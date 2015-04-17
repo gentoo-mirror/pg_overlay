@@ -22,9 +22,14 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	echo 'mkfs_f2fs_LDFLAGS = ' >> mkfs/Makefile.am
-	eautoreconf
+	eautoreconf --prefix=/ --includedir=/usr/include --disable-static
 }
 
 src_configure(){
-	econf --disable-static
+	econf --prefix=/ --includedir=/usr/include --disable-static
+}
+
+src_install() {
+	default
+	rm -f "${ED}"/$(get_libdir)/libf2fs.{,l}a
 }
