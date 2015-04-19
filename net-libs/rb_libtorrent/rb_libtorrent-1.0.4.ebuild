@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-libs/rb_libtorrent/rb_libtorrent-0.16.19.ebuild,v 1.2 2015/03/23 12:07:50 jlec Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-libs/rb_libtorrent/rb_libtorrent-1.0.3.ebuild,v 1.5 2015/04/12 17:21:04 jlec Exp $
 
 EAPI=5
 
@@ -27,7 +27,7 @@ IUSE="debug doc examples python ssl static-libs test"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
 RDEPEND="
-	>=dev-libs/boost-1.48:=[threads]
+	>=dev-libs/boost-1.53:=[threads]
 	sys-libs/zlib
 	examples? ( !net-p2p/mldonkey )
 	ssl? ( dev-libs/openssl:0= )
@@ -40,6 +40,10 @@ DEPEND="${RDEPEND}
 
 RESTRICT="test"
 
+PATCHES=( "${FILESDIR}"/${PN}-1.0.2-python.patch )
+
+AUTOTOOLS_IN_SOURCE_BUILD=1
+
 src_configure() {
 	local myeconfargs=(
 		--disable-silent-rules # bug 441842
@@ -51,6 +55,9 @@ src_configure() {
 		$(use_enable python python-binding)
 		$(usex debug "--enable-logging=verbose" "")
 	)
+
+	use python && python_setup
+
 	autotools-utils_src_configure
 	use python && cd "${BUILD_DIR}"/bindings/python && distutils-r1_src_configure
 }
