@@ -1,11 +1,11 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/qbittorrent/qbittorrent-9999.ebuild,v 1.21 2015/03/01 15:49:39 hwoarang Exp $
+# $Header: /var/cvsroot/gentoo-x86/net-p2p/qbittorrent/qbittorrent-9999.ebuild,v 1.24 2015/05/10 13:12:13 pesa Exp $
 
 EAPI=5
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils python-r1 qmake-utils
+inherit eutils python-r1 qt4-r2
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="http://www.qbittorrent.org/"
@@ -21,16 +21,14 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+dbus debug geoip +qt4 qt5 webui +X"
+IUSE="+dbus debug +qt4 qt5 webui +X"
 REQUIRED_USE="^^ ( qt4 qt5 )
-	dbus? ( X )
-	geoip? ( X )"
+	dbus? ( X )"
 
-# geoip and python are runtime deps only (see INSTALL file)
 CDEPEND="
 	dev-libs/boost:=
-	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[X?,qt4?,qt5?]
-	>=net-libs/rb_libtorrent-0.16.17
+	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[qt4?,qt5?,X?]
+	>=net-libs/rb_libtorrent-1.0.0
 	sys-libs/zlib
 	qt4? ( dev-qt/qtcore:4
 		dbus? ( dev-qt/qtdbus:4 )
@@ -48,16 +46,15 @@ DEPEND="${CDEPEND}
 	virtual/pkgconfig
 "
 RDEPEND="${CDEPEND}
-	${PYTHON_DEPS}
-	geoip? ( dev-libs/geoip )
-"
+	${PYTHON_DEPS}"
 
 S=${WORKDIR}/${MY_P}
 DOCS=(AUTHORS Changelog README.md TODO)
 
 src_prepare() {
 	epatch_user
-	
+	qt4-r2_src_prepare
+
 	# To last stable version for What.CD & Pedro's BTMusic
 	sed -i s/"VER_MINOR = 2"/"VER_MINOR = 1"/g version.pri || die
 	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 12"/g version.pri || die
@@ -69,10 +66,9 @@ src_configure() {
 	local myconf=(
 		./configure
 		--prefix="${EPREFIX}/usr"
-		--with-qtsingleapplication=system
+		--with-qtsingleapplication=system --without-geoip-database-embedded
 		$(use dbus  || echo --disable-qt-dbus)
 		$(use debug && echo --enable-debug)
-		$(use geoip || echo --without-geoip-database-embedded)
 		$(use qt5   && echo --with-qt5)
 		$(use webui || echo --disable-webui)
 		$(use X     || echo --disable-gui)
@@ -82,8 +78,4 @@ src_configure() {
 	"${myconf[@]}" || die "configure failed"
 	use qt4 && eqmake4
 	use qt5 && eqmake5
-}
-
-src_install() {
-	emake INSTALL_ROOT="${D}" install
 }
