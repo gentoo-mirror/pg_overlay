@@ -56,9 +56,9 @@ src_prepare() {
 	qt4-r2_src_prepare
 
 	# To last stable version for What.CD & Pedro's BTMusic
-	sed -i s/"VER_MINOR = 2"/"VER_MINOR = 1"/g version.pri || die
-	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 12"/g version.pri || die
-	sed -i s/"VER_STATUS"/"#VER_STATUS"/g version.pri || die
+	sed -i s/"VER_MINOR = 3"/"VER_MINOR = 2"/g version.pri || die
+	#sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 12"/g version.pri || die
+	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
 }
 
 src_configure() {
@@ -66,7 +66,7 @@ src_configure() {
 	local myconf=(
 		./configure
 		--prefix="${EPREFIX}/usr"
-		--with-qtsingleapplication=system --without-geoip-database-embedded
+		--with-qtsingleapplication=system
 		$(use dbus  || echo --disable-qt-dbus)
 		$(use debug && echo --enable-debug)
 		$(use qt5   && echo --with-qt5)
