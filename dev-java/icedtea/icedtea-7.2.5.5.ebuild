@@ -103,7 +103,6 @@ COMMON_DEP="
 	javascript? ( dev-java/rhino:1.6 )
 	nss? ( >=dev-libs/nss-3.12.5-r1 )
 	kerberos? ( virtual/krb5 )
-	#
 	smartcard? ( sys-apps/pcsc-lite )
 	sunec? ( >=dev-libs/nss-3.16.1-r1 )
 	!dev-java/icedtea-web:7"
