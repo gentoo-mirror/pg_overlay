@@ -32,19 +32,22 @@ IUSE_INPUT_DEVICES="
 	input_devices_roccat_ryostkl
 	input_devices_roccat_tyon
 "
-IUSE="${IUSE_INPUT_DEVICES} lua"
+IUSE="${IUSE_INPUT_DEVICES} lua lua51 lua52"
 REQUIRED_USE="
 	lua? ( input_devices_roccat_ryosmk )
+	lua? ( ^^ ( lua51 lua52 ) )
 "
 
 RDEPEND="
-	>=dev-libs/libgaminggear-0.8
+	>=dev-libs/libgaminggear-0.9
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	media-libs/libcanberra
 	virtual/libusb:1
 	dev-libs/dbus-glib
 	virtual/libgudev:=
+	lua51? ( || ( dev-lang/lua:5.1 dev-lang/lua:0 ) )
+	lua52? ( dev-lang/lua:5.2 )
 "
 
 DEPEND="${RDEPEND}"
@@ -57,10 +60,14 @@ src_configure() {
 	local UDEVDIR="$(get_udevdir)"/rules.d
 	local MODELS=${INPUT_DEVICES//roccat_/}
 	mycmakeargs=(
-		-DDEVICES=${MODELS// /;} -DWITH_LUA=5.1 \
+		-DDEVICES=${MODELS// /;} \
 		-DUDEVDIR="${UDEVDIR/"//"//}"
 	)
-	sed -i '/libroccatkoneplus/d' kovaplus/roccatkovapluscontrol/CMakeLists.txt
+	if use lua51 ; then
+		mycmakeargs+=( -DWITH_LUA=5.1 )
+	elif use lua52 ; then
+		mycmakeargs+=( -DWITH_LUA=5.2 )
+	fi	
 	cmake-utils_src_configure
 }
 src_install() {
@@ -82,8 +89,10 @@ pkg_postinst() {
 	ewarn "so konextdconfig is now roccatkonextdconfig and so on"
 	ewarn "Everything that was ryos is now ryosmk to distinguish it from the ryostkl product range"
 	ewarn
-	ewarn "In version 3.0.0 the support for Python as a scripting language for RyosMKPro"
-	ewarn "ripple effects was dropped and replaced with Lua. Use USE=lua to enable it"
+	ewarn "In version 3.4.0 the support for Lua as a scripting language for RyosMKPro"
+	ewarn "ripple effects has been changed. Now in combination with USE=lua to enable it"
+	ewarn "one also needs to put additional use flag depending on which lua version is wanted - "
+	ewarn "it can be USE=lua51 for Lua 5.1 or USE=lua52 for 5.2"
 	ewarn
 }
 
