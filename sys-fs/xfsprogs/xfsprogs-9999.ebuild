@@ -45,6 +45,10 @@ src_prepare() {
 	sed -i \
 		-e '1iLLDFLAGS = -static' \
 		{estimate,fsr}/Makefile || die
+		
+	sed -i \
+		-e "/LLDFLAGS/s:-static-libtool-libs:$(use static && echo -all-static):" \
+		$(find -name Makefile) || die
 	
 	#libdisk has broken blkid conditional checking
 	sed -i \

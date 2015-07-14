@@ -26,9 +26,13 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )
 "
+src_prepare() {
+	epatch "${FILESDIR}"/${PN}-0.10.0-doc.patch
+}
 src_configure() {
 	mycmakeargs=(
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}"/usr
+		-DDOCDIR=share/doc/${PF}
 		$(cmake-utils_use_with doc DOC)
 	)
 	cmake-utils_src_configure

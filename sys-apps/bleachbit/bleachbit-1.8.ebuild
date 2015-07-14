@@ -24,7 +24,7 @@ RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"
 DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
 
-DOCS=( README )
+#DOCS=( README )
 
 python_prepare_all() {
 	rem_locale() {

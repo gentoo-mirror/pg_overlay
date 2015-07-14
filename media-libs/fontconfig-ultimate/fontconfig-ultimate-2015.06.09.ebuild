@@ -1,57 +1,39 @@
-# Copyright 1999-2013 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
+# $Header: /var/cvsroot/gentoo-x86/media-libs/fontconfig-ultimate/fontconfig-ultimate-2015.04.ebuild,v 1.1 2015/05/09 09:59:16 yngwin Exp $
 
 EAPI=5
+inherit readme.gentoo versionator
 
-EGIT_REPO_URI="https://github.com/bohoomil/fontconfig-ultimate.git"
-
-inherit readme.gentoo git-2
-
-DESCRIPTION="A set of rendering and font replacement rules for fontconfig-infinality"
+MY_PV=$(replace_all_version_separators "-")
+DESCRIPTION="A set of font rendering and replacement rules for fontconfig-infinality"
 HOMEPAGE="http://bohoomil.com/"
+SRC_URI="https://github.com/bohoomil/${PN}/archive/${MY_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
-IUSE="+fonts-ms +fonts-free fonts-extra"
+KEYWORDS="~amd64 ~x86"
 
-RDEPEND="app-eselect/eselect-infinality
+DEPEND="app-eselect/eselect-infinality
 	app-eselect/eselect-lcdfilter
 	media-libs/fontconfig-infinality
-	media-libs/freetype:2[infinality]
-	fonts-ms? (
-		media-fonts/corefonts
-		media-fonts/dejavu
-		fonts-extra? (
-			media-fonts/cantarell
-			media-fonts/croscorefonts
-			media-fonts/droid
-			media-fonts/font-bh-75dpi
-			media-fonts/paratype
-		)
-	)
-	fonts-free? (
-		media-fonts/dejavu
-		media-fonts/liberation-fonts
-		media-fonts/heuristica
-		fonts-extra? (
-			media-fonts/cantarell
-			media-fonts/croscorefonts
-			media-fonts/droid
-			media-fonts/font-bh-ttf
-			media-fonts/libertine-ttf
-			media-fonts/paratype
-			media-fonts/urw-fonts
-		)
-	)"
+	media-libs/freetype:2[infinality]"
+RDEPEND="${DEPEND}"
+
+S=${WORKDIR}/${PN}-${MY_PV}
 
 DISABLE_AUTOFORMATTING="1"
 DOC_CONTENTS="1. Disable all rules but 52-infinality.conf using eselect fontconfig
-2. Enable one of \"ultimate\" presets using eselect infinality
+2. Enable one of the \"ultimate\" presets using eselect infinality
 3. Select ultimate lcdfilter settings using eselect lcdfilter"
 
+BLACKLIST="43-wqy-zenhei-sharp.conf"
+
 src_prepare() {
+	pushd fontconfig_patches/fonts-settings || die
+	rm ${BLACKLIST} || die
+	popd
+
 	# Generate lcdfilter config
 	echo -e "################# FONTCONFIG ULTIMATE STYLE #################\n" \
 	> "${T}"/ultimate || die
@@ -87,7 +69,7 @@ src_install() {
 	doins fontconfig_patches/{ms,free,combi}/*.conf
 
 	# Cut a list of default .conf files out of Makefile.am
-	local default_configs config
+	local default_configs config fonts_settings
 	default_configs=$(sed --quiet \
 		-e ':again' \
 		-e '/\\$/ N' \
@@ -96,35 +78,34 @@ src_install() {
 		-e 's/^CONF_LINKS =//p' \
 		conf.d.infinality/Makefile.am) || die
 
-	cd fontconfig_patches/ms || die
-	for config in ${default_configs} *.conf; do
+	# Install per-font settings
+	pushd fontconfig_patches/fonts-settings || die
+	doins *.conf
+	fonts_settings=$(echo *.conf)
+	popd
+
+	# Install font presets
+	pushd fontconfig_patches/ms || die
+	for config in ${default_configs} ${fonts_settings} *.conf; do
 		dosym ../../conf.src.ultimate/"${config}" \
 			/etc/fonts/infinality/styles.conf.avail/ultimate-ms/"${config}"
 	done
-	cd ../../fontconfig_patches/free || die
-	for config in ${default_configs} *.conf; do
+	popd
+	pushd fontconfig_patches/free || die
+	for config in ${default_configs} ${fonts_settings} *.conf; do
 		dosym ../../conf.src.ultimate/"${config}" \
 			/etc/fonts/infinality/styles.conf.avail/ultimate-free/"${config}"
 	done
-	cd ../../fontconfig_patches/combi || die
-	for config in ${default_configs} *.conf; do
+	popd
+	pushd fontconfig_patches/combi || die
+	for config in ${default_configs} ${fonts_settings} *.conf; do
 		dosym ../../conf.src.ultimate/"${config}" \
 			/etc/fonts/infinality/styles.conf.avail/ultimate-combi/"${config}"
 	done
-	cd "${S}"
+	popd
 
 	insinto /usr/share/eselect-lcdfilter/env.d
 	doins "${T}"/ultimate
-
-#	dodoc doc/fontconfig-infinality-ultimate/README
-#	dohtml doc/fontconfig-infinality-ultimate/README.html
-#	readme.gentoo_create_doc
-
-	insinto /etc/profile.d
-	doins freetype/infinality-settings.sh
-
-	dodoc -r doc/fontconfig-infinality-ultimate/fontconfig-global doc/fontconfig-infinality-ultimate/fontconfig-user
-
 
 	readme.gentoo_create_doc
 }
