@@ -89,7 +89,7 @@ pkg_postinst() {
 	ewarn "so konextdconfig is now roccatkonextdconfig and so on"
 	ewarn "Everything that was ryos is now ryosmk to distinguish it from the ryostkl product range"
 	ewarn
-	ewarn "In version 3.4.0 the support for Lua as a scripting language for RyosMKPro"
+	ewarn "In version 3.5.0-r1 the support for Lua as a scripting language for RyosMKPro"
 	ewarn "ripple effects has been changed. Now in combination with USE=lua to enable it"
 	ewarn "one also needs to put additional use flag depending on which lua version is wanted - "
 	ewarn "it can be USE=lua51 for Lua 5.1 or USE=lua52 for 5.2"

@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/dev-libs/libgaminggear/libgaminggear-0.7.0.ebuild,v 1.1 2015/03/24 05:02:17 idella4 Exp $
+# $Header: /var/cvsroot/gentoo-x86/dev-libs/libgaminggear/libgaminggear-0.10.0.ebuild,v 1.1 2015/06/30 14:41:23 idella4 Exp $
 
 EAPI=5
 
@@ -16,6 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 RDEPEND="
+	!<sys-apps/roccat-tools-3.4.0
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	media-libs/libcanberra
@@ -24,11 +25,12 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}
-	doc? ( app-doc/doxygen )
-"
+	doc? ( app-doc/doxygen )"
+
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-0.10.0-doc.patch
 }
+
 src_configure() {
 	mycmakeargs=(
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}"/usr
@@ -37,12 +39,15 @@ src_configure() {
 	)
 	cmake-utils_src_configure
 }
+
 src_install() {
 	cmake-utils_src_install
 }
+
 pkg_preinst() {
 	gnome2_icon_savelist
 }
+
 pkg_postinst() {
 	gnome2_icon_cache_update
 }
