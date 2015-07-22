@@ -10,19 +10,19 @@
 EAPI="5"
 SLOT="7"
 
-inherit autotools check-reqs java-pkg-2 java-vm-2 multiprocessing pax-utils prefix versionator virtualx
+inherit check-reqs gnome2-utils java-pkg-2 java-vm-2 multiprocessing pax-utils prefix versionator virtualx
 
 ICEDTEA_VER=$(get_version_component_range 2-4)
 ICEDTEA_BRANCH=$(get_version_component_range 2-3)
 ICEDTEA_PKG=icedtea-${ICEDTEA_VER}
 ICEDTEA_PRE=$(get_version_component_range _)
-CORBA_TARBALL="e3445769412d.tar.bz2"
-JAXP_TARBALL="e3b08dc13807.tar.bz2"
-JAXWS_TARBALL="299588405837.tar.bz2"
-JDK_TARBALL="444d55ffed65.tar.bz2"
-LANGTOOLS_TARBALL="bc95d2472055.tar.bz2"
-OPENJDK_TARBALL="dbfa75121aca.tar.bz2"
-HOTSPOT_TARBALL="94f15794d5e7.tar.bz2"
+CORBA_TARBALL="2545636482d6.tar.bz2"
+JAXP_TARBALL="ffbe529eeac7.tar.bz2"
+JAXWS_TARBALL="b9776fab65b8.tar.bz2"
+JDK_TARBALL="61d3e001dee6.tar.bz2"
+LANGTOOLS_TARBALL="9c6e1de67d7d.tar.bz2"
+OPENJDK_TARBALL="39b2c4354d0a.tar.bz2"
+HOTSPOT_TARBALL="b19bc5aeaa09.tar.bz2"
 
 CACAO_TARBALL="e215e36be9fc.tar.gz"
 JAMVM_TARBALL="jamvm-ec18fb9e49e62dce16c5094ef1527eed619463aa.tar.gz"
@@ -43,7 +43,9 @@ ICEDTEA_URL="${DROP_URL}/icedtea${SLOT}/${ICEDTEA_VER}"
 
 DESCRIPTION="A harness to build OpenJDK using Free Software build tools and dependencies"
 HOMEPAGE="http://icedtea.classpath.org"
+SRC_PKG="${ICEDTEA_PKG}.tar.xz"
 SRC_URI="
+	http://icedtea.classpath.org/download/source/${SRC_PKG}
 	${ICEDTEA_URL}/openjdk.tar.bz2 -> ${OPENJDK_GENTOO_TARBALL}
 	${ICEDTEA_URL}/corba.tar.bz2 -> ${CORBA_GENTOO_TARBALL}
 	${ICEDTEA_URL}/jaxp.tar.bz2 -> ${JAXP_GENTOO_TARBALL}
@@ -53,11 +55,9 @@ SRC_URI="
 	${ICEDTEA_URL}/langtools.tar.bz2 -> ${LANGTOOLS_GENTOO_TARBALL}
 	${DROP_URL}/cacao/${CACAO_TARBALL} -> ${CACAO_GENTOO_TARBALL}
 	${DROP_URL}/jamvm/${JAMVM_TARBALL} -> ${JAMVM_GENTOO_TARBALL}"
-EHG_REPO_URI="http://icedtea.classpath.org/hg/icedtea7"
-EHG_REVISION="${ICEDTEA_PKG}${ICEDTEA_PRE}"
 
 LICENSE="Apache-1.1 Apache-2.0 GPL-1 GPL-2 GPL-2-with-linking-exception LGPL-2 MPL-1.0 MPL-1.1 public-domain W3C"
-KEYWORDS=""
+KEYWORDS="~amd64"
 RESTRICT="test"
 
 IUSE="+X +alsa cacao cjk +cups debug doc examples infinality jamvm javascript +jbootstrap kerberos +nsplugin
@@ -190,7 +190,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	mercurial_src_unpack
+	unpack ${SRC_PKG}
 }
 
 java_prepare() {
@@ -199,8 +199,6 @@ java_prepare() {
 
 	# icedtea doesn't like some locales. #330433 #389717
 	export LANG="C" LC_ALL="C"
-
-	eautoreconf
 }
 
 src_configure() {
@@ -294,6 +292,9 @@ src_configure() {
 		--with-jamvm-src-zip="${DISTDIR}/${JAMVM_GENTOO_TARBALL}" \
 		--with-jdk-home="$(java-config -O)" \
 		--prefix="${EPREFIX}/usr/$(get_libdir)/icedtea${SLOT}" \
+		--mandir="${EPREFIX}/usr/$(get_libdir)/icedtea${SLOT}/man" \
+		--docdir="${EPREFIX}/usr/share/doc/${PF}" \
+		--htmldir="${EPREFIX}/usr/share/doc/${PF}/html" \
 		--with-pkgversion="Gentoo ${PF}" \
 		--disable-downloading --disable-Werror \
 		--disable-hotspot-tests --disable-jdk-tests \
@@ -330,44 +331,22 @@ src_test() {
 }
 
 src_install() {
+	default
+
 	local dest="/usr/$(get_libdir)/icedtea${SLOT}"
 	local ddest="${ED}${dest#/}"
-	dodir "${dest}"
-
-	dodoc README NEWS AUTHORS
-	dosym /usr/share/doc/${PF} /usr/share/doc/${PN}${SLOT}
-
-	cd openjdk.build/j2sdk-image || die
 
 	# Ensures HeadlessGraphicsEnvironment is used.
 	if ! use X; then
 		rm -r jre/lib/$(get_system_arch)/xawt || die
 	fi
 
-	# Don't hide classes
-	rm lib/ct.sym || die
-
-	#402507
-	mkdir jre/.systemPrefs || die
-	touch jre/.systemPrefs/.system.lock || die
-	touch jre/.systemPrefs/.systemRootModFile || die
-
-	# doins doesn't preserve executable bits.
-	cp -vRP bin include jre lib man "${ddest}" || die
-
-	dodoc ASSEMBLY_EXCEPTION THIRD_PARTY_README
-
-	if use doc; then
-		docinto html
-		dodoc -r ../docs/*
+	if ! use examples; then
+		rm -rf "${ddest}"/demo "${ddest}"/sample || die
 	fi
 
-	if use examples; then
-		cp -vRP demo sample "${ddest}" || die
-	fi
-
-	if use source; then
-		cp src.zip "${ddest}" || die
+	if ! use source; then
+		rm -f "${ddest}"/src.zip || die
 	fi
 
 	# provided by icedtea-web but we need it in JAVA_HOME to work with run-java-tool
@@ -383,9 +362,6 @@ src_install() {
 	# Fix the permissions.
 	find "${ddest}" \! -type l \( -perm /111 -exec chmod 755 {} \; -o -exec chmod 644 {} \; \) || die
 
-	# Needs to be done before generating cacerts
-	java-vm_set-pax-markings "${ddest}"
-
 	# We need to generate keystore - bug #273306
 	einfo "Generating cacerts file from certificates in ${EPREFIX}/usr/share/ca-certificates/"
 	mkdir "${T}/certgen" && cd "${T}/certgen" || die
@@ -399,10 +375,10 @@ src_install() {
 
 	# OpenJDK7 should be able to use fontconfig instead, but wont hurt to
 	# install it anyway. Bug 390663
-	cp "${FILESDIR}"/fontconfig.Gentoo.properties.src "${T}"/fontconfig.Gentoo.properties || die
-	eprefixify "${T}"/fontconfig.Gentoo.properties
+	cp "${FILESDIR}"/fontconfig.Gentoo.properties.src "${T}" || die
+	eprefixify "${T}"/fontconfig.Gentoo.properties.src
 	insinto "${dest}"/jre/lib
-	doins "${T}"/fontconfig.Gentoo.properties
+	doins "${T}"/fontconfig.Gentoo.properties.src
 
 	set_java_env "${FILESDIR}/icedtea.env"
 	if ! use X || ! use alsa || ! use cups; then
@@ -421,4 +397,9 @@ pkg_preinst() {
 		elog "build VM settings in /etc/java-config-2/build/jdk.conf are not changed"
 		elog "and the same holds for any user VM settings. Sorry for the inconvenience."
 	fi
+
+	gnome2_icon_savelist;
 }
+
+pkg_postinst() { gnome2_icon_cache_update; }
+pkg_postrm() { gnome2_icon_cache_update; }
