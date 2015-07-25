@@ -115,7 +115,7 @@ src_configure() {
 		$(cmake-utils_use_use udisks UDISKS2)
 		$(cmake-utils_use_use libsamplerate SRC)
 		$(cmake-utils_use_use vorbis)
-		$(cmake-utils_use_use wavpack) -DUSE_NULL=0 -DUSE_ANALYZER=0 -DUSE_GNOMEHOTKEY=0 -DUSE_RGSCAN=0 -DUSE_SB=0 -
+		$(cmake-utils_use_use wavpack) -DUSE_NULL=0 -DUSE_ANALYZER=0 -DUSE_GNOMEHOTKEY=0 -DUSE_RGSCAN=0 -DUSE_SB=0
 		)
 
 	cmake-utils_src_configure
