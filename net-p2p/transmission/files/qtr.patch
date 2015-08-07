@@ -1,0 +1,10 @@
+--- qt/qtr.pro	2015-07-30 13:56:17.749162637 +0700
++++ qt/qtr.pro_new	2015-07-30 22:59:20.492766088 +0700
+@@ -55,6 +55,7 @@
+ 
+ FORMS += AboutDialog.ui \
+          DetailsDialog.ui \
++         LicenseDialog.ui \
+          MainWindow.ui \
+          MakeDialog.ui \
+          MakeProgressDialog.ui \

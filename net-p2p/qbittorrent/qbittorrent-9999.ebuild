@@ -58,7 +58,7 @@ src_prepare() {
 	# To last stable version for What.CD & Pedro's BTMusic
 	sed -i s/"VER_MINOR = 3"/"VER_MINOR = 2"/g version.pri || die
 	#sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 12"/g version.pri || die
-	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
+	sed -i s/"VER_STATUS = beta"/"VER_STATUS ="/g version.pri || die
 }
 
 src_configure() {

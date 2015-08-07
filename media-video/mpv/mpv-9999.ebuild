@@ -155,7 +155,6 @@ src_prepare() {
 	cp "${DISTDIR}"/waf-${WAF_V} "${S}"/waf || die
 	chmod 0755 "${S}"/waf || die
 	epatch_user
-	sed -i s/"waf-1.8.4"/"waf-1.8.12"/g bootstrap.py || die
 }
 
 src_configure() {

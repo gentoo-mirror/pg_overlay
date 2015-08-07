@@ -68,14 +68,13 @@ src_prepare() {
 	sed -i '/ExecStart/ s|$| -g /var/lib/transmission/config|' daemon/${PN}-daemon.service || die
 	# http://trac.transmissionbt.com/ticket/4324
 	sed -i -e 's|noinst\(_PROGRAMS = $(TESTS)\)|check\1|' lib${PN}/Makefile.am || die
-	# http://trac.transmissionbt.com/ticket/5700
+	## http://trac.transmissionbt.com/ticket/5700
 	sed -i -e '1iQMAKE_CXXFLAGS += -std=c++11' qt/qtr.pro || die
+	
 	# 2.84+ -> 2.84
-	#sed -i s/2.84+/2.84/g CMakeLists.txt || die
-	#sed -i s/2.84+/2.84/g configure || die
-	#sed -i s/2.84+/2.84/g configure.ac || die
-	#sed -i s/2.84+/2.84/g lib${PN}/version.h || die
 	sed -i s/TR284Z/TR2840/g lib${PN}/version.h || die
+	
+	epatch "${FILESDIR}"/FilterBar.patch
 	
 	epatch_user
 	eautoreconf
