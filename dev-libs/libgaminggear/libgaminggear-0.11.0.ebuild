@@ -16,7 +16,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE="doc"
 
 RDEPEND="
-	!<sys-apps/roccat-tools-3.4.0
+	!<sys-apps/roccat-tools-3.5.0
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	media-libs/libcanberra
@@ -28,7 +28,8 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-0.10.0-doc.patch
+	epatch "${FILESDIR}"/*.patch
+
 }
 
 src_configure() {
