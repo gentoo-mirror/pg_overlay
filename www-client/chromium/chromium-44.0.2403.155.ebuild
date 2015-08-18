@@ -29,8 +29,7 @@ QA_FLAGS_IGNORED=".*\.nexe"
 # right tools for it, bug #469144 .
 QA_PRESTRIPPED=".*\.nexe"
 
-RDEPEND=">=app-accessibility/speech-dispatcher-0.8:=
-	app-arch/bzip2:=
+RDEPEND="app-arch/bzip2:=
 	app-arch/snappy:=
 	cups? ( >=net-print/cups-1.3.11:= )
 	>=dev-libs/elfutils-0.149
@@ -108,13 +107,11 @@ RDEPEND+="
 DEPEND+=" $(python_gen_any_dep '
 	dev-python/beautifulsoup:python-2[${PYTHON_USEDEP}]
 	dev-python/jinja[${PYTHON_USEDEP}]
-	dev-python/ply[${PYTHON_USEDEP}]
 	dev-python/simplejson[${PYTHON_USEDEP}]
 ')"
 python_check_deps() {
 	has_version "dev-python/beautifulsoup:python-2[${PYTHON_USEDEP}]" && \
 		has_version "dev-python/jinja[${PYTHON_USEDEP}]" && \
-		has_version "dev-python/ply[${PYTHON_USEDEP}]" && \
 		has_version "dev-python/simplejson[${PYTHON_USEDEP}]"
 }
 
@@ -387,9 +384,7 @@ src_configure() {
 	# This makes breakages easier to detect by revdep-rebuild.
 	myconf+="
 		-Dlinux_link_gsettings=1
-		-Dlinux_link_libpci=1
-		-Dlinux_link_libspeechd=1
-		-Dlibspeechd_h_prefix=speech-dispatcher/"
+		-Dlinux_link_libpci=1"
 
 	# TODO: use the file at run time instead of effectively compiling it in.
 	myconf+="
