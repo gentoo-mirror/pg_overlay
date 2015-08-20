@@ -1,0 +1,11 @@
+--- libxfs/Makefile	2015-08-19 06:50:49.813629091 +0700
++++ libxfs/Makefile_new	2015-08-19 06:52:42.230968667 +0700
+@@ -137,7 +137,7 @@
+ 	$(Q)$(LN_S) -f $(PWD)/libxfs/$* $(TOPDIR)/include/xfs/$*
+ 
+ install-dev: install
+-	$(INSTALL) -m 644 $(PKGHFILES) $(PKG_INC_DIR)
++	$(INSTALL) -m 644 $(PKGHFILES) $(PKG_INC_DIR) $(INSTALL_LTLIB_DEV)
+ 
+ # We need to install the headers before building the dependencies.  If we
+ # include the .ltdep file, the makefile decides that it needs to build the

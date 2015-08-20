@@ -1,0 +1,18 @@
+--- libxlog/Makefile	2015-08-19 07:06:18.903883346 +0700
++++ libxlog/Makefile_new	2015-08-19 07:08:00.614134032 +0700
+@@ -12,6 +12,8 @@
+ 
+ CFILES = xfs_log_recover.c util.c
+ 
++LTLIBS = $(LIBUUID) $(LIBXFS)
++
+ # don't want to link xfs_repair with a debug libxlog.
+ DEBUG = -DNDEBUG
+ 
+@@ -20,5 +22,6 @@
+ include $(BUILDRULES)
+ 
+ install install-dev: default
++	$(INSTALL_LTLIB_DEV)
+ 
+ -include .ltdep

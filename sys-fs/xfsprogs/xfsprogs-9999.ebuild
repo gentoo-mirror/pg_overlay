@@ -36,6 +36,8 @@ pkg_setup() {
 }
 
 src_prepare() {
+	epatch "${FILESDIR}"/*.patch
+	
 	sed -i \
 		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
 		include/builddefs.in || die
@@ -92,7 +94,8 @@ src_install() {
 	emake -j1 DIST_ROOT="${ED}" install-dev
 
 	# handle is for xfsdump, the rest for xfsprogs
-	#gen_usr_ldscript -a handle
+	gen_usr_ldscript -a xfs xlog
+
 	# removing unnecessary .la files if not needed
 	if use !static ; then
 		find "${ED}" -name '*.la' -delete; \

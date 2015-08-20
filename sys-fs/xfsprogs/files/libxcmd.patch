@@ -1,0 +1,13 @@
+--- libxcmd/Makefile	2015-08-19 06:48:30.764972174 +0700
++++ libxcmd/Makefile_new	2015-08-19 06:49:50.357920611 +0700
+@@ -34,6 +34,9 @@
+ 
+ include $(BUILDRULES)
+ 
+-install install-dev: default
++install: default
++
++install-dev: default
++	$(INSTALL_LTLIB_DEV)
+ 
+ -include .ltdep
