@@ -28,8 +28,7 @@ DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )"
 
 src_prepare() {
-	epatch "${FILESDIR}"/*.patch
-
+	epatch "${FILESDIR}"/${PN}-0.10.0-doc.patch
 }
 
 src_configure() {
