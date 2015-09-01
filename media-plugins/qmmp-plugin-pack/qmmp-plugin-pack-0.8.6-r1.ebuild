@@ -19,6 +19,6 @@ IUSE=""
 
 RDEPEND="media-libs/taglib
 	media-sound/qmmp
-	dev-qt/qtgui:4"
+	dev-qt/qtgui:5"
 DEPEND="${RDEPEND}
 	dev-lang/yasm"

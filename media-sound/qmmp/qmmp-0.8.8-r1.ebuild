@@ -7,7 +7,7 @@ EAPI="5"
 inherit cmake-utils
 [ "$PV" == "9999" ] && inherit subversion
 
-DESCRIPTION="Qt4-based audio player with winamp/xmms skins support"
+DESCRIPTION="Qt-based audio player with winamp/xmms skins support"
 HOMEPAGE="http://qmmp.ylsoftware.com"
 if [ "$PV" != "9999" ]; then
 	SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2"
@@ -26,7 +26,7 @@ libsamplerate lyrics +mad midi mms modplug mplayer mpris musepack notifier opus 
 projectm pulseaudio scrobbler sndfile stereo tray udisks +vorbis wavpack"
 
 RDEPEND="media-libs/taglib
-	dev-qt/qtgui:4
+	dev-qt/qtgui:5
 	alsa? ( media-libs/alsa-lib )
 	bs2b? ( media-libs/libbs2b )
 	cdda? ( dev-libs/libcdio-paranoia )
@@ -43,7 +43,7 @@ RDEPEND="media-libs/taglib
 	mplayer? ( || ( media-video/mplayer
 		media-video/mplayer2 )
 	)
-	mpris? ( dev-qt/qtdbus:4 )
+	mpris? ( dev-qt/qtdbus:5 )
 	musepack? ( >=media-sound/musepack-tools-444 )
 	modplug? ( >=media-libs/libmodplug-0.8.4 )
 	vorbis? ( media-libs/libvorbis
@@ -53,7 +53,7 @@ RDEPEND="media-libs/taglib
 	ffmpeg? ( virtual/ffmpeg )
 	opus? ( media-libs/opusfile )
 	projectm? ( media-libs/libprojectm
-		dev-qt/qtopengl:4 )
+		dev-qt/qtopengl:5 )
 	pulseaudio? ( >=media-sound/pulseaudio-0.9.9 )
 	wavpack? ( media-sound/wavpack )
 	scrobbler? ( net-misc/curl )

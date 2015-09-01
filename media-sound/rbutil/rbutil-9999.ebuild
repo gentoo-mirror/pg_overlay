@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils qt4-r2 git-r3
+inherit eutils qmake-utils git-r3
 
 DESCRIPTION="Rockbox opensource firmware manager for mp3 players"
 HOMEPAGE="http://www.rockbox.org/wiki/RockboxUtility"
@@ -16,8 +16,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="media-libs/speex
-	dev-qt/qtcore:4
-	dev-qt/qtgui:4
+	dev-qt/qtcore:5
+	dev-qt/qtgui:5
 	virtual/libusb:0"
 DEPEND="${RDEPEND}"
 
@@ -25,10 +25,10 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 
 src_configure() {
 	# generate binary translations
-	lrelease ${PN}qt.pro || die
+	QT_SELECT="5" lrelease ${PN}qt.pro || die
 
 	# noccache is required in order to call the correct compiler
-	eqmake4 CONFIG+=noccache
+	eqmake5 CONFIG+=noccache
 }
 
 src_install() {

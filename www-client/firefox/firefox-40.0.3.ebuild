@@ -24,10 +24,12 @@ fi
 
 # Patch version
 PATCH="${PN}-40.0-patches-0.01"
-
+# Upstream ftp release URI that's used by mozlinguas.eclass
+# We don't use the http mirror because it deletes old tarballs.
 MOZ_HTTP_URI="http://archive.mozilla.org/pub/${PN}/releases"
 
-MOZCONFIG_OPTIONAL_WIFI=1
+MOZCONFIG_OPTIONAL_GTK3=0
+MOZCONFIG_OPTIONAL_WIFI=0
 MOZCONFIG_OPTIONAL_JIT="enabled"
 
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.40 multilib pax-utils fdo-mime autotools virtualx mozlinguas
@@ -71,7 +73,7 @@ if [[ ${PV} =~ alpha ]]; then
 		http://dev.gentoo.org/~nirbheek/mozilla/firefox/firefox-${MOZ_PV}_${CHANGESET}.source.tar.bz2"
 	S="${WORKDIR}/mozilla-aurora-${CHANGESET}"
 elif [[ ${PV} =~ beta ]]; then
-	S="${WORKDIR}/mozilla-release"
+	S="${WORKDIR}/mozilla-beta"
 	SRC_URI="${SRC_URI}
 		${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.bz2"
 else
@@ -136,15 +138,13 @@ src_prepare() {
 	# Apply our patches
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \
-	EPATCH_EXCLUDE="8010_bug114311-freetype26.patch" \
 	epatch "${WORKDIR}/firefox"
-	#epatch "${FILESDIR}"/${PN}-38-hppa-js-syntax-error.patch #556196
+	
+	epatch "${FILESDIR}/Makefile_in.patch"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	epatch_user
-	
-	epatch "${FILESDIR}/Makefile_in.patch"
-	
+
 	# Enable gnomebreakpad
 	if use debug ; then
 		sed -i -e "s:GNOME_DISABLE_CRASH_DIALOG=1:GNOME_DISABLE_CRASH_DIALOG=0:g" \
