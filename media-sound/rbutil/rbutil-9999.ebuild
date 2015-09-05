@@ -16,8 +16,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="media-libs/speex
-	dev-qt/qtcore:5
-	dev-qt/qtgui:5
+	dev-qt/qtcore:4
+	dev-qt/qtgui:4
 	virtual/libusb:0"
 DEPEND="${RDEPEND}"
 
@@ -25,10 +25,10 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 
 src_configure() {
 	# generate binary translations
-	QT_SELECT="5" lrelease ${PN}qt.pro || die
+	QT_SELECT="4" lrelease ${PN}qt.pro || die
 
 	# noccache is required in order to call the correct compiler
-	eqmake5 CONFIG+=noccache
+	eqmake4 CONFIG+=noccache
 }
 
 src_install() {

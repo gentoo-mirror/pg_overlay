@@ -16,9 +16,9 @@ KEYWORDS="amd64 ppc ~ppc64 ~sparc x86 ~x86-fbsd"
 IUSE="nls"
 
 RDEPEND="
-	>=dev-cpp/gtkmm-2.4:2.4
+	>=dev-cpp/gtkmm-3.0:3.0
 	>=dev-libs/libsigc++-2.2:2
-	>=media-libs/libcanberra-0.16
+	>=media-libs/libcanberra-0.16[gtk3]
 	>=media-sound/pulseaudio-3[glib]
 	virtual/freedesktop-icon-theme
 "
@@ -39,6 +39,6 @@ src_configure() {
 	econf \
 		--docdir=/usr/share/doc/${PF} \
 		--htmldir=/usr/share/doc/${PF}/html \
-		--disable-lynx --disable-gtk3 \
+		--disable-lynx --disable-gtk2 --enable-gtk3 \
 		$(use_enable nls)
 }
