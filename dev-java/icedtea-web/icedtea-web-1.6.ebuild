@@ -15,15 +15,20 @@ LICENSE="GPL-2 GPL-2-with-linking-exception LGPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-IUSE="doc +icedtea7 javascript +nsplugin tagsoup test"
+IUSE="doc +icedtea7 +icedtea8 javascript +nsplugin tagsoup test"
 
 COMMON_DEP="
-	icedtea7? ( || (
-		dev-java/icedtea:7 dev-java/icedtea-bin:7
+	icedtea8? ( || (
+		dev-java/icedtea:8 dev-java/icedtea-bin:8
 	) )
-	!icedtea7? ( || (
-		dev-java/icedtea:7 dev-java/icedtea-bin:7
-		dev-java/icedtea:6 dev-java/icedtea-bin:6
+	!icedtea8? ( || (
+	  icedtea7? ( || (
+		  dev-java/icedtea:7 dev-java/icedtea-bin:7
+	  ) )
+	  !icedtea7? ( || (
+		  dev-java/icedtea:7 dev-java/icedtea-bin:7
+		  dev-java/icedtea:6 dev-java/icedtea-bin:6
+	  ) )
 	) )
 	app-eselect/eselect-java
 	tagsoup? ( dev-java/tagsoup )
@@ -41,9 +46,12 @@ DEPEND="${COMMON_DEP}
 
 # http://mail.openjdk.java.net/pipermail/distro-pkg-dev/2010-December/011221.html
 pkg_setup() {
-	JAVA_PKG_WANT_BUILD_VM="icedtea-7 icedtea-bin-7"
-	if ! use icedtea7; then
-		JAVA_PKG_WANT_BUILD_VM="${JAVA_PKG_WANT_BUILD_VM} icedtea-6 icedtea-bin-6"
+	JAVA_PKG_WANT_BUILD_VM="icedtea-8 icedtea-bin-8"
+	if ! use icedtea8; then
+	  JAVA_PKG_WANT_BUILD_VM="${JAVA_PKG_WANT_BUILD_VM} icedtea-7 icedtea-bin-7"
+	  if ! use icedtea7; then
+		  JAVA_PKG_WANT_BUILD_VM="${JAVA_PKG_WANT_BUILD_VM} icedtea-6 icedtea-bin-6"
+	  fi
 	fi
 	JAVA_PKG_WANT_SOURCE="1.6"
 	JAVA_PKG_WANT_TARGET="1.6"
@@ -72,7 +80,7 @@ src_configure() {
 		$(use_enable doc docs)
 		$(use_enable nsplugin plugin)
 		$(use_with javascript rhino)
-		$(use_with tagsoup tagsoup ${tagsoup_jar}) --with-firefox=/usr/bin/firefox
+		$(use_with tagsoup tagsoup ${tagsoup_jar})
 	)
 
 	unset JAVA_HOME JDK_HOME CLASSPATH JAVAC JAVACFLAGS

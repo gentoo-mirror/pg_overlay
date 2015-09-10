@@ -36,7 +36,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/*.patch
+	epatch "${FILESDIR}"/${PN}-4.2.0-sharedlibs.patch
 	
 	sed -i \
 		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
@@ -90,12 +90,11 @@ src_configure() {
 
 src_install() {
 	emake DIST_ROOT="${ED}" install
-	# parallel install fails on these targets for >=xfsprogs-3.2.0
-	emake DIST_ROOT="${ED}" install-dev
+	# parallel install fails on this target for >=xfsprogs-3.2.0
+	emake -j1 DIST_ROOT="${ED}" install-dev
 
 	# handle is for xfsdump, the rest for xfsprogs
 	gen_usr_ldscript -a xfs xlog
-
 	# removing unnecessary .la files if not needed
-	use static-libs || find "${ED}" -name '*.la' -delete; find "${ED}" -name '*.a' -delete
+	use static-libs || find "${ED}" -name '*.la' -delete
 }
