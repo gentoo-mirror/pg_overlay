@@ -14,7 +14,7 @@ inherit check-reqs chromium eutils flag-o-matic multilib multiprocessing pax-uti
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
-SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz"
+SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}-lite.tar.xz"
 
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
@@ -186,6 +186,7 @@ src_prepare() {
 	# fi
 
 	epatch "${FILESDIR}/${PN}-system-jinja-r7.patch"
+	epatch "${FILESDIR}/${PN}-tracing-r0.patch"
 
 	epatch_user
 	
@@ -483,7 +484,7 @@ src_configure() {
 
 		# Prevent libvpx build failures. Bug 530248, 544702, 546984.
 		if [[ ${myarch} == amd64 || ${myarch} == x86 ]]; then
-			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx2
+			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
 		fi
 	fi
 
@@ -504,7 +505,9 @@ src_configure() {
 	if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 		build_ffmpeg_args+=" --disable-asm"
 	fi
-        
+
+        build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
+
 	# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 	einfo "Configuring bundled ffmpeg..."
 	pushd third_party/ffmpeg > /dev/null || die

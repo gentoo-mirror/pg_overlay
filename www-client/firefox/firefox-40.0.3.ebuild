@@ -143,6 +143,7 @@ src_prepare() {
 	epatch "${FILESDIR}"/${PN}-38-dont-hardcode-libc-soname.patch #557956
 	
 	epatch "${FILESDIR}/Makefile_in.patch"
+	epatch "${FILESDIR}/freetype.patch"
 	# Allow user to apply any additional patches without modifing ebuild
 	epatch_user
 
@@ -173,6 +174,8 @@ src_prepare() {
 	sed 's@\(xargs rm\)$@\1 -f@' \
 		-i "${S}"/toolkit/mozapps/installer/packager.mk || die
 
+	sed -i '/^ftcache.h/a ftfntfmt.h' "${S}"/config/system-headers
+
 	eautoreconf
 
 	# Must run autoconf in js/src
@@ -182,6 +185,7 @@ src_prepare() {
 	# Need to update jemalloc's configure
 	cd "${S}"/memory/jemalloc/src || die
 	WANT_AUTOCONF= eautoconf
+	#
 }
 
 src_configure() {

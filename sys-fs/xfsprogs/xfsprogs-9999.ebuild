@@ -38,22 +38,19 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-4.2.0-sharedlibs.patch
 	
+	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
+	# Clear out -static from all flags since we want to link against dynamic xfs libs.
 	sed -i \
 		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
+		-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
 		include/builddefs.in || die
-	
-	sed -i \
-		-e '1iLLDFLAGS = -static' \
-		{estimate,fsr}/Makefile || die
-		
-	sed -i \
-		-e "/LLDFLAGS/s:-static-libtool-libs:$(use static && echo -all-static):" \
-		$(find -name Makefile) || die
-	
-	#libdisk has broken blkid conditional checking
+	find -name Makefile -exec \
+		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
+
+	# libdisk has broken blkid conditional checking
 	sed -i \
 		-e '/LIB_SUBDIRS/s:libdisk::' \
-		Makefile || die
+		Makefile || diee
 	
 	emake configure
 	
