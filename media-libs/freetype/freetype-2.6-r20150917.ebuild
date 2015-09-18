@@ -56,8 +56,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/01-freetype-2.6-enable-valid.patch
 
 	if use infinality; then
-		epatch "${FILESDIR}"/02-upstream-2015.08.24.patch
-		epatch "${FILESDIR}"/03-infinality-2.6-2015.08.24.patch
+		patch -p1 -i "${FILESDIR}"/02-upstream-2015.09.17.patch
+		epatch "${FILESDIR}"/03-infinality-2.6-2015.09.17.patch
 		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in freetype-2.4.11
 		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
 	fi
