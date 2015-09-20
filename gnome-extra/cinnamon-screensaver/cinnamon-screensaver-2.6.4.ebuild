@@ -89,7 +89,7 @@ src_configure() {
 		$(use_enable pam locking) \
 		$(use_enable systemd logind) \
 		--with-mit-ext \
-		--without-pam-prefix \
+		--with-pam-prefix=/etc \
 		--with-xf86gamma-ext \
 		--with-kbd-layout-indicator
 	# Do not use --without-console-kit, it would provide no benefit: there is
