@@ -137,6 +137,7 @@ src_prepare() {
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \
 	epatch "${WORKDIR}/firefox"
+	epatch "${FILESDIR}"/${PN}-38-dont-hardcode-libc-soname.patch #557956
 	epatch "${FILESDIR}/Makefile_in.patch"
 	epatch "${FILESDIR}/freetype.patch"
 
