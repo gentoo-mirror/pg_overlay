@@ -30,11 +30,6 @@ DEPEND="${RDEPEND}
 		)
 "
 
-#src_prepare() {
-#	# Fix statup crashes (bug #530170)
-#	#epatch "${FILESDIR}"/${P}-fix-startup-crashes.patch
-#}
-
 src_configure() {
 	econf \
 		--docdir=/usr/share/doc/${PF} \
