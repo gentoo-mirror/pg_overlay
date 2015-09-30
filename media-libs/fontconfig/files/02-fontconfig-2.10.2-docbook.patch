@@ -13,3 +13,4 @@ diff --unified -uNrp fontconfig-2.10.2-orig/configure.ac fontconfig-2.10.2/confi
 +fi
  
  AM_CONDITIONAL(USEDOCBOOK, test "x$HASDOCBOOK" = xyes)
+ 

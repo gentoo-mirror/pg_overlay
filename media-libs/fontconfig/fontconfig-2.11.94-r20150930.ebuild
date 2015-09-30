@@ -62,7 +62,7 @@ src_configure() {
 	esac
 	local myeconfargs=(
 		$(use_enable doc docbook)
-		--enable-docs
+		--disable-docs
 		--localstatedir="${EPREFIX}"/var
 		--with-default-fonts="${EPREFIX}"/usr/share/fonts
 		--with-add-fonts="${EPREFIX}/usr/local/share/fonts${addfonts}" \
