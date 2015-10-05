@@ -12,8 +12,7 @@ SRC_URI="mirror://sourceforge/freetype/${P/_/}.tar.bz2
 	utils?	( mirror://sourceforge/freetype/ft2demos-${PV}.tar.bz2
 		mirror://nongnu/freetype/ft2demos-${PV}.tar.bz2 )
 	doc?	( mirror://sourceforge/freetype/${PN}-doc-${PV}.tar.bz2
-		mirror://nongnu/freetype/${PN}-doc-${PV}.tar.bz2 )
-	infinality? ( https://dev.gentoo.org/~polynomial-c/${P}-infinality-patches.tar.xz )"
+		mirror://nongnu/freetype/${PN}-doc-${PV}.tar.bz2 )"
 
 LICENSE="|| ( FTL GPL-2+ )"
 SLOT="2"
@@ -53,11 +52,10 @@ src_prepare() {
 	}
 
 	# This is the same as the 01 patch from infinality
-	epatch "${FILESDIR}"/01-freetype-2.6-enable-valid.patch
+	epatch "${FILESDIR}"/01-freetype-*-enable-valid.patch
 
 	if use infinality; then
-		patch -p1 -i "${FILESDIR}"/02-upstream-2015.09.30.patch
-		epatch "${FILESDIR}"/03-infinality-2.6-2015.09.30.patch
+		epatch "${FILESDIR}"/03-infinality-*.patch
 		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in freetype-2.4.11
 		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
 	fi
@@ -78,7 +76,6 @@ src_prepare() {
 	fi
 
 	epatch "${FILESDIR}"/${PN}-2.4.11-sizeof-types.patch # 459966
-
 	if use utils; then
 		cd "${WORKDIR}/ft2demos-${PV}" || die
 		# Disable tests needing X11 when USE="-X". (bug #177597)
