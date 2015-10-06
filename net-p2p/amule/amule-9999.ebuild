@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils flag-o-matic wxwidgets user git-r3
 
-EGIT_REPO_URI="git://repo.or.cz/amule.git"
+EGIT_REPO_URI="http://repo.or.cz/amule.git"
 EGIT_BRANCH="master"
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"

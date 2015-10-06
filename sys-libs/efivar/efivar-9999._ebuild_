@@ -17,7 +17,13 @@ KEYWORDS="~amd64 ~ia64 ~x86"
 RDEPEND="dev-libs/popt"
 DEPEND="${RDEPEND}"
 
+src_prepare() {
+	sed 's|-O0|-Os|g' -i "Make.defaults" || true
+	sed 's|-rpath=$(TOPDIR)/src/|-rpath=$(libdir)|g' -i "src/test/Makefile" || true
+}
 src_configure() {
 	tc-export CC
+	export MAKEOPTS=-j1
 	export libdir="/usr/$(get_libdir)"
+	unset LIBS # Bug 562004
 }
