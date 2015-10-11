@@ -60,7 +60,7 @@ src_configure() {
 	local MODELS=${INPUT_DEVICES//roccat_/}
 	mycmakeargs=(
 		-DDEVICES=${MODELS// /;} \
-		-DUDEVDIR="${UDEVDIR/"//"//}" -DCMAKE_BUILD_TYPE=Debug
+		-DUDEVDIR="${UDEVDIR/"//"//}"
 	)
 	if use lua ; then
 		mycmakeargs+=( -DWITH_LUA=5.1 )
