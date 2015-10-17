@@ -1,10 +1,12 @@
 Taken from: https://code.launchpad.net/~saiarcot895
-And rebased against chromium-45.0.2454.85 source.
+And rebased against chromium-46.0.2490.71 source.
 
-diff -uar chromium-45.0.2454.85.orig/chrome/browser/about_flags.cc chromium-45.0.2454.85/chrome/browser/about_flags.cc
---- chromium-45.0.2454.85.orig/chrome/browser/about_flags.cc	2015-09-01 22:10:41.000000000 +0200
-+++ chromium-45.0.2454.85/chrome/browser/about_flags.cc	2015-09-03 00:01:11.689523547 +0200
-@@ -974,7 +974,7 @@
+Description: Enables using VA-API hardware acceleration in Linux. The patch for bpf_gpu_policy_linux.cc initially came from https://codereview.chromium.org/15955009/diff/92001/content/common/sandbox_linux/bpf_gpu_policy_linux.cc.
+
+diff -uarN chromium-46.0.2490.71.orig/chrome/browser/about_flags.cc chromium-46.0.2490.71/chrome/browser/about_flags.cc
+--- chromium-46.0.2490.71.orig/chrome/browser/about_flags.cc	2015-10-13 21:04:31.000000000 +0200
++++ chromium-46.0.2490.71/chrome/browser/about_flags.cc	2015-10-14 11:21:28.934823857 +0200
+@@ -1014,7 +1014,7 @@
       "disable-accelerated-video-decode",
       IDS_FLAGS_DISABLE_ACCELERATED_VIDEO_DECODE_NAME,
       IDS_FLAGS_DISABLE_ACCELERATED_VIDEO_DECODE_DESCRIPTION,
@@ -13,9 +15,9 @@ diff -uar chromium-45.0.2454.85.orig/chrome/browser/about_flags.cc chromium-45.0
       SINGLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(USE_ASH)
-diff -uar chromium-45.0.2454.85.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc chromium-45.0.2454.85/content/common/gpu/media/gpu_video_decode_accelerator.cc
---- chromium-45.0.2454.85.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc	2015-08-22 21:01:55.000000000 +0200
-+++ chromium-45.0.2454.85/content/common/gpu/media/gpu_video_decode_accelerator.cc	2015-09-03 00:01:11.585506322 +0200
+diff -uarN chromium-46.0.2490.71.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc chromium-46.0.2490.71/content/common/gpu/media/gpu_video_decode_accelerator.cc
+--- chromium-46.0.2490.71.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/common/gpu/media/gpu_video_decode_accelerator.cc	2015-10-14 11:21:28.727789543 +0200
 @@ -33,7 +33,7 @@
  #include "content/common/gpu/media/dxva_video_decode_accelerator.h"
  #elif defined(OS_MACOSX)
@@ -34,51 +36,9 @@ diff -uar chromium-45.0.2454.85.orig/content/common/gpu/media/gpu_video_decode_a
    decoder.reset(new VaapiVideoDecodeAccelerator(
        make_context_current_, base::Bind(&GpuVideoDecodeAccelerator::BindImage,
                                          base::Unretained(this))));
-diff -uar chromium-45.0.2454.85.orig/content/common/gpu/media/vaapi_video_decode_accelerator.cc chromium-45.0.2454.85/content/common/gpu/media/vaapi_video_decode_accelerator.cc
---- chromium-45.0.2454.85.orig/content/common/gpu/media/vaapi_video_decode_accelerator.cc	2015-09-01 22:10:42.000000000 +0200
-+++ chromium-45.0.2454.85/content/common/gpu/media/vaapi_video_decode_accelerator.cc	2015-09-03 00:01:11.707526530 +0200
-@@ -269,17 +269,17 @@
- 
-   base::AutoLock auto_lock(lock_);
-   DCHECK_EQ(state_, kUninitialized);
--  DVLOG(2) << "Initializing VAVDA, profile: " << profile;
-+  LOG(WARNING) << "Initializing VAVDA, profile: " << profile;
- 
- #if defined(USE_X11)
-   if (gfx::GetGLImplementation() != gfx::kGLImplementationDesktopGL) {
--    DVLOG(1) << "HW video decode acceleration not available without "
-+    LOG(ERROR) << "HW video decode acceleration not available without "
-                 "DesktopGL (GLX).";
-     return false;
-   }
- #elif defined(USE_OZONE)
-   if (gfx::GetGLImplementation() != gfx::kGLImplementationEGLGLES2) {
--    DVLOG(1) << "HW video decode acceleration not available without "
-+    LOG(ERROR) << "HW video decode acceleration not available without "
-              << "EGLGLES2.";
-     return false;
-   }
-@@ -289,7 +289,7 @@
-       VaapiWrapper::kDecode, profile, base::Bind(&ReportToUMA, VAAPI_ERROR));
- 
-   if (!vaapi_wrapper_.get()) {
--    DVLOG(1) << "Failed initializing VAAPI for profile " << profile;
-+    LOG(ERROR) << "Failed initializing VAAPI for profile " << profile;
-     return false;
-   }
- 
-@@ -302,7 +302,7 @@
-     vp8_accelerator_.reset(new VaapiVP8Accelerator(this, vaapi_wrapper_.get()));
-     decoder_.reset(new VP8Decoder(vp8_accelerator_.get()));
-   } else {
--    DLOG(ERROR) << "Unsupported profile " << profile;
-+    LOG(ERROR) << "Unsupported profile " << profile;
-     return false;
-   }
- 
-diff -uar chromium-45.0.2454.85.orig/content/common/gpu/media/vaapi_wrapper.cc chromium-45.0.2454.85/content/common/gpu/media/vaapi_wrapper.cc
---- chromium-45.0.2454.85.orig/content/common/gpu/media/vaapi_wrapper.cc	2015-09-01 22:10:42.000000000 +0200
-+++ chromium-45.0.2454.85/content/common/gpu/media/vaapi_wrapper.cc	2015-09-03 00:01:11.705526199 +0200
+diff -uarN chromium-46.0.2490.71.orig/content/common/gpu/media/vaapi_wrapper.cc chromium-46.0.2490.71/content/common/gpu/media/vaapi_wrapper.cc
+--- chromium-46.0.2490.71.orig/content/common/gpu/media/vaapi_wrapper.cc	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/common/gpu/media/vaapi_wrapper.cc	2015-10-14 11:21:28.944825515 +0200
 @@ -146,7 +146,7 @@
      VAProfile va_profile,
      const base::Closure& report_error_to_uma_cb) {
@@ -88,28 +48,7 @@ diff -uar chromium-45.0.2454.85.orig/content/common/gpu/media/vaapi_wrapper.cc c
      return nullptr;
    }
  
-@@ -299,14 +299,16 @@
- bool VaapiWrapper::VaInitialize(const base::Closure& report_error_to_uma_cb) {
-   static bool vaapi_functions_initialized = PostSandboxInitialization();
-   if (!vaapi_functions_initialized) {
--    bool running_on_chromeos = false;
--#if defined(OS_CHROMEOS)
-+    bool error_level_logging = false;
-+#if defined(OS_LINUX)
-+    error_level_logging = true;
-+#elif defined(OS_CHROMEOS)
-     // When chrome runs on linux with chromeos=1, do not log error message
-     // without VAAPI libraries.
--    running_on_chromeos = base::SysInfo::IsRunningOnChromeOS();
-+    error_level_logging = base::SysInfo::IsRunningOnChromeOS();
- #endif
-     static const char kErrorMsg[] = "Failed to initialize VAAPI libs";
--    if (running_on_chromeos)
-+    if (error_level_logging)
-       LOG(ERROR) << kErrorMsg;
-     else
-       DVLOG(1) << kErrorMsg;
-@@ -378,7 +380,7 @@
+@@ -384,7 +384,7 @@
    if (std::find(supported_entrypoints.begin(),
                  supported_entrypoints.end(),
                  entrypoint) == supported_entrypoints.end()) {
@@ -118,7 +57,7 @@ diff -uar chromium-45.0.2454.85.orig/content/common/gpu/media/vaapi_wrapper.cc c
      return false;
    }
    return true;
-@@ -402,8 +404,8 @@
+@@ -408,8 +408,8 @@
      if (attribs[i].type != required_attribs[i].type ||
          (attribs[i].value & required_attribs[i].value) !=
              required_attribs[i].value) {
@@ -129,9 +68,9 @@ diff -uar chromium-45.0.2454.85.orig/content/common/gpu/media/vaapi_wrapper.cc c
        return false;
      }
    }
-diff -uar chromium-45.0.2454.85.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc chromium-45.0.2454.85/content/common/sandbox_linux/bpf_gpu_policy_linux.cc
---- chromium-45.0.2454.85.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2015-08-22 21:01:55.000000000 +0200
-+++ chromium-45.0.2454.85/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2015-09-03 00:01:11.670520400 +0200
+diff -uarN chromium-46.0.2490.71.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc chromium-46.0.2490.71/content/common/sandbox_linux/bpf_gpu_policy_linux.cc
+--- chromium-46.0.2490.71.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2015-10-14 11:21:28.884815569 +0200
 @@ -21,6 +21,8 @@
  #include "base/logging.h"
  #include "base/memory/scoped_ptr.h"
@@ -227,10 +166,10 @@ diff -uar chromium-45.0.2454.85.orig/content/common/sandbox_linux/bpf_gpu_policy
  
    return true;
  }
-diff -uar chromium-45.0.2454.85.orig/content/content_common.gypi chromium-45.0.2454.85/content/content_common.gypi
---- chromium-45.0.2454.85.orig/content/content_common.gypi	2015-09-01 22:10:42.000000000 +0200
-+++ chromium-45.0.2454.85/content/content_common.gypi	2015-09-03 00:01:11.594507813 +0200
-@@ -840,7 +840,7 @@
+diff -uarN chromium-46.0.2490.71.orig/content/content_common.gypi chromium-46.0.2490.71/content/content_common.gypi
+--- chromium-46.0.2490.71.orig/content/content_common.gypi	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/content_common.gypi	2015-10-14 11:21:28.755794184 +0200
+@@ -856,7 +856,7 @@
          },
        ],
      }],
@@ -239,7 +178,7 @@ diff -uar chromium-45.0.2454.85.orig/content/content_common.gypi chromium-45.0.2
        'sources': [
          'common/gpu/media/accelerated_video_decoder.h',
          'common/gpu/media/h264_decoder.cc',
-@@ -891,7 +891,7 @@
+@@ -908,7 +908,7 @@
          'common/gpu/media/tegra_v4l2_device.h',
        ],
      }],
@@ -248,9 +187,9 @@ diff -uar chromium-45.0.2454.85.orig/content/content_common.gypi chromium-45.0.2
        'dependencies': [
          '../media/media.gyp:media',
          '../third_party/libyuv/libyuv.gyp:libyuv',
-diff -uar chromium-45.0.2454.85.orig/content/content_gpu.gypi chromium-45.0.2454.85/content/content_gpu.gypi
---- chromium-45.0.2454.85.orig/content/content_gpu.gypi	2015-08-22 21:01:55.000000000 +0200
-+++ chromium-45.0.2454.85/content/content_gpu.gypi	2015-09-03 00:01:11.605509635 +0200
+diff -uarN chromium-46.0.2490.71.orig/content/content_gpu.gypi chromium-46.0.2490.71/content/content_gpu.gypi
+--- chromium-46.0.2490.71.orig/content/content_gpu.gypi	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/content_gpu.gypi	2015-10-14 11:21:28.756794349 +0200
 @@ -36,7 +36,7 @@
          ],
        },
@@ -260,10 +199,10 @@ diff -uar chromium-45.0.2454.85.orig/content/content_gpu.gypi chromium-45.0.2454
        'include_dirs': [
          '<(DEPTH)/third_party/libva',
        ],
-diff -uar chromium-45.0.2454.85.orig/content/content_tests.gypi chromium-45.0.2454.85/content/content_tests.gypi
---- chromium-45.0.2454.85.orig/content/content_tests.gypi	2015-09-01 22:10:42.000000000 +0200
-+++ chromium-45.0.2454.85/content/content_tests.gypi	2015-09-03 00:01:11.607509967 +0200
-@@ -1691,7 +1691,7 @@
+diff -uarN chromium-46.0.2490.71.orig/content/content_tests.gypi chromium-46.0.2490.71/content/content_tests.gypi
+--- chromium-46.0.2490.71.orig/content/content_tests.gypi	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/content_tests.gypi	2015-10-14 11:21:28.766796007 +0200
+@@ -1705,7 +1705,7 @@
            },
          ]
      }],
@@ -272,55 +211,33 @@ diff -uar chromium-45.0.2454.85.orig/content/content_tests.gypi chromium-45.0.24
        'targets': [
            {
              'target_name': 'vaapi_jpeg_decoder_unittest',
-diff -uar chromium-45.0.2454.85.orig/content/gpu/gpu_main.cc chromium-45.0.2454.85/content/gpu/gpu_main.cc
---- chromium-45.0.2454.85.orig/content/gpu/gpu_main.cc	2015-09-01 22:10:42.000000000 +0200
-+++ chromium-45.0.2454.85/content/gpu/gpu_main.cc	2015-09-03 00:01:11.712527357 +0200
-@@ -64,7 +64,7 @@
- #include "content/common/sandbox_mac.h"
- #endif
+diff -uarN chromium-46.0.2490.71.orig/content/public/common/content_switches.cc chromium-46.0.2490.71/content/public/common/content_switches.cc
+--- chromium-46.0.2490.71.orig/content/public/common/content_switches.cc	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/public/common/content_switches.cc	2015-10-14 11:21:28.775797499 +0200
+@@ -943,7 +943,7 @@
+ // Disable web audio API.
+ const char kDisableWebAudio[]               = "disable-webaudio";
  
--#if defined(OS_CHROMEOS) && defined(ARCH_CPU_X86_FAMILY)
-+#if (defined(OS_CHROMEOS) || defined(OS_LINUX)) && defined(ARCH_CPU_X86_FAMILY)
- #include "content/common/gpu/media/vaapi_wrapper.h"
- #endif
- 
-@@ -224,7 +224,7 @@
-   // commandline switches.
-   GetGpuInfoFromCommandLine(gpu_info, command_line);
- 
--#if defined(OS_CHROMEOS) && defined(ARCH_CPU_X86_FAMILY)
-+#if (defined(OS_CHROMEOS) || defined(OS_LINUX)) && defined(ARCH_CPU_X86_FAMILY)
-   VaapiWrapper::PreSandboxInitialization();
- #endif
- 
-diff -uar chromium-45.0.2454.85.orig/content/public/common/content_switches.cc chromium-45.0.2454.85/content/public/common/content_switches.cc
---- chromium-45.0.2454.85.orig/content/public/common/content_switches.cc	2015-09-01 22:10:42.000000000 +0200
-+++ chromium-45.0.2454.85/content/public/common/content_switches.cc	2015-09-03 00:01:11.615511291 +0200
-@@ -962,7 +962,9 @@
- #if defined(OS_CHROMEOS)
+-#if defined(OS_CHROMEOS)
++#if defined(OS_CHROMEOS) || defined(OS_LINUX)
  // Disables panel fitting (used for mirror mode).
  const char kDisablePanelFitting[]           = "disable-panel-fitting";
-+#endif
  
+diff -uarN chromium-46.0.2490.71.orig/content/public/common/content_switches.h chromium-46.0.2490.71/content/public/common/content_switches.h
+--- chromium-46.0.2490.71.orig/content/public/common/content_switches.h	2015-10-13 21:04:32.000000000 +0200
++++ chromium-46.0.2490.71/content/public/common/content_switches.h	2015-10-14 11:21:28.776797665 +0200
+@@ -275,7 +275,7 @@
+ 
+ CONTENT_EXPORT extern const char kDisableWebAudio[];
+ 
+-#if defined(OS_CHROMEOS)
 +#if defined(OS_CHROMEOS) || defined(OS_LINUX)
- // Disables VA-API accelerated video encode.
- const char kDisableVaapiAcceleratedVideoEncode[] =
-     "disable-vaapi-accelerated-video-encode";
-diff -uar chromium-45.0.2454.85.orig/content/public/common/content_switches.h chromium-45.0.2454.85/content/public/common/content_switches.h
---- chromium-45.0.2454.85.orig/content/public/common/content_switches.h	2015-09-01 22:10:42.000000000 +0200
-+++ chromium-45.0.2454.85/content/public/common/content_switches.h	2015-09-03 00:01:11.617511623 +0200
-@@ -277,6 +277,8 @@
- 
- #if defined(OS_CHROMEOS)
  CONTENT_EXPORT extern const char kDisablePanelFitting[];
-+#endif
-+#if defined(OS_CHROMEOS) || defined(OS_LINUX)
  CONTENT_EXPORT extern const char kDisableVaapiAcceleratedVideoEncode[];
  #endif
- 
-diff -uar chromium-45.0.2454.85.orig/gpu/config/software_rendering_list_json.cc chromium-45.0.2454.85/gpu/config/software_rendering_list_json.cc
---- chromium-45.0.2454.85.orig/gpu/config/software_rendering_list_json.cc	2015-09-01 22:10:43.000000000 +0200
-+++ chromium-45.0.2454.85/gpu/config/software_rendering_list_json.cc	2015-09-03 00:01:11.653517586 +0200
+diff -uarN chromium-46.0.2490.71.orig/gpu/config/software_rendering_list_json.cc chromium-46.0.2490.71/gpu/config/software_rendering_list_json.cc
+--- chromium-46.0.2490.71.orig/gpu/config/software_rendering_list_json.cc	2015-10-07 04:42:12.000000000 +0200
++++ chromium-46.0.2490.71/gpu/config/software_rendering_list_json.cc	2015-10-14 11:21:28.855810761 +0200
 @@ -481,17 +481,6 @@
        ]
      },
@@ -339,7 +256,7 @@ diff -uar chromium-45.0.2454.85.orig/gpu/config/software_rendering_list_json.cc 
        "id": 49,
        "description": "NVidia GeForce GT 650M can cause the system to hang with flash 3D",
        "cr_bugs": [140175],
-@@ -1040,6 +1029,11 @@
+@@ -1039,6 +1028,11 @@
              "op": ">=",
              "value": "3.0"
            }
@@ -351,10 +268,10 @@ diff -uar chromium-45.0.2454.85.orig/gpu/config/software_rendering_list_json.cc 
          }
        ],
        "features": [
-diff -uar chromium-45.0.2454.85.orig/media/media.gyp chromium-45.0.2454.85/media/media.gyp
---- chromium-45.0.2454.85.orig/media/media.gyp	2015-09-01 22:10:43.000000000 +0200
-+++ chromium-45.0.2454.85/media/media.gyp	2015-09-03 00:01:11.635514603 +0200
-@@ -717,7 +717,7 @@
+diff -uarN chromium-46.0.2490.71.orig/media/media.gyp chromium-46.0.2490.71/media/media.gyp
+--- chromium-46.0.2490.71.orig/media/media.gyp	2015-10-13 21:04:33.000000000 +0200
++++ chromium-46.0.2490.71/media/media.gyp	2015-10-14 11:21:28.820804959 +0200
+@@ -756,7 +756,7 @@
            ],
          }],
          # For VaapiVideoEncodeAccelerator.
@@ -363,12 +280,3 @@ diff -uar chromium-45.0.2454.85.orig/media/media.gyp chromium-45.0.2454.85/media
            'sources': [
              'filters/h264_bitstream_buffer.cc',
              'filters/h264_bitstream_buffer.h',
-@@ -1292,7 +1292,7 @@
-             'player_android',
-           ],
-         }],
--        ['target_arch != "arm" and chromeos == 1 and use_x11 == 1', {
-+        ['target_arch != "arm" and (chromeos == 1 or desktop_linux == 1) and use_x11 == 1', {
-           'sources': [
-             'filters/h264_bitstream_buffer_unittest.cc',
-           ],
