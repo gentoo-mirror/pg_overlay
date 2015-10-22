@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/net-p2p/transmission/transmission-2.84-r14483.ebuild,v 1.3 2015/03/25 20:25:27 grknight Exp $
+# $Id$
 
 EAPI=5
 inherit autotools eutils fdo-mime gnome2-utils qmake-utils systemd user
@@ -46,6 +46,7 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/os-headers
 	virtual/pkgconfig
+	qt5? ( dev-qt/linguist-tools:5 )
 	xfs? ( sys-fs/xfsprogs )"
 
 REQUIRED_USE="ayatana? ( gtk ) ?? ( qt4 qt5 )"
@@ -112,7 +113,6 @@ src_install() {
 
 	newinitd "${FILESDIR}"/${PN}-daemon.initd.9 ${PN}-daemon
 	newconfd "${FILESDIR}"/${PN}-daemon.confd.4 ${PN}-daemon
-	#systemd_dounit daemon/${PN}-daemon.service
 
 	keepdir /var/{lib/${PN}/{config,downloads},log/${PN}}
 	fowners -R ${PN}:${PN} /var/{lib/${PN}/{,config,downloads},log/${PN}}
