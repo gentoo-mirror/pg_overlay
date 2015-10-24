@@ -6,7 +6,7 @@ EAPI="5"
 
 inherit eutils flag-o-matic wxwidgets user git-r3
 
-EGIT_REPO_URI="http://repo.or.cz/amule.git"
+EGIT_REPO_URI="git://repo.or.cz/amule.git"
 EGIT_BRANCH="master"
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
@@ -16,7 +16,7 @@ SRC_URI=""
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="alpha amd64 ppc ppc64 ~sparc x86"
-IUSE="+daemon -debug -geoip +nls +remote -stats +unicode -upnp +X +mmap"
+IUSE="+daemon -debug -geoip +nls remote -stats +unicode -upnp +X +mmap"
 
 DEPEND=">=dev-libs/crypto++-5
 	>=sys-libs/zlib-1.2.1
@@ -27,8 +27,8 @@ DEPEND=">=dev-libs/crypto++-5
 	upnp? ( >=net-libs/libupnp-1.6.6 )
 	remote? ( >=media-libs/libpng-1.2.0
 	unicode? ( >=media-libs/gd-2.0.26 ) )
-	X? ( >=x11-libs/wxGTK-2.8.12:2.8[X] )
-	!X? ( >=x11-libs/wxGTK-2.8.12:2.8 )"
+	X? ( >=x11-libs/wxGTK-3.0:3.0[X] )
+	!X? ( >=x11-libs/wxGTK-3.0:3.0 )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -42,7 +42,7 @@ pkg_setup() {
 src_configure() {
 	local myconf
 
-	WX_GTK_VER="2.8"
+	WX_GTK_VER="3.0"
 
 	if use X; then
 		einfo "wxGTK with X support will be used"
@@ -56,7 +56,7 @@ src_configure() {
 		use stats && myconf="${myconf}
 			--enable-wxcas
 			--enable-alc"
-		use remote && myconf="${myconf}
+		myconf="${myconf}
 			--enable-amule-gui"
 	else
 		myconf="

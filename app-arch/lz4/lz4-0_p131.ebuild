@@ -28,6 +28,7 @@ IUSE="test valgrind"
 DEPEND="test? ( valgrind? ( dev-util/valgrind ) )"
 
 src_prepare() {
+	epatch "${FILESDIR}/programs_Makefile.patch"
 	if ! use valgrind; then
 		sed -i -e '/^test:/s|test-mem||g' programs/Makefile || die
 	fi
