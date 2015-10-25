@@ -9,3 +9,32 @@
  
  test-lz4: lz4 datagen test-lz4-basic test-lz4-multiple test-lz4-sparse test-lz4-contentSize test-lz4-frame-concatenation
  	@echo "\n ---- test pass-through ----"
+
+diff --git a/programs/Makefile b/programs/Makefile
+index f422902..4506dcc 100644
+--- a/programs/Makefile
++++ b/programs/Makefile
+@@ -39,8 +39,8 @@ RELEASE?= r131
+ DESTDIR?=
+ PREFIX ?= /usr/local
+ CFLAGS ?= -O3
+-CFLAGS += -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-qual -Wcast-align -Wstrict-prototypes -pedantic -DLZ4_VERSION=\"$(RELEASE)\"
+-FLAGS  := -I../lib $(CPPFLAGS) $(CFLAGS) $(LDFLAGS)
++CFLAGS += -std=c99 -Wall -Wextra -Wundef -Wshadow -Wcast-qual -Wcast-align -Wstrict-prototypes -pedantic
++FLAGS  := -I../lib $(CPPFLAGS) $(CFLAGS) -DLZ4_VERSION=\"$(RELEASE)\" $(LDFLAGS)
+
+ BINDIR := $(PREFIX)/bin
+ MANDIR := $(PREFIX)/share/man/man1
+diff --git a/programs/lz4cli.c b/programs/lz4cli.c
+index cc5c96a..4bbbf88 100644
+--- a/programs/lz4cli.c
++++ b/programs/lz4cli.c
+@@ -87,7 +87,7 @@
+ ******************************/
+ #define COMPRESSOR_NAME "LZ4 command line interface"
+ #ifndef LZ4_VERSION
+-#  define LZ4_VERSION "r128"
++#  define LZ4_VERSION "r131"
+ #endif
+ #define AUTHOR "Yann Collet"
+ #define WELCOME_MESSAGE "*** %s %i-bits %s, by %s (%s) ***\n", COMPRESSOR_NAME, (int)(sizeof(void*)*8), LZ4_VERSION, AUTHOR, __DATE__

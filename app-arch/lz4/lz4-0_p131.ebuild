@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit multilib multilib-minimal toolchain-funcs
+inherit multilib multilib-minimal toolchain-funcs ${VCS_ECLASS} 
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
