@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python{2_7,3_3,3_4} )
 PYTHON_REQ_USE='threads(+)'
 inherit eutils python-any-r1 waf-utils pax-utils fdo-mime gnome2-utils
 
-WAF_V="1.8.15"
+WAF_V="1.8.14"
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="http://mpv.io/"
