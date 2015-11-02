@@ -1,6 +1,6 @@
 # Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: /var/cvsroot/gentoo-x86/media-plugins/qmmp-plugin-pack/qmmp-plugin-pack-0.8.4.ebuild,v 1.1 2015/06/13 18:26:35 hwoarang Exp $
+# $Id$
 
 EAPI=5
 
@@ -18,7 +18,12 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="media-libs/taglib
-	media-sound/qmmp
-	dev-qt/qtgui:5"
+	>=media-sound/qmmp-1.0.0
+	dev-qt/qtgui:5
+	dev-qt/qtx11extras:5
+	dev-qt/qtwidgets:5"
 DEPEND="${RDEPEND}
-	dev-lang/yasm"
+	dev-lang/yasm
+	dev-qt/linguist-tools:5"
+
+PATCHES=( "${FILESDIR}"/${P}-fix-build.patch )

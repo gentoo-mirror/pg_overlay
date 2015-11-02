@@ -76,6 +76,8 @@ src_prepare() {
 	fi
 
 	epatch "${FILESDIR}"/${PN}-2.4.11-sizeof-types.patch # 459966
+	epatch "${FILESDIR}"/${PN}-2.6.1-bad-shift.patch
+
 	if use utils; then
 		cd "${WORKDIR}/ft2demos-${PV}" || die
 		# Disable tests needing X11 when USE="-X". (bug #177597)
