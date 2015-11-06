@@ -1,0 +1,332 @@
+Submitted By: Ken Moffat <ken at linuxfromscratch dot org>
+Date: 2015-09-08
+Initial Package Version: 5.0.1.2
+Upstream Status: Applied
+Origin: Upstream / Fedora (David Tardon)
+Description: Fixes for boost_1_59_0.
+
+I found the first part of this at fedora, apparently backported (I think
+that just means cherry-picked in this case),
+http://pkgs.fedoraproject.org/cgit/libreoffice.git/commit/?id=57cfb98d1c45259f946ff3444eeb6891a030e063
+
+That fixed my initial error linking libwriterperfect_importtestbase.a,
+but some considerable time later the build failed in libcdr-0.1.a and
+libvisio-0.1.a.  I think that is because fedora use external packages
+for those.
+
+I then picked up some upstream changes from 30th August, also by
+David Tardon at redhat.  Three of these drop a dependency on boost, three
+more fix the build in libabw, libvisio, libcdr.  I had to apply some of
+these by hand, so E&OE.
+
+diff -Naur a/external/libabw/ExternalProject_libabw.mk b/external/libabw/ExternalProject_libabw.mk
+--- a/external/libabw/ExternalProject_libabw.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libabw/ExternalProject_libabw.mk	2015-09-07 05:38:02.772996780 +0100
+@@ -35,7 +35,8 @@
+ 			--disable-werror \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+ 			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),\
+-				-I$(call gb_UnpackedTarball_get_dir,boost))" \
++				-I$(call gb_UnpackedTarball_get_dir,boost)) \
++				-DBOOST_ERROR_CODE_HEADER_ONLY -DBOOST_SYSTEM_NO_DEPRECATED" \
+ 			$(if $(CROSS_COMPILING),--build=$(BUILD_PLATFORM) --host=$(HOST_PLATFORM)) \
+ 		&& $(MAKE) \
+ 	)
+diff -Naur a/external/libcdr/ExternalProject_libcdr.mk b/external/libcdr/ExternalProject_libcdr.mk
+--- a/external/libcdr/ExternalProject_libcdr.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libcdr/ExternalProject_libcdr.mk	2015-09-07 05:47:59.917229440 +0100
+@@ -36,7 +36,8 @@
+ 			--disable-werror \
+ 			--disable-weffc \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost))" \
++			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) \
++				-DBOOST_ERROR_CODE_HEADER_ONLY -DBOOST_SYSTEM_NO_DEPRECATED" \
+ 			$(if $(CROSS_COMPILING),--build=$(BUILD_PLATFORM) --host=$(HOST_PLATFORM)) \
+ 		&& $(MAKE) \
+ 	)
+diff -Naur a/external/libebook/ExternalProject_libebook.mk b/external/libebook/ExternalProject_libebook.mk
+--- a/external/libebook/ExternalProject_libebook.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libebook/ExternalProject_libebook.mk	2015-09-07 05:54:27.322799235 +0100
+@@ -38,7 +38,8 @@
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+ 			--disable-werror \
+ 			--disable-weffc \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost))" \
++			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) \
++				-DBOOST_ERROR_CODE_HEADER_ONLY -DBOOST_SYSTEM_NO_DEPRECATED" \
+ 			XML_CFLAGS="$(LIBXML_CFLAGS)" \
+ 			XML_LIBS="$(LIBXML_LIBS)" \
+ 			REVENGE_GENERATORS_CFLAGS=' ' REVENGE_GENERATORS_LIBS=' ' REVENGE_STREAM_CFLAGS=' ' REVENGE_STREAM_LIBS=' ' \
+diff -Naur a/external/libmspub/ExternalProject_libmspub.mk b/external/libmspub/ExternalProject_libmspub.mk
+--- a/external/libmspub/ExternalProject_libmspub.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libmspub/ExternalProject_libmspub.mk	2015-09-07 05:54:27.322799235 +0100
+@@ -35,7 +35,8 @@
+ 			--disable-werror \
+ 			--disable-weffc \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost))" \
++			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) \
++				-DBOOST_ERROR_CODE_HEADER_ONLY -DBOOST_SYSTEM_NO_DEPRECATED" \
+ 			$(if $(CROSS_COMPILING),--build=$(BUILD_PLATFORM) --host=$(HOST_PLATFORM)) \
+ 		&& $(MAKE) \
+ 	)
+diff -Naur a/external/libmwaw/ExternalProject_libmwaw.mk b/external/libmwaw/ExternalProject_libmwaw.mk
+--- a/external/libmwaw/ExternalProject_libmwaw.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libmwaw/ExternalProject_libmwaw.mk	2015-09-07 05:56:50.897902089 +0100
+@@ -16,7 +16,6 @@
+ ))
+ 
+ $(eval $(call gb_ExternalProject_use_externals,libmwaw,\
+-	boost_headers \
+ 	revenge \
+ ))
+ 
+@@ -30,15 +29,14 @@
+ 			, \
+ 				--enable-shared --disable-static \
+ 			) \
++			--with-sharedptr=c++11 \
+ 			--without-docs \
+ 			--disable-tools \
+ 			--disable-zip \
+ 			$(if $(ENABLE_DEBUG),--enable-debug,--disable-debug) \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+ 			--disable-werror \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),\
+-				$(if $(COM_GCC_IS_CLANG),-Qunused-arguments) \
+-				-I$(call gb_UnpackedTarball_get_dir,boost))" \
++			CXXFLAGS="$(CXXFLAGS_CXX11)" \
+ 			$(if $(filter LINUX,$(OS)),$(if $(SYSTEM_REVENGE),, \
+ 				'LDFLAGS=-Wl$(COMMA)-z$(COMMA)origin \
+ 					-Wl$(COMMA)-rpath$(COMMA)\$$$$ORIGIN')) \
+diff -Naur a/external/libmwaw/Library_mwaw.mk b/external/libmwaw/Library_mwaw.mk
+--- a/external/libmwaw/Library_mwaw.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libmwaw/Library_mwaw.mk	2015-09-07 05:38:02.760996856 +0100
+@@ -13,7 +13,6 @@
+ 
+ $(eval $(call gb_Library_use_externals,mwaw,\
+     revenge \
+-    boost_headers \
+ ))
+ 
+ $(eval $(call gb_Library_set_warnings_not_errors,mwaw))
+@@ -24,10 +23,10 @@
+ ))
+ 
+ $(eval $(call gb_Library_add_defs,mwaw,\
+-	-DBOOST_ALL_NO_LIB \
+ 	-DBUILD_MWAW \
+ 	-DNDEBUG \
+ 	-D_WINDLL \
++	-DSHAREDPTR_STD \
+ ))
+ 
+ $(eval $(call gb_Library_add_generated_exception_objects,mwaw,\
+diff -Naur a/external/libodfgen/ExternalProject_libodfgen.mk b/external/libodfgen/ExternalProject_libodfgen.mk
+--- a/external/libodfgen/ExternalProject_libodfgen.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libodfgen/ExternalProject_libodfgen.mk	2015-09-07 05:44:35.670516577 +0100
+@@ -16,7 +16,6 @@
+ ))
+ 
+ $(eval $(call gb_ExternalProject_use_externals,libodfgen,\
+-	boost_headers \
+ 	revenge \
+ ))
+ 
+@@ -35,7 +34,7 @@
+ 			--disable-weffc \
+ 			--without-docs \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) $(if $(SYSTEM_REVENGE),,$(if $(filter-out MSC,$(COM)),-DLIBREVENGE_VISIBILITY))" \
++			CXXFLAGS="$(CXXFLAGS_CXX11) $(if $(SYSTEM_REVENGE),,$(if $(filter-out MSC,$(COM)),-DLIBREVENGE_VISIBILITY))" \
+ 			$(if $(filter LINUX,$(OS)),$(if $(SYSTEM_REVENGE),, \
+ 				'LDFLAGS=-Wl$(COMMA)-z$(COMMA)origin \
+ 					-Wl$(COMMA)-rpath$(COMMA)\$$$$ORIGIN')) \
+diff -Naur a/external/libodfgen/Library_odfgen.mk b/external/libodfgen/Library_odfgen.mk
+--- a/external/libodfgen/Library_odfgen.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libodfgen/Library_odfgen.mk	2015-09-07 05:38:02.768996806 +0100
+@@ -12,7 +12,6 @@
+ $(eval $(call gb_Library_use_unpacked,odfgen,libodfgen))
+ 
+ $(eval $(call gb_Library_use_externals,odfgen,\
+-    boost_headers \
+ 	revenge \
+ ))
+ 
+@@ -24,10 +23,10 @@
+ ))
+ 
+ $(eval $(call gb_Library_add_defs,odfgen,\
+-	-DBOOST_ALL_NO_LIB \
+ 	-DDLL_EXPORT \
+ 	-DLIBODFGEN_BUILD \
+ 	-DNDEBUG \
++	-DSHAREDPTR_STD \
+ 	-DPACKAGE=\"libodfgen\" \
+ 	-DVERSION=\"0.1.$(ODFGEN_VERSION_MICRO)\" \
+ ))
+diff -Naur a/external/liborcus/ExternalProject_liborcus.mk b/external/liborcus/ExternalProject_liborcus.mk
+--- a/external/liborcus/ExternalProject_liborcus.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/liborcus/ExternalProject_liborcus.mk	2015-09-07 05:54:27.322799235 +0100
+@@ -63,7 +63,7 @@
+ endif
+ endif
+ 
+-liborcus_CXXFLAGS=$(CXXFLAGS) $(gb_VISIBILITY_FLAGS) $(gb_VISIBILITY_FLAGS_CXX)
++liborcus_CXXFLAGS=$(CXXFLAGS) $(gb_VISIBILITY_FLAGS) $(gb_VISIBILITY_FLAGS_CXX) $(CXXFLAGS_CXX11) -DBOOST_SYSTEM_NO_DEPRECATED
+ liborcus_LDFLAGS=$(LDFLAGS) $(gb_LTOFLAGS)
+ ifeq ($(COM),MSC)
+ liborcus_CXXFLAGS+=$(BOOST_CXXFLAGS)
+diff -Naur a/external/libpagemaker/ExternalProject_libpagemaker.mk b/external/libpagemaker/ExternalProject_libpagemaker.mk
+--- a/external/libpagemaker/ExternalProject_libpagemaker.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libpagemaker/ExternalProject_libpagemaker.mk	2015-09-07 05:54:27.322799235 +0100
+@@ -33,7 +33,8 @@
+ 			--disable-werror \
+ 			--disable-weffc \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost))" \
++			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) \
++				-DBOOST_ERROR_CODE_HEADER_ONLY -DBOOST_SYSTEM_NO_DEPRECATED" \
+ 			$(if $(CROSS_COMPILING),--build=$(BUILD_PLATFORM) --host=$(HOST_PLATFORM)) \
+ 		&& $(MAKE) \
+ 	)
+diff -Naur a/external/librevenge/ExternalProject_librevenge.mk b/external/librevenge/ExternalProject_librevenge.mk
+--- a/external/librevenge/ExternalProject_librevenge.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/librevenge/ExternalProject_librevenge.mk	2015-09-07 05:54:27.322799235 +0100
+@@ -34,7 +34,8 @@
+ 			--disable-generators \
+ 			--without-docs \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost))" \
++			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) \
++				-DBOOST_ERROR_CODE_HEADER_ONLY -DBOOST_SYSTEM_NO_DEPRECATED" \
+ 			$(if $(CROSS_COMPILING),--build=$(BUILD_PLATFORM) --host=$(HOST_PLATFORM)) \
+ 			$(if $(filter MACOSX,$(OS)),--prefix=/@.__________________________________________________OOO) \
+ 		&& $(MAKE) \
+diff -Naur a/external/libvisio/ExternalProject_libvisio.mk b/external/libvisio/ExternalProject_libvisio.mk
+--- a/external/libvisio/ExternalProject_libvisio.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libvisio/ExternalProject_libvisio.mk	2015-09-07 05:45:58.941991310 +0100
+@@ -35,7 +35,8 @@
+ 			$(if $(ENABLE_DEBUG),--enable-debug,--disable-debug) \
+ 			--disable-werror \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost))" \
++			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) \
++				-DBOOST_ERROR_CODE_HEADER_ONLY -DBOOST_SYSTEM_NO_DEPRECATED" \
+ 			$(if $(CROSS_COMPILING),--build=$(BUILD_PLATFORM) --host=$(HOST_PLATFORM)) \
+ 		&& $(MAKE) \
+ 	)
+diff -Naur a/external/libwps/0001-add-missing-include.patch b/external/libwps/0001-add-missing-include.patch
+--- a/external/libwps/0001-add-missing-include.patch	1970-01-01 01:00:00.000000000 +0100
++++ b/external/libwps/0001-add-missing-include.patch	2015-09-07 05:38:02.736997008 +0100
+@@ -0,0 +1,24 @@
++From bc6f0f3a006123a89d1321038edeb75f2fd67c6f Mon Sep 17 00:00:00 2001
++From: David Tardon <dtardon@redhat.com>
++Date: Sun, 30 Aug 2015 11:21:29 +0200
++Subject: [PATCH] add missing include
++
++---
++ src/lib/WPS8.cpp | 1 +
++ 1 file changed, 1 insertion(+)
++
++diff --git a/src/lib/WPS8.cpp b/src/lib/WPS8.cpp
++index 04c1e57..8d39fa8 100644
++--- a/src/lib/WPS8.cpp
+++++ b/src/lib/WPS8.cpp
++@@ -19,6 +19,7 @@
++  * applicable instead of those above.
++  */
++ 
+++#include <algorithm>
++ #include <stdlib.h>
++ #include <stdio.h>
++ #include <string.h>
++-- 
++2.4.3
++
+diff -Naur a/external/libwps/ExternalProject_libwps.mk b/external/libwps/ExternalProject_libwps.mk
+--- a/external/libwps/ExternalProject_libwps.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libwps/ExternalProject_libwps.mk	2015-09-07 05:39:58.960267334 +0100
+@@ -16,7 +16,6 @@
+ ))
+ 
+ $(eval $(call gb_ExternalProject_use_externals,libwps,\
+-	boost_headers \
+ 	revenge \
+ ))
+ 
+@@ -30,12 +29,13 @@
+ 			, \
+ 				--enable-shared --disable-static \
+ 			) \
++			--with-sharedptr=c++11 \
+ 			--without-docs \
+ 			--disable-tools \
+ 			--disable-debug \
+ 			--disable-werror \
+ 			$(if $(VERBOSE)$(verbose),--disable-silent-rules,--enable-silent-rules) \
+-			CXXFLAGS="$(if $(SYSTEM_BOOST),$(BOOST_CPPFLAGS),-I$(call gb_UnpackedTarball_get_dir,boost)) $(gb_VISIBILITY_FLAGS) $(gb_VISIBILITY_FLAGS_CXX)" \
++			CXXFLAGS="$(CXXFLAGS_CXX11) $(gb_VISIBILITY_FLAGS) $(gb_VISIBILITY_FLAGS_CXX)" \
+ 			$(if $(filter LINUX,$(OS)),$(if $(SYSTEM_REVENGE),, \
+ 				'LDFLAGS=-Wl$(COMMA)-z$(COMMA)origin \
+ 					-Wl$(COMMA)-rpath$(COMMA)\$$$$ORIGIN')) \
+diff -Naur a/external/libwps/Library_wps.mk b/external/libwps/Library_wps.mk
+--- a/external/libwps/Library_wps.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libwps/Library_wps.mk	2015-09-07 05:38:02.756996881 +0100
+@@ -12,7 +12,6 @@
+ $(eval $(call gb_Library_use_unpacked,wps,libwps))
+ 
+ $(eval $(call gb_Library_use_externals,wps,\
+-    boost_headers \
+ 	revenge \
+ ))
+ 
+@@ -24,10 +23,10 @@
+ ))
+ 
+ $(eval $(call gb_Library_add_defs,wps,\
+-	-DBOOST_ALL_NO_LIB \
+ 	-DBUILD_WPS\
+ 	-DDLL_EXPORT \
+ 	-DNDEBUG \
++	-DSHAREDPTR_STD \
+ ))
+ 
+ $(eval $(call gb_Library_set_generated_cxx_suffix,wps,cpp))
+diff -Naur a/external/libwps/UnpackedTarball_libwps.mk b/external/libwps/UnpackedTarball_libwps.mk
+--- a/external/libwps/UnpackedTarball_libwps.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/external/libwps/UnpackedTarball_libwps.mk	2015-09-07 05:41:48.911570689 +0100
+@@ -14,6 +14,7 @@
+ $(eval $(call gb_UnpackedTarball_set_patchlevel,libwps,1))
+ 
+ $(eval $(call gb_UnpackedTarball_add_patches,libwps,\
++	external/libwps/0001-add-missing-include.patch \
+ 	external/libwps/0001-QuattroPro-parser-correct-a-mistake-when-reading-neg.patch \
+ 	external/libwps/0001-error-C2065-M_PI-undeclared-identifier.patch \
+ 	$(if $(SYSTEM_REVENGE),,external/libwps/rpath.patch.0) \
+diff -Naur a/solenv/gbuild/platform/com_GCC_defs.mk b/solenv/gbuild/platform/com_GCC_defs.mk
+--- a/solenv/gbuild/platform/com_GCC_defs.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/solenv/gbuild/platform/com_GCC_defs.mk	2015-09-07 05:54:27.322799235 +0100
+@@ -47,6 +47,8 @@
+ gb_AFLAGS := $(AFLAGS)
+ 
+ gb_COMPILERDEFS := \
++	-DBOOST_ERROR_CODE_HEADER_ONLY \
++	-DBOOST_SYSTEM_NO_DEPRECATED \
+ 	-DCPPU_ENV=$(gb_CPPU_ENV) \
+ 
+ gb_CFLAGS_COMMON := \
+diff -Naur a/solenv/gbuild/platform/com_MSC_defs.mk b/solenv/gbuild/platform/com_MSC_defs.mk
+--- a/solenv/gbuild/platform/com_MSC_defs.mk	2015-08-22 07:41:35.000000000 +0100
++++ b/solenv/gbuild/platform/com_MSC_defs.mk	2015-09-07 05:54:27.322799235 +0100
+@@ -44,6 +44,9 @@
+ # like std::copy, std::transform (when MSVC_USE_DEBUG_RUNTIME is enabled)
+ 
+ gb_COMPILERDEFS := \
++	-DBOOST_ERROR_CODE_HEADER_ONLY \
++	-DBOOST_OPTIONAL_USE_OLD_DEFINITION_OF_NONE \
++	-DBOOST_SYSTEM_NO_DEPRECATED \
+ 	-D_CRT_NON_CONFORMING_SWPRINTFS \
+ 	-D_CRT_NONSTDC_NO_DEPRECATE \
+ 	-D_CRT_SECURE_NO_DEPRECATE \

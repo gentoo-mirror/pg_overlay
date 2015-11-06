@@ -12,7 +12,7 @@ inherit autotools eutils fdo-mime git-r3 gnome2-utils l10n
 EGIT_REPO_URI="https://github.com/Alexey-Yakovenko/${PN}.git"
 EGIT_BRANCH="master"
 
-KEYWORDS=""
+KEYWORDS="~amd64"
 
 DESCRIPTION="foobar2k-like music player"
 HOMEPAGE="http://deadbeef.sourceforge.net"
@@ -67,10 +67,10 @@ LICENSE="BSD
 
 SLOT="0"
 
-IUSE="+alsa +flac +gtk2 +hotkeys +m3u +mad +mp3 +sndfile +vorbis
-	aac adplug alac cdda converter cover cover-imlib2 cover-network curl dts dumb equalizer
-	ffmpeg gme gtk3 lastfm libav libnotify libsamplerate mac midi mms mono2stereo mpg123 musepack nls
-	nullout oss playlist-browser psf pulseaudio sc68 shell-exec shn sid tta unity vtx wavpack wma zip"
+IUSE="+alsa +flac gtk2 +hotkeys +m3u mad mp3 sndfile vorbis
+	aac adplug alac cdda +converter +cover +cover-imlib2 +cover-network +curl dts dumb equalizer
+	ffmpeg gme +gtk3 lastfm libav +libnotify libsamplerate +mac midi mms mono2stereo mpg123 musepack +nls
+	nullout oss playlist-browser psf pulseaudio sc68 +shell-exec shn sid +threads tta unity vtx +wavpack wma +zip"
 
 REQUIRED_USE="converter? ( || ( gtk2 gtk3 ) )
 	cover-imlib2? ( cover )
@@ -158,19 +158,11 @@ src_prepare() {
 }
 
 src_configure() {
-	if use shell-exec ; then
-		if use gtk2 || use gtk3 ; then
-			shell-exec-ui="--enable-shellexec-ui"
-		else
-			shell-exec-ui="--disable-shellexec-ui"
-		fi
-	fi
 
 	econf --disable-coreaudio \
 		--disable-portable \
 		--disable-static \
 		--docdir=/usr/share/${PN} \
-		${shell-exec-ui} \
 		$(use_enable aac) \
 		$(use_enable adplug) \
 		$(use_enable alac) \
@@ -210,9 +202,11 @@ src_configure() {
 		$(use_enable pulseaudio pulse) \
 		$(use_enable sc68) \
 		$(use_enable shell-exec shellexec) \
+		$(use_enable shell-exec shellexecui)
 		$(use_enable shn) \
 		$(use_enable sid) \
 		$(use_enable sndfile) \
+		$(use_enable threads) \
 		$(use_enable tta) \
 		$(use_enable vorbis) \
 		$(use_enable vtx) \
@@ -224,6 +218,7 @@ src_configure() {
 pkg_preinst() {
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_savelist
+                gnome2_schemas_savelist
 	fi
 }
 
@@ -233,6 +228,7 @@ pkg_postinst() {
 
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_cache_update
+                gnome2_schemas_update
 	fi
 }
 
@@ -242,5 +238,6 @@ pkg_postrm() {
 
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_cache_update
+                gnome2_schemas_update
 	fi
 }

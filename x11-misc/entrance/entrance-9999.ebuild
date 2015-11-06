@@ -1,10 +1,10 @@
 # Copyright 1999-2014 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: x11-plugins/entrance/entrance-9999.ebuild,v 1.4 2014/12/22 12:02:10 -tclover Exp $
+# $Id$
 
 EAPI=5
 
-inherit autotools-utils git-2
+inherit autotools-utils git-r3
 
 DESCRIPTION="PAM compatible display manager build on EFL"
 HOMEPAGE="https://enlightenment.org"
