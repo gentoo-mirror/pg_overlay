@@ -15,12 +15,17 @@ SRC_URI="http://download.geany.org/${P}.tar.bz2"
 LICENSE="GPL-2+ HPND"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
-IUSE="gtk3 vte"
+IUSE="gtk3 +vte"
 
 RDEPEND=">=dev-libs/glib-2.28:2
-	!gtk3? ( >=x11-libs/gtk+-2.24:2 )
-	gtk3? ( >=x11-libs/gtk+-3.0:3 )
-	vte? ( x11-libs/vte:2.91 )"
+	!gtk3? (
+		>=x11-libs/gtk+-2.24:2
+		vte? ( x11-libs/vte:0 )
+	)
+	gtk3? (
+		>=x11-libs/gtk+-3.0:3
+		vte? ( x11-libs/vte:2.91 )
+	)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	dev-util/intltool
