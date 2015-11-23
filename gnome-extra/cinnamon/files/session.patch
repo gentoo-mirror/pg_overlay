@@ -1,0 +1,20 @@
+diff -Nuar a/files/usr/share/cinnamon-session/sessions/cinnamon2d.session b/files/usr/share/cinnamon-session/sessions/cinnamon2d.session
+--- a/files/usr/share/cinnamon-session/sessions/cinnamon2d.session	2015-11-21 00:14:43.000000000 +0700
++++ b/files/usr/share/cinnamon-session/sessions/cinnamon2d.session	2015-11-22 01:50:13.723484627 +0700
+@@ -1,5 +1,5 @@
+ [Cinnamon Session]
+ Name=Cinnamon (Software Rendering)
+-RequiredComponents=cinnamon2d;cinnamon-settings-daemon;cinnamon-screensaver;nemo-autostart;nm-applet;cinnamon-killer-daemon;
++RequiredComponents=cinnamon2d;cinnamon-settings-daemon;cinnamon-screensaver;nemo-autostart;cinnamon-killer-daemon;
+ DesktopName=X-Cinnamon
+  
+diff -Nuar a/files/usr/share/cinnamon-session/sessions/cinnamon.session b/files/usr/share/cinnamon-session/sessions/cinnamon.session
+--- a/files/usr/share/cinnamon-session/sessions/cinnamon.session	2015-11-21 00:14:43.000000000 +0700
++++ b/files/usr/share/cinnamon-session/sessions/cinnamon.session	2015-11-22 01:50:01.627352207 +0700
+@@ -1,5 +1,5 @@
+ [Cinnamon Session]
+ Name=Cinnamon
+-RequiredComponents=cinnamon;cinnamon-settings-daemon;cinnamon-screensaver;nemo-autostart;nm-applet;cinnamon-killer-daemon;
++RequiredComponents=cinnamon;cinnamon-settings-daemon;cinnamon-screensaver;nemo-autostart;cinnamon-killer-daemon;
+ DesktopName=X-Cinnamon
+  

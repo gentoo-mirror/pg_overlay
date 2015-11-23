@@ -1,0 +1,36 @@
+# Copyright 1999-2015 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Id$
+
+EAPI=5
+
+inherit gnome2-utils
+
+DESCRIPTION="Nemo-Terminal Extension"
+HOMEPAGE="https://github.com/linuxmint/nemo-extensions"
+SRC_URI="http://packages.linuxmint.com/pool/main/n/${PN}/${PN}_${PV}+rosa.tar.gz -> ${P}.tar.gz"
+
+LICENSE="GPL"
+SLOT="0"
+KEYWORDS="~amd64 ~x86"
+
+RDEPEND=">=gnome-extra/nemo-2.8
+		>=dev-python/nemo-python-2.8
+		>=x11-libs/vte-0.36.5:2.90"
+DEPEND=""
+
+S=${S}+rosa
+
+src_install() {
+
+	insinto /usr/share/glib-2.0/schemas
+	doins src/org.nemo.extensions.${PN}.gschema.xml
+	
+	insinto /usr/share/nemo-python/extensions
+	doins src/nemo_terminal.py
+	
+	insinto /usr/share/${PN}
+	doins pixmap/logo_120x120.png
+	
+	gnome2_schemas_update
+}

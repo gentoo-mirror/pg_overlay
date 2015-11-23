@@ -75,6 +75,6 @@
  repair: libxlog
 +libxlog: libxfs
 +libxlog-install-dev: libxfs-install-dev
- 
+ copy: libxlog
  
  ifeq ($(HAVE_BUILDDEFS), yes)

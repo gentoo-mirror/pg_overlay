@@ -1,0 +1,11 @@
+diff -Nuar js/ui/statusIconDispatcher.js js_1/ui/statusIconDispatcher.js
+--- js/ui/statusIconDispatcher.js	2015-11-22 01:18:25.740145802 +0700
++++ js_1/ui/statusIconDispatcher.js	2015-11-22 01:28:56.764895250 +0700
+@@ -12,7 +12,6 @@
+     'gnome-volume-control-applet': 'volume', // renamed to gnome-sound-applet
+                                              // when moved to control center                                                
+     'gnome-sound-applet': 'volume',
+-    'nm-applet': 'network',
+     'gnome-power-manager': 'battery',
+     'keyboard': 'keyboard',
+     'a11y-keyboard': 'a11y',

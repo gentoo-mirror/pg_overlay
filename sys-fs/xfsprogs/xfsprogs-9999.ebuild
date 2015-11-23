@@ -8,11 +8,11 @@ inherit bash-completion-r1 eutils multilib toolchain-funcs autotools git-r3
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="http://oss.sgi.com/projects/xfs/"
-EGIT_REPO_URI="git://oss.sgi.com/xfs/cmds/xfsprogs.git"
+EGIT_REPO_URI="git://git.kernel.org/pub/scm/fs/xfs/xfsprogs-dev.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS=""
 IUSE="libedit nls readline static static-libs"
 REQUIRED_USE="static? ( static-libs )"
 

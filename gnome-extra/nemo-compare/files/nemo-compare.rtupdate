@@ -1,0 +1,7 @@
+#! /bin/sh
+set -e
+
+if [ "$1" = rtupdate ]; then
+	pyclean -p nemo-compare /usr/share/nemo-compare
+	pycompile -p nemo-compare  /usr/share/nemo-compare
+fi

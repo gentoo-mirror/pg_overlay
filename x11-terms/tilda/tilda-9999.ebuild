@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/lanoxx/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 ppc x86 ~x86-fbsd ~x86-interix ~amd64-linux ~x86-linux"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=x11-libs/vte-0.40.2:2.91

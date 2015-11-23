@@ -17,7 +17,7 @@ EGIT_REPO_URI="https://github.com/az0/bleachbit.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="+gtk nls"
 
 RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"

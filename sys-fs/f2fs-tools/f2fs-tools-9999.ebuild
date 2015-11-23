@@ -14,7 +14,7 @@ EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/f2fs-tools.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 DEPEND=""
