@@ -72,6 +72,7 @@ src_configure() {
 	gnome2_src_configure \
 		--disable-update-mimedb \
 		--disable-more-warnings \
+		--disable-schemas-compile \
 		$(use_enable exif libexif) \
 		$(use_enable introspection) \
 		$(use_enable tracker) \

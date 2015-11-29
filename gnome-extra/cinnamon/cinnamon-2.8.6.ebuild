@@ -171,8 +171,10 @@ src_prepare() {
 
 	if ! use networkmanager; then
 		rm -rv files/usr/share/cinnamon/applets/network@cinnamon.org || die
-		sed -i 's/;nm-applet;/;/g' files/usr/share/cinnamon-session/sessions/cinnamon*.session
-		sed -i '/nm-applet/d' js/ui/statusIconDispatcher.js
+		sed -i 's/;nm-applet;/;/g' \
+			files/usr/share/cinnamon-session/sessions/cinnamon*.session || die
+		sed -i '/nm-applet/d' \
+			js/ui/statusIconDispatcher.js || die
 		fi
 
 	epatch_user

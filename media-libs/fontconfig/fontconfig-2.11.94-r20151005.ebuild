@@ -33,11 +33,11 @@ pkg_setup() {
 	DOC_CONTENTS="Please make fontconfig configuration changes using
 	\`eselect fontconfig\`. Any changes made to /etc/fonts/fonts.conf will be
 	overwritten. If you need to reset your configuration to upstream defaults,
-	delete the directory ${EROOT}etc/fonts/conf.d/ and re-emerge fontconfig."
+	delete the directory "${EROOT}"etc/fonts/conf.d/ and re-emerge fontconfig."
 }
 
 src_prepare() {
-	cp -fr ${FILESDIR}/conf.d.infinality "${S}"/conf.d.infinality
+	cp -fr "{FILESDIR}"/conf.d.infinality "${S}"/conf.d.infinality
 	epatch "${FILESDIR}"/*
 }
 

@@ -75,10 +75,19 @@ create_user-config.jam() {
 	fi
 
 	if python_bindings_needed; then
+		# boost expects libpython$(pyver) and doesn't allow overrides
+		# and the build system is so creepy that it's easier just to
+		# provide a symlink (linker's going to use SONAME anyway)
+		# TODO: replace it with proper override one day
+		ln -f -s "$(python_get_library_path)" "${T}/lib${EPYTHON}$(get_libname)" || die
+
 		if tc-is-cross-compiler; then
 			python_configuration="using python : ${EPYTHON#python} : : ${SYSROOT:-${EROOT}}/usr/include/${EPYTHON} : ${SYSROOT:-${EROOT}}/usr/$(get_libdir) ;"
 		else
-			python_configuration="using python : : ${PYTHON} ;"
+			# note: we need to provide version explicitly because of
+			# a bug in the build system:
+			# https://github.com/boostorg/build/pull/104
+			python_configuration="using python : ${EPYTHON#python} : ${PYTHON} : $(python_get_includedir) : ${T} ;"
 		fi
 	fi
 
@@ -103,19 +112,24 @@ pkg_setup() {
 }
 
 PATCHES=(
-	"${FILESDIR}/${PN}-1.51.0-respect_python-buildid.patch"
-	"${FILESDIR}/${PN}-1.51.0-support_dots_in_python-buildid.patch"
-	"${FILESDIR}/${PN}-1.48.0-no_strict_aliasing_python2.patch"
-	"${FILESDIR}/${PN}-1.48.0-disable_libboost_python3.patch"
-	"${FILESDIR}/${PN}-1.48.0-python_linking.patch"
-	"${FILESDIR}/${PN}-1.48.0-disable_icu_rpath.patch"
-	"${FILESDIR}/${PN}-1.55.0-context-x32.patch"
-	"${FILESDIR}/${PN}-1.56.0-build-auto_index-tool.patch"
+	"${FILESDIR}/${PN}-1.51.0-respect_python-buildid.patch" \
+	"${FILESDIR}/${PN}-1.51.0-support_dots_in_python-buildid.patch" \
+	"${FILESDIR}/${PN}-1.48.0-no_strict_aliasing_python2.patch" \
+	"${FILESDIR}/${PN}-1.48.0-disable_libboost_python3.patch" \
+	"${FILESDIR}/${PN}-1.48.0-python_linking.patch" \
+	"${FILESDIR}/${PN}-1.48.0-disable_icu_rpath.patch" \
+	"${FILESDIR}/${PN}-1.55.0-context-x32.patch" \
+	"${FILESDIR}/${PN}-1.56.0-build-auto_index-tool.patch" \
+	"${FILESDIR}/${PN}-1.58.0-address-model.patch" \
+	"${FILESDIR}/${PN}-1.58.0-pool.patch" \
+	"${FILESDIR}/${PN}-1.58.0-pool-test_linking.patch" \
+	"${FILESDIR}/${PN}-1.59.0-log.patch" \
+	"${FILESDIR}/${PN}-1.59-python-make_setter.patch" \
+	"${FILESDIR}/${PN}-1.59-test-fenv.patch"
 )
 
 src_prepare() {
 	epatch ${PATCHES[@]}
-
 	# Do not try to build missing 'wave' tool, bug #522682
 	# Upstream bugreport - https://svn.boost.org/trac/boost/ticket/10507
 	sed -i -e 's:wave/build//wave::' tools/Jamfile.v2 || die

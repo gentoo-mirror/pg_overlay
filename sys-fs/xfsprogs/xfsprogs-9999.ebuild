@@ -1,10 +1,10 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2015 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI="5"
 
-inherit bash-completion-r1 eutils multilib toolchain-funcs autotools git-r3
+inherit bash-completion-r1 eutils multilib toolchain-funcs git-r3
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="http://oss.sgi.com/projects/xfs/"
@@ -36,8 +36,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-4.2.0-sharedlibs.patch
-	
+	epatch "${FILESDIR}"/${PN}-4.3.0-sharedlibs.patch
+
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
 	sed -i \
@@ -50,10 +50,10 @@ src_prepare() {
 	# libdisk has broken blkid conditional checking
 	sed -i \
 		-e '/LIB_SUBDIRS/s:libdisk::' \
-		Makefile || diee
-	
+		Makefile || die
+
 	emake configure
-	
+
 	# TODO: write a patch for configure.in to use pkg-config for the uuid-part
 	if use static && use readline ; then
 		sed -i \

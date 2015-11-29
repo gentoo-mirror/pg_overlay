@@ -1,4 +1,5 @@
 # Distributed under the terms of the GNU General Public License v2
+# $Id$
 
 EAPI="5"
 
@@ -218,7 +219,7 @@ src_configure() {
 pkg_preinst() {
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_savelist
-                gnome2_schemas_savelist
+		gnome2_schemas_savelist
 	fi
 }
 
@@ -228,7 +229,7 @@ pkg_postinst() {
 
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_cache_update
-                gnome2_schemas_update
+		gnome2_schemas_update
 	fi
 }
 
@@ -238,6 +239,6 @@ pkg_postrm() {
 
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_cache_update
-                gnome2_schemas_update
+		gnome2_schemas_update
 	fi
 }

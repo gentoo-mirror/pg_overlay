@@ -33,7 +33,7 @@ src_install() {
 	insinto /usr/share/themes/${MY_PN}_compact/xfwm4
 	doins xfwm4-compact/*
 	rm -rf xfwm4-compact
-	
+
 	insinto /usr/share/themes/${MY_PN}_bright/xfce-notify-4.0
 	doins xfce-notify-4.0_bright/*
 	rm -rf xfce-notify-4.0_bright
