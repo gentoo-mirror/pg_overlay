@@ -41,22 +41,22 @@ PDEPEND="infinality? ( media-libs/fontconfig-infinality )"
 src_prepare() {
 	enable_option() {
 		sed -i -e "/#define $1/a #define $1" \
-			include/freetype/config/ftoption.h \
+			include/${PN}/config/ftoption.h \
 			|| die "unable to enable option $1"
 	}
 
 	disable_option() {
 		sed -i -e "/#define $1/ { s:^:/*:; s:$:*/: }" \
-			include/freetype/config/ftoption.h \
+			include/${PN}/config/ftoption.h \
 			|| die "unable to disable option $1"
 	}
 
 	# This is the same as the 01 patch from infinality
-	epatch "${FILESDIR}"/01-freetype-*-enable-valid.patch
+	epatch "${FILESDIR}"/01-${PN}-${PV}-enable-valid.patch
 
 	if use infinality; then
 		patch -p1 -i "${FILESDIR}"/02-upstream-*.patch
-		epatch "${FILESDIR}"/03-infinality-*.patch
+		epatch "${FILESDIR}"/03-infinality-${PV}*.patch
 		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in freetype-2.4.11
 		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
 	fi
@@ -76,7 +76,7 @@ src_prepare() {
 		enable_option FT_DEBUG_MEMORY
 	fi
 
-	epatch "${FILESDIR}"/${PN}-2.4.11-sizeof-types.patch
+	epatch "${FILESDIR}"/${PN}-2.4.11-sizeof-types.patch # 459966
 
 	if use utils; then
 		cd "${WORKDIR}/ft2demos-${PV}" || die
@@ -151,7 +151,9 @@ multilib_src_install_all() {
 			cp ${header} "${ED}/usr/include/freetype2/internal4fontforge/$(dirname ${header})" || die
 		done
 	fi
-
+	exeinto /etc/X11/xinit/xinitrc.d/
+	doexe "${FILESDIR}"/*.sh
+	
 	dodoc docs/{CHANGES,CUSTOMIZE,DEBUG,INSTALL.UNIX,*.txt,PROBLEMS,TODO}
 	use doc && dohtml -r docs/*
 
