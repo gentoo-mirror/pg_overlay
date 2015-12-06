@@ -27,7 +27,7 @@ RDEPEND="
 		media-libs/libpng:0=[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
 		virtual/jpeg:=[${MULTILIB_USEDEP}]
-		>=x11-libs/gtk+-2.18:2[${MULTILIB_USEDEP}]
+		>=x11-libs/gtk+-3.18:3[${MULTILIB_USEDEP}]
 		x11-libs/gdk-pixbuf[${MULTILIB_USEDEP}]
 		x11-libs/libSM[${MULTILIB_USEDEP}]
 		x11-libs/libXxf86vm[${MULTILIB_USEDEP}]
@@ -111,7 +111,8 @@ multilib_src_configure() {
 			$(multilib_native_use_enable webkit webview)
 			$(use_with libnotify)
 			$(use_with opengl)
-			$(use_with tiff libtiff sys)"
+			$(use_with tiff libtiff sys)
+			--with-gtk=3"
 
 	use aqua && \
 		myconf="${myconf}

@@ -4,7 +4,10 @@
 
 EAPI="5"
 
-inherit eutils flag-o-matic wxwidgets user git-r3
+AUTOTOOLS_IN_SOURCE_BUILD=1
+AUTOTOOLS_AUTORECONF=1
+
+inherit eutils autotools-utils flag-o-matic wxwidgets-gtk3 user git-r3
 
 EGIT_REPO_URI="git://github.com/amule-project/amule.git"
 EGIT_BRANCH="master"
@@ -40,7 +43,20 @@ pkg_setup() {
 }
 
 src_prepare() {
-	./autogen.sh
+	sed -i \
+	-e 's/AM_INIT_AUTOMAKE/\0([subdir-objects])/'  \
+	configure.in || die
+	mv configure.in configure.ac || die
+
+	# Ugly pixmaps hack
+	OLDPWD="`pwd`"
+	cd src/pixmaps/flags_xpm
+	./makeflags.sh
+	cd "$OLDPWD"
+
+	autotools-utils_src_prepare
+	sed -i s/gtk1/gtk3/g configure || die
+	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g configure || die
 }
 
 src_configure() {

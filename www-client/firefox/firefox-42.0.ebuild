@@ -64,7 +64,7 @@ DEPEND="${RDEPEND}
 	x86? ( ${ASM_DEPEND}
 		virtual/opengl )"
 
-# No source releases for alpha
+# No source releases for alpha|beta
 if [[ ${PV} =~ alpha ]]; then
 	CHANGESET="8a3042764de7"
 	SRC_URI="${SRC_URI}
@@ -75,6 +75,19 @@ else
 	SRC_URI="${SRC_URI}
 		${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
 fi
+#elif [[ ${PV} =~ beta ]]; then
+#	S="${WORKDIR}/mozilla-beta"
+#	SRC_URI="${SRC_URI}
+#		${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
+#else
+#	SRC_URI="${SRC_URI}
+#		${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
+#	if [[ ${MOZ_ESR} == 1 ]]; then
+#		S="${WORKDIR}/mozilla-esr${PV%%.*}"
+#	else
+#		S="${WORKDIR}/mozilla-release"
+#	fi
+#fi
 
 QA_PRESTRIPPED="usr/$(get_libdir)/${PN}/firefox"
 
@@ -226,8 +239,31 @@ src_configure() {
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 	mozconfig_annotate '' --disable-mailnews
+	mozconfig_annotate '' --with-pthreads
 
-	# Other ff-specific settings
+	# Disable unwanted features
+	mozconfig_annotate '' --disable-pay
+	mozconfig_annotate '' --disable-metro
+	mozconfig_annotate '' --disable-maintenance-service
+	mozconfig_annotate '' --disable-services-healthreport
+	mozconfig_annotate '' --disable-moz-services-healthreport
+	mozconfig_annotate '' --disable-moz_services_healthreport
+	mozconfig_annotate '' --disable-data-reporting
+	mozconfig_annotate '' --disable-telemetry-reporting
+	mozconfig_annotate '' --disable-auto-deps
+	mozconfig_annotate '' --disable-ipdl-tests
+	mozconfig_annotate '' --disable-update-channel
+	mozconfig_annotate '' --disable-update-packaging
+	mozconfig_annotate '' --enable-debugger-info-modules=no
+	mozconfig_annotate '' --disable-debugger-info-modules
+	mozconfig_annotate '' --disable-mochitest
+	mozconfig_annotate '' --disable-mochitests
+	mozconfig_annotate '' --disable-accessibility
+	mozconfig_annotate '' --disable-parental-controls
+	mozconfig_annotate '' --disable-logging
+	mozconfig_annotate '' --disable-elf-hack
+
+	# Other settings
 	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
 
 	# Allow for a proper pgo build
