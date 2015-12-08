@@ -197,7 +197,7 @@ src_prepare() {
 	epatch "${FILESDIR}/chromium-widevine-r1.patch"
 
 	#VA-API Patch 
-	epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
+	epatch "${FILESDIR}/chromium_vaapi.patch"
 	
 	# Inox patches
 	EPATCH_SUFFIX="patch" \

@@ -57,6 +57,7 @@ src_prepare() {
 	if use infinality; then
 		patch -p1 -i "${FILESDIR}"/02-upstream-*.patch
 		patch -p1 -i  "${FILESDIR}"/03-infinality-${PV}*.patch
+		epatch "${FILESDIR}"/stem-darkening.patch
 		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in freetype-2.4.11
 		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
 	fi
