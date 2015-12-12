@@ -198,7 +198,7 @@ src_prepare() {
 
 	#VA-API Patch 
 	epatch "${FILESDIR}/chromium_vaapi.patch"
-	
+
 	# Inox patches
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \
