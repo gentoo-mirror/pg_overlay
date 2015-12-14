@@ -9,14 +9,13 @@ MY_P="${P/_/-}"
 S="${WORKDIR}/${MY_P}"
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
-SRC_URI="!gtk3? ( http://distfiles.audacious-media-player.org/${MY_P}.tar.bz2 )
-	 gtk3? ( http://distfiles.audacious-media-player.org/${MY_P}-gtk3.tar.bz2 )"
+SRC_URI="!gtk3? ( http://distfiles.audacious-media-player.org/${MY_P}.tar.bz2 )"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="alpha amd64 ~arm ~hppa ppc ppc64 x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux"
-IUSE="aac alsa bs2b cdda +cue +ffmpeg +flac fluidsynth +gnome +http +gtk3 jack
-lame +libnotify libsamplerate lirc mms mp3 nls +pulseaudio qt5 scrobbler sdl sid sndfile vorbis +wavpack"
+IUSE="aac alsa bs2b cdda +cue +ffmpeg +flac fluidsynth +gnome +http gtk3 jack
+lame libnotify libsamplerate lirc mms mp3 nls +pulseaudio +qt5 scrobbler sdl sid sndfile vorbis +wavpack"
 REQUIRED_USE="|| ( alsa flac lame jack pulseaudio qt5 sdl )"
 
 RDEPEND="app-arch/unzip
@@ -35,7 +34,6 @@ RDEPEND="app-arch/unzip
 		>=media-libs/flac-1.2.1-r1 )
 	fluidsynth? ( media-sound/fluidsynth )
 	http? ( >=net-libs/neon-0.26.4 )
-	!gtk3? ( x11-libs/gtk+:2 )
 	gtk3? ( x11-libs/gtk+:3 )
 	qt5? ( dev-qt/qtcore:5
 	      dev-qt/qtgui:5
@@ -129,14 +127,33 @@ src_configure() {
 		$(use_enable vorbis) \
 		$(use_enable wavpack)
 	
-	sed -i 's/asx asx3 //' extra.mk || die
-	sed -i 's/pls xspf //' extra.mk || die
-	sed -i 's/compressor crossfade crystalizer mixer silence-removal stereo_plugin voice_removal echo_plugin ladspa //' extra.mk || die
-	sed -i 's/ alarm albumart delete-files //' extra.mk || die
-	sed -i 's/playlist-manager search-tool //' extra.mk || die
-	sed -i 's/skins skins-data //' extra.mk || die
-	sed -i 's/adplug metronom psf tonegen vtx xsf //' extra.mk || die
+	sed -i 's/asx //' extra.mk || die
+	sed -i 's/asx3 //' extra.mk || die
+	sed -i 's/pls //' extra.mk || die
+	sed -i 's/xspf //' extra.mk || die
+	sed -i 's/compressor //' extra.mk || die
+	sed -i 's/crossfade //' extra.mk || die
+	sed -i 's/crystalizer //' extra.mk || die
+	sed -i 's/mixer //' extra.mk || die
+	sed -i 's/silence-removal //' extra.mk || die
+	sed -i 's/stereo_plugin //' extra.mk || die
+	sed -i 's/voice_removal //' extra.mk || die
+	sed -i 's/echo_plugin //' extra.mk || die
+	sed -i 's/ladspa //' extra.mk || die
+	sed -i 's/alarm //' extra.mk || die
+	sed -i 's/albumart //' extra.mk || die
+	sed -i 's/delete-files //' extra.mk || die
+	sed -i 's/playlist-manager //' extra.mk || die
+	sed -i 's/search-tool //' extra.mk || die
+	sed -i 's/skins //' extra.mk || die
+	sed -i 's/skins-data //' extra.mk || die
+	sed -i 's/adplug //' extra.mk || die
+	sed -i 's/metronom //' extra.mk || die
+	sed -i 's/psf //' extra.mk || die
+	sed -i 's/tonegen //' extra.mk || die
+	sed -i 's/vtx //' extra.mk || die
+	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/gio //' extra.mk || die
 	sed -i 's/blur_scope cairo-spectrum//' extra.mk || die
-	sed -e 's/Visualization//' extra.mk || die
+	sed -i 's/Visualization//' extra.mk || die
 }

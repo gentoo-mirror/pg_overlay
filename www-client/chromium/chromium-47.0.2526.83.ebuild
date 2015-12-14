@@ -18,8 +18,9 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
-IUSE="cups gnome gnome-keyring +gtk3 hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine"
+KEYWORDS="~amd64 ~x86"
+IUSE="cups gnome gnome-keyring +gtk3 hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux 
+system-ffmpeg +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
@@ -526,9 +527,9 @@ src_configure() {
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"
 		fi
-		
-		build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
-		
+
+                build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
+
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 		einfo "Configuring bundled ffmpeg..."
 		pushd third_party/ffmpeg > /dev/null || die
@@ -676,3 +677,4 @@ pkg_postinst() {
 	gnome2_icon_cache_update
 	readme.gentoo_print_elog
 }
+

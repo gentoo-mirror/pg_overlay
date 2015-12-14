@@ -18,7 +18,7 @@ LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS="alpha amd64 ~arm ~hppa ppc ppc64 x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux"
 
-IUSE="nls +gtk3 qt5"
+IUSE="nls gtk3 +qt5"
 DOCS="AUTHORS"
 
 RDEPEND=">=dev-libs/dbus-glib-0.60
@@ -54,7 +54,7 @@ src_configure() {
 	econf \
 		--enable-dbus \
 		$(use_enable nls) \
-		$(use_enable qt5 qt)
+		$(use_enable qt5 qt) --disable-gtk
 }
 
 src_install() {

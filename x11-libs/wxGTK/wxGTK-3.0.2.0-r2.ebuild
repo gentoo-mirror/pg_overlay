@@ -112,7 +112,8 @@ multilib_src_configure() {
 			$(use_with libnotify)
 			$(use_with opengl)
 			$(use_with tiff libtiff sys)
-			--with-gtk=3"
+			--with-gtk=3
+			--enable-largefile "
 
 	use aqua && \
 		myconf="${myconf}
