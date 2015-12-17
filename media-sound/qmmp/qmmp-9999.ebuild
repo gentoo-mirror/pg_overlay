@@ -128,10 +128,13 @@ src_configure() {
 		$(cmake-utils_use_use libsamplerate SRC)
 		$(cmake-utils_use_use vorbis)
 		$(cmake-utils_use_use wavpack)
+<<<<<<< HEAD
 		-DUSE_NULL=OFF
 		-DUSE_GNOMEHOTKEY=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
+=======
+>>>>>>> 0262330df90307201e6f23f562077355e5144091
 		)
 
 	cmake-utils_src_configure
