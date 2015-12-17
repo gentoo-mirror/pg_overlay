@@ -146,6 +146,7 @@ src_configure() {
 	sed -i 's/playlist-manager //' extra.mk || die
 	sed -i 's/search-tool //' extra.mk || die
 	sed -i 's/skins //' extra.mk || die
+	sed -i 's/skins-qt //' extra.mk || die
 	sed -i 's/skins-data //' extra.mk || die
 	sed -i 's/adplug //' extra.mk || die
 	sed -i 's/metronom //' extra.mk || die

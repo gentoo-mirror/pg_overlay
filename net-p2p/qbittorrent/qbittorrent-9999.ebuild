@@ -21,7 +21,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+dbus debug +qt4 qt5 webui +X"
+IUSE="+dbus debug qt4 +qt5 webui +X"
 REQUIRED_USE="
 	^^ ( qt4 qt5 )
 	dbus? ( X )
@@ -38,6 +38,7 @@ CDEPEND="
 		X? ( dev-qt/qtgui:4 )
 	)
 	qt5? (
+		dev-qt/qtconcurrent:5
 		dev-qt/qtcore:5
 		dev-qt/qtnetwork:5
 		dev-qt/qtxml:5
@@ -61,9 +62,9 @@ src_prepare() {
 	qt4-r2_src_prepare
 	
 	# To last stable version for What.CD & Pedro's BTMusic
-	sed -i s/"VER_MINOR = 3"/"VER_MINOR = 2"/g version.pri || die
+	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 2"/g version.pri || die
 	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 4"/g version.pri || die
-	sed -i s/"VER_STATUS = beta"/"VER_STATUS ="/g version.pri || die
+	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
 }
 
 src_configure() {
@@ -74,9 +75,9 @@ src_configure() {
 		--with-qtsingleapplication=system
 		$(use dbus  || echo --disable-qt-dbus)
 		$(use debug && echo --enable-debug)
-		$(use qt5   && echo --with-qt5)
+		$(use qt4   && echo --with-qt4)
 		$(use webui || echo --disable-webui)
-		$(use X     || echo --disable-gui)
+		$(use X     || echo --disable-gui) --without-qt4 --with-boost
 	)
 
 	echo "${myconf[@]}"

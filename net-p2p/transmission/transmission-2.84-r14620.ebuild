@@ -74,8 +74,7 @@ src_prepare() {
 	
 	# 2.84+ -> 2.84
 	sed -i s/TR284Z/TR2840/g lib${PN}/version.h || die
-	
-	epatch_user
+
 	eautoreconf
 }
 

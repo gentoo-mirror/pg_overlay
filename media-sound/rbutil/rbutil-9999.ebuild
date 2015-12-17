@@ -12,12 +12,11 @@ EGIT_REPO_URI="git://git.rockbox.org/rockbox.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
-RDEPEND="media-libs/speex
-	dev-qt/qtcore:4
-	dev-qt/qtgui:4
+RDEPEND="dev-qt/qtcore:5
+	dev-qt/qtgui:5
 	virtual/libusb:0"
 DEPEND="${RDEPEND}"
 
@@ -25,10 +24,10 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 
 src_configure() {
 	# generate binary translations
-	QT_SELECT="4" lrelease ${PN}qt.pro || die
+	QT_SELECT="5" lrelease ${PN}qt.pro || die
 
 	# noccache is required in order to call the correct compiler
-	eqmake4 CONFIG+=noccache
+	eqmake5 CONFIG+=noccache
 }
 
 src_install() {

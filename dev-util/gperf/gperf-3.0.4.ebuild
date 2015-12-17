@@ -20,8 +20,8 @@ src_prepare() {
 		-e "/^AR /s:=.*:= $(tc-getAR):" \
 		-e "/^CPPFLAGS /s:=:+=:" \
 		*/Makefile.in || die #444078
-		
-	epatch "${FILESDIR}/gperf-for-infinality.patch"
+
+	epatch "${FILESDIR}"/gperf-for-infinality.patch
 }
 
 src_configure() {
