@@ -4,7 +4,7 @@
 
 EAPI="5"
 
-inherit autotools git-r3
+inherit autotools git-r3 multilib
 
 DESCRIPTION="Tools for Flash-Friendly File System (F2FS)"
 HOMEPAGE="http://sourceforge.net/projects/f2fs-tools/"
@@ -32,4 +32,5 @@ src_configure(){
 src_install() {
 	default
 	rm -f "${ED}"/$(get_libdir)/libf2fs.{,l}a
+	rm -f "${ED}"/$(get_libdir)/libf2fs_format.{,l}a
 }
