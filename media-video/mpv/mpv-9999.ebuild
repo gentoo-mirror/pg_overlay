@@ -15,7 +15,7 @@ SRC_URI="http://ftp.waf.io/pub/release/waf-${WAF_V}"
 DOCS=( README.md etc/example.conf etc/input.conf )
 
 if [[ ${PV} == *9999* ]]; then
-	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
+	EGIT_REPO_URI="git://github.com/mpv-player/mpv.git"
 	inherit git-r3
 else
 	SRC_URI+=" https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
