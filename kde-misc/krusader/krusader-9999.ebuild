@@ -11,7 +11,7 @@ DESCRIPTION="An advanced twin-panel (commander-style) file-manager with many ext
 HOMEPAGE="http://www.krusader.org/"
 
 LICENSE="GPL-2"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE=""
 
 CDEPEND="

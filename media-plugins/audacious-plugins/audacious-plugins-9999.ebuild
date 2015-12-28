@@ -29,8 +29,7 @@ RDEPEND="app-arch/unzip
 		dev-libs/libcdio-paranoia )
 	cue? ( media-libs/libcue )
 	ffmpeg? ( >=virtual/ffmpeg-0.7.3 )
-	flac? ( >=media-libs/libvorbis-1.0
-		>=media-libs/flac-1.2.1-r1 )
+	flac? ( >=media-libs/flac-1.2.1-r1 )
 	fluidsynth? ( media-sound/fluidsynth )
 	http? ( >=net-libs/neon-0.26.4 )
 	gtk3? ( x11-libs/gtk+:3 )
@@ -120,7 +119,7 @@ src_configure() {
 		$(use_enable sndfile) \
 		$(use_enable vorbis) \
 		$(use_enable wavpack)
-	
+
 	sed -i 's/asx //' extra.mk || die
 	sed -i 's/asx3 //' extra.mk || die
 	sed -i 's/pls //' extra.mk || die
