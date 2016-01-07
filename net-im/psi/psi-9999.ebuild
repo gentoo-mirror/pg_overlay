@@ -20,7 +20,7 @@ HOMEPAGE="http://psi-im.org/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="crypt dbus debug doc enchant extras jingle iconsets +qt5 spell sql ssl xscreensaver plugins whiteboarding webkit"
+IUSE="crypt dbus debug doc +enchant extras jingle iconsets +qt5 +spell sql ssl xscreensaver plugins whiteboarding webkit"
 
 REQUIRED_USE="
 	iconsets? ( extras )
@@ -155,7 +155,7 @@ src_configure() {
 	use debug && myconf+=" --debug"
 	if use spell; then
 		if use enchant; then
-			myconf+=" --disable-aspell"
+			myconf+=" "
 		else
 			myconf+=" --disable-enchant"
 		fi

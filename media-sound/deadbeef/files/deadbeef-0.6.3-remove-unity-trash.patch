@@ -1,9 +1,10 @@
---- deadbeef.desktop.in.org	2015-02-03 23:23:03.421428844 +0300
-+++ deadbeef.desktop.in	2015-02-03 23:23:22.451428905 +0300
-@@ -13,52 +13,3 @@
+--- deadbeef.desktop.in	2016-01-01 20:03:24.000000000 +0700
++++ deadbeef.desktop.in.new	2016-01-01 20:07:57.865097431 +0700
+@@ -14,63 +14,4 @@
+ Terminal=false
  Type=Application
  Icon=deadbeef
- X-PulseAudio-Properties=media.role=music
+-X-PulseAudio-Properties=media.role=music
 -
 -X-Ayatana-Desktop-Shortcuts=Play;Pause;Stop;Next;Prev
 -
@@ -11,45 +12,57 @@
 -
 -[Play Shortcut Group]
 -Name=Play
+-Name[zh_TW]=播放
 -Exec=deadbeef --play
 -TargetEnvironment=Unity
 -
 -[Pause Shortcut Group]
 -Name=Pause
+-Name[zh_TW]=暫停
 -Exec=deadbeef --pause
 -TargetEnvironment=Unity
 -
 -[Stop Shortcut Group]
 -Name=Stop
+-Name[zh_TW]=停止
 -Exec=deadbeef --stop
 -TargetEnvironment=Unity
 -
 -[Next Shortcut Group]
 -Name=Next
+-Name[zh_TW]=下一首
 -Exec=deadbeef --next
 -TargetEnvironment=Unity
 -
 -[Prev Shortcut Group]
 -Name=Prev
+-Name[zh_TW]=上一首
 -Exec=deadbeef --prev
 -TargetEnvironment=Unity
 -
 -[Desktop Action Play]
 -Name=Play
+-Name[zh_TW]=播放
 -Exec=deadbeef --play
 -
 -[Desktop Action Pause]
 -Name=Pause
+-Name[zh_TW]=暫停
 -Exec=deadbeef --pause
 -
 -[Desktop Action Stop]
 -Name=Stop
+-Name[zh_TW]=停止
 -Exec=deadbeef --stop
 -
 -[Desktop Action Next]
 -Name=Next
+-Name[zh_TW]=下一首
 -Exec=deadbeef --next
 -
 -[Desktop Action Previous]
 -Name=Prev
+-Name[zh_TW]=上一首
 -Exec=deadbeef --prev
++X-PulseAudio-Properties=media.role=music
+\ No newline at end of file

@@ -56,11 +56,6 @@ DOCS="AUTHORS NEWS qt/README.txt"
 MY_S="${S}+"
 S="${MY_S}"
 
-pkg_setup() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 -1 ${PN}
-}
-
 src_prepare() {
 	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
 	# Trick to avoid automagic dependency
