@@ -192,7 +192,6 @@ java_prepare() {
 
 	# icedtea doesn't like some locales. #330433 #389717
 	export LANG="C" LC_ALL="C"
-
 	eautoreconf
 }
 
@@ -265,6 +264,9 @@ src_configure() {
 
 	unset JAVA_HOME JDK_HOME CLASSPATH JAVAC JAVACFLAGS
 
+	export DISTRIBUTION_PATCHES="004_add-fontconfig.patch 005_enable-infinality.patch"
+	ln -s "${FILESDIR}"/{004_add-fontconfig,005_enable-infinality}.patch . || die
+
 	econf ${config} \
 		--with-openjdk-src-zip="${DISTDIR}/${OPENJDK_GENTOO_TARBALL}" \
 		--with-corba-src-zip="${DISTDIR}/${CORBA_GENTOO_TARBALL}" \
@@ -287,7 +289,7 @@ src_configure() {
 		--disable-hotspot-tests --disable-jdk-tests \
 		--enable-system-lcms --enable-system-gif \
 		--enable-system-jpeg --enable-system-png \
-		--enable-system-zlib --disable-pulseaudio --enable-infinality \
+		--enable-system-zlib \
 		$(use_enable !debug optimizations) \
 		$(use_enable doc docs) \
 		$(use_enable nss) \
@@ -301,8 +303,7 @@ src_compile() {
 
 	# With ant >=1.8.2 all required tasks are part of ant-core
 	export ANT_TASKS="none"
-
-	emake LDFLAGS=
+	emake
 }
 
 src_test() {

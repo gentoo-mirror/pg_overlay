@@ -12,9 +12,7 @@ EGIT_REPO_URI="git://github.com/audacious-media-player/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="aac alsa bs2b cdda +cue +ffmpeg +flac fluidsynth +gnome +http gtk3 
-jack lame libnotify libsamplerate lirc mms mp3 nls +pulseaudio +qt5 scrobbler 
-sdl sid sndfile vorbis +wavpack"
+IUSE="aac +alsa bs2b cdda +cue +ffmpeg +flac fluidsynth gnome +http gtk3 jack lame +libnotify libsamplerate lirc mms mp3 +nls +pulseaudio +qt5 scrobbler sdl sid sndfile vorbis +wavpack"
 REQUIRED_USE="|| ( alsa flac lame jack pulseaudio qt5 sdl )"
 
 RDEPEND="app-arch/unzip

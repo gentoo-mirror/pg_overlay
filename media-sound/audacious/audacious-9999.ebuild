@@ -14,7 +14,7 @@ LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="nls gtk3 +qt5"
+IUSE="+nls gtk3 +qt5"
 DOCS="AUTHORS"
 
 RDEPEND=">=dev-libs/dbus-glib-0.60
@@ -22,7 +22,6 @@ RDEPEND=">=dev-libs/dbus-glib-0.60
 	>=x11-libs/cairo-1.2.6
 	>=x11-libs/pango-1.8.0
 	virtual/freedesktop-icon-theme
-	!gtk3? ( x11-libs/gtk+:2 )
 	gtk3? ( x11-libs/gtk+:3 )
 	qt5? ( dev-qt/qtcore:5
 	      dev-qt/qtgui:5
