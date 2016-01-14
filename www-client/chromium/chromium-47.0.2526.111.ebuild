@@ -19,7 +19,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cups gnome gnome-keyring +gtk3 hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine"
+IUSE="cups gnome gnome-keyring +gtk3 hangouts hidpi hotwording kerberos neon pic +proprietary-codecs +pulseaudio selinux system-ffmpeg +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
@@ -49,7 +49,7 @@ RDEPEND="app-arch/bzip2:=
 	media-libs/flac:=
 	media-libs/fontconfig:=
 	media-libs/freetype:=
-	media-libs/harfbuzz:=[icu(+)]
+	>=media-libs/harfbuzz-0.9.41:=[icu(+)]
 	media-libs/libexif:=
 	>=media-libs/libjpeg-turbo-1.2.0-r1:=
 	media-libs/libpng:0=

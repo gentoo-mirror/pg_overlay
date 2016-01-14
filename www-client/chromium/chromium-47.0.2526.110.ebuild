@@ -49,7 +49,7 @@ RDEPEND="app-arch/bzip2:=
 	media-libs/flac:=
 	media-libs/fontconfig:=
 	media-libs/freetype:=
-	media-libs/harfbuzz:=[icu(+)]
+	>=media-libs/harfbuzz-0.9.41:=[icu(+)]
 	media-libs/libexif:=
 	>=media-libs/libjpeg-turbo-1.2.0-r1:=
 	media-libs/libpng:0=

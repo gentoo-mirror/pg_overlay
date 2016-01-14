@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="dev-qt/qtcore:5
 	dev-qt/qtgui:5
-	virtual/libusb:0"
+	virtual/libusb"
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}/${PN}/${PN}qt
