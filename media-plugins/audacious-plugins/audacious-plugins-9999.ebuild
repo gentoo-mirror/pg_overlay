@@ -130,14 +130,10 @@ src_configure() {
 	sed -i 's/stereo_plugin //' extra.mk || die
 	sed -i 's/voice_removal //' extra.mk || die
 	sed -i 's/echo_plugin //' extra.mk || die
-	sed -i 's/ladspa //' extra.mk || die
-	sed -i 's/alarm //' extra.mk || die
-	sed -i 's/albumart //' extra.mk || die
-	sed -i 's/delete-files //' extra.mk || die
-	sed -i 's/playlist-manager //' extra.mk || die
-	sed -i 's/search-tool //' extra.mk || die
-	sed -i 's/skins //' extra.mk || die
+	sed -i 's/playlist-manager-qt //' extra.mk || die
+	sed -i 's/search-tool-qt //' extra.mk || die
 	sed -i 's/skins-qt //' extra.mk || die
+	sed -i 's/delete-files //' extra.mk || die
 	sed -i 's/skins-data //' extra.mk || die
 	sed -i 's/adplug //' extra.mk || die
 	sed -i 's/metronom //' extra.mk || die
@@ -146,6 +142,5 @@ src_configure() {
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/gio //' extra.mk || die
-	sed -i 's/blur_scope cairo-spectrum//' extra.mk || die
 	sed -i 's/Visualization//' extra.mk || die
 }

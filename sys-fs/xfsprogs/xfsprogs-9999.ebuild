@@ -8,7 +8,7 @@ inherit bash-completion-r1 eutils multilib toolchain-funcs git-r3
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="http://oss.sgi.com/projects/xfs/"
-EGIT_REPO_URI="git://git.kernel.org/pub/scm/fs/xfs/${PN}s-dev.git"
+EGIT_REPO_URI="git://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"

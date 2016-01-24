@@ -7,7 +7,7 @@ EAPI="5"
 inherit cmake-utils
 [ "$PV" == "9999" ] && inherit subversion
 
-DESCRIPTION="Qt4-based audio player with winamp/xmms skins support"
+DESCRIPTION="Qt-based audio player with winamp/xmms skins support"
 HOMEPAGE="http://qmmp.ylsoftware.com"
 if [ "$PV" != "9999" ]; then
 	SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2"
@@ -129,6 +129,7 @@ src_configure() {
 		$(cmake-utils_use_use vorbis)
 		$(cmake-utils_use_use wavpack)
 		-DUSE_NULL=OFF
+		-DUSE_SOXR=ON
 		-DUSE_GNOMEHOTKEY=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF

@@ -369,7 +369,7 @@ src_configure() {
 		-Duse_system_speex=1
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1
-		-Denable_webrtc=0
+		-Denable_webrtc=1
 		-Denable_google_now=0
 		-Denable_remoting=0
 		-Dsafe_browsing_mode=0
