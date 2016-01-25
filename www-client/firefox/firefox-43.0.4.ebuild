@@ -5,25 +5,48 @@
 EAPI="5"
 VIRTUALX_REQUIRED="pgo"
 WANT_AUTOCONF="2.1"
+MOZ_ESR=""
+
+# This list can be updated with scripts/get_langs.sh from the mozilla overlay
+# No official support as of fetch time
+# csb
+MOZ_LANGS=( en en-US ru )
+
+# Convert the ebuild version to the upstream mozilla version, used by mozlinguas
+MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
+MOZ_PV="${MOZ_PV/_beta/b}" # Handle beta for SRC_URI
+MOZ_PV="${MOZ_PV/_rc/rc}" # Handle rc for SRC_URI
+
+if [[ ${MOZ_ESR} == 1 ]]; then
+	# ESR releases have slightly version numbers
+	MOZ_PV="${MOZ_PV}esr"
+fi
+
+# Patch version
+PATCH="${PN}-42.0-patches-0.3"
+MOZ_HTTP_URI="http://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_GTK3=1
 MOZCONFIG_OPTIONAL_WIFI=0
 MOZCONFIG_OPTIONAL_JIT="enabled"
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.42 multilib pax-utils fdo-mime autotools virtualx git-r3
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.42 multilib pax-utils fdo-mime autotools virtualx mozlinguas
 
-DESCRIPTION="Cyberfox Web Browser"
-HOMEPAGE="http://8pecxstudios.com/cyberfox-web-browser"
+DESCRIPTION="Firefox Web Browser"
+HOMEPAGE="http://www.mozilla.com/firefox"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist egl hardened +minimal pgo unity selinux +gmp-autoupdate test"
+IUSE="bindist egl hardened +hwaccel +minimal pgo selinux +gmp-autoupdate test"
 RESTRICT="!bindist? ( bindist )"
 
-EGIT_REPO_URI="https://github.com/InternalError503/cyberfox.git"
-SRC_URI="unity?	( http://security.ubuntu.com/ubuntu/pool/main/f/firefox/firefox_43.0.4+build3-0ubuntu1.debian.tar.xz )"
+# More URIs appended below...
+SRC_URI="${SRC_URI}
+	https://dev.gentoo.org/~anarchy/mozilla/patchsets/${PATCH}.tar.xz
+	https://dev.gentoo.org/~axs/mozilla/patchsets/${PATCH}.tar.xz
+	https://dev.gentoo.org/~polynomial-c/mozilla/patchsets/${PATCH}.tar.xz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -41,9 +64,34 @@ DEPEND="${RDEPEND}
 	x86? ( ${ASM_DEPEND}
 		virtual/opengl )"
 
-QA_PRESTRIPPED="usr/$(get_libdir)/${PN}/cyberfox"
+# No source releases for alpha|beta
+if [[ ${PV} =~ alpha ]]; then
+	CHANGESET="8a3042764de7"
+	SRC_URI="${SRC_URI}
+		https://dev.gentoo.org/~nirbheek/mozilla/firefox/firefox-${MOZ_PV}_${CHANGESET}.source.tar.xz"
+	S="${WORKDIR}/mozilla-aurora-${CHANGESET}"
+else
+	S="${WORKDIR}/firefox-${MOZ_PV}"
+	SRC_URI="${SRC_URI}
+		${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
+fi
+#elif [[ ${PV} =~ beta ]]; then
+#	S="${WORKDIR}/mozilla-beta"
+#	SRC_URI="${SRC_URI}
+#		${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
+#else
+#	SRC_URI="${SRC_URI}
+#		${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
+#	if [[ ${MOZ_ESR} == 1 ]]; then
+#		S="${WORKDIR}/mozilla-esr${PV%%.*}"
+#	else
+#		S="${WORKDIR}/mozilla-release"
+#	fi
+#fi
 
-BUILD_OBJ_DIR="${S}/cf"
+QA_PRESTRIPPED="usr/$(get_libdir)/${PN}/firefox"
+
+BUILD_OBJ_DIR="${S}/ff"
 
 pkg_setup() {
 	moz_pkgsetup
@@ -83,30 +131,23 @@ pkg_pretend() {
 }
 
 src_unpack() {
-	# fetch Cyberfox and CyberCTR from git
-	git-r3_fetch https://github.com/InternalError503/CyberCTR.git HEAD
-	git-r3_checkout https://github.com/InternalError503/CyberCTR.git "${WORKDIR}"/cyberctr
-	git-r3_fetch
-	git-r3_checkout
-	if [ "${A}" != "" ]; then
-		unpack ${A}
-	fi
+	unpack ${A}
+
+	# Unpack language packs
+	mozlinguas_src_unpack
 }
 
 src_prepare() {
 	# Apply our patches
-	if use unity ; then
-		epatch "${WORKDIR}/debian/patches/unity-menubar.patch"
-	fi
-
-	EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" \
-	epatch "${FILESDIR}"
+	EPATCH_SUFFIX="patch" \
+	EPATCH_FORCE="yes" \
+	EPATCH_EXCLUDE="8002_jemalloc_configure_unbashify.patch
+			8011_bug1194520-freetype261_until_moz43.patch" \
+	epatch "${WORKDIR}/firefox"
+	epatch "${FILESDIR}/Makefile_in.patch"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	epatch_user
-
-	# fix permissions
-	chmod -R +x "${S}"
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -126,13 +167,18 @@ src_prepare() {
 		-i "${S}"/nsprpub/configure{.in,} \
 		|| die
 
-	# Don't exit with error when some libs are missing which we have in system
+	# Don't exit with error when some libs are missing which we have in
+	# system.
 	sed '/^MOZ_PKG_FATAL_WARNINGS/s@= 1@= 0@' \
 		-i "${S}"/browser/installer/Makefile.in || die
 
-	# Don't error out when there's no files to be removed
+	# Don't error out when there's no files to be removed:
 	sed 's@\(xargs rm\)$@\1 -f@' \
 		-i "${S}"/toolkit/mozapps/installer/packager.mk || die
+
+	# Keep codebase the same even if not using official branding
+	sed '/^MOZ_DEV_EDITION=1/d' \
+		-i "${S}"/browser/branding/aurora/configure.sh || die
 
 	eautoreconf
 
@@ -172,25 +218,13 @@ src_configure() {
 	use hardened && append-ldflags "-Wl,-z,relro,-z,now"
 
 	use egl && mozconfig_annotate 'Enable EGL as GL provider' --with-gl-provider=EGL
+
 	# Setup api key for location services
 	echo -n "${_google_api_key}" > "${S}"/google-api-key
 	mozconfig_annotate '' --with-google-api-keyfile="${S}/google-api-key"
 
-	# Branding
-	mozconfig_annotate '' --with-distribution-id=cyberfox
-	mozconfig_annotate '' --with-app-name=cyberfox
-	mozconfig_annotate '' --with-app-basename=cyberfox
-	if use bindist; then
-		mozconfig_annotate '' --with-branding=browser/branding/unofficial
-	else
-		mozconfig_annotate '' --with-branding=browser/branding/official-linux
-	fi
-
-	# Config
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 	mozconfig_annotate '' --disable-mailnews
-	mozconfig_annotate '' --enable-release
-	mozconfig_annotate '' --enable-stdcxx-compat
 	mozconfig_annotate '' --with-pthreads
 
 	# Disable unwanted features
@@ -212,7 +246,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-mochitests
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
-#	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-elf-hack
 
 	# Other settings
@@ -220,7 +253,7 @@ src_configure() {
 
 	# Allow for a proper pgo build
 	if use pgo; then
-		echo "mk_add_options PROFILE_GEN_SCRIPT='\$(PYTHON) \$(OBJDIR)/_profile/pgo/profileserver.py'" >> "${S}"/.mozconfig
+		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
 	fi
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
@@ -231,6 +264,7 @@ src_configure() {
 	if [[ $(gcc-major-version) -lt 4 ]]; then
 		append-cxxflags -fno-stack-protector
 	fi
+
 	# workaround for funky/broken upstream configure...
 	emake -f client.mk configure
 }
@@ -242,7 +276,7 @@ src_compile() {
 		# Reset and cleanup environment variables used by GNOME/XDG
 		gnome2_environment_reset
 
-		# Cyberfox tries to use dri stuff when it's run, see bug 380283
+		# Firefox tries to use dri stuff when it's run, see bug 380283
 		shopt -s nullglob
 		cards=$(echo -n /dev/dri/card* | sed 's/ /:/g')
 		if test -z "${cards}"; then
@@ -265,56 +299,93 @@ src_compile() {
 		MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX%/}/bin/bash}" \
 		emake -f client.mk realbuild
 	fi
+
 }
 
 src_install() {
 	MOZILLA_FIVE_HOME="/usr/$(get_libdir)/${PN}"
+	DICTPATH="\"${EPREFIX}/usr/share/myspell\""
 
 	cd "${BUILD_OBJ_DIR}" || die
 
 	# Pax mark xpcshell for hardened support, only used for startupcache creation.
 	pax-mark m "${BUILD_OBJ_DIR}"/dist/bin/xpcshell
 
-	# install CyberCTR
-	insinto "${MOZILLA_FIVE_HOME}"/distribution
-        doins -r "${WORKDIR}"/cyberctr/distribution/*
+	# Add our default prefs for firefox
+	cp "${FILESDIR}"/gentoo-default-prefs.js-1 \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
 
-	# Add our default prefs for cyberfox
-	insinto "${MOZILLA_FIVE_HOME}"/defaults/pref/
-	doins "${FILESDIR}/local-settings.js"
-	cp "${FILESDIR}/gentoo-default-prefs.js" "${S}/gentoo-default-prefs.js"
+	# Augment this with hwaccel prefs
+	if use hwaccel ; then
+		cat "${FILESDIR}"/gentoo-hwaccel-prefs.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
+	fi
+
+	# Set default path to search for dictionaries.
+	echo "pref(\"spellchecker.dictionary_path\", ${DICTPATH});" \
+		>> "${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
+
+	echo "pref(\"extensions.autoDisableScopes\", 3);" >> \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
 
 	local plugin
 	use gmp-autoupdate || for plugin in \
 	gmp-gmpopenh264 ; do
 		echo "pref(\"media.${plugin}.autoupdate\", false);" >> \
-			"${S}/gentoo-default-prefs.js" \
+			"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 			|| die
 	done
 
-	insinto "${MOZILLA_FIVE_HOME}"
-	doins "${S}/gentoo-default-prefs.js"
-
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
 	emake DESTDIR="${D}" install
-	insinto /
-	local size sizes icon_path
-	sizes="16 22 24 32 48 256"
+
+	# Install language packs
+	mozlinguas_src_install
+
+	local size sizes icon_path icon name
 	if use bindist; then
-		icon_path="${S}/browser/branding/unofficial"
+		sizes="16 32 48"
+		icon_path="${S}/browser/branding/aurora"
+		# Firefox's new rapid release cycle means no more codenames
+		# Let's just stick with this one...
+		icon="aurora"
+		name="Aurora"
+
+		# Override preferences to set the MOZ_DEV_EDITION defaults, since we
+		# don't define MOZ_DEV_EDITION to avoid profile debaucles.
+		# (source: browser/app/profile/firefox.js)
+		cat >>"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" <<PROFILE_EOF
+pref("app.feedback.baseURL", "https://input.mozilla.org/%LOCALE%/feedback/firefoxdev/%VERSION%/");
+sticky_pref("lightweightThemes.selectedThemeID", "firefox-devedition@mozilla.org");
+sticky_pref("browser.devedition.theme.enabled", true);
+sticky_pref("devtools.theme", "dark");
+PROFILE_EOF
+
 	else
-		icon_path="${S}/browser/branding/official-linux"
+		sizes="16 22 24 32 256"
+		icon_path="${S}/browser/branding/official"
+		icon="${PN}"
+		name="Mozilla Firefox"
 	fi
 
 	# Install icons and .desktop for menu entry
 	for size in ${sizes}; do
-		newicon -s ${size} "${icon_path}/default${size}.png" "${PN}.png" || die
+		insinto "/usr/share/icons/hicolor/${size}x${size}/apps"
+		newins "${icon_path}/default${size}.png" "${icon}.png"
 	done
 	# The 128x128 icon has a different name
-	newicon -s 128 "${icon_path}/mozicon128.png" "${PN}.png" || die
+	insinto "/usr/share/icons/hicolor/128x128/apps"
+	newins "${icon_path}/mozicon128.png" "${icon}.png"
 	# Install a 48x48 icon into /usr/share/pixmaps for legacy DEs
-	newicon "${icon_path}/content/icon48.png" "${PN}.png"
+	newicon "${icon_path}/content/icon48.png" "${icon}.png"
 	newmenu "${FILESDIR}/icon/${PN}.desktop" "${PN}.desktop"
+	sed -i -e "s:@NAME@:${name}:" -e "s:@ICON@:${icon}:" \
+		"${ED}/usr/share/applications/${PN}.desktop" || die
+
 	# Add StartupNotify=true bug 237317
 	if use startup-notification ; then
 		echo "StartupNotify=true"\
@@ -322,9 +393,9 @@ src_install() {
 			|| die
 	fi
 
-	# Required in order to use plugins and even run cyberfox on hardened.
+	# Required in order to use plugins and even run firefox on hardened.
 	if use jit; then
-		pax-mark m "${ED}"${MOZILLA_FIVE_HOME}/{cyberfox,cyberfox-bin,plugin-container}
+		pax-mark m "${ED}"${MOZILLA_FIVE_HOME}/{firefox,firefox-bin,plugin-container}
 	else
 		pax-mark m "${ED}"${MOZILLA_FIVE_HOME}/plugin-container
 	fi
@@ -344,6 +415,7 @@ src_install() {
 pkg_preinst() {
 	gnome2_icon_savelist
 }
+
 pkg_postinst() {
 	# Update mimedb for the new .desktop file
 	fdo-mime_desktop_database_update

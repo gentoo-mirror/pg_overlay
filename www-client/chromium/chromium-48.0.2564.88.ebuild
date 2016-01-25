@@ -196,6 +196,11 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-icu-r0.patch"
 
+	# Inox patches
+	EPATCH_SUFFIX="patch" \
+	EPATCH_FORCE="yes" \
+	epatch "${FILESDIR}/inox"
+    
 	epatch_user
 
 	local conditional_bundled_libraries=""
