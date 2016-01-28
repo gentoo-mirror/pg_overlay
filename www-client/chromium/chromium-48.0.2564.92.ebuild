@@ -14,7 +14,7 @@ inherit check-reqs chromium eutils flag-o-matic multilib multiprocessing pax-uti
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
-SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz"
+SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}-lite.tar.xz"
 
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
@@ -336,6 +336,7 @@ src_prepare() {
 		'v8/src/third_party/fdlibm' \
 		'v8/src/third_party/valgrind' \
 		'third_party/speech-dispatcher' \
+		'third_party/libva' \
 		--do-remove || die
 }
 
