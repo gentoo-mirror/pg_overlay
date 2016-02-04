@@ -4,10 +4,10 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4} )
+PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV='1.8.18'
+WAF_PV='1.8.19'
 
 inherit eutils fdo-mime gnome2-utils pax-utils python-any-r1 toolchain-funcs waf-utils
 
@@ -162,7 +162,7 @@ src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
 	epatch_user
-	sed -i 's/waf-1.8.12/waf-1.8.18/g' bootstrap.py || die
+	sed -i 's/waf-1.8.12/waf-1.8.19/g' bootstrap.py || die
 }
 
 src_configure() {
