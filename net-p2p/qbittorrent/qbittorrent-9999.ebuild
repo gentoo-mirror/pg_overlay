@@ -3,9 +3,9 @@
 # $Id$
 
 EAPI=5
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python2_7 python3_{3,4,5} )
 
-inherit eutils python-r1 qt4-r2
+inherit eutils python-r1 qt4-r2 flag-o-matic
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="http://www.qbittorrent.org/"
@@ -63,7 +63,7 @@ src_prepare() {
 	
 	# To last stable version for What.CD & Pedro's BTMusic
 	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 2"/g version.pri || die
-	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 4"/g version.pri || die
+	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 5"/g version.pri || die
 	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
 }
 

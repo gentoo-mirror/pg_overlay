@@ -29,16 +29,16 @@ RDEPEND=">=dev-libs/libevent-2.0.10:=
 		)
 	systemd? ( sys-apps/systemd:= )
 	qt4? (
-		dev-qt/qtcore:4=
-		dev-qt/qtgui:4=
-		dev-qt/qtdbus:4=
+		dev-qt/qtcore:4
+		dev-qt/qtgui:4
+		dev-qt/qtdbus:4
 		)
 	qt5? (
-		dev-qt/qtcore:5=
-		dev-qt/qtdbus:5=
-		dev-qt/qtgui:5=
-		dev-qt/qtnetwork:5=
-		dev-qt/qtwidgets:5=
+		dev-qt/qtcore:5
+		dev-qt/qtdbus:5
+		dev-qt/qtgui:5
+		dev-qt/qtnetwork:5
+		dev-qt/qtwidgets:5
 		)"
 DEPEND="${RDEPEND}
 	>=dev-libs/glib-2.32
@@ -77,6 +77,7 @@ src_configure() {
 	export ac_cv_header_xfs_xfs_h=$(usex xfs)
 
 	econf \
+		--disable-external-natpmp \
 		$(use_enable lightweight) \
 		$(use_with systemd systemd-daemon) \
 		$(use_with gtk)
@@ -144,7 +145,7 @@ pkg_postinst() {
 	elog "start) in settings.json file located at /var/lib/${PN}/config or"
 	elog "any other appropriate config directory."
 	elog
-	elog "Since µTP is enabled by default, ${PN} needs large kernel buffers for"
+	elog "Since ??TP is enabled by default, ${PN} needs large kernel buffers for"
 	elog "the UDP socket. You can append following lines into /etc/sysctl.conf:"
 	elog " net.core.rmem_max = 4194304"
 	elog " net.core.wmem_max = 1048576"
