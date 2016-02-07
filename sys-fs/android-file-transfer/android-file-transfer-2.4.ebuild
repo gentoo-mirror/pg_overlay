@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 S=${WORKDIR}/${MY_PN}-${PV}
-PATCHES=( "${FILESDIR}/2.2-automagic.patch" )
+#PATCHES=( "${FILESDIR}/2.2-automagic.patch" )
 
 src_configure() {
 	local mycmakeargs=(
