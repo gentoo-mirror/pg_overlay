@@ -393,7 +393,7 @@ src_configure() {
 		-Denable_remoting=0
 		-Dsafe_browsing_mode=0
 		-Denable_rlz=0
-		-Denable_hangout_services_extension=0
+		-Denable_hangout_services_extension=1
 		-Dbranding=Chromium
 		-Dgoogle_chrome_build=0
 		-Denable_web_speech=1

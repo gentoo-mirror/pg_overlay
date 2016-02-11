@@ -1,0 +1,545 @@
+#!/usr/bin/env bash
+# vim:set ts=4 sw=4:
+
+#
+# Copyright (c) 2011-2015 Andrey Ovcharov <sudormrfhalt@gmail.com>
+# This program is licensed under the terms of the GNU General Public License v3.
+#
+# ipatch - Intelligent patch wrapper.
+#
+# The latest version of this software can be obtained here:
+# https://bitbucket.org/redeyeteam/ipatch
+# Bugs: https://bitbucket.org/redeyeteam/ipatch/issues
+# Wiki: https://bitbucket.org/redeyeteam/ipatch/wiki/
+#
+
+# ./ipatch push . scsi-Add-missing-command-definitions.patch
+# ./ipatch pop . scsi-Add-missing-command-definitions.patch
+# ./ipatch push . /home/andrey/Desktop/geek-sources-2.6.32.63/kernel-2.6.34-4.el6.conf
+
+PROG="$(basename $0)"
+SYNOPSIS="an intelligent patch wrapper"
+VERSION="@PACKAGE_VERSION@"
+TAG="@PACKAGE_TAG@"
+DESCRIPTION="Batch processing lists of patches or recursive work on whole directories with the patches. Automatic extraction based on mimetype."
+
+MIMETYPES=(
+  "application/gzip" # gz
+  "application/x-bzip" # bz, bz2
+  "application/x-compress" # TODO <-- wtf *.Z ???
+  "application/x-lrzip" # lrz
+  "application/x-xz" # xz
+  "application/zip" # zip
+  "application/x-gzip" # zip
+  "text/x-patch" # patch
+  "message/rfc822" # patch or diff
+  "text/x-diff" # diff
+  "inode/directory" # directory
+  "text/plain" #text file
+  "application/octet-stream" # patch like iso-latin-1
+)
+
+init_variables() {
+  : ${cfg_file:="/etc/ipatch.conf"}
+
+  # Constant`s
+  local die_flag_cfg=$(source $cfg_file 2>/dev/null; echo ${die_flag})
+  : ${die_flag:=${die_flag_cfg:-0}} # 0 or 1
+
+  local verbose_cfg=$(source $cfg_file 2>/dev/null; echo ${verbose})
+  : ${verbose:=${verbose_cfg:-0}} # 0 or 1
+
+  local lists_handler_cfg=$(source $cfg_file 2>/dev/null; echo ${lists_handler})
+  : ${lists_handler:=${lists_handler_cfg:-stupid}} # stupid or smart
+
+  local crap_cfg=$(source $cfg_file 2>/dev/null; echo ${crap})
+  : ${crap:=${crap_cfg:-1}} # 0 or 1
+
+  local not_one_line_cfg=$(source $cfg_file 2>/dev/null; echo ${not_one_line})
+  : ${not_one_line:=${not_one_line_cfg:-1}} # 0 or 1
+
+  # Colors
+  GOOD=$(printf '\033[32;01m')
+  WARN=$(printf '\033[33;01m')
+  BAD=$(printf '\033[31;01m')
+  HILITE=$(printf '\033[36;01m')
+  BRACKET=$(printf '\033[34;01m')
+  NORMAL=$(printf '\033[0m')
+}
+
+function print () {
+  [[ "$verbose" == "0" ]] && return
+  echo -e "$1"
+}
+
+function ebegin() {
+  echo -e "${GOOD}*${NORMAL} ${@} ..."
+}
+
+function einfo() {
+  echo -e " \e[0;36m*\e[0m ${@}"
+}
+function ewarn() {
+  echo -e " ${WARN}*${NORMAL} ${@}"
+}
+
+function eerror() {
+  echo -e " ${BAD}*${NORMAL} ${@}"
+  exit 1
+}
+
+function emsg() {
+  if [[ "$die_flag" == "0" ]]; then
+    ewarn "$@"
+  else
+    eerror "$@"
+  fi
+}
+
+function eend() {
+  local retval=${1:-0}
+  shift
+  return ${retval}
+}
+
+function print_version() {
+        cat <<END
+${HILITE}${PROG}${NORMAL} v. ${VERSION} "${TAG}"
+END
+}
+
+# iternal function
+#
+# @FUNCTION: usage
+# @USAGE:
+# @DESCRIPTION: Show help
+function usage() {
+cat << EOF
+$(print_version)
+
+Usage: ${HILITE}$PROG${NORMAL} ${GOOD}<operation>${NORMAL} ${WARN}<work dir>${NORMAL} ${GOOD}<patch|dir|conf>${NORMAL}
+
+where ${GOOD}<operation>${NORMAL} is one of
+${GOOD}push${NORMAL} or ${GOOD}+${NORMAL}        apply patch
+${GOOD}test${NORMAL} or ${GOOD}~${NORMAL}        test patch
+${GOOD}pop${NORMAL} or ${GOOD}-${NORMAL}         reversing patch
+${GOOD}help${NORMAL} or ${GOOD}h${NORMAL} or ${GOOD}?${NORMAL}   print this help
+
+where ${GOOD}<work dir>${NORMAL} is some directory. For current directory use dot.
+
+where ${GOOD}<patch|dir|conf>${NORMAL} is one of
+${GOOD}<dir>/<patch>${NORMAL}    Any patch file ${GOOD}*.{diff,patch,gz,bz,bz2,lrz,xz,zip,Z}${NORMAL}
+${GOOD}<dir>${NORMAL}            For recursive apply or reversing all patches from directory. For current directory use dot.
+${GOOD}<dir>/<conf>${NORMAL}     Patch set config file ${GOOD}*.conf${NORMAL}
+
+${GOOD}patch set config file${NORMAL} format:
+${GOOD}<operation>${NORMAL},${GOOD}<patch|dir>${NORMAL}
+
+Examples:
+To apply all patches to current directory from /etc/portage/patches
+${HILITE}$PROG${NORMAL} ${GOOD}push ${WARN}.${NORMAL} /etc/portage/patches
+
+To reversing patch /etc/portage/patches/reiser4-for-3.14.1.patch.gz in /usr/src/linux
+${HILITE}$PROG${NORMAL} ${GOOD}pop ${WARN}/usr/src/linux${NORMAL} /etc/portage/patches/reiser4-for-3.14.1.patch.gz
+
+To apply all patches from /etc/portage/patches/local.conf config file in /usr/src/linux
+${HILITE}$PROG${NORMAL} ${GOOD}push ${WARN}/usr/src/linux${NORMAL} /etc/portage/patches/local.conf
+
+${HILITE}$PROG${NORMAL} is copyright Andrey Ovcharov ${BAD}<sudormrfhalt@gmail.com>${NORMAL} and contributors.
+Distributed under the terms of the ${BAD}GNU${NORMAL} General Public License version 3. ${BAD}NO WARRANTY${NORMAL} given.
+EOF
+}
+
+# iternal function
+#
+# @FUNCTION: find_crap
+# @USAGE:
+# @DESCRIPTION: Find *.orig or *.rej files
+find_crap() {
+  [[ ${#} -ne 1 ]] && emsg "Invalid number of args to ${FUNCNAME}()"
+  [[ $verbose -ne 0 ]] && einfo "${FUNCNAME}() $@"
+  [[ $(find "$1" \( -name \*.orig -o -name \*.rej \) | wc -c) == "0" ]] && return 0 || return 1
+}
+
+# iternal function
+#
+# @FUNCTION: rm_crap
+# @USAGE:
+# @DESCRIPTION: Remove *.orig or *.rej files
+rm_crap() {
+  [[ ${#} -ne 1 ]] && emsg "Invalid number of args to ${FUNCNAME}()"
+  [[ $verbose -ne 0 ]] && einfo "${FUNCNAME}() $@"
+  [[ $(find "$1" \( -name \*~ -o -name \.gitignore -o -name \*.orig -o -name \.*.orig -o -name \*.rej -o -name \*.old -o -name \.*.old \) -delete) ]] && return 0 || return 1
+}
+
+#for more specific mimetype lookups see "xdg-mime query filetype"
+GetMimetype () {
+  file -b --mime-type $1
+}
+
+# searches for an element in the specified array and returns 0 if found, otherwise 1
+# $1 is the element to search for
+# $2 is the array
+# source: patrik at http://stackoverflow.com/a/8574392
+ContainsElement () {
+  local e
+  for e in "${@:2}"; do [[ "$e" == "$1" ]] && return 0; done
+  return 1
+}
+
+# iternal function
+#
+# @FUNCTION: UnpackApply
+# @USAGE: UnpackApply <operation> <work dir> <dir>/<patch>
+# @DESCRIPTION: Extract patch based on mimetype and apply it from *.{diff,patch,gz,bz,bz2,lrz,xz,zip,Z}
+#
+# where <operation> is one of
+# "push" or "+" - apply patch
+# "test" or "~" - test patch
+# "pop" or "-" - reversing patch
+#
+# to unpack <patch> need
+# *.gz       -> gunzip -dc    -> app-arch/gzip
+# *.bz|*.bz2 -> bunzip -dc    -> app-arch/bzip2
+# *.lrz      -> lrunzip -dc   -> app-arch/lrzip
+# *.xz       -> xz -dc        -> app-arch/xz-utils
+# *.zip      -> unzip -d      -> app-arch/unzip
+# *.Z        -> uncompress -c -> app-arch/gzip
+UnpackApply() {
+  [[ ${#} -ne 3 ]] && emsg "Invalid number of args to ${FUNCNAME}()"
+  [[ $verbose -ne 0 ]] && einfo "${FUNCNAME}() $@"
+
+  local arg1="$1" arg2=$(echo "$2" | sed 's_//_/_g') arg3=$(echo "$3" | sed 's_//_/_g')
+  [[ ! -d "$arg2" ]] && emsg "${HILITE}Directory${NORMAL} ${WARN}$arg3${NORMAL} ${HILITE}does not exist.${NORMAL}"
+  [[ ! -f "$arg3" ]] && emsg "${HILITE}Patch${NORMAL} ${WARN}$arg3${NORMAL} ${HILITE}does not exist.${NORMAL}"
+
+  case "$arg1" in
+    push|+ ) local crc=$(LC_ALL=posix grep $(md5sum "$arg3" | awk '{print $1}') --color=auto --no-messages .* | awk -F ":" '{print $2}')
+             if [ -f "$arg3" ] && [ -r "$arg3" ] && [ ! -f "$(dirname $arg3)/.$(basename $arg3)" ] && [ -z "$crc" ]; then
+               local level patched=0
+
+               for level in {0..4}; do
+                 if [[ "$patched" == "0" ]]; then
+                 [[ $verbose -ne 0 ]] && echo -n -e "test ${WARN}-p${level}${NORMAL} $(basename $arg3) ..."
+                 case $(GetMimetype "$arg3") in
+                 "application/gzip" ) gunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                 "application/x-bzip" ) bunzip2 -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                 "application/x-compress" ) uncompress -c < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                 "application/x-lrzip" ) lrunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                 "application/x-xz" ) xz -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                 "application/zip"|"application/x-gzip" ) zcat "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+
+                 "text/x-patch"|"message/rfc822"|"text/x-diff"|"application/octet-stream" ) patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run -i "$arg3" >/dev/null; cur="$?" ;;
+                 * ) emsg "${FUNCNAME}(): '${GOOD}$arg3${NORMAL}' - unknown file mimetype" && return 1 ;;
+                 esac
+                 echo -n -e "\033[0K"
+                 if [[ "$cur" == "0" ]]; then
+                   [[ $verbose -ne 0 ]] && echo -n -e " ${GOOD}OK${NORMAL}\n"
+                   echo -n -e "$arg1 ${WARN}-p${level}${NORMAL} $(basename $arg3) ..."
+                   case $(GetMimetype "$arg3") in
+                   "application/gzip" ) gunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} >/dev/null; cur="$?" ;;
+                   "application/x-bzip" ) bunzip2 -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} >/dev/null; cur="$?" ;;
+                   "application/x-compress" ) uncompress -c < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} >/dev/null; cur="$?" ;;
+                   "application/x-lrzip" ) lrunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} >/dev/null; cur="$?" ;;
+                   "application/x-xz" ) xz -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} >/dev/null; cur="$?" ;;
+                   "application/zip"|"application/x-gzip" ) zcat "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} >/dev/null; cur="$?" ;;
+
+                   "text/x-patch"|"message/rfc822"|"text/x-diff"|"application/octet-stream" ) patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} -i "$arg3" >/dev/null; cur="$?" ;;
+                   * ) emsg "${FUNCNAME}(): '${GOOD}$arg3${NORMAL}' - unknown file mimetype" && return 1 ;;
+                   esac
+                   echo -n -e "\033[0K"
+                   if [[ "$cur" == "0" ]]; then
+                     patched=1
+                     echo -n " ${GOOD}OK${NORMAL}"
+                   else
+                     echo -n " ${BAD}FAIL${NORMAL}"
+                   fi
+                   touch "$arg2/.$(basename $arg3)"
+                   echo $(md5sum ${arg3} | awk '{print $1}') >> "$arg2/.$(basename $arg3)"
+                   break
+                 else
+                   [[ $verbose -ne 0 ]] && echo -n -e " ${BAD}FAIL${NORMAL}\n"
+                 fi
+                 fi
+               done
+               if [[ "$patched" == "0" ]]; then
+                 echo -n -e "$arg1 ${WARN}-p${level}${NORMAL} $(basename $arg3) ${BAD}failed${NORMAL} !" && return 1
+               fi
+             else
+               [[ ! -e "$arg3" ]] && emsg "${GOOD}$arg3${NORMAL} does not exist, unable to ${HILITE}$PROG${NORMAL}" && return 1
+               [[ -f "$(dirname $arg3)/.$(basename $arg3)" ]] && emsg "${GOOD}$arg3${NORMAL} alredy applyedy" && return 1
+               if [[ ! -z $crc ]]; then
+                 local crcfile=$(LC_ALL=posix grep $(md5sum "$arg3" | awk '{print $1}') --color=auto --no-messages .* | awk -F ":" '{print $1}')
+                 emsg " ${BAD}FAIL${NORMAL} - $(basename $arg3) = $crcfile"
+                 return 1
+               fi
+               return 0
+             fi ;;
+    pop|-  ) local level patched=0
+
+             for level in {0..4}; do
+               if [[ "$patched" == "0" ]]; then
+               [[ $verbose -ne 0 ]] && echo -n -e "test ${WARN}-p${level}${NORMAL} $(basename $arg3) ..."
+               case $(GetMimetype "$arg3") in
+               "application/gzip" ) gunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} --dry-run >/dev/null; cur="$?" ;;
+               "application/x-bzip" ) bunzip2 -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} --dry-run >/dev/null; cur="$?" ;;
+               "application/x-compress" ) uncompress -c < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} --dry-run >/dev/null; cur="$?" ;;
+               "application/x-lrzip" ) lrunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} --dry-run >/dev/null; cur="$?" ;;
+               "application/x-xz" ) xz -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} --dry-run >/dev/null; cur="$?" ;;
+               "application/zip"|"application/x-gzip" ) zcat "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} --dry-run >/dev/null; cur="$?" ;;
+
+               "text/x-patch"|"message/rfc822"|"text/x-diff"|"application/octet-stream" ) patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} --dry-run -i "$arg3" >/dev/null; cur="$?" ;;
+               * ) emsg "${FUNCNAME}(): '${GOOD}$arg3${NORMAL}' - unknown file mimetype" && return 1 ;;
+               esac
+               echo -n -e "\033[0K"
+               if [[ "$cur" == "0" ]]; then
+                 [[ $verbose -ne 0 ]] && echo -n -e " ${GOOD}OK${NORMAL}\n"
+                 echo -n -e "$arg1 ${WARN}-p${level}${NORMAL} $(basename $arg3) ..."
+                 case $(GetMimetype "$arg3") in
+                 "application/gzip" ) gunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} >/dev/null; cur="$?" ;;
+                 "application/x-bzip" ) bunzip2 -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} >/dev/null; cur="$?" ;;
+                 "application/x-compress" ) uncompress -c < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} >/dev/null; cur="$?" ;;
+                 "application/x-lrzip" ) lrunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} >/dev/null; cur="$?" ;;
+                 "application/x-xz" ) xz -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} >/dev/null; cur="$?" ;;
+                 "application/zip"|"application/x-gzip" ) zcat "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} >/dev/null; cur="$?" ;;
+
+                 "text/x-patch"|"message/rfc822"|"text/x-diff"|"application/octet-stream" ) patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent --reverse -p ${level} -i "$arg3" >/dev/null; cur="$?" ;;
+                 * ) emsg "${FUNCNAME}(): '${GOOD}$arg3${NORMAL}' - unknown file mimetype" && return 1 ;;
+                 esac
+                 if [[ "$cur" == "0" ]]; then
+                   patched=1
+                   echo -n " ${GOOD}OK${NORMAL}"
+                 else
+                   echo -n " ${BAD}FAIL${NORMAL}"
+                 fi
+                 find "$arg2" -name ".$(basename $arg3)" -delete
+                 break
+               else
+                 [[ $verbose -ne 0 ]] && echo -n -e " ${BAD}FAIL${NORMAL}\n"
+               fi
+               fi
+             done
+             if [[ "$patched" == "0" ]]; then
+               echo -n -e "$arg1 $(basename $arg3) ${BAD}failed${NORMAL} !" && return 1
+             fi
+
+             rm_crap "${arg2}" ;;
+    test|~  ) local level patched=0
+
+              for level in {0..4}; do
+                if [[ "$patched" == "0" ]]; then
+                case $(GetMimetype "$arg3") in
+                "application/gzip" ) gunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                "application/x-bzip" ) bunzip2 -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                "application/x-compress" ) uncompress -c < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                "application/x-lrzip" ) lrunzip -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                "application/x-xz" ) xz -dc < "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+                "application/zip"|"application/x-gzip" ) zcat "$arg3" | patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run >/dev/null; cur="$?" ;;
+
+                "text/x-patch"|"message/rfc822"|"text/x-diff"|"application/octet-stream" ) patch -g 0 --directory="${arg2}" --remove-empty-files --no-backup-if-mismatch --silent -p ${level} --dry-run -i "$arg3" >/dev/null; cur="$?" ;;
+                * ) emsg "${FUNCNAME}(): '${GOOD}$arg3${NORMAL}' - unknown file mimetype" && return 1 ;;
+                esac
+                if [[ "$cur" == "0" ]]; then
+                  patched=1
+                  echo -n -e "$arg1 ${WARN}-p${level}${NORMAL} $(basename $arg3) ..."
+                  break
+                  echo -n " ${GOOD}OK${NORMAL}"
+                else
+                  echo -n " ${BAD}FAIL${NORMAL}"
+                fi
+                fi
+              done
+              if [[ "$patched" == "0" ]]; then
+                echo -n -e "$arg1 $(basename $arg3) ${BAD}failed${NORMAL} !" && return 1
+              fi ;;
+    * ) emsg "${FUNCNAME}(): '$arg1' - unknown arg"; return 1 ;;
+  esac
+}
+
+# @FUNCTION: ApplyPatch
+# @USAGE:
+# ApplyPatch <operation> <work dir> <patch|dir|conf>
+#
+# where <operation> is one of
+# "push" or "+" - apply patch
+# "test" or "~" - test patch
+# "pop" or "-" - reversing patch
+#
+# @DESCRIPTION:
+# Main function
+ApplyPatch() {
+  [[ ${#} -ne 3 ]] && emsg "Invalid number of args to ${FUNCNAME}()"
+  [[ $verbose -ne 0 ]] && einfo "${FUNCNAME}() $@"
+
+  local arg1="$1" arg2=$(echo "$2" | sed 's_//_/_g') arg3=$(echo "$3" | sed 's_//_/_g')
+
+    case "${arg1}" in
+      push|+ ) operation="push" ;;
+      test|~ ) operation="test" ;;
+      pop|- ) operation="pop" ;;
+
+      * ) emsg "${FUNCNAME}(): '${arg1}' - unknown arg"; return 1 ;;
+    esac
+
+    [[ $verbose -ne 0 ]] && einfo "$(GetMimetype $arg3)"
+    case $(GetMimetype "$arg3") in
+    "inode/directory" )
+        [[ ! -d "$arg3" ]] && emsg "${HILITE}Directory${NORMAL} ${WARN}$arg3${NORMAL} ${HILITE}does not exist.${NORMAL}"
+
+#        local pfile patches=$(find ${arg3}/ -type f -iregex ".*\.\(diff\|patch\|gz\|bz\|bz2\|lrz\|xz\|zip\|Z\)$" | sort -n | sed ':a;N;$!ba;s/\n/ /g') # TODO make find & mimetype
+        local pfile patches=$(find ${arg3}/ -type f | sort -n | sed ':a;N;$!ba;s/\n/ /g')
+
+        # find * -printf "%p " -exec GetMimetype {} \;
+        [[ -z "${patches}" ]] && emsg "No patches found: ${arg3}/*.{diff,patch,gz,bz,bz2,lrz,xz,zip,Z}" && return 0
+
+        case "${operation}" in
+        push|test|pop )
+          for pfile in ${patches}; do
+            if [ -f "$pfile" ] && ContainsElement $(GetMimetype "$pfile") "${MIMETYPES[@]}"; then
+              UnpackApply "$operation" "$arg2" "$pfile"; echo
+            else
+              emsg "${HILITE}File${NORMAL} ${WARN}$arg3${NORMAL} ${HILITE}with invalid mimetype${NORMAL} ${WARN}"$(GetMimetype '${pfile}')"${NORMAL}"
+            fi
+          done ;;
+        * ) emsg "${FUNCNAME}(): '$operation' - unknown arg"; return 1 ;;
+        esac ;;
+    "text/plain" )
+        [[ ! -f "$arg3" ]] && emsg "${HILITE}File${NORMAL} ${WARN}$arg3${NORMAL} ${HILITE}does not exist.${NORMAL}"
+
+        case "${operation}" in
+          push )
+            case "${lists_handler}" in
+            stupid )
+              OLD_IFS=$IFS
+              IFS=','
+              [[ -f "$arg3~" ]] && rm -rf "$arg3~"
+              egrep -v '^[[:space:]]*#|^ *$|^$' "$arg3" >> "$arg3~"
+              local number=0 successed=0 failed=0 prev="undefined"
+              while read action pfile ; do
+                ((number++))
+                [[ ! -f "$pfile" ]] && pfile="$(dirname "$arg3")/$pfile"
+                case "${action}" in
+                push|test|pop ) echo -n "[${WARN}#$number${NORMAL}, ${HILITE}$(date +%T)${NORMAL}, ok: ${GOOD}${successed}${NORMAL}, fail: ${BAD}${failed}${NORMAL}] "; UnpackApply "$action" "$arg2" "$pfile"; cur="$?" ;;
+                * ) emsg "${FUNCNAME}(): '$action' - unknown arg"; return 1 ;;
+                esac
+                if [[ "$cur" == "0" ]]; then
+                  ((successed++))
+                else
+                  ((failed++))
+                fi
+                echo -n -e "\033[0K"
+                if ([[ "$cur" == "$prev" ]] || [[ "$prev" == "undefined" ]]); then
+                  [[ "$not_one_line" == "1" ]] && echo -e '\r' || echo -n -e '\r'
+                else
+                  echo
+                fi
+                prev="$cur"
+                done < "$arg3~"
+              IFS=$OLD_IFS ;;
+#             smart )
+#               index=1
+#               for var in $(grep -v '^#' "$arg3"); do
+#                 [ "${no_luck}" = "1" ] && break || ok_array[$index]="${var}"; index=$(expr $index + 1)
+#                   ebegin "Applying $var"
+#                     UnpackApply "push" "$arg2" "$(dirname "$arg3")/$line" || $(no_luck="1")
+#                     [ "${no_luck}" = "1" ] && break || ok_array[$index]="${var}"; index=$(expr $index + 1)
+#                   eend
+#               done
+#               if [ "${no_luck}" = "1" ]; then
+#                 for var in $(seq ${#ok_array[@]} -1 1); do
+#                   ebegin "${HILITE}Reversing patch <--${NORMAL} ${WARN}${ok_array[var]}${NORMAL}"
+#                     UnpackApply "pop" "$arg2" "$(dirname "$arg3")/${ok_array[var]}"
+#                   eend $?
+#                 done
+#               fi ;;
+            esac ;;
+          pop ) # TODO При pop должно быть чтение файла с конца в начало!!!
+            OLD_IFS=$IFS
+            IFS=','
+            [[ -f "$arg3~" ]] && rm -rf "$arg3~"
+            tac "$arg3" >> "$arg3~1"
+            egrep -v '^[[:space:]]*#|^ *$|^$' "$arg3~1" >> "$arg3~" && rm -rf "$arg3~1"
+            while read action pfile ; do
+              ((number++))
+              [[ ! -f "$pfile" ]] && pfile="$(dirname "$arg3")/$pfile"
+              case "${action}" in
+              push ) echo -n "[${WARN}#$number${NORMAL}, ${HILITE}$(date +%T)${NORMAL}, ok: ${GOOD}${successed}${NORMAL}, fail: ${BAD}${failed}${NORMAL}] "; UnpackApply "pop" "$arg2" "$pfile"; cur="$?" ;;
+              test ) echo -n "[${WARN}#$number${NORMAL}, ${HILITE}$(date +%T)${NORMAL}, ok: ${GOOD}${successed}${NORMAL}, fail: ${BAD}${failed}${NORMAL}] "; UnpackApply "$action" "$arg2" "$pfile"; cur="$?" ;;
+              pop ) echo -n "[${WARN}#$number${NORMAL}, ${HILITE}$(date +%T)${NORMAL}, ok: ${GOOD}${successed}${NORMAL}, fail: ${BAD}${failed}${NORMAL}] "; UnpackApply "push" "$arg2" "$pfile"; cur="$?" ;;
+              * ) emsg "${FUNCNAME}(): '$action' - unknown arg"; return 1 ;;
+              esac
+              if [[ "$cur" == "0" ]]; then
+                ((successed++))
+              else
+                ((failed++))
+              fi
+              echo -n -e "\033[0K"
+              if ([[ "$cur" == "$prev" ]] || [[ "$prev" == "undefined" ]]); then
+                [[ "$not_one_line" == "1" ]] && echo -e '\r' || echo -n -e '\r'
+              else
+                echo
+              fi
+              prev="$cur"
+            done < "$arg3~"
+            rm -rf "$arg3~"
+            IFS=$OLD_IFS ;;
+          test|* ) emsg "${FUNCNAME}(): '$operation' - unknown arg"; return 1 ;;
+        esac ;;
+    "text/x-patch"|"message/rfc822"|"text/x-diff"|* )
+        case "${operation}" in
+        push|test|pop ) UnpackApply "$operation" "$arg2" "$arg3"; echo ;;
+        * ) emsg "${FUNCNAME}(): '$operation' - unknown arg"; return 1 ;;
+        esac ;;
+    esac
+
+#   case "$crap" in
+#   0 ) find_crap; cur="$?"
+#       if [[ "$cur" == "1" ]]; then
+#         einfo "${HILITE}Reversing crap patch <--${NORMAL} ${WARN}$(basename "$arg3")${NORMAL}"
+#         UnpackApply "pop" "$arg3"
+#         rm_crap
+#       fi ;;
+#   esac
+}
+
+# Start here
+
+init_variables
+
+# Required program(s)
+req_progs=( patch find grep wc gunzip bunzip2 uncompress lrunzip xz unzip )
+
+for p in ${req_progs[@]}; do
+  hash "$p" 2>&- || \
+  { echo >&2 " Required program \"$p\" not installed."; exit 1; }
+done
+
+_arg1="$1"
+_arg2=$(echo "$2" | sed 's_//_/_g')
+_arg3=$(echo "$3" | sed 's_//_/_g')
+
+[[ "$2" = "." ]] && _arg2="$(pwd)" || _arg2="$2"
+test -d "${_arg2}" >/dev/null 2>&1 && cd "${_arg2}" || emsg "No such directory - ${_arg2}"
+
+if [ -r "$_arg3" ] || [ -d "$_arg3" ]; then
+    case $(GetMimetype "$_arg3") in
+    "text/x-patch"|"message/rfc822"|"text/x-diff" )
+        [[ $(grep -c ^ "$_arg3") -lt ${min_patch_length} ]] && emsg "${HILITE}Skipping empty patch -->${NORMAL} ${WARN}$(basename "$_arg3")${NORMAL} contain "$(grep -c ^ $_arg3)" lines" ;;
+    "inode/directory" )
+        [[ "$3" = "." ]] && _arg3="$(pwd)" || _arg3="$3"
+        test -d "${_arg3}" >/dev/null 2>&1 && cd "${_arg3}" || emsg "No such directory - ${_arg3}" ;;
+    "text/plain"|* )
+        [[ ! -s "$_arg3" ]] && emsg "${HILITE}Skipping missing or empty config file -->${NORMAL} ${WARN}$(basename "$_arg3")${NORMAL}" ;;
+    esac
+else
+    emsg "No such file or directory - $_arg3"
+fi
+
+if [ -z "$_arg1" ] || [ -z "$_arg2" ] || [ -z "$_arg3" ]; then
+    usage
+    exit 1
+fi
+
+ApplyPatch "${_arg1}" "${_arg2}" "${_arg3}"
+
+exit 0

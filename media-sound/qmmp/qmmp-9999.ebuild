@@ -1,13 +1,13 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI=6
 
 inherit cmake-utils
 [ "$PV" == "9999" ] && inherit subversion
 
-DESCRIPTION="Qt-based audio player with winamp/xmms skins support"
+DESCRIPTION="Qt5-based audio player with winamp/xmms skins support"
 HOMEPAGE="http://qmmp.ylsoftware.com"
 if [ "$PV" != "9999" ]; then
 	SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2"
@@ -87,53 +87,52 @@ src_prepare() {
 
 src_configure() {
 	mycmakeargs=(
-		$(cmake-utils_use_use alsa)
-		$(cmake-utils_use_use aac)
-		$(cmake-utils_use_use alsa)
-		$(cmake-utils_use_use analyzer)
-		$(cmake-utils_use_use bs2b)
-		$(cmake-utils_use_use cdda CDA)
-		$(cmake-utils_use_use crossfade)
-		$(cmake-utils_use_use cover)
-		$(cmake-utils_use_use cue)
-		$(cmake-utils_use_use curl)
-		$(cmake-utils_use_use dbus)
-		$(cmake-utils_use_use enca)
-		$(cmake-utils_use_use ffmpeg)
-		$(cmake-utils_use_use flac)
-		$(cmake-utils_use_use game GME)
+		-DUSE_ALSA="$(usex alsa)"
+		-DUSE_AAC="$(usex aac)"
+		-DUSE_ANALYZER=OFF
+		-DUSE_B2SB=OFF
+		-DUSE_CDDA=OFF
+		-DUSE_CROSSFADE=OFF
+		-DUSE_COVER="$(usex cover)"
+		-DUSE_CUE="$(usex cue)"
+		-DUSE_CURL="$(usex curl)"
+		-DUSE_DBUS="$(usex dbus)"
+		-DUSE_ENCA="$(usex enca)"
+		-DUSE_FFMPEG=OFF
+		-DUSE_FLAC="$(usex flac)"
+		-DUSE_GME=OFF
 		-DUSE_HAL=OFF
-		$(cmake-utils_use_use jack)
-		$(cmake-utils_use_use kde KDENOTIFY)
-		$(cmake-utils_use_use ladspa)
-		$(cmake-utils_use_use lyrics)
-		$(cmake-utils_use_use mad)
-		$(cmake-utils_use_use midi MIDI_WILDMIDI)
-		$(cmake-utils_use_use mplayer)
-		$(cmake-utils_use_use mms)
-		$(cmake-utils_use_use modplug)
-		$(cmake-utils_use_use mpris)
-		$(cmake-utils_use_use musepack MPC)
-		$(cmake-utils_use_use notifier)
-		$(cmake-utils_use_use opus)
-		$(cmake-utils_use_use oss)
-		$(cmake-utils_use_use projectm)
-		$(cmake-utils_use_use pulseaudio PULSE)
-		$(cmake-utils_use_use qsui)
-		$(cmake-utils_use_use scrobbler)
-		$(cmake-utils_use_use sndfile)
-		$(cmake-utils_use_use stereo)
-		$(cmake-utils_use_use tray STATICON)
-		$(cmake-utils_use_use udisks UDISKS2)
-		$(cmake-utils_use_use libsamplerate SRC)
-		$(cmake-utils_use_use vorbis)
-		$(cmake-utils_use_use wavpack)
+		-DUSE_JACK=OFF
+		-DUSE_KDENOTIFY=ON
+		-DUSE_LADSPA=OFF
+		-DUSE_LYRICS="$(usex lyrics)"
+		-DUSE_MAD=OFF
+		-DUSE_MIDI_WILDMIDI=OFF
+		-DUSE_MPLAYER=OFF
+		-DUSE_MMS=OFF
+		-DUSE_MODPLUG=OFF
+		-DUSE_MPRIS="$(usex mpris)"
+		-DUSE_MPC=OFF
+		-DUSE_NOTIFIER="$(usex notifier)"
+		-DUSE_OPUS=OFF
+		-DUSE_OSS=OFF
+		-DUSE_PROHECTM=OFF
+		-DUSE_PULSE="$(usex pulseaudio)"
+		-DUSE_QSUI="$(usex qsui)"
+		-DUSE_SCROBBLER=OFF
+		-DUSE_SNDFILE=OFF
+		-DUSE_STEREO="$(usex stereo)"
+		-DUSE_STATICON="$(usex tray)"
+		-DUSE_UDISKS2=OFF
+		-DUSE_SRC=OFF
+		-DUSE_VORBIS=OFF
+		-DUSE_WAVPACK="$(usex wavpack)"
 		-DUSE_NULL=OFF
 		-DUSE_SOXR=ON
 		-DUSE_GNOMEHOTKEY=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
-		)
+	)
 
 	cmake-utils_src_configure
 }
