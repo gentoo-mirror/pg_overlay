@@ -65,9 +65,7 @@ src_prepare() {
 	default
 
 	if use infinality; then
-		patch -p1 -i "${FILESDIR}"/02-upstream-*.patch
 		patch -p1 -i  "${FILESDIR}"/03-infinality-${PV}*.patch
-		epatch "${FILESDIR}"/stem-darkening.patch
 		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in freetype-2.4.11
 		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
 	fi
@@ -164,6 +162,9 @@ multilib_src_install_all() {
 		done
 	fi
 
+	exeinto /etc/X11/xinit/xinitrc.d/
+	doexe "${FILESDIR}"/*.sh
+	
 	dodoc docs/{CHANGES,CUSTOMIZE,DEBUG,INSTALL.UNIX,*.txt,PROBLEMS,TODO}
 	if use doc ; then
 		docinto html
