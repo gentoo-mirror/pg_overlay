@@ -19,7 +19,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
 KEYWORDS="amd64 ~arm x86"
-IUSE="cups gn gnome gnome-keyring gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi"
+IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 REQUIRED_USE="gn? ( kerberos !system-ffmpeg )"
@@ -199,12 +199,12 @@ src_prepare() {
 	if use vaapi; then
 		epatch "${FILESDIR}/chromium_vaapi.patch"
 	fi
-	
+
 	# Inox patches
 	EPATCH_SUFFIX="patch" \
 	EPATCH_FORCE="yes" \
 	epatch "${FILESDIR}/inox"
-    
+
 	epatch_user
 
 	local conditional_bundled_libraries=""
@@ -553,13 +553,13 @@ src_configure() {
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"
 		fi
-		
+
 		if use vaapi; then
 			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
 		else
 			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau"
 		fi
-		
+
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 		einfo "Configuring bundled ffmpeg..."
 		pushd third_party/ffmpeg > /dev/null || die

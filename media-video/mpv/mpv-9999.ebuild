@@ -19,7 +19,7 @@ if [[ ${PV} != *9999* ]]; then
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
-	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
+	EGIT_REPO_URI="git://github.com/mpv-player/mpv.git"
 	inherit git-r3
 fi
 SRC_URI+=" https://waf.io/waf-${WAF_PV}"
@@ -74,7 +74,7 @@ COMMON_DEPEND="
 		libguess? ( >=app-i18n/libguess-1.0 )
 		uchardet? ( dev-libs/uchardet )
 	)
-	jack? ( media-sound/jack-audio-connection-kit )
+	jack? ( virtual/jack )
 	jpeg? ( virtual/jpeg:0 )
 	lcms? ( >=media-libs/lcms-2.6:2 )
 	libass? (
