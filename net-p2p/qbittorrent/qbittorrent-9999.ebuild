@@ -62,8 +62,8 @@ src_prepare() {
 	qt4-r2_src_prepare
 	
 	# To last stable version for What.CD & Pedro's BTMusic
-	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 2"/g version.pri || die
-	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 5"/g version.pri || die
+	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 3"/g version.pri || die
+	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 3"/g version.pri || die
 	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
 }
 
