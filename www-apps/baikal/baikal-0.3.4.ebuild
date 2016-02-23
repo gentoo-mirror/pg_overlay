@@ -20,6 +20,8 @@ RDEPEND=">=dev-lang/php-5.3[ctype,filter,pdo,session,xml,xmlreader,mysql?,sqlite
 	sqlite? ( dev-db/sqlite )
 	virtual/httpd-php"
 
+S=${WORKDIR}/${PN}
+
 src_install() {
 	webapp_src_preinst
 
