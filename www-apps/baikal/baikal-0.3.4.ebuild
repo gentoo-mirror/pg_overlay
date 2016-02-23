@@ -15,7 +15,7 @@ KEYWORDS="~amd64"
 IUSE="+mysql sqlite"
 REQUIRED_USE="|| ( mysql sqlite )"
 
-RDEPEND=">=dev-lang/php-5.3[ctype,filter,pdo,session,xml,mysql?,sqlite?]
+RDEPEND=">=dev-lang/php-5.3[ctype,filter,pdo,session,xml,xmlreader,mysql?,sqlite?]
 	mysql? ( virtual/mysql )
 	sqlite? ( dev-db/sqlite )
 	virtual/httpd-php"
@@ -50,6 +50,8 @@ src_install() {
 
 	if has_version www-servers/apache ; then
 		fowners -R apache:apache /etc/${PN}
+	elif has_version www-servers/nginx ; then
+		fowners -R nginx:nginx /etc/${PN}
 	else
 		einfo "/etc/${PN} must be owned by the webserver user for baikal"
 	fi
