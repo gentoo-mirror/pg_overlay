@@ -330,7 +330,7 @@ multilib_src_configure() {
 		$(use_with xinerama)
 		$(use_with xml)
 		$(use_with xml xslt)
-		--with-d3dadapter
+		--with-d3dadapter --without-xattr
 	)
 
 	use staging && myconf+=(
