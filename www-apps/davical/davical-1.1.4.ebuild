@@ -24,7 +24,7 @@ RDEPEND="app-admin/pwgen
 	>=dev-php/awl-0.55
 	virtual/httpd-php"
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${PN}-${PV}"
 
 need_httpd
 
