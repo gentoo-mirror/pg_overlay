@@ -41,12 +41,7 @@ SRC_URI="${SRC_URI}
 	gstreamer? ( https://dev.gentoo.org/~np-hardass/distfiles/${PN}/${GST_P}.patch.bz2 )
 	https://dev.gentoo.org/~tetromino/distfiles/${PN}/${WINE_GENTOO}.tar.bz2"
 
-if [[ ${PV} == "9999" ]] ; then
-	STAGING_EGIT_REPO_URI="git://github.com/wine-compholio/wine-staging.git"
-else
-	SRC_URI="${SRC_URI}
-	staging? ( https://github.com/wine-compholio/wine-staging/archive/v${PV}.tar.gz -> ${STAGING_P}.tar.gz )"
-fi
+${PV} == "9999" || STAGING_EGIT_REPO_URI="git://github.com/wine-compholio/wine-staging.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -215,7 +210,11 @@ src_unpack() {
 			EGIT_CHECKOUT_DIR=${STAGING_DIR} git-r3_src_unpack
 		fi
 	else
-		use staging && unpack "${P}.tar.gz"
+		if use staging ; then
+			unpack "${P}.tar.gz"
+		else
+			unpack "${P}.tar.bz2"
+		fi
 	fi
 
 	unpack "${WINE_GENTOO}.tar.bz2"
@@ -265,15 +264,6 @@ src_prepare() {
 
 		local STAGING_EXCLUDE=""
 		use pipelight || STAGING_EXCLUDE="${STAGING_EXCLUDE} -W Pipelight"
-
-		# Launch wine-staging patcher in a subshell, using epatch as a backend, and gitapply.sh as a backend for binary patches
-		#ebegin "Running Wine-Staging patch installer"
-		#(
-		#	set -- DESTDIR="${S}" --backend=epatch --no-autoconf --all ${STAGING_EXCLUDE}
-		#	cd "${STAGING_DIR}/patches"
-		#	source "${STAGING_DIR}/patches/patchinstall.sh"
-		#)
-		#eend $?
 	fi
 	autotools-utils_src_prepare
 
