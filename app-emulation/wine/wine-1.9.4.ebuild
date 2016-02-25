@@ -19,7 +19,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	MAJOR_V=$(get_version_component_range 1-2)
 	SRC_URI="!staging? ( https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2 )
-		staging? ( https://github.com/${PN}-compholio/${PN}-patched/archive/staging-${PV}.tar.gz )
+		staging? ( https://github.com/${PN}-compholio/${PN}-patched/archive/staging-${PV}.tar.gz -> ${P}.tar.gz )
 		"
 	KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
 fi
