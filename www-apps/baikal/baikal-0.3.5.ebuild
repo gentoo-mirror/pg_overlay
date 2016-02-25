@@ -33,7 +33,7 @@ src_install() {
 
 	einfo "Setting up container for configuration"
 	insinto /etc/${PN}
-	doins ${FILESDIR}/.htaccess || die "doins failed"
+	#doins ${FILESDIR}/.htaccess || die "doins failed"
 
 	einfo "Fixing symlinks"
 	local link target
