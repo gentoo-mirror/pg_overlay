@@ -29,7 +29,7 @@ S="${WORKDIR}/${PN}-${PV}"
 need_httpd
 
 src_unpack() {
-	unpack * ${PN}-${PV}
+	cp -r ${PN}-r${PV}-658daa6d60f55b6ab06c4e2d5c4831ffe1204ff1 ${PN}-${PV}
 }
 
 src_prepare() {
