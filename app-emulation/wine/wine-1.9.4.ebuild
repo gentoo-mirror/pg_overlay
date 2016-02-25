@@ -163,7 +163,7 @@ usr/share/applications/wine-uninstaller.desktop
 usr/share/applications/wine-winecfg.desktop"
 
 if use staging; then
-	S=${WORLDIR}/${PN}-patched-staging-${PV}
+	S=${WORKDIR}/${PN}-patched-staging-${PV}
 fi
 
 wine_build_environment_check() {
