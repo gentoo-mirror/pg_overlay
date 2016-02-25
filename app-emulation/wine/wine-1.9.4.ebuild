@@ -18,7 +18,9 @@ if [[ ${PV} == "9999" ]] ; then
 	#KEYWORDS=""
 else
 	MAJOR_V=$(get_version_component_range 1-2)
-	SRC_URI="https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2"
+	SRC_URI="!staging? ( https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2 )
+		staging? ( https://github.com/${PN}-compholio/${PN}-patched/archive/staging-${PV}.tar.gz )
+		"
 	KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
 fi
 
@@ -227,7 +229,7 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.7.12-osmesa-check.patch #429386
 		"${FILESDIR}"/${PN}-1.6-memset-O3.patch #480508
 	
-		#"${FILESDIR}"/nine-1.9.1.patch
+		"${FILESDIR}"/nine-1.9.1.patch
 		"${FILESDIR}"/steam.patch
 		"${FILESDIR}"/mipmap.patch
 		"${FILESDIR}"/heap_perf.patch
@@ -262,13 +264,13 @@ src_prepare() {
 		use pipelight || STAGING_EXCLUDE="${STAGING_EXCLUDE} -W Pipelight"
 
 		# Launch wine-staging patcher in a subshell, using epatch as a backend, and gitapply.sh as a backend for binary patches
-		ebegin "Running Wine-Staging patch installer"
-		(
-			set -- DESTDIR="${S}" --backend=epatch --no-autoconf --all ${STAGING_EXCLUDE}
-			cd "${STAGING_DIR}/patches"
-			source "${STAGING_DIR}/patches/patchinstall.sh"
-		)
-		eend $?
+		#ebegin "Running Wine-Staging patch installer"
+		#(
+		#	set -- DESTDIR="${S}" --backend=epatch --no-autoconf --all ${STAGING_EXCLUDE}
+		#	cd "${STAGING_DIR}/patches"
+		#	source "${STAGING_DIR}/patches/patchinstall.sh"
+		#)
+		#eend $?
 	fi
 	autotools-utils_src_prepare
 
