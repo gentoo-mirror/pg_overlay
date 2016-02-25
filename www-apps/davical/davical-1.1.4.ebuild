@@ -24,9 +24,13 @@ RDEPEND="app-admin/pwgen
 	>=dev-php/awl-0.55
 	virtual/httpd-php"
 
-S="${WORKDIR}/${PN}-r${PV}-*"
+S="${WORKDIR}/${PN}-${PV}"
 
 need_httpd
+
+src_unpack() {
+	unpack * ${PN}-${PV}
+}
 
 src_prepare() {
 	epatch "${FILESDIR}/awl-locations.patch"
