@@ -10,19 +10,11 @@ PLOCALE_BACKUP="en"
 
 inherit autotools-utils eutils fdo-mime flag-o-matic gnome2-utils l10n multilib multilib-minimal pax-utils toolchain-funcs virtualx versionator
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="git://source.winehq.org/git/wine.git http://source.winehq.org/git/wine.git"
-	EGIT_BRANCH="master"
-	inherit git-r3
-	SRC_URI=""
-	#KEYWORDS=""
-else
-	MAJOR_V=$(get_version_component_range 1-2)
-	SRC_URI="!staging? ( https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2 )
-		staging? ( https://github.com/${PN}-compholio/${PN}-patched/archive/staging-${PV}.tar.gz -> ${P}.tar.gz )
-		"
-	KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
-fi
+MAJOR_V=$(get_version_component_range 1-2)
+SRC_URI="!staging? ( https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2 )
+	staging? ( https://github.com/${PN}-compholio/${PN}-patched/archive/staging-${PV}.tar.gz -> ${P}.tar.gz )
+	"
+KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
 
 GV="2.44"
 MV="4.5.6"
@@ -40,8 +32,6 @@ SRC_URI="${SRC_URI}
 	mono? ( https://dl.winehq.org/wine/wine-mono/${MV}/wine-mono-${MV}.msi )
 	gstreamer? ( https://dev.gentoo.org/~np-hardass/distfiles/${PN}/${GST_P}.patch.bz2 )
 	https://dev.gentoo.org/~tetromino/distfiles/${PN}/${WINE_GENTOO}.tar.bz2"
-
-${PV} == "9999" || STAGING_EGIT_REPO_URI="git://github.com/wine-compholio/wine-staging.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -202,19 +192,10 @@ pkg_setup() {
 }
 
 src_unpack() {
-	if [[ ${PV} == "9999" ]] ; then
-		git-r3_src_unpack
-		if use staging; then
-			EGIT_REPO_URI=${STAGING_EGIT_REPO_URI}
-			unset ${PN}_LIVE_REPO;
-			EGIT_CHECKOUT_DIR=${STAGING_DIR} git-r3_src_unpack
-		fi
+	if use staging; then
+		unpack "${P}.tar.gz"
 	else
-		if use staging ; then
-			unpack "${P}.tar.gz"
-		else
-			unpack "${P}.tar.bz2"
-		fi
+		unpack "${P}.tar.bz2"
 	fi
 
 	unpack "${WINE_GENTOO}.tar.bz2"
