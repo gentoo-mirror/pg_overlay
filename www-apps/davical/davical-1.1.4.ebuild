@@ -29,7 +29,7 @@ S="${WORKDIR}/${PN}-${PV}"
 need_httpd
 
 src_prepare() {
-	cp -r ${PV}-r{PN}* ${PN}-{PV}
+	cp -r ${PN}-r{PV}*/ ${PN}-{PV}
 	epatch "${FILESDIR}/awl-locations.patch"
 	epatch "${FILESDIR}/inc_path.patch"
 }
