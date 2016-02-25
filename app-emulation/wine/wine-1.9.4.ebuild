@@ -227,11 +227,11 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.7.12-osmesa-check.patch #429386
 		"${FILESDIR}"/${PN}-1.6-memset-O3.patch #480508
 	
-	patch -p1 -i "${FILESDIR}"/nine-1.9.1.patch
-	patch -p1 -i "${FILESDIR}"/steam.patch
-	patch -p1 -i "${FILESDIR}"/mipmap.patch
-	patch -p1 -i "${FILESDIR}"/heap_perf.patch
-# 	#patch -p1 -i "${FILESDIR}"/wbemprox_query_v2.patch
+	epatch "${FILESDIR}"/nine-1.9.1.patch
+	epatch "${FILESDIR}"/steam.patch
+	epatch "${FILESDIR}"/mipmap.patch
+	epatch "${FILESDIR}"/heap_perf.patch
+	epatch "${FILESDIR}"/wbemprox_query_v2.patch
 	
 	)
 	if use gstreamer; then
