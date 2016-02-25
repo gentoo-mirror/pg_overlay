@@ -231,7 +231,7 @@ src_prepare() {
 	patch -p1 -i "${FILESDIR}"/steam.patch
 	patch -p1 -i "${FILESDIR}"/mipmap.patch
 	patch -p1 -i "${FILESDIR}"/heap_perf.patch
-	patch -p1 -i "${FILESDIR}"/wbemprox_query_v2.patch
+# 	#patch -p1 -i "${FILESDIR}"/wbemprox_query_v2.patch
 	
 	)
 	if use gstreamer; then
@@ -335,6 +335,7 @@ multilib_src_configure() {
 		$(use_with xinerama)
 		$(use_with xml)
 		$(use_with xml xslt)
+		--with-d3dadapter
 	)
 
 	use staging && myconf+=(
