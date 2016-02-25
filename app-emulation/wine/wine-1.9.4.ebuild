@@ -314,11 +314,6 @@ multilib_src_configure() {
 		--with-d3dadapter --without-xattr
 	)
 
-	use staging && myconf+=(
-		--with-xattr
-		$(use_with vaapi va)
-	)
-
 	local PKG_CONFIG AR RANLIB
 	# Avoid crossdev's i686-pc-linux-gnu-pkg-config if building wine32 on amd64; #472038
 	# set AR and RANLIB to make QA scripts happy; #483342
