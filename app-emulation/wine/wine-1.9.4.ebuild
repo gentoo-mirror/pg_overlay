@@ -227,7 +227,7 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.7.12-osmesa-check.patch #429386
 		"${FILESDIR}"/${PN}-1.6-memset-O3.patch #480508
 	
-		"${FILESDIR}"/nine-1.9.1.patch
+		#"${FILESDIR}"/nine-1.9.1.patch
 		"${FILESDIR}"/steam.patch
 		"${FILESDIR}"/mipmap.patch
 		"${FILESDIR}"/heap_perf.patch
