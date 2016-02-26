@@ -77,7 +77,7 @@ src_configure() {
 }
 
 install_locale() {
-	insinto /use/share/apps/${PN}/locale
+	insinto /usr/share/apps/${PN}/locale
 	doins "${S}"/locale/${1}.qm
 	eend $? || dir "failed to install $1 locale"
 }
