@@ -35,7 +35,7 @@ SRC_URI="${SRC_URI}
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-IUSE="+abi_x86_32 +abi_x86_64 +alsa capi cups custom-cflags dos elibc_glibc +fontconfig +gecko gphoto2 gsm gstreamer +jpeg +lcms ldap +mono mp3 ncurses netapi nls odbc openal opencl +opengl osmesa oss +perl pcap pipelight +png prelink pulseaudio +realtime +run-exes s3tc samba scanner selinux +ssl staging test +threads +truetype +udisks v4l vaapi +X +xcomposite xinerama +xml"
+IUSE="+abi_x86_32 +abi_x86_64 +alsa capi cups custom-cflags +d3d9 dos elibc_glibc +fontconfig +gecko gphoto2 gsm gstreamer +jpeg +lcms ldap +mono mp3 ncurses netapi nls odbc openal opencl +opengl osmesa oss +perl pcap pipelight +png prelink pulseaudio +realtime +run-exes s3tc samba scanner selinux +ssl staging test +threads +truetype +udisks v4l vaapi +X +xcomposite xinerama +xml"
 REQUIRED_USE="|| ( abi_x86_32 abi_x86_64 )
 	test? ( abi_x86_32 )
 	elibc_glibc? ( threads )
@@ -211,13 +211,6 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.4_rc2-multilib-portage.patch #395615
 		"${FILESDIR}"/${PN}-1.7.12-osmesa-check.patch #429386
 		"${FILESDIR}"/${PN}-1.6-memset-O3.patch #480508
-	
-		"${FILESDIR}"/nine-1.9.1.patch
-		"${FILESDIR}"/steam.patch
-		"${FILESDIR}"/mipmap.patch
-		"${FILESDIR}"/heap_perf.patch
-		"${FILESDIR}"/wbemprox_query_v2.patch
-	
 	)
 	if use gstreamer; then
 		# See http://bugs.winehq.org/show_bug.cgi?id=30557
@@ -262,6 +255,12 @@ src_prepare() {
 	cp "${WORKDIR}"/${WINE_GENTOO}/icons/oic_winlogo.ico dlls/user32/resources/ || die
 
 	l10n_get_locales > po/LINGUAS # otherwise wine doesn't respect LINGUAS
+
+	if use d3d9; then
+		EPATCH_SUFFIX="patch" \
+		EPATCH_FORCE="yes" \
+		epatch "${FILESDIR}/d3d9"
+	fi
 }
 
 src_configure() {
@@ -311,7 +310,8 @@ multilib_src_configure() {
 		$(use_with xinerama)
 		$(use_with xml)
 		$(use_with xml xslt)
-		--with-d3dadapter --without-xattr
+		$(use_with d3d9 d3dadapter) 
+		--without-xattr
 	)
 
 	local PKG_CONFIG AR RANLIB
