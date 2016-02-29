@@ -1,0 +1,3 @@
+www-client/chromium -gn -gtk3
+www-client/firefox -egl -pgo -qt5
+x11-base/xorg-drivers -input_devices_libinput

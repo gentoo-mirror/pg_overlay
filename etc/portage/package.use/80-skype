@@ -1,0 +1,352 @@
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-libs/libpng abi_x86_32
+# required by x11-libs/libXScrnSaver-1.2.2-r1::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libX11 abi_x86_32
+# required by media-libs/harfbuzz-1.1.3::gentoo[graphite]
+# required by media-libs/freetype-2.6.2-r20151206::pg_overlay[harfbuzz]
+# required by media-libs/fontconfig-2.11.94::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-gfx/graphite2 abi_x86_32
+# required by x11-libs/libSM-1.2.2-r1::gentoo[uuid]
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+sys-apps/util-linux abi_x86_32
+# required by dev-qt/qtcore-4.8.7-r1::gentoo[iconv]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+virtual/libiconv abi_x86_32
+# required by sys-libs/readline-6.3_p8-r2::gentoo
+# required by dev-db/sqlite-3.10.0::gentoo[readline]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+sys-libs/ncurses abi_x86_32
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libXScrnSaver abi_x86_32
+# required by media-sound/pulseaudio-7.1::gentoo
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+dev-libs/json-c abi_x86_32
+# required by media-sound/pulseaudio-7.1::gentoo[dbus]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+sys-apps/dbus abi_x86_32
+# required by virtual/pkgconfig-0-r1::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-util/pkgconfig abi_x86_32
+# required by dev-qt/qtscript-4.8.7::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+virtual/pkgconfig abi_x86_32
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-db/sqlite abi_x86_32
+# required by x11-libs/libxcb-9999::x11
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-libs/libXdmcp abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libXcursor abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-qt/qtcore:4 abi_x86_32
+# required by x11-libs/libXfixes-5.0.1::gentoo
+# required by x11-libs/libXcursor-1.1.14::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-proto/fixesproto abi_x86_32
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-qt/qtxmlpatterns:4 abi_x86_32
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-qt/qtwebkit:4 -exceptions abi_x86_32
+# required by media-libs/libpng-1.6.21::gentoo
+# required by media-libs/freetype-2.6.2-r20151206::pg_overlay[png]
+# required by media-libs/fontconfig-2.11.94::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+sys-libs/zlib abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo[mng]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-libs/libmng abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libXrandr abi_x86_32
+# required by dev-qt/qtcore-4.8.7-r1::gentoo[ssl,-libressl]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-libs/openssl abi_x86_32
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-libs/libXtst abi_x86_32
+# required by x11-libs/libX11-1.6.3::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-proto/xf86bigfontproto abi_x86_32
+# required by media-libs/harfbuzz-1.1.3::gentoo[truetype]
+# required by app-office/libreoffice-5.0.4.2::gentoo
+# required by @selected
+# required by @world (argument)
+media-libs/freetype abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo[xv]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libXv abi_x86_32
+# required by dev-libs/openssl-1.0.2e::gentoo[gmp]
+# required by dev-qt/qtcore-4.8.7-r1::gentoo[ssl,-libressl]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-libs/gmp abi_x86_32
+# required by media-libs/freetype-2.6.2-r20151206::pg_overlay[bzip2]
+# required by media-libs/fontconfig-2.11.94::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+app-arch/bzip2 abi_x86_32
+# required by media-plugins/alsa-plugins-1.1.0::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[alsa,alsa-plugin]
+# required by net-im/skype-4.3.0.37-r5::gentoo[pulseaudio]
+# required by skype (argument)
+media-libs/alsa-lib abi_x86_32
+# required by media-sound/pulseaudio-7.1::gentoo
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+media-libs/libsndfile abi_x86_32
+# required by x11-libs/libXScrnSaver-1.2.2-r1::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-proto/scrnsaverproto abi_x86_32
+# required by x11-libs/libxcb-9999::x11
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-libs/libXau abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo[xv]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-proto/videoproto abi_x86_32
+# required by media-libs/harfbuzz-1.1.3::gentoo[fontconfig]
+# required by media-libs/freetype-2.6.2-r20151206::pg_overlay[harfbuzz]
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-libs/fontconfig abi_x86_32
+# required by media-sound/pulseaudio-7.1::gentoo[alsa,alsa-plugin]
+# required by net-im/skype-4.3.0.37-r5::gentoo[pulseaudio]
+# required by skype (argument)
+media-plugins/alsa-plugins abi_x86_32
+# required by media-libs/libmng-2.0.3::gentoo[lcms]
+# required by dev-qt/qtgui-4.8.7::gentoo[mng]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-libs/lcms abi_x86_32
+# required by dev-db/sqlite-3.10.0::gentoo[readline]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+sys-libs/readline abi_x86_32
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-qt/qtdbus:4 abi_x86_32
+# required by x11-libs/libXrender-0.9.9::gentoo
+# required by x11-libs/libXcursor-1.1.14::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-proto/renderproto abi_x86_32
+# required by x11-libs/libX11-1.6.3::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-libs/libxcb abi_x86_32
+# required by x11-libs/libXtst-1.2.2::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-libs/libXext abi_x86_32
+# required by media-libs/tiff-4.0.6::gentoo[jpeg]
+# required by media-libs/lcms-2.7::gentoo[tiff]
+# required by media-libs/libmng-2.0.3::gentoo[lcms]
+# required by dev-qt/qtgui-4.8.7::gentoo[mng]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+virtual/jpeg:0 abi_x86_32
+# required by x11-libs/libxcb-9999::x11
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-proto/xcb-proto abi_x86_32
+# required by media-libs/fontconfig-2.11.94::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-libs/expat abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-proto/xextproto abi_x86_32
+# required by x11-libs/libXau-1.0.8::gentoo
+# required by x11-libs/libxcb-9999::x11
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-proto/xproto abi_x86_32
+# required by x11-libs/libXtst-1.2.2::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-proto/recordproto abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libICE abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libSM abi_x86_32
+# required by media-libs/freetype-2.6.2-r20151206::pg_overlay[harfbuzz]
+# required by media-libs/fontconfig-2.11.94::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-libs/harfbuzz abi_x86_32
+# required by x11-libs/libXrandr-1.5.0::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-proto/randrproto abi_x86_32
+# required by dev-libs/glib-2.46.2-r1::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[glib]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+virtual/libffi abi_x86_32
+# required by media-libs/tiff-4.0.6::gentoo[lzma]
+# required by media-libs/lcms-2.7::gentoo[tiff]
+# required by media-libs/libmng-2.0.3::gentoo[lcms]
+# required by dev-qt/qtgui-4.8.7::gentoo[mng]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+app-arch/xz-utils abi_x86_32
+# required by x11-libs/libXtst-1.2.2::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-libs/libXi abi_x86_32
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-qt/qtgui:4 accessibility abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo[tiff]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-libs/tiff abi_x86_32
+# required by dev-db/sqlite-3.10.0::gentoo[icu]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-libs/icu abi_x86_32
+# required by x11-libs/libXcursor-1.1.14::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+x11-libs/libXrender abi_x86_32
+# required by virtual/libffi-3.0.13-r1::gentoo
+# required by dev-libs/glib-2.46.2-r1::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[glib]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+dev-libs/libffi abi_x86_32
+# required by x11-libs/libXi-1.7.6::gentoo
+# required by x11-libs/libXtst-1.2.2::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-libs/libXfixes abi_x86_32
+# required by x11-libs/libXi-1.7.6::gentoo
+# required by x11-libs/libXtst-1.2.2::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-proto/inputproto abi_x86_32
+# required by x11-libs/libxcb-9999::x11
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+dev-libs/libpthread-stubs abi_x86_32
+# required by virtual/jpeg-0-r2::gentoo
+# required by media-libs/libmng-2.0.3::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo[mng]
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+media-libs/libjpeg-turbo abi_x86_32
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-qt/qtscript:4 abi_x86_32
+# required by media-libs/harfbuzz-1.1.3::gentoo[glib]
+# required by media-libs/freetype-2.6.2-r20151206::pg_overlay[harfbuzz]
+# required by media-libs/fontconfig-2.11.94::gentoo
+# required by dev-qt/qtgui-4.8.7::gentoo
+# required by dev-qt/qtwebkit-4.8.7::gentoo
+# required by net-im/skype-4.3.0.37-r5::gentoo
+# required by skype (argument)
+dev-libs/glib abi_x86_32
+# required by x11-libs/libX11-1.6.3::gentoo
+# required by media-sound/pulseaudio-7.1::gentoo[X]
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+x11-proto/kbproto abi_x86_32
+# required by media-plugins/alsa-plugins-1.1.0::gentoo[pulseaudio]
+media-sound/pulseaudio abi_x86_32
+# required by dev-libs/glib-2.46.2-r1::gentoo[xattr]
+# required by sys-auth/consolekit-1.0.1::gentoo
+# required by sys-auth/pambase-20150213::gentoo[consolekit]
+# required by sys-libs/pam-1.2.1-r1::gentoo
+# required by virtual/pam-0-r1::gentoo
+# required by kde-plasma/kwallet-pam-5.5.4::gentoo
+# required by @selected
+# required by @world (argument)
+#sys-apps/attr abi_x86_32
+# required by media-sound/pulseaudio-8.0::gentoo[caps]
+# required by media-libs/libcanberra-0.30-r5::gentoo[pulseaudio]
+# required by dev-libs/libgaminggear-0.11.2::pg_overlay
+# required by sys-apps/roccat-tools-3.8.0::pg_overlay
+# required by @selected
+# required by @world (argument)
+#sys-libs/libcap abi_x86_32
+
+

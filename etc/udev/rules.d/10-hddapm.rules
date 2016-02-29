@@ -1,0 +1,9 @@
+ACTION!="add|change", GOTO="hddapm_end"
+
+# Add your disk(s) here, as shown in the examples.
+# You can choose to use other attributes, such as serial number, to select
+# the hard disk to control.
+
+KERNEL=="sdc", ATTRS{model}=="Hitachi HTS54101", RUN+="/sbin/hdparm -B255 /dev/$name"
+
+LABEL="hddapm_end"

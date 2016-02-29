@@ -1,0 +1,32 @@
+app-text/goldendict **
+
+kde-misc/kdeconnect **
+kde-misc/krusader **
+
+media-libs/virglrenderer **
+media-libs/x264 **
+media-plugins/audacious-plugins **
+media-plugins/qmmp-plugin-pack **
+media-sound/audacious **
+media-sound/deadbeef **
+media-sound/qmmp **
+media-sound/rbutil **
+media-video/mpv **
+
+net-p2p/amule* **
+net-p2p/qbittorrent **
+
+sys-apps/bleachbit **
+sys-fs/f2fs-tools **
+sys-fs/xfsprogs **
+
+x11-base/xorg-drivers **
+x11-base/xorg-server **
+x11-drivers/xf86-input-evdev **
+x11-drivers/xf86-input-libinput **
+x11-drivers/xf86-video-intel **
+#x11-libs/libxcb **
+#x11-proto/xcb-proto **
+#x11-proto/xf86vidmodeproto **
+
+x11-themes/qtcurve **

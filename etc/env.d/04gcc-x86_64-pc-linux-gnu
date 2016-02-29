@@ -1,0 +1,5 @@
+PATH="/usr/x86_64-pc-linux-gnu/gcc-bin/5.3.0"
+ROOTPATH="/usr/x86_64-pc-linux-gnu/gcc-bin/5.3.0"
+GCC_SPECS=""
+MANPATH="/usr/share/gcc-data/x86_64-pc-linux-gnu/5.3.0/man"
+INFOPATH="/usr/share/gcc-data/x86_64-pc-linux-gnu/5.3.0/info"

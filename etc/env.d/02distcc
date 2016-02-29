@@ -1,0 +1,10 @@
+# This file is managed by distcc-config; use it to change these settings.
+# DISTCC_LOG and DISTCC_DIR should not be set.
+DISTCC_VERBOSE="0"
+DISTCC_FALLBACK="1"
+DISTCC_SAVE_TEMPS="0"
+DISTCC_TCP_CORK=""
+DISTCC_SSH=""
+UNCACHED_ERR_FD=""
+DISTCC_ENABLE_DISCREPANCY_EMAIL=""
+DCC_EMAILLOG_WHOM_TO_BLAME=""

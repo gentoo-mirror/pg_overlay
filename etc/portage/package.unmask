@@ -1,0 +1,15 @@
+dev-libs/boost
+dev-util/boost-build
+=kde-apps/*-*15*::kde
+kde-misc/kdeconnect
+kde-misc/krusader
+media-video/ffmpeg
+net-libs/libkgapi
+sys-auth/consolekit
+x11-base/xorg-drivers
+x11-base/xorg-server
+x11-drivers/xf86-input-libinput
+x11-drivers/xf86-video-intel
+#x11-libs/libxcb 
+#x11-proto/xcb-proto 
+#x11-proto/xf86vidmodeproto

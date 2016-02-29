@@ -1,0 +1,7 @@
+dev-db/mysql
+dev-util/systemtap
+=*/*-*9999*::kde
+media-video/libav
+sys-apps/systemd
+sys-fs/udev
+www-client/chromium::gentoo
