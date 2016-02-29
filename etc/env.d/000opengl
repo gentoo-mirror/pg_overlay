@@ -1,4 +1,0 @@
-# Configuration file for eselect
-# This file has been automatically generated.
-LDPATH=""
-OPENGL_PROFILE="xorg-x11"

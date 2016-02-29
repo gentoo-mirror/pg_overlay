@@ -1,6 +1,0 @@
-/bin/echo 1 > /sys/block/zram0/compact; \
-/bin/echo 8 > /sys/block/zram0/max_comp_streams; \
-/bin/echo lz4 > /sys/block/zram0/comp_algorithm; \
-/bin/echo 16G > /sys/block/zram0/disksize; \
-/sbin/mkswap /dev/zram0; \
-/sbin/swapon -p100 /dev/zram0

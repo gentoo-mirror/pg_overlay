@@ -1,2 +1,0 @@
-/sbin/swapoff /dev/zram0; \
-/bin/echo 1 > /sys/block/zram0/reset

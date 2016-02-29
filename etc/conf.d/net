@@ -1,3 +1,0 @@
-config_eno1="192.168.88.11/24"
-routes_eno1="default via 192.168.88.1"
-dns_servers_eno1="192.168.88.1"

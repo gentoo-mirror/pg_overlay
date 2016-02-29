@@ -1,1 +1,0 @@
-KERNEL=="uhid", GROUP="roccat", MODE="0660"
