@@ -213,6 +213,7 @@ src_configure() {
 		$(use_enable pulseaudio pulse)
 		$(use_enable jack)
 		$(use_enable openal)
+		--disable-opensles
 		$(use_enable alsa)
 		--disable-coreaudio
 
