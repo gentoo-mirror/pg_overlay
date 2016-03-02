@@ -1,0 +1,12 @@
+--- Makefile.in	2015-08-08 12:17:16.818301634 +0700
++++ Makefile.in.New	2015-08-08 12:17:07.491185072 +0700
+@@ -225,6 +225,9 @@
+ SYMBOL_INDEX_NAME = \
+   $(MOZ_APP_NAME)-$(MOZ_APP_VERSION)-$(OS_TARGET)-$(BUILDID)-$(CPU_ARCH)$(EXTRA_BUILDID)-symbols.txt
+ 
++pgo-profile-run:
++	$(PYTHON) $(topsrcdir)/build/pgo/profileserver.py $(EXTRA_TEST_ARGS)
++  
+ buildsymbols:
+ ifdef MOZ_CRASHREPORTER
+ 	echo building symbol store
