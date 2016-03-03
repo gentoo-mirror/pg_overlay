@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PLOCALES="ast az be bg bs ca cs da de el en_GB eo es eu fi fr gl he hr id it kk ky lt ms my pl pt pt_BR ro ru sk sv th tr ug uk vi zh_CN"
 inherit eutils l10n multilib qmake-utils

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 inherit autotools eutils fdo-mime gnome2-utils qmake-utils systemd user
 
 DESCRIPTION="A Fast, Easy and Free BitTorrent client"

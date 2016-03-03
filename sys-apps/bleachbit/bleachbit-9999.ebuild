@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PLOCALES="ar ast be bg bn bs ca cs da de el en_AU en_GB eo es et eu fa fi fo fr gl he hi hr hu hy ia id it ja ko ku ky lt lv
 ms my nb nds nl nn pl pt_BR pt ro ru se si sk sl sr sv ta te th tr ug uk uz vi zh_CN zh_TW"
