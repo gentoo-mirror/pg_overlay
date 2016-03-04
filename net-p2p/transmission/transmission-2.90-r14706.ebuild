@@ -69,7 +69,9 @@ src_prepare() {
 
 	# 2.90+ -> 2.90
 	sed -i s/2.90+/2.90/g CMakeLists.txt || die
-	sed -i s/TR2900Z/TR2900/g CMakeLists.txt || die
+	sed -i s/TR290Z/TR290/g CMakeLists.txt || die
+        sed -i s/2.90+/2.90/g configure.ac || die
+	sed -i s/TR290Z/TR290/g configure.ac || die
 
 	eapply_user
 	eautoreconf
