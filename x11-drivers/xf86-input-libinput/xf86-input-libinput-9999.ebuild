@@ -8,7 +8,7 @@ inherit linux-info xorg-2
 
 DESCRIPTION="X.org input driver based on libinput"
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=dev-libs/libinput-1.2.0:0="
