@@ -132,7 +132,6 @@ src_configure() {
 		-DUSE_GNOMEHOTKEY=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
-		-DUSE_TWO_PANEL_DIALOG=OFF
 	)
 
 	cmake-utils_src_configure
