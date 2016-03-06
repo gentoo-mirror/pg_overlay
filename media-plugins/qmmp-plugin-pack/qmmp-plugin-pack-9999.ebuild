@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -35,5 +35,3 @@ RDEPEND="media-libs/taglib
 DEPEND="${RDEPEND}
 	dev-lang/yasm
 	dev-qt/linguist-tools:5"
-
-PATCHES=( "${FILESDIR}"/${P}-fix-build.patch )
