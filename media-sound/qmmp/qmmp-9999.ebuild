@@ -27,6 +27,7 @@ libsamplerate lyrics +mad midi mms modplug mplayer mpris musepack notifier opus 
 projectm pulseaudio qsui scrobbler sndfile stereo tray udisks +vorbis wavpack"
 
 RDEPEND="media-libs/taglib
+	dev-qt/qdbusviewer:5
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5
@@ -89,49 +90,49 @@ src_configure() {
 	mycmakeargs=(
 		-DUSE_ALSA="$(usex alsa)"
 		-DUSE_AAC="$(usex aac)"
-		-DUSE_ANALYZER=OFF
-		-DUSE_B2SB=OFF
-		-DUSE_CDDA=OFF
-		-DUSE_CROSSFADE=OFF
+		-DUSE_ANALYZER="$(usex analyzer)"
+		-DUSE_BS2B="$(usex bs2b)"
+		-DUSE_CDA="$(usex cdda)"
+		-DUSE_CROSSFADE="$(usex crossfade)"
 		-DUSE_COVER="$(usex cover)"
 		-DUSE_CUE="$(usex cue)"
 		-DUSE_CURL="$(usex curl)"
 		-DUSE_DBUS="$(usex dbus)"
 		-DUSE_ENCA="$(usex enca)"
-		-DUSE_FFMPEG=OFF
+		-DUSE_FFMPEG="$(usex ffmpeg)"
 		-DUSE_FLAC="$(usex flac)"
-		-DUSE_GME=OFF
+		-DUSE_GME="$(usex game)"
 		-DUSE_HAL=OFF
-		-DUSE_JACK=OFF
-		-DUSE_KDENOTIFY=ON
-		-DUSE_LADSPA=OFF
+		-DUSE_JACK="$(usex jack)"
+		-DUSE_KDENOTIFY="$(usex kde)"
+		-DUSE_LADSPA="$(usex ladspa)"
 		-DUSE_LYRICS="$(usex lyrics)"
-		-DUSE_MAD=OFF
-		-DUSE_MIDI_WILDMIDI=OFF
-		-DUSE_MPLAYER=OFF
-		-DUSE_MMS=OFF
-		-DUSE_MODPLUG=OFF
+		-DUSE_MAD="$(usex mad)"
+		-DUSE_MIDI_WILDMIDI="$(usex midi)"
+		-DUSE_MPLAYER="$(usex mplayer)"
+		-DUSE_MMS="$(usex mms)"
+		-DUSE_MODPLUG="$(usex modplug)"
 		-DUSE_MPRIS="$(usex mpris)"
-		-DUSE_MPC=OFF
+		-DUSE_MPC="$(usex musepack)"
 		-DUSE_NOTIFIER="$(usex notifier)"
-		-DUSE_OPUS=OFF
-		-DUSE_OSS=OFF
-		-DUSE_PROHECTM=OFF
+		-DUSE_OPUS="$(usex opus)"
+		-DUSE_OSS="$(usex oss)"
+		-DUSE_PROJECTM="$(usex projectm)"
 		-DUSE_PULSE="$(usex pulseaudio)"
 		-DUSE_QSUI="$(usex qsui)"
-		-DUSE_SCROBBLER=OFF
-		-DUSE_SNDFILE=OFF
+		-DUSE_SCROBBLER="$(usex scrobbler)"
+		-DUSE_SNDFILE="$(usex sndfile)"
 		-DUSE_STEREO="$(usex stereo)"
 		-DUSE_STATICON="$(usex tray)"
-		-DUSE_UDISKS2=OFF
-		-DUSE_SRC=OFF
-		-DUSE_VORBIS=OFF
+		-DUSE_UDISKS2="$(usex udisks)"
+		-DUSE_SRC="$(usex libsamplerate)"
+		-DUSE_VORBIS="$(usex vorbis)"
 		-DUSE_WAVPACK="$(usex wavpack)"
-		-DUSE_NULL=OFF
-		-DUSE_SOXR=ON
 		-DUSE_GNOMEHOTKEY=OFF
+		-DUSE_NULL=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
+		-DUSE_SOXR=ON
 	)
 
 	cmake-utils_src_configure
