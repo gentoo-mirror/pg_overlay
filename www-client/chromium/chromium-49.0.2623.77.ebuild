@@ -78,7 +78,6 @@ RDEPEND="
 		>=dev-libs/libevent-1.4.13:=
 		dev-libs/libxml2:=[icu]
 		dev-libs/libxslt:=
-		dev-libs/re2:=
 		media-libs/flac:=
 		>=media-libs/harfbuzz-0.9.41:=[icu(+)]
 		>=media-libs/libjpeg-turbo-1.2.0-r1:=
@@ -189,21 +188,20 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}/${PN}-system-ffmpeg-r1.patch"
+	epatch "${FILESDIR}/${PN}-system-ffmpeg-r2.patch"
 	epatch "${FILESDIR}/${PN}-system-jinja-r7.patch"
 	epatch "${FILESDIR}/${PN}-widevine-r1.patch"
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
-	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r0.patch"
-	epatch "${FILESDIR}/${PN}-system-icu-r0.patch"
+	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r1.patch"
 
 	if use vaapi; then
-		epatch "${FILESDIR}/chromium_vaapi.patch"
+		epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
 	fi
 
 	# Inox patches
-	EPATCH_SUFFIX="patch" \
-	EPATCH_FORCE="yes" \
-	epatch "${FILESDIR}/inox"
+	#EPATCH_SUFFIX="patch" \
+	#EPATCH_FORCE="yes" \
+	#epatch "${FILESDIR}/inox"
 
 	epatch_user
 
@@ -213,20 +211,19 @@ src_prepare() {
 	fi
 	if use gn; then
 		conditional_bundled_libraries+="
+			base/third_party/libevent
 			third_party/adobe
 			third_party/ffmpeg
 			third_party/flac
 			third_party/harfbuzz-ng
 			third_party/icu
 			third_party/jinja2
-			third_party/libevent
 			third_party/libjpeg_turbo
 			third_party/libpng
 			third_party/libwebp
 			third_party/libxml
 			third_party/libxslt
 			third_party/markupsafe
-			third_party/re2
 			third_party/snappy
 			third_party/speech-dispatcher
 			third_party/usb_ids
@@ -258,6 +255,8 @@ src_prepare() {
 		'third_party/analytics' \
 		'third_party/angle' \
 		'third_party/angle/src/third_party/compiler' \
+		'third_party/angle/src/third_party/murmurhash' \
+		'third_party/angle/src/third_party/trace_event' \
 		'third_party/boringssl' \
 		'third_party/brotli' \
 		'third_party/cacheinvalidation' \
@@ -320,6 +319,7 @@ src_prepare() {
 		'third_party/polymer' \
 		'third_party/protobuf' \
 		'third_party/qcms' \
+		'third_party/re2' \
 		'third_party/sfntly' \
 		'third_party/skia' \
 		'third_party/smhasher' \
@@ -330,6 +330,7 @@ src_prepare() {
 		'third_party/webdriver' \
 		'third_party/webrtc' \
 		'third_party/widevine' \
+		'third_party/woff2' \
 		'third_party/x86inc' \
 		'third_party/zlib/google' \
 		'url/third_party/mozilla' \
@@ -366,6 +367,7 @@ src_configure() {
 	# TODO: use_system_libvpx (http://crbug.com/494939).
 	# TODO: use_system_opus (https://code.google.com/p/webrtc/issues/detail?id=3077).
 	# TODO: use_system_protobuf (bug #525560).
+	# TODO: use_system_re2 (bug #571156).
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 	myconf_gyp+="
@@ -383,7 +385,6 @@ src_configure() {
 		-Duse_system_libxslt=1
 		-Duse_system_minizip=1
 		-Duse_system_nspr=1
-		-Duse_system_re2=1
 		-Duse_system_snappy=1
 		-Duse_system_speex=1
 		-Duse_system_xdg_utils=1
@@ -461,7 +462,9 @@ src_configure() {
 		-Dhost_clang=0
 		-Dlinux_use_bundled_binutils=0
 		-Dlinux_use_bundled_gold=0
-		-Dlinux_use_gold_flags=0"
+		-Dlinux_use_gold_flags=0
+		-Dsysroot="
+	myconf_gn+=" use_sysroot=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gyp+=" -Dproprietary_codecs=1 -Dffmpeg_branding=${ffmpeg_branding}"
@@ -481,6 +484,9 @@ src_configure() {
 	elif [[ $myarch = x86 ]] ; then
 		target_arch=ia32
 		ffmpeg_target_arch=ia32
+	elif [[ $myarch = arm64 ]] ; then
+		target_arch=arm64
+		ffmpeg_target_arch=arm64
 	elif [[ $myarch = arm ]] ; then
 		target_arch=arm
 		ffmpeg_target_arch=$(usex neon arm-neon arm)
