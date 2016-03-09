@@ -199,9 +199,9 @@ src_prepare() {
 	fi
 
 	# Inox patches
-	#EPATCH_SUFFIX="patch" \
-	#EPATCH_FORCE="yes" \
-	#epatch "${FILESDIR}/inox"
+	EPATCH_SUFFIX="patch" \
+	EPATCH_FORCE="yes" \
+	epatch "${FILESDIR}/inox"
 
 	epatch_user
 
