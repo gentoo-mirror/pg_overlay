@@ -47,6 +47,10 @@ src_prepare() {
 
 	sed -i s/gtk1/gtk3/g configure || die
 	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g configure || die
+	sed -i s/gtk1/gtk3/g m4/wxwin.m4 || die
+	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g m4/wxwin.m4 || die
+	sed -i s/gtk1/gtk3/g autom4te.cache/* || die
+	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g autom4te.cache/* || die
 }
 
 src_configure() {
