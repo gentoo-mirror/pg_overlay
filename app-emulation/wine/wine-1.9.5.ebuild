@@ -17,7 +17,7 @@ SRC_URI="!staging? ( https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2 )
 KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
 
 GV="2.44"
-MV="4.5.6"
+MV="4.6.0"
 STAGING_P="wine-staging-${PV}"
 STAGING_DIR="${WORKDIR}/${STAGING_P}"
 WINE_GENTOO="wine-gentoo-2015.03.07"
