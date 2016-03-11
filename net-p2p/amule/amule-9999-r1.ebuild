@@ -30,8 +30,8 @@ DEPEND=">=dev-libs/crypto++-5
 	upnp? ( >=net-libs/libupnp-1.6.6 )
 	remote? ( >=media-libs/libpng-1.2.0
 	unicode? ( >=media-libs/gd-2.0.26 ) )
-	X? ( >=x11-libs/wxGTK-3.1:3.[X] )
-	!X? ( >=x11-libs/wxGTK-3.1:3.1 )"
+	X? ( >=x11-libs/wxGTK-3.1.0:3.1[X] )
+	!X? ( >=x11-libs/wxGTK-3.1.0:3.1 )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
