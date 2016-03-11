@@ -119,7 +119,7 @@ need-wxwidgets() {
 		die
 	fi
 
-	if [[ ${WX_GTK_VER} != 2.8 && ${WX_GTK_VER} != 2.9 && ${WX_GTK_VER} != 3.0 ]]; then
+	if [[ ${WX_GTK_VER} != 2.9 && ${WX_GTK_VER} != 3.0 && ${WX_GTK_VER} != 3.1 ]]; then
 		eerror "Invalid WX_GTK_VER: ${WX_GTK_VER} - must be set to a valid wxGTK SLOT."
 		echo
 		die
