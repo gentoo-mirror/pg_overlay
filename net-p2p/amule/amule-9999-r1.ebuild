@@ -30,8 +30,8 @@ DEPEND=">=dev-libs/crypto++-5
 	upnp? ( >=net-libs/libupnp-1.6.6 )
 	remote? ( >=media-libs/libpng-1.2.0
 	unicode? ( >=media-libs/gd-2.0.26 ) )
-	X? ( >=x11-libs/wxGTK-3.0:3.0[X] )
-	!X? ( >=x11-libs/wxGTK-3.0:3.0 )"
+	X? ( >=x11-libs/wxGTK-3.1:3.[X] )
+	!X? ( >=x11-libs/wxGTK-3.1:3.1 )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -52,7 +52,7 @@ src_prepare() {
 src_configure() {
 	local myconf
 
-	WX_GTK_VER="3.0"
+	WX_GTK_VER="3.1"
 
 	if use X; then
 		einfo "wxGTK with X support will be used"
