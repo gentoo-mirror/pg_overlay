@@ -81,6 +81,7 @@ multilib_src_configure() {
 	myconf="
 			--enable-cxx11
 			--enable-optimise
+			--enable-compat28
 			--with-zlib=sys
 			--with-expat=sys
 			$(use_with sdl)
