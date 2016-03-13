@@ -54,6 +54,8 @@ REQUIRED_USE="ayatana? ( gtk ) ?? ( qt4 qt5 )"
 
 DOCS="AUTHORS NEWS qt/README.txt"
 
+S=${S}+
+
 src_prepare() {
 	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
 	# Trick to avoid automagic dependency
@@ -64,11 +66,11 @@ src_prepare() {
 	# http://trac.transmissionbt.com/ticket/4324
 	sed -i -e 's|noinst\(_PROGRAMS = $(TESTS)\)|check\1|' libtransmission/Makefile.am || die
 
-	# 2.90+ -> 2.90
-	sed -i s/2.90+/2.90/g CMakeLists.txt || die
-	sed -i s/TR290Z/TR290/g CMakeLists.txt || die
-        sed -i s/2.90+/2.90/g configure.ac || die
-	sed -i s/TR290Z/TR290/g configure.ac || die
+	# 2.92+ -> 2.92
+	sed -i s/2.92+/2.92/g CMakeLists.txt || die
+	sed -i s/TR292Z/TR292/g CMakeLists.txt || die
+	sed -i s/2.92+/2.92/g configure.ac || die
+	sed -i s/TR292Z/TR292/g configure.ac || die
 
 	eapply_user
 	eautoreconf
