@@ -39,13 +39,6 @@ DEPEND="${RDEPEND}
 
 RESTRICT="test"
 
-src_prepare() {
-	default
-	chmod a-x docs/*.rst docs/*.htm* src/*.cpp include/libtorrent/*.hpp || die
-
-	eautoreconf
-}
-
 src_configure() {
 	local boost_py2 boost_py3
 
