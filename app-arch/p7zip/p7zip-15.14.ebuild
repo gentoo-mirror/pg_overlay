@@ -30,7 +30,6 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${PN}_${PV}
 
 src_prepare() {
-
 	if ! use pch; then
 		sed "s:PRE_COMPILED_HEADER=StdAfx.h.gch:PRE_COMPILED_HEADER=:g" -i makefile.* || die
 	fi
