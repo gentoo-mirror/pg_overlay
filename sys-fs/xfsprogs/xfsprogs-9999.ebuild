@@ -30,7 +30,6 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.3.0-sharedlibs.patch
-	"${FILESDIR}"/headers.patch
 )
 
 pkg_setup() {

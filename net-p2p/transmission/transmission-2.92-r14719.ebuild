@@ -76,7 +76,6 @@ src_prepare() {
 	sed -i s/2.92+/2.92/g lib${PN}/version.h || die
 	sed -i s/TR292Z/TR2920/g lib${PN}/version.h || die
 
-	eapply "${FILESDIR}"/xfs.patch
 	eapply_user
 	eautoreconf
 }
