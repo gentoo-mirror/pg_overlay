@@ -36,7 +36,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-4.3.0-sharedlibs.patch
+	eapply "${FILESDIR}"/${PN}-4.3.0-sharedlibs.patch
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
