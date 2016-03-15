@@ -61,6 +61,7 @@ src_prepare() {
 			-e 's|-lblkid|\0 -luuid|' \
 			configure || die
 	fi
+	default
 }
 
 src_configure() {
