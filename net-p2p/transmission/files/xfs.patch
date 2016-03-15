@@ -1,0 +1,66 @@
+diff -Nuar transmission-2.92+/CMakeLists.txt transmission-2.92+new/CMakeLists.txt
+--- transmission-2.92+/CMakeLists.txt	2016-03-15 13:05:18.000000000 +0700
++++ transmission-2.92+new/CMakeLists.txt	2016-03-15 17:20:48.372504682 +0700
+@@ -466,7 +466,8 @@
+     stdbool.h
+     sys/statvfs.h
+     xfs/xfs.h
+-    xlocale.h)
++    xlocale.h
++    xfs/libxfs.h)
+ 
+ if(ENABLE_NLS)
+     list(APPEND NEEDED_HEADERS libintl.h)
+diff -Nuar transmission-2.92+/configure transmission-2.92+new/configure
+--- transmission-2.92+/configure	2016-03-15 13:05:38.000000000 +0700
++++ transmission-2.92+new/configure	2016-03-15 17:20:28.201279143 +0700
+@@ -18500,7 +18500,8 @@
+ 
+ 
+ for ac_header in sys/statvfs.h \
+-                  xfs/xfs.h
++                  xfs/xfs.h \
++                  xfs/libxfs.h
+ do :
+   as_ac_Header=`$as_echo "ac_cv_header_$ac_header" | $as_tr_sh`
+ ac_fn_c_check_header_mongrel "$LINENO" "$ac_header" "$as_ac_Header" "$ac_includes_default"
+diff -Nuar transmission-2.92+/configure.ac transmission-2.92+new/configure.ac
+--- transmission-2.92+/configure.ac	2016-03-15 13:05:12.000000000 +0700
++++ transmission-2.92+new/configure.ac	2016-03-15 17:22:57.049941614 +0700
+@@ -232,7 +232,10 @@
+ 
+ 
+ AC_CHECK_HEADERS([sys/statvfs.h \
+-                  xfs/xfs.h])
++                  xfs/xfs.h \
++                  xfs/libxfs.h])
++#define _GNU_SOURCE
++#include <xfs/libxfs.h>])
+ 
+ 
+ dnl ----------------------------------------------------------------------------
+diff -Nuar transmission-2.92+/libtransmission/file-posix.c transmission-2.92+new/libtransmission/file-posix.c
+--- transmission-2.92+/libtransmission/file-posix.c	2016-03-15 13:05:20.000000000 +0700
++++ transmission-2.92+new/libtransmission/file-posix.c	2016-03-15 17:26:52.748572812 +0700
+@@ -38,7 +38,9 @@
+ #include <unistd.h> /* lseek (), write (), ftruncate (), pread (), pwrite (), pathconf (), etc */
+ 
+ #ifdef HAVE_XFS_XFS_H
++ #define _GNU_SOURCE
+  #include <xfs/xfs.h>
++ #include <xfs/libxfs.h>
+ #endif
+ 
+ #include "transmission.h"
+diff -Nuar transmission-2.92+/libtransmission/platform-quota.c transmission-2.92+new/libtransmission/platform-quota.c
+--- transmission-2.92+/libtransmission/platform-quota.c	2016-03-15 13:05:21.000000000 +0700
++++ transmission-2.92+new/libtransmission/platform-quota.c	2016-03-15 17:34:10.694465722 +0700
+@@ -61,6 +61,8 @@
+ 
+ #ifdef HAVE_XFS_XFS_H
+  #define HAVE_XQM
++ #define _GNU_SOURCE
++ #include <xfs/xfs.h>
+  #include <xfs/xqm.h>
+ #endif
+ 
