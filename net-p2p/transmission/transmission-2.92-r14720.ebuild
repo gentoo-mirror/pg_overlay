@@ -61,10 +61,10 @@ src_prepare() {
 	# Trick to avoid automagic dependency
 	use ayatana || { sed -i -e '/^LIBAPPINDICATOR_MINIMUM/s:=.*:=9999:' configure.ac || die; }
 	# Pass our configuration dir to systemd unit file
-	sed -i '/ExecStart/ s|$| -g /var/lib/transmission/config|' daemon/transmission-daemon.service || die
+	sed -i '/ExecStart/ s|$| -g /var/lib/transmission/config|' daemon/${PN}-daemon.service || die
 
 	# http://trac.transmissionbt.com/ticket/4324
-	sed -i -e 's|noinst\(_PROGRAMS = $(TESTS)\)|check\1|' libtransmission/Makefile.am || die
+	sed -i -e 's|noinst\(_PROGRAMS = $(TESTS)\)|check\1|' lib${PN}/Makefile.am || die
 
 	# 2.92+ -> 2.92
 	sed -i s/2.92+/2.92/g CMakeLists.txt || die
