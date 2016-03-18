@@ -7,7 +7,7 @@ inherit autotools fdo-mime flag-o-matic gnome2-utils qmake-utils systemd user
 
 DESCRIPTION="A Fast, Easy and Free BitTorrent client"
 HOMEPAGE="http://www.transmissionbt.com/"
-SRC_URI="https://build.transmissionbt.com/job/trunk-linux/lastSuccessfulBuild/artifact/${PN}-trunk-${PR}.tar.xz"
+SRC_URI="https://build.${PN}bt.com/job/trunk-linux/lastSuccessfulBuild/artifact/${PN}-trunk-${PR}.tar.xz"
 
 # web/LICENSE is always GPL-2 whereas COPYING allows either GPL-2 or GPL-3 for the rest
 # transmission in licenses/ is for mentioning OpenSSL linking exception
@@ -28,7 +28,7 @@ RDEPEND=">=dev-libs/libevent-2.0.10:=
 		>=x11-libs/gtk+-3.4:3=
 		ayatana? ( >=dev-libs/libappindicator-0.4.90:3= )
 		)
-	systemd? ( sys-apps/systemd:= )
+	systemd? ( >=sys-apps/systemd-209:= )
 	qt4? (
 		dev-qt/qtcore:4
 		dev-qt/qtgui:4
@@ -61,7 +61,7 @@ src_prepare() {
 	# Trick to avoid automagic dependency
 	use ayatana || { sed -i -e '/^LIBAPPINDICATOR_MINIMUM/s:=.*:=9999:' configure.ac || die; }
 	# Pass our configuration dir to systemd unit file
-	sed -i '/ExecStart/ s|$| -g /var/lib/transmission/config|' daemon/${PN}-daemon.service || die
+	sed -i '/ExecStart/ s|$| -g /var/lib/${PN}/config|' daemon/${PN}-daemon.service || die
 
 	# http://trac.transmissionbt.com/ticket/4324
 	sed -i -e 's|noinst\(_PROGRAMS = $(TESTS)\)|check\1|' lib${PN}/Makefile.am || die
