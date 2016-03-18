@@ -40,6 +40,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	epatch "${FILESDIR}"/${PN}-3.1.0-mtu.patch #291907
 	use ipv6 || epatch "${FILESDIR}"/${PN}-4.2.0-no-ipv6.patch #326849
+	use !iptables || epatch "${FILESDIR}"/${P}-no-iptables.patch
 
 	sed -i \
 		-e '/^CC =/d' \
@@ -61,8 +62,6 @@ src_prepare() {
 	sed -i 's:TCPI_OPT_ECN_SEEN:16:' misc/ss.c || die
 
 	use minimal && sed -i -e '/^SUBDIRS=/s:=.*:=lib tc ip:' Makefile
-
-	epatch_user
 }
 
 src_configure() {
