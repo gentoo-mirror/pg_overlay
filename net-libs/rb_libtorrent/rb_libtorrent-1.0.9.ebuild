@@ -64,7 +64,6 @@ src_configure() {
 		$(use_enable python python-binding)
 		$(usex debug "--enable-logging=verbose" "")
 		${boost_py3}
-		${boost_py2}
 	)
 
 	if use python ;then
