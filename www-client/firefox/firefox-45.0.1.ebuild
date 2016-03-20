@@ -259,6 +259,11 @@ src_configure() {
 }
 
 src_compile() {
+	if use kde ; then
+		cp "${FILESDIR}/kde/kde.js-1" \
+		obj-x86_64-unknown-linux-gnu/dist/bin/defaults/pref/kde.js \
+		|| die
+	fi
 	if use pgo; then
 		addpredict /root
 		addpredict /etc/gconf
