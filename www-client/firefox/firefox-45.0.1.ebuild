@@ -39,7 +39,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linu
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test"
+IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde"
 RESTRICT="!bindist? ( bindist )"
 
 # More URIs appended below...
@@ -127,8 +127,11 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
-	eapply "${FILESDIR}/Makefile_in.patch"
+	eapply "${FILESDIR}/pgo.patch"
 	eapply "${FILESDIR}/privacy"
+	if use kde ; then
+		eapply "${FILESDIR}/kde"
+	fi
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
@@ -306,6 +309,12 @@ src_install() {
 		|| die
 	fi
 
+	if use kde ; then
+		cat "${FILESDIR}"/kde/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
+	fi
+    
 	# Set default path to search for dictionaries.
 	echo "pref(\"spellchecker.dictionary_path\", ${DICTPATH});" \
 		>> "${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
