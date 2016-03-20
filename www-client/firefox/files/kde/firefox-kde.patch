@@ -811,6 +811,7 @@ new file mode 100644
 +                      command="Browser:ShowAllBookmarks"
 +                      key="manBookmarkKb"/>
 +            <menuseparator/>
++            <menuseparator id="BMB_pocketSeparator"/>
 +            <menuitem id="BMB_subscribeToPageMenuitem"
 +#ifndef XP_MACOSX
 +                      class="menuitem-iconic subviewbutton"
