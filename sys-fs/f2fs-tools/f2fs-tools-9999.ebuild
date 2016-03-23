@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=5
 
 inherit autotools git-r3 multilib
 
@@ -14,6 +14,10 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE=""
+
+src_prepare() {
+	eautoreconf
+}
 
 src_configure() {
 	#This is required to install to /sbin, bug #481110
