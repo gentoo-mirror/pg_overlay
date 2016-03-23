@@ -194,6 +194,8 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r1.patch"
 
+	epatch "${FILESDIR}/999-gtk2ui.patch"
+
 	if use vaapi; then
 		epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
 	fi
