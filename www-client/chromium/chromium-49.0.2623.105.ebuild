@@ -14,7 +14,7 @@ inherit check-reqs chromium eutils flag-o-matic multilib multiprocessing pax-uti
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
-SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}-lite.tar.xz"
+SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz"
 
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
@@ -198,10 +198,10 @@ src_prepare() {
 		epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
 	fi
 
-	# Inox patches
-	EPATCH_SUFFIX="patch" \
-	EPATCH_FORCE="yes" \
-	epatch "${FILESDIR}/inox"
+	# Iridium patches
+	for i in $(cat "${FILESDIR}/iridium-browser/series"); \
+	do epatch "${FILESDIR}/iridium-browser/$i"; \
+	done
 
 	epatch_user
 
