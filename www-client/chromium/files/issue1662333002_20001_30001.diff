@@ -1,9 +1,9 @@
+Index: chrome/browser/ui/libgtk2ui/gtk2_ui.cc
 diff --git a/chrome/browser/ui/libgtk2ui/gtk2_ui.cc b/chrome/browser/ui/libgtk2ui/gtk2_ui.cc
-index 3b354ce..ff88b6d 100644
+index 3b354ce602afffb903a957419ef832c37b813ef4..ff88b6d725f5c90406fdad60543df71fc0ab45ce 100644
 --- a/chrome/browser/ui/libgtk2ui/gtk2_ui.cc
 +++ b/chrome/browser/ui/libgtk2ui/gtk2_ui.cc
-
-@@ -312,6 +312,10 @@
+@@ -312,6 +312,10 @@ const color_utils::HSL kDefaultTintFrameIncognito = { -1, 0.2f, 0.35f };
  const color_utils::HSL kDefaultTintFrameIncognitoInactive = { -1, 0.3f, 0.6f };
  const color_utils::HSL kDefaultTintBackgroundTab = { -1, 0.5, 0.75 };
  
