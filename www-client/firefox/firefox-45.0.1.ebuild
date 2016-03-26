@@ -128,7 +128,11 @@ src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
 	eapply "${FILESDIR}/pgo.patch"
-	eapply "${FILESDIR}/privacy"
+
+	for i in $(cat "${FILESDIR}/privacy/series"); \
+	do eapply "${FILESDIR}/privacy/$i"; \
+	done
+
 	if use kde ; then
 		eapply "${FILESDIR}/kde"
 	fi
