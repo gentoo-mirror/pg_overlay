@@ -12,8 +12,27 @@ EGIT_REPO_URI="git://github.com/audacious-media-player/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="aac +alsa bs2b cdda +cue +ffmpeg +flac fluidsynth gnome +http gtk3 jack lame +libnotify libsamplerate lirc mms mp3 +nls +pulseaudio +qt5 scrobbler sdl sid sndfile vorbis +wavpack"
-REQUIRED_USE="|| ( alsa flac lame jack pulseaudio qt5 sdl )"
+IUSE="aac adplug alsa bs2b cdda +cue ffmpeg +flac fluidsynth http jack lame libnotify libsamplerate lirc mms mp3 nls +pulseaudio +qt5 scrobbler sdl sid sndfile vorbis +wavpack"
+REQUIRED_USE="
+	^^ ( qt5 )
+"
+# The following plugins REQUIRE a GUI build of audacious, because non-GUI
+# builds do NOT install the libaudgui library & headers.
+# Plugins without a configure option:
+#   alarm
+#   albumart
+#   delete-files
+#   ladspa
+#   playlist-manager
+#   search-tool
+#   skins
+#   vtx
+# Plugins with a configure option:
+#   glspectrum
+#   gtkui
+#   hotkey
+#   notify
+#   statusicon
 
 RDEPEND="app-arch/unzip
 	>=dev-libs/dbus-glib-0.60
@@ -30,11 +49,11 @@ RDEPEND="app-arch/unzip
 	flac? ( >=media-libs/flac-1.2.1-r1 )
 	fluidsynth? ( media-sound/fluidsynth )
 	http? ( >=net-libs/neon-0.26.4 )
-	gtk3? ( x11-libs/gtk+:3 )
 	qt5? ( dev-qt/qtcore:5
-	      dev-qt/qtgui:5
-	      dev-qt/qtmultimedia:5
-	      dev-qt/qtwidgets:5 )
+		   dev-qt/qtgui:5
+		   dev-qt/qtmultimedia:5
+		   dev-qt/qtwidgets:5
+		   ~media-sound/audacious-${PV}[qt5?] )
 	jack? ( >=media-libs/bio2jack-0.4
 		media-sound/jack-audio-connection-kit )
 	lame? ( media-sound/lame )
@@ -78,6 +97,9 @@ src_prepare() {
 
 src_configure() {
 	mp3_warning
+	if use qt5 ;then
+		notify="--disable-notify"
+	fi
 
 	if use ffmpeg && has_version media-video/ffmpeg ; then
 		ffmpeg="--with-ffmpeg=ffmpeg"
@@ -89,8 +111,11 @@ src_configure() {
 
 	econf \
 		${ffmpeg} \
+		${notify} \
 		--disable-modplug \
+		--enable-statusicon \
 		--enable-soxr \
+		$(use_enable adplug) \
 		$(use_enable aac) \
 		$(use_enable alsa) \
 		$(use_enable bs2b) \

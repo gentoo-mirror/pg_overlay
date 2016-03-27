@@ -14,7 +14,10 @@ LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="+nls gtk3 +qt5"
+IUSE="+chardet nls qt5"
+REQUIRED_USE="
+	^^ ( qt5 )
+"
 DOCS="AUTHORS"
 
 RDEPEND=">=dev-libs/dbus-glib-0.60
@@ -22,7 +25,7 @@ RDEPEND=">=dev-libs/dbus-glib-0.60
 	>=x11-libs/cairo-1.2.6
 	>=x11-libs/pango-1.8.0
 	virtual/freedesktop-icon-theme
-	gtk3? ( x11-libs/gtk+:3 )
+	chardet? ( >=app-i18n/libguess-1.2 )
 	qt5? ( dev-qt/qtcore:5
 	      dev-qt/qtgui:5
 	      dev-qt/qtwidgets:5 )"
@@ -48,11 +51,10 @@ src_configure() {
 	# Bugs #197894, #199069, #207330, #208606
 	econf \
 		--enable-dbus \
+		$(use_enable chardet) \
 		$(use_enable nls) \
 		$(use_enable qt5 qt) --disable-gtk
 }
-
-
 
 src_install() {
 	default
