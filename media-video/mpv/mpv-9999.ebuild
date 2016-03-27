@@ -36,6 +36,7 @@ IUSE="aqua +alsa archive bluray cdda +cli coreaudio doc drm dvb +dvd +egl +enca
 
 REQUIRED_USE="
 	|| ( cli libmpv )
+	aqua? ( opengl )
 	egl? ( || ( gbm X wayland ) )
 	enca? ( iconv )
 	gbm? ( drm egl )
@@ -87,7 +88,7 @@ COMMON_DEPEND="
 		luajit? ( dev-lang/luajit:2 )
 	)
 	openal? ( >=media-libs/openal-1.13 )
-	opengl? ( virtual/opengl )
+	opengl? ( !aqua? ( virtual/opengl ) )
 	pulseaudio? ( media-sound/pulseaudio )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
 	samba? ( net-fs/samba )
@@ -139,7 +140,7 @@ src_configure() {
 		--confdir="${EPREFIX}"/etc/${PN}
 		--docdir="${EPREFIX}"/usr/share/doc/${PF}
 
-		--disable-gpl3		# Unclear license info. See Gentoo bug 571728.
+		--disable-gpl3			# Unclear license info. See Gentoo bug 571728.
 
 		$(usex cli '' '--disable-cplayer')
 		$(use_enable libmpv libmpv-shared)
@@ -147,7 +148,7 @@ src_configure() {
 		# See deep down below for build-date
 		--disable-libmpv-static
 		--disable-static-build
-		#--disable-optimize	# Do not add '-O2' to CFLAGS
+		--disable-optimize		# Do not add '-O2' to CFLAGS
 		--disable-debug-build	# Do not add '-g' to CFLAGS
 
 		$(use_enable doc html-build)
@@ -216,7 +217,7 @@ src_configure() {
 		$(use_enable jpeg)
 		--disable-android
 		$(use_enable raspberry-pi rpi)
-		$(use_enable opengl standard-gl)
+		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 
 		# HWaccels
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
@@ -230,8 +231,8 @@ src_configure() {
 		$(use_enable v4l audio-input)
 		$(use_enable dvb dvbin)
 
-		# OS-specific features
-		--disable-apple-remote
+		# Miscellaneous features
+		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
 	)
 
 	if use vaapi && use X; then
