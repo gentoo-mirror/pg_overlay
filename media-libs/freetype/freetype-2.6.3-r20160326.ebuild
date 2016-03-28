@@ -64,7 +64,8 @@ src_prepare() {
 	default
 
 	if use infinality; then
-		eapply  "${FILESDIR}"/02-infinality-${PV}.patch
+		eapply "${FILESDIR}"/02-upstream-2016.03.26.patch
+		eapply "${FILESDIR}"/03-infinality-2.6.3-2016.03.26.patch
 		# FT_CONFIG_OPTION_SUBPIXEL_RENDERING is already enabled in freetype-2.4.11
 		enable_option TT_CONFIG_OPTION_SUBPIXEL_HINTING
 	fi
