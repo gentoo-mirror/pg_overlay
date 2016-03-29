@@ -27,10 +27,7 @@ DEPEND="${RDEPEND}
 PDEPEND="!x86-winnt? ( app-eselect/eselect-fontconfig )
 	virtual/ttf-fonts"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-2.10.2-docbook.patch # 310157
-	"${FILESDIR}"/${PN}-2.11.93-latin-update.patch # 130466 + make liberation default
-)
+PATCHES=( "${FILESDIR}"/${PN}-2.11.93-latin-update.patch ) # 130466 + make liberation default
 
 MULTILIB_CHOST_TOOLS=( /usr/bin/fc-cache )
 
@@ -73,7 +70,7 @@ src_configure() {
 
 	local myeconfargs=(
 		$(use_enable doc docbook)
-		--enable-docs
+		--disable-docs
 		--localstatedir="${EPREFIX}"/var
 		--with-default-fonts="${EPREFIX}"/usr/share/fonts
 		--with-add-fonts="${EPREFIX}/usr/local/share/fonts${addfonts}" \
