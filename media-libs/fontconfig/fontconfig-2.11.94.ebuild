@@ -41,10 +41,10 @@ pkg_setup() {
 src_prepare() {
 	cp -r "${FILESDIR}"/iu/conf.d.infinality ${S}
 
+	epatch "${FILESDIR}"/iu/0*.patch
 	epatch "${FILESDIR}"/${PN}-2.10.2-docbook.patch
 	epatch "${FILESDIR}"/${PN}-2.11.93-latin-update.patch
-	epatch "${FILESDIR}"/iu/0*.patch
-	
+
 	eautomake
 }
 
