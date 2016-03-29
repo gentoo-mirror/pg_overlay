@@ -4,7 +4,7 @@
 
 EAPI=5
 AUTOTOOLS_AUTORECONF=yes
-inherit eutils readme.gentoo autotools-multilib
+inherit eutils readme.gentoo-r1 autotools-multilib
 
 DESCRIPTION="A library for configuring and customizing font access"
 HOMEPAGE="http://fontconfig.org/"
