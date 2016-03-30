@@ -27,7 +27,15 @@ DEPEND="${RDEPEND}
 PDEPEND="!x86-winnt? ( app-eselect/eselect-fontconfig )
 	virtual/ttf-fonts"
 
-PATCHES=( "${FILESDIR}"/${PN}-2.11.93-latin-update.patch ) # 130466 + make liberation default
+PATCHES=(
+	"${FILESDIR}"/${PN}-2.10.2-docbook.patch # 310157
+	"${FILESDIR}"/${PN}-2.11.93-latin-update.patch # 130466 + make liberation default
+	"${FILESDIR}"/iu/01-configure.patch
+	"${FILESDIR}"/iu/02-configure.ac.patch
+	"${FILESDIR}"/iu/03-Makefile.in.patch
+	"${FILESDIR}"/iu/04-Makefile.conf.d.patch
+	"${FILESDIR}"/iu/05-Makefile.am.in.patch
+)
 
 MULTILIB_CHOST_TOOLS=( /usr/bin/fc-cache )
 
@@ -41,9 +49,14 @@ pkg_setup() {
 src_prepare() {
 	cp -r "${FILESDIR}"/iu/conf.d.infinality ${S}
 
-	epatch "${FILESDIR}"/iu/0*.patch
 	epatch "${FILESDIR}"/${PN}-2.10.2-docbook.patch
 	epatch "${FILESDIR}"/${PN}-2.11.93-latin-update.patch
+
+	epatch "${FILESDIR}"/iu/01-configure.patch
+	epatch "${FILESDIR}"/iu/02-configure.ac.patch
+	epatch "${FILESDIR}"/iu/03-Makefile.in.patch
+	epatch "${FILESDIR}"/iu/04-Makefile.conf.d.patch
+	epatch "${FILESDIR}"/iu/05-Makefile.am.in.patch
 
 	eautomake
 }
