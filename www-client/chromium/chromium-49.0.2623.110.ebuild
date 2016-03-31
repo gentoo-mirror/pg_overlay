@@ -205,6 +205,11 @@ src_prepare() {
 	do epatch "${FILESDIR}/iridium-browser/$i"; \
 	done
 
+	# Inox patches
+	#for i in $(cat "${FILESDIR}/inox-patchset/series"); \
+	#do epatch "${FILESDIR}/inox-patchset/$i"; \
+	#done    
+
 	epatch_user
 
 	local conditional_bundled_libraries=""
