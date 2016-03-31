@@ -11,10 +11,10 @@ EGIT_REPO_URI="git://github.com/audacious-media-player/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE="aac adplug alsa bs2b cdda +cue ffmpeg +flac fluidsynth http jack lame libnotify libsamplerate lirc mms mp3 nls +pulseaudio +qt5 scrobbler sdl sid sndfile vorbis +wavpack"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux"
+IUSE="aac adplug alsa bs2b cdda +cue ffmpeg +flac fluidsynth gnome http gtk gtk3 jack lame +libnotify libsamplerate lirc mms mp3 nls +pulseaudio +qt5 scrobbler sdl sid sndfile vorbis +wavpack"
 REQUIRED_USE="
-	^^ ( qt5 )
+	^^ ( gtk gtk3 qt5 )
 "
 # The following plugins REQUIRE a GUI build of audacious, because non-GUI
 # builds do NOT install the libaudgui library & headers.
@@ -115,6 +115,7 @@ src_configure() {
 		--disable-modplug \
 		--enable-statusicon \
 		--enable-soxr \
+		--disable-gtl \
 		$(use_enable adplug) \
 		$(use_enable aac) \
 		$(use_enable alsa) \
