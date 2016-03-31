@@ -128,11 +128,14 @@ src_configure() {
 		-DUSE_SRC="$(usex libsamplerate)"
 		-DUSE_VORBIS="$(usex vorbis)"
 		-DUSE_WAVPACK="$(usex wavpack)"
+		-DUSE_QTMULTIMEDIA=OFF
 		-DUSE_GNOMEHOTKEY=OFF
 		-DUSE_NULL=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
 		-DUSE_SOXR=ON
+		-DUSE_QMMP_DIALOG=OFF
+		-DUSE_SKINNED=OFF
 	)
 
 	cmake-utils_src_configure
