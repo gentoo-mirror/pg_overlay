@@ -216,8 +216,8 @@ src_prepare() {
 	
 	# Ungoogled Chromium patches
 	if use ungoogled; then
-		"${FILESDIR}"/ungoogled-chromium/domain_patcher.sh
 		"${FILESDIR}"/ungoogled-chromium/source_cleaner.sh
+		"${FILESDIR}"/ungoogled-chromium/domain_patcher.sh
 		for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
 		do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
 		done
