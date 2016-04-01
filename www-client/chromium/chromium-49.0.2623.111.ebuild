@@ -19,7 +19,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
 KEYWORDS="amd64 ~arm x86"
-IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi"
+IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine inox +iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 REQUIRED_USE="gn? ( kerberos !system-ffmpeg )"
@@ -194,27 +194,34 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r1.patch"
 
-	epatch "${FILESDIR}/issue1662333002_20001_30001.diff"
+	epatch "${FILESDIR}/issue1662333002_20001_30001.diff" # gtk3 bug
 
 	if use vaapi; then
 		epatch "${FILESDIR}/chromium_vaapi.patch"
 	fi
 
-	# Iridium patches
-	for i in $(cat "${FILESDIR}/iridium-browser/series"); \
-	do epatch "${FILESDIR}/iridium-browser/$i"; \
-	done
-
 	# Inox patches
-	#for i in $(cat "${FILESDIR}/inox-patchset/series"); \
-	#do epatch "${FILESDIR}/inox-patchset/$i"; \
-	#done  
+	if use inox; then
+		for i in $(cat "${FILESDIR}/inox-patchset/series"); \
+		do epatch "${FILESDIR}/inox-patchset/$i"; \
+		done
+	fi
 
+	# Iridium patches
+	if use iridium; then
+		for i in $(cat "${FILESDIR}/iridium-browser/series"); \
+		do epatch "${FILESDIR}/iridium-browser/$i"; \
+		done
+	fi
+	
 	# Ungoogled Chromium patches
-	#"${FILESDIR}"/ungoogled-chromium/domain_patcher.sh
-	#for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
-	#do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
-	#done
+	if use ungoogled; then
+		"${FILESDIR}"/ungoogled-chromium/domain_patcher.sh
+		"${FILESDIR}"/ungoogled-chromium/source_cleaner.sh
+		for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
+		do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
+		done
+	fi
 
 	epatch_user
 
@@ -417,7 +424,10 @@ src_configure() {
 		-Denable_print_preview=0
 		-Dtracing_like_official_build=1
 		-Dfieldtrial_testing_like_official_build=1
-		-Dfastbuild=2"
+		-Dfastbuild=2
+		-Dsafe_browsing=0
+		-Dremoting=0
+		-Denable_prod_wallet_service=0"
 
 	# Needed for system icu - we don't need additional data files.
 	myconf_gyp+=" -Dicu_use_data_file_flag=0"
