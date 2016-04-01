@@ -200,15 +200,11 @@ src_prepare() {
 		epatch "${FILESDIR}/chromium_vaapi.patch"
 	fi
 
-	# Iridium patches
-	for i in $(cat "${FILESDIR}/iridium-browser/series"); \
-	do epatch "${FILESDIR}/iridium-browser/$i"; \
+	# Ungoogled Chromium patches
+	sh "${FILESDIR}"/ungoogled-chromium/domain_patcher.sh
+	for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
+	do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
 	done
-
-	# Inox patches
-	#for i in $(cat "${FILESDIR}/inox-patchset/series"); \
-	#do epatch "${FILESDIR}/inox-patchset/$i"; \
-	#done    
 
 	epatch_user
 

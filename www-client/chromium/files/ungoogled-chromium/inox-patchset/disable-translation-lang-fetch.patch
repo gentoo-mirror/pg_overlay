@@ -1,0 +1,21 @@
+--- ./chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc
++++ ./chrome/browser/spellchecker/spellcheck_hunspell_dictionary.cc.new
+@@ -148,7 +148,6 @@
+     return;
+   }
+   request_context_getter_ = request_context_getter;
+-  DownloadDictionary(GetDictionaryURL());
+ }
+ 
+ bool SpellcheckHunspellDictionary::IsReady() const {
+@@ -341,9 +340,6 @@
+     }
+ 
+     if (request_context_getter_) {
+-      // Download from the UI thread to check that |request_context_getter_| is
+-      // still valid.
+-      DownloadDictionary(GetDictionaryURL());
+       return;
+     }
+   }
+

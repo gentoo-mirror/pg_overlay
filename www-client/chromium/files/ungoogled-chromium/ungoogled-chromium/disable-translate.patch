@@ -1,0 +1,56 @@
+# Disables browser translation
+
+--- a/components/translate/core/browser/translate_manager.cc
++++ b/components/translate/core/browser/translate_manager.cc
+@@ -88,6 +88,7 @@ base::WeakPtr<TranslateManager> TranslateManager::GetWeakPtr() {
+ }
+ 
+ void TranslateManager::InitiateTranslation(const std::string& page_lang) {
++  return;
+   // Short-circuit out if not in a state where initiating translation makes
+   // sense (this method may be called muhtiple times for a given page).
+   if (!language_state_.page_needs_translation() ||
+--- a/components/translate/content/renderer/translate_helper.cc
++++ b/components/translate/content/renderer/translate_helper.cc
+@@ -83,6 +83,7 @@ scoped_ptr<translate::RendererCldDataProvider> CreateDataProvider(
+ // should not be translated.
+ // TODO(dglazkov): This logic should be moved into Blink.
+ bool HasNoTranslateMeta(WebDocument* document) {
++  return false;
+   WebElement head = document->head();
+   if (head.isNull() || !head.hasChildNodes())
+     return false;
+@@ -140,7 +140,10 @@ TranslateHelper::TranslateHelper(content::RenderFrame* render_frame,
+       world_id_(world_id),
+       extension_group_(extension_group),
+       extension_scheme_(extension_scheme),
+-      weak_method_factory_(this) {}
++      weak_method_factory_(this) {
++  CancelPendingTranslation();
++  CancelCldDataPolling();
++}
+
+ TranslateHelper::~TranslateHelper() {
+   CancelPendingTranslation();
+@@ -391,6 +394,7 @@ void TranslateHelper::OnTranslatePage(int page_seq_no,
+                                       const std::string& translate_script,
+                                       const std::string& source_lang,
+                                       const std::string& target_lang) {
++  return;
+   WebLocalFrame* main_frame = render_frame()->GetWebFrame();
+   if (!main_frame || page_seq_no_ != page_seq_no)
+     return;  // We navigated away, nothing to do.
+--- a/components/translate/core/browser/translate_script.cc
++++ b/components/translate/core/browser/translate_script.cc
+@@ -132,9 +132,8 @@ void TranslateScript::OnScriptFetchComplete(
+     data_ = base::StringPrintf("var translateApiKey = '%s';\n",
+                                google_apis::GetAPIKey().c_str());
+ 
+-    GURL security_origin = translate::GetTranslateSecurityOrigin();
+     base::StringAppendF(
+-        &data_, "var securityOrigin = '%s';", security_origin.spec().c_str());
++        &data_, "var securityOrigin = '';");
+ 
+     // Append embedded translate.js and a remote element library.
+     base::StringPiece str = ResourceBundle::GetSharedInstance().
+
