@@ -431,6 +431,7 @@ src_configure() {
 		-Denable_prod_wallet_service=0"
 
 	myconf_gn+=" is_desktop_linux=false"
+	myconf_gn+=" use_gio=false"
 
 
 	# Needed for system icu - we don't need additional data files.
