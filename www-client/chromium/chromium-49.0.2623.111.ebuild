@@ -437,6 +437,7 @@ src_configure() {
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" use_gconf=false"
+	myconf_gn+=" is_linux=true"
 	myconf_gn+=" is_desktop_linux=false"
 
 
