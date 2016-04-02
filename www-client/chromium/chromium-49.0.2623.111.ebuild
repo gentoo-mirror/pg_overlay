@@ -430,7 +430,8 @@ src_configure() {
 		-Dfastbuild=2
 		-Denable_prod_wallet_service=0"
 
-	myconf_gn+=" enable_nacl=false
+	myconf_gn+=" 
+		enable_nacl=false
 		enable_google_now=false
 		enable_rlz=false
 		enable_webrtc=true
