@@ -414,8 +414,8 @@ src_configure() {
 		-Duse_system_zlib=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
-		-Denable_remoting=0
-		-Dsafe_browsing_mode=0
+		-Dremoting=0
+		-Dsafe_browsing=0
 		-Denable_rlz=0
 		-Denable_hangout_services_extension=1
 		-Dbranding=Chromium
@@ -428,8 +428,6 @@ src_configure() {
 		-Dtracing_like_official_build=1
 		-Dfieldtrial_testing_like_official_build=1
 		-Dfastbuild=2
-		-Dsafe_browsing=0
-		-Dremoting=0
 		-Denable_prod_wallet_service=0"
 
 	# Needed for system icu - we don't need additional data files.
