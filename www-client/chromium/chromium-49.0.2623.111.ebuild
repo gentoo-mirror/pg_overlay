@@ -430,6 +430,14 @@ src_configure() {
 		-Dfastbuild=2
 		-Denable_prod_wallet_service=0"
 
+	myconf_gn+=" enable_nacl=false
+		enable_google_now=false
+		enable_rlz=false
+		enable_webrtc=true
+		enable_remoting=false
+		safe_browsing_mode=0
+		is_desktop_linux=false"
+
 	# Needed for system icu - we don't need additional data files.
 	myconf_gyp+=" -Dicu_use_data_file_flag=0"
 
