@@ -437,6 +437,7 @@ src_configure() {
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" is_desktop_linux=false"
+	myconf_gn+=" use_gconf=false"
 
 	# Needed for system icu - we don't need additional data files.
 	myconf_gyp+=" -Dicu_use_data_file_flag=0"
