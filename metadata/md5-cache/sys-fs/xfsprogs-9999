@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install prepare setup unpack
+DEPEND=!static? ( >=sys-apps/util-linux-2.17.2 readline? ( sys-libs/readline:0= ) !readline? ( libedit? ( dev-libs/libedit ) ) ) !<sys-fs/xfsdump-3 static? ( >=sys-apps/util-linux-2.17.2[static-libs(+)] readline? ( sys-libs/readline:0=[static-libs(+)] ) !readline? ( libedit? ( dev-libs/libedit[static-libs(+)] ) ) readline? ( sys-libs/ncurses:0=[static-libs] ) ) nls? ( sys-devel/gettext ) >=dev-vcs/git-1.8.2.1
+DESCRIPTION=xfs filesystem utilities
+EAPI=5
+HOMEPAGE=http://oss.sgi.com/projects/xfs/
+IUSE=libedit nls readline static static-libs
+LICENSE=LGPL-2.1
+RDEPEND=!static? ( >=sys-apps/util-linux-2.17.2 readline? ( sys-libs/readline:0= ) !readline? ( libedit? ( dev-libs/libedit ) ) ) !<sys-fs/xfsdump-3
+REQUIRED_USE=static? ( static-libs )
+SLOT=0
+_eclass_exported_funcs=pkg_setup:- src_unpack:git-r3 src_prepare:- src_configure:- src_install:-
+_eclasses_=bash-completion-r1	acf715fa09463f043fbfdc1640f3fb85	eutils	9d81603248f2ba3ec59124320d123e5e	git-r3	ef66dfc3db09f327af21cf32f140fb2b	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	d513d423d449877e49d99af3f7af7acb
+_md5_=1c831d1f94f82f2c84996a9849513e44

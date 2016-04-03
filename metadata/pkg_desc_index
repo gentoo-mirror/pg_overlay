@@ -1,0 +1,50 @@
+app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
+app-arch/p7zip 15.14: Port of 7-Zip archiver for Unix
+app-emulation/wine 1.9.6: Free implementation of Windows(tm) on Unix
+app-pda/libimobiledevice 1.2.0: Support library to communicate with Apple iPhone/iPod Touch devices
+app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
+app-pda/usbmuxd 1.1.0: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
+app-text/goldendict 9999: Feature-rich dictionary lookup program
+app-text/qpdfview 0.4.16: A tabbed document viewer
+dev-python/nemo-python 2.8.0: Python bindings for the Nautilus file manager
+dev-util/gperf 3.0.4: A perfect hash function generator
+gnome-extra/cinnamon 2.8.6: A fork of GNOME Shell with layout similar to GNOME 2
+gnome-extra/cinnamon-control-center 2.8.1: Cinnamons's main interface to configure various aspects of the desktop
+gnome-extra/cinnamon-screensaver 2.8.0: Screensaver for Cinnamon
+gnome-extra/cinnamon-session 2.8.2: Cinnamon session manager
+gnome-extra/cinnamon-settings-daemon 2.8.3: Cinnamon's settings daemon
+gnome-extra/nemo 2.8.6: A file manager for Cinnamon, forked from Nautilus
+gnome-extra/nemo-compare 2.8.0: Nemo-Compare Extension
+gnome-extra/nemo-extensions 2.8: Extensions for Cinnamon's file-manager Nemo
+gnome-extra/nemo-fileroller 2.8.0: Provides context menu for Nemo
+gnome-extra/nemo-terminal 2.8.1: Nemo-Terminal Extension
+media-libs/fontconfig 2.11.94: A library for configuring and customizing font access
+media-libs/fontconfig-ultimate 2015.12.06: A set of font rendering and replacement rules for fontconfig-infinality
+media-libs/freetype 2.6.3-r20160326: A high-quality and portable font engine
+media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
+media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
+media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
+media-sound/deadbeef 9999: foobar2k-like music player
+media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
+media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
+media-video/mpv 9999: Media player based on MPlayer and mplayer2
+net-im/psi 9999: Qt5 Jabber client, with Licq-like interface
+net-libs/rb_libtorrent 1.0.9: C++ BitTorrent implementation focusing on efficiency and scalability
+net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client
+net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
+net-p2p/transmission 2.92-r14720: A Fast, Easy and Free BitTorrent client
+sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
+sys-apps/iproute2 4.5.0: kernel routing and traffic control utilities
+sys-devel/qconf 9999: Qt ./configure generation util
+sys-fs/android-file-transfer 2.4: Reliable MTP client with minimalistic UI
+sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
+sys-fs/xfsprogs 9999: xfs filesystem utilities
+www-apps/baikal 0.4.0: Lightweight CalDAV+CardDAV server
+www-client/chromium 47.0.2526.111 48.0.2564.116 49.0.2623.110 49.0.2623.111: Open-source version of Google Chrome web browser
+www-client/firefox 43.0.4 45.0 45.0.1: Firefox Web Browser
+x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
+x11-libs/cairo 1.14.6-r20150311: A vector graphics library with cross-device output support
+x11-libs/wxGTK 3.0.2.0-r2 3.1.0: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
+x11-terms/tilda 9999: A drop down terminal, similar to the consoles found in first person shooters
+x11-themes/greybird 1.6.2: The default theme from Xubuntu
+x11-themes/qtcurve 9999: A set of widget styles for Qt and GTK2

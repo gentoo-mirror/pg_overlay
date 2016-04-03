@@ -1,0 +1,187 @@
+# This file is deprecated as per GLEP 56 in favor of metadata.xml.
+# Please add your descriptions to your package's metadata.xml ONLY.
+# * generated automatically using pmaint *
+
+app-arch/p7zip:rar - Enable support for non-free rar decoder
+app-emulation/wine:capi - Enable ISDN support via CAPI
+app-emulation/wine:custom-cflags - Bypass strip-flags; use at your own peril
+app-emulation/wine:dos - Pull in games-emulation/dosbox to run DOS applications
+app-emulation/wine:gecko - Add support for the Gecko engine when using iexplore
+app-emulation/wine:gstreamer - Use media-libs/gstreamer to provide DirectShow functionality; For versions before wine-1.9.2, uses experimental patch which may break some apps
+app-emulation/wine:mono - Add support for .NET using Wine's Mono add-on
+app-emulation/wine:netapi - Use libnetapi from net-fs/samba to support Windows networks in netapi32.dll
+app-emulation/wine:opencl - Enable OpenCL support
+app-emulation/wine:osmesa - Add support for OpenGL in bitmaps using libOSMesa
+app-emulation/wine:pcap - Support packet capture software (e.g. wireshark)
+app-emulation/wine:perl - Install helpers written in perl (winedump/winemaker)
+app-emulation/wine:pipelight - Apply Wine-Staging patches for Pipelight/Silverlight support
+app-emulation/wine:prelink - Run prelink on DLLs during build; For versions before wine-1.7.55 or hardened, do not disable if you do not know what this means as it can break things at runtime
+app-emulation/wine:realtime - Pull in sys-auth/rtkit for low-latency pulseaudio support
+app-emulation/wine:run-exes - Use Wine to open and run .EXE and .MSI files
+app-emulation/wine:s3tc - Pull in media-libs/libtxc_dxtn for DXTn texture compression, needed for many games
+app-emulation/wine:samba - Add support for NTLM auth. see http://wiki.winehq.org/NtlmAuthSetupGuide and http://wiki.winehq.org/NtlmSigningAndSealing
+app-emulation/wine:staging - Apply Wine-Staging patches for advanced feature support that haven't made it into upstream Wine yet For versions before wine-1.8, this patchset is unofficial.
+app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
+app-text/qpdfview:synctex - Add support for searching TeX sources
+gnome-extra/cinnamon-control-center:colord - Support color management using x11-misc/colord
+gnome-extra/cinnamon-settings-daemon:colord - Support color management using x11-misc/colord
+gnome-extra/nemo:l10n - Pull in gnome-extra/cinnamon-translations for localization support
+gnome-extra/nemo:packagekit - Use packagekit to search for programs to open unknown file types
+gnome-extra/nemo:tracker - Add support for app-misc/tracker search
+media-libs/freetype:adobe-cff - Use Adobe CFF as default font-renderer
+media-libs/freetype:auto-hinter - Use the unpatented auto-hinter instead of the (recommended) TrueType bytecode interpreter
+media-libs/freetype:bindist - Disable ClearType support (see http://freetype.org/patents.html)
+media-libs/freetype:bzip2 - Support bzip2 compressed PCF fonts.
+media-libs/freetype:fontforge - Install internal headers required for TrueType debugger in media-gfx/fontforge (built with USE=truetype-debugger)
+media-libs/freetype:harfbuzz - Use media-libs/harfbuzz for auto-hinting OpenType fonts. WARNING: may trigger circular dependencies!
+media-libs/freetype:infinality - Enable infinality options for improved LCD filtering
+media-libs/freetype:utils - Install utilities and examples from ft2demos
+media-plugins/audacious-plugins:adplug - Build with AdPlug (Adlib sound card emulation) support
+media-plugins/audacious-plugins:bs2b - Enable Bauer Bauer stereophonic-to-binaural headphone filter
+media-plugins/audacious-plugins:cue - Support CUE sheets using the libcue library
+media-plugins/audacious-plugins:fluidsynth - Support FluidSynth as MIDI synth backend
+media-plugins/audacious-plugins:gtk3 - Link against version 3 of the GIMP Toolkit instead of version 2 (x11-libs/gtk+)
+media-plugins/audacious-plugins:http - Support HTTP streams through neon
+media-plugins/audacious-plugins:midi - Build with amidi-plug (MIDI synth) support
+media-plugins/audacious-plugins:scrobbler - Build with scrobbler/LastFM submission support
+media-plugins/audacious-plugins:sid - Build with SID (Commodore 64 Audio) support
+media-sound/audacious:chardet - Try to handle non-UTF8 chinese/japanese/korean ID3 tags
+media-sound/audacious:gtk3 - Link against version 3 of the GIMP Toolkit instead of version 2 (x11-libs/gtk+)
+media-sound/deadbeef:aac - Advanced Audio Coding (AAC) plugin
+media-sound/deadbeef:adplug - Adplug plugin
+media-sound/deadbeef:alac - Apple Lossless Audio Codec (ALAC) plugin
+media-sound/deadbeef:cdda - Compact Disc Digital Audio (CDDA) plugin
+media-sound/deadbeef:converter - Support for converting media files
+media-sound/deadbeef:cover - Album artwork plugin
+media-sound/deadbeef:cover-imlib2 - Album artwork (with support for imlib2) plugin
+media-sound/deadbeef:cover-network - Plugin for downloading album artwork from internet
+media-sound/deadbeef:curl - cURL plugin
+media-sound/deadbeef:dts - Digital Theater System (DTS) plugin
+media-sound/deadbeef:dumb - Tracker music (MOD, S3M, XM, IT, STM, 669, PTM, PSM, MTM, DSM, ASYLUM AMF, UMX, J2B) plugin
+media-sound/deadbeef:equalizer - Equalizer plugin
+media-sound/deadbeef:ffmpeg - FFmpeg plugin
+media-sound/deadbeef:flac - Free Lossless Audio Codec (FLAC) plugin
+media-sound/deadbeef:gme - Game Music Emu (NSF, AY and other formats) plugin
+media-sound/deadbeef:gtk2 - GTK2 based user interface
+media-sound/deadbeef:gtk3 - GTK3 based user interface
+media-sound/deadbeef:hotkeys - Hotkeys support plugin
+media-sound/deadbeef:lastfm - Last.fm scrobbling plugin
+media-sound/deadbeef:libav - Libav plugin
+media-sound/deadbeef:libnotify - Notification daemon support plugin
+media-sound/deadbeef:libsamplerate - Sample rate conversion plugin
+media-sound/deadbeef:m3u - m3u playlist plugin
+media-sound/deadbeef:mac - Monkey's Audio plugin
+media-sound/deadbeef:mad - MPEG-1/2/2.5 Layer 3 (MP3) support through mad/libmad
+media-sound/deadbeef:midi - midi support (via timidity) plugin
+media-sound/deadbeef:mms - Microsoft Media Server (MMS) plugin
+media-sound/deadbeef:mono2stereo - mono2stereo plugin
+media-sound/deadbeef:mp3 - MPEG-1/2/2.5 Layer 3 (MP3) support plugin. It is a virtual use for mad/libmad or mpg123/libmpg123 since deadbeef 0.6.3
+media-sound/deadbeef:mpg123 - MPEG-1/2/2.5 Layer 3 (MP3) support through mpg123/libmpg123
+media-sound/deadbeef:nls - Native Language Support (NLS)
+media-sound/deadbeef:nullout - NULL output plugin
+media-sound/deadbeef:oss - Open Sound System (OSS) output plugin
+media-sound/deadbeef:playlist-browser - Playlist browser user interface plugin
+media-sound/deadbeef:psf - AOSDK-based PSF(QSF,SSF,DSF) plugin
+media-sound/deadbeef:pulseaudio - PulseAudio output plugin
+media-sound/deadbeef:sc68 - Atari ST and Amiga music plugin
+media-sound/deadbeef:shell-exec - Support for running shell commands
+media-sound/deadbeef:shn - Shorten (SHN) plugin
+media-sound/deadbeef:sid - Commodore64 SID music player plugin
+media-sound/deadbeef:sndfile - PCM wave support (via libsndfile) plugin
+media-sound/deadbeef:tta - True Audio TTA plugin
+media-sound/deadbeef:unity - Gnome Unity support
+media-sound/deadbeef:vorbis - Ogg Vorbis plugin
+media-sound/deadbeef:vtx - Libayemy VTX ZX-Spectrum music player plugin
+media-sound/deadbeef:wavpack - WavPack plugin
+media-sound/deadbeef:wma - Windows media audio plugin
+media-sound/deadbeef:zip - vfs_zip plugin
+media-sound/qmmp:analyzer - Enable visual analyzer
+media-sound/qmmp:bs2b - Enable Bauer stereophonic-to-binaural headphone filter
+media-sound/qmmp:cover - Enable album cover support
+media-sound/qmmp:crossfade - Enable crossfade effect when switching tracks
+media-sound/qmmp:cue - enable CUE sheet parsing
+media-sound/qmmp:enca - Detects the character encoding automatically
+media-sound/qmmp:game - Enable Game music support
+media-sound/qmmp:kde - Use kde4 notifier system
+media-sound/qmmp:lyrics - Fetch track lyrics from the web
+media-sound/qmmp:midi - Enable midi support using wildmidi library
+media-sound/qmmp:mpris - Enable MPRIS support
+media-sound/qmmp:notifier - Enable qmmps' notifier system
+media-sound/qmmp:opus - Enable the opus plugin
+media-sound/qmmp:projectm - Enable projectm music visualization plugin
+media-sound/qmmp:qsui - Enable QMMP simple UI
+media-sound/qmmp:scrobbler - Enable audioscrobbler/last.fm support
+media-sound/qmmp:stereo - Enable stereo effect
+media-sound/qmmp:tray - Build tray icon
+media-video/mpv:archive - Enable support for various archive formats via app-arch/libarchive
+media-video/mpv:bluray - Enable playback of Blu-ray filesystems
+media-video/mpv:bs2b - Enable Bauer stereophonic-to-binaural headphone filter
+media-video/mpv:cdio - Enable CDDA support via dev-libs/libcdio-paranoia
+media-video/mpv:cli - Build mpv CLI player
+media-video/mpv:doc-pdf - Build documentation in pdf format
+media-video/mpv:drm - Enable Kernel Mode Setting / Direct Rendering Manager based video output
+media-video/mpv:egl - Enable support for various EGL-based video outputs
+media-video/mpv:enca - Enable subtitles charset discovery via app-i18n/enca
+media-video/mpv:gbm - Enable Graphics Buffer Manager based EGL video output
+media-video/mpv:jpeg - Enable support for saving screenshots in JPEG format
+media-video/mpv:libguess - Enable subtitles charset discovery via app-i18n/libguess
+media-video/mpv:libmpv - Build mpv shared library
+media-video/mpv:lua - Enable Lua scripting, OSC (On Screen Controller) GUI and net-misc/youtube-dl hook-script
+media-video/mpv:luajit - Use dev-lang/luajit instead of dev-lang/lua
+media-video/mpv:pvr - Enable Video4Linux2 MPEG PVR
+media-video/mpv:raspberry-pi - Enable support for the Raspberry Pi
+media-video/mpv:rubberband - Enable high quality pitch correction via media-libs/rubberband
+media-video/mpv:sdl - Enable media-libs/libsdl2 based video and audio outputs
+media-video/mpv:uchardet - Enable subtitles charset discovery via dev-libs/uchardet
+media-video/mpv:vf-dlopen - Install additional video filters to be used with -vf dlopen
+net-im/psi:enchant - Use enchant spell engine instead of aspell
+net-im/psi:extras - Enables extra non official patches
+net-im/psi:iconsets - Install additional iconsets, some of them has not clear licensing
+net-im/psi:plugins - Enable plugins support
+net-im/psi:powersave - Disable some non critical timers for much less CPU usage
+net-im/psi:webkit - Enable chatlog rendering using webkit
+net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
+net-im/psi:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
+net-p2p/qbittorrent:webui - Enable the Web UI
+net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
+net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
+sys-apps/iproute2:berkdb - build programs that use berkdb (just arpd)
+sys-apps/iproute2:iptables - include support for iptables filtering
+sys-apps/iproute2:minimal - only install ip and tc programs
+www-client/chromium:gn - Use GN (generate ninja) instead of GYP for building
+www-client/chromium:gtk3 - Use gtk3 instead of gtk2
+www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
+www-client/chromium:hidpi - Enable support for high-resolution screens (high dots per inch)
+www-client/chromium:hotwording - Enable voice-recognition support (Ok Google)
+www-client/chromium:pic - Disable optimized assembly code that is not PIC friendly
+www-client/chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3
+www-client/chromium:system-ffmpeg - Use system ffmpeg instead of the bundled one
+www-client/chromium:tcmalloc - Use bundled tcmalloc instead of system malloc
+www-client/chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
+www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
+www-client/firefox:custom-optimization - Fine-tune custom compiler optimizations (-Os, -O0, -O1, -O2, -O3)
+www-client/firefox:egl - Enable EGL provider
+www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
+www-client/firefox:gstreamer-0 - Use gstreamer:0.10 instead of gstreamer:1 for media support
+www-client/firefox:gtk3 - Use the cairo-gtk3 rendering engine
+www-client/firefox:hwaccel - Use hardware-accelerated rendering
+www-client/firefox:jemalloc3 - Enable or disable jemalloc3 (forced-on when supported prior to 38.0)
+www-client/firefox:minimal - Prevent sdk and headers from being installed
+www-client/firefox:pgo - Add support for profile-guided optimization using gcc-4.5, for faster binaries. This option will double the compile time.
+www-client/firefox:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
+www-client/firefox:system-icu - Use the system-wide dev-libs/icu instead of bundled.
+www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled.
+www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
+www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
+www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
+x11-libs/cairo:gles2 - Use OpenGL ES 2 backend for acceleration.
+x11-libs/cairo:glib - Compile with GLib Object System support
+x11-libs/cairo:opengl - Use Mesa backend for acceleration
+x11-libs/cairo:valgrind - Built-in support to mark memory regions
+x11-libs/cairo:xlib-xcb - Use XCB renderer backend for acceleration over xlib. Enabling this may solve or introduce display corruption problems.
+x11-libs/wxGTK:gnome - Use gnome-base/libgnomeprintui for printing tasks.
+x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
+x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
+x11-themes/qtcurve:kde - Enable KDE4 support. This adds a QtCurve configuration module to KDE's SystemSettings
+x11-themes/qtcurve:kf5 - Enable KDE Frameworks 5 support
+x11-themes/qtcurve:windeco - Enable window decoration for KWin

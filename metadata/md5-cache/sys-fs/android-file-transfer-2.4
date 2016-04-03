@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=fuse? ( sys-fs/fuse ) qt4? ( dev-qt/qtcore:4 dev-qt/qtgui:4 ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 ) virtual/pkgconfig sys-devel/make >=dev-util/cmake-2.8.12
+DESCRIPTION=Reliable MTP client with minimalistic UI
+EAPI=6
+HOMEPAGE=https://whoozle.github.io/android-file-transfer-linux/
+IUSE=fuse qt4 +qt5
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2
+RDEPEND=fuse? ( sys-fs/fuse ) qt4? ( dev-qt/qtcore:4 dev-qt/qtgui:4 ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 )
+REQUIRED_USE=^^ ( qt4 qt5 )
+SLOT=0
+SRC_URI=https://github.com/whoozle/android-file-transfer-linux/archive/v2.4.tar.gz -> android-file-transfer-2.4.tar.gz
+_eclass_exported_funcs=src_prepare:cmake-utils src_configure:- src_compile:cmake-utils src_test:cmake-utils src_install:cmake-utils
+_eclasses_=cmake-utils	422bbd1bee2557490177a34dbe0a662b	eutils	9d81603248f2ba3ec59124320d123e5e	flag-o-matic	d270fa247153df66074f795fa42dba3e	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	d513d423d449877e49d99af3f7af7acb	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_md5_=ec089152dd05d505bc520abde1a4c8b8

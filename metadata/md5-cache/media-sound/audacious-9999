@@ -1,0 +1,15 @@
+DEFINED_PHASES=configure install prepare unpack
+DEPEND=>=app-i18n/libguess-1.2 >=dev-libs/dbus-glib-0.60 >=dev-libs/glib-2.28 >=x11-libs/cairo-1.2.6 >=x11-libs/pango-1.8.0 virtual/freedesktop-icon-theme qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 ) virtual/pkgconfig nls? ( dev-util/intltool ) !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1
+DESCRIPTION=Audacious Player - Your music, your way, no exceptions
+EAPI=5
+HOMEPAGE=http://audacious-media-player.org/
+IUSE=+chardet nls qt5
+LICENSE=BSD-2
+PDEPEND=~media-plugins/audacious-plugins-9999
+RDEPEND=>=app-i18n/libguess-1.2 >=dev-libs/dbus-glib-0.60 >=dev-libs/glib-2.28 >=x11-libs/cairo-1.2.6 >=x11-libs/pango-1.8.0 virtual/freedesktop-icon-theme qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 )
+REQUIRED_USE=^^ ( qt5 )
+SLOT=0
+SRC_URI=mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2
+_eclass_exported_funcs=src_unpack:git-r3 src_prepare:- src_configure:- src_install:-
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	9d81603248f2ba3ec59124320d123e5e	git-r3	ef66dfc3db09f327af21cf32f140fb2b	libtool	b75230758539a7da029e24afdb693960	multilib	3972ca401cf7dbb430df9995f5d8d580	toolchain-funcs	d513d423d449877e49d99af3f7af7acb
+_md5_=49ecc2b4c14ffa4aab93b04a5a4e7f17
