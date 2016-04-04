@@ -219,6 +219,7 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.9.5-multilib-portage.patch #395615
 		"${FILESDIR}"/${PN}-1.7.12-osmesa-check.patch #429386
 		"${FILESDIR}"/${PN}-1.6-memset-O3.patch #480508
+		"${FILESDIR}"/wine-d3d9-1.9.7.patch
 	)
 	if use staging; then
 		ewarn "Applying the Wine-Staging patchset. Any bug reports to the"
@@ -231,9 +232,9 @@ src_prepare() {
 		STAGING_EXCLUDE="${STAGING_EXCLUDE} -W makefiles-Disabled_Rules"
 	fi
 
-	if use d3d9 && use staging; then
-		epatch "${FILESDIR}/wine-d3d9-1.9.7.patch"
-	fi
+	#if use d3d9 && use staging; then
+	#	epatch "${FILESDIR}"/wine-d3d9-1.9.7.patch
+	#fi
 
 	autotools-utils_src_prepare
 
