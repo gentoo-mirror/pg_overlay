@@ -230,6 +230,11 @@ src_prepare() {
 		#577198 1.9.5 only
 		STAGING_EXCLUDE="${STAGING_EXCLUDE} -W makefiles-Disabled_Rules"
 	fi
+
+	if use d3d9 && use staging; then
+		epatch "${FILESDIR}/wine-d3d9-1.9.7.patch"
+	fi
+
 	autotools-utils_src_prepare
 
 	# Modification of the server protocol requires regenerating the server requests
@@ -246,10 +251,6 @@ src_prepare() {
 	cp "${WORKDIR}"/${WINE_GENTOO}/icons/oic_winlogo.ico dlls/user32/resources/ || die
 
 	l10n_get_locales > po/LINGUAS # otherwise wine doesn't respect LINGUAS
-
-	if use d3d9 && use staging; then
-		epatch "${FILESDIR}/wine-d3d9-1.9.7.patch"
-	fi
 }
 
 src_configure() {
