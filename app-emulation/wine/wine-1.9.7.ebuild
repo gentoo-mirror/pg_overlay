@@ -247,9 +247,9 @@ src_prepare() {
 
 	l10n_get_locales > po/LINGUAS # otherwise wine doesn't respect LINGUAS
 
-	#if use d3d9 && use staging; then
-	#	epatch "${FILESDIR}/wine-d3d9-latest.patch"
-	#fi
+	if use d3d9 && use staging; then
+		epatch "${FILESDIR}/wine-d3d9-1.9.7.patch"
+	fi
 }
 
 src_configure() {
