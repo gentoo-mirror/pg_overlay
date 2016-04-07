@@ -23,7 +23,7 @@ IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 REQUIRED_USE="gn? ( kerberos !system-ffmpeg )
-		|| ( inox iridium ungoogled )"
+		^^ ( inox iridium ungoogled )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
