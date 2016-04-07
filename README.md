@@ -1,4 +1,4 @@
-What you can find in mt repository:
+What you can find in my repository:
 
 1 - Firefox with PGO & Privacy patches by Wilco
 
