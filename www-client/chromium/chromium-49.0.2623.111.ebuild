@@ -413,6 +413,11 @@ src_configure() {
 		-Duse_system_speex=1
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1
+		-Duse_mojo=0
+		-Duse_gconf=0
+		-Duse_sysroot=0
+		-Ddisable_fatal_linker_warnings=1
+		-Ddisable_glibc=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
 		-Dremoting=0
@@ -428,7 +433,8 @@ src_configure() {
 		-Dtracing_like_official_build=1
 		-Dfieldtrial_testing_like_official_build=1
 		-Dfastbuild=2
-		-Denable_prod_wallet_service=0"
+		-Denable_prod_wallet_service=0
+		-Dlinux_strip_binary=1"
 
 	# Needed for system icu - we don't need additional data files.
 	myconf_gyp+=" -Dicu_use_data_file_flag=0"
