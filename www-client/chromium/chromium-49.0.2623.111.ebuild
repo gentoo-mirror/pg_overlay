@@ -22,7 +22,8 @@ KEYWORDS="amd64 ~arm x86"
 IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine inox iridium +ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
-REQUIRED_USE="gn? ( kerberos !system-ffmpeg )"
+REQUIRED_USE="gn? ( kerberos !system-ffmpeg )
+		|| ( inox iridium ungoogled )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
