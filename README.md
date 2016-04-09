@@ -11,3 +11,5 @@ What you can find in my repository:
 5 - Cinnamon without NetworkManager ebuilds
 
 6 - Modified ebuilds for various packages written with intention to be live & minimal
+
+7 - aMule live version

@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
+EAPI=5
 inherit cmake-utils
 
 MY_PN=${PN}-linux
@@ -26,7 +26,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 S=${WORKDIR}/${MY_PN}-${PV}
-#PATCHES=( "${FILESDIR}/2.2-automagic.patch" )
 
 src_configure() {
 	local mycmakeargs=(
