@@ -435,12 +435,12 @@ src_configure() {
 		-Denable_prod_wallet_service=0
 		-Dlinux_strip_binary=1"
 
-	if use iridium; then
-		myconf_gyp+="
-			-Dsafe_browsing=1"
-	else
+	if use !iridium; then
 		myconf_gyp+="
 			-Dsafe_browsing=0"
+	else
+		myconf_gyp+="
+			-Dsafe_browsing=1"
 	fi
 
 	# Needed for system icu - we don't need additional data files.
