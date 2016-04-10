@@ -19,7 +19,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
 KEYWORDS="amd64 ~arm x86"
-IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine inox +iridium ungoogled vaapi"
+IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine inox iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 REQUIRED_USE="gn? ( kerberos !system-ffmpeg )
