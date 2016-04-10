@@ -1,6 +1,6 @@
 What you can find in my repository:
 
-1 - Firefox with PGO & Privacy patches by Wilco
+1 - Firefox with PGO, OpenSUSE-KDE & Privacy patches by Wilco
 
 2 - Chromium with Inox, Iridium, Ungoogled & VA-API patches
 
