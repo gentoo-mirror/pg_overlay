@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
-AUTOTOOLS_AUTORECONF=yes
-inherit eutils readme.gentoo-r1 autotools-multilib
+EAPI=6
+
+inherit autotools eutils multilib-minimal readme.gentoo-r1
 
 DESCRIPTION="A library for configuring and customizing font access"
 HOMEPAGE="http://fontconfig.org/"
@@ -27,6 +27,16 @@ DEPEND="${RDEPEND}
 PDEPEND="!x86-winnt? ( app-eselect/eselect-fontconfig )
 	virtual/ttf-fonts"
 
+PATCHES=(
+	"${FILESDIR}"/${PN}-2.10.2-docbook.patch # 310157
+	"${FILESDIR}"/${PN}-2.11.93-latin-update.patch # 130466 + make liberation default
+	"${FILESDIR}"/iu/01-configure.patch
+	"${FILESDIR}"/iu/02-configure.ac.patch
+	"${FILESDIR}"/iu/03-Makefile.in.patch
+	"${FILESDIR}"/iu/04-Makefile.conf.d.patch
+	"${FILESDIR}"/iu/05-Makefile.am.in.patch
+)
+
 MULTILIB_CHOST_TOOLS=( /usr/bin/fc-cache )
 
 pkg_setup() {
@@ -38,20 +48,11 @@ pkg_setup() {
 
 src_prepare() {
 	cp -r "${FILESDIR}"/iu/conf.d.infinality ${S}
-
-	epatch "${FILESDIR}"/${PN}-2.10.2-docbook.patch
-	epatch "${FILESDIR}"/${PN}-2.11.93-latin-update.patch
-
-	epatch "${FILESDIR}"/iu/01-configure.patch
-	epatch "${FILESDIR}"/iu/02-configure.ac.patch
-	epatch "${FILESDIR}"/iu/03-Makefile.in.patch
-	epatch "${FILESDIR}"/iu/04-Makefile.conf.d.patch
-	epatch "${FILESDIR}"/iu/05-Makefile.am.in.patch
-
-	eautomake
+	default
+	eautoreconf
 }
 
-src_configure() {
+multilib_src_configure() {
 	local addfonts
 	# harvest some font locations, such that users can benefit from the
 	# host OS's installed fonts
@@ -80,7 +81,8 @@ src_configure() {
 		--with-templatedir="${EPREFIX}"/etc/fonts/conf.avail --with-templateinfdir=/etc/fonts/conf.avail.infinality
 	)
 
-	autotools-multilib_src_configure
+	ECONF_SOURCE="${S}" \
+	econf "${myeconfargs[@]}"
 }
 
 multilib_src_install() {
