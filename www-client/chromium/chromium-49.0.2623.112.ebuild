@@ -435,7 +435,7 @@ src_configure() {
 		-Denable_prod_wallet_service=0
 		-Dlinux_strip_binary=1"
 
-	if use !iridium; then
+	if use !ungoogled; then
 		myconf_gyp+="
 			-Dsafe_browsing=0"
 	else
