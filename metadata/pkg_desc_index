@@ -18,7 +18,7 @@ gnome-extra/nemo-compare 2.8.0: Nemo-Compare Extension
 gnome-extra/nemo-extensions 2.8: Extensions for Cinnamon's file-manager Nemo
 gnome-extra/nemo-fileroller 2.8.0: Provides context menu for Nemo
 gnome-extra/nemo-terminal 2.8.1: Nemo-Terminal Extension
-media-libs/fontconfig 2.11.94: A library for configuring and customizing font access
+media-libs/fontconfig 2.11.95: A library for configuring and customizing font access
 media-libs/fontconfig-ultimate 2015.12.06: A set of font rendering and replacement rules for fontconfig-infinality
 media-libs/freetype 2.6.3-r20160326: A high-quality and portable font engine
 media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
