@@ -437,10 +437,10 @@ src_configure() {
 
 	if ! use ungoogled; then
 		myconf_gyp+="
-			-Dsafe_browsing=0"
+			-Dsafe_browsing=1"
 	else
 		myconf_gyp+="
-			-Dsafe_browsing=1"
+			-Dsafe_browsing=0"
 	fi
 
 	# Needed for system icu - we don't need additional data files.
