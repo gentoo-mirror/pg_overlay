@@ -149,7 +149,7 @@ src_configure() {
 		# See deep down below for build-date
 		--disable-libmpv-static
 		--disable-static-build
-		--disable-optimize		# Do not add '-O2' to CFLAGS
+		--enable-optimize		# Do not add '-O2' to CFLAGS
 		--disable-debug-build	# Do not add '-g' to CFLAGS
 
 		$(use_enable doc html-build)
