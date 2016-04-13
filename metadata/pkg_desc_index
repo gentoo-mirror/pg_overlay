@@ -6,7 +6,6 @@ app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod T
 app-pda/usbmuxd 1.1.0: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/qpdfview 0.4.16: A tabbed document viewer
-dev-libs/libgaminggear 0.12.0: Provides functionality for gaming input devices
 dev-python/nemo-python 2.8.0: Python bindings for the Nautilus file manager
 dev-util/gperf 3.0.4: A perfect hash function generator
 gnome-extra/cinnamon 2.8.6: A fork of GNOME Shell with layout similar to GNOME 2
@@ -36,7 +35,6 @@ net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/transmission 2.92-r14720: A Fast, Easy and Free BitTorrent client
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/iproute2 4.5.0: kernel routing and traffic control utilities
-sys-apps/roccat-tools 4.0.0: Utility for advanced configuration of Roccat devices
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer 2.4: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
