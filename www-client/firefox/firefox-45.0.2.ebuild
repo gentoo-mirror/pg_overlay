@@ -127,7 +127,10 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
-	eapply "${FILESDIR}/pgo.patch"
+
+	if use pdo ; then
+		eapply "${FILESDIR}/pgo.patch"
+	fi
 
 	for i in $(cat "${FILESDIR}/privacy/series"); \
 	do eapply "${FILESDIR}/privacy/$i"; \
