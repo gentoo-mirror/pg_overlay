@@ -40,8 +40,8 @@ sys-fs/android-file-transfer 2.4: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 www-apps/baikal 0.4.0: Lightweight CalDAV+CardDAV server
-www-client/chromium 47.0.2526.111 48.0.2564.116 49.0.2623.110 49.0.2623.111 49.0.2623.112: Open-source version of Google Chrome web browser
-www-client/firefox 43.0.4 45.0 45.0.1: Firefox Web Browser
+www-client/chromium 47.0.2526.111 48.0.2564.116 49.0.2623.110 49.0.2623.111 49.0.2623.112 50.0.2661.76: Open-source version of Google Chrome web browser
+www-client/firefox 43.0.4 45.0 45.0.1 45.0.2: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.14.6-r20150311: A vector graphics library with cross-device output support
 x11-libs/wxGTK 3.0.2.0-r2 3.1.0: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
