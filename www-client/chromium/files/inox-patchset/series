@@ -1,5 +1,12 @@
+disable-google-url-tracker.patch
+disable-default-extensions.patch
 disable-web-resource-service.patch
-disable-update-pings.patch
+restore-classic-ntp.patch
+disable-google-ipv6-probes.patch
+disable-gcm-status-check.patch
+add-duckduckgo-search-engine.patch
+disable-missing-key-warning.patch
+disable-translation-lang-fetch.patch
 chromium-sandbox-pie.patch
 disable-new-avatar-menu.patch
 disable-first-run-behaviour.patch
