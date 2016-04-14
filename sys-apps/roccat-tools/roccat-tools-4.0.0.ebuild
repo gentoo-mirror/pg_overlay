@@ -82,6 +82,7 @@ pkg_preinst() {
 }
 pkg_postinst() {
 	gnome2_icon_cache_update
+	readme.gentoo_create_doc
 	readme.gentoo_print_elog
 	ewarn
 	ewarn "Starting from version 3.0.0, executables were renamed and now prefixed with 'roccat',"
