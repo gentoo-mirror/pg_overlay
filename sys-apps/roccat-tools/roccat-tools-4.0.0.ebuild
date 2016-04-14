@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit readme.gentoo cmake-utils gnome2-utils udev user
+inherit readme.gentoo-r1 cmake-utils gnome2-utils udev user
 
 DESCRIPTION="Utility for advanced configuration of Roccat devices"
 
