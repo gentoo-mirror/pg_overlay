@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -25,10 +25,12 @@ RDEPEND="
 		>=dev-libs/glib-2.22:2[${MULTILIB_USEDEP}]
 		media-libs/libpng:0=[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
-		virtual/jpeg:=[${MULTILIB_USEDEP}]
-		>=x11-libs/gtk+-3.18:3[${MULTILIB_USEDEP}]
+		virtual/jpeg:0[${MULTILIB_USEDEP}]
+		x11-libs/cairo[${MULTILIB_USEDEP}]
+		x11-libs/gtk+:3[${MULTILIB_USEDEP}]
 		x11-libs/gdk-pixbuf[${MULTILIB_USEDEP}]
 		x11-libs/libSM[${MULTILIB_USEDEP}]
+		x11-libs/libX11[${MULTILIB_USEDEP}]
 		x11-libs/libXxf86vm[${MULTILIB_USEDEP}]
 		x11-libs/pango[X,${MULTILIB_USEDEP}]
 		gstreamer? (
@@ -40,8 +42,8 @@ RDEPEND="
 		webkit? ( net-libs/webkit-gtk:4 )
 		)
 	aqua? (
-		>=x11-libs/gtk+-2.4:2[aqua=,${MULTILIB_USEDEP}]
-		virtual/jpeg:=[${MULTILIB_USEDEP}]
+		x11-libs/gtk+:3[aqua=,${MULTILIB_USEDEP}]
+		virtual/jpeg:0[${MULTILIB_USEDEP}]
 		tiff?   ( media-libs/tiff:0[${MULTILIB_USEDEP}] )
 		)"
 
@@ -72,6 +74,7 @@ src_prepare() {
 	#	-e 's:^wx_release_number=1$:wx_release_number=2:' \
 	#	-i "${S}"/configure || die
 
+	default
 }
 
 multilib_src_configure() {
@@ -105,8 +108,8 @@ multilib_src_configure() {
 			--enable-graphics_ctx
 			--without-gtkprint
 			--enable-gui
+			--with-gtk=3
 			--with-libpng=sys
-			--with-libxpm=sys
 			--with-libjpeg=sys
 			--without-gnomevfs
 			$(use_enable gstreamer mediactrl)
@@ -114,7 +117,6 @@ multilib_src_configure() {
 			$(use_with libnotify)
 			$(use_with opengl)
 			$(use_with tiff libtiff sys)
-			--with-gtk=3
 			--enable-largefile
 			--with-x"
 
