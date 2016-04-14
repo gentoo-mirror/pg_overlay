@@ -358,7 +358,6 @@ src_prepare() {
 		'url/third_party/mozilla' \
 		'v8/src/third_party/fdlibm' \
 		'v8/src/third_party/valgrind' \
-		'third_party/speech-dispatcher' \
 		'third_party/libva' \
 		--do-remove || die
 }
