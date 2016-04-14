@@ -358,7 +358,6 @@ src_prepare() {
 		'url/third_party/mozilla' \
 		'v8/src/third_party/fdlibm' \
 		'v8/src/third_party/valgrind' \
-		'third_party/speech-dispatcher' \
 		'third_party/libva' \
 		--do-remove || die
 }
@@ -442,7 +441,7 @@ src_configure() {
 	fi
 
 	# Needed for system icu - we don't need additional data files.
-	myconf_gyp+=" -Dicu_use_data_file_flag=0"
+	# myconf_gyp+=" -Dicu_use_data_file_flag=0"
 
 	# TODO: patch gyp so that this arm conditional is not needed.
 	if ! use arm; then
