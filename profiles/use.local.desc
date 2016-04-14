@@ -148,6 +148,7 @@ net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xf
 sys-apps/iproute2:berkdb - build programs that use berkdb (just arpd)
 sys-apps/iproute2:iptables - include support for iptables filtering
 sys-apps/iproute2:minimal - only install ip and tc programs
+sys-apps/roccat-tools:lua - Build support for Lua scripting for RyosMKPro ripple effects
 www-client/chromium:gn - Use GN (generate ninja) instead of GYP for building
 www-client/chromium:gtk3 - Use gtk3 instead of gtk2
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
