@@ -597,12 +597,6 @@ src_configure() {
 			build_ffmpeg_args+=" --disable-asm"
 		fi
 
-		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
-		else
-			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau"
-		fi
-
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 		einfo "Configuring bundled ffmpeg..."
 		pushd third_party/ffmpeg > /dev/null || die
