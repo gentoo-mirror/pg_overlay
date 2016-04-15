@@ -195,7 +195,7 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r1.patch"
 
 	if use vaapi; then
-		epatch "${FILESDIR}/enable_vaapi_on_linux_.diff"
+		epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
 	fi
 
 	# Inox patches
@@ -595,12 +595,6 @@ src_configure() {
 		local build_ffmpeg_args=""
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"
-		fi
-
-		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
-		else
-			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau"
 		fi
 
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
