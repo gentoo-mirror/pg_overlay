@@ -14,7 +14,7 @@ inherit check-reqs chromium eutils flag-o-matic multilib multiprocessing pax-uti
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
-SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz"
+SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}-lite.tar.xz"
 
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
@@ -473,8 +473,7 @@ src_configure() {
 	myconf_gyp+="
 		-Dlinux_link_gsettings=1
 		-Dlinux_link_libpci=1
-		-Dlinux_link_libspeechd=0
-		-Dlibspeechd_h_prefix="
+		-Dlinux_link_libspeechd=0"
 
 	# TODO: use the file at run time instead of effectively compiling it in.
 	myconf_gyp+="
