@@ -1,6 +1,6 @@
 # HG changeset patch
 # Parent e0751ad74e835e80041a61ea00c2a63bf6fbe2de
-# Parent  e10e9bf6ab3a74655998bd0286d248f5d17a601a
+# Parent  e3d8efdd7eea96ff7b8a7f6489a082cad72a98d8
 
 diff --git a/browser/app/Makefile.in b/browser/app/Makefile.in
 --- a/browser/app/Makefile.in
@@ -49,7 +49,7 @@ diff --git a/browser/branding/branding-common.mozbuild b/browser/branding/brandi
 diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
 --- a/browser/installer/package-manifest.in
 +++ b/browser/installer/package-manifest.in
-@@ -670,18 +670,21 @@
+@@ -665,18 +665,21 @@
  @RESPATH@/browser/extensions/{972ce4c6-7e08-4474-a285-3208198ce6fd}/icon.png
  @RESPATH@/browser/extensions/{972ce4c6-7e08-4474-a285-3208198ce6fd}/install.rdf
  @RESPATH@/chrome/toolkit@JAREXT@
@@ -64,10 +64,10 @@ diff --git a/browser/installer/package-manifest.in b/browser/installer/package-m
  @RESPATH@/browser/chrome/icons/default/default48.png
 +@RESPATH@/browser/chrome/icons/default/default256.png
  #endif
+ @RESPATH@/browser/features/*
  
  ; [Webide Files]
  @RESPATH@/browser/chrome/webide@JAREXT@
  @RESPATH@/browser/chrome/webide.manifest
  @RESPATH@/browser/@PREF_DIR@/webide-prefs.js
  
- ; DevTools
