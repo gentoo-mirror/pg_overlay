@@ -1,30 +1,11 @@
 # HG changeset patch
-# Parent  d9c9ae52f0338a60d1626d9209248341815e597a
+# Parent  797d5f17b080f54439602f107ecaf6b09a0ef5c1
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
 Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=140751
      https://bugzilla.novell.com/show_bug.cgi?id=170055
 
-diff --git a/modules/libpref/Makefile.in b/modules/libpref/Makefile.in
---- a/modules/libpref/Makefile.in
-+++ b/modules/libpref/Makefile.in
-@@ -21,13 +21,15 @@ endif
- ifdef MOZ_SERVICES_HEALTHREPORT
- ifneq (android,$(MOZ_WIDGET_TOOLKIT))
- grepref_files += $(topsrcdir)/services/healthreport/healthreport-prefs.js
- else
- grepref_files += $(topsrcdir)/mobile/android/chrome/content/healthreport-prefs.js
- endif
- endif
- 
-+LOCAL_INCLUDES += -I$(topsrcdir)/toolkit/xre
-+
- greprefs.js: $(grepref_files)
- 	$(call py_action,preprocessor,$(PREF_PPFLAGS) $(DEFINES) $(ACDEFINES) $(MOZ_DEBUG_DEFINES) $^ -o $@)
- 
- libs:: greprefs.js
- 	$(INSTALL) $^ $(DIST)/bin/
 diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
 --- a/modules/libpref/Preferences.cpp
 +++ b/modules/libpref/Preferences.cpp
@@ -46,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #include "prefread.h"
  #include "prefapi_private_data.h"
  
-@@ -1148,16 +1149,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
+@@ -1136,16 +1137,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
  
  static nsresult pref_LoadPrefsInDirList(const char *listId)
  {
@@ -81,7 +62,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
      return NS_OK;
  
    bool hasMore;
-@@ -1173,17 +1192,17 @@ static nsresult pref_LoadPrefsInDirList(
+@@ -1161,17 +1180,17 @@ static nsresult pref_LoadPrefsInDirList(
  
      nsAutoCString leaf;
      path->GetNativeLeafName(leaf);
@@ -100,7 +81,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  {
    nsZipItemPtr<char> manifest(jarReader, name, true);
    NS_ENSURE_TRUE(manifest.Buffer(), NS_ERROR_NOT_AVAILABLE);
-@@ -1277,26 +1296,38 @@ static nsresult pref_InitInitialObjects(
+@@ -1265,26 +1284,38 @@ static nsresult pref_InitInitialObjects(
    /* these pref file names should not be used: we process them after all other application pref files for backwards compatibility */
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -139,6 +120,30 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
    // or jar:$gre/omni.jar!/defaults/preferences/*.js.
    RefPtr<nsZipArchive> appJarReader = mozilla::Omnijar::GetReader(mozilla::Omnijar::APP);
    // GetReader(mozilla::Omnijar::APP) returns null when $app == $gre, in which
+diff --git a/modules/libpref/moz.build b/modules/libpref/moz.build
+--- a/modules/libpref/moz.build
++++ b/modules/libpref/moz.build
+@@ -31,16 +31,20 @@ UNIFIED_SOURCES += [
+     'prefread.cpp',
+ ]
+ 
+ # prefapi.cpp cannot be built in unified mode because it uses plarena.h
+ SOURCES += [
+     'prefapi.cpp',
+ ]
+ 
++LOCAL_INCLUDES += [
++    '/toolkit/xre'
++]
++
+ include('/ipc/chromium/chromium-config.mozbuild')
+ 
+ FINAL_LIBRARY = 'xul'
+ 
+ DEFINES['OS_ARCH'] = CONFIG['OS_ARCH']
+ DEFINES['MOZ_WIDGET_TOOLKIT'] = CONFIG['MOZ_WIDGET_TOOLKIT']
+ 
+ if CONFIG['GNU_CXX']:
 diff --git a/python/mozbuild/mozpack/chrome/flags.py b/python/mozbuild/mozpack/chrome/flags.py
 --- a/python/mozbuild/mozpack/chrome/flags.py
 +++ b/python/mozbuild/mozpack/chrome/flags.py
@@ -226,7 +231,7 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
  #include "AndroidBridge.h"
  #endif
  
-@@ -2714,16 +2718,25 @@ nsDownload::SetState(DownloadState aStat
+@@ -2719,16 +2723,25 @@ nsDownload::SetState(DownloadState aStat
        nsCOMPtr<nsIPrefBranch> pref(do_GetService(NS_PREFSERVICE_CONTRACTID));
  
        // Master pref to control this function.
@@ -252,7 +257,7 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
          int64_t goat = PR_Now() - mStartTime;
          showTaskbarAlert = goat > alertIntervalUSec;
  
-@@ -2754,16 +2767,17 @@ nsDownload::SetState(DownloadState aStat
+@@ -2759,16 +2772,17 @@ nsDownload::SetState(DownloadState aStat
                    NS_LITERAL_STRING(DOWNLOAD_MANAGER_ALERT_ICON), title,
                    message, !removeWhenDone,
                    mPrivate ? NS_LITERAL_STRING("private") : NS_LITERAL_STRING("non-private"),
@@ -2697,7 +2702,7 @@ new file mode 100644
 diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
 --- a/uriloader/exthandler/moz.build
 +++ b/uriloader/exthandler/moz.build
-@@ -72,17 +72,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'ui
+@@ -75,17 +75,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'ui
  else:
      # These files can't be built in unified mode because they redefine LOG.
      SOURCES += [
@@ -2717,7 +2722,7 @@ diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
          'android/nsExternalSharingAppService.cpp',
          'android/nsExternalURLHandlerService.cpp',
          'android/nsMIMEInfoAndroid.cpp',
-@@ -125,16 +127,17 @@ include('/ipc/chromium/chromium-config.m
+@@ -129,16 +131,17 @@ include('/ipc/chromium/chromium-config.m
  
  FINAL_LIBRARY = 'xul'
  
@@ -3662,8 +3667,8 @@ diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
 --- a/xpcom/components/moz.build
 +++ b/xpcom/components/moz.build
 @@ -47,12 +47,13 @@ FINAL_LIBRARY = 'xul'
- GENERATED_INCLUDES += ['..']
  LOCAL_INCLUDES += [
+     '!..',
      '../base',
      '../build',
      '../ds',

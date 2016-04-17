@@ -1,11 +1,11 @@
 # HG changeset patch
-# Parent  77c3bdc27160dfa96aa4b3288c7f12a72f273967
+# Parent  25d63ce139ad6e957d2565e3b83d01dfa36ea314
 
 diff --git a/browser/base/content/browser-kde.xul b/browser/base/content/browser-kde.xul
 new file mode 100644
 --- /dev/null
 +++ b/browser/base/content/browser-kde.xul
-@@ -0,0 +1,1250 @@
+@@ -0,0 +1,1181 @@
 +#filter substitution
 +<?xml version="1.0"?>
 +# -*- Mode: HTML -*-
@@ -99,15 +99,6 @@ new file mode 100644
 +      <menuitem id="context_unpinTab" label="&unpinTab.label;" hidden="true"
 +                accesskey="&unpinTab.accesskey;"
 +                oncommand="gBrowser.unpinTab(TabContextMenu.contextTab);"/>
-+      <menu id="context_tabViewMenu" label="&moveToGroup.label;"
-+            accesskey="&moveToGroup.accesskey;">
-+        <menupopup id="context_tabViewMenuPopup"
-+                   onpopupshowing="if (event.target == this) TabView.moveToGroupPopupShowing(event);">
-+          <menuseparator id="context_tabViewNamedGroups" hidden="true"/>
-+          <menuitem id="context_tabViewNewGroup" label="&moveToNewGroup.label;"
-+                    oncommand="TabView.moveTabTo(TabContextMenu.contextTab, null);"/>
-+        </menupopup>
-+      </menu>
 +      <menuitem id="context_openTabInWindow" label="&moveToNewWindow.label;"
 +                accesskey="&moveToNewWindow.accesskey;"
 +                tbattr="tabbrowser-multiple"
@@ -127,7 +118,7 @@ new file mode 100644
 +                accesskey="&bookmarkAllTabs.accesskey;"
 +                command="Browser:BookmarkAllTabs"/>
 +      <menuitem id="context_closeTabsToTheEnd" label="&closeTabsToTheEnd.label;" accesskey="&closeTabsToTheEnd.accesskey;"
-+                oncommand="gBrowser.removeTabsToTheEndFrom(TabContextMenu.contextTab);"/>
++                oncommand="gBrowser.removeTabsToTheEndFrom(TabContextMenu.contextTab, {animate: true});"/>
 +      <menuitem id="context_closeOtherTabs" label="&closeOtherTabs.label;" accesskey="&closeOtherTabs.accesskey;"
 +                oncommand="gBrowser.removeAllTabsBut(TabContextMenu.contextTab);"/>
 +      <menuseparator/>
@@ -269,14 +260,6 @@ new file mode 100644
 +      <box id="UITourHighlight"></box>
 +    </panel>
 +
-+    <panel id="abouthome-search-panel" orient="vertical" type="arrow" hidden="true"
-+           onclick="this.hidePopup()">
-+      <hbox id="abouthome-search-panel-manage"
-+            onclick="openPreferences('paneSearch')">
-+        <label>&changeSearchSettings.button;</label>
-+      </hbox>
-+    </panel>
-+
 +    <panel id="social-share-panel"
 +           class="social-panel"
 +           type="arrow"
@@ -326,26 +309,6 @@ new file mode 100644
 +           type="arrow"
 +           orient="horizontal"
 +           hidden="true"/>
-+
-+    <menupopup id="processHangOptions"
-+               onpopupshowing="ProcessHangMonitor.refreshMenu(window);">
-+      <menuitem id="processHangTerminateScript"
-+                oncommand="ProcessHangMonitor.terminateScript(window)"
-+                accesskey="&processHang.terminateScript.accessKey;"
-+                label="&processHang.terminateScript.label;"/>
-+      <menuitem id="processHangDebugScript"
-+                oncommand="ProcessHangMonitor.debugScript(window)"
-+                accesskey="&processHang.debugScript.accessKey;"
-+                label="&processHang.debugScript.label;"/>
-+      <menuitem id="processHangTerminatePlugin"
-+                oncommand="ProcessHangMonitor.terminatePlugin(window)"
-+                accesskey="&processHang.terminatePlugin.accessKey;"
-+                label="&processHang.terminatePlugin.label;"/>
-+      <menuitem id="processHangTerminateProcess"
-+                oncommand="ProcessHangMonitor.terminateProcess(window)"
-+                accesskey="&processHang.terminateProcess.accessKey;"
-+                label="&processHang.terminateProcess.label;"/>
-+    </menupopup>
 +
 +    <menupopup id="toolbar-context-menu"
 +               onpopupshowing="onViewToolbarsPopupShowing(event, document.getElementById('viewToolbarsMenuSeparator'));">
@@ -508,17 +471,6 @@ new file mode 100644
 +
 +    <tooltip id="dynamic-shortcut-tooltip"
 +             onpopupshowing="UpdateDynamicShortcutTooltipText(this);"/>
-+
-+    <menupopup id="emeNotificationsPopup">
-+      <menuitem id="emeNotificationsNotNow"
-+                label="&emeNotificationsNotNow.label;"
-+                acceskey="&emeNotificationsNotNow.accesskey;"
-+                oncommand="gEMEHandler.onNotNow(this);"/>
-+      <menuitem id="emeNotificationsDontAskAgain"
-+                label="&emeNotificationsDontAskAgain.label;"
-+                acceskey="&emeNotificationsDontAskAgain.accesskey;"
-+                oncommand="gEMEHandler.onDontAskAgain(this);"/>
-+    </menupopup>
 +  </popupset>
 +
 +#ifdef CAN_DRAW_IN_TITLEBAR
@@ -626,12 +578,6 @@ new file mode 100644
 +                     removable="false">
 +        <menupopup id="alltabs-popup"
 +                   position="after_end">
-+          <menuitem id="menu_tabview"
-+                    class="menuitem-iconic"
-+                    key="key_tabview"
-+                    label="&viewTabGroups.label;"
-+                    command="Browser:ToggleTabView"
-+                    observes="tabviewGroupsNumber"/>
 +          <menuitem id="alltabs_undoCloseTab"
 +                    class="menuitem-iconic"
 +                    key="key_undoCloseTab"
@@ -740,7 +686,7 @@ new file mode 100644
 +                <image id="plugins-notification-icon" class="notification-anchor-icon" role="button"
 +                       aria-label="&urlbar.pluginsNotificationAnchor.label;"/>
 +                <image id="web-notifications-notification-icon" class="notification-anchor-icon" role="button"
-+                       aria-label="&urlbar.webNotsNotificationAnchor.label;"/>
++                       aria-label="&urlbar.webNotsNotificationAnchor3.label;"/>
 +                <image id="webRTC-shareDevices-notification-icon" class="notification-anchor-icon" role="button"
 +                       aria-label="&urlbar.webRTCShareDevicesNotificationAnchor.label;"/>
 +                <image id="webRTC-sharingDevices-notification-icon" class="notification-anchor-icon" role="button"
@@ -774,13 +720,11 @@ new file mode 100644
 +                   onclick="gIdentityHandler.handleIdentityButtonEvent(event);"
 +                   onkeypress="gIdentityHandler.handleIdentityButtonEvent(event);"
 +                   ondragstart="gIdentityHandler.onDragStart(event);">
-+                <hbox id="identity-icons"
-+                      consumeanchor="identity-box">
-+                  <image id="tracking-protection-icon"/>
-+                  <image id="page-proxy-favicon"
-+                         onclick="PageProxyClickHandler(event);"
-+                         pageproxystate="invalid"/>
-+                </hbox>
++                <image id="identity-icon"
++                       consumeanchor="identity-box"
++                       onclick="PageProxyClickHandler(event);"/>
++                <image id="tracking-protection-icon"/>
++                <image id="connection-icon"/>
 +                <hbox id="identity-icon-labels">
 +                  <label id="identity-icon-label" class="plain" flex="1"/>
 +                  <label id="identity-icon-country-label" class="plain"/>
@@ -1091,19 +1035,6 @@ new file mode 100644
 +                     type="checkbox"
 +                     label="&fullScreenCmd.label;"
 +                     tooltip="dynamic-shortcut-tooltip"/>
-+
-+#ifdef MOZ_SERVICES_SYNC
-+      <toolbarbutton id="sync-button"
-+                     class="toolbarbutton-1 chromeclass-toolbar-additional"
-+                     label="&syncToolbarButton.label;"
-+                     oncommand="gSyncUI.handleToolbarButton()"/>
-+#endif
-+
-+      <toolbarbutton id="tabview-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
-+                     label="&tabGroupsButton.label;"
-+                     command="Browser:ToggleTabView"
-+                     tooltip="dynamic-shortcut-tooltip"
-+                     observes="tabviewGroupsNumber"/>
 +    </toolbarpalette>
 +  </toolbox>
 +
@@ -1259,25 +1190,25 @@ new file mode 100644
 diff --git a/browser/base/jar.mn b/browser/base/jar.mn
 --- a/browser/base/jar.mn
 +++ b/browser/base/jar.mn
-@@ -70,16 +70,18 @@ browser.jar:
-         content/browser/aboutSocialError.xhtml        (content/aboutSocialError.xhtml)
-         content/browser/aboutProviderDirectory.xhtml  (content/aboutProviderDirectory.xhtml)
+@@ -71,16 +71,18 @@ browser.jar:
          content/browser/aboutTabCrashed.css           (content/aboutTabCrashed.css)
          content/browser/aboutTabCrashed.js            (content/aboutTabCrashed.js)
          content/browser/aboutTabCrashed.xhtml         (content/aboutTabCrashed.xhtml)
+ *       content/browser/aboutTabGroupsMigration.xhtml (content/aboutTabGroupsMigration.xhtml)
+         content/browser/aboutTabGroupsMigration.js    (content/aboutTabGroupsMigration.js)
  *       content/browser/browser.css                   (content/browser.css)
- *       content/browser/browser.js                    (content/browser.js)
+         content/browser/browser.js                    (content/browser.js)
  *       content/browser/browser.xul                   (content/browser.xul)
 +*       content/browser/browser-kde.xul               (content/browser-kde.xul)
 +%       override chrome://browser/content/browser.xul chrome://browser/content/browser-kde.xul desktop=kde
- *       content/browser/browser-tabPreviews.xml       (content/browser-tabPreviews.xml)
- *       content/browser/chatWindow.xul                (content/chatWindow.xul)
-         content/browser/tab-content.js                (content/tab-content.js)
-         content/browser/content.js                    (content/content.js)
-         content/browser/social-content.js             (content/social-content.js)
-         content/browser/defaultthemes/1.footer.jpg    (content/defaultthemes/1.footer.jpg)
-         content/browser/defaultthemes/1.header.jpg    (content/defaultthemes/1.header.jpg)
-         content/browser/defaultthemes/1.icon.jpg      (content/defaultthemes/1.icon.jpg)
+         content/browser/browser-addons.js             (content/browser-addons.js)
+         content/browser/browser-ctrlTab.js            (content/browser-ctrlTab.js)
+         content/browser/browser-customization.js      (content/browser-customization.js)
+         content/browser/browser-data-submission-info-bar.js (content/browser-data-submission-info-bar.js)
+         content/browser/browser-devedition.js         (content/browser-devedition.js)
+         content/browser/browser-eme.js                (content/browser-eme.js)
+         content/browser/browser-feeds.js              (content/browser-feeds.js)
+         content/browser/browser-fullScreen.js         (content/browser-fullScreen.js)
 diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/nsModule.cpp
 --- a/browser/components/build/nsModule.cpp
 +++ b/browser/components/build/nsModule.cpp
@@ -1296,11 +1227,11 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
  
  #if defined(XP_WIN)
  #include "nsIEHistoryEnumerator.h"
- #include "nsEdgeReadingListExtractor.h"
  #endif
  
  #include "rdf.h"
-@@ -32,18 +32,16 @@ using namespace mozilla::browser;
+ #include "nsFeedSniffer.h"
+@@ -31,18 +31,16 @@ using namespace mozilla::browser;
  
  /////////////////////////////////////////////////////////////////////////////
  
@@ -1315,11 +1246,11 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
  
  #if defined(XP_WIN)
  NS_GENERIC_FACTORY_CONSTRUCTOR(nsIEHistoryEnumerator)
- NS_GENERIC_FACTORY_CONSTRUCTOR(nsEdgeReadingListExtractor)
  #endif
  
  NS_GENERIC_FACTORY_CONSTRUCTOR(nsFeedSniffer)
-@@ -63,17 +61,17 @@ NS_DEFINE_NAMED_CID(NS_EDGEREADINGLISTEX
+ 
+@@ -60,17 +58,17 @@ NS_DEFINE_NAMED_CID(NS_WINIEHISTORYENUME
  NS_DEFINE_NAMED_CID(NS_SHELLSERVICE_CID);
  #endif
  
@@ -1335,13 +1266,13 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
      { &kNS_BROWSER_ABOUT_REDIRECTOR_CID, false, nullptr, AboutRedirector::Create },
  #if defined(XP_WIN)
      { &kNS_WINIEHISTORYENUMERATOR_CID, false, nullptr, nsIEHistoryEnumeratorConstructor },
-     { &kNS_EDGEREADINGLISTEXTRACTOR_CID, false, nullptr, nsEdgeReadingListExtractorConstructor },
  #elif defined(XP_MACOSX)
      { &kNS_SHELLSERVICE_CID, false, nullptr, nsMacShellServiceConstructor },
+ #endif
 diff --git a/browser/components/preferences/in-content/main.js b/browser/components/preferences/in-content/main.js
 --- a/browser/components/preferences/in-content/main.js
 +++ b/browser/components/preferences/in-content/main.js
-@@ -14,16 +14,22 @@ var gMainPane = {
+@@ -18,16 +18,22 @@ var gMainPane = {
    init: function ()
    {
      function setEventListener(aId, aEventType, aCallback)
@@ -1364,7 +1295,7 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
      // when the user will select the default.  We refresh here periodically
      // in case the default changes.  On other Windows OS's defaults can also
      // be set while the prefs are open.
-@@ -711,16 +717,27 @@ var gMainPane = {
+@@ -720,16 +726,27 @@ var gMainPane = {
     */
    setDefaultBrowser: function()
    {
@@ -1418,7 +1349,7 @@ diff --git a/browser/components/shell/nsKDEShellService.cpp b/browser/components
 new file mode 100644
 --- /dev/null
 +++ b/browser/components/shell/nsKDEShellService.cpp
-@@ -0,0 +1,292 @@
+@@ -0,0 +1,251 @@
 +/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1496,47 +1427,6 @@ new file mode 100644
 +    command->AppendElement( paramstr, false );
 +
 +    return nsKDEUtils::command( command ) ? NS_OK : NS_ERROR_FAILURE;
-+}
-+
-+NS_IMETHODIMP
-+nsKDEShellService::GetShouldSkipCheckDefaultBrowser(bool* aResult)
-+{
-+  NS_ENSURE_ARG_POINTER(aResult);
-+
-+  nsresult rv;
-+  nsCOMPtr<nsIPrefBranch> prefs(do_GetService(NS_PREFSERVICE_CONTRACTID, &rv));
-+  if (NS_FAILED(rv)) {
-+    return rv;
-+  }
-+
-+  rv = prefs->GetBoolPref(PREF_SKIPDEFAULTBROWSERCHECK, aResult);
-+  if (NS_FAILED(rv)) {
-+    return rv;
-+  }
-+  if (*aResult) {
-+    // Only skip the default browser check once. The next attempt in
-+    // a new session should proceed.
-+    return prefs->SetBoolPref(PREF_SKIPDEFAULTBROWSERCHECK, false);
-+  }
-+
-+  int32_t defaultBrowserCheckCount;
-+  rv = prefs->GetIntPref(PREF_DEFAULTBROWSERCHECKCOUNT,
-+                         &defaultBrowserCheckCount);
-+  if (NS_FAILED(rv)) {
-+    return rv;
-+  }
-+  if (defaultBrowserCheckCount < 4) {
-+    *aResult = false;
-+    return prefs->SetIntPref(PREF_DEFAULTBROWSERCHECKCOUNT,
-+                             defaultBrowserCheckCount + 1);
-+  }
-+
-+  // Disable the default browser check after three attempts.
-+  // Don't modify PREF_CHECKDEFAULTBROWSER since that is a
-+  // user-initiated action and it shouldn't get re-enabled
-+  // if it has been user disabled.
-+  *aResult = true;
-+  return rv;
 +}
 +
 +NS_IMETHODIMP
@@ -1795,7 +1685,7 @@ new file mode 100644
 diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
 --- a/browser/installer/package-manifest.in
 +++ b/browser/installer/package-manifest.in
-@@ -709,16 +709,17 @@
+@@ -705,16 +705,17 @@
  @RESPATH@/defaults/autoconfig/prefcalls.js
  @RESPATH@/browser/defaults/profile/prefs.js
  @RESPATH@/browser/defaults/permissions
@@ -1810,6 +1700,6 @@ diff --git a/browser/installer/package-manifest.in b/browser/installer/package-m
  #ifdef MOZ_SERVICES_NOTIFICATIONS
  @RESPATH@/defaults/pref/services-notifications.js
  #endif
- #ifdef MOZ_SERVICES_SYNC
  @RESPATH@/defaults/pref/services-sync.js
- #endif
+ 
+ ; [Layout Engine Resources]
