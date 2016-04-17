@@ -39,7 +39,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linu
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde"
+IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde +privacy"
 RESTRICT="!bindist? ( bindist )"
 
 # More URIs appended below...
@@ -127,11 +127,16 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
-	eapply "${FILESDIR}/add_missing_pgo_rule.patch"
+	
+	if use pgo ; then
+		eapply "${FILESDIR}/add_missing_pgo_rule.patch"
+	fi
 
-	for i in $(cat "${FILESDIR}/privacy/series"); \
-	do eapply "${FILESDIR}/privacy/$i"; \
-	done
+	if use kde ; then	
+		for i in $(cat "${FILESDIR}/privacy/series"); \
+		do eapply "${FILESDIR}/privacy/$i"; \
+		done
+	fi
 
 	if use kde ; then
 		for i in $(cat "${FILESDIR}/kde/series"); \
