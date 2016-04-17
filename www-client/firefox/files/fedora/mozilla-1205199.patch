@@ -1,0 +1,106 @@
+diff --git a/dom/plugins/base/nsPluginNativeWindowGtk.cpp b/dom/plugins/base/nsPluginNativeWindowGtk.cpp
+--- a/dom/plugins/base/nsPluginNativeWindowGtk.cpp
++++ b/dom/plugins/base/nsPluginNativeWindowGtk.cpp
+@@ -19,16 +19,17 @@
+ 
+ #if (GTK_MAJOR_VERSION == 3)
+ #include <gtk/gtkx.h>
+ #else
+ #include "gtk2xtbin.h"
+ #endif
+ #include "mozilla/X11Util.h"
+ 
++static void plug_added_cb(GtkWidget *widget, gpointer data);
+ static gboolean plug_removed_cb   (GtkWidget *widget, gpointer data);
+ static void socket_unrealize_cb   (GtkWidget *widget, gpointer data);
+ 
+ nsPluginNativeWindowGtk::nsPluginNativeWindowGtk() : nsPluginNativeWindow()
+ {
+   // initialize the struct fields
+   window = nullptr; 
+   x = 0; 
+@@ -158,16 +159,19 @@ nsresult nsPluginNativeWindowGtk::Create
+ 
+   //attach the socket to the container widget
+   gtk_widget_set_parent_window(mSocketWidget, parent_win);
+ 
+   // enable/disable focus event handlers,
+   // see plugin_window_filter_func() for details
+   g_object_set_data(G_OBJECT(mSocketWidget), "enable-xt-focus", (void *)aEnableXtFocus);
+ 
++  g_signal_connect(mSocketWidget, "plug_added",
++                   G_CALLBACK(plug_added_cb), nullptr);
++
+   // Make sure to handle the plug_removed signal.  If we don't the
+   // socket will automatically be destroyed when the plug is
+   // removed, which means we're destroying it more than once.
+   // SYNTAX ERROR.
+   g_signal_connect(mSocketWidget, "plug_removed",
+                    G_CALLBACK(plug_removed_cb), nullptr);
+ 
+   g_signal_connect(mSocketWidget, "unrealize",
+@@ -273,16 +277,42 @@ nsresult nsPluginNativeWindowGtk::Create
+   // Leave mWsInfo.type = 0 - Who knows what this is meant to be?
+ 
+   XFlush(mWsInfo.display);
+ 
+   return NS_OK;
+ }
+ #endif
+ 
++static void
++plug_window_finalize_cb(gpointer socket, GObject* plug_window)
++{
++  g_object_unref(socket);
++}
++
++static void
++plug_added_cb(GtkWidget *socket, gpointer data)
++{
++  // The plug window has been embedded, and gtk_socket_add_window() has added
++  // a filter to the socket's plug_window, passing the socket as data for the
++  // filter, so the socket must live as long as events may be received on the
++  // plug window.
++  //
++  // https://git.gnome.org/browse/gtk+/tree/gtk/gtksocket.c?h=3.18.7#n1124
++  g_object_ref(socket);
++  // When the socket is unrealized, perhaps during gtk_widget_destroy() from
++  // ~nsPluginNativeWindowGtk, the plug is removed.  The plug in the child
++  // process then destroys its widget and window.  When the browser process
++  // receives the DestroyNotify event for the plug window, GDK releases its
++  // reference to plugWindow.  This is typically the last reference and so the
++  // weak ref callback triggers release of the socket.
++  GdkWindow* plugWindow = gtk_socket_get_plug_window(GTK_SOCKET(socket));
++  g_object_weak_ref(G_OBJECT(plugWindow), plug_window_finalize_cb, socket);
++}
++
+ /* static */
+ gboolean
+ plug_removed_cb (GtkWidget *widget, gpointer data)
+ {
+   // Gee, thanks for the info!
+   return TRUE;
+ }
+ 
+diff --git a/widget/gtk/mozgtk/mozgtk.c b/widget/gtk/mozgtk/mozgtk.c
+--- a/widget/gtk/mozgtk/mozgtk.c
++++ b/widget/gtk/mozgtk/mozgtk.c
+@@ -384,16 +384,17 @@ STUB(gtk_selection_data_targets_include_
+ STUB(gtk_separator_get_type)
+ STUB(gtk_separator_menu_item_new)
+ STUB(gtk_separator_tool_item_new)
+ STUB(gtk_settings_get_default)
+ STUB(gtk_settings_get_for_screen)
+ STUB(gtk_socket_add_id)
+ STUB(gtk_socket_get_id)
+ STUB(gtk_socket_get_type)
++STUB(gtk_socket_get_plug_window)
+ STUB(gtk_socket_new)
+ STUB(gtk_spin_button_new)
+ STUB(gtk_statusbar_new)
+ STUB(gtk_style_lookup_icon_set)
+ STUB(gtk_table_attach)
+ STUB(gtk_table_get_type)
+ STUB(gtk_table_new)
+ STUB(gtk_target_list_add)
+

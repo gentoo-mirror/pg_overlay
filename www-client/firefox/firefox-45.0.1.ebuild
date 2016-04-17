@@ -128,6 +128,9 @@ src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
 	
+	# Fedora & OpenSUSE patches
+	eapply "${FILESDIR}/fedora"
+	
 	if use pgo ; then
 		eapply "${FILESDIR}/add_missing_pgo_rule.patch"
 	fi
