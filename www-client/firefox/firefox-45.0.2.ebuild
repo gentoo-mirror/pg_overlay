@@ -251,11 +251,11 @@ src_configure() {
 	mozconfig_annotate '' --disable-elf-hack
 	
 	# Privacy
-	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-tests
+	#mozconfig_annotate '' --disable-necko-wifi
+	#mozconfig_annotate '' --disable-safe-browsing
+	#mozconfig_annotate '' --disable-crashreporter
+	#mozconfig_annotate '' --disable-updater
+	#mozconfig_annotate '' --disable-tests
 
 	# Other ff-specific settings
 	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
