@@ -128,8 +128,8 @@ src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
 	
-	# Fedora & OpenSUSE patches
-	#eapply "${FILESDIR}/fedora"
+	# Fedora patches
+	eapply "${FILESDIR}/fedora-patchset"
 
 	if use kde ; then
 		for i in $(cat "${FILESDIR}/kde/series"); \
