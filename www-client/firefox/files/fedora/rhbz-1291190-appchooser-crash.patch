@@ -1,0 +1,18 @@
+diff -up firefox-44.0/widget/gtk/nsApplicationChooser.cpp.appchooser-crash firefox-44.0/widget/gtk/nsApplicationChooser.cpp
+--- firefox-44.0/widget/gtk/nsApplicationChooser.cpp.appchooser-crash	2016-01-24 00:23:50.000000000 +0100
++++ firefox-44.0/widget/gtk/nsApplicationChooser.cpp	2016-02-03 17:17:50.891127905 +0100
+@@ -112,7 +112,13 @@ void nsApplicationChooser::Done(GtkWidge
+ 
+   // A "response" signal won't be sent again but "destroy" will be.
+   g_signal_handlers_disconnect_by_func(chooser, FuncToGpointer(OnDestroy), this);
+-  gtk_widget_destroy(chooser);
++  // GTK 3.18 has a problem with destroying dialog at this stage for some reason.
++  // We're going to hide the dialog in this case as a workaround.
++  if (gtk_major_version  == 3 && gtk_minor_version == 18) {
++    gtk_widget_hide(chooser);
++  } else {
++    gtk_widget_destroy(chooser);
++  }
+ 
+   if (mCallback) {
+     mCallback->Done(localHandler);

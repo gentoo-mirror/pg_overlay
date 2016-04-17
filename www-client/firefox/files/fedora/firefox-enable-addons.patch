@@ -1,0 +1,39 @@
+diff -up firefox-43.0/firefox-43.0/browser/app/profile/firefox.js.addons firefox-43.0/firefox-43.0/browser/app/profile/firefox.js
+--- firefox-43.0/browser/app/profile/firefox.js.addons	2015-12-10 10:18:32.942990945 +0100
++++ firefox-43.0/browser/app/profile/firefox.js	2015-12-10 10:22:36.435169388 +0100
+@@ -71,7 +71,8 @@ pref("extensions.hotfix.certs.2.sha1Fing
+ 
+ // Disable add-ons that are not installed by the user in all scopes by default.
+ // See the SCOPE constants in AddonManager.jsm for values to use here.
+-pref("extensions.autoDisableScopes", 15);
++pref("extensions.autoDisableScopes", 0);
++pref("extensions.showMismatchUI", false);
+ 
+ // Require signed add-ons by default
+ pref("xpinstall.signatures.required", true);
+diff -up firefox-43.0/firefox-43.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm.addons firefox-43.0/firefox-43.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+--- firefox-43.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm.addons	2015-12-08 19:06:45.000000000 +0100
++++ firefox-43.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm	2015-12-10 10:18:32.944990955 +0100
+@@ -2523,11 +2523,7 @@ this.XPIProvider = {
+ 
+       AddonManagerPrivate.markProviderSafe(this);
+ 
+-      if (aAppChanged === undefined) {
+-        // For new profiles we will never need to show the add-on selection UI
+-        Services.prefs.setBoolPref(PREF_SHOWN_SELECTION_UI, true);
+-      }
+-      else if (aAppChanged && !this.allAppGlobal &&
++      if (aAppChanged && !this.allAppGlobal &&
+                Preferences.get(PREF_EM_SHOW_MISMATCH_UI, true)) {
+         if (!Preferences.get(PREF_SHOWN_SELECTION_UI, false)) {
+           // Flip a flag to indicate that we interrupted startup with an interactive prompt
+@@ -2547,6 +2543,9 @@ this.XPIProvider = {
+             flushCaches = true;
+           }
+         }
++      } else {
++        // For new profiles we will never need to show the add-on selection UI
++        Services.prefs.setBoolPref(PREF_SHOWN_SELECTION_UI, true);
+       }
+ 
+       if (flushCaches) {
