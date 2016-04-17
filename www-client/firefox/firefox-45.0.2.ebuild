@@ -226,8 +226,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-mailnews
 	
 	# New features
-	mozconfig_annotate '' --with-pthreads
-	mozconfig_annotate '' --enable-gold
+	#mozconfig_annotate '' --with-pthreads
+	#mozconfig_annotate '' --enable-gold
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-pay
