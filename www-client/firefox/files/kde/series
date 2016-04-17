@@ -1,6 +1,10 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
 mozilla-language.patch
+mozilla-gtk3_20.patch
+
 firefox-kde.patch
 firefox-no-default-ualocale.patch
 firefox-branded-icons.patch
+
+unity-menubar.patch
