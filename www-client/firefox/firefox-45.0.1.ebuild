@@ -39,7 +39,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linu
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde"
+IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde +privacy"
 RESTRICT="!bindist? ( bindist )"
 
 # More URIs appended below...
@@ -127,14 +127,21 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
-	eapply "${FILESDIR}/pgo.patch"
+	
+	if use pgo ; then
+		eapply "${FILESDIR}/add_missing_pgo_rule.patch"
+	fi
 
-	for i in $(cat "${FILESDIR}/privacy/series"); \
-	do eapply "${FILESDIR}/privacy/$i"; \
-	done
+	if use kde ; then	
+		for i in $(cat "${FILESDIR}/privacy/series"); \
+		do eapply "${FILESDIR}/privacy/$i"; \
+		done
+	fi
 
 	if use kde ; then
-		eapply "${FILESDIR}/kde"
+		for i in $(cat "${FILESDIR}/kde/series"); \
+		do eapply "${FILESDIR}/kde/$i"; \
+		done
 	fi
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -217,10 +224,12 @@ src_configure() {
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 	mozconfig_annotate '' --disable-mailnews
-	mozconfig_annotate '' --enable-release
+	
+	# New features
 	mozconfig_annotate '' --with-pthreads
+	mozconfig_annotate '' --enable-gold
 
-	# Disable unwanted features
+	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-pay
 	mozconfig_annotate '' --disable-metro
 	mozconfig_annotate '' --disable-maintenance-service
@@ -240,13 +249,20 @@ src_configure() {
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-elf-hack
+	
+	# Privacy
+	mozconfig_annotate '' --disable-necko-wifi
+	mozconfig_annotate '' --disable-safe-browsing
+	mozconfig_annotate '' --disable-crashreporter
+	mozconfig_annotate '' --disable-updater
+	mozconfig_annotate '' --disable-tests
 
 	# Other ff-specific settings
 	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
 
 	# Allow for a proper pgo build
 	if use pgo; then
-		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
+		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 $(MAKE) -C $(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
 	fi
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
