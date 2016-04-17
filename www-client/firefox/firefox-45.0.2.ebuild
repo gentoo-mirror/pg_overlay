@@ -230,25 +230,25 @@ src_configure() {
 	#mozconfig_annotate '' --enable-gold
 
 	# Disable unwanted features from Cyberfox
-	mozconfig_annotate '' --disable-pay
-	mozconfig_annotate '' --disable-metro
-	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-services-healthreport
-	mozconfig_annotate '' --disable-moz-services-healthreport
-	mozconfig_annotate '' --disable-moz_services_healthreport
-	mozconfig_annotate '' --disable-data-reporting
-	mozconfig_annotate '' --disable-telemetry-reporting
-	mozconfig_annotate '' --disable-auto-deps
-	mozconfig_annotate '' --disable-ipdl-tests
-	mozconfig_annotate '' --disable-update-channel
-	mozconfig_annotate '' --disable-update-packaging
-	mozconfig_annotate '' --enable-debugger-info-modules=no
-	mozconfig_annotate '' --disable-debugger-info-modules
-	mozconfig_annotate '' --disable-mochitest
-	mozconfig_annotate '' --disable-mochitests
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-parental-controls
-	mozconfig_annotate '' --disable-elf-hack
+	#mozconfig_annotate '' --disable-pay
+	#mozconfig_annotate '' --disable-metro
+	#mozconfig_annotate '' --disable-maintenance-service
+	#mozconfig_annotate '' --disable-services-healthreport
+	#mozconfig_annotate '' --disable-moz-services-healthreport
+	#mozconfig_annotate '' --disable-moz_services_healthreport
+	#mozconfig_annotate '' --disable-data-reporting
+	#mozconfig_annotate '' --disable-telemetry-reporting
+	#mozconfig_annotate '' --disable-auto-deps
+	#mozconfig_annotate '' --disable-ipdl-tests
+	#mozconfig_annotate '' --disable-update-channel
+	#mozconfig_annotate '' --disable-update-packaging
+	#mozconfig_annotate '' --enable-debugger-info-modules=no
+	#mozconfig_annotate '' --disable-debugger-info-modules
+	#mozconfig_annotate '' --disable-mochitest
+	#mozconfig_annotate '' --disable-mochitests
+	#mozconfig_annotate '' --disable-accessibility
+	#mozconfig_annotate '' --disable-parental-controls
+	#mozconfig_annotate '' --disable-elf-hack
 	
 	# Privacy
 	#mozconfig_annotate '' --disable-necko-wifi
