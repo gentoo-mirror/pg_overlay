@@ -23,7 +23,7 @@ IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 REQUIRED_USE="gn? ( kerberos !system-ffmpeg )
-		^^ ( inox iridium ungoogled )"
+		?? ( inox iridium ungoogled )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -194,9 +194,9 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r1.patch"
 
-	#if use vaapi; then
-	#	epatch "${FILESDIR}/chromium_vaapi.patch"
-	#fi
+	if use vaapi; then
+		epatch "${FILESDIR}/chromium_vaapi.patch"
+	fi
 
 	# Inox patches
 	if use inox; then

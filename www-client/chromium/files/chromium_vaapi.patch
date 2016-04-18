@@ -3,26 +3,26 @@ Enables using VA-API hardware acceleration in Linux. The patch for bpf_gpu_polic
 
 Taken from:
 https://code.launchpad.net/~saiarcot895/chromium-browser/chromium-browser.wily.dev
-And rebased against chromium-dev 49.0.2623.75 sources.
+And rebased against chromium-dev 50.0.2661.75 sources.
  
 --------
 
-diff -uar chromium-49.0.2623.75.orig/chrome/browser/about_flags.cc chromium-49.0.2623.75/chrome/browser/about_flags.cc
---- chromium-49.0.2623.75.orig/chrome/browser/about_flags.cc	2016-02-25 03:02:29.000000000 +0100
-+++ chromium-49.0.2623.75/chrome/browser/about_flags.cc	2016-03-05 23:03:21.549519447 +0100
-@@ -937,7 +937,7 @@
-      "disable-accelerated-video-decode",
-      IDS_FLAGS_ACCELERATED_VIDEO_DECODE_NAME,
-      IDS_FLAGS_ACCELERATED_VIDEO_DECODE_DESCRIPTION,
--     kOsMac | kOsWin | kOsCrOS,
-+     kOsAll,
-      SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
+diff -uarN chromium-50.0.2661.75.orig/chrome/browser/about_flags.cc chromium-50.0.2661.75/chrome/browser/about_flags.cc
+--- chromium-50.0.2661.75.orig/chrome/browser/about_flags.cc	2016-04-13 22:59:38.000000000 +0200
++++ chromium-50.0.2661.75/chrome/browser/about_flags.cc	2016-04-16 00:44:45.685691647 +0200
+@@ -854,7 +854,7 @@
+         "disable-accelerated-video-decode",
+         IDS_FLAGS_ACCELERATED_VIDEO_DECODE_NAME,
+         IDS_FLAGS_ACCELERATED_VIDEO_DECODE_DESCRIPTION,
+-        kOsMac | kOsWin | kOsCrOS,
++        kOsAll,
+         SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
  #if defined(USE_ASH)
-diff -uar chromium-49.0.2623.75.orig/content/common/gpu/client/command_buffer_proxy_impl.cc chromium-49.0.2623.75/content/common/gpu/client/command_buffer_proxy_impl.cc
---- chromium-49.0.2623.75.orig/content/common/gpu/client/command_buffer_proxy_impl.cc	2016-02-24 21:01:32.000000000 +0100
-+++ chromium-49.0.2623.75/content/common/gpu/client/command_buffer_proxy_impl.cc	2016-03-05 23:03:21.569522766 +0100
-@@ -698,8 +698,10 @@
+diff -uarN chromium-50.0.2661.75.orig/content/common/gpu/client/command_buffer_proxy_impl.cc chromium-50.0.2661.75/content/common/gpu/client/command_buffer_proxy_impl.cc
+--- chromium-50.0.2661.75.orig/content/common/gpu/client/command_buffer_proxy_impl.cc	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/common/gpu/client/command_buffer_proxy_impl.cc	2016-04-16 00:41:59.606303547 +0200
+@@ -641,8 +641,10 @@
  
  scoped_ptr<media::VideoDecodeAccelerator>
  CommandBufferProxyImpl::CreateVideoDecoder() {
@@ -33,9 +33,9 @@ diff -uar chromium-49.0.2623.75.orig/content/common/gpu/client/command_buffer_pr
    return scoped_ptr<media::VideoDecodeAccelerator>(
        new GpuVideoDecodeAcceleratorHost(channel_, this));
  }
-diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc chromium-49.0.2623.75/content/common/gpu/media/gpu_video_decode_accelerator.cc
---- chromium-49.0.2623.75.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc	2016-02-24 21:01:32.000000000 +0100
-+++ chromium-49.0.2623.75/content/common/gpu/media/gpu_video_decode_accelerator.cc	2016-03-05 23:03:21.581524755 +0100
+diff -uarN chromium-50.0.2661.75.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc chromium-50.0.2661.75/content/common/gpu/media/gpu_video_decode_accelerator.cc
+--- chromium-50.0.2661.75.orig/content/common/gpu/media/gpu_video_decode_accelerator.cc	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/common/gpu/media/gpu_video_decode_accelerator.cc	2016-04-16 00:41:59.617304831 +0200
 @@ -34,7 +34,7 @@
  #include "content/common/gpu/media/dxva_video_decode_accelerator_win.h"
  #elif defined(OS_MACOSX)
@@ -89,9 +89,9 @@ diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/gpu_video_decode_a
    decoder.reset(new VaapiVideoDecodeAccelerator(
        make_context_current_, base::Bind(&GpuVideoDecodeAccelerator::BindImage,
                                          base::Unretained(this))));
-diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_video_decode_accelerator.cc chromium-49.0.2623.75/content/common/gpu/media/vaapi_video_decode_accelerator.cc
---- chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_video_decode_accelerator.cc	2016-02-24 00:02:00.000000000 +0100
-+++ chromium-49.0.2623.75/content/common/gpu/media/vaapi_video_decode_accelerator.cc	2016-03-05 23:03:21.581524755 +0100
+diff -uarN chromium-50.0.2661.75.orig/content/common/gpu/media/vaapi_video_decode_accelerator.cc chromium-50.0.2661.75/content/common/gpu/media/vaapi_video_decode_accelerator.cc
+--- chromium-50.0.2661.75.orig/content/common/gpu/media/vaapi_video_decode_accelerator.cc	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/common/gpu/media/vaapi_video_decode_accelerator.cc	2016-04-16 00:41:59.618304948 +0200
 @@ -334,17 +334,17 @@
  
    base::AutoLock auto_lock(lock_);
@@ -131,9 +131,9 @@ diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_video_decode
      return false;
    }
  
-diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_wrapper.cc chromium-49.0.2623.75/content/common/gpu/media/vaapi_wrapper.cc
---- chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_wrapper.cc	2016-02-24 21:01:32.000000000 +0100
-+++ chromium-49.0.2623.75/content/common/gpu/media/vaapi_wrapper.cc	2016-03-05 23:03:21.587525751 +0100
+diff -uarN chromium-50.0.2661.75.orig/content/common/gpu/media/vaapi_wrapper.cc chromium-50.0.2661.75/content/common/gpu/media/vaapi_wrapper.cc
+--- chromium-50.0.2661.75.orig/content/common/gpu/media/vaapi_wrapper.cc	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/common/gpu/media/vaapi_wrapper.cc	2016-04-16 00:41:59.619305064 +0200
 @@ -186,7 +186,7 @@
      VAProfile va_profile,
      const base::Closure& report_error_to_uma_cb) {
@@ -166,7 +166,7 @@ diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_wrapper.cc c
      else
        DVLOG(1) << kErrorMsg;
      return false;
-@@ -424,7 +426,7 @@
+@@ -421,7 +423,7 @@
    if (std::find(supported_entrypoints.begin(),
                  supported_entrypoints.end(),
                  entrypoint) == supported_entrypoints.end()) {
@@ -175,7 +175,7 @@ diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_wrapper.cc c
      return false;
    }
    return true;
-@@ -448,8 +450,8 @@
+@@ -445,8 +447,8 @@
      if (attribs[i].type != required_attribs[i].type ||
          (attribs[i].value & required_attribs[i].value) !=
              required_attribs[i].value) {
@@ -186,9 +186,9 @@ diff -uar chromium-49.0.2623.75.orig/content/common/gpu/media/vaapi_wrapper.cc c
        return false;
      }
    }
-diff -uar chromium-49.0.2623.75.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc chromium-49.0.2623.75/content/common/sandbox_linux/bpf_gpu_policy_linux.cc
---- chromium-49.0.2623.75.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2016-02-24 00:02:00.000000000 +0100
-+++ chromium-49.0.2623.75/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2016-03-05 23:03:21.600527904 +0100
+diff -uarN chromium-50.0.2661.75.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc chromium-50.0.2661.75/content/common/sandbox_linux/bpf_gpu_policy_linux.cc
+--- chromium-50.0.2661.75.orig/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2016-03-25 14:04:48.000000000 +0100
++++ chromium-50.0.2661.75/content/common/sandbox_linux/bpf_gpu_policy_linux.cc	2016-04-16 00:41:59.632306581 +0200
 @@ -22,6 +22,8 @@
  #include "base/macros.h"
  #include "base/memory/scoped_ptr.h"
@@ -288,10 +288,10 @@ diff -uar chromium-49.0.2623.75.orig/content/common/sandbox_linux/bpf_gpu_policy
  
    return true;
  }
-diff -uar chromium-49.0.2623.75.orig/content/content_common.gypi chromium-49.0.2623.75/content/content_common.gypi
---- chromium-49.0.2623.75.orig/content/content_common.gypi	2016-02-24 21:01:32.000000000 +0100
-+++ chromium-49.0.2623.75/content/content_common.gypi	2016-03-05 23:03:21.609529397 +0100
-@@ -878,7 +878,7 @@
+diff -uarN chromium-50.0.2661.75.orig/content/content_common.gypi chromium-50.0.2661.75/content/content_common.gypi
+--- chromium-50.0.2661.75.orig/content/content_common.gypi	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/content_common.gypi	2016-04-16 00:41:59.642307748 +0200
+@@ -860,7 +860,7 @@
          },
        ],
      }],
@@ -299,8 +299,8 @@ diff -uar chromium-49.0.2623.75.orig/content/content_common.gypi chromium-49.0.2
 +    ['chromeos==1 or desktop_linux==1', {
        'sources': [
          'common/gpu/media/accelerated_video_decoder.h',
-         'common/gpu/media/gpu_arc_video_service.cc',
-@@ -936,7 +936,7 @@
+         'common/gpu/media/h264_decoder.cc',
+@@ -916,7 +916,7 @@
          'common/gpu/media/tegra_v4l2_device.h',
        ],
      }],
@@ -309,10 +309,10 @@ diff -uar chromium-49.0.2623.75.orig/content/content_common.gypi chromium-49.0.2
        'dependencies': [
          '../media/media.gyp:media',
          '../third_party/libyuv/libyuv.gyp:libyuv',
-diff -uar chromium-49.0.2623.75.orig/content/content_gpu.gypi chromium-49.0.2623.75/content/content_gpu.gypi
---- chromium-49.0.2623.75.orig/content/content_gpu.gypi	2016-02-24 21:01:32.000000000 +0100
-+++ chromium-49.0.2623.75/content/content_gpu.gypi	2016-03-05 23:03:21.620531221 +0100
-@@ -38,7 +38,7 @@
+diff -uarN chromium-50.0.2661.75.orig/content/content_gpu.gypi chromium-50.0.2661.75/content/content_gpu.gypi
+--- chromium-50.0.2661.75.orig/content/content_gpu.gypi	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/content_gpu.gypi	2016-04-16 00:41:59.643307865 +0200
+@@ -40,7 +40,7 @@
          ],
        },
      }],
@@ -321,10 +321,10 @@ diff -uar chromium-49.0.2623.75.orig/content/content_gpu.gypi chromium-49.0.2623
        'include_dirs': [
          '<(DEPTH)/third_party/libva',
        ],
-diff -uar chromium-49.0.2623.75.orig/content/content_tests.gypi chromium-49.0.2623.75/content/content_tests.gypi
---- chromium-49.0.2623.75.orig/content/content_tests.gypi	2016-02-24 21:01:32.000000000 +0100
-+++ chromium-49.0.2623.75/content/content_tests.gypi	2016-03-05 23:03:21.632533211 +0100
-@@ -1757,7 +1757,7 @@
+diff -uarN chromium-50.0.2661.75.orig/content/content_tests.gypi chromium-50.0.2661.75/content/content_tests.gypi
+--- chromium-50.0.2661.75.orig/content/content_tests.gypi	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/content_tests.gypi	2016-04-16 00:41:59.648308450 +0200
+@@ -1784,7 +1784,7 @@
            },
          ]
      }],
@@ -333,9 +333,9 @@ diff -uar chromium-49.0.2623.75.orig/content/content_tests.gypi chromium-49.0.26
        'targets': [
            {
              'target_name': 'vaapi_jpeg_decoder_unittest',
-diff -uar chromium-49.0.2623.75.orig/content/gpu/gpu_main.cc chromium-49.0.2623.75/content/gpu/gpu_main.cc
---- chromium-49.0.2623.75.orig/content/gpu/gpu_main.cc	2016-02-24 21:01:32.000000000 +0100
-+++ chromium-49.0.2623.75/content/gpu/gpu_main.cc	2016-03-05 23:03:21.633533377 +0100
+diff -uarN chromium-50.0.2661.75.orig/content/gpu/gpu_main.cc chromium-50.0.2661.75/content/gpu/gpu_main.cc
+--- chromium-50.0.2661.75.orig/content/gpu/gpu_main.cc	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/gpu/gpu_main.cc	2016-04-16 00:41:59.655309266 +0200
 @@ -76,7 +76,7 @@
  #include "content/common/sandbox_mac.h"
  #endif
@@ -354,10 +354,10 @@ diff -uar chromium-49.0.2623.75.orig/content/gpu/gpu_main.cc chromium-49.0.2623.
    VaapiWrapper::PreSandboxInitialization();
  #endif
  
-diff -uar chromium-49.0.2623.75.orig/content/public/common/content_switches.cc chromium-49.0.2623.75/content/public/common/content_switches.cc
---- chromium-49.0.2623.75.orig/content/public/common/content_switches.cc	2016-02-25 03:02:29.000000000 +0100
-+++ chromium-49.0.2623.75/content/public/common/content_switches.cc	2016-03-05 23:03:21.644535200 +0100
-@@ -947,7 +947,9 @@
+diff -uarN chromium-50.0.2661.75.orig/content/public/common/content_switches.cc chromium-50.0.2661.75/content/public/common/content_switches.cc
+--- chromium-50.0.2661.75.orig/content/public/common/content_switches.cc	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/public/common/content_switches.cc	2016-04-16 00:41:59.672311252 +0200
+@@ -972,7 +972,9 @@
  #if defined(OS_CHROMEOS)
  // Disables panel fitting (used for mirror mode).
  const char kDisablePanelFitting[]           = "disable-panel-fitting";
@@ -367,10 +367,10 @@ diff -uar chromium-49.0.2623.75.orig/content/public/common/content_switches.cc c
  // Disables VA-API accelerated video encode.
  const char kDisableVaapiAcceleratedVideoEncode[] =
      "disable-vaapi-accelerated-video-encode";
-diff -uar chromium-49.0.2623.75.orig/content/public/common/content_switches.h chromium-49.0.2623.75/content/public/common/content_switches.h
---- chromium-49.0.2623.75.orig/content/public/common/content_switches.h	2016-02-25 03:02:29.000000000 +0100
-+++ chromium-49.0.2623.75/content/public/common/content_switches.h	2016-03-05 23:03:21.663538350 +0100
-@@ -278,6 +278,8 @@
+diff -uarN chromium-50.0.2661.75.orig/content/public/common/content_switches.h chromium-50.0.2661.75/content/public/common/content_switches.h
+--- chromium-50.0.2661.75.orig/content/public/common/content_switches.h	2016-04-13 22:59:46.000000000 +0200
++++ chromium-50.0.2661.75/content/public/common/content_switches.h	2016-04-16 00:41:59.683312536 +0200
+@@ -281,6 +281,8 @@
  
  #if defined(OS_CHROMEOS)
  CONTENT_EXPORT extern const char kDisablePanelFitting[];
@@ -379,9 +379,9 @@ diff -uar chromium-49.0.2623.75.orig/content/public/common/content_switches.h ch
  CONTENT_EXPORT extern const char kDisableVaapiAcceleratedVideoEncode[];
  #endif
  
-diff -uar chromium-49.0.2623.75.orig/gpu/config/software_rendering_list_json.cc chromium-49.0.2623.75/gpu/config/software_rendering_list_json.cc
---- chromium-49.0.2623.75.orig/gpu/config/software_rendering_list_json.cc	2016-02-24 00:02:01.000000000 +0100
-+++ chromium-49.0.2623.75/gpu/config/software_rendering_list_json.cc	2016-03-05 23:03:21.663538350 +0100
+diff -uarN chromium-50.0.2661.75.orig/gpu/config/software_rendering_list_json.cc chromium-50.0.2661.75/gpu/config/software_rendering_list_json.cc
+--- chromium-50.0.2661.75.orig/gpu/config/software_rendering_list_json.cc	2016-04-13 22:59:47.000000000 +0200
++++ chromium-50.0.2661.75/gpu/config/software_rendering_list_json.cc	2016-04-16 00:41:59.692313586 +0200
 @@ -481,17 +481,6 @@
        ]
      },
@@ -412,10 +412,10 @@ diff -uar chromium-49.0.2623.75.orig/gpu/config/software_rendering_list_json.cc 
          }
        ],
        "features": [
-diff -uar chromium-49.0.2623.75.orig/media/media.gyp chromium-49.0.2623.75/media/media.gyp
---- chromium-49.0.2623.75.orig/media/media.gyp	2016-02-24 21:01:33.000000000 +0100
-+++ chromium-49.0.2623.75/media/media.gyp	2016-03-05 23:03:21.681541334 +0100
-@@ -783,7 +783,7 @@
+diff -uarN chromium-50.0.2661.75.orig/media/media.gyp chromium-50.0.2661.75/media/media.gyp
+--- chromium-50.0.2661.75.orig/media/media.gyp	2016-04-13 22:59:48.000000000 +0200
++++ chromium-50.0.2661.75/media/media.gyp	2016-04-16 00:41:59.709315572 +0200
+@@ -724,7 +724,7 @@
            ],
          }],
          # For VaapiVideoEncodeAccelerator.
@@ -424,7 +424,7 @@ diff -uar chromium-49.0.2623.75.orig/media/media.gyp chromium-49.0.2623.75/media
            'sources': [
              'filters/h264_bitstream_buffer.cc',
              'filters/h264_bitstream_buffer.h',
-@@ -1417,7 +1417,7 @@
+@@ -1354,7 +1354,7 @@
              'cdm/cdm_adapter_unittest.cc',
            ],
          }],
