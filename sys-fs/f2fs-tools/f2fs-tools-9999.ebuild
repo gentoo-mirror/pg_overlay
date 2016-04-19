@@ -1,10 +1,10 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=5
 
-inherit autotools git-r3 multilib
+inherit autotools eutils git-r3 multilib
 
 DESCRIPTION="Tools for Flash-Friendly File System (F2FS)"
 HOMEPAGE="http://sourceforge.net/projects/f2fs-tools/"
@@ -16,6 +16,7 @@ KEYWORDS=""
 IUSE=""
 
 src_prepare() {
+	epatch "${FILESDIR}"/${PN}-1.6.1-sysmacros.patch #580338
 	eautoreconf
 }
 
