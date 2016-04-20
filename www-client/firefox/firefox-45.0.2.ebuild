@@ -131,6 +131,8 @@ src_prepare() {
 	# Fedora patches
 	eapply "${FILESDIR}/fedora-patchset"
 
+	eapply "${FILESDIR}/pgo.patch"
+
 	if use kde ; then
 		for i in $(cat "${FILESDIR}/kde/series"); \
 		do eapply "${FILESDIR}/kde/$i"; \

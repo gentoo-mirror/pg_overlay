@@ -1,0 +1,11 @@
+diff -up qBittorrent-release-3.3.3/src/src.pro.verbose qBittorrent-release-3.3.3/src/src.pro
+--- qBittorrent-release-3.3.3/src/src.pro.verbose	2016-01-20 16:49:39.000000000 -0600
++++ qBittorrent-release-3.3.3/src/src.pro	2016-03-13 07:41:52.856291944 -0500
+@@ -1,6 +1,6 @@
+ # Global
+ TEMPLATE = app
+-CONFIG += qt thread silent
++CONFIG += qt thread
+ 
+ # C++11 support
+ CONFIG += c++11
