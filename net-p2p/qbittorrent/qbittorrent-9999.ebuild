@@ -58,6 +58,9 @@ S=${WORKDIR}/${MY_P}
 DOCS=(AUTHORS Changelog README.md TODO)
 
 src_prepare() {
+
+	epatch "${FILESDIR}/"${PN}*.patch
+
 	epatch_user
 	qt4-r2_src_prepare
 	
