@@ -42,7 +42,6 @@ RESTRICT="test"
 
 src_configure() {
 	local myeconfargs=(
-		--enable-shared
 		--disable-silent-rules # bug 441842
 		--with-boost-system=mt
 		--with-libiconv
