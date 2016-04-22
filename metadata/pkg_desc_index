@@ -1,6 +1,6 @@
 app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 15.14.1: Port of 7-Zip archiver for Unix
-app-emulation/wine 1.9.6 1.9.7 1.9.8: Free implementation of Windows(tm) on Unix
+app-emulation/wine 1.9.8: Free implementation of Windows(tm) on Unix
 app-pda/libimobiledevice 1.2.0: Support library to communicate with Apple iPhone/iPod Touch devices
 app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
 app-pda/usbmuxd 1.1.0: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
