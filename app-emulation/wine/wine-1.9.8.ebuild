@@ -2,13 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
+EAPI=6
 
-AUTOTOOLS_AUTORECONF=1
 PLOCALES="ar bg ca cs da de el en en_US eo es fa fi fr he hi hr hu it ja ko lt ml nb_NO nl or pa pl pt_BR pt_PT rm ro ru sk sl sr_RS@cyrillic sr_RS@latin sv te th tr uk wa zh_CN zh_TW"
 PLOCALE_BACKUP="en"
 
-inherit autotools-utils eutils fdo-mime flag-o-matic gnome2-utils l10n multilib multilib-minimal pax-utils toolchain-funcs virtualx versionator
+inherit autotools eutils fdo-mime flag-o-matic gnome2-utils l10n multilib multilib-minimal pax-utils toolchain-funcs virtualx versionator
 
 MAJOR_V=$(get_version_component_range 1-2)
 SRC_URI="!staging? ( https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2 )
@@ -17,9 +16,7 @@ SRC_URI="!staging? ( https://dl.winehq.org/wine/source/${MAJOR_V}/${P}.tar.bz2 )
 KEYWORDS="-* ~amd64 ~x86 ~x86-fbsd"
 
 GV="2.44"
-MV="4.6.0"
-STAGING_P="wine-staging-${PV}"
-STAGING_DIR="${WORKDIR}/${STAGING_P}"
+MV="4.6.2"
 WINE_GENTOO="wine-gentoo-2015.03.07"
 DESCRIPTION="Free implementation of Windows(tm) on Unix"
 HOMEPAGE="http://www.winehq.org/"
@@ -49,6 +46,7 @@ RESTRICT="test"
 COMMON_DEPEND="
 	truetype? ( >=media-libs/freetype-2.0.0[${MULTILIB_USEDEP}] )
 	capi? ( net-dialup/capi4k-utils )
+	d3d9? ( media-libs/mesa[d3d9,${MULTILIB_USEDEP}] )
 	ncurses? ( >=sys-libs/ncurses-5.2:0=[${MULTILIB_USEDEP}] )
 	udisks? ( sys-apps/dbus[${MULTILIB_USEDEP}] )
 	fontconfig? ( media-libs/fontconfig:=[${MULTILIB_USEDEP}] )
@@ -116,7 +114,7 @@ RDEPEND="${COMMON_DEPEND}
 	dos? ( games-emulation/dosbox )
 	perl? ( dev-lang/perl dev-perl/XML-Simple )
 	s3tc? ( >=media-libs/libtxc_dxtn-1.0.1-r1[${MULTILIB_USEDEP}] )
-	samba? ( >=net-fs/samba-3.0.25 )
+	samba? ( >=net-fs/samba-3.0.25[winbind] )
 	selinux? ( sec-policy/selinux-wine )
 	udisks? ( sys-fs/udisks:2 )
 	pulseaudio? ( realtime? ( sys-auth/rtkit ) )"
@@ -143,9 +141,7 @@ usr/share/applications/wine-notepad.desktop
 usr/share/applications/wine-uninstaller.desktop
 usr/share/applications/wine-winecfg.desktop"
 
-if use staging; then
-	S=${WORKDIR}/${PN}-patched-staging-${PV}
-fi
+S=${WORKDIR}/${PN}-patched-staging-${PV} # As always use staging
 
 wine_build_environment_check() {
 	[[ ${MERGE_TYPE} = "binary" ]] && return 0
@@ -170,8 +166,8 @@ wine_build_environment_check() {
 		# Compile in subshell to prevent "Aborted" message
 		if ! ( $(tc-getCC) -O2 -mincoming-stack-boundary=3 "${FILESDIR}"/pr69140.c -o "${T}"/pr69140 || false ) >/dev/null 2>&1; then
 			eerror "Wine cannot be built with this version of gcc-5.3"
-			eerror "due to compiler bugs; please re-emerge the latest gcc-5.3.x ebuild,"
-			eerror "or use gcc-config to select a different compiler version."
+			eerror "due to compiler bugs; please use gcc-config to select a"
+			eerror "different compiler version."
 			eerror "See https://bugs.gentoo.org/574044"
 			eerror
 			return 1
@@ -219,7 +215,7 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.9.5-multilib-portage.patch #395615
 		"${FILESDIR}"/${PN}-1.7.12-osmesa-check.patch #429386
 		"${FILESDIR}"/${PN}-1.6-memset-O3.patch #480508
-		"${FILESDIR}"/${PN}-1.9.7-sysmacros.patch #580046
+		"${FILESDIR}"/${PN}-sysmacros.patch #580046
 	)
 	if use staging; then
 		ewarn "Applying the Wine-Staging patchset. Any bug reports to the"
@@ -230,12 +226,11 @@ src_prepare() {
 	fi
 
 	if use d3d9 && use staging; then
-		EPATCH_SUFFIX="patch" \
-		EPATCH_FORCE="yes" \
-		epatch "${FILESDIR}/d3d9"
+		eapply "${FILESDIR}/d3d9"
 	fi
 
-	autotools-utils_src_prepare
+	default
+	eautoreconf
 
 	# Modification of the server protocol requires regenerating the server requests
 	if [[ "$(md5sum server/protocol.def)" != "${md5}" ]]; then
@@ -300,13 +295,13 @@ multilib_src_configure() {
 		$(use_with xinerama)
 		$(use_with xml)
 		$(use_with xml xslt)
-		$(use_with d3d9 d3dadapter)
 	)
 
 	use staging && myconf+=(
 		--with-xattr
 		$(use_with vaapi va)
 	)
+	use d3d9 && myconf+=( $(use_with d3d9 d3dadapter) )
 
 	local PKG_CONFIG AR RANLIB
 	# Avoid crossdev's i686-pc-linux-gnu-pkg-config if building wine32 on amd64; #472038
