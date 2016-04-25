@@ -58,10 +58,9 @@ S=${S}+
 
 src_prepare() {
 	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
+
 	# Trick to avoid automagic dependency
 	use ayatana || { sed -i -e '/^LIBAPPINDICATOR_MINIMUM/s:=.*:=9999:' configure.ac || die; }
-	# Pass our configuration dir to systemd unit file
-	sed -i '/ExecStart/ s|$| -g /var/lib/${PN}/config|' daemon/${PN}-daemon.service || die
 
 	# http://trac.transmissionbt.com/ticket/4324
 	sed -i -e 's|noinst\(_PROGRAMS = $(TESTS)\)|check\1|' lib${PN}/Makefile.am || die
@@ -76,7 +75,7 @@ src_prepare() {
 	sed -i s/2.92+/2.92/g lib${PN}/version.h || die
 	sed -i s/TR292Z/TR2920/g lib${PN}/version.h || die
 
-	eapply_user
+	default
 	eautoreconf
 }
 
