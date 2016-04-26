@@ -19,9 +19,9 @@ gnome-extra/nemo-extensions 2.8: Extensions for Cinnamon's file-manager Nemo
 gnome-extra/nemo-fileroller 2.8.0: Provides context menu for Nemo
 gnome-extra/nemo-terminal 2.8.1: Nemo-Terminal Extension
 mail-client/thunderbird 45.0: Thunderbird Mail Client
-media-libs/fontconfig 2.11.95: A library for configuring and customizing font access
-media-libs/fontconfig-ultimate 2015.12.06: A set of font rendering and replacement rules for fontconfig-infinality
-media-libs/freetype 2.6.3-r20160326: A high-quality and portable font engine
+media-libs/fontconfig 2.11.95-r20160423: A library for configuring and customizing font access
+media-libs/fontconfig-ultimate 2016.04.23: A set of font rendering and replacement rules for fontconfig-infinality
+media-libs/freetype 2.6.3-r20160423: A high-quality and portable font engine
 media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
