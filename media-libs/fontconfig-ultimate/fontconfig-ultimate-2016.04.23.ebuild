@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=5
-inherit readme.gentoo versionator
+inherit readme.gentoo-r1 versionator
 
 MY_PV=$(replace_all_version_separators "-")
 DESCRIPTION="A set of font rendering and replacement rules for fontconfig-infinality"
