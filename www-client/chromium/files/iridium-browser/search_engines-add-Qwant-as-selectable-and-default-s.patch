@@ -1,4 +1,4 @@
-From b51a04451ff5e3ffde49fb30e528f7802bd23d92 Mon Sep 17 00:00:00 2001
+From a4a37c14c53fdf105501c071ba030d8ed763f38c Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 4 May 2015 15:27:37 +0200
 Subject: [PATCH 23/57] search_engines: add Qwant as selectable and default
@@ -11,7 +11,7 @@ Subject: [PATCH 23/57] search_engines: add Qwant as selectable and default
  3 files changed, 119 insertions(+), 109 deletions(-)
 
 diff --git a/components/search_engines/prepopulated_engines.json b/components/search_engines/prepopulated_engines.json
-index daa6e8e..6177916 100644
+index ff56569..978ab1d 100644
 --- a/components/search_engines/prepopulated_engines.json
 +++ b/components/search_engines/prepopulated_engines.json
 @@ -36,6 +36,15 @@
@@ -43,7 +43,7 @@ index 7dba2a7..2f52144 100644
  };
  
 diff --git a/components/search_engines/template_url_prepopulate_data.cc b/components/search_engines/template_url_prepopulate_data.cc
-index 77c7c07..b907aa9 100644
+index 750c350..d145778 100644
 --- a/components/search_engines/template_url_prepopulate_data.cc
 +++ b/components/search_engines/template_url_prepopulate_data.cc
 @@ -50,441 +50,441 @@ namespace {
@@ -598,5 +598,5 @@ index 77c7c07..b907aa9 100644
    &vinden,       &virgilio,     &yahoo,        &yahoo_ar,     &yahoo_at,
    &yahoo_au,     &yahoo_br,     &yahoo_ca,     &yahoo_ch,     &yahoo_cl,
 -- 
-2.6.2
+2.6.6
 

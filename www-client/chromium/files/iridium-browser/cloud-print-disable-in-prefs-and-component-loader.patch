@@ -1,4 +1,4 @@
-From d35f973c5ad906448f98ef89991ee70ad4883112 Mon Sep 17 00:00:00 2001
+From 7fce48575e5c4397a9b30909797d64bcf1074cb6 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 16:55:12 +0200
 Subject: [PATCH 15/57] cloud-print: disable in prefs and component loader
@@ -16,7 +16,7 @@ be off by default.
  3 files changed, 3 insertions(+), 5 deletions(-)
 
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index ac23b38..c195f2f 100644
+index d386f9d..4850983 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
 @@ -555,10 +555,12 @@ void ComponentLoader::AddDefaultComponentExtensions(
@@ -33,7 +33,7 @@ index ac23b38..c195f2f 100644
    if (!skip_session_components) {
      AddWebStoreApp();
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index a23100f..50cae0d 100644
+index 45251dd..09bdbd9 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
 @@ -87,7 +87,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
@@ -61,5 +61,5 @@ index efc476a..168153f 100644
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
 -- 
-2.6.2
+2.6.6
 

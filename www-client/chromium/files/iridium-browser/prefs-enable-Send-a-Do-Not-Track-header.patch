@@ -1,4 +1,4 @@
-From 3d13ae6c3ffb958405601cdcdf7c6d9f1a58003a Mon Sep 17 00:00:00 2001
+From b84885906fdb1225fd700e7c1e02e34457afe4aa Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
 Subject: [PATCH 12/57] prefs: enable "Send a Do-Not-Track header"
@@ -23,7 +23,7 @@ OPT-OUT.]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index 32a103d..a23100f 100644
+index 94b8791..45251dd 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
 @@ -100,7 +100,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
@@ -36,5 +36,5 @@ index 32a103d..a23100f 100644
  #if defined(ENABLE_WEBRTC)
    // TODO(guoweis): Remove next 2 options at M50.
 -- 
-2.6.2
+2.6.6
 

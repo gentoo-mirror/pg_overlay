@@ -1,4 +1,4 @@
-From 72c987ba14900f802df77a168d7f21643f400792 Mon Sep 17 00:00:00 2001
+From 170df29d0f8997cd371cefe3dce632f555a31c96 Mon Sep 17 00:00:00 2001
 From: amistry <amistry@chromium.org>
 Date: Tue, 9 Jun 2015 12:18:39 -0700
 Subject: [PATCH 48/57] hotword: disable at build time by default
@@ -24,7 +24,7 @@ Hard-disable hotwording by default even on a build level.
  3 files changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/chrome/browser/BUILD.gn b/chrome/browser/BUILD.gn
-index a66cec3..5840df3 100644
+index fc5b93e..ed30ddee 100644
 --- a/chrome/browser/BUILD.gn
 +++ b/chrome/browser/BUILD.gn
 @@ -25,7 +25,8 @@ declare_args() {
@@ -38,7 +38,7 @@ index a66cec3..5840df3 100644
  
  additional_modules_list_file =
 diff --git a/chrome/browser/extensions/component_loader.cc b/chrome/browser/extensions/component_loader.cc
-index c195f2f..dbfb29e 100644
+index 4850983..708c366 100644
 --- a/chrome/browser/extensions/component_loader.cc
 +++ b/chrome/browser/extensions/component_loader.cc
 @@ -358,17 +358,21 @@ void ComponentLoader::AddHangoutServicesExtension() {
@@ -64,7 +64,7 @@ index c195f2f..dbfb29e 100644
  
  void ComponentLoader::AddImageLoaderExtension() {
 diff --git a/chrome/browser/search/hotword_service_unittest.cc b/chrome/browser/search/hotword_service_unittest.cc
-index 315c85a..e97e618 100644
+index e5887df..6517883 100644
 --- a/chrome/browser/search/hotword_service_unittest.cc
 +++ b/chrome/browser/search/hotword_service_unittest.cc
 @@ -165,6 +165,7 @@ INSTANTIATE_TEST_CASE_P(HotwordServiceTests,
@@ -100,5 +100,5 @@ index 315c85a..e97e618 100644
  
  TEST_P(HotwordServiceTest, DisableAlwaysOnOnLanguageChange) {
 -- 
-2.6.2
+2.6.6
 

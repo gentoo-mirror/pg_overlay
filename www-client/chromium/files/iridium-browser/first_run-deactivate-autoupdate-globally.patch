@@ -1,4 +1,4 @@
-From d5daeb1000f6d32ec1df75e5d373f5c77c156694 Mon Sep 17 00:00:00 2001
+From d2a17edc230ba0b2b12e3ee357f5d97099221caa Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:12:43 +0200
 Subject: [PATCH 26/57] first_run: deactivate autoupdate globally
@@ -28,5 +28,5 @@ index 61b12fe..88d3a5f 100644
    if (!extensions_enabled)
      autoupdate_enabled = false;
 -- 
-2.6.2
+2.6.6
 
