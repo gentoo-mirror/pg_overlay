@@ -1,14 +1,14 @@
 # HG changeset patch
 # User Wolfgang Rosenauer <wr@rosenauer.org>
 # Parent 099312626f5f7c9cb5573a61d0230574ee12a660
-# Parent  ab1135c098843a4a4c5153bd361b964986fccefa
+# Parent  8015dc2ad5992bfc7d33091fc92edf18ea220a89
 Do not overwrite the locale dynamic pref from xulrunner's all.js with a wrong default value
 
 diff --git a/browser/app/profile/firefox.js b/browser/app/profile/firefox.js
 --- a/browser/app/profile/firefox.js
 +++ b/browser/app/profile/firefox.js
-@@ -254,17 +254,17 @@ pref("browser.uitour.url", "https://www.
- pref("browser.uitour.readerViewTrigger", "^https:\\/\\/www\\.mozilla\\.org\\/[^\\/]+\\/firefox\\/reading\\/start");
+@@ -216,17 +216,17 @@ pref("browser.uitour.readerViewTrigger",
+ pref("browser.uitour.surveyDuration", 7200);
  
  pref("browser.customizemode.tip0.shown", false);
  pref("browser.customizemode.tip0.learnMoreUrl", "https://support.mozilla.org/1/firefox/%VERSION%/%OS%/%LOCALE%/customize");
