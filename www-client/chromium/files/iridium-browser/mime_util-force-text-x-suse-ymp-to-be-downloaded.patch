@@ -1,4 +1,4 @@
-From 1e3ee2091141bfad3d165fca0ce5daf6d74b1eea Mon Sep 17 00:00:00 2001
+From 59c2da047bd6b94a7f6d0270e79f606d7b3402bf Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Thu, 29 Jan 2015 10:46:40 +0100
 Subject: [PATCH 08/57] mime_util: force text/x-suse-ymp to be downloaded
@@ -22,5 +22,5 @@ index f7e59e4..592662f 100644
      "text/csv",
      "text/tab-separated-values",
 -- 
-2.6.2
+2.6.6
 

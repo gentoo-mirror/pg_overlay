@@ -1,4 +1,4 @@
-From 636bdae64b8e7b1acd7213312bd29064e37b5a93 Mon Sep 17 00:00:00 2001
+From 2635b67b97a5e214218f75e686218f3d29bbe2d0 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 15 Sep 2014 10:58:42 +0200
 Subject: [PATCH 04/57] dns: send IPv6 connectivity probes to RIPE DNS rather
@@ -11,7 +11,7 @@ anyway), avoid sending to Google.
  1 file changed, 3 insertions(+), 3 deletions(-)
 
 diff --git a/net/dns/host_resolver_impl.cc b/net/dns/host_resolver_impl.cc
-index 16970cd..86dab6d 100644
+index af91b09..7405a57 100644
 --- a/net/dns/host_resolver_impl.cc
 +++ b/net/dns/host_resolver_impl.cc
 @@ -81,10 +81,10 @@ const unsigned kMinimumTTLSeconds = kCacheEntryTTLSeconds;
@@ -29,5 +29,5 @@ index 16970cd..86dab6d 100644
  // We use a separate histogram name for each platform to facilitate the
  // display of error codes by their symbolic name (since each platform has
 -- 
-2.6.2
+2.6.6
 

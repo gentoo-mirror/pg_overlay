@@ -1,4 +1,4 @@
-From 7b1b98f0ad43d405374c6613e2517d6c5f7ecbf7 Mon Sep 17 00:00:00 2001
+From b0b356c967b8acef2870a0b211457b1eb421870f Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Tue, 7 Jul 2015 18:28:46 +0200
 Subject: [PATCH 43/57] safe_browsing: disable reporting of safebrowsing
@@ -12,10 +12,10 @@ This prevents trk:148 (phishing) and trk:149 (malware).
  1 file changed, 12 insertions(+)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index 6f431e5..c749294 100644
+index 1a8dbe4..d1c569e 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -55,11 +55,13 @@ namespace {
+@@ -54,11 +54,13 @@ namespace {
      REPORT_RESULT_MAX
    };
  
@@ -29,7 +29,7 @@ index 6f431e5..c749294 100644
  
  }  // namespace
  
-@@ -276,6 +278,10 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+@@ -275,6 +277,10 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
      return;
    }
  
@@ -40,7 +40,7 @@ index 6f431e5..c749294 100644
    // Fill in metadata about which model we used.
    if (is_extended_reporting) {
      request->set_model_filename(model_loader_extended_->name());
-@@ -315,6 +321,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+@@ -314,6 +320,7 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
  
    // Record that we made a request
    phishing_report_times_.push(base::Time::Now());
@@ -48,7 +48,7 @@ index 6f431e5..c749294 100644
  }
  
  void ClientSideDetectionService::StartClientReportMalwareRequest(
-@@ -329,6 +336,10 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
+@@ -328,6 +335,10 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
      return;
    }
  
@@ -59,7 +59,7 @@ index 6f431e5..c749294 100644
    std::string request_data;
    if (!request->SerializeToString(&request_data)) {
      UpdateEnumUMAHistogram(REPORT_FAILED_SERIALIZATION);
-@@ -362,6 +373,7 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
+@@ -361,6 +372,7 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
  
    // Record that we made a malware request
    malware_report_times_.push(base::Time::Now());
@@ -68,5 +68,5 @@ index 6f431e5..c749294 100644
  
  
 -- 
-2.6.2
+2.6.6
 

@@ -1,0 +1,60 @@
+diff --git a/toolkit/mozapps/extensions/content/extensions.js b/toolkit/mozapps/extensions/content/extensions.js
+--- a/toolkit/mozapps/extensions/content/extensions.js
++++ b/toolkit/mozapps/extensions/content/extensions.js
+@@ -195,19 +195,25 @@ function loadView(aViewId) {
+ 
+     gViewController.loadInitialView(aViewId);
+   } else {
+     gViewController.loadView(aViewId);
+   }
+ }
+ 
+ function isCorrectlySigned(aAddon) {
+-  // temporary add-ons do not require signing
++  // Temporary add-ons do not require signing.
+   if (aAddon.scope == AddonManager.SCOPE_TEMPORARY)
+       return true;
++  // On UNIX platforms except OSX, an additional location for system add-ons
++  // exists in /usr/{lib,share}/mozilla/extensions. Add-ons installed there
++  // do not require signing either.
++  if (aAddon.scope == AddonManager.SCOPE_SYSTEM &&
++      Services.appinfo.OS != "Darwin")
++    return true;
+   if (aAddon.signedState <= AddonManager.SIGNEDSTATE_MISSING)
+     return false;
+   return true;
+ }
+ 
+ function isDiscoverEnabled() {
+   if (Services.prefs.getPrefType(PREF_DISCOVERURL) == Services.prefs.PREF_INVALID)
+     return false;
+diff --git a/toolkit/mozapps/extensions/internal/XPIProvider.jsm b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+--- a/toolkit/mozapps/extensions/internal/XPIProvider.jsm
++++ b/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+@@ -682,18 +682,23 @@ function isUsableAddon(aAddon) {
+   // Hack to ensure the default theme is always usable
+   if (aAddon.type == "theme" && aAddon.internalName == XPIProvider.defaultSkin)
+     return true;
+ 
+   if (aAddon._installLocation.name == KEY_APP_SYSTEM_ADDONS &&
+       aAddon.signedState != AddonManager.SIGNEDSTATE_SYSTEM) {
+     return false;
+   }
+-  // temporary and system add-ons do not require signing
+-  if ((aAddon._installLocation.name != KEY_APP_SYSTEM_DEFAULTS &&
++  // Temporary and system add-ons do not require signing.
++  // On UNIX platforms except OSX, an additional location for system add-ons
++  // exists in /usr/{lib,share}/mozilla/extensions. Add-ons installed there
++  // do not require signing either.
++  if (((aAddon._installLocation.scope != AddonManager.SCOPE_SYSTEM ||
++        Services.appinfo.OS == "Darwin") &&
++       aAddon._installLocation.name != KEY_APP_SYSTEM_DEFAULTS &&
+        aAddon._installLocation.name != KEY_APP_TEMPORARY) &&
+        mustSign(aAddon.type)) {
+     if (aAddon.signedState <= AddonManager.SIGNEDSTATE_MISSING)
+       return false;
+   }
+ 
+   if (aAddon.blocklistState == Blocklist.STATE_BLOCKED)
+     return false;
+

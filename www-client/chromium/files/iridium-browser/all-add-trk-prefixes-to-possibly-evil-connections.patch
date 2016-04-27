@@ -1,4 +1,4 @@
-From a92a5074fa64e3e4553ede60eb1c96ffe85c68a6 Mon Sep 17 00:00:00 2001
+From 22e6c500e21a7b50e7bde5dcdfd81df96155cca5 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 3 Nov 2014 10:52:56 +0100
 Subject: [PATCH 46/57] all: add trk: prefixes to possibly evil connections
@@ -42,21 +42,16 @@ by default.
  chrome/chrome_watcher/chrome_watcher_main.cc           |  2 +-
  chrome/common/extensions/chrome_extensions_client.cc   |  4 ++--
  chrome/common/extensions/extension_constants.cc        |  2 +-
- chrome/common/localized_error.cc                       |  2 +-
  chrome/common/url_constants.cc                         |  6 +++---
  chrome/installer/util/google_chrome_distribution.cc    |  2 +-
  chrome/installer/util/user_experiment.cc               |  2 +-
  chromecast/browser/service/cast_service_simple.cc      |  2 +-
  chromeos/geolocation/simple_geolocation_provider.cc    |  2 +-
- cloud_print/gcp20/prototype/cloud_print_requester.cc   |  2 +-
- cloud_print/service/service_state.cc                   |  2 +-
- cloud_print/virtual_driver/win/install/setup.cc        |  2 +-
  components/cloud_devices/common/cloud_devices_urls.cc  |  8 ++++----
  components/copresence/rpc/rpc_handler.cc               |  2 +-
  components/crash/content/app/breakpad_linux.cc         |  2 +-
  components/crash/content/tools/crash_service.cc        |  2 +-
  components/drive/service/drive_api_service.cc          |  8 ++++----
- .../bookmark_server_cluster_service.cc                 |  2 +-
  components/feedback/feedback_uploader.cc               |  2 +-
  components/gcm_driver/gcm_account_tracker.cc           |  4 ++--
  components/google/core/browser/google_url_tracker.cc   |  2 +-
@@ -68,7 +63,7 @@ by default.
  components/policy/core/common/policy_loader_win.cc     |  2 +-
  components/policy/resources/policy_templates.json      |  6 +++---
  components/rappor/rappor_service.cc                    |  2 +-
- components/search_engines/prepopulated_engines.json    |  2 +-
+ components/search_engines/prepopulated_engines.json    |  4 ++--
  .../translate/core/browser/translate_url_fetcher.cc    |  1 +
  components/translate/core/common/translate_util.cc     |  2 +-
  components/variations/variations_url_constants.cc      |  2 +-
@@ -90,7 +85,7 @@ by default.
  sync/tools/sync_client.cc                              |  2 +-
  ui/app_list/demo/app_list_demo_views.cc                |  2 +-
  ui/views/examples/webview_example.cc                   |  2 +-
- 79 files changed, 129 insertions(+), 128 deletions(-)
+ 74 files changed, 125 insertions(+), 124 deletions(-)
 
 diff --git a/build/mac/tweak_info_plist.py b/build/mac/tweak_info_plist.py
 index a6ffbca..90b9cbc 100755
@@ -115,7 +110,7 @@ index a6ffbca..90b9cbc 100755
        # This allows crash dumping to a file without uploading the
        # dump, for testing purposes.  Breakpad does not recognise
 diff --git a/chrome/browser/chromeos/customization/customization_document.cc b/chrome/browser/chromeos/customization/customization_document.cc
-index b326170..031adba 100644
+index aa17dc1..6d4ea37 100644
 --- a/chrome/browser/chromeos/customization/customization_document.cc
 +++ b/chrome/browser/chromeos/customization/customization_document.cc
 @@ -155,7 +155,7 @@ void CheckWallpaperCacheExists(const base::FilePath& path, bool* exists) {
@@ -141,7 +136,7 @@ index feacc46..b4253c5 100644
    auth_service_.reset(
        new google_apis::AuthService(oauth2_token_service,
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
-index 2bf13ab..ee8a4f8 100644
+index 4508213..3b298ef 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_misc.cc
 @@ -58,7 +58,7 @@
@@ -154,7 +149,7 @@ index 2bf13ab..ee8a4f8 100644
  // Obtains the current app window.
  AppWindow* GetCurrentAppWindow(ChromeSyncExtensionFunction* function) {
 diff --git a/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc b/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc
-index 5f78e2c..10a5459 100644
+index 0dbfa19..3c173f5 100644
 --- a/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc
 +++ b/chrome/browser/chromeos/extensions/file_manager/private_api_strings.cc
 @@ -19,26 +19,26 @@ namespace {
@@ -219,7 +214,7 @@ index d3a4ea2..e4fc362 100644
  
  CryptotokenPrivateCanOriginAssertAppIdFunction::
 diff --git a/chrome/browser/extensions/install_signer.cc b/chrome/browser/extensions/install_signer.cc
-index 7ce0ccb..22cca4a 100644
+index 19c3f91..31a18bb 100644
 --- a/chrome/browser/extensions/install_signer.cc
 +++ b/chrome/browser/extensions/install_signer.cc
 @@ -65,7 +65,7 @@ const int kSignatureFormatVersion = 2;
@@ -292,7 +287,7 @@ index 3bb7131..765d3ce 100644
 +  return GURL("trk:143:https://support.google.com/chrome/?p=ib_nacl");
  }
 diff --git a/chrome/browser/net/predictor.cc b/chrome/browser/net/predictor.cc
-index f2d91b9..ea84eeb 100644
+index 25a309a..fde88d0 100644
 --- a/chrome/browser/net/predictor.cc
 +++ b/chrome/browser/net/predictor.cc
 @@ -362,7 +362,7 @@ UrlList Predictor::GetPredictedUrlListAtStartup(PrefService* user_prefs) {
@@ -357,10 +352,10 @@ index 59a0f9a..888e42b 100644
  }
  
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index ef3186b..c98c3d1 100644
+index 4fc49ed..059bebe 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -72,9 +72,9 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
+@@ -71,9 +71,9 @@ const int ClientSideDetectionService::kNegativeCacheIntervalDays = 1;
  const int ClientSideDetectionService::kPositiveCacheIntervalMinutes = 30;
  
  const char ClientSideDetectionService::kClientReportPhishingUrl[] =
@@ -386,7 +381,7 @@ index e792d41..8d2dcc4 100644
  // static
  DownloadFeedbackFactory* DownloadFeedback::factory_ = NULL;
 diff --git a/chrome/browser/safe_browsing/srt_global_error_win.cc b/chrome/browser/safe_browsing/srt_global_error_win.cc
-index db6e4bc..771021a 100644
+index 69f40626..e1dedbf 100644
 --- a/chrome/browser/safe_browsing/srt_global_error_win.cc
 +++ b/chrome/browser/safe_browsing/srt_global_error_win.cc
 @@ -36,7 +36,7 @@ namespace {
@@ -412,7 +407,7 @@ index deef151..1e65d44 100644
  
    DCHECK(!bdict_file.empty());
 diff --git a/chrome/browser/spellchecker/spelling_service_client.cc b/chrome/browser/spellchecker/spelling_service_client.cc
-index d769b27..aa7f89c 100644
+index b8ec824..e3e4acb 100644
 --- a/chrome/browser/spellchecker/spelling_service_client.cc
 +++ b/chrome/browser/spellchecker/spelling_service_client.cc
 @@ -31,7 +31,7 @@
@@ -425,7 +420,7 @@ index d769b27..aa7f89c 100644
  // The location of spellcheck suggestions in JSON response from spelling
  // service.
 diff --git a/chrome/browser/supervised_user/experimental/supervised_user_async_url_checker.cc b/chrome/browser/supervised_user/experimental/supervised_user_async_url_checker.cc
-index 2dd6302..43ec1a3 100644
+index f56232e..5acc91e 100644
 --- a/chrome/browser/supervised_user/experimental/supervised_user_async_url_checker.cc
 +++ b/chrome/browser/supervised_user/experimental/supervised_user_async_url_checker.cc
 @@ -31,7 +31,7 @@ using net::URLRequestStatus;
@@ -438,7 +433,7 @@ index 2dd6302..43ec1a3 100644
  const char kDataFormat[] = "key=%s&urls=%s";
  
 diff --git a/chrome/browser/supervised_user/supervised_user_service.cc b/chrome/browser/supervised_user/supervised_user_service.cc
-index b96fbf6..2069422 100644
+index 4cbcf65..5467ded 100644
 --- a/chrome/browser/supervised_user/supervised_user_service.cc
 +++ b/chrome/browser/supervised_user/supervised_user_service.cc
 @@ -84,7 +84,7 @@ namespace {
@@ -469,7 +464,7 @@ index 724faf5..38f78b8 100644
  }  // namespace
  
 diff --git a/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc b/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
-index 85f1f89..0d54ab8 100644
+index f2c7777..0389bda 100644
 --- a/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
 +++ b/chrome/browser/ui/views/outdated_upgrade_bubble_view.cc
 @@ -43,7 +43,7 @@ const int kWidthOfDescriptionText = 330;
@@ -482,41 +477,41 @@ index 85f1f89..0d54ab8 100644
  
  // The maximum number of ignored bubble we track in the NumLaterPerReinstall
 diff --git a/chrome/browser/ui/website_settings/mock_permission_bubble_request.cc b/chrome/browser/ui/website_settings/mock_permission_bubble_request.cc
-index 0cfd934..ca35584 100644
+index 7749547..6a78777 100644
 --- a/chrome/browser/ui/website_settings/mock_permission_bubble_request.cc
 +++ b/chrome/browser/ui/website_settings/mock_permission_bubble_request.cc
-@@ -16,7 +16,7 @@ MockPermissionBubbleRequest::MockPermissionBubbleRequest()
+@@ -15,7 +15,7 @@ MockPermissionBubbleRequest::MockPermissionBubbleRequest()
    text_ = base::ASCIIToUTF16("test");
    accept_label_ = base::ASCIIToUTF16("button");
    deny_label_ = base::ASCIIToUTF16("button");
--  hostname_ = GURL("http://www.google.com");
-+  hostname_ = GURL("trk:243:http://www.google.com");
+-  origin_ = GURL("http://www.google.com");
++  origin_ = GURL("trk:243:http://www.google.com");
  }
  
  MockPermissionBubbleRequest::MockPermissionBubbleRequest(
-@@ -28,7 +28,7 @@ MockPermissionBubbleRequest::MockPermissionBubbleRequest(
+@@ -26,7 +26,7 @@ MockPermissionBubbleRequest::MockPermissionBubbleRequest(
    text_ = base::UTF8ToUTF16(text);
    accept_label_ = base::ASCIIToUTF16("button");
    deny_label_ = base::ASCIIToUTF16("button");
--  hostname_ = GURL("http://www.google.com");
-+  hostname_ = GURL("trk:244:http://www.google.com");
+-  origin_ = GURL("http://www.google.com");
++  origin_ = GURL("trk:244:http://www.google.com");
  }
  
  MockPermissionBubbleRequest::MockPermissionBubbleRequest(
-@@ -55,7 +55,7 @@ MockPermissionBubbleRequest::MockPermissionBubbleRequest(
+@@ -51,7 +51,7 @@ MockPermissionBubbleRequest::MockPermissionBubbleRequest(
    text_ = base::UTF8ToUTF16(text);
    accept_label_ = base::UTF8ToUTF16(accept_label);
    deny_label_ = base::UTF8ToUTF16(deny_label);
--  hostname_ = GURL("http://www.google.com");
-+  hostname_ = GURL("trk:245:http://www.google.com");
+-  origin_ = GURL("http://www.google.com");
++  origin_ = GURL("trk:245:http://www.google.com");
  }
  
  MockPermissionBubbleRequest::~MockPermissionBubbleRequest() {}
 diff --git a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-index df78320..91338a6 100644
+index 3baf8ef..fd9d4ac 100644
 --- a/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
 +++ b/chrome/browser/ui/webui/ntp/ntp_resource_cache.cc
-@@ -79,17 +79,17 @@ namespace {
+@@ -80,17 +80,17 @@ namespace {
  // The URL for the the Learn More page shown on incognito new tab.
  const char kLearnMoreIncognitoUrl[] =
  #if defined(OS_CHROMEOS)
@@ -539,10 +534,10 @@ index df78320..91338a6 100644
  
  std::string SkColorToRGBAString(SkColor color) {
 diff --git a/chrome/chrome_watcher/chrome_watcher_main.cc b/chrome/chrome_watcher/chrome_watcher_main.cc
-index e28de01..811c5c9 100644
+index 2bf2151..80d2efc 100644
 --- a/chrome/chrome_watcher/chrome_watcher_main.cc
 +++ b/chrome/chrome_watcher/chrome_watcher_main.cc
-@@ -202,7 +202,7 @@ void OnWindowEvent(
+@@ -203,7 +203,7 @@ void OnWindowEvent(
  void GetKaskoCrashServerUrl(base::string16* crash_server) {
    const char kKaskoCrashServerUrl[] = "KASKO_CRASH_SERVER_URL";
    static const wchar_t kDefaultKaskoCrashServerUrl[] =
@@ -568,7 +563,7 @@ index eb485b3..f280794 100644
  const char kThumbsWhiteListedExtension[] = "khopmbdjffemhegeeobelklnbglcdgfh";
  
 diff --git a/chrome/common/extensions/extension_constants.cc b/chrome/common/extensions/extension_constants.cc
-index 5a72265..cbc7d53 100644
+index 81bc30f..d2bc87f 100644
 --- a/chrome/common/extensions/extension_constants.cc
 +++ b/chrome/common/extensions/extension_constants.cc
 @@ -11,7 +11,7 @@ namespace extension_urls {
@@ -580,24 +575,11 @@ index 5a72265..cbc7d53 100644
  
  }  // namespace
  
-diff --git a/chrome/common/localized_error.cc b/chrome/common/localized_error.cc
-index a00cd5b..215d273 100644
---- a/chrome/common/localized_error.cc
-+++ b/chrome/common/localized_error.cc
-@@ -47,7 +47,7 @@ const unsigned int kErrorPagesNoDetails = 0;
- namespace {
- 
- static const char kRedirectLoopLearnMoreUrl[] =
--    "https://support.google.com/chrome/answer/95626";
-+    "trk:249:https://support.google.com/chrome/answer/95626";
- static const char kWeakDHKeyLearnMoreUrl[] =
-     "https://support.google.com/chrome?p=dh_error";
- static const int kGoogleCachedCopySuggestionType = 0;
 diff --git a/chrome/common/url_constants.cc b/chrome/common/url_constants.cc
-index 5e2954c..3980bef 100644
+index 646fcf3..21487fe 100644
 --- a/chrome/common/url_constants.cc
 +++ b/chrome/common/url_constants.cc
-@@ -295,7 +295,7 @@ const char kChromeUIVoiceSearchHost[] = "voicesearch";
+@@ -304,7 +304,7 @@ const char kChromeUIVoiceSearchHost[] = "voicesearch";
  const char kEULAPathFormat[] = "/usr/share/chromeos-assets/eula/%s/eula.html";
  const char kOemEulaURLPath[] = "oem";
  const char kOnlineEulaURLPath[] =
@@ -606,7 +588,7 @@ index 5e2954c..3980bef 100644
  
  const char kChromeOSCreditsPath[] =
      "/opt/google/chrome/resources/about_os_credits.html";
-@@ -359,7 +359,7 @@ const char kExtensionResourceInvalidRequestURL[] =
+@@ -368,7 +368,7 @@ const char kExtensionResourceInvalidRequestURL[] =
      "chrome-extension-resource://invalid/";
  
  const char kSyncGoogleDashboardURL[] =
@@ -615,7 +597,7 @@ index 5e2954c..3980bef 100644
  
  const char kPasswordManagerLearnMoreURL[] =
  #if defined(OS_CHROMEOS)
-@@ -548,7 +548,7 @@ const char kCloudPrintLearnMoreURL[] =
+@@ -557,7 +557,7 @@ const char kCloudPrintLearnMoreURL[] =
  #endif
  
  const char kCloudPrintNoDestinationsLearnMoreURL[] =
@@ -676,45 +658,6 @@ index e083b3e..e7c78ca 100644
  }  // namespace
  
  SimpleGeolocationProvider::SimpleGeolocationProvider(
-diff --git a/cloud_print/gcp20/prototype/cloud_print_requester.cc b/cloud_print/gcp20/prototype/cloud_print_requester.cc
-index ccae344..14c7fb6 100644
---- a/cloud_print/gcp20/prototype/cloud_print_requester.cc
-+++ b/cloud_print/gcp20/prototype/cloud_print_requester.cc
-@@ -23,7 +23,7 @@
- #include "net/url_request/url_request_context.h"
- #include "url/gurl.h"
- 
--const char kCloudPrintUrl[] = "https://www.google.com/cloudprint";
-+const char kCloudPrintUrl[] = "trk:256:https://www.google.com/cloudprint";
- 
- namespace {
- 
-diff --git a/cloud_print/service/service_state.cc b/cloud_print/service/service_state.cc
-index 1c644ce..25fa773 100644
---- a/cloud_print/service/service_state.cc
-+++ b/cloud_print/service/service_state.cc
-@@ -36,7 +36,7 @@ const char kRobotTokenOptionName[] = "robot_refresh_token";
- const char kAuthTokenOptionName[] = "auth_token";
- const char kXmppAuthTokenOptionName[] = "xmpp_auth_token";
- 
--const char kClientLoginUrl[] = "https://www.google.com/accounts/ClientLogin";
-+const char kClientLoginUrl[] = "trk:258:https://www.google.com/accounts/ClientLogin";
- 
- const int64_t kRequestTimeoutMs = 10 * 1000;
- 
-diff --git a/cloud_print/virtual_driver/win/install/setup.cc b/cloud_print/virtual_driver/win/install/setup.cc
-index afb5954..aa7848f 100644
---- a/cloud_print/virtual_driver/win/install/setup.cc
-+++ b/cloud_print/virtual_driver/win/install/setup.cc
-@@ -38,7 +38,7 @@ namespace {
- 
- const wchar_t kNameValue[] = L"GCP Virtual Driver";
- const wchar_t kUninstallId[] = L"{74AA24E0-AC50-4B28-BA46-9CF05467C9B7}";
--const wchar_t kGcpUrl[] = L"http://www.google.com/cloudprint";
-+const wchar_t kGcpUrl[] = L"trk:203:http://www.google.com/cloudprint";
- 
- const wchar_t kDataFileName[] = L"gcp_driver.gpd";
- const wchar_t kDriverName[] = L"MXDWDRV.DLL";
 diff --git a/components/cloud_devices/common/cloud_devices_urls.cc b/components/cloud_devices/common/cloud_devices_urls.cc
 index 7b4b711..5e58255 100644
 --- a/components/cloud_devices/common/cloud_devices_urls.cc
@@ -758,10 +701,10 @@ index d3ce789..069db42 100644
  // UrlSafe is defined as:
  // '/' represented by a '_' and '+' represented by a '-'
 diff --git a/components/crash/content/app/breakpad_linux.cc b/components/crash/content/app/breakpad_linux.cc
-index 3435f04..741f0e2 100644
+index aab3a98..9990b57 100644
 --- a/components/crash/content/app/breakpad_linux.cc
 +++ b/components/crash/content/app/breakpad_linux.cc
-@@ -87,7 +87,7 @@ namespace breakpad {
+@@ -88,7 +88,7 @@ namespace breakpad {
  namespace {
  
  #if !defined(OS_CHROMEOS)
@@ -803,19 +746,6 @@ index 91c0225..ed7029f 100644
  
  // Mime type to create a directory.
  const char kFolderMimeType[] = "application/vnd.google-apps.folder";
-diff --git a/components/enhanced_bookmarks/bookmark_server_cluster_service.cc b/components/enhanced_bookmarks/bookmark_server_cluster_service.cc
-index cf34176..f9a72f8 100644
---- a/components/enhanced_bookmarks/bookmark_server_cluster_service.cc
-+++ b/components/enhanced_bookmarks/bookmark_server_cluster_service.cc
-@@ -26,7 +26,7 @@
- using bookmarks::BookmarkNode;
- 
- namespace {
--const char kClusterUrl[] = "https://www.google.com/stars/cluster";
-+const char kClusterUrl[] = "trk:196:https://www.google.com/stars/cluster";
- const int kPrefServiceVersion = 1;
- const char kPrefServiceVersionKey[] = "version";
- const char kPrefServiceDataKey[] = "data";
 diff --git a/components/feedback/feedback_uploader.cc b/components/feedback/feedback_uploader.cc
 index e278177..6ec309b 100644
 --- a/components/feedback/feedback_uploader.cc
@@ -846,7 +776,7 @@ index 06c0866..1a2071a 100644
  const char kGCMAccountTrackerName[] = "gcm_account_tracker";
  // Minimum token validity when sending to GCM groups server.
 diff --git a/components/google/core/browser/google_url_tracker.cc b/components/google/core/browser/google_url_tracker.cc
-index d71754a..c22d40e 100644
+index 4136f962..4628cdc 100644
 --- a/components/google/core/browser/google_url_tracker.cc
 +++ b/components/google/core/browser/google_url_tracker.cc
 @@ -34,7 +34,7 @@
@@ -919,10 +849,10 @@ index 55d9e13..5f17829 100644
  
  } // namespace metrics
 diff --git a/components/password_manager/core/browser/password_store.cc b/components/password_manager/core/browser/password_store.cc
-index 52bb385..d3c234a 100644
+index ee9e6e0..a42aeb4 100644
 --- a/components/password_manager/core/browser/password_store.cc
 +++ b/components/password_manager/core/browser/password_store.cc
-@@ -165,10 +165,10 @@ void PasswordStore::GetLogins(const PasswordForm& form,
+@@ -170,10 +170,10 @@ void PasswordStore::GetLogins(const PasswordForm& form,
    // TODO(mdm): actually delete them at some point, say M24 or so.
    base::Time ignore_logins_cutoff;  // the null time
    if (form.scheme == PasswordForm::SCHEME_HTML &&
@@ -951,10 +881,10 @@ index d2475ca..bc70699 100644
  const char kBlockedExtensionPrefix[] = "[BLOCKED]";
  
 diff --git a/components/policy/resources/policy_templates.json b/components/policy/resources/policy_templates.json
-index d32fe4f..7090b6f 100644
+index 7bdc31e..9c7d1dd 100644
 --- a/components/policy/resources/policy_templates.json
 +++ b/components/policy/resources/policy_templates.json
-@@ -2008,7 +2008,7 @@
+@@ -2031,7 +2031,7 @@
              'dynamic_refresh': True,
              'per_profile': True,
            },
@@ -963,7 +893,7 @@ index d32fe4f..7090b6f 100644
            'id': 34,
            'caption': '''Configure the list of force-installed apps and extensions''',
            'tags': ['full-admin-access'],
-@@ -2051,7 +2051,7 @@
+@@ -2074,7 +2074,7 @@
            URL indicated in the extension's manifest.
  
            For example, <ph
@@ -972,7 +902,7 @@ index d32fe4f..7090b6f 100644
            installs the <ph name="EXTENSION_POLICY_EXAMPLE_EXTENSION_NAME">Chrome
            Remote Desktop</ph> app from the standard Chrome Web Store "update"
            URL. For more information about hosting extensions, see: <ph
-@@ -5114,7 +5114,7 @@
+@@ -5169,7 +5169,7 @@
        'features': {
          'dynamic_refresh': True,
        },
@@ -995,18 +925,20 @@ index 02853af..bc782ee 100644
  GURL GetServerUrl() {
    std::string server_url = variations::GetVariationParamValue(
 diff --git a/components/search_engines/prepopulated_engines.json b/components/search_engines/prepopulated_engines.json
-index 6177916..3935520 100644
+index 978ab1d..6d877cd9c 100644
 --- a/components/search_engines/prepopulated_engines.json
 +++ b/components/search_engines/prepopulated_engines.json
-@@ -129,7 +129,7 @@
+@@ -129,8 +129,8 @@
      "google": {
        "name": "Google",
        "keyword": "google.com",
 -      "favicon_url": "http://www.google.com/favicon.ico",
+-      "search_url": "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:iOSSearchLanguage}{google:searchClient}{google:sourceId}{google:instantExtendedEnabledParameter}{google:contextualSearchVersion}ie={inputEncoding}",
 +      "favicon_url": "trk:186:http://www.google.com/favicon.ico",
-       "search_url": "{google:baseURL}search?q={searchTerms}&{google:RLZ}{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:searchClient}{google:sourceId}{google:instantExtendedEnabledParameter}{google:contextualSearchVersion}ie={inputEncoding}",
++      "search_url": "{google:baseURL}search?q={searchTerms}&{google:originalQueryForSuggestion}{google:assistedQueryStats}{google:searchFieldtrialParameter}{google:iOSSearchLanguage}{google:searchClient}{google:sourceId}{google:instantExtendedEnabledParameter}{google:contextualSearchVersion}ie={inputEncoding}",
        "suggest_url": "{google:baseSuggestURL}search?{google:searchFieldtrialParameter}client={google:suggestClient}&gs_ri={google:suggestRid}&xssi=t&q={searchTerms}&{google:inputType}{google:cursorPosition}{google:currentPageUrl}{google:pageClassification}{google:searchVersion}{google:sessionToken}{google:prefetchQuery}sugkey={google:suggestAPIKeyParameter}",
        "instant_url": "{google:baseURL}webhp?sourceid=chrome-instant&{google:RLZ}{google:forceInstantResults}{google:instantExtendedEnabledParameter}ie={inputEncoding}",
+       "image_url": "{google:baseURL}searchbyimage/upload",
 diff --git a/components/translate/core/browser/translate_url_fetcher.cc b/components/translate/core/browser/translate_url_fetcher.cc
 index 39c2b2c..70ab07e 100644
 --- a/components/translate/core/browser/translate_url_fetcher.cc
@@ -1071,10 +1003,10 @@ index 2f7e365..bef7570 100644
  const char kUpstreamUrl[] = "/up?";
  
 diff --git a/content/shell/browser/shell_browser_main_parts.cc b/content/shell/browser/shell_browser_main_parts.cc
-index 48a87e3..4fafb459 100644
+index 9b17cd5..ae89850 100644
 --- a/content/shell/browser/shell_browser_main_parts.cc
 +++ b/content/shell/browser/shell_browser_main_parts.cc
-@@ -60,7 +60,7 @@ GURL GetStartupURL() {
+@@ -66,7 +66,7 @@ GURL GetStartupURL() {
  #endif
  
    if (args.empty())
@@ -1084,7 +1016,7 @@ index 48a87e3..4fafb459 100644
    GURL url(args[0]);
    if (url.is_valid() && url.has_scheme())
 diff --git a/extensions/common/update_manifest.cc b/extensions/common/update_manifest.cc
-index 57162da..c2d5790 100644
+index c8ebdf7..0ae4862 100644
 --- a/extensions/common/update_manifest.cc
 +++ b/extensions/common/update_manifest.cc
 @@ -17,7 +17,7 @@
@@ -1142,10 +1074,10 @@ index d3d0cd9..91210c8 100644
   // Used to mint uber auth tokens when needed.
  const char kGaiaSid[] = "sid";
 diff --git a/google_apis/gaia/google_service_auth_error.cc b/google_apis/gaia/google_service_auth_error.cc
-index 76f4122..004e64f 100644
+index 34c94c1..448bb91 100644
 --- a/google_apis/gaia/google_service_auth_error.cc
 +++ b/google_apis/gaia/google_service_auth_error.cc
-@@ -238,7 +238,7 @@ std::string GoogleServiceAuthError::ToString() const {
+@@ -246,7 +246,7 @@ std::string GoogleServiceAuthError::ToString() const {
      case WEB_LOGIN_REQUIRED:
        return "Less secure apps may not authenticate with this account. "
               "Please visit: "
@@ -1194,7 +1126,7 @@ index 657fd3f..5fa47f5 100644
          NS_GOOGLE_AUTH_PROTOCOL, "allow-generated-jid");
      const buzz::QName QN_GOOGLE_AUTH_CLIENT_USES_FULL_BIND_RESULT(
 diff --git a/net/cert/ct_known_logs_static.h b/net/cert/ct_known_logs_static.h
-index a1e30f1..7bfa6bd 100644
+index 8452ece..883b4df 100644
 --- a/net/cert/ct_known_logs_static.h
 +++ b/net/cert/ct_known_logs_static.h
 @@ -24,7 +24,7 @@ const CTLogInfo kCTLogList[] = {
@@ -1280,7 +1212,7 @@ index e235958..2a9dc68 100644
  const char kXmppServerAddressForMe2MeHost[] = "talk.google.com:5222";
  const bool kXmppServerUseTls = true;
 diff --git a/remoting/protocol/jingle_messages.cc b/remoting/protocol/jingle_messages.cc
-index 959c6a5..fac5e60 100644
+index 45bc3b5..6cbc6df 100644
 --- a/remoting/protocol/jingle_messages.cc
 +++ b/remoting/protocol/jingle_messages.cc
 @@ -23,7 +23,7 @@ const char kJabberNamespace[] = "jabber:client";
@@ -1290,8 +1222,8 @@ index 959c6a5..fac5e60 100644
 -const char kIceTransportNamespace[] = "google:remoting:ice";
 +const char kIceTransportNamespace[] = "trk:100:google:remoting:ice";
  
- const char kEmptyNamespace[] = "";
- const char kXmlNamespace[] = "http://www.w3.org/XML/1998/namespace";
+ const char kWebrtcTransportNamespace[] = "google:remoting:webrtc";
+ 
 diff --git a/remoting/webapp/base/js/xmpp_login_handler.js b/remoting/webapp/base/js/xmpp_login_handler.js
 index 004d6cc..4afd301 100644
 --- a/remoting/webapp/base/js/xmpp_login_handler.js
@@ -1332,7 +1264,7 @@ index 1829993..023f13f 100644
  
  // Ping times in 100-nanosecond intervals.
 diff --git a/sync/tools/sync_client.cc b/sync/tools/sync_client.cc
-index deba666..89179d2 100644
+index 36c7561..1faf4d4 100644
 --- a/sync/tools/sync_client.cc
 +++ b/sync/tools/sync_client.cc
 @@ -69,7 +69,7 @@ const char kXmppHostPortSwitch[] = "xmpp-host-port";
@@ -1371,5 +1303,5 @@ index ccde6d7..c14a13a 100644
  }
  
 -- 
-2.6.2
+2.6.6
 

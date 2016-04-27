@@ -1,4 +1,4 @@
-From 178b810696faedee1bf178a760773e9a1a644cff Mon Sep 17 00:00:00 2001
+From 7127ac1b31aab90a98f0e47e0c0a4e2431f2f18d Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 6 May 2015 14:13:00 +0200
 Subject: [PATCH 37/57] src: add comments for evil-looking code
@@ -14,7 +14,7 @@ can be whitelisted, i.e. have no trk: prefix.
  1 file changed, 10 insertions(+), 1 deletion(-)
 
 diff --git a/components/google/core/browser/google_url_tracker.cc b/components/google/core/browser/google_url_tracker.cc
-index 0b3e0b3..d71754a 100644
+index 9a21ca4..4136f962 100644
 --- a/components/google/core/browser/google_url_tracker.cc
 +++ b/components/google/core/browser/google_url_tracker.cc
 @@ -24,10 +24,19 @@
@@ -39,5 +39,5 @@ index 0b3e0b3..d71754a 100644
  GoogleURLTracker::GoogleURLTracker(scoped_ptr<GoogleURLTrackerClient> client,
                                     Mode mode)
 -- 
-2.6.2
+2.6.6
 

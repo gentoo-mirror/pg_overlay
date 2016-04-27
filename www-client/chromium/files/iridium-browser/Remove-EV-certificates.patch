@@ -1,4 +1,4 @@
-From 8782b299ed2c7f0ac4c32d966f05dac479afcd17 Mon Sep 17 00:00:00 2001
+From c64ed828011a71d2377c7c39461aa5d076e1b873 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 2 Mar 2015 11:28:26 +0100
 Subject: [PATCH 36/57] Remove EV certificates
@@ -42,5 +42,5 @@ index a5ac6e2..ec33175 100644
  
  #endif  // defined(USE_NSS_CERTS) || defined(OS_IOS) || defined(OS_WIN)
 -- 
-2.6.2
+2.6.6
 

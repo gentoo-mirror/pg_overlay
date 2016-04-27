@@ -1,0 +1,30 @@
+From 16dd07219a125abaf53bbf3e93bc7c183ea3052c Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sat, 8 Nov 2014 21:40:49 +0100
+Subject: [PATCH 25/57] prefs: use separate directory for config
+
+Do not overwrite an existing Chromium configuration.
+---
+ chrome/common/chrome_paths_linux.cc | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+diff --git a/chrome/common/chrome_paths_linux.cc b/chrome/common/chrome_paths_linux.cc
+index ffeb6ef..f8389e6 100644
+--- a/chrome/common/chrome_paths_linux.cc
++++ b/chrome/common/chrome_paths_linux.cc
+@@ -65,11 +65,7 @@ bool GetDefaultUserDataDirectory(base::FilePath* result) {
+   base::FilePath config_dir(GetXDGDirectory(env.get(),
+                                             kXdgConfigHomeEnvVar,
+                                             kDotConfigDir));
+-#if defined(GOOGLE_CHROME_BUILD)
+-  *result = config_dir.Append("google-chrome");
+-#else
+-  *result = config_dir.Append("chromium");
+-#endif
++  *result = config_dir.Append("iridium");
+   return true;
+ }
+ 
+-- 
+2.6.6
+

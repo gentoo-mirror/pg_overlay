@@ -1,4 +1,4 @@
-From 1aaca878a143c0178076811cefcb41a4cab0368c Mon Sep 17 00:00:00 2001
+From 641ce9740269fa9ffc0baa62f66c9851d578d048 Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
 Subject: [PATCH 28/57] build: fix OSX branded build crashes on OSX
@@ -10,10 +10,10 @@ Subject: [PATCH 28/57] build: fix OSX branded build crashes on OSX
  3 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/build/common.gypi b/build/common.gypi
-index 2063a6c..18c014f 100644
+index 0706226..1c25215 100644
 --- a/build/common.gypi
 +++ b/build/common.gypi
-@@ -1961,7 +1961,7 @@
+@@ -1953,7 +1953,7 @@
            ['branding=="Chrome"', {
              'mac_product_name%': 'Google Chrome',
            }, { # else: branding!="Chrome"
@@ -42,7 +42,7 @@ index f1e9946..1e39207 100644
 +PRODUCT_INSTALLER_SHORTNAME=Iridium Installer
 +COPYRIGHT=Copyright 2015 the browser authors. Some rights reserved.
 diff --git a/chrome/common/chrome_constants.cc b/chrome/common/chrome_constants.cc
-index 69dbbe9..9208964 100644
+index a48b5cc..f683cec 100644
 --- a/chrome/common/chrome_constants.cc
 +++ b/chrome/common/chrome_constants.cc
 @@ -9,11 +9,11 @@
@@ -60,5 +60,5 @@ index 69dbbe9..9208964 100644
  #error Unknown branding
  #endif
 -- 
-2.6.2
+2.6.6
 

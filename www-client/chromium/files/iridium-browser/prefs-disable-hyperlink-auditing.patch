@@ -1,4 +1,4 @@
-From 318b8f9c0041c85b2223e95da0d01524971f09f9 Mon Sep 17 00:00:00 2001
+From 84da07b6fb76cbe5bffbdff19a572216c723991b Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 17:03:17 +0200
 Subject: [PATCH 17/57] prefs: disable hyperlink auditing
@@ -15,10 +15,10 @@ https://html.spec.whatwg.org/multipage/semantics.html#hyperlink-auditing .
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/chrome_content_browser_client.cc b/chrome/browser/chrome_content_browser_client.cc
-index 21f7f95..fe978fa 100644
+index af77d2f..5fe988c 100644
 --- a/chrome/browser/chrome_content_browser_client.cc
 +++ b/chrome/browser/chrome_content_browser_client.cc
-@@ -733,7 +733,7 @@ ChromeContentBrowserClient::~ChromeContentBrowserClient() {
+@@ -749,7 +749,7 @@ ChromeContentBrowserClient::~ChromeContentBrowserClient() {
  void ChromeContentBrowserClient::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(prefs::kDisable3DAPIs, false);
@@ -28,5 +28,5 @@ index 21f7f95..fe978fa 100644
  }
  
 -- 
-2.6.2
+2.6.6
 
