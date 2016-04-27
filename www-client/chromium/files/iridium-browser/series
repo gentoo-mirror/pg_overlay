@@ -25,7 +25,6 @@ prefs-disable-translation-service.patch
 first_run-deactivate-autoupdate-globally.patch
 build-fix-OSX-branded-build-crashes-on-OSX.patch
 src-use-cached-copy-of-safebrowsing-lists-at-iridium.patch
-prefs-use-system-provided-preference-skeleton.patch
 build-build-the-sandbox-with-PIE.patch
 updater-disable-auto-update.patch
 plugin-do-not-load-any-system-provided-plugins-on-Wi.patch
