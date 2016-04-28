@@ -115,15 +115,15 @@ src_prepare() {
 	eapply "${WORKDIR}/firefox"
 	
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done
+	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	#do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	#done
 
-	if use kde ; then
-		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
-		do eapply "${FILESDIR}/kde-opensuse/$i"; \
-		done
-	fi
+	#if use kde ; then
+	#	for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
+	#	do eapply "${FILESDIR}/kde-opensuse/$i"; \
+	#	done
+	#fi
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
