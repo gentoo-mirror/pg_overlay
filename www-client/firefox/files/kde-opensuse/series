@@ -1,0 +1,15 @@
+mozilla-nongnome-proxies.patch
+mozilla-shared-nss-db.patch
+mozilla-kde.patch
+mozilla-preferences.patch
+mozilla-language.patch
+mozilla-ntlm-full-path.patch
+mozilla-openaes-decl.patch
+mozilla-no-stdcxx-check.patch
+mozilla-libproxy.patch
+mozilla-reduce-files-per-UnifiedBindings.patch
+mozilla-check_return.patch
+
+firefox-kde.patch
+firefox-no-default-ualocale.patch
+firefox-branded-icons.patch
