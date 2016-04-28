@@ -113,17 +113,22 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
-	
-	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	#do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	#done
 
-	#if use kde ; then
-	#	for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
-	#	do eapply "${FILESDIR}/kde-opensuse/$i"; \
-	#	done
-	#fi
+	if use pgo ; then
+        eapply "${FILESDIR}/pgo.patch"
+	fi
+    
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	done
+
+	if use kde ; then
+		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
+		do eapply "${FILESDIR}/kde-opensuse/$i"; \
+		done
+	fi
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
@@ -248,7 +253,7 @@ src_configure() {
 
 	# Allow for a proper pgo build
 	if use pgo; then
-		echo "mk_add_options PROFILE_GEN_SCRIPT='\$(PYTHON) \$(OBJDIR)/_profile/pgo/profileserver.py'" >> "${S}"/.mozconfig
+		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
 	fi
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
