@@ -115,9 +115,9 @@ src_prepare() {
 	eapply "${WORKDIR}/firefox"
 	
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done
+	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	#do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	#done
 
 	if use kde ; then
 		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
@@ -318,7 +318,7 @@ src_install() {
 	fi
 
 	if use kde ; then
-		cat "${FILESDIR}"/kde/kde.js-1 >> \
+		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
 	fi
