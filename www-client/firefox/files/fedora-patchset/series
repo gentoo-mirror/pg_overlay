@@ -1,4 +1,5 @@
 firefox-build-prbool.patch
+firefox-debug.patch
 
 firefox-enable-addons.patch
 rhbz-1291190-appchooser-crash.patch
