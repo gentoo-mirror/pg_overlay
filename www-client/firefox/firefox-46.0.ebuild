@@ -112,12 +112,12 @@ src_unpack() {
 
 src_prepare() {
 	# Apply our patches
-	eapply "${WORKDIR}/firefox"
+	eapply "${WORKDIR}/firefox" \
+		"${FILESDIR}"/jit-none-branch64.patch
 
 	if use pgo ; then
         eapply "${FILESDIR}/pgo.patch"
 	fi
-    
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
