@@ -27,7 +27,7 @@ EMVER="1.9.1"
 
 # Patches
 PATCH="thunderbird-38.0-patches-0.1"
-PATCHFF="firefox-45.0-patches-03"
+PATCHFF="firefox-45.0-patches-04"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
