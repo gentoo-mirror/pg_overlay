@@ -1,3 +1,4 @@
+mozilla-pkgconfig.patch
 mozilla-nongnome-proxies.patch
 mozilla-shared-nss-db.patch
 mozilla-kde.patch
