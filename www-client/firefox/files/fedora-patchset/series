@@ -1,7 +1,9 @@
 firefox-build-prbool.patch
 
+firefox-enable-addons.patch
 mozilla-1170092.patch
 
 mozilla-1245076.patch
 mozilla-1245076-1.patch
 mozilla-1255590.patch
+mozilla-1196777.patch

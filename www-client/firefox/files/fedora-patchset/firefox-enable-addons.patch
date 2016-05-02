@@ -1,0 +1,13 @@
+diff -up firefox-46.0/browser/app/profile/firefox.js.addons firefox-46.0/browser/app/profile/firefox.js
+--- firefox-46.0/browser/app/profile/firefox.js.addons	2016-04-22 02:37:18.000000000 +0200
++++ firefox-46.0/browser/app/profile/firefox.js	2016-04-25 12:09:36.133479899 +0200
+@@ -74,7 +74,8 @@ pref("extensions.systemAddon.update.url"
+ 
+ // Disable add-ons that are not installed by the user in all scopes by default.
+ // See the SCOPE constants in AddonManager.jsm for values to use here.
+-pref("extensions.autoDisableScopes", 15);
++pref("extensions.autoDisableScopes", 0);
++pref("extensions.showMismatchUI", false);
+ 
+ // Require signed add-ons by default
+ pref("xpinstall.signatures.required", true);
