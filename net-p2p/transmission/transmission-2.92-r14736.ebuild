@@ -14,7 +14,7 @@ SRC_URI="https://build.${PN}bt.com/job/trunk-linux/lastSuccessfulBuild/artifact/
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT=0
-IUSE="ayatana gtk libressl lightweight qt4 qt5 xfs"
+IUSE="ayatana gtk libressl lightweight qt4 qt5 systemd xfs"
 KEYWORDS="~amd64 ~arm ~mips ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux"
 
 RDEPEND=">=dev-libs/libevent-2.0.10:=
