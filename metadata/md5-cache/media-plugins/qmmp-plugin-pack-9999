@@ -1,11 +1,11 @@
 DEFINED_PHASES=compile configure install preinst prepare test unpack
-DEPEND=media-libs/taglib >=media-sound/qmmp-1.0.0 dev-qt/qtgui:5 dev-qt/qtx11extras:5 dev-qt/qtwidgets:5 dev-lang/yasm dev-qt/linguist-tools:5 sys-devel/make >=dev-util/cmake-2.8 || ( dev-vcs/subversion[http] dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] ) net-misc/rsync
+DEPEND=>=media-libs/taglib-1.10 media-sound/mpg123 >=media-sound/qmmp-1.0.0 dev-qt/qtgui:5 dev-qt/qtx11extras:5 dev-qt/qtwidgets:5 dev-lang/yasm dev-qt/linguist-tools:5 sys-devel/make >=dev-util/cmake-2.8 || ( dev-vcs/subversion[http] dev-vcs/subversion[webdav-neon] dev-vcs/subversion[webdav-serf] ) net-misc/rsync
 DESCRIPTION=A set of extra plugins for Qmmp
-EAPI=5
+EAPI=6
 HOMEPAGE=http://qmmp.ylsoftware.com/
 LICENSE=GPL-2
-RDEPEND=media-libs/taglib >=media-sound/qmmp-1.0.0 dev-qt/qtgui:5 dev-qt/qtx11extras:5 dev-qt/qtwidgets:5
+RDEPEND=>=media-libs/taglib-1.10 media-sound/mpg123 >=media-sound/qmmp-1.0.0 dev-qt/qtgui:5 dev-qt/qtx11extras:5 dev-qt/qtwidgets:5
 SLOT=0
 _eclass_exported_funcs=pkg_preinst:subversion src_unpack:subversion src_prepare:subversion src_configure:cmake-utils src_compile:cmake-utils src_test:cmake-utils src_install:cmake-utils
 _eclasses_=cmake-utils	422bbd1bee2557490177a34dbe0a662b	eutils	792f83d5ec9536cb5ccef375469d8bde	flag-o-matic	d270fa247153df66074f795fa42dba3e	multilib	23ae8c186171e6476af098d2a50d0ee0	subversion	4fee0a764150bb4dda27ed4d2c4ed7ce	toolchain-funcs	d513d423d449877e49d99af3f7af7acb	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
-_md5_=275e01cb35a61590ab7650fa7761dabb
+_md5_=124efd0aa9bded561f99809aba4c00e1
