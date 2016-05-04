@@ -6,11 +6,11 @@ EAPI=6
 
 inherit wxwidgets-gtk3 user
 
-S="${WORKDIR}"/aMule-SVN-r${PV}
+S="${WORKDIR}"/aMule-SVN-${PR}
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
-SRC_URI="http://${PN}.sourceforge.net/tarballs/aMule-SVN-r${PV}.tar.bz2"
+SRC_URI="http://${PN}.sourceforge.net/tarballs/aMule-SVN-${PR}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
