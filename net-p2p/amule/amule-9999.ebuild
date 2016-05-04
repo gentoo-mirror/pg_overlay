@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit wxwidgets-gtk3 user git-r3
+inherit wxwidgets user git-r3
 
 EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 
@@ -26,8 +26,8 @@ DEPEND=">=dev-libs/crypto++-5
 	upnp? ( >=net-libs/libupnp-1.6.6 )
 	remote? ( >=media-libs/libpng-1.2.0
 	unicode? ( >=media-libs/gd-2.0.26 ) )
-	X? ( >=x11-libs/wxGTK-3.1.0:3.1[X] )
-	!X? ( >=x11-libs/wxGTK-3.1.0:3.1 )"
+	X? ( >=x11-libs/wxGTK-3.0:3.0-gtk3[X] )
+	!X? ( >=x11-libs/wxGTK-3.0:3.0-gtk3 )"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -52,7 +52,7 @@ src_prepare() {
 src_configure() {
 	local myconf
 
-	WX_GTK_VER="3.1"
+	WX_GTK_VER="3.0"
 
 	if use X; then
 		einfo "wxGTK with X support will be used"
