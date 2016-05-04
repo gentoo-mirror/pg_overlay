@@ -213,6 +213,7 @@ src_configure() {
 	# New features
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-system-hunspell
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-pay
@@ -237,6 +238,7 @@ src_configure() {
 	
 	# Privacy
 	mozconfig_annotate '' --disable-necko-wifi
+	mozconfig_annotate '' --disable-webrtc
 	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
@@ -246,6 +248,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-gnomevfs
 	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-debug-symbols
 
 	# Other ff-specific settings
 	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
