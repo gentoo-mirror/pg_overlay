@@ -2,7 +2,6 @@ app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 15.14.1: Port of 7-Zip archiver for Unix
 app-dicts/myspell-ru 20150711: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/wine 1.9.8 1.9.9: Free implementation of Windows(tm) on Unix
-app-pda/libimobiledevice 1.2.0: Support library to communicate with Apple iPhone/iPod Touch devices
 app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
 app-pda/usbmuxd 1.1.0: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
 app-text/goldendict 9999: Feature-rich dictionary lookup program
@@ -46,7 +45,6 @@ www-client/chromium 47.0.2526.111 48.0.2564.116 49.0.2623.110 49.0.2623.111 49.0
 www-client/firefox 45.0 45.0.1 45.0.2 46.0 46.0.1: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.14.6-r20150311: A vector graphics library with cross-device output support
-x11-libs/wxGTK 3.0.2.0-r2 3.1.0: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-terms/tilda 9999: A drop down terminal, similar to the consoles found in first person shooters
 x11-themes/greybird 1.6.2: The default theme from Xubuntu
 x11-themes/qtcurve 9999: A set of widget styles for Qt and GTK2
