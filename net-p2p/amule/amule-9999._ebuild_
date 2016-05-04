@@ -6,7 +6,8 @@ EAPI=6
 
 inherit wxwidgets-gtk3 user git-r3
 
-EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
+EGIT_REPO_URI="git://github.com/${PN}-project/${PN}.git"
+EGIT_BRANCH="master"
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
@@ -40,11 +41,16 @@ pkg_setup() {
 
 src_prepare() {
 
-	sed -i s/gtk1/gtk3/g configure || die
-	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g configure || die
 	sed -i s/gtk1/gtk3/g m4/wxwin.m4 || die
 	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g m4/wxwin.m4 || die
 	sed -i s/wxGTK1/wxGTK3/g src/OtherFunctions.cpp || die
+
+	./autogen.sh
+
+	sed -i s/gtk1/gtk3/g configure || die
+	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g configure || die
+	sed -i s/gtk1/gtk3/g autom4te.cache/* || die
+	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g autom4te.cache/* || die
 
 	default
 }
@@ -63,11 +69,11 @@ src_configure() {
 	fi
 
 	if use X ; then
-		myconf="${myconf}
-			--enable-amule-gui"
 		use stats && myconf="${myconf}
 			--enable-wxcas
 			--enable-alc"
+		myconf="${myconf}
+			--enable-amule-gui"
 	else
 		myconf="
 			--disable-monolithic
