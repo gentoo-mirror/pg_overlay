@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-inherit autotools fdo-mime flag-o-matic gnome2-utils qmake-utils systemd user
+inherit autotools fdo-mime flag-o-matic gnome2-utils qmake-utils user
 
 DESCRIPTION="A Fast, Easy and Free BitTorrent client"
 HOMEPAGE="http://www.transmissionbt.com/"
@@ -14,7 +14,7 @@ SRC_URI="https://build.${PN}bt.com/job/trunk-linux/lastSuccessfulBuild/artifact/
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT=0
-IUSE="ayatana gtk libressl lightweight systemd qt4 qt5 xfs"
+IUSE="ayatana gtk libressl lightweight qt4 qt5 xfs"
 KEYWORDS="~amd64 ~arm ~mips ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux"
 
 RDEPEND=">=dev-libs/libevent-2.0.10:=
@@ -28,7 +28,6 @@ RDEPEND=">=dev-libs/libevent-2.0.10:=
 		>=x11-libs/gtk+-3.4:3=
 		ayatana? ( >=dev-libs/libappindicator-0.4.90:3= )
 		)
-	systemd? ( >=sys-apps/systemd-209:= )
 	qt4? (
 		dev-qt/qtcore:4
 		dev-qt/qtgui:4
