@@ -214,7 +214,7 @@ src_configure() {
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-system-hunspell
-	mozconfig_annotate '' --disable-default-toolkit=cairo-gtk2
+	mozconfig_annotate '' --disable-cairo-gtk2
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-pay
