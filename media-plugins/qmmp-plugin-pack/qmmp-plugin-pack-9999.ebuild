@@ -21,7 +21,6 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=media-libs/taglib-1.10
-	media-sound/mpg123
 	>=media-sound/qmmp-1.0.0
 	dev-qt/qtgui:5
 	dev-qt/qtx11extras:5
