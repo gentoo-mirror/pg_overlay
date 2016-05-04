@@ -259,8 +259,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-debug-symbols
 
 	# Light Firefox / Palemoon
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-windows-mobile-components
 	mozconfig_annotate '' --disable-mobile-optimize
