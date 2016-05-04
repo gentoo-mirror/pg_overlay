@@ -214,6 +214,7 @@ src_configure() {
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-system-hunspell
+	mozconfig_annotate '' --disable-default-toolkit=cairo-gtk2
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-pay
@@ -240,13 +241,14 @@ src_configure() {
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-webrtc
 	mozconfig_annotate '' --disable-safe-browsing
+	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-strip-libs
-
+	
 	# KDE
 	mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-gconf
@@ -254,9 +256,16 @@ src_configure() {
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
-	# Light Firefox
-	mozconfig_annotate '' --disable-gamepad
+	# Light Firefox / Palemoon
 	mozconfig_annotate '' --disable-accessibility
+	mozconfig_annotate '' --disable-parental-controls
+	mozconfig_annotate '' --disable-gamepad
+	mozconfig_annotate '' --disable-windows-mobile-components
+	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-b2g-ril
+	mozconfig_annotate '' --disable-b2g-bt
+	mozconfig_annotate '' --disable-b2g-camera
+	
 
 	# Disable EME
 	mozconfig_annotate '' --disable-eme
