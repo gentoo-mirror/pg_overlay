@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit wxwidgets-gtk3 user
+inherit wxwidgets-gtk3 user git-r3
 
 EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 
