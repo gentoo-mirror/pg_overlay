@@ -10,7 +10,6 @@ inherit qmake-utils git-r3 l10n
 DESCRIPTION="Feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
 EGIT_REPO_URI="https://github.com/goldendict/goldendict.git"
-EGIT_BRANCH=$(usex qt5 qt4x5 master)
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -34,7 +33,7 @@ RDEPEND="
 		dev-qt/qthelp:5
 		dev-qt/qtsingleapplication[qt5]
 		dev-qt/qtsvg:5
-		dev-qt/qtwebkit:5
+		dev-qt/qtwebengine:5
 		dev-qt/qtx11extras:5
 		dev-qt/qtwidgets:5
 	)
