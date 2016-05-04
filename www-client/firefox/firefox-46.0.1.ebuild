@@ -209,7 +209,7 @@ src_configure() {
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 	mozconfig_annotate '' --disable-mailnews
-	
+
 	# New features
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --enable-gold
@@ -235,7 +235,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-elf-hack
-	
+
 	# Privacy
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-webrtc
@@ -243,12 +243,22 @@ src_configure() {
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
-	
+	mozconfig_annotate '' --enable-strip
+	mozconfig_annotate '' --enable-install-strip
+
 	# KDE
+	mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-gnomevfs
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
+
+	# Light Firefox
+	mozconfig_annotate '' --disable-gamepad
+	mozconfig_annotate '' --disable-accessibility
+
+	# Disable EME
+	mozconfig_annotate '' --disable-eme
 
 	# Other ff-specific settings
 	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
