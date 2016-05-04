@@ -33,7 +33,7 @@ RDEPEND="
 		dev-qt/qthelp:5
 		dev-qt/qtsingleapplication[qt5]
 		dev-qt/qtsvg:5
-		dev-qt/qtwebkit:5
+		dev-qt/qtwebengine:5
 		dev-qt/qtx11extras:5
 		dev-qt/qtwidgets:5
 	)
