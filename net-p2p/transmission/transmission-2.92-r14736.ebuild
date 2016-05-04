@@ -74,6 +74,10 @@ src_prepare() {
 	sed -i s/2.92+/2.92/g lib${PN}/version.h || die
 	sed -i s/TR292Z/TR2920/g lib${PN}/version.h || die
 
+	# Prevent m4_copy error when running aclocal
+	# m4_copy: won't overwrite defined macro: glib_DEFUN
+	rm m4/glib-gettext.m4 || die
+
 	default
 	eautoreconf
 }
