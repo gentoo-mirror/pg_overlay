@@ -437,12 +437,21 @@ src_configure() {
 	#Ungoogled
 	myconf_gyp+="
 		-Duse_ozone=0
-		-Duse_gconf=0
 		-Dlinux_breakpad=0
 		-Dlinux_use_libgps=0
 		-Denable_remoting_host=0
 		-Denable_prod_wallet_service=0
-		-Dlinux_strip_binary=1"
+		-Ddisable_fatal_linker_warnings=1
+		-Dlinux_strip_binary=1
+		-Denable_hevc_demuxing=1
+		-Dremove_webcore_debug_symbols=1"
+
+	#
+	myconf_gyp+="
+		-Duse_gio=0
+		-Dlogging_like_official_build=1
+		-Dchrome_pgo_phase=1
+		-Doptimize=speed"
 
 	if ! use ungoogled; then
 		myconf_gyp+="
