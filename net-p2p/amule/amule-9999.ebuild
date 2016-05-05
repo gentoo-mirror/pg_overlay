@@ -19,15 +19,14 @@ IUSE="+daemon -debug -geoip +nls remote -stats +unicode -upnp +X +mmap"
 DEPEND=">=dev-libs/crypto++-5
 	sys-libs/binutils-libs:0=
 	>=sys-libs/zlib-1.2.1
-	dev-libs/boost
-	dev-util/boost-build
-	stats? ( >=media-libs/gd-2.0.26[jpeg] )
+	>=x11-libs/wxGTK-3.0.2:3.0-gtk3[X?]
+	stats? ( >=media-libs/gd-2.0.26:=[jpeg] )
 	geoip? ( dev-libs/geoip )
 	upnp? ( >=net-libs/libupnp-1.6.6 )
-	remote? ( >=media-libs/libpng-1.2.0
-	unicode? ( >=media-libs/gd-2.0.26 ) )
-	X? ( >=x11-libs/wxGTK-3.0.2:3.0-gtk3[X] )
-	!X? ( >=x11-libs/wxGTK-3.0.2:3.0-gtk3 )"
+	remote? ( >=media-libs/libpng-1.2.0:0=
+	unicode? ( >=media-libs/gd-2.0.26:= ) )
+	dev-util/boost-build
+	!net-p2p/imule"
 RDEPEND="${DEPEND}"
 
 pkg_setup() {
@@ -39,7 +38,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-
 	sed -i s/gtk1/gtk3/g configure || die
 	sed -i s/WX_GTKPORT1/WX_GTKPORT3/g configure || die
 	sed -i s/gtk1/gtk3/g m4/wxwin.m4 || die
@@ -63,11 +61,11 @@ src_configure() {
 	fi
 
 	if use X ; then
-		myconf="${myconf}
-			--enable-amule-gui"
 		use stats && myconf="${myconf}
 			--enable-wxcas
 			--enable-alc"
+		use remote && myconf="${myconf}
+			--enable-amule-gui"
 	else
 		myconf="
 			--disable-monolithic
@@ -78,11 +76,9 @@ src_configure() {
 
 	econf \
 		--with-denoise-level=0 \
-		--with-wx-config=${WX_CONFIG} \
-		--disable-amulecmd \
-		--with-boost \
+		--with-wx-config="${WX_CONFIG}" \
+		--enable-amulecmd \
 		$(use_enable debug) \
-		$(use_enable !debug optimize) \
 		$(use_enable daemon amule-daemon) \
 		$(use_enable geoip) \
 		$(use_enable nls) \
