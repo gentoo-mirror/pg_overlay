@@ -421,7 +421,7 @@ src_configure() {
 		-Ddisable_glibc=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
-		-D_remoting=0
+		-Dremoting=0
 		-Denable_rlz=0
 		-Dbranding=Chromium
 		-Dgoogle_chrome_build=0
@@ -434,7 +434,7 @@ src_configure() {
 		-Dfieldtrial_testing_like_official_build=1
 		-Dfastbuild=2"
 
-	#Ungoogled
+	# Ungoogled
 	myconf_gyp+="
 		-Duse_ozone=0
 		-Dlinux_breakpad=0
@@ -448,7 +448,7 @@ src_configure() {
 
 	#
 	myconf_gyp+="
-		-Duse_gio=0
+		$(gyp_use gnome use_gio)
 		-Dlogging_like_official_build=1
 		-Dchrome_pgo_phase=1
 		-Doptimize=speed"
@@ -491,7 +491,7 @@ src_configure() {
 	# Use explicit library dependencies instead of dlopen.
 	# This makes breakages easier to detect by revdep-rebuild.
 	myconf_gyp+="
-		$(gyp_use gnome-keyring linux_link_gsettings)
+		$(gyp_use gnome linux_link_gsettings)
 		-Dlinux_link_libpci=1
 		-Dlinux_link_libspeechd=0"
 
