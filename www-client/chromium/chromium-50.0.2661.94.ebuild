@@ -518,7 +518,7 @@ src_configure() {
 		-Dhost_clang=0
 		-Dlinux_use_bundled_binutils=0
 		-Dlinux_use_bundled_gold=0
-		-Dlinux_use_gold_flags=0
+		-Dlinux_use_gold_flags=1
 		-Dsysroot="
 	myconf_gn+=" use_sysroot=false"
 
