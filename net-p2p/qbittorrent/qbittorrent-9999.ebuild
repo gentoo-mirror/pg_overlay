@@ -57,16 +57,12 @@ DEPEND="${RDEPEND}
 
 DOCS=(AUTHORS Changelog CONTRIBUTING.md README.md TODO)
 
-src_prepare() {
+src_configure() {
 	# To last stable version for What.CD & Pedro's BTMusic
 	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 3"/g version.pri || die
 	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 4"/g version.pri || die
 	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
 
-	default
-}
-
-src_configure() {
 	econf \
 		--with-qjson=system \
 		--with-qtsingleapplication=system \
@@ -75,7 +71,7 @@ src_configure() {
 		$(use_enable webui) \
 		$(use_enable X gui) \
 		$(use_enable !X systemd) \
-		$(use_with !qt5 qt4) --without-qt4 --with-boost
+		$(use_with !qt5 qt4)
 
 	if use qt5; then
 		eqmake5
