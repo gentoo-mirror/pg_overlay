@@ -1,0 +1,11 @@
+DEFINED_PHASES=-
+DESCRIPTION=Vacuum and reindex browser sqlite databases
+EAPI=6
+HOMEPAGE=https://bbs.archlinux.org/viewtopic.php?id=148062 https://github.com/graysky2/profile-cleaner
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+RDEPEND=app-shells/bash sys-devel/bc sys-apps/coreutils sys-apps/findutils sys-apps/grep sys-apps/sed sys-process/parallel dev-db/sqlite:3
+SLOT=0
+SRC_URI=http://repo-ck.com/source/profile-cleaner/profile-cleaner-2.35.tar.xz
+_eclass_exported_funcs=-
+_md5_=dbf0098b38f22c92c230e7337d47d021
