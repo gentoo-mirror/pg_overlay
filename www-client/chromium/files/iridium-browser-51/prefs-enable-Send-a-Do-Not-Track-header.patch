@@ -1,0 +1,40 @@
+From 23fe77328128a086b104c6332fcebfe3c9509ec7 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sat, 13 Sep 2014 15:06:39 +0200
+Subject: [PATCH 12/55] prefs: enable "Send a Do-Not-Track header"
+
+Set enable_do_not_track to true by default.
+
+The web community has pointed out (in e.g.
+https://news.ycombinator.com/item?id=9483958 ) that defaulting to
+DNT=on is "a questionable plan". I agree with that feeling
+that DNT becomes useless if everybody has it on.
+
+However, Iridium is order of magnitudes away from "everybody"
+currently. We shall reevaluate this in time again.
+
+[The same ycombinator post also quotes section 6.3 of the
+https://tools.ietf.org/html/draft-mayer-do-not-track-00#section-6
+draft: "It MUST NOT transmit OPT-IN without explicit user consent."
+This is ok, because the UA is not sending OPT-IN; it is sending
+OPT-OUT.]
+---
+ chrome/browser/ui/browser_ui_prefs.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
+index aeb6ca4..42861cd 100644
+--- a/chrome/browser/ui/browser_ui_prefs.cc
++++ b/chrome/browser/ui/browser_ui_prefs.cc
+@@ -102,7 +102,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+   registry->RegisterBooleanPref(prefs::kImportSearchEngine, true);
+   registry->RegisterBooleanPref(
+       prefs::kEnableDoNotTrack,
+-      false,
++      true,
+       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
+ #if defined(ENABLE_WEBRTC)
+   // TODO(guoweis): Remove next 2 options at M50.
+-- 
+2.6.6
+
