@@ -250,7 +250,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-strip-libs
-	
+
 	# KDE
 	mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-gconf
@@ -260,12 +260,6 @@ src_configure() {
 
 	# Light Firefox / Palemoon
 	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-windows-mobile-components
-	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-b2g-ril
-	mozconfig_annotate '' --disable-b2g-bt
-	mozconfig_annotate '' --disable-b2g-camera
-	
 
 	# Disable EME
 	mozconfig_annotate '' --disable-eme
