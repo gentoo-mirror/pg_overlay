@@ -252,8 +252,8 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip-libs
 
 	# KDE
-	mozconfig_annotate '' --disable-gio
-	mozconfig_annotate '' --disable-gconf
+	#mozconfig_annotate '' --disable-gio
+	#mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-gnomevfs
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
