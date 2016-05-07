@@ -18,7 +18,7 @@ index 75df69f..1c214c3 100644
 @@ -13,6 +13,12 @@
  TestSPKI
  sha256/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
-
+ 
 +IridiumBrowser1
 +sha256/lFx4wFkIxxIE60oXak/s1KXPK+hoCo+PfWqhZ42V2ns=
 +
@@ -33,7 +33,7 @@ index 3c42d8d..8e54ac3 100644
 --- a/net/http/transport_security_state_static.h
 +++ b/net/http/transport_security_state_static.h
 @@ -13,6 +13,7 @@
-
+ 
  enum SecondLevelDomainName {
    DOMAIN_NOT_PINNED,
 +  DOMAIN_IRIDIUMBROWSER_DE,
@@ -43,7 +43,7 @@ index 3c42d8d..8e54ac3 100644
 @@ -295,6 +296,14 @@ static const char kSPKIHash_TestSPKI[] =
      "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00"
      "\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00";
-
+ 
 +static const char kSPKIHash_IridiumBrowser1[] =
 +    "\x94\x5c\x78\xc0\x59\x08\xc7\x12\x04\xeb\x4a\x17\x6a\x4f\xec\xd4"
 +    "\xa5\xcf\x2b\xe8\x68\x0a\x8f\x8f\x7d\x6a\xa1\x67\x8d\x95\xda\x7b";
@@ -68,7 +68,7 @@ index 3c42d8d..8e54ac3 100644
      kSPKIHash_GoogleBackup2048,
      kSPKIHash_GoogleG2,
 @@ -724,6 +738,7 @@ struct Pinset {
-
+ 
  static const struct Pinset kPinsets[] = {
      {kTestAcceptableCerts, kNoRejectedPublicKeys, kNoReportURI},
 +    {kIridiumbrowserAcceptableCerts, kNoRejectedPublicKeys, kNoReportURI},
@@ -77,7 +77,7 @@ index 3c42d8d..8e54ac3 100644
      {kTwitterComAcceptableCerts, kNoRejectedPublicKeys, kTwitterComReportURI},
 @@ -750,7 +765,7 @@ static const uint8_t kHSTSHuffmanTree[] = {
  };
-
+ 
  static const uint8_t kPreloadedHSTSData[] = {
 -    0xfb, 0x5d, 0xbb, 0xf6, 0xa8, 0x89, 0x57, 0xbc, 0xda, 0x59, 0x7f, 0xcf,
 +    0xfb, 0x5d, 0xbb, 0xf6, 0xa9, 0x09, 0x97, 0xbc, 0xda, 0x59, 0x7f, 0xcf,
@@ -15303,13 +15303,13 @@ index 3c42d8d..8e54ac3 100644
 +    0x71, 0x23, 0x47, 0xbe, 0xb5, 0xee, 0x32, 0xb1, 0x26, 0xdb, 0x9f, 0x8a,
 +    0x12, 0xb3, 0x62, 0xdd, 0xbd, 0x93, 0x5a,
  };
-
+ 
 -static const unsigned kPreloadedHSTSBits = 803081;
 +static const unsigned kPreloadedHSTSBits = 803095;
-
+ 
 -static const unsigned kHSTSRootPosition = 802430;
 +static const unsigned kHSTSRootPosition = 802444;
-
+ 
  #endif  // NET_HTTP_TRANSPORT_SECURITY_STATE_STATIC_H_
 diff --git a/net/http/transport_security_state_static.json b/net/http/transport_security_state_static.json
 index 04c1bc3..114f9bf 100644
@@ -15346,6 +15346,6 @@ index 04c1bc3..114f9bf 100644
      "GOOGLE_COM",
      "ANDROID_COM",
      "GOOGLE_ANALYTICS_COM",
---
+-- 
 2.6.6
 

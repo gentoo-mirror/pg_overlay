@@ -20,14 +20,10 @@ prefs-only-keep-cookies-until-exit.patch
 prefs-always-prompt-for-download-directory-by-defaul.patch
 first_run-barf-if-metrics_reporting-is-activated.patch
 search_engines-add-DuckDuckGo-as-selectable-and-defa.patch
-search_engines-add-Qwant-as-selectable-and-default-s.patch
 prefs-disable-translation-service.patch
-prefs-use-separate-directory-for-config.patch
 first_run-deactivate-autoupdate-globally.patch
-ui-translation-update-strings-to-read-Iridium-instea.patch
 build-fix-OSX-branded-build-crashes-on-OSX.patch
 src-use-cached-copy-of-safebrowsing-lists-at-iridium.patch
-prefs-use-system-provided-preference-skeleton.patch
 build-build-the-sandbox-with-PIE.patch
 updater-disable-auto-update.patch
 plugins-use-cached-copy-of-plugin-description-list-a.patch
@@ -51,5 +47,3 @@ extensions-always-show-component-extensions-in-the-e.patch
 battery_status_service-disable-more-privacy-nightmar.patch
 translate-disable-fetching-of-translate-languages-fr.patch
 build-use-Wl-no-keep-memory.patch
-icons-iridium-icons.patch
-common-set-Iridium-version-and-change-User-Agent-acc.patch

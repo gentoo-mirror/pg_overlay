@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine inox iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
@@ -207,7 +207,7 @@ src_prepare() {
 	# Iridium patches
 	if use iridium; then
 		for i in $(cat "${FILESDIR}/iridium-browser-51/series"); \
-		do epatch "${FILESDIR}/iridium-browser/$i"; \
+		do epatch "${FILESDIR}/iridium-browser-51/$i"; \
 		done
 	fi
 
