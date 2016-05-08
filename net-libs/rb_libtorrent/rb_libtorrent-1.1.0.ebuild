@@ -42,8 +42,7 @@ RESTRICT="test"
 
 src_configure() {
 # make sure lib search dir points to the main `S` dir and not to python copies
-sed -i "s|-L[^ ]*/src/\.libs|-L${S}/src/.libs|" \
-	-- 'bindings/python/link_flags.in' || die
+sed -i "s|-L[^ ]*/src/\.libs|-L${S}/src/.libs|" -- 'bindings/python/link_flags.in' || die
 
 	local myeconfargs=(
 		--disable-silent-rules # bug 441842
