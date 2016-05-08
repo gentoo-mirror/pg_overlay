@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~x86 arm"
 IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine inox iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
@@ -452,6 +452,10 @@ src_configure() {
 		-Dlogging_like_official_build=1
 		-Dchrome_pgo_phase=1
 		-Doptimize=speed"
+	myconf_gyp+=" -Ddisable_pnacl=1"
+	myconf_gn+=" enable_pnacl=false"
+	myconf_gyp+=" -Ddisable_glibc=1"
+	myconf_gn+=" disable_glibc=true"
 
 	if ! use ungoogled; then
 		myconf_gyp+="
@@ -519,7 +523,7 @@ src_configure() {
 		-Dhost_clang=0
 		-Dlinux_use_bundled_binutils=0
 		-Dlinux_use_bundled_gold=0
-		-Dlinux_use_gold_flags=1
+		-Dlinux_use_gold_flags=0
 		-Dsysroot="
 	myconf_gn+=" use_sysroot=false"
 

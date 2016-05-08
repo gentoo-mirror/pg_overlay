@@ -211,7 +211,7 @@ src_prepare() {
 		do epatch "${FILESDIR}/iridium-browser/$i"; \
 		done
 	fi
-	
+
 	# Ungoogled Chromium patches
 	if use ungoogled; then
 		echo "Stripping binaries from the source code"

@@ -40,7 +40,20 @@ DEPEND="${RDEPEND}
 
 RESTRICT="test"
 
+src_prepare() {
+# make sure lib search dir points to the main `S` dir and not to python copies
+echo "sedsedsed"
+sed -i "s|-L[^ ]*/src/\.libs|-L${S}/src/.libs|" \
+	-- 'bindings/python/link_flags.in' || die
+	default
+}
+
 src_configure() {
+# make sure lib search dir points to the main `S` dir and not to python copies
+echo "sedsedsed"
+sed -i "s|-L[^ ]*/src/\.libs|-L${S}/src/.libs|" \
+	-- 'bindings/python/link_flags.in' || die
+
 	local myeconfargs=(
 		--disable-silent-rules # bug 441842
 		--with-boost-system=mt
@@ -69,7 +82,7 @@ src_compile() {
 	default
 
 	python_compile() {
-		cd "${BUILD_DIR}/../bindings/python" || return 1
+		cd "${BUILD_DIR}/../bindings/python" || die
 		distutils-r1_python_compile
 	}
 	use python && distutils-r1_src_compile
@@ -81,7 +94,7 @@ src_install() {
 	default
 
 	python_install() {
-		cd "${BUILD_DIR}/../bindings/python" || return 1
+		cd "${BUILD_DIR}/../bindings/python" || die
 		distutils-r1_python_install
 	}
 	use python && distutils-r1_src_install

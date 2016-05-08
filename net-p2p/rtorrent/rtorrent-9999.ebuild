@@ -8,7 +8,7 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
+EGIT_REPO_URI="git://github.com/rakshasa/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
