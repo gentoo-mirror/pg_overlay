@@ -5,6 +5,7 @@ app-emulation/wine 1.9.8 1.9.9: Free implementation of Windows(tm) on Unix
 app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
 app-pda/usbmuxd 1.1.0: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
 app-text/goldendict 9999: Feature-rich dictionary lookup program
+app-text/qpdfview 0.4.16: A tabbed document viewer
 dev-python/nemo-python 2.8.0: Python bindings for the Nautilus file manager
 dev-util/gperf 3.0.4: A perfect hash function generator
 gnome-extra/cinnamon 2.8.6: A fork of GNOME Shell with layout similar to GNOME 2
