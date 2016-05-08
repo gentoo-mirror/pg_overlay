@@ -31,7 +31,7 @@ media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/psi 9999: Qt5 Jabber client, with Licq-like interface
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
-net-libs/rb_libtorrent 1.0.9 1.1.0: C++ BitTorrent implementation focusing on efficiency and scalability
+net-libs/rb_libtorrent 1.1.0: C++ BitTorrent implementation focusing on efficiency and scalability
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
