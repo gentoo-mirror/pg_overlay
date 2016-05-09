@@ -75,7 +75,7 @@ src_install() {
 	keepdir $stat_dir
 	fowners root:roccat $stat_dir
 	fperms 2770 $stat_dir
-	readme.gentoo_src_install
+	readme.gentoo_create_doc
 }
 pkg_preinst() {
 	gnome2_icon_savelist
