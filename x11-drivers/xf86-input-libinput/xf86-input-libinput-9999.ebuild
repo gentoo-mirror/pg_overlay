@@ -20,7 +20,3 @@ pkg_pretend() {
 	CONFIG_CHECK="~TIMERFD"
 	check_extra_config
 }
-
-src_prepare() {
-	sed -i 's/1.2.901/1.2.3/g' configure.ac || die
-}
