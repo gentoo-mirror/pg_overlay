@@ -32,7 +32,7 @@ src_install() {
 
 	insinto "${MY_HTDOCSDIR}"
 	#mv plugins rutorrent
-	cd rutorrent
+	cd ${P}
 	doins -r .
 
 	chmod +x "${ED}${MY_HTDOCSDIR}"/plugins/*/*.sh \
