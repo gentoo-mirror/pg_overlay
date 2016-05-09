@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/Novik/ruTorrent"
 EGIT_REPO_URI="git://github.com/Novik/ruTorrent.git"
 
 LICENSE="GPL-2"
-KEYWORDS="~alpha ~amd64 ~ppc ~x86"
+KEYWORDS=""
 IUSE=""
 
 need_httpd_cgi
