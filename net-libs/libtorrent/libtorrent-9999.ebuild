@@ -44,7 +44,7 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable ipv6) \
 		$(use_enable ssl openssl) \
-		--with-posix-fallocate
+		--with-posix-fallocate --enable-largefile
 }
 
 src_install() {
