@@ -176,8 +176,8 @@ src_configure() {
 		$(use_enable uchardet)
 		$(use_enable rubberband)
 		$(use_enable lcms lcms2)
-		--enable-vapoursynth	# Only available in overlays
-		--enable-vapoursynth-lazy
+		--disable-vapoursynth	# Only available in overlays.
+		--disable-vapoursynth-lazy
 		$(use_enable archive libarchive)
 
 		--enable-libavdevice
