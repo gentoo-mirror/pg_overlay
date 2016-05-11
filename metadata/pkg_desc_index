@@ -29,6 +29,7 @@ media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
+net-ftp/vsftpd 3.0.3: Very Secure FTP Daemon written with speed, size and security in mind
 net-im/psi 9999: Qt5 Jabber client, with Licq-like interface
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/rb_libtorrent 1.1.0: C++ BitTorrent implementation focusing on efficiency and scalability
