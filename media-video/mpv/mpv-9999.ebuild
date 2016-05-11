@@ -176,8 +176,8 @@ src_configure() {
 		$(use_enable uchardet)
 		$(use_enable rubberband)
 		$(use_enable lcms lcms2)
-		--disable-vapoursynth	# Only available in overlays
-		--disable-vapoursynth-lazy
+		--enable-vapoursynth	# Only available in overlays
+		--enable-vapoursynth-lazy
 		$(use_enable archive libarchive)
 
 		--enable-libavdevice
@@ -267,19 +267,18 @@ pkg_postinst() {
 	fdo-mime_desktop_database_update
 	gnome2_icon_cache_update
 
-	# bash-completion prior to 2.3-r1 installs (mostly broken) mpv completion.
-	if use cli && ! use zsh-completion && \
-		! has_version '<app-shells/bash-completion-2.3-r1' && \
+	# bash-completion < 2.3-r1 already installs (mostly broken) mpv completion.
+	if use cli && ! has_version '<app-shells/bash-completion-2.3-r1' && \
 		! has_version 'app-shells/mpv-bash-completion'; then
 		elog "If you want to have command-line completion via bash-completion,"
 		elog "please install app-shells/mpv-bash-completion."
-	fi;
+	fi
 
 	if use cli && [[ -n ${REPLACING_VERSIONS} ]] && \
 		has_version 'app-shells/mpv-bash-completion'; then
 		elog "If command-line completion doesn't work after mpv update,"
 		elog "please rebuild app-shells/mpv-bash-completion."
-	fi;
+	fi
 }
 
 pkg_postrm() {
