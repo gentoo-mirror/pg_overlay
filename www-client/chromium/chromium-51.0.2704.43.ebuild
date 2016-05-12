@@ -415,7 +415,6 @@ src_configure() {
 	# Inox
 	myconf_gyp+="
 		-Duse_mojo=0
-		-Duse_gconf=0
 		-Duse_sysroot=0
 		-Ddisable_fatal_linker_warnings=1
 		-Ddisable_glibc=1
