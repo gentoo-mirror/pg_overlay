@@ -441,21 +441,13 @@ src_configure() {
 		-Dlinux_use_libgps=0
 		-Denable_remoting_host=0
 		-Denable_prod_wallet_service=0
-		-Ddisable_fatal_linker_warnings=1
 		-Dlinux_strip_binary=1
 		-Denable_hevc_demuxing=1
 		-Dremove_webcore_debug_symbols=1"
 
-	# Chromium-Minimum from AUR
-	myconf_gyp+="
-		-Ddisable_glibc=1"
-
 	# My
 	myconf_gyp+="
-		$(gyp_use gnome use_gio)
-		-Dlogging_like_official_build=1
-		-Dchrome_pgo_phase=1
-		-Doptimize=speed"
+		$(gyp_use gnome use_gio)"
 
 	if ! use ungoogled; then
 		myconf_gyp+="
