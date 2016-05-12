@@ -446,16 +446,12 @@ src_configure() {
 		-Denable_hevc_demuxing=1
 		-Dremove_webcore_debug_symbols=1"
 
-	#
+	# My
 	myconf_gyp+="
 		$(gyp_use gnome use_gio)
 		-Dlogging_like_official_build=1
 		-Dchrome_pgo_phase=1
 		-Doptimize=speed"
-	myconf_gyp+=" -Ddisable_pnacl=1"
-	myconf_gn+=" enable_pnacl=false"
-	myconf_gyp+=" -Ddisable_glibc=1"
-	myconf_gn+=" disable_glibc=true"
 
 	if ! use ungoogled; then
 		myconf_gyp+="
@@ -523,7 +519,7 @@ src_configure() {
 		-Dhost_clang=0
 		-Dlinux_use_bundled_binutils=0
 		-Dlinux_use_bundled_gold=0
-		-Dlinux_use_gold_flags=0
+		-Dlinux_use_gold_flags=1
 		-Dsysroot="
 	myconf_gn+=" use_sysroot=false"
 
