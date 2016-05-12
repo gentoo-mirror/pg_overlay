@@ -415,7 +415,6 @@ src_configure() {
 	# Inox
 	myconf_gyp+="
 		-Duse_mojo=0
-		-Duse_gconf=0
 		-Duse_sysroot=0
 		-Ddisable_fatal_linker_warnings=1
 		-Ddisable_glibc=1
@@ -445,7 +444,7 @@ src_configure() {
 		-Denable_hevc_demuxing=1
 		-Dremove_webcore_debug_symbols=1"
 
-	#
+	#######
 	myconf_gyp+="
 		$(gyp_use gnome use_gio)"
 
