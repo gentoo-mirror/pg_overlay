@@ -446,6 +446,10 @@ src_configure() {
 		-Denable_hevc_demuxing=1
 		-Dremove_webcore_debug_symbols=1"
 
+	# Chromium-Minimum from AUR
+	myconf_gyp+="
+		-Ddisable_glibc=1"
+
 	# My
 	myconf_gyp+="
 		$(gyp_use gnome use_gio)
@@ -519,7 +523,7 @@ src_configure() {
 		-Dhost_clang=0
 		-Dlinux_use_bundled_binutils=0
 		-Dlinux_use_bundled_gold=0
-		-Dlinux_use_gold_flags=1
+		-Dlinux_use_gold_flags=0
 		-Dsysroot="
 	myconf_gn+=" use_sysroot=false"
 
