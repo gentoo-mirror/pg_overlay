@@ -9,7 +9,7 @@ PYTHON_REQ_USE="threads"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1 versionator
+inherit autotools distutils-r1 flag-o-matic versionator
 
 MY_PV=$(replace_all_version_separators '_' )
 S=${WORKDIR}/libtorrent-rasterbar-${PV}
