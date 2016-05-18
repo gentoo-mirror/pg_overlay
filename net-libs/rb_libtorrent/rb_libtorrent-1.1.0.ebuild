@@ -51,6 +51,10 @@ src_prepare() {
 }
 
 src_configure() {
+
+	append-cflags -std=c11
+	append-cxxflags -std=c++11
+
 	local myeconfargs=(
 		--disable-silent-rules # bug 441842
 		--with-boost-system=mt
