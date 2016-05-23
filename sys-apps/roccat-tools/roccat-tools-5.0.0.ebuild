@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -84,9 +84,8 @@ pkg_postinst() {
 	gnome2_icon_cache_update
 	readme.gentoo_print_elog
 	ewarn
-	ewarn "Starting from version 3.0.0, executables were renamed and now prefixed with 'roccat',"
-	ewarn "so konextdconfig is now roccatkonextdconfig and so on"
-	ewarn "Everything that was ryos is now ryosmk to distinguish it from the ryostkl product range"
+	ewarn "This version breaks stored data for some devices. Before reporting bugs please delete"
+	ewarn "affected folder(s) in /var/lib/roccat"
 	ewarn
 }
 
