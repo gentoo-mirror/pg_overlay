@@ -41,7 +41,7 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	=dev-libs/libgaminggear-0.12*
+	=dev-libs/libgaminggear-0.13*
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	media-libs/libcanberra
