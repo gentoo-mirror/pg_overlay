@@ -195,7 +195,7 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-snapshot-toolchain-r1.patch"
 
 	if use vaapi; then
-		epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
+		epatch "${FILESDIR}/chromium_vaapi.patch"
 	fi
 
 	# Inox patches
