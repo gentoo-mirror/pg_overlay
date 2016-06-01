@@ -443,11 +443,7 @@ src_configure() {
 		-Denable_prod_wallet_service=0
 		-Dlinux_strip_binary=1
 		-Denable_hevc_demuxing=1
-		-Dremove_webcore_debug_symbols=1
-		-Denable_supervised_users=0
-		-Denable_one_click_signin=0
-		-Dconfiguration_policy=0
-		-Ddisable_newlib=1"
+		-Dremove_webcore_debug_symbols=1"
 
 	#######
 	myconf_gyp+="
