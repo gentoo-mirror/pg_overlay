@@ -43,7 +43,7 @@ sys-fs/android-file-transfer 2.4: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 50.0.2661.94 50.0.2661.104 51.0.2704.63 51.0.2704.77: Open-source version of Google Chrome web browser
+www-client/chromium 50.0.2661.94 50.0.2661.104 51.0.2704.63 51.0.2704.77 51.0.2704.79: Open-source version of Google Chrome web browser
 www-client/firefox 46.0 46.0.1: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.14.6-r20150311: A vector graphics library with cross-device output support
