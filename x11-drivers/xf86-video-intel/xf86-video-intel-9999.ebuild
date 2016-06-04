@@ -10,7 +10,7 @@ inherit linux-info xorg-2
 
 DESCRIPTION="X.Org driver for Intel cards"
 
-KEYWORDS="~amd64 ~x86 ~amd64-fbsd -x86-fbsd"
+KEYWORDS=""
 IUSE="debug +dri3 +sna +udev uxa xvmc"
 
 REQUIRED_USE="
