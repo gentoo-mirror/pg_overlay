@@ -23,7 +23,7 @@ RDEPEND="app-emulation/qemu
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
 	dev-qt/qtnetwork:5
-	x11-libs/qtermwidget[qt5]
+	=x11-libs/qtermwidget-9999[qt5]
 	dev-libs/glib:2
 	net-misc/spice-gtk
 	net-libs/libvncserver
