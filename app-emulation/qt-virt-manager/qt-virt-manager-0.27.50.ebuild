@@ -23,7 +23,7 @@ RDEPEND="app-emulation/qemu
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
 	dev-qt/qtnetwork:5
-	x11-libs/qtermwidget[qt5]
+	=x11-libs/qtermwidget-9999[qt5]
 	dev-libs/glib:2
 	net-misc/spice-gtk
 	net-libs/libvncserver
@@ -33,11 +33,10 @@ RDEPEND="app-emulation/qemu
 #DOCS="AUTHORS CHANGELOG README TODO"
 
 src_configure() {
-	BUILD_QT_VERSION=5
-	#local mycmakeargs=(
-	#	"-DMAN_PAGE_COMPRESSOR="
-	#	"-DWITHOUT_EMBEDDED_DISPLAY=$(use vnc && echo "OFF" || echo "ON")"
-	#)
+
+	local mycmakeargs=(
+		"-DBUILD_QT_VERSION=5"
+	)
 
 	cmake-utils_src_configure
 }
