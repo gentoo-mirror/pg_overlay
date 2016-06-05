@@ -6,7 +6,7 @@ EAPI=5
 
 inherit cmake-utils
 
-DESCRIPTION="Graphical interface for QEMU and KVM emulators, using Qt5"
+DESCRIPTION="Qt5 Virtual Machine Manager provides a graphical tool for administering virtual machines for QEMU/KVM, Xen, and LXC and other Virtual Entities. Uses libvirt as the backend management API."
 HOMEPAGE="https://github.com/F1ash/qt-virt-manager"
 SRC_URI="https://github.com/F1ash/${PN}/archive/${PV}.tar.gz"
 
