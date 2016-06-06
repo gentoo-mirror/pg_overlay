@@ -1,7 +1,7 @@
-From 68670148c8100342d119ed237513d46a9f3b083a Mon Sep 17 00:00:00 2001
+From 25d1a802cb3011d3b979e0b1f881156d75d92f12 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 19 Oct 2014 14:49:10 +0200
-Subject: [PATCH 22/57] search_engines: add DuckDuckGo as selectable and
+Subject: [PATCH 22/55] search_engines: add DuckDuckGo as selectable and
  default search engine
 
 There is a lot of code pertaining to DefaultSearchEngine,
@@ -17,7 +17,7 @@ prepending &duckduckgo yields the desired result, for now at least.
  3 files changed, 121 insertions(+), 109 deletions(-)
 
 diff --git a/components/search_engines/prepopulated_engines.json b/components/search_engines/prepopulated_engines.json
-index 9f7608d..ff56569 100644
+index 2774895..5998de6 100644
 --- a/components/search_engines/prepopulated_engines.json
 +++ b/components/search_engines/prepopulated_engines.json
 @@ -36,6 +36,17 @@

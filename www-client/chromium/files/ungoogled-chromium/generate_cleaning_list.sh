@@ -1,13 +1,11 @@
-# A script that strips unwanted files
+# A script that prints files to be removed
+# This script's output is cleaning_list
 
 # Delete all binary files
 find . -path ./debian -prune \
-    -o -path ./third_party/icu/source -prune \
-    -o -path ./third_party/liblouis/src/tables -prune \
     -o -path ./components/dom_distiller/core/data/distillable_page_model.bin -prune \
     -o -path ./components/dom_distiller/core/data/distillable_page_model_new.bin -prune \
-    -o -path ./third_party/skia/resources -prune \
-    -o -path ./third_party/deqp/src/data -prune \
+    -o -path ./components/dom_distiller/core/data/long_page_model.bin -prune \
     -o -type f -not \( -empty \) -not \( -name "*.ttf" \
         -o -name "*.png" \
         -o -name "*.jpg" \
@@ -38,9 +36,7 @@ find . -path ./debian -prune \
         -o -name "*.json" \
         -o -name "*.txt" \
         -o -name "*.TXT" \) \
-    -not \( -exec grep -Iq . {} \; \) -print | xargs -L1 -I{} rm {}
+    -not \( -exec grep -Iq . {} \; \) -printf '%P\n'
 
 # Delete domain_reliability files
-rm -r ./components/domain_reliability/baked_in_configs/*
-
-exit 0;
+find . -path "./components/domain_reliability/baked_in_configs/*" -type f -printf '%P\n'

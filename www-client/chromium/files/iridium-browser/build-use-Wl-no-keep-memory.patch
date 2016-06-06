@@ -1,14 +1,14 @@
-From 93b1afbc179a7e7485ed35100b34b7f6ec57fe0f Mon Sep 17 00:00:00 2001
+From 154fa82c50f966cb6473fc0f188d5f52406221b9 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sun, 20 Dec 2015 11:12:00 +0100
-Subject: [PATCH 55/57] build: use -Wl,--no-keep-memory
+Subject: [PATCH 53/55] build: use -Wl,--no-keep-memory
 
 ---
  chrome/chrome_exe.gypi | 8 ++++++++
  1 file changed, 8 insertions(+)
 
 diff --git a/chrome/chrome_exe.gypi b/chrome/chrome_exe.gypi
-index e145024..de0fa56 100644
+index 3d4701e..5c402bb 100644
 --- a/chrome/chrome_exe.gypi
 +++ b/chrome/chrome_exe.gypi
 @@ -76,6 +76,14 @@

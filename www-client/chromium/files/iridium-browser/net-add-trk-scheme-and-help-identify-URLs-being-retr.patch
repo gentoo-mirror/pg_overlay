@@ -1,7 +1,7 @@
-From 4c78263b3c32c90572b33b6993f0c871832b6e79 Mon Sep 17 00:00:00 2001
+From a33565c13d61094fe550aca8d5081f85132108a7 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Wed, 20 May 2015 01:34:50 +0200
-Subject: [PATCH 40/57] net: add "trk:" scheme and help identify URLs being
+Subject: [PATCH 38/55] net: add "trk:" scheme and help identify URLs being
  retrieved
 
 The Chromium codebase has left us with a number of suspect URLs, and
@@ -116,7 +116,7 @@ index bf15ceb..67edd9d 100644
         base::LowerCaseEqualsASCII(scheme, url::kDataScheme))) {
      return metrics::OmniboxInputType::URL;
 diff --git a/chrome/browser/history/history_utils.cc b/chrome/browser/history/history_utils.cc
-index 170f9f5..fbfb6e77 100644
+index cbb66d4..d69e58c 100644
 --- a/chrome/browser/history/history_utils.cc
 +++ b/chrome/browser/history/history_utils.cc
 @@ -20,6 +20,7 @@ bool CanAddURLToHistory(const GURL& url) {
@@ -128,10 +128,10 @@ index 170f9f5..fbfb6e77 100644
        url.SchemeIs(chrome::kChromeSearchScheme) ||
        url.SchemeIs(dom_distiller::kDomDistillerScheme))
 diff --git a/chrome/browser/ui/browser_command_controller.cc b/chrome/browser/ui/browser_command_controller.cc
-index 01c7886..000e66c 100644
+index c624c8c..e099475 100644
 --- a/chrome/browser/ui/browser_command_controller.cc
 +++ b/chrome/browser/ui/browser_command_controller.cc
-@@ -111,7 +111,8 @@ bool HasInternalURL(const NavigationEntry* entry) {
+@@ -107,7 +107,8 @@ bool HasInternalURL(const NavigationEntry* entry) {
  
    // If the |virtual_url()| isn't a chrome:// URL, check if it's actually
    // view-source: of a chrome:// URL.
@@ -142,10 +142,10 @@ index 01c7886..000e66c 100644
  
    return false;
 diff --git a/chrome/browser/ui/browser_navigator.cc b/chrome/browser/ui/browser_navigator.cc
-index 784ece5..2d4c394 100644
+index d98c47e..b88d728 100644
 --- a/chrome/browser/ui/browser_navigator.cc
 +++ b/chrome/browser/ui/browser_navigator.cc
-@@ -609,6 +609,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
+@@ -610,6 +610,14 @@ bool IsURLAllowedInIncognito(const GURL& url,
      return stripped_url.is_valid() &&
          IsURLAllowedInIncognito(stripped_url, browser_context);
    }
@@ -175,7 +175,7 @@ index 870e8df..bdea535 100644
  
      GURL rewritten_tab_url = tab_url;
 diff --git a/chrome/chrome_dll.gypi b/chrome/chrome_dll.gypi
-index 9ee23c53..1d8bc23 100644
+index a84463b..b443f1d 100644
 --- a/chrome/chrome_dll.gypi
 +++ b/chrome/chrome_dll.gypi
 @@ -120,6 +120,7 @@
@@ -185,9 +185,9 @@ index 9ee23c53..1d8bc23 100644
 +            '../iridium/iridium.gyp:trknotify',
              '<@(chromium_browser_dependencies)',
              'chrome_features.gyp:chrome_common_features',
-             '../content/content.gyp:content_app_browser',
+             'policy_path_parser',
 diff --git a/chrome/chrome_exe.gypi b/chrome/chrome_exe.gypi
-index c5af97b..e145024 100644
+index 0c878b2e..3d4701e 100644
 --- a/chrome/chrome_exe.gypi
 +++ b/chrome/chrome_exe.gypi
 @@ -195,6 +195,7 @@
@@ -199,7 +199,7 @@ index c5af97b..e145024 100644
              # Chromium functionality directly into the executable.
              '<@(chromium_browser_dependencies)',
 diff --git a/components/infobars/core/infobar_delegate.h b/components/infobars/core/infobar_delegate.h
-index e0a17e6..1a7bb85a 100644
+index 00b0175..a0e4779 100644
 --- a/components/infobars/core/infobar_delegate.h
 +++ b/components/infobars/core/infobar_delegate.h
 @@ -131,6 +131,7 @@ class InfoBarDelegate {
@@ -279,10 +279,10 @@ index a79b89d..ab808cc 100644
  
  BrowserURLHandlerImpl::~BrowserURLHandlerImpl() {
 diff --git a/content/browser/child_process_security_policy_impl.cc b/content/browser/child_process_security_policy_impl.cc
-index 639401f..93ec7e3 100644
+index 34bad5a..892c437 100644
 --- a/content/browser/child_process_security_policy_impl.cc
 +++ b/content/browser/child_process_security_policy_impl.cc
-@@ -308,6 +308,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
+@@ -307,6 +307,7 @@ ChildProcessSecurityPolicyImpl::ChildProcessSecurityPolicyImpl() {
    RegisterPseudoScheme(url::kAboutScheme);
    RegisterPseudoScheme(url::kJavaScriptScheme);
    RegisterPseudoScheme(kViewSourceScheme);
@@ -290,7 +290,7 @@ index 639401f..93ec7e3 100644
  }
  
  ChildProcessSecurityPolicyImpl::~ChildProcessSecurityPolicyImpl() {
-@@ -396,7 +397,7 @@ void ChildProcessSecurityPolicyImpl::GrantRequestURL(
+@@ -395,7 +396,7 @@ void ChildProcessSecurityPolicyImpl::GrantRequestURL(
    if (IsPseudoScheme(url.scheme())) {
      // The view-source scheme is a special case of a pseudo-URL that eventually
      // results in requesting its embedded URL.
@@ -299,7 +299,7 @@ index 639401f..93ec7e3 100644
        // URLs with the view-source scheme typically look like:
        //   view-source:http://www.google.com/a
        // In order to request these URLs, the child_id needs to be able to
-@@ -588,13 +589,15 @@ bool ChildProcessSecurityPolicyImpl::CanRequestURL(
+@@ -587,13 +588,15 @@ bool ChildProcessSecurityPolicyImpl::CanRequestURL(
    if (IsPseudoScheme(url.scheme())) {
      // There are a number of special cases for pseudo schemes.
  
@@ -523,10 +523,10 @@ index 0000000..3c58d22
 +
 +#endif /* IRIDIUM_TRKNOTIFY_H */
 diff --git a/net/url_request/url_request.cc b/net/url_request/url_request.cc
-index 9fa81a7..eb52fe0 100644
+index 2ace1d2..22b0da2 100644
 --- a/net/url_request/url_request.cc
 +++ b/net/url_request/url_request.cc
-@@ -48,6 +48,8 @@ using std::string;
+@@ -47,6 +47,8 @@ using std::string;
  
  namespace net {
  
@@ -535,7 +535,7 @@ index 9fa81a7..eb52fe0 100644
  namespace {
  
  // Max number of http redirects to follow.  Same number as gecko.
-@@ -583,6 +585,11 @@ URLRequest::URLRequest(const GURL& url,
+@@ -566,6 +568,11 @@ URLRequest::URLRequest(const GURL& url,
    DCHECK(base::MessageLoop::current())
        << "The current base::MessageLoop must exist";
  
@@ -548,10 +548,10 @@ index 9fa81a7..eb52fe0 100644
    net_log_.BeginEvent(NetLog::TYPE_REQUEST_ALIVE);
  }
 diff --git a/net/url_request/url_request.h b/net/url_request/url_request.h
-index 1a17470..cb7337e 100644
+index fcbc445..f328808 100644
 --- a/net/url_request/url_request.h
 +++ b/net/url_request/url_request.h
-@@ -888,6 +888,8 @@ class NET_EXPORT URLRequest : NON_EXPORTED_BASE(public base::NonThreadSafe),
+@@ -876,6 +876,8 @@ class NET_EXPORT URLRequest : NON_EXPORTED_BASE(public base::NonThreadSafe),
    DISALLOW_COPY_AND_ASSIGN(URLRequest);
  };
  
@@ -561,10 +561,10 @@ index 1a17470..cb7337e 100644
  
  #endif  // NET_URL_REQUEST_URL_REQUEST_H_
 diff --git a/tools/metrics/histograms/histograms.xml b/tools/metrics/histograms/histograms.xml
-index 546842e..999e002 100644
+index c9bb7ea..11ce01e 100644
 --- a/tools/metrics/histograms/histograms.xml
 +++ b/tools/metrics/histograms/histograms.xml
-@@ -70853,6 +70853,7 @@ http://cs/file:chrome/histograms.xml - but prefer this file for new entries.
+@@ -73012,6 +73012,7 @@ http://cs/file:chrome/histograms.xml - but prefer this file for new entries.
    <int value="60" label="CHROME_WINDOW_ERROR"/>
    <int value="61" label="CONFIRM_DANGEROUS_DOWNLOAD"/>
    <int value="62" label="WINDOWS_DESKTOP_SEARCH_INFOBAR_DELEGATE"/>
@@ -619,7 +619,7 @@ index 2b67bee..39add8b 100644
    return out << url.possibly_invalid_spec();
  }
 diff --git a/url/gurl.h b/url/gurl.h
-index c55959b..9daeccd 100644
+index 103f1d8..6fc528a 100644
 --- a/url/gurl.h
 +++ b/url/gurl.h
 @@ -398,6 +398,9 @@ class URL_EXPORT GURL {
@@ -641,7 +641,7 @@ index c55959b..9daeccd 100644
  
  #endif  // URL_GURL_H_
 diff --git a/url/url_constants.cc b/url/url_constants.cc
-index 2dc1478..5e53b05 100644
+index 0388fbc..42159a8 100644
 --- a/url/url_constants.cc
 +++ b/url/url_constants.cc
 @@ -20,6 +20,7 @@ const char kHttpScheme[] = "http";
@@ -653,10 +653,10 @@ index 2dc1478..5e53b05 100644
  const char kWssScheme[] = "wss";
  
 diff --git a/url/url_constants.h b/url/url_constants.h
-index c48dafc..18770d0 100644
+index fa71164..ce3e9c7 100644
 --- a/url/url_constants.h
 +++ b/url/url_constants.h
-@@ -24,6 +24,7 @@ URL_EXPORT extern const char kHttpScheme[];
+@@ -26,6 +26,7 @@ URL_EXPORT extern const char kHttpScheme[];
  URL_EXPORT extern const char kHttpsScheme[];
  URL_EXPORT extern const char kJavaScriptScheme[];
  URL_EXPORT extern const char kMailToScheme[];

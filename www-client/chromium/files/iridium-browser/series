@@ -2,7 +2,6 @@ net-cert-increase-default-key-length-for-newly-gener.patch
 webrtc-disable-WebRTC-identity-store.patch
 webrtc-generate-real-ephemeral-keys.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
-http-certificate-pinning-for-iridiumbrowser.de.patch
 profile-resetter-do-not-tick-send-settings-by-defaul.patch
 browser-ui-disable-warning-about-missing-API-keys.patch
 mime_util-force-text-x-suse-ymp-to-be-downloaded.patch
@@ -27,8 +26,6 @@ build-fix-OSX-branded-build-crashes-on-OSX.patch
 src-use-cached-copy-of-safebrowsing-lists-at-iridium.patch
 build-build-the-sandbox-with-PIE.patch
 updater-disable-auto-update.patch
-plugin-do-not-load-any-system-provided-plugins-on-Wi.patch
-plugin-only-load-plugins-from-user-s-domain-on-Mac-O.patch
 plugins-use-cached-copy-of-plugin-description-list-a.patch
 Remove-EV-certificates.patch
 src-add-comments-for-evil-looking-code.patch

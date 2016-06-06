@@ -21,8 +21,6 @@ iridium-browser/prefs-disable-translation-service.patch
 iridium-browser/first_run-deactivate-autoupdate-globally.patch
 iridium-browser/build-build-the-sandbox-with-PIE.patch
 iridium-browser/updater-disable-auto-update.patch
-iridium-browser/plugin-do-not-load-any-system-provided-plugins-on-Wi.patch
-iridium-browser/plugin-only-load-plugins-from-user-s-domain-on-Mac-O.patch
 iridium-browser/Remove-EV-certificates.patch
 iridium-browser/spellchecker-flag-downloading-dictionary-from-Google.patch
 iridium-browser/google-cloud-messaging-disable-experiment-status-che.patch
@@ -50,7 +48,6 @@ inox-patchset/disable-google-url-tracker.patch
 inox-patchset/disable-new-avatar-menu.patch
 inox-patchset/disable-translation-lang-fetch.patch
 inox-patchset/modify-default-prefs.patch
-inox-patchset/restore-classic-ntp.patch
 
 ungoogled-chromium/disable-web-resource-service.patch
 ungoogled-chromium/clear-http-auth-cache-menu-item.patch
@@ -75,4 +72,5 @@ ungoogled-chromium/disable-copresence.patch
 ungoogled-chromium/disable-gcm.patch
 ungoogled-chromium/disable-domain-reliability.patch
 ungoogled-chromium/intercept-all-modified-domains.patch
+ungoogled-chromium/disable-intranet-redirect-detector.patch
 

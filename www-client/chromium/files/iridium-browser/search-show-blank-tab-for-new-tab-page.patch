@@ -1,7 +1,7 @@
-From 1005c908e88967ab041553f98a970246da7cdbc8 Mon Sep 17 00:00:00 2001
+From 6dac15e0fe4acdcd2be987459a712af71e031227 Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Mon, 6 Jul 2015 17:17:20 +0200
-Subject: [PATCH 50/57] search: show blank tab for new tab page
+Subject: [PATCH 48/55] search: show blank tab for new tab page
 
 Avoid loading the search page everytime, just show a blank one instead.
 
@@ -11,7 +11,7 @@ References: https://github.com/iridium-browser/iridium-browser/issues/32
  1 file changed, 6 insertions(+)
 
 diff --git a/chrome/browser/search/search.cc b/chrome/browser/search/search.cc
-index 380d5b3..21e143e 100644
+index 645fecb..abe25d1f 100644
 --- a/chrome/browser/search/search.cc
 +++ b/chrome/browser/search/search.cc
 @@ -225,6 +225,7 @@ bool IsURLAllowedForSupervisedUser(const GURL& url, Profile* profile) {

@@ -1,7 +1,7 @@
-From d05901772daed806f8397bc14963b7c0d1d2ced3 Mon Sep 17 00:00:00 2001
+From e5f65eed69fa1f7a01a5fb85d6f96e3d705069ef Mon Sep 17 00:00:00 2001
 From: Joachim Bauch <jojo@struktur.de>
 Date: Wed, 22 Jul 2015 12:24:15 +0200
-Subject: [PATCH 45/57] safe_browsing: disable cookie transmission
+Subject: [PATCH 43/55] safe_browsing: disable cookie transmission
 
 Disables sending/setting cookies for Safebrowsing requests. This
 prevents the long-living tracking cookie from being set.
@@ -16,10 +16,10 @@ References: https://github.com/iridium-browser/iridium-browser/issues/37
  5 files changed, 26 insertions(+), 9 deletions(-)
 
 diff --git a/chrome/browser/safe_browsing/client_side_detection_service.cc b/chrome/browser/safe_browsing/client_side_detection_service.cc
-index d1c569e..4fc49ed 100644
+index 61b2582..9f98df0 100644
 --- a/chrome/browser/safe_browsing/client_side_detection_service.cc
 +++ b/chrome/browser/safe_browsing/client_side_detection_service.cc
-@@ -313,7 +313,9 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
+@@ -314,7 +314,9 @@ void ClientSideDetectionService::StartClientReportPhishingRequest(
    info->phishing_url = GURL(request->url());
    client_phishing_reports_[fetcher] = info;
  
@@ -30,7 +30,7 @@ index d1c569e..4fc49ed 100644
    fetcher->SetRequestContext(request_context_getter_.get());
    fetcher->SetUploadData("application/octet-stream", request_data);
    fetcher->Start();
-@@ -359,7 +361,9 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
+@@ -360,7 +362,9 @@ void ClientSideDetectionService::StartClientReportMalwareRequest(
    info->original_url = GURL(request->url());
    client_malware_reports_[fetcher] = info;
  
@@ -42,10 +42,10 @@ index d1c569e..4fc49ed 100644
    fetcher->SetUploadData("application/octet-stream", request_data);
    fetcher->Start();
 diff --git a/chrome/browser/safe_browsing/download_protection_service.cc b/chrome/browser/safe_browsing/download_protection_service.cc
-index 08c1ff2..c3cd862 100644
+index 6a1ff00..ed9b1b0 100644
 --- a/chrome/browser/safe_browsing/download_protection_service.cc
 +++ b/chrome/browser/safe_browsing/download_protection_service.cc
-@@ -883,7 +883,9 @@ class DownloadProtectionService::CheckClientDownloadRequest
+@@ -909,7 +909,9 @@ class DownloadProtectionService::CheckClientDownloadRequest
      fetcher_ = net::URLFetcher::Create(0 /* ID used for testing */,
                                         GetDownloadRequestUrl(),
                                         net::URLFetcher::POST, this);
@@ -105,10 +105,10 @@ index 3d49aa2..0132a51 100644
    request_->SetUploadData("text/plain", update_list_data_);
    request_->Start();
 diff --git a/chrome/browser/safe_browsing/srt_fetcher_win.cc b/chrome/browser/safe_browsing/srt_fetcher_win.cc
-index e90118d..b1c910f 100644
+index 10d155c..1fc9fca 100644
 --- a/chrome/browser/safe_browsing/srt_fetcher_win.cc
 +++ b/chrome/browser/safe_browsing/srt_fetcher_win.cc
-@@ -225,7 +225,9 @@ class SRTFetcher : public net::URLFetcherDelegate {
+@@ -252,7 +252,9 @@ class SRTFetcher : public net::URLFetcherDelegate {
                                               GURL(GetSRTDownloadURL()),
                                               net::URLFetcher::GET,
                                               this)) {
