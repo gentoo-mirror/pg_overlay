@@ -1,7 +1,7 @@
-From b84885906fdb1225fd700e7c1e02e34457afe4aa Mon Sep 17 00:00:00 2001
+From 23fe77328128a086b104c6332fcebfe3c9509ec7 Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Sat, 13 Sep 2014 15:06:39 +0200
-Subject: [PATCH 12/57] prefs: enable "Send a Do-Not-Track header"
+Subject: [PATCH 12/55] prefs: enable "Send a Do-Not-Track header"
 
 Set enable_do_not_track to true by default.
 
@@ -23,10 +23,10 @@ OPT-OUT.]
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/ui/browser_ui_prefs.cc b/chrome/browser/ui/browser_ui_prefs.cc
-index 94b8791..45251dd 100644
+index aeb6ca4..42861cd 100644
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
-@@ -100,7 +100,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
+@@ -102,7 +102,7 @@ void RegisterBrowserUserPrefs(user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(prefs::kImportSearchEngine, true);
    registry->RegisterBooleanPref(
        prefs::kEnableDoNotTrack,

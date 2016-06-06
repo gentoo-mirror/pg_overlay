@@ -1,7 +1,7 @@
-From a487f8a2aae0caf9d23757a7e11471f7f1a40b40 Mon Sep 17 00:00:00 2001
+From bfd58cdb3d463383ab27c74705a13b76a63e7abd Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Fri, 13 Feb 2015 00:59:04 +0100
-Subject: [PATCH 32/57] updater: disable auto-update
+Subject: [PATCH 32/55] updater: disable auto-update
 
 As per http://www.chromium.org/administrators/turning-off-auto-updates ,
 the auto update function is decidedly disabled on Linux, i.e.
@@ -15,10 +15,10 @@ the case anyway, since we are based off Chromium, not Chrome.
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/chrome/browser/app_controller_mac.mm b/chrome/browser/app_controller_mac.mm
-index c0a864c..93db5eb 100644
+index 5e46b72..1d66d9f 100644
 --- a/chrome/browser/app_controller_mac.mm
 +++ b/chrome/browser/app_controller_mac.mm
-@@ -666,7 +666,7 @@ class AppControllerProfileObserver : public ProfileInfoCacheObserver {
+@@ -667,7 +667,7 @@ class AppControllerProfileObserver : public ProfileAttributesStorage::Observer {
    CFStringRef checkInterval = CFSTR("checkInterval");
    CFPropertyListRef plist = CFPreferencesCopyAppValue(checkInterval, app);
    if (!plist) {

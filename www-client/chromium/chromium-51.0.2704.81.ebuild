@@ -207,17 +207,19 @@ src_prepare() {
 
 	# Iridium patches
 	if use iridium; then
-		for i in $(cat "${FILESDIR}/iridium-browser-51/series"); \
-		do epatch "${FILESDIR}/iridium-browser-51/$i"; \
+		for i in $(cat "${FILESDIR}/iridium-browser/series"); \
+		do epatch "${FILESDIR}/iridium-browser/$i"; \
 		done
 	fi
 
 	# Ungoogled Chromium patches
 	if use ungoogled; then
 		echo "Stripping binaries from the source code"
-		"${FILESDIR}"/ungoogled-chromium/source_cleaner.sh || die
+		"${FILESDIR}"/ungoogled-chromium/generate_cleaning_list.sh > cleaning_list || die
+		"${FILESDIR}"/ungoogled-chromium/evaluate_cleaning_list.py cleaning_list || die
 		echo "Replacing many domains in the source code with non-existant alternatives"
-		"${FILESDIR}"/ungoogled-chromium/domain_patcher.sh || die
+		#"${FILESDIR}"/ungoogled-chromium/generate_domain_substitution_list.sh > domain_substitution_list || die
+		#"${FILESDIR}"/ungoogled-chromium/evaluate_domain_substitution_list.py "${FILESDIR}"/ungoogled-chromium/domain_regex_list domain_substitution_list || die
 		echo "Applying patches"
 		for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
 		do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
@@ -454,7 +456,10 @@ src_configure() {
 			-Dsafe_browsing=1"
 	else
 		myconf_gyp+="
-			-Dsafe_browsing=0"
+			-Dsafe_browsing=0
+			-Denable_supervised_users=0
+			-Denable_one_click_signin=0
+			-Ddisable_newlib=1"
 	fi
 
 	# Needed for system icu - we don't need additional data files.

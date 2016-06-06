@@ -1,7 +1,7 @@
-From 641ce9740269fa9ffc0baa62f66c9851d578d048 Mon Sep 17 00:00:00 2001
+From da63b6097f63d3403d3fd2511137b51785c558b6 Mon Sep 17 00:00:00 2001
 From: Yuriy Shevchuk <yuriy@struktur.de>
 Date: Tue, 23 Dec 2014 16:54:56 +0100
-Subject: [PATCH 28/57] build: fix OSX branded build crashes on OSX
+Subject: [PATCH 28/55] build: fix OSX branded build crashes on OSX
 
 ---
  build/common.gypi                  |  2 +-
@@ -10,10 +10,10 @@ Subject: [PATCH 28/57] build: fix OSX branded build crashes on OSX
  3 files changed, 10 insertions(+), 10 deletions(-)
 
 diff --git a/build/common.gypi b/build/common.gypi
-index 0706226..1c25215 100644
+index 1aad5054..912ac49 100644
 --- a/build/common.gypi
 +++ b/build/common.gypi
-@@ -1953,7 +1953,7 @@
+@@ -1975,7 +1975,7 @@
            ['branding=="Chrome"', {
              'mac_product_name%': 'Google Chrome',
            }, { # else: branding!="Chrome"
