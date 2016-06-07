@@ -252,7 +252,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip-libs
 
 	# KDE
-	#mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-gnomevfs
 	mozconfig_annotate '' --disable-libproxy
@@ -264,7 +263,9 @@ src_configure() {
 	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-gamepad
+	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-websms-backend
 	mozconfig_annotate '' --disable-windows-mobile-components
 	mozconfig_annotate '' --disable-valgrind
