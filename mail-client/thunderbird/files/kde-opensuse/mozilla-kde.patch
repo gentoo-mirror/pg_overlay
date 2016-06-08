@@ -1,15 +1,15 @@
 # HG changeset patch
-# Parent  f2726ebfae7cdded8e7ca6030829b0a3fae4e438
+# Parent  797d5f17b080f54439602f107ecaf6b09a0ef5c1
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
 Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=140751
      https://bugzilla.novell.com/show_bug.cgi?id=170055
 
-diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
---- a/modules/libpref/Preferences.cpp
-+++ b/modules/libpref/Preferences.cpp
-@@ -31,16 +31,17 @@
+diff --git a/mozilla/modules/libpref/Preferences.cpp b/mozilla/modules/libpref/Preferences.cpp
+--- a/mozilla/modules/libpref/Preferences.cpp
++++ b/mozilla/modules/libpref/Preferences.cpp
+@@ -30,16 +30,17 @@
  #include "nsIZipReader.h"
  #include "nsPrefBranch.h"
  #include "nsXPIDLString.h"
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #include "prefread.h"
  #include "prefapi_private_data.h"
  
-@@ -1138,16 +1139,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
+@@ -1136,16 +1137,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
  
  static nsresult pref_LoadPrefsInDirList(const char *listId)
  {
@@ -62,7 +62,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
      return NS_OK;
  
    bool hasMore;
-@@ -1163,17 +1182,17 @@ static nsresult pref_LoadPrefsInDirList(
+@@ -1161,17 +1180,17 @@ static nsresult pref_LoadPrefsInDirList(
  
      nsAutoCString leaf;
      path->GetNativeLeafName(leaf);
@@ -81,7 +81,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  {
    nsZipItemPtr<char> manifest(jarReader, name, true);
    NS_ENSURE_TRUE(manifest.Buffer(), NS_ERROR_NOT_AVAILABLE);
-@@ -1267,24 +1286,36 @@ static nsresult pref_InitInitialObjects(
+@@ -1265,26 +1284,38 @@ static nsresult pref_InitInitialObjects(
    /* these pref file names should not be used: we process them after all other application pref files for backwards compatibility */
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -91,7 +91,9 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #elif defined(XP_UNIX)
      "unix.js"
 +    , "" // placeholder for KDE  (empty is otherwise harmless)
- #if defined(_AIX)
+ #if defined(VMS)
+     , "openvms.js"
+ #elif defined(_AIX)
      , "aix.js"
  #endif
  #elif defined(XP_BEOS)
@@ -118,9 +120,9 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
    // or jar:$gre/omni.jar!/defaults/preferences/*.js.
    RefPtr<nsZipArchive> appJarReader = mozilla::Omnijar::GetReader(mozilla::Omnijar::APP);
    // GetReader(mozilla::Omnijar::APP) returns null when $app == $gre, in which
-diff --git a/modules/libpref/moz.build b/modules/libpref/moz.build
---- a/modules/libpref/moz.build
-+++ b/modules/libpref/moz.build
+diff --git a/mozilla/modules/libpref/moz.build b/mozilla/modules/libpref/moz.build
+--- a/mozilla/modules/libpref/moz.build
++++ b/mozilla/modules/libpref/moz.build
 @@ -31,16 +31,20 @@ UNIFIED_SOURCES += [
      'prefread.cpp',
  ]
@@ -142,9 +144,9 @@ diff --git a/modules/libpref/moz.build b/modules/libpref/moz.build
  DEFINES['MOZ_WIDGET_TOOLKIT'] = CONFIG['MOZ_WIDGET_TOOLKIT']
  
  if CONFIG['GNU_CXX']:
-diff --git a/python/mozbuild/mozpack/chrome/flags.py b/python/mozbuild/mozpack/chrome/flags.py
---- a/python/mozbuild/mozpack/chrome/flags.py
-+++ b/python/mozbuild/mozpack/chrome/flags.py
+diff --git a/mozilla/python/mozbuild/mozpack/chrome/flags.py b/mozilla/python/mozbuild/mozpack/chrome/flags.py
+--- a/mozilla/python/mozbuild/mozpack/chrome/flags.py
++++ b/mozilla/python/mozbuild/mozpack/chrome/flags.py
 @@ -211,16 +211,17 @@ class Flags(OrderedDict):
          'contentaccessible': Flag,
          'os': StringFlag,
@@ -163,9 +165,9 @@ diff --git a/python/mozbuild/mozpack/chrome/flags.py b/python/mozbuild/mozpack/c
          Initialize a set of flags given in string form.
             flags = Flags('contentaccessible=yes', 'appversion>=3.5')
          '''
-diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpack/chrome/manifest.py
---- a/python/mozbuild/mozpack/chrome/manifest.py
-+++ b/python/mozbuild/mozpack/chrome/manifest.py
+diff --git a/mozilla/python/mozbuild/mozpack/chrome/manifest.py b/mozilla/python/mozbuild/mozpack/chrome/manifest.py
+--- a/mozilla/python/mozbuild/mozpack/chrome/manifest.py
++++ b/mozilla/python/mozbuild/mozpack/chrome/manifest.py
 @@ -33,16 +33,17 @@ class ManifestEntry(object):
          'application',
          'platformversion',
@@ -184,10 +186,10 @@ diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpac
          '''
          self.base = base
          self.flags = Flags(*flags)
-diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloads/moz.build
---- a/toolkit/components/downloads/moz.build
-+++ b/toolkit/components/downloads/moz.build
-@@ -64,15 +64,16 @@ if not CONFIG['MOZ_SUITE']:
+diff --git a/mozilla/toolkit/components/downloads/moz.build b/mozilla/toolkit/components/downloads/moz.build
+--- a/mozilla/toolkit/components/downloads/moz.build
++++ b/mozilla/toolkit/components/downloads/moz.build
+@@ -65,15 +65,16 @@ if not CONFIG['MOZ_SUITE']:
          'nsDownloadManagerUI.js',
          'nsDownloadManagerUI.manifest',
      ]
@@ -205,9 +207,9 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
  DEFINES['GOOGLE_PROTOBUF_NO_STATIC_INITIALIZER'] = True
  
  CXXFLAGS += CONFIG['TK_CFLAGS']
-diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/components/downloads/nsDownloadManager.cpp
---- a/toolkit/components/downloads/nsDownloadManager.cpp
-+++ b/toolkit/components/downloads/nsDownloadManager.cpp
+diff --git a/mozilla/toolkit/components/downloads/nsDownloadManager.cpp b/mozilla/toolkit/components/downloads/nsDownloadManager.cpp
+--- a/mozilla/toolkit/components/downloads/nsDownloadManager.cpp
++++ b/mozilla/toolkit/components/downloads/nsDownloadManager.cpp
 @@ -51,16 +51,20 @@
  #ifdef XP_WIN
  #include <shlobj.h>
@@ -273,34 +275,34 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
  
        if (fileURL &&
            NS_SUCCEEDED(fileURL->GetFile(getter_AddRefs(file))) &&
-diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
---- a/toolkit/content/jar.mn
-+++ b/toolkit/content/jar.mn
-@@ -72,29 +72,33 @@ toolkit.jar:
+diff --git a/mozilla/toolkit/content/jar.mn b/mozilla/toolkit/content/jar.mn
+--- a/mozilla/toolkit/content/jar.mn
++++ b/mozilla/toolkit/content/jar.mn
+@@ -64,29 +64,33 @@ toolkit.jar:
     content/global/viewZoomOverlay.js
-    content/global/bindings/autocomplete.xml    (widgets/autocomplete.xml)
+ *+ content/global/bindings/autocomplete.xml    (widgets/autocomplete.xml)
     content/global/bindings/browser.xml         (widgets/browser.xml)
     content/global/bindings/button.xml          (widgets/button.xml)
     content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
     content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
     content/global/bindings/datetimepicker.xml  (widgets/datetimepicker.xml)
- *  content/global/bindings/dialog.xml          (widgets/dialog.xml)
-+*  content/global/bindings/dialog-kde.xml      (widgets/dialog-kde.xml)
+ *+ content/global/bindings/dialog.xml          (widgets/dialog.xml)
++*+ content/global/bindings/dialog-kde.xml      (widgets/dialog-kde.xml)
 +% override chrome://global/content/bindings/dialog.xml chrome://global/content/bindings/dialog-kde.xml desktop=kde
     content/global/bindings/editor.xml          (widgets/editor.xml)
     content/global/bindings/expander.xml        (widgets/expander.xml)
-    content/global/bindings/filefield.xml       (widgets/filefield.xml)
- *  content/global/bindings/findbar.xml         (widgets/findbar.xml)
+ *  content/global/bindings/filefield.xml       (widgets/filefield.xml)
+ *+ content/global/bindings/findbar.xml         (widgets/findbar.xml)
     content/global/bindings/general.xml         (widgets/general.xml)
     content/global/bindings/groupbox.xml        (widgets/groupbox.xml)
-    content/global/bindings/listbox.xml         (widgets/listbox.xml)
+ *+ content/global/bindings/listbox.xml         (widgets/listbox.xml)
     content/global/bindings/menu.xml            (widgets/menu.xml)
     content/global/bindings/menulist.xml        (widgets/menulist.xml)
     content/global/bindings/notification.xml    (widgets/notification.xml)
     content/global/bindings/numberbox.xml       (widgets/numberbox.xml)
     content/global/bindings/popup.xml           (widgets/popup.xml)
- *  content/global/bindings/preferences.xml     (widgets/preferences.xml)
-+*  content/global/bindings/preferences-kde.xml (widgets/preferences-kde.xml)
+ *+ content/global/bindings/preferences.xml     (widgets/preferences.xml)
++*+ content/global/bindings/preferences-kde.xml (widgets/preferences-kde.xml)
 +% override chrome://global/content/bindings/preferences.xml chrome://global/content/bindings/preferences-kde.xml desktop=kde
     content/global/bindings/progressmeter.xml   (widgets/progressmeter.xml)
     content/global/bindings/radio.xml           (widgets/radio.xml)
@@ -310,11 +312,11 @@ diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
     content/global/bindings/scale.xml           (widgets/scale.xml)
     content/global/bindings/scrollbar.xml       (widgets/scrollbar.xml)
     content/global/bindings/scrollbox.xml       (widgets/scrollbox.xml)
-diff --git a/toolkit/content/widgets/dialog-kde.xml b/toolkit/content/widgets/dialog-kde.xml
+diff --git a/mozilla/toolkit/content/widgets/dialog-kde.xml b/mozilla/toolkit/content/widgets/dialog-kde.xml
 new file mode 100644
 --- /dev/null
-+++ b/toolkit/content/widgets/dialog-kde.xml
-@@ -0,0 +1,463 @@
++++ b/mozilla/toolkit/content/widgets/dialog-kde.xml
+@@ -0,0 +1,460 @@
 +<?xml version="1.0"?>
 +<!-- This Source Code Form is subject to the terms of the Mozilla Public
 +   - License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -325,7 +327,7 @@ new file mode 100644
 +          xmlns="http://www.mozilla.org/xbl"
 +          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 +          xmlns:xbl="http://www.mozilla.org/xbl">
-+
++  
 +  <binding id="dialog" extends="chrome://global/content/bindings/general.xml#root-element">
 +    <resources>
 +      <stylesheet src="chrome://global/skin/dialog.css"/>
@@ -334,10 +336,10 @@ new file mode 100644
 +      <xul:vbox class="box-inherit dialog-content-box" flex="1">
 +        <children/>
 +      </xul:vbox>
-+
++          
 +      <xul:hbox class="dialog-button-box" anonid="buttons"
 +                xbl:inherits="pack=buttonpack,align=buttonalign,dir=buttondir,orient=buttonorient"
-+#ifdef XP_UNIX
++#ifdef XP_UNIX_GNOME
 +                >
 +        <xul:button dlgtype="disclosure" class="dialog-button" hidden="true"/>
 +        <xul:button dlgtype="help" class="dialog-button" hidden="true"/>
@@ -348,13 +350,13 @@ new file mode 100644
 +        <xul:button dlgtype="accept" class="dialog-button" xbl:inherits="disabled=buttondisabledaccept"/>
 +#elif XP_UNIX
 +                >
-+        <xul:button dlgtype="help" class="dialog-button" hidden="true"/>
-+        <xul:button dlgtype="extra2" class="dialog-button" hidden="true"/>
-+        <xul:spacer anonid="spacer" flex="1"/>
-+        <xul:button dlgtype="accept" class="dialog-button" xbl:inherits="disabled=buttondisabledaccept"/>
-+        <xul:button dlgtype="extra1" class="dialog-button" hidden="true"/>
-+        <xul:button dlgtype="cancel" class="dialog-button"/>
-+        <xul:button dlgtype="disclosure" class="dialog-button" hidden="true"/>
++	<xul:button dlgtype="help" class="dialog-button" hidden="true"/>
++	<xul:button dlgtype="extra2" class="dialog-button" hidden="true"/>
++	<xul:spacer anonid="spacer" flex="1"/>
++	<xul:button dlgtype="accept" class="dialog-button" xbl:inherits="disabled=buttondisabledaccept"/>
++	<xul:button dlgtype="extra1" class="dialog-button" hidden="true"/>
++	<xul:button dlgtype="cancel" class="dialog-button"/>
++	<xul:button dlgtype="disclosure" class="dialog-button" hidden="true"/>
 +#else
 +                pack="end">
 +        <xul:button dlgtype="extra2" class="dialog-button" hidden="true"/>
@@ -403,7 +405,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="cancelDialog">
 +        <body>
 +        <![CDATA[
@@ -411,7 +413,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="getButton">
 +        <parameter name="aDlgType"/>
 +        <body>
@@ -462,7 +464,7 @@ new file mode 100644
 +        <![CDATA[
 +          var xOffset = screen.availWidth/2 - window.outerWidth/2;
 +          var yOffset = screen.availHeight/2 - window.outerHeight/2; //(opener.outerHeight *2)/10;
-+
++  
 +          xOffset = xOffset > 0 ? xOffset : 0;
 +          yOffset = yOffset > 0 ? yOffset : 0;
 +          window.moveTo(xOffset, yOffset);
@@ -489,9 +491,6 @@ new file mode 100644
 +        <parameter name="aEvent"/>
 +        <body>
 +        <![CDATA[
-+          let { AppConstants } =
-+              Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
-+
 +          function focusInit() {
 +            const dialog = document.documentElement;
 +            const defaultButton = dialog.getButton(dialog.defaultButton);
@@ -517,10 +516,11 @@ new file mode 100644
 +                    initialFocusedElt.focus();
 +                  }
 +                }
-+                else if (AppConstants.platform != "macosx" &&
-+                         focusedElt.hasAttribute("dlgtype") && focusedElt != defaultButton) {
++#ifndef XP_MACOSX
++                else if (focusedElt.hasAttribute("dlgtype") && focusedElt != defaultButton) {
 +                  defaultButton.focus();
 +                }
++#endif
 +              }
 +            }
 +
@@ -534,7 +534,7 @@ new file mode 100644
 +          setTimeout(focusInit, 0);
 +        ]]>
 +        </body>
-+      </method>
++      </method>                
 +
 +      <property name="mStrBundle">
 +        <getter>
@@ -549,7 +549,7 @@ new file mode 100644
 +          return this._mStrBundle;
 +        ]]></getter>
 +      </property>
-+
++      
 +      <method name="_configureButtons">
 +        <parameter name="aButtons"/>
 +        <body>
@@ -621,7 +621,7 @@ new file mode 100644
 +
 +          // ensure that hitting enter triggers the default button command
 +          this.defaultButton = this.defaultButton;
-+
++          
 +          // if there is a special button configuration, use it
 +          if (aButtons) {
 +            // expect a comma delimited list of dlgtype values
@@ -634,17 +634,16 @@ new file mode 100644
 +              shown[list[i].replace(/ /g, "")] = true;
 +
 +            // hide/show the buttons we want
-+            for (dlgtype in buttons)
++            for (dlgtype in buttons) 
 +              buttons[dlgtype].hidden = !shown[dlgtype];
 +
-+            let { AppConstants } =
-+                Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
-+            // show the spacer on Windows only when the extra2 button is present
-+            if (AppConstants.platform == "win") {
-+              var spacer = document.getAnonymousElementByAttribute(this, "anonid", "spacer");
-+              spacer.removeAttribute("hidden");
-+              spacer.setAttribute("flex", shown["extra2"]?"1":"0");
-+            }
++#ifdef XP_WIN
++#           show the spacer on Windows only when the extra2 button is present
++            var spacer = document.getAnonymousElementByAttribute(this, "anonid", "spacer");
++            spacer.removeAttribute("hidden");
++            spacer.setAttribute("flex", shown["extra2"]?"1":"0");
++#endif
++
 +          }
 +        ]]>
 +        </body>
@@ -682,7 +681,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="_doButtonCommand">
 +        <parameter name="aDlgType"/>
 +        <body>
@@ -706,17 +705,17 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="_fireButtonEvent">
 +        <parameter name="aDlgType"/>
 +        <body>
 +        <![CDATA[
 +          var event = document.createEvent("Events");
 +          event.initEvent("dialog"+aDlgType, true, true);
-+
++          
 +          // handle dom event handlers
 +          var noCancel = this.dispatchEvent(event);
-+
++          
 +          // handle any xml attribute event handlers
 +          var handler = this.getAttribute("ondialog"+aDlgType);
 +          if (handler != "") {
@@ -725,7 +724,7 @@ new file mode 100644
 +            if (returned == false)
 +              noCancel = false;
 +          }
-+
++          
 +          return noCancel;
 +        ]]>
 +        </body>
@@ -746,7 +745,7 @@ new file mode 100644
 +      </method>
 +
 +    </implementation>
-+
++    
 +    <handlers>
 +      <handler event="keypress" keycode="VK_RETURN"
 +               group="system" action="this._hitEnter(event);"/>
@@ -778,11 +777,11 @@ new file mode 100644
 +  </binding>
 +
 +</bindings>
-diff --git a/toolkit/content/widgets/preferences-kde.xml b/toolkit/content/widgets/preferences-kde.xml
+diff --git a/mozilla/toolkit/content/widgets/preferences-kde.xml b/mozilla/toolkit/content/widgets/preferences-kde.xml
 new file mode 100644
 --- /dev/null
-+++ b/toolkit/content/widgets/preferences-kde.xml
-@@ -0,0 +1,1408 @@
++++ b/mozilla/toolkit/content/widgets/preferences-kde.xml
+@@ -0,0 +1,1403 @@
 +<?xml version="1.0"?>
 +
 +<!DOCTYPE bindings [
@@ -849,7 +848,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="fireChangedEvent">
 +        <parameter name="aPreference"/>
 +        <body>
@@ -866,7 +865,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <field name="service">
 +        Components.classes["@mozilla.org/preferences-service;1"]
 +                  .getService(Components.interfaces.nsIPrefService);
@@ -916,11 +915,11 @@ new file mode 100644
 +            .addObserver(this.name, this.preferences, false);
 +        // In non-instant apply mode, we must try and use the last saved state
 +        // from any previous opens of a child dialog instead of the value from
-+        // preferences, to pick up any edits a user may have made.
++        // preferences, to pick up any edits a user may have made. 
 +
 +        var secMan = Components.classes["@mozilla.org/scriptsecuritymanager;1"]
 +                    .getService(Components.interfaces.nsIScriptSecurityManager);
-+        if (this.preferences.type == "child" &&
++        if (this.preferences.type == "child" && 
 +            !this.instantApply && window.opener &&
 +            secMan.isSystemPrincipal(window.opener.document.nodePrincipal)) {
 +          var pdoc = window.opener.document;
@@ -961,13 +960,13 @@ new file mode 100644
 +        <setter>
 +          if (val == this.name)
 +            return val;
-+
++            
 +          this.preferences.rootBranchInternal
 +              .removeObserver(this.name, this.preferences);
 +          this.setAttribute('name', val);
 +          this.preferences.rootBranchInternal
 +              .addObserver(val, this.preferences, false);
-+
++              
 +          return val;
 +        </setter>
 +      </property>
@@ -994,20 +993,20 @@ new file mode 100644
 +        </body>
 +      </method>
 +      <property name="value" onget="return this._value" onset="return this._setValue(val);"/>
-+
++      
 +      <property name="locked">
 +        <getter>
 +          return this.preferences.rootBranch.prefIsLocked(this.name);
 +        </getter>
 +      </property>
-+
++      
 +      <property name="disabled">
 +        <getter>
 +          return this.getAttribute("disabled") == "true";
 +        </getter>
 +        <setter>
 +        <![CDATA[
-+          if (val)
++          if (val) 
 +            this.setAttribute("disabled", "true");
 +          else
 +            this.removeAttribute("disabled");
@@ -1018,24 +1017,24 @@ new file mode 100644
 +          var elements = document.getElementsByAttribute("preference", this.id);
 +          for (var i = 0; i < elements.length; ++i) {
 +            elements[i].disabled = val;
-+
++            
 +            var labels = document.getElementsByAttribute("control", elements[i].id);
 +            for (var j = 0; j < labels.length; ++j)
 +              labels[j].disabled = val;
 +          }
-+
++            
 +          return val;
 +        ]]>
 +        </setter>
 +      </property>
-+
++      
 +      <property name="tabIndex">
 +        <getter>
 +          return parseInt(this.getAttribute("tabindex"));
 +        </getter>
 +        <setter>
 +        <![CDATA[
-+          if (val)
++          if (val) 
 +            this.setAttribute("tabindex", val);
 +          else
 +            this.removeAttribute("tabindex");
@@ -1046,12 +1045,12 @@ new file mode 100644
 +          var elements = document.getElementsByAttribute("preference", this.id);
 +          for (var i = 0; i < elements.length; ++i) {
 +            elements[i].tabIndex = val;
-+
++            
 +            var labels = document.getElementsByAttribute("control", elements[i].id);
 +            for (var j = 0; j < labels.length; ++j)
 +              labels[j].tabIndex = val;
 +          }
-+
++            
 +          return val;
 +        ]]>
 +        </setter>
@@ -1065,7 +1064,7 @@ new file mode 100644
 +        ]]>
 +        </getter>
 +      </property>
-+
++      
 +      <method name="reset">
 +        <body>
 +          // defer reset until preference update
@@ -1073,7 +1072,7 @@ new file mode 100644
 +        </body>
 +      </method>
 +
-+      <field name="_useDefault">false</field>
++      <field name="_useDefault">false</field>      
 +      <property name="defaultValue">
 +        <getter>
 +        <![CDATA[
@@ -1084,27 +1083,27 @@ new file mode 100644
 +        ]]>
 +        </getter>
 +      </property>
-+
++      
 +      <property name="_branch">
 +        <getter>
 +          return this._useDefault ? this.preferences.defaultBranch : this.preferences.rootBranch;
 +        </getter>
 +      </property>
-+
++      
 +      <field name="batching">false</field>
-+
++      
 +      <method name="_reportUnknownType">
 +        <body>
 +        <![CDATA[
 +          var consoleService = Components.classes["@mozilla.org/consoleservice;1"]
 +                                         .getService(Components.interfaces.nsIConsoleService);
-+          var msg = "<preference> with id='" + this.id + "' and name='" +
++          var msg = "<preference> with id='" + this.id + "' and name='" + 
 +                    this.name + "' has unknown type '" + this.type + "'.";
 +          consoleService.logStringMessage(msg);
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <property name="valueFromPreferences">
 +        <getter>
 +        <![CDATA[
@@ -1189,7 +1188,7 @@ new file mode 100644
 +              if (!lf.exists())
 +                lf.initWithPath(val);
 +            }
-+            else
++            else 
 +              lf = val.QueryInterface(Components.interfaces.nsILocalFile);
 +            this.preferences.rootBranch
 +                .setComplexValue(this.name, Components.interfaces.nsILocalFile, lf);
@@ -1203,7 +1202,7 @@ new file mode 100644
 +        ]]>
 +        </setter>
 +      </property>
-+
++      
 +      <method name="setElementValue">
 +        <parameter name="aElement"/>
 +        <body>
@@ -1220,7 +1219,7 @@ new file mode 100644
 +            try {
 +              var event = document.createEvent("Events");
 +              event.initEvent("syncfrompreference", true, true);
-+              var f = new Function ("event",
++              var f = new Function ("event", 
 +                                    aElement.getAttribute("onsyncfrompreference"));
 +              rv = f.call(aElement, event);
 +            }
@@ -1228,22 +1227,20 @@ new file mode 100644
 +              Components.utils.reportError(e);
 +            }
 +          }
-+          var val = rv;
-+          if (val === undefined)
-+            val = this.instantApply ? this.valueFromPreferences : this.value;
++          var val = rv !== undefined ? rv : (this.instantApply ? this.valueFromPreferences : this.value);
 +          // if the preference is marked for reset, show default value in UI
 +          if (val === undefined)
 +            val = this.defaultValue;
 +
 +          /**
-+           * Initialize a UI element property with a value. Handles the case
++           * Initialize a UI element property with a value. Handles the case 
 +           * where an element has not yet had a XBL binding attached for it and
 +           * the property setter does not yet exist by setting the same attribute
-+           * on the XUL element using DOM apis and assuming the element's
-+           * constructor or property getters appropriately handle this state.
++           * on the XUL element using DOM apis and assuming the element's 
++           * constructor or property getters appropriately handle this state. 
 +           */
 +          function setValue(element, attribute, value) {
-+            if (attribute in element)
++            if (attribute in element) 
 +              element[attribute] = value;
 +            else
 +              element.setAttribute(attribute, value);
@@ -1275,19 +1272,19 @@ new file mode 100644
 +            try {
 +              var event = document.createEvent("Events");
 +              event.initEvent("synctopreference", true, true);
-+              var f = new Function ("event",
++              var f = new Function ("event", 
 +                                    aElement.getAttribute("onsynctopreference"));
 +              var rv = f.call(aElement, event);
-+              if (rv !== undefined)
++              if (rv !== undefined) 
 +                return rv;
 +            }
 +            catch (e) {
 +              Components.utils.reportError(e);
 +            }
 +          }
-+
++          
 +          /**
-+           * Read the value of an attribute from an element, assuming the
++           * Read the value of an attribute from an element, assuming the 
 +           * attribute is a property on the element's node API. If the property
 +           * is not present in the API, then assume its value is contained in
 +           * an attribute, as is the case before a binding has been attached.
@@ -1315,7 +1312,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="isElementEditable">
 +        <parameter name="aElement"/>
 +        <body>
@@ -1331,26 +1328,26 @@ new file mode 100644
 +            return true;
 +          }
 +          return aElement.getAttribute("preference-editable") == "true";
-+        ]]>
++        ]]> 
 +        </body>
 +      </method>
-+
++      
 +      <method name="updateElements">
 +        <body>
 +        <![CDATA[
 +          if (!this.id)
 +            return;
 +
-+          // This "change" event handler tracks changes made to preferences by
-+          // sources other than the user in this window.
++          // This "change" event handler tracks changes made to preferences by 
++          // sources other than the user in this window. 
 +          var elements = document.getElementsByAttribute("preference", this.id);
-+          for (var i = 0; i < elements.length; ++i)
++          for (var i = 0; i < elements.length; ++i) 
 +            this.setElementValue(elements[i]);
 +        ]]>
 +        </body>
 +      </method>
 +    </implementation>
-+
++    
 +    <handlers>
 +      <handler event="change">
 +        this.updateElements();
@@ -1418,22 +1415,19 @@ new file mode 100644
 +            var acceptButton = docElt.getButton("accept");
 +            acceptButton.hidden = true;
 +            var cancelButton  = docElt.getButton("cancel");
-+
-+            let { AppConstants } =
-+                Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
-+            if (AppConstants.platform == "macosx") {
-+              // no buttons on Mac except Help
-+              cancelButton.hidden = true;
-+              // Move Help button to the end
-+              document.getAnonymousElementByAttribute(this, "anonid", "spacer").hidden = true;
-+              // Also, don't fire onDialogAccept on enter
-+              acceptButton.disabled = true;
-+            } else {
-+              // morph the Cancel button into the Close button
-+              cancelButton.setAttribute ("icon", "close");
-+              cancelButton.label = docElt.getAttribute("closebuttonlabel");
-+              cancelButton.accesskey = docElt.getAttribute("closebuttonaccesskey");
-+            }
++#ifdef XP_MACOSX
++            // no buttons on Mac except Help
++            cancelButton.hidden = true;
++            // Move Help button to the end
++            document.getAnonymousElementByAttribute(this, "anonid", "spacer").hidden = true;         
++            // Also, don't fire onDialogAccept on enter
++            acceptButton.disabled = true;
++#else
++            // morph the Cancel button into the Close button
++            cancelButton.setAttribute ("icon", "close");
++            cancelButton.label = docElt.getAttribute("closebuttonlabel");
++            cancelButton.accesskey = docElt.getAttribute("closebuttonaccesskey");
++#endif
 +          }
 +        }
 +        this.setAttribute("animated", this._shouldAnimate ? "true" : "false");
@@ -1502,26 +1496,26 @@ new file mode 100644
 +                onget="return document.getAnonymousElementByAttribute(this, 'class', 'paneDeckContainer');"/>
 +      <property name="_selector"
 +                onget="return document.getAnonymousElementByAttribute(this, 'anonid', 'selector');"/>
-+      <property name="lastSelected"
++      <property name="lastSelected" 
 +                onget="return this.getAttribute('lastSelected');">
 +        <setter>
-+          this.setAttribute("lastSelected", val);
++          this.setAttribute("lastSelected", val); 
 +          document.persist(this.id, "lastSelected");
 +          return val;
-+        </setter>
++        </setter>          
 +      </property>
 +      <property name="currentPane"
 +                onset="return this._currentPane = val;">
 +        <getter>
 +          if (!this._currentPane)
 +            this._currentPane = this.preferencePanes[0];
-+
++          
 +          return this._currentPane;
-+        </getter>
++        </getter> 
 +      </property>
 +      <field name="_currentPane">null</field>
-+
-+
++      
++      
 +      <method name="_makePaneButton">
 +        <parameter name="aPaneElement"/>
 +        <body>
@@ -1553,16 +1547,16 @@ new file mode 100644
 +            {
 +              this._pane = aPane;
 +            }
-+            OverlayLoadObserver.prototype = {
++            OverlayLoadObserver.prototype = { 
 +              _outer: this,
-+              observe: function (aSubject, aTopic, aData)
++              observe: function (aSubject, aTopic, aData) 
 +              {
 +                this._pane.loaded = true;
 +                this._outer._fireEvent("paneload", this._pane);
 +                this._outer._selectPane(this._pane);
 +              }
 +            };
-+
++            
 +            var obs = new OverlayLoadObserver(aPaneElement);
 +            document.loadOverlay(aPaneElement.src, obs);
 +          }
@@ -1571,13 +1565,13 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="_fireEvent">
 +        <parameter name="aEventName"/>
 +        <parameter name="aTarget"/>
 +        <body>
 +        <![CDATA[
-+          // Panel loaded, synthesize a load event.
++          // Panel loaded, synthesize a load event. 
 +          try {
 +            var event = document.createEvent("Events");
 +            event.initEvent(aEventName, true, true);
@@ -1588,41 +1582,39 @@ new file mode 100644
 +              if (rv == false)
 +                cancel = true;
 +            }
-+            return !cancel;
++            return !cancel;  
 +          }
-+          catch (e) {
++          catch (e) { 
 +            Components.utils.reportError(e);
 +          }
 +          return false;
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <field name="_initialized">false</field>
 +      <method name="_selectPane">
 +        <parameter name="aPaneElement"/>
 +        <body>
 +        <![CDATA[
-+          let { AppConstants } =
-+              Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
-+          if (AppConstants.platform == "macosx") {
-+            var paneTitle = aPaneElement.label;
-+            if (paneTitle != "")
-+              document.title = paneTitle;
-+          }
++#ifdef XP_MACOSX
++          var paneTitle = aPaneElement.label;
++          if (paneTitle != "")
++            document.title = paneTitle;
++#endif
 +          var helpButton = document.documentElement.getButton("help");
 +          if (aPaneElement.helpTopic)
 +            helpButton.hidden = false;
 +          else
 +            helpButton.hidden = true;
 +
-+          // Find this pane's index in the deck and set the deck's
++          // Find this pane's index in the deck and set the deck's 
 +          // selectedIndex to that value to switch to it.
 +          var prefpanes = this.preferencePanes;
 +          for (var i = 0; i < prefpanes.length; ++i) {
 +            if (prefpanes[i] == aPaneElement) {
 +              this._paneDeck.selectedIndex = i;
-+
++              
 +              if (this.type != "child") {
 +                if (aPaneElement.hasAttribute("flex") && this._shouldAnimate &&
 +                    prefpanes.length > 1)
@@ -1675,15 +1667,17 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <property name="_shouldAnimate">
 +        <getter>
 +        <![CDATA[
-+          let { AppConstants } =
-+              Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
 +          var psvc = Components.classes["@mozilla.org/preferences-service;1"]
 +                               .getService(Components.interfaces.nsIPrefBranch);
-+          var animate = AppConstants.platform == "macosx";
++#ifdef XP_MACOSX
++          var animate = true;
++#else
++          var animate = false;
++#endif
 +          try {
 +            animate = psvc.getBoolPref("browser.preferences.animateFadeIn");
 +          }
@@ -1692,7 +1686,7 @@ new file mode 100644
 +        ]]>
 +        </getter>
 +      </property>
-+
++      
 +      <method name="animate">
 +        <parameter name="aOldPane"/>
 +        <parameter name="aNewPane"/>
@@ -1700,7 +1694,7 @@ new file mode 100644
 +        <![CDATA[
 +          // if we are already resizing, use currentHeight
 +          var oldHeight = this._currentHeight ? this._currentHeight : aOldPane.contentHeight;
-+
++          
 +          this._multiplier = aNewPane.contentHeight > oldHeight ? 1 : -1;
 +          var sizeDelta = Math.abs(oldHeight - aNewPane.contentHeight);
 +          this._animateRemainder = sizeDelta % this._animateIncrement;
@@ -1709,7 +1703,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <property name="_sizeIncrement">
 +        <getter>
 +        <![CDATA[
@@ -1719,7 +1713,7 @@ new file mode 100644
 +          if ((this._multiplier > 0 && this._currentHeight >= lastSelectedPane.contentHeight) ||
 +              (this._multiplier < 0 && this._currentHeight <= lastSelectedPane.contentHeight))
 +            return 0;
-+
++          
 +          if ((this._multiplier > 0 && newHeight > lastSelectedPane.contentHeight) ||
 +              (this._multiplier < 0 && newHeight < lastSelectedPane.contentHeight))
 +            increment = this._animateRemainder * this._multiplier;
@@ -1727,14 +1721,14 @@ new file mode 100644
 +        ]]>
 +        </getter>
 +      </property>
-+
++      
 +      <method name="notify">
 +        <parameter name="aTimer"/>
 +        <body>
 +        <![CDATA[
 +          if (!document)
 +            aTimer.cancel();
-+
++          
 +          if (aTimer == this._animateTimer) {
 +            var increment = this._sizeIncrement;
 +            if (increment != 0) {
@@ -1758,39 +1752,39 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="_setUpAnimationTimer">
 +        <parameter name="aStartHeight"/>
 +        <body>
 +        <![CDATA[
-+          if (!this._animateTimer)
++          if (!this._animateTimer) 
 +            this._animateTimer = Components.classes["@mozilla.org/timer;1"]
 +                                           .createInstance(Components.interfaces.nsITimer);
 +          else
 +            this._animateTimer.cancel();
 +          this._currentHeight = aStartHeight;
-+
-+          this._animateTimer.initWithCallback(this, this._animateDelay,
++          
++          this._animateTimer.initWithCallback(this, this._animateDelay, 
 +                                              Components.interfaces.nsITimer.TYPE_REPEATING_SLACK);
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="_setUpFadeTimer">
 +        <body>
 +        <![CDATA[
-+          if (!this._fadeTimer)
++          if (!this._fadeTimer) 
 +            this._fadeTimer = Components.classes["@mozilla.org/timer;1"]
 +                                        .createInstance(Components.interfaces.nsITimer);
 +          else
 +            this._fadeTimer.cancel();
-+
-+          this._fadeTimer.initWithCallback(this, this._fadeDelay,
++          
++          this._fadeTimer.initWithCallback(this, this._fadeDelay, 
 +                                           Components.interfaces.nsITimer.TYPE_REPEATING_SLACK);
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <field name="_animateTimer">null</field>
 +      <field name="_fadeTimer">null</field>
 +      <field name="_animateDelay">15</field>
@@ -1806,13 +1800,13 @@ new file mode 100644
 +        <body>
 +        <![CDATA[
 +          this.appendChild(aPaneElement);
-+
++          
 +          // Set up pane button
 +          this._makePaneButton(aPaneElement);
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <method name="openSubDialog">
 +        <parameter name="aURL"/>
 +        <parameter name="aFeatures"/>
@@ -1821,7 +1815,7 @@ new file mode 100644
 +          return openDialog(aURL, "", "modal,centerscreen,resizable=no" + (aFeatures != "" ? ("," + aFeatures) : ""), aParams);
 +        </body>
 +      </method>
-+
++      
 +      <method name="openWindow">
 +        <parameter name="aWindowType"/>
 +        <parameter name="aURL"/>
@@ -1858,29 +1852,29 @@ new file mode 100644
 +                    .getService(Components.interfaces.nsIScriptSecurityManager);
 +        if (this.type == "child" && window.opener &&
 +            secMan.isSystemPrincipal(window.opener.document.nodePrincipal)) {
-+          let psvc = Components.classes["@mozilla.org/preferences-service;1"]
++          var psvc = Components.classes["@mozilla.org/preferences-service;1"]
 +                               .getService(Components.interfaces.nsIPrefBranch);
 +          var pdocEl = window.opener.document.documentElement;
 +          if (pdocEl.instantApply) {
-+            let panes = this.preferencePanes;
-+            for (let i = 0; i < panes.length; ++i)
++            var panes = this.preferencePanes;
++            for (var i = 0; i < panes.length; ++i)
 +              panes[i].writePreferences(true);
 +          }
 +          else {
 +            // Clone all the preferences elements from the child document and
-+            // insert them into the pane collection of the parent.
++            // insert them into the pane collection of the parent. 
 +            var pdoc = window.opener.document;
 +            if (pdoc.documentElement.localName == "prefwindow") {
 +              var currentPane = pdoc.documentElement.currentPane;
 +              var id = window.location.href + "#childprefs";
 +              var childPrefs = pdoc.getElementById(id);
 +              if (!childPrefs) {
-+                childPrefs = pdoc.createElement("preferences");
++                var childPrefs = pdoc.createElement("preferences");
 +                currentPane.appendChild(childPrefs);
 +                childPrefs.id = id;
 +              }
-+              let panes = this.preferencePanes;
-+              for (let i = 0; i < panes.length; ++i) {
++              var panes = this.preferencePanes;
++              for (var i = 0; i < panes.length; ++i) {
 +                var preferences = panes[i].preferences;
 +                for (var j = 0; j < preferences.length; ++j) {
 +                  // Try to find a preference element for the same preference.
@@ -1911,11 +1905,11 @@ new file mode 100644
 +          }
 +        }
 +        else {
-+          let panes = this.preferencePanes;
++          var panes = this.preferencePanes;
 +          for (var i = 0; i < panes.length; ++i)
 +            panes[i].writePreferences(false);
 +
-+          let psvc = Components.classes["@mozilla.org/preferences-service;1"]
++          var psvc = Components.classes["@mozilla.org/preferences-service;1"]
 +                               .getService(Components.interfaces.nsIPrefService);
 +          psvc.savePrefFile(null);
 +        }
@@ -1957,7 +1951,7 @@ new file mode 100644
 +      </handler>
 +    </handlers>
 +  </binding>
-+
++  
 +  <binding id="prefpane">
 +    <resources>
 +      <stylesheet src="chrome://global/skin/preferences.css"/>
@@ -1992,20 +1986,20 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
-+      <property name="src"
++      
++      <property name="src" 
 +                onget="return this.getAttribute('src');"
 +                onset="this.setAttribute('src', val); return val;"/>
-+      <property name="selected"
++      <property name="selected" 
 +                onget="return this.getAttribute('selected') == 'true';"
 +                onset="this.setAttribute('selected', val); return val;"/>
-+      <property name="image"
++      <property name="image" 
 +                onget="return this.getAttribute('image');"
 +                onset="this.setAttribute('image', val); return val;"/>
-+      <property name="label"
++      <property name="label" 
 +                onget="return this.getAttribute('label');"
 +                onset="this.setAttribute('label', val); return val;"/>
-+
++      
 +      <property name="preferenceElements"
 +                onget="return this.getElementsByAttribute('preference', '*');"/>
 +      <property name="preferences"
@@ -2029,30 +2023,30 @@ new file mode 100644
 +      </property>
 +
 +      <field name="_loaded">false</field>
-+      <property name="loaded"
++      <property name="loaded" 
 +                onget="return !this.src ? true : this._loaded;"
 +                onset="this._loaded = val; return val;"/>
-+
++      
 +      <method name="preferenceForElement">
 +        <parameter name="aElement"/>
 +        <body>
 +          return document.getElementById(aElement.getAttribute("preference"));
 +        </body>
 +      </method>
-+
++      
 +      <method name="getPreferenceElement">
 +        <parameter name="aStartElement"/>
 +        <body>
 +        <![CDATA[
 +          var temp = aStartElement;
-+          while (temp && temp.nodeType == Node.ELEMENT_NODE &&
++          while (temp && temp.nodeType == Node.ELEMENT_NODE && 
 +                 !temp.hasAttribute("preference"))
 +            temp = temp.parentNode;
 +          return temp.nodeType == Node.ELEMENT_NODE ? temp : aStartElement;
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <field name="DeferredTask" readonly="true">
 +        let targetObj = {};
 +        Components.utils.import("resource://gre/modules/DeferredTask.jsm", targetObj);
@@ -2108,7 +2102,7 @@ new file mode 100644
 +        ]]>
 +        </body>
 +      </method>
-+
++      
 +      <property name="contentHeight">
 +        <getter>
 +          var targetHeight = parseInt(window.getComputedStyle(this._content, "").height);
@@ -2123,25 +2117,25 @@ new file mode 100644
 +    </implementation>
 +    <handlers>
 +      <handler event="command">
-+        // This "command" event handler tracks changes made to preferences by
++        // This "command" event handler tracks changes made to preferences by 
 +        // the user in this window.
 +        if (event.sourceEvent)
 +          event = event.sourceEvent;
 +        this.userChangedValue(event.target);
 +      </handler>
 +      <handler event="select">
-+        // This "select" event handler tracks changes made to colorpicker
++        // This "select" event handler tracks changes made to colorpicker 
 +        // preferences by the user in this window.
-+        if (event.target.localName == "colorpicker")
++        if (event.target.localName == "colorpicker") 
 +          this.userChangedValue(event.target);
 +      </handler>
 +      <handler event="change">
-+        // This "change" event handler tracks changes made to preferences by
-+        // the user in this window.
++        // This "change" event handler tracks changes made to preferences by 
++        // the user in this window. 
 +        this.userChangedValue(event.target);
 +      </handler>
 +      <handler event="input">
-+        // This "input" event handler tracks changes made to preferences by
++        // This "input" event handler tracks changes made to preferences by 
 +        // the user in this window.
 +        this.userChangedValue(event.target);
 +      </handler>
@@ -2158,11 +2152,11 @@ new file mode 100644
 +            dump("*** No preference found for " + elements[i].getAttribute("preference") + "\n");
 +          }
 +        }
-+      ]]>
++      ]]>      
 +      </handler>
 +    </handlers>
 +  </binding>
-+
++          
 +  <binding id="panebutton" role="xul:listitem"
 +           extends="chrome://global/content/bindings/radio.xml#radio">
 +    <resources>
@@ -2191,9 +2185,9 @@ new file mode 100644
 +#    PrefWindow II  (???)
 +#    PrefWindow I   (June 4, 1999)
 +#
-diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
---- a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
-+++ b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
+diff --git a/mozilla/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/mozilla/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
+--- a/mozilla/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
++++ b/mozilla/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 @@ -15,16 +15,17 @@
  #include "nsPrintfCString.h"
  #include "nsNetCID.h"
@@ -2285,9 +2279,9 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 +  return NS_OK;
 +}
 +
-diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
---- a/toolkit/xre/moz.build
-+++ b/toolkit/xre/moz.build
+diff --git a/mozilla/toolkit/xre/moz.build b/mozilla/toolkit/xre/moz.build
+--- a/mozilla/toolkit/xre/moz.build
++++ b/mozilla/toolkit/xre/moz.build
 @@ -48,17 +48,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'ui
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'qt':
      EXPORTS += ['nsQAppInstance.h']
@@ -2308,10 +2302,10 @@ diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
      ]
  
  if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk3':
-diff --git a/toolkit/xre/nsKDEUtils.cpp b/toolkit/xre/nsKDEUtils.cpp
+diff --git a/mozilla/toolkit/xre/nsKDEUtils.cpp b/mozilla/toolkit/xre/nsKDEUtils.cpp
 new file mode 100644
 --- /dev/null
-+++ b/toolkit/xre/nsKDEUtils.cpp
++++ b/mozilla/toolkit/xre/nsKDEUtils.cpp
 @@ -0,0 +1,339 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -2652,10 +2646,10 @@ new file mode 100644
 +    fputs( "\\E\n", commandFile ); // done as \E, so it cannot happen in normal data
 +    fflush( commandFile );
 +    }
-diff --git a/toolkit/xre/nsKDEUtils.h b/toolkit/xre/nsKDEUtils.h
+diff --git a/mozilla/toolkit/xre/nsKDEUtils.h b/mozilla/toolkit/xre/nsKDEUtils.h
 new file mode 100644
 --- /dev/null
-+++ b/toolkit/xre/nsKDEUtils.h
++++ b/mozilla/toolkit/xre/nsKDEUtils.h
 @@ -0,0 +1,48 @@
 +/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -2705,9 +2699,9 @@ new file mode 100644
 +    };
 +
 +#endif // nsKDEUtils
-diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
---- a/uriloader/exthandler/moz.build
-+++ b/uriloader/exthandler/moz.build
+diff --git a/mozilla/uriloader/exthandler/moz.build b/mozilla/uriloader/exthandler/moz.build
+--- a/mozilla/uriloader/exthandler/moz.build
++++ b/mozilla/uriloader/exthandler/moz.build
 @@ -75,17 +75,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'ui
  else:
      # These files can't be built in unified mode because they redefine LOG.
@@ -2746,10 +2740,10 @@ diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
  
  if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('qt', 'gtk2', 'gtk3'):
      CXXFLAGS += CONFIG['TK_CFLAGS']
-diff --git a/uriloader/exthandler/unix/nsCommonRegistry.cpp b/uriloader/exthandler/unix/nsCommonRegistry.cpp
+diff --git a/mozilla/uriloader/exthandler/unix/nsCommonRegistry.cpp b/mozilla/uriloader/exthandler/unix/nsCommonRegistry.cpp
 new file mode 100644
 --- /dev/null
-+++ b/uriloader/exthandler/unix/nsCommonRegistry.cpp
++++ b/mozilla/uriloader/exthandler/unix/nsCommonRegistry.cpp
 @@ -0,0 +1,53 @@
 +/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -2804,10 +2798,10 @@ new file mode 100644
 +        return nsKDERegistry::GetFromType( aMIMEType );
 +    return nsGNOMERegistry::GetFromType( aMIMEType );
 +}
-diff --git a/uriloader/exthandler/unix/nsCommonRegistry.h b/uriloader/exthandler/unix/nsCommonRegistry.h
+diff --git a/mozilla/uriloader/exthandler/unix/nsCommonRegistry.h b/mozilla/uriloader/exthandler/unix/nsCommonRegistry.h
 new file mode 100644
 --- /dev/null
-+++ b/uriloader/exthandler/unix/nsCommonRegistry.h
++++ b/mozilla/uriloader/exthandler/unix/nsCommonRegistry.h
 @@ -0,0 +1,28 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -2837,10 +2831,10 @@ new file mode 100644
 +};
 +
 +#endif
-diff --git a/uriloader/exthandler/unix/nsKDERegistry.cpp b/uriloader/exthandler/unix/nsKDERegistry.cpp
+diff --git a/mozilla/uriloader/exthandler/unix/nsKDERegistry.cpp b/mozilla/uriloader/exthandler/unix/nsKDERegistry.cpp
 new file mode 100644
 --- /dev/null
-+++ b/uriloader/exthandler/unix/nsKDERegistry.cpp
++++ b/mozilla/uriloader/exthandler/unix/nsKDERegistry.cpp
 @@ -0,0 +1,88 @@
 +/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -2930,10 +2924,10 @@ new file mode 100644
 +        }
 +    return nullptr;
 +}
-diff --git a/uriloader/exthandler/unix/nsKDERegistry.h b/uriloader/exthandler/unix/nsKDERegistry.h
+diff --git a/mozilla/uriloader/exthandler/unix/nsKDERegistry.h b/mozilla/uriloader/exthandler/unix/nsKDERegistry.h
 new file mode 100644
 --- /dev/null
-+++ b/uriloader/exthandler/unix/nsKDERegistry.h
++++ b/mozilla/uriloader/exthandler/unix/nsKDERegistry.h
 @@ -0,0 +1,34 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -2969,9 +2963,9 @@ new file mode 100644
 +};
 +
 +#endif //nsKDERegistry_h__
-diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
---- a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
-+++ b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
+diff --git a/mozilla/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/mozilla/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
+--- a/mozilla/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
++++ b/mozilla/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
 @@ -7,32 +7,35 @@
  #ifdef MOZ_WIDGET_QT
  #if (MOZ_ENABLE_CONTENTACTION)
@@ -3072,9 +3066,9 @@ diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler
    // nsGIOMimeApp->Launch wants a URI string instead of local file
    nsresult rv;
    nsCOMPtr<nsIIOService> ioservice = do_GetService(NS_IOSERVICE_CONTRACTID, &rv);
-diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exthandler/unix/nsOSHelperAppService.cpp
---- a/uriloader/exthandler/unix/nsOSHelperAppService.cpp
-+++ b/uriloader/exthandler/unix/nsOSHelperAppService.cpp
+diff --git a/mozilla/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/mozilla/uriloader/exthandler/unix/nsOSHelperAppService.cpp
+--- a/mozilla/uriloader/exthandler/unix/nsOSHelperAppService.cpp
++++ b/mozilla/uriloader/exthandler/unix/nsOSHelperAppService.cpp
 @@ -10,17 +10,17 @@
  #if defined(MOZ_ENABLE_CONTENTACTION)
  #include <contentaction/contentaction.h>
@@ -3161,9 +3155,9 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
        gnomeInfo->SetFileExtensions(NS_ConvertUTF16toUTF8(extensions));
        return gnomeInfo.forget();
      }
-diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
---- a/widget/gtk/moz.build
-+++ b/widget/gtk/moz.build
+diff --git a/mozilla/widget/gtk/moz.build b/mozilla/widget/gtk/moz.build
+--- a/mozilla/widget/gtk/moz.build
++++ b/mozilla/widget/gtk/moz.build
 @@ -86,16 +86,17 @@ else:
  include('/ipc/chromium/chromium-config.mozbuild')
  
@@ -3182,9 +3176,9 @@ diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
          '/widget/x11',
      ]
  
-diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
---- a/widget/gtk/nsFilePicker.cpp
-+++ b/widget/gtk/nsFilePicker.cpp
+diff --git a/mozilla/widget/gtk/nsFilePicker.cpp b/mozilla/widget/gtk/nsFilePicker.cpp
+--- a/mozilla/widget/gtk/nsFilePicker.cpp
++++ b/mozilla/widget/gtk/nsFilePicker.cpp
 @@ -4,32 +4,34 @@
   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
  
@@ -3510,9 +3504,9 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
 +    return NS_OK;
 +    }
 +
-diff --git a/widget/gtk/nsFilePicker.h b/widget/gtk/nsFilePicker.h
---- a/widget/gtk/nsFilePicker.h
-+++ b/widget/gtk/nsFilePicker.h
+diff --git a/mozilla/widget/gtk/nsFilePicker.h b/mozilla/widget/gtk/nsFilePicker.h
+--- a/mozilla/widget/gtk/nsFilePicker.h
++++ b/mozilla/widget/gtk/nsFilePicker.h
 @@ -69,14 +69,20 @@ protected:
    nsString  mDefaultExtension;
  
@@ -3534,9 +3528,9 @@ diff --git a/widget/gtk/nsFilePicker.h b/widget/gtk/nsFilePicker.h
  };
  
  #endif
-diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestParser.cpp
---- a/xpcom/components/ManifestParser.cpp
-+++ b/xpcom/components/ManifestParser.cpp
+diff --git a/mozilla/xpcom/components/ManifestParser.cpp b/mozilla/xpcom/components/ManifestParser.cpp
+--- a/mozilla/xpcom/components/ManifestParser.cpp
++++ b/mozilla/xpcom/components/ManifestParser.cpp
 @@ -35,16 +35,17 @@
  
  #include "nsIConsoleService.h"
@@ -3669,9 +3663,9 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        continue;
      }
  
-diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
---- a/xpcom/components/moz.build
-+++ b/xpcom/components/moz.build
+diff --git a/mozilla/xpcom/components/moz.build b/mozilla/xpcom/components/moz.build
+--- a/mozilla/xpcom/components/moz.build
++++ b/mozilla/xpcom/components/moz.build
 @@ -47,12 +47,13 @@ FINAL_LIBRARY = 'xul'
  LOCAL_INCLUDES += [
      '!..',
@@ -3686,10 +3680,10 @@ diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
  
  if CONFIG['MOZ_WIDGET_GTK']:
      CXXFLAGS += CONFIG['TK_CFLAGS']
-diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
---- a/xpcom/io/nsLocalFileUnix.cpp
-+++ b/xpcom/io/nsLocalFileUnix.cpp
-@@ -44,16 +44,17 @@
+diff --git a/mozilla/xpcom/io/nsLocalFileUnix.cpp b/mozilla/xpcom/io/nsLocalFileUnix.cpp
+--- a/mozilla/xpcom/io/nsLocalFileUnix.cpp
++++ b/mozilla/xpcom/io/nsLocalFileUnix.cpp
+@@ -47,16 +47,17 @@
  #include "prproces.h"
  #include "nsIDirectoryEnumerator.h"
  #include "nsISimpleEnumerator.h"
@@ -3707,7 +3701,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "prmem.h"
  #include "plbase64.h"
  
-@@ -1948,42 +1949,52 @@ nsLocalFile::SetPersistentDescriptor(con
+@@ -1963,42 +1964,52 @@ nsLocalFile::SetPersistentDescriptor(con
    return InitWithNativePath(aPersistentDescriptor);
  #endif
  }
@@ -3766,7 +3760,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
      return rv;
    }
    return NS_ERROR_FAILURE;
-@@ -1991,16 +2002,22 @@ nsLocalFile::Reveal()
+@@ -2006,16 +2017,22 @@ nsLocalFile::Reveal()
    return NS_ERROR_FAILURE;
  #endif
  }

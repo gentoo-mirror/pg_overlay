@@ -1,0 +1,50 @@
+
+# HG changeset patch
+# User Jonathan Kew <jkew@mozilla.com>
+# Date 1463581374 -3600
+# Node ID 9c57b7cacffc57ec3919a2cf3b5ce861e0cf3842
+# Parent  ea7843420fe518b772c7b259d8ff47193fc5b79e
+Bug 1272647 - Exclude NameTable.cpp from unified compilation because #include <cmath> in other source files causes gcc6 compilation failure. r=bas
+
+diff --git a/gfx/graphite2/src/moz.build b/gfx/graphite2/src/moz.build
+--- a/gfx/graphite2/src/moz.build
++++ b/gfx/graphite2/src/moz.build
+@@ -40,30 +40,35 @@ UNIFIED_SOURCES += [
+     'gr_features.cpp',
+     'gr_font.cpp',
+     'gr_logging.cpp',
+     'gr_segment.cpp',
+     'gr_slot.cpp',
+     'Intervals.cpp',
+     'json.cpp',
+     'Justifier.cpp',
+-    'NameTable.cpp',
+     'Pass.cpp',
+     'Position.cpp',
+     'SegCache.cpp',
+     'SegCacheEntry.cpp',
+     'SegCacheStore.cpp',
+     'Segment.cpp',
+     'Silf.cpp',
+     'Slot.cpp',
+     'Sparse.cpp',
+     'TtfUtil.cpp',
+     'UtfCodec.cpp',
+ ]
+ 
++# Excluded from UNIFIED_SOURCES because <cmath> from other files breaks it,
++# see bug 1272647.
++SOURCES += [
++    'NameTable.cpp',
++]
++
+ # tell graphite2 not to export symbols, we'll be linking it directly with
+ # thebes
+ DEFINES['GRAPHITE2_STATIC'] = True
+ 
+ # We allow warnings for third-party code that can be updated from upstream.
+ ALLOW_COMPILER_WARNINGS = True
+ 
+ FINAL_LIBRARY = 'gkmedias'
+
+
