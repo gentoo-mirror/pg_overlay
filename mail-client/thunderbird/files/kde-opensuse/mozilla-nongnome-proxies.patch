@@ -7,8 +7,8 @@ RCS file: /cvsroot/mozilla/toolkit/system/unixproxy/nsUnixSystemProxySettings.cp
 retrieving revision 1.1
 
 diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
---- a/mozilla/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
-+++ b/mozilla/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
+--- a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
++++ b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 @@ -53,23 +53,27 @@ nsUnixSystemProxySettings::GetMainThread
    // dbus prevents us from being threadsafe, but this routine should not block anyhow
    *aMainThreadOnly = true;

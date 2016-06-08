@@ -155,9 +155,12 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
+	pushd mozilla
 	for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
 	do eapply "${FILESDIR}/kde-opensuse/$i"; \
 	done
+	popd
+	eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
 
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
 	do eapply "${FILESDIR}/fedora-patchset/$i"; \
