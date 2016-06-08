@@ -155,7 +155,7 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	pushdcd mozilla
+	pushd mozilla
 	for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
 	do eapply "${FILESDIR}/kde-opensuse/$i"; \
 	done
