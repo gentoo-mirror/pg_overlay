@@ -1,11 +1,11 @@
 # HG changeset patch
-# Parent  fd5629206dcf3f64d85ab177be6bc6076f0f1619
+# Parent  4311c6bdf61ac317bc60b25cd89ff67662a75049
 
 diff --git a/browser/base/content/browser-kde.xul b/browser/base/content/browser-kde.xul
 new file mode 100644
 --- /dev/null
 +++ b/browser/base/content/browser-kde.xul
-@@ -0,0 +1,1175 @@
+@@ -0,0 +1,1160 @@
 +#filter substitution
 +<?xml version="1.0"?>
 +# -*- Mode: HTML -*-
@@ -77,6 +77,8 @@ new file mode 100644
 +
 +<script type="application/javascript" src="chrome://global/content/contentAreaUtils.js"/>
 +
++<script type="application/javascript" src="chrome://browser/content/downloads/downloads.js"/>
++<script type="application/javascript" src="chrome://browser/content/downloads/indicator.js"/>
 +<script type="application/javascript" src="chrome://browser/content/places/editBookmarkOverlay.js"/>
 +
 +# All sets except for popupsets (commands, keys, stringbundles and broadcasters) *must* go into the
@@ -188,12 +190,6 @@ new file mode 100644
 +        <vbox>
 +          <label id="editBookmarkPanelTitle"/>
 +          <description id="editBookmarkPanelDescription"/>
-+          <hbox>
-+            <button id="editBookmarkPanelRemoveButton"
-+                    class="editBookmarkPanelHeaderButton"
-+                    oncommand="StarUI.removeBookmarkButtonCommand();"
-+                    accesskey="&editBookmark.removeBookmark.accessKey;"/>
-+          </hbox>
 +        </vbox>
 +      </row>
 +      <vbox id="editBookmarkPanelContent" flex="1" hidden="true"/>
@@ -204,15 +200,15 @@ new file mode 100644
 +                label="&editBookmark.done.label;"
 +                default="true"
 +                oncommand="StarUI.panel.hidePopup();"/>
-+        <button id="editBookmarkPanelDeleteButton"
++        <button id="editBookmarkPanelRemoveButton"
 +                class="editBookmarkPanelBottomButton"
-+                label="&editBookmark.cancel.label;"
-+                oncommand="StarUI.cancelButtonOnCommand();"/>
++                oncommand="StarUI.removeBookmarkButtonCommand();"
++                accesskey="&editBookmark.removeBookmark.accessKey;"/>
 +#else
-+        <button id="editBookmarkPanelDeleteButton"
++        <button id="editBookmarkPanelRemoveButton"
 +                class="editBookmarkPanelBottomButton"
-+                label="&editBookmark.cancel.label;"
-+                oncommand="StarUI.cancelButtonOnCommand();"/>
++                oncommand="StarUI.removeBookmarkButtonCommand();"
++                accesskey="&editBookmark.removeBookmark.accessKey;"/>
 +        <button id="editBookmarkPanelDoneButton"
 +                class="editBookmarkPanelBottomButton"
 +                label="&editBookmark.done.label;"
@@ -471,6 +467,46 @@ new file mode 100644
 +
 +    <tooltip id="dynamic-shortcut-tooltip"
 +             onpopupshowing="UpdateDynamicShortcutTooltipText(this);"/>
++
++    <menupopup id="SyncedTabsSidebarContext">
++      <menuitem label="&syncedTabs.context.openTab.label;"
++                accesskey="&syncedTabs.context.openTab.accesskey;"
++                id="syncedTabsOpenSelected"/>
++      <menuitem label="&syncedTabs.context.bookmarkSingleTab.label;"
++                accesskey="&syncedTabs.context.bookmarkSingleTab.accesskey;"
++                id="syncedTabsBookmarkSelected"/>
++      <menuseparator/>
++      <menuitem label="&syncSyncNowItem.label;"
++                accesskey="&syncSyncNowItem.accesskey;"
++                id="syncedTabsRefresh"/>
++    </menupopup>
++    <menupopup id="SyncedTabsSidebarTabsFilterContext"
++               class="textbox-contextmenu">
++      <menuitem label="&undoCmd.label;"
++                accesskey="&undoCmd.accesskey;"
++                cmd="cmd_undo"/>
++      <menuseparator/>
++      <menuitem label="&cutCmd.label;"
++                accesskey="&cutCmd.accesskey;"
++                cmd="cmd_cut"/>
++      <menuitem label="&copyCmd.label;"
++                accesskey="&copyCmd.accesskey;"
++                cmd="cmd_copy"/>
++      <menuitem label="&pasteCmd.label;"
++                accesskey="&pasteCmd.accesskey;"
++                cmd="cmd_paste"/>
++      <menuitem label="&deleteCmd.label;"
++                accesskey="&deleteCmd.accesskey;"
++                cmd="cmd_delete"/>
++      <menuseparator/>
++      <menuitem label="&selectAllCmd.label;"
++                accesskey="&selectAllCmd.accesskey;"
++                cmd="cmd_selectAll"/>
++      <menuseparator/>
++      <menuitem label="&syncSyncNowItem.label;"
++                accesskey="&syncSyncNowItem.accesskey;"
++                id="syncedTabsRefreshFilter"/>
++    </menupopup>
 +  </popupset>
 +
 +#ifdef CAN_DRAW_IN_TITLEBAR
@@ -667,10 +703,6 @@ new file mode 100644
 +              <box id="notification-popup-box" hidden="true" align="center">
 +                <image id="default-notification-icon" class="notification-anchor-icon" role="button"
 +                       aria-label="&urlbar.defaultNotificationAnchor.label;"/>
-+                <!-- NB: the identity-notification-icon is used for persona-based auth and preffed
-+                     off by default. It hasn't been updated for some time and liable to being
-+                     removed.-->
-+                <image id="identity-notification-icon" class="notification-anchor-icon" role="button"/>
 +                <image id="geo-notification-icon" class="notification-anchor-icon" role="button"
 +                       aria-label="&urlbar.geolocationNotificationAnchor.label;"/>
 +                <image id="addons-notification-icon" class="notification-anchor-icon" role="button"
@@ -810,30 +842,6 @@ new file mode 100644
 +                      label="&showAllBookmarks2.label;"
 +                      command="Browser:ShowAllBookmarks"
 +                      key="manBookmarkKb"/>
-+            <menuseparator/>
-+            <menuitem id="BMB_subscribeToPageMenuitem"
-+#ifndef XP_MACOSX
-+                      class="menuitem-iconic subviewbutton"
-+#else
-+                      class="subviewbutton"
-+#endif
-+                      label="&subscribeToPageMenuitem.label;"
-+                      oncommand="return FeedHandler.subscribeToFeed(null, event);"
-+                      onclick="checkForMiddleClick(this, event);"
-+                      observes="singleFeedMenuitemState"/>
-+            <menu id="BMB_subscribeToPageMenupopup"
-+#ifndef XP_MACOSX
-+                  class="menu-iconic subviewbutton"
-+#else
-+                  class="subviewbutton"
-+#endif
-+                  label="&subscribeToPageMenupopup.label;"
-+                  observes="multipleFeedsMenuState">
-+              <menupopup id="BMB_subscribeToPageSubmenuMenupopup"
-+                         onpopupshowing="return FeedHandler.buildFeedList(event.target);"
-+                         oncommand="return FeedHandler.subscribeToFeed(null, event);"
-+                         onclick="checkForMiddleClick(this, event);"/>
-+            </menu>
 +            <menuseparator/>
 +            <menu id="BMB_bookmarksToolbar"
 +                  class="menu-iconic bookmark-item subviewbutton"
@@ -1133,29 +1141,6 @@ new file mode 100644
 +
 +  <vbox id="browser-bottombox" layer="true">
 +    <notificationbox id="global-notificationbox" notificationside="bottom"/>
-+    <toolbar id="developer-toolbar"
-+             hidden="true">
-+#ifdef XP_MACOSX
-+          <toolbarbutton id="developer-toolbar-closebutton"
-+                         class="devtools-closebutton"
-+                         oncommand="DeveloperToolbar.hide();"
-+                         tooltiptext="&devToolbarCloseButton.tooltiptext;"/>
-+#endif
-+          <stack class="gclitoolbar-stack-node" flex="1">
-+            <textbox class="gclitoolbar-input-node" rows="1"/>
-+            <hbox class="gclitoolbar-complete-node"/>
-+          </stack>
-+          <toolbarbutton id="developer-toolbar-toolbox-button"
-+                         class="developer-toolbar-button"
-+                         observes="devtoolsMenuBroadcaster_DevToolbox"
-+                         tooltiptext="&devToolbarToolsButton.tooltip;"/>
-+#ifndef XP_MACOSX
-+          <toolbarbutton id="developer-toolbar-closebutton"
-+                         class="devtools-closebutton"
-+                         oncommand="DeveloperToolbar.hide();"
-+                         tooltiptext="&devToolbarCloseButton.tooltiptext;"/>
-+#endif
-+   </toolbar>
 +  </vbox>
 +
 +  <svg:svg height="0">
@@ -1266,7 +1251,7 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
 diff --git a/browser/components/preferences/in-content/main.js b/browser/components/preferences/in-content/main.js
 --- a/browser/components/preferences/in-content/main.js
 +++ b/browser/components/preferences/in-content/main.js
-@@ -19,16 +19,22 @@ var gMainPane = {
+@@ -23,16 +23,22 @@ var gMainPane = {
    init: function ()
    {
      function setEventListener(aId, aEventType, aCallback)
@@ -1287,12 +1272,12 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
      // In Windows 8 we launch the control panel since it's the only
      // way to get all file type association prefs. So we don't know
      // when the user will select the default.  We refresh here periodically
-     // in case the default changes.  On other Windows OS's defaults can also
+     // in case the default changes. On other Windows OS's defaults can also
      // be set while the prefs are open.
-@@ -704,16 +710,27 @@ var gMainPane = {
-    */
-   setDefaultBrowser: function()
-   {
+@@ -736,16 +742,27 @@ var gMainPane = {
+     let alwaysCheckPref = document.getElementById("browser.shell.checkDefaultBrowser");
+     alwaysCheckPref.value = true;
+ 
      let shellSvc = getShellService();
      if (!shellSvc)
        return;
@@ -1300,10 +1285,10 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
        shellSvc.setDefaultBrowser(true, false);
 +      if (kde_session == 1) {
 +        var shellObj = Components.classes["@mozilla.org/file/local;1"]
-+                                   .createInstance(Components.interfaces.nsILocalFile);
++          .createInstance(Components.interfaces.nsILocalFile);
 +        shellObj.initWithPath("/usr/bin/kwriteconfig");
 +        var process = Components.classes["@mozilla.org/process/util;1"]
-+                                  .createInstance(Components.interfaces.nsIProcess);
++          .createInstance(Components.interfaces.nsIProcess);
 +        process.init(shellObj);
 +        var args = ["--file", "kdeglobals", "--group", "General", "--key",
 +            "BrowserApplication", "firefox"];
@@ -1313,8 +1298,8 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
        Cu.reportError(ex);
        return;
      }
-     let selectedIndex =
-       shellSvc.isDefaultBrowser(false, true) ? 1 : 0;
+ 
+     let selectedIndex = shellSvc.isDefaultBrowser(false, true) ? 1 : 0;
      document.getElementById("setDefaultPane").selectedIndex = selectedIndex;
    }
 diff --git a/browser/components/shell/moz.build b/browser/components/shell/moz.build
@@ -1632,7 +1617,7 @@ new file mode 100644
 diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
 --- a/browser/installer/package-manifest.in
 +++ b/browser/installer/package-manifest.in
-@@ -703,16 +703,17 @@
+@@ -697,16 +697,17 @@
  @RESPATH@/greprefs.js
  @RESPATH@/defaults/autoconfig/prefcalls.js
  @RESPATH@/browser/defaults/permissions

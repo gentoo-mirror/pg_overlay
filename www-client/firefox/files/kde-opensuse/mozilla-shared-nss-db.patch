@@ -4,10 +4,10 @@ Subject: use libnsssharedhelper if available at compile time
          (can be disabled by exporting MOZ_XRE_NO_NSSHELPER=1)
 References:
 
-diff --git a/configure.in b/configure.in
---- a/configure.in
-+++ b/configure.in
-@@ -8310,16 +8310,31 @@ if test "$MOZ_ENABLE_SKIA"; then
+diff --git a/old-configure.in b/old-configure.in
+--- a/old-configure.in
++++ b/old-configure.in
+@@ -8187,16 +8187,31 @@ if test "$MOZ_ENABLE_SKIA"; then
      AC_DEFINE(USE_SKIA_GPU)
      AC_SUBST(MOZ_ENABLE_SKIA_GPU)
    fi
@@ -87,7 +87,7 @@ diff --git a/security/manager/ssl/nsNSSComponent.cpp b/security/manager/ssl/nsNS
  #include "mozilla/Preferences.h"
  #include "mozilla/PublicSSL.h"
  #include "mozilla/Services.h"
-@@ -1007,17 +1014,31 @@ nsNSSComponent::InitializeNSS()
+@@ -1017,17 +1024,31 @@ nsNSSComponent::InitializeNSS()
        return rv;
      }
    }
@@ -122,22 +122,22 @@ diff --git a/security/manager/ssl/nsNSSComponent.cpp b/security/manager/ssl/nsNS
 diff --git a/toolkit/library/moz.build b/toolkit/library/moz.build
 --- a/toolkit/library/moz.build
 +++ b/toolkit/library/moz.build
-@@ -205,16 +205,18 @@ if CONFIG['MOZ_B2G_CAMERA'] and CONFIG['
-         'stagefright_omx',
-     ]
- 
- if CONFIG['OS_ARCH'] == 'Linux' and CONFIG['OS_TARGET'] != 'Android':
+@@ -209,16 +209,18 @@ if CONFIG['OS_ARCH'] == 'Linux' and CONF
      OS_LIBS += [
          'rt',
      ]
  
-+OS_LIBS += sorted(CONFIG['NSSHELPER_LIBS'])
-+
  OS_LIBS += CONFIG['MOZ_CAIRO_OSLIBS']
  OS_LIBS += CONFIG['MOZ_WEBRTC_X11_LIBS']
+ OS_LIBS += CONFIG['MOZ_SERVO_LIBS']
  
++OS_LIBS += sorted(CONFIG['NSSHELPER_LIBS'])
++
  if CONFIG['MOZ_NATIVE_JPEG']:
      OS_LIBS += CONFIG['MOZ_JPEG_LIBS']
  
  if CONFIG['MOZ_NATIVE_PNG']:
      OS_LIBS += CONFIG['MOZ_PNG_LIBS']
+ 
+ if CONFIG['MOZ_NATIVE_HUNSPELL']:
+     OS_LIBS += CONFIG['MOZ_HUNSPELL_LIBS']
