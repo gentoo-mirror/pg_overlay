@@ -208,6 +208,7 @@ src_configure() {
 	# New features
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-skia
 	mozconfig_annotate '' --enable-system-hunspell
 	mozconfig_annotate '' --disable-cairo-gtk2
 	mozconfig_annotate '' --disable-toolkit-gtk2
