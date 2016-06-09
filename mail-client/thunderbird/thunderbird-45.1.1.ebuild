@@ -160,6 +160,7 @@ src_prepare() {
 	do eapply "${FILESDIR}/fedora-patchset/$i"; \
 	done
 
+	# OpenSUSE-KDE patchset
 	if use kde ; then
 		pushd mozilla
 		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
