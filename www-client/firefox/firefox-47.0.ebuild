@@ -10,7 +10,7 @@ MOZ_ESR=""
 # This list can be updated with scripts/get_langs.sh from the mozilla overlay
 # No official support as of fetch time
 # csb
-MOZ_LANGS=( en en-US ru )
+MOZ_LANGS=( en en-GB en-US ru )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
