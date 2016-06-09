@@ -38,7 +38,7 @@ HOMEPAGE="http://www.mozilla.com/en-US/thunderbird/"
 KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist crypt hardened ldap lightning +minimal mozdom selinux"
+IUSE="bindist crypt hardened ldap lightning +minimal mozdom selinux +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/{${PATCH},${PATCHFF}}.tar.xz )
@@ -155,16 +155,19 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	pushd mozilla
-	for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
-	do eapply "${FILESDIR}/kde-opensuse/$i"; \
-	done
-	popd
-	eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
-
+	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
 	do eapply "${FILESDIR}/fedora-patchset/$i"; \
 	done
+
+	if use kde ; then
+		pushd mozilla
+		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
+		do eapply "${FILESDIR}/kde-opensuse/$i"; \
+		done
+		popd
+		eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
+	fi
 
 	# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
@@ -268,6 +271,12 @@ src_install() {
 	cp "${FILESDIR}"/thunderbird-gentoo-default-prefs-1.js-1 \
 		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" \
 		|| die
+
+	if use kde ; then
+		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" \
+		|| die
+	fi
 
 	mozconfig_install_prefs \
 		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js"
