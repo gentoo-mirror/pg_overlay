@@ -273,16 +273,16 @@ src_install() {
 		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" \
 		|| die
 
+	mozconfig_install_prefs \
+		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js"
+
 	if use kde ; then
 		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" \
 		|| die
 	fi
 
-	mozconfig_install_prefs \
-		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js"
-
-	# dev-db/sqlite does not have FTS3_TOKENIZER support.
+		# dev-db/sqlite does not have FTS3_TOKENIZER support.
 	# gloda needs it to function, and bad crashes happen when its enabled and doesn't work
 	if in_iuse system-sqlite && use system-sqlite ; then
 		echo "lockPref(\"mailnews.database.global.indexer.enabled\", false);" \
