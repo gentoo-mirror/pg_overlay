@@ -113,21 +113,6 @@ src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
 
-	if use pgo ; then
-        eapply "${FILESDIR}/pgo.patch"
-	fi
-
-	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done
-
-	if use kde ; then
-		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
-		do eapply "${FILESDIR}/kde-opensuse/$i"; \
-		done
-	fi
-
 	# Enable gnomebreakpad
 	if use debug ; then
 		sed -i -e "s:GNOME_DISABLE_CRASH_DIALOG=1:GNOME_DISABLE_CRASH_DIALOG=0:g" \
@@ -161,6 +146,23 @@ src_prepare() {
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
+
+	# Patch to enable PGO
+	if use pgo ; then
+        eapply "${FILESDIR}/pgo.patch"
+	fi
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	done
+
+	# OpenSUSE-KDE patchset
+	if use kde ; then
+		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
+		do eapply "${FILESDIR}/kde-opensuse/$i"; \
+		done
+	fi
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
