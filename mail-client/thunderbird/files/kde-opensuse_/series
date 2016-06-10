@@ -1,0 +1,5 @@
+mozilla-language.patch
+mozilla-nongnome-proxies.patch
+mozilla-kde.patch
+mozilla-no-stdcxx-check.patch
+mozilla-flexible-array-member-in-union.patch
