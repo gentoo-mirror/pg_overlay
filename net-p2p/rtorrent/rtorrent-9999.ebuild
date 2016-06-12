@@ -43,7 +43,7 @@ src_configure() {
 		--disable-dependency-tracking \
 		$(use_enable debug) \
 		$(use_enable ipv6) \
-		$(use_with xmlrpc xmlrpc-c) --enable-largefile --with-ncurces --with-ncurcesw
+		$(use_with xmlrpc xmlrpc-c) --enable-largefile
 }
 
 src_install() {
