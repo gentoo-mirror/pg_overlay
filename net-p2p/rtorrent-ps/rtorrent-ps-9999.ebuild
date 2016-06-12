@@ -6,7 +6,7 @@ EAPI=5
 
 inherit autotools eutils git-r3
 
-DESCRIPTION="BitTorrent Client using libtorrent"
+DESCRIPTION="Extended rTorrent distribution with UI enhancements, colorization, and some added features"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="git://github.com/rakshasa/rtorrent.git"
 
