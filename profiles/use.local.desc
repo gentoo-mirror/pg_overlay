@@ -141,6 +141,7 @@ net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
 net-im/psi:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-p2p/qbittorrent:webui - Enable the Web UI
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
+net-p2p/rtorrent-ps:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
 sys-apps/roccat-tools:lua - Build support for Lua scripting for RyosMKPro ripple effects
