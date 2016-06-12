@@ -35,6 +35,14 @@ src_prepare() {
 	cp "${FILESDIR}/ui_pyroscope.cc" "${S}/src"
 	cp "${FILESDIR}/ui_pyroscope.h" "${S}/src"
 
+	sed -i src/{command_pyroscope.cc,ui_pyroscope.cc} \
+        -e "s:tr1:std:"
+
+    sed -i configure.ac \
+        -e "s:\\(AC_DEFINE(HAVE_CONFIG_H.*\\):\1\nAC_DEFINE(RT_HEX_VERSION, 0x000907, version checks):"
+    sed -i src/ui/download_list.cc \
+        -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
+
 	epatch "${FILESDIR}"/*.patch
 
 	eautoreconf
