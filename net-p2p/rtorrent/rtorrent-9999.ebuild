@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit autotools eutils git-r3
+inherit autotools eutils flag-o-matic git-r3
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -35,12 +35,15 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cflags -fno-strict-aliasing
+	append-cxxflags -fno-strict-aliasing
+
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		--disable-dependency-tracking \
 		$(use_enable debug) \
 		$(use_enable ipv6) \
-		$(use_with xmlrpc xmlrpc-c) --enable-largefile --with-ncurces --with-ncurcesw
+		$(use_with xmlrpc xmlrpc-c) --enable-largefile
 }
 
 src_install() {

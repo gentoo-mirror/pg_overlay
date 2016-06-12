@@ -155,8 +155,8 @@ std::string elapsed_time(unsigned long dt)  {
 
 // return 2-digits number, or digit + dimension indicator
 std::string num2(int64_t num) {
-	if (num < 0 || 10*1000*1000 <= num) return std::string("♯");
-	if (!num) return std::string(" .");
+	if (num < 0 || 10*1000*1000 <= num) return std::string("♯♯");
+	if (!num) return std::string(" ·");
 
 	char buffer[10];
 	if (num < 100) {
