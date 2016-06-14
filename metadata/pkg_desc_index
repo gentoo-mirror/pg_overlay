@@ -30,7 +30,6 @@ media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-net-ftp/vsftpd 3.0.3: Very Secure FTP Daemon written with speed, size and security in mind
 net-im/psi 9999: Qt5 Jabber client, with Licq-like interface
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/rb_libtorrent 1.1.0: C++ BitTorrent implementation focusing on efficiency and scalability
@@ -40,7 +39,6 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/rtorrent-ps 9999: Extended rTorrent distribution with UI enhancements, colorization, and some added features
 net-p2p/transmission 2.92-r14736: A Fast, Easy and Free BitTorrent client
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/roccat-tools 5.0.0 5.1.0: Utility for advanced configuration of Roccat devices
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer 2.4: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)

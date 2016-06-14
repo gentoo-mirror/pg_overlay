@@ -140,12 +140,15 @@ net-im/psi:powersave - Disable some non critical timers for much less CPU usage
 net-im/psi:webkit - Enable chatlog rendering using webkit
 net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
 net-im/psi:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
+net-libs/rb_libtorrent:dht - Enable DHT (distributed hash table) support for libtorrent
+net-p2p/amule:daemon - Enable amule daemon
+net-p2p/amule:remote - Enable remote controlling of the client
+net-p2p/amule:stats - Enable statistic reporting
 net-p2p/qbittorrent:webui - Enable the Web UI
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/rtorrent-ps:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
-sys-apps/roccat-tools:lua - Build support for Lua scripting for RyosMKPro ripple effects
 www-client/chromium:gn - Use GN (generate ninja) instead of GYP for building
 www-client/chromium:gtk3 - Use gtk3 instead of gtk2
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
@@ -159,9 +162,9 @@ www-client/chromium:widevine - Unsupported closed-source DRM capability (require
 www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
 www-client/firefox:custom-optimization - Fine-tune custom compiler optimizations (-Os, -O0, -O1, -O2, -O3)
 www-client/firefox:egl - Enable EGL provider
-www-client/firefox:force-gtk2 - Use the cairo-gtk2 rendering engine
 www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
 www-client/firefox:gstreamer-0 - Use gstreamer:0.10 instead of gstreamer:1 for media support
+www-client/firefox:gtk2 - Use the cairo-gtk2 rendering engine
 www-client/firefox:gtk3 - Use the cairo-gtk3 rendering engine
 www-client/firefox:hwaccel - Use hardware-accelerated rendering
 www-client/firefox:jemalloc3 - Enable or disable jemalloc3 (forced-on when supported prior to 38.0)
@@ -179,12 +182,16 @@ x11-base/xorg-server:glamor - Enable Glamor OpenGL 2D acceleration
 x11-base/xorg-server:kdrive - Build the kdrive X servers
 x11-base/xorg-server:tslib - Build with tslib support for touchscreen devices
 x11-base/xorg-server:unwind - Enable libunwind usage for backtraces
+x11-base/xorg-server:xephyr - Build the Xephyr server
 x11-base/xorg-server:xnest - Build the Xnest server
 x11-base/xorg-server:xorg - Build the Xorg X server (HIGHLY RECOMMENDED)
 x11-base/xorg-server:xvfb - Build the Xvfb server
+x11-drivers/xf86-video-intel:dri3 - Enable DRI3 support
+x11-drivers/xf86-video-intel:glamor - Enable Glamor OpenGL 2D acceleration
 x11-drivers/xf86-video-intel:sna - Enable SandyBridge's New Acceleration (useful on all chipsets, not just SandyBridge)
 x11-drivers/xf86-video-intel:uxa - Enable UMA Acceleration Architecture
 x11-drivers/xf86-video-intel:xvmc - Enables X-Video Motion Compensation support
+x11-drivers/xf86-video-nouveau:glamor - Enable Glamor OpenGL 2D acceleration
 x11-libs/cairo:gles2 - Use OpenGL ES 2 backend for acceleration.
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Use Mesa backend for acceleration
