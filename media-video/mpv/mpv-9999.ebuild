@@ -135,8 +135,8 @@ pkg_pretend() {
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	default
 	sed -i 's/waf-1.8.12/1.8.21/g' bootstrap.py || die
+	default src_prepare
 }
 
 src_configure() {
