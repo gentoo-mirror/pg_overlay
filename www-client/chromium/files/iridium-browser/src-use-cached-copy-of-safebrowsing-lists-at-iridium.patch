@@ -1,4 +1,4 @@
-From b89129339c8d6e570b7c4d196a8207a4ff5db44b Mon Sep 17 00:00:00 2001
+From a4379f9a134ef0e7ad034b1127e6e9fbcdc01c7f Mon Sep 17 00:00:00 2001
 From: Jan Engelhardt <jengelh@inai.de>
 Date: Mon, 26 Jan 2015 13:57:44 +0100
 Subject: [PATCH 29/55] src: use cached copy of safebrowsing lists at
