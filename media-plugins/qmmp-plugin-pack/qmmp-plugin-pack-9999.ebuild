@@ -27,3 +27,7 @@ RDEPEND=">=media-libs/taglib-1.10
 DEPEND="${RDEPEND}
 	dev-lang/yasm
 	dev-qt/linguist-tools:5"
+
+src_prepare() {
+	default
+}
