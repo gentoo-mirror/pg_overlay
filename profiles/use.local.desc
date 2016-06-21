@@ -149,6 +149,7 @@ net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/rtorrent-ps:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
+sys-apps/roccat-tools:lua - Build support for Lua scripting for RyosMKPro ripple effects
 www-client/chromium:gn - Use GN (generate ninja) instead of GYP for building
 www-client/chromium:gtk3 - Use gtk3 instead of gtk2
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
