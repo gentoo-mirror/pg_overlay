@@ -29,5 +29,5 @@ DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5"
 
 src_prepare() {
-	default
+	cmake-utils_src_prepare
 }
