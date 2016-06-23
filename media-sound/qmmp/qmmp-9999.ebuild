@@ -70,8 +70,6 @@ DOCS="AUTHORS ChangeLog README"
 
 CMAKE_IN_SOURCE_BUILD="1"
 
-REQUIRED_USE="kde? ( dbus ) "
-
 src_prepare() {
 	if has_version dev-libs/libcdio-paranoia; then
 		sed -i \
