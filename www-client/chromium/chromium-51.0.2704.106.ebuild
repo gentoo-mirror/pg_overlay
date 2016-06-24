@@ -447,8 +447,7 @@ src_configure() {
 		-Denable_hevc_demuxing=1
 		-Dremove_webcore_debug_symbols=1
 		-Denable_supervised_users=0
-        -Denable_one_click_signin=0
-		-Ddisable_newlib=1"
+        -Denable_one_click_signin=0"
 
 	#######
 	myconf_gyp+="
@@ -459,7 +458,8 @@ src_configure() {
 			-Dsafe_browsing=1"
 	else
 		myconf_gyp+="
-			-Dsafe_browsing=0"
+			-Dsafe_browsing=0
+			-Ddisable_newlib=1"
 	fi
 
 	# Needed for system icu - we don't need additional data files.
