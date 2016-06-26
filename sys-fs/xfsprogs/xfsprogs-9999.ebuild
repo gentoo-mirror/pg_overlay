@@ -42,6 +42,8 @@ pkg_setup() {
 src_prepare() {
 	epatch "${PATCHES[@]}"
 
+	emake
+
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
 	sed -i \
@@ -56,9 +58,7 @@ src_prepare() {
 		-e '/LIB_SUBDIRS/s:libdisk::' \
 		Makefile || die
 
-	emake configure
-
-	# TODO: write a patch for configure.in to use pkg-config for the uuid-part
+		# TODO: write a patch for configure.in to use pkg-config for the uuid-part
 	if use static && use readline ; then
 		sed -i \
 			-e 's|-lreadline|\0 -lncurses|' \
