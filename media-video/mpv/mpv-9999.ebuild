@@ -22,7 +22,7 @@ else
 	EGIT_REPO_URI="git://github.com/mpv-player/mpv.git"
 	inherit git-r3
 fi
-SRC_URI+="https://waf.io/waf-${WAF_PV}"
+SRC_URI+=" https://waf.io/waf-${WAF_PV}"
 DOCS+=( README.md etc/mpv.conf etc/input.conf )
 
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
@@ -84,7 +84,7 @@ COMMON_DEPEND="
 	)
 	libcaca? ( >=media-libs/libcaca-0.99_beta18 )
 	lua? (
-		!luajit? ( || ( =dev-lang/lua-5.1*:= =dev-lang/lua-5.2*:= ) )
+		!luajit? ( <dev-lang/lua-5.3:= )
 		luajit? ( dev-lang/luajit:2 )
 	)
 	openal? ( >=media-libs/openal-1.13 )
