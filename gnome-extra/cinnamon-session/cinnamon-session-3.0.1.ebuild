@@ -1,10 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
-GCONF_DEBUG="no"
-
+EAPI=6
 inherit autotools eutils gnome2
 
 DESCRIPTION="Cinnamon session manager"
@@ -34,7 +32,7 @@ COMMON_DEPEND="
 	x11-libs/pango[X]
 	virtual/opengl
 	systemd? ( >=sys-apps/systemd-183 )
-	!systemd? ( >=sys-power/upower-0.9.23 )
+	!systemd? ( >=sys-power/upower-0.97 )
 "
 RDEPEND="${COMMON_DEPEND}
 	>=gnome-extra/cinnamon-desktop-2.6[systemd=]
@@ -52,21 +50,17 @@ DEPEND="${COMMON_DEPEND}
 
 src_prepare() {
 	# make upower and logind check non-automagic
-	epatch "${FILESDIR}/${PN}-2.6.2-automagic.patch"
-	epatch_user
-
+	eapply "${FILESDIR}/${PN}-3.0.1-automagic.patch"
 	eautoreconf
 	gnome2_src_prepare
 }
 
 src_configure() {
-	DOCS="AUTHORS README README.md"
-
 	gnome2_src_configure \
 		--disable-gconf \
 		--disable-static \
 		$(use_enable doc docbook-docs) \
 		$(use_enable ipv6) \
 		$(use_enable systemd logind) \
-		$(usex systemd --disable-old-upower --disable-old-upower)
+		$(usex systemd --disable-old-upower --enable-old-upower)
 }

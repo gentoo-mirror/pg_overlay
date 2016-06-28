@@ -1,9 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
-GCONF_DEBUG="no"
+EAPI=6
 GNOME2_LA_PUNT="yes"
 PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 PYTHON_REQ_USE="xml"
@@ -21,7 +20,7 @@ SRC_URI="https://github.com/linuxmint/Cinnamon/archive/${MY_PV}.tar.gz -> ${MY_P
 LICENSE="GPL-2+"
 SLOT="0"
 
-# bluetooth support dropped due bug #511648
+# bluetooth support dropped due to bug #511648
 IUSE="+nls +networkmanager" #+bluetooth
 
 # We need *both* python 2.7 and 3.x
@@ -32,7 +31,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 
 KEYWORDS="~amd64 ~x86"
 
-COMMON_DEPEND="
+COMMON_DEPEND="${PYTHON_DEPS}
 	app-accessibility/at-spi2-atk:2
 	app-misc/ca-certificates
 	dev-libs/dbus-glib
@@ -45,13 +44,12 @@ COMMON_DEPEND="
 	gnome-base/librsvg
 	>=gnome-extra/cinnamon-desktop-2.4:0=[introspection]
 	gnome-extra/cinnamon-menus[introspection]
-	>=gnome-extra/cjs-2.4
+	>=gnome-extra/cjs-2.8.0
 	>=media-libs/clutter-1.10:1.0[introspection]
 	media-libs/cogl:1.0=[introspection]
 	>=gnome-base/gsettings-desktop-schemas-2.91.91
 	media-libs/gstreamer:1.0
 	media-libs/gst-plugins-base:1.0
-	media-sound/pulseaudio:0=[glib]
 	net-libs/libsoup:2.4[introspection]
 	>=sys-auth/polkit-0.100[introspection]
 	x11-libs/gdk-pixbuf:2[introspection]
@@ -60,8 +58,7 @@ COMMON_DEPEND="
 	>=x11-libs/startup-notification-0.11
 	x11-libs/libX11
 	>=x11-libs/libXfixes-5.0
-	>=x11-wm/muffin-2.5[introspection]
-	${PYTHON_DEPS}
+	>=x11-wm/muffin-3.0.0[introspection]
 	networkmanager? (
 		gnome-base/libgnome-keyring
 		>=net-misc/networkmanager-0.8.999[introspection] )
@@ -108,7 +105,7 @@ RDEPEND="${COMMON_DEPEND}
 	dev-python/pillow[python_targets_python2_7]
 
 	x11-themes/gnome-themes-standard[gtk]
-	x11-themes/gnome-icon-theme-symbolic
+	x11-themes/adwaita-icon-theme
 
 	>=gnome-extra/nemo-2.4
 	>=gnome-extra/cinnamon-control-center-2.4
@@ -126,9 +123,10 @@ RDEPEND="${COMMON_DEPEND}
 
 DEPEND="${COMMON_DEPEND}
 	dev-python/polib[python_targets_python2_7]
+	dev-util/gtk-doc
+	>=dev-util/intltool-0.4
 	>=sys-devel/gettext-0.17
 	virtual/pkgconfig
-	>=dev-util/intltool-0.40
 	gnome-base/gnome-common
 	!!=dev-lang/spidermonkey-1.8.2*
 "
@@ -144,21 +142,17 @@ pkg_setup() {
 src_prepare() {
 	# Fix backgrounds path as cinnamon doesn't provide them
 	# https://github.com/linuxmint/Cinnamon/issues/3575
-	epatch "${FILESDIR}"/${PN}-2.8.0-background.patch
+	eapply "${FILESDIR}"/${PN}-2.8.0-background.patch
 
 	# Fix automagic gnome-bluetooth dep, bug #398145
-	epatch "${FILESDIR}"/${PN}-2.2.6-automagic-gnome-bluetooth.patch
+	eapply "${FILESDIR}"/${PN}-2.2.6-automagic-gnome-bluetooth.patch
 
 	# Optional NetworkManager, bug #488684
-	epatch "${FILESDIR}"/${PN}-2.6.7-optional-networkmanager.patch
+	eapply "${FILESDIR}"/${PN}-2.6.7-optional-networkmanager.patch
 
 	# Use wheel group instead of sudo (from Fedora/Arch)
 	# https://github.com/linuxmint/Cinnamon/issues/3576
-	epatch "${FILESDIR}"/${PN}-2.8.3-set-wheel.patch
-
-	# Fix GNOME 3.14 support (from Fedora/Arch)
-	# https://github.com/linuxmint/Cinnamon/issues/3577
-	epatch "${FILESDIR}"/${PN}-2.8.3-gnome-3.14.patch
+	eapply "${FILESDIR}"/${PN}-2.8.3-set-wheel.patch
 
 	# Use pkexec instead of gksu (from Arch)
 	# https://github.com/linuxmint/Cinnamon/issues/3565

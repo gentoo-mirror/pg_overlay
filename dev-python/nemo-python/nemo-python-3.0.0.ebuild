@@ -2,17 +2,16 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
-GCONF_DEBUG="no"
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 
-inherit autotools autotools-utils eutils gnome2 python-single-r1 gnome2-utils
+inherit autotools eutils gnome2 gnome2-utils python-single-r1
 
 DESCRIPTION="Python bindings for the Nautilus file manager"
 HOMEPAGE="https://projects.gnome.org/nautilus-python/"
-SRC_URI="https://github.com/linuxmint/nemo-extensions/archive/${PV/0}x.tar.gz"
+SRC_URI="https://github.com/linuxmint/nemo-extensions/archive/${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -34,25 +33,27 @@ DEPEND="${RDEPEND}
 		dev-libs/libxslt
 		>=dev-util/gtk-doc-1.9 )
 "
-S=${WORKDIR}/nemo-extensions-2.8.x/nemo-python
+S=${WORKDIR}/nemo-extensions-${PV}/${PN}
 
 src_prepare() {
-	# Python2 Fix
-	find -type f | xargs sed -i 's@^#!.*python$@#!/usr/bin/python2@'
+	mv configure.in configure.ac
 
-	# Fix path for nemo-python
-	sed -i 's|libdirsuffix="/i386-linux-gnu/"|libdirsuffix=""|' m4/python.m4
 	eautoreconf
+	gnome2_src_prepare
 }
 
 src_configure() {
 	# FIXME: package does not ship pre-built documentation
 	# and has broken logic for dealing with gtk-doc
-	gnome2_src_configure
+	gnome2_src_configure --disable-debug --disable-static --disable-schemas-compile
 }
 
 src_install() {
 	gnome2_src_install
 	# Directory for systemwide extensions
 	keepdir /usr/share/nemo/extensions-3.0
+
+	# removing unnecessary .la & .a files
+	find "${D}" -name '*.la' -exec rm -f {} + || die "la file removal failed"
+	find "${D}" -name '*.a' -exec rm -f {} + || die "a file removal failed"
 }

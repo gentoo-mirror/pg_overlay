@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=6
 
 DESCRIPTION="Extensions for Cinnamon's file-manager Nemo"
 HOMEPAGE="https://github.com/linuxmint/nemo-extensions/"
@@ -15,7 +15,7 @@ IUSE="+fileroller +compare +terminal"
 DEPEND=""
 
 RDEPEND="${DEPEND}
-		compare? ( >=gnome-extra/nemo-compare-2.8.0 )
-		fileroller? ( >=gnome-extra/nemo-fileroller-2.8.0 )
-		terminal? ( >=gnome-extra/nemo-terminal-2.8.0 )
+		compare? ( >=gnome-extra/nemo-compare-${PV} )
+		fileroller? ( >=gnome-extra/nemo-fileroller-${PV} )
+		terminal? ( >=gnome-extra/nemo-terminal-${PV} )
 		"

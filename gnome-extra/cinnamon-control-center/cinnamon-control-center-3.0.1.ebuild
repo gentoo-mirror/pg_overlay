@@ -1,9 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI="5"
-GCONF_DEBUG="yes"
+EAPI=6
 GNOME2_LA_PUNT="yes" # gmodule is used, which uses dlopen
 
 inherit autotools eutils gnome2
@@ -14,7 +13,7 @@ SRC_URI="https://github.com/linuxmint/cinnamon-control-center/archive/${PV}.tar.
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+colord cups input_devices_wacom modemmanager networkmanager"
+IUSE="+colord +cups debug input_devices_wacom"
 KEYWORDS="~amd64 ~x86"
 
 # False positives caused by nested configure scripts
@@ -25,14 +24,12 @@ QA_CONFIGURE_OPTIONS=".*"
 
 COMMON_DEPEND="
 	>=dev-libs/glib-2.31:2
-	dev-libs/libxml2:2
 	>=gnome-base/libgnomekbd-2.91.91:0=
 	>=gnome-extra/cinnamon-desktop-1.0:0=
 	>=gnome-extra/cinnamon-menus-1.0:0=
 	>=gnome-extra/cinnamon-settings-daemon-1.0:0=
+	>=gnome-extra/nm-applet-0.9.8
 	media-libs/fontconfig
-	>=media-libs/libcanberra-0.13[gtk3]
-	>=media-sound/pulseaudio-1.1[glib]
 	>=sys-auth/polkit-0.103
 	>=x11-libs/gdk-pixbuf-2.23.0:2
 	>=x11-libs/gtk+-3.4.1:3
@@ -41,8 +38,8 @@ COMMON_DEPEND="
 	x11-libs/libxklavier
 	networkmanager? ( >=gnome-extra/nm-applet-0.9.8
 		>=net-misc/networkmanager-0.9.8 )
-	modemmanager? ( >=gnome-extra/nm-applet-0.9.8 
-		>=net-misc/networkmanager-0.9.8[modemmanager] 
+	modemmanager? ( >=gnome-extra/nm-applet-0.9.8
+		>=net-misc/networkmanager-0.9.8[modemmanager]
 		>=net-misc/modemmanager-0.7 )
 	colord? ( >=x11-misc/colord-0.1.14:0= )
 	cups? ( >=net-print/cups-1.4[dbus] )
@@ -54,9 +51,8 @@ COMMON_DEPEND="
 # <gnome-color-manager-3.1.2 has file collisions with g-c-c-3.1.x
 # libgnomekbd needed only for gkbd-keyboard-display tool
 RDEPEND="${COMMON_DEPEND}
-	|| ( ( app-admin/openrc-settingsd sys-auth/consolekit ) >=sys-apps/systemd-31 )
-	x11-themes/gnome-icon-theme
-	x11-themes/gnome-icon-theme-symbolic
+	|| ( >=sys-apps/systemd-31 ( app-admin/openrc-settingsd sys-auth/consolekit ) )
+	x11-themes/adwaita-icon-theme
 	colord? ( >=gnome-extra/gnome-color-manager-3 )
 	cups? (
 		app-admin/system-config-printer
@@ -76,18 +72,13 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 
 	gnome-base/gnome-common
-
-	app-arch/xz-utils
 "
 # Needed for autoreconf
 #	gnome-base/gnome-common
 
 src_prepare() {
 	# make some panels optional
-	epatch "${FILESDIR}"/${PN}-2.8.0-optional.patch
-
-	epatch_user
-
+	eapply "${FILESDIR}"/${PN}-2.8.0-optional.patch
 	eautoreconf
 	gnome2_src_prepare
 }
@@ -100,5 +91,6 @@ src_configure() {
 		--without-libsocialweb \
 		$(use_enable colord color) \
 		$(use_enable cups) \
+		$(usex debug --enable-debug=yes ' ') \
 		$(use_enable input_devices_wacom wacom)
 }
