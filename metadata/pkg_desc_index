@@ -8,18 +8,15 @@ app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod T
 app-pda/usbmuxd 1.1.0: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/qpdfview 0.4.16: A tabbed document viewer
-dev-python/nemo-python 2.8.0: Python bindings for the Nautilus file manager
+dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
 dev-util/gperf 3.0.4: A perfect hash function generator
-gnome-extra/cinnamon 2.8.6: A fork of GNOME Shell with layout similar to GNOME 2
-gnome-extra/cinnamon-control-center 2.8.1: Cinnamons's main interface to configure various aspects of the desktop
-gnome-extra/cinnamon-screensaver 2.8.0: Screensaver for Cinnamon
-gnome-extra/cinnamon-session 2.8.2: Cinnamon session manager
-gnome-extra/cinnamon-settings-daemon 2.8.3: Cinnamon's settings daemon
-gnome-extra/nemo 2.8.6: A file manager for Cinnamon, forked from Nautilus
-gnome-extra/nemo-compare 2.8.0: Nemo-Compare Extension
-gnome-extra/nemo-extensions 2.8: Extensions for Cinnamon's file-manager Nemo
-gnome-extra/nemo-fileroller 2.8.0: Provides context menu for Nemo
-gnome-extra/nemo-terminal 2.8.1: Nemo-Terminal Extension
+gnome-extra/cinnamon 3.0.6: A fork of GNOME Shell with layout similar to GNOME 2
+gnome-extra/cinnamon-control-center 3.0.1: Cinnamons's main interface to configure various aspects of the desktop
+gnome-extra/cinnamon-session 3.0.1: Cinnamon session manager
+gnome-extra/nemo-compare 3.0.0: Nemo-Compare Extension
+gnome-extra/nemo-extensions 3.0.0: Extensions for Cinnamon's file-manager Nemo
+gnome-extra/nemo-fileroller 3.0.0: Provides context menu for Nemo
+gnome-extra/nemo-terminal 3.0.0: Nemo-Terminal Extension
 mail-client/thunderbird 45.0 45.1.0 45.1.1: Thunderbird Mail Client
 media-libs/fontconfig 2.11.95-r20160423: A library for configuring and customizing font access
 media-libs/fontconfig-ultimate 2016.04.23: A set of font rendering and replacement rules for fontconfig-infinality
