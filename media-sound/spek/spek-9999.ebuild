@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=5
 WX_GTK_VER="3.0-gtk3"
 
 inherit autotools eutils git-r3 toolchain-funcs wxwidgets
@@ -29,5 +29,4 @@ DEPEND="${RDEPEND}
 "
 src_prepare() {
 	eautoreconf
-	default
 }
