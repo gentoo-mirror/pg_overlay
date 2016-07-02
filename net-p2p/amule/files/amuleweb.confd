@@ -3,10 +3,10 @@
 # $Id$
 
 # owner of amuleweb process (must be existing)
-AMULEUSER="perfect_gentleman_007"
+AMULEUSER="$USER"
 
 # home directory for amuleweb (from where to read configuration) (must be existing)
-AMULEHOME="/home/perfect_gentleman_007"
+AMULEHOME="$HOME"
 
 # log file (/dev/null for nowhere)
 LOG=/deb/null
