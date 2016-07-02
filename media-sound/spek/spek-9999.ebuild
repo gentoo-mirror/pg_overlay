@@ -29,9 +29,5 @@ DEPEND="${RDEPEND}
 "
 src_prepare() {
 	need-wxwidgets unicode
-
-	epatch \
-		"${FILESDIR}"/${P}-replace-gnu+11-with-c++11.patch \
-		"${FILESDIR}"/${P}-stdlib.patch
 	eautoreconf
 }
