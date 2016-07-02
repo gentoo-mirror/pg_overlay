@@ -6,7 +6,7 @@
 AMULEUSER="$USER"
 
 # home directory for amuled (must be existing)
-AMULEHOME="$USERHOME"
+AMULEHOME="$HOME"
 
 # log file (/dev/null for nowhere)
 LOG=/dev/null
