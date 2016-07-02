@@ -3,10 +3,10 @@
 # $Id$
 
 # owner of amuled process (must be existing)
-AMULEUSER="perfect_gentleman_007"
+AMULEUSER="$USER"
 
 # home directory for amuled (must be existing)
-AMULEHOME="/home/perfect_gentleman_007"
+AMULEHOME="$USERHOME"
 
 # log file (/dev/null for nowhere)
 LOG=/dev/null
