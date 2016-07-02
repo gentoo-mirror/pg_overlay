@@ -26,7 +26,6 @@ media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, n
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
 media-sound/deadbeef 9999: foobar2k-like music player
-media-sound/pulseaudio 9.0: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
