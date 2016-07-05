@@ -4,12 +4,11 @@
 
 EAPI=6
 
-inherit qmake-utils vcs-snapshot
+inherit qmake-utils
 
-COMMIT_ID="248abdd"
 DESCRIPTION="Lumina desktop environment"
 HOMEPAGE="http://lumina-desktop.org/"
-SRC_URI="https://github.com/pcbsd/lumina/archive/${COMMIT_ID}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/trueos/lumina/archive/v1.0.0-Beta1.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -38,6 +37,8 @@ RDEPEND="$COMMON_DEPEND
 	media-sound/alsa-utils
 	sys-power/acpi
 	app-admin/sysstat"
+
+S=${WORKDIR}/${PN}-1.0.0-Beta1
 
 src_configure(){
 	eqmake5 PREFIX="${ROOT}usr" L_BINDIR="${ROOT}usr/bin" \
