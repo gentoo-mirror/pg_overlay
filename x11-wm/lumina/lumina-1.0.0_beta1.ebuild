@@ -38,7 +38,7 @@ RDEPEND="$COMMON_DEPEND
 	sys-power/acpi
 	app-admin/sysstat"
 
-S=${PN}-1.0.0-Beta1
+S=${WORKDIR}/${PN}-1.0.0-Beta1
 
 src_configure(){
 	eqmake5 PREFIX="${ROOT}usr" L_BINDIR="${ROOT}usr/bin" \
