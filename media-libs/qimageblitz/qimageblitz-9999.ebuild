@@ -22,7 +22,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}/${P}-exec-stack.patch"
 	"${FILESDIR}/${P}-gcc.patch"
 	"${FILESDIR}/${P}-cmake.patch"
 )
