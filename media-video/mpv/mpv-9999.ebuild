@@ -7,7 +7,7 @@ EAPI=6
 PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV='1.9.0'
+WAF_PV='1.9.1'
 
 inherit fdo-mime gnome2-utils pax-utils python-any-r1 toolchain-funcs waf-utils
 
@@ -135,7 +135,7 @@ pkg_pretend() {
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	sed -i 's/waf-1.8.12/1.9.0/g' bootstrap.py || die
+	sed -i 's/1.8.12/1.9.1/g' bootstrap.py || die
 	default src_prepare
 }
 
