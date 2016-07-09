@@ -12,7 +12,7 @@ PYTHON_REQ_USE="sqlite"
 inherit distutils-r1 eutils l10n git-r3
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
-HOMEPAGE="http://bleachbit.sourceforge.net/"
+HOMEPAGE="http://bleachbit.org/"
 EGIT_REPO_URI="git://github.com/az0/${PN}.git"
 
 LICENSE="GPL-3"
@@ -20,7 +20,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+gtk nls"
 
-RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"
+RDEPEND="
+	dev-python/notify-python[$PYTHON_USEDEP]
+	gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"
+
 DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
 
