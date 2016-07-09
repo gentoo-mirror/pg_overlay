@@ -46,7 +46,7 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 50.0.2661.94 50.0.2661.104 51.0.2704.63 51.0.2704.77 51.0.2704.79 51.0.2704.81 51.0.2704.84 51.0.2704.103 51.0.2704.106: Open-source version of Google Chrome web browser
-www-client/firefox 46.0 46.0.1 47.0 47.0.1: Firefox Web Browser
+www-client/firefox 47.0 47.0.1: Firefox Web Browser
 x11-base/xorg-drivers 9999: Meta package containing deps on all xorg drivers
 x11-base/xorg-server 9999: X.Org X servers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
