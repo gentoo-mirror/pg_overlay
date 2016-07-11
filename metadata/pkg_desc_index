@@ -2,7 +2,6 @@ app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 15.14.1: Port of 7-Zip archiver for Unix
 app-dicts/myspell-en 20160501: English dictionaries for myspell/hunspell
 app-emulation/qt-virt-manager 0.27.50: Qt5 Virtual Machine Manager provides a graphical tool for administering virtual machines for QEMU/KVM, Xen, and LXC and other Virtual Entities. Uses libvirt as the backend management API.
-app-emulation/wine 1.9.14: Free implementation of Windows(tm) on Unix
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
@@ -18,6 +17,7 @@ gnome-extra/nemo-compare 3.0.0: Nemo-Compare Extension
 gnome-extra/nemo-extensions 3.0.0: Extensions for Cinnamon's file-manager Nemo
 gnome-extra/nemo-fileroller 3.0.0: Provides context menu for Nemo
 gnome-extra/nemo-terminal 3.0.0: Nemo-Terminal Extension
+kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 45.0 45.1.0 45.1.1 45.2.0: Thunderbird Mail Client
 media-libs/fontconfig 2.11.95-r20160423: A library for configuring and customizing font access
 media-libs/fontconfig-ultimate 2016.04.23: A set of font rendering and replacement rules for fontconfig-infinality
