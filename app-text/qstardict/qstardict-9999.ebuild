@@ -21,10 +21,8 @@ fi
 SLOT="0"
 
 PLUGINS="multitran stardict swac web"
-IUSE_PLUGINS=""
-for p in $PLUGINS; do IUSE_PLUGINS="${IUSE_PLUGINS} plugin_${p}"; done;
-IUSE="dbus kde nls ${IUSE_PLUGINS}"
-REQUIRED_USE="|| ( ${IUSE_PLUGINS} )"
+IUSE="dbus kde nls ${PLUGINS}"
+REQUIRED_USE="|| ( ${PLUGINS} )"
 
 DEPEND="dev-qt/qtgui:5
 	dbus? ( dev-qt/qtdbus:5 )
