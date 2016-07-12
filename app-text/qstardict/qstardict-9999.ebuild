@@ -50,7 +50,7 @@ src_configure() {
 		QMAKE_FLAGS+=(NO_TRANSLATIONS=1)
 	fi
 
-	eqmake "${PN}".pro "${QMAKE_FLAGS[@]}"
+	eqmake5 "${PN}".pro "${QMAKE_FLAGS[@]}"
 }
 
 src_install() {
