@@ -13,23 +13,21 @@ HOMEPAGE="http://qstardict.ylsoftware.com/"
 LICENSE="GPL-2"
 if [ -n "${VCS_ECLASS}" ]; then
 	KEYWORDS=""
-	EGIT_REPO_URI="https://github.com/Ri0n/qstardict"
+	EGIT_REPO_URI="git://github.com/Ri0n/qstardict.git"
 else
 	KEYWORDS="~amd64 ~ia64 ~x86"
 	SRC_URI="https://github.com/a-rodin/qstardict/archive/${P}.zip"
 fi
 SLOT="0"
 
-PLUGINS="multitran stardict swac web"
-IUSE_PLUGINS=""
-for p in $PLUGINS; do IUSE_PLUGINS="${IUSE_PLUGINS} plugin_${p}"; done;
-IUSE="dbus kde nls ${IUSE_PLUGINS}"
-REQUIRED_USE="|| ( ${IUSE_PLUGINS} )"
+PLUGINS="stardict swac web"
+IUSE="dbus kde nls ${PLUGINS}"
+REQUIRED_USE="|| ( ${PLUGINS} )"
 
 DEPEND="dev-qt/qtgui:5
 	dbus? ( dev-qt/qtdbus:5 )
 	dev-libs/glib:2
-	plugin_swac? ( dev-qt/qtsql:5 )
+	swac? ( dev-qt/qtsql:5 )
 	kde? ( kde-frameworks/kwindowsystem )
 "
 RDEPEND="${RDEPEND}"
@@ -37,7 +35,7 @@ RDEPEND="${RDEPEND}"
 src_configure() {
 	local eplugins=()
 	for f in $PLUGINS; do
-		use "plugin_${f}" && eplugins+=("${f}")
+		use "${f}" && eplugins+=("${f}")
 	done
 	use kde && eplugins+=("kdeintegration")
 
