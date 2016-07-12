@@ -65,7 +65,7 @@ CDEPEND="
 		)
 		=app-crypt/gnupg-1.4*
 	) )
-	kde ( kde-apps/kdialog:5
+	kde? ( kde-apps/kdialog:5
 		kde-misc/kmozillahelper )"
 
 DEPEND="${CDEPEND}
