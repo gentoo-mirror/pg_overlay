@@ -30,7 +30,7 @@ MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_GTK3=1
 MOZCONFIG_OPTIONAL_JIT="enabled"
-inherit flag-o-matic toolchain-funcs mozconfig-v6.45 makeedit autotools pax-utils check-reqs nsplugins mozlinguas
+inherit flag-o-matic toolchain-funcs mozconfig-v6.45 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2
 
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="http://www.mozilla.com/en-US/thunderbird/"
@@ -65,7 +65,7 @@ CDEPEND="
 		)
 		=app-crypt/gnupg-1.4*
 	) )
-	kde ( kde-apps/kdialog:5
+	kde? ( kde-apps/kdialog:5
 		kde-misc/kmozillahelper )"
 
 DEPEND="${CDEPEND}
