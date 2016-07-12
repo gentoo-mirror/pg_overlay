@@ -20,7 +20,7 @@ else
 fi
 SLOT="0"
 
-PLUGINS="multitran stardict swac web"
+PLUGINS="stardict swac web"
 IUSE="dbus kde nls ${PLUGINS}"
 REQUIRED_USE="|| ( ${PLUGINS} )"
 
