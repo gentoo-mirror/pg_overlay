@@ -50,7 +50,9 @@ ASM_DEPEND=">=dev-lang/yasm-1.1"
 RDEPEND="
 	>=dev-libs/nss-3.23
 	>=dev-libs/nspr-4.12
-	selinux? ( sec-policy/selinux-mozilla )"
+	selinux? ( sec-policy/selinux-mozilla )
+	kde? ( kde-apps/kdedialog:5
+		kde-misc/kmozillahelper )"
 
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
