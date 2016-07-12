@@ -13,7 +13,7 @@ HOMEPAGE="http://qstardict.ylsoftware.com/"
 LICENSE="GPL-2"
 if [ -n "${VCS_ECLASS}" ]; then
 	KEYWORDS=""
-	EGIT_REPO_URI="https://github.com/Ri0n/qstardict"
+	EGIT_REPO_URI="git://github.com/Ri0n/qstardict.git"
 else
 	KEYWORDS="~amd64 ~ia64 ~x86"
 	SRC_URI="https://github.com/a-rodin/qstardict/archive/${P}.zip"
