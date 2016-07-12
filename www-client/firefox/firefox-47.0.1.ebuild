@@ -51,7 +51,7 @@ RDEPEND="
 	>=dev-libs/nss-3.23
 	>=dev-libs/nspr-4.12
 	selinux? ( sec-policy/selinux-mozilla )
-	kde? ( kde-apps/kdedialog:5
+	kde? ( kde-apps/kdialog:5
 		kde-misc/kmozillahelper )"
 
 DEPEND="${RDEPEND}
