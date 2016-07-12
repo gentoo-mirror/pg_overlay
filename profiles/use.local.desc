@@ -5,6 +5,9 @@
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
 app-text/qpdfview:synctex - Add support for searching TeX sources
+app-text/qstardict:plugin_stardict - build stardict plugin
+app-text/qstardict:plugin_swac - 
+app-text/qstardict:plugin_web - build web plugin
 gnome-extra/cinnamon-control-center:colord - Support color management using x11-misc/colord
 mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
 mail-client/thunderbird:crypt - Enable encryption support with enigmail
