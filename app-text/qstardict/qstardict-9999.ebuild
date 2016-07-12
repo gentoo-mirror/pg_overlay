@@ -27,7 +27,7 @@ REQUIRED_USE="|| ( ${PLUGINS} )"
 DEPEND="dev-qt/qtgui:5
 	dbus? ( dev-qt/qtdbus:5 )
 	dev-libs/glib:2
-	plugin_swac? ( dev-qt/qtsql:5 )
+	swac? ( dev-qt/qtsql:5 )
 	kde? ( kde-frameworks/kwindowsystem )
 "
 RDEPEND="${RDEPEND}"
