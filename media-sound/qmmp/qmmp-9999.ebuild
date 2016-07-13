@@ -23,8 +23,8 @@ LICENSE="GPL-2"
 SLOT="0"
 # KEYWORDS further up
 IUSE="analyzer aac +alsa bs2b cdda cover crossfade cue curl enca ffmpeg flac jack game kde ladspa
-lyrics +mad mms modplug mplayer mpris musepack notifier opus oss
-projectm pulseaudio qsui scrobbler sndfile stereo tray udisks +vorbis wavpack"
+lyrics +mad midi mms modplug mplayer mpris musepack notifier opus oss projectm
+pulseaudio qsui scrobbler sndfile soxr stereo tray udisks +vorbis wavpack"
 
 RDEPEND="media-libs/taglib
 	dev-qt/qtcore:5
@@ -44,6 +44,7 @@ RDEPEND="media-libs/taglib
 	game? ( media-libs/game-music-emu )
 	ladspa? ( media-libs/ladspa-cmt )
 	mad? ( media-libs/libmad )
+	midi? ( media-sound/wildmidi )
 	mms? ( media-libs/libmms )
 	mplayer? ( media-video/mplayer )
 	mpris? ( dev-qt/qtdbus:5 )
@@ -62,6 +63,7 @@ RDEPEND="media-libs/taglib
 	wavpack? ( media-sound/wavpack )
 	scrobbler? ( net-misc/curl )
 	sndfile? ( media-libs/libsndfile )
+	soxr? ( media-libs/soxr )
 	udisks? ( sys-fs/udisks:2 )"
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5"
@@ -101,6 +103,7 @@ src_configure() {
 		-DUSE_LADSPA="$(usex ladspa)"
 		-DUSE_LYRICS="$(usex lyrics)"
 		-DUSE_MAD="$(usex mad)"
+		-DUSE_MIDI="$(usex midi)"
 		-DUSE_MPLAYER="$(usex mplayer)"
 		-DUSE_MMS="$(usex mms)"
 		-DUSE_MODPLUG="$(usex modplug)"
@@ -114,6 +117,7 @@ src_configure() {
 		-DUSE_QSUI="$(usex qsui)"
 		-DUSE_SCROBBLER="$(usex scrobbler)"
 		-DUSE_SNDFILE="$(usex sndfile)"
+		-DUSE_SOXR="$(usex soxr)"
 		-DUSE_STEREO="$(usex stereo)"
 		-DUSE_STATICON="$(usex tray)"
 		-DUSE_UDISKS2="$(usex udisks)"
@@ -124,7 +128,6 @@ src_configure() {
 		-DUSE_NULL=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
-		-DUSE_SOXR=ON
 		-DUSE_QMMP_DIALOG=OFF
 		-DUSE_SKINNED=OFF
 	)
