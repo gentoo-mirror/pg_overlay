@@ -43,14 +43,6 @@ mail-client/thunderbird:system-jpeg - Use the system-wide media-libs/libjpeg-tur
 mail-client/thunderbird:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 mail-client/thunderbird:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 mail-client/thunderbird:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
-media-libs/freetype:adobe-cff - Use Adobe CFF as default font-renderer
-media-libs/freetype:auto-hinter - Use the unpatented auto-hinter instead of the (recommended) TrueType bytecode interpreter
-media-libs/freetype:bindist - Disable ClearType support (see http://freetype.org/patents.html)
-media-libs/freetype:bzip2 - Support bzip2 compressed PCF fonts.
-media-libs/freetype:fontforge - Install internal headers required for TrueType debugger in media-gfx/fontforge (built with USE=truetype-debugger)
-media-libs/freetype:harfbuzz - Use media-libs/harfbuzz for auto-hinting OpenType fonts. WARNING: may trigger circular dependencies!
-media-libs/freetype:infinality - Enable infinality options for improved LCD filtering
-media-libs/freetype:utils - Install utilities and examples from ft2demos
 media-plugins/audacious-plugins:adplug - Build with AdPlug (Adlib sound card emulation) support
 media-plugins/audacious-plugins:bs2b - Enable Bauer Bauer stereophonic-to-binaural headphone filter
 media-plugins/audacious-plugins:cue - Support CUE sheets using the libcue library
