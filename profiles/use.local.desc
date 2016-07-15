@@ -3,6 +3,9 @@
 # * generated automatically using pmaint *
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
+app-emulation/vmware-modules:pax_kernel - Apply patch needed for pax enabled kernels
+app-emulation/vmware-modules:vmci - Build the Virtual Machine Communication Interface module; disable this if you want to use the module from the mainline kernel
+app-emulation/vmware-modules:vsock - Build the VMware VMCI transport for Virtual Sockets; disable this if you want to use the module from the mainline kernel
 app-emulation/vmware-workstation:bundled-libs - Use precompiled bundled libraries instead of the system installation
 app-emulation/vmware-workstation:ovftool - Install OVF tool.
 app-emulation/vmware-workstation:server - Install VMware Workstation Server component.
