@@ -118,7 +118,7 @@ src_install() {
 		doexe bin/7zG
 
 		insinto /usr/$(get_libdir)/${PN}
-		doins -r GUI/{Lang,help}
+		doins -r GUI/Lang
 
 		insinto /usr/share/icons/hicolor/16x16/apps/
 		newins GUI/p7zip_16_ok.png p7zip.png
