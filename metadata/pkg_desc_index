@@ -2,7 +2,6 @@ app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 16.02: Port of 7-Zip archiver for Unix
 app-dicts/myspell-en 20160501: English dictionaries for myspell/hunspell
 app-emulation/qt-virt-manager 0.27.50: Qt5 Virtual Machine Manager provides a graphical tool for administering virtual machines for QEMU/KVM, Xen, and LXC and other Virtual Entities. Uses libvirt as the backend management API.
-app-emulation/wine 1.9.14: Free implementation of Windows(tm) on Unix
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-pda/libusbmuxd 1.0.10: USB multiplex daemon for use with Apple iPhone/iPod Touch devices
