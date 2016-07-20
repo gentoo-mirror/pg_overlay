@@ -35,6 +35,7 @@ net-im/psi 9999: Qt5 Jabber client, with Licq-like interface
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/rb_libtorrent 1.1.0: C++ BitTorrent implementation focusing on efficiency and scalability
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
+net-p2p/ktorrent 9999: Powerful BitTorrent client based on KDE Frameworks
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/rtorrent-ps 9999: Extended rTorrent distribution with UI enhancements, colorization, and some added features
