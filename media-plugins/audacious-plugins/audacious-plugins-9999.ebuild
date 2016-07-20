@@ -76,8 +76,8 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 mp3_warning() {
-	if ! use mp3 ; then
-		ewarn "MP3 support is optional, you may want to enable the mp3 USE-flag"
+	if ! use mpg123 ; then
+		ewarn "MP3 support is optional, you may want to enable the mpg123 USE-flag"
 	fi
 }
 
