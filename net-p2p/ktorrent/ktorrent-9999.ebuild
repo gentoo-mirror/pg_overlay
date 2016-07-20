@@ -63,6 +63,7 @@ COMMON_DEPEND="
 	<net-libs/libktorrent-${LIBKT_VERSION_MAX}:5
 	>=net-libs/libktorrent-${LIBKT_VERSION_MIN}:5
 	infowidget? ( dev-libs/geoip )
+	kross? ( $(add_frameworks_dep krosspython) 
 	mediaplayer? (
 		media-libs/phonon[qt5]
 		>=media-libs/taglib-1.5
@@ -102,6 +103,7 @@ RDEPEND="${COMMON_DEPEND}
 
 src_prepare() {
 	kde5_src_prepare
+	punt_bogus_dep KF5 Kross
 }
 
 src_configure() {
