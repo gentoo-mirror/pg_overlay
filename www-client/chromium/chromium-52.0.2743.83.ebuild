@@ -201,21 +201,21 @@ src_prepare() {
 	fi
 
 	# Inox patches
-	if use inox; then
+	#if use inox; then
 		#for i in $(cat "${FILESDIR}/inox-patchset/series"); \
 		#do epatch "${FILESDIR}/inox-patchset/$i"; \
 		#done
-	fi
+	#fi
 
 	# Iridium patches
-	if use iridium; then
+	#if use iridium; then
 		#for i in $(cat "${FILESDIR}/iridium-browser/series"); \
 		#do epatch "${FILESDIR}/iridium-browser/$i"; \
 		#done
-	fi
+	#fi
 
 	# Ungoogled Chromium patches
-	if use ungoogled; then
+	#if use ungoogled; then
 		#echo "Stripping binaries from the source code"
 		#"${FILESDIR}"/ungoogled-chromium/generate_cleaning_list.sh > cleaning_list || die
 		#"${FILESDIR}"/ungoogled-chromium/evaluate_cleaning_list.py cleaning_list || die
@@ -226,7 +226,7 @@ src_prepare() {
 		#for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
 		#do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
 		#done
-	fi
+	#fi
 
 	epatch_user
 
