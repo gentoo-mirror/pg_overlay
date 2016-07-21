@@ -63,7 +63,8 @@ COMMON_DEPEND="
 	<net-libs/libktorrent-${LIBKT_VERSION_MAX}:5
 	>=net-libs/libktorrent-${LIBKT_VERSION_MIN}:5
 	infowidget? ( dev-libs/geoip )
-	kross? (  kde-apps/kross-interpreters ) 
+	kross? ( $(add_frameworks_dep kross)
+				$(add_kdeapps_dep kross-interpreters) ) 
 	mediaplayer? (
 		media-libs/phonon[qt5]
 		>=media-libs/taglib-1.5
