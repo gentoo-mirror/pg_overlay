@@ -31,7 +31,7 @@ DESCRIPTION="Powerful BitTorrent client based on KDE Frameworks"
 HOMEPAGE="http://ktorrent.pwsp.net/"
 
 LICENSE="GPL-2"
-IUSE="bwscheduler +downloadorder +infowidget kross +logviewer +magnetgenerator mediaplayer shutdown +scanfolder +stats upnp zeroconf"
+IUSE="bwscheduler +downloadorder +infowidget kross +logviewer +magnetgenerator mediaplayer rss shutdown +scanfolder +stats upnp zeroconf"
 
 COMMON_DEPEND="
 	$(add_frameworks_dep karchive)
@@ -121,6 +121,7 @@ src_configure() {
 		-DENABLE_ZEROCONF_PLUGIN=$(usex zeroconf)
 		-DENABLE_SCRIPTING_PLUGIN=$(usex kross)
 		-DENABLE_SCANFOLDER_PLUGIN=$(usex scanfolder)
+		-DENABLE_SYNDICATION_PLUGIN=$(usex rss)
 	)
 # add back when ported
 # 		-DENABLE_IPFILTER_PLUGIN=$(usex ipfilter)
