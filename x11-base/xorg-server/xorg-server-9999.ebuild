@@ -27,7 +27,7 @@ CDEPEND=">=app-eselect/eselect-opengl-1.3.0
 	>=x11-libs/libpciaccess-0.12.901
 	>=x11-libs/libXau-1.0.4
 	>=x11-libs/libXdmcp-1.0.2
-	>=x11-libs/libXfont-1.4.2
+	>=x11-libs/libXfont2-2.0.0
 	>=x11-libs/libxkbfile-1.0.4
 	>=x11-libs/libxshmfence-1.1
 	>=x11-libs/pixman-0.27.2
