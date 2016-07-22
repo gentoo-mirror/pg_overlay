@@ -31,19 +31,29 @@ DEPEND="${COMMON_DEPEND}
 DOCS=( doc/rtorrent.rc )
 
 src_prepare() {
-	cp "${FILESDIR}/command_pyroscope.cc" "${S}/src"
-	cp "${FILESDIR}/ui_pyroscope.cc" "${S}/src"
-	cp "${FILESDIR}/ui_pyroscope.h" "${S}/src"
+	cp "${FILESDIR}/command_pyroscope.cc" "${S}"
+	cp "${FILESDIR}/ui_pyroscope.cc" "${S}"
+	cp "${FILESDIR}/ui_pyroscope.h" "${S}"
 
-	sed -i src/{command_pyroscope.cc,ui_pyroscope.cc} \
+   sed -i doc/scripts/update_commands_0.9.sed \
+        -e "s:':\":g"
+    sed -i ../{command_pyroscope.cc,ui_pyroscope.cc} \
         -e "s:tr1:std:"
 
     sed -i configure.ac \
         -e "s:\\(AC_DEFINE(HAVE_CONFIG_H.*\\):\1\nAC_DEFINE(RT_HEX_VERSION, 0x000907, version checks):"
     sed -i src/ui/download_list.cc \
-        -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short HEAD) \" VERSION:"
+        -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
 
-	epatch "${FILESDIR}"/*.patch
+    for i in ${FILESDIR}/*.patch; do
+        sed -f doc/scripts/update_commands_0.9.sed -i "$i"
+        msg "Patching $i"
+        epatch "$i"
+    done
+    for i in *.{cc,h}; do
+        sed -f doc/scripts/update_commands_0.9.sed -i "$i"
+        dosym "$i" src
+    done
 
 	eautoreconf
 }
