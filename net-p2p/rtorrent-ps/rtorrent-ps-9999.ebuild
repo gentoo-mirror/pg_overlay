@@ -31,11 +31,8 @@ DEPEND="${COMMON_DEPEND}
 DOCS=( doc/rtorrent.rc )
 
 src_prepare() {
-	for i in ${FILESDIR}/*.{cc,h}; do
+	for i in ${FILESDIR}/*.{cc,h,patch}; do
 		cp "$i" "${S}"
-	done
-	for i in ${FILESDIR}/*.patch; do
-		cp "$i" ${S}
 	done
 
 	sed -i doc/scripts/update_commands_0.9.sed \
