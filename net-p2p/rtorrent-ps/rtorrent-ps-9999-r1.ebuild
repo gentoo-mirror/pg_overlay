@@ -46,7 +46,7 @@ src_prepare() {
         -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
 
     for i in ${FILESDIR}/*.patch; do
-        #sed -f doc/scripts/update_commands_0.9.sed -i "$i"
+        sed -f doc/scripts/update_commands_0.9.sed -i "$i"
         epatch "$i"
     done
     for i in *.{cc,h}; do
