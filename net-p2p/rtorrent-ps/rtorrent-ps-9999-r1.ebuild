@@ -37,17 +37,20 @@ src_prepare() {
 
    sed -i doc/scripts/update_commands_0.9.sed \
         -e "s:':\":g"
-    sed -i ../{command_pyroscope.cc,ui_pyroscope.cc} \
+    sed -i {command_pyroscope.cc,ui_pyroscope.cc} \
         -e "s:tr1:std:"
 
     sed -i configure.ac \
         -e "s:\\(AC_DEFINE(HAVE_CONFIG_H.*\\):\1\nAC_DEFINE(RT_HEX_VERSION, 0x000907, version checks):"
     sed -i src/ui/download_list.cc \
         -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
-
-    for i in ${FILESDIR}/*.patch; do
+	
+	for i in ${FILESDIR}/*.patch; do
+		cp "$i" ${S}
+	done
+	
+    for i in *.patch; do
         sed -f doc/scripts/update_commands_0.9.sed -i "$i"
-        msg "Patching $i"
         epatch "$i"
     done
     for i in *.{cc,h}; do
