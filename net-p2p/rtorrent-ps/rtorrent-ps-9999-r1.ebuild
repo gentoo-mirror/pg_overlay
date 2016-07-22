@@ -37,7 +37,7 @@ src_prepare() {
 
    sed -i doc/scripts/update_commands_0.9.sed \
         -e "s:':\":g"
-    sed -i ../{command_pyroscope.cc,ui_pyroscope.cc} \
+    sed -i {command_pyroscope.cc,ui_pyroscope.cc} \
         -e "s:tr1:std:"
 
     sed -i configure.ac \
