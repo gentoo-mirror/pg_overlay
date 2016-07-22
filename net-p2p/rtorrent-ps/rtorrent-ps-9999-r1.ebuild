@@ -31,9 +31,9 @@ DEPEND="${COMMON_DEPEND}
 DOCS=( doc/rtorrent.rc )
 
 src_prepare() {
-	cp "${FILESDIR}/command_pyroscope.cc" "${S}/src"
-	cp "${FILESDIR}/ui_pyroscope.cc" "${S}/src"
-	cp "${FILESDIR}/ui_pyroscope.h" "${S}/src"
+	cp "${FILESDIR}/command_pyroscope.cc" "${S}"
+	cp "${FILESDIR}/ui_pyroscope.cc" "${S}"
+	cp "${FILESDIR}/ui_pyroscope.h" "${S}"
 
    sed -i doc/scripts/update_commands_0.9.sed \
         -e "s:':\":g"
@@ -45,10 +45,10 @@ src_prepare() {
     sed -i src/ui/download_list.cc \
         -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
 
-    for i in ${S}/*.patch; do
+    for i in ${FILESDIR}/*.patch; do
         sed -f doc/scripts/update_commands_0.9.sed -i "$i"
         msg "Patching $i"
-        patch -uNp1 -i "$i"
+        epatch"$i"
     done
     for i in ${S}/*.{cc,h}; do
         sed -f doc/scripts/update_commands_0.9.sed -i "$i"
