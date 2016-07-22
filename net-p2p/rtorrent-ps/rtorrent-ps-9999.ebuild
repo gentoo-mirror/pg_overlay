@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://github.com/rakshasa/rtorrent.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+daemon debug ipv6 selinux test xmlrpc"
+IUSE="+daemon debug ipv6 selinux test +xmlrpc"
 
 COMMON_DEPEND="=net-libs/libtorrent-9999
 	>=dev-libs/libsigc++-2.2.2:2
