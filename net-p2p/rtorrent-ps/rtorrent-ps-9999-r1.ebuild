@@ -48,7 +48,7 @@ src_prepare() {
     for i in ${FILESDIR}/*.patch; do
         sed -f doc/scripts/update_commands_0.9.sed -i "$i"
         msg "Patching $i"
-        epatch"$i"
+        epatch "$i"
     done
     for i in *.{cc,h}; do
         sed -f doc/scripts/update_commands_0.9.sed -i "$i"
