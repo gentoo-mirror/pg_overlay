@@ -196,9 +196,9 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-linker-warnings-r0.patch"
 	epatch "${FILESDIR}/${PN}-ffmpeg-license-r0.patch"
 
-	if use vaapi; then
-		epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
-	fi
+	#if use vaapi; then
+		#epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
+	#fi
 
 	# Inox patches
 	#if use inox; then
