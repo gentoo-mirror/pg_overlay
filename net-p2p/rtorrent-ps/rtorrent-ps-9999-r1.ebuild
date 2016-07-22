@@ -50,7 +50,7 @@ src_prepare() {
         msg "Patching $i"
         epatch"$i"
     done
-    for i in ${S}/*.{cc,h}; do
+    for i in *.{cc,h}; do
         sed -f doc/scripts/update_commands_0.9.sed -i "$i"
         ln -sf "$i" src
     done
