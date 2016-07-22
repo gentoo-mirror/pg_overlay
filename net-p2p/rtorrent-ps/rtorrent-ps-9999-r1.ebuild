@@ -44,8 +44,12 @@ src_prepare() {
         -e "s:\\(AC_DEFINE(HAVE_CONFIG_H.*\\):\1\nAC_DEFINE(RT_HEX_VERSION, 0x000907, version checks):"
     sed -i src/ui/download_list.cc \
         -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
-
-    for i in ${FILESDIR}/*.patch; do
+	
+	for i in ${FILESDIR}/*.patch; do
+		dosym "$i" "${S}"
+	done
+	
+    for i in *.patch; do
         sed -f doc/scripts/update_commands_0.9.sed -i "$i"
         epatch "$i"
     done
