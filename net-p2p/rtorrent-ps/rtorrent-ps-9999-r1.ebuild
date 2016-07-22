@@ -46,7 +46,7 @@ src_prepare() {
         -e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
 	
 	for i in ${FILESDIR}/*.patch; do
-		dosym "$i" ${S}
+		cp "$i" ${S}
 	done
 	
     for i in *.patch; do
