@@ -9,6 +9,7 @@ inherit autotools eutils flag-o-matic git-r3
 DESCRIPTION="Extended rTorrent distribution with UI enhancements, colorization, and some added features"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="git://github.com/rakshasa/rtorrent.git"
+EGIT_BRANCH="master"
 
 LICENSE="GPL-2"
 SLOT="0"
