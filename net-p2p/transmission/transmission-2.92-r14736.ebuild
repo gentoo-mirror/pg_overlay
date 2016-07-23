@@ -91,7 +91,7 @@ src_configure() {
 	econf \
 		--disable-external-natpmp \
 		$(use_enable lightweight) \
-		$(use_with systemd systemd-daemon) \
+		$(use_with systemd systemd) \
 		$(use_with gtk)
 
 	if use qt4 || use qt5; then
