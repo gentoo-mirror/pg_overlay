@@ -11,7 +11,7 @@ app-text/qpdfview 0.4.16: A tabbed document viewer
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
 dev-util/gperf 3.0.4: A perfect hash function generator
-gnome-extra/cinnamon 3.0.6: A fork of GNOME Shell with layout similar to GNOME 2
+gnome-extra/cinnamon 3.0.6 3.0.7: A fork of GNOME Shell with layout similar to GNOME 2
 gnome-extra/cinnamon-control-center 3.0.1: Cinnamons's main interface to configure various aspects of the desktop
 gnome-extra/cinnamon-session 3.0.1: Cinnamon session manager
 gnome-extra/nemo-compare 3.0.0: Nemo-Compare Extension
