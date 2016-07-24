@@ -40,7 +40,7 @@ COMMON_DEPEND="
 	networkmanager? ( >=gnome-extra/nm-applet-0.9.8
 		>=net-misc/networkmanager-0.9.8
 		modemmanager? ( >=net-misc/networkmanager-0.9.8[modemmanager]
-			>=net-misc/modemmanager-0.7 ))
+			>=net-misc/modemmanager-0.7 ) )
 	colord? ( >=x11-misc/colord-0.1.14:0= )
 	cups? ( >=net-print/cups-1.4[dbus] )
 	input_devices_wacom? (
