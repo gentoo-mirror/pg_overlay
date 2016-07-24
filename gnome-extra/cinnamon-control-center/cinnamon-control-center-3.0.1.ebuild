@@ -13,7 +13,8 @@ SRC_URI="https://github.com/linuxmint/cinnamon-control-center/archive/${PV}.tar.
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+colord +cups debug input_devices_wacom systemd"
+IUSE="+colord +cups debug input_devices_wacom systemd networkmanager
+	modemmanager"
 KEYWORDS="~amd64 ~x86"
 
 # False positives caused by nested configure scripts
@@ -29,7 +30,6 @@ COMMON_DEPEND="
 	>=gnome-extra/cinnamon-desktop-1.0:0=
 	>=gnome-extra/cinnamon-menus-1.0:0=
 	>=gnome-extra/cinnamon-settings-daemon-1.0:0=
-	>=gnome-extra/nm-applet-0.9.8
 	media-libs/fontconfig
 	>=sys-auth/polkit-0.103
 	>=x11-libs/gdk-pixbuf-2.23.0:2
@@ -38,9 +38,9 @@ COMMON_DEPEND="
 	x11-libs/libX11
 	x11-libs/libxklavier
 	networkmanager? ( >=gnome-extra/nm-applet-0.9.8
-		>=net-misc/networkmanager-0.9.8 
+		>=net-misc/networkmanager-0.9.8
 		modemmanager? ( >=net-misc/networkmanager-0.9.8[modemmanager]
-			>=net-misc/modemmanager-0.7 ))
+			>=net-misc/modemmanager-0.7 ) )
 	colord? ( >=x11-misc/colord-0.1.14:0= )
 	cups? ( >=net-print/cups-1.4[dbus] )
 	input_devices_wacom? (
