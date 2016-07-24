@@ -62,5 +62,5 @@ src_configure() {
 		$(use_enable doc docbook-docs) \
 		$(use_enable ipv6) \
 		$(use_enable systemd logind) \
-		$(usex systemd --disable-old-upower --enable-old-upower)
+		$(usex systemd --disable-old-upower --disable-old-upower) --disable-deprecation-flags
 }
