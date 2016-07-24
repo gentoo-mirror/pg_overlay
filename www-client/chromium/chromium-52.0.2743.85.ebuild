@@ -195,10 +195,11 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 	epatch "${FILESDIR}/${PN}-linker-warnings-r0.patch"
 	epatch "${FILESDIR}/${PN}-ffmpeg-license-r0.patch"
+	epatch "${FILESDIR}/PNGImageDecoder.patch"
 
-	#if use vaapi; then
-		#epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
-	#fi
+	if use vaapi; then
+		epatch "${FILESDIR}/chromium_vaapi.patch"
+	fi
 
 	# Inox patches
 	#if use inox; then
