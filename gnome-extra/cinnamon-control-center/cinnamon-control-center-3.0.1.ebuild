@@ -38,7 +38,7 @@ COMMON_DEPEND="
 	x11-libs/libX11
 	x11-libs/libxklavier
 	networkmanager? ( >=gnome-extra/nm-applet-0.9.8
-		>=net-misc/networkmanager-0.9.8 
+		>=net-misc/networkmanager-0.9.8
 		modemmanager? ( >=net-misc/networkmanager-0.9.8[modemmanager]
 			>=net-misc/modemmanager-0.7 ))
 	colord? ( >=x11-misc/colord-0.1.14:0= )
