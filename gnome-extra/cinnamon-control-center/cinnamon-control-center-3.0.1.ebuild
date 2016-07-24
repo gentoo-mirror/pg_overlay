@@ -13,7 +13,8 @@ SRC_URI="https://github.com/linuxmint/cinnamon-control-center/archive/${PV}.tar.
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="+colord +cups debug input_devices_wacom systemd"
+IUSE="+colord +cups debug input_devices_wacom systemd networkmanager
+	modemmanager"
 KEYWORDS="~amd64 ~x86"
 
 # False positives caused by nested configure scripts
