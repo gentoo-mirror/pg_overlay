@@ -21,7 +21,7 @@ LICENSE="GPL-2+"
 SLOT="0"
 
 # bluetooth support dropped due to bug #511648
-IUSE="+nls +networkmanager" #+bluetooth
+IUSE="gstreamer +nls networkmanager" #+bluetooth
 
 # We need *both* python 2.7 and 3.x
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
@@ -48,8 +48,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/clutter-1.10:1.0[introspection]
 	media-libs/cogl:1.0=[introspection]
 	>=gnome-base/gsettings-desktop-schemas-2.91.91
-	media-libs/gstreamer:1.0
-	media-libs/gst-plugins-base:1.0
 	net-libs/libsoup:2.4[introspection]
 	>=sys-auth/polkit-0.100[introspection]
 	x11-libs/gdk-pixbuf:2[introspection]
@@ -59,6 +57,9 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	x11-libs/libX11
 	>=x11-libs/libXfixes-5.0
 	>=x11-wm/muffin-3.0.0[introspection]
+	gstreamer? (
+		media-libs/gstreamer:1.0
+		media-libs/gst-plugins-base:1.0 )
 	networkmanager? (
 		gnome-base/libgnome-keyring
 		>=net-misc/networkmanager-0.8.999:=[introspection] )
