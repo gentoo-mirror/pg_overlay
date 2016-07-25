@@ -31,10 +31,12 @@ RDEPEND="
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qthelp:5
+		dev-qt/qtprintsupport:5
 		dev-qt/qtsingleapplication[qt5]
 		dev-qt/qtsvg:5
 		dev-qt/qtwebkit:5
 		dev-qt/qtx11extras:5
+		dev-qt/qtxml:5
 		dev-qt/qtwidgets:5
 	)
 	media-libs/libao
