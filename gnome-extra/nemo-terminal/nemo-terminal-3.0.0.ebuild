@@ -28,7 +28,7 @@ src_install() {
 	doins src/org.nemo.extensions.${PN}.gschema.xml
 
 	insinto /usr/share/nemo-python/extensions
-	doins src/nemo_terminal.py
+	doexe src/nemo_terminal.py
 
 	insinto /usr/share/${PN}
 	doins pixmap/logo_120x120.png
