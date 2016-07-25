@@ -14,12 +14,11 @@ LICENSE="GPL"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 
-RDEPEND=">=gnome-extra/nemo-3.0
-		>=dev-python/nemo-python-3.0
-		x11-libs/vte:2.91"
+RDEPEND="
+         >=gnome-extra/nemo-3.0
+         >=dev-python/nemo-python-3.0
+         x11-libs/vte:2.90"
 DEPEND=""
-
-PATCHES=( "${FILESDIR}"/nemo-terminal-added-Vte-2.91-support.patch )
 
 S=${WORKDIR}/nemo-extensions-${PV}/${PN}
 
