@@ -54,7 +54,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	autoconf
+	eautoreconf
 	default
 }
 
