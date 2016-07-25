@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/ChristianHenzel/ClipIt"
 LICENSE="LGPL-3.0"
 SLOT="0"
 KEYWORDS=""
-IUSE="nls gtk3"
+IUSE="nls +gtk3"
 
 DEPEND="
 	!gtk3? ( >=x11-libs/gtk+-2.10:2 )
