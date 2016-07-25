@@ -54,7 +54,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	autoreconf
+	autoconf
 	default
 }
 
