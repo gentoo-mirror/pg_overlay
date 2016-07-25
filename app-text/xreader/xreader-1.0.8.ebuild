@@ -90,7 +90,7 @@ src_configure() {
 		$(use_enable gnome libgnome-desktop) \
 		$(use_with gnome-keyring keyring) \
 		$(use_enable introspection) \
-		$(use_enable nautilus) \
+		$(use_enable nemo) \
 		$(use_enable nsplugin browser-plugin) \
 		$(use_enable postscript ps) \
 		$(use_enable t1lib) \
