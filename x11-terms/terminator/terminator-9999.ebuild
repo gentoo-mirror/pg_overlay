@@ -14,7 +14,7 @@ EBZR_REPO_URI="https://code.launchpad.net/~gnome-terminator/terminator/gtk3"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="dbus doc gnome +libnotify"
 
 RDEPEND="
