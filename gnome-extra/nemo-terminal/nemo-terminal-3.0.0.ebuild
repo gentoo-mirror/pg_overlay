@@ -27,7 +27,7 @@ src_install() {
 	insinto /usr/share/glib-2.0/schemas
 	doins src/org.nemo.extensions.${PN}.gschema.xml
 
-	insinto /usr/share/nemo-python/extensions
+	exeinto /usr/share/nemo-python/extensions
 	doexe src/nemo_terminal.py
 
 	insinto /usr/share/${PN}
