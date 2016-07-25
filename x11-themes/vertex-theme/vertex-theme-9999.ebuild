@@ -14,7 +14,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+cinnamon +vertex_dark gnome-shell gtk2 +gtk3 vertex_light metacity unity xfwm"
+IUSE="+cinnamon +vertex_dark gnome-shell +gtk2 +gtk3 vertex_light metacity unity xfwm"
 
 DEPEND=">=x11-libs/gtk+-3.12.2
 	>=x11-themes/gtk-engines-murrine-0.98.2-r1"
