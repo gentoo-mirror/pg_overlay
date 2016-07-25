@@ -22,14 +22,6 @@ DEPEND=""
 
 S=${WORKDIR}/nemo-extensions-${PV}/${PN}
 
-src_prepare() {
-	pushd ..
-	default
-	popd
-	gnome2_src_prepare
-}
-
-
 src_install() {
 
 	insinto /usr/share/glib-2.0/schemas
