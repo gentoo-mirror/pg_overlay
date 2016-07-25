@@ -58,5 +58,6 @@ x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.14.6-r20150311: A vector graphics library with cross-device output support
 x11-misc/lightdm 1.18.2: A lightweight display manager
+x11-terms/terminator 9999: Multiple GNOME terminals in one window
 x11-terms/tilda 9999: A drop down terminal, similar to the consoles found in first person shooters
 x11-wm/lumina 1.0.0_beta1 9999: Lumina desktop environment
