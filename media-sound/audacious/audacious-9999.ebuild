@@ -7,8 +7,8 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
-EGIT_REPO_URI="!gtk3? ( git://github.com/${PN}-media-player/${PN}.git +refs/heads/master )
-	gtk3? ( git://github.com/${PN}-media-player/${PN}.git +refs/heads/master+gtk3 )"
+EGIT_REPO_URI="git://github.com/${PN}-media-player/${PN}.git"
+
 SRC_URI="mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2"
 
 LICENSE="BSD-2"
@@ -38,6 +38,18 @@ DEPEND="${RDEPEND}
 	nls? ( dev-util/intltool )"
 
 PDEPEND="~media-plugins/audacious-plugins-${PV}"
+
+src_unpack() {
+	if use !gtk3; then
+		EGIT_BRANCH="master"
+		EGIT_COMMIT="$EGIT_BRANCH"
+		git-r3_src_unpack
+	else
+		EGIT_BRANCH="master-gtk3"
+		EGIT_COMMIT="$EGIT_BRANCH"		
+		git-r3_src_unpack
+	fi
+}
 
 src_prepare() {
 	if [ "${A}" = "gentoo_ice-xmms-0.2.tar.bz2" ]; then
