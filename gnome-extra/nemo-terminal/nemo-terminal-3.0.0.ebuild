@@ -22,8 +22,11 @@ DEPEND=""
 
 S=${WORKDIR}/nemo-extensions-${PV}/${PN}
 
-src_install() {
+src_prepare() {
+	sed -i 's|^#!/usr/bin/python$|#!/usr/bin/python2|' src/nemo_terminal.py
+}
 
+src_install() {
 	insinto /usr/share/glib-2.0/schemas
 	doins src/org.nemo.extensions.${PN}.gschema.xml
 
