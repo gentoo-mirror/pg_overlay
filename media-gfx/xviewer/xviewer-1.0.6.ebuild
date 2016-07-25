@@ -45,6 +45,7 @@ DEPEND="${RDEPEND}
 "
 src_prepare() {
 	autoreconf
+	default
 }
 src_configure() {
 	gnome2_src_configure \
