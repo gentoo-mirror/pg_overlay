@@ -14,7 +14,7 @@ LICENSE="GPL-3"
 
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+cinnamon +vertex_dark gnome-shell +gtk2 +gtk3 vertex_light metacity unity xfwm"
+IUSE="+cinnamon +vertex_dark gnome-shell +gtk2 +gtk3 vertex_light +metacity unity xfwm"
 
 DEPEND=">=x11-libs/gtk+-3.12.2
 	>=x11-themes/gtk-engines-murrine-0.98.2-r1"
@@ -26,16 +26,16 @@ src_prepare() {
 
 src_configure() {
 	econf \
-		$(use_enable cinnamon cinnamon) \
+		$(use_enable cinnamon) \
 		$(use_enable vertex_dark dark) \
-		$(use_enable gnome-shell gnome-shell) \
-		$(use_enable gtk2 gtk2) \
-		$(use_enable gtk3 gtk3) \
+		$(use_enable gnome-shell) \
+		$(use_enable gtk2) \
+		$(use_enable gtk3) \
 		$(use_enable vertex_light light)\
 		$(use_enable vertex_dark dark) \
-		$(use_enable metacity metacity) \
-		$(use_enable unity unity)  \
-		$(use_enable xfwm xfwm) \
+		$(use_enable metacity) \
+		$(use_enable unity)  \
+		$(use_enable xfwm) \
 		--with-gnome=3.20
 }
 
