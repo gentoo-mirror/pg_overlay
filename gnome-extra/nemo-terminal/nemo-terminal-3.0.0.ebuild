@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit gnome2
+inherit gnome2 gnome2-utils
 
 DESCRIPTION="Nemo-Terminal Extension"
 HOMEPAGE="https://github.com/linuxmint/nemo-extensions"
