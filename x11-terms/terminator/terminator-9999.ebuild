@@ -10,7 +10,7 @@ inherit bzr distutils-r1 virtualx
 
 DESCRIPTION="Multiple GNOME terminals in one window"
 HOMEPAGE="http://www.tenshu.net/p/terminator.html"
-EBZR_REPO_URI="lp:terminator/gtk3"
+EBZR_REPO_URI="https://code.launchpad.net/~gnome-terminator/terminator/gtk3"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -20,6 +20,7 @@ IUSE="dbus doc gnome +libnotify"
 RDEPEND="
 	dev-libs/keybinder:3
 	x11-libs/vte:2.91
+	dev-python/psutil[${PYTHON_USEDEP}]
 	dbus? ( sys-apps/dbus )
 	gnome? (
 		dev-python/gconf-python
@@ -63,12 +64,4 @@ python_prepare_all() {
 python_test() {
 	VIRTUALX_COMMAND="esetup.py"
 	virtualmake test
-}
-
-pkg_postinst() {
-	gnome2_pkg_postinst
-}
-
-pkg_postrm() {
-	gnome2_pkg_postrm
 }
