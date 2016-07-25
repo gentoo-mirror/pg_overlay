@@ -67,13 +67,8 @@ DEPEND="${COMMON_DEPEND}
 src_prepare() {
 	gnome2_src_prepare
 
-	# Do not depend on adwaita-icon-theme, bug #326855, #391859
-	# https://bugs.freedesktop.org/show_bug.cgi?id=29942
 	sed -e "s:GTK\;Graphics\;VectorGraphics\;Viewer\;:GTK\;Office\;Viewer\;Graphics\;VectorGraphics;:g" \
 		-i data/atril.desktop.in.in || e
-
-	sed -e 's/adwaita-icon-theme >= $ADWAITA_ICON_THEME_REQUIRED//g' \
-		-i configure || die "sed failed"
 }
 
 src_configure() {
