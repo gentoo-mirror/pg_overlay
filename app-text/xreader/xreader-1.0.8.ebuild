@@ -5,7 +5,7 @@
 EAPI=6
 GNOME2_LA_PUNT="yes"
 
-inherit gnome2
+inherit autotools gnome2
 
 DESCRIPTION="Simple document viewer for GNOME"
 HOMEPAGE="https://wiki.gnome.org/Apps/Evince"
@@ -65,6 +65,7 @@ DEPEND="${COMMON_DEPEND}
 #  app-text/yelp-tools
 
 src_prepare() {
+	eautoreconf
 	gnome2_src_prepare
 
 	sed -e "s:GTK\;Graphics\;VectorGraphics\;Viewer\;:GTK\;Office\;Viewer\;Graphics\;VectorGraphics;:g" \
