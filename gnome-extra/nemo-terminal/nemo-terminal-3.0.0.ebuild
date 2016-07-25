@@ -27,11 +27,13 @@ src_install() {
 	insinto /usr/share/glib-2.0/schemas
 	doins src/org.nemo.extensions.${PN}.gschema.xml
 
-	exeinto /usr/share/nemo-python/extensions
-	doexe src/nemo_terminal.py
+	insinto /usr/share/nemo-python/extensions
+	doins src/nemo_terminal.py
 
 	insinto /usr/share/${PN}
 	doins pixmap/logo_120x120.png
-
+}
+pkg_postinst () {
+	gnome2_pkg_postinst
 	gnome2_schemas_update
 }
