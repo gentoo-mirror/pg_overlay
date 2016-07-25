@@ -80,6 +80,7 @@ src_configure() {
 		--enable-thumbnailer \
 		--enable-dbus \
 		--with-gtk=3.0 \
+		--disable-caja \
 		$(use_enable djvu) \
 		$(use_enable dvi) \
 		$(use_enable gstreamer multimedia) \
