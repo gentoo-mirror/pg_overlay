@@ -28,6 +28,7 @@ RDEPEND="
 		dev-qt/qtwebkit:4[exceptions]
 	)
 	qt5? (
+		dev-qt/linguist-tools:5
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qthelp:5
