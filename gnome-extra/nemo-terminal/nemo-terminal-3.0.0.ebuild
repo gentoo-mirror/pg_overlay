@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit gnome2-utils
+inherit gnome2
 
 DESCRIPTION="Nemo-Terminal Extension"
 HOMEPAGE="https://github.com/linuxmint/nemo-extensions"
@@ -34,6 +34,5 @@ src_install() {
 	doins pixmap/logo_120x120.png
 }
 pkg_postinst () {
-	gnome2_pkg_postinst
 	gnome2_schemas_update
 }
