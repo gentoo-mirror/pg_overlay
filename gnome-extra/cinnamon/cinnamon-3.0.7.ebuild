@@ -57,7 +57,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	x11-libs/libX11
 	>=x11-libs/libXfixes-5.0
 	>=x11-wm/muffin-3.0.0[introspection]
-	gstreamer?(
+	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0 )
 	networkmanager? (
