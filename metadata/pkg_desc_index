@@ -23,6 +23,7 @@ kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 45.0 45.1.0 45.1.1 45.2.0: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
 media-gfx/xviewer 1.0.6: A simple and easy to use image viewer. X-Apps Project
+media-gfx/xviewer-plugins 1.0.3: Eye of GNOME plugins
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
