@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit autoools eutils fdo-mime git-r3
+inherit autotools eutils fdo-mime git-r3
 
 DESCRIPTION="Lightweight GTK+ clipboard manager. Fork of Parcellite."
 HOMEPAGE="https://github.com/ChristianHenzel/ClipIt"
