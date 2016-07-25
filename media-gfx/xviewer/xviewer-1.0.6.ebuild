@@ -44,7 +44,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 src_prepare() {
-	autoreconf
+	./gnome-autogen
 	default
 }
 src_configure() {
