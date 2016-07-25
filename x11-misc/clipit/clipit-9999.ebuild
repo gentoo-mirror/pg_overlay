@@ -27,6 +27,9 @@ DEPEND="
 RDEPEND="${DEPEND}
 	x11-misc/xdotool
 "
+src_prepare(){
+	eautoreconf
+}
 
 src_configure(){
 	econf \
