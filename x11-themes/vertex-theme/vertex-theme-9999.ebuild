@@ -37,6 +37,7 @@ src_configure() {
 		$(use_enable unity unity)  \
 		$(use_enable xfwm xfwm) \
 		--with-gnome=3.20
+}
 
 src_install() {
 	emake DESTDIR="${D}" install
