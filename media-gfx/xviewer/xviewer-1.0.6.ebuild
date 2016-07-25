@@ -25,10 +25,8 @@ RDEPEND="
 	>=gnome-extra/cinnamon-3.0.0
 	>=x11-libs/gtk+-3.19.3:3[introspection,X]
 	>=x11-misc/shared-mime-info-0.20
-
 	>=x11-libs/gdk-pixbuf-2.30.0:2[jpeg?,tiff?]
 	x11-libs/libX11
-
 	exif? ( >=media-libs/libexif-0.6.14 )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.3:= )
 	jpeg? ( virtual/jpeg:0 )
@@ -44,7 +42,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 src_prepare() {
-	./gnome-autogen
+	./gnome-autogen.sh
 	default
 }
 src_configure() {
