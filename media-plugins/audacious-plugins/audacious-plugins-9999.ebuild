@@ -98,6 +98,18 @@ src_prepare() {
 src_configure() {
 	mp3_warning
 
+	if use qt5 ;then
+		notify="--disable-notify"
+	elif use libnotify ;then
+		notify="--enable-notify"
+	fi
+
+	if use gtk3 ;then
+		gtk="--enable-gtk"
+	else
+		gtk="--disable-gtk"
+	fi
+
 	if use ffmpeg && has_version media-video/ffmpeg ; then
 		ffmpeg="--with-ffmpeg=ffmpeg"
 	elif use ffmpeg && has_version media-video/libav ; then
