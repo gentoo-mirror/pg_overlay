@@ -5,7 +5,7 @@
 EAPI=6
 GNOME2_LA_PUNT="yes"
 
-inherit gnome2
+inherit autotools gnome2
 
 SRC_URI="https://github.com/linuxmint/${PN}/archive/${PV}.tar.gz"
 DESCRIPTION="A simple and easy to use image viewer. X-Apps Project"
@@ -22,7 +22,8 @@ KEYWORDS="~alpha ~amd64 ~arm ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 RDEPEND="
 	>=dev-libs/glib-2.42.0:2[dbus]
 	>=dev-libs/libpeas-0.7.4:=[gtk]
-	>=gnome-extra/cinnamon-3.0.0
+	>=gnome-base/gnome-desktop-2.91.2:3=
+	>=gnome-base/gsettings-desktop-schemas-2.91.92
 	>=x11-libs/gtk+-3.19.3:3[introspection,X]
 	>=x11-misc/shared-mime-info-0.20
 
@@ -43,7 +44,10 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig
 "
-
+src_prepare() {
+	gnome-autogen.sh
+	default
+}
 src_configure() {
 	gnome2_src_configure \
 		$(usex debug --enable-debug=yes ' ') \
