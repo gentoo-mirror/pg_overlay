@@ -169,7 +169,7 @@ src_configure() {
 	sed -i 's/compressor //' extra.mk || die
 	sed -i 's/crossfade //' extra.mk || die
 	sed -i 's/crystalizer //' extra.mk || die
-	sed -i 's/lapsda //' extra.mk || die
+	sed -i 's/ladspa //' extra.mk || die
 	sed -i 's/mixer //' extra.mk || die
 	sed -i 's/silence-removal //' extra.mk || die
 	sed -i 's/stereo_plugin //' extra.mk || die
