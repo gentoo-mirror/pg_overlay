@@ -4,9 +4,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
-
-inherit eutils bash-completion-r1 python-r1
+inherit eutils bash-completion-r1
 
 DESCRIPTION="Nemo-Compare Extension"
 HOMEPAGE="https://github.com/linuxmint/nemo-extensions"
@@ -32,8 +30,6 @@ src_install() {
 	insinto /usr/share/${PN}/
 	doins data/${PN}-notification
 	doins src/*
-
-	#fperms +x /usr/share/${PN}/${PN}-preferences.py
 
 	dosym /usr/share/${PN}/${PN}-preferences.py /usr/bin/${PN}-preferences
 
