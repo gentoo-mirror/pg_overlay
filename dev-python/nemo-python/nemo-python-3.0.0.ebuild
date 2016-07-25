@@ -5,7 +5,7 @@
 EAPI=6
 
 GNOME2_LA_PUNT="yes"
-PYTHON_COMPAT=( python{2_7,3_4,3_5} )
+PYTHON_COMPAT=( python2_7 )
 
 inherit autotools eutils gnome2 gnome2-utils python-single-r1
 
@@ -45,7 +45,7 @@ src_prepare() {
 src_configure() {
 	# FIXME: package does not ship pre-built documentation
 	# and has broken logic for dealing with gtk-doc
-	gnome2_src_configure --disable-debug --disable-static --disable-schemas-compile
+	gnome2_src_configure --disable-static
 }
 
 src_install() {
