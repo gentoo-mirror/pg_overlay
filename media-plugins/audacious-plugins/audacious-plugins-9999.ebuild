@@ -8,6 +8,8 @@ inherit autotools eutils git-r3
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
 EGIT_REPO_URI="git://github.com/audacious-media-player/${PN}.git"
+EGIT_BRANCH="!gtk3? ( master )
+	gtk3? ( master-gtk3 )"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -98,6 +100,18 @@ src_prepare() {
 src_configure() {
 	mp3_warning
 
+	if use qt5 ;then
+		notify="--disable-notify"
+	elif use libnotify ;then
+		notify="--enable-notify"
+	fi
+
+	if use gtk3 ;then
+		gtk="--enable-gtk"
+	else
+		gtk="--disable-gtk"
+	fi
+
 	if use ffmpeg && has_version media-video/ffmpeg ; then
 		ffmpeg="--with-ffmpeg=ffmpeg"
 	elif use ffmpeg && has_version media-video/libav ; then
@@ -145,6 +159,7 @@ src_configure() {
 	sed -i 's/compressor //' extra.mk || die
 	sed -i 's/crossfade //' extra.mk || die
 	sed -i 's/crystalizer //' extra.mk || die
+	sed -i 's/lapsda //' extra.mk || die
 	sed -i 's/mixer //' extra.mk || die
 	sed -i 's/silence-removal //' extra.mk || die
 	sed -i 's/stereo_plugin //' extra.mk || die

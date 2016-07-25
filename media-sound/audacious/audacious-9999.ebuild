@@ -8,15 +8,17 @@ inherit autotools eutils git-r3
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
 EGIT_REPO_URI="git://github.com/${PN}-media-player/${PN}.git"
+EGIT_BRANCH="!gtk3? ( master )
+	gtk3? ( master-gtk3 )"
 SRC_URI="mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2"
 
 LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="+chardet nls qt5"
+IUSE="+chardet gtk3 nls qt5"
 REQUIRED_USE="
-	^^ ( qt5 )
+	^^ ( gtk3 qt5 )
 "
 DOCS="AUTHORS"
 
@@ -26,6 +28,8 @@ RDEPEND=">=app-i18n/libguess-1.2
 	>=x11-libs/cairo-1.2.6
 	>=x11-libs/pango-1.8.0
 	virtual/freedesktop-icon-theme
+	chardet? ( >=app-i18n/libguess-1.2 )
+	gtk3? ( x11-libs/gtk+:3 )
 	qt5? ( dev-qt/qtcore:5
 	      dev-qt/qtgui:5
 	      dev-qt/qtwidgets:5 )"
@@ -44,6 +48,11 @@ src_prepare() {
 }
 
 src_configure() {
+	if use gtk3 ;then
+		gtk="--enable-gtk"
+	else
+		gtk="--disable-gtk"
+	fi
 	# D-Bus is a mandatory dependency, remote control,
 	# session management and some plugins depend on this.
 	# Building without D-Bus is *unsupported* and a USE-flag
@@ -51,8 +60,10 @@ src_configure() {
 	# Bugs #197894, #199069, #207330, #208606
 	econf \
 		--enable-dbus \
+		${gtk} \
+		$(use_enable chardet) \
 		$(use_enable nls) \
-		$(use_enable qt5 qt) --disable-gtk
+		$(use_enable qt5 qt)
 }
 
 src_install() {
