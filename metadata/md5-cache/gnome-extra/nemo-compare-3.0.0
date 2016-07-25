@@ -2,12 +2,12 @@ DEFINED_PHASES=install
 DESCRIPTION=Nemo-Compare Extension
 EAPI=6
 HOMEPAGE=https://github.com/linuxmint/nemo-extensions
-IUSE=+meld diffuse python_targets_python2_7 python_targets_python3_4 python_targets_python3_5
+IUSE=+meld diffuse
 KEYWORDS=~amd64 ~x86
 LICENSE=GPL
 RDEPEND=>=gnome-extra/nemo-3.0 >=dev-python/nemo-python-3.0 dev-python/pyxdg meld? ( dev-util/meld ) diffuse? ( dev-util/diffuse )
 SLOT=0
 SRC_URI=https://github.com/linuxmint/nemo-extensions/archive/3.0.0.tar.gz
 _eclass_exported_funcs=src_install:-
-_eclasses_=bash-completion-r1	acf715fa09463f043fbfdc1640f3fb85	eutils	792f83d5ec9536cb5ccef375469d8bde	multibuild	742139c87a9fa3766f0c2b155e5522bf	multilib	d062ae4ba2fc40a19c11de2ad89b6616	python-r1	0f6937650a475d673baa5d0c8c0b37b3	python-utils-r1	c0ed2a2f233d3af6dd556048695dc5cb	toolchain-funcs	82165206dedb2075f9a0fb8f9b1f9441
-_md5_=6cf30e32747b6d8cc2877b66e787792b
+_eclasses_=bash-completion-r1	acf715fa09463f043fbfdc1640f3fb85	eutils	792f83d5ec9536cb5ccef375469d8bde	multilib	d062ae4ba2fc40a19c11de2ad89b6616	toolchain-funcs	82165206dedb2075f9a0fb8f9b1f9441
+_md5_=b6a20450618f4877165bed95674310ed
