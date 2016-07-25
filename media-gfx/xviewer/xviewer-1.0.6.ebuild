@@ -35,7 +35,7 @@ RDEPEND="
 	jpeg? ( virtual/jpeg:0 )
 	lcms? ( media-libs/lcms:2 )
 	svg? ( >=gnome-base/librsvg-2.36.2:2 )
-	xmp? ( media-libs/exempi:2 )i:2 )
+	xmp? ( media-libs/exempi:2 )
 "
 DEPEND="${RDEPEND}
 	>=dev-util/gtk-doc-am-1.16
