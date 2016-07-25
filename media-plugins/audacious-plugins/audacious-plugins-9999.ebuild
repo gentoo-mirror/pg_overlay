@@ -7,8 +7,7 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
-EGIT_REPO_URI="!gtk3? ( git://github.com/${PN}-media-player/${PN}.git +refs/heads/master )
-	gtk3? ( git://github.com/${PN}-media-player/${PN}.git +refs/heads/master+gtk3 )"
+EGIT_REPO_URI="git://github.com/audacious-media-player/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -79,6 +78,18 @@ DEPEND="${RDEPEND}
 mp3_warning() {
 	if ! use mpg123 ; then
 		ewarn "MP3 support is optional, you may want to enable the mpg123 USE-flag"
+	fi
+}
+
+src_unpack() {
+	if use !gtk3; then
+		EGIT_BRANCH="master"
+		EGIT_COMMIT="$EGIT_BRANCH"
+		git-r3_src_unpack
+	else
+		EGIT_BRANCH="master-gtk3"
+		EGIT_COMMIT="$EGIT_BRANCH"		
+		git-r3_src_unpack
 	fi
 }
 
