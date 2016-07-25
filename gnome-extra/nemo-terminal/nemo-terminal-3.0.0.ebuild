@@ -22,14 +22,6 @@ DEPEND=""
 
 S=${WORKDIR}/nemo-extensions-${PV}/${PN}
 
-src_prepare() {
-	pushd ..
-	default
-	popd
-	gnome2_src_prepare
-}
-
-
 src_install() {
 
 	insinto /usr/share/glib-2.0/schemas
@@ -40,6 +32,8 @@ src_install() {
 
 	insinto /usr/share/${PN}
 	doins pixmap/logo_120x120.png
-
+}
+pkg_postinst () {
+	gnome2_pkg_postinst
 	gnome2_schemas_update
 }
