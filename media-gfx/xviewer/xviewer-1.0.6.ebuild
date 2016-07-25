@@ -45,7 +45,8 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 src_prepare() {
-	gnome-autogen.sh
+	#gnome-autogen.sh
+	eautoreconf	
 	default
 }
 src_configure() {
