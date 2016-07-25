@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=5
 
 inherit gnome2-utils
 
@@ -22,8 +22,11 @@ DEPEND=""
 
 S=${WORKDIR}/nemo-extensions-${PV}/${PN}
 
-src_install() {
+src_prepare() {
+	sed -i 's|^#!/usr/bin/python$|#!/usr/bin/python2|' src/nemo_terminal.py
+}
 
+src_install() {
 	insinto /usr/share/glib-2.0/schemas
 	doins src/org.nemo.extensions.${PN}.gschema.xml
 
@@ -34,6 +37,5 @@ src_install() {
 	doins pixmap/logo_120x120.png
 }
 pkg_postinst () {
-	gnome2_pkg_postinst
 	gnome2_schemas_update
 }
