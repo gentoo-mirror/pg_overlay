@@ -221,7 +221,7 @@ src_install() {
 			popd >/dev/null
 		done
 	fi
-	use perl && perl_delete_localpod
+	perl_delete_localpod
 
 	if use python || use dbus ; then
 		python_fix_shebang "${D}"
