@@ -130,6 +130,18 @@ media-video/mpv:rubberband - Enable high quality pitch correction via media-libs
 media-video/mpv:sdl - Enable media-libs/libsdl2 based video and audio outputs (Note: these outputs exist for compatibility reasons only, avoid if possible)
 media-video/mpv:uchardet - Enable subtitles charset discovery via dev-libs/uchardet
 media-video/mpv:vf-dlopen - Install additional video filters to be used with -vf dlopen
+net-im/pidgin:gadu - Enable Gadu Gadu protocol support
+net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
+net-im/pidgin:gstreamer - Enables voice and video sessions
+net-im/pidgin:gtk - Builds Pidgin, the GTK+ interface
+net-im/pidgin:meanwhile - Enable meanwhile support for Sametime protocol
+net-im/pidgin:mxit - Enable mxit protocol support
+net-im/pidgin:ncurses - Build finch, console interface
+net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
+net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
+net-im/pidgin:silc - Enable SILC protocol support
+net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
+net-im/pidgin:zephyr - Enable Zephyr protocol support
 net-im/psi:enchant - Use enchant spell engine instead of aspell
 net-im/psi:extras - Enables extra non official patches
 net-im/psi:iconsets - Install additional iconsets, some of them has not clear licensing
