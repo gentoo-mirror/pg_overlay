@@ -20,7 +20,7 @@ COMMON_DEPEND="gnome-base/libglade:2.0
 	x11-libs/gtk+:3
 	>=x11-misc/xneur-$(get_version_component_range 1-2)
 	gconf? ( gnome-base/gconf )
-	x11-misc/xneur[gtk3]"
+	!x11-misc/xneur[gtk3]"
 RDEPEND="${COMMON_DEPEND}
 	nls? ( virtual/libintl )"
 DEPEND="${COMMON_DEPEND}
