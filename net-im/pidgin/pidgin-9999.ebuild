@@ -35,7 +35,7 @@ RDEPEND="
 		dbus? ( ${PYTHON_DEPS} )
 		python? ( ${PYTHON_DEPS} ) )
 	gtk? (
-		x11-libs/gtk+:3[aqua=]
+		x11-libs/gtk+:3
 		x11-libs/libSM
 		xscreensaver? ( x11-libs/libXScrnSaver )
 		eds? ( >=gnome-extra/evolution-data-server-3.6:= )
@@ -183,9 +183,6 @@ src_configure() {
 		$(use gtk && use_enable xscreensaver screensaver) \
 		$(use gtk && use_enable prediction cap) \
 		$(use gtk && use_enable eds gevolution) \
-		$(use_enable perl) \
-		$(use_enable tk) \
-		$(use_enable tcl) \
 		$(use_enable debug) \
 		$(use_enable dbus) \
 		$(use_enable meanwhile) \
