@@ -19,7 +19,7 @@ COMMON_DEPEND="gnome-base/libglade:2.0
 	>=sys-devel/gettext-0.16.1
 	x11-libs/gtk+:3
 	>=x11-misc/xneur-$(get_version_component_range 1-2)
-	gconf? ( gnome-base/gconf:3 )
+	gconf? ( gnome-base/gconf )
 	!x11-misc/xneur[gtk3]"
 RDEPEND="${COMMON_DEPEND}
 	nls? ( virtual/libintl )"
@@ -38,7 +38,9 @@ src_prepare() {
 src_configure() {
 	econf \
 		$(use_enable nls) \
-		$(use_with gconf)
+		$(use_with gconf) \
+		--without-appindicator \
+		--with-x
 }
 
 src_install() {
