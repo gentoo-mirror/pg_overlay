@@ -19,7 +19,7 @@ COMMON_DEPEND=">=dev-libs/libpcre-5.0
 	sys-libs/zlib
 	>=x11-libs/libX11-1.1
 	x11-libs/libXtst
-	gstreamer? ( >=media-libs/gstreamer:1.0 )
+	gstreamer? ( media-libs/gstreamer:1.0 )
 	!gstreamer? (
 		openal? ( >=media-libs/freealut-1.0.1 )
 		!openal? (
