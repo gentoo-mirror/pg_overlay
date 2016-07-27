@@ -190,6 +190,7 @@ src_configure() {
 		$(use_enable gstreamer gstreamer-video) \
 		$(use_enable gstreamer farstream) \
 		$(use_enable gstreamer vv) \
+		$(use_enable gnome-keyring) \
 		$(use_enable sasl cyrus-sasl ) \
 		$(use_enable zeroconf avahi) \
 		$(use_enable idn) \
@@ -220,7 +221,7 @@ src_install() {
 			popd >/dev/null
 		done
 	fi
-	use perl && perl_delete_localpod
+	perl_delete_localpod
 
 	if use python || use dbus ; then
 		python_fix_shebang "${D}"
