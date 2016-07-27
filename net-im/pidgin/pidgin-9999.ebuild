@@ -73,7 +73,6 @@ DEPEND="$RDEPEND
 	gtk? ( x11-proto/scrnsaverproto
 		${NLS_DEPEND} )
 	dbus? ( ${PYTHON_DEPS} )
-	doc? ( app-doc/doxygen )
 	!gtk? ( nls? ( ${NLS_DEPEND} ) )"
 
 DOCS="AUTHORS HACKING NEWS README ChangeLog"
