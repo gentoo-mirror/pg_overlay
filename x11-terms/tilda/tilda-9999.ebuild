@@ -15,8 +15,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-RDEPEND=">=x11-libs/vte-0.40.2:2.91
-	>=dev-libs/glib-2.8.4:2
+RDEPEND=">=dev-libs/glib-2.8.4:2
 	dev-libs/confuse
 	>=x11-libs/gtk+-3.0"
 	
@@ -29,7 +28,8 @@ src_prepare() {
 
 src_configure() {
 	econf \
-	--enable-vte-2.91
+	--disable-vte \
+	--disable-vte-2.91
 }
 
 src_install() {
