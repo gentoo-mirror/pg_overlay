@@ -18,7 +18,7 @@ KEYWORDS=""
 IUSE="dbus doc gnome +libnotify"
 
 RDEPEND="
-	dev-libs/keybinder:3
+	dev-libs/keybinder:2
 	x11-libs/vte:2.90
 	dev-python/psutil[${PYTHON_USEDEP}]
 	dbus? ( sys-apps/dbus )
@@ -32,10 +32,6 @@ RDEPEND="
 DEPEND="dev-util/intltool"
 
 python_prepare_all() {
-	local PATCHES=(
-		"${FILESDIR}"/0.90-without-icon-cache.patch
-		"${FILESDIR}"/0.94-session.patch
-	)
 
 	local i p
 	if [[ -n "${LINGUAS+x}" ]] ; then
