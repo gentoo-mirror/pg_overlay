@@ -28,7 +28,8 @@ src_prepare() {
 
 src_configure() {
 	econf \
-	--disable-vte
+	--disable-vte \
+	--disable-vte-2.91
 }
 
 src_install() {
