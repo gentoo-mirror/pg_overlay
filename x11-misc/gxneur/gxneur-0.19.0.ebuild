@@ -38,9 +38,7 @@ src_prepare() {
 src_configure() {
 	econf \
 		$(use_enable nls) \
-		$(use_with gconf) \
-		--without-appindicator \
-		--with-x
+		$(use_with gconf)
 }
 
 src_install() {
