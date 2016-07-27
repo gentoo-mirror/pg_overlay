@@ -87,8 +87,7 @@ src_configure() {
 		$(use_with spell) \
 		$(use_with xosd) \
 		$(use_with libnotify) \
-		$(use_with keylogger) \
-		--with-x
+		$(use_with keylogger)
 }
 
 src_install() {
