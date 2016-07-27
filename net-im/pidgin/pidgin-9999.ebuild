@@ -38,7 +38,6 @@ RDEPEND="
 		x11-libs/gtk+:3[aqua=]
 		x11-libs/libSM
 		xscreensaver? ( x11-libs/libXScrnSaver )
-		spell? ( >=app-text/gtkspell-2.0.2:2 )
 		eds? ( >=gnome-extra/evolution-data-server-3.6:= )
 		prediction? ( >=dev-db/sqlite-3.3:3 )
 	)
@@ -80,7 +79,6 @@ DEPEND="$RDEPEND
 DOCS="AUTHORS HACKING NEWS README ChangeLog"
 
 REQUIRED_USE="dbus? ( ${PYTHON_REQUIRED_USE} )
-		networkmanager? ( dbus )
 		python? ( ${PYTHON_REQUIRED_USE} )"
 
 # Enable Default protocols
@@ -186,7 +184,6 @@ src_configure() {
 		$(use gtk && use_enable xscreensaver screensaver) \
 		$(use gtk && use_enable prediction cap) \
 		$(use gtk && use_enable eds gevolution) \
-		$(use gtk && use_enable spell gtkspell) \
 		$(use_enable perl) \
 		$(use_enable tk) \
 		$(use_enable tcl) \
