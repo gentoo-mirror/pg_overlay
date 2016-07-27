@@ -34,8 +34,7 @@ COMMON_DEPEND=">=dev-libs/libpcre-5.0
 RDEPEND="${COMMON_DEPEND}
 	gstreamer? ( media-libs/gst-plugins-good )
 	nls? ( virtual/libintl )
-	"
-	#gtk3? ( !x11-misc/gxneur )
+	gtk3? ( !x11-misc/gxneur )"
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )"
