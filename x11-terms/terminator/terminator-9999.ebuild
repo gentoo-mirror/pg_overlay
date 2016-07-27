@@ -19,7 +19,7 @@ IUSE="dbus doc gnome +libnotify"
 
 RDEPEND="
 	dev-libs/keybinder:3
-	x11-libs/vte:2.91
+	x11-libs/vte:2.90
 	dev-python/psutil[${PYTHON_USEDEP}]
 	dbus? ( sys-apps/dbus )
 	gnome? (
