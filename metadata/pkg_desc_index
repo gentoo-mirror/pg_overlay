@@ -60,6 +60,6 @@ x11-libs/cairo 1.14.6-r20150311: A vector graphics library with cross-device out
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/lightdm 1.18.2: A lightweight display manager
 x11-terms/guake 9999: Drop-down terminal for GTK+ desktops
-x11-terms/terminator 0.98: Multiple GNOME terminals in one window
+x11-terms/roxterm 3.3.2: A terminal emulator designed to integrate with the ROX environment
 x11-terms/tilda 9999: A drop down terminal, similar to the consoles found in first person shooters
 x11-themes/vertex-theme 9999: Vertex is a theme for GTK 3, GTK 2, Gnome-Shell, Cinnamon and xfce4
