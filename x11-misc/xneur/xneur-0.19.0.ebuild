@@ -45,8 +45,8 @@ src_prepare() {
 	rm -f m4/{lt~obsolete,ltoptions,ltsugar,ltversion,libtool}.m4 \
 		ltmain.sh aclocal.m4 || die
 
-	sed -i -e "s/-Werror -g0//" configure.in || die
-	sed -i -e 's/@LDFLAGS@ //' xnconfig.pc.in || die
+	sed -i -e "s/-Werror -g0//" configure.ac || die
+	sed -i -e 's/@LDFLAGS@ //' xnconfig.pc.ac || die
 	eautoreconf
 }
 
