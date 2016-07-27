@@ -57,7 +57,7 @@ RDEPEND="
 		dev-libs/nss
 	)
 	meanwhile? ( net-libs/meanwhile )
-	plugins ( dev-libs/gplugin )
+	plugins? ( dev-libs/gplugin )
 	silc? ( >=net-im/silc-toolkit-1.0.1 )
 	sasl? ( dev-libs/cyrus-sasl:2 )
 	idn? ( net-dns/libidn )
