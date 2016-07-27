@@ -13,7 +13,7 @@ SRC_URI="https://launchpad.net/~andrew-crew-kuznetsov/+archive/${PN}-stable/+fil
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="aplay debug gstreamer gtk +gtk3 keylogger +libnotify +nls openal xosd +spell"
+IUSE="aplay debug gstreamer +gtk +gtk3 keylogger +libnotify +nls openal xosd +spell"
 
 COMMON_DEPEND=">=dev-libs/libpcre-5.0
 	sys-libs/zlib
