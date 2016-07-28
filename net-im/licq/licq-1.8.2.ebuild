@@ -4,11 +4,11 @@
 
 EAPI=5
 
-inherit cmake-utils eutils flag-o-matic
+inherit cmake-utils eutils flag-o-matic git-r3
 
 DESCRIPTION="ICQ Client with v8 support"
 HOMEPAGE="http://www.licq.org/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+EGIT_REPO_URI="git://github.com/licq-im/licq.git"
 
 LICENSE="GPL-2"
 SLOT="2"
