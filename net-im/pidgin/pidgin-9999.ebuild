@@ -16,7 +16,7 @@ SRC_URI="https://dev.gentoo.org/~polynomial-c/${PN}-eds-3.6.patch.bz2"
 
 LICENSE="GPL-2"
 SLOT="0/3" # libpurple version
-KEYWORDS="alpha amd64 arm hppa ia64 ppc ppc64 sparc x86 ~x86-freebsd ~amd64-linux ~x86-linux ~x86-macos"
+KEYWORDS=""
 IUSE="dbus debug eds gadu gnutls +gstreamer +gtk gnome-keyring idn meanwhile mxit pie +plugins"
 IUSE+=" nls silc sasl ncurses"
 IUSE+=" groupwise prediction python +xscreensaver zephyr zeroconf" # mono"
@@ -37,6 +37,7 @@ RDEPEND="
 	gtk? (
 		x11-libs/gtk+:3
 		x11-libs/libSM
+		net-libs/webkit-gtk:3
 		xscreensaver? ( x11-libs/libXScrnSaver )
 		eds? ( >=gnome-extra/evolution-data-server-3.6:= )
 		prediction? ( >=dev-db/sqlite-3.3:3 )
