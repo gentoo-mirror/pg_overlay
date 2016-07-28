@@ -35,6 +35,8 @@ media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/pidgin 9999: GTK Instant Messenger client
+net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
+net-im/psimedia 9999: Psi plugin for voice/video calls
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/rb_libtorrent 1.1.0: C++ BitTorrent implementation focusing on efficiency and scalability
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
@@ -45,6 +47,7 @@ net-p2p/rtorrent-ps 9999: Extended rTorrent distribution with UI enhancements, c
 net-p2p/transmission 2.92-r14736: A Fast, Easy and Free BitTorrent client
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/roccat-tools 5.2.0: Utility for advanced configuration of Roccat devices
+sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer 2.4: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
