@@ -34,6 +34,7 @@ media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
+net-im/licq 9999: ICQ Client with v8 support
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
