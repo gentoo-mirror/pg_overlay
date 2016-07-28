@@ -17,7 +17,7 @@ IUSE="debug doc linguas_he nls socks5 ssl xosd aosd xmpp qt4 msn"
 
 RDEPEND=">=app-crypt/gpgme-1
 	xmpp? ( net-libs/gloox )
-	qt5? ( dev-qt/qtgui:5)
+	qt5? ( dev-qt/qtgui:5 )
 	socks5? ( net-proxy/dante )
 	ssl? ( >=dev-libs/openssl-0.9.5a:0= )
 	xosd? ( x11-libs/xosd )
