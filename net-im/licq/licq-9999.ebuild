@@ -40,7 +40,7 @@ src_prepare() {
 		plugins+=" ${x}\/CMakeLists.txt"
 	done
 
-	sed -i -e "s/file(GLOB cmake_plugins.*$/set(cmake_plugins ${plugins})/" plugins/CMakeLists.txt
+	#sed -i -e "s/file(GLOB cmake_plugins.*$/set(cmake_plugins ${plugins})/" plugins/CMakeLists.txt
 }
 
 pkg_setup() {
