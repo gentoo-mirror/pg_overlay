@@ -13,7 +13,7 @@ SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="2"
 KEYWORDS="alpha amd64 ia64 ppc sparc x86"
-IUSE="debug doc linguas_he nls socks5 ssl xosd aosd xmpp qt4 msn"
+IUSE="debug doc linguas_he nls socks5 ssl xosd aosd xmpp qt5 msn"
 
 RDEPEND=">=app-crypt/gpgme-1
 	xmpp? ( net-libs/gloox )
