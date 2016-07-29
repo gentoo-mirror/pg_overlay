@@ -16,6 +16,7 @@ KEYWORDS=""
 IUSE=""
 
 src_prepare() {
+	epatch "${FILESDIR}"/f2fs-tools-1.7.0-lisselinux.patch
 	eautoreconf
 }
 

@@ -1,0 +1,10 @@
+--- configure.ac	2016-07-29 11:03:00.108058286 +0700
++++ configure.ac_new	2016-07-29 11:23:11.507832548 +0700
+@@ -54,7 +54,6 @@
+ 
+ # Checks for libraries.
+ PKG_CHECK_MODULES([libuuid], [uuid])
+-PKG_CHECK_MODULES([libselinux], [libselinux])
+ 
+ # Checks for header files.
+ AC_CHECK_HEADERS([linux/fs.h fcntl.h mntent.h stdlib.h string.h \
