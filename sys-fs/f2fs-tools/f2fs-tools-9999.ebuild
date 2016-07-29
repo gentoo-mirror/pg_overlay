@@ -15,8 +15,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
+RDEPEND="sys-libs/libselinux"
+DEPEND="${RDEPEND}"
+
 src_prepare() {
-	epatch "${FILESDIR}"/f2fs-tools-1.7.0-lisselinux.patch
 	eautoreconf
 }
 
