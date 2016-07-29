@@ -16,7 +16,6 @@ KEYWORDS=""
 IUSE=""
 
 src_prepare() {
-	epatch "${FILESDIR}"/${PN}-1.6.1-sysmacros.patch #580338
 	eautoreconf
 }
 
