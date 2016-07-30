@@ -8,7 +8,7 @@ PLOCALES="cs de el en_GB es et hr hu it ja nl pl pt ru sl sv th uk zh_CN"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
-inherit distutils-r1 eutils l10n git-r3
+inherit distutils-r1 l10n git-r3
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="http://bleachbit.org/"
@@ -17,15 +17,12 @@ EGIT_REPO_URI="https://github.com/andrewgee/${PN}.git"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="+gtk nls"
+IUSE=""
 
-RDEPEND="
-	dev-python/notify-python[$PYTHON_USEDEP]
-	gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"
+RDEPEND="sci-geosciences/osm-gps-map"
 
 DEPEND="${RDEPEND}
-	dev-python/python-distutils-extra
-	nls? ( sys-devel/gettext )"
+	dev-python/python-distutils-extra"
 
 DOCS=( README )
 
@@ -38,13 +35,4 @@ python_prepare_all() {
 	l10n_for_each_disabled_locale_do rem_locale
 
 	distutils-r1_python_prepare_all
-}
-
-python_install_all() {
-	distutils-r1_python_install_all
-
-	python_replicate_script "${D}/bin/${PN}"
-
-	doicon ${PN}.png
-	domenu ${PN}.desktop
 }
