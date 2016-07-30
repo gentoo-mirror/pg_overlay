@@ -42,7 +42,6 @@ python_prepare_all() {
 
 python_install_all() {
 	distutils-r1_python_install_all
-	use nls && emake -C po DESTDIR="${D}" install
 
 	newbin ${PN}.py ${PN}
 	python_replicate_script "${D}/usr/bin/${PN}"
