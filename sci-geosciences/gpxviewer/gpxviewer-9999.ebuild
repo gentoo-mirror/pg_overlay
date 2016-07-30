@@ -40,10 +40,6 @@ python_prepare_all() {
 	distutils-r1_python_prepare_all
 }
 
-python_compile_all() {
-	use nls && emake -C po
-}
-
 python_install_all() {
 	distutils-r1_python_install_all
 	use nls && emake -C po DESTDIR="${D}" install
