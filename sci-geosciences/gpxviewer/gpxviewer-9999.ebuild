@@ -22,8 +22,7 @@ IUSE=""
 RDEPEND="sci-geosciences/osm-gps-map"
 
 DEPEND="${RDEPEND}
-	dev-python/python-distutils-extra
-	nls? ( sys-devel/gettext )"
+	dev-python/python-distutils-extra"
 
 DOCS=( README )
 
