@@ -4,7 +4,7 @@
 
 EAPI=6
 
-PLOCALES="cs de el en_GB es et hr hu it ja nl pl pt ru sl sv th uk zh_CN"
+PLOCALES="cs de el en_GB es et fr hr hu it ja nl pl pt ru sl sv th uk zh_CN"
 PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="sqlite"
 
