@@ -4,9 +4,8 @@
 
 EAPI=6
 
-PLOCALES="cs de el en_GB es et hr hu it ja nl pl pt ru sl sv th uk zh_CN"
+PLOCALES="cs de el en_GB es et fr hr hu it ja nl pl pt ru sl sv th uk zh_CN"
 PYTHON_COMPAT=( python2_7 )
-PYTHON_REQ_USE="sqlite"
 
 inherit distutils-r1 l10n git-r3
 
@@ -19,10 +18,10 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-RDEPEND="sci-geosciences/osm-gps-map"
+RDEPEND="sci-geosciences/osm-gps-map[python]"
 
 DEPEND="${RDEPEND}
-	dev-python/python-distutils-extra"
+	dev-python/python-distutils-extra[$PYTHON_USEDEP]"
 
 DOCS=( README )
 
