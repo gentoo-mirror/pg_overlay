@@ -27,7 +27,7 @@ DEPEND="${RDEPEND}
 	dev-python/python-distutils-extra
 	nls? ( sys-devel/gettext )"
 
-DOCS=( README.md )
+DOCS=( README )
 
 python_prepare_all() {
 	rem_locale() {
