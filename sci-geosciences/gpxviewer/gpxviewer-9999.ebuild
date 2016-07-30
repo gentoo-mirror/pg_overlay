@@ -17,11 +17,9 @@ EGIT_REPO_URI="https://github.com/andrewgee/${PN}.git"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="+gtk nls"
+IUSE=""
 
-RDEPEND="
-	dev-python/notify-python[$PYTHON_USEDEP]
-	gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"
+RDEPEND="sci-geosciences/osm-gps-map"
 
 DEPEND="${RDEPEND}
 	dev-python/python-distutils-extra
