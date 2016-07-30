@@ -19,7 +19,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-RDEPEND="sci-geosciences/osm-gps-map"
+RDEPEND="sci-geosciences/osm-gps-map [python]"
 
 DEPEND="${RDEPEND}
 	dev-python/python-distutils-extra"
