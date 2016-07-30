@@ -43,7 +43,6 @@ python_prepare_all() {
 python_install_all() {
 	distutils-r1_python_install_all
 
-	newbin ${PN} ${PN}
 	python_replicate_script "${D}/usr/bin/${PN}"
 
 	doicon ${PN}.png
