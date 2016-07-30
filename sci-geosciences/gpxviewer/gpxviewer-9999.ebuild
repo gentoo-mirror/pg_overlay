@@ -43,7 +43,7 @@ python_prepare_all() {
 python_install_all() {
 	distutils-r1_python_install_all
 
-	python_replicate_script "${D}/usr/bin/${PN}"
+	#python_replicate_script "${D}/usr/bin/${PN}"
 
 	doicon ${PN}.png
 	domenu ${PN}.desktop
