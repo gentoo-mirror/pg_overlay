@@ -32,8 +32,6 @@ COMMON_DEPEND=">=dev-libs/libpcre-5.0
 	spell? ( app-text/enchant )
 	xosd? ( x11-libs/xosd )"
 RDEPEND="${COMMON_DEPEND}
-	gstreamer? ( media-libs/gst-plugins-good
-		media-plugins/gst-plugins-alsa )
 	nls? ( virtual/libintl )
 	gtk3? ( !x11-misc/gxneur )"
 DEPEND="${COMMON_DEPEND}
