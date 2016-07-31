@@ -1,15 +1,13 @@
-What you can find in my repository:
+Welcome, wanderer.
 
-1 - Firefox with PGO, OpenSUSE-KDE & Privacy patches by Wilco
+That what you can find here:
+
+1 - Firefox with PGO, OpenSUSE-KDE patches
 
 2 - Chromium with Inox, Iridium, Ungoogled & VA-API patches
 
-3 - Freetype & Fontconfig with Infinality Ultimate patches by Bohoomil
+3 - Cinnamon without NetworkManager ebuilds
 
-4 - Wine with Staging & D3D9 patches
+4 - Modified ebuilds for various packages written with intention to be live & minimal
 
-5 - Cinnamon without NetworkManager ebuilds
-
-6 - Modified ebuilds for various packages written with intention to be live & minimal
-
-7 - aMule live version
+5 - aMule live version
