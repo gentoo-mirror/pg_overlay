@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/AndrewCrewKuznetsov/xneur-devel.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="aplay debug +gstreamer gtk gtk3 keylogger +libnotify nls openal xosd spell"
 
 COMMON_DEPEND=">=dev-libs/libpcre-5.0
