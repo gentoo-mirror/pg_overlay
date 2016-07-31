@@ -20,7 +20,7 @@ COMMON_DEPEND=">=sys-devel/gettext-0.16.1
 	!x11-misc/xneur[gtk3]
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
-	dev-qt/qtdbus:5
+	dev-qt/qtdbus:5"
 RDEPEND="${COMMON_DEPEND}
 	nls? ( virtual/libintl )"
 DEPEND="${COMMON_DEPEND}
