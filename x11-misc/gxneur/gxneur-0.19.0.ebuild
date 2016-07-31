@@ -2,23 +2,23 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=5
+EAPI=4
 
-inherit autotools eutils git-r3 gnome2-utils versionator
+inherit autotools eutils gnome2-utils versionator
 
 DESCRIPTION="GTK+ based GUI for xneur"
 HOMEPAGE="http://www.xneur.ru/"
-EGIT_REPO_URI="git://github.com/AndrewCrewKuznetsov/xneur-devel.git"
+SRC_URI="https://launchpad.net/~andrew-crew-kuznetsov/+archive/xneur-stable/+files/gxneur_${PV}.orig.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="gconf nls"
 
 COMMON_DEPEND="gnome-base/libglade:2.0
 	>=sys-devel/gettext-0.16.1
 	>=x11-libs/gtk+-2.18:2
-	>=x11-misc/xneur-$(get_version_component_range 1-2)[gtk]
+	x11-misc/xneur[gtk]
 	gconf? ( gnome-base/gconf:2 )
 	!x11-misc/xneur[gtk3]"
 RDEPEND="${COMMON_DEPEND}
@@ -26,8 +26,6 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )"
-
-S=${WORKDIR}/${P}/${PN}
 
 src_prepare() {
 	rm -f m4/{lt~obsolete,ltoptions,ltsugar,ltversion,libtool}.m4 \
