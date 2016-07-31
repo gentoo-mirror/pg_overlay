@@ -53,7 +53,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	if ! use qt5 ; then
-		epatch "${FILESDIR}/${PN}-36a761108-qtsingleapplication-unbundle.patch"
+		epatch "${FILESDIR}/${PN}-qt4-qtsingleapplication-unbundle.patch"
 	else
 		epatch "${FILESDIR}/${PN}-qtsingleapplication-unbundle-qt5.patch"
 	fi
