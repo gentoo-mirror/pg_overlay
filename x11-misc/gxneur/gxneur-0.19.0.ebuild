@@ -13,7 +13,7 @@ SRC_URI="https://launchpad.net/~andrew-crew-kuznetsov/+archive/xneur-stable/+fil
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+gconf nls"
+IUSE="gconf nls"
 
 COMMON_DEPEND="gnome-base/libglade:2.0
 	>=sys-devel/gettext-0.16.1
