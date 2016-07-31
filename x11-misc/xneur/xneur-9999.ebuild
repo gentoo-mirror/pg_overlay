@@ -8,7 +8,7 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="In-place conversion of text typed in with a wrong keyboard layout (Punto Switcher replacement)"
 HOMEPAGE="http://www.xneur.ru/"
-EGIT_SRC_URI="git://github.com/AndrewCrewKuznetsov/xneur-devel.git"
+EGIT_REPO_URI="git://github.com/AndrewCrewKuznetsov/xneur-devel.git"
 
 LICENSE="GPL-2"
 SLOT="0"
