@@ -40,7 +40,7 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )"
 
-S=${WORKDIR}/${PN}-devel/${PN}
+S=${WORKDIR}/${P}/${PN}
 
 src_prepare() {
 	# Fixes error/warning: no newline at end of file
