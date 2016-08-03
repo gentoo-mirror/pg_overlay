@@ -7,7 +7,7 @@ References:
 diff --git a/old-configure.in b/old-configure.in
 --- a/old-configure.in
 +++ b/old-configure.in
-@@ -8187,16 +8187,31 @@ if test "$MOZ_ENABLE_SKIA"; then
+@@ -6495,16 +6495,31 @@ if test "$MOZ_ENABLE_SKIA"; then
      AC_DEFINE(USE_SKIA_GPU)
      AC_SUBST(MOZ_ENABLE_SKIA_GPU)
    fi
@@ -42,26 +42,26 @@ diff --git a/old-configure.in b/old-configure.in
 diff --git a/security/manager/ssl/moz.build b/security/manager/ssl/moz.build
 --- a/security/manager/ssl/moz.build
 +++ b/security/manager/ssl/moz.build
-@@ -160,16 +160,19 @@ UNIFIED_SOURCES += [
- FINAL_LIBRARY = 'xul'
+@@ -159,16 +159,19 @@ if CONFIG['MOZ_XUL']:
+     ]
  
- LOCAL_INCLUDES += [
-     '/dom/base',
-     '/security/certverifier',
-     '/security/pkix/include',
+ UNIFIED_SOURCES += [
+     'md4.c',
  ]
+ 
+ FINAL_LIBRARY = 'xul'
  
 +CXXFLAGS += sorted(CONFIG['NSSHELPER_CFLAGS'])
 +OS_LIBS += sorted(CONFIG['NSSHELPER_LIBS'])
 +
  LOCAL_INCLUDES += [
-     '!/dist/public/nss',
+     '/dom/base',
+     '/dom/crypto',
+     '/security/certverifier',
+     '/security/pkix/include',
  ]
  
- if CONFIG['NSS_DISABLE_DBM']:
-     DEFINES['NSS_DISABLE_DBM'] = '1'
- 
- DEFINES['SSL_DISABLE_DEPRECATED_CIPHER_SUITE_NAMES'] = 'True'
+ LOCAL_INCLUDES += [
 diff --git a/security/manager/ssl/nsNSSComponent.cpp b/security/manager/ssl/nsNSSComponent.cpp
 --- a/security/manager/ssl/nsNSSComponent.cpp
 +++ b/security/manager/ssl/nsNSSComponent.cpp
@@ -83,11 +83,11 @@ diff --git a/security/manager/ssl/nsNSSComponent.cpp b/security/manager/ssl/nsNS
  
  #include "ExtendedValidation.h"
  #include "NSSCertDBTrustDomain.h"
+ #include "ScopedNSSTypes.h"
  #include "SharedSSLState.h"
- #include "mozilla/Preferences.h"
- #include "mozilla/PublicSSL.h"
- #include "mozilla/Services.h"
-@@ -1017,17 +1024,31 @@ nsNSSComponent::InitializeNSS()
+ #include "cert.h"
+ #include "certdb.h"
+@@ -1491,17 +1498,31 @@ nsNSSComponent::InitializeNSS()
        return rv;
      }
    }
@@ -133,11 +133,11 @@ diff --git a/toolkit/library/moz.build b/toolkit/library/moz.build
  
 +OS_LIBS += sorted(CONFIG['NSSHELPER_LIBS'])
 +
- if CONFIG['MOZ_NATIVE_JPEG']:
+ if CONFIG['MOZ_SYSTEM_JPEG']:
      OS_LIBS += CONFIG['MOZ_JPEG_LIBS']
  
- if CONFIG['MOZ_NATIVE_PNG']:
+ if CONFIG['MOZ_SYSTEM_PNG']:
      OS_LIBS += CONFIG['MOZ_PNG_LIBS']
  
- if CONFIG['MOZ_NATIVE_HUNSPELL']:
+ if CONFIG['MOZ_SYSTEM_HUNSPELL']:
      OS_LIBS += CONFIG['MOZ_HUNSPELL_LIBS']

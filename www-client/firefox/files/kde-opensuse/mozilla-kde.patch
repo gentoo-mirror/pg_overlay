@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  f2726ebfae7cdded8e7ca6030829b0a3fae4e438
+# Parent  972c67cdd5dd4463abbee60036b686d4cb78e616
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #include "prefread.h"
  #include "prefapi_private_data.h"
  
-@@ -1138,16 +1139,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
+@@ -1145,16 +1146,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
  
  static nsresult pref_LoadPrefsInDirList(const char *listId)
  {
@@ -62,7 +62,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
      return NS_OK;
  
    bool hasMore;
-@@ -1163,17 +1182,17 @@ static nsresult pref_LoadPrefsInDirList(
+@@ -1170,17 +1189,17 @@ static nsresult pref_LoadPrefsInDirList(
  
      nsAutoCString leaf;
      path->GetNativeLeafName(leaf);
@@ -81,7 +81,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  {
    nsZipItemPtr<char> manifest(jarReader, name, true);
    NS_ENSURE_TRUE(manifest.Buffer(), NS_ERROR_NOT_AVAILABLE);
-@@ -1267,24 +1286,36 @@ static nsresult pref_InitInitialObjects(
+@@ -1274,24 +1293,36 @@ static nsresult pref_InitInitialObjects(
    /* these pref file names should not be used: we process them after all other application pref files for backwards compatibility */
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -187,7 +187,7 @@ diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpac
 diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloads/moz.build
 --- a/toolkit/components/downloads/moz.build
 +++ b/toolkit/components/downloads/moz.build
-@@ -64,15 +64,16 @@ if not CONFIG['MOZ_SUITE']:
+@@ -60,15 +60,16 @@ if not CONFIG['MOZ_SUITE']:
          'nsDownloadManagerUI.js',
          'nsDownloadManagerUI.manifest',
      ]
@@ -337,7 +337,7 @@ new file mode 100644
 +
 +      <xul:hbox class="dialog-button-box" anonid="buttons"
 +                xbl:inherits="pack=buttonpack,align=buttonalign,dir=buttondir,orient=buttonorient"
-+#ifdef XP_UNIX
++#ifdef XP_UNIX_GNOME
 +                >
 +        <xul:button dlgtype="disclosure" class="dialog-button" hidden="true"/>
 +        <xul:button dlgtype="help" class="dialog-button" hidden="true"/>
@@ -2296,7 +2296,7 @@ diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
          'nsNativeAppSupportQt.cpp',
          'nsQAppInstance.cpp',
      ]
- elif CONFIG['MOZ_ENABLE_GTK']:
+ elif 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
 +    EXPORTS += ['nsKDEUtils.h']
      UNIFIED_SOURCES += [
 +        'nsKDEUtils.cpp',
@@ -2715,11 +2715,11 @@ diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
          osdir + '/nsOSHelperAppService.cpp',
      ]
  
- if CONFIG['MOZ_ENABLE_GTK']:
+ if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
      UNIFIED_SOURCES += [
 +        'unix/nsCommonRegistry.cpp',
          'unix/nsGNOMERegistry.cpp',
-+	'unix/nsKDERegistry.cpp',
++        'unix/nsKDERegistry.cpp',
          'unix/nsMIMEInfoUnix.cpp',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'android':
@@ -3164,7 +3164,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
-@@ -86,16 +86,17 @@ else:
+@@ -90,16 +90,17 @@ else:
  include('/ipc/chromium/chromium-config.mozbuild')
  
  FINAL_LIBRARY = 'xul'
@@ -3684,7 +3684,7 @@ diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
 +    '/toolkit/xre'
  ]
  
- if CONFIG['MOZ_WIDGET_GTK']:
+ if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
      CXXFLAGS += CONFIG['TK_CFLAGS']
 diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
 --- a/xpcom/io/nsLocalFileUnix.cpp
