@@ -21,6 +21,11 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 
+src_prepare() {
+	eapply "${FILSDIR}"/CMakeLists.patch
+	default
+}
+
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
