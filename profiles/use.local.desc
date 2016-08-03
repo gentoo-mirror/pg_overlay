@@ -3,6 +3,7 @@
 # * generated automatically using pmaint *
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
+app-emulation/playonlinux:winbind - Enables support for the winbind auth daemon
 app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
 app-text/qpdfview:synctex - Add support for searching TeX sources
 app-text/qstardict:stardict - build stardict plugin
