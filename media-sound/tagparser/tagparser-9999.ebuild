@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://github.com/Martchus/tagparser.git"
 LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~x86"
-IUSE="+doxygen"
+IUSE=""
 
 RDEPEND="
 	dev-util/cpp-utilities
@@ -23,8 +23,7 @@ DEPEND="${RDEPEND}"
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_find_package doxygen DOXYGEN)
-		-DWITH_DOXYGEN=ON
+		-DCMAKE_BUILD_TYPE=Release
 	)
 
 	cmake-utils_src_configure
