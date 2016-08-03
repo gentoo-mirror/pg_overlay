@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="
 	dev-qt/qtcore:5
-	dev-qt/qtqui:5
+	dev-qt/qtgui:5
 	dev-util/cpp-utilities
 "
 DEPEND="${RDEPEND}"
