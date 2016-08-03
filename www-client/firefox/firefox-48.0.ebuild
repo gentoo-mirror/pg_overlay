@@ -214,7 +214,6 @@ src_configure() {
 	mozconfig_annotate '' --with-google-api-keyfile="${S}/google-api-key"
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
-	mozconfig_annotate '' --disable-mailnews
 
 	# New features
 	mozconfig_annotate '' --with-pthreads
