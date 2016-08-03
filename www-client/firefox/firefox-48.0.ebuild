@@ -223,7 +223,6 @@ src_configure() {
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-telemetry-reporting
 	mozconfig_annotate '' --disable-auto-deps
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-update-channel
