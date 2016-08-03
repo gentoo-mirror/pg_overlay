@@ -250,7 +250,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-b2g-camera
 	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-mobile-optimize
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-websms-backend
