@@ -24,6 +24,7 @@ RDEPEND="
 	dev-qt/qtgui:5
 	dev-qt/qtscript:5
 	dev-qt/qtwebengine:5
+	media-sound/tagparser
 "
 DEPEND="${RDEPEND}"
 
