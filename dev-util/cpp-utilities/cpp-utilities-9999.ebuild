@@ -13,12 +13,19 @@ EGIT_REPO_URI="git://github.com/Martchus/cpp-utilities.git"
 LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
-
-REQUIRED_USE=""
+IUSE="+doxygen"
 
 RDEPEND="
+	doxygen? ( app-doc/doxygen )
 	dev-util/cmake
 	sys-devel/gcc
 "
 DEPEND="${RDEPEND}"
+
+src_configure() {
+	local mycmakeargs=(
+		$(cmake-utils_use_find_package doxygen DOXYGEN)
+	)
+
+	cmake-utils_src_configure
+}
