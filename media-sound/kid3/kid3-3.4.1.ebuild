@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=5
 
 KDE_LINGUAS="cs de es et fi fr it nl pl ru sr sr@ijekavian sr@ijekavianlatin
 sr@Latn tr zh_CN zh_TW"
 KDE_REQUIRED="optional"
 KDE_HANDBOOK="optional"
-inherit kde5 kde5-functions
+inherit cmake-utils
 
 DESCRIPTION="A simple tag editor for KDE"
 HOMEPAGE="http://kid3.sourceforge.net/"
@@ -54,12 +54,12 @@ PATCHES=( "${FILESDIR}/${PN}-3.3.2-libdir.patch" )
 src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_with acoustid CHROMAPRINT)
-		$(cmake-utils_use_with flac)
+		$(cmake-utils_use_with flac FLAC)
 		$(cmake-utils_use_with mp3 ID3LIB)
 		$(cmake-utils_use_with mp4 MP4V2)
-		$(cmake-utils_use_with phonon)
-		$(cmake-utils_use_with taglib)
-		$(cmake-utils_use_with vorbis)
+		$(cmake-utils_use_with phonon PHONON)
+		$(cmake-utils_use_with taglib TAGLIB)
+		$(cmake-utils_use_with vorbis VORBIS)
 		"-DWITH_QT5=ON"
 	)
 
@@ -69,5 +69,5 @@ src_configure() {
 		mycmakeargs+=("-DWITH_APPS=Qt;CLI")
 	fi
 
-	kde4-base_src_configure
+	cmake-utils_src_configure
 }
