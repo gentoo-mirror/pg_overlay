@@ -30,6 +30,7 @@ DEPEND="${RDEPEND}"
 
 src_configure() {
 	local mycmakeargs=(
+		-DJS_PROVIDER=qml
 		-DWEBVIEW_PROVIDER=webengine
 		-DCMAKE_BUILD_TYPE=Release
 	)
