@@ -15,7 +15,7 @@ HOMEPAGE="http://kid3.sourceforge.net/"
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz"
 
 LICENSE="GPL-2+"
-SLOT="4"
+SLOT="5"
 KEYWORDS="~amd64 ~x86"
 IUSE="acoustid flac kde mp3 mp4 +phonon +taglib vorbis"
 
