@@ -222,7 +222,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-system-hunspell
 
 	# Disable unwanted features from Cyberfox
-	mozconfig_annotate '' --disable-pay
 	mozconfig_annotate '' --disable-metro
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-services-healthreport
