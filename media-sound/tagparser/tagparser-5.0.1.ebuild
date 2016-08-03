@@ -4,15 +4,15 @@
 
 EAPI=6
 
-inherit cmake-utils git-r3
+inherit cmake-utils
 
 DESCRIPTION="C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags"
 HOMEPAGE="https://github.com/Martchus/tagparser"
-EGIT_REPO_URI="git://github.com/Martchus/tagparser.git"
+SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 RDEPEND="
