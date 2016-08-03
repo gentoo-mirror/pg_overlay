@@ -15,7 +15,7 @@ SLOT="5"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-REQUIRED_USE="flac? ( vorbis )"
+REQUIRED_USE=""
 
 RDEPEND="
 	dev-util/cmake
