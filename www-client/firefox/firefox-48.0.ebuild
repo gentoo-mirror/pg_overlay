@@ -25,8 +25,8 @@ PATCH="${PN}-48.0-patches-01"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 #MOZCONFIG_OPTIONAL_QT5=1 -- fails to build so leave it off until the code can be patched
-MOZCONFIG_OPTIONAL_GTK2ONLY=1
-MOZCONFIG_OPTIONAL_WIFI=1
+MOZCONFIG_OPTIONAL_GTK2ONLY=0
+MOZCONFIG_OPTIONAL_WIFI=0
 MOZCONFIG_OPTIONAL_JIT="enabled"
 
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.48 pax-utils fdo-mime autotools virtualx mozlinguas-v2
@@ -220,32 +220,17 @@ src_configure() {
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-skia
 	mozconfig_annotate '' --enable-system-hunspell
-	mozconfig_annotate '' --disable-cairo-gtk2
-	mozconfig_annotate '' --disable-toolkit-gtk2
-	mozconfig_annotate '' --disable-gtk2
 
 	# Disable unwanted features from Cyberfox
-	mozconfig_annotate '' --disable-pay
-	mozconfig_annotate '' --disable-metro
 	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-services-healthreport
-	mozconfig_annotate '' --disable-moz-services-healthreport
-	mozconfig_annotate '' --disable-moz_services_healthreport
-	mozconfig_annotate '' --disable-data-reporting
-	mozconfig_annotate '' --disable-telemetry-reporting
-	mozconfig_annotate '' --disable-auto-deps
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-update-channel
 	mozconfig_annotate '' --disable-update-packaging
-	mozconfig_annotate '' --enable-debugger-info-modules=no
-	mozconfig_annotate '' --disable-debugger-info-modules
-	mozconfig_annotate '' --disable-mochitest
-	mozconfig_annotate '' --disable-mochitests
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-elf-hack
 
-	# Privacy
+	# https://aur.archlinux.org/packages/firefox-esr-privacy/
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-url-classifier
@@ -254,11 +239,9 @@ src_configure() {
 	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-strip-libs
 
-	# KDE
+	# https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-gnomevfs
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
@@ -266,13 +249,10 @@ src_configure() {
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
 	mozconfig_annotate '' --disable-b2g-ril
-	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-mobile-optimize
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-websms-backend
-	mozconfig_annotate '' --disable-windows-mobile-components
 	mozconfig_annotate '' --disable-valgrind
 
 	# Disable EME
