@@ -22,7 +22,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	eapply "${FILSDIR}"/CMakeLists.patch
+	eapply "${FILESDIR}"/CMakeLists.patch
 	default
 }
 
