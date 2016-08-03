@@ -90,6 +90,8 @@ media-sound/deadbeef:vtx - Libayemy VTX ZX-Spectrum music player plugin
 media-sound/deadbeef:wavpack - WavPack plugin
 media-sound/deadbeef:wma - Windows media audio plugin
 media-sound/deadbeef:zip - vfs_zip plugin
+media-sound/kid3:acoustid - Enable support for acoustic fingerprinting plugin using (media-libs/chromaprint)
+media-sound/kid3:phonon - Enable sound support via media-libs/phonon or dev-qt/qtphonon
 media-sound/mpd:adplug - Enable the AdPlug decoder plugin
 media-sound/mpd:cdio - Use libcdio for ISO9660 parsing support
 media-sound/mpd:curl - Support for web stream listening
