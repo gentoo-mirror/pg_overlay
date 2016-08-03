@@ -239,7 +239,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-strip-libs
 
 	# KDE
 	mozconfig_annotate '' --disable-gconf
