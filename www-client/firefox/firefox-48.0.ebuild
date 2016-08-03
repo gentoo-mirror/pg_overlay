@@ -242,7 +242,6 @@ src_configure() {
 
 	# KDE
 	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-gnomevfs
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
