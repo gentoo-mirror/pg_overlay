@@ -53,7 +53,7 @@ PATCHES=( "${FILESDIR}/${PN}-3.3.2-libdir.patch" )
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_find_package acoustid LIBCHROMAPRINT)
+		$(cmake-utils_use_find_package acoustid libchromaprint)
 		$(cmake-utils_use_find_package flac FLAC)
 		$(cmake-utils_use_find_package mp3 ID3LIB)
 		$(cmake-utils_use_find_package mp4 MP4V2)
