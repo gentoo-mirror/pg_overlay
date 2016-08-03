@@ -36,7 +36,7 @@ media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 9999: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
-media-sound/tagparser 9999: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
+media-sound/tagparser 5.0.1 9999: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
