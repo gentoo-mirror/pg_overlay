@@ -10,7 +10,7 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 app-text/xreader 1.0.8: Simple document viewer for GNOME
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
-dev-util/cpp-utilities 3.4.1 9999: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gperf 3.0.4: A perfect hash function generator
 dev-util/gtk-update-icon-cache 3.20.6: GTK update icon cache
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -36,8 +36,8 @@ media-sound/mpd 0.19.17: The Music Player Daemon (mpd)
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
-media-sound/tageditor 1.4.0 9999: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
-media-sound/tagparser 5.0.1 9999: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
+media-sound/tageditor 1.4.0: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
+media-sound/tagparser 5.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
