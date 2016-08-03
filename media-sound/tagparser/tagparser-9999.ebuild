@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://github.com/Martchus/tagparser.git"
 LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~x86"
-IUSE="doxy"
+IUSE="doxygen"
 
 RDEPEND="
 	dev-util/cpp-utilities
