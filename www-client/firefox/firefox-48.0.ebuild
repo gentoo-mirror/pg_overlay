@@ -227,7 +227,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-update-channel
 	mozconfig_annotate '' --disable-update-packaging
 	mozconfig_annotate '' --enable-debugger-info-modules=no
-	mozconfig_annotate '' --disable-debugger-info-modules
 	mozconfig_annotate '' --disable-mochitest
 	mozconfig_annotate '' --disable-mochitests
 	mozconfig_annotate '' --disable-accessibility
