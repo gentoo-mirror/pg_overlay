@@ -15,8 +15,6 @@ SLOT="5"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-REQUIRED_USE=""
-
 RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
