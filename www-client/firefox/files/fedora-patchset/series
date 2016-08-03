@@ -1,13 +1,11 @@
-
 firefox-build-prbool.patch
 firefox-debug.patch
 firefox-enable-addons.patch
 firefox-gtk3-20.patch
-rhbz-1291190-appchooser-crash.patch
 mozilla-1170092.patch
-mozilla-1245076.patch
-mozilla-1245076-1.patch
-mozilla-1255590.patch
 mozilla-1196777.patch
 mozilla-1270046.patch
 mozilla-1245783.patch
+mozilla-256180.patch
+mozilla-890908-async-nego.patch
+mozilla-1272332.patch

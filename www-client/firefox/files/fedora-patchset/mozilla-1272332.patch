@@ -1,0 +1,54 @@
+diff -up firefox-48.0/modules/libpref/init/all.js.orig firefox-48.0/modules/libpref/init/all.js
+--- firefox-48.0/modules/libpref/init/all.js.orig	2016-07-25 22:22:05.000000000 +0200
++++ firefox-48.0/modules/libpref/init/all.js	2016-07-28 13:14:39.065888837 +0200
+@@ -4497,6 +4497,7 @@ pref("gfx.apitrace.enabled",false);
+ pref("gfx.content.use-native-pushlayer", true);
+ #ifdef MOZ_WIDGET_GTK
+ pref("gfx.xrender.enabled",false);
++pref("widget.allow-gtk-dark-theme", false);
+ #endif
+ #endif
+ 
+diff -up firefox-48.0/widget/gtk/nsLookAndFeel.cpp.orig firefox-48.0/widget/gtk/nsLookAndFeel.cpp
+--- firefox-48.0/widget/gtk/nsLookAndFeel.cpp.orig	2016-06-01 06:11:44.000000000 +0200
++++ firefox-48.0/widget/gtk/nsLookAndFeel.cpp	2016-07-28 13:58:35.645067880 +0200
+@@ -28,6 +28,7 @@
+ #include <dlfcn.h>
+ 
+ #include "mozilla/gfx/2D.h"
++#include "mozilla/Preferences.h"
+ 
+ #if MOZ_WIDGET_GTK != 2
+ #include <cairo-gobject.h>
+@@ -1097,16 +1098,22 @@ nsLookAndFeel::Init()
+     // with wrong color theme, see Bug 972382
+     GtkSettings *settings = gtk_settings_get_for_screen(gdk_screen_get_default());
+ 
+-    // Disable dark theme because it interacts poorly with widget styling in
+-    // web content (see bug 1216658).
+-    // To avoid triggering reload of theme settings unnecessarily, only set the
+-    // setting when necessary.
+-    const gchar* dark_setting = "gtk-application-prefer-dark-theme";
+-    gboolean dark;
+-    g_object_get(settings, dark_setting, &dark, nullptr);
+ 
+-    if (dark) {
+-        g_object_set(settings, dark_setting, FALSE, nullptr);
++    bool isContentProcess = XRE_IsContentProcess();
++    bool allowDarkTheme = mozilla::Preferences::GetBool("widget.allow-gtk-dark-theme", false);
++
++    if (isContentProcess || !allowDarkTheme) {
++        // Disable dark theme because it interacts poorly with widget styling in
++        // web content (see bug 1216658).
++        // To avoid triggering reload of theme settings unnecessarily, only set the
++        // setting when necessary.
++        const gchar* dark_setting = "gtk-application-prefer-dark-theme";
++        gboolean dark;
++        g_object_get(settings, dark_setting, &dark, nullptr);
++
++        if (dark) {
++            g_object_set(settings, dark_setting, FALSE, nullptr);
++        }
+     }
+ 
+     GtkWidgetPath *path = gtk_widget_path_new();

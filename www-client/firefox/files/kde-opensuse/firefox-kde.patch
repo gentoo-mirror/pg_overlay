@@ -1,11 +1,11 @@
 # HG changeset patch
-# Parent  4311c6bdf61ac317bc60b25cd89ff67662a75049
+# Parent  07e419c2bbc63c486d25fd8ce117abd10e9ebdba
 
 diff --git a/browser/base/content/browser-kde.xul b/browser/base/content/browser-kde.xul
 new file mode 100644
 --- /dev/null
 +++ b/browser/base/content/browser-kde.xul
-@@ -0,0 +1,1160 @@
+@@ -0,0 +1,1174 @@
 +#filter substitution
 +<?xml version="1.0"?>
 +# -*- Mode: HTML -*-
@@ -148,7 +148,12 @@ new file mode 100644
 +    <panel type="autocomplete" id="PopupSearchAutoComplete" noautofocus="true" hidden="true"/>
 +
 +    <!-- for url bar autocomplete -->
-+    <panel type="autocomplete-richlistbox" id="PopupAutoCompleteRichResult" noautofocus="true" hidden="true">
++    <panel type="autocomplete-richlistbox"
++           id="PopupAutoCompleteRichResult"
++           noautofocus="true"
++           hidden="true"
++           flip="none"
++           level="parent">
 +#ifdef NIGHTLY_BUILD
 +      <hbox id="urlbar-search-footer" flex="1" align="stretch" pack="end">
 +        <button id="urlbar-search-settings" label="&changeSearchSettings.button;"
@@ -177,7 +182,6 @@ new file mode 100644
 +
 +    <panel id="editBookmarkPanel"
 +           type="arrow"
-+           footertype="promobox"
 +           orient="vertical"
 +           ignorekeys="true"
 +           hidden="true"
@@ -228,16 +232,14 @@ new file mode 100644
 +           orient="vertical"
 +           role="alert">
 +     <vbox>
-+      <hbox pack="end">
-+        <toolbarbutton id="UITourTooltipClose" class="close-icon"
-+                       tooltiptext="&uiTour.infoPanel.close;"/>
-+      </hbox>
 +      <hbox id="UITourTooltipBody">
-+        <vbox id="UITourTooltipIconContainer">
-+          <image id="UITourTooltipIcon"/>
-+        </vbox>
++        <image id="UITourTooltipIcon"/>
 +        <vbox flex="1">
-+          <label id="UITourTooltipTitle" flex="1"/>
++          <hbox id="UITourTooltipTitleContainer">
++            <label id="UITourTooltipTitle" flex="1"/>
++            <toolbarbutton id="UITourTooltipClose" class="close-icon"
++                           tooltiptext="&uiTour.infoPanel.close;"/>
++          </hbox>
 +          <description id="UITourTooltipDescription" flex="1"/>
 +        </vbox>
 +      </hbox>
@@ -469,12 +471,25 @@ new file mode 100644
 +             onpopupshowing="UpdateDynamicShortcutTooltipText(this);"/>
 +
 +    <menupopup id="SyncedTabsSidebarContext">
-+      <menuitem label="&syncedTabs.context.openTab.label;"
-+                accesskey="&syncedTabs.context.openTab.accesskey;"
-+                id="syncedTabsOpenSelected"/>
++      <menuitem label="&syncedTabs.context.open.label;"
++                accesskey="&syncedTabs.context.open.accesskey;"
++                id="syncedTabsOpenSelected" where="current"/>
++      <menuitem label="&syncedTabs.context.openInNewTab.label;"
++                accesskey="&syncedTabs.context.openInNewTab.accesskey;"
++                id="syncedTabsOpenSelectedInTab" where="tab"/>
++      <menuitem label="&syncedTabs.context.openInNewWindow.label;"
++                accesskey="&syncedTabs.context.openInNewWindow.accesskey;"
++                id="syncedTabsOpenSelectedInWindow" where="window"/>
++      <menuitem label="&syncedTabs.context.openInNewPrivateWindow.label;"
++                accesskey="&syncedTabs.context.openInNewPrivateWindow.accesskey;"
++                id="syncedTabsOpenSelectedInPrivateWindow" where="window" private="true"/>
++      <menuseparator/>
 +      <menuitem label="&syncedTabs.context.bookmarkSingleTab.label;"
 +                accesskey="&syncedTabs.context.bookmarkSingleTab.accesskey;"
 +                id="syncedTabsBookmarkSelected"/>
++      <menuitem label="&syncedTabs.context.copy.label;"
++                accesskey="&syncedTabs.context.copy.accesskey;"
++                id="syncedTabsCopySelected"/>
 +      <menuseparator/>
 +      <menuitem label="&syncSyncNowItem.label;"
 +                accesskey="&syncSyncNowItem.accesskey;"
@@ -684,7 +699,7 @@ new file mode 100644
 +            <textbox id="urlbar" flex="1"
 +                     placeholder="&urlbar.placeholder2;"
 +                     type="autocomplete"
-+                     autocompletesearch="urlinline history"
++                     autocompletesearch="unifiedcomplete"
 +                     autocompletesearchparam="enable-actions"
 +                     autocompletepopup="PopupAutoCompleteRichResult"
 +                     completeselectedindex="true"
@@ -693,7 +708,7 @@ new file mode 100644
 +                     showcommentcolumn="true"
 +                     showimagecolumn="true"
 +                     enablehistory="true"
-+                     maxrows="6"
++                     maxrows="10"
 +                     newlines="stripsurroundingwhitespace"
 +                     ontextentered="this.handleCommand(param);"
 +                     ontextreverted="return this.handleRevert();"
@@ -713,8 +728,6 @@ new file mode 100644
 +                       aria-label="&urlbar.loginFillNotificationAnchor.label;"/>
 +                <image id="password-notification-icon" class="notification-anchor-icon" role="button"
 +                       aria-label="&urlbar.passwordNotificationAnchor.label;"/>
-+                <image id="webapps-notification-icon" class="notification-anchor-icon" role="button"
-+                       aria-label="&urlbar.webappsNotificationAnchor.label;"/>
 +                <image id="plugins-notification-icon" class="notification-anchor-icon" role="button"
 +                       aria-label="&urlbar.pluginsNotificationAnchor.label;"/>
 +                <image id="web-notifications-notification-icon" class="notification-anchor-icon" role="button"
@@ -865,7 +878,7 @@ new file mode 100644
 +            </menu>
 +            <menu id="BMB_unsortedBookmarks"
 +                  class="menu-iconic bookmark-item subviewbutton"
-+                  label="&bookmarksMenuButton.unsorted.label;"
++                  label="&bookmarksMenuButton.other.label;"
 +                  container="true">
 +              <menupopup id="BMB_unsortedBookmarksPopup"
 +                         placespopup="true"
@@ -887,7 +900,8 @@ new file mode 100644
 +        <!-- This is a placeholder for the Downloads Indicator.  It is visible
 +             during the customization of the toolbar, in the palette, and before
 +             the Downloads Indicator overlay is loaded. -->
-+        <toolbarbutton id="downloads-button" class="toolbarbutton-1 chromeclass-toolbar-additional"
++        <toolbarbutton id="downloads-button"
++                       class="toolbarbutton-1 chromeclass-toolbar-additional badged-button"
 +                       key="key_openDownloads"
 +                       oncommand="DownloadsIndicatorView.onCommand(event);"
 +                       ondrop="DownloadsIndicatorView.onDrop(event);"
@@ -1169,7 +1183,7 @@ new file mode 100644
 diff --git a/browser/base/jar.mn b/browser/base/jar.mn
 --- a/browser/base/jar.mn
 +++ b/browser/base/jar.mn
-@@ -71,16 +71,18 @@ browser.jar:
+@@ -69,16 +69,18 @@ browser.jar:
          content/browser/aboutTabCrashed.css           (content/aboutTabCrashed.css)
          content/browser/aboutTabCrashed.js            (content/aboutTabCrashed.js)
          content/browser/aboutTabCrashed.xhtml         (content/aboutTabCrashed.xhtml)
@@ -1185,9 +1199,9 @@ diff --git a/browser/base/jar.mn b/browser/base/jar.mn
          content/browser/browser-customization.js      (content/browser-customization.js)
          content/browser/browser-data-submission-info-bar.js (content/browser-data-submission-info-bar.js)
          content/browser/browser-devedition.js         (content/browser-devedition.js)
-         content/browser/browser-eme.js                (content/browser-eme.js)
          content/browser/browser-feeds.js              (content/browser-feeds.js)
          content/browser/browser-fullScreen.js         (content/browser-fullScreen.js)
+         content/browser/browser-fullZoom.js           (content/browser-fullZoom.js)
 diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/nsModule.cpp
 --- a/browser/components/build/nsModule.cpp
 +++ b/browser/components/build/nsModule.cpp
@@ -1311,11 +1325,11 @@ diff --git a/browser/components/shell/moz.build b/browser/components/shell/moz.b
      SOURCES += [
          'nsMacShellService.cpp',
      ]
- elif CONFIG['MOZ_WIDGET_GTK']:
+ elif 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
      SOURCES += [
          'nsGNOMEShellService.cpp',
-+	'nsKDEShellService.cpp',
-+	'nsUnixShellService.cpp',
++        'nsKDEShellService.cpp',
++        'nsUnixShellService.cpp',
      ]
  
  if SOURCES:
@@ -1617,7 +1631,7 @@ new file mode 100644
 diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
 --- a/browser/installer/package-manifest.in
 +++ b/browser/installer/package-manifest.in
-@@ -697,16 +697,17 @@
+@@ -689,16 +689,17 @@
  @RESPATH@/greprefs.js
  @RESPATH@/defaults/autoconfig/prefcalls.js
  @RESPATH@/browser/defaults/permissions

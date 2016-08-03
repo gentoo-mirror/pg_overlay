@@ -21,23 +21,24 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-47.0-patches-0.1"
+PATCH="${PN}-48.0-patches-01"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
-MOZCONFIG_OPTIONAL_GTK2ONLY=0
-MOZCONFIG_OPTIONAL_WIFI=0
+#MOZCONFIG_OPTIONAL_QT5=1 -- fails to build so leave it off until the code can be patched
+MOZCONFIG_OPTIONAL_GTK2ONLY=1
+MOZCONFIG_OPTIONAL_WIFI=1
 MOZCONFIG_OPTIONAL_JIT="enabled"
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.47 pax-utils fdo-mime autotools virtualx mozlinguas-v2
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.48 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde"
+IUSE="bindist +egl hardened +hwaccel pgo selinux +gmp-autoupdate test +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -111,9 +112,12 @@ src_unpack() {
 
 src_prepare() {
 	# Apply our patches
-	eapply "${WORKDIR}/firefox" \
-		"${FILESDIR}"/${PN}-47.0-crashreporter.patch \
-		"${FILESDIR}"/${PN}-47.0-define-HUNSPELL_STATIC-conditionally.patch
+	eapply "${WORKDIR}/firefox"
+#		"${FILESDIR}"/${PN}-45-qt-widget-fix.patch
+
+	if ! tc-ld-is-gold && has_version ">=sys-devel/binutils-2.26" ; then
+		eapply "${FILESDIR}"/xpcom-components-binutils-26.patch
+	fi
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -202,12 +206,14 @@ src_configure() {
 	# Add full relro support for hardened
 	use hardened && append-ldflags "-Wl,-z,relro,-z,now"
 
+	# Only available on mozilla-overlay for experimentation -- Removed in Gentoo repo per bug 571180
+	use egl && mozconfig_annotate 'Enable EGL as GL provider' --with-gl-provider=EGL
+
 	# Setup api key for location services
 	echo -n "${_google_api_key}" > "${S}"/google-api-key
 	mozconfig_annotate '' --with-google-api-keyfile="${S}/google-api-key"
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
-	mozconfig_annotate '' --disable-mailnews
 
 	# New features
 	mozconfig_annotate '' --with-pthreads
@@ -241,7 +247,6 @@ src_configure() {
 
 	# Privacy
 	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --disable-webrtc
 	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --disable-crashreporter
@@ -279,6 +284,7 @@ src_configure() {
 	fi
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
+	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	# Finalize and report settings
 	mozconfig_final
