@@ -6,7 +6,7 @@ EAPI=6
 
 inherit cmake-utils git-r3
 
-DESCRIPTION="A simple tag editor for KDE"
+DESCRIPTION="Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities"
 HOMEPAGE="https://github.com/Martchus/cpp-utilities"
 EGIT_REPO_URI="git://github.com/Martchus/cpp-utilities.git"
 
