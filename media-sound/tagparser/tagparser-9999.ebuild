@@ -24,6 +24,7 @@ DEPEND="${RDEPEND}"
 src_configure() {
 	local mycmakeargs=(
 		$(cmake-utils_use_find_package doxygen DOXYGEN)
+		-DWITH_DOXYGEN=OFF
 	)
 
 	cmake-utils_src_configure
