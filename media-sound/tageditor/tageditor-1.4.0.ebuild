@@ -17,10 +17,8 @@ IUSE=""
 
 RDEPEND="
 	dev-qt/qtcore:5
-	dev-qt/qtdbus:5
 	dev-qt/qtdeclarative:5
 	dev-qt/qtgui:5
-	dev-qt/qtscript:5
 	dev-qt/qtwebengine:5
 	dev-util/qtutilities
 	media-sound/tagparser
