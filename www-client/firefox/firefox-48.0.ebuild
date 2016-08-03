@@ -223,7 +223,6 @@ src_configure() {
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-moz-services-healthreport
 	mozconfig_annotate '' --disable-moz_services_healthreport
 	mozconfig_annotate '' --disable-data-reporting
 	mozconfig_annotate '' --disable-telemetry-reporting
