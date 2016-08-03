@@ -33,6 +33,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DWIDGETS_GUI=ON
 		-DWEBVIEW_PROVIDER=webengine
+		-DCMAKE_BUILD_TYPE=Release
 	)
 
 	cmake-utils_src_configure
