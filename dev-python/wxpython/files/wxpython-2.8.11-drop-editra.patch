@@ -1,6 +1,6 @@
 --- a/wxPython/setup.py
 +++ b/wxPython/setup.py
-@@ -887,20 +887,6 @@ WX_PKGLIST =      [ 'wx',
+@@ -887,13 +887,6 @@ WX_PKGLIST =      [ 'wx',
                      'wx.tools',
                      'wx.tools.XRCed',
                      'wx.tools.XRCed.plugins',
@@ -10,18 +10,11 @@
 -                    'wx.tools.Editra.src.eclib',
 -                    'wx.tools.Editra.src.ebmlib',
 -                    'wx.tools.Editra.src.extern',
--                    'wx.tools.Editra.src.extern.aui',
--                    'wx.tools.Editra.src.extern.dexml',
--                    'wx.tools.Editra.src.extern.pygments',
--                    'wx.tools.Editra.src.extern.pygments.filters',
--                    'wx.tools.Editra.src.extern.pygments.formatters',
--                    'wx.tools.Editra.src.extern.pygments.lexers',
--                    'wx.tools.Editra.src.extern.pygments.styles',
 -                    'wx.tools.Editra.src.syntax',
                      ]
  
  if not EGGing:
-@@ -927,7 +913,6 @@ else:
+@@ -920,7 +913,6 @@ else:
                 opj('scripts/pywrap'),
                 opj('scripts/pywxrc'),
                 opj('scripts/xrced'),
@@ -29,7 +22,7 @@
                 ]
      if os.name == 'nt':
          SCRIPTS.append( opj('scripts/genaxmodule') ) 
-@@ -941,15 +926,6 @@ DATA_FILES += find_data_files('wx/tools/XRCed', '*.txt', '*.xrc', '*.htb')
+@@ -934,15 +926,6 @@ DATA_FILES += find_data_files('wx/tools/XRCed', '*.txt', '*.xrc', '*.htb')
  DATA_FILES += find_data_files('wx/tools/XRCed/plugins', '*.crx')
  DATA_FILES += find_data_files('wx/tools/XRCed/plugins/bitmaps', '*.png')
  
@@ -45,7 +38,7 @@
  
  
  ## import pprint
-@@ -1000,7 +976,6 @@ if EGGing:
+@@ -993,7 +976,6 @@ if EGGing:
                                    'pyshell = wx.py.PyShell:main',
                                    'pywrap = wx.py.PyWrap:main',
                                    'helpviewer = wx.tools.helpviewer:main',
