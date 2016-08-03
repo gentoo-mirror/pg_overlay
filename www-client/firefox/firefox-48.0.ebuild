@@ -230,7 +230,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-elf-hack
 
-	# Privacy
+	# https://aur.archlinux.org/packages/firefox-esr-privacy/
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-url-classifier
@@ -240,7 +240,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 
-	# KDE
+	# https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
@@ -253,7 +253,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-mobile-optimize
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-websms-backend
-	mozconfig_annotate '' --disable-windows-mobile-components
 	mozconfig_annotate '' --disable-valgrind
 
 	# Disable EME
