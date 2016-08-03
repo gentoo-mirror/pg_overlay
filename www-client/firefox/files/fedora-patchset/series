@@ -1,12 +1,10 @@
 firefox-build-prbool.patch
 firefox-debug.patch
 firefox-enable-addons.patch
-rhbz-1173156.patch
 firefox-fedora-ua.patch
 firefox-gtk3-20.patch
 rhbz-1291190-appchooser-crash.patch
 mozilla-1170092.patch
-
 mozilla-1253216.patch
 mozilla-1196777.patch
 mozilla-1270046.patch
