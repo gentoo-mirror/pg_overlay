@@ -46,6 +46,7 @@ net-libs/rb_libtorrent 1.1.0: C++ BitTorrent implementation focusing on efficien
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/ktorrent 9999: Powerful BitTorrent client based on KDE Frameworks
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
+net-p2p/retroshare 0.6.0 0.6.9999: P2P private sharing application
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/rtorrent-ps 9999: Extended rTorrent distribution with UI enhancements, colorization, and some added features
 net-p2p/transmission 2.92-r14736: A Fast, Easy and Free BitTorrent client

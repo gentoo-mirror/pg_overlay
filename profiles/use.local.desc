@@ -191,6 +191,11 @@ net-p2p/ktorrent:stats - Shows statistics about torrents in several graphs
 net-p2p/ktorrent:upnp - Forward ports using UPnP
 net-p2p/ktorrent:zeroconf - Discover peers on the local network using the Zeroconf protocol
 net-p2p/qbittorrent:webui - Enable the Web UI
+net-p2p/retroshare:cli - Enables the CLI version of RetroShare
+net-p2p/retroshare:feedreader - Enables the Feedreader plugin
+net-p2p/retroshare:links-cloud - Enables LinkClouds plugin
+net-p2p/retroshare:qt4 - Enables the GUI using qt4
+net-p2p/retroshare:voip - Enables VOIP plugin
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/rtorrent-ps:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
