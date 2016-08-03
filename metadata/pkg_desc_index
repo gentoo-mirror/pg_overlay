@@ -11,6 +11,7 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 app-text/xreader 1.0.8: Simple document viewer for GNOME
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
+dev-python/wxpython 3.0.2.0: A blending of the wxWindows C++ class library with Python
 dev-util/gperf 3.0.4: A perfect hash function generator
 dev-util/gtk-update-icon-cache 3.20.6: GTK update icon cache
 gnome-base/gsettings-desktop-schemas 3.21.2: Collection of GSettings schemas for GNOME desktop
