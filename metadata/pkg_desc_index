@@ -1,7 +1,6 @@
 app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-dicts/myspell-en 20160501 20160701: English dictionaries for myspell/hunspell
-app-emulation/playonlinux 4.2.10: Set of scripts to easily install and use Windows games and software
 app-misc/double-commander 0.7.3: Cross Platform file manager.
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
@@ -11,7 +10,7 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 app-text/xreader 1.0.8: Simple document viewer for GNOME
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
-dev-python/wxpython 3.0.2.0: A blending of the wxWindows C++ class library with Python
+dev-util/cpp-utilities 9999: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gperf 3.0.4: A perfect hash function generator
 dev-util/gtk-update-icon-cache 3.20.6: GTK update icon cache
 gnome-base/gsettings-desktop-schemas 3.21.2: Collection of GSettings schemas for GNOME desktop
@@ -37,6 +36,8 @@ media-sound/mpd 0.19.17: The Music Player Daemon (mpd)
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
+media-sound/tageditor 9999: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
+media-sound/tagparser 9999: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
