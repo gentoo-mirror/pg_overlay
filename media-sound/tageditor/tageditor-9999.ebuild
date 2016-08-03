@@ -23,7 +23,7 @@ RDEPEND="
 	dev-qt/qtdeclarative:5
 	dev-qt/qtgui:5
 	dev-qt/qtscript:5
-	dev-qt/webengine:5
+	dev-qt/qtwebengine:5
 "
 DEPEND="${RDEPEND}"
 
