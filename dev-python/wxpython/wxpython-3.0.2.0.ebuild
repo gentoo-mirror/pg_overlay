@@ -30,7 +30,7 @@ RDEPEND="
 	media-libs/libpng:0=
 	media-libs/tiff:0
 	virtual/jpeg
-	x11-libs/gtk+:2
+	x11-libs/gtk+:3
 	x11-libs/pango[X]
 	cairo?	( >=dev-python/pycairo-1.8.4[${PYTHON_USEDEP}] )
 	opengl?	( dev-python/pyopengl[${PYTHON_USEDEP}] )"
@@ -71,7 +71,7 @@ src_configure() {
 
 	mydistutilsargs=(
 		WX_CONFIG="${WX_CONFIG}"
-		WXPORT=gtk2
+		WXPORT=gtk3
 		UNICODE=1
 		BUILD_GLCANVAS=$(usex opengl 1 0)
 	)
