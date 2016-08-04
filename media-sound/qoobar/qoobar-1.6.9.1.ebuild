@@ -20,6 +20,7 @@ RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	media-libs/flac
+	media-libs/libdiscid
 	media-sound/shntool
 "
 DEPEND="${RDEPEND}"
