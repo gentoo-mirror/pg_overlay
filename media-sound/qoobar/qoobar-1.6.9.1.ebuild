@@ -23,3 +23,6 @@ RDEPEND="
 	media-sound/shntool
 "
 DEPEND="${RDEPEND}"
+src_configure() {
+	eqmake5
+}
