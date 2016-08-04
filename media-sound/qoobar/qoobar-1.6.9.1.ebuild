@@ -28,5 +28,5 @@ DEPEND="${RDEPEND}"
 src_configure() {
 	export QT_SELECT="5"
 	lrelease src/${PN}_app/${PN}_app.pro
-	eqmake5
+	qmake
 }
