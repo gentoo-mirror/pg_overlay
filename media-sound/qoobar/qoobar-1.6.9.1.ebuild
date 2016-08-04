@@ -31,7 +31,3 @@ src_configure() {
 	lrelease src/${PN}_app/${PN}_app.pro
 	qmake
 }
-
-src_compile() {
-	emake
-}
