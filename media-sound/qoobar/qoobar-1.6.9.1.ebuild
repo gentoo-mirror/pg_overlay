@@ -20,11 +20,17 @@ RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	media-libs/flac
+	media-libs/libdiscid
 	media-sound/shntool
 "
 DEPEND="${RDEPEND}"
 
 src_configure() {
-	QT_SELECT="5" lrelease src/${PN}_app/${PN}_app.pro
-	eqmake5
+	export QT_SELECT="5"
+	lrelease src/${PN}_app/${PN}_app.pro
+	qmake
+}
+
+src_compile() {
+	emake
 }
