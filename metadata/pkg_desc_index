@@ -34,6 +34,7 @@ media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptio
 media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/mpd 0.19.17: The Music Player Daemon (mpd)
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
+media-sound/qoobar 1.6.9.1: Qoobar - Audio Tagger for Classical Music
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 1.4.0: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
