@@ -29,5 +29,5 @@ src_configure() {
 	find . -type f -print0 | xargs -0 sed -i '/gstreamer/d'
 	export QT_SELECT="5"
 	lrelease src/${PN}_app/${PN}_app.pro
-	qmake
+	eqmake5
 }
