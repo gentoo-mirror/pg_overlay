@@ -196,7 +196,6 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-linker-warnings-r0.patch"
 	epatch "${FILESDIR}/${PN}-ffmpeg-license-r0.patch"
 
-	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-system-icu-54-does-not-have-detectHostTimeZone.patch
 	epatch "${FILESDIR}"/patches/${PN}-48.0.2564.116-libusb_interrupt_event_handler.patch
 	epatch "${FILESDIR}"/patches/${PN}-50.0.2661.94-unbundle-re2-fix.patch
 	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-PNGImageDecoder-fix-cast.patch
@@ -418,7 +417,6 @@ src_configure() {
 
 	# Done TODO
 	myconf_gyp+="
-		-Duse_system_icu=1
 		-Duse_system_libjpeg=1
 		-Duse_system_libpng=1
 		-Duse_system_libusb=1
