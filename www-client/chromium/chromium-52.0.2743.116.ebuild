@@ -299,16 +299,20 @@ src_prepare() {
 		'third_party/google_input_tools/third_party/closure_library/third_party/closure' \
 		'third_party/hunspell' \
 		'third_party/iccjpeg' \
+		'third_party/icu' \
 		'third_party/jstemplate' \
 		'third_party/khronos' \
 		'third_party/leveldatabase' \
 		'third_party/libXNVCtrl' \
 		'third_party/libaddressinput' \
 		'third_party/libjingle' \
+		'third_party/libjpeg_turbo' \
 		'third_party/libphonenumber' \
+		'third_party/libpng' \
 		'third_party/libsecret' \
 		'third_party/libsrtp' \
 		'third_party/libudev' \
+		'third_party/libusb' \
 		'third_party/libvpx' \
 		'third_party/libvpx/source/libvpx/third_party/x86inc' \
 		'third_party/libwebm' \
@@ -321,6 +325,7 @@ src_prepare() {
 		'third_party/mt19937ar' \
 		'third_party/openh264' \
 		'third_party/openmax_dl' \
+		'third_party/opus' \
 		'third_party/ots' \
 		'third_party/pdfium' \
 		'third_party/pdfium/third_party/agg23' \
@@ -337,6 +342,7 @@ src_prepare() {
 		'third_party/protobuf' \
 		'third_party/protobuf/third_party/six' \
 		'third_party/qcms' \
+		'third_party/re2' \
 		'third_party/sfntly' \
 		'third_party/skia' \
 		'third_party/smhasher' \
