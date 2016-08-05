@@ -201,6 +201,8 @@ src_prepare() {
 	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-PNGImageDecoder-fix-cast.patch
 	epatch "${FILESDIR}"/patches/${PN}-52.0.2743.82-cups22.patch
 	epatch "${FILESDIR}"/patches/${PN}-46.0.2490.86-use_system_opus.patch
+	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-use_system_harfbuzz.patch
+	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-sync_link_zlib.patch
 
 	if use vaapi; then
 		epatch "${FILESDIR}/chromium_vaapi.patch"
@@ -415,7 +417,6 @@ src_configure() {
 
 	# Done TODO
 	myconf_gyp+="
-		-Duse_system_icu=1
 		-Duse_system_libjpeg=1
 		-Duse_system_libpng=1
 		-Duse_system_libusb=1
