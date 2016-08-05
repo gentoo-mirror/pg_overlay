@@ -196,11 +196,14 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-linker-warnings-r0.patch"
 	epatch "${FILESDIR}/${PN}-ffmpeg-license-r0.patch"
 
+	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-system-icu-54-does-not-have-detectHostTimeZone.patch
 	epatch "${FILESDIR}"/patches/${PN}-48.0.2564.116-libusb_interrupt_event_handler.patch
 	epatch "${FILESDIR}"/patches/${PN}-50.0.2661.94-unbundle-re2-fix.patch
 	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-PNGImageDecoder-fix-cast.patch
 	epatch "${FILESDIR}"/patches/${PN}-52.0.2743.82-cups22.patch
 	epatch "${FILESDIR}"/patches/${PN}-46.0.2490.86-use_system_opus.patch
+	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-use_system_harfbuzz.patch
+	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-sync_link_zlib.patch
 
 	if use vaapi; then
 		epatch "${FILESDIR}/chromium_vaapi.patch"
