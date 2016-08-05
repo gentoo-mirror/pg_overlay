@@ -418,8 +418,7 @@ src_configure() {
 	# Done TODO
 	myconf_gyp+="
 		-Duse_system_libjpeg=1
-		-Duse_system_libpng=1
-		-Duse_system_libvpx=1"
+		-Duse_system_libpng=1"
 
 	# Inox
 	myconf_gyp+="
