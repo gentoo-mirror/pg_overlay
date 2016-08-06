@@ -19,3 +19,5 @@ DEPEND=""
 RDEPEND=""
 
 FONT_SUFFIX="ttf"
+
+S=${WORKDIR}
