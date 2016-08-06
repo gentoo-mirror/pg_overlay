@@ -23,4 +23,4 @@ FONT_SUFFIX="ttf"
 src_unpack() {
 	mkdir "${S}" && cd "${S}"
 	unpack ${A}
-}}
+}
