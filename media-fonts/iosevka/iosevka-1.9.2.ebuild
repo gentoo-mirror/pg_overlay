@@ -20,4 +20,7 @@ RDEPEND=""
 
 FONT_SUFFIX="ttf"
 
-S=${WORKDIR}
+src_unpack() {
+	mkdir "${S}" && cd "${S}"
+	unpack ${A}
+}}
