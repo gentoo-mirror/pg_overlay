@@ -1,6 +1,5 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -8,7 +7,7 @@ inherit bash-completion-r1 eutils multilib toolchain-funcs git-r3
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="http://oss.sgi.com/projects/xfs/"
-EGIT_REPO_URI="git://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git"
+EGIT_REPO_URI="git://oss.sgi.com/xfs/cmds/${PN}.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -29,7 +28,8 @@ DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.3.0-sharedlibs.patch
+	"${FILESDIR}"/${PN}-4.7.0-sharedlibs.patch
+	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
 )
 
 pkg_setup() {
@@ -53,16 +53,11 @@ src_prepare() {
 	find -name Makefile -exec \
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
-	# libdisk has broken blkid conditional checking
-	sed -i \
-		-e '/LIB_SUBDIRS/s:libdisk::' \
-		Makefile || die
-
-		# TODO: write a patch for configure.in to use pkg-config for the uuid-part
+	# TODO: Write a patch for configure.ac to use pkg-config for the uuid-part.
 	if use static && use readline ; then
 		sed -i \
-			-e 's|-lreadline|\0 -lncurses|' \
-			-e 's|-lblkid|\0 -luuid|' \
+			-e 's|-lreadline|& -lncurses|' \
+			-e 's|-lblkid|& -luuid|' \
 			configure || die
 	fi
 }
@@ -79,8 +74,6 @@ src_configure() {
 	fi
 
 	econf \
-		--bindir=/usr/bin \
-		--libexecdir=/usr/$(get_libdir) \
 		$(use_enable nls gettext) \
 		$(use_enable readline) \
 		$(usex readline --disable-editline $(use_enable libedit editline)) \
@@ -95,7 +88,7 @@ src_install() {
 	emake -j1 DIST_ROOT="${ED}" install-dev
 
 	# handle is for xfsdump, the rest for xfsprogs
-	gen_usr_ldscript -a xfs xlog
+	gen_usr_ldscript -a handle xcmd xfs xlog
 	# removing unnecessary .la files if not needed
 	use static-libs || find "${ED}" -name '*.la' -delete
 }
