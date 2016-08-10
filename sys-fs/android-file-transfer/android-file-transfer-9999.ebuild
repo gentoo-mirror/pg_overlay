@@ -10,8 +10,6 @@ DESCRIPTION="Reliable MTP client with minimalistic UI"
 HOMEPAGE="https://whoozle.github.io/android-file-transfer-linux/"
 EGIT_REPO_URI="git://github.com/whoozle/${PN}-linux.git"
 
-S=${WORKDIR}/${PN}-linux
-
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
