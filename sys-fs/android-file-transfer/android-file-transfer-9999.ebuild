@@ -3,12 +3,12 @@
 # $Header: $
 
 EAPI=5
-inherit cmake-utils
+inherit cmake-utils git-r3
 
 MY_PN=${PN}-linux
 DESCRIPTION="Reliable MTP client with minimalistic UI"
 HOMEPAGE="https://whoozle.github.io/android-file-transfer-linux/"
-SRC_URI="https://github.com/whoozle/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="git://github.com/whoozle/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -24,8 +24,6 @@ RDEPEND="fuse? ( sys-fs/fuse )
 		dev-qt/qtwidgets:5 )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
-
-S=${WORKDIR}/${MY_PN}-${PV}
 
 src_configure() {
 	local mycmakeargs=(
