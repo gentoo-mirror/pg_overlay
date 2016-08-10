@@ -8,7 +8,7 @@ inherit cmake-utils git-r3
 MY_PN=${PN}-linux
 DESCRIPTION="Reliable MTP client with minimalistic UI"
 HOMEPAGE="https://whoozle.github.io/android-file-transfer-linux/"
-EGIT_REPO_URI="git://github.com/whoozle/${PN}.git"
+EGIT_REPO_URI="git://github.com/whoozle/${PN}-linux.git"
 
 LICENSE="GPL-2"
 SLOT="0"
