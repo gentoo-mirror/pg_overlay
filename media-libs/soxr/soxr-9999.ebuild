@@ -21,10 +21,7 @@ RDEPEND="${DEPEND}"
 
 #S="${WORKDIR}/${MY_P}"
 DOCS=( "README" "TODO" "NEWS" "AUTHORS" )
-PATCHES=(
-	"${FILESDIR}/nodoc.patch"
-	"${FILESDIR}/noexamples.patch"
-	)
+PATCHES=( "${FILESDIR}/nodoc.patch" )
 
 src_install() {
 	cmake-multilib_src_install
