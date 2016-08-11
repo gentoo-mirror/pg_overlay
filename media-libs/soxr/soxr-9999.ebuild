@@ -19,7 +19,7 @@ IUSE="examples"
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${MY_P}"
+#S="${WORKDIR}/${MY_P}"
 DOCS=( "README" "TODO" "NEWS" "AUTHORS" )
 PATCHES=(
 	"${FILESDIR}/nodoc.patch"
