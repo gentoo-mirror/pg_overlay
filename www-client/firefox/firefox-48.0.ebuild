@@ -155,7 +155,7 @@ src_prepare() {
 
 	# Patch to enable PGO
 	if use pgo ; then
-        eapply "${FILESDIR}/pgo.patch"
+        eapply "${FILESDIR}/${PN}-48-pgo.patch"
 	fi
 
 	# Fedora patches
