@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://git.code.sf.net/p/soxr/code"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd"
+KEYWORDS=""
 IUSE="examples"
 
 DEPEND=""
