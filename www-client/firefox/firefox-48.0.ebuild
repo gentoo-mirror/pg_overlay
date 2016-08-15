@@ -220,6 +220,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-skia
 	mozconfig_annotate '' --enable-system-hunspell
+	mozconfig_annotate '' --enable-elf-hack
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-maintenance-service
@@ -228,7 +229,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-update-packaging
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
-	mozconfig_annotate '' --disable-elf-hack
 
 	# https://aur.archlinux.org/packages/firefox-esr-privacy/
 	mozconfig_annotate '' --disable-necko-wifi
