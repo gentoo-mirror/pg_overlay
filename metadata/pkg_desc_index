@@ -54,7 +54,7 @@ net-p2p/rtorrent-ps 9999: Extended rTorrent distribution with UI enhancements, c
 net-p2p/transmission 2.92-r14736: A Fast, Easy and Free BitTorrent client
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/roccat-tools 5.2.0 5.3.0: Utility for advanced configuration of Roccat devices
+sys-apps/roccat-tools 5.3.0: Utility for advanced configuration of Roccat devices
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer 9999: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
