@@ -38,7 +38,7 @@ IUSE_INPUT_DEVICES="
 IUSE="${IUSE_INPUT_DEVICES}"
 
 RDEPEND="
-	=dev-libs/libgaminggear-0.13*
+	=dev-libs/libgaminggear-0.14*
 	x11-libs/gtk+:2
 	x11-libs/libnotify
 	media-libs/libcanberra
