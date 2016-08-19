@@ -25,7 +25,7 @@ src_prepare() {
 
 src_configure() {
 	tc-export CC
-	export EXTRA_CFLAGS=${CFLAGS}
+	export EXTRA_CFLAGS=-Os
 }
 
 src_install() {
