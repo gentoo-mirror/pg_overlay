@@ -16,7 +16,7 @@ MY_PV=$(replace_all_version_separators _)
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
-SRC_URI="https://github.com/arvidn/libtorrent/releases/download/libtorrent-${MY_PV}/${MY_P}.tar.gz"
+SRC_URI="https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1/${MY_P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
