@@ -16,7 +16,7 @@ KEYWORDS="amd64 ia64 x86"
 IUSE=""
 
 RDEPEND="sys-apps/pciutils
-	>=sys-libs/efivar-0.19"
+	>=sys-libs/efivar-26"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
