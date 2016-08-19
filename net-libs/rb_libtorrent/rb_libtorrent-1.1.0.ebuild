@@ -29,7 +29,6 @@ RDEPEND="
 	dev-libs/boost:=[threads]
 	virtual/libiconv
 	examples? ( !net-p2p/mldonkey )
-	geoip? ( dev-libs/geoip )
 	python? (
 		${PYTHON_DEPS}
 		dev-libs/boost:=[python,${PYTHON_USEDEP}]
@@ -62,12 +61,9 @@ src_configure() {
 	local myeconfargs=(
 		$(use_enable debug)
 		$(use_enable debug logging)
-		$(use_enable debug statistics)
 		$(use_enable debug disk-stats)
 		$(use_enable dht dht $(usex debug logging yes))
 		$(use_enable examples)
-		$(use_enable geoip)
-		$(use_with   geoip libgeoip)
 		$(use_enable ssl encryption)
 		$(use_enable static-libs static)
 		$(use_enable test tests)
