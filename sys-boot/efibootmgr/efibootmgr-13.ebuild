@@ -30,7 +30,7 @@ src_configure() {
 
 src_install() {
 	# build system uses perl, so just do it ourselves
-	dosbin src/efibootmgr/efibootmgr
-	doman src/man/man8/efibootmgr.8
-	dodoc AUTHORS README doc/ChangeLog doc/TODO
+	dosbin src/efibootmgr
+	doman src/efibootmgr.8
+	dodoc AUTHORS README TODO
 }
