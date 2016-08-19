@@ -20,6 +20,7 @@ RDEPEND="sys-apps/pciutils
 DEPEND="${RDEPEND}"
 
 src_prepare() {
+	echo "$(git describe --tags)" | sed -e 's|efibootmgr-||g' -e 's|-|\.|g' || die
 	sed -i -e s/-Werror// Makefile || die
 }
 
