@@ -20,6 +20,7 @@ RDEPEND="sys-apps/pciutils
 DEPEND="${RDEPEND}"
 
 src_prepare() {
+	epatch "${FILESDIR}"/Makefile.patch
 	sed -i -e s/-Werror// Makefile || die
 }
 

@@ -1,0 +1,8 @@
+--- a/Makefile	2016-08-17 22:22:35.000000000 +0700
++++ b/Makefile	2016-08-19 13:18:12.807360492 +0700
+@@ -1,4 +1,4 @@
+-TOPDIR = $(shell echo $$PWD)
++TOPDIR = $(shell echo $PWD)
+ 
+ include $(TOPDIR)/Make.version
+ include $(TOPDIR)/Make.rules
