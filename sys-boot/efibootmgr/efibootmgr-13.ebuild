@@ -24,7 +24,7 @@ src_prepare() {
 }
 
 src_configure() {
-	#tc-export CC
+	tc-export CC
 	export EXTRA_CFLAGS=${CFLAGS}
 }
 
