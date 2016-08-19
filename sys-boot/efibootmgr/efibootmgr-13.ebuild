@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils toolchain-funcs
+inherit toolchain-funcs
 
 DESCRIPTION="User-space application to modify the EFI boot manager"
 HOMEPAGE="https://github.com/rhinstaller/efibootmgr"
@@ -20,7 +20,6 @@ RDEPEND="sys-apps/pciutils
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/Makefile.patch
 	sed -i -e s/-Werror// Makefile || die
 }
 
