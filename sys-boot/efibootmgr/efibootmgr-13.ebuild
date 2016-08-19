@@ -23,10 +23,9 @@ src_prepare() {
 	sed -i -e s/-Werror// Makefile || die
 }
 
-#src_configure() {
-	#tc-export CC
-	#export EXTRA_CFLAGS=-Os
-#}
+src_configure() {
+	tc-export CC
+}
 
 src_install() {
 	# build system uses perl, so just do it ourselves
