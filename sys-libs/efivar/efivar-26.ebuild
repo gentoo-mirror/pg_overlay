@@ -18,11 +18,6 @@ RDEPEND="dev-libs/popt"
 DEPEND="${RDEPEND}
 	>=sys-kernel/linux-headers-3.18"
 
-src_prepare() {
-	epatch "${FILESDIR}/0.23-sysmacros.patch"
-	epatch_user
-}
-
 src_configure() {
 	tc-export CC
 	tc-ld-disable-gold
