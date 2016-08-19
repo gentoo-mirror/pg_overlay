@@ -19,9 +19,9 @@ RDEPEND="sys-apps/pciutils
 	>=sys-libs/efivar-26"
 DEPEND="${RDEPEND}"
 
-src_prepare() {
-	sed -i -e s/-Werror// Makefile || die
-}
+#src_prepare() {
+#	sed -i -e s/-Werror// Makefile || die
+#}
 
 src_configure() {
 	tc-export CC
