@@ -8,7 +8,7 @@ inherit git-r3 toolchain-funcs
 
 DESCRIPTION="User-space application to modify the EFI boot manager"
 HOMEPAGE="https://github.com/rhinstaller/efibootmgr"
-SRC_URI="git://github.com/rhinstaller/${PN}.git"
+EGIT_REPO_URI="git://github.com/rhinstaller/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
