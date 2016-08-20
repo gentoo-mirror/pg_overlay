@@ -1,7 +1,6 @@
 firefox-enable-addons.patch
 firefox-gtk3-20.patch
 mozilla-1170092.patch
-
 mozilla-1253216.patch
 mozilla-1196777.patch
 mozilla-1270046.patch
@@ -11,4 +10,3 @@ mozilla-890908-async-nego.patch
 mozilla-1272332.patch
 mozilla-1225044.patch
 mozilla-1291700.patch
-mozilla-440908.patch
