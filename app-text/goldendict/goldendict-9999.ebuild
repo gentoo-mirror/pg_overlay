@@ -67,6 +67,8 @@ src_prepare() {
 
 	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> goldendict.pro
 	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> goldendict.pro
+
+	punt_bogus_dep QT Help
 }
 
 src_configure() {
