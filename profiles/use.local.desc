@@ -13,8 +13,6 @@ app-text/xreader:nautilus - Enable property page extension in gnome-base/nautilu
 app-text/xreader:t1lib - Enable the Type-1 fonts for the built-in DVI viewer (media-libs/t1lib)
 app-text/xreader:xps - Enable XPS viewer using app-text/libgxps
 gnome-extra/cinnamon-control-center:colord - Support color management using x11-misc/colord
-kde-apps/akonadi:designer - Install plugin for dev-qt/designer
-kde-apps/akonadi:tools - Install tools for developers and testing
 mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
 mail-client/thunderbird:crypt - Enable encryption support with enigmail
 mail-client/thunderbird:custom-optimization - Fine-tune custom compiler optimizations (-Os, -O0, -O1, -O2, -O3)

@@ -23,7 +23,6 @@ gnome-extra/nemo-compare 3.0.0: Nemo-Compare Extension
 gnome-extra/nemo-extensions 3.0.0: Extensions for Cinnamon's file-manager Nemo
 gnome-extra/nemo-fileroller 3.0.0: Provides context menu for Nemo
 gnome-extra/nemo-terminal 3.0.0: Nemo-Terminal Extension
-kde-apps/akonadi 16.08.0: Storage service for PIM data and libraries for PIM apps
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 45.0 45.1.0 45.1.1 45.2.0: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
