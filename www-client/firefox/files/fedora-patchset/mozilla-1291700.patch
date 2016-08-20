@@ -1,0 +1,93 @@
+# HG changeset patch
+# User Honza Bambas <honzab.moz@firemni.cz>
+# Parent  069612b7e7c93f79394fc40bc24c1e354de7a3e5
+Bug 1291700 - Allow negotiate/ntml to work when in the 'Never remember history' mode, r=jduell
+
+diff --git a/extensions/auth/nsHttpNegotiateAuth.cpp b/extensions/auth/nsHttpNegotiateAuth.cpp
+--- a/extensions/auth/nsHttpNegotiateAuth.cpp
++++ b/extensions/auth/nsHttpNegotiateAuth.cpp
+@@ -60,17 +60,37 @@ static const char kNegotiateAuthSSPI[] =
+ //-----------------------------------------------------------------------------
+ 
+ // Return false when the channel comes from a Private browsing window.
+ static bool
+ TestNotInPBMode(nsIHttpAuthenticableChannel *authChannel)
+ {
+     nsCOMPtr<nsIChannel> bareChannel = do_QueryInterface(authChannel);
+     MOZ_ASSERT(bareChannel);
+-    return !NS_UsePrivateBrowsing(bareChannel);
++
++    if (!NS_UsePrivateBrowsing(bareChannel)) {
++        return true;
++    }
++
++    nsCOMPtr<nsIPrefBranch> prefs = do_GetService(NS_PREFSERVICE_CONTRACTID);
++    if (!prefs) {
++        return true;
++    }
++
++    // When the "Never remember history" option is set, all channels are
++    // set PB mode flag, but here we want to make an exception, users
++    // want their credentials go out.
++    bool dontRememberHistory;
++    if (NS_SUCCEEDED(prefs->GetBoolPref("browser.privatebrowsing.autostart",
++                                        &dontRememberHistory)) &&
++        dontRememberHistory) {
++        return true;
++    }
++
++    return false;
+ }
+ 
+ NS_IMETHODIMP
+ nsHttpNegotiateAuth::GetAuthFlags(uint32_t *flags)
+ {
+     //
+     // Negotiate Auth creds should not be reused across multiple requests.
+     // Only perform the negotiation when it is explicitly requested by the
+diff --git a/netwerk/protocol/http/nsHttpNTLMAuth.cpp b/netwerk/protocol/http/nsHttpNTLMAuth.cpp
+--- a/netwerk/protocol/http/nsHttpNTLMAuth.cpp
++++ b/netwerk/protocol/http/nsHttpNTLMAuth.cpp
+@@ -182,28 +182,38 @@ ForceGenericNTLM()
+     return flag;
+ }
+ 
+ // Check to see if we should use default credentials for this host or proxy.
+ static bool
+ CanUseDefaultCredentials(nsIHttpAuthenticableChannel *channel,
+                          bool isProxyAuth)
+ {
++    nsCOMPtr<nsIPrefBranch> prefs = do_GetService(NS_PREFSERVICE_CONTRACTID);
++
+     // Prevent using default credentials for authentication when we are in the
+     // private browsing mode.  It would cause a privacy data leak.
+     nsCOMPtr<nsIChannel> bareChannel = do_QueryInterface(channel);
+     MOZ_ASSERT(bareChannel);
++
+     if (NS_UsePrivateBrowsing(bareChannel)) {
++        // But allow when in the "Never remember history" mode.
++        bool dontRememberHistory;
++        if (prefs &&
++            NS_SUCCEEDED(prefs->GetBoolPref("browser.privatebrowsing.autostart",
++                                            &dontRememberHistory)) &&
++            !dontRememberHistory) {
++            return false;
++        }
++    }
++
++    if (!prefs) {
+         return false;
+     }
+ 
+-    nsCOMPtr<nsIPrefBranch> prefs = do_GetService(NS_PREFSERVICE_CONTRACTID);
+-    if (!prefs)
+-        return false;
+-
+     if (isProxyAuth) {
+         bool val;
+         if (NS_FAILED(prefs->GetBoolPref(kAllowProxies, &val)))
+             val = false;
+         LOG(("Default credentials allowed for proxy: %d\n", val));
+         return val;
+     }
+ 
