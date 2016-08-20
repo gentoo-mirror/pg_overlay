@@ -1,0 +1,125 @@
+diff -up firefox-48.0/widget/gtk/nsWindow.cpp.1225044 firefox-48.0/widget/gtk/nsWindow.cpp
+--- firefox-48.0/widget/gtk/nsWindow.cpp.1225044	2016-08-17 11:49:31.675792661 +0200
++++ firefox-48.0/widget/gtk/nsWindow.cpp	2016-08-17 11:51:49.773545394 +0200
+@@ -216,6 +216,9 @@ static gboolean window_state_event_cb
+ static void     theme_changed_cb          (GtkSettings *settings,
+                                            GParamSpec *pspec,
+                                            nsWindow *data);
++static void     check_resize_cb           (GtkContainer* container,
++                                           gpointer user_data);
++
+ #if (MOZ_WIDGET_GTK == 3)
+ static void     scale_changed_cb          (GtkWidget* widget,
+                                            GParamSpec* aPSpec,
+@@ -472,6 +475,8 @@ nsWindow::nsWindow()
+ #if GTK_CHECK_VERSION(3,4,0)
+     mLastScrollEventTime = GDK_CURRENT_TIME;
+ #endif
++
++    mPendingConfigures = 0;
+ }
+ 
+ nsWindow::~nsWindow()
+@@ -2413,6 +2418,8 @@ nsWindow::OnConfigureEvent(GtkWidget *aW
+     LOG(("configure event [%p] %d %d %d %d\n", (void *)this,
+          aEvent->x, aEvent->y, aEvent->width, aEvent->height));
+ 
++    mPendingConfigures--;
++
+     LayoutDeviceIntRect screenBounds;
+     GetScreenBounds(screenBounds);
+ 
+@@ -3403,6 +3410,12 @@ nsWindow::OnDPIChanged()
+ }
+ 
+ void
++nsWindow::OnCheckResize()
++{
++    mPendingConfigures++;
++}
++
++void
+ nsWindow::DispatchDragEvent(EventMessage aMsg, const LayoutDeviceIntPoint& aRefPoint,
+                             guint aTime)
+ {
+@@ -3858,6 +3871,8 @@ nsWindow::Create(nsIWidget* aParent,
+                          G_CALLBACK(delete_event_cb), nullptr);
+         g_signal_connect(mShell, "window_state_event",
+                          G_CALLBACK(window_state_event_cb), nullptr);
++        g_signal_connect(mShell, "check-resize",
++                         G_CALLBACK(check_resize_cb), nullptr);
+ 
+         GtkSettings* default_settings = gtk_settings_get_default();
+         g_signal_connect_after(default_settings,
+@@ -4177,7 +4192,31 @@ nsWindow::NativeShow(bool aAction)
+     }
+     else {
+         if (mIsTopLevel) {
+-            gtk_widget_hide(GTK_WIDGET(mShell));
++            // Workaround window freezes on GTK versions before 3.21.2 by
++            // ensuring that configure events get dispatched to windows before
++            // they are unmapped. See bug 1225044.
++            if (gtk_check_version(3, 21, 2) != nullptr && mPendingConfigures > 0) {
++                GtkAllocation allocation;
++                gtk_widget_get_allocation(GTK_WIDGET(mShell), &allocation);
++
++                GdkEventConfigure event;
++                PodZero(&event);
++                event.type = GDK_CONFIGURE;
++                event.window = mGdkWindow;
++                event.send_event = TRUE;
++                event.x = allocation.x;
++                event.y = allocation.y;
++                event.width = allocation.width;
++                event.height = allocation.height;
++
++                auto shellClass = GTK_WIDGET_GET_CLASS(mShell);
++                for (int i = 0; i < mPendingConfigures; i++) {
++                    Unused << shellClass->configure_event(mShell, &event);
++                }
++                mPendingConfigures = 0;
++            }
++
++            gtk_widget_hide(mShell);
+ 
+             ClearTransparencyBitmap(); // Release some resources
+         }
+@@ -6028,6 +6067,16 @@ theme_changed_cb (GtkSettings *settings,
+     window->ThemeChanged();
+ }
+ 
++static void
++check_resize_cb (GtkContainer* container, gpointer user_data)
++{
++    RefPtr<nsWindow> window = get_window_for_gtk_widget(GTK_WIDGET(container));
++    if (!window) {
++      return;
++    }
++    window->OnCheckResize();
++}
++
+ #if (MOZ_WIDGET_GTK == 3)
+ static void
+ scale_changed_cb (GtkWidget* widget, GParamSpec* aPSpec, gpointer aPointer)
+diff -up firefox-48.0/widget/gtk/nsWindow.h.1225044 firefox-48.0/widget/gtk/nsWindow.h
+--- firefox-48.0/widget/gtk/nsWindow.h.1225044	2016-07-25 22:22:07.000000000 +0200
++++ firefox-48.0/widget/gtk/nsWindow.h	2016-08-17 11:50:55.274248334 +0200
+@@ -254,6 +254,7 @@ public:
+ 
+     void               ThemeChanged(void);
+     void               OnDPIChanged(void);
++    void               OnCheckResize(void);
+ 
+ #ifdef MOZ_X11
+     Window             mOldFocusWindow;
+@@ -463,6 +464,10 @@ private:
+     RefPtr<nsShmImage>  mBackShmImage;
+ #endif
+ 
++    // Upper bound on pending ConfigureNotify events to be dispatched to the
++    // window. See bug 1225044.
++    int mPendingConfigures;
++
+ #ifdef ACCESSIBILITY
+     RefPtr<mozilla::a11y::Accessible> mRootAccessible;
+ 
