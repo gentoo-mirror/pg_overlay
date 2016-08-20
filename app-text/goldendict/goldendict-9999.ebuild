@@ -31,7 +31,6 @@ RDEPEND="
 		dev-qt/linguist-tools:5
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
-		dev-qt/qthelp:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtsingleapplication[qt5]
 		dev-qt/qtsvg:5
