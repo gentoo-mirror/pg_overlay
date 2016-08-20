@@ -65,8 +65,8 @@ src_prepare() {
 	# add trailing semicolon
 	sed -i -e '/^Categories/s/$/;/' redist/${PN}.desktop || die
 
-	echo "QMAKE_CXXFLAGS_RELEASE = $CFLAGS" >> goldendict.pro
-	echo "QMAKE_CFLAGS_RELEASE = $CXXFLAGS" >> goldendict.pro
+	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> goldendict.pro
+	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> goldendict.pro
 }
 
 src_configure() {
