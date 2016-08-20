@@ -95,6 +95,7 @@ src_configure() {
 		-DBUILD_TOOLS=$(usex tools)
 		-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
 		-DINSTALL_QSQLITE_IN_QT_PREFIX=TRUE
+		-DAKONADI_DATABASE_BACKEND=QSQLITE3
 	)
 
 	kde5_src_configure
