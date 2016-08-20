@@ -31,6 +31,7 @@ RDEPEND="
 		dev-qt/linguist-tools:5
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
+		dev-qt/qthelp:5
 		dev-qt/qtprintsupport:5
 		dev-qt/qtsingleapplication[qt5]
 		dev-qt/qtsvg:5
@@ -67,8 +68,6 @@ src_prepare() {
 
 	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> goldendict.pro
 	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> goldendict.pro
-
-	punt_bogus_dep QT Help
 }
 
 src_configure() {
