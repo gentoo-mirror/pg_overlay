@@ -94,7 +94,6 @@ src_configure() {
 		-DAKONADI_BUILD_QSQLITE=$(usex sqlite)
 		-DBUILD_TOOLS=$(usex tools)
 		-DKDE_INSTALL_USE_QT_SYS_PATHS=ON
-		-KDE_INSTALL_USE_QT_SYS_PATHS=$(usex sqlite)
 		-DINSTALL_QSQLITE_IN_QT_PREFIX=$(usex sqlite)
 	)
 
