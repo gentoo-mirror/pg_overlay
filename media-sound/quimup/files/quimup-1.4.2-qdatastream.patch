@@ -4,9 +4,9 @@ index ddd2c74..52d6e6c 100644
 +++ b/src/qtlocalpeer.cpp
 @@ -48,6 +48,7 @@
  #include "qtlocalpeer.h"
- #include <QCoreApplication>
- #include <QTime>
-+#include <QDataStream>
+ #include <QtCore/QCoreApplication>
+ #include <QtCore/QTime>
++#include <QtCore/QDataStream>
  
  #if defined(Q_OS_WIN)
- #include <QLibrary>
+ #include <QtCore/QLibrary>
