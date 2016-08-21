@@ -29,10 +29,6 @@ S="${WORKDIR}/${PN} ${PV}"
 
 DOCS=( changelog FAQ.txt README )
 
-src_prepare() {
-	epatch "${FILESDIR}"/${P}-qdatastream.patch
-}
-
 src_configure() {
 	eqmake5
 }
