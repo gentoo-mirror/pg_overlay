@@ -34,6 +34,6 @@ src_configure() {
 src_install() {
 	default
 	dosbin src/efibootdump
-	doman src/man/efibootmgr.8
+	doman src/efibootmgr.8
 	dodoc AUTHORS README TODO
 }
