@@ -8,7 +8,9 @@ inherit toolchain-funcs
 
 DESCRIPTION="User-space application to modify the EFI boot manager"
 HOMEPAGE="https://github.com/rhinstaller/efibootmgr"
-SRC_URI="https://github.com/rhinstaller/${PN}/releases/download/${P}/${P}.tar.bz2"
+SRC_URI="https://github.com/rhinstaller/${PN}/archive/5e9700c2252eed45f4568f3a7c08c866c2c83c0b.zip -> ${P}.zip"
+
+S=${WORKDIR}/${PN}-5e9700c2252eed45f4568f3a7c08c866c2c83c0b
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -21,8 +23,7 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	default
-	sed -i -e s/-Werror// Make.defaults || die
-	eapply "${FILESDIR}"/efivar-0.24.patch
+	sed -i -e s/-Werror// Makefile || die
 }
 
 src_configure() {
@@ -33,6 +34,6 @@ src_configure() {
 src_install() {
 	default
 	dosbin src/efibootdump
-	doman src/man/efibootmgr.8
+	doman src/efibootmgr.8
 	dodoc AUTHORS README TODO
 }
