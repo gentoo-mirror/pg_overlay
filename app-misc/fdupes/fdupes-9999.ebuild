@@ -9,9 +9,9 @@ inherit eutils flag-o-matic git-r3 toolchain-funcs
 MY_P="${PN}-${PV/_pre/-PR}"
 
 DESCRIPTION="Identify/delete duplicate files residing within specified directories"
-HOMEPAGE="https://github.com/adrianlopezroche/fdupes https://code.google.com/p/fdupes/"
+HOMEPAGE="https://github.com/adrianlopezroche/fdupes"
 SRC_URI=""
-EGIT_REPO_URI="https://github.com/adrianlopezroche/fdupes.git"
+EGIT_REPO_URI="git://github.com/adrianlopezroche/fdupes.git"
 
 LICENSE="MIT"
 SLOT="0"
@@ -28,5 +28,5 @@ src_prepare() {
 src_install() {
 	dobin fdupes
 	doman fdupes.1
-	dodoc CHANGES CONTRIBUTORS README TODO
+	dodoc CHANGES CONTRIBUTORS README
 }
