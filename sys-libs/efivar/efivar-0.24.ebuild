@@ -19,7 +19,6 @@ DEPEND="${RDEPEND}
 	>=sys-kernel/linux-headers-3.18"
 
 src_prepare() {
-	epatch "${FILESDIR}/0.21-nvme_ioctl.h.patch"
 	epatch "${FILESDIR}/0.23-sysmacros.patch"
 	epatch_user
 }
