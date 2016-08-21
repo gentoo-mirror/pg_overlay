@@ -184,7 +184,7 @@ index 0000000..7def371
 +MINOR_VERSION = 12
 +VERSION = $(MAJOR_VERSION).$(MINOR_VERSION)
 diff --git a/Makefile b/Makefile
-index 0f2f62c..35b7611 100644
+index 5f52e5d..35b7611 100644
 --- a/Makefile
 +++ b/Makefile
 @@ -1,100 +1,55 @@
@@ -193,7 +193,7 @@ index 0f2f62c..35b7611 100644
  
 -  SIGNING_KEY := pjones
 -  RELEASE_MAJOR := 0
--  RELEASE_MINOR := 12
+-  RELEASE_MINOR := 11
 -  RELEASE_NAME := efibootmgr
 -  VERSION := $(RELEASE_MAJOR).$(RELEASE_MINOR)
 -  RELEASE_STRING := $(RELEASE_NAME)-$(RELEASE_MAJOR).$(RELEASE_MINOR)
@@ -354,9 +354,30 @@ index edbce4b..280a8c9 100644
  Many other uses may be found.
  
 diff --git a/doc/TODO b/TODO
-similarity index 100%
+similarity index 59%
 rename from doc/TODO
 rename to TODO
+index 6340ac7..4a33a84 100644
+--- a/doc/TODO
++++ b/TODO
+@@ -1,10 +1,13 @@
+-For 0.9:
+-
+ - support for setting hotkeys
+ - support for driver variables, not just boot variables.
+ - support for arbitrary device paths with -c (including guid parsing)
+-- audit for missing unparse_*_path() types.
+-  - verify/debug NVME code
+ - maintain a list of known GUIDs and print {vendor} instead of the full GUID
+   - accept these for arbitrary paths as well.
++  - these are done in libefivar, but efibootmgr still needs some work on it
+ - MS-DOS style extended partitions
++- lots more network stuff
++  - IPv6 with various discovery methods
++  - IPv4 w/o dhcp
++  - make sure FCoE works
++  - iscsi
++- make sure nvme works
 diff --git a/doc/ChangeLog b/doc/ChangeLog
 deleted file mode 100644
 index 7673cbe..0000000
@@ -1121,14 +1142,16 @@ index 7673cbe..0000000
 -
 -    Initial revision
 diff --git a/efibootmgr.spec.in b/efibootmgr.spec.in
-index c794588..e9168da 100644
+index bd75a9e..e9168da 100644
 --- a/efibootmgr.spec.in
 +++ b/efibootmgr.spec.in
-@@ -5,11 +5,11 @@ Release: 1%{?dist}
+@@ -4,18 +4,18 @@ Version: @@VERSION@@
+ Release: 1%{?dist}
  Group: System Environment/Base
  License: GPLv2+
- URL: http://github.com/rhinstaller/%{name}/
+-URL: http://github.com/vathpela/%{name}/
 -BuildRequires: git
++URL: http://github.com/rhinstaller/%{name}/
 +BuildRequires: git, popt-devel
  BuildRequires: efivar-libs >= 0.19 , efivar-devel >= 0.19
  BuildRoot: %(mktemp -ud %{_tmppath}/%{name}-%{version}-%{release}-XXXXXXXX)
@@ -1138,7 +1161,14 @@ index c794588..e9168da 100644
  
  # for RHEL / Fedora when efibootmgr was part of the elilo package
  Conflicts: elilo <= 3.6-6
-@@ -39,20 +39,18 @@ make %{?_smp_mflags} EXTRA_CFLAGS='%{optflags}'
+ Obsoletes: elilo <= 3.6-6
+ 
+-Source0: https://github.com/vathpela/%{name}/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
++Source0: https://github.com/rhinstaller/%{name}/releases/download/%{name}-%{version}/%{name}-%{version}.tar.bz2
+ 
+ %description
+ %{name} displays and allows the user to edit the Intel Extensible
+@@ -39,22 +39,25 @@ make %{?_smp_mflags} EXTRA_CFLAGS='%{optflags}'
  
  %install
  rm -rf %{buildroot}
@@ -1164,8 +1194,15 @@ index c794588..e9168da 100644
 +%doc README
      
  %changelog
- * Thu May 28 2015 Peter Jones <pjones@redhat.com> - 0.12-1
-@@ -82,7 +80,7 @@ rm -rf %{buildroot}
++* Thu May 28 2015 Peter Jones <pjones@redhat.com> - 0.12-1
++- Update to 0.12
++- use libefiboot and libefivar to make device paths and load options
++- don't depend on -lz or -lpci any more
++
+ * Tue Oct 21 2014 Peter Jones <pjones@redhat.com> - 0.11.0-1
+ - Fix "-n" and friends not being assigned/checked right sometimes from 0.10.0-1
+ - Generate more archives to avoid people using github's, because they're just
+@@ -77,7 +80,7 @@ rm -rf %{buildroot}
  * Thu Jan  3 2008 Matt Domsch <Matt_Domsch@dell.com> 0.5.4-1
  - split efibootmgr into its own RPM for Fedora/RHEL.
  
@@ -1708,10 +1745,10 @@ index 998dff0..b335335 100644
  Set BootNext to XXXX (hex)
  .TP
 diff --git a/src/efibootmgr/efibootmgr.c b/src/efibootmgr.c
-similarity index 92%
+similarity index 82%
 rename from src/efibootmgr/efibootmgr.c
 rename to src/efibootmgr.c
-index 886f98c..199eb28 100644
+index a5b5bf9..199eb28 100644
 --- a/src/efibootmgr/efibootmgr.c
 +++ b/src/efibootmgr.c
 @@ -30,8 +30,6 @@
@@ -1912,16 +1949,140 @@ index 886f98c..199eb28 100644
  				}
  			}
  		}
-@@ -1021,7 +1034,7 @@ set_mirror(int below4g, int above4g)
- 	data = (uint8_t *)&abm;
- 	rc = efi_set_variable(ADDRESS_RANGE_MIRROR_VARIABLE_GUID,
- 			      ADDRESS_RANGE_MIRROR_VARIABLE_REQUEST, data,
--				data_size, attributes);
-+			      data_size, attributes, 0644);
- 	return rc;
+@@ -960,6 +973,115 @@ set_active_state()
+ 	return -1;
  }
  
-@@ -1147,7 +1160,7 @@ parse_opts(int argc, char **argv)
++static int
++get_mirror(int which, int *below4g, int *above4g, int *mirrorstatus)
++{
++	int rc;
++	uint8_t *data;
++	ADDRESS_RANGE_MIRROR_VARIABLE_DATA *abm;
++	size_t data_size;
++	uint32_t attributes;
++	char *name;
++
++	if (which)
++		name = ADDRESS_RANGE_MIRROR_VARIABLE_REQUEST;
++	else
++		name = ADDRESS_RANGE_MIRROR_VARIABLE_CURRENT;
++
++	rc = efi_get_variable(ADDRESS_RANGE_MIRROR_VARIABLE_GUID, name,
++				&data, &data_size, &attributes);
++	if (rc == 0) {
++		abm = (ADDRESS_RANGE_MIRROR_VARIABLE_DATA *)data;
++		if (!which && abm->mirror_version != MIRROR_VERSION) {
++			fprintf(stderr, "** Warning ** : unrecognised version for memory mirror i/f\n");
++			return 2;
++		}
++		*below4g = abm->mirror_memory_below_4gb;
++		*above4g = abm->mirror_amount_above_4gb;
++		*mirrorstatus = abm->mirror_status;
++	}
++	return rc;
++}
++
++static int
++set_mirror(int below4g, int above4g)
++{
++	int s, status, rc;
++	uint8_t *data;
++	ADDRESS_RANGE_MIRROR_VARIABLE_DATA abm;
++	size_t data_size;
++	uint32_t attributes;
++	int oldbelow4g, oldabove4g;
++
++	if ((s = get_mirror(0, &oldbelow4g, &oldabove4g, &status)) == 0) {
++		if (oldbelow4g == below4g && oldabove4g == above4g)
++			return 0;
++	} else {
++		fprintf(stderr, "** Warning ** : platform does not support memory mirror\n");
++		return s;
++	}
++
++	data = (uint8_t *)&abm;
++	data_size = sizeof (abm);
++	attributes = EFI_VARIABLE_NON_VOLATILE
++		| EFI_VARIABLE_BOOTSERVICE_ACCESS
++		| EFI_VARIABLE_RUNTIME_ACCESS;
++
++	abm.mirror_version = MIRROR_VERSION;
++	abm.mirror_amount_above_4gb = opts.set_mirror_hi ? above4g : oldabove4g;
++	abm.mirror_memory_below_4gb = opts.set_mirror_lo ? below4g : oldbelow4g;
++	abm.mirror_status = 0;
++	data = (uint8_t *)&abm;
++	rc = efi_set_variable(ADDRESS_RANGE_MIRROR_VARIABLE_GUID,
++			      ADDRESS_RANGE_MIRROR_VARIABLE_REQUEST, data,
++			      data_size, attributes, 0644);
++	return rc;
++}
++
++static void
++show_mirror(void)
++{
++	int status;
++	int below4g, above4g;
++	int rbelow4g, rabove4g;
++
++	if (get_mirror(0, &below4g, &above4g, &status) == 0) {
++		if (status == 0) {
++			printf("MirroredPercentageAbove4G: %d.%.2d\n", above4g/100, above4g%100);
++			printf("MirrorMemoryBelow4GB: %s\n", below4g ? "true" : "false");
++		} else {
++			printf("MirrorStatus: ");
++			switch (status) {
++			case 1:
++				printf("Platform does not support address range mirror\n");
++				break;
++			case 2:
++				printf("Invalid version number\n");
++				break;
++			case 3:
++				printf("MirroredMemoryAbove4GB > 50.00%%\n");
++				break;
++			case 4:
++				printf("DIMM configuration does not allow mirror\n");
++				break;
++			case 5:
++				printf("OEM specific method\n");
++				break;
++			default:
++				printf("%u\n", status);
++				break;
++			}
++			printf("DesiredMirroredPercentageAbove4G: %d.%.2d\n", above4g/100, above4g%100);
++			printf("DesiredMirrorMemoryBelow4GB: %s\n", below4g ? "true" : "false");
++		}
++	}
++	if ((get_mirror(1, &rbelow4g, &rabove4g, &status) == 0) &&
++		(above4g != rabove4g || below4g != rbelow4g)) {
++		printf("RequestMirroredPercentageAbove4G: %d.%.2d\n", rabove4g/100, rabove4g%100);
++		printf("RequestMirrorMemoryBelow4GB: %s\n", rbelow4g ? "true" : "false");
++	}
++}
++
+ static void
+ usage()
+ {
+@@ -987,6 +1109,8 @@ usage()
+ #endif
+ 	printf("\t-l | --loader name     (defaults to \\EFI\\redhat\\grub.efi)\n");
+ 	printf("\t-L | --label label     Boot manager display label (defaults to \"Linux\")\n");
++	printf("\t-m | --mirror-below-4G t|f mirror memory below 4GB\n");
++	printf("\t-M | --mirror-above-4G X percentage memory to mirror above 4GB\n");
+ 	printf("\t-n | --bootnext XXXX   set BootNext to XXXX (hex)\n");
+ 	printf("\t-N | --delete-bootnext delete BootNext\n");
+ 	printf("\t-o | --bootorder XXXX,YYYY,ZZZZ,...     explicitly set BootOrder (hex)\n");
+@@ -1023,6 +1147,7 @@ parse_opts(int argc, char **argv)
+ {
+ 	int c, rc;
+ 	unsigned int num;
++	float fnum;
+ 	int option_index = 0;
+ 
+ 	while (1)
+@@ -1035,7 +1160,7 @@ parse_opts(int argc, char **argv)
  			{"bootnum",          required_argument, 0, 'b'},
  			{"delete-bootnum",         no_argument, 0, 'B'},
  			{"create",                 no_argument, 0, 'c'},
@@ -1930,7 +2091,25 @@ index 886f98c..199eb28 100644
  			{"remove-dups",            no_argument, 0, 'D'},
  			{"disk",             required_argument, 0, 'd'},
  			{"iface",            required_argument, 0, 'i'},
-@@ -1207,13 +1220,11 @@ parse_opts(int argc, char **argv)
+@@ -1045,6 +1170,8 @@ parse_opts(int argc, char **argv)
+ 			{"keep",                   no_argument, 0, 'k'},
+ 			{"loader",           required_argument, 0, 'l'},
+ 			{"label",            required_argument, 0, 'L'},
++			{"mirror-below-4G",  required_argument, 0, 'm'},
++			{"mirror-above-4G",  required_argument, 0, 'M'},
+ 			{"bootnext",         required_argument, 0, 'n'},
+ 			{"delete-bootnext",        no_argument, 0, 'N'},
+ 			{"bootorder",        required_argument, 0, 'o'},
+@@ -1064,7 +1191,7 @@ parse_opts(int argc, char **argv)
+ 		};
+ 
+ 		c = getopt_long (argc, argv,
+-				 "AaBb:cCDd:e:E:gH:i:l:L:n:No:Op:qt:TuU:v::Vw"
++				 "AaBb:cCDd:e:E:gH:i:l:L:M:m:n:No:Op:qt:TuU:v::Vw"
+ 				 "@:h",
+ 				 long_options, &option_index);
+ 		if (c == -1)
+@@ -1093,13 +1220,11 @@ parse_opts(int argc, char **argv)
  				print_error_arrow("Invalid bootnum value",
  					optarg,
  					(intptr_t)endptr - (intptr_t)optarg);
@@ -1948,7 +2127,7 @@ index 886f98c..199eb28 100644
  
  			opts.bootnum = result;
  			break;
-@@ -1233,26 +1244,19 @@ parse_opts(int argc, char **argv)
+@@ -1119,26 +1244,19 @@ parse_opts(int argc, char **argv)
  			break;
  		case 'e':
  			rc = sscanf(optarg, "%u", &num);
@@ -1985,34 +2164,36 @@ index 886f98c..199eb28 100644
  			break;
  		case 'g':
  			opts.forcegpt = 1;
-@@ -1287,20 +1291,17 @@ parse_opts(int argc, char **argv)
- 				opts.below4g = 0;
- 				break;
- 			default:
--				fprintf (stderr,"invalid boolean value %s\n",optarg);
--				exit(1);
-+				errx(33, "invalid boolean value %s\n", optarg);
- 			}
+@@ -1163,6 +1281,28 @@ parse_opts(int argc, char **argv)
+ 		case 'L':
+ 			opts.label = (unsigned char *)optarg;
  			break;
- 		case 'M':
- 			opts.set_mirror_hi = 1;
- 			rc = sscanf(optarg, "%f", &fnum);
--			if (rc == 1 && fnum <= 50) {
--				opts.above4g = fnum * 100; /* percent to basis points */
--			}
--			else {
--				fprintf (stderr,"invalid numeric value %s\n",optarg);
--				exit(1);
--			}
++		case 'm':
++			opts.set_mirror_lo = 1;
++			switch (optarg[0]) {
++			case '1': case 'y': case 't':
++				opts.below4g = 1;
++				break;
++			case '0': case 'n': case 'f':
++				opts.below4g = 0;
++				break;
++			default:
++				errx(33, "invalid boolean value %s\n", optarg);
++			}
++			break;
++		case 'M':
++			opts.set_mirror_hi = 1;
++			rc = sscanf(optarg, "%f", &fnum);
 +			if (rc == 1 && fnum <= 50 && fnum >= 0)
 +				/* percent to basis points */
 +				opts.above4g = fnum * 100;
 +			else
 +				errx(34, "invalid numeric value %s\n", optarg);
- 			break;
++			break;
  		case 'N':
  			opts.delete_bootnext = 1;
-@@ -1314,13 +1315,11 @@ parse_opts(int argc, char **argv)
+ 			break;
+@@ -1175,13 +1315,11 @@ parse_opts(int argc, char **argv)
  				print_error_arrow("Invalid BootNext value",
  					optarg,
  					(intptr_t)endptr - (intptr_t)optarg);
@@ -2030,7 +2211,7 @@ index 886f98c..199eb28 100644
  			opts.bootnext = result;
  			break;
  		}
-@@ -1332,11 +1331,10 @@ parse_opts(int argc, char **argv)
+@@ -1193,11 +1331,10 @@ parse_opts(int argc, char **argv)
  			break;
  		case 'p':
  			rc = sscanf(optarg, "%u", &num);
@@ -2046,7 +2227,7 @@ index 886f98c..199eb28 100644
  			break;
  		case 'q':
  			opts.quiet = 1;
-@@ -1346,10 +1344,8 @@ parse_opts(int argc, char **argv)
+@@ -1207,10 +1344,8 @@ parse_opts(int argc, char **argv)
  			if (rc == 1) {
  				opts.timeout = num;
  				opts.set_timeout = 1;
@@ -2059,7 +2240,7 @@ index 886f98c..199eb28 100644
  			}
  			break;
  		case 'T':
-@@ -1361,14 +1357,16 @@ parse_opts(int argc, char **argv)
+@@ -1222,14 +1357,16 @@ parse_opts(int argc, char **argv)
  		case 'v':
  			opts.verbose = 1;
  			if (optarg) {
@@ -2083,6 +2264,25 @@ index 886f98c..199eb28 100644
  			}
  			break;
  		case 'V':
+@@ -1360,6 +1497,10 @@ main(int argc, char **argv)
+ 			err(14, "Could not set Timeout");
+ 	}
+ 
++	if (opts.set_mirror_lo || opts.set_mirror_hi) {
++		ret=set_mirror(opts.below4g, opts.above4g);
++	}
++
+ 	if (!opts.quiet && ret == 0) {
+ 		num = read_boot_u16("BootNext");
+ 		if (num >= 0) {
+@@ -1375,6 +1516,7 @@ main(int argc, char **argv)
+ 		}
+ 		show_boot_order();
+ 		show_boot_vars();
++		show_mirror();
+ 	}
+ 	free_vars(&boot_entry_list);
+ 	free_array(boot_names);
 diff --git a/src/efibootmgr/.gitignore b/src/efibootmgr/.gitignore
 deleted file mode 100644
 index efc8f8a..0000000
@@ -2519,13 +2719,55 @@ index 0000000..2c2be38
 +	}
 +	return 0;
 +}
+diff --git a/src/include/efi.h b/src/include/efi.h
+index b8d3b12..b1e760e 100644
+--- a/src/include/efi.h
++++ b/src/include/efi.h
+@@ -41,6 +41,8 @@
+  *******************************************************/
+ #define BLKX_UNKNOWN_GUID \
+ EFI_GUID( 0x47c7b225, 0xc42a, 0x11d2, 0x8e57, 0x00, 0xa0, 0xc9, 0x69, 0x72, 0x3b)
++#define ADDRESS_RANGE_MIRROR_VARIABLE_GUID \
++EFI_GUID( 0x7b9be2e0, 0xe28a, 0x4197, 0xad3e, 0x32, 0xf0, 0x62, 0xf9, 0x46, 0x2c)
+ 
+ /* Exported functions */
+ 
+@@ -49,4 +51,16 @@ extern ssize_t make_linux_load_option(uint8_t **data, size_t *data_size,
+ 		       uint8_t *optional_data, size_t optional_data_size);
+ extern ssize_t get_extra_args(uint8_t *data, ssize_t data_size);
+ 
++typedef struct {
++	uint8_t		mirror_version;
++	uint8_t		mirror_memory_below_4gb;
++	uint16_t	mirror_amount_above_4gb;
++	uint8_t		mirror_status;
++} __attribute__((packed)) ADDRESS_RANGE_MIRROR_VARIABLE_DATA;
++
++#define        MIRROR_VERSION  1
++
++#define ADDRESS_RANGE_MIRROR_VARIABLE_CURRENT "MirrorCurrent"
++#define ADDRESS_RANGE_MIRROR_VARIABLE_REQUEST "MirrorRequest"
++
+ #endif /* EFI_H */
 diff --git a/src/include/efibootmgr.h b/src/include/efibootmgr.h
-index 10a6701..dc02fcb 100644
+index f5738b3..dc02fcb 100644
 --- a/src/include/efibootmgr.h
 +++ b/src/include/efibootmgr.h
-@@ -78,7 +78,7 @@ typedef struct {
- 	unsigned int set_mirror_lo:1;
- 	unsigned int set_mirror_hi:1;
+@@ -61,6 +61,8 @@ typedef struct {
+ 	int bootnext;
+ 	int verbose;
+ 	int active;
++	int below4g;
++	int above4g;
+ 	int deduplicate;
+ 	unsigned int delete_boot:1;
+ 	unsigned int delete_bootorder:1;
+@@ -73,8 +75,10 @@ typedef struct {
+ 	unsigned int forcegpt:1;
+ 	unsigned int set_timeout:1;
+ 	unsigned int delete_timeout:1;
++	unsigned int set_mirror_lo:1;
++	unsigned int set_mirror_hi:1;
  	unsigned int no_boot_order:1;
 -	unsigned short int timeout;
 +	short int timeout;
