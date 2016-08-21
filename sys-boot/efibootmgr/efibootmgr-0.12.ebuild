@@ -21,7 +21,7 @@ DEPEND="${RDEPEND}"
 
 src_prepare() {
 	default
-	sed -i -e s/-Werror// Make.defaults || die
+	sed -i -e s/-Werror// Makefile || die
 	eapply "${FILESDIR}"/efivar-0.24.patch
 }
 
