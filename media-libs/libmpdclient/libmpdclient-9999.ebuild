@@ -15,8 +15,9 @@ SLOT="0"
 KEYWORDS=""
 IUSE="doc examples static-libs"
 
-RDEPEND="media-soung/mpd [libmpdclient]"
-DEPEND="doc? ( app-doc/doxygen )"
+RDEPEND="media-soung/mpd[libmpdclient]"
+DEPEND="${RDEPEND}
+	doc? ( app-doc/doxygen )"
 
 src_prepare() {
 	sed -e "s:@top_srcdir@:.:" -i doc/doxygen.conf.in
