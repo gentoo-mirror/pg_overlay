@@ -20,7 +20,7 @@ DEPEND="doc? ( app-doc/doxygen )"
 
 src_prepare() {
 	sed -e "s:@top_srcdir@:.:" -i doc/doxygen.conf.in
-	eautoconf
+	eautoreconf
 }
 
 src_configure() {
