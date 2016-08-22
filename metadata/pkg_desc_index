@@ -30,6 +30,7 @@ media-fonts/iosevka 1.9.2: Open source coding font
 media-gfx/xviewer 1.0.6: A simple and easy to use image viewer. X-Apps Project
 media-gfx/xviewer-plugins 1.0.3: Eye of GNOME plugins
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
+media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/soxr 9999: The SoX Resampler library
 media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
