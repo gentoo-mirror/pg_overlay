@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit git-r3
+inherit autotools-utils git-r3
 
 DESCRIPTION="A library for interfacing Music Player Daemon (media-sound/mpd)"
 HOMEPAGE="http://www.musicpd.org"
