@@ -12,11 +12,12 @@ EGIT_REPO_URI="git://git.musicpd.org/master/libmpdclient.git"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="alpha amd64 arm hppa ppc ppc64 sparc x86"
+KEYWORDS=""
 IUSE="doc examples static-libs"
 
-RDEPEND=""
-DEPEND="doc? ( app-doc/doxygen )"
+RDEPEND="media-sound/mpd[libmpdclient]"
+DEPEND="${RDEPEND}
+	doc? ( app-doc/doxygen )"
 
 src_prepare() {
 	sed -e "s:@top_srcdir@:.:" -i doc/doxygen.conf.in
