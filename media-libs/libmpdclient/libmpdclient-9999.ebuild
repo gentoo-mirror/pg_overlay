@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE="doc examples static-libs"
 
-RDEPEND="media-soung/mpd[libmpdclient]"
+RDEPEND="media-sound/mpd[libmpdclient]"
 DEPEND="${RDEPEND}
 	doc? ( app-doc/doxygen )"
 
