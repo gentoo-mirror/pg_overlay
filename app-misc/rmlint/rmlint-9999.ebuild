@@ -17,8 +17,8 @@ SLOT="0"
 KEYWORDS=""
 IUSE="X"
 
-RDEPEND="X? ( x11-libs/gtksourceview:3 
-        dev-python/colorlog )"
+RDEPEND="X? ( x11-libs/gtksourceview:3.0
+		dev-python/colorlog )"
 DEPEND="${RDEPEND}
 		dev-util/scons
 		dev-python/sphinx
