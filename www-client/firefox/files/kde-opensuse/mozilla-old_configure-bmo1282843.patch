@@ -1,0 +1,29 @@
+# HG changeset patch
+# User Wolfgang Rosenauer <wr@rosenauer.org>
+# Parent  2a0e5188c796cb2addedd185aba6176405786854
+Bug 1282843 - configure.py doesn't parse global autoconf options like --libdir
+without assuming libdir during build we do not find plugins/extensions in the correct system directory
+
+diff --git a/build/moz.configure/old.configure b/build/moz.configure/old.configure
+--- a/build/moz.configure/old.configure
++++ b/build/moz.configure/old.configure
+@@ -149,16 +149,19 @@ def old_configure_options(*options):
+     def all_options(help):
+         return list(options)
+ 
+     return depends(prepare_configure, extra_old_configure_args, all_options,
+                    *options)
+ 
+ 
+ @old_configure_options(
++    '--libdir',
++    '--includedir',
++    '--datadir',
+     '--cache-file',
+     '--enable-accessibility',
+     '--enable-address-sanitizer',
+     '--enable-alsa',
+     '--enable-android-omx',
+     '--enable-android-resource-constrained',
+     '--enable-approximate-location',
+     '--enable-b2g-bt',
