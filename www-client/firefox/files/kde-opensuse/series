@@ -9,7 +9,6 @@ mozilla-no-stdcxx-check.patch
 mozilla-reduce-files-per-UnifiedBindings.patch
 mozilla-check_return.patch
 mozilla-exclude-nametablecpp.patch
-mozilla-binutils-visibility.patch
 mozilla-old_configure-bmo1282843.patch
 
 firefox-kde.patch
