@@ -58,12 +58,12 @@ net-p2p/transmission 2.92-r14736: A Fast, Easy and Free BitTorrent client
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/roccat-tools 5.3.0: Utility for advanced configuration of Roccat devices
-sys-boot/efibootmgr 0.12: User-space application to modify the EFI boot manager
+sys-boot/efibootmgr 0.12 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer 9999: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
-sys-libs/efivar 0.24: Tools and library to manipulate EFI variables
+sys-libs/efivar 0.24 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 50.0.2661.104 51.0.2704.106 52.0.2743.85 52.0.2743.91 52.0.2743.116: Open-source version of Google Chrome web browser
 www-client/firefox 48.0 48.0.1 48.0.2: Firefox Web Browser
