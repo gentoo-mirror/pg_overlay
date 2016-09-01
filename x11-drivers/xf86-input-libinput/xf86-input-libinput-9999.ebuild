@@ -14,7 +14,7 @@ IUSE=""
 RDEPEND=">=dev-libs/libinput-1.3.0:0="
 DEPEND="${RDEPEND}"
 
-DOCS=( "README.md" "conf/60-libinput.conf" )
+DOCS=( "README.md" "conf/40-libinput.conf" )
 
 pkg_pretend() {
 	CONFIG_CHECK="~TIMERFD"
