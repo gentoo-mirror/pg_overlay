@@ -5,14 +5,11 @@
 EAPI=6
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="4.7"
+MOZ_LIGHTNING_VER="4.7.3"
 MOZ_LIGHTNING_GDATA_VER="2.6"
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
-MOZ_LANGS=(ar ast be bg bn-BD br ca cs cy da de el en en-GB en-US es-AR
-es-ES et eu fi fr fy-NL ga-IE gd gl he hr hsb hu hy-AM id is it ja ko lt
-nb-NO nl nn-NO pa-IN pl pt-BR pt-PT rm ro ru si sk sl sq sr sv-SE ta-LK tr
-uk vi zh-CN zh-TW )
+MOZ_LANGS=(en en-GB en-US ru )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_beta/b}"
@@ -33,21 +30,21 @@ MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_GTK3=1
 MOZCONFIG_OPTIONAL_JIT="enabled"
-inherit flag-o-matic toolchain-funcs mozconfig-v6.45 makeedit autotools pax-utils check-reqs nsplugins mozlinguas
+inherit flag-o-matic toolchain-funcs mozconfig-v6.45 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2
 
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="http://www.mozilla.com/en-US/thunderbird/"
 
-KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist crypt hardened ldap lightning +minimal mozdom selinux"
+IUSE="bindist crypt hardened ldap lightning +minimal mozdom selinux +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/{${PATCH},${PATCHFF}}.tar.xz )
 SRC_URI="${SRC_URI}
 	${MOZ_HTTP_URI}/${MOZ_PV}/source/${MOZ_P}.source.tar.xz
-	https://dev.gentoo.org/~axs/distfiles/lightning-${MOZ_LIGHTNING_VER}-r1.tar.xz
+	https://dev.gentoo.org/~axs/distfiles/lightning-${MOZ_LIGHTNING_VER}.tar.xz
 	lightning? ( https://dev.gentoo.org/~axs/distfiles/gdata-provider-${MOZ_LIGHTNING_GDATA_VER}-r1.tar.xz )
 	crypt? ( http://www.enigmail.net/download/source/enigmail-${EMVER}.tar.gz )
 	${PATCH_URIS[@]}"
@@ -61,12 +58,15 @@ CDEPEND="
 	crypt?  ( || (
 		( >=app-crypt/gnupg-2.0
 			|| (
-				app-crypt/pinentry[gtk]
-				app-crypt/pinentry[qt4]
+				app-crypt/pinentry[gtk(-)]
+				app-crypt/pinentry[qt4(-)]
+				app-crypt/pinentry[qt5(-)]
 			)
 		)
 		=app-crypt/gnupg-1.4*
-	) )"
+	) )
+	kde? ( kde-apps/kdialog:5
+		kde-misc/kmozillahelper )"
 
 DEPEND="${CDEPEND}
 	amd64? ( ${ASM_DEPEND}
@@ -157,6 +157,21 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	done
+
+	# OpenSUSE-KDE patchset
+	if use kde ; then
+		pushd mozilla
+		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
+		do eapply "${FILESDIR}/kde-opensuse/$i"; \
+		done
+		popd
+		eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
+	fi
+
 	# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
 	local THIS_MOZ_LIGHTNING_VER=$(python "${S}"/calendar/lightning/build/makeversion.py ${PV})
@@ -175,7 +190,6 @@ src_prepare() {
 }
 
 src_configure() {
-	declare MOZILLA_FIVE_HOME="/usr/$(get_libdir)/${PN}"
 	MEXTENSIONS="default"
 
 	####################################
@@ -186,9 +200,6 @@ src_configure() {
 
 	mozconfig_init
 	mozconfig_config
-
-	# We want rpath support to prevent unneeded hacks on different libc variants
-	append-ldflags -Wl,-rpath="${MOZILLA_FIVE_HOME}"
 
 	# It doesn't compile on alpha without this LDFLAGS
 	use alpha && append-ldflags "-Wl,--no-relax"
@@ -201,7 +212,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-calendar
 
 	# Other tb-specific settings
-	mozconfig_annotate '' --with-default-mozilla-five-home=${MOZILLA_FIVE_HOME}
 	mozconfig_annotate '' --with-user-appdir=.thunderbird
 
 	mozconfig_use_enable ldap
@@ -257,8 +267,6 @@ src_compile() {
 }
 
 src_install() {
-	declare MOZILLA_FIVE_HOME="/usr/$(get_libdir)/${PN}"
-
 	declare emid
 	cd "${BUILD_OBJ_DIR}" || die
 
@@ -269,6 +277,19 @@ src_install() {
 
 	mozconfig_install_prefs \
 		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js"
+
+	if use kde ; then
+		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" \
+		|| die
+	fi
+
+		# dev-db/sqlite does not have FTS3_TOKENIZER support.
+	# gloda needs it to function, and bad crashes happen when its enabled and doesn't work
+	if in_iuse system-sqlite && use system-sqlite ; then
+		echo "lockPref(\"mailnews.database.global.indexer.enabled\", false);" \
+			>>"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" || die
+	fi
 
 	# Pax mark xpcshell for hardened support, only used for startupcache creation.
 	pax-mark m "${BUILD_OBJ_DIR}"/dist/bin/xpcshell
