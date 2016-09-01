@@ -3,7 +3,6 @@ mozilla-nongnome-proxies.patch
 mozilla-kde.patch
 mozilla-no-stdcxx-check.patch
 mozilla-binutils-visibility.patch
-tb-ssldap.patch
 mozilla-flex_buffer_overrun.patch
 mozilla-gtk3_20.patch
 

@@ -169,6 +169,7 @@ src_prepare() {
 		do eapply "${FILESDIR}/kde-opensuse/$i"; \
 		done
 		popd
+		eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
 	fi
 
 	# Confirm the version of lightning being grabbed for langpacks is the same
