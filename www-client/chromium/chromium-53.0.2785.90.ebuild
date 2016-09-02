@@ -387,8 +387,6 @@ src_configure() {
 		-Denable_hevc_demuxing=1
 		-Dlinux_breakpad=0
 		-Dlinux_use_libgps=0
-		-Ddisable_nacl=1
-		-Ddisable_pnacl=1
 		-Ddisable_newlib=1
 		-Denable_remoting_host=0
 		-Denable_automation=0
