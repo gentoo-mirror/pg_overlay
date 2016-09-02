@@ -378,57 +378,40 @@ src_configure() {
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1"
 
-	# Done TODO
-	#myconf_gyp+="
-		#-Duse_system_libjpeg=1
-		#-Duse_system_libpng=1"
-
-	# Inox
-	myconf_gyp+="
-		-Duse_mojo=0
-		-Duse_sysroot=0
-		-Ddisable_fatal_linker_warnings=1
-		-Ddisable_glibc=1
-		-Denable_webrtc=1
-		-Denable_google_now=0
-		-Dremoting=0
-		-Denable_rlz=0
-		-Dbranding=Chromium
-		-Dgoogle_chrome_build=0
-		-Denable_web_speech=1
-		-Denable_wifi_bootstrapping=0
-		-Denable_speech_input=0
-		-Denable_pre_sync_backup=0
-		-Denable_print_preview=0
-		-Dtracing_like_official_build=1
-		-Dfieldtrial_testing_like_official_build=1
-		-Dfastbuild=2"
-
-	# Ungoogled
+	# From Ungoogled
 	myconf_gyp+="
 		-Duse_ozone=0
+		-Duse_gconf=0
+		-Duse_sysroot=0
+		-Denable_mpeg2ts_stream_parser=1
+		-Denable_hevc_demuxing=1
 		-Dlinux_breakpad=0
 		-Dlinux_use_libgps=0
+		-Ddisable_nacl=1
+		-Ddisable_pnacl=1
+		-Ddisable_newlib=1
 		-Denable_remoting_host=0
+		-Denable_automation=0
+		-Denable_google_now=0
+		-Denable_wifi_bootstrapping=0
+		-Duse_official_google_api_keys=0
+		-Denable_rlz=0
+		-Denable_pre_sync_backup=0
 		-Denable_prod_wallet_service=0
-		-Dlinux_strip_binary=1
-		-Denable_hevc_demuxing=1
-		-Dremove_webcore_debug_symbols=1
-		-Ddisable_newlib=1"
+		-Denable_one_click_signin=0
+		-Dfastbuild=1
+		-Ddisable_fatal_linker_warnings=1
+		-Dtracing_like_official_build=1
+		-Dfieldtrial_testing_like_official_build=1
+		-D-Dlinux_strip_binary=1"
 
-	#######
+	# From AUR's
 	myconf_gyp+="
-		$(gyp_use gnome use_gio)"
-
-	if ! use ungoogled; then
-		myconf_gyp+="
-			-Dsafe_browsing=1"
-	else
-		myconf_gyp+="
-			-Dsafe_browsing=0
-			-Denable_supervised_users=0
-			-Denable_one_click_signin=0"
-	fi
+		-Duse_mojo=0
+		-Denable_hangout_services_extension=1
+		-Ddisable_fatal_linker_warnings=1
+		-Ddisable_glibc=1
+		-Dlinux_link_libspeechd=0"
 
 	local gn_system_libraries="
 		flac
