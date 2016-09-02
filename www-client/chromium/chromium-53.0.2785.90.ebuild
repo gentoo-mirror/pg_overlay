@@ -193,6 +193,10 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 
+	if use vaapi; then
+		epatch "${FILESDIR}/chromium_vaapi.patch"
+	fi
+
 	epatch_user
 
 	local conditional_bundled_libraries=""
@@ -320,6 +324,8 @@ src_prepare() {
 		'url/third_party/mozilla' \
 		'v8/src/third_party/fdlibm' \
 		'v8/src/third_party/valgrind' \
+		'third_party/speech-dispatcher' \
+		'third_party/libva' \
 		--do-remove || die
 }
 
