@@ -403,7 +403,7 @@ src_configure() {
 		-Ddisable_fatal_linker_warnings=1
 		-Dtracing_like_official_build=1
 		-Dfieldtrial_testing_like_official_build=1
-		-D-Dlinux_strip_binary=1"
+		-Dlinux_strip_binary=1"
 
 	# From AUR's
 	myconf_gyp+="
