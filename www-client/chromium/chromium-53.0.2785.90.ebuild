@@ -379,9 +379,9 @@ src_configure() {
 		-Duse_system_zlib=1"
 
 	# Done TODO
-	myconf_gyp+="
-		-Duse_system_libjpeg=1
-		-Duse_system_libpng=1"
+	#myconf_gyp+="
+		#-Duse_system_libjpeg=1
+		#-Duse_system_libpng=1"
 
 	# Inox
 	myconf_gyp+="
