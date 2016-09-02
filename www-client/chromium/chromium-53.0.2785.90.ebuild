@@ -381,15 +381,15 @@ src_configure() {
 	# From AUR's
 	myconf_gyp+="
 		-Dlinux_link_libspeechd=0
-		-Dlinux_strip_binary=1
-		-Duse_mojo=0
-		-Duse_gconf=0
-		-Duse_sysroot=0
-		-Denable_hangout_services_extension=1
-		-Ddisable_fatal_linker_warnings=1
-		-Ddisable_glibc=1
-		-Ddisable_nacl=1
-		-Ddisable_pnacl=1"
+		-Dlinux_strip_binary=1"
+		#-Duse_mojo=0
+		#-Duse_gconf=0
+		#-Duse_sysroot=0
+		#-Denable_hangout_services_extension=1
+		#-Ddisable_fatal_linker_warnings=1
+		#-Ddisable_glibc=1
+		#-Ddisable_nacl=1
+		#-Ddisable_pnacl=1"
 
 	local gn_system_libraries="
 		flac
