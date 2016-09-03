@@ -193,7 +193,7 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 
-	epatch "${FILEDIR}/${PN}-52.0.2743.116-unset-madv_free.patch"
+	epatch "${FILESDIR}/${PN}-52.0.2743.116-unset-madv_free.patch"
 
 	if use vaapi; then
 		epatch "${FILESDIR}/chromium_vaapi.patch"
