@@ -407,9 +407,9 @@ src_configure() {
 		-Duse_system_zlib=1"
 
 	# From AUR's
-	myconf_gyp+="
-		-Dlinux_link_libspeechd=0
-		-Dlinux_strip_binary=1"
+	#myconf_gyp+="
+		#-Dlinux_link_libspeechd=0
+		#-Dlinux_strip_binary=1"
 		#-Duse_mojo=0
 		#-Duse_gconf=0
 		#-Duse_sysroot=0
@@ -497,7 +497,7 @@ src_configure() {
 		-Dhost_clang=0
 		-Dlinux_use_bundled_binutils=0
 		-Dlinux_use_bundled_gold=0
-		-Dlinux_use_gold_flags=1
+		-Dlinux_use_gold_flags=0
 		-Dsysroot="
 	myconf_gn+=" use_sysroot=false"
 
