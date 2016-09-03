@@ -425,8 +425,7 @@ src_configure() {
 	myconf_gyp+="
 		-Dlinux_link_gsettings=1
 		-Dlinux_link_libpci=1
-		-Dlinux_link_libspeechd=1
-		-Dlibspeechd_h_prefix=speech-dispatcher/"
+		-Dlinux_link_libspeechd=0"
 
 	# TODO: link_pulseaudio=true for GN.
 
