@@ -73,7 +73,6 @@ RDEPEND="
 	x11-libs/pango:=
 	kerberos? ( virtual/krb5 )
 	!gn? (
-		>=app-accessibility/speech-dispatcher-0.8:=
 		app-arch/snappy:=
 		>=dev-libs/libevent-1.4.13:=
 		dev-libs/libxml2:=[icu]
