@@ -193,9 +193,9 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 
-	if use vaapi; then
-		epatch "${FILESDIR}/chromium_vaapi.patch"
-	fi
+	#if use vaapi; then
+	#	epatch "${FILESDIR}/chromium_vaapi.patch"
+	#fi
 
 	# Inox patches
 	if use inox; then
@@ -602,11 +602,11 @@ src_configure() {
 			build_ffmpeg_args+=" --disable-asm"
 		fi
 
-		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
-		else
-			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
-		fi
+		#if use vaapi; then
+		#	build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
+		#else
+		#	build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
+		#fi
 
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 		einfo "Configuring bundled ffmpeg..."
