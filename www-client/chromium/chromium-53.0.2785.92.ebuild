@@ -18,12 +18,11 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 x86"
-IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi inox iridium ungoogled"
+IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 # TODO: bootstrapped gn binary hangs when using tcmalloc with portage's sandbox.
-REQUIRED_USE="gn? ( gnome gnome-keyring !tcmalloc )
-		?? ( inox iridium ungoogled )"
+REQUIRED_USE="gn? ( gnome gnome-keyring !tcmalloc )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -193,38 +192,6 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 
-	#if use vaapi; then
-	#	epatch "${FILESDIR}/chromium_vaapi.patch"
-	#fi
-
-	# Inox patches
-	if use inox; then
-		for i in $(cat "${FILESDIR}/inox-patchset/series"); \
-		do epatch "${FILESDIR}/inox-patchset/$i"; \
-		done
-	fi
-
-	# Iridium patches
-	#if use iridium; then
-		#for i in $(cat "${FILESDIR}/iridium-browser/series"); \
-		#do epatch "${FILESDIR}/iridium-browser/$i"; \
-		#done
-	#fi
-
-	# Ungoogled Chromium patches
-	#if use ungoogled; then
-		#echo "Stripping binaries from the source code"
-		#"${FILESDIR}"/ungoogled-chromium/generate_cleaning_list.sh > cleaning_list || die
-		#"${FILESDIR}"/ungoogled-chromium/evaluate_cleaning_list.py cleaning_list || die
-		#echo "Replacing many domains in the source code with non-existant alternatives"
-		#"${FILESDIR}"/ungoogled-chromium/generate_domain_substitution_list.sh > domain_substitution_list || die
-		#"${FILESDIR}"/ungoogled-chromium/evaluate_domain_substitution_list.py "${FILESDIR}"/ungoogled-chromium/domain_regex_list domain_substitution_list || die
-		#echo "Applying patches"
-		#for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
-		#do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
-		#done
-	#fi
-
 	epatch_user
 
 	local conditional_bundled_libraries=""
@@ -353,7 +320,6 @@ src_prepare() {
 		'v8/src/third_party/fdlibm' \
 		'v8/src/third_party/valgrind' \
 		'third_party/speech-dispatcher' \
-		'third_party/libva' \
 		--do-remove || die
 }
 
@@ -406,19 +372,6 @@ src_configure() {
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1"
 
-	# From AUR's
-	#myconf_gyp+="
-		#-Dlinux_link_libspeechd=0
-		#-Dlinux_strip_binary=1"
-		#-Duse_mojo=0
-		#-Duse_gconf=0
-		#-Duse_sysroot=0
-		#-Denable_hangout_services_extension=1
-		#-Ddisable_fatal_linker_warnings=1
-		#-Ddisable_glibc=1
-		#-Ddisable_nacl=1
-		#-Ddisable_pnacl=1"
-
 	local gn_system_libraries="
 		flac
 		harfbuzz-ng
@@ -470,8 +423,10 @@ src_configure() {
 	# Use explicit library dependencies instead of dlopen.
 	# This makes breakages easier to detect by revdep-rebuild.
 	myconf_gyp+="
-		$(gyp_use gnome linux_link_gsettings)
-		-Dlinux_link_libpci=1"
+		-Dlinux_link_gsettings=1
+		-Dlinux_link_libpci=1
+		-Dlinux_link_libspeechd=1
+		-Dlibspeechd_h_prefix=speech-dispatcher/"
 
 	# TODO: link_pulseaudio=true for GN.
 
@@ -601,12 +556,6 @@ src_configure() {
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"
 		fi
-
-		#if use vaapi; then
-		#	build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
-		#else
-		#	build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
-		#fi
 
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 		einfo "Configuring bundled ffmpeg..."
