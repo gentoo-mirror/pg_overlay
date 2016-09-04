@@ -15,7 +15,7 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-RDEPEND=""
+RDEPEND="sys-libs/libselinux"
 DEPEND="${RDEPEND}"
 
 src_prepare() {
