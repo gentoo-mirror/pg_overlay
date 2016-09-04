@@ -189,7 +189,7 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-system-ffmpeg-r2.patch"
 	epatch "${FILESDIR}/${PN}-system-jinja-r11.patch"
-	use widewine && epatch "${FILESDIR}/${PN}-widevine-r1.patch"
+	use widevine && epatch "${FILESDIR}/${PN}-widevine-r1.patch"
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 
