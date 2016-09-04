@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit qmake-utils git-r3
+inherit cmake-utils git-r3
 
 DESCRIPTION="CDEmu manager front end for KF5"
 HOMEPAGE="https://github.com/Real-Gecko/KDE-CDEmu"
