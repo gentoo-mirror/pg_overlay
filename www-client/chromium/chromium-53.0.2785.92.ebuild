@@ -189,22 +189,16 @@ pkg_setup() {
 src_prepare() {
 	epatch "${FILESDIR}/${PN}-system-ffmpeg-r2.patch"
 	epatch "${FILESDIR}/${PN}-system-jinja-r11.patch"
-	epatch "${FILESDIR}/${PN}-widevine-r1.patch"
+	use widevine && epatch "${FILESDIR}/${PN}-widevine-r1.patch"
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 
 	epatch "${FILESDIR}/${PN}-52.0.2743.116-unset-madv_free.patch"
 
-	if use vaapi; then
-		epatch "${FILESDIR}/chromium_vaapi.patch"
-	fi
+	use vaapi && epatch "${FILESDIR}/chromium_vaapi.patch"
 
 	# Inox patches
-	if use inox; then
-		for i in $(cat "${FILESDIR}/inox-patchset/series"); \
-		do epatch "${FILESDIR}/inox-patchset/$i"; \
-		done
-	fi
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset/series"); do epatch "${FILESDIR}/inox-patchset/$i"; done
 
 	# Iridium patches
 	#if use iridium; then
