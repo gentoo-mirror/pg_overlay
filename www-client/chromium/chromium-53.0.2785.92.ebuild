@@ -198,9 +198,7 @@ src_prepare() {
 	use vaapi && epatch "${FILESDIR}/chromium_vaapi.patch"
 
 	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset/series"); \
-		do epatch "${FILESDIR}/inox-patchset/$i"; \
-		done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset/series"); do epatch "${FILESDIR}/inox-patchset/$i"; done
 
 	# Iridium patches
 	#if use iridium; then
