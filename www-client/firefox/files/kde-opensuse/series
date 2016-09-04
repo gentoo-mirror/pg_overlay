@@ -13,4 +13,4 @@ mozilla-exclude-nametablecpp.patch
 firefox-kde.patch
 firefox-no-default-ualocale.patch
 firefox-branded-icons.patch
-mozilla-flex_buffer_overrun.patch
+#mozilla-flex_buffer_overrun.patch
