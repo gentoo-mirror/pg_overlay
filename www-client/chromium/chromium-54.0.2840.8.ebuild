@@ -21,8 +21,6 @@ KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
-REQUIRED_USE="gn? ( gnome gnome-keyring )"
-
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
 
