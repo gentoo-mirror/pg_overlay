@@ -30,12 +30,12 @@ MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_GTK3=1
 MOZCONFIG_OPTIONAL_JIT="enabled"
-inherit flag-o-matic toolchain-funcs mozconfig-v6.45 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2
+inherit flag-o-matic toolchain-funcs mozconfig-v6.45 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2 fdo-mime gnome2-utils
 
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="http://www.mozilla.com/en-US/thunderbird/"
 
-KEYWORDS="~alpha amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist crypt hardened ldap lightning +minimal mozdom selinux +kde"
@@ -300,17 +300,30 @@ src_install() {
 	# Install language packs
 	mozlinguas_src_install
 
+	local size sizes icon_path icon
 	if ! use bindist; then
-		newicon "${S}"/other-licenses/branding/thunderbird/content/icon48.png thunderbird-icon.png
+		icon_path="${S}/other-licenses/branding/thunderbird"
+		icon="${PN}-icon"
+
 		domenu "${FILESDIR}"/icon/${PN}.desktop
 	else
-		newicon "${S}"/mail/branding/aurora/content/icon48.png thunderbird-icon-unbranded.png
+		icon_path="${S}/mail/branding/aurora"
+		icon="${PN}-icon-unbranded"
+
 		newmenu "${FILESDIR}"/icon/${PN}-unbranded.desktop \
 			${PN}.desktop
 
 		sed -i -e "s:Mozilla\ Thunderbird:EarlyBird:g" \
 			"${ED}"/usr/share/applications/${PN}.desktop
 	fi
+
+	# Install a 48x48 icon into /usr/share/pixmaps for legacy DEs
+	newicon "${icon_path}"/mailicon48.png "${icon}".png
+	# Install icons for menu entry
+	sizes="16 22 24 32 48 256"
+	for size in ${sizes}; do
+		newicon -s ${size} "${icon_path}/mailicon${size}.png" "${icon}.png"
+	done
 
 	local emid
 	# stage extra locales for lightning and install over existing
@@ -361,7 +374,14 @@ src_install() {
 	fi
 }
 
+pkg_preinst() {
+	gnome2_icon_savelist
+}
+
 pkg_postinst() {
+	fdo-mime_desktop_database_update
+	gnome2_icon_cache_update
+
 	if use crypt; then
 		local peimpl=$(eselect --brief --colour=no pinentry show)
 		case "${peimpl}" in
@@ -383,4 +403,9 @@ pkg_postinst() {
 		elog "fails to show the calendar extension after restarting with above change"
 		elog "please file a bug report."
 	fi
+}
+
+pkg_postrm() {
+	fdo-mime_desktop_database_update
+	gnome2_icon_cache_update
 }
