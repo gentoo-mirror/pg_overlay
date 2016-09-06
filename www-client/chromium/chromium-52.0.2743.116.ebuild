@@ -393,7 +393,7 @@ src_configure() {
 		-Ddisable_glibc=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
-		-Denable_remoting=0
+		-Dremoting=0
 		-Dsafe_browsing_mode=0
 		-Denable_rlz=0
 		-Denable_hangout_services_extension=0
@@ -411,16 +411,6 @@ src_configure() {
 	#######
 	myconf_gyp+="
 		$(gyp_use gnome use_gio)"
-
-	if ! use ungoogled; then
-		myconf_gyp+="
-			-Dsafe_browsing=1"
-	else
-		myconf_gyp+="
-			-Dsafe_browsing=0
-			-Denable_supervised_users=0
-			-Denable_one_click_signin=0"
-	fi
 
 	local gn_system_libraries="
 		flac
