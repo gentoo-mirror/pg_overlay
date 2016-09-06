@@ -394,7 +394,6 @@ src_configure() {
 		-Denable_webrtc=1
 		-Denable_google_now=0
 		-Dremoting=0
-		-Dsafe_browsing=0
 		-Denable_rlz=0
 		-Denable_hangout_services_extension=0
 		-Dbranding=Chromium
