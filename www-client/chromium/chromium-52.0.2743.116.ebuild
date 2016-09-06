@@ -196,45 +196,14 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-linker-warnings-r0.patch"
 	epatch "${FILESDIR}/${PN}-ffmpeg-license-r0.patch"
 
-	epatch "${FILESDIR}"/patches/${PN}-48.0.2564.116-libusb_interrupt_event_handler.patch
-	epatch "${FILESDIR}"/patches/${PN}-50.0.2661.94-unbundle-re2-fix.patch
-	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-PNGImageDecoder-fix-cast.patch
-	epatch "${FILESDIR}"/patches/${PN}-52.0.2743.82-cups22.patch
-	epatch "${FILESDIR}"/patches/${PN}-46.0.2490.86-use_system_opus.patch
-	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-use_system_harfbuzz.patch
-	epatch "${FILESDIR}"/patches/${PN}-52.0.2723.2-sync_link_zlib.patch
+	# Fedora Patchset
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+		do epatch "${FILESDIR}/fedora-patchset/$i"; \
+		done
 
 	if use vaapi; then
-		epatch "${FILESDIR}/chromium_vaapi.patch"
+		epatch "${FILESDIR}/chromium_vaapi-52.patch"
 	fi
-
-	# Inox patches
-	#if use inox; then
-		#for i in $(cat "${FILESDIR}/inox-patchset/series"); \
-		#do epatch "${FILESDIR}/inox-patchset/$i"; \
-		#done
-	#fi
-
-	# Iridium patches
-	#if use iridium; then
-		#for i in $(cat "${FILESDIR}/iridium-browser/series"); \
-		#do epatch "${FILESDIR}/iridium-browser/$i"; \
-		#done
-	#fi
-
-	# Ungoogled Chromium patches
-	#if use ungoogled; then
-		#echo "Stripping binaries from the source code"
-		#"${FILESDIR}"/ungoogled-chromium/generate_cleaning_list.sh > cleaning_list || die
-		#"${FILESDIR}"/ungoogled-chromium/evaluate_cleaning_list.py cleaning_list || die
-		#echo "Replacing many domains in the source code with non-existant alternatives"
-		#"${FILESDIR}"/ungoogled-chromium/generate_domain_substitution_list.sh > domain_substitution_list || die
-		#"${FILESDIR}"/ungoogled-chromium/evaluate_domain_substitution_list.py "${FILESDIR}"/ungoogled-chromium/domain_regex_list domain_substitution_list || die
-		#echo "Applying patches"
-		#for i in $(cat "${FILESDIR}/ungoogled-chromium/patch_order"); \
-		#do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
-		#done
-	#fi
 
 	epatch_user
 
@@ -415,21 +384,20 @@ src_configure() {
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1"
 
-	# Done TODO
+	#Inox
 	myconf_gyp+="
-		-Duse_system_libjpeg=1
-		-Duse_system_libpng=1"
-
-	# Inox
-	myconf_gyp+="
+		-Dlinux_strip_binary=1
 		-Duse_mojo=0
+		-Duse_gconf=0
 		-Duse_sysroot=0
 		-Ddisable_fatal_linker_warnings=1
 		-Ddisable_glibc=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
-		-Dremoting=0
+		-Denable_remoting=0
+		-Dsafe_browsing_mode=0
 		-Denable_rlz=0
+		-Denable_hangout_services_extension=0
 		-Dbranding=Chromium
 		-Dgoogle_chrome_build=0
 		-Denable_web_speech=1
@@ -440,18 +408,6 @@ src_configure() {
 		-Dtracing_like_official_build=1
 		-Dfieldtrial_testing_like_official_build=1
 		-Dfastbuild=2"
-
-	# Ungoogled
-	myconf_gyp+="
-		-Duse_ozone=0
-		-Dlinux_breakpad=0
-		-Dlinux_use_libgps=0
-		-Denable_remoting_host=0
-		-Denable_prod_wallet_service=0
-		-Dlinux_strip_binary=1
-		-Denable_hevc_demuxing=1
-		-Dremove_webcore_debug_symbols=1
-		-Ddisable_newlib=1"
 
 	#######
 	myconf_gyp+="
