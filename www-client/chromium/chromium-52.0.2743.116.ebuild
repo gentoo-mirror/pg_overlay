@@ -393,7 +393,7 @@ src_configure() {
 		-Ddisable_glibc=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
-		-Denable_remoting=0
+		-Dremoting=0
 		-Dsafe_browsing_mode=0
 		-Denable_rlz=0
 		-Denable_hangout_services_extension=0
