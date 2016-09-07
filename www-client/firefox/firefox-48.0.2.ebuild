@@ -208,9 +208,10 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
+	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-skia
 	mozconfig_annotate '' --enable-system-hunspell
-	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-url-classifier
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
@@ -247,9 +248,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-b2g-camera
 	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-valgrind
-
-	# Disable EME
-	mozconfig_annotate '' --disable-eme
 
 	# Allow for a proper pgo build
 	if use pgo; then
