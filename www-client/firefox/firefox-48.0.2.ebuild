@@ -324,12 +324,6 @@ src_install() {
 		|| die
 	fi
 
-	if use kde ; then
-		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-		|| die
-	fi
-
 	echo "pref(\"extensions.autoDisableScopes\", 3);" >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
@@ -341,6 +335,12 @@ src_install() {
 			"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 			|| die
 	done
+
+	if use kde ; then
+		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
+	fi
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
 	emake DESTDIR="${D}" install
