@@ -10,6 +10,7 @@ chromium-50.0.2661.94-unbundle-re2-fix.patch
 chromium-52.0.2723.2-PNGImageDecoder-fix-cast.patch
 chromium-52.0.2743.82-cups22.patch
 chromium-52.0.2743.82-more-codec-aliases.patch
+chromium-52.0.2743.82-sandbox-pie.patch
 chromium-52.0.2743.82-master-prefs-path.patch
 chromium-52.0.2743.116-unset-madv_free.patch
 
