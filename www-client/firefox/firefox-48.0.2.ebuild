@@ -209,7 +209,6 @@ src_configure() {
 
 	# New features
 	mozconfig_annotate '' --enable-elf-hack
-	mozconfig_annotate '' --enable-skia
 	mozconfig_annotate '' --enable-system-hunspell
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-url-classifier
