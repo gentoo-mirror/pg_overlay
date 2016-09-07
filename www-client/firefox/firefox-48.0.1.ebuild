@@ -38,7 +38,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-lin
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde"
+IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde +fedora"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -159,9 +159,7 @@ src_prepare() {
 	fi
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done
+	use fedora && for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then

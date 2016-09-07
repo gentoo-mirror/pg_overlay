@@ -222,22 +222,22 @@ src_configure() {
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 
-	# https://aur.archlinux.org/packages/firefox-esr-privacy/
+	# AUR Firefox-esr-privacy
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
+	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
-
-	# https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --disable-gconf
+
+	# AUR Firefox-KDE-OpenSUSE
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
-	# Light Firefox / Palemoon
+	# Light Firefox / AUR Palemoon-git
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
 	mozconfig_annotate '' --disable-b2g-ril
