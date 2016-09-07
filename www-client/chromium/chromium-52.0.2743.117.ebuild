@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD hotwording? ( no-source-code )"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 x86"
-IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi"
+IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts hidpi hotwording kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi +inox"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 # TODO: bootstrapped gn binary hangs when using tcmalloc with portage's sandbox.
@@ -196,14 +196,12 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-ffmpeg-license-r0.patch"
 
 	# Fedora Patchset
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-		do epatch "${FILESDIR}/fedora-patchset/$i"; \
-		done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
 
-	if use vaapi; then
-		epatch "${FILESDIR}/chromium_vaapi-52.patch"
-	fi
+	use vaapi && epatch "${FILESDIR}/chromium_vaapi-52.patch"
 
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset/series"); do epatch "${FILESDIR}/inox-patchset/$i"; done
+	
 	epatch_user
 
 	local conditional_bundled_libraries=""
