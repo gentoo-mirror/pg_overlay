@@ -245,7 +245,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
-	mozconfig_annotate '' --disable-mochitests
 	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-valgrind
