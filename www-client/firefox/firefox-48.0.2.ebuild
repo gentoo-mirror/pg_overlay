@@ -154,21 +154,13 @@ src_prepare() {
 	eapply_user
 
 	# Patch to enable PGO
-	if use pgo ; then
-        eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
-	fi
+	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# OpenSUSE-KDE patchset
-	if use kde ; then
-		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
-		do eapply "${FILESDIR}/kde-opensuse/$i"; \
-		done
-	fi
+	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -230,22 +222,22 @@ src_configure() {
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 
-	# https://aur.archlinux.org/packages/firefox-esr-privacy/
+	# AUR Firefox-esr-privacy
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
+	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
-
-	# https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --disable-gconf
+
+	# AUR Firefox-KDE-OpenSUSE
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
-	# Light Firefox / Palemoon
+	# Light Firefox / AUR Palemoon-git
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
 	mozconfig_annotate '' --disable-b2g-ril
