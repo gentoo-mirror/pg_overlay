@@ -208,13 +208,13 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	mozconfig_annotate '' --with-pthreads
-	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-skia
 	mozconfig_annotate '' --enable-system-hunspell
 	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --disable-url-classifier
 
-	# Disable unwanted features from Cyberfox
+	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
+	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-update-channel
@@ -222,29 +222,36 @@ src_configure() {
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 
-	# AUR Firefox-esr-privacy
+	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
-	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --disable-gconf
 
 	# AUR Firefox-KDE-OpenSUSE
+	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
-	# Light Firefox / AUR Palemoon-git
+	# AUR Palemoon-git
+	mozconfig_annotate '' --disable-gamepad
+	mozconfig_annotate '' --disable-logging
+	mozconfig_annotate '' --disable-websms-backend
+	mozconfig_annotate '' --disable-windows-mobile-components
+	mozconfig_annotate '' --disable-metro
+	mozconfig_annotate '' --disable-maintenance-service
+	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-codesighs
+	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
-	mozconfig_annotate '' --disable-b2g-ril
-	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-parental-controls
-	mozconfig_annotate '' --disable-websms-backend
+	mozconfig_annotate '' --disable-mochitests
+	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-valgrind
 
 	# Disable EME
