@@ -232,26 +232,20 @@ src_configure() {
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --disable-gconf
 
-	# AUR Firefox-KDE-OpenSUSE
+	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
-	# AUR Palemoon-git
+	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon-git/
 	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-websms-backend
-	mozconfig_annotate '' --disable-windows-mobile-components
-	mozconfig_annotate '' --disable-metro
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
-	mozconfig_annotate '' --disable-mochitests
 	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-valgrind
 
 	# Disable EME
