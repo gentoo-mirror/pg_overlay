@@ -218,7 +218,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-skia
 	mozconfig_annotate '' --enable-system-hunspell
-	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --disable-elf-hack
 
 	# Disable unwanted features from Cyberfox
 	mozconfig_annotate '' --disable-maintenance-service
