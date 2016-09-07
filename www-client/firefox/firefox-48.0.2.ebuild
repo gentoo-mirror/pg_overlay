@@ -214,7 +214,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-url-classifier
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
-	mozconfig_annotate '' --with-pthreads
+	#mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-update-channel
@@ -228,12 +228,12 @@ src_configure() {
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
-	mozconfig_annotate '' --enable-strip
-	mozconfig_annotate '' --enable-install-strip
+	#mozconfig_annotate '' --enable-strip
+	#mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --disable-gconf
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
-	mozconfig_annotate '' --enable-gold
+	#mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
@@ -272,7 +272,7 @@ src_compile() {
 	if use pgo; then
 		addpredict /root
 		addpredict /etc/gconf
-		addpredict /proc/self
+		#addpredict /proc/self
 		# Reset and cleanup environment variables used by GNOME/XDG
 		gnome2_environment_reset
 
