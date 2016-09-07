@@ -242,7 +242,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-websms-backend
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
