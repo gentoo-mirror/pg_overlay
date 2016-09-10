@@ -13,7 +13,6 @@ chromium-52.0.2743.82-sandbox-pie.patch
 chromium-52.0.2743.82-master-prefs-path.patch
 chromium-52.0.2743.116-unset-madv_free.patch
 chromium-53.0.2785.92-gn-system.patch
-chromium-53.0.2785.92-last-commit-position.patch
 chromium-53.0.2785.92-boringssl-time-fix.patch
 chromium-53.0.2785.101-crrev-415028.patch
 
