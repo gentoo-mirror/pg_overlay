@@ -403,7 +403,7 @@ src_configure() {
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1"
 
-	#Inox
+	#AUR Inox
 	myconf_gyp+="
 		-Dlinux_strip_binary=1
 		-Duse_mojo=0
@@ -413,8 +413,7 @@ src_configure() {
 		-Ddisable_glibc=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
-		-Denable_remoting=0
-		-Dsafe_browsing_mode=0
+		-Dremoting=0
 		-Denable_rlz=0
 		-Denable_hangout_services_extension=0
 		-Dbranding=Chromium
@@ -427,6 +426,16 @@ src_configure() {
 		-Dtracing_like_official_build=1
 		-Dfieldtrial_testing_like_official_build=1
 		-Dfastbuild=2"
+
+	# AUR Chromium-minimum
+	myconf_gyp+="
+		-Dlogging_like_official_build=1
+		-Ddisable_nacl=1
+		-Ddisable_pnacl=1"
+
+	#######
+	myconf_gyp+="
+		$(gyp_use gnome use_gio)"
 
 	local gn_system_libraries="
 		flac
