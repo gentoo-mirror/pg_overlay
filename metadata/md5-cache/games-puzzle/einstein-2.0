@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile configure install postinst preinst prepare setup unpack
+DEPEND=media-libs/libsdl[sound,video] media-libs/sdl-mixer media-libs/sdl-ttf
+DESCRIPTION=A puzzle game inspired by Albert Einstein
+EAPI=5
+HOMEPAGE=https://freecode.com/projects/einsteinpuzzle
+KEYWORDS=amd64 x86
+LICENSE=GPL-2
+RDEPEND=media-libs/libsdl[sound,video] media-libs/sdl-mixer media-libs/sdl-ttf games-misc/games-envd
+SLOT=0
+SRC_URI=mirror://gentoo/einstein-2.0-src.tar.gz mirror://gentoo/einstein.png
+_eclass_exported_funcs=pkg_preinst:games pkg_postinst:games pkg_setup:games src_unpack:base src_prepare:- src_configure:games src_compile:games src_install:-
+_eclasses_=base	3fe4f8980633fd7bc69e9887209ba2fe	eutils	b83a2420b796f7c6eff682679d08fe25	games	2cf0d67d765e6358b435ccda30c13ad8	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	6198c04daba0e1307bd844df7d37f423	user	80aaa71614ced86f02ee1a513821dc87
+_md5_=a3d7e8aea4826d405f62cb2c2b1f76a1
