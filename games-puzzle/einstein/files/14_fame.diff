@@ -1,0 +1,10 @@
+--- ../orig/einstein-2.0/res/rules.txt	2005-10-12 01:13:34.000000000 +0200
++++ ./res/rules.txt	2007-08-31 08:42:16.000000000 +0200
+@@ -52,6 +52,7 @@
+ If you no longer need some tip, remove it by right mouse button click.
+ You can always see removed tips by pressing the 'Switch' button.
+ 
++Who loads or restarts a game, does not enter the Hall Of Fame.
+ 
+ "
+ 

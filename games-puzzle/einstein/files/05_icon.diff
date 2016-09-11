@@ -1,0 +1,25 @@
+--- ../orig/einstein-2.0/res/resources.descr	2005-09-25 22:51:14.000000000 +0200
++++ ./res/resources.descr	2007-08-31 10:54:56.000000000 +0200
+@@ -1,6 +1,7 @@
+ priority = 100
+ 
+ resources = {
++    { name = "icon.bmp" }
+     { name = "cursor.bmp" }
+     { name = "rain.bmp" }
+     { name = "tile.bmp" }
+--- ../orig/einstein-2.0/main.cpp	2005-09-26 12:32:54.000000000 +0200
++++ ./main.cpp	2007-08-31 10:52:59.000000000 +0200
+@@ -31,6 +31,12 @@
+     SDL_SetColorKey(mouse, SDL_SRCCOLORKEY, SDL_MapRGB(mouse->format, 0, 0, 0));
+     screen.setMouseImage(mouse);
+     SDL_FreeSurface(mouse);
++    
++    SDL_Surface *icon = loadImage(L"icon.bmp");
++    SDL_SetColorKey(icon, SDL_SRCCOLORKEY, SDL_MapRGB(icon->format, 0, 0, 0));
++    SDL_WM_SetIcon(icon, NULL);
++    SDL_FreeSurface(icon);
++    
+     SDL_WM_SetCaption("Einstein", NULL);
+ 
+ #ifdef __APPLE__
