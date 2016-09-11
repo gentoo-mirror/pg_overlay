@@ -1,5 +1,5 @@
---- ../orig/einstein-2.0.dfsg.2/main.cpp	2007-08-31 08:42:16.000000000 +0200
-+++ ./main.cpp	2007-08-31 10:39:20.000000000 +0200
+--- a/einstein-2.0.dfsg.2/main.cpp	2007-08-31 08:42:16.000000000 +0200
++++ b/einstein-2.0.dfsg.2/main.cpp	2007-08-31 10:39:20.000000000 +0200
 @@ -70,7 +70,7 @@
  #ifdef __APPLE__
      dirs.push_back(getResourcesPath(selfPath));
