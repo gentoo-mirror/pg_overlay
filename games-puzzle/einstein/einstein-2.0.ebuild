@@ -22,7 +22,7 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	epatch "${FILESDIR}"/${P}*.patch
-	epatch "${FILESDIR}"/${P}*.diff
+	epatch "${FILESDIR}"/*.diff
 
 	sed -i \
 		-e "/PREFIX/s:/usr/local:${GAMES_PREFIX}:" \
