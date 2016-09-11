@@ -1,5 +1,5 @@
---- a/einstein-2.0/puzgen.cpp	2005-08-14 04:40:58.000000000 +0200
-+++ b/einstein-2.0/puzgen.cpp	2007-08-31 08:42:16.000000000 +0200
+--- ../orig/einstein-2.0/puzgen.cpp	2005-08-14 04:40:58.000000000 +0200
++++ ./puzgen.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -313,6 +313,8 @@
  
  void genPuzzle(SolvedPuzzle &puzzle, Rules &rules)

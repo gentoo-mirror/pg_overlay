@@ -1,5 +1,5 @@
-diff -ruN a/einstein-2.0.dfsg.2/font.h ./font.h
---- b/einstein-2.0.dfsg.2/font.h	2005-08-16 00:33:17.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/font.h ./font.h
+--- ../orig/einstein-2.0.dfsg.2/font.h	2005-08-16 00:33:17.000000000 +0200
 +++ ./font.h	2007-08-31 10:00:33.000000000 +0200
 @@ -3,7 +3,7 @@
  
@@ -10,8 +10,8 @@ diff -ruN a/einstein-2.0.dfsg.2/font.h ./font.h
  
  
  class Font
-diff -ruN a/einstein-2.0.dfsg.2/iconset.h ./iconset.h
---- b/einstein-2.0.dfsg.2/iconset.h	2005-08-14 04:40:58.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/iconset.h ./iconset.h
+--- ../orig/einstein-2.0.dfsg.2/iconset.h	2005-08-14 04:40:58.000000000 +0200
 +++ ./iconset.h	2007-08-31 09:51:37.000000000 +0200
 @@ -2,7 +2,7 @@
  #define __ICONSET_H__
@@ -22,8 +22,8 @@ diff -ruN a/einstein-2.0.dfsg.2/iconset.h ./iconset.h
  
  
  class IconSet
-diff -ruN a/einstein-2.0.dfsg.2/main.cpp ./main.cpp
---- b/einstein-2.0.dfsg.2/main.cpp	2007-08-31 08:42:16.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/main.cpp ./main.cpp
+--- ../orig/einstein-2.0.dfsg.2/main.cpp	2007-08-31 08:42:16.000000000 +0200
 +++ ./main.cpp	2007-08-31 10:06:07.000000000 +0200
 @@ -1,8 +1,8 @@
  #include <stdlib.h>
@@ -37,8 +37,8 @@ diff -ruN a/einstein-2.0.dfsg.2/main.cpp ./main.cpp
  #include "main.h"
  #include "utils.h"
  #include "storage.h"
-diff -ruN a/einstein-2.0.dfsg.2/screen.cpp ./screen.cpp
---- b/einstein-2.0.dfsg.2/screen.cpp	2005-09-24 07:17:30.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/screen.cpp ./screen.cpp
+--- ../orig/einstein-2.0.dfsg.2/screen.cpp	2005-09-24 07:17:30.000000000 +0200
 +++ ./screen.cpp	2007-08-31 09:52:07.000000000 +0200
 @@ -1,4 +1,4 @@
 -#include <SDL.h>
@@ -46,8 +46,8 @@ diff -ruN a/einstein-2.0.dfsg.2/screen.cpp ./screen.cpp
  #include "screen.h"
  #include "exceptions.h"
  #include "unicode.h"
-diff -ruN a/einstein-2.0.dfsg.2/screen.h ./screen.h
---- b/einstein-2.0.dfsg.2/screen.h	2005-09-24 07:08:44.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/screen.h ./screen.h
+--- ../orig/einstein-2.0.dfsg.2/screen.h	2005-09-24 07:08:44.000000000 +0200
 +++ ./screen.h	2007-08-31 09:52:26.000000000 +0200
 @@ -2,7 +2,7 @@
  #define __SCREEN_H__
@@ -58,8 +58,8 @@ diff -ruN a/einstein-2.0.dfsg.2/screen.h ./screen.h
  #include <vector>
  #include <list>
  
-diff -ruN a/einstein-2.0.dfsg.2/sound.cpp ./sound.cpp
---- b/einstein-2.0.dfsg.2/sound.cpp	2005-09-24 08:32:07.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/sound.cpp ./sound.cpp
+--- ../orig/einstein-2.0.dfsg.2/sound.cpp	2005-09-24 08:32:07.000000000 +0200
 +++ ./sound.cpp	2007-08-31 10:07:35.000000000 +0200
 @@ -1,7 +1,7 @@
  #include "sound.h"
@@ -70,8 +70,8 @@ diff -ruN a/einstein-2.0.dfsg.2/sound.cpp ./sound.cpp
  #include "resources.h"
  
  
-diff -ruN a/einstein-2.0.dfsg.2/sound.h ./sound.h
---- b/einstein-2.0.dfsg.2/sound.h	2005-09-24 08:24:20.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/sound.h ./sound.h
+--- ../orig/einstein-2.0.dfsg.2/sound.h	2005-09-24 08:24:20.000000000 +0200
 +++ ./sound.h	2007-08-31 10:01:28.000000000 +0200
 @@ -4,7 +4,7 @@
  
@@ -82,8 +82,8 @@ diff -ruN a/einstein-2.0.dfsg.2/sound.h ./sound.h
  
  
  class Sound
-diff -ruN a/einstein-2.0.dfsg.2/utils.h ./utils.h
---- b/einstein-2.0.dfsg.2/utils.h	2005-08-14 04:40:58.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/utils.h ./utils.h
+--- ../orig/einstein-2.0.dfsg.2/utils.h	2005-08-14 04:40:58.000000000 +0200
 +++ ./utils.h	2007-08-31 09:52:39.000000000 +0200
 @@ -1,7 +1,7 @@
  #ifndef __UTILS_H__
@@ -94,8 +94,8 @@ diff -ruN a/einstein-2.0.dfsg.2/utils.h ./utils.h
  #include <string>
  #ifdef WIN32
  #include <sys/time.h>
-diff -ruN a/einstein-2.0.dfsg.2/widgets.h ./widgets.h
---- b/einstein-2.0.dfsg.2/widgets.h	2005-09-24 08:11:11.000000000 +0200
+diff -ruN ../orig/einstein-2.0.dfsg.2/widgets.h ./widgets.h
+--- ../orig/einstein-2.0.dfsg.2/widgets.h	2005-09-24 08:11:11.000000000 +0200
 +++ ./widgets.h	2007-08-31 09:59:58.000000000 +0200
 @@ -4,7 +4,7 @@
  #include <string>

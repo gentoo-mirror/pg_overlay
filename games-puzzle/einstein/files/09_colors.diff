@@ -1,5 +1,5 @@
---- a/einstein-2.0.dfsg.2/descr.cpp	2007-08-31 11:02:45.000000000 +0200
-+++ b/einstein-2.0.dfsg.2/descr.cpp	2007-08-31 13:48:19.000000000 +0200
+--- ../orig/einstein-2.0.dfsg.2/descr.cpp	2007-08-31 11:02:45.000000000 +0200
++++ ./descr.cpp	2007-08-31 13:48:19.000000000 +0200
 @@ -11,6 +11,7 @@
  #include "convert.h"
  #include "utils.h"
