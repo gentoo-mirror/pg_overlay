@@ -1,4 +1,4 @@
-diff -ruN a/einstein-2.0/descr.cpp ./descr.cpp
+diff -ruN ../orig/einstein-2.0/descr.cpp ./descr.cpp
 --- a/einstein-2.0/descr.cpp	2005-08-17 15:42:29.000000000 +0200
 +++ b/einstein-2.0/descr.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -139,9 +139,9 @@
@@ -14,7 +14,7 @@ diff -ruN a/einstein-2.0/descr.cpp ./descr.cpp
      textHeight = (int)(textFont->getHeight(L"A") * 1.0);
      text = new TextParser(msg(L"rulesText"), *textFont, START_X, START_Y, 
                  CLIENT_WIDTH, CLIENT_HEIGHT);
-diff -ruN a/einstein-2.0/game.cpp ./game.cpp
+diff -ruN ../orig/einstein-2.0/game.cpp ./game.cpp
 --- a/einstein-2.0/game.cpp	2005-08-23 00:44:54.000000000 +0200
 +++ b/einstein-2.0/game.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -33,7 +33,7 @@
@@ -100,7 +100,7 @@ diff -ruN a/einstein-2.0/game.cpp ./game.cpp
      
      area.setTimer(300, watch);
  
-diff -ruN a/einstein-2.0/main.cpp ./main.cpp
+diff -ruN ../orig/einstein-2.0/main.cpp ./main.cpp
 --- a/einstein-2.0/main.cpp	2005-09-26 12:32:54.000000000 +0200
 +++ b/einstein-2.0/main.cpp	2007-08-31 10:45:09.000000000 +0200
 @@ -78,7 +84,7 @@
@@ -112,7 +112,7 @@ diff -ruN a/einstein-2.0/main.cpp ./main.cpp
          Area area;
          showMessageWindow(&area, L"darkpattern.bmp", 
                  700, 100, &font, 255,255,255, 
-diff -ruN a/einstein-2.0/menu.cpp ./menu.cpp
+diff -ruN ../orig/einstein-2.0/menu.cpp ./menu.cpp
 --- a/einstein-2.0/menu.cpp	2005-09-25 22:51:00.000000000 +0200
 +++ b/einstein-2.0/menu.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -23,11 +23,11 @@
@@ -151,7 +151,7 @@ diff -ruN a/einstein-2.0/menu.cpp ./menu.cpp
  
      area.add(new MenuBackground());
      area.draw();
-diff -ruN a/einstein-2.0/opensave.cpp ./opensave.cpp
+diff -ruN ../orig/einstein-2.0/opensave.cpp ./opensave.cpp
 --- a/einstein-2.0/opensave.cpp	2005-08-14 23:33:36.000000000 +0200
 +++ b/einstein-2.0/opensave.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -160,7 +160,7 @@
@@ -181,7 +181,7 @@ diff -ruN a/einstein-2.0/opensave.cpp ./opensave.cpp
      
      Game *newGame = NULL;
      
-diff -ruN a/einstein-2.0/options.cpp ./options.cpp
+diff -ruN ../orig/einstein-2.0/options.cpp ./options.cpp
 --- a/einstein-2.0/options.cpp	2005-09-26 12:33:18.000000000 +0200
 +++ b/einstein-2.0/options.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -53,8 +53,8 @@
@@ -195,7 +195,7 @@ diff -ruN a/einstein-2.0/options.cpp ./options.cpp
  
      bool fullscreen = (getStorage()->get(L"fullscreen", 1) != 0);
      bool niceCursor = (getStorage()->get(L"niceCursor", 1) != 0);
-diff -ruN a/einstein-2.0/res/resources.descr ./res/resources.descr
+diff -ruN ../orig/einstein-2.0/res/resources.descr ./res/resources.descr
 --- a/einstein-2.0/res/resources.descr	2005-09-25 22:51:14.000000000 +0200
 +++ b/einstein-2.0/res/resources.descr	2007-08-31 08:42:16.000000000 +0200
 @@ -89,13 +90,11 @@
@@ -213,7 +213,7 @@ diff -ruN a/einstein-2.0/res/resources.descr ./res/resources.descr
      { name = "btn.bmp" }
      { name = "rules.txt", format = "messages" group = "messages" }
      { name = "rules_ru.txt", format = "messages" group = "messages" }
-diff -ruN a/einstein-2.0/topscores.cpp ./topscores.cpp
+diff -ruN ../orig/einstein-2.0/topscores.cpp ./topscores.cpp
 --- a/einstein-2.0/topscores.cpp	2005-08-14 23:08:43.000000000 +0200
 +++ b/einstein-2.0/topscores.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -103,9 +103,9 @@
