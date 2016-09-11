@@ -9,7 +9,7 @@ PYTHON_REQ_USE='threads(+)'
 
 WAF_PV='1.9.3'
 
-inherit fdo-mime gnome2-utils pax-utils python-any-r1 toolchain-funcs waf-utils
+inherit fdo-mime gnome2-utils pax-utils python-any-r1 toolchain-funcs versionator waf-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/"
@@ -29,9 +29,9 @@ DOCS+=( README.md etc/mpv.conf etc/input.conf )
 LICENSE="GPL-2+ BSD ISC"
 SLOT="0"
 IUSE="aqua +alsa archive bluray cdda +cli coreaudio doc drm dvb dvd +egl +enca
-	encode gbm +iconv jack jpeg lcms +libass libav libcaca libguess libmpv lua
+	encode gbm +iconv jack jpeg lcms +libass libav libcaca libguess libmpv +lua
 	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba -sdl
-	selinux test uchardet v4l vaapi vdpau vf-dlopen wayland +X xinerama
+	selinux test +uchardet v4l vaapi vdpau vf-dlopen wayland +X xinerama
 	+xscreensaver +xv zsh-completion"
 
 REQUIRED_USE="
@@ -143,6 +143,7 @@ src_configure() {
 	local mywafargs=(
 		--confdir="${EPREFIX}/etc/${PN}"
 		--docdir="${EPREFIX}/usr/share/doc/${PF}"
+		--htmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 
 		$(usex cli '' '--disable-cplayer')
 		$(use_enable libmpv libmpv-shared)
@@ -152,8 +153,8 @@ src_configure() {
 		--disable-static-build
 		#--disable-optimize		# Don't add '-O2' to CFLAGS.
 		--disable-debug-build	# Don't add '-g' to CFLAGS.
+		--disable-html-build
 
-		$(use_enable doc html-build)
 		$(use_enable doc pdf-build)
 		$(use_enable vf-dlopen vf-dlopen-filters)
 		$(use_enable zsh-completion zsh-comp)
@@ -257,6 +258,11 @@ src_configure() {
 src_install() {
 	waf-utils_src_install
 
+	if use lua; then
+		insinto /usr/share/${PN}
+		doins -r TOOLS/lua
+	fi
+
 	if use cli && use luajit; then
 		pax-mark -m "${ED}"usr/bin/${PN}
 	fi
@@ -269,6 +275,26 @@ pkg_preinst() {
 pkg_postinst() {
 	fdo-mime_desktop_database_update
 	gnome2_icon_cache_update
+
+	local rv softvol_0_18_1=0
+	for rv in ${REPLACING_VERSIONS}; do
+		version_compare ${rv} 0.18.1-r1
+		[[ $? -eq 1 ]] && softvol_0_18_1=1
+	done
+
+	if [[ ${softvol_0_18_1} -eq 1 ]]; then
+		echo
+		elog "Starting from version 0.18.1 the software volume control is"
+		elog "enabled by default, see:"
+		elog "https://github.com/mpv-player/mpv/blob/v0.18.1/DOCS/interface-changes.rst"
+		elog "https://github.com/mpv-player/mpv/issues/3322"
+		elog
+		elog "This means that volume controls don't change the system volume,"
+		elog "e.g. per-application volume with PulseAudio."
+		elog "If you want to restore the old behaviour, please refer to"
+		elog "https://bugs.gentoo.org/show_bug.cgi?id=588492#c7"
+		echo
+	fi
 
 	# bash-completion < 2.3-r1 already installs (mostly broken) mpv completion.
 	if use cli && ! has_version '<app-shells/bash-completion-2.3-r1' && \
@@ -291,6 +317,7 @@ pkg_postrm() {
 
 src_test() {
 	cd "${S}"/build/test || die
+	local test
 	for test in *; do
 		if [[ -x ${test} ]]; then
 			./"${test}" || die "Test suite failed"
