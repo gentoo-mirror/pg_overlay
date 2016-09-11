@@ -1,0 +1,38 @@
+diff -ruN -x '*.png' -x '*.jpg' -x '*.ogg' -x '*_image_archive' ../orig/einstein-2.0.dfsg.2/mkres/compressor.cpp ./mkres/compressor.cpp
+--- ../orig/einstein-2.0.dfsg.2/mkres/compressor.cpp	2005-08-14 04:40:58.000000000 +0200
++++ ./mkres/compressor.cpp	2008-01-26 11:50:29.000000000 +0100
+@@ -1,5 +1,6 @@
+ #include "compressor.h"
+ #include <zlib.h>
++#include <string.h>
+ #include "convert.h"
+ #include "exceptions.h"
+ 
+diff -ruN -x '*.png' -x '*.jpg' -x '*.ogg' -x '*_image_archive' ../orig/einstein-2.0.dfsg.2/mkres/main.cpp ./mkres/main.cpp
+--- ../orig/einstein-2.0.dfsg.2/mkres/main.cpp	2005-08-14 04:40:58.000000000 +0200
++++ ./mkres/main.cpp	2008-01-26 11:48:37.000000000 +0100
+@@ -1,3 +1,4 @@
++#include <string.h>
+ #include "compressor.h"
+ #include "exceptions.h"
+ #include "unicode.h"
+diff -ruN -x '*.png' -x '*.jpg' -x '*.ogg' -x '*_image_archive' ../orig/einstein-2.0.dfsg.2/mkres/unicode.cpp ./mkres/unicode.cpp
+--- ../orig/einstein-2.0.dfsg.2/mkres/unicode.cpp	2005-08-14 04:40:58.000000000 +0200
++++ ./mkres/unicode.cpp	2008-01-26 11:51:35.000000000 +0100
+@@ -1,5 +1,6 @@
+ #include <wchar.h>
+ #include <stdlib.h>
++#include <string.h>
+ #ifdef WIN32
+ #include <windows.h>
+ #endif
+diff -ruN -x '*.png' -x '*.jpg' -x '*.ogg' -x '*_image_archive' ../orig/einstein-2.0.dfsg.2/unicode.cpp ./unicode.cpp
+--- ../orig/einstein-2.0.dfsg.2/unicode.cpp	2005-08-14 04:40:58.000000000 +0200
++++ ./unicode.cpp	2008-01-26 11:49:10.000000000 +0100
+@@ -1,5 +1,6 @@
+ #include <wchar.h>
+ #include <stdlib.h>
++#include <string.h>
+ #ifdef WIN32
+ #include <windows.h>
+ #endif
