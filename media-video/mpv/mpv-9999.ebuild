@@ -153,7 +153,7 @@ src_configure() {
 		--disable-static-build
 		#--disable-optimize		# Don't add '-O2' to CFLAGS.
 		--disable-debug-build	# Don't add '-g' to CFLAGS.
-		--enable-html-build
+		--disable-html-build
 
 		$(use_enable doc pdf-build)
 		$(use_enable vf-dlopen vf-dlopen-filters)
