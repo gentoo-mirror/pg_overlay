@@ -1,5 +1,5 @@
---- ../orig/einstein-2.0.dfsg.2/res/rules.txt	2005-10-12 01:13:34.000000000 +0200
-+++ ./res/rules.txt	2010-01-19 21:35:24.000000000 +0100
+--- a/einstein-2.0.dfsg.2/res/rules.txt	2005-10-12 01:13:34.000000000 +0200
++++ b/einstein-2.0.dfsg.2/res/rules.txt	2010-01-19 21:35:24.000000000 +0100
 @@ -1,56 +1,56 @@
  rulesText = "
  

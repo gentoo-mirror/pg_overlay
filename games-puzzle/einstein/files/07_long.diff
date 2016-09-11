@@ -1,5 +1,5 @@
---- ../orig/einstein-2.0/formatter.cpp	2005-08-14 04:40:58.000000000 +0200
-+++ ./formatter.cpp	2007-08-31 08:42:16.000000000 +0200
+--- a/einstein-2.0/formatter.cpp	2005-08-14 04:40:58.000000000 +0200
++++ b/einstein-2.0/formatter.cpp	2007-08-31 08:42:16.000000000 +0200
 @@ -58,7 +58,7 @@
              if ((c.type == INT_ARG) || (c.type == STRING_ARG) ||
                      (c.type == FLOAT_ARG) || (c.type == DOUBLE_ARG))

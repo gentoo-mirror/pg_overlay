@@ -1,6 +1,6 @@
 diff -ruN ../orig/einstein-2.0.dfsg.2/res/messages_de.txt ./res/messages_de.txt
---- ../orig/einstein-2.0.dfsg.2/res/messages_de.txt	1970-01-01 01:00:00.000000000 +0100
-+++ ./res/messages_de.txt	2010-01-19 21:10:45.000000000 +0100
+--- a/einstein-2.0.dfsg.2/res/messages_de.txt	1970-01-01 01:00:00.000000000 +0100
++++ b/einstein-2.0/res/messages_de.txt	2010-01-19 21:10:45.000000000 +0100
 @@ -0,0 +1,39 @@
 +rules = "Spielregeln"
 +close = "Schließen"
@@ -42,8 +42,8 @@ diff -ruN ../orig/einstein-2.0.dfsg.2/res/messages_de.txt ./res/messages_de.txt
 +volume = "Lautstärke:"
 +
 diff -ruN ../orig/einstein-2.0.dfsg.2/res/resources.descr ./res/resources.descr
---- ../orig/einstein-2.0.dfsg.2/res/resources.descr	2005-09-25 22:51:14.000000000 +0200
-+++ ./res/resources.descr	2010-01-19 21:12:09.000000000 +0100
+--- a/einstein-2.0.dfsg.2/res/resources.descr	2005-09-25 22:51:14.000000000 +0200
++++ b/einstein-2.0/res/resources.descr	2010-01-19 21:12:09.000000000 +0100
 @@ -99,8 +99,10 @@
      { name = "btn.bmp" }
      { name = "rules.txt", format = "messages" group = "messages" }
@@ -56,7 +56,7 @@ diff -ruN ../orig/einstein-2.0.dfsg.2/res/resources.descr ./res/resources.descr
      { name = "applause.wav" }
      { name = "glasbk2.wav" }
 diff -ruN ../orig/einstein-2.0.dfsg.2/res/rules_de.txt ./res/rules_de.txt
---- ../orig/einstein-2.0.dfsg.2/res/rules_de.txt	1970-01-01 01:00:00.000000000 +0100
+--- a/einstein-2.0.dfsg.2/res/rules_de.txt	1970-01-01 01:00:00.000000000 +0100
 +++ ./res/rules_de.txt	2010-01-19 21:10:39.000000000 +0100
 @@ -0,0 +1,64 @@
 +rulesText = "
