@@ -2,7 +2,7 @@ app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-dicts/myspell-en 20160501 20160701: English dictionaries for myspell/hunspell
-app-misc/double-commander 0.7.3: Cross Platform file manager.
+app-misc/double-commander 0.7.5: Cross Platform file manager.
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
