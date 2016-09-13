@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 x86"
-IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi inox iridium ungoogled"
+IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi +inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 # TODO: bootstrapped gn binary hangs when using tcmalloc with portage's sandbox.
@@ -193,8 +193,6 @@ src_prepare() {
 	epatch "${FILESDIR}/${PN}-last-commit-position-r0.patch"
 	epatch "${FILESDIR}/${PN}-system-zlib-r0.patch"
 
-	epatch "${FILESDIR}/${PN}-52.0.2743.116-unset-madv_free.patch"
-
 	use vaapi && epatch "${FILESDIR}/chromium_vaapi.patch"
 
 	# Inox patches
@@ -220,6 +218,9 @@ src_prepare() {
 		#do epatch "${FILESDIR}/ungoogled-chromium/$i"; \
 		#done
 	#fi
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
 
 	epatch_user
 
@@ -402,7 +403,7 @@ src_configure() {
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1"
 
-	#Inox
+	#AUR Inox
 	myconf_gyp+="
 		-Dlinux_strip_binary=1
 		-Duse_mojo=0
@@ -412,10 +413,8 @@ src_configure() {
 		-Ddisable_glibc=1
 		-Denable_webrtc=1
 		-Denable_google_now=0
-		-Denable_remoting=0
-		-Dsafe_browsing_mode=0
+		-Dremoting=0
 		-Denable_rlz=0
-		-Denable_hangout_services_extension=0
 		-Dbranding=Chromium
 		-Dgoogle_chrome_build=0
 		-Denable_web_speech=1
@@ -426,6 +425,23 @@ src_configure() {
 		-Dtracing_like_official_build=1
 		-Dfieldtrial_testing_like_official_build=1
 		-Dfastbuild=2"
+
+	# AUR Chromium-minimum
+	myconf_gyp+="
+		-Dlogging_like_official_build=1
+		-Ddisable_nacl=1
+		-Ddisable_pnacl=1"
+
+	# Ungoogled
+	myconf_gyp+="
+		-Denable_mpeg2ts_stream_parser=1
+		-Denable_hevc_demuxing=1
+		-Dlinux_breakpad=0
+		-Dlinux_use_libgps=0"
+
+	#######
+	myconf_gyp+="
+		$(gyp_use gnome use_gio)"
 
 	local gn_system_libraries="
 		flac
