@@ -1,0 +1,11 @@
+pings.patch
+promo.patch
+google-api-warning.patch
+third-party-cookies.patch
+
+gtk3.patch
+gtk3theme.patch
+
+khronos.patch
+ps-print.patch
+gpu-timeout.patch

@@ -222,6 +222,9 @@ src_prepare() {
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
 
+	# Debian patches
+	for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
+
 	epatch_user
 
 	local conditional_bundled_libraries=""
@@ -437,7 +440,8 @@ src_configure() {
 		-Denable_mpeg2ts_stream_parser=1
 		-Denable_hevc_demuxing=1
 		-Dlinux_breakpad=0
-		-Dlinux_use_libgps=0"
+		-Dlinux_use_libgps=0
+		-Denable_prod_wallet_service=0"
 
 	#######
 	myconf_gyp+="
