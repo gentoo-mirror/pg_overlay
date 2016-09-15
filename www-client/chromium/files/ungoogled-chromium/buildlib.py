@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 # ungoogled-chromium: A Google Chromium variant for removing Google integration and
 # enhancing privacy, control, and transparency
 # Copyright (C) 2016  Eloston
