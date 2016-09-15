@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 x86"
-IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi +inox iridium ungoogled"
+IUSE="cups gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux system-ffmpeg +tcmalloc widevine vaapi inox iridium +ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 # TODO: bootstrapped gn binary hangs when using tcmalloc with portage's sandbox.
@@ -206,16 +206,7 @@ src_prepare() {
 	#fi
 
 	# Ungoogled Chromium patches
-	if use ungoogled; then
-		#echo "Stripping binaries from the source code"
-		#"${FILESDIR}"/ungoogled-chromium/generate_cleaning_list.sh > cleaning_list || die
-		#"${FILESDIR}"/ungoogled-chromium/evaluate_cleaning_list.py cleaning_list || die
-		#echo "Replacing many domains in the source code with non-existant alternatives"
-		#"${FILESDIR}"/ungoogled-chromium/generate_domain_substitution_list.sh > domain_substitution_list || die
-		#"${FILESDIR}"/ungoogled-chromium/evaluate_domain_substitution_list.py "${FILESDIR}"/ungoogled-chromium/domain_regex_list domain_substitution_list || die
-		echo "Applying Ungoogled patches"
-		for i in $(cat "${FILESDIR}/ungoogled-chromium/series"); do epatch "${FILESDIR}/ungoogled-chromium/$i"; done
-	fi
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium/series"); do epatch "${FILESDIR}/ungoogled-chromium/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
