@@ -1,0 +1,69 @@
+# Disable domain reliability component
+
+--- a/components/domain_reliability/baked_in_configs.gypi
++++ b/components/domain_reliability/baked_in_configs.gypi
+@@ -5,23 +5,6 @@
+ {
+   'variables': {
+     'baked_in_configs': [
+-      'domain_reliability/baked_in_configs/c_android_clients_google_com.json',
+-      'domain_reliability/baked_in_configs/c_bigcache_googleapis_com.json',
+-      'domain_reliability/baked_in_configs/c_doc-0-0-sj_sj_googleusercontent_com.json',
+-      'domain_reliability/baked_in_configs/c_docs_google_com.json',
+-      'domain_reliability/baked_in_configs/c_drive_google_com.json',
+-      'domain_reliability/baked_in_configs/c_googlesyndication_com.json',
+-      'domain_reliability/baked_in_configs/c_pack_google_com.json',
+-      'domain_reliability/baked_in_configs/c_play_google_com.json',
+-      'domain_reliability/baked_in_configs/c_youtube_com.json',
+-      'domain_reliability/baked_in_configs/clients2_google_com.json',
+-      'domain_reliability/baked_in_configs/docs_google_com.json',
+-      'domain_reliability/baked_in_configs/google-analytics_com.json',
+-      'domain_reliability/baked_in_configs/googlevideo_com.json',
+-      'domain_reliability/baked_in_configs/gvt1_com.json',
+-      'domain_reliability/baked_in_configs/gvt2_com.json',
+-      'domain_reliability/baked_in_configs/ssl_gstatic_com.json',
+-      'domain_reliability/baked_in_configs/www_google_com.json',
+     ],
+   },
+ }
+--- a/components/domain_reliability/google_configs.cc
++++ b/components/domain_reliability/google_configs.cc
+@@ -11,7 +11,7 @@
+ #include "components/domain_reliability/config.h"
+ 
+ namespace domain_reliability {
+-
++#if 0
+ namespace {
+ 
+ struct GoogleConfigParams {
+@@ -534,17 +534,11 @@ CreateGoogleConfig(const GoogleConfigParams& params, bool is_www) {
+ }
+ 
+ }  // namespace
+-
++#endif
+ // static
+ void GetAllGoogleConfigs(
+     std::vector<DomainReliabilityConfig*>* configs_out) {
+   configs_out->clear();
+-
+-  for (auto& params : kGoogleConfigs) {
+-    configs_out->push_back(CreateGoogleConfig(params, false).release());
+-    if (params.duplicate_for_www)
+-      configs_out->push_back(CreateGoogleConfig(params, true).release());
+-  }
+ }
+ 
+ }  // namespace domain_reliability
+--- a/components/domain_reliability/uploader.cc
++++ b/components/domain_reliability/uploader.cc
+@@ -75,7 +75,7 @@ class DomainReliabilityUploaderImpl
+     VLOG(1) << "Uploading report to " << upload_url;
+     VLOG(2) << "Report JSON: " << report_json;
+ 
+-    if (discard_uploads_) {
++    if (true) {
+       VLOG(1) << "Discarding report instead of uploading.";
+       UploadResult result;
+       result.status = UploadResult::SUCCESS;
