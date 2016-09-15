@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI="5"
-PYTHON_COMPAT=( python2_7 python3_5 )
+PYTHON_COMPAT=( python2_7 )
 
 CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
@@ -206,17 +206,7 @@ src_prepare() {
 	#fi
 
 	# Ungoogled Chromium patches
-	if use ungoogled; then
-		echo "Stripping binaries from the source code"
-		#"${FILESDIR}"/ungoogled-chromium/generate_cleaning_list.sh > cleaning_list || die
-		"${FILESDIR}"/ungoogled-chromium/buildlib.py "${FILESDIR}"/ungoogled-chromium/cleaning_list || die
-		echo "Replacing many domains in the source code with non-existant alternatives"
-		#"${FILESDIR}"/ungoogled-chromium/generate_domain_substitution_list.sh > domain_substitution_list || die
-		"${FILESDIR}"/ungoogled-chromium/buildlib.py "${FILESDIR}"/ungoogled-chromium/domain_substitution_list || die
-		"${FILESDIR}"/ungoogled-chromium/buildlib.py "${FILESDIR}"/ungoogled-chromium/domain_regex_list || die
-		echo "Applying Ungoogled patches"
-		for i in $(cat "${FILESDIR}/ungoogled-chromium/series"); do epatch "${FILESDIR}/ungoogled-chromium/$i"; done
-	fi
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium/series"); do epatch "${FILESDIR}/ungoogled-chromium/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
