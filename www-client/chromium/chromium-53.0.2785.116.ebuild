@@ -441,6 +441,9 @@ src_configure() {
 		-Dlinux_use_libgps=0
 		-Denable_prod_wallet_service=0"
 
+	use ungoogled && myconf_gyp+="
+						-Dsafe_browsing=0"
+
 	#######
 	myconf_gyp+="
 		$(gyp_use gnome use_gio)"
