@@ -5,13 +5,9 @@
 		<email>hwoarang@gentoo.org</email>
 		<name>Markos Chandras</name>
 	</maintainer>
-	<use>
-		<flag name="gtk">Pull in the gtk+ greeter</flag>
-		<flag name="kde">Pull in the kde greeter</flag>
-	</use>
 	<longdescription lang="en">
 </longdescription>
 	<upstream>
-		<remote-id type="launchpad">lightdm</remote-id>
+		<remote-id type="launchpad">lightdm-gtk-greeter</remote-id>
 	</upstream>
 </pkgmetadata>
