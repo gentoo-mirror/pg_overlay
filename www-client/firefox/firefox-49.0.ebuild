@@ -262,7 +262,7 @@ src_compile() {
 	if use pgo; then
 		addpredict /root
 		addpredict /etc/gconf
-		addpredict /proc/self/oom_score_adj
+		addpredict /proc/self
 		# Reset and cleanup environment variables used by GNOME/XDG
 		gnome2_environment_reset
 
