@@ -1,11 +1,11 @@
 # HG changeset patch
-# Parent  07e419c2bbc63c486d25fd8ce117abd10e9ebdba
+# Parent  2704257a50b4ff60fa43eca8d4a547c6d70bb30e
 
 diff --git a/browser/base/content/browser-kde.xul b/browser/base/content/browser-kde.xul
 new file mode 100644
 --- /dev/null
 +++ b/browser/base/content/browser-kde.xul
-@@ -0,0 +1,1174 @@
+@@ -0,0 +1,1179 @@
 +#filter substitution
 +<?xml version="1.0"?>
 +# -*- Mode: HTML -*-
@@ -16,6 +16,7 @@ new file mode 100644
 +
 +<?xml-stylesheet href="chrome://browser/content/browser.css" type="text/css"?>
 +<?xml-stylesheet href="chrome://browser/content/places/places.css" type="text/css"?>
++<?xml-stylesheet href="chrome://browser/content/usercontext/usercontext.css" type="text/css"?>
 +<?xml-stylesheet href="chrome://devtools/skin/devtools-browser.css" type="text/css"?>
 +<?xml-stylesheet href="chrome://browser/skin/controlcenter/panel.css" type="text/css"?>
 +<?xml-stylesheet href="chrome://browser/skin/customizableui/panelUIOverlay.css" type="text/css"?>
@@ -296,18 +297,6 @@ new file mode 100644
 +           noautofocus="true"
 +           position="topcenter topright"/>
 +
-+    <panel id="loop-notification-panel"
-+           class="loop-panel social-panel"
-+           type="arrow"
-+           hidden="true"
-+           noautofocus="true"/>
-+
-+    <panel id="loop-panel"
-+           class="loop-panel social-panel"
-+           type="arrow"
-+           orient="horizontal"
-+           hidden="true"/>
-+
 +    <menupopup id="toolbar-context-menu"
 +               onpopupshowing="onViewToolbarsPopupShowing(event, document.getElementById('viewToolbarsMenuSeparator'));">
 +      <menuitem oncommand="gCustomizeMode.addToPanel(document.popupNode)"
@@ -388,7 +377,28 @@ new file mode 100644
 +#include browser-context.inc
 +    </menupopup>
 +
-+    <menupopup id="placesContext"/>
++    <menupopup id="placesContext">
++      <menuseparator id="placesContext_recentlyBookmarkedSeparator"
++                     ignoreitem="true"
++                     ordinal="2"
++                     hidden="true"/>
++      <menuitem id="placesContext_hideRecentlyBookmarked"
++                label="&hideRecentlyBookmarked.label;"
++                accesskey="&hideRecentlyBookmarked.accesskey;"
++                oncommand="BookmarkingUI.hideRecentlyBookmarked();"
++                closemenu="single"
++                ignoreitem="true"
++                ordinal="2"
++                hidden="true"/>
++      <menuitem id="placesContext_showRecentlyBookmarked"
++                label="&showRecentlyBookmarked.label;"
++                accesskey="&showRecentlyBookmarked.accesskey;"
++                oncommand="BookmarkingUI.showRecentlyBookmarked();"
++                closemenu="single"
++                ignoreitem="true"
++                ordinal="2"
++                hidden="true"/>
++    </menupopup>
 +
 +    <panel id="ctrlTab-panel" class="KUI-panel" hidden="true" norestorefocus="true" level="top">
 +      <hbox>
@@ -401,21 +411,6 @@ new file mode 100644
 +      </hbox>
 +      <hbox pack="center">
 +        <button id="ctrlTab-showAll" class="ctrlTab-preview" noicon="true"/>
-+      </hbox>
-+    </panel>
-+
-+    <!-- Sync Panel -->
-+    <panel id="sync-start-panel" class="sync-panel" type="arrow" hidden="true"
-+           noautofocus="true" onclick="this.hidePopup();"
-+           flip="slide">
-+      <hbox class="sync-panel-outer">
-+        <image class="sync-panel-icon"/>
-+        <vbox class="sync-panel-inner">
-+          <description id="sync-start-panel-title"
-+                       value="&syncStartPanel2.heading;"/>
-+          <description id="sync-start-panel-subtitle"
-+                       value="&syncStartPanel2.subTitle;"/>
-+        </vbox>
 +      </hbox>
 +    </panel>
 +
@@ -634,7 +629,12 @@ new file mode 100644
 +                    key="key_undoCloseTab"
 +                    label="&undoCloseTab.label;"
 +                    observes="History:UndoCloseTab"/>
-+          <menuseparator id="alltabs-popup-separator"/>
++          <menuseparator id="alltabs-popup-separator-1"/>
++          <menu id="alltabs_containersTab"
++                label="&newUserContext.label;">
++            <menupopup id="alltabs_containersMenuTab" />
++          </menu>
++          <menuseparator id="alltabs-popup-separator-2"/>
 +        </menupopup>
 +      </toolbarbutton>
 +
@@ -718,41 +718,41 @@ new file mode 100644
 +              <box id="notification-popup-box" hidden="true" align="center">
 +                <image id="default-notification-icon" class="notification-anchor-icon" role="button"
 +                       aria-label="&urlbar.defaultNotificationAnchor.label;"/>
-+                <image id="geo-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="geo-notification-icon" class="notification-anchor-icon geo-icon" role="button"
 +                       aria-label="&urlbar.geolocationNotificationAnchor.label;"/>
-+                <image id="addons-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="addons-notification-icon" class="notification-anchor-icon install-icon" role="button"
 +                       aria-label="&urlbar.addonsNotificationAnchor.label;"/>
-+                <image id="indexedDB-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="indexedDB-notification-icon" class="notification-anchor-icon indexedDB-icon" role="button"
 +                       aria-label="&urlbar.indexedDBNotificationAnchor.label;"/>
-+                <image id="login-fill-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="login-fill-notification-icon" class="notification-anchor-icon login-icon" role="button"
 +                       aria-label="&urlbar.loginFillNotificationAnchor.label;"/>
-+                <image id="password-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="password-notification-icon" class="notification-anchor-icon login-icon" role="button"
 +                       aria-label="&urlbar.passwordNotificationAnchor.label;"/>
-+                <image id="plugins-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="plugins-notification-icon" class="notification-anchor-icon plugin-icon" role="button"
 +                       aria-label="&urlbar.pluginsNotificationAnchor.label;"/>
-+                <image id="web-notifications-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="web-notifications-notification-icon" class="notification-anchor-icon web-notifications-icon" role="button"
 +                       aria-label="&urlbar.webNotsNotificationAnchor3.label;"/>
-+                <image id="webRTC-shareDevices-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="webRTC-shareDevices-notification-icon" class="notification-anchor-icon camera-icon" role="button"
 +                       aria-label="&urlbar.webRTCShareDevicesNotificationAnchor.label;"/>
-+                <image id="webRTC-sharingDevices-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="webRTC-sharingDevices-notification-icon" class="notification-anchor-icon camera-icon in-use" role="button"
 +                       aria-label="&urlbar.webRTCSharingDevicesNotificationAnchor.label;"/>
-+                <image id="webRTC-shareMicrophone-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="webRTC-shareMicrophone-notification-icon" class="notification-anchor-icon microphone-icon" role="button"
 +                       aria-label="&urlbar.webRTCShareMicrophoneNotificationAnchor.label;"/>
-+                <image id="webRTC-sharingMicrophone-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="webRTC-sharingMicrophone-notification-icon" class="notification-anchor-icon microphone-icon in-use" role="button"
 +                       aria-label="&urlbar.webRTCSharingMicrophoneNotificationAnchor.label;"/>
-+                <image id="webRTC-shareScreen-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="webRTC-shareScreen-notification-icon" class="notification-anchor-icon screen-icon" role="button"
 +                       aria-label="&urlbar.webRTCShareScreenNotificationAnchor.label;"/>
-+                <image id="webRTC-sharingScreen-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="webRTC-sharingScreen-notification-icon" class="notification-anchor-icon screen-icon in-use" role="button"
 +                       aria-label="&urlbar.webRTCSharingScreenNotificationAnchor.label;"/>
-+                <image id="pointerLock-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="pointerLock-notification-icon" class="notification-anchor-icon pointer-icon" role="button"
 +                       aria-label="&urlbar.pointerLockNotificationAnchor.label;"/>
-+                <image id="servicesInstall-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="servicesInstall-notification-icon" class="notification-anchor-icon service-icon" role="button"
 +                       aria-label="&urlbar.servicesNotificationAnchor.label;"/>
-+                <image id="translate-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="translate-notification-icon" class="notification-anchor-icon translation-icon" role="button"
 +                       aria-label="&urlbar.translateNotificationAnchor.label;"/>
-+                <image id="translated-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="translated-notification-icon" class="notification-anchor-icon translation-icon in-use" role="button"
 +                       aria-label="&urlbar.translatedNotificationAnchor.label;"/>
-+                <image id="eme-notification-icon" class="notification-anchor-icon" role="button"
++                <image id="eme-notification-icon" class="notification-anchor-icon drm-icon" role="button"
 +                       aria-label="&urlbar.emeNotificationAnchor.label;"/>
 +              </box>
 +              <!-- Use onclick instead of normal popup= syntax since the popup
@@ -789,7 +789,7 @@ new file mode 100644
 +                       hidden="true"
 +                       onclick="ReaderParent.buttonClick(event);"/>
 +              </hbox>
-+              <hbox id="userContext-icons">
++              <hbox id="userContext-icons" hidden="true">
 +                <label id="userContext-label"/>
 +                <image id="userContext-indicator"/>
 +              </hbox>
@@ -855,6 +855,11 @@ new file mode 100644
 +                      label="&showAllBookmarks2.label;"
 +                      command="Browser:ShowAllBookmarks"
 +                      key="manBookmarkKb"/>
++            <menuseparator/>
++            <menuitem label="&recentBookmarks.label;"
++                      id="BMB_recentBookmarks"
++                      disabled="true"
++                      class="menuitem-iconic subviewbutton"/>
 +            <menuseparator/>
 +            <menu id="BMB_bookmarksToolbar"
 +                  class="menu-iconic bookmark-item subviewbutton"
@@ -1288,7 +1293,7 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
      // when the user will select the default.  We refresh here periodically
      // in case the default changes. On other Windows OS's defaults can also
      // be set while the prefs are open.
-@@ -736,16 +742,27 @@ var gMainPane = {
+@@ -730,16 +736,27 @@ var gMainPane = {
      let alwaysCheckPref = document.getElementById("browser.shell.checkDefaultBrowser");
      alwaysCheckPref.value = true;
  
@@ -1631,7 +1636,7 @@ new file mode 100644
 diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
 --- a/browser/installer/package-manifest.in
 +++ b/browser/installer/package-manifest.in
-@@ -689,16 +689,17 @@
+@@ -676,16 +676,17 @@
  @RESPATH@/greprefs.js
  @RESPATH@/defaults/autoconfig/prefcalls.js
  @RESPATH@/browser/defaults/permissions
@@ -1643,9 +1648,9 @@ diff --git a/browser/installer/package-manifest.in b/browser/installer/package-m
 +@BINPATH@/defaults/pref/kde.js
  
  ; Services (gre) prefs
- #ifdef MOZ_SERVICES_NOTIFICATIONS
- @RESPATH@/defaults/pref/services-notifications.js
- #endif
  @RESPATH@/defaults/pref/services-sync.js
  
  ; [Layout Engine Resources]
+ ; Style Sheets, Graphics and other Resources used by the layout engine.
+ @RESPATH@/res/EditorOverride.css
+ @RESPATH@/res/contenteditable.css

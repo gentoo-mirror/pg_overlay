@@ -1,0 +1,32 @@
+# HG changeset patch
+# User Lee Salzman <lsalzman@mozilla.com>
+# Date 1474489725 14400
+#      Wed Sep 21 16:28:45 2016 -0400
+# Node ID 38a427a913b57080374b9966466b8f436ec39eb8
+# Parent  4dfd3f00543d1d7adc3f0f852e6f32fbca6f3420
+fix invalid Sk4f store to SkColor in SkPixmap::erase
+
+MozReview-Commit-ID: 840x1nXgYns
+
+diff --git a/gfx/skia/skia/src/core/SkPixmap.cpp b/gfx/skia/skia/src/core/SkPixmap.cpp
+--- a/gfx/skia/skia/src/core/SkPixmap.cpp
++++ b/gfx/skia/skia/src/core/SkPixmap.cpp
+@@ -221,17 +221,17 @@ bool SkPixmap::erase(const SkColor4f& or
+         pm = *this;
+     }
+ 
+     const SkColor4f color = origColor.pin();
+ 
+     if (kRGBA_F16_SkColorType != pm.colorType()) {
+         Sk4f c4 = Sk4f::Load(color.vec());
+         SkColor c;
+-        (c4 * Sk4f(255) + Sk4f(0.5f)).store(&c);
++        SkNx_cast<uint8_t>(c4 * Sk4f(255) + Sk4f(0.5f)).store(&c);
+         return pm.erase(c);
+     }
+ 
+     const uint64_t half4 = color.premul().toF16();
+     for (int y = 0; y < pm.height(); ++y) {
+         sk_memset64(pm.writable_addr64(0, y), half4, pm.width());
+     }
+     return true;

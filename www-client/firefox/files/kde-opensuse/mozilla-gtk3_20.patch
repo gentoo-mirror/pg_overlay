@@ -2331,3 +2331,4 @@ diff -up firefox-48.0/widget/gtk/WidgetStyleCache.h.gtk3-20 firefox-48.0/widget/
                    StyleFlags aFlags = NO_STYLE_FLAGS);
  void
  ReleaseStyleContext(GtkStyleContext* style);
+
