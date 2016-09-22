@@ -1,6 +1,6 @@
 firefox-build-prbool.patch
 firefox-enable-addons.patch
-firefox-fedora-ua.patch
+#firefox-fedora-ua.patch
 rhbz-1291190-appchooser-crash.patch
 mozilla-1170092.patch
 mozilla-1253216.patch
