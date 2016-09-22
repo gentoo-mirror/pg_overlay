@@ -209,7 +209,7 @@ src_configure() {
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-ipdl-tests
-	mozconfig_annotate '' --disable-update-channel
+	#mozconfig_annotate '' --disable-update-channel
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 
