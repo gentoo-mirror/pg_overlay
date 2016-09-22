@@ -2,7 +2,6 @@ mozilla-language.patch
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
 mozilla-no-stdcxx-check.patch
-mozilla-binutils-visibility.patch
 mozilla-flex_buffer_overrun.patch
 mozilla-gtk3_20.patch
 
