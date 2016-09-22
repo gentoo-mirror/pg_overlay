@@ -26,7 +26,7 @@ gnome-extra/nemo-extensions 3.0.0: Extensions for Cinnamon's file-manager Nemo
 gnome-extra/nemo-fileroller 3.0.0: Provides context menu for Nemo
 gnome-extra/nemo-terminal 3.0.0: Nemo-Terminal Extension
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-mail-client/thunderbird 45.3.0-r1: Thunderbird Mail Client
+mail-client/thunderbird 45.3.0-r2: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
 media-fonts/iosevka 1.9.2: Open source coding font
 media-gfx/xviewer 1.0.6: A simple and easy to use image viewer. X-Apps Project
