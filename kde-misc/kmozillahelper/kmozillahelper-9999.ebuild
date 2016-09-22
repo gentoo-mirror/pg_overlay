@@ -47,12 +47,6 @@ DEPEND="${COMMON_DEPEND}
 "
 RDEPEND="${COMMON_DEPEND}"
 
-src_prepare() {
-	default
-	# Use a stock X icon for kdialog window - suppress display of this icon using the supplied kwin rule
-	eapply "${FILESDIR}/${PN}-0.6.5-use-x-icon.patch"
-}
-
 pkg_postinst() {
 	ewarn "To suppress the taskbar icon for ${PN} file dialog window - install Kwin rule"
 	ewarn "${FILESDIR}/kwinrulesrc to \${HOME}/.config/"

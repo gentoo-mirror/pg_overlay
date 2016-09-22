@@ -21,15 +21,14 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-48.0-patches-01"
+PATCH="${PN}-49.0-patches-02"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
-#MOZCONFIG_OPTIONAL_QT5=1 -- fails to build so leave it off until the code can be patched
-MOZCONFIG_OPTIONAL_GTK2ONLY=0
-MOZCONFIG_OPTIONAL_WIFI=0
+MOZCONFIG_OPTIONAL_GTK2ONLY=1
+MOZCONFIG_OPTIONAL_WIFI=1
 MOZCONFIG_OPTIONAL_JIT="enabled"
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.48 pax-utils fdo-mime autotools virtualx mozlinguas-v2
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.49 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
@@ -49,11 +48,9 @@ SRC_URI="${SRC_URI}
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
-	>=dev-libs/nss-3.24
+	>=dev-libs/nss-3.25
 	>=dev-libs/nspr-4.12
-	selinux? ( sec-policy/selinux-mozilla )
-	kde? ( kde-apps/kdialog:5
-		kde-misc/kmozillahelper )"
+	selinux? ( sec-policy/selinux-mozilla )"
 
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
@@ -112,12 +109,8 @@ src_unpack() {
 
 src_prepare() {
 	# Apply our patches
-	eapply "${WORKDIR}/firefox"
-#		"${FILESDIR}"/${PN}-45-qt-widget-fix.patch
-
-	if ! tc-ld-is-gold && has_version ">=sys-devel/binutils-2.26" ; then
-		eapply "${FILESDIR}"/xpcom-components-binutils-26.patch
-	fi
+	eapply "${WORKDIR}/firefox" \
+		"${FILESDIR}"/${PN}-48.0-pgo.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -272,7 +265,6 @@ src_compile() {
 	if use pgo; then
 		addpredict /root
 		addpredict /etc/gconf
-		addpredict /proc/self
 		# Reset and cleanup environment variables used by GNOME/XDG
 		gnome2_environment_reset
 

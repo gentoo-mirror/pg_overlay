@@ -125,7 +125,7 @@ diff -up firefox-48.0/extensions/auth/nsHttpNegotiateAuth.cpp.890908-async-nego 
 +// This runnable is created by GenerateCredentialsAsync and it runs
 +// in nsHttpNegotiateAuth::mNegotiateThread and calling GenerateCredentials.
 +//
-+class GetNextTokenRunnable final : public nsRunnable
++class GetNextTokenRunnable final : public mozilla::Runnable
 +{
 +    virtual ~GetNextTokenRunnable() {}
 +    public:
