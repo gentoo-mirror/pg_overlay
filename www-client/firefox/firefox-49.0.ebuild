@@ -223,6 +223,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-gconf
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
+	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
@@ -261,6 +262,7 @@ src_compile() {
 	if use pgo; then
 		addpredict /root
 		addpredict /etc/gconf
+		addpredict /proc
 		# Reset and cleanup environment variables used by GNOME/XDG
 		gnome2_environment_reset
 
