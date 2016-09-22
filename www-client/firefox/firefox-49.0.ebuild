@@ -24,8 +24,8 @@ fi
 PATCH="${PN}-49.0-patches-02"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
-MOZCONFIG_OPTIONAL_GTK2ONLY=1
-MOZCONFIG_OPTIONAL_WIFI=1
+MOZCONFIG_OPTIONAL_GTK2ONLY=0
+MOZCONFIG_OPTIONAL_WIFI=0
 MOZCONFIG_OPTIONAL_JIT="enabled"
 
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.49 pax-utils fdo-mime autotools virtualx mozlinguas-v2
@@ -209,7 +209,6 @@ src_configure() {
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-ipdl-tests
-	#mozconfig_annotate '' --disable-update-channel
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 
