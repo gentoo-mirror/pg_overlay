@@ -149,10 +149,10 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# OpenSUSE-KDE patchset
-	#use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
+	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -200,8 +200,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	#mozconfig_annotate '' --enable-elf-hack
-	mozconfig_annotate '' --enable-system-hunspell
+	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-url-classifier
 
@@ -220,10 +219,11 @@ src_configure() {
 	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --enable-system-hunspell
 	mozconfig_annotate '' --disable-gconf
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
-	#mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-debug-symbols
 
@@ -262,7 +262,7 @@ src_compile() {
 	if use pgo; then
 		addpredict /root
 		addpredict /etc/gconf
-		#addpredict /proc # Don't know what triggers it
+		addpredict /proc # Don't know what triggers it
 		# Reset and cleanup environment variables used by GNOME/XDG
 		gnome2_environment_reset
 
