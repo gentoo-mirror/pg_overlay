@@ -200,7 +200,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	mozconfig_annotate '' --enable-elf-hack
+	#mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-system-hunspell
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-url-classifier
