@@ -212,7 +212,7 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
 
 	# Debian patches
-	#for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
+	use gtk3 && use !ungoogled && for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
 
 	epatch_user
 
