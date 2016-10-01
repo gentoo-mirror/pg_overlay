@@ -426,7 +426,6 @@ src_configure() {
 
 	# Ungoogled
 	myconf_gyp+="
-		-Ddisable_newlib=1
 		-Denable_remoting_host=0
 		-Denable_automation=0
 		-Denable_hotwording=0
@@ -440,6 +439,7 @@ src_configure() {
 		-Dlinux_use_libgps=0"
 
 	use ungoogled && myconf_gyp+="
+						-Ddisable_newlib=1
 						-Dsafe_browsing=0"
 
 	#######
