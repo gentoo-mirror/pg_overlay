@@ -436,11 +436,11 @@ src_configure() {
 						-Ddisable_newlib=1
 						-Denable_remoting_host=0
 						-Denable_automation=0
+						-Dsafe_browsing=0
 						-Denable_hotwording=0
 						-Duse_official_google_api_keys=0
 						-Denable_prod_wallet_service=0
-						-Denable_one_click_signin=0
-						-Dsafe_browsing=0"
+						-Denable_one_click_signin=0"
 
 	#######
 	myconf_gyp+="
