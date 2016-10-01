@@ -426,9 +426,6 @@ src_configure() {
 
 	# Ungoogled
 	myconf_gyp+="
-		-Duse_official_google_api_keys=0
-		-Denable_prod_wallet_service=0
-		-Denable_one_click_signin=0
 		-Dremove_webcore_debug_symbols=1
 		-Denable_mpeg2ts_stream_parser=1
 		-Denable_hevc_demuxing=1
@@ -440,6 +437,9 @@ src_configure() {
 						-Denable_remoting_host=0
 						-Denable_automation=0
 						-Denable_hotwording=0
+						-Duse_official_google_api_keys=0
+						-Denable_prod_wallet_service=0
+						-Denable_one_click_signin=0
 						-Dsafe_browsing=0"
 
 	#######
