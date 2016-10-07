@@ -4,7 +4,6 @@ disable/pings.patch
 disable/promo.patch
 disable/extension-updater.patch
 disable/google-api-warning.patch
-disable/external-components.patch
 disable/default-browser-warning.patch
 
 gtk3.patch
@@ -16,10 +15,7 @@ glibc2.24.patch
 khronos.patch
 ps-print.patch
 gpu-timeout.patch
-master-preferences.patch
 chromedriver-revision.patch
 
 system/nspr.patch
 system/clang.patch
-system/ffmpeg.patch
-system/harfbuzz.patch
