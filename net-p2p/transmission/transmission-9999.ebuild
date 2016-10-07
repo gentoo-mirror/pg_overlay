@@ -79,7 +79,6 @@ src_prepare() {
 
 	default
 	eautoreconf
-	sed -i s/TR292Z/TR2920/g configure || die
 }
 
 src_configure() {
