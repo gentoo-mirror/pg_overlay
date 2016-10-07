@@ -67,7 +67,6 @@ src_prepare() {
 	# 2.92+ -> 2.92
 	sed -i s/2.92+/2.92/g CMakeLists.txt || die
 	sed -i s/TR292Z/TR2920/g CMakeLists.txt || die
-	sed -i s/2.92+/2.92/g configure || die
 	sed -i s/2.92+/2.92/g configure.ac || die
 	sed -i s/TR292Z/TR2920/g configure.ac || die
 	sed -i s/2.92+/2.92/g lib${PN}/version.h || die
