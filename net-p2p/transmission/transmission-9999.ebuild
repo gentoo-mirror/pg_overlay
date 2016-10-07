@@ -53,7 +53,7 @@ REQUIRED_USE="ayatana? ( gtk ) ?? ( qt4 qt5 )"
 
 DOCS="AUTHORS NEWS qt/README.txt"
 
-S=${S}+
+#S=${S}+
 
 src_prepare() {
 	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
@@ -67,18 +67,16 @@ src_prepare() {
 	# 2.92+ -> 2.92
 	sed -i s/2.92+/2.92/g CMakeLists.txt || die
 	sed -i s/TR292Z/TR2920/g CMakeLists.txt || die
-	sed -i s/2.92+/2.92/g configure || die
-	sed -i s/TR292Z/TR2920/g configure || die
 	sed -i s/2.92+/2.92/g configure.ac || die
 	sed -i s/TR292Z/TR2920/g configure.ac || die
-	sed -i s/2.92+/2.92/g lib${PN}/version.h || die
-	sed -i s/TR292Z/TR2920/g lib${PN}/version.h || die
 
 	# Prevent m4_copy error when running aclocal
 	# m4_copy: won't overwrite defined macro: glib_DEFUN
 	rm m4/glib-gettext.m4 || die
 
 	default
+	#./autogen.sh
+	./update-version-h.sh
 	eautoreconf
 }
 
