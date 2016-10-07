@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-inherit autotools fdo-mime flag-o-matic git-r3 gnome2-utils qmake-utils user
+inherit autotools eutils fdo-mime flag-o-matic git-r3 gnome2-utils qmake-utils user
 
 DESCRIPTION="A Fast, Easy and Free BitTorrent client"
 HOMEPAGE="http://www.transmissionbt.com/"
