@@ -347,8 +347,6 @@ src_prepare() {
 		'third_party/speech-dispatcher' \
 		'third_party/libva' \
 		--do-remove || die
-
-	use debian && sh "${FILESDIR}"/debian-patchset/scripts/build-removals && sh "${FILESDIR}"/debian-patchset/scripts/upstream-removals
 }
 
 src_configure() {
