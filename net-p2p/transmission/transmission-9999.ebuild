@@ -69,8 +69,6 @@ src_prepare() {
 	sed -i s/TR292Z/TR2920/g CMakeLists.txt || die
 	sed -i s/2.92+/2.92/g configure.ac || die
 	sed -i s/TR292Z/TR2920/g configure.ac || die
-	sed -i s/2.92+/2.92/g lib${PN}/version.h || die
-	sed -i s/TR292Z/TR2920/g lib${PN}/version.h || die
 
 	# Prevent m4_copy error when running aclocal
 	# m4_copy: won't overwrite defined macro: glib_DEFUN
