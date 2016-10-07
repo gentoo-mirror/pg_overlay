@@ -71,6 +71,6 @@ ungoogled-chromium/disable-windows-zone-identifier.patch
 ungoogled-chromium/fix-bundled-devtools.patch
 ungoogled-chromium/remove-get-help-button.patch
 
-debian_system/gtk3.patch
-debian_system/gtk3theme.patch
-debian_system/khronos.patch
+common_debian/gtk3.patch
+common_debian/gtk3theme.patch
+common_debian/khronos.patch
