@@ -3,11 +3,11 @@
 # $Id$
 
 EAPI=6
-inherit autotools fdo-mime flag-o-matic gnome2-utils qmake-utils user
+inherit autotools fdo-mime flag-o-matic git-r3 gnome2-utils qmake-utils user
 
 DESCRIPTION="A Fast, Easy and Free BitTorrent client"
 HOMEPAGE="http://www.transmissionbt.com/"
-SRC_URI="https://build.${PN}bt.com/job/trunk-linux/lastSuccessfulBuild/artifact/${PN}-trunk-${PR}.tar.xz"
+EGIT_REPO_URI="git://github.com/transmission/transmission.git"
 
 # web/LICENSE is always GPL-2 whereas COPYING allows either GPL-2 or GPL-3 for the rest
 # transmission in licenses/ is for mentioning OpenSSL linking exception
