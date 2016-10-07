@@ -209,7 +209,7 @@ src_prepare() {
 	#fi
 
 	# Debian patches
-	use debian && sh "${FILESDIR}"/debian-patchset/scripts/build-removals && sh "${FILESDIR}"/debian-patchset/scripts/upstream-removals && for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
 
 	# Ungoogled Chromium patches
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium/series"); do epatch "${FILESDIR}/ungoogled-chromium/$i"; done
@@ -347,6 +347,8 @@ src_prepare() {
 		'third_party/speech-dispatcher' \
 		'third_party/libva' \
 		--do-remove || die
+
+	use debian && sh "${FILESDIR}"/debian-patchset/scripts/build-removals && sh "${FILESDIR}"/debian-patchset/scripts/upstream-removals
 }
 
 src_configure() {
