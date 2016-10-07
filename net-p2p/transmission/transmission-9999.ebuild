@@ -75,7 +75,8 @@ src_prepare() {
 	rm m4/glib-gettext.m4 || die
 
 	default
-	eautoreconf
+	./autogen.sh
+	#eautoreconf
 }
 
 src_configure() {
