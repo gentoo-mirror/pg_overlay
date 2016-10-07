@@ -209,7 +209,7 @@ src_prepare() {
 	#fi
 
 	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
+	use debian && sh "${FILESDIR}/debian-patchset/scripts/build-removals && sh "${FILESDIR}/debian-patchset/scripts/upstream-removals && for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
 
 	# Ungoogled Chromium patches
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium/series"); do epatch "${FILESDIR}/ungoogled-chromium/$i"; done
