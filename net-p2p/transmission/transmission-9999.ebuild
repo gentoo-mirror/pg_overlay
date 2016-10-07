@@ -53,7 +53,7 @@ REQUIRED_USE="ayatana? ( gtk ) ?? ( qt4 qt5 )"
 
 DOCS="AUTHORS NEWS qt/README.txt"
 
-S=${S}+
+#S=${S}+
 
 src_prepare() {
 	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
