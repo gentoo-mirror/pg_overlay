@@ -208,14 +208,14 @@ src_prepare() {
 		#done
 	#fi
 
+	# Debian patches
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
+
 	# Ungoogled Chromium patches
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium/series"); do epatch "${FILESDIR}/ungoogled-chromium/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
-
-	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series"); do epatch "${FILESDIR}/debian-patchset/$i"; done
 
 	epatch_user
 
