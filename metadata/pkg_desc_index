@@ -17,7 +17,7 @@ dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applica
 dev-util/gperf 3.0.4: A perfect hash function generator
 dev-util/gtk-update-icon-cache 3.20.6: GTK update icon cache
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-gnome-base/gsettings-desktop-schemas 3.21.2: Collection of GSettings schemas for GNOME desktop
+gnome-base/gsettings-desktop-schemas 3.21.2 3.21.4: Collection of GSettings schemas for GNOME desktop
 gnome-extra/cinnamon 3.0.6 3.0.7: A fork of GNOME Shell with layout similar to GNOME 2
 gnome-extra/cinnamon-control-center 3.0.1: Cinnamons's main interface to configure various aspects of the desktop
 gnome-extra/cinnamon-session 3.0.1: Cinnamon session manager
