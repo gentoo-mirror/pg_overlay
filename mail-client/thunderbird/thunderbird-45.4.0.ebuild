@@ -152,7 +152,7 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	push mozilla
+	pushd mozilla
 	eapply "${FILESDIR}/firefox-gcc-6.0.patch" # GCC 6.0
 	popd
 
