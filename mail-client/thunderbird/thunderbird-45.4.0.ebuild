@@ -152,7 +152,9 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
+	push mozilla
 	eapply "${FILESDIR}/firefox-gcc-6.0.patch" # GCC 6.0
+	popd
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then
