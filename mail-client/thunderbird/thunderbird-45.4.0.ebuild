@@ -152,10 +152,7 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done
+	eapply "${FILESDIR}/firefox-gcc-6.0.patch" # GCC 6.0
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then
@@ -166,6 +163,11 @@ src_prepare() {
 		popd
 		eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
 	fi
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	done	
 
 	# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
