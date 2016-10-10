@@ -434,11 +434,11 @@ src_configure() {
 		-Denable_hevc_demuxing=1
 		-Dlinux_breakpad=0
 		-Dlinux_use_libgps=0
+		-Denable_remoting_host=0
 		-Denable_prod_wallet_service=0"
 
 	use ungoogled && myconf_gyp+="
 						-Ddisable_newlib=1
-						-Denable_remoting_host=0
 						-Denable_automation=0
 						-Dsafe_browsing=0
 						-Denable_hotwording=0
