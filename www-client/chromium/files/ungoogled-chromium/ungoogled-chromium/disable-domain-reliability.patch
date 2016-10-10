@@ -67,3 +67,44 @@
        VLOG(1) << "Discarding report instead of uploading.";
        UploadResult result;
        result.status = UploadResult::SUCCESS;
+--- a/components/domain_reliability/bake_in_configs.py
++++ b/components/domain_reliability/bake_in_configs.py
+@@ -488,7 +488,7 @@ def origin_is_whitelisted(origin):
+     domain = origin[8:-1]
+   else:
+     return False
+-  return any(domain == e or domain.endswith('.' + e)  for e in DOMAIN_WHITELIST)
++  return False
+ 
+ 
+ def quote_and_wrap_text(text, width=79, prefix='  "', suffix='"'):
+--- a/components/domain_reliability/BUILD.gn
++++ b/components/domain_reliability/BUILD.gn
+@@ -32,12 +32,21 @@
+   # The JSON file list is too long for the command line on Windows, so put
+   # them in a response file.
+   response_file_contents = rebase_path(baked_in_configs, root_build_dir)
+-  args = [
+-    "--file-list",
+-    "{{response_file_name}}",
+-    "--output",
+-    rebase_path(output_file, root_build_dir),
+-  ]
++  if (is_win) {
++      args = [
++        "--file-list",
++        "nul",
++        "--output",
++        rebase_path(output_file, root_build_dir),
++      ]
++  } else {
++        args = [
++        "--file-list",
++        "/dev/null",
++        "--output",
++        rebase_path(output_file, root_build_dir),
++      ]
++  }
+ }
+ 
+ component("domain_reliability") {
