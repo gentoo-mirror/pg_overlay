@@ -19,7 +19,7 @@ EMVER="1.9.1"
 
 # Patches
 PATCH="thunderbird-38.0-patches-0.1"
-PATCHFF="firefox-45.0-patches-06"
+PATCHFF="firefox-45.0-patches-07"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -152,10 +152,6 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	pushd mozilla
-	eapply "${FILESDIR}/firefox-gcc-6.0.patch" # GCC 6.0
-	popd
-
 	# OpenSUSE-KDE patchset
 	if use kde ; then
 		pushd mozilla
@@ -283,7 +279,7 @@ src_install() {
 		|| die
 	fi
 
-		# dev-db/sqlite does not have FTS3_TOKENIZER support.
+	# dev-db/sqlite does not have FTS3_TOKENIZER support.
 	# gloda needs it to function, and bad crashes happen when its enabled and doesn't work
 	if in_iuse system-sqlite && use system-sqlite ; then
 		echo "lockPref(\"mailnews.database.global.indexer.enabled\", false);" \
