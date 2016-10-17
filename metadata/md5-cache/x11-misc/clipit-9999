@@ -8,5 +8,5 @@ LICENSE=LGPL-3.0
 RDEPEND=!gtk3? ( >=x11-libs/gtk+-2.10:2 ) gtk3? ( x11-libs/gtk+:3 ) >=dev-libs/glib-2.14 nls? ( dev-util/intltool sys-devel/gettext ) x11-misc/xdotool
 SLOT=0
 _eclass_exported_funcs=pkg_postrm:- pkg_postinst:- src_unpack:git-r3 src_prepare:- src_configure:-
-_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	b83a2420b796f7c6eff682679d08fe25	fdo-mime	92d07846ea8ea54172f8c0112a47ae3d	git-r3	00f60a84fc7b499c99edfe99caea9f95	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	6198c04daba0e1307bd844df7d37f423
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	b83a2420b796f7c6eff682679d08fe25	fdo-mime	92d07846ea8ea54172f8c0112a47ae3d	git-r3	86ff3e88fc8a07b4f595afa27e416341	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	6198c04daba0e1307bd844df7d37f423
 _md5_=ac8d76879812a448e82a5fcae0ea5260
