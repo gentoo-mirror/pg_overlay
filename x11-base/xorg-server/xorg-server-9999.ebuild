@@ -18,7 +18,6 @@ IUSE="${IUSE_SERVERS} glamor ipv6 libressl minimal selinux +suid systemd tslib +
 CDEPEND=">=app-eselect/eselect-opengl-1.3.0
 	!libressl? ( dev-libs/openssl:0 )
 	libressl? ( dev-libs/libressl )
-	dev-libs/wayland-protocols
 	media-libs/freetype
 	>=x11-apps/iceauth-1.0.2
 	>=x11-apps/rgb-1.0.3
@@ -145,7 +144,7 @@ PATCHES=(
 	"${UPSTREAMED_PATCHES[@]}"
 	"${FILESDIR}"/${PN}-1.12-unloadsubmodule.patch
 	# needed for new eselect-opengl, bug #541232
-	"${FILESDIR}"/${PN}-1.18-support-multiple-Files-sections.patch
+	#"${FILESDIR}"/${PN}-1.18-support-multiple-Files-sections.patch
 )
 
 pkg_pretend() {
