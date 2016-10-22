@@ -25,9 +25,9 @@ RDEPEND="
 	scanner? (
 		media-gfx/sane-backends
 		dev-libs/libxml2:2
-		virtual/libusb:0
+		virtual/libusb
 	)
-	network? ( virtual/libusb:0 )
+	network? ( virtual/libusb )
 "
 
 REQUIRED_USE="
