@@ -123,6 +123,7 @@ src_configure() {
 		-DUSE_UDISKS2="$(usex udisks)"
 		-DUSE_VORBIS="$(usex vorbis)"
 		-DUSE_WAVPACK="$(usex wavpack)"
+		-DUSE_ARCHIVE=ON
 		-DUSE_QTMULTIMEDIA=OFF
 		-DUSE_GNOMEHOTKEY=OFF
 		-DUSE_NULL=OFF
