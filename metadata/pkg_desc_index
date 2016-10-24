@@ -61,7 +61,7 @@ net-print/samsung-unified-driver 1.00.37: Samsung Unified Linux Driver for print
 sci-geosciences/googleearth 7.1.7.2600: A 3D interface to the planet
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/roccat-tools 5.3.0 5.4.0: Utility for advanced configuration of Roccat devices
+sys-apps/roccat-tools 5.4.0 5.5.0: Utility for advanced configuration of Roccat devices
 sys-boot/efibootmgr 0.12 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer 9999: Reliable MTP client with minimalistic UI
