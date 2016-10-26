@@ -19,7 +19,6 @@ search_engines-add-DuckDuckGo-as-selectable-and-defa.patch
 search_engines-add-Qwant-as-selectable-and-default-s.patch
 prefs-disable-translation-service.patch
 first_run-deactivate-autoupdate-globally.patch
-ui-translation-update-strings-to-read-Iridium-instea.patch
 build-fix-OSX-branded-build-crashes-on-OSX.patch
 src-use-cached-copy-of-safebrowsing-lists-at-iridium.patch
 build-build-the-sandbox-with-PIE.patch
