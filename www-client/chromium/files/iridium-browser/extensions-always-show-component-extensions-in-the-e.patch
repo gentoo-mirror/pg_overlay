@@ -1,0 +1,42 @@
+From 651e3bd88ac23abccbc0585f166b0c649747c965 Mon Sep 17 00:00:00 2001
+From: Joachim Bauch <jojo@struktur.de>
+Date: Thu, 25 Jun 2015 15:34:10 +0200
+Subject: [PATCH 45/52] extensions: always show component extensions in the ext
+ list
+
+The attached patch makes sure that component extensions are always
+shown in "chrome://extensions".
+
+Currently these are
+- Bookmark Manager
+- Chromium PDF Viewer
+- CryptoTokenExtension
+
+References: https://github.com/iridium-browser/iridium-browser/issues/28
+---
+ extensions/common/extension.cc | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/extensions/common/extension.cc b/extensions/common/extension.cc
+index 2f5e2d6..e600ad9 100644
+--- a/extensions/common/extension.cc
++++ b/extensions/common/extension.cc
+@@ -352,6 +352,7 @@ bool Extension::ShouldDisplayInExtensionSettings() const {
+ }
+ 
+ bool Extension::ShouldNotBeVisible() const {
++#if 0
+   // Don't show component extensions because they are only extensions as an
+   // implementation detail of Chrome.
+   if (extensions::Manifest::IsComponentLocation(location()) &&
+@@ -368,6 +369,7 @@ bool Extension::ShouldNotBeVisible() const {
+   if (is_app() && !ShouldDisplayInAppLauncher() && !ShouldDisplayInNewTabPage())
+     return true;
+ 
++#endif
+   return false;
+ }
+ 
+-- 
+2.6.6
+
