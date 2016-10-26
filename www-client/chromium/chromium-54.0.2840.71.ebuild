@@ -376,18 +376,26 @@ src_configure() {
 		-Duse_system_zlib=1"
 
 	# AUR Chromium-Minimum
-	myconf_gn+=" symbol_level=0 is_debug=false fatal_linker_warnings=false treat_warnings_as_errors=false fieldtrial_testing_like_official_build=true remove_webcore_debug_symbols=true use_gconf=false use_sysroot=false enable_nacl=false enable_nacl_nonsfi=false"
+	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" is_debug=false"
+	myconf_gn+=" fatal_linker_warnings=false"
+	myconf_gn+=" treat_warnings_as_errors=false"
+	myconf_gn+=" fieldtrial_testing_like_official_build=true"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
+	myconf_gn+=" use_gconf=false"
+	myconf_gn+=" use_sysroot=false"
+	myconf_gn+=" enable_nacl=false"
+	myconf_gn+=" enable_nacl_nonsfi=false"
 	# Ungoogled
-	myconf_gn+="
-		use_ozone=false
-		enable_remoting=false
-		enable_supervised_users=false
-		proprietary_codecs=true
-		enable_google_now=false
-		enable_one_click_signin=false
-		enable_hotwording=false
-		enable_hevc_demuxing=true
-		enable_mse_mpeg2ts_stream_parser=true"
+	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" enable_remoting=false"
+	myconf_gn+=" enable_supervised_users=false"
+	myconf_gn+=" enable_google_now=false"
+	myconf_gn+=" enable_one_click_signin=false"
+	myconf_gn+=" enable_hotwording=false"
+	myconf_gn+=" enable_hevc_demuxing=true"
+	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
+
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries="
 		flac
