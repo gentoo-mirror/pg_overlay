@@ -377,7 +377,6 @@ src_configure() {
 
 	# AUR Chromium-Minimum
 	myconf_gn+=" 
-		symbol_level=0
 		is_debug=false
 		fatal_linker_warnings=false
 		treat_warnings_as_errors=false
