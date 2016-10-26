@@ -375,6 +375,29 @@ src_configure() {
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1"
 
+	# AUR Chromium-Minimum
+	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" is_debug=false"
+	myconf_gn+=" fatal_linker_warnings=false"
+	myconf_gn+=" treat_warnings_as_errors=false"
+	myconf_gn+=" fieldtrial_testing_like_official_build=true"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
+	myconf_gn+=" use_sysroot=false"
+	myconf_gn+=" enable_nacl=false"
+	myconf_gn+=" enable_nacl_nonsfi=false"
+	# Ungoogled
+	myconf_gn+=" use_gio=$(usex gnome true false)"
+	myconf_gn+=" link_pulseaudio=usex pulseaudio true false"
+
+	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" enable_remoting=false"
+	myconf_gn+=" enable_supervised_users=false"
+	myconf_gn+=" enable_google_now=false"
+	myconf_gn+=" enable_one_click_signin=false"
+	myconf_gn+=" enable_hotwording=false"
+	myconf_gn+=" enable_hevc_demuxing=true"
+	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
+
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries="
 		flac
@@ -429,10 +452,9 @@ src_configure() {
 	# Use explicit library dependencies instead of dlopen.
 	# This makes breakages easier to detect by revdep-rebuild.
 	myconf_gyp+="
-		-Dlinux_link_gsettings=1
+		$(gyp_use gnome linux_link_gsettings)
 		-Dlinux_link_libpci=1
-		-Dlinux_link_libspeechd=1
-		-Dlibspeechd_h_prefix=speech-dispatcher/"
+		-Dlinux_link_libspeechd=0"
 
 	# TODO: link_pulseaudio=true for GN.
 
