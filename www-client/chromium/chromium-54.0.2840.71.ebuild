@@ -376,19 +376,17 @@ src_configure() {
 		-Duse_system_zlib=1"
 
 	# AUR Chromium-Minimum
-	myconf_gn+="
-		'symbol_level=0'
-		'is_debug=false'
-		'fatal_linker_warnings=false'
-		'treat_warnings_as_errors=false'
-		'fieldtrial_testing_like_official_build=true'
-		'remove_webcore_debug_symbols=true'
-		'use_allocator="none"'
-		'use_gconf=false'
-		'use_gold=true'
-		'use_sysroot=false'
-		'enable_nacl=false
-		'enable_nacl_nonsfi=false'"
+	myconf_gn+=" \
+		symbol_level=0 \
+		is_debug=false \
+		fatal_linker_warnings=false \
+		treat_warnings_as_errors=false \
+		fieldtrial_testing_like_official_build=true \
+		remove_webcore_debug_symbols=true \
+		use_gconf=false \
+		use_sysroot=false \
+		enable_nacl=false \
+		enable_nacl_nonsfi=false"
 	# Ungoogled
 	myconf_gn+="
 		use_ozone=false
