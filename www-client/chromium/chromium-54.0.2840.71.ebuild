@@ -398,7 +398,7 @@ src_configure() {
 		enable_one_click_signin=false
 		enable_hotwording=false
 		enable_hevc_demuxing=true
-		enable_mse_mpeg2ts_stream_parser=true
+		enable_mse_mpeg2ts_stream_parser=true"
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries="
 		flac
