@@ -13,6 +13,7 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 app-text/xreader 1.0.8: Simple document viewer for GNOME
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libgaminggear 0.14.0 0.15.0: Provides functionality for gaming input devices
+dev-libs/re2 0.2016.10.01: An efficent, principled regular expression library
 dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gperf 3.0.4: A perfect hash function generator
