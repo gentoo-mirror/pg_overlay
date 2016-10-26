@@ -43,6 +43,5 @@ extensions-always-show-component-extensions-in-the-e.patch
 battery_status_service-disable-more-privacy-nightmar.patch
 translate-disable-fetching-of-translate-languages-fr.patch
 build-use-Wl-no-keep-memory.patch
-icons-iridium-icons.patch
 first_run-barf-if-metrics_reporting-is-activated.patch
 all-add-trk-prefixes-to-possibly-evil-connections.patch
