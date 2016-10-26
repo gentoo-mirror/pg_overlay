@@ -375,6 +375,37 @@ src_configure() {
 		-Duse_system_xdg_utils=1
 		-Duse_system_zlib=1"
 
+	# AUR Chromium-Minimum
+	myconf_gn+=" 
+		symbol_level=0
+		is_debug=false
+		fatal_linker_warnings=false
+		treat_warnings_as_errors=false
+		fieldtrial_testing_like_official_build=true
+		remove_webcore_debug_symbols=true
+		use_allocator="none"
+		use_gconf=false
+		use_gold=true
+		use_sysroot=false
+		enable_nacl=false
+		enable_nacl_nonsfi=false"
+	# Ungoogled
+	myconf_gn+="
+		is_debug=false
+		treat_warnings_as_errors=false
+		use_ozone=false
+		enable_remoting=false
+		enable_nacl=false
+		safe_browsing_mode=0
+		enable_supervised_users=false
+		fieldtrial_testing_like_official_build=true
+		proprietary_codecs=true
+		enable_google_now=false
+		enable_one_click_signin=false
+		enable_hotwording=false
+		enable_hevc_demuxing=true
+		enable_mse_mpeg2ts_stream_parser=true
+		remove_webcore_debug_symbols=true"
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries="
 		flac
