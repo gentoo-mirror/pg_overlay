@@ -382,13 +382,12 @@ src_configure() {
 	myconf_gn+=" treat_warnings_as_errors=false"
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" use_gconf=false"
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	# Ungoogled
-	myconf_gn+=" use_gio=false"
-	myconf_gn+=" link_pulseaudio=true"
+	myconf_gn+=" use_gio=$(usex gnome true false)"
+	myconf_gn+=" link_pulseaudio=usex pulseaudio true false"
 
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_remoting=false"
