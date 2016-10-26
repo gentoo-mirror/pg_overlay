@@ -387,6 +387,8 @@ src_configure() {
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	# Ungoogled
+	myconf_gn+=" use_gio=false"
+
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_supervised_users=false"
