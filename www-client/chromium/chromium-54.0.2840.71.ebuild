@@ -429,10 +429,9 @@ src_configure() {
 	# Use explicit library dependencies instead of dlopen.
 	# This makes breakages easier to detect by revdep-rebuild.
 	myconf_gyp+="
-		-Dlinux_link_gsettings=1
+		$(gyp_use gnome linux_link_gsettings)
 		-Dlinux_link_libpci=1
-		-Dlinux_link_libspeechd=1
-		-Dlibspeechd_h_prefix=speech-dispatcher/"
+		-Dlinux_link_libspeechd=0"
 
 	# TODO: link_pulseaudio=true for GN.
 
