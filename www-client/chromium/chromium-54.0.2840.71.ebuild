@@ -388,6 +388,7 @@ src_configure() {
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	# Ungoogled
 	myconf_gn+=" use_gio=false"
+	myconf_gn+=" link_pulseaudio=true"
 
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_remoting=false"
