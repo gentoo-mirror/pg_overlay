@@ -1,48 +1,20 @@
-diff -up chromium-53.0.2785.92/build/linux/unbundle/libjpeg.gn.gnsystem chromium-53.0.2785.92/build/linux/unbundle/libjpeg.gn
---- chromium-53.0.2785.92/build/linux/unbundle/libjpeg.gn.gnsystem	2016-09-06 13:27:56.018365168 -0400
-+++ chromium-53.0.2785.92/build/linux/unbundle/libjpeg.gn	2016-09-06 13:27:56.018365168 -0400
-@@ -0,0 +1,9 @@
-+# Copyright 2016 The Chromium Authors. All rights reserved.
-+# Use of this source code is governed by a BSD-style license that can be
-+# found in the LICENSE file.
-+
-+source_set("libjpeg") {
-+  libs = [
-+    "jpeg",
-+  ]
-+}
-diff -up chromium-53.0.2785.92/build/linux/unbundle/libpng.gn.gnsystem chromium-53.0.2785.92/build/linux/unbundle/libpng.gn
---- chromium-53.0.2785.92/build/linux/unbundle/libpng.gn.gnsystem	2016-09-06 13:27:56.018365168 -0400
-+++ chromium-53.0.2785.92/build/linux/unbundle/libpng.gn	2016-09-06 13:27:56.018365168 -0400
-@@ -0,0 +1,25 @@
-+# Copyright 2016 The Chromium Authors. All rights reserved.
-+# Use of this source code is governed by a BSD-style license that can be
-+# found in the LICENSE file.
-+
-+import("//build/config/linux/pkg_config.gni")
-+import("//build/shim_headers.gni")
-+
-+pkg_config("system_libpng") {
-+  packages = [ "libpng" ]
+diff -up chromium-54.0.2840.59/build/linux/unbundle/libjpeg.gn.gnsystem chromium-54.0.2840.59/build/linux/unbundle/libjpeg.gn
+--- chromium-54.0.2840.59/build/linux/unbundle/libjpeg.gn.gnsystem	2016-10-13 16:06:00.464796742 -0400
++++ chromium-54.0.2840.59/build/linux/unbundle/libjpeg.gn	2016-10-13 16:06:08.976631824 -0400
+@@ -16,6 +16,10 @@ source_set("libjpeg") {
+   libs = [ "jpeg" ]
+ }
+ 
++config("system_libjpeg") {
++  defines = [ "USE_SYSTEM_LIBJPEG=1" ]
 +}
 +
-+shim_headers("libpng_shim") {
-+  root_path = "include"
-+  headers = [
-+    "png.h",
-+    "pngconf.h",
-+  ]
-+}
-+
-+source_set("libpng") {
-+  deps = [
-+    ":libpng_shim",
-+  ]
-+  public_configs = [ ":system_libpng" ]
-+}
-diff -up chromium-53.0.2785.92/build/linux/unbundle/libusb.gn.gnsystem chromium-53.0.2785.92/build/linux/unbundle/libusb.gn
---- chromium-53.0.2785.92/build/linux/unbundle/libusb.gn.gnsystem	2016-09-06 13:27:56.019365149 -0400
-+++ chromium-53.0.2785.92/build/linux/unbundle/libusb.gn	2016-09-06 13:27:56.018365168 -0400
+ source_set("simd") {
+ }
+ 
+diff -up chromium-54.0.2840.59/build/linux/unbundle/libusb.gn.gnsystem chromium-54.0.2840.59/build/linux/unbundle/libusb.gn
+--- chromium-54.0.2840.59/build/linux/unbundle/libusb.gn.gnsystem	2016-10-13 15:47:48.147891525 -0400
++++ chromium-54.0.2840.59/build/linux/unbundle/libusb.gn	2016-10-13 15:47:48.147891525 -0400
 @@ -0,0 +1,24 @@
 +# Copyright 2016 The Chromium Authors. All rights reserved.
 +# Use of this source code is governed by a BSD-style license that can be
@@ -68,9 +40,9 @@ diff -up chromium-53.0.2785.92/build/linux/unbundle/libusb.gn.gnsystem chromium-
 +  ]
 +  public_configs = [ ":system_libusb" ]
 +}
-diff -up chromium-53.0.2785.92/build/linux/unbundle/opus.gn.gnsystem chromium-53.0.2785.92/build/linux/unbundle/opus.gn
---- chromium-53.0.2785.92/build/linux/unbundle/opus.gn.gnsystem	2016-09-06 13:27:56.019365149 -0400
-+++ chromium-53.0.2785.92/build/linux/unbundle/opus.gn	2016-09-06 13:31:11.546589545 -0400
+diff -up chromium-54.0.2840.59/build/linux/unbundle/opus.gn.gnsystem chromium-54.0.2840.59/build/linux/unbundle/opus.gn
+--- chromium-54.0.2840.59/build/linux/unbundle/opus.gn.gnsystem	2016-10-13 15:47:48.147891525 -0400
++++ chromium-54.0.2840.59/build/linux/unbundle/opus.gn	2016-10-13 15:47:48.147891525 -0400
 @@ -0,0 +1,161 @@
 +# Copyright 2016 The Chromium Authors. All rights reserved.
 +# Use of this source code is governed by a BSD-style license that can be
@@ -233,20 +205,19 @@ diff -up chromium-53.0.2785.92/build/linux/unbundle/opus.gn.gnsystem chromium-53
 +  ]
 +}
 +
-diff -up chromium-53.0.2785.92/build/linux/unbundle/replace_gn_files.py.gnsystem chromium-53.0.2785.92/build/linux/unbundle/replace_gn_files.py
---- chromium-53.0.2785.92/build/linux/unbundle/replace_gn_files.py.gnsystem	2016-09-02 15:02:02.000000000 -0400
-+++ chromium-53.0.2785.92/build/linux/unbundle/replace_gn_files.py	2016-09-06 13:27:56.020365130 -0400
-@@ -21,9 +21,13 @@ REPLACEMENTS = {
-   'flac': 'third_party/flac/BUILD.gn',
-   'harfbuzz-ng': 'third_party/harfbuzz-ng/BUILD.gn',
+diff -up chromium-54.0.2840.59/build/linux/unbundle/replace_gn_files.py.gnsystem chromium-54.0.2840.59/build/linux/unbundle/replace_gn_files.py
+--- chromium-54.0.2840.59/build/linux/unbundle/replace_gn_files.py.gnsystem	2016-10-12 15:02:53.000000000 -0400
++++ chromium-54.0.2840.59/build/linux/unbundle/replace_gn_files.py	2016-10-13 15:47:48.147891525 -0400
+@@ -23,10 +23,12 @@ REPLACEMENTS = {
    'libevent': 'base/third_party/libevent/BUILD.gn',
-+  'libjpeg': 'third_party/libjpeg/BUILD.gn',
-+  'libpng': 'third_party/libpng/BUILD.gn',
+   'libjpeg': 'build/secondary/third_party/libjpeg_turbo/BUILD.gn',
+   'libpng': 'third_party/libpng/BUILD.gn',
 +  'libusb': 'third_party/libusb/BUILD.gn',
+   'libvpx': 'third_party/libvpx/BUILD.gn',
    'libwebp': 'third_party/libwebp/BUILD.gn',
    'libxml': 'third_party/libxml/BUILD.gn',
    'libxslt': 'third_party/libxslt/BUILD.gn',
 +  'opus': 'third_party/opus/BUILD.gn',
+   're2': 'third_party/re2/BUILD.gn',
    'snappy': 'third_party/snappy/BUILD.gn',
    'yasm': 'third_party/yasm/yasm_assemble.gni',
-   'zlib': 'third_party/zlib/BUILD.gn',

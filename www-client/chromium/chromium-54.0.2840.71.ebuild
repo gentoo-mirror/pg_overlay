@@ -196,12 +196,14 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	use widevine && epatch "${FILESDIR}/${PN}-widevine-r1.patch"
 
 	# Iridium patches
 	use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
 
-	default
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
