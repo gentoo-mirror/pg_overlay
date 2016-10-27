@@ -198,6 +198,7 @@ pkg_setup() {
 src_prepare() {
 	default
 	use widevine && epatch "${FILESDIR}/${PN}-widevine-r1.patch"
+	use vaapi && epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
 
 	# Iridium patches
 	use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
@@ -309,6 +310,7 @@ src_prepare() {
 		third_party/zlib/google
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
+		third_party/libva
 	)
 	if ! use system-ffmpeg; then
 		keeplibs+=( third_party/ffmpeg )
