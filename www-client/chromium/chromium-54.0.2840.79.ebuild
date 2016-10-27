@@ -197,8 +197,9 @@ pkg_setup() {
 
 src_prepare() {
 	default
-	use widevine && epatch "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && epatch "${FILESDIR}/enable_vaapi_on_linux.diff"
+	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
+	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
+	use gtk3 && eapply "${FILESDIR}/dont-use-gtk2.patch"
 
 	# Iridium patches
 	use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
