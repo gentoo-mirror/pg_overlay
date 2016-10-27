@@ -386,17 +386,17 @@ src_configure() {
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	# Ungoogled
-	myconf_gn+=" use_gio=$(usex gnome true false)"
+	#myconf_gn+=" use_gio=$(usex gnome true false)"
 	#myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 
-	myconf_gn+=" use_ozone=false"
-	myconf_gn+=" enable_remoting=false"
+	#myconf_gn+=" use_ozone=false"
+	#myconf_gn+=" enable_remoting=false"
 	#myconf_gn+=" enable_supervised_users=false"
-	myconf_gn+=" enable_google_now=false"
+	#myconf_gn+=" enable_google_now=false"
 	#myconf_gn+=" enable_one_click_signin=false"
 	#myconf_gn+=" enable_hotwording=false"
-	myconf_gn+=" enable_hevc_demuxing=true"
-	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
+	#myconf_gn+=" enable_hevc_demuxing=true"
+	#myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries="
