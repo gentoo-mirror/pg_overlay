@@ -391,7 +391,7 @@ src_configure() {
 
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_remoting=false"
-	myconf_gn+=" enable_supervised_users=false"
+	#myconf_gn+=" enable_supervised_users=false"
 	myconf_gn+=" enable_google_now=false"
 	#myconf_gn+=" enable_one_click_signin=false"
 	#myconf_gn+=" enable_hotwording=false"
