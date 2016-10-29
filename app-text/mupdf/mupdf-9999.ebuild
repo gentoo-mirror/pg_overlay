@@ -46,11 +46,6 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.5-old-debian-files.patch \
 		"${FILESDIR}"/${PN}-1.3-pkg-config.patch
 
-	if has_version ">=media-libs/openjpeg-2.1:2" ; then
-		epatch \
-			"${FILESDIR}"/${PN}-1.5-openjpeg-2.1.patch
-	fi
-
 	sed -e "/^libdir=/s:/lib:/$(get_libdir):" \
 		-e "/^prefix=/s:=.*:=${EROOT}/usr:" \
 		-i platform/debian/${PN}.pc || die
