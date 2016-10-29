@@ -7,7 +7,7 @@ EAPI=6
 PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV='1.9.4'
+WAF_PV='1.9.5'
 
 inherit fdo-mime gnome2-utils pax-utils python-any-r1 toolchain-funcs versionator waf-utils
 
@@ -22,7 +22,7 @@ else
 	EGIT_REPO_URI="git://github.com/mpv-player/mpv.git"
 	inherit git-r3
 fi
-SRC_URI+=" https://waf.io/waf-${WAF_PV}"
+SRC_URI+="http://waf.io/waf-${WAF_PV}"
 DOCS+=( README.md etc/mpv.conf etc/input.conf )
 
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
@@ -135,7 +135,7 @@ pkg_pretend() {
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	sed -i 's/1.8.12/1.9.4/g' bootstrap.py || die
+	sed -i 's/1.8.12/1.9.5/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	default src_prepare
 }
