@@ -22,7 +22,7 @@ else
 	EGIT_REPO_URI="git://github.com/mpv-player/mpv.git"
 	inherit git-r3
 fi
-SRC_URI+="https://waf.io/waf-${WAF_PV}"
+SRC_URI+="http://waf.io/waf-${WAF_PV}"
 DOCS+=( README.md etc/mpv.conf etc/input.conf )
 
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
