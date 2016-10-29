@@ -4,6 +4,7 @@
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-arch/rar:all_sfx - Install all SFX (Self-Extracting) files rather than just the native format (allows creation of Windows EXEs on Linux ELF systems)
+app-text/mupdf:openssl - Use dev-libs/openssl crypto backend
 app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
 app-text/qpdfview:synctex - Add support for searching TeX sources
 app-text/qstardict:stardict - build stardict plugin
