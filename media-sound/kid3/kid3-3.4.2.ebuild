@@ -52,13 +52,13 @@ PATCHES=( "${FILESDIR}/${PN}-3.3.2-libdir.patch" )
 
 src_configure() {
 	local mycmakeargs=(
-		-DWITH_CHROMAPRINT="$(usex acoustid)"
-		-DWITH_FLAC="$(usex flac)"
-		-DWITH_ID3LIB="$(usex mp3)"
-		-DWITH_MP4V2="$(usex mp4)"
-		-DWITH_PHONON="$(usex phonon)"
-		-DWITH_TAGLIB="$(usex taglib)"
-		-DWITH_VORBIS="$(usex vorbis)"
+		$(cmake-utils_use_with acoustid CHROMAPRINT)
+		$(cmake-utils_use_with flac FLAC)
+		$(cmake-utils_use_with mp3 ID3LIB)
+		$(cmake-utils_use_with mp4 MP4V2)
+		$(cmake-utils_use_with phonon PHONON)
+		$(cmake-utils_use_with taglib TAGLIB)
+		$(cmake-utils_use_with vorbis VORBIS)
 		"-DWITH_QT5=ON"
 	)
 
