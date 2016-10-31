@@ -39,7 +39,6 @@ RDEPEND="
 	mp4? ( media-libs/libmp4v2:0 )
 	phonon? ( || (
 		media-libs/phonon[qt5]
-		dev-qt/qtphonon:5
 	) )
 	taglib? ( >=media-libs/taglib-1.9.1 )
 	vorbis? (
