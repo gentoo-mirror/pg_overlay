@@ -8,7 +8,7 @@ KDE_LINGUAS="cs de es et fi fr it nl pl ru sr sr@ijekavian sr@ijekavianlatin
 sr@Latn tr zh_CN zh_TW"
 KDE_REQUIRED="optional"
 KDE_HANDBOOK="optional"
-inherit kde5
+inherit cmake-utils
 
 DESCRIPTION="A simple tag editor for KDE"
 HOMEPAGE="http://kid3.sourceforge.net/"
@@ -68,5 +68,6 @@ src_configure() {
 		mycmakeargs+=("-DWITH_APPS=Qt;CLI")
 	fi
 
-	kde5_src_configure
+	cmake-utils_src_configure
+
 }
