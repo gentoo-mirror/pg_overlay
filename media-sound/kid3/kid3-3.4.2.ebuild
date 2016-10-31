@@ -69,5 +69,5 @@ src_configure() {
 		mycmakeargs+=("-DWITH_APPS=Qt;CLI")
 	fi
 
-	kde5-src_configure
+	kde5_src_configure
 }
