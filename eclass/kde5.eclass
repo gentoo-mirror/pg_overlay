@@ -145,10 +145,10 @@ case ${KDE_AUTODEPS} in
 		if [[ ${KDE_BUILD_TYPE} = live ]]; then
 			case ${CATEGORY} in
 				kde-frameworks)
-					FRAMEWORKS_MINIMAL=9999
+					FRAMEWORKS_MINIMAL=5.27.0
 				;;
 				kde-plasma)
-					FRAMEWORKS_MINIMAL=9999
+					FRAMEWORKS_MINIMAL=5.27.0
 				;;
 				*) ;;
 			esac
