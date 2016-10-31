@@ -92,6 +92,8 @@ media-sound/deadbeef:vtx - Libayemy VTX ZX-Spectrum music player plugin
 media-sound/deadbeef:wavpack - WavPack plugin
 media-sound/deadbeef:wma - Windows media audio plugin
 media-sound/deadbeef:zip - vfs_zip plugin
+media-sound/kid3:acoustid - Enable support for acoustic fingerprinting plugin using (media-libs/chromaprint)
+media-sound/kid3:phonon - Enable sound support via media-libs/phonon or dev-qt/qtphonon
 media-sound/qmmp:analyzer - Enable visual analyzer
 media-sound/qmmp:bs2b - Enable Bauer stereophonic-to-binaural headphone filter
 media-sound/qmmp:cover - Enable album cover support
