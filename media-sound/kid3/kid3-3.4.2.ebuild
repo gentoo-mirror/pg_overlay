@@ -8,7 +8,7 @@ KDE_LINGUAS="cs de es et fi fr it nl pl ru sr sr@ijekavian sr@ijekavianlatin
 sr@Latn tr zh_CN zh_TW"
 KDE_REQUIRED="optional"
 KDE_HANDBOOK="optional"
-inherit kde5
+inherit cmake-utils
 
 DESCRIPTION="A simple tag editor for KDE"
 HOMEPAGE="http://kid3.sourceforge.net/"
@@ -39,7 +39,6 @@ RDEPEND="
 	mp4? ( media-libs/libmp4v2:0 )
 	phonon? ( || (
 		media-libs/phonon[qt5]
-		dev-qt/qtphonon:5
 	) )
 	taglib? ( >=media-libs/taglib-1.9.1 )
 	vorbis? (
@@ -53,21 +52,22 @@ PATCHES=( "${FILESDIR}/${PN}-3.3.2-libdir.patch" )
 
 src_configure() {
 	local mycmakeargs=(
-		-DWITH_CHROMAPRINT="$(usex acoustid)"
-		-DWITH_FLAC="$(usex flac)"
-		-DWITH_ID3LIB="$(usex mp3)"
-		-DWITH_MP4V2="$(usex mp4)"
-		-DWITH_PHONON="$(usex phonon)"
-		-DWITH_TAGLIB="$(usex taglib)"
-		-DWITH_VORBIS="$(usex vorbis)"
+		$(cmake-utils_use_with acoustid CHROMAPRINT)
+		$(cmake-utils_use_with flac FLAC)
+		$(cmake-utils_use_with mp3 ID3LIB)
+		$(cmake-utils_use_with mp4 MP4V2)
+		$(cmake-utils_use_with phonon PHONON)
+		$(cmake-utils_use_with taglib TAGLIB)
+		$(cmake-utils_use_with vorbis VORBIS)
 		"-DWITH_QT5=ON"
 	)
 
 	if use kde; then
 		mycmakeargs+=("-DWITH_APPS=Qt;CLI;KDE")
 	else
-		mycmakeargs+=("-DWITH_APPS=Qt;CLI;KDE")
+		mycmakeargs+=("-DWITH_APPS=Qt;CLI")
 	fi
 
-	kde5_src_configure
+	cmake-utils_src_configure
+
 }
