@@ -64,9 +64,9 @@ src_configure() {
 	)
 
 	if use kde; then
-		mycmakeargs+=("-DWITH_APPS=KDE;CLI")
+		mycmakeargs+=("-DWITH_APPS=Qt;CLI;KDE")
 	else
-		mycmakeargs+=("-DWITH_APPS=Qt;CLI")
+		mycmakeargs+=("-DWITH_APPS=Qt;CLI;KDE")
 	fi
 
 	kde5_src_configure
