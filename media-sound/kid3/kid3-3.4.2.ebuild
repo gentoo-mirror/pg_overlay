@@ -59,7 +59,7 @@ src_configure() {
 		-DWITH_MP4V2="$(usex mp4)"
 		-DWITH_PHONON="$(usex phonon)"
 		-DWITH_TAGLIB="$(usex taglib)"
-		-DWITH_VORBIS-="$(usex vorbis)"
+		-DWITH_VORBIS="$(usex vorbis)"
 		"-DWITH_QT5=ON"
 	)
 
