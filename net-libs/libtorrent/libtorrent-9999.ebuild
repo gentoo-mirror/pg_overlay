@@ -19,7 +19,7 @@ LICENSE="GPL-2"
 SLOT="0"
 
 KEYWORDS=""
-IUSE="-debug -ipv6 -libressl +ssl -test"
+IUSE="-debug -libressl +ssl -test"
 
 RDEPEND="
 	sys-libs/zlib
@@ -45,9 +45,8 @@ src_configure() {
 	CONFIG_SHELL=${BASH} econf \
 		--enable-aligned \
 		$(use_enable debug) \
-		$(use_enable ipv6) \
 		$(use_enable ssl openssl) \
-		--with-posix-fallocate --enable-largefile
+		--with-posix-fallocate --enable-largefile --without-ipv6
 }
 
 src_install() {
