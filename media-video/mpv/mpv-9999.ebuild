@@ -4,12 +4,12 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_3,3_4,3_5} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV='1.9.5'
 
-inherit fdo-mime gnome2-utils pax-utils python-any-r1 toolchain-funcs versionator waf-utils
+inherit gnome2-utils pax-utils python-any-r1 toolchain-funcs versionator waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/"
@@ -95,7 +95,7 @@ COMMON_DEPEND="
 		media-libs/mesa[egl,gles2]
 	)
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
-	samba? ( net-fs/samba )
+	samba? ( net-fs/samba[smbclient(+)] )
 	sdl? ( media-libs/libsdl2[sound,threads,video,X?,wayland?] )
 	v4l? ( media-libs/libv4l )
 	vaapi? ( >=x11-libs/libva-1.4.0[drm?,X?,wayland?] )
@@ -116,7 +116,7 @@ COMMON_DEPEND="
 "
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
-	>=dev-lang/perl-5.8
+	dev-lang/perl
 	dev-python/docutils
 	virtual/pkgconfig
 	doc? ( dev-python/rst2pdf )
@@ -130,6 +130,15 @@ pkg_pretend() {
 	if [[ ${MERGE_TYPE} != "binary" ]] && ! tc-has-tls && use vaapi && use egl; then
 		die "Your compiler lacks C++11 TLS support. Use GCC>=4.8.0 or Clang>=3.3."
 	fi
+}
+
+pkg_pretend() {
+	mpv_check_compiler
+}
+
+pkg_setup() {
+	mpv_check_compiler
+	python-any-r1_pkg_setup
 }
 
 src_prepare() {
@@ -222,11 +231,13 @@ src_configure() {
 		--disable-android
 		$(use_enable raspberry-pi rpi)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
+		--disable-mali-fbdev	# Only available in overlays.
 
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
 		$(use_enable vaapi vaapi-hwaccel)
 		# Automagic VDPAU HW acceleration. See Gentoo bug 558870.
+		--disable-cuda			# No support in ffmpeg. See Gentoo bug 595450.
 
 		# TV features:
 		$(use_enable v4l tv)
@@ -274,9 +285,6 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	fdo-mime_desktop_database_update
-	gnome2_icon_cache_update
-
 	local rv softvol_0_18_1=0
 	for rv in ${REPLACING_VERSIONS}; do
 		version_compare ${rv} 0.18.1-r1
@@ -284,7 +292,6 @@ pkg_postinst() {
 	done
 
 	if [[ ${softvol_0_18_1} -eq 1 ]]; then
-		echo
 		elog "Starting from version 0.18.1 the software volume control is"
 		elog "enabled by default, see:"
 		elog "https://github.com/mpv-player/mpv/blob/v0.18.1/DOCS/interface-changes.rst"
@@ -293,8 +300,9 @@ pkg_postinst() {
 		elog "This means that volume controls don't change the system volume,"
 		elog "e.g. per-application volume with PulseAudio."
 		elog "If you want to restore the old behaviour, please refer to"
+		elog
 		elog "https://bugs.gentoo.org/show_bug.cgi?id=588492#c7"
-		echo
+		elog
 	fi
 
 	# bash-completion < 2.3-r1 already installs (mostly broken) mpv completion.
@@ -309,11 +317,14 @@ pkg_postinst() {
 		elog "If command-line completion doesn't work after mpv update,"
 		elog "please rebuild app-shells/mpv-bash-completion."
 	fi
+
+	gnome2_icon_cache_update
+	xdg_desktop_database_update
 }
 
 pkg_postrm() {
-	fdo-mime_desktop_database_update
 	gnome2_icon_cache_update
+	xdg_desktop_database_update
 }
 
 src_test() {
