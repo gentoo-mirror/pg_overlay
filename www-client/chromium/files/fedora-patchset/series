@@ -18,3 +18,4 @@ chromium-54.0.2840.59-nullfix.patch
 chromium-54.0.2840.59-jpeg-include-dir.patch
 chromium-46.0.2490.86-use_system_opus.patch
 chromium-52.0.2723.2-use_system_harfbuzz.patch
+chromium-54.0.2840.90-setopaque.patch
