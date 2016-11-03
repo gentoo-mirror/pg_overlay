@@ -52,7 +52,7 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
-net-libs/rb_libtorrent 1.1.0 1.1.1: C++ BitTorrent implementation focusing on efficiency and scalability
+net-libs/rb_libtorrent 1.0.10 1.1.1: C++ BitTorrent implementation focusing on efficiency and scalability
 net-misc/megasync 9999: A Qt-based program for syncing your MEGA account in your PC. This is the official app.
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/ktorrent 9999: Powerful BitTorrent client based on KDE Frameworks
