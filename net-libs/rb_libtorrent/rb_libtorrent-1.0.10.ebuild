@@ -9,17 +9,17 @@ PYTHON_REQ_USE="threads"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1 flag-o-matic versionator
+inherit distutils-r1 eutils versionator
 
 MY_P=libtorrent-rasterbar-${PV} # TODO: rename, bug 576126
 MY_PV=$(replace_all_version_separators _)
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
-SRC_URI="https://github.com/arvidn/libtorrent/releases/download/libtorrent-1_1/${MY_P}.tar.gz"
+SRC_URI="https://github.com/arvidn/libtorrent/releases/download/libtorrent-${MY_PV}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
-SLOT="0"
+SLOT="0/8"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="debug +dht doc examples +geoip libressl python +ssl static-libs test"
 
@@ -29,6 +29,7 @@ RDEPEND="
 	dev-libs/boost:=[threads]
 	virtual/libiconv
 	examples? ( !net-p2p/mldonkey )
+	geoip? ( dev-libs/geoip )
 	python? (
 		${PYTHON_DEPS}
 		dev-libs/boost:=[python,${PYTHON_USEDEP}]
@@ -44,6 +45,8 @@ DEPEND="${RDEPEND}
 
 S=${WORKDIR}/${MY_P}
 
+PATCHES=( "${FILESDIR}/${PN}-1.0.9-test_torrent_parse.patch" )
+
 src_prepare() {
 	default
 
@@ -55,15 +58,15 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cflags -std=c11
-	append-cxxflags -std=c++11
-
 	local myeconfargs=(
 		$(use_enable debug)
 		$(use_enable debug logging)
+		$(use_enable debug statistics)
 		$(use_enable debug disk-stats)
 		$(use_enable dht dht $(usex debug logging yes))
 		$(use_enable examples)
+		$(use_enable geoip)
+		$(use_with   geoip libgeoip)
 		$(use_enable ssl encryption)
 		$(use_enable static-libs static)
 		$(use_enable test tests)
