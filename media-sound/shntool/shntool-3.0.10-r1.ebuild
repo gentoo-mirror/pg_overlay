@@ -23,6 +23,6 @@ DEPEND="${RDEPEND}"
 
 DOCS="NEWS README ChangeLog AUTHORS doc/*"
 
-PATCHES=( "$(FILESDIR)/large-size.patch"
-		"$(FILESDIR)/large-times.patch"
-		"$(FILESDIR)/no-cdquality-check.patch" )
+PATCHES=( "${FILESDIR}/large-size.patch"
+		"${FILESDIR}/large-times.patch"
+		"${FILESDIR}/no-cdquality-check.patch" )
