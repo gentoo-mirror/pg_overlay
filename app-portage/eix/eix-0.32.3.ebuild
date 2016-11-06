@@ -60,9 +60,9 @@ src_configure() {
 
 		# used purely to control/disrespect *FLAGS
 		--disable-debugging
-		--disable-new_dialect
-		--disable-optimization
-		--disable-strong-optimization
+		--enable-new_dialect
+		--enable-optimization
+		--enable-strong-optimization
 		--disable-security
 		--disable-nopie-security
 		--disable-strong-security
