@@ -16,6 +16,6 @@ IUSE=""
 
 src_install() {
 	insinto /usr/bin
-	doins push.sh
+	doins bin/push.sh
 	dodoc README
 }
