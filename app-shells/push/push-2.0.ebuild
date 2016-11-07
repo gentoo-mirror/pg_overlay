@@ -15,7 +15,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~s
 IUSE=""
 
 src_install() {
-	insinto /usr/bin
-	doins bin/push.sh
+	exeinto /usr/bin
+	doexe bin/push.sh
 	dodoc README
 }
