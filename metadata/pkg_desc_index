@@ -8,6 +8,7 @@ app-misc/fdupes 9999: Identify/delete duplicate files residing within specified 
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
 app-portage/eix 0.32.3: Search and query ebuilds
+app-shells/push 2.0: A POSIX shell function to treat a variable like an array, quoting args
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/mupdf 1.9a: a lightweight PDF viewer and toolkit written in portable C
 app-text/qpdfview 0.4.16: A tabbed document viewer
