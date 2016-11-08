@@ -126,13 +126,18 @@ RDEPEND="${COMMON_DEPEND}
 	selinux? ( sec-policy/selinux-mplayer )
 "
 
-pkg_pretend() {
-	if [[ ${MERGE_TYPE} != "binary" ]] && ! tc-has-tls && use vaapi && use egl; then
+mpv_check_compiler() {
+	if [[ ${MERGE_TYPE} != "binary" ]] && use vaapi && use egl && ! tc-has-tls; then
 		die "Your compiler lacks C++11 TLS support. Use GCC>=4.8.0 or Clang>=3.3."
 	fi
 }
 
+pkg_pretend() {
+	mpv_check_compiler
+}
+
 pkg_setup() {
+	mpv_check_compiler
 	python-any-r1_pkg_setup
 }
 
