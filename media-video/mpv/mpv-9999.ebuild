@@ -132,12 +132,7 @@ pkg_pretend() {
 	fi
 }
 
-pkg_pretend() {
-	mpv_check_compiler
-}
-
 pkg_setup() {
-	mpv_check_compiler
 	python-any-r1_pkg_setup
 }
 
