@@ -1,8 +1,8 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
+# $Id: 23bf429cf70e4022b10445b66f3675998b79b9e6 $
 
-EAPI=5
+EAPI=6
 
 inherit eutils flag-o-matic autotools multilib-minimal
 
@@ -11,8 +11,8 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="git://anongit.freedesktop.org/git/cairo"
 	SRC_URI=""
 else
-	SRC_URI="http://cairographics.org/releases/${P}.tar.xz"
-	KEYWORDS="alpha amd64 arm ~arm64 hppa ~ia64 ~m68k ~mips ~ppc ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+	SRC_URI="http://cairographics.org/snapshots/${P}.tar.xz"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 fi
 
 DESCRIPTION="A vector graphics library with cross-device output support"
@@ -70,15 +70,18 @@ MULTILIB_WRAPPED_HEADERS=(
 	/usr/include/cairo/cairo-directfb.h
 )
 
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
+	"${FILESDIR}"/${PN}-respect-fontconfig.patch
+)
+
 src_prepare() {
-	epatch "${FILESDIR}"/*.patch
+	default
 
 	# tests and perf tools require X, bug #483574
 	if ! use X; then
 		sed -e '/^SUBDIRS/ s#boilerplate test perf# #' -i Makefile.am || die
 	fi
-
-	epatch_user
 
 	# Slightly messed build system YAY
 	if [[ ${PV} == *9999* ]]; then
@@ -91,25 +94,26 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	local myopts
+	local myopts=()
 
 	[[ ${CHOST} == *-interix* ]] && append-flags -D_REENTRANT
 
-	use elibc_FreeBSD && myopts+=" --disable-symbol-lookup"
-	[[ ${CHOST} == *-darwin* ]] && myopts+=" --disable-symbol-lookup"
+	if use elibc_FreeBSD || [[ ${CHOST} == *-darwin* ]] ; then
+		myopts+=( --disable-symbol-lookup )
+	fi
 
 	# TODO: remove this (and add USE-dep) when DirectFB is converted,
 	# bug #484248 -- but beware of the circular dep.
 	if ! multilib_is_native_abi; then
-		myopts+=" --disable-directfb"
+		myopts+=( --disable-directfb )
 	fi
 
 	# TODO: remove this (and add USE-dep) when qtgui is converted, bug #498010
 	if ! multilib_is_native_abi; then
-		myopts+=" --disable-qt"
+		myopts+=( --disable-qt )
 	fi
 
-	# [[ ${PV} == *9999* ]] && myopts+=" $(use_enable doc gtk-doc)"
+	# [[ ${PV} == *9999* ]] && myopts+=( $(use_enable doc gtk-doc) )
 
 	ECONF_SOURCE="${S}" \
 	econf \
@@ -139,7 +143,7 @@ multilib_src_configure() {
 		--disable-gallium \
 		--disable-qt \
 		--disable-vg \
-		${myopts}
+		${myopts[@]}
 }
 
 multilib_src_install_all() {
