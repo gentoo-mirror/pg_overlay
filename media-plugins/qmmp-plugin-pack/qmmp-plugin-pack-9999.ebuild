@@ -29,5 +29,8 @@ DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5"
 
 src_prepare() {
+	mycmakeargs=(
+		-DUSE_GOOM=OFF
+	)
 	cmake-utils_src_prepare
 }
