@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	mycmakeargs=(
-		-DUSE_GOOM=0
+		-DUSE_GOOM=OFF
 	)
 	cmake-utils_src_prepare
 }
