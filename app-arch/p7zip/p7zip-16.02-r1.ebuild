@@ -83,6 +83,14 @@ src_prepare() {
 		sed -i -e '/^LOCAL_LIBS=/s/LOCAL_LIBS=/&-static /' makefile.machine || die
 	fi
 
+	#
+	rm GUI/kde4/p7zip_compress.desktop # FS#43766
+	pushd Utils
+	sed -i 's/_do_not_use//g' generate.py
+	./generate.py
+	popd
+	#
+
 	if use kde || use wxwidgets; then
 		need-wxwidgets unicode
 		einfo "Preparing dependency list"
