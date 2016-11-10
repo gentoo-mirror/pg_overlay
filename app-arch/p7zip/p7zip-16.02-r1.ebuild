@@ -84,7 +84,6 @@ src_prepare() {
 	fi
 
 	#
-	rm GUI/kde4/p7zip_compress.desktop # FS#43766
 	pushd Utils
 	sed -i 's/_do_not_use//g' generate.py
 	./generate.py
