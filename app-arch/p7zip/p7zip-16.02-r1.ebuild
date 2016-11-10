@@ -137,11 +137,6 @@ src_install() {
 			rm GUI/kde4/p7zip_compress.desktop || die
 			insinto /usr/share/kservices5/ServiceMenus
 			doins GUI/kde4/*.desktop
-			dodir /usr/share/kde4/services/ServiceMenus # drop these lines after konqueror:4/krusader:4 are gone
-			for item in "${ED}"usr/share/kservices5/ServiceMenus/*.desktop; do
-				item="$(basename ${item})"
-				dosym "/usr/share/kservices5/ServiceMenus/${item}" "/usr/share/kde4/services/ServiceMenus/${item}"
-			done
 		fi
 	fi
 
