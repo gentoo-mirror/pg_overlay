@@ -94,7 +94,7 @@ src_compile() {
 	emake CC=$(tc-getCC) CXX=$(tc-getCXX) all3
 	if use kde || use wxwidgets; then
 		emake CC=$(tc-getCC) CXX=$(tc-getCXX) -- 7zG
-#		emake -- 7zFM
+		emake -- 7zFM
 	fi
 }
 
@@ -110,14 +110,14 @@ src_install() {
 
 	if use kde || use wxwidgets; then
 		make_wrapper 7zG "/usr/$(get_libdir)/${PN}/7zG"
-#		make_wrapper 7zFM "/usr/$(get_libdir)/${PN}/7zFM"
+		make_wrapper 7zFM "/usr/$(get_libdir)/${PN}/7zFM"
 
-#		make_desktop_entry 7zFM "${PN} FM" ${PN} "GTK;Utility;Archiving;Compression"
+		make_desktop_entry 7zFM "${PN} FM" ${PN} "GTK;Utility;Archiving;Compression"
 
 		dobin GUI/p7zipForFilemanager
 		exeinto /usr/$(get_libdir)/${PN}
-#		doexe bin/7z{G,FM}
-		doexe bin/7zG
+		doexe bin/7z{G,FM}
+#		doexe bin/7zG
 
 		insinto /usr/$(get_libdir)/${PN}
 		doins -r GUI/Lang
