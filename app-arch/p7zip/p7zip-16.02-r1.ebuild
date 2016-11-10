@@ -116,8 +116,8 @@ src_install() {
 
 		dobin GUI/p7zipForFilemanager
 		exeinto /usr/$(get_libdir)/${PN}
-		doexe bin/7z{G,FM}
-#		doexe bin/7zG
+#		doexe bin/7z{G,FM}
+		doexe bin/7zG
 
 		insinto /usr/$(get_libdir)/${PN}
 		doins -r GUI/Lang
