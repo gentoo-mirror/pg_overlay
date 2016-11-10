@@ -115,7 +115,7 @@ src_install() {
 	make_wrapper 7za "/usr/$(get_libdir)/${PN}/7za"
 	make_wrapper 7z "/usr/$(get_libdir)/${PN}/7z"
 
-#	if use kde || use wxwidgets; then
+	if use kde || use wxwidgets; then
 		make_wrapper 7zG "/usr/$(get_libdir)/${PN}/7zG"
 		make_wrapper 7zFM "/usr/$(get_libdir)/${PN}/7zFM"
 
@@ -143,7 +143,7 @@ src_install() {
 				dosym "/usr/share/kservices5/ServiceMenus/${item}" "/usr/share/kde4/services/ServiceMenus/${item}"
 			done
 		fi
-#	fi
+	fi
 
 	dobin contrib/gzip-like_CLI_wrapper_for_7z/p7zip
 	doman contrib/gzip-like_CLI_wrapper_for_7z/man1/p7zip.1
