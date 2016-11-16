@@ -3,20 +3,21 @@
 # $Id$
 
 EAPI=6
+WX_GTK_VER="3.0-gtk3"
 
 inherit wxwidgets user git-r3
 
-EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
-
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
+EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE="+daemon -debug -geoip +nls remote -stats +unicode -upnp +X +mmap"
 
-DEPEND=">=dev-libs/crypto++-5
+DEPEND="
+	>=dev-libs/crypto++-5
 	sys-libs/binutils-libs:0=
 	>=sys-libs/zlib-1.2.1
 	>=x11-libs/wxGTK-3.0.2:3.0-gtk3[X?]
@@ -49,8 +50,6 @@ src_prepare() {
 
 src_configure() {
 	local myconf
-
-	WX_GTK_VER="3.0-gtk3"
 
 	if use X; then
 		einfo "wxGTK with X support will be used"
