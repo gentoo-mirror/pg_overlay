@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  1d3f5cacba056949ea9a56d4d805c3073efe403b
+# Parent  6ff55468281e12a84adefb46b17acb60d9cea608
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #include "prefread.h"
  #include "prefapi_private_data.h"
  
-@@ -1162,16 +1163,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
+@@ -1180,16 +1181,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
  
  static nsresult pref_LoadPrefsInDirList(const char *listId)
  {
@@ -62,7 +62,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
      return NS_OK;
  
    bool hasMore;
-@@ -1187,17 +1206,17 @@ static nsresult pref_LoadPrefsInDirList(
+@@ -1205,17 +1224,17 @@ static nsresult pref_LoadPrefsInDirList(
  
      nsAutoCString leaf;
      path->GetNativeLeafName(leaf);
@@ -81,7 +81,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  {
    nsZipItemPtr<char> manifest(jarReader, name, true);
    NS_ENSURE_TRUE(manifest.Buffer(), NS_ERROR_NOT_AVAILABLE);
-@@ -1291,24 +1310,36 @@ static nsresult pref_InitInitialObjects(
+@@ -1309,24 +1328,36 @@ static nsresult pref_InitInitialObjects(
    /* these pref file names should not be used: we process them after all other application pref files for backwards compatibility */
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -228,7 +228,7 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
  #endif
  
  #ifdef MOZ_WIDGET_ANDROID
- #include "AndroidBridge.h"
+ #include "GeneratedJNIWrappers.h"
  #endif
  
 @@ -2719,16 +2723,25 @@ nsDownload::SetState(DownloadState aStat
@@ -278,7 +278,7 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
 diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
 --- a/toolkit/content/jar.mn
 +++ b/toolkit/content/jar.mn
-@@ -72,29 +72,33 @@ toolkit.jar:
+@@ -67,29 +67,33 @@ toolkit.jar:
     content/global/viewZoomOverlay.js
     content/global/bindings/autocomplete.xml    (widgets/autocomplete.xml)
     content/global/bindings/browser.xml         (widgets/browser.xml)
@@ -784,7 +784,7 @@ diff --git a/toolkit/content/widgets/preferences-kde.xml b/toolkit/content/widge
 new file mode 100644
 --- /dev/null
 +++ b/toolkit/content/widgets/preferences-kde.xml
-@@ -0,0 +1,1408 @@
+@@ -0,0 +1,1410 @@
 +<?xml version="1.0"?>
 +
 +<!DOCTYPE bindings [
@@ -954,6 +954,8 @@ new file mode 100644
 +      <field name="_constructed">false</field>
 +      <property name="instantApply">
 +        <getter>
++          if (this.getAttribute("instantApply") == "false")
++            return false;
 +          return this.getAttribute("instantApply") == "true" || this.preferences.instantApply;
 +        </getter>
 +      </property>
@@ -2290,13 +2292,13 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -47,17 +47,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'ui
- elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'qt':
-     EXPORTS += ['nsQAppInstance.h']
-     SOURCES += [
-         '!moc_nsNativeAppSupportQt.cpp',
-         'nsNativeAppSupportQt.cpp',
-         'nsQAppInstance.cpp',
+@@ -39,17 +39,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+         'updaterfileutils_osx.mm',
+     ]
+ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
+     UNIFIED_SOURCES += [
+         'nsNativeAppSupportDefault.cpp',
+         'UIKitDirProvider.mm',
      ]
  elif 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
 +    EXPORTS += ['nsKDEUtils.h']
@@ -2730,7 +2732,7 @@ diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
          'android/nsExternalSharingAppService.cpp',
          'android/nsExternalURLHandlerService.cpp',
          'android/nsMIMEInfoAndroid.cpp',
-@@ -131,16 +133,17 @@ include('/ipc/chromium/chromium-config.m
+@@ -123,16 +125,17 @@ include('/ipc/chromium/chromium-config.m
  
  FINAL_LIBRARY = 'xul'
  
@@ -2746,7 +2748,7 @@ diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
      CXXFLAGS += CONFIG['TK_CFLAGS']
      CXXFLAGS += CONFIG['MOZ_DBUS_CFLAGS']
  
- if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('qt', 'gtk2', 'gtk3'):
+ if CONFIG['MOZ_WIDGET_TOOLKIT'] in ('gtk2', 'gtk3'):
      CXXFLAGS += CONFIG['TK_CFLAGS']
 diff --git a/uriloader/exthandler/unix/nsCommonRegistry.cpp b/uriloader/exthandler/unix/nsCommonRegistry.cpp
 new file mode 100644
@@ -2974,13 +2976,12 @@ new file mode 100644
 diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
 --- a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
 +++ b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
-@@ -7,32 +7,35 @@
- #ifdef MOZ_WIDGET_QT
- #if (MOZ_ENABLE_CONTENTACTION)
- #include <contentaction/contentaction.h>
- #include "nsContentHandlerApp.h"
- #endif
- #endif
+@@ -1,50 +1,53 @@
+ /* -*- Mode: C++; tab-width: 3; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+  *
+  * This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
  
  #include "nsMIMEInfoUnix.h"
 -#include "nsGNOMERegistry.h"
@@ -2992,9 +2993,6 @@ diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler
  #ifdef MOZ_ENABLE_DBUS
  #include "nsDBusHandlerApp.h"
  #endif
- #ifdef MOZ_WIDGET_QT
- #include "nsMIMEInfoQt.h"
- #endif
 +#if defined(XP_UNIX) && !defined(XP_MACOSX)
 +#include "nsKDEUtils.h"
 +#endif
@@ -3002,17 +3000,14 @@ diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler
  nsresult
  nsMIMEInfoUnix::LoadUriInternal(nsIURI * aURI)
  {
--  nsresult rv = nsGNOMERegistry::LoadURL(aURI);
-+  nsresult rv = nsCommonRegistry::LoadURL(aURI);
+-  return nsGNOMERegistry::LoadURL(aURI);
++  return nsCommonRegistry::LoadURL(aURI);
+ }
  
- #ifdef MOZ_WIDGET_QT
-   if (NS_FAILED(rv)) {
-     rv = nsMIMEInfoQt::LoadUriInternal(aURI);
-   }
- #endif
- 
-   return rv;
-@@ -45,24 +48,24 @@ nsMIMEInfoUnix::GetHasDefaultHandler(boo
+ NS_IMETHODIMP
+ nsMIMEInfoUnix::GetHasDefaultHandler(bool *_retval)
+ {
+   // if mDefaultApplication is set, it means the application has been set from
    // either /etc/mailcap or ${HOME}/.mailcap, in which case we don't want to
    // give the GNOME answer.
    if (mDefaultApplication)
@@ -3040,7 +3035,7 @@ diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler
  
    if (*_retval)
      return NS_OK;
-@@ -97,16 +100,33 @@ nsMIMEInfoUnix::LaunchDefaultWithFile(ns
+@@ -79,16 +82,33 @@ nsMIMEInfoUnix::LaunchDefaultWithFile(ns
      ContentAction::Action::defaultActionForFile(uri, QString(mSchemeOrType.get()));
    if (action.isValid()) {
      action.trigger();
@@ -3166,7 +3161,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
-@@ -87,16 +87,17 @@ else:
+@@ -90,16 +90,17 @@ else:
  include('/ipc/chromium/chromium-config.mozbuild')
  
  FINAL_LIBRARY = 'xul'
@@ -3275,8 +3270,8 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
      GTK_WINDOW(mParentWidget->GetNativeData(NS_NATIVE_SHELLWIDGET));
  
    GtkFileChooserAction action = GetGtkFileChooserAction(mMode);
-   const gchar *accept_button = (action == GTK_FILE_CHOOSER_ACTION_SAVE)
-@@ -595,8 +615,235 @@ nsFilePicker::Done(GtkWidget* file_choos
+ 
+@@ -603,8 +623,235 @@ nsFilePicker::Done(GtkWidget* file_choos
    if (mCallback) {
      mCallback->Done(result);
      mCallback = nullptr;
@@ -3590,7 +3585,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
  #pragma warning(disable:4996) // VC12+ deprecates GetVersionEx
    OSVERSIONINFO info = { sizeof(OSVERSIONINFO) };
    if (GetVersionEx(&info)) {
-     nsTextFormatter::ssprintf(osVersion, MOZ_UTF16("%ld.%ld"),
+     nsTextFormatter::ssprintf(osVersion, u"%ld.%ld",
                                info.dwMajorVersion,
                                info.dwMinorVersion);
    }
@@ -3599,12 +3594,12 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
  #elif defined(MOZ_WIDGET_COCOA)
    SInt32 majorVersion = nsCocoaFeatures::OSXVersionMajor();
    SInt32 minorVersion = nsCocoaFeatures::OSXVersionMinor();
-   nsTextFormatter::ssprintf(osVersion, MOZ_UTF16("%ld.%ld"),
+   nsTextFormatter::ssprintf(osVersion, u"%ld.%ld",
                              majorVersion,
                              minorVersion);
 +  desktop = NS_LITERAL_STRING("macosx");
  #elif defined(MOZ_WIDGET_GTK)
-   nsTextFormatter::ssprintf(osVersion, MOZ_UTF16("%ld.%ld"),
+   nsTextFormatter::ssprintf(osVersion, u"%ld.%ld",
                              gtk_major_version,
                              gtk_minor_version);
 +  desktop = nsKDEUtils::kdeSession() ? NS_LITERAL_STRING("kde") : NS_LITERAL_STRING("gnome");
@@ -3614,7 +3609,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
      mozilla::AndroidBridge::Bridge()->GetStaticStringField("android/os/Build$VERSION",
                                                             "RELEASE",
                                                             osVersion);
-     isTablet = mozilla::widget::GeckoAppShell::IsTablet();
+     isTablet = java::GeckoAppShell::IsTablet();
    }
 +  desktop = NS_LITERAL_STRING("android");
  #endif
