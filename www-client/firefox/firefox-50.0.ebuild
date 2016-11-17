@@ -334,7 +334,7 @@ src_install() {
 		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
-		cp "${FILESDIR}/kde-opensuse/kde.js-1" ff/dist/bin/defaults/pref/kde.js
+		cp "${FILESDIR}/kde-opensuse/kde.js-1" "${BUILD_OBJ_DIR}/dist/bin/defaults/pref/kde.js"
 	fi
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
