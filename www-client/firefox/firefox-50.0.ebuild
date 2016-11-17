@@ -155,7 +155,7 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done && "${FILESDIR}/kde-opensuse/kde.js-1" obj-x86_64-pc-linux-gnu/dist/bin/defaults/pref/kde.js
+	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
@@ -334,6 +334,7 @@ src_install() {
 		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
+		cp "${FILESDIR}/kde-opensuse/kde.js-1" obj-x86_64-pc-linux-gnu/dist/bin/defaults/pref/kde.js
 	fi
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
