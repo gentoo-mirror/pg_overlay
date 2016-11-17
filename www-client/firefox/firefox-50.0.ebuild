@@ -206,46 +206,54 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	mozconfig_annotate '' --enable-elf-hack
-	mozconfig_annotate '' --disable-eme
-	mozconfig_annotate '' --disable-url-classifier
+	#mozconfig_annotate '' --enable-elf-hack
+	#mozconfig_annotate '' --disable-eme
+	#mozconfig_annotate '' --disable-url-classifier
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
-	mozconfig_annotate '' --with-pthreads
-	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-ipdl-tests
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-parental-controls
+	#mozconfig_annotate '' --with-pthreads
+	#mozconfig_annotate '' --disable-maintenance-service
+	#mozconfig_annotate '' --disable-ipdl-tests
+	#mozconfig_annotate '' --disable-accessibility
+	#mozconfig_annotate '' --disable-parental-controls
 
 	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
-	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --disable-webrtc
-	mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-tests
-	mozconfig_annotate '' --enable-strip
-	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-system-hunspell
-	mozconfig_annotate '' --disable-gconf
+	#mozconfig_annotate '' --disable-necko-wifi
+	#mozconfig_annotate '' --disable-webrtc
+	#mozconfig_annotate '' --disable-safe-browsing
+	#mozconfig_annotate '' --disable-crashreporter
+	#mozconfig_annotate '' --disable-updater
+	#mozconfig_annotate '' --disable-tests
+	#mozconfig_annotate '' --enable-strip
+	#mozconfig_annotate '' --enable-install-strip
+	#mozconfig_annotate '' --with-pthreads
+	#mozconfig_annotate '' --enable-system-hunspell
+	#mozconfig_annotate '' --disable-gconf
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
-	mozconfig_annotate '' --enable-gold
-	mozconfig_annotate '' --enable-pie
-	mozconfig_annotate '' --disable-libproxy
-	mozconfig_annotate '' --disable-gio
-	mozconfig_annotate '' --disable-debug-symbols
+	#mozconfig_annotate '' --enable-gold
+	#mozconfig_annotate '' --enable-pie
+	#mozconfig_annotate '' --disable-libproxy
+	#mozconfig_annotate '' --disable-gio
+	#mozconfig_annotate '' --disable-gconf
+	#mozconfig_annotate '' --disable-crashreporter
+	#mozconfig_annotate '' --disable-updater
+	#mozconfig_annotate '' --disable-tests
+	#mozconfig_annotate '' --disable-debug-symbols
 
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon-git/
-	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-websms-backend
-	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-b2g-ril
-	mozconfig_annotate '' --disable-b2g-bt
-	mozconfig_annotate '' --disable-b2g-camera
-	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-valgrind
+	#mozconfig_annotate '' --disable-accessibility
+	#mozconfig_annotate '' --disable-gamepad
+	#mozconfig_annotate '' --disable-necko-wifi
+	#mozconfig_annotate '' --disable-websms-backend
+	#mozconfig_annotate '' --disable-parental-controls
+	#mozconfig_annotate '' --disable-maintenance-service
+	#mozconfig_annotate '' --disable-mobile-optimize
+	#mozconfig_annotate '' --disable-b2g-ril
+	#mozconfig_annotate '' --disable-b2g-bt
+	#mozconfig_annotate '' --disable-b2g-camera
+	#mozconfig_annotate '' --disable-debug
+	#mozconfig_annotate '' --disable-valgrind
 
 	# Allow for a proper pgo build
 	if use pgo; then
@@ -331,11 +339,11 @@ src_install() {
 			|| die
 	done
 
-	if use kde ; then
-		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/kde.js" \
-		|| die
-	fi
+	#if use kde ; then
+	#	cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
+	#	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/kde.js" \
+	#	|| die
+	#fi
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
 	emake DESTDIR="${D}" install
