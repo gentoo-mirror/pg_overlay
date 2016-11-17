@@ -9,7 +9,6 @@ mozilla-no-stdcxx-check.patch
 mozilla-reduce-files-per-UnifiedBindings.patch
 mozilla-check_return.patch
 mozilla-skia-overflow.patch
-mozilla-binutils-visibility.patch
 firefox-kde.patch
 firefox-no-default-ualocale.patch
 firefox-branded-icons.patch
