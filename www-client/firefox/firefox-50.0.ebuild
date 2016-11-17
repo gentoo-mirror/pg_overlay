@@ -331,11 +331,8 @@ src_install() {
 	done
 
 	if use kde ; then
-		#cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
-		#"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-		#|| die
 		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/kde.js" \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
 	fi
 
