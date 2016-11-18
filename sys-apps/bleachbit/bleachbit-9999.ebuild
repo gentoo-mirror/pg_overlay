@@ -43,7 +43,7 @@ python_prepare_all() {
 }
 
 python_compile_all() {
-	use nls && emake -C po
+	use nls && emake -C po local
 }
 
 python_install_all() {
