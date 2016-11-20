@@ -243,7 +243,6 @@ src_configure() {
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-pie
-	mozconfig_annotate '' --enable-rust
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-gconf
