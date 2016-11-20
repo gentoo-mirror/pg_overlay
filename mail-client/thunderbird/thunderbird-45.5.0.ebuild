@@ -5,7 +5,7 @@
 EAPI=6
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="4.7.3"
+MOZ_LIGHTNING_VER="4.7.4"
 MOZ_LIGHTNING_GDATA_VER="2.6"
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
@@ -13,18 +13,13 @@ MOZ_LANGS=(en en-GB en-US ru )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_beta/b}"
-# ESR releases have slightly version numbers
-if [[ ${MOZ_ESR} == 1 ]]; then
-	MOZ_PV="${MOZ_PV}esr"
-fi
-MOZ_P="${PN}-${MOZ_PV}"
 
 # Enigmail version
 EMVER="1.9.1"
 
 # Patches
 PATCH="thunderbird-38.0-patches-0.1"
-PATCHFF="firefox-45.0-patches-06"
+PATCHFF="firefox-45.0-patches-07"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -44,7 +39,7 @@ RESTRICT="!bindist? ( bindist )"
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/{${PATCH},${PATCHFF}}.tar.xz )
 SRC_URI="${SRC_URI}
 	${MOZ_HTTP_URI}/${MOZ_PV}/source/${MOZ_P}.source.tar.xz
-	https://dev.gentoo.org/~axs/distfiles/lightning-${MOZ_LIGHTNING_VER}.repack.tar.xz
+	https://dev.gentoo.org/~axs/distfiles/lightning-${MOZ_LIGHTNING_VER}.tar.xz
 	lightning? ( https://dev.gentoo.org/~axs/distfiles/gdata-provider-${MOZ_LIGHTNING_GDATA_VER}-r1.tar.xz )
 	crypt? ( http://www.enigmail.net/download/source/enigmail-${EMVER}.tar.gz )
 	${PATCH_URIS[@]}"
@@ -157,11 +152,6 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done
-
 	# OpenSUSE-KDE patchset
 	if use kde ; then
 		pushd mozilla
@@ -171,6 +161,11 @@ src_prepare() {
 		popd
 		eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
 	fi
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	done	
 
 	# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
@@ -284,7 +279,7 @@ src_install() {
 		|| die
 	fi
 
-		# dev-db/sqlite does not have FTS3_TOKENIZER support.
+	# dev-db/sqlite does not have FTS3_TOKENIZER support.
 	# gloda needs it to function, and bad crashes happen when its enabled and doesn't work
 	if in_iuse system-sqlite && use system-sqlite ; then
 		echo "lockPref(\"mailnews.database.global.indexer.enabled\", false);" \
