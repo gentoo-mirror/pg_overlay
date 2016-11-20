@@ -353,7 +353,7 @@ src_install() {
 		cp "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/kde.js" \
 		|| die
-		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
+		cat "${FILESDIR}"/kde-opensuse/kde.js-1 \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
 	fi
