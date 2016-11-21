@@ -10,7 +10,7 @@ if [[ ${PV} == "9999" ]] ; then
 	inherit git-2 autotools
 	SRC_URI=""
 else
-	SRC_URI="https://github.com/fenrus75/${PN}/archive/v${PV}-pre.tar.gz -> ${P}"
+	SRC_URI="https://github.com/fenrus75/${PN}/archive/v${PV}-pre.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86 ~amd64-linux ~x86-linux"
 fi
 
