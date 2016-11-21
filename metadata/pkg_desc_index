@@ -76,6 +76,7 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 0.24 9999: Tools and library to manipulate EFI variables
 sys-power/cpupower 4.8.9: Shows and sets processor power related values
+sys-power/powertop 2.9_pre 2.9: tool that helps you find what software is using the most power
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 53.0.2785.143 53.0.2785.144 53.0.2785.154 54.0.2840.71 54.0.2840.79 54.0.2840.85 54.0.2840.90 54.0.2840.93 54.0.2840.99 54.0.2840.100 54.0.2840.101: Open-source version of Google Chrome web browser
 www-client/firefox 50.0: Firefox Web Browser
