@@ -401,7 +401,13 @@ src_configure() {
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 
-	# libevent: https://bugs.gentoo.org/593458
+	if use inox; then
+		myconf_gn+=" enable_rlz=false"
+		myconf_gn+=" enable_rlz_support=false"
+		myconf_gn+=" safe_browsing_mode=0"
+	fi
+
+		# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries="
 		flac
 		harfbuzz-ng
