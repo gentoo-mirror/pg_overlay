@@ -6,4 +6,5 @@ mozilla-1170092.patch
 mozilla-1005640-accept-lang.patch
 mozilla-1253216.patch
 mozilla-1196777.patch
+widget-rebase.patch
 mozilla-256180.patch
