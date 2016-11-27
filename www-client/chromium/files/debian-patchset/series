@@ -17,4 +17,3 @@ system/vpx.patch
 system/nspr.patch
 system/event.patch
 system/clang.patch
-system/ffmpeg.patch
