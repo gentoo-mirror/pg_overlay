@@ -6,16 +6,14 @@ disable/extension-updater.patch
 disable/google-api-warning.patch
 disable/default-browser-warning.patch
 
-gtk3.patch
 gtk3theme.patch
 
-cups2.2.patch
 glibc2.24.patch
 
-khronos.patch
 ps-print.patch
 gpu-timeout.patch
-chromedriver-revision.patch
 
+system/vpx.patch
 system/nspr.patch
+system/event.patch
 system/clang.patch

@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 x86"
-IUSE="cups +gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi debian +inox iridium ungoogled"
+IUSE="cups +gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi +debian +inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
@@ -207,6 +207,9 @@ src_prepare() {
 	# Iridium patches
 	use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
 
+	# Debian patches
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series");do epatch "${FILESDIR}/debian-patchset/$i";done
+
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
 
@@ -391,9 +394,10 @@ src_configure() {
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
+
 	# Ungoogled
 	myconf_gn+=" use_gio=$(usex gnome true false)"
-	#myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
+	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_remoting=false"
@@ -404,9 +408,13 @@ src_configure() {
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 
+	# Debian
+	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" enable_iterator_debugging=false"
+
 	if use inox; then
 		myconf_gn+=" enable_rlz=false"
-		myconf_gn+=" enable_rlz_support=false"
+		#myconf_gn+=" enable_rlz_support=false"
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
 
