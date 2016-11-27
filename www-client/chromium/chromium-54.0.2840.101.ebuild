@@ -397,7 +397,7 @@ src_configure() {
 
 	# Ungoogled
 	myconf_gn+=" use_gio=$(usex gnome true false)"
-	#myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
+	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_remoting=false"
@@ -413,8 +413,8 @@ src_configure() {
 	myconf_gn+=" enable_iterator_debugging=false"
 
 	if use inox; then
-		#myconf_gn+=" enable_rlz=false"
-		#myconf_gn+=" enable_rlz_support=false"
+		myconf_gn+=" enable_rlz=false"
+		myconf_gn+=" enable_rlz_support=false"
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
 
