@@ -37,7 +37,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-lin
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist hardened +hwaccel pgo selinux +gmp-autoupdate test +kde"
+IUSE="bindist hardened +hwaccel jack pgo selinux +gmp-autoupdate test +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -48,6 +48,7 @@ SRC_URI="${SRC_URI}
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
+	jack? ( virtual/jack )
 	>=dev-libs/nss-3.26.2
 	>=dev-libs/nspr-4.12
 	selinux? ( sec-policy/selinux-mozilla )"
@@ -199,6 +200,9 @@ src_configure() {
 
 	mozconfig_init
 	mozconfig_config
+
+	# enable JACK, bug 600002
+	mozconfig_use_enable jack
 
 	# It doesn't compile on alpha without this LDFLAGS
 	use alpha && append-ldflags "-Wl,--no-relax"
