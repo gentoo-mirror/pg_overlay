@@ -1,4 +1,4 @@
-app-admin/profile-cleaner 2.35: Vacuum and reindex browser sqlite databases
+app-admin/profile-cleaner 2.36: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-arch/rar 5.4.0: RAR compressor/uncompressor
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
@@ -30,7 +30,7 @@ gnome-extra/nemo-extensions 3.0.0: Extensions for Cinnamon's file-manager Nemo
 gnome-extra/nemo-fileroller 3.0.0: Provides context menu for Nemo
 gnome-extra/nemo-terminal 3.0.0: Nemo-Terminal Extension
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-mail-client/thunderbird 45.4.0 45.5.0 45.5.1: Thunderbird Mail Client
+mail-client/thunderbird 45.5.1: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
 media-fonts/iosevka 1.9.2: Open source coding font
 media-gfx/xviewer 1.0.6: A simple and easy to use image viewer. X-Apps Project
