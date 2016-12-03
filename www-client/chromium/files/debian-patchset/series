@@ -12,4 +12,3 @@ glibc2.24.patch
 
 ps-print.patch
 gpu-timeout.patch
-build-flags.patch
