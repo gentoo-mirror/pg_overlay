@@ -233,7 +233,7 @@ src_configure() {
 
 	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
 	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --disable-webrtc
+	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
