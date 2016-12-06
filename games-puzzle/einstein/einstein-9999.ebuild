@@ -7,7 +7,7 @@ inherit eutils games git-r3
 
 DESCRIPTION="A puzzle game inspired by Albert Einstein"
 HOMEPAGE="https://freecode.com/projects/einsteinpuzzle"
-EGIT_REPO="git://github.com/lksj/einstein-puzzle.git"
+EGIT_REPO_URI="git://github.com/lksj/einstein-puzzle.git"
 
 LICENSE="GPL-2"
 SLOT="0"
