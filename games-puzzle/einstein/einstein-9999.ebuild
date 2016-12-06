@@ -21,7 +21,6 @@ DEPEND="media-libs/libsdl[sound,video]
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	epatch "${FILESDIR}"/${P}*.patch
 	sed -i \
 		-e "/PREFIX/s:/usr/local:${GAMES_PREFIX}:" \
 		-e "s:\$(PREFIX)/share/einstein:${GAMES_DATADIR}/${PN}:" \
