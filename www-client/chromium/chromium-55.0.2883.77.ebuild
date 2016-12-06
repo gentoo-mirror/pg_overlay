@@ -209,6 +209,9 @@ src_prepare() {
 	# Iridium patches
 	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
 
+	# Ungoogled patches
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium/series");do epatch "${FILESDIR}/ungoogled-chromium/$i";done
+
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series");do epatch "${FILESDIR}/debian-patchset/$i";done
 
@@ -395,24 +398,23 @@ src_configure() {
 	myconf_gn+=" enable_nacl_nonsfi=false"
 
 	# Ungoogled
-	myconf_gn+=" use_gio=$(usex gnome true false)"
-	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
-	#myconf_gn+=" enable_one_click_signin=false"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-
-	# Debian
-	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" enable_rlz_support=false"
 	myconf_gn+=" enable_iterator_debugging=false"
+	if use ungoogled; then
+		myconf_gn+=" safe_browsing_mode=0"
+		myconf_gn+=" enable_one_click_signin=false"
+	fi
+	myconf_gn+=" use_gio=$(usex gnome true false)"
+	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 
 	# Inox
 	myconf_gn+=" enable_rlz=false"
-	myconf_gn+=" enable_rlz_support=false"
-
 	if use inox; then
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
@@ -497,10 +499,10 @@ src_configure() {
 		-Dhost_clang=0
 		-Dlinux_use_bundled_binutils=0
 		-Dlinux_use_bundled_gold=0
-		-Dlinux_use_gold_flags=0
+		-Dlinux_use_gold_flags=1
 		-Dsysroot="
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false"
+	myconf_gn+=" use_gold=true use_sysroot=false linux_use_bundled_binutils=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gyp+=" -Dproprietary_codecs=1 -Dffmpeg_branding=${ffmpeg_branding}"
