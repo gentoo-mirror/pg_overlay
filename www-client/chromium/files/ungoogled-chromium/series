@@ -4,9 +4,14 @@ debian/disable/extension-updater.patch
 debian/disable/google-api-warning.patch
 debian/disable/external-components.patch
 debian/disable/default-browser-warning.patch
+debian/gtk3theme.patch
+debian/glibc2.24.patch
 debian/ps-print.patch
+debian/build-flags.patch
 debian/gpu-timeout.patch
 
+inox-patchset/chromium-53.0.2785.92-last-commit-position.patch
+inox-patchset/fix-building-without-safebrowsing.patch
 inox-patchset/chromium-widevine.patch
 inox-patchset/disable-autofill-download-manager.patch
 inox-patchset/disable-google-url-tracker.patch
@@ -20,13 +25,11 @@ inox-patchset/add-duckduckgo-search-engine.patch
 inox-patchset/disable-missing-key-warning.patch
 inox-patchset/disable-translation-lang-fetch.patch
 inox-patchset/disable-update-pings.patch
-inox-patchset/chromium-sandbox-pie.patch
 inox-patchset/disable-new-avatar-menu.patch
 inox-patchset/disable-first-run-behaviour.patch
 inox-patchset/disable-battery-status-service.patch
 
 iridium-browser/net-cert-increase-default-key-length-for-newly-gener.patch
-iridium-browser/webrtc-disable-WebRTC-identity-store.patch
 iridium-browser/mime_util-force-text-x-suse-ymp-to-be-downloaded.patch
 iridium-browser/prefs-do-not-store-passwords-by-default.patch
 iridium-browser/prefs-only-keep-cookies-until-exit.patch
@@ -37,7 +40,6 @@ iridium-browser/net-add-trk-scheme-and-help-identify-URLs-being-retr.patch
 iridium-browser/safe_browsing-disable-incident-reporting.patch
 iridium-browser/safe_browsing-disable-reporting-of-safebrowsing-over.patch
 iridium-browser/safe_browsing-support-trk-prefix.patch
-iridium-browser/safe_browsing-disable-cookie-transmission.patch
 iridium-browser/all-add-trk-prefixes-to-possibly-evil-connections.patch
 iridium-browser/promo-disable-Google-promotion-fetching.patch
 iridium-browser/hotword-disable-at-build-time-by-default.patch
@@ -47,7 +49,7 @@ ungoogled-chromium/clear-http-auth-cache-menu-item.patch
 ungoogled-chromium/disable-crash-reporter.patch
 ungoogled-chromium/disable-formatting-in-omnibox.patch
 ungoogled-chromium/disable-google-host-detection.patch
-ungoogled-chromium/add-nosearch-search-engine.patch
+ungoogled-chromium/replace-google-search-engine-with-nosearch.patch
 ungoogled-chromium/disable-signin.patch
 ungoogled-chromium/disable-translate.patch
 ungoogled-chromium/disable-unload-javascript-dialog-box.patch
@@ -57,21 +59,16 @@ ungoogled-chromium/disable-untraceable-urls.patch
 ungoogled-chromium/disable-ipv6-pinging.patch
 ungoogled-chromium/disable-profile-avatar-downloading.patch
 ungoogled-chromium/remove-disable-setuid-sandbox-as-bad-flag.patch
-ungoogled-chromium/fix-building-without-safebrowsing.patch
 ungoogled-chromium/disable-logging-urls-to-stderr.patch
 ungoogled-chromium/change-trace-infobar-message.patch
-ungoogled-chromium/disable-copresence.patch
 ungoogled-chromium/disable-gcm.patch
 ungoogled-chromium/disable-domain-reliability.patch
 ungoogled-chromium/intercept-all-modified-domains.patch
 ungoogled-chromium/disable-intranet-redirect-detector.patch
 ungoogled-chromium/fix-building-without-one-click-signin.patch
 ungoogled-chromium/enable-page-saving-on-more-pages.patch
-ungoogled-chromium/disable-windows-zone-identifier.patch
-ungoogled-chromium/fix-bundled-devtools.patch
+ungoogled-chromium/disable-download-quarantine.patch
 ungoogled-chromium/remove-get-help-button.patch
-ungoogled-chromium/fix-building-with-iridium-trknotify.patch
+ungoogled-chromium/disable-gaia.patch
+ungoogled-chromium/gn-modify-hardcoded-settings.patch
 
-common_debian/gtk3.patch
-common_debian/gtk3theme.patch
-common_debian/khronos.patch
