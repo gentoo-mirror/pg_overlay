@@ -35,8 +35,8 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cflags -fno-strict-aliasing
-	append-cxxflags -fno-strict-aliasing
+	append-cflags -fno-strict-aliasing -std=c++11
+	append-cxxflags -fno-strict-aliasing -std=c++11
 
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
