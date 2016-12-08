@@ -7,22 +7,22 @@ EAPI=6
 PYTHON_COMPAT=( python{2_7,3_4,3_5} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV='1.9.5'
+WAF_PV='1.9.6'
 
-inherit gnome2-utils pax-utils python-any-r1 toolchain-funcs versionator waf-utils xdg-utils
+inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/"
 
 if [[ ${PV} != *9999* ]]; then
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux"
+	KEYWORDS="~amd64 ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
 	EGIT_REPO_URI="git://github.com/mpv-player/mpv.git"
 	inherit git-r3
 fi
-SRC_URI+="http://waf.io/waf-${WAF_PV}"
+SRC_URI+=" https://waf.io/waf-${WAF_PV}"
 DOCS+=( README.md etc/mpv.conf etc/input.conf )
 
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
@@ -31,7 +31,7 @@ SLOT="0"
 IUSE="aqua +alsa archive bluray cdda +cli coreaudio doc drm dvb dvd +egl +enca
 	encode gbm +iconv jack jpeg lcms +libass libav libcaca libguess libmpv +lua
 	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba -sdl
-	selinux test +uchardet v4l vaapi vdpau vf-dlopen wayland +X xinerama
+	selinux test tools +uchardet v4l vaapi vdpau vf-dlopen wayland +X xinerama
 	+xscreensaver +xv zsh-completion"
 
 REQUIRED_USE="
@@ -55,8 +55,8 @@ REQUIRED_USE="
 "
 
 COMMON_DEPEND="
-	!libav? ( >=media-video/ffmpeg-2.4:0=[encode?,threads,vaapi?,vdpau?] )
-	libav? ( >=media-video/libav-11:0=[encode?,threads,vaapi?,vdpau?] )
+	!libav? ( >=media-video/ffmpeg-3.2.2:=[encode?,threads,vaapi?,vdpau?] )
+	libav? ( >=media-video/libav-12:=[encode?,threads,vaapi?,vdpau?] )
 	sys-libs/zlib
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.0.0:= )
@@ -124,7 +124,10 @@ DEPEND="${COMMON_DEPEND}
 "
 RDEPEND="${COMMON_DEPEND}
 	selinux? ( sec-policy/selinux-mplayer )
+	tools? ( ${PYTHON_DEPS} )
 "
+
+PATCHES=( "${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch" )
 
 mpv_check_compiler() {
 	if [[ ${MERGE_TYPE} != "binary" ]] && use vaapi && use egl && ! tc-has-tls; then
@@ -138,13 +141,13 @@ pkg_pretend() {
 
 pkg_setup() {
 	mpv_check_compiler
-	python-any-r1_pkg_setup
+	[[ ${MERGE_TYPE} != "binary" ]] && python_setup
 }
 
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	sed -i 's/1.8.12/1.9.5/g' bootstrap.py || die
+	sed -i 's/1.8.12/1.9.6/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	default src_prepare
 }
@@ -230,6 +233,7 @@ src_configure() {
 		$(use_enable jpeg)
 		--disable-android
 		$(use_enable raspberry-pi rpi)
+		--disable-ios-gl
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		--disable-mali-fbdev	# Only available in overlays.
 
@@ -277,6 +281,12 @@ src_install() {
 
 	if use cli && use luajit; then
 		pax-mark -m "${ED}"usr/bin/${PN}
+	fi
+
+	if use tools; then
+		dobin TOOLS/{mpv_identify.sh,umpv}
+		newbin TOOLS/idet.sh mpv_idet.sh
+		python_replicate_script "${ED}"usr/bin/umpv
 	fi
 }
 
