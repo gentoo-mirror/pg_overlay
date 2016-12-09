@@ -9,6 +9,7 @@ inherit autotools eutils flag-o-matic git-r3
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="git://github.com/rakshasa/${PN}.git"
+EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -35,8 +36,8 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cflags -fno-strict-aliasing -std=c++11
-	append-cxxflags -fno-strict-aliasing -std=c++11
+	#append-cflags -fno-strict-aliasing
+	#append-cxxflags -fno-strict-aliasing
 
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
