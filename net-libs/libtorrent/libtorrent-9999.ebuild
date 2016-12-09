@@ -9,6 +9,7 @@ inherit autotools flag-o-matic git-r3 libtool toolchain-funcs
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="git://github.com/rakshasa/${PN}.git"
+EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"
 
@@ -38,8 +39,8 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cflags -fno-strict-aliasing
-	append-cxxflags -fno-strict-aliasing
+	#append-cflags -fno-strict-aliasing
+	#append-cxxflags -fno-strict-aliasing
 
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
