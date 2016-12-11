@@ -2,8 +2,6 @@ disable/pings.patch
 disable/promo.patch
 disable/extension-updater.patch
 disable/google-api-warning.patch
-disable/third-party-cookies.patch
-disable/external-components.patch
 disable/default-browser-warning.patch
 
 gtk3theme.patch
