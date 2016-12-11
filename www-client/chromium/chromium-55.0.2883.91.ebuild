@@ -204,7 +204,7 @@ src_prepare() {
 	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
 
 	# Inox patches
-	#use inox && for i in $(cat "${FILESDIR}/inox-patchset/series");do epatch "${FILESDIR}/inox-patchset/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset/series");do epatch "${FILESDIR}/inox-patchset/$i";done
 
 	# Iridium patches
 	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done

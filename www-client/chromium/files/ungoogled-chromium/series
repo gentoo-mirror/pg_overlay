@@ -10,7 +10,6 @@ debian/ps-print.patch
 debian/build-flags.patch
 debian/gpu-timeout.patch
 
-inox-patchset/chromium-icu58.patch
 inox-patchset/fix-building-without-safebrowsing.patch
 inox-patchset/chromium-widevine.patch
 inox-patchset/disable-autofill-download-manager.patch
