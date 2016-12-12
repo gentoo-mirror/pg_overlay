@@ -30,6 +30,7 @@ gnome-extra/nemo-extensions 3.0.0: Extensions for Cinnamon's file-manager Nemo
 gnome-extra/nemo-fileroller 3.0.0: Provides context menu for Nemo
 gnome-extra/nemo-terminal 3.0.0: Nemo-Terminal Extension
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
+kde-misc/plasma-applet-awesome-widgets 9999: Collection of minimalistic Plasmoids which look like Awesome WM widgets (ex-PyTextMonitor)
 mail-client/thunderbird 45.5.1: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
 media-fonts/iosevka 1.9.2: Open source coding font
