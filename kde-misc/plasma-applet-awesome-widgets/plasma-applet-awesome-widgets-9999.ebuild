@@ -22,8 +22,8 @@ IUSE=""
 DEPEND="
 	$(add_frameworks_dep plasma)
 	$(add_qt_dep qtdeclarative)
+	$(add_qt_dep qtquickcontrols2)
 "
 RDEPEND="${DEPEND}"
 
-#DOCS=( README.md )
 S="${S}/sources"
