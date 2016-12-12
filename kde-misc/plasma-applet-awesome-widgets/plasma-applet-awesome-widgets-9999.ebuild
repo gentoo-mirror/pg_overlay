@@ -25,5 +25,4 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-#DOCS=( README.md )
 S="${S}/sources"
