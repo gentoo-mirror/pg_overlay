@@ -8,7 +8,7 @@ inherit eutils webapp
 
 DESCRIPTION="Personal cloud that runs on your own server"
 HOMEPAGE="http://nextcloud.com"
-SRC_URI="http://download.nextcloud.com/server/prereleases/${PN}-11.0.0RC1.tar.bz2"
+SRC_URI="http://download.${PN}.com/server/releases/${P}.tar.bz2"
 LICENSE="AGPL-3"
 
 KEYWORDS="~amd64 ~arm ~x86"
