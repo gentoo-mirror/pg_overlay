@@ -216,7 +216,7 @@ src_prepare() {
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series");do epatch "${FILESDIR}/debian-patchset/$i";done
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
