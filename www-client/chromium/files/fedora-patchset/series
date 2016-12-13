@@ -4,7 +4,6 @@ chromium-47.0.2526.80-nacl-ignore-broken-fd-counter.patch
 chromium-48.0.2564.116-libusb_interrupt_event_handler.patch
 chromium-55.0.2883.75-cups22.patch
 chromium-55.0.2883.75-more-codec-aliases.patch
-chromium-55.0.2883.75-sandbox-pie.patch
 chromium-52.0.2743.82-arm-webrtc.patch
 chromium-52.0.2743.82-master-prefs-path.patch
 chromium-52.0.2743.116-unset-madv_free.patch
