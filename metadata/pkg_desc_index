@@ -74,7 +74,6 @@ sys-fs/android-file-transfer 9999: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 0.24 9999: Tools and library to manipulate EFI variables
-www-apps/nextcloud 11.0.0: Personal cloud that runs on your own server
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 55.0.2883.95: Open-source version of Google Chrome web browser
 www-client/firefox 50.1.0: Firefox Web Browser
