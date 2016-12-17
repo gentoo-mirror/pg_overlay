@@ -46,7 +46,7 @@ src_prepare() {
 }
 
 src_configure() {
-	mycmakeargs="${mycmakeargs}	-DPYTHON='${PYTHON}'"
+	mycmakeargs="-DPYTHON='${PYTHON}'"
 	cmake-utils_src_configure
 }
 
