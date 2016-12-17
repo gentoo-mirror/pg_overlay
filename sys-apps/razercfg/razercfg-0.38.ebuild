@@ -42,7 +42,7 @@ src_prepare() {
 		librazer/CMakeLists.txt \
 		|| die "sed failed"
 
-	defaulf
+	default
 }
 
 src_configure() {
