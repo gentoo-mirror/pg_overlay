@@ -15,7 +15,7 @@ SRC_URI="http://bues.ch/${PN}/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+pm-utils qt4 systemd +udev"
+IUSE="pm-utils qt4 systemd +udev"
 
 RDEPEND="qt4? ( >=dev-python/pyside-1.2.1[${PYTHON_USEDEP}] )
 	systemd? ( sys-apps/systemd )
