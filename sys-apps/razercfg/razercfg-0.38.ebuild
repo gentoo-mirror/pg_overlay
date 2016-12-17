@@ -51,7 +51,7 @@ src_configure() {
 src_install() {
 	cmake-utils_src_install
 	newinitd "${FILESDIR}"/razerd.init.d-r2 razerd
-	dodoc README razer.conf
+	dodoc HACKING.md README.md razer.conf
 
 	if ! use qt4; then
 		rm "${D}"/usr/bin/qrazercfg
