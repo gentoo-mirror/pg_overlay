@@ -8,10 +8,10 @@ inherit eutils flag-o-matic multilib toolchain-funcs vcs-snapshot
 
 DESCRIPTION="a lightweight PDF viewer and toolkit written in portable C"
 HOMEPAGE="http://mupdf.com/"
-SRC_URI="http://git.ghostscript.com/?p=mupdf.git;a=snapshot;h=027860688eafc89ca3d57937a77a43a9bb96f590;sf=tgz -> ${P}.tar.gz"
+SRC_URI="http://mupdf.com/downloads/${P}-source.tar.gz -> ${P}.tar.gz"
 
 LICENSE="AGPL-3"
-MY_SOVER=1.9
+MY_SOVER=1.10
 SLOT="0/${MY_SOVER}"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~ppc-macos ~x64-macos ~x86-macos"
 IUSE="X vanilla +curl libressl opengl +openssl static static-libs"
@@ -52,13 +52,10 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.9a-debug-build.patch \
 		"${FILESDIR}"/${PN}-1.5-old-debian-files.patch \
 		"${FILESDIR}"/${PN}-1.3-pkg-config.patch \
-		"${FILESDIR}"/${PN}-1.5-Makerules-openssl-curl.patch \
-		"${FILESDIR}"/${PN}-1.9a-no-thirdlibs.patch \
 		"${FILESDIR}"/${PN}-1.8-system-glfw.patch
 
 	if has_version ">=media-libs/openjpeg-2.1:2" ; then
-		epatch \
-			"${FILESDIR}"/${PN}-1.5-openjpeg-2.1.patch
+		epatch "${FILESDIR}"/${PN}-1.5-openjpeg-2.1.patch
 	fi
 
 	sed -e "/^libdir=/s:/lib:/$(get_libdir):" \
