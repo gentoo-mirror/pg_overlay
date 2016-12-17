@@ -1,8 +1,8 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 
 PYTHON_COMPAT=( python3_5 )
 
@@ -41,6 +41,8 @@ src_prepare() {
 		-e "s:DESTINATION lib:DESTINATION $(get_libdir):" \
 		librazer/CMakeLists.txt \
 		|| die "sed failed"
+
+	default
 }
 
 src_configure() {
