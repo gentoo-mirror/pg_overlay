@@ -41,6 +41,8 @@ src_prepare() {
 		-e "s:DESTINATION lib:DESTINATION $(get_libdir):" \
 		librazer/CMakeLists.txt \
 		|| die "sed failed"
+
+	defaulf
 }
 
 src_configure() {
