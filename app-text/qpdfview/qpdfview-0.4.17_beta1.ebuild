@@ -8,6 +8,7 @@ PLOCALES="ast az be bg bs ca cs da de el en_GB eo es eu fi fr gl he hr hu id it 
 inherit l10n qmake-utils versionator
 
 MY_PV=$(replace_version_separator 3 '' )
+S=${WORKDIR}/${PN}-${MY_PV}
 
 DESCRIPTION="A tabbed document viewer"
 HOMEPAGE="https://launchpad.net/qpdfview"
