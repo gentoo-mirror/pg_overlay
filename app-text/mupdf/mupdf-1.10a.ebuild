@@ -52,7 +52,8 @@ src_prepare() {
 		"${FILESDIR}"/${PN}-1.9a-debug-build.patch \
 		"${FILESDIR}"/${PN}-1.5-old-debian-files.patch \
 		"${FILESDIR}"/${PN}-1.3-pkg-config.patch \
-		"${FILESDIR}"/${PN}-1.8-system-glfw.patch
+		"${FILESDIR}"/${PN}-1.8-system-glfw.patch \
+		"${FILESDIR}"/${PN}-1.10-shared_libs-1.patch
 
 	if has_version ">=media-libs/openjpeg-2.1:2" ; then
 		epatch "${FILESDIR}"/${PN}-1.5-openjpeg-2.1.patch

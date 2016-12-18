@@ -1,9 +1,8 @@
-From 368e80b59a7b2f330ad9bd7de45c350c6fbb2209 Mon Sep 17 00:00:00 2001
+From e3e49d206fbe5761c53a85b9499c940a0d718c8a Mon Sep 17 00:00:00 2001
 From: Christian Hesse <mail@eworm.de>
-Date: Mon, 18 Apr 2016 15:23:07 +0200
-Subject: [PATCH 1/1] update API for mupdf 1.9
+Date: Thu, 28 Apr 2016 09:59:31 +0200
+Subject: [PATCH] mupdf 1.9 compatibility
 
-Signed-off-by: Christian Hesse <mail@eworm.de>
 ---
  AUTHORS    | 1 +
  config.mk  | 2 +-
@@ -146,6 +145,3 @@ index 4a003b9..a4b9320 100644
  
      /* Disable FZ_IGNORE_IMAGE to collect image blocks */
      fz_disable_device_hints(mupdf_page->ctx, text_device, FZ_IGNORE_IMAGE);
--- 
-2.8.0
-

@@ -38,7 +38,8 @@ pkg_setup() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/mupdf-1.10.patch"
+	eapply \
+		"${FILESDIR}"/0*-mupdf-1.10.patch
 	default
 }
 
