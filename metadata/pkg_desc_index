@@ -9,7 +9,7 @@ app-portage/eix 0.32.3: Search and query ebuilds
 app-shells/push 2.0: A POSIX shell function to treat a variable like an array, quoting args
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/mupdf 1.10a: a lightweight PDF viewer and toolkit written in portable C
-app-text/qpdfview 0.4.16: A tabbed document viewer
+app-text/qpdfview 0.4.16 0.4.17_beta1: A tabbed document viewer
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 app-text/xreader 1.0.8: Simple document viewer for GNOME
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
