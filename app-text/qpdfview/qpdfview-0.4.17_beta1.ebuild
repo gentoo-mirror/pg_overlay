@@ -11,7 +11,7 @@ MY_PV=$(replace_version_separator 3 '' )
 
 DESCRIPTION="A tabbed document viewer"
 HOMEPAGE="https://launchpad.net/qpdfview"
-SRC_URI="https://launchpad.net/${PN}/trunk/${MY_PV}/+download/${MY_PV}.tar.gz"
+SRC_URI="https://launchpad.net/${PN}/trunk/${MY_PV}/+download/${PN}-${MY_PV}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
