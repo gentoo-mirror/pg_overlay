@@ -40,7 +40,6 @@ pkg_setup() {
 src_prepare() {
 	eapply \
 		"${FILESDIR}"/01-mupdf-1.10.patch \
-		"${FILESDIR}"/02-mupdf-1.10.patch \
 		"${FILESDIR}"/03-mupdf-1.10.patch \
 		"${FILESDIR}"/04-mupdf-1.10.patch \
 		"${FILESDIR}"/05-mupdf-1.10.patch \
