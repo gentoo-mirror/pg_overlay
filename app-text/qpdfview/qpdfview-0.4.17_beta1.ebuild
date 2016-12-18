@@ -3,7 +3,7 @@
 # $Id$
 
 EAPI=6
-PLOCALES="ast az be bg bs ca cs da de el en_GB eo es eu fi fr gl he hr hu id it kk ko ky lt ms my pl pt pt_BR ro ru sk sv th tr ug uk vi zh_CN"
+PLOCALES="ast az be bg bs ca cs da de el en_GB eo es eu fi fr gl he hr hu id it ja kk ko ky lt ms my pl pt pt_BR ro ru sk sv th tr ug uk vi zh_CN"
 
 inherit l10n qmake-utils versionator
 
