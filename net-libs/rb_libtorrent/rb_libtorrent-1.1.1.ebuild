@@ -9,7 +9,7 @@ PYTHON_REQ_USE="threads"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1 flag-o-matic versionator
+inherit distutils-r1 eutils versionator
 
 MY_P=libtorrent-rasterbar-${PV} # TODO: rename, bug 576126
 MY_PV=$(replace_all_version_separators _)
@@ -19,8 +19,8 @@ HOMEPAGE="http://libtorrent.org"
 SRC_URI="https://github.com/arvidn/libtorrent/releases/download/libtorrent-${MY_PV}/${MY_P}.tar.gz"
 
 LICENSE="BSD"
-SLOT="0"
-KEYWORDS=""
+SLOT="0/9"
+KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="debug +dht doc examples libressl python +ssl static-libs test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
@@ -55,9 +55,6 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cflags -std=c11
-	append-cxxflags -std=c++11
-
 	local myeconfargs=(
 		$(use_enable debug)
 		$(use_enable debug logging)
