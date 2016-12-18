@@ -57,6 +57,11 @@ DEPEND="${RDEPEND}
 
 DOCS=(AUTHORS Changelog CONTRIBUTING.md README.md TODO)
 
+src_prepare() {
+	eapply "${FILESDIR}/rb_libtorrent-1.1.x.patch"
+	default
+}
+
 src_configure() {
 	# To last stable version for What.CD & Pedro's BTMusic
 	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 3"/g version.pri || die
