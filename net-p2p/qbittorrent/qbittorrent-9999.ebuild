@@ -58,7 +58,7 @@ DEPEND="${RDEPEND}
 DOCS=(AUTHORS Changelog CONTRIBUTING.md README.md TODO)
 
 src_prepare() {
-	eaplly "${FILESDIR}/rb_libtorrent-1.1.x.patch"
+	eapply "${FILESDIR}/rb_libtorrent-1.1.x.patch"
 	default
 }
 
