@@ -38,7 +38,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/*.patch"
+	eapply "${FILESDIR}/*"
 	default
 }
 
