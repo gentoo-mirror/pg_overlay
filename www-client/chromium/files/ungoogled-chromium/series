@@ -6,10 +6,10 @@ debian/disable/external-components.patch
 debian/disable/default-browser-warning.patch
 debian/gtk3theme.patch
 debian/glibc2.24.patch
+debian/gn.patch
 debian/ps-print.patch
 debian/build-flags.patch
 debian/gpu-timeout.patch
-
 inox-patchset/fix-building-without-safebrowsing.patch
 inox-patchset/chromium-widevine.patch
 inox-patchset/disable-autofill-download-manager.patch
