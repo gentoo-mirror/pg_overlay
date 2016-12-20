@@ -2,6 +2,8 @@ disable/pings.patch
 disable/promo.patch
 disable/extension-updater.patch
 disable/google-api-warning.patch
+disable/third-party-cookies.patch
+disable/external-components.patch
 disable/default-browser-warning.patch
 
 gtk3theme.patch
@@ -11,3 +13,4 @@ glibc2.24.patch
 ps-print.patch
 gpu-timeout.patch
 build-flags.patch
+
