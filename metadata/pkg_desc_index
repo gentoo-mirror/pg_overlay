@@ -1,7 +1,6 @@
 app-admin/profile-cleaner 2.36: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-misc/double-commander 0.7.5: Cross Platform file manager.
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
@@ -12,29 +11,17 @@ app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/mupdf 1.10a: a lightweight PDF viewer and toolkit written in portable C
 app-text/qpdfview 0.4.16 0.4.17_beta1: A tabbed document viewer
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
-app-text/xreader 1.0.8: Simple document viewer for GNOME
 app-text/zathura-pdf-mupdf 0.3.0: PDF plug-in for zathura
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libgaminggear 0.14.0 0.15.0: Provides functionality for gaming input devices
-dev-libs/re2 0.2016.10.01: An efficent, principled regular expression library
-dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
+dev-libs/re2 0.2016.11.01: An efficent, principled regular expression library
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-gnome-base/gsettings-desktop-schemas 3.21.2 3.21.4: Collection of GSettings schemas for GNOME desktop
-gnome-extra/cinnamon 3.0.6 3.0.7: A fork of GNOME Shell with layout similar to GNOME 2
-gnome-extra/cinnamon-control-center 3.0.1: Cinnamons's main interface to configure various aspects of the desktop
-gnome-extra/cinnamon-session 3.0.1: Cinnamon session manager
-gnome-extra/nemo-compare 3.0.0: Nemo-Compare Extension
-gnome-extra/nemo-extensions 3.0.0: Extensions for Cinnamon's file-manager Nemo
-gnome-extra/nemo-fileroller 3.0.0: Provides context menu for Nemo
-gnome-extra/nemo-terminal 3.0.0: Nemo-Terminal Extension
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/plasma-applet-awesome-widgets 9999: Collection of minimalistic Plasmoids which look like Awesome WM widgets (ex-PyTextMonitor)
 mail-client/thunderbird 45.5.1: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
-media-fonts/iosevka 1.9.2: Open source coding font
-media-gfx/xviewer 1.0.6: A simple and easy to use image viewer. X-Apps Project
-media-gfx/xviewer-plugins 1.0.3: Eye of GNOME plugins
+media-fonts/iosevka 1.9.2 1.10.0: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/soxr 9999: The SoX Resampler library
@@ -66,12 +53,12 @@ sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain pr
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.38: Utility for advanced configuration of Razer mice (DeathAdder, Krait, Lachesis)
 sys-apps/roccat-tools 5.4.0 5.5.0: Utility for advanced configuration of Roccat devices
-sys-boot/efibootmgr 0.12 9999: User-space application to modify the EFI boot manager
+sys-boot/efibootmgr 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer 9999: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
-sys-libs/efivar 0.24 9999: Tools and library to manipulate EFI variables
+sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 55.0.2883.95 55.0.2883.103: Open-source version of Google Chrome web browser
 www-client/firefox 50.1.0: Firefox Web Browser
@@ -81,9 +68,5 @@ x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.15.2: A vector graphics library with cross-device output support
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
-x11-misc/gxneur 0.19.0 9999: GTK+ based GUI for xneur
-x11-misc/lightdm-gtk-greeter 2.0.1-r1: LightDM GTK+ Greeter
-x11-misc/xneur 0.20.0 9999: In-place conversion of text typed in with a wrong keyboard layout (Punto Switcher replacement)
 x11-terms/guake 9999: Drop-down terminal for GTK+ desktops
 x11-terms/tilda 9999: A drop down terminal, similar to the consoles found in first person shooters
-x11-themes/vertex-theme 9999: Vertex is a theme for GTK 3, GTK 2, Gnome-Shell, Cinnamon and xfce4
