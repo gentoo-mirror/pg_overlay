@@ -71,15 +71,15 @@ src_configure() {
 		myconf="--with-sound=no"
 	fi
 
-	if use gtk; then
+	#if use gtk; then
 		if use gtk3; then
 			myconf="${myconf} --with-gtk=gtk3"
 		else
 			myconf="${myconf} --with-gtk=gtk2"
 		fi
-	else
-		myconf="${myconf} --without-gtk"
-	fi
+	#else
+	#	myconf="${myconf} --without-gtk"
+	#fi
 
 	econf ${myconf} \
 		$(use_with debug) \
