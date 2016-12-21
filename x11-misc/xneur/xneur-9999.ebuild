@@ -44,7 +44,7 @@ src_prepare() {
 	# Fixes error/warning: no newline at end of file
 	#find -name '*.c' -exec sed -i -e '${/[^ ]/s:$:\n:}' {} + || die
 	#rm -f m4/{lt~obsolete,ltoptions,ltsugar,ltversion,libtool}.m4 \
-		ltmain.sh aclocal.m4 || die
+		#ltmain.sh aclocal.m4 || die
 
 	#sed -i -e "s/-Werror -g0//" configure.ac || die
 	#sed -i -e 's/@LDFLAGS@ //' xnconfig.pc.in || die
