@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://github.com/AndrewCrewKuznetsov/xneur-devel.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="gconf nls"
 
 COMMON_DEPEND="gnome-base/libglade:2.0
