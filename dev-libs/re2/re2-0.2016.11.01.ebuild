@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${PN}-${RE2_VER}"
 
-PATCHES=( ${FILESDIR}/gcc-61-fix.patch )
+#PATCHES=( ${FILESDIR}/gcc-61-fix.patch )
 DOCS=( "AUTHORS" "CONTRIBUTORS" "README" "doc/syntax.txt" )
 HTML_DOCS=( "doc/syntax.html" )
 
