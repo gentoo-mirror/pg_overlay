@@ -31,7 +31,6 @@ src_install() {
 	webapp_src_preinst
 
 	insinto "${MY_HTDOCSDIR}"
-	#mv plugins rutorrent
 	cd ${P}
 	doins -r .
 
