@@ -4,11 +4,11 @@
 
 EAPI=5
 
-inherit autotools eutils git-r3
+inherit autotools eutils
 
 DESCRIPTION="In-place conversion of text typed in with a wrong keyboard layout (Punto Switcher replacement)"
 HOMEPAGE="http://www.xneur.ru/"
-EGIT_REPO_URI="git://github.com/AndrewCrewKuznetsov/xneur-devel.git"
+SRC_URI="https://github.com/AndrewCrewKuznetsov/${PN}-devel/blob/master/dists/${PV}/${PN}_${PV}.orig.tar.gz > ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
