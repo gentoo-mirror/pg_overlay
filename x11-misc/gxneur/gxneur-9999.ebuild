@@ -12,15 +12,13 @@ EGIT_REPO_URI="git://github.com/AndrewCrewKuznetsov/xneur-devel.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="gconf nls"
 
 COMMON_DEPEND="gnome-base/libglade:2.0
 	>=sys-devel/gettext-0.16.1
 	>=x11-libs/gtk+-2.18:2
-	>=x11-misc/xneur-$(get_version_component_range 1-2)[gtk]
-	gconf? ( gnome-base/gconf:2 )
-	!x11-misc/xneur[gtk3]"
+	gconf? ( gnome-base/gconf:2 )"
 RDEPEND="${COMMON_DEPEND}
 	nls? ( virtual/libintl )"
 DEPEND="${COMMON_DEPEND}

@@ -8,7 +8,7 @@ inherit autotools eutils
 
 DESCRIPTION="In-place conversion of text typed in with a wrong keyboard layout (Punto Switcher replacement)"
 HOMEPAGE="http://www.xneur.ru/"
-SRC_URI="https://github.com/AndrewCrewKuznetsov/${PN}-devel/blob/master/dists/${PV}/${PN}_${PV}.orig.tar.gz"
+SRC_URI="https://raw.githubusercontent.com/AndrewCrewKuznetsov/${PN}-devel/master/dists/${PV}/${PN}_${PV}.orig.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -32,13 +32,12 @@ COMMON_DEPEND=">=dev-libs/libpcre-5.0
 	spell? ( app-text/enchant )
 	xosd? ( x11-libs/xosd )"
 RDEPEND="${COMMON_DEPEND}
-	nls? ( virtual/libintl )
-	gtk3? ( !x11-misc/gxneur )"
+	nls? ( virtual/libintl )"
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )"
 
-S=${WORKDIR}/${P}/${PN}
+#S=${WORKDIR}/${P}/${PN}
 
 src_prepare() {
 	# Fixes error/warning: no newline at end of file
@@ -72,15 +71,15 @@ src_configure() {
 		myconf="--with-sound=no"
 	fi
 
-	if use gtk; then
+	#if use gtk; then
 		if use gtk3; then
 			myconf="${myconf} --with-gtk=gtk3"
 		else
 			myconf="${myconf} --with-gtk=gtk2"
 		fi
-	else
-		myconf="${myconf} --without-gtk"
-	fi
+	#else
+	#	myconf="${myconf} --without-gtk"
+	#fi
 
 	econf ${myconf} \
 		$(use_with debug) \
