@@ -16,7 +16,7 @@ SRC_URI="https://github.com/google/re2/archive/${RE2_VER}.tar.gz -> ${PN}-${RE2_
 
 LICENSE="BSD"
 # NOTE: Always run libre2 through abi-compliance-checker!
-SLOT="0/0.2016.05.01"
+SLOT="0/0.${PV}"
 KEYWORDS="amd64 ~arm ~arm64 x86"
 IUSE="icu"
 
@@ -26,7 +26,7 @@ DEPEND="${RDEPEND}
 
 S="${WORKDIR}/${PN}-${RE2_VER}"
 
-PATCHES=( ${FILESDIR}/gcc-61-fix.patch )
+#PATCHES=( ${FILESDIR}/gcc-61-fix.patch )
 DOCS=( "AUTHORS" "CONTRIBUTORS" "README" "doc/syntax.txt" )
 HTML_DOCS=( "doc/syntax.html" )
 
