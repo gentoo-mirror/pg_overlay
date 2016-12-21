@@ -7,6 +7,7 @@ app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
 app-portage/eix 0.32.3: Search and query ebuilds
 app-shells/push 2.0: A POSIX shell function to treat a variable like an array, quoting args
+app-shells/quoter 3.0_p2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/mupdf 1.10a: a lightweight PDF viewer and toolkit written in portable C
 app-text/qpdfview 0.4.16 0.4.17_beta1: A tabbed document viewer
@@ -18,8 +19,6 @@ dev-libs/libgaminggear 0.14.0 0.15.0: Provides functionality for gaming input de
 dev-libs/re2 0.2016.10.01: An efficent, principled regular expression library
 dev-python/nemo-python 3.0.0: Python bindings for the Nautilus file manager
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gperf 3.0.4: A perfect hash function generator
-dev-util/gtk-update-icon-cache 3.20.6: GTK update icon cache
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 gnome-base/gsettings-desktop-schemas 3.21.2 3.21.4: Collection of GSettings schemas for GNOME desktop
 gnome-extra/cinnamon 3.0.6 3.0.7: A fork of GNOME Shell with layout similar to GNOME 2
