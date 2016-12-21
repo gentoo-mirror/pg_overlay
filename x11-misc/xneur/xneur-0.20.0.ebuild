@@ -32,8 +32,7 @@ COMMON_DEPEND=">=dev-libs/libpcre-5.0
 	spell? ( app-text/enchant )
 	xosd? ( x11-libs/xosd )"
 RDEPEND="${COMMON_DEPEND}
-	nls? ( virtual/libintl )
-	gtk3? ( !x11-misc/gxneur )"
+	nls? ( virtual/libintl )"
 DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig
 	nls? ( sys-devel/gettext )"
