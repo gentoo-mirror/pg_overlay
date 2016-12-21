@@ -1,0 +1,13 @@
+DEFINED_PHASES=configure install postinst prepare
+DEPEND=>=dev-libs/libpcre-5.0 sys-libs/zlib >=x11-libs/libX11-1.1 x11-libs/libXtst gstreamer? ( media-libs/gstreamer:1.0 ) !gstreamer? ( openal? ( >=media-libs/freealut-1.0.1 ) !openal? ( aplay? ( >=media-sound/alsa-utils-1.0.17 ) ) ) libnotify? ( gtk? ( gtk3? ( x11-libs/gtk+:3 ) !gtk3? ( x11-libs/gtk+:2 ) ) >=x11-libs/libnotify-0.4.0 ) spell? ( app-text/enchant ) xosd? ( x11-libs/xosd ) virtual/pkgconfig nls? ( sys-devel/gettext ) !<sys-devel/gettext-0.18.1.1-r3 || ( >=sys-devel/automake-1.15:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
+DESCRIPTION=In-place conversion of text typed in with a wrong keyboard layout (Punto Switcher replacement)
+EAPI=5
+HOMEPAGE=http://www.xneur.ru/
+IUSE=aplay debug +gstreamer gtk gtk3 keylogger +libnotify nls openal xosd spell
+LICENSE=GPL-2
+RDEPEND=>=dev-libs/libpcre-5.0 sys-libs/zlib >=x11-libs/libX11-1.1 x11-libs/libXtst gstreamer? ( media-libs/gstreamer:1.0 ) !gstreamer? ( openal? ( >=media-libs/freealut-1.0.1 ) !openal? ( aplay? ( >=media-sound/alsa-utils-1.0.17 ) ) ) libnotify? ( gtk? ( gtk3? ( x11-libs/gtk+:3 ) !gtk3? ( x11-libs/gtk+:2 ) ) >=x11-libs/libnotify-0.4.0 ) spell? ( app-text/enchant ) xosd? ( x11-libs/xosd ) nls? ( virtual/libintl ) gtk3? ( !x11-misc/gxneur )
+SLOT=0
+SRC_URI=https://github.com/AndrewCrewKuznetsov/xneur-devel/blob/master/dists/0.20.0/xneur_0.20.0.orig.tar.gz
+_eclass_exported_funcs=pkg_postinst:- src_prepare:- src_configure:- src_install:-
+_eclasses_=autotools	07e71b3b5690738ef7e8bc097077e00c	eutils	b83a2420b796f7c6eff682679d08fe25	libtool	4890219c51da247200223277f993e054	multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=d647c5f724fba693e76e320d00991541
