@@ -12,7 +12,7 @@ diff --git a/deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py b/deluge/
 index 9fb81df..f0e2392 100644
 --- a/deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py
 +++ b/deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py
-@@ -127,7 +127,7 @@ class Core(CorePluginBase):
+@@ -103,7 +103,7 @@ class Core(CorePluginBase):
          """
          core_config = deluge.configmanager.ConfigManager("core.conf")
          for setting in CONTROLLED_SETTINGS:
