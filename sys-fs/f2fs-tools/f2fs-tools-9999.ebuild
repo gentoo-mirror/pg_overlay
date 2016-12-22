@@ -21,7 +21,7 @@ DEPEND="
 
 src_prepare() {
 	default
-	#eautoreconf
+	eautoreconf
 }
 
 src_configure() {
