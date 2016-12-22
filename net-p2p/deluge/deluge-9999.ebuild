@@ -25,14 +25,14 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="console geoip gtk libnotify sound webinterface"
+IUSE="console geoip +gtk +libnotify sound -webinterface"
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 	sound? ( gtk )
 	libnotify? ( gtk )
 "
 PATCHES=(
-	"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
+	#"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
 )
 
 CDEPEND=">=net-libs/rb_libtorrent-1.0.9-r1[python,${PYTHON_USEDEP}]"
@@ -76,7 +76,7 @@ python_prepare_all() {
 	l10n_for_each_disabled_locale_do rm_loc
 
 	# Setting stable version
-	sed -i s/version=_version/version = "1.3.13"/g
+	#sed -i 's/version=_version/version = "1.3.13"/g' setup.py || die
 
 	distutils-r1_python_prepare_all
 }
