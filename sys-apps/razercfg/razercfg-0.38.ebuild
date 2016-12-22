@@ -70,9 +70,7 @@ pkg_postinst() {
 	use udev && udevadm control --reload-rules && udevadm trigger --subsystem-match=usb
 
 	if [[ -e "${ROOT}"usr/bin/pyrazer.pyc ]]; then
-		echo
 		eerror "A stale ${ROOT}usr/bin/pyrazer.pyc exists and will prevent"
 		eerror "the Python frontends from working until removed manually."
-		echo
 	fi
 }
