@@ -25,7 +25,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="console geoip gtk libnotify sound webinterface"
+IUSE="console geoip +gtk +libnotify sound -webinterface"
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 	sound? ( gtk )
