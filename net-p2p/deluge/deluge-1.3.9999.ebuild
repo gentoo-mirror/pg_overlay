@@ -77,8 +77,6 @@ python_prepare_all() {
 	l10n_for_each_disabled_locale_do rm_loc
 
 	distutils-r1_python_prepare_all
-
-	sed -i 's/.dev0//g' deluge.egg-info/PKG-INFO || die
 }
 
 esetup.py() {
@@ -88,6 +86,7 @@ esetup.py() {
 	set -- "${PYTHON}" setup.py "$@"
 	echo "$@"
 	"$@" || die
+	sed -i 's/.dev0//g' deluge.egg-info/PKG-INFO || die
 }
 
 python_install_all() {
