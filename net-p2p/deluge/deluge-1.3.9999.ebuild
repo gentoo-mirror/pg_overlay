@@ -76,7 +76,7 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
-	sed -i's/.dev0//g' deluge.egg-info/PKG-INFO || die
+	sed -i 's/.dev0//g' deluge.egg-info/PKG-INFO || die
 
 	distutils-r1_python_prepare_all
 }
@@ -107,8 +107,6 @@ python_install_all() {
 	if use webinterface; then
 		newinitd "${FILESDIR}/deluge-web.init" deluge-web
 		newconfd "${FILESDIR}/deluge-web.conf" deluge-web
-		systemd_newunit "${FILESDIR}/deluge-web.service-2" deluge-web.service
-		systemd_install_serviced "${FILESDIR}/deluge-web.service.conf"
 	else
 		rm -rf "${D}/usr/$(get_libdir)/python2.7/site-packages/deluge/ui/web/" || die
 		rm -f "${D}/usr/bin/deluge-web" || die
@@ -116,8 +114,6 @@ python_install_all() {
 	fi
 	newinitd "${FILESDIR}"/deluged.init-2 deluged
 	newconfd "${FILESDIR}"/deluged.conf-2 deluged
-	systemd_newunit "${FILESDIR}"/deluged.service-2 deluged.service
-	systemd_install_serviced "${FILESDIR}"/deluged.service.conf
 }
 
 pkg_postinst() {
