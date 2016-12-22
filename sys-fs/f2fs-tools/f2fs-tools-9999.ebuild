@@ -19,9 +19,9 @@ DEPEND="
 	sys-apps/util-linux
 	sys-libs/libselinux"
 
-src_prepare() {
-	eautoreconf
-}
+#src_prepare() {
+#	eautoreconf
+#}
 
 src_configure() {
 	#This is required to install to /sbin, bug #481110
