@@ -75,6 +75,9 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
+	# Setting stable version
+	sed -i s/version=_version/version = "1.3.13"/g
+
 	distutils-r1_python_prepare_all
 }
 
