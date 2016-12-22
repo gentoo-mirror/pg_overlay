@@ -5,13 +5,13 @@ Subject: [Scheduler] Revert erroneous fix backported from develop branch
 
  * The issue this was intended to fix only occurs on develop branch
 ---
- deluge/plugins/scheduler/scheduler/core.py | 2 +-
+ deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py | 2 +-
  1 file changed, 1 insertion(+), 1 deletion(-)
 
-diff --git a/deluge/plugins/scheduler/scheduler/core.py b/deluge/plugins/scheduler/scheduler/core.py
+diff --git a/deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py b/deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py
 index 9fb81df..f0e2392 100644
---- a/deluge/plugins/scheduler/scheduler/core.py
-+++ b/deluge/plugins/scheduler/scheduler/core.py
+--- a/deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py
++++ b/deluge/plugins/Scheduler/deluge/plugins/scheduler/core.py
 @@ -127,7 +127,7 @@ class Core(CorePluginBase):
          """
          core_config = deluge.configmanager.ConfigManager("core.conf")
