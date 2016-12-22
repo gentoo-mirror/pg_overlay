@@ -76,9 +76,9 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
-	sed -i 's/.dev0//g' deluge.egg-info/PKG-INFO || die
-
 	distutils-r1_python_prepare_all
+
+	sed -i 's/.dev0//g' deluge.egg-info/PKG-INFO || die
 }
 
 esetup.py() {
