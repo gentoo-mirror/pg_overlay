@@ -86,11 +86,11 @@ esetup.py() {
 	set -- "${PYTHON}" setup.py "$@"
 	echo "$@"
 	"$@" || die
-	sed -i 's/.dev0//g' deluge.egg-info/PKG-INFO || die
 }
 
 python_install_all() {
 	distutils-r1_python_install_all
+	sed -i 's/.dev0//g' deluge.egg-info/PKG-INFO || die
 	if ! use console ; then
 		rm -rf "${D}/usr/$(get_libdir)/python2.7/site-packages/deluge/ui/console/" || die
 		rm -f "${D}/usr/bin/deluge-console" || die
