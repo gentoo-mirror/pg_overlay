@@ -2,23 +2,25 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI="6"
 
-inherit autotools eutils git-r3 multilib
+inherit autotools git-r3 multilib
 
 DESCRIPTION="Tools for Flash-Friendly File System (F2FS)"
-HOMEPAGE="http://sourceforge.net/projects/f2fs-tools/"
+HOMEPAGE="https://git.kernel.org/?p=linux/kernel/git/jaegeuk/f2fs-tools.git;a=summary"
 EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/${PN}.git"
 
 LICENSE="GPL-2"
-SLOT="0"
+SLOT="0/1"
 KEYWORDS=""
 IUSE=""
 
-RDEPEND="sys-libs/libselinux"
-DEPEND="${RDEPEND}"
+DEPEND="
+	sys-apps/util-linux
+	sys-libs/libselinux"
 
 src_prepare() {
+	default
 	eautoreconf
 }
 
