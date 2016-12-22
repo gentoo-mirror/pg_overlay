@@ -76,10 +76,9 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
-	sed -i 's/self.dev = True/self.dev = False/g' deluge/common.py || die
-
 	distutils-r1_python_prepare_all
-}
+	sed -i '/tag_build = -dev/d' setup.cfg || die
+	}
 
 esetup.py() {
 	# bug 531370: deluge has its own plugin system. No need to relocate its egg info files.
@@ -117,8 +116,6 @@ python_install_all() {
 }
 
 pkg_postinst() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
 	elog
 	elog "If, after upgrading, deluge doesn't work, please remove the"
 	elog "'~/.config/deluge' directory and try again, but make a backup"
