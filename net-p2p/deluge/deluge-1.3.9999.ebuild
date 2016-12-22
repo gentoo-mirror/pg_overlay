@@ -76,7 +76,7 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
-	sed -i 's/self.dev = True/self.dev = Fales/g' deluge/common.py || die
+	sed -i 's/self.dev = True/self.dev = False/g' deluge/common.py || die
 
 	distutils-r1_python_prepare_all
 }
