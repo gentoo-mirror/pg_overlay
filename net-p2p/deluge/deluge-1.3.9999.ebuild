@@ -116,8 +116,6 @@ python_install_all() {
 }
 
 pkg_postinst() {
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
 	elog
 	elog "If, after upgrading, deluge doesn't work, please remove the"
 	elog "'~/.config/deluge' directory and try again, but make a backup"
