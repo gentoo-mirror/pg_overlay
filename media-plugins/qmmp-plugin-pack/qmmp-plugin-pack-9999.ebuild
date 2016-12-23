@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit cmake-utils versionator
+inherit cmake-utils subversion
 
 DESCRIPTION="A set of extra plugins for Qmmp"
 HOMEPAGE="http://qmmp.ylsoftware.com/"
