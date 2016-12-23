@@ -18,7 +18,7 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=media-libs/taglib-1.10
-	=media-sound/qmmp-$(get_version_component_range 1-2)*
+	=media-sound/qmmp-9999
 	dev-qt/qtgui:5
 	dev-qt/qtx11extras:5
 	dev-qt/qtwidgets:5"
