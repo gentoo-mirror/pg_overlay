@@ -16,7 +16,7 @@ HOMEPAGE="https://transmissionbt.com/"
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 systemd test"
+IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 systemd test xfs"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -68,6 +68,8 @@ src_prepare() {
 }
 
 src_configure() {
+	export ac_cv_header_xfs_xfs_h=$(usex xfs)
+
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_DOCDIR=share/doc/${PF}
 
@@ -92,16 +94,6 @@ src_configure() {
 	)
 
 	cmake-utils_src_configure
-
-	symlink_tarball() {
-		local srcdir="${BUILD_DIR}/third-party/${1}-${3}/src"
-		mkdir -p "${srcdir}" || die
-		ln -s "${DISTDIR}/${2}-${3}.tar.gz" "${srcdir}/${3}.tar.gz" || die
-	}
-
-	symlink_tarball dht dht "${DHT_ID}"
-	symlink_tarball utp libutp "${UTP_ID}"
-	symlink_tarball b64 libb64 "${B64_ID}"
 }
 
 DISABLE_AUTOFORMATTING=1
