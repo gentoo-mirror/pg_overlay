@@ -75,7 +75,7 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable webui) \
 		$(use_enable X gui) \
-		$(use_enable !X systemd) \
+		--disable-systemd \
 		$(use_with !qt5 qt4)
 
 	if use qt5; then
