@@ -22,9 +22,9 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+dbus debug +qt5 webui +X"
-REQUIRED_USE="
-	dbus? ( X )
-"
+#REQUIRED_USE="
+# 	dbus? ( X )
+# "
 
 RDEPEND="
 	dev-libs/boost:=
