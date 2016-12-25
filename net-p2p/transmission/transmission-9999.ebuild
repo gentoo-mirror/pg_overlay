@@ -26,8 +26,6 @@ RDEPEND="
 		libressl? ( dev-libs/libressl:0= )
 	)
 	mbedtls? ( net-libs/mbedtls:0= )
-	net-libs/libnatpmp
-	>=net-libs/miniupnpc-1.7:=
 	>=net-misc/curl-7.16.3[ssl]
 	sys-libs/zlib:=
 	gtk? (
