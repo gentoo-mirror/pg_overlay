@@ -9,7 +9,7 @@ inherit autotools eutils flag-o-matic git-r3
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="git://github.com/rakshasa/${PN}.git"
-EGIT_BRANCH="feature-bind"
+#EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"
 SLOT="0"
