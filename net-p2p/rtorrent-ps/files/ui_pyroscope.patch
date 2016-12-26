@@ -16,13 +16,17 @@
  
 --- orig/src/display/canvas.h	2009-11-12 09:03:47.000000000 +0100
 +++ rtorrent-0.8.6/src/display/canvas.h	2011-05-28 13:42:58.000000000 +0200
-@@ -139,4 +139,6 @@
-   va_start(arglist, str);
-+  if (y < height()) {
-   wmove(m_window, y, x);
-   vw_printw(m_window, const_cast<char*>(str), arglist);
+@@ -137,8 +137,10 @@
+ 
+   if (!m_isDaemon) {
+     va_start(arglist, str);
++    if (y < height()) {
+     wmove(m_window, y, x);
+     vw_printw(m_window, const_cast<char*>(str), arglist);
 +  }
-   va_end(arglist);
+     va_end(arglist);
+   }
+ }
 --- orig/src/display/window_statusbar.cc	2009-11-12 09:03:47.000000000 +0100
 +++ rtorrent-0.8.6/src/display/window_statusbar.cc	2011-05-28 19:38:52.000000000 +0200
 @@ -69,2 +69,4 @@
