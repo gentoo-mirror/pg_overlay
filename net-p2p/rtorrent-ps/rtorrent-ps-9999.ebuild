@@ -53,7 +53,7 @@ src_prepare() {
 	done
 	for i in *.{cc,h}; do
 		sed -f doc/scripts/update_commands_0.9.sed -i $i
-		dosym $i src/$i
+		dosym $i src/
 	done
 
 	eautoreconf
