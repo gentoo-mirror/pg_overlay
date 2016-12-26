@@ -9,7 +9,7 @@ inherit autotools flag-o-matic git-r3 libtool toolchain-funcs
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="git://github.com/rakshasa/${PN}.git"
-#EGIT_BRANCH="feature-bind"
+EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"
 
@@ -43,8 +43,7 @@ src_configure() {
 	CONFIG_SHELL=${BASH} econf \
 		--enable-aligned \
 		$(use_enable debug) \
-		$(use_enable ssl openssl) \
-		--with-posix-fallocate --enable-largefile
+		$(use_enable ssl openssl)
 }
 
 src_install() {
