@@ -48,12 +48,12 @@ src_prepare() {
 		-e "s:rTorrent \" VERSION:rTorrent-PS git~$(git rev-parse --short $_commit) \" VERSION:"
 
 	for i in *.patch; do
-		sed -f doc/scripts/update_commands_0.9.sed -i $i
-		epatch $i
+		sed -f doc/scripts/update_commands_0.9.sed -i $i;
+		epatch $i;
 	done
 	for i in *.{cc,h}; do
-		sed -f doc/scripts/update_commands_0.9.sed -i $i
-		dosym $i src/$i_1
+		sed -f doc/scripts/update_commands_0.9.sed -i $i;
+		dosym $i src/$i;
 	done
 
 	eautoreconf
