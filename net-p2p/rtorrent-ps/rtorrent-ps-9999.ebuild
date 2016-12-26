@@ -9,6 +9,7 @@ inherit autotools eutils flag-o-matic git-r3
 DESCRIPTION="Extended rTorrent distribution with UI enhancements, colorization, and some added features"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="git://github.com/rakshasa/rtorrent.git"
+EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -38,7 +39,8 @@ src_prepare() {
 	sed -i doc/scripts/update_commands_0.9.sed \
 		-e "s:':\":g"
 	sed -i {command_pyroscope.cc,ui_pyroscope.cc} \
-		-e "s:tr1:std:"
+		-e "s:tr1:std:" \
+		-e "s:print_download_info:print_download_info_full:"
 
 	sed -i configure.ac \
 		-e "s:\\(AC_DEFINE(HAVE_CONFIG_H.*\\):\1\nAC_DEFINE(RT_HEX_VERSION, 0x000907, version checks):"
