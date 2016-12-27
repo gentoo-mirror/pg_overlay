@@ -7,7 +7,7 @@ EAPI="6"
 inherit autotools git-r3 multilib
 
 DESCRIPTION="Tools for Flash-Friendly File System (F2FS)"
-HOMEPAGE="https://git.kernel.org/?p=linux/kernel/git/jaegeuk/f2fs-tools.git;a=summary"
+HOMEPAGE="https://git.kernel.org/cgit/linux/kernel/git/jaegeuk/f2fs-tools.git/about/"
 EGIT_REPO_URI="git://git.kernel.org/pub/scm/linux/kernel/git/jaegeuk/${PN}.git"
 
 LICENSE="GPL-2"
@@ -26,11 +26,8 @@ src_prepare() {
 
 src_configure() {
 	#This is required to install to /sbin, bug #481110
-	econf --prefix=/ --includedir=/usr/include
-}
-
-src_install() {
-	default
-	rm -f "${ED}"/$(get_libdir)/libf2fs.{,l}a
-	rm -f "${ED}"/$(get_libdir)/libf2fs_format.{,l}a
+	econf \
+		--prefix=/ \
+		--includedir=/usr/include \
+		--disable-static
 }
