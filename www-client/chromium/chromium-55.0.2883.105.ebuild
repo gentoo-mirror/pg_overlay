@@ -319,9 +319,9 @@ src_prepare() {
 		v8/src/third_party/valgrind
 		third_party/libva
 	)
-	if ! use system-ffmpeg; then
-		keeplibs+=( third_party/ffmpeg )
-	fi
+	#if ! use system-ffmpeg; then
+	#	keeplibs+=( third_party/ffmpeg )
+	#fi
 	if use gn; then
 		keeplibs+=(
 			base/third_party/libevent
