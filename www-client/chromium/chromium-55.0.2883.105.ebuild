@@ -305,7 +305,6 @@ src_prepare() {
 		third_party/protobuf/third_party/six
 		third_party/qcms
 		third_party/sfntly
-		third_party/skia
 		third_party/smhasher
 		third_party/sqlite
 		third_party/tcmalloc
