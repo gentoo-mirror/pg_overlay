@@ -17,7 +17,7 @@ SRC_URI="https://github.com/google/${PN}/archive/${RE2_VER}.tar.gz -> ${PN}-${RE
 LICENSE="BSD"
 # NOTE: Always run libre2 through abi-compliance-checker!
 # https://abi-laboratory.pro/tracker/timeline/re2/
-SONAME="gentoo-2016-09-01"
+SONAME="gentoo-2016-11-01"
 SLOT="0/${SONAME}"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="icu"
