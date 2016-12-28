@@ -13,8 +13,7 @@ inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib multipro
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
-SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz
-		https://chromium.googlesource.com/${PN}/src.git/+archive/${PV}.tar.gz"
+SRC_URI="https://chromium.googlesource.com/${PN}/src.git/+archive/${PV}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
