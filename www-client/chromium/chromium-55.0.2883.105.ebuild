@@ -246,7 +246,6 @@ src_prepare() {
 		third_party/cacheinvalidation
 		third_party/catapult
 		third_party/catapult/third_party/polymer
-		third_party/catapult/third_party/py_vulcanize
 		third_party/catapult/third_party/py_vulcanize/third_party/rcssmin
 		third_party/catapult/third_party/py_vulcanize/third_party/rjsmin
 		third_party/catapult/tracing/third_party/d3
