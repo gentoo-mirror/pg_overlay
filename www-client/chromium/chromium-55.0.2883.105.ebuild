@@ -124,7 +124,7 @@ DEPEND="${COMMON_DEPEND}
 		dev-python/simplejson[${PYTHON_USEDEP}]
 	')
 "
-
+S=${WORKDIR}
 # Keep this in sync with the python_gen_any_dep call.
 python_check_deps() {
 	has_version --host-root "dev-python/beautifulsoup:python-2[${PYTHON_USEDEP}]" &&
