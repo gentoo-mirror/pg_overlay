@@ -46,6 +46,7 @@ iridium-browser/hotword-disable-at-build-time-by-default.patch
 iridium-browser/browser-disable-profile-auto-import-on-first-run.patch
 
 ungoogled-chromium/clear-http-auth-cache-menu-item.patch
+ungoogled-chromium/disable-crash-reporter.patch
 ungoogled-chromium/disable-formatting-in-omnibox.patch
 ungoogled-chromium/disable-google-host-detection.patch
 ungoogled-chromium/replace-google-search-engine-with-nosearch.patch
