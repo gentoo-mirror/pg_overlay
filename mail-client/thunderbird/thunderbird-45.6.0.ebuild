@@ -5,7 +5,7 @@
 EAPI=6
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="4.7.5.1"
+MOZ_LIGHTNING_VER="4.7.6"
 MOZ_LIGHTNING_GDATA_VER="2.6"
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
@@ -22,6 +22,12 @@ PATCH="thunderbird-38.0-patches-0.1"
 PATCHFF="firefox-45.0-patches-07"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
+
+# ESR releases have slightly version numbers
+if [[ ${MOZ_ESR} == 1 ]]; then
+	MOZ_PV="${MOZ_PV}esr"
+fi
+MOZ_P="${PN}-${MOZ_PV}"
 
 MOZCONFIG_OPTIONAL_GTK3=1
 MOZCONFIG_OPTIONAL_JIT="enabled"
