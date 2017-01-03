@@ -9,7 +9,7 @@ PYTHON_REQ_USE="threads"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1 eutils git-r3 versionator
+inherit distutils-r1 eutils git-r3
 
 MY_P=libtorrent-rasterbar-${PV} # TODO: rename, bug 576126
 MY_PV=$(replace_all_version_separators _)
@@ -45,13 +45,7 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	_elibtoolize --force --copy
-	eaclocal
-	eautoconf
-	eautoheader
-	touch config.h.in
-	eautomake --gnu
-
+	./autotool.sh
 	default
 
 	# bug 578026
