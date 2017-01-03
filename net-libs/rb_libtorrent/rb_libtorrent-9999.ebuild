@@ -45,6 +45,9 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
+	eautoreconf
+	elibtoolize
+
 	default
 
 	# bug 578026
