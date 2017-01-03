@@ -47,8 +47,8 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	default
 	elibtoolize
-	eautoreconf
-	#eautoconf
+	#eautoreconf
+	eautoconf
 	#eautomake
 
 	# bug 578026
