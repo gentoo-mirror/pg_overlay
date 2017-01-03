@@ -22,9 +22,9 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+dbus debug +qt5 webui +X"
-#REQUIRED_USE="
-# 	dbus? ( X )
-# "
+REQUIRED_USE="
+	dbus? ( X )
+"
 
 RDEPEND="
 	dev-libs/boost:=
@@ -56,11 +56,6 @@ DEPEND="${RDEPEND}
 "
 
 DOCS=(AUTHORS Changelog CONTRIBUTING.md README.md TODO)
-
-src_prepare() {
-	eapply "${FILESDIR}/rb_libtorrent-1.1.1.patch"
-	default
-}
 
 src_configure() {
 	# To last stable version for What.CD & Pedro's BTMusic
