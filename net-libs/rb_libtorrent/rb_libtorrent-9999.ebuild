@@ -42,7 +42,7 @@ DEPEND="${RDEPEND}
 	sys-devel/libtool
 "
 
-S=${WORKDIR}/${MY_P}
+#S=${WORKDIR}/${MY_P}
 
 src_prepare() {
 	default
