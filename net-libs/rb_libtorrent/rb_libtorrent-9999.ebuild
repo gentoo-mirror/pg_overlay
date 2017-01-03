@@ -45,12 +45,11 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
+	default
 	eautoreconf
 	elibtoolize
 	#eautoconf
 	#eautomake
-
-	default
 
 	# bug 578026
 	# prepend -L${S}/... to ensure bindings link against the lib we just built
