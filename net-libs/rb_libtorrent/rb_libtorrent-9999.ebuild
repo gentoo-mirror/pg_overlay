@@ -45,7 +45,8 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	eautoreconf --add-missing --copy --no-force
+
+	eautomake --add-missing --copy --no-force
 
 	default
 
