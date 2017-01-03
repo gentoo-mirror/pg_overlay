@@ -45,7 +45,7 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	./autotools.sh
+	./autotool.sh
 	default
 
 	# bug 578026
