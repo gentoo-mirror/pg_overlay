@@ -45,10 +45,11 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	_elibtoolize --force --copy
+	_elibtoolize
 	eaclocal
-	eautoheader
 	eautoconf
+	eautoheader
+	touch config.h.in
 	eautomake --gnu
 
 	default
