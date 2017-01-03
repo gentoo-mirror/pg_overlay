@@ -9,7 +9,7 @@ PYTHON_REQ_USE="threads"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit distutils-r1 eutils git-r3 versionator
+inherit autotools distutils-r1 eutils git-r3 versionator
 
 MY_P=libtorrent-rasterbar-${PV} # TODO: rename, bug 576126
 MY_PV=$(replace_all_version_separators _)
@@ -45,8 +45,11 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	./autotools.sh
-	default
+	#default
+	elibtoolize
+	#eautoreconf
+	eautoconf
+	#eautomake
 
 	# bug 578026
 	# prepend -L${S}/... to ensure bindings link against the lib we just built
