@@ -45,7 +45,7 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	eautoconf
+	WANT_AUTOCONF=2.69 eautoconf
 	default
 
 	# bug 578026
