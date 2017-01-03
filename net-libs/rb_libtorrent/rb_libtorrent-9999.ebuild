@@ -45,8 +45,7 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	elibtoolize
-	eautoconf
+	elibtoolize && 	eautoconf
 
 	default
 
