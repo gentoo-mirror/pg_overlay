@@ -11,17 +11,14 @@ DISTUTILS_IN_SOURCE_BUILD=true
 
 inherit distutils-r1 eutils git-r3
 
-MY_P=libtorrent-rasterbar-${PV} # TODO: rename, bug 576126
-MY_PV=$(replace_all_version_separators _)
-
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
 EGIT_REPO_URI="git://github.com/arvidn/libtorrent.git"
 
 LICENSE="BSD"
-SLOT="0/9"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
-IUSE="debug +dht doc examples libressl python +ssl static-libs test"
+SLOT="0/10"
+KEYWORDS=""
+IUSE="debug dht doc examples libressl python +ssl static-libs test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -41,9 +38,6 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	sys-devel/libtool
 "
-
-#S=${WORKDIR}/${MY_P}
-
 src_prepare() {
 	./autotool.sh
 	default
