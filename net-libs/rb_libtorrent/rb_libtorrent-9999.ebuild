@@ -45,6 +45,8 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
+	elibtoolize
+	eaclocal
 	eautoconf
 	eautomake --add-missing --copy --no-force
 
