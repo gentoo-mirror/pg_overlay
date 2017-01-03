@@ -47,6 +47,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	_elibtoolize --force --copy
 	eaclocal
+	eautoheader
 	eautoconf
 	eautomake --gnu
 
