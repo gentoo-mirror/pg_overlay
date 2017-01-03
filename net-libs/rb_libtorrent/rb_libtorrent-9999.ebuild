@@ -45,7 +45,7 @@ DEPEND="${RDEPEND}
 #S=${WORKDIR}/${MY_P}
 
 src_prepare() {
-	eautoreconf
+	eautoreconf --gnu
 
 	default
 
