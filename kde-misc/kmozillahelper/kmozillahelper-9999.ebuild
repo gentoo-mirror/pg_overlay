@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="git://github.com/openSUSE/kmozillahelper.git"
 	inherit git-r3
 	SRC_URI=""
-	#KEYWORDS=""
+	KEYWORDS=""
 else
 	SRC_URI="https://github.com/openSUSE/${PN}/archive/${PV}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
@@ -43,11 +43,21 @@ DEPEND="${COMMON_DEPEND}
 	$(add_frameworks_dep kinit)
 	dev-libs/mpfr:0
 	sys-devel/gettext
-	!kde-misc/kmozillahelper
+	!kde-misc/kmozillahelper:4
 "
 RDEPEND="${COMMON_DEPEND}"
 
+src_prepare() {
+	# Don't allow running as root: may break sandboxing during Portage-based
+	# install of Mozilla applications (Firefox)
+	# See https://github.com/bobwya/bobwya/issues/7#issuecomment-243017441
+	local PATCHES=(
+		"${FILESDIR}/${PN}-0.6.5-dont_run_as_root.patch"
+	)
+	default
+}
+
 pkg_postinst() {
 	ewarn "To suppress the taskbar icon for ${PN} file dialog window - install Kwin rule"
-	ewarn "${FILESDIR}/kwinrulesrc to \${HOME}/.config/"
+	ewarn "${FILESDIR}/kwinrulesrc to \"\${HOME}/.config/\""
 }
