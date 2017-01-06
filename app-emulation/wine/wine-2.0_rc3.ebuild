@@ -58,7 +58,7 @@ if [[ ${PV} == "9999" ]] ; then
 else
 	SRC_URI="${SRC_URI}
 	staging? ( https://github.com/wine-compholio/wine-staging/archive/v${MY_PV}${SUFFIX}.tar.gz -> ${STAGING_P}.tar.gz )
-	d3d9? ( https://github.com/sarnex/wine-d3d9-patches/archive/${D3D9_P}.tar.gz )"
+# 	d3d9? ( https://github.com/sarnex/wine-d3d9-patches/archive/${D3D9_P}.tar.gz )"
 fi
 
 LICENSE="LGPL-2.1"
