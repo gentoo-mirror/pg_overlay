@@ -16,7 +16,8 @@ IUSE="debug +dri3 +sna +udev uxa xvmc"
 REQUIRED_USE="
 	|| ( sna uxa )
 "
-RDEPEND="x11-libs/libXext
+RDEPEND="
+	x11-libs/libXext
 	x11-libs/libXfixes
 	>=x11-libs/pixman-0.27.1
 	>=x11-libs/libdrm-2.4.29[video_cards_intel]
@@ -40,6 +41,10 @@ DEPEND="${RDEPEND}
 	x11-proto/dri3proto
 	x11-proto/presentproto
 	x11-proto/resourceproto"
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-2.99.917-config-header.patch #575970
+)
 
 src_configure() {
 	replace-flags -Os -O2
