@@ -1,6 +1,6 @@
-diff -up a/toolkit/xre/nsAppRunner.cpp b/toolkit/xre/nsAppRunner.cpp
---- a/toolkit/xre/nsAppRunner.cpp	2014-11-26 03:17:40.000000000 +0100
-+++ b/toolkit/xre/nsAppRunner.cpp	2015-01-05 14:23:05.977933308 +0100
+diff -up a/mozilla/toolkit/xre/nsAppRunner.cpp b/mozilla/toolkit/xre/nsAppRunner.cpp
+--- a/mozilla/toolkit/xre/nsAppRunner.cpp	2014-11-26 03:17:40.000000000 +0100
++++ b/mozilla/toolkit/xre/nsAppRunner.cpp	2015-01-05 14:23:05.977933308 +0100
 @@ -4168,10 +4168,8 @@ XREMain::XRE_main(int argc, char* argv[]
  
  #if defined(MOZ_WIDGET_GTK)

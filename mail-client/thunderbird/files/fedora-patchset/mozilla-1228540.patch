@@ -6,9 +6,9 @@
 # Parent  e790bba372f14241addda469a4bdb7ab00786ab3
 Bug 1228540 - Update harfbuzz to release 1.1.3.
 
-diff --git a/gfx/harfbuzz/src/Makefile.am b/gfx/harfbuzz/src/Makefile.am
---- a/gfx/harfbuzz/src/Makefile.am
-+++ b/gfx/harfbuzz/src/Makefile.am
+diff --git a/mozilla/gfx/harfbuzz/src/Makefile.am b/mozilla/gfx/harfbuzz/src/Makefile.am
+--- a/mozilla/gfx/harfbuzz/src/Makefile.am
++++ b/mozilla/gfx/harfbuzz/src/Makefile.am
 @@ -43,16 +43,17 @@ HBSOURCES =  \
  	hb-open-type-private.hh \
  	hb-ot-cmap-table.hh \
@@ -71,9 +71,9 @@ diff --git a/gfx/harfbuzz/src/Makefile.am b/gfx/harfbuzz/src/Makefile.am
  HarfBuzz_0_0_gir_FILES = \
  	$(HBHEADERS) \
  	$(HBNODISTHEADERS) \
-diff --git a/gfx/harfbuzz/src/check-header-guards.sh b/gfx/harfbuzz/src/check-header-guards.sh
---- a/gfx/harfbuzz/src/check-header-guards.sh
-+++ b/gfx/harfbuzz/src/check-header-guards.sh
+diff --git a/mozilla/gfx/harfbuzz/src/check-header-guards.sh b/mozilla/gfx/harfbuzz/src/check-header-guards.sh
+--- a/mozilla/gfx/harfbuzz/src/check-header-guards.sh
++++ b/mozilla/gfx/harfbuzz/src/check-header-guards.sh
 @@ -4,22 +4,21 @@ LC_ALL=C
  export LC_ALL
  
@@ -99,9 +99,9 @@ diff --git a/gfx/harfbuzz/src/check-header-guards.sh b/gfx/harfbuzz/src/check-he
  done
  
  exit $stat
-diff --git a/gfx/harfbuzz/src/gen-indic-table.py b/gfx/harfbuzz/src/gen-indic-table.py
---- a/gfx/harfbuzz/src/gen-indic-table.py
-+++ b/gfx/harfbuzz/src/gen-indic-table.py
+diff --git a/mozilla/gfx/harfbuzz/src/gen-indic-table.py b/mozilla/gfx/harfbuzz/src/gen-indic-table.py
+--- a/mozilla/gfx/harfbuzz/src/gen-indic-table.py
++++ b/mozilla/gfx/harfbuzz/src/gen-indic-table.py
 @@ -86,16 +86,17 @@ short = [{
  	"Bindu":		'Bi',
  	"Cantillation_Mark":	'Ca',
@@ -120,9 +120,9 @@ diff --git a/gfx/harfbuzz/src/gen-indic-table.py b/gfx/harfbuzz/src/gen-indic-ta
  
  # Add some of the values, to make them more readable, and to avoid duplicates
  
-diff --git a/gfx/harfbuzz/src/hb-atomic-private.hh b/gfx/harfbuzz/src/hb-atomic-private.hh
---- a/gfx/harfbuzz/src/hb-atomic-private.hh
-+++ b/gfx/harfbuzz/src/hb-atomic-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-atomic-private.hh b/mozilla/gfx/harfbuzz/src/hb-atomic-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-atomic-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-atomic-private.hh
 @@ -114,16 +114,41 @@ typedef int hb_atomic_int_impl_t;
  typedef unsigned int hb_atomic_int_impl_t;
  #define HB_ATOMIC_INT_IMPL_INIT(V) (V)
@@ -165,9 +165,9 @@ diff --git a/gfx/harfbuzz/src/hb-atomic-private.hh b/gfx/harfbuzz/src/hb-atomic-
  #define HB_ATOMIC_INT_IMPL_INIT(V) (V)
  #define hb_atomic_int_impl_add(AI, V)		(((AI) += (V)) - (V))
  
-diff --git a/gfx/harfbuzz/src/hb-blob.h b/gfx/harfbuzz/src/hb-blob.h
---- a/gfx/harfbuzz/src/hb-blob.h
-+++ b/gfx/harfbuzz/src/hb-blob.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-blob.h b/mozilla/gfx/harfbuzz/src/hb-blob.h
+--- a/mozilla/gfx/harfbuzz/src/hb-blob.h
++++ b/mozilla/gfx/harfbuzz/src/hb-blob.h
 @@ -59,68 +59,68 @@ typedef enum {
    HB_MEMORY_MODE_DUPLICATE,
    HB_MEMORY_MODE_READONLY,
@@ -249,9 +249,9 @@ diff --git a/gfx/harfbuzz/src/hb-blob.h b/gfx/harfbuzz/src/hb-blob.h
  HB_END_DECLS
  
  #endif /* HB_BLOB_H */
-diff --git a/gfx/harfbuzz/src/hb-buffer-private.hh b/gfx/harfbuzz/src/hb-buffer-private.hh
---- a/gfx/harfbuzz/src/hb-buffer-private.hh
-+++ b/gfx/harfbuzz/src/hb-buffer-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-buffer-private.hh b/mozilla/gfx/harfbuzz/src/hb-buffer-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-buffer-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-buffer-private.hh
 @@ -119,16 +119,21 @@ struct hb_buffer_t {
  
    /* Text before / after the main buffer contents.
@@ -330,9 +330,9 @@ diff --git a/gfx/harfbuzz/src/hb-buffer-private.hh b/gfx/harfbuzz/src/hb-buffer-
  	   sizeof (b->info[0].var), owner)
  #define HB_BUFFER_ALLOCATE_VAR(b, var) \
  	HB_BUFFER_XALLOCATE_VAR (b, allocate_var, var (), #var)
-diff --git a/gfx/harfbuzz/src/hb-buffer-serialize.cc b/gfx/harfbuzz/src/hb-buffer-serialize.cc
---- a/gfx/harfbuzz/src/hb-buffer-serialize.cc
-+++ b/gfx/harfbuzz/src/hb-buffer-serialize.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-buffer-serialize.cc b/mozilla/gfx/harfbuzz/src/hb-buffer-serialize.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-buffer-serialize.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-buffer-serialize.cc
 @@ -31,55 +31,61 @@ static const char *serialize_formats[] =
    "text",
    "json",
@@ -537,9 +537,9 @@ diff --git a/gfx/harfbuzz/src/hb-buffer-serialize.cc b/gfx/harfbuzz/src/hb-buffe
  			      const char **end_ptr, /* May be NULL */
  			      hb_font_t *font, /* May be NULL */
  			      hb_buffer_serialize_format_t format)
-diff --git a/gfx/harfbuzz/src/hb-buffer.cc b/gfx/harfbuzz/src/hb-buffer.cc
---- a/gfx/harfbuzz/src/hb-buffer.cc
-+++ b/gfx/harfbuzz/src/hb-buffer.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-buffer.cc b/mozilla/gfx/harfbuzz/src/hb-buffer.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-buffer.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-buffer.cc
 @@ -30,33 +30,59 @@
  #include "hb-buffer-private.hh"
  #include "hb-utf-private.hh"
@@ -1761,9 +1761,9 @@ diff --git a/gfx/harfbuzz/src/hb-buffer.cc b/gfx/harfbuzz/src/hb-buffer.cc
 +  vsnprintf (buf, sizeof (buf),  fmt, ap);
 +  return (bool) this->message_func (this, font, buf, this->message_data);
 +}
-diff --git a/gfx/harfbuzz/src/hb-buffer.h b/gfx/harfbuzz/src/hb-buffer.h
---- a/gfx/harfbuzz/src/hb-buffer.h
-+++ b/gfx/harfbuzz/src/hb-buffer.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-buffer.h b/mozilla/gfx/harfbuzz/src/hb-buffer.h
+--- a/mozilla/gfx/harfbuzz/src/hb-buffer.h
++++ b/mozilla/gfx/harfbuzz/src/hb-buffer.h
 @@ -35,344 +35,438 @@
  #define HB_BUFFER_H
  
@@ -2283,9 +2283,9 @@ diff --git a/gfx/harfbuzz/src/hb-buffer.h b/gfx/harfbuzz/src/hb-buffer.h
  HB_END_DECLS
  
  #endif /* HB_BUFFER_H */
-diff --git a/gfx/harfbuzz/src/hb-common.cc b/gfx/harfbuzz/src/hb-common.cc
---- a/gfx/harfbuzz/src/hb-common.cc
-+++ b/gfx/harfbuzz/src/hb-common.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-common.cc b/mozilla/gfx/harfbuzz/src/hb-common.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-common.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-common.cc
 @@ -276,22 +276,25 @@ retry:
  #endif
  
@@ -2438,9 +2438,9 @@ diff --git a/gfx/harfbuzz/src/hb-common.cc b/gfx/harfbuzz/src/hb-common.cc
  hb_user_data_array_t::get (hb_user_data_key_t *key)
  {
    hb_user_data_item_t item = {NULL };
-diff --git a/gfx/harfbuzz/src/hb-common.h b/gfx/harfbuzz/src/hb-common.h
---- a/gfx/harfbuzz/src/hb-common.h
-+++ b/gfx/harfbuzz/src/hb-common.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-common.h b/mozilla/gfx/harfbuzz/src/hb-common.h
+--- a/mozilla/gfx/harfbuzz/src/hb-common.h
++++ b/mozilla/gfx/harfbuzz/src/hb-common.h
 @@ -93,64 +93,69 @@ typedef uint32_t hb_tag_t;
  #define HB_TAG(c1,c2,c3,c4) ((hb_tag_t)((((uint8_t)(c1))<<24)|(((uint8_t)(c2))<<16)|(((uint8_t)(c3))<<8)|((uint8_t)(c4))))
  #define HB_UNTAG(tag)   ((uint8_t)((tag)>>24)), ((uint8_t)((tag)>>16)), ((uint8_t)((tag)>>8)), ((uint8_t)(tag))
@@ -2555,9 +2555,9 @@ diff --git a/gfx/harfbuzz/src/hb-common.h b/gfx/harfbuzz/src/hb-common.h
  typedef struct hb_user_data_key_t {
    /*< private >*/
    char unused;
-diff --git a/gfx/harfbuzz/src/hb-coretext.cc b/gfx/harfbuzz/src/hb-coretext.cc
---- a/gfx/harfbuzz/src/hb-coretext.cc
-+++ b/gfx/harfbuzz/src/hb-coretext.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-coretext.cc b/mozilla/gfx/harfbuzz/src/hb-coretext.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-coretext.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-coretext.cc
 @@ -171,16 +171,53 @@ hb_coretext_shaper_font_data_t *
    data->y_mult = (CGFloat) font->y_scale / font_size;
    data->ct_font = CTFontCreateWithGraphicsFont (face_data, font_size, NULL, NULL);
@@ -2676,9 +2676,9 @@ diff --git a/gfx/harfbuzz/src/hb-coretext.cc b/gfx/harfbuzz/src/hb-coretext.cc
  
  hb_coretext_aat_shaper_face_data_t *
  _hb_coretext_aat_shaper_face_data_create (hb_face_t *face)
-diff --git a/gfx/harfbuzz/src/hb-coretext.h b/gfx/harfbuzz/src/hb-coretext.h
---- a/gfx/harfbuzz/src/hb-coretext.h
-+++ b/gfx/harfbuzz/src/hb-coretext.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-coretext.h b/mozilla/gfx/harfbuzz/src/hb-coretext.h
+--- a/mozilla/gfx/harfbuzz/src/hb-coretext.h
++++ b/mozilla/gfx/harfbuzz/src/hb-coretext.h
 @@ -39,22 +39,22 @@
  
  HB_BEGIN_DECLS
@@ -2705,10 +2705,10 @@ diff --git a/gfx/harfbuzz/src/hb-coretext.h b/gfx/harfbuzz/src/hb-coretext.h
  HB_END_DECLS
  
  #endif /* HB_CORETEXT_H */
-diff --git a/gfx/harfbuzz/src/hb-directwrite.cc b/gfx/harfbuzz/src/hb-directwrite.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-directwrite.cc b/mozilla/gfx/harfbuzz/src/hb-directwrite.cc
 new file mode 100644
 --- /dev/null
-+++ b/gfx/harfbuzz/src/hb-directwrite.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-directwrite.cc
 @@ -0,0 +1,827 @@
 +/*
 + * Copyright © 2015  Ebrahim Byagowi
@@ -3537,10 +3537,10 @@ new file mode 100644
 +  /* Wow, done! */
 +  return true;
 +}
-diff --git a/gfx/harfbuzz/src/hb-directwrite.h b/gfx/harfbuzz/src/hb-directwrite.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-directwrite.h b/mozilla/gfx/harfbuzz/src/hb-directwrite.h
 new file mode 100644
 --- /dev/null
-+++ b/gfx/harfbuzz/src/hb-directwrite.h
++++ b/mozilla/gfx/harfbuzz/src/hb-directwrite.h
 @@ -0,0 +1,34 @@
 +/*
 + * Copyright © 2015  Ebrahim Byagowi
@@ -3576,9 +3576,9 @@ new file mode 100644
 +HB_END_DECLS
 +
 +#endif /* HB_UNISCRIBE_H */
-diff --git a/gfx/harfbuzz/src/hb-face.h b/gfx/harfbuzz/src/hb-face.h
---- a/gfx/harfbuzz/src/hb-face.h
-+++ b/gfx/harfbuzz/src/hb-face.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-face.h b/mozilla/gfx/harfbuzz/src/hb-face.h
+--- a/mozilla/gfx/harfbuzz/src/hb-face.h
++++ b/mozilla/gfx/harfbuzz/src/hb-face.h
 @@ -38,80 +38,80 @@ HB_BEGIN_DECLS
  
  
@@ -3677,9 +3677,9 @@ diff --git a/gfx/harfbuzz/src/hb-face.h b/gfx/harfbuzz/src/hb-face.h
  HB_END_DECLS
  
  #endif /* HB_FACE_H */
-diff --git a/gfx/harfbuzz/src/hb-fallback-shape.cc b/gfx/harfbuzz/src/hb-fallback-shape.cc
---- a/gfx/harfbuzz/src/hb-fallback-shape.cc
-+++ b/gfx/harfbuzz/src/hb-fallback-shape.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-fallback-shape.cc b/mozilla/gfx/harfbuzz/src/hb-fallback-shape.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-fallback-shape.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-fallback-shape.cc
 @@ -101,17 +101,17 @@ hb_bool_t
     * - Handle Variation Selectors?
     * - Apply normalization?
@@ -3699,9 +3699,9 @@ diff --git a/gfx/harfbuzz/src/hb-fallback-shape.cc b/gfx/harfbuzz/src/hb-fallbac
    unsigned int count = buffer->len;
    hb_glyph_info_t *info = buffer->info;
    hb_glyph_position_t *pos = buffer->pos;
-diff --git a/gfx/harfbuzz/src/hb-font-private.hh b/gfx/harfbuzz/src/hb-font-private.hh
---- a/gfx/harfbuzz/src/hb-font-private.hh
-+++ b/gfx/harfbuzz/src/hb-font-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-font-private.hh b/mozilla/gfx/harfbuzz/src/hb-font-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-font-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-font-private.hh
 @@ -37,16 +37,18 @@
  
  
@@ -3830,9 +3830,9 @@ diff --git a/gfx/harfbuzz/src/hb-font-private.hh b/gfx/harfbuzz/src/hb-font-priv
  					      hb_position_t *x, hb_position_t *y)
    {
      if (likely (HB_DIRECTION_IS_HORIZONTAL (direction)))
-diff --git a/gfx/harfbuzz/src/hb-font.cc b/gfx/harfbuzz/src/hb-font.cc
---- a/gfx/harfbuzz/src/hb-font.cc
-+++ b/gfx/harfbuzz/src/hb-font.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-font.cc b/mozilla/gfx/harfbuzz/src/hb-font.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-font.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-font.cc
 @@ -40,16 +40,64 @@
  #include <string.h>
  
@@ -4022,9 +4022,9 @@ diff --git a/gfx/harfbuzz/src/hb-font.cc b/gfx/harfbuzz/src/hb-font.cc
   * @y: (out): 
   *
   * 
-diff --git a/gfx/harfbuzz/src/hb-font.h b/gfx/harfbuzz/src/hb-font.h
---- a/gfx/harfbuzz/src/hb-font.h
-+++ b/gfx/harfbuzz/src/hb-font.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-font.h b/mozilla/gfx/harfbuzz/src/hb-font.h
+--- a/mozilla/gfx/harfbuzz/src/hb-font.h
++++ b/mozilla/gfx/harfbuzz/src/hb-font.h
 @@ -41,61 +41,85 @@ typedef struct hb_font_t hb_font_t;
  
  
@@ -4591,9 +4591,9 @@ diff --git a/gfx/harfbuzz/src/hb-font.h b/gfx/harfbuzz/src/hb-font.h
  HB_END_DECLS
  
  #endif /* HB_FONT_H */
-diff --git a/gfx/harfbuzz/src/hb-ft.cc b/gfx/harfbuzz/src/hb-ft.cc
---- a/gfx/harfbuzz/src/hb-ft.cc
-+++ b/gfx/harfbuzz/src/hb-ft.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ft.cc b/mozilla/gfx/harfbuzz/src/hb-ft.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ft.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ft.cc
 @@ -361,16 +361,35 @@ hb_ft_get_glyph_from_name (hb_font_t *fo
      if (!FT_Get_Glyph_Name(ft_face, 0, buf, sizeof (buf)) &&
          len < 0 ? !strcmp (buf, name) : !strncmp (buf, name, len))
@@ -4649,9 +4649,9 @@ diff --git a/gfx/harfbuzz/src/hb-ft.cc b/gfx/harfbuzz/src/hb-ft.cc
      hb_font_funcs_set_glyph_h_kerning_func (funcs, hb_ft_get_glyph_h_kerning, NULL, NULL);
      //hb_font_funcs_set_glyph_v_kerning_func (funcs, hb_ft_get_glyph_v_kerning, NULL, NULL);
      hb_font_funcs_set_glyph_extents_func (funcs, hb_ft_get_glyph_extents, NULL, NULL);
-diff --git a/gfx/harfbuzz/src/hb-ft.h b/gfx/harfbuzz/src/hb-ft.h
---- a/gfx/harfbuzz/src/hb-ft.h
-+++ b/gfx/harfbuzz/src/hb-ft.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ft.h b/mozilla/gfx/harfbuzz/src/hb-ft.h
+--- a/mozilla/gfx/harfbuzz/src/hb-ft.h
++++ b/mozilla/gfx/harfbuzz/src/hb-ft.h
 @@ -54,73 +54,73 @@ HB_BEGIN_DECLS
   * destroyed after hb-face is destroyed.
   *
@@ -4735,9 +4735,9 @@ diff --git a/gfx/harfbuzz/src/hb-ft.h b/gfx/harfbuzz/src/hb-ft.h
  HB_END_DECLS
  
  #endif /* HB_FT_H */
-diff --git a/gfx/harfbuzz/src/hb-glib.cc b/gfx/harfbuzz/src/hb-glib.cc
---- a/gfx/harfbuzz/src/hb-glib.cc
-+++ b/gfx/harfbuzz/src/hb-glib.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-glib.cc b/mozilla/gfx/harfbuzz/src/hb-glib.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-glib.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-glib.cc
 @@ -378,16 +378,18 @@ hb_glib_get_unicode_funcs (void)
  #undef HB_UNICODE_FUNC_IMPLEMENT
      }
@@ -4757,9 +4757,9 @@ diff --git a/gfx/harfbuzz/src/hb-glib.cc b/gfx/harfbuzz/src/hb-glib.cc
    gsize size = 0;
    gconstpointer data = g_bytes_get_data (gbytes, &size);
    return hb_blob_create ((const char *) data,
-diff --git a/gfx/harfbuzz/src/hb-glib.h b/gfx/harfbuzz/src/hb-glib.h
---- a/gfx/harfbuzz/src/hb-glib.h
-+++ b/gfx/harfbuzz/src/hb-glib.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-glib.h b/mozilla/gfx/harfbuzz/src/hb-glib.h
+--- a/mozilla/gfx/harfbuzz/src/hb-glib.h
++++ b/mozilla/gfx/harfbuzz/src/hb-glib.h
 @@ -31,25 +31,25 @@
  
  #include "hb.h"
@@ -4790,9 +4790,9 @@ diff --git a/gfx/harfbuzz/src/hb-glib.h b/gfx/harfbuzz/src/hb-glib.h
  HB_END_DECLS
  
  #endif /* HB_GLIB_H */
-diff --git a/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl b/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl
---- a/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl
-+++ b/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl
+diff --git a/mozilla/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl b/mozilla/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl
+--- a/mozilla/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl
++++ b/mozilla/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl
 @@ -37,17 +37,17 @@
  #include <glib-object.h>
  
@@ -4812,9 +4812,9 @@ diff --git a/gfx/harfbuzz/src/hb-gobject-enums.h.tmpl b/gfx/harfbuzz/src/hb-gobj
  
  HB_END_DECLS
  
-diff --git a/gfx/harfbuzz/src/hb-gobject-structs.h b/gfx/harfbuzz/src/hb-gobject-structs.h
---- a/gfx/harfbuzz/src/hb-gobject-structs.h
-+++ b/gfx/harfbuzz/src/hb-gobject-structs.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-gobject-structs.h b/mozilla/gfx/harfbuzz/src/hb-gobject-structs.h
+--- a/mozilla/gfx/harfbuzz/src/hb-gobject-structs.h
++++ b/mozilla/gfx/harfbuzz/src/hb-gobject-structs.h
 @@ -38,68 +38,68 @@
  HB_BEGIN_DECLS
  
@@ -4897,9 +4897,9 @@ diff --git a/gfx/harfbuzz/src/hb-gobject-structs.h b/gfx/harfbuzz/src/hb-gobject
  HB_END_DECLS
  
  #endif /* HB_GOBJECT_H */
-diff --git a/gfx/harfbuzz/src/hb-graphite2.cc b/gfx/harfbuzz/src/hb-graphite2.cc
---- a/gfx/harfbuzz/src/hb-graphite2.cc
-+++ b/gfx/harfbuzz/src/hb-graphite2.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-graphite2.cc b/mozilla/gfx/harfbuzz/src/hb-graphite2.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-graphite2.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-graphite2.cc
 @@ -346,27 +346,28 @@ hb_bool_t
      {
        hb_glyph_info_t *info = &buffer->info[clusters[i].base_glyph + j];
@@ -4962,9 +4962,9 @@ diff --git a/gfx/harfbuzz/src/hb-graphite2.cc b/gfx/harfbuzz/src/hb-graphite2.cc
    gr_seg_destroy (seg);
  
    return true;
-diff --git a/gfx/harfbuzz/src/hb-graphite2.h b/gfx/harfbuzz/src/hb-graphite2.h
---- a/gfx/harfbuzz/src/hb-graphite2.h
-+++ b/gfx/harfbuzz/src/hb-graphite2.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-graphite2.h b/mozilla/gfx/harfbuzz/src/hb-graphite2.h
+--- a/mozilla/gfx/harfbuzz/src/hb-graphite2.h
++++ b/mozilla/gfx/harfbuzz/src/hb-graphite2.h
 @@ -31,18 +31,18 @@
  #include <graphite2/Font.h>
  
@@ -4986,9 +4986,9 @@ diff --git a/gfx/harfbuzz/src/hb-graphite2.h b/gfx/harfbuzz/src/hb-graphite2.h
  HB_END_DECLS
  
  #endif /* HB_GRAPHITE2_H */
-diff --git a/gfx/harfbuzz/src/hb-icu.h b/gfx/harfbuzz/src/hb-icu.h
---- a/gfx/harfbuzz/src/hb-icu.h
-+++ b/gfx/harfbuzz/src/hb-icu.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-icu.h b/mozilla/gfx/harfbuzz/src/hb-icu.h
+--- a/mozilla/gfx/harfbuzz/src/hb-icu.h
++++ b/mozilla/gfx/harfbuzz/src/hb-icu.h
 @@ -31,22 +31,22 @@
  
  #include "hb.h"
@@ -5015,9 +5015,9 @@ diff --git a/gfx/harfbuzz/src/hb-icu.h b/gfx/harfbuzz/src/hb-icu.h
  HB_END_DECLS
  
  #endif /* HB_ICU_H */
-diff --git a/gfx/harfbuzz/src/hb-open-type-private.hh b/gfx/harfbuzz/src/hb-open-type-private.hh
---- a/gfx/harfbuzz/src/hb-open-type-private.hh
-+++ b/gfx/harfbuzz/src/hb-open-type-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-open-type-private.hh b/mozilla/gfx/harfbuzz/src/hb-open-type-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-open-type-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-open-type-private.hh
 @@ -98,19 +98,16 @@ static inline Type& StructAfter(TObject 
  # define DEFINE_COMPILES_ASSERTION(_code) _DEFINE_COMPILES_ASSERTION0 (__LINE__, _code)
  
@@ -5057,9 +5057,9 @@ diff --git a/gfx/harfbuzz/src/hb-open-type-private.hh b/gfx/harfbuzz/src/hb-open
    inline hb_sanitize_context_t (void) :
  	debug_depth (0),
  	start (NULL), end (NULL),
-diff --git a/gfx/harfbuzz/src/hb-ot-font.cc b/gfx/harfbuzz/src/hb-ot-font.cc
---- a/gfx/harfbuzz/src/hb-ot-font.cc
-+++ b/gfx/harfbuzz/src/hb-ot-font.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-font.cc b/mozilla/gfx/harfbuzz/src/hb-ot-font.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-font.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-font.cc
 @@ -30,34 +30,63 @@
  
  #include "hb-font-private.hh"
@@ -5226,9 +5226,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-font.cc b/gfx/harfbuzz/src/hb-ot-font.cc
    hb_ot_font_t *ot_font = _hb_ot_font_create (font->face);
    if (unlikely (!ot_font))
      return;
-diff --git a/gfx/harfbuzz/src/hb-ot-font.h b/gfx/harfbuzz/src/hb-ot-font.h
---- a/gfx/harfbuzz/src/hb-ot-font.h
-+++ b/gfx/harfbuzz/src/hb-ot-font.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-font.h b/mozilla/gfx/harfbuzz/src/hb-ot-font.h
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-font.h
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-font.h
 @@ -31,15 +31,15 @@
  #ifndef HB_OT_FONT_H
  #define HB_OT_FONT_H
@@ -5246,9 +5246,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-font.h b/gfx/harfbuzz/src/hb-ot-font.h
  HB_END_DECLS
  
  #endif /* HB_OT_FONT_H */
-diff --git a/gfx/harfbuzz/src/hb-ot-head-table.hh b/gfx/harfbuzz/src/hb-ot-head-table.hh
---- a/gfx/harfbuzz/src/hb-ot-head-table.hh
-+++ b/gfx/harfbuzz/src/hb-ot-head-table.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-head-table.hh b/mozilla/gfx/harfbuzz/src/hb-ot-head-table.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-head-table.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-head-table.hh
 @@ -50,17 +50,19 @@ struct head
      unsigned int upem = unitsPerEm;
      /* If no valid head table found, assume 1000, which matches typical Type1 usage. */
@@ -5270,9 +5270,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-head-table.hh b/gfx/harfbuzz/src/hb-ot-head-
    FixedVersion	fontRevision;		/* Set by font manufacturer. */
    ULONG		checkSumAdjustment;	/* To compute: set it to 0, sum the
  					 * entire font as ULONG, then store
-diff --git a/gfx/harfbuzz/src/hb-ot-layout-common-private.hh b/gfx/harfbuzz/src/hb-ot-layout-common-private.hh
---- a/gfx/harfbuzz/src/hb-ot-layout-common-private.hh
-+++ b/gfx/harfbuzz/src/hb-ot-layout-common-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-layout-common-private.hh b/mozilla/gfx/harfbuzz/src/hb-ot-layout-common-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-layout-common-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-layout-common-private.hh
 @@ -540,16 +540,19 @@ struct Feature
  
        OffsetTo<FeatureParams> new_offset;
@@ -5293,9 +5293,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-layout-common-private.hh b/gfx/harfbuzz/src/
    OffsetTo<FeatureParams>
  		 featureParams;	/* Offset to Feature Parameters table (if one
  				 * has been defined for the feature), relative
-diff --git a/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh b/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh
---- a/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh
-+++ b/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh b/mozilla/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh
 @@ -737,17 +737,17 @@ struct PairPosFormat1
    DEFINE_SIZE_ARRAY (10, pairSet);
  };
@@ -5315,9 +5315,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-layout-gpos-table.hh b/gfx/harfbuzz/src/hb-o
  
      unsigned int count2 = class2Count;
      const ClassDef &klass2 = this+classDef2;
-diff --git a/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh b/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh
---- a/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh
-+++ b/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh b/mozilla/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh
 @@ -840,37 +840,43 @@ static inline bool ligate_input (hb_appl
    }
    c->replace_glyph_with_ligature (lig_glyph, klass);
@@ -5387,9 +5387,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-layout-gsubgpos-private.hh b/gfx/harfbuzz/sr
  
      unsigned int new_len = buffer->backtrack_len () + buffer->lookahead_len ();
      int delta = new_len - orig_len;
-diff --git a/gfx/harfbuzz/src/hb-ot-layout-private.hh b/gfx/harfbuzz/src/hb-ot-layout-private.hh
---- a/gfx/harfbuzz/src/hb-ot-layout-private.hh
-+++ b/gfx/harfbuzz/src/hb-ot-layout-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-layout-private.hh b/mozilla/gfx/harfbuzz/src/hb-ot-layout-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-layout-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-layout-private.hh
 @@ -512,21 +512,19 @@ static inline bool
  static inline void
  _hb_glyph_info_clear_ligated_and_multiplied (hb_glyph_info_t *info)
@@ -5414,9 +5414,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-layout-private.hh b/gfx/harfbuzz/src/hb-ot-l
  static inline void
  _hb_buffer_allocate_unicode_vars (hb_buffer_t *buffer)
  {
-diff --git a/gfx/harfbuzz/src/hb-ot-layout.cc b/gfx/harfbuzz/src/hb-ot-layout.cc
---- a/gfx/harfbuzz/src/hb-ot-layout.cc
-+++ b/gfx/harfbuzz/src/hb-ot-layout.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-layout.cc b/mozilla/gfx/harfbuzz/src/hb-ot-layout.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-layout.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-layout.cc
 @@ -125,26 +125,30 @@ static inline const OT::GPOS&
  
  hb_bool_t
@@ -5657,9 +5657,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-layout.cc b/gfx/harfbuzz/src/hb-ot-layout.cc
        stage->pause_func (plan, font, buffer);
      }
    }
-diff --git a/gfx/harfbuzz/src/hb-ot-layout.h b/gfx/harfbuzz/src/hb-ot-layout.h
---- a/gfx/harfbuzz/src/hb-ot-layout.h
-+++ b/gfx/harfbuzz/src/hb-ot-layout.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-layout.h b/mozilla/gfx/harfbuzz/src/hb-ot-layout.h
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-layout.h
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-layout.h
 @@ -43,170 +43,170 @@ HB_BEGIN_DECLS
  #define HB_OT_TAG_GPOS HB_TAG('G','P','O','S')
  #define HB_OT_TAG_JSTF HB_TAG('J','S','T','F')
@@ -5937,9 +5937,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-layout.h b/gfx/harfbuzz/src/hb-ot-layout.h
  			      unsigned int *range_end          /* OUT.  May be NULL */);
  
  
-diff --git a/gfx/harfbuzz/src/hb-ot-map-private.hh b/gfx/harfbuzz/src/hb-ot-map-private.hh
---- a/gfx/harfbuzz/src/hb-ot-map-private.hh
-+++ b/gfx/harfbuzz/src/hb-ot-map-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-map-private.hh b/mozilla/gfx/harfbuzz/src/hb-ot-map-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-map-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-map-private.hh
 @@ -198,17 +198,18 @@ struct hb_ot_map_builder_t
      hb_tag_t tag;
      unsigned int seq; /* sequence#, used for stable sorting only */
@@ -5960,9 +5960,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-map-private.hh b/gfx/harfbuzz/src/hb-ot-map-
    };
  
    HB_INTERNAL void add_pause (unsigned int table_index, hb_ot_map_t::pause_func_t pause_func);
-diff --git a/gfx/harfbuzz/src/hb-ot-map.cc b/gfx/harfbuzz/src/hb-ot-map.cc
---- a/gfx/harfbuzz/src/hb-ot-map.cc
-+++ b/gfx/harfbuzz/src/hb-ot-map.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-map.cc b/mozilla/gfx/harfbuzz/src/hb-ot-map.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-map.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-map.cc
 @@ -84,17 +84,17 @@ hb_ot_map_builder_t::hb_ot_map_builder_t
    hb_tag_t script_tags[3] = {HB_TAG_NONE, HB_TAG_NONE, HB_TAG_NONE};
    hb_tag_t language_tag;
@@ -5982,10 +5982,10 @@ diff --git a/gfx/harfbuzz/src/hb-ot-map.cc b/gfx/harfbuzz/src/hb-ot-map.cc
  				       hb_ot_map_feature_flags_t flags)
  {
    feature_info_t *info = feature_infos.push();
-diff --git a/gfx/harfbuzz/src/hb-ot-os2-table.hh b/gfx/harfbuzz/src/hb-ot-os2-table.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-os2-table.hh b/mozilla/gfx/harfbuzz/src/hb-ot-os2-table.hh
 new file mode 100644
 --- /dev/null
-+++ b/gfx/harfbuzz/src/hb-ot-os2-table.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-os2-table.hh
 @@ -0,0 +1,105 @@
 +/*
 + * Copyright © 2011,2012  Google, Inc.
@@ -6092,9 +6092,9 @@ new file mode 100644
 +
 +
 +#endif /* HB_OT_OS2_TABLE_HH */
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc
 @@ -218,26 +218,26 @@ collect_features_arabic (hb_ot_shape_pla
      map->add_gsub_pause (NULL);
    }
@@ -6239,9 +6239,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-arabic.cc b/gfx/harfbuzz/src/h
  	  }
  	}
        }
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc
 @@ -35,11 +35,11 @@ const hb_ot_complex_shaper_t _hb_ot_comp
    NULL, /* data_create */
    NULL, /* data_destroy */
@@ -6255,9 +6255,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-default.cc b/gfx/harfbuzz/src/
 +  HB_OT_SHAPE_ZERO_WIDTH_MARKS_BY_UNICODE_LATE,
    true, /* fallback_position */
  };
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc
 @@ -63,17 +63,17 @@ compose_hebrew (const hb_ot_shape_normal
      0x0000u, /* FINAL TSADI */
      0xFB46u, /* TSADI */
@@ -6277,9 +6277,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-hebrew.cc b/gfx/harfbuzz/src/h
        switch (b) {
        case 0x05B4u: /* HIRIQ */
  	  if (a == 0x05D9u) { /* YOD */
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh b/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh
 @@ -104,37 +104,41 @@ enum indic_position_t {
  };
  
@@ -6368,9 +6368,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-indic-private.hh b/gfx/harfbuz
  hb_indic_get_categories (hb_codepoint_t u);
  
  #endif /* HB_OT_SHAPE_COMPLEX_INDIC_PRIVATE_HH */
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc
 @@ -1,315 +1,323 @@
  /* == Start of generated table == */
  /*
@@ -7486,9 +7486,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-indic-table.cc b/gfx/harfbuzz/
  #undef ISC_M
  #undef ISC_VI
  
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc
 @@ -171,34 +171,18 @@ set_indic_properties (hb_glyph_info_t &i
    indic_category_t cat = (indic_category_t) (type & 0x7Fu);
    indic_position_t pos = (indic_position_t) (type >> 8);
@@ -7652,9 +7652,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-indic.cc b/gfx/harfbuzz/src/hb
    "indic",
    collect_features_indic,
    override_features_indic,
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc
 @@ -194,16 +194,20 @@ set_myanmar_properties (hb_glyph_info_t 
      case 0x1004u: case 0x101Bu: case 0x105Au:
        cat = (indic_category_t) OT_Ra;
@@ -7676,9 +7676,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-myanmar.cc b/gfx/harfbuzz/src/
      case 0x1045u: case 0x1046u: case 0x1047u: case 0x1048u:
      case 0x1049u: case 0x1090u: case 0x1091u: case 0x1092u:
      case 0x1093u: case 0x1094u: case 0x1095u: case 0x1096u:
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh b/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh
 @@ -39,19 +39,17 @@
  #define complex_var_u8_1()	var2.u8[3]
  
@@ -7700,9 +7700,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-private.hh b/gfx/harfbuzz/src/
    HB_COMPLEX_SHAPER_IMPLEMENT (default) /* should be first */ \
    HB_COMPLEX_SHAPER_IMPLEMENT (arabic) \
    HB_COMPLEX_SHAPER_IMPLEMENT (hangul) \
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc
 @@ -372,11 +372,11 @@ const hb_ot_complex_shaper_t _hb_ot_comp
    NULL, /* data_create */
    NULL, /* data_destroy */
@@ -7716,9 +7716,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-thai.cc b/gfx/harfbuzz/src/hb-
 +  HB_OT_SHAPE_ZERO_WIDTH_MARKS_BY_UNICODE_LATE,
    false,/* fallback_position */
  };
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc
 @@ -52,11 +52,11 @@ const hb_ot_complex_shaper_t _hb_ot_comp
    NULL, /* data_create */
    NULL, /* data_destroy */
@@ -7732,9 +7732,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-tibetan.cc b/gfx/harfbuzz/src/
 +  HB_OT_SHAPE_ZERO_WIDTH_MARKS_BY_UNICODE_LATE,
    true, /* fallback_position */
  };
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc b/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc
 @@ -280,16 +280,19 @@ setup_rphf_mask (const hb_ot_shape_plan_
        info[i].mask |= mask;
    }
@@ -7871,9 +7871,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-complex-use.cc b/gfx/harfbuzz/src/hb-o
    "use",
    collect_features_use,
    NULL, /* override_features */
-diff --git a/gfx/harfbuzz/src/hb-ot-shape-normalize.cc b/gfx/harfbuzz/src/hb-ot-shape-normalize.cc
---- a/gfx/harfbuzz/src/hb-ot-shape-normalize.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape-normalize.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape-normalize.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape-normalize.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape-normalize.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape-normalize.cc
 @@ -71,26 +71,26 @@
   */
  
@@ -7922,9 +7922,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape-normalize.cc b/gfx/harfbuzz/src/hb-ot-
        return 2;
      }
      return 1;
-diff --git a/gfx/harfbuzz/src/hb-ot-shape.cc b/gfx/harfbuzz/src/hb-ot-shape.cc
---- a/gfx/harfbuzz/src/hb-ot-shape.cc
-+++ b/gfx/harfbuzz/src/hb-ot-shape.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape.cc b/mozilla/gfx/harfbuzz/src/hb-ot-shape.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape.cc
 @@ -657,42 +657,43 @@ hb_ot_position_default (hb_ot_shape_cont
    unsigned int count = c->buffer->len;
    hb_glyph_info_t *info = c->buffer->info;
@@ -8040,9 +8040,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape.cc b/gfx/harfbuzz/src/hb-ot-shape.cc
  			    const hb_feature_t *features,
  			    unsigned int        num_features,
  			    hb_set_t           *glyphs)
-diff --git a/gfx/harfbuzz/src/hb-ot-shape.h b/gfx/harfbuzz/src/hb-ot-shape.h
---- a/gfx/harfbuzz/src/hb-ot-shape.h
-+++ b/gfx/harfbuzz/src/hb-ot-shape.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-shape.h b/mozilla/gfx/harfbuzz/src/hb-ot-shape.h
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-shape.h
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-shape.h
 @@ -31,23 +31,23 @@
  #ifndef HB_OT_SHAPE_H
  #define HB_OT_SHAPE_H
@@ -8069,9 +8069,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-shape.h b/gfx/harfbuzz/src/hb-ot-shape.h
  HB_END_DECLS
  
  #endif /* HB_OT_SHAPE_H */
-diff --git a/gfx/harfbuzz/src/hb-ot-tag.cc b/gfx/harfbuzz/src/hb-ot-tag.cc
---- a/gfx/harfbuzz/src/hb-ot-tag.cc
-+++ b/gfx/harfbuzz/src/hb-ot-tag.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-tag.cc b/mozilla/gfx/harfbuzz/src/hb-ot-tag.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-tag.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-tag.cc
 @@ -350,17 +350,16 @@ static const LangTag ot_languages[] = {
    {"guz",	HB_TAG('G','U','Z',' ')},	/* Ekegusii/Gusii */
    {"gv",	HB_TAG('M','N','X',' ')},	/* Manx */
@@ -8175,9 +8175,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-tag.cc b/gfx/harfbuzz/src/hb-ot-tag.cc
 +}
 +
 +#endif
-diff --git a/gfx/harfbuzz/src/hb-ot-tag.h b/gfx/harfbuzz/src/hb-ot-tag.h
---- a/gfx/harfbuzz/src/hb-ot-tag.h
-+++ b/gfx/harfbuzz/src/hb-ot-tag.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-ot-tag.h b/mozilla/gfx/harfbuzz/src/hb-ot-tag.h
+--- a/mozilla/gfx/harfbuzz/src/hb-ot-tag.h
++++ b/mozilla/gfx/harfbuzz/src/hb-ot-tag.h
 @@ -34,26 +34,26 @@
  #include "hb.h"
  
@@ -8209,9 +8209,9 @@ diff --git a/gfx/harfbuzz/src/hb-ot-tag.h b/gfx/harfbuzz/src/hb-ot-tag.h
  HB_END_DECLS
  
  #endif /* HB_OT_TAG_H */
-diff --git a/gfx/harfbuzz/src/hb-private.hh b/gfx/harfbuzz/src/hb-private.hh
---- a/gfx/harfbuzz/src/hb-private.hh
-+++ b/gfx/harfbuzz/src/hb-private.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-private.hh b/mozilla/gfx/harfbuzz/src/hb-private.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-private.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-private.hh
 @@ -48,19 +48,16 @@
  /* We only use these two for debug output.  However, the debug code is
   * always seen by the compiler (and optimized out in non-debug builds.
@@ -8314,9 +8314,9 @@ diff --git a/gfx/harfbuzz/src/hb-private.hh b/gfx/harfbuzz/src/hb-private.hh
 +#define VAR 1
  
  #endif /* HB_PRIVATE_HH */
-diff --git a/gfx/harfbuzz/src/hb-set.h b/gfx/harfbuzz/src/hb-set.h
---- a/gfx/harfbuzz/src/hb-set.h
-+++ b/gfx/harfbuzz/src/hb-set.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-set.h b/mozilla/gfx/harfbuzz/src/hb-set.h
+--- a/mozilla/gfx/harfbuzz/src/hb-set.h
++++ b/mozilla/gfx/harfbuzz/src/hb-set.h
 @@ -39,119 +39,119 @@ HB_BEGIN_DECLS
  /*
   * Since: 0.9.21
@@ -8463,9 +8463,9 @@ diff --git a/gfx/harfbuzz/src/hb-set.h b/gfx/harfbuzz/src/hb-set.h
  HB_END_DECLS
  
  #endif /* HB_SET_H */
-diff --git a/gfx/harfbuzz/src/hb-shape-plan.h b/gfx/harfbuzz/src/hb-shape-plan.h
---- a/gfx/harfbuzz/src/hb-shape-plan.h
-+++ b/gfx/harfbuzz/src/hb-shape-plan.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-shape-plan.h b/mozilla/gfx/harfbuzz/src/hb-shape-plan.h
+--- a/mozilla/gfx/harfbuzz/src/hb-shape-plan.h
++++ b/mozilla/gfx/harfbuzz/src/hb-shape-plan.h
 @@ -33,57 +33,57 @@
  
  #include "hb-common.h"
@@ -8533,9 +8533,9 @@ diff --git a/gfx/harfbuzz/src/hb-shape-plan.h b/gfx/harfbuzz/src/hb-shape-plan.h
  HB_END_DECLS
  
  #endif /* HB_SHAPE_PLAN_H */
-diff --git a/gfx/harfbuzz/src/hb-shape.cc b/gfx/harfbuzz/src/hb-shape.cc
---- a/gfx/harfbuzz/src/hb-shape.cc
-+++ b/gfx/harfbuzz/src/hb-shape.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-shape.cc b/mozilla/gfx/harfbuzz/src/hb-shape.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-shape.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-shape.cc
 @@ -205,23 +205,25 @@ parse_one_feature (const char **pp, cons
  	 parse_feature_value_postfix (pp, end, feature) &&
  	 parse_space (pp, end) &&
@@ -8566,9 +8566,9 @@ diff --git a/gfx/harfbuzz/src/hb-shape.cc b/gfx/harfbuzz/src/hb-shape.cc
  			hb_feature_t *feature)
  {
    hb_feature_t feat;
-diff --git a/gfx/harfbuzz/src/hb-shape.h b/gfx/harfbuzz/src/hb-shape.h
---- a/gfx/harfbuzz/src/hb-shape.h
-+++ b/gfx/harfbuzz/src/hb-shape.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-shape.h b/mozilla/gfx/harfbuzz/src/hb-shape.h
+--- a/mozilla/gfx/harfbuzz/src/hb-shape.h
++++ b/mozilla/gfx/harfbuzz/src/hb-shape.h
 @@ -42,37 +42,37 @@ HB_BEGIN_DECLS
  
  typedef struct hb_feature_t {
@@ -8612,9 +8612,9 @@ diff --git a/gfx/harfbuzz/src/hb-shape.h b/gfx/harfbuzz/src/hb-shape.h
  HB_END_DECLS
  
  #endif /* HB_SHAPE_H */
-diff --git a/gfx/harfbuzz/src/hb-shaper-list.hh b/gfx/harfbuzz/src/hb-shaper-list.hh
---- a/gfx/harfbuzz/src/hb-shaper-list.hh
-+++ b/gfx/harfbuzz/src/hb-shaper-list.hh
+diff --git a/mozilla/gfx/harfbuzz/src/hb-shaper-list.hh b/mozilla/gfx/harfbuzz/src/hb-shaper-list.hh
+--- a/mozilla/gfx/harfbuzz/src/hb-shaper-list.hh
++++ b/mozilla/gfx/harfbuzz/src/hb-shaper-list.hh
 @@ -41,15 +41,18 @@ HB_SHAPER_IMPLEMENT (coretext_aat)
  
  #ifdef HAVE_OT
@@ -8634,9 +8634,9 @@ diff --git a/gfx/harfbuzz/src/hb-shaper-list.hh b/gfx/harfbuzz/src/hb-shaper-lis
  #ifdef HAVE_FALLBACK
  HB_SHAPER_IMPLEMENT (fallback) /* <--- This should be last. */
  #endif
-diff --git a/gfx/harfbuzz/src/hb-unicode.h b/gfx/harfbuzz/src/hb-unicode.h
---- a/gfx/harfbuzz/src/hb-unicode.h
-+++ b/gfx/harfbuzz/src/hb-unicode.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-unicode.h b/mozilla/gfx/harfbuzz/src/hb-unicode.h
+--- a/mozilla/gfx/harfbuzz/src/hb-unicode.h
++++ b/mozilla/gfx/harfbuzz/src/hb-unicode.h
 @@ -169,52 +169,52 @@ typedef enum
   */
  
@@ -8924,9 +8924,9 @@ diff --git a/gfx/harfbuzz/src/hb-unicode.h b/gfx/harfbuzz/src/hb-unicode.h
  HB_END_DECLS
  
  #endif /* HB_UNICODE_H */
-diff --git a/gfx/harfbuzz/src/hb-uniscribe.cc b/gfx/harfbuzz/src/hb-uniscribe.cc
---- a/gfx/harfbuzz/src/hb-uniscribe.cc
-+++ b/gfx/harfbuzz/src/hb-uniscribe.cc
+diff --git a/mozilla/gfx/harfbuzz/src/hb-uniscribe.cc b/mozilla/gfx/harfbuzz/src/hb-uniscribe.cc
+--- a/mozilla/gfx/harfbuzz/src/hb-uniscribe.cc
++++ b/mozilla/gfx/harfbuzz/src/hb-uniscribe.cc
 @@ -914,17 +914,17 @@ retry:
  				     log_clusters + chars_offset,
  				     char_props + chars_offset,
@@ -8965,9 +8965,9 @@ diff --git a/gfx/harfbuzz/src/hb-uniscribe.cc b/gfx/harfbuzz/src/hb-uniscribe.cc
      hb_buffer_reverse (buffer);
  
    /* Wow, done! */
-diff --git a/gfx/harfbuzz/src/hb-uniscribe.h b/gfx/harfbuzz/src/hb-uniscribe.h
---- a/gfx/harfbuzz/src/hb-uniscribe.h
-+++ b/gfx/harfbuzz/src/hb-uniscribe.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-uniscribe.h b/mozilla/gfx/harfbuzz/src/hb-uniscribe.h
+--- a/mozilla/gfx/harfbuzz/src/hb-uniscribe.h
++++ b/mozilla/gfx/harfbuzz/src/hb-uniscribe.h
 @@ -29,18 +29,18 @@
  
  #include "hb.h"
@@ -8989,9 +8989,9 @@ diff --git a/gfx/harfbuzz/src/hb-uniscribe.h b/gfx/harfbuzz/src/hb-uniscribe.h
  HB_END_DECLS
  
  #endif /* HB_UNISCRIBE_H */
-diff --git a/gfx/harfbuzz/src/hb-version.h b/gfx/harfbuzz/src/hb-version.h
---- a/gfx/harfbuzz/src/hb-version.h
-+++ b/gfx/harfbuzz/src/hb-version.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb-version.h b/mozilla/gfx/harfbuzz/src/hb-version.h
+--- a/mozilla/gfx/harfbuzz/src/hb-version.h
++++ b/mozilla/gfx/harfbuzz/src/hb-version.h
 @@ -33,34 +33,34 @@
  
  #include "hb-common.h"
@@ -9032,9 +9032,9 @@ diff --git a/gfx/harfbuzz/src/hb-version.h b/gfx/harfbuzz/src/hb-version.h
  HB_END_DECLS
  
  #endif /* HB_VERSION_H */
-diff --git a/gfx/harfbuzz/src/hb-version.h.in b/gfx/harfbuzz/src/hb-version.h.in
---- a/gfx/harfbuzz/src/hb-version.h.in
-+++ b/gfx/harfbuzz/src/hb-version.h.in
+diff --git a/mozilla/gfx/harfbuzz/src/hb-version.h.in b/mozilla/gfx/harfbuzz/src/hb-version.h.in
+--- a/mozilla/gfx/harfbuzz/src/hb-version.h.in
++++ b/mozilla/gfx/harfbuzz/src/hb-version.h.in
 @@ -42,25 +42,25 @@ HB_BEGIN_DECLS
  
  #define HB_VERSION_STRING "@HB_VERSION@"
@@ -9064,9 +9064,9 @@ diff --git a/gfx/harfbuzz/src/hb-version.h.in b/gfx/harfbuzz/src/hb-version.h.in
  HB_END_DECLS
  
  #endif /* HB_VERSION_H */
-diff --git a/gfx/harfbuzz/src/hb.h b/gfx/harfbuzz/src/hb.h
---- a/gfx/harfbuzz/src/hb.h
-+++ b/gfx/harfbuzz/src/hb.h
+diff --git a/mozilla/gfx/harfbuzz/src/hb.h b/mozilla/gfx/harfbuzz/src/hb.h
+--- a/mozilla/gfx/harfbuzz/src/hb.h
++++ b/mozilla/gfx/harfbuzz/src/hb.h
 @@ -23,16 +23,20 @@
   *
   * Red Hat Author(s): Behdad Esfahbod
@@ -9088,9 +9088,9 @@ diff --git a/gfx/harfbuzz/src/hb.h b/gfx/harfbuzz/src/hb.h
  #include "hb-font.h"
  #include "hb-set.h"
  #include "hb-shape.h"
-diff --git a/gfx/harfbuzz/src/sample.py b/gfx/harfbuzz/src/sample.py
---- a/gfx/harfbuzz/src/sample.py
-+++ b/gfx/harfbuzz/src/sample.py
+diff --git a/mozilla/gfx/harfbuzz/src/sample.py b/mozilla/gfx/harfbuzz/src/sample.py
+--- a/mozilla/gfx/harfbuzz/src/sample.py
++++ b/mozilla/gfx/harfbuzz/src/sample.py
 @@ -28,16 +28,22 @@ del blob
  font = hb.font_create (face)
  upem = hb.face_get_upem (face)
@@ -9114,9 +9114,9 @@ diff --git a/gfx/harfbuzz/src/sample.py b/gfx/harfbuzz/src/sample.py
  
  infos = hb.buffer_get_glyph_infos (buf)
  positions = hb.buffer_get_glyph_positions (buf)
-diff --git a/gfx/harfbuzz/src/test.cc b/gfx/harfbuzz/src/test.cc
---- a/gfx/harfbuzz/src/test.cc
-+++ b/gfx/harfbuzz/src/test.cc
+diff --git a/mozilla/gfx/harfbuzz/src/test.cc b/mozilla/gfx/harfbuzz/src/test.cc
+--- a/mozilla/gfx/harfbuzz/src/test.cc
++++ b/mozilla/gfx/harfbuzz/src/test.cc
 @@ -115,17 +115,17 @@ main (int argc, char **argv)
    {
      hb_glyph_info_t *info = &infos[i];
