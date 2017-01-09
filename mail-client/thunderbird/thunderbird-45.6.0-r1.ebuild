@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -130,7 +130,9 @@ src_prepare() {
 
 	# Apply our patchset from firefox to thunderbird as well
 	pushd "${S}"/mozilla &>/dev/null || die
-	eapply "${WORKDIR}/firefox"
+	eapply "${WORKDIR}/firefox" \
+		"${FILESDIR}"/mozilla_configure_regexp_esr.patch \
+		"${FILESDIR}"/update_h2_curve.patch
 	popd &>/dev/null || die
 
 	# Ensure that are plugins dir is enabled as default
