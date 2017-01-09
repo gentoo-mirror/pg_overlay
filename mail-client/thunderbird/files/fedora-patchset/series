@@ -1,4 +1,3 @@
-thunderbird-install-dir.patch
 thunderbird-objdir.patch
 build-nspr-prbool.patch
 build-werror.patch
