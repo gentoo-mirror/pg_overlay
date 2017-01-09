@@ -1,6 +1,6 @@
-diff -up thunderbird-31.0/comm-esr31/client.mk.old thunderbird-31.0/comm-esr31/client.mk
---- thunderbird-31.0/comm-esr31/client.mk.old	2014-07-18 02:04:05.000000000 +0200
-+++ thunderbird-31.0/comm-esr31/client.mk	2014-07-30 10:57:01.177453550 +0200
+diff -up a/client.mk b/client.mk
+--- a/client.mk	2014-07-18 02:04:05.000000000 +0200
++++ b/client.mk	2014-07-30 10:57:01.177453550 +0200
 @@ -131,7 +131,7 @@ endif
  
  
