@@ -217,6 +217,8 @@ src_configure() {
 	# Other tb-specific settings
 	mozconfig_annotate '' --with-user-appdir=.thunderbird
 
+	mozconfig_annotate '' --with-system-icu
+
 	mozconfig_use_enable ldap
 
 	mozlinguas_mozconfig
