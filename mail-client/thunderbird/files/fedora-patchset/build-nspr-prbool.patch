@@ -1,6 +1,6 @@
-diff -up a/media/webrtc/trunk/webrtc/base/nssidentity.h b/media/webrtc/trunk/webrtc/base/nssidentity.h
---- a/media/webrtc/trunk/webrtc/base/nssidentity.h	2015-04-07 10:29:51.919137851 +0200
-+++ b/media/webrtc/trunk/webrtc/base/nssidentity.h	2015-04-07 10:33:06.886532753 +0200
+diff -up a/mozilla-beta/media/webrtc/trunk/webrtc/base/nssidentity.h a/mozilla-beta/media/webrtc/trunk/webrtc/base/nssidentity.h
+--- a/mozilla-beta/media/webrtc/trunk/webrtc/base/nssidentity.h	2015-04-07 10:29:51.919137851 +0200
++++ b/mozilla-beta/media/webrtc/trunk/webrtc/base/nssidentity.h	2015-04-07 10:33:06.886532753 +0200
 @@ -15,6 +15,7 @@
  
  #include "cert.h"
@@ -9,9 +9,9 @@ diff -up a/media/webrtc/trunk/webrtc/base/nssidentity.h b/media/webrtc/trunk/web
  #include "hasht.h"
  #include "keythi.h"
  
-diff -up a/modules/libmar/sign/nss_secutil.h b/modules/libmar/sign/nss_secutil.h
---- a/modules/libmar/sign/nss_secutil.h	2015-04-07 10:33:13.079513533 +0200
-+++ b/modules/libmar/sign/nss_secutil.h	2015-04-07 10:33:16.101504154 +0200
+diff -up a/mozilla-beta/modules/libmar/sign/nss_secutil.h a/mozilla-beta/modules/libmar/sign/nss_secutil.h
+--- a/mozilla-beta/modules/libmar/sign/nss_secutil.h	2015-04-07 10:33:13.079513533 +0200
++++ b/mozilla-beta/modules/libmar/sign/nss_secutil.h	2015-04-07 10:33:16.101504154 +0200
 @@ -11,6 +11,7 @@
  #include "nss.h"
  #include "pk11pub.h"
@@ -20,9 +20,9 @@ diff -up a/modules/libmar/sign/nss_secutil.h b/modules/libmar/sign/nss_secutil.h
  #include "hasht.h"
  #include "cert.h"
  #include "key.h"
-diff -up a/security/certverifier/ExtendedValidation.cpp b/security/certverifier/ExtendedValidation.cpp
---- a/security/certverifier/ExtendedValidation.cpp	2015-04-07 10:36:42.693902941 +0200
-+++ b/security/certverifier/ExtendedValidation.cpp	2015-04-07 10:36:45.925893606 +0200
+diff -up a/mozilla-beta/security/certverifier/ExtendedValidation.cpp a/mozilla-beta/security/certverifier/ExtendedValidation.cpp
+--- a/mozilla-beta/security/certverifier/ExtendedValidation.cpp	2015-04-07 10:36:42.693902941 +0200
++++ b/mozilla-beta/security/certverifier/ExtendedValidation.cpp	2015-04-07 10:36:45.925893606 +0200
 @@ -9,6 +9,7 @@
  #include "cert.h"
  #include "certdb.h"
@@ -31,9 +31,9 @@ diff -up a/security/certverifier/ExtendedValidation.cpp b/security/certverifier/
  #include "hasht.h"
  #include "pkix/stdkeywords.h"
  #include "pkix/pkixtypes.h"
-diff -up a/security/certverifier/OCSPCache.h b/security/certverifier/OCSPCache.h
---- a/security/certverifier/OCSPCache.h	2015-04-07 10:36:34.106927741 +0200
-+++ b/security/certverifier/OCSPCache.h	2015-04-07 10:36:35.940922444 +0200
+diff -up a/mozilla-beta/security/certverifier/OCSPCache.h a/mozilla-beta/security/certverifier/OCSPCache.h
+--- a/mozilla-beta/security/certverifier/OCSPCache.h	2015-04-07 10:36:34.106927741 +0200
++++ b/mozilla-beta/security/certverifier/OCSPCache.h	2015-04-07 10:36:35.940922444 +0200
 @@ -25,6 +25,7 @@
  #ifndef mozilla_psm_OCSPCache_h
  #define mozilla_psm_OCSPCache_h
@@ -42,9 +42,9 @@ diff -up a/security/certverifier/OCSPCache.h b/security/certverifier/OCSPCache.h
  #include "hasht.h"
  #include "mozilla/Mutex.h"
  #include "mozilla/Vector.h"
-diff -up a/security/manager/ssl/src/nsCryptoHash.h b/security/manager/ssl/src/nsCryptoHash.h
---- a/security/manager/ssl/src/nsCryptoHash.h	2015-04-07 10:36:15.887980360 +0200
-+++ b/security/manager/ssl/src/nsCryptoHash.h	2015-04-07 10:36:18.124973899 +0200
+diff -up a/mozilla-beta/security/manager/ssl/src/nsCryptoHash.h a/mozilla-beta/security/manager/ssl/src/nsCryptoHash.h
+--- a/mozilla-beta/security/manager/ssl/src/nsCryptoHash.h	2015-04-07 10:36:15.887980360 +0200
++++ b/mozilla-beta/security/manager/ssl/src/nsCryptoHash.h	2015-04-07 10:36:18.124973899 +0200
 @@ -10,6 +10,7 @@
  #include "nsICryptoHash.h"
  #include "nsICryptoHMAC.h"
@@ -53,9 +53,9 @@ diff -up a/security/manager/ssl/src/nsCryptoHash.h b/security/manager/ssl/src/ns
  #include "hasht.h"
  #include "secmodt.h"
  
-diff -up a/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp b/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp
---- a/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp	2015-04-07 10:36:25.065953853 +0200
-+++ b/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp	2015-04-07 10:36:27.319947343 +0200
+diff -up a/mozilla-beta/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp a/mozilla-beta/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp
+--- a/mozilla-beta/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp	2015-04-07 10:36:25.065953853 +0200
++++ b/mozilla-beta/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp	2015-04-07 10:36:27.319947343 +0200
 @@ -15,6 +15,7 @@
  
  #include <stdio.h>
