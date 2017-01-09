@@ -14,7 +14,9 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="!<sys-apps/openrc-0.13"
+RDEPEND="
+	!<sys-apps/openrc-0.13
+	>=app-shells/push-2.0"
 
 DISABLE_AUTOFORMATTING="true"
 DOC_CONTENTS="To use zram, activate it in your kernel and add it to default runlevel:
