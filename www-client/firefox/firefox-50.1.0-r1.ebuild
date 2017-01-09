@@ -116,7 +116,8 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox" \
-		"${FILESDIR}"/${PN}-48.0-pgo.patch
+		"${FILESDIR}"/mozilla_configure_regexp.patch \
+		"${FILESDIR}"/update_h2_curve.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
