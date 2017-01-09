@@ -171,9 +171,9 @@ src_prepare() {
 	fi
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done	
+	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	#do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	#done	
 
 	# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
