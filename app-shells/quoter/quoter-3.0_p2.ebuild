@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit vcs-snapshot
+inherit toolchain-funcs vcs-snapshot
 
 DESCRIPTION="Quote arguments or standard input for usage in POSIX shell by eval"
 HOMEPAGE="https://github.com/vaeth/quoter/"
