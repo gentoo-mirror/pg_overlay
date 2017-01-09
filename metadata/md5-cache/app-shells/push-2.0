@@ -8,4 +8,4 @@ SLOT=0
 SRC_URI=https://github.com/vaeth/push/archive/v2.0.tar.gz -> push-2.0.tar.gz
 _eclass_exported_funcs=src_unpack:vcs-snapshot src_install:-
 _eclasses_=vcs-snapshot	2b65ecb2d0f91e4322c2ac8d673993bd
-_md5_=2b320b4f77de4264fba7b90fef06d759
+_md5_=00365f3fae84e682fb4d97a235ffbc32
