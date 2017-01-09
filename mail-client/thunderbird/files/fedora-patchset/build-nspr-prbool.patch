@@ -42,9 +42,9 @@ diff -up a/mozilla/security/certverifier/OCSPCache.h a/mozilla/security/certveri
  #include "hasht.h"
  #include "mozilla/Mutex.h"
  #include "mozilla/Vector.h"
-diff -up a/mozilla/security/manager/ssl/src/nsCryptoHash.h a/mozilla/security/manager/ssl/src/nsCryptoHash.h
---- a/mozilla/security/manager/ssl/src/nsCryptoHash.h	2015-04-07 10:36:15.887980360 +0200
-+++ b/mozilla/security/manager/ssl/src/nsCryptoHash.h	2015-04-07 10:36:18.124973899 +0200
+diff -up a/mozilla/security/manager/ssl/nsCryptoHash.h a/mozilla/security/manager/ssl/nsCryptoHash.h
+--- a/mozilla/security/manager/ssl/nsCryptoHash.h	2015-04-07 10:36:15.887980360 +0200
++++ b/mozilla/security/manager/ssl/nsCryptoHash.h	2015-04-07 10:36:18.124973899 +0200
 @@ -10,6 +10,7 @@
  #include "nsICryptoHash.h"
  #include "nsICryptoHMAC.h"
