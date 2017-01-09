@@ -1,9 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
-inherit readme.gentoo-r1 systemd
+RESTRICT="mirror"
+inherit readme.gentoo-r1
 
 DESCRIPTION="Scripts to support compressed swap devices or ramdisks with zram"
 HOMEPAGE="https://github.com/vaeth/zram-init/"
@@ -14,7 +14,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-RDEPEND="!<sys-apps/openrc-0.13"
+RDEPEND=">=app-shells/push-2.0
+	!<sys-apps/openrc-0.13"
 
 DISABLE_AUTOFORMATTING="true"
 DOC_CONTENTS="To use zram, activate it in your kernel and add it to default runlevel:
@@ -33,11 +34,11 @@ src_install() {
 	dosbin sbin/*
 	doinitd openrc/init.d/*
 	doconfd openrc/conf.d/*
-	systemd_dounit systemd/system/*
 	insinto /etc/modprobe.d
 	doins modprobe.d/*
 	insinto /usr/share/zsh/site-functions
 	doins zsh/*
+	dodoc AUTHORS ChangeLog README
 	readme.gentoo_create_doc
 }
 
