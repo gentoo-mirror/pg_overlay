@@ -1,7 +1,7 @@
 # Remove when mozbz#1269319 lands
 
---- firefox-45.0.1-orig/js/src/Makefile.in	2016-05-17 14:53:58.753178403 +0200
-+++ firefox-45.0.1/js/src/Makefile.in	2016-05-17 14:53:28.432817862 +0200
+--- a/mozilla/js/src/Makefile.in	2016-05-17 14:53:58.753178403 +0200
++++ b/mozilla/js/src/Makefile.in	2016-05-17 14:53:28.432817862 +0200
 @@ -144,6 +144,11 @@ distclean::
  
  CFLAGS += $(MOZ_ZLIB_CFLAGS)
