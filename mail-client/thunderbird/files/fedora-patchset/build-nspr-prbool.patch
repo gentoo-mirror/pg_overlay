@@ -53,14 +53,4 @@ diff -up a/mozilla/security/manager/ssl/nsCryptoHash.h a/mozilla/security/manage
  #include "hasht.h"
  #include "secmodt.h"
  
-diff -up a/mozilla/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp a/mozilla/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp
---- a/mozilla/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp	2015-04-07 10:36:25.065953853 +0200
-+++ b/mozilla/security/manager/ssl/tests/unit/tlsserver/cmd/ClientAuthServer.cpp	2015-04-07 10:36:27.319947343 +0200
-@@ -15,6 +15,7 @@
- 
- #include <stdio.h>
- 
-+#include "prtypes.h"
- #include "hasht.h"
- #include "ScopedNSSTypes.h"
- #include "ssl.h"
+
