@@ -33,6 +33,9 @@ IUSE_INPUT_DEVICES="
 	input_devices_roccat_ryosmk
 	input_devices_roccat_ryostkl
 	input_devices_roccat_savu
+	input_devices_roccat_skeltr
+	input_devices_roccat_sova
+	input_devices_roccat_suora
 	input_devices_roccat_tyon
 "
 IUSE="${IUSE_INPUT_DEVICES}"
