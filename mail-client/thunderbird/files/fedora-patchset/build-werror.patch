@@ -1,7 +1,7 @@
 diff -up a/mozilla/media/libstagefright/moz.build b/mozilla/media/libstagefright/moz.build
 --- a/mozilla/media/libstagefright/moz.build.old	2014-08-26 05:38:08.000000000 +0200
 +++ b/mozilla/media/libstagefright/moz.build	2014-08-27 15:40:12.030299348 +0200
-@@ -120,7 +120,6 @@ elif CONFIG['GNU_CXX']:
+@@ -158,7 +158,6 @@ elif CONFIG['GNU_CXX']:
          '-Wno-sign-compare'
      ]
      CXXFLAGS += [
