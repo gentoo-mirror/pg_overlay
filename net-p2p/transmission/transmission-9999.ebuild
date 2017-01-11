@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,7 +6,7 @@ EAPI=6
 
 inherit cmake-utils git-r3 gnome2-utils readme.gentoo-r1 user xdg-utils
 
-EGIT_REPO_URI="https://github.com/transmission/transmission"
+EGIT_REPO_URI="git://github.com/transmission/transmission.git"
 
 DESCRIPTION="A fast, easy, and free BitTorrent client"
 HOMEPAGE="https://transmissionbt.com/"
