@@ -38,7 +38,8 @@ src_prepare() {
 	epatch \
 		"${FILESDIR}"/${P}-gentoo.patch \
 		"${FILESDIR}"/${P}-fat.patch \
-		"${FILESDIR}"/${P}-non-root.patch
+		"${FILESDIR}"/${P}-non-root.patch \
+		"${FILESDIR}"/${P}-long-bit.patch
 
 	l10n_find_plocales_changes "src/po" "" ".po" || die
 	sed -i \
