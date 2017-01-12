@@ -8,7 +8,7 @@ inherit autotools eutils flag-o-matic linux-info multilib user
 
 DESCRIPTION="The Music Player Daemon (mpd)"
 HOMEPAGE="https://www.musicpd.org"
-SRC_URI="https://www.musicpd.org/download/${PN}/${PV}/${P}.tar.xz"
+SRC_URI="https://www.musicpd.org/download/${PN}/${PV%.*}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
