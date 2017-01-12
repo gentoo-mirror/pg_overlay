@@ -37,8 +37,8 @@ S=${WORKDIR}/${MY_P}
 src_prepare() {
 	epatch \
 		"${FILESDIR}"/${P}-gentoo.patch \
-		"${FILESDIR}"/${P}-fat.patch \
-		"${FILESDIR}"/${P}-musl.patch
+		"${FILESDIR}"/${P}-non-root.patch \
+		"${FILESDIR}"/${P}-long-bit.patch
 
 	l10n_find_plocales_changes "src/po" "" ".po" || die
 	sed -i \
@@ -55,7 +55,7 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" PREFIX="${EPREFIX}/usr" install $(usex gtk 'install-gui' '')
-	dodoc README docs/*
+	dodoc README.md docs/*
 	if use gtk ; then
 		make_desktop_entry /usr/sbin/gtk-lshw "Hardware Lister" "/usr/share/lshw/artwork/logo.svg"
 	fi
