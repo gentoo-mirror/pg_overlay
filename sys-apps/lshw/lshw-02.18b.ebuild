@@ -55,7 +55,7 @@ src_compile() {
 
 src_install() {
 	emake DESTDIR="${D}" PREFIX="${EPREFIX}/usr" install $(usex gtk 'install-gui' '')
-	dodoc README docs/*
+	dodoc README.md docs/*
 	if use gtk ; then
 		make_desktop_entry /usr/sbin/gtk-lshw "Hardware Lister" "/usr/share/lshw/artwork/logo.svg"
 	fi
