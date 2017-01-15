@@ -40,7 +40,6 @@ DEPEND="${COMMON_DEPEND}
 PATCHES=(
 	"${FILESDIR}/${PN}-docs.patch"
 	"${FILESDIR}/${PN}-lrt.patch"
-	"${FILESDIR}/${P}-session.patch"
 	"${FILESDIR}/${P}-login1-perms.patch"
 )
 
