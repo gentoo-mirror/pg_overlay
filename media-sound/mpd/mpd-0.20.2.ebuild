@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sh ~x86 ~x86-fbsd ~x64-macos"
 IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
-	+fifo +ffmpeg flac fluidsynth +glib gme +icu +id3tag +inotify +ipv6 jack
+	+fifo +ffmpeg flac fluidsynth gme +icu +id3tag +inotify +ipv6 jack
 	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
 	mpg123 musepack +network nfs ogg openal opus oss pipe pulseaudio recorder
 	samba selinux sid +signalfd sndfile soundcloud sqlite tcpd twolame
@@ -27,19 +27,10 @@ ENCODER_PLUGINS="audiofile flac lame twolame vorbis"
 
 REQUIRED_USE="|| ( ${OUTPUT_PLUGINS} )
 	|| ( ${DECODER_PLUGINS} )
-	ao? ( glib )
-	gme? ( glib )
-	jack? ( glib )
-	network? ( || ( ${ENCODER_PLUGINS} )
-		glib )
+	network? ( || ( ${ENCODER_PLUGINS} ) )
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
-	sid? ( glib )
-	soundcloud? ( glib )
-	sqlite? ( glib )
 	opus? ( ogg )
-	upnp? ( expat )
-	vorbis? ( glib )
-	wavpack? ( glib )"
+	upnp? ( expat )"
 
 CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	adplug? ( media-libs/adplug )
@@ -58,7 +49,6 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	)
 	flac? ( media-libs/flac[ogg?] )
 	fluidsynth? ( media-sound/fluidsynth )
-	glib? ( dev-libs/glib:2 )
 	gme? ( >=media-libs/game-music-emu-0.6.0_pre20120802 )
 	icu? ( dev-libs/icu:= )
 	id3tag? ( media-libs/libid3tag )
@@ -212,7 +202,6 @@ src_configure() {
 		$(use_enable wildmidi)		\
 		$(use_enable zip zzip)		\
 		$(use_enable icu)			\
-		$(use_enable glib)			\
 		$(use_enable faad aac)		\
 		$(use_with zeroconf zeroconf avahi) \
 		--with-systemdsystemunitdir=$(systemd_get_systemunitdir) \
