@@ -59,6 +59,7 @@ sys-apps/lshw 02.18b: Hardware Lister
 sys-apps/razercfg 0.38: Utility for advanced configuration of Razer mice (DeathAdder, Krait, Lachesis)
 sys-apps/roccat-tools 5.5.0 5.6.0: Utility for advanced configuration of Roccat devices
 sys-apps/util-linux 2.29: Various useful Linux utilities
+sys-auth/elogind 219.14: The systemd project's logind, extracted to a standalone package
 sys-block/zram-init 6.1.0: Scripts to support compressed swap devices or ramdisks with zram
 sys-boot/efibootmgr 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
