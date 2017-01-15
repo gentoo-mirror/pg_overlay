@@ -44,7 +44,6 @@ PDEPEND="policykit? ( sys-auth/polkit )"
 PATCHES=(
 	"${FILESDIR}/${PN}-docs.patch"
 	"${FILESDIR}/${PN}-lrt.patch"
-	"${FILESDIR}/${P}-session.patch"
 	"${FILESDIR}/${P}-login1-perms.patch"
 	"${FILESDIR}/${P}-gperf.patch"
 	"${FILESDIR}/${P}-glibc.patch" # bug 605744
