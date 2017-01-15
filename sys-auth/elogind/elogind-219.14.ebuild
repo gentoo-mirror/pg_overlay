@@ -13,11 +13,11 @@ SRC_URI="https://wingolog.org/pub/${PN}/${P}.tar.xz"
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="acl apparmor pam policykit +seccomp selinux"
+IUSE="acl apparmor pam policykit selinux +seccomp"
 
 COMMON_DEPEND="
-	sys-apps/util-linux
 	sys-libs/libcap
+	sys-apps/util-linux
 	virtual/libudev:=
 	acl? ( sys-apps/acl )
 	apparmor? ( sys-libs/libapparmor )
@@ -27,25 +27,21 @@ COMMON_DEPEND="
 "
 RDEPEND="${COMMON_DEPEND}
 	sys-apps/dbus
+	policykit? ( sys-auth/polkit )
 	!sys-auth/systemd
 "
 DEPEND="${COMMON_DEPEND}
-	app-text/docbook-xml-dtd:4.2
-	app-text/docbook-xml-dtd:4.5
-	app-text/docbook-xsl-stylesheets
-	dev-util/gperf
+	=dev-util/gperf-3.0*
 	dev-util/intltool
 	sys-devel/libtool
 	virtual/pkgconfig
 "
-PDEPEND="policykit? ( sys-auth/polkit )"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-docs.patch"
 	"${FILESDIR}/${PN}-lrt.patch"
+	"${FILESDIR}/${P}-session.patch"
 	"${FILESDIR}/${P}-login1-perms.patch"
-	"${FILESDIR}/${P}-gperf.patch"
-	"${FILESDIR}/${P}-glibc.patch" # bug 605744
 )
 
 pkg_setup() {
@@ -81,8 +77,8 @@ src_install() {
 	default
 	find "${D}" -name '*.la' -delete || die
 
-	# Build system ignores --with-rootlibdir and puts pkgconfig below
-	# /$(libdir) - Move it to /usr/$(libdir)/pkgconfig
+	# Unfortunately the build system puts the pkgconfig file(s)
+	# into $(libdir)/pkgconfig - Move it to /usr/$(libdir)/pkgconfig
 	mkdir -p "${ED%/}"/usr/$(get_libdir) || die
 	mv "${ED%/}"/$(get_libdir)/pkgconfig "${ED%/}"/usr/$(get_libdir)/ || die
 

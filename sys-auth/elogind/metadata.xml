@@ -2,7 +2,8 @@
 <!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="project">
-		<email>freedesktop-bugs@gentoo.org</email>
+		<email>kde@gentoo.org</email>
+		<name>Gentoo KDE Project</name>
 	</maintainer>
 	<use>
 		<flag name="apparmor">Enable AppArmor support</flag>
