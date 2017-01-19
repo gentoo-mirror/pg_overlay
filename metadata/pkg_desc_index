@@ -32,6 +32,7 @@ media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptio
 media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/kid3 3.4.2: A simple tag editor for KDE
 media-sound/mpd 0.20.2: The Music Player Daemon (mpd)
+media-sound/pulseaudio 10.0: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/quimup 1.4.2: A Qt5 client for the music player daemon (MPD) written in C++
 media-sound/rbutil 9999: Rockbox opensource firmware manager for mp3 players
