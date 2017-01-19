@@ -22,7 +22,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd
 IUSE="+alsa +alsa-plugin +asyncns bluetooth +caps dbus doc equalizer +gdbm +glib
 gnome gtk ipv6 jack libsamplerate libressl lirc native-headset neon ofono-headset
 +orc oss qt4 realtime selinux sox ssl systemd system-wide tcpd test +udev
-+webrtc-aec +X xen zeroconf"
++webrtc-aec +X zeroconf"
 
 # See "*** BLUEZ support not found (requires D-Bus)" in configure.ac
 REQUIRED_USE="
@@ -76,7 +76,6 @@ RDEPEND="
 	>=media-libs/speex-1.2_rc1
 	gdbm? ( sys-libs/gdbm )
 	webrtc-aec? ( >=media-libs/webrtc-audio-processing-0.2 )
-	xen? ( app-emulation/xen-tools )
 	systemd? ( sys-apps/systemd:0=[${MULTILIB_USEDEP}] )
 	dev-libs/libltdl:0
 	selinux? ( sec-policy/selinux-pulseaudio )
@@ -195,7 +194,6 @@ multilib_src_configure() {
 		$(use_enable ipv6)
 		$(use_enable ssl openssl)
 		$(use_enable webrtc-aec)
-		$(use_enable xen)
 		$(use_with caps)
 		$(use_with equalizer fftw)
 		--disable-adrian-aec
