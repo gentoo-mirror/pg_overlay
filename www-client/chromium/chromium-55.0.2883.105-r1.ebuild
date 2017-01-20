@@ -263,7 +263,6 @@ src_prepare() {
 		third_party/google_input_tools/third_party/closure_library/third_party/closure
 		third_party/hunspell
 		third_party/iccjpeg
-		third_party/inspector_protocol
 		third_party/jinja2
 		third_party/jstemplate
 		third_party/khronos
@@ -320,7 +319,6 @@ src_prepare() {
 		third_party/zlib/google
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
-		v8/third_party/inspector_protocol
 		third_party/libva
 	)
 	if ! use system-ffmpeg; then
