@@ -7,7 +7,7 @@ inherit font unpacker
 
 DESCRIPTION="Open source coding font"
 HOMEPAGE="http://be5invis.github.io/Iosevka "
-SRC_URI="https://github.com/be5invis/Iosevka/releases/download/v${PV}/${PN}-pack-${PV}.7z"
+SRC_URI="https://github.com/be5invis/Iosevka/releases/download/v${PV}/${PN}-pack-${PV}.zip"
 
 LICENSE="OFL-1.1"
 SLOT="0"
