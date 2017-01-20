@@ -320,6 +320,7 @@ src_prepare() {
 		third_party/zlib/google
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
+		v8/third_party/inspector_protocol
 		third_party/libva
 	)
 	if ! use system-ffmpeg; then
