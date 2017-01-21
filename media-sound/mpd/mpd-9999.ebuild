@@ -163,7 +163,7 @@ src_configure() {
 		$(use_enable adplug)		\
 		$(use_enable alsa)			\
 		$(use_enable ao)			\
-		$(use_enable audiofile)		\
+		$(use_enable audiofile)		\src/lib/sacdiso/sacd_disc.cpp
 		$(use_enable zlib)			\
 		$(use_enable bzip2)			\
 		$(use_enable cdio cdio-paranoia) \
@@ -222,10 +222,10 @@ src_install() {
 
 	newinitd "${FILESDIR}"/${PN}2.init ${PN}
 
-	if use unicode; then
-		sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
-			"${ED}"/etc/mpd.conf || die "sed failed"
-	fi
+	#if use unicode; then
+	#	sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
+	#		"${ED}"/etc/mpd.conf || die "sed failed"
+	#fi
 
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/${PN}.logrotate ${PN}
