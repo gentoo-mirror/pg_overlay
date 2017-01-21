@@ -221,11 +221,6 @@ src_install() {
 
 	newinitd "${FILESDIR}"/${PN}2.init ${PN}
 
-	if use unicode; then
-		sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
-			"${ED}"/etc/mpd.conf || die "sed failed"
-	fi
-
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/${PN}.logrotate ${PN}
 
