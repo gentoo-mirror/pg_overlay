@@ -217,8 +217,8 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install
 
-	insinto /etc
-	newins doc/mpdconf.dist mpd.conf
+	#insinto /etc
+	#newins doc/mpdconf.dist mpd.conf
 
 	newinitd "${FILESDIR}"/${PN}2.init ${PN}
 
