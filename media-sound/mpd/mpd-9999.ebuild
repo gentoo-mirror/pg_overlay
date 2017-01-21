@@ -31,7 +31,7 @@ REQUIRED_USE="|| ( ${OUTPUT_PLUGINS} )
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
 	opus? ( ogg )
 	upnp? ( expat )
-	sacd? ( cdio upnp )"
+	sacd? ( cdio )"
 
 CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	adplug? ( media-libs/adplug )
@@ -93,7 +93,7 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-# 	"${FILESDIR}"/glib.patch
+	"${FILESDIR}"/glib-upnp.patch
 )
 
 pkg_setup() {
@@ -123,8 +123,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	rm src/lib/sacdiso/sacd_disc.cpp
-	cp -f ${FILESDIR}/sacd_disc.cpp src/lib/sacdiso/sacd_disc.cpp
 	default
 	eautoreconf
 }
