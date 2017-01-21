@@ -14,3 +14,14 @@ diff -Nuar a/src/lib/sacdiso/sacd_disc.cpp b/src/lib/sacdiso/sacd_disc.cpp
  //#include <math.h>
  #include <malloc.h>
  #include <string.h>
+diff -Nuar a/src/lib/sacdiso/sacd_metabase.h b/src/lib/sacdiso/sacd_metabase.h
+--- a/src/lib/sacdiso/sacd_metabase.h	2017-01-21 23:50:30.815968263 +0700
++++ b/src/lib/sacdiso/sacd_metabase.h	2017-01-22 01:11:55.135554756 +0700
+@@ -21,7 +21,6 @@
+ #define _SACD_METABASE_H_INCLUDED
+ 
+ #include <string>
+-#include <upnp/ixml.h>
+ 
+ #include "config.h"
+ #include "tag/TagHandler.hxx"
