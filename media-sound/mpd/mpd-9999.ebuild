@@ -18,7 +18,7 @@ IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
 	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
 	mpg123 musepack +network nfs ogg openal opus oss pipe pulseaudio recorder
 	samba selinux sid +signalfd sndfile soundcloud sqlite tcpd twolame
-	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib sacd"
+	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib +sacd"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio recorder"
 DECODER_PLUGINS="adplug audiofile faad ffmpeg flac fluidsynth mad mikmod
@@ -210,6 +210,7 @@ src_configure() {
 		${mpdconf}
 
 	sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
+	sed '/glib/d' src/lib/sacdiso/sacd_disc.cpp
 }
 
 src_install() {
