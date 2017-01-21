@@ -101,6 +101,7 @@ src_unpack() {
 		mkdir -p "${WORKDIR}"/mpd
 		S="${WORKDIR}"/mpd
 		EGIT_REPO_URI="git://git.musicpd.org/cgit/manisiutkin/${PN}.git"
+		git-r3_src_unpack
     fi
 }
 
