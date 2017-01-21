@@ -18,7 +18,7 @@ IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
 	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
 	mpg123 musepack +network nfs ogg openal opus oss pipe pulseaudio recorder
 	samba selinux sid +signalfd sndfile soundcloud sqlite tcpd twolame
-	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib"
+	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib sacd"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio recorder"
 DECODER_PLUGINS="adplug audiofile faad ffmpeg flac fluidsynth mad mikmod
@@ -30,7 +30,8 @@ REQUIRED_USE="|| ( ${OUTPUT_PLUGINS} )
 	network? ( || ( ${ENCODER_PLUGINS} ) )
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
 	opus? ( ogg )
-	upnp? ( expat )"
+	upnp? ( expat )
+	sacd? ( cdio )"
 
 CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	adplug? ( media-libs/adplug )
@@ -95,6 +96,13 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-0.18.conf.patch
 )
 
+src_unpack() {
+	if use sacd; then
+		unset SRC_URI
+		EGIT_REPO_URI="git://git.musicpd.org/cgit/manisiutkin/${PN}.git"
+	fi
+}
+
 pkg_setup() {
 	use network || ewarn "Icecast and Shoutcast streaming needs networking."
 	use fluidsynth && ewarn "Using fluidsynth is discouraged by upstream."
@@ -123,10 +131,6 @@ pkg_setup() {
 
 src_prepare() {
 	cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
-	#
-	cp -f "${FILESDIR}"/plugins/* src/encoder/plugins/ || die "cp failed"
-	cp -rf "${FILESDIR}"/lib/* src/lib || die "cp failed"
-	eapply "${FILESDIR}/iso.patch"
 	default
 	eautoreconf
 }
