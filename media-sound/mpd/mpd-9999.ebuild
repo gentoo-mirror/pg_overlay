@@ -31,7 +31,7 @@ REQUIRED_USE="|| ( ${OUTPUT_PLUGINS} )
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
 	opus? ( ogg )
 	upnp? ( expat )
-	sacd? ( cdio )"
+	sacd? ( cdio upnp )"
 
 CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	adplug? ( media-libs/adplug )
@@ -93,7 +93,7 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}"/glib-upnp.patch
+	"${FILESDIR}"/glib.patch
 )
 
 pkg_setup() {
