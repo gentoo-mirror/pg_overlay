@@ -131,7 +131,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	use !sacd && cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
+	use !sacd || cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
 	default
 	eautoreconf
 }
