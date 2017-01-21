@@ -16,7 +16,7 @@ diff -Nuar a/src/lib/sacdiso/sacd_disc.cpp b/src/lib/sacdiso/sacd_disc.cpp
  #include <string.h>
 diff -Nuar a/src/lib/sacdiso/sacd_metabase.h b/src/lib/sacdiso/sacd_metabase.h
 --- a/src/lib/sacdiso/sacd_metabase.h	2017-01-21 23:50:30.815968263 +0700
-+++ b/src/lib/sacdiso/sacd_metabase.h	2017-01-22 01:11:55.135554756 +0700
++++ b/src/lib/sacdiso/sacd_metabase.h	2017-01-22 01:24:27.259169270 +0700
 @@ -21,7 +21,6 @@
  #define _SACD_METABASE_H_INCLUDED
  
@@ -25,3 +25,19 @@ diff -Nuar a/src/lib/sacdiso/sacd_metabase.h b/src/lib/sacdiso/sacd_metabase.h
  
  #include "config.h"
  #include "tag/TagHandler.hxx"
+@@ -51,7 +50,6 @@
+ 	string store_path;
+ 	string store_file;
+ 	string         xml_file;
+-	IXML_Document* xmldoc;
+ 	bool metabase_loaded;
+ public:
+ 	sacd_metabase_t(sacd_disc_t* sacd_disc, const char* tags_path = nullptr, const char* tags_file = nullptr);
+@@ -59,7 +57,6 @@
+     bool get_info(uint32_t track_index, const struct TagHandler& handler, void* handler_ctx);
+ private:
+ 	bool init_xmldoc();
+-	IXML_Node* get_track_node(uint32_t track_index);
+ 	void utf2xml(string& src, string& dst);
+ 	void xml2utf(string& src, string& dst);
+ };
