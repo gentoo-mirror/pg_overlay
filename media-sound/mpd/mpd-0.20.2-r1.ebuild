@@ -126,6 +126,7 @@ src_prepare() {
 	#
 	cp -f "${FILESDIR}"/plugins/* src/encoder/plugins/ || die "cp failed"
 	cp -rf "${FILESDIR}"/lib/* src/lib || die "cp failed"
+	eapply "${FILESDIR}/iso.patch"
 	default
 	eautoreconf
 }
