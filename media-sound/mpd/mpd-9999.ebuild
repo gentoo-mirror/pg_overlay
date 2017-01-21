@@ -8,7 +8,7 @@ inherit autotools eutils flag-o-matic linux-info multilib user git-r3
 
 DESCRIPTION="The Music Player Daemon (mpd)"
 HOMEPAGE="https://www.musicpd.org"
-SRC_URI="https://www.musicpd.org/download/${PN}/${PV%.*}/${P}.tar.xz"
+EGIT_REPO_URI="git://git.musicpd.org/manisiutkin/mpd.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -18,7 +18,7 @@ IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
 	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
 	mpg123 musepack +network nfs ogg openal opus oss pipe pulseaudio recorder
 	samba selinux sid +signalfd sndfile soundcloud sqlite tcpd twolame
-	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib sacd"
+	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib +sacd"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio recorder"
 DECODER_PLUGINS="adplug audiofile faad ffmpeg flac fluidsynth mad mikmod
@@ -95,15 +95,6 @@ RDEPEND="${CDEPEND}
 PATCHES=(
 	#"${FILESDIR}"/${PN}-0.18.conf.patch
 )
-
-src_unpack() {
-	if use sacd; then
-		#mkdir -p "${WORKDIR}"/mpd
-		#S="${WORKDIR}"/mpd
-		EGIT_REPO_URI="git://git.musicpd.org/manisiutkin/mpd.git"
-		git-r3_src_unpack
-    fi
-}
 
 pkg_setup() {
 	use network || ewarn "Icecast and Shoutcast streaming needs networking."
@@ -218,7 +209,8 @@ src_configure() {
 		$(use_enable sacd dvdaiso) \
 		${mpdconf}
 
-	use sacd && sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
+	sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
+	sed '/glib/d' src/lib/sacdiso/sacd_disc.cpp
 }
 
 src_install() {
