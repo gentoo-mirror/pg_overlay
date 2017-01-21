@@ -123,7 +123,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	#use !sacd || cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
+	cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
 	rm src/lib/sacdiso/sacd_disc.cpp
 	cp -f ${FILESDIR}/sacd_disc.cpp src/lib/sacdiso/sacd_disc.cpp
 	default
@@ -217,15 +217,15 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install
 
-	#insinto /etc
-	#newins doc/mpdconf.dist mpd.conf
+	insinto /etc
+	newins doc/mpdconf.dist mpd.conf
 
 	newinitd "${FILESDIR}"/${PN}2.init ${PN}
 
-	#if use unicode; then
-	#	sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
-	#		"${ED}"/etc/mpd.conf || die "sed failed"
-	#fi
+	if use unicode; then
+		sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
+			"${ED}"/etc/mpd.conf || die "sed failed"
+	fi
 
 	insinto /etc/logrotate.d
 	newins "${FILESDIR}"/${PN}.logrotate ${PN}
