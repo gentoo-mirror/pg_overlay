@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit autotools eutils flag-o-matic linux-info multilib user
+inherit autotools eutils flag-o-matic linux-info multilib user git-r3
 
 DESCRIPTION="The Music Player Daemon (mpd)"
 HOMEPAGE="https://www.musicpd.org"
