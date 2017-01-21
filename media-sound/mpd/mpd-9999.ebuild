@@ -123,7 +123,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
 	rm src/lib/sacdiso/sacd_disc.cpp
 	cp -f ${FILESDIR}/sacd_disc.cpp src/lib/sacdiso/sacd_disc.cpp
 	default
@@ -218,7 +217,7 @@ src_install() {
 	emake DESTDIR="${D}" install
 
 	insinto /etc
-	newins doc/mpdconf.dist mpd.conf
+	newins doc/mpdconf.example mpd.conf
 
 	newinitd "${FILESDIR}"/${PN}2.init ${PN}
 
