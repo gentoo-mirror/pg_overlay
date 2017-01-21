@@ -93,7 +93,7 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}"/glib-upnp.patch
+	"${FILESDIR}"/glib.patch
 )
 
 pkg_setup() {
