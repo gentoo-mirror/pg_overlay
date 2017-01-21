@@ -1,5 +1,6 @@
---- a/src/lib/sacdiso/sacd_disc.cpp	2017-01-21 23:27:54.573965304 +0700
-+++ b/src/lib/sacdiso/sacd_disc.cpp	2017-01-21 23:28:26.274315042 +0700
+diff -Nuar a/src/lib/sacdiso/sacd_disc.cpp b/src/lib/sacdiso/sacd_disc.cpp
+--- a/src/lib/sacdiso/sacd_disc.cpp	2017-01-21 23:50:30.815968263 +0700
++++ b/src/lib/sacdiso/sacd_disc.cpp	2017-01-21 23:51:24.203561882 +0700
 @@ -23,12 +23,6 @@
  
  #include <string>
