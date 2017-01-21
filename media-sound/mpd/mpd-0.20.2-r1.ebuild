@@ -98,9 +98,9 @@ PATCHES=(
 
 src_unpack() {
 	if use sacd; then
-		EGIT_REPO_URI="git://git.musicpd.org/cgit/manisiutkin/${PN}.git"
 		S="${WORKDIR}"/mpd
-	fi
+		EGIT_REPO_URI="git://git.musicpd.org/cgit/manisiutkin/${PN}.git"
+    fi
 }
 
 pkg_setup() {
