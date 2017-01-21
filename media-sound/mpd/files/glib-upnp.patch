@@ -16,7 +16,7 @@ diff -Nuar a/src/lib/sacdiso/sacd_disc.cpp b/src/lib/sacdiso/sacd_disc.cpp
  #include <string.h>
 diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.cpp
 --- a/src/lib/sacdiso/sacd_metabase.cpp	2017-01-21 23:50:30.815968263 +0700
-+++ b/src/lib/sacdiso/sacd_metabase.cpp	2017-01-22 01:27:24.779227108 +0700
++++ b/src/lib/sacdiso/sacd_metabase.cpp	2017-01-22 01:28:49.915214016 +0700
 @@ -25,7 +25,6 @@
  #include "sacd_metabase.h"
  
@@ -33,10 +33,11 @@ diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.c
  			if (access(store_file.c_str(), F_OK) == 0) {
  				if (tags_file && access(tags_file, F_OK) == -1) {
  					FILE* s = fopen(store_file.c_str(), "rb");
-@@ -61,13 +59,9 @@
+@@ -60,14 +58,9 @@
+ 				}
  			}
  		}
- 	}
+-	}
 -	xml_file = tags_file ? tags_file : store_file;
 -	metabase_loaded = init_xmldoc();
  }
@@ -47,7 +48,7 @@ diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.c
  	}
  }
  
-@@ -75,35 +69,20 @@
+@@ -75,35 +68,20 @@
  	if (!metabase_loaded) {
  		return false;
  	}
@@ -83,7 +84,7 @@ diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.c
  					}
  					if (tag_name.length() > 0) {
  						TagType tag_type = TAG_NUM_OF_ITEM_TYPES;
-@@ -117,53 +96,30 @@
+@@ -117,53 +95,30 @@
  							tag_handler_invoke_tag(handler, handler_ctx, tag_type, tag_value.c_str());
  						}
  					}
@@ -137,7 +138,7 @@ diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.c
  							break;
  						}
  					}
-@@ -172,17 +128,10 @@
+@@ -172,17 +127,10 @@
  		}
  	}
  	if (list_track) {
@@ -155,7 +156,7 @@ diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.c
  					}
  					if (attr_id == track_id) {
  						node_track_id = node_track;
-@@ -195,7 +144,6 @@
+@@ -195,7 +143,6 @@
  	return node_track_id;
  }
  
@@ -163,7 +164,7 @@ diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.c
  	dst.clear();
  	for (size_t i = 0; i < src.length(); i++) {
  		if (src[i] == '\r') {
-@@ -210,7 +158,6 @@
+@@ -210,7 +157,6 @@
  	}
  }
  
