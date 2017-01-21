@@ -31,7 +31,7 @@ REQUIRED_USE="|| ( ${OUTPUT_PLUGINS} )
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
 	opus? ( ogg )
 	upnp? ( expat )
-	sacd? ( cdio )"
+	sacd? ( cdio upnp )"
 
 CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	adplug? ( media-libs/adplug )
@@ -217,6 +217,8 @@ src_configure() {
 		$(use_enable sacd sacdiso) \
 		$(use_enable sacd dvdaiso) \
 		${mpdconf}
+
+	use sacd && sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
 }
 
 src_install() {
