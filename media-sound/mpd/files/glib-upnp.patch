@@ -14,6 +14,163 @@ diff -Nuar a/src/lib/sacdiso/sacd_disc.cpp b/src/lib/sacdiso/sacd_disc.cpp
  //#include <math.h>
  #include <malloc.h>
  #include <string.h>
+diff -Nuar a/src/lib/sacdiso/sacd_metabase.cpp b/src/lib/sacdiso/sacd_metabase.cpp
+--- a/src/lib/sacdiso/sacd_metabase.cpp	2017-01-21 23:50:30.815968263 +0700
++++ b/src/lib/sacdiso/sacd_metabase.cpp	2017-01-22 01:27:24.779227108 +0700
+@@ -25,7 +25,6 @@
+ #include "sacd_metabase.h"
+ 
+ sacd_metabase_t::sacd_metabase_t(sacd_disc_t* sacd_disc, const char* tags_path, const char* tags_file) {
+-	xmldoc = nullptr;
+ 	metabase_loaded = false;
+ 	uint8_t md5_data[MASTER_TOC_LEN * SACD_LSN_SIZE];
+ 	if (sacd_disc->read_blocks_raw(START_OF_MASTER_TOC, MASTER_TOC_LEN, md5_data)) {
+@@ -41,7 +40,6 @@
+ 			store_file = store_path;
+ 			store_file += "/";
+ 			store_file += store_id;
+-			store_file += ".xml";
+ 			if (access(store_file.c_str(), F_OK) == 0) {
+ 				if (tags_file && access(tags_file, F_OK) == -1) {
+ 					FILE* s = fopen(store_file.c_str(), "rb");
+@@ -61,13 +59,9 @@
+ 			}
+ 		}
+ 	}
+-	xml_file = tags_file ? tags_file : store_file;
+-	metabase_loaded = init_xmldoc();
+ }
+ 
+ sacd_metabase_t::~sacd_metabase_t() {
+-	if (xmldoc) {
+-		ixmlDocument_free(xmldoc);
+ 	}
+ }
+ 
+@@ -75,35 +69,20 @@
+ 	if (!metabase_loaded) {
+ 		return false;
+ 	}
+-	IXML_Node* node_track = get_track_node(track_index);
+ 	if (!node_track) {
+ 		return false;
+ 	}
+-	IXML_NodeList* list_tags = ixmlNode_getChildNodes(node_track);
+ 	if (!list_tags) {
+ 		return false;
+ 	}
+-	for (unsigned long tag_index = 0; tag_index < ixmlNodeList_length(list_tags); tag_index++) {
+-		IXML_Node* node_tag = ixmlNodeList_item(list_tags, tag_index);
+ 		if (node_tag) {
+-			string node_name = ixmlNode_getNodeName(node_tag);
+ 			if (node_name == MB_TAG_META) {
+-				IXML_NamedNodeMap* attr_tag = ixmlNode_getAttributes(node_tag);
+ 				if (attr_tag) {
+ 					string tag_name;
+ 					string tag_value;
+-					string xml_tag_value;
+-					IXML_Node* node_attr;
+-					node_attr = ixmlNamedNodeMap_getNamedItem(attr_tag, MB_ATT_NAME);
+ 					if (node_attr) {
+-						tag_name = ixmlNode_getNodeValue(node_attr);
+-						//ixmlNode_free(node_attr);
+ 					}
+-					node_attr = ixmlNamedNodeMap_getNamedItem(attr_tag, MB_ATT_VALUE);
+ 					if (node_attr) {
+-						xml_tag_value = ixmlNode_getNodeValue(node_attr);
+-						xml2utf(xml_tag_value, tag_value);
+-						//ixmlNode_free(node_attr);
+ 					}
+ 					if (tag_name.length() > 0) {
+ 						TagType tag_type = TAG_NUM_OF_ITEM_TYPES;
+@@ -117,53 +96,30 @@
+ 							tag_handler_invoke_tag(handler, handler_ctx, tag_type, tag_value.c_str());
+ 						}
+ 					}
+-					//ixmlNamedNodeMap_free(attr_tag);
+ 				}
+ 			}
+-			//ixmlNode_free(node_tag);
+ 		}
+ 	}
+-	//ixmlNodeList_free(list_tags);
+-	//ixmlNode_free(node_track);
+ 	return true;
+ }
+ 
+-bool sacd_metabase_t::init_xmldoc() {
+-	xmldoc = ixmlLoadDocument(xml_file.c_str());
+-	if (!xmldoc) {
+ 		return false;
+ 	}
+ 	return true;
+ }
+ 
+-IXML_Node* sacd_metabase_t::get_track_node(uint32_t track_index) {
+ 	string track_id = to_string(track_index + 1);
+-	IXML_NodeList* list_track = nullptr;
+-	IXML_Node* node_track_id = nullptr;
+-	IXML_Node* node_root = ixmlNodeList_item(ixmlDocument_getElementsByTagName(xmldoc, MB_TAG_ROOT), 0);
+ 	if (node_root) {
+-		IXML_NodeList* list_store = ixmlNode_getChildNodes(node_root);
+ 		if (list_store) {
+-			for (unsigned long i = 0; i < ixmlNodeList_length(list_store); i++) {
+-				IXML_Node* node_store = ixmlNodeList_item(list_store, i);
+ 				if (node_store) {
+-					IXML_NamedNodeMap* attr_store = ixmlNode_getAttributes(node_store);
+ 					if (attr_store) {
+-						IXML_Node* node_attr;
+ 						string attr_id;
+ 						string attr_type;
+-						node_attr = ixmlNamedNodeMap_getNamedItem(attr_store, MB_ATT_ID);
+ 						if (node_attr) {
+-							attr_id = ixmlNode_getNodeValue(node_attr);
+-							//ixmlNode_free(node_attr);
+ 						}
+-						node_attr = ixmlNamedNodeMap_getNamedItem(attr_store, MB_ATT_TYPE);
+ 						if (node_attr) {
+-							attr_type = ixmlNode_getNodeValue(node_attr);
+-							//ixmlNode_free(node_attr);
+ 						}
+ 						if (attr_id == store_id && attr_type == METABASE_TYPE) {
+-							list_track = ixmlNode_getChildNodes(node_store);
+ 							break;
+ 						}
+ 					}
+@@ -172,17 +128,10 @@
+ 		}
+ 	}
+ 	if (list_track) {
+-		for (unsigned long i = 0; i < ixmlNodeList_length(list_track); i++) {
+-			IXML_Node* node_track = ixmlNodeList_item(list_track, i);
+ 			if (node_track) {
+-				IXML_NamedNodeMap* attr_track = ixmlNode_getAttributes(node_track);
+ 				if (attr_track) {
+-					IXML_Node* node_attr;
+ 					string attr_id;
+-					node_attr = ixmlNamedNodeMap_getNamedItem(attr_track, MB_ATT_ID);
+ 					if (node_attr) {
+-						attr_id = ixmlNode_getNodeValue(node_attr);
+-						//ixmlNode_free(node_attr);
+ 					}
+ 					if (attr_id == track_id) {
+ 						node_track_id = node_track;
+@@ -195,7 +144,6 @@
+ 	return node_track_id;
+ }
+ 
+-void sacd_metabase_t::utf2xml(string& src, string& dst) {
+ 	dst.clear();
+ 	for (size_t i = 0; i < src.length(); i++) {
+ 		if (src[i] == '\r') {
+@@ -210,7 +158,6 @@
+ 	}
+ }
+ 
+-void sacd_metabase_t::xml2utf(string& src, string& dst) {
+ 	dst.clear();
+ 	for (size_t i = 0; i < src.length(); i++) {
+ 		if (strncmp(&src.c_str()[i], "&#13;", 5) == 0) {
 diff -Nuar a/src/lib/sacdiso/sacd_metabase.h b/src/lib/sacdiso/sacd_metabase.h
 --- a/src/lib/sacdiso/sacd_metabase.h	2017-01-21 23:50:30.815968263 +0700
 +++ b/src/lib/sacdiso/sacd_metabase.h	2017-01-22 01:26:07.917336114 +0700
