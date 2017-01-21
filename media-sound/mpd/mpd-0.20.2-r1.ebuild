@@ -98,6 +98,7 @@ PATCHES=(
 
 src_unpack() {
 	if use sacd; then
+		mkdir -p S="${WORKDIR}"/mpd
 		S="${WORKDIR}"/mpd
 		EGIT_REPO_URI="git://git.musicpd.org/cgit/manisiutkin/${PN}.git"
     fi
