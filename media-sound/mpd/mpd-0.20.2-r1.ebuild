@@ -214,8 +214,8 @@ src_configure() {
 		$(use_enable icu)			\
 		$(use_enable faad aac)		\
 		$(use_with zeroconf zeroconf avahi) \
-		--enable-sacdiso \
-		--enable-dvdaiso \
+		$(use_enable sacd sacdiso) \
+		$(use_enable sacd dvdaiso) \
 		${mpdconf}
 }
 
