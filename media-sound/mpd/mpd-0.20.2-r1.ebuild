@@ -222,7 +222,6 @@ src_configure() {
 }
 
 src_install() {
-	sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
 	emake DESTDIR="${D}" install
 
 	insinto /etc
