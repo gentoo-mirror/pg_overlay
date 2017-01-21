@@ -8,7 +8,7 @@ inherit autotools eutils flag-o-matic linux-info multilib user git-r3
 
 DESCRIPTION="The Music Player Daemon (mpd)"
 HOMEPAGE="https://www.musicpd.org"
-SRC_URI="https://www.musicpd.org/download/${PN}/${PV%.*}/${P}.tar.xz"
+EGIT_REPO_URI="git://git.musicpd.org/manisiutkin/mpd.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -95,15 +95,6 @@ RDEPEND="${CDEPEND}
 PATCHES=(
 	#"${FILESDIR}"/${PN}-0.18.conf.patch
 )
-
-src_unpack() {
-	if use sacd; then
-		#mkdir -p "${WORKDIR}"/mpd
-		#S="${WORKDIR}"/mpd
-		EGIT_REPO_URI="git://git.musicpd.org/manisiutkin/mpd.git"
-		git-r3_src_unpack
-    fi
-}
 
 pkg_setup() {
 	use network || ewarn "Icecast and Shoutcast streaming needs networking."
