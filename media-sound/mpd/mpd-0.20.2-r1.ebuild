@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit autotools eutils flag-o-matic linux-info multilib user
+inherit autotools eutils flag-o-matic linux-info multilib user git-r3
 
 DESCRIPTION="The Music Player Daemon (mpd)"
 HOMEPAGE="https://www.musicpd.org"
@@ -12,7 +12,7 @@ SRC_URI="https://www.musicpd.org/download/${PN}/${PV%.*}/${P}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sh ~x86 ~x86-fbsd ~x64-macos"
 IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
 	+fifo +ffmpeg flac fluidsynth gme +icu +id3tag +inotify +ipv6 jack
 	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
@@ -93,14 +93,16 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.18.conf.patch
+	#"${FILESDIR}"/${PN}-0.18.conf.patch
 )
 
 src_unpack() {
 	if use sacd; then
-		unset SRC_URI
-		EGIT_REPO_URI="git://git.musicpd.org/cgit/manisiutkin/${PN}.git"
-	fi
+		#mkdir -p "${WORKDIR}"/mpd
+		#S="${WORKDIR}"/mpd
+		EGIT_REPO_URI="git://git.musicpd.org/manisiutkin/mpd.git"
+		git-r3_src_unpack
+    fi
 }
 
 pkg_setup() {
@@ -130,7 +132,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
+	#use !sacd || cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
 	default
 	eautoreconf
 }
@@ -212,8 +214,8 @@ src_configure() {
 		$(use_enable icu)			\
 		$(use_enable faad aac)		\
 		$(use_with zeroconf zeroconf avahi) \
-		--enable-sacdiso \
-		--enable-dvdaiso \
+		$(use_enable sacd sacdiso) \
+		$(use_enable sacd dvdaiso) \
 		${mpdconf}
 }
 
