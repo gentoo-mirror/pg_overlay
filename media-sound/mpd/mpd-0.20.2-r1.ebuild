@@ -218,10 +218,11 @@ src_configure() {
 		$(use_enable sacd dvdaiso) \
 		${mpdconf}
 
-	use sacd && sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
+	sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
 }
 
 src_install() {
+	sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
 	emake DESTDIR="${D}" install
 
 	insinto /etc
