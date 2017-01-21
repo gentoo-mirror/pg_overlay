@@ -93,7 +93,7 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	#"${FILESDIR}"/${PN}-0.18.conf.patch
+	"${FILESDIR}"/glib.patch
 )
 
 pkg_setup() {
@@ -124,8 +124,6 @@ pkg_setup() {
 
 src_prepare() {
 	#use !sacd || cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
-	sed -i '/glib/d' src/lib/sacdiso/sacd_disc.cpp
-	sed -i '/GLIB/d' src/lib/sacdiso/sacd_disc.cpp
 	default
 	eautoreconf
 }

@@ -1,0 +1,15 @@
+--- a/src/lib/sacdiso/sacd_disc.cpp	2017-01-21 23:19:57.648704312 +0700
++++ b/src/lib/sacdiso/sacd_disc.cpp	2017-01-21 23:20:18.572934905 +0700
+@@ -23,12 +23,6 @@
+ 
+ #include <string>
+ 
+-#define HAVE_GLIB 1
+-
+-#ifdef HAVE_GLIB
+-#include <glib.h>
+-#endif
+-
+ //#include <math.h>
+ #include <malloc.h>
+ #include <string.h>
