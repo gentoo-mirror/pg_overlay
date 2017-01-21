@@ -93,7 +93,7 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.18.conf.patch
+	#"${FILESDIR}"/${PN}-0.18.conf.patch
 )
 
 src_unpack() {
