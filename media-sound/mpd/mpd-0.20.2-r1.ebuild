@@ -124,7 +124,7 @@ pkg_setup() {
 src_prepare() {
 	cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
 	#
-	cp -f "${FILESDIR}"/plugins/* mpd-sacd/src/encoder/plugins/ || die "cp failed"
+	cp -f "${FILESDIR}"/plugins/* src/encoder/plugins/ || die "cp failed"
 	cp -rf "${FILESDIR}"/lib/* src/lib || die "cp failed"
 	default
 	eautoreconf
