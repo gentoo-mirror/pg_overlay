@@ -93,7 +93,7 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	#"${FILESDIR}"/${PN}-0.18.conf.patch
+# 	"${FILESDIR}"/glib.patch
 )
 
 pkg_setup() {
@@ -124,8 +124,8 @@ pkg_setup() {
 
 src_prepare() {
 	#use !sacd || cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
-	sed -i '/glib/d' src/lib/sacdiso/sacd_disc.cpp
-	sed -i '/GLIB/d' src/lib/sacdiso/sacd_disc.cpp
+	rm src/lib/sacdiso/sacd_disc.cpp
+	cp -f ${FILESDIR}/sacd_disc.cpp src/lib/sacdiso/sacd_disc.cpp
 	default
 	eautoreconf
 }
@@ -217,8 +217,8 @@ src_configure() {
 src_install() {
 	emake DESTDIR="${D}" install
 
-	insinto /etc
-	newins doc/mpdconf.dist mpd.conf
+	#insinto /etc
+	#newins doc/mpdconf.dist mpd.conf
 
 	newinitd "${FILESDIR}"/${PN}2.init ${PN}
 
