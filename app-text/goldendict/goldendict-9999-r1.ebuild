@@ -17,8 +17,10 @@ KEYWORDS="~amd64 ~x86"
 IUSE="debug ffmpeg libav"
 
 RDEPEND="
+	app-arch/bzip2
 	>=app-text/hunspell-1.2:=
 	dev-libs/eb
+	dev-libs/lzo
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qthelp:5
@@ -30,7 +32,10 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
 	dev-qt/qtxml:5
+	media-libs/libvorbis
+	media-libs/tiff:0
 	sys-libs/zlib
+	x11-libs/libX11
 	x11-libs/libXtst
 	ffmpeg? (
 		media-libs/libao
