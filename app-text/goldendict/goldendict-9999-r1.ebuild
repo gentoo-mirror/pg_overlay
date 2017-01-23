@@ -18,6 +18,7 @@ IUSE="debug ffmpeg libav"
 
 RDEPEND="
 	>=app-text/hunspell-1.2:=
+	dev-libs/eb
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qthelp:5
