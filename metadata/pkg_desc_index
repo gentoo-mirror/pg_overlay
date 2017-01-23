@@ -9,7 +9,6 @@ app-portage/eix 0.32.4: Search and query ebuilds
 app-shells/push 2.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 3.0_p2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
-app-text/mupdf 1.10a: a lightweight PDF viewer and toolkit written in portable C
 app-text/qpdfview 0.4.16 0.4.17_beta1: A tabbed document viewer
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 app-text/zathura-pdf-mupdf 0.3.0: PDF plug-in for zathura
