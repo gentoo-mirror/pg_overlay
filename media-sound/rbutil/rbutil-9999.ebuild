@@ -29,10 +29,10 @@ src_configure() {
 	S=${WORKDIR}/${P}/${PN}/${PN}qt
 	export QT_SELECT="5"
 	# generate binary translations
-	lrelease ${PN}qt.pro || die
+	lrelease ${WORKDIR}/${P}/${PN}/${PN}qt/${PN}qt.pro || die
 
 	# noccache is required in order to call the correct compiler
-	eqmake5 CONFIG+=noccache
+	eqmake5 CONFIG+=noccache ${WORKDIR}/${P}/${PN}/${PN}qt
 }
 
 src_install() {
