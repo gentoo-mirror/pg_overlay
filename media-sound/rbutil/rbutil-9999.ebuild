@@ -22,6 +22,11 @@ DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}/${PN}/${PN}qt
 
+src_prepare() {
+	S=${WORKDIR}/${P}
+	default
+}
+
 src_configure() {
 	export QT_SELECT="5"
 	# generate binary translations
