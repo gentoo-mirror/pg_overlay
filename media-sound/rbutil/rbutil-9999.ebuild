@@ -24,7 +24,7 @@ src_prepare() {
 	default
 }
 
-${WORKDIR}/${P}/${PN}/${PN}qt
+S=${WORKDIR}/${P}/${PN}/${PN}qt
 
 src_configure() {
 	export QT_SELECT="5"
