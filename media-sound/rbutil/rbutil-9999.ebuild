@@ -20,14 +20,13 @@ RDEPEND="dev-qt/qtcore:5
 	virtual/libusb"
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}/${P}/${PN}/${PN}qt
-
 src_prepare() {
 	S=${WORKDIR}/${P}
 	default
 }
 
 src_configure() {
+	S=${WORKDIR}/${P}/${PN}/${PN}qt
 	export QT_SELECT="5"
 	# generate binary translations
 	lrelease ${PN}qt.pro || die
@@ -37,6 +36,7 @@ src_configure() {
 }
 
 src_install() {
+	S=${WORKDIR}/${P}/${PN}/${PN}qt
 	newbin RockboxUtility ${PN}
 	newicon icons/rockbox-256.png ${PN}.png
 	make_desktop_entry ${PN} "Rockbox Utility"
