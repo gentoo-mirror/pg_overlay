@@ -21,18 +21,18 @@ RDEPEND="dev-qt/qtcore:5
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	S=${WORKDIR}/${P}
 	default
 }
 
+${WORKDIR}/${P}/${PN}/${PN}qt
+
 src_configure() {
-	S=${WORKDIR}/${P}/${PN}/${PN}qt
 	export QT_SELECT="5"
 	# generate binary translations
-	lrelease ${WORKDIR}/${P}/${PN}/${PN}qt/${PN}qt.pro || die
+	lrelease${PN}qt.pro || die
 
 	# noccache is required in order to call the correct compiler
-	eqmake5 CONFIG+=noccache ${WORKDIR}/${P}/${PN}/${PN}qt
+	eqmake5 CONFIG+=noccache
 }
 
 src_install() {
