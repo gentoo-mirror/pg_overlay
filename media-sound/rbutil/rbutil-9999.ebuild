@@ -9,6 +9,7 @@ inherit eutils qmake-utils git-r3
 DESCRIPTION="Rockbox opensource firmware manager for mp3 players"
 HOMEPAGE="http://www.rockbox.org/wiki/RockboxUtility"
 EGIT_REPO_URI="git://git.rockbox.org/rockbox.git"
+EGIT_COMMIT="3e738661108fb2a8e3474c6336c2a5c2668f82b6"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -25,7 +26,7 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 src_configure() {
 	export QT_SELECT="5"
 	# generate binary translations
-	lrelease${PN}qt.pro || die
+	lrelease ${PN}qt.pro || die
 	# noccache is required in order to call the correct compiler
 	eqmake5 CONFIG+=noccache
 }
