@@ -20,11 +20,6 @@ RDEPEND="dev-qt/qtcore:5
 	virtual/libusb"
 DEPEND="${RDEPEND}"
 
-src_prepare() {
-	S=${WORKDIR}/${P}
-	default
-}
-
 S=${WORKDIR}/${P}/${PN}/${PN}qt
 
 src_configure() {
