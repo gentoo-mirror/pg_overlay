@@ -21,6 +21,7 @@ RDEPEND="dev-qt/qtcore:5
 DEPEND="${RDEPEND}"
 
 src_prepare() {
+	S=${WORKDIR}/${P}
 	default
 }
 
@@ -30,13 +31,11 @@ src_configure() {
 	export QT_SELECT="5"
 	# generate binary translations
 	lrelease${PN}qt.pro || die
-
 	# noccache is required in order to call the correct compiler
 	eqmake5 CONFIG+=noccache
 }
 
 src_install() {
-	S=${WORKDIR}/${P}/${PN}/${PN}qt
 	newbin RockboxUtility ${PN}
 	newicon icons/rockbox-256.png ${PN}.png
 	make_desktop_entry ${PN} "Rockbox Utility"
