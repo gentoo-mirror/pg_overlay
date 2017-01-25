@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: /var/cvsroot/gentoo-x86/net-im/psi/psi-9999.ebuild,v 1.12 2011/06/30 09:23:16 pva Exp $
 
@@ -82,12 +82,12 @@ DEPEND="${RDEPEND}
 	qt5? ( dev-qt/linguist-tools )
 "
 PDEPEND="
-	crypt? ( >=app-crypt/qca-2.1.0[gpg] )
+	crypt? ( app-crypt/qca[gpg] )
 	jingle? (
 		net-im/psimedia[extras?]
-		>=app-crypt/qca-2.1.0.3[openssl]
+		app-crypt/qca[ssl]
 	)
-	ssl? ( >=app-crypt/qca-2.1.0.3[openssl] )
+	ssl? ( app-crypt/qca[ssl] )
 "
 RESTRICT="test"
 
@@ -98,7 +98,7 @@ pkg_setup() {
 		echo
 		ewarn "You're about to build heavily patched version of Psi called Psi+."
 		ewarn "It has really nice features but still is under heavy development."
-		ewarn "Take a look at homepage for more info: http://code.google.com/p/psi-dev"
+		ewarn "Take a look at homepage for more info: http://psi-plus.com/"
 		echo
 
 		if use iconsets; then
@@ -221,16 +221,17 @@ src_install() {
 	use doc && dohtml -r doc/api
 
 	# install translations
+	local mylrelease="$(qt$(usex qt5 5 4)_get_bindir)"/lrelease
 	cd "${WORKDIR}/psi-l10n"
 	insinto /usr/share/${MY_PN}
 	install_locale() {
 		if use extras; then
-			lrelease "translations/${PN}_${1}.ts" || die "lrelease ${1} failed"
+			"${mylrelease}" "translations/${PN}_${1}.ts" || die "lrelease ${1} failed"
 			doins "translations/${PN}_${1}.qm"
 		else
 			# PLOCALES are set from Psi+. So we don't want to fail here if no locale
 			if [ -f "${x}/${PN}_${1}.ts" ]; then
-				lrelease "${x}/${PN}_${1}.ts" || die "lrelease ${1} failed"
+				"${mylrelease}" "${x}/${PN}_${1}.ts" || die "lrelease ${1} failed"
 				doins "${x}/${PN}_${1}.qm"
 			else
 				ewarn "Unfortunately locale \"${1}\" is supported for Psi+ only"
