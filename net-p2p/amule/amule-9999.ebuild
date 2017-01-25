@@ -26,7 +26,7 @@ DEPEND="
 	upnp? ( >=net-libs/libupnp-1.6.6 )
 	remote? ( >=media-libs/libpng-1.2.0:0=
 	unicode? ( >=media-libs/gd-2.0.26:= ) )
-	dev-util/boost-build
+	dev-libs/boost
 	!net-p2p/imule"
 RDEPEND="${DEPEND}"
 
