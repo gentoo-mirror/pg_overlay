@@ -189,7 +189,7 @@ src_configure() {
 	
 	use whiteboarding && CONF+=("--enable-whiteboarding")
 	use xscreensaver || CONF+=("--disable-xss")
-	use plugins && CONF+=("--enable-plugins")
+	use plugins || CONF+=("--disable-plugins")
 	use webkit && CONF+=("--enable-webkit")
 
 	elog ./configure "${CONF[@]}"
