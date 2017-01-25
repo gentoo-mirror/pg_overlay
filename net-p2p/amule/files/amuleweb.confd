@@ -9,7 +9,7 @@ AMULEUSER="$USER"
 AMULEHOME="$HOME"
 
 # log file (/dev/null for nowhere)
-LOG=/deb/null
+LOG=/dev/null
 
 # aMule password (note: not your webserver password, but the external
 # connection one)
