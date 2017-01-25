@@ -14,16 +14,17 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE="qt4 qt5"
-#RESTRICT="test strip"
 
-DEPEND="
+RDEPEND="
 	qt4? ( dev-qt/qtcore:4 )
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtxml:5
 	)
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}"
+
+DOCS=( AUTHORS README.md TODO )
 
 REQUIRED_USE="^^ ( qt4 qt5 )"
 
@@ -32,9 +33,11 @@ src_configure() {
 	use qt5 && QTVERSION=5
 	./configure \
 	--prefix="${EPREFIX}"/usr \
-	--qtselect="${QTVERSION}" || die "./configure failed"
+	--qtselect="${QTVERSION}" \
+	--extraconf=QMAKE_STRIP= \
+	--verbose || die "./configure failed"
 }
 
 src_install() {
-	emake INSTALL_ROOT="${D}" install
+	emake INSTALL_ROOT="${ED}" install
 }
