@@ -22,6 +22,7 @@ DEPEND="${RDEPEND}
 	sys-kernel/linux-headers"
 
 PATCHES=(
+	"${FILESDIR}"/0001-Fix-build-with-gperf-3.1.patch
 	"${FILESDIR}"/${PN}-2.25-build-system-fixes.patch
 	"${FILESDIR}"/${PN}-2.25-ignore-RAISE_SETFCAP-install-failures.patch
 	"${FILESDIR}"/${PN}-2.21-include.patch
