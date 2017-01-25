@@ -54,6 +54,8 @@ src_configure() {
 	if use X; then
 		einfo "wxGTK with X support will be used"
 		need-wxwidgets unicode
+		myconf="${myconf}
+			--enable-amule-gui"
 	else
 		einfo "wxGTK without X support will be used"
 		need-wxwidgets base-unicode
