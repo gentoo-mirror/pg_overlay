@@ -20,3 +20,25 @@ diff -up firefox-48.0/security/certverifier/OCSPCache.h.prbool firefox-48.0/secu
  #include "hasht.h"
  #include "mozilla/Mutex.h"
  #include "mozilla/Vector.h"
+diff -up firefox-51.0/security/certverifier/CTLogVerifier.cpp.old firefox-51.0/security/certverifier/CTLogVerifier.cpp
+--- firefox-51.0/security/certverifier/CTLogVerifier.cpp.old	2017-01-18 13:03:34.758386735 +0100
++++ firefox-51.0/security/certverifier/CTLogVerifier.cpp	2017-01-18 13:03:38.753367776 +0100
+@@ -7,6 +7,7 @@
+ #include "CTLogVerifier.h"
+ 
+ #include "CTSerialization.h"
++#include "prtypes.h"
+ #include "hasht.h"
+ #include "mozilla/ArrayUtils.h"
+ #include "mozilla/Assertions.h"
+diff -up firefox-51.0/security/certverifier/CTObjectsExtractor.cpp.old firefox-51.0/security/certverifier/CTObjectsExtractor.cpp
+--- firefox-51.0/security/certverifier/CTObjectsExtractor.cpp.old	2017-01-18 13:01:57.629847680 +0100
++++ firefox-51.0/security/certverifier/CTObjectsExtractor.cpp	2017-01-18 13:02:01.892827449 +0100
+@@ -6,6 +6,7 @@
+ 
+ #include "CTObjectsExtractor.h"
+ 
++#include "prtypes.h"
+ #include "hasht.h"
+ #include "mozilla/Assertions.h"
+ #include "mozilla/Casting.h"

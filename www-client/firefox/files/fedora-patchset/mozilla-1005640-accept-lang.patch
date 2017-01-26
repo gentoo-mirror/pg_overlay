@@ -1,7 +1,7 @@
-diff -up firefox-48.0.1/toolkit/mozapps/extensions/internal/XPIProvider.jsm.mydebug firefox-48.0.1/toolkit/mozapps/extensions/internal/XPIProvider.jsm
---- firefox-48.0.1/toolkit/mozapps/extensions/internal/XPIProvider.jsm.mydebug	2016-08-15 23:35:40.000000000 +0200
-+++ firefox-48.0.1/toolkit/mozapps/extensions/internal/XPIProvider.jsm	2016-09-21 16:08:04.441220821 +0200
-@@ -2724,6 +2724,11 @@ this.XPIProvider = {
+diff -up firefox-51.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm.1005640-accept-lang firefox-51.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm
+--- firefox-51.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm.1005640-accept-lang	2017-01-16 17:16:52.000000000 +0100
++++ firefox-51.0/toolkit/mozapps/extensions/internal/XPIProvider.jsm	2017-01-18 12:35:29.380394216 +0100
+@@ -2852,6 +2852,11 @@ this.XPIProvider = {
          this.addAddonsToCrashReporter();
        }
  
@@ -12,8 +12,8 @@ diff -up firefox-48.0.1/toolkit/mozapps/extensions/internal/XPIProvider.jsm.myde
 +
        try {
          AddonManagerPrivate.recordTimestamp("XPI_bootstrap_addons_begin");
-         for (let id in this.bootstrappedAddons) {
-@@ -2751,6 +2756,14 @@ this.XPIProvider = {
+ 
+@@ -2880,6 +2885,14 @@ this.XPIProvider = {
          AddonManagerPrivate.recordException("XPI-BOOTSTRAP", "startup failed", e);
        }
  

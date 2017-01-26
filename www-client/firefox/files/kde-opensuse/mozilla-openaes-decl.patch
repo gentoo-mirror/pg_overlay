@@ -1,7 +1,7 @@
 # HG changeset patch
 # Parent 33024abb3c58dab7239e32388df58e14f99defd5
 # User Wolfgang Rosenauer <wr@rosenauer.org>
-# Parent  17196b2f3cd2bcba6a5b54f4496b5762a593c5b3
+# Parent  6005a673f4c68ed05294bedcf45d6d962bf303e6
 
 diff --git a/media/gmp-clearkey/0.1/openaes/oaes_lib.c b/media/gmp-clearkey/0.1/openaes/oaes_lib.c
 --- a/media/gmp-clearkey/0.1/openaes/oaes_lib.c
@@ -20,7 +20,7 @@ diff --git a/media/gmp-clearkey/0.1/openaes/oaes_lib.c b/media/gmp-clearkey/0.1/
  #include <time.h> 
  #include <string.h>
  
- #include "mozilla/Snprintf.h"
+ #include "mozilla/Sprintf.h"
  
  #ifdef WIN32
  #include <process.h>
