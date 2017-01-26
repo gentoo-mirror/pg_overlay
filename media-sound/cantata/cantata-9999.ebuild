@@ -58,10 +58,6 @@ DEPEND="${RDEPEND}
 # cantata has no tests
 RESTRICT="test"
 
-PATCHES=(
-	"${FILESDIR}/${P}-qt5-no-X11.patch"
-)
-
 src_prepare() {
 	cmake-utils_src_prepare
 
