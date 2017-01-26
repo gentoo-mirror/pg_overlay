@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  6ff55468281e12a84adefb46b17acb60d9cea608
+# Parent  f3e80d26a430dfa1c58421fb66144a3c23ffc166
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #include "prefread.h"
  #include "prefapi_private_data.h"
  
-@@ -1180,16 +1181,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
+@@ -1174,16 +1175,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
  
  static nsresult pref_LoadPrefsInDirList(const char *listId)
  {
@@ -62,7 +62,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
      return NS_OK;
  
    bool hasMore;
-@@ -1205,17 +1224,17 @@ static nsresult pref_LoadPrefsInDirList(
+@@ -1199,17 +1218,17 @@ static nsresult pref_LoadPrefsInDirList(
  
      nsAutoCString leaf;
      path->GetNativeLeafName(leaf);
@@ -81,7 +81,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  {
    nsZipItemPtr<char> manifest(jarReader, name, true);
    NS_ENSURE_TRUE(manifest.Buffer(), NS_ERROR_NOT_AVAILABLE);
-@@ -1309,24 +1328,36 @@ static nsresult pref_InitInitialObjects(
+@@ -1303,24 +1322,36 @@ static nsresult pref_InitInitialObjects(
    /* these pref file names should not be used: we process them after all other application pref files for backwards compatibility */
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -187,8 +187,7 @@ diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpac
 diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloads/moz.build
 --- a/toolkit/components/downloads/moz.build
 +++ b/toolkit/components/downloads/moz.build
-@@ -60,17 +60,18 @@ if not CONFIG['MOZ_SUITE']:
-         'nsDownloadManagerUI.js',
+@@ -57,16 +57,17 @@ if not CONFIG['MOZ_SUITE']:
          'nsDownloadManagerUI.manifest',
      ]
  
@@ -196,9 +195,9 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
  
  LOCAL_INCLUDES += [
      '../protobuf',
--    '/ipc/chromium/src'
-+    '/ipc/chromium/src',
-+    '/toolkit/xre'
+     '/ipc/chromium/src',
++    '/toolkit/xre',
+     'chromium'
  ]
  
  DEFINES['GOOGLE_PROTOBUF_NO_RTTI'] = True
@@ -206,11 +205,10 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
  
  CXXFLAGS += CONFIG['TK_CFLAGS']
  
- if CONFIG['GNU_CXX']:
 diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/components/downloads/nsDownloadManager.cpp
 --- a/toolkit/components/downloads/nsDownloadManager.cpp
 +++ b/toolkit/components/downloads/nsDownloadManager.cpp
-@@ -51,16 +51,20 @@
+@@ -52,16 +52,20 @@
  #ifdef XP_WIN
  #include <shlobj.h>
  #include "nsWindowsHelpers.h"
@@ -228,10 +226,10 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
  #endif
  
  #ifdef MOZ_WIDGET_ANDROID
- #include "GeneratedJNIWrappers.h"
+ #include "FennecJNIWrappers.h"
  #endif
  
-@@ -2719,16 +2723,25 @@ nsDownload::SetState(DownloadState aStat
+@@ -2723,16 +2727,25 @@ nsDownload::SetState(DownloadState aStat
        nsCOMPtr<nsIPrefBranch> pref(do_GetService(NS_PREFSERVICE_CONTRACTID));
  
        // Master pref to control this function.
@@ -257,7 +255,7 @@ diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/compon
          int64_t goat = PR_Now() - mStartTime;
          showTaskbarAlert = goat > alertIntervalUSec;
  
-@@ -2759,16 +2772,17 @@ nsDownload::SetState(DownloadState aStat
+@@ -2763,16 +2776,17 @@ nsDownload::SetState(DownloadState aStat
                    NS_LITERAL_STRING(DOWNLOAD_MANAGER_ALERT_ICON), title,
                    message, !removeWhenDone,
                    mPrivate ? NS_LITERAL_STRING("private") : NS_LITERAL_STRING("non-private"),
@@ -316,7 +314,7 @@ diff --git a/toolkit/content/widgets/dialog-kde.xml b/toolkit/content/widgets/di
 new file mode 100644
 --- /dev/null
 +++ b/toolkit/content/widgets/dialog-kde.xml
-@@ -0,0 +1,463 @@
+@@ -0,0 +1,457 @@
 +<?xml version="1.0"?>
 +<!-- This Source Code Form is subject to the terms of the Mozilla Public
 +   - License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -386,8 +384,7 @@ new file mode 100644
 +        <![CDATA[
 +          if (this.hasAttribute("defaultButton"))
 +            return this.getAttribute("defaultButton");
-+          else // default to the accept button
-+            return "accept";
++          return "accept";  // default to the accept button
 +        ]]>
 +        </getter>
 +        <setter>
@@ -491,9 +488,6 @@ new file mode 100644
 +        <parameter name="aEvent"/>
 +        <body>
 +        <![CDATA[
-+          let { AppConstants } =
-+              Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
-+
 +          function focusInit() {
 +            const dialog = document.documentElement;
 +            const defaultButton = dialog.getButton(dialog.defaultButton);
@@ -519,7 +513,7 @@ new file mode 100644
 +                    initialFocusedElt.focus();
 +                  }
 +                }
-+                else if (AppConstants.platform != "macosx" &&
++                else if (!/Mac/.test(navigator.platform) &&
 +                         focusedElt.hasAttribute("dlgtype") && focusedElt != defaultButton) {
 +                  defaultButton.focus();
 +                }
@@ -604,16 +598,16 @@ new file mode 100644
 +              else
 +                switch (dlgtype) {
 +                  case "accept":
-+                    button.setAttribute("icon","accept");
++                    button.setAttribute("icon", "accept");
 +                    break;
 +                  case "cancel":
-+                    button.setAttribute("icon","cancel");
++                    button.setAttribute("icon", "cancel");
 +                    break;
 +                  case "disclosure":
-+                    button.setAttribute("icon","properties");
++                    button.setAttribute("icon", "properties");
 +                    break;
 +                  case "help":
-+                    button.setAttribute("icon","help");
++                    button.setAttribute("icon", "help");
 +                    break;
 +                  default:
 +                    break;
@@ -639,10 +633,8 @@ new file mode 100644
 +            for (dlgtype in buttons)
 +              buttons[dlgtype].hidden = !shown[dlgtype];
 +
-+            let { AppConstants } =
-+                Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
 +            // show the spacer on Windows only when the extra2 button is present
-+            if (AppConstants.platform == "win") {
++            if (/Win/.test(navigator.platform)) {
 +              var spacer = document.getAnonymousElementByAttribute(this, "anonid", "spacer");
 +              spacer.removeAttribute("hidden");
 +              spacer.setAttribute("flex", shown["extra2"]?"1":"0");
@@ -784,7 +776,7 @@ diff --git a/toolkit/content/widgets/preferences-kde.xml b/toolkit/content/widge
 new file mode 100644
 --- /dev/null
 +++ b/toolkit/content/widgets/preferences-kde.xml
-@@ -0,0 +1,1410 @@
+@@ -0,0 +1,1403 @@
 +<?xml version="1.0"?>
 +
 +<!DOCTYPE bindings [
@@ -1422,10 +1414,7 @@ new file mode 100644
 +            var acceptButton = docElt.getButton("accept");
 +            acceptButton.hidden = true;
 +            var cancelButton  = docElt.getButton("cancel");
-+
-+            let { AppConstants } =
-+                Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
-+            if (AppConstants.platform == "macosx") {
++            if (/Mac/.test(navigator.platform)) {
 +              // no buttons on Mac except Help
 +              cancelButton.hidden = true;
 +              // Move Help button to the end
@@ -1607,9 +1596,7 @@ new file mode 100644
 +        <parameter name="aPaneElement"/>
 +        <body>
 +        <![CDATA[
-+          let { AppConstants } =
-+              Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
-+          if (AppConstants.platform == "macosx") {
++          if (/Mac/.test(navigator.platform)) {
 +            var paneTitle = aPaneElement.label;
 +            if (paneTitle != "")
 +              document.title = paneTitle;
@@ -1683,11 +1670,9 @@ new file mode 100644
 +      <property name="_shouldAnimate">
 +        <getter>
 +        <![CDATA[
-+          let { AppConstants } =
-+              Components.utils.import("resource://gre/modules/AppConstants.jsm", {});
 +          var psvc = Components.classes["@mozilla.org/preferences-service;1"]
 +                               .getService(Components.interfaces.nsIPrefBranch);
-+          var animate = AppConstants.platform == "macosx";
++          var animate = /Mac/.test(navigator.platform);
 +          try {
 +            animate = psvc.getBoolPref("browser.preferences.animateFadeIn");
 +          }
@@ -1854,7 +1839,7 @@ new file mode 100644
 +    <handlers>
 +      <handler event="dialogaccept">
 +      <![CDATA[
-+        if (!this._fireEvent("beforeaccept", this)){
++        if (!this._fireEvent("beforeaccept", this)) {
 +          return false;
 +        }
 +
@@ -2292,7 +2277,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -39,17 +39,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+@@ -40,17 +40,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
          'updaterfileutils_osx.mm',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
@@ -2316,7 +2301,7 @@ diff --git a/toolkit/xre/nsKDEUtils.cpp b/toolkit/xre/nsKDEUtils.cpp
 new file mode 100644
 --- /dev/null
 +++ b/toolkit/xre/nsKDEUtils.cpp
-@@ -0,0 +1,339 @@
+@@ -0,0 +1,344 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -2337,6 +2322,11 @@ new file mode 100644
 +#include <sys/resource.h>
 +#include <unistd.h>
 +#include <X11/Xlib.h>
++// copied from X11/X.h as a hack since for an unknown
++// reason it's not picked up from X11/X.h
++#ifndef None
++#define None                 0L /* universal null resource or null atom */
++#endif
 +
 +//#define DEBUG_KDE
 +#ifdef DEBUG_KDE
@@ -3161,7 +3151,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
-@@ -90,16 +90,17 @@ else:
+@@ -101,16 +101,17 @@ else:
  include('/ipc/chromium/chromium-config.mozbuild')
  
  FINAL_LIBRARY = 'xul'
@@ -3534,25 +3524,25 @@ diff --git a/widget/gtk/nsFilePicker.h b/widget/gtk/nsFilePicker.h
 diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestParser.cpp
 --- a/xpcom/components/ManifestParser.cpp
 +++ b/xpcom/components/ManifestParser.cpp
-@@ -35,16 +35,17 @@
+@@ -32,16 +32,17 @@
+ #include "nsTextFormatter.h"
+ #include "nsVersionComparator.h"
+ #include "nsXPCOMCIDInternal.h"
  
  #include "nsIConsoleService.h"
  #include "nsIScriptError.h"
  #include "nsIXULAppInfo.h"
  #include "nsIXULRuntime.h"
- #ifdef MOZ_B2G_LOADER
- #include "mozilla/XPTInterfaceInfoManager.h"
- #endif
 +#include "nsKDEUtils.h"
  
- #ifdef MOZ_B2G_LOADER
- #define XPTONLY_MANIFEST &nsComponentManagerImpl::XPTOnlyManifestManifest
- #define XPTONLY_XPT &nsComponentManagerImpl::XPTOnlyManifestXPT
- #else
- #define XPTONLY_MANIFEST nullptr
- #define XPTONLY_XPT nullptr
- #endif
-@@ -494,16 +495,17 @@ ParseManifest(NSLocationType aType, File
+ using namespace mozilla;
+ 
+ struct ManifestDirective
+ {
+   const char* directive;
+   int argc;
+ 
+@@ -472,16 +473,17 @@ ParseManifest(NSLocationType aType, File
    NS_NAMED_LITERAL_STRING(kRemoteEnabled, "remoteenabled");
    NS_NAMED_LITERAL_STRING(kRemoteRequired, "remoterequired");
    NS_NAMED_LITERAL_STRING(kApplication, "application");
@@ -3570,7 +3560,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    NS_NAMED_LITERAL_STRING(kMain, "main");
    NS_NAMED_LITERAL_STRING(kContent, "content");
  
-@@ -554,44 +556,49 @@ ParseManifest(NSLocationType aType, File
+@@ -532,44 +534,49 @@ ParseManifest(NSLocationType aType, File
          CopyUTF8toUTF16(s, abi);
          abi.Insert(char16_t('_'), 0);
          abi.Insert(osTarget, 0);
@@ -3620,7 +3610,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
      process = kMain;
    }
  
-@@ -694,25 +701,27 @@ ParseManifest(NSLocationType aType, File
+@@ -672,25 +679,27 @@ ParseManifest(NSLocationType aType, File
      TriState stOsVersion = eUnspecified;
      TriState stOs = eUnspecified;
      TriState stABI = eUnspecified;
@@ -3648,7 +3638,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        }
  
  #if defined(MOZ_WIDGET_ANDROID)
-@@ -762,16 +771,17 @@ ParseManifest(NSLocationType aType, File
+@@ -740,16 +749,17 @@ ParseManifest(NSLocationType aType, File
      }
  
      if (!ok ||

@@ -1,7 +1,7 @@
 # HG changeset patch
 # User Wolfgang Rosenauer <wr@rosenauer.org>
 # Parent 5a29924228527f8882c83cf62d470963ea1ce62e
-# Parent  bf7b3a5853467b34f13465102a19b9c7c2524bd4
+# Parent  4f39ed617c2f151a3a15903c7ae4471b66774e9e
 Bug 583793 - Firefox interface language set to LANG, ignores LANGUAGE
 
 diff --git a/intl/locale/nsLocaleService.cpp b/intl/locale/nsLocaleService.cpp
@@ -25,7 +25,7 @@ diff --git a/intl/locale/nsLocaleService.cpp b/intl/locale/nsLocaleService.cpp
      for( i = 0; i < LocaleListLength; i++ ) {
          nsresult result;
          // setlocale( , "") evaluates LC_* and LANG
-@@ -149,16 +150,21 @@ nsLocaleService::nsLocaleService(void)
+@@ -149,16 +150,36 @@ nsLocaleService::nsLocaleService(void)
              } else {
                  CopyASCIItoUTF16(lang, platformLocale);
                  result = nsPosixLocale::GetXPLocale(lang, xpLocale);
@@ -35,9 +35,24 @@ diff --git a/intl/locale/nsLocaleService.cpp b/intl/locale/nsLocaleService.cpp
              return;
          }
 +        // LANGUAGE is overriding LC_MESSAGES
++        // it can be a colon separated list of preferred languages
++        // as we do not recognize here if a language is available
++        // we actually only consider the first entry unless GetXPLocale
++        // fails completely
 +        if (i == LC_MESSAGES && language && *language) {
-+          CopyASCIItoUTF16(language, platformLocale);
-+          result = nsPosixLocale::GetXPLocale(language, xpLocale);
++#define LANGUAGE_SEP ":"
++          nsAutoString xpLocale_temp;
++          char* rawBuffer = (char*) language;
++          char* token = nsCRT::strtok(rawBuffer, LANGUAGE_SEP, &rawBuffer);
++          for (; token;
++              token = nsCRT::strtok(rawBuffer, LANGUAGE_SEP, &rawBuffer)) {
++            result = nsPosixLocale::GetXPLocale(token, xpLocale_temp);
++            if (NS_SUCCEEDED(result)) {
++              CopyASCIItoUTF16(token, platformLocale);
++              xpLocale = xpLocale_temp;
++              break;
++            }
++          }
 +        }
          resultLocale->AddCategory(category, xpLocale);
          resultLocale->AddCategory(category_platform, platformLocale);
