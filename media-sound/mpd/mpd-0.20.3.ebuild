@@ -13,12 +13,12 @@ SRC_URI="https://www.musicpd.org/download/${PN}/${PV%.*}/${P}.tar.xz"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sh ~x86 ~x86-fbsd ~x64-macos"
-IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
-	+fifo +ffmpeg flac fluidsynth gme +icu +id3tag +inotify +ipv6 jack
-	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
-	mpg123 musepack +network nfs ogg openal opus oss pipe pulseaudio recorder
+IUSE="adplug alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
+	+fifo +ffmpeg flac fluidsynth gme +icu +id3tag +inotify ipv6 jack
+	lame mms libav libmpdclient libsamplerate +libsoxr mad mikmod modplug
+	mpg123 musepack network nfs ogg openal opus oss pipe +pulseaudio recorder
 	samba selinux sid +signalfd sndfile soundcloud sqlite tcpd twolame
-	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib"
+	+unicode upnp vorbis +wavpack wildmidi zeroconf +zip zlib"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio recorder"
 DECODER_PLUGINS="adplug audiofile faad ffmpeg flac fluidsynth mad mikmod
