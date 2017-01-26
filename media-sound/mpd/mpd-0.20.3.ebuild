@@ -16,7 +16,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~sh ~x86 ~x86-fbsd ~x64-macos"
 IUSE="adplug alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
 	+fifo +ffmpeg flac fluidsynth gme +icu +id3tag +inotify ipv6 jack
 	lame mms libav libmpdclient libsamplerate +libsoxr mad mikmod modplug
-	mpg123 musepack +network nfs ogg openal opus oss pipe +pulseaudio recorder
+	mpg123 musepack network nfs ogg openal opus oss pipe +pulseaudio recorder
 	samba selinux sid +signalfd sndfile soundcloud sqlite tcpd twolame
 	+unicode upnp vorbis +wavpack wildmidi zeroconf +zip zlib"
 
