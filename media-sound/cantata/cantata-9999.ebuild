@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://github.com/CDrummond/cantata.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="cdda cddb http-server mtp musicbrainz replaygain +taglib udisks"
 REQUIRED_USE="
 	cdda? ( udisks || ( cddb musicbrainz ) )
