@@ -79,7 +79,6 @@ src_configure() {
 		--with-denoise-level=0 \
 		--with-wx-config="${WX_CONFIG}" \
 		--enable-amulecmd \
-		--with-boost \
 		$(use_enable debug) \
 		$(use_enable daemon amule-daemon) \
 		$(use_enable geoip) \
@@ -89,6 +88,7 @@ src_configure() {
 		$(use_enable stats alcc) \
 		$(use_enable upnp) \
 		$(use_enable mmap mmap) \
+		$(usex daemon --with-boost) \
 		${myconf}
 }
 
