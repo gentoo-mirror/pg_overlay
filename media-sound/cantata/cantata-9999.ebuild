@@ -5,7 +5,7 @@
 EAPI=6
 
 PLOCALES="cs de en_GB es fr hu ko pl ru zh_CN"
-inherit cmake-utils git r3 gnome2-utils l10n qmake-utils xdg
+inherit cmake-utils git-r3 gnome2-utils l10n qmake-utils xdg
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
 HOMEPAGE="https://github.com/CDrummond/cantata"
