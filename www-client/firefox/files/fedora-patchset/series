@@ -1,9 +1,7 @@
-xulrunner-24.0-jemalloc-ppc.patch
 firefox-build-prbool.patch
 
 rhbz-966424.patch
 firefox-enable-addons.patch
-rhbz-1173156.patch
 firefox-fedora-ua.patch
 mozilla-1170092.patch
 mozilla-1005640-accept-lang.patch
