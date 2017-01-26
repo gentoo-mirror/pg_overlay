@@ -16,7 +16,7 @@ HOMEPAGE="https://transmissionbt.com/"
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 systemd test xfs"
+IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 test +xfs"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -41,7 +41,6 @@ RDEPEND="
 		dev-qt/qtnetwork:5
 		dev-qt/qtdbus:5
 	)
-	systemd? ( >=sys-apps/systemd-209:= )
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -90,7 +89,7 @@ src_configure() {
 		-DWITH_CRYPTO=$(usex mbedtls polarssl openssl)
 		-DWITH_INOTIFY=ON
 		-DWITH_LIBAPPINDICATOR=$(usex ayatana ON OFF)
-		-DWITH_SYSTEMD=$(usex systemd ON OFF)
+		-DWITH_SYSTEMD=OFF
 	)
 
 	cmake-utils_src_configure
