@@ -229,6 +229,8 @@ src_configure() {
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
+	mozconfig_use_enable rust
+
 	# New features
 	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
