@@ -59,7 +59,6 @@ DEPEND="${RDEPEND}
 RESTRICT="test"
 
 PATCHES=(
-	"${FILESDIR}/${P}-mpris-plasma57.patch"
 	"${FILESDIR}/${P}-qt5-no-X11.patch"
 )
 
