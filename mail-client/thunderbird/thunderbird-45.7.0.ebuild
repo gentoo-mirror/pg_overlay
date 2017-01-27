@@ -169,9 +169,14 @@ src_prepare() {
 	fi
 
 	# Fedora patches
+	eapply "${FILESDIR}/fedora-patchset/thunderbird-objdir.patch"
+	pushd mozilla
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
 	do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	done	
+	done
+	popd
+	eapply "${FILESDIR}/fedora-patchset/lightning-bad-langs.patch"
+	eapply "${FILESDIR}/fedora-patchset/thunderbird-enable-addons.patch"
 
 	# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
