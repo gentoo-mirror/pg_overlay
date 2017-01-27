@@ -18,13 +18,13 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 x86"
-IUSE="cups +gn gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi debian inox iridium +ungoogled"
+IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi debian inox iridium +ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
 		?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
-#MY_MAJORV="$(get_major_version )"
+MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -165,9 +165,7 @@ For other desktop environments, try one of the following:
 
 PATCHES=(
 	"${FILESDIR}/${PN}-system-ffmpeg-r4.patch"
-	"${FILESDIR}/${PN}-widevine-r1.patch"
 	"${FILESDIR}/${PN}-glibc-2.24.patch"
-	"${FILESDIR}/${PN}-56-gcc4.patch"
 )
 
 pre_build_checks() {
@@ -214,19 +212,19 @@ src_prepare() {
 	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
 
 	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do epatch "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
 
 	# Iridium patches
-	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
+	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do eapply "${FILESDIR}/iridium-browser/$i";done
 
 	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do epatch "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
 
 	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do epatch "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do epatch "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
