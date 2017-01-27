@@ -42,7 +42,7 @@ app-text/qstardict:swac -
 app-text/qstardict:web - build web plugin
 mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
 mail-client/thunderbird:crypt - Enable encryption support with enigmail
-mail-client/thunderbird:custom-optimization - Fine-tune custom compiler optimizations (-Os, -O0, -O1, -O2, -O3)
+mail-client/thunderbird:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
 mail-client/thunderbird:gstreamer-0 - Use gstreamer:0.10 instead of gstreamer:1 for media support
 mail-client/thunderbird:jemalloc3 - Enable or disable jemalloc3 (forced-on when supported prior to 38.0)
 mail-client/thunderbird:lightning - Enable app-global calendar support (note 38.0 and above bundles calendar support when this flag is off)

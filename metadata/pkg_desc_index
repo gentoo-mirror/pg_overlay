@@ -18,7 +18,7 @@ dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applica
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/plasma-applet-awesome-widgets 9999: Collection of minimalistic Plasmoids which look like Awesome WM widgets (ex-PyTextMonitor)
-mail-client/thunderbird 45.6.0-r1: Thunderbird Mail Client
+mail-client/thunderbird 45.6.0-r1 45.7.0: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
 media-fonts/iosevka 1.9.2 1.10.0 1.10.5: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
