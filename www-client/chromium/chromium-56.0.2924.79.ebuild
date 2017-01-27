@@ -20,6 +20,11 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 x86"
 IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi debian inox iridium +ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
+REQUIRED_USE="debian? ( gtk3 )
+		ungoogled? ( gtk3 )
+		?? ( inox iridium ungoogled )
+		?? ( ungoogled debian )"
+MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -79,6 +84,9 @@ COMMON_DEPEND="
 	>=media-libs/libwebp-0.4.0:=
 	sys-libs/zlib:=[minizip]
 	kerberos? ( virtual/krb5 )
+	!gn? (
+		>=dev-libs/libevent-1.4.13:=
+	)
 "
 # For nvidia-drivers blocker, see bug #413637 .
 RDEPEND="${COMMON_DEPEND}
@@ -200,6 +208,24 @@ pkg_setup() {
 src_prepare() {
 	default
 
+	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
+	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
+
+	# Inox patches
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
+
+	# Iridium patches
+	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do eapply "${FILESDIR}/iridium-browser/$i";done
+
+	# Ungoogled patches
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
+
+	# Debian patches
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
+
 	local keeplibs=(
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
@@ -307,6 +333,7 @@ src_prepare() {
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/third_party/inspector_protocol
+		third_party/libva
 
 		# gyp -> gn leftovers
 		base/third_party/libevent
