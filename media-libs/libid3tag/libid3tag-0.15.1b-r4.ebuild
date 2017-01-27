@@ -22,7 +22,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epunt_cxx #74489
-	epatch "${FILESDIR}/${PV}"/*.patch
+	#epatch "${FILESDIR}/${PV}"/*.patch
 	elibtoolize #sane .so versionning on fbsd and .so -> .so.version symlink
 }
 
