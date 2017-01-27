@@ -8,7 +8,7 @@ inherit eutils linux-info systemd toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
-SRC_URI="http://http.debian.net/debian/pool/main/m/${PN}/${PN}_${PV}+dfsg.orig.tar.xz -> ${P}.tar.xz
+SRC_URI="http://ftp.debian.net/debian/pool/main/m/${PN}/${PN}_${PV}+dfsg.orig.tar.xz -> ${P}.tar.xz
 	https://dev.gentoo.org/~xmw/${PN}-gentoo-artwork.patch.xz"
 
 LICENSE="BSD GPL-2"
