@@ -24,7 +24,7 @@ REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
 		?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
-MY_MAJORV=$(get_major_version )
+MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -386,7 +386,7 @@ src_configure() {
 	# Inox
 	myconf_gn+=" enable_rlz=false"
 	if use inox; then
-		myconf_gn+=" safe_browsing_mode=0"	
+		myconf_gn+=" safe_browsing_mode=0"
 
 	# GN needs explicit config for Debug/Release as opposed to inferring it from build directory.
 	myconf_gn+=" is_debug=false"
