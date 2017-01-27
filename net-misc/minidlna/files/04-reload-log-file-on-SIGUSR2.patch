@@ -1,0 +1,107 @@
+Author: Benoît Knecht <benoit.knecht@fsfe.org>
+	Alexander Gerasiov <gq@debian.org>
+Description: Reload log file upon receiving SIGUSR2
+ This will allow for logrotate to tell minidlna that it needs to reopen
+ its log file.
+Updated: 2015-03-01
+
+--- a/log.c
++++ b/log.c
+@@ -29,6 +29,7 @@
+ #include "log.h"
+ 
+ static FILE *log_fp = NULL;
++static char *log_filename = NULL;
+ static const int _default_log_level = E_WARN;
+ int log_level[L_MAX];
+ 
+@@ -59,8 +60,14 @@
+ void
+ log_close(void)
+ {
+-	if (log_fp)
++	if (log_fp) {
+ 		fclose(log_fp);
++		log_fp = NULL;
++	}
++	if (log_filename) {
++		free(log_filename);
++		log_filename = NULL;
++	}
+ }
+ 
+ int find_matching_name(const char* str, const char* names[]) {
+@@ -79,7 +86,6 @@
+ log_init(const char *fname, const char *debug)
+ {
+ 	int i;
+-	FILE *fp;
+ 
+ 	int level = find_matching_name(debug, level_name);
+ 	int default_log_level = (level == -1) ? _default_log_level : level;
+@@ -120,9 +126,26 @@
+ 	if (!fname)					// use default i.e. stdout
+ 		return 0;
+ 
+-	if (!(fp = fopen(fname, "a")))
++	if (!(log_filename = strdup(fname)))
++		return 1;
++
++	if (!(log_fp = fopen(log_filename, "a")))
+ 		return 1;
+-	log_fp = fp;
++
++	return 0;
++}
++
++int
++log_reopen(void)
++{
++	if (log_fp)
++	{
++		fclose(log_fp);
++		log_fp = NULL;
++	}
++	if (log_filename)
++		if (!(log_fp = fopen(log_filename, "a")))
++			return 1;
+ 	return 0;
+ }
+ 
+--- a/log.h
++++ b/log.h
+@@ -46,6 +46,7 @@
+ extern int log_level[L_MAX];
+ extern int log_init(const char *fname, const char *debug);
+ extern void log_close(void);
++extern int log_reopen(void);
+ extern void log_err(int level, enum _log_facility facility, char *fname, int lineno, char *fmt, ...)
+ 	__attribute__((__format__ (__printf__, 5, 6)));
+ 
+--- a/minidlna.c
++++ b/minidlna.c
+@@ -166,6 +166,15 @@
+ }
+ 
+ static void
++sigusr2(int sig)
++{
++	signal(sig, sigusr2);
++	DPRINTF(E_WARN, L_GENERAL, "received signal %d, reload log\n", sig);
++
++	log_reopen();
++}
++
++static void
+ sighup(int sig)
+ {
+ 	signal(sig, sighup);
+@@ -961,6 +970,8 @@
+ 	sa.sa_handler = process_handle_child_termination;
+ 	if (sigaction(SIGCHLD, &sa, NULL))
+ 		DPRINTF(E_FATAL, L_GENERAL, "Failed to set %s handler. EXITING.\n", "SIGCHLD");
++	if (signal(SIGUSR2, &sigusr2) == SIG_ERR)
++		DPRINTF(E_FATAL, L_GENERAL, "Failed to set %s handler. EXITING.\n", "SIGUSR2");
+ 
+ 	if (writepidfile(pidfilename, pid, uid) != 0)
+ 		pidfilename = NULL;
