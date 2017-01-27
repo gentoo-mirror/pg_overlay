@@ -351,39 +351,6 @@ src_prepare() {
 src_configure() {
 	local myconf_gn=""
 
-	# AUR Chromium-Minimum
-	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_debug=false"
-	myconf_gn+=" fatal_linker_warnings=false"
-	myconf_gn+=" treat_warnings_as_errors=false"
-	myconf_gn+=" fieldtrial_testing_like_official_build=true"
-	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" use_sysroot=false"
-	myconf_gn+=" enable_nacl=false"
-	myconf_gn+=" enable_nacl_nonsfi=false"
-
-	# Ungoogled
-	myconf_gn+=" use_ozone=false"
-	myconf_gn+=" enable_remoting=false"
-	myconf_gn+=" enable_google_now=false"
-	myconf_gn+=" enable_hotwording=false"
-	myconf_gn+=" enable_hevc_demuxing=true"
-	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	myconf_gn+=" enable_rlz_support=false"
-	myconf_gn+=" enable_iterator_debugging=false"
-	if use ungoogled; then
-		myconf_gn+=" safe_browsing_mode=0"
-		myconf_gn+=" enable_one_click_signin=false"
-	fi
-	myconf_gn+=" use_gio=$(usex gnome true false)"
-	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-
-	# Inox
-	myconf_gn+=" enable_rlz=false"
-	if use inox; then
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
-
 	# GN needs explicit config for Debug/Release as opposed to inferring it from build directory.
 	myconf_gn+=" is_debug=false"
 
@@ -398,6 +365,27 @@ src_configure() {
 	# TODO: use_system_protobuf (bug #525560).
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
+
+	# Inox
+	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" is_debug=false"
+	myconf_gn+=" fatal_linker_warnings=false"
+	myconf_gn+=" treat_warnings_as_errors=false"
+	myconf_gn+=" fieldtrial_testing_like_official_build=true"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
+	myconf_gn+=" link_pulseaudio=true"
+	myconf_gn+=" use_sysroot=false"
+	myconf_gn+=" enable_nacl=false"
+	myconf_gn+=" enable_nacl_nonsfi=false"
+	myconf_gn+=" enable_rlz=false"
+	myconf_gn+=" enable_rlz_support=false"
+	myconf_gn+=" enable_remoting=false"
+	myconf_gn+=" enable_google_now=false"
+	myconf_gn+=" enable_hotwording=false"
+	myconf_gn+=" enable_print_preview=false"
+	if use inox; then
+		myconf_gn+=" safe_browsing_mode=0"
+	fi
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries="
