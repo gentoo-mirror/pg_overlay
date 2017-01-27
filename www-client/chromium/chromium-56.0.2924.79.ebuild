@@ -307,7 +307,6 @@ src_prepare() {
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/third_party/inspector_protocol
-		third_party/libva
 
 		# gyp -> gn leftovers
 		base/third_party/libevent
