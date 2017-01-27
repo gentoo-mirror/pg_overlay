@@ -17,14 +17,9 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 x86"
-IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi debian inox iridium +ungoogled"
+KEYWORDS="amd64 ~arm ~arm64 x86"
+IUSE="cups gnome gnome-keyring gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
-REQUIRED_USE="debian? ( gtk3 )
-		ungoogled? ( gtk3 )
-		?? ( inox iridium ungoogled )
-		?? ( ungoogled debian )"
-MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -55,7 +50,7 @@ COMMON_DEPEND="
 	media-libs/libvpx:=[svc]
 	media-libs/speex:=
 	pulseaudio? ( media-sound/pulseaudio:= )
-	system-ffmpeg? ( >=media-video/ffmpeg-2.7.2:= )
+	system-ffmpeg? ( >=media-video/ffmpeg-3:= )
 	sys-apps/dbus:=
 	sys-apps/pciutils:=
 	>=sys-libs/libcap-2.22:=
@@ -84,9 +79,6 @@ COMMON_DEPEND="
 	>=media-libs/libwebp-0.4.0:=
 	sys-libs/zlib:=[minizip]
 	kerberos? ( virtual/krb5 )
-	!gn? (
-		>=dev-libs/libevent-1.4.13:=
-	)
 "
 # For nvidia-drivers blocker, see bug #413637 .
 RDEPEND="${COMMON_DEPEND}
@@ -165,7 +157,9 @@ For other desktop environments, try one of the following:
 
 PATCHES=(
 	"${FILESDIR}/${PN}-system-ffmpeg-r4.patch"
+	"${FILESDIR}/${PN}-widevine-r1.patch"
 	"${FILESDIR}/${PN}-glibc-2.24.patch"
+	"${FILESDIR}/${PN}-56-gcc4.patch"
 )
 
 pre_build_checks() {
@@ -207,24 +201,6 @@ pkg_setup() {
 
 src_prepare() {
 	default
-
-	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
-
-	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
-
-	# Iridium patches
-	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do eapply "${FILESDIR}/iridium-browser/$i";done
-
-	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
-
-	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
-
-	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
@@ -333,7 +309,6 @@ src_prepare() {
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/third_party/inspector_protocol
-		third_party/libva
 
 		# gyp -> gn leftovers
 		base/third_party/libevent
@@ -353,39 +328,6 @@ src_prepare() {
 
 src_configure() {
 	local myconf_gn=""
-
-	# AUR Chromium-Minimum
-	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_debug=false"
-	myconf_gn+=" fatal_linker_warnings=false"
-	myconf_gn+=" treat_warnings_as_errors=false"
-	myconf_gn+=" fieldtrial_testing_like_official_build=true"
-	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" use_sysroot=false"
-	myconf_gn+=" enable_nacl=false"
-	myconf_gn+=" enable_nacl_nonsfi=false"
-
-	# Ungoogled
-	myconf_gn+=" use_ozone=false"
-	myconf_gn+=" enable_remoting=false"
-	myconf_gn+=" enable_google_now=false"
-	myconf_gn+=" enable_hotwording=false"
-	myconf_gn+=" enable_hevc_demuxing=true"
-	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	myconf_gn+=" enable_rlz_support=false"
-	myconf_gn+=" enable_iterator_debugging=false"
-	if use ungoogled; then
-		myconf_gn+=" safe_browsing_mode=0"
-		myconf_gn+=" enable_one_click_signin=false"
-	fi
-	myconf_gn+=" use_gio=$(usex gnome true false)"
-	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-
-	# Inox
-	myconf_gn+=" enable_rlz=false"
-	if use inox; then
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
 
 	# GN needs explicit config for Debug/Release as opposed to inferring it from build directory.
 	myconf_gn+=" is_debug=false"
@@ -445,7 +387,7 @@ src_configure() {
 	# Never use bundled gold binary. Disable gold linker flags for now.
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=true use_sysroot=false linux_use_bundled_binutils=false"
+	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
@@ -528,12 +470,6 @@ src_configure() {
 		local build_ffmpeg_args=""
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"
-		fi
-
-		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
-		else
-			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
 		fi
 
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
