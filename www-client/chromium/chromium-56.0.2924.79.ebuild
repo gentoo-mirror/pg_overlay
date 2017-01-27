@@ -208,8 +208,8 @@ pkg_setup() {
 src_prepare() {
 	default
 
-	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
+	#use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
+	#use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
 
 	# Inox patches
 	#use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
