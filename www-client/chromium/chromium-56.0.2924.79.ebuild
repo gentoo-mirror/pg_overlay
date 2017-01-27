@@ -24,7 +24,6 @@ REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
 		?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
-MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
