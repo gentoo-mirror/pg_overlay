@@ -1,13 +1,17 @@
-From: Franziskus Kiefer <franziskuskiefer@gmail.com>
+# HG changeset patch
+# User Franziskus Kiefer <franziskuskiefer@gmail.com>
+# Date 1469717280 -7200
+#      Thu Jul 28 16:48:00 2016 +0200
+# Node ID 95aa61f1e3562e526bf88179d9d078fd90ad1bda
+# Parent  d42aacfe34af25e2f5110e2ca3d24a210eabeb33
+Update keybits in H2, r=mt
 
-Update keybits in H2
-
-https://bugzilla.mozilla.org/show_bug.cgi?id=1290037
+MozReview-Commit-ID: 35oWoDMqe1Y
 
 diff --git a/netwerk/protocol/http/Http2Session.cpp b/netwerk/protocol/http/Http2Session.cpp
 --- a/netwerk/protocol/http/Http2Session.cpp
 +++ b/netwerk/protocol/http/Http2Session.cpp
-@@ -3516,18 +3516,18 @@ Http2Session::ConfirmTLSProfile()
+@@ -3544,18 +3544,18 @@ Http2Session::ConfirmTLSProfile()
      RETURN_SESSION_ERROR(this, INADEQUATE_SECURITY);
    }
  

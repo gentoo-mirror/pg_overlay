@@ -6,9 +6,9 @@
 # Parent  3c9f357598e86c2f593e9895d5725bf3498f8f5a
 Bug 1228540 - pt 2 - Remove our HBGetGlyphHOrigin callback, as the default behavior is sufficient.
 
-diff --git a/mozilla/gfx/thebes/gfxHarfBuzzShaper.cpp b/mozilla/gfx/thebes/gfxHarfBuzzShaper.cpp
---- a/mozilla/gfx/thebes/gfxHarfBuzzShaper.cpp
-+++ b/mozilla/gfx/thebes/gfxHarfBuzzShaper.cpp
+diff --git a/gfx/thebes/gfxHarfBuzzShaper.cpp b/gfx/thebes/gfxHarfBuzzShaper.cpp
+--- a/gfx/thebes/gfxHarfBuzzShaper.cpp
++++ b/gfx/thebes/gfxHarfBuzzShaper.cpp
 @@ -349,27 +349,16 @@ gfxHarfBuzzShaper::HBGetGlyphVAdvance(hb
          static_cast<const gfxHarfBuzzShaper::FontCallbackData*>(font_data);
      // Currently, we don't offer gfxFont subclasses a method to override this
@@ -57,9 +57,9 @@ diff --git a/mozilla/gfx/thebes/gfxHarfBuzzShaper.cpp b/mozilla/gfx/thebes/gfxHa
                                               nullptr, nullptr);
          hb_font_funcs_set_glyph_contour_point_func(sHBFontFuncs,
                                                     HBGetContourPoint,
-diff --git a/mozilla/gfx/thebes/gfxHarfBuzzShaper.h b/mozilla/gfx/thebes/gfxHarfBuzzShaper.h
---- a/mozilla/gfx/thebes/gfxHarfBuzzShaper.h
-+++ b/mozilla/gfx/thebes/gfxHarfBuzzShaper.h
+diff --git a/gfx/thebes/gfxHarfBuzzShaper.h b/gfx/thebes/gfxHarfBuzzShaper.h
+--- a/gfx/thebes/gfxHarfBuzzShaper.h
++++ b/gfx/thebes/gfxHarfBuzzShaper.h
 @@ -56,21 +56,16 @@ public:
                         hb_codepoint_t glyph, void *user_data);
  

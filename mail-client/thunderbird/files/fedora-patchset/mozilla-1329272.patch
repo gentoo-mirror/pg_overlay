@@ -1,20 +1,17 @@
-From: Jory A. Pratt <anarchy@gentoo.org>
+From 66fc64a75617ffc68f16780f60e39c1f368dfd41 Mon Sep 17 00:00:00 2001
+From: Daniel Stenberg <daniel@haxx.se>
+Date: Mon, 9 Jan 2017 14:37:33 +0100
+Subject: [PATCH] bug 1329272: add bracket for sed 4.3 compliance, r=glandium
 
-Note: the first occurrence of :space: is [:space:] (with a single pair
-of []), where it should be [[:space:]] (with two pairs of []).
-
-This causes the sed command to fail (with the error message quoted in
-my original report), driving to failure the whole configure step.
-
-https://bugzilla.mozilla.org/show_bug.cgi?id=1329252
+---
+ build/autoconf/icu.m4 | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/build/autoconf/icu.m4 b/build/autoconf/icu.m4
+index 4f46345f435a..794ddcdf4e52 100644
 --- a/build/autoconf/icu.m4
 +++ b/build/autoconf/icu.m4
-@@ -68,17 +68,17 @@ if test -n "$USE_ICU"; then
-     icudir="$_topsrcdir/intl/icu/source"
-     if test ! -d "$icudir"; then
-         icudir="$_topsrcdir/../../intl/icu/source"
+@@ -67,11 +67,11 @@ if test -n "$USE_ICU"; then
          if test ! -d "$icudir"; then
              AC_MSG_ERROR([Cannot find the ICU directory])
          fi
@@ -27,6 +24,6 @@ diff --git a/build/autoconf/icu.m4 b/build/autoconf/icu.m4
      fi
      MOZ_ICU_VERSION="$version"
  
-     if test "$OS_TARGET" = WINNT; then
-         MOZ_SHARED_ICU=1
-     fi
+-- 
+2.11.0
+
