@@ -11,6 +11,8 @@ HOMEPAGE="http://minidlna.sourceforge.net/"
 SRC_URI="http://ftp.by.debian.org/debian/pool/main/m/${PN}/${PN}_${PV}+dfsg.orig.tar.xz -> ${P}.tar.xz
 	https://dev.gentoo.org/~xmw/${PN}-gentoo-artwork.patch.xz"
 
+S=${S}+dfsg	
+
 LICENSE="BSD GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
