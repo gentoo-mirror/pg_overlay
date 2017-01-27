@@ -52,7 +52,7 @@ src_prepare() {
 		-e "/db_dir/s:/var/cache/:/var/lib/:" \
 		-i ${PN}.conf || die
 
-	epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
+	#epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
 	epatch "${FILESDIR}/*.patch"
 	epatch_user
 }
