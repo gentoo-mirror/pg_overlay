@@ -24,6 +24,7 @@ REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
 		?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
+MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -83,9 +84,6 @@ COMMON_DEPEND="
 	>=media-libs/libwebp-0.4.0:=
 	sys-libs/zlib:=[minizip]
 	kerberos? ( virtual/krb5 )
-	!gn? (
-		>=dev-libs/libevent-1.4.13:=
-	)
 "
 # For nvidia-drivers blocker, see bug #413637 .
 RDEPEND="${COMMON_DEPEND}
