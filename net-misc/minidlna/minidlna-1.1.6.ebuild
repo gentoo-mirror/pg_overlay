@@ -53,7 +53,7 @@ src_prepare() {
 		-i ${PN}.conf || die
 
 	#epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
-	epatch "${FILESDIR}/*.patch"
+	epatch "${FILESDIR}"/*.patch
 	epatch_user
 }
 
