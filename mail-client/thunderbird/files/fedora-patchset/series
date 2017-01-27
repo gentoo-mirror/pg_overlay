@@ -1,4 +1,3 @@
-build-nspr-prbool.patch
 build-werror.patch
 firefox-gcc-6.0.patch
 
