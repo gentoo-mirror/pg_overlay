@@ -161,7 +161,7 @@ For other desktop environments, try one of the following:
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-system-ffmpeg-r4.patch"
+	#"${FILESDIR}/${PN}-system-ffmpeg-r4.patch"
 	"${FILESDIR}/${PN}-glibc-2.24.patch"
 )
 
