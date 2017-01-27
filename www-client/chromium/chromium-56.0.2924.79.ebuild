@@ -24,7 +24,7 @@ REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
 		?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
-MY_MAJORV="$(get_major_version )"
+#MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -214,19 +214,19 @@ src_prepare() {
 	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
 
 	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do epatch "${FILESDIR}/inox-patchset/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do epatch "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
 
 	# Iridium patches
 	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
 
 	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do epatch "${FILESDIR}/ungoogled-chromium/$i";done
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do epatch "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
 
 	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do epatch "${FILESDIR}/debian-patchset/$i";done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do epatch "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do epatch "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
