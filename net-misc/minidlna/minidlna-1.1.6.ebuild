@@ -4,7 +4,7 @@
 
 EAPI=5
 
-inherit eutils linux-info systemd toolchain-funcs user
+inherit autotools eutils linux-info systemd toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
@@ -55,6 +55,7 @@ src_prepare() {
 	#epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
 	epatch "${FILESDIR}"/*.patch
 	epatch_user
+	eautoreconf
 }
 
 src_configure() {
