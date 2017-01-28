@@ -1,3 +1,5 @@
+fix-building-without-safebrowsing.patch
+
 disable-autofill-download-manager.patch
 disable-google-url-tracker.patch
 disable-default-extensions.patch
