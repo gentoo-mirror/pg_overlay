@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 x86"
-IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi +debian inox iridium ungoogled"
+IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi +debian +inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
@@ -384,9 +384,9 @@ src_configure() {
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
-	#if use inox; then
-	#	myconf_gn+=" safe_browsing_mode=0"
-	#fi
+	if use inox; then
+		myconf_gn+=" safe_browsing_mode=0"
+	fi
 
 	# Ungoogled
 	myconf_gn+=" enable_hevc_demuxing=true"
