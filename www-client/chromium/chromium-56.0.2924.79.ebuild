@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 x86"
-IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi debian +inox iridium ungoogled"
+IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi +debian inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
@@ -212,16 +212,16 @@ src_prepare() {
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
 
 	# Iridium patches
-	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do eapply "${FILESDIR}/iridium-browser/$i";done
+	use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do eapply "${FILESDIR}/iridium-browser/$i";done
 
 	# Ungoogled patches
-	#use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
