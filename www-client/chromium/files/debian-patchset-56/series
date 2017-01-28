@@ -6,7 +6,6 @@ gn/buildflags.patch
 
 disable/promo.patch
 disable/google-api-warning.patch
-disable/external-components.patch
 
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
