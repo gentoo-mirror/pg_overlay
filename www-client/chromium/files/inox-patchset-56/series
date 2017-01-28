@@ -1,4 +1,5 @@
 fix-building-without-safebrowsing.patch
+fix-building-without-webrtc.patch
 
 disable-autofill-download-manager.patch
 disable-google-url-tracker.patch

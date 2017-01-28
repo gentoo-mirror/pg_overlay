@@ -375,6 +375,7 @@ src_configure() {
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=true"
 	myconf_gn+=" use_sysroot=false"
+	myconf_gn+=" enable_hangout_services_extension=false"
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_rlz=false"
