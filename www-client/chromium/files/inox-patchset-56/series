@@ -1,6 +1,5 @@
-chromium-52.0.2743.116-unset-madv_free.patch
-
 fix-building-without-safebrowsing.patch
+fix-building-without-webrtc.patch
 
 disable-autofill-download-manager.patch
 disable-google-url-tracker.patch
