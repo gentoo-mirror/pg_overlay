@@ -389,7 +389,6 @@ src_configure() {
 	fi
 
 	# Ungoogled
-	myconf_gn+=" enable_one_click_signin=false"
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_iterator_debugging=false"
