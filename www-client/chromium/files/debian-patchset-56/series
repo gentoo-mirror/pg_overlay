@@ -2,6 +2,7 @@ manpage.patch
 master-preferences.patch
 
 gn/parallel.patch
+gn/buildflags.patch
 
 disable/promo.patch
 disable/google-api-warning.patch
