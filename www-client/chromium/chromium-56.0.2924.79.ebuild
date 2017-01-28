@@ -18,7 +18,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 x86"
-IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi +debian +inox iridium ungoogled"
+IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi debian inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
@@ -367,22 +367,22 @@ src_configure() {
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
 	# Inox
-	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_debug=false"
-	myconf_gn+=" fatal_linker_warnings=false"
-	myconf_gn+=" treat_warnings_as_errors=false"
-	myconf_gn+=" fieldtrial_testing_like_official_build=true"
-	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" link_pulseaudio=true"
-	myconf_gn+=" use_sysroot=false"
-	myconf_gn+=" enable_nacl=false"
-	myconf_gn+=" enable_nacl_nonsfi=false"
-	myconf_gn+=" enable_rlz=false"
-	myconf_gn+=" enable_rlz_support=false"
-	myconf_gn+=" enable_remoting=false"
-	myconf_gn+=" enable_google_now=false"
-	myconf_gn+=" enable_hotwording=false"
-	myconf_gn+=" enable_print_preview=false"
+	#myconf_gn+=" symbol_level=0"
+	#myconf_gn+=" is_debug=false"
+	#myconf_gn+=" fatal_linker_warnings=false"
+	#myconf_gn+=" treat_warnings_as_errors=false"
+	#myconf_gn+=" fieldtrial_testing_like_official_build=true"
+	#myconf_gn+=" remove_webcore_debug_symbols=true"
+	#myconf_gn+=" link_pulseaudio=true"
+	#myconf_gn+=" use_sysroot=false"
+	#myconf_gn+=" enable_nacl=false"
+	#myconf_gn+=" enable_nacl_nonsfi=false"
+	#myconf_gn+=" enable_rlz=false"
+	#myconf_gn+=" enable_rlz_support=false"
+	#myconf_gn+=" enable_remoting=false"
+	#myconf_gn+=" enable_google_now=false"
+	#myconf_gn+=" enable_hotwording=false"
+	#myconf_gn+=" enable_print_preview=false"
 	if use inox; then
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
