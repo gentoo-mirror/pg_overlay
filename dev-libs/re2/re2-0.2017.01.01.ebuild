@@ -12,12 +12,12 @@ RE2_VER=${RE2_VER//./-}
 
 DESCRIPTION="An efficent, principled regular expression library"
 HOMEPAGE="https://github.com/google/re2"
-SRC_URI="https://github.com/google/${PN}/archive/${RE2_VER}.tar.gz -> ${PN}-${RE2_VER}.tar.gz"
+SRC_URI="https://github.com/google/re2/archive/${RE2_VER}.tar.gz -> re2-${RE2_VER}.tar.gz"
 
 LICENSE="BSD"
 # NOTE: Always run libre2 through abi-compliance-checker!
 # https://abi-laboratory.pro/tracker/timeline/re2/
-SONAME="gentoo-2016-11-01"
+SONAME="gentoo-2016-09-01"
 SLOT="0/${SONAME}"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="icu"
@@ -26,7 +26,7 @@ RDEPEND="icu? ( dev-libs/icu:0=[${MULTILIB_USEDEP}] )"
 DEPEND="${RDEPEND}
 	icu? ( virtual/pkgconfig )"
 
-S="${WORKDIR}/${PN}-${RE2_VER}"
+S="${WORKDIR}/re2-${RE2_VER}"
 
 DOCS=( AUTHORS CONTRIBUTORS README doc/syntax.txt )
 HTML_DOCS=( doc/syntax.html )
