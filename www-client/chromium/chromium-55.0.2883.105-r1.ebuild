@@ -199,7 +199,7 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/chromium_vaapi-55.patch"
+	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux-55.diff"
 
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MAJORV}/series");do epatch "${FILESDIR}/inox-patchset-${MAJORV}/$i";done
