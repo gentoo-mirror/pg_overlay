@@ -163,11 +163,10 @@ For other desktop environments, try one of the following:
 
 PATCHES=(
 	"${FILESDIR}/${PN}-system-ffmpeg-r4.patch"
-	"${FILESDIR}/${PN}-glibc-2.24.patch"
-	#"${FILESDIR}/${PN}-system-jinja-r14.patch"
-	#"${FILESDIR}/${PN}-54-ffmpeg2compat.patch"
-	#"${FILESDIR}/${PN}-gn-bootstrap-ld.patch"
-	#"${FILESDIR}/${PN}-icu-58.patch"
+	"${FILESDIR}/${PN}-system-jinja-r14.patch"
+	"${FILESDIR}/${PN}-54-ffmpeg2compat.patch"
+	"${FILESDIR}/${PN}-gn-bootstrap-ld.patch"
+	"${FILESDIR}/${PN}-icu-58.patch"
 )
 
 pkg_pretend() {
