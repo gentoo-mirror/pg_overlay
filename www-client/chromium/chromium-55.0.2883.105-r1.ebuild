@@ -24,6 +24,7 @@ REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
 		?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
+MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
 QA_FLAGS_IGNORED=".*\.nexe"
@@ -162,10 +163,11 @@ For other desktop environments, try one of the following:
 
 PATCHES=(
 	"${FILESDIR}/${PN}-system-ffmpeg-r4.patch"
-	"${FILESDIR}/${PN}-system-jinja-r14.patch"
-	"${FILESDIR}/${PN}-54-ffmpeg2compat.patch"
-	"${FILESDIR}/${PN}-gn-bootstrap-ld.patch"
-	"${FILESDIR}/${PN}-icu-58.patch"
+	"${FILESDIR}/${PN}-glibc-2.24.patch"
+	#"${FILESDIR}/${PN}-system-jinja-r14.patch"
+	#"${FILESDIR}/${PN}-54-ffmpeg2compat.patch"
+	#"${FILESDIR}/${PN}-gn-bootstrap-ld.patch"
+	#"${FILESDIR}/${PN}-icu-58.patch"
 )
 
 pkg_pretend() {
@@ -197,22 +199,22 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux.diff"
+	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux-55.diff"
 
 	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset/series");do epatch "${FILESDIR}/inox-patchset/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MAJORV}/series");do epatch "${FILESDIR}/inox-patchset-${MAJORV}/$i";done
 
 	# Iridium patches
 	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do epatch "${FILESDIR}/iridium-browser/$i";done
 
 	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium/series");do epatch "${FILESDIR}/ungoogled-chromium/$i";done
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MAJORV}/series");do epatch "${FILESDIR}/ungoogled-chromium-${MAJORV}/$i";done
 
 	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset/series");do epatch "${FILESDIR}/debian-patchset/$i";done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MAJORV}/series");do epatch "${FILESDIR}/debian-patchset-${MAJORV}/$i";done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do epatch "${FILESDIR}/fedora-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MAJORV}/series"); do epatch "${FILESDIR}/fedora-patchset-${MAJORV}/$i"; done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
