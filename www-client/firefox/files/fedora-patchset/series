@@ -2,7 +2,6 @@ firefox-build-prbool.patch
 
 rhbz-966424.patch
 firefox-enable-addons.patch
-firefox-fedora-ua.patch
 mozilla-1170092.patch
 mozilla-1005640-accept-lang.patch
 
