@@ -37,7 +37,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-lin
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +gmp-autoupdate hardened hwaccel jack pgo rust selinux test +kde"
+IUSE="bindist +gmp-autoupdate hardened +hwaccel jack pgo rust selinux test +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -126,7 +126,8 @@ src_unpack() {
 
 src_prepare() {
 	# Apply our patches
-	eapply "${WORKDIR}/firefox"
+	eapply "${WORKDIR}/firefox" \
+		"${FILESDIR}"/fix_hardened_pie_detection.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -373,7 +374,7 @@ src_install() {
 		|| die
 	fi
 
-	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX%/}/bin/bash}" \
 	emake DESTDIR="${D}" install
 
 	# Install language packs

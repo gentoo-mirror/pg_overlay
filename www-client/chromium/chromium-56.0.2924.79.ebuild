@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="cups gnome gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg +tcmalloc widevine vaapi +debian +inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
@@ -160,11 +160,6 @@ For other desktop environments, try one of the following:
 - x11-themes/tango-icon-theme
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-system-ffmpeg-r4.patch"
-	"${FILESDIR}/${PN}-glibc-2.24.patch"
-)
-
 pre_build_checks() {
 	if [[ ${MERGE_TYPE} != binary ]]; then
 		local -x CPP="$(tc-getCXX) -E"
@@ -184,6 +179,7 @@ pre_build_checks() {
 	eshopts_push -s extglob
 	if is-flagq '-g?(gdb)?([1-9])'; then
 		CHECKREQS_DISK_BUILD="25G"
+		CHECKREQS_MEMORY="16G"
 	fi
 	eshopts_pop
 	check-reqs_pkg_setup
@@ -203,6 +199,12 @@ pkg_setup() {
 }
 
 src_prepare() {
+	local PATCHES=(
+		"${FILESDIR}/${PN}-glibc-2.24.patch"
+	)
+
+	use system-ffmpeg && PATCHES+=( "${FILESDIR}/${PN}-system-ffmpeg-r4.patch" )
+
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
@@ -522,7 +524,7 @@ src_configure() {
 		fi
 
 		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
+			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
 		else
 			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
 		fi
