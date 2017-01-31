@@ -22,9 +22,9 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 # KEYWORDS further up
-IUSE="analyzer aac +alsa bs2b cdda cover crossfade cue curl enca ffmpeg flac jack game kde ladspa
-lyrics +mad midi mms modplug mplayer mpris musepack notifier opus oss projectm
-pulseaudio qsui scrobbler sndfile soxr stereo tray udisks +vorbis wavpack"
+IUSE="analyzer aac +alsa bs2b cdda cover crossfade +cue curl +enca ffmpeg flac jack game +kde ladspa
+lyrics +mad midi mms modplug mplayer +mpris musepack +notifier opus oss projectm
+pulseaudio +qsui scrobbler sndfile+ soxr stereo +tray -udisks -vorbis wavpack"
 
 RDEPEND="media-libs/taglib
 	dev-qt/qtcore:5
