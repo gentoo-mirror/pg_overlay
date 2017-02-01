@@ -55,7 +55,6 @@ sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/lshw 02.18b: Hardware Lister
 sys-apps/razercfg 0.38: Utility for advanced configuration of Razer mice (DeathAdder, Krait, Lachesis)
 sys-apps/roccat-tools 5.5.0 5.6.0: Utility for advanced configuration of Roccat devices
-sys-apps/util-linux 2.29: Various useful Linux utilities
 sys-auth/elogind 219.14: The systemd project's logind, extracted to a standalone package
 sys-block/zram-init 6.1.0: Scripts to support compressed swap devices or ramdisks with zram
 sys-boot/efibootmgr 9999: User-space application to modify the EFI boot manager
@@ -64,7 +63,6 @@ sys-fs/android-file-transfer 9999: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
-sys-libs/libcap 2.25: POSIX 1003.1e capabilities
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 55.0.2883.105-r1 56.0.2924.79: Open-source version of Google Chrome web browser
 www-client/firefox 50.1.0-r1 51.0 51.0.1: Firefox Web Browser
