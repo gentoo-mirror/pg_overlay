@@ -88,7 +88,7 @@ src_configure() {
 		$(use_enable stats alcc) \
 		$(use_enable upnp) \
 		$(use_enable mmap mmap) \
-		$(usex boost --with-boost) \
+		$(use_with boost) \
 		${myconf}
 }
 
