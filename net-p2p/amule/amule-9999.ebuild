@@ -14,7 +14,7 @@ EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+daemon -debug -geoip +nls remote -stats +unicode -upnp +X +mmap"
+IUSE="+daemon -debug -geoip +nls remote -stats +unicode -upnp +X +mmap boost"
 
 DEPEND="
 	>=dev-libs/crypto++-5
@@ -90,7 +90,7 @@ src_configure() {
 		$(use_enable stats alcc) \
 		$(use_enable upnp) \
 		$(use_enable mmap mmap) \
-		$(usex daemon --with-boost) \
+		$(usex boost --with-boost) \
 		${myconf}
 }
 
