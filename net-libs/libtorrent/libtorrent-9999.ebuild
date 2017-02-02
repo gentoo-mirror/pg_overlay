@@ -46,7 +46,8 @@ src_configure() {
 	CONFIG_SHELL=${BASH} econf \
 		--enable-aligned \
 		$(use_enable debug) \
-		$(use_enable ssl openssl)
+		$(use_enable ssl openssl) \
+		--with-posix-fallocate
 }
 
 src_install() {
