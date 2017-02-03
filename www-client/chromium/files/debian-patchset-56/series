@@ -1,5 +1,4 @@
 manpage.patch
-master-preferences.patch
 
 gn/parallel.patch
 gn/buildflags.patch
