@@ -27,6 +27,8 @@ media-libs/libid3tag 0.15.1b-r4: The MAD id3tag library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/soxr 9999: The SoX Resampler library
 media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
+media-plugins/gst-plugins-libav 1.10.3: FFmpeg based gstreamer plugin
+media-plugins/gst-plugins-vaapi 1.10.3: Hardware accelerated video decoding through VA-API plugin
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
