@@ -18,6 +18,10 @@ kde-misc/plasma-applet-awesome-widgets 9999: Collection of minimalistic Plasmoid
 mail-client/thunderbird 45.7.0: Thunderbird Mail Client
 media-fonts/infinality-fonts-meta 0: Meta package for infinality-ultimate with fonts
 media-fonts/iosevka 1.11.0: Open source coding font
+media-libs/gst-plugins-bad 1.10.3: Less plugins for GStreamer
+media-libs/gst-plugins-base 1.10.3: Basepack of plugins for gstreamer
+media-libs/gst-plugins-good 1.10.3: Basepack of plugins for GStreamer
+media-libs/gstreamer 1.10.3: Open source multimedia framework
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libid3tag 0.15.1b-r4: The MAD id3tag library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
