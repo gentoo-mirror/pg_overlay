@@ -1,13 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=6
 GST_ORG_MODULE="gst-plugins-good"
-
-PV="${PV%_*}"
-P="${PN}-${PV}"
-S="${WORKDIR}/${P}"
 
 inherit eutils flag-o-matic gstreamer
 
@@ -21,8 +17,8 @@ IUSE="+orc"
 # dtmf plugin moved from bad to good in 1.2
 RDEPEND="
 	>=dev-libs/glib-2.40.0:2[${MULTILIB_USEDEP}]
-	>=media-libs/gst-plugins-base-${PV}_pre:${SLOT}[${MULTILIB_USEDEP}]
-	>=media-libs/gstreamer-${PV}_pre:${SLOT}[${MULTILIB_USEDEP}]
+	>=media-libs/gst-plugins-base-${PV}:${SLOT}[${MULTILIB_USEDEP}]
+	>=media-libs/gstreamer-${PV}:${SLOT}[${MULTILIB_USEDEP}]
 	>=app-arch/bzip2-1.0.6-r4[${MULTILIB_USEDEP}]
 	>=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}]
 	orc? ( >=dev-lang/orc-0.4.17[${MULTILIB_USEDEP}] )

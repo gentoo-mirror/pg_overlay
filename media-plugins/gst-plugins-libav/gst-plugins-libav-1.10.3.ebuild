@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -6,9 +6,10 @@ EAPI=6
 
 inherit eutils multilib-minimal
 
+MY_PN="gst-libav"
 DESCRIPTION="FFmpeg based gstreamer plugin"
 HOMEPAGE="https://gstreamer.freedesktop.org/modules/gst-libav.html"
-SRC_URI="https://gstreamer.freedesktop.org/src/gst-libav/gst-libav-${PV}.tar.xz"
+SRC_URI="https://gstreamer.freedesktop.org/src/${MY_PN}/${MY_PN}-${PV}.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="1.0"
@@ -30,7 +31,7 @@ DEPEND="${RDEPEND}
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
 "
 
-S="${WORKDIR}/gst-libav-${PV}"
+S="${WORKDIR}/${MY_PN}-${PV}"
 
 multilib_src_configure() {
 	GST_PLUGINS_BUILD=""
