@@ -1,13 +1,9 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 EAPI=6
 GST_ORG_MODULE="gst-plugins-bad"
-
-PV="${PV%_*}"
-P="${PN}-${PV}"
-S="${WORKDIR}/${P}"
 
 inherit eutils flag-o-matic gstreamer virtualx
 
@@ -17,7 +13,7 @@ HOMEPAGE="https://gstreamer.freedesktop.org/"
 LICENSE="LGPL-2"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
 
-IUSE="X egl gles2 gtk +introspection opengl +orc vcd vnc wayland"
+IUSE="X bzip2 egl gles2 gtk +introspection opengl +orc vcd vnc wayland"
 REQUIRED_USE="
 	egl? ( !gles2 )
 	gles2? ( !opengl )
@@ -28,9 +24,9 @@ REQUIRED_USE="
 # dtmf plugin moved from bad to good in 1.2
 # X11 is automagic for now, upstream #709530
 RDEPEND="
-	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
-	>=media-libs/gstreamer-${PV}_pre:${SLOT}[${MULTILIB_USEDEP},introspection?]
-	>=media-libs/gst-plugins-base-${PV}_pre:${SLOT}[${MULTILIB_USEDEP},introspection?]
+	>=dev-libs/glib-2.40.0:2[${MULTILIB_USEDEP}]
+	>=media-libs/gstreamer-${PV}:${SLOT}[${MULTILIB_USEDEP},introspection?]
+	>=media-libs/gst-plugins-base-${PV}:${SLOT}[${MULTILIB_USEDEP},introspection?]
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1:= )
 
 	egl? ( >=media-libs/mesa-9.1.6[egl,${MULTILIB_USEDEP}] )
@@ -70,6 +66,7 @@ multilib_src_configure() {
 	# and shm (need a switch for winnt ?)
 	gstreamer_multilib_src_configure \
 		$(multilib_native_use_enable introspection) \
+		$(use_enable bzip2 bz2) \
 		$(use_enable egl) \
 		$(use_enable gles2) \
 		$(use_enable gtk gtk3) \
