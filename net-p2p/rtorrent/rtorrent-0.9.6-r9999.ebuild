@@ -4,19 +4,19 @@
 
 EAPI=5
 
-inherit autotools eutils flag-o-matic git-r3
+inherit autotools flag-o-matic eutils
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="git://github.com/rakshasa/${PN}.git"
-EGIT_BRANCH="feature-bind"
+COMMIT="10ce6864b81aaf2a7e43e9959940696b47aac2bc"
+SRC_URI="https://github.com/rakshasa/${PN}/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~hppa ~ia64 ppc ppc64 ~sparc x86 ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris"
 IUSE="+daemon debug ipv6 selinux test +xmlrpc"
 
-COMMON_DEPEND="=net-libs/libtorrent-9999
+COMMON_DEPEND="~net-libs/libtorrent-0.13.${PV##*.}
 	>=net-misc/curl-7.19.1
 	sys-libs/ncurses:0=
 	xmlrpc? ( dev-libs/xmlrpc-c )"
@@ -29,6 +29,8 @@ DEPEND="${COMMON_DEPEND}
 	virtual/pkgconfig"
 
 DOCS=( doc/rtorrent.rc )
+
+S=${WORKDIR}/${PN}-${COMMIT}
 
 src_prepare() {
 	eautoreconf
