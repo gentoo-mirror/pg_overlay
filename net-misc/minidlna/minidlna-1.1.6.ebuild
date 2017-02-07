@@ -32,7 +32,7 @@ DEPEND="${RDEPEND}
 
 CONFIG_CHECK="~INOTIFY_USER"
 
-S=${WORKDIR}/${PV}-git-${COMMIT}
+S=${WORKDIR}/${PN}-git-${COMMIT}
 
 pkg_setup() {
 	local my_is_new="yes"
