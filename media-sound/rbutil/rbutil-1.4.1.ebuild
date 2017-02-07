@@ -9,7 +9,7 @@ inherit eutils qmake-utils
 DESCRIPTION="Rockbox opensource firmware manager for mp3 players"
 HOMEPAGE="http://www.rockbox.org/wiki/RockboxUtility"
 COMMIT="16d1788356e82c639302a884437341e039574822"
-SRC_URI="https://github.com/Rockbox/rockbox/commit/${COMMIT}.tar.gz > ${P}.tar.gz"
+SRC_URI="https://github.com/Rockbox/rockbox/commit/${COMMIT}.tar.gz >> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
