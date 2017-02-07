@@ -22,7 +22,7 @@ RDEPEND="dev-qt/qtcore:5
 	dev-qt/qtwidgets:5
 	>=media-libs/libmpdclient-2.10
 	media-libs/taglib
-	media-sound/mpd[libmpdclient]"
+	media-sound/mpd"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
