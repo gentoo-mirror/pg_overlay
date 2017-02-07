@@ -21,7 +21,7 @@ RDEPEND="dev-qt/qtcore:5
 	virtual/libusb"
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}/${P}/${PN}/${PN}qt
+S=${WORKDIR}/${P}-${COMMIT}/${PN}/${PN}qt
 
 src_configure() {
 	export QT_SELECT="5"
