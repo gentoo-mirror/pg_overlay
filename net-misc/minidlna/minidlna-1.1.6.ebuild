@@ -8,7 +8,8 @@ inherit autotools eutils linux-info systemd toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
-SRC_URI="http://ftp.by.debian.org/debian/pool/main/m/${PN}/${PN}_${PV}+dfsg.orig.tar.xz -> ${P}.tar.xz
+COMMIT="8a996b4b624ef45538a5de10730b8e94c55e7768"
+SRC_URI="https://sourceforge.net/code-snapshots/git/m/mi/${PN}/git.git/${PN}-git-${COMMIT}.zip -> ${P}.zip
 	https://dev.gentoo.org/~xmw/${PN}-gentoo-artwork.patch.xz"
 
 S=${S}+dfsg	
@@ -31,6 +32,8 @@ DEPEND="${RDEPEND}
 
 CONFIG_CHECK="~INOTIFY_USER"
 
+S=${WORKDIR}/${PV}-git-${COMMIT}
+
 pkg_setup() {
 	local my_is_new="yes"
 	[ -d "${EPREFIX}"/var/lib/${PN} ] && my_is_new="no"
@@ -52,8 +55,8 @@ src_prepare() {
 		-e "/db_dir/s:/var/cache/:/var/lib/:" \
 		-i ${PN}.conf || die
 
-	#epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
-	epatch "${FILESDIR}"/*.patch
+	epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
+	#epatch "${FILESDIR}"/*.patch
 	epatch_user
 	eautoreconf
 }
