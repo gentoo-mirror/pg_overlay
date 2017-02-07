@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install prepare test
-DEPEND=dev-qt/qtcore:5 dev-qt/qtdbus:5 dev-qt/qtdeclarative:5 dev-qt/qtgui:5 sys-libs/readline:0= acoustid? ( media-libs/chromaprint virtual/ffmpeg ) flac? ( media-libs/flac[cxx] media-libs/libvorbis ) mp3? ( media-libs/id3lib ) mp4? ( media-libs/libmp4v2:0 ) phonon? ( || ( media-libs/phonon[qt5] ) ) taglib? ( >=media-libs/taglib-1.9.1 ) vorbis? ( media-libs/libogg media-libs/libvorbis ) sys-devel/make >=dev-util/cmake-3.5.2
+DEPEND=dev-qt/qtcore:5 dev-qt/qtdbus:5 dev-qt/qtdeclarative:5 dev-qt/qtgui:5 sys-libs/readline:0= acoustid? ( media-libs/chromaprint virtual/ffmpeg ) flac? ( media-libs/flac[cxx] media-libs/libvorbis ) mp3? ( media-libs/id3lib ) mp4? ( media-libs/libmp4v2:0 ) phonon? ( || ( media-libs/phonon[qt5] ) ) taglib? ( >=media-libs/taglib-1.9.1 ) vorbis? ( media-libs/libogg media-libs/libvorbis ) sys-devel/make >=dev-util/cmake-3.6.3
 DESCRIPTION=A simple tag editor for KDE
 EAPI=6
 HOMEPAGE=http://kid3.sourceforge.net/
@@ -11,5 +11,5 @@ REQUIRED_USE=flac? ( vorbis )
 SLOT=5
 SRC_URI=mirror://sourceforge/kid3/kid3-3.4.2.tar.gz
 _eclass_exported_funcs=src_prepare:cmake-utils src_configure:- src_compile:cmake-utils src_test:cmake-utils src_install:cmake-utils
-_eclasses_=cmake-utils	b602fb1ae4bc807a6756bb8b187fbe54	eutils	ea170b525f6a38a006be05c9d9429f13	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	multilib	165fc17c38d1b11dac2008280dab6e80	multiprocessing	7bb10a841be2368af0c00f27dd67560b	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
+_eclasses_=cmake-utils	014267c4475c1a625ecec5b16e0db1e6	eutils	ea170b525f6a38a006be05c9d9429f13	flag-o-matic	7366202dd55cb8f018f5d450d54e7749	multilib	165fc17c38d1b11dac2008280dab6e80	multiprocessing	7bb10a841be2368af0c00f27dd67560b	toolchain-funcs	1b1da0c45c555989dc5d832b54880783	versionator	99ae9d758cbe7cfed19170e7d48f5a9c
 _md5_=648e1b584e344aecd2697f5c538c4799
