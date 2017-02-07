@@ -9,7 +9,7 @@ inherit eutils qmake-utils git-r3
 DESCRIPTION="Rockbox opensource firmware manager for mp3 players"
 HOMEPAGE="http://www.rockbox.org/wiki/RockboxUtility"
 EGIT_REPO_URI="git://git.rockbox.org/rockbox.git"
-EGIT_COMMIT="96a7603bf9e930a715f7bbb50929975d8d184419"
+EGIT_COMMIT="1fa7c5635184e3a8c16b696a658c027fcc0862d8"
 #EGIT_COMMIT="16d1788356e82c639302a884437341e039574822"
 
 LICENSE="GPL-2"
