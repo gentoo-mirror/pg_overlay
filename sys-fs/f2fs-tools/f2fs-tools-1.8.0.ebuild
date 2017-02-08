@@ -17,6 +17,12 @@ IUSE=""
 
 DEPEND="sys-apps/util-linux"
 
+
+src_prepare() {
+	default
+	eautoreconf
+}
+
 src_configure() {
 	#This is required to install to /sbin, bug #481110
 	econf \
