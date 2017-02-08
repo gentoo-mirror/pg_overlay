@@ -1,0 +1,12 @@
+DEFINED_PHASES=configure install
+DEPEND=sys-apps/util-linux
+DESCRIPTION=Tools for Flash-Friendly File System (F2FS)
+EAPI=6
+HOMEPAGE=https://git.kernel.org/cgit/linux/kernel/git/jaegeuk/f2fs-tools.git/about/
+KEYWORDS=~amd64 ~arm ~mips ~x86
+LICENSE=GPL-2
+SLOT=0/1
+SRC_URI=https://git.kernel.org/cgit/linux/kernel/git/jaegeuk/f2fs-tools.git/snapshot/f2fs-tools-1.8.0.tar.gz
+_eclass_exported_funcs=src_configure:- src_install:-
+_eclasses_=multilib	165fc17c38d1b11dac2008280dab6e80	toolchain-funcs	1b1da0c45c555989dc5d832b54880783
+_md5_=b52246b33c4e837c4cceb679d65eda3f
