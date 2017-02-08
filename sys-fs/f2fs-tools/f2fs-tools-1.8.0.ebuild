@@ -4,7 +4,7 @@
 
 EAPI="6"
 
-inherit multilib
+inherit autotools multilib
 
 DESCRIPTION="Tools for Flash-Friendly File System (F2FS)"
 HOMEPAGE="https://git.kernel.org/cgit/linux/kernel/git/jaegeuk/f2fs-tools.git/about/"
