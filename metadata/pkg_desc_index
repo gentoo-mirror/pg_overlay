@@ -45,6 +45,7 @@ media-sound/tagparser 5.0.1: C++ library for reading and writing MP4 (iTunes), I
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
+net-im/skypeforlinux 1.17.0.1: P2P Internet Telephony (VoiceIP) client
 net-libs/libtorrent 0.13.6 0.13.6-r9999 9999: BitTorrent library written in C++ for *nix
 net-libs/rb_libtorrent 1.0.10 1.1.1 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-misc/minidlna 1.1.6: DLNA/UPnP-AV compliant media server
