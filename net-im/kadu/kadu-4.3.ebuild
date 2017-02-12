@@ -122,6 +122,7 @@ src_configure() {
 		-DINSTALL_SDK=$(usex sdk)
 		-DWITH_ENCHANT=$(usex spell)
 		-DCMAKE_CXX_STANDARD=14
+		-DENABLE_TESTS=OFF
 	)
 	unset PLUGINS
 
