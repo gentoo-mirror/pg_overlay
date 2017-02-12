@@ -86,7 +86,6 @@ hints
 history
 idle
 imagelink
-indicator_docking
 last_seen
 mediaplayer
 mprisplayer_mediaplayer
