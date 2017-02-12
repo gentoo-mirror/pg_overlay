@@ -15,7 +15,7 @@ COMMIT="dc7acca2cd4c87fb2541df17d8b4d80e0f607cc8"
 SRC_URI="https://github.com/wxWidgets/wxWidgets/archive/${COMMIT}.tar.gz -> ${P}.tar.gz
 	doc? ( mirror://sourceforge/wxpython/wxPython-docs-${PV}.tar.bz2 )"
 
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS=""
 IUSE="+X aqua doc debug gstreamer libnotify opengl sdl tiff webkit"
 
 WXSUBVERSION=${PV}-gtk3					# 3.0.2.0-gtk3
