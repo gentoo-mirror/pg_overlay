@@ -133,6 +133,7 @@ src_configure() {
 		-DNETWORK_IMPLEMENTATION="Qt"
 		-DINSTALL_SDK=$(usex sdk)
 		-DWITH_ENCHANT=$(usex spell)
+		-DCMAKE_CXX_STANDARD=14
 	)
 	unset PLUGINS
 
