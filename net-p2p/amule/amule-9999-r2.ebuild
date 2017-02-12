@@ -3,7 +3,9 @@
 # $Id$
 
 EAPI=6
-WX_GTK_VER="3.0-gtk3"
+WX_GTK_VER="3.0"
+
+inherit wxwidgets user
 
 inherit wxwidgets user git-r3
 
@@ -20,7 +22,7 @@ DEPEND="
 	>=dev-libs/crypto++-5
 	sys-libs/binutils-libs:0=
 	>=sys-libs/zlib-1.2.1
-	>=x11-libs/wxGTK-3.0.2:3.0-gtk3[X?]
+	x11-libs/wxGTK:${WX_GTK_VER}[X?]
 	stats? ( >=media-libs/gd-2.0.26:=[jpeg] )
 	geoip? ( dev-libs/geoip )
 	upnp? ( >=net-libs/libupnp-1.6.6 )
