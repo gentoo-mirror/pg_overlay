@@ -69,7 +69,7 @@ LICENSE="wxWinLL-3
 		GPL-2
 		doc?	( wxWinFDL-3 )"
 
-S="${WORKDIR}/wxPython-src-${PV}"
+S="${WORKDIR}/wxWidgets-${COMMIT}"
 PATCHES=(
 	"${FILESDIR}"/${P}-webview-fixes.patch
 	"${FILESDIR}"/${P}-gcc6.patch
