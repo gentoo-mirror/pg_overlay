@@ -24,7 +24,7 @@ REQUIRED_USE="
 "
 COMMON_DEPEND="
 	app-crypt/qca:2[qt5,ssl]
-	>=dev-libs/injeqt-1.0.0
+	>=dev-libs/injeqt-1.1.0
 	>=dev-qt/qtcore-5.2.0:5
 	>=dev-qt/qtdbus-5.2.0:5
 	>=dev-qt/qtdeclarative-5.2.0:5
@@ -133,6 +133,7 @@ src_configure() {
 		-DNETWORK_IMPLEMENTATION="Qt"
 		-DINSTALL_SDK=$(usex sdk)
 		-DWITH_ENCHANT=$(usex spell)
+		-DCMAKE_CXX_STANDARD=14
 	)
 	unset PLUGINS
 
