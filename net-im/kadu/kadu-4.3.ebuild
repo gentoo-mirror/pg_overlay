@@ -15,7 +15,7 @@ SRC_URI="http://download.kadu.im/stable/${P}.tar.bz2"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~x86"
 SLOT="0"
-IUSE="+gadu mpd otr phonon sdk speech spell xmpp"
+IUSE="+gadu mpd otr sdk speech spell xmpp"
 REQUIRED_USE="
 	|| (
 		gadu
@@ -49,12 +49,6 @@ COMMON_DEPEND="
 		>=dev-libs/libgcrypt-1.2.2:0
 		>=net-libs/libotr-4.1.0
 	)
-	phonon? (
-		|| (
-			media-libs/phonon[qt5]
-			>=dev-qt/qtphonon-4.7.0:4
-		)
-	)
 	spell? ( app-text/enchant )
 	xmpp? (
 		net-dns/libidn
@@ -84,12 +78,8 @@ config_wizard
 docking
 docking_notify
 emoticons
-encryption_ng
-encryption_ng_simlite
 exec_notify
 ext_sound
-falf_mediaplayer
-filedesc
 firewall
 freedesktop_notify
 hints
@@ -99,10 +89,9 @@ imagelink
 last_seen
 mediaplayer
 mprisplayer_mediaplayer
-pcspeaker
-screenshot simpleview
+screenshot
+simpleview
 single_window
-sms
 sound
 sql_history
 tabs
@@ -121,7 +110,6 @@ src_configure() {
 	use gadu && PLUGINS+=' gadu_protocol history_migration profiles_import'
 	use mpd && PLUGINS+=' mpd_mediaplayer'
 	use otr && PLUGINS+=' encryption_otr'
-	use phonon && PLUGINS+=' phonon_sound'
 	use speech && PLUGINS+=' speech'
 	use spell && PLUGINS+=' spellchecker'
 	use xmpp && PLUGINS+=' jabber_protocol'
@@ -134,6 +122,7 @@ src_configure() {
 		-DINSTALL_SDK=$(usex sdk)
 		-DWITH_ENCHANT=$(usex spell)
 		-DCMAKE_CXX_STANDARD=14
+		-DENABLE_TESTS=OFF
 	)
 	unset PLUGINS
 
