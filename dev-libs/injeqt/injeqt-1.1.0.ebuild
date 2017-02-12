@@ -22,10 +22,6 @@ DEPEND="${RDEPEND}
 	test? ( >=dev-qt/qttest-5.4.2:5 )
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-cmake-preserve-cxxflags.patch"
-)
-
 src_configure() {
 	local mycmakeargs=(
 		-DDISABLE_EXAMPLES=ON
