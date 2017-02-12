@@ -70,10 +70,6 @@ LICENSE="wxWinLL-3
 		doc?	( wxWinFDL-3 )"
 
 S="${WORKDIR}/wxWidgets-${COMMIT}"
-PATCHES=(
-	"${FILESDIR}"/${P}-webview-fixes.patch
-	"${FILESDIR}"/${P}-gcc6.patch
-)
 
 src_prepare() {
 	default
