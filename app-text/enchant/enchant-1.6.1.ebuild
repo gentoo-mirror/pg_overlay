@@ -37,6 +37,8 @@ PATCHES=(
 	"${FILESDIR}/${P}-hunspell150_fix.patch"
 )
 
+S=${WORkDIR}/${PN}-${PN}-1-6-1
+
 src_prepare() {
 	default
 	sed -i \
