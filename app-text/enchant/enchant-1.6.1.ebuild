@@ -33,7 +33,6 @@ DOCS="AUTHORS BUGS ChangeLog HACKING MAINTAINERS NEWS README TODO"
 
 PATCHES=(
 	# http://bugzilla.abisource.com/show_bug.cgi?id=13772
-	"${FILESDIR}/${P}-hunspell140_fix.patch"
 	"${FILESDIR}/${P}-hunspell150_fix.patch"
 )
 
