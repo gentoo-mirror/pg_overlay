@@ -24,6 +24,9 @@ app-emulation/wine:samba - Add support for NTLM auth. see http://wiki.winehq.org
 app-emulation/wine:staging - Apply Wine-Staging patches for advanced feature support that haven't made it into upstream Wine yet
 app-emulation/wine:themes - Support GTK+:3 window theming through Wine-Staging
 app-emulation/wine:udev - Use virtual/libudev to provide plug and play support
+app-text/enchant:aspell - Adds support for app-text/aspell spell checker
+app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
+app-text/enchant:zemberek - Adds support for app-text/zemberek-server spell checker server
 app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
 app-text/qpdfview:synctex - Add support for searching TeX sources
 app-text/qstardict:stardict - build stardict plugin
