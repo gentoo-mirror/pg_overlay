@@ -31,11 +31,6 @@ DEPEND="${COMMON_DEPENDS}
 
 DOCS="AUTHORS BUGS ChangeLog HACKING MAINTAINERS NEWS README TODO"
 
-PATCHES=(
-	# http://bugzilla.abisource.com/show_bug.cgi?id=13772
-	"${FILESDIR}/${P}-hunspell150_fix.patch"
-)
-
 S=${WORKDIR}/${PN}-${PN}-1-6-1
 
 src_prepare() {
