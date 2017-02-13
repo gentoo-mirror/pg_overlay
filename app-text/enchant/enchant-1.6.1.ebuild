@@ -38,7 +38,7 @@ src_prepare() {
 	sed -i \
 		-e 's:noinst_PROGRAMS:check_PROGRAMS:' \
 		tests/Makefile.am || die
-	AT_M4DIR=ac-helpers eautoreconf
+	eautoreconf
 }
 
 src_configure() {
