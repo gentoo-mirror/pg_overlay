@@ -87,8 +87,6 @@ history
 idle
 imagelink
 last_seen
-mediaplayer
-mprisplayer_mediaplayer
 screenshot
 simpleview
 single_window
