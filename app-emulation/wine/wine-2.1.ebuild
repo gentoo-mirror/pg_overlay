@@ -54,7 +54,7 @@ if [[ ${PV} == "9999" ]] ; then
 	STAGING_EGIT_REPO_URI="git://github.com/wine-compholio/wine-staging.git"
 else
 	SRC_URI="${SRC_URI}
-	staging? ( https://github.com/${PN}-compholio/${PN}-patched/archive/staging-${PV}.tar.gz -> ${STAGING_P}.tar.gz )"
+	staging? ( https://github.com/wine-compholio/wine-staging/archive/v${MY_PV}.tar.gz -> ${STAGING_P}.tar.gz )"
 fi
 
 LICENSE="LGPL-2.1"
