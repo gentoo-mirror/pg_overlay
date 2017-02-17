@@ -93,7 +93,7 @@ RDEPEND="${CDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}"/glib.patch
+	"${FILESDIR}"/${PN}-0.18.conf.patch
 )
 
 pkg_setup() {
@@ -123,6 +123,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
 	default
 	eautoreconf
 }
@@ -160,7 +161,7 @@ src_configure() {
 		$(use_enable adplug)		\
 		$(use_enable alsa)			\
 		$(use_enable ao)			\
-		$(use_enable audiofile)		\src/lib/sacdiso/sacd_disc.cpp
+		$(use_enable audiofile)		\
 		$(use_enable zlib)			\
 		$(use_enable bzip2)			\
 		$(use_enable cdio cdio-paranoia) \
@@ -215,12 +216,17 @@ src_install() {
 	emake DESTDIR="${D}" install
 
 	insinto /etc
-	newins doc/mpdconf.example mpd.conf
+	newins doc/mpdconf.dist mpd.conf
 
-	newinitd "${FILESDIR}"/${PN}2.init ${PN}
+	newinitd "${FILESDIR}"/${PN}-0.20.4.init ${PN}
+
+	if use unicode; then
+		sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
+			"${ED}"/etc/mpd.conf || die "sed failed"
+	fi
 
 	insinto /etc/logrotate.d
-	newins "${FILESDIR}"/${PN}.logrotate ${PN}
+	newins "${FILESDIR}"/${PN}-0.20.4.logrotate ${PN}
 
 	use prefix || diropts -m0755 -o mpd -g audio
 	dodir /var/lib/mpd
