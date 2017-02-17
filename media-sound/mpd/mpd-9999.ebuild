@@ -208,8 +208,6 @@ src_configure() {
 		$(use_enable sacd sacdiso) \
 		$(use_enable sacd dvdaiso) \
 		${mpdconf}
-
-	sed -i 's/DSD_CFLAGS = \\/DSD_CFLAGS = $(MMS_CFLAGS) \\/' Makefile || die
 }
 
 src_install() {
