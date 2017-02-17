@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -213,7 +213,7 @@ src_install() {
 	insinto /etc
 	newins doc/mpdconf.dist mpd.conf
 
-	newinitd "${FILESDIR}"/${PN}2.init ${PN}
+	newinitd "${FILESDIR}"/${PN}-0.20.4.init ${PN}
 
 	if use unicode; then
 		sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
@@ -221,7 +221,7 @@ src_install() {
 	fi
 
 	insinto /etc/logrotate.d
-	newins "${FILESDIR}"/${PN}.logrotate ${PN}
+	newins "${FILESDIR}"/${PN}-0.20.4.logrotate ${PN}
 
 	use prefix || diropts -m0755 -o mpd -g audio
 	dodir /var/lib/mpd
