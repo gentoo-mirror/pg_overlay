@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -70,7 +70,7 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	openal? ( media-libs/openal )
 	opus? ( media-libs/opus )
 	pulseaudio? ( media-sound/pulseaudio )
-	samba? ( || ( <net-fs/samba-4.0.25[smbclient] >=net-fs/samba-4.0.25 ) )
+	samba? ( >=net-fs/samba-4.0.25  )
 	sid? ( || ( media-libs/libsidplay:2 media-libs/libsidplayfp ) )
 	sndfile? ( media-libs/libsndfile )
 	soundcloud? ( >=dev-libs/yajl-2 )
@@ -78,7 +78,7 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	sqlite? ( dev-db/sqlite:3 )
 	tcpd? ( sys-apps/tcp-wrappers )
 	twolame? ( media-sound/twolame )
-	upnp? ( net-libs/libupnp )
+	upnp? ( net-libs/libupnp:0 )
 	vorbis? ( media-libs/libvorbis )
 	wavpack? ( media-sound/wavpack )
 	wildmidi? ( media-sound/wildmidi )
