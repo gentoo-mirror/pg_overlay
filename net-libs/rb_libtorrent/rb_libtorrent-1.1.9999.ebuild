@@ -41,13 +41,12 @@ DEPEND="${RDEPEND}
 "
 src_prepare() {
 	mv autotool.sh autogen.sh
-	eautoconf
 	default
 
 	# bug 578026
 	# prepend -L${S}/... to ensure bindings link against the lib we just built
 	sed -i -e "s|^|-L${S}/src/.libs |" bindings/python/compile_flags.in || die
-
+	eautreoconf
 	use python && distutils-r1_src_prepare
 }
 
