@@ -41,7 +41,7 @@ DEPEND="${RDEPEND}
 "
 src_prepare() {
 	mv autotool.sh autogen.sh
-	eautoreconf
+	eautoconf
 	default
 
 	# bug 578026
