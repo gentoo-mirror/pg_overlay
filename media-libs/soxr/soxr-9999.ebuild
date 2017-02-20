@@ -9,7 +9,7 @@ inherit cmake-multilib git-r3
 MY_P=${P}-Source
 DESCRIPTION="The SoX Resampler library"
 HOMEPAGE="https://sourceforge.net/p/soxr/wiki/Home/"
-EGIT_REPO_URI="{git,https}://git.code.sf.net/p/soxr/code"
+EGIT_REPO_URI=( {git,https}://git.code.sf.net/p/soxr/code )
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -19,7 +19,6 @@ IUSE="examples"
 DEPEND=""
 RDEPEND="${DEPEND}"
 
-#S="${WORKDIR}/${MY_P}"
 DOCS=( "README" "TODO" "NEWS" "AUTHORS" )
 PATCHES=( "${FILESDIR}/nodoc.patch" )
 
