@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -21,8 +21,7 @@ REQUIRED_USE="
 "
 DOCS="AUTHORS"
 
-RDEPEND=">=app-i18n/libguess-1.2
-	>=dev-libs/dbus-glib-0.60
+RDEPEND=">=dev-libs/dbus-glib-0.60
 	>=dev-libs/glib-2.28
 	>=x11-libs/cairo-1.2.6
 	>=x11-libs/pango-1.8.0
