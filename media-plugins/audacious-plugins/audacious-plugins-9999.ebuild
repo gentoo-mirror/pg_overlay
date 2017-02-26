@@ -1,4 +1,4 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -11,8 +11,9 @@ EGIT_REPO_URI="git://github.com/audacious-media-player/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~x86-fbsd ~x86-freebsd ~x86-interix ~amd64-linux ~x86-linux"
-IUSE="aac alsa bs2b cdda +cue ffmpeg +flac fluidsynth gnome +http gtk gtk3 jack lame libnotify libsamplerate lirc mms mpg123 nls +pulseaudio +qt5 scrobbler sdl sid sndfile vorbis +wavpack"
+KEYWORDS=""
+IUSE="aac +adplug alsa bs2b cdda cue ffmpeg flac fluidsynth gnome http gtk gtk3 jack
+lame libnotify libsamplerate lirc mms mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk gtk3 qt5 )
 "
@@ -61,7 +62,7 @@ RDEPEND="app-arch/unzip
 	libsamplerate? ( media-libs/libsamplerate )
 	lirc? ( app-misc/lirc )
 	mms? ( >=media-libs/libmms-0.3 )
-	mpg123? ( >=media-sound/mpg123-1.12.1 )
+	mp3? ( >=media-sound/mpg123-1.12.1 )
 	pulseaudio? ( >=media-sound/pulseaudio-0.9.3 )
 	scrobbler? ( net-misc/curl )
 	sdl? ( media-libs/libsdl[sound] )
@@ -76,8 +77,8 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 mp3_warning() {
-	if ! use mpg123 ; then
-		ewarn "MP3 support is optional, you may want to enable the mpg123 USE-flag"
+	if ! use mp3 ; then
+		ewarn "MP3 support is optional, you may want to enable the mp3 USE-flag"
 	fi
 }
 
@@ -109,7 +110,6 @@ src_prepare() {
 
 src_configure() {
 	mp3_warning
-
 	if use qt5 ;then
 		notify="--disable-notify"
 	elif use libnotify ;then
@@ -141,8 +141,9 @@ src_configure() {
 		$(use_enable bs2b) \
 		$(use_enable cdda cdaudio) \
 		$(use_enable cue) \
-		$(use_enable flac flac) \
+		$(use_enable flac flacng) \
 		$(use_enable fluidsynth amidiplug) \
+		$(use_enable flac filewriter_flac) \
 		$(use_enable http neon) \
 		$(use_enable jack) \
 		$(use_enable gnome gnomeshortcuts) \
@@ -151,7 +152,7 @@ src_configure() {
 		$(use_enable libsamplerate resample) \
 		$(use_enable lirc) \
 		$(use_enable mms) \
-		$(use_enable mpg123) \
+		$(use_enable mp3) \
 		$(use_enable nls) \
 		$(use_enable pulseaudio pulse) \
 		$(use_enable qt5 qt) \
