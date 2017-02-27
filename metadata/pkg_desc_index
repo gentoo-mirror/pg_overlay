@@ -30,6 +30,7 @@ media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptio
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/mpd 0.20.4 0.20.5 9999: The Music Player Daemon (mpd)
+media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/quimup 1.4.2: A Qt5 client for the music player daemon (MPD) written in C++
 media-sound/rbutil 1.4.1 9999: Rockbox opensource firmware manager for mp3 players
@@ -66,7 +67,7 @@ sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 56.0.2924.87 56.0.2924.101: Open-source version of Google Chrome web browser
+www-client/chromium 56.0.2924.87 56.0.2924.101 56.0.2924.110: Open-source version of Google Chrome web browser
 www-client/firefox 51.0.1: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
