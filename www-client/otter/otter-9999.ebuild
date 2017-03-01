@@ -11,7 +11,7 @@ EGIT_REPO_URI="git://github.com/OtterBrowser/otter-browser.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE="spell"
 
 DEPEND="
