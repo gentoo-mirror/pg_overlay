@@ -16,17 +16,10 @@ IUSE="spell"
 
 DEPEND="
 	dev-qt/qtconcurrent:5
-	dev-qt/qtcore:5
-	dev-qt/qtdbus:5
-	dev-qt/qtdeclarative:5
-	dev-qt/qtgui:5
 	dev-qt/qtmultimedia:5
 	dev-qt/qtnetwork:5[ssl]
-	dev-qt/qtprintsupport:5
 	dev-qt/qtscript:5
-	dev-qt/qtsql:5
 	dev-qt/qtwebengine:5
-	dev-qt/qtwidgets:5
 	dev-qt/qtxmlpatterns:5
 	spell? ( kde-frameworks/sonnet )
 "
