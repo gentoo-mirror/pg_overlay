@@ -11,6 +11,7 @@ HOMEPAGE="https://arcanis.me/projects/awesome-widgets"
 
 if [[ ${KDE_BUILD_TYPE} = live ]] ; then
 	EGIT_REPO_URI="git://github.com/arcan1s/awesome-widgets.git"
+	EGIT_BRANCH="development"
 else
 	SRC_URI="https://github.com/arcan1s/awesome-widgets/archive/V.${PV}.tar.gz -> ${P}.tar.gz"
 fi
@@ -20,10 +21,7 @@ KEYWORDS=""
 IUSE=""
 
 DEPEND="
-	$(add_frameworks_dep plasma)
-	$(add_qt_dep qtdeclarative)
-	$(add_qt_dep qtquickcontrols2)
-"
+	$(add_frameworks_dep plasma)"
 RDEPEND="${DEPEND}"
 
 S="${S}/sources"
