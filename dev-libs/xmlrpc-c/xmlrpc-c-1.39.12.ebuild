@@ -28,7 +28,7 @@ RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.32.05-Wimplicit.patch"
-	"${FILESDIR}/${PN}-1.32.11-cplusplus.patch"
+	"${FILESDIR}/${PN}-1.39.11-cplusplus.patch"
 )
 
 pkg_setup() {
