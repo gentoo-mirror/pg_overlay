@@ -73,7 +73,7 @@ www-client/firefox 51.0.1: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
-x11-libs/cairo 1.15.2: A vector graphics library with cross-device output support
+x11-libs/cairo 1.15.2 1.15.4: A vector graphics library with cross-device output support
 x11-libs/wxGTK 3.0.2.0-r302: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-terms/guake 9999: Drop-down terminal for GTK+ desktops
