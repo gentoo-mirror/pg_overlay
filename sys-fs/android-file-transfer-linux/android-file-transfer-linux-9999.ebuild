@@ -25,6 +25,7 @@ src_configure() {
 		-DBUILD_FUSE=$(usex fuse)
 		-DBUILD_QT_UI=$(usex qt5)
 		-DUSB_BACKEND_LIBUSB=OFF
+		-DGIT_DISCOVERY_ACROSS_FILESYSTEM=OFF
 	)
 	cmake-utils_src_configure
 }
