@@ -3,15 +3,15 @@
 # $Header: $
 
 EAPI=6
-inherit cmake-utils git-r3
+inherit cmake-utils
 
 DESCRIPTION="Reliable MTP client with minimalistic UI"
 HOMEPAGE="https://whoozle.github.io/android-file-transfer-linux/"
-EGIT_REPO_URI="git://github.com/whoozle/${PN}.git"
+SRC_URI="https://github.com/whoozle/${PN}/archive/v${PV}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="fuse +qt5"
 REQUIRED_USE="qt5"
 
