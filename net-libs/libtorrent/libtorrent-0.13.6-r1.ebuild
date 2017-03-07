@@ -9,7 +9,7 @@ inherit eutils flag-o-matic libtool toolchain-funcs
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 COMMIT="c167c5a9e0bcf0df23ae5efd91396aae0e37eb87"
-SRC_URI="https://github.com/rakshasa/${PN}/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/rakshasa/${PN}/archive/${COMMIT}.tar.gz -> ${P}-r1.tar.gz"
 
 LICENSE="GPL-2"
 
