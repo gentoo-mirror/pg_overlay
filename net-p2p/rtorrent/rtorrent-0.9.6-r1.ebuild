@@ -9,7 +9,7 @@ inherit autotools flag-o-matic eutils
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 COMMIT="10ce6864b81aaf2a7e43e9959940696b47aac2bc"
-SRC_URI="https://github.com/rakshasa/${PN}/archive/${COMMIT}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/rakshasa/${PN}/archive/${COMMIT}.tar.gz -> ${P}-r1.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
