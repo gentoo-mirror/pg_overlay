@@ -21,6 +21,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 src_prepare() {
+	git init
 	default
 	cmake-utils_src_prepare
 }
