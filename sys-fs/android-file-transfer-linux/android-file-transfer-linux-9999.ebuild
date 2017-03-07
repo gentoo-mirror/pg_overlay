@@ -20,6 +20,12 @@ RDEPEND="fuse? ( sys-fs/fuse )
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
+src_prepare() {
+	git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+	default
+	cmake-utils_src_prepare
+}
+
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_FUSE=$(usex fuse)
