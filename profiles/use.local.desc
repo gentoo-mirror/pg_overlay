@@ -215,7 +215,6 @@ net-im/psi:plugins - Enable plugins support
 net-im/psi:sql - Enable psi-new-history extras patch
 net-im/psi:webkit - Enable chatlog rendering using webkit
 net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
-net-im/skypeforlinux:pax_kernel - Triggers a paxmarking of the main skype binary
 net-libs/rb_libtorrent:dht - Enable DHT (distributed hash table) support for libtorrent
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
