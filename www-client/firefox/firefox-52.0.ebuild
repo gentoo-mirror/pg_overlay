@@ -272,7 +272,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --disable-websms-backend
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
