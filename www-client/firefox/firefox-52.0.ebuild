@@ -177,7 +177,7 @@ src_prepare() {
 	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debia-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
