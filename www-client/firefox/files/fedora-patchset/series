@@ -1,6 +1,5 @@
 firefox-build-prbool.patch
 firefox-debug.patch
-build-icu-big-endian.patch
 
 rhbz-966424.patch
 firefox-enable-addons.patch
