@@ -388,7 +388,6 @@ src_configure() {
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
-	myconf_gn+=" enable_rlz=false"
 	myconf_gn+=" enable_rlz_support=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
