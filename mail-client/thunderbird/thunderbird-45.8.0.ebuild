@@ -52,7 +52,8 @@ CDEPEND="
 	>=dev-libs/nss-3.21.1
 	>=dev-libs/nspr-4.12
 	crypt? ( x11-plugins/enigmail[-thunderbird(-)] )
-	"
+	kde? ( kde-apps/kdialog:5
+		kde-misc/kmozillahelper )"
 
 DEPEND="${CDEPEND}
 	amd64? ( ${ASM_DEPEND}
