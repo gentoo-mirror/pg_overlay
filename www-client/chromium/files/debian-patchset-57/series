@@ -8,4 +8,3 @@ disable/external-components.patch
 
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
-fixes/gtk3theme.patch
