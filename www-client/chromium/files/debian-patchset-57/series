@@ -1,5 +1,3 @@
-gn/buildflags.patch
-
 disable/promo.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
