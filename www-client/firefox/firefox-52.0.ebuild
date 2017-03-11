@@ -58,6 +58,8 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
 	rust? ( dev-lang/rust )
+	system-harfbuzz? ( >=media-libs/harfbuzz-1.3.3:0=[graphite,icu] >=media-gfx/graphite2-1.3.8 )
+	system-icu? ( >=dev-libs/icu-58.1:= )
 	amd64? ( ${ASM_DEPEND} virtual/opengl )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
@@ -177,7 +179,7 @@ src_prepare() {
 	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debia-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
