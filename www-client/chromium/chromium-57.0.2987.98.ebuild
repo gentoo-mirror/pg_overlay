@@ -388,14 +388,13 @@ src_configure() {
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
-	myconf_gn+=" enable_rlz_support=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
-	if use inox; then
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
+#	if use inox; then
+#		myconf_gn+=" safe_browsing_mode=0"
+#	fi
 
 	# Ungoogled
 	myconf_gn+=" enable_hevc_demuxing=true"
