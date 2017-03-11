@@ -3,17 +3,6 @@ author: Michael Gilbert <mgilbert@debian.org>
 
 --- a/build/toolchain/linux/BUILD.gn
 +++ b/build/toolchain/linux/BUILD.gn
-@@ -89,6 +99,10 @@ gcc_toolchain("x86") {
-   ar = "ar"
-   ld = cxx
- 
-+  extra_cflags = target_extra_cflags
-+  extra_ldflags = target_extra_ldflags
-+  extra_cxxflags = target_extra_cxxflags
-+
-   toolchain_args = {
-     current_cpu = "x86"
-     current_os = "linux"
 @@ -128,6 +142,10 @@ gcc_toolchain("x64") {
    ar = "ar"
    ld = cxx
