@@ -19,6 +19,8 @@ RDEPEND="sys-apps/pciutils
 DEPEND="${RDEPEND}"
 
 src_prepare() {
+	rm -f .gitignore
+	rm -f src/.gitignore
 	default
 	sed -i -e s/-Werror// Make.defaults || die
 }
