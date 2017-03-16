@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -46,6 +45,7 @@ src_prepare() {
 	# bug 578026
 	# prepend -L${S}/... to ensure bindings link against the lib we just built
 	sed -i -e "s|^|-L${S}/src/.libs |" bindings/python/compile_flags.in || die
+
 	use python && distutils-r1_src_prepare
 }
 
