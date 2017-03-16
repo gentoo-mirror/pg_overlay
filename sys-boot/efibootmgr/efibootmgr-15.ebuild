@@ -21,7 +21,7 @@ DEPEND="${RDEPEND}"
 src_prepare() {
 	default
 	sed -i -e s/-Werror// Make.defaults || die
-	sed -i '/git/d' Make.defauls || die
+	sed -i '/git/d' Make.defaults || die
 }
 
 src_configure() {
