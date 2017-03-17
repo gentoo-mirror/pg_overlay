@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -56,7 +55,7 @@ src_prepare() {
 		-i ${PN}.conf || die
 
 	epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
-	#epatch "${FILESDIR}"/*.patch
+
 	epatch_user
 	eautoreconf
 }
