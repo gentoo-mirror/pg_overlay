@@ -36,7 +36,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-createtorrentdialog.patch"
 )
 
-CDEPEND=">=net-libs/rb_libtorrent-1.0.9-r1[python,${PYTHON_USEDEP}]"
+CDEPEND=">=net-libs/libtorrent-rasterbar-1.0.9-r1[python,${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-util/intltool"
