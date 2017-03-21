@@ -51,14 +51,10 @@ net-p2p/rtorrent 0.9.6 0.9.6-r1 9999: BitTorrent Client using libtorrent
 net-p2p/rtorrent-ps 9999: Extended rTorrent distribution with UI enhancements, colorization, and some added features
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.37: Samsung Unified Linux Driver for printers and MFDs
-sci-geosciences/googleearth 7.1.7.2600: A 3D interface to the planet
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/lshw 02.18b: Hardware Lister
 sys-apps/razercfg 0.38: Utility for advanced configuration of Razer mice (DeathAdder, Krait, Lachesis)
-sys-apps/roccat-tools 5.5.0 5.6.0: Utility for advanced configuration of Roccat devices
-sys-auth/elogind 219.14: The systemd project's logind, extracted to a standalone package
-sys-block/zram-init 6.1.0: Scripts to support compressed swap devices or ramdisks with zram
+sys-apps/roccat-tools 5.6.0: Utility for advanced configuration of Roccat devices
 sys-boot/efibootmgr 15 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.1 9999: Reliable MTP client with minimalistic UI
