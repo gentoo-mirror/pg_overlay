@@ -1,6 +1,5 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 
@@ -10,8 +9,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit distutils-r1 l10n git-r3
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
-HOMEPAGE="http://bleachbit.org/"
-EGIT_REPO_URI="https://github.com/andrewgee/${PN}.git"
+HOMEPAGE="https://github.com/andrewgee/"
+EGIT_REPO_URI="git://github.com/andrewgee/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"

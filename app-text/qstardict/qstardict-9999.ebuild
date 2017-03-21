@@ -1,23 +1,15 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
 EAPI="6"
-
-case $PV in *9999*) VCS_ECLASS="git-r3" ;; *) VCS_ECLASS="" ;; esac
 
 inherit eutils qmake-utils confutils ${VCS_ECLASS}
 
 DESCRIPTION="QStarDict is a StarDict clone written with using Qt"
 HOMEPAGE="http://qstardict.ylsoftware.com/"
 LICENSE="GPL-2"
-if [ -n "${VCS_ECLASS}" ]; then
-	KEYWORDS=""
-	EGIT_REPO_URI="git://github.com/Ri0n/qstardict.git"
-else
-	KEYWORDS="~amd64 ~ia64 ~x86"
-	SRC_URI="https://github.com/a-rodin/qstardict/archive/${P}.zip"
-fi
+KEYWORDS=""
+EGIT_REPO_URI="git://github.com/a-rodin/qstardict.git"
 SLOT="0"
 
 PLUGINS="stardict swac web"
