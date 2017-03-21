@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
@@ -30,6 +30,7 @@ DEPEND="${RDEPEND}
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.7.0-sharedlibs.patch
 	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
+	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
 )
 
 pkg_setup() {

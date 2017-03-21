@@ -1,6 +1,5 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 
@@ -17,7 +16,6 @@ KEYWORDS=""
 IUSE="+daemon debug ipv6 selinux test +xmlrpc"
 
 COMMON_DEPEND="=net-libs/libtorrent-9999
-	>=dev-libs/libsigc++-2.2.2:2
 	>=net-misc/curl-7.19.1
 	sys-libs/ncurses:0=
 	xmlrpc? ( dev-libs/xmlrpc-c )"
