@@ -268,17 +268,16 @@ www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo in
 www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
-x11-drivers/xf86-video-intel:dri3 - Enable DRI3 support
-x11-drivers/xf86-video-intel:glamor - Enable Glamor OpenGL 2D acceleration
+x11-drivers/xf86-video-intel:dri3 - Use DRI3 by default
 x11-drivers/xf86-video-intel:sna - Enable SandyBridge's New Acceleration (useful on all chipsets, not just SandyBridge)
+x11-drivers/xf86-video-intel:tools - Build the intel-virtual-output tool
 x11-drivers/xf86-video-intel:uxa - Enable UMA Acceleration Architecture
 x11-drivers/xf86-video-intel:xvmc - Enables X-Video Motion Compensation support
-x11-drivers/xf86-video-nouveau:glamor - Enable Glamor OpenGL 2D acceleration
-x11-libs/cairo:gles2 - Use OpenGL ES 2 backend for acceleration.
+x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
 x11-libs/cairo:glib - Compile with GLib Object System support
-x11-libs/cairo:opengl - Use Mesa backend for acceleration
+x11-libs/cairo:opengl - Build the OpenGL backend
+x11-libs/cairo:utils - Build support for Cairo script and trace utilities
 x11-libs/cairo:valgrind - Built-in support to mark memory regions
-x11-libs/cairo:xlib-xcb - Use XCB renderer backend for acceleration over xlib. Enabling this may solve or introduce display corruption problems.
 x11-libs/wxGTK:gnome - Use gnome-base/libgnomeprintui for printing tasks.
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.

@@ -2,7 +2,6 @@ app-admin/profile-cleaner 2.36: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-emulation/wine 2.0_rc3 2.0_rc4 2.0 2.1: Free implementation of Windows(tm) on Unix
-app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
 app-text/enchant 1.6.1: Spellchecker wrapping library
@@ -72,7 +71,7 @@ www-client/firefox 52.0.1: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
-x11-libs/cairo 1.15.2 1.15.4: A vector graphics library with cross-device output support
+x11-libs/cairo 1.15.4: A vector graphics library with cross-device output support
 x11-libs/wxGTK 3.0.2.0-r302: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-terms/guake 9999: Drop-down terminal for GTK+ desktops
