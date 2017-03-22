@@ -4,6 +4,7 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-emulation/wine 2.0_rc3 2.0_rc4 2.0 2.1: Free implementation of Windows(tm) on Unix
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
+app-portage/eix 0.32.6: Search and query ebuilds
 app-text/enchant 1.6.1: Spellchecker wrapping library
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qpdfview 0.4.16 0.4.17_beta1: A tabbed document viewer
