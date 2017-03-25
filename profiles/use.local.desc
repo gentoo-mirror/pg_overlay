@@ -38,6 +38,7 @@ app-portage/eix:tools - Create separate binary for script helper tools; useful i
 app-text/enchant:aspell - Adds support for app-text/aspell spell checker
 app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/enchant:zemberek - Adds support for app-text/zemberek-server spell checker server
+app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
 app-text/qpdfview:synctex - Add support for searching TeX sources
 app-text/qstardict:stardict - build stardict plugin
