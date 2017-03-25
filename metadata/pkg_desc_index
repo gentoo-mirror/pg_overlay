@@ -17,7 +17,6 @@ dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-kde-apps/kopete 5.9999: Multi-protocol IM client based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 45.7.0 45.8.0: Thunderbird Mail Client
 media-fonts/iosevka 1.11.0: Open source coding font
