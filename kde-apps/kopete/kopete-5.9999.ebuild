@@ -142,7 +142,7 @@ src_configure() {
 		-DWITH_Mediastreamer=$(usex jingle)
 		-DWITH_Speex=$(usex jingle)
 		-DDISABLE_VIDEOSUPPORT=$(usex !v4l)
-		-DIRIS_XMPP_JID_DEPRECATED=OFF
+		-DIRIS_XMPP_JID_DEPRECATED=ON
 	)
 	# enable protocols
 	for x in ${PROTOCOLS}; do
