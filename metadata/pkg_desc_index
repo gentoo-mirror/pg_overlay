@@ -57,7 +57,6 @@ sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain pr
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.38: Utility for advanced configuration of Razer mice (DeathAdder, Krait, Lachesis)
 sys-apps/roccat-tools 5.6.0: Utility for advanced configuration of Roccat devices
-sys-boot/efibootmgr 15 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.1 9999: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
