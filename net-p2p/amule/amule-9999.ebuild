@@ -30,8 +30,6 @@ COMMON_DEPEND="
 DEPEND="${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}"
 
-PATCHES=( "${FILESDIR}/${PN}-2.2.6-fallocate.diff" )
-
 pkg_setup() {
 	if use stats && ! use X; then
 		einfo "Note: You would need both the X and stats USE flags"
