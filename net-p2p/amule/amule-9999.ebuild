@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -15,19 +15,22 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+daemon -debug -geoip +nls remote -stats +unicode -upnp +X +mmap boost"
 
-DEPEND="
-	>=dev-libs/crypto++-5
+COMMON_DEPEND="
+	dev-libs/crypto++
 	sys-libs/binutils-libs:0=
-	>=sys-libs/zlib-1.2.1
-	>=x11-libs/wxGTK-3.0.2:3.0-gtk3[X?]
-	stats? ( >=media-libs/gd-2.0.26:=[jpeg] )
+	sys-libs/zlib
+	x11-libs/wxGTK:${WX_GTK_VER}[X?]
+	stats? ( media-libs/gd:=[jpeg,png] )
 	geoip? ( dev-libs/geoip )
-	upnp? ( >=net-libs/libupnp-1.6.6 )
-	remote? ( >=media-libs/libpng-1.2.0:0=
-	unicode? ( >=media-libs/gd-2.0.26:= ) )
+	upnp? ( net-libs/libupnp:* )
+	remote? ( media-libs/libpng:0=
+	unicode? ( media-libs/gd:= ) )
 	boost? ( dev-libs/boost )
 	!net-p2p/imule"
-RDEPEND="${DEPEND}"
+DEPEND="${COMMON_DEPEND}"
+RDEPEND="${COMMON_DEPEND}"
+
+PATCHES=( "${FILESDIR}/${PN}-2.2.6-fallocate.diff" )
 
 pkg_setup() {
 	if use stats && ! use X; then
