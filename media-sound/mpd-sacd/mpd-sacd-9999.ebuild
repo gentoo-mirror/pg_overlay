@@ -84,7 +84,8 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	wildmidi? ( media-sound/wildmidi )
 	zeroconf? ( net-dns/avahi[dbus] )
 	zip? ( dev-libs/zziplib )
-	zlib? ( sys-libs/zlib )"
+	zlib? ( sys-libs/zlib )
+	!media-sound/mpd"
 DEPEND="${CDEPEND}
 	dev-libs/boost
 	virtual/pkgconfig"
