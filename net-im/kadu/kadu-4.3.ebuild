@@ -120,7 +120,7 @@ src_configure() {
 		-DWITH_ENCHANT=$(usex spell)
 		-DCMAKE_CXX_STANDARD=14
 		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DCMAKE_INSTALL_LIBDIR=lib \
+		-DCMAKE_INSTALL_LIBDIR=lib
 	)
 	unset PLUGINS
 
