@@ -8,5 +8,6 @@ chromium-53.0.2785.92-boringssl-time-fix.patch
 chromium-54.0.2840.59-nullfix.patch
 chromium-54.0.2840.59-jpeg-include-dir.patch
 chromium-54.0.2840.90-setopaque.patch
+chromium-57.0.2987.110-gtk_ui-gcc-fix.patch
 chromium-46.0.2490.86-use_system_opus.patch
 chromium-55.0.2883.75-use_system_harfbuzz.patch
