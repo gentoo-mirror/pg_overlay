@@ -3,7 +3,7 @@
 
 EAPI=6
 
-MYSPELL_DICT=( russian-aot.{dic,aff} )
+MYSPELL_DICT=( ru_RU.{dic,aff} )
 
 MYSPELL_HYPH=( hyph_ru_RU.dic )
 
