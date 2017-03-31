@@ -1,6 +1,7 @@
 app-admin/profile-cleaner 2.36: Vacuum and reindex browser sqlite databases
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
+app-dicts/myspell-ru 20150711-r1: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/wine 2.0_rc3 2.0_rc4 2.0 2.1: Free implementation of Windows(tm) on Unix
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
