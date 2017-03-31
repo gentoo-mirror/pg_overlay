@@ -30,8 +30,8 @@ src_prepare() {
 	mv russian-aot.aff ru_RU.aff
 }
 
-src_install() {
-	myspell-r2_src_install
-	dosym /usr/share/hunspell/ru_RU.dic /usr/share/myspell/ru_RU.dic
-	dosym /usr/share/hunspell/ru_RU.aff /usr/share/myspell/ru_RU.aff
-}
+#src_install() {
+#	myspell-r2_src_install
+#	dosym /usr/share/hunspell/ru_RU.dic /usr/share/myspell/ru_RU.dic
+#	dosym /usr/share/hunspell/ru_RU.aff /usr/share/myspell/ru_RU.aff
+#}
