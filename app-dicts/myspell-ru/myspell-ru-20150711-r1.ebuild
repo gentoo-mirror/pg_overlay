@@ -25,10 +25,10 @@ SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-fbsd"
 
 src_install() {
-	myspell-r2_src_install
 	insinto /usr/share/hunspell
 	newins russian-aot.dic ru_RU.dic
 	newins russian-aot.aff ru_RU.af
 	dosym /usr/share/hunspell/ru_RU.dic /usr/share/myspell/ru_RU.dic
 	dosym /usr/share/hunspell/ru_RU.aff /usr/share/myspell/ru_RU.aff
+	myspell-r2_src_install
 }
