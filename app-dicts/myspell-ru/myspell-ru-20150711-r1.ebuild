@@ -26,9 +26,9 @@ KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd6
 
 src_install() {
 	myspell-r2_src_install
-	insto /usr/share/hunspell
+	insinto /usr/share/hunspell
 	newins russian-aot.dic ru_RU.dic
-	dosym russian-aot.aff ru_RU.af
+	newins russian-aot.aff ru_RU.af
 	dosym /usr/share/hunspell/ru_RU.dic /usr/share/myspell/ru_RU.dic
 	dosym /usr/share/hunspell/ru_RU.aff /usr/share/myspell/ru_RU.aff
 }
