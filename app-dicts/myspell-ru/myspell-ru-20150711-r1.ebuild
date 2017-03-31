@@ -11,14 +11,14 @@ MYSPELL_THES=( ru_th_aot.{dat,idx} )
 
 inherit myspell-r2
 
-EXT="extension-center"
-DICT="russian-dictionary-pack"
+EXT="extensions"
+DICT="russian-spellcheck-dictionary.-based-on-works-of-aot-group"
 MY_PN="dict_pack_ru-aot"
 MY_PV="0.4.0"
 
 DESCRIPTION="Russian spellcheck dictionary based on works of AOT group for myspell/hunspell"
 HOMEPAGE="https://extensions.libreoffice.org/extensions/russian-spellcheck-dictionary.-based-on-works-of-aot-group"
-SRC_URI="http://extensions.libreoffice.org/${EXT}/${DICT}/releases/${MY_PV}/${MY_PN}-0-4-0.oxt"
+SRC_URI="https://extensions.libreoffice.org/${EXT}/${DICT}/${MY_PV}/@@download/file/${MY_PN}-0-4-0.oxt"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
