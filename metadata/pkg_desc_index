@@ -28,6 +28,7 @@ dev-libs/liborcus 0.12.1: Standalone file import filter library for spreadsheet 
 dev-libs/libxml2 2.9.4-r1: Version 2 of the library to manipulate XML files
 dev-libs/protobuf 3.1.0: Google's Protocol Buffers -- an efficient method of encoding structured data
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
+dev-python/pycups 1.9.73-r1: Python bindings for the CUPS API
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1: The QML and Quick modules for the Qt5 framework
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -40,6 +41,7 @@ kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 45.7.0 45.8.0: Thunderbird Mail Client
 media-fonts/iosevka 1.11.0: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
+media-libs/libepoxy 1.4.1: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/soxr 9999: The SoX Resampler library
 media-libs/vulkan-loader 1.0.42.0: Vulkan Installable Client Driver (ICD) Loader
