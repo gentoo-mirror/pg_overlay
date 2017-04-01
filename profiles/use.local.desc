@@ -2,6 +2,7 @@
 # Please add your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using pmaint *
 
+app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-crypt/gpgme:common-lisp - Install common-lisp files
 app-emulation/wine:capi - Enable ISDN support via CAPI
