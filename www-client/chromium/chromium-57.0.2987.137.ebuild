@@ -54,7 +54,7 @@ COMMON_DEPEND="
 	media-libs/libexif:=
 	media-libs/libjpeg-turbo:=
 	media-libs/libpng:=
-	system-libvpx? ( media-libs/libvpx:=[svc] )
+	system-libvpx? ( media-libs/libvpx:=[postproc,svc] )
 	media-libs/speex:=
 	pulseaudio? ( media-sound/pulseaudio:= )
 	system-ffmpeg? ( >=media-video/ffmpeg-3:= )
