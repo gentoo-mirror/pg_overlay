@@ -8,7 +8,7 @@ app-misc/ca-certificates 20161130.3.30 20161130.3.30-r1: Common CA Certificates 
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
 app-portage/eix 0.32.6: Search and query ebuilds
-app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
+app-portage/gentoolkit 0.4.0 9999: Collection of administration scripts for Gentoo
 app-portage/gentoopm 9999: A common interface to Gentoo package managers
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
 app-text/enchant 1.6.1: Spellchecker wrapping library
@@ -28,7 +28,6 @@ dev-libs/liborcus 0.12.1: Standalone file import filter library for spreadsheet 
 dev-libs/libxml2 2.9.4-r1: Version 2 of the library to manipulate XML files
 dev-libs/protobuf 3.1.0: Google's Protocol Buffers -- an efficient method of encoding structured data
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
-dev-python/pycups 1.9.73-r1: Python bindings for the CUPS API
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1: The QML and Quick modules for the Qt5 framework
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
