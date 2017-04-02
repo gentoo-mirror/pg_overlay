@@ -44,7 +44,7 @@ media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.1: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/soxr 9999: The SoX Resampler library
-media-libs/vulkan-loader 1.0.42.0 1.0.42.2: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-loader 1.0.42.2: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
@@ -87,6 +87,7 @@ sys-fs/android-file-transfer-linux 3.1 9999: Reliable MTP client with minimalist
 sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
+sys-libs/libcap-ng 0.7.8: POSIX 1003.1e capabilities
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 57.0.2987.137: Open-source version of Google Chrome web browser
 www-client/firefox 52.0.1 52.0.2: Firefox Web Browser
