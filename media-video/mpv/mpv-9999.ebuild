@@ -293,7 +293,7 @@ src_configure() {
 	# Create reproducible non-live builds.
 	[[ ${PV} != *9999* ]] && mywafargs+=(--disable-build-date)
 
-	waf-utils_src_configure "${mywafargs[@]}" -j9
+	waf-utils_src_configure "${mywafargs[@]}"
 }
 
 src_install() {
