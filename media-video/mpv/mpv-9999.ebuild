@@ -164,7 +164,7 @@ src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
 	sed -i 's/1.8.12/2.0.0pre1/g' bootstrap.py || die
-	#sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
+	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	default src_prepare
 }
 
