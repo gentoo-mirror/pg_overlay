@@ -4,4 +4,3 @@ build-icu-big-endian.patch
 firefox-gcc-6.0.patch
 
 rhbz-966424.patch
-rhbz-1014858.patch
