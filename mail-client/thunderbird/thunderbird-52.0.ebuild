@@ -26,7 +26,7 @@ MOZ_P="${PN}-${MOZ_PV}"
 
 MOZCONFIG_OPTIONAL_GTK2ONLY=0
 MOZCONFIG_OPTIONAL_WIFI=0
-MOZCONFIG_OPTIONAL_JIT="enabled"
+#MOZCONFIG_OPTIONAL_JIT=1
 inherit flag-o-matic toolchain-funcs mozconfig-v6.52 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2 fdo-mime gnome2-utils
 
 DESCRIPTION="Thunderbird Mail Client"
@@ -146,7 +146,6 @@ src_prepare() {
 	fi
 
 	# Fedora patches
-	eapply "${FILESDIR}/fedora-patchset/thunderbird-objdir.patch"
 	pushd mozilla
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
 	do eapply "${FILESDIR}/fedora-patchset/$i"; \
