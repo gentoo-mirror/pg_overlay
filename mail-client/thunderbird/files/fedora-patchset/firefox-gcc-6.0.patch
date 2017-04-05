@@ -24,4 +24,3 @@ diff -up firefox-44.0/mozglue/build/arm.cpp.old firefox-44.0/mozglue/build/arm.c
  #    include <string.h>
  
  enum{
-
