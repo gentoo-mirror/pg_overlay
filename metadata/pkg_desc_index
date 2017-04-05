@@ -38,7 +38,7 @@ dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applicati
 kde-frameworks/extra-cmake-modules 5.32.0: Extra modules and scripts for CMake
 kde-frameworks/ki18n 5.32.0: Framework based on Gettext for internationalizing user interface text
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-mail-client/thunderbird 45.7.0 45.8.0: Thunderbird Mail Client
+mail-client/thunderbird 52.0: Thunderbird Mail Client
 media-fonts/iosevka 1.11.0: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.1: Epoxy is a library for handling OpenGL function pointer management for you
