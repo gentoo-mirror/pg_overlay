@@ -1,4 +1,4 @@
-build-icu-big-endian.patch
+firefox-build-prbool.patch
 
 firefox-gcc-6.0.patch
 
