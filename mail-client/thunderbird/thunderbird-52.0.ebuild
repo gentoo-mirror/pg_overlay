@@ -26,7 +26,7 @@ MOZ_P="${PN}-${MOZ_PV}"
 
 MOZCONFIG_OPTIONAL_GTK2ONLY=0
 MOZCONFIG_OPTIONAL_WIFI=0
-MOZCONFIG_OPTIONAL_JIT="enabled"
+MOZCONFIG_OPTIONAL_JIT=1
 inherit flag-o-matic toolchain-funcs mozconfig-v6.52 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2 fdo-mime gnome2-utils
 
 DESCRIPTION="Thunderbird Mail Client"
@@ -35,7 +35,7 @@ HOMEPAGE="http://www.mozilla.com/en-US/thunderbird/"
 KEYWORDS="~alpha amd64 ~arm ppc ppc64 x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist crypt hardened ldap lightning +minimal mozdom rust selinux +kde"
+IUSE="bindist crypt hardened ldap lightning +minimal mozdom rust selinux +jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCHFF}.tar.xz )
