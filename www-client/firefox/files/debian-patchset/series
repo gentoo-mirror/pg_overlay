@@ -1,6 +1,5 @@
 prefs/Set-javascript.options.showInConsole.patch
 prefs/Set-DPI-to-system-settings.patch
-prefs/Don-t-auto-disable-extensions-in-system-directories.patch
 debian-hacks/Allow-to-override-ICU_DATA_FILE-from-the-environment.patch
 debian-hacks/Set-program-name-from-the-remoting-name.patch
 debian-hacks/Build-against-system-libjsoncpp.patch
