@@ -1,7 +1,6 @@
 mozilla-language.patch
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
-mozilla-develdirs.patch
 mozilla-no-stdcxx-check.patch
 
 tb-ssldap.patch
