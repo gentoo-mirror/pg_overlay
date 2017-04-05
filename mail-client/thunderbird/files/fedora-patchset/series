@@ -4,8 +4,6 @@ build-icu-big-endian.patch
 build-nspr-prbool.patch
 build-werror.patch
 firefox-gcc-6.0.patch
-lightning-bad-langs.patch
-thunderbird-enable-addons.patch
 
 rhbz-966424.patch
 rhbz-1014858.patch
