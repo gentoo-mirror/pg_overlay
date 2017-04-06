@@ -5,7 +5,7 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/gpgme 1.9.0: GnuPG Made Easy is a library for making GnuPG easier to use
 app-dicts/myspell-ru 20150711-r1: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/wine 2.0_rc3 2.0_rc4 2.0 2.1: Free implementation of Windows(tm) on Unix
-app-misc/ca-certificates 20161130.3.30 20161130.3.30-r1: Common CA Certificates PEM files
+app-misc/ca-certificates 20161130.3.30.1: Common CA Certificates PEM files
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
 app-portage/eix 0.32.6: Search and query ebuilds
