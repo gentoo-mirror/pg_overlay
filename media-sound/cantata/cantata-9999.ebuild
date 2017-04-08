@@ -67,7 +67,7 @@ src_prepare() {
 	# qjson ebuild does not support Qt5 yet
 	rm -rf 3rdparty/qjson/ || die
 
-	l10n_find_plocales_changes 'ts' '' '.ts'
+	l10n_find_plocales_changes 'translations' '' '.ts'
 }
 
 src_configure() {
