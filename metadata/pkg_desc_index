@@ -37,8 +37,8 @@ dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applica
 dev-util/gdbus-codegen 2.50.3: GDBus code and documentation generator
 dev-util/ninja 1.7.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-kde-frameworks/extra-cmake-modules 5.32.0: Extra modules and scripts for CMake
-kde-frameworks/ki18n 5.32.0: Framework based on Gettext for internationalizing user interface text
+kde-frameworks/extra-cmake-modules 5.32.0 5.33.0: Extra modules and scripts for CMake
+kde-frameworks/ki18n 5.32.0 5.33.0: Framework based on Gettext for internationalizing user interface text
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 52.0: Thunderbird Mail Client
 media-fonts/iosevka 1.11.0: Open source coding font
