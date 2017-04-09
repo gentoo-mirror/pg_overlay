@@ -75,13 +75,11 @@ src_configure() {
 
 	local mycmakeargs=(
 		-DCANTATA_HELPERS_LIB_DIR="$(get_libdir)"
-		-DCANTATA_TRANSLATIONS="${langs// /;}"
 		-DENABLE_CDPARANOIA=$(usex cdda)
 		-DENABLE_CDDB=$(usex cddb)
 		-DENABLE_HTTP_SERVER=$(usex http-server)
 		-DENABLE_MTP=$(usex mtp)
 		-DENABLE_MUSICBRAINZ=$(usex musicbrainz)
-		-DLCONVERT_EXECUTABLE="$(qt5_get_bindir)/lconvert"
 		-DLRELEASE_EXECUTABLE="$(qt5_get_bindir)/lrelease"
 		-DENABLE_FFMPEG=$(usex replaygain)
 		-DENABLE_MPG123=$(usex replaygain)
