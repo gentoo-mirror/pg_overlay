@@ -4,7 +4,7 @@
 
 EAPI=6
 
-PLOCALES="cs de en_GB es fr hu ja ko pl ru zh_CN"
+PLOCALES="blank cantata_cs cantata_de cantata_en_GB cantata_es cantata_fr cantata_hu cantata_ja cantata_ko cantata_pl cantata_ru cantata_zh_CN"
 inherit cmake-utils git-r3 gnome2-utils l10n qmake-utils xdg
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
@@ -81,7 +81,6 @@ src_configure() {
 		-DENABLE_HTTP_SERVER=$(usex http-server)
 		-DENABLE_MTP=$(usex mtp)
 		-DENABLE_MUSICBRAINZ=$(usex musicbrainz)
-		-DENABLE_QT5=ON
 		-DLCONVERT_EXECUTABLE="$(qt5_get_bindir)/lconvert"
 		-DLRELEASE_EXECUTABLE="$(qt5_get_bindir)/lrelease"
 		-DENABLE_FFMPEG=$(usex replaygain)
@@ -92,9 +91,7 @@ src_configure() {
 		-DENABLE_HTTP_STREAM_PLAYBACK=OFF
 		-DENABLE_REMOTE_DEVICES=OFF
 		-DENABLE_UDISKS2=OFF
-		-DUSE_SYSTEM_MENU_ICON=OFF
 	)
-#	-DENABLE_KDE=$(usex kde)	# not yet ported to KF5
 
 	cmake-utils_src_configure
 }
