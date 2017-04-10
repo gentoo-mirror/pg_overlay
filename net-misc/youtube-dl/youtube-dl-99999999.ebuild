@@ -82,8 +82,6 @@ python_test() {
 python_install_all() {
 	dodoc README.md
 
-	newbashcomp ${PN}.bash-completion ${PN}
-
 	distutils-r1_python_install_all
 
 	rm -r "${ED}"/usr/etc || die
