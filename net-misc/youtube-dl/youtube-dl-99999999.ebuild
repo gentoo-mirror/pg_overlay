@@ -80,7 +80,7 @@ python_test() {
 }
 
 python_install_all() {
-	doman ${PN}.1
+	dodoc README.md
 
 	newbashcomp ${PN}.bash-completion ${PN}
 
