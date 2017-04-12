@@ -43,8 +43,6 @@ DEPEND="${RDEPEND}
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
-PATCHES=( "${FILESDIR}"/${P}-build.patch )
-
 src_configure() {
 	#To last stable version for What.CD & Pedro's BTMusic
 	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 3"/g version.pri || die
