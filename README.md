@@ -2,7 +2,7 @@ Welcome, wanderer.
 
 That what you can find here:
 
-1 - Firefox with PGO, OpenSUSE-KDE patches
+1 - Firefox with OpenSUSE-KDE patches
 
 2 - Chromium with Inox, Iridium, Ungoogled & VA-API patches
 
