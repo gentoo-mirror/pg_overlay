@@ -39,3 +39,4 @@ pref("browser.safebrowsing.reportMalwareMistakeURL", "");
 pref("browser.safebrowsing.blockedURIs.enabled", false);
 pref("browser.safebrowsing.provider.mozilla.lists", "");
 pref("browser.safebrowsing.provider.mozilla.updateURL", "");
+pref("browser.safebrowsing.provider.mozilla.gethashURL", "");
