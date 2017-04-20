@@ -107,6 +107,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-perl/JSON
 	>=dev-util/gperf-3.0.3
 	dev-util/ninja
+	net-libs/nodejs
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
 	sys-devel/flex
@@ -166,9 +167,9 @@ pre_build_checks() {
 			# bugs: #601654
 			die "At least clang 3.9.1 is required"
 		fi
-		if tc-is-gcc && ! version_is_at_least 5 "$(gcc-major-version)"; then
+		if tc-is-gcc && ! version_is_at_least 4.8 "$(gcc-version)"; then
 			# bugs: #535730, #525374, #518668, #600288
-			die "At least gcc 5 is required"
+			die "At least gcc 4.8 is required"
 		fi
 	fi
 
@@ -202,6 +203,8 @@ pkg_setup() {
 src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}/${PN}-FORTIFY_SOURCE.patch"
+		"${FILESDIR}/${PN}-gn-bootstrap-r2.patch"
+		"${FILESDIR}/skia-avx2.patch"
 	)
 
 	use system-ffmpeg && PATCHES+=( "${FILESDIR}/${PN}-system-ffmpeg-r4.patch" )
@@ -225,6 +228,9 @@ src_prepare() {
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
+
+	mkdir -p third_party/node/linux/node-linux-x64/bin || die
+	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
 	local keeplibs=(
 		base/third_party/dmg_fp
@@ -297,6 +303,8 @@ src_prepare() {
 		third_party/mesa
 		third_party/modp_b64
 		third_party/mt19937ar
+		third_party/node
+		third_party/node/node_modules/vulcanize/third_party/UglifyJS2
 		third_party/openh264
 		third_party/openmax_dl
 		third_party/opus
@@ -384,7 +392,7 @@ src_configure() {
 	myconf_gn+=" treat_warnings_as_errors=false"
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" link_pulseaudio=true"
+	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
@@ -392,21 +400,22 @@ src_configure() {
 	myconf_gn+=" enable_rlz_support=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
+	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
-	if use inox; then
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
+	#if use inox; then
+	#	myconf_gn+=" safe_browsing_mode=0"
+	#fi
 
 	# Ungoogled
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	if use ungoogled; then
-		myconf_gn+=" enable_one_click_signin=false"
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
+	#if use ungoogled; then
+	#	myconf_gn+=" enable_one_click_signin=false"
+	#	myconf_gn+=" safe_browsing_mode=0"
+	#fi
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
