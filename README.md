@@ -6,8 +6,6 @@ That what you can find here:
 
 2 - Chromium with Inox, Iridium, Ungoogled & VA-API patches
 
-3 - Cinnamon without NetworkManager ebuilds
+3 - Modified ebuilds for various packages written with intention to be live & minimal
 
-4 - Modified ebuilds for various packages written with intention to be live & minimal
-
-5 - aMule live version
+4 - aMule live version
