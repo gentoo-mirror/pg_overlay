@@ -106,7 +106,6 @@ COMMON_DEPEND="
 	)
 	X? (
 		x11-libs/libX11
-		x11-libs/libXext
 		>=x11-libs/libXrandr-1.2.0
 		opengl? ( x11-libs/libXdamage )
 		xinerama? ( x11-libs/libXinerama )
@@ -235,7 +234,6 @@ src_configure() {
 		$(use_enable gbm)
 		$(use_enable wayland)
 		$(use_enable X x11)
-		$(use_enable X xext)
 		$(use_enable xv)
 		$(use_enable xinerama)
 		$(use_enable X xrandr)
