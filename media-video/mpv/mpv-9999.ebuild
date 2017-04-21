@@ -105,7 +105,6 @@ COMMON_DEPEND="
 	)
 	X? (
 		x11-libs/libX11
-		>=x11-libs/libXrandr-1.2.0
 		opengl? ( x11-libs/libXdamage )
 		xv? ( x11-libs/libXv )
 	)
@@ -233,7 +232,6 @@ src_configure() {
 		$(use_enable wayland)
 		$(use_enable X x11)
 		$(use_enable xv)
-		$(use_enable X xrandr)
 		$(usex opengl "$(use_enable aqua gl-cocoa)" '--disable-gl-cocoa')
 		$(usex opengl "$(use_enable X gl-x11)" '--disable-gl-x11')
 		$(usex egl "$(use_enable X egl-x11)" '--disable-egl-x11')
