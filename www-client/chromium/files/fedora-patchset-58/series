@@ -13,7 +13,6 @@ chromium-54.0.2840.59-nullfix.patch
 chromium-54.0.2840.59-jpeg-include-dir.patch
 chromium-54.0.2840.90-setopaque.patch
 chromium-56.0.2924.87-fpermissive.patch
-
 chromium-58.0.3029.81-fix-gn.patch
 
 chromium-46.0.2490.86-use_system_opus.patch
