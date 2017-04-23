@@ -93,7 +93,7 @@ sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 sys-libs/libcap-ng 0.7.8: POSIX 1003.1e capabilities
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 57.0.2987.146 58.0.3029.82: Open-source version of Google Chrome web browser
+www-client/chromium 57.0.2987.146 58.0.3029.82 58.0.3029.83: Open-source version of Google Chrome web browser
 www-client/firefox 53.0: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
