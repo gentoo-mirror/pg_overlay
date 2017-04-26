@@ -5,27 +5,6 @@
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-crypt/gpgme:common-lisp - Install common-lisp files
-app-emulation/wine:capi - Enable ISDN support via CAPI
-app-emulation/wine:custom-cflags - Bypass strip-flags; use at your own peril
-app-emulation/wine:d3d9 - Apply highly experimental patches for Gallium Nine support. This patch may break some applications.
-app-emulation/wine:dos - Pull in games-emulation/dosbox to run DOS applications
-app-emulation/wine:gecko - Add support for the Gecko engine when using iexplore
-app-emulation/wine:gstreamer - Use media-libs/gstreamer to provide DirectShow functionality;
-app-emulation/wine:mono - Add support for .NET using Wine's Mono add-on
-app-emulation/wine:netapi - Use libnetapi from net-fs/samba to support Windows networks in netapi32.dll
-app-emulation/wine:opencl - Enable OpenCL support
-app-emulation/wine:osmesa - Add support for OpenGL in bitmaps using libOSMesa
-app-emulation/wine:pcap - Support packet capture software (e.g. wireshark)
-app-emulation/wine:perl - Install helpers written in perl (winedump/winemaker)
-app-emulation/wine:pipelight - Apply Wine-Staging patches for Pipelight/Silverlight support
-app-emulation/wine:prelink - Run prelink on DLLs during build; For versions before wine-1.7.55 or hardened, do not disable if you do not know what this means as it can break things at runtime
-app-emulation/wine:realtime - Pull in sys-auth/rtkit for low-latency pulseaudio support
-app-emulation/wine:run-exes - Use Wine to open and run .EXE and .MSI files
-app-emulation/wine:s3tc - Pull in media-libs/libtxc_dxtn for DXTn texture compression, needed for many games
-app-emulation/wine:samba - Add support for NTLM auth. see http://wiki.winehq.org/NtlmAuthSetupGuide and http://wiki.winehq.org/NtlmSigningAndSealing
-app-emulation/wine:staging - Apply Wine-Staging patches for advanced feature support that haven't made it into upstream Wine yet
-app-emulation/wine:themes - Support GTK+:3 window theming through Wine-Staging
-app-emulation/wine:udev - Use virtual/libudev to provide plug and play support
 app-misc/ca-certificates:cacert - Include root certs from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/ca-certificates:insecure_certs - Install certs which are known to *not* being trustworthy.
 app-misc/ddcutil:enable-api-libs - Enables the C/C++ API.
@@ -45,7 +24,6 @@ app-portage/eix:tools - Create separate binary for script helper tools; useful i
 app-text/enchant:aspell - Adds support for app-text/aspell spell checker
 app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/enchant:zemberek - Adds support for app-text/zemberek-server spell checker server
-app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
 app-text/qpdfview:synctex - Add support for searching TeX sources
 app-text/qstardict:stardict - build stardict plugin
