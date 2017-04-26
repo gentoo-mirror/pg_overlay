@@ -1,8 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit autotools git-r3
 
@@ -16,17 +15,15 @@ KEYWORDS=""
 IUSE="doc examples static-libs"
 
 RDEPEND=""
-DEPEND="${RDEPEND}
-	doc? ( app-doc/doxygen )"
+DEPEND="doc? ( app-doc/doxygen )"
 
 src_prepare() {
+	default
 	sed -e "s:@top_srcdir@:.:" -i doc/doxygen.conf.in
-	eautoreconf
 }
 
 src_configure() {
 	econf \
-		--docdir="${EPREFIX}"/usr/share/doc/${PF} \
 		$(use_enable static-libs static) \
 		$(use_enable doc documentation)
 }
