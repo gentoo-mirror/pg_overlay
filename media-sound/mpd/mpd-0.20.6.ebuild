@@ -6,7 +6,7 @@ EAPI=6
 inherit autotools eutils flag-o-matic linux-info multilib user
 
 DESCRIPTION="The Music Player Daemon (mpd)"
-HOMEPAGE="https://www.musicpd.org"
+HOMEPAGE="https://www.musicpd.org https://github.com/MusicPlayerDaemon/MPD"
 SRC_URI="https://www.musicpd.org/download/${PN}/${PV%.*}/${P}.tar.xz"
 
 LICENSE="GPL-2"
@@ -24,17 +24,21 @@ DECODER_PLUGINS="adplug audiofile faad ffmpeg flac fluidsynth mad mikmod
 	modplug mpg123 musepack ogg flac sid vorbis wavpack wildmidi"
 ENCODER_PLUGINS="audiofile flac lame twolame vorbis"
 
-REQUIRED_USE="|| ( ${OUTPUT_PLUGINS} )
+REQUIRED_USE="
+	|| ( ${OUTPUT_PLUGINS} )
 	|| ( ${DECODER_PLUGINS} )
 	network? ( || ( ${ENCODER_PLUGINS} ) )
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
 	opus? ( ogg )
-	upnp? ( expat )"
+	upnp? ( expat )
+"
 
 CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	adplug? ( media-libs/adplug )
-	alsa? ( media-sound/alsa-utils
-		media-libs/alsa-lib )
+	alsa? (
+		media-sound/alsa-utils
+		media-libs/alsa-lib
+	)
 	ao? ( media-libs/libao[alsa?,pulseaudio?] )
 	audiofile? ( media-libs/audiofile )
 	bzip2? ( app-arch/bzip2 )
@@ -51,7 +55,7 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	gme? ( >=media-libs/game-music-emu-0.6.0_pre20120802 )
 	icu? ( dev-libs/icu:= )
 	id3tag? ( media-libs/libid3tag )
-	jack? ( media-sound/jack-audio-connection-kit )
+	jack? ( virtual/jack )
 	lame? ( network? ( media-sound/lame ) )
 	libmpdclient? ( media-libs/libmpdclient )
 	libsamplerate? ( media-libs/libsamplerate )
@@ -61,8 +65,10 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	modplug? ( media-libs/libmodplug )
 	mpg123? ( >=media-sound/mpg123-1.12.2 )
 	musepack? ( media-sound/musepack-tools )
-	network? ( >=media-libs/libshout-2
-		!lame? ( !vorbis? ( media-libs/libvorbis ) ) )
+	network? (
+		>=media-libs/libshout-2
+		!lame? ( !vorbis? ( media-libs/libvorbis ) )
+	)
 	nfs? ( net-fs/libnfs )
 	ogg? ( media-libs/libogg )
 	openal? ( media-libs/openal )
@@ -71,12 +77,12 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	samba? ( >=net-fs/samba-4.0.25 )
 	sid? ( || ( media-libs/libsidplay:2 media-libs/libsidplayfp ) )
 	sndfile? ( media-libs/libsndfile )
-	soundcloud? ( >=dev-libs/yajl-2 )
+	soundcloud? ( >=dev-libs/yajl-2:= )
 	libsoxr? ( media-libs/soxr )
 	sqlite? ( dev-db/sqlite:3 )
 	tcpd? ( sys-apps/tcp-wrappers )
 	twolame? ( media-sound/twolame )
-	upnp? ( net-libs/libupnp:0 )
+	upnp? ( net-libs/libupnp )
 	vorbis? ( media-libs/libvorbis )
 	wavpack? ( media-sound/wavpack )
 	wildmidi? ( media-sound/wildmidi )
@@ -127,83 +133,97 @@ src_prepare() {
 }
 
 src_configure() {
-	local mpdconf="--enable-database --disable-roar --disable-documentation
+	local myeconfargs=(
+		--enable-database --disable-roar --disable-documentation
 		--enable-dsd --enable-largefile --disable-osx --disable-shine-encoder
 		--disable-solaris-output --enable-tcp --enable-un --disable-werror
-		--docdir=${EPREFIX}/usr/share/doc/${PF}"
+		--docdir="${EPREFIX}"/usr/share/doc/${PF}
+	)
 
 	if use network; then
-		mpdconf+=" --enable-shout $(use_enable vorbis vorbis-encoder)
-			--enable-httpd-output $(use_enable lame lame-encoder)
+		myeconfargs+=(
+			--enable-shout
+			$(use_enable vorbis vorbis-encoder)
+			--enable-httpd-output
+			$(use_enable lame lame-encoder)
 			$(use_enable twolame twolame-encoder)
-			$(use_enable audiofile wave-encoder)"
+			$(use_enable audiofile wave-encoder)
+		)
 	else
-		mpdconf+=" --disable-shout --disable-vorbis-encoder
-			--disable-httpd-output --disable-lame-encoder
-			--disable-twolame-encoder --disable-wave-encoder"
+		myeconfargs+=(
+			--disable-shout
+			--disable-vorbis-encoder
+			--disable-httpd-output
+			--disable-lame-encoder
+			--disable-twolame-encoder
+			--disable-wave-encoder
+		)
 	fi
 
 	if use samba || use upnp; then
-		mpdconf+=" --enable-neighbor-plugins"
+		myeconfargs+=( --enable-neighbor-plugins )
 	fi
 
 	append-lfs-flags
 	append-ldflags "-L/usr/$(get_libdir)/sidplay/builders"
 
-	econf \
-		$(use_enable eventfd)		\
-		$(use_enable signalfd)		\
-		$(use_enable libmpdclient)	\
-		$(use_enable expat)			\
-		$(use_enable upnp)			\
-		$(use_enable adplug)		\
-		$(use_enable alsa)			\
-		$(use_enable ao)			\
-		$(use_enable audiofile)		\
-		$(use_enable zlib)			\
-		$(use_enable bzip2)			\
-		$(use_enable cdio cdio-paranoia) \
-		$(use_enable curl)			\
-		$(use_enable samba smbclient) \
-		$(use_enable nfs)			\
-		$(use_enable debug)			\
-		$(use_enable ffmpeg)		\
-		$(use_enable fifo)			\
-		$(use_enable flac)			\
-		$(use_enable fluidsynth)	\
-		$(use_enable gme)			\
-		$(use_enable id3tag id3)	\
-		$(use_enable inotify)		\
-		$(use_enable ipv6)			\
-		$(use_enable cdio iso9660)	\
-		$(use_enable jack)			\
-		$(use_enable soundcloud)	\
-		$(use_enable tcpd libwrap)	\
-		$(use_enable libsamplerate lsr) \
-		$(use_enable libsoxr soxr)	\
-		$(use_enable mad)			\
-		$(use_enable mikmod)		\
-		$(use_enable mms)			\
-		$(use_enable modplug)		\
-		$(use_enable musepack mpc)	\
-		$(use_enable mpg123)		\
-		$(use_enable openal)		\
-		$(use_enable opus)			\
-		$(use_enable oss)			\
-		$(use_enable pipe pipe-output) \
-		$(use_enable pulseaudio pulse) \
-		$(use_enable recorder recorder-output) \
-		$(use_enable sid sidplay)	\
-		$(use_enable sndfile sndfile) \
-		$(use_enable sqlite)		\
-		$(use_enable vorbis)		\
-		$(use_enable wavpack)		\
-		$(use_enable wildmidi)		\
-		$(use_enable zip zzip)		\
-		$(use_enable icu)			\
-		$(use_enable faad aac)		\
-		$(use_with zeroconf zeroconf avahi) \
-		${mpdconf}
+	myeconfargs+=(
+		$(use_enable eventfd)
+		$(use_enable signalfd)
+		$(use_enable libmpdclient)
+		$(use_enable expat)
+		$(use_enable upnp)
+		$(use_enable adplug)
+		$(use_enable alsa)
+		$(use_enable ao)
+		$(use_enable audiofile)
+		$(use_enable zlib)
+		$(use_enable bzip2)
+		$(use_enable cdio cdio-paranoia)
+		$(use_enable curl)
+		$(use_enable samba smbclient)
+		$(use_enable nfs)
+		$(use_enable debug)
+		$(use_enable ffmpeg)
+		$(use_enable fifo)
+		$(use_enable flac)
+		$(use_enable fluidsynth)
+		$(use_enable gme)
+		$(use_enable id3tag id3)
+		$(use_enable inotify)
+		$(use_enable ipv6)
+		$(use_enable cdio iso9660)
+		$(use_enable jack)
+		$(use_enable soundcloud)
+		$(use_enable tcpd libwrap)
+		$(use_enable libsamplerate lsr)
+		$(use_enable libsoxr soxr)
+		$(use_enable mad)
+		$(use_enable mikmod)
+		$(use_enable mms)
+		$(use_enable modplug)
+		$(use_enable musepack mpc)
+		$(use_enable mpg123)
+		$(use_enable openal)
+		$(use_enable opus)
+		$(use_enable oss)
+		$(use_enable pipe pipe-output)
+		$(use_enable pulseaudio pulse)
+		$(use_enable recorder recorder-output)
+		$(use_enable sid sidplay)
+		$(use_enable sndfile sndfile)
+		$(use_enable sqlite)
+		$(use_enable systemd systemd_daemon)
+		$(use_enable vorbis)
+		$(use_enable wavpack)
+		$(use_enable wildmidi)
+		$(use_enable zip zzip)
+		$(use_enable icu)
+		$(use_enable faad aac)
+		$(use_with zeroconf zeroconf avahi)
+	)
+
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
