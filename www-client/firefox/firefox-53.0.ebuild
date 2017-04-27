@@ -27,7 +27,7 @@ MOZCONFIG_OPTIONAL_GTK2ONLY=0
 MOZCONFIG_OPTIONAL_WIFI=0
 MOZCONFIG_OPTIONAL_JIT=1
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.52 pax-utils fdo-mime autotools virtualx mozlinguas-v2
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.53 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
@@ -53,12 +53,6 @@ RDEPEND="
 	selinux? ( sec-policy/selinux-mozilla )
 	kde? ( kde-apps/kdialog:5
 		kde-misc/kmozillahelper )"
-
-# atoms in mozconfig that need to be newer than what is inherited
-RDEPEND+="
-	>=app-text/hunspell-1.5.4
-	>=media-libs/libpng-1.6.28
-"
 
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
