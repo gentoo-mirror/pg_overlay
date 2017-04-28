@@ -2,7 +2,6 @@ build-remove-calling-untrusted-hooks.patch
 build-select-default-toolchain.patch
 build-chromium-last-commit-position-r0.patch.patch
 build-resolve-undefined-macro-in-Widevine.patch
-build-fix-gn-bootstrap-braindamaged-build-system-aga.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
 profile-resetter-do-not-tick-send-settings-by-defaul.patch
