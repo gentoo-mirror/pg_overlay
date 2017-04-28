@@ -218,7 +218,7 @@ src_prepare() {
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
 
 	# Iridium patches
-	use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do eapply "${FILESDIR}/iridium-browser/$i";done
+	use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${MY_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser/$i";done
 
 	# Ungoogled patches
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
