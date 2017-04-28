@@ -1,6 +1,5 @@
 build-remove-calling-untrusted-hooks.patch
 build-select-default-toolchain.patch
-build-chromium-last-commit-position-r0.patch.patch
 build-resolve-undefined-macro-in-Widevine.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
