@@ -1,6 +1,5 @@
 build-remove-calling-untrusted-hooks.patch
 build-select-default-toolchain.patch
-build-chromium-last-commit-position-r0.patch.patch
 build-resolve-undefined-macro-in-Widevine.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
@@ -12,7 +11,6 @@ prefs-disable-Use-a-web-service-to-help-resolve-navi.patch
 prefs-disable-Use-a-prediction-service-to-help-compl.patch
 prefs-enable-Send-a-Do-Not-Track-header.patch
 prefs-disable-network-DNS-prediction.patch
-prefs-block-third-party-cookies-by-default.patch
 cloud-print-disable-in-prefs-and-component-loader.patch
 prefs-disable-background-mode-by-default.patch
 prefs-disable-hyperlink-auditing.patch
@@ -24,7 +22,6 @@ search_engines-add-Qwant-as-selectable-and-default-s.patch
 prefs-disable-translation-service.patch
 first_run-deactivate-autoupdate-globally.patch
 src-use-cached-copy-of-safebrowsing-lists-at-iridium.patch
-build-build-the-sandbox-with-PIE.patch
 updater-disable-auto-update.patch
 plugins-use-cached-copy-of-plugin-description-list-a.patch
 Remove-EV-certificates.patch

@@ -214,6 +214,12 @@ src_prepare() {
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux-${MY_MAJORV}.diff"
 
+	# Debian patches
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
+
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
 
@@ -222,12 +228,6 @@ src_prepare() {
 
 	# Ungoogled patches
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
-
-	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
-
-	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
