@@ -1,0 +1,26 @@
+From 3142858463ecb12b2c251bfad097e22583a20844 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 23 Apr 2017 22:24:11 +0200
+Subject: [PATCH 05/60] build: fix gn bootstrap / braindamaged build system
+ again
+
+openSUSE patch fix-gn-bootstrap.diff
+---
+ tools/gn/bootstrap/bootstrap.py | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/tools/gn/bootstrap/bootstrap.py b/tools/gn/bootstrap/bootstrap.py
+index 38cfb117d29c..3e6b18147b46 100755
+--- a/tools/gn/bootstrap/bootstrap.py
++++ b/tools/gn/bootstrap/bootstrap.py
+@@ -385,6 +385,7 @@ def write_gn_ninja(path, root_gen_dir, options):
+       'base/base_switches.cc',
+       'base/build_time.cc',
+       'base/callback_internal.cc',
++      'base/callback_helpers.cc',
+       'base/command_line.cc',
+       'base/debug/activity_tracker.cc',
+       'base/debug/alias.cc',
+-- 
+2.12.2
+

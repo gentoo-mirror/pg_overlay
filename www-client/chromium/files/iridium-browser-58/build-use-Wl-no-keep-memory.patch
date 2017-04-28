@@ -1,0 +1,47 @@
+From 9243cfeb88d23bf7b10a3679c56eb5d364f8b128 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 20 Dec 2015 11:12:00 +0100
+Subject: [PATCH 54/60] build: use -Wl,--no-keep-memory
+
+---
+ chrome/BUILD.gn        | 3 ++-
+ sandbox/linux/BUILD.gn | 2 +-
+ 2 files changed, 3 insertions(+), 2 deletions(-)
+
+diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
+index 9777702f47a5..6c40e5f524d7 100644
+--- a/chrome/BUILD.gn
++++ b/chrome/BUILD.gn
+@@ -221,6 +221,7 @@ if (!is_android && !is_mac) {
+     } else if (use_aura) {
+       # Non-Windows aura entrypoint.
+       sources += [ "app/chrome_exe_main_aura.cc" ]
++      ldflags = [ "-Wl,--no-keep-memory" ]
+     }
+ 
+     if (is_linux) {
+@@ -253,7 +254,7 @@ if (!is_android && !is_mac) {
+         "//chrome/common:features",
+       ]
+ 
+-      ldflags = [ "-pie" ]
++      ldflags += [ "-pie", "-Wl,--no-keep-memory" ]
+ 
+       if (use_pango || use_cairo) {
+         # Needed for chrome_main.cc initialization of libraries.
+diff --git a/sandbox/linux/BUILD.gn b/sandbox/linux/BUILD.gn
+index 6647137a8a57..4bf1b7b7c23f 100644
+--- a/sandbox/linux/BUILD.gn
++++ b/sandbox/linux/BUILD.gn
+@@ -284,7 +284,7 @@ if (is_linux) {
+       # TODO fix this and re-enable this warning.
+       "-Wno-sign-compare",
+     ]
+-    ldflags = [ "-pie" ]
++    ldflags = [ "-pie", "-Wl,--no-keep-memory" ]
+ 
+     import("//build/config/compiler/compiler.gni")
+     import("//build/config/sanitizers/sanitizers.gni")
+-- 
+2.12.2
+
