@@ -5,7 +5,6 @@ chromium-47.0.2526.80-nacl-ignore-broken-fd-counter.patch
 chromium-48.0.2564.116-libusb_interrupt_event_handler.patch
 chromium-55.0.2883.75-cups22.patch
 chromium-55.0.2883.75-more-codec-aliases.patch
-chromium-55.0.2883.75-sandbox-pie.patch
 chromium-54.0.2840.59-gn-system.patch
 chromium-53.0.2785.92-last-commit-position.patch
 chromium-53.0.2785.92-boringssl-time-fix.patch
