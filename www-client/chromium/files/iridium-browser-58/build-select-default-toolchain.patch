@@ -1,0 +1,54 @@
+From ece0c65c6f55e7c8182c27be895bebd987e80d6b Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Thu, 20 Apr 2017 17:03:14 +0200
+Subject: [PATCH 02/60] build: select default toolchain
+
+(Patch used from openSUSE.)
+
+You will need to use
+
+	export CC=gcc CXX=g++
+	(or clang equivalents)
+
+now or gn bootstrap and ninja will fail with spurious
+
+	-MD: no such file or directory
+
+kind of error. If anyone knows whether gn can do
+
+	= getenv("CC") || "gcc"
+
+that would be magnificient.
+---
+ toolchain/BUILD.gn | 19 +++++++++++++++++++
+ 1 file changed, 19 insertions(+)
+ create mode 100644 toolchain/BUILD.gn
+
+diff --git a/toolchain/BUILD.gn b/toolchain/BUILD.gn
+new file mode 100644
+index 000000000000..052c0b3f305a
+--- /dev/null
++++ b/toolchain/BUILD.gn
+@@ -0,0 +1,19 @@
++import("//build/toolchain/gcc_toolchain.gni")
++
++gcc_toolchain("default") {
++  cc = getenv("CC")
++  cxx = getenv("CXX")
++  ar = "ar"
++  nm = "nm"
++  ld = cxx
++
++  extra_cflags = getenv("CFLAGS")
++  extra_cppflags = getenv("CPPFLAGS")
++  extra_cxxflags = getenv("CXXFLAGS")
++  extra_ldflags = getenv("LDFLAGS")
++
++  toolchain_args = {
++    current_cpu = current_cpu
++    current_os = current_os
++  }
++}
+-- 
+2.12.2
+

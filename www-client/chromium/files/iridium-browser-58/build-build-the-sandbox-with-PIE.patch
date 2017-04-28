@@ -1,0 +1,33 @@
+From 4ab3113eb98ab276c949a39d156b76dc9b759479 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Thu, 29 Jan 2015 10:39:51 +0100
+Subject: [PATCH 32/60] build: build the sandbox with PIE
+
+(Position Independent Executable.)
+This patch originally from openSUSE, chromium-sandbox-pie.patch.
+---
+ sandbox/linux/BUILD.gn | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/sandbox/linux/BUILD.gn b/sandbox/linux/BUILD.gn
+index 3e98defa5c61..6647137a8a57 100644
+--- a/sandbox/linux/BUILD.gn
++++ b/sandbox/linux/BUILD.gn
+@@ -278,12 +278,13 @@ if (is_linux) {
+ 
+     cflags = [
+       # For ULLONG_MAX
+-      "-std=gnu99",
++      "-std=gnu99 -fPIE",
+ 
+       # These files have a suspicious comparison.
+       # TODO fix this and re-enable this warning.
+       "-Wno-sign-compare",
+     ]
++    ldflags = [ "-pie" ]
+ 
+     import("//build/config/compiler/compiler.gni")
+     import("//build/config/sanitizers/sanitizers.gni")
+-- 
+2.12.2
+

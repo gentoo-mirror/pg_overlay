@@ -1,0 +1,25 @@
+From 85a59cfdc9285df6b1dc8b9e642979727f868745 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 23 Apr 2017 21:52:40 +0200
+Subject: [PATCH 04/60] build: resolve undefined macro in Widevine
+
+openSUSE patch fix_building_widevinecdm_with_chromium.patch
+---
+ third_party/widevine/cdm/stub/widevine_cdm_version.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/third_party/widevine/cdm/stub/widevine_cdm_version.h b/third_party/widevine/cdm/stub/widevine_cdm_version.h
+index 659683ba2aca..dd76a0b5f785 100644
+--- a/third_party/widevine/cdm/stub/widevine_cdm_version.h
++++ b/third_party/widevine/cdm/stub/widevine_cdm_version.h
+@@ -10,6 +10,7 @@
+ 
+ #include "third_party/widevine/cdm/widevine_cdm_common.h"
+ 
++#define WIDEVINE_CDM_VERSION_STRING "unknown"
+ #define WIDEVINE_CDM_AVAILABLE
+ 
+ #endif  // WIDEVINE_CDM_VERSION_H_
+-- 
+2.12.2
+
