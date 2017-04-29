@@ -1,6 +1,6 @@
-diff -up a/calendar/locales/shipped-locales b/calendar/locales/shipped-locales
---- a/calendar/locales/shipped-locales	2016-04-07 23:14:23.000000000 +0200
-+++ b/calendar/locales/shipped-locales	2016-04-14 13:14:16.853967318 +0200
+diff -up thunderbird-45.0/calendar/locales/shipped-locales.bad-langs thunderbird-45.0/calendar/locales/shipped-locales
+--- thunderbird-45.0/calendar/locales/shipped-locales.bad-langs	2016-04-07 23:14:23.000000000 +0200
++++ thunderbird-45.0/calendar/locales/shipped-locales	2016-04-14 13:14:16.853967318 +0200
 @@ -15,7 +15,6 @@ fy-NL
  ga-IE
  gd
