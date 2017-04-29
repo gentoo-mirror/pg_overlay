@@ -1,0 +1,13 @@
+diff -up comm-esr31/client.mk.old comm-esr31/client.mk
+--- comm-esr31/client.mk.old	2014-07-18 02:04:05.000000000 +0200
++++ comm-esr31/client.mk	2014-07-30 10:57:01.177453550 +0200
+@@ -131,7 +131,7 @@ endif
+ 
+ 
+ ifndef MOZ_OBJDIR
+-  MOZ_OBJDIR = obj-$(CONFIG_GUESS)
++  MOZ_OBJDIR = objdir
+ else
+ # On Windows Pymake builds check MOZ_OBJDIR doesn't start with "/"
+   ifneq (,$(findstring mingw,$(CONFIG_GUESS)))
+diff -up comm-esr31/mozilla/media/webrtc/trunk/Makefile.old comm-esr31/mozilla/media/webrtc/trunk/Makefile

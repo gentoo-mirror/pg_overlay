@@ -1,5 +1,12 @@
 firefox-build-prbool.patch
 
+thunderbird-objdir.patch
+build-nspr-prbool.patch
+build-werror.patch
+rhbz-1219542-s390-build.patch
 firefox-gcc-6.0.patch
+lightning-bad-langs.patch
+thunderbird-enable-addons.patch
 
 rhbz-966424.patch
+rhbz-1400293-fix-mozilla-1324096.patch
