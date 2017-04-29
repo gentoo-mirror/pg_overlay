@@ -24,8 +24,6 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 MOZ_P="${PN}-${MOZ_PV}"
 
-MOZCONFIG_OPTIONAL_GTK2ONLY=0
-MOZCONFIG_OPTIONAL_WIFI=0
 MOZCONFIG_OPTIONAL_JIT=1
 inherit flag-o-matic toolchain-funcs mozconfig-v6.52 makeedit autotools pax-utils check-reqs nsplugins mozlinguas-v2 fdo-mime gnome2-utils
 
@@ -197,6 +195,12 @@ src_configure() {
 
 	mozconfig_use_enable ldap
 	mozconfig_use_enable rust
+
+	# Settings
+	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --disable-crashreporter
+	mozconfig_annotate '' --disable-updater
 
 	mozlinguas_mozconfig
 
