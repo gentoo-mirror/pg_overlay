@@ -91,7 +91,7 @@ PDEPEND="
 	video_cards_geode?         ( x11-drivers/xf86-video-geode )
 	video_cards_glint?         ( x11-drivers/xf86-video-glint )
 	video_cards_i915?          ( x11-drivers/xf86-video-intel )
-	video_cards_i965?          ( >=x11-base/xorg-server-${PV}[glamor] || x11-drivers/xf86-video-intel)
+	video_cards_i965?          ( >=x11-base/xorg-server-${PV}[glamor] || x11-drivers/xf86-video-intel )
 	video_cards_intel?         ( !video_cards_i965? ( x11-drivers/xf86-video-intel ) )
 	video_cards_mga?           ( x11-drivers/xf86-video-mga )
 	video_cards_nouveau?       ( x11-drivers/xf86-video-nouveau )
