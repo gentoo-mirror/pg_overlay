@@ -2,6 +2,13 @@
 # Please add your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using pmaint *
 
+app-admin/syslog-ng:amqp - Enable support for AMQP destinations
+app-admin/syslog-ng:json - Enable support for JSON template formatting via dev-libs/json-c
+app-admin/syslog-ng:mongodb - Enable support for mongodb destinations
+app-admin/syslog-ng:pacct - Enable support for reading Process Accounting files (EXPERIMENTAL, Linux only)
+app-admin/syslog-ng:redis - Enable support for Redis destinations
+app-admin/syslog-ng:smtp - Enable support for SMTP destinations
+app-admin/syslog-ng:spoof-source - Enable support for spoofed source addresses
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-crypt/gpgme:common-lisp - Install common-lisp files
