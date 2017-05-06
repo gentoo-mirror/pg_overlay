@@ -27,7 +27,7 @@ dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.9.0_beta3: The QML and Quick modules for the Qt5 framework
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.52.1: GDBus code and documentation generator
+dev-util/gdbus-codegen 2.50.3 2.52.1: GDBus code and documentation generator
 dev-util/ninja 1.7.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 kde-frameworks/extra-cmake-modules 5.33.0: Extra modules and scripts for CMake
