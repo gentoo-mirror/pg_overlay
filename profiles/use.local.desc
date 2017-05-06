@@ -31,8 +31,6 @@ app-portage/eix:tools - Create separate binary for script helper tools; useful i
 app-text/enchant:aspell - Adds support for app-text/aspell spell checker
 app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/enchant:zemberek - Adds support for app-text/zemberek-server spell checker server
-app-text/qpdfview:fitz - Use experimental fitz rendering, provided by app-text/mupdf, instead of poppler
-app-text/qpdfview:synctex - Add support for searching TeX sources
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
@@ -45,11 +43,8 @@ dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
 dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
-dev-qt/qtdeclarative:exceptions - Add support for exceptions - like catching them inside the event loop (recommended by upstream)
 dev-qt/qtdeclarative:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtdeclarative:localstorage - Build the LocalStorage import for QtQuick (requires QtSql)
-dev-qt/qtdeclarative:qt3support - Enable the Qt3Support libraries for Qt4. Note that this does not mean you can compile pure Qt3 programs with Qt4.
-dev-qt/qtdeclarative:webkit - Build the WebView QML component
 dev-qt/qtdeclarative:widgets - Enable QtWidgets support
 dev-qt/qtdeclarative:xml - Build the XmlListModel import for QtQuick (requires QtXmlPatterns)
 mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
@@ -258,7 +253,6 @@ net-im/psi:plugins - Enable plugins support
 net-im/psi:sql - Enable psi-new-history extras patch
 net-im/psi:webkit - Enable chatlog rendering using webkit
 net-im/psi:whiteboarding - Enable experimental interactive SVG drawing
-net-im/skypeforlinux:pax_kernel - Triggers a paxmarking of the main skype binary
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
@@ -277,19 +271,9 @@ net-p2p/rtorrent-ps:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
 net-print/samsung-unified-driver:network - Enable network printing support
-sys-apps/kmod:lzma - Enable support for XZ compressed modules
-sys-apps/kmod:tools - Install module loading/unloading tools.
-sys-apps/kmod:zlib - Enable support for gzipped modules
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
 sys-apps/razercfg:qt4 - Installs a qt UI. Requires dev-python/pyside
 sys-apps/roccat-tools:lua - Build support for Lua scripting for RyosMKPro ripple effects
-sys-apps/util-linux:caps - build setpriv helper (run programs with diff capabilities)
-sys-apps/util-linux:cramfs - build mkfs/fsck helpers for cramfs filesystems
-sys-apps/util-linux:fdformat - build fdformat (floppy disk format)
-sys-apps/util-linux:kill - build the kill program
-sys-apps/util-linux:pam - build runuser helper
-sys-apps/util-linux:suid - install mount/umount as setuid so non-root users may mount/umount devices, and wall/write as setgid so non-root users can notify other users
-sys-apps/util-linux:tty-helpers - install the mesg/wall/write tools for talking to local users
 www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
 www-client/chromium:gconf - Enable support for GConf to retrieve system settings
 www-client/chromium:gtk3 - Use gtk3 instead of gtk2
@@ -330,7 +314,6 @@ x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
 x11-libs/cairo:utils - Build support for Cairo script and trace utilities
 x11-libs/cairo:valgrind - Built-in support to mark memory regions
-x11-libs/libxcb:xkb - Enable the XCB keyboard extension
 x11-libs/wxGTK:gnome - Use gnome-base/libgnomeprintui for printing tasks.
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
