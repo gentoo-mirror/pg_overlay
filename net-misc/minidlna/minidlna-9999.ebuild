@@ -7,9 +7,8 @@ inherit autotools git-r3 eutils linux-info systemd toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
-COMMIT="49aa42d89347f1797caefe4e4ac09e20868fe66e"
-EGIT_REPO_URI="git://git.code.sf.net/p/${PN}/git"
 SRC_URI="https://dev.gentoo.org/~xmw/${PN}-gentoo-artwork.patch.xz"
+EGIT_REPO_URI="git://git.code.sf.net/p/${PN}/git"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
