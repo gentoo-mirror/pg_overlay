@@ -31,8 +31,6 @@ DEPEND="${RDEPEND}
 
 CONFIG_CHECK="~INOTIFY_USER"
 
-S=${WORKDIR}/${PN}-git-${COMMIT}
-
 pkg_setup() {
 	local my_is_new="yes"
 	[ -d "${EPREFIX}"/var/lib/${PN} ] && my_is_new="no"
