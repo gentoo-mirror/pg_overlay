@@ -7,7 +7,7 @@ inherit autotools eutils linux-info systemd toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
-COMMIT="8a996b4b624ef45538a5de10730b8e94c55e7768"
+COMMIT="49aa42d89347f1797caefe4e4ac09e20868fe66e"
 SRC_URI="https://sourceforge.net/code-snapshots/git/m/mi/${PN}/git.git/${PN}-git-${COMMIT}.zip -> ${P}.zip
 	https://dev.gentoo.org/~xmw/${PN}-gentoo-artwork.patch.xz"
 
