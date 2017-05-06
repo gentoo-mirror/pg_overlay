@@ -16,13 +16,14 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="pm-utils qt4 systemd +udev"
 
-RDEPEND="qt4? ( >=dev-python/pyside-1.2.1[${PYTHON_USEDEP}] )
+RDEPEND="${PYTHON_DEPS}
+	qt4? ( >=dev-python/pyside-1.2.1[${PYTHON_USEDEP}] )
 	systemd? ( sys-apps/systemd )
 	udev? ( virtual/udev )
 	pm-utils? ( sys-power/pm-utils )
 	virtual/libusb:1"
-
-DEPEND="virtual/pkgconfig
+DEPEND="${PYTHON_DEPS}
+	virtual/pkgconfig
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	virtual/libusb:1"
 
