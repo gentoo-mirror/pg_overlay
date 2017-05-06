@@ -7,7 +7,6 @@ inherit autotools git-r3 eutils linux-info systemd toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
-SRC_URI="https://dev.gentoo.org/~xmw/${PN}-gentoo-artwork.patch.xz"
 EGIT_REPO_URI="git://git.code.sf.net/p/${PN}/git"
 
 LICENSE="BSD GPL-2"
@@ -49,7 +48,7 @@ src_prepare() {
 		-e "/db_dir/s:/var/cache/:/var/lib/:" \
 		-i ${PN}.conf || die
 
-	epatch "${WORKDIR}"/${PN}-gentoo-artwork.patch
+	epatch "${FILESDIR}"/${PN}-gentoo-artwork.patch
 
 	epatch_user
 	eautoreconf
