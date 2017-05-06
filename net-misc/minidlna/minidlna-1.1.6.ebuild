@@ -11,8 +11,6 @@ COMMIT="49aa42d89347f1797caefe4e4ac09e20868fe66e"
 SRC_URI="https://sourceforge.net/code-snapshots/git/m/mi/${PN}/git.git/${PN}-git-${COMMIT}.zip -> ${P}.zip
 	https://dev.gentoo.org/~xmw/${PN}-gentoo-artwork.patch.xz"
 
-S=${WORKDIR}/${PN}-git-${COMMIT}	
-
 LICENSE="BSD GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
