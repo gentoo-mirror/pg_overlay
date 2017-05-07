@@ -25,7 +25,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	rm -rf .git
+	find -name '.git' -exec rm -rf {} \;
 }
 
 src_install() {
