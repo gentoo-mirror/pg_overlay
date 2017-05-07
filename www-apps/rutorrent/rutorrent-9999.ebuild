@@ -26,6 +26,10 @@ pkg_setup() {
 	webapp_pkg_setup
 }
 
+src_prepare() {
+	find -name '\.git*' -exec rm -rf {} \;
+}
+
 src_install() {
 	webapp_src_preinst
 
