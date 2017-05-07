@@ -20,8 +20,6 @@ DEPEND="
 "
 RDEPEND="virtual/httpd-php"
 
-S="${WORKDIR}"
-
 pkg_setup() {
 	webapp_pkg_setup
 }
