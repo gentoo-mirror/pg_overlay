@@ -271,8 +271,6 @@ net-p2p/rtorrent-ps:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
 net-print/samsung-unified-driver:network - Enable network printing support
-sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
-sys-apps/razercfg:qt4 - Installs a qt UI. Requires dev-python/pyside
 sys-apps/roccat-tools:lua - Build support for Lua scripting for RyosMKPro ripple effects
 www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
 www-client/chromium:gconf - Enable support for GConf to retrieve system settings

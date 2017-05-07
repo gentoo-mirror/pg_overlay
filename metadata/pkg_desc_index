@@ -17,7 +17,7 @@ app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-libs/gobject-introspection 1.50.0 1.52.1: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
-dev-libs/libevdev 1.5.6: Handler library for evdev events
+dev-libs/libevdev 1.5.6 1.5.7: Handler library for evdev events
 dev-libs/libgaminggear 0.14.0 0.15.0: Provides functionality for gaming input devices
 dev-libs/libixion 0.12.2: General purpose formula parser & interpreter
 dev-libs/liborcus 0.12.1: Standalone file import filter library for spreadsheet documents
@@ -73,7 +73,6 @@ net-print/samsung-unified-driver 1.00.37: Samsung Unified Linux Driver for print
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/i2c-tools 3.1.1-r1: I2C tools for bus probing, chip dumping, EEPROM decoding, and more
-sys-apps/razercfg 0.38: Utility for advanced configuration of Razer mice (DeathAdder, Krait, Lachesis)
 sys-apps/roccat-tools 5.6.0: Utility for advanced configuration of Roccat devices
 sys-boot/efibootmgr 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
