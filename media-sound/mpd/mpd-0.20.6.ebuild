@@ -213,7 +213,6 @@ src_configure() {
 		$(use_enable sid sidplay)
 		$(use_enable sndfile sndfile)
 		$(use_enable sqlite)
-		$(use_enable systemd systemd_daemon)
 		$(use_enable vorbis)
 		$(use_enable wavpack)
 		$(use_enable wildmidi)
