@@ -370,9 +370,9 @@ src_install() {
 		|| die
 	fi
 
-	cat "${FILESDIR}"/privacy-patchset/privacy.js-1 >> \
-	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-	|| die	
+	#cat "${FILESDIR}"/privacy-patchset/privacy.js-1 >> \
+	#"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	#|| die	
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake DESTDIR="${D}" install
