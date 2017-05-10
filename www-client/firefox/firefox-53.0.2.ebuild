@@ -178,7 +178,7 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
 
 	# Privacy-esr patches
-	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -368,9 +368,9 @@ src_install() {
 		|| die
 	fi
 
-	cat "${FILESDIR}"/privacy-patchset/privacy.js-1 >> \
-	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-	|| die	
+	#cat "${FILESDIR}"/privacy-patchset/privacy.js-1 >> \
+	#"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	#|| die	
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake DESTDIR="${D}" install
