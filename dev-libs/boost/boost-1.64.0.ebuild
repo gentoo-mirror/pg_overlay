@@ -6,16 +6,15 @@ PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
 
 inherit eutils flag-o-matic multiprocessing python-r1 toolchain-funcs versionator multilib-minimal
 
-REAL_P="${PN}_$(replace_all_version_separators _ ${MY_PV})"
+MY_P="${PN}_$(replace_all_version_separators _)"
 MAJOR_V="$(get_version_component_range 1-2)"
 
 DESCRIPTION="Boost Libraries for C++"
 HOMEPAGE="http://www.boost.org/"
-SRC_URI="https://downloads.sourceforge.net/project/boost/${PN}/${MY_PV}/${REAL_P}.tar.bz2
-	https://dl.bintray.com/boostorg/release/${MY_PV}/source/${REAL_P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/project/boost/${PN}/${PV}/${MY_P}.tar.bz2"
 
 LICENSE="Boost-1.0"
-SLOT="0/${MY_PV}" # ${MY_PV} instead ${MAJOR_V} due to bug 486122
+SLOT="0/${PV}" # ${PV} instead ${MAJOR_V} due to bug 486122
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris ~x86-winnt"
 
 IUSE="context debug doc icu +nls mpi python static-libs +threads tools"
@@ -33,7 +32,7 @@ REQUIRED_USE="
 	mpi? ( threads )
 	python? ( ${PYTHON_REQUIRED_USE} )"
 
-S="${WORKDIR}/${REAL_P}"
+S="${WORKDIR}/${MY_P}"
 
 # the tests will never fail because these are not intended as sanity
 # tests at all. They are more a way for upstream to check their own code
@@ -46,7 +45,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-1.48.0-disable_icu_rpath.patch"
 	"${FILESDIR}/${PN}-1.55.0-context-x32.patch"
 	"${FILESDIR}/${PN}-1.56.0-build-auto_index-tool.patch"
-	#"${FILESDIR}/${PN}-1.63.0-fix-python.patch"
+	"${FILESDIR}/${PN}-1.63.0-fix-python.patch"
 )
 
 python_bindings_needed() {

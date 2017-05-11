@@ -8,11 +8,11 @@ RESTRICT="test"
 PYTHON_COMPAT=( python2_7 )
 inherit eutils flag-o-matic python-single-r1 toolchain-funcs versionator
 
-REAL_PV="$(replace_all_version_separators _ ${MY_PV})"
+MY_PV="$(replace_all_version_separators _)"
 
 DESCRIPTION="A system for large project software construction, simple to use and powerful"
 HOMEPAGE="http://www.boost.org/doc/tools/build/index.html"
-SRC_URI="https://downloads.sourceforge.net/project/boost/boost/${MY_PV}/boost_${REAL_PV}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/project/boost/boost/${PV}/boost_${MY_PV}.tar.bz2"
 
 LICENSE="Boost-1.0"
 SLOT="0"
@@ -29,7 +29,7 @@ DEPEND="${RDEPEND}
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )
 	test? ( ${PYTHON_REQUIRED_USE} )"
 
-S="${WORKDIR}/boost_${REAL_PV}/tools/build/src"
+S="${WORKDIR}/boost_${MY_PV}/tools/build/src"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.48.0-disable_python_rpath.patch"
@@ -47,7 +47,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	tar xjf "${DISTDIR}/${A}" boost_${REAL_PV}/tools/build || die "unpacking tar failed"
+	tar xjf "${DISTDIR}/${A}" boost_${MY_PV}/tools/build || die "unpacking tar failed"
 }
 
 src_prepare() {
