@@ -2,6 +2,7 @@ app-admin/profile-cleaner 2.36: Vacuum and reindex browser sqlite databases
 app-admin/syslog-ng 3.9.1: syslog replacement with advanced filtering features
 app-admin/webapp-config 1.54-r2 9999: Gentoo's installer for web-based applications
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
+app-arch/rar 5.5.0_beta2: RAR compressor/uncompressor
 app-arch/unrar 5.5.3: Uncompress rar files
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/gpgme 1.9.0: GnuPG Made Easy is a library for making GnuPG easier to use
