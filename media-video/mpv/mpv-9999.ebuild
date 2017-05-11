@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV='2.0.0pre2'
+WAF_PV='2.0.0pre3'
 
 inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils
 
@@ -166,7 +166,7 @@ pkg_setup() {
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	sed -i 's/1.9.8/2.0.0pre2/g' bootstrap.py || die
+	sed -i 's/1.9.8/2.0.0pre3/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	default src_prepare
 }
@@ -345,8 +345,8 @@ pkg_postinst() {
 
 	if [[ ${opengl_0_25_0} -eq 1 ]]; then
 		elog "Since version 0.25.0 the 'opengl' USE flag is mapped to"
-		elog "the 'opengl' video output and no longer depends on X11"
-		elog "or Mac OS Aqua. Consider enabling the 'opengl' USE flag."
+		elog "the 'opengl' video output and no longer explicitly requires"
+		elog "X11 or Mac OS Aqua. Consider enabling the 'opengl' USE flag."
 	fi
 
 	if use cli && ! has_version 'app-shells/mpv-bash-completion'; then
