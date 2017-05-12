@@ -275,7 +275,6 @@ src_configure() {
 
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
-		$(use_enable vaapi vaapi-hwaccel-new)
 		--jobs $(($(nproc)+1))
 	)
 
