@@ -275,7 +275,7 @@ src_configure() {
 
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
-		sse4-intrinsics
+		--sse4-intrinsics
 		--jobs 9
 	)
 
