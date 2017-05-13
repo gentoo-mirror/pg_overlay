@@ -49,8 +49,8 @@ CDEPEND="
 	>=dev-libs/nss-3.28.3
 	>=dev-libs/nspr-4.13.1
 	crypt? ( x11-plugins/enigmail[-thunderbird(-)] )
-	kde? ( kde-apps/kdialog:5
-		kde-misc/kmozillahelper )"
+	kde? ( kde-apps/kdialog:5 )"
+		#kde-misc/kmozillahelper )" https://github.com/openSUSE/kmozillahelper/issues/14
 
 DEPEND="rust? ( dev-lang/rust )
 	amd64? ( ${ASM_DEPEND}
