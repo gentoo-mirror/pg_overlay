@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="component-build cups gconf gnome-keyring +gtk3 hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg system-libvpx +tcmalloc widevine vaapi debian inox iridium +ungoogled"
+IUSE="component-build cups gconf gnome-keyring +gtk3 hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg system-libvpx +tcmalloc widevine vaapi +debian +inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
@@ -107,6 +107,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-perl/JSON
 	>=dev-util/gperf-3.0.3
 	dev-util/ninja
+	net-libs/nodejs
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
 	sys-devel/flex
@@ -166,9 +167,9 @@ pre_build_checks() {
 			# bugs: #601654
 			die "At least clang 3.9.1 is required"
 		fi
-		if tc-is-gcc && ! version_is_at_least 5 "$(gcc-major-version)"; then
+		if tc-is-gcc && ! version_is_at_least 4.8 "$(gcc-version)"; then
 			# bugs: #535730, #525374, #518668, #600288
-			die "At least gcc 5 is required"
+			die "At least gcc 4.8 is required"
 		fi
 	fi
 
@@ -202,6 +203,8 @@ pkg_setup() {
 src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}/${PN}-FORTIFY_SOURCE.patch"
+		"${FILESDIR}/${PN}-gn-bootstrap-r2.patch"
+		"${FILESDIR}/skia-avx2.patch"
 	)
 
 	use system-ffmpeg && PATCHES+=( "${FILESDIR}/${PN}-system-ffmpeg-r4.patch" )
@@ -211,20 +214,23 @@ src_prepare() {
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux-${MY_MAJORV}.diff"
 
-	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
-
-	# Iridium patches
-	use iridium && for i in $(cat "${FILESDIR}/iridium-browser/series");do eapply "${FILESDIR}/iridium-browser/$i";done
-
-	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
-
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
+
+	# Inox patches
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
+
+	# Iridium patches
+	use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${MY_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${MY_MAJORV}/$i";done
+
+	# Ungoogled patches
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${MY_MAJORV}/$i";done
+
+	mkdir -p third_party/node/linux/node-linux-x64/bin || die
+	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
 	local keeplibs=(
 		base/third_party/dmg_fp
@@ -297,6 +303,8 @@ src_prepare() {
 		third_party/mesa
 		third_party/modp_b64
 		third_party/mt19937ar
+		third_party/node
+		third_party/node/node_modules/vulcanize/third_party/UglifyJS2
 		third_party/openh264
 		third_party/openmax_dl
 		third_party/opus
