@@ -23,6 +23,8 @@ fi
 PATCH="${PN}-53.0-patches-02"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
+MOZCONFIG_OPTIONAL_JIT=1
+
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.53 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
@@ -32,7 +34,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-lin
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +gmp-autoupdate hardened +hwaccel jack pgo rust selinux test +kde"
+IUSE="bindist +gmp-autoupdate hardened +hwaccel jack pgo rust selinux test +jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -47,8 +49,8 @@ RDEPEND="
 	>=dev-libs/nss-3.29.5
 	>=dev-libs/nspr-4.13.1
 	selinux? ( sec-policy/selinux-mozilla )
-	kde? ( kde-apps/kdialog:5
-		kde-misc/kmozillahelper )"
+	kde? ( kde-apps/kdialog:5 )"
+		#kde-misc/kmozillahelper )" - https://github.com/openSUSE/kmozillahelper/issues/14
 
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
