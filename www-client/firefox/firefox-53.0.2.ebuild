@@ -120,6 +120,7 @@ src_unpack() {
 src_prepare() {
 	# Apply our patches
 	eapply "${WORKDIR}/firefox"
+	eapply "${FILESDIR}"/firefox-53-turn_of_crash_on_seccomp_fail.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
