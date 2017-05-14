@@ -17,10 +17,12 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="component-build cups gconf gnome-keyring +gtk3 hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg system-libvpx +tcmalloc widevine vaapi +inox iridium ungoogled"
+IUSE="component-build cups gconf gnome-keyring +gtk3 hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg system-libvpx +tcmalloc widevine vaapi +debian +inox iridium ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
-REQUIRED_USE="ungoogled? ( gtk3 )
-		?? ( inox iridium ungoogled )"
+REQUIRED_USE="debian? ( gtk3 )
+		ungoogled? ( gtk3 )
+		?? ( inox iridium ungoogled )
+		?? ( ungoogled debian )"
 MY_MAJORV="$(get_major_version )"
 
 # Native Client binaries are compiled with different set of flags, bug #452066.
@@ -213,7 +215,7 @@ src_prepare() {
 	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux-${MY_MAJORV}.diff"
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
