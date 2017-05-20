@@ -49,8 +49,8 @@ RDEPEND="
 	>=dev-libs/nss-3.29.5
 	>=dev-libs/nspr-4.13.1
 	selinux? ( sec-policy/selinux-mozilla )
-	kde? ( kde-apps/kdialog:5 )"
-		#kde-misc/kmozillahelper )" - https://github.com/openSUSE/kmozillahelper/issues/14
+	kde? ( kde-apps/kdialog:5 )
+		kde-misc/kmozillahelper )"
 
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
