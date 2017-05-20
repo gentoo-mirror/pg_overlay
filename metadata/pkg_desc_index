@@ -38,7 +38,7 @@ kde-frameworks/extra-cmake-modules 5.33.0: Extra modules and scripts for CMake
 kde-frameworks/ki18n 5.33.0: Framework based on Gettext for internationalizing user interface text
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/plasma-applet-weather-widget 1.6.9: Plasma 5 applet for weather forecasts
-mail-client/thunderbird 52.1.0: Thunderbird Mail Client
+mail-client/thunderbird 52.1.1: Thunderbird Mail Client
 media-fonts/iosevka 1.12.5: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.1: Epoxy is a library for handling OpenGL function pointer management for you
@@ -50,7 +50,7 @@ media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: foobar2k-like music player
-media-sound/mpd 0.20.6: The Music Player Daemon (mpd)
+media-sound/mpd 0.20.6 0.20.8: The Music Player Daemon (mpd)
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
@@ -85,7 +85,7 @@ sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 58.0.3029.110 58.0.3029.112: Open-source version of Google Chrome web browser
+www-client/chromium 58.0.3029.110 58.0.3029.112 58.0.3029.140: Open-source version of Google Chrome web browser
 www-client/firefox 53.0.2: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
