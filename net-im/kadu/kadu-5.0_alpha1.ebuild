@@ -6,6 +6,7 @@ EAPI="6"
 inherit cmake-utils flag-o-matic
 
 MY_P="${P/_/-}"
+S="${WORKDIR}/${MY_P}"
 
 DESCRIPTION="An open source Gadu-Gadu and Jabber/XMPP protocol Instant Messenger client"
 HOMEPAGE="http://www.kadu.net"
