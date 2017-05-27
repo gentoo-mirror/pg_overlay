@@ -61,6 +61,11 @@ dev-qt/qtdeclarative:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtdeclarative:localstorage - Build the LocalStorage import for QtQuick (requires QtSql)
 dev-qt/qtdeclarative:widgets - Enable QtWidgets support
 dev-qt/qtdeclarative:xml - Build the XmlListModel import for QtQuick (requires QtXmlPatterns)
+dev-qt/qtwebengine:geolocation - Enable physical position determination via dev-qt/qtpositioning
+dev-qt/qtwebengine:pax_kernel - Enable building under a PaX enabled kernel
+dev-qt/qtwebengine:system-ffmpeg - Use the system-wide media-video/ffmpeg instead of bundled.
+dev-qt/qtwebengine:system-icu - Use the system-wide dev-libs/icu instead of bundled.
+dev-qt/qtwebengine:widgets - Enable QtWidgets support
 mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
 mail-client/thunderbird:crypt - Enable encryption support with enigmail
 mail-client/thunderbird:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
