@@ -28,7 +28,7 @@ dev-libs/protobuf 3.1.0 3.3.0: Google's Protocol Buffers -- an efficient method 
 dev-libs/re2 0.2017.04.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
-dev-qt/qtdeclarative 5.9.0_rc: The QML and Quick modules for the Qt5 framework
+dev-qt/qtdeclarative 5.7.1 5.9.0_rc: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebengine 5.9.0_rc: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -62,7 +62,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 1.4.0: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 5.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-net-im/kadu 4.3: An open source Gadu-Gadu and Jabber/XMPP protocol Instant Messenger client
+net-im/kadu 4.3 5.0_alpha1: An open source Gadu-Gadu and Jabber/XMPP protocol Instant Messenger client
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
 net-libs/libtorrent 0.13.6 0.13.6-r1 9999: BitTorrent library written in C++ for *nix
