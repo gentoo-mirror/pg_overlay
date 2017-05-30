@@ -1,11 +1,12 @@
 DEFINED_PHASES=compile install postinst postrm unpack
 DEPEND=X? ( x11-libs/gtksourceview:3.0 dev-python/colorlog ) dev-util/scons dev-python/sphinx sys-devel/gettext >=sys-apps/sed-4 dev-util/scons >=dev-vcs/git-1.8.2.1
-DESCRIPTION=commandline tool to clean your filesystem from various sort of lint (unused files, twins, etc.).
-EAPI=5
+DESCRIPTION=rmlint finds space waste and other broken things on your filesystem and offers to remove it
+EAPI=6
 HOMEPAGE=https://github.com/sahib/rmlint
-IUSE=X
+IUSE=X doc
+LICENSE=GPL-3
 RDEPEND=X? ( x11-libs/gtksourceview:3.0 dev-python/colorlog )
 SLOT=0
 _eclass_exported_funcs=pkg_postrm:- pkg_postinst:- src_unpack:git-r3 src_compile:- src_install:-
 _eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	9c113d6a64826c40154cad7be15d95ea	git-r3	cbafa3261c37c7e3af44bb16a34ea390	gnome2-utils	8a5e0bf2b8031478ecfeaec753ef4560	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	multiprocessing	284a473719153462f3e974d86c8cb81c	scons-utils	fcace052aef60e6b0eb3023c26aa585a	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	xdg-utils	b9389dfad0ee8f8e0b2a41b79fcf7120
-_md5_=7e849e3caa7af276f48a5cf9e87fda46
+_md5_=a28cd8431adb8ad1daec6c8fb95203f0
