@@ -29,7 +29,6 @@ dev-libs/re2 0.2017.04.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.0_rc: The QML and Quick modules for the Qt5 framework
-dev-qt/qtsingleapplication 2.6.1_p20150629: Qt library to start applications only once per user
 dev-qt/qtwebengine 5.9.0_rc: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -88,7 +87,7 @@ sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 58.0.3029.110 58.0.3029.112 58.0.3029.140: Open-source version of Google Chrome web browser
-www-client/firefox 53.0.2 53.0.3: Firefox Web Browser
+www-client/firefox 53.0.3: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
