@@ -1,7 +1,7 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
@@ -16,58 +16,64 @@ SLOT="0"
 KEYWORDS=""
 
 IUSE="nls"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/pygtk:2[${PYTHON_USEDEP}]
 	gnome-base/libglade:2.0"
 
-DEPEND="${RDEPEND}
-	nls? ( sys-devel/gettext:* )"
+DEPEND="nls? ( sys-devel/gettext:* )"
 
 src_prepare() {
-	# Change some paths to make ${PN}-gui run when installed in /usr/bin.
-	sed -e "s:^liblocation=.*$:liblocation='${EROOT}usr/share/${PN}' #Gentoo:" \
-		-e "s:^locale_base=.*$:locale_base=None #Gentoo:" \
-		-i ${PN}-gui || die
+	default
+
+	# Change some paths to make ${PN}-gui run with our filesystem layout.
+	# These commands are taken from the debian/rules file.
+	sed -e "s:^liblocation=.*$:liblocation='${EROOT}usr/share/${PN}':" \
+		-e "s:^locale_base=.*$:locale_base=None:" \
+		-i "${PN}-gui" \
+		|| die "failed to fix liblocation and locale_base in ${PN}-gui"
 }
 
 src_install() {
-	share=/usr/share/${PN}
+	# The commands below roughly follow debian/rules.
+	python_foreach_impl python_doscript "${PN}-gui"
 
-	insinto ${share}
-	doins ${PN}{.glade,.gladep,_icon.png}
+	insinto "/usr/share/${PN}"
+	doins "${PN}.glade" "${PN}_icon.png"
 
-	exeinto ${share}/${PN}
-	doexe ${PN}/find*
-	doexe ${PN}/${PN}
-	doexe ${PN}/zipdir
+	exeinto "/usr/share/${PN}/${PN}"
+	doexe "${PN}"/find*
+	doexe "${PN}/${PN}"
+	doexe "${PN}/zipdir"
 
-	exeinto ${share}/${PN}/fstool/
-	doexe ${PN}/fstool/*
+	exeinto "/usr/share/${PN}/${PN}/fstool"
+	doexe "${PN}/fstool/dir_size" "${PN}/fstool/edu" "${PN}/fstool/lS"
+	python_scriptinto "/usr/share/${PN}/${PN}/fstool"
+	python_foreach_impl python_doscript "${PN}/fstool/dupwaste"
 
-	exeinto ${share}/${PN}/supprt/
-	doexe ${PN}/supprt/{fslver,getffl,getffp,getfpf,md5sum_approx}
+	exeinto "/usr/share/${PN}/${PN}/supprt"
+	doexe "${PN}"/supprt/get*
 
-	exeinto ${share}/${PN}/supprt/rmlint
-	doexe ${PN}/supprt/rmlint/*
+	python_scriptinto "/usr/share/${PN}/${PN}/supprt"
+	python_foreach_impl python_doscript "${PN}/supprt/md5sum_approx"
 
-	dobin ${PN}-gui
+	doexe "${PN}/supprt/fslver"
 
-	doicon ${PN}_icon.png
-	domenu ${PN}.desktop
+	exeinto "/usr/share/${PN}/${PN}/supprt/rmlint"
+	doexe "${PN}"/supprt/rmlint/*.sh
+	python_scriptinto "/usr/share/${PN}/${PN}/supprt/rmlint"
+	python_foreach_impl python_doscript "${PN}/supprt/rmlint/fixdup"
+	python_foreach_impl python_doscript "${PN}/supprt/rmlint/merge_hardlinks"
+
+	doicon "${PN}_icon.png"
+	domenu "${PN}.desktop"
 
 	dodoc doc/{FAQ,NEWS,README,TODO}
-	doman man/${PN}{.1,-gui.1}
+	doman man/*.1
 
-	if use nls ; then
-		cd po
+	if use nls; then
+		cd po || die
 		emake DESTDIR="${D}" install
 	fi
-
-	# Fix Python shebangs.
-	python_replicate_script "${ED}"${share}/${PN}/fstool/dupwaste
-	python_replicate_script "${ED}"${share}/${PN}/supprt/md5sum_approx
-	python_replicate_script "${ED}"${share}/${PN}/supprt/rmlint/merge_hardlinks
-	python_replicate_script "${ED}"${share}/${PN}/supprt/rmlint/fixdup
-	python_replicate_script "${ED}"/usr/bin/${PN}-gui
 }
