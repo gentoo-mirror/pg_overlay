@@ -34,6 +34,7 @@ app-text/enchant:zemberek - Adds support for app-text/zemberek-server spell chec
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
+dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
 dev-libs/protobuf:java - Builds the Java implementation. This is not needed for Java support in protoc.
 dev-libs/protobuf:python - Builds the Python implementation. This is not needed for Python support in protoc.
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.

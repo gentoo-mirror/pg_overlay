@@ -15,6 +15,7 @@ app-text/enchant 1.6.1: Spellchecker wrapping library
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-libs/boost 1.64.0: Boost Libraries for C++
+dev-libs/gobject-introspection 1.50.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libgaminggear 0.15.0: Provides functionality for gaming input devices
@@ -26,6 +27,7 @@ dev-qt/qtdeclarative 5.7.1 5.9.0_rc: The QML and Quick modules for the Qt5 frame
 dev-qt/qtwebengine 5.9.0_rc: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/gdbus-codegen 2.50.3: GDBus code and documentation generator
 dev-util/ninja 1.7.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
