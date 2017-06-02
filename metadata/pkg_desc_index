@@ -23,8 +23,7 @@ dev-libs/protobuf 3.3.0: Google's Protocol Buffers -- an efficient method of enc
 dev-libs/re2 0.2017.04.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
-dev-qt/qtdeclarative 5.7.1 5.9.0_rc: The QML and Quick modules for the Qt5 framework
-dev-qt/qtwebengine 5.9.0_rc: Library for rendering dynamic web content in Qt5 C++ and QML applications
+dev-qt/qtdeclarative 5.7.1 5.9.0: The QML and Quick modules for the Qt5 framework
 dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.50.3: GDBus code and documentation generator
