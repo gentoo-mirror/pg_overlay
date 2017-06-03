@@ -67,7 +67,7 @@ LICENSE="wxWinLL-3
 		GPL-2
 		doc?	( wxWinFDL-3 )"
 
-S="${WORKDIR}/wxPython-src-${PV}"
+S="${WORKDIR}/wxWidgets-${PV}"
 PATCHES=(
 	"${FILESDIR}"/${P}-abicheck.patch
 	"${FILESDIR}"/${P}-webkit2.patch
