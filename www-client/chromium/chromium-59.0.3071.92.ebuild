@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~arm64 ~x86"
-IUSE="component-build cups gconf gnome-keyring +gtk3 +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-libvpx +tcmalloc widevine +debian +inox iridium ungoogled vaapi"
+IUSE="component-build cups gconf gnome-keyring +gtk3 hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg system-libvpx +tcmalloc widevine +debian +inox iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
@@ -562,8 +562,8 @@ src_configure() {
 	touch chrome/test/data/webui/i18n_process_css_test.html || die
 
 	einfo "Configuring Chromium..."
-	tools/gn/bootstrap/bootstrap.py -v --no-clean --jobs $(($(nproc)+1))  --gn-gen-args "${myconf_gn}"|| die
-	out/Release/gn gen --args="${myconf_gn}" --jobs $(($(nproc)+1)) out/Release || die
+	tools/gn/bootstrap/bootstrap.py -v --no-clean --jobs $(($(nproc)+1)) --gn-gen-args "${myconf_gn}" || die
+	out/Release/gn gen --args="${myconf_gn}" out/Release || die
 }
 
 src_compile() {
