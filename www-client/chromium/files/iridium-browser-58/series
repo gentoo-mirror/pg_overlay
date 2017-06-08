@@ -11,7 +11,6 @@ prefs-disable-Use-a-web-service-to-help-resolve-navi.patch
 prefs-disable-Use-a-prediction-service-to-help-compl.patch
 prefs-enable-Send-a-Do-Not-Track-header.patch
 prefs-disable-network-DNS-prediction.patch
-cloud-print-disable-in-prefs-and-component-loader.patch
 prefs-disable-background-mode-by-default.patch
 prefs-disable-hyperlink-auditing.patch
 prefs-do-not-store-passwords-by-default.patch
