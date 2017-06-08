@@ -6,6 +6,5 @@ disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/external-components.patch
 
-fixes/dma.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
