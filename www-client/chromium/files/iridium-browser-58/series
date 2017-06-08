@@ -1,6 +1,5 @@
 build-remove-calling-untrusted-hooks.patch
 build-select-default-toolchain.patch
-build-resolve-undefined-macro-in-Widevine.patch
 net-cert-increase-default-key-length-for-newly-gener.patch
 dns-send-IPv6-connectivity-probes-to-RIPE-DNS-rather.patch
 profile-resetter-do-not-tick-send-settings-by-defaul.patch
@@ -11,7 +10,6 @@ prefs-disable-Use-a-web-service-to-help-resolve-navi.patch
 prefs-disable-Use-a-prediction-service-to-help-compl.patch
 prefs-enable-Send-a-Do-Not-Track-header.patch
 prefs-disable-network-DNS-prediction.patch
-cloud-print-disable-in-prefs-and-component-loader.patch
 prefs-disable-background-mode-by-default.patch
 prefs-disable-hyperlink-auditing.patch
 prefs-do-not-store-passwords-by-default.patch
