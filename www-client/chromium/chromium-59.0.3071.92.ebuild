@@ -573,12 +573,12 @@ src_compile() {
 	fi
 
 	# Build mksnapshot and pax-mark it.
-	eninja -j$(($(nproc)+1)) -C out/Release mksnapshot || die
+	eninja -C out/Release mksnapshot || die
 	pax-mark m out/Release/mksnapshot
 
 	# Even though ninja autodetects number of CPUs, we respect
 	# user's options, for debugging with -j 1 or any other reason.
-	eninja -j$(($(nproc)+1)) -C out/Release ${ninja_targets} || die
+	eninja -C out/Release ${ninja_targets} || die
 
 	pax-mark m out/Release/chrome
 }
