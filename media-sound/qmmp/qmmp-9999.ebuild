@@ -146,6 +146,7 @@ src_configure() {
 		-DUSE_SB=OFF
 		-DUSE_QMMP_DIALOG=OFF
 		-DUSE_SKINNED=OFF
+		-DUSE_GNOMEHOTKEY=ON
 	)
 
 	cmake-utils_src_configure
