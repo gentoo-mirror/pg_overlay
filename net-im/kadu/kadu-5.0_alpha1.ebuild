@@ -23,22 +23,23 @@ REQUIRED_USE="
 	)
 "
 COMMON_DEPEND="
-	>=dev-libs/injeqt-1.1.0
-	>=dev-qt/qtcore-5.2.0:5
-	>=dev-qt/qtdbus-5.2.0:5
-	>=dev-qt/qtdeclarative-5.2.0:5
-	>=dev-qt/qtgui-5.2.0:5
-	>=dev-qt/qtmultimedia-5.2.0:5
-	>=dev-qt/qtnetwork-5.2.0:5
-	>=dev-qt/qtscript-5.2.0:5
-	>=dev-qt/qtsql-5.2.0:5
-	>=dev-qt/qtsvg-5.2.0:5
-	>=dev-qt/qtwebkit-5.2.0:5
-	>=dev-qt/qtwidgets-5.2.0:5
-	>=dev-qt/qtx11extras-5.2.0:5
-	>=dev-qt/qtxml-5.2.0:5
-	>=dev-qt/qtxmlpatterns-5.2.0:5
 	>=app-arch/libarchive-2.6[lzma]
+	>=dev-libs/injeqt-1.1.0
+	dev-qt/qtcore:5
+	dev-qt/qtdbus:5
+	dev-qt/qtdeclarative:5
+	dev-qt/qtgui:5
+	dev-qt/qtmultimedia:5
+	dev-qt/qtnetwork:5
+	dev-qt/qtscript:5
+	dev-qt/qtsql:5
+	dev-qt/qtsvg:5
+	dev-qt/qttest:5
+	dev-qt/qtwebkit:5
+	dev-qt/qtwidgets:5
+	dev-qt/qtx11extras:5
+	dev-qt/qtxml:5
+	dev-qt/qtxmlpatterns:5
 	x11-libs/libX11
 	x11-libs/libXext
 	x11-libs/libXScrnSaver
@@ -51,12 +52,12 @@ COMMON_DEPEND="
 	spell? ( app-text/enchant )
 	xmpp? (
 		net-dns/libidn
-		>=net-libs/qxmpp-0.8.3[qt5]
+		>=net-libs/qxmpp-0.9.3-r1
 		sys-libs/zlib
 	)
 "
 DEPEND="${COMMON_DEPEND}
-	>=dev-qt/linguist-tools-5.2.0:5
+	dev-qt/linguist-tools:5
 	x11-proto/scrnsaverproto
 	x11-proto/xextproto
 	x11-proto/xproto
