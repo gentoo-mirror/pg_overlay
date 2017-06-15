@@ -16,7 +16,5 @@ chromium-56.0.2924.87-fpermissive.patch
 chromium-58.0.3029.81-enable-mp3.patch
 chromium-58.0.3029.96-revert-b794998819088f76b4cf44c8db6940240c563cf4.patch
 chromium-59.0.3071.86-ffmpeg-stdatomic.patch
-chromium-59.0.3071.86-dma-buf-header-hack.patch
-chromium-59.0.3071.86-system-clang.patch
 chromium-46.0.2490.86-use_system_opus.patch
 chromium-58.0.3029.81-use_system_harfbuzz.patch
