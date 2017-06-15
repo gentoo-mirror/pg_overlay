@@ -108,7 +108,7 @@ src_configure() {
 		linker=llvm-link
 	fi
 
-	local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
+	use llvm && local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
 	local c_compiler="$(tc-getBUILD_CC)"
 	local cxx_compiler="$(tc-getBUILD_CXX)"
 	if use clang ; then
