@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  9488ac970162c2224614d544b9bab7b984b38c90
+# Parent  f17aea11a99a3ea5fee78bc53bdecb8d851660f0
 
 diff --git a/browser/base/content/browser-kde.xul b/browser/base/content/browser-kde.xul
 new file mode 100644
@@ -1145,7 +1145,7 @@ new file mode 100644
 diff --git a/browser/base/jar.mn b/browser/base/jar.mn
 --- a/browser/base/jar.mn
 +++ b/browser/base/jar.mn
-@@ -60,16 +60,18 @@ browser.jar:
+@@ -58,16 +58,18 @@ browser.jar:
          content/browser/aboutSocialError.xhtml        (content/aboutSocialError.xhtml)
          content/browser/aboutProviderDirectory.xhtml  (content/aboutProviderDirectory.xhtml)
          content/browser/aboutTabCrashed.css           (content/aboutTabCrashed.css)
@@ -1227,7 +1227,7 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
 diff --git a/browser/components/preferences/in-content/main.js b/browser/components/preferences/in-content/main.js
 --- a/browser/components/preferences/in-content/main.js
 +++ b/browser/components/preferences/in-content/main.js
-@@ -32,16 +32,22 @@ var gMainPane = {
+@@ -34,16 +34,22 @@ var gMainPane = {
          // In Windows 8 we launch the control panel since it's the only
          // way to get all file type association prefs. So we don't know
          // when the user will select the default.  We refresh here periodically
@@ -1250,7 +1250,7 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
      this.updateBrowserStartupLastSession();
  
      if (AppConstants.platform == "win") {
-@@ -680,16 +686,27 @@ var gMainPane = {
+@@ -682,16 +688,27 @@ var gMainPane = {
        let alwaysCheckPref = document.getElementById("browser.shell.checkDefaultBrowser");
        alwaysCheckPref.value = true;
  
@@ -1281,7 +1281,7 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
 diff --git a/browser/components/shell/moz.build b/browser/components/shell/moz.build
 --- a/browser/components/shell/moz.build
 +++ b/browser/components/shell/moz.build
-@@ -34,16 +34,18 @@ if CONFIG['OS_ARCH'] == 'WINNT':
+@@ -38,16 +38,18 @@ if CONFIG['OS_ARCH'] == 'WINNT':
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'cocoa':
      SOURCES += [
@@ -1593,10 +1593,10 @@ new file mode 100644
 diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
 --- a/browser/installer/package-manifest.in
 +++ b/browser/installer/package-manifest.in
-@@ -638,16 +638,17 @@
- @RESPATH@/greprefs.js
+@@ -645,16 +645,17 @@
  @RESPATH@/defaults/autoconfig/prefcalls.js
  @RESPATH@/browser/defaults/permissions
+ @RESPATH@/browser/defaults/blocklists
  
  ; Warning: changing the path to channel-prefs.js can cause bugs (Bug 756325)
  ; Technically this is an app pref file, but we are keeping it in the original
@@ -1604,10 +1604,10 @@ diff --git a/browser/installer/package-manifest.in b/browser/installer/package-m
  @RESPATH@/defaults/pref/channel-prefs.js
 +@BINPATH@/defaults/pref/kde.js
  
+ ; Remote control protocol prefs
+ ; defined in ../../testing/marionette/prefs/marionette.js
+ @RESPATH@/defaults/pref/marionette.js
+ 
  ; Services (gre) prefs
  @RESPATH@/defaults/pref/services-sync.js
  
- ; [Layout Engine Resources]
- ; Style Sheets, Graphics and other Resources used by the layout engine.
- @RESPATH@/res/EditorOverride.css
- @RESPATH@/res/contenteditable.css

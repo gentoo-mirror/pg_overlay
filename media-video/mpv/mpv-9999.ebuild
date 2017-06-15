@@ -275,7 +275,7 @@ src_configure() {
 
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
-		--jobs $(($(nproc)+1))
+		--jobs=$(makeopts_jobs)
 	)
 
 	if use vaapi && use X; then

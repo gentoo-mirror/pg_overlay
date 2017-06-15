@@ -20,7 +20,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-53.0-patches-02"
+PATCH="${PN}-54.0-patches-03"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_JIT=1
@@ -30,11 +30,11 @@ inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +gmp-autoupdate hardened +hwaccel jack pgo rust selinux test +jit +kde"
+IUSE="bindist +gmp-autoupdate hardened hwaccel jack nsplugin pgo selinux test +jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -54,7 +54,7 @@ RDEPEND="
 
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
-	rust? ( dev-lang/rust )
+	>=dev-lang/rust-1.15.1
 	amd64? ( ${ASM_DEPEND} virtual/opengl )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
@@ -95,11 +95,6 @@ pkg_setup() {
 		ewarn "You will do a double build for profile guided optimization."
 		ewarn "This will result in your build taking at least twice as long as before."
 	fi
-
-	if use rust; then
-		einfo
-		ewarn "This is very experimental, should only be used by those developing firefox."
-	fi
 }
 
 pkg_pretend() {
@@ -121,8 +116,7 @@ src_unpack() {
 
 src_prepare() {
 	# Apply our patches
-	eapply "${WORKDIR}/${PN}"
-	eapply "${FILESDIR}"/${PN}-53-turn_of_crash_on_seccomp_fail.patch
+	eapply "${WORKDIR}/firefox"
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -293,10 +287,6 @@ src_configure() {
 	# Finalize and report settings
 	mozconfig_final
 
-	if [[ $(gcc-major-version) -lt 4 ]]; then
-		append-cxxflags -fno-stack-protector
-	fi
-
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake -f client.mk configure
@@ -357,6 +347,12 @@ src_install() {
 	echo "pref(\"extensions.autoDisableScopes\", 3);" >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
+
+	if use nsplugin; then
+		echo "pref(\"plugin.load_flash_only\", false);" >> \
+			"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+			|| die
+	fi
 
 	local plugin
 	use gmp-autoupdate || for plugin in "${GMP_PLUGIN_LIST[@]}" ; do

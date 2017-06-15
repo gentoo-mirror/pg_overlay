@@ -9,10 +9,10 @@ Subject: Build against system libjsoncpp
  3 files changed, 3 insertions(+), 27 deletions(-)
 
 diff --git a/config/system-headers b/config/system-headers
-index be3162f58edb..623dd1552c94 100644
+index 1ee6c4cf85b2..19fbe393e008 100644
 --- a/config/system-headers
 +++ b/config/system-headers
-@@ -1335,3 +1335,4 @@ unicode/utypes.h
+@@ -1338,3 +1338,4 @@ unicode/utypes.h
  libutil.h
  unwind.h
  fenv.h

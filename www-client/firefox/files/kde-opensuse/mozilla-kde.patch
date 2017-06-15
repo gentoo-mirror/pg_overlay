@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  564e9441f71b5bc368c33697428f756f5914eb04
+# Parent  1fccdb56cf307cef5ddd39ece2ac58c93fe706b8
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #include "prefread.h"
  #include "prefapi_private_data.h"
  
-@@ -1174,16 +1175,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
+@@ -1199,16 +1200,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
  
  static nsresult pref_LoadPrefsInDirList(const char *listId)
  {
@@ -62,7 +62,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
      return NS_OK;
  
    bool hasMore;
-@@ -1199,17 +1218,17 @@ static nsresult pref_LoadPrefsInDirList(
+@@ -1224,17 +1243,17 @@ static nsresult pref_LoadPrefsInDirList(
  
      nsAutoCString leaf;
      path->GetNativeLeafName(leaf);
@@ -81,7 +81,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  {
    nsZipItemPtr<char> manifest(jarReader, name, true);
    NS_ENSURE_TRUE(manifest.Buffer(), NS_ERROR_NOT_AVAILABLE);
-@@ -1303,24 +1322,36 @@ static nsresult pref_InitInitialObjects(
+@@ -1328,24 +1347,36 @@ static nsresult pref_InitInitialObjects(
    /* these pref file names should not be used: we process them after all other application pref files for backwards compatibility */
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -2169,7 +2169,7 @@ new file mode 100644
 diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downloads/nsHelperAppDlg.js
 --- a/toolkit/mozapps/downloads/nsHelperAppDlg.js
 +++ b/toolkit/mozapps/downloads/nsHelperAppDlg.js
-@@ -627,17 +627,17 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -629,17 +629,17 @@ nsUnknownContentTypeDialog.prototype = {
        else
          typeString = mimeInfo.MIMEType;
      }
@@ -2188,7 +2188,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
    },
  
    // Returns true if opening the default application makes sense.
-@@ -801,17 +801,17 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -803,17 +803,17 @@ nsUnknownContentTypeDialog.prototype = {
        switch (this.dialogElement("openHandler").selectedIndex) {
        case 0:
          // No app need be specified in this case.
@@ -2207,7 +2207,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
      this.mDialog.document.documentElement.getButton("accept").disabled = !ok;
    },
  
-@@ -1068,30 +1068,56 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -1070,30 +1070,56 @@ nsUnknownContentTypeDialog.prototype = {
            params.handlerApp.executable &&
            params.handlerApp.executable.isFile()) {
          // Remember the file they chose to run.
@@ -3178,7 +3178,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  #include "nsXPIDLString.h"
  #include "nsIURL.h"
  #include "nsIFileStreams.h"
-@@ -1146,26 +1146,26 @@ nsresult nsOSHelperAppService::OSProtoco
+@@ -1147,26 +1147,26 @@ nsresult nsOSHelperAppService::OSProtoco
      ContentAction::Action::defaultActionForScheme(QString(aProtocolScheme) + ':');
  
    if (action.isValid())
@@ -3207,7 +3207,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
  nsresult nsOSHelperAppService::GetFileTokenForPath(const char16_t * platformAppPath, nsIFile ** aFile)
  {
-@@ -1252,17 +1252,17 @@ nsOSHelperAppService::GetFromExtension(c
+@@ -1253,17 +1253,17 @@ nsOSHelperAppService::GetFromExtension(c
                                           mime_types_description,
                                           true);
  
@@ -3226,7 +3226,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
      rv = LookUpTypeAndDescription(NS_ConvertUTF8toUTF16(aFileExt),
                                    majorType,
-@@ -1373,17 +1373,17 @@ nsOSHelperAppService::GetFromType(const 
+@@ -1374,17 +1374,17 @@ nsOSHelperAppService::GetFromType(const 
    nsAutoString extensions, mime_types_description;
    LookUpExtensionsAndDescription(majorType,
                                   minorType,
@@ -3623,7 +3623,7 @@ diff --git a/widget/gtk/nsFilePicker.h b/widget/gtk/nsFilePicker.h
 diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestParser.cpp
 --- a/xpcom/components/ManifestParser.cpp
 +++ b/xpcom/components/ManifestParser.cpp
-@@ -32,16 +32,17 @@
+@@ -33,16 +33,17 @@
  #include "nsTextFormatter.h"
  #include "nsVersionComparator.h"
  #include "nsXPCOMCIDInternal.h"
@@ -3641,7 +3641,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    const char* directive;
    int argc;
  
-@@ -472,16 +473,17 @@ ParseManifest(NSLocationType aType, File
+@@ -466,16 +467,17 @@ ParseManifest(NSLocationType aType, File
    NS_NAMED_LITERAL_STRING(kRemoteEnabled, "remoteenabled");
    NS_NAMED_LITERAL_STRING(kRemoteRequired, "remoterequired");
    NS_NAMED_LITERAL_STRING(kApplication, "application");
@@ -3659,7 +3659,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    NS_NAMED_LITERAL_STRING(kMain, "main");
    NS_NAMED_LITERAL_STRING(kContent, "content");
  
-@@ -532,44 +534,49 @@ ParseManifest(NSLocationType aType, File
+@@ -526,44 +528,49 @@ ParseManifest(NSLocationType aType, File
          CopyUTF8toUTF16(s, abi);
          abi.Insert(char16_t('_'), 0);
          abi.Insert(osTarget, 0);
@@ -3709,7 +3709,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
      process = kMain;
    }
  
-@@ -672,25 +679,27 @@ ParseManifest(NSLocationType aType, File
+@@ -666,25 +673,27 @@ ParseManifest(NSLocationType aType, File
      TriState stOsVersion = eUnspecified;
      TriState stOs = eUnspecified;
      TriState stABI = eUnspecified;
@@ -3737,7 +3737,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        }
  
  #if defined(MOZ_WIDGET_ANDROID)
-@@ -740,16 +749,17 @@ ParseManifest(NSLocationType aType, File
+@@ -734,16 +743,17 @@ ParseManifest(NSLocationType aType, File
      }
  
      if (!ok ||
@@ -3758,7 +3758,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
 diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
 --- a/xpcom/components/moz.build
 +++ b/xpcom/components/moz.build
-@@ -43,12 +43,13 @@ FINAL_LIBRARY = 'xul'
+@@ -50,12 +50,13 @@ FINAL_LIBRARY = 'xul'
  LOCAL_INCLUDES += [
      '!..',
      '../base',
@@ -3793,7 +3793,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "prmem.h"
  #include "plbase64.h"
  
-@@ -1949,42 +1950,52 @@ nsLocalFile::SetPersistentDescriptor(con
+@@ -1948,59 +1949,74 @@ nsLocalFile::SetPersistentDescriptor(con
    return InitWithNativePath(aPersistentDescriptor);
  #endif
  }
@@ -3817,22 +3817,32 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
    if (isDirectory) {
 -    return giovfs->ShowURIForInput(mPath);
 +    url = mPath;
-   } else if (NS_SUCCEEDED(giovfs->OrgFreedesktopFileManager1ShowItems(mPath))) {
-     return NS_OK;
-   } else {
-     nsCOMPtr<nsIFile> parentDir;
-     nsAutoCString dirPath;
-     if (NS_FAILED(GetParent(getter_AddRefs(parentDir)))) {
-       return NS_ERROR_FAILURE;
-     }
-     if (NS_FAILED(parentDir->GetNativePath(dirPath))) {
-       return NS_ERROR_FAILURE;
-     }
- 
--    return giovfs->ShowURIForInput(dirPath);
-+    url = dirPath;
    }
-+
+   if (NS_SUCCEEDED(giovfs->OrgFreedesktopFileManager1ShowItems(mPath))) {
+     return NS_OK;
+   }
+   nsCOMPtr<nsIFile> parentDir;
+   nsAutoCString dirPath;
+   if (NS_FAILED(GetParent(getter_AddRefs(parentDir)))) {
+     return NS_ERROR_FAILURE;
+   }
+   if (NS_FAILED(parentDir->GetNativePath(dirPath))) {
+     return NS_ERROR_FAILURE;
+   }
+ 
+-  return giovfs->ShowURIForInput(dirPath);
++  url = dirPath;
+ #elif defined(MOZ_WIDGET_COCOA)
+   CFURLRef url;
+   if (NS_SUCCEEDED(GetCFURL(&url))) {
+     nsresult rv = CocoaFileUtils::RevealFileInFinder(url);
+     ::CFRelease(url);
+     return rv;
+   }
+   return NS_ERROR_FAILURE;
+ #else
+   return NS_ERROR_FAILURE;
+ #endif
 +  if(nsKDEUtils::kdeSupport()) {
 +    nsTArray<nsCString> command;
 +    command.AppendElement( NS_LITERAL_CSTRING("REVEAL") );
@@ -3844,17 +3854,6 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
 +    return NS_ERROR_FAILURE;
 +
 +  return giovfs->ShowURIForInput(url);
- #elif defined(MOZ_WIDGET_COCOA)
-   CFURLRef url;
-   if (NS_SUCCEEDED(GetCFURL(&url))) {
-     nsresult rv = CocoaFileUtils::RevealFileInFinder(url);
-     ::CFRelease(url);
-     return rv;
-   }
-   return NS_ERROR_FAILURE;
-@@ -1992,16 +2003,22 @@ nsLocalFile::Reveal()
-   return NS_ERROR_FAILURE;
- #endif
  }
  
  NS_IMETHODIMP

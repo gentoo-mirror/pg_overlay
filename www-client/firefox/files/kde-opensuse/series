@@ -1,5 +1,4 @@
 mozilla-nongnome-proxies.patch
-mozilla-shared-nss-db.patch
 mozilla-kde.patch
 mozilla-language.patch
 mozilla-ntlm-full-path.patch
