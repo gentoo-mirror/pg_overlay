@@ -34,6 +34,12 @@ app-text/enchant:zemberek - Adds support for app-text/zemberek-server spell chec
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
+dev-lang/rust:clang - Use sys-devel/clang for building
+dev-lang/rust:libcxx - Use sys-libs/libcxx as standard library when building with sys-devel/clang
+dev-lang/rust:sanitize - Add LeakSanitizer, ThreadSanitizer, AddressSanitizer and MemorySanitizer support
+dev-lang/rust:source - Install rust source to /user/share/rust-*/src.
+dev-lang/rust:system-llvm - Use system sys-devel/llvm in place of the bundled one
+dev-lang/rust:tools - Enable a build of the and extended rust tool (RLS, analysis data, ...)
 dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
 dev-libs/protobuf:java - Builds the Java implementation. This is not needed for Java support in protoc.
 dev-libs/protobuf:python - Builds the Python implementation. This is not needed for Python support in protoc.

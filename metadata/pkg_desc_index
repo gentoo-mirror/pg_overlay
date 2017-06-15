@@ -26,6 +26,7 @@ dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.0: The QML and Quick modules for the Qt5 framework
 dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
+dev-util/cargo 0.19.0: The Rust's package manager
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.50.3: GDBus code and documentation generator
 dev-util/ninja 1.7.2: A small build system similar to make
