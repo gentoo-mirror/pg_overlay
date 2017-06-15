@@ -7,10 +7,10 @@ Subject: Set javascript.options.showInConsole
  1 file changed, 1 insertion(+)
 
 diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
-index 9d2bb25dac3a..70533f6a6ef9 100644
+index 5c3e5dc0dc54..4093b0bb9f48 100644
 --- a/modules/libpref/init/all.js
 +++ b/modules/libpref/init/all.js
-@@ -1232,6 +1232,7 @@ pref("javascript.options.strict.debug",     false);
+@@ -1274,6 +1274,7 @@ pref("javascript.options.strict.debug",     false);
  #endif
  pref("javascript.options.baselinejit",      true);
  pref("javascript.options.ion",              true);
