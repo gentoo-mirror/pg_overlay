@@ -1,6 +1,5 @@
 rhbz-966424.patch
 firefox-enable-addons.patch
-rhbz-1173156.patch
 mozilla-1170092.patch
 mozilla-1005640-accept-lang.patch
 
@@ -13,5 +12,6 @@ mozilla-1158076-2.patch
 mozilla-1321521.patch
 mozilla-1321521-2.patch
 mozilla-1337988.patch
+mozilla-1353817.patch
 
 mozilla-440908.patch
