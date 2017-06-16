@@ -80,7 +80,7 @@ sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 58.0.3029.110 58.0.3029.112 58.0.3029.140 59.0.3071.92 59.0.3071.93: Open-source version of Google Chrome web browser
+www-client/chromium 58.0.3029.140 59.0.3071.93 59.0.3071.104: Open-source version of Google Chrome web browser
 www-client/firefox 54.0: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput

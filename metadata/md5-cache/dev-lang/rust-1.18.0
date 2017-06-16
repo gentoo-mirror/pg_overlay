@@ -12,4 +12,4 @@ SLOT=stable/1.18
 SRC_URI=https://static.rust-lang.org/dist/rustc-1.18.0-src.tar.gz -> rustc-1.18.0-src.tar.gz amd64? ( https://static.rust-lang.org/dist/rust-1.17.0-x86_64-unknown-linux-gnu.tar.gz ) x86? ( https://static.rust-lang.org/dist/rust-1.17.0-i686-unknown-linux-gnu.tar.gz )
 _eclass_exported_funcs=pkg_postrm:- pkg_postinst:- pkg_setup:- src_prepare:- src_configure:- src_compile:- src_install:-
 _eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	9c113d6a64826c40154cad7be15d95ea	llvm	45ef89988bfb458ac81bb566c1eaa437	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	python-any-r1	27d7f9da7187d283b7f3eae8390b7b09	python-utils-r1	c9de01becf9df3f8c10aeec3dc693f5d	toolchain-funcs	6eb35f81556258a4bc9182ad3dfd58ee	versionator	c80ccf29e90adea7c5cae94b42eb76d0
-_md5_=db8b118f91a16cccb805164efd40e07e
+_md5_=e828c3a37d37c9fd93ad6bd0cce67d30
