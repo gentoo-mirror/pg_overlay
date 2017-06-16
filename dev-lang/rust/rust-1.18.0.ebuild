@@ -65,7 +65,7 @@ PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 PATCHES=(
 	"${FILESDIR}/${P}"-bootstrap-output-name-of-failed-config.patch
 	"${FILESDIR}/${P}"-bootstrap-verbose.patch
-	"${FILESDIR}/${P}"-configure-no-override.patch
+	#"${FILESDIR}/${P}"-configure-no-override.patch
 	#"${FILESDIR}/${P}"-no-fail-fast.patch
 )
 
