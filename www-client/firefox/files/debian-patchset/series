@@ -3,16 +3,11 @@ prefs/Set-javascript.options.showInConsole.patch
 prefs/Set-DPI-to-system-settings.patch
 prefs/Don-t-auto-disable-extensions-in-system-directories.patch
 debian-hacks/Avoid-wrong-sessionstore-data-to-keep-windows-out-of.patch
-debian-hacks/Add-another-preferences-directory-for-applications-p.patch
 debian-hacks/Don-t-register-plugins-if-the-MOZILLA_DISABLE_PLUGIN.patch
-debian-hacks/Use-a-variable-for-xulrunner-base-version-in-various.patch
 debian-hacks/Don-t-error-out-when-run-time-libsqlite-is-older-tha.patch
 debian-hacks/Add-a-2-minutes-timeout-on-xpcshell-tests.patch
-debian-hacks/Add-debian-extra-stuff-to-upstream-build-system-dire.patch
-debian-hacks/Make-upstream-build-system-create-debian-installer-M.patch
 debian-hacks/Don-t-build-image-gtests.patch
 debian-hacks/Allow-to-override-ICU_DATA_FILE-from-the-environment.patch
 debian-hacks/Set-program-name-from-the-remoting-name.patch
 debian-hacks/Build-against-system-libjsoncpp.patch
 debian-hacks/Use-the-Mozilla-Location-Service-key-when-the-Google.patch
-debian-hacks/Add-ppc64el-target-for-rust-code.patch
