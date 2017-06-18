@@ -254,7 +254,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --disable-libproxy
-	mozconfig_annotate '' --disable-gio
+	#mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
