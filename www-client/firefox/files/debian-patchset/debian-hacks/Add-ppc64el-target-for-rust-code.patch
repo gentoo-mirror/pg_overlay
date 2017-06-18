@@ -1,0 +1,20 @@
+From: Mike Hommey <mh@glandium.org>
+Date: Sat, 17 Jun 2017 07:17:24 +0900
+Subject: Add ppc64el target for rust code
+
+---
+ build/moz.configure/rust.configure | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/build/moz.configure/rust.configure b/build/moz.configure/rust.configure
+index 267d989f1597..bbcb729b8623 100644
+--- a/build/moz.configure/rust.configure
++++ b/build/moz.configure/rust.configure
+@@ -150,6 +150,7 @@ def rust_triple_alias(host_or_target):
+             ('sparc64', 'Linux'): 'sparc64-unknown-linux-gnu',
+             ('x86', 'Linux'): 'i686-unknown-linux-gnu',
+             ('x86_64', 'Linux'): 'x86_64-unknown-linux-gnu',
++            ('ppc64le', 'Linux'): 'powerpc64le-unknown-linux-gnu',
+             # OS X
+             ('x86', 'OSX'): 'i686-apple-darwin',
+             ('x86_64', 'OSX'): 'x86_64-apple-darwin',
