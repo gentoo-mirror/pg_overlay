@@ -226,7 +226,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-url-classifier
 
@@ -241,9 +240,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --with-pthreads
