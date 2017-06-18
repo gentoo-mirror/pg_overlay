@@ -60,14 +60,8 @@ DEPEND="${RDEPEND}
 	dev-util/cmake
 "
 PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
-	>=dev-util/cargo-${CARGO_DEPEND_VERSION}"
-
-PATCHES=(
-	#"${FILESDIR}/${P}"-bootstrap-output-name-of-failed-config.patch
-	#"${FILESDIR}/${P}"-bootstrap-verbose.patch
-	#"${FILESDIR}/${P}"-configure-no-override.patch
-	#"${FILESDIR}/${P}"-no-fail-fast.patch
-)
+	|| ( 	>=dev-util/cargo-${CARGO_DEPEND_VERSION}
+		>=dev-util/cargo-bin-${CARGO_DEPEND_VERSION} )"
 
 S="${WORKDIR}/${MY_P}-src"
 
@@ -77,11 +71,13 @@ toml_usex() {
 
 pkg_setup() {
 	python-any-r1_pkg_setup
-	use llvm && llvm_pkg_setup
+	llvm_pkg_setup
 }
 
 src_prepare() {
-	local rust_stage0_root="${WORKDIR}"/rust-stage0
+	use amd64 && CTARGET="x86_64-unknown-linux-gnu"
+	use x86 && CTARGET="i686-unknown-linux-gnu"
+	local rust_stage0_root="${S}"/build/"${CTARGET}"/stage0
 
 	local rust_stage0_name="RUST_STAGE0_${ARCH}"
 	local rust_stage0="${!rust_stage0_name}"
@@ -92,7 +88,9 @@ src_prepare() {
 }
 
 src_configure() {
-	local rust_stage0_root="${WORKDIR}"/rust-stage0
+	use amd64 && CTARGET="x86_64-unknown-linux-gnu"
+	use x86 && CTARGET="i686-unknown-linux-gnu"
+	local rust_stage0_root="${S}"/build/"${CTARGET}"/stage0
 
 	local rust_target_name="CHOST_${ARCH}"
 	local rust_target="${!rust_target_name}"
@@ -108,7 +106,7 @@ src_configure() {
 		linker=llvm-link
 	fi
 
-	use llvm && local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
+	local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
 	local c_compiler="$(tc-getBUILD_CC)"
 	local cxx_compiler="$(tc-getBUILD_CXX)"
 	if use clang ; then
@@ -135,7 +133,7 @@ src_configure() {
 		verbose = 2
 		[install]
 		prefix = "${EPREFIX}/usr"
-		libdir = "$(get_libdir)/${P}"
+		libdir = "$(get_libdir)"
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
@@ -176,7 +174,6 @@ src_install() {
 	fi
 
 	cat <<-EOF > "${T}"/50${P}
-		LDPATH="/usr/$(get_libdir)/${P}"
 		MANPATH="/usr/share/${P}/man"
 	EOF
 	doenvd "${T}"/50${P}
