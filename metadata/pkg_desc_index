@@ -33,7 +33,7 @@ dev-util/ninja 1.7.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/plasma-applet-weather-widget 1.6.9: Plasma 5 applet for weather forecasts
-mail-client/thunderbird 52.1.1: Thunderbird Mail Client
+mail-client/thunderbird 52.2.0: Thunderbird Mail Client
 media-fonts/iosevka 1.12.5: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.2: Epoxy is a library for handling OpenGL function pointer management for you
