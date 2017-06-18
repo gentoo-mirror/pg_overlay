@@ -23,8 +23,6 @@ fi
 PATCH="${PN}-54.0-patches-03"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
-MOZCONFIG_OPTIONAL_JIT=1
-
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.53 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
@@ -34,7 +32,7 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +gmp-autoupdate hardened +hwaccel jack nsplugin pgo selinux test +jit +kde"
+IUSE="bindist +gmp-autoupdate hardened +hwaccel jack nsplugin pgo selinux test +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -169,13 +167,13 @@ src_prepare() {
 	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+	#$for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
 
 	# Privacy-esr patches
-	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -226,7 +224,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-url-classifier
 
@@ -241,14 +238,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --with-pthreads
-	mozconfig_annotate '' --enable-system-hunspell
-	mozconfig_annotate '' --disable-gconf
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --enable-gold
