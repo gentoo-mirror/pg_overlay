@@ -23,8 +23,6 @@ fi
 PATCH="${PN}-54.0-patches-03"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
-MOZCONFIG_OPTIONAL_JIT=1
-
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.53 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
@@ -34,7 +32,7 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +gmp-autoupdate hardened +hwaccel jack nsplugin pgo selinux test +jit +kde"
+IUSE="bindist +gmp-autoupdate hardened +hwaccel jack nsplugin pgo selinux test +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -242,8 +240,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --with-pthreads
-	mozconfig_annotate '' --enable-system-hunspell
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --enable-gold
