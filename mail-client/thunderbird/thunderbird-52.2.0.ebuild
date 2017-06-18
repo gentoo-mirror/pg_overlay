@@ -14,7 +14,7 @@ MOZ_LANGS=(en en-GB en-US ru )
 MOZ_PV="${PV/_beta/b}"
 
 # Patches
-PATCHFF="firefox-52.0-patches-08"
+PATCHFF="firefox-52.2-patches-01"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
