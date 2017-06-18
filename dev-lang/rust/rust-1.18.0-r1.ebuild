@@ -146,13 +146,13 @@ src_configure() {
 		[target.${rust_target}]
 		cc = "${c_compiler}"
 		cxx = "${cxx_compiler}"
-		llvm-config = "${llvm_config}"
+		#llvm-config = "${llvm_config}"
 	EOF
 }
 
 src_compile() {
 	export RUST_BACKTRACE=1
-	#export LLVM_LINK_SHARED=1
+	export LLVM_LINK_SHARED=1
 
 	./x.py build --verbose --config="${S}"/config.toml || die
 }
