@@ -227,7 +227,6 @@ src_configure() {
 
 	# New features
 	mozconfig_annotate '' --disable-eme
-	mozconfig_annotate '' --disable-url-classifier
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
 	mozconfig_annotate '' --with-pthreads
@@ -240,6 +239,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --disable-safe-browsing
+	mozconfig_annotate '' --disable-crashreporter
+	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 
