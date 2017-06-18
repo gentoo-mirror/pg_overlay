@@ -146,7 +146,6 @@ src_configure() {
 		[target.${rust_target}]
 		cc = "${c_compiler}"
 		cxx = "${cxx_compiler}"
-		llvm-config = "${llvm_config}"
 	EOF
 }
 
