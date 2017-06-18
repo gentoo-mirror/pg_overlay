@@ -60,8 +60,11 @@ DEPEND="${RDEPEND}
 	dev-util/cmake
 "
 PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
-	|| ( 	>=dev-util/cargo-${CARGO_DEPEND_VERSION}
-		>=dev-util/cargo-bin-${CARGO_DEPEND_VERSION} )"
+	>=dev-util/cargo-${CARGO_DEPEND_VERSION}"
+
+PATCHES=(
+	"${FILESDIR}/${P}"-bootstrap-use-configured-rustc-cargo-paths.patch
+)
 
 S="${WORKDIR}/${MY_P}-src"
 
@@ -75,9 +78,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	use amd64 && CTARGET="x86_64-unknown-linux-gnu"
-	use x86 && CTARGET="i686-unknown-linux-gnu"
-	local rust_stage0_root="${S}"/build/"${CTARGET}"/stage0
+	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
 	local rust_stage0_name="RUST_STAGE0_${ARCH}"
 	local rust_stage0="${!rust_stage0_name}"
@@ -88,9 +89,7 @@ src_prepare() {
 }
 
 src_configure() {
-	use amd64 && CTARGET="x86_64-unknown-linux-gnu"
-	use x86 && CTARGET="i686-unknown-linux-gnu"
-	local rust_stage0_root="${S}"/build/"${CTARGET}"/stage0
+	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
 	local rust_target_name="CHOST_${ARCH}"
 	local rust_target="${!rust_target_name}"
@@ -174,6 +173,7 @@ src_install() {
 	fi
 
 	cat <<-EOF > "${T}"/50${P}
+		LDPATH="/usr/$(get_libdir)/${P}"
 		MANPATH="/usr/share/${P}/man"
 	EOF
 	doenvd "${T}"/50${P}
