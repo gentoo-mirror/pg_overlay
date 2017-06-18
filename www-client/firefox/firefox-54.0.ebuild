@@ -248,7 +248,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --with-pthreads
 	mozconfig_annotate '' --enable-system-hunspell
-	mozconfig_annotate '' --disable-gconf
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
 	mozconfig_annotate '' --enable-gold
