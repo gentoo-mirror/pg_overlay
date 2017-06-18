@@ -75,17 +75,6 @@
  // Interval: Time between checks for a new version (in seconds)
  pref("app.update.interval", 43200); // 12 hours
  // The time interval between the downloading of mar file chunks in the
---- firefox-52.0esr.bak/build/application.ini	2017-03-09
-+++ firefox-52.0esr/build/application.ini	2017-03-09
-@@ -43,7 +43,7 @@
- 
- [XRE]
- #ifdef MOZ_PROFILE_MIGRATOR
--EnableProfileMigrator=1
-+EnableProfileMigrator=0
- #endif
- 
- #if MOZ_CRASHREPORTER
 --- firefox-52.0esr.bak/toolkit/components/telemetry/healthreport-prefs.js	2017-03-09
 +++ firefox-52.0esr/toolkit/components/telemetry/healthreport-prefs.js	2017-03-09
 @@ -5,6 +5,6 @@
