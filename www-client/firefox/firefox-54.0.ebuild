@@ -254,12 +254,9 @@ src_configure() {
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --disable-libproxy
-	#mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
-	mozconfig_annotate '' --disable-debug-symbols
 
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon-git/
 	mozconfig_annotate '' --disable-accessibility
