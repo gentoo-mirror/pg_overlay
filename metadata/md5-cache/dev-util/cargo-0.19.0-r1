@@ -1,0 +1,15 @@
+DEFINED_PHASES=compile configure install test unpack
+DEPEND=sys-libs/zlib !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) net-libs/libssh2 net-libs/http-parser >=virtual/rust-1.9.0 dev-util/cmake sys-apps/coreutils sys-apps/diffutils sys-apps/findutils sys-apps/sed
+DESCRIPTION=The Rust's package manager
+EAPI=6
+HOMEPAGE=http://crates.io
+IUSE=doc libressl debug
+KEYWORDS=~amd64 ~x86
+LICENSE=|| ( MIT Apache-2.0 )
+RDEPEND=sys-libs/zlib !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) net-libs/libssh2 net-libs/http-parser !dev-util/cargo-bin net-misc/curl[ssl]
+RESTRICT=mirror
+SLOT=0
+SRC_URI=https://github.com/rust-lang/cargo/archive/0.19.0.tar.gz -> cargo-0.19.0.tar.gz amd64? ( https://static.rust-lang.org/dist/cargo-0.19.0-x86_64-unknown-linux-gnu.tar.gz ) x86? ( https://static.rust-lang.org/dist/cargo-0.19.0-i686-unknown-linux-gnu.tar.gz )
+_eclass_exported_funcs=src_unpack:cargo src_configure:- src_compile:- src_test:- src_install:-
+_eclasses_=bash-completion-r1	8e447753aaf658afa609fbf961d80ab7	cargo	4a14060dec0a7e707d952d502c09ca2e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	772b26a6baefb4c8c5e0c1fc724508b7
+_md5_=fcf701f7177c5a09741e5f1b7fa660a4
