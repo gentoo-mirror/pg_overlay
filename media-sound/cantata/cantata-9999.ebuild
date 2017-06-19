@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PLOCALES="blank cantata_cs cantata_de cantata_en_GB cantata_es cantata_fr cantata_hu cantata_ja cantata_ko cantata_pl cantata_ru cantata_zh_CN"
+PLOCALES="blank cantata_cs cantata_de cantata_en_GB cantata_es cantata_fr cantata_hu cantata_it cantata_ja cantata_ko cantata_pl cantata_ru cantata_zh_CN"
 inherit cmake-utils git-r3 gnome2-utils l10n qmake-utils xdg
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
