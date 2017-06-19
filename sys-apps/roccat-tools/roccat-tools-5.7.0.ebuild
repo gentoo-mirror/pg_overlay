@@ -47,7 +47,7 @@ RDEPEND="
 	virtual/libusb:1
 	dev-libs/dbus-glib
 	virtual/libgudev:=
-	|| ( dev-lang/lua:5.2 dev-lang/lua:0 )
+	|| ( dev-lang/lua:5.1 dev-lang/lua:0 )
 "
 
 DEPEND="${RDEPEND}"
@@ -62,7 +62,7 @@ src_configure() {
 	mycmakeargs=(
 		-DDEVICES=${MODELS// /;} \
 		-DUDEVDIR="${UDEVDIR/"//"//}"
-		-DWITH_LUA=5.2
+		-DWITH_LUA=5.1
 	)
 	cmake-utils_src_configure
 }
