@@ -71,7 +71,7 @@ toml_usex() {
 
 pkg_setup() {
 	python-any-r1_pkg_setup
-	use llvm && llvm_pkg_setup
+	llvm_pkg_setup
 }
 
 src_prepare() {
@@ -106,7 +106,7 @@ src_configure() {
 		linker=llvm-link
 	fi
 
-	use llvm && local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
+	local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
 	local c_compiler="$(tc-getBUILD_CC)"
 	local cxx_compiler="$(tc-getBUILD_CXX)"
 	if use clang ; then
