@@ -133,6 +133,11 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
+	pushd mozilla
+	eapply "${FILESDIR}/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch"
+	popd
+
+
 	# OpenSUSE-KDE patchset
 	if use kde ; then
 		pushd mozilla
