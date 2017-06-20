@@ -133,6 +133,8 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
+	eapply "${FILESDIR}/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch"
+
 	# OpenSUSE-KDE patchset
 	if use kde ; then
 		pushd mozilla
@@ -144,13 +146,13 @@ src_prepare() {
 	fi
 
 	# Fedora patches
-	#pushd mozilla
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
-	#do eapply "${FILESDIR}/fedora-patchset/$i"; \
-	#done
-	#popd
-	#eapply "${FILESDIR}/fedora-patchset/lightning-bad-langs.patch"
-	#eapply "${FILESDIR}/fedora-patchset/thunderbird-enable-addons.patch"
+	pushd mozilla
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
+	do eapply "${FILESDIR}/fedora-patchset/$i"; \
+	done
+	popd
+	eapply "${FILESDIR}/fedora-patchset/lightning-bad-langs.patch"
+	eapply "${FILESDIR}/fedora-patchset/thunderbird-enable-addons.patch"
 
 	# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
