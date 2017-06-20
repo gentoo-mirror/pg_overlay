@@ -31,6 +31,7 @@ dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applica
 dev-util/gdbus-codegen 2.50.3: GDBus code and documentation generator
 dev-util/ninja 1.7.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/plasma-applet-weather-widget 1.6.9: Plasma 5 applet for weather forecasts
 mail-client/thunderbird 52.2.0: Thunderbird Mail Client
