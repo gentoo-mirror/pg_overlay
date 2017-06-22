@@ -23,7 +23,7 @@ fi
 PATCH="${PN}-54.0-patches-03"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
-MOZCONFIG_OPTIONAL_JIT=1
+MOZCONFIG_OPTIONAL_JIT=0
 
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.53 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
@@ -166,7 +166,7 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
+	#use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
@@ -223,38 +223,38 @@ src_configure() {
 	#mozconfig_annotate '' --disable-eme
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
-	#mozconfig_annotate '' --with-pthreads
-	#mozconfig_annotate '' --disable-maintenance-service
-	#mozconfig_annotate '' --disable-ipdl-tests
-	#mozconfig_annotate '' --disable-accessibility
-	#mozconfig_annotate '' --disable-parental-controls
+	mozconfig_annotate '' --with-pthreads
+	mozconfig_annotate '' --disable-maintenance-service
+	mozconfig_annotate '' --disable-ipdl-tests
+	mozconfig_annotate '' --disable-accessibility
+	mozconfig_annotate '' --disable-parental-controls
 
 	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
-	#mozconfig_annotate '' --disable-necko-wifi
-	#mozconfig_annotate '' --enable-webrtc
-	#mozconfig_annotate '' --disable-safe-browsing
-	#mozconfig_annotate '' --disable-crashreporter
-	#mozconfig_annotate '' --disable-url-classifier
-	#mozconfig_annotate '' --enable-strip
-	#mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --disable-necko-wifi
+	mozconfig_annotate '' --enable-webrtc
+	mozconfig_annotate '' --disable-safe-browsing
+	mozconfig_annotate '' --disable-crashreporter
+	mozconfig_annotate '' --disable-url-classifier
+	mozconfig_annotate '' --enable-strip
+	mozconfig_annotate '' --enable-install-strip
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
-	#mozconfig_annotate '' --enable-gold
-	#mozconfig_annotate '' --enable-pie
-	#mozconfig_annotate '' --disable-libproxy
-	#mozconfig_annotate '' --disable-gconf
-	#mozconfig_annotate '' --disable-updater
-	#mozconfig_annotate '' --disable-tests
+	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --disable-updater
+	mozconfig_annotate '' --disable-tests
 
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon-git/
-	#mozconfig_annotate '' --disable-gamepad
-	#mozconfig_annotate '' --disable-necko-wifi
-	#mozconfig_annotate '' --disable-mobile-optimize
-	#mozconfig_annotate '' --disable-b2g-ril
-	#mozconfig_annotate '' --disable-b2g-bt
-	#mozconfig_annotate '' --disable-b2g-camera
-	#mozconfig_annotate '' --disable-debug
-	#mozconfig_annotate '' --disable-valgrind
+	mozconfig_annotate '' --disable-gamepad
+	mozconfig_annotate '' --disable-necko-wifi
+	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-b2g-ril
+	mozconfig_annotate '' --disable-b2g-bt
+	mozconfig_annotate '' --disable-b2g-camera
+	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-valgrind
 
 	# Allow for a proper pgo build
 	if use pgo; then
