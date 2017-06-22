@@ -175,7 +175,7 @@ src_prepare() {
 	#for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
 
 	# Privacy-esr patches
-	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -230,17 +230,17 @@ src_configure() {
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
 	mozconfig_annotate '' --with-pthreads
-	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-ipdl-tests
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-parental-controls
+	#mozconfig_annotate '' --disable-maintenance-service
+	#mozconfig_annotate '' --disable-ipdl-tests
+	#mozconfig_annotate '' --disable-accessibility
+	#mozconfig_annotate '' --disable-parental-controls
 
 	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
-	mozconfig_annotate '' --disable-necko-wifi
+	#mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --enable-webrtc
-	mozconfig_annotate '' --disable-safe-browsing
+	#mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-url-classifier
+	#mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 
@@ -248,22 +248,19 @@ src_configure() {
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --disable-libproxy
-	mozconfig_annotate '' --disable-gconf
+	#mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
 
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon-git/
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --disable-parental-controls
-	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-b2g-ril
-	mozconfig_annotate '' --disable-b2g-bt
-	mozconfig_annotate '' --disable-b2g-camera
-	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-valgrind
+	#mozconfig_annotate '' --disable-gamepad
+	#mozconfig_annotate '' --disable-necko-wifi
+	#mozconfig_annotate '' --disable-mobile-optimize
+	#mozconfig_annotate '' --disable-b2g-ril
+	#mozconfig_annotate '' --disable-b2g-bt
+	#mozconfig_annotate '' --disable-b2g-camera
+	#mozconfig_annotate '' --disable-debug
+	#mozconfig_annotate '' --disable-valgrind
 
 	# Allow for a proper pgo build
 	if use pgo; then
