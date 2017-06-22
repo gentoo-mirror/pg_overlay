@@ -23,7 +23,7 @@ fi
 PATCH="${PN}-54.0-patches-03"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
-MOZCONFIG_OPTIONAL_JIT=0
+MOZCONFIG_OPTIONAL_JIT=1
 
 inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.53 pax-utils fdo-mime autotools virtualx mozlinguas-v2
 
@@ -166,7 +166,7 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	#use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
+	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
