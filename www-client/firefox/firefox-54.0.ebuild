@@ -34,7 +34,7 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +gmp-autoupdate hardened +hwaccel jack nsplugin pgo selinux test +jit +kde"
+IUSE="bindist +gmp-autoupdate hardened +hwaccel jack nsplugin pgo selinux test jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -226,10 +226,10 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	mozconfig_annotate '' --disable-eme
+	#mozconfig_annotate '' --disable-eme
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
-	mozconfig_annotate '' --with-pthreads
+	#mozconfig_annotate '' --with-pthreads
 	#mozconfig_annotate '' --disable-maintenance-service
 	#mozconfig_annotate '' --disable-ipdl-tests
 	#mozconfig_annotate '' --disable-accessibility
@@ -237,20 +237,20 @@ src_configure() {
 
 	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
 	#mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --enable-webrtc
+	#mozconfig_annotate '' --enable-webrtc
 	#mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-crashreporter
+	#mozconfig_annotate '' --disable-crashreporter
 	#mozconfig_annotate '' --disable-url-classifier
-	mozconfig_annotate '' --enable-strip
-	mozconfig_annotate '' --enable-install-strip
+	#mozconfig_annotate '' --enable-strip
+	#mozconfig_annotate '' --enable-install-strip
 
 	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
-	mozconfig_annotate '' --enable-gold
-	mozconfig_annotate '' --enable-pie
-	mozconfig_annotate '' --disable-libproxy
+	#mozconfig_annotate '' --enable-gold
+	#mozconfig_annotate '' --enable-pie
+	#mozconfig_annotate '' --disable-libproxy
 	#mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-tests
+	#mozconfig_annotate '' --disable-updater
+	#mozconfig_annotate '' --disable-tests
 
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon-git/
 	#mozconfig_annotate '' --disable-gamepad
