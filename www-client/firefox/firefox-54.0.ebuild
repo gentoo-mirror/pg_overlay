@@ -229,6 +229,14 @@ src_configure() {
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-parental-controls
 
+	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
+	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-updater
+	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --disable-tests
+
 	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --enable-webrtc
@@ -238,26 +246,25 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-install-strip
 
-	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
-	mozconfig_annotate '' --enable-gold
-	mozconfig_annotate '' --enable-pie
-	mozconfig_annotate '' --disable-libproxy
-	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-tests
-
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon/
+	mozconfig_annotate '' --disable-installer
+	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-websms-backend
+	
 	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
-	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-valgrind
+
+	#Waterfox
+	mozconfig_annotate '' --disable-js-shell
+	mozconfig_annotate '' --disable-verify-mar
+	mozconfig_annotate '' --disable-profiling
 
 	# Allow for a proper pgo build
 	if use pgo; then
