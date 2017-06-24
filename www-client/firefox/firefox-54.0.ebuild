@@ -246,14 +246,17 @@ src_configure() {
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
 
-	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon-git/
+	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon/
+	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-necko-wifi
+	mozconfig_annotate '' --disable-logging
+	mozconfig_annotate '' --disable-websms-backend
 	mozconfig_annotate '' --disable-mobile-optimize
 	mozconfig_annotate '' --disable-b2g-ril
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
 	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-valgrind
 
 	# Allow for a proper pgo build
@@ -347,9 +350,9 @@ src_install() {
 		|| die
 	fi
 
-	#cat "${FILESDIR}"/privacy-patchset/privacy.js-1 >> \
-	#"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-	#|| die	
+	cat "${FILESDIR}"/privacy-patchset/privacy.js-1 >> \
+	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	|| die	
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake DESTDIR="${D}" install
