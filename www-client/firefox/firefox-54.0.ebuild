@@ -166,7 +166,7 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
+	#use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
