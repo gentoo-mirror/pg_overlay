@@ -249,7 +249,6 @@ src_configure() {
 
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon/
 	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-websms-backend
