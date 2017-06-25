@@ -220,6 +220,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
+	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
@@ -253,7 +254,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-logging
 	mozconfig_annotate '' --disable-websms-backend
-	
+
+	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-mobile-optimize
 	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-b2g-ril
