@@ -220,7 +220,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	#mozconfig_annotate '' --disable-eme
+	mozconfig_annotate '' --disable-eme
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
 	mozconfig_annotate '' --with-pthreads
@@ -261,7 +261,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-b2g-camera
 	mozconfig_annotate '' --disable-valgrind
 
-	#Waterfox
+	# Waterfox
 	mozconfig_annotate '' --disable-js-shell
 	mozconfig_annotate '' --disable-verify-mar
 	mozconfig_annotate '' --disable-profiling

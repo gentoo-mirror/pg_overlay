@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV='2.0.0pre4'
+WAF_PV=2.0.0pre4
 
 inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils
 
@@ -30,8 +30,7 @@ SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
 	dvd +egl encode gbm +iconv jack jpeg lcms +libass libav libcaca libmpv +lua
 	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
-	selinux test tools +uchardet v4l vaapi vdpau wayland +X +xv
-	zsh-completion"
+	selinux test tools +uchardet v4l vaapi vdpau wayland +X +xv zsh-completion"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
