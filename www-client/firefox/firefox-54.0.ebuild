@@ -248,12 +248,8 @@ src_configure() {
 	mozconfig_annotate '' --enable-install-strip
 
 	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon/
-	mozconfig_annotate '' --disable-installer
 	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-codesighs
 	mozconfig_annotate '' --disable-gamepad
-	mozconfig_annotate '' --disable-logging
-	mozconfig_annotate '' --disable-websms-backend
 
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-mobile-optimize
