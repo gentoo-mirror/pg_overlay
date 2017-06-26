@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://git.code.sf.net/p/${PN}/git"
 LICENSE="BSD GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="netgear readynas"
+IUSE="netgear readynas tivo"
 
 RDEPEND="dev-db/sqlite:3
 	media-libs/flac
@@ -59,9 +59,9 @@ src_configure() {
 		--disable-silent-rules \
 		--with-db-path=/var/lib/${PN} \
 		--with-log-path=/var/log/${PN} \
-		--disable-tivo \
 		$(use_enable netgear) \
-		$(use_enable readynas)
+		$(use_enable readynas) \
+		$(use_enable tivo)
 }
 
 src_install() {
