@@ -58,6 +58,17 @@
  }
 
  void BackgroundModeManager::RegisterProfile(Profile* profile) {
+--- a/components/content_settings/core/browser/cookie_settings.cc
++++ b/components/content_settings/core/browser/cookie_settings.cc
+@@ -79,7 +79,7 @@
+ void CookieSettings::RegisterProfilePrefs(
+     user_prefs::PrefRegistrySyncable* registry) {
+   registry->RegisterBooleanPref(
+-      prefs::kBlockThirdPartyCookies, false,
++      prefs::kBlockThirdPartyCookies, true,
+       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
+ }
+
 --- a/chrome/browser/ui/navigation_correction_tab_observer.cc
 +++ b/chrome/browser/ui/navigation_correction_tab_observer.cc
 @@ -56,7 +56,7 @@ NavigationCorrectionTabObserver::~Naviga
