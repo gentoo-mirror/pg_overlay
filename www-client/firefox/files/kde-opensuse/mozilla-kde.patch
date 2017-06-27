@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  1fccdb56cf307cef5ddd39ece2ac58c93fe706b8
+# Parent  a15b45ae85ab486503a1a09252734b80fe782998
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -1624,9 +1624,9 @@ new file mode 100644
 +                  aPaneElement.style.opacity = 0.0;
 +                  this.animate(oldPane, aPaneElement);
 +                } else if (!this._shouldAnimate && prefpanes.length > 1) {
-+                  var targetHeight = parseInt(window.getComputedStyle(this._paneDeckContainer, "").height);
-+                  var verticalPadding = parseInt(window.getComputedStyle(aPaneElement, "").paddingTop);
-+                  verticalPadding += parseInt(window.getComputedStyle(aPaneElement, "").paddingBottom);
++                  var targetHeight = parseInt(window.getComputedStyle(this._paneDeckContainer).height);
++                  var verticalPadding = parseInt(window.getComputedStyle(aPaneElement).paddingTop);
++                  verticalPadding += parseInt(window.getComputedStyle(aPaneElement).paddingBottom);
 +                  if (aPaneElement.contentHeight > targetHeight - verticalPadding) {
 +                    // To workaround the bottom border of a groupbox from being
 +                    // cutoff an hbox with a class of bottomBox may enclose it.
@@ -1635,7 +1635,7 @@ new file mode 100644
 +                    var bottomPadding = 0;
 +                    var bottomBox = aPaneElement.getElementsByAttribute("class", "bottomBox")[0];
 +                    if (bottomBox)
-+                      bottomPadding = parseInt(window.getComputedStyle(bottomBox, "").paddingBottom);
++                      bottomPadding = parseInt(window.getComputedStyle(bottomBox).paddingBottom);
 +                    window.innerHeight += bottomPadding + verticalPadding + aPaneElement.contentHeight - targetHeight;
 +                  }
 +
@@ -1719,7 +1719,7 @@ new file mode 100644
 +            }
 +          } else if (aTimer == this._fadeTimer) {
 +            var elt = document.getElementById(this.lastSelected);
-+            var newOpacity = parseFloat(window.getComputedStyle(elt, "").opacity) + this._fadeIncrement;
++            var newOpacity = parseFloat(window.getComputedStyle(elt).opacity) + this._fadeIncrement;
 +            if (newOpacity < 1.0)
 +              elt.style.opacity = newOpacity;
 +            else {
@@ -2087,9 +2087,9 @@ new file mode 100644
 +
 +      <property name="contentHeight">
 +        <getter>
-+          var targetHeight = parseInt(window.getComputedStyle(this._content, "").height);
-+          targetHeight += parseInt(window.getComputedStyle(this._content, "").marginTop);
-+          targetHeight += parseInt(window.getComputedStyle(this._content, "").marginBottom);
++          var targetHeight = parseInt(window.getComputedStyle(this._content).height);
++          targetHeight += parseInt(window.getComputedStyle(this._content).marginTop);
++          targetHeight += parseInt(window.getComputedStyle(this._content).marginBottom);
 +          return targetHeight;
 +        </getter>
 +      </property>
