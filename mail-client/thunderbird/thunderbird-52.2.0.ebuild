@@ -14,7 +14,7 @@ MOZ_LANGS=(en en-GB en-US ru )
 MOZ_PV="${PV/_beta/b}"
 
 # Patches
-PATCHFF="firefox-52.2-patches-01"
+PATCHFF="firefox-52.2-patches-02"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -339,7 +339,7 @@ src_install() {
 	fi
 
 	# Required in order to use plugins and even run thunderbird on hardened.
-	pax-mark pm "${ED}"${MOZILLA_FIVE_HOME}/{thunderbird,thunderbird-bin,plugin-container}
+	pax-mark m "${ED}"${MOZILLA_FIVE_HOME}/{thunderbird,thunderbird-bin,plugin-container}
 
 	if use minimal; then
 		rm -r "${ED}"/usr/include "${ED}"${MOZILLA_FIVE_HOME}/{idl,include,lib,sdk} || \
