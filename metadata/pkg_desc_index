@@ -1,7 +1,5 @@
 app-admin/syslog-ng 3.9.1: syslog replacement with advanced filtering features
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
-app-arch/rar 5.5.0_beta2: RAR compressor/uncompressor
-app-arch/unrar 5.5.3: Uncompress rar files
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/gpgme 1.9.0: GnuPG Made Easy is a library for making GnuPG easier to use
 app-dicts/myspell-ru 20150711-r1: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
