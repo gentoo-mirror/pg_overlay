@@ -17,9 +17,7 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND="
-	media-libs/libsamplerate
 	>=media-libs/taglib-1.10
-	media-sound/mpg123
 	=media-sound/qmmp-9999
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
