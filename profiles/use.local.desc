@@ -16,17 +16,6 @@ app-misc/ca-certificates:insecure_certs - Install certs which are known to *not*
 app-misc/ddcutil:enable-api-libs - Enables the C/C++ API.
 app-misc/ddcutil:usb-monitor - Adds support for monitors attached via USB.
 app-misc/ddcutil:user-permissions - Adds a udev rules to allow non-root users in the i2c group to access the /dev/i2c-* devices. If usb-monitor is selected, users will need to be added to the video group to access the USB monitor. Otherwise, only root will be able to use ddcutil.
-app-portage/eix:debug - Build with upstream's CXXFLAGS/LDFLAGS for debugging support; not recommended for normal use.
-app-portage/eix:dep - Make DEP=true the default which enables support for {,R,P}DEPEND but requires roughly double disk and memory.
-app-portage/eix:doc - Create description of the eix cache file additionally in html format
-app-portage/eix:optimization - Accept upstream's choices for CXXFLAGS/LDFLAGS for optimization. Absense of this USE flag does not strip user's *FLAGS
-app-portage/eix:required-use - Make REQUIRED_USE=true the default which enables support for REQUIRED_USE but requires more disk and memory.
-app-portage/eix:security - This adds some checks which can prevent certain exploits if e.g. the eix code has a bug. If you use the hardened toolchain, using this flag does not increase security and can even lead to problems.
-app-portage/eix:sqlite - Compile in support for portage's sqlite backend; to actually use it you need additional configuration of portage and eix
-app-portage/eix:strong-optimization - Adds several more agressive CXXFLAGS/LDFLAGS for optimization like graphite (if available). May cause trouble with some buggy compiler versions. Absense of this USE flag does not strip user's *FLAGS
-app-portage/eix:strong-security - Add many checks to prevent exploits if eix code has a bug. This will slow down eix considerably. Use only if you are paranoid or have reasons to suspect a bug.
-app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
-app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-text/enchant:aspell - Adds support for app-text/aspell spell checker
 app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/enchant:zemberek - Adds support for app-text/zemberek-server spell checker server

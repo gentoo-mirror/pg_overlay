@@ -7,7 +7,6 @@ app-misc/ca-certificates 20161130.3.30.1 20161130.3.30.2: Common CA Certificates
 app-misc/ddcutil 0.7.3: Program for querying and changing monitor settings
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-portage/eix 0.32.8: Search and query ebuilds
 app-portage/gentoolkit 0.4.0 9999: Collection of administration scripts for Gentoo
 app-text/enchant 1.6.1: Spellchecker wrapping library
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
@@ -22,7 +21,7 @@ dev-libs/protobuf 3.3.0: Google's Protocol Buffers -- an efficient method of enc
 dev-libs/re2 0.2017.04.01 0.2017.06.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
-dev-qt/qtdeclarative 5.7.1 5.9.0: The QML and Quick modules for the Qt5 framework
+dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
 dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
 dev-util/cargo 0.19.0: The Rust's package manager
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -35,7 +34,7 @@ kde-misc/plasma-applet-weather-widget 1.6.9: Plasma 5 applet for weather forecas
 mail-client/thunderbird 52.2.0 52.2.1: Thunderbird Mail Client
 media-fonts/iosevka 1.12.5: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
-media-libs/libepoxy 1.4.2: Epoxy is a library for handling OpenGL function pointer management for you
+media-libs/libepoxy 1.4.3: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/soxr 9999: The SoX Resampler library
 media-libs/vulkan-loader 1.0.51.0: Vulkan Installable Client Driver (ICD) Loader
