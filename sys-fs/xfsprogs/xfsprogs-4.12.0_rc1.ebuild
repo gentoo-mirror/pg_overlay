@@ -33,6 +33,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
 	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
 )
+S=${WORKDIR}/${PN}-dev-${MY_PV}
 
 pkg_setup() {
 	if use readline && use libedit ; then
