@@ -1,6 +1,5 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 GST_ORG_MODULE="gst-plugins-base"
@@ -43,7 +42,6 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	>=dev-util/gtk-doc-am-1.12
-	!!<media-libs/gst-plugins-bad-1.11.90_pre:1.0
 	X? (
 		>=x11-proto/videoproto-2.3.1-r1[${MULTILIB_USEDEP}]
 		>=x11-proto/xextproto-7.2.1-r1[${MULTILIB_USEDEP}]

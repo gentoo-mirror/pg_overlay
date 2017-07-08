@@ -1,15 +1,10 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=6
 GST_ORG_MODULE="gst-plugins-bad"
 
-PV="${PV%_*}"
-P="${PN}-${PV}"
-S="${WORKDIR}/${P}"
-
-inherit autotools eutils flag-o-matic gstreamer virtualx
+inherit eutils flag-o-matic gstreamer virtualx
 
 DESCRIPTION="Less plugins for GStreamer"
 HOMEPAGE="https://gstreamer.freedesktop.org/"
