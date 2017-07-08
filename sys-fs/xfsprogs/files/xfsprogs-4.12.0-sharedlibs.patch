@@ -70,10 +70,11 @@
  -include .ltdep
 --- xfsprogs-4.7.0/Makefile
 +++ xfsprogs-4.7.0/Makefile
-@@ -88,6 +88,8 @@
+@@ -88,7 +88,9 @@
  repair: libxlog libxcmd
  copy: libxlog
  mkfs: libxcmd
+ speceman: libxcmd
 +libxlog: libxfs
 +libxlog-install-dev: libxfs-install-dev
  
