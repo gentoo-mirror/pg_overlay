@@ -29,8 +29,8 @@ REQUIRED_USE="
 # X11 is automagic for now, upstream #709530
 RDEPEND="
 	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
-	>=media-libs/gstreamer-${PV}_pre:${SLOT}[${MULTILIB_USEDEP},introspection?]
-	>=media-libs/gst-plugins-base-${PV}_pre:${SLOT}[${MULTILIB_USEDEP},introspection?]
+	>=media-libs/gstreamer-${PV}:${SLOT}[${MULTILIB_USEDEP},introspection?]
+	>=media-libs/gst-plugins-base-${PV}:${SLOT}[${MULTILIB_USEDEP},introspection?]
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1:= )
 
 	egl? ( >=media-libs/mesa-9.1.6[egl,${MULTILIB_USEDEP}] )
