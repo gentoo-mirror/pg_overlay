@@ -75,7 +75,7 @@ sys-boot/efibootmgr 9999: User-space application to modify the EFI boot manager
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.1 9999: Reliable MTP client with minimalistic UI
 sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
-sys-fs/xfsprogs 9999: xfs filesystem utilities
+sys-fs/xfsprogs 4.12.0_rc1 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 59.0.3071.125: Open-source version of Google Chrome web browser
