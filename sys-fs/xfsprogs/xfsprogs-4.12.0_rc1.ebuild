@@ -43,7 +43,9 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${PATCHES[@]}"
+	epatch "${PATCHES[@]}"	
+
+	emake configure
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
