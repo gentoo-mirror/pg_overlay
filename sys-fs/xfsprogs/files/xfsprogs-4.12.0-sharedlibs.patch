@@ -74,7 +74,7 @@
  repair: libxlog libxcmd
  copy: libxlog
  mkfs: libxcmd
- speceman: libxcmd
+ spaceman: libxcmd
 +libxlog: libxfs
 +libxlog-install-dev: libxfs-install-dev
  
