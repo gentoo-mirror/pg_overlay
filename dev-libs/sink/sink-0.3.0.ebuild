@@ -4,7 +4,6 @@
 EAPI=6
 
 KDE_TEST="forceoptional"
-KDE_EXAMPLES="true"
 inherit kde5
 
 DESCRIPTION="A data access layer handling synchronization, caching and indexing"
@@ -31,4 +30,4 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 # fails to build
-RESTRICT+=" test"
+#RESTRICT+=" test"
