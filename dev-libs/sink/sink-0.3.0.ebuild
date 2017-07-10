@@ -24,21 +24,10 @@ RDEPEND="
 	dev-libs/flatbuffers
 	dev-libs/kasync
 	net-libs/kdav2
+	net-libs/kimap2
 	sys-libs/readline:0=
 "
 DEPEND="${RDEPEND}"
 
 # fails to build
 RESTRICT+=" test"
-
-src_prepare() {
-	kde5_src_prepare
-	cmake_comment_add_subdirectory examples
-}
-
-src_configure() {
-	local mycmakeargs=(
-		-DBUILD_DAV=ON
-	)
-	kde5_src_configure
-}
