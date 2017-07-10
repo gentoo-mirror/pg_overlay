@@ -30,4 +30,4 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 # fails to build
-#RESTRICT+=" test"
+RESTRICT+=" test"
