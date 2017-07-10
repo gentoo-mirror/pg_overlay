@@ -30,3 +30,10 @@ DEPEND="${RDEPEND}"
 
 # fails to build
 RESTRICT+=" test"
+
+src_configure() {
+	local mycmakeargs=(
+		-DENABLE_DAV=ON
+	)
+	kde5_src_configure
+}
