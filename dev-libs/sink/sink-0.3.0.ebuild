@@ -33,7 +33,7 @@ RESTRICT+=" test"
 
 src_configure() {
 	local mycmakeargs=(
-		-DENABLE_DAV=ON
+		-DBUILD_DAV=ON
 	)
 	kde5_src_configure
 }
