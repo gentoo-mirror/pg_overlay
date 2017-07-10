@@ -12,7 +12,7 @@ SRC_URI="mirror://kde/unstable/${PN}/${PV}/src/${P}.tar.xz"
 
 LICENSE="LGPL-2+"
 KEYWORDS="~amd64"
-IUSE=""
+IUSE="+examples"
 
 # qtgui is bogus but is required because something else in the deptree
 # uses it as a public dependency but doesn't search for it properly
