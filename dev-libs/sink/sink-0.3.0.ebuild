@@ -4,6 +4,7 @@
 EAPI=6
 
 KDE_TEST="forceoptional"
+KDE_EXAMPLES="true"
 inherit kde5
 
 DESCRIPTION="A data access layer handling synchronization, caching and indexing"
