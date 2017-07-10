@@ -19,6 +19,7 @@ dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libgaminggear 0.15.0 0.15.1: Provides functionality for gaming input devices
 dev-libs/protobuf 3.3.0: Google's Protocol Buffers -- an efficient method of encoding structured data
 dev-libs/re2 0.2017.04.01 0.2017.06.01: An efficent, principled regular expression library
+dev-libs/sink 0.3.0: A data access layer handling synchronization, caching and indexing
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
