@@ -23,7 +23,7 @@ RDEPEND="
 	dev-db/lmdb:=
 	dev-libs/flatbuffers
 	dev-libs/kasync
-	dev-libs/kdav2
+	net-libs/kdav2
 	sys-libs/readline:0=
 "
 DEPEND="${RDEPEND}"
