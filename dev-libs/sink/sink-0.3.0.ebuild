@@ -23,12 +23,12 @@ RDEPEND="
 	dev-db/lmdb:=
 	dev-libs/flatbuffers
 	dev-libs/kasync
-	dev-libs/libgit2
 	net-libs/kdav2
 	net-libs/kimap2
 	sys-libs/readline:0=
 "
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+		dev-libs/libgit2"
 
 # fails to build
 RESTRICT+=" test"
