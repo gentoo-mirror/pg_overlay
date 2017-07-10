@@ -3,7 +3,7 @@
 
 EAPI=6
 
-KDE_TEST="optional"
+KDE_TEST="false"
 inherit kde5
 
 DESCRIPTION="A data access layer handling synchronization, caching and indexing"
@@ -27,7 +27,8 @@ RDEPEND="
 	net-libs/kimap2
 	sys-libs/readline:0=
 "
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+		dev-libs/libgit2"
 
 # fails to build
-#RESTRICT+=" test"
+RESTRICT+=" test"
