@@ -1,7 +1,3 @@
-chromium-system-ffmpeg-r6.patch
-
-vaapi_patch_r2.patch
-
 0001-fix-building-without-safebrowsing.patch
 
 0003-disable-autofill-download-manager.patch
