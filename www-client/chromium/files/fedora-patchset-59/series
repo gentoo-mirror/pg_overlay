@@ -18,7 +18,6 @@ chromium-59.0.3071.86-gcc7.patch
 chromium-59.0.3071.86-enable-mp3.patch
 chromium-58.0.3029.96-revert-b794998819088f76b4cf44c8db6940240c563cf4.patch
 chromium-59.0.3071.86-ffmpeg-stdatomic.patch
-chromium-59.0.3071.86-dma-buf-header-hack.patch
 chromium-59.0.3071.86-system-clang.patch
 chromium-59.0.3071.115-ucontext-fix.patch
 
