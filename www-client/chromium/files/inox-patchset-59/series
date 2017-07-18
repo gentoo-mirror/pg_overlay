@@ -1,5 +1,3 @@
-chromium-v8-gcc7.patch
-
 chromium-system-ffmpeg-r6.patch
 
 vaapi_patch_r2.patch
