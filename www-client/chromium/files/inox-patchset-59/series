@@ -1,19 +1,7 @@
-0001-Clip-FreeType-glyph-bitmap-to-mask.patch
-
-chromium-blink-gcc7.patch
-
-chromium-v8-gcc7.patch
-
-chromium-system-ffmpeg-r6.patch
-
-vaapi_patch_r2.patch
-
 0001-fix-building-without-safebrowsing.patch
 
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
-0005-disable-default-extensions.patch
-0006-modify-default-prefs.patch
 0007-disable-web-resource-service.patch
 0008-restore-classic-ntp.patch
 0009-disable-google-ipv6-probes.patch
