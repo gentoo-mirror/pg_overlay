@@ -2,7 +2,6 @@
 
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
-0005-disable-default-extensions.patch
 0006-modify-default-prefs.patch
 0007-disable-web-resource-service.patch
 0008-restore-classic-ntp.patch
