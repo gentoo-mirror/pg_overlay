@@ -67,7 +67,7 @@ toml_usex() {
 
 pkg_setup() {
 	python-any-r1_pkg_setup
-	llvm_pkg_setup
+	#llvm_pkg_setup
 }
 
 src_prepare() {
