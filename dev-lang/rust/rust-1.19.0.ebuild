@@ -67,7 +67,7 @@ toml_usex() {
 
 pkg_setup() {
 	python-any-r1_pkg_setup
-	llvm_pkg_setup
+	#llvm_pkg_setup
 }
 
 src_prepare() {
@@ -94,7 +94,7 @@ src_configure() {
 	local archiver="$(tc-getAR)"
 	local linker="$(tc-getCC)"
 
-	local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
+	#local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
 	local c_compiler="$(tc-getBUILD_CC)"
 	local cxx_compiler="$(tc-getBUILD_CXX)"
 
@@ -137,7 +137,7 @@ src_configure() {
 src_compile() {
 	export RUST_BACKTRACE=1
 
-	./x.py build -j"$(makeopts_jobs)" --verbose --config="${S}"/config.toml || die
+	./x.py build -j"$(nproc)" --verbose --config="${S}"/config.toml || die
 }
 
 src_install() {
