@@ -94,7 +94,7 @@ src_configure() {
 	local archiver="$(tc-getAR)"
 	local linker="$(tc-getCC)"
 
-	local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
+	#local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
 	local c_compiler="$(tc-getBUILD_CC)"
 	local cxx_compiler="$(tc-getBUILD_CXX)"
 
