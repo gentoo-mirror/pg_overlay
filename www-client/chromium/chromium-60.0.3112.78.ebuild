@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="component-build cups gconf gnome-keyring +gtk3 hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid system-ffmpeg system-libvpx +tcmalloc widevine +debian +inox iridium ungoogled vaapi"
+IUSE="component-build cups gnome-keyring +gtk3 hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-libvpx +tcmalloc widevine +debian +inox iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="debian? ( gtk3 )
 		ungoogled? ( gtk3 )
@@ -37,12 +37,11 @@ COMMON_DEPEND="
 	cups? ( >=net-print/cups-1.3.11:= )
 	dev-libs/expat:=
 	dev-libs/glib:2
-	dev-libs/icu:=
+	<dev-libs/icu-59:=
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
 	>=dev-libs/nss-3.14.3:=
 	>=dev-libs/re2-0.2016.05.01:=
-	gconf? ( >=gnome-base/gconf-2.24.0:= )
 	gnome-keyring? ( >=gnome-base/libgnome-keyring-3.12:= )
 	>=media-libs/alsa-lib-1.0.19:=
 	media-libs/fontconfig:=
@@ -51,6 +50,8 @@ COMMON_DEPEND="
 	media-libs/libjpeg-turbo:=
 	media-libs/libpng:=
 	system-libvpx? ( media-libs/libvpx:=[postproc,svc] )
+	>=media-libs/openh264-1.6.0:=
+	media-libs/opus:=
 	pulseaudio? ( media-sound/pulseaudio:= )
 	system-ffmpeg? ( >=media-video/ffmpeg-3:= )
 	sys-apps/dbus:=
@@ -188,11 +189,9 @@ pkg_setup() {
 
 src_prepare() {
 	local PATCHES=(
-		"${FILESDIR}/${PN}-FORTIFY_SOURCE.patch"
-		"${FILESDIR}/skia-avx2.patch"
-		"${FILESDIR}/${PN}-dma-buf-r1.patch"
-		"${FILESDIR}/${PN}-system-ffmpeg-r6.patch"
-		"${FILESDIR}/${PN}-system-icu-r1.patch"
+		"${FILESDIR}/${PN}-widevine-r1.patch"
+		"${FILESDIR}/${PN}-FORTIFY_SOURCE-r1.patch"
+		"${FILESDIR}/${PN}-gn-bootstrap-r8.patch"
 	)
 
 	default
@@ -253,6 +252,7 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/gl-matrix
 		third_party/catapult/tracing/third_party/jszip
 		third_party/catapult/tracing/third_party/mannwhitneyu
+		third_party/catapult/tracing/third_party/oboe
 		third_party/ced
 		third_party/cld_2
 		third_party/cld_3
@@ -263,9 +263,11 @@ src_prepare() {
 		third_party/flatbuffers
 		third_party/flot
 		third_party/freetype
+		third_party/glslang-angle
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
 		third_party/google_input_tools/third_party/closure_library/third_party/closure
+		third_party/googletest
 		third_party/hunspell
 		third_party/iccjpeg
 		third_party/inspector_protocol
@@ -280,7 +282,6 @@ src_prepare() {
 		third_party/libsecret
 		third_party/libsrtp
 		third_party/libudev
-		third_party/libusb
 		third_party/libwebm
 		third_party/libxml
 		third_party/libyuv
@@ -292,9 +293,7 @@ src_prepare() {
 		third_party/mt19937ar
 		third_party/node
 		third_party/node/node_modules/vulcanize/third_party/UglifyJS2
-		third_party/openh264
 		third_party/openmax_dl
-		third_party/opus
 		third_party/ots
 		third_party/pdfium
 		third_party/pdfium/third_party/agg23
@@ -313,20 +312,23 @@ src_prepare() {
 		third_party/qcms
 		third_party/sfntly
 		third_party/skia
+		third_party/skia/third_party/vulkan
 		third_party/smhasher
+		third_party/spirv-headers
+		third_party/spirv-tools-angle
 		third_party/sqlite
 		third_party/swiftshader
 		third_party/swiftshader/third_party/llvm-subzero
-		third_party/swiftshader/third_party/pnacl-subzero
 		third_party/swiftshader/third_party/subzero
 		third_party/tcmalloc
 		third_party/usrsctp
+		third_party/vulkan
+		third_party/vulkan-validation-layers
 		third_party/web-animations-js
 		third_party/webdriver
 		third_party/webrtc
 		third_party/widevine
 		third_party/woff2
-		third_party/x86inc
 		third_party/zlib/google
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
@@ -353,6 +355,22 @@ src_prepare() {
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
 }
 
+bootstrap_gn() {
+	if tc-is-cross-compiler; then
+		local -x AR=${BUILD_AR}
+		local -x CC=${BUILD_CC}
+		local -x CXX=${BUILD_CXX}
+		local -x NM=${BUILD_NM}
+		local -x CFLAGS=${BUILD_CFLAGS}
+		local -x CXXFLAGS=${BUILD_CXXFLAGS}
+		local -x LDFLAGS=${BUILD_LDFLAGS}
+	fi
+	einfo "Building GN..."
+	set -- tools/gn/bootstrap/bootstrap.py -s -v --no-clean
+	echo "$@"
+	"$@" || die
+}
+
 src_configure() {
 	local myconf_gn=""
 
@@ -369,11 +387,10 @@ src_configure() {
 	myconf_gn+=" enable_nacl=false"
 
 	# Use system-provided libraries.
+	# TODO: freetype (https://bugs.chromium.org/p/pdfium/issues/detail?id=733).
 	# TODO: use_system_hunspell (upstream changes needed).
 	# TODO: use_system_libsrtp (bug #459932).
-	# TODO: use_system_libusb (http://crbug.com/266149).
 	# TODO: xml (bug #616818).
-	# TODO: use_system_opus (https://code.google.com/p/webrtc/issues/detail?id=3077).
 	# TODO: use_system_protobuf (bug #525560).
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
@@ -420,6 +437,8 @@ src_configure() {
 		libpng
 		libwebp
 		libxslt
+		openh264
+		opus
 		re2
 		snappy
 		yasm
@@ -437,7 +456,7 @@ src_configure() {
 	myconf_gn+=" enable_hangout_services_extension=$(usex hangouts true false)"
 	myconf_gn+=" enable_widevine=$(usex widevine true false)"
 	myconf_gn+=" use_cups=$(usex cups true false)"
-	myconf_gn+=" use_gconf=$(usex gconf true false)"
+	myconf_gn+=" use_gconf=false"
 	myconf_gn+=" use_gnome_keyring=$(usex gnome-keyring true false)"
 	myconf_gn+=" use_gtk3=$(usex gtk3 true false)"
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
@@ -448,7 +467,7 @@ src_configure() {
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 
 	if tc-is-clang; then
-		myconf_gn+=" is_clang=true clang_base_path=\"/usr\" clang_use_chrome_plugins=false"
+		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false"
 	else
 		myconf_gn+=" is_clang=false"
 	fi
@@ -456,7 +475,7 @@ src_configure() {
 	# Never use bundled gold binary. Disable gold linker flags for now.
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=true use_sysroot=false linux_use_bundled_binutils=false"
+	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
@@ -475,16 +494,16 @@ src_configure() {
 
 	local myarch="$(tc-arch)"
 	if [[ $myarch = amd64 ]] ; then
-		target_arch=x64
+		myconf_gn+=" target_cpu=\"x64\""
 		ffmpeg_target_arch=x64
 	elif [[ $myarch = x86 ]] ; then
-		target_arch=ia32
+		myconf_gn+=" target_cpu=\"x86\""
 		ffmpeg_target_arch=ia32
 	elif [[ $myarch = arm64 ]] ; then
-		target_arch=arm64
+		myconf_gn+=" target_cpu=\"arm64\""
 		ffmpeg_target_arch=arm64
 	elif [[ $myarch = arm ]] ; then
-		target_arch=arm
+		myconf_gn+=" target_cpu=\"arm\""
 		ffmpeg_target_arch=$(usex neon arm-neon arm)
 	else
 		die "Failed to determine target arch, got '$myarch'."
@@ -517,19 +536,18 @@ src_configure() {
 	# Make sure the build system will use the right tools, bug #340795.
 	tc-export AR CC CXX NM
 
-	# https://bugs.gentoo.org/588596
-	append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
-
 	# Define a custom toolchain for GN
 	myconf_gn+=" custom_toolchain=\"${FILESDIR}/toolchain:default\""
 
-	# Tools for building programs to be executed on the build system, bug #410883.
 	if tc-is-cross-compiler; then
-		export AR_host=$(tc-getBUILD_AR)
-		export CC_host=$(tc-getBUILD_CC)
-		export CXX_host=$(tc-getBUILD_CXX)
-		export NM_host=$(tc-getBUILD_NM)
+		tc-export BUILD_{AR,CC,CXX,NM}
+		myconf_gn+=" host_toolchain=\"${FILESDIR}/toolchain:host\""
+	else
+		myconf_gn+=" host_toolchain=\"${FILESDIR}/toolchain:default\""
 	fi
+
+	# https://bugs.gentoo.org/588596
+	append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
 
 	# Bug 491582.
 	export TMPDIR="${WORKDIR}/temp"
@@ -561,9 +579,12 @@ src_configure() {
 
 	touch chrome/test/data/webui/i18n_process_css_test.html || die
 
+	bootstrap_gn
+
 	einfo "Configuring Chromium..."
-	tools/gn/bootstrap/bootstrap.py -v --no-clean --gn-gen-args "${myconf_gn}" || die
-	out/Release/gn gen --args="${myconf_gn}" out/Release || die
+	set -- out/Release/gn gen --args="${myconf_gn}" out/Release
+	echo "$@"
+	"$@" || die
 }
 
 src_compile() {
