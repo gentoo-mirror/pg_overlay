@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit autotools git-r3
+inherit meson git-r3
 
 DESCRIPTION="A library for interfacing Music Player Daemon (media-sound/mpd)"
 HOMEPAGE="http://www.musicpd.org"
@@ -24,9 +24,8 @@ src_prepare() {
 }
 
 src_configure() {
-	econf \
-		$(use_enable static-libs static) \
-		$(use_enable doc documentation)
+	local mesonargs \
+		-Denable-documentation=$(usex doc true false)
 }
 
 src_install() {
