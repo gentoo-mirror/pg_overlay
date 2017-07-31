@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://git.musicpd.org/master/libmpdclient.git"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc examples static-libs"
+IUSE="doc examples static"
 
 RDEPEND=""
 DEPEND="doc? ( app-doc/doxygen )"
@@ -23,8 +23,10 @@ src_prepare() {
 }
 
 src_configure() {
-	local mesonargs \
-		-Denable-documentation=$(usex doc true false)
+	local mesonargs=(
+		-Ddocumentation=$(usex doc true false)
+		--default-library=$(usex static true false)
+	)
 	meson_src_configure
 }
 
