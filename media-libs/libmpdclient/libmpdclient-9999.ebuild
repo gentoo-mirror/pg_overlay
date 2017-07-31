@@ -24,7 +24,6 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
-		--buildtype=release
 		-Ddocumentation="$(usex doc true false)"
 		--default-library="$(usex static static shared)"
 	)
