@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-inherit qmake-utils confutils ${VCS_ECLASS}
+inherit eutils qmake-utils ${VCS_ECLASS}
 
 DESCRIPTION="QStarDict is a StarDict clone written with using Qt"
 HOMEPAGE="http://qstardict.ylsoftware.com/"
