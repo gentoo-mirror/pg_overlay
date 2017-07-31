@@ -401,14 +401,14 @@ src_configure() {
 	fi
 
 	# Ungoogled
-	myconf_gn+=" enable_iterator_debugging=false"
-	myconf_gn+=" use_gio=false"
-	myconf_gn+=" enable_hevc_demuxing=true"
-	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	if use ungoogled; then
-		myconf_gn+=" enable_one_click_signin=false"
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
+	#myconf_gn+=" enable_iterator_debugging=false"
+	#myconf_gn+=" use_gio=false"
+	#myconf_gn+=" enable_hevc_demuxing=true"
+	#myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
+	#if use ungoogled; then
+	#	myconf_gn+=" enable_one_click_signin=false"
+	#	myconf_gn+=" safe_browsing_mode=0"
+	#fi
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
