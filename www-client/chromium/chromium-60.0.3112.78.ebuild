@@ -193,7 +193,7 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux-${MY_MAJORV}.diff"
+	use vaapi && eapply "${FILESDIR}/chromium-vaapi-${MY_MAJORV}.patch"
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
