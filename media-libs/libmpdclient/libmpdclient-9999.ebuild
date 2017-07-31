@@ -25,6 +25,7 @@ src_prepare() {
 src_configure() {
 	local mesonargs \
 		-Denable-documentation=$(usex doc true false)
+	meson_src_configure
 }
 
 src_install() {
