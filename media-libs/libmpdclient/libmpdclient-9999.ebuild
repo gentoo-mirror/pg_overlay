@@ -23,9 +23,9 @@ src_prepare() {
 }
 
 src_configure() {
-	local mesonargs=(
-		-Ddocumentation=$(usex doc true false)
-		--default-library=$(usex static true false)
+	local emesonargs=(
+		-Ddocumentation="$(usex doc true false)"
+		--default-library="$(usex static true false)"
 	)
 	meson_src_configure
 }
