@@ -401,6 +401,7 @@ src_configure() {
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
+	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_rlz=false"
 	myconf_gn+=" enable_rlz_support=false"
@@ -409,9 +410,9 @@ src_configure() {
 	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
-	#if use inox; then
-	#	myconf_gn+=" safe_browsing_mode=0"
-	#fi
+	if use inox; then
+		myconf_gn+=" safe_browsing_mode=0"
+	fi
 
 	# Ungoogled
 	myconf_gn+=" enable_iterator_debugging=false"
