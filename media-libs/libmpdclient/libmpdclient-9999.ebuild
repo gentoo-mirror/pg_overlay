@@ -25,7 +25,6 @@ src_prepare() {
 src_configure() {
 	local emesonargs=(
 		--buildtype=release
-		--strip
 		-Ddocumentation="$(usex doc true false)"
 		--default-library="$(usex static static shared)"
 	)
@@ -34,6 +33,7 @@ src_configure() {
 
 src_install() {
 	default
+	meson_src_install
 	use examples && dodoc src/example.c
 	use doc || rm -rf "${ED}"/usr/share/doc/${PF}/html
 	find "${ED}" -name "*.la" -exec rm -rf {} + || die "failed to delete .la files"
