@@ -38,7 +38,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	sys-devel/flex"
 
-S=${WORKDIR}/${PN}-${MY_PV}
+S=${WORKDIR}/${PN}-${P}
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
