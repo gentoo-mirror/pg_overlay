@@ -14,11 +14,11 @@ DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/"
 
 if [[ ${PV} != *9999* ]]; then
-	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/${PN}-player/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
-	EGIT_REPO_URI="git://github.com/mpv-player/mpv.git"
+	EGIT_REPO_URI="git://github.com/${PN}-player/${PN}.git"
 	inherit git-r3
 fi
 SRC_URI+=" https://waf.io/waf-${WAF_PV}"
@@ -28,9 +28,10 @@ DOCS+=( README.md etc/{mpv,input}.conf DOCS/{client-api,interface}-changes.rst)
 LICENSE="LGPL-2.1+ GPL-2+ BSD ISC samba? ( GPL-3+ )"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
-	dvd +egl encode gbm +iconv jack jpeg lcms +libass libav libcaca libmpv +lua
-	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
-	selinux test tools +uchardet v4l vaapi vdpau wayland +X +xv zsh-completion"
+	dvd +egl encode gbm +iconv jack javascript jpeg lcms +libass libav libcaca
+	libmpv +lua luajit openal +opengl oss pulseaudio raspberry-pi rubberband
+	samba sdl selinux test tools +uchardet v4l vaapi vdpau wayland +X +xv zlib
+	zsh-completion"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
@@ -58,7 +59,6 @@ REQUIRED_USE="
 COMMON_DEPEND="
 	!libav? ( >=media-video/ffmpeg-3.2.2:0=[encode?,threads,vaapi?,vdpau?] )
 	libav? ( >=media-video/libav-12:0=[encode?,threads,vaapi?,vdpau?] )
-	sys-libs/zlib
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.0.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
@@ -75,6 +75,7 @@ COMMON_DEPEND="
 		uchardet? ( app-i18n/uchardet )
 	)
 	jack? ( virtual/jack )
+	javascript? ( >=dev-lang/mujs-1.0.0 )
 	jpeg? ( virtual/jpeg:0 )
 	lcms? ( >=media-libs/lcms-2.6:2 )
 	libass? (
@@ -90,18 +91,18 @@ COMMON_DEPEND="
 	pulseaudio? ( media-sound/pulseaudio )
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
-	samba? ( net-fs/samba[smbclient(+)] )
+	samba? ( net-fs/samba )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
 	v4l? ( media-libs/libv4l )
 	vaapi? (
 		!libav? ( >=media-video/ffmpeg-3.3:0 )
 		libav? ( >=media-video/libav-13:0 )
-		>=x11-libs/libva-1.4.0[drm?,X?,wayland?]
+		x11-libs/libva[drm?,X?,wayland?]
 	)
 	vdpau? (
 		!libav? ( >=media-video/ffmpeg-3.3:0 )
 		libav? ( >=media-video/libav-13:0 )
-		>=x11-libs/libvdpau-0.2
+		x11-libs/libvdpau
 	)
 	wayland? (
 		>=dev-libs/wayland-1.6.0
@@ -119,6 +120,7 @@ COMMON_DEPEND="
 		)
 		xv? ( x11-libs/libXv )
 	)
+	zlib? ( sys-libs/zlib )
 "
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
@@ -186,8 +188,10 @@ src_configure() {
 		$(use_enable samba libsmbclient)
 		$(use_enable lua)
 		$(usex luajit '--lua=luajit' '')
+		$(use_enable javascript)
 		$(use_enable libass)
 		$(use_enable libass libass-osd)
+		$(use_enable zlib)
 		$(use_enable encode encoding)
 		$(use_enable bluray libbluray)
 		$(use_enable dvd dvdread)
