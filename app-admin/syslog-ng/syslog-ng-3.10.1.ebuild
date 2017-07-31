@@ -9,7 +9,7 @@ MY_PV=${PV/_/}
 MY_PV_MM=$(get_version_component_range 1-2)
 DESCRIPTION="syslog replacement with advanced filtering features"
 HOMEPAGE="http://www.balabit.com/network-security/syslog-ng"
-SRC_URI="https://github.com/balabit/${PN}/archive/${P}.tar.gz"
+SRC_URI="https://github.com/balabit/${PN}/releases/download/${P}/${P}.tar.gz"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
@@ -37,8 +37,6 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	sys-devel/flex"
-
-S=${WORKDIR}/${PN}-${P}
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
