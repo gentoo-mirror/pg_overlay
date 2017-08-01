@@ -1,5 +1,5 @@
---- client_native_pixmap_dmabuf.cc	2017-07-26 02:05:19.000000000 +0700
-+++ client_native_pixmap_dmabuf.cc_new	2017-08-01 15:21:44.000000000 +0700
+--- a/ui/gfx/linux/client_native_pixmap_dmabuf.cc	2017-07-26 02:05:19.000000000 +0700
++++ b//ui/gfx/linux/client_native_pixmap_dmabuf.cc_new	2017-08-01 15:21:44.000000000 +0700
 @@ -91,18 +91,10 @@
      // associated crash keys once crbug.com/629521 is fixed.
      bool fd_valid = fcntl(dmabuf_fd_.get(), F_GETFD) != -1 ||
