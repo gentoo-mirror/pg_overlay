@@ -186,7 +186,6 @@ pkg_setup() {
 src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}/${PN}-FORTIFY_SOURCE-r1.patch"
-		"${FILESDIR}/fix_dma-buf.h.patch"
 		"${FILESDIR}/${PN}-gn-bootstrap-r8.patch"
 	)
 
