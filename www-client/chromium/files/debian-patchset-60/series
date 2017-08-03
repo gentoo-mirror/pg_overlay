@@ -14,4 +14,3 @@ system/icu.patch
 system/vpx.patch
 system/nspr.patch
 system/event.patch
-system/libxml.patch
