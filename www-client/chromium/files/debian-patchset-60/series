@@ -1,6 +1,5 @@
 gn/parallel.patch
 gn/buildflags.patch
-gn/scheduler.patch
 
 disable/promo.patch
 disable/google-api-warning.patch
