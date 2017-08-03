@@ -187,7 +187,7 @@ src_prepare() {
 	local PATCHES=(
 		"${FILESDIR}/${PN}-FORTIFY_SOURCE-r1.patch"
 		"${FILESDIR}/${PN}-gn-bootstrap-r8.patch"
-		"${FILESDIR}/${PN}-dma-buf-r2.patch"
+		"${FILESDIR}/${PN}-major-minor.patch"
 	)
 
 	default
