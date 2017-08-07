@@ -1,10 +1,10 @@
-diff -up chromium-59.0.3071.86/components/neterror/resources/sounds/button-press.mp3 chromium-59.0.3071.86/components/neterror/resources/sounds/button-press
-diff -up chromium-59.0.3071.86/components/neterror/resources/sounds/hit.mp3 chromium-59.0.3071.86/components/neterror/resources/sounds/hit
-diff -up chromium-59.0.3071.86/components/neterror/resources/sounds/score-reached.mp3 chromium-59.0.3071.86/components/neterror/resources/sounds/score-reached
-diff -up chromium-59.0.3071.86/media/base/mime_util_internal.cc.mp3 chromium-59.0.3071.86/media/base/mime_util_internal.cc
---- chromium-59.0.3071.86/media/base/mime_util_internal.cc.mp3	2017-06-05 15:03:08.000000000 -0400
-+++ chromium-59.0.3071.86/media/base/mime_util_internal.cc	2017-06-15 12:37:05.162650032 -0400
-@@ -286,10 +286,10 @@ void MimeUtil::AddSupportedMediaFormats(
+diff -up chromium-60.0.3112.78/components/neterror/resources/sounds/button-press.mp3 chromium-60.0.3112.78/components/neterror/resources/sounds/button-press
+diff -up chromium-60.0.3112.78/components/neterror/resources/sounds/hit.mp3 chromium-60.0.3112.78/components/neterror/resources/sounds/hit
+diff -up chromium-60.0.3112.78/components/neterror/resources/sounds/score-reached.mp3 chromium-60.0.3112.78/components/neterror/resources/sounds/score-reached
+diff -up chromium-60.0.3112.78/media/base/mime_util_internal.cc.mp3 chromium-60.0.3112.78/media/base/mime_util_internal.cc
+--- chromium-60.0.3112.78/media/base/mime_util_internal.cc.mp3	2017-07-25 15:04:57.000000000 -0400
++++ chromium-60.0.3112.78/media/base/mime_util_internal.cc	2017-07-31 10:57:55.054231795 -0400
+@@ -278,10 +278,10 @@ void MimeUtil::AddSupportedMediaFormats(
    CodecSet webm_codecs(webm_audio_codecs);
    webm_codecs.insert(webm_video_codecs.begin(), webm_video_codecs.end());
  
@@ -16,7 +16,7 @@ diff -up chromium-59.0.3071.86/media/base/mime_util_internal.cc.mp3 chromium-59.
    CodecSet aac;
    aac.insert(MPEG2_AAC);
    aac.insert(MPEG4_AAC);
-@@ -333,10 +333,10 @@ void MimeUtil::AddSupportedMediaFormats(
+@@ -325,10 +325,10 @@ void MimeUtil::AddSupportedMediaFormats(
    AddContainerWithCodecs("application/ogg", ogg_codecs, false);
    AddContainerWithCodecs("audio/flac", implicit_codec, false);
  
@@ -28,7 +28,7 @@ diff -up chromium-59.0.3071.86/media/base/mime_util_internal.cc.mp3 chromium-59.
    AddContainerWithCodecs("audio/aac", implicit_codec, true);  // AAC / ADTS.
    AddContainerWithCodecs("audio/mp4", mp4_audio_codecs, true);
    DCHECK(!mp4_video_codecs.empty());
-@@ -789,7 +789,6 @@ bool MimeUtil::IsCodecProprietary(Codec
+@@ -928,7 +928,6 @@ bool MimeUtil::IsCodecProprietary(Codec
      case INVALID_CODEC:
      case AC3:
      case EAC3:
@@ -36,7 +36,7 @@ diff -up chromium-59.0.3071.86/media/base/mime_util_internal.cc.mp3 chromium-59.
      case MPEG2_AAC:
      case MPEG4_AAC:
      case H264:
-@@ -797,6 +796,7 @@ bool MimeUtil::IsCodecProprietary(Codec
+@@ -936,6 +935,7 @@ bool MimeUtil::IsCodecProprietary(Codec
      case DOLBY_VISION:
        return true;
  
@@ -44,42 +44,44 @@ diff -up chromium-59.0.3071.86/media/base/mime_util_internal.cc.mp3 chromium-59.
      case PCM:
      case VORBIS:
      case OPUS:
-diff -up chromium-59.0.3071.86/media/BUILD.gn.mp3 chromium-59.0.3071.86/media/BUILD.gn
---- chromium-59.0.3071.86/media/BUILD.gn.mp3	2017-06-15 12:48:07.277772389 -0400
-+++ chromium-59.0.3071.86/media/BUILD.gn	2017-06-15 12:50:34.342911710 -0400
-@@ -229,6 +229,14 @@ component("media") {
-     "formats/webm/webm_video_client.h",
-     "formats/webm/webm_webvtt_parser.cc",
-     "formats/webm/webm_webvtt_parser.h",
-+    "formats/mpeg/adts_constants.cc",
-+    "formats/mpeg/adts_constants.h",
-+    "formats/mpeg/adts_stream_parser.cc",
-+    "formats/mpeg/adts_stream_parser.h",
-+    "formats/mpeg/mpeg1_audio_stream_parser.cc",
-+    "formats/mpeg/mpeg1_audio_stream_parser.h",
-+    "formats/mpeg/mpeg_audio_stream_parser_base.cc",
-+    "formats/mpeg/mpeg_audio_stream_parser_base.h",
-     "muxers/webm_muxer.cc",
-     "muxers/webm_muxer.h",
-     "renderers/audio_renderer_impl.cc",
-@@ -442,14 +450,6 @@ component("media") {
-       "formats/mp4/sample_to_group_iterator.h",
-       "formats/mp4/track_run_iterator.cc",
-       "formats/mp4/track_run_iterator.h",
--      "formats/mpeg/adts_constants.cc",
--      "formats/mpeg/adts_constants.h",
--      "formats/mpeg/adts_stream_parser.cc",
--      "formats/mpeg/adts_stream_parser.h",
--      "formats/mpeg/mpeg1_audio_stream_parser.cc",
--      "formats/mpeg/mpeg1_audio_stream_parser.h",
--      "formats/mpeg/mpeg_audio_stream_parser_base.cc",
--      "formats/mpeg/mpeg_audio_stream_parser_base.h",
+diff -up chromium-60.0.3112.78/media/BUILD.gn.mp3 chromium-60.0.3112.78/media/BUILD.gn
+diff -up chromium-60.0.3112.78/media/formats/BUILD.gn.mp3 chromium-60.0.3112.78/media/formats/BUILD.gn
+--- chromium-60.0.3112.78/media/formats/BUILD.gn.mp3	2017-07-31 11:00:08.486638957 -0400
++++ chromium-60.0.3112.78/media/formats/BUILD.gn	2017-07-31 11:01:17.867290730 -0400
+@@ -12,6 +12,14 @@ source_set("formats") {
+     "ac3/ac3_util.h",
+     "common/offset_byte_queue.cc",
+     "common/offset_byte_queue.h",
++    "mpeg/adts_constants.cc",
++    "mpeg/adts_constants.h",
++    "mpeg/adts_stream_parser.cc",
++    "mpeg/adts_stream_parser.h",
++    "mpeg/mpeg1_audio_stream_parser.cc",
++    "mpeg/mpeg1_audio_stream_parser.h",
++    "mpeg/mpeg_audio_stream_parser_base.cc",
++    "mpeg/mpeg_audio_stream_parser_base.h",
+     "webm/webm_audio_client.cc",
+     "webm/webm_audio_client.h",
+     "webm/webm_cluster_parser.cc",
+@@ -76,14 +84,6 @@ source_set("formats") {
+       "mp4/sample_to_group_iterator.h",
+       "mp4/track_run_iterator.cc",
+       "mp4/track_run_iterator.h",
+-      "mpeg/adts_constants.cc",
+-      "mpeg/adts_constants.h",
+-      "mpeg/adts_stream_parser.cc",
+-      "mpeg/adts_stream_parser.h",
+-      "mpeg/mpeg1_audio_stream_parser.cc",
+-      "mpeg/mpeg1_audio_stream_parser.h",
+-      "mpeg/mpeg_audio_stream_parser_base.cc",
+-      "mpeg/mpeg_audio_stream_parser_base.h",
      ]
-     if (enable_mse_mpeg2ts_stream_parser) {
-       sources += [
-diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h.mp3 chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
---- chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h.mp3	2017-06-16 14:34:19.233333696 -0400
-+++ chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h	2017-06-16 14:35:36.235836034 -0400
+   }
+ 
+diff -up chromium-60.0.3112.78/third_party/catapult/third_party/gsutil/gslib/tests/test_data/test.mp3 chromium-60.0.3112.78/third_party/catapult/third_party/gsutil/gslib/tests/test_data/test
+diff -up chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h.mp3 chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h
+--- chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h.mp3	2017-07-31 10:18:49.000000000 -0400
++++ chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm64/config.h	2017-07-31 10:57:55.056231757 -0400
 @@ -1,7 +1,7 @@
  /* Automatically generated by configure - do not modify! */
  #ifndef FFMPEG_CONFIG_H
@@ -136,9 +138,9 @@ diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux
  #define CONFIG_MPEGVIDEO_PARSER 0
  #define CONFIG_OPUS_PARSER 1
  #define CONFIG_PNG_PARSER 0
-diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h.mp3 chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h
---- chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h.mp3	2017-06-16 14:33:03.565804834 -0400
-+++ chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h	2017-06-16 14:34:00.538697021 -0400
+diff -up chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h.mp3 chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h
+--- chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h.mp3	2017-07-31 10:18:49.000000000 -0400
++++ chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm/config.h	2017-07-31 10:57:55.057231738 -0400
 @@ -1,7 +1,7 @@
  /* Automatically generated by configure - do not modify! */
  #ifndef FFMPEG_CONFIG_H
@@ -195,9 +197,9 @@ diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux
  #define CONFIG_MPEGVIDEO_PARSER 0
  #define CONFIG_OPUS_PARSER 1
  #define CONFIG_PNG_PARSER 0
-diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h.mp3 chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h
---- chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h.mp3	2017-06-16 14:35:50.558558013 -0400
-+++ chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h	2017-06-16 14:36:34.140710462 -0400
+diff -up chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h.mp3 chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h
+--- chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h.mp3	2017-07-31 10:18:49.000000000 -0400
++++ chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/arm-neon/config.h	2017-07-31 10:57:55.106230806 -0400
 @@ -1,7 +1,7 @@
  /* Automatically generated by configure - do not modify! */
  #ifndef FFMPEG_CONFIG_H
@@ -254,9 +256,9 @@ diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux
  #define CONFIG_MPEGVIDEO_PARSER 0
  #define CONFIG_OPUS_PARSER 1
  #define CONFIG_PNG_PARSER 0
-diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h.mp3 chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h
---- chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h.mp3	2017-06-16 14:31:10.694999531 -0400
-+++ chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h	2017-06-16 14:32:48.921089988 -0400
+diff -up chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h.mp3 chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h
+--- chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h.mp3	2017-07-31 10:18:49.000000000 -0400
++++ chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/ia32/config.h	2017-07-31 10:57:55.107230787 -0400
 @@ -1,7 +1,7 @@
  /* Automatically generated by configure - do not modify! */
  #ifndef FFMPEG_CONFIG_H
@@ -313,9 +315,9 @@ diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux
  #define CONFIG_MPEGVIDEO_PARSER 0
  #define CONFIG_OPUS_PARSER 1
  #define CONFIG_PNG_PARSER 0
-diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h.mp3 chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h
---- chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h.mp3	2017-06-16 14:27:17.782528334 -0400
-+++ chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h	2017-06-16 14:29:24.962054946 -0400
+diff -up chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h.mp3 chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h
+--- chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h.mp3	2017-07-31 10:18:49.000000000 -0400
++++ chromium-60.0.3112.78/third_party/ffmpeg/chromium/config/Chromium/linux/x64/config.h	2017-07-31 10:57:55.108230768 -0400
 @@ -1,7 +1,7 @@
  /* Automatically generated by configure - do not modify! */
  #ifndef FFMPEG_CONFIG_H
@@ -372,9 +374,9 @@ diff -up chromium-59.0.3071.86/third_party/ffmpeg/chromium/config/Chromium/linux
  #define CONFIG_MPEGVIDEO_PARSER 0
  #define CONFIG_OPUS_PARSER 1
  #define CONFIG_PNG_PARSER 0
-diff -up chromium-59.0.3071.86/third_party/ffmpeg/ffmpeg_generated.gni.mp3 chromium-59.0.3071.86/third_party/ffmpeg/ffmpeg_generated.gni
---- chromium-59.0.3071.86/third_party/ffmpeg/ffmpeg_generated.gni.mp3	2017-06-08 11:40:39.000000000 -0400
-+++ chromium-59.0.3071.86/third_party/ffmpeg/ffmpeg_generated.gni	2017-06-15 12:37:05.163650012 -0400
+diff -up chromium-60.0.3112.78/third_party/ffmpeg/ffmpeg_generated.gni.mp3 chromium-60.0.3112.78/third_party/ffmpeg/ffmpeg_generated.gni
+--- chromium-60.0.3112.78/third_party/ffmpeg/ffmpeg_generated.gni.mp3	2017-07-31 10:18:46.000000000 -0400
++++ chromium-60.0.3112.78/third_party/ffmpeg/ffmpeg_generated.gni	2017-07-31 10:57:55.109230749 -0400
 @@ -177,19 +177,12 @@ if ((is_linux && current_cpu == "arm" &&
    ]
  }
@@ -462,9 +464,9 @@ diff -up chromium-59.0.3071.86/third_party/ffmpeg/ffmpeg_generated.gni.mp3 chrom
  if ((is_linux && current_cpu == "arm" && arm_use_neon) || (is_linux && current_cpu == "arm")) {
    ffmpeg_c_sources += [
      "libavcodec/arm/h264pred_init_arm.c",
-diff -up chromium-59.0.3071.86/third_party/ffmpeg/libavcodec/sbrdsp.c.mp3 chromium-59.0.3071.86/third_party/ffmpeg/libavcodec/sbrdsp.c
---- chromium-59.0.3071.86/third_party/ffmpeg/libavcodec/sbrdsp.c.mp3	2017-06-08 11:40:41.000000000 -0400
-+++ chromium-59.0.3071.86/third_party/ffmpeg/libavcodec/sbrdsp.c	2017-06-15 12:37:05.163650012 -0400
+diff -up chromium-60.0.3112.78/third_party/ffmpeg/libavcodec/sbrdsp.c.mp3 chromium-60.0.3112.78/third_party/ffmpeg/libavcodec/sbrdsp.c
+--- chromium-60.0.3112.78/third_party/ffmpeg/libavcodec/sbrdsp.c.mp3	2017-07-31 10:18:48.000000000 -0400
++++ chromium-60.0.3112.78/third_party/ffmpeg/libavcodec/sbrdsp.c	2017-07-31 10:57:55.110230730 -0400
 @@ -23,6 +23,7 @@
  #define USE_FIXED 0
  
@@ -473,5 +475,5 @@ diff -up chromium-59.0.3071.86/third_party/ffmpeg/libavcodec/sbrdsp.c.mp3 chromi
  #include "config.h"
  #include "libavutil/attributes.h"
  #include "libavutil/intfloat.h"
-diff -up chromium-59.0.3071.86/third_party/webrtc/examples/objc/AppRTCMobile/ios/resources/mozart.mp3 chromium-59.0.3071.86/third_party/webrtc/examples/objc/AppRTCMobile/ios/resources/mozart
-diff -up chromium-59.0.3071.86/tools/android/audio_focus_grabber/java/res/raw/ping.mp3 chromium-59.0.3071.86/tools/android/audio_focus_grabber/java/res/raw/ping
+diff -up chromium-60.0.3112.78/third_party/webrtc/examples/objc/AppRTCMobile/ios/resources/mozart.mp3 chromium-60.0.3112.78/third_party/webrtc/examples/objc/AppRTCMobile/ios/resources/mozart
+diff -up chromium-60.0.3112.78/tools/android/audio_focus_grabber/java/res/raw/ping.mp3 chromium-60.0.3112.78/tools/android/audio_focus_grabber/java/res/raw/ping
