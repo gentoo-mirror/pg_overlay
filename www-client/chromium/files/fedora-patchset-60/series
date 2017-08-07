@@ -20,5 +20,4 @@ chromium-60.0.3112.78-no-libpng-prefix.patch
 chromium-60.0.3112.78-jpeg-nomangle.patch
 chromium-60.0.3112.78-no-zlib-mangle.patch
 
-chromium-46.0.2490.86-use_system_opus.patch
 chromium-58.0.3029.81-use_system_harfbuzz.patch
