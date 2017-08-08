@@ -20,12 +20,12 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-54.0-patches-04"
+PATCH="${PN}-55.0-patches-07"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_JIT=1
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.53 pax-utils fdo-mime autotools virtualx mozlinguas-v2
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.55 pax-utils xdg-utils autotools virtualx mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
@@ -46,15 +46,15 @@ ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
 	jack? ( virtual/jack )
-	>=dev-libs/nss-3.30.2
-	>=dev-libs/nspr-4.14
+	>=dev-libs/nss-3.32
+	>=dev-libs/nspr-4.16
 	selinux? ( sec-policy/selinux-mozilla )
 	kde? ( kde-apps/kdialog:5
 		kde-misc/kmozillahelper )"
 
 DEPEND="${RDEPEND}
 	pgo? ( >=sys-devel/gcc-4.5 )
-	>=dev-lang/rust-1.15.1
+	>=virtual/rust-1.15.1
 	amd64? ( ${ASM_DEPEND} virtual/opengl )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
@@ -171,6 +171,9 @@ src_prepare() {
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
@@ -179,10 +182,6 @@ src_prepare() {
 	# Must run autoconf in js/src
 	cd "${S}"/js/src || die
 	eautoconf old-configure.in
-
-	# Need to update jemalloc's configure
-	cd "${S}"/memory/jemalloc/src || die
-	WANT_AUTOCONF= eautoconf
 }
 
 src_configure() {
@@ -438,7 +437,7 @@ pkg_preinst() {
 
 pkg_postinst() {
 	# Update mimedb for the new .desktop file
-	fdo-mime_desktop_database_update
+	xdg_desktop_database_update
 	gnome2_icon_cache_update
 
 	if ! use gmp-autoupdate ; then
