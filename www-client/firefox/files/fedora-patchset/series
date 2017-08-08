@@ -2,7 +2,6 @@ firefox-build-prbool.patch
 firefox-enable-addons.patch
 mozilla-1170092.patch
 mozilla-1005640-accept-lang.patch
-firefox-nss-version.patch
 
 mozilla-1253216.patch
 mozilla-1196777.patch
