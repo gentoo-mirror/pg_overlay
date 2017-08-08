@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  a15b45ae85ab486503a1a09252734b80fe782998
+# Parent  172cd661ceed38b3161c6246f6729f4d8370dce3
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -9,7 +9,7 @@ Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=140751
 diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
 --- a/modules/libpref/Preferences.cpp
 +++ b/modules/libpref/Preferences.cpp
-@@ -31,16 +31,17 @@
+@@ -32,16 +32,17 @@
  #include "nsIZipReader.h"
  #include "nsPrefBranch.h"
  #include "nsXPIDLString.h"
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #include "prefread.h"
  #include "prefapi_private_data.h"
  
-@@ -1199,16 +1200,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
+@@ -1219,16 +1220,34 @@ pref_LoadPrefsInDir(nsIFile* aDir, char 
  
  static nsresult pref_LoadPrefsInDirList(const char *listId)
  {
@@ -62,7 +62,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
      return NS_OK;
  
    bool hasMore;
-@@ -1224,17 +1243,17 @@ static nsresult pref_LoadPrefsInDirList(
+@@ -1244,17 +1263,17 @@ static nsresult pref_LoadPrefsInDirList(
  
      nsAutoCString leaf;
      path->GetNativeLeafName(leaf);
@@ -81,7 +81,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  {
    nsZipItemPtr<char> manifest(jarReader, name, true);
    NS_ENSURE_TRUE(manifest.Buffer(), NS_ERROR_NOT_AVAILABLE);
-@@ -1328,24 +1347,36 @@ static nsresult pref_InitInitialObjects(
+@@ -1348,24 +1367,36 @@ static nsresult pref_InitInitialObjects(
    /* these pref file names should not be used: we process them after all other application pref files for backwards compatibility */
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -121,17 +121,17 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
 diff --git a/modules/libpref/moz.build b/modules/libpref/moz.build
 --- a/modules/libpref/moz.build
 +++ b/modules/libpref/moz.build
-@@ -31,16 +31,20 @@ UNIFIED_SOURCES += [
+@@ -33,16 +33,20 @@ EXPORTS.mozilla += [
+ UNIFIED_SOURCES += [
+     'nsPrefBranch.cpp',
+     'nsPrefsFactory.cpp',
+     'prefapi.cpp',
+     'Preferences.cpp',
      'prefread.cpp',
  ]
  
- # prefapi.cpp cannot be built in unified mode because it uses plarena.h
- SOURCES += [
-     'prefapi.cpp',
- ]
- 
 +LOCAL_INCLUDES += [
-+    '/toolkit/xre'
++     '/toolkit/xre'
 +]
 +
  include('/ipc/chromium/chromium-config.mozbuild')
@@ -140,12 +140,12 @@ diff --git a/modules/libpref/moz.build b/modules/libpref/moz.build
  
  DEFINES['OS_ARCH'] = CONFIG['OS_ARCH']
  DEFINES['MOZ_WIDGET_TOOLKIT'] = CONFIG['MOZ_WIDGET_TOOLKIT']
- 
- FINAL_TARGET_PP_FILES += [
+ if CONFIG['MOZ_ENABLE_WEBRENDER']:
+     DEFINES['MOZ_ENABLE_WEBRENDER'] = True
 diff --git a/python/mozbuild/mozpack/chrome/flags.py b/python/mozbuild/mozpack/chrome/flags.py
 --- a/python/mozbuild/mozpack/chrome/flags.py
 +++ b/python/mozbuild/mozpack/chrome/flags.py
-@@ -211,16 +211,17 @@ class Flags(OrderedDict):
+@@ -220,16 +220,17 @@ class Flags(OrderedDict):
          'contentaccessible': Flag,
          'os': StringFlag,
          'osversion': VersionFlag,
@@ -187,9 +187,9 @@ diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpac
 diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloads/moz.build
 --- a/toolkit/components/downloads/moz.build
 +++ b/toolkit/components/downloads/moz.build
-@@ -49,16 +49,17 @@ if CONFIG['OS_ARCH'] == 'WINNT':
-         'nsDownloadScanner.cpp',
-     ]
+@@ -37,16 +37,17 @@ UNIFIED_SOURCES += [
+     'nsDownloadManager.cpp'
+ ]
  
  FINAL_LIBRARY = 'xul'
  
@@ -205,78 +205,10 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
  
  CXXFLAGS += CONFIG['TK_CFLAGS']
  
-diff --git a/toolkit/components/downloads/nsDownloadManager.cpp b/toolkit/components/downloads/nsDownloadManager.cpp
---- a/toolkit/components/downloads/nsDownloadManager.cpp
-+++ b/toolkit/components/downloads/nsDownloadManager.cpp
-@@ -52,16 +52,20 @@
- #ifdef XP_WIN
- #include <shlobj.h>
- #include "nsWindowsHelpers.h"
- #ifdef DOWNLOAD_SCANNER
- #include "nsDownloadScanner.h"
- #endif
- #endif
- 
-+#if defined(XP_UNIX) && !defined(XP_MACOSX)
-+#include "nsKDEUtils.h"
-+#endif
-+
- #ifdef XP_MACOSX
- #include <CoreFoundation/CoreFoundation.h>
- #endif
- 
- #ifdef MOZ_WIDGET_ANDROID
- #include "FennecJNIWrappers.h"
- #endif
- 
-@@ -2724,16 +2728,25 @@ nsDownload::SetState(DownloadState aStat
-       nsCOMPtr<nsIPrefBranch> pref(do_GetService(NS_PREFSERVICE_CONTRACTID));
- 
-       // Master pref to control this function.
-       bool showTaskbarAlert = true;
-       if (pref)
-         pref->GetBoolPref(PREF_BDM_SHOWALERTONCOMPLETE, &showTaskbarAlert);
- 
-       if (showTaskbarAlert) {
-+        if( nsKDEUtils::kdeSupport()) {
-+          nsTArray<nsCString> command;
-+          command.AppendElement( NS_LITERAL_CSTRING( "DOWNLOADFINISHED" ));
-+          nsAutoString displayName;
-+          GetDisplayName( displayName );
-+          command.AppendElement( nsAutoCString( ToNewUTF8String( displayName )));
-+          nsKDEUtils::command( command );
-+        } else {
-+        // begin non-KDE block
-         int32_t alertInterval = 2000;
-         if (pref)
-           pref->GetIntPref(PREF_BDM_SHOWALERTINTERVAL, &alertInterval);
- 
-         int64_t alertIntervalUSec = alertInterval * PR_USEC_PER_MSEC;
-         int64_t goat = PR_Now() - mStartTime;
-         showTaskbarAlert = goat > alertIntervalUSec;
- 
-@@ -2765,16 +2778,17 @@ nsDownload::SetState(DownloadState aStat
-                   message, !removeWhenDone,
-                   mPrivate ? NS_LITERAL_STRING("private") : NS_LITERAL_STRING("non-private"),
-                   mDownloadManager, EmptyString(), NS_LITERAL_STRING("auto"),
-                   EmptyString(), EmptyString(), nullptr, mPrivate,
-                   false /* requireInteraction */);
-             }
-         }
-       }
-+      }
- 
- #if defined(XP_WIN) || defined(XP_MACOSX) || defined(MOZ_WIDGET_ANDROID) || defined(MOZ_WIDGET_GTK)
-       nsCOMPtr<nsIFileURL> fileURL = do_QueryInterface(mTarget);
-       nsCOMPtr<nsIFile> file;
-       nsAutoString path;
- 
-       if (fileURL &&
-           NS_SUCCEEDED(fileURL->GetFile(getter_AddRefs(file))) &&
 diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
 --- a/toolkit/content/jar.mn
 +++ b/toolkit/content/jar.mn
-@@ -73,29 +73,33 @@ toolkit.jar:
+@@ -75,29 +75,33 @@ toolkit.jar:
     content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
     content/global/bindings/datekeeper.js       (widgets/datekeeper.js)
     content/global/bindings/datepicker.js       (widgets/datepicker.js)
@@ -774,7 +706,7 @@ diff --git a/toolkit/content/widgets/preferences-kde.xml b/toolkit/content/widge
 new file mode 100644
 --- /dev/null
 +++ b/toolkit/content/widgets/preferences-kde.xml
-@@ -0,0 +1,1391 @@
+@@ -0,0 +1,1380 @@
 +<?xml version="1.0"?>
 +
 +<!DOCTYPE bindings [
@@ -904,7 +836,7 @@ new file mode 100644
 +          return;
 +
 +        this.preferences.rootBranchInternal
-+            .addObserver(this.name, this.preferences, false);
++            .addObserver(this.name, this.preferences);
 +        // In non-instant apply mode, we must try and use the last saved state
 +        // from any previous opens of a child dialog instead of the value from
 +        // preferences, to pick up any edits a user may have made.
@@ -958,7 +890,7 @@ new file mode 100644
 +              .removeObserver(this.name, this.preferences);
 +          this.setAttribute("name", val);
 +          this.preferences.rootBranchInternal
-+              .addObserver(val, this.preferences, false);
++              .addObserver(val, this.preferences);
 +
 +          return val;
 +        </setter>
@@ -1114,13 +1046,9 @@ new file mode 100644
 +                         .data;
 +            case "string":
 +            case "unichar":
-+              return this._branch
-+                         .getComplexValue(this.name, Components.interfaces.nsISupportsString)
-+                         .data;
++              return this._branch.getStringPref(this.name);
 +            case "fontname":
-+              var family = this._branch
-+                               .getComplexValue(this.name, Components.interfaces.nsISupportsString)
-+                               .data;
++              var family = this._branch.getStringPref(this.name);
 +              var fontEnumerator = Components.classes["@mozilla.org/gfx/fontenumerator;1"]
 +                                             .createInstance(Components.interfaces.nsIFontEnumerator);
 +              return fontEnumerator.getStandardFamilyName(family);
@@ -1165,11 +1093,7 @@ new file mode 100644
 +          case "string":
 +          case "unichar":
 +          case "fontname":
-+            var iss = Components.classes["@mozilla.org/supports-string;1"]
-+                                .createInstance(Components.interfaces.nsISupportsString);
-+            iss.data = val;
-+            this.preferences.rootBranch
-+                .setComplexValue(this.name, Components.interfaces.nsISupportsString, iss);
++            this.preferences.rootBranch.setStringPref(this.name, val);
 +            break;
 +          case "file":
 +            var lf;
@@ -1657,11 +1581,8 @@ new file mode 100644
 +        <![CDATA[
 +          var psvc = Components.classes["@mozilla.org/preferences-service;1"]
 +                               .getService(Components.interfaces.nsIPrefBranch);
-+          var animate = /Mac/.test(navigator.platform);
-+          try {
-+            animate = psvc.getBoolPref("browser.preferences.animateFadeIn");
-+          } catch (e) { }
-+          return animate;
++          return psvc.getBoolPref("browser.preferences.animateFadeIn",
++                                  /Mac/.test(navigator.platform));
 +        ]]>
 +        </getter>
 +      </property>
@@ -2169,7 +2090,7 @@ new file mode 100644
 diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downloads/nsHelperAppDlg.js
 --- a/toolkit/mozapps/downloads/nsHelperAppDlg.js
 +++ b/toolkit/mozapps/downloads/nsHelperAppDlg.js
-@@ -629,17 +629,17 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -625,17 +625,17 @@ nsUnknownContentTypeDialog.prototype = {
        else
          typeString = mimeInfo.MIMEType;
      }
@@ -2188,7 +2109,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
    },
  
    // Returns true if opening the default application makes sense.
-@@ -803,17 +803,17 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -799,17 +799,17 @@ nsUnknownContentTypeDialog.prototype = {
        switch (this.dialogElement("openHandler").selectedIndex) {
        case 0:
          // No app need be specified in this case.
@@ -2207,7 +2128,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
      this.mDialog.document.documentElement.getButton("accept").disabled = !ok;
    },
  
-@@ -1070,30 +1070,56 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -1066,30 +1066,56 @@ nsUnknownContentTypeDialog.prototype = {
            params.handlerApp.executable &&
            params.handlerApp.executable.isFile()) {
          // Remember the file they chose to run.
@@ -2374,7 +2295,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -53,17 +53,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+@@ -61,17 +61,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
          '../components/printingui/mac',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
@@ -2819,7 +2740,7 @@ diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
          'android/nsExternalSharingAppService.cpp',
          'android/nsExternalURLHandlerService.cpp',
          'android/nsMIMEInfoAndroid.cpp',
-@@ -123,16 +125,17 @@ include('/ipc/chromium/chromium-config.m
+@@ -125,16 +127,17 @@ include('/ipc/chromium/chromium-config.m
  
  FINAL_LIBRARY = 'xul'
  
@@ -3178,7 +3099,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  #include "nsXPIDLString.h"
  #include "nsIURL.h"
  #include "nsIFileStreams.h"
-@@ -1147,26 +1147,26 @@ nsresult nsOSHelperAppService::OSProtoco
+@@ -1143,26 +1143,26 @@ nsresult nsOSHelperAppService::OSProtoco
      ContentAction::Action::defaultActionForScheme(QString(aProtocolScheme) + ':');
  
    if (action.isValid())
@@ -3207,7 +3128,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
  nsresult nsOSHelperAppService::GetFileTokenForPath(const char16_t * platformAppPath, nsIFile ** aFile)
  {
-@@ -1253,17 +1253,17 @@ nsOSHelperAppService::GetFromExtension(c
+@@ -1249,17 +1249,17 @@ nsOSHelperAppService::GetFromExtension(c
                                           mime_types_description,
                                           true);
  
@@ -3226,7 +3147,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
      rv = LookUpTypeAndDescription(NS_ConvertUTF8toUTF16(aFileExt),
                                    majorType,
-@@ -1374,17 +1374,17 @@ nsOSHelperAppService::GetFromType(const 
+@@ -1370,17 +1370,17 @@ nsOSHelperAppService::GetFromType(const 
    nsAutoString extensions, mime_types_description;
    LookUpExtensionsAndDescription(majorType,
                                   minorType,
@@ -3248,7 +3169,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
 diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
 --- a/widget/gtk/moz.build
 +++ b/widget/gtk/moz.build
-@@ -101,16 +101,17 @@ else:
+@@ -109,16 +109,17 @@ else:
  include('/ipc/chromium/chromium-config.mozbuild')
  
  FINAL_LIBRARY = 'xul'
@@ -3259,13 +3180,13 @@ diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
      '/other-licenses/atk-1.0',
 +    '/toolkit/xre',
      '/widget',
+     '/widget/headless',
  ]
  
  if CONFIG['MOZ_X11']:
      LOCAL_INCLUDES += [
          '/widget/x11',
      ]
- 
 diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
 --- a/widget/gtk/nsFilePicker.cpp
 +++ b/widget/gtk/nsFilePicker.cpp
@@ -3726,7 +3647,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        NS_ConvertASCIItoUTF16 wtoken(token);
  
        if (CheckStringFlag(kApplication, wtoken, appID, stApp) ||
-           CheckStringFlag(kOs, wtoken, osTarget, stOs) ||
+           CheckOsFlag(kOs, wtoken, osTarget, stOs) ||
            CheckStringFlag(kABI, wtoken, abi, stABI) ||
 +          CheckStringFlag(kDesktop, wtoken, desktop, stDesktop) ||
            CheckStringFlag(kProcess, wtoken, process, stProcess) ||
@@ -3737,7 +3658,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        }
  
  #if defined(MOZ_WIDGET_ANDROID)
-@@ -734,16 +743,17 @@ ParseManifest(NSLocationType aType, File
+@@ -729,16 +738,17 @@ ParseManifest(NSLocationType aType, File
      }
  
      if (!ok ||
@@ -3758,7 +3679,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
 diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
 --- a/xpcom/components/moz.build
 +++ b/xpcom/components/moz.build
-@@ -50,12 +50,13 @@ FINAL_LIBRARY = 'xul'
+@@ -44,12 +44,13 @@ FINAL_LIBRARY = 'xul'
  LOCAL_INCLUDES += [
      '!..',
      '../base',
@@ -3793,7 +3714,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "prmem.h"
  #include "plbase64.h"
  
-@@ -1948,59 +1949,74 @@ nsLocalFile::SetPersistentDescriptor(con
+@@ -1941,59 +1942,74 @@ nsLocalFile::SetPersistentDescriptor(con
    return InitWithNativePath(aPersistentDescriptor);
  #endif
  }
