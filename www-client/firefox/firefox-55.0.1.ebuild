@@ -171,6 +171,9 @@ src_prepare() {
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
+	# Debian patches
+	for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
