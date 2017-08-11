@@ -1,0 +1,49 @@
+From: Mike Hommey <mh@glandium.org>
+Date: Wed, 9 Aug 2017 18:37:10 +0900
+Subject: Bug 1388681 - Disable -Wformat-security where -Wformat is disabled
+
+---
+ media/mtransport/third_party/nICEr/nicer.gyp       | 2 ++
+ media/mtransport/third_party/nrappkit/nrappkit.gyp | 2 ++
+ 2 files changed, 4 insertions(+)
+
+diff --git a/media/mtransport/third_party/nICEr/nicer.gyp b/media/mtransport/third_party/nICEr/nicer.gyp
+index f11aec4a93f7..84628de2d78f 100644
+--- a/media/mtransport/third_party/nICEr/nicer.gyp
++++ b/media/mtransport/third_party/nICEr/nicer.gyp
+@@ -164,6 +164,7 @@
+                     '-Wno-strict-prototypes',
+                     '-Wmissing-prototypes',
+                     '-Wno-format',
++                    '-Wno-format-security',
+                  ],
+                  'defines' : [
+                      'HAVE_LIBM=1',
+@@ -212,6 +213,7 @@
+                     '-Wno-strict-prototypes',
+                     '-Wmissing-prototypes',
+                     '-Wno-format',
++                    '-Wno-format-security',
+                  ],
+                  'defines' : [
+                      'LINUX',
+diff --git a/media/mtransport/third_party/nrappkit/nrappkit.gyp b/media/mtransport/third_party/nrappkit/nrappkit.gyp
+index f67f3bb8ccaa..614a6c7ac017 100644
+--- a/media/mtransport/third_party/nrappkit/nrappkit.gyp
++++ b/media/mtransport/third_party/nrappkit/nrappkit.gyp
+@@ -160,6 +160,7 @@
+                     '-Wno-strict-prototypes',
+                     '-Wmissing-prototypes',
+                     '-Wno-format',
++                    '-Wno-format-security',
+                  ],
+                  'defines' : [
+                      'HAVE_LIBM=1',
+@@ -207,6 +208,7 @@
+                      '-Wno-strict-prototypes',
+                      '-Wmissing-prototypes',
+                      '-Wno-format',
++                     '-Wno-format-security',
+                  ],
+                  'defines' : [
+                      'LINUX',
