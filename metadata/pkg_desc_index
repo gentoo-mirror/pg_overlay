@@ -7,8 +7,6 @@ app-misc/ca-certificates 20161130.3.30.1 20161130.3.30.2: Common CA Certificates
 app-misc/ddcutil 0.7.3 0.8.4: Program for querying and changing monitor settings
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-office/libreoffice 5.4.0.3: A full office productivity suite
-app-office/libreoffice-l10n 5.4.0.3: Translations for the Libreoffice suite
 app-portage/gentoolkit 0.4.0 9999: Collection of administration scripts for Gentoo
 app-text/enchant 1.6.1: Spellchecker wrapping library
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
@@ -82,7 +80,7 @@ sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 4.12.0_rc1 4.12.0_rc2 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 60.0.3112.90 60.0.3112.97: Open-source version of Google Chrome web browser
+www-client/chromium 60.0.3112.90 60.0.3112.97 60.0.3112.101: Open-source version of Google Chrome web browser
 www-client/firefox 55.0 55.0.1: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
