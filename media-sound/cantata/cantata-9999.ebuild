@@ -60,7 +60,7 @@ DEPEND="${RDEPEND}
 # cantata has no tests
 RESTRICT="test"
 
-PATCHES=( "${FILESDIR}/${P}-headers.patch" )
+PATCHES=( "${FILESDIR}/${PN}-2.1.0-headers.patch" )
 
 src_prepare() {
 	remove_locale() {
