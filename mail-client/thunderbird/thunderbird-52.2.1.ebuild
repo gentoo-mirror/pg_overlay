@@ -52,7 +52,7 @@ CDEPEND="
 	kde? ( kde-apps/kdialog:5
 		kde-misc/kmozillahelper )"
 
-DEPEND="rust? ( dev-lang/rust )
+DEPEND="rust? ( virtual/rust )
 	amd64? ( ${ASM_DEPEND}
 		virtual/opengl )
 	x86? ( ${ASM_DEPEND}
