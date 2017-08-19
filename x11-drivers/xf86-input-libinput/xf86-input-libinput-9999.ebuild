@@ -5,8 +5,6 @@ EAPI=5
 
 inherit linux-info xorg-2
 
-EGIT_REPO_URI="git://anongit.freedesktop.org/git/wayland/libinput"
-
 DESCRIPTION="X.org input driver based on libinput"
 
 KEYWORDS=""
