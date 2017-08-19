@@ -7,8 +7,6 @@ inherit linux-info xorg-2
 
 DESCRIPTION="X.org input driver based on libinput"
 
-EGIT_REPO_URI="git://anongit.freedesktop.org/xorg/driver/xf86-input-libinput.git"
-
 KEYWORDS=""
 IUSE=""
 
