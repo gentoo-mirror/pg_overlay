@@ -135,9 +135,9 @@ src_prepare() {
 	eapply_user
 
 	# Build with Rust
-	pushd mozilla
-	eapply "${FILESDIR}/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch"
-	popd
+	#pushd mozilla
+	#eapply "${FILESDIR}/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch"
+	#popd
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then
