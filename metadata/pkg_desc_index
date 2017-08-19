@@ -12,25 +12,23 @@ app-text/enchant 1.6.1: Spellchecker wrapping library
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-libs/boost 1.64.0: Boost Libraries for C++
-dev-libs/gobject-introspection 1.50.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libgaminggear 0.15.0 0.15.1: Provides functionality for gaming input devices
 dev-libs/protobuf 3.3.0: Google's Protocol Buffers -- an efficient method of encoding structured data
-dev-libs/re2 0.2017.04.01 0.2017.06.01 0.2017.07.01: An efficent, principled regular expression library
+dev-libs/re2 0.2017.04.01 0.2017.06.01 0.2017.07.01 0.2017.08.01: An efficent, principled regular expression library
 dev-libs/sink 0.3.0: A data access layer handling synchronization, caching and indexing
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
 dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.50.3: GDBus code and documentation generator
 dev-util/ninja 1.7.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/plasma-applet-weather-widget 1.6.9: Plasma 5 applet for weather forecasts
-mail-client/thunderbird 52.2.1: Thunderbird Mail Client
+mail-client/thunderbird 52.2.1 52.3.0: Thunderbird Mail Client
 media-fonts/iosevka 1.12.5: Open source coding font
 media-libs/gst-plugins-bad 1.12.1 1.12.2: Less plugins for GStreamer
 media-libs/gst-plugins-base 1.12.1 1.12.2: Basepack of plugins for gstreamer
@@ -80,8 +78,8 @@ sys-fs/f2fs-tools 1.8.0 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 4.12.0_rc1 4.12.0_rc2 9999: xfs filesystem utilities
 sys-libs/efivar 9999: Tools and library to manipulate EFI variables
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 60.0.3112.90 60.0.3112.97 60.0.3112.101: Open-source version of Google Chrome web browser
-www-client/firefox 55.0 55.0.1: Firefox Web Browser
+www-client/chromium 60.0.3112.90 60.0.3112.97 60.0.3112.101 60.0.3112.107: Open-source version of Google Chrome web browser
+www-client/firefox 55.0 55.0.1 55.0.2: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
