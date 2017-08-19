@@ -13,14 +13,14 @@ SRC_URI="https://github.com/balabit/${PN}/releases/download/${P}/${P}.tar.gz"
 
 LICENSE="GPL-2+ LGPL-2.1+"
 SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~x86-fbsd"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~x86-fbsd"
 IUSE="amqp caps dbi geoip ipv6 json libressl mongodb pacct python redis smtp spoof-source systemd tcpd"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 RESTRICT="test"
 
 RDEPEND="
 	caps? ( sys-libs/libcap )
-	dbi? ( >=dev-db/libdbi-0.8.3 )
+	dbi? ( >=dev-db/libdbi-0.9.0 )
 	geoip? ( >=dev-libs/geoip-1.5.0 )
 	json? ( >=dev-libs/json-c-0.9 )
 	python? ( ${PYTHON_DEPS} )
@@ -32,7 +32,7 @@ RDEPEND="
 	dev-libs/libpcre
 	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:0= )
-	>=dev-libs/eventlog-0.2.12
+	!dev-libs/eventlog
 	>=dev-libs/glib-2.10.1:2"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
@@ -48,8 +48,7 @@ src_prepare() {
 	use python && python_fix_shebang .
 
 	if use !json ; then
-		sed -i -e '1 s/cim //' scl/Makefile.am || die
-		eautoreconf
+		rm -r scl/cim || die "failed to rm -r scl/cim"
 	fi
 
 	for f in "${FILESDIR}"/*logrotate*.in ; do
