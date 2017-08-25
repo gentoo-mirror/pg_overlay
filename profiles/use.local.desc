@@ -138,33 +138,6 @@ media-sound/mpd:systemd - Enable support for systemd socket activation
 media-sound/mpd:twolame - Support twolame MPEG-2 encoding
 media-sound/mpd:wildmidi - Enable MIDI support via wildmidi
 media-sound/mpd:zip - Support for ZIP files
-media-sound/mpd-sacd:adplug - Enable the AdPlug decoder plugin
-media-sound/mpd-sacd:cdio - Use libcdio for ISO9660 parsing support
-media-sound/mpd-sacd:curl - Support for web stream listening
-media-sound/mpd-sacd:eventfd - Use the eventfd function in MPD's event loop
-media-sound/mpd-sacd:faad - Use external faad library for AAC decoding
-media-sound/mpd-sacd:fifo - Support writing audio to a FIFO
-media-sound/mpd-sacd:fluidsynth - Enables Fluidsynth MIDI software synthesis (discouraged)
-media-sound/mpd-sacd:glib - Enable GLib usage
-media-sound/mpd-sacd:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
-media-sound/mpd-sacd:id3tag - Support for ID3 tags
-media-sound/mpd-sacd:inotify - Use the Linux kernel inotify subsystem to notice changes to mpd music library
-media-sound/mpd-sacd:lame - Support for MP3 streaming via Icecast2
-media-sound/mpd-sacd:libmpdclient - Enable support for remote mpd databases
-media-sound/mpd-sacd:libsoxr - Enable the libsoxr resampler
-media-sound/mpd-sacd:mpg123 - Enable support for mp3 decoding over media-sound/mpg123
-media-sound/mpd-sacd:network - Enables network streaming support
-media-sound/mpd-sacd:nfs - Enable support for the Network File System
-media-sound/mpd-sacd:opus - Enable Opus codec support
-media-sound/mpd-sacd:pipe - Support writing audio to a pipe
-media-sound/mpd-sacd:recorder - Enables output plugin for recording radio streams
-media-sound/mpd-sacd:sid - Build with SID (Commodore 64 Audio) support
-media-sound/mpd-sacd:signalfd - Use the signalfd function in MPD's event loop
-media-sound/mpd-sacd:soundcloud - Build plugin to access soundcloud
-media-sound/mpd-sacd:systemd - Enable support for systemd socket activation
-media-sound/mpd-sacd:twolame - Support twolame MPEG-2 encoding
-media-sound/mpd-sacd:wildmidi - Enable MIDI support via wildmidi
-media-sound/mpd-sacd:zip - Support for ZIP files
 media-sound/ncmpcpp:clock - Enable clock screen
 media-sound/ncmpcpp:outputs - Enable outputs screen
 media-sound/ncmpcpp:visualizer - Enable visualizer screen with sound wave/frequency spectrum modes
