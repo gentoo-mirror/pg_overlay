@@ -111,33 +111,6 @@ media-sound/deadbeef:vtx - Libayemy VTX ZX-Spectrum music player plugin
 media-sound/deadbeef:wavpack - WavPack plugin
 media-sound/deadbeef:wma - Windows media audio plugin
 media-sound/deadbeef:zip - vfs_zip plugin
-media-sound/mpd:adplug - Enable the AdPlug decoder plugin
-media-sound/mpd:cdio - Use libcdio for ISO9660 parsing support
-media-sound/mpd:curl - Support for web stream listening
-media-sound/mpd:eventfd - Use the eventfd function in MPD's event loop
-media-sound/mpd:faad - Use external faad library for AAC decoding
-media-sound/mpd:fifo - Support writing audio to a FIFO
-media-sound/mpd:fluidsynth - Enables Fluidsynth MIDI software synthesis (discouraged)
-media-sound/mpd:glib - Enable GLib usage
-media-sound/mpd:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
-media-sound/mpd:id3tag - Support for ID3 tags
-media-sound/mpd:inotify - Use the Linux kernel inotify subsystem to notice changes to mpd music library
-media-sound/mpd:lame - Support for MP3 streaming via Icecast2
-media-sound/mpd:libmpdclient - Enable support for remote mpd databases
-media-sound/mpd:libsoxr - Enable the libsoxr resampler
-media-sound/mpd:mpg123 - Enable support for mp3 decoding over media-sound/mpg123
-media-sound/mpd:network - Enables network streaming support
-media-sound/mpd:nfs - Enable support for the Network File System
-media-sound/mpd:opus - Enable Opus codec support
-media-sound/mpd:pipe - Support writing audio to a pipe
-media-sound/mpd:recorder - Enables output plugin for recording radio streams
-media-sound/mpd:sid - Build with SID (Commodore 64 Audio) support
-media-sound/mpd:signalfd - Use the signalfd function in MPD's event loop
-media-sound/mpd:soundcloud - Build plugin to access soundcloud
-media-sound/mpd:systemd - Enable support for systemd socket activation
-media-sound/mpd:twolame - Support twolame MPEG-2 encoding
-media-sound/mpd:wildmidi - Enable MIDI support via wildmidi
-media-sound/mpd:zip - Support for ZIP files
 media-sound/ncmpcpp:clock - Enable clock screen
 media-sound/ncmpcpp:outputs - Enable outputs screen
 media-sound/ncmpcpp:visualizer - Enable visualizer screen with sound wave/frequency spectrum modes
