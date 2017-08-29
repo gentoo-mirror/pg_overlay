@@ -192,6 +192,10 @@ src_prepare() {
 
 	default
 
+	# GCC7 patches
+	eapply ${FILESDIR}/chromium-blink-gcc7.patch
+	eapply ${FILESDIR}//chromium-v8-gcc7.patch
+
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && eapply "${FILESDIR}/chromium-vaapi-${MY_MAJORV}.patch"
 
@@ -391,6 +395,7 @@ src_configure() {
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
+	myconf_gn+=" enable_webrtc=true"
 	# Inox
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" is_debug=false"
@@ -398,6 +403,7 @@ src_configure() {
 	myconf_gn+=" treat_warnings_as_errors=false"
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
+	myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
@@ -407,9 +413,9 @@ src_configure() {
 	myconf_gn+=" enable_rlz_support=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
-	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
+	myconf_gn+=" enable_mdns=false"
 	if use inox; then
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
