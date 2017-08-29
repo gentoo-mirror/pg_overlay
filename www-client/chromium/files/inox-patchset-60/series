@@ -1,5 +1,4 @@
 0001-fix-building-without-safebrowsing.patch
-
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
 0005-disable-default-extensions.patch
@@ -15,3 +14,6 @@
 0017-disable-new-avatar-menu.patch
 0018-disable-first-run-behaviour.patch
 0019-disable-battery-status-service.patch
+0021-disable-rlz.patch
+9000-disable-metrics.patch
+9001-disable-profiler.patch
