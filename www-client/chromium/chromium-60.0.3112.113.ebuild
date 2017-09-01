@@ -396,6 +396,7 @@ src_configure() {
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
 	myconf_gn+=" enable_webrtc=true"
+	myconf_gn+=" use_gio=false"
 	# Inox
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" is_debug=false"
@@ -409,8 +410,6 @@ src_configure() {
 	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
-	myconf_gn+=" enable_rlz=false"
-	myconf_gn+=" enable_rlz_support=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
@@ -422,9 +421,9 @@ src_configure() {
 
 	# Ungoogled
 	myconf_gn+=" enable_iterator_debugging=false"
-	myconf_gn+=" use_gio=false"
-	myconf_gn+=" enable_hevc_demuxing=true"
+	myconf_gn+=" enable_service_discovery=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
+	myconf_gn+=" enable_hevc_demuxing=true"
 	if use ungoogled; then
 		myconf_gn+=" enable_one_click_signin=false"
 		myconf_gn+=" safe_browsing_mode=0"
