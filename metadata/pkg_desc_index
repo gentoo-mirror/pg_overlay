@@ -7,12 +7,13 @@ app-misc/ca-certificates 20161130.3.30.1 20161130.3.30.2: Common CA Certificates
 app-misc/ddcutil 0.7.3 0.8.4: Program for querying and changing monitor settings
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
+app-office/libreoffice 5.4.1.2: A full office productivity suite
+app-office/libreoffice-l10n 5.4.1.2: Translations for the Libreoffice suite
 app-portage/gentoolkit 0.4.0 9999: Collection of administration scripts for Gentoo
 app-text/enchant 1.6.1: Spellchecker wrapping library
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-lang/orc 0.4.27: The Oil Runtime Compiler, a just-in-time compiler for array operations
-dev-libs/boost 1.64.0: Boost Libraries for C++
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libgaminggear 0.15.0 0.15.1: Provides functionality for gaming input devices
@@ -21,7 +22,6 @@ dev-libs/re2 0.2017.04.01 0.2017.06.01 0.2017.07.01 0.2017.08.01: An efficent, p
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
-dev-util/boost-build 1.64.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/ninja 1.7.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
