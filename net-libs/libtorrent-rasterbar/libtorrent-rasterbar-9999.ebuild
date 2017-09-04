@@ -43,7 +43,10 @@ src_prepare() {
 
 	# bug 578026
 	# prepend -L${S}/... to ensure bindings link against the lib we just built
-	sed -i -e "s|^|-L${S}/src/.libs |" bindings/python/compile_flags.in || die
+	sed -i -e "s|^|-L${S}/src/.libs |" bindings/python/link_flags.in || die
+
+	# prepend -I${S}/... to ensure bindings use the right headers
+	sed -i -e "s|^|-I${S}/src/include |" bindings/python/compile_flags.in || die
 
 	use python && distutils-r1_src_prepare
 }
@@ -63,12 +66,10 @@ src_configure() {
 	econf "${myeconfargs[@]}"
 
 	if use python; then
-		myeconfargs+=(
-			--enable-python-binding
-			--with-boost-python
-		)
 		python_configure() {
-			econf "${myeconfargs[@]}"
+			econf "${myeconfargs[@]}" \
+				--enable-python-binding \
+				--with-boost-python="${EPYTHON#python}"
 		}
 		distutils-r1_src_configure
 	fi
