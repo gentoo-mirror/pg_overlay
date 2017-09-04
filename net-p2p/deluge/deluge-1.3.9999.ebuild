@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -46,7 +46,10 @@ RDEPEND="${CDEPEND}
 	dev-python/pyxdg[${PYTHON_USEDEP}]
 	dev-python/setproctitle[${PYTHON_USEDEP}]
 	|| ( >=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
+		(
+		>=dev-python/twisted-core-13.0[${PYTHON_USEDEP}]
 		>=dev-python/twisted-web-13.0[${PYTHON_USEDEP}]
+		)
 	)
 	geoip? ( dev-libs/geoip )
 	gtk? (
