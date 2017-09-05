@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 
 inherit python-any-r1 xorg-2
 
-EGIT_REPO_URI="git://anongit.freedesktop.org/${PN}.git"
+EGIT_REPO_URI="https://anongit.freedesktop.org/${PN}.git"
 
 DESCRIPTION="Handler library for evdev events"
 

@@ -9,7 +9,7 @@ DESCRIPTION="Mozilla KDE Desktop Integration"
 HOMEPAGE="https://github.com/openSUSE/kmozillahelper"
 
 if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="git://github.com/openSUSE/kmozillahelper.git"
+	EGIT_REPO_URI="https://github.com/openSUSE/kmozillahelper.git"
 	inherit git-r3
 	SRC_URI=""
 	KEYWORDS=""

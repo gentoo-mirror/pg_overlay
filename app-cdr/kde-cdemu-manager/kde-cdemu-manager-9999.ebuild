@@ -9,7 +9,7 @@ inherit cmake-utils git-r3
 DESCRIPTION="CDEmu manager front end for KF5"
 HOMEPAGE="https://github.com/Real-Gecko/KDE-CDEmu"
 
-EGIT_REPO_URI="git://github.com/Real-Gecko/KDE-CDEmu.git"
+EGIT_REPO_URI="https://github.com/Real-Gecko/KDE-CDEmu.git"
 
 LICENSE="GPLv3"
 SLOT="0"

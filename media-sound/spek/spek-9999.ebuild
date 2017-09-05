@@ -8,7 +8,7 @@ inherit autotools eutils git-r3 toolchain-funcs wxwidgets
 
 DESCRIPTION="Analyse your audio files by showing their spectrogram"
 HOMEPAGE="http://www.spek-project.org/"
-EGIT_REPO_URI="git://github.com/alexkay/${PN}.git"
+EGIT_REPO_URI="https://github.com/alexkay/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"

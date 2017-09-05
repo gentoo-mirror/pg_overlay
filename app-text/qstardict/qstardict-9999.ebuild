@@ -9,7 +9,7 @@ DESCRIPTION="QStarDict is a StarDict clone written with using Qt"
 HOMEPAGE="http://qstardict.ylsoftware.com/"
 LICENSE="GPL-2"
 KEYWORDS=""
-EGIT_REPO_URI="git://github.com/a-rodin/qstardict.git"
+EGIT_REPO_URI="https://github.com/a-rodin/qstardict.git"
 SLOT="0"
 
 PLUGINS="stardict swac web"

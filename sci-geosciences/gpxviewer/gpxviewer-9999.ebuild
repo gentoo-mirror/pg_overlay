@@ -10,7 +10,7 @@ inherit distutils-r1 l10n git-r3
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="https://github.com/andrewgee/"
-EGIT_REPO_URI="git://github.com/andrewgee/${PN}.git"
+EGIT_REPO_URI="https://github.com/andrewgee/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"

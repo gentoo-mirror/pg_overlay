@@ -7,7 +7,7 @@ inherit eutils flag-o-matic autotools multilib-minimal
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="git://anongit.freedesktop.org/git/cairo"
+	EGIT_REPO_URI="https://anongit.freedesktop.org/git/cairo"
 	SRC_URI=""
 else
 	SRC_URI="http://cairographics.org/snapshots/${P}.tar.xz"

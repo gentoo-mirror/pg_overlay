@@ -9,7 +9,7 @@ inherit eutils git-r3 python-r1
 
 DESCRIPTION="A utility to find various forms of lint on a filesystem"
 HOMEPAGE="http://www.pixelbeat.org/fslint/"
-EGIT_REPO_URI="git://github.com/pixelb/fslint.git"
+EGIT_REPO_URI="https://github.com/pixelb/fslint.git"
 
 LICENSE="GPL-2"
 SLOT="0"

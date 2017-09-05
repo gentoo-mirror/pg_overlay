@@ -8,7 +8,7 @@ inherit multilib git-r3
 
 DESCRIPTION="Qt ./configure generation util"
 HOMEPAGE="http://delta.affinix.com/qconf/"
-EGIT_REPO_URI="git://github.com/psi-plus/qconf.git"
+EGIT_REPO_URI="https://github.com/psi-plus/qconf.git"
 
 LICENSE="GPL-2"
 SLOT="0"
