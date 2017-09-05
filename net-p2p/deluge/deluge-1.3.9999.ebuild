@@ -13,7 +13,7 @@ HOMEPAGE="http://deluge-torrent.org/"
 
 if [[ ${PV} == 1.3.9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://deluge-torrent.org/${PN}.git
+	EGIT_REPO_URI="git://deluge-torrent.org/${PN}.git
 		http://git.deluge-torrent.org/${PN}"
 	EGIT_BRANCH="1.3-stable"
 	SRC_URI=""
@@ -32,11 +32,10 @@ REQUIRED_USE="
 	libnotify? ( gtk )
 "
 PATCHES=(
-	#"${FILESDIR}/${PN}-1.3.5-disable_libtorrent_internal_copy.patch"
-	#"${FILESDIR}/${PN}-createtorrentdialog.patch"
+	"${FILESDIR}/${PN}-1.3.5-disable_libtorrent_internal_copy.patch"
 )
 
-CDEPEND=">=net-libs/libtorrent-rasterbar-1.0.9-r1[python,${PYTHON_USEDEP}]"
+CDEPEND=">=net-libs/libtorrent-rasterbar-1.1[python,${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-util/intltool"
