@@ -12,14 +12,21 @@ EGIT_REPO_URI="git://git.musicpd.org/master/libmpdclient.git"
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc examples static"
+IUSE="doc examples static test"
 
 RDEPEND=""
-DEPEND="doc? ( app-doc/doxygen )"
+DEPEND="doc? ( app-doc/doxygen )
+		test? ( dev-libs/check )
+"
 
 src_prepare() {
 	default
 	sed -e "s:@top_srcdir@:.:" -i doc/doxygen.conf.in
+
+	# meson doesn't support setting docdir
+	sed -e "/^docdir =/s/meson.project_name()/'${PF}'/" \
+		-e "/^install_data(/s/'COPYING', //" \
+		-i meson.build || die
 }
 
 src_configure() {
@@ -27,14 +34,13 @@ src_configure() {
 		--buildtype=release
 		-Ddocumentation="$(usex doc true false)"
 		--default-library="$(usex static static shared)"
+		-Dtest=$(usex test true false)
 	)
 	meson_src_configure
 }
 
 src_install() {
-	default
 	meson_src_install
 	use examples && dodoc src/example.c
 	use doc || rm -rf "${ED}"/usr/share/doc/${PF}/html
-	find "${ED}" -name "*.la" -exec rm -rf {} + || die "failed to delete .la files"
 }
