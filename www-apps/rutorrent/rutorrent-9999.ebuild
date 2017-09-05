@@ -7,7 +7,7 @@ inherit webapp eutils git-r3
 
 DESCRIPTION="ruTorrent is a front-end for the popular Bittorrent client rTorrent"
 HOMEPAGE="https://github.com/Novik/ruTorrent"
-EGIT_REPO_URI="git://github.com/Novik/ruTorrent.git"
+EGIT_REPO_URI="https://github.com/Novik/ruTorrent.git"
 
 LICENSE="GPL-2"
 KEYWORDS=""

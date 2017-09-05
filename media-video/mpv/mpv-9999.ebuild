@@ -18,7 +18,7 @@ if [[ ${PV} != *9999* ]]; then
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
-	EGIT_REPO_URI="git://github.com/${PN}-player/${PN}.git"
+	EGIT_REPO_URI="https://github.com/${PN}-player/${PN}.git"
 	inherit git-r3
 fi
 SRC_URI+=" https://waf.io/waf-${WAF_PV}"

@@ -7,7 +7,7 @@ inherit autotools git-r3 eutils linux-info systemd toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
-EGIT_REPO_URI="git://git.code.sf.net/p/${PN}/git"
+EGIT_REPO_URI="https://git.code.sf.net/p/${PN}/git"
 
 LICENSE="BSD GPL-2"
 SLOT="0"

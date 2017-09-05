@@ -5,7 +5,7 @@ EAPI=5
 XORG_DRI="always"
 inherit xorg-2
 
-EGIT_REPO_URI="git://anongit.freedesktop.org/git/nouveau/${PN}"
+EGIT_REPO_URI="https://anongit.freedesktop.org/git/nouveau/${PN}"
 
 DESCRIPTION="Accelerated Open Source driver for nVidia cards"
 HOMEPAGE="https://nouveau.freedesktop.org/"

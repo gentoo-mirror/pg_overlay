@@ -7,7 +7,7 @@ inherit autotools flag-o-matic git-r3 libtool toolchain-funcs
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="git://github.com/rakshasa/${PN}.git"
+EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
 EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"

@@ -11,7 +11,7 @@ inherit distutils-r1 eutils l10n git-r3
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="http://bleachbit.org/"
-EGIT_REPO_URI="git://github.com/az0/${PN}.git"
+EGIT_REPO_URI="https://github.com/az0/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"

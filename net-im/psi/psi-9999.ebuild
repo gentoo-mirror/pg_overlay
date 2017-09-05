@@ -7,8 +7,8 @@ EAPI=5
 PLOCALES="be bg ca cs de en eo es et fa fi fr he hu it ja kk mk nl pl pt pt_BR ru sk sl sr@latin sv sw uk ur_PK vi zh_CN zh_TW"
 PLOCALE_BACKUP="en"
 
-PSI_URI="git://github.com/psi-im"
-PSI_PLUS_URI="git://github.com/psi-plus"
+PSI_URI="https://github.com/psi-im"
+PSI_PLUS_URI="https://github.com/psi-plus"
 EGIT_REPO_URI="${PSI_URI}/psi.git"
 PSI_LANGS_URI="${PSI_URI}/psi-translations.git"
 PSI_PLUS_LANGS_URI="${PSI_PLUS_URI}/psi-plus-l10n.git"

@@ -7,7 +7,7 @@ inherit autotools eutils git-r3
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
-EGIT_REPO_URI="git://github.com/${PN}-media-player/${PN}.git"
+EGIT_REPO_URI="https://github.com/${PN}-media-player/${PN}.git"
 
 SRC_URI="mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2"
 

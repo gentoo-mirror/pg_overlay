@@ -12,7 +12,7 @@ inherit distutils-r1 eutils git-r3
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
-EGIT_REPO_URI="git://github.com/arvidn/libtorrent.git"
+EGIT_REPO_URI="https://github.com/arvidn/libtorrent.git"
 
 LICENSE="BSD"
 SLOT="0/10"

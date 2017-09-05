@@ -10,7 +10,7 @@ HOMEPAGE="https://www.qbittorrent.org/"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="git://github.com/${PN}/qBittorrent.git"
+	EGIT_REPO_URI="https://github.com/${PN}/qBittorrent.git"
 else
 	MY_P=${P/_}
 	SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.xz"
