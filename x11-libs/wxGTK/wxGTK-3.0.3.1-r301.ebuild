@@ -70,7 +70,7 @@ LICENSE="wxWinLL-3
 S="${WORKDIR}/wxWidgets-${PV}"
 PATCHES=(
 	"${FILESDIR}"/${P}-abicheck.patch
-	"${FILESDIR}"/${P}-webkit2.patch
+	"${FILESDIR}"/${P}-avoid-tlw-destroy-assert.patch
 )
 
 src_prepare() {
