@@ -433,8 +433,8 @@ src_configure() {
 	myconf_gn+=" enable_print_preview=false"
 	#if use inox; then
 	#	myconf_gn+=" safe_browsing_mode=0"
-	#	myconf_gn+=" enable_service_discovery=false"
 	#	myconf_gn+=" enable_mdns=false"
+	#	myconf_gn+=" enable_service_discovery=false"
 	#fi
 
 	# Ungoogled
@@ -444,6 +444,7 @@ src_configure() {
 	if use ungoogled; then
 		myconf_gn+=" enable_one_click_signin=false"
 		myconf_gn+=" safe_browsing_mode=0"
+
 	fi
 
 	# libevent: https://bugs.gentoo.org/593458
