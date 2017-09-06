@@ -2,7 +2,6 @@ app-admin/syslog-ng 3.11.1: syslog replacement with advanced filtering features
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/gpgme 1.9.0: GnuPG Made Easy is a library for making GnuPG easier to use
-app-dicts/myspell-ru 20150711-r2: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-misc/ddcutil 0.7.3 0.8.4: Program for querying and changing monitor settings
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
