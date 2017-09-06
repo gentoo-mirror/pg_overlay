@@ -203,7 +203,10 @@ src_prepare() {
 	default
 
 	# GCC7 patches
-	eapply ${FILESDIR}/chromium-blink-gcc7.patch
+	eapply "${FILESDIR}/chromium-blink-gcc7.patch"
+
+	# glibc-2.26 patch
+	eapply "${FILESDIR}/breakpad-use-ucontext_t.patch"
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && eapply "${FILESDIR}/chromium-vaapi-${MY_MAJORV}.patch"
