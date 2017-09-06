@@ -432,9 +432,9 @@ src_configure() {
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
 	myconf_gn+=" enable_mdns=false"
-	if use inox; then
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
+	#if use inox; then
+	#	myconf_gn+=" safe_browsing_mode=0"
+	#fi
 
 	# Ungoogled
 	myconf_gn+=" enable_iterator_debugging=false"
