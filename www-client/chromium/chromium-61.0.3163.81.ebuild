@@ -431,14 +431,14 @@ src_configure() {
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
-	#myconf_gn+=" enable_mdns=false"
+	myconf_gn+=" enable_mdns=false"
 	#if use inox; then
 	#	myconf_gn+=" safe_browsing_mode=0"
+	#	myconf_gn+=" enable_service_discovery=false"
 	#fi
 
 	# Ungoogled
 	myconf_gn+=" enable_iterator_debugging=false"
-	myconf_gn+=" enable_service_discovery=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_hevc_demuxing=true"
 	if use ungoogled; then
