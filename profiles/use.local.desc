@@ -198,8 +198,6 @@ net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xf
 net-print/samsung-unified-driver:network - Enable network printing support
 sys-apps/roccat-tools:lua - Build support for Lua scripting for RyosMKPro ripple effects
 www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
-www-client/chromium:gconf - Enable support for GConf to retrieve system settings
-www-client/chromium:gtk3 - Use gtk3 instead of gtk2
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
 www-client/chromium:pic - Disable optimized assembly code that is not PIC friendly
 www-client/chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3

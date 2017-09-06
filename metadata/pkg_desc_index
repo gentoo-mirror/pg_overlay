@@ -70,7 +70,7 @@ sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.2 9999: Reliable MTP client with minimalistic UI
 sys-fs/xfsprogs 9999: xfs filesystem utilities
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 60.0.3112.116: Open-source version of Google Chrome web browser
+www-client/chromium 60.0.3112.116 61.0.3163.81: Open-source version of Google Chrome web browser
 www-client/firefox 55.0.3: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
