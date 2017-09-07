@@ -20,7 +20,7 @@ dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/ninja 1.7.2: A small build system similar to make
+dev-util/ninja 1.7.2 1.8.1: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
@@ -76,7 +76,7 @@ x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg driver
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
-x11-libs/cairo 1.15.6: A vector graphics library with cross-device output support
+x11-libs/cairo 1.15.6 1.15.8: A vector graphics library with cross-device output support
 x11-libs/wxGTK 3.0.3.1-r301: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-terms/guake 9999: Drop-down terminal for GTK+ desktops
