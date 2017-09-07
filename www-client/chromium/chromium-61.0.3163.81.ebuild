@@ -209,7 +209,7 @@ src_prepare() {
 	eapply "${FILESDIR}/breakpad-use-ucontext_t.patch"
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/chromium-vaapi-${MY_MAJORV}.patch"
+	use vaapi && eapply "${FILESDIR}/${PN}-libva-remove-${MY_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-${MY_MAJORV}.patch" && myconf_gn+=" use_vaapi=true"
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
@@ -329,9 +329,6 @@ src_prepare() {
 		third_party/spirv-headers
 		third_party/spirv-tools-angle
 		third_party/sqlite
-		third_party/swiftshader
-		third_party/swiftshader/third_party/llvm-subzero
-		third_party/swiftshader/third_party/subzero
 		third_party/usrsctp
 		third_party/vulkan
 		third_party/vulkan-validation-layers
@@ -344,7 +341,6 @@ src_prepare() {
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/third_party/inspector_protocol
-		third_party/libva
 
 		# gyp -> gn leftovers
 		base/third_party/libevent
@@ -412,6 +408,7 @@ src_configure() {
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
+	use vaapi && myconf_gn+=" use_vaapi=true"
 	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" use_gio=false"
 	# Inox
@@ -433,8 +430,6 @@ src_configure() {
 	myconf_gn+=" enable_print_preview=false"
 	#if use inox; then
 	#	myconf_gn+=" safe_browsing_mode=0"
-	#	myconf_gn+=" enable_mdns=false"
-	#	myconf_gn+=" enable_service_discovery=false"
 	#fi
 
 	# Ungoogled
@@ -444,7 +439,8 @@ src_configure() {
 	if use ungoogled; then
 		myconf_gn+=" enable_one_click_signin=false"
 		myconf_gn+=" safe_browsing_mode=0"
-
+		myconf_gn+=" enable_mdns=false"
+		myconf_gn+=" enable_service_discovery=false"
 	fi
 
 	# libevent: https://bugs.gentoo.org/593458
@@ -685,9 +681,6 @@ src_install() {
 
 	doins -r out/Release/locales
 	doins -r out/Release/resources
-
-	insinto "${CHROMIUM_HOME}/swiftshader"
-	doins out/Release/swiftshader/*.so
 
 	newman out/Release/chrome.1 chromium.1
 	newman out/Release/chrome.1 chromium-browser.1
