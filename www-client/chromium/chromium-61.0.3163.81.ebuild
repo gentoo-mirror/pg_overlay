@@ -428,11 +428,9 @@ src_configure() {
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
 	myconf_gn+=" enable_print_preview=false"
-	if use inox; then
+	#if use inox; then
 	#	myconf_gn+=" safe_browsing_mode=0"
-		myconf_gn+=" enable_mdns=false"
-		myconf_gn+=" enable_service_discovery=false"
-	fi
+	#fi
 
 	# Ungoogled
 	myconf_gn+=" enable_iterator_debugging=false"
@@ -441,7 +439,8 @@ src_configure() {
 	if use ungoogled; then
 		myconf_gn+=" enable_one_click_signin=false"
 		myconf_gn+=" safe_browsing_mode=0"
-
+		myconf_gn+=" enable_mdns=false"
+		myconf_gn+=" enable_service_discovery=false"
 	fi
 
 	# libevent: https://bugs.gentoo.org/593458
