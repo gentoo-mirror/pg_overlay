@@ -209,7 +209,7 @@ src_prepare() {
 	eapply "${FILESDIR}/breakpad-use-ucontext_t.patch"
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/${PN}-libva-remove-${MY_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-${MY_MAJORV}.patch"
+	use vaapi && eapply "${FILESDIR}/${PN}-libva-remove-${MY_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-${MY_MAJORV}.patch" && myconf_gn+=" use_vaapi=true"
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
