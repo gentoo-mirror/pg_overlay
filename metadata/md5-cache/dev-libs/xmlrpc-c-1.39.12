@@ -10,5 +10,4 @@ RDEPEND=sys-libs/ncurses:0= sys-libs/readline:0= curl? ( net-misc/curl ) libxml2
 REQUIRED_USE=test? ( abyss curl cxx ) tools? ( curl )
 SLOT=0
 SRC_URI=mirror://sourceforge/xmlrpc-c/xmlrpc-c-1.39.12.tgz
-_eclass_exported_funcs=pkg_setup:- src_prepare:- src_configure:- src_compile:- src_install:-
 _md5_=91080f5f444bd0876c5abbc8fd17dda5
