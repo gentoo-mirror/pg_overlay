@@ -1,6 +1,6 @@
 --- a/base/tracked_objects.cc
 +++ b/base/tracked_objects.cc
-@@ -897,10 +897,14 @@
+@@ -897,10 +897,14 @@ void ThreadData::EnsureTlsInitialization
    // never again change in this process.
    ++incarnation_counter_;
  

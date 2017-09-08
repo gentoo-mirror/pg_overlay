@@ -1,6 +1,6 @@
 --- a/chrome/browser/chrome_content_browser_client.cc
 +++ b/chrome/browser/chrome_content_browser_client.cc
-@@ -842,7 +842,7 @@ ChromeContentBrowserClient::~ChromeConte
+@@ -841,7 +841,7 @@ ChromeContentBrowserClient::~ChromeConte
  void ChromeContentBrowserClient::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(prefs::kDisable3DAPIs, false);
@@ -8,7 +8,7 @@
 +  registry->RegisterBooleanPref(prefs::kEnableHyperlinkAuditing, false);
    registry->RegisterListPref(prefs::kEnableDeprecatedWebPlatformFeatures);
  }
-
+ 
 --- a/chrome/browser/ui/browser_ui_prefs.cc
 +++ b/chrome/browser/ui/browser_ui_prefs.cc
 @@ -62,11 +62,11 @@ void RegisterBrowserUserPrefs(user_prefs
@@ -45,7 +45,7 @@
 -  NETWORK_PREDICTION_DEFAULT = NETWORK_PREDICTION_WIFI_ONLY,
 +  NETWORK_PREDICTION_DEFAULT = NETWORK_PREDICTION_NEVER,
  };
-
+ 
  enum class NetworkPredictionStatus {
 --- a/chrome/browser/background/background_mode_manager.cc
 +++ b/chrome/browser/background/background_mode_manager.cc
@@ -56,11 +56,11 @@
 -  registry->RegisterBooleanPref(prefs::kBackgroundModeEnabled, true);
 +  registry->RegisterBooleanPref(prefs::kBackgroundModeEnabled, false);
  }
-
+ 
  void BackgroundModeManager::RegisterProfile(Profile* profile) {
 --- a/components/content_settings/core/browser/cookie_settings.cc
 +++ b/components/content_settings/core/browser/cookie_settings.cc
-@@ -80,7 +80,7 @@
+@@ -80,7 +80,7 @@ void CookieSettings::GetCookieSettings(
  void CookieSettings::RegisterProfilePrefs(
      user_prefs::PrefRegistrySyncable* registry) {
    registry->RegisterBooleanPref(
@@ -68,7 +68,7 @@
 +      prefs::kBlockThirdPartyCookies, true,
        user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
-
+ 
 --- a/chrome/browser/ui/navigation_correction_tab_observer.cc
 +++ b/chrome/browser/ui/navigation_correction_tab_observer.cc
 @@ -56,7 +56,7 @@ NavigationCorrectionTabObserver::~Naviga
@@ -79,7 +79,7 @@
 +                             false,
                               user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
  }
-
+ 
 --- a/components/autofill/core/browser/autofill_manager.cc
 +++ b/components/autofill/core/browser/autofill_manager.cc
 @@ -278,7 +278,7 @@ void AutofillManager::RegisterProfilePre
@@ -125,7 +125,7 @@
 +  registry->RegisterBooleanPref(prefs::kSignInPromoShowOnFirstRunAllowed, false);
    registry->RegisterBooleanPref(prefs::kSignInPromoShowNTPBubble, false);
  }
-
+ 
 --- a/components/bookmarks/browser/bookmark_utils.cc
 +++ b/components/bookmarks/browser/bookmark_utils.cc
 @@ -442,12 +442,12 @@ void GetBookmarksMatchingProperties(Book
@@ -167,11 +167,11 @@
 +++ b/chrome/service/cloud_print/connector_settings.cc
 @@ -60,7 +60,7 @@ void ConnectorSettings::InitFrom(Service
    DCHECK(server_url_.is_valid());
-
+ 
    connect_new_printers_ = prefs->GetBoolean(
 -      prefs::kCloudPrintConnectNewPrinters, true);
 +      prefs::kCloudPrintConnectNewPrinters, false);
-
+ 
    xmpp_ping_enabled_ = prefs->GetBoolean(
        prefs::kCloudPrintXmppPingEnabled, false);
 --- a/chrome/browser/ui/webui/local_discovery/local_discovery_ui.cc
@@ -189,10 +189,10 @@
  }
 --- a/extensions/common/extension.cc
 +++ b/extensions/common/extension.cc
-@@ -344,14 +344,6 @@
+@@ -344,14 +344,6 @@ bool Extension::ShouldDisplayInExtension
    if (is_theme())
      return false;
-
+ 
 -  // Hide component extensions because they are only extensions as an
 -  // implementation detail of Chrome.
 -  if (extensions::Manifest::IsComponentLocation(location()) &&

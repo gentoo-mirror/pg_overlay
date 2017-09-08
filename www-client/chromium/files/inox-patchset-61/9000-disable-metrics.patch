@@ -1,6 +1,6 @@
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1131,6 +1131,11 @@ const FeatureEntry::FeatureVariation kAs
+@@ -1131,6 +1131,11 @@ const FeatureEntry::Choice kAsyncImageDe
  //
  // When adding a new choice, add it to the end of the list.
  const FeatureEntry kFeatureEntries[] = {
