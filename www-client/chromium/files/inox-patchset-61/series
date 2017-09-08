@@ -1,3 +1,4 @@
+0001-fix-building-without-safebrowsing.patch
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
 0005-disable-default-extensions.patch
