@@ -411,6 +411,7 @@ src_configure() {
 	use vaapi && myconf_gn+=" use_vaapi=true"
 	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" use_gio=false"
+
 	# Inox
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" is_debug=false"
@@ -442,6 +443,9 @@ src_configure() {
 		myconf_gn+=" enable_mdns=false"
 		myconf_gn+=" enable_service_discovery=false"
 	fi
+
+	# Ubuntu 
+	myconf_gn+=" use_swiftshader_with_subzero=false"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
