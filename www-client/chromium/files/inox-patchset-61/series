@@ -19,3 +19,4 @@
 9000-disable-metrics.patch
 9001-disable-profiler.patch
 9002-disable-topsites-thumbnails.patch
+9003-disable-avatar-button.patch

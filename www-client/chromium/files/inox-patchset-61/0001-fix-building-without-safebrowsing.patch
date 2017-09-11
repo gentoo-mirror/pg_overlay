@@ -1378,38 +1378,23 @@
  
 --- a/chrome/browser/safe_browsing/BUILD.gn
 +++ b/chrome/browser/safe_browsing/BUILD.gn
-@@ -36,16 +36,13 @@ static_library("safe_browsing") {
-     "chrome_cleaner/srt_field_trial_win.h",
-     "chrome_cleaner/srt_global_error_win.cc",
-     "chrome_cleaner/srt_global_error_win.h",
--    "safe_browsing_tab_observer.cc",
--    "safe_browsing_tab_observer.h",
--    "url_checker_delegate_impl.cc",
--    "url_checker_delegate_impl.h",
-   ]
+@@ -12,6 +12,11 @@ proto_library("chunk_proto") {
+ }
  
-   deps = [
-     "//chrome/app:generated_resources",
-     "//components/chrome_cleaner/public/interfaces",
-     "//components/safe_browsing/common:interfaces",
+ static_library("safe_browsing") {
++  deps = [
 +    "//components/safe_browsing:csd_proto",
-   ]
++  ]
++
++  if (false) {
+   sources = [
+     "chrome_cleaner/chrome_cleaner_controller_impl_win.cc",
+     "chrome_cleaner/chrome_cleaner_controller_impl_win.h",
+@@ -67,6 +72,7 @@ static_library("safe_browsing") {
+       "settings_reset_prompt/settings_reset_prompt_prefs_manager.h",
+     ]
+   }
++  }
  
-   if (enable_extensions) {
-@@ -59,8 +56,6 @@ static_library("safe_browsing") {
-       "settings_reset_prompt/extension_info.h",
-       "settings_reset_prompt/settings_reset_prompt_config.cc",
-       "settings_reset_prompt/settings_reset_prompt_config.h",
--      "settings_reset_prompt/settings_reset_prompt_controller.cc",
--      "settings_reset_prompt/settings_reset_prompt_controller.h",
-       "settings_reset_prompt/settings_reset_prompt_model.cc",
-       "settings_reset_prompt/settings_reset_prompt_model.h",
-       "settings_reset_prompt/settings_reset_prompt_prefs_manager.cc",
-@@ -105,7 +100,6 @@ static_library("safe_browsing") {
-     deps += [
-       "//chrome/browser/safe_browsing:chunk_proto",
-       "//chrome/common/safe_browsing:proto",
--      "//components/safe_browsing:csd_proto",
-       "//components/safe_browsing:safe_browsing",
-       "//components/safe_browsing/browser:browser",
-       "//components/safe_browsing/common:common",
+   if (safe_browsing_mode != 0) {
+     # "Safe Browsing Basic" files used for safe browsing in full mode
