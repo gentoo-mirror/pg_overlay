@@ -11,6 +11,8 @@ app-portage/gentoolkit 0.4.0 9999: Collection of administration scripts for Gent
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-lang/orc 0.4.27: The Oil Runtime Compiler, a just-in-time compiler for array operations
+dev-lang/rust 1.20.0: Systems programming language from Mozilla
+dev-libs/boost 1.65.1: Boost Libraries for C++
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libgaminggear 0.15.1: Provides functionality for gaming input devices
@@ -19,6 +21,7 @@ dev-libs/re2 0.2017.08.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
+dev-util/boost-build 1.65.1: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/ninja 1.7.2 1.8.1: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -69,6 +72,7 @@ sys-apps/roccat-tools 5.7.0: Utility for advanced configuration of Roccat device
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.2 9999: Reliable MTP client with minimalistic UI
 sys-fs/xfsprogs 9999: xfs filesystem utilities
+virtual/rust 1.20.0: Virtual for Rust language compiler
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 60.0.3112.116 61.0.3163.81: Open-source version of Google Chrome web browser
 www-client/firefox 55.0.3: Firefox Web Browser

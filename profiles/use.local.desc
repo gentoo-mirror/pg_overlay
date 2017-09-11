@@ -17,6 +17,9 @@ app-misc/ddcutil:user-permissions - Adds a udev rules to allow non-root users in
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
+dev-lang/rust:clang - Use sys-devel/clang for building
+dev-lang/rust:libcxx - Use sys-libs/libcxx as standard library when building with sys-devel/clang
+dev-lang/rust:system-llvm - Use system sys-devel/llvm in place of the bundled one
 dev-libs/protobuf:java - Builds the Java implementation. This is not needed for Java support in protoc.
 dev-libs/protobuf:python - Builds the Python implementation. This is not needed for Python support in protoc.
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
