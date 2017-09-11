@@ -3,7 +3,7 @@
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 python3_{5,6} )
-inherit python-any-r1 qt5-build
+inherit flag-o-matic python-any-r1 qt5-build
 
 DESCRIPTION="The QML and Quick modules for the Qt5 framework"
 
@@ -34,10 +34,16 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 src_prepare() {
+	# this is supposed to be handled by the build system (src/qml/qml.pro),
+	# fails because we override QMAKE_CXXFLAGS. bug 626070
+	if tc-is-gcc && [[ $(gcc-major-version) -ge 6 ]]; then
+		append-cxxflags -fno-delete-null-pointer-checks -fno-lifetime-dse
+	fi
+
 	use jit || PATCHES+=("${FILESDIR}/${PN}-5.4.2-disable-jit.patch")
 
-	use localstorage || sed -i -e '/localstorage/d' \
-		src/imports/imports.pro || die
+	qt_use_disable_mod localstorage sql \
+		src/imports/imports.pro
 
 	qt_use_disable_mod widgets widgets \
 		src/src.pro \
