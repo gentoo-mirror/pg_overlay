@@ -17,7 +17,7 @@ LICENSE="GPL-2"
 SLOT="0"
 
 RDEPEND="
-	app-misc/razer-drivers
+	sys-apps/razer-drivers
 
 	>=dev-lang/python-3.4.5
 	dev-python/pygobject
