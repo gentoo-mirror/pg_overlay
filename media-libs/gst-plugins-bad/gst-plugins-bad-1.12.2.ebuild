@@ -20,14 +20,14 @@ REQUIRED_USE="
 	wayland? ( egl )
 "
 
-# dtmf plugin moved from bad to good in 1.2
 # X11 is automagic for now, upstream #709530
 RDEPEND="
-	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.40.0:2[${MULTILIB_USEDEP}]
 	>=media-libs/gstreamer-${PV}:${SLOT}[${MULTILIB_USEDEP},introspection?]
 	>=media-libs/gst-plugins-base-${PV}:${SLOT}[${MULTILIB_USEDEP},introspection?]
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1:= )
 
+	bzip2? ( >=app-arch/bzip2-1.0.6-r4[${MULTILIB_USEDEP}] )
 	egl? ( >=media-libs/mesa-9.1.6[egl,${MULTILIB_USEDEP}] )
 	gles2? ( >=media-libs/mesa-9.1.6[gles2,${MULTILIB_USEDEP}] )
 	opengl? (
@@ -38,20 +38,15 @@ RDEPEND="
 
 	gtk? ( >=x11-libs/gtk+-3.15:3[X?,wayland?,${MULTILIB_USEDEP}] )
 	orc? ( >=dev-lang/orc-0.4.17[${MULTILIB_USEDEP}] )
-
-	!<media-libs/gst-plugins-good-1.1:${SLOT}
 "
 DEPEND="${RDEPEND}
 	>=dev-util/gtk-doc-am-1.12
 "
 
+RESTRICT="test"
+
 src_prepare() {
 	default
-	eautoreconf
-	# FIXME: tests are slower than upstream expects
-	sed -e 's:/\* tcase_set_timeout.*:tcase_set_timeout (tc_chain, 5 * 60);:' \
-		-i tests/check/elements/audiomixer.c || die
-
 	addpredict /dev # Prevent sandbox violations bug #570624
 }
 
@@ -66,6 +61,7 @@ multilib_src_configure() {
 	# and shm (need a switch for winnt ?)
 	gstreamer_multilib_src_configure \
 		$(multilib_native_use_enable introspection) \
+		$(use_enable bzip2 bz2) \
 		$(use_enable egl) \
 		$(use_enable gles2) \
 		$(use_enable gtk gtk3) \
@@ -97,8 +93,8 @@ multilib_src_configure() {
 
 multilib_src_test() {
 	unset DISPLAY
-	# FIXME: tests are slower than upstream expects
-	virtx emake check -j1
+	# Tests are slower than upstream expects
+	virtx emake check CK_DEFAULT_TIMEOUT=300
 }
 
 multilib_src_install_all() {
