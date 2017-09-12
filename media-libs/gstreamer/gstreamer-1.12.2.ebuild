@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit bash-completion-r1 multilib multilib-minimal pax-utils
+inherit bash-completion-r1 eutils multilib-minimal pax-utils autotools
 
 DESCRIPTION="Open source multimedia framework"
 HOMEPAGE="https://gstreamer.freedesktop.org/"
@@ -16,7 +16,7 @@ IUSE="+caps +introspection nls +orc test"
 
 RDEPEND="
 	>=dev-libs/glib-2.40.0:2[${MULTILIB_USEDEP}]
-	caps? ( sys-libs/libcap )
+	caps? ( sys-libs/libcap[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-1.31.1:= )
 "
 DEPEND="${RDEPEND}
@@ -73,7 +73,7 @@ multilib_src_configure() {
 		)
 	fi
 
-	ECONF_SOURCE="${S}" econf ${myconf[$@]}
+	ECONF_SOURCE="${S}" econf "${myconf[@]}"
 
 	if multilib_is_native_abi; then
 		local x
