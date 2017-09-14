@@ -1,3 +1,5 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index fcd5e8a..2331da2 100644
 --- a/CMakeLists.txt	2017-09-14 19:45:50.515027507 +0700
 +++ b/CMakeLists.txt	2017-09-14 20:20:43.040226884 +0700
 @@ -681,9 +681,5 @@
