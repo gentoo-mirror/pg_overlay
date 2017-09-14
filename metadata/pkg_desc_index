@@ -28,7 +28,6 @@ dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applicati
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/plasma-applet-weather-widget 1.6.9: Plasma 5 applet for weather forecasts
-kde-plasma/kwin 5.10.95: KDE window manager
 mail-client/thunderbird 52.3.0: Thunderbird Mail Client
 media-fonts/iosevka 1.13.3: Open source coding font
 media-libs/gst-plugins-bad 1.12.2: Less plugins for GStreamer
