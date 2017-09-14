@@ -1,7 +1,6 @@
 --- a/CMakeLists.txt	2017-09-14 19:45:50.515027507 +0700
 +++ b/CMakeLists.txt	2017-09-14 20:20:43.040226884 +0700
-@@ -680,10 +680,6 @@
- 
+@@ -681,9 +681,5 @@
  find_package(KF5I18n CONFIG REQUIRED)
  ki18n_install(po)
 -
