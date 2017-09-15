@@ -9,4 +9,3 @@ diff -up chromium-61.0.3163.79/third_party/WebKit/Source/platform/graphics/gpu/S
  #include <memory>
  
  namespace gpu {
-diff -up chromium-61.0.3163.79/v8/src/objects/hash-table.h.gcc7 chromium-61.0.3163.79/v8/src/objects/hash-table.h
