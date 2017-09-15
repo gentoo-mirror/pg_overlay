@@ -40,6 +40,7 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
+	config_rpath_update m4/config.rpath
 	eautoreconf
 	default
 
