@@ -7,7 +7,7 @@ inherit meson git-r3
 
 DESCRIPTION="A library for interfacing Music Player Daemon (media-sound/mpd)"
 HOMEPAGE="http://www.musicpd.org"
-EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/libmpdclient.git"
+EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
 LICENSE="BSD"
 SLOT="0"

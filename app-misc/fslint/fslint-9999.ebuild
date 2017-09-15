@@ -14,7 +14,6 @@ EGIT_REPO_URI="https://github.com/pixelb/fslint.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-
 IUSE="nls"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
