@@ -14,7 +14,6 @@ dev-lang/rust 1.20.0: Systems programming language from Mozilla
 dev-libs/boost 1.65.1: Boost Libraries for C++
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libevdev 1.5.7: Handler library for evdev events
-dev-libs/libgaminggear 0.15.1: Provides functionality for gaming input devices
 dev-libs/protobuf 3.3.0: Google's Protocol Buffers -- an efficient method of encoding structured data
 dev-libs/re2 0.2017.08.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
@@ -67,10 +66,8 @@ net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.37: Samsung Unified Linux Driver for printers and MFDs
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/i2c-tools 3.1.1-r1: I2C tools for bus probing, chip dumping, EEPROM decoding, and more
 sys-apps/polychromatic 9999: A graphical front end for managing Razer peripherals under GNU/Linux.
 sys-apps/razer-drivers 9999: Razer Drivers for Linux
-sys-apps/roccat-tools 5.7.0: Utility for advanced configuration of Roccat devices
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.2 9999: Reliable MTP client with minimalistic UI
 sys-fs/xfsprogs 9999: xfs filesystem utilities
