@@ -1,8 +1,7 @@
-# Copyright 1999-2012 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
-EAPI=5
+EAPI=6
 
 inherit eutils autotools git-r3
 
@@ -18,8 +17,7 @@ IUSE=""
 RDEPEND="x11-libs/vte:2.91
 	>=dev-libs/glib-2.8.4:2
 	dev-libs/confuse
-	>=x11-libs/gtk+-3.0"
-	
+	gnome-base/libglade"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
@@ -30,8 +28,4 @@ src_prepare() {
 src_configure() {
 	econf \
 	--enable-vte-2.91
-}
-
-src_install() {
-	emake DESTDIR="${D}" install || die
 }

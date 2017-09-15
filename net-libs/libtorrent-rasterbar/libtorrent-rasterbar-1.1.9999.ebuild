@@ -40,7 +40,7 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	./autotool.sh
+	eautoreconf
 	default
 
 	# bug 578026
