@@ -40,7 +40,13 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	eautoreconf
+	eaclocal
+	_elibtoolize
+	eautoheader
+	eautoconf
+	config_rpath_update build-aux
+	eautomake
+	eautopoint
 	default
 
 	# bug 578026
