@@ -44,7 +44,7 @@ src_prepare() {
 	_elibtoolize
 	eautoheader
 	eautoconf
-	config_rpath_update "${S}/"m4/config.rpath
+	config_rpath_update build-aux
 	eautomake
 	eautopoint
 	default
