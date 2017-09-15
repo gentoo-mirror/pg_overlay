@@ -46,7 +46,6 @@ src_prepare() {
 	eautoconf
 	config_rpath_update build-aux
 	eautomake
-	eautopoint
 	default
 
 	# bug 578026
