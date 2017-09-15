@@ -14,11 +14,10 @@ app-crypt/gpgme:common-lisp - Install common-lisp files
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
+dev-lang/orc:pax_kernel - Apply patch needed for pax enabled kernels.
 dev-lang/rust:clang - Use sys-devel/clang for building
 dev-lang/rust:libcxx - Use sys-libs/libcxx as standard library when building with sys-devel/clang
 dev-lang/rust:system-llvm - Use system sys-devel/llvm in place of the bundled one
-dev-libs/protobuf:java - Builds the Java implementation. This is not needed for Java support in protoc.
-dev-libs/protobuf:python - Builds the Python implementation. This is not needed for Python support in protoc.
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.

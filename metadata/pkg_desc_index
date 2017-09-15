@@ -6,7 +6,7 @@ app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-office/libreoffice 5.4.1.2: A full office productivity suite
 app-office/libreoffice-l10n 5.4.1.2: Translations for the Libreoffice suite
-app-portage/gentoolkit 0.4.0 9999: Collection of administration scripts for Gentoo
+app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-lang/orc 0.4.27: The Oil Runtime Compiler, a just-in-time compiler for array operations
@@ -14,18 +14,16 @@ dev-lang/rust 1.20.0: Systems programming language from Mozilla
 dev-libs/boost 1.65.1: Boost Libraries for C++
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/libevdev 1.5.7: Handler library for evdev events
-dev-libs/protobuf 3.3.0: Google's Protocol Buffers -- an efficient method of encoding structured data
 dev-libs/re2 0.2017.08.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
 dev-util/boost-build 1.65.1: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/ninja 1.7.2 1.8.1: A small build system similar to make
+dev-util/ninja 1.7.2 1.8.2: A small build system similar to make
 dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-misc/plasma-applet-weather-widget 1.6.9: Plasma 5 applet for weather forecasts
 mail-client/thunderbird 52.3.0: Thunderbird Mail Client
 media-fonts/iosevka 1.13.3: Open source coding font
 media-libs/gst-plugins-bad 1.12.2: Less plugins for GStreamer
@@ -82,5 +80,4 @@ x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia c
 x11-libs/cairo 1.15.6 1.15.8: A vector graphics library with cross-device output support
 x11-libs/wxGTK 3.0.3.1-r301: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
-x11-terms/guake 9999: Drop-down terminal for GTK+ desktops
 x11-terms/tilda 9999: A drop down terminal, similar to the consoles found in first person shooters
