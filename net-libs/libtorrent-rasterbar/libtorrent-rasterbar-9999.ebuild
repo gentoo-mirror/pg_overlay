@@ -8,7 +8,7 @@ PYTHON_REQ_USE="threads"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit distutils-r1 eutils git-r3
+inherit autotools distutils-r1 eutils git-r3
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
@@ -37,8 +37,14 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	sys-devel/libtool
 "
+
 src_prepare() {
-	./autotool.sh
+	eaclocal
+	_elibtoolize
+	eautoheader
+	eautoconf
+	config_rpath_update build-aux
+	eautomake
 	default
 
 	# bug 578026
