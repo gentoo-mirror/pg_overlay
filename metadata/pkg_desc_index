@@ -52,6 +52,7 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/kadu 4.3 5.0_alpha1: An open source Gadu-Gadu and Jabber/XMPP protocol Instant Messenger client
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
+net-libs/libnsl 1.1.0: Public client interface for NIS(YP) and NIS+ in a IPv6 ready version
 net-libs/libtorrent 0.13.6 0.13.6-r1 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.1.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
