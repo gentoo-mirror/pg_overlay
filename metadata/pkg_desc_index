@@ -8,6 +8,7 @@ app-office/libreoffice 5.4.1.2: A full office productivity suite
 app-office/libreoffice-l10n 5.4.1.2: Translations for the Libreoffice suite
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
+app-text/opensp 1.5.2-r4: A free, object-oriented toolkit for SGML parsing and entity management
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-lang/orc 0.4.27: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/rust 1.20.0: Systems programming language from Mozilla
