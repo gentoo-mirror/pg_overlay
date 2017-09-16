@@ -5,7 +5,7 @@ EAPI=6
 
 inherit cmake-utils git-r3 gnome2-utils readme.gentoo-r1 user xdg-utils
 
-EGIT_REPO_URI="https://github.com/transmission/transmission.git"
+EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 
 DESCRIPTION="A fast, easy, and free BitTorrent client"
 HOMEPAGE="https://transmissionbt.com/"

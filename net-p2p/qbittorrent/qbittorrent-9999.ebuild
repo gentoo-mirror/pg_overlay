@@ -46,8 +46,8 @@ DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 src_configure() {
 	#To last stable version for What.CD & Pedro's BTMusic
 	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 3"/g version.pri || die
-	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 11"/g version.pri || die
-	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
+	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 16"/g version.pri || die
+	sed -i s/"VER_STATUS = beta2"/"VER_STATUS ="/g version.pri || die
 
 	local mycmakeargs=(
 		-DQT5=ON
