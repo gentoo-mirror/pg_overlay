@@ -9,7 +9,6 @@ app-office/libreoffice-l10n 5.4.1.2: Translations for the Libreoffice suite
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
-dev-lang/orc 0.4.27: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/rust 1.20.0: Systems programming language from Mozilla
 dev-libs/boost 1.65.1: Boost Libraries for C++
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
@@ -26,17 +25,12 @@ kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 52.3.0: Thunderbird Mail Client
 media-fonts/iosevka 1.13.3: Open source coding font
-media-libs/gst-plugins-bad 1.12.2: Less plugins for GStreamer
-media-libs/gst-plugins-base 1.12.2: Basepack of plugins for gstreamer
-media-libs/gst-plugins-good 1.12.2: Basepack of plugins for GStreamer
-media-libs/gstreamer 1.12.2: Open source multimedia framework
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.3: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/soxr 9999: The SoX Resampler library
 media-libs/vulkan-loader 1.0.57.0: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Audacious Player - Your music, your way, no exceptions
-media-plugins/gst-plugins-vaapi 1.12.2: Hardware accelerated video decoding through VA-API plugin for GStreamer
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
