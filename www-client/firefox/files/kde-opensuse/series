@@ -5,7 +5,7 @@ mozilla-ntlm-full-path.patch
 mozilla-openaes-decl.patch
 mozilla-no-stdcxx-check.patch
 mozilla-reduce-files-per-UnifiedBindings.patch
-
+mozilla-ucontext.patch
 firefox-kde.patch
 firefox-no-default-ualocale.patch
 firefox-branded-icons.patch
