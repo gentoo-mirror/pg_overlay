@@ -143,7 +143,7 @@ src_prepare() {
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then
-		pushd pushd "${S}"/mozilla &>/dev/null || die
+		pushd "${S}"/mozilla &>/dev/null || die
 		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
 		do eapply "${FILESDIR}/kde-opensuse/$i"; \
 		done
@@ -153,7 +153,7 @@ src_prepare() {
 	fi
 
 	# Fedora patches
-	pushd pushd "${S}"/mozilla &>/dev/null || die
+	pushd "${S}"/mozilla &>/dev/null || die
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
 	do eapply "${FILESDIR}/fedora-patchset/$i"; \
 	done
