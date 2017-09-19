@@ -229,12 +229,16 @@ src_configure() {
 	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --disable-jprof
+	mozconfig_annotate '' --disable-dmd
 	mozconfig_annotate '' --disable-instruments
 	mozconfig_annotate '' --disable-callgrind
 	mozconfig_annotate '' --disable-profiling
 	mozconfig_annotate '' --disable-vtune
+	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-ipdl-tests
+	mozconfig_annotate '' --disable-gtest-in-build
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-android-omx
 	mozconfig_annotate '' --disable-b2g-bt
