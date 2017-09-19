@@ -165,6 +165,10 @@ src_prepare() {
 	# Patch to enable PGO
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
+	#eapply "${FILESDIR}/glibc-2.26-fix.patch"
+	eapply "${FILESDIR}/clip-ft-glyph.patch"
+	eapply "${FILESDIR}/harmony-fix.patch"
+
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/kde-opensuse/$i"; done
 
@@ -174,6 +178,7 @@ src_prepare() {
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
 
+	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# Autotools configure is now called old-configure.in
