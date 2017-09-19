@@ -136,7 +136,6 @@ src_prepare() {
 
 	#######
 	pushd "${S}"/mozilla &>/dev/null || die
-	eapply "${FILESDIR}/glibc-2.26-fix.patch"
 	eapply "${FILESDIR}/clip-ft-glyph-52esr.patch"
 	popd &>/dev/null || die
 
