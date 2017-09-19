@@ -34,6 +34,7 @@ media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: foobar2k-like music player
+media-sound/pulseaudio 11.1: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/quimup 1.4.2: A Qt5 client for the music player daemon (MPD) written in C++
 media-sound/rbutil 1.4.1 9999: Rockbox opensource firmware manager for mp3 players
