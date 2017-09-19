@@ -225,9 +225,9 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
+	find browser/config/mozconfigs -type f -exec sed -i 's/_REPORTING=1/_REPORTING=0/g' {} \;
 	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
-	mozconfig_annotate '' --disable-telemetry
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
 	mozconfig_annotate '' --with-pthreads
