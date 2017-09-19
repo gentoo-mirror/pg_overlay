@@ -232,6 +232,9 @@ src_configure() {
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_CRASHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_CRASHREPORTER_ENABLE_PERCENT=0" >> "${S}"/.mozconfig
+	mozconfig_annotate '' --disable-data-reporting
+	mozconfig_annotate '' --disable-telemetry-reporting
+	mozconfig_annotate '' --disable-services-healthreport
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
 	mozconfig_annotate '' --with-pthreads
