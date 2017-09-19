@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=1.9.14
+WAF_PV=2.0.0
 
 inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils
 
