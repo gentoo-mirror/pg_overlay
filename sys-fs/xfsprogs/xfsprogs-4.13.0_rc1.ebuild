@@ -32,7 +32,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
 	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
 	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
-	"${FILESDIR}"/${PN}-4.12.0-fix_musl.patch
 )
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
@@ -46,6 +45,8 @@ pkg_setup() {
 
 src_prepare() {
 	epatch "${PATCHES[@]}"
+
+	emake configure
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
