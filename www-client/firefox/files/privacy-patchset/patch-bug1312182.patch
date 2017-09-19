@@ -28,8 +28,8 @@ Date:   Tue May 30 10:42:42 2017 +0200
 
 diff --git browser/base/content/baseMenuOverlay.xul browser/base/content/baseMenuOverlay.xul
 index 1befa2bb66cc..804bbdebb797 100644
---- browser/base/content/baseMenuOverlay.xul
-+++ browser/base/content/baseMenuOverlay.xul
+--- a/browser/base/content/baseMenuOverlay.xul
++++ b/browser/base/content/baseMenuOverlay.xul
 @@ -61,7 +61,7 @@
                    onclick="checkForMiddleClick(this, event);"
                    label="&helpKeyboardShortcuts.label;"
@@ -41,8 +41,8 @@ index 1befa2bb66cc..804bbdebb797 100644
                    accesskey="&healthReport2.accesskey;"
 diff --git browser/components/nsBrowserGlue.js browser/components/nsBrowserGlue.js
 index 554c279356b9..1c21bf4c4323 100644
---- browser/components/nsBrowserGlue.js
-+++ browser/components/nsBrowserGlue.js
+--- a/browser/components/nsBrowserGlue.js
++++ b/browser/components/nsBrowserGlue.js
 @@ -528,9 +528,7 @@ BrowserGlue.prototype = {
      os.addObserver(this, "distribution-customization-complete");
      os.addObserver(this, "handle-xul-text-link");
@@ -67,8 +67,8 @@ index 554c279356b9..1c21bf4c4323 100644
      os.removeObserver(this, "xpi-signature-changed");
 diff --git browser/components/preferences/in-content-new/main.xul browser/components/preferences/in-content-new/main.xul
 index e89ee1891c91..8672557bede2 100644
---- browser/components/preferences/in-content-new/main.xul
-+++ browser/components/preferences/in-content-new/main.xul
+--- a/browser/components/preferences/in-content-new/main.xul
++++ b/browser/components/preferences/in-content-new/main.xul
 @@ -183,11 +183,9 @@
                name="layout.spellcheckDefault"
                type="int"/>
@@ -83,8 +83,8 @@ index e89ee1891c91..8672557bede2 100644
                name="browser.preferences.defaultPerformanceSettings.enabled"
 diff --git browser/components/preferences/in-content-new/privacy.js browser/components/preferences/in-content-new/privacy.js
 index be057bfad611..73f72391b991 100644
---- browser/components/preferences/in-content-new/privacy.js
-+++ browser/components/preferences/in-content-new/privacy.js
+--- a/browser/components/preferences/in-content-new/privacy.js
++++ b/browser/components/preferences/in-content-new/privacy.js
 @@ -321,11 +321,9 @@ var gPrivacyPane = {
        this.initSubmitCrashes();
      }
@@ -162,8 +162,8 @@ index be057bfad611..73f72391b991 100644
      this.setTelemetrySectionEnabled(checkbox.checked);
 diff --git browser/components/preferences/in-content-new/privacy.xul browser/components/preferences/in-content-new/privacy.xul
 index 9d531bd8274b..8030567573f8 100644
---- browser/components/preferences/in-content-new/privacy.xul
-+++ browser/components/preferences/in-content-new/privacy.xul
+--- a/browser/components/preferences/in-content-new/privacy.xul
++++ b/browser/components/preferences/in-content-new/privacy.xul
 @@ -760,9 +760,14 @@
  </groupbox>
  
@@ -198,8 +198,8 @@ index 9d531bd8274b..8030567573f8 100644
                preference="browser.crashReports.unsubmittedCheck.autoSubmit"
 diff --git browser/components/preferences/in-content/advanced.js browser/components/preferences/in-content/advanced.js
 index a6a2abaad9cf..9c7a2e716403 100644
---- browser/components/preferences/in-content/advanced.js
-+++ browser/components/preferences/in-content/advanced.js
+--- a/browser/components/preferences/in-content/advanced.js
++++ b/browser/components/preferences/in-content/advanced.js
 @@ -46,9 +46,7 @@ var gAdvancedPane = {
        this.initSubmitCrashes();
      }
@@ -309,8 +309,8 @@ index a6a2abaad9cf..9c7a2e716403 100644
    updateOnScreenKeyboardVisibility() {
 diff --git browser/components/preferences/in-content/advanced.xul browser/components/preferences/in-content/advanced.xul
 index f2330223fb18..1b2c62168a59 100644
---- browser/components/preferences/in-content/advanced.xul
-+++ browser/components/preferences/in-content/advanced.xul
+--- a/browser/components/preferences/in-content/advanced.xul
++++ b/browser/components/preferences/in-content/advanced.xul
 @@ -37,12 +37,9 @@
    <preference id="layout.spellcheckDefault"
                name="layout.spellcheckDefault"
@@ -344,8 +344,8 @@ index f2330223fb18..1b2c62168a59 100644
          <caption>
 diff --git browser/locales/en-US/chrome/browser/preferences-old/advanced.dtd browser/locales/en-US/chrome/browser/preferences-old/advanced.dtd
 index 215b800d3385..bf23c4fd251f 100644
---- browser/locales/en-US/chrome/browser/preferences-old/advanced.dtd
-+++ browser/locales/en-US/chrome/browser/preferences-old/advanced.dtd
+--- a/browser/locales/en-US/chrome/browser/preferences-old/advanced.dtd
++++ b/browser/locales/en-US/chrome/browser/preferences-old/advanced.dtd
 @@ -28,6 +28,11 @@
  
  <!ENTITY dataChoicesTab.label            "Data Choices">
@@ -360,8 +360,8 @@ index 215b800d3385..bf23c4fd251f 100644
  <!ENTITY enableHealthReport.accesskey    "R">
 diff --git browser/locales/en-US/chrome/browser/preferences/advanced.dtd browser/locales/en-US/chrome/browser/preferences/advanced.dtd
 index 58a6b38630cf..6c478e48244a 100644
---- browser/locales/en-US/chrome/browser/preferences/advanced.dtd
-+++ browser/locales/en-US/chrome/browser/preferences/advanced.dtd
+--- a/browser/locales/en-US/chrome/browser/preferences/advanced.dtd
++++ b/browser/locales/en-US/chrome/browser/preferences/advanced.dtd
 @@ -28,6 +28,11 @@
  
  <!ENTITY dataChoicesTab.label            "Data Choices">
