@@ -35,6 +35,8 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.12.0-fix_musl.patch
 )
 
+S=${WORKDIR}/${PN}-dev-${MY_PV}
+
 pkg_setup() {
 	if use readline && use libedit ; then
 		ewarn "You have USE='readline libedit' but these are exclusive."
