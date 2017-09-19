@@ -283,9 +283,14 @@ src_configure() {
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake -f client.mk configure
-	sed -i '/MOZ_DATA_REPORTING/d' ff/mozilla-config.h ;
-	sed -i '/MOZ_SERVICES_HEALTHREPORT/d' ff/mozilla-config.h ;
-	sed -i '/MOZ_TELEMETRY_REPORTING/d' ff/mozilla-config.h ;
+	sed -i '/MOZ_DATA_REPORTING/d' ff/config.status || die
+	sed -i '/MOZ_SERVICES_HEALTHREPORT/d' ff/config.status || die
+	sed -i '/MOZ_TELEMETRY_REPORTING/d' ff/config.status || die
+	sed -i 's/DMOZ_DATA_REPORTING=1/DMOZ_DATA_REPORTING=0/g' ff/config/autoconf.mk || die
+	sed -i 's/DMOZ_TELEMETRY_REPORTING=1/DMOZ_TELEMETRY_REPORTING=0/g' ff/config/autoconf.mk || die
+	sed -i 's/DMOZ_DATA_REPORTING=1/DMOZ_DATA_REPORTING=0/g' ff/faster/Makefile || die
+	sed -i 's/DMOZ_TELEMETRY_REPORTING=1/DMOZ_TELEMETRY_REPORTING=0/g' ff/faster/Makefile || die
+
 }
 
 src_compile() {
