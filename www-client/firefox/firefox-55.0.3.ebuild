@@ -222,12 +222,14 @@ src_configure() {
 	# Setup api key for location services
 	echo -n "${_google_api_key}" > "${S}"/google-api-key
 	mozconfig_annotate '' --with-google-api-keyfile="${S}/google-api-key"
-
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
 	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
+	mozconfig_annotate '' --disable-datareporting
+	mozconfig_annotate '' --disable-healthreport
+	mozconfig_annotate '' --disable-telemetry
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
 	mozconfig_annotate '' --with-pthreads
