@@ -231,7 +231,6 @@ src_configure() {
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_CRASHREPORTER=0" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_HEALTHREPORT=0" >> "${S}"/.mozconfig
 	echo "export MOZ_CRASHREPORTER_ENABLE_PERCENT=0" >> "${S}"/.mozconfig
 
 	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
