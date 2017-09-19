@@ -135,30 +135,29 @@ src_prepare() {
 	eapply_user
 
 	#######
-	pushd mozilla/toolkit/crashreporter/google-breakpad/src/client
+	pushd "${S}"/mozilla &>/dev/null || die
 	eapply "${FILESDIR}/glibc-2.26-fix.patch"
-	popd
-	pushd mozilla
 	eapply "${FILESDIR}/clip-ft-glyph-52esr.patch"
-	eapply "${FILESDIR}/harmony-fix.patch"
-	popd
+	popd &>/dev/null || die
+
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then
-		pushd mozilla
+		pushd "${S}"/mozilla &>/dev/null || die
 		for i in $(cat "${FILESDIR}/kde-opensuse/series"); \
 		do eapply "${FILESDIR}/kde-opensuse/$i"; \
 		done
-		popd
+		popd &>/dev/null || die
+
 		eapply "${FILESDIR}/kde-opensuse/tb-ssldap.patch"
 	fi
 
 	# Fedora patches
-	pushd mozilla
+	pushd "${S}"/mozilla &>/dev/null || die
 	for i in $(cat "${FILESDIR}/fedora-patchset/series"); \
 	do eapply "${FILESDIR}/fedora-patchset/$i"; \
 	done
-	popd
+	popd &>/dev/null || die
 	eapply "${FILESDIR}/fedora-patchset/lightning-bad-langs.patch"
 	eapply "${FILESDIR}/fedora-patchset/thunderbird-enable-addons.patch"
 

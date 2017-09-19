@@ -2,7 +2,7 @@ From 6a0b7c8ecf0734ba1bcdccf8e0ee97e721fd5420 Mon Sep 17 00:00:00 2001
 Message-Id: <6a0b7c8ecf0734ba1bcdccf8e0ee97e721fd5420.1505113337.git.jan.steffens@gmail.com>
 From: =?UTF-8?q?Emilio=20Cobos=20=C3=81lvarez?= <emilio@crisal.io>
 Date: Sat, 19 Aug 2017 20:14:25 +0200
-Subject: [PATCH] Fix use of struct ucontext (squash 2 commits)
+	Subject: [PATCH] Fix use of struct ucontext (squash 2 commits)
 
 Needed for building with glibc 2.26.
 
@@ -20,10 +20,10 @@ MozReview-Commit-ID: 5tP7fXsI7dQ
  .../linux/minidump_writer/minidump_writer.cc       |  2 +-
  6 files changed, 28 insertions(+), 28 deletions(-)
 
-diff --git a/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.cc b/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.cc
+diff --git a/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc b/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc
 index 999960912e459e1b..303c0ebd32b663c4 100644
---- a/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.cc
-+++ b/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.cc
+--- a/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc
++++ b/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.cc
 @@ -40,15 +40,15 @@ namespace google_breakpad {
  
  #if defined(__i386__)
@@ -129,10 +129,10 @@ index 999960912e459e1b..303c0ebd32b663c4 100644
  #if _MIPS_SIM == _ABI64
    out->context_flags = MD_CONTEXT_MIPS64_FULL;
  #elif _MIPS_SIM == _ABIO32
-diff --git a/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.h b/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.h
+diff --git a/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.h b/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.h
 index c533e28ba7441e83..039752a2dfb6e589 100644
---- a/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.h
-+++ b/toolkit/crashreporter/breakpad-client/linux/dump_writer_common/ucontext_reader.h
+--- a/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.h
++++ b/toolkit/crashreporter/google-breakpad/src/client/linux/dump_writer_common/ucontext_reader.h
 @@ -41,21 +41,21 @@ namespace google_breakpad {
  
  // Wraps platform-dependent implementations of accessors to ucontext structs.
@@ -160,10 +160,10 @@ index c533e28ba7441e83..039752a2dfb6e589 100644
  #endif
  };
  
-diff --git a/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.cc b/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.cc
+diff --git a/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.cc b/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.cc
 index 71a51a763938e39d..12df9bc96ec45fea 100644
---- a/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.cc
-+++ b/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.cc
+--- a/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.cc
++++ b/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.cc
 @@ -439,44 +439,44 @@ bool ExceptionHandler::HandleSignal(int sig, siginfo_t* info, void* uc) {
    // Fill in all the holes in the struct to make Valgrind happy.
    memset(&g_crash_context_, 0, sizeof(g_crash_context_));
@@ -214,10 +214,10 @@ index 71a51a763938e39d..12df9bc96ec45fea 100644
    getcontext(&context);
    return HandleSignal(sig, &siginfo, &context);
  }
-diff --git a/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.h b/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.h
+diff --git a/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.h b/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.h
 index 711586fec7ddae59..be1880170e2826b0 100644
---- a/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.h
-+++ b/toolkit/crashreporter/breakpad-client/linux/handler/exception_handler.h
+--- a/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.h
++++ b/toolkit/crashreporter/google-breakpad/src/client/linux/handler/exception_handler.h
 @@ -191,7 +191,7 @@ class ExceptionHandler {
    struct CrashContext {
      siginfo_t siginfo;
@@ -227,10 +227,10 @@ index 711586fec7ddae59..be1880170e2826b0 100644
  #if !defined(__ARM_EABI__) && !defined(__mips__)
      // #ifdef this out because FP state is not part of user ABI for Linux ARM.
      // In case of MIPS Linux FP state is already part of struct
-diff --git a/toolkit/crashreporter/breakpad-client/linux/microdump_writer/microdump_writer.cc b/toolkit/crashreporter/breakpad-client/linux/microdump_writer/microdump_writer.cc
+diff --git a/toolkit/crashreporter/google-breakpad/src/client/linux/microdump_writer/microdump_writer.cc b/toolkit/crashreporter/google-breakpad/src/client/linux/microdump_writer/microdump_writer.cc
 index ff20bf36584c876b..a0b90e08fc5f0cff 100644
---- a/toolkit/crashreporter/breakpad-client/linux/microdump_writer/microdump_writer.cc
-+++ b/toolkit/crashreporter/breakpad-client/linux/microdump_writer/microdump_writer.cc
+--- a/toolkit/crashreporter/google-breakpad/src/client/linux/microdump_writer/microdump_writer.cc
++++ b/toolkit/crashreporter/google-breakpad/src/client/linux/microdump_writer/microdump_writer.cc
 @@ -571,7 +571,7 @@ class MicrodumpWriter {
  
    void* Alloc(unsigned bytes) { return dumper_->allocator()->Alloc(bytes); }
@@ -240,10 +240,10 @@ index ff20bf36584c876b..a0b90e08fc5f0cff 100644
  #if !defined(__ARM_EABI__) && !defined(__mips__)
    const google_breakpad::fpstate_t* const float_state_;
  #endif
-diff --git a/toolkit/crashreporter/breakpad-client/linux/minidump_writer/minidump_writer.cc b/toolkit/crashreporter/breakpad-client/linux/minidump_writer/minidump_writer.cc
+diff --git a/toolkit/crashreporter/google-breakpad/src/client/linux/minidump_writer/minidump_writer.cc b/toolkit/crashreporter/google-breakpad/src/client/linux/minidump_writer/minidump_writer.cc
 index 0650bb95c179464a..6b5304bcd605ca3a 100644
---- a/toolkit/crashreporter/breakpad-client/linux/minidump_writer/minidump_writer.cc
-+++ b/toolkit/crashreporter/breakpad-client/linux/minidump_writer/minidump_writer.cc
+--- a/toolkit/crashreporter/google-breakpad/src/client/linux/minidump_writer/minidump_writer.cc
++++ b/toolkit/crashreporter/google-breakpad/src/client/linux/minidump_writer/minidump_writer.cc
 @@ -1247,7 +1247,7 @@ class MinidumpWriter {
    const int fd_;  // File descriptor where the minidum should be written.
    const char* path_;  // Path to the file where the minidum should be written.
