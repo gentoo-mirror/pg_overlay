@@ -165,7 +165,7 @@ src_prepare() {
 	# Patch to enable PGO
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
-	eapply "${FILESDIR}/glibc-2.26-fix.patch"
+	#eapply "${FILESDIR}/glibc-2.26-fix.patch"
 	eapply "${FILESDIR}/clip-ft-glyph.patch"
 	eapply "${FILESDIR}/harmony-fix.patch"
 
