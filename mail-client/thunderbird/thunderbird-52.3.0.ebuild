@@ -135,8 +135,10 @@ src_prepare() {
 	eapply_user
 
 	#######
-	pushd mozilla
+	pushd mozilla/toolkit/crashreporter/google-breakpad/src/client
 	eapply "${FILESDIR}/glibc-2.26-fix.patch"
+	popd
+	pushd mozilla
 	eapply "${FILESDIR}/clip-ft-glyph-52esr.patch"
 	eapply "${FILESDIR}/harmony-fix.patch"
 	popd
