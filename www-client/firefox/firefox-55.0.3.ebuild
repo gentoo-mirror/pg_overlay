@@ -225,7 +225,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# New features
-	find browser/config/mozconfigs -type f -exec sed -i 's/_REPORTING=1/_REPORTING=0/g' {} \;
 	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
 
@@ -284,6 +283,9 @@ src_configure() {
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake -f client.mk configure
+	sed -i ff/mozilla-config.h '/MOZ_DATA_REPORTING/d' {} \;
+	sed -i ff/mozilla-config.h '/MOZ_SERVICES_HEALTHREPORT/d' {} \;
+	sed -i ff/mozilla-config.h '/MOZ_TELEMETRY_REPORTING/d' {} \;
 }
 
 src_compile() {
