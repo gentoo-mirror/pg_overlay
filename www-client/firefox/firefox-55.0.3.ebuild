@@ -227,7 +227,6 @@ src_configure() {
 	# New features
 	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --disable-eme
-	mozconfig_annotate '' --disable-datareporting
 	mozconfig_annotate '' --disable-healthreport
 	mozconfig_annotate '' --disable-telemetry
 
