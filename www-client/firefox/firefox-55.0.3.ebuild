@@ -285,13 +285,17 @@ src_configure() {
 	emake -f client.mk configure
 
 	# Disable Telemetry & Data reporting
-	sed -i "/MOZ_CRASHREPORTER_ENABLE_PERCENT': '0/d" ff/config.status || die
-	sed -i "/MOZ_DATA_REPORTING': '1/d" ff/config.status || die
-	sed -i "/MOZ_TELEMETRY_REPORTING': '1/d" ff/config.status || die
-	sed -i 's/-DMOZ_DATA_REPORTING=1//g' ff/config/autoconf.mk || die
-	sed -i 's/-DMOZ_TELEMETRY_REPORTING=1//g' ff/config/autoconf.mk || die
-	sed -i 's/-DMOZ_DATA_REPORTING=1//g' ff/faster/Makefile || die
-	sed -i 's/-DMOZ_TELEMETRY_REPORTING=1//g' ff/faster/Makefile || die
+	sed -i '/MOZ_CRASHREPORTER_ENABLE_PERCENT/d' ff/config.status || die
+	sed -i '/MOZ_DATA_REPORTING/d' ff/config.status || die
+	sed -i '/MOZ_TELEMETRY_REPORTING/d' ff/config.status || die
+
+	#sed -i 's/-DMOZ_CRASHREPORTER_ENABLE_PERCENT=0//g' ff/config/autoconf.mk || die
+	#sed -i 's/-DMOZ_DATA_REPORTING=1//g' ff/config/autoconf.mk || die
+	#sed -i 's/-DMOZ_TELEMETRY_REPORTING=1//g' ff/config/autoconf.mk || die
+
+	#sed -i 's/-DMOZ_CRASHREPORTER_ENABLE_PERCENT=0//g' ff/faster/Makefile || die
+	#sed -i 's/-DMOZ_DATA_REPORTING=1//g' ff/faster/Makefile || die
+	#sed -i 's/-DMOZ_TELEMETRY_REPORTING=1//g' ff/faster/Makefile || die
 
 }
 
