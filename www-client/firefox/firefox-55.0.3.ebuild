@@ -283,9 +283,11 @@ src_configure() {
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	emake -f client.mk configure
-	sed -i '/MOZ_DATA_REPORTING/d' ff/config.status || die
-	sed -i '/MOZ_SERVICES_HEALTHREPORT/d' ff/config.status || die
-	sed -i '/MOZ_TELEMETRY_REPORTING/d' ff/config.status || die
+
+	# Disable Telemetry & Data reporting
+	#sed -i "s/MOZ_CRASHREPORTER_ENABLE_PERCENT': '0/MOZ_CRASHREPORTER_ENABLE_PERCENT': '/g" ff/config.status || die
+	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '0/g" ff/config.status || die
+	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '0/g" ff/config.status || die
 	sed -i 's/DMOZ_DATA_REPORTING=1/DMOZ_DATA_REPORTING=0/g' ff/config/autoconf.mk || die
 	sed -i 's/DMOZ_TELEMETRY_REPORTING=1/DMOZ_TELEMETRY_REPORTING=0/g' ff/config/autoconf.mk || die
 	sed -i 's/DMOZ_DATA_REPORTING=1/DMOZ_DATA_REPORTING=0/g' ff/faster/Makefile || die
