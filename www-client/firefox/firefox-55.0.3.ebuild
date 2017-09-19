@@ -224,50 +224,49 @@ src_configure() {
 	mozconfig_annotate '' --with-google-api-keyfile="${S}/google-api-key"
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
-	# New features
-	mozconfig_annotate '' --enable-elf-hack
+	# Disable unnecessary  features
+	mozconfig_annotate '' --disable-tests
+	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-rust-debug
+	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --disable-instruments
+	mozconfig_annotate '' --disable-callgrind
+	mozconfig_annotate '' --disable-profiling
+	mozconfig_annotate '' --disable-vtune
 	mozconfig_annotate '' --disable-eme
-
-	# Disable unwanted features from Cyberfox https://github.com/logicoftekk/Cyberfox-Overlay
-	mozconfig_annotate '' --with-pthreads
-	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-parental-controls
-
-	# AUR Firefox-KDE-OpenSUSE https://aur.archlinux.org/packages/firefox-kde-opensuse/
-	mozconfig_annotate '' --enable-gold
-	mozconfig_annotate '' --enable-pie
-	mozconfig_annotate '' --disable-libproxy
-	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-tests
-
-	# AUR Firefox-ESR-Privacy https://aur.archlinux.org/packages/firefox-esr-privacy/
-	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --enable-webrtc
-	mozconfig_annotate '' --disable-safe-browsing
-	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-url-classifier
-	mozconfig_annotate '' --enable-strip
-	mozconfig_annotate '' --enable-install-strip
-
-	# AUR PaleMoon-git https://aur.archlinux.org/packages/palemoon/
-	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-gamepad
-
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-debug-symbols
-	mozconfig_annotate '' --disable-b2g-ril
+	mozconfig_annotate '' --disable-android-omx
 	mozconfig_annotate '' --disable-b2g-bt
 	mozconfig_annotate '' --disable-b2g-camera
+	mozconfig_annotate '' --disable-b2g-ril
+	mozconfig_annotate '' --disable-clang-plugin
+	mozconfig_annotate '' --disable-crashreporter
+	mozconfig_annotate '' --disable-debug-js-modules
+	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --disable-faststripe
+	mozconfig_annotate '' --disable-gamepad
+	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-ios-target
+	mozconfig_annotate '' --disable-maintenance-service
+	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-mozril-geoloc
+	mozconfig_annotate '' --disable-necko-wifi
+	mozconfig_annotate '' --disable-parental-controls
+	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --disable-safe-browsing
+	mozconfig_annotate '' --enable-strip
+	mozconfig_annotate '' --disable-trace-logging
+	mozconfig_annotate '' --disable-updater
+	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --disable-valgrind
-
-	# Waterfox
-	mozconfig_annotate '' --disable-js-shell
 	mozconfig_annotate '' --disable-verify-mar
-	mozconfig_annotate '' --disable-profiling
+	mozconfig_annotate '' --without-crashreporter-enable-percent
+	mozconfig_annotate '' --without-debug-label
+	mozconfig_annotate '' --with-pthreads
 
 	# Allow for a proper pgo build
 	if use pgo; then
@@ -288,15 +287,6 @@ src_configure() {
 	sed -i '/MOZ_CRASHREPORTER_ENABLE_PERCENT/d' ff/config.status || die
 	sed -i '/MOZ_DATA_REPORTING/d' ff/config.status || die
 	sed -i '/MOZ_TELEMETRY_REPORTING/d' ff/config.status || die
-
-	#sed -i 's/-DMOZ_CRASHREPORTER_ENABLE_PERCENT=0//g' ff/config/autoconf.mk || die
-	#sed -i 's/-DMOZ_DATA_REPORTING=1//g' ff/config/autoconf.mk || die
-	#sed -i 's/-DMOZ_TELEMETRY_REPORTING=1//g' ff/config/autoconf.mk || die
-
-	#sed -i 's/-DMOZ_CRASHREPORTER_ENABLE_PERCENT=0//g' ff/faster/Makefile || die
-	#sed -i 's/-DMOZ_DATA_REPORTING=1//g' ff/faster/Makefile || die
-	#sed -i 's/-DMOZ_TELEMETRY_REPORTING=1//g' ff/faster/Makefile || die
-
 }
 
 src_compile() {
