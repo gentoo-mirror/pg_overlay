@@ -62,7 +62,7 @@ src_prepare() {
 	rm -fr Modules/_ctypes/libffi*
 	rm -fr Modules/zlib
 
-	cp "-f ${FILESDIR}/22_all_tests_environment.patch" "${WORKDIR}/patches" || die
+	cp -f "${FILESDIR}/22_all_tests_environment.patch" "${WORKDIR}/patches" || die
 	EPATCH_SUFFIX="patch" epatch "${WORKDIR}/patches"
 	epatch "${FILESDIR}/${PN}-3.5-distutils-OO-build.patch"
 	epatch "${FILESDIR}/${PN}-3.6.0-blake2_remove_nested_comments.patch"
