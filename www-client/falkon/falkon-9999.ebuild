@@ -52,7 +52,7 @@ DOCS=( AUTHORS BUILDING.md CHANGELOG FAQ README.md )
 
 src_prepare() {
 	# get extra plugins into qupzilla build tree
-	mv "${WORKDIR}"/${PN}-plugins-${PLUGINS_HASH}/plugins/* "${S}"/src/plugins/ || die
+	mv "${WORKDIR}"/${PN}-plugins-${PLUGINS_VERSION}/plugins/* "${S}"/src/plugins/ || die
 
 	rm_loc() {
 		# remove localizations the user has not specified
