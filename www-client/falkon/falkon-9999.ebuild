@@ -78,9 +78,9 @@ src_prepare() {
 src_configure() {
 	# see BUILDING document for explanation of options
 	export \
-		CMAKE_INSTALL_PREFIX="${EPREFIX}/usr" \
+		FALKON_PREFIX="${EPREFIX}/usr" \
 		USE_LIBPATH="${EPREFIX}/usr/$(get_libdir)" \
-		CMAKE_BUILD_TYPE=$(usex debug true '') \
+		DEBUG_BUILD=$(usex debug true '') \
 		DISABLE_DBUS=$(usex dbus '' true) \
 		GNOME_INTEGRATION=$(usex gnome-keyring true '') \
 		KDE_INTEGRATION=$(usex kwallet true '') \
