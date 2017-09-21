@@ -3,14 +3,10 @@
 
 EAPI=6
 
-PLOCALES="ar_SA bg_BG ca_ES cs_CZ da_DK de_DE el_GR es_ES es_MX es_VE eu_ES
-	fa_IR fi_FI fr_FR gl_ES he_IL hr_HR hu_HU id_ID is it_IT ja_JP ka_GE
-	lg lt lv_LV nl_NL nqo pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sr
-	sr@ijekavian sr@ijekavianlatin sr@latin sv_SE tr_TR uk_UA uz@Latn
-	zh_CN zh_HK zh_TW"
+PLOCALES="ar_SA bg_BG ca_ES cs_CZ da_DK de_DE el_GR es_419 es_ES es_MX es_VE eu_ES fa_IR fi_FI fr_FR gl_ES he_IL hr_HR hu_HU id_ID is it_IT ja_JP ka_GE lg lt lv_LV nl_NL nqo pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sl_SI sr sr@ijekavian sr@ijekavianlatin sr@latin sv_SE tr_TR uk_UA uz@Latn zh_CN zh_HK zh_TW"
 
-PLUGINS_HASH='80fea7df7765fdf9c9c64fdb667052b25f1c0a22'
-PLUGINS_VERSION='2017.03.26' # if there are no updates, we can use the older archive
+#PLUGINS_HASH='80fea7df7765fdf9c9c64fdb667052b25f1c0a22'
+#PLUGINS_VERSION='2017.03.26' # if there are no updates, we can use the older archive
 
 inherit git-r3 l10n qmake-utils
 
@@ -18,7 +14,7 @@ EGIT_REPO_URI="https://anongit.kde.org/${PN}.git"
 
 DESCRIPTION="Falkon Web Browser. Cross-platform Qt Web Browser"
 HOMEPAGE="https://www.qupzilla.com/"
-SRC_URI+=" https://github.com/QupZilla/qupzilla-plugins/archive/${PLUGINS_HASH}.tar.gz -> ${PN}-plugins-${PLUGINS_VERSION}.tar.gz"
+#SRC_URI+=" https://github.com/QupZilla/qupzilla-plugins/archive/${PLUGINS_HASH}.tar.gz -> ${PN}-plugins-${PLUGINS_VERSION}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -56,8 +52,10 @@ src_unpack() {
 }
 
 src_prepare() {
-	# get extra plugins into qupzilla build tree
+	 get extra plugins into qupzilla build tree
 	mv "${WORKDIR}"/qupzilla-plugins-${PLUGINS_HASH}/plugins/* "${S}"/src/plugins/ || die
+
+	eapply "${FILESDIR}/plugins_to_falkon.patch"
 
 	rm_loc() {
 		# remove localizations the user has not specified
