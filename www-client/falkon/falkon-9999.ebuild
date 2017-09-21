@@ -18,7 +18,7 @@ EGIT_REPO_URI="https://anongit.kde.org/${PN}.git"
 
 DESCRIPTION="Falkon Web Browser. Cross-platform Qt Web Browser"
 HOMEPAGE="https://www.qupzilla.com/"
-SRC_URI="https://github.com/QupZilla/qupzilla-plugins/archive/${PLUGINS_HASH}.tar.gz -> ${PN}-plugins-${PLUGINS_VERSION}.tar.gz"
+SRC_URI+=" https://github.com/QupZilla/qupzilla-plugins/archive/${PLUGINS_HASH}.tar.gz -> ${PN}-plugins-${PLUGINS_VERSION}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -52,7 +52,7 @@ DOCS=( AUTHORS BUILDING.md CHANGELOG FAQ README.md )
 
 src_prepare() {
 	# get extra plugins into qupzilla build tree
-	mv "${WORKDIR}"/${PN}-plugins-${PLUGINS_VERSION}/plugins/* "${S}"/src/plugins/ || die
+	mv "${WORKDIR}"/qupzilla-plugins-${PLUGINS_HASH}/plugins/* "${S}"/src/plugins/ || die
 
 	rm_loc() {
 		# remove localizations the user has not specified
