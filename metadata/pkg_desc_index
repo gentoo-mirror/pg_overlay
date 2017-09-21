@@ -68,6 +68,7 @@ sys-fs/xfsprogs 4.13.0_rc1 9999: xfs filesystem utilities
 virtual/rust 1.20.0: Virtual for Rust language compiler
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 60.0.3112.116 61.0.3163.81 61.0.3163.91 61.0.3163.98: Open-source version of Google Chrome web browser
+www-client/falkon 9999: Falkon Web Browser. Cross-platform Qt Web Browser
 www-client/firefox 55.0.3: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
