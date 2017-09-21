@@ -44,7 +44,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
-DOCS=( AUTHORS BUILDING.md CHANGELOG FAQ README.md )
+DOCS=( BUILDING.md CHANGELOG README.md )
 
 src_unpack() {
 	git-r3_src_unpack
