@@ -14,7 +14,7 @@ EGIT_REPO_URI="https://anongit.kde.org/${PN}.git"
 
 DESCRIPTION="Falkon Web Browser. Cross-platform Qt Web Browser"
 HOMEPAGE="https://www.qupzilla.com/"
-#SRC_URI+=" https://github.com/QupZilla/qupzilla-plugins/archive/${PLUGINS_HASH}.tar.gz -> ${PN}-plugins-${PLUGINS_VERSION}.tar.gz"
+SRC_URI+=" https://github.com/QupZilla/qupzilla-plugins/archive/${PLUGINS_HASH}.tar.gz -> ${PN}-plugins-${PLUGINS_VERSION}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
