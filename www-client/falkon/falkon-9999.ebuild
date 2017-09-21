@@ -50,6 +50,11 @@ DEPEND="${RDEPEND}
 
 DOCS=( AUTHORS BUILDING.md CHANGELOG FAQ README.md )
 
+src_unpack() {
+	git-r3_src_unpack
+	default
+}
+
 src_prepare() {
 	# get extra plugins into qupzilla build tree
 	mv "${WORKDIR}"/qupzilla-plugins-${PLUGINS_HASH}/plugins/* "${S}"/src/plugins/ || die
