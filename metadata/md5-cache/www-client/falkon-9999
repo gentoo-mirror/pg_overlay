@@ -9,4 +9,4 @@ RDEPEND=>=dev-qt/qtcore-5.8:5 >=dev-qt/qtdeclarative-5.8:5[widgets] >=dev-qt/qtg
 SLOT=0
 SRC_URI=https://github.com/QupZilla/qupzilla-plugins/archive/80fea7df7765fdf9c9c64fdb667052b25f1c0a22.tar.gz -> falkon-plugins-2017.03.26.tar.gz
 _eclasses_=estack	43ddf5aaffa7a8d0482df54d25a66a1f	git-r3	52a888802d25387c2c74cb845d1219bc	l10n	2c2e15383ba891d642f51896a7f0ecfe	multilib	97f470f374f2e94ccab04a2fb21d811e	qmake-utils	990448b067cb3cfe1443bc25fb57239c	toolchain-funcs	185a06792159ca143528e7010368e8af
-_md5_=baf35cf74422f5523788277394d3ffea
+_md5_=6aba6c8d26bc7d8d319188994e7d391c
