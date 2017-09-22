@@ -2,6 +2,10 @@ app-admin/syslog-ng 3.11.1: syslog replacement with advanced filtering features
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/gpgme 1.9.0: GnuPG Made Easy is a library for making GnuPG easier to use
+app-emulation/virtualbox 5.1.28: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox-additions 5.1.28: CD image containing guest additions for VirtualBox
+app-emulation/virtualbox-extpack-oracle 5.1.28.117968: PUEL extensions for VirtualBox
+app-emulation/virtualbox-modules 5.1.28: Kernel Modules for Virtualbox
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-office/libreoffice 5.4.1.2: A full office productivity suite
@@ -68,7 +72,7 @@ sys-fs/android-file-transfer-linux 3.2 9999: Reliable MTP client with minimalist
 sys-fs/xfsprogs 4.13.0_rc1 9999: xfs filesystem utilities
 virtual/rust 1.20.0: Virtual for Rust language compiler
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 60.0.3112.116 61.0.3163.81 61.0.3163.91 61.0.3163.98: Open-source version of Google Chrome web browser
+www-client/chromium 60.0.3112.116 61.0.3163.81 61.0.3163.91 61.0.3163.98 61.0.3163.100: Open-source version of Google Chrome web browser
 www-client/falkon 9999: Falkon Web Browser. Cross-platform Qt Web Browser
 www-client/firefox 55.0.3: Firefox Web Browser
 x11-base/xorg-drivers 1.19 9999: Meta package containing deps on all xorg drivers
