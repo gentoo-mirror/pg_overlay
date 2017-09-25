@@ -56,11 +56,10 @@ src_prepare() {
 	mv "${WORKDIR}"/qupzilla-plugins-${PLUGINS_HASH}/plugins/* "${S}"/src/plugins/ || die
 
 	eapply "${FILESDIR}/plugins_to_falkon.patch"
-	eapply "${FILESDIR}/disable_icons_direct_copy.patch"
 
 	rm_loc() {
 		# remove localizations the user has not specified
-		sed -i -e "/${1}.ts/d" translations/translations.pri || die
+		#sed -i -e "/${1}.ts/d" translations/translations.pri || die
 		rm translations/${1}.ts || die
 	}
 
