@@ -59,7 +59,7 @@ src_prepare() {
 
 	rm_loc() {
 		# remove localizations the user has not specified
-		sed -i -e "/${1}.ts/d" translations/translations.pri || die
+		#sed -i -e "/${1}.ts/d" translations/translations.pri || die
 		rm translations/${1}.ts || die
 	}
 
