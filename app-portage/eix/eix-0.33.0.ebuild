@@ -46,7 +46,7 @@ src_prepare() {
 
 src_configure() {
 	local myconf=(
-		$(use_enable debug paranoicasserts)
+		$(use_enable debug debugging)
 		$(use_enable nls)
 		$(use_with doc extra-doc)
 		$(use_with sqlite)
@@ -74,6 +74,7 @@ src_configure() {
 		--disable-strong-security
 
 		--without-zsh-completion
+		--disable-swap-remote
 	)
 
 	econf "${myconf[@]}"
