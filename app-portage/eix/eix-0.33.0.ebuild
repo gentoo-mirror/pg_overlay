@@ -87,7 +87,7 @@ src_install() {
 
 	insinto /usr/share/${PN}
 	doins "${ED}"/usr/bin/eix-functions.sh
-	rm -r "${ED}"/usr/bin/eix-functions.sh || die
+	#rm -r "${ED}"/usr/bin/eix-functions.sh || die
 
 	keepdir /var/cache/eix
 }

@@ -71,6 +71,7 @@ src_configure() {
 		-Dalways-accept-keywords=$(usex prefix true false) \
 		-Ddep-default=$(usex dep true false) \
 		-Drequired-use-default=$(usex required-use true false) \
+		-Dzsh-completion="" \
 		-Dportage-rootpath="${ROOTPATH}" \
 		-Deprefix-default="${EPREFIX}"
 	)

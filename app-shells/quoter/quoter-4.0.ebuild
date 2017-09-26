@@ -16,7 +16,7 @@ IUSE=""
 src_install() {
 	emake DESTDIR="${ED}" install
 
-	rm -f "${ED}"/usr/bin/quoter_pipe.sh || die
+	#rm -f "${ED}"/usr/bin/quoter_pipe.sh || die
 	insinto /usr/share/${PN}
 	doins bin/quoter_pipe.sh
 	dodoc README
