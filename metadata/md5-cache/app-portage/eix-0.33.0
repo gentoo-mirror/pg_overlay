@@ -10,4 +10,4 @@ RDEPEND=nls? ( virtual/libintl ) sqlite? ( >=dev-db/sqlite-3:= ) >=app-shells/pu
 SLOT=0
 SRC_URI=https://github.com/vaeth/eix/releases/download/v0.33.0/eix-0.33.0.tar.xz
 _eclasses_=autotools	7027963e8e8cc12c91117bdb9225dc26	bash-completion-r1	8e447753aaf658afa609fbf961d80ab7	l10n	2c2e15383ba891d642f51896a7f0ecfe	libtool	0081a71a261724730ec4c248494f044d	multilib	97f470f374f2e94ccab04a2fb21d811e	systemd	34815d3b76e745c5ca33eec9f95074c2	toolchain-funcs	185a06792159ca143528e7010368e8af
-_md5_=bba14c4ba0ded7bdd125d45201c49e12
+_md5_=4ee2446284ce0842617bf5e7c23a5c84
