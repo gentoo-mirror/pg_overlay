@@ -52,7 +52,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	 get extra plugins into qupzilla build tree
+	# get extra plugins into qupzilla build tree
 	mv "${WORKDIR}"/qupzilla-plugins-${PLUGINS_HASH}/plugins/* "${S}"/src/plugins/ || die
 
 	eapply "${FILESDIR}/plugins_to_falkon.patch"
