@@ -10,7 +10,7 @@ app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-office/libreoffice 5.4.1.2: A full office productivity suite
 app-office/libreoffice-l10n 5.4.1.2: Translations for the Libreoffice suite
-app-portage/eix 0.33.0 0.33.0-r1: Search and query ebuilds
+app-portage/eix 0.33.0: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.0: Quote arguments or standard input for usage in POSIX shell by eval
