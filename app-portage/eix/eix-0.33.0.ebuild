@@ -36,11 +36,6 @@ src_prepare() {
 	default
 	sed -i -e "s:/:${EPREFIX}/:" tmpfiles.d/eix.conf || die
 
-	#sed -e "/eixf_source=/s:push.sh:cat \"${EROOT}usr/share/push/push.sh\":" \
-	#	-e "/eixf_source=/s:quoter_pipe.sh:cat \"${EROOT}usr/share/quoter/quoter_pipe.sh\":" \
-	#	-i src/eix-functions.sh.in || die
-	#sed -e "s:'\$(bindir)/eix-functions.sh':cat \\\\\"${EROOT}usr/share/eix/eix-functions.sh\\\\\":" \
-	#	-i src/Makefile.am || die
 	eautoreconf
 }
 
@@ -84,10 +79,6 @@ src_install() {
 	default
 	dobashcomp bash/eix
 	systemd_dotmpfilesd tmpfiles.d/eix.conf
-
-	insinto /usr/share/${PN}
-	doins "${ED}"/usr/bin/eix-functions.sh
-	#rm -r "${ED}"/usr/bin/eix-functions.sh || die
 
 	keepdir /var/cache/eix
 }

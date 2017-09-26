@@ -16,7 +16,5 @@ IUSE=""
 src_install() {
 	emake DESTDIR="${ED}" install
 
-	insinto /usr/share/${PN}
-	doins bin/push.sh
 	dodoc README
 }
