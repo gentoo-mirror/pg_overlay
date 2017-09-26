@@ -4,7 +4,7 @@
 EAPI=6
 
 PLOCALES="de ru"
-inherit autotools bash-completion-r1 l10n systemd flag-o-matic
+inherit autotools bash-completion-r1 l10n systemd
 
 DESCRIPTION="Search and query ebuilds"
 HOMEPAGE="https://github.com/vaeth/eix/"
@@ -72,10 +72,9 @@ src_configure() {
 		--disable-security
 		--disable-nopie-security
 		--disable-strong-security
-	)
 
-	# https://github.com/vaeth/eix/issues/35
-	append-cxxflags -std=c++11
+		--without-zsh-completion
+	)
 
 	econf "${myconf[@]}"
 }
