@@ -171,7 +171,7 @@ src_prepare() {
 	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/opensuse-kde/$i"; done
 
 	# Privacy-esr patches
-	#for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
@@ -296,6 +296,7 @@ src_configure() {
 	# Disable Telemetry & Data reporting
 	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '/" ff/config.status || die
 	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_SERVICES_HEALTHREPORT': '1/MOZ_SERVICES_HEALTHREPORT': '/" ff/config.status || die
 }
 
 src_compile() {
