@@ -168,16 +168,16 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/opensuse-kde/$i"; done
+	#use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/opensuse-kde/$i"; done
 
 	# Privacy-esr patches
-	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# ArchLinux patches
 	#for i in $(cat "${FILESDIR}/archlinux-patchset/series"); do eapply "${FILESDIR}/archlinux-patchset/$i"; done
