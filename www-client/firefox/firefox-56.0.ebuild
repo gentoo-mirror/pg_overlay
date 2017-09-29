@@ -236,6 +236,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --disable-jprof
 	mozconfig_annotate '' --disable-dmd
 	mozconfig_annotate '' --disable-instruments
@@ -243,7 +244,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-profiling
 	mozconfig_annotate '' --disable-vtune
 	mozconfig_annotate '' --disable-gc-trace
-	mozconfig_annotate '' --disable-eme
+	mozconfig_annotate '' --disable-perf
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-gtest-in-build
 	mozconfig_annotate '' --disable-accessibility
@@ -257,7 +258,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-faststripe
 	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-ios-target
@@ -268,6 +268,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-parental-controls
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --disable-safe-browsing
+	mozconfig_annotate '' --disable-signmar
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --disable-trace-logging
 	mozconfig_annotate '' --disable-updater
