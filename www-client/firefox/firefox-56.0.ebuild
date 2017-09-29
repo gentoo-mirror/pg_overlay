@@ -274,7 +274,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-url-classifier
 	mozconfig_annotate '' --disable-valgrind
 	mozconfig_annotate '' --disable-verify-mar
-	mozconfig_annotate '' --without-crashreporter-enable-percent
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --with-pthreads
 
