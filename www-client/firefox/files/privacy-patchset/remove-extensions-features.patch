@@ -1,6 +1,6 @@
 --- a/browser/extensions/moz.build	2017-08-11 11:58:51.858436805 +0700
 +++ b/browser/extensions/moz.build	2017-08-11 12:02:56.311429564 +0700
-@@ -5,17 +5,8 @@
+@@ -5,16 +5,7 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  DIRS += [
@@ -17,4 +17,3 @@
 -    'shield-recipe-client',
      'webcompat',
  ]
- 
