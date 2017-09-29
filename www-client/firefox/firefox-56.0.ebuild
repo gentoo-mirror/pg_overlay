@@ -294,9 +294,8 @@ src_configure() {
 	emake -f client.mk configure
 
 	# Disable Telemetry & Data reporting
-	sed -i s/MOZ_CRASHREPORTER_ENABLE_PERCENT': '1/MOZ_CRASHREPORTER_ENABLE_PERCENT': '0/g ff/config.status || die
-	sed -i s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '0/g ff/config.status || die
-	sed -i s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '0/g ff/config.status || die
+	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '/" ff/config.status || die
 }
 
 src_compile() {
