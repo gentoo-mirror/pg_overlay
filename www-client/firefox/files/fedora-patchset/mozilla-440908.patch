@@ -1,19 +1,7 @@
-From: Mike Hommey <glandium@debian.org>
-Date: Sat, 21 Jun 2008 02:48:46 +0200
-Subject: Allow .js preference files to set locked prefs with lockPref()
-
----
- modules/libpref/prefapi.cpp  |  6 ++++--
- modules/libpref/prefapi.h    |  3 ++-
- modules/libpref/prefread.cpp | 13 ++++++++++---
- modules/libpref/prefread.h   |  4 +++-
- 4 files changed, 19 insertions(+), 7 deletions(-)
-
-diff --git a/modules/libpref/prefapi.cpp b/modules/libpref/prefapi.cpp
-index 2e40fa26bbeb..9383f579ed9e 100644
---- a/modules/libpref/prefapi.cpp
-+++ b/modules/libpref/prefapi.cpp
-@@ -1036,8 +1036,8 @@ void PREF_ReaderCallback(void       *closure,
+diff -up firefox-56.0/modules/libpref/prefapi.cpp.440908 firefox-56.0/modules/libpref/prefapi.cpp
+--- firefox-56.0/modules/libpref/prefapi.cpp.440908	2017-09-14 22:15:52.000000000 +0200
++++ firefox-56.0/modules/libpref/prefapi.cpp	2017-09-25 10:39:39.266572792 +0200
+@@ -1036,8 +1036,8 @@ void PREF_ReaderCallback(void       *clo
                           PrefValue   value,
                           PrefType    type,
                           bool        isDefault,
@@ -24,31 +12,30 @@ index 2e40fa26bbeb..9383f579ed9e 100644
  {
      uint32_t flags = 0;
      if (isDefault) {
-@@ -1049,4 +1049,6 @@ void PREF_ReaderCallback(void       *closure,
+@@ -1049,4 +1049,6 @@ void PREF_ReaderCallback(void       *clo
          flags |= kPrefForceSet;
      }
      pref_HashPref(pref, value, type, flags);
 +    if (isLocked)
 +        PREF_LockPref(pref, true);
  }
-diff --git a/modules/libpref/prefapi.h b/modules/libpref/prefapi.h
-index ab525bbcc5c9..cc49678acc74 100644
---- a/modules/libpref/prefapi.h
-+++ b/modules/libpref/prefapi.h
-@@ -246,7 +246,8 @@ void PREF_ReaderCallback( void *closure,
+diff -up firefox-56.0/modules/libpref/prefapi.h.440908 firefox-56.0/modules/libpref/prefapi.h
+--- firefox-56.0/modules/libpref/prefapi.h.440908	2017-07-31 18:20:51.000000000 +0200
++++ firefox-56.0/modules/libpref/prefapi.h	2017-09-25 10:39:39.267572789 +0200
+@@ -246,8 +246,8 @@ void PREF_ReaderCallback( void *closure,
                            PrefValue   value,
                            PrefType    type,
                            bool        isDefault,
 -                          bool        isStickyDefault);
+-
 +                          bool        isStickyDefault,
 +                          bool        isLocked);
  
- 
  /*
-diff --git a/modules/libpref/prefread.cpp b/modules/libpref/prefread.cpp
-index 1f29b8e07cd8..e1ec9d529394 100644
---- a/modules/libpref/prefread.cpp
-+++ b/modules/libpref/prefread.cpp
+  * Callback whenever we change a preference
+diff -up firefox-56.0/modules/libpref/prefread.cpp.440908 firefox-56.0/modules/libpref/prefread.cpp
+--- firefox-56.0/modules/libpref/prefread.cpp.440908	2017-09-14 22:15:52.000000000 +0200
++++ firefox-56.0/modules/libpref/prefread.cpp	2017-09-25 10:39:39.267572789 +0200
 @@ -43,6 +43,7 @@ enum {
  #define BITS_PER_HEX_DIGIT      4
  
@@ -66,7 +53,7 @@ index 1f29b8e07cd8..e1ec9d529394 100644
      return true;
  }
  
-@@ -215,6 +216,7 @@ PREF_ParseBuf(PrefParseState *ps, const char *buf, int bufLen)
+@@ -215,6 +216,7 @@ PREF_ParseBuf(PrefParseState *ps, const
                  ps->vtype = PrefType::Invalid;
                  ps->fdefault = false;
                  ps->fstickydefault = false;
@@ -74,24 +61,22 @@ index 1f29b8e07cd8..e1ec9d529394 100644
              }
              switch (c) {
              case '/':       /* begin comment block or line? */
-@@ -226,12 +228,15 @@ PREF_ParseBuf(PrefParseState *ps, const char *buf, int bufLen)
+@@ -225,11 +227,14 @@ PREF_ParseBuf(PrefParseState *ps, const
+                 break;
              case 'u':       /* indicating user_pref */
              case 's':       /* indicating sticky_pref */
-             case 'p':       /* indicating pref */
 +            case 'l':       /* indicating lockPref */
+             case 'p':       /* indicating pref */
                  if (c == 'u') {
                    ps->smatch = kUserPref;
                  } else if (c == 's') {
                    ps->smatch = kPrefSticky;
--                } else {
-+                } else if (c == 'p') {
-                   ps->smatch = kPref;
-+                } else {
++                } else if (c == 'l') {
 +                  ps->smatch = kLockPref;
+                 } else {
+                   ps->smatch = kPref;
                  }
-                 ps->sindex = 1;
-                 ps->nextstate = PREF_PARSE_UNTIL_OPEN_PAREN;
-@@ -277,8 +282,10 @@ PREF_ParseBuf(PrefParseState *ps, const char *buf, int bufLen)
+@@ -277,8 +282,10 @@ PREF_ParseBuf(PrefParseState *ps, const
          /* name parsing */
          case PREF_PARSE_UNTIL_NAME:
              if (c == '\"' || c == '\'') {
@@ -103,11 +88,10 @@ index 1f29b8e07cd8..e1ec9d529394 100644
                  ps->quotechar = c;
                  ps->nextstate = PREF_PARSE_UNTIL_COMMA; /* return here when done */
                  state = PREF_PARSE_QUOTED_STRING;
-diff --git a/modules/libpref/prefread.h b/modules/libpref/prefread.h
-index f9027fda3be0..ecd6e8bfe771 100644
---- a/modules/libpref/prefread.h
-+++ b/modules/libpref/prefread.h
-@@ -34,7 +34,8 @@ typedef void (*PrefReader)(void       *closure,
+diff -up firefox-56.0/modules/libpref/prefread.h.440908 firefox-56.0/modules/libpref/prefread.h
+--- firefox-56.0/modules/libpref/prefread.h.440908	2017-09-14 22:15:52.000000000 +0200
++++ firefox-56.0/modules/libpref/prefread.h	2017-09-25 10:39:39.267572789 +0200
+@@ -34,7 +34,8 @@ typedef void (*PrefReader)(void       *c
                             PrefValue   val,
                             PrefType    type,
                             bool        defPref,

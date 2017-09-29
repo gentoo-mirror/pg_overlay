@@ -9,7 +9,7 @@ retrieving revision 1.1
 diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 --- a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 +++ b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
-@@ -53,23 +53,27 @@ nsUnixSystemProxySettings::GetMainThread
+@@ -54,23 +54,27 @@ nsUnixSystemProxySettings::GetMainThread
    // dbus prevents us from being threadsafe, but this routine should not block anyhow
    *aMainThreadOnly = true;
    return NS_OK;
@@ -37,7 +37,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 +      mGConf = do_GetService(NS_GCONFSERVICE_CONTRACTID);
 +    }
    }
-   
+ 
    return NS_OK;
  }
  

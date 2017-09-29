@@ -1,0 +1,46 @@
+From: Mike Hommey <mh+mozilla@glandium.org>
+Date: Thu, 10 Aug 2017 14:03:08 +0900
+Subject: Bug 1388981 - Fixup EVENT__SIZEOF_OFF_T. r?jld
+
+There are two problems related with EVENT__SIZEOF_OFF_T:
+- When building Firefox with -D_FILE_OFFSET_BITS=64, off_t is 64 bits,
+  but the in-tree event-config.h still defines EVENT__SIZEOF_OFF_T to 4.
+- When building Firefox *without* -D_FILE_OFFSET_BITS=64 (the default)
+  against a system libevent that was built with -D_FILE_OFFSET_BITS=64,
+  its event-config.h defines EVENT__SIZEOF_OFF_T to 8, which then
+  doesn't match off_t size.
+
+For the latter, libevent actually defines its own off_t type, that
+callers are supposed to use instead of off_t. So that's what our
+static_assert should be checking.
+---
+ ipc/chromium/src/base/message_pump_libevent.cc                    | 2 +-
+ ipc/chromium/src/third_party/libevent/linux/event2/event-config.h | 2 +-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/ipc/chromium/src/base/message_pump_libevent.cc b/ipc/chromium/src/base/message_pump_libevent.cc
+index 72ecf8c99d31..bc9298b00ed0 100644
+--- a/ipc/chromium/src/base/message_pump_libevent.cc
++++ b/ipc/chromium/src/base/message_pump_libevent.cc
+@@ -36,7 +36,7 @@
+ 
+ CHECK_EVENT_SIZEOF(LONG,      long);
+ CHECK_EVENT_SIZEOF(LONG_LONG, long long);
+-CHECK_EVENT_SIZEOF(OFF_T,     off_t);
++CHECK_EVENT_SIZEOF(OFF_T,     ev_off_t);
+ CHECK_EVENT_SIZEOF(PTHREAD_T, pthread_t);
+ CHECK_EVENT_SIZEOF(SHORT,     short);
+ CHECK_EVENT_SIZEOF(SIZE_T,    size_t);
+diff --git a/ipc/chromium/src/third_party/libevent/linux/event2/event-config.h b/ipc/chromium/src/third_party/libevent/linux/event2/event-config.h
+index bd32d03565f1..dd64dc621002 100644
+--- a/ipc/chromium/src/third_party/libevent/linux/event2/event-config.h
++++ b/ipc/chromium/src/third_party/libevent/linux/event2/event-config.h
+@@ -461,7 +461,7 @@
+ #define EVENT__SIZEOF_LONG_LONG 8
+ 
+ /* The size of `off_t', as computed by sizeof. */
+-#ifdef __LP64__
++#if defined(__LP64__) || (defined(_FILE_OFFSET_BITS) && _FILE_OFFSET_BITS == 64)
+ #define EVENT__SIZEOF_OFF_T 8
+ #else
+ #define EVENT__SIZEOF_OFF_T 4
