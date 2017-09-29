@@ -3,4 +3,3 @@ firefox-52-disable-telemetry.patch
 firefox-52-disable-data-sharing-infobar.patch
 remove-extensions-features.patch
 disable-healthreport.patch
-patch-bug1312182.patch
