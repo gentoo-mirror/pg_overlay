@@ -7,10 +7,10 @@ Subject: Set program name from the remoting name
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/toolkit/xre/nsAppRunner.cpp b/toolkit/xre/nsAppRunner.cpp
-index b1f389ecbf5e..cf87219db62d 100644
+index 917d493706b1..cc0509310972 100644
 --- a/toolkit/xre/nsAppRunner.cpp
 +++ b/toolkit/xre/nsAppRunner.cpp
-@@ -3776,7 +3776,7 @@ XREMain::XRE_mainStartup(bool* aExitFlag)
+@@ -3822,7 +3822,7 @@ XREMain::XRE_mainStartup(bool* aExitFlag)
  
    // Set program name to the one defined in application.ini.
    {

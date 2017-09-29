@@ -1,13 +1,13 @@
 # HG changeset patch
 # User Wolfgang Rosenauer <wr@rosenauer.org>
 # Parent 5a29924228527f8882c83cf62d470963ea1ce62e
-# Parent  4f39ed617c2f151a3a15903c7ae4471b66774e9e
+# Parent  242f2521ed48bb63b91582956b5e4af80bcb3378
 Bug 583793 - Firefox interface language set to LANG, ignores LANGUAGE
 
 diff --git a/intl/locale/nsLocaleService.cpp b/intl/locale/nsLocaleService.cpp
 --- a/intl/locale/nsLocaleService.cpp
 +++ b/intl/locale/nsLocaleService.cpp
-@@ -114,16 +114,17 @@ nsLocaleService::nsLocaleService(void)
+@@ -116,16 +116,17 @@ nsLocaleService::nsLocaleService(void)
      NS_ENSURE_SUCCESS_VOID(rv);
  #endif
  #if defined(XP_UNIX) && !defined(XP_MACOSX)
@@ -25,7 +25,7 @@ diff --git a/intl/locale/nsLocaleService.cpp b/intl/locale/nsLocaleService.cpp
      for( i = 0; i < LocaleListLength; i++ ) {
          nsresult result;
          // setlocale( , "") evaluates LC_* and LANG
-@@ -149,16 +150,36 @@ nsLocaleService::nsLocaleService(void)
+@@ -151,16 +152,37 @@ nsLocaleService::nsLocaleService(void)
              } else {
                  CopyASCIItoUTF16(lang, platformLocale);
                  result = nsPosixLocale::GetXPLocale(lang, xpLocale);
@@ -54,11 +54,12 @@ diff --git a/intl/locale/nsLocaleService.cpp b/intl/locale/nsLocaleService.cpp
 +            }
 +          }
 +        }
++
          resultLocale->AddCategory(category, xpLocale);
          resultLocale->AddCategory(category_platform, platformLocale);
      }
      mSystemLocale = do_QueryInterface(resultLocale);
      mApplicationLocale = do_QueryInterface(resultLocale);
-        
+ 
  #endif // XP_UNIX
  

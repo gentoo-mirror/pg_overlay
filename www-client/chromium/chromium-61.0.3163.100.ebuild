@@ -407,7 +407,6 @@ src_configure() {
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
-	use vaapi && myconf_gn+=" use_vaapi=true"
 	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" use_gio=false"
 
