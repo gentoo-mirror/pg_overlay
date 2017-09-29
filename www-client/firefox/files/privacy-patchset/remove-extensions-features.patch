@@ -1,6 +1,6 @@
---- a/browser/extensions/moz.build	2017-08-11 11:58:51.858436805 +0700
-+++ b/browser/extensions/moz.build	2017-08-11 12:02:56.311429564 +0700
-@@ -5,16 +5,7 @@
+--- moz.build	2017-09-15 23:14:47.000000000 +0700
++++ moz.build_new	2017-09-29 18:32:33.068758645 +0700
+@@ -5,17 +5,8 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  DIRS += [
@@ -9,7 +9,7 @@
 -    'clicktoplay-rollout',
      'e10srollout',
 -    'followonsearch',
--    'formatautofill',
+-    'formautofill',
 -    'onboarding',
      'pdfjs',
 -    'pocket',
@@ -17,3 +17,4 @@
 -    'shield-recipe-client',
      'webcompat',
  ]
+ 
