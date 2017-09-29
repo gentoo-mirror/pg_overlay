@@ -1,5 +1,4 @@
 fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-fixes/Bug-1373988-Make-webrtc-gtest-build-work-with-system.patch
 fixes/Bug-1388681-Disable-Wformat-security-where-Wformat-i.patch
 prefs/Set-javascript.options.showInConsole.patch
 prefs/Set-DPI-to-system-settings.patch
