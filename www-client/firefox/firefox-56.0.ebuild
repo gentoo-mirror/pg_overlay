@@ -46,7 +46,7 @@ ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
 	jack? ( virtual/jack )
-	>=dev-libs/nss-3.32
+	>=dev-libs/nss-3.32.1
 	>=dev-libs/nspr-4.16
 	selinux? ( sec-policy/selinux-mozilla )
 	kde? ( kde-apps/kdialog:5
@@ -293,9 +293,9 @@ src_configure() {
 	emake -f client.mk configure
 
 	# Disable Telemetry & Data reporting
-	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '0/" ff/config.status || die
-	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '0/" ff/config.status || die
-	sed -i "s/MOZ_SERVICES_HEALTHREPORT': '1/MOZ_SERVICES_HEALTHREPORT': '0/" ff/config.status || die
+	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_SERVICES_HEALTHREPORT': '1/MOZ_SERVICES_HEALTHREPORT': '/" ff/config.status || die
 }
 
 src_compile() {
