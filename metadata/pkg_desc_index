@@ -68,8 +68,8 @@ net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.37: Samsung Unified Linux Driver for printers and MFDs
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
+sys-apps/openrazer 9999: Razer Drivers for Linux
 sys-apps/polychromatic 9999: A graphical front end for managing Razer peripherals under GNU/Linux.
-sys-apps/razer-drivers 9999: Razer Drivers for Linux
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.2 9999: Reliable MTP client with minimalistic UI
 sys-fs/xfsprogs 4.13.0_rc1 4.13.0_rc2 9999: xfs filesystem utilities
