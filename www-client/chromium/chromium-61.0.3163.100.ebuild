@@ -210,12 +210,6 @@ src_prepare() {
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && eapply "${FILESDIR}/${PN}-libva-remove-${MY_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-${MY_MAJORV}.patch" && myconf_gn+=" use_vaapi=true"
 
-	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
-
-	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
-
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
 
@@ -227,6 +221,12 @@ src_prepare() {
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
+
+	# Debian patches
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i";done
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i";done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
