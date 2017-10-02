@@ -11,13 +11,6 @@ app-admin/syslog-ng:smtp - Enable support for SMTP destinations
 app-admin/syslog-ng:spoof-source - Enable support for spoofed source addresses
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-crypt/gpgme:common-lisp - Install common-lisp files
-app-emulation/virtualbox:headless - Build without any graphic frontend
-app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
-app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels.
-app-emulation/virtualbox:sdk - Enable building of SDK
-app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
-app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
-app-emulation/virtualbox-modules:pax_kernel - Apply patch needed for pax enabled kernels
 app-portage/eix:debug - Build with upstream's CXXFLAGS/LDFLAGS for debugging support; not recommended for normal use.
 app-portage/eix:doc - Create description of the eix cache file additionally in html format
 app-portage/eix:sqlite - Compile in support for portage's sqlite backend; to actually use it you need additional configuration of portage and eix
