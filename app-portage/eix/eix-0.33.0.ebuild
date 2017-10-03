@@ -67,9 +67,6 @@ src_configure() {
 		--disable-security
 		--disable-nopie-security
 		--disable-strong-security
-
-		--without-zsh-completion
-		--disable-swap-remote
 	)
 
 	econf "${myconf[@]}"
