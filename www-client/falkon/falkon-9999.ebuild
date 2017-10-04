@@ -42,7 +42,7 @@ DEPEND="${RDEPEND}
 	gnome-keyring? ( virtual/pkgconfig )
 "
 
-DOCS=( AUTHORS BUILDING.md CHANGELOG FAQ README.md )
+DOCS=( BUILDING.md CHANGELOG README.md )
 
 src_unpack() {
 	kde5_src_unpack
@@ -53,7 +53,7 @@ src_prepare() {
 	kde5_src_prepare
 	# get extra plugins into qupzilla build tree
 	mv "${WORKDIR}"/qupzilla-plugins-${PLUGINS_HASH}/plugins/* "${S}"/src/plugins/ || die
-	eapply "${FILESDIR}/plugins_to_falkon.patch"
+	#eapply "${FILESDIR}/plugins_to_falkon.patch"
 }
 
 src_configure() {
