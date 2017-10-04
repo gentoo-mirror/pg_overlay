@@ -1,0 +1,365 @@
+diff -Nuar a/src/plugins/CopyTitle/copytitle.cpp b/src/plugins/CopyTitle/copytitle.cpp
+--- a/src/plugins/CopyTitle/copytitle.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/CopyTitle/copytitle.cpp	2017-09-21 11:54:13.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* QupZilla - WebKit based browser
++* Falkon - WebKit based browser
+ * Copyright (C) 2010-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+@@ -62,7 +62,7 @@
+ bool CopyTitle::testPlugin()
+ {
+     // Require the version that the plugin was built with
+-    return (Qz::VERSION == QLatin1String(QUPZILLA_VERSION));
++    return (Qz::VERSION == QLatin1String(FALKON_VERSION));
+ }
+ 
+ QTranslator* CopyTitle::getTranslator(const QString &locale)
+diff -Nuar a/src/plugins/CopyTitle/copytitle.h b/src/plugins/CopyTitle/copytitle.h
+--- a/src/plugins/CopyTitle/copytitle.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/CopyTitle/copytitle.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* QupZilla - WebKit based browser
++* Falkon - WebKit based browser
+ * Copyright (C) 2010-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+@@ -29,7 +29,7 @@
+     Q_INTERFACES(PluginInterface)
+ 
+ #if QT_VERSION >= 0x050000
+-    Q_PLUGIN_METADATA(IID "QupZilla.Browser.plugin.CopyTitle")
++    Q_PLUGIN_METADATA(IID "Falkon.Browser.plugin.CopyTitle")
+ #endif
+ 
+ public:
+diff -Nuar a/src/plugins/CopyTitle/CopyTitle.pro b/src/plugins/CopyTitle/CopyTitle.pro
+--- a/src/plugins/CopyTitle/CopyTitle.pro	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/CopyTitle/CopyTitle.pro	2017-09-21 11:54:13.000000000 +0700
+@@ -45,7 +45,7 @@
+     translations/zh_TW.ts
+ 
+ PLUGIN_DIR = $$PWD
+-srcdir = $$(QUPZILLA_SRCDIR)
++srcdir = $$(FALKON_SRCDIR)
+ equals(srcdir, "") {
+     include(../../plugins.pri)
+ }
+diff -Nuar a/src/plugins/CopyTitle/README.md b/src/plugins/CopyTitle/README.md
+--- a/src/plugins/CopyTitle/README.md	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/CopyTitle/README.md	2017-09-21 11:53:57.000000000 +0700
+@@ -1,7 +1,7 @@
+-Copy title extension for QupZilla
++Copy title extension for Falkon
+ -------------------------------------------------
+ An extension, that will copy the window title into the clipboard.
+ 
+ ![context](http://i.imgur.com/3ewZIZU.png)
+ 
+-You will find more information about the configuration and usage of this extension in the [wiki](https://github.com/QupZilla/qupzilla-plugins/wiki/Copy-Title).
++You will find more information about the configuration and usage of this extension in the [wiki](https://github.com/Falkon/qupzilla-plugins/wiki/Copy-Title).
+diff -Nuar a/src/plugins/MailHandle/mailhandle_plugin.cpp b/src/plugins/MailHandle/mailhandle_plugin.cpp
+--- a/src/plugins/MailHandle/mailhandle_plugin.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/mailhandle_plugin.cpp	2017-09-21 11:54:13.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* MailHandle plugin for QupZilla
++* MailHandle plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+@@ -37,7 +37,7 @@
+     PluginSpec spec;
+     spec.name = "MailHandle";
+     spec.info = "Mailto links handler";
+-    spec.description = "Makes QupZilla handle mailto links in online services";
++    spec.description = "Makes Falkon handle mailto links in online services";
+     spec.version = "0.1.0";
+     spec.author = QString::fromUtf8("Mladen Pejaković <pejakm@autistici.org>");
+     spec.icon = QPixmap(":/mailhandle/data/mailhandle.png");
+@@ -65,7 +65,7 @@
+ bool MailHandle_Plugin::testPlugin()
+ {
+     // Require the version that the plugin was built with
+-    return (Qz::VERSION == QLatin1String(QUPZILLA_VERSION));
++    return (Qz::VERSION == QLatin1String(FALKON_VERSION));
+ }
+ 
+ QTranslator* MailHandle_Plugin::getTranslator(const QString &locale)
+diff -Nuar a/src/plugins/MailHandle/mailhandle_plugin.h b/src/plugins/MailHandle/mailhandle_plugin.h
+--- a/src/plugins/MailHandle/mailhandle_plugin.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/mailhandle_plugin.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* MailHandle plugin for QupZilla
++* MailHandle plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+@@ -32,7 +32,7 @@
+     Q_INTERFACES(PluginInterface)
+ 
+ #if QT_VERSION >= 0x050000
+-    Q_PLUGIN_METADATA(IID "QupZilla.Browser.plugin.MailHandle")
++    Q_PLUGIN_METADATA(IID "Falkon.Browser.plugin.MailHandle")
+ #endif
+ 
+ public:
+diff -Nuar a/src/plugins/MailHandle/MailHandle.pro b/src/plugins/MailHandle/MailHandle.pro
+--- a/src/plugins/MailHandle/MailHandle.pro	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/MailHandle.pro	2017-09-21 11:54:13.000000000 +0700
+@@ -56,7 +56,7 @@
+         translations/zh_TW.ts \
+ 
+     PLUGIN_DIR = $$PWD
+-    srcdir = $$(QUPZILLA_SRCDIR)
++    srcdir = $$(FALKON_SRCDIR)
+     equals(srcdir, "") {
+         include(../../plugins.pri)
+     }
+diff -Nuar a/src/plugins/MailHandle/mailhandle_schemehandler.cpp b/src/plugins/MailHandle/mailhandle_schemehandler.cpp
+--- a/src/plugins/MailHandle/mailhandle_schemehandler.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/mailhandle_schemehandler.cpp	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* MailHandle plugin for QupZilla
++* MailHandle plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+diff -Nuar a/src/plugins/MailHandle/mailhandle_schemehandler.h b/src/plugins/MailHandle/mailhandle_schemehandler.h
+--- a/src/plugins/MailHandle/mailhandle_schemehandler.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/mailhandle_schemehandler.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* MailHandle plugin for QupZilla
++* MailHandle plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+diff -Nuar a/src/plugins/MailHandle/mailhandle_settings.cpp b/src/plugins/MailHandle/mailhandle_settings.cpp
+--- a/src/plugins/MailHandle/mailhandle_settings.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/mailhandle_settings.cpp	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* MailHandle plugin for QupZilla
++* MailHandle plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+diff -Nuar a/src/plugins/MailHandle/mailhandle_settings.h b/src/plugins/MailHandle/mailhandle_settings.h
+--- a/src/plugins/MailHandle/mailhandle_settings.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/mailhandle_settings.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* MailHandle plugin for QupZilla
++* MailHandle plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+diff -Nuar a/src/plugins/MailHandle/README.md b/src/plugins/MailHandle/README.md
+--- a/src/plugins/MailHandle/README.md	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/MailHandle/README.md	2017-09-21 11:53:57.000000000 +0700
+@@ -1,7 +1,7 @@
+-MailHandle extension for QupZilla
++MailHandle extension for Falkon
+ -------------------------------------------------
+ This extension allows you to handle mailto links on web-pages. 
+ 
+ ![conf2](http://i.imgur.com/HKj1DY9.png)
+ 
+-You will find more information about the configuration and usage of this extension in the [wiki](https://github.com/QupZilla/qupzilla-plugins/wiki/Mail-Handle).
+\ No newline at end of file
++You will find more information about the configuration and usage of this extension in the [wiki](https://github.com/Falkon/qupzilla-plugins/wiki/Mail-Handle).
+\ No newline at end of file
+diff -Nuar a/src/plugins/Readability/data/Call.js b/src/plugins/Readability/data/Call.js
+--- a/src/plugins/Readability/data/Call.js	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Readability/data/Call.js	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* QupZilla - WebKit based browser
++* Falkon - WebKit based browser
+ * Copyright (C) 2016  Jaroslav Bambas <jar.bambas@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+diff -Nuar a/src/plugins/Readability/data/Toolbar.js b/src/plugins/Readability/data/Toolbar.js
+--- a/src/plugins/Readability/data/Toolbar.js	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Readability/data/Toolbar.js	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* QupZilla - WebKit based browser
++* Falkon - WebKit based browser
+ * Copyright (C) 2016  Jaroslav Bambas <jar.bambas@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+diff -Nuar a/src/plugins/Readability/readability.cpp b/src/plugins/Readability/readability.cpp
+--- a/src/plugins/Readability/readability.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Readability/readability.cpp	2017-09-21 11:54:13.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* QupZilla - WebKit based browser
++* Falkon - WebKit based browser
+ * Copyright (C) 2016  Jaroslav Bambas <jar.bambas@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+@@ -60,7 +60,7 @@
+ 
+ bool ReadabilityPlugin::testPlugin()
+ {
+-    return (Qz::VERSION == QLatin1String(QUPZILLA_VERSION));
++    return (Qz::VERSION == QLatin1String(FALKON_VERSION));
+ }
+ 
+ QTranslator* ReadabilityPlugin::getTranslator(const QString &locale)
+diff -Nuar a/src/plugins/Readability/readability.h b/src/plugins/Readability/readability.h
+--- a/src/plugins/Readability/readability.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Readability/readability.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* QupZilla - WebKit based browser
++* Falkon - WebKit based browser
+ * Copyright (C) 2016  Jaroslav Bambas <jar.bambas@gmail.com>
+ *
+ * This program is free software: you can redistribute it and/or modify
+@@ -28,7 +28,7 @@
+ {
+     Q_OBJECT
+     Q_INTERFACES(PluginInterface)
+-    Q_PLUGIN_METADATA(IID "QupZilla.Browser.plugin.ReadabilityPlugin")
++    Q_PLUGIN_METADATA(IID "Falkon.Browser.plugin.ReadabilityPlugin")
+ 
+ public:
+     explicit ReadabilityPlugin();
+diff -Nuar a/src/plugins/Readability/Readability.pro b/src/plugins/Readability/Readability.pro
+--- a/src/plugins/Readability/Readability.pro	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Readability/Readability.pro	2017-09-21 11:54:13.000000000 +0700
+@@ -6,7 +6,7 @@
+ 
+ 
+ PLUGIN_DIR = $$PWD
+-srcdir = $$(QUPZILLA_SRCDIR)
++srcdir = $$(FALKON_SRCDIR)
+ equals(srcdir, "") {
+     include(../../plugins.pri)
+ }
+diff -Nuar a/src/plugins/Readability/README.md b/src/plugins/Readability/README.md
+--- a/src/plugins/Readability/README.md	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Readability/README.md	2017-09-21 11:53:57.000000000 +0700
+@@ -1,7 +1,7 @@
+-Readability plugin for QupZilla
++Readability plugin for Falkon
+ -------------------------------------------------
+ This plugin allows modify web page to easily reading.
+ 
+ ![example](http://i.imgur.com/SnQNfQl.png)
+ 
+-You will find more information about usage of this plugin in the [wiki](https://github.com/QupZilla/qupzilla-plugins/wiki/Readability).
++You will find more information about usage of this plugin in the [wiki](https://github.com/Falkon/qupzilla-plugins/wiki/Readability).
+diff -Nuar a/src/plugins/Videoner/README.md b/src/plugins/Videoner/README.md
+--- a/src/plugins/Videoner/README.md	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/README.md	2017-09-21 11:53:57.000000000 +0700
+@@ -1,7 +1,7 @@
+-Videoner extension for QupZilla
++Videoner extension for Falkon
+ -------------------------------------------------
+ This extension allows you to open links in video sharing platforms in an external program. 
+ 
+ ![yt1](http://i.imgur.com/vgtKUCJ.png)
+ 
+-You will find more information about the configuration and usage of this extension in the [wiki](https://github.com/QupZilla/qupzilla-plugins/wiki/Videoner).
+\ No newline at end of file
++You will find more information about the configuration and usage of this extension in the [wiki](https://github.com/Falkon/qupzilla-plugins/wiki/Videoner).
+\ No newline at end of file
+diff -Nuar a/src/plugins/Videoner/videoner_handler.cpp b/src/plugins/Videoner/videoner_handler.cpp
+--- a/src/plugins/Videoner/videoner_handler.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/videoner_handler.cpp	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* Videoner plugin for QupZilla
++* Videoner plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+diff -Nuar a/src/plugins/Videoner/videoner_handler.h b/src/plugins/Videoner/videoner_handler.h
+--- a/src/plugins/Videoner/videoner_handler.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/videoner_handler.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* Videoner plugin for QupZilla
++* Videoner plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+diff -Nuar a/src/plugins/Videoner/videoner_plugin.cpp b/src/plugins/Videoner/videoner_plugin.cpp
+--- a/src/plugins/Videoner/videoner_plugin.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/videoner_plugin.cpp	2017-09-21 11:54:13.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* Videoner plugin for QupZilla
++* Videoner plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+@@ -61,7 +61,7 @@
+ bool Videoner_Plugin::testPlugin()
+ {
+     // Require the version that the plugin was built with
+-    return (Qz::VERSION == QLatin1String(QUPZILLA_VERSION));
++    return (Qz::VERSION == QLatin1String(FALKON_VERSION));
+ }
+ 
+ QTranslator* Videoner_Plugin::getTranslator(const QString &locale)
+diff -Nuar a/src/plugins/Videoner/videoner_plugin.h b/src/plugins/Videoner/videoner_plugin.h
+--- a/src/plugins/Videoner/videoner_plugin.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/videoner_plugin.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* Videoner plugin for QupZilla
++* Videoner plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+@@ -32,7 +32,7 @@
+     Q_INTERFACES(PluginInterface)
+ 
+ #if QT_VERSION >= 0x050000
+-    Q_PLUGIN_METADATA(IID "QupZilla.Browser.plugin.Videoner")
++    Q_PLUGIN_METADATA(IID "Falkon.Browser.plugin.Videoner")
+ #endif
+ 
+ public:
+diff -Nuar a/src/plugins/Videoner/Videoner.pro b/src/plugins/Videoner/Videoner.pro
+--- a/src/plugins/Videoner/Videoner.pro	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/Videoner.pro	2017-09-21 11:54:13.000000000 +0700
+@@ -59,7 +59,7 @@
+     translations/zh_TW.ts \
+ 
+ PLUGIN_DIR = $$PWD
+-srcdir = $$(QUPZILLA_SRCDIR)
++srcdir = $$(FALKON_SRCDIR)
+ equals(srcdir, "") {
+     include(../../plugins.pri)
+ }
+diff -Nuar a/src/plugins/Videoner/videoner_settings.cpp b/src/plugins/Videoner/videoner_settings.cpp
+--- a/src/plugins/Videoner/videoner_settings.cpp	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/videoner_settings.cpp	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* Videoner plugin for QupZilla
++* Videoner plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
+diff -Nuar a/src/plugins/Videoner/videoner_settings.h b/src/plugins/Videoner/videoner_settings.h
+--- a/src/plugins/Videoner/videoner_settings.h	2017-03-26 16:44:44.000000000 +0700
++++ b/src/plugins/Videoner/videoner_settings.h	2017-09-21 11:53:57.000000000 +0700
+@@ -1,5 +1,5 @@
+ /* ============================================================
+-* Videoner plugin for QupZilla
++* Videoner plugin for Falkon
+ * Copyright (C) 2012-2014  David Rosca <nowrep@gmail.com>
+ * Copyright (C) 2012-2014  Mladen Pejaković <pejakm@autistici.org>
+ *
