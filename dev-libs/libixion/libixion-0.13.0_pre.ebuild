@@ -16,7 +16,7 @@ HOMEPAGE="https://gitlab.com/ixion/ixion"
 [[ ${MY_PV} == 9999 ]] || SRC_URI="http://kohei.us/files/ixion/src/${MY_P}.tar.xz"
 
 LICENSE="MIT"
-SLOT="0/0.12" # based on SONAME of libixion.so
+SLOT="0/0.13" # based on SONAME of libixion.so
 [[ ${MY_PV} == 9999 ]] || \
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~x86"
 IUSE="debug python static-libs +threads"

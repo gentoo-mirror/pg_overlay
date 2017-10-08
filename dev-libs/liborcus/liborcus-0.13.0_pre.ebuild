@@ -16,7 +16,7 @@ HOMEPAGE="https://gitlab.com/orcus/orcus/blob/master/README.md"
 [[ ${MY_PV} == 9999 ]] || SRC_URI="http://kohei.us/files/orcus/src/${MY_P}.tar.xz"
 
 LICENSE="MIT"
-SLOT="0/0.12" # based on SONAME of liborcus.so
+SLOT="0/0.13" # based on SONAME of liborcus.so
 [[ ${MY_PV} == 9999 ]] || \
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~x86"
 IUSE="python +spreadsheet-model static-libs tools"
