@@ -34,15 +34,15 @@ diff --git a/firefox/media/libstagefright/binding/mp4parse_capi/Cargo.toml b/fir
 index aee7ee947151a27c..d7e3f55119d3f4b6 100644
 --- a/firefox/media/libstagefright/binding/mp4parse_capi/Cargo.toml
 +++ b/firefox/media/libstagefright/binding/mp4parse_capi/Cargo.toml
-@@ -18,6 +18,8 @@ exclude = [
+@@ -18,5+18,7 @@ exclude = [
    "*.mp4",
  ]
  
 +build = false
 +
  [dependencies]
- byteorder = "1.0.0"
  "mp4parse" = {version = "0.6.0", path = "../mp4parse"}
 -- 
 2.12.2
 
+s
