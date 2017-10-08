@@ -11,3 +11,4 @@ diff -up comm-esr31/mail/app/profile/all-thunderbird.js.addons comm-esr31/mail/a
  
  // Preferences for AMO integration
  pref("extensions.getAddons.cache.enabled", true);
+ 
