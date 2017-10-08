@@ -134,12 +134,6 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	#######
-	pushd "${S}"/mozilla &>/dev/null || die
-	eapply "${FILESDIR}/clip-ft-glyph-52esr.patch"
-	popd &>/dev/null || die
-
-
 	# OpenSUSE-KDE patchset
 	if use kde ; then
 		pushd "${S}"/mozilla &>/dev/null || die
