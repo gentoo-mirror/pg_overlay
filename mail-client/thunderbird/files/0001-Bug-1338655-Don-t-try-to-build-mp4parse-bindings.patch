@@ -30,10 +30,10 @@ extra : rebase_source : 29378fcbc86015ce6cc22dc66d38a43ddbac204e
  media/libstagefright/binding/mp4parse_capi/Cargo.toml | 2 ++
  2 files changed, 5 insertions(+), 2 deletions(-)
 
-diff --git a/firefox/media/libstagefright/binding/mp4parse_capi/Cargo.toml b/firefox/media/libstagefright/binding/mp4parse_capi/Cargo.toml
+diff --git a/mozilla/media/libstagefright/binding/mp4parse_capi/Cargo.toml b/mozilla/media/libstagefright/binding/mp4parse_capi/Cargo.toml
 index aee7ee947151a27c..d7e3f55119d3f4b6 100644
---- a/firefox/media/libstagefright/binding/mp4parse_capi/Cargo.toml
-+++ b/firefox/media/libstagefright/binding/mp4parse_capi/Cargo.toml
+--- a/mozilla/media/libstagefright/binding/mp4parse_capi/Cargo.toml
++++ b/mozilla/media/libstagefright/binding/mp4parse_capi/Cargo.toml
 @@ -18,5+18,7 @@ exclude = [
    "*.mp4",
  ]
