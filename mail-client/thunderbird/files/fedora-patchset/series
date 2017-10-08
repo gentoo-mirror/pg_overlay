@@ -1,4 +1,3 @@
 firefox-build-prbool.patch
-firefox-gcc-6.0.patch
 rhbz-966424.patch
 rhbz-1400293-fix-mozilla-1324096.patch

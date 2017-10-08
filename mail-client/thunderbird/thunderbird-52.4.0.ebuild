@@ -14,7 +14,7 @@ MOZ_LANGS=(en en-GB en-US ru )
 MOZ_PV="${PV/_beta/b}"
 
 # Patches
-PATCHFF="firefox-52.4-patches-02"
+PATCHFF="firefox-52.4-patches-03"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -134,11 +134,7 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	#######
-	pushd "${S}"/mozilla &>/dev/null || die
-	eapply "${FILESDIR}/clip-ft-glyph-52esr.patch"
-	popd &>/dev/null || die
-
+	eapply "${FILESDIR}/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch"
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then
