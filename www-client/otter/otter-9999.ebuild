@@ -31,6 +31,8 @@ RDEPEND="
 DOCS=( CHANGELOG CONTRIBUTING.md TODO )
 
 src_prepare() {
+	default
+
 	if [[ -n ${LINGUAS} ]]; then
 		local lingua
 		for lingua in resources/translations/*.qm; do
