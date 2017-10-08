@@ -1,6 +1,6 @@
---- deadbeef.desktop.in	2017-03-24 10:32:57.605372242 +0700
-+++ deadbeef.desktop.in_new	2017-03-24 10:34:17.361271531 +0700
-@@ -4,13 +4,9 @@
+--- deadbeef.desktop.in	2017-10-08 20:32:06.449371327 +0700
++++ deadbeef.desktop.in_new	2017-10-08 20:33:12.610186082 +0700
+@@ -4,83 +4,15 @@
  GenericName=Audio Player
  GenericName[pt_BR]=Reprodutor de áudio
  GenericName[ru]=Аудио плеер
@@ -14,11 +14,11 @@
  Icon=deadbeef
  Exec=deadbeef %F
  Terminal=false
-@@ -18,69 +14,5 @@
+-Actions=Play;Pause;Stop;Next;Prev
  MimeType=application/ogg;audio/x-vorbis+ogg;application/x-ogg;audio/mp3;audio/prs.sid;audio/x-flac;audio/mpeg;audio/x-mpeg;audio/x-mod;audio/x-it;audio/x-s3m;audio/x-xm;audio/x-mpegurl;audio/x-scpls;
  Categories=Audio;AudioVideo;Player;GTK;
  Keywords=Sound;Music;Audio;Player;Musicplayer;MP3
--Keywords[zh_TW]=Sound;Music;Audio;Player;Musicplayer;MP3;音樂;音樂播放器;播放器;音訊
+ Keywords[zh_TW]=Sound;Music;Audio;Player;Musicplayer;MP3;音樂;音樂播放器;播放器;音訊
  
 -X-Ayatana-Desktop-Shortcuts=Play;Pause;Stop;Next;Prev
  X-PulseAudio-Properties=media.role=music
