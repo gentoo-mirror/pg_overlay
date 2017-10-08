@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit gnome2-utils scons-utils eutils git-r3
+inherit eutils git-r3 gnome2-utils scons-utils
 
 DESCRIPTION="rmlint finds space waste and other broken things on your filesystem and offers to remove it"
 HOMEPAGE="https://github.com/sahib/rmlint"
