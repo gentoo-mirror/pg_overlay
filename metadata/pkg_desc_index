@@ -23,8 +23,8 @@ dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
 dev-util/boost-build 1.65.1: A system for large project software construction, simple to use and powerful
-dev-util/cpp-utilities 3.4.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/qtutilities 4.0.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/cpp-utilities 4.9.2: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/qtutilities 5.7.2: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/scons 3.0.0: Extensible Python-based build utility
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
@@ -46,8 +46,8 @@ media-sound/quimup 1.4.2: A Qt5 client for the music player daemon (MPD) written
 media-sound/rbutil 1.4.1 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
-media-sound/tageditor 1.4.0: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
-media-sound/tagparser 5.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
+media-sound/tageditor 2.2.5: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
+media-sound/tagparser 6.4.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-im/kadu 4.3 5.0_alpha1: An open source Gadu-Gadu and Jabber/XMPP protocol Instant Messenger client
 net-im/pidgin 9999: GTK Instant Messenger client
