@@ -4,20 +4,14 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/gpgme 1.9.0: GnuPG Made Easy is a library for making GnuPG easier to use
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-office/libreoffice 5.4.1.2: A full office productivity suite
-app-office/libreoffice-l10n 5.4.1.2: Translations for the Libreoffice suite
 app-portage/eix 0.33.0: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.0: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/iso-codes 3.76_pre: ISO language, territory, currency, script codes and their translations
-app-text/libexttextcat 3.4.5_pre: Library implementing N-gram-based text categorization
-app-text/libwpd 0.10.2_pre: WordPerfect Document import/export library
-app-text/libwpg 0.3.2_pre: C++ library to read and parse graphics in WPG
 app-text/po4a 0.52: Tools for helping translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
-dev-lang/python 3.6.2: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.20.0: Systems programming language from Mozilla
 dev-libs/boost 1.65.1: Boost Libraries for C++
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
@@ -46,6 +40,7 @@ media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/audacious 9999: Audacious Player - Your music, your way, no exceptions
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: foobar2k-like music player
+media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
 media-sound/pulseaudio 11.1: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/quimup 1.4.2: A Qt5 client for the music player daemon (MPD) written in C++
