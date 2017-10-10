@@ -167,7 +167,7 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series"); do eapply "${FILESDIR}/opensuse-kde/$i"; done
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde/series"); do eapply "${FILESDIR}/opensuse-kde/$i"; done
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
@@ -276,6 +276,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-verify-mar
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --with-pthreads
+
+	mozconfig_annotate '' --disable-stylo
 
 	# Allow for a proper pgo build
 	if use pgo; then
