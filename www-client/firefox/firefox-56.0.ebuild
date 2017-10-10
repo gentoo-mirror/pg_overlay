@@ -277,6 +277,8 @@ src_configure() {
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --with-pthreads
 
+	mozconfig_annotate '' --disable-stylo
+
 	# Allow for a proper pgo build
 	if use pgo; then
 		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
