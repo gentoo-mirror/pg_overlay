@@ -8,7 +8,7 @@ PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja k
 
 PLOCALE_BACKUP="en_GB"
 
-inherit autotools eutils fdo-mime git-r3 gnome2-utils l10n
+inherit autotools eutils fdo-mime gnome2-utils l10n
 
 SRC_URI="https://github.com/DeaDBeeF-Player/${PN}/archive/${PV}.tar.gz"
 
