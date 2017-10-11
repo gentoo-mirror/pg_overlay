@@ -10,7 +10,7 @@ PLOCALE_BACKUP="en_GB"
 
 inherit autotools fdo-mime gnome2-utils l10n
 
-SRC_URI="https://github.com/DeaDBeeF-Player/${PN}/archive/${PV}.tar.gz"
+SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 
 KEYWORDS="~amd64 ~x86"
 
@@ -160,7 +160,6 @@ src_prepare() {
 	eapply_user
 
 	config_rpath_update "${S}/config.rpath"
-	eautoreconf
 }
 
 src_configure() {
