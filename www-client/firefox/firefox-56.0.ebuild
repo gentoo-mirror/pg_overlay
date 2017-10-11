@@ -176,7 +176,7 @@ src_prepare() {
 	#for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# ArchLinux patches
 	#for i in $(cat "${FILESDIR}/archlinux-patchset/series"); do eapply "${FILESDIR}/archlinux-patchset/$i"; done
@@ -276,8 +276,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-verify-mar
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --with-pthreads
-
-	mozconfig_annotate '' --disable-stylo
 
 	# Allow for a proper pgo build
 	if use pgo; then
