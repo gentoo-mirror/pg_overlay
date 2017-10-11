@@ -1,5 +1,5 @@
---- deadbeef.desktop.in	2017-10-08 20:32:06.449371327 +0700
-+++ deadbeef.desktop.in_new	2017-10-08 20:33:12.610186082 +0700
+--- a/deadbeef.desktop.in	2017-10-08 20:32:06.449371327 +0700
++++ b/deadbeef.desktop.in	2017-10-08 20:33:12.610186082 +0700
 @@ -4,83 +4,15 @@
  GenericName=Audio Player
  GenericName[pt_BR]=Reprodutor de áudio
