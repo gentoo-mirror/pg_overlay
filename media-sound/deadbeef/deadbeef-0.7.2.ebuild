@@ -8,7 +8,7 @@ PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja k
 
 PLOCALE_BACKUP="en_GB"
 
-inherit autotools fdo-mime gnome2-utils l10n
+inherit fdo-mime gnome2-utils l10n
 
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 
@@ -159,7 +159,7 @@ src_prepare() {
 
 	eapply_user
 	default
-	eautoreconf
+	#eautoreconf
 }
 
 src_configure() {
