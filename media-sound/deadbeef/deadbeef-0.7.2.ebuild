@@ -158,7 +158,7 @@ src_prepare() {
 	fi
 
 	eapply_user
-
+	defaults
 	#config_rpath_update "${S}/config.rpath"
 }
 
