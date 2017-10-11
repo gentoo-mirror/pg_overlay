@@ -8,7 +8,7 @@ PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja k
 
 PLOCALE_BACKUP="en_GB"
 
-inherit fdo-mime gnome2-utils l10n
+inherit autotools fdo-mime gnome2-utils l10n
 
 SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
 
@@ -159,7 +159,8 @@ src_prepare() {
 
 	eapply_user
 	default
-	#config_rpath_update "${S}/config.rpath"
+	config_rpath_update "${S}/config.rpath"
+	eautoreconf
 }
 
 src_configure() {
