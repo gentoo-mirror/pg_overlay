@@ -1,19 +1,18 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+# EAPI=6
 
 PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg
 	lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
 
 PLOCALE_BACKUP="en_GB"
 
-inherit autotools eutils fdo-mime git-r3 gnome2-utils l10n
+inherit autotools fdo-mime gnome2-utils l10n
 
-EGIT_REPO_URI="https://github.com/Alexey-Yakovenko/${PN}.git"
-EGIT_BRANCH="master"
+SRC_URI="https://github.com/DeaDBeeF-Player/${PN}/archive/${PV}.tar.gz"
 
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 DESCRIPTION="foobar2k-like music player"
 HOMEPAGE="http://deadbeef.sourceforge.net"
@@ -69,10 +68,10 @@ LICENSE="BSD
 
 SLOT="0"
 
-IUSE="alsa +flac gtk2 +hotkeys +m3u mad mp3 sndfile +vorbis
-	aac adplug alac cdda cdparanoia +converter +cover +cover-imlib2 +cover-network +curl dts dumb equalizer
-	ffmpeg gme +gtk3 lastfm libav +libnotify libsamplerate +mac midi mms mono2stereo mpg123 musepack nls
-	nullout oss playlist-browser psf +pulseaudio sc68 shell-exec shn sid tta unity vtx +wavpack wma +zip"
+IUSE="+alsa +flac +gtk2 +hotkeys +m3u +mad +mp3 +sndfile +vorbis
+	aac adplug alac cdda cdparanoia converter cover cover-imlib2 cover-network curl dts dumb equalizer
+	ffmpeg gme gtk3 lastfm libav libnotify libsamplerate mac midi mms mono2stereo mpg123 musepack nls
+	nullout oss playlist-browser psf pulseaudio sc68 shell-exec shn sid tta unity vtx wavpack wma zip"
 
 REQUIRED_USE="cdparanoia? ( cdda )
 	converter? ( || ( gtk2 gtk3 ) )
@@ -133,17 +132,17 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	if ! use_if_iuse linguas_pt_BR && use_if_iuse linguas_ru ; then
-		epatch "${FILESDIR}/${PN}-remove-pt_br-help-translation.patch"
+		eapply "${FILESDIR}/${PN}-remove-pt_br-help-translation.patch"
 		rm -v "${S}/translation/help.pt_BR.txt" || die
 	fi
 
 	if ! use_if_iuse linguas_ru && use_if_iuse linguas_pt_BR ; then
-		epatch "${FILESDIR}/${PN}-remove-ru-help-translation.patch"
+		eapply "${FILESDIR}/${PN}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
 	fi
 
 	if ! use_if_iuse linguas_pt_BR && ! use_if_iuse linguas_ru ; then
-		epatch "${FILESDIR}/${PN}-remove-pt_br-and-ru-help-translation.patch"
+		eapply "${FILESDIR}/${PN}-remove-pt_br-and-ru-help-translation.patch"
 		rm -v "${S}/translation/help.pt_BR.txt" "${S}/translation/help.ru.txt" || die
 	fi
 
@@ -155,8 +154,10 @@ src_prepare() {
 
 	if ! use unity ; then
 		# remove unity trash
-		epatch "${FILESDIR}/${P}-remove-unity-trash.patch"
+		eapply "${FILESDIR}/${PN}-0.7.2-remove-unity-trash.patch"
 	fi
+
+	eapply_user
 
 	config_rpath_update "${S}/config.rpath"
 	eautoreconf
