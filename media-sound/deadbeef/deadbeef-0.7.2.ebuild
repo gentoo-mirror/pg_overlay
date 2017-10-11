@@ -10,10 +10,9 @@ PLOCALE_BACKUP="en_GB"
 
 inherit autotools eutils fdo-mime git-r3 gnome2-utils l10n
 
-EGIT_REPO_URI="https://github.com/Alexey-Yakovenko/${PN}.git"
-EGIT_BRANCH="master"
+SRC_URI="https://github.com/DeaDBeeF-Player/${PN}/archive/${PV}.tar.gz"
 
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 
 DESCRIPTION="foobar2k-like music player"
 HOMEPAGE="http://deadbeef.sourceforge.net"
