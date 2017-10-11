@@ -159,7 +159,7 @@ src_prepare() {
 
 	eapply_user
 
-	config_rpath_update "${S}/config.rpath"
+	#config_rpath_update "${S}/config.rpath"
 }
 
 src_configure() {
