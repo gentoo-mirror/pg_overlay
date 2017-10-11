@@ -159,7 +159,6 @@ src_prepare() {
 
 	eapply_user
 	default
-	config_rpath_update "${S}/config.rpath"
 	eautoreconf
 }
 
