@@ -5,13 +5,13 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 pypy )
 PYTHON_REQ_USE="threads(+)"
 
-inherit distutils-r1
+inherit distutils-r1 poly-c_ebuilds
 
 DESCRIPTION="Extensible Python-based build utility"
 HOMEPAGE="http://www.scons.org/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.gz
-	doc? ( http://www.scons.org/doc/${PV}/PDF/${PN}-user.pdf -> ${P}-user.pdf
-	       http://www.scons.org/doc/${PV}/HTML/${PN}-user.html -> ${P}-user.html )"
+SRC_URI="mirror://sourceforge/${PN}/${MY_P}.tar.gz
+	doc? ( http://www.scons.org/doc/${MY_PV}/PDF/${PN}-user.pdf -> ${MY_P}-user.pdf
+	       http://www.scons.org/doc/${MY_PV}/HTML/${PN}-user.html -> ${MY_P}-user.html )"
 
 LICENSE="MIT"
 SLOT="0"
@@ -40,7 +40,7 @@ python_install_all() {
 	local DOCS=( {CHANGES,README,RELEASE}.txt )
 	distutils-r1_python_install_all
 
-	use doc && dodoc "${DISTDIR}"/${P}-user.{pdf,html}
+	use doc && dodoc "${DISTDIR}"/${MY_P}-user.{pdf,html}
 }
 
 src_install() {

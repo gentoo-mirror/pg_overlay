@@ -6,11 +6,11 @@ EAPI="6"
 PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 DISTUTILS_OPTIONAL=1
 
-inherit distutils-r1 flag-o-matic ltprune qmake-utils
+inherit distutils-r1 flag-o-matic ltprune qmake-utils poly-c_ebuilds
 
 DESCRIPTION="GnuPG Made Easy is a library for making GnuPG easier to use"
 HOMEPAGE="http://www.gnupg.org/related_software/gpgme"
-SRC_URI="mirror://gnupg/gpgme/${P}.tar.bz2"
+SRC_URI="mirror://gnupg/gpgme/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="1/11" # subslot = soname major version
@@ -28,10 +28,8 @@ DEPEND="${COMMON_DEPEND}
 	qt5? ( dev-qt/qttest:5 )"
 RDEPEND="${COMMON_DEPEND}
 	cxx? (
-		!<kde-apps/gpgmepp-4.14.11_pre20160611:4
-		!kde-apps/gpgmepp:5
-		!<kde-apps/kdepimlibs-4.14.10_p20160611:4
-		!=kde-apps/kdepimlibs-4.14.11_pre20160211*:4
+		!kde-apps/gpgmepp
+		!kde-apps/kdepimlibs:4
 	)"
 
 REQUIRED_USE="qt5? ( cxx ) python? ( ${PYTHON_REQUIRED_USE} )"
