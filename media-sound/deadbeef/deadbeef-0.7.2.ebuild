@@ -159,7 +159,6 @@ src_prepare() {
 
 	eapply_user
 	default
-	#eautoreconf
 }
 
 src_configure() {
