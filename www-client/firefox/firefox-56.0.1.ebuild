@@ -173,13 +173,13 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 
 	# Debian patches
-	#for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/debian-patchset/series"); do eapply "${FILESDIR}/debian-patchset/$i"; done
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series"); do eapply "${FILESDIR}/fedora-patchset/$i"; done
 
 	# ArchLinux patches
-	#for i in $(cat "${FILESDIR}/archlinux-patchset/series"); do eapply "${FILESDIR}/archlinux-patchset/$i"; done
+	for i in $(cat "${FILESDIR}/archlinux-patchset/series"); do eapply "${FILESDIR}/archlinux-patchset/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -293,12 +293,12 @@ src_configure() {
 	emake -f client.mk configure
 
 	# Disable Telemetry & Data reporting
-	sed -i "/MOZ_DATA_REPORTING/d" ff/config.status || die
-	sed -i "/MOZ_TELEMETRY_REPORTING/d" ff/config.status || die
+	#sed -i "/MOZ_DATA_REPORTING/d" ff/config.status || die
+	#sed -i "/MOZ_TELEMETRY_REPORTING/d" ff/config.status || die
 	#sed -i "/MOZ_SERVICES_HEALTHREPORT/d" ff/config.status || die
 	#sed -i 's/-DMOZ_SERVICES_HEALTHREPORT=1//g' ff/faster/Makefile || die
-	#sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '/" ff/config.status || die
-	#sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '/" ff/config.status || die
 	sed -i "s/MOZ_SERVICES_HEALTHREPORT': '1/MOZ_SERVICES_HEALTHREPORT': '/" ff/config.status || die
 }
 
