@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  faadbf89d1cb02eefec4c5dfd3ab86bc20d815d5
+# Parent  a930d4c1c3fba77f61071becdc51e3232e0b72ca
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -3276,7 +3276,7 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
  
    mFilters.AppendElement(filter);
    mFilterNames.AppendElement(name);
-@@ -371,16 +375,34 @@ nsFilePicker::Show(int16_t *aReturn)
+@@ -371,16 +375,37 @@ nsFilePicker::Show(int16_t *aReturn)
  
  NS_IMETHODIMP
  nsFilePicker::Open(nsIFilePickerShownCallback *aCallback)
@@ -3287,19 +3287,22 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
  
 +  // KDE file picker is not handled via callback
 +  if( nsKDEUtils::kdeSupport()) {
-+    int16_t result;
 +    mCallback = aCallback;
 +    mRunning = true;
-+    NS_ADDREF_THIS();
-+    kdeFileDialog(&result);
-+    if (mCallback) {
-+      mCallback->Done(result);
-+      mCallback = nullptr;
-+    } else {
-+      mResult = result;
-+    }
-+    mRunning = false;
-+    NS_RELEASE_THIS();
++    g_idle_add([](gpointer data) -> gboolean {
++      nsFilePicker* queuedPicker = (nsFilePicker*) data;
++      int16_t result;
++      queuedPicker->kdeFileDialog(&result);
++      if (queuedPicker->mCallback) {
++        queuedPicker->mCallback->Done(result);
++        queuedPicker->mCallback = nullptr;
++      } else {
++        queuedPicker->mResult = result;
++      }
++      queuedPicker->mRunning = false;
++      return G_SOURCE_REMOVE;
++    }, this);
++
 +    return NS_OK;
 +  }
 +
@@ -3311,7 +3314,7 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
  
    GtkFileChooserAction action = GetGtkFileChooserAction(mMode);
  
-@@ -603,8 +625,235 @@ nsFilePicker::Done(GtkWidget* file_choos
+@@ -603,8 +628,233 @@ nsFilePicker::Done(GtkWidget* file_choos
    if (mCallback) {
      mCallback->Done(result);
      mCallback = nullptr;
@@ -3408,8 +3411,6 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
 +    else
 +      startdir = ToNewUTF8String(mDefault);
 +  }
-+  if( startdir.IsEmpty())
-+      startdir = ".";
 +
 +    nsAutoCString filters;
 +    PRInt32 count = mFilters.Length();
