@@ -407,11 +407,11 @@ src_configure() {
 	# Inox
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" is_debug=false"
+	myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" fatal_linker_warnings=false"
 	myconf_gn+=" treat_warnings_as_errors=false"
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_sysroot=false"
 	myconf_gn+=" enable_nacl=false"
@@ -420,7 +420,7 @@ src_configure() {
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
-	myconf_gn+=" enable_print_preview=false"
+	#myconf_gn+=" enable_print_preview=false"
 	#if use inox; then
 	#	myconf_gn+=" safe_browsing_mode=0"
 	#fi
