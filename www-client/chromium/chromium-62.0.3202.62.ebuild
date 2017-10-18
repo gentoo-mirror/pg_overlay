@@ -149,6 +149,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-gcc5-r3.patch"
 	"${FILESDIR}/${PN}-gn-bootstrap-r17.patch"
 	"${FILESDIR}/${PN}-glibc2.26-r1.patch"
+	"${FILESDIR}/crc32c-string-view-check.patch"
 )
 
 pre_build_checks() {
@@ -195,7 +196,7 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux_${MY_MAJORV}.diff" && myconf_gn+=" use_vaapi=true"
+	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux_${MY_MAJORV}.diff"
 
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${MY_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${MY_MAJORV}/$i";done
@@ -398,8 +399,10 @@ src_configure() {
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
+	#
 	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" use_gio=false"
+	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
@@ -422,7 +425,7 @@ src_configure() {
 	#	myconf_gn+=" safe_browsing_mode=0"
 	#fi
 
-	# Ungoogled
+	# Ungoogled-Chromium
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_hevc_demuxing=true"
@@ -433,7 +436,7 @@ src_configure() {
 	#	myconf_gn+=" enable_service_discovery=false"
 	#fi
 
-	# Ubuntu 
+	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
 
 	# libevent: https://bugs.gentoo.org/593458
