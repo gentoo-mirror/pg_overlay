@@ -46,7 +46,7 @@ src_prepare() {
 	#eautoconf
 	config_rpath_update "${S}/build-aux"
 	#eautomake
-	eautoconf
+	eautoreconf
 	default
 
 	# bug 578026
