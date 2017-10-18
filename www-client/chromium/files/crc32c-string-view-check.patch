@@ -12,14 +12,14 @@ not contain a <string_view> header.
 [1] https://crbug.com/759349
 [2] https://gcc.gnu.org/bugzilla/show_bug.cgi?id=79433
 ---
- include/crc32c/crc32c.h | 10 +++-------
- src/crc32c_unittest.cc  |  6 ++----
+ third_party/crc32c/src/include/crc32c/crc32c.h | 10 +++-------
+ third_party/crc32c/src/src/crc32c_unittest.cc  |  6 ++----
  2 files changed, 5 insertions(+), 11 deletions(-)
 
 diff --git a/include/crc32c/crc32c.h b/include/crc32c/crc32c.h
 index 9f1973a..8ecab0d 100644
---- a/include/crc32c/crc32c.h
-+++ b/include/crc32c/crc32c.h
+--- a/third_party/crc32c/src/include/crc32c/crc32c.h
++++ b/third_party/crc32c/src/include/crc32c/crc32c.h
 @@ -33,22 +33,18 @@ inline uint32_t Crc32c(const std::string& string) {
                  string.size());
  }
@@ -48,8 +48,8 @@ index 9f1973a..8ecab0d 100644
  
 diff --git a/src/crc32c_unittest.cc b/src/crc32c_unittest.cc
 index 7a9c765..69babb3 100644
---- a/src/crc32c_unittest.cc
-+++ b/src/crc32c_unittest.cc
+--- a/third_party/crc32c/src/src/crc32c_unittest.cc
++++ b/third_party/crc32c/src/src/crc32c_unittest.cc
 @@ -95,9 +95,8 @@ TEST(CRC32CTest, Crc32cStdString) {
    EXPECT_EQ(static_cast<uint32_t>(0x113fdb5c), crc32c::Crc32c(buf));
  }
