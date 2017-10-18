@@ -40,13 +40,9 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	#eaclocal
-	#_elibtoolize
-	#eautoheader
-	#eautoconf
+	mkdir -p build-aux
 	config_rpath_update "${S}/build-aux"
-	#eautomake
-	eautoconf
+	eautoreconf
 	default
 
 	# bug 578026
