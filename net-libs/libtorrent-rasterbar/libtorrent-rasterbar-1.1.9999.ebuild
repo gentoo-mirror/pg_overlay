@@ -44,8 +44,9 @@ src_prepare() {
 	#_elibtoolize
 	#eautoheader
 	#eautoconf
-	config_rpath_update "${S}/build-aux"
+	#config_rpath_update "${S}/build-aux"
 	#eautomake
+	config_rpath_update "${S}/config.rpath"
 	eautoreconf
 	default
 
