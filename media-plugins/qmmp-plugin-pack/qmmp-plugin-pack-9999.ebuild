@@ -17,8 +17,9 @@ KEYWORDS=""
 IUSE="ffmpeg history"
 
 RDEPEND="
+	ffmpeg? ( =media-sound/qmmp-9999[ffmpeg] )
+	history? ( dev-qt/qtsql:5[sqlite] )
 	>=media-libs/taglib-1.10
-	=media-sound/qmmp-9999
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
