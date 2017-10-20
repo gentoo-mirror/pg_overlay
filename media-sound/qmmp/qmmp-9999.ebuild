@@ -140,10 +140,10 @@ src_configure() {
 		-DUSE_UDISKS2="$(usex udisks)"
 		-DUSE_VORBIS="$(usex vorbis)"
 		-DUSE_WAVPACK="$(usex wavpack)"
-		-DUSE_ARCHIVE=ON
-		-DUSE_NULL=OFF
-		-DUSE_RGSCAN=OFF
-		-DUSE_SB=OFF
+		-DUSE_ARCHIVE=1
+		-DUSE_NULL=0
+		-DUSE_RGSCAN=0
+		-DUSE_SB=0
 	)
 
 	cmake-utils_src_configure

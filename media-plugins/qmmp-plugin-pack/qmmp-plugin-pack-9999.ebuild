@@ -14,7 +14,7 @@ ESVN_REPO_URI="svn://svn.code.sf.net/p/qmmp-dev/code/branches/${PN}-${QMMP_DEV_B
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
+IUSE="ffmpeg history"
 
 RDEPEND="
 	>=media-libs/taglib-1.10
@@ -29,9 +29,9 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	mycmakeargs=(
-		-DUSE_FFVIDEO=0
+		-DUSE_FFVIDEO="$(usex ffmpeg)"
+		-DUSE_HISTORY="$(usex history)"
 		-DUSE_GOOM=0
 		)
 	default
-	#cmake-utils_src_prepare
 }
