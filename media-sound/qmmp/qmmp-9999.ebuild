@@ -144,8 +144,6 @@ src_configure() {
 		-DUSE_NULL=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
-		-DUSE_QMMP_DIALOG=OFF
-		-DUSE_SKINNED=OFF
 	)
 
 	cmake-utils_src_configure
