@@ -34,6 +34,7 @@ gcc-0.3.51
 git2-0.6.6
 git2-curl-0.7.0
 glob-0.2.11
+globset-0.2.0
 hamcrest-0.1.1
 hex-0.2.0
 home-0.3.0
