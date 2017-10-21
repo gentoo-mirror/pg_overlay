@@ -126,6 +126,12 @@ KEYWORDS="~amd64 ~arm ~x86"
 
 IUSE="doc libressl"
 
+if [[ ${ARCH} = "amd64" ]]; then
+	TRIPLE="x86_64-unknown-linux-gnu"
+else
+	TRIPLE="i686-unknown-linux-gnu"
+fi
+
 COMMON_DEPEND="sys-libs/zlib
 	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:0= )
