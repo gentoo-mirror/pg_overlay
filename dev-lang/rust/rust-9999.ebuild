@@ -20,7 +20,7 @@ HOMEPAGE="http://www.rust-lang.org/"
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 KEYWORDS=""
 
-IUSE="clang debug doc source +system-llvm sanitize tools"
+IUSE="clang debug doc source system-llvm sanitize tools"
 
 CDEPEND="clang? ( sys-libs/libcxx )
 	>=app-eselect/eselect-rust-0.3_pre20150425
@@ -65,8 +65,6 @@ src_prepare() {
 
     use amd64 && BUILD_TRIPLE=x86_64-unknown-linux-gnu
     use x86 && BUILD_TRIPLE=i686-unknown-linux-gnu
-    
-	cp "${FILESDIR}/bootstrap-config.toml" config.toml
 }
 
 src_unpack() {

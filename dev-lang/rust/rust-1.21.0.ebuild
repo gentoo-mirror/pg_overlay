@@ -138,7 +138,7 @@ src_compile() {
 	export RUST_BACKTRACE=1
 	use system-llvm && export LLVM_LINK_SHARED=1
 
-	./x.py build --verbose --config="${S}"/config.toml || die
+	./x.py build --verbose --config="${S}"/config.toml ${MAKEOPTS} || die
 }
 
 src_install() {
