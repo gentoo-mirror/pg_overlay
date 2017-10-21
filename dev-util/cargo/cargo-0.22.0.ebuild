@@ -78,7 +78,7 @@ scoped-tls-0.1.0
 semver-0.7.0
 semver-parser-0.7.0
 serde-1.0.9
-serde_derive-1.0.9
+serde_derive-1.0.11
 serde_derive_internals-0.15.1
 serde_ignored-0.0.3
 serde_json-1.0.2
