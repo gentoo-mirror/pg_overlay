@@ -110,8 +110,7 @@ ws2_32-sys-0.2.1
 
 inherit bash-completion-r1 cargo versionator
 
-CARGO_SNAPSHOT_VERSION="0.$(($(get_version_component_range 2) - 1)).0"
-CTARGET=${CHOST/pc/unknown}
+BOOTSTRAP_VERSION="0.21.0"
 
 DESCRIPTION="The Rust's package manager"
 HOMEPAGE="http://crates.io"
@@ -131,8 +130,6 @@ if [[ ${ARCH} = "amd64" ]]; then
 else
 	TRIPLE="i686-unknown-linux-gnu"
 fi
-
-BOOTSTRAP_VERSION="0.21.0"
 
 COMMON_DEPEND="sys-libs/zlib
 	!libressl? ( dev-libs/openssl:0= )
@@ -160,7 +157,7 @@ src_configure() {
 src_compile() {
 	export CARGO_HOME="${ECARGO_HOME}"
 	local cargo="${WORKDIR}/cargo-${BOOTSTRAP_VERSION}-${TRIPLE}/cargo/bin/cargo"
-	RUSTFLAGS='-C target-feature=-crt-static' ${cargo}  build  --release || die "Failed to build cargo"
+	${cargo}  build  --release || die "Failed to build cargo"
 
 	# Building HTML documentation
 	use doc && ${cargo} doc
