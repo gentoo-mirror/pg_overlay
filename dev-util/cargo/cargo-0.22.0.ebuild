@@ -132,6 +132,8 @@ else
 	TRIPLE="i686-unknown-linux-gnu"
 fi
 
+BOOTSTRAP_VERSION="0.21.0"
+
 COMMON_DEPEND="sys-libs/zlib
 	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:0= )
