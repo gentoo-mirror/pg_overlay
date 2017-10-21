@@ -94,7 +94,7 @@ termcolor-0.3.2
 thread-id-2.0.0
 thread_local-0.2.7
 thread_local-0.3.4
-toml-0.4.2
+toml-0.4.3
 unicode-bidi-0.3.4
 unicode-normalization-0.1.5
 unicode-xid-0.0.4
