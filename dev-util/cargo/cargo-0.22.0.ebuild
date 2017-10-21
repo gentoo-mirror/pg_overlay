@@ -41,7 +41,7 @@ itoa-0.3.1
 jobserver-0.1.6
 kernel32-sys-0.2.2
 lazy_static-0.2.8
-libc-0.2.25
+libc-0.2.28
 libgit2-sys-0.6.12
 libssh2-sys-0.2.6
 libz-sys-1.0.16
