@@ -35,6 +35,7 @@ git2-curl-0.7.0
 glob-0.2.11
 hamcrest-0.1.1
 hex-0.2.0
+home-0.3.0
 idna-0.1.2
 ignore-0.2.2
 itoa-0.3.1
