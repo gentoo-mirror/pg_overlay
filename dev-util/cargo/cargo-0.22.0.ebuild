@@ -24,7 +24,7 @@ dbghelp-sys-0.2.0
 docopt-0.8.1
 dtoa-0.4.1
 env_logger-0.4.3
-error-chain-0.11.0
+error-chain-0.11.0-rc.2
 filetime-0.1.10
 flate2-0.2.19
 foreign-types-0.2.0
