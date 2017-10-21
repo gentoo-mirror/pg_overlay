@@ -65,6 +65,8 @@ src_prepare() {
 
     use amd64 && BUILD_TRIPLE=x86_64-unknown-linux-gnu
     use x86 && BUILD_TRIPLE=i686-unknown-linux-gnu
+    
+	cp "${FILESDIR}/bootstrap-config.toml" config.toml
 }
 
 src_unpack() {
