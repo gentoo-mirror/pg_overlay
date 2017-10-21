@@ -37,7 +37,7 @@ glob-0.2.11
 hamcrest-0.1.1
 hex-0.2.0
 home-0.3.0
-idna-0.1.2
+idna-0.1.4
 ignore-0.2.2
 itoa-0.3.1
 jobserver-0.1.6
