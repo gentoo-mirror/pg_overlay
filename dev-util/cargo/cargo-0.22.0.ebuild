@@ -48,6 +48,7 @@ libgit2-sys-0.6.12
 libssh2-sys-0.2.6
 libz-sys-1.0.16
 log-0.3.8
+magenta-0.1.1
 matches-0.1.6
 memchr-0.1.11
 memchr-1.0.1
