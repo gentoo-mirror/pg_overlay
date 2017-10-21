@@ -69,7 +69,7 @@ percent-encoding-1.0.0
 pkg-config-0.3.9
 psapi-sys-0.1.0
 quote-0.3.15
-rand-0.3.15
+rand-0.3.16
 regex-0.1.80
 regex-0.2.2
 regex-syntax-0.3.9
