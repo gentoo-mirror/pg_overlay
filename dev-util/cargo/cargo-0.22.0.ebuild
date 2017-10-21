@@ -108,14 +108,19 @@ wincolor-0.1.4
 ws2_32-sys-0.2.1
 "
 
-inherit bash-completion-r1 cargo versionator
+inherit bash-completion-r1 cargo
 
 BOOTSTRAP_VERSION="0.21.0"
 
 DESCRIPTION="The Rust's package manager"
 HOMEPAGE="http://crates.io"
 SRC_URI="https://github.com/rust-lang/cargo/archive/${PV}.tar.gz -> ${P}.tar.gz
-	https://static.rust-lang.org/dist/cargo-${CARGO_SNAPSHOT_VERSION}-${CTARGET}.tar.gz
+	x86?   (
+		https://static.rust-lang.org/dist/cargo-${BOOTSTRAP_VERSION}-i686-unknown-linux-gnu.tar.gz
+	)
+	amd64? (
+		https://static.rust-lang.org/dist/cargo-${BOOTSTRAP_VERSION}-x86_64-unknown-linux-gnu.tar.gz
+	)
 	$(cargo_crate_uris ${CRATES})"
 
 RESTRICT="mirror"
