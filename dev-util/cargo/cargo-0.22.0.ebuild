@@ -15,6 +15,7 @@ backtrace-sys-0.1.12
 bitflags-0.7.0
 bitflags-0.9.1
 bufstream-0.1.3
+cc-1.0.0
 cfg-if-0.1.2
 cmake-0.1.24
 conv-0.3.3
