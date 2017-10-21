@@ -80,6 +80,7 @@ rustc-demangle-0.1.4
 rustc-serialize-0.3.24
 same-file-0.1.3
 scoped-tls-0.1.0
+scopeguard-0.1.2
 semver-0.7.0
 semver-parser-0.7.0
 serde-1.0.11
