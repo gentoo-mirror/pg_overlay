@@ -18,7 +18,7 @@ cc-1.0.0
 cfg-if-0.1.2
 cmake-0.1.24
 crossbeam-0.2.10
-curl-0.4.7
+curl-0.4.8
 curl-sys-0.3.14
 dbghelp-sys-0.2.0
 docopt-0.8.1
