@@ -105,6 +105,7 @@ unicode-normalization-0.1.5
 unicode-xid-0.0.4
 unreachable-1.0.0
 url-1.5.1
+userenv-sys-0.2.0
 utf8-ranges-0.1.3
 utf8-ranges-1.0.0
 vcpkg-0.2.2
