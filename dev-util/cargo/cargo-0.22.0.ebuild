@@ -11,7 +11,7 @@ aho-corasick-0.5.3
 aho-corasick-0.6.3
 atty-0.2.2
 backtrace-0.3.2
-backtrace-sys-0.1.11
+backtrace-sys-0.1.12
 bitflags-0.9.1
 bufstream-0.1.3
 cc-1.0.0
