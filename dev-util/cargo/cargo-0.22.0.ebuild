@@ -62,7 +62,7 @@ num-complex-0.1.38
 num-integer-0.1.34
 num-iter-0.1.33
 num-rational-0.1.38
-num-traits-0.1.39
+num-traits-0.1.40
 num_cpus-1.6.2
 openssl-0.9.20
 openssl-probe-0.1.1
