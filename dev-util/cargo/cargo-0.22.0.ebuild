@@ -17,6 +17,7 @@ bufstream-0.1.3
 cc-1.0.0
 cfg-if-0.1.2
 cmake-0.1.24
+core-foundation-0.4.4
 crossbeam-0.2.10
 curl-0.4.8
 curl-sys-0.3.14
