@@ -49,6 +49,9 @@ RDEPEND="app-arch/unzip
 	flac? ( >=media-libs/flac-1.2.1-r1 )
 	fluidsynth? ( media-sound/fluidsynth )
 	http? ( >=net-libs/neon-0.26.4 )
+	gtk3? ( x11-libs/gtk+:3
+			media-libs/adplug
+			~media-sound/audacious-${PV}[gtk3?] )
 	qt5? ( dev-qt/qtcore:5
 		   dev-qt/qtgui:5
 		   dev-qt/qtmultimedia:5
@@ -133,6 +136,7 @@ src_configure() {
 		${ffmpeg} \
 		${notify} \
 		--disable-modplug \
+		--enable-mpris2 \
 		--enable-soxr \
 		--disable-gtk \
 		$(use_enable aac) \
@@ -140,9 +144,9 @@ src_configure() {
 		$(use_enable bs2b) \
 		$(use_enable cdda cdaudio) \
 		$(use_enable cue) \
-		$(use_enable flac flacng) \
+		$(use_enable flac) \
 		$(use_enable fluidsynth amidiplug) \
-		$(use_enable flac filewriter_flac) \
+		$(use_enable flac filewriter) \
 		$(use_enable http neon) \
 		$(use_enable jack) \
 		$(use_enable gnome gnomeshortcuts) \
@@ -151,7 +155,7 @@ src_configure() {
 		$(use_enable libsamplerate resample) \
 		$(use_enable lirc) \
 		$(use_enable mms) \
-		$(use_enable mp3) \
+		$(use_enable mp3 mpg123) \
 		$(use_enable nls) \
 		$(use_enable pulseaudio pulse) \
 		$(use_enable qt5 qt) \

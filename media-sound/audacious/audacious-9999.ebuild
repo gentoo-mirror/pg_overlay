@@ -1,6 +1,5 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Id$
 
 EAPI=5
 inherit autotools eutils git-r3
@@ -50,13 +49,6 @@ src_unpack() {
 	fi
 }
 
-src_prepare() {
-	if [ "${A}" = "gentoo_ice-xmms-0.2.tar.bz2" ]; then
-		unpack ${A}
-	fi
-	eautoreconf
-}
-
 src_configure() {
 	if use gtk3 ;then
 		gtk="--enable-gtk"
@@ -81,7 +73,7 @@ src_install() {
 
 	# Gentoo_ice skin installation; bug #109772
 	insinto /usr/share/audacious/Skins/gentoo_ice
-	doins "${S}"/gentoo_ice/*
+	doins "${WORKDIR}"/gentoo_ice/*
 	docinto gentoo_ice
-	dodoc "${S}"/README
+	dodoc "${WORKDIR}"/README
 }
