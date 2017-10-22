@@ -112,11 +112,6 @@ src_prepare() {
 
 src_configure() {
 	mp3_warning
-	if use qt5 ;then
-		notify="--disable-notify"
-	elif use libnotify ;then
-		notify="--enable-notify"
-	fi
 
 	if use gtk3 ;then
 		gtk="--enable-gtk"
@@ -137,8 +132,12 @@ src_configure() {
 		${gtk} \
 		${notify} \
 		--disable-modplug \
-		--enable-mpris2 \
+		--disable-console \
 		--disable-soxr \
+		--disable-oss4 \
+		--enable-mpris2 \
+		--enable-hotkey \
+		--disable-mac-media-keys \
 		$(use_enable aac) \
 		$(use_enable alsa) \
 		$(use_enable bs2b) \
