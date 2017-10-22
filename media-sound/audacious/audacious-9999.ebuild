@@ -49,6 +49,10 @@ src_unpack() {
 	fi
 }
 
+src_prepare() {
+	eautoreconf
+}
+
 src_configure() {
 	if use gtk3 ;then
 		gtk="--enable-gtk"
