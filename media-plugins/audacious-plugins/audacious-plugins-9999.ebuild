@@ -2,7 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit autotools eutils git-r3
+
+PLOCALES="af ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fo fr fy ga gl he hi hr hu id is it iu ja ka kk km kn ko ku ky la lb lt lv mk ml ms nap nb nds nl nn oc pl pms pt pt_BR ro ru si sk sl sr sv ta te th tl tlh tr uk ur vi zh_CN zh_HK zh_TW"
+
+inherit autotools eutils git-r3 l10n
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
@@ -108,6 +111,12 @@ src_prepare() {
 
 	eautoreconf
 
+	local loc_dir="${S}/po"
+	l10n_find_plocales_changes "${loc_dir}" "" ".po"
+	rm_loc() {
+		rm -vf "${loc_dir}/${1}.po" || die
+	}
+	l10n_for_each_disabled_locale_do rm_loc
 }
 
 src_configure() {
@@ -192,6 +201,5 @@ src_configure() {
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/filewriter//' extra.mk || die
-	#sed -i 's/gio//' extra.mk || die
 	sed -i 's/Visualization//' extra.mk || die
 }
