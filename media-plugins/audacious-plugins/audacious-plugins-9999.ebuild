@@ -2,7 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit autotools eutils git-r3
+
+PLOCALES="ar be bg ca cmn cs da de el en_GB es_AR es_MX es et eu fa_IR fi fr gl hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
+
+inherit autotools eutils git-r3 l10n
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
@@ -11,7 +14,7 @@ EGIT_REPO_URI="https://github.com/audacious-media-player/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="aac +adplug alsa bs2b cdda +cue ffmpeg flac fluidsynth gnome +http gtk3 jack
+IUSE="aac alsa bs2b cdda +cue ffmpeg flac fluidsynth gnome +http gtk3 jack
 lame libnotify libsamplerate lirc mms mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
@@ -108,6 +111,13 @@ src_prepare() {
 
 	eautoreconf
 
+	local loc_dir="${S}/po"
+	l10n_find_plocales_changes "${loc_dir}" "" ".po"
+	rm_loc() {
+		rm -vf "${loc_dir}/${1}.po" || die
+		sed -i '/${1}.po/d' "${loc_dir}/Makefile" || die 
+	}
+	l10n_for_each_disabled_locale_do rm_loc
 }
 
 src_configure() {
@@ -192,6 +202,5 @@ src_configure() {
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/filewriter//' extra.mk || die
-	#sed -i 's/gio//' extra.mk || die
 	sed -i 's/Visualization//' extra.mk || die
 }
