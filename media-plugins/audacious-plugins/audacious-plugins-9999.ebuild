@@ -192,6 +192,6 @@ src_configure() {
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/filewriter//' extra.mk || die
-	sed -i 's/gio//' extra.mk || die
+	#sed -i 's/gio//' extra.mk || die
 	sed -i 's/Visualization//' extra.mk || die
 }
