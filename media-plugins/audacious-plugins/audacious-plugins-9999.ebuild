@@ -113,8 +113,8 @@ src_prepare() {
 
 	local loc_dir="${S}/po"
 	rm_loc() {
-# 		#rm -vf "${loc_dir}/${1}.po" || die
-		sed -i -e 's/"${1}".po//' po/Makefile || die "removing of ${1}.po failed"
+		rm -vf "${loc_dir}/${1}.po" || die
+		sed -i /${1}.po// po/Makefile || die "removing of ${1}.po failed"
 	}
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rm_loc
