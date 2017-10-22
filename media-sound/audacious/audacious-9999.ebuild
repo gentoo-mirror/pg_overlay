@@ -14,7 +14,7 @@ LICENSE="BSD-2"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="+chardet gtk3 nls qt5"
+IUSE="gtk3 nls qt5"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
 "
@@ -25,7 +25,6 @@ RDEPEND=">=dev-libs/dbus-glib-0.60
 	>=x11-libs/cairo-1.2.6
 	>=x11-libs/pango-1.8.0
 	virtual/freedesktop-icon-theme
-	chardet? ( >=app-i18n/libguess-1.2 )
 	gtk3? ( x11-libs/gtk+:3 )
 	qt5? ( dev-qt/qtcore:5
 	      dev-qt/qtgui:5
@@ -38,6 +37,7 @@ DEPEND="${RDEPEND}
 PDEPEND="~media-plugins/audacious-plugins-${PV}"
 
 src_unpack() {
+	default
 	if use !gtk3; then
 		EGIT_BRANCH="master"
 		EGIT_COMMIT="$EGIT_BRANCH"
@@ -67,7 +67,6 @@ src_configure() {
 	econf \
 		--enable-dbus \
 		${gtk} \
-		$(use_enable chardet) \
 		$(use_enable nls) \
 		$(use_enable qt5 qt)
 }
