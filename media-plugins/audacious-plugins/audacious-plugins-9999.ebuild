@@ -11,10 +11,10 @@ EGIT_REPO_URI="https://github.com/audacious-media-player/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="aac +adplug alsa bs2b cdda cue ffmpeg flac fluidsynth gnome http gtk gtk3 jack
+IUSE="aac +adplug alsa bs2b cdda +cue ffmpeg flac fluidsynth gnome +http gtk3 jack
 lame libnotify libsamplerate lirc mms mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile vorbis wavpack"
 REQUIRED_USE="
-	^^ ( gtk gtk3 qt5 )
+	^^ ( gtk3 qt5 )
 "
 # The following plugins REQUIRE a GUI build of audacious, because non-GUI
 # builds do NOT install the libaudgui library & headers.
@@ -49,6 +49,9 @@ RDEPEND="app-arch/unzip
 	flac? ( >=media-libs/flac-1.2.1-r1 )
 	fluidsynth? ( media-sound/fluidsynth )
 	http? ( >=net-libs/neon-0.26.4 )
+	gtk3? ( x11-libs/gtk+:3
+			media-libs/adplug
+			~media-sound/audacious-${PV}[gtk3?] )
 	qt5? ( dev-qt/qtcore:5
 		   dev-qt/qtgui:5
 		   dev-qt/qtmultimedia:5
@@ -109,14 +112,9 @@ src_prepare() {
 
 src_configure() {
 	mp3_warning
-	if use qt5 ;then
-		notify="--disable-notify"
-	elif use libnotify ;then
-		notify="--enable-notify"
-	fi
 
 	if use gtk3 ;then
-		gtk="--enable-gtk"
+		gtk="--enable-gtk --enable-hotkey"
 	else
 		gtk="--disable-gtk"
 	fi
@@ -131,18 +129,25 @@ src_configure() {
 
 	econf \
 		${ffmpeg} \
+		${gtk} \
 		${notify} \
 		--disable-modplug \
-		--enable-soxr \
-		--disable-gtk \
+		--disable-console \
+		--disable-soxr \
+		--disable-oss4 \
+		--enable-mpris2 \
+		--disable-glspectrum \
+		--disable-qtaudio \
+		--disable-qtglspectrum \
+		--disable-mac-media-keys \
 		$(use_enable aac) \
 		$(use_enable alsa) \
 		$(use_enable bs2b) \
 		$(use_enable cdda cdaudio) \
 		$(use_enable cue) \
-		$(use_enable flac flacng) \
+		$(use_enable flac) \
 		$(use_enable fluidsynth amidiplug) \
-		$(use_enable flac filewriter_flac) \
+		$(use_enable flac filewriter) \
 		$(use_enable http neon) \
 		$(use_enable jack) \
 		$(use_enable gnome gnomeshortcuts) \
@@ -151,7 +156,7 @@ src_configure() {
 		$(use_enable libsamplerate resample) \
 		$(use_enable lirc) \
 		$(use_enable mms) \
-		$(use_enable mp3) \
+		$(use_enable mp3 mpg123) \
 		$(use_enable nls) \
 		$(use_enable pulseaudio pulse) \
 		$(use_enable qt5 qt) \
@@ -174,7 +179,7 @@ src_configure() {
 	sed -i 's/silence-removal //' extra.mk || die
 	sed -i 's/stereo_plugin //' extra.mk || die
 	sed -i 's/voice_removal //' extra.mk || die
-	sed -i 's/echo_plugin //' extra.mk || die
+	sed -i 's/echo_plugin//' extra.mk || die
 	sed -i 's/playlist-manager-qt //' extra.mk || die
 	sed -i 's/search-tool-qt //' extra.mk || die
 	sed -i 's/skins-qt //' extra.mk || die
@@ -186,6 +191,7 @@ src_configure() {
 	sed -i 's/tonegen //' extra.mk || die
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
-	sed -i 's/gio //' extra.mk || die
+	sed -i 's/filewriter//' extra.mk || die
+	#sed -i 's/gio//' extra.mk || die
 	sed -i 's/Visualization//' extra.mk || die
 }
