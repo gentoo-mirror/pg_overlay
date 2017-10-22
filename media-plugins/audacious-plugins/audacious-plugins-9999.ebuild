@@ -114,7 +114,7 @@ src_configure() {
 	mp3_warning
 
 	if use gtk3 ;then
-		gtk="--enable-gtk"
+		gtk="--enable-gtk --enable-hotkey"
 	else
 		gtk="--disable-gtk"
 	fi
@@ -136,7 +136,6 @@ src_configure() {
 		--disable-soxr \
 		--disable-oss4 \
 		--enable-mpris2 \
-		--enable-hotkey \
 		--disable-mac-media-keys \
 		$(use_enable aac) \
 		$(use_enable alsa) \
