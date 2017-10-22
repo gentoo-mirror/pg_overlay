@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/audacious-media-player/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="aac +adplug alsa bs2b cdda +cue ffmpeg flac fluidsynth gnome http gtk3 jack
+IUSE="aac +adplug alsa bs2b cdda +cue ffmpeg flac fluidsynth gnome +http gtk3 jack
 lame libnotify libsamplerate lirc mms mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
@@ -179,7 +179,7 @@ src_configure() {
 	sed -i 's/silence-removal //' extra.mk || die
 	sed -i 's/stereo_plugin //' extra.mk || die
 	sed -i 's/voice_removal //' extra.mk || die
-	sed -i 's/echo_plugin //' extra.mk || die
+	sed -i 's/echo_plugin//' extra.mk || die
 	sed -i 's/playlist-manager-qt //' extra.mk || die
 	sed -i 's/search-tool-qt //' extra.mk || die
 	sed -i 's/skins-qt //' extra.mk || die
@@ -191,6 +191,7 @@ src_configure() {
 	sed -i 's/tonegen //' extra.mk || die
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
-	sed -i 's/gio //' extra.mk || die
+	sed -i 's/filewriter//' extra.mk || die
+	sed -i 's/gio//' extra.mk || die
 	sed -i 's/Visualization//' extra.mk || die
 }
