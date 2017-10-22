@@ -136,6 +136,9 @@ src_configure() {
 		--disable-soxr \
 		--disable-oss4 \
 		--enable-mpris2 \
+		--disable-glspectrum \
+		--disable-qtaudio \
+		--disable-qtglspectrum \
 		--disable-mac-media-keys \
 		$(use_enable aac) \
 		$(use_enable alsa) \
