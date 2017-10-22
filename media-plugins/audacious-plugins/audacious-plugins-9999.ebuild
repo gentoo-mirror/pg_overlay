@@ -134,11 +134,11 @@ src_configure() {
 
 	econf \
 		${ffmpeg} \
+		${gtk} \
 		${notify} \
 		--disable-modplug \
 		--enable-mpris2 \
-		--enable-soxr \
-		--disable-gtk \
+		--disable-soxr \
 		$(use_enable aac) \
 		$(use_enable alsa) \
 		$(use_enable bs2b) \
