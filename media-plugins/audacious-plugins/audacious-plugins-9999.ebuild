@@ -111,12 +111,11 @@ src_prepare() {
 
 	eautoreconf
 
-	local loc_dir="${S}/po"
-	l10n_find_plocales_changes "${loc_dir}" "" ".po"
 	rm_loc() {
-		rm -vf "${loc_dir}/${1}.po" || die
-		sed -i '/"${1}.po"/d' "${loc_dir}/Makefile" || die 
+		rm -vf "po/${1}.po" || die
+		sed -i s/${1}.po// po/Makefile || die
 	}
+	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rm_loc
 }
 

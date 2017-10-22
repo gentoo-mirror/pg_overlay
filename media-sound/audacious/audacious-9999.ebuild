@@ -2,7 +2,10 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
-inherit autotools eutils git-r3
+
+PLOCALES="ar ast be bg ca cmn cs da de el en_GB eo es_AR es_MX es et eu fa_IR fi fr gl he hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ro ru si sk sq sr@latin sr sr_RS sv ta tr uk vi zh_CN zh_TW"
+
+inherit autotools eutils git-r3 l10n
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
@@ -51,6 +54,13 @@ src_unpack() {
 
 src_prepare() {
 	eautoreconf
+
+	rm_loc() {
+		rm -vf "po/${1}.po" || die
+		sed -i s/${1}.po// po/Makefile || die
+	}
+	l10n_find_plocales_changes po "" ".po"
+	l10n_for_each_disabled_locale_do rm_loc
 }
 
 src_configure() {
