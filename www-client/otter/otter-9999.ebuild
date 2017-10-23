@@ -31,7 +31,7 @@ RDEPEND="
 DOCS=( CHANGELOG CONTRIBUTING.md TODO )
 
 src_prepare() {
-	default
+	cmake-utils_src_prepare
 
 	if [[ -n ${LINGUAS} ]]; then
 		local lingua
@@ -44,7 +44,6 @@ src_prepare() {
 			fi
 		done
 	fi
-cmake-utils_src_prepare
 }
 
 src_install() {
