@@ -33,7 +33,8 @@ python_install() {
 	distutils-r1_python_install \
 		--standard-lib \
 		--no-version-script \
-		--install-data "${EPREFIX}"/usr/share
+		--install-data "${EPREFIX}"/usr/share \
+		--optimize=1
 }
 
 python_install_all() {
