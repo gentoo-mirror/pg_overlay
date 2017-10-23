@@ -31,7 +31,7 @@ src_prepare() {
 	#sed -i "/Append/s:RPATH=libdir,::"          SConstruct
 	#sed -i "/Default/s:lib_static,::"           SConstruct
 	#sed -i "/Alias/s:install_static,::"         SConstruct
-	sed -i "/  print/{s/print/print(/; s/$/)/}" SConstruct
+	sed -i "/  print/{s/print/print(/; s/$/)/}" SConstruct &&
 
 	# need limits.h for PATH_MAX (only when EXTENSIONS is enabled)
 	[[ ${CHOST} == *-solaris* ]] && append-cppflags -D__EXTENSIONS__
