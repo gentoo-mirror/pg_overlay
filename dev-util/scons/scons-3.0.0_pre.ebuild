@@ -34,7 +34,7 @@ python_install() {
 		--standard-lib \
 		--no-version-script \
 		--install-data "${EPREFIX}"/usr/share \
-		-optimize=1
+		--optimize=1
 }
 
 python_install_all() {
