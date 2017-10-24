@@ -28,7 +28,7 @@ if [ "${MY_PV%9999}" = "${MY_PV}" ] ; then
 else
 	KEYWORDS=""
 fi
-IUSE="+drm egl opengl vdpau wayland X utils"
+IUSE="+drm opengl vdpau wayland X utils"
 
 VIDEO_CARDS="nvidia intel i965 fglrx nouveau"
 for x in ${VIDEO_CARDS}; do
@@ -41,7 +41,6 @@ RDEPEND=">=x11-libs/libdrm-2.4.46[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXfixes-5.0.1[${MULTILIB_USEDEP}]
 	)
-	egl? ( >=media-libs/mesa-9.1.6[egl,${MULTILIB_USEDEP}] )
 	opengl? ( >=virtual/opengl-7.0-r1[${MULTILIB_USEDEP}] )
 	wayland? ( >=dev-libs/wayland-1.0.6[${MULTILIB_USEDEP}] )"
 
@@ -78,7 +77,6 @@ multilib_src_configure() {
 		$(use_enable opengl glx)
 		$(use_enable X x11)
 		$(use_enable wayland)
-		$(use_enable egl)
 		$(use_enable drm)
 	)
 	autotools-utils_src_configure
