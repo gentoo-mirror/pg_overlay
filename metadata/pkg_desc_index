@@ -37,7 +37,6 @@ kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/thunderbird 52.4.0: Thunderbird Mail Client
 media-fonts/iosevka 1.13.3: Open source coding font
-media-libs/harfbuzz 1.6.2: An OpenType text shaping engine
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.3: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
