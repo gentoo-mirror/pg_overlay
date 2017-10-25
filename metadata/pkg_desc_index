@@ -8,6 +8,7 @@ app-emulation/virtualbox-extpack-oracle 5.2.0.118431: PUEL extensions for Virtua
 app-emulation/virtualbox-modules 5.2.0: Kernel Modules for Virtualbox
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
+app-misc/workrave 1.10.18: Helpful utility to attack Repetitive Strain Injury (RSI)
 app-portage/eix 0.33.0: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
