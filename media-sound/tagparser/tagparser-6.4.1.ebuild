@@ -7,7 +7,7 @@ inherit cmake-utils
 
 DESCRIPTION="C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags"
 HOMEPAGE="https://github.com/Martchus/tagparser"
-SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/Martchus/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="5"
