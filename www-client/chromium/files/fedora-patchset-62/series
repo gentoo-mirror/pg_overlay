@@ -11,7 +11,6 @@ chromium-59.0.3071.86-nullfix.patch
 chromium-54.0.2840.59-jpeg-include-dir.patch
 chromium-61.0.3163.79-setopaque.patch
 chromium-56.0.2924.87-fpermissive.patch
-chromium-62.0.3202.62-gcc7.patch
 chromium-62.0.3202.62-enable-mp3.patch
 chromium-58.0.3029.96-revert-b794998819088f76b4cf44c8db6940240c563cf4.patch
 chromium-60.0.3112.78-no-libpng-prefix.patch
