@@ -102,5 +102,5 @@ src_install() {
 	}
 	use python && distutils-r1_src_install
 
-	prune_libtool_files
+	find "${D}" -name '*.la' -delete || die
 }
