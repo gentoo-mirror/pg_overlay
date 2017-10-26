@@ -16,7 +16,6 @@ chromium-58.0.3029.96-revert-b794998819088f76b4cf44c8db6940240c563cf4.patch
 chromium-60.0.3112.78-no-libpng-prefix.patch
 chromium-60.0.3112.78-jpeg-nomangle.patch
 chromium-60.0.3112.78-no-zlib-mangle.patch
-chromium-61.0.3163.79-gcc-no-opt-safe-math.patch
 
 chromium-46.0.2490.86-use_system_opus.patch
 chromium-58.0.3029.81-use_system_harfbuzz.patch
