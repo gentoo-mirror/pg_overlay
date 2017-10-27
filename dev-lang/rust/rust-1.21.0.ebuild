@@ -45,7 +45,7 @@ LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
 IUSE="debug doc +jemalloc system-llvm"
 
-RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425"
+RDEPEND=""
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	system-llvm? (
@@ -61,7 +61,9 @@ DEPEND="${RDEPEND}
 	)
 	dev-util/cmake
 "
-PDEPEND=">=dev-util/cargo-${CARGO_DEPEND_VERSION}"
+PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
+	|| ( 	>=dev-util/cargo-${CARGO_DEPEND_VERSION}
+		>=dev-util/cargo-bin-${CARGO_DEPEND_VERSION} )"
 
 S="${WORKDIR}/${MY_P}-src"
 

@@ -123,20 +123,20 @@ wincolor-0.1.4
 ws2_32-sys-0.2.1
 "
 
-inherit bash-completion-r1 cargo
+inherit bash-completion-r1 cargo versionator
 
-BOOTSTRAP_VERSION="0.21.0"
+BOOTSTRAP_VERSION="0.$(($(get_version_component_range 2) - 1)).0"
 
 DESCRIPTION="The Rust's package manager"
 HOMEPAGE="http://crates.io"
 SRC_URI="https://github.com/rust-lang/cargo/archive/${PV}.tar.gz -> ${P}.tar.gz
+	$(cargo_crate_uris ${CRATES})
 	x86?   (
 		https://static.rust-lang.org/dist/cargo-${BOOTSTRAP_VERSION}-i686-unknown-linux-gnu.tar.gz
 	)
 	amd64? (
 		https://static.rust-lang.org/dist/cargo-${BOOTSTRAP_VERSION}-x86_64-unknown-linux-gnu.tar.gz
-	)
-	$(cargo_crate_uris ${CRATES})"
+	)"
 
 RESTRICT="mirror"
 LICENSE="|| ( MIT Apache-2.0 )"
