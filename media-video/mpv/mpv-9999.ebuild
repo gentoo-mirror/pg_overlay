@@ -139,8 +139,6 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
-	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
 	"${FILESDIR}/${PN}-0.27.0-allow-upstream-ffmpeg.patch"
 )
 
@@ -185,6 +183,7 @@ src_configure() {
 		$(use_enable zsh-completion zsh-comp)
 		$(use_enable test)
 
+		--disable-android
 		$(use_enable iconv)
 		$(use_enable samba libsmbclient)
 		$(use_enable lua)
@@ -240,7 +239,6 @@ src_configure() {
 		$(usex vaapi "$(use_enable gbm vaapi-drm)" '--disable-vaapi-drm')
 		$(use_enable libcaca caca)
 		$(use_enable jpeg)
-		--disable-android
 		$(use_enable raspberry-pi rpi)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		--disable-mali-fbdev	# Only available in overlays.
@@ -294,10 +292,6 @@ src_install() {
 		newbin TOOLS/idet.sh mpv_idet.sh
 		python_replicate_script "${ED}"usr/bin/umpv
 	fi
-}
-
-pkg_preinst() {
-	gnome2_icon_savelist
 }
 
 pkg_postinst() {
