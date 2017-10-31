@@ -12,7 +12,7 @@ EAPI=6
 # changes its ABI then this package will be rebuilt needlessly. Hence, such a
 # package is free _not_ to := depend on FFmpeg but I would strongly encourage
 # doing so since such a case is unlikely.
-FFMPEG_SUBSLOT=55.57.57
+FFMPEG_SUBSLOT=56.58.58
 
 SCM=""
 if [ "${PV#9999}" != "${PV}" ] ; then
@@ -20,14 +20,14 @@ if [ "${PV#9999}" != "${PV}" ] ; then
 	EGIT_REPO_URI="git://source.ffmpeg.org/ffmpeg.git"
 fi
 
-inherit eutils flag-o-matic multilib multilib-minimal toolchain-funcs ${SCM} versionator
+inherit eutils flag-o-matic multilib multilib-minimal toolchain-funcs ${SCM}
 
 DESCRIPTION="Complete solution to record, convert and stream audio and video. Includes libavcodec"
 HOMEPAGE="http://ffmpeg.org/"
 if [ "${PV#9999}" != "${PV}" ] ; then
 	SRC_URI=""
 elif [ "${PV%_p*}" != "${PV}" ] ; then # Snapshot
-	SRC_URI="https://github.com/FFmpeg/FFmpeg/archive/n${PV/_pre/}-dev.tar.gz"
+	SRC_URI="mirror://gentoo/${P}.tar.bz2"
 else # Release
 	SRC_URI="http://ffmpeg.org/releases/${P/_/-}.tar.bz2"
 fi
@@ -54,7 +54,7 @@ LICENSE="
 	samba? ( GPL-3 )
 "
 if [ "${PV#9999}" = "${PV}" ] ; then
-	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~x64-solaris ~x86-solaris"
 fi
 
 # Options to use as use_enable in the foo[:bar] form.
@@ -287,7 +287,7 @@ RESTRICT="
 	gpl? ( openssl? ( bindist ) fdk? ( bindist ) )
 "
 
-S=${WORKDIR}/FFmpeg-n${PV/_pre/}-dev
+S=${WORKDIR}/${P/_/-}
 
 PATCHES=(
 	"${FILESDIR}"/chromium.patch
