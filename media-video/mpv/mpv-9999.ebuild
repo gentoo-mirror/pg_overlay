@@ -8,7 +8,7 @@ PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=1.9.14
 
-inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils
+inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils flag-o-matic
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/"
@@ -156,6 +156,9 @@ src_prepare() {
 }
 
 src_configure() {
+	append_cppflags -DLIBAVCODEC_MPV=1
+	append_cxxflags -DLIBAVCODEC_MPV=1
+
 	tc-export CC PKG_CONFIG AR
 
 	if tc-is-cross-compiler && use raspberry-pi; then
@@ -259,7 +262,7 @@ src_configure() {
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
 		--jobs=$(makeopts_jobs)
-		--libavdevice=ffmpeg
+		--enable-libavdevice
 	)
 
 	if use vaapi && use X; then
