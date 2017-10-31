@@ -3,10 +3,10 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_6} )
+PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=1.9.8
+WAF_PV=1.9.14
 
 inherit gnome2-utils pax-utils python-r1 toolchain-funcs versionator waf-utils xdg-utils
 
@@ -14,15 +14,15 @@ DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/"
 
 if [[ ${PV} != *9999* ]]; then
-	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/${PN}-player/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
-	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
+	EGIT_REPO_URI="https://github.com/${PN}-player/${PN}.git"
 	inherit git-r3
 fi
 SRC_URI+=" https://waf.io/waf-${WAF_PV}"
-DOCS+=( README.md DOCS/{client-api,interface}-changes.rst )
+DOCS+=( README.md etc/{mpv,input}.conf DOCS/{client-api,interface}-changes.rst)
 
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
 LICENSE="LGPL-2.1+ GPL-2+ BSD ISC samba? ( GPL-3+ )"
@@ -150,8 +150,10 @@ pkg_setup() {
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
+	sed -i 's/1.9.8/1.9.14/g' bootstrap.py || die
+	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	eapply "${FILESDIR}/${PV}"
-	default_src_prepare
+	default src_prepare
 }
 
 src_configure() {
@@ -174,9 +176,9 @@ src_configure() {
 		--disable-libmpv-static
 		--disable-static-build
 		# See deep down below for build-date.
-		--disable-optimize		# Don't add '-O2' to CFLAGS.
+		#--disable-optimize		# Don't add '-O2' to CFLAGS.
 		--disable-debug-build	# Don't add '-g' to CFLAGS.
-		--enable-html-build
+		--disable-html-build
 
 		$(use_enable doc pdf-build)
 		$(use_enable cplugins)
@@ -259,6 +261,7 @@ src_configure() {
 
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
+		--jobs=$(makeopts_jobs)
 	)
 
 	if use vaapi && use X; then
