@@ -34,14 +34,3 @@ index 5a389f16f2..acb673c5fd 100644
                                  use='libavcodec')
      }, {
          # This check should always result in the opposite of is_ffmpeg.
-@@ -488,9 +481,7 @@ libav_dependencies = [
-         'func': check_ffmpeg_or_libav_versions(),
-         'req': True,
-         'fmsg': "Unable to find development files for some of the required \
--FFmpeg/Libav libraries. You need git master. For FFmpeg, the mpv fork, that \
--might contain additional fixes and features is required. It is available on \
--https://github.com/mpv-player/ffmpeg-mpv Aborting."
-+FFmpeg/Libav libraries. You need at least {0}. Aborting.".format(libav_versions_string)
-     }, {
-         'name': '--libavdevice',
-         'desc': 'libavdevice',
