@@ -88,7 +88,3 @@
 -https://github.com/mpv-player/ffmpeg-mpv Aborting."
 +FFmpeg/Libav libraries. You need at least {0}. Aborting.".format(libav_versions_string)
      }, {
-         'name': '--libavdevice',
-         'desc': 'libavdevice',
-         'func': check_pkg_config('libavdevice', '>= 57.0.0'),
-
