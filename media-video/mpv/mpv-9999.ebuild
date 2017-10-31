@@ -139,7 +139,7 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-0.27.0-allow-upstream-ffmpeg.patch"
+	"${FILESDIR}/${P}-allow-upstream-ffmpeg.patch"
 )
 
 pkg_setup() {
