@@ -141,6 +141,7 @@ RDEPEND="${COMMON_DEPEND}
 PATCHES=(
 	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
 	"${FILESDIR}/${P}-allow-upstream-ffmpeg.patch"
+	"${FILESDIR}/ffmpeg.patch"
 )
 
 pkg_setup() {

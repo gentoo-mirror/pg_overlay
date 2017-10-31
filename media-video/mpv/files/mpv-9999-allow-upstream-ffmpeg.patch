@@ -1,39 +1,36 @@
---- a/wscript	2017-10-31 15:27:25.100037571 +0700
-+++ b/wscript	2017-10-31 15:28:50.661108923 +0700
-@@ -426,12 +426,12 @@
- ]
- 
- ffmpeg_pkg_config_checks = [
--    'libavutil',     '>= 56.0.100',
--    'libavcodec',    '>= 58.2.100',
--    'libavformat',   '>= 58.0.102',
--    'libswscale',    '>= 5.0.101',
--    'libavfilter',   '>= 7.0.101',
--    'libswresample', '>= 3.0.100',
-+    'libavutil',     '>= 54.0.100',
-+    'libavcodec',    '>= 56.2.100',
-+    'libavformat',   '>= 56.0.102',
-+    'libswscale',    '>= 3.0.101',
-+    'libavfilter',   '>= 5.0.101',
-+    'libswresample', '>= 2.0.100',
- ]
- libav_pkg_config_checks = [
-     'libavutil',     '>= 56.6.0',
-@@ -484,7 +484,7 @@
-     }, {
-         'name': 'libav-any',
-         'desc': 'Libav/FFmpeg library versions',
--        'deps': 'ffmpeg_mpv || libav',
-+        'deps': 'ffmpeg_garbage || libav || ffmpeg_mpv',
-         'func': check_ffmpeg_or_libav_versions(),
+From e65fb584da78b5297fd68023a562ed149f769901 Mon Sep 17 00:00:00 2001
+From: orbea <ovariegata@yahoo.com>
+Date: Sun, 29 Oct 2017 06:40:26 -0700
+Subject: [PATCH] Revert "build: require our own ffmpeg repo"
+
+This reverts commit 83d44aca7dc7f46b8d3b64d441f5a8317a40e080.
+---
+ wscript | 17 ++++-------------
+ 1 file changed, 4 insertions(+), 13 deletions(-)
+
+diff --git a/wscript b/wscript
+index 5a389f16f2..acb673c5fd 100644
+--- a/wscript
++++ b/wscript
+@@ -458,18 +458,11 @@ libav_dependencies = [
          'req': True,
-         'fmsg': "Unable to find development files for some of the required \
-@@ -494,7 +494,7 @@
+         'fmsg': "FFmpeg/Libav development files not found.",
      }, {
-         'name': '--libavdevice',
-         'desc': 'libavdevice',
--        'func': check_pkg_config('libavdevice', '>= 57.0.0'),
-+        'func': check_pkg_config('libavdevice', '>= 56.0.0'),
-     }
- ]
- 
+-        'name': 'ffmpeg_mpv',
+-        'desc': 'libav* is FFmpeg mpv modified version',
+-        'func': check_statement('libavcodec/version.h',
+-                                'int x[LIBAVCODEC_MPV ? 1 : -1]',
+-                                use='libavcodec')
+-    }, {
+-        'name': 'ffmpeg_garbage',
+-        'deps': '!ffmpeg_mpv',
+-        'desc': 'libav* is upstream FFmpeg (unsupported)',
++        'name': 'is_ffmpeg',
++        'desc': 'libav* is FFmpeg',
+         # FFmpeg <=> LIBAVUTIL_VERSION_MICRO>=100
+         'func': check_statement('libavcodec/version.h',
+-                                'int x[LIBAVCODEC_VERSION_MICRO >= 100 ? 1 : -1]',
++                                'int x[LIBAVCODEC_MPV ? 1 : -1]',
+                                 use='libavcodec')
+     }, {
+         # This check should always result in the opposite of is_ffmpeg.
