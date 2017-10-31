@@ -287,7 +287,7 @@ RESTRICT="
 	gpl? ( openssl? ( bindist ) fdk? ( bindist ) )
 "
 
-S=${WORKDIR}/${P/_/-}
+S=${WORKDIR}/FFmpeg-n${PV/_pre/}-dev
 
 PATCHES=(
 	"${FILESDIR}"/chromium.patch
