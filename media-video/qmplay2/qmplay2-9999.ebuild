@@ -58,6 +58,7 @@ src_configure() {
 		-DUSE_LIBASS=$(usex libass)
 		-DUSE_MODPLUG=$(usex modplug)
 		-DUSE_NOTIFY=$(usex notify)
+		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex notify)
 		-DUSE_OPENGL2=$(usex opengl)
 		-DUSE_PULSEAUDIO=$(usex pulseaudio)
 		-DUSE_TAGLIB=$(usex taglib)
@@ -66,7 +67,6 @@ src_configure() {
 		-DUSE_VIDEOFILTERS=$(usex videofilters)
 		-DUSE_VISUALIZATIONS=$(usex visualizations)
 		-DUSE_XVIDEO=$(usex xv)
-
 	)
 
 	if use extensions; then
