@@ -42,6 +42,8 @@ src_configure() {
 	local mycmakeargs=(
 		-DUSE_FFMPEG=ON
 		-DUSE_FFMPEG_AVDEVICE=ON
+		-DUSE_QT5=ON
+		-DUSE_LINK_TIME_OPTIMIZATION=ON 
 		-DUSE_CMD=OFF
 		-DUSE_PORTAUDIO=OFF
 		-DLANGUAGES="$(l10n_get_locales)"
