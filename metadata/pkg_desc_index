@@ -61,9 +61,8 @@ media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reportin
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 2.2.5: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 6.4.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
-media-video/ffmpeg 3.5_pre: Complete solution to record, convert and stream audio and video. Includes libavcodec
 media-video/libva-utils 2.0.0_pre: Collection of utilities and tests for VA-API
-media-video/mpv 0.27.0 9999: Media player based on MPlayer and mplayer2
+media-video/mpv 0.27.0 0.27.0-r1 9999: Media player based on MPlayer and mplayer2
 net-im/kadu 4.3 5.0_alpha1: An open source Gadu-Gadu and Jabber/XMPP protocol Instant Messenger client
 net-im/pidgin 9999: GTK Instant Messenger client
 net-im/psi 9999: Qt4 Jabber client, with Licq-like interface
