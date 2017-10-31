@@ -13,7 +13,7 @@ KEYWORDS=""
 
 LICENSE="LGPL"
 SLOT="0"
-IUSE="alsa +audiofilters cdio cuvid +ffmpeg extensions inputs +jemalloc lastfm +libass modplug mpris +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
+IUSE="alsa +audiofilters cdio cuvid extensions +ffmpeg gme inputs +jemalloc lastfm +libass modplug mpris +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
 
 RDEPEND="
 	>=dev-qt/qtdbus-5.9.1:5
