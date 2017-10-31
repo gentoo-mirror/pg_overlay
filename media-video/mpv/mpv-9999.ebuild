@@ -139,6 +139,7 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 PATCHES=(
+	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
 	"${FILESDIR}/${P}-allow-upstream-ffmpeg.patch"
 )
 
@@ -246,8 +247,6 @@ src_configure() {
 
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
-		$(use_enable vaapi vaapi-hwaccel)
-		$(use_enable vdpau vdpau-hwaccel)
 		$(use_enable cuda cuda-hwaccel)
 
 		# TV features:
