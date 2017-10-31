@@ -13,7 +13,7 @@ KEYWORDS=""
 
 LICENSE="LGPL"
 SLOT="0"
-IUSE="alsa +audiofilters cdio cuvid +ffmpeg extensions inputs +jemalloc lastfm +libass modplug mpris +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
+IUSE="alsa +audiofilters cdio cuvid extensions +ffmpeg gme inputs +jemalloc lastfm +libass modplug mpris notify +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
 
 RDEPEND="
 	>=dev-qt/qtdbus-5.9.1:5
@@ -42,6 +42,8 @@ src_configure() {
 	local mycmakeargs=(
 		-DUSE_FFMPEG=ON
 		-DUSE_FFMPEG_AVDEVICE=ON
+		-DUSE_QT5=ON
+		-DUSE_LINK_TIME_OPTIMIZATION=ON 
 		-DUSE_CMD=OFF
 		-DUSE_PORTAUDIO=OFF
 		-DLANGUAGES="$(l10n_get_locales)"
@@ -55,7 +57,8 @@ src_configure() {
 		-DUSE_JEMALLOC=$(usex jemalloc)
 		-DUSE_LIBASS=$(usex libass)
 		-DUSE_MODPLUG=$(usex modplug)
-		-DUSE_NOTIFY=$(usex notifications)
+		-DUSE_NOTIFY=$(usex notify)
+		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex notify)
 		-DUSE_OPENGL2=$(usex opengl)
 		-DUSE_PULSEAUDIO=$(usex pulseaudio)
 		-DUSE_TAGLIB=$(usex taglib)
@@ -64,7 +67,6 @@ src_configure() {
 		-DUSE_VIDEOFILTERS=$(usex videofilters)
 		-DUSE_VISUALIZATIONS=$(usex visualizations)
 		-DUSE_XVIDEO=$(usex xv)
-
 	)
 
 	if use extensions; then
