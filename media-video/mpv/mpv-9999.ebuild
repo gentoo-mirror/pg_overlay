@@ -259,6 +259,7 @@ src_configure() {
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
 		--jobs=$(makeopts_jobs)
+		--libavdevice=ffmpeg
 	)
 
 	if use vaapi && use X; then
