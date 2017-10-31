@@ -13,7 +13,7 @@ KEYWORDS=""
 
 LICENSE="LGPL"
 SLOT="0"
-IUSE="alsa +audiofilters cdio cuvid extensions +ffmpeg gme inputs +jemalloc lastfm +libass modplug mpris +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
+IUSE="alsa +audiofilters cdio cuvid extensions +ffmpeg gme inputs +jemalloc lastfm +libass modplug mpris notify +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
 
 RDEPEND="
 	>=dev-qt/qtdbus-5.9.1:5
@@ -55,7 +55,7 @@ src_configure() {
 		-DUSE_JEMALLOC=$(usex jemalloc)
 		-DUSE_LIBASS=$(usex libass)
 		-DUSE_MODPLUG=$(usex modplug)
-		-DUSE_NOTIFY=$(usex notifications)
+		-DUSE_NOTIFY=$(usex notify)
 		-DUSE_OPENGL2=$(usex opengl)
 		-DUSE_PULSEAUDIO=$(usex pulseaudio)
 		-DUSE_TAGLIB=$(usex taglib)
