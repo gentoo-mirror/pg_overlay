@@ -45,41 +45,37 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=()
+	local myconf=( CONFIG+=recheck )
 
 	if use gui; then
-		myconf+=( x11 xv )
+		myconf+=( CONFIG+=x11 CONFIG+=xv )
 	else
-		myconf+=( no-x11 no-xv )
+		myconf+=( CONFIG+=no-x11 CONFIG+=no-xv )
 	fi
 
 	if use opengl; then
-		myconf+=( gl )
+		myconf+=( CONFIG+=gl )
 	else
-		myconf+=( no-gl )
+		myconf+=( CONFIG+=no-gl )
 	fi
 
 	if use portaudio; then
-		myconf+=( portaudio )
+		myconf+=( CONFIG+=portaudio )
 	else
-		myconf+=( no-portaudio )
+		myconf+=( CONFIG+=no-portaudio )
 	fi
 
 	if use pulseaudio; then
-		myconf+=( pulseaudio )
+		myconf+=( CONFIG+=pulseaudio )
 	else
-		myconf+=( no-pulseaudio )
+		myconf+=( CONFIG+=no-pulseaudio )
 	fi
 
 	if use vaapi; then
-		myconf+=( vaapi )
+		myconf+=( CONFIG+=vaapi )
 	else
-		myconf+=( no-vaapi )
+		myconf+=( CONFIG+=no-vaapi )
 	fi
 
 	eqmake5 "${myconf[@]}" ${MY_PN}.pro
-}
-
-src_compile() {
-	cmake-utils_src_compile -DQTAV_HAVE_CUDA=0 -DHAVE_OPENGL=1 -DOPENGL=1
 }
