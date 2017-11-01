@@ -77,6 +77,8 @@ src_configure() {
 	else
 		myconf+=( no-vaapi )
 	fi
+	
+	echo "CONFIG+=recheck" > user.conf
 
 	eqmake5 CONFIG+='no_rpath recheck gl no-cedarv'
 }
