@@ -5,7 +5,7 @@ EAPI=6
 
 MY_PN="QtAV"
 CAPI_HASH="b43aa93"
-inherit cmake-utils
+inherit qmake-utils
 
 DESCRIPTION="Multimedia playback framework based on Qt + FFmpeg"
 HOMEPAGE="https://www.qtav.org"
@@ -40,24 +40,44 @@ S="${WORKDIR}/${MY_PN}-${PV}"
 PATCHES=( "${FILESDIR}/${P}-multilib.patch" )
 
 src_prepare() {
-	cmake-utils_src_prepare
-	cp "${WORKDIR}/${P}-capi.h-${CAPI_HASH}" contrib/capi/capi.h \
-		|| die "Failed to add missing header"
+	sed -e 's|\$\$\[QT_INSTALL_BINS\]\/\.\.\/mkspecs|\$\$\[QT_INSTALL_ARCHDATA\]\/mkspecs|g' -i tools/install_sdk/install_sdk.pro
+	default
 }
 
 src_configure() {
-	local mycmakeargs=(
-		-DBUILD_TESTS=OFF
-		-DBUILD_EXAMPLES=OFF
-		-DBUILD_PLAYERS=$(usex gui)
-		-DBUILD_QT5OPENGL=$(usex opengl)
-		-DHAVE_OPENGL=$(usex opengl)
-		-DHAVE_PORTAUDIO=$(usex portaudio)
-		-DHAVE_PULSE=$(usex pulseaudio)
-		-DHAVE_VAAPI=$(usex vaapi)
-	)
+	local myconf=()
 
-	cmake-utils_src_configure
+	if use gui; then
+		myconf+=( x11 xv )
+	else
+		myconf+=( no-x11 no-xv )
+	fi
+
+	if use opengl; then
+		myconf+=( gl )
+	else
+		myconf+=( no-gl )
+	fi
+
+	if use portaudio; then
+		myconf+=( portaudio )
+	else
+		myconf+=( no-portaudio )
+	fi
+
+	if use pulseaudio; then
+		myconf+=( pulseaudio )
+	else
+		myconf+=( no-pulseaudio )
+	fi
+
+	if use vaapi; then
+		myconf+=( vaapi )
+	else
+		myconf+=( no-vaapi )
+	fi
+
+	eqmake5 "${myconf[@]}" ${MY_PN}.pro
 }
 
 src_compile() {
