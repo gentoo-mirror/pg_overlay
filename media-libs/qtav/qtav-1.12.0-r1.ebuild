@@ -79,7 +79,3 @@ src_configure() {
 
 	eqmake5 "${myconf[@]}" ${MY_PN}.pro
 }
-
-src_compile() {
-	cmake-utils_src_compile -DQTAV_HAVE_CUDA=0 -DHAVE_OPENGL=1 -DOPENGL=1
-}
