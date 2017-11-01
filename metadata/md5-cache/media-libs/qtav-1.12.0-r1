@@ -1,4 +1,4 @@
-DEFINED_PHASES=compile configure prepare
+DEFINED_PHASES=configure prepare
 DEPEND=dev-qt/qtcore:5 dev-qt/qtdeclarative:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 gui? ( dev-qt/qtsql:5 ) libav? ( media-video/libav:= x11-libs/libX11 ) !libav? ( media-video/ffmpeg:= ) opengl? ( dev-qt/qtopengl:5 ) portaudio? ( media-libs/portaudio ) pulseaudio? ( media-sound/pulseaudio )
 DESCRIPTION=Multimedia playback framework based on Qt + FFmpeg
 EAPI=6
@@ -11,4 +11,4 @@ REQUIRED_USE=gui? ( opengl )
 SLOT=0/1
 SRC_URI=https://github.com/wang-bin/QtAV/archive/v1.12.0.tar.gz -> qtav-1.12.0.tar.gz https://dev.gentoo.org/~johu/distfiles/qtav-1.12.0-capi.h-b43aa93.xz
 _eclasses_=estack	43ddf5aaffa7a8d0482df54d25a66a1f	multilib	97f470f374f2e94ccab04a2fb21d811e	qmake-utils	990448b067cb3cfe1443bc25fb57239c	toolchain-funcs	185a06792159ca143528e7010368e8af
-_md5_=6dc61134f1114a4ab73cca0d750ada79
+_md5_=5a36d9e300a36b58a9193bfca0296df8
