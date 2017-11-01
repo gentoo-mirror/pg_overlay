@@ -77,5 +77,5 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 
-	eqmake5 "${myconf[@]}" ${MY_PN}.pro
+	eqmake5 "${myconf[@]}"
 }
