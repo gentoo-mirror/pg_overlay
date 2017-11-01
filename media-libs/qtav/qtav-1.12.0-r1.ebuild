@@ -48,6 +48,7 @@ src_configure() {
 	local myconf=()
 
 	if use gui; then
+		myconf+=( xv )
 		myconf+=( x11 xv )
 	else
 		myconf+=( no-x11 no-xv )
@@ -56,7 +57,7 @@ src_configure() {
 	if use opengl; then
 		myconf+=( gl )
 	else
-		myconf+=( gl )
+		myconf+=( no-gl )
 	fi
 
 	if use portaudio; then
