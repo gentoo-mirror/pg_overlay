@@ -48,38 +48,36 @@ src_configure() {
 	local myconf=()
 
 	if use gui; then
-		myconf+=( x11 )
-		myconf+=( xv )
+		myconf+=( CONFIG+=x11 )
+		myconf+=( CONFIG+=)
 	else
-		myconf+=( no-x11 no-xv )
+		myconf+=( CONFIG+=no-x11 )
+		myconf+=( CONFIG+=no-xv )
 	fi
 
 	if use opengl; then
-		myconf+=( gl )
+		myconf+=( CONFIG+=gl )
 	else
-		myconf+=( no-gl )
+		myconf+=( CONFIG+=no-gl )
 	fi
 
 	if use portaudio; then
-		myconf+=( portaudio )
+		myconf+=( CONFIG+=portaudio )
 	else
-		myconf+=( no-portaudio )
+		myconf+=( CONFIG+=no-portaudio )
 	fi
 
 	if use pulseaudio; then
-		myconf+=( pulseaudio )
+		myconf+=( CONFIG+=pulseaudio )
 	else
-		myconf+=( no-pulseaudio )
+		myconf+=( CONFIG+=no-pulseaudio )
 	fi
 
 	if use vaapi; then
-		myconf+=( vaapi )
+		myconf+=( CONFIG+=vaapi )
 	else
-		myconf+=( no-vaapi )
+		myconf+=( CONFIG+=no-vaapi )
 	fi
 	
-	echo "CONFIG+=recheck" > user.conf
-
-	eqmake5 CONFIG+='no_rpath recheck gl no-cedarv'
-	eqmake5 CONFIG+='no_rpath recheck gl no-cedarv'
+# 	eqmake5 CONFIG+=recheck ${myconf[@]}
 }
