@@ -77,5 +77,5 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 
-	eqmake5 "${myconf[@]}"
+	eqmake5 "${myconf[@]} CONFIG+=no-cedarv"
 }
