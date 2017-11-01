@@ -55,6 +55,7 @@ src_configure() {
 		-DHAVE_PULSE=$(usex pulseaudio)
 		-DHAVE_VAAPI=$(usex vaapi)
 		-DHAVE_OPENGL=$(usex opengl)
+		-DHAVE_CUDA=OFF
 	)
 
 	cmake-utils_src_configure
