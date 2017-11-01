@@ -79,6 +79,6 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 	
-	eqmake5 PREFIX=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
+	eqmake5 -config r PREFIX=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]} -config r
 	eqmake5 PREFIX=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
 }
