@@ -45,36 +45,36 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=( CONFIG+=recheck )
+	local myconf=( CONFIG += recheck )
 
 	if use gui; then
-		myconf+=( CONFIG+=x11 CONFIG+=xv )
+		myconf+=( CONFIG += x11 CONFIG += xv )
 	else
-		myconf+=( CONFIG+=no-x11 CONFIG+=no-xv )
+		myconf+=( CONFIG += no-x11 CONFIG += no-xv )
 	fi
 
 	if use opengl; then
-		myconf+=( CONFIG+=gl )
+		myconf+=( CONFIG += gl )
 	else
-		myconf+=( CONFIG+=no-gl )
+		myconf+=( CONFIG += no-gl )
 	fi
 
 	if use portaudio; then
-		myconf+=( CONFIG+=portaudio )
+		myconf+=( CONFIG += portaudio )
 	else
-		myconf+=( CONFIG+=no-portaudio )
+		myconf+=( CONFIG += no-portaudio )
 	fi
 
 	if use pulseaudio; then
-		myconf+=( CONFIG+=pulseaudio )
+		myconf+=( CONFIG += pulseaudio )
 	else
-		myconf+=( CONFIG+=no-pulseaudio )
+		myconf+=( CONFIG += no-pulseaudio )
 	fi
 
 	if use vaapi; then
-		myconf+=( CONFIG+=vaapi )
+		myconf+=( CONFIG += vaapi )
 	else
-		myconf+=( CONFIG+=no-vaapi )
+		myconf+=( CONFIG += no-vaapi )
 	fi
 
 	eqmake5 "${myconf[@]}"
