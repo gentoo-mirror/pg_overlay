@@ -45,7 +45,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=()
+	local myconf=( CONFIG+=recheck)
 
 	if use gui; then
 		myconf+=( CONFIG+=x11 CONFIG+=xv )
