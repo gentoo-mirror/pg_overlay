@@ -48,34 +48,37 @@ src_configure() {
 	local myconf=()
 
 	if use gui; then
-		myconf+=( x11 xv )
+		myconf+=( CONFIG+=x11 )
+		myconf+=( CONFIG+=)
 	else
-		myconf+=( no-x11 no-xv )
+		myconf+=( CONFIG+=no-x11 )
+		myconf+=( CONFIG+=no-xv )
 	fi
 
 	if use opengl; then
-		myconf+=( gl )
+		myconf+=( CONFIG+=gl )
 	else
-		myconf+=( gl )
+		myconf+=( CONFIG+=no-gl )
 	fi
 
 	if use portaudio; then
-		myconf+=( portaudio )
+		myconf+=( CONFIG+=portaudio )
 	else
-		myconf+=( no-portaudio )
+		myconf+=( CONFIG+=no-portaudio )
 	fi
 
 	if use pulseaudio; then
-		myconf+=( pulseaudio )
+		myconf+=( CONFIG+=pulseaudio )
 	else
-		myconf+=( no-pulseaudio )
+		myconf+=( CONFIG+=no-pulseaudio )
 	fi
 
 	if use vaapi; then
-		myconf+=( vaapi )
+		myconf+=( CONFIG+=vaapi )
 	else
-		myconf+=( no-vaapi )
+		myconf+=( CONFIG+=no-vaapi )
 	fi
-
-	eqmake5 "CONFIG+=recheck no-cedarv "${myconf[@]}""
+	
+	eqmake5 prefix=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
+	eqmake5 prefix=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
 }
