@@ -41,6 +41,7 @@ PATCHES=( "${FILESDIR}/${P}-multilib.patch" )
 
 src_prepare() {
 	sed -e 's|\$\$\[QT_INSTALL_BINS\]\/\.\.\/mkspecs|\$\$\[QT_INSTALL_ARCHDATA\]\/mkspecs|g' -i tools/install_sdk/install_sdk.pro
+	default
 }
 
 src_configure() {
