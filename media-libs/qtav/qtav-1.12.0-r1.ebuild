@@ -48,8 +48,8 @@ src_configure() {
 	local myconf=()
 
 	if use gui; then
+		myconf+=( x11 )
 		myconf+=( xv )
-		myconf+=( x11 xv )
 	else
 		myconf+=( no-x11 no-xv )
 	fi
@@ -78,5 +78,5 @@ src_configure() {
 		myconf+=( no-vaapi )
 	fi
 
-	eqmake5 "CONFIG+=recheck no-cedarv "${myconf[@]}""
+	eqmake5 "CONFIG+=recheck no-cedarv ${myconf[@]}"
 }
