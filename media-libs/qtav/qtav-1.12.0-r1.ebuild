@@ -45,37 +45,37 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=( CONFIG+=recheck )
+	local myconf=()
 
 	if use gui; then
-		myconf+=( CONFIG+=x11 CONFIG+=xv )
+		myconf+=( x11 xv )
 	else
-		myconf+=( CONFIG+=no-x11 CONFIG+=no-xv )
+		myconf+=( no-x11 no-xv )
 	fi
 
 	if use opengl; then
-		myconf+=( CONFIG+=gl )
+		myconf+=( gl )
 	else
-		myconf+=( CONFIG+=no-gl )
+		myconf+=( gl )
 	fi
 
 	if use portaudio; then
-		myconf+=( CONFIG+=portaudio )
+		myconf+=( portaudio )
 	else
-		myconf+=( CONFIG+=no-portaudio )
+		myconf+=( no-portaudio )
 	fi
 
 	if use pulseaudio; then
-		myconf+=( CONFIG+=pulseaudio )
+		myconf+=( pulseaudio )
 	else
-		myconf+=( CONFIG+=no-pulseaudio )
+		myconf+=( no-pulseaudio )
 	fi
 
 	if use vaapi; then
-		myconf+=( CONFIG+=vaapi )
+		myconf+=( vaapi )
 	else
-		myconf+=( CONFIG+=no-vaapi )
+		myconf+=( no-vaapi )
 	fi
 
-	eqmake5 "${myconf[@]}" ${MY_PN}.pro
+	eqmake5 "CONFIG+=recheck no-cedarv "${myconf[@]}""
 }
