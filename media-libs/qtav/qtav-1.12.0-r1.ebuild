@@ -48,9 +48,9 @@ src_configure() {
 	local myconf=()
 
 	if use gui; then
-		myconf+=( CONFIG+=x11 xv )
+		myconf+=( CONFIG+=x11 CONFIG+=xv )
 	else
-		myconf+=( CONFIG+=no-x11 no-xv )
+		myconf+=( CONFIG+=no-x11 CONFIG+=no-xv )
 	fi
 
 	if use opengl; then
