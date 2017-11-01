@@ -78,5 +78,5 @@ src_configure() {
 		myconf+=( no-vaapi )
 	fi
 
-	eqmake5 CONFIG+='recheck gl no-cedarv'
+	eqmake5 CONFIG+='no_rpath recheck gl no-cedarv'
 }
