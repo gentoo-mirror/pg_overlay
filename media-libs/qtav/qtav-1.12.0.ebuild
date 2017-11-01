@@ -60,3 +60,7 @@ src_configure() {
 
 	cmake-utils_src_configure
 }
+
+src_compile() {
+	cmake-utils_src_compile -DQTAV_HAVE_CUDA=0 -DHAVE_OPENGL=1 -DOPENGL=1
+}
