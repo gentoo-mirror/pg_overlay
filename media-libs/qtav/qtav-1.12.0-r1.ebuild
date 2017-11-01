@@ -79,6 +79,10 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 	
-	eqmake5 CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]} 
-	eqmake5 CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
+	eqmake5 PREFIX=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]} 
+	eqmake5 PREFIX=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
+}
+
+src_install() {
+	emake INSTALL_ROOT="${D}" install
 }
