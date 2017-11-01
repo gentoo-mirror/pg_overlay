@@ -45,7 +45,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=( CONFIG+=recheck )
+	local myconf=()
 
 	if use gui; then
 		myconf+=( CONFIG+=x11 CONFIG+=xv )
@@ -77,5 +77,5 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 
-	eqmake5 "${myconf[@]} CONFIG+=no-cedarv"
+	eqmake5 "${myconf[@]} CONFIG+=no-cedarv CONFIG+=recheck"
 }
