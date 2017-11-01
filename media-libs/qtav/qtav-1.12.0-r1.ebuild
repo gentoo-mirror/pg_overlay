@@ -79,5 +79,5 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 	
-# 	eqmake5 CONFIG+=recheck ${myconf[@]}
+	eqmake5 CONFIG+=recheck ${myconf[@]}
 }
