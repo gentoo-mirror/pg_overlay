@@ -56,7 +56,7 @@ src_configure() {
 	if use opengl; then
 		myconf+=( CONFIG+=gl )
 	else
-		myconf+=( CONFIG+=no-gl )
+		myconf+=( CONFIG+=gl )
 	fi
 
 	if use portaudio; then
@@ -77,5 +77,5 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 
-	eqmake5 CONFIG+=no-cedarv CONFIG+=recheck CONFIG+=opengl ${myconf[@]}
+	eqmake5 CONFIG+=no-cedarv CONFIG+=recheck CONFIG+=gl ${myconf[@]}
 }
