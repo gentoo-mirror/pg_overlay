@@ -14,7 +14,7 @@ https://dev.gentoo.org/~johu/distfiles/${P}-capi.h-${CAPI_HASH}.xz"
 
 LICENSE="GPL-3+ LGPL-2.1+"
 SLOT="0/1"
-KEYWORDS="~amd64"
+KEYWORDS=""
 IUSE="gui libav opengl portaudio pulseaudio vaapi"
 REQUIRED_USE="gui? ( opengl )"
 
@@ -79,6 +79,10 @@ src_configure() {
 		myconf+=( CONFIG+=no-vaapi )
 	fi
 	
-	eqmake5 prefix=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
-	eqmake5 prefix=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
+	eqmake5 PREFIX=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]} 
+	eqmake5 PREFIX=/usr CONFIG+='no_rpatch no-cedarv recheck' ${myconf[@]}
+}
+
+src_install() {
+	emake INSTALL_ROOT="${D}" install
 }
