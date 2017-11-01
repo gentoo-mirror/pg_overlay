@@ -81,4 +81,5 @@ src_configure() {
 	echo "CONFIG+=recheck" > user.conf
 
 	eqmake5 CONFIG+='no_rpath recheck gl no-cedarv'
+	eqmake5 CONFIG+='no_rpath recheck gl no-cedarv'
 }
