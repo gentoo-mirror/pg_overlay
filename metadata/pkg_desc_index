@@ -15,7 +15,6 @@ app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.0: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
-app-text/iso-codes 3.76_pre: ISO language, territory, currency, script codes and their translations
 app-text/po4a 0.52: Tools for helping translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.21.0_pre: A SQL Database Engine in a C Library
@@ -33,9 +32,9 @@ dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framewor
 dev-scheme/guile 2.2.0_pre: GNU Ubiquitous Intelligent Language for Extensions
 dev-util/boost-build 1.65.1: A system for large project software construction, simple to use and powerful
 dev-util/cargo 0.22.0: The Rust's package manager
-dev-util/cpp-utilities 4.9.2: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/cpp-utilities 4.11.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/itstool 2.0.3_pre: Translation tool for XML documents that uses gettext files and ITS rules
-dev-util/qtutilities 5.7.2: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/qtutilities 5.8.1: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/scons 3.0.0_pre: Extensible Python-based build utility
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
@@ -60,8 +59,8 @@ media-sound/quimup 1.4.2: A Qt5 client for the music player daemon (MPD) written
 media-sound/rbutil 1.4.1 9999: Rockbox opensource firmware manager for mp3 players
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
-media-sound/tageditor 2.2.5: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
-media-sound/tagparser 6.4.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
+media-sound/tageditor 2.3.0: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
+media-sound/tagparser 6.5.0: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/libva-utils 2.0.0_pre: Collection of utilities and tests for VA-API
 media-video/mpv 0.27.0 9999: Media player based on MPlayer and mplayer2
 media-video/qmplay2 9999: Qt-based video player, which can play all formats and stream
