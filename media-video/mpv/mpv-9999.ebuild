@@ -260,6 +260,9 @@ src_configure() {
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
 		--jobs=$(makeopts_jobs)
 		--enable-ffmpeg-upstream
+
+		--disable-vulkan
+		--disable-shaderc
 	)
 
 	if use vaapi && use X; then
