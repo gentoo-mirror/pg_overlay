@@ -140,7 +140,7 @@ RDEPEND="${COMMON_DEPEND}
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
-	"${FILESDIR}/ffmpeg.patch"
+	"${FILESDIR}/ffmpeg-versions.patch"
 )
 
 pkg_setup() {
@@ -259,6 +259,10 @@ src_configure() {
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
 		--jobs=$(makeopts_jobs)
+		--enable-ffmpeg-upstream
+
+		--disable-vulkan
+		--disable-shaderc
 	)
 
 	if use vaapi && use X; then
