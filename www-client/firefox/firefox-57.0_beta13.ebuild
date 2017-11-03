@@ -251,9 +251,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-gtest-in-build
 	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-b2g-camera
-	mozconfig_annotate '' --disable-b2g-ril
-	mozconfig_annotate '' --disable-clang-plugin
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-debug-js-modules
 	mozconfig_annotate '' --enable-elf-hack
