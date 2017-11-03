@@ -25,8 +25,7 @@ MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_JIT=1
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.57 pax-utils xdg-utils autotools \
-	virtualx mozlinguas-v2 versionator
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.57 pax-utils xdg-utils autotools virtualx mozlinguas-v2 versionator
 
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="http://www.mozilla.com/firefox"
