@@ -280,7 +280,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-trace-logging
 
 	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-url-classifier
 
 	mozconfig_annotate '' --disable-valgrind
 	mozconfig_annotate '' --disable-verify-mar
