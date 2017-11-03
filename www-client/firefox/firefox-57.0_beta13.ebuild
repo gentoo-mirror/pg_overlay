@@ -177,7 +177,7 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/privacy-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/privacy-patchset-${MY_MAJORV}/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
+	#for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
 
 	# Fedora patches
 	#for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
