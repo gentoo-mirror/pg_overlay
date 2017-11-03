@@ -274,7 +274,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-reflow-perf
 	mozconfig_annotate '' --disable-rust-debug
 
-	mozconfig_annotate '' --disable-safe-browsing
 	mozconfig_annotate '' --disable-signmar
 
 	mozconfig_annotate '' --disable-tests
