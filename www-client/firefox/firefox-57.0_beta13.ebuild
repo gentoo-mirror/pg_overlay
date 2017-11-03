@@ -175,13 +175,13 @@ src_prepare() {
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${MY_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${MY_MAJORV}/$i"; done
 
 	# Privacy-esr patches
-	#for i in $(cat "${FILESDIR}/privacy-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/privacy-patchset-${MY_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/privacy-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/privacy-patchset-${MY_MAJORV}/$i"; done
 
 	# Debian patches
-	#for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
 
 	# ArchLinux patches
 	for i in $(cat "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/$i"; done
@@ -292,7 +292,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
-	#mozconfig_annotate '' --enable-llvm-hacks
+	mozconfig_annotate '' --enable-llvm-hacks
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
