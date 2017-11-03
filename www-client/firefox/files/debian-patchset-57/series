@@ -1,0 +1,4 @@
+debian-hacks/Don-t-build-image-gtests.patch
+debian-hacks/Set-program-name-from-the-remoting-name.patch
+debian-hacks/Build-against-system-libjsoncpp.patch
+debian-hacks/Use-the-Mozilla-Location-Service-key-when-the-Google.patch
