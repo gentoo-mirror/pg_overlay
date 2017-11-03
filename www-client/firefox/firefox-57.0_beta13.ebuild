@@ -235,46 +235,66 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# Disable unnecessary  features
-	mozconfig_annotate '' --disable-tests
-	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-rust-debug
-	mozconfig_annotate '' --disable-debug-symbols
-	mozconfig_annotate '' --enable-gold
-	mozconfig_annotate '' --disable-jprof
-	mozconfig_annotate '' --disable-dmd
-	mozconfig_annotate '' --disable-instruments
-	mozconfig_annotate '' --disable-callgrind
-	mozconfig_annotate '' --disable-profiling
-	mozconfig_annotate '' --disable-vtune
-	mozconfig_annotate '' --disable-gc-trace
-	mozconfig_annotate '' --disable-perf
-	mozconfig_annotate '' --disable-ipdl-tests
-	mozconfig_annotate '' --disable-gtest-in-build
 	mozconfig_annotate '' --disable-accessibility
+
+	mozconfig_annotate '' --disable-callgrind
 	mozconfig_annotate '' --disable-crashreporter
+
+	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-debug-js-modules
-	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --disable-dmd
+	mozconfig_annotate '' --disable-dump-painting 
+
 	mozconfig_annotate '' --disable-faststripe
+
 	mozconfig_annotate '' --disable-gamepad
+	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-gtest-in-build
+
+	mozconfig_annotate '' --disable-instruments
 	mozconfig_annotate '' --disable-ios-target
+	mozconfig_annotate '' --disable-ipdl-tests
+
+	mozconfig_annotate '' --disable-jprof
+
+	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-logrefcnt
+
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-mozril-geoloc
+
 	mozconfig_annotate '' --disable-necko-wifi
+
 	mozconfig_annotate '' --disable-parental-controls
-	mozconfig_annotate '' --enable-pie
-	mozconfig_annotate '' --disable-safe-browsing
+	mozconfig_annotate '' --disable-perf
+	mozconfig_annotate '' --disable-profiling
+
+	mozconfig_annotate '' --disable-reflow-perf
+	mozconfig_annotate '' --disable-rust-debug
+
 	mozconfig_annotate '' --disable-signmar
-	mozconfig_annotate '' --enable-strip
+
+	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-trace-logging
+
 	mozconfig_annotate '' --disable-updater
-	mozconfig_annotate '' --disable-url-classifier
+
 	mozconfig_annotate '' --disable-valgrind
 	mozconfig_annotate '' --disable-verify-mar
+	mozconfig_annotate '' --disable-vtune
+
 	mozconfig_annotate '' --without-debug-label
+
+	# Enable good features
+	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --enable-llvm-hacks
+	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --enable-strip
+	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --with-pthreads
 
 	# Allow for a proper pgo build
