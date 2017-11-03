@@ -171,6 +171,7 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
+	cp browser/base/content/browser.xul browser/base/content/browser-kde.xul
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${MY_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${MY_MAJORV}/$i"; done
 
 	# Privacy-esr patches
