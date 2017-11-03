@@ -180,7 +180,7 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
+	#for i in $(cat "${FILESDIR}/fedora-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${MY_MAJORV}/$i"; done
 
 	# ArchLinux patches
 	for i in $(cat "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/$i"; done
