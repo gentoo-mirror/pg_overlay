@@ -24,7 +24,7 @@ dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plu
 dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libixion 0.13.0_pre: General purpose formula parser & interpreter
 dev-libs/liborcus 0.13.0_pre: Standalone file import filter library for spreadsheet documents
-dev-libs/re2 0.2017.08.01: An efficent, principled regular expression library
+dev-libs/re2 0.2017.08.01 0.2017.11.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/daemonize 2.4.7: Interfaces for Python
 dev-python/wokkel 0.7.1: Twisted Jabber support library
