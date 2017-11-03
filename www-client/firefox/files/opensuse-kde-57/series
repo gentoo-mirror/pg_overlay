@@ -1,0 +1,13 @@
+mozilla-nongnome-proxies.patch
+mozilla-kde.patch
+
+browser-kde-xul.patch
+
+mozilla-language.patch
+mozilla-ntlm-full-path.patch
+mozilla-openaes-decl.patch
+mozilla-no-stdcxx-check.patch
+
+firefox-kde.patch
+firefox-no-default-ualocale.patch
+firefox-branded-icons.patch
