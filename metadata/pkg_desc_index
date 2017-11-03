@@ -89,7 +89,7 @@ sys-libs/timezone-data 2017c_pre: Timezone data (/usr/share/zoneinfo) and utilit
 virtual/rust 1.20.0 1.21.0: Virtual for Rust language compiler
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 62.0.3202.75 62.0.3202.84: Open-source version of Google Chrome web browser
-www-client/firefox 56.0.1 56.0.2: Firefox Web Browser
+www-client/firefox 56.0.1 56.0.2 57.0_beta13: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
