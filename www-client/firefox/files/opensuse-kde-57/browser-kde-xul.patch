@@ -1,4 +1,4 @@
---- a/browser/base/content/browser.xul
+--- a/browser/base/content/browser-kde.xul
 +++ b/browser/base/content/browser-kde.xul
 @@ -209,7 +209,7 @@
        </row>
