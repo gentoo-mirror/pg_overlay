@@ -289,7 +289,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-llvm-hacks
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-stylo
