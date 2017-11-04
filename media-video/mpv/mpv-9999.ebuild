@@ -57,13 +57,12 @@ REQUIRED_USE="
 "
 
 COMMON_DEPEND="
-	!libav? ( >=media-video/ffmpeg-3.2.2:0=[encode?,threads,vaapi?,vdpau?] )
-	libav? ( >=media-video/libav-12:0=[encode?,threads,vaapi?,vdpau?] )
+	!libav? ( ~media-video/ffmpeg-${PV}:0=[encode?,threads,vaapi?,vdpau?] )
+	libav? ( ~media-video/libav-${PV}:0=[encode?,threads,vaapi?,vdpau?] )
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.0.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
 	cdda? ( dev-libs/libcdio-paranoia )
-	cuda? ( >=media-video/ffmpeg-3.3:0 )
 	drm? ( x11-libs/libdrm )
 	dvd? (
 		>=media-libs/libdvdnav-4.2.0
@@ -94,16 +93,8 @@ COMMON_DEPEND="
 	samba? ( net-fs/samba )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
 	v4l? ( media-libs/libv4l )
-	vaapi? (
-		!libav? ( >=media-video/ffmpeg-3.3:0 )
-		libav? ( >=media-video/libav-13:0 )
-		x11-libs/libva[drm?,X?,wayland?]
-	)
-	vdpau? (
-		!libav? ( >=media-video/ffmpeg-3.3:0 )
-		libav? ( >=media-video/libav-13:0 )
-		x11-libs/libvdpau
-	)
+	vaapi? ( x11-libs/libva[drm?,X?,wayland?] )
+	vdpau? ( x11-libs/libvdpau )
 	wayland? (
 		>=dev-libs/wayland-1.6.0
 		>=x11-libs/libxkbcommon-0.3.0
@@ -205,6 +196,7 @@ src_configure() {
 		--disable-vapoursynth-lazy
 		$(use_enable archive libarchive)
 
+		--enable-ffmpeg-upstream
 		--enable-libavdevice
 
 		# Audio outputs:
@@ -244,6 +236,8 @@ src_configure() {
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		--disable-mali-fbdev	# Only available in overlays.
 		$(usex opengl '' '--disable-gl')
+		--disable-vulkan		# Requires glslang and spirv-tools packaged.
+		--disable-shaderc		# Only available in overlays.
 
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
@@ -259,10 +253,6 @@ src_configure() {
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
 		--jobs=$(makeopts_jobs)
-		--enable-ffmpeg-upstream
-
-		--disable-vulkan
-		--disable-shaderc
 	)
 
 	if use vaapi && use X; then
