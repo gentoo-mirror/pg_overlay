@@ -61,6 +61,7 @@ media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reportin
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 2.3.0: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 6.5.0: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
+media-video/ffmpeg 9999: Complete solution to record, convert and stream audio and video. Includes libavcodec
 media-video/libva-utils 2.0.0_pre: Collection of utilities and tests for VA-API
 media-video/mpv 0.27.0 9999: Media player based on MPlayer and mplayer2
 media-video/qmplay2 9999: Qt-based video player, which can play all formats and stream
