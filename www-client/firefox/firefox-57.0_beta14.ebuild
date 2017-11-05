@@ -171,14 +171,14 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	#cp browser/base/content/browser.xul browser/base/content/browser-kde.xul
-	#use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${MY_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${MY_MAJORV}/$i"; done
+	cp browser/base/content/browser.xul browser/base/content/browser-kde.xul
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${MY_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${MY_MAJORV}/$i"; done
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/privacy-patchset-${MY_MAJORV}/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
+	#for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
 
 	# ArchLinux patches
 	for i in $(cat "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/$i"; done
