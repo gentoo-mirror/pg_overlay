@@ -5,7 +5,7 @@ EAPI=5
 
 PLOCALES="ar be bg ca cmn cs da de el en_GB es_AR es_MX es et eu fa_IR fi fr gl hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
 
-inherit autotools eutils git-r3 l10n
+inherit autotools git-r3 l10n
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
@@ -13,12 +13,13 @@ EGIT_REPO_URI="https://github.com/audacious-media-player/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE="aac alsa bs2b cdda +cue ffmpeg flac fluidsynth gnome +http gtk3 jack
-lame libnotify libsamplerate lirc mms mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile vorbis wavpack"
+IUSE="aac +adplug alsa ampache aosd bs2b cdda cue ffmpeg flac fluidsynth gnome hotkeys http gme gtk3 jack lame libav
+	libnotify libsamplerate lirc mms modplug mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile soxr vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
-"
+	qt5? ( !libnotify )
+	|| ( alsa jack pulseaudio sdl )"
+
 # The following plugins REQUIRE a GUI build of audacious, because non-GUI
 # builds do NOT install the libaudgui library & headers.
 # Plugins without a configure option:
@@ -36,56 +37,69 @@ REQUIRED_USE="
 #   hotkey
 #   notify
 #   statusicon
-
-RDEPEND="app-arch/unzip
-	>=dev-libs/dbus-glib-0.60
+RDEPEND="
+	app-arch/unzip
+	dev-libs/dbus-glib
+	dev-libs/glib[utils]
 	dev-libs/libxml2:2
-	~media-sound/audacious-${PV}
-	( || ( >=dev-libs/glib-2.32.2[utils] dev-util/gdbus-codegen ) )
+	~media-sound/audacious-${PV}[gtk3?,qt5?]
 	aac? ( >=media-libs/faad2-2.7 )
 	alsa? ( >=media-libs/alsa-lib-1.0.16 )
+	ampache? ( www-apps/ampache )
+	aosd? (
+		x11-libs/libXrender
+		x11-libs/libXcomposite
+	)
 	bs2b? ( media-libs/libbs2b )
-	cdda? ( >=media-libs/libcddb-1.2.1
-		dev-libs/libcdio-paranoia )
+	cdda? (
+		>=media-libs/libcddb-1.2.1
+		dev-libs/libcdio-paranoia
+	)
 	cue? ( media-libs/libcue )
 	ffmpeg? ( >=virtual/ffmpeg-0.7.3 )
-	flac? ( >=media-libs/flac-1.2.1-r1 )
+	flac? (
+		>=media-libs/libvorbis-1.0
+		>=media-libs/flac-1.2.1-r1
+	)
 	fluidsynth? ( media-sound/fluidsynth )
 	http? ( >=net-libs/neon-0.26.4 )
-	gtk3? ( x11-libs/gtk+:3
-			media-libs/adplug
-			~media-sound/audacious-${PV}[gtk3?] )
-	qt5? ( dev-qt/qtcore:5
-		   dev-qt/qtgui:5
-		   dev-qt/qtmultimedia:5
-		   dev-qt/qtwidgets:5
-		   ~media-sound/audacious-${PV}[qt5?] )
-	jack? ( >=media-libs/bio2jack-0.4
-		media-sound/jack-audio-connection-kit )
+	gtk3? (
+		x11-libs/gtk+:3
+	)
+	qt5? (
+		dev-qt/qtcore:5
+		dev-qt/qtgui:5
+		dev-qt/qtmultimedia:5
+		dev-qt/qtwidgets:5
+		media-libs/adplug
+	)
+	jack? (
+		>=media-libs/bio2jack-0.4
+		media-sound/jack-audio-connection-kit
+	)
 	lame? ( media-sound/lame )
 	libnotify? ( x11-libs/libnotify )
 	libsamplerate? ( media-libs/libsamplerate )
 	lirc? ( app-misc/lirc )
 	mms? ( >=media-libs/libmms-0.3 )
+	modplug? ( media-libs/libmodplug )
 	mp3? ( >=media-sound/mpg123-1.12.1 )
 	pulseaudio? ( >=media-sound/pulseaudio-0.9.3 )
 	scrobbler? ( net-misc/curl )
-	sdl? ( media-libs/libsdl[sound] )
+	sdl? ( media-libs/libsdl2[sound] )
 	sid? ( >=media-libs/libsidplayfp-1.0.0 )
 	sndfile? ( >=media-libs/libsndfile-1.0.17-r1 )
-	vorbis? ( >=media-libs/libvorbis-1.2.0
-		  >=media-libs/libogg-1.1.3 )
+	soxr? ( media-libs/soxr )
+	vorbis? (
+		>=media-libs/libvorbis-1.2.0
+		>=media-libs/libogg-1.1.3
+	)
 	wavpack? ( >=media-sound/wavpack-4.50.1-r1 )"
 
 DEPEND="${RDEPEND}
-	nls? ( dev-util/intltool )
-	virtual/pkgconfig"
-
-mp3_warning() {
-	if ! use mp3 ; then
-		ewarn "MP3 support is optional, you may want to enable the mp3 USE-flag"
-	fi
-}
+	dev-util/gdbus-codegen
+	virtual/pkgconfig
+	nls? ( dev-util/intltool )"
 
 src_unpack() {
 	if use !gtk3; then
@@ -100,15 +114,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	has_version "<dev-libs/glib-2.32" && \
-		cd "${S}"/src/mpris2 && \
-		gdbus-codegen --interface-prefix org.mpris. \
-			--c-namespace Mpris --generate-c-code object-core mpris2.xml && \
-		gdbus-codegen --interface-prefix org.mpris. \
-			--c-namespace Mpris \
-			--generate-c-code object-player mpris2-player.xml && \
-		cd "${S}"
-
+	default
 	eautoreconf
 
 	rm_loc() {
@@ -120,43 +126,32 @@ src_prepare() {
 }
 
 src_configure() {
-	mp3_warning
-
-	if use gtk3 ;then
-		gtk="--enable-gtk --enable-hotkey"
-	else
-		gtk="--disable-gtk"
-	fi
-
-	if use ffmpeg && has_version media-video/ffmpeg ; then
-		ffmpeg="--with-ffmpeg=ffmpeg"
-	elif use ffmpeg && has_version media-video/libav ; then
-		ffmpeg="--with-ffmpeg=libav"
-	else
-		ffmpeg="--with-ffmpeg=none"
+	if ! use mp3 ; then
+		ewarn "MP3 support is optional, you may want to enable the mp3 USE-flag"
 	fi
 
 	econf \
-		${ffmpeg} \
-		${gtk} \
-		${notify} \
-		--disable-modplug \
-		--disable-console \
-		--disable-soxr \
-		--disable-oss4 \
 		--enable-mpris2 \
-		--disable-glspectrum \
+		--enable-songchange \
+		--enable-speedpitch \
+		--disable-oss4 \
 		--disable-qtaudio \
 		--disable-qtglspectrum \
-		--disable-mac-media-keys \
+		--disable-coreaudio \
+		--disable-sndio \
 		$(use_enable aac) \
 		$(use_enable alsa) \
+		$(use_enable ampache) \
+		$(use_enable aosd) \
 		$(use_enable bs2b) \
 		$(use_enable cdda cdaudio) \
 		$(use_enable cue) \
 		$(use_enable flac) \
 		$(use_enable fluidsynth amidiplug) \
 		$(use_enable flac filewriter) \
+		$(use_enable gme console) \
+		$(use_enable gtk3 gtk) \
+		$(use_enable hotkeys hotkey) \
 		$(use_enable http neon) \
 		$(use_enable jack) \
 		$(use_enable gnome gnomeshortcuts) \
@@ -165,6 +160,7 @@ src_configure() {
 		$(use_enable libsamplerate resample) \
 		$(use_enable lirc) \
 		$(use_enable mms) \
+		$(use_enable modplug) \
 		$(use_enable mp3 mpg123) \
 		$(use_enable nls) \
 		$(use_enable pulseaudio pulse) \
@@ -173,8 +169,10 @@ src_configure() {
 		$(use_enable sdl sdlout) \
 		$(use_enable sid) \
 		$(use_enable sndfile) \
+		$(use_enable soxr) \
 		$(use_enable vorbis) \
-		$(use_enable wavpack)
+		$(use_enable wavpack) \
+		$(use_with ffmpeg ffmpeg $(usex libav libav ffmpeg))
 
 	sed -i 's/asx //' extra.mk || die
 	sed -i 's/asx3 //' extra.mk || die
