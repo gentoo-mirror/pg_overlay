@@ -9,7 +9,3 @@ disable/google-api-warning.patch
 fixes/mojo.patch
 fixes/ps-print.patch
 fixes/gpu-timeout.patch
-
-system/vpx.patch
-system/nspr.patch
-system/event.patch
