@@ -1,5 +1,4 @@
 gn/parallel.patch
-gn/bootstrap.patch
 gn/narrowing.patch
 gn/buildflags.patch
 
