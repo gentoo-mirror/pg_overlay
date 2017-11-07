@@ -5,7 +5,6 @@ gn/buildflags.patch
 disable/promo.patch
 disable/fuzzers.patch
 disable/google-api-warning.patch
-disable/external-components.patch
 
 fixes/mojo.patch
 fixes/ps-print.patch
