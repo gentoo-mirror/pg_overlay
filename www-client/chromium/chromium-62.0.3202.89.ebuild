@@ -318,9 +318,6 @@ src_prepare() {
 		third_party/spirv-headers
 		third_party/spirv-tools-angle
 		third_party/sqlite
-		third_party/swiftshader
-		third_party/swiftshader/third_party/llvm-subzero
-		third_party/swiftshader/third_party/subzero
 		third_party/usrsctp
 		third_party/vulkan
 		third_party/vulkan-validation-layers
@@ -428,12 +425,15 @@ src_configure() {
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_hevc_demuxing=true"
-	#if use ungoogled; then
-	#	myconf_gn+=" enable_one_click_signin=false"
-	#	myconf_gn+=" safe_browsing_mode=0"
-	#	myconf_gn+=" enable_mdns=false"
-	#	myconf_gn+=" enable_service_discovery=false"
-	#fi
+	if use ungoogled; then
+		myconf_gn+=" enable_one_click_signin=false"
+		myconf_gn+=" safe_browsing_mode=0"
+		myconf_gn+=" enable_mdns=false"
+		myconf_gn+=" enable_service_discovery=false"
+	fi
+
+	# Dedian's Chromium
+	myconf_gn+=" enable_reading_list=false"
 
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
