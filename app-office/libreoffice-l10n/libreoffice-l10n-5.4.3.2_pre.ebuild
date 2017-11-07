@@ -9,7 +9,8 @@ REAL_PV=$(get_version_component_range 1-3)
 
 DESCRIPTION="Translations for the Libreoffice suite"
 HOMEPAGE="http://www.libreoffice.org"
-BASE_SRC_URI_TESTING="http://download.documentfoundation.org/${PN/-l10n/}/testing/${REAL_PV}/rpm"
+BASE_SRC_URI_TESTING="http://download.documentfoundation.org/${PN/-l10n/}/testing/${REAL_PV}/rpm
+					http://ftp.halifax.rwth-aachen.de/tdf/${PN/-l10n/}/testing/${REAL_PV}/rpm"
 BASE_SRC_URI_STABLE="http://download.documentfoundation.org/${PN/-l10n/}/stable/${REAL_PV}/rpm"
 
 LICENSE="|| ( LGPL-3 MPL-1.1 )"
@@ -25,12 +26,12 @@ LANGUAGES_HELP=" am ast bg bn-IN bn bo bs ca-valencia ca cs da de dz el en-GB en
 LANGUAGES="${LANGUAGES_HELP}af ar as be br brx cy dgo fa ga gd gug kk kmr-Latn kn kok ks lb lo lt lv mai ml mn mni mr my nr nso oc or pa:pa-IN ro rw sa:sa-IN sat sd sid sr-Latn sr ss st sw-TZ ta te th tn ts tt uz ve xh zu "
 
 for lang in ${LANGUAGES_HELP}; do
-	helppack="offlinehelp? ( ${BASE_SRC_URI_STABLE}/x86/LibreOffice_${REAL_PV}_Linux_x86_rpm_helppack_${lang#*:}.tar.gz -> LibreOffice_${MY_PV}_Linux_x86_rpm_helppack_${lang#*:}.tar.gz ${BASE_SRC_URI_TESTING}/x86/LibreOffice_${MY_PV}_Linux_x86_rpm_helppack_${lang#*:}.tar.gz )"
+	helppack="offlinehelp? ( ${BASE_SRC_URI_STABLE}/x86_64/LibreOffice_${REAL_PV}_Linux_x86-64_rpm_helppack_${lang#*:}.tar.gz -> LibreOffice_${MY_PV}_Linux_x86-64_rpm_helppack_${lang#*:}.tar.gz ${BASE_SRC_URI_TESTING}/x86_64/LibreOffice_${MY_PV}_Linux_x86-64_rpm_helppack_${lang#*:}.tar.gz )"
 	SRC_URI+=" l10n_${lang%:*}? ( ${helppack} )"
 done
 for lang in ${LANGUAGES}; do
 	if [[ ${lang%:*} != en ]]; then
-		langpack="${BASE_SRC_URI_STABLE}/x86/LibreOffice_${REAL_PV}_Linux_x86_rpm_langpack_${lang#*:}.tar.gz -> LibreOffice_${MY_PV}_Linux_x86_rpm_langpack_${lang#*:}.tar.gz ${BASE_SRC_URI_TESTING}/x86/LibreOffice_${MY_PV}_Linux_x86_rpm_langpack_${lang#*:}.tar.gz"
+		langpack="${BASE_SRC_URI_STABLE}/x86_64/LibreOffice_${REAL_PV}_Linux_x86-64_rpm_langpack_${lang#*:}.tar.gz -> LibreOffice_${MY_PV}_Linux_x86-64_rpm_langpack_${lang#*:}.tar.gz ${BASE_SRC_URI_TESTING}/x86_64/LibreOffice_${MY_PV}_Linux_x86-64_rpm_langpack_${lang#*:}.tar.gz"
 		SRC_URI+=" l10n_${lang%:*}? ( ${langpack} )"
 	fi
 	IUSE+=" l10n_${lang%:*}"
@@ -59,12 +60,12 @@ src_prepare() {
 
 		# for english we provide just helppack, as translation is always there
 		if [[ ${lang%:*} != en ]]; then
-			rpmdir="LibreOffice_${MY_PV}_Linux_x86_rpm_langpack_${dir}/RPMS/"
+			rpmdir="LibreOffice_${MY_PV}_Linux_x86-64_rpm_langpack_${dir}/RPMS/"
 			[[ -d ${rpmdir} ]] || die "Missing directory: ${rpmdir}"
 			rpm_unpack ./${rpmdir}/*.rpm
 		fi
 		if [[ "${LANGUAGES_HELP}" =~ " ${lang} " ]] && use offlinehelp; then
-			rpmdir="LibreOffice_${MY_PV}_Linux_x86_rpm_helppack_${dir}/RPMS/"
+			rpmdir="LibreOffice_${MY_PV}_Linux_x86-64_rpm_helppack_${dir}/RPMS/"
 			[[ -d ${rpmdir} ]] || die "Missing directory: ${rpmdir}"
 			rpm_unpack ./${rpmdir}/*.rpm
 		fi
