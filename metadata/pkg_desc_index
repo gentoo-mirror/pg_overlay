@@ -46,6 +46,7 @@ media-fonts/iosevka 1.13.3: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.3: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
+media-libs/libvisio 0.1.6_pre: Library parsing the visio documents
 media-libs/qtav 1.12.0 1.12.0-r1: Multimedia playback framework based on Qt + FFmpeg
 media-libs/soxr 9999: The SoX Resampler library
 media-libs/vulkan-loader 1.0.61.1: Vulkan Installable Client Driver (ICD) Loader
@@ -91,7 +92,7 @@ sys-fs/xfsprogs 4.13.0_rc1 4.13.0_rc2 9999: xfs filesystem utilities
 sys-libs/timezone-data 2017c_pre: Timezone data (/usr/share/zoneinfo) and utilities (tzselect/zic/zdump)
 virtual/rust 1.20.0 1.21.0: Virtual for Rust language compiler
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
-www-client/chromium 62.0.3202.75 62.0.3202.84 62.0.3202.89: Open-source version of Google Chrome web browser
+www-client/chromium 62.0.3202.89: Open-source version of Google Chrome web browser
 www-client/firefox 56.0.2 57.0_beta14: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
