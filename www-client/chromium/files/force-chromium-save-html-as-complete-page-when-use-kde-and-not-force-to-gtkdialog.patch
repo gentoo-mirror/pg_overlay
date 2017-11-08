@@ -1,0 +1,41 @@
+--- chromium-46.0.2490.86n/chrome/browser/download/save_package_file_picker.cc	2015-10-07 10:42:08.000000000 +0800
++++ chromium-46.0.2490.86/chrome/browser/download/save_package_file_picker.cc	2015-11-19 09:50:16.430935272 +0800
+@@ -4,6 +4,8 @@
+ 
+ #include "chrome/browser/download/save_package_file_picker.h"
+ 
++#include "base/environment.h"
++#include "base/nix/xdg_util.h"
+ #include "base/bind.h"
+ #include "base/command_line.h"
+ #include "base/i18n/file_util_icu.h"
+@@ -241,6 +243,29 @@
+   if (can_save_as_complete_) {
+     DCHECK_LT(index, static_cast<int>(save_types_.size()));
+     save_type = save_types_[index];
++    //the way chromium support kdialog is via involking 'kdialog' command.
++    //It had a issue that:
++    //for gtk dialog, it's call via GTK api, then dialog file filter and filer index
++    //can be set and retreived. so, 'save page' can provide two way: only html and complete page.
++    //
++    //But involking 'kdialog' only return the filepath, there is no way to retreive file type index.
++    //chromium depend on the 'file type index' returned by filedialog to determine how to save a page.
++    //
++    //That's to say, even we passed two filter to kdialog, it still not work as our expected.
++    //So, here is a workaround, since most user need save page with picture etc.
++    //We force to save as complete page under kde and 'not forced to use gtk dialog'
++    if(save_type == content::SAVE_PAGE_TYPE_AS_ONLY_HTML) {
++      scoped_ptr<base::Environment> env(base::Environment::Create());
++      base::nix::DesktopEnvironment desktop =
++          base::nix::GetDesktopEnvironment(env.get());
++      if (desktop == base::nix::DESKTOP_ENVIRONMENT_KDE3 ||
++          desktop == base::nix::DESKTOP_ENVIRONMENT_KDE4) {
++        // Check to see if the user dislikes the KDE file dialog.
++        if (!env->HasVar("NO_CHROME_KDE_FILE_DIALOG")) {
++          save_type = content::SAVE_PAGE_TYPE_AS_COMPLETE_HTML;
++        }
++      }
++    }
+     if (select_file_dialog_.get() &&
+         select_file_dialog_->HasMultipleFileTypeChoices())
+       download_prefs_->SetSaveFileType(save_type);
