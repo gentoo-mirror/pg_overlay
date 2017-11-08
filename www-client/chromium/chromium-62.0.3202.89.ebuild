@@ -150,7 +150,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-gn-bootstrap-r17.patch"
 	"${FILESDIR}/${PN}-glibc2.26-r1.patch"
 	"${FILESDIR}/crc32c-string-view-check.patch"
-	#"${FILESDIR}/force-chromium-save-html-as-complete-page-when-use-kde-and-not-force-to-gtkdialog.patch"
 )
 
 pre_build_checks() {
