@@ -1,6 +1,7 @@
 app-admin/syslog-ng 3.11.1: syslog replacement with advanced filtering features
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
+app-crypt/gnupg 2.2.2_pre: The GNU Privacy Guard, a GPL OpenPGP implementation
 app-crypt/gpgme 1.9.0_pre: GnuPG Made Easy is a library for making GnuPG easier to use
 app-emulation/virtualbox 5.2.0: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-additions 5.2.0: CD image containing guest additions for VirtualBox
@@ -16,6 +17,7 @@ app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.0: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
+app-text/libetonyek 0.1.7_pre: Library parsing Apple Keynote presentations
 app-text/po4a 0.52: Tools for helping translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.21.0_pre: A SQL Database Engine in a C Library
@@ -101,6 +103,7 @@ x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia c
 x11-libs/cairo 1.15.8: A vector graphics library with cross-device output support
 x11-libs/libva 2.0.0_pre: Video Acceleration (VA) API for Linux
 x11-libs/libva-intel-driver 2.0.0_pre: HW video decode support for Intel integrated graphics
+x11-libs/pango 1.40.13_pre: Internationalized text layout and rendering library
 x11-libs/wxGTK 3.0.3.1-r301: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-terms/tilda 9999: A drop down terminal, similar to the consoles found in first person shooters
