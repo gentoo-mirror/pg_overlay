@@ -17,7 +17,6 @@ app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.0: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
-app-text/libetonyek 0.1.7_pre: Library parsing Apple Keynote presentations
 app-text/po4a 0.52: Tools for helping translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.21.0_pre: A SQL Database Engine in a C Library
@@ -48,7 +47,6 @@ media-fonts/iosevka 1.13.3: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.3: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
-media-libs/libvisio 0.1.6_pre: Library parsing the visio documents
 media-libs/qtav 1.12.0 1.12.0-r1: Multimedia playback framework based on Qt + FFmpeg
 media-libs/soxr 9999: The SoX Resampler library
 media-libs/vulkan-loader 1.0.61.1: Vulkan Installable Client Driver (ICD) Loader
