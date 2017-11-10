@@ -3,7 +3,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_{5,6} )
 
 inherit distutils-r1 git-r3 linux-mod
 
@@ -21,7 +21,7 @@ RDEPEND="
 	media-libs/libsdl2
 	media-libs/sdl2-image
 	sci-libs/fftw:3.0
-	>=dev-lang/python-3.6.0
+	dev-python/daemonize[$PYTHON_USEDEP]
 	dev-python/dbus-python[$PYTHON_USEDEP]
 	dev-python/notify2[$PYTHON_USEDEP]
 	dev-python/numpy[$PYTHON_USEDEP]
