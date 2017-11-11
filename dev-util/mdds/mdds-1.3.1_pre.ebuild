@@ -13,7 +13,7 @@ HOMEPAGE="https://gitlab.com/mdds/mdds"
 [[ ${MY_PV} == 9999 ]] || SRC_URI="http://kohei.us/files/${PN}/src/${MY_P}.tar.bz2"
 
 LICENSE="MIT"
-SLOT="1/${MY_PV%.*}"
+SLOT="1/1.2"
 IUSE="valgrind"
 
 [[ ${MY_PV} == 9999 ]] || \
