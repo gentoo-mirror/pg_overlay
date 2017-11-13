@@ -34,13 +34,13 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin pgo selinux test jit +kde"
+IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin pgo screenshot selinux test jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
 	${PATCH_URIS[@]}
-	https://ftp.mozilla.org/pub/${PN}/candidates/${PV}-candidates/build3/source/firefox-${PV}.source.tar.xz"
+	https://ftp.mozilla.org/pub/${PN}/candidates/${PV}-candidates/build4/source/firefox-${PV}.source.tar.xz"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
@@ -370,6 +370,12 @@ src_install() {
 		cat "${FILESDIR}"/gentoo-hwaccel-prefs.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
+	fi
+
+	if ! use screenshot; then
+		echo "pref(\"extensions.screenshots.disabled\", true);" >> \
+			"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+			|| die
 	fi
 
 	echo "pref(\"extensions.autoDisableScopes\", 3);" >> \
