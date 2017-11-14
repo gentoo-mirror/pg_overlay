@@ -6,7 +6,7 @@ GNOME_ORG_MODULE="glib"
 PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
 PYTHON_REQ_USE="xml"
 
-inherit gnome.org distutils-r1 poly-c_gnome
+inherit gnome.org distutils-r1
 
 DESCRIPTION="GDBus code and documentation generator"
 HOMEPAGE="https://www.gtk.org/"
@@ -22,7 +22,7 @@ DEPEND="${RDEPEND}"
 # To prevent circular dependencies with glib[test]
 PDEPEND=">=dev-libs/glib-${PV}:2"
 
-S="${WORKDIR}/glib-${MY_PV}/gio/gdbus-2.0/codegen"
+S="${WORKDIR}/glib-${PV}/gio/gdbus-2.0/codegen"
 
 python_prepare_all() {
 	PATCHES=(
@@ -32,7 +32,7 @@ python_prepare_all() {
 
 	sed -e 's:#!@PYTHON@:#!/usr/bin/env python:' gdbus-codegen.in > gdbus-codegen || die
 	cp "${FILESDIR}/setup.py-2.32.4" setup.py || die "cp failed"
-	sed -e "s/@PV@/${MY_PV}/" -i setup.py || die "sed setup.py failed"
+	sed -e "s/@PV@/${PV}/" -i setup.py || die "sed setup.py failed"
 }
 
 src_test() {
@@ -42,5 +42,5 @@ src_test() {
 
 python_install_all() {
 	distutils-r1_python_install_all # no-op, but prevents QA warning
-	doman "${WORKDIR}/glib-${MY_PV}/docs/reference/gio/gdbus-codegen.1"
+	doman "${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.1"
 }
