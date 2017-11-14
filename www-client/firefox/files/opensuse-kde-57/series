@@ -1,5 +1,6 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
+mozilla-bindgen-systemlibs.patch
 
 firefox-kde.patch
 firefox-no-default-ualocale.patch
