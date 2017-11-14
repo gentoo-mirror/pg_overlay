@@ -1,11 +1,11 @@
 # HG changeset patch
 # User Wolfgang Rosenauer <wr@rosenauer.org>
-# Parent  e96e9b3997ea31024687aaa1e9aa5ccf78bc0ee9
+# Parent  8f6d1846ca837387965573161577b1c5a483bcda
 
 diff --git a/config/config.mk b/config/config.mk
 --- a/config/config.mk
 +++ b/config/config.mk
-@@ -653,17 +653,16 @@ ifeq ($(MOZ_WIDGET_TOOLKIT),android)
+@@ -579,17 +579,16 @@ ifeq ($(MOZ_WIDGET_TOOLKIT),android)
  # of the linker command line), if libmozglue.so ends up after libc.so, all
  # hell breaks loose, so better safe than sorry, and check it's actually the
  # case.

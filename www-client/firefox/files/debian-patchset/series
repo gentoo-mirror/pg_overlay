@@ -1,5 +1,0 @@
-fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-fixes/Bug-1388681-Disable-Wformat-security-where-Wformat-i.patch
-debian-hacks/Don-t-build-image-gtests.patch
-debian-hacks/Set-program-name-from-the-remoting-name.patch
-debian-hacks/Use-the-Mozilla-Location-Service-key-when-the-Google.patch
