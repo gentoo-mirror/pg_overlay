@@ -59,7 +59,7 @@ DEPEND="${RDEPEND}
 			>=sys-devel/clang-4.0.1 )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
-MY_MAJORV="$(get_major_version )"
+FF_MAJORV="$(get_major_version )"
 
 S="${WORKDIR}/firefox-${MOZ_PV}"
 
@@ -171,16 +171,16 @@ src_prepare() {
 	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${MY_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${MY_MAJORV}/$i"; done
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${FF_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${FF_MAJORV}/$i"; done
 
 	# Privacy-esr patches
-	for i in $(cat "${FILESDIR}/privacy-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/privacy-patchset-${MY_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/privacy-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/privacy-patchset-${FF_MAJORV}/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${MY_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/debian-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${FF_MAJORV}/$i"; done
 
 	# ArchLinux patches
-	for i in $(cat "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${MY_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -396,12 +396,12 @@ src_install() {
 	done
 
 	if use kde ; then
-		cat "${FILESDIR}"/opensuse-kde-${MY_MAJORV}/kde.js-1 >> \
+		cat "${FILESDIR}"/opensuse-kde-${FF_MAJORV}/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
 	fi
 
-	cat "${FILESDIR}"/privacy-patchset/privacy.js-1 >> \
+	cat "${FILESDIR}"/privacy-patchset-${FF_MAJORV}/privacy.js-1 >> \
 	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 	|| die	
 
