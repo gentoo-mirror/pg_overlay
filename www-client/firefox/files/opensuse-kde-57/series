@@ -1,5 +1,10 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
+mozilla-ntlm-full-path.patch
+mozilla-openaes-decl.patch
+mozilla-no-stdcxx-check.patch
+mozilla-reduce-files-per-UnifiedBindings.patch
+mozilla-bindgen-systemlibs.patch
 
 firefox-kde.patch
 firefox-no-default-ualocale.patch
