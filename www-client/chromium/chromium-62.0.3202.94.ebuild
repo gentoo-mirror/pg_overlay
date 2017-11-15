@@ -479,7 +479,7 @@ src_configure() {
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 
 	if tc-is-clang; then
-		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false use_lld=true"
+		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false"
 	else
 		myconf_gn+=" is_clang=false"
 	fi
