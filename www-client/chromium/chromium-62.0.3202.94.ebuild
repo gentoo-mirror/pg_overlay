@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +debian +inox iridium ungoogled vaapi"
+IUSE="component-build cups gnome-keyring +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine clang +debian +inox iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
@@ -479,7 +479,7 @@ src_configure() {
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 
 	if tc-is-clang; then
-		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false"
+		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false use_lld=true"
 	else
 		myconf_gn+=" is_clang=false"
 	fi
@@ -487,7 +487,7 @@ src_configure() {
 	# Never use bundled gold binary. Disable gold linker flags for now.
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=true use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
+	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
