@@ -182,6 +182,8 @@ src_prepare() {
 	# ArchLinux patches
 	for i in $(cat "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/$i"; done
 
+	eapply "${FILESDIR}/clang.patch"
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
@@ -258,7 +260,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
-	mozconfig_annotate '' --disable-llvm-hacks
+	mozconfig_annotate '' --enable-llvm-hacks
 
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
