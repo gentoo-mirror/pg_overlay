@@ -182,8 +182,6 @@ src_prepare() {
 	# ArchLinux patches
 	for i in $(cat "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/$i"; done
 
-	eapply "${FILESDIR}/clang.patch"
-
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
