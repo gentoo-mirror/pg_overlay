@@ -290,6 +290,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-stylo
 	mozconfig_annotate '' --enable-webrtc
