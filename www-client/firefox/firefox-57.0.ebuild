@@ -260,7 +260,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
-	mozconfig_annotate '' --enable-llvm-hacks
+	mozconfig_annotate '' --disable-llvm-hacks
 
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
@@ -288,7 +288,7 @@ src_configure() {
 	mozconfig_annotate '' --without-debug-label
 
 	# Enable good features
-	mozconfig_annotate '' --disable-elf-hack
+	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-pie
