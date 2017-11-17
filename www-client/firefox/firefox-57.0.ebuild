@@ -234,7 +234,7 @@ src_configure() {
 	if use clang; then
 		mozconfig_annotate '' --disable-elf-hack
 		mozconfig_annotate '' --disable-gold
-		mozconfig_annotate '' --enable-llvm-hacks
+		mozconfig_annotate '' --disable-llvm-hacks
 	else
 		mozconfig_annotate '' --enable-elf-hack
 		mozconfig_annotate '' --enable-gold
@@ -295,10 +295,10 @@ src_configure() {
 	mozconfig_annotate '' --without-debug-label
 
 	# Enable good features
-	mozconfig_annotate '' --enable-install-strip
+	#mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --enable-rust-simd
-	mozconfig_annotate '' --enable-strip
+	#mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-stylo
 	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --with-pthreads
