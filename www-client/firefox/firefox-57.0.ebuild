@@ -34,7 +34,7 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin pgo screenshot selinux test jit +kde"
+IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin pgo screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -168,7 +168,7 @@ src_prepare() {
 	eapply_user
 
 	# Patch to enable PGO
-	use pgo && eapply "${FILESDIR}/${PN}-48.0-pgo.patch"
+	use clang && eapply "${FILESDIR}/${PN}-clang.patch"
 
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${FF_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${FF_MAJORV}/$i"; done
@@ -231,6 +231,16 @@ src_configure() {
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
+	if use clang; then
+		mozconfig_annotate '' --disable-elf-hack
+		mozconfig_annotate '' --disable-gold
+		mozconfig_annotate '' --enable-llvm-hacks
+	else
+		mozconfig_annotate '' --enable-elf-hack
+		mozconfig_annotate '' --enable-gold
+		mozconfig_annotate '' --disable-llvm-hacks
+	fi
+
 	# Disable unnecessary  features
 	mozconfig_annotate '' --disable-accessibility
 
@@ -258,7 +268,6 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
-	mozconfig_annotate '' --disable-llvm-hacks
 
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
@@ -286,8 +295,6 @@ src_configure() {
 	mozconfig_annotate '' --without-debug-label
 
 	# Enable good features
-	mozconfig_annotate '' --enable-elf-hack
-	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --enable-rust-simd
