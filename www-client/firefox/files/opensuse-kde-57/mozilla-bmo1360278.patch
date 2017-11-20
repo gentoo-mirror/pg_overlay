@@ -1,0 +1,96 @@
+# HG changeset patch
+# User Dimi Meim <dimimeim@gmail.com>
+# Date 1508186130 -10800
+#      Mon Oct 16 23:35:30 2017 +0300
+# Node ID 7251515cd508453edff10be2e1294261ef1dc4b5
+# Parent  fe64f869d5a139326216d80ea36faa357358342d
+Bug-1360278-fix
+
+diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
+--- a/modules/libpref/init/all.js
++++ b/modules/libpref/init/all.js
+@@ -5911,8 +5911,11 @@ pref("toolkit.crashreporter.include_cont
+ pref("toolkit.crashreporter.include_context_heap", true);
+ #endif
+ 
+ // Open noopener links in a new process
+ pref("dom.noopener.newprocess.enabled", true);
+ 
+ pref("layers.omtp.enabled", false);
+ pref("layers.omtp.force-sync", false);
++
++//Pop up context menu on mouse button release
++pref("input.contextMenu.onRelease", false);
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -357,16 +357,17 @@ private:
+ static NS_DEFINE_IID(kCDragServiceCID,  NS_DRAGSERVICE_CID);
+ 
+ // The window from which the focus manager asks us to dispatch key events.
+ static nsWindow         *gFocusWindow          = nullptr;
+ static bool              gBlockActivateEvent   = false;
+ static bool              gGlobalsInitialized   = false;
+ static bool              gRaiseWindows         = true;
+ 
++static bool              menuContextOnClickRelease = false;
+ #if GTK_CHECK_VERSION(3,4,0)
+ static uint32_t          gLastTouchID = 0;
+ #endif
+ 
+ #define NS_WINDOW_TITLE_MAX_LENGTH 4095
+ 
+ // If after selecting profile window, the startup fail, please refer to
+ // http://bugzilla.gnome.org/show_bug.cgi?id=88940
+@@ -2790,19 +2791,21 @@ nsWindow::OnButtonPressEvent(GdkEventBut
+ 
+     WidgetMouseEvent event(true, eMouseDown, this, WidgetMouseEvent::eReal);
+     event.button = domButton;
+     InitButtonEvent(event, aEvent);
+     event.pressure = mLastMotionPressure;
+ 
+     DispatchInputEvent(&event);
+ 
++    Preferences::AddBoolVarCache(&menuContextOnClickRelease, "input.contextMenu.onRelease", false);
++
+     // right menu click on linux should also pop up a context menu
+     if (domButton == WidgetMouseEvent::eRightButton &&
+-        MOZ_LIKELY(!mIsDestroyed)) {
++        MOZ_LIKELY(!mIsDestroyed) && !menuContextOnClickRelease) {
+         WidgetMouseEvent contextMenuEvent(true, eContextMenu, this,
+                                           WidgetMouseEvent::eReal);
+         InitButtonEvent(contextMenuEvent, aEvent);
+         contextMenuEvent.pressure = mLastMotionPressure;
+         DispatchInputEvent(&contextMenuEvent);
+     }
+ }
+ 
+@@ -2833,16 +2836,28 @@ nsWindow::OnButtonReleaseEvent(GdkEventB
+     event.button = domButton;
+     InitButtonEvent(event, aEvent);
+     gdouble pressure = 0;
+     gdk_event_get_axis ((GdkEvent*)aEvent, GDK_AXIS_PRESSURE, &pressure);
+     event.pressure = pressure ? pressure : mLastMotionPressure;
+ 
+     DispatchInputEvent(&event);
+     mLastMotionPressure = pressure;
++
++    Preferences::AddBoolVarCache(&menuContextOnClickRelease, "input.contextMenu.onRelease", false);
++
++    // right menu click on linux should also pop up a context menu
++    if (domButton == WidgetMouseEvent::eRightButton &&
++        MOZ_LIKELY(!mIsDestroyed) && menuContextOnClickRelease) {
++        WidgetMouseEvent contextMenuEvent(true, eContextMenu, this,
++                                          WidgetMouseEvent::eReal);
++        InitButtonEvent(contextMenuEvent, aEvent);
++        contextMenuEvent.pressure = mLastMotionPressure;
++        DispatchInputEvent(&contextMenuEvent);
++    }
+ }
+ 
+ void
+ nsWindow::OnContainerFocusInEvent(GdkEventFocus *aEvent)
+ {
+     LOGFOCUS(("OnContainerFocusInEvent [%p]\n", (void *)this));
+ 
+     // Unset the urgency hint, if possible

@@ -2,6 +2,9 @@ mozilla-nongnome-proxies.patch
 mozilla-kde.patch
 mozilla-bindgen-systemlibs.patch
 
+mozilla-bmo1360278.patch
+mozilla-bmo1399611-csd.patch
+
 firefox-kde.patch
 firefox-no-default-ualocale.patch
 firefox-branded-icons.patch
