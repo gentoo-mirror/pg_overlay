@@ -91,7 +91,7 @@ sys-apps/openrazer 9999: Razer Drivers for Linux
 sys-apps/polychromatic 9999: A graphical front end for managing Razer peripherals under GNU/Linux.
 sys-devel/qconf 9999: Qt ./configure generation util
 sys-fs/android-file-transfer-linux 3.2 9999: Reliable MTP client with minimalistic UI
-sys-fs/xfsprogs 4.13.0_rc1 4.13.0_rc2 4.14.0_rc1 9999: xfs filesystem utilities
+sys-fs/xfsprogs 4.13.0_rc1 4.13.0_rc2 4.14.0_rc1 4.14.0_rc2 9999: xfs filesystem utilities
 sys-libs/timezone-data 2017c_pre: Timezone data (/usr/share/zoneinfo) and utilities (tzselect/zic/zdump)
 virtual/rust 1.20.0 1.21.0: Virtual for Rust language compiler
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
