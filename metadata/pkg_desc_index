@@ -26,6 +26,7 @@ dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libinput 1.9.1_pre: Library to handle input devices in Wayland
 dev-libs/libixion 0.13.0_pre: General purpose formula parser & interpreter
 dev-libs/liborcus 0.13.0_pre: Standalone file import filter library for spreadsheet documents
+dev-libs/nettle 3.4_pre: Low-level cryptographic library
 dev-libs/re2 0.2017.08.01 0.2017.11.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/daemonize 2.4.7: Interfaces for Python
@@ -44,7 +45,7 @@ dev-util/qtutilities 5.8.1: Common C++ classes and routines used by my applicati
 dev-util/scons 3.0.0_pre: Extensible Python-based build utility
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-mail-client/thunderbird 52.4.0: Thunderbird Mail Client
+mail-client/thunderbird 52.4.0 52.5.0: Thunderbird Mail Client
 media-fonts/iosevka 1.13.3: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.3: Epoxy is a library for handling OpenGL function pointer management for you
