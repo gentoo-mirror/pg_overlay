@@ -18,7 +18,7 @@ app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/po4a 0.52: Tools for helping translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.21.0_pre: A SQL Database Engine in a C Library
-dev-lang/rust 1.21.0 9999: Systems programming language from Mozilla
+dev-lang/rust 1.21.0 1.22.1 9999: Systems programming language from Mozilla
 dev-libs/boost 1.65.1: Boost Libraries for C++
 dev-libs/glib 2.54.2: The GLib library of C routines
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
