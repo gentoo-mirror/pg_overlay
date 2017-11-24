@@ -98,7 +98,7 @@ src_configure() {
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = ["${rust_target}"]
-		cargo = "${rust_stage0_root}/bin/cargo"
+		cargo = "/usr/bin/cargo"
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
 		submodules = false
