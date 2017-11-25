@@ -115,7 +115,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DENABLE_DEVICE_ORIENTATION=$(usex orientation)
-		-DENABLE_GAMEPAD_DEPRICATED=OFF
+		-DENABLE_GAMEPAD_DEPRECATED=OFF
 		-DENABLE_GEOLOCATION=$(usex geolocation)
 		-DENABLE_PRINT_SUPPORT=$(usex printsupport)
 		-DENABLE_QT_GESTURE_EVENTS=$(usex printsupport)
@@ -124,6 +124,7 @@ src_configure() {
 		-DUSE_MEDIA_FOUNDATION=$(usex multimedia)
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
 		-DPORT=Qt
+		-DENABLE_TOOLS=OFF
 	)
 
 	cmake-utils_src_configure
