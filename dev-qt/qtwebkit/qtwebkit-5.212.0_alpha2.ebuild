@@ -4,7 +4,7 @@
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
 QT_MIN_VER="5.9.3:5"
-inherit python-any-r1 qt5-build versionator
+inherit cmake-utils python-any-r1 qt5-build versionator
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
@@ -110,6 +110,28 @@ src_prepare() {
 	#sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
 
 	qt5-build_src_prepare
+}
+
+src_configure() {
+	local mycmakeargs=(
+		-DENABLE_DEVICE_ORIENTATION=$(usex orientation)
+		-DENABLE_GAMEPAD_DEPRECATED=OFF
+		-DENABLE_GEOLOCATION=$(usex geolocation)
+		-DENABLE_PRINT_SUPPORT=$(usex printsupport)
+		-DENABLE_QT_GESTURE_EVENTS=$(usex printsupport)
+		-DENABLE_QT_WEBCHANNEL=$(usex webchannel)
+		-DUSE_GSTREAMER=$(usex gstreamer)
+		-DUSE_MEDIA_FOUNDATION=$(usex multimedia)
+		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
+		-DPORT=Qt
+		-DENABLE_TOOLS=OFF
+	)
+
+	cmake-utils_src_configure
+}
+
+src_compile() {
+	cmake-utils_src_compile
 }
 
 src_install() {
