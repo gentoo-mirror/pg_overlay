@@ -98,8 +98,8 @@ src_install() {
 
 	find "${ED}" -name '*.la' -delete
 	# Fix pkgconfig files
-	sed -e 's|qt/Qt5WebKit|qt/QtWebKit|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc
-	sed -e 's|qt/Qt5WebKitWidgets|qt/QtWebKitWidgets|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc
-	sed -e '/Name/a Description: Qt WebKit module' -i  ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc
-	sed -e '/Name/a Description: Qt WebKitWidgets module' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc
+	sed -e 's|Qt5WebKit|QtWebKit|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc || die
+	sed -e 's|Qt5WebKitWidgets|QtWebKitWidgets|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc  || die
+	sed -e '/Name/a Description: Qt WebKit module' -i  ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc || die
+	sed -e '/Name/a Description: Qt WebKitWidgets module' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc || die
 }
