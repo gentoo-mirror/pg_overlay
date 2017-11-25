@@ -10,7 +10,7 @@ DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
 SLOT="5"
 
-#KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 
 SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
 
@@ -91,4 +91,15 @@ src_configure() {
 	)
 
 	cmake-utils_src_configure
+}
+
+src_install() {
+	cmake-utils_src_install
+
+	find "${ED}" -name '*.la' -delete
+	# Fix pkgconfig files
+	sed -e 's|qt5/Qt5WebKit|qt5/QtWebKit|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc || die
+	sed -e 's|qt5/Qt5WebKitWidgets|qt5/QtWebKitWidgets|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc  || die
+	sed -e '/Name/a Description: Qt WebKit module' -i  ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc || die
+	sed -e '/Name/a Description: Qt WebKitWidgets module' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc || die
 }
