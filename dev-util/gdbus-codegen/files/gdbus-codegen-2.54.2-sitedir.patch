@@ -8,7 +8,7 @@
 -    # Make the prefix containing gdbus-codegen 'relocatable' at runtime by
 -    # adding /some/prefix/bin/../share/glib-2.0 to the python path
 -    path = os.path.join(filedir, '..', 'share', 'glib-2.0')
-else:
+ else:
 -    # Assume that the modules we need are in the current directory and add the
 -    # parent directory to the python path.
 -    path = os.path.join(filedir, '..')
