@@ -89,25 +89,25 @@ src_prepare() {
 	#	Tools/qmake/mkspecs/features/{force_static_libs_as_shared,unix/default_post}.prf \
 	#	|| die
 
-	#qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/functions.prf
+	qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/functions.prf
 
-	#qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/functions.prf
-	#qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/functions.prf
+	qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/functions.prf
+	qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/functions.prf
 	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/functions.prf
-	#qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/functions.prf
-	#qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/functions.prf
-	#qt_use_disable_mod webchannel webchannel \
-	#	Source/WebKit2/Target.pri \
-	#	Source/WebKit2/WebKit2.pri
+	qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/functions.prf
+	qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/functions.prf
+	qt_use_disable_mod webchannel webchannel \
+		Source/WebKit2/Target.pri \
+		Source/WebKit2/WebKit2.pri
 
 	# bug 562396
 	use jit || PATCHES+=("${FILESDIR}/${PN}-5.5.1-disable-jit.patch")
 
-	#use webp || sed -i -e '/config_libwebp: WEBKIT_CONFIG += use_webp/d' \
-	#	Tools/qmake/mkspecs/features/functions.prf || die
+	use webp || sed -i -e '/config_libwebp: WEBKIT_CONFIG += use_webp/d' \
+		Tools/qmake/mkspecs/features/functions.prf || die
 
 	# bug 458222
-	#sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
+	sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
 
 	qt5-build_src_prepare
 }
