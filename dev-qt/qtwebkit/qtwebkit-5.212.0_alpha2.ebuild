@@ -123,6 +123,7 @@ src_configure() {
 		-DUSE_GSTREAMER=$(usex gstreamer)
 		-DUSE_MEDIA_FOUNDATION=$(usex multimedia)
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
+		-DPORT=Qt
 	)
 
 	cmake-utils_src_configure
