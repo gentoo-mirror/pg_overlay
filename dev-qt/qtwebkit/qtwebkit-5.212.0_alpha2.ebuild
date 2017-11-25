@@ -66,7 +66,7 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-5.4.2-system-leveldb.patch"
+	#"${FILESDIR}/${PN}-5.4.2-system-leveldb.patch"
 	"${FILESDIR}/${PN}-webkit-gcc7.patch"
 	"${FILESDIR}/${PN}-null-pointer-dereference.patch"
 	"${FILESDIR}/${PN}-cmake-3.10.patch"
