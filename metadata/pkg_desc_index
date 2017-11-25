@@ -33,7 +33,7 @@ dev-python/daemonize 2.4.7: Interfaces for Python
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/wokkel 0.7.1: Twisted Jabber support library
-dev-qt/qtdeclarative 5.7.1 5.9.1: The QML and Quick modules for the Qt5 framework
+dev-qt/qtdeclarative 5.9.3: The QML and Quick modules for the Qt5 framework
 dev-scheme/guile 2.2.0_pre: GNU Ubiquitous Intelligent Language for Extensions
 dev-util/boost-build 1.65.1: A system for large project software construction, simple to use and powerful
 dev-util/cargo 0.22.0: The Rust's package manager
