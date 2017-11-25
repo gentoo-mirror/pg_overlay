@@ -125,6 +125,7 @@ src_configure() {
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
 		-DPORT=Qt
 		-DENABLE_TOOLS=OFF
+		-DENABLE_API_TESTS=OFF
 	)
 
 	cmake-utils_src_configure
