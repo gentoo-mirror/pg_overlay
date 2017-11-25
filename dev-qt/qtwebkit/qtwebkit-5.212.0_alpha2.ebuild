@@ -12,8 +12,7 @@ if [[ ${QT5_BUILD_TYPE} == release ]]; then
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 fi
 
-MY_PV=${PV/_/-}
-SRC_URI="https://github.com/annulen/webkit/releases/download/${PN}-${MY_PV}/${PN}-${MY_PV}.tar.xz"
+SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
 
 # TODO: qttestlib
 
@@ -67,7 +66,7 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-	#"${FILESDIR}/${PN}-5.4.2-system-leveldb.patch"
+	"${FILESDIR}/${PN}-5.4.2-system-leveldb.patch"
 	"${FILESDIR}/${PN}-webkit-gcc7.patch"
 	"${FILESDIR}/${PN}-null-pointer-dereference.patch"
 	"${FILESDIR}/${PN}-cmake-3.10.patch"
@@ -77,7 +76,7 @@ S=${WORKDIR}/${P/_/-}
 
 src_prepare() {
 	# ensure bundled library cannot be used
-	rm -r Source/ThirdParty/leveldb || die
+	#rm -r Source/ThirdParty/leveldb || die
 
 	# force using system library
 	sed -i -e 's/qtConfig(system-jpeg)/true/' \
