@@ -89,16 +89,16 @@ src_prepare() {
 	#	Tools/qmake/mkspecs/features/{force_static_libs_as_shared,unix/default_post}.prf \
 	#	|| die
 
-	qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/features.prf
 
-	qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/features.prf
-	qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/features.prf
-	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/features.prf
-	qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/features.prf
-	qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/features.prf
-	qt_use_disable_mod webchannel webchannel \
-		Source/WebKit2/Target.pri \
-		Source/WebKit2/WebKit2.pri
+	#qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_mod webchannel webchannel \
+	#	Source/WebKit2/Target.pri \
+	#	Source/WebKit2/WebKit2.pri
 
 	if ! use gstreamer; then
 		PATCHES+=("${FILESDIR}/${PN}-5.8.0-disable-gstreamer.patch")
