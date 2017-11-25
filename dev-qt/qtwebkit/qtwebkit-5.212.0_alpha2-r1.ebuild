@@ -94,6 +94,8 @@ src_configure() {
 }
 
 src_install() {
+	cmake-utils_src_install
+
 	find "${ED}" -name '*.la' -delete
 	# Fix pkgconfig files
 	sed -e 's|qt/Qt5WebKit|qt/QtWebKit|' -i ${ED}/usr/lib/pkgconfig/Qt5WebKit.pc
