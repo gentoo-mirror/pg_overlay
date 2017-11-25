@@ -8,9 +8,9 @@ inherit cmake-utils python-any-r1 qt5-build versionator
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
-if [[ ${QT5_BUILD_TYPE} == release ]]; then
-	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-fi
+#if [[ ${QT5_BUILD_TYPE} == release ]]; then
+#	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+# #fi
 
 SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
 
