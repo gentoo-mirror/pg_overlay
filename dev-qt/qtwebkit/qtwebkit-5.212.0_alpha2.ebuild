@@ -79,9 +79,9 @@ src_prepare() {
 	#rm -r Source/ThirdParty/leveldb || die
 
 	# force using system library
-	#sed -i -e 's/qtConfig(system-jpeg)/true/' \
-	#	-e 's/qtConfig(system-png)/true/' \
-	#	Tools/qmake/mkspecs/features/features.prf || die
+	sed -i -e 's/qtConfig(system-jpeg)/true/' \
+		-e 's/qtConfig(system-png)/true/' \
+		Tools/qmake/mkspecs/features/functions.prf || die
 
 	# bug 466216
 	#sed -i -e '/CONFIG +=/s/rpath//' \
@@ -89,13 +89,13 @@ src_prepare() {
 	#	Tools/qmake/mkspecs/features/{force_static_libs_as_shared,unix/default_post}.prf \
 	#	|| die
 
-	#qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/functions.prf
 
-	#qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/features.prf
-	#qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/features.prf
-	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/features.prf
-	#qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/features.prf
-	#qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/features.prf
+	#qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/functions.prf
+	#qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/functions.prf
+	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/functions.prf
+	#qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/functions.prf
+	#qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/functions.prf
 	#qt_use_disable_mod webchannel webchannel \
 	#	Source/WebKit2/Target.pri \
 	#	Source/WebKit2/WebKit2.pri
@@ -104,7 +104,7 @@ src_prepare() {
 	use jit || PATCHES+=("${FILESDIR}/${PN}-5.5.1-disable-jit.patch")
 
 	#use webp || sed -i -e '/config_libwebp: WEBKIT_CONFIG += use_webp/d' \
-	#	Tools/qmake/mkspecs/features/features.prf || die
+	#	Tools/qmake/mkspecs/features/functions.prf || die
 
 	# bug 458222
 	#sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
