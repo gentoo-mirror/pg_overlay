@@ -1,49 +1,131 @@
+
 # HG changeset patch
-# User Dimi Meim <dimimeim@gmail.com>
-# Date 1508186130 -10800
-#      Mon Oct 16 23:35:30 2017 +0300
-# Node ID 7251515cd508453edff10be2e1294261ef1dc4b5
-# Parent  fe64f869d5a139326216d80ea36faa357358342d
-Bug-1360278-fix
+# User Robin Grenet <robin.grenet@wanadoo.fr>
+# Date 1510835758 -3600
+# Node ID f540f9e801cb2e0be5259baea13dfce953ccb520
+# Parent  0abbf75bd0ecfa99ab4386f551a622983f5f27ea
+Bug 1360278 - Add preference to trigger context menu on mouse up for GTK+ and macOS, r=mstange,smaug
+
+MozReview-Commit-ID: Bg60bD8jIg6
 
 diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
 --- a/modules/libpref/init/all.js
 +++ b/modules/libpref/init/all.js
-@@ -5911,8 +5911,11 @@ pref("toolkit.crashreporter.include_cont
- pref("toolkit.crashreporter.include_context_heap", true);
- #endif
+@@ -229,16 +229,20 @@ pref("dom.script_loader.bytecode_cache.e
+ pref("dom.script_loader.bytecode_cache.strategy", 0);
  
- // Open noopener links in a new process
- pref("dom.noopener.newprocess.enabled", true);
+ // Fastback caching - if this pref is negative, then we calculate the number
+ // of content viewers to cache based on the amount of available memory.
+ pref("browser.sessionhistory.max_total_viewers", -1);
  
- pref("layers.omtp.enabled", false);
- pref("layers.omtp.force-sync", false);
+ pref("ui.use_native_colors", true);
+ pref("ui.click_hold_context_menus", false);
 +
-+//Pop up context menu on mouse button release
-+pref("input.contextMenu.onRelease", false);
++// Pop up context menu on mouseup instead of mousedown, if that's the OS default.
++// Note: ignored on Windows (context menus always use mouseup)
++pref("ui.context_menus.after_mouseup", false);
+ // Duration of timeout of incremental search in menus (ms).  0 means infinite.
+ pref("ui.menu.incremental_search.timeout", 1000);
+ // If true, all popups won't hide automatically on blur
+ pref("ui.popup.disable_autohide", false);
+ 
+ pref("browser.display.use_document_fonts",  1);  // 0 = never, 1 = quick, 2 = always
+ // 0 = default: always, except in high contrast mode
+ // 1 = always
+diff --git a/widget/cocoa/nsChildView.mm b/widget/cocoa/nsChildView.mm
+--- a/widget/cocoa/nsChildView.mm
++++ b/widget/cocoa/nsChildView.mm
+@@ -4695,18 +4695,20 @@ NSEvent* gLastDragMouseDownEvent = nil;
+   [self convertCocoaMouseEvent:theEvent toGeckoEvent:&geckoEvent];
+   geckoEvent.button = WidgetMouseEvent::eRightButton;
+   geckoEvent.mClickCount = [theEvent clickCount];
+ 
+   mGeckoChild->DispatchInputEvent(&geckoEvent);
+   if (!mGeckoChild)
+     return;
+ 
+-  // Let the superclass do the context menu stuff.
+-  [super rightMouseDown:theEvent];
++  if (!nsBaseWidget::ShowContextMenuAfterMouseUp()) {
++    // Let the superclass do the context menu stuff.
++    [super rightMouseDown:theEvent];
++  }
+ 
+   NS_OBJC_END_TRY_ABORT_BLOCK;
+ }
+ 
+ - (void)rightMouseUp:(NSEvent *)theEvent
+ {
+   NS_OBJC_BEGIN_TRY_ABORT_BLOCK;
+ 
+@@ -4719,16 +4721,33 @@ NSEvent* gLastDragMouseDownEvent = nil;
+   WidgetMouseEvent geckoEvent(true, eMouseUp, mGeckoChild,
+                               WidgetMouseEvent::eReal);
+   [self convertCocoaMouseEvent:theEvent toGeckoEvent:&geckoEvent];
+   geckoEvent.button = WidgetMouseEvent::eRightButton;
+   geckoEvent.mClickCount = [theEvent clickCount];
+ 
+   nsAutoRetainCocoaObject kungFuDeathGrip(self);
+   mGeckoChild->DispatchInputEvent(&geckoEvent);
++  if (!mGeckoChild)
++    return;
++
++  if (nsBaseWidget::ShowContextMenuAfterMouseUp()) {
++    // Let the superclass do the context menu stuff, but pretend it's rightMouseDown.
++    NSEvent *dupeEvent = [NSEvent mouseEventWithType:NSRightMouseDown
++                                            location:theEvent.locationInWindow
++                                       modifierFlags:theEvent.modifierFlags
++                                           timestamp:theEvent.timestamp
++                                        windowNumber:theEvent.windowNumber
++                                             context:theEvent.context
++                                         eventNumber:theEvent.eventNumber
++                                          clickCount:theEvent.clickCount
++                                            pressure:theEvent.pressure];
++
++    [super rightMouseDown:dupeEvent];
++  }
+ 
+   NS_OBJC_END_TRY_ABORT_BLOCK;
+ }
+ 
+ - (void)rightMouseDragged:(NSEvent*)theEvent
+ {
+   if (!mGeckoChild)
+     return;
 diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
 --- a/widget/gtk/nsWindow.cpp
 +++ b/widget/gtk/nsWindow.cpp
-@@ -357,16 +357,17 @@ private:
- static NS_DEFINE_IID(kCDragServiceCID,  NS_DRAGSERVICE_CID);
+@@ -2733,16 +2733,29 @@ nsWindow::InitButtonEvent(WidgetMouseEve
+ }
  
- // The window from which the focus manager asks us to dispatch key events.
- static nsWindow         *gFocusWindow          = nullptr;
- static bool              gBlockActivateEvent   = false;
- static bool              gGlobalsInitialized   = false;
- static bool              gRaiseWindows         = true;
+ static guint ButtonMaskFromGDKButton(guint button)
+ {
+     return GDK_BUTTON1_MASK << (button - 1);
+ }
  
-+static bool              menuContextOnClickRelease = false;
- #if GTK_CHECK_VERSION(3,4,0)
- static uint32_t          gLastTouchID = 0;
- #endif
+ void
++nsWindow::DispatchContextMenuEventFromMouseEvent(uint16_t domButton,
++                                                 GdkEventButton *aEvent)
++{
++    if (domButton == WidgetMouseEvent::eRightButton && MOZ_LIKELY(!mIsDestroyed)) {
++        WidgetMouseEvent contextMenuEvent(true, eContextMenu, this,
++                                          WidgetMouseEvent::eReal);
++        InitButtonEvent(contextMenuEvent, aEvent);
++        contextMenuEvent.pressure = mLastMotionPressure;
++        DispatchInputEvent(&contextMenuEvent);
++    }
++}
++
++void
+ nsWindow::OnButtonPressEvent(GdkEventButton *aEvent)
+ {
+     LOG(("Button %u press on %p\n", aEvent->button, (void *)this));
  
- #define NS_WINDOW_TITLE_MAX_LENGTH 4095
- 
- // If after selecting profile window, the startup fail, please refer to
- // http://bugzilla.gnome.org/show_bug.cgi?id=88940
-@@ -2790,19 +2791,21 @@ nsWindow::OnButtonPressEvent(GdkEventBut
- 
+     // If you double click in GDK, it will actually generate a second
+     // GDK_BUTTON_PRESS before sending the GDK_2BUTTON_PRESS, and this is
+     // different than the DOM spec.  GDK puts this in the queue
+     // programatically, so it's safe to assume that if there's a
+@@ -2801,23 +2814,18 @@ nsWindow::OnButtonPressEvent(GdkEventBut
      WidgetMouseEvent event(true, eMouseDown, this, WidgetMouseEvent::eReal);
      event.button = domButton;
      InitButtonEvent(event, aEvent);
@@ -51,21 +133,25 @@ diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
  
      DispatchInputEvent(&event);
  
-+    Preferences::AddBoolVarCache(&menuContextOnClickRelease, "input.contextMenu.onRelease", false);
-+
      // right menu click on linux should also pop up a context menu
-     if (domButton == WidgetMouseEvent::eRightButton &&
+-    if (domButton == WidgetMouseEvent::eRightButton &&
 -        MOZ_LIKELY(!mIsDestroyed)) {
-+        MOZ_LIKELY(!mIsDestroyed) && !menuContextOnClickRelease) {
-         WidgetMouseEvent contextMenuEvent(true, eContextMenu, this,
-                                           WidgetMouseEvent::eReal);
-         InitButtonEvent(contextMenuEvent, aEvent);
-         contextMenuEvent.pressure = mLastMotionPressure;
-         DispatchInputEvent(&contextMenuEvent);
+-        WidgetMouseEvent contextMenuEvent(true, eContextMenu, this,
+-                                          WidgetMouseEvent::eReal);
+-        InitButtonEvent(contextMenuEvent, aEvent);
+-        contextMenuEvent.pressure = mLastMotionPressure;
+-        DispatchInputEvent(&contextMenuEvent);
++    if (!nsBaseWidget::ShowContextMenuAfterMouseUp()) {
++        DispatchContextMenuEventFromMouseEvent(domButton, aEvent);
      }
  }
  
-@@ -2833,16 +2836,28 @@ nsWindow::OnButtonReleaseEvent(GdkEventB
+ void
+ nsWindow::OnButtonReleaseEvent(GdkEventButton *aEvent)
+ {
+     LOG(("Button %u release on %p\n", aEvent->button, (void *)this));
+ 
+@@ -2843,16 +2851,21 @@ nsWindow::OnButtonReleaseEvent(GdkEventB
      event.button = domButton;
      InitButtonEvent(event, aEvent);
      gdouble pressure = 0;
@@ -75,16 +161,9 @@ diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
      DispatchInputEvent(&event);
      mLastMotionPressure = pressure;
 +
-+    Preferences::AddBoolVarCache(&menuContextOnClickRelease, "input.contextMenu.onRelease", false);
-+
 +    // right menu click on linux should also pop up a context menu
-+    if (domButton == WidgetMouseEvent::eRightButton &&
-+        MOZ_LIKELY(!mIsDestroyed) && menuContextOnClickRelease) {
-+        WidgetMouseEvent contextMenuEvent(true, eContextMenu, this,
-+                                          WidgetMouseEvent::eReal);
-+        InitButtonEvent(contextMenuEvent, aEvent);
-+        contextMenuEvent.pressure = mLastMotionPressure;
-+        DispatchInputEvent(&contextMenuEvent);
++    if (nsBaseWidget::ShowContextMenuAfterMouseUp()) {
++        DispatchContextMenuEventFromMouseEvent(domButton, aEvent);
 +    }
  }
  
@@ -94,3 +173,88 @@ diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
      LOGFOCUS(("OnContainerFocusInEvent [%p]\n", (void *)this));
  
      // Unset the urgency hint, if possible
+diff --git a/widget/gtk/nsWindow.h b/widget/gtk/nsWindow.h
+--- a/widget/gtk/nsWindow.h
++++ b/widget/gtk/nsWindow.h
+@@ -240,16 +240,18 @@ private:
+     LayoutDeviceIntSize GetSafeWindowSize(LayoutDeviceIntSize aSize);
+ 
+     void               EnsureGrabs  (void);
+     void               GrabPointer  (guint32 aTime);
+     void               ReleaseGrabs (void);
+ 
+     void               UpdateClientOffset();
+ 
++    void               DispatchContextMenuEventFromMouseEvent(uint16_t domButton,
++                                                              GdkEventButton *aEvent);
+ public:
+     void               ThemeChanged(void);
+     void               OnDPIChanged(void);
+     void               OnCheckResize(void);
+     void               OnCompositedChanged(void);
+ 
+ #ifdef MOZ_X11
+     Window             mOldFocusWindow;
+diff --git a/widget/nsBaseWidget.cpp b/widget/nsBaseWidget.cpp
+--- a/widget/nsBaseWidget.cpp
++++ b/widget/nsBaseWidget.cpp
+@@ -1213,16 +1213,32 @@ nsBaseWidget::DispatchEventToAPZOnly(moz
+   if (mAPZC) {
+     MOZ_ASSERT(APZThreadUtils::IsControllerThread());
+     uint64_t inputBlockId = 0;
+     ScrollableLayerGuid guid;
+     mAPZC->ReceiveInputEvent(*aEvent, &guid, &inputBlockId);
+   }
+ }
+ 
++// static
++bool
++nsBaseWidget::ShowContextMenuAfterMouseUp()
++{
++  static bool gContextMenuAfterMouseUp = false;
++  static bool gContextMenuAfterMouseUpCached = false;
++  if (!gContextMenuAfterMouseUpCached) {
++    Preferences::AddBoolVarCache(&gContextMenuAfterMouseUp,
++                                 "ui.context_menus.after_mouseup",
++                                 false);
++
++    gContextMenuAfterMouseUpCached = true;
++  }
++  return gContextMenuAfterMouseUp;
++}
++
+ nsIDocument*
+ nsBaseWidget::GetDocument() const
+ {
+   if (mWidgetListener) {
+     if (nsIPresShell* presShell = mWidgetListener->GetPresShell()) {
+       return presShell->GetDocument();
+     }
+   }
+diff --git a/widget/nsBaseWidget.h b/widget/nsBaseWidget.h
+--- a/widget/nsBaseWidget.h
++++ b/widget/nsBaseWidget.h
+@@ -412,16 +412,22 @@ public:
+   void NotifyLiveResizeStopped();
+ 
+ #if defined(MOZ_WIDGET_ANDROID)
+   void RecvToolbarAnimatorMessageFromCompositor(int32_t) override {};
+   void UpdateRootFrameMetrics(const ScreenPoint& aScrollOffset, const CSSToScreenScale& aZoom) override {};
+   void RecvScreenPixels(mozilla::ipc::Shmem&& aMem, const ScreenIntSize& aSize) override {};
+ #endif
+ 
++  /**
++   * Whether context menus should only appear on mouseup instead of mousedown,
++   * on OSes where they normally appear on mousedown (macOS, *nix).
++   */
++  static bool ShowContextMenuAfterMouseUp();
++
+ protected:
+   // These are methods for CompositorWidgetWrapper, and should only be
+   // accessed from that class. Derived widgets can choose which methods to
+   // implement, or none if supporting out-of-process compositing.
+   virtual bool PreRender(mozilla::widget::WidgetRenderingContext* aContext) {
+     return true;
+   }
+   virtual void PostRender(mozilla::widget::WidgetRenderingContext* aContext)
+
