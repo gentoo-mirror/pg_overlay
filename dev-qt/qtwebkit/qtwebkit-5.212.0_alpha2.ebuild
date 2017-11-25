@@ -12,7 +12,8 @@ if [[ ${QT5_BUILD_TYPE} == release ]]; then
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 fi
 
-SRC_URI="https://github.com/annulen/webkit/releases/download/${PN}-${PV/_/-}/${PN}-${PV/_/-}.tar.xz"
+MY_PV=${PV/_/-}
+SRC_URI="https://github.com/annulen/webkit/releases/download/${PN}-${MY_PV}/${PN}-${MY_PV}.tar.xz"
 
 # TODO: qttestlib
 
@@ -71,6 +72,8 @@ PATCHES=(
 	"${FILESDIR}/${PN}-null-pointer-dereference.patch"
 	"${FILESDIR}/${PN}-cmake-3.10.patch"
 )
+
+S=${S/_/-}
 
 src_prepare() {
 	# ensure bundled library cannot be used
