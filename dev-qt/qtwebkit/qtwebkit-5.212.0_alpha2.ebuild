@@ -100,10 +100,6 @@ src_prepare() {
 	#	Source/WebKit2/Target.pri \
 	#	Source/WebKit2/WebKit2.pri
 
-	if ! use gstreamer; then
-		PATCHES+=("${FILESDIR}/${PN}-5.8.0-disable-gstreamer.patch")
-	fi
-
 	# bug 562396
 	use jit || PATCHES+=("${FILESDIR}/${PN}-5.5.1-disable-jit.patch")
 
