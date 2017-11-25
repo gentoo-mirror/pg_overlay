@@ -129,6 +129,10 @@ src_configure() {
 	cmake-utils_src_configure
 }
 
+src_configure() {
+	cmake-utils_src_compile
+}
+
 src_install() {
 	qt5-build_src_install
 
