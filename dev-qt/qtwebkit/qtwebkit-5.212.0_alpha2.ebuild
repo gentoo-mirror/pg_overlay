@@ -79,15 +79,15 @@ src_prepare() {
 	#rm -r Source/ThirdParty/leveldb || die
 
 	# force using system library
-	sed -i -e 's/qtConfig(system-jpeg)/true/' \
-		-e 's/qtConfig(system-png)/true/' \
-		Tools/qmake/mkspecs/features/features.prf || die
+	#sed -i -e 's/qtConfig(system-jpeg)/true/' \
+	#	-e 's/qtConfig(system-png)/true/' \
+	#	Tools/qmake/mkspecs/features/features.prf || die
 
 	# bug 466216
-	sed -i -e '/CONFIG +=/s/rpath//' \
-		Source/WebKit/qt/declarative/{experimental/experimental,public}.pri \
-		Tools/qmake/mkspecs/features/{force_static_libs_as_shared,unix/default_post}.prf \
-		|| die
+	#sed -i -e '/CONFIG +=/s/rpath//' \
+	#	Source/WebKit/qt/declarative/{experimental/experimental,public}.pri \
+	#	Tools/qmake/mkspecs/features/{force_static_libs_as_shared,unix/default_post}.prf \
+	#	|| die
 
 	qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/features.prf
 
