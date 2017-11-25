@@ -93,7 +93,7 @@ src_prepare() {
 
 	#qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/features.prf
 	#qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/features.prf
-	#qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/features.prf
+	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/features.prf
 	#qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/features.prf
 	#qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/features.prf
 	#qt_use_disable_mod webchannel webchannel \
