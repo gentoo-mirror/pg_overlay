@@ -3,14 +3,12 @@
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
-#QT_MIN_VER="5.9.3:5"
+QT_MIN_VER="5.9.3:5"
 inherit cmake-utils python-any-r1 versionator
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
-if [[ ${QT5_BUILD_TYPE} == release ]]; then
-	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-fi
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 
 SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
 
