@@ -3,17 +3,18 @@
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
+QT_MIN_VER="5.9.1:5"
 inherit cmake-utils python-any-r1 versionator
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
+
+SLOT="5"
 
 #KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 
 SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
 
 # TODO: qttestlib
-
-SLOT="5"
 
 IUSE="geolocation gstreamer gles2 +jit multimedia opengl orientation printsupport qml test webchannel webp"
 REQUIRED_USE="?? ( gstreamer multimedia )"
@@ -24,11 +25,11 @@ RDEPEND="
 	>=dev-libs/leveldb-1.18-r1
 	dev-libs/libxml2:2
 	dev-libs/libxslt
-	>=dev-qt/qtcore-5.9.1:5[icu]
-	>=dev-qt/qtgui-5.9.1:5
-	>=dev-qt/qtnetwork-5.9.1:5
-	>=dev-qt/qtsql-5.9.1:5
-	>=dev-qt/qtwidgets-5.9.1:5
+	>=dev-qt/qtcore-${QT_MIN_VER}[icu]
+	>=dev-qt/qtgui-${QT_MIN_VER}
+	>=dev-qt/qtnetwork-${QT_MIN_VER}
+	>=dev-qt/qtsql-${QT_MIN_VER}
+	>=dev-qt/qtwidgets-${QT_MIN_VER}
 	media-libs/fontconfig:1.0
 	media-libs/libpng:0=
 	>=sys-libs/zlib-1.2.5
@@ -37,21 +38,21 @@ RDEPEND="
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXrender
-	geolocation? ( >=dev-qt/qtpositioning-5.9.1:5 )
+	geolocation? ( >=dev-qt/qtpositioning-${QT_MIN_VER} )
 	gstreamer? (
 		dev-libs/glib:2
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
 	)
-	multimedia? ( >=dev-qt/qtmultimedia-5.9.1:5[widgets] )
+	multimedia? ( >=dev-qt/qtmultimedia-${QT_MIN_VER}[widgets] )
 	opengl? (
-		>=dev-qt/qtgui-5.9.1:5[gles2=]
-		>=dev-qt/qtopengl-5.9.1:5
+		>=dev-qt/qtgui-${QT_MIN_VER}[gles2=]
+		>=dev-qt/qtopengl-${QT_MIN_VER}
 	)
-	orientation? ( >=dev-qt/qtsensors-5.9.1:5 )
-	printsupport? ( >=dev-qt/qtprintsupport-5.9.1:5 )
-	qml? ( >=dev-qt/qtdeclarative-5.9.1:5 )
-	webchannel? ( >=dev-qt/qtwebchannel-5.9.1:5 )
+	orientation? ( >=dev-qt/qtsensors-${QT_MIN_VER} )
+	printsupport? ( >=dev-qt/qtprintsupport-${QT_MIN_VER} )
+	qml? ( >=dev-qt/qtdeclarative-${QT_MIN_VER} )
+	webchannel? ( >=dev-qt/qtwebchannel-${QT_MIN_VER} )
 	webp? ( media-libs/libwebp:0= )
 "
 DEPEND="${RDEPEND}
@@ -61,13 +62,14 @@ DEPEND="${RDEPEND}
 	sys-devel/bison
 	sys-devel/flex
 	virtual/rubygems
-	test? ( >=dev-qt/qttest-5.9.1:5 )
+	test? ( >=dev-qt/qttest-${QT_MIN_VER} )
 "
 
 PATCHES=(
 	"${FILESDIR}/${PN}-gcc7.patch"
 	"${FILESDIR}/${PN}-null-pointer-dereference.patch"
 	"${FILESDIR}/${PN}-cmake-3.10.patch"
+	"${FILESDIR}/${PN}-5.212-update.patch"
 )
 
 S=${WORKDIR}/${P/_/-}
@@ -85,7 +87,7 @@ src_configure() {
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
 		-DPORT=Qt
 		-DENABLE_TOOLS=OFF
-		-DENABLE_API_TESTS=ON
+		-DENABLE_API_TESTS=OFF
 	)
 
 	cmake-utils_src_configure
