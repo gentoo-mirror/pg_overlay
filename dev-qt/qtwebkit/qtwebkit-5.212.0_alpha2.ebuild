@@ -96,9 +96,9 @@ src_prepare() {
 	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/functions.prf
 	qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/functions.prf
 	qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod webchannel webchannel \
-		Source/WebKit2/Target.pri \
-		Source/WebKit2/WebKit2.pri
+	#qt_use_disable_mod webchannel webchannel \
+	#	Source/WebKit2/Target.pri \
+	#	Source/WebKit2/WebKit2.pri
 
 	# bug 562396
 	use jit || PATCHES+=("${FILESDIR}/${PN}-5.5.1-disable-jit.patch")
@@ -107,7 +107,7 @@ src_prepare() {
 		Tools/qmake/mkspecs/features/functions.prf || die
 
 	# bug 458222
-	sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
+	#sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
 
 	qt5-build_src_prepare
 }
