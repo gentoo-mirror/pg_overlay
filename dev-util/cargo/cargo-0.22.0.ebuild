@@ -138,8 +138,8 @@ scopeguard-0.1.2
 selectors-0.18.0
 semver-0.8.0
 semver-parser-0.7.0
-serde-1.0.15
-serde_derive-1.0.15
+serde-1.0.11
+serde_derive-1.0.11
 serde_derive_internals-0.16.0
 serde_ignored-0.0.4
 serde_json-1.0.3
