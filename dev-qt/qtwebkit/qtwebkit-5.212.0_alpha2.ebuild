@@ -73,7 +73,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-cmake-3.10.patch"
 )
 
-S=${S/_/-}
+S=${WORKDIR}/${P/_/-}
 
 src_prepare() {
 	# ensure bundled library cannot be used
