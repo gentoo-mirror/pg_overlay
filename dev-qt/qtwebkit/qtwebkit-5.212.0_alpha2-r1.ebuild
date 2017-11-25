@@ -10,7 +10,7 @@ DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
 SLOT="5"
 
-#KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 
 SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
 
