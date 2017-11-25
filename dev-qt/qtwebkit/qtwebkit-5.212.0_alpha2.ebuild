@@ -107,11 +107,11 @@ src_prepare() {
 	# bug 562396
 	use jit || PATCHES+=("${FILESDIR}/${PN}-5.5.1-disable-jit.patch")
 
-	use webp || sed -i -e '/config_libwebp: WEBKIT_CONFIG += use_webp/d' \
-		Tools/qmake/mkspecs/features/features.prf || die
+	#use webp || sed -i -e '/config_libwebp: WEBKIT_CONFIG += use_webp/d' \
+	#	Tools/qmake/mkspecs/features/features.prf || die
 
 	# bug 458222
-	sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
+	#sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
 
 	qt5-build_src_prepare
 }
