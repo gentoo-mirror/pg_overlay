@@ -13,6 +13,8 @@ SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.t
 
 # TODO: qttestlib
 
+SLOT="5"
+
 IUSE="geolocation gstreamer gles2 +jit multimedia opengl orientation printsupport qml test webchannel webp"
 REQUIRED_USE="?? ( gstreamer multimedia )"
 
