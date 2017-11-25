@@ -4,7 +4,7 @@
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
 QT_MIN_VER="5.9.1"
-inherit cmake-utils python-any-r1 versionator
+inherit qt5-build cmake-utils python-any-r1 versionator
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
