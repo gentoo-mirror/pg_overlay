@@ -3,8 +3,7 @@
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 )
-QT_MIN_VER="5.9.1"
-inherit qt5-build cmake-utils python-any-r1 versionator
+inherit cmake-utils python-any-r1 versionator
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
@@ -23,11 +22,11 @@ RDEPEND="
 	>=dev-libs/leveldb-1.18-r1
 	dev-libs/libxml2:2
 	dev-libs/libxslt
-	>=dev-qt/qtcore-${QT_MIN_VER}[icu]
-	>=dev-qt/qtgui-${QT_MIN_VER}
-	>=dev-qt/qtnetwork-${QT_MIN_VER}
-	>=dev-qt/qtsql-${QT_MIN_VER}
-	>=dev-qt/qtwidgets-${QT_MIN_VER}
+	>=dev-qt/qtcore-5.9.1:5[icu]
+	>=dev-qt/qtgui-5.9.1:5
+	>=dev-qt/qtnetwork-5.9.1:5
+	>=dev-qt/qtsql-5.9.1:5
+	>=dev-qt/qtwidgets-5.9.1:5
 	media-libs/fontconfig:1.0
 	media-libs/libpng:0=
 	>=sys-libs/zlib-1.2.5
@@ -36,21 +35,21 @@ RDEPEND="
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXrender
-	geolocation? ( >=dev-qt/qtpositioning-${QT_MIN_VER} )
+	geolocation? ( >=dev-qt/qtpositioning-5.9.1:5 )
 	gstreamer? (
 		dev-libs/glib:2
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
 	)
-	multimedia? ( >=dev-qt/qtmultimedia-${QT_MIN_VER}[widgets] )
+	multimedia? ( >=dev-qt/qtmultimedia-5.9.1:5[widgets] )
 	opengl? (
-		>=dev-qt/qtgui-${QT_MIN_VER}[gles2=]
-		>=dev-qt/qtopengl-${QT_MIN_VER}
+		>=dev-qt/qtgui-5.9.1:5[gles2=]
+		>=dev-qt/qtopengl-5.9.1:5
 	)
-	orientation? ( >=dev-qt/qtsensors-${QT_MIN_VER} )
-	printsupport? ( >=dev-qt/qtprintsupport-${QT_MIN_VER} )
-	qml? ( >=dev-qt/qtdeclarative-${QT_MIN_VER} )
-	webchannel? ( >=dev-qt/qtwebchannel-${QT_MIN_VER} )
+	orientation? ( >=dev-qt/qtsensors-5.9.1:5 )
+	printsupport? ( >=dev-qt/qtprintsupport-5.9.1:5 )
+	qml? ( >=dev-qt/qtdeclarative-5.9.1:5 )
+	webchannel? ( >=dev-qt/qtwebchannel-5.9.1:5 )
 	webp? ( media-libs/libwebp:0= )
 "
 DEPEND="${RDEPEND}
@@ -60,7 +59,7 @@ DEPEND="${RDEPEND}
 	sys-devel/bison
 	sys-devel/flex
 	virtual/rubygems
-	test? ( >=dev-qt/qttest-${QT_MIN_VER} )
+	test? ( >=dev-qt/qttest-5.9.1:5 )
 "
 
 PATCHES=(
@@ -77,14 +76,14 @@ src_configure() {
 		-DENABLE_GAMEPAD_DEPRECATED=OFF
 		-DENABLE_GEOLOCATION=$(usex geolocation)
 		-DENABLE_PRINT_SUPPORT=$(usex printsupport)
-		-DENABLE_QT_GESTURE_EVENTS=$(usex printsupport)
+		-DENABLE_QT_GESTURE_EVENTS=$(usex orientation)
 		-DENABLE_QT_WEBCHANNEL=$(usex webchannel)
 		-DUSE_GSTREAMER=$(usex gstreamer)
 		-DUSE_MEDIA_FOUNDATION=$(usex multimedia)
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
 		-DPORT=Qt
 		-DENABLE_TOOLS=OFF
-		-DENABLE_API_TESTS=OFF
+		-DENABLE_API_TESTS=ON
 	)
 
 	cmake-utils_src_configure
