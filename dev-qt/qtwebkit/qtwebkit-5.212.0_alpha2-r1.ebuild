@@ -66,7 +66,7 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-gcc7.patch"
+	#"${FILESDIR}/${PN}-gcc7.patch"
 	#"${FILESDIR}/${PN}-null-pointer-dereference.patch"
 	#"${FILESDIR}/${PN}-cmake-3.10.patch"
 	"${FILESDIR}/${PN}-5.212-up-to-date.patch"
