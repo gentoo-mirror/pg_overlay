@@ -5,8 +5,6 @@ EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
-LLVM_MAX_SLOT=4
-
 inherit python-any-r1 versionator toolchain-funcs llvm
 
 if [[ ${PV} = *beta* ]]; then
@@ -31,7 +29,7 @@ RUST_STAGE0_VERSION="1.$(($(get_version_component_range 2) - 0)).1" #
 RUST_STAGE0_amd64="rust-${RUST_STAGE0_VERSION}-${CHOST_amd64}"
 RUST_STAGE0_x86="rust-${RUST_STAGE0_VERSION}-${CHOST_x86}"
 
-CARGO_DEPEND_VERSION="0.$(($(get_version_component_range 2) + 0)).0" #
+CARGO_VERSION="0.$(($(get_version_component_range 2) + 1)).0" #
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="http://www.rust-lang.org/"
@@ -51,19 +49,16 @@ DEPEND="${RDEPEND}
 	system-llvm? (
 		<sys-devel/llvm-6_pre:=
 		|| (
-			sys-devel/llvm:4
-			>=sys-devel/llvm-3:0
+			sys-devel/llvm:5
 		)
 	)
 	|| (
 		>=sys-devel/gcc-4.7
-		>=sys-devel/clang-3.5
+		sys-devel/clang:5
 	)
 	dev-util/cmake
 "
-PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
-	|| ( 	>=dev-util/cargo-${CARGO_DEPEND_VERSION}
-		>=dev-util/cargo-bin-${CARGO_DEPEND_VERSION} )"
+PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425"
 
 S="${WORKDIR}/${MY_P}-src"
 
@@ -120,12 +115,12 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		debuginfo = $(toml_usex debug)
 		debug-assertions = $(toml_usex debug)
-		codegen-units = 0
 		use-jemalloc = $(toml_usex jemalloc)
 		default-linker = "$(tc-getCC)"
 		default-ar = "$(tc-getAR)"
 		rpath = false
 		channel = "stable"
+		codegen-units = 0
 		[target.${rust_target}]
 		cc = "$(tc-getBUILD_CC)"
 		cxx = "$(tc-getBUILD_CXX)"
