@@ -5,6 +5,8 @@ EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
+LLVM_MAX_SLOT=5
+
 inherit python-any-r1 versionator toolchain-funcs llvm
 
 if [[ ${PV} = *beta* ]]; then
@@ -136,7 +138,7 @@ src_configure() {
 
 src_compile() {
 	export RUST_BACKTRACE=1
-	use system-llvm && export LLVM_LINK_SHARED=1
+	#use system-llvm && export LLVM_LINK_SHARED=1
 
 	./x.py build --verbose --config="${S}"/config.toml ${MAKEOPTS} || die
 }
