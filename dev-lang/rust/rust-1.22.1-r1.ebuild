@@ -50,14 +50,9 @@ DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	system-llvm? (
 		<sys-devel/llvm-6_pre:=
-		|| (
-			sys-devel/llvm:5
-		)
-	)
-	|| (
-		>=sys-devel/gcc-4.7
-		sys-devel/clang:5
-	)
+		sys-devel/llvm:5 )
+	|| (	>=sys-devel/gcc-4.7
+			sys-devel/clang:5 )
 	dev-util/cmake
 "
 PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425"
@@ -74,6 +69,8 @@ pkg_setup() {
 }
 
 src_prepare() {
+	eapply "${FILESDIR}/0001-librustc_llvm-build-Force-link-against-libffi.patch"
+
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
 	local rust_stage0_name="RUST_STAGE0_${ARCH}"
