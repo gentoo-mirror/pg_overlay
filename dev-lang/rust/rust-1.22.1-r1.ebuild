@@ -5,6 +5,8 @@ EAPI=6
 
 PYTHON_COMPAT=( python2_7 )
 
+LLVM_MAX_SLOT=5
+
 inherit python-any-r1 versionator toolchain-funcs llvm
 
 if [[ ${PV} = *beta* ]]; then
