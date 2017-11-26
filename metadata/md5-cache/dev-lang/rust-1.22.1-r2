@@ -1,13 +1,12 @@
 DEFINED_PHASES=compile configure install postinst postrm prepare setup
-DEPEND=|| ( >=dev-lang/python-2.7.5-r2:2.7 ) system-llvm? ( <sys-devel/llvm-6_pre:= sys-devel/llvm:5 ) || ( >=sys-devel/gcc-4.7 sys-devel/clang:5 ) dev-util/cmake
+DEPEND=|| ( >=dev-lang/python-2.7.5-r2:2.7 ) system-llvm? ( <sys-devel/llvm-6_pre:= || ( sys-devel/llvm:4 >=sys-devel/llvm-3:0 ) ) || ( >=sys-devel/gcc-4.7 >=sys-devel/clang-3.5 ) dev-util/cmake
 DESCRIPTION=Systems programming language from Mozilla
 EAPI=6
 HOMEPAGE=http://www.rust-lang.org/
 IUSE=debug doc +jemalloc system-llvm
-KEYWORDS=~amd64 ~x86
 LICENSE=|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA
-PDEPEND=>=app-eselect/eselect-rust-0.3_pre20150425
+PDEPEND=>=app-eselect/eselect-rust-0.3_pre20150425 || ( >=dev-util/cargo-0.22.0 >=dev-util/cargo-bin-0.22.0 )
 SLOT=stable/1.22
 SRC_URI=https://static.rust-lang.org/dist/rustc-1.22.1-src.tar.gz -> rustc-1.22.1-src.tar.gz amd64? ( https://static.rust-lang.org/dist/rust-1.22.1-x86_64-unknown-linux-gnu.tar.gz ) x86? ( https://static.rust-lang.org/dist/rust-1.22.1-i686-unknown-linux-gnu.tar.gz )
 _eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	227b041a120d309fdefbebb3b8c1dfa9	llvm	fe231a791db197943447fdeadafa7e08	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	python-any-r1	27d7f9da7187d283b7f3eae8390b7b09	python-utils-r1	c9de01becf9df3f8c10aeec3dc693f5d	toolchain-funcs	185a06792159ca143528e7010368e8af	versionator	c80ccf29e90adea7c5cae94b42eb76d0
-_md5_=6b0f0e30d44a41530731c6276891f940
+_md5_=d237f510668ab435d92438e77aa27342
