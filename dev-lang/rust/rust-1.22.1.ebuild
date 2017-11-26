@@ -109,7 +109,8 @@ src_configure() {
 		python = "${EPYTHON}"
 		locked-deps = true
 		vendor = true
-		verbose = 2
+		verbose = 0
+		extended = true
 		[install]
 		prefix = "${EPREFIX}/usr"
 		libdir = "$(get_libdir)"
@@ -119,6 +120,7 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		debuginfo = $(toml_usex debug)
 		debug-assertions = $(toml_usex debug)
+		codegen-units = 0
 		use-jemalloc = $(toml_usex jemalloc)
 		default-linker = "$(tc-getCC)"
 		default-ar = "$(tc-getAR)"
