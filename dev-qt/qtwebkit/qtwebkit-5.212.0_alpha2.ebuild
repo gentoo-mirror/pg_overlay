@@ -2,19 +2,18 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python2_7 )
-QT_MIN_VER="5.9.3:5"
-inherit cmake-utils python-any-r1 qt5-build versionator
+QT_MIN_VER="5.9.1:5"
+inherit cmake-utils python-any-r1 versionator
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 
-#if [[ ${QT5_BUILD_TYPE} == release ]]; then
-#	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-# #fi
+SLOT="5"
+
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 
 SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
-
-# TODO: qttestlib
 
 IUSE="geolocation gstreamer gles2 +jit multimedia opengl orientation printsupport qml test webchannel webp"
 REQUIRED_USE="?? ( gstreamer multimedia )"
@@ -22,7 +21,7 @@ REQUIRED_USE="?? ( gstreamer multimedia )"
 RDEPEND="
 	dev-db/sqlite:3
 	dev-libs/icu:=
-	>=dev-libs/leveldb-1.18-r1
+	dev-libs/hyphen
 	dev-libs/libxml2:2
 	dev-libs/libxslt
 	>=dev-qt/qtcore-${QT_MIN_VER}[icu]
@@ -42,17 +41,15 @@ RDEPEND="
 	gstreamer? (
 		dev-libs/glib:2
 		media-libs/gstreamer:1.0
-		media-libs/gst-plugins-base:1.0
+		media-libs/gst-plugins-bad:1.0
+		media-libs/gst-plugins-good:1.0
 	)
 	multimedia? ( >=dev-qt/qtmultimedia-${QT_MIN_VER}[widgets] )
-	opengl? (
-		>=dev-qt/qtgui-${QT_MIN_VER}[gles2=]
-		>=dev-qt/qtopengl-${QT_MIN_VER}
-	)
+	opengl? ( >=dev-qt/qtopengl-${QT_MIN_VER} )
 	orientation? ( >=dev-qt/qtsensors-${QT_MIN_VER} )
 	printsupport? ( >=dev-qt/qtprintsupport-${QT_MIN_VER} )
 	qml? ( >=dev-qt/qtdeclarative-${QT_MIN_VER} )
-	webchannel? ( >=dev-qt/qtwebchannel-${QT_MIN_VER} )
+	webchannel? ( >=dev-qt/qtwebchannel-${QT_MIN_VER}[qml] )
 	webp? ( media-libs/libwebp:0= )
 "
 DEPEND="${RDEPEND}
@@ -66,81 +63,41 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-	#"${FILESDIR}/${PN}-5.4.2-system-leveldb.patch"
-	"${FILESDIR}/${PN}-gcc7.patch"
-	"${FILESDIR}/${PN}-null-pointer-dereference.patch"
-	"${FILESDIR}/${PN}-cmake-3.10.patch"
+	"${FILESDIR}/${PN}-5.212-up-to-date.patch"
 )
 
 S=${WORKDIR}/${P/_/-}
 
-src_prepare() {
-	# ensure bundled library cannot be used
-	#rm -r Source/ThirdParty/leveldb || die
-
-	# force using system library
-	sed -i -e 's/qtConfig(system-jpeg)/true/' \
-		-e 's/qtConfig(system-png)/true/' \
-		Tools/qmake/mkspecs/features/functions.prf || die
-
-	# bug 466216
-	#sed -i -e '/CONFIG +=/s/rpath//' \
-	#	Source/WebKit/qt/declarative/{experimental/experimental,public}.pri \
-	#	Tools/qmake/mkspecs/features/{force_static_libs_as_shared,unix/default_post}.prf \
-	#	|| die
-
-	qt_use_disable_config opengl opengl Tools/qmake/mkspecs/features/functions.prf
-
-	qt_use_disable_mod geolocation positioning Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod multimedia multimediawidgets Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod orientation sensors Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod printsupport printsupport Tools/qmake/mkspecs/features/functions.prf
-	qt_use_disable_mod qml quick Tools/qmake/mkspecs/features/functions.prf
-	#qt_use_disable_mod webchannel webchannel \
-	#	Source/WebKit2/Target.pri \
-	#	Source/WebKit2/WebKit2.pri
-
-	# bug 562396
-	use jit || PATCHES+=("${FILESDIR}/${PN}-5.5.1-disable-jit.patch")
-
-	use webp || sed -i -e '/config_libwebp: WEBKIT_CONFIG += use_webp/d' \
-		Tools/qmake/mkspecs/features/functions.prf || die
-
-	# bug 458222
-	#sed -i -e '/SUBDIRS += examples/d' Source/QtWebKit.pro || die
-
-	qt5-build_src_prepare
-}
-
 src_configure() {
 	local mycmakeargs=(
 		-DENABLE_DEVICE_ORIENTATION=$(usex orientation)
-		-DENABLE_GAMEPAD_DEPRECATED=OFF
 		-DENABLE_GEOLOCATION=$(usex geolocation)
+		-DENABLE_JIT=$(usex jit)
+		-DENABLE_OPENGL=$(usex opengl)
 		-DENABLE_PRINT_SUPPORT=$(usex printsupport)
-		-DENABLE_QT_GESTURE_EVENTS=$(usex printsupport)
+		-DENABLE_QT_GESTURE_EVENTS=$(usex orientation)
 		-DENABLE_QT_WEBCHANNEL=$(usex webchannel)
 		-DUSE_GSTREAMER=$(usex gstreamer)
 		-DUSE_MEDIA_FOUNDATION=$(usex multimedia)
 		-DUSE_QT_MULTIMEDIA=$(usex multimedia)
 		-DPORT=Qt
-		-DENABLE_TOOLS=OFF
+		-DCMAKE_BUILD_TYPE=Release
 		-DENABLE_API_TESTS=OFF
+		-DENABLE_GAMEPAD_DEPRECATED=OFF
+		-DENABLE_NETSCAPE_PLUGIN_API=OFF
+		-DENABLE_TOOLS=OFF
 	)
 
 	cmake-utils_src_configure
 }
 
-src_compile() {
-	cmake-utils_src_compile
-}
-
 src_install() {
-	qt5-build_src_install
+	cmake-utils_src_install
 
-	# bug 572056
-	if [[ ! -f ${D%/}${QT5_LIBDIR}/libQt5WebKit.so ]]; then
-		eerror "${CATEGORY}/${PF} could not build due to a broken ruby environment."
-		die 'Check "eselect ruby" and ensure you have a working ruby in your $PATH'
-	fi
+	find "${ED}" -name '*.la' -delete
+	# Fix pkgconfig files
+	sed -e 's|qt5/Qt5WebKit|qt5/QtWebKit|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc || die
+	sed -e 's|qt5/Qt5WebKitWidgets|qt5/QtWebKitWidgets|' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc  || die
+	sed -e '/Name/a Description: Qt WebKit module' -i  ${ED}/usr/lib64/pkgconfig/Qt5WebKit.pc || die
+	sed -e '/Name/a Description: Qt WebKitWidgets module' -i ${ED}/usr/lib64/pkgconfig/Qt5WebKitWidgets.pc || die
 }
