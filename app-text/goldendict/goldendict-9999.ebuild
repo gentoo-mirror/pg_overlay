@@ -1,10 +1,10 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 PLOCALES="ar_SA ay_WI be_BY be_BY@latin bg_BG cs_CZ de_DE el_GR es_AR es_BO es_ES fa_IR fr_FR it_IT ja_JP ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR qu_WI ru_RU sk_SK sq_AL sr_SR sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
 
-inherit qmake-utils git-r3 l10n
+inherit eutils qmake-utils git-r3 l10n
 
 DESCRIPTION="Feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
@@ -12,50 +12,50 @@ EGIT_REPO_URI="https://github.com/goldendict/goldendict.git"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS=""
-IUSE="debug qt5"
+KEYWORDS="~amd64 ~x86"
+IUSE="debug ffmpeg libav"
 
 RDEPEND="
-	>=app-text/hunspell-1.2
+	app-arch/bzip2
+	>=app-text/hunspell-1.2:=
 	dev-libs/eb
-	!qt5? (
-		dev-qt/qtcore:4[exceptions]
-		dev-qt/qtgui:4[exceptions]
-		dev-qt/qthelp:4[exceptions]
-		dev-qt/qtsingleapplication[qt4]
-		dev-qt/qtsvg:4[exceptions]
-		dev-qt/qtwebkit:4[exceptions]
-	)
-	qt5? (
-		dev-qt/linguist-tools:5
-		dev-qt/qtcore:5
-		dev-qt/qtgui:5
-		dev-qt/qthelp:5
-		dev-qt/qtprintsupport:5
-		dev-qt/qtsingleapplication[qt5]
-		dev-qt/qtsvg:5
-		dev-qt/qtwebkit:5
-		dev-qt/qtx11extras:5
-		dev-qt/qtxml:5
-		dev-qt/qtwidgets:5
-	)
-	media-libs/libao
-	media-libs/libogg
+	dev-libs/lzo
+	dev-qt/qtcore:5
+	dev-qt/qtgui:5
+	dev-qt/qthelp:5
+	dev-qt/qtnetwork:5
+	dev-qt/qtprintsupport:5
+	dev-qt/qtsingleapplication[qt5]
+	dev-qt/qtsvg:5
+	dev-qt/qtwebkit:5
+	dev-qt/qtwidgets:5
+	dev-qt/qtx11extras:5
+	dev-qt/qtxml:5
 	media-libs/libvorbis
+	media-libs/tiff:0
 	sys-libs/zlib
+	x11-libs/libX11
 	x11-libs/libXtst
-	media-video/ffmpeg
+	ffmpeg? (
+		media-libs/libao
+		libav? ( media-video/libav:0= )
+		!libav? ( media-video/ffmpeg:0= )
+	)
 "
 DEPEND="${RDEPEND}
+	dev-qt/linguist-tools:5
 	virtual/pkgconfig
 "
 
+PATCHES=( "${FILESDIR}/${PN}-1.5.0-qtsingleapplication-unbundle.patch" )
+
 src_prepare() {
-	if ! use qt5 ; then
-		epatch "${FILESDIR}/${PN}-qt4-qtsingleapplication-unbundle.patch"
-	else
-		epatch "${FILESDIR}/${PN}-qtsingleapplication-unbundle-qt5.patch"
-	fi
+	default
+
+	# disable git
+	sed -i \
+		-e '/git describe/s/^/#/' \
+		${PN}.pro || die
 
 	# fix installation path
 	sed -i \
@@ -70,11 +70,13 @@ src_prepare() {
 }
 
 src_configure() {
-	if use qt5; then
-		eqmake5
-	else
-		eqmake4
+	local myconf=()
+
+	if ! use ffmpeg && ! use libav ; then
+		myconf+=( DISABLE_INTERNAL_PLAYER=1 )
 	fi
+
+	eqmake5 "${myconf[@]}"
 }
 
 install_locale() {
@@ -88,16 +90,7 @@ src_install() {
 	domenu redist/${PN}.desktop
 	doicon redist/icons/${PN}.png
 
-	# install help files 
-	# en by default
-	# ru if linguas_ru_RU is set by user
 	insinto /usr/share/${PN}/help
-	if use linguas_ru_RU ; then
-		doins help/gdhelp_ru.qch
-	fi
 	doins help/gdhelp_en.qch
-	
-	# install locale files
-	# qm files are already in repository, so there's no need to generate them
-	l10n_for_each_locale_do install_locale	
+	l10n_for_each_locale_do install_locale
 }
