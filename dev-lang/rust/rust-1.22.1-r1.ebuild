@@ -25,16 +25,10 @@ fi
 CHOST_amd64=x86_64-unknown-linux-gnu
 CHOST_x86=i686-unknown-linux-gnu
 
-RUST_STAGE0_VERSION="${PV}" #Use current version for stage0s
-RUST_STAGE0_amd64="rust-${RUST_STAGE0_VERSION}-${CHOST_amd64}"
-RUST_STAGE0_x86="rust-${RUST_STAGE0_VERSION}-${CHOST_x86}"
-
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="http://www.rust-lang.org/"
 
-SRC_URI="https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.gz
-	amd64? ( https://static.rust-lang.org/dist/${RUST_STAGE0_amd64}.tar.gz )
-	x86? ( https://static.rust-lang.org/dist/${RUST_STAGE0_x86}.tar.gz )"
+SRC_URI="https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.gz"
 
 ALL_LLVM_TARGETS=( AArch64 ARM Hexagon JSBackend Mips MSP430 NVPTX PowerPC Sparc SystemZ X86 ) 
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
@@ -63,20 +57,10 @@ pkg_setup() {
 
 src_prepare() {
 	eapply "${FILESDIR}/0001-librustc_llvm-build-Force-link-against-libffi.patch"
-
-	#local rust_stage0_root="${WORKDIR}"/rust-stage0
-
-	#local rust_stage0_name="RUST_STAGE0_${ARCH}"
-	#local rust_stage0="${!rust_stage0_name}"
-
-	#"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
-
 	default
 }
 
 src_configure() {
-	#local rust_stage0_root="${WORKDIR}"/rust-stage0
-
 	local rust_target_name="CHOST_${ARCH}"
 	local rust_target="${!rust_target_name}"
 
