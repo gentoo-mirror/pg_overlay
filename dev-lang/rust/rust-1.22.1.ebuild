@@ -25,11 +25,9 @@ fi
 CHOST_amd64=x86_64-unknown-linux-gnu
 CHOST_x86=i686-unknown-linux-gnu
 
-RUST_STAGE0_VERSION="1.$(($(get_version_component_range 2) - 0)).1" #
+RUST_STAGE0_VERSION="${PV}" #Use current version for stage0s
 RUST_STAGE0_amd64="rust-${RUST_STAGE0_VERSION}-${CHOST_amd64}"
 RUST_STAGE0_x86="rust-${RUST_STAGE0_VERSION}-${CHOST_x86}"
-
-CARGO_VERSION="0.$(($(get_version_component_range 2) + 1)).0" #
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="http://www.rust-lang.org/"
@@ -99,23 +97,29 @@ src_configure() {
 		python = "${EPYTHON}"
 		locked-deps = true
 		vendor = true
-		verbose = 0
 		extended = true
+		verbose = 0
+		sanitizers = false
+		profiler = false
 		[install]
 		prefix = "${EPREFIX}/usr"
 		libdir = "$(get_libdir)"
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
+		debug = $(toml_usex debug)
 		optimize = $(toml_usex !debug)
-		debuginfo = $(toml_usex debug)
+		codegen-units = 0
 		debug-assertions = $(toml_usex debug)
+		debuginfo = $(toml_usex debug)
 		use-jemalloc = $(toml_usex jemalloc)
+		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
 		default-ar = "$(tc-getAR)"
-		rpath = false
 		channel = "stable"
-		codegen-units = 0
+		rpath = false
+		codegen-tests = $(toml_usex debug)
+		dist-src = $(toml_usex debug)
 		[target.${rust_target}]
 		cc = "$(tc-getBUILD_CC)"
 		cxx = "$(tc-getBUILD_CXX)"
@@ -123,8 +127,6 @@ src_configure() {
 }
 
 src_compile() {
-	#export RUST_BACKTRACE=1
-
 	./x.py build --verbose --config="${S}"/config.toml ${MAKEOPTS} || die
 }
 
