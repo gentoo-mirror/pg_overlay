@@ -22,7 +22,6 @@ REQUIRED_USE="?? ( gstreamer multimedia )"
 RDEPEND="
 	dev-db/sqlite:3
 	dev-libs/icu:=
-	>=dev-libs/leveldb-1.18-r1
 	dev-libs/libxml2:2
 	dev-libs/libxslt
 	>=dev-qt/qtcore-${QT_MIN_VER}[icu]
