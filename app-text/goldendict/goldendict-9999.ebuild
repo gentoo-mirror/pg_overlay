@@ -42,7 +42,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
-PATCHES=( "${FILESDIR}/${PN}-1.5.0-qtsingleapplication-unbundle.patch" )
+PATCHES=( "${FILESDIR}/${P}-qtsingleapplication-unbundle.patch" )
 
 src_prepare() {
 	default
