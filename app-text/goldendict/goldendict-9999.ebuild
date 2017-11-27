@@ -22,6 +22,7 @@ RDEPEND="
 	dev-libs/lzo
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5
+	dev-qt/qthelp:5
 	dev-qt/qtsingleapplication[qt5]
 	dev-qt/qtsvg:5
 	dev-qt/qtwebkit:5
