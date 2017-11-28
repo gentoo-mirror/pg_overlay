@@ -7,5 +7,5 @@ IUSE=+daemon -debug -geoip +nls remote -stats +unicode -upnp +X +mmap boost
 LICENSE=GPL-2
 RDEPEND=dev-libs/crypto++ sys-libs/binutils-libs:0= sys-libs/zlib x11-libs/wxGTK:3.0-gtk3[X?] stats? ( media-libs/gd:=[jpeg,png] ) geoip? ( dev-libs/geoip ) upnp? ( net-libs/libupnp:* ) remote? ( media-libs/libpng:0= unicode? ( media-libs/gd:= ) ) boost? ( dev-libs/boost ) !net-p2p/imule
 SLOT=0
-_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	227b041a120d309fdefbebb3b8c1dfa9	flag-o-matic	a6089a2a4027ae3da4a460dc87b21050	git-r3	52a888802d25387c2c74cb845d1219bc	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	185a06792159ca143528e7010368e8af	user	8bc2845510e2109af75e3eeac607ec81	wxwidgets	04e063b0eff26daaea83d859dd9d6e05
+_eclasses_=epatch	8233751dc5105a6ae8fcd86ce2bb0247	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	227b041a120d309fdefbebb3b8c1dfa9	flag-o-matic	a6089a2a4027ae3da4a460dc87b21050	git-r3	fec09a83ae965b041b47f5ff7c8ba29a	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	toolchain-funcs	185a06792159ca143528e7010368e8af	user	8bc2845510e2109af75e3eeac607ec81	wxwidgets	04e063b0eff26daaea83d859dd9d6e05
 _md5_=e71e85c9666959b18858601da327f1fb
