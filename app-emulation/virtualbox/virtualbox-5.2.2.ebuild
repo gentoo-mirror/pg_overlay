@@ -232,7 +232,7 @@ src_compile() {
 	MAKEJOBS=$(grep -Eo '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' <<< ${MAKEOPTS}) #'
 	MAKELOAD=$(grep -Eo '(\-l|\-\-load-average)(=?|[[:space:]]*)[[:digit:]]+' <<< ${MAKEOPTS}) #'
 	MAKEOPTS="${MAKEJOBS} ${MAKELOAD}"
-	kmk \
+	./kmk \
 		VBOX_BUILD_PUBLISHER=_Gentoo \
 		TOOL_GCC3_CC="$(tc-getCC)" TOOL_GCC3_CXX="$(tc-getCXX)" \
 		TOOL_GCC3_AS="$(tc-getCC)" TOOL_GCC3_AR="$(tc-getAR)" \
