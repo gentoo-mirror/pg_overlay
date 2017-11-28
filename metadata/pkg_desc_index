@@ -7,6 +7,7 @@ app-emulation/virtualbox 5.2.0: Family of powerful x86 virtualization products f
 app-emulation/virtualbox-additions 5.2.0: CD image containing guest additions for VirtualBox
 app-emulation/virtualbox-extpack-oracle 5.2.0.118431: PUEL extensions for VirtualBox
 app-emulation/virtualbox-modules 5.2.0: Kernel Modules for Virtualbox
+app-emulation/wine-staging 2.21: Free implementation of Windows(tm) on Unix, with Wine-Staging patchset
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/workrave 1.10.18: Helpful utility to attack Repetitive Strain Injury (RSI)
