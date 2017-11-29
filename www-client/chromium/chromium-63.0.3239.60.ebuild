@@ -427,9 +427,12 @@ src_configure() {
 
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false enable_reading_list=false"
-
+	myconf_gn+=" enable_reading_list=false"
 	# Ubuntu's Chromium
-	myconf_gn+=" use_swiftshader_with_subzero=false use_gcc_glibc=false use_clang_newlib=false enable_package_mash_services=false"
+	myconf_gn+=" use_swiftshader_with_subzero=false"
+	myconf_gn+=" use_gcc_glibc=false"
+	myconf_gn+=" use_clang_newlib=false"
+	myconf_gn+=" enable_package_mash_services=false"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
