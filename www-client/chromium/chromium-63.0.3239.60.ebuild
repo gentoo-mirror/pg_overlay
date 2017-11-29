@@ -426,11 +426,13 @@ src_configure() {
 	fi
 
 	# Dedian's Chromium
-	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" use_ozone=false enable_reading_list=false"
 	myconf_gn+=" enable_reading_list=false"
-
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
+	myconf_gn+=" use_gcc_glibc=false"
+	myconf_gn+=" use_clang_newlib=false"
+	myconf_gn+=" enable_package_mash_services=false"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
@@ -570,11 +572,12 @@ src_configure() {
 			build_ffmpeg_args+=" --disable-asm"
 		fi
 
-		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
-		else
-			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
-		fi
+		#if use vaapi; then
+		#	build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
+		#	#build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
+		#else
+		#	build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --#optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
+		#fi
 
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 		einfo "Configuring bundled ffmpeg..."
