@@ -404,7 +404,6 @@ src_configure() {
 	# Inox
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" is_debug=false"
-	myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" fatal_linker_warnings=false"
 	myconf_gn+=" treat_warnings_as_errors=false"
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
@@ -433,6 +432,7 @@ src_configure() {
 	fi
 
 	# Dedian's Chromium
+	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_reading_list=false"
 
 	# Ubuntu's Chromium
