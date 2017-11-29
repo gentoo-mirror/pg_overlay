@@ -17,4 +17,3 @@ fixes/connection-message.patch
 system/vpx.patch
 system/nspr.patch
 system/lcms2.patch
-system/event.patch
