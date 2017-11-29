@@ -403,15 +403,8 @@ src_configure() {
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_debug=false"
-	myconf_gn+=" exclude_unwind_tables=true"
-	myconf_gn+=" fatal_linker_warnings=false"
-	myconf_gn+=" treat_warnings_as_errors=false"
-	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-	myconf_gn+=" use_sysroot=false"
-	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_remoting=false"
@@ -433,6 +426,7 @@ src_configure() {
 	fi
 
 	# Dedian's Chromium
+	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_reading_list=false"
 
 	# Ubuntu's Chromium
