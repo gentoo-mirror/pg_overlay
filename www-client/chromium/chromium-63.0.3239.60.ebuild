@@ -572,12 +572,12 @@ src_configure() {
 			build_ffmpeg_args+=" --disable-asm"
 		fi
 
-		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
-			#build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
-		else
-			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
-		fi
+		#if use vaapi; then
+		#	build_ffmpeg_args+=" --enable-vaapi --enable-vaapi"
+		#	#build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
+		#else
+		#	build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --#optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
+		#fi
 
 		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
 		einfo "Configuring bundled ffmpeg..."
