@@ -197,7 +197,7 @@ src_prepare() {
 	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux_${CHR_MAJORV}.diff"
 
 	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
+	#use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
 
 	# Iridium patches
 	use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${CHR_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${CHR_MAJORV}/$i";done
@@ -206,10 +206,12 @@ src_prepare() {
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
 
 	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
+	#use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
+
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/$i";done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/$i";done
+	#for i in $(cat "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/$i";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
