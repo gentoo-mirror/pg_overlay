@@ -8,6 +8,5 @@ fix-clang-compile.patch
 fix-compile-error.patch
 specify-gcc-standard.patch
 fix-gn-bootstrap.patch
-remove-unavailable-clang-option.patch
 suppress-newer-clang-warning-flags.patch
 fix-webrtc-build.patch
