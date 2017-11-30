@@ -439,6 +439,7 @@ src_configure() {
 		# Need harfbuzz_from_pkgconfig target
 		#harfbuzz-ng
 		libdrm
+		libevent
 		libjpeg
 		libpng
 		libwebp
@@ -462,7 +463,7 @@ src_configure() {
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
-	myconf_gn+=" use_system_harfbuzz=true"
+	myconf_gn+=" use_system_harfbuzz=true use_system_lcms2=true"
 
 	# Optional dependencies.
 	myconf_gn+=" enable_hangout_services_extension=$(usex hangouts true false)"
