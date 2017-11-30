@@ -206,9 +206,9 @@ src_prepare() {
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
 
 	# Debian patches
-	#use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
 
-	for i in $(cat "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/$i";done
+	#for i in $(cat "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/$i";done
 
 	# Fedora patches
 	#for i in $(cat "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/$i";done
@@ -488,7 +488,7 @@ src_configure() {
 	# Never use bundled gold binary. Disable gold linker flags for now.
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
+	myconf_gn+=" use_gold=true use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
