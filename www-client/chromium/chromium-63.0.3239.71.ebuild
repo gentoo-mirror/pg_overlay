@@ -431,7 +431,6 @@ src_configure() {
 	myconf_gn+=" enable_reading_list=false"
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
-	myconf_gn+=" use_gcc_glibc=false"
 	myconf_gn+=" enable_package_mash_services=false"
 
 	# libevent: https://bugs.gentoo.org/593458
@@ -479,9 +478,9 @@ src_configure() {
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 
 	if tc-is-clang; then
-		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false use_lld=true"
+		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false use_lld=true use_clang_newlib=true"
 	else
-		myconf_gn+=" is_clang=false"
+		myconf_gn+=" is_clang=false use_gcc_glibc=false"
 	fi
 
 	# Never use bundled gold binary. Disable gold linker flags for now.
