@@ -1,4 +1,3 @@
-build-remove-calling-untrusted-hooks.patch
 build-DEPS-pick-an-existing-webrtc-commit.patch
 build-select-default-toolchain.patch
 build-import-openSUSE-chromium-last-commit-position-.patch
