@@ -38,7 +38,7 @@ multilib_src_configure() {
 	# FIXME: handle backends per arch ?
 	ECONF_SOURCE="${S}" econf \
 		--disable-gtk-doc \
-		--enable-backend=sse,mmx \
+		--enable-backend=all \
 		$(use_enable static-libs static)
 }
 
