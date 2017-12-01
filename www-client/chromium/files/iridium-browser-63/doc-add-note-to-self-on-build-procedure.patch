@@ -1,0 +1,30 @@
+From 11ef6e1d11b6faf0aa614ca7468193cafd937d71 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Thu, 30 Nov 2017 15:56:12 +0100
+Subject: [PATCH 64/64] doc: add note to self on build procedure
+
+---
+ testbuild.txt | 11 +++++++++++
+ 1 file changed, 11 insertions(+)
+ create mode 100644 testbuild.txt
+
+diff --git a/testbuild.txt b/testbuild.txt
+new file mode 100644
+index 000000000000..3895724e4032
+--- /dev/null
++++ b/testbuild.txt
+@@ -0,0 +1,11 @@
++basic test that the patches build
++1. gclient sync
++2. grab an extra patch which spans git repositories (and that is why it is not
++   included)
++   quilt import $suse/chromium-60.0.3112.113-breakpad-ucontext.patch \
++     $suse/chromium-62.0.3202.62-correct-cplusplus-check.patch
++3. export CC=gcc CXX=g++
++4. tools/gn/bootstrap/bootstrap.py -v --gn-gen-args ' custom_toolchain="./toolchain:default" linux_use_bundled_binutils=false use_custom_libcxx=false is_debug=false enable_nacl=false is_component_ffmpeg=true use_cups=true use_gconf=true use_aura=true symbol_level=1 remove_webcore_debug_symbols=true use_kerberos=true use_pulseaudio=true link_pulseaudio=true is_component_build=false use_sysroot=false fatal_linker_warnings=false use_allocator="tcmalloc" fieldtrial_testing_like_official_build=true use_gold=true use_sysroot=false treat_warnings_as_errors=false enable_widevine=true enable_hangout_services_extension=true is_clang=false proprietary_codecs=true ffmpeg_branding="Chrome"'
++5. mkdir -p third_party/node/linux/node-linux-x64/bin
++6. ln -s /usr/bin/node third_party/node/linux/node-linux-x64/bin/
++5. ninja  -C out/Release chrome chrome_sandbox chromedriver
+-- 
+2.15.0
+

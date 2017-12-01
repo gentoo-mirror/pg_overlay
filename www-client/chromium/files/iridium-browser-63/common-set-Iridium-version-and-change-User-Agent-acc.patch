@@ -1,0 +1,105 @@
+From f3d59528cd8b1e733c7cbc3b67ca02209b48a084 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Wed, 8 Jul 2015 15:08:32 +0200
+Subject: [PATCH 59/64] common: set Iridium version and change User-Agent
+ accordingly
+
+Reduced version number:
+We do not use @BUILD@ or @PATCH@, in particular not in the User-Agent
+string.
+
+As for the user agent, continue providing Chrome/* for possible
+compatibility checks by the browser and/or websites, since we
+really are still Chromium.
+
+Note to self:
+Update "Chromium/*" in UA string when updating chrome/version.
+---
+ android_webview/common/aw_version_info_values.h.version | 2 +-
+ chrome/VERSION                                          | 8 ++++----
+ components/version_info/version_info.cc                 | 2 +-
+ components/version_info/version_info_values.h.version   | 2 +-
+ content/common/user_agent.cc                            | 2 ++
+ extensions/shell/common/version.h.in                    | 2 +-
+ 6 files changed, 10 insertions(+), 8 deletions(-)
+
+diff --git a/android_webview/common/aw_version_info_values.h.version b/android_webview/common/aw_version_info_values.h.version
+index 72faf9743fde..7c0f43d1a1ab 100644
+--- a/android_webview/common/aw_version_info_values.h.version
++++ b/android_webview/common/aw_version_info_values.h.version
+@@ -5,6 +5,6 @@
+ #ifndef ANDROID_WEBVIEW_COMMON_AW_VERSION_INFO_VALUES_H_
+ #define ANDROID_WEBVIEW_COMMON_AW_VERSION_INFO_VALUES_H_
+ 
+-#define PRODUCT_VERSION "@MAJOR@.@MINOR@.@BUILD@.@PATCH@"
++#define PRODUCT_VERSION "@MAJOR@.@MINOR@"
+ 
+ #endif  // ANDROID_WEBVIEW_COMMON_AW_VERSION_INFO_VALUES_H_
+diff --git a/chrome/VERSION b/chrome/VERSION
+index e50bcc605cda..4b7ecfa9219a 100644
+--- a/chrome/VERSION
++++ b/chrome/VERSION
+@@ -1,4 +1,4 @@
+-MAJOR=62
+-MINOR=0
+-BUILD=3202
+-PATCH=94
++MAJOR=2017
++MINOR=11
++BUILD=0
++PATCH=0
+diff --git a/components/version_info/version_info.cc b/components/version_info/version_info.cc
+index 0b28f1523900..695c22584d51 100644
+--- a/components/version_info/version_info.cc
++++ b/components/version_info/version_info.cc
+@@ -14,7 +14,7 @@
+ namespace version_info {
+ 
+ std::string GetProductNameAndVersionForUserAgent() {
+-  return "Chrome/" + GetVersionNumber();
++  return "Iridium/" + GetVersionNumber();
+ }
+ 
+ std::string GetProductName() {
+diff --git a/components/version_info/version_info_values.h.version b/components/version_info/version_info_values.h.version
+index 6232e359ef20..3cf4fee096c0 100644
+--- a/components/version_info/version_info_values.h.version
++++ b/components/version_info/version_info_values.h.version
+@@ -6,7 +6,7 @@
+ #define COMPONENTS_VERSION_INFO_VERSION_INFO_VALUES_H_
+ 
+ #define PRODUCT_NAME "@PRODUCT_FULLNAME@"
+-#define PRODUCT_VERSION "@MAJOR@.@MINOR@.@BUILD@.@PATCH@"
++#define PRODUCT_VERSION "@MAJOR@.@MINOR@"
+ #define LAST_CHANGE "@LASTCHANGE@"
+ #define IS_OFFICIAL_BUILD @OFFICIAL_BUILD@
+ 
+diff --git a/content/common/user_agent.cc b/content/common/user_agent.cc
+index b071e6ba90d6..e41b0cd9429f 100644
+--- a/content/common/user_agent.cc
++++ b/content/common/user_agent.cc
+@@ -187,6 +187,8 @@ std::string BuildUserAgentFromOSAndProduct(const std::string& os_info,
+       product.c_str(),
+       WEBKIT_VERSION_MAJOR,
+       WEBKIT_VERSION_MINOR);
++  if (strncmp(product.c_str(), "Chrome/", 7) != 0)
++	base::StringAppendF(&user_agent, " Chrome/62.0.3202.94");
+   return user_agent;
+ }
+ 
+diff --git a/extensions/shell/common/version.h.in b/extensions/shell/common/version.h.in
+index c4627fe512a1..bf7d27484e99 100644
+--- a/extensions/shell/common/version.h.in
++++ b/extensions/shell/common/version.h.in
+@@ -7,7 +7,7 @@
+ #ifndef EXTENSIONS_SHELL_COMMON_VERSION_H_
+ #define EXTENSIONS_SHELL_COMMON_VERSION_H_
+ 
+-#define PRODUCT_VERSION "@MAJOR@.@MINOR@.@BUILD@.@PATCH@"
++#define PRODUCT_VERSION "@MAJOR@.@MINOR@"
+ #define LAST_CHANGE "@LASTCHANGE@"
+ 
+ #endif  // EXTENSIONS_SHELL_COMMON_VERSION_H_
+-- 
+2.15.0
+

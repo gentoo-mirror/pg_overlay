@@ -1,0 +1,43 @@
+From a88ca020fd2b57d9cbed011806dd92289de90d8c Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Thu, 11 Sep 2014 16:37:32 +0200
+Subject: [PATCH 14/64] autofill: disable autofill download manager
+
+Disables the autofill download manager (trk:158).
+---
+ components/autofill/core/browser/autofill_download_manager.cc | 2 +-
+ components/autofill/core/browser/autofill_manager.cc          | 2 ++
+ 2 files changed, 3 insertions(+), 1 deletion(-)
+
+diff --git a/components/autofill/core/browser/autofill_download_manager.cc b/components/autofill/core/browser/autofill_download_manager.cc
+index d2551b9c4f54..ea48f849cf73 100644
+--- a/components/autofill/core/browser/autofill_download_manager.cc
++++ b/components/autofill/core/browser/autofill_download_manager.cc
+@@ -158,7 +158,7 @@ std::string RequestTypeToString(AutofillDownloadManager::RequestType type) {
+ }
+ 
+ GURL GetRequestUrl(AutofillDownloadManager::RequestType request_type) {
+-  return GURL("https://clients1.google.com/tbproxy/af/" +
++  return GURL("trk:158:https://clients1.google.com/tbproxy/af/" +
+               RequestTypeToString(request_type) + "?client=" + kClientName);
+ }
+ 
+diff --git a/components/autofill/core/browser/autofill_manager.cc b/components/autofill/core/browser/autofill_manager.cc
+index 31143c2309a9..d60774538070 100644
+--- a/components/autofill/core/browser/autofill_manager.cc
++++ b/components/autofill/core/browser/autofill_manager.cc
+@@ -254,9 +254,11 @@ AutofillManager::AutofillManager(
+       autofill_assistant_(this),
+ #endif
+       weak_ptr_factory_(this) {
++#if 0
+   if (enable_download_manager == ENABLE_AUTOFILL_DOWNLOAD_MANAGER) {
+     download_manager_.reset(new AutofillDownloadManager(driver, this));
+   }
++#endif
+   CountryNames::SetLocaleString(app_locale_);
+   if (personal_data_ && client_)
+     personal_data_->OnSyncServiceInitialized(client_->GetSyncService());
+-- 
+2.15.0
+
