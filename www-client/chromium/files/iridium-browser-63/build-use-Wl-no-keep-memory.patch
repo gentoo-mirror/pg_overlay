@@ -1,0 +1,38 @@
+From c76e2b613c59655a079b3b8fb9bd080a1fd71ad8 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sun, 20 Dec 2015 11:12:00 +0100
+Subject: [PATCH 57/64] build: use -Wl,--no-keep-memory
+
+---
+ chrome/BUILD.gn        | 1 +
+ sandbox/linux/BUILD.gn | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/chrome/BUILD.gn b/chrome/BUILD.gn
+index b09dff10e932..4c4312322f79 100644
+--- a/chrome/BUILD.gn
++++ b/chrome/BUILD.gn
+@@ -279,6 +279,7 @@ if (!is_android && !is_mac) {
+         ]
+ 
+         ldflags = [ "-pie" ]
++        ldflags += [ "-Wl,--no-keep-memory" ]
+ 
+         # Chrome OS debug builds for arm need to pass --long-plt to the linker.
+         # See https://bugs.chromium.org/p/chromium/issues/detail?id=583532
+diff --git a/sandbox/linux/BUILD.gn b/sandbox/linux/BUILD.gn
+index 4b61c15e703a..c3ccd1d822fc 100644
+--- a/sandbox/linux/BUILD.gn
++++ b/sandbox/linux/BUILD.gn
+@@ -314,7 +314,7 @@ if (is_linux) {
+       # TODO fix this and re-enable this warning.
+       "-Wno-sign-compare",
+     ]
+-    ldflags = [ "-pie" ]
++    ldflags = [ "-pie", "-Wl,--no-keep-memory" ]
+ 
+     import("//build/config/compiler/compiler.gni")
+     import("//build/config/sanitizers/sanitizers.gni")
+-- 
+2.15.0
+
