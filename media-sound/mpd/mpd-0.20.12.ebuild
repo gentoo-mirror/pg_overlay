@@ -128,7 +128,6 @@ pkg_setup() {
 src_prepare() {
 	cp -f doc/mpdconf.example doc/mpdconf.dist || die "cp failed"
 	default
-	#eautoreconf
 }
 
 src_configure() {
