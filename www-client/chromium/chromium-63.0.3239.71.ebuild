@@ -481,7 +481,7 @@ src_configure() {
 	if tc-is-clang; then
 		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false use_lld=true"
 	else
-		myconf_gn+=" is_clang=false use_gcc_newlib=true"
+		myconf_gn+=" is_clang=false"
 	fi
 
 	# Never use bundled gold binary. Disable gold linker flags for now.
