@@ -194,6 +194,8 @@ src_prepare() {
 	eapply "${WORKDIR}/patches"
 
 	eapply_user
+
+	sed -i 's/3093/0/g' Config.kmk # 
 }
 
 src_configure() {
