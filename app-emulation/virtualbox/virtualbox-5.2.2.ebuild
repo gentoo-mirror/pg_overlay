@@ -195,7 +195,7 @@ src_prepare() {
 
 	eapply_user
 
-	sed -i 's/3093/0/g' Config.kmk # 
+	eapply "${FILESDIR}/dont_check_kbuild_revision.patch" 
 }
 
 src_configure() {
