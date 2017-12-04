@@ -194,16 +194,16 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/enable_vaapi_on_linux_${CHR_MAJORV}.diff"
+	use vaapi && eapply "${FILESDIR}/chromium-libva-r2-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/chromium-vaapi-r15-${CHR_MAJORV}.patch"
 
 	# Inox patches
-	#use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
 
 	# Iridium patches
-	use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${CHR_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${CHR_MAJORV}/$i";done
+	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${CHR_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${CHR_MAJORV}/$i";done
 
 	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
+	#use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
@@ -411,9 +411,9 @@ src_configure() {
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
-	#if use inox; then
-	#	myconf_gn+=" safe_browsing_mode=0"
-	#fi
+	if use inox; then
+		myconf_gn+=" safe_browsing_mode=0"
+	fi
 
 	# Ungoogled-Chromium
 	myconf_gn+=" enable_iterator_debugging=false"
