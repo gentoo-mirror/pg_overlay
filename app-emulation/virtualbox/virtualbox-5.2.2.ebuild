@@ -194,6 +194,8 @@ src_prepare() {
 	eapply "${WORKDIR}/patches"
 
 	eapply_user
+
+	eapply "${FILESDIR}/dont_check_kbuild_revision.patch" 
 }
 
 src_configure() {
