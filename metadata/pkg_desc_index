@@ -19,15 +19,18 @@ app-text/goldendict 9998 9999: Feature-rich dictionary lookup program
 app-text/po4a 0.52: Tools for helping translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.21.0_pre: A SQL Database Engine in a C Library
+dev-lang/nasm 2.13.02_pre: groovy little assembler
 dev-lang/orc 0.4.28_pre: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/rust 1.21.0 1.22.1 1.22.1-r1 1.22.1-r9999 9999: Systems programming language from Mozilla
 dev-libs/boost 1.65.1: Boost Libraries for C++
 dev-libs/glib 2.54.2: The GLib library of C routines
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
+dev-libs/libassuan 2.4.4_pre: IPC library used by GnuPG and GPGME
 dev-libs/libevdev 1.5.7: Handler library for evdev events
 dev-libs/libinput 1.9.1_pre: Library to handle input devices in Wayland
 dev-libs/libixion 0.13.0_pre: General purpose formula parser & interpreter
 dev-libs/liborcus 0.13.0_pre: Standalone file import filter library for spreadsheet documents
+dev-libs/libunistring 0.9.8_pre: Library for manipulating Unicode and C strings according to Unicode standard
 dev-libs/nettle 3.4_pre: Low-level cryptographic library
 dev-libs/re2 0.2017.08.01 0.2017.11.01 0.2017.12.01: An efficent, principled regular expression library
 dev-libs/xmlrpc-c 1.39.12 1.43.9999: A lightweigt RPC library based on XML and HTTP
