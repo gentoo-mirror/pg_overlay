@@ -29,6 +29,7 @@ COMMON_DEPEND="
 	dev-libs/expat:=
 	dev-libs/glib:2
 	system-icu? ( >=dev-libs/icu-59:= )
+	>=dev-libs/libevent-2.0:0
 	>=dev-libs/libxml2-2.9.5:=[icu]
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
