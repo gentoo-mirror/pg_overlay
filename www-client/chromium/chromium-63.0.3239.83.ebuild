@@ -195,7 +195,8 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/chromium-libva-r2-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/chromium-vaapi-r15-${CHR_MAJORV}.patch"
+	use vaapi && eapply "${FILESDIR}/${PN}-libva-r2-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-r15-${CHR_MAJORV}.patch"
+	use system-icu && eapply "${FILESDIR}/${PN}-icu-60-support-${CHR_MAJORV}.patch"
 
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
