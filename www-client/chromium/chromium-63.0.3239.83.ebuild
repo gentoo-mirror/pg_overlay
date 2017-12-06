@@ -29,6 +29,7 @@ COMMON_DEPEND="
 	dev-libs/expat:=
 	dev-libs/glib:2
 	system-icu? ( >=dev-libs/icu-59:= )
+	>=dev-libs/libevent-2.0:0
 	>=dev-libs/libxml2-2.9.5:=[icu]
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
@@ -38,7 +39,7 @@ COMMON_DEPEND="
 	>=media-libs/alsa-lib-1.0.19:=
 	media-libs/fontconfig:=
 	media-libs/freetype:=
-	>=media-libs/harfbuzz-1.4.2:=[icu(-)]
+	>=media-libs/harfbuzz-1.5.0:=[icu(-)]
 	media-libs/libjpeg-turbo:=
 	media-libs/libpng:=
 	system-libvpx? ( media-libs/libvpx:=[postproc,svc] )
@@ -146,10 +147,8 @@ GTK+ icon theme.
 
 PATCHES=(
 	"${FILESDIR}/${PN}-FORTIFY_SOURCE-r2.patch"
-	"${FILESDIR}/${PN}-gcc5-r3.patch"
-	"${FILESDIR}/${PN}-gn-bootstrap-r17.patch"
-	"${FILESDIR}/${PN}-glibc2.26-r1.patch"
-	"${FILESDIR}/crc32c-string-view-check.patch"
+	"${FILESDIR}/${PN}-clang-r1.patch"
+	"${FILESDIR}/${PN}-webrtc-r0.patch"
 )
 
 pre_build_checks() {
@@ -196,22 +195,23 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/chromium-libva-version-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/chromium-vaapi-${CHR_MAJORV}.patch"
+	use vaapi && eapply "${FILESDIR}/chromium-libva-r2-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/chromium-vaapi-r15-${CHR_MAJORV}.patch"
 
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
 
 	# Iridium patches
-	use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${CHR_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${CHR_MAJORV}/$i";done
+	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${CHR_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${CHR_MAJORV}/$i";done
 
 	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
+	#use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/$i";done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/$i";done
+	#for i in $(cat "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/$i";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -226,7 +226,6 @@ src_prepare() {
 		base/third_party/valgrind
 		base/third_party/xdg_mime
 		base/third_party/xdg_user_dirs
-		breakpad/src/third_party/curl
 		chrome/third_party/mozilla_security_manager
 		courgette/third_party
 		net/third_party/mozilla_security_manager
@@ -235,23 +234,26 @@ src_prepare() {
 		third_party/analytics
 		third_party/angle
 		third_party/angle/src/common/third_party/base
-		third_party/angle/src/common/third_party/murmurhash
+		third_party/angle/src/common/third_party/smhasher
 		third_party/angle/src/third_party/compiler
 		third_party/angle/src/third_party/libXNVCtrl
 		third_party/angle/src/third_party/trace_event
+		third_party/blink
 		third_party/boringssl
+		third_party/breakpad
+		third_party/breakpad/breakpad/src/third_party/curl
 		third_party/brotli
 		third_party/cacheinvalidation
 		third_party/catapult
+		third_party/catapult/common/py_vulcanize/third_party/rcssmin
+		third_party/catapult/common/py_vulcanize/third_party/rjsmin
 		third_party/catapult/third_party/polymer
-		third_party/catapult/third_party/py_vulcanize
-		third_party/catapult/third_party/py_vulcanize/third_party/rcssmin
-		third_party/catapult/third_party/py_vulcanize/third_party/rjsmin
 		third_party/catapult/tracing/third_party/d3
 		third_party/catapult/tracing/third_party/gl-matrix
 		third_party/catapult/tracing/third_party/jszip
 		third_party/catapult/tracing/third_party/mannwhitneyu
 		third_party/catapult/tracing/third_party/oboe
+		third_party/catapult/tracing/third_party/pako
 		third_party/ced
 		third_party/cld_2
 		third_party/cld_3
@@ -403,15 +405,8 @@ src_configure() {
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_debug=false"
-	myconf_gn+=" exclude_unwind_tables=true"
-	myconf_gn+=" fatal_linker_warnings=false"
-	myconf_gn+=" treat_warnings_as_errors=false"
-	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-	myconf_gn+=" use_sysroot=false"
-	myconf_gn+=" enable_nacl=false"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_remoting=false"
@@ -433,16 +428,19 @@ src_configure() {
 	fi
 
 	# Dedian's Chromium
+	myconf_gn+=" use_ozone=false enable_reading_list=false"
 	myconf_gn+=" enable_reading_list=false"
-
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
+	myconf_gn+=" enable_package_mash_services=false"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
 		flac
-		harfbuzz-ng
+		# Need harfbuzz_from_pkgconfig target
+		#harfbuzz-ng
 		libdrm
+		libevent
 		libjpeg
 		libpng
 		libwebp
@@ -464,6 +462,9 @@ src_configure() {
 		gn_system_libraries+=( libvpx )
 	fi
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
+
+	# See dependency logic in third_party/BUILD.gn
+	myconf_gn+=" use_system_harfbuzz=true use_system_lcms2=true"
 
 	# Optional dependencies.
 	myconf_gn+=" enable_hangout_services_extension=$(usex hangouts true false)"
@@ -573,7 +574,7 @@ src_configure() {
 		fi
 
 		if use vaapi; then
-			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
+			build_ffmpeg_args+=" --enable-vaapi --enable-vaapi" build_ffmpeg_args+=" --enable-vaapi --enable-vaapi --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
 		else
 			build_ffmpeg_args+=" --enable-vdpau --enable-vdpau --enable-hwaccel=h264_vdpau,hevc_vdpau,mpeg1_vdpau,mpeg2_vdpau,mpeg4_vdpau,vc1_vdpau,wmv3_vdpau --optflags=-O3,-pipe,-fomit-frame-pointer,-fno-stack-protector --disable-debug"
 		fi
@@ -666,9 +667,6 @@ src_install() {
 
 	doins -r out/Release/locales
 	doins -r out/Release/resources
-
-	newman out/Release/chrome.1 chromium.1
-	newman out/Release/chrome.1 chromium-browser.1
 
 	# Install icons and desktop entry.
 	local branding size
