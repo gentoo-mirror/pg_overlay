@@ -10,7 +10,6 @@ app-admin/syslog-ng:redis - Enable support for Redis destinations
 app-admin/syslog-ng:smtp - Enable support for SMTP destinations
 app-admin/syslog-ng:spoof-source - Enable support for spoofed source addresses
 app-arch/p7zip:rar - Enable support for non-free rar decoder
-app-crypt/gpgme:common-lisp - Install common-lisp files
 app-emulation/virtualbox:headless - Build without any graphic frontend
 app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
 app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels.

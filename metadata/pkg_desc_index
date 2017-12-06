@@ -1,8 +1,7 @@
 app-admin/syslog-ng 3.11.1: syslog replacement with advanced filtering features
 app-arch/p7zip 16.02-r1: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-crypt/gnupg 2.2.2_pre: The GNU Privacy Guard, a GPL OpenPGP implementation
-app-crypt/gpgme 1.9.0_pre: GnuPG Made Easy is a library for making GnuPG easier to use
+app-crypt/pinentry 1.1.0_pre: Simple passphrase entry dialogs which utilize the Assuan protocol
 app-emulation/virtualbox 5.2.0 5.2.2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-additions 5.2.0 5.2.2: CD image containing guest additions for VirtualBox
 app-emulation/virtualbox-extpack-oracle 5.2.0.118431 5.2.2.119230: PUEL extensions for VirtualBox
