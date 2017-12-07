@@ -1,0 +1,14 @@
+diff -Nuar a/Makefile.am b/Makefile.am
+--- a/Makefile.am	2016-06-19 18:26:18.000000000 +0700
++++ b/Makefile.am	2017-10-11 17:16:14.480580953 +0700
+@@ -64,8 +64,7 @@
+ 
+ docs_DATA = README help.txt about.txt translators.txt ChangeLog\
+ 	COPYING.GPLv2 COPYING.LGPLv2.1\
+-	translation/help.ru.txt\
+-	translation/help.pt_BR.txt
++	translation/help.ru.txt
+ 
+ desktopdir = $(datadir)/applications
+ desktop_DATA = deadbeef.desktop
+
