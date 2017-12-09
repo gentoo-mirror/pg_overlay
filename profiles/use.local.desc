@@ -278,6 +278,16 @@ net-p2p/rtorrent-ps:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
 net-print/samsung-unified-driver:network - Enable network printing support
+sys-devel/llvm:clang - Build the clang C/C++ compiler
+sys-devel/llvm:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
+sys-devel/llvm:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
+sys-devel/llvm:doc - Build and install the HTML documentation and regenerate the man pages
+sys-devel/llvm:gold - Build the gold linker plugin
+sys-devel/llvm:lldb - Build the lldb debugger
+sys-devel/llvm:multitarget - Build all host targets (default: host only)
+sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
+sys-devel/llvm:sanitize - Build compiler-rt's sanitizers
+sys-devel/llvm:static-analyzer - Install the Clang static analyzer (requires USE=clang)
 www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
 www-client/chromium:pic - Disable optimized assembly code that is not PIC friendly
