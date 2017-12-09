@@ -206,6 +206,11 @@ multilib_src_install() {
 	rm -rf "${ED%/}"/usr/include || die
 	mv "${ED%/}"/usr/lib/llvm/${SLOT}/include "${ED%/}"/usr/include || die
 
+	# install fuzzer libraries for clang (cmake rules were added in 6)
+	# https://bugs.gentoo.org/636840
+	into "/usr/lib/llvm/${SLOT}"
+	dolib.a "$(get_libdir)"/libLLVMFuzzer*.a
+
 	LLVM_LDPATHS+=( "${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)" )
 }
 
@@ -219,13 +224,6 @@ multilib_src_install_all() {
 		LDPATH="$( IFS=:; echo "${LLVM_LDPATHS[*]}" )"
 _EOF_
 	doenvd "${T}/10llvm-${revord}"
-
-	# install pre-generated manpages
-	if ! use doc; then
-		# (doman does not support custom paths)
-		insinto "/usr/lib/llvm/${SLOT}/share/man/man1"
-		doins "${WORKDIR}/llvm-manpages-${PV}/llvm"/*.1
-	fi
 
 	docompress "/usr/lib/llvm/${SLOT}/share/man"
 }
