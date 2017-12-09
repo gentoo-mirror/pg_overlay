@@ -1,4 +1,4 @@
-chromium-exclude-unwind-tables-r1.patch
+chromium-exclude_unwind_tables.patch
 0001-fix-building-without-safebrowsing.patch
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
