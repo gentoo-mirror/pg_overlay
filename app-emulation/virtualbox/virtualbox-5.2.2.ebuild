@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_5,3_6} )
 inherit eutils flag-o-matic java-pkg-opt-2 linux-info multilib pax-utils python-single-r1 toolchain-funcs udev xdg-utils
 
 MY_PV="${PV/beta/BETA}"
@@ -196,6 +196,8 @@ src_prepare() {
 	eapply_user
 
 	eapply "${FILESDIR}/dont_check_kbuild_revision.patch" 
+
+	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
 src_configure() {
