@@ -195,7 +195,8 @@ src_prepare() {
 
 	eapply_user
 
-	eapply "${FILESDIR}/dont_check_kbuild_revision.patch" 
+	eapply "${FILESDIR}/dont_check_kbuild_revision.patch"
+	eapply "${FILESDIR}/python3_support.patch"
 
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
