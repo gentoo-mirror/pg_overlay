@@ -202,7 +202,9 @@ src_configure() {
 
 	# Settings
 	mozconfig_annotate '' --enable-gold
+	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
 
