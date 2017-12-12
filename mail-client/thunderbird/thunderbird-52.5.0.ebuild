@@ -106,7 +106,7 @@ src_prepare() {
 
 	# Apply our patchset from firefox to thunderbird as well
 	pushd "${S}"/mozilla &>/dev/null || die
-	rm -f 1005_gentoo_specific_pgo.patch 2005_fix_pgo_build.patch 2006_fix_lto_builds.patch
+	rm -f ${WORKDIR}/firefox/1005_gentoo_specific_pgo.patch ${WORKDIR}/firefox/2005_fix_pgo_build.patch ${WORKDIR}/firefox/2006_fix_lto_builds.patch || die
 	eapply "${WORKDIR}/firefox"
 	popd &>/dev/null || die
 
