@@ -14,7 +14,7 @@ MOZ_LANGS=(en en-GB en-US ru )
 MOZ_PV="${PV/_beta/b}"
 
 # Patches
-PATCHFF="firefox-52.5-patches-01"
+PATCHFF="firefox-52.5-patches-02"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -106,7 +106,6 @@ src_prepare() {
 
 	# Apply our patchset from firefox to thunderbird as well
 	pushd "${S}"/mozilla &>/dev/null || die
-	rm -f ${WORKDIR}/firefox/1005_gentoo_specific_pgo.patch ${WORKDIR}/firefox/2005_fix_pgo_build.patch ${WORKDIR}/firefox/2006_fix_lto_builds.patch || die
 	eapply "${WORKDIR}/firefox"
 	popd &>/dev/null || die
 
