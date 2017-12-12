@@ -35,7 +35,7 @@ DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
 "
 
-CMAKE_MIN_VERSION="2.8.11"
+CMAKE_MIN_VERSION="3.1"
 DOCS=( AUTHORS ChangeLog README.md )
 
 src_configure() {

@@ -9,7 +9,7 @@ DESCRIPTION="A set of extra plugins for Qmmp"
 HOMEPAGE="http://qmmp.ylsoftware.com/"
 
 QMMP_DEV_BRANCH="1.3"
-ESVN_REPO_URI="svn://svn.code.sf.net/p/qmmp-dev/code/branches/${PN}-${QMMP_DEV_BRANCH}"
+ESVN_REPO_URI="svn://svn.code.sf.net/p/qmmp-dev/code/trunk/${PN}/"
 
 LICENSE="GPL-2"
 SLOT="0"
