@@ -35,5 +35,6 @@ src_prepare() {
 		-DUSE_HISTORY="$(usex history)"
 		-DUSE_GOOM=0
 		)
-	default
-}
+
+	cmake-utils_src_prepare
+	}
