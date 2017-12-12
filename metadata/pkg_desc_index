@@ -48,7 +48,7 @@ dev-util/qtutilities 5.8.1: Common C++ classes and routines used by my applicati
 dev-util/scons 3.0.0_pre: Extensible Python-based build utility
 kde-misc/PlayBar2 9999: MPRIS2 client, written in QML for Plasma 5 and GNU/Linux
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-mail-client/thunderbird 52.4.0 52.5.0: Thunderbird Mail Client
+mail-client/thunderbird 52.5.0: Thunderbird Mail Client
 media-fonts/iosevka 1.13.3: Open source coding font
 media-libs/libcue 2.1.0: CUE Sheet Parser Library
 media-libs/libepoxy 1.4.3: Epoxy is a library for handling OpenGL function pointer management for you
@@ -100,7 +100,7 @@ sys-libs/timezone-data 2017c_pre: Timezone data (/usr/share/zoneinfo) and utilit
 virtual/rust 1.20.0 1.21.0 1.22.1: Virtual for Rust language compiler
 www-apps/rutorrent 3.7 9999: ruTorrent is a front-end for the popular Bittorrent client rTorrent
 www-client/chromium 63.0.3239.71 63.0.3239.83 63.0.3239.84 63.0.3239.90: Open-source version of Google Chrome web browser
-www-client/firefox 57.0 57.0.1 57.0.2: Firefox Web Browser
+www-client/firefox 57.0.2: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
