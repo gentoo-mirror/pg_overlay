@@ -121,6 +121,9 @@ multilib_src_configure() {
 
 		# disable OCaml bindings (now in dev-ml/llvm-ocaml)
 		-DOCAMLFIND=NO
+
+		-DLLVM_ENABLE_LLD=ON
+		-DLLVM_ENABLE_LTO=THIN
 	)
 
 #	Note: go bindings have no CMake rules at the moment
