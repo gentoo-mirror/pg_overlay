@@ -49,15 +49,6 @@ dev-qt/qtdeclarative:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtdeclarative:localstorage - Build the LocalStorage import for QtQuick (requires QtSql)
 dev-qt/qtdeclarative:widgets - Enable QtWidgets support
 dev-qt/qtdeclarative:xml - Build the XmlListModel import for QtQuick (requires QtXmlPatterns)
-kde-apps/okular:chm - Enable support for Microsoft Compiled HTML Help files
-kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
-kde-apps/okular:image-backend - Enable image viewing support
-kde-apps/okular:markdown - Enable Markdown support via app-text/discount
-kde-apps/okular:mobi - Enable mobipocket support
-kde-apps/okular:mobile - Enable Plasma mobile support
-kde-apps/okular:plucker - Enable Plucker E-Book for Palm OS devices support
-kde-apps/okular:share - Enable support for a share menu using dev-libs/purpose
-kde-apps/okular:speech - Enable text-to-speech support
 mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
 mail-client/thunderbird:crypt - Enable encryption support with enigmail
 mail-client/thunderbird:custom-optimization - Fine-tune custom compiler optimizations (-Os, -O0, -O1, -O2, -O3)
