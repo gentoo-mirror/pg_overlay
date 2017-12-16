@@ -263,7 +263,6 @@ media-video/ffmpeg:x265 - Enables HEVC encoding with media-libs/x265.
 media-video/ffmpeg:zeromq - Enables net-libs/zeromq support with the zmq/azmq filters.
 media-video/ffmpeg:zimg - Enables media-libs/zimg based scale filter.
 media-video/ffmpeg:zvbi - Enables media-libs/zvbi based teletext decoder.
-media-video/libva-utils:drm - Enables VA/DRM API support.
 media-video/mpv:archive - Enable support for various archive formats via app-arch/libarchive
 media-video/mpv:bluray - Enable playback of Blu-ray filesystems
 media-video/mpv:cli - Build mpv CLI player
@@ -375,7 +374,6 @@ x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
 x11-libs/cairo:utils - Build support for Cairo script and trace utilities
 x11-libs/cairo:valgrind - Built-in support to mark memory regions
-x11-libs/libva-intel-driver:drm - Enables VA/DRM API support.
 x11-libs/wxGTK:gnome - Use gnome-base/libgnomeprintui for printing tasks.
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
