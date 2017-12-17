@@ -143,7 +143,7 @@ src_prepare() {
 	chmod +x "${S}"/waf || die
 	sed -i 's/1.9.8/1.9.14/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
-	default src_prepare
+	default
 }
 
 src_configure() {

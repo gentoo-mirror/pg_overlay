@@ -141,6 +141,7 @@ RDEPEND="${COMMON_DEPEND}
 PATCHES=(
 	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
 	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
+	"${FILESDIR}/${PN}-libva2.patch" #641384
 )
 
 pkg_setup() {
@@ -153,7 +154,7 @@ src_prepare() {
 	sed -i 's/1.9.8/1.9.14/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	eapply "${FILESDIR}/${PV}"
-	default src_prepare
+	default
 }
 
 src_configure() {
