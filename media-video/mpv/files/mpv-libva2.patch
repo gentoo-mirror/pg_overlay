@@ -1,7 +1,7 @@
 From 2ecf240b1cd20875991a5b18efafbe799864ff7f Mon Sep 17 00:00:00 2001
 From: Mark Thompson <sw@jkqxz.net>
 Date: Mon, 9 Oct 2017 20:10:26 +0100
-Subject: vaapi: Use libva2 message callbacks
+Subject: [PATCH] vaapi: Use libva2 message callbacks
 
 They are no longer global, so they work vaguely sensibly.
 ---
@@ -86,6 +86,3 @@ index 6bedbbaa18..3b1cb9cc41 100644
  
          talloc_free(ctx);
      }
--- 
-cgit v1.1-22-g1649
-
