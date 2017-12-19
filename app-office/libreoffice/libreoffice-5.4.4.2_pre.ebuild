@@ -347,6 +347,8 @@ src_prepare() {
 			-e ":Keywords: s:pdf;::" \
 			sysui/desktop/menus/draw.desktop || die
 	fi
+
+	for i in $(cat "${FILESDIR}/fedora/series"); do eapply "${FILESDIR}/fedora/$i";done
 }
 
 src_configure() {

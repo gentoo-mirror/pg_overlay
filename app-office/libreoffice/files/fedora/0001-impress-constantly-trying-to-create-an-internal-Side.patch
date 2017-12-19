@@ -1,0 +1,60 @@
+From f090aa14bc07dccf58b47f466dda00ff2e302a10 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Wed, 15 Nov 2017 15:01:33 +0000
+Subject: [PATCH] impress constantly trying to create an internal SidebarView
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+I think since the sidebar was integrated that this is dead
+code belonging to the sidebars impress-only ancestor
+
+Nothing creates the SidebarView[1], so attempt fails, a failed attempt
+is scheduled in to try again on a configuration update timer
+
+configuration update timer fails to load missing SidebarView
+but broadcasts configuration update on each attemp
+
+when the presenter console gets a configuration update it
+refreshes its ui by loading the current slide
+
+if the current slide has notes and those notes are long enough
+to be scrolled and the user has scrolled to the end, then when the
+slide is reloaded the notes are at the top again.
+
+So presenter console notes scroll to the top after 5 seconds because
+the configuration update fired, because the previous configuration
+update didn't work.
+
+This is old lady that swallowed a fly level stuff
+
+[1] and I think its a typo here anyway and msSidebarViewURL should have
+been msSidebarPaneURL
+
+Change-Id: Ibfff16bb1092a49a8a54ca9697b5dc3819448af3
+Reviewed-on: https://gerrit.libreoffice.org/44766
+Tested-by: Jenkins <ci@libreoffice.org>
+Reviewed-by: Caolán McNamara <caolanm@redhat.com>
+Tested-by: Caolán McNamara <caolanm@redhat.com>
+(cherry picked from commit ee82c5b96898bb73f5df6fdda7da1f04c3c375cc)
+---
+ sd/source/ui/framework/module/ImpressModule.cxx | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/sd/source/ui/framework/module/ImpressModule.cxx b/sd/source/ui/framework/module/ImpressModule.cxx
+index 2c240d8..24e6a8c 100644
+--- a/sd/source/ui/framework/module/ImpressModule.cxx
++++ b/sd/source/ui/framework/module/ImpressModule.cxx
+@@ -43,9 +43,6 @@ void ImpressModule::Initialize (Reference<frame::XController>& rxController)
+     new SlideSorterModule(
+         rxController,
+         FrameworkHelper::msLeftImpressPaneURL);
+-    new ToolPanelModule(
+-        rxController,
+-        FrameworkHelper::msSidebarViewURL);
+     new ToolBarModule(rxController);
+     new ShellStackGuard(rxController);
+ }
+-- 
+2.9.5
+

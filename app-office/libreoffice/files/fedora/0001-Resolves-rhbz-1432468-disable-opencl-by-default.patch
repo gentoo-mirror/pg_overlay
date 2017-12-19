@@ -1,0 +1,26 @@
+From b54cfe9d3d22fdd40f7015bd343df8620c983779 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Mon, 27 Mar 2017 11:47:01 +0100
+Subject: [PATCH] Resolves: rhbz#1432468 disable opencl by default
+
+Change-Id: Ie037fcabdd219f195425979dd721501fb5527573
+---
+ officecfg/registry/schema/org/openoffice/Office/Common.xcs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/officecfg/registry/schema/org/openoffice/Office/Common.xcs b/officecfg/registry/schema/org/openoffice/Office/Common.xcs
+index 946bd32..284d694 100644
+--- a/officecfg/registry/schema/org/openoffice/Office/Common.xcs
++++ b/officecfg/registry/schema/org/openoffice/Office/Common.xcs
+@@ -5670,7 +5670,7 @@
+           <desc>Determines whether OpenCL can be used, when available, to speed up
+           some operations.</desc>
+         </info>
+-        <value>true</value>
++        <value>false</value>
+       </prop>
+       <prop oor:name="OpenCLBlackList" oor:type="oor:string-list" oor:nillable="false">
+         <!-- UIHints: Tools - Options General OpenCL -->
+-- 
+2.9.3
+

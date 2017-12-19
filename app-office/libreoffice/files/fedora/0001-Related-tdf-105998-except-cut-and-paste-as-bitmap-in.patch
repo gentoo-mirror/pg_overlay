@@ -1,0 +1,74 @@
+From 6e5d7b41eaee08cd4ff169f2268e4ca9c00326d2 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Tue, 5 Dec 2017 17:13:28 +0000
+Subject: [PATCH] Related: tdf#105998 except cut and paste as bitmap instead of
+ export
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Take a drawing rectangle in draw and cut and paste as bitmap to writer.  The
+hairline border along the very right/bottom edge of the bitmap appear missing.
+
+fallback to default handlers which can distort the hairline to be visible
+
+Change-Id: Iedb580f65879628839c83e41092745ae7c11267c
+Reviewed-on: https://gerrit.libreoffice.org/45902
+Tested-by: Jenkins <ci@libreoffice.org>
+Reviewed-by: Caolán McNamara <caolanm@redhat.com>
+Tested-by: Caolán McNamara <caolanm@redhat.com>
+---
+ .../source/processor2d/vclpixelprocessor2d.cxx     | 23 ++++++++++++++++++----
+ 1 file changed, 19 insertions(+), 4 deletions(-)
+
+diff --git a/drawinglayer/source/processor2d/vclpixelprocessor2d.cxx b/drawinglayer/source/processor2d/vclpixelprocessor2d.cxx
+index 4b5e45c..adde2ab 100644
+--- a/drawinglayer/source/processor2d/vclpixelprocessor2d.cxx
++++ b/drawinglayer/source/processor2d/vclpixelprocessor2d.cxx
+@@ -41,6 +41,7 @@
+ #include <helperwrongspellrenderer.hxx>
+ #include <drawinglayer/primitive2d/fillhatchprimitive2d.hxx>
+ #include <basegfx/polygon/b2dpolygontools.hxx>
++#include <basegfx/polygon/b2dpolypolygontools.hxx>
+ #include <vcl/hatch.hxx>
+ #include <tools/diagnose_ex.h>
+ #include <com/sun/star/awt/PosSize.hpp>
+@@ -248,10 +249,6 @@ namespace drawinglayer
+                 maBColorModifierStack.getModifiedColor(
+                     rSource.getLineAttribute().getColor()));
+ 
+-            mpOutputDevice->SetFillColor();
+-            mpOutputDevice->SetLineColor(Color(aLineColor));
+-            aHairLinePolyPolygon.transform(maCurrentTransformation);
+-
+             double fLineWidth(rSource.getLineAttribute().getWidth());
+ 
+             if(basegfx::fTools::more(fLineWidth, 0.0))
+@@ -272,6 +269,24 @@ namespace drawinglayer
+                 fLineWidth = 0.0;
+             }
+ 
++            //Related: tdf#105998 cut and paste as bitmap of shape from draw to
++            //writer.  If we are a hairline along the very right/bottom edge of
++            //the canvas then fallback to defaults which can distort the
++            //hairline inside the paintable area
++            if (fLineWidth == 0.0)
++            {
++                Size aSize = mpOutputDevice->GetOutputSize();
++                basegfx::B2DRange aRange = aHairLinePolyPolygon.getB2DRange();
++                basegfx::B2DRange aOutputRange = aRange;
++                aOutputRange.transform(maCurrentTransformation);
++                if (std::round(aOutputRange.getMaxX()) == aSize.Width() || std::round(aOutputRange.getMaxY()) == aSize.Height())
++                    return false;
++            }
++
++            mpOutputDevice->SetFillColor();
++            mpOutputDevice->SetLineColor(Color(aLineColor));
++            aHairLinePolyPolygon.transform(maCurrentTransformation);
++
+             bool bHasPoints(false);
+             bool bTryWorked(false);
+ 
+-- 
+2.14.3
+
