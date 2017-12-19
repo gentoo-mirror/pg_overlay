@@ -126,6 +126,8 @@ src_prepare() {
 	# gtk-update-icon-cache is installed by dev-util/gtk-update-icon-cache
 	eapply "${FILESDIR}"/${PN}-3.22.2-update-icon-cache.patch
 
+	for i in $(cat "${FILESDIR}/debian/series"); do eapply "${FILESDIR}/debian/$i";done
+
 	eautoreconf
 	gnome2_src_prepare
 }
