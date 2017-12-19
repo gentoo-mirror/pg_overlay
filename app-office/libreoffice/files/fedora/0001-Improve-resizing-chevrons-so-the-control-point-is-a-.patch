@@ -1,0 +1,92 @@
+From 7126bc7730242e80a04d704256d2cf7a244b3cf0 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
+Date: Mon, 25 Sep 2017 14:45:51 +0100
+Subject: [PATCH] Improve resizing chevrons so the control point is a fixed
+ distance from end
+
+during resizing, because...
+
+"If I want to use LibreOffice Draw to illustrate process steps with chevrons
+(which I do a lot, working on for example customer project roadmaps), I always
+get stuck if the steps I want to illustrate are not equal lengths, because the
+sizes/angles of the chevron "arrow heads" are proportional to the length of the
+chevron, rather than being fixed, and thus don't "fit" together. Which makes
+for an incredibly ugly diagram."
+
+Change-Id: Ib8b5e0ea7db5383cae754127023f7ab12d748537
+---
+ include/svx/svdoashp.hxx       |  3 ++-
+ svx/source/svdraw/svdoashp.cxx | 17 ++++++++++++++++-
+ 2 files changed, 18 insertions(+), 2 deletions(-)
+
+diff --git a/include/svx/svdoashp.hxx b/include/svx/svdoashp.hxx
+index ea222ed..85f5e9d 100644
+--- a/include/svx/svdoashp.hxx
++++ b/include/svx/svdoashp.hxx
+@@ -57,11 +57,12 @@ enum class CustomShapeHandleModes
+     RESIZE_ABSOLUTE_Y    = 8,
+     MOVE_SHAPE           = 16,
+     ORTHO4               = 32,
++    RESIZE_ABSOLUTE_NEGX = 64
+ };
+ 
+ namespace o3tl
+ {
+-    template<> struct typed_flags<CustomShapeHandleModes> : is_typed_flags<CustomShapeHandleModes, 63> {};
++    template<> struct typed_flags<CustomShapeHandleModes> : is_typed_flags<CustomShapeHandleModes, 127> {};
+ }
+ 
+ struct SdrCustomShapeInteraction
+diff --git a/svx/source/svdraw/svdoashp.cxx b/svx/source/svdraw/svdoashp.cxx
+index 5323375..4f01a19 100644
+--- a/svx/source/svdraw/svdoashp.cxx
++++ b/svx/source/svdraw/svdoashp.cxx
+@@ -617,6 +617,11 @@ std::vector< SdrCustomShapeInteraction > SdrObjCustomShape::GetInteractionHandle
+                         }
+                         break;
+ 
++                        case mso_sptChevron :
++                        case mso_sptHomePlate :
++                             nMode |= CustomShapeHandleModes::RESIZE_ABSOLUTE_NEGX;
++                        break;
++
+                         case mso_sptWedgeRectCallout :
+                         case mso_sptWedgeRRectCallout :
+                         case mso_sptCloudCallout :
+@@ -1523,6 +1528,11 @@ void SdrObjCustomShape::NbcResize( const Point& rRef, const Fraction& rxFact, co
+                 sal_Int32 nX = ( aIter->aPosition.X - aOld.Left() ) + maRect.Left();
+                 aIter->xInteraction->setControllerPosition( css::awt::Point( nX, aIter->xInteraction->getPosition().Y ) );
+             }
++            else if ( aIter->nMode & CustomShapeHandleModes::RESIZE_ABSOLUTE_NEGX )
++            {
++                sal_Int32 nX = maRect.Right() - (aOld.Right() - aIter->aPosition.X);
++                aIter->xInteraction->setControllerPosition( css::awt::Point( nX, aIter->xInteraction->getPosition().Y ) );
++            }
+             if ( aIter->nMode & CustomShapeHandleModes::RESIZE_ABSOLUTE_Y )
+             {
+                 sal_Int32 nY = ( aIter->aPosition.Y - aOld.Top() ) + maRect.Top();
+@@ -1535,6 +1545,7 @@ void SdrObjCustomShape::NbcResize( const Point& rRef, const Fraction& rxFact, co
+     }
+     InvalidateRenderGeometry();
+ }
++
+ void SdrObjCustomShape::NbcRotate( const Point& rRef, long nAngle, double sn, double cs )
+ {
+     bool bMirroredX = IsMirroredX();
+@@ -1933,8 +1944,12 @@ void SdrObjCustomShape::DragResizeCustomShape( const tools::Rectangle& rNewRect
+             {
+                 if ( aIter->nMode & CustomShapeHandleModes::RESIZE_FIXED )
+                     aIter->xInteraction->setControllerPosition( aIter->aPosition );
+-                if ( aIter->nMode & CustomShapeHandleModes::RESIZE_ABSOLUTE_X )
++                if ( aIter->nMode & CustomShapeHandleModes::RESIZE_ABSOLUTE_X ||
++                     aIter->nMode & CustomShapeHandleModes::RESIZE_ABSOLUTE_NEGX )
+                 {
++                    if (aIter->nMode & CustomShapeHandleModes::RESIZE_ABSOLUTE_NEGX)
++                        bOldMirroredX = !bOldMirroredX;
++
+                     sal_Int32 nX;
+                     if ( bOldMirroredX )
+                     {
+-- 
+2.9.5
+

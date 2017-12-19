@@ -1,0 +1,11 @@
+0001-don-t-suppress-crashes.patch
+0001-Related-tdf-106100-recover-mangled-svg-in-presentati.patch
+0001-Resolves-rhbz-1432468-disable-opencl-by-default.patch
+0001-rename-IsAutoCapitalizeWordDelim-to-NonFieldWordDeli.patch
+0002-consider-field-marks-as-text-for-auto-quotes.patch
+0001-gtk3-only-for-3.20.patch
+0001-Improve-resizing-chevrons-so-the-control-point-is-a-.patch
+0001-Resolves-tdf-42873-videos-in-presenter-console-mispl.patch
+0001-impress-constantly-trying-to-create-an-internal-Side.patch
+0001-Related-tdf-105998-except-cut-and-paste-as-bitmap-in.patch
+0001-always-install-fc_local.conf-on-linux.patch
