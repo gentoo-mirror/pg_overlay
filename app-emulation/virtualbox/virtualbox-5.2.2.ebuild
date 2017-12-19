@@ -55,7 +55,7 @@ RDEPEND="!app-emulation/virtualbox-bin
 	udev? ( >=virtual/udev-171 )
 	vnc? ( >=net-libs/libvncserver-0.9.9 )"
 DEPEND="${RDEPEND}
-	>=dev-util/kbuild-0.1.9998_pre20131130-r1
+	>=dev-util/kbuild-0.1.9998.3127
 	>=dev-lang/yasm-0.6.2
 	sys-devel/bin86
 	sys-libs/libcap
@@ -197,7 +197,6 @@ src_prepare() {
 
 	eapply_user
 
-	eapply "${FILESDIR}/dont_check_kbuild_revision.patch"
 	eapply "${FILESDIR}/python3_support.patch"
 
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
