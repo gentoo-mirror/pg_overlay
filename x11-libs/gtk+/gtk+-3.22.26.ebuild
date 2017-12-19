@@ -125,6 +125,7 @@ src_prepare() {
 
 	# gtk-update-icon-cache is installed by dev-util/gtk-update-icon-cache
 	eapply "${FILESDIR}"/${PN}-3.22.2-update-icon-cache.patch
+	eapply "${FILESDIR}"/0001-entry-Undo-ABI-breakage-from-addition-of-insert_emoj.patch
 
 	eautoreconf
 	gnome2_src_prepare
