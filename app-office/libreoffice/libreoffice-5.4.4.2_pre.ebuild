@@ -348,7 +348,7 @@ src_prepare() {
 			sysui/desktop/menus/draw.desktop || die
 	fi
 
-	for i in $(cat "${FILESDIR}/fedoras/series"); do eapply "${FILESDIR}/fedora/$i";done
+	for i in $(cat "${FILESDIR}/fedora/series"); do eapply "${FILESDIR}/fedora/$i";done
 }
 
 src_configure() {
