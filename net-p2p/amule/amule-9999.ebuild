@@ -25,7 +25,7 @@ COMMON_DEPEND="
 	upnp? ( net-libs/libupnp:* )
 	remote? ( media-libs/libpng:0=
 	unicode? ( media-libs/gd:= ) )
-	boost? ( dev-libs/boost )
+	boost? ( dev-libs/boost:= )
 	!net-p2p/imule"
 DEPEND="${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}"
