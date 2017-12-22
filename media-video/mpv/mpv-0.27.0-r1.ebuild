@@ -97,7 +97,7 @@ COMMON_DEPEND="
 	vaapi? (
 		!libav? ( >=media-video/ffmpeg-3.3:0 )
 		libav? ( >=media-video/libav-13:0 )
-		x11-libs/libva[drm?,X?,wayland?]
+		x11-libs/libva:=[drm?,X?,wayland?]
 	)
 	vdpau? (
 		!libav? ( >=media-video/ffmpeg-3.3:0 )
@@ -141,7 +141,6 @@ RDEPEND="${COMMON_DEPEND}
 PATCHES=(
 	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
 	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
-	"${FILESDIR}/${PN}-libva2.patch" #641384
 )
 
 pkg_setup() {
@@ -154,7 +153,7 @@ src_prepare() {
 	sed -i 's/1.9.8/1.9.14/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	eapply "${FILESDIR}/${PV}"
-	default
+	default_src_prepare
 }
 
 src_configure() {
