@@ -3,6 +3,8 @@
 
 EAPI=6
 
+inherit autotools
+
 DESCRIPTION="Compiles finite state machines from regular languages into executable code"
 HOMEPAGE="https://www.colm.net/open-source/ragel/"
 SRC_URI="https://www.colm.net/files/ragel/${P}.tar.gz"
