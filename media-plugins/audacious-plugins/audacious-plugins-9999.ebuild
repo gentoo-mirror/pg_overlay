@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 PLOCALES="ar be bg ca cmn cs da de el en_GB es_AR es_MX es et eu fa_IR fi fr gl hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
 
@@ -14,11 +14,12 @@ EGIT_REPO_URI="https://github.com/audacious-media-player/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="aac +adplug alsa ampache aosd bs2b cdda cue ffmpeg flac fluidsynth gnome hotkeys http gme gtk3 jack lame libav
-	libnotify libsamplerate lirc mms modplug mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile soxr vorbis wavpack"
+	libnotify libsamplerate lirc mms modplug mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile soxr speedpitch vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
 	qt5? ( !libnotify )
-	|| ( alsa jack pulseaudio sdl )"
+	|| ( alsa jack pulseaudio sdl )
+	ampache? ( qt5 http )"
 
 # The following plugins REQUIRE a GUI build of audacious, because non-GUI
 # builds do NOT install the libaudgui library & headers.
@@ -45,7 +46,7 @@ RDEPEND="
 	~media-sound/audacious-${PV}[gtk3?,qt5?]
 	aac? ( >=media-libs/faad2-2.7 )
 	alsa? ( >=media-libs/alsa-lib-1.0.16 )
-	ampache? ( www-apps/ampache )
+	ampache? ( =media-libs/ampache_browser-1* )
 	aosd? (
 		x11-libs/libXrender
 		x11-libs/libXcomposite
@@ -63,9 +64,7 @@ RDEPEND="
 	)
 	fluidsynth? ( media-sound/fluidsynth )
 	http? ( >=net-libs/neon-0.26.4 )
-	gtk3? (
-		x11-libs/gtk+:3
-	)
+	gtk3? ( x11-libs/gtk+:3 )
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
@@ -75,11 +74,11 @@ RDEPEND="
 	)
 	jack? (
 		>=media-libs/bio2jack-0.4
-		media-sound/jack-audio-connection-kit
+		virtual/jack
 	)
 	lame? ( media-sound/lame )
 	libnotify? ( x11-libs/libnotify )
-	libsamplerate? ( media-libs/libsamplerate )
+	libsamplerate? ( media-libs/libsamplerate:= )
 	lirc? ( app-misc/lirc )
 	mms? ( >=media-libs/libmms-0.3 )
 	modplug? ( media-libs/libmodplug )
@@ -90,6 +89,7 @@ RDEPEND="
 	sid? ( >=media-libs/libsidplayfp-1.0.0 )
 	sndfile? ( >=media-libs/libsndfile-1.0.17-r1 )
 	soxr? ( media-libs/soxr )
+	speedpitch? ( media-libs/libsamplerate:= )
 	vorbis? (
 		>=media-libs/libvorbis-1.2.0
 		>=media-libs/libogg-1.1.3
@@ -108,7 +108,7 @@ src_unpack() {
 		git-r3_src_unpack
 	else
 		EGIT_BRANCH="master-gtk3"
-		EGIT_COMMIT="$EGIT_BRANCH"		
+		EGIT_COMMIT="$EGIT_BRANCH"
 		git-r3_src_unpack
 	fi
 }
@@ -133,7 +133,6 @@ src_configure() {
 	econf \
 		--enable-mpris2 \
 		--enable-songchange \
-		--enable-speedpitch \
 		--disable-oss4 \
 		--disable-qtaudio \
 		--disable-qtglspectrum \
@@ -170,6 +169,7 @@ src_configure() {
 		$(use_enable sid) \
 		$(use_enable sndfile) \
 		$(use_enable soxr) \
+		$(use_enable speedpitch) \
 		$(use_enable vorbis) \
 		$(use_enable wavpack) \
 		$(use_with ffmpeg ffmpeg $(usex libav libav ffmpeg))
