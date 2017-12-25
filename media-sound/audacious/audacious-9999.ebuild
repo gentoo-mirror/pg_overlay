@@ -5,7 +5,7 @@ EAPI=6
 
 PLOCALES="ar ast be bg ca cmn cs da de el en_GB eo es_AR es_MX es et eu fa_IR fi fr gl he hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ro ru si sk sq sr@latin sr sr_RS sv ta tr uk vi zh_CN zh_TW"
 
-inherit autotools eutils git-r3 l10n
+inherit autotools eutils git-r3 gnome2-utils l10n xdg-utils
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
 HOMEPAGE="http://audacious-media-player.org/"
@@ -28,11 +28,11 @@ RDEPEND="
 	>=x11-libs/pango-1.8.0
 	virtual/freedesktop-icon-theme
 	gtk3? ( x11-libs/gtk+:3 )
-	qt5? ( dev-qt/qtcore:5
-	      dev-qt/qtgui:5
-	      dev-qt/qtwidgets:5 )
-	"
-
+	qt5? (
+		dev-qt/qtcore:5
+		dev-qt/qtgui:5
+		dev-qt/qtwidgets:5
+	)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	nls? ( dev-util/intltool )"
@@ -53,6 +53,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	default
 	eautoreconf
 
 	rm_loc() {
@@ -85,4 +86,14 @@ src_install() {
 	doins -r "${WORKDIR}"/gentoo_ice/.
 	docinto gentoo_ice
 	dodoc "${WORKDIR}"/README
+}
+
+pkg_postinst() {
+	xdg_desktop_database_update
+	gnome2_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
+	gnome2_icon_cache_update
 }
