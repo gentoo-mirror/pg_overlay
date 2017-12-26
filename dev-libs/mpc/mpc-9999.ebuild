@@ -19,13 +19,13 @@ DEPEND=">=dev-libs/gmp-4.3.2[${MULTILIB_USEDEP},static-libs?]
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	$ECONF_SOURCE=${S} elibtoolize #347317
-	ECONF_SOURCE=${S} eautoreconf
+	ECONF_SOURCE=${S} elibtoolize #347317
+	#ECONF_SOURCE=${S} eautoreconf
 }
 
 multilib_src_configure() {
-	#ECONF_SOURCE=${S} econf $(use_enable static-libs static)
-	econf $(use_enable static-libs static)
+	ECONF_SOURCE=${S} econf $(use_enable static-libs static)
+	#econf $(use_enable static-libs static)
 	}
 
 multilib_src_install_all() {
