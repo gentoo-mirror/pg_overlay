@@ -1,0 +1,500 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sun, 12 Mar 2017 08:08:35 +0100
+Subject: Don't build testing suites and stuff
+
+We can't build the testsuites from upstream for now, some files contains
+non-free stuff from the DFSG POV and we have filtered those files and
+folder out before.
+---
+ mozilla/devtools/client/aboutdebugging/moz.build           |  8 +++++---
+ mozilla/devtools/client/animationinspector/moz.build       |  6 ++++--
+ mozilla/devtools/client/canvasdebugger/moz.build           |  4 +++-
+ mozilla/devtools/client/commandline/moz.build              |  4 +++-
+ mozilla/devtools/client/debugger/moz.build                 | 12 +++++++-----
+ mozilla/devtools/client/dom/moz.build                      |  4 +++-
+ mozilla/devtools/client/framework/moz.build                | 10 ++++++----
+ mozilla/devtools/client/inspector/components/moz.build     |  4 +++-
+ mozilla/devtools/client/inspector/computed/moz.build       |  4 +++-
+ mozilla/devtools/client/inspector/fonts/moz.build          |  4 +++-
+ mozilla/devtools/client/inspector/markup/moz.build         |  4 +++-
+ mozilla/devtools/client/inspector/moz.build                |  4 +++-
+ mozilla/devtools/client/inspector/rules/moz.build          |  4 +++-
+ mozilla/devtools/client/inspector/shared/moz.build         |  4 +++-
+ mozilla/devtools/client/jsonview/moz.build                 |  4 +++-
+ mozilla/devtools/client/netmonitor/har/moz.build           |  4 +++-
+ mozilla/devtools/client/netmonitor/moz.build               |  4 +++-
+ mozilla/devtools/client/performance/moz.build              |  6 ++++--
+ mozilla/devtools/client/projecteditor/moz.build            |  4 +++-
+ mozilla/devtools/client/responsive.html/moz.build          |  6 ++++--
+ mozilla/devtools/client/responsivedesign/moz.build         |  4 +++-
+ mozilla/devtools/client/scratchpad/moz.build               |  4 +++-
+ mozilla/devtools/client/shadereditor/moz.build             |  4 +++-
+ mozilla/devtools/client/shared/moz.build                   |  6 ++++--
+ mozilla/devtools/client/sourceeditor/moz.build             |  4 +++-
+ mozilla/devtools/client/storage/moz.build                  |  4 +++-
+ mozilla/devtools/client/styleeditor/moz.build              |  4 +++-
+ mozilla/devtools/client/webaudioeditor/moz.build           |  4 +++-
+ mozilla/devtools/client/webconsole/moz.build               |  4 +++-
+ mozilla/devtools/client/webconsole/net/moz.build           |  6 ++++--
+ .../client/webconsole/new-console-output/test/moz.build    | 10 ++++++----
+ mozilla/devtools/client/webide/moz.build                   | 14 ++++++++------
+ 32 files changed, 118 insertions(+), 54 deletions(-)
+
+diff --git a/mozilla/devtools/client/aboutdebugging/moz.build b/mozilla/devtools/client/aboutdebugging/moz.build
+index fd180ba..7cf529f 100644
+--- a/mozilla/devtools/client/aboutdebugging/moz.build
++++ b/mozilla/devtools/client/aboutdebugging/moz.build
+@@ -9,6 +9,8 @@ DIRS += [
+     'modules',
+ ]
+ 
+-BROWSER_CHROME_MANIFESTS += [
+-    'test/browser.ini'
+-]
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += [
++#    'test/browser.ini'
++#]
+diff --git a/mozilla/devtools/client/animationinspector/moz.build b/mozilla/devtools/client/animationinspector/moz.build
+index 60527da..8737cbd 100644
+--- a/mozilla/devtools/client/animationinspector/moz.build
++++ b/mozilla/devtools/client/animationinspector/moz.build
+@@ -4,8 +4,10 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+-XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++#XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
+ 
+ DIRS += [
+     'components'
+diff --git a/mozilla/devtools/client/canvasdebugger/moz.build b/mozilla/devtools/client/canvasdebugger/moz.build
+index 684fabc..bb149fc 100644
+--- a/mozilla/devtools/client/canvasdebugger/moz.build
++++ b/mozilla/devtools/client/canvasdebugger/moz.build
+@@ -7,4 +7,6 @@ DevToolsModules(
+     'panel.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/commandline/moz.build b/mozilla/devtools/client/commandline/moz.build
+index 22fc466..5ef6cab 100644
+--- a/mozilla/devtools/client/commandline/moz.build
++++ b/mozilla/devtools/client/commandline/moz.build
+@@ -2,4 +2,6 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/debugger/moz.build b/mozilla/devtools/client/debugger/moz.build
+index 9719ec0..6a2309e 100644
+--- a/mozilla/devtools/client/debugger/moz.build
++++ b/mozilla/devtools/client/debugger/moz.build
+@@ -13,8 +13,10 @@ DevToolsModules(
+     'panel.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += [
+-  'new/test/mochitest/browser.ini',
+-  'test/mochitest/browser.ini',
+-  'test/mochitest/browser2.ini'
+-]
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += [
++#  'new/test/mochitest/browser.ini',
++#  'test/mochitest/browser.ini',
++#  'test/mochitest/browser2.ini'
++#]
+diff --git a/mozilla/devtools/client/dom/moz.build b/mozilla/devtools/client/dom/moz.build
+index 1e04a09..24f6259 100644
+--- a/mozilla/devtools/client/dom/moz.build
++++ b/mozilla/devtools/client/dom/moz.build
+@@ -3,7 +3,9 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+ 
+ DIRS += [
+     'content',
+diff --git a/mozilla/devtools/client/framework/moz.build b/mozilla/devtools/client/framework/moz.build
+index 7b28b4b..65a0a77 100644
+--- a/mozilla/devtools/client/framework/moz.build
++++ b/mozilla/devtools/client/framework/moz.build
+@@ -4,10 +4,12 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+-TEST_HARNESS_FILES.xpcshell.devtools.client.framework.test += [
+-    'test/shared-redux-head.js',
+-]
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++#TEST_HARNESS_FILES.xpcshell.devtools.client.framework.test += [
++#    'test/shared-redux-head.js',
++#]
+ 
+ DevToolsModules(
+     'about-devtools-toolbox.js',
+diff --git a/mozilla/devtools/client/inspector/components/moz.build b/mozilla/devtools/client/inspector/components/moz.build
+index 5e4dd40..f8d132e 100644
+--- a/mozilla/devtools/client/inspector/components/moz.build
++++ b/mozilla/devtools/client/inspector/components/moz.build
+@@ -10,4 +10,6 @@ DevToolsModules(
+     'inspector-tab-panel.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/inspector/computed/moz.build b/mozilla/devtools/client/inspector/computed/moz.build
+index 5ce9503..930a13e 100644
+--- a/mozilla/devtools/client/inspector/computed/moz.build
++++ b/mozilla/devtools/client/inspector/computed/moz.build
+@@ -8,4 +8,6 @@ DevToolsModules(
+     'computed.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/inspector/fonts/moz.build b/mozilla/devtools/client/inspector/fonts/moz.build
+index a66982b..d75011f 100644
+--- a/mozilla/devtools/client/inspector/fonts/moz.build
++++ b/mozilla/devtools/client/inspector/fonts/moz.build
+@@ -8,4 +8,6 @@ DevToolsModules(
+     'fonts.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/inspector/markup/moz.build b/mozilla/devtools/client/inspector/markup/moz.build
+index 4d721cc..7a2368d 100644
+--- a/mozilla/devtools/client/inspector/markup/moz.build
++++ b/mozilla/devtools/client/inspector/markup/moz.build
+@@ -13,4 +13,6 @@ DevToolsModules(
+     'utils.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/inspector/moz.build b/mozilla/devtools/client/inspector/moz.build
+index bdf3e38..0d48850 100644
+--- a/mozilla/devtools/client/inspector/moz.build
++++ b/mozilla/devtools/client/inspector/moz.build
+@@ -20,4 +20,6 @@ DevToolsModules(
+     'toolsidebar.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/inspector/rules/moz.build b/mozilla/devtools/client/inspector/rules/moz.build
+index e826c14..582db04 100644
+--- a/mozilla/devtools/client/inspector/rules/moz.build
++++ b/mozilla/devtools/client/inspector/rules/moz.build
+@@ -13,4 +13,6 @@ DevToolsModules(
+     'rules.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/inspector/shared/moz.build b/mozilla/devtools/client/inspector/shared/moz.build
+index fd2239b..f3071de 100644
+--- a/mozilla/devtools/client/inspector/shared/moz.build
++++ b/mozilla/devtools/client/inspector/shared/moz.build
+@@ -13,4 +13,6 @@ DevToolsModules(
+     'utils.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/jsonview/moz.build b/mozilla/devtools/client/jsonview/moz.build
+index 06a98ed..3035baf 100644
+--- a/mozilla/devtools/client/jsonview/moz.build
++++ b/mozilla/devtools/client/jsonview/moz.build
+@@ -20,4 +20,6 @@ DevToolsModules(
+     'viewer-config.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/netmonitor/har/moz.build b/mozilla/devtools/client/netmonitor/har/moz.build
+index f6dd4af..416a11c 100644
+--- a/mozilla/devtools/client/netmonitor/har/moz.build
++++ b/mozilla/devtools/client/netmonitor/har/moz.build
+@@ -12,4 +12,6 @@ DevToolsModules(
+     'toolbox-overlay.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/netmonitor/moz.build b/mozilla/devtools/client/netmonitor/moz.build
+index 4b34b09..33a75f1 100644
+--- a/mozilla/devtools/client/netmonitor/moz.build
++++ b/mozilla/devtools/client/netmonitor/moz.build
+@@ -28,4 +28,6 @@ DevToolsModules(
+     'toolbar-view.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/performance/moz.build b/mozilla/devtools/client/performance/moz.build
+index 909d69d..327d04b 100644
+--- a/mozilla/devtools/client/performance/moz.build
++++ b/mozilla/devtools/client/performance/moz.build
+@@ -15,5 +15,7 @@ DevToolsModules(
+     'panel.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+-XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++#XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
+diff --git a/mozilla/devtools/client/projecteditor/moz.build b/mozilla/devtools/client/projecteditor/moz.build
+index 0494938..64a4463 100644
+--- a/mozilla/devtools/client/projecteditor/moz.build
++++ b/mozilla/devtools/client/projecteditor/moz.build
+@@ -6,4 +6,6 @@
+ 
+ DIRS += ['lib']
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/responsive.html/moz.build b/mozilla/devtools/client/responsive.html/moz.build
+index 79fbf3a..84ea36e 100644
+--- a/mozilla/devtools/client/responsive.html/moz.build
++++ b/mozilla/devtools/client/responsive.html/moz.build
+@@ -24,5 +24,7 @@ DevToolsModules(
+     'types.js',
+ )
+ 
+-XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
+-BROWSER_CHROME_MANIFESTS += ['test/browser/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
++#BROWSER_CHROME_MANIFESTS += ['test/browser/browser.ini']
+diff --git a/mozilla/devtools/client/responsivedesign/moz.build b/mozilla/devtools/client/responsivedesign/moz.build
+index 215b4e8..98d76e8 100644
+--- a/mozilla/devtools/client/responsivedesign/moz.build
++++ b/mozilla/devtools/client/responsivedesign/moz.build
+@@ -2,7 +2,9 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+ 
+ DevToolsModules(
+     'resize-commands.js',
+diff --git a/mozilla/devtools/client/scratchpad/moz.build b/mozilla/devtools/client/scratchpad/moz.build
+index da8257c..4241882 100644
+--- a/mozilla/devtools/client/scratchpad/moz.build
++++ b/mozilla/devtools/client/scratchpad/moz.build
+@@ -10,4 +10,6 @@ DevToolsModules(
+     'scratchpad-panel.js',
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/shadereditor/moz.build b/mozilla/devtools/client/shadereditor/moz.build
+index 684fabc..bb149fc 100644
+--- a/mozilla/devtools/client/shadereditor/moz.build
++++ b/mozilla/devtools/client/shadereditor/moz.build
+@@ -7,4 +7,6 @@ DevToolsModules(
+     'panel.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/shared/moz.build b/mozilla/devtools/client/shared/moz.build
+index 1c61970..9919891 100644
+--- a/mozilla/devtools/client/shared/moz.build
++++ b/mozilla/devtools/client/shared/moz.build
+@@ -4,8 +4,10 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+-XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++#XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
+ 
+ DIRS += [
+     'components',
+diff --git a/mozilla/devtools/client/sourceeditor/moz.build b/mozilla/devtools/client/sourceeditor/moz.build
+index 5081325..742a15f 100644
+--- a/mozilla/devtools/client/sourceeditor/moz.build
++++ b/mozilla/devtools/client/sourceeditor/moz.build
+@@ -15,4 +15,6 @@ DevToolsModules(
+     'editor.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/storage/moz.build b/mozilla/devtools/client/storage/moz.build
+index 0c7f2f4..65ed904 100644
+--- a/mozilla/devtools/client/storage/moz.build
++++ b/mozilla/devtools/client/storage/moz.build
+@@ -4,7 +4,9 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+ 
+ DevToolsModules(
+     'panel.js',
+diff --git a/mozilla/devtools/client/styleeditor/moz.build b/mozilla/devtools/client/styleeditor/moz.build
+index 4fc06b6..ff2a00f6 100644
+--- a/mozilla/devtools/client/styleeditor/moz.build
++++ b/mozilla/devtools/client/styleeditor/moz.build
+@@ -4,7 +4,9 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+ 
+ DevToolsModules(
+     'styleeditor-commands.js',
+diff --git a/mozilla/devtools/client/webaudioeditor/moz.build b/mozilla/devtools/client/webaudioeditor/moz.build
+index 684fabc..bb149fc 100644
+--- a/mozilla/devtools/client/webaudioeditor/moz.build
++++ b/mozilla/devtools/client/webaudioeditor/moz.build
+@@ -7,4 +7,6 @@ DevToolsModules(
+     'panel.js'
+ )
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+diff --git a/mozilla/devtools/client/webconsole/moz.build b/mozilla/devtools/client/webconsole/moz.build
+index c8324b3..c3c5cc6 100644
+--- a/mozilla/devtools/client/webconsole/moz.build
++++ b/mozilla/devtools/client/webconsole/moz.build
+@@ -4,7 +4,9 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += ['test/browser.ini']
+ 
+ DIRS += [
+     'net',
+diff --git a/mozilla/devtools/client/webconsole/net/moz.build b/mozilla/devtools/client/webconsole/net/moz.build
+index 1b9eca7..debfa26 100644
+--- a/mozilla/devtools/client/webconsole/net/moz.build
++++ b/mozilla/devtools/client/webconsole/net/moz.build
+@@ -15,5 +15,7 @@ DevToolsModules(
+     'net-request.js',
+ )
+ 
+-XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
+-BROWSER_CHROME_MANIFESTS += ['test/mochitest/browser.ini']
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#XPCSHELL_TESTS_MANIFESTS += ['test/unit/xpcshell.ini']
++#BROWSER_CHROME_MANIFESTS += ['test/mochitest/browser.ini']
+diff --git a/mozilla/devtools/client/webconsole/new-console-output/test/moz.build b/mozilla/devtools/client/webconsole/new-console-output/test/moz.build
+index da06c31..25a95b2 100644
+--- a/mozilla/devtools/client/webconsole/new-console-output/test/moz.build
++++ b/mozilla/devtools/client/webconsole/new-console-output/test/moz.build
+@@ -3,10 +3,12 @@
+ # License, v. 2.0. If a copy of the MPL was not distributed with this
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+-BROWSER_CHROME_MANIFESTS += [
+-  'fixtures/stub-generators/browser.ini',
+-  'mochitest/browser.ini',
+-]
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += [
++#  'fixtures/stub-generators/browser.ini',
++#  'mochitest/browser.ini',
++#]
+ 
+ DIRS += [
+     'fixtures'
+diff --git a/mozilla/devtools/client/webide/moz.build b/mozilla/devtools/client/webide/moz.build
+index c5dcb07..494a003 100644
+--- a/mozilla/devtools/client/webide/moz.build
++++ b/mozilla/devtools/client/webide/moz.build
+@@ -11,12 +11,14 @@ DIRS += [
+     'themes',
+ ]
+ 
+-BROWSER_CHROME_MANIFESTS += [
+-    'test/browser.ini'
+-]
+-MOCHITEST_CHROME_MANIFESTS += [
+-    'test/chrome.ini'
+-]
++# Don't build any testsuites. We have filteres out some needed content for
++# this as some files are not DFSG clean.
++#BROWSER_CHROME_MANIFESTS += [
++#    'test/browser.ini'
++#]
++#MOCHITEST_CHROME_MANIFESTS += [
++#    'test/chrome.ini'
++#]
+ 
+ JS_PREFERENCE_PP_FILES += [
+     'webide-prefs.js',
