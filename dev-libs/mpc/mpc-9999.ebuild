@@ -3,7 +3,7 @@
 
 EAPI="4"
 
-inherit eutils git-r3 libtool multilib-minimal
+inherit autotools eutils git-r3 libtool multilib-minimal
 
 DESCRIPTION="A library for multiprecision complex arithmetic with exact rounding"
 HOMEPAGE="http://mpc.multiprecision.org/"
