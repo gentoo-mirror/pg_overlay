@@ -7,7 +7,7 @@ inherit eutils git-r3 libtool multilib-minimal
 
 DESCRIPTION="A library for multiprecision complex arithmetic with exact rounding"
 HOMEPAGE="http://mpc.multiprecision.org/"
-EGIT_REPO_URI="ttps://scm.gforge.inria.fr/anonscm/git/${PN}/${PN}.git"
+EGIT_REPO_URI="https://scm.gforge.inria.fr/anonscm/git/${PN}/${PN}.git"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
