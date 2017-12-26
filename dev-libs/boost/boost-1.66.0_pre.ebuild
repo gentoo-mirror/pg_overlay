@@ -187,7 +187,8 @@ src_configure() {
 		)
 
 	OPTIONS+=(
-		--optimization=on
+		--optimization=speed
+		optimization=speed
 		pch=off
 		--boost-build="${EPREFIX}"/usr/share/boost-build
 		--prefix="${ED%/}/usr"
