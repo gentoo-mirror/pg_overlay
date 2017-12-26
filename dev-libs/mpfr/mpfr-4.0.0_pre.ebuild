@@ -1,17 +1,17 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 # NOTE: we cannot depend on autotools here starting with gcc-4.3.x
-inherit eutils libtool multilib-minimal poly-c_ebuilds
+inherit eutils libtool multilib-minimal
 
-REAL_PV=${MY_PV/_p*}
-REAL_P=${PN}-${REAL_PV}
-PLEVEL=${MY_PV/*p}
+MY_PV=${PV/_p*}
+MY_P=${PN}-${MY_PV}
+PLEVEL=${PV/*p}
 DESCRIPTION="library for multiple-precision floating-point computations with exact rounding"
 HOMEPAGE="http://www.mpfr.org/"
-SRC_URI="http://www.mpfr.org/mpfr-${REAL_PV}/${REAL_P}.tar.xz"
+SRC_URI="http://www.mpfr.org/mpfr-${MY_PV}/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0/6" # libmpfr.so version
@@ -21,16 +21,18 @@ IUSE="static-libs"
 RDEPEND=">=dev-libs/gmp-5.0.0[${MULTILIB_USEDEP},static-libs?]"
 DEPEND="${RDEPEND}"
 
-S=${WORKDIR}/${REAL_P}
+S=${WORKDIR}/${MY_P}
+
+HTML_DOCS=( doc/FAQ.html )
 
 src_prepare() {
-	if [[ ${PLEVEL} != ${MY_PV} ]] ; then
+	if [[ ${PLEVEL} != ${PV} ]] ; then
 		local i
 		for (( i = 1; i <= PLEVEL; ++i )) ; do
-			epatch "${FILESDIR}"/${REAL_PV}/patch$(printf '%02d' ${i})
+			epatch "${FILESDIR}"/${MY_PV}/patch$(printf '%02d' ${i})
 		done
 	fi
-	epatch_user
+	eapply_user
 	find . -type f -exec touch -r configure {} +
 	elibtoolize
 }
@@ -45,10 +47,6 @@ multilib_src_configure() {
 }
 
 multilib_src_install_all() {
+	rm "${ED}"/usr/share/doc/"${P}"/COPYING*
 	use static-libs || find "${ED}"/usr -name '*.la' -delete
-
-	# clean up html/license install
-	pushd "${ED}"/usr/share/doc/${PF} >/dev/null || die
-	dohtml *.html && rm COPYING* *.html
-	popd >/dev/null || die
 }
