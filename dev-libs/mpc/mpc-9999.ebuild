@@ -19,7 +19,7 @@ DEPEND=">=dev-libs/gmp-4.3.2[${MULTILIB_USEDEP},static-libs?]
 RDEPEND="${DEPEND}"
 
 src_prepare() {
-	elibtoolize #347317
+	#elibtoolize #347317
 	eautoreconf
 }
 
