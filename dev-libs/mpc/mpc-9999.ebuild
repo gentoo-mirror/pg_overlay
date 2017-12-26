@@ -20,7 +20,7 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	#elibtoolize #347317
-	eautoreconf
+	ECONF_SOURCE=${S} eautoreconf
 }
 
 multilib_src_configure() {
