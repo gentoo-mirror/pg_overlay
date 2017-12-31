@@ -27,7 +27,7 @@ src_prepare() {
 }
 
 src_configure() {
-	econf --prefix=${EPREFIX}/usr --sysconfdir=${EPREFIX}/etc PYTHON=$PYTHON_USEDEP
+	econf --prefix=${EPREFIX}/usr --sysconfdir=${EPREFIX}/etc PYTHON=python2.7
 }
 
 src_compile() {
