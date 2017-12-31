@@ -27,8 +27,7 @@ src_prepare() {
 }
 
 src_configure() {
-	econf --prefix=/usr \ 
-		--sysconfdir=/etc
+	econf --prefix=${EPREFIX}/usr --sysconfdir=${EPREFIX}/etc
 }
 
 src_compile() {
