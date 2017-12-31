@@ -17,7 +17,6 @@ IUSE="aac +adplug alsa ampache aosd bs2b cdda cue ffmpeg flac fluidsynth gnome h
 	libnotify libsamplerate lirc mms modplug mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile soxr speedpitch vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
-	qt5? ( !libnotify )
 	|| ( alsa jack pulseaudio sdl )
 	ampache? ( qt5 http )"
 
@@ -41,7 +40,7 @@ REQUIRED_USE="
 RDEPEND="
 	app-arch/unzip
 	dev-libs/dbus-glib
-	dev-libs/glib[utils]
+	dev-libs/glib
 	dev-libs/libxml2:2
 	~media-sound/audacious-${PV}[gtk3?,qt5?]
 	aac? ( >=media-libs/faad2-2.7 )
@@ -70,8 +69,7 @@ RDEPEND="
 		dev-qt/qtgui:5
 		dev-qt/qtmultimedia:5
 		dev-qt/qtwidgets:5
-		media-libs/adplug
-	)
+		)
 	jack? (
 		>=media-libs/bio2jack-0.4
 		virtual/jack
@@ -115,15 +113,16 @@ src_unpack() {
 
 src_prepare() {
 	default
-	eautoreconf
-
+	
 	rm_loc() {
 		rm -vf "po/${1}.po" || die
 		sed -i s/${1}.po// po/Makefile || die
 	}
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rm_loc
-}
+
+	eautoreconf
+	}
 
 src_configure() {
 	if ! use mp3 ; then
