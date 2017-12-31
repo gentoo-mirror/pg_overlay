@@ -17,7 +17,6 @@ IUSE="aac +adplug alsa ampache aosd bs2b cdda cue ffmpeg flac fluidsynth gnome h
 	libnotify libsamplerate lirc mms modplug mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile soxr speedpitch vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
-	qt5? ( !libnotify )
 	|| ( alsa jack pulseaudio sdl )
 	ampache? ( qt5 http )"
 
@@ -70,8 +69,7 @@ RDEPEND="
 		dev-qt/qtgui:5
 		dev-qt/qtmultimedia:5
 		dev-qt/qtwidgets:5
-		media-libs/adplug
-	)
+		)
 	jack? (
 		>=media-libs/bio2jack-0.4
 		virtual/jack
