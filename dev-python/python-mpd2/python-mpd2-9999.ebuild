@@ -4,7 +4,7 @@
 EAPI=6
 PYTHON_COMPAT=( python{2_7,3_5,3_6} pypy )
 
-inherit distutils-r1 git-r3 vcs-snapshot
+inherit distutils-r1 git-r3
 
 DESCRIPTION="Python MPD client library"
 HOMEPAGE="https://github.com/Mic92/python-mpd2"
