@@ -23,15 +23,18 @@ DEPEND=">=dev-lang/python-3.4
 
 src_prepare() {
 	eautoreconf
-	default_src_prepare
 	default
 }
 
-#src_configure() {
-#	econf --prefix=/usr \ 
-#		--sysconfdir=/etc
-#}
+src_configure() {
+	econf --prefix=/usr \ 
+		--sysconfdir=/etc
+}
 
-#src_install() {
-#	emake install DESTDIR="${D}" || die "Failed to install"
-#}
+src_compile() {
+	emake
+}
+
+src_install() {
+	emake install DESTDIR="${D}" || die "Failed to install"
+}
