@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=(python{2_7,3_6)}
+PYTHON_COMPAT=(python{2_7,3_6})
 
 inherit autotools distutils-r1 eutils git-r3 l10n
 
@@ -27,7 +27,7 @@ src_prepare() {
 }
 
 src_configure() {
-	econf --prefix=${EPREFIX}/usr --sysconfdir=${EPREFIX}/etc PYTHON=python2.7
+	econf --prefix=${EPREFIX}/usr --sysconfdir=${EPREFIX}/etc PYTHON=$PYTHON_USEDEP
 }
 
 src_compile() {
