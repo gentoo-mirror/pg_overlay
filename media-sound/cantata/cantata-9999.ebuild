@@ -48,7 +48,7 @@ RDEPEND="
 	)
 	streaming? ( media-video/vlc:0= )
 	taglib? (
-		media-libs/taglib[asf(+),mp4(+)]
+		media-libs/taglib
 		media-libs/taglib-extras
 		udisks? ( sys-fs/udisks:2 )
 	)
