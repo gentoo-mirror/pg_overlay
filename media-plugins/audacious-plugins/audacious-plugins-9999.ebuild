@@ -131,7 +131,7 @@ src_configure() {
 
 	econf \
 		--enable-mpris2 \
-		--enable-songchange \
+		--disable-songchange \
 		--disable-oss4 \
 		--disable-qtaudio \
 		--disable-qtglspectrum \
@@ -177,15 +177,7 @@ src_configure() {
 	sed -i 's/asx3 //' extra.mk || die
 	sed -i 's/pls //' extra.mk || die
 	sed -i 's/xspf //' extra.mk || die
-	sed -i 's/compressor //' extra.mk || die
-	sed -i 's/crossfade //' extra.mk || die
-	sed -i 's/crystalizer //' extra.mk || die
-	sed -i 's/ladspa //' extra.mk || die
-	sed -i 's/mixer //' extra.mk || die
-	sed -i 's/silence-removal //' extra.mk || die
-	sed -i 's/stereo_plugin //' extra.mk || die
-	sed -i 's/voice_removal //' extra.mk || die
-	sed -i 's/echo_plugin//' extra.mk || die
+	sed -i '/EFFECT_PLUGINS/d' extra.mk || die
 	sed -i 's/playlist-manager-qt //' extra.mk || die
 	sed -i 's/search-tool-qt //' extra.mk || die
 	sed -i 's/skins-qt //' extra.mk || die
@@ -197,7 +189,7 @@ src_configure() {
 	sed -i 's/tonegen //' extra.mk || die
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
-	sed -i 's/filewriter//' extra.mk || die
+	sed -i 's/ filewriter//' extra.mk || die
 	sed -i 's/gio //' extra.mk || die
-	sed -i 's/Visualization//' extra.mk || die
+	sed -i '/VISUALIZATION_PLUGINS/d' extra.mk || die
 }
