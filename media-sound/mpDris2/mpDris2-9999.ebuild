@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=(python{3_5,3_6})
 
-inherit autotools distutils-r1 git-r3
+inherit autotools git-r3
 
 MY_PN="${PN/d/D}"
 
@@ -27,6 +27,10 @@ src_prepare() {
 	eautoreconf
 	#default_src_prepare
 	default
+}
+
+src_configure()
+	econf --prefix=/usr --sysconfdir=/etc
 }
 
 src_install() {
