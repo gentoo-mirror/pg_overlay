@@ -177,8 +177,7 @@ src_configure() {
 	sed -i 's/asx3 //' extra.mk || die
 	sed -i 's/pls //' extra.mk || die
 	sed -i 's/xspf //' extra.mk || die
-	sed -i '/EFFECT_PLUGINS/d' extra.mk || die
-	sed -i '/EFFECT_PLUGINS_DIR/d' extra.mk || die
+	sed -i '/EFFECT_PLUGIN/d' extra.mk || die
 	sed -i 's/playlist-manager-qt //' extra.mk || die
 	sed -i 's/search-tool-qt //' extra.mk || die
 	sed -i 's/skins-qt //' extra.mk || die
@@ -192,6 +191,5 @@ src_configure() {
 	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/ filewriter//' extra.mk || die
 	sed -i 's/gio //' extra.mk || die
-	sed -i '/VISUALIZATION_PLUGINS/d' extra.mk || die
-	sed -i '/VISUALIZATION_PLUGINS_DIR/d' extra.mk || die
+	sed -i '/VISUALIZATION_PLUGIN/d' extra.mk || die
 }
