@@ -22,6 +22,7 @@ DEPEND=">=dev-lang/python-3.4
 		>=dev-python/python-mpd2-0.5.5[$PYTHON_USEDEP]"
 
 src_prepare() {
+	sed -i 's/3.4/2.4/g' configure.ac
 	eautoreconf
 	default
 }
