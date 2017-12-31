@@ -7,8 +7,6 @@ PYTHON_COMPAT=(python{3_5,3_6})
 
 inherit autotools eutils git-r3 l10n
 
-MY_PN="${PN/d/D}"
-
 DESCRIPTION="An implementation of the MPRIS 2 interface as a client for MPD"
 HOMEPAGE="http://github.com/eonpatapon/mpDris2"
 EGIT_REPO_URI="https://github.com/eonpatapon/${PN}.git"
@@ -21,7 +19,7 @@ IUSE=""
 DEPEND=">=dev-lang/python-3.4
 		>=dev-python/dbus-python-0.80[$PYTHON_USEDEP]
 		>=dev-python/pygobject-3.14.0:3[$PYTHON_USEDEP]
-		>=dev-python/python-mpd2-0.5.5"[$PYTHON_USEDEP]
+		>=dev-python/python-mpd2-0.5.5[$PYTHON_USEDEP]"
 
 src_prepare() {
 	eautoreconf
