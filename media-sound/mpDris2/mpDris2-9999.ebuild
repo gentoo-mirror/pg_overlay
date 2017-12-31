@@ -24,8 +24,8 @@ DEPEND=">=dev-lang/python-3.4
 		>=dev-python/python-mpd2-0.5.5"[$PYTHON_USEDEP]
 
 src_prepare() {
-	default_src_prepare
 	eautoreconf
+	default_src_prepare
 }
 
 src_install() {
