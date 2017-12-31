@@ -41,7 +41,7 @@ REQUIRED_USE="
 RDEPEND="
 	app-arch/unzip
 	dev-libs/dbus-glib
-	dev-libs/glib[utils]
+	dev-libs/glib
 	dev-libs/libxml2:2
 	~media-sound/audacious-${PV}[gtk3?,qt5?]
 	aac? ( >=media-libs/faad2-2.7 )
@@ -115,15 +115,16 @@ src_unpack() {
 
 src_prepare() {
 	default
-	eautoreconf
-
+	
 	rm_loc() {
 		rm -vf "po/${1}.po" || die
 		sed -i s/${1}.po// po/Makefile || die
 	}
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rm_loc
-}
+
+	eautoreconf
+	}
 
 src_configure() {
 	if ! use mp3 ; then

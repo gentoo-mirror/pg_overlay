@@ -36,7 +36,6 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	nls? ( dev-util/intltool )"
-
 PDEPEND="~media-plugins/audacious-plugins-${PV}"
 
 src_unpack() {
@@ -54,7 +53,6 @@ src_unpack() {
 
 src_prepare() {
 	default
-	eautoreconf
 
 	rm_loc() {
 		rm -vf "po/${1}.po" || die
@@ -62,7 +60,9 @@ src_prepare() {
 	}
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rm_loc
-}
+
+	eautoreconf
+	}
 
 src_configure() {
 	# D-Bus is a mandatory dependency, remote control,
