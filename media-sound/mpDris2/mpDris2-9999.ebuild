@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=(python{3_5,3_6})
 
-inherit autotools eutils git-r3 l10n
+inherit autotools distutils-r1 eutils git-r3 l10n
 
 DESCRIPTION="An implementation of the MPRIS 2 interface as a client for MPD"
 HOMEPAGE="http://github.com/eonpatapon/mpDris2"
