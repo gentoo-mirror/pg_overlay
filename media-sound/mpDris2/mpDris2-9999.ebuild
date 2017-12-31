@@ -26,7 +26,7 @@ DEPEND=">=dev-lang/python-3.4
 src_prepare() {
 	eautoreconf
 	#default_src_prepare
-	deafult
+	default
 }
 
 src_install() {
