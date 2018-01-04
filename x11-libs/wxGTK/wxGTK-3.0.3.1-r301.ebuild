@@ -1,23 +1,21 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=6
 
-inherit autotools multilib-minimal
+inherit multilib-minimal
 
 DESCRIPTION="GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit"
-HOMEPAGE="http://wxwidgets.org/"
-
-# we use the wxPython tarballs because they include the full wxGTK sources and
-# docs, and are released more frequently than wxGTK.
+HOMEPAGE="https://wxwidgets.org/"
 SRC_URI="https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/wxWidgets-${PV}.tar.bz2
-	doc? ( https://github.com/wxWidgets/wxWidgets/releases/download/v${PV%.*}/wxWidgets-${PV%.*}-docs-html.tar.bz2 )"
+	https://dev.gentoo.org/~leio/distfiles/wxGTK-3.0.3_p20180104.tar.xz
+	doc? ( https://github.com/wxWidgets/wxWidgets/releases/download/v3.0.3/wxWidgets-3.0.3-docs-html.tar.bz2 )"
 
 KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
 IUSE="+X aqua doc debug gstreamer libnotify opengl sdl tiff webkit"
 
-WXSUBVERSION=${PV}-gtk3					# 3.0.2.0-gtk3
-WXVERSION=${WXSUBVERSION%.*}			# 3.0.2
+WXSUBVERSION=${PV}.0-gtk3			# 3.0.3.0-gtk3
+WXVERSION=${WXSUBVERSION%.*}			# 3.0.3
 WXRELEASE=${WXVERSION%.*}-gtk3			# 3.0-gtk3
 WXRELEASE_NODOT=${WXRELEASE//./}		# 30-gtk3
 
@@ -25,8 +23,8 @@ SLOT="${WXRELEASE}"
 
 RDEPEND="
 	dev-libs/expat[${MULTILIB_USEDEP}]
-	sdl?    ( media-libs/libsdl[${MULTILIB_USEDEP}] )
-	X?  (
+	sdl? ( media-libs/libsdl[${MULTILIB_USEDEP}] )
+	X? (
 		>=dev-libs/glib-2.22:2[${MULTILIB_USEDEP}]
 		media-libs/libpng:0=[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
@@ -39,12 +37,12 @@ RDEPEND="
 		x11-libs/libXxf86vm[${MULTILIB_USEDEP}]
 		x11-libs/pango[${MULTILIB_USEDEP}]
 		gstreamer? (
-			media-libs/gstreamer:0.10[${MULTILIB_USEDEP}]
-			media-libs/gst-plugins-base:0.10[${MULTILIB_USEDEP}] )
+			media-libs/gstreamer:1.0[${MULTILIB_USEDEP}]
+			media-libs/gst-plugins-base:1.0[${MULTILIB_USEDEP}] )
 		libnotify? ( x11-libs/libnotify[${MULTILIB_USEDEP}] )
 		opengl? ( virtual/opengl[${MULTILIB_USEDEP}] )
 		tiff?   ( media-libs/tiff:0[${MULTILIB_USEDEP}] )
-		webkit? ( net-libs/webkit-gtk:3 )
+		webkit? ( net-libs/webkit-gtk:4 )
 		)
 	aqua? (
 		x11-libs/gtk+:3[aqua=,${MULTILIB_USEDEP}]
@@ -55,7 +53,7 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig[${MULTILIB_USEDEP}]
 	opengl? ( virtual/glu[${MULTILIB_USEDEP}] )
-	X?  (
+	X? (
 		x11-proto/xproto[${MULTILIB_USEDEP}]
 		x11-proto/xineramaproto[${MULTILIB_USEDEP}]
 		x11-proto/xf86vidmodeproto[${MULTILIB_USEDEP}]
@@ -63,24 +61,17 @@ DEPEND="${RDEPEND}
 
 PDEPEND=">=app-eselect/eselect-wxwidgets-20131230"
 
-LICENSE="wxWinLL-3
-		GPL-2
-		doc?	( wxWinFDL-3 )"
+LICENSE="wxWinLL-3 GPL-2 doc? ( wxWinFDL-3 )"
 
 S="${WORKDIR}/wxWidgets-${PV}"
+
 PATCHES=(
-	"${FILESDIR}"/${P}-abicheck.patch
-	"${FILESDIR}"/${P}-avoid-tlw-destroy-assert.patch
+	"${WORKDIR}"/wxGTK-3.0.3_p20180104/
+	"${FILESDIR}"/wxGTK-${SLOT}-translation-domain.patch
 )
 
 src_prepare() {
 	default
-
-	local f
-	for f in $(find "${S}" -name configure.in); do
-		mv "${f}" "${f/in/ac}" || die
-	done
-	AT_M4DIR="${S}/build/aclocal" eautoreconf
 
 	# Versionating
 	sed -i \
@@ -88,8 +79,8 @@ src_prepare() {
 		-e "s:\(WX_RELEASE_NODOT = \).*:\1${WXRELEASE_NODOT}:"\
 		-e "s:\(WX_VERSION = \).*:\1${WXVERSION}:"\
 		-e "s:aclocal):aclocal/wxwin${WXRELEASE_NODOT}.m4):" \
-		-e "s:wxstd.mo:wxstd${WXRELEASE_NODOT}:" \
-		-e "s:wxmsw.mo:wxmsw${WXRELEASE_NODOT}:" \
+		-e "s:wxstd.mo:wxstd${WXRELEASE_NODOT}.mo:" \
+		-e "s:wxmsw.mo:wxmsw${WXRELEASE_NODOT}.mo:" \
 		Makefile.in || die
 
 	sed -i \
