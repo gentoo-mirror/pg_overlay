@@ -39,6 +39,12 @@ pkg_setup() {
 	fi
 }
 
+src_prepare() {
+	eapply "${FILESDIR}/switch_tabs_on_search_tabs.patch"
+	for i in $(cat "${FILESDIR}/debian-patchset/series");do 
+eapply "${FILESDIR}/debian-patchset/$i";done
+}
+
 src_configure() {
 	local myconf
 
