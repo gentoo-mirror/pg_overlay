@@ -43,6 +43,7 @@ src_prepare() {
 	eapply "${FILESDIR}/switch_tabs_on_search_tabs.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do 
 eapply "${FILESDIR}/debian-patchset/$i";done
+	default
 }
 
 src_configure() {
