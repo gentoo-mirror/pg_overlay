@@ -64,14 +64,6 @@ src_configure() {
 			--disable-alc"
 	fi
 
-	if use gtk3 ; then
-		myconf="${myconf}
-			--with-toolkit=gtk3"
-	else
-		myconf="${myconf}
-			--with-toolkit=gtk2"
-	fi
-
 	econf \
 		--with-denoise-level=0 \
 		--with-wx-config="${WX_CONFIG}" \
