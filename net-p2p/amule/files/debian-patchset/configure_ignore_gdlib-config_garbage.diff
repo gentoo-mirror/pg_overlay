@@ -1,5 +1,5 @@
---- a/configure.in
-+++ b/configure.in
+--- a/configure.ac
++++ b/configure.ac
 @@ -106,7 +106,7 @@ AC_ARG_WITH(
  MULE_IF_ENABLED([cas], [
  	MULE_CHECK_GDLIB([2.0.0], [
