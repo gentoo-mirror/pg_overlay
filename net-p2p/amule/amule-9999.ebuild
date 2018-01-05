@@ -13,7 +13,7 @@ EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+daemon debug geoip gtk3 +nls remote stats +unicode -upnp +X +mmap boost"
+IUSE="+daemon debug geoip gtk3 +nls remote stats +unicode -upnp +X +mmap +boost"
 REQUIRED_USE="gtk3? ( X )"
 
 COMMON_DEPEND="
