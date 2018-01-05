@@ -19,10 +19,13 @@ COMMON_DEPEND="
 	dev-libs/crypto++
 	sys-libs/binutils-libs:0=
 	sys-libs/zlib
+	x11-libs/wxGTK:${WX_GTK_VER}[X?]
 	stats? ( media-libs/gd:=[jpeg,png] )
 	geoip? ( dev-libs/geoip )
-	gtk3? ( x11-libs/wxGTK:${WX_GTK_VER}-gtk3[X?] )
-	!gtk3? ( x11-libs/wxGTK:${WX_GTK_VER}[X?] )
+	gtk3? ( 
+		x11-libs/wxGTK:${WX_GTK_VER}-gtk3[X]
+		!x11-libs/wxGTK:${WX_GTK_VER}[X]
+	)
 	upnp? ( net-libs/libupnp:* )
 	remote? ( media-libs/libpng:0=
 	unicode? ( media-libs/gd:= ) )
@@ -69,6 +72,11 @@ src_configure() {
 			--disable-amule-gui
 			--disable-wxcas
 			--disable-alc"
+	fi
+
+	if use gtk3 ; then
+		myconf="${myconf}
+			--with-toolkit=gtk3"
 	fi
 
 	econf \
