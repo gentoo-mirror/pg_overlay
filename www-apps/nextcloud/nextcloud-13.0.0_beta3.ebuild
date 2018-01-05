@@ -18,8 +18,6 @@ DEPEND=""
 RDEPEND="dev-lang/php[curl?,filter,gd,hash,json,mysql?,pdo,posix,postgres?,session,simplexml,sqlite?,xmlreader,xmlwriter,zip]
 	virtual/httpd-php"
 
-PATCHES=( "${FILESDIR}"/${P}-destroy_modal_when_closed.patch )
-
 S=${WORKDIR}/${PN}
 
 pkg_setup() {
