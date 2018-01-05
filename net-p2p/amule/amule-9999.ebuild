@@ -24,7 +24,7 @@ COMMON_DEPEND="
 	geoip? ( dev-libs/geoip )
 	gtk3? ( 
 		x11-libs/wxGTK:${WX_GTK_VER}-gtk3[X]
-		!x11-libs/wxGTK:${WX_GTK_VER}
+		!x11-libs/wxGTK:${WX_GTK_VER}[X]
 	)
 	upnp? ( net-libs/libupnp:* )
 	remote? ( media-libs/libpng:0=
