@@ -71,7 +71,7 @@ xpi_install() {
 	x="${1}"
 	cd ${x}
 	# determine id for extension
-	emid="$(sed -n -e '/install-manifest/,$ { /em:id/!d; s/.*[\">]\([^\"<>]*\)[\"<].*/\1/; p; q }' "${x}"/manifest.json)" \
+	emid="$(sed -n -e '/install-manifest/,$ { /id/!d; s/.*[\">]\([^\"<>]*\)[\"<].*/\1/; p; q }' "${x}"/manifest.json)" \
 		|| die "failed to determine extension id"
 	if [[ -n ${MOZEXTENSION_TARGET} ]]; then
 		insinto "${MOZILLA_FIVE_HOME}"/${MOZEXTENSION_TARGET%/}/${emid}
