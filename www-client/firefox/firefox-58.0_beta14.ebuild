@@ -159,7 +159,7 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	# Patch to enable PGO
+	# Patch for Clang
 	use clang && eapply "${FILESDIR}/${PN}-clang.patch"
 
 	# OpenSUSE-KDE patchset
