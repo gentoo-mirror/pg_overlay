@@ -35,7 +35,7 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin screenshot selinux test clang jit +kde"
+IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin pgo screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -159,7 +159,7 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	# Patch to enable PGO
+	# Patch for Clang
 	use clang && eapply "${FILESDIR}/${PN}-clang.patch"
 
 	# OpenSUSE-KDE patchset
