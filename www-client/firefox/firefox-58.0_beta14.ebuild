@@ -294,6 +294,8 @@ src_configure() {
 	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --with-pthreads
 
+	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
+
 	# Allow for a proper pgo build
 	if use pgo; then
 		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
