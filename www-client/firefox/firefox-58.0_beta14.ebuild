@@ -173,6 +173,9 @@ src_prepare() {
 	# ArchLinux patches
 	for i in $(cat "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/$i"; done
 
+	# Ubuntu patches
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/ubuntu-patchset-${FF_MAJORV}/$i"; done
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
@@ -294,8 +297,9 @@ src_configure() {
 	mozconfig_annotate '' --enable-webrtc
 	mozconfig_annotate '' --with-pthreads
 
+	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
-
+	
 	# Allow for a proper pgo build
 	if use pgo; then
 		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
@@ -313,6 +317,10 @@ src_configure() {
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	./mach configure
+
+	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '/" ff/config.status || die
+	sed -i "s/MOZ_SERVICES_HEALTHREPORT': '1/MOZ_SERVICES_HEALTHREPORT': '/" ff/config.status || die
 }
 
 src_compile() {
