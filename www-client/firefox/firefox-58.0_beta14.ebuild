@@ -228,7 +228,7 @@ src_configure() {
 	if use clang; then
 		mozconfig_annotate '' --disable-elf-hack
 		mozconfig_annotate '' --enable-clang-plugin
-		mozconfig_annotate '' --enable-gold
+		mozconfig_annotate '' --disable-gold
 		mozconfig_annotate '' --enable-llvm-hacks
 	else
 		mozconfig_annotate '' --enable-elf-hack
