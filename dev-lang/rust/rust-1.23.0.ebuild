@@ -88,6 +88,7 @@ src_configure() {
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		targets = "${LLVM_TARGETS// /;}"
+		link-jobs = $(makeopts_jobs)
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -111,7 +112,7 @@ src_configure() {
 		[rust]
 		debug = $(toml_usex debug)
 		optimize = $(toml_usex !debug)
-		codegen-units = 0
+		codegen-units = $(makeopts_jobs)
 		debug-assertions = $(toml_usex debug)
 		debuginfo = $(toml_usex debug)
 		use-jemalloc = $(toml_usex jemalloc)
