@@ -3,9 +3,11 @@
 
 EAPI=6
 
+PLOCALES="ca cs da de el es fi fr ga gl he hu it ja ms nl pl pt ro ru sk sr sv tr uk vi zh_CN"
+
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils git-r3 python-r1
+inherit eutils git-r3 l10n python-r1
 
 DESCRIPTION="A utility to find various forms of lint on a filesystem"
 HOMEPAGE="http://www.pixelbeat.org/fslint/"
@@ -25,6 +27,12 @@ DEPEND="nls? ( sys-devel/gettext:* )"
 
 src_prepare() {
 	default
+	rem_locale() {
+		rm "po/${1}.po" || die "removing of ${1}.po failed"
+	}
+
+	l10n_find_plocales_changes po "" ".po"
+	l10n_for_each_disabled_locale_do rem_locale
 
 	# Change some paths to make ${PN}-gui run with our filesystem layout.
 	# These commands are taken from the debian/rules file.
