@@ -3,8 +3,7 @@
 
 EAPI=6
 
-PLOCALES="ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa fi fo fr gl he hi hr hu hy ia id it ja ko ku ky lt lv ms my nb nds nl nn pl pt 
-pt_BR ro ru se si sk sl sq sr sv ta te th tr ug uk uz vi zh_CN zh_TW"
+PLOCALES="ca cs da de el es fi fr ga gl he hu it ja ms nl pl pt ro ru sk sr sv tr uk vi zh_CN"
 
 PYTHON_COMPAT=( python2_7 )
 
