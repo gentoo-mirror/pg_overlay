@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="5"
+EAPI=6
 
-inherit webapp eutils git-r3
+inherit git-r3 webapp
 
 DESCRIPTION="ruTorrent is a front-end for the popular Bittorrent client rTorrent"
 HOMEPAGE="https://github.com/Novik/ruTorrent"
@@ -26,6 +26,7 @@ pkg_setup() {
 
 src_prepare() {
 	find -name '.git*' -exec rm -rf {} \;
+	rm -f '.htaccess'
 }
 
 src_install() {
