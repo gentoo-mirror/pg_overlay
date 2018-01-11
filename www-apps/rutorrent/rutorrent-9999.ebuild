@@ -25,6 +25,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	find -name '.git*' -exec rm -rf {} \;
 	rm -f '.htaccess'
 }
