@@ -10,4 +10,4 @@ RDEPEND=sys-libs/ncurses:0= sys-libs/readline:0= curl? ( net-misc/curl ) libxml2
 REQUIRED_USE=test? ( abyss curl cxx ) tools? ( curl )
 SLOT=0
 _eclasses_=desktop	2ccd1dd1dd7bfb8795eea024a4f91bb6	epatch	8233751dc5105a6ae8fcd86ce2bb0247	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e7258392d5eda499c1cfa94db650b61	ltprune	2770eed66a9b8ef944714cd0e968182e	multilib	97f470f374f2e94ccab04a2fb21d811e	preserve-libs	ef207dc62baddfddfd39a164d9797648	subversion	a5d5826a85609611f098c0553eb24cc1	toolchain-funcs	885c7d8dd70a58825f3d17e35a3cd1e9
-_md5_=4ff24abdae39ecb682bc0a094f54284c
+_md5_=a7f4c29e1843aa6d859df52c31ee599f
