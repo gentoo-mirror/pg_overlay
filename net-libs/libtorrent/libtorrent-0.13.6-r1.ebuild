@@ -32,7 +32,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? ( dev-util/cppunit )"
 
-S="${WORKDIR}/${COMMIT}"
+S="${WORKDIR}/${PN}-${COMMIT}"
 
 src_prepare() {
 	elibtoolize
