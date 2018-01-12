@@ -32,6 +32,7 @@ DOCS=( doc/rtorrent.rc )
 S="${WORKDIR}/${PN}-${COMMIT}"
 
 src_prepare() {
+	default
 	eautoreconf
 }
 
