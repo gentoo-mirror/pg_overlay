@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit autotools flag-o-matic eutils
+inherit autotools flag-o-matic
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -29,7 +29,10 @@ DEPEND="${COMMON_DEPEND}
 
 DOCS=( doc/rtorrent.rc )
 
+S="${WORKDIR}/${PN}-${COMMIT}"
+
 src_prepare() {
+	default
 	eautoreconf
 }
 

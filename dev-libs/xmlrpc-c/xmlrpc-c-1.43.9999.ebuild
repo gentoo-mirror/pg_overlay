@@ -16,7 +16,8 @@ ESVN_REPO_URI="svn://svn.code.sf.net/p/xmlrpc-c/code/stable"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~ppc-aix ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc x86 ~ppc-aix ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris 
+~x64-solaris ~x86-solaris"
 IUSE="abyss +cgi +curl +cxx +libxml2 threads test tools"
 
 REQUIRED_USE="test? ( abyss curl cxx ) tools? ( curl )"
@@ -41,6 +42,8 @@ src_prepare() {
 		-e "/CFLAGS_COMMON/s|-g -O3$||" \
 		-e "/CXXFLAGS_COMMON/s|-g$||" \
 		common.mk || die
+
+	sed 's/xmlParserCtx /xmlParserCtxt/g' -i src/xmlrpc_libxml2.c || die
 
 	eapply ${PATCHES[@]}
 	eapply_user

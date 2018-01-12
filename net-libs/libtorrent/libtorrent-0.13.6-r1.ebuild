@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit eutils flag-o-matic libtool toolchain-funcs
+inherit autotools flag-o-matic
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -32,8 +32,11 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? ( dev-util/cppunit )"
 
+S="${WORKDIR}/${PN}-${COMMIT}"
+
 src_prepare() {
-	elibtoolize
+	default
+	eautoreconf
 }
 
 src_configure() {
