@@ -43,7 +43,7 @@ src_prepare() {
 		-e "/CXXFLAGS_COMMON/s|-g$||" \
 		common.mk || die
 
-	sed 's/xmlParserCtx /xmlParserCtxt/g' -i stable/src/xmlrpc_libxml2.c || die
+	sed 's/xmlParserCtx /xmlParserCtxt/g' -i src/xmlrpc_libxml2.c || die
 
 	eapply ${PATCHES[@]}
 	eapply_user
