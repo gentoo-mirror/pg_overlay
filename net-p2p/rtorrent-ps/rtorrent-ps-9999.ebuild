@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit autotools eutils flag-o-matic git-r3
+inherit autotools flag-o-matic git-r3
 
 DESCRIPTION="Extended rTorrent distribution with UI enhancements, colorization, and some added features"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -54,6 +54,7 @@ src_prepare() {
 		cp $i src/$i
 	done
 
+	default
 	eautoreconf
 }
 
