@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -31,16 +31,15 @@ RDEPEND="
 		>=dev-libs/dbus-glib-0.100
 		>=dev-libs/glib-2.32:2
 		>=x11-libs/gtk+-3.4:3
-		ayatana? ( >=dev-libs/libappindicator-0.4.30:3 )
-	)
+		ayatana? ( >=dev-libs/libappindicator-0.4.90:3 )
+		)
 	qt5? (
 		dev-qt/qtcore:5
-		dev-qt/qtgui:5
-		dev-qt/qtwidgets:5
-		dev-qt/qtnetwork:5
 		dev-qt/qtdbus:5
-	)
-"
+		dev-qt/qtgui:5
+		dev-qt/qtnetwork:5
+		dev-qt/qtwidgets:5
+		)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	nls? (
