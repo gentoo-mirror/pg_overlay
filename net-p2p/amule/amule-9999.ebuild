@@ -2,9 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+
+PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
+
 WX_GTK_VER="3.0"
 
-inherit wxwidgets user git-r3
+inherit git-r3 l10n wxwidgets
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
@@ -41,9 +44,14 @@ pkg_setup() {
 }
 
 src_prepare() {
+	rem_locale() {
+		rm "po/${1}.po" || die "removing of ${1}.po failed"
+	}
+	l10n_find_plocales_changes po "" ".po"
+	l10n_for_each_disabled_locale_do rem_locale
+	
 	eapply "${FILESDIR}/switch_tabs_on_search_tabs.patch"
-	for i in $(cat "${FILESDIR}/debian-patchset/series");do 
-eapply "${FILESDIR}/debian-patchset/$i";done
+	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 	default
 }
 
