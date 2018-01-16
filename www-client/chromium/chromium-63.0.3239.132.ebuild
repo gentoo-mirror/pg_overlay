@@ -21,7 +21,7 @@ IUSE="component-build cups gnome-keyring +hangouts kerberos neon pic +proprietar
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
-CHR_MAJORV="$(get_major_version )"
+CHR_MAJORV="$(get_major_version)"
 
 COMMON_DEPEND="
 	app-arch/bzip2:=
