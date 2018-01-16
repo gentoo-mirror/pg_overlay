@@ -9,12 +9,10 @@ MOZ_ESR=""
 # This list can be updated with scripts/get_langs.sh from the mozilla overlay
 MOZ_LANGS=( en en-US ru )
 
-BUILD_VER=2
-
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
 MOZ_PV="${MOZ_PV/_beta/b}" # Handle beta for SRC_URI
-MOZ_PV="${MOZ_PV/_rc${BUILD_VER}/}" # Handle rc for SRC_URI
+MOZ_PV="${PV/_rc?/}" # Handle rc for SRC_URI
 
 if [[ ${MOZ_ESR} == 1 ]]; then
 	# ESR releases have slightly different version numbers
@@ -42,7 +40,7 @@ RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
-	${MOZ_HTTP_URI}/${MOZ_PV}-candidates/build${BUILD_VER}/source/firefox-${MOZ_PV}.source.tar.xz
+	${MOZ_HTTP_URI}/${PV/_rc/-candidates/build}/source/firefox-$(get_major_version).0.source.tar.xz
 	${PATCH_URIS[@]}"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
