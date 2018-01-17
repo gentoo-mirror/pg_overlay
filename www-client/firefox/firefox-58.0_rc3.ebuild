@@ -40,7 +40,7 @@ RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
-	${MOZ_HTTP_URI}/${PV/_rc/-candidates/build}/source/firefox-$(get_major_version).0.source.tar.xz
+	${MOZ_HTTP_URI}/${PV/_rc/-candidates/build}/source/${P/_rc?/}.source.tar.xz
 	${PATCH_URIS[@]}"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
