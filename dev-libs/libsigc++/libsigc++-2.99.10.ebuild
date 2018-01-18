@@ -20,7 +20,7 @@ DEPEND="sys-devel/m4
 
 src_prepare() {
 	# properly interpret --{enable,disable}-benchmark configure option (bug 599764)
-	eapply "${FILESDIR}"/${P}-make-disable-benchmarks-work.patch
+	eapply "${FILESDIR}"/${PN}-2.10.0-make-disable-benchmarks-work.patch
 
 	# don't waste time building examples
 	sed -i 's|^\(SUBDIRS =.*\)examples\(.*\)$|\1\2|' \
