@@ -323,10 +323,6 @@ src_configure() {
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 	./mach configure
-
-	sed -i "s/MOZ_DATA_REPORTING': '1/MOZ_DATA_REPORTING': '/" ff/config.status || die
-	sed -i "s/MOZ_TELEMETRY_REPORTING': '1/MOZ_TELEMETRY_REPORTING': '/" ff/config.status || die
-	sed -i "s/MOZ_SERVICES_HEALTHREPORT': '1/MOZ_SERVICES_HEALTHREPORT': '/" ff/config.status || die
 }
 
 src_compile() {
