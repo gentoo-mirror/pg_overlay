@@ -14,6 +14,8 @@ KEYWORDS=""
 LICENSE="LGPL"
 SLOT="0"
 IUSE="alsa +audiofilters cdio cuvid extensions +ffmpeg gme inputs +jemalloc lastfm +libass modplug mpris notify +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
+REQUIRED_USE="lastfm? ( extensions )
+		mpris? ( extensions )"
 
 RDEPEND="
 	>=dev-qt/qtdbus-5.9.1:5
@@ -42,7 +44,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DUSE_FFMPEG=ON
 		-DUSE_FFMPEG_AVDEVICE=ON
-		-DUSE_QT5=ON
 		-DUSE_LINK_TIME_OPTIMIZATION=ON 
 		-DUSE_CMD=OFF
 		-DUSE_PORTAUDIO=OFF
