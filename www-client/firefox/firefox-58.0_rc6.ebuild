@@ -300,6 +300,10 @@ src_configure() {
 	mozconfig_annotate '' --with-pthreads
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	
 	# Allow for a proper pgo build
