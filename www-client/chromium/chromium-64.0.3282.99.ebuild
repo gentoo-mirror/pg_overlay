@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -17,14 +17,17 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +debian +inox iridium ungoogled vaapi"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +debian 
++inox iridium ungoogled vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="?? ( inox iridium ungoogled )
 		?? ( ungoogled debian )"
 
 COMMON_DEPEND="
+	app-accessibility/at-spi2-atk:2
 	app-arch/bzip2:=
 	cups? ( >=net-print/cups-1.3.11:= )
+	dev-libs/atk
 	dev-libs/expat:=
 	dev-libs/glib:2
 	system-icu? ( >=dev-libs/icu-59:= )
@@ -32,7 +35,7 @@ COMMON_DEPEND="
 	>=dev-libs/libxml2-2.9.5:=[icu]
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
-	>=dev-libs/nss-3.14.3:=
+	>=dev-libs/nss-3.26:=
 	>=dev-libs/re2-0.2016.05.01:=
 	gnome-keyring? ( >=gnome-base/libgnome-keyring-3.12:= )
 	>=media-libs/alsa-lib-1.0.19:=
@@ -145,9 +148,12 @@ GTK+ icon theme.
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-FORTIFY_SOURCE-r2.patch"
-	"${FILESDIR}/${PN}-clang-r1.patch"
-	"${FILESDIR}/${PN}-webrtc-r0.patch"
+	"${FILESDIR}/chromium-FORTIFY_SOURCE-r2.patch"
+	"${FILESDIR}/chromium-webrtc-r0.patch"
+	"${FILESDIR}/chromium-memcpy-r0.patch"
+	"${FILESDIR}/chromium-cups-r0.patch"
+	"${FILESDIR}/chromium-clang-r2.patch"
+	"${FILESDIR}/chromium-angle-r0.patch"
 )
 
 pre_build_checks() {
@@ -184,34 +190,33 @@ pkg_pretend() {
 pkg_setup() {
 	pre_build_checks
 
-	# Make sure the build system will use the right python, bug #344367.
-	python-any-r1_pkg_setup
-
 	chromium_suid_sandbox_check_kernel_config
 }
 
 src_prepare() {
+	# Calling this here supports resumption via FEATURES=keepwork
+	python_setup
 	default
 
-	use system-icu && eapply "${FILESDIR}/${PN}-icu-60-support-$(get_major_version).patch"
+	use system-icu && eapply "${FILESDIR}/${PN}-icu-60-support-${CHR_MAJORV}.patch"
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/${PN}-libva-r2-$(get_major_version).patch" && eapply "${FILESDIR}/${PN}-vaapi-r15-$(get_major_version).patch"
+	use vaapi && eapply "${FILESDIR}/${PN}-libva-r2-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-r15-${CHR_MAJORV}.patch"
 	
 	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
 
 	# Iridium patches
-	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser-$(get_major_version)/series");do eapply "${FILESDIR}/iridium-browser-$(get_major_version)/$i";done
+	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${CHR_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${CHR_MAJORV}/$i";done
 
 	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
 
 	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
-	for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i";done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/$i";done
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i";done
+	#for i in $(cat "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/$i";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -240,6 +245,7 @@ src_prepare() {
 		third_party/angle/src/third_party/trace_event
 		third_party/blink
 		third_party/boringssl
+		third_party/boringssl/src/third_party/fiat
 		third_party/breakpad
 		third_party/breakpad/breakpad/src/third_party/curl
 		third_party/brotli
@@ -255,7 +261,6 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/oboe
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
-		third_party/cld_2
 		third_party/cld_3
 		third_party/crc32c
 		third_party/cros_system_api
@@ -291,6 +296,7 @@ src_prepare() {
 		third_party/lzma_sdk
 		third_party/markupsafe
 		third_party/mesa
+		third_party/metrics_proto
 		third_party/modp_b64
 		third_party/mt19937ar
 		third_party/node
@@ -376,6 +382,9 @@ bootstrap_gn() {
 }
 
 src_configure() {
+	# Calling this here supports resumption via FEATURES=keepwork
+	python_setup
+
 	local myconf_gn=""
 
 	# GN needs explicit config for Debug/Release as opposed to inferring it from build directory.
@@ -384,6 +393,9 @@ src_configure() {
 	# Component build isn't generally intended for use by end users. It's mostly useful
 	# for development and debugging.
 	myconf_gn+=" is_component_build=$(usex component-build true false)"
+
+	# https://chromium.googlesource.com/chromium/src/+/lkcr/docs/jumbo.md
+	myconf_gn+=" use_jumbo_build=$(usex jumbo-build true false)"
 
 	myconf_gn+=" use_allocator=$(usex tcmalloc \"tcmalloc\" \"none\")"
 
@@ -412,9 +424,9 @@ src_configure() {
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
-	#if use inox; then
-	#	myconf_gn+=" safe_browsing_mode=0"
-	#fi
+	if use inox; then
+		myconf_gn+=" safe_browsing_mode=0"
+	fi
 
 	# Ungoogled-Chromium
 	myconf_gn+=" enable_iterator_debugging=false"
@@ -598,6 +610,9 @@ src_configure() {
 }
 
 src_compile() {
+	# Calling this here supports resumption via FEATURES=keepwork
+	python_setup
+
 	# Build mksnapshot and pax-mark it.
 	local x
 	for x in mksnapshot v8_context_snapshot_generator; do

@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -63,7 +63,6 @@ COMMON_DEPEND="
 	archive? ( >=app-arch/libarchive-3.0.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
 	cdda? ( dev-libs/libcdio-paranoia )
-	cuda? ( >=media-video/ffmpeg-3.3:0 )
 	drm? ( x11-libs/libdrm )
 	dvd? (
 		>=media-libs/libdvdnav-4.2.0
@@ -94,19 +93,12 @@ COMMON_DEPEND="
 	samba? ( net-fs/samba )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
 	v4l? ( media-libs/libv4l )
-	vaapi? (
-		!libav? ( >=media-video/ffmpeg-3.3:0 )
-		libav? ( >=media-video/libav-13:0 )
-		x11-libs/libva:=[drm?,X?,wayland?]
-	)
-	vdpau? (
-		!libav? ( >=media-video/ffmpeg-3.3:0 )
-		libav? ( >=media-video/libav-13:0 )
-		x11-libs/libvdpau
-	)
+	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
+	vdpau? ( x11-libs/libvdpau )
 	wayland? (
 		>=dev-libs/wayland-1.6.0
 		>=x11-libs/libxkbcommon-0.3.0
+		dev-libs/wayland-protocols
 	)
 	X? (
 		x11-libs/libX11
@@ -140,7 +132,6 @@ RDEPEND="${COMMON_DEPEND}
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.19.0-make-ffmpeg-version-check-non-fatal.patch"
-	"${FILESDIR}/${PN}-0.23.0-make-libavdevice-check-accept-libav.patch"
 )
 
 pkg_setup() {
@@ -225,6 +216,8 @@ src_configure() {
 		$(use_enable aqua cocoa)
 		$(use_enable drm)
 		$(use_enable gbm)
+		$(use_enable wayland wayland-scanner)
+		$(use_enable wayland wayland-protocols)
 		$(use_enable wayland)
 		$(use_enable X x11)
 		$(use_enable xv)
@@ -248,8 +241,6 @@ src_configure() {
 
 		# HWaccels:
 		# Automagic Video Toolbox HW acceleration. See Gentoo bug 577332.
-		$(use_enable vaapi vaapi-hwaccel)
-		$(use_enable vdpau vdpau-hwaccel)
 		$(use_enable cuda cuda-hwaccel)
 
 		# TV features:
