@@ -1,26 +1,33 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit kde5
+inherit cmake-utils git-r3 kde5-functions
 
-DESCRIPTION="MPRIS2 client, written in QML for Plasma 5 and GNU/Linux"
+DESCRIPTION="MPRIS2 client, written in QML for Plasma 5"
 HOMEPAGE="https://github.com/audoban/PlayBar2"
+EGIT_REPO_URI="https://github.com/audoban/${PN}.git"
 
-if [[ ${KDE_BUILD_TYPE} = live ]] ; then
-	EGIT_REPO_URI="https://github.com/audoban/${PN}.git"
-else
-	SRC_URI="https://github.com/audoban/PlayBar2/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-fi
-
-LICENSE="GPL-2"
-KEYWORDS=""
+LICENSE="GPL-3"
+SLOT="0"
 IUSE=""
+KEYWORDS=""
 
-DEPEND="
-	$(add_frameworks_dep plasma)"
-RDEPEND="${DEPEND}
-			$(add_plasma_dep plasma-workspace)"
-
-DOCS=( README.md )
+DEPEND="$(add_frameworks_dep extra-cmake-modules)
+	$(add_frameworks_dep kconfig)
+	$(add_frameworks_dep kconfigwidgets)
+	$(add_frameworks_dep kcoreaddons)
+	$(add_frameworks_dep kdoctools)
+	$(add_frameworks_dep kglobalaccel)
+	$(add_frameworks_dep ki18n)
+	$(add_frameworks_dep kwidgetsaddons)
+	$(add_frameworks_dep kwindowsystem)
+	$(add_frameworks_dep kxmlgui)
+	$(add_frameworks_dep plasma)
+	$(add_qt_dep qtcore)
+	$(add_qt_dep qtdeclarative)
+	$(add_qt_dep qtgui)
+	$(add_qt_dep qtquickcontrols)
+	$(add_qt_dep qtwidgets)"
+RDEPEND="${DEPEND}"
