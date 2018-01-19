@@ -198,25 +198,24 @@ src_prepare() {
 	python_setup
 	default
 
-	use system-icu && eapply "${FILESDIR}/${PN}-icu-60-support.patch"
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/${PN}-libva-r2-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-r15-${CHR_MAJORV}.patch"
+	use vaapi && eapply "${FILESDIR}/${PN}-vaapi-r16-$(get_major_version).patch"
 	
 	# Inox patches
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/inox-patchset-${CHR_MAJORV}/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
 
 	# Iridium patches
-	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser-${CHR_MAJORV}/series");do eapply "${FILESDIR}/iridium-browser-${CHR_MAJORV}/$i";done
+	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser-$(get_major_version)/series");do eapply "${FILESDIR}/iridium-browser-$(get_major_version)/$i";done
 
 	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ungoogled-chromium-${CHR_MAJORV}/$i";done
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
 
 	# Debian patches
-	use debian && for i in $(cat "${FILESDIR}/debian-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/debian-patchset-${CHR_MAJORV}/$i";done
-	for i in $(cat "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/series");do eapply "${FILESDIR}/ubuntu-patchset-${CHR_MAJORV}/$i";done
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i";done
 
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/series"); do eapply "${FILESDIR}/fedora-patchset-${CHR_MAJORV}/$i";done
+	#for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
