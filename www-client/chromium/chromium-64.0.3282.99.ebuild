@@ -199,7 +199,7 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
-	use vaapi && eapply "${FILESDIR}/${PN}-vaapi-r16-$(get_major_version).patch"
+	use vaapi && eapply "${FILESDIR}/${PN}-vaapi-r16.patch"
 	
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
