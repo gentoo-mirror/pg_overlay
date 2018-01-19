@@ -2,8 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+PLOCALES="de es pl pt ru zn_CN"
 
-inherit cmake-utils git-r3 kde5-functions
+inherit cmake-utils git-r3 kde5-functions l10n
 
 DESCRIPTION="MPRIS2 client, written in QML for Plasma 5"
 HOMEPAGE="https://github.com/audoban/PlayBar2"
