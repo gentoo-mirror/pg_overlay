@@ -14,6 +14,8 @@ KEYWORDS=""
 LICENSE="LGPL"
 SLOT="0"
 IUSE="alsa +audiofilters cdio cuvid extensions +ffmpeg gme inputs +jemalloc lastfm +libass modplug mpris notify +opengl portaudio pulseaudio sid +taglib +vaapi vdpau +videofilters visualizations +xv"
+REQUIRED_USE="lastfm? ( extensions )
+		mpris? ( extensions )"
 
 RDEPEND="
 	>=dev-qt/qtdbus-5.9.1:5
