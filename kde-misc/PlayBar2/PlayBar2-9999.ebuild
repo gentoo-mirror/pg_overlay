@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PLOCALES="de es pl pt ru zn_CN"
+PLOCALES="de es pl pt ru zh_CN"
 
 inherit cmake-utils git-r3 kde5-functions l10n
 
@@ -35,11 +35,12 @@ RDEPEND="${DEPEND}"
 
 src_prepare() {
 	rem_locale() {
-		rm "po/${1}.po" || die "removing of ${1}.po failed"
+		rm -rf "po/${1}" || die "removing of ${1}.po failed"
 	}
 
-	l10n_find_plocales_changes po "" ".po"
+	l10n_find_plocales_changes po "" ""
 	l10n_for_each_disabled_locale_do rem_locale
 
 	default
+	cmake-utils_src_prepare
 }
