@@ -41,5 +41,6 @@ src_prepare() {
 	l10n_find_plocales_changes po "" ""
 	l10n_for_each_disabled_locale_do rem_locale
 
-	default_src_prepare
+	default
+	cmake-utils_src_prepare
 }
