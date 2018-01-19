@@ -198,7 +198,7 @@ src_prepare() {
 	python_setup
 	default
 
-	use system-icu && eapply "${FILESDIR}/${PN}-icu-60-support-${CHR_MAJORV}.patch"
+	use system-icu && eapply "${FILESDIR}/${PN}-icu-60-support.patch"
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && eapply "${FILESDIR}/${PN}-libva-r2-${CHR_MAJORV}.patch" && eapply "${FILESDIR}/${PN}-vaapi-r15-${CHR_MAJORV}.patch"
 	
