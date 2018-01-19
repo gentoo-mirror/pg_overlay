@@ -8,7 +8,6 @@ remove-linux-kernel-dependency.patch
 fix-compile-error.patch
 specify-gcc-standard.patch
 fix-gn-bootstrap.patch
-revert-Xclang-instcombine-lower-dbg-declare.patch
 suppress-newer-clang-warning-flags.patch
 fix-build-errors.patch
 fix-ffmpeg-build.patch

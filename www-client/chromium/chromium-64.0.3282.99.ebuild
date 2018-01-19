@@ -423,6 +423,7 @@ src_configure() {
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hotwording=false"
+	myconf_gn+=" exclude_unwind_tables=true"
 	if use inox; then
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
@@ -439,11 +440,10 @@ src_configure() {
 	fi
 
 	# Dedian's Chromium
-	myconf_gn+=" use_ozone=false enable_reading_list=false"
+	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_reading_list=false"
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
-	myconf_gn+=" enable_package_mash_services=false"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
