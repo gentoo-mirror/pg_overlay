@@ -32,3 +32,14 @@ DEPEND="$(add_frameworks_dep extra-cmake-modules)
 	$(add_qt_dep qtquickcontrols)
 	$(add_qt_dep qtwidgets)"
 RDEPEND="${DEPEND}"
+
+src_prepare() {
+	rem_locale() {
+		rm "po/${1}.po" || die "removing of ${1}.po failed"
+	}
+
+	l10n_find_plocales_changes po "" ".po"
+	l10n_for_each_disabled_locale_do rem_locale
+
+	default
+}
