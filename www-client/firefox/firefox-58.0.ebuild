@@ -21,7 +21,7 @@ fi
 
 # Patch version
 PATCH="${PN}-58.0-patches-01"
-MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/candidates"
+MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_JIT=1
 
@@ -35,12 +35,12 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin pgo screenshot selinux test clang jit +kde"
+IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack nsplugin screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
-	${MOZ_HTTP_URI}/${PV/_rc/-candidates/build}/source/${P/_rc?/}.source.tar.xz
+	${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz
 	${PATCH_URIS[@]}"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
@@ -59,8 +59,6 @@ DEPEND="${RDEPEND}
 	>=sys-devel/clang-4.0.1
 	amd64? ( ${ASM_DEPEND} virtual/opengl )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
-
-FF_MAJORV="$(get_major_version )"
 
 S="${WORKDIR}/firefox-${MOZ_PV}"
 
@@ -306,11 +304,6 @@ src_configure() {
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	
-	# Allow for a proper pgo build
-	if use pgo; then
-		echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
-	fi
-
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
