@@ -1,7 +1,7 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=6
 
 inherit kde5
 
@@ -45,8 +45,3 @@ DEPEND="${COMMON_DEPEND}
 	!kde-misc/kmozillahelper:4
 "
 RDEPEND="${COMMON_DEPEND}"
-
-pkg_postinst() {
-	ewarn "To suppress the taskbar icon for ${PN} file dialog window - install Kwin rule"
-	ewarn "${FILESDIR}/kwinrulesrc to \"\${HOME}/.config/\""
-}
