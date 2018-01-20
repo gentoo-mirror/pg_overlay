@@ -62,7 +62,7 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-5.212-up-to-date.patch"
+	"${FILESDIR}/${P}-update.patch"
 )
 
 S=${WORKDIR}/${P/_/-}

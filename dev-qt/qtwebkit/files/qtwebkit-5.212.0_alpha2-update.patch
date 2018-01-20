@@ -36242,6 +36242,46 @@ index c67cb43f1..7e15f564f 100755
  rm -rf ${MY_TEMP_DIR}
  
  echo "###"
+diff --git a/Source/WTF/wtf/CurrentTime.cpp b/Source/WTF/wtf/CurrentTime.cpp
+index 7de52f779..8774314fe 100644
+--- a/Source/WTF/wtf/CurrentTime.cpp
++++ b/Source/WTF/wtf/CurrentTime.cpp
+@@ -261,18 +261,7 @@ double monotonicallyIncreasingTime()
+     return ecore_time_get();
+ }
+ 
+-#elif PLATFORM(QT)
+-
+-double monotonicallyIncreasingTime()
+-{
+-    ASSERT(QElapsedTimer::isMonotonic());
+-    static QElapsedTimer timer;
+-    if (!timer.isValid())
+-        timer.start();
+-    return timer.nsecsElapsed() / 1.0e9;
+-}
+-
+-#elif USE(GLIB)
++#elif USE(GLIB) && !PLATFORM(QT)
+ 
+ double monotonicallyIncreasingTime()
+ {
+@@ -295,6 +284,15 @@ double monotonicallyIncreasingTime()
+     return (mach_absolute_time() * timebaseInfo.numer) / (1.0e9 * timebaseInfo.denom);
+ }
+ 
++#elif OS(LINUX) || OS(FREEBSD) || OS(OPENBSD) || OS(NETBSD)
++
++double monotonicallyIncreasingTime()
++{
++    struct timespec ts { };
++    clock_gettime(CLOCK_MONOTONIC, &ts);
++    return static_cast<double>(ts.tv_sec) + ts.tv_nsec / 1.0e9;
++}
++
+ #else
+ 
+ double monotonicallyIncreasingTime()
 diff --git a/Source/WTF/wtf/DateMath.cpp b/Source/WTF/wtf/DateMath.cpp
 index ebcecac6e..80086b379 100644
 --- a/Source/WTF/wtf/DateMath.cpp
@@ -36647,10 +36687,18 @@ index af3fa1799..92308d832 100644
  #include <wtf/ThreadSafeRefCounted.h>
  
 diff --git a/Source/WebCore/CMakeLists.txt b/Source/WebCore/CMakeLists.txt
-index 7d0ad0433..02f9d3bf3 100644
+index 7d0ad0433..e9fc4e54e 100644
 --- a/Source/WebCore/CMakeLists.txt
 +++ b/Source/WebCore/CMakeLists.txt
-@@ -3353,7 +3353,7 @@ if (ENABLE_USER_MESSAGE_HANDLERS)
+@@ -68,6 +68,7 @@ set(WebCore_INCLUDE_DIRECTORIES
+     "${WEBCORE_DIR}/platform"
+     "${WEBCORE_DIR}/platform/animation"
+     "${WEBCORE_DIR}/platform/audio"
++    "${WEBCORE_DIR}/platform/crypto"
+     "${WEBCORE_DIR}/platform/graphics"
+     "${WEBCORE_DIR}/platform/graphics/cpu/arm"
+     "${WEBCORE_DIR}/platform/graphics/cpu/arm/filters"
+@@ -3353,7 +3354,7 @@ if (ENABLE_USER_MESSAGE_HANDLERS)
  endif ()
  
  if (USE_WOFF2)
@@ -36659,7 +36707,7 @@ index 7d0ad0433..02f9d3bf3 100644
    list(APPEND WebCore_LIBRARIES woff2)
  endif ()
  
-@@ -3558,9 +3558,11 @@ if (WebCore_USER_AGENT_SCRIPTS)
+@@ -3558,9 +3559,11 @@ if (WebCore_USER_AGENT_SCRIPTS)
      MAKE_JS_FILE_ARRAYS(
          ${DERIVED_SOURCES_WEBCORE_DIR}/UserAgentScriptsData.cpp
          ${DERIVED_SOURCES_WEBCORE_DIR}/UserAgentScripts.h
@@ -36672,10 +36720,30 @@ index 7d0ad0433..02f9d3bf3 100644
  
  # Generate plug-in resources
 diff --git a/Source/WebCore/PlatformQt.cmake b/Source/WebCore/PlatformQt.cmake
-index c5466b6c7..f0e68cf9e 100644
+index c5466b6c7..49c76a8de 100644
 --- a/Source/WebCore/PlatformQt.cmake
 +++ b/Source/WebCore/PlatformQt.cmake
-@@ -110,6 +110,7 @@ list(APPEND WebCore_SOURCES
+@@ -2,6 +2,10 @@ include(platform/ImageDecoders.cmake)
+ include(platform/Linux.cmake)
+ include(platform/TextureMapper.cmake)
+ 
++if (JPEG_DEFINITIONS)
++    add_definitions(${JPEG_DEFINITIONS})
++endif ()
++
+ list(APPEND WebCore_INCLUDE_DIRECTORIES
+     "${DERIVED_SOURCES_JAVASCRIPTCORE_DIR}"
+     "${DERIVED_SOURCES_JAVASCRIPTCORE_DIR}/inspector"
+@@ -69,6 +73,8 @@ list(APPEND WebCore_SOURCES
+ 
+     platform/audio/qt/AudioBusQt.cpp
+ 
++    platform/crypto/qt/CryptoDigestQt.cpp
++
+     platform/graphics/ImageSource.cpp
+     platform/graphics/PlatformDisplay.cpp
+     platform/graphics/WOFFFileFormat.cpp
+@@ -110,6 +116,7 @@ list(APPEND WebCore_SOURCES
      platform/network/NetworkStorageSessionStub.cpp
      platform/network/MIMESniffing.cpp
  
@@ -36683,7 +36751,7 @@ index c5466b6c7..f0e68cf9e 100644
      platform/network/qt/CookieJarQt.cpp
      platform/network/qt/CredentialStorageQt.cpp
      platform/network/qt/DNSQt.cpp
-@@ -162,19 +163,19 @@ list(APPEND WebCore_SOURCES
+@@ -162,19 +169,19 @@ list(APPEND WebCore_SOURCES
      platform/text/qt/TextBreakIteratorInternalICUQt.cpp
  )
  
@@ -36707,7 +36775,7 @@ index c5466b6c7..f0e68cf9e 100644
  
  if (COMPILER_IS_GCC_OR_CLANG)
      set_source_files_properties(
-@@ -182,6 +183,12 @@ if (COMPILER_IS_GCC_OR_CLANG)
+@@ -182,6 +189,12 @@ if (COMPILER_IS_GCC_OR_CLANG)
      PROPERTIES
          COMPILE_FLAGS "-frtti -UQT_NO_DYNAMIC_CAST"
      )
@@ -36720,7 +36788,7 @@ index c5466b6c7..f0e68cf9e 100644
  endif ()
  
  if (ENABLE_DEVICE_ORIENTATION)
-@@ -197,7 +204,7 @@ if (ENABLE_GAMEPAD_DEPRECATED)
+@@ -197,7 +210,7 @@ if (ENABLE_GAMEPAD_DEPRECATED)
      list(APPEND WebCore_SOURCES
          platform/qt/GamepadsQt.cpp
      )
@@ -36729,7 +36797,7 @@ index c5466b6c7..f0e68cf9e 100644
  endif ()
  
  if (ENABLE_GRAPHICS_CONTEXT_3D)
-@@ -221,7 +228,7 @@ if (ENABLE_NETSCAPE_PLUGIN_API)
+@@ -221,7 +234,7 @@ if (ENABLE_NETSCAPE_PLUGIN_API)
              platform/win/WebCoreInstanceHandle.cpp
          )
          list(APPEND WebCore_LIBRARIES
@@ -36738,7 +36806,7 @@ index c5466b6c7..f0e68cf9e 100644
              version
          )
      elseif (PLUGIN_BACKEND_XLIB)
-@@ -374,7 +381,7 @@ if (USE_QT_MULTIMEDIA)
+@@ -374,7 +387,7 @@ if (USE_QT_MULTIMEDIA)
      list(APPEND WebCore_LIBRARIES
          ${Qt5Multimedia_LIBRARIES}
      )
@@ -36747,6 +36815,30 @@ index c5466b6c7..f0e68cf9e 100644
  endif ()
  
  if (ENABLE_VIDEO)
+diff --git a/Source/WebCore/bindings/js/JSHTMLFormElementCustom.cpp b/Source/WebCore/bindings/js/JSHTMLFormElementCustom.cpp
+index 3aed7052f..cb2119b10 100644
+--- a/Source/WebCore/bindings/js/JSHTMLFormElementCustom.cpp
++++ b/Source/WebCore/bindings/js/JSHTMLFormElementCustom.cpp
+@@ -30,8 +30,7 @@
+ #include "HTMLCollection.h"
+ #include "HTMLFormElement.h"
+ #include "JSDOMWindowCustom.h"
+-#include "JSNodeList.h"
+-#include "StaticNodeList.h"
++#include "JSRadioNodeList.h"
+ 
+ using namespace JSC;
+ 
+@@ -48,8 +47,7 @@ bool JSHTMLFormElement::nameGetter(ExecState* exec, PropertyName propertyName, J
+         return true;
+     }
+ 
+-    // FIXME: HTML5 specifies that this should be a RadioNodeList.
+-    value = toJS(exec, globalObject(), StaticElementList::adopt(namedItems).get());
++    value = toJS(exec, globalObject(), wrapped().radioNodeList(propertyNameToAtomicString(propertyName)).get());
+     return true;
+ }
+ 
 diff --git a/Source/WebCore/bridge/qt/qt_class.cpp b/Source/WebCore/bridge/qt/qt_class.cpp
 index 5efebc0fd..1554f8d63 100644
 --- a/Source/WebCore/bridge/qt/qt_class.cpp
@@ -36786,6 +36878,209 @@ index 34a97244a..c9d675c3f 100644
      ~QtRuntimeMethod();
  
      static JSValueRef call(JSContextRef ctx, JSObjectRef function, JSObjectRef thisObject, size_t argumentCount, const JSValueRef arguments[], JSValueRef* exception);
+diff --git a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA1.cpp b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA1.cpp
+index bc94aa3de..54dcd03fb 100644
+--- a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA1.cpp
++++ b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA1.cpp
+@@ -54,7 +54,7 @@ CryptoAlgorithmIdentifier CryptoAlgorithmSHA1::identifier() const
+ 
+ void CryptoAlgorithmSHA1::digest(const CryptoAlgorithmParameters&, const CryptoOperationData& data, VectorCallback&& callback, VoidCallback&& failureCallback, ExceptionCode&)
+ {
+-    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoAlgorithmIdentifier::SHA_1);
++    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoDigest::Algorithm::SHA_1);
+     if (!digest) {
+         failureCallback();
+         return;
+diff --git a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA224.cpp b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA224.cpp
+index 62cc5a8c2..3878227d9 100644
+--- a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA224.cpp
++++ b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA224.cpp
+@@ -54,7 +54,7 @@ CryptoAlgorithmIdentifier CryptoAlgorithmSHA224::identifier() const
+ 
+ void CryptoAlgorithmSHA224::digest(const CryptoAlgorithmParameters&, const CryptoOperationData& data, VectorCallback&& callback, VoidCallback&& failureCallback, ExceptionCode&)
+ {
+-    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoAlgorithmIdentifier::SHA_224);
++    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoDigest::Algorithm::SHA_224);
+     if (!digest) {
+         failureCallback();
+         return;
+diff --git a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA256.cpp b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA256.cpp
+index 27fe8aa0a..0acaf0905 100644
+--- a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA256.cpp
++++ b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA256.cpp
+@@ -54,7 +54,7 @@ CryptoAlgorithmIdentifier CryptoAlgorithmSHA256::identifier() const
+ 
+ void CryptoAlgorithmSHA256::digest(const CryptoAlgorithmParameters&, const CryptoOperationData& data, VectorCallback&& callback, VoidCallback&& failureCallback, ExceptionCode&)
+ {
+-    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoAlgorithmIdentifier::SHA_256);
++    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoDigest::Algorithm::SHA_256);
+     if (!digest) {
+         failureCallback();
+         return;
+diff --git a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA384.cpp b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA384.cpp
+index 6eba234f3..b1bfbe157 100644
+--- a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA384.cpp
++++ b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA384.cpp
+@@ -54,7 +54,7 @@ CryptoAlgorithmIdentifier CryptoAlgorithmSHA384::identifier() const
+ 
+ void CryptoAlgorithmSHA384::digest(const CryptoAlgorithmParameters&, const CryptoOperationData& data, VectorCallback&& callback, VoidCallback&& failureCallback, ExceptionCode&)
+ {
+-    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoAlgorithmIdentifier::SHA_384);
++    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoDigest::Algorithm::SHA_384);
+     if (!digest) {
+         failureCallback();
+         return;
+diff --git a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA512.cpp b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA512.cpp
+index 87d62d445..7ddf1d4d2 100644
+--- a/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA512.cpp
++++ b/Source/WebCore/crypto/algorithms/CryptoAlgorithmSHA512.cpp
+@@ -54,7 +54,7 @@ CryptoAlgorithmIdentifier CryptoAlgorithmSHA512::identifier() const
+ 
+ void CryptoAlgorithmSHA512::digest(const CryptoAlgorithmParameters&, const CryptoOperationData& data, VectorCallback&& callback, VoidCallback&& failureCallback, ExceptionCode&)
+ {
+-    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoAlgorithmIdentifier::SHA_512);
++    std::unique_ptr<CryptoDigest> digest = CryptoDigest::create(CryptoDigest::Algorithm::SHA_512);
+     if (!digest) {
+         failureCallback();
+         return;
+diff --git a/Source/WebCore/dom/InlineStyleSheetOwner.cpp b/Source/WebCore/dom/InlineStyleSheetOwner.cpp
+index 83574842c..a487f6041 100644
+--- a/Source/WebCore/dom/InlineStyleSheetOwner.cpp
++++ b/Source/WebCore/dom/InlineStyleSheetOwner.cpp
+@@ -137,7 +137,11 @@ void InlineStyleSheetOwner::createSheet(Element& element, const String& text)
+ 
+     if (!isValidCSSContentType(element, m_contentType))
+         return;
+-    if (!document.contentSecurityPolicy()->allowInlineStyle(document.url(), m_startTextPosition.m_line, element.isInUserAgentShadowTree()))
++
++    ASSERT(document.contentSecurityPolicy());
++    const ContentSecurityPolicy& contentSecurityPolicy = *document.contentSecurityPolicy();
++    bool hasKnownNonce = contentSecurityPolicy.allowStyleWithNonce(element.fastGetAttribute(HTMLNames::nonceAttr), element.isInUserAgentShadowTree());
++    if (!contentSecurityPolicy.allowInlineStyle(document.url(), m_startTextPosition.m_line, text, hasKnownNonce))
+         return;
+ 
+     RefPtr<MediaQuerySet> mediaQueries;
+diff --git a/Source/WebCore/dom/ScriptElement.cpp b/Source/WebCore/dom/ScriptElement.cpp
+index 521028195..f9c70e326 100644
+--- a/Source/WebCore/dom/ScriptElement.cpp
++++ b/Source/WebCore/dom/ScriptElement.cpp
+@@ -258,8 +258,9 @@ bool ScriptElement::requestScript(const String& sourceUrl)
+ 
+     ASSERT(!m_cachedScript);
+     if (!stripLeadingAndTrailingHTMLSpaces(sourceUrl).isEmpty()) {
++        bool hasKnownNonce = m_element.document().contentSecurityPolicy()->allowScriptWithNonce(m_element.fastGetAttribute(HTMLNames::nonceAttr), m_element.isInUserAgentShadowTree());
+         ResourceLoaderOptions options = CachedResourceLoader::defaultCachedResourceOptions();
+-        options.setContentSecurityPolicyImposition(m_element.isInUserAgentShadowTree() ? ContentSecurityPolicyImposition::SkipPolicyCheck : ContentSecurityPolicyImposition::DoPolicyCheck);
++        options.setContentSecurityPolicyImposition(hasKnownNonce ? ContentSecurityPolicyImposition::SkipPolicyCheck : ContentSecurityPolicyImposition::DoPolicyCheck);
+ 
+         CachedResourceRequest request(ResourceRequest(m_element.document().completeURL(sourceUrl)), options);
+ 
+@@ -293,8 +294,13 @@ void ScriptElement::executeScript(const ScriptSourceCode& sourceCode)
+     if (sourceCode.isEmpty())
+         return;
+ 
+-    if (!m_isExternalScript && !m_element.document().contentSecurityPolicy()->allowInlineScript(m_element.document().url(), m_startLineNumber, m_element.isInUserAgentShadowTree()))
+-        return;
++    if (!m_isExternalScript) {
++        ASSERT(m_element.document().contentSecurityPolicy());
++        const ContentSecurityPolicy& contentSecurityPolicy = *m_element.document().contentSecurityPolicy();
++        bool hasKnownNonce = contentSecurityPolicy.allowScriptWithNonce(m_element.fastGetAttribute(HTMLNames::nonceAttr), m_element.isInUserAgentShadowTree());
++        if (!contentSecurityPolicy.allowInlineScript(m_element.document().url(), m_startLineNumber, sourceCode.source().toStringWithoutCopying(), hasKnownNonce))
++            return;
++    }
+ 
+ #if ENABLE(NOSNIFF)
+     if (m_isExternalScript && m_cachedScript && !m_cachedScript->mimeTypeAllowedByNosniff()) {
+diff --git a/Source/WebCore/dom/StyledElement.cpp b/Source/WebCore/dom/StyledElement.cpp
+index e5d06633d..e7c328a44 100644
+--- a/Source/WebCore/dom/StyledElement.cpp
++++ b/Source/WebCore/dom/StyledElement.cpp
+@@ -202,7 +202,7 @@ void StyledElement::styleAttributeChanged(const AtomicString& newStyleString, At
+         if (PropertySetCSSStyleDeclaration* cssomWrapper = inlineStyleCSSOMWrapper())
+             cssomWrapper->clearParentElement();
+         ensureUniqueElementData().m_inlineStyle = nullptr;
+-    } else if (reason == ModifiedByCloning || document().contentSecurityPolicy()->allowInlineStyle(document().url(), startLineNumber, isInUserAgentShadowTree()))
++    } else if (reason == ModifiedByCloning || document().contentSecurityPolicy()->allowInlineStyle(document().url(), startLineNumber, String(), isInUserAgentShadowTree()))
+         setInlineStyleFromString(newStyleString);
+ 
+     elementData()->setStyleAttributeIsDirty(false);
+diff --git a/Source/WebCore/html/HTMLAnchorElement.cpp b/Source/WebCore/html/HTMLAnchorElement.cpp
+index bc100a870..75eb7a2a3 100644
+--- a/Source/WebCore/html/HTMLAnchorElement.cpp
++++ b/Source/WebCore/html/HTMLAnchorElement.cpp
+@@ -46,6 +46,7 @@
+ #include "SecurityOrigin.h"
+ #include "SecurityPolicy.h"
+ #include "Settings.h"
++#include "URLUtils.h"
+ #include <wtf/text/StringBuilder.h>
+ 
+ namespace WebCore {
+@@ -76,15 +77,6 @@ HTMLAnchorElement::~HTMLAnchorElement()
+     clearRootEditableElementForSelectionOnMouseDown();
+ }
+ 
+-// This function does not allow leading spaces before the port number.
+-static unsigned parsePortFromStringPosition(const String& value, unsigned portStart, unsigned& portEnd)
+-{
+-    portEnd = portStart;
+-    while (isASCIIDigit(value[portEnd]))
+-        ++portEnd;
+-    return value.substring(portStart, portEnd - portStart).toUInt();
+-}
+-
+ bool HTMLAnchorElement::supportsFocus() const
+ {
+     if (hasEditableStyle())
+diff --git a/Source/WebCore/html/HTMLLinkElement.cpp b/Source/WebCore/html/HTMLLinkElement.cpp
+index 49c15ce12..4a73e530d 100644
+--- a/Source/WebCore/html/HTMLLinkElement.cpp
++++ b/Source/WebCore/html/HTMLLinkElement.cpp
+@@ -32,6 +32,7 @@
+ #include "CachedResource.h"
+ #include "CachedResourceLoader.h"
+ #include "CachedResourceRequest.h"
++#include "ContentSecurityPolicy.h"
+ #include "Document.h"
+ #include "Event.h"
+ #include "EventSender.h"
+@@ -245,6 +246,13 @@ void HTMLLinkElement::process()
+             priority = ResourceLoadPriority::VeryLow;
+         CachedResourceRequest request(ResourceRequest(document().completeURL(url)), charset, priority);
+         request.setInitiator(this);
++
++        if (document().contentSecurityPolicy()->allowStyleWithNonce(fastGetAttribute(HTMLNames::nonceAttr))) {
++            ResourceLoaderOptions options = CachedResourceLoader::defaultCachedResourceOptions();
++            options.setContentSecurityPolicyImposition(ContentSecurityPolicyImposition::SkipPolicyCheck);
++            request.setOptions(options);
++        }
++
+         m_cachedSheet = document().cachedResourceLoader().requestCSSStyleSheet(request);
+         
+         if (m_cachedSheet)
+diff --git a/Source/WebCore/html/HTMLScriptElement.idl b/Source/WebCore/html/HTMLScriptElement.idl
+index 1365d12bf..ff0b30aac 100644
+--- a/Source/WebCore/html/HTMLScriptElement.idl
++++ b/Source/WebCore/html/HTMLScriptElement.idl
+@@ -27,5 +27,5 @@ interface HTMLScriptElement : HTMLElement {
+     [Reflect, URL] attribute DOMString src;
+     [Reflect] attribute DOMString type;
+     [Reflect] attribute DOMString crossOrigin;
+-    [Reflect, Conditional=CSP_NEXT] attribute DOMString nonce;
++    [Reflect] attribute DOMString nonce;
+ };
+diff --git a/Source/WebCore/html/HTMLStyleElement.idl b/Source/WebCore/html/HTMLStyleElement.idl
+index 7abf3839f..fd3f7c0d3 100644
+--- a/Source/WebCore/html/HTMLStyleElement.idl
++++ b/Source/WebCore/html/HTMLStyleElement.idl
+@@ -25,5 +25,7 @@ interface HTMLStyleElement : HTMLElement {
+ 
+     // DOM Level 2 Style
+     readonly attribute StyleSheet sheet;
++
++    [Reflect] attribute DOMString nonce;
+ };
+ 
 diff --git a/Source/WebCore/inspector/InspectorDOMAgent.cpp b/Source/WebCore/inspector/InspectorDOMAgent.cpp
 index ef9bb394e..82d35c1a8 100644
 --- a/Source/WebCore/inspector/InspectorDOMAgent.cpp
@@ -36837,6 +37132,930 @@ index 2983a2d92..2cddda42c 100644
      } else {
          if (!m_mediaTypeWhenNotPrinting.isNull())
              setMediaType(m_mediaTypeWhenNotPrinting);
+diff --git a/Source/WebCore/page/Performance.cpp b/Source/WebCore/page/Performance.cpp
+index ed39a1d15..1c491da5d 100644
+--- a/Source/WebCore/page/Performance.cpp
++++ b/Source/WebCore/page/Performance.cpp
+@@ -233,7 +233,7 @@ void Performance::webkitClearMeasures(const String& measureName)
+ double Performance::now() const
+ {
+     double nowSeconds = monotonicallyIncreasingTime() - m_referenceTime;
+-    const double resolutionSeconds = 0.000005;
++    const double resolutionSeconds = 0.0001;
+     return 1000.0 * floor(nowSeconds / resolutionSeconds) * resolutionSeconds;
+ }
+ 
+diff --git a/Source/WebCore/page/Settings.in b/Source/WebCore/page/Settings.in
+index 84a9f0cd0..74d9e0709 100644
+--- a/Source/WebCore/page/Settings.in
++++ b/Source/WebCore/page/Settings.in
+@@ -79,7 +79,6 @@ needsSiteSpecificQuirks initial=false
+ domTimersThrottlingEnabled initial=true
+ webArchiveDebugModeEnabled initial=false, conditional=WEB_ARCHIVE
+ localFileContentSniffingEnabled initial=false
+-offlineStorageDatabaseEnabled initial=false
+ offlineWebApplicationCacheEnabled initial=false
+ enforceCSSMIMETypeInNoQuirksMode initial=true
+ usesEncodingDetector initial=false
+@@ -91,6 +90,9 @@ acceleratedFiltersEnabled initial=false
+ useLegacyTextAlignPositionedElementBehavior initial=false
+ javaScriptRuntimeFlags type=JSC::RuntimeFlags
+ 
++# PLATFORM(QT) only
++offlineStorageDatabaseEnabled initial=true
++
+ # FIXME: This should really be disabled by default as it makes platforms that don't support the feature download files
+ # they can't use by. Leaving enabled for now to not change existing behavior.
+ downloadableBinaryFontsEnabled initial=true
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicy.cpp b/Source/WebCore/page/csp/ContentSecurityPolicy.cpp
+index 19bf207fa..9e726d5fe 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicy.cpp
++++ b/Source/WebCore/page/csp/ContentSecurityPolicy.cpp
+@@ -29,14 +29,17 @@
+ 
+ #include "ContentSecurityPolicyDirective.h"
+ #include "ContentSecurityPolicyDirectiveList.h"
++#include "ContentSecurityPolicyHash.h"
+ #include "ContentSecurityPolicySource.h"
+ #include "ContentSecurityPolicySourceList.h"
++#include "CryptoDigest.h"
+ #include "DOMStringList.h"
+ #include "Document.h"
+ #include "DocumentLoader.h"
+ #include "FormData.h"
+ #include "FormDataList.h"
+ #include "Frame.h"
++#include "HTMLParserIdioms.h"
+ #include "InspectorInstrumentation.h"
+ #include "JSMainThreadExecState.h"
+ #include "ParsingUtilities.h"
+@@ -45,6 +48,7 @@
+ #include "SchemeRegistry.h"
+ #include "SecurityOrigin.h"
+ #include "SecurityPolicyViolationEvent.h"
++#include "TextEncoding.h"
+ #include <inspector/InspectorValues.h>
+ #include <inspector/ScriptCallStack.h>
+ #include <inspector/ScriptCallStackFactory.h>
+@@ -193,6 +197,48 @@ bool isAllowedByAllWithContext(const CSPDirectiveListVector& policies, const Str
+     return true;
+ }
+ 
++template<bool (ContentSecurityPolicyDirectiveList::*allowed)(const String& nonce) const>
++static bool isAllowedByAllWithNonce(const CSPDirectiveListVector& policies, const String& nonce)
++{
++    for (auto& policy : policies) {
++        if (!(policy.get()->*allowed)(nonce))
++            return false;
++    }
++    return true;
++}
++
++static CryptoDigest::Algorithm toCryptoDigestAlgorithm(ContentSecurityPolicyHashAlgorithm algorithm)
++{
++    switch (algorithm) {
++    case ContentSecurityPolicyHashAlgorithm::SHA_256:
++        return CryptoDigest::Algorithm::SHA_256;
++    case ContentSecurityPolicyHashAlgorithm::SHA_384:
++        return CryptoDigest::Algorithm::SHA_384;
++    case ContentSecurityPolicyHashAlgorithm::SHA_512:
++        return CryptoDigest::Algorithm::SHA_512;
++    }
++    ASSERT_NOT_REACHED();
++    return CryptoDigest::Algorithm::SHA_512;
++}
++
++template<bool (ContentSecurityPolicyDirectiveList::*allowed)(const ContentSecurityPolicyHash&) const>
++bool isAllowedByAllWithHashFromContent(const CSPDirectiveListVector& policies, const String& content, const TextEncoding& encoding, OptionSet<ContentSecurityPolicyHashAlgorithm> algorithms)
++{
++    // FIXME: Compute the digest with respect to the raw bytes received from the page.
++    // See <https://bugs.webkit.org/show_bug.cgi?id=155184>.
++    CString contentCString = encoding.encode(content, EntitiesForUnencodables);
++    for (auto algorithm : algorithms) {
++        auto cryptoDigest = CryptoDigest::create(toCryptoDigestAlgorithm(algorithm));
++        cryptoDigest->addBytes(contentCString.data(), contentCString.length());
++        Vector<uint8_t> digest = cryptoDigest->computeHash();
++        for (auto& policy : policies) {
++            if ((policy.get()->*allowed)(std::make_pair(algorithm, digest)))
++                return true;
++        }
++    }
++    return false;
++}
++
+ template<bool (ContentSecurityPolicyDirectiveList::*allowFromURL)(const URL&, ContentSecurityPolicy::ReportingStatus) const>
+ bool isAllowedByAllWithURL(const CSPDirectiveListVector& policies, const URL& url, ContentSecurityPolicy::ReportingStatus reportingStatus)
+ {
+@@ -216,14 +262,61 @@ bool ContentSecurityPolicy::allowInlineEventHandlers(const String& contextURL, c
+     return overrideContentSecurityPolicy || isAllowedByAllWithContext<&ContentSecurityPolicyDirectiveList::allowInlineEventHandlers>(m_policies, contextURL, contextLine, reportingStatus);
+ }
+ 
+-bool ContentSecurityPolicy::allowInlineScript(const String& contextURL, const WTF::OrdinalNumber& contextLine, bool overrideContentSecurityPolicy, ContentSecurityPolicy::ReportingStatus reportingStatus) const
++// FIXME: We should compute the document encoding once and cache it instead of computing it on each invocation.
++const TextEncoding& ContentSecurityPolicy::documentEncoding() const
+ {
+-    return overrideContentSecurityPolicy || isAllowedByAllWithContext<&ContentSecurityPolicyDirectiveList::allowInlineScript>(m_policies, contextURL, contextLine, reportingStatus);
++    if (!is<Document>(m_scriptExecutionContext))
++        return UTF8Encoding();
++    Document& document = downcast<Document>(*m_scriptExecutionContext);
++    if (TextResourceDecoder* decoder = document.decoder())
++        return decoder->encoding();
++    return UTF8Encoding();
+ }
+ 
+-bool ContentSecurityPolicy::allowInlineStyle(const String& contextURL, const WTF::OrdinalNumber& contextLine, bool overrideContentSecurityPolicy, ContentSecurityPolicy::ReportingStatus reportingStatus) const
++bool ContentSecurityPolicy::allowScriptWithNonce(const String& nonce, bool overrideContentSecurityPolicy) const
+ {
+-    return overrideContentSecurityPolicy || m_overrideInlineStyleAllowed || isAllowedByAllWithContext<&ContentSecurityPolicyDirectiveList::allowInlineStyle>(m_policies, contextURL, contextLine, reportingStatus);
++    if (overrideContentSecurityPolicy)
++        return true;
++    String strippedNonce = stripLeadingAndTrailingHTMLSpaces(nonce);
++    if (strippedNonce.isEmpty())
++        return false;
++    if (isAllowedByAllWithNonce<&ContentSecurityPolicyDirectiveList::allowScriptWithNonce>(m_policies, strippedNonce))
++        return true;
++    return false;
++}
++
++bool ContentSecurityPolicy::allowStyleWithNonce(const String& nonce, bool overrideContentSecurityPolicy) const
++{
++    if (overrideContentSecurityPolicy)
++        return true;
++    String strippedNonce = stripLeadingAndTrailingHTMLSpaces(nonce);
++    if (strippedNonce.isEmpty())
++        return false;
++    if (isAllowedByAllWithNonce<&ContentSecurityPolicyDirectiveList::allowStyleWithNonce>(m_policies, strippedNonce))
++        return true;
++    return false;
++}
++
++bool ContentSecurityPolicy::allowInlineScript(const String& contextURL, const WTF::OrdinalNumber& contextLine, const String& scriptContent, bool overrideContentSecurityPolicy, ContentSecurityPolicy::ReportingStatus reportingStatus) const
++{
++    if (overrideContentSecurityPolicy)
++        return true;
++    if (!m_hashAlgorithmsForInlineScripts.isEmpty() && !scriptContent.isEmpty()
++        && isAllowedByAllWithHashFromContent<&ContentSecurityPolicyDirectiveList::allowInlineScriptWithHash>(m_policies, scriptContent, documentEncoding(), m_hashAlgorithmsForInlineScripts))
++        return true;
++    return isAllowedByAllWithContext<&ContentSecurityPolicyDirectiveList::allowInlineScript>(m_policies, contextURL, contextLine, reportingStatus);
++}
++
++bool ContentSecurityPolicy::allowInlineStyle(const String& contextURL, const WTF::OrdinalNumber& contextLine, const String& styleContent, bool overrideContentSecurityPolicy, ContentSecurityPolicy::ReportingStatus reportingStatus) const
++{
++    if (overrideContentSecurityPolicy)
++        return true;
++    if (m_overrideInlineStyleAllowed)
++        return true;
++    if (!m_hashAlgorithmsForInlineStylesheets.isEmpty() && !styleContent.isEmpty()
++        && isAllowedByAllWithHashFromContent<&ContentSecurityPolicyDirectiveList::allowInlineStyleWithHash>(m_policies, styleContent, documentEncoding(), m_hashAlgorithmsForInlineStylesheets))
++        return true;
++    return isAllowedByAllWithContext<&ContentSecurityPolicyDirectiveList::allowInlineStyle>(m_policies, contextURL, contextLine, reportingStatus);
+ }
+ 
+ bool ContentSecurityPolicy::allowEval(JSC::ExecState* state, bool overrideContentSecurityPolicy, ContentSecurityPolicy::ReportingStatus reportingStatus) const
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicy.h b/Source/WebCore/page/csp/ContentSecurityPolicy.h
+index 14c60f5c4..dcc05a173 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicy.h
++++ b/Source/WebCore/page/csp/ContentSecurityPolicy.h
+@@ -29,6 +29,7 @@
+ 
+ #include "ContentSecurityPolicyResponseHeaders.h"
+ #include "ScriptState.h"
++#include <wtf/OptionSet.h>
+ #include <wtf/Vector.h>
+ #include <wtf/text/TextPosition.h>
+ 
+@@ -43,8 +44,11 @@ class ContentSecurityPolicySource;
+ class DOMStringList;
+ class ScriptExecutionContext;
+ class SecurityOrigin;
++class TextEncoding;
+ class URL;
+ 
++enum class ContentSecurityPolicyHashAlgorithm;
++
+ typedef Vector<std::unique_ptr<ContentSecurityPolicyDirectiveList>> CSPDirectiveListVector;
+ typedef int SandboxFlags;
+ 
+@@ -82,8 +86,10 @@ public:
+     };
+     bool allowJavaScriptURLs(const String& contextURL, const WTF::OrdinalNumber& contextLine, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
+     bool allowInlineEventHandlers(const String& contextURL, const WTF::OrdinalNumber& contextLine, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
+-    bool allowInlineScript(const String& contextURL, const WTF::OrdinalNumber& contextLine, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
+-    bool allowInlineStyle(const String& contextURL, const WTF::OrdinalNumber& contextLine, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
++    bool allowScriptWithNonce(const String& nonce, bool overrideContentSecurityPolicy = false) const;
++    bool allowInlineScript(const String& contextURL, const WTF::OrdinalNumber& contextLine, const String& scriptContent, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
++    bool allowStyleWithNonce(const String& nonce, bool overrideContentSecurityPolicy = false) const;
++    bool allowInlineStyle(const String& contextURL, const WTF::OrdinalNumber& contextLine, const String& styleContent, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
+     bool allowEval(JSC::ExecState* = nullptr, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
+     bool allowPluginType(const String& type, const String& typeAttribute, const URL&, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
+     bool allowScriptFromSource(const URL&, bool overrideContentSecurityPolicy = false, ContentSecurityPolicy::ReportingStatus = ContentSecurityPolicy::ReportingStatus::SendReport) const;
+@@ -134,6 +140,14 @@ public:
+     void reportViolation(const String& directiveText, const String& effectiveDirective, const String& consoleMessage, const URL& blockedURL, const Vector<String>& reportURIs, const String& header, const String& contextURL = String(), const WTF::OrdinalNumber& contextLine = WTF::OrdinalNumber::beforeFirst(), JSC::ExecState* = nullptr) const;
+     void reportBlockedScriptExecutionToInspector(const String& directiveText) const;
+     void enforceSandboxFlags(SandboxFlags sandboxFlags) { m_sandboxFlags |= sandboxFlags; }
++    void addHashAlgorithmsForInlineScripts(OptionSet<ContentSecurityPolicyHashAlgorithm> hashAlgorithmsForInlineScripts)
++    {
++        m_hashAlgorithmsForInlineScripts |= hashAlgorithmsForInlineScripts;
++    }
++    void addHashAlgorithmsForInlineStylesheets(OptionSet<ContentSecurityPolicyHashAlgorithm> hashAlgorithmsForInlineStylesheets)
++    {
++        m_hashAlgorithmsForInlineStylesheets |= hashAlgorithmsForInlineStylesheets;
++    }
+ 
+     // Used by ContentSecurityPolicySource
+     bool protocolMatchesSelf(const URL&) const;
+@@ -145,6 +159,8 @@ private:
+ 
+     void didReceiveHeader(const String&, ContentSecurityPolicyHeaderType, ContentSecurityPolicy::PolicyFrom);
+ 
++    const TextEncoding& documentEncoding() const;
++
+     ScriptExecutionContext* m_scriptExecutionContext { nullptr };
+     std::unique_ptr<ContentSecurityPolicySource> m_selfSource;
+     String m_selfSourceProtocol;
+@@ -152,6 +168,8 @@ private:
+     String m_lastPolicyEvalDisabledErrorMessage;
+     SandboxFlags m_sandboxFlags;
+     bool m_overrideInlineStyleAllowed { false };
++    OptionSet<ContentSecurityPolicyHashAlgorithm> m_hashAlgorithmsForInlineScripts;
++    OptionSet<ContentSecurityPolicyHashAlgorithm> m_hashAlgorithmsForInlineStylesheets;
+ };
+ 
+ }
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.cpp b/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.cpp
+index 01cfa5134..47f5da456 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.cpp
++++ b/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.cpp
+@@ -105,6 +105,40 @@ static bool isNotASCIISpace(UChar c)
+     return !isASCIISpace(c);
+ }
+ 
++static inline bool checkEval(ContentSecurityPolicySourceListDirective* directive)
++{
++    return !directive || directive->allowEval();
++}
++
++static inline bool checkInline(ContentSecurityPolicySourceListDirective* directive)
++{
++    return !directive || directive->allowInline();
++}
++
++static inline bool checkSource(ContentSecurityPolicySourceListDirective* directive, const URL& url)
++{
++    return !directive || directive->allows(url);
++}
++
++static inline bool checkHash(ContentSecurityPolicySourceListDirective* directive, const ContentSecurityPolicyHash& hash)
++{
++    return !directive || directive->allows(hash);
++}
++
++static inline bool checkNonce(ContentSecurityPolicySourceListDirective* directive, const String& nonce)
++{
++    return !directive || directive->allows(nonce);
++}
++
++static inline bool checkMediaType(ContentSecurityPolicyMediaListDirective* directive, const String& type, const String& typeAttribute)
++{
++    if (!directive)
++        return true;
++    if (typeAttribute.isEmpty() || typeAttribute.stripWhiteSpace() != type)
++        return false;
++    return directive->allows(type);
++}
++
+ ContentSecurityPolicyDirectiveList::ContentSecurityPolicyDirectiveList(ContentSecurityPolicy& policy, ContentSecurityPolicyHeaderType type)
+     : m_policy(policy)
+     , m_headerType(type)
+@@ -120,7 +154,7 @@ std::unique_ptr<ContentSecurityPolicyDirectiveList> ContentSecurityPolicyDirecti
+     auto directives = std::make_unique<ContentSecurityPolicyDirectiveList>(policy, type);
+     directives->parse(header, from);
+ 
+-    if (!directives->checkEval(directives->operativeDirective(directives->m_scriptSrc.get()))) {
++    if (!checkEval(directives->operativeDirective(directives->m_scriptSrc.get()))) {
+         String message = makeString("Refused to evaluate a string as JavaScript because 'unsafe-eval' is not an allowed source of script in the following Content Security Policy directive: \"", directives->operativeDirective(directives->m_scriptSrc.get())->text(), "\".\n");
+         directives->setEvalDisabledErrorMessage(message);
+     }
+@@ -137,30 +171,6 @@ void ContentSecurityPolicyDirectiveList::reportViolation(const String& directive
+     m_policy.reportViolation(directiveText, effectiveDirective, message, blockedURL, m_reportURIs, m_header, contextURL, contextLine, state);
+ }
+ 
+-bool ContentSecurityPolicyDirectiveList::checkEval(ContentSecurityPolicySourceListDirective* directive) const
+-{
+-    return !directive || directive->allowEval();
+-}
+-
+-bool ContentSecurityPolicyDirectiveList::checkInline(ContentSecurityPolicySourceListDirective* directive) const
+-{
+-    return !directive || directive->allowInline();
+-}
+-
+-bool ContentSecurityPolicyDirectiveList::checkSource(ContentSecurityPolicySourceListDirective* directive, const URL& url) const
+-{
+-    return !directive || directive->allows(url);
+-}
+-
+-bool ContentSecurityPolicyDirectiveList::checkMediaType(ContentSecurityPolicyMediaListDirective* directive, const String& type, const String& typeAttribute) const
+-{
+-    if (!directive)
+-        return true;
+-    if (typeAttribute.isEmpty() || typeAttribute.stripWhiteSpace() != type)
+-        return false;
+-    return directive->allows(type);
+-}
+-
+ ContentSecurityPolicySourceListDirective* ContentSecurityPolicyDirectiveList::operativeDirective(ContentSecurityPolicySourceListDirective* directive) const
+ {
+     return directive ? directive : m_defaultSrc.get();
+@@ -278,6 +288,16 @@ bool ContentSecurityPolicyDirectiveList::allowInlineScript(const String& context
+     return m_reportOnly || checkInline(operativeDirective(m_scriptSrc.get()));
+ }
+ 
++bool ContentSecurityPolicyDirectiveList::allowInlineScriptWithHash(const ContentSecurityPolicyHash& hash) const
++{
++    return checkHash(operativeDirective(m_scriptSrc.get()), hash);
++}
++
++bool ContentSecurityPolicyDirectiveList::allowScriptWithNonce(const String& nonce) const
++{
++    return checkNonce(operativeDirective(m_scriptSrc.get()), nonce);
++}
++
+ bool ContentSecurityPolicyDirectiveList::allowInlineStyle(const String& contextURL, const WTF::OrdinalNumber& contextLine, ContentSecurityPolicy::ReportingStatus reportingStatus) const
+ {
+     static NeverDestroyed<String> consoleMessage(ASCIILiteral("Refused to apply inline style because it violates the following Content Security Policy directive: "));
+@@ -286,6 +306,16 @@ bool ContentSecurityPolicyDirectiveList::allowInlineStyle(const String& contextU
+     return m_reportOnly || checkInline(operativeDirective(m_styleSrc.get()));
+ }
+ 
++bool ContentSecurityPolicyDirectiveList::allowInlineStyleWithHash(const ContentSecurityPolicyHash& hash) const
++{
++    return checkHash(operativeDirective(m_styleSrc.get()), hash);
++}
++
++bool ContentSecurityPolicyDirectiveList::allowStyleWithNonce(const String& nonce) const
++{
++    return checkNonce(operativeDirective(m_styleSrc.get()), nonce);
++}
++
+ bool ContentSecurityPolicyDirectiveList::allowEval(JSC::ExecState* state, ContentSecurityPolicy::ReportingStatus reportingStatus) const
+ {
+     static NeverDestroyed<String> consoleMessage(ASCIILiteral("Refused to evaluate script because it violates the following Content Security Policy directive: "));
+@@ -579,18 +609,22 @@ void ContentSecurityPolicyDirectiveList::addDirective(const String& name, const
+ {
+     ASSERT(!name.isEmpty());
+ 
+-    if (equalLettersIgnoringASCIICase(name, defaultSrc))
++    if (equalLettersIgnoringASCIICase(name, defaultSrc)) {
+         setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_defaultSrc);
+-    else if (equalLettersIgnoringASCIICase(name, scriptSrc))
++        m_policy.addHashAlgorithmsForInlineScripts(m_defaultSrc->hashAlgorithmsUsed());
++        m_policy.addHashAlgorithmsForInlineStylesheets(m_defaultSrc->hashAlgorithmsUsed());
++    } else if (equalLettersIgnoringASCIICase(name, scriptSrc)) {
+         setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_scriptSrc);
+-    else if (equalLettersIgnoringASCIICase(name, objectSrc))
++        m_policy.addHashAlgorithmsForInlineScripts(m_scriptSrc->hashAlgorithmsUsed());
++    } else if (equalLettersIgnoringASCIICase(name, styleSrc)) {
++        setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_styleSrc);
++        m_policy.addHashAlgorithmsForInlineStylesheets(m_styleSrc->hashAlgorithmsUsed());
++    } else if (equalLettersIgnoringASCIICase(name, objectSrc))
+         setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_objectSrc);
+     else if (equalLettersIgnoringASCIICase(name, frameSrc))
+         setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_frameSrc);
+     else if (equalLettersIgnoringASCIICase(name, imgSrc))
+         setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_imgSrc);
+-    else if (equalLettersIgnoringASCIICase(name, styleSrc))
+-        setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_styleSrc);
+     else if (equalLettersIgnoringASCIICase(name, fontSrc))
+         setCSPDirective<ContentSecurityPolicySourceListDirective>(name, value, m_fontSrc);
+     else if (equalLettersIgnoringASCIICase(name, mediaSrc))
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.h b/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.h
+index 2a98b2d09..997c2a5a6 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.h
++++ b/Source/WebCore/page/csp/ContentSecurityPolicyDirectiveList.h
+@@ -28,6 +28,7 @@
+ #define ContentSecurityPolicyDirectiveList_h
+ 
+ #include "ContentSecurityPolicy.h"
++#include "ContentSecurityPolicyHash.h"
+ #include "ContentSecurityPolicyMediaListDirective.h"
+ #include "ContentSecurityPolicySourceListDirective.h"
+ #include "URL.h"
+@@ -50,7 +51,11 @@ public:
+     bool allowJavaScriptURLs(const String& contextURL, const WTF::OrdinalNumber& contextLine, ContentSecurityPolicy::ReportingStatus) const;
+     bool allowInlineEventHandlers(const String& contextURL, const WTF::OrdinalNumber& contextLine, ContentSecurityPolicy::ReportingStatus) const;
+     bool allowInlineScript(const String& contextURL, const WTF::OrdinalNumber& contextLine, ContentSecurityPolicy::ReportingStatus) const;
++    bool allowInlineScriptWithHash(const ContentSecurityPolicyHash&) const;
++    bool allowScriptWithNonce(const String& nonce) const;
+     bool allowInlineStyle(const String& contextURL, const WTF::OrdinalNumber& contextLine, ContentSecurityPolicy::ReportingStatus) const;
++    bool allowInlineStyleWithHash(const ContentSecurityPolicyHash&) const;
++    bool allowStyleWithNonce(const String& nonce) const;
+     bool allowEval(JSC::ExecState*, ContentSecurityPolicy::ReportingStatus) const;
+     bool allowPluginType(const String& type, const String& typeAttribute, const URL&, ContentSecurityPolicy::ReportingStatus) const;
+ 
+@@ -87,11 +92,6 @@ private:
+     ContentSecurityPolicySourceListDirective* operativeDirective(ContentSecurityPolicySourceListDirective*) const;
+     void reportViolation(const String& directiveText, const String& effectiveDirective, const String& consoleMessage, const URL& blockedURL = URL(), const String& contextURL = String(), const WTF::OrdinalNumber& contextLine = WTF::OrdinalNumber::beforeFirst(), JSC::ExecState* = nullptr) const;
+ 
+-    bool checkEval(ContentSecurityPolicySourceListDirective*) const;
+-    bool checkInline(ContentSecurityPolicySourceListDirective*) const;
+-    bool checkSource(ContentSecurityPolicySourceListDirective*, const URL&) const;
+-    bool checkMediaType(ContentSecurityPolicyMediaListDirective*, const String& type, const String& typeAttribute) const;
+-
+     void setEvalDisabledErrorMessage(const String& errorMessage) { m_evalDisabledErrorMessage = errorMessage; }
+ 
+     bool checkEvalAndReportViolation(ContentSecurityPolicySourceListDirective*, const String& consoleMessage, const String& contextURL = String(), const WTF::OrdinalNumber& contextLine = WTF::OrdinalNumber::beforeFirst(), JSC::ExecState* = nullptr) const;
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicyHash.h b/Source/WebCore/page/csp/ContentSecurityPolicyHash.h
+new file mode 100644
+index 000000000..12a94f261
+--- /dev/null
++++ b/Source/WebCore/page/csp/ContentSecurityPolicyHash.h
+@@ -0,0 +1,69 @@
++/*
++ * Copyright (C) 2016 Apple Inc. All rights reserved.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions
++ * are met:
++ * 1. Redistributions of source code must retain the above copyright
++ *    notice, this list of conditions and the following disclaimer.
++ * 2. Redistributions in binary form must reproduce the above copyright
++ *    notice, this list of conditions and the following disclaimer in the
++ *    documentation and/or other materials provided with the distribution.
++ *
++ * THIS SOFTWARE IS PROVIDED BY APPLE INC. AND ITS CONTRIBUTORS ``AS IS''
++ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
++ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
++ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL APPLE INC. OR ITS CONTRIBUTORS
++ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
++ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
++ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
++ * THE POSSIBILITY OF SUCH DAMAGE.
++ */
++
++#ifndef ContentSecurityPolicyHash_h
++#define ContentSecurityPolicyHash_h
++
++#include <wtf/HashTraits.h>
++#include <wtf/Hasher.h>
++#include <wtf/Vector.h>
++
++namespace WebCore {
++
++// Keep this synchronized with the constant maximumContentSecurityPolicyDigestLength below.
++enum class ContentSecurityPolicyHashAlgorithm {
++    SHA_256 = 1 << 0,
++    SHA_384 = 1 << 1,
++    SHA_512 = 1 << 2,
++};
++
++const size_t maximumContentSecurityPolicyDigestLength = 64; // bytes to hold SHA-512 digest
++
++typedef Vector<uint8_t> ContentSecurityPolicyDigest;
++typedef std::pair<ContentSecurityPolicyHashAlgorithm, ContentSecurityPolicyDigest> ContentSecurityPolicyHash;
++
++}
++
++namespace WTF {
++
++template<> struct DefaultHash<WebCore::ContentSecurityPolicyHashAlgorithm> { typedef IntHash<WebCore::ContentSecurityPolicyHashAlgorithm> Hash; };
++template<> struct HashTraits<WebCore::ContentSecurityPolicyHashAlgorithm> : StrongEnumHashTraits<WebCore::ContentSecurityPolicyHashAlgorithm> { };
++template<> struct DefaultHash<WebCore::ContentSecurityPolicyDigest> {
++    struct Hash {
++        static unsigned hash(const WebCore::ContentSecurityPolicyDigest& digest)
++        {
++            return StringHasher::computeHashAndMaskTop8Bits(digest.data(), digest.size());
++        }
++        static bool equal(const WebCore::ContentSecurityPolicyDigest& a, const WebCore::ContentSecurityPolicyDigest& b)
++        {
++            return a == b;
++        }
++        static const bool safeToCompareToEmptyOrDeleted = true;
++    };
++};
++
++}
++
++#endif // ContentSecurityPolicyHash_h
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicySourceList.cpp b/Source/WebCore/page/csp/ContentSecurityPolicySourceList.cpp
+index 408b40e2b..8044ae8bf 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicySourceList.cpp
++++ b/Source/WebCore/page/csp/ContentSecurityPolicySourceList.cpp
+@@ -33,6 +33,8 @@
+ #include "SecurityOrigin.h"
+ #include "URL.h"
+ #include <wtf/ASCIICType.h>
++#include <wtf/NeverDestroyed.h>
++#include <wtf/text/Base64.h>
+ 
+ namespace WebCore {
+ 
+@@ -125,6 +127,16 @@ bool ContentSecurityPolicySourceList::matches(const URL& url)
+     return false;
+ }
+ 
++bool ContentSecurityPolicySourceList::matches(const ContentSecurityPolicyHash& hash) const
++{
++    return m_hashes.contains(hash);
++}
++
++bool ContentSecurityPolicySourceList::matches(const String& nonce) const
++{
++    return m_nonces.contains(nonce);
++}
++
+ // source-list       = *WSP [ source *( 1*WSP source ) *WSP ]
+ //                   / *WSP "'none'" *WSP
+ //
+@@ -145,6 +157,12 @@ void ContentSecurityPolicySourceList::parse(const UChar* begin, const UChar* end
+         bool hostHasWildcard = false;
+         bool portHasWildcard = false;
+ 
++        if (parseNonceSource(beginSource, position))
++            continue;
++
++        if (parseHashSource(beginSource, position))
++            continue;
++
+         if (parseSource(beginSource, position, scheme, host, port, path, hostHasWildcard, portHasWildcard)) {
+             // Wildcard hosts and keyword sources ('self', 'unsafe-inline',
+             // etc.) aren't stored in m_list, but as attributes on the source
+@@ -385,4 +403,96 @@ bool ContentSecurityPolicySourceList::parsePort(const UChar* begin, const UChar*
+     return ok;
+ }
+ 
++static bool isBase64Character(UChar c)
++{
++    return isASCIIAlphanumeric(c) || c == '+' || c == '/' || c == '-' || c == '_';
++}
++
++// Match Blink's behavior of allowing an equal sign to appear anywhere in the value of the nonce
++// even though this does not match the behavior of Content Security Policy Level 3 spec.,
++// <https://w3c.github.io/webappsec-csp/> (29 February 2016).
++static bool isNonceCharacter(UChar c)
++{
++    return isBase64Character(c) || c == '=';
++}
++
++// nonce-source    = "'nonce-" nonce-value "'"
++// nonce-value     = base64-value
++bool ContentSecurityPolicySourceList::parseNonceSource(const UChar* begin, const UChar* end)
++{
++    static NeverDestroyed<String> noncePrefix("'nonce-", String::ConstructFromLiteral);
++    if (!StringView(begin, end - begin).startsWithIgnoringASCIICase(noncePrefix.get()))
++        return false;
++    const UChar* position = begin + noncePrefix.get().length();
++    const UChar* beginNonceValue = position;
++    skipWhile<UChar, isNonceCharacter>(position, end);
++    if (position >= end || position == beginNonceValue || *position != '\'')
++        return false;
++    m_nonces.add(String(beginNonceValue, position - beginNonceValue));
++    return true;
++}
++
++static bool parseHashAlgorithmAdvancingPosition(const UChar*& position, size_t length, ContentSecurityPolicyHashAlgorithm& algorithm)
++{
++    static struct {
++        NeverDestroyed<String> label;
++        ContentSecurityPolicyHashAlgorithm algorithm;
++    } labelToHashAlgorithmTable[] {
++        { ASCIILiteral("sha256"), ContentSecurityPolicyHashAlgorithm::SHA_256 },
++        { ASCIILiteral("sha384"), ContentSecurityPolicyHashAlgorithm::SHA_384 },
++        { ASCIILiteral("sha512"), ContentSecurityPolicyHashAlgorithm::SHA_512 },
++    };
++
++    StringView stringView(position, length);
++    for (auto& entry : labelToHashAlgorithmTable) {
++        String& label = entry.label.get();
++        if (!stringView.startsWithIgnoringASCIICase(label))
++            continue;
++        position += label.length();
++        algorithm = entry.algorithm;
++        return true;
++    }
++    return false;
++}
++
++// hash-source    = "'" hash-algorithm "-" base64-value "'"
++// hash-algorithm = "sha256" / "sha384" / "sha512"
++// base64-value  = 1*( ALPHA / DIGIT / "+" / "/" / "-" / "_" )*2( "=" )
++bool ContentSecurityPolicySourceList::parseHashSource(const UChar* begin, const UChar* end)
++{
++    if (begin == end)
++        return false;
++
++    const UChar* position = begin;
++    if (!skipExactly<UChar>(position, end, '\''))
++        return false;
++
++    ContentSecurityPolicyHashAlgorithm algorithm;
++    if (!parseHashAlgorithmAdvancingPosition(position, end - position, algorithm))
++        return false;
++
++    if (!skipExactly<UChar>(position, end, '-'))
++        return false;
++
++    const UChar* beginHashValue = position;
++    skipWhile<UChar, isBase64Character>(position, end);
++    skipExactly<UChar>(position, end, '=');
++    skipExactly<UChar>(position, end, '=');
++    if (position >= end || position == beginHashValue || *position != '\'')
++        return false;
++    Vector<uint8_t> digest;
++    StringView hashValue(beginHashValue, position - beginHashValue); // base64url or base64 encoded
++    // FIXME: Normalize Base64URL to Base64 instead of decoding twice. See <https://bugs.webkit.org/show_bug.cgi?id=155186>.
++    if (!base64Decode(hashValue.toStringWithoutCopying(), digest, Base64ValidatePadding)) {
++        if (!base64URLDecode(hashValue.toStringWithoutCopying(), digest))
++            return false;
++    }
++    if (digest.size() > maximumContentSecurityPolicyDigestLength)
++        return false;
++
++    m_hashes.add(std::make_pair(algorithm, digest));
++    m_hashAlgorithmsUsed |= algorithm;
++    return true;
++}
++
+ } // namespace WebCore
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicySourceList.h b/Source/WebCore/page/csp/ContentSecurityPolicySourceList.h
+index fdb9b7e09..811b6cec1 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicySourceList.h
++++ b/Source/WebCore/page/csp/ContentSecurityPolicySourceList.h
+@@ -27,8 +27,11 @@
+ #ifndef ContentSecurityPolicySourceList_h
+ #define ContentSecurityPolicySourceList_h
+ 
++#include "ContentSecurityPolicyHash.h"
+ #include "ContentSecurityPolicySource.h"
+-#include <wtf/Vector.h>
++#include <wtf/HashSet.h>
++#include <wtf/OptionSet.h>
++#include <wtf/text/StringHash.h>
+ #include <wtf/text/WTFString.h>
+ 
+ namespace WebCore {
+@@ -41,8 +44,14 @@ public:
+     ContentSecurityPolicySourceList(const ContentSecurityPolicy&, const String& directiveName);
+ 
+     void parse(const String&);
++
+     bool matches(const URL&);
+-    bool allowInline() const { return m_allowInline; }
++    bool matches(const ContentSecurityPolicyHash&) const;
++    bool matches(const String& nonce) const;
++
++    OptionSet<ContentSecurityPolicyHashAlgorithm> hashAlgorithmsUsed() const { return m_hashAlgorithmsUsed; }
++
++    bool allowInline() const { return m_allowInline && m_hashes.isEmpty() && m_nonces.isEmpty(); }
+     bool allowEval() const { return m_allowEval; }
+     bool allowSelf() const { return m_allowSelf; }
+ 
+@@ -55,10 +64,17 @@ private:
+     bool parsePort(const UChar* begin, const UChar* end, int& port, bool& portHasWildcard);
+     bool parsePath(const UChar* begin, const UChar* end, String& path);
+ 
++    bool parseNonceSource(const UChar* begin, const UChar* end);
++
+     bool isProtocolAllowedByStar(const URL&) const;
+ 
++    bool parseHashSource(const UChar* begin, const UChar* end);
++
+     const ContentSecurityPolicy& m_policy;
+     Vector<ContentSecurityPolicySource> m_list;
++    HashSet<String> m_nonces;
++    HashSet<ContentSecurityPolicyHash> m_hashes;
++    OptionSet<ContentSecurityPolicyHashAlgorithm> m_hashAlgorithmsUsed;
+     String m_directiveName;
+     bool m_allowSelf { false };
+     bool m_allowStar { false };
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.cpp b/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.cpp
+index 89133d4eb..4c4f11c42 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.cpp
++++ b/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.cpp
+@@ -47,4 +47,14 @@ bool ContentSecurityPolicySourceListDirective::allows(const URL& url)
+     return m_sourceList.matches(url);
+ }
+ 
++bool ContentSecurityPolicySourceListDirective::allows(const String& nonce) const
++{
++    return m_sourceList.matches(nonce);
++}
++
++bool ContentSecurityPolicySourceListDirective::allows(const ContentSecurityPolicyHash& hash) const
++{
++    return m_sourceList.matches(hash);
++}
++
+ } // namespace WebCore
+diff --git a/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.h b/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.h
+index 9d4e2114c..ac650052d 100644
+--- a/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.h
++++ b/Source/WebCore/page/csp/ContentSecurityPolicySourceListDirective.h
+@@ -39,9 +39,13 @@ public:
+     ContentSecurityPolicySourceListDirective(const String& name, const String& value, const ContentSecurityPolicy&);
+ 
+     bool allows(const URL&);
++    bool allows(const ContentSecurityPolicyHash&) const;
++    bool allows(const String& nonce) const;
+     bool allowInline() const { return m_sourceList.allowInline(); }
+     bool allowEval() const { return m_sourceList.allowEval(); }
+ 
++    OptionSet<ContentSecurityPolicyHashAlgorithm> hashAlgorithmsUsed() const { return m_sourceList.hashAlgorithmsUsed(); }
++
+ private:
+     ContentSecurityPolicySourceList m_sourceList;
+ };
+diff --git a/Source/WebCore/page/qt/EventHandlerQt.cpp b/Source/WebCore/page/qt/EventHandlerQt.cpp
+index 240ea75eb..b717b1f54 100644
+--- a/Source/WebCore/page/qt/EventHandlerQt.cpp
++++ b/Source/WebCore/page/qt/EventHandlerQt.cpp
+@@ -49,6 +49,7 @@
+ #include "PlatformWheelEvent.h"
+ #include "RenderWidget.h"
+ #include "Scrollbar.h"
++#include <QCoreApplication>
+ 
+ namespace WebCore {
+ 
+@@ -123,7 +124,14 @@ bool EventHandler::passMouseReleaseEventToSubframe(MouseEventWithHitTestResults&
+ unsigned EventHandler::accessKeyModifiers()
+ {
+ #if OS(DARWIN)
+-    return PlatformEvent::CtrlKey | PlatformEvent::AltKey;
++    // On macOS, the ControlModifier value corresponds
++    // to the Command keys on the keyboard,
++    // and the MetaModifier value corresponds to the Control keys.
++    // See http://doc.qt.io/qt-5/qt.html#KeyboardModifier-enum
++    if (UNLIKELY(QCoreApplication::testAttribute(Qt::AA_MacDontSwapCtrlAndMeta)))
++        return PlatformEvent::CtrlKey | PlatformEvent::AltKey;
++    else
++        return PlatformEvent::MetaKey | PlatformEvent::AltKey;
+ #else
+     return PlatformEvent::AltKey;
+ #endif
+diff --git a/Source/WebCore/crypto/CryptoDigest.h b/Source/WebCore/platform/crypto/CryptoDigest.h
+similarity index 88%
+rename from Source/WebCore/crypto/CryptoDigest.h
+rename to Source/WebCore/platform/crypto/CryptoDigest.h
+index 353b13e82..31f075aa3 100644
+--- a/Source/WebCore/crypto/CryptoDigest.h
++++ b/Source/WebCore/platform/crypto/CryptoDigest.h
+@@ -1,5 +1,5 @@
+ /*
+- * Copyright (C) 2013 Apple Inc. All rights reserved.
++ * Copyright (C) 2013, 2016 Apple Inc. All rights reserved.
+  *
+  * Redistribution and use in source and binary forms, with or without
+  * modification, are permitted provided that the following conditions
+@@ -26,12 +26,9 @@
+ #ifndef CryptoDigest_h
+ #define CryptoDigest_h
+ 
+-#include "CryptoAlgorithmIdentifier.h"
+ #include <wtf/Noncopyable.h>
+ #include <wtf/Vector.h>
+ 
+-#if ENABLE(SUBTLE_CRYPTO)
+-
+ namespace WebCore {
+ 
+ struct CryptoDigestContext;
+@@ -39,7 +36,14 @@ struct CryptoDigestContext;
+ class CryptoDigest {
+     WTF_MAKE_NONCOPYABLE(CryptoDigest);
+ public:
+-    static std::unique_ptr<CryptoDigest> create(CryptoAlgorithmIdentifier);
++    enum class Algorithm {
++        SHA_1,
++        SHA_224,
++        SHA_256,
++        SHA_384,
++        SHA_512,
++    };
++    static std::unique_ptr<CryptoDigest> create(Algorithm);
+     ~CryptoDigest();
+ 
+     void addBytes(const void* input, size_t length);
+@@ -53,5 +57,4 @@ private:
+ 
+ } // namespace WebCore
+ 
+-#endif // ENABLE(SUBTLE_CRYPTO)
+ #endif // CryptoDigest_h
+diff --git a/Source/WebCore/platform/crypto/qt/CryptoDigestQt.cpp b/Source/WebCore/platform/crypto/qt/CryptoDigestQt.cpp
+new file mode 100644
+index 000000000..1dcb8bf72
+--- /dev/null
++++ b/Source/WebCore/platform/crypto/qt/CryptoDigestQt.cpp
+@@ -0,0 +1,93 @@
++/*
++ * Copyright (C) 2016 Konstantin Tokavev <annulen@yandex.ru>
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions
++ * are met:
++ * 1. Redistributions of source code must retain the above copyright
++ *    notice, this list of conditions and the following disclaimer.
++ * 2. Redistributions in binary form must reproduce the above copyright
++ *    notice, this list of conditions and the following disclaimer in the
++ *    documentation and/or other materials provided with the distribution.
++ *
++ * THIS SOFTWARE IS PROVIDED BY APPLE INC. AND ITS CONTRIBUTORS ``AS IS''
++ * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
++ * THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
++ * PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL APPLE INC. OR ITS CONTRIBUTORS
++ * BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
++ * CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
++ * SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
++ * INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
++ * CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
++ * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
++ * THE POSSIBILITY OF SUCH DAMAGE.
++ */
++
++#include "config.h"
++#include "CryptoDigest.h"
++
++#include <QCryptographicHash>
++#include <QDebug>
++
++namespace WebCore {
++
++static QCryptographicHash::Algorithm toQtAlgorithm(CryptoDigest::Algorithm algorithm)
++{
++    switch (algorithm) {
++    case CryptoDigest::Algorithm::SHA_1:
++        return QCryptographicHash::Sha1;
++
++    case CryptoDigest::Algorithm::SHA_224:
++        return QCryptographicHash::Sha224;
++
++    case CryptoDigest::Algorithm::SHA_256:
++        return QCryptographicHash::Sha256;
++
++    case CryptoDigest::Algorithm::SHA_384:
++        return QCryptographicHash::Sha384;
++
++    case CryptoDigest::Algorithm::SHA_512:
++        return QCryptographicHash::Sha512;
++    }
++
++    ASSERT_NOT_REACHED();
++    return QCryptographicHash::Algorithm();
++}
++
++struct CryptoDigestContext {
++    CryptoDigestContext(QCryptographicHash::Algorithm algorithm)
++        : hash(algorithm)
++    {
++    }
++    QCryptographicHash hash;
++};
++
++CryptoDigest::CryptoDigest()
++{
++}
++
++CryptoDigest::~CryptoDigest()
++{
++}
++
++std::unique_ptr<CryptoDigest> CryptoDigest::create(CryptoDigest::Algorithm algorithm)
++{
++    std::unique_ptr<CryptoDigest> digest(new CryptoDigest);
++    digest->m_context.reset(new CryptoDigestContext(toQtAlgorithm(algorithm)));
++    return digest;
++}
++
++void CryptoDigest::addBytes(const void* input, size_t length)
++{
++    m_context->hash.addData(static_cast<const char*>(input), length);
++}
++
++Vector<uint8_t> CryptoDigest::computeHash()
++{
++    QByteArray digest = m_context->hash.result();
++    Vector<uint8_t> result(digest.size());
++    memcpy(result.data(), digest.constData(), digest.size());
++    return result;
++}
++
++} // namespace WebCore
+diff --git a/Source/WebCore/platform/graphics/GraphicsContext.h b/Source/WebCore/platform/graphics/GraphicsContext.h
+index d7f529cf8..8b821fa98 100644
+--- a/Source/WebCore/platform/graphics/GraphicsContext.h
++++ b/Source/WebCore/platform/graphics/GraphicsContext.h
+@@ -563,6 +563,7 @@ public:
+ 
+ #if PLATFORM(QT)
+     void pushTransparencyLayerInternal(const QRect&, qreal, QPixmap&);
++    void popTransparencyLayerInternal();
+     void takeOwnershipOfPlatformContext();
+ #endif
+ 
 diff --git a/Source/WebCore/platform/graphics/WOFFFileFormat.cpp b/Source/WebCore/platform/graphics/WOFFFileFormat.cpp
 index c2323cf04..d8f4a5da7 100644
 --- a/Source/WebCore/platform/graphics/WOFFFileFormat.cpp
@@ -37031,7 +38250,7 @@ index 7f2f07b60..fe63ff7bb 100644
  #if USE(TEXTURE_MAPPER_GL)
  #include <texmap/TextureMapperGL.h>
 diff --git a/Source/WebCore/platform/graphics/qt/GraphicsContextQt.cpp b/Source/WebCore/platform/graphics/qt/GraphicsContextQt.cpp
-index 59519398e..260081946 100644
+index 59519398e..1e041050e 100644
 --- a/Source/WebCore/platform/graphics/qt/GraphicsContextQt.cpp
 +++ b/Source/WebCore/platform/graphics/qt/GraphicsContextQt.cpp
 @@ -47,10 +47,8 @@
@@ -37045,6 +38264,61 @@ index 59519398e..260081946 100644
  #include "Path.h"
  #include "Pattern.h"
  #include "ShadowBlur.h"
+@@ -360,7 +358,7 @@ void GraphicsContext::restorePlatformState()
+ {
+     if (!m_data->layers.isEmpty() && !m_data->layers.top()->alphaMask.isNull())
+         if (!--m_data->layers.top()->saveCounter)
+-            endPlatformTransparencyLayer();
++            popTransparencyLayerInternal();
+ 
+     m_data->p()->restore();
+ }
+@@ -1315,18 +1313,39 @@ void GraphicsContext::beginPlatformTransparencyLayer(float opacity)
+     ++m_data->layerCount;
+ }
+ 
++void GraphicsContext::popTransparencyLayerInternal()
++{
++    TransparencyLayer* layer = m_data->layers.pop();
++    ASSERT(!layer->alphaMask.isNull());
++    ASSERT(layer->saveCounter == 0);
++    layer->painter.resetTransform();
++    layer->painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
++    layer->painter.drawPixmap(QPoint(), layer->alphaMask);
++    layer->painter.end();
++
++    QPainter* p = m_data->p();
++    p->save();
++    p->resetTransform();
++    p->setOpacity(layer->opacity);
++    p->drawPixmap(layer->offset, layer->pixmap);
++    p->restore();
++
++    delete layer;
++}
++
+ void GraphicsContext::endPlatformTransparencyLayer()
+ {
+     if (paintingDisabled())
+         return;
+ 
++    while ( ! m_data->layers.top()->alphaMask.isNull() ){
++        --m_data->layers.top()->saveCounter;
++        popTransparencyLayerInternal();
++        if (m_data->layers.isEmpty())
++            return;
++    }
+     TransparencyLayer* layer = m_data->layers.pop();
+-    if (!layer->alphaMask.isNull()) {
+-        layer->painter.resetTransform();
+-        layer->painter.setCompositionMode(QPainter::CompositionMode_DestinationIn);
+-        layer->painter.drawPixmap(QPoint(), layer->alphaMask);
+-    } else
+-        --m_data->layerCount; // see the comment for layerCount
++    --m_data->layerCount; // see the comment for layerCount
+     layer->painter.end();
+ 
+     QPainter* p = m_data->p();
 diff --git a/Source/WebCore/platform/graphics/qt/IconQt.cpp b/Source/WebCore/platform/graphics/qt/IconQt.cpp
 index 24f13067d..9bd3d5323 100644
 --- a/Source/WebCore/platform/graphics/qt/IconQt.cpp
@@ -37070,10 +38344,10 @@ index e76572134..9037ae6ac 100644
  #include "StillImageQt.h"
  
 diff --git a/Source/WebCore/platform/graphics/qt/ImageBufferQt.cpp b/Source/WebCore/platform/graphics/qt/ImageBufferQt.cpp
-index 380d22bb5..2295362aa 100644
+index 380d22bb5..af798f761 100644
 --- a/Source/WebCore/platform/graphics/qt/ImageBufferQt.cpp
 +++ b/Source/WebCore/platform/graphics/qt/ImageBufferQt.cpp
-@@ -31,14 +31,12 @@
+@@ -31,14 +31,11 @@
  #include "ImageBuffer.h"
  
  #include "GraphicsContext.h"
@@ -37081,7 +38355,7 @@ index 380d22bb5..2295362aa 100644
  #include "IntRect.h"
  #include "MIMETypeRegistry.h"
  #include "StillImageQt.h"
- #include "TransparencyLayer.h"
+-#include "TransparencyLayer.h"
  #include <runtime/JSCInlines.h>
  #include <runtime/TypedArrayInlines.h>
 -#include <wtf/text/CString.h>
@@ -37157,6 +38431,85 @@ index 73a0e414f..bf3e8c6c5 100644
  
  namespace WebCore {
  
+diff --git a/Source/WebCore/platform/graphics/texmap/TextureMapperImageBuffer.cpp b/Source/WebCore/platform/graphics/texmap/TextureMapperImageBuffer.cpp
+index 48130eba4..b8b605805 100644
+--- a/Source/WebCore/platform/graphics/texmap/TextureMapperImageBuffer.cpp
++++ b/Source/WebCore/platform/graphics/texmap/TextureMapperImageBuffer.cpp
+@@ -114,14 +114,70 @@ void TextureMapperImageBuffer::drawSolidColor(const FloatRect& rect, const Trans
+     context->restore();
+ }
+ 
+-void TextureMapperImageBuffer::drawBorder(const Color&, float /* borderWidth */, const FloatRect&, const TransformationMatrix&)
++void TextureMapperImageBuffer::drawBorder(const Color& color, float borderWidth , const FloatRect& rect, const TransformationMatrix& matrix)
+ {
+-    notImplemented();
++#if PLATFORM(QT)
++    GraphicsContext* context = currentContext();
++    if (!context)
++        return;
++
++    context->save();
++    context->setCompositeOperation(isInMaskMode() ? CompositeDestinationIn : CompositeSourceOver);
++#if ENABLE(3D_TRANSFORMS)
++    context->concat3DTransform(matrix);
++#else
++    context->concatCTM(matrix.toAffineTransform());
++#endif
++
++    QPainter& painter = *context->platformContext();
++    painter.setBrush(Qt::NoBrush);
++    QPen newPen(color);
++    newPen.setWidthF(borderWidth);
++    painter.setPen(newPen);
++    painter.drawRect(rect);
++
++    context->restore();
++#endif
+ }
+ 
+-void TextureMapperImageBuffer::drawNumber(int /* number */, const Color&, const FloatPoint&, const TransformationMatrix&)
++void TextureMapperImageBuffer::drawNumber(int number, const Color& color, const FloatPoint& targetPoint, const TransformationMatrix& matrix)
+ {
+-    notImplemented();
++#if PLATFORM(QT)
++    GraphicsContext* context = currentContext();
++    if (!context)
++        return;
++
++    context->save();
++    context->setCompositeOperation(isInMaskMode() ? CompositeDestinationIn : CompositeSourceOver);
++#if ENABLE(3D_TRANSFORMS)
++    context->concat3DTransform(matrix);
++#else
++    context->concatCTM(matrix.toAffineTransform());
++#endif
++
++    // Partially duplicates TextureMapperGL::drawNumber
++    int pointSize = 8;
++    QString counterString = QString::number(number);
++
++    QFont font(QString::fromLatin1("Monospace"), pointSize, QFont::Bold);
++    font.setStyleHint(QFont::TypeWriter);
++
++    QFontMetrics fontMetrics(font);
++    int width = fontMetrics.width(counterString) + 4;
++    int height = fontMetrics.height();
++
++    IntSize size(width, height);
++    IntRect sourceRect(IntPoint::zero(), size);
++
++    QPainter& painter = *context->platformContext();
++    painter.translate(targetPoint);
++    painter.fillRect(sourceRect, color);
++    painter.setFont(font);
++    painter.setPen(Qt::white);
++    painter.drawText(2, height * 0.85, counterString);
++
++    context->restore();
++#endif
+ }
+ 
+ PassRefPtr<BitmapTexture> BitmapTextureImageBuffer::applyFilters(TextureMapper&, const FilterOperations& filters)
 diff --git a/Source/WebCore/platform/graphics/win/MediaPlayerPrivateMediaFoundation.cpp b/Source/WebCore/platform/graphics/win/MediaPlayerPrivateMediaFoundation.cpp
 index 0610c85b6..98f2ec964 100644
 --- a/Source/WebCore/platform/graphics/win/MediaPlayerPrivateMediaFoundation.cpp
@@ -37413,6 +38766,38 @@ index 3b08c06cd..d1cf87fdd 100644
  }
  
  bool cookiesEnabled(const NetworkStorageSession& session, const URL& /*firstParty*/, const URL& /*url*/)
+diff --git a/Source/WebCore/platform/network/qt/DNSQt.cpp b/Source/WebCore/platform/network/qt/DNSQt.cpp
+index b12cbaa09..4559d17a0 100644
+--- a/Source/WebCore/platform/network/qt/DNSQt.cpp
++++ b/Source/WebCore/platform/network/qt/DNSQt.cpp
+@@ -24,6 +24,7 @@
+ #include <QHostInfo>
+ #include <QObject>
+ #include <QString>
++#include <wtf/NeverDestroyed.h>
+ #include <wtf/text/WTFString.h>
+ 
+ namespace WebCore {
+@@ -34,7 +35,7 @@ public:
+     DnsPrefetchHelper() : QObject() { }
+ 
+ public Q_SLOTS:
+-    void lookup(QString hostname)
++    void lookup(const String& hostname)
+     {
+         if (hostname.isEmpty()) {
+             DNSResolveQueue::singleton().decrementRequestCount();
+@@ -71,8 +72,8 @@ void DNSResolveQueue::updateIsUsingProxy()
+ // This is called by the platform-independent DNSResolveQueue.
+ void DNSResolveQueue::platformResolve(const String& hostname)
+ {
+-    static DnsPrefetchHelper dnsPrefetchHelper;
+-    dnsPrefetchHelper.lookup(QString(hostname));
++    static NeverDestroyed<DnsPrefetchHelper> dnsPrefetchHelper;
++    dnsPrefetchHelper.get().lookup(hostname);
+ }
+ 
+ } // namespace
 diff --git a/Source/WebCore/platform/network/qt/QNetworkReplyHandler.cpp b/Source/WebCore/platform/network/qt/QNetworkReplyHandler.cpp
 index cd096bfe7..1b60c5131 100644
 --- a/Source/WebCore/platform/network/qt/QNetworkReplyHandler.cpp
@@ -37445,20 +38830,20 @@ index b850e2327..8b69383ff 100644
  #include "QNetworkReplyHandler.h"
  #include "ResourceHandleClient.h"
 diff --git a/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp b/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp
-index d74073ec5..b7f9447bc 100644
+index d74073ec5..c54a8115b 100644
 --- a/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp
 +++ b/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp
-@@ -18,14 +18,11 @@
+@@ -18,18 +18,27 @@
  */
  
  #include "config.h"
 -#include "NetworkingContext.h"
  #include "ResourceRequest.h"
 -#include "ThirdPartyCookiesQt.h"
--
+ 
 -#include "BlobData.h"
 -#include "BlobRegistryImpl.h"
- 
+-
 -#include <qglobal.h>
 +#include "BlobUrlConversion.h"
 +#include "NetworkingContext.h"
@@ -37466,12 +38851,29 @@ index d74073ec5..b7f9447bc 100644
  
  #include <QNetworkRequest>
  #include <QUrl>
-@@ -43,44 +40,11 @@ unsigned initializeMaximumHTTPConnectionCountPerHost()
+ 
++// HTTP/2 is implemented since Qt 5.8, but QTBUG-64359 makes it unusable in browser
++#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 4)
++#define USE_HTTP2 1
++#endif
++
++// HTTP2AllowedAttribute enforces HTTP/2 instead of negotiating, see QTBUG-61397
++#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
++#define HTTP2_IS_BUGGY_WITHOUT_HTTPS 1
++#else
++#define HTTP2_IS_BUGGY_WITHOUT_HTTPS 0
++#endif
++
+ namespace WebCore {
+ 
+ // The limit can be found in qhttpnetworkconnection.cpp.
+@@ -43,44 +52,11 @@ unsigned initializeMaximumHTTPConnectionCountPerHost()
      return 6 * (1 + 3 + 2);
  }
  
 -static void appendBlobResolved(QByteArray& data, const QUrl& url, QString* contentType = 0)
--{
++static QUrl toQUrl(const URL& url)
+ {
 -    RefPtr<BlobData> blobData = static_cast<BlobRegistryImpl&>(blobRegistry()).getBlobDataFromURL(url);
 -    if (!blobData)
 -        return;
@@ -37494,8 +38896,7 @@ index d74073ec5..b7f9447bc 100644
 -}
 -
 -static void resolveBlobUrl(const QUrl& url, QUrl& resolvedUrl)
-+static QUrl toQUrl(const URL& url)
- {
+-{
 -    RefPtr<BlobData> blobData = static_cast<BlobRegistryImpl&>(blobRegistry()).getBlobDataFromURL(url);
 -    if (!blobData)
 -        return;
@@ -37515,28 +38916,31 @@ index d74073ec5..b7f9447bc 100644
  }
  
  static inline QByteArray stringToByteArray(const String& string)
-@@ -93,14 +57,16 @@ static inline QByteArray stringToByteArray(const String& string)
+@@ -93,13 +69,19 @@ static inline QByteArray stringToByteArray(const String& string)
  QNetworkRequest ResourceRequest::toNetworkRequest(NetworkingContext *context) const
  {
      QNetworkRequest request;
 -    QUrl newurl = url();
--
++    const URL& originalUrl = url();
++    request.setUrl(toQUrl(originalUrl));
++    request.setOriginatingObject(context ? context->originatingObject() : 0);
+ 
 -    if (newurl.scheme() == QLatin1String("blob"))
 -        resolveBlobUrl(url(), newurl);
--
-+    QUrl newurl = toQUrl(url());
-     request.setUrl(newurl);
-     request.setOriginatingObject(context ? context->originatingObject() : 0);
- 
-+#if QT_VERSION >= QT_VERSION_CHECK(5, 8, 0)
-+    // HTTP2AllowedAttribute enforces HTTP/2 instead of negotiating, see QTBUG-61397
-+    if (newurl.scheme().toLower() == QLatin1String("https"))
-+        request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
++#if USE(HTTP2)
++#if HTTP2_IS_BUGGY_WITHOUT_HTTPS
++    if (originalUrl.protocolIs("https"))
 +#endif
-+
++    {
++        request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
++    }
++#endif // USE(HTTP2)
+ 
+-    request.setUrl(newurl);
+-    request.setOriginatingObject(context ? context->originatingObject() : 0);
+ 
      const HTTPHeaderMap &headers = httpHeaderFields();
      for (HTTPHeaderMap::const_iterator it = headers.begin(), end = headers.end();
-          it != end; ++it) {
 diff --git a/Source/WebCore/platform/qt/DeviceMotionClientQt.cpp b/Source/WebCore/platform/qt/DeviceMotionClientQt.cpp
 index 88fb5c1c6..5c01f29f5 100644
 --- a/Source/WebCore/platform/qt/DeviceMotionClientQt.cpp
@@ -37549,6 +38953,19 @@ index 88fb5c1c6..5c01f29f5 100644
  
  namespace WebCore {
  
+diff --git a/Source/WebCore/platform/qt/EventLoopQt.cpp b/Source/WebCore/platform/qt/EventLoopQt.cpp
+index 39bb54c53..c0ca31ec5 100644
+--- a/Source/WebCore/platform/qt/EventLoopQt.cpp
++++ b/Source/WebCore/platform/qt/EventLoopQt.cpp
+@@ -26,7 +26,7 @@ namespace WebCore {
+ 
+ void EventLoop::cycle()
+ {
+-    QCoreApplication::processEvents();
++    QCoreApplication::processEvents(QEventLoop::WaitForMoreEvents);
+ }
+ 
+ } // namespace WebCore
 diff --git a/Source/WebCore/platform/qt/GamepadsQt.cpp b/Source/WebCore/platform/qt/GamepadsQt.cpp
 index 6fff52f9a..70b4305de 100644
 --- a/Source/WebCore/platform/qt/GamepadsQt.cpp
@@ -37597,6 +39014,83 @@ index 1beac6a68..1a0006842 100644
  #include "IntPoint.h"
  #include "IntSize.h"
  #include "PlatformEvent.h"
+diff --git a/Source/WebCore/platform/qt/PlatformKeyboardEventQt.cpp b/Source/WebCore/platform/qt/PlatformKeyboardEventQt.cpp
+index a0e67e494..2e667e2da 100644
+--- a/Source/WebCore/platform/qt/PlatformKeyboardEventQt.cpp
++++ b/Source/WebCore/platform/qt/PlatformKeyboardEventQt.cpp
+@@ -808,6 +808,7 @@ static bool isVirtualKeyCodeRepresentingCharacter(int code)
+     }
+ }
+ 
++template<bool unmodified>
+ static String keyTextForKeyEvent(const QKeyEvent* event)
+ {
+     switch (event->key()) {
+@@ -820,6 +821,53 @@ static String keyTextForKeyEvent(const QKeyEvent* event)
+     case Qt::Key_Enter:
+         if (event->text().isNull())
+             return ASCIILiteral("\r");
++        break;
++
++// Workaround for broken accesskey when QKeyEvent has modifier, see QTBUG-64891
++#define MAKE_TEXT_FOR_KEY(QtKey, Character) \
++    case Qt::Key_##QtKey: \
++        if (unmodified && event->text().isNull()) \
++            return ASCIILiteral(#Character); \
++        break;
++
++    MAKE_TEXT_FOR_KEY(0, 0);
++    MAKE_TEXT_FOR_KEY(1, 1);
++    MAKE_TEXT_FOR_KEY(2, 2);
++    MAKE_TEXT_FOR_KEY(3, 3);
++    MAKE_TEXT_FOR_KEY(4, 4);
++    MAKE_TEXT_FOR_KEY(5, 5);
++    MAKE_TEXT_FOR_KEY(6, 6);
++    MAKE_TEXT_FOR_KEY(7, 7);
++    MAKE_TEXT_FOR_KEY(8, 8);
++    MAKE_TEXT_FOR_KEY(9, 9);
++    MAKE_TEXT_FOR_KEY(A, a);
++    MAKE_TEXT_FOR_KEY(B, b);
++    MAKE_TEXT_FOR_KEY(C, c);
++    MAKE_TEXT_FOR_KEY(D, d);
++    MAKE_TEXT_FOR_KEY(E, e);
++    MAKE_TEXT_FOR_KEY(F, f);
++    MAKE_TEXT_FOR_KEY(G, g);
++    MAKE_TEXT_FOR_KEY(H, h);
++    MAKE_TEXT_FOR_KEY(I, i);
++    MAKE_TEXT_FOR_KEY(J, j);
++    MAKE_TEXT_FOR_KEY(K, k);
++    MAKE_TEXT_FOR_KEY(L, l);
++    MAKE_TEXT_FOR_KEY(M, m);
++    MAKE_TEXT_FOR_KEY(N, n);
++    MAKE_TEXT_FOR_KEY(O, o);
++    MAKE_TEXT_FOR_KEY(P, p);
++    MAKE_TEXT_FOR_KEY(Q, q);
++    MAKE_TEXT_FOR_KEY(R, r);
++    MAKE_TEXT_FOR_KEY(S, s);
++    MAKE_TEXT_FOR_KEY(T, t);
++    MAKE_TEXT_FOR_KEY(U, u);
++    MAKE_TEXT_FOR_KEY(V, v);
++    MAKE_TEXT_FOR_KEY(W, w);
++    MAKE_TEXT_FOR_KEY(X, x);
++    MAKE_TEXT_FOR_KEY(Y, y);
++    MAKE_TEXT_FOR_KEY(Z, z);
++
++#undef MAKE_TEXT_FOR_KEY
+     }
+     return event->text();
+ }
+@@ -840,8 +888,8 @@ PlatformKeyboardEvent::PlatformKeyboardEvent(QKeyEvent* event, bool useNativeVir
+         m_modifiers |= MetaKey;
+ 
+     m_useNativeVirtualKeyAsDOMKey = useNativeVirtualKeyAsDOMKey;
+-    m_text = keyTextForKeyEvent(event);
+-    m_unmodifiedText = m_text; // FIXME: not correct
++    m_text = keyTextForKeyEvent<false>(event);
++    m_unmodifiedText = keyTextForKeyEvent<true>(event);
+     m_keyIdentifier = keyIdentifierForQtKeyCode(event->key());
+     m_autoRepeat = event->isAutoRepeat();
+     m_isKeypad = (state & Qt::KeypadModifier);
 diff --git a/Source/WebCore/platform/qt/PlatformScreenQt.cpp b/Source/WebCore/platform/qt/PlatformScreenQt.cpp
 index 91ff0ab43..2790a0d9c 100644
 --- a/Source/WebCore/platform/qt/PlatformScreenQt.cpp
@@ -38668,7 +40162,7 @@ index edc22fee9..82dc1e662 100644
      endif ()
  
 diff --git a/Source/WebKit/PlatformQt.cmake b/Source/WebKit/PlatformQt.cmake
-index da199aeaf..f0e4acf8a 100644
+index da199aeaf..3792def6f 100644
 --- a/Source/WebKit/PlatformQt.cmake
 +++ b/Source/WebKit/PlatformQt.cmake
 @@ -16,10 +16,22 @@ macro(generate_version_header _file _var _prefix)
@@ -38694,15 +40188,6 @@ index da199aeaf..f0e4acf8a 100644
  list(APPEND WebKit_INCLUDE_DIRECTORIES
      "${WEBCORE_DIR}"
      "${DERIVED_SOURCES_DIR}"
-@@ -406,7 +418,7 @@ install(
-     COMPONENT Data
- )
- 
--file(GLOB WebKit_PRIVATE_HEADERS qt/Api/*_p.h)
-+file(GLOB WebKit_PRIVATE_HEADERS qt/Api/*_p.h ../WebKit2/UIProcess/API/qt/*_p.h)
- install(
-     FILES
-         ${WebKit_PRIVATE_HEADERS}
 @@ -432,6 +444,13 @@ endif ()
  if (ENABLE_DEVICE_ORIENTATION)
      set(WEBKIT_PRI_RUNTIME_DEPS "sensors ${WEBKIT_PRI_RUNTIME_DEPS}")
@@ -38734,7 +40219,7 @@ index da199aeaf..f0e4acf8a 100644
      set(WEBKITWIDGETS_PRI_DEPS "${WEBKITWIDGETS_PRI_DEPS} printsupport")
 -    set(EXTRA_LIBS_NAMES WebCore JavaScriptCore WTF xml2)
 +    set(EXTRA_LIBS_NAMES WebCore JavaScriptCore WTF)
-+    append_lib_names_to_list(EXTRA_LIBS_NAMES ${LIBXML2_LIBRARIES} ${SQLITE_LIBRARIES} ${ZLIB_LIBRARIES})
++    append_lib_names_to_list(EXTRA_LIBS_NAMES ${LIBXML2_LIBRARIES} ${SQLITE_LIBRARIES} ${ZLIB_LIBRARIES} ${JPEG_LIBRARIES} ${PNG_LIBRARIES})
      if (NOT USE_SYSTEM_MALLOC)
          list(APPEND EXTRA_LIBS_NAMES bmalloc)
      endif ()
@@ -38760,7 +40245,15 @@ index da199aeaf..f0e4acf8a 100644
      foreach (LIB_NAME ${EXTRA_LIBS_NAMES})
          set(WEBKIT_PKGCONGIG_DEPS "${WEBKIT_PKGCONGIG_DEPS} ${LIB_PREFIX}${LIB_NAME}")
          set(WEBKIT_PRI_EXTRA_LIBS "${WEBKIT_PRI_EXTRA_LIBS} -l${LIB_PREFIX}${LIB_NAME}")
-@@ -496,11 +519,19 @@ if (KDE_INSTALL_USE_QT_SYS_PATHS)
+@@ -479,6 +502,7 @@ endif ()
+ if (NOT MACOS_BUILD_FRAMEWORKS)
+     ecm_generate_pkgconfig_file(
+         BASE_NAME Qt5WebKit
++        DESCRIPTION "Qt WebKit module"
+         DEPS "${WEBKIT_PKGCONGIG_DEPS}"
+         FILENAME_VAR WebKit_PKGCONFIG_FILENAME
+     )
+@@ -496,11 +520,19 @@ if (KDE_INSTALL_USE_QT_SYS_PATHS)
              INCLUDE_INSTALL_DIR "$$QT_MODULE_LIB_BASE/QtWebKit.framework/Headers"
              MODULE_CONFIG "lib_bundle"
          )
@@ -38780,7 +40273,7 @@ index da199aeaf..f0e4acf8a 100644
      endif ()
  else ()
      set(WebKit_PRI_ARGUMENTS
-@@ -511,14 +542,24 @@ else ()
+@@ -511,14 +543,24 @@ else ()
              INCLUDE_INSTALL_DIR "${LIB_INSTALL_DIR}/QtWebKit.framework/Headers"
              MODULE_CONFIG "lib_bundle"
          )
@@ -38805,7 +40298,7 @@ index da199aeaf..f0e4acf8a 100644
  if (MACOS_BUILD_FRAMEWORKS)
      set(WebKit_OUTPUT_NAME QtWebKit)
  else ()
-@@ -538,7 +579,23 @@ ecm_generate_pri_file(
+@@ -538,7 +580,23 @@ ecm_generate_pri_file(
      FILENAME_VAR WebKit_PRI_FILENAME
      ${WebKit_PRI_ARGUMENTS}
  )
@@ -38830,7 +40323,15 @@ index da199aeaf..f0e4acf8a 100644
  
  if (QT_STATIC_BUILD)
      set(WebKit_LIBRARY_TYPE STATIC)
-@@ -685,11 +742,19 @@ if (KDE_INSTALL_USE_QT_SYS_PATHS)
+@@ -669,6 +727,7 @@ install(
+ if (NOT MACOS_BUILD_FRAMEWORKS)
+     ecm_generate_pkgconfig_file(
+         BASE_NAME Qt5WebKitWidgets
++        DESCRIPTION "Qt WebKitWidgets module"
+         DEPS "${WEBKITWIDGETS_PKGCONFIG_DEPS}"
+         FILENAME_VAR WebKitWidgets_PKGCONFIG_FILENAME
+     )
+@@ -685,11 +744,19 @@ if (KDE_INSTALL_USE_QT_SYS_PATHS)
              INCLUDE_INSTALL_DIR "$$QT_MODULE_LIB_BASE/QtWebKitWidgets.framework/Headers"
              MODULE_CONFIG "lib_bundle"
          )
@@ -38850,7 +40351,7 @@ index da199aeaf..f0e4acf8a 100644
      endif ()
  else ()
      set(WebKitWidgets_PRI_ARGUMENTS
-@@ -700,14 +765,24 @@ else ()
+@@ -700,14 +767,24 @@ else ()
              INCLUDE_INSTALL_DIR "${LIB_INSTALL_DIR}/QtWebKitWidgets.framework/Headers"
              MODULE_CONFIG "lib_bundle"
          )
@@ -38875,7 +40376,7 @@ index da199aeaf..f0e4acf8a 100644
  if (MACOS_BUILD_FRAMEWORKS)
      set(WebKitWidgets_OUTPUT_NAME QtWebKitWidgets)
  else ()
-@@ -726,7 +801,23 @@ ecm_generate_pri_file(
+@@ -726,7 +803,23 @@ ecm_generate_pri_file(
      FILENAME_VAR WebKitWidgets_PRI_FILENAME
      ${WebKitWidgets_PRI_ARGUMENTS}
  )
@@ -38900,7 +40401,7 @@ index da199aeaf..f0e4acf8a 100644
  
  if (MSVC)
      if (CMAKE_SIZEOF_VOID_P EQUAL 8)
-@@ -758,7 +849,7 @@ install(TARGETS WebKitWidgets EXPORT Qt5WebKitWidgetsTargets
+@@ -758,7 +851,7 @@ install(TARGETS WebKitWidgets EXPORT Qt5WebKitWidgetsTargets
          DESTINATION "${LIB_INSTALL_DIR}"
          RUNTIME DESTINATION "${BIN_INSTALL_DIR}"
  )
@@ -38909,7 +40410,7 @@ index da199aeaf..f0e4acf8a 100644
      install(FILES $<TARGET_PDB_FILE:WebKitWidgets> DESTINATION "${BIN_INSTALL_DIR}" OPTIONAL)
  endif ()
  
-@@ -786,6 +877,7 @@ if (COMPILER_IS_GCC_OR_CLANG)
+@@ -786,6 +879,7 @@ if (COMPILER_IS_GCC_OR_CLANG)
      set_source_files_properties(
          qt/Api/qwebdatabase.cpp
          qt/Api/qwebelement.cpp
@@ -38917,7 +40418,7 @@ index da199aeaf..f0e4acf8a 100644
          qt/Api/qwebhistory.cpp
          qt/Api/qwebhistoryinterface.cpp
          qt/Api/qwebpluginfactory.cpp
-@@ -795,7 +887,6 @@ if (COMPILER_IS_GCC_OR_CLANG)
+@@ -795,7 +889,6 @@ if (COMPILER_IS_GCC_OR_CLANG)
  
          qt/WidgetApi/qgraphicswebview.cpp
          qt/WidgetApi/qwebframe.cpp
@@ -39023,10 +40524,22 @@ index e6145b6ff..df28e9f21 100644
  }
  
 diff --git a/Source/WebKit/qt/WebCoreSupport/QWebPageAdapter.cpp b/Source/WebKit/qt/WebCoreSupport/QWebPageAdapter.cpp
-index ab9fb1382..89e872fb2 100644
+index ab9fb1382..00dc0c488 100644
 --- a/Source/WebKit/qt/WebCoreSupport/QWebPageAdapter.cpp
 +++ b/Source/WebKit/qt/WebCoreSupport/QWebPageAdapter.cpp
-@@ -434,6 +434,9 @@ bool QWebPageAdapter::findText(const QString& subString, FindFlag options)
+@@ -390,7 +390,10 @@ QString QWebPageAdapter::selectedText() const
+ 
+ QString QWebPageAdapter::selectedHtml() const
+ {
+-    return page->focusController().focusedOrMainFrame().editor().selectedRange()->toHTML();
++    RefPtr<Range> range = page->focusController().focusedOrMainFrame().editor().selectedRange();
++    if (!range)
++        return QString();
++    return range->toHTML();
+ }
+ 
+ bool QWebPageAdapter::isContentEditable() const
+@@ -434,6 +437,9 @@ bool QWebPageAdapter::findText(const QString& subString, FindFlag options)
      if (options & FindBeginsInSelection)
          webCoreFindOptions |= WebCore::StartInSelection;
  
@@ -39295,9 +40808,18 @@ index 7ea5ba0f5..c5a8ccfa9 100644
          ::CloseHandle(serverIdentifier);
          return false;
 diff --git a/Source/WebKit2/PlatformQt.cmake b/Source/WebKit2/PlatformQt.cmake
-index 5243ef2d8..6bd0627f0 100644
+index 5243ef2d8..5883096eb 100644
 --- a/Source/WebKit2/PlatformQt.cmake
 +++ b/Source/WebKit2/PlatformQt.cmake
+@@ -1,7 +1,7 @@
+ set(WebKit2_WebProcess_OUTPUT_NAME QtWebProcess)
+ set(WebKit2_NetworkProcess_OUTPUT_NAME QtWebNetworkProcess)
+ set(WebKit2_PluginProcess_OUTPUT_NAME QtWebPluginProcess)
+-set(WebKit2_DatabaseProcess_OUTPUT_NAME QtWebDatabaseProcess)
++set(WebKit2_DatabaseProcess_OUTPUT_NAME QtWebStorageProcess)
+ 
+ file(MAKE_DIRECTORY ${DERIVED_SOURCES_WEBKIT2_DIR})
+ 
 @@ -17,6 +17,8 @@ if (${JavaScriptCore_LIBRARY_TYPE} MATCHES STATIC)
      add_definitions(-DSTATICALLY_LINKED_WITH_WTF -DSTATICALLY_LINKED_WITH_JavaScriptCore)
  endif ()
@@ -39307,7 +40829,15 @@ index 5243ef2d8..6bd0627f0 100644
  #set(WebKit2_USE_PREFIX_HEADER ON)
  
  list(APPEND WebKit2_INCLUDE_DIRECTORIES
-@@ -280,25 +282,27 @@ list(APPEND WebProcess_SOURCES
+@@ -257,6 +259,7 @@ if (ENABLE_NETSCAPE_PLUGIN_API)
+ endif ()
+ 
+ list(APPEND WebKit2_SYSTEM_INCLUDE_DIRECTORIES
++    ${GLIB_INCLUDE_DIRS}
+     ${GSTREAMER_INCLUDE_DIRS}
+     ${Qt5Quick_INCLUDE_DIRS}
+     ${Qt5Quick_PRIVATE_INCLUDE_DIRS}
+@@ -280,25 +283,27 @@ list(APPEND WebProcess_SOURCES
      qt/MainQt.cpp
  )
  
@@ -39349,6 +40879,19 @@ index 5243ef2d8..6bd0627f0 100644
  list(APPEND NetworkProcess_SOURCES
      NetworkProcess/EntryPoint/qt/NetworkProcessMain.cpp
  )
+@@ -324,3 +329,12 @@ WEBKIT_CREATE_FORWARDING_HEADERS(QtWebKit/private DIRECTORIES UIProcess/API/qt)
+ if (ENABLE_API_TESTS)
+     add_subdirectory(UIProcess/API/qt/tests)
+ endif ()
++
++file(GLOB WebKit2_PRIVATE_HEADERS UIProcess/API/qt/*_p.h)
++install(
++    FILES
++       ${WebKit2_PRIVATE_HEADERS}
++    DESTINATION
++        ${KDE_INSTALL_INCLUDEDIR}/QtWebKit/${PROJECT_VERSION}/QtWebKit/private
++    COMPONENT Data
++)
 diff --git a/Source/WebKit2/PluginProcess/qt/PluginControllerProxyQt.cpp b/Source/WebKit2/PluginProcess/qt/PluginControllerProxyQt.cpp
 index 743adfaa4..75a7544e5 100644
 --- a/Source/WebKit2/PluginProcess/qt/PluginControllerProxyQt.cpp
@@ -39385,6 +40928,22 @@ index 766568519..511c4eaca 100644
  #include "WebCoreArgumentCoders.h"
  #include <QMimeData>
  #include <QStringList>
+diff --git a/Source/WebKit2/Shared/qt/ProcessExecutablePathQt.cpp b/Source/WebKit2/Shared/qt/ProcessExecutablePathQt.cpp
+index c5f809d34..ae14ef13e 100644
+--- a/Source/WebKit2/Shared/qt/ProcessExecutablePathQt.cpp
++++ b/Source/WebKit2/Shared/qt/ProcessExecutablePathQt.cpp
+@@ -65,4 +65,11 @@ String executablePathOfNetworkProcess()
+     return executablePath(QStringLiteral("QtWebNetworkProcess"));
+ }
+ 
++#if ENABLE(DATABASE_PROCESS)
++String executablePathOfDatabaseProcess()
++{
++    return executablePath(QStringLiteral("QtWebStorageProcess"));
++}
++#endif
++
+ } // namespace WebKit
 diff --git a/Source/WebKit2/Shared/qt/WebEventFactoryQt.cpp b/Source/WebKit2/Shared/qt/WebEventFactoryQt.cpp
 index 876208b99..50fcb5ccd 100644
 --- a/Source/WebKit2/Shared/qt/WebEventFactoryQt.cpp
@@ -39452,7 +41011,7 @@ index f6717a405..f2c2cb5a7 100644
  #include "qquickwebview_p.h"
  #include "qquickwebview_p_p.h"
 diff --git a/Source/WebKit2/UIProcess/API/qt/qquickwebview.cpp b/Source/WebKit2/UIProcess/API/qt/qquickwebview.cpp
-index cf8ac19d9..3b84c6dba 100644
+index cf8ac19d9..b894d7338 100644
 --- a/Source/WebKit2/UIProcess/API/qt/qquickwebview.cpp
 +++ b/Source/WebKit2/UIProcess/API/qt/qquickwebview.cpp
 @@ -38,7 +38,6 @@
@@ -39471,6 +41030,14 @@ index cf8ac19d9..3b84c6dba 100644
  #include <WKSerializedScriptValue.h>
  #include <WKString.h>
  #include <WKStringQt.h>
+@@ -409,6 +407,7 @@ void QQuickWebViewPrivate::initialize(WKPageConfigurationRef configurationRef)
+     preferences.setMediaSourceEnabled(false);
+     preferences.setWebGLEnabled(true);
+     preferences.setForceCompositingMode(true);
++    preferences.setAllowFileAccessFromFileURLs(true);
+ 
+     webPageProxy->setURLSchemeHandlerForScheme(QrcSchemeHandler::create(), ASCIILiteral("qrc"));
+ 
 diff --git a/Source/WebKit2/UIProcess/API/qt/qquickwebview_p_p.h b/Source/WebKit2/UIProcess/API/qt/qquickwebview_p_p.h
 index fe40823ea..cca489582 100644
 --- a/Source/WebKit2/UIProcess/API/qt/qquickwebview_p_p.h
@@ -39590,7 +41157,7 @@ index 899a9e038..210342ef5 100644
  target_compile_definitions(tst_qmltests_WebView PRIVATE ${tst_qmltests_WebView_DEFINITIONS})
  target_link_libraries(tst_qmltests_WebView ${qmltests_LIBRARIES})
 diff --git a/Source/WebKit2/UIProcess/Launcher/qt/ProcessLauncherQt.cpp b/Source/WebKit2/UIProcess/Launcher/qt/ProcessLauncherQt.cpp
-index 6b6bcf5c6..53913fa56 100644
+index 6b6bcf5c6..51a3ffbba 100644
 --- a/Source/WebKit2/UIProcess/Launcher/qt/ProcessLauncherQt.cpp
 +++ b/Source/WebKit2/UIProcess/Launcher/qt/ProcessLauncherQt.cpp
 @@ -36,16 +36,12 @@
@@ -39610,6 +41177,19 @@ index 6b6bcf5c6..53913fa56 100644
  #include <string>
  #include <sys/resource.h>
  #include <sys/socket.h>
+@@ -126,6 +122,12 @@ void ProcessLauncher::launchProcess()
+         commandLine = QLatin1String("%1 \"%2\" %3 %4");
+         QByteArray pluginProcessPrefix = qgetenv("QT_WEBKIT2_PP_CMD_PREFIX");
+         commandLine = commandLine.arg(QLatin1String(pluginProcessPrefix.constData())).arg(QString(executablePathOfPluginProcess()));
++#endif
++#if ENABLE(DATABASE_PROCESS)
++    } else if (m_launchOptions.processType == ProcessType::Database) {
++        commandLine = QLatin1String("%1 \"%2\" %3 %4");
++        QByteArray processPrefix = qgetenv("QT_WEBKIT2_DP_CMD_PREFIX");
++        commandLine = commandLine.arg(QLatin1String(processPrefix.constData())).arg(QString(executablePathOfDatabaseProcess()));
+ #endif
+     } else {
+         qDebug() << "Unsupported process type" << (int)m_launchOptions.processType;
 diff --git a/Source/WebKit2/UIProcess/Plugins/PluginProcessProxy.cpp b/Source/WebKit2/UIProcess/Plugins/PluginProcessProxy.cpp
 index 41df0e27f..b07738bbd 100644
 --- a/Source/WebKit2/UIProcess/Plugins/PluginProcessProxy.cpp
@@ -40235,6 +41815,127 @@ index 000000000..06cc0b66d
 +but compiler (${CMAKE_CXX_COMPILER_ID}) does not have sanitizer support")
 +    endif()
 +endif()
+diff --git a/Source/cmake/ECMGeneratePkgConfigFile.cmake b/Source/cmake/ECMGeneratePkgConfigFile.cmake
+index b4e686630..09d7e2b47 100644
+--- a/Source/cmake/ECMGeneratePkgConfigFile.cmake
++++ b/Source/cmake/ECMGeneratePkgConfigFile.cmake
+@@ -16,6 +16,7 @@
+ #                         [INCLUDE_INSTALL_DIR <dir>]
+ #                         [LIB_INSTALL_DIR <dir>]
+ #                         [DEFINES -D<variable=value>...]
++#                         [DESCRIPTION <library description>]
+ #                         [INSTALL])
+ #
+ # ``BASE_NAME`` is the name of the module. It's the name projects will use to
+@@ -42,6 +43,10 @@
+ # ``DEFINES`` is a list of preprocessor defines that it is recommended users of
+ # the library pass to the compiler when using it.
+ #
++# ``DESCRIPTION`` describes what this library is. If it's not specified, CMake
++# will first try to get the description from the metainfo.yaml file or will
++# create one based on ``LIB_NAME``.
++#
+ # ``INSTALL`` will cause the module to be installed to the ``pkgconfig``
+ # subdirectory of ``LIB_INSTALL_DIR``, unless the ``ECM_PKGCONFIG_INSTALL_DIR``
+ # cache variable is set to something different. Note that the first call to
+@@ -66,24 +71,39 @@
+ #   )
+ #
+ # Since 1.3.0.
++# ``DESCRIPTION`` available since 5.1.41
++#
+ 
+ #=============================================================================
+ # Copyright 2014 Aleix Pol Gonzalez <aleixpol@kde.org>
+ # Copyright 2014 David Faure <faure@kde.org>
+ #
+-# Distributed under the OSI-approved BSD License (the "License");
+-# see accompanying file COPYING-CMAKE-SCRIPTS for details.
+-#
+-# This software is distributed WITHOUT ANY WARRANTY; without even the
+-# implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+-# See the License for more information.
+-#=============================================================================
+-# (To distribute this file outside of extra-cmake-modules, substitute the full
+-#  License text for the above reference.)
++# Redistribution and use in source and binary forms, with or without
++# modification, are permitted provided that the following conditions
++# are met:
++#
++# 1. Redistributions of source code must retain the copyright
++#    notice, this list of conditions and the following disclaimer.
++# 2. Redistributions in binary form must reproduce the copyright
++#    notice, this list of conditions and the following disclaimer in the
++#    documentation and/or other materials provided with the distribution.
++# 3. The name of the author may not be used to endorse or promote products
++#    derived from this software without specific prior written permission.
++#
++# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
++# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
++# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
++# IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
++# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
++# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
++# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
++# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
++# THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ 
+ function(ECM_GENERATE_PKGCONFIG_FILE)
+   set(options INSTALL)
+-  set(oneValueArgs BASE_NAME LIB_NAME FILENAME_VAR INCLUDE_INSTALL_DIR LIB_INSTALL_DIR)
++  set(oneValueArgs BASE_NAME LIB_NAME FILENAME_VAR INCLUDE_INSTALL_DIR LIB_INSTALL_DIR DESCRIPTION)
+   set(multiValueArgs DEPS DEFINES)
+ 
+   cmake_parse_arguments(EGPF "${options}" "${oneValueArgs}" "${multiValueArgs}" ${ARGN})
+@@ -119,6 +139,17 @@ function(ECM_GENERATE_PKGCONFIG_FILE)
+           set(EGPF_LIB_INSTALL_DIR "lib")
+       endif()
+   endif()
++  if(NOT EGPF_DESCRIPTION)
++      if(EXISTS ${CMAKE_SOURCE_DIR}/metainfo.yaml)
++          file(STRINGS "${CMAKE_SOURCE_DIR}/metainfo.yaml" _EGPF_METAINFO_DESCRIPTION_STRING REGEX "^description:.*$")
++          if(_EGPF_METAINFO_DESCRIPTION_STRING)
++              string(REGEX REPLACE "^description:[ ]*(.*)" "\\1" EGPF_DESCRIPTION ${_EGPF_METAINFO_DESCRIPTION_STRING})
++          endif()
++      endif()
++      if("${EGPF_DESCRIPTION}" STREQUAL "")
++          set(EGPF_DESCRIPTION "${EGPF_LIB_NAME} library.")
++      endif()
++  endif()
+ 
+   set(PKGCONFIG_TARGET_BASENAME ${EGPF_BASE_NAME})
+   set(PKGCONFIG_TARGET_LIBNAME ${EGPF_LIB_NAME})
+@@ -135,6 +166,7 @@ function(ECM_GENERATE_PKGCONFIG_FILE)
+   else()
+       set(PKGCONFIG_TARGET_LIBS "${CMAKE_INSTALL_PREFIX}/${EGPF_LIB_INSTALL_DIR}")
+   endif()
++  set(PKGCONFIG_TARGET_DESCRIPTION "${EGPF_DESCRIPTION}")
+   set(PKGCONFIG_TARGET_DEFINES "")
+   if(EGPF_DEFINES)
+     set(PKGCONFIG_TARGET_DEFINES "${EGPF_DEFINE}")
+@@ -148,6 +180,7 @@ function(ECM_GENERATE_PKGCONFIG_FILE)
+   file(WRITE ${PKGCONFIG_FILENAME}
+ "
+ Name: ${PKGCONFIG_TARGET_LIBNAME}
++Description: ${PKGCONFIG_TARGET_DESCRIPTION}
+ Version: ${PROJECT_VERSION}
+ Libs: -L${CMAKE_INSTALL_PREFIX}/${EGPF_LIB_INSTALL_DIR} -l${PKGCONFIG_TARGET_LIBNAME}
+ Cflags: ${PKGCONFIG_TARGET_INCLUDES} ${PKGCONFIG_TARGET_DEFINES}
+@@ -156,8 +189,11 @@ Requires: ${PKGCONFIG_TARGET_DEPS}
+   )
+ 
+   if(EGPF_INSTALL)
+-    set(ECM_PKGCONFIG_INSTALL_DIR "${EGPF_LIB_INSTALL_DIR}/pkgconfig" CACHE PATH "The directory where pkgconfig will be installed to.")
++    if(CMAKE_SYSTEM_NAME MATCHES "FreeBSD")
++      set(ECM_PKGCONFIG_INSTALL_DIR "${CMAKE_INSTALL_PREFIX}/libdata/pkgconfig" CACHE PATH "The directory where pkgconfig will be installed to.")
++    else()
++      set(ECM_PKGCONFIG_INSTALL_DIR "${EGPF_LIB_INSTALL_DIR}/pkgconfig" CACHE PATH "The directory where pkgconfig will be installed to.")
++    endif()
+     install(FILES ${PKGCONFIG_FILENAME} DESTINATION ${ECM_PKGCONFIG_INSTALL_DIR})
+   endif()
+ endfunction()
+-
 diff --git a/Source/cmake/FindGTKUnixPrint.cmake b/Source/cmake/FindGTKUnixPrint.cmake
 index de3b3eb6e..0a988624c 100644
 --- a/Source/cmake/FindGTKUnixPrint.cmake
@@ -40279,6 +41980,28 @@ index 47dfdb492..f8c30b7f3 100644
  
  if (HYPHEN_INCLUDE_DIR AND HYPHEN_LIBRARIES)
      set(HYPHEN_FOUND 1)
+diff --git a/Source/cmake/FindICU.cmake b/Source/cmake/FindICU.cmake
+index 4e93286f3..c0de36338 100644
+--- a/Source/cmake/FindICU.cmake
++++ b/Source/cmake/FindICU.cmake
+@@ -24,7 +24,7 @@ mark_as_advanced(ICU_INCLUDE_DIR)
+ # Look for the library.
+ find_library(
+     ICU_LIBRARY
+-    NAMES icuuc cygicuuc cygicuuc32
++    NAMES sicuuc icuuc cygicuuc cygicuuc32
+     HINTS ${PC_ICU_LIBRARY_DIRS}
+           ${PC_ICU_LIBDIR}
+     DOC "Libraries to link against for the common parts of ICU")
+@@ -49,7 +49,7 @@ if (ICU_INCLUDE_DIR AND ICU_LIBRARY)
+     pkg_check_modules(PC_ICU_I18N icu-i18n)
+     find_library(
+         ICU_I18N_LIBRARY
+-        NAMES icui18n icuin cygicuin cygicuin32
++        NAMES sicui18n sicuin icui18n icuin cygicuin cygicuin32
+         HINTS ${PC_ICU_I18N_LIBRARY_DIRS}
+               ${PC_ICU_I18N_LIBDIR}
+         DOC "Libraries to link against for ICU internationalization")
 diff --git a/Source/cmake/FindLibsecret.cmake b/Source/cmake/FindLibsecret.cmake
 index d33228a77..7cfe1dfde 100644
 --- a/Source/cmake/FindLibsecret.cmake
@@ -40366,7 +42089,7 @@ index 529e2bc0d..9c4f00ecd 100644
  
  if (COMPILER_IS_CLANG AND CMAKE_GENERATOR STREQUAL "Ninja")
 diff --git a/Source/cmake/OptionsQt.cmake b/Source/cmake/OptionsQt.cmake
-index 1930027d1..de180ee56 100644
+index 1930027d1..559b2ab8b 100644
 --- a/Source/cmake/OptionsQt.cmake
 +++ b/Source/cmake/OptionsQt.cmake
 @@ -1,4 +1,5 @@
@@ -40431,7 +42154,23 @@ index 1930027d1..de180ee56 100644
      endforeach ()
  endmacro()
  
-@@ -152,7 +165,21 @@ else ()
+@@ -119,7 +132,15 @@ WEBKIT_OPTION_BEGIN()
+ 
+ if (APPLE)
+     option(MACOS_FORCE_SYSTEM_XML_LIBRARIES "Use system installation of libxml2 and libxslt on macOS" ON)
++    option(MACOS_USE_SYSTEM_ICU "Use system installation of ICU on macOS" ON)
++    option(USE_UNIX_DOMAIN_SOCKETS "Use Unix domain sockets instead of native IPC code on macOS" OFF)
++    option(USE_APPSTORE_COMPLIANT_CODE "Avoid using private macOS APIs which are not allowed on App Store (experimental)" OFF)
+     set(MACOS_BUILD_FRAMEWORKS ON) # TODO: Make it an option
++
++    if (USE_APPSTORE_COMPLIANT_CODE)
++        set(MACOS_USE_SYSTEM_ICU OFF)
++        set(USE_UNIX_DOMAIN_SOCKETS ON)
++    endif ()
+ endif ()
+ 
+ if (WIN32 OR APPLE)
+@@ -152,7 +173,28 @@ else ()
  endif ()
  
  # FIXME: Move Qt handling here
@@ -40446,6 +42185,13 @@ index 1930027d1..de180ee56 100644
 +    set(MACOS_BUILD_FRAMEWORKS OFF)
 +endif ()
 +
++# static icu libraries on windows are build with 's' prefix
++if (QT_STATIC_BUILD AND MSVC)
++    set(ICU_LIBRARY_PREFIX "s")
++else ()
++    set(ICU_LIBRARY_PREFIX "")
++endif ()
++
 +if (QT_STATIC_BUILD)
 +    set(ENABLE_WEBKIT2_DEFAULT OFF)
 +else ()
@@ -40454,7 +42200,7 @@ index 1930027d1..de180ee56 100644
  
  if (UNIX AND TARGET Qt5::QXcbIntegrationPlugin AND NOT APPLE)
      set(ENABLE_X11_TARGET_DEFAULT ON)
-@@ -179,7 +206,7 @@ WEBKIT_OPTION_DEFINE(ENABLE_OPENGL "Whether to use OpenGL." PUBLIC ON)
+@@ -179,7 +221,7 @@ WEBKIT_OPTION_DEFINE(ENABLE_OPENGL "Whether to use OpenGL." PUBLIC ON)
  WEBKIT_OPTION_DEFINE(ENABLE_PRINT_SUPPORT "Enable support for printing web pages" PUBLIC ON)
  WEBKIT_OPTION_DEFINE(ENABLE_QT_GESTURE_EVENTS "Enable support for gesture events (required for mouse in WK2)" PUBLIC ON)
  WEBKIT_OPTION_DEFINE(ENABLE_QT_WEBCHANNEL "Enable support for Qt WebChannel" PUBLIC ON)
@@ -40463,7 +42209,7 @@ index 1930027d1..de180ee56 100644
  WEBKIT_OPTION_DEFINE(ENABLE_X11_TARGET "Whether to enable support for the X11 windowing target." PUBLIC ${ENABLE_X11_TARGET_DEFAULT})
  
  option(GENERATE_DOCUMENTATION "Generate HTML and QCH documentation" OFF)
-@@ -249,11 +276,17 @@ if (MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+@@ -249,11 +291,17 @@ if (MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8)
  endif ()
  
  WEBKIT_OPTION_CONFLICT(USE_GSTREAMER USE_QT_MULTIMEDIA)
@@ -40481,7 +42227,7 @@ index 1930027d1..de180ee56 100644
  # WebAudio and MediaSource are supported with GStreamer only
  WEBKIT_OPTION_DEPEND(ENABLE_WEB_AUDIO USE_GSTREAMER)
  WEBKIT_OPTION_DEPEND(ENABLE_LEGACY_WEB_AUDIO USE_GSTREAMER)
-@@ -261,6 +294,8 @@ WEBKIT_OPTION_DEPEND(ENABLE_MEDIA_SOURCE USE_GSTREAMER)
+@@ -261,6 +309,8 @@ WEBKIT_OPTION_DEPEND(ENABLE_MEDIA_SOURCE USE_GSTREAMER)
  
  WEBKIT_OPTION_DEPEND(ENABLE_QT_WEBCHANNEL ENABLE_WEBKIT2)
  
@@ -40490,7 +42236,7 @@ index 1930027d1..de180ee56 100644
  # While it's possible to have UI-less NPAPI plugins without X11, we don't support this case yet
  if (UNIX AND NOT APPLE)
      WEBKIT_OPTION_DEPEND(ENABLE_NETSCAPE_PLUGIN_API ENABLE_X11_TARGET)
-@@ -271,9 +306,9 @@ WEBKIT_OPTION_END()
+@@ -271,9 +321,9 @@ WEBKIT_OPTION_END()
  # FTL JIT and IndexedDB support require GCC 4.9
  # TODO: Patch code to avoid variadic lambdas
  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -40502,7 +42248,7 @@ index 1930027d1..de180ee56 100644
          endif ()
      else ()
          if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.8.0")
-@@ -291,13 +326,6 @@ endif ()
+@@ -291,13 +341,6 @@ endif ()
  set(ENABLE_WEBKIT ON)
  set(WTF_USE_UDIS86 1)
  
@@ -40516,7 +42262,74 @@ index 1930027d1..de180ee56 100644
  if (SHARED_CORE)
      set(WebCoreTestSupport_LIBRARY_TYPE SHARED)
  else ()
-@@ -431,7 +459,6 @@ if (WEBP_FOUND)
+@@ -360,6 +403,7 @@ if (SQLITE3_SOURCE_DIR)
+     add_library(qtsqlite STATIC ${SQLITE_SOURCE_FILE})
+     target_compile_definitions(qtsqlite PUBLIC -DSQLITE_CORE -DSQLITE_OMIT_LOAD_EXTENSION -DSQLITE_OMIT_COMPLETE)
+     WEBKIT_SET_EXTRA_COMPILER_FLAGS(qtsqlite)
++    QT_ADD_EXTRA_WEBKIT_TARGET_EXPORT(qtsqlite)
+     set(SQLITE_LIBRARIES qtsqlite)
+     set(SQLITE_FOUND 1)
+ else ()
+@@ -372,6 +416,19 @@ if (NOT QT_BUNDLED_JPEG)
+     find_package(JPEG REQUIRED)
+ else ()
+     set(JPEG_FOUND 1)
++    # As of Qt 5.10, libjpeg-turbo shipped as a part of Qt requires using a few macro definitions
++    # WARNING: Keep in sync with libjpeg.pri
++    # FIXME: Change Qt so we can avoid this
++    include(CheckTypeSize)
++    check_type_size(size_t _SIZEOF_SIZE_T)
++    set(JPEG_DEFINITIONS
++        -DC_ARITH_CODING_SUPPORTED=1
++        -DD_ARITH_CODING_SUPPORTED=1
++        -DBITS_IN_JSAMPLE=8
++        -DJPEG_LIB_VERSION=80
++        -DSIZEOF_SIZE_T=${_SIZEOF_SIZE_T}
++    )
++    unset(_SIZEOF_SIZE_T)
+ endif ()
+ 
+ if (NOT QT_BUNDLED_PNG)
+@@ -386,15 +443,19 @@ else ()
+     set(ZLIB_FOUND 1)
+ endif ()
+ 
+-if (NOT APPLE)
+-    find_package(ICU REQUIRED)
+-else ()
++if (MACOS_USE_SYSTEM_ICU)
++    # Use system ICU library and bundled headers
+     set(ICU_INCLUDE_DIRS
+         "${WEBCORE_DIR}/icu"
+         "${JAVASCRIPTCORE_DIR}/icu"
+         "${WTF_DIR}/icu"
+     )
+     set(ICU_LIBRARIES libicucore.dylib)
++else ()
++    find_package(ICU REQUIRED)
++endif ()
++
++if (APPLE)
+     find_library(COREFOUNDATION_LIBRARY CoreFoundation)
+     if (QT_STATIC_BUILD)
+         find_library(CARBON_LIBRARY Carbon)
+@@ -419,10 +480,11 @@ else ()
+     endif ()
+ endif ()
+ 
+-find_package(Fontconfig)
+-
+-if (FONTCONFIG_FOUND)
+-    SET_AND_EXPOSE_TO_BUILD(HAVE_FONTCONFIG 1)
++if (ENABLE_TEST_SUPPORT)
++    find_package(Fontconfig)
++    if (FONTCONFIG_FOUND)
++        SET_AND_EXPOSE_TO_BUILD(HAVE_FONTCONFIG 1)
++    endif ()
+ endif ()
+ 
+ find_package(WebP)
+@@ -431,7 +493,6 @@ if (WEBP_FOUND)
      SET_AND_EXPOSE_TO_BUILD(USE_WEBP 1)
  endif ()
  
@@ -40524,7 +42337,50 @@ index 1930027d1..de180ee56 100644
  set(QT_REQUIRED_COMPONENTS Core Gui Network)
  
  # FIXME: Allow building w/o these components
-@@ -549,6 +576,14 @@ if (COMPILER_IS_GCC_OR_CLANG AND UNIX)
+@@ -461,6 +522,33 @@ if (ENABLE_DEVICE_ORIENTATION)
+     SET_AND_EXPOSE_TO_BUILD(HAVE_QTSENSORS 1)
+ endif ()
+ 
++if (ENABLE_OPENGL)
++    # Note: Gui module is already found
++    # Warning: quotes are sinificant here!
++    if (NOT DEFINED Qt5Gui_OPENGL_IMPLEMENTATION OR "${Qt5Gui_OPENGL_IMPLEMENTATION}" STREQUAL "")
++       message(FATAL_ERROR "Qt with OpenGL support is required for ENABLE_OPENGL")
++    endif ()
++
++    SET_AND_EXPOSE_TO_BUILD(USE_TEXTURE_MAPPER_GL TRUE)
++    SET_AND_EXPOSE_TO_BUILD(ENABLE_GRAPHICS_CONTEXT_3D TRUE)
++
++    if (WIN32)
++        include(CheckCXXSymbolExists)
++        set(CMAKE_REQUIRED_INCLUDES ${Qt5Gui_INCLUDE_DIRS})
++        set(CMAKE_REQUIRED_FLAGS ${Qt5Gui_EXECUTABLE_COMPILE_FLAGS})
++        check_cxx_symbol_exists(QT_OPENGL_DYNAMIC qopenglcontext.h HAVE_QT_OPENGL_DYNAMIC)
++        if (HAVE_QT_OPENGL_DYNAMIC)
++            set(Qt5Gui_OPENGL_IMPLEMENTATION DynamicGL)
++        endif ()
++        unset(CMAKE_REQUIRED_INCLUDES)
++        unset(CMAKE_REQUIRED_FLAGS)
++    endif ()
++
++    message(STATUS "Qt OpenGL implementation: ${Qt5Gui_OPENGL_IMPLEMENTATION}")
++    message(STATUS "Qt OpenGL libraries: ${Qt5Gui_OPENGL_LIBRARIES}")
++    message(STATUS "Qt EGL libraries: ${Qt5Gui_EGL_LIBRARIES}")
++endif ()
++
+ if (ENABLE_PRINT_SUPPORT)
+     list(APPEND QT_REQUIRED_COMPONENTS PrintSupport)
+     SET_AND_EXPOSE_TO_BUILD(HAVE_QTPRINTSUPPORT 1)
+@@ -480,7 +568,7 @@ endif ()
+ 
+ # Mach ports and Unix sockets are currently used by WK2, but their USE() values
+ # affect building WorkQueue
+-if (APPLE)
++if (APPLE AND NOT USE_UNIX_DOMAIN_SOCKETS)
+     SET_AND_EXPOSE_TO_BUILD(USE_MACH_PORTS 1) # Qt-specific
+ elseif (UNIX)
+     SET_AND_EXPOSE_TO_BUILD(USE_UNIX_DOMAIN_SOCKETS 1)
+@@ -549,6 +637,14 @@ if (COMPILER_IS_GCC_OR_CLANG AND UNIX)
      endif ()
  endif ()
  
@@ -40539,10 +42395,15 @@ index 1930027d1..de180ee56 100644
  if (WIN32 AND COMPILER_IS_GCC_OR_CLANG)
      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-keep-inline-dllexport")
  endif ()
-@@ -602,17 +637,13 @@ if (ENABLE_OPENGL)
-     SET_AND_EXPOSE_TO_BUILD(ENABLE_GRAPHICS_CONTEXT_3D TRUE)
+@@ -597,22 +693,8 @@ if (ENABLE_X11_TARGET)
+     endif ()
+ endif ()
  
-     # TODO: Add proper support of DynamicGL detection to Qt and use it
+-if (ENABLE_OPENGL)
+-    SET_AND_EXPOSE_TO_BUILD(USE_TEXTURE_MAPPER_GL TRUE)
+-    SET_AND_EXPOSE_TO_BUILD(ENABLE_GRAPHICS_CONTEXT_3D TRUE)
+-
+-    # TODO: Add proper support of DynamicGL detection to Qt and use it
 -    if (WIN32)
 -        if  (QT_USES_GLES2_ONLY)
 -            # FIXME: Fix build with ANGLE-only Qt
@@ -40550,16 +42411,23 @@ index 1930027d1..de180ee56 100644
 -        else ()
 -            set(Qt5Gui_OPENGL_IMPLEMENTATION GL)
 -        endif ()
-+    if (WIN32 AND NOT QT_USES_GLES2_ONLY)
-+        set(Qt5Gui_OPENGL_IMPLEMENTATION GL)
-     endif ()
- endif ()
- 
+-    endif ()
+-endif ()
+-
  if (NOT ENABLE_VIDEO)
 +    set(USE_MEDIA_FOUNDATION OFF)
      set(USE_QT_MULTIMEDIA OFF)
  
      if (NOT ENABLE_WEB_AUDIO)
+@@ -800,7 +882,7 @@ if (MSVC)
+     endif ()
+ 
+     if (NOT QT_CONAN_DIR)
+-        set(ICU_LIBRARIES icuuc${CMAKE_DEBUG_POSTFIX} icuin${CMAKE_DEBUG_POSTFIX} icudt${CMAKE_DEBUG_POSTFIX})
++        set(ICU_LIBRARIES ${ICU_LIBRARY_PREFIX}icuuc${CMAKE_DEBUG_POSTFIX} ${ICU_LIBRARY_PREFIX}icuin${CMAKE_DEBUG_POSTFIX} ${ICU_LIBRARY_PREFIX}icudt${CMAKE_DEBUG_POSTFIX})
+     endif ()
+ endif ()
+ 
 diff --git a/Source/cmake/WebKitCommon.cmake b/Source/cmake/WebKitCommon.cmake
 index e617c7cc4..1f7b4ccdf 100644
 --- a/Source/cmake/WebKitCommon.cmake
@@ -40574,20 +42442,24 @@ index e617c7cc4..1f7b4ccdf 100644
  
      # We cannot check for RUBY_FOUND because it is set only when the full package is installed and
      # the only thing we need is the interpreter. Unlike Python, cmake does not provide a macro
+diff --git a/Source/cmake/WebKitFeatures.cmake b/Source/cmake/WebKitFeatures.cmake
+index 57915dfc2..d76b29fd8 100644
+--- a/Source/cmake/WebKitFeatures.cmake
++++ b/Source/cmake/WebKitFeatures.cmake
+@@ -101,7 +101,7 @@ macro(WEBKIT_OPTION_BEGIN)
+     WEBKIT_OPTION_DEFINE(ENABLE_DFG_JIT "Toggle data flow graph JIT tier" PRIVATE ON)
+     WEBKIT_OPTION_DEFINE(ENABLE_DOM4_EVENTS_CONSTRUCTOR "Toggle DOM4 Events constructors" PRIVATE OFF)
+     WEBKIT_OPTION_DEFINE(ENABLE_DOWNLOAD_ATTRIBUTE "Toggle download attribute support" PRIVATE OFF)
+-    WEBKIT_OPTION_DEFINE(ENABLE_DRAG_SUPPORT "Toggle Drag Support" PRIVATE OFF)
++    WEBKIT_OPTION_DEFINE(ENABLE_DRAG_SUPPORT "Toggle support of drag actions (including selection of text with mouse)" PRIVATE OFF)
+     WEBKIT_OPTION_DEFINE(ENABLE_ENCRYPTED_MEDIA "Toggle EME support" PRIVATE OFF)
+     WEBKIT_OPTION_DEFINE(ENABLE_ENCRYPTED_MEDIA_V2 "Support EME v2" PRIVATE OFF)
+     WEBKIT_OPTION_DEFINE(ENABLE_ES6_ARROWFUNCTION_SYNTAX "Toggle ES6 arrow function syntax support" PRIVATE ON)
 diff --git a/Source/cmake/WebKitMacros.cmake b/Source/cmake/WebKitMacros.cmake
-index 858e2e47d..a34e85463 100644
+index 858e2e47d..07e31432a 100644
 --- a/Source/cmake/WebKitMacros.cmake
 +++ b/Source/cmake/WebKitMacros.cmake
-@@ -265,8 +265,6 @@ macro(WEBKIT_FRAMEWORK _target)
-         ${${_target}_HEADERS}
-         ${${_target}_SOURCES}
-         ${${_target}_DERIVED_SOURCES}
--        ${${_target}_PRIVATE_HEADERS}
--        ${${_target}_PUBLIC_HEADERS}
-     )
-     target_link_libraries(${_target} ${${_target}_LIBRARIES})
-     set_target_properties(${_target} PROPERTIES COMPILE_DEFINITIONS "BUILDING_${_target}")
-@@ -377,22 +375,12 @@ macro(GENERATE_WEBKIT2_MESSAGE_SOURCES _output_source _input_files)
+@@ -377,22 +377,12 @@ macro(GENERATE_WEBKIT2_MESSAGE_SOURCES _output_source _input_files)
      endforeach ()
  endmacro()
  
@@ -41061,12 +42933,15 @@ index 000000000..e33d76027
 +
 +}
 diff --git a/Tools/qmake/mkspecs/features/functions.prf b/Tools/qmake/mkspecs/features/functions.prf
-index 3e0d40610..3699d6b71 100644
+index 3e0d40610..e3f42cec4 100644
 --- a/Tools/qmake/mkspecs/features/functions.prf
 +++ b/Tools/qmake/mkspecs/features/functions.prf
-@@ -66,9 +66,6 @@ defineTest(isPlatformSupported) {
+@@ -65,10 +65,9 @@ defineTest(isPlatformSupported) {
+         skipBuild("Using cmake version $$cmake_version, but at least cmake 2.8.12 is required to build QtWebKit.")
      }
  
++    intel_icc: skipBuild("Building QtWebKit with ICC is not supported.")
++
      win32 {
 -        qtConfig(opengles2):!qtConfig(dynamicgl) {
 -            skipBuild("QtWebKit supports only dynamic GL Qt builds on Windows at the moment.")
@@ -41075,7 +42950,7 @@ index 3e0d40610..3699d6b71 100644
              skipBuild("WinRT is not supported.")
          }
 diff --git a/Tools/qmake/projects/run_cmake.pro b/Tools/qmake/projects/run_cmake.pro
-index 5603ed72e..b15bd9266 100644
+index 5603ed72e..f63fcd658 100644
 --- a/Tools/qmake/projects/run_cmake.pro
 +++ b/Tools/qmake/projects/run_cmake.pro
 @@ -12,6 +12,8 @@ CONFIG(debug, debug|release) {
@@ -41087,22 +42962,53 @@ index 5603ed72e..b15bd9266 100644
  cmake_build_dir = $$system_quote($$system_path($$ROOT_BUILD_DIR/$$lower($$configuration)))
  toolchain_file = $$system_quote($$system_path($$ROOT_BUILD_DIR/qmake_toolchain.cmake))
  
-@@ -49,9 +51,11 @@ build_pass|!debug_and_release {
+@@ -23,11 +25,10 @@ build_pass|!debug_and_release {
+         USE_LIBHYPHEN=OFF
+ 
+     !isEmpty(_QMAKE_SUPER_CACHE_) {
+-        CMAKE_PREFIX_PATH=\"$$ROOT_QT_BUILD_DIR/qtbase;$$ROOT_QT_BUILD_DIR/qtlocation;$$ROOT_QT_BUILD_DIR/qtsensors;$$ROOT_QT_BUILD_DIR/qtdeclarative;$$ROOT_QT_BUILD_DIR/qtwebchannel\"
++        CMAKE_CONFIG += CMAKE_PREFIX_PATH=\"$$ROOT_QT_BUILD_DIR/qtbase;$$ROOT_QT_BUILD_DIR/qtlocation;$$ROOT_QT_BUILD_DIR/qtsensors;$$ROOT_QT_BUILD_DIR/qtdeclarative;$$ROOT_QT_BUILD_DIR/qtwebchannel\"
+     } else {
+-        CMAKE_PREFIX_PATH=\"$$[QT_INSTALL_PREFIX]\"
++        CMAKE_CONFIG += Qt5_DIR=\"$$[QT_INSTALL_LIBS]/cmake/Qt5\"
+     }
+-    CMAKE_CONFIG += CMAKE_PREFIX_PATH=$$CMAKE_PREFIX_PATH
+ 
+     static: CMAKE_CONFIG += USE_THIN_ARCHIVES=OFF
+ 
+@@ -37,8 +38,12 @@ build_pass|!debug_and_release {
+     !qtConfig(system-jpeg):exists($$QTBASE_DIR) {
+         CMAKE_CONFIG += \
+             QT_BUNDLED_JPEG=1 \
+-            JPEG_INCLUDE_DIR=$$QTBASE_DIR/src/3rdparty/libjpeg \
+             JPEG_LIBRARIES=$$staticLibPath(qtjpeg)
++
++        exists($$QTBASE_DIR/src/3rdparty/libjpeg/src/jpeglib.h): \
++            CMAKE_CONFIG += JPEG_INCLUDE_DIR=$$QTBASE_DIR/src/3rdparty/libjpeg/src
++        else: \
++            CMAKE_CONFIG += JPEG_INCLUDE_DIR=$$QTBASE_DIR/src/3rdparty/libjpeg
+     }
+ 
+     !qtConfig(system-png):qtConfig(png):exists($$QTBASE_DIR) {
+@@ -49,13 +54,11 @@ build_pass|!debug_and_release {
      }
  
      !qtConfig(system-zlib):exists($$QTBASE_DIR) {
 -        CMAKE_CONFIG += \
 -            QT_BUNDLED_ZLIB=1 \
 -            ZLIB_INCLUDE_DIRS=$$QTBASE_DIR/src/3rdparty/zlib
+-    }
 +        CMAKE_CONFIG += QT_BUNDLED_ZLIB=1
-+
+ 
+-    qtConfig(opengles2):!qtConfig(dynamicgl) {
+-        CMAKE_CONFIG += QT_USES_GLES2_ONLY=1
 +        exists($$QTBASE_DIR/src/3rdparty/zlib/src/zlib.h): \
 +            CMAKE_CONFIG += ZLIB_INCLUDE_DIRS=$$QTBASE_DIR/src/3rdparty/zlib/src
 +        else: CMAKE_CONFIG += ZLIB_INCLUDE_DIRS=$$QTBASE_DIR/src/3rdparty/zlib
      }
  
-     qtConfig(opengles2):!qtConfig(dynamicgl) {
-@@ -82,6 +86,8 @@ build_pass|!debug_and_release {
+     exists($$ROOT_BUILD_DIR/conanbuildinfo.cmake):exists($$ROOT_BUILD_DIR/conanfile.txt) {
+@@ -82,6 +85,8 @@ build_pass|!debug_and_release {
          }
      }
  
@@ -41111,7 +43017,7 @@ index 5603ed72e..b15bd9266 100644
      equals(QMAKE_HOST.os, Windows) {
          if(equals(MAKEFILE_GENERATOR, MSVC.NET)|equals(MAKEFILE_GENERATOR, MSBUILD)) {
              cmake_generator = "NMake Makefiles JOM"
-@@ -93,10 +99,15 @@ build_pass|!debug_and_release {
+@@ -93,10 +98,15 @@ build_pass|!debug_and_release {
              cmake_generator = "Unix Makefiles"
              make_command_name = make
          }
@@ -41129,7 +43035,7 @@ index 5603ed72e..b15bd9266 100644
  
      # Append additional platform options defined in CMAKE_CONFIG
      for (config, CMAKE_CONFIG): cmake_args += "-D$$config"
-@@ -115,7 +126,12 @@ build_pass|!debug_and_release {
+@@ -115,7 +125,12 @@ build_pass|!debug_and_release {
  
      build_pass:build_all: default_target.target = all
      else: default_target.target = first
@@ -41143,7 +43049,7 @@ index 5603ed72e..b15bd9266 100644
      QMAKE_EXTRA_TARGETS += default_target
  
      # When debug and release are built at the same time, don't install data files twice
-@@ -129,3 +145,10 @@ build_pass|!debug_and_release {
+@@ -129,3 +144,10 @@ build_pass|!debug_and_release {
      install_target.commands = $(MAKE) -f $(MAKEFILE) install_impl $$make_args DESTDIR=$(INSTALL_ROOT)
      QMAKE_EXTRA_TARGETS += install_target
  }
@@ -41154,3 +43060,16 @@ index 5603ed72e..b15bd9266 100644
 +    notParallel.target = .NOTPARALLEL
 +    QMAKE_EXTRA_TARGETS += notParallel
 +}
+diff --git a/Tools/qt/make-snapshot.pl b/Tools/qt/make-snapshot.pl
+index 667890de0..2c2af1a9f 100755
+--- a/Tools/qt/make-snapshot.pl
++++ b/Tools/qt/make-snapshot.pl
+@@ -36,7 +36,7 @@ scalar @ARGV == 0 || usage();
+ -f "ChangeLog" && die "This script must be run in snapshots repository";
+ -d ".git" || usage();
+ 
+-`git status` =~ "nothing to commit, working tree clean" or die "Target working tree is dirty";
++`LC_ALL=C LANG=C git status` =~ "nothing to commit, working tree clean" or die "Target working tree is dirty";
+ 
+ my $src_repo = dirname(dirname(dirname(__FILE__)));
+ my $target_repo = getcwd();
