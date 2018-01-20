@@ -40,3 +40,27 @@ pref("browser.safebrowsing.blockedURIs.enabled",false);
 pref("browser.safebrowsing.provider.mozilla.lists","");
 pref("browser.safebrowsing.provider.mozilla.updateURL","");
 pref("browser.safebrowsing.provider.mozilla.gethashURL","");
+//
+pref("browser.bookmarks.showMobileBookmarks",false);
+pref("extensions.pocket.enabled",false);
+// disable telemetry
+pref("toolkit.telemetry.enabled",false);
+pref("toolkit.telemetry.server","");
+pref("toolkit.telemetry.unified",false);
+pref("toolkit.telemetry.archive.enabled",false);
+pref("toolkit.telemetry.cachedClientID","");
+pref("toolkit.telemetry.newProfilePing.enabled",false);
+pref("toolkit.telemetry.shutdownPingSender.enabled",false);
+pref("toolkit.telemetry.updatePing.enabled",false);
+pref("toolkit.telemetry.bhrPing.enabled",false);
+pref("toolkit.telemetry.firstShutdownPing.enabled",false);
+pref("experiments.enabled",false);
+pref("experiments.manifest.uri","");
+pref("experiments.supported",false);
+pref("experiments.activeExperiment",false);
+// disable health report
+pref("datareporting.healthreport.about.reportUrl","");
+pref("datdatareporting.healthreport.infoURL","");
+pref("datareporting.policy.dataSubmissionEnabled",false);
+// disable crash reports
+pref("breakpad.reportURL","");
