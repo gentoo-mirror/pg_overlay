@@ -160,19 +160,19 @@ src_prepare() {
 	use clang && eapply "${FILESDIR}/${PN}-clang.patch"
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-${FF_MAJORV}/series"); do eapply "${FILESDIR}/opensuse-kde-${FF_MAJORV}/$i"; done
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
 
 	# Privacy-esr patches
-	for i in $(cat "${FILESDIR}/privacy-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/privacy-patchset-${FF_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/debian-patchset-${FF_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
 
 	# ArchLinux patches
-	for i in $(cat "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/archlinux-patchset-${FF_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/archlinux-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/archlinux-patchset-$(get_major_version)/$i"; done
 
 	# Ubuntu patches
-	for i in $(cat "${FILESDIR}/ubuntu-patchset-${FF_MAJORV}/series"); do eapply "${FILESDIR}/ubuntu-patchset-${FF_MAJORV}/$i"; done
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i"; done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -368,12 +368,12 @@ src_install() {
 	done
 
 	if use kde ; then
-		cat "${FILESDIR}"/opensuse-kde-${FF_MAJORV}/kde.js-1 >> \
+		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 		|| die
 	fi
 
-	cat "${FILESDIR}"/privacy-patchset-${FF_MAJORV}/privacy.js-1 >> \
+	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
 	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 	|| die
 
