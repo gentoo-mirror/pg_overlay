@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -45,22 +45,18 @@ IUSE="debug doc +jemalloc ${ALL_LLVM_TARGETS[*]}"
 
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )"
 
-RDEPEND=""
+RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
+		jemalloc? ( dev-libs/jemalloc )"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
 	>=sys-devel/gcc-4.7
 	dev-util/cmake
 "
-PDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425"
 
 S="${WORKDIR}/${MY_P}-src"
 
 toml_usex() {
 	usex "$1" true false
-}
-
-pkg_setup() {
-	python-any-r1_pkg_setup
 }
 
 src_prepare() {
@@ -125,6 +121,8 @@ src_configure() {
 		[target.${rust_target}]
 		cc = "$(tc-getBUILD_CC)"
 		cxx = "$(tc-getBUILD_CXX)"
+		linker = "$(tc-getCC)"
+		ar = "$(tc-getAR)"
 	EOF
 }
 
