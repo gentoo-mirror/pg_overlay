@@ -7,7 +7,7 @@ inherit cmake-utils
 
 DESCRIPTION="OpenGL Mathematics"
 HOMEPAGE="http://glm.g-truc.net/"
-SRC_URI="https://github.com/g-truc/glm/archive/${PV}-a2.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/g-truc/glm/archive/${PV/_alpha/-a}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="|| ( HappyBunny MIT )"
 SLOT="0"
@@ -16,7 +16,9 @@ IUSE="test cpu_flags_x86_sse2 cpu_flags_x86_sse3 cpu_flags_x86_avx cpu_flags_x86
 
 RDEPEND="virtual/opengl"
 
-S=${WORKDIR}/${P}-a2
+S=${WORKDIR}/${P/_alpha/-a}
+
+PATCHES=("${FILESDIR}/${P}-experimental.patch")
 
 src_configure() {
 	if use test; then
