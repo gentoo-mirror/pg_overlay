@@ -16,6 +16,8 @@ IUSE="test cpu_flags_x86_sse2 cpu_flags_x86_sse3 cpu_flags_x86_avx cpu_flags_x86
 
 RDEPEND="virtual/opengl"
 
+S=${WORKDIR}/${P}-a2
+
 src_configure() {
 	if use test; then
 		local mycmakeargs=(
