@@ -20,7 +20,7 @@ BRANDING="${PN}-branding-gentoo-0.8.tar.xz"
 # PATCHSET="${P}-patchset-01.tar.xz"
 
 [[ ${PV} == *9999* ]] && SCM_ECLASS="git-r3"
-inherit multiprocessing autotools bash-completion-r1 check-reqs gnome2-utils java-pkg-opt-2 pax-utils python-single-r1 toolchain-funcs flag-o-matic versionator xdg-utils qmake-utils ${SCM_ECLASS} flag-o-matic
+inherit multiprocessing autotools bash-completion-r1 check-reqs gnome2-utils java-pkg-opt-2 pax-utils python-single-r1 toolchain-funcs flag-o-matic versionator xdg-utils qmake-utils ${SCM_ECLASS}
 unset SCM_ECLASS
 
 DESCRIPTION="A full office productivity suite"
@@ -352,8 +352,6 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cppflags -DGLM_ENABLE_EXPERIMENTAL
-
 	# Set up Google API keys, see https://www.chromium.org/developers/how-tos/api-keys
 	# Note: these are for Gentoo use ONLY. For your own distribution, please get
 	# your own set of keys. Feel free to contact chromium@gentoo.org for more info.
