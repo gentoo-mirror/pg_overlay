@@ -1,9 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+PLOCALES="cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW"
 
-inherit eutils qmake-utils git-r3
+inherit eutils qmake-utils git-r3 l10n
 
 DESCRIPTION="Rockbox opensource firmware manager for mp3 players"
 HOMEPAGE="http://www.rockbox.org/wiki/RockboxUtility"
@@ -20,6 +21,18 @@ RDEPEND="dev-qt/qtcore:5
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}/${PN}/${PN}qt
+
+src_prepare() {
+	default
+	rem_locale() {
+		rm "lang/${1}.ts" || die "removing of ${1}.ts failed"
+	}
+
+	l10n_find_plocales_changes lang "" ".ts"
+	l10n_for_each_disabled_locale_do rem_locale
+
+	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
+}
 
 src_configure() {
 	export QT_SELECT="5"
