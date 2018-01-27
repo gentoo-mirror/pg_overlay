@@ -25,11 +25,12 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 src_prepare() {
 	default
 	rem_locale() {
-		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
-		sed -i 's/lang\/${PN}_${1}.ts//' ${PN}qt.pri || die "removing of ${1}.ts failed"
+		rm -vf "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
+		sed -i "s/lang\/${PN}_${1}.ts//" ${PN}qt.pri || die "removing of ${1}.ts failed"
+		sed -i "s/lang\/${PN}_${1}.qm//" rbutilqt-lang.qrc || die "removing of ${1}.ts failed"
 	}
 
-	l10n_find_plocales_changes lang "" ".ts"
+	l10n_find_plocales_changes lang "${PN}_" ".ts"
 	l10n_for_each_disabled_locale_do rem_locale
 
 	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
