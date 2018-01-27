@@ -141,7 +141,7 @@ pkg_setup() {
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	sed -i 's/1.9.8/1.9.14/g' bootstrap.py || die
+	sed -i 's/1.9.8/1.9.15/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	default_src_prepare
 }
