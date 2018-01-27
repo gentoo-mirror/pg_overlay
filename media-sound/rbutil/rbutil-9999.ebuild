@@ -22,7 +22,7 @@ DEPEND="${RDEPEND}"
 S=${WORKDIR}/${P}/${PN}/${PN}qt
 
 src_prepare() {
-	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro
+	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
 }
 
 src_configure() {
