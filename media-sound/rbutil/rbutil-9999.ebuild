@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PLOCALES="rbutil_{cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW}"
+PLOCALES="cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW"
 
 inherit eutils qmake-utils git-r3 l10n
 
@@ -25,7 +25,7 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 src_prepare() {
 	default
 	rem_locale() {
-		rm "lang/${1}.ts" || die "removing of ${1}.ts failed"
+		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 	}
 
 	l10n_find_plocales_changes lang "" ".ts"
