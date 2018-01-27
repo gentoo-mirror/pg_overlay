@@ -25,7 +25,7 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 src_prepare() {
 	default
 	rem_locale() {
-		rm -vf "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
+		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.ts//" ${PN}qt.pri || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.qm//" rbutilqt-lang.qrc || die "removing of ${1}.ts failed"
 	}
