@@ -28,7 +28,7 @@ src_prepare() {
 		rm "lang/${1}.ts" || die "removing of ${1}.ts failed"
 	}
 
-	l10n_find_plocales_changes ts "" ".ts"
+	l10n_find_plocales_changes lang "" ".ts"
 	l10n_for_each_disabled_locale_do rem_locale
 
 	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
