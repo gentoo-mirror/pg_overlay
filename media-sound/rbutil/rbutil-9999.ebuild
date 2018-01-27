@@ -21,6 +21,10 @@ DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/${P}/${PN}/${PN}qt
 
+src_prepare() {
+	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro
+}
+
 src_configure() {
 	export QT_SELECT="5"
 	# generate binary translations
