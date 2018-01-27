@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils qmake-utils git-r3
+inherit eutils qmake-utils git-r3 l10n
 
 DESCRIPTION="Rockbox opensource firmware manager for mp3 players"
 HOMEPAGE="http://www.rockbox.org/wiki/RockboxUtility"
@@ -23,6 +23,13 @@ S=${WORKDIR}/${P}/${PN}/${PN}qt
 
 src_prepare() {
 	default
+	rem_locale() {
+		rm "lang/${1}.qm" || die "removing of ${1}.qm failed"
+	}
+
+	l10n_find_plocales_changes qm "" ".qm"
+	l10n_for_each_disabled_locale_do rem_locale
+
 	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
 }
 
