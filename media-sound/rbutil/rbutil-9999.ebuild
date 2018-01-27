@@ -26,7 +26,7 @@ src_prepare() {
 	default
 	rem_locale() {
 		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
-		sed -i 's/lang\/${PN}_${1}.ts//' ${PN}qt.pri || die
+		sed -i 's/lang\/${PN}_${1}.ts//g' ${PN}qt.pri || die
 	}
 
 	l10n_find_plocales_changes lang "" ".ts"
