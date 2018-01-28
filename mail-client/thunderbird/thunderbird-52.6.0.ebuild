@@ -67,7 +67,7 @@ S="${WORKDIR}/${MOZ_P}"
 
 BUILD_OBJ_DIR="${S}/tbird"
 
-EPATCH_EXCLUDE='2007_fix_nvidia_latest.patch'
+EPATCH_EXCLUDE="2007_fix_nvidia_latest.patch"
 
 pkg_setup() {
 	moz_pkgsetup
