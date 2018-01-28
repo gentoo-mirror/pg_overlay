@@ -1,5 +1,3 @@
 mozilla-language.patch
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
-mozilla-no-stdcxx-check.patch
-mozilla-ucontext.patch
