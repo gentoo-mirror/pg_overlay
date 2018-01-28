@@ -106,7 +106,7 @@ src_prepare() {
 
 	# Apply our patchset from firefox to thunderbird as well
 	pushd "${S}"/mozilla &>/dev/null || die
-	EPATCH_EXCLUDE="2007_fix_nvidia_latest.patch"
+	EPATCH_EXCLUDE+=" 2007_fix_nvidia_latest.patch"
 	eapply "${WORKDIR}/firefox"
 	popd &>/dev/null || die
 
