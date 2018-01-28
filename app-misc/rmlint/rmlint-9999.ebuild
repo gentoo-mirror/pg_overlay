@@ -3,7 +3,9 @@
 
 EAPI=6
 
-inherit eutils git-r3 gnome2-utils scons-utils
+PYTHON_COMPAT=( python3_{4,5,6} )
+
+inherit eutils git-r3 gnome2-utils python-r1 scons-utils
 
 DESCRIPTION="rmlint finds space waste and other broken things on your filesystem and offers to remove it"
 HOMEPAGE="https://github.com/sahib/rmlint"
@@ -14,12 +16,14 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 IUSE="X doc"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="X? ( x11-libs/gtksourceview:3.0
-		dev-python/colorlog )"
+		dev-python/colorlog[${PYTHON_USEDEP}]
+		dev-python/pygobject:3[${PYTHON_USEDEP}] )"
 DEPEND="${RDEPEND}
-		dev-util/scons
-		dev-python/sphinx
+		dev-util/scons[${PYTHON_USEDEP}]
+		dev-python/sphinx[${PYTHON_USEDEP}]
 		sys-devel/gettext"
 
 src_compile(){
