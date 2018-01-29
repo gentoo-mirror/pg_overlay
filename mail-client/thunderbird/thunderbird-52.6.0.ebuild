@@ -105,8 +105,8 @@ src_prepare() {
 	eapply "${FILESDIR}"/1000_fix_gentoo_preferences.patch
 
 	# Apply our patchset from firefox to thunderbird as well
+	rm -f "${WORKDIR}"/firefox/2007_fix_nvidia_latest.patch || die
 	pushd "${S}"/mozilla &>/dev/null || die
-	rm -f "${WORKDIR}/firefox/2007_fix_nvidia_latest.patch"
 	eapply "${WORKDIR}/firefox"
 	popd &>/dev/null || die
 
