@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PLOCALES="de es fr pl ru zh"
+PLOCALES="de es fr pl ru uk zh"
 
 inherit cmake-utils git-r3 l10n xdg
 
@@ -40,6 +40,17 @@ DEPEND="${RDEPEND}
 CMAKE_MIN_VERSION="3.1"
 DOCS=( AUTHORS ChangeLog README.md )
 
+src_prepare() {
+	l10n_find_plocales_changes "${S}/lang" "" '.ts'
+
+	# Delete Ubuntu Unity shortcut group
+	sed -i -e '/X-Ayatana-Desktop-Shortcuts/,$d' \
+		src/gui/Unix/QMPlay2.desktop || die
+
+	cmake-utils_src_prepare
+}
+
+
 src_configure() {
 	local mycmakeargs=(
 		-DUSE_FFMPEG=ON
@@ -75,7 +86,7 @@ src_configure() {
 		mycmakeargs+=( -DUSE_LASTFM=$(usex lastfm) )
 		mycmakeargs+=( -DUSE_MPRIS2=$(usex mpris) )
 	else
-		mycmakeargs+=( -DUSE_EXTENSIONS=OFF -DUSE_MPRIS2=OFF -DUSE_LASTFM=OFF -DUSE_TEKSTOWO=OFF -DUSE_DATMUSIC=OFF -DUSE_ANIMEODCINKI=OFF -DUSE_WBIJAM=OFF -DDUSE_MEDIABROWSER=OFF)
+		mycmakeargs+=( -DUSE_EXTENSIONS=OFF -DUSE_MPRIS2=OFF -DUSE_LASTFM=OFF -DUSE_TEKSTOWO=OFF -DUSE_DATMUSIC=OFF -DUSE_ANIMEODCINKI=OFF -DUSE_WBIJAM=OFF -DUSE_MEDIABROWSER=OFF)
 	fi
 
 	cmake-utils_src_configure
