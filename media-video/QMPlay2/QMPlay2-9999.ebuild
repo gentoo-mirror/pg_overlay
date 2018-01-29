@@ -4,7 +4,7 @@
 EAPI=6
 PLOCALES="de es fr pl ru zh"
 
-inherit cmake-utils git-r3 l10n
+inherit cmake-utils git-r3 l10n xdg
 
 DESCRIPTION="Qt-based video player, which can play all formats and stream"
 HOMEPAGE="https://github.com/zaps166/QMPlay2"
