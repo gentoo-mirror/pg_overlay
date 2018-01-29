@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PLOCALES="de es fr pl ru zh"
+PLOCALES="de es fr pl ru uk zh"
 
 inherit cmake-utils git-r3 l10n xdg
 
