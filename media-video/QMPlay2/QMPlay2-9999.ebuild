@@ -4,7 +4,7 @@
 EAPI=6
 PLOCALES="de es fr pl ru zh"
 
-inherit cmake-utils git-r3 l10n
+inherit cmake-utils git-r3 l10n xdg
 
 DESCRIPTION="Qt-based video player, which can play all formats and stream"
 HOMEPAGE="https://github.com/zaps166/QMPlay2"
@@ -75,7 +75,7 @@ src_configure() {
 		mycmakeargs+=( -DUSE_LASTFM=$(usex lastfm) )
 		mycmakeargs+=( -DUSE_MPRIS2=$(usex mpris) )
 	else
-		mycmakeargs+=( -DUSE_EXTENSIONS=OFF -DUSE_TEKSTOWO=OFF -DUSE_DATMUSIC=OFF -DUSE_ANIMEODCINKI=OFF -DUSE_WBIJAM=OFF -DDUSE_MEDIABROWSER=OFF)
+		mycmakeargs+=( -DUSE_EXTENSIONS=OFF -DUSE_MPRIS2=OFF -DUSE_LASTFM=OFF -DUSE_TEKSTOWO=OFF -DUSE_DATMUSIC=OFF -DUSE_ANIMEODCINKI=OFF -DUSE_WBIJAM=OFF -DDUSE_MEDIABROWSER=OFF)
 	fi
 
 	cmake-utils_src_configure
