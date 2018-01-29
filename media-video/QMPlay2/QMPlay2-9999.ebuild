@@ -40,6 +40,17 @@ DEPEND="${RDEPEND}
 CMAKE_MIN_VERSION="3.1"
 DOCS=( AUTHORS ChangeLog README.md )
 
+src_prepare() {
+	l10n_find_plocales_changes "${S}/lang" "" '.ts'
+
+	# Delete Ubuntu Unity shortcut group
+	sed -i -e '/X-Ayatana-Desktop-Shortcuts/,$d' \
+		src/gui/Unix/QMPlay2.desktop || die
+
+	cmake-utils_src_prepare
+}
+
+
 src_configure() {
 	local mycmakeargs=(
 		-DUSE_FFMPEG=ON
