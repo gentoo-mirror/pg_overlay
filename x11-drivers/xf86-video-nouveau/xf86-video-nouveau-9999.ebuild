@@ -5,12 +5,12 @@ EAPI=5
 XORG_DRI="always"
 inherit xorg-2
 
-EGIT_REPO_URI="https://anongit.freedesktop.org/git/nouveau/${PN}"
+EGIT_REPO_URI="https://anongit.freedesktop.org/git/nouveau/${PN}.git"
 
 DESCRIPTION="Accelerated Open Source driver for nVidia cards"
-HOMEPAGE="https://nouveau.freedesktop.org/"
+HOMEPAGE="https://nouveau.freedesktop.org/wiki/"
 
-KEYWORDS="~amd64 ~ppc ~ppc64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND=">=x11-libs/libdrm-2.4.60[video_cards_nouveau]
