@@ -18,7 +18,7 @@ RDEPEND="virtual/opengl"
 
 S=${WORKDIR}/${P/_alpha/-a}
 
-PATCHES=("${FILESDIR}/${P}-experimental.patch")
+#PATCHES=("${FILESDIR}/${P}-experimental.patch")
 
 src_configure() {
 	if use test; then
