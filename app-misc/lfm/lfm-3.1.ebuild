@@ -15,8 +15,3 @@ SRC_URI="https://inigo.katxi.org/devel/${PN}/${P}.tar.gz"
 LICENSE="GPL-3+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-
-src_prepare() {
-	default
-	epatch "${FILESDIR}"/${P}-no-doc.patch
-}
