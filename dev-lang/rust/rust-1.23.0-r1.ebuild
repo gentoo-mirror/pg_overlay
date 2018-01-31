@@ -130,7 +130,7 @@ src_configure() {
 }
 
 src_compile() {
-	./x.py build --verbose --config="${S}"/config.toml ${MAKEOPTS} || die
+	./x.py build --verbose --config="${S}"/config.toml -j$(makeopts_jobs) || die
 }
 
 src_install() {
