@@ -20,4 +20,3 @@ fixes/connection-message.patch
 system/nspr.patch
 system/lcms2.patch
 system/event.patch
-system/harfbuzz.patch
