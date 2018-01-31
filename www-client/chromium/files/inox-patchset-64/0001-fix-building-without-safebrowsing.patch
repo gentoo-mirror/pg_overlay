@@ -24,7 +24,7 @@
  
  #if defined(OS_ANDROID)
  float GetDeviceScaleAdjustment() {
-@@ -1753,7 +1754,7 @@ void ChromeContentBrowserClient::AppendE
+@@ -1752,7 +1753,7 @@ void ChromeContentBrowserClient::AppendE
        // Disable client-side phishing detection in the renderer if it is
        // disabled in the Profile preferences or the browser process.
        if (!prefs->GetBoolean(prefs::kSafeBrowsingEnabled) ||
@@ -33,7 +33,7 @@
          command_line->AppendSwitch(
              switches::kDisableClientSidePhishingDetection);
        }
-@@ -2363,7 +2364,7 @@ void ChromeContentBrowserClient::AllowCe
+@@ -2361,7 +2362,7 @@ void ChromeContentBrowserClient::AllowCe
    SSLErrorHandler::HandleSSLError(
        web_contents, cert_error, ssl_info, request_url, strict_enforcement,
        expired_previous_decision,
@@ -42,7 +42,7 @@
        callback, SSLErrorHandler::BlockingPageReadyCallback());
  }
  
-@@ -2553,8 +2554,6 @@ bool ChromeContentBrowserClient::CanCrea
+@@ -2551,8 +2552,6 @@ bool ChromeContentBrowserClient::CanCrea
  void ChromeContentBrowserClient::ResourceDispatcherHostCreated() {
    DCHECK_CURRENTLY_ON(BrowserThread::UI);
  
@@ -51,7 +51,7 @@
    for (size_t i = 0; i < extra_parts_.size(); ++i)
      extra_parts_[i]->ResourceDispatcherHostCreated();
  
-@@ -3045,17 +3044,6 @@ void ChromeContentBrowserClient::ExposeI
+@@ -3043,17 +3042,6 @@ void ChromeContentBrowserClient::ExposeI
                                        base::RetainedRef(context)));
    }
  
@@ -69,7 +69,7 @@
  #if defined(OS_WIN)
    if (base::FeatureList::IsEnabled(features::kModuleDatabase)) {
      // Add the ModuleEventSink interface. This is the interface used by renderer
-@@ -3510,7 +3498,7 @@ ChromeContentBrowserClient::CreateThrott
+@@ -3508,7 +3496,7 @@ ChromeContentBrowserClient::CreateThrott
            switches::kCommittedInterstitials)) {
      throttles.push_back(std::make_unique<SSLErrorNavigationThrottle>(
          handle,
@@ -78,7 +78,7 @@
          base::Bind(&SSLErrorHandler::HandleSSLError)));
    }
  
-@@ -3699,12 +3687,6 @@ ChromeContentBrowserClient::CreateURLLoa
+@@ -3697,12 +3685,6 @@ ChromeContentBrowserClient::CreateURLLoa
  
    std::vector<std::unique_ptr<content::URLLoaderThrottle>> result;
  
@@ -91,7 +91,7 @@
    return result;
  }
  
-@@ -3783,18 +3765,3 @@ void ChromeContentBrowserClient::SetDefa
+@@ -3781,18 +3763,3 @@ void ChromeContentBrowserClient::SetDefa
      const storage::QuotaSettings* settings) {
    g_default_quota_settings = settings;
  }
