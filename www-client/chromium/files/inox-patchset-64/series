@@ -3,6 +3,7 @@ chromium-use-fromUTF8-for-UnicodeString-construction.patch
 chromium-omnibox-unescape-fragment.patch
 chromium-skia-harmony.patch
 0001-fix-building-without-safebrowsing.patch
+0002-fix-building-without-reporting.patch
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
 0005-disable-default-extensions.patch
