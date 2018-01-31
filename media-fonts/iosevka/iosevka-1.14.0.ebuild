@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit font unpacker
+inherit font
 
 DESCRIPTION="Open source coding font"
 HOMEPAGE="http://be5invis.github.io/Iosevka"
