@@ -3,7 +3,9 @@
 
 EAPI=6
 
-inherit cmake-utils xdg-utils
+PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
+
+inherit cmake-utils l10n xdg-utils
 [[ ${PV} = 9999 ]] && inherit subversion
 
 DESCRIPTION="Qt5-based audio player with winamp/xmms skins support"
@@ -97,6 +99,13 @@ src_prepare() {
 			-e 's:cdio/cdda.h:cdio/paranoia/cdda.h:' \
 			src/plugins/Input/cdaudio/decoder_cdaudio.cpp || die
 	fi
+
+	rm_locale() {
+		rm -vf "src/${PN}ui/translations/lib${PN}ui_${1}.ts" || die "removing of ${1}.ts failed"
+		sed -i "/lib${PN}ui_${1}.qm/d" src/${PN}ui/translations/lib${PN}ui_locales.qrc || die "removing of ${1}.ts failed"
+	}
+	l10n_find_plocales_changes src/${PN}ui/translations "lib${PN}ui_" ".ts"
+	l10n_for_each_disabled_locale_do rm_locale
 
 	cmake-utils_src_prepare
 }
