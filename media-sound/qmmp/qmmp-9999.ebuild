@@ -3,6 +3,8 @@
 
 EAPI=6
 
+PLOCALES="ru"
+
 inherit cmake-utils l10n xdg-utils
 [[ ${PV} = 9999 ]] && inherit subversion
 
