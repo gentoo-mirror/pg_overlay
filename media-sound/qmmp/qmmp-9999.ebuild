@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit cmake-utils xdg-utils
+inherit cmake-utils l10n xdg-utils
 [[ ${PV} = 9999 ]] && inherit subversion
 
 DESCRIPTION="Qt5-based audio player with winamp/xmms skins support"
