@@ -34,6 +34,7 @@ RDEPEND="
 	dbus? ( dev-qt/qtdbus:5 )
 	X? (
 		dev-qt/qtgui:5
+		dev-qt/qtsvg:5
 		dev-qt/qtwidgets:5
 	)"
 DEPEND="${RDEPEND}
@@ -42,12 +43,19 @@ DEPEND="${RDEPEND}
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
-src_configure() {
-	#To last stable version for Pedro's BTMusic
-	sed -i s/"VER_MINOR = 4"/"VER_MINOR = 3"/g version.pri || die
-	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 16"/g version.pri || die
-	sed -i s/"VER_STATUS = beta2"/"VER_STATUS ="/g version.pri || die
+src_prepare() {
+	cmake-utils_src_prepare
 
+	# bug 641382
+	sed -i -e "s/-Werror  //" cmake/Modules/MacroQbtCompilerSettings.cmake || die
+
+	#To last stable version for Pedro's BTMusic
+	sed -i s/"VER_MINOR = 1"/"VER_MINOR = 0"/g version.pri || die
+	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 3"/g version.pri || die
+	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
+}
+
+src_configure() {
 	local mycmakeargs=(
 		-DSYSTEM_QTSINGLEAPPLICATION=ON
 		-DDBUS=$(usex dbus)

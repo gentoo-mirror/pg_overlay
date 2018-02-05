@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -31,8 +31,8 @@ RDEPEND="
 		>=dev-libs/dbus-glib-0.100
 		>=dev-libs/glib-2.32:2
 		>=x11-libs/gtk+-3.4:3
-		ayatana? ( >=dev-libs/libappindicator-0.4.90:3 )
-		)
+		ayatana? ( >=dev-libs/libappindicator-0.4.30:3 )
+	)
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtdbus:5
@@ -56,10 +56,10 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	# 2.92+ -> 2.92
-	sed -i s/2.92+/2.92/g CMakeLists.txt || die
-	sed -i s/TR292Z/TR2920/g CMakeLists.txt || die
-	sed -i s/2.92+/2.92/g configure.ac || die
-	sed -i s/TR292Z/TR2920/g configure.ac || die
+	sed -i s/2.93+/2.93/g CMakeLists.txt || die
+	sed -i s/TR293Z/TR2930/g CMakeLists.txt || die
+	sed -i s/2.93+/2.93/g configure.ac || die
+	sed -i s/TR293Z/TR2930/g configure.ac || die
 
 	default
 }
