@@ -4,7 +4,7 @@
 
 depend() {
 	use net ypbind nis
-	after slapd mysqld postgresql
+	after slapd mysqld postgresql netmount
 }
 
 start() {
