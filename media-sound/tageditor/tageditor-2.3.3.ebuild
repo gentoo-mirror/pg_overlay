@@ -18,7 +18,6 @@ RDEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdeclarative:5
 	dev-qt/qtgui:5
-	dev-qt/qtwebkit:5
 	dev-util/qtutilities
 	media-sound/tagparser
 "
@@ -28,7 +27,7 @@ DEPEND="${RDEPEND}"
 src_configure() {
 	local mycmakeargs=(
 		-DJS_PROVIDER=qml
-		-DWEBVIEW_PROVIDER=webkit
+		-DWEBVIEW_PROVIDER=none
 		-DCMAKE_BUILD_TYPE=Release
 	)
 
