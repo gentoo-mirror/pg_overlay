@@ -3,7 +3,7 @@
 
 EAPI=6
 
-WX_GTK_VER="3.0-gtk3"
+WX_GTK_VER="3.0"
 
 inherit toolchain-funcs wxwidgets
 
@@ -29,7 +29,6 @@ S=${WORKDIR}/${PN}_${PV}
 DOCS=( ChangeLog README TODO )
 
 PATCHES=(
-	"${FILESDIR}"/${P}-darwin.patch
 	"${FILESDIR}"/CVE-2017-17969.patch
 	"${FILESDIR}"/CVE-2018-5996.patch
 )
@@ -88,13 +87,6 @@ src_prepare() {
 		sed -i -e '/^LOCAL_LIBS=/s/LOCAL_LIBS=/&-static /' makefile.machine || die
 	fi
 
-	#
-	pushd Utils
-	sed -i 's/_do_not_use//g' generate.py
-	./generate.py
-	popd
-	#
-
 	if use kde || use wxwidgets; then
 		need-wxwidgets unicode
 		einfo "Preparing dependency list"
@@ -106,7 +98,7 @@ src_compile() {
 	emake CC=$(tc-getCC) CXX=$(tc-getCXX) all3
 	if use kde || use wxwidgets; then
 		emake CC=$(tc-getCC) CXX=$(tc-getCXX) -- 7zG
-		emake -- 7zFM
+#		emake -- 7zFM
 	fi
 }
 
@@ -122,14 +114,14 @@ src_install() {
 
 	if use kde || use wxwidgets; then
 		make_wrapper 7zG "/usr/$(get_libdir)/${PN}/7zG"
-		make_wrapper 7zFM "/usr/$(get_libdir)/${PN}/7zFM"
+#		make_wrapper 7zFM "/usr/$(get_libdir)/${PN}/7zFM"
 
-		make_desktop_entry 7zFM "${PN} FM" ${PN} "GTK;Utility;Archiving;Compression"
+#		make_desktop_entry 7zFM "${PN} FM" ${PN} "GTK;Utility;Archiving;Compression"
 
 		dobin GUI/p7zipForFilemanager
 		exeinto /usr/$(get_libdir)/${PN}
-		doexe bin/7z{G,FM}
-#		doexe bin/7zG
+#		doexe bin/7z{G,FM}
+		doexe bin/7zG
 
 		insinto /usr/$(get_libdir)/${PN}
 		doins -r GUI/Lang
@@ -142,6 +134,11 @@ src_install() {
 			rm GUI/kde4/p7zip_compress.desktop || die
 			insinto /usr/share/kservices5/ServiceMenus
 			doins GUI/kde4/*.desktop
+			dodir /usr/share/kde4/services/ServiceMenus # drop these lines after konqueror:4/krusader:4 are gone
+			for item in "${ED}"usr/share/kservices5/ServiceMenus/*.desktop; do
+				item="$(basename ${item})"
+				dosym "/usr/share/kservices5/ServiceMenus/${item}" "/usr/share/kde4/services/ServiceMenus/${item}"
+			done
 		fi
 	fi
 
