@@ -17,3 +17,4 @@ net-p2p/deluge:linguas_pms - Piemontese locale
 net-p2p/deluge:setproctitle - Install dependencies needed for beautifying the process name
 net-p2p/deluge:webinterface - Install dependencies needed for the web interface
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
+x11-libs/gdk-pixbuf:X - Build and install the legacy gdk_pixbuf_xlib-2.0 library
