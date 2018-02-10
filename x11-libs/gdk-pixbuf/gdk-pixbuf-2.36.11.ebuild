@@ -84,7 +84,7 @@ multilib_src_configure() {
 
 multilib_src_install() {
 	# Parallel install fails when no gdk-pixbuf is already installed, bug #481372
-	MAKEOPTS="${MAKEOPTS}" gnome2_src_install
+	MAKEOPTS="-j1" gnome2_src_install
 }
 
 pkg_preinst() {
@@ -93,6 +93,8 @@ pkg_preinst() {
 	multilib_pkg_preinst() {
 		# Make sure loaders.cache belongs to gdk-pixbuf alone
 		local cache="usr/$(get_libdir)/${PN}-2.0/2.10.0/loaders.cache"
+
+		mkdir -p "${ED}/usr/$(get_libdir)/${PN}-2.0/2.10.0"
 
 		if [[ -e ${EROOT}${cache} ]]; then
 			cp "${EROOT}"${cache} "${ED}"/${cache} || die
