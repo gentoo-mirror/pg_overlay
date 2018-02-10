@@ -97,7 +97,6 @@ pkg_preinst() {
 		if [[ -e ${EROOT}${cache} ]]; then
 			cp "${EROOT}"${cache} "${ED}"/${cache} || die
 		else
-			dodir "usr/$(get_libdir)/${PN}-2.0/2.10.0/" || die
 			touch "${ED}"/${cache} || die
 		fi
 	}
