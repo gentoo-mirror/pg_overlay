@@ -44,10 +44,10 @@ MULTILIB_CHOST_TOOLS=(
 PATCHES=(
 	# Do not run lowmem test on uclibc
 	# See https://bugzilla.gnome.org/show_bug.cgi?id=756590
-	"${FILESDIR}"/${PN}-2.32.3-fix-lowmem-uclibc.patch
+	#"${FILESDIR}"/${PN}-2.32.3-fix-lowmem-uclibc.patch
 	# Fix --without-libtiff having no effect (from master)
 	# https://bugzilla.gnome.org/show_bug.cgi?id=788770
-	"${FILESDIR}"/${PV}-fix-libtiff-disable.patch
+	#"${FILESDIR}"/${PV}-fix-libtiff-disable.patch
 )
 
 src_prepare() {
@@ -84,7 +84,7 @@ multilib_src_configure() {
 
 multilib_src_install() {
 	# Parallel install fails when no gdk-pixbuf is already installed, bug #481372
-	MAKEOPTS="${MAKEOPTS} -j1" gnome2_src_install
+	MAKEOPTS="${MAKEOPTS}" gnome2_src_install
 }
 
 pkg_preinst() {
@@ -97,7 +97,6 @@ pkg_preinst() {
 		if [[ -e ${EROOT}${cache} ]]; then
 			cp "${EROOT}"${cache} "${ED}"/${cache} || die
 		else
-			dodir "usr/$(get_libdir)/${PN}-2.0/2.10.0/" || die
 			touch "${ED}"/${cache} || die
 		fi
 	}
