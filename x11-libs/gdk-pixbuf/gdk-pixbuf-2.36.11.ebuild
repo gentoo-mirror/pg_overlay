@@ -74,7 +74,7 @@ multilib_src_configure() {
 		$(multilib_native_use_enable introspection) \
 		$(use_with X x11) \
 		--with-libpng \
-		--with-included-loaders=png
+		--with-included-loaders
 
 	# work-around gtk-doc out-of-source brokedness
 	if multilib_is_native_abi; then
