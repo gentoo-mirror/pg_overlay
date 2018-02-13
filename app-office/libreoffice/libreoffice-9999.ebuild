@@ -393,7 +393,7 @@ src_configure() {
 		--enable-randr
 		--enable-release-build
 		--disable-breakpad
-		--enable-ccache
+		--disable-ccache
 		--disable-dependency-tracking
 		--disable-epm
 		--disable-fetch-external
