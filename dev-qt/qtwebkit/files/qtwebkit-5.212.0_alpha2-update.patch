@@ -37133,7 +37133,7 @@ index 2983a2d92..2cddda42c 100644
          if (!m_mediaTypeWhenNotPrinting.isNull())
              setMediaType(m_mediaTypeWhenNotPrinting);
 diff --git a/Source/WebCore/page/Performance.cpp b/Source/WebCore/page/Performance.cpp
-index ed39a1d15..1c491da5d 100644
+index ed39a1d15..aa18fe063 100644
 --- a/Source/WebCore/page/Performance.cpp
 +++ b/Source/WebCore/page/Performance.cpp
 @@ -233,7 +233,7 @@ void Performance::webkitClearMeasures(const String& measureName)
@@ -37141,7 +37141,7 @@ index ed39a1d15..1c491da5d 100644
  {
      double nowSeconds = monotonicallyIncreasingTime() - m_referenceTime;
 -    const double resolutionSeconds = 0.000005;
-+    const double resolutionSeconds = 0.0001;
++    const double resolutionSeconds = 0.001;
      return 1000.0 * floor(nowSeconds / resolutionSeconds) * resolutionSeconds;
  }
  
@@ -39963,6 +39963,26 @@ index 370b3a0f8..bcb274c8e 100644
      IndentTextOrNot m_shouldIndentText;
  };
  
+diff --git a/Source/WebCore/rendering/style/NinePieceImage.cpp b/Source/WebCore/rendering/style/NinePieceImage.cpp
+index b4c33f4f0..3c32a8a59 100644
+--- a/Source/WebCore/rendering/style/NinePieceImage.cpp
++++ b/Source/WebCore/rendering/style/NinePieceImage.cpp
+@@ -25,6 +25,7 @@
+ #include "NinePieceImage.h"
+ 
+ #include "GraphicsContext.h"
++#include "ImageQualityController.h"
+ #include "LengthFunctions.h"
+ #include "RenderStyle.h"
+ #include <wtf/NeverDestroyed.h>
+@@ -209,6 +210,7 @@ void NinePieceImage::paint(GraphicsContext& graphicsContext, RenderElement* rend
+     if (!image)
+         return;
+ 
++    InterpolationQualityMaintainer interpolationMaintainer(graphicsContext, ImageQualityController::interpolationQualityFromStyle(style));
+     for (ImagePiece piece = MinPiece; piece < MaxPiece; ++piece) {
+         if ((piece == MiddlePiece && !fill()) || isEmptyPieceRect(piece, destinationRects, sourceRects))
+             continue;
 diff --git a/Source/WebCore/svg/properties/SVGAnimatedListPropertyTearOff.h b/Source/WebCore/svg/properties/SVGAnimatedListPropertyTearOff.h
 index 6177281c3..f2b8f562c 100644
 --- a/Source/WebCore/svg/properties/SVGAnimatedListPropertyTearOff.h
@@ -40149,7 +40169,7 @@ index 0e77eac4d..0bcdc4c92 100644
  
  void XMLDocumentParser::processingInstruction(const xmlChar* target, const xmlChar* data)
 diff --git a/Source/WebKit/CMakeLists.txt b/Source/WebKit/CMakeLists.txt
-index edc22fee9..82dc1e662 100644
+index edc22fee9..04117d563 100644
 --- a/Source/WebKit/CMakeLists.txt
 +++ b/Source/WebKit/CMakeLists.txt
 @@ -60,7 +60,7 @@ if (${PORT} STREQUAL "Qt")
@@ -40161,8 +40181,31 @@ index edc22fee9..82dc1e662 100644
          install(FILES $<TARGET_PDB_FILE:WebKit> DESTINATION "${BIN_INSTALL_DIR}" OPTIONAL)
      endif ()
  
+@@ -70,11 +70,21 @@ if (${PORT} STREQUAL "Qt")
+ 
+     if (MACOS_BUILD_FRAMEWORKS)
+         set_target_properties(WebKit PROPERTIES
+-            FRAMEWORK_VERSION 5
++            FRAMEWORK_VERSION ${PROJECT_VERSION_MAJOR}
++            SOVERSION ${MACOS_COMPATIBILITY_VERSION}
+             MACOSX_FRAMEWORK_IDENTIFIER org.qt-project.QtWebKit
+         )
+     endif ()
+ 
++    if (USE_LINKER_VERSION_SCRIPT)
++        set(VERSION_SCRIPT "${CMAKE_BINARY_DIR}/QtWebKit.version")
++        add_custom_command(TARGET WebKit PRE_LINK
++            COMMAND ${PERL_EXECUTABLE} ${TOOLS_DIR}/qt/generate-version-script.pl ${Qt5_VERSION} > ${VERSION_SCRIPT}
++            VERBATIM
++        )
++        set_target_properties(WebKit PROPERTIES LINK_FLAGS -Wl,--version-script,${VERSION_SCRIPT})
++    endif ()
++
+     if (ENABLE_WEBKIT2)
+         add_dependencies(WebKit WebKit2)
+     endif ()
 diff --git a/Source/WebKit/PlatformQt.cmake b/Source/WebKit/PlatformQt.cmake
-index da199aeaf..3792def6f 100644
+index da199aeaf..6fe440be8 100644
 --- a/Source/WebKit/PlatformQt.cmake
 +++ b/Source/WebKit/PlatformQt.cmake
 @@ -16,10 +16,22 @@ macro(generate_version_header _file _var _prefix)
@@ -40410,7 +40453,17 @@ index da199aeaf..3792def6f 100644
      install(FILES $<TARGET_PDB_FILE:WebKitWidgets> DESTINATION "${BIN_INSTALL_DIR}" OPTIONAL)
  endif ()
  
-@@ -786,6 +879,7 @@ if (COMPILER_IS_GCC_OR_CLANG)
+@@ -768,7 +861,8 @@ endif ()
+ 
+ if (MACOS_BUILD_FRAMEWORKS)
+     set_target_properties(WebKitWidgets PROPERTIES
+-        FRAMEWORK_VERSION 5
++        FRAMEWORK_VERSION ${PROJECT_VERSION_MAJOR}
++        SOVERSION ${MACOS_COMPATIBILITY_VERSION}
+         MACOSX_FRAMEWORK_IDENTIFIER org.qt-project.QtWebKitWidgets
+     )
+ endif ()
+@@ -786,6 +880,7 @@ if (COMPILER_IS_GCC_OR_CLANG)
      set_source_files_properties(
          qt/Api/qwebdatabase.cpp
          qt/Api/qwebelement.cpp
@@ -40418,7 +40471,7 @@ index da199aeaf..3792def6f 100644
          qt/Api/qwebhistory.cpp
          qt/Api/qwebhistoryinterface.cpp
          qt/Api/qwebpluginfactory.cpp
-@@ -795,7 +889,6 @@ if (COMPILER_IS_GCC_OR_CLANG)
+@@ -795,7 +890,6 @@ if (COMPILER_IS_GCC_OR_CLANG)
  
          qt/WidgetApi/qgraphicswebview.cpp
          qt/WidgetApi/qwebframe.cpp
@@ -41980,28 +42033,6 @@ index 47dfdb492..f8c30b7f3 100644
  
  if (HYPHEN_INCLUDE_DIR AND HYPHEN_LIBRARIES)
      set(HYPHEN_FOUND 1)
-diff --git a/Source/cmake/FindICU.cmake b/Source/cmake/FindICU.cmake
-index 4e93286f3..c0de36338 100644
---- a/Source/cmake/FindICU.cmake
-+++ b/Source/cmake/FindICU.cmake
-@@ -24,7 +24,7 @@ mark_as_advanced(ICU_INCLUDE_DIR)
- # Look for the library.
- find_library(
-     ICU_LIBRARY
--    NAMES icuuc cygicuuc cygicuuc32
-+    NAMES sicuuc icuuc cygicuuc cygicuuc32
-     HINTS ${PC_ICU_LIBRARY_DIRS}
-           ${PC_ICU_LIBDIR}
-     DOC "Libraries to link against for the common parts of ICU")
-@@ -49,7 +49,7 @@ if (ICU_INCLUDE_DIR AND ICU_LIBRARY)
-     pkg_check_modules(PC_ICU_I18N icu-i18n)
-     find_library(
-         ICU_I18N_LIBRARY
--        NAMES icui18n icuin cygicuin cygicuin32
-+        NAMES sicui18n sicuin icui18n icuin cygicuin cygicuin32
-         HINTS ${PC_ICU_I18N_LIBRARY_DIRS}
-               ${PC_ICU_I18N_LIBDIR}
-         DOC "Libraries to link against for ICU internationalization")
 diff --git a/Source/cmake/FindLibsecret.cmake b/Source/cmake/FindLibsecret.cmake
 index d33228a77..7cfe1dfde 100644
 --- a/Source/cmake/FindLibsecret.cmake
@@ -42089,16 +42120,48 @@ index 529e2bc0d..9c4f00ecd 100644
  
  if (COMPILER_IS_CLANG AND CMAKE_GENERATOR STREQUAL "Ninja")
 diff --git a/Source/cmake/OptionsQt.cmake b/Source/cmake/OptionsQt.cmake
-index 1930027d1..559b2ab8b 100644
+index 1930027d1..003fdca41 100644
 --- a/Source/cmake/OptionsQt.cmake
 +++ b/Source/cmake/OptionsQt.cmake
-@@ -1,4 +1,5 @@
+@@ -1,4 +1,6 @@
++include(CheckCXXSourceCompiles)
  include(FeatureSummary)
 +include(ECMEnableSanitizers)
  include(ECMPackageConfigHelpers)
  
  set(ECM_MODULE_DIR ${CMAKE_MODULE_PATH})
-@@ -59,7 +60,16 @@ macro(QT_ADD_EXTRA_WEBKIT_TARGET_EXPORT target)
+@@ -52,6 +54,30 @@ macro(CONVERT_PRL_LIBS_TO_CMAKE _qt_component)
+     endif ()
+ endmacro()
+ 
++macro(CHECK_QT5_PRIVATE_INCLUDE_DIRS _qt_component _header)
++    set(INCLUDE_TEST_SOURCE
++    "
++        #include <${_header}>
++        int main() { return 0; }
++    "
++    )
++    set(CMAKE_REQUIRED_INCLUDES ${Qt5${_qt_component}_PRIVATE_INCLUDE_DIRS})
++    set(CMAKE_REQUIRED_LIBRARIES Qt5::${_qt_component})
++
++    # Avoid check_include_file_cxx() because it performs linking but doesn't support CMAKE_REQUIRED_LIBRARIES (doh!)
++    check_cxx_source_compiles("${INCLUDE_TEST_SOURCE}" Qt5${_qt_component}_PRIVATE_HEADER_FOUND)
++
++    unset(INCLUDE_TEST_SOURCE)
++    unset(CMAKE_REQUIRED_INCLUDES)
++    unset(CMAKE_REQUIRED_LIBRARIES)
++
++    if (NOT Qt5${_qt_component}_PRIVATE_HEADER_FOUND)
++        message(FATAL_ERROR "Header ${_header} is not found. Please make sure that:
++    1. Private headers of Qt5${_qt_component} are installed
++    2. Qt5${_qt_component}_PRIVATE_INCLUDE_DIRS is correctly defined in Qt5${_qt_component}Config.cmake")
++    endif ()
++endmacro()
++
+ macro(QT_ADD_EXTRA_WEBKIT_TARGET_EXPORT target)
+     if (QT_STATIC_BUILD OR SHARED_CORE)
+         install(TARGETS ${target} EXPORT WebKitTargets
+@@ -59,7 +85,16 @@ macro(QT_ADD_EXTRA_WEBKIT_TARGET_EXPORT target)
      endif ()
  endmacro()
  
@@ -42116,7 +42179,7 @@ index 1930027d1..559b2ab8b 100644
      foreach (_file ${ARGN})
          get_filename_component(_ext ${_file} EXT)
          if (NOT _ext STREQUAL ".cpp")
-@@ -67,12 +77,12 @@ macro(QTWEBKIT_GENERATE_MOC_FILES_CPP)
+@@ -67,12 +102,12 @@ macro(QTWEBKIT_GENERATE_MOC_FILES_CPP)
          endif ()
          get_filename_component(_name_we ${_file} NAME_WE)
          set(_moc_name "${CMAKE_CURRENT_BINARY_DIR}/${_name_we}.moc")
@@ -42131,7 +42194,7 @@ index 1930027d1..559b2ab8b 100644
      get_filename_component(_header_ext ${_header} EXT)
      get_filename_component(_source_ext ${_source} EXT)
      if ((NOT _header_ext STREQUAL ".h") OR (NOT _source_ext STREQUAL ".cpp"))
-@@ -80,16 +90,19 @@ macro(QTWEBKIT_GENERATE_MOC_FILE_H _header _source)
+@@ -80,16 +115,19 @@ macro(QTWEBKIT_GENERATE_MOC_FILE_H _header _source)
      endif ()
      get_filename_component(_name_we ${_header} NAME_WE)
      set(_moc_name "${CMAKE_CURRENT_BINARY_DIR}/moc_${_name_we}.cpp")
@@ -42154,14 +42217,18 @@ index 1930027d1..559b2ab8b 100644
      endforeach ()
  endmacro()
  
-@@ -119,7 +132,15 @@ WEBKIT_OPTION_BEGIN()
+@@ -118,8 +156,18 @@ endif ()
+ WEBKIT_OPTION_BEGIN()
  
  if (APPLE)
++    set(MACOS_COMPATIBILITY_VERSION "${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}" CACHE STRING "Compatibility version that macOS dylibs should have")
++
      option(MACOS_FORCE_SYSTEM_XML_LIBRARIES "Use system installation of libxml2 and libxslt on macOS" ON)
+-    set(MACOS_BUILD_FRAMEWORKS ON) # TODO: Make it an option
 +    option(MACOS_USE_SYSTEM_ICU "Use system installation of ICU on macOS" ON)
 +    option(USE_UNIX_DOMAIN_SOCKETS "Use Unix domain sockets instead of native IPC code on macOS" OFF)
 +    option(USE_APPSTORE_COMPLIANT_CODE "Avoid using private macOS APIs which are not allowed on App Store (experimental)" OFF)
-     set(MACOS_BUILD_FRAMEWORKS ON) # TODO: Make it an option
++    option(MACOS_BUILD_FRAMEWORKS "Build QtWebKit as framework bundles" ON)
 +
 +    if (USE_APPSTORE_COMPLIANT_CODE)
 +        set(MACOS_USE_SYSTEM_ICU OFF)
@@ -42170,7 +42237,7 @@ index 1930027d1..559b2ab8b 100644
  endif ()
  
  if (WIN32 OR APPLE)
-@@ -152,7 +173,28 @@ else ()
+@@ -152,7 +200,28 @@ else ()
  endif ()
  
  # FIXME: Move Qt handling here
@@ -42200,7 +42267,7 @@ index 1930027d1..559b2ab8b 100644
  
  if (UNIX AND TARGET Qt5::QXcbIntegrationPlugin AND NOT APPLE)
      set(ENABLE_X11_TARGET_DEFAULT ON)
-@@ -179,7 +221,7 @@ WEBKIT_OPTION_DEFINE(ENABLE_OPENGL "Whether to use OpenGL." PUBLIC ON)
+@@ -179,7 +248,7 @@ WEBKIT_OPTION_DEFINE(ENABLE_OPENGL "Whether to use OpenGL." PUBLIC ON)
  WEBKIT_OPTION_DEFINE(ENABLE_PRINT_SUPPORT "Enable support for printing web pages" PUBLIC ON)
  WEBKIT_OPTION_DEFINE(ENABLE_QT_GESTURE_EVENTS "Enable support for gesture events (required for mouse in WK2)" PUBLIC ON)
  WEBKIT_OPTION_DEFINE(ENABLE_QT_WEBCHANNEL "Enable support for Qt WebChannel" PUBLIC ON)
@@ -42209,7 +42276,7 @@ index 1930027d1..559b2ab8b 100644
  WEBKIT_OPTION_DEFINE(ENABLE_X11_TARGET "Whether to enable support for the X11 windowing target." PUBLIC ${ENABLE_X11_TARGET_DEFAULT})
  
  option(GENERATE_DOCUMENTATION "Generate HTML and QCH documentation" OFF)
-@@ -249,11 +291,17 @@ if (MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8)
+@@ -249,11 +318,17 @@ if (MINGW AND CMAKE_SIZEOF_VOID_P EQUAL 8)
  endif ()
  
  WEBKIT_OPTION_CONFLICT(USE_GSTREAMER USE_QT_MULTIMEDIA)
@@ -42227,7 +42294,7 @@ index 1930027d1..559b2ab8b 100644
  # WebAudio and MediaSource are supported with GStreamer only
  WEBKIT_OPTION_DEPEND(ENABLE_WEB_AUDIO USE_GSTREAMER)
  WEBKIT_OPTION_DEPEND(ENABLE_LEGACY_WEB_AUDIO USE_GSTREAMER)
-@@ -261,6 +309,8 @@ WEBKIT_OPTION_DEPEND(ENABLE_MEDIA_SOURCE USE_GSTREAMER)
+@@ -261,6 +336,8 @@ WEBKIT_OPTION_DEPEND(ENABLE_MEDIA_SOURCE USE_GSTREAMER)
  
  WEBKIT_OPTION_DEPEND(ENABLE_QT_WEBCHANNEL ENABLE_WEBKIT2)
  
@@ -42236,7 +42303,7 @@ index 1930027d1..559b2ab8b 100644
  # While it's possible to have UI-less NPAPI plugins without X11, we don't support this case yet
  if (UNIX AND NOT APPLE)
      WEBKIT_OPTION_DEPEND(ENABLE_NETSCAPE_PLUGIN_API ENABLE_X11_TARGET)
-@@ -271,9 +321,9 @@ WEBKIT_OPTION_END()
+@@ -271,9 +348,9 @@ WEBKIT_OPTION_END()
  # FTL JIT and IndexedDB support require GCC 4.9
  # TODO: Patch code to avoid variadic lambdas
  if (CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
@@ -42248,7 +42315,7 @@ index 1930027d1..559b2ab8b 100644
          endif ()
      else ()
          if (CMAKE_CXX_COMPILER_VERSION VERSION_LESS "4.8.0")
-@@ -291,13 +341,6 @@ endif ()
+@@ -291,13 +368,6 @@ endif ()
  set(ENABLE_WEBKIT ON)
  set(WTF_USE_UDIS86 1)
  
@@ -42262,7 +42329,7 @@ index 1930027d1..559b2ab8b 100644
  if (SHARED_CORE)
      set(WebCoreTestSupport_LIBRARY_TYPE SHARED)
  else ()
-@@ -360,6 +403,7 @@ if (SQLITE3_SOURCE_DIR)
+@@ -360,6 +430,7 @@ if (SQLITE3_SOURCE_DIR)
      add_library(qtsqlite STATIC ${SQLITE_SOURCE_FILE})
      target_compile_definitions(qtsqlite PUBLIC -DSQLITE_CORE -DSQLITE_OMIT_LOAD_EXTENSION -DSQLITE_OMIT_COMPLETE)
      WEBKIT_SET_EXTRA_COMPILER_FLAGS(qtsqlite)
@@ -42270,7 +42337,7 @@ index 1930027d1..559b2ab8b 100644
      set(SQLITE_LIBRARIES qtsqlite)
      set(SQLITE_FOUND 1)
  else ()
-@@ -372,6 +416,19 @@ if (NOT QT_BUNDLED_JPEG)
+@@ -372,6 +443,19 @@ if (NOT QT_BUNDLED_JPEG)
      find_package(JPEG REQUIRED)
  else ()
      set(JPEG_FOUND 1)
@@ -42290,7 +42357,7 @@ index 1930027d1..559b2ab8b 100644
  endif ()
  
  if (NOT QT_BUNDLED_PNG)
-@@ -386,15 +443,19 @@ else ()
+@@ -386,15 +470,19 @@ else ()
      set(ZLIB_FOUND 1)
  endif ()
  
@@ -42313,7 +42380,7 @@ index 1930027d1..559b2ab8b 100644
      find_library(COREFOUNDATION_LIBRARY CoreFoundation)
      if (QT_STATIC_BUILD)
          find_library(CARBON_LIBRARY Carbon)
-@@ -419,10 +480,11 @@ else ()
+@@ -419,10 +507,11 @@ else ()
      endif ()
  endif ()
  
@@ -42329,7 +42396,7 @@ index 1930027d1..559b2ab8b 100644
  endif ()
  
  find_package(WebP)
-@@ -431,7 +493,6 @@ if (WEBP_FOUND)
+@@ -431,7 +520,6 @@ if (WEBP_FOUND)
      SET_AND_EXPOSE_TO_BUILD(USE_WEBP 1)
  endif ()
  
@@ -42337,7 +42404,7 @@ index 1930027d1..559b2ab8b 100644
  set(QT_REQUIRED_COMPONENTS Core Gui Network)
  
  # FIXME: Allow building w/o these components
-@@ -461,6 +522,33 @@ if (ENABLE_DEVICE_ORIENTATION)
+@@ -461,6 +549,33 @@ if (ENABLE_DEVICE_ORIENTATION)
      SET_AND_EXPOSE_TO_BUILD(HAVE_QTSENSORS 1)
  endif ()
  
@@ -42371,7 +42438,7 @@ index 1930027d1..559b2ab8b 100644
  if (ENABLE_PRINT_SUPPORT)
      list(APPEND QT_REQUIRED_COMPONENTS PrintSupport)
      SET_AND_EXPOSE_TO_BUILD(HAVE_QTPRINTSUPPORT 1)
-@@ -480,7 +568,7 @@ endif ()
+@@ -480,7 +595,7 @@ endif ()
  
  # Mach ports and Unix sockets are currently used by WK2, but their USE() values
  # affect building WorkQueue
@@ -42380,7 +42447,20 @@ index 1930027d1..559b2ab8b 100644
      SET_AND_EXPOSE_TO_BUILD(USE_MACH_PORTS 1) # Qt-specific
  elseif (UNIX)
      SET_AND_EXPOSE_TO_BUILD(USE_UNIX_DOMAIN_SOCKETS 1)
-@@ -549,6 +637,14 @@ if (COMPILER_IS_GCC_OR_CLANG AND UNIX)
+@@ -493,6 +608,12 @@ if (ENABLE_QT_WEBCHANNEL)
+ endif ()
+ 
+ find_package(Qt5 ${REQUIRED_QT_VERSION} REQUIRED COMPONENTS ${QT_REQUIRED_COMPONENTS})
++
++CHECK_QT5_PRIVATE_INCLUDE_DIRS(Gui private/qhexstring_p.h)
++if (ENABLE_WEBKIT2)
++    CHECK_QT5_PRIVATE_INCLUDE_DIRS(Quick private/qsgrendernode_p.h)
++endif ()
++
+ if (QT_STATIC_BUILD)
+     foreach (qt_module ${QT_REQUIRED_COMPONENTS})
+         CONVERT_PRL_LIBS_TO_CMAKE(${qt_module})
+@@ -549,6 +670,14 @@ if (COMPILER_IS_GCC_OR_CLANG AND UNIX)
      endif ()
  endif ()
  
@@ -42395,7 +42475,7 @@ index 1930027d1..559b2ab8b 100644
  if (WIN32 AND COMPILER_IS_GCC_OR_CLANG)
      set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fno-keep-inline-dllexport")
  endif ()
-@@ -597,22 +693,8 @@ if (ENABLE_X11_TARGET)
+@@ -597,22 +726,8 @@ if (ENABLE_X11_TARGET)
      endif ()
  endif ()
  
@@ -42419,7 +42499,7 @@ index 1930027d1..559b2ab8b 100644
      set(USE_QT_MULTIMEDIA OFF)
  
      if (NOT ENABLE_WEB_AUDIO)
-@@ -800,7 +882,7 @@ if (MSVC)
+@@ -800,7 +915,7 @@ if (MSVC)
      endif ()
  
      if (NOT QT_CONAN_DIR)
@@ -42950,7 +43030,7 @@ index 3e0d40610..e3f42cec4 100644
              skipBuild("WinRT is not supported.")
          }
 diff --git a/Tools/qmake/projects/run_cmake.pro b/Tools/qmake/projects/run_cmake.pro
-index 5603ed72e..f63fcd658 100644
+index 5603ed72e..b9d0f08a2 100644
 --- a/Tools/qmake/projects/run_cmake.pro
 +++ b/Tools/qmake/projects/run_cmake.pro
 @@ -12,6 +12,8 @@ CONFIG(debug, debug|release) {
@@ -43008,8 +43088,12 @@ index 5603ed72e..f63fcd658 100644
      }
  
      exists($$ROOT_BUILD_DIR/conanbuildinfo.cmake):exists($$ROOT_BUILD_DIR/conanfile.txt) {
-@@ -82,6 +85,8 @@ build_pass|!debug_and_release {
+@@ -80,8 +83,12 @@ build_pass|!debug_and_release {
+         debug_and_release:build_all:CONFIG(debug, debug|release) {
+             CMAKE_CONFIG += CMAKE_INSTALL_PREFIX=\"$$[QT_INSTALL_PREFIX]/debug\"
          }
++
++        !qt_framework: CMAKE_CONFIG += MACOS_BUILD_FRAMEWORKS=OFF
      }
  
 +    !isEmpty(use_ninja): cmake_args += "-G Ninja"
@@ -43017,7 +43101,7 @@ index 5603ed72e..f63fcd658 100644
      equals(QMAKE_HOST.os, Windows) {
          if(equals(MAKEFILE_GENERATOR, MSVC.NET)|equals(MAKEFILE_GENERATOR, MSBUILD)) {
              cmake_generator = "NMake Makefiles JOM"
-@@ -93,10 +98,15 @@ build_pass|!debug_and_release {
+@@ -93,10 +100,15 @@ build_pass|!debug_and_release {
              cmake_generator = "Unix Makefiles"
              make_command_name = make
          }
@@ -43035,7 +43119,7 @@ index 5603ed72e..f63fcd658 100644
  
      # Append additional platform options defined in CMAKE_CONFIG
      for (config, CMAKE_CONFIG): cmake_args += "-D$$config"
-@@ -115,7 +125,12 @@ build_pass|!debug_and_release {
+@@ -115,7 +127,12 @@ build_pass|!debug_and_release {
  
      build_pass:build_all: default_target.target = all
      else: default_target.target = first
@@ -43049,7 +43133,7 @@ index 5603ed72e..f63fcd658 100644
      QMAKE_EXTRA_TARGETS += default_target
  
      # When debug and release are built at the same time, don't install data files twice
-@@ -129,3 +144,10 @@ build_pass|!debug_and_release {
+@@ -129,3 +146,10 @@ build_pass|!debug_and_release {
      install_target.commands = $(MAKE) -f $(MAKEFILE) install_impl $$make_args DESTDIR=$(INSTALL_ROOT)
      QMAKE_EXTRA_TARGETS += install_target
  }
