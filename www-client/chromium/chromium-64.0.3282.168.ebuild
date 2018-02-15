@@ -431,6 +431,9 @@ src_configure() {
 		myconf_gn+=" enable_reporting=false"
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
+	append-cflags -fno-unwind-tables -fno-asynchronous-unwind-tables
+	append-cxxflags -fno-unwind-tables -fno-asynchronous-unwind-tables
+	append-cppflags -DNO_UNWIND_TABLES
 
 	# Ungoogled-Chromium
 	myconf_gn+=" enable_iterator_debugging=false"
@@ -448,6 +451,7 @@ src_configure() {
 	myconf_gn+=" enable_reading_list=false"
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
+
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(

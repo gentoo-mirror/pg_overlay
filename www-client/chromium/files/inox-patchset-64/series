@@ -1,4 +1,3 @@
-chromium-exclude_unwind_tables.patch
 chromium-use-fromUTF8-for-UnicodeString-construction.patch
 chromium-omnibox-unescape-fragment.patch
 chromium-skia-harmony.patch
