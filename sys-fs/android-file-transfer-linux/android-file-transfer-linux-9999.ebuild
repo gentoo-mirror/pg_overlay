@@ -25,6 +25,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_FUSE=$(usex fuse)
 		-DBUILD_QT_UI=ON
+		-DBUILD_SHARED_LIB=ON
 		-DUSB_BACKEND_LIBUSB=OFF
 	)
 	cmake-utils_src_configure
