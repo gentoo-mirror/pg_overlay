@@ -49,7 +49,7 @@ If you are upgrading from an older version than 3.x you should clear all of your
 # CCACHE_DIR='${CCACHE_DIR:-${PORTAGE_TMPDIR}/ccache}' ccache -C\\n
 ccache now supports sys-devel/clang and dev-lang/icc, too!"
 
-	readme.gentoo_create_doc
+	readme.gentoo_create_doc doc
 }
 
 pkg_prerm() {
