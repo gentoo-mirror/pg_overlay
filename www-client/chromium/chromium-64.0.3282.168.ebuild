@@ -426,7 +426,6 @@ src_configure() {
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
-	myconf_gn+=" exclude_unwind_tables=true"
 	if use inox; then
 		myconf_gn+=" enable_reporting=false"
 		myconf_gn+=" safe_browsing_mode=0"
