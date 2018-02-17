@@ -82,6 +82,7 @@ src_configure() {
 		$(use_enable nls gettext) \
 		$(use_enable readline) \
 		$(usex readline --disable-editline $(use_enable libedit editline)) \
+		--enable-blkid \
 		${myconf}
 
 	MAKEOPTS+=" V=1"
