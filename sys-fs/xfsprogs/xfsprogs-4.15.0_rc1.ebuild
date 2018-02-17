@@ -55,8 +55,10 @@ src_prepare() {
 	find -name Makefile -exec \
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
-	eautoreconf
-	eautoconf
+	emake configure
+	
+	#eautoreconf
+	#eautoconf
 	
 	# TODO: Write a patch for configure.ac to use pkg-config for the uuid-part.
 	if use static && use readline ; then
