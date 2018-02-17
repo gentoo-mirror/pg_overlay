@@ -29,7 +29,7 @@ DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
+	#"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
 	#"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
 	#"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
 )
@@ -69,7 +69,7 @@ src_prepare() {
 src_configure() {
 	export DEBUG=-DNDEBUG
 	export OPTIMIZER=${CFLAGS}
-	unset PLATFORM # if set in user env, this breaks configure
+	#unset PLATFORM # if set in user env, this breaks configure
 
 	local myconf
 	if use static || use static-libs ; then
@@ -82,7 +82,6 @@ src_configure() {
 		$(use_enable nls gettext) \
 		$(use_enable readline) \
 		$(usex readline --disable-editline $(use_enable libedit editline)) \
-		--enable-blkid \
 		${myconf}
 
 	MAKEOPTS+=" V=1"
