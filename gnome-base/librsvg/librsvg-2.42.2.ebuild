@@ -3,24 +3,25 @@
 
 EAPI=6
 GNOME2_LA_PUNT="yes"
+GNOME2_EAUTORECONF="yes"
 VALA_USE_DEPEND="vapigen"
 
-inherit autotools eutils gnome2 multilib-minimal vala
+inherit gnome2 multilib-minimal vala
 
 DESCRIPTION="Scalable Vector Graphics (SVG) rendering library"
 HOMEPAGE="https://wiki.gnome.org/Projects/LibRsvg"
 
 LICENSE="LGPL-2"
 SLOT="2"
-KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~amd64 ~arm64 ~sparc ~x86"
 
-IUSE="+introspection tools vala"
+IUSE="debug +introspection tools vala"
 REQUIRED_USE="vala? ( introspection )"
 
 RDEPEND="
-	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.52.3:2[${MULTILIB_USEDEP}]
 	>=x11-libs/cairo-1.12.14-r4[${MULTILIB_USEDEP}]
-	>=x11-libs/pango-1.36.3[${MULTILIB_USEDEP}]
+	>=x11-libs/pango-1.38.0[${MULTILIB_USEDEP}]
 	>=dev-libs/libxml2-2.9.1-r4:2[${MULTILIB_USEDEP}]
 	>=dev-libs/libcroco-0.6.8-r1[${MULTILIB_USEDEP}]
 	>=x11-libs/gdk-pixbuf-2.30.7:2[introspection?,${MULTILIB_USEDEP}]
@@ -30,21 +31,23 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	dev-libs/gobject-introspection-common
 	dev-libs/vala-common
+	dev-util/cargo
+	>=virtual/rust-1.20
 	>=dev-util/gtk-doc-am-1.13
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
 	vala? ( $(vala_depend) )
 "
 # >=gtk-doc-am-1.13, gobject-introspection-common, vala-common needed by eautoreconf
 
-src_prepare() {
+PATCHES=(
 	# https://bugzilla.gnome.org/show_bug.cgi?id=653323
-	eapply "${FILESDIR}/${PN}-2.40.12-gtk-optional.patch"
+	"${FILESDIR}"/${PN}-2.40.12-gtk-optional.patch
 
 	# https://bugzilla.gnome.org/show_bug.cgi?id=731826
-	eapply "${FILESDIR}/${PN}-2.40.2-vala-out-of-source.patch"
+	"${FILESDIR}"/${PN}-2.40.2-vala-out-of-source.patch
+)
 
-	eautoreconf
-
+src_prepare() {
 	use vala && vala_src_prepare
 	gnome2_src_prepare
 }
@@ -63,6 +66,7 @@ multilib_src_configure() {
 	gnome2_src_configure \
 		--disable-static \
 		--disable-tools \
+		$(use_enable debug) \
 		$(multilib_native_use_enable introspection) \
 		$(multilib_native_use_with tools gtk3) \
 		$(multilib_native_use_enable vala) \
