@@ -46,16 +46,16 @@ pkg_setup() {
 src_prepare() {
 	epatch "${PATCHES[@]}"
 
-	emake #configure
+	emake configure
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
-	sed -i \
-		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
-		-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
-		include/builddefs.in || die
-	find -name Makefile -exec \
-		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
+	#sed -i \
+	#	-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
+	#	-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
+	#	include/builddefs.in || die
+	#find -name Makefile -exec \
+	#	sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
 	# TODO: Write a patch for configure.ac to use pkg-config for the uuid-part.
 	if use static && use readline ; then
