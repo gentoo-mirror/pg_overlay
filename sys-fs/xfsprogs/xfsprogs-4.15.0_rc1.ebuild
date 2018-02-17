@@ -67,9 +67,9 @@ src_prepare() {
 }
 
 src_configure() {
-	export DEBUG=-DNDEBUG
-	export OPTIMIZER=${CFLAGS}
-	unset PLATFORM # if set in user env, this breaks configure
+	#export DEBUG=-DNDEBUG
+	#export OPTIMIZER=${CFLAGS}
+	#unset PLATFORM # if set in user env, this breaks configure
 
 	local myconf
 	if use static || use static-libs ; then
