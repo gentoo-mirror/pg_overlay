@@ -45,8 +45,6 @@ pkg_setup() {
 
 src_prepare() {
 	default
-	eautoreconf
-	eautoconf
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
@@ -57,6 +55,9 @@ src_prepare() {
 	find -name Makefile -exec \
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
+	eautoreconf
+	eautoconf
+	
 	# TODO: Write a patch for configure.ac to use pkg-config for the uuid-part.
 	if use static && use readline ; then
 		sed -i \
