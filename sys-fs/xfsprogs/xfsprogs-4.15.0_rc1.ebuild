@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
-inherit eutils toolchain-funcs multilib versionator
+inherit autotools toolchain-funcs multilib versionator
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="http://oss.sgi.com/projects/xfs/"
@@ -12,7 +12,7 @@ SRC_URI="https://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git/snapshot/${PN}-dev-
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+#KEYWORDS="~alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86"
 IUSE="libedit nls readline static static-libs"
 REQUIRED_USE="static? ( static-libs )"
 
@@ -44,19 +44,19 @@ pkg_setup() {
 }
 
 src_prepare() {
-	#epatch "${PATCHES[@]}"
-
-	emake configure
+	default
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
-	#sed -i \
-	#	-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
-	#	-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
-	#	include/builddefs.in || die
-	#find -name Makefile -exec \
-	#	sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
+	sed -i \
+		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
+		-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
+		include/builddefs.in || die
+	find -name Makefile -exec \
+		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
+	emake configure
+	
 	# TODO: Write a patch for configure.ac to use pkg-config for the uuid-part.
 	if use static && use readline ; then
 		sed -i \
@@ -67,22 +67,22 @@ src_prepare() {
 }
 
 src_configure() {
-	#export DEBUG=-DNDEBUG
-	#export OPTIMIZER=${CFLAGS}
-	#unset PLATFORM # if set in user env, this breaks configure
+	export DEBUG=-DNDEBUG
+	export OPTIMIZER=${CFLAGS}
+	unset PLATFORM # if set in user env, this breaks configure
 
-	local myconf
+	local myconf=(
+		$(use_enable nls gettext)
+		$(use_enable readline)
+		$(usex readline --disable-editline $(use_enable libedit editline))
+	)
 	if use static || use static-libs ; then
-		myconf+=" --enable-static"
+		myconf+=( --enable-static )
 	else
-		myconf+=" --disable-static"
+		myconf+=( --disable-static )
 	fi
 
-	econf \
-		$(use_enable nls gettext) \
-		$(use_enable readline) \
-		$(usex readline --disable-editline $(use_enable libedit editline)) \
-		${myconf}
+	econf "${myconf[@]}"
 
 	MAKEOPTS+=" V=1"
 }
