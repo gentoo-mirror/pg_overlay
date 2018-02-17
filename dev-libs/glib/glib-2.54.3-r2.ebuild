@@ -89,7 +89,10 @@ pkg_setup() {
 src_prepare() {
 	# Prevent build failure in stage3 where pkgconfig is not available, bug #481056
 	mv -f "${WORKDIR}"/pkg-config-*/pkg.m4 "${S}"/m4macros/ || die
+	# Copy missing gengiotypefuncs.py
+	cp  "${FILESDIR}"/gengiotypefuncs.py "${S}"/gio/tests/ || die
 
+	# We need gengiotypefuncs
 	if use test; then
 		# Disable tests requiring dev-util/desktop-file-utils when not installed, bug #286629, upstream bug #629163
 		if ! has_version dev-util/desktop-file-utils ; then
