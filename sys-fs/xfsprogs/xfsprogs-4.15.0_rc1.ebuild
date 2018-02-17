@@ -28,11 +28,11 @@ DEPEND="${RDEPEND}
 	)
 	nls? ( sys-devel/gettext )"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
-	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
-	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
-)
+#PATCHES=(
+#	"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
+#	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
+#	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
+#)
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
 
@@ -48,12 +48,12 @@ src_prepare() {
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
 	# Clear out -static from all flags since we want to link against dynamic xfs libs.
-	sed -i \
-		-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
-		-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
-		include/builddefs.in || die
-	find -name Makefile -exec \
-		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
+	#sed -i \
+	#	-e "/^PKG_DOC_DIR/s:@pkg_name@:${PF}:" \
+	#	-e "1iLLDFLAGS += $(usex static '-all-static' '')" \
+	#	include/builddefs.in || die
+	#find -name Makefile -exec \
+	#	sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
 	emake configure
 	
