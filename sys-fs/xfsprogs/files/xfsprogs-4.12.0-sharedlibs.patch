@@ -34,7 +34,7 @@
  	$(INSTALL_LTLIB_DEV)
 --- xfsprogs-4.7.0/libxcmd/Makefile
 +++ xfsprogs-4.7.0/libxcmd/Makefile
-@@ -34,6 +34,9 @@
+@@ -26,6 +26,9 @@
  
  include $(BUILDRULES)
  
@@ -47,7 +47,7 @@
  -include .ltdep
 --- xfsprogs-4.7.0/libxfs/Makefile
 +++ xfsprogs-4.7.0/libxfs/Makefile
-@@ -138,6 +138,7 @@
+@@ -151,6 +151,7 @@
  
  install-dev: install
  	$(INSTALL) -m 644 $(PKGHFILES) $(PKG_INC_DIR)
@@ -70,11 +70,12 @@
  -include .ltdep
 --- xfsprogs-4.7.0/Makefile
 +++ xfsprogs-4.7.0/Makefile
-@@ -88,7 +88,9 @@
+@@ -90,8 +90,10 @@
  repair: libxlog libxcmd
  copy: libxlog
  mkfs: libxcmd
  spaceman: libxcmd
+ scrub: libhandle libxcmd
 +libxlog: libxfs
 +libxlog-install-dev: libxfs-install-dev
  

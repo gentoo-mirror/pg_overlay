@@ -28,11 +28,11 @@ DEPEND="${RDEPEND}
 	)
 	nls? ( sys-devel/gettext )"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
-	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
-	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
-)
+#PATCHES=(
+	#"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
+	#"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
+	#"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
+#)
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
 
@@ -44,7 +44,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${PATCHES[@]}"
+	#epatch "${PATCHES[@]}"
 
 	emake configure
 
@@ -69,7 +69,7 @@ src_prepare() {
 src_configure() {
 	export DEBUG=-DNDEBUG
 	export OPTIMIZER=${CFLAGS}
-	unset PLATFORM # if set in user env, this breaks configure
+	#unset PLATFORM # if set in user env, this breaks configure
 
 	local myconf
 	if use static || use static-libs ; then
