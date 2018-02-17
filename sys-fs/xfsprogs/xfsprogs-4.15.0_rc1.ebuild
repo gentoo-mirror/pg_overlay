@@ -28,11 +28,11 @@ DEPEND="${RDEPEND}
 	)
 	nls? ( sys-devel/gettext )"
 
-PATCHES=(
+#PATCHES=(
 	#"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
 	#"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
 	#"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
-)
+#)
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
 
