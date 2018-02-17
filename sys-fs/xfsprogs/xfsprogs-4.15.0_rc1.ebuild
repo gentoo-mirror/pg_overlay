@@ -45,7 +45,7 @@ pkg_setup() {
 
 src_prepare() {
 	default
-	eutoreconf
+	eautoreconf
 	eautoconf
 
 	# LLDFLAGS is used for programs, so apply -all-static when USE=static is enabled.
