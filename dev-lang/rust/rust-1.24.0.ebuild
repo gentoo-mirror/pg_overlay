@@ -52,7 +52,7 @@ DEPEND="${RDEPEND}
 	>=sys-devel/gcc-4.7
 	dev-util/cmake
 "
-PDEPEND="!extended? ( >=dev-util/cargo-${CARGO_DEPEND_VERSION} )"
+PDEPEND="!extended? ( dev-util/cargo )"
 
 PATCHES=( "${FILESDIR}/1.23.0-separate-libdir.patch"
 		"${FILESDIR}/0001-librustc_llvm-build-Force-link-against-libffi.patch")
