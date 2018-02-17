@@ -44,7 +44,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	epatch "${PATCHES[@]}"
+	#epatch "${PATCHES[@]}"
 
 	emake configure
 
