@@ -59,7 +59,7 @@ src_configure() {
 	local myconf
 
 	if use gtk3 ; then
-		WX_GTK_VER="${WX_GTK_VER}"-gtk3
+		WX_GTK_VER="${WX_GTK_VER}-gtk3"
 		myconf="${myconf}
 			--with-toolkit=gtk3"
 	fi
