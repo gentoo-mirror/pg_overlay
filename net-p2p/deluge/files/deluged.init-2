@@ -4,7 +4,7 @@
 
 depend() {
 	need net
-	after netmount
+	after nfs nfsclient netmount
 }
 
 checkconfig() {
