@@ -58,6 +58,12 @@ src_prepare() {
 src_configure() {
 	local myconf
 
+	if use gtk3 ; then
+		WX_GTK_VER="3.1-gtk3"
+		myconf="${myconf}
+			--with-toolkit=gtk3"
+	fi
+
 	if use X; then
 		einfo "wxGTK with X support will be used"
 		need-wxwidgets unicode
@@ -78,12 +84,6 @@ src_configure() {
 			--disable-amule-gui
 			--disable-wxcas
 			--disable-alc"
-	fi
-
-	if use gtk3 ; then
-		WX_GTK_VER="3.1-gtk3"
-		myconf="${myconf}
-			--with-toolkit=gtk3"
 	fi
 
 	econf \
