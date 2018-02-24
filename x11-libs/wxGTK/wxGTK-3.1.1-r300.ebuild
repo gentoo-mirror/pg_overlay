@@ -65,11 +65,6 @@ LICENSE="wxWinLL-3 GPL-2 doc? ( wxWinFDL-3 )"
 
 S="${WORKDIR}/wxWidgets-${PV}"
 
-PATCHES=(
-	"${WORKDIR}"/wxGTK-3.0.3_p20180104/
-	"${FILESDIR}"/wxGTK-${SLOT}-translation-domain.patch
-)
-
 src_prepare() {
 	default
 

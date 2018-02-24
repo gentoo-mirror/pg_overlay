@@ -55,9 +55,6 @@ PDEPEND=">=app-eselect/eselect-wxwidgets-20131230"
 LICENSE="wxWinLL-3 GPL-2 doc? ( wxWinFDL-3 )"
 
 S="${WORKDIR}/wxWidgets-${PV}"
-PATCHES=(
-	"${FILESDIR}"/${PN}-3.0.3-collision.patch
-)
 
 multilib_src_configure() {
 	local myconf
