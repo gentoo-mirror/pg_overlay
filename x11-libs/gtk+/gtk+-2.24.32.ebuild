@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -11,7 +11,7 @@ HOMEPAGE="https://www.gtk.org/"
 
 LICENSE="LGPL-2+"
 SLOT="2"
-IUSE="aqua cups examples +introspection test vim-syntax xinerama"
+IUSE="adwaita-icon-theme aqua cups doc examples +introspection test vim-syntax xinerama"
 REQUIRED_USE="
 	xinerama? ( !aqua )
 "
@@ -22,6 +22,7 @@ KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86 ~
 # https://bugzilla.gnome.org/show_bug.cgi?id=768663#c1
 RESTRICT="test"
 
+# NOTE: cairo[svg] dep is due to bug 291283 (not patched to avoid eautoreconf)
 COMMON_DEPEND="
 	>=dev-libs/atk-2.10.0[introspection?,${MULTILIB_USEDEP}]
 	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
@@ -47,13 +48,15 @@ COMMON_DEPEND="
 		xinerama? ( >=x11-libs/libXinerama-1.1.3[${MULTILIB_USEDEP}] )
 	)
 "
-# docbook-4.1.2 and xsl required for man pages
+# docbook-4.1.2 and xsl required for man pages
 # docbook-4.3 required for gtk-doc
 DEPEND="${COMMON_DEPEND}
-	app-text/docbook-xsl-stylesheets
-	app-text/docbook-xml-dtd:4.1.2
-	app-text/docbook-xml-dtd:4.3
-	dev-libs/libxslt
+	doc? (
+		app-text/docbook-xsl-stylesheets
+		app-text/docbook-xml-dtd:4.1.2
+		app-text/docbook-xml-dtd:4.3
+		dev-libs/libxslt
+	)
 	dev-libs/gobject-introspection-common
 	>=dev-util/gtk-doc-am-1.20
 	>=sys-devel/gettext-0.18.3[${MULTILIB_USEDEP}]
@@ -79,12 +82,14 @@ RDEPEND="${COMMON_DEPEND}
 	!<gnome-base/gail-1000
 	!<dev-util/gtk-builder-convert-${PV}
 	!<x11-libs/vte-0.28.2-r201:0
-	>=x11-themes/adwaita-icon-theme-3.14
-	x11-themes/gnome-themes-standard
+	adwaita-icon-theme? (
+		>=x11-themes/adwaita-icon-theme-3.14
+		x11-themes/gnome-themes-standard
+	)
 "
 # librsvg for svg icons (PDEPEND to avoid circular dep), bug #547710
 PDEPEND="
-	x11-themes/gtk-engines-adwaita
+	adwaita-icon-theme? ( x11-themes/gtk-engines-adwaita )
 	gnome-base/librsvg[${MULTILIB_USEDEP}]
 	vim-syntax? ( app-vim/gtk-syntax )
 "
@@ -177,6 +182,10 @@ src_prepare() {
 multilib_src_configure() {
 	[[ ${ABI} == ppc64 ]] && append-flags -mminimal-toc
 
+	if use doc
+	then	set -- --enable-man --with-xml-catalog="${EPREFIX}"/etc/xml/catalog
+	else	set --
+	fi
 	ECONF_SOURCE=${S} \
 	gnome2_src_configure \
 		$(usex aqua --with-gdktarget=quartz --with-gdktarget=x11) \
@@ -185,8 +194,7 @@ multilib_src_configure() {
 		$(multilib_native_use_enable introspection) \
 		$(use_enable xinerama) \
 		--disable-papi \
-		--enable-man \
-		--with-xml-catalog="${EPREFIX}"/etc/xml/catalog \
+		"$@" \
 		CUPS_CONFIG="${EPREFIX}/usr/bin/${CHOST}-cups-config"
 
 	# work-around gtk-doc out-of-source brokedness
@@ -211,7 +219,11 @@ multilib_src_install_all() {
 	# Also set more default variables in sync with gtk3 and other distributions
 	echo 'gtk-fallback-icon-theme = "gnome"' > "${T}/gtkrc"
 	echo 'gtk-theme-name = "Adwaita"' >> "${T}/gtkrc"
-	echo 'gtk-icon-theme-name = "Adwaita"' >> "${T}/gtkrc"
+	if use adwaita-icon-theme ; then
+		echo 'gtk-icon-theme-name = "Adwaita"' >> "${T}/gtkrc"
+	else
+		echo 'gtk-icon-theme-name = "gnome"' >> "${T}/gtkrc"
+	fi
 	echo 'gtk-cursor-theme-name = "Adwaita"' >> "${T}/gtkrc"
 
 	insinto /usr/share/gtk-2.0
@@ -220,8 +232,8 @@ multilib_src_install_all() {
 	einstalldocs
 
 	# dev-util/gtk-builder-convert split off into a separate package, #402905
-	rm "${ED}"usr/bin/gtk-builder-convert || die
-	rm "${ED}"usr/share/man/man1/gtk-builder-convert.* || die
+	rm -f "${ED}"usr/bin/gtk-builder-convert || die
+	rm -f "${ED}"usr/share/man/man1/gtk-builder-convert.* || die
 
 	readme.gentoo_create_doc
 }
