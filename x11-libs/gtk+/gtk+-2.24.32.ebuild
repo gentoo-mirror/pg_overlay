@@ -175,6 +175,8 @@ src_prepare() {
 	# Rely on split gtk-update-icon-cache package, bug #528810
 	eapply "${FILESDIR}"/${PN}-2.24.31-update-icon-cache.patch
 
+	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done	
+
 	eautoreconf
 	gnome2_src_prepare
 }

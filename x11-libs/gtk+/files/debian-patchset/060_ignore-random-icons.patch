@@ -1,0 +1,13 @@
+Index: gtk+-2.24.31/gtk/updateiconcache.c
+===================================================================
+--- gtk+-2.24.31.orig/gtk/updateiconcache.c	2016-09-09 23:27:04.938696254 +0200
++++ gtk+-2.24.31/gtk/updateiconcache.c	2016-09-09 23:27:04.934696184 +0200
+@@ -679,7 +679,7 @@
+ 		      directories = g_list_append (directories, g_strdup (subdir));
+ 		    }
+ 		  else
+-		    dir_index = 0xffff;
++		    continue;
+ 		}
+ 		
+ 	      image = g_new0 (Image, 1);
