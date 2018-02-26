@@ -170,9 +170,6 @@ src_prepare() {
 	# Rely on split gtk-update-icon-cache package, bug #528810
 	eapply "${FILESDIR}"/${PN}-2.24.31-update-icon-cache.patch
 
-	# Fix beep when overwriting at the end of a gtkentry, from gtk-2-24 branch
-	eapply "${FILESDIR}"/${PN}-2.24.31-fix-gtkentry-beep.patch
-
 	eautoreconf
 	gnome2_src_prepare
 }
