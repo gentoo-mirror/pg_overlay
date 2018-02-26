@@ -185,8 +185,8 @@ multilib_src_configure() {
 		$(multilib_native_use_enable introspection) \
 		$(use_enable xinerama) \
 		--disable-papi \
-		#--enable-man \
-		#--with-xml-catalog="${EPREFIX}"/etc/xml/catalog \
+		--enable-man \
+		--with-xml-catalog="${EPREFIX}"/etc/xml/catalog \
 		CUPS_CONFIG="${EPREFIX}/usr/bin/${CHOST}-cups-config"
 
 	# work-around gtk-doc out-of-source brokedness
