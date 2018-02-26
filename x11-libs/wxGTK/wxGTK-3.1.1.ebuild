@@ -63,7 +63,7 @@ multilib_src_configure() {
 	myconf="
 			--with-zlib=sys
 			--with-expat=sys
-			--enable-compat28
+			--disable-compat28
 			$(use_with sdl)"
 
 	# debug in >=2.9
