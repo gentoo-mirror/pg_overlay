@@ -40,7 +40,7 @@ src_prepare() {
 
 	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
 
-	rm -rv quazip/ zlib/ || die
+	rm -rv zlib/ || die
 }
 
 src_configure() {
