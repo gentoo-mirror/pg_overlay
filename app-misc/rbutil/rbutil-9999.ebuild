@@ -25,11 +25,7 @@ RDEPEND="dev-qt/qtcore:5=
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5"
 
-S="${WORKDIR}/RockboxUtility-v${PV}/${PN}/${PN}qt"
-
-PATCHES=(
-	"${FILESDIR}"/quazip.patch
-)
+S="${WORKDIR}/${P}/${PN}/${PN}qt"
 
 src_prepare() {
 	default
