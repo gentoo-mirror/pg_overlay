@@ -1,16 +1,3 @@
-gn/parallel.patch
-gn/narrowing.patch
-gn/buildflags.patch
-
-disable/fonts.patch
-disable/signin.patch
-disable/fuzzers.patch
-disable/avatar-menu.patch
-disable/welcome-page.patch
-disable/google-api-warning.patch
-disable/device-notifications.patch
-
-
 system/nspr.patch
 system/lcms2.patch
 system/event.patch
