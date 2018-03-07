@@ -28,8 +28,6 @@ warnings/unused-typedefs.patch
 warnings/unused-variable.patch
 warnings/null-destination.patch
 
-system/icu.patch
 system/nspr.patch
 system/lcms2.patch
 system/event.patch
-system/harfbuzz.patch
