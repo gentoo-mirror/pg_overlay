@@ -32,5 +32,4 @@ system/icu.patch
 system/nspr.patch
 system/lcms2.patch
 system/event.patch
-system/ffmpeg.patch
 system/harfbuzz.patch
