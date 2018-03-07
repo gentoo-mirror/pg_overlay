@@ -196,19 +196,12 @@ pkg_setup() {
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup
-	default
-
+	
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 	
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
-
-	# Iridium patches
-	#use iridium && for i in $(cat "${FILESDIR}/iridium-browser-$(get_major_version)/series");do eapply "${FILESDIR}/iridium-browser-$(get_major_version)/$i";done
-
-	# Ungoogled patches
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
@@ -467,12 +460,6 @@ src_configure() {
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_hevc_demuxing=true"
-	if use ungoogled; then
-		myconf_gn+=" enable_one_click_signin=false"
-		myconf_gn+=" safe_browsing_mode=0"
-		myconf_gn+=" enable_mdns=false"
-		myconf_gn+=" enable_service_discovery=false"
-	fi
 
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false"
