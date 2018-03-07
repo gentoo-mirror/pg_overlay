@@ -8,7 +8,6 @@ dont-use-integrated-as-on-arm64.patch
 remove-linux-kernel-dependency.patch
 fix-compile-error.patch
 specify-gcc-standard.patch
-revert-Xclang-instcombine-lower-dbg-declare.patch
 suppress-newer-clang-warning-flags.patch
 fix-ffmpeg-build.patch
 fix-build-on-older-gcc.patch
