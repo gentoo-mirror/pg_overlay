@@ -1,5 +1,5 @@
---- qtwebengine-opensource-src-5.9.1/src/3rdparty/chromium/third_party/skia/src/ports/SkFontHost_FreeType.cpp.orig	2017-10-10 17:42:06.956950985 +0200
-+++ qtwebengine-opensource-src-5.9.1/src/3rdparty/chromium/third_party/skia/src/ports/SkFontHost_FreeType.cpp	2017-10-10 17:46:05.824187787 +0200
+--- a/third_party/skia/src/ports/SkFontHost_FreeType.cpp.orig	2017-10-10 17:42:06.956950985 +0200
++++ b/third_party/skia/src/ports/SkFontHost_FreeType.cpp	2017-10-10 17:46:05.824187787 +0200
 @@ -99,8 +99,6 @@
      FreeTypeLibrary()
          : fGetVarDesignCoordinates(nullptr)
