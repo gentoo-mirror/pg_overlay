@@ -2,7 +2,7 @@ Index: beta/build/config/compiler/BUILD.gn
 ===================================================================
 --- beta.orig/build/config/compiler/BUILD.gn
 +++ beta/build/config/compiler/BUILD.gn
-@@ -393,7 +393,7 @@ config("compiler") {
+@@ -437,7 +437,7 @@ config("compiler") {
      ldflags += [ "-fuse-ld=bfd" ]
    }
  

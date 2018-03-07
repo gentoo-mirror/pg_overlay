@@ -5,7 +5,7 @@ Index: beta/build/config/compiler/BUILD.gn
 ===================================================================
 --- beta.orig/build/config/compiler/BUILD.gn
 +++ beta/build/config/compiler/BUILD.gn
-@@ -1273,26 +1273,26 @@ config("default_warnings") {
+@@ -1310,26 +1310,26 @@ config("default_warnings") {
          "-Wno-address-of-packed-member",
  
          # TODO(hans): https://crbug.com/681136
