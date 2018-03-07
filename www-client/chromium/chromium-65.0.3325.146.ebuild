@@ -393,7 +393,7 @@ src_configure() {
 	fi
 
 	if tc-is-clang; then
-		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false"
+		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false use_lld=true"
 	else
 		myconf_gn+=" is_clang=false"
 	fi
