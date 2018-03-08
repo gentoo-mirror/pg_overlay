@@ -36,7 +36,7 @@ Signed-off-by: Daniel Charles <daniel.charles@intel.com>
 
 --- a/chrome/browser/about_flags.cc
 +++ b/chrome/browser/about_flags.cc
-@@ -1254,12 +1254,14 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1249,12 +1249,14 @@ const FeatureEntry kFeatureEntries[] = {
       flag_descriptions::kUiPartialSwapDescription, kOsAll,
       SINGLE_DISABLE_VALUE_TYPE(switches::kUIDisablePartialSwap)},
  #if BUILDFLAG(ENABLE_WEBRTC)
@@ -51,7 +51,7 @@ Signed-off-by: Daniel Charles <daniel.charles@intel.com>
      {"enable-webrtc-hw-h264-encoding",
       flag_descriptions::kWebrtcHwH264EncodingName,
       flag_descriptions::kWebrtcHwH264EncodingDescription, kOsAndroid | kOsCrOS,
-@@ -1551,6 +1553,13 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1550,6 +1552,13 @@ const FeatureEntry kFeatureEntries[] = {
       flag_descriptions::kShowTouchHudDescription, kOsCrOS,
       SINGLE_VALUE_TYPE(ash::switches::kAshTouchHud)},
  #endif  // OS_CHROMEOS
@@ -65,7 +65,7 @@ Signed-off-by: Daniel Charles <daniel.charles@intel.com>
      {
          "disable-accelerated-video-decode",
          flag_descriptions::kAcceleratedVideoDecodeName,
-@@ -1558,6 +1567,7 @@ const FeatureEntry kFeatureEntries[] = {
+@@ -1557,6 +1566,7 @@ const FeatureEntry kFeatureEntries[] = {
          kOsMac | kOsWin | kOsCrOS | kOsAndroid,
          SINGLE_DISABLE_VALUE_TYPE(switches::kDisableAcceleratedVideoDecode),
      },
@@ -362,7 +362,7 @@ Signed-off-by: Daniel Charles <daniel.charles@intel.com>
  #include "content/browser/gpu/gpu_process_host.h"
  #include "content/public/common/content_features.h"
  #include "content/public/common/content_switches.h"
-@@ -55,9 +56,17 @@ const gpu::GpuPreferences GetGpuPreferen
+@@ -55,10 +56,18 @@ const gpu::GpuPreferences GetGpuPreferen
    gpu_preferences.in_process_gpu =
        command_line->HasSwitch(switches::kInProcessGPU);
    gpu_preferences.disable_accelerated_video_decode =
@@ -376,10 +376,12 @@ Signed-off-by: Daniel Charles <daniel.charles@intel.com>
 +      !command_line->HasSwitch(switches::kEnableAcceleratedVideo);
 +#else
        command_line->HasSwitch(switches::kDisableAcceleratedVideoEncode);
+-#if BUILDFLAG(ENABLE_WEBRTC)
 +#endif
- #if BUILDFLAG(ENABLE_WEBRTC)
++#if BUILDFLAG(ENABLE_WEBRTC) && (defined(OS_CHROMEOS) || defined(OS_ANDROID))
    gpu_preferences.disable_web_rtc_hw_encoding =
        command_line->HasSwitch(switches::kDisableWebRtcHWEncoding);
+ #endif
 --- a/content/public/common/content_switches.cc
 +++ b/content/public/common/content_switches.cc
 @@ -78,12 +78,21 @@ const char kDisable3DAPIs[]
