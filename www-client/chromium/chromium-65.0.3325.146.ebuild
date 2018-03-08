@@ -28,7 +28,7 @@ COMMON_DEPEND="
 	dev-libs/expat:=
 	dev-libs/glib:2
 	system-icu? ( >=dev-libs/icu-59:= )
-	>=dev-libs/libevent-2.0:0
+	debian? ( >=dev-libs/libevent-2.0:0 )
 	>=dev-libs/libxml2-2.9.5:=[icu]
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
@@ -493,6 +493,9 @@ src_configure() {
 	fi
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
+	fi
+	if use debian; then
+		gn_system_libraries+=( libevent )
 	fi
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
