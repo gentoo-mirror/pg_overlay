@@ -1,7 +1,5 @@
 chromium-skia-harmony.patch
 
-chromium-freetype-r0.patch
-
 0001-fix-building-without-safebrowsing.patch
 0002-fix-building-without-reporting.patch
 

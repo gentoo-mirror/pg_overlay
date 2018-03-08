@@ -196,7 +196,9 @@ pkg_setup() {
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup
-	
+
+	default
+
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 	
@@ -206,8 +208,6 @@ src_prepare() {
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
 	#for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i";done
-
-	default
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -441,11 +441,8 @@ src_configure() {
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-	#myconf_gn+=" use_system_freetype=true"
-	#myconf_gn+=" use_system_libjpeg=true"
-	#myconf_gn+=" use_system_libpng=true"
-	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
+	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	if use inox; then
@@ -474,9 +471,9 @@ src_configure() {
 		fontconfig
 		freetype
 		# Need harfbuzz_from_pkgconfig target
-		#harfbuzz-ng
+		harfbuzz
 		libdrm
-		#libevent
+		libevent
 		libjpeg
 		libpng
 		libwebp
@@ -500,8 +497,7 @@ src_configure() {
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
-	myconf_gn+=" use_system_harfbuzz=true"
-	#use_system_lcms2=true"
+	myconf_gn+=" use_system_lcms2=true"
 
 	# Optional dependencies.
 	myconf_gn+=" enable_hangout_services_extension=$(usex hangouts true false)"
