@@ -8,7 +8,6 @@ disable/fuzzers.patch
 disable/avatar-menu.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
-disable/third-party-cookies.patch
 disable/device-notifications.patch
 
 fixes/mojo.patch
