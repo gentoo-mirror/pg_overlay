@@ -441,9 +441,9 @@ src_configure() {
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-	myconf_gn+=" use_system_freetype=true"
-	myconf_gn+=" use_system_libjpeg=true"
-	myconf_gn+=" use_system_libpng=true"
+	#myconf_gn+=" use_system_freetype=true"
+	#myconf_gn+=" use_system_libjpeg=true"
+	#myconf_gn+=" use_system_libpng=true"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_remoting=false"
@@ -476,7 +476,7 @@ src_configure() {
 		# Need harfbuzz_from_pkgconfig target
 		#harfbuzz-ng
 		libdrm
-		libevent
+		#libevent
 		libjpeg
 		libpng
 		libwebp
@@ -500,7 +500,8 @@ src_configure() {
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
-	myconf_gn+=" use_system_harfbuzz=true use_system_lcms2=true"
+	myconf_gn+=" use_system_harfbuzz=true"
+	#use_system_lcms2=true"
 
 	# Optional dependencies.
 	myconf_gn+=" enable_hangout_services_extension=$(usex hangouts true false)"
