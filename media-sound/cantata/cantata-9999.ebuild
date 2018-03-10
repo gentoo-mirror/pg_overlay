@@ -49,7 +49,6 @@ RDEPEND="
 	streaming? ( media-video/vlc:0= )
 	taglib? (
 		media-libs/taglib
-		media-libs/taglib-extras
 		udisks? ( sys-fs/udisks:2 )
 	)
 "
@@ -91,7 +90,6 @@ src_configure() {
 		-DENABLE_MPG123=$(usex replaygain)
 		-DENABLE_HTTP_STREAM_PLAYBACK=$(usex streaming)
 		-DENABLE_TAGLIB=$(usex taglib)
-		-DENABLE_TAGLIB_EXTRAS=$(usex taglib)
 		-DENABLE_DEVICES_SUPPORT=$(usex udisks)
 		-DENABLE_REMOTE_DEVICES=OFF
 		-DENABLE_UDISKS2=OFF
