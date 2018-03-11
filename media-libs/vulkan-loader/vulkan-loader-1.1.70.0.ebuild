@@ -28,7 +28,7 @@ DEPEND="${PYTHON_DEPS}
 	X? ( x11-libs/libX11:=[${MULTILIB_USEDEP}] )"
 
 multilib_src_prepare() {	
-	./update_external_sources.sh
+	sh update_external_sources.sh
 }
 multilib_src_configure() {
 	local mycmakeargs=(
