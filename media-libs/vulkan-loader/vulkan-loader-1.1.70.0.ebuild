@@ -28,6 +28,7 @@ DEPEND="${PYTHON_DEPS}
 	X? ( x11-libs/libX11:=[${MULTILIB_USEDEP}] )"
 
 multilib_src_configure() {
+	./update_external_sources.sh
 	local mycmakeargs=(
 		-DCMAKE_SKIP_RPATH=On
 		-DBUILD_TESTS=Off
