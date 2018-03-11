@@ -27,15 +27,18 @@ DEPEND="${PYTHON_DEPS}
 	wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 	X? ( x11-libs/libX11:=[${MULTILIB_USEDEP}] )"
 
+src_prepare() {	
+	./update_external_sources.sh
+}
 multilib_src_configure() {
 	local mycmakeargs=(
-		-DCMAKE_SKIP_RPATH=True
-		-DBUILD_TESTS=False
-		-DBUILD_LAYERS=False
-		-DBUILD_DEMOS=False
-		-DBUILD_VKJSON=False
+		-DCMAKE_SKIP_RPATH=On
+		-DBUILD_TESTS=Off
+		-DBUILD_LAYERS=Off
+		-DBUILD_DEMOS=Off
+		-DBUILD_VKJSON=Off
 		-DBUILD_LOADER=True
-		-DBUILD_WSI_MIR_SUPPORT=False
+		-DBUILD_WSI_MIR_SUPPORT=Off
 		-DBUILD_WSI_WAYLAND_SUPPORT=$(usex wayland)
 		-DBUILD_WSI_XCB_SUPPORT=$(usex X)
 		-DBUILD_WSI_XLIB_SUPPORT=$(usex X)
