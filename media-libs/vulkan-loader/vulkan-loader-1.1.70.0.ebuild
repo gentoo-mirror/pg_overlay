@@ -29,6 +29,7 @@ DEPEND="${PYTHON_DEPS}
 
 src_prepare() {	
 	./update_external_sources.sh
+	default
 }
 multilib_src_configure() {
 	local mycmakeargs=(
