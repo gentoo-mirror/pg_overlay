@@ -1,9 +1,6 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
-mozilla-enable-csd.patch
 mozilla-bmo256180.patch
-mozilla-alsa-sandbox.patch
 
 firefox-kde.patch
-firefox-no-default-ualocale.patch
 firefox-branded-icons.patch
