@@ -48,7 +48,6 @@ SRC_URI="${SRC_URI}
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
-	dev-libs/jsoncpp
 	system-icu? ( >=dev-libs/icu-60.2 )
 	jack? ( virtual/jack )
 	>=dev-libs/nss-3.35
