@@ -1,11 +1,11 @@
 # HG changeset patch
-# Parent  89cbe8c49d05965b87815143d1944ab6964f12c7
+# Parent  ffcd96e120857e207bd357b2005f0b5bc776e375
 
 diff --git a/browser/base/content/browser-kde.xul b/browser/base/content/browser-kde.xul
 new file mode 100644
 --- /dev/null
 +++ b/browser/base/content/browser-kde.xul
-@@ -0,0 +1,1248 @@
+@@ -0,0 +1,1238 @@
 +#filter substitution
 +<?xml version="1.0"?>
 +# -*- Mode: HTML -*-
@@ -286,26 +286,26 @@ new file mode 100644
 +                     key="viewBookmarksSidebarKb"
 +                     observes="viewBookmarksSidebar"
 +                     oncommand="SidebarUI.show('viewBookmarksSidebar');">
-+         <observes element="viewBookmarksSidebar" attribute="checked"/>
-+       </toolbarbutton>
++        <observes element="viewBookmarksSidebar" attribute="checked"/>
++      </toolbarbutton>
 +      <toolbarbutton id="sidebar-switcher-history"
 +                     label="&historyButton.label;"
 +                     class="subviewbutton subviewbutton-iconic"
 +                     key="key_gotoHistory"
 +                     observes="viewHistorySidebar"
 +                     oncommand="SidebarUI.show('viewHistorySidebar');">
-+         <observes element="viewHistorySidebar" attribute="checked"/>
-+       </toolbarbutton>
++        <observes element="viewHistorySidebar" attribute="checked"/>
++      </toolbarbutton>
 +      <toolbarbutton id="sidebar-switcher-tabs"
 +                     label="&syncedTabs.sidebar.label;"
 +                     class="subviewbutton subviewbutton-iconic"
 +                     observes="viewTabsSidebar"
 +                     oncommand="SidebarUI.show('viewTabsSidebar');">
-+         <observes element="viewTabsSidebar" attribute="checked"/>
-+       </toolbarbutton>
++        <observes element="viewTabsSidebar" attribute="checked"/>
++      </toolbarbutton>
 +      <toolbarseparator/>
-+      <vbox id="sidebar-extensions"></vbox>
-+      <toolbarseparator/>
++      <!-- Extension toolbarbuttons go here. -->
++      <toolbarseparator id="sidebar-extensions-separator"/>
 +      <toolbarbutton id="sidebar-reverse-position"
 +                     class="subviewbutton"
 +                     oncommand="SidebarUI.reversePosition()"/>
@@ -425,15 +425,15 @@ new file mode 100644
 +           emailLink-title="&emailPageCmd.label;"
 +           sendToDevice-title="&pageAction.sendTabToDevice.label;"
 +           sendToDevice-notReadyTitle="&sendToDevice.syncNotReady.label;">
-+      <photonpanelmultiview id="pageActionPanelMultiView"
-+                            mainViewId="pageActionPanelMainView"
-+                            viewCacheId="appMenu-viewCache">
++      <panelmultiview id="pageActionPanelMultiView"
++                      mainViewId="pageActionPanelMainView"
++                      viewCacheId="appMenu-viewCache">
 +        <panelview id="pageActionPanelMainView"
 +                   context="pageActionContextMenu"
 +                   class="PanelUI-subView">
 +          <vbox class="panel-subview-body"/>
 +        </panelview>
-+      </photonpanelmultiview>
++      </panelmultiview>
 +    </panel>
 +    <panel id="pageActionFeedback"
 +           role="alert"
@@ -444,7 +444,8 @@ new file mode 100644
 +           tabspecific="true"
 +           noautofocus="true"
 +           copyURLFeedback="&copyURLFeedback.label;"
-+           sendToDeviceFeedback="&sendToDeviceFeedback.label;">
++           sendToDeviceFeedback="&sendToDeviceFeedback.label;"
++           sendToDeviceOfflineFeedback="&sendToDeviceOfflineFeedback.label;">
 +      <hbox id="pageActionFeedbackAnimatableBox">
 +        <image id="pageActionFeedbackAnimatableImage"/>
 +      </hbox>
@@ -603,13 +604,10 @@ new file mode 100644
 +</vbox>
 +#endif
 +
-+<deck flex="1" id="tab-view-deck">
-+<vbox flex="1" id="browser-panel">
-+
-+  <toolbox id="navigator-toolbox" mode="icons">
++  <toolbox id="navigator-toolbox">
 +    <!-- Menu -->
 +    <toolbar type="menubar" id="toolbar-menubar" class="chromeclass-menubar" customizable="true"
-+             mode="icons" iconsize="small"
++             mode="icons"
 +#ifdef MENUBAR_CAN_AUTOHIDE
 +             toolbarname="&menubarCmd.label;"
 +             accesskey="&menubarCmd.accesskey;"
@@ -635,7 +633,6 @@ new file mode 100644
 +             fullscreentoolbar="true"
 +             customizable="true"
 +             mode="icons"
-+             iconsize="small"
 +             aria-label="&tabsToolbar.label;"
 +             context="toolbar-context-menu"
 +             collapsed="true">
@@ -718,7 +715,6 @@ new file mode 100644
 +    <toolbar id="nav-bar"
 +             aria-label="&navbarCmd.label;"
 +             fullscreentoolbar="true" mode="icons" customizable="true"
-+             iconsize="small"
 +             customizationtarget="nav-bar-customization-target"
 +             overflowable="true"
 +             overflowbutton="nav-bar-overflow-button"
@@ -822,6 +818,8 @@ new file mode 100644
 +                         tooltiptext="&urlbar.persistentStorageBlocked.tooltip;"/>
 +                  <image data-permission-id="popup" class="blocked-permission-icon popup-icon" role="button"
 +                         tooltiptext="&urlbar.popupBlocked.tooltip;"/>
++                  <image data-permission-id="canvas" class="blocked-permission-icon canvas-icon" role="button"
++                         tooltiptext="&urlbar.canvasBlocked.tooltip;"/>
 +                </box>
 +                <box id="notification-popup-box"
 +                     hidden="true"
@@ -936,7 +934,7 @@ new file mode 100644
 +
 +        <toolbarbutton id="library-button" class="toolbarbutton-1 chromeclass-toolbar-additional subviewbutton-nav"
 +                       removable="true"
-+                       onmousedown="PanelUI.showSubView('appMenu-libraryView', this, null, event);"
++                       onmousedown="PanelUI.showSubView('appMenu-libraryView', this, event);"
 +                       closemenu="none"
 +                       cui-areatype="toolbar"
 +                       tooltiptext="&libraryButton.tooltip;"
@@ -983,10 +981,8 @@ new file mode 100644
 +      </hbox>
 +    </toolbar>
 +
-+    <toolbarset id="customToolbars" context="toolbar-context-menu"/>
-+
 +    <toolbar id="PersonalToolbar"
-+             mode="icons" iconsize="small"
++             mode="icons"
 +             class="chromeclass-directories"
 +             context="toolbar-context-menu"
 +             toolbarname="&personalbarCmd.label;" accesskey="&personalbarCmd.accesskey;"
@@ -1160,7 +1156,7 @@ new file mode 100644
 +      </toolbarbutton>
 +
 +      <toolbaritem id="search-container"
-+                   class="chromeclass-toolbar-additional panel-wide-item"
++                   class="chromeclass-toolbar-additional"
 +                   title="&searchItem.title;"
 +                   align="center"
 +                   flex="100"
@@ -1247,17 +1243,11 @@ new file mode 100644
 +    <notificationbox id="global-notificationbox" notificationside="bottom"/>
 +  </vbox>
 +
-+</vbox>
-+# <iframe id="tab-view"> is dynamically appended as the 2nd child of #tab-view-deck.
-+#     Introducing the iframe dynamically, as needed, was found to be better than
-+#     starting with an empty iframe here in browser.xul from a Ts standpoint.
-+</deck>
-+
 +</window>
 diff --git a/browser/base/jar.mn b/browser/base/jar.mn
 --- a/browser/base/jar.mn
 +++ b/browser/base/jar.mn
-@@ -52,16 +52,18 @@ browser.jar:
+@@ -45,16 +45,18 @@ browser.jar:
          content/browser/aboutRobots-icon.png          (content/aboutRobots-icon.png)
          content/browser/aboutRobots-widget-left.png   (content/aboutRobots-widget-left.png)
          content/browser/aboutTabCrashed.css           (content/aboutTabCrashed.css)
@@ -1339,7 +1329,7 @@ diff --git a/browser/components/build/nsModule.cpp b/browser/components/build/ns
 diff --git a/browser/components/preferences/in-content/main.js b/browser/components/preferences/in-content/main.js
 --- a/browser/components/preferences/in-content/main.js
 +++ b/browser/components/preferences/in-content/main.js
-@@ -193,16 +193,23 @@ var gMainPane = {
+@@ -330,16 +330,23 @@ var gMainPane = {
            this._backoffIndex++ : backoffTimes.length - 1]);
        };
  
@@ -1363,7 +1353,7 @@ diff --git a/browser/components/preferences/in-content/main.js b/browser/compone
      performanceSettingsLink.setAttribute("href", performanceSettingsUrl);
  
      this.updateDefaultPerformanceSettingsPref();
-@@ -898,16 +905,27 @@ var gMainPane = {
+@@ -1035,16 +1042,27 @@ var gMainPane = {
        // Reset exponential backoff delay time in order to do visual update in pollForDefaultBrowser.
        this._backoffIndex = 0;
  
@@ -1707,7 +1697,7 @@ new file mode 100644
 diff --git a/browser/installer/package-manifest.in b/browser/installer/package-manifest.in
 --- a/browser/installer/package-manifest.in
 +++ b/browser/installer/package-manifest.in
-@@ -657,16 +657,18 @@
+@@ -649,16 +649,18 @@
  @RESPATH@/browser/defaults/blocklists
  @RESPATH@/browser/defaults/pinning
  
