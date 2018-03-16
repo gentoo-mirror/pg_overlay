@@ -22,6 +22,7 @@ RDEPEND="
 	dev-libs/nspr
 	media-libs/fontconfig
 	media-libs/freetype
+	net-libs/libproxy
 	net-misc/curl
 	sys-devel/gcc[cxx]
 	sys-libs/zlib
