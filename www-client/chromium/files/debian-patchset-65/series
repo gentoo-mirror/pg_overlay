@@ -24,5 +24,4 @@ warnings/unused-variable.patch
 
 system/nspr.patch
 system/event.patch
-system/ffmpeg.patch
 system/harfbuzz.patch
