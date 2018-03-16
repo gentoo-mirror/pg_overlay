@@ -133,7 +133,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	if ! use_if_iuse l10n_pt_BR && use_if_iuse l10n_ru ; then
 		eapply "${FILESDIR}/${P}-remove-pt_br-help-translation.patch"
-		rm -v "${S}/translation/help.pt_BR.txt" || die
+		#rm -v "${S}/translation/help.pt_BR.txt" || die
 	fi
 
 	if ! use_if_iuse l10n_ru && use_if_iuse l10n_pt_BR ; then
@@ -143,7 +143,7 @@ src_prepare() {
 
 	if ! use_if_iuse l10n_pt_BR && ! use_if_iuse l10n_ru ; then
 		eapply "${FILESDIR}/${P}-remove-pt_br-and-ru-help-translation.patch"
-		rm -v "${S}/translation/help.pt_BR.txt" "${S}/translation/help.ru.txt" || die
+		#rm -v "${S}/translation/help.pt_BR.txt" "${S}/translation/help.ru.txt" || die
 	fi
 
 	if use midi ; then
