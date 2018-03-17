@@ -1,0 +1,123 @@
+# HG changeset patch
+# Parent 376f185a0a757fe128be665adbb705f4a56461bc
+# User Steve Singer <steve@ssinger.info>
+# Parent  23e95bbe4d5553a2ba9dda2a4a96a2029253597c
+Bug 1005535 - Get skia GPU building on big endian.
+
+diff --git a/gfx/skia/skia/include/core/SkColorPriv.h b/gfx/skia/skia/include/core/SkColorPriv.h
+--- a/gfx/skia/skia/include/core/SkColorPriv.h
++++ b/gfx/skia/skia/include/core/SkColorPriv.h
+@@ -27,37 +27,27 @@
+  *  For easier compatibility with Skia's GPU backend, we further restrict these
+  *  to either (in memory-byte-order) RGBA or BGRA. Note that this "order" does
+  *  not directly correspond to the same shift-order, since we have to take endianess
+  *  into account.
+  *
+  *  Here we enforce this constraint.
+  */
+ 
+-#ifdef SK_CPU_BENDIAN
+-    #define SK_RGBA_R32_SHIFT   24
+-    #define SK_RGBA_G32_SHIFT   16
+-    #define SK_RGBA_B32_SHIFT   8
+-    #define SK_RGBA_A32_SHIFT   0
+ 
+-    #define SK_BGRA_B32_SHIFT   24
+-    #define SK_BGRA_G32_SHIFT   16
+-    #define SK_BGRA_R32_SHIFT   8
+-    #define SK_BGRA_A32_SHIFT   0
+-#else
+     #define SK_RGBA_R32_SHIFT   0
+     #define SK_RGBA_G32_SHIFT   8
+     #define SK_RGBA_B32_SHIFT   16
+     #define SK_RGBA_A32_SHIFT   24
+ 
+     #define SK_BGRA_B32_SHIFT   0
+     #define SK_BGRA_G32_SHIFT   8
+     #define SK_BGRA_R32_SHIFT   16
+     #define SK_BGRA_A32_SHIFT   24
+-#endif
++
+ 
+ #if defined(SK_PMCOLOR_IS_RGBA) && defined(SK_PMCOLOR_IS_BGRA)
+     #error "can't define PMCOLOR to be RGBA and BGRA"
+ #endif
+ 
+ #define LOCAL_PMCOLOR_SHIFTS_EQUIVALENT_TO_RGBA  \
+     (SK_A32_SHIFT == SK_RGBA_A32_SHIFT &&    \
+      SK_R32_SHIFT == SK_RGBA_R32_SHIFT &&    \
+diff --git a/gfx/skia/skia/include/core/SkImageInfo.h b/gfx/skia/skia/include/core/SkImageInfo.h
+--- a/gfx/skia/skia/include/core/SkImageInfo.h
++++ b/gfx/skia/skia/include/core/SkImageInfo.h
+@@ -78,17 +78,17 @@ enum SkColorType {
+ 
+     kLastEnum_SkColorType = kRGBA_F16_SkColorType,
+ 
+ #if SK_PMCOLOR_BYTE_ORDER(B,G,R,A)
+     kN32_SkColorType = kBGRA_8888_SkColorType,
+ #elif SK_PMCOLOR_BYTE_ORDER(R,G,B,A)
+     kN32_SkColorType = kRGBA_8888_SkColorType,
+ #else
+-    #error "SK_*32_SHFIT values must correspond to BGRA or RGBA byte order"
++    kN32_SkColorType = kBGRA_8888_SkColorType
+ #endif
+ };
+ 
+ static int SkColorTypeBytesPerPixel(SkColorType ct) {
+     static const uint8_t gSize[] = {
+         0,  // Unknown
+         1,  // Alpha_8
+         2,  // RGB_565
+diff --git a/gfx/skia/skia/include/gpu/GrColor.h b/gfx/skia/skia/include/gpu/GrColor.h
+--- a/gfx/skia/skia/include/gpu/GrColor.h
++++ b/gfx/skia/skia/include/gpu/GrColor.h
+@@ -69,17 +69,17 @@ static inline GrColor GrColorPackA4(unsi
+ #define GrColorUnpackG(color)   (((color) >> GrColor_SHIFT_G) & 0xFF)
+ #define GrColorUnpackB(color)   (((color) >> GrColor_SHIFT_B) & 0xFF)
+ #define GrColorUnpackA(color)   (((color) >> GrColor_SHIFT_A) & 0xFF)
+ 
+ /**
+  *  Since premultiplied means that alpha >= color, we construct a color with
+  *  each component==255 and alpha == 0 to be "illegal"
+  */
+-#define GrColor_ILLEGAL     (~(0xFF << GrColor_SHIFT_A))
++#define GrColor_ILLEGAL     ((uint32_t)(~(0xFF << GrColor_SHIFT_A)))
+ 
+ #define GrColor_WHITE 0xFFFFFFFF
+ #define GrColor_TRANSPARENT_BLACK 0x0
+ 
+ /**
+  * Assert in debug builds that a GrColor is premultiplied.
+  */
+ static inline void GrColorIsPMAssert(GrColor SkDEBUGCODE(c)) {
+diff --git a/gfx/skia/skia/include/gpu/GrTypes.h b/gfx/skia/skia/include/gpu/GrTypes.h
+--- a/gfx/skia/skia/include/gpu/GrTypes.h
++++ b/gfx/skia/skia/include/gpu/GrTypes.h
+@@ -321,25 +321,23 @@ enum GrPixelConfig {
+     */
+     kRGBA_half_GrPixelConfig,
+ 
+     kLast_GrPixelConfig = kRGBA_half_GrPixelConfig
+ };
+ static const int kGrPixelConfigCnt = kLast_GrPixelConfig + 1;
+ 
+ // Aliases for pixel configs that match skia's byte order.
+-#ifndef SK_CPU_LENDIAN
+-    #error "Skia gpu currently assumes little endian"
+-#endif
++
+ #if SK_PMCOLOR_BYTE_ORDER(B,G,R,A)
+     static const GrPixelConfig kSkia8888_GrPixelConfig = kBGRA_8888_GrPixelConfig;
+ #elif SK_PMCOLOR_BYTE_ORDER(R,G,B,A)
+     static const GrPixelConfig kSkia8888_GrPixelConfig = kRGBA_8888_GrPixelConfig;
+ #else
+-    #error "SK_*32_SHIFT values must correspond to GL_BGRA or GL_RGBA format."
++    static const GrPixelConfig kSkia8888_GrPixelConfig = kBGRA_8888_GrPixelConfig;
+ #endif
+ 
+ // Returns true if the pixel config is a GPU-specific compressed format
+ // representation.
+ static inline bool GrPixelConfigIsCompressed(GrPixelConfig config) {
+     switch (config) {
+         case kETC1_GrPixelConfig:
+             return true;
