@@ -170,6 +170,8 @@ src_prepare() {
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
 
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i"; done
+
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
 
