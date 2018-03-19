@@ -41,7 +41,6 @@ PDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${P}-docs.patch"
-	"${FILESDIR}/${P}-legacy-cgroupmode.patch"
 	"${FILESDIR}/${P}-drop-logintest.patch" # bug 645156
 )
 
