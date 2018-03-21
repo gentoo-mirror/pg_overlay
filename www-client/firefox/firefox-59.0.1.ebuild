@@ -38,11 +38,13 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
-SRCHASH=3db9e3d52b17
+SRCHASH=3db9e3d52b17563efca181ccbb50deb8660c59ae
+SDIR="release"
+[[ ${PV} = *_beta* ]] && SDIR="beta"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
-	https://hg.mozilla.org/releases/mozilla-release/archive/${SRCHASH}.tar.bz2 -> firefox-${MOZ_PV}.source.tar.bz2
+	https://hg.mozilla.org/releases/mozilla-${SDIR}/archive/${SRCHASH}.tar.bz2 -> firefox-${MOZ_PV}.source.tar.bz2
 	${PATCH_URIS[@]}"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
@@ -62,7 +64,7 @@ DEPEND="${RDEPEND}
 	amd64? ( ${ASM_DEPEND} virtual/opengl )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
-S="${WORKDIR}"/mozilla-release-${SRCHASH}
+S="${WORKDIR}"/mozilla-${SDIR}-${SRCHASH}
 
 QA_PRESTRIPPED="usr/lib*/${PN}/firefox"
 
