@@ -103,6 +103,7 @@ DEPEND="${COMMON_DEPEND}
 	>=sys-devel/bison-2.4.3
 	sys-devel/flex
 	>=sys-devel/clang-5
+	>=sys-devel/lld-5
 	virtual/pkgconfig
 	dev-vcs/git
 	$(python_gen_any_dep '
