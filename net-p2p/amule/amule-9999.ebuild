@@ -50,7 +50,6 @@ src_prepare() {
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rem_locale
 	
-	eapply "${FILESDIR}/switch_tabs_on_search_tabs.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 	default
 }
