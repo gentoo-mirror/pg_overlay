@@ -32,7 +32,6 @@ REQUIRED_USE="
 
 COMMON_DEPEND="
 	${PYTHON_DEPS}
-	dev-python/pygtk:3[${PYTHON_USEDEP}]
 	x11-libs/gtk+:3"
 DEPEND="${COMMON_DEPEND}
 	>=dev-util/intltool-0.40.1
