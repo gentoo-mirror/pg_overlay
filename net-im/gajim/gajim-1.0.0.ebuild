@@ -45,7 +45,6 @@ RDEPEND="${COMMON_DEPEND}
 	dbus? (
 		dev-python/dbus-python[${PYTHON_USEDEP}]
 		dev-libs/dbus-glib
-		libnotify? ( dev-python/notify-python[${PYTHON_USEDEP}] )
 		zeroconf? ( net-dns/avahi[dbus,gtk,python,${PYTHON_USEDEP}] )
 		)
 	gnome? (
