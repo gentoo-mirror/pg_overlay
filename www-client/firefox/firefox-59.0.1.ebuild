@@ -38,7 +38,7 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
-SRCHASH=3db9e3d52b17563efca181ccbb50deb8660c59ae
+SRCHASH=3db9e3d52b17
 SDIR="release"
 [[ ${PV} = *_beta* ]] && SDIR="beta"
 
