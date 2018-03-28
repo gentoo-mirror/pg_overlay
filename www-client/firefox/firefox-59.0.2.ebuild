@@ -38,7 +38,7 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
-SRCHASH=3db9e3d52b17
+SRCHASH=239e434d6d2b
 SDIR="release"
 [[ ${PV} = *_beta* ]] && SDIR="beta"
 
@@ -172,7 +172,7 @@ src_prepare() {
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
 
-	for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i"; done
+	#for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
