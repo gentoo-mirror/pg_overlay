@@ -234,7 +234,7 @@ src_configure() {
 		mozconfig_annotate '' --enable-gold
 		mozconfig_annotate '' --enable-llvm-hacks
 	else
-		mozconfig_annotate '' --enable-elf-hack
+		#mozconfig_annotate '' --enable-elf-hack
 		mozconfig_annotate '' --disable-clang-plugin
 		mozconfig_annotate '' --enable-gold
 		mozconfig_annotate '' --disable-llvm-hacks
