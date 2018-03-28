@@ -50,6 +50,7 @@ SRC_URI="${SRC_URI}
 ASM_DEPEND=">=dev-lang/yasm-1.1"
 
 RDEPEND="
+	>=dev-libs/jsoncpp-1.8.1
 	system-icu? ( >=dev-libs/icu-60.2 )
 	jack? ( virtual/jack )
 	>=dev-libs/nss-3.35
@@ -228,12 +229,10 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	if use clang; then
-		mozconfig_annotate '' --disable-elf-hack
 		mozconfig_annotate '' --disable-clang-plugin
 		mozconfig_annotate '' --enable-gold
 		mozconfig_annotate '' --enable-llvm-hacks
 	else
-		mozconfig_annotate '' --enable-elf-hack
 		mozconfig_annotate '' --disable-clang-plugin
 		mozconfig_annotate '' --enable-gold
 		mozconfig_annotate '' --disable-llvm-hacks

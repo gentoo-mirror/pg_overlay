@@ -31,7 +31,7 @@ src_prepare() {
 }
 
 src_install() {
-	DOCS=( doc/{AUTHORS.txt,MANUAL.txt,NEWS.txt} README.md )
+	DOCS=( doc/{AUTHORS.adoc,MANUAL.adoc,NEWS.adoc} README.md )
 	default
 
 	dobin ccache-config
