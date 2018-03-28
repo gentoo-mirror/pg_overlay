@@ -1,0 +1,146 @@
+From: Mike Hommey <glandium@debian.org>
+Date: Sat, 21 Jun 2008 02:48:46 +0200
+Subject: Allow .js preference files to set locked prefs with lockPref()
+
+---
+ modules/libpref/Preferences.cpp | 28 +++++++++++++++++++++++-----
+ 1 file changed, 23 insertions(+), 5 deletions(-)
+
+diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
+index 9de57c0caca6..ede68d03d66e 100644
+--- a/modules/libpref/Preferences.cpp
++++ b/modules/libpref/Preferences.cpp
+@@ -801,6 +801,7 @@ pref_SetPref(const char* aPrefName,
+              PrefValueKind aKind,
+              PrefValue aValue,
+              bool aIsSticky,
++             bool aIsLocked,
+              bool aFromFile)
+ {
+   MOZ_ASSERT(NS_IsMainThread());
+@@ -839,6 +840,10 @@ pref_SetPref(const char* aPrefName,
+ 
+     return rv;
+   }
++  if (aIsLocked) {
++    pref->SetIsLocked(true);
++    gIsAnyPrefLocked = true;
++  }
+ 
+   if (valueChanged) {
+     if (aKind == PrefValueKind::User && XRE_IsParentProcess()) {
+@@ -948,6 +953,7 @@ public:
+     , mVtype()
+     , mIsDefault()
+     , mIsSticky()
++    , mIsLocked()
+   {
+   }
+ 
+@@ -964,7 +970,8 @@ public:
+                    PrefType aType,
+                    PrefValue aValue,
+                    bool aIsDefault,
+-                   bool aIsSticky);
++                   bool aIsSticky,
++                   bool aIsLocked);
+ 
+   void ReportProblem(const char* aMessage, int aLine, bool aError);
+ 
+@@ -998,6 +1005,7 @@ private:
+   static constexpr const char* kUserPref = "user_pref";
+   static constexpr const char* kPref = "pref";
+   static constexpr const char* kStickyPref = "sticky_pref";
++  static constexpr const char* kLockedPref = "lockPref";
+   static constexpr const char* kTrue = "true";
+   static constexpr const char* kFalse = "false";
+ 
+@@ -1017,6 +1025,7 @@ private:
+   Maybe<PrefType> mVtype; // pref value type
+   bool mIsDefault;        // true if (default) pref
+   bool mIsSticky;         // true if (sticky) pref
++  bool mIsLocked;         // true if (locked) pref
+ };
+ 
+ // This function will increase the size of the buffer owned by the given pref
+@@ -1063,11 +1072,12 @@ Parser::HandleValue(const char* aPrefName,
+                     PrefType aType,
+                     PrefValue aValue,
+                     bool aIsDefault,
+-                    bool aIsSticky)
++                    bool aIsSticky,
++                    bool aIsLocked)
+ {
+   PrefValueKind kind =
+     aIsDefault ? PrefValueKind::Default : PrefValueKind::User;
+-  pref_SetPref(aPrefName, aType, kind, aValue, aIsSticky, /* fromFile */ true);
++  pref_SetPref(aPrefName, aType, kind, aValue, aIsSticky, aIsLocked, /* fromFile */ true);
+ }
+ 
+ // Report an error or a warning. If not specified, just dump to stderr.
+@@ -1141,6 +1151,7 @@ Parser::Parse(const nsCString& aName,
+           mVtype = Nothing();
+           mIsDefault = false;
+           mIsSticky = false;
++          mIsLocked = false;
+         }
+         switch (c) {
+           case '/': // begin comment block or line?
+@@ -1152,10 +1163,13 @@ Parser::Parse(const nsCString& aName,
+           case 'u': // indicating user_pref
+           case 's': // indicating sticky_pref
+           case 'p': // indicating pref
++          case 'l': // indicating lockPref
+             if (c == 'u') {
+               mStrMatch = kUserPref;
+             } else if (c == 's') {
+               mStrMatch = kStickyPref;
++            } else if (c == 'l') {
++              mStrMatch = kLockedPref;
+             } else {
+               mStrMatch = kPref;
+             }
+@@ -1203,8 +1217,9 @@ Parser::Parse(const nsCString& aName,
+       // name parsing
+       case State::eUntilName:
+         if (c == '\"' || c == '\'') {
+-          mIsDefault = (mStrMatch == kPref || mStrMatch == kStickyPref);
++          mIsDefault = (mStrMatch == kPref || mStrMatch == kStickyPref || mStrMatch == kLockedPref);
+           mIsSticky = (mStrMatch == kStickyPref);
++          mIsLocked = (mStrMatch == kLockedPref);
+           mQuoteChar = c;
+           mNextState = State::eUntilComma; // return here when done
+           state = State::eQuotedString;
+@@ -1521,7 +1536,7 @@ Parser::Parse(const nsCString& aName,
+           }
+ 
+           // We've extracted a complete name/value pair.
+-          HandleValue(mLb, *mVtype, value, mIsDefault, mIsSticky);
++          HandleValue(mLb, *mVtype, value, mIsDefault, mIsSticky, mIsLocked);
+           numPrefs++;
+ 
+           state = State::eInit;
+@@ -4493,6 +4508,7 @@ Preferences::SetCStringInAnyProcess(const char* aPrefName,
+                       aKind,
+                       prefValue,
+                       /* isSticky */ false,
++                      /* isLocked */ false,
+                       /* fromFile */ false);
+ }
+ 
+@@ -4519,6 +4535,7 @@ Preferences::SetBoolInAnyProcess(const char* aPrefName,
+                       aKind,
+                       prefValue,
+                       /* isSticky */ false,
++                      /* isLocked */ false,
+                       /* fromFile */ false);
+ }
+ 
+@@ -4543,6 +4560,7 @@ Preferences::SetIntInAnyProcess(const char* aPrefName,
+                       aKind,
+                       prefValue,
+                       /* isSticky */ false,
++                      /* isLocked */ false,
+                       /* fromFile */ false);
+ }
+ 
