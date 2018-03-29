@@ -6,7 +6,7 @@ EAPI=6
 PLOCALES=( )
 
 inherit l10n meson multilib toolchain-funcs virtualx
-[[ ${PV} == 9999* ]] && inherit git-2
+[[ ${PV} == 9999* ]] && inherit git-r3
 
 DESCRIPTION="UI library that focuses on simplicity and minimalism"
 HOMEPAGE="http://pwmt.org/projects/girara/"
@@ -43,7 +43,7 @@ pkg_setup() {
 }
 multilib_src_prepare() {
 	rem_locale() {
-		rm "po/${1}.po" || die "removing of ${1}.po failed"
+		rm -fv "po/${1}.po" || die "removing of ${1}.po failed"
 	}
 
 	l10n_find_plocales_changes po "" ".po"
