@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PLOCALES=( de el eo es fr he it nl pl pt_BR ru tr )
+PLOCALES="de el eo es fr he it nl pl pt_BR ru tr"
 
 inherit l10n meson multilib toolchain-funcs virtualx
 [[ ${PV} == 9999* ]] && inherit git-r3
@@ -44,6 +44,7 @@ pkg_setup() {
 src_prepare() {
 	rem_locale() {
 		rm -fv "po/${1}.po" || die "removing of ${1}.po failed"
+		sed -i s/${1}// po/LINGUAS || die
 	}
 
 	l10n_find_plocales_changes po "" ".po"
