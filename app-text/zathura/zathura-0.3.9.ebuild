@@ -38,7 +38,7 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
-		sed -i s/${1}.po// po/LINGUAS || die
+		sed -i s/${1}// po/LINGUAS || die
 	}
 
 	l10n_find_plocales_changes po "" ".po"
