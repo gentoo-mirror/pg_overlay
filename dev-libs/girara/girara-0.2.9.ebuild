@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PLOCALES=( )
+PLOCALES=( de el eo es fr he it nl pl pt_BR ru tr )
 
 inherit l10n meson multilib toolchain-funcs virtualx
 [[ ${PV} == 9999* ]] && inherit git-r3
