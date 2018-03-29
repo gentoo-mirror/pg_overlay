@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils multilib toolchain-funcs virtualx xdg-utils
+inherit meson multilib toolchain-funcs virtualx xdg-utils
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -34,10 +34,11 @@ DEPEND="${RDEPEND}
 	test? ( dev-libs/check )"
 
 src_configure() {
-	myzathuraconf=(
-		WITH_MAGIC=$(usex magic 1 0)
-		WITH_SQLITE=$(usex sqlite 1 0)
-		WITH_SYNCTEX=$(usex synctex 1 0)
+	local emesonargs=(
+		-Denable-magic=$(usex magic 1 0)
+		-Denable-sqlite=$(usex sqlite 1 0)
+		-Denable-syntex=$(usex synctex 1 0)
+		-Denable-seccomp=1
 		PREFIX="${EPREFIX}"/usr
 		LIBDIR='${PREFIX}'/$(get_libdir)
 		CC="$(tc-getCC)"
@@ -45,19 +46,6 @@ src_configure() {
 		VERBOSE=1
 		DESTDIR="${D}"
 	)
-}
-
-src_compile() {
-	emake "${myzathuraconf[@]}"
-}
-
-src_test() {
-	virtx emake "${myzathuraconf[@]}" test
-}
-
-src_install() {
-	emake "${myzathuraconf[@]}" install
-	dodoc AUTHORS
 }
 
 pkg_postinst() {
