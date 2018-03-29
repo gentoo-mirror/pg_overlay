@@ -39,12 +39,6 @@ src_configure() {
 		-Denable-sqlite=$(usex sqlite 1 0)
 		-Denable-syntex=$(usex synctex 1 0)
 		-Denable-seccomp=1
-		PREFIX="${EPREFIX}"/usr
-		LIBDIR='${PREFIX}'/$(get_libdir)
-		CC="$(tc-getCC)"
-		SFLAGS=''
-		VERBOSE=1
-		#DESTDIR="${D}"
 	)
 }
 
