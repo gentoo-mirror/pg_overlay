@@ -9,7 +9,7 @@ inherit multilib toolchain-funcs virtualx
 DESCRIPTION="UI library that focuses on simplicity and minimalism"
 HOMEPAGE="http://pwmt.org/projects/girara/"
 if ! [[ ${PV} == 9999* ]]; then
-SRC_URI="http://pwmt.org/projects/${PN}/download/${P}.tar.gz"
+SRC_URI="http://pwmt.org/projects/${PN}/download/${P}.tar.xz"
 fi
 EGIT_REPO_URI="https://git.pwmt.org/pwmt/${PN}.git"
 EGIT_BRANCH="develop"

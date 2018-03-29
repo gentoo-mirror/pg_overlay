@@ -11,7 +11,7 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_BRANCH="develop"
 else
 	KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux ~x86-linux"
-	SRC_URI="http://pwmt.org/projects/${PN}/download/${P}.tar.gz"
+	SRC_URI="http://pwmt.org/projects/${PN}/download/${P}.tar.xz"
 fi
 
 DESCRIPTION="A highly customizable and functional document viewer"
