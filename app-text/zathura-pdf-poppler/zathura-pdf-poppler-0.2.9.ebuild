@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit eutils toolchain-funcs xdg
+inherit meson toolchain-funcs xdg
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -22,24 +22,7 @@ SLOT="0"
 IUSE=""
 
 RDEPEND="app-text/poppler[cairo]
-	>=app-text/zathura-0.3.8
+	>=app-text/zathura-0.3.9
 	x11-libs/cairo:="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
-
-src_configure() {
-	myzathuraconf=(
-		CC="$(tc-getCC)"
-		LD="$(tc-getLD)"
-		VERBOSE=1
-	)
-}
-
-src_compile() {
-	emake "${myzathuraconf[@]}"
-}
-
-src_install() {
-	emake "${myzathuraconf[@]}" DESTDIR="${ED%/}" install
-	dodoc AUTHORS
-}
