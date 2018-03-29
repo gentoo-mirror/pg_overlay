@@ -3,7 +3,9 @@
 
 EAPI=6
 
-inherit eutils multilib toolchain-funcs virtualx xdg-utils
+PLOCALES=( ) 
+
+inherit l10n meson multilib toolchain-funcs virtualx xdg-utils
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -33,31 +35,37 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? ( dev-libs/check )"
 
-src_configure() {
-	myzathuraconf=(
-		WITH_MAGIC=$(usex magic 1 0)
-		WITH_SQLITE=$(usex sqlite 1 0)
-		WITH_SYNCTEX=$(usex synctex 1 0)
-		PREFIX="${EPREFIX}"/usr
-		LIBDIR='${PREFIX}'/$(get_libdir)
-		CC="$(tc-getCC)"
-		SFLAGS=''
-		VERBOSE=1
-		DESTDIR="${D}"
+src_prepare() {
+	rem_locale() {
+		rm "po/${1}.po" || die "removing of ${1}.po failed"
+	}
+
+	l10n_find_plocales_changes po "" ".po"
+	l10n_for_each_disabled_locale_do rem_locale	
+
+	default
+}
+
+multulib_src_configure() {
+	local emesonargs=(
+		-Denable-magic=$(usex magic 1 0)
+		-Denable-sqlite=$(usex sqlite 1 0)
+		-Denable-syntex=$(usex synctex 1 0)
+		-Denable-seccomp=1
 	)
+	meson_src_configure
 }
 
-src_compile() {
-	emake "${myzathuraconf[@]}"
+multilib_src_compile() {
+	meson_src_compile
 }
 
-src_test() {
-	virtx emake "${myzathuraconf[@]}" test
+multilib_src_test() {
+	meson_src_test
 }
 
-src_install() {
-	emake "${myzathuraconf[@]}" install
-	dodoc AUTHORS
+multilib_src_install() {
+	meson_src_install
 }
 
 pkg_postinst() {
