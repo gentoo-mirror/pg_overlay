@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PLOCALES="de el eo es fr he it nl pl pt_BR ru tr"
+PLOCALES="ca cs de el eo es es_CL et fr he hr id_ID it lt nl no pl pt_BR ru ta_IN tr uk_UA"
 
 inherit l10n meson multilib toolchain-funcs virtualx xdg-utils
 
@@ -31,6 +31,7 @@ RDEPEND=">=dev-libs/girara-0.2.8:3=
 	sqlite? ( dev-db/sqlite:3= )
 	synctex? ( >=app-text/texlive-core-2015 )"
 DEPEND="${RDEPEND}
+	dev-python/sphinx
 	sys-devel/gettext
 	virtual/pkgconfig
 	test? ( dev-libs/check )"
