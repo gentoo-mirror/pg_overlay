@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PLOCALES=( de el eo es fr he it nl pl pt_BR ru tr ) 
+PLOCALES="de el eo es fr he it nl pl pt_BR ru tr"
 
 inherit l10n meson multilib toolchain-funcs virtualx xdg-utils
 
