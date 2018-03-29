@@ -41,7 +41,7 @@ pkg_setup() {
 		-Denable-docs=$(usex docs 1 0)
 	)
 }
-multilib_src_prepare() {
+src_prepare() {
 	rem_locale() {
 		rm -fv "po/${1}.po" || die "removing of ${1}.po failed"
 	}
