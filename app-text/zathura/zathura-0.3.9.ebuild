@@ -44,7 +44,7 @@ src_configure() {
 		CC="$(tc-getCC)"
 		SFLAGS=''
 		VERBOSE=1
-		DESTDIR="${D}"
+		#DESTDIR="${D}"
 	)
 }
 
