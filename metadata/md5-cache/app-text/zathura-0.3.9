@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install postinst postrm prepare test
-DEPEND=>=dev-libs/girara-0.2.8:3= >=dev-libs/glib-2.32:2= x11-libs/cairo:= >=x11-libs/gtk+-3.6:3 magic? ( sys-apps/file:= ) sqlite? ( dev-db/sqlite:3= ) synctex? ( >=app-text/texlive-core-2015 ) sys-devel/gettext virtual/pkgconfig test? ( dev-libs/check ) >=dev-util/meson-0.40.0 >=dev-util/ninja-1.7.2 test? ( !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost )
+DEPEND=>=dev-libs/girara-0.2.8:3= >=dev-libs/glib-2.32:2= x11-libs/cairo:= >=x11-libs/gtk+-3.6:3 magic? ( sys-apps/file:= ) sqlite? ( dev-db/sqlite:3= ) synctex? ( >=app-text/texlive-core-2015 ) dev-python/sphinx sys-devel/gettext virtual/pkgconfig test? ( dev-libs/check ) >=dev-util/meson-0.40.0 >=dev-util/ninja-1.7.2 test? ( !prefix? ( x11-base/xorg-server[xvfb] ) x11-apps/xhost )
 DESCRIPTION=A highly customizable and functional document viewer
 EAPI=6
 HOMEPAGE=http://pwmt.org/projects/zathura/
@@ -10,4 +10,4 @@ RDEPEND=>=dev-libs/girara-0.2.8:3= >=dev-libs/glib-2.32:2= x11-libs/cairo:= >=x1
 SLOT=0
 SRC_URI=http://pwmt.org/projects/zathura/download/zathura-0.3.9.tar.xz
 _eclasses_=l10n	97f2753e3f1f3753d53d856c7c0bbb0b	meson	f8e09b2b2ac1e9bb0bd374b6ad77a90d	multilib	97f470f374f2e94ccab04a2fb21d811e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	ebb2eaddc6331c4fa000b8eb8f6fe074	python-utils-r1	c9de01becf9df3f8c10aeec3dc693f5d	toolchain-funcs	885c7d8dd70a58825f3d17e35a3cd1e9	virtualx	3a3c4637ea6d5a2113707a644766337c	xdg-utils	f2c8335407f0b935b0a96d4adf23ef25
-_md5_=22849bbd481a27bb0a5ae493eab07e31
+_md5_=72865dc0b92c362c2b85f214a5d71081
