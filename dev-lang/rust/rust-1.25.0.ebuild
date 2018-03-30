@@ -55,7 +55,6 @@ DEPEND="${RDEPEND}
 "
 PDEPEND="!extended? ( dev-util/cargo )"
 
-PATCHES=( "${FILESDIR}/1.23.0-separate-libdir.patch" )
 S="${WORKDIR}/${MY_P}-src"
 
 toml_usex() {
