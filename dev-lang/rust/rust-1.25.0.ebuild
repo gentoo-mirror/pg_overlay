@@ -55,9 +55,6 @@ DEPEND="${RDEPEND}
 "
 PDEPEND="!extended? ( dev-util/cargo )"
 
-PATCHES=( "${FILESDIR}/1.23.0-separate-libdir.patch"
-		"${FILESDIR}/0001-librustc_llvm-build-Force-link-against-libffi.patch")
-
 S="${WORKDIR}/${MY_P}-src"
 
 toml_usex() {
