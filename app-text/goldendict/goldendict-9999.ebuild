@@ -69,7 +69,7 @@ src_configure() {
 	local myconf=()
 
 	if ! use ffmpeg && ! use libav ; then
-		myconf+=( no_ffmpeg_player )
+		myconf+=( CONFIG+=no_ffmpeg_player )
 	fi
 
 	eqmake5 "${myconf[@]}"
