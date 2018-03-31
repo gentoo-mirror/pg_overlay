@@ -69,9 +69,10 @@ src_configure() {
 	local myconf=()
 
 	if ! use ffmpeg && ! use libav ; then
-		myconf+=( DISABLE_INTERNAL_PLAYER=1 )
+		myconf+=( CONFIG+=no_ffmpeg_player )
 	fi
 
+	myconf+=( CONFIG+=no_qtmultimedia_player )
 	eqmake5 "${myconf[@]}"
 }
 
