@@ -13,14 +13,12 @@ disable/device-notifications.patch
 
 fixes/mojo.patch
 fixes/optional.patch
-fixes/optimize.patch
 fixes/ps-print.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/duplicate-name.patch
 fixes/overloaded-call.patch
 fixes/incomplete-types.patch
-fixes/widevine-revision.patch
 fixes/connection-message.patch
 fixes/skia_buildfix.patch
 
@@ -32,4 +30,3 @@ warnings/unused-typedefs.patch
 
 system/nspr.patch
 system/event.patch
-system/openjpeg.patch
