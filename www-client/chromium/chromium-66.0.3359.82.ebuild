@@ -470,7 +470,7 @@ src_configure() {
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" enable_reading_list=false"
-	myconf_gn+="use_system_lcms2=true"
+	myconf_gn+=" use_system_lcms2=true"
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
 	myconf_gn+=" enable_vr=false"
