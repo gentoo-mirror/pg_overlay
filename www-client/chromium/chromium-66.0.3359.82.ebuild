@@ -475,7 +475,6 @@ src_configure() {
 	myconf_gn+=" use_swiftshader_with_subzero=false"
 	myconf_gn+=" enable_vr=false"
 	myconf_gn+=" enable_wayland_server=false"
-	myconf_gn+=" use_bundled_fontconfig=false"
 	myconf_gn+=" use_thin_lto=true"
 
 	# libevent: https://bugs.gentoo.org/593458
