@@ -32,4 +32,3 @@ warnings/unused-typedefs.patch
 
 system/nspr.patch
 system/event.patch
-system/openjpeg.patch
