@@ -203,7 +203,7 @@ src_prepare() {
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r1.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
-	
+
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
 
@@ -475,7 +475,6 @@ src_configure() {
 	myconf_gn+=" use_swiftshader_with_subzero=false"
 	myconf_gn+=" enable_vr=false"
 	myconf_gn+=" enable_wayland_server=false"
-	myconf_gn+=" use_thin_lto=true"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
