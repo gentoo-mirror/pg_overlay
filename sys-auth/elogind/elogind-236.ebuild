@@ -44,6 +44,8 @@ PATCHES=(
 	"${FILESDIR}/${P}-drop-logintest.patch" # bug 645156
 )
 
+S=${WORKDIR}$/{P}-stable
+
 pkg_setup() {
 	local CONFIG_CHECK="~CGROUPS ~EPOLL ~INOTIFY_USER ~SIGNALFD ~TIMERFD"
 
