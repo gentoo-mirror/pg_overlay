@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +debian +inox vaapi"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos lto neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +debian +inox vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 COMMON_DEPEND="
@@ -475,7 +475,9 @@ src_configure() {
 	myconf_gn+=" use_swiftshader_with_subzero=false"
 	myconf_gn+=" enable_vr=false"
 	myconf_gn+=" enable_wayland_server=false"
-
+	if use lto; then
+		myconf_gn+=" use_thin_lto=true"
+  fi
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
 		flac
