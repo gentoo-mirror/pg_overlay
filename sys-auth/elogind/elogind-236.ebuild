@@ -40,6 +40,7 @@ PDEPEND="
 "
 
 PATCHES=(
+	"${FILESDIR}/${P}-docs.patch"
 	"${FILESDIR}/${P}-drop-logintest.patch" # bug 645156
 )
 
