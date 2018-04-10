@@ -1,6 +1,6 @@
---- a/meson.build	2018-01-14 18:59:36.141461154 +0100
-+++ b/meson.build	2018-01-14 19:00:46.208461781 +0100
-@@ -2792,16 +2792,5 @@
+--- a/meson.build	2018-04-10 13:59:30.950795634 +0700
++++ b/meson.build	2018-04-10 14:00:19.504391757 +0700
+@@ -2800,21 +2800,6 @@
  # install_data('modprobe.d/systemd.conf',
  #              install_dir : modprobedir)
  #endif // 0
@@ -14,6 +14,11 @@
 -             'LICENSE.GPL2',
 -             'LICENSE.LGPL2.1',
 -             'src/libelogind/sd-bus/GVARIANT-SERIALIZATION',
+-#if 0 /// UNNEEDED by elogind
+-#              'TRANSIENT-SETTINGS.md',
+-#              'UIDS-GIDS.md',
+-#endif // 0
 -             install_dir : docdir)
  
  #if 0 /// UNNEEDED by elogind
+ # meson.add_install_script('sh', '-c', mkdir_p.format(systemdstatedir))
