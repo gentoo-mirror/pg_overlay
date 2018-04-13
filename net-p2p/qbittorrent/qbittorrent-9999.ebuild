@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PLOCALES="af ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fo fr fy ga gl he hi hr hu id is it iu ja ka kk km kn ko ku ky la lb lt lv mk ml ms nap nb nds nl nn oc pl pms pt pt_BR ro ru si sk sl sr sv ta te th tl tlh tr uk ur vi zh_CN zh_HK zh_TW"
+PLOCALES="ar be bg ca cs da de el en en_AU en_GB eo es eu fi fr gl he hi_IN hr hu hy id is it ja ka ko lt lv_LV ms_MY nb nl oc pl pt_BR pt_PT ro ru sk sl sr sv tr uk uz@Latn vi zh zh_HK zh_TW"
 
 inherit cmake-utils gnome2-utils l10n xdg-utils
 
@@ -43,11 +43,10 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
-PATCHES=( "${FILESDIR}/${PN}-4.0.4-werror.patch" )
 
 src_prepare() {
 	local loc_dir="${S}/src/lang"
-	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
+	l10n_find_plocales_changes "${loc_dir}" "${PN}_" ".ts"
 	rm_loc() {
 		rm -vf "${loc_dir}/${PN}_${1}.ts" || die
 	}
