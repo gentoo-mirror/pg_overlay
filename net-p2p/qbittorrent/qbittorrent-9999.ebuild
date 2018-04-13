@@ -46,7 +46,7 @@ DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
 src_prepare() {
 	local loc_dir="${S}/src/lang"
-	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
+	l10n_find_plocales_changes "${loc_dir}" "${PN}_" ".ts"
 	rm_loc() {
 		rm -vf "${loc_dir}/${PN}_${1}.ts" || die
 	}
