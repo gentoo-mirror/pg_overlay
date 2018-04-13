@@ -29,9 +29,9 @@ DEPEND="${RDEPEND}
 	nls? ( sys-devel/gettext )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.12.0-sharedlibs.patch
-	"${FILESDIR}"/${PN}-4.7.0-libxcmd-link.patch
 	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
+	"${FILESDIR}"/${PN}-4.15.0-sharedlibs.patch
+	"${FILESDIR}"/${PN}-4.15.0-docdir.patch
 )
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
@@ -72,6 +72,8 @@ src_configure() {
 	unset PLATFORM # if set in user env, this breaks configure
 
 	local myconf=(
+		--with-crond-dir="${EPREFIX}/etc/cron.d"
+		--without-systemd-unit-dir
 		$(use_enable nls gettext)
 		$(use_enable readline)
 		$(usex readline --disable-editline $(use_enable libedit editline))
@@ -93,7 +95,7 @@ src_install() {
 	emake -j1 DIST_ROOT="${ED}" install-dev
 
 	# handle is for xfsdump, the rest for xfsprogs
-	gen_usr_ldscript -a handle xcmd xfs xlog
+	gen_usr_ldscript -a handle xcmd xfs xlog frog
 	# removing unnecessary .la files if not needed
 	use static-libs || find "${ED}" -name '*.la' -delete
 }
