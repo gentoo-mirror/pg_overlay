@@ -243,6 +243,7 @@ src_prepare() {
 		third_party/angle/third_party/spirv-tools
 		third_party/angle/third_party/vulkan-validation-layers
 		third_party/blink
+		third_party/blink/tools/blinkpy/common/name_style_converter.py
 		third_party/boringssl
 		third_party/boringssl/src/third_party/fiat
 		third_party/breakpad
@@ -350,8 +351,6 @@ src_prepare() {
 		third_party/usb_ids
 		third_party/xdg-utils
 		third_party/yasm/run_yasm.py
-
-		third_party/blink/tools/blinkpy/common/name_style_converter.py
 	)
 	if ! use system-ffmpeg; then
 		keeplibs+=( third_party/ffmpeg third_party/opus )
