@@ -350,6 +350,8 @@ src_prepare() {
 		third_party/usb_ids
 		third_party/xdg-utils
 		third_party/yasm/run_yasm.py
+
+		third_party/blink/tools/blinkpy/common/name_style_converter.py
 	)
 	if ! use system-ffmpeg; then
 		keeplibs+=( third_party/ffmpeg third_party/opus )
