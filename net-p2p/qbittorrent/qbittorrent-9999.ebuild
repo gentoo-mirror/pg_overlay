@@ -2,8 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
+PLOCALES="af ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fo fr fy ga gl he hi hr hu id is it iu ja ka kk km kn ko ku ky la lb lt lv mk ml ms nap nb nds nl nn oc pl pms pt pt_BR ro ru si sk sl sr sv ta te th tl tlh tr uk ur vi zh_CN zh_HK zh_TW"
 
-inherit cmake-utils gnome2-utils xdg-utils
+inherit cmake-utils gnome2-utils l10n xdg-utils
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org/"
@@ -33,6 +34,7 @@ RDEPEND="
 	sys-libs/zlib
 	dbus? ( dev-qt/qtdbus:5 )
 	X? (
+		dev-qt/linguist-tools:5
 		dev-qt/qtgui:5
 		dev-qt/qtsvg:5
 		dev-qt/qtwidgets:5
@@ -44,6 +46,13 @@ DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 PATCHES=( "${FILESDIR}/${PN}-4.0.4-werror.patch" )
 
 src_prepare() {
+	local loc_dir="${S}/src/lang"
+	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
+	rm_loc() {
+		rm -vf "${loc_dir}/${PN}_${1}.ts" || die
+	}
+	l10n_for_each_disabled_locale_do rm_loc
+
 	cmake-utils_src_prepare
 
 	#To last stable version for Pedro's BTMusic
