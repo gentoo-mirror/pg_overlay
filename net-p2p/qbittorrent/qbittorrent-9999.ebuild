@@ -43,7 +43,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
-PATCHES=( "${FILESDIR}/${PN}-4.0.4-werror.patch" )
 
 src_prepare() {
 	local loc_dir="${S}/src/lang"
