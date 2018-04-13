@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -55,7 +55,7 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	# 2.92+ -> 2.92
+	# 2.93+ -> 2.93
 	sed -i s/2.93+/2.93/g CMakeLists.txt || die
 	sed -i s/TR293Z/TR2930/g CMakeLists.txt || die
 	sed -i s/2.93+/2.93/g configure.ac || die
@@ -75,7 +75,6 @@ src_configure() {
 		-DENABLE_NLS=$(usex nls ON OFF)
 		-DENABLE_QT=$(usex qt5 ON OFF)
 		-DENABLE_TESTS=$(usex test ON OFF)
-		-DUSE_QT5=ON
 
 		-DUSE_SYSTEM_EVENT2=ON
 		-DUSE_SYSTEM_DHT=OFF
