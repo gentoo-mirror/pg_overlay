@@ -243,6 +243,7 @@ src_prepare() {
 		third_party/angle/third_party/spirv-tools
 		third_party/angle/third_party/vulkan-validation-layers
 		third_party/blink
+		third_party/blink/tools/blinkpy/common
 		third_party/blink/tools/blinkpy/common/name_style_converter.py
 		third_party/boringssl
 		third_party/boringssl/src/third_party/fiat
