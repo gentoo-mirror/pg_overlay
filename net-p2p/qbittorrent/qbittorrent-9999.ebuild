@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit cmake-utils xdg-utils
+inherit cmake-utils gnome2-utils xdg-utils
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org/"
@@ -27,9 +27,9 @@ RDEPEND="
 	>=dev-libs/boost-1.62.0-r1:=
 	dev-qt/qtcore:5
 	dev-qt/qtnetwork:5[ssl]
-	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[qt5,X?]
+	>=dev-qt/qtsingleapplication-2.6.1_p20130904-r1[qt5(+),X?]
 	dev-qt/qtxml:5
-	>=net-libs/libtorrent-rasterbar-1.0.6
+	>=net-libs/libtorrent-rasterbar-1.0.6:0=
 	sys-libs/zlib
 	dbus? ( dev-qt/qtdbus:5 )
 	X? (
@@ -38,20 +38,17 @@ RDEPEND="
 		dev-qt/qtwidgets:5
 	)"
 DEPEND="${RDEPEND}
-	dev-qt/linguist-tools:5
 	virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
+PATCHES=( "${FILESDIR}/${PN}-4.0.4-werror.patch" )
 
 src_prepare() {
 	cmake-utils_src_prepare
 
-	# bug 641382
-	sed -i -e "s/-Werror  //" cmake/Modules/MacroQbtCompilerSettings.cmake || die
-
 	#To last stable version for Pedro's BTMusic
 	sed -i s/"VER_MINOR = 1"/"VER_MINOR = 0"/g version.pri || die
-	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 3"/g version.pri || die
+	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 4"/g version.pri || die
 	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
 }
 
@@ -66,9 +63,11 @@ src_configure() {
 }
 
 pkg_postinst() {
+	gnome2_icon_cache_update
 	xdg_desktop_database_update
 }
 
 pkg_postrm() {
+	gnome2_icon_cache_update
 	xdg_desktop_database_update
 }
