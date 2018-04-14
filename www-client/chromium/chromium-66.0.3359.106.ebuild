@@ -242,7 +242,7 @@ src_prepare() {
 		third_party/angle/third_party/spirv-headers
 		third_party/angle/third_party/spirv-tools
 		third_party/angle/third_party/vulkan-validation-layers
-		third_party/blink
+		
 		third_party/boringssl
 		third_party/boringssl/src/third_party/fiat
 		third_party/breakpad
@@ -344,7 +344,7 @@ src_prepare() {
 		v8/third_party/inspector_protocol
 
 		# gyp -> gn leftovers
-		
+		base/third_party/libevent
 		third_party/adobe
 		third_party/speech-dispatcher
 		third_party/usb_ids
