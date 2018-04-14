@@ -64,7 +64,7 @@ PATCHES=( "${FILESDIR}/${P}-headers.patch" )
 
 src_prepare() {
 	remove_locale() {
-		rm "translations/${PN}_${1}".ts || die
+		rm -vf "translations/${PN}_${1}".ts || die
 	}
 
 	cmake-utils_src_prepare
