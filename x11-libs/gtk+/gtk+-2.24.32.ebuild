@@ -171,10 +171,10 @@ src_prepare() {
 	eapply "${FILESDIR}"/${PN}-2.24.31-update-icon-cache.patch
 
 	# Revert as upstream did
-	eapply "${FILESDIR}"/${MY_P}-revert_abicheck.patch
+	eapply "${FILESDIR}"/${P}-revert_abicheck.patch
 
 	# And fixing the crap upstream seems to be too stupid to fix.
-	eapply "${FILESDIR}"/${MY_P}-glib-2.54.3-symbols_workaround.patch
+	eapply "${FILESDIR}"/${P}-glib-2.54.3-symbols_workaround.patch
 
 	eautoreconf
 	gnome2_src_prepare
