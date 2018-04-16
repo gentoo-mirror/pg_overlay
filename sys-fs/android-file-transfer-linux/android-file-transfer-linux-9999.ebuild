@@ -30,3 +30,9 @@ src_configure() {
 	)
 	cmake-utils_src_configure
 }
+
+src_install() {
+	dolib "${S}"_build/libmtp-ng.so
+
+	cmake-utils_src_install
+}

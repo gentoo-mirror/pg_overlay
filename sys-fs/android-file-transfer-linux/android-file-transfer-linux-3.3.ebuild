@@ -14,7 +14,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE="fuse +qt5"
 REQUIRED_USE="qt5"
 
-RDEPEND="fuse? ( sys-fs/fuse )
+RDEPEND=" sys-libs/readline
+	fuse? ( sys-fs/fuse )
 	qt5? ( dev-qt/qtwidgets:5 )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
