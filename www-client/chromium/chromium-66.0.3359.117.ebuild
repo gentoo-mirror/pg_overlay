@@ -209,7 +209,8 @@ src_prepare() {
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
-	for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i";done
+	
+	eapply ${FILESDIR}/add-missing-blink-tools.patch
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -367,8 +368,6 @@ src_prepare() {
 
 	# Remove most bundled libraries. Some are still needed.
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
-
-	cp -rv ${FILESDIR}/bug-834155/* . || die
 }
 
 bootstrap_gn() {
