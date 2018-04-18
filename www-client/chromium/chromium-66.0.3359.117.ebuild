@@ -368,7 +368,7 @@ src_prepare() {
 	# Remove most bundled libraries. Some are still needed.
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
 
-	cp -r $${FILESDIR}/bug-834155/* .
+	cp -rv ${FILESDIR}/bug-834155/* . || die
 }
 
 bootstrap_gn() {
