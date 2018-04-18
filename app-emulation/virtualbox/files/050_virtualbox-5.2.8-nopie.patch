@@ -126,17 +126,6 @@ diff -Naur VirtualBox-5.1.24/Config.kmk VirtualBox-5.1.24/Config.kmk
   ifeq ($(KBUILD_TARGET_ARCH),amd64)
    # in 64-bit mode we'll build a sys-module (VBoxREM2).
    if1of ($(KBUILD_TARGET), darwin solaris)
-@@ -6467,8 +6468,8 @@
- TEMPLATE_VBOXGUESTR3XF86MOD_CFLAGS  = $(TEMPLATE_VBOXGUESTR3EXE_CFLAGS) -fno-pie -fno-merge-constants -std=c99 -ffreestanding
- TEMPLATE_VBOXGUESTR3XF86MOD_CXXFLAGS= $(TEMPLATE_VBOXGUESTR3EXE_CXXFLAGS) -fno-pie -fno-merge-constants -ffreestanding
- ifndef VBOX_WITH_COMPATIBLE_LINUX_GUEST_PACKAGE
-- TEMPLATE_VBOXGUESTR3XF86MOD_CFLAGS   += $(VBOX_GCC_fno-stack-protector)
-- TEMPLATE_VBOXGUESTR3XF86MOD_CXXFLAGS += $(VBOX_GCC_fno-stack-protector)
-+ TEMPLATE_VBOXGUESTR3XF86MOD_CFLAGS   += $(VBOX_GCC_fno-stack-protector) $(VBOX_GCC_nopie)
-+ TEMPLATE_VBOXGUESTR3XF86MOD_CXXFLAGS += $(VBOX_GCC_fno-stack-protector) $(VBOX_GCC_nopie)
- endif
- TEMPLATE_VBOXGUESTR3XF86MOD_SYSSUFF = .o
- TEMPLATE_VBOXGUESTR3XF86MOD_LIBS  = \
 diff -Naur VirtualBox-5.1.24/src/VBox/Devices/PC/ipxe/Makefile.kmk VirtualBox-5.1.24/src/VBox/Devices/PC/ipxe/Makefile.kmk
 --- VirtualBox-5.1.24/src/VBox/Devices/PC/ipxe/Makefile.kmk	2017-07-26 13:55:27.746972186 -0400
 +++ VirtualBox-5.1.24/src/VBox/Devices/PC/ipxe/Makefile.kmk	2017-07-26 13:53:10.641974329 -0400

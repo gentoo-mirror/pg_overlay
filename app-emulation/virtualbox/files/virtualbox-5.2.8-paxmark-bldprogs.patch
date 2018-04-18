@@ -37,22 +37,22 @@
  	$(QUIET)$(VBOX_VBOXTPG) --generate-wrapper-header --host-$(VBOX_HC_ARCH_BITS)-bit --ring-3-context \
  		$(filter-out -C, $(filter-out -h,$(flags))) \
  		-o "$(out).tmp" -s "$(source)"
---- a/src/VBox/VMM/Makefile.kmk
-+++ b/src/VBox/VMM/Makefile.kmk	2016-09-21 02:26:11 
-@@ -795,6 +795,7 @@
-  define def_vmm_lib_dtrace_preprocess
-   $$$$(VMMLibDTrace_0_OUTDIR)/$1: $2 $$(VBOX_VBOXCPP) | $$$$(dir $$$$@)
- 	$$(QUIET)$$(call MSG_GENERATE,VMMLibDTrace,$$@,$$<)
+--- a/src/VBox/VMM/Makefile.kmk	2018-04-10 15:26:24.622867735 +0300
++++ b/src/VBox/VMM/Makefile.kmk	2018-04-10 15:24:35.901998796 +0300
+@@ -896,6 +896,7 @@
+   $$(VMMLibDTrace_0_OUTDIR)/$1: $2 $$(VBOX_VBOXCPP) | $$$$(dir $$$$@)
+ 	$$(call KB_FN_AUTO_CMD_DEPS_COMMANDS)
+ 	$$(QUIET)$$(call MSG_GENERATE,VMMLibDTrace,$$@,$2)
 +	$$(QUIET)paxmark.sh -m "$(VBOX_VBOXCPP)"
  	$$(QUIET)$(VBOX_VBOXCPP) -d \
  		-D VBOX_FOR_DTRACE_LIB \
  		-D VBOX_FOR_DTRACE_LIB_$(toupper $(KBUILD_TARGET_ARCH)) \
---- a/src/VBox/Main/Makefile.kmk
-+++ b/src/VBox/Main/Makefile.kmk	2016-09-21 02:31:23 
-@@ -522,6 +522,7 @@
-  $$(VBoxSVC_0_OUTDIR)/USBIdDatabase.cpp:  $$(USBIdDatabaseGenerator_1_TARGET) \
+--- a/src/VBox/Main/Makefile.kmk	2018-04-10 15:26:15.292793067 +0300
++++ b/src/VBox/Main/Makefile.kmk	2018-04-10 15:25:14.042303341 +0300
+@@ -607,6 +607,7 @@
   		$(PATH_SUB_CURRENT)/src-server/usb.ids $(PATH_SUB_CURRENT)/src-server/custom.ids | $$(dir $$@)
- 	$(call MSG_GENERATE,USBIdDatabase,$@,$<)
+ 	$(call KB_FN_AUTO_CMD_DEPS_COMMANDS)
+ 	$(call MSG_GENERATE,USBIdDatabase,$@,$(USBIdDatabaseGenerator_1_TARGET))
 +	$(QUIET)paxmark.sh -m "$(USBIdDatabaseGenerator_1_TARGET)"
  	$(QUIET)$(USBIdDatabaseGenerator_1_TARGET) -o "$@" $(filter %.ids,$^)
  
