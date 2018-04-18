@@ -4,14 +4,14 @@
 EAPI=6
 
 PYTHON_COMPAT=( python{2_7,3_5,3_6} )
-inherit eutils flag-o-matic java-pkg-opt-2 linux-info multilib pax-utils python-single-r1 toolchain-funcs udev xdg-utils
+inherit flag-o-matic java-pkg-opt-2 linux-info multilib pax-utils python-single-r1 tmpfiles toolchain-funcs udev xdg-utils
 
 MY_PV="${PV/beta/BETA}"
 MY_PV="${MY_PV/rc/RC}"
 MY_P=VirtualBox-${MY_PV}
 
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
-HOMEPAGE="http://www.virtualbox.org/"
+HOMEPAGE="https://www.virtualbox.org/"
 SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
 	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-5.2.0-patches-01.tar.xz"
 
@@ -47,7 +47,6 @@ RDEPEND="!app-emulation/virtualbox-bin
 			x11-libs/libXinerama
 		)
 	)
-	java? ( >=virtual/jre-1.6:= )
 	libressl? ( dev-libs/libressl:= )
 	!libressl? ( dev-libs/openssl:0= )
 	lvm? ( sys-fs/lvm2 )
@@ -71,13 +70,15 @@ DEPEND="${RDEPEND}
 		dev-texlive/texlive-fontsextra
 	)
 	!headless? ( x11-libs/libXinerama )
-	java? ( >=virtual/jre-1.6:= )
+	java? ( >=virtual/jdk-1.6 )
 	pam? ( sys-libs/pam )
 	pax_kernel? ( sys-apps/elfix )
 	pulseaudio? ( media-sound/pulseaudio )
 	qt5? ( dev-qt/linguist-tools:5 )
 	vboxwebsrv? ( net-libs/gsoap[-gnutls(-)] )
 	${PYTHON_DEPS}"
+RDEPEND="${RDEPEND}
+	java? ( >=virtual/jre-1.6 )"
 
 QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/VBoxSDL.so
@@ -152,7 +153,8 @@ src_prepare() {
 
 	# Replace pointless GCC version check with something less stupid.
 	# This is needed for the qt5 version check.
-	sed -e 's@^check_gcc$@cc_maj="$(gcc -dumpversion | cut -d. -f1)" ; cc_min="$(gcc -dumpversion | cut -d. -f2)"@' -i configure || die
+	sed -e 's@^check_gcc$@cc_maj="$(gcc -dumpversion | cut -d. -f1)" ; cc_min="$(gcc -dumpversion | cut -d. -f2)"@' \
+		-i configure || die
 
 	# Don't use "echo -n"
 	sed 's@ECHO_N="echo -n"@ECHO_N="printf"@' -i configure || die
@@ -186,12 +188,12 @@ src_prepare() {
 
 	# Only add nopie patch when we're on hardened
 	if  gcc-specs-pie ; then
-		eapply "${FILESDIR}/050_virtualbox-5.1.24-nopie.patch"
+		eapply "${FILESDIR}/050_virtualbox-5.2.8-nopie.patch"
 	fi
 
 	# Only add paxmark patch when we're on pax_kernel
 	if use pax_kernel ; then
-		eapply "${FILESDIR}"/virtualbox-5.1.4-paxmark-bldprogs.patch
+		eapply "${FILESDIR}"/virtualbox-5.2.8-paxmark-bldprogs.patch
 	fi
 
 	eapply "${WORKDIR}/patches"
@@ -209,21 +211,26 @@ src_configure() {
 		--with-g++="$(tc-getCXX)"
 		--disable-dbus
 		--disable-kmods
+		$(usex alsa '' --disable-alsa)
+		$(usex debug --build-debug '')
+		$(usex doc '' --disable-docs)
+		$(usex java '' --disable-java)
+		$(usex lvm '' --disable-devmapper)
+		$(usex pulseaudio '' --disable-pulse)
+		$(usex python '' --disable-python)
+		$(usex vboxwebsrv --enable-webservice '')
+		$(usex vnc --enable-vnc '')
 	)
-	use alsa       || myconf+=( --disable-alsa )
-	use debug      && myconf+=( --build-debug )
-	use doc        || myconf+=( --disable-docs )
-	use java       || myconf+=( --disable-java )
-	use lvm        || myconf+=( --disable-devmapper )
-	use opengl     || myconf+=( --disable-opengl )
-	use pulseaudio || myconf+=( --disable-pulse )
-	use python     || myconf+=( --disable-python )
-	use vboxwebsrv && myconf+=( --enable-webservice )
-	use vnc        && myconf+=( --enable-vnc )
 	if ! use headless ; then
-		use qt5 || myconf+=( --disable-qt )
+		myconf+=(
+			$(usex opengl '' --disable-opengl)
+			$(usex qt5 '' --disable-qt)
+		)
 	else
-		myconf+=( --build-headless --disable-opengl )
+		myconf+=(
+			--build-headless
+			--disable-opengl
+		)
 	fi
 	if use amd64 && ! has_multilib_profile ; then
 		myconf+=( --disable-vmmraw )
@@ -416,6 +423,8 @@ src_install() {
 	if use doc ; then
 		dodoc UserManual.pdf
 	fi
+
+	newtmpfiles "${FILESDIR}"/${PN}-vboxusb_tmpfilesd ${PN}-vboxusb.conf
 }
 
 pkg_postinst() {
@@ -425,6 +434,8 @@ pkg_postinst() {
 		udevadm control --reload-rules \
 			&& udevadm trigger --subsystem-match=usb
 	fi
+
+	tmpfiles_process /usr/lib/tmpfiles.d/virtualbox-vboxusb.conf
 
 	if ! use headless && use qt5 ; then
 		elog "To launch VirtualBox just type: \"virtualbox\"."
@@ -436,11 +447,6 @@ pkg_postinst() {
 	elog ""
 	elog "For advanced networking setups you should emerge:"
 	elog "net-misc/bridge-utils and sys-apps/usermode-utilities"
-	elog ""
-	elog "IMPORTANT!"
-	elog "If you upgrade from app-emulation/virtualbox-ose make sure to run"
-	elog "\"env-update\" as root and logout and relogin as the user you wish"
-	elog "to run ${PN} as."
 	elog ""
 	elog "Starting with version 4.0.0, ${PN} has USB-1 support."
 	elog "For USB-2 support, PXE-boot ability and VRDP support please emerge"
