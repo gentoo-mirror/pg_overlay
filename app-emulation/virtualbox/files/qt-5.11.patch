@@ -1,0 +1,10 @@
+--- a/src/VBox/Frontends/VirtualBox/src/settings/global/UIGlobalSettingsProxy.cpp	2018-04-13 23:37:17.000000000 +0700
++++ b/src/VBox/Frontends/VirtualBox/src/settings/global/UIGlobalSettingsProxy.cpp	2018-04-18 19:42:30.207128585 +0700
+@@ -21,6 +21,7 @@
+ 
+ /* Qt includes: */
+ # include <QRegExpValidator>
++# include <QButtonGroup>
+ 
+ /* GUI includes: */
+ # include "QIWidgetValidator.h"
