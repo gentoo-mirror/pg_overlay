@@ -1,8 +1,7 @@
+fix-crash-in-is_cfi-true-builds-with-unbundled-ICU.patch
 chromium-skia-harmony.patch
-
 0001-fix-building-without-safebrowsing.patch
 0002-fix-building-without-reporting.patch
-
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
 0005-disable-default-extensions.patch
