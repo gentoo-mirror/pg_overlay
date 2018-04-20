@@ -338,7 +338,7 @@ multilib_src_install() {
 			install || die "Installation of Boost libraries failed"
 
 		if python_bindings_needed; then
-			rm -r ${PYTHON_DIRS} || die
+			rm -rf ${PYTHON_DIRS} || die
 
 			# Move mpi.so Python module to Python site-packages directory.
 			# https://svn.boost.org/trac/boost/ticket/2838
