@@ -283,9 +283,9 @@ multilib_src_install_all() {
 	fi
 
 	if ! use context; then
-		rm -rf "${ED%/}"/usr/include/boost/context || die
-		rm -rf "${ED%/}"/usr/include/boost/coroutine{,2} || die
-		rm -f "${ED%/}"/usr/include/boost/asio/spawn.hpp || die
+		rm -r "${ED%/}"/usr/include/boost/context || die
+		rm -r "${ED%/}"/usr/include/boost/coroutine{,2} || die
+		rm "${ED%/}"/usr/include/boost/asio/spawn.hpp || die
 	fi
 
 	if use doc; then
@@ -338,7 +338,7 @@ multilib_src_install() {
 			install || die "Installation of Boost libraries failed"
 
 		if python_bindings_needed; then
-			rm -r ${PYTHON_DIRS} || die
+			rm -rf ${PYTHON_DIRS} || die
 
 			# Move mpi.so Python module to Python site-packages directory.
 			# https://svn.boost.org/trac/boost/ticket/2838
