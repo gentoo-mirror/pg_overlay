@@ -285,7 +285,7 @@ multilib_src_install_all() {
 	if ! use context; then
 		rm -r "${ED%/}"/usr/include/boost/context || die
 		rm -r "${ED%/}"/usr/include/boost/coroutine{,2} || die
-		rm "${ED%/}"/usr/include/boost/asio/spawn.hpp || die
+		rm -f "${ED%/}"/usr/include/boost/asio/spawn.hpp || die
 	fi
 
 	if use doc; then
