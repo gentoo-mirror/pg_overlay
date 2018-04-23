@@ -481,6 +481,9 @@ src_configure() {
 		myconf_gn+=" use_thin_lto=true"
 	fi
 
+	# OpenSUSE
+	myconf_gn+=" use_system_freetype=true"
+
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
 		flac
