@@ -47,7 +47,6 @@ S="${WORKDIR}/${P/_/-}"
 PATCHES=(
 	"${FILESDIR}/1.2.0-desktop-files.patch"
 	"${FILESDIR}/1.3.0-OS-detect.patch"
-	"${FILESDIR}/1.4.0-poppler.patch"
 )
 
 DOCS=( README.md )
@@ -77,7 +76,7 @@ src_install(){
 	mv "${D}/${D}/usr/share" "${D}/usr/share" || die
 	rm -rf "${D}/var" || die
 	mv "${ED%/}"/etc/luminaDesktop.conf{.dist,} || die
-	einstalldocs
+	#einstalldocs
 
 	remove_locale() {
 		rm -f "${D}"/usr/share/${PN}-desktop/i18n/l*_${1}.qm
