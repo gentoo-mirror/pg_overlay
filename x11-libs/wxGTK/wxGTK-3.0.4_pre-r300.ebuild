@@ -3,18 +3,17 @@
 
 EAPI=6
 
-inherit multilib-minimal
+inherit multilib-minimal poly-c_ebuilds
 
 DESCRIPTION="GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit"
 HOMEPAGE="https://wxwidgets.org/"
-SRC_URI="https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/wxWidgets-${PV}.tar.bz2
-	https://dev.gentoo.org/~leio/distfiles/wxGTK-3.0.3_p20180104.tar.xz
-	doc? ( https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/wxWidgets-${PV}-docs-html.tar.bz2 )"
+SRC_URI="https://github.com/wxWidgets/wxWidgets/releases/download/v${MY_PV}/wxWidgets-${MY_PV}.tar.bz2
+	doc? ( https://github.com/wxWidgets/wxWidgets/releases/download/v${MY_PV}/wxWidgets-${MY_PV}-docs-html.tar.bz2 )"
 
-#KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ~mips ppc ~ppc64 ~sh sparc x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
+KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sh ~sparc ~x86 ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos"
 IUSE="+X aqua doc debug gstreamer libnotify opengl sdl tiff webkit"
 
-WXSUBVERSION=${PV}.0-gtk3			# 3.0.3.0-gtk3
+WXSUBVERSION=${MY_PV}.0-gtk3			# 3.0.3.0-gtk3
 WXVERSION=${WXSUBVERSION%.*}			# 3.0.3
 WXRELEASE=${WXVERSION%.*}-gtk3			# 3.0-gtk3
 WXRELEASE_NODOT=${WXRELEASE//./}		# 30-gtk3
@@ -63,7 +62,11 @@ PDEPEND=">=app-eselect/eselect-wxwidgets-20131230"
 
 LICENSE="wxWinLL-3 GPL-2 doc? ( wxWinFDL-3 )"
 
-S="${WORKDIR}/wxWidgets-${PV}"
+S="${WORKDIR}/wxWidgets-${MY_PV}"
+
+PATCHES=(
+	"${FILESDIR}"/wxGTK-${SLOT}-translation-domain.patch
+)
 
 src_prepare() {
 	default
@@ -97,7 +100,7 @@ multilib_src_configure() {
 	myconf="
 			--with-zlib=sys
 			--with-expat=sys
-			--disable-compat28
+			--enable-compat28
 			$(use_with sdl)"
 
 	# debug in >=2.9
@@ -154,7 +157,7 @@ multilib_src_install_all() {
 	newdoc base/readme.txt base_readme.txt
 	newdoc gtk/readme.txt gtk_readme.txt
 
-	use doc && HTML_DOCS="${WORKDIR}"/wxWidgets-${PV}-docs-html/.
+	use doc && HTML_DOCS="${WORKDIR}"/wxWidgets-${MY_PV}-docs-html/.
 	einstalldocs
 
 	# Unversioned links
