@@ -76,7 +76,7 @@ src_install(){
 	mv "${D}/${D}/usr/share" "${D}/usr/share" || die
 	rm -rf "${D}/var" || die
 	mv "${ED%/}"/etc/luminaDesktop.conf{.dist,} || die
-	einstalldocs
+	#einstalldocs
 
 	remove_locale() {
 		rm -f "${D}"/usr/share/${PN}-desktop/i18n/l*_${1}.qm
