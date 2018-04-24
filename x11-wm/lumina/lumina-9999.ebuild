@@ -4,7 +4,7 @@
 EAPI=6
 PLOCALES="af ar az bg bn bs ca cs cy da de el en_AU en_GB en_ZA es et eu fa fi fr fr_CA fur gl he hi hr hu id is it ja ka ko lt lv mk mn ms mt nb ne nl pa pl pt pt_BR ro ru sa sk sl sr sv sw ta tg th tr uk ur uz vi zh_CN zh_HK zh_TW zu"
 
-inherit qmake-utils l10n xdg-utils gnome2-utils
+inherit git-r3 qmake-utils l10n xdg-utils gnome2-utils
 DESCRIPTION="Lumina desktop environment"
 HOMEPAGE="https://lumina-desktop.org/"
 EGIT_REPO_URI="https://github.com/trueos/lumina"
