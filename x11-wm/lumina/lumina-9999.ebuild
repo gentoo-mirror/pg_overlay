@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/trueos/lumina"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE="desktop-utils"
 
 COMMON_DEPEND="dev-qt/qtcore:5
@@ -68,22 +68,17 @@ src_configure(){
 }
 
 src_install(){
-	# A hack to avoid sandbox violation and install liblthemeengine*.so to the correct places
-	emake install INSTALL_ROOT="${D}"
-	rm "${ED%/}"/${PN}-* "${ED%/}"/start-${PN}-desktop "${ED%/}"/liblthemeengine*.so "${ED%/}"/lthemeengine || die
-	mv "${D}/${D}/etc" "${D}/etc" || die
-	mv "${D}/${D}/usr/bin" "${D}/usr/bin" || die
-	mv "${D}/${D}/usr/share" "${D}/usr/share" || die
-	rm -rf "${D}/var" || die
+	default
 	mv "${ED%/}"/etc/luminaDesktop.conf{.dist,} || die
-	#einstalldocs
+	rm "${ED%/}"/${PN}-* "${ED%/}"/start-${PN}-desktop || die
+
+	einstalldocs
 
 	remove_locale() {
 		rm -f "${D}"/usr/share/${PN}-desktop/i18n/l*_${1}.qm
 	}
 	l10n_for_each_disabled_locale_do remove_locale
 }
-
 pkg_postinst() {
 	xdg_desktop_database_update
 	xdg_mimeinfo_database_update
