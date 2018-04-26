@@ -84,12 +84,14 @@ src_configure() {
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
+		enabled = true
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		link-jobs = $(makeopts_jobs)
+		link-shared = true
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -97,9 +99,10 @@ src_configure() {
 		cargo = "${rust_stage0_root}/bin/cargo"
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
+		compiler-docs = $(toml_usex doc)
 		submodules = false
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = $(toml_usex extended)
 		verbose = 0

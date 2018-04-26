@@ -16,7 +16,7 @@ EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+daemon debug geoip gtk3 +nls remote stats +unicode -upnp +X +mmap +boost"
+IUSE="+daemon debug geoip gtk3 gui +nls stats +unicode -upnp +X +mmap +boost webserver"
 REQUIRED_USE="gtk3? ( X )"
 
 COMMON_DEPEND="
@@ -28,7 +28,7 @@ COMMON_DEPEND="
 	gtk3? ( x11-libs/wxGTK:${WX_GTK_VER}-gtk3[X?] )
 	!gtk3? ( x11-libs/wxGTK:${WX_GTK_VER}[X?] )
 	upnp? ( net-libs/libupnp:* )
-	remote? ( media-libs/libpng:0=
+	gui? ( media-libs/libpng:0=
 	unicode? ( media-libs/gd:= ) )
 	boost? ( dev-libs/boost:= )
 	!net-p2p/imule"
@@ -75,7 +75,7 @@ src_configure() {
 		use stats && myconf="${myconf}
 			--enable-wxcas
 			--enable-alc"
-		use remote && myconf="${myconf}
+		use gui && myconf="${myconf}
 			--enable-amule-gui"
 	else
 		myconf="
@@ -93,7 +93,7 @@ src_configure() {
 		$(use_enable daemon amule-daemon) \
 		$(use_enable geoip) \
 		$(use_enable nls) \
-		$(use_enable remote webserver) \
+		$(use_enable webserver) \
 		$(use_enable stats cas) \
 		$(use_enable stats alcc) \
 		$(use_enable upnp) \
@@ -109,8 +109,11 @@ src_install() {
 		newconfd "${FILESDIR}"/amuled.confd amuled
 		newinitd "${FILESDIR}"/amuled.initd amuled
 	fi
-	if use remote; then
+	if use webservers; then
 		newconfd "${FILESDIR}"/amuleweb.confd amuleweb
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
+    if use gui; then
+        rm ${D}/amule
+    fi
 }
