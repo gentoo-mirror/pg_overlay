@@ -56,6 +56,7 @@ DEPEND="${RDEPEND}
 	>=sys-devel/gcc-4.7
 	dev-util/cmake
 	dev-util/ninja
+	extended? ( !dev-util/cargo )
 "
 PDEPEND="!extended? ( dev-util/cargo )"
 
@@ -84,6 +85,7 @@ src_configure() {
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
+		enabled = true
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
@@ -97,9 +99,10 @@ src_configure() {
 		cargo = "${rust_stage0_root}/bin/cargo"
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
+		compiler-docs = $(toml_usex doc)
 		submodules = false
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = $(toml_usex extended)
 		verbose = 0
