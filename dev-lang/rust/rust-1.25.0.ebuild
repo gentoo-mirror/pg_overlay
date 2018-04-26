@@ -56,6 +56,7 @@ DEPEND="${RDEPEND}
 	>=sys-devel/gcc-4.7
 	dev-util/cmake
 	dev-util/ninja
+	extended? ( !dev-util/cargo )
 "
 PDEPEND="!extended? ( dev-util/cargo )"
 
