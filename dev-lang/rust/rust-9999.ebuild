@@ -18,7 +18,7 @@ DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="http://www.rust-lang.org/"
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
-KEYWORDS=""
+#KEYWORDS=""
 
 IUSE="clang debug doc source system-llvm sanitize tools"
 
