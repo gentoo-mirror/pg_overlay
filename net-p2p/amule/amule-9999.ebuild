@@ -76,7 +76,8 @@ src_configure() {
 			--enable-wxcas
 			--enable-alc"
 		use gui && myconf="${myconf}
-			--enable-amule-gui"
+			--enable-amule-gui
+			--disable-monolithic"
 	else
 		myconf="
 			--disable-monolithic
