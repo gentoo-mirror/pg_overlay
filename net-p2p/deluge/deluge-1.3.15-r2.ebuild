@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -16,7 +16,6 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="git://deluge-torrent.org/${PN}.git
 		http://git.deluge-torrent.org/${PN}"
 	SRC_URI=""
-	KEYWORDS="amd64 x86"
 else
 	SRC_URI="http://download.deluge-torrent.org/source/${P}.tar.bz2"
 	KEYWORDS="amd64 ~arm ~ppc ~sparc x86"
@@ -32,9 +31,10 @@ REQUIRED_USE="
 "
 PATCHES=(
 	"${FILESDIR}/${PN}-1.3.5-disable_libtorrent_internal_copy.patch"
+	"${FILESDIR}/${PN}-1.3.15-r1-fix-preferences-ui.patch"
 )
 
-CDEPEND=">=net-libs/libtorrent-rasterbar-1.1[python,${PYTHON_USEDEP}]"
+CDEPEND="net-libs/libtorrent-rasterbar[python,${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-util/intltool"
@@ -49,7 +49,7 @@ RDEPEND="${CDEPEND}
 		>=dev-python/twisted-web-13.0[${PYTHON_USEDEP}]
 		)
 	)
-	geoip? ( dev-libs/geoip )
+	geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 	gtk? (
 		sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
 		dev-python/pygobject:2[${PYTHON_USEDEP}]
