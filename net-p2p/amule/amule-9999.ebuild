@@ -115,6 +115,6 @@ src_install() {
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
     if use gui; then
-        rm ${D}/amule
+        rm ${D}/usr/bin/amule
     fi
 }
