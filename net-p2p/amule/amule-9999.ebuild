@@ -76,7 +76,8 @@ src_configure() {
 			--enable-wxcas
 			--enable-alc"
 		use gui && myconf="${myconf}
-			--enable-amule-gui"
+			--enable-amule-gui
+			--disable-monolithic"
 	else
 		myconf="
 			--disable-monolithic
@@ -109,7 +110,7 @@ src_install() {
 		newconfd "${FILESDIR}"/amuled.confd amuled
 		newinitd "${FILESDIR}"/amuled.initd amuled
 	fi
-	if use webservers; then
+	if use webserver; then
 		newconfd "${FILESDIR}"/amuleweb.confd amuleweb
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
