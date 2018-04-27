@@ -16,5 +16,5 @@ IUSE=""
 src_install() {
 	emake DESTDIR="${ED}" install
 
-	dodoc README
+	dodoc README.md
 }
