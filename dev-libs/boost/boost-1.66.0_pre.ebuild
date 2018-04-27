@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -301,7 +301,7 @@ multilib_src_install_all() {
 		# To avoid broken links
 		dodoc LICENSE_1_0.txt
 
-		dosym /usr/include/boost /usr/share/doc/${PF}/html/boost
+		dosym ../../../../include/boost /usr/share/doc/${PF}/html/boost
 	fi
 }
 
