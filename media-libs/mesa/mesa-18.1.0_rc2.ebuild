@@ -434,8 +434,10 @@ multilib_src_install() {
 						|| die "Failed to move ${x}"
 				fi
 			done
+			ebegin "Linking DRI drivers"
 			pushd "${ED}"/usr/$(get_abi_LIBDIR)/dri || die "pushd failed"
 			ln -s ../mesa/*.so . || die "Creating symlink failed"
+			ebegin "Finished linking DRI drivers"
 			# remove symlinks to drivers known to eselect
 			for x in ${gallium_drivers[@]}; do
 				if [ -f ${x} -o -L ${x} ]; then
