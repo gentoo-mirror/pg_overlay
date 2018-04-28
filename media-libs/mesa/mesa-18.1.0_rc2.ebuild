@@ -12,7 +12,7 @@ fi
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit autotools llvm multilib-minimal python-any-r1 pax-utils ${GIT_ECLASS}
+inherit autotools llvm multilib multilib-minimal python-any-r1 pax-utils ${GIT_ECLASS}
 
 OPENGL_DIR="xorg-x11"
 
@@ -328,7 +328,7 @@ multilib_src_configure() {
 			$(use_enable xa)
 			$(use_enable xvmc)
 		"
-		use vaapi && myconf+=" --with-va-libdir=/usr/$(get_libdir)/va/drivers"
+		use vaapi && myconf+=" --with-va-libdir=/usr/$(get_abi_LIBDIR)/va/drivers"
 
 		gallium_enable swrast
 		gallium_enable video_cards_vc4 vc4
@@ -417,40 +417,42 @@ multilib_src_install() {
 	if use classic || use gallium; then
 			ebegin "Moving DRI/Gallium drivers for dynamic switching"
 			local gallium_drivers=( i915_dri.so i965_dri.so r300_dri.so r600_dri.so swrast_dri.so )
-			keepdir /usr/$(get_libdir)/dri
-			dodir /usr/$(get_libdir)/mesa
+			keepdir /usr/$(get_abi_LIBDIR)/dri
+			dodir /usr/$(get_abi_LIBDIR)/mesa
 			for x in ${gallium_drivers[@]}; do
-				if [ -f "$(get_libdir)/gallium/${x}" ]; then
-					mv -f "${ED}/usr/$(get_libdir)/dri/${x}" "${ED}/usr/$(get_libdir)/dri/${x/_dri.so/g_dri.so}" \
+				if [ -f "$(get_abi_LIBDIR)/gallium/${x}" ]; then
+					mv -f "${ED}/usr/$(get_abi_LIBDIR)/dri/${x}" "${ED}/usr/$(get_abi_LIBDIR)/dri/${x/_dri.so/g_dri.so}" \
 						|| die "Failed to move ${x}"
 				fi
 			done
 			if use classic; then
 				emake -C "${BUILD_DIR}/src/mesa/drivers/dri" DESTDIR="${D}" install
 			fi
-			for x in "${ED}"/usr/$(get_libdir)/dri/*.so; do
+			for x in "${ED}"/usr/$(get_abi_LIBDIR)/dri/*.so; do
 				if [ -f ${x} -o -L ${x} ]; then
 					mv -f "${x}" "${x/dri/mesa}" \
 						|| die "Failed to move ${x}"
 				fi
 			done
-			pushd "${ED}"/usr/$(get_libdir)/dri || die "pushd failed"
+			ebegin "Linking DRI drivers"
+			pushd "${ED}"/usr/$(get_abi_LIBDIR)/dri || die "pushd failed"
 			ln -s ../mesa/*.so . || die "Creating symlink failed"
+			ebegin "Finished linking DRI drivers"
 			# remove symlinks to drivers known to eselect
-			for x in ${gallium_drivers[@]}; do
-				if [ -f ${x} -o -L ${x} ]; then
-					rm "${x}" || die "Failed to remove ${x}"
-				fi
-			done
+			#for x in ${gallium_drivers[@]}; do
+			#	if [ -f ${x} -o -L ${x} ]; then
+			#		rm "${x}" || die "Failed to remove ${x}"
+			#	fi
+			#done
 			popd
 		eend $?
 	fi
 	if use opencl; then
 		ebegin "Moving Gallium/Clover OpenCL implementation for dynamic switching"
-		local cl_dir="/usr/$(get_libdir)/OpenCL/vendors/mesa"
+		local cl_dir="/usr/$(get_abi_LIBDIR)/OpenCL/vendors/mesa"
 		dodir ${cl_dir}/{lib,include}
-		if [ -f "${ED}/usr/$(get_libdir)/libOpenCL.so" ]; then
-			mv -f "${ED}"/usr/$(get_libdir)/libOpenCL.so* \
+		if [ -f "${ED}/usr/$(get_abi_LIBDIR)/libOpenCL.so" ]; then
+			mv -f "${ED}"/usr/$(get_abi_LIBDIR)/libOpenCL.so* \
 			"${ED}"${cl_dir}
 		fi
 		if [ -f "${ED}/usr/include/CL/opencl.h" ]; then
@@ -509,7 +511,7 @@ pkg_postinst() {
 	# run omxregister-bellagio to make the OpenMAX drivers known system-wide
 	if use openmax; then
 		ebegin "Registering OpenMAX drivers"
-		BELLAGIO_SEARCH_PATH="${EPREFIX}/usr/$(get_libdir)/libomxil-bellagio0" \
+		BELLAGIO_SEARCH_PATH="${EPREFIX}/usr/$(get_abi_LIBDIR)/libomxil-bellagio0" \
 			OMX_BELLAGIO_REGISTRY=${EPREFIX}/usr/share/mesa/xdg/.omxregister \
 			omxregister-bellagio
 		eend $?
