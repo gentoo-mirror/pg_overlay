@@ -12,7 +12,7 @@ fi
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit autotools llvm multilib python-any-r1 pax-utils ${GIT_ECLASS}
+inherit autotools llvm multilib multilib-minimal python-any-r1 pax-utils ${GIT_ECLASS}
 
 OPENGL_DIR="xorg-x11"
 
