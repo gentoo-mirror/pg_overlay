@@ -287,8 +287,10 @@ src_prepare() {
 	[[ ${PV} == 9999 ]] && eautoreconf
 	echo $(get_abi_LIBDIR)
 	echo $(get_abi_LIBDIR)
-	echo ${libdir}
-	echo ${libdir}
+	echo ${get_libdir}
+	echo ${get_libdir}
+    echo get_libdir
+	echo get_libdir
 }
 
 multilib_src_configure() {
