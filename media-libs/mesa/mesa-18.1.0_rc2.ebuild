@@ -285,6 +285,10 @@ pkg_setup() {
 src_prepare() {
 	eapply_user
 	[[ ${PV} == 9999 ]] && eautoreconf
+	echo $(get_abi_LIBDIR)
+	echo $(get_abi_LIBDIR)
+	echo ${get_libdir}
+	echo ${get_libdir}
 }
 
 multilib_src_configure() {
@@ -409,6 +413,11 @@ multilib_src_configure() {
 		--with-vulkan-drivers=${VULKAN_DRIVERS} \
 		PYTHON2="${PYTHON}" \
 		${myconf}
+
+    echo $(get_abi_LIBDIR)
+	echo $(get_abi_LIBDIR)
+	echo ${get_libdir}
+	echo ${get_libdir}
 }
 
 multilib_src_install() {
