@@ -439,11 +439,11 @@ multilib_src_install() {
 			ln -s ../mesa/*.so . || die "Creating symlink failed"
 			ebegin "Finished linking DRI drivers"
 			# remove symlinks to drivers known to eselect
-			for x in ${gallium_drivers[@]}; do
-				if [ -f ${x} -o -L ${x} ]; then
-					rm "${x}" || die "Failed to remove ${x}"
-				fi
-			done
+			#for x in ${gallium_drivers[@]}; do
+			#	if [ -f ${x} -o -L ${x} ]; then
+			#		rm "${x}" || die "Failed to remove ${x}"
+			#	fi
+			#done
 			popd
 		eend $?
 	fi
