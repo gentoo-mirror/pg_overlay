@@ -15,7 +15,6 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 IUSE="daemon debug geoip gtk3 gui +nls stats +unicode upnp X +mmap +boost webserver"
-REQUIRED_USE="gtk3? ( X )"
 
 COMMON_DEPEND="
 	dev-libs/crypto++
