@@ -13,7 +13,7 @@ SLOT="5"
 
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 
-SRC_URI="https://github.com/annulen/webkit/releases/download/${P/_/-}/${P/_/-}.tar.xz"
+SRC_URI="http://download.qt.io/snapshots/ci/${PN}/${PV/.0_*}/latest/src/submodules/${PN}-everywhere-src-${PV/.0_*}.tar.xz -> ${P}.tar.xz"
 
 IUSE="geolocation gstreamer gles2 +jit multimedia opengl orientation printsupport qml test webchannel webp"
 REQUIRED_USE="?? ( gstreamer multimedia )"
@@ -61,11 +61,7 @@ DEPEND="${RDEPEND}
 	test? ( >=dev-qt/qttest-${QT_MIN_VER} )
 "
 
-PATCHES=(
-	"${FILESDIR}/${P}-update.patch"
-)
-
-S=${WORKDIR}/${P/_/-}
+S=${WORKDIR}/${PN}-everywhere-src-${PV/.0_*}
 
 src_configure() {
 	local mycmakeargs=(
