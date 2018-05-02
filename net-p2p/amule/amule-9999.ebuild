@@ -2,9 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
-
 WX_GTK_VER="3.0"
 
 inherit git-r3 l10n wxwidgets
@@ -16,7 +14,7 @@ EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+daemon debug geoip gtk3 gui +nls stats +unicode -upnp +X +mmap +boost webserver"
+IUSE="daemon debug geoip gtk3 gui +nls stats +unicode upnp X +mmap +boost webserver"
 REQUIRED_USE="gtk3? ( X )"
 
 COMMON_DEPEND="
