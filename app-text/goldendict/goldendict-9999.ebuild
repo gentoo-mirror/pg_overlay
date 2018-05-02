@@ -21,12 +21,17 @@ RDEPEND="
 	dev-libs/eb
 	dev-libs/lzo
 	dev-qt/qtcore:5
-	dev-qt/qtdeclarative:5
+	dev-qt/qtgui:5
 	dev-qt/qthelp:5
-	dev-qt/qtsingleapplication[qt5]
+	dev-qt/qtnetwork:5
+	dev-qt/qtprintsupport:5
+	dev-qt/qtsingleapplication[qt5+]
+	dev-qt/qtsql:5
 	dev-qt/qtsvg:5
 	dev-qt/qtwebkit:5
-	dev-qt/qtx11extras:5
+	dev-qt/qtwidgets:5
+	dev-qt/qtwebkit:5
+	dev-qt/qtxml:5
 	media-libs/libvorbis
 	media-libs/tiff:0
 	sys-libs/zlib
