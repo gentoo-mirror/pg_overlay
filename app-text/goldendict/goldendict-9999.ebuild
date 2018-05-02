@@ -25,7 +25,6 @@ RDEPEND="
 	dev-qt/qthelp:5
 	dev-qt/qtnetwork:5
 	dev-qt/qtprintsupport:5
-	dev-qt/qtsingleapplication
 	dev-qt/qtsql:5
 	dev-qt/qtsvg:5
 	dev-qt/qtwebkit:5
@@ -47,8 +46,6 @@ DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
 	virtual/pkgconfig
 "
-
-#PATCHES=( "${FILESDIR}/${P}-qtsingleapplication-unbundle.patch" )
 
 src_prepare() {
 	default
