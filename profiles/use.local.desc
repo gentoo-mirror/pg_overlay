@@ -9,6 +9,8 @@ dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
 dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
+media-fonts/unifont:fontforge - Use media-gfx/fontforge to build fonts from source
+media-fonts/unifont:utils - Install unifont utilities
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
 net-fs/nfs-utils:ldap - Add ldap support
