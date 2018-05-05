@@ -79,9 +79,9 @@ src_install() {
 
 	newconfd "${FILESDIR}"/${PN}-1.0.25.confd ${PN}
 	newinitd "${FILESDIR}"/${PN}-1.1.5.initd ${PN}
-	systemd_newunit "${FILESDIR}"/${PN}-1.1.2.service ${PN}.service
-	echo "d /run/${PN} 0755 ${PN} ${PN} -" > "${T}"/${PN}.conf
-	systemd_dotmpfilesd "${T}"/${PN}.conf
+	#systemd_newunit "${FILESDIR}"/${PN}-1.1.2.service ${PN}.service
+	#echo "d /run/${PN} 0755 ${PN} ${PN} -" > "${T}"/${PN}.conf
+	#systemd_dotmpfilesd "${T}"/${PN}.conf
 
 	dodir /var/{lib,log}/${PN}
 	fowners ${PN}:${PN} /var/{lib,log}/${PN}
