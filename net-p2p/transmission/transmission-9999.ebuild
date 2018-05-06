@@ -42,6 +42,7 @@ DEPEND="${RDEPEND}
 			dev-util/intltool
 			sys-devel/gettext
 		)
+    )
 	virtual/os-headers
 	virtual/pkgconfig
 	qt5? ( dev-qt/linguist-tools:5 )
