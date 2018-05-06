@@ -114,8 +114,6 @@ src_install() {
 
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
-
-	readme.gentoo_create_doc
 }
 
 pkg_preinst() {
