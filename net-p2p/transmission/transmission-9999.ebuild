@@ -2,7 +2,6 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-
 inherit cmake-utils git-r3 gnome2-utils readme.gentoo-r1 user xdg-utils
 
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
@@ -15,24 +14,19 @@ HOMEPAGE="https://transmissionbt.com/"
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 test +xfs"
-RESTRICT="!test? ( test )"
+IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 +xfs"
 
-RDEPEND="
-	>=dev-libs/libevent-2.0.10:=
-	!mbedtls? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:0= )
-	)
-	mbedtls? ( net-libs/mbedtls:0= )
+RDEPEND=">=dev-libs/libevent-2.0.10:=
+	!libressl? ( dev-libs/openssl:0= )
+	libressl? ( dev-libs/libressl:0= )
 	>=net-misc/curl-7.16.3[ssl]
 	sys-libs/zlib:=
 	gtk? (
 		>=dev-libs/dbus-glib-0.100
 		>=dev-libs/glib-2.32:2
 		>=x11-libs/gtk+-3.4:3
-		ayatana? ( >=dev-libs/libappindicator-0.4.30:3 )
-	)
+		ayatana? ( >=dev-libs/libappindicator-0.4.90:3 )
+		)
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtdbus:5
@@ -41,25 +35,36 @@ RDEPEND="
 		dev-qt/qtwidgets:5
 		)"
 DEPEND="${RDEPEND}
+	>=dev-libs/glib-2.32
+	dev-util/intltool
+	sys-devel/gettext
+	virtual/os-headers
 	virtual/pkgconfig
-	nls? (
-		virtual/libintl
-		gtk? (
-			dev-util/intltool
-			sys-devel/gettext
-		)
-		qt5? (
-			dev-qt/linguist-tools:5
-		)
-	)
-"
+	qt5? ( dev-qt/linguist-tools:5 )
+	xfs? ( sys-fs/xfsprogs )"
+
+REQUIRED_USE="ayatana? ( gtk )"
 
 src_prepare() {
-	# 2.93+ -> 2.93
-	sed -i s/2.93+/2.93/g CMakeLists.txt || die
-	sed -i s/TR293Z/TR2930/g CMakeLists.txt || die
-	sed -i s/2.93+/2.93/g configure.ac || die
-	sed -i s/TR293Z/TR2930/g configure.ac || die
+	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
+
+	# Trick to avoid automagic dependency
+	if ! use ayatana ; then
+		sed -i -e '/^LIBAPPINDICATOR_MINIMUM/s:=.*:=9999:' configure.ac || die
+	fi
+
+	# http://trac.transmissionbt.com/ticket/4324
+	sed -i -e 's|noinst\(_PROGRAMS = $(TESTS)\)|check\1|' libtransmission/Makefile.am || die
+
+	# Prevent m4_copy error when running aclocal
+	# m4_copy: won't overwrite defined macro: glib_DEFUN
+	rm m4/glib-gettext.m4 || die
+
+    # 2.94+ -> 2.94
+	sed -i s/2.94+/2.94/g CMakeLists.txt || die
+	sed -i s/TR294Z/TR2940/g CMakeLists.txt || die
+	sed -i s/2.94+/2.94/g configure.ac || die
+	sed -i s/TR294Z/TR2940/g configure.ac || die
 
 	default
 }
@@ -92,23 +97,10 @@ src_configure() {
 	cmake-utils_src_configure
 }
 
-DISABLE_AUTOFORMATTING=1
-DOC_CONTENTS="\
-If you use transmission-daemon, please, set 'rpc-username' and
-'rpc-password' (in plain text, transmission-daemon will hash it on
-start) in settings.json file located at /var/lib/transmission/config or
-any other appropriate config directory.
-
-Since µTP is enabled by default, transmission needs large kernel buffers for
-the UDP socket. You can append following lines into /etc/sysctl.conf:
-
-net.core.rmem_max = 4194304
-net.core.wmem_max = 1048576
-
-and run sysctl -p"
-
 src_install() {
 	cmake-utils_src_install
+
+    rm "${ED%/}"/usr/share/transmission/web/LICENSE || die
 
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
@@ -128,6 +120,17 @@ pkg_postrm() {
 pkg_postinst() {
 	xdg_desktop_database_update
 	gnome2_icon_cache_update
+
+	elog "If you use transmission-daemon, please, set 'rpc-username' and"
+	elog "'rpc-password' (in plain text, transmission-daemon will hash it on"
+	elog "start) in settings.json file located at /var/lib/transmission/config or"
+	elog "any other appropriate config directory."
+	elog
+	elog "Since µTP is enabled by default, transmission needs large kernel buffers for"
+	elog "the UDP socket. You can append following lines into /etc/sysctl.conf:"
+	elog " net.core.rmem_max = 4194304"
+	elog " net.core.wmem_max = 1048576"
+	elog "and run sysctl -p"
 
 	readme.gentoo_print_elog
 }
