@@ -14,11 +14,14 @@ HOMEPAGE="https://transmissionbt.com/"
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 +xfs"
+IUSE="ayatana gtk libressl lightweight mbedtls nls qt5 test +xfs"
 
 RDEPEND=">=dev-libs/libevent-2.0.10:=
-	!libressl? ( dev-libs/openssl:0= )
-	libressl? ( dev-libs/libressl:0= )
+	!mbedtls? (
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:0= )
+	)
+	mbedtls? ( net-libs/mbedtls:0= )
 	>=net-misc/curl-7.16.3[ssl]
 	sys-libs/zlib:=
 	gtk? (
@@ -49,6 +52,8 @@ DEPEND="${RDEPEND}
 	xfs? ( sys-fs/xfsprogs )"
 
 REQUIRED_USE="ayatana? ( gtk )"
+
+DOCS=( AUTHORS NEWS qt/README.txt )
 
 src_prepare() {
 	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
@@ -109,17 +114,10 @@ src_install() {
 
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
-
-	readme.gentoo_create_doc
 }
 
 pkg_preinst() {
 	gnome2_icon_savelist
-}
-
-pkg_postrm() {
-	xdg_desktop_database_update
-	gnome2_icon_cache_update
 }
 
 pkg_postinst() {
@@ -136,6 +134,9 @@ pkg_postinst() {
 	elog " net.core.rmem_max = 4194304"
 	elog " net.core.wmem_max = 1048576"
 	elog "and run sysctl -p"
+}
 
-	readme.gentoo_print_elog
+pkg_postrm() {
+	xdg_desktop_database_update
+	gnome2_icon_cache_update
 }
