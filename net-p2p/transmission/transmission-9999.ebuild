@@ -36,8 +36,12 @@ RDEPEND=">=dev-libs/libevent-2.0.10:=
 		)"
 DEPEND="${RDEPEND}
 	>=dev-libs/glib-2.32
-	dev-util/intltool
-	sys-devel/gettext
+	nls? (
+		virtual/libintl
+		gtk? (
+			dev-util/intltool
+			sys-devel/gettext
+		)
 	virtual/os-headers
 	virtual/pkgconfig
 	qt5? ( dev-qt/linguist-tools:5 )
