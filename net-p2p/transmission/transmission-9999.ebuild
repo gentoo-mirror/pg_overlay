@@ -14,7 +14,7 @@ HOMEPAGE="https://transmissionbt.com/"
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="ayatana gtk libressl lightweight nls test qt5 +xfs"
+IUSE="ayatana gtk libressl lightweight mbedtls nls qt5 test +xfs"
 
 RDEPEND=">=dev-libs/libevent-2.0.10:=
 	!mbedtls? (
