@@ -134,8 +134,6 @@ pkg_postinst() {
 	elog " net.core.rmem_max = 4194304"
 	elog " net.core.wmem_max = 1048576"
 	elog "and run sysctl -p"
-
-	readme.gentoo_print_elog
 }
 
 pkg_postrm() {
