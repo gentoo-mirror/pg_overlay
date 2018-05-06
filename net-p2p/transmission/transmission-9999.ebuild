@@ -14,7 +14,7 @@ HOMEPAGE="https://transmissionbt.com/"
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="ayatana gtk libressl lightweight nls mbedtls qt5 +xfs"
+IUSE="ayatana gtk libressl lightweight nls test qt5 +xfs"
 
 RDEPEND=">=dev-libs/libevent-2.0.10:=
 	!libressl? ( dev-libs/openssl:0= )
@@ -50,6 +50,8 @@ DEPEND="${RDEPEND}
 
 REQUIRED_USE="ayatana? ( gtk )"
 
+DOCS=( AUTHORS NEWS qt/README.txt )
+
 src_prepare() {
 	sed -i -e '/CFLAGS/s:-ggdb3::' configure.ac || die
 
@@ -84,7 +86,7 @@ src_configure() {
 		-DENABLE_LIGHTWEIGHT=$(usex lightweight ON OFF)
 		-DENABLE_NLS=$(usex nls ON OFF)
 		-DENABLE_QT=$(usex qt5 ON OFF)
-		-DENABLE_TESTS=OFF
+		-DENABLE_TESTS=$(usex test ON OFF)
 
 		-DUSE_SYSTEM_EVENT2=ON
 		-DUSE_SYSTEM_DHT=OFF
@@ -117,11 +119,6 @@ pkg_preinst() {
 	gnome2_icon_savelist
 }
 
-pkg_postrm() {
-	xdg_desktop_database_update
-	gnome2_icon_cache_update
-}
-
 pkg_postinst() {
 	xdg_desktop_database_update
 	gnome2_icon_cache_update
@@ -138,4 +135,9 @@ pkg_postinst() {
 	elog "and run sysctl -p"
 
 	readme.gentoo_print_elog
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
+	gnome2_icon_cache_update
 }
