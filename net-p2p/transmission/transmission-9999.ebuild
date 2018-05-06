@@ -84,7 +84,7 @@ src_configure() {
 		-DENABLE_LIGHTWEIGHT=$(usex lightweight ON OFF)
 		-DENABLE_NLS=$(usex nls ON OFF)
 		-DENABLE_QT=$(usex qt5 ON OFF)
-		-DENABLE_TESTS=$(usex test ON OFF)
+		-DENABLE_TESTS=OFF
 
 		-DUSE_SYSTEM_EVENT2=ON
 		-DUSE_SYSTEM_DHT=OFF
