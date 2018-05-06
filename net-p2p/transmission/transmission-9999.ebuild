@@ -17,8 +17,11 @@ SLOT="0"
 IUSE="ayatana gtk libressl lightweight nls test qt5 +xfs"
 
 RDEPEND=">=dev-libs/libevent-2.0.10:=
-	!libressl? ( dev-libs/openssl:0= )
-	libressl? ( dev-libs/libressl:0= )
+	!mbedtls? (
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:0= )
+	)
+	mbedtls? ( net-libs/mbedtls:0= )
 	>=net-misc/curl-7.16.3[ssl]
 	sys-libs/zlib:=
 	gtk? (
