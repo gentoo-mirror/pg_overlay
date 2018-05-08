@@ -70,7 +70,6 @@ src_configure() {
 		--enable-jemalloc \
 		--enable-readline \
 		--with-system-nspr \
-		--enable-optimize \
 		--with-intl-api \
 		$(use_with system-icu) \
 		$(use_enable debug) \
