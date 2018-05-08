@@ -58,19 +58,19 @@ src_configure() {
 	cd "${BUILDDIR}" || die
 
 	econf \
-		--with-system-zlib \
-		--enable-strip \
-		--enable-shared-js \
-		--enable-pie \
-		\
-		--disable-debug-symbols \
-		--enable-gold \
-		--with-pthreads \
-		\
+		#--with-system-zlib \
+		#--enable-strip \
+		#--enable-shared-js \
+		#--enable-pie \
+		#\
+		#--disable-debug-symbols \
+		#--enable-gold \
+		#--with-pthreads \
+		#\
 		--enable-jemalloc \
 		--enable-readline \
 		--with-system-nspr \
-		--enable-optimize \
+		#--enable-optimize \
 		--with-intl-api \
 		$(use_with system-icu) \
 		$(use_enable debug) \
