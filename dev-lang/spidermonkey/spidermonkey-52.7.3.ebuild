@@ -37,6 +37,7 @@ src_prepare() {
 	rm -f	"${WORKDIR}"/${PN}/0002-build-Add-major-version-to-make-parallel-installable.patch \
 		"${WORKDIR}"/${PN}/0005-headers-Fix-symbols-visibility.patch \
 		"${WORKDIR}"/${PN}/0007-build-Remove-unnecessary-NSPR-dependency.patch \
+		"${WORKDIR}"/${PN}/0008-tests-Skip-on-all-64-bit-archs.patch \
 		|| die
 
 	eapply "${WORKDIR}/${PN}"
