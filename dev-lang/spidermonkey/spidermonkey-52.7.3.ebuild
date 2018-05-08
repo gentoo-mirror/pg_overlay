@@ -34,7 +34,7 @@ pkg_setup(){
 src_prepare() {
 	# remove patches integrated by upstream
 
-	eapply "${FILESDIR}"/${PN}-52-baseconfig.patch
+	#eapply "${FILESDIR}"/${PN}-52-baseconfig.patch
 	eapply "${FILESDIR}"/fix-soname.patch
 	eapply "${FILESDIR}"/copy-headers.patch
 	eapply "${FILESDIR}"/disable-mozglue.patch
