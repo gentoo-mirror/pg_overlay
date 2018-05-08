@@ -65,6 +65,8 @@ src_configure() {
 		\
 		--disable-debug-symbols \
 		--enable-gold \
+		--enable-posix-nspr-emulation \
+		--enable-release \
 		--with-pthreads \
 		\
 		--enable-optimize="-O2" \
@@ -141,7 +143,7 @@ src_install() {
 		rm -f "${ED}"usr/bin/js${SLOT}
 	fi
 
-	dosym /usr/$(get_libdir)/libmozjs-${SLOT}.so /usr/$(get_libdir)/libmozjs-${SLOT}.so.0
+	#dosym /usr/$(get_libdir)/libmozjs-${SLOT}.so /usr/$(get_libdir)/libmozjs-${SLOT}.so.0
 
 	# We can't actually disable building of static libraries
 	# They're used by the tests and in a few other places
