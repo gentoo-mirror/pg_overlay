@@ -117,11 +117,7 @@ src_compile() {
 			host_jsoplengen.o || die
 	fi
 
-	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
-	emake
-		#MOZ_OPTIMIZE_FLAGS="" MOZ_DEBUG_FLAGS="" \
-		#HOST_OPTIMIZE_FLAGS="" MODULE_OPTIMIZE_FLAGS="" \
-		#MOZ_PGO_OPTIMIZE_FLAGS=""
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" emake
 }
 
 src_test() {
@@ -141,7 +137,7 @@ src_install() {
 		rm -f "${ED}"usr/bin/js${SLOT}
 	fi
 
-	#dosym /usr/$(get_libdir)/libmozjs-${SLOT}.so /usr/$(get_libdir)/libmozjs-${SLOT}.so.0
+	dosym /usr/$(get_libdir)/libmozjs-${SLOT}.so /usr/$(get_libdir)/libmozjs-${SLOT}.so.0
 
 	# We can't actually disable building of static libraries
 	# They're used by the tests and in a few other places
