@@ -69,6 +69,8 @@ pkg_setup() {
 src_prepare() {
 	default
 
+	eapply "${FILESDIR}"/jsauthority_pass_s_format_string_to_remaining_report_function.patch
+
 	sed -i -e 's|unix-group:wheel|unix-user:0|' src/polkitbackend/*-default.rules || die #401513
 
 	# Workaround upstream hack around standard gtk-doc behavior, bug #552170
