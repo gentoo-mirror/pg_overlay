@@ -131,7 +131,7 @@ src_install() {
 		rm -f "${ED}"usr/bin/js${SLOT}
 	fi
 
-	dosym "${ED}"${get_libdir}/libmozjs-${SLOT}.so "${ED}"${get_libdir}/libmozjs-${SLOT}.so.0
+	#dosym "${ED}"${get_libdir}/libmozjs-${SLOT}.so "${ED}"${get_libdir}/libmozjs-${SLOT}.so.0
 
 	# We can't actually disable building of static libraries
 	# They're used by the tests and in a few other places
