@@ -43,9 +43,6 @@ src_prepare() {
 	eapply "${WORKDIR}/${PN}"
 
 	eapply "${FILESDIR}"/fix-soname.patch
-	eapply "${FILESDIR}"/copy-headers.patch
-	eapply "${FILESDIR}"/disable-mozglue.patch
-	eapply "${FILESDIR}"/include-configure-script.patch
 
 	eapply_user
 
@@ -66,15 +63,6 @@ src_configure() {
 	cd "${BUILDDIR}" || die
 
 	econf \
-		--with-system-zlib \
-		--enable-shared-js \
-		--enable-pie \
-		\
-		--disable-debug-symbols \
-		--enable-gold \
-		--enable-release \
-		--with-pthreads \
-		\
 		--enable-optimize="-O2" \
 		--enable-jemalloc \
 		--enable-readline \
