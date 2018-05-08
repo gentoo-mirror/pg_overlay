@@ -7,7 +7,8 @@ inherit autotools toolchain-funcs pax-utils mozcoreconf-v5
 
 DESCRIPTION="Stand-alone JavaScript C++ library"
 HOMEPAGE="https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey"
-SRC_URI="https://ftp.mozilla.org/pub/firefox/releases/${PV}esr/source/firefox-${PV}esr.source.tar.xz -> ${P}.tar.xz"
+SRC_URI="https://ftp.mozilla.org/pub/firefox/releases/${PV}esr/source/firefox-${PV}esr.source.tar.xz -> ${P}.tar.xz
+		https://dev.gentoo.org/~axs/distfiles/${PN}-52.0-patches-0.tar.xz"
 
 LICENSE="NPL-1.1"
 SLOT="52"
@@ -33,6 +34,13 @@ pkg_setup(){
 
 src_prepare() {
 	# remove patches integrated by upstream
+	rm -f	"${WORKDIR}"/${PN}/0002-build-Add-major-version-to-make-parallel-installable.patch \
+		"${WORKDIR}"/${PN}/0005-headers-Fix-symbols-visibility.patch \
+		"${WORKDIR}"/${PN}/0007-build-Remove-unnecessary-NSPR-dependency.patch \
+		"${WORKDIR}"/${PN}/0008-tests-Skip-on-all-64-bit-archs.patch \
+		|| die
+
+	eapply "${WORKDIR}/${PN}"
 
 	eapply "${FILESDIR}"/fix-soname.patch
 	eapply "${FILESDIR}"/copy-headers.patch
@@ -59,12 +67,12 @@ src_configure() {
 
 	econf \
 		--with-system-zlib \
-		--enable-strip \
 		--enable-shared-js \
 		--enable-pie \
 		\
 		--disable-debug-symbols \
 		--enable-gold \
+		--enable-release \
 		--with-pthreads \
 		\
 		--enable-optimize="-O2" \
@@ -117,11 +125,7 @@ src_compile() {
 			host_jsoplengen.o || die
 	fi
 
-	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
-	emake \
-		MOZ_OPTIMIZE_FLAGS="" MOZ_DEBUG_FLAGS="" \
-		HOST_OPTIMIZE_FLAGS="" MODULE_OPTIMIZE_FLAGS="" \
-		MOZ_PGO_OPTIMIZE_FLAGS=""
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" emake
 }
 
 src_test() {
