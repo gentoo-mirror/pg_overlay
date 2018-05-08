@@ -59,7 +59,6 @@ src_configure() {
 
 	econf \
 		--with-system-zlib \
-		--enable-strip \
 		--enable-shared-js \
 		--enable-pie \
 		\
@@ -119,10 +118,10 @@ src_compile() {
 	fi
 
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
-	emake \
-		MOZ_OPTIMIZE_FLAGS="" MOZ_DEBUG_FLAGS="" \
-		HOST_OPTIMIZE_FLAGS="" MODULE_OPTIMIZE_FLAGS="" \
-		MOZ_PGO_OPTIMIZE_FLAGS=""
+	emake
+		#MOZ_OPTIMIZE_FLAGS="" MOZ_DEBUG_FLAGS="" \
+		#HOST_OPTIMIZE_FLAGS="" MODULE_OPTIMIZE_FLAGS="" \
+		#MOZ_PGO_OPTIMIZE_FLAGS=""
 }
 
 src_test() {
