@@ -67,6 +67,7 @@ src_configure() {
 		--enable-gold \
 		--with-pthreads \
 		\
+		--enable-optimize="-O2" \
 		--enable-jemalloc \
 		--enable-readline \
 		--with-system-nspr \
