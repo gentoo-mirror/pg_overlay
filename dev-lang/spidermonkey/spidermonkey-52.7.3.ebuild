@@ -65,7 +65,6 @@ src_configure() {
 		\
 		--disable-debug-symbols \
 		--enable-gold \
-		--enable-posix-nspr-emulation \
 		--enable-release \
 		--with-pthreads \
 		\
