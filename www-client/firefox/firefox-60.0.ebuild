@@ -20,12 +20,12 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-59.0-patches-01"
+PATCH="${PN}-60.0-patches-0"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_JIT=1
 
-inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.58 \
+inherit check-reqs flag-o-matic toolchain-funcs eutils gnome2-utils mozconfig-v6.60 \
 		pax-utils xdg-utils autotools mozlinguas-v2
 
 DESCRIPTION="Firefox Web Browser"
@@ -38,7 +38,7 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
-SRCHASH=239e434d6d2b
+SRCHASH=ea4f3168c604
 SDIR="release"
 [[ ${PV} = *_beta* ]] && SDIR="beta"
 

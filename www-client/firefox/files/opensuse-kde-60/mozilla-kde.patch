@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  97234138e3aafe66fc7f17c8f530e7c534af2fc2
+# Parent  9cc0c990890e64f69ed068cf1a4534535bcc50a7
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  using namespace mozilla;
  
  #ifdef DEBUG
-@@ -4235,25 +4236,37 @@ Preferences::InitInitialObjects()
+@@ -3868,25 +3869,37 @@ Preferences::InitInitialObjects()
    // application pref files for backwards compatibility.
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -65,7 +65,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  
    // Load jar:$app/omni.jar!/defaults/preferences/*.js
    // or jar:$gre/omni.jar!/defaults/preferences/*.js.
-@@ -4302,17 +4315,17 @@ Preferences::InitInitialObjects()
+@@ -3935,17 +3948,17 @@ Preferences::InitInitialObjects()
        }
  
        nsCOMPtr<nsIFile> path = do_QueryInterface(elem);
@@ -153,12 +153,12 @@ diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpac
 diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloads/moz.build
 --- a/toolkit/components/downloads/moz.build
 +++ b/toolkit/components/downloads/moz.build
-@@ -17,9 +17,13 @@ XPIDL_SOURCES += [
- XPIDL_MODULE = 'downloads'
+@@ -41,10 +41,14 @@ EXTRA_JS_MODULES += [
  
- UNIFIED_SOURCES += [
-     'nsDownloadManager.cpp'
- ]
+ if CONFIG['MOZ_PLACES']:
+     EXTRA_JS_MODULES += [
+         'DownloadHistory.jsm',
+     ]
  
  FINAL_LIBRARY = 'xul'
  
@@ -166,11 +166,12 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
 +    '/toolkit/xre'
 +]
 +
- CXXFLAGS += CONFIG['TK_CFLAGS']
+ with Files('**'):
+     BUG_COMPONENT = ('Toolkit', 'Download Manager')
 diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
 --- a/toolkit/content/jar.mn
 +++ b/toolkit/content/jar.mn
-@@ -67,16 +67,18 @@ toolkit.jar:
+@@ -69,16 +69,18 @@ toolkit.jar:
     content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
     content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
     content/global/bindings/datekeeper.js       (widgets/datekeeper.js)
@@ -193,7 +194,7 @@ diff --git a/toolkit/content/widgets/dialog-kde.xml b/toolkit/content/widgets/di
 new file mode 100644
 --- /dev/null
 +++ b/toolkit/content/widgets/dialog-kde.xml
-@@ -0,0 +1,477 @@
+@@ -0,0 +1,478 @@
 +<?xml version="1.0"?>
 +<!-- This Source Code Form is subject to the terms of the Mozilla Public
 +   - License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -209,7 +210,7 @@ new file mode 100644
 +          xmlns:xul="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 +          xmlns:xbl="http://www.mozilla.org/xbl">
 +
-+  <binding id="dialog" extends="chrome://global/content/bindings/general.xml#root-element">
++  <binding id="dialog">
 +    <resources>
 +      <stylesheet src="chrome://global/skin/dialog.css"/>
 +    </resources>
@@ -448,9 +449,9 @@ new file mode 100644
 +          if (!this._mStrBundle) {
 +            // need to create string bundle manually instead of using <xul:stringbundle/>
 +            // see bug 63370 for details
-+            this._mStrBundle = Components.classes["@mozilla.org/intl/stringbundle;1"]
-+                                         .getService(Components.interfaces.nsIStringBundleService)
-+                                         .createBundle("chrome://global/locale/dialog.properties");
++            this._mStrBundle = Cc["@mozilla.org/intl/stringbundle;1"]
++                                 .getService(Ci.nsIStringBundleService)
++                                 .createBundle("chrome://global/locale/dialog.properties");
 +          }
 +          return this._mStrBundle;
 +        ]]></getter>
@@ -625,6 +626,7 @@ new file mode 100644
 +          if (handler != "") {
 +            var fn = new Function("event", handler);
 +            var returned = fn(event);
++            // eslint-disable-next-line mozilla/no-compare-against-boolean-literals
 +            if (returned == false)
 +              noCancel = false;
 +          }
@@ -663,7 +665,7 @@ new file mode 100644
 +      <handler event="focus" phase="capturing">
 +        var btn = this.getButton(this.defaultButton);
 +        if (btn)
-+          btn.setAttribute("default", event.originalTarget == btn || !(event.originalTarget instanceof Components.interfaces.nsIDOMXULButtonElement));
++          btn.setAttribute("default", event.originalTarget == btn || !(event.originalTarget instanceof Ci.nsIDOMXULButtonElement));
 +      </handler>
 +#endif
 +    </handlers>
@@ -674,7 +676,7 @@ new file mode 100644
 diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downloads/nsHelperAppDlg.js
 --- a/toolkit/mozapps/downloads/nsHelperAppDlg.js
 +++ b/toolkit/mozapps/downloads/nsHelperAppDlg.js
-@@ -626,17 +626,17 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -627,17 +627,17 @@ nsUnknownContentTypeDialog.prototype = {
        else
          typeString = mimeInfo.MIMEType;
      }
@@ -693,7 +695,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
    },
  
    // Returns true if opening the default application makes sense.
-@@ -800,17 +800,17 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -801,17 +801,17 @@ nsUnknownContentTypeDialog.prototype = {
        switch (this.dialogElement("openHandler").selectedIndex) {
        case 0:
          // No app need be specified in this case.
@@ -712,7 +714,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
      this.mDialog.document.documentElement.getButton("accept").disabled = !ok;
    },
  
-@@ -1065,30 +1065,57 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -1066,30 +1066,57 @@ nsUnknownContentTypeDialog.prototype = {
  
        if (params.handlerApp &&
            params.handlerApp.executable &&
@@ -720,15 +722,15 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
          // Remember the file they chose to run.
          this.chosenApp = params.handlerApp;
        }
-     } else if ("@mozilla.org/applicationchooser;1" in Components.classes) {
--      var nsIApplicationChooser = Components.interfaces.nsIApplicationChooser;
--      var appChooser = Components.classes["@mozilla.org/applicationchooser;1"]
--                                 .createInstance(nsIApplicationChooser);
+     } else if ("@mozilla.org/applicationchooser;1" in Cc) {
+-      var nsIApplicationChooser = Ci.nsIApplicationChooser;
+-      var appChooser = Cc["@mozilla.org/applicationchooser;1"]
+-                         .createInstance(nsIApplicationChooser);
 -      appChooser.init(this.mDialog, this.dialogElement("strings").getString("chooseAppFilePickerTitle"));
 -      var contentTypeDialogObj = this;
 -      let appChooserCallback = function appChooserCallback_done(aResult) {
 -        if (aResult) {
--           contentTypeDialogObj.chosenApp = aResult.QueryInterface(Components.interfaces.nsILocalHandlerApp);
+-           contentTypeDialogObj.chosenApp = aResult.QueryInterface(Ci.nsILocalHandlerApp);
 +      // handle the KDE case which is implemented in the filepicker
 +      // therefore falling back to Gtk2 like behaviour if KDE is running
 +      // FIXME this should be better handled in the nsIApplicationChooser
@@ -750,7 +752,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
 +          // Remember the file they chose to run.
 +          var localHandlerApp =
 +            Components.classes["@mozilla.org/uriloader/local-handler-app;1"].
-+                       createInstance(Components.interfaces.nsILocalHandlerApp);
++                      createInstance(Components.interfaces.nsILocalHandlerApp);
 +          localHandlerApp.executable = fp.file;
 +          this.chosenApp = localHandlerApp;
          }
@@ -760,14 +762,14 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
 -      // The finishChooseApp is called from appChooserCallback
 -      return;
 +      } else {
-+        var nsIApplicationChooser = Components.interfaces.nsIApplicationChooser;
-+        var appChooser = Components.classes["@mozilla.org/applicationchooser;1"]
-+                                   .createInstance(nsIApplicationChooser);
++        var nsIApplicationChooser = Ci.nsIApplicationChooser;
++        var appChooser = Cc["@mozilla.org/applicationchooser;1"]
++                           .createInstance(nsIApplicationChooser);
 +        appChooser.init(this.mDialog, this.dialogElement("strings").getString("chooseAppFilePickerTitle"));
 +        var contentTypeDialogObj = this;
 +        let appChooserCallback = function appChooserCallback_done(aResult) {
 +          if (aResult) {
-+             contentTypeDialogObj.chosenApp = aResult.QueryInterface(Components.interfaces.nsILocalHandlerApp);
++             contentTypeDialogObj.chosenApp = aResult.QueryInterface(Ci.nsILocalHandlerApp);
 +          }
 +          contentTypeDialogObj.finishChooseApp();
 +        };
@@ -776,9 +778,9 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
 +        return;
 +      }
      } else {
-       var nsIFilePicker = Components.interfaces.nsIFilePicker;
-       var fp = Components.classes["@mozilla.org/filepicker;1"]
-                          .createInstance(nsIFilePicker);
+       var nsIFilePicker = Ci.nsIFilePicker;
+       var fp = Cc["@mozilla.org/filepicker;1"]
+                  .createInstance(nsIFilePicker);
        fp.init(this.mDialog,
                this.dialogElement("strings").getString("chooseAppFilePickerTitle"),
                nsIFilePicker.modeOpen);
@@ -880,7 +882,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -61,17 +61,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+@@ -65,17 +65,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
          '../components/printingui',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
@@ -1879,7 +1881,7 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
  
    GtkFileChooserAction action = GetGtkFileChooserAction(mMode);
  
-@@ -603,8 +630,233 @@ nsFilePicker::Done(GtkWidget* file_choos
+@@ -608,8 +635,233 @@ nsFilePicker::Done(GtkWidget* file_choos
    if (mCallback) {
      mCallback->Done(result);
      mCallback = nullptr;
@@ -2158,7 +2160,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    const char* directive;
    int argc;
  
-@@ -466,16 +467,17 @@ ParseManifest(NSLocationType aType, File
+@@ -444,16 +445,17 @@ ParseManifest(NSLocationType aType, File
    NS_NAMED_LITERAL_STRING(kRemoteEnabled, "remoteenabled");
    NS_NAMED_LITERAL_STRING(kRemoteRequired, "remoterequired");
    NS_NAMED_LITERAL_STRING(kApplication, "application");
@@ -2176,7 +2178,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    NS_NAMED_LITERAL_STRING(kMain, "main");
    NS_NAMED_LITERAL_STRING(kContent, "content");
  
-@@ -526,44 +528,49 @@ ParseManifest(NSLocationType aType, File
+@@ -499,44 +501,49 @@ ParseManifest(NSLocationType aType, File
          CopyUTF8toUTF16(s, abi);
          abi.Insert(char16_t('_'), 0);
          abi.Insert(osTarget, 0);
@@ -2226,7 +2228,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
      process = kMain;
    }
  
-@@ -666,25 +673,27 @@ ParseManifest(NSLocationType aType, File
+@@ -638,25 +645,27 @@ ParseManifest(NSLocationType aType, File
      TriState stOsVersion = eUnspecified;
      TriState stOs = eUnspecified;
      TriState stABI = eUnspecified;
@@ -2254,7 +2256,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        }
  
  #if defined(MOZ_WIDGET_ANDROID)
-@@ -729,16 +738,17 @@ ParseManifest(NSLocationType aType, File
+@@ -701,16 +710,17 @@ ParseManifest(NSLocationType aType, File
      }
  
      if (!ok ||
@@ -2292,7 +2294,7 @@ diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
 diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
 --- a/xpcom/io/nsLocalFileUnix.cpp
 +++ b/xpcom/io/nsLocalFileUnix.cpp
-@@ -45,16 +45,17 @@
+@@ -46,16 +46,17 @@
  #include "prproces.h"
  #include "nsIDirectoryEnumerator.h"
  #include "nsISimpleEnumerator.h"
@@ -2310,7 +2312,7 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "prmem.h"
  #include "plbase64.h"
  
-@@ -1934,59 +1935,74 @@ nsLocalFile::SetPersistentDescriptor(con
+@@ -1955,59 +1956,74 @@ nsLocalFile::SetPersistentDescriptor(con
    return InitWithNativePath(aPersistentDescriptor);
  #endif
  }
