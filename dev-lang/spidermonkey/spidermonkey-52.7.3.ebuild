@@ -59,6 +59,11 @@ src_configure() {
 	cd "${BUILDDIR}" || die
 
 	econf \
+		--disable-debug-symbols \
+		--enable-strip \
+		--enable-gold \
+		--enable-shared-js \
+		--with-system-zlib \
 		--enable-jemalloc \
 		--enable-readline \
 		--with-system-nspr \
