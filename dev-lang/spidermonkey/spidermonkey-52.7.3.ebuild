@@ -16,8 +16,8 @@ IUSE="debug +jit minimal +system-icu test"
 
 RESTRICT="ia64? ( test )"
 
-S="${WORKDIR}/firefox-${PV}esr/js/src"
-BUILDDIR="${S}"
+S="${WORKDIR}/firefox-${PV}esr"
+BUILDDIR="${S}/js/src"
 
 RDEPEND=">=dev-libs/nspr-4.13.1
 	virtual/libffi
@@ -34,7 +34,7 @@ pkg_setup(){
 src_prepare() {
 	# remove patches integrated by upstream
 
-	#eapply "${FILESDIR}"/${PN}-52-baseconfig.patch
+	eapply "${FILESDIR}"/${PN}-52-baseconfig.patch
 	eapply "${FILESDIR}"/fix-soname.patch
 	eapply "${FILESDIR}"/copy-headers.patch
 	eapply "${FILESDIR}"/disable-mozglue.patch
