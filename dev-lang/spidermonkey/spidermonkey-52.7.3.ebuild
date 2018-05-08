@@ -63,7 +63,7 @@ src_configure() {
 		--enable-shared-js \
 		--enable-pie \
 		\
-		--disable-debug-symbols
+		--disable-debug-symbols \
 		--enable-gold \
 		--with-pthreads \
 		\
