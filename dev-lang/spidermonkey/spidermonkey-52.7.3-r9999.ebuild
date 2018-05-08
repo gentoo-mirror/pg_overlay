@@ -58,19 +58,19 @@ src_configure() {
 	cd "${BUILDDIR}" || die
 
 	econf \
-		#--with-system-zlib \
-		#--enable-strip \
-		#--enable-shared-js \
-		#--enable-pie \
-		#\
-		#--disable-debug-symbols \
-		#--enable-gold \
-		#--with-pthreads \
-		#\
+		--with-system-zlib \
+		--enable-strip \
+		--enable-shared-js \
+		--enable-pie \
+		\
+		--disable-debug-symbols \
+		--enable-gold \
+		--with-pthreads \
+		\
 		--enable-jemalloc \
 		--enable-readline \
 		--with-system-nspr \
-		#--enable-optimize \
+		--enable-optimize \
 		--with-intl-api \
 		$(use_with system-icu) \
 		$(use_enable debug) \
@@ -141,7 +141,7 @@ src_install() {
 		rm -f "${ED}"usr/bin/js${SLOT}
 	fi
 
-	dosym "${ED}"${get_libdir}/libmozjs-${SLOT}.so "${ED}"${get_libdir}/libmozjs-${SLOT}.so.0
+	dosym "${ED}"usr/$(get_libdir)/libmozjs-${SLOT}.so "${ED}"usr/$(get_libdir)/libmozjs-${SLOT}.so.0
 
 	# We can't actually disable building of static libraries
 	# They're used by the tests and in a few other places
