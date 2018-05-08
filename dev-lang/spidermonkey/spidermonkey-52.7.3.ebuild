@@ -34,7 +34,6 @@ pkg_setup(){
 src_prepare() {
 	# remove patches integrated by upstream
 
-	#eapply "${FILESDIR}"/${PN}-52-baseconfig.patch
 	eapply "${FILESDIR}"/fix-soname.patch
 	eapply "${FILESDIR}"/copy-headers.patch
 	eapply "${FILESDIR}"/disable-mozglue.patch
@@ -60,10 +59,11 @@ src_configure() {
 
 	econf \
 		--disable-debug-symbols \
-		--enable-strip \
+		--disable-strip \
 		--enable-gold \
 		--enable-shared-js \
 		--with-system-zlib \
+		--enable-pie \
 		--enable-jemalloc \
 		--enable-readline \
 		--with-system-nspr \
