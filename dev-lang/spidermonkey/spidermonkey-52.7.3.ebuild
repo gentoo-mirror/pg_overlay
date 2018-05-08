@@ -43,7 +43,6 @@ src_prepare() {
 	eapply "${WORKDIR}/${PN}"
 
 	eapply "${FILESDIR}"/fix-soname.patch
-	eapply "${FILESDIR}"/include-configure-script.patch
 
 	eapply_user
 
