@@ -63,15 +63,6 @@ src_configure() {
 	cd "${BUILDDIR}" || die
 
 	econf \
-		--with-system-zlib \
-		--enable-shared-js \
-		--enable-pie \
-		\
-		--disable-debug-symbols \
-		--enable-gold \
-		--enable-release \
-		--with-pthreads \
-		\
 		--enable-optimize="-O2" \
 		--enable-jemalloc \
 		--enable-readline \
@@ -122,11 +113,7 @@ src_compile() {
 			host_jsoplengen.o || die
 	fi
 
-	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
-	emake \
-		MOZ_OPTIMIZE_FLAGS="" MOZ_DEBUG_FLAGS="" \
-		HOST_OPTIMIZE_FLAGS="" MODULE_OPTIMIZE_FLAGS="" \
-		MOZ_PGO_OPTIMIZE_FLAGS=""
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" emake
 }
 
 src_test() {
