@@ -19,6 +19,7 @@ fixes/gpu-timeout.patch
 fixes/duplicate-name.patch
 fixes/overloaded-call.patch
 fixes/incomplete-types.patch
+fixes/ambiguous-aliases.patch
 fixes/connection-message.patch
 fixes/skia_buildfix.patch
 
