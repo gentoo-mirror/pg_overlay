@@ -38,13 +38,13 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
-SRCHASH=ea4f3168c604
+SRCHASH=3202d5534730
 SDIR="release"
 [[ ${PV} = *_beta* ]] && SDIR="beta"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
-	https://hg.mozilla.org/releases/mozilla-${SDIR}/archive/${SRCHASH}.tar.bz2 -> firefox-${MOZ_PV}.source.tar.bz2
+	${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz
 	${PATCH_URIS[@]}"
 
 ASM_DEPEND=">=dev-lang/yasm-1.1"
@@ -64,7 +64,7 @@ DEPEND="${RDEPEND}
 	amd64? ( ${ASM_DEPEND} virtual/opengl )
 	x86? ( ${ASM_DEPEND} virtual/opengl )"
 
-S="${WORKDIR}"/mozilla-${SDIR}-${SRCHASH}
+S="${WORKDIR}/firefox-${PV%_*}"
 
 QA_PRESTRIPPED="usr/lib*/${PN}/firefox"
 
@@ -115,6 +115,7 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
+	eapply "${FILESDIR}"/${PN}-ffmpeg4.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -171,8 +172,7 @@ src_prepare() {
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
-
-	#for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i"; done
+	for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
@@ -207,7 +207,7 @@ src_configure() {
 	mozconfig_use_enable jack
 
 	# Enable/Disable eme support
-	mozconfig_use_enable eme-free eme
+	use eme-free && mozconfig_annotate '+eme-free' --disable-eme
 
 	# It doesn't compile on alpha without this LDFLAGS
 	use alpha && append-ldflags "-Wl,--no-relax"

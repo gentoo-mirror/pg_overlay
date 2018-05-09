@@ -1,3 +1,13 @@
+
+# HG changeset patch
+# User Jean-Yves Avenard <jyavenard@mozilla.com>
+# Date 1524125955 -7200
+# Node ID 573a198b7fdf076e27eb1f468162df101246d7b3
+# Parent  b0c68c17915159517e82c04b26801ff3869f61be
+Bug 1435212 - Add support for FFmpeg 4.0. r=bryce
+
+MozReview-Commit-ID: JlDFSUyGQu
+
 diff --git a/dom/media/platforms/ffmpeg/FFmpegDataDecoder.cpp b/dom/media/platforms/ffmpeg/FFmpegDataDecoder.cpp
 --- a/dom/media/platforms/ffmpeg/FFmpegDataDecoder.cpp
 +++ b/dom/media/platforms/ffmpeg/FFmpegDataDecoder.cpp
