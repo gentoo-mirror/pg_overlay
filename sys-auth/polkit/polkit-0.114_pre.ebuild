@@ -69,7 +69,7 @@ pkg_setup() {
 src_prepare() {
 	default
 
-	#eapply "${FILESDIR}"/jsauthority_pass_s_format_string_to_remaining_report_function.patch
+	eapply "${FILESDIR}"/jsauthority_pass_s_format_string_to_remaining_report_function.patch
 
 	sed -i -e 's|unix-group:wheel|unix-user:0|' src/polkitbackend/*-default.rules || die #401513
 
@@ -106,6 +106,7 @@ src_configure() {
 		--with-os-type=gentoo
 	)
 	econf "${myeconfargs[@]}"
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 }
 
 src_compile() {
