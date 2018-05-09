@@ -106,6 +106,7 @@ src_configure() {
 		--with-os-type=gentoo
 	)
 	econf "${myeconfargs[@]}"
+	sed -i -e 's/ -shared / -Wl,-O1,--as-needed\0/g' libtool
 }
 
 src_compile() {
