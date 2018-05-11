@@ -18,7 +18,7 @@ SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="alsa debug doc headless java libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
+IUSE="alsa debug doc headless java libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc opus"
 
 RDEPEND="!app-emulation/virtualbox-bin
 	~app-emulation/virtualbox-modules-${PV}
@@ -220,6 +220,7 @@ src_configure() {
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
 		$(usex vnc --enable-vnc '')
+		$(usex opus --enable-system-libopus '')
 	)
 	if ! use headless ; then
 		myconf+=(
