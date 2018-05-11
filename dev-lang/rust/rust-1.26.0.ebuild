@@ -119,7 +119,6 @@ src_configure() {
 		codegen-units = 1
 		debug-assertions = $(toml_usex debug)
 		debuginfo = $(toml_usex debug)
-		debuginfo-tools = $(toml_usex debug)
 		use-jemalloc = $(toml_usex jemalloc)
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
