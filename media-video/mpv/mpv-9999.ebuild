@@ -29,7 +29,7 @@ DOCS+=( README.md etc/{mpv,input}.conf DOCS/{client-api,interface}-changes.rst)
 LICENSE="LGPL-2.1+ GPL-2+ BSD ISC samba? ( GPL-3+ )"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
-	dvd +egl gbm +iconv jack javascript jpeg lcms +libass libav libcaca
+	dvd +egl encode gbm +iconv jack javascript jpeg lcms +libass libav libcaca
 	libmpv +lua luajit openal +opengl oss pulseaudio raspberry-pi rubberband
 	samba sdl selinux test tools +uchardet v4l vaapi vdpau wayland +X +xv zlib
 	zsh-completion"
@@ -58,8 +58,8 @@ REQUIRED_USE="
 "
 
 COMMON_DEPEND="
-	!libav? ( >=media-video/ffmpeg-4.0:0=[threads,vaapi?,vdpau?] )
-	libav? ( >=media-video/libav-13:0=[threads,vaapi?,vdpau?] )
+	!libav? ( >=media-video/ffmpeg-4.0:0=[encode?,threads,vaapi?,vdpau?] )
+	libav? ( ~media-video/libav-9999:0=[encode?,threads,vaapi?,vdpau?] )
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.0.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
@@ -98,8 +98,8 @@ COMMON_DEPEND="
 	vdpau? ( x11-libs/libvdpau )
 	wayland? (
 		>=dev-libs/wayland-1.6.0
+		>=dev-libs/wayland-protocols-1.12
 		>=x11-libs/libxkbcommon-0.3.0
-		dev-libs/wayland-protocols
 	)
 	X? (
 		x11-libs/libX11
@@ -177,6 +177,7 @@ src_configure() {
 		$(use_enable libass)
 		$(use_enable libass libass-osd)
 		$(use_enable zlib)
+		$(use_enable encode encoding)
 		$(use_enable bluray libbluray)
 		$(use_enable dvd dvdread)
 		$(use_enable dvd dvdnav)
