@@ -1,0 +1,29 @@
+--- a/patches/06_all_regenerate_platform-specific_modules.patch	2017-09-19 17:33:20.000000000 +0300
++++ b/patches/06_all_regenerate_platform-specific_modules.patch	2018-05-08 15:46:44.420477210 +0300
+@@ -41,11 +41,11 @@ https://bugs.python.org/issue12619
+  
+  # Default target
+  all:		@DEF_MAKE_ALL_RULE@
+--build_all:	$(BUILDPYTHON) oldsharedmods sharedmods gdbhooks
+-+build_all:	$(BUILDPYTHON) oldsharedmods sharedmods platformspecificmods gdbhooks
++-build_all:	check-clean-src $(BUILDPYTHON) oldsharedmods sharedmods gdbhooks
+++build_all:	check-clean-src $(BUILDPYTHON) oldsharedmods sharedmods platformspecificmods gdbhooks
+  
+- # Compile a binary with profile guided optimization.
+- profile-opt:
++ # Check that the source is clean when building out of source.
++ check-clean-src:
+ @@ -518,6 +518,32 @@
+  		_TCLTK_INCLUDES='$(TCLTK_INCLUDES)' _TCLTK_LIBS='$(TCLTK_LIBS)' \
+  		$(PYTHON_FOR_BUILD) $(srcdir)/setup.py $$quiet build
+@@ -116,8 +116,8 @@ https://bugs.python.org/issue12619
+  Python/thread.o: @THREADHEADERS@
+  
+  # Declare targets that aren't real files
+--.PHONY: all build_all sharedmods oldsharedmods test quicktest memtest
+-+.PHONY: all build_all sharedmods oldsharedmods platformspecificmods test quicktest memtest
++-.PHONY: all build_all sharedmods check-clean-src oldsharedmods test quicktest memtest
+++.PHONY: all build_all sharedmods check-clean-src oldsharedmods platformspecificmods test quicktest memtest
+  .PHONY: install altinstall oldsharedinstall bininstall altbininstall
+  .PHONY: maninstall libinstall inclinstall libainstall sharedinstall
+  .PHONY: frameworkinstall frameworkinstallframework frameworkinstallstructure
