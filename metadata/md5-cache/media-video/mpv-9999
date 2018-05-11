@@ -4,4 +4,4 @@ EAPI=6
 KEYWORDS=~amd64 ~arm64 ~x86
 RDEPEND=|| ( =dev-lang/rust-1.26.0* =dev-lang/rust-bin-1.26.0* )
 SLOT=0
-_md5_=aba5284c147edebba31fbb24124ab1ae
+_md5_=2636b06d200f9ef233635a4df30e4f29
