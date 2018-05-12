@@ -25,11 +25,11 @@ DEPEND="
 RDEPEND=""
 
 PATCHES=(
-	"${FILESDIR}/${PN}-unknown-configure-opt.patch"
+	#"${FILESDIR}/${PN}-unknown-configure-opt.patch"
 	"${FILESDIR}/${PN}-0.1.5-gentoo-docdir.patch"
-	"${FILESDIR}/${PN}-0.1.9998_pre20120806-qa.patch"
-	"${FILESDIR}/${PN}-0.1.9998_pre20110817-kash-link-pthread.patch"
-	"${FILESDIR}/${PN}-0.1.9998_pre20171020-gold.patch"
+	#"${FILESDIR}/${PN}-0.1.9998_pre20120806-qa.patch"
+	#"${FILESDIR}/${PN}-0.1.9998_pre20110817-kash-link-pthread.patch"
+	#"${FILESDIR}/${PN}-0.1.9998_pre20171020-gold.patch"
 )
 
 src_prepare() {
@@ -37,7 +37,7 @@ src_prepare() {
 
 	default
 
-	mv src/kmk/configure.{in,ac} || die
+	#mv src/kmk/configure.{in,ac} || die
 
 	# Add a file with the svn revision this package was pulled from
 	printf '%s\n' "KBUILD_SVN_REV := $(get_version_component_range 4)" \
