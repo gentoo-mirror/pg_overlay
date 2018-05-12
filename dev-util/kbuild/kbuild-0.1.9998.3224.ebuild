@@ -37,7 +37,7 @@ src_prepare() {
 
 	default
 
-	mv src/kmk/configure.{in,ac} || die
+	#mv src/kmk/configure.{in,ac} || die
 
 	# Add a file with the svn revision this package was pulled from
 	printf '%s\n' "KBUILD_SVN_REV := $(get_version_component_range 4)" \
