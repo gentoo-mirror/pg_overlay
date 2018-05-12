@@ -25,11 +25,11 @@ DEPEND="
 RDEPEND=""
 
 PATCHES=(
-	#"${FILESDIR}/${PN}-unknown-configure-opt.patch"
+	"${FILESDIR}/${PN}-unknown-configure-opt.patch"
 	"${FILESDIR}/${PN}-0.1.5-gentoo-docdir.patch"
-	#"${FILESDIR}/${PN}-0.1.9998_pre20120806-qa.patch"
-	#"${FILESDIR}/${PN}-0.1.9998_pre20110817-kash-link-pthread.patch"
-	#"${FILESDIR}/${PN}-0.1.9998_pre20171020-gold.patch"
+	"${FILESDIR}/${PN}-0.1.9998_pre20120806-qa.patch"
+	"${FILESDIR}/${PN}-0.1.9998_pre20110817-kash-link-pthread.patch"
+	"${FILESDIR}/${PN}-0.1.9998_pre20171020-gold.patch"
 )
 
 src_prepare() {
