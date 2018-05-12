@@ -20,7 +20,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-60.0-patches-0"
+PATCH="${PN}-60.0-patches-01"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_JIT=1
@@ -38,7 +38,7 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist +eme-free +gmp-autoupdate hardened +hwaccel jack screenshot selinux test clang jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
-SRCHASH=3202d5534730
+#SRCHASH=3202d5534730
 SDIR="release"
 [[ ${PV} = *_beta* ]] && SDIR="beta"
 
@@ -52,8 +52,8 @@ ASM_DEPEND=">=dev-lang/yasm-1.1"
 RDEPEND="
 	system-icu? ( >=dev-libs/icu-60.2 )
 	jack? ( virtual/jack )
-	>=dev-libs/nss-3.35
-	>=dev-libs/nspr-4.18
+	>=dev-libs/nss-3.36.1
+	>=dev-libs/nspr-4.19
 	selinux? ( sec-policy/selinux-mozilla )
 	kde? ( kde-apps/kdialog:5
 		kde-misc/kmozillahelper )"
@@ -115,7 +115,6 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
-	eapply "${FILESDIR}"/${PN}-ffmpeg4.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
