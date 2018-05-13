@@ -64,7 +64,7 @@ src_install() {
 	newinitd "${FILESDIR}/${PN}-1.3-initd" ${PN}
 	newpamd "${FILESDIR}/${PN}-1.4.3-pamd" crond
 
-	systemd_newunit contrib/cronie.systemd cronie.service
+	#systemd_newunit contrib/cronie.systemd cronie.service
 
 	if use anacron ; then
 		local anacrondir="/var/spool/anacron"
