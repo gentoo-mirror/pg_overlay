@@ -132,7 +132,6 @@ Some web pages may require additional fonts to display properly.
 Try installing some of the following packages if some characters
 are not displayed properly:
 - media-fonts/arphicfonts
-- media-fonts/bitstream-cyberbit
 - media-fonts/droid
 - media-fonts/ipamonafont
 - media-fonts/noto
@@ -600,6 +599,9 @@ src_configure() {
 	# Bug 491582.
 	export TMPDIR="${WORKDIR}/temp"
 	mkdir -p -m 755 "${TMPDIR}" || die
+
+	# https://bugs.gentoo.org/654216
+	addpredict /dev/dri/
 
 	if ! use system-ffmpeg; then
 		local build_ffmpeg_args=""
