@@ -49,7 +49,7 @@ multilib_src_configure() {
 	local myeconfargs=(
 		--with-speex="$(usex speex lib no)"
 		$(use_enable arcam_av arcamav)
-		$(use_enable ffmpeg avcodec)
+		$(use_enable ffmpeg avlib)
 		$(use_enable jack)
 		$(use_enable libsamplerate samplerate)
 		$(use_enable mix)
