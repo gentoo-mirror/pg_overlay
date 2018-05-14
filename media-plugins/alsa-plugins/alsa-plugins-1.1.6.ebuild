@@ -30,6 +30,10 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
+PATCHES=(
+	"${FILESDIR}/plugin-config.patch"
+)
+
 src_prepare() {
 	default
 
@@ -68,7 +72,7 @@ multilib_src_install_all() {
 	dodoc upmix.txt vdownmix.txt README-pcm-oss
 	use jack && dodoc README-jack
 	use libsamplerate && dodoc samplerate.txt
-	#use ffmpeg && dodoc lavcrate.txt a52.txt
+	use ffmpeg && dodoc lavcrate.txt a52.txt
 
 	if use pulseaudio; then
 		dodoc README-pulse
