@@ -201,7 +201,7 @@ src_prepare() {
 	eapply_user
 
 	eapply "${FILESDIR}/python3_support.patch"
-	#eapply "${FILESDIR}/qt-5.11.patch"
+	eapply "${FILESDIR}/qt-5.11.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
