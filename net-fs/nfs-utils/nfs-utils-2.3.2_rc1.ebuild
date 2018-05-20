@@ -66,6 +66,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
 	"${FILESDIR}"/mount_nfs_Fix_auto_protocol_negotiation.patch
 	"${FILESDIR}"/nfsd_Set_default_minor_versions.patch
+	"${FILESDIR}"/${PN}-2.3.1-no-rpcgen.patch
 )
 
 src_prepare() {

@@ -1,0 +1,16 @@
+diff -up nfs-utils-2.3.1/tools/Makefile.am.orig nfs-utils-2.3.1/tools/Makefile.am
+--- a/tools/Makefile.am	2017-12-20 10:40:36.000000000 -0500
++++ b/tools/Makefile.am	2018-05-16 08:08:13.829718208 -0400
+@@ -1,11 +1,5 @@
+ ## Process this file with automake to produce Makefile.in
+ 
+-OPTDIRS =
+-
+-if CONFIG_RPCGEN
+-OPTDIRS += rpcgen
+-endif
+-
+-SUBDIRS = locktest rpcdebug nlmtest mountstats nfs-iostat $(OPTDIRS)
++SUBDIRS = locktest rpcdebug nlmtest mountstats nfs-iostat
+ 
+ MAINTAINERCLEANFILES = Makefile.in
