@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -15,7 +15,7 @@ if [[ "${PV}" = *_rc* ]] ; then
 	S="${WORKDIR}/${PN}-${PN}-${MY_PV}"
 else
 	SRC_URI="mirror://sourceforge/nfs/${P}.tar.bz2"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+	KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86"
 fi
 
 LICENSE="GPL-2"
@@ -65,6 +65,8 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.1.4-mtab-sym.patch
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
 	"${FILESDIR}"/${P}-svcgssd_undefined_reference.patch #641912
+	"${FILESDIR}"/mount_nfs_Fix_auto_protocol_negotiation.patch
+	"${FILESDIR}"/nfsd_Set_default_minor_versions.patch
 )
 
 src_prepare() {
@@ -81,22 +83,23 @@ src_configure() {
 	export libsqlite3_cv_is_recent=yes # Our DEPEND forces this.
 	export ac_cv_header_keyutils_h=$(usex nfsidmap)
 	local myeconfargs=(
-		--with-statedir="${EPREFIX}"/var/lib/nfs
+		--with-statedir="${EPREFIX%/}"/var/lib/nfs
 		--enable-tirpc
-		--with-tirpcinclude="${EPREFIX}"/usr/include/tirpc/
-		--with-pluginpath="${EPREFIX}"/usr/$(get_libdir)/libnfsidmap
+		--with-tirpcinclude="${EPREFIX%/}"/usr/include/tirpc/
+		--with-pluginpath="${EPREFIX%/}"/usr/$(get_libdir)/libnfsidmap
 		--with-systemd="$(systemd_get_systemunitdir)"
+		--without-gssglue
+		$(use_enable caps)
+		$(use_enable ipv6)
+		$(use_enable kerberos gss)
+		$(use_enable kerberos svcgss)
+		$(use_enable ldap)
 		$(use_enable libmount libmount-mount)
-		$(use_with tcpd tcp-wrappers)
 		$(use_enable nfsdcld nfsdcltrack)
 		$(use_enable nfsv4)
 		$(use_enable nfsv41)
-		$(use_enable ipv6)
-		$(use_enable caps)
 		$(use_enable uuid)
-		$(use_enable kerberos gss)
-		$(use_enable kerberos svcgss)
-		--without-gssglue
+		$(use_with tcpd tcp-wrappers)
 	)
 	econf "${myeconfargs[@]}"
 }
@@ -152,7 +155,7 @@ src_install() {
 	local systemd_systemunitdir="$(systemd_get_systemunitdir)"
 	sed -i \
 		-e 's:/usr/sbin/rpc.statd:/sbin/rpc.statd:' \
-		"${ED%/}${systemd_systemunitdir}"/* # || die
+		"${ED%/}${systemd_systemunitdir}"/* #|| die
 
 	keepdir /var/lib/nfs #368505
 	keepdir /var/lib/nfs/v4recovery #603628
