@@ -11,7 +11,6 @@ dev-python/python-mpd2 9999: Python MPD client library
 media-fonts/unifont 10.0.07: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-sound/pulseaudio 11.99.1: A networked sound server with an advanced plugin system
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
-net-fs/nfs-utils 2.3.1-r3: NFS client and server daemons
 net-libs/libtorrent 0.13.6: BitTorrent library written in C++ for *nix
 net-p2p/deluge 1.3.15-r2: BitTorrent client with a client/server model
 net-p2p/rtorrent 0.9.6: BitTorrent Client using libtorrent

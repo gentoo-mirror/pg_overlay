@@ -29,13 +29,6 @@ media-sound/pulseaudio:systemd - Build with sys-apps/systemd support to replace 
 media-sound/pulseaudio:webrtc-aec - Uses the webrtc.org AudioProcessing library for enhancing VoIP calls greatly in applications that support it by performing acoustic echo cancellation, analog gain control, noise suppression and other processing.
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
-net-fs/nfs-utils:ldap - Add ldap support
-net-fs/nfs-utils:libmount - Link mount.nfs with libmount
-net-fs/nfs-utils:nfsdcld - Enable nfsdcld NFSv4 clientid tracking daemon
-net-fs/nfs-utils:nfsidmap - Enable support for newer nfsidmap helper
-net-fs/nfs-utils:nfsv4 - Enable support for NFSv4
-net-fs/nfs-utils:nfsv41 - Enable support for NFSv4.1
-net-fs/nfs-utils:uuid - Support UUID lookups in rpc.mountd
 net-p2p/deluge:console - Enable default console UI
 net-p2p/deluge:linguas_iu - Inuktitut locale
 net-p2p/deluge:linguas_nap - Neapolitan locale
