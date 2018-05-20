@@ -100,7 +100,6 @@ src_configure() {
 		$(use_enable nfsv41)
 		$(use_enable uuid)
 		$(use_with tcpd tcp-wrappers)
-		--with-rpcgen=internal
 	)
 	econf "${myeconfargs[@]}"
 }
