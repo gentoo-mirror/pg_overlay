@@ -64,7 +64,7 @@ DEPEND="${DEPEND_COMMON}
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.1.4-mtab-sym.patch
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
-	"${FILESDIR}"/${P}-svcgssd_undefined_reference.patch #641912
+	"${FILESDIR}"/${PN}-2.3.1-svcgssd_undefined_reference.patch #641912
 	"${FILESDIR}"/mount_nfs_Fix_auto_protocol_negotiation.patch
 	"${FILESDIR}"/nfsd_Set_default_minor_versions.patch
 )
