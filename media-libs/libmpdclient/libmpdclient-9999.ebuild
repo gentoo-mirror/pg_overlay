@@ -15,13 +15,15 @@ KEYWORDS=""
 IUSE="doc examples static test"
 
 RDEPEND=""
-DEPEND="doc? ( app-doc/doxygen )
-		test? ( dev-libs/check )
+DEPEND="
+	doc? ( app-doc/doxygen )
+	test? ( dev-libs/check )
 "
 
 src_prepare() {
 	default
-	sed -e "s:@top_srcdir@:.:" -i doc/doxygen.conf.in
+
+	sed -i "s:@top_srcdir@:.:" doc/doxygen.conf.in || die
 
 	# meson doesn't support setting docdir
 	sed -e "/^docdir =/s/meson.project_name()/'${PF}'/" \
@@ -40,6 +42,7 @@ src_configure() {
 
 src_install() {
 	meson_src_install
+
 	use examples && dodoc src/example.c
 	use doc || rm -rf "${ED}"/usr/share/doc/${PF}/html
 }
