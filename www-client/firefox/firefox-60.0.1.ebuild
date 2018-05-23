@@ -290,6 +290,7 @@ src_configure() {
 	mozconfig_annotate '' --without-debug-label
 
 	# Enable good features
+	mozconfig_annotate '' --enable-system-cairo
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-pie
 	mozconfig_annotate '' --enable-rust-simd
