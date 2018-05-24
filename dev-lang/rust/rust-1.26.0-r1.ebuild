@@ -139,11 +139,6 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		[target.${rust_target}]
-		cc = "$(tc-getBUILD_CC)"
-		cxx = "$(tc-getBUILD_CXX)"
-		linker = "$(tc-getCC)"
-		ar = "$(tc-getAR)"
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
