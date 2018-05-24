@@ -3,9 +3,9 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_5 )
+PYTHON_COMPAT=( python2_7 python3_{5,6} pypy )
 
-inherit multiprocessing python-any-r1 versionator toolchain-funcs
+inherit multiprocessing multilib-build python-any-r1 versionator toolchain-funcs
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
@@ -82,10 +82,19 @@ src_prepare() {
 }
 
 src_configure() {
+	local rust_target="" rust_targets="" rust_target_name arch_cflags
+
+	# Collect rust target names to compile standard libs for all ABIs.
+	for v in $(multilib_get_enabled_abi_pairs); do
+		rust_target_name="CHOST_${v##*.}"
+		rust_targets="${rust_targets},\"${!rust_target_name}\""
+	done
+	rust_targets="${rust_targets#,}"
+
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	local rust_target_name="CHOST_${ARCH}"
-	local rust_target="${!rust_target_name}"
+	rust_target_name="CHOST_${ARCH}"
+	rust_target="${!rust_target_name}"
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
@@ -99,7 +108,7 @@ src_configure() {
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
-		target = ["${rust_target}"]
+		target = [${rust_targets}]
 		cargo = "${rust_stage0_root}/bin/cargo"
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
@@ -114,7 +123,7 @@ src_configure() {
 		profiler = false
 		[install]
 		prefix = "${EPREFIX}/usr"
-		libdir = "$(get_libdir)"
+		libdir = "$(get_libdir)/${P}"
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
@@ -136,19 +145,53 @@ src_configure() {
 		linker = "$(tc-getCC)"
 		ar = "$(tc-getAR)"
 	EOF
+
+	for v in $(multilib_get_enabled_abi_pairs); do
+		rust_target=$(get_abi_CHOST ${v##*.})
+		arch_cflags="$(get_abi_CFLAGS ${v##*.})"
+
+		cat <<- EOF >> "${S}"/config.env
+			CFLAGS_${rust_target}=${arch_cflags}
+		EOF
+
+		cat <<- EOF >> "${S}"/config.toml
+			[target.${rust_target}]
+			cc = "$(tc-getBUILD_CC)"
+			cxx = "$(tc-getBUILD_CXX)"
+			linker = "$(tc-getCC)"
+			ar = "$(tc-getAR)"
+		EOF
+	done
 }
 
 src_compile() {
-	./x.py build --verbose --config="${S}"/config.toml -j$(makeopts_jobs) || die
+	env $(cat "${S}"/config.env)\
+		./x.py build --verbose --config="${S}"/config.toml -j$(makeopts_jobs) || die
 }
 
 src_install() {
+	local rust_target abi_libdir
+
 	env DESTDIR="${D}" ./x.py install || die
 
 	mv "${D}/usr/bin/rustc" "${D}/usr/bin/rustc-${PV}" || die
 	mv "${D}/usr/bin/rustdoc" "${D}/usr/bin/rustdoc-${PV}" || die
 	mv "${D}/usr/bin/rust-gdb" "${D}/usr/bin/rust-gdb-${PV}" || die
 	mv "${D}/usr/bin/rust-lldb" "${D}/usr/bin/rust-lldb-${PV}" || die
+
+	# Copy shared library versions of standard libraries for all targets
+	# into the system's abi-dependent lib directories because the rust
+	# installer only does so for the native ABI.
+	for v in $(multilib_get_enabled_abi_pairs); do
+		if [ ${v##*.} = ${DEFAULT_ABI} ]; then
+			continue
+		fi
+		abi_libdir=$(get_abi_LIBDIR ${v##*.})
+		rust_target=$(get_abi_CHOST ${v##*.})
+		mkdir -p ${D}/usr/${abi_libdir}
+		cp ${D}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib/*.so \
+		   ${D}/usr/${abi_libdir} || die
+	done
 
 	dodoc COPYRIGHT
 
