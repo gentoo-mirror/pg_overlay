@@ -14,7 +14,6 @@ chromium-skia-harmony.patch
 0009-disable-google-ipv6-probes.patch
 0010-disable-gcm-status-check.patch
 0011-add-duckduckgo-search-engine.patch
-0012-branding.patch
 0013-disable-missing-key-warning.patch
 0014-disable-translation-lang-fetch.patch
 0015-disable-update-pings.patch
