@@ -12,7 +12,6 @@ fixes/ps-print.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/connection-message.patch
-fixes/skia_buildfix.patch
 
 warnings/friend.patch
 warnings/printf.patch
