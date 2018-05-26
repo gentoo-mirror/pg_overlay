@@ -11,18 +11,7 @@ disable/device-notifications.patch
 fixes/ps-print.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
-fixes/overloaded-call.patch
-fixes/ambiguous-aliases.patch
 fixes/connection-message.patch
-fixes/skia_buildfix.patch
 
-warnings/friend.patch
-warnings/printf.patch
-warnings/sequence-point.patch
-warnings/initialization.patch
-warnings/unused-typedefs.patch
-
-system/vpx.patch
 system/nspr.patch
 system/event.patch
-system/openjpeg.patch
