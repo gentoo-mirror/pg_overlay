@@ -8,7 +8,6 @@ disable/fuzzers.patch
 disable/welcome-page.patch
 disable/device-notifications.patch
 
-fixes/optional.patch
 fixes/ps-print.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
