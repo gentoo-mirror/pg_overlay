@@ -5,13 +5,9 @@ gn/buildflags.patch
 
 disable/signin.patch
 disable/fuzzers.patch
-disable/avatar-menu.patch
 disable/welcome-page.patch
-disable/google-api-warning.patch
 disable/device-notifications.patch
 
-fixes/mojo.patch
-fixes/optional.patch
 fixes/ps-print.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
