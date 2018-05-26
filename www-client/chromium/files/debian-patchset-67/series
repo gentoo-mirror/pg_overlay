@@ -13,7 +13,6 @@ fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/connection-message.patch
 
-system/vpx.patch
 system/nspr.patch
 system/event.patch
 system/openjpeg.patch
