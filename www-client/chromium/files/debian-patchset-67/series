@@ -3,7 +3,6 @@ gn/parallel.patch
 gn/narrowing.patch
 gn/buildflags.patch
 
-disable/fonts.patch
 disable/signin.patch
 disable/fuzzers.patch
 disable/avatar-menu.patch
