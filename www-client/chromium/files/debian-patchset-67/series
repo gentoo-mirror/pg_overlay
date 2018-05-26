@@ -6,7 +6,6 @@ gn/buildflags.patch
 disable/signin.patch
 disable/fuzzers.patch
 disable/welcome-page.patch
-disable/google-api-warning.patch
 disable/device-notifications.patch
 
 fixes/mojo.patch
