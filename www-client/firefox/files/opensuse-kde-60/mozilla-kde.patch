@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  9cc0c990890e64f69ed068cf1a4534535bcc50a7
+# Parent  d7a4d772ba2afb3ac43e2f2f234ffa55bcf50e70
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -714,7 +714,7 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
      this.mDialog.document.documentElement.getButton("accept").disabled = !ok;
    },
  
-@@ -1066,30 +1066,57 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -1066,30 +1066,60 @@ nsUnknownContentTypeDialog.prototype = {
  
        if (params.handlerApp &&
            params.handlerApp.executable &&
@@ -731,6 +731,12 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
 -      let appChooserCallback = function appChooserCallback_done(aResult) {
 -        if (aResult) {
 -           contentTypeDialogObj.chosenApp = aResult.QueryInterface(Ci.nsILocalHandlerApp);
+-        }
+-        contentTypeDialogObj.finishChooseApp();
+-      };
+-      appChooser.open(this.mLauncher.MIMEInfo.MIMEType, appChooserCallback);
+-      // The finishChooseApp is called from appChooserCallback
+-      return;
 +      // handle the KDE case which is implemented in the filepicker
 +      // therefore falling back to Gtk2 like behaviour if KDE is running
 +      // FIXME this should be better handled in the nsIApplicationChooser
@@ -739,28 +745,26 @@ diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downl
 +                          .getService(Components.interfaces.nsIEnvironment);
 +      if (env.get('KDE_FULL_SESSION') == "true")
 +      {
-+        var nsIFilePicker = Components.interfaces.nsIFilePicker;
-+        var fp = Components.classes["@mozilla.org/filepicker;1"]
-+                           .createInstance(nsIFilePicker);
++        var nsIFilePicker = Ci.nsIFilePicker;
++        var fp = Cc["@mozilla.org/filepicker;1"]
++                    .createInstance(nsIFilePicker);
 +        fp.init(this.mDialog,
 +                this.dialogElement("strings").getString("chooseAppFilePickerTitle"),
 +                nsIFilePicker.modeOpen);
 +
 +        fp.appendFilters(nsIFilePicker.filterApps);
 +
-+        if (fp.show() == nsIFilePicker.returnOK && fp.file) {
-+          // Remember the file they chose to run.
-+          var localHandlerApp =
-+            Components.classes["@mozilla.org/uriloader/local-handler-app;1"].
-+                      createInstance(Components.interfaces.nsILocalHandlerApp);
-+          localHandlerApp.executable = fp.file;
-+          this.chosenApp = localHandlerApp;
-         }
--        contentTypeDialogObj.finishChooseApp();
--      };
--      appChooser.open(this.mLauncher.MIMEInfo.MIMEType, appChooserCallback);
--      // The finishChooseApp is called from appChooserCallback
--      return;
++        fp.open(aResult => {
++          if (aResult == nsIFilePicker.returnOK && fp.file) {
++            // Remember the file they chose to run.
++            var localHandlerApp =
++              Cc["@mozilla.org/uriloader/local-handler-app;1"].
++                         createInstance(Ci.nsILocalHandlerApp);
++            localHandlerApp.executable = fp.file;
++            this.chosenApp = localHandlerApp;
++          }
++          this.finishChooseApp();
++        });
 +      } else {
 +        var nsIApplicationChooser = Ci.nsIApplicationChooser;
 +        var appChooser = Cc["@mozilla.org/applicationchooser;1"]
@@ -1304,6 +1308,46 @@ new file mode 100644
 +    };
 +
 +#endif // nsKDEUtils
+diff --git a/uriloader/exthandler/HandlerServiceParent.cpp b/uriloader/exthandler/HandlerServiceParent.cpp
+--- a/uriloader/exthandler/HandlerServiceParent.cpp
++++ b/uriloader/exthandler/HandlerServiceParent.cpp
+@@ -1,16 +1,16 @@
+ #include "mozilla/Logging.h"
+ #include "HandlerServiceParent.h"
+ #include "nsIHandlerService.h"
+ #include "nsIMIMEInfo.h"
+ #include "ContentHandlerService.h"
+ #include "nsStringEnumerator.h"
+ #ifdef MOZ_WIDGET_GTK
+-#include "unix/nsGNOMERegistry.h"
++#include "unix/nsCommonRegistry.h"
+ #endif
+ 
+ using mozilla::dom::HandlerInfo;
+ using mozilla::dom::HandlerApp;
+ using mozilla::dom::ContentHandlerService;
+ using mozilla::dom::RemoteHandlerApp;
+ 
+ namespace {
+@@ -264,17 +264,17 @@ HandlerServiceParent::RecvExists(const H
+ }
+ 
+ mozilla::ipc::IPCResult
+ HandlerServiceParent::RecvExistsForProtocol(const nsCString& aProtocolScheme,
+                                             bool* aHandlerExists)
+ {
+ #ifdef MOZ_WIDGET_GTK
+   // Check the GNOME registry for a protocol handler
+-  *aHandlerExists = nsGNOMERegistry::HandlerExists(aProtocolScheme.get());
++  *aHandlerExists = nsCommonRegistry::HandlerExists(aProtocolScheme.get());
+ #else
+   *aHandlerExists = false;
+ #endif
+   return IPC_OK();
+ }
+ 
+ mozilla::ipc::IPCResult
+ HandlerServiceParent::RecvGetTypeFromExtension(const nsCString& aFileExtension,
 diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
 --- a/uriloader/exthandler/moz.build
 +++ b/uriloader/exthandler/moz.build
