@@ -30,10 +30,9 @@ DEPEND="${PYTHON_DEPS}
 		x11-libs/libXrandr:=[${MULTILIB_USEDEP}]
 	)"
 
-src_prepare() {
-	default
-	sh update_external_sources.sh
-}
+PATCHES=(
+	"${FILESDIR}/cmake_spirv_tools_commit.patch"
+)
 
 multilib_src_configure() {
 	local mycmakeargs=(
