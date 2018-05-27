@@ -20,16 +20,10 @@ HOMEPAGE="https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-IUSE="demos layers wayland X"
-REQUIRED_USE="demos? ( X )"
+IUSE="wayland X"
 
 RDEPEND=""
 DEPEND="${PYTHON_DEPS}
-	demos? ( dev-util/glslang:=[${MULTILIB_USEDEP}] )
-	layers? (
-			dev-util/glslang:=[${MULTILIB_USEDEP}]
-			>=dev-util/spirv-tools-2018.2-r1:=[${MULTILIB_USEDEP}]
-		)
 	wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 	X? (
 		x11-libs/libX11:=[${MULTILIB_USEDEP}]
@@ -37,19 +31,16 @@ DEPEND="${PYTHON_DEPS}
 	)"
 
 #PATCHES=(
-#		"${FILESDIR}/${PN}-Fix-layers-install-directory.patch"
 #		"${FILESDIR}/${PN}-Use-a-file-to-get-the-spirv-tools-commit-ID.patch"
 #	)
 
 multilib_src_configure() {
 	local mycmakeargs=(
-		-DCMAKE_SKIP_RPATH=True
-		-DBUILD_TESTS=False
-		-DBUILD_LAYERS=$(usex layers)
-		-DBUILD_DEMOS=$(usex demos)
-		-DBUILD_VKJSON=False
-		-DBUILD_LOADER=True
-		-DBUILD_WSI_MIR_SUPPORT=False
+		-DCMAKE_SKIP_RPATH=ON
+		-DBUILD_TESTS=OFF
+		-DBUILD_VKJSON=OFF
+		-DBUILD_LOADER=ON
+		-DBUILD_WSI_MIR_SUPPORT=OFF
 		-DBUILD_WSI_WAYLAND_SUPPORT=$(usex wayland)
 		-DBUILD_WSI_XCB_SUPPORT=$(usex X)
 		-DBUILD_WSI_XLIB_SUPPORT=$(usex X)
