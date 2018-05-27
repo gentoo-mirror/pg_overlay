@@ -9,8 +9,8 @@ if [[ "${PV}" == "9999" ]]; then
 	inherit git-r3
 else
 	KEYWORDS="~amd64"
-	SRC_URI="https://github.com/KhronosGroup/Vulkan-LoaderAndValidationLayers/archive/sdk-${PV}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/Vulkan-LoaderAndValidationLayers-sdk-${PV}"
+	SRC_URI="https://github.com/KhronosGroup/Vulkan-Loader/archive/sdk-${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/Vulkan-Loader-sdk-${PV}"
 fi
 
 inherit python-any-r1 cmake-multilib
