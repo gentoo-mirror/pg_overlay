@@ -30,8 +30,8 @@ DEPEND="${PYTHON_DEPS}
 		x11-libs/libXrandr:=[${MULTILIB_USEDEP}]
 	)"
 
-src_preare() {
-	./update_external_sources.sh
+src_prepare() {
+	sh update_external_sources.sh
 }
 
 multilib_src_configure() {
