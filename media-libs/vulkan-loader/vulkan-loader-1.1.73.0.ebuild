@@ -38,7 +38,7 @@ DEPEND="${PYTHON_DEPS}
 	)"
 
 PATCHES=(
-		"${FILESDIR}/${PN}-1.1.70.0-Dont-require-glslang-if-not-building-layers.patch"
+		#"${FILESDIR}/${PN}-1.1.70.0-Dont-require-glslang-if-not-building-layers.patch"
 		"${FILESDIR}/${PN}-Fix-layers-install-directory.patch"
 		"${FILESDIR}/${PN}-Use-a-file-to-get-the-spirv-tools-commit-ID.patch"
 	)
