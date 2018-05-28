@@ -15,12 +15,12 @@ if [[ "${PV}" = *_rc* ]] ; then
 	S="${WORKDIR}/${PN}-${PN}-${MY_PV}"
 else
 	SRC_URI="mirror://sourceforge/nfs/${P}.tar.bz2"
-	KEYWORDS="alpha amd64 arm ~arm64 hppa ia64 ~mips ppc ppc64 ~s390 ~sh sparc x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="caps ipv6 kerberos ldap +libmount nfsdcld +nfsidmap +nfsv4 nfsv41 selinux tcpd +uuid"
+IUSE="caps ipv6 junction kerberos ldap +libmount nfsdcld +nfsidmap +nfsv4 nfsv41 selinux tcpd +uuid"
 REQUIRED_USE="kerberos? ( nfsv4 )"
 RESTRICT="test" #315573
 
@@ -59,14 +59,13 @@ RDEPEND="${DEPEND_COMMON}
 	)
 "
 DEPEND="${DEPEND_COMMON}
+	dev-libs/libxml2
 	virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.1.4-mtab-sym.patch
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
-	"${FILESDIR}"/${PN}-2.3.1-no-rpcgen.patch
-	"${FILESDIR}"/mount_nfs_Fix_auto_protocol_negotiation.patch
-	"${FILESDIR}"/nfsd_Set_default_minor_versions.patch
+	"${FILESDIR}"/${PN}-2.3.2-junction_libs.patch
 )
 
 src_prepare() {
@@ -91,6 +90,7 @@ src_configure() {
 		--without-gssglue
 		$(use_enable caps)
 		$(use_enable ipv6)
+		$(use_enable junction)
 		$(use_enable kerberos gss)
 		$(use_enable kerberos svcgss)
 		$(use_enable ldap)
@@ -152,10 +152,10 @@ src_install() {
 		-e "/^NFS_NEEDED_SERVICES=/s:=.*:=\"${opt_need}\":" \
 		"${ED%/}"/etc/conf.d/nfs || die #234132
 
-	local systemd_systemunitdir="$(systemd_get_systemunitdir)"
-	sed -i \
-		-e 's:/usr/sbin/rpc.statd:/sbin/rpc.statd:' \
-		"${ED%/}${systemd_systemunitdir}"/* #|| die
+	#local systemd_systemunitdir="$(systemd_get_systemunitdir)"
+	#sed -i \
+	#	-e 's:/usr/sbin/rpc.statd:/sbin/rpc.statd:' \
+	#	"${ED%/}${systemd_systemunitdir}"/* || die
 
 	keepdir /var/lib/nfs #368505
 	keepdir /var/lib/nfs/v4recovery #603628
