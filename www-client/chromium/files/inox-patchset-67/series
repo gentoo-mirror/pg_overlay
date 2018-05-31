@@ -1,6 +1,8 @@
-chromium-arflags.patch
+remove-dependency-on-ffmpeg-internals-for-start-time.patch
 
 chromium-skia-harmony.patch
+
+chromium-arflags.patch
 
 0001-fix-building-without-safebrowsing.patch
 0002-fix-building-without-reporting.patch
