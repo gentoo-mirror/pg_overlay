@@ -5,14 +5,34 @@ gn/buildflags.patch
 
 disable/signin.patch
 disable/fuzzers.patch
+disable/openh264.patch
 disable/welcome-page.patch
+disable/google-api-warning.patch
 disable/device-notifications.patch
 
+fixes/mojo.patch
+fixes/widevine.patch
 fixes/ps-print.patch
+fixes/namespace.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
+fixes/ambiguous-aliases.patch
 fixes/connection-message.patch
+fixes/skia_buildfix.patch
+
+warnings/printf.patch
+warnings/multichar.patch
+warnings/return-type.patch
+warnings/enum-compare.patch
+warnings/sequence-point.patch
+warnings/initialization.patch
+warnings/unused-typedefs.patch
+warnings/misleading-indentation.patch
 
 system/vpx.patch
+system/icu.patch
+system/jpeg.patch
 system/nspr.patch
 system/event.patch
+system/openjpeg.patch
+system/fontconfig.patch
