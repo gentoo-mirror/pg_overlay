@@ -49,7 +49,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="debug doc extended +jemalloc ${ALL_LLVM_TARGETS[*]}"
+IUSE="debug doc extended +jemalloc wasm ${ALL_LLVM_TARGETS[*]}"
 
 RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		jemalloc? ( dev-libs/jemalloc )"
@@ -88,6 +88,9 @@ src_configure() {
 		rust_target_name="CHOST_${v##*.}"
 		rust_targets="${rust_targets},\"${!rust_target_name}\""
 	done
+	if use wasm; then
+		rust_targets="${rust_targets},\"wasm32-unknown-unknown\""
+	fi
 	rust_targets="${rust_targets#,}"
 
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
@@ -138,6 +141,7 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
+		lld = $(toml_usex wasm)
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
@@ -156,6 +160,13 @@ src_configure() {
 			ar = "$(tc-getAR)"
 		EOF
 	done
+
+	if use wasm; then
+		cat <<- EOF >> "${S}"/config.toml
+			[target.wasm32-unknown-unknown]
+			linker = "lld"
+		EOF
+	fi
 }
 
 src_compile() {
@@ -182,9 +193,9 @@ src_install() {
 		fi
 		abi_libdir=$(get_abi_LIBDIR ${v##*.})
 		rust_target=$(get_abi_CHOST ${v##*.})
-		mkdir -p ${D}/usr/${abi_libdir}
-		cp ${D}/usr/$(get_libdir)/rustlib/${rust_target}/lib/*.so \
-		   ${D}/usr/${abi_libdir} || die
+		mkdir -p "${D}/usr/${abi_libdir}"
+		cp "${D}/usr/$(get_libdir)/rustlib/${rust_target}/lib/*.so" \
+		   "${D}/usr/${abi_libdir}" || die
 	done
 
 	dodoc COPYRIGHT
