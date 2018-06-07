@@ -23,7 +23,6 @@ IUSE="-debug -libressl +ssl -test"
 
 RDEPEND="
 	sys-libs/zlib
-	>=dev-libs/libsigc++-2.2.2:2
 	ssl? (
 	    !libressl? ( dev-libs/openssl:0= )
 	    libressl? ( dev-libs/libressl:= )
