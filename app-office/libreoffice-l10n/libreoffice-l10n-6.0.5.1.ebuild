@@ -3,9 +3,9 @@
 
 EAPI=6
 
-inherit rpm versionator
+inherit rpm eapi7-ver
 
-MY_PV=$(get_version_component_range 1-3)
+MY_PV=$(ver_cut 1-3)
 
 DESCRIPTION="Translations for the Libreoffice suite"
 HOMEPAGE="https://www.libreoffice.org"
