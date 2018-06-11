@@ -6,36 +6,36 @@ EAPI=6
 PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
 PYTHON_REQ_USE="threads,xml"
 
+inherit autotools bash-completion-r1 check-reqs eapi7-ver flag-o-matic gnome2-utils java-pkg-opt-2 multiprocessing pax-utils python-single-r1 qmake-utils toolchain-funcs xdg-utils poly-c_ebuilds
+
+REAL_PV="${MY_PV/_alpha/.alpha}"
+REAL_PV="${REAL_PV/_beta/.beta}"
 # experimental ; release ; old
-# Usually the tarballs are moved a lot so this should make
-# everyone happy.
+# Usually the tarballs are moved a lot so this should make everyone happy.
 DEV_URI="
 	https://dev-builds.libreoffice.org/pre-releases/src
-	https://download.documentfoundation.org/libreoffice/src/${PV:0:5}/
-	https://download.documentfoundation.org/libreoffice/old/${PV}/
+	https://download.documentfoundation.org/libreoffice/src/${REAL_PV:0:5}/
+	https://downloadarchive.documentfoundation.org/libreoffice/old/${REAL_PV}/src
 "
 ADDONS_URI="https://dev-www.libreoffice.org/src/"
 
 BRANDING="${PN}-branding-gentoo-0.8.tar.xz"
 PATCHSET="${PN}-6.0.3.2-patchset-01.tar.xz"
 
-[[ ${PV} == *9999* ]] && SCM_ECLASS="git-r3"
-inherit multiprocessing autotools bash-completion-r1 check-reqs gnome2-utils java-pkg-opt-2 pax-utils python-single-r1 toolchain-funcs flag-o-matic versionator xdg-utils qmake-utils ${SCM_ECLASS}
-unset SCM_ECLASS
+[[ ${REAL_PV} == *9999* ]] && inherit git-r3
 
 DESCRIPTION="A full office productivity suite"
 HOMEPAGE="https://www.libreoffice.org"
 SRC_URI="branding? ( https://dev.gentoo.org/~dilfridge/distfiles/${BRANDING} )"
 [[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PATCHSET}"
 
-# Split modules following git/tarballs
-# Core MUST be first!
+# Split modules following git/tarballs; Core MUST be first!
 # Help is used for the image generator
 # Only release has the tarballs
-if [[ ${PV} != *9999* ]]; then
+if [[ ${REAL_PV} != *9999* ]]; then
 	for i in ${DEV_URI}; do
-		SRC_URI+=" ${i}/${P}.tar.xz"
-		SRC_URI+=" ${i}/${PN}-help-${PV}.tar.xz"
+		SRC_URI+=" ${i}/${PN}-${REAL_PV}.tar.xz"
+		SRC_URI+=" ${i}/${PN}-help-${REAL_PV}.tar.xz"
 	done
 	unset i
 fi
@@ -67,10 +67,19 @@ IUSE="bluetooth +branding coinmp +cups dbus debug eds firebird googledrive
 gstreamer +gtk gtk2 jemalloc kde libressl mysql odk pdfimport postgres test vlc
 $(printf 'libreoffice_extensions_%s ' ${LO_EXTS})"
 
+REQUIRED_USE="${PYTHON_REQUIRED_USE}
+	bluetooth? ( dbus )
+	kde? ( gtk )
+	libreoffice_extensions_nlpsolver? ( java )
+	libreoffice_extensions_scripting-beanshell? ( java )
+	libreoffice_extensions_scripting-javascript? ( java )
+	libreoffice_extensions_wiki-publisher? ( java )
+"
+
 LICENSE="|| ( LGPL-3 MPL-1.1 )"
 SLOT="0"
-[[ ${PV} == *9999* ]] || \
-KEYWORDS="~amd64 ~x86 ~amd64-linux ~x86-linux"
+[[ ${REAL_PV} == *9999* ]] || \
+KEYWORDS="~amd64 ~arm ~x86 ~amd64-linux ~x86-linux"
 
 COMMON_DEPEND="${PYTHON_DEPS}
 	app-arch/unzip
@@ -102,7 +111,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/icu:=
 	dev-libs/libassuan
 	dev-libs/libgpg-error
-	=dev-libs/liborcus-0.13*
+	>=dev-libs/liborcus-0.13.3
 	dev-libs/librevenge
 	dev-libs/nspr
 	dev-libs/nss
@@ -151,12 +160,14 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		dev-libs/glib:2
 		dev-libs/gobject-introspection
 		gnome-base/dconf
+		media-libs/mesa[egl]
 		x11-libs/gtk+:3
 	)
 	gtk2? (
 		x11-libs/gdk-pixbuf
 		>=x11-libs/gtk+-2.24:2
 	)
+	jemalloc? ( dev-libs/jemalloc )
 	kde? (
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
@@ -168,7 +179,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		kde-frameworks/kio:5
 		kde-frameworks/kwindowsystem:5
 	)
-	jemalloc? ( dev-libs/jemalloc )
 	libreoffice_extensions_scripting-beanshell? ( dev-java/bsh )
 	libreoffice_extensions_scripting-javascript? ( dev-java/rhino:1.6 )
 	mysql? ( dev-db/mysql-connector-c++ )
@@ -189,12 +199,12 @@ RDEPEND="${COMMON_DEPEND}
 	vlc? ( media-video/vlc )
 "
 
-if [[ ${PV} != *9999* ]]; then
-	PDEPEND="=app-office/libreoffice-l10n-$(get_version_component_range 1-2)*"
+if [[ ${REAL_PV} != *9999* ]] && [[ ${MY_PV} != *_* ]]; then
+	PDEPEND="=app-office/libreoffice-l10n-$(ver_cut 1-2)*"
 else
 	# Translations are not reliable on live ebuilds
 	# rather force people to use english only.
-	PDEPEND="app-office/libreoffice-l10n"
+	PDEPEND="!app-office/libreoffice-l10n"
 fi
 
 # FIXME: cppunit should be moved to test conditional
@@ -217,43 +227,47 @@ DEPEND="${COMMON_DEPEND}
 	sys-devel/ucpp
 	sys-libs/zlib
 	virtual/pkgconfig
+	x11-base/xorg-proto
 	x11-libs/libXt
 	x11-libs/libXtst
-	x11-proto/randrproto
-	x11-proto/xextproto
-	x11-proto/xineramaproto
-	x11-proto/xproto
 	java? (
 		dev-java/ant-core
 		>=virtual/jdk-1.6
 	)
 	odk? ( >=app-doc/doxygen-1.8.4 )
 	test? (
+		app-crypt/gnupg
 		dev-util/cppunit
 		media-fonts/dejavu
 	)
-"
-
-REQUIRED_USE="${PYTHON_REQUIRED_USE}
-	bluetooth? ( dbus )
-	kde? ( gtk )
-	libreoffice_extensions_nlpsolver? ( java )
-	libreoffice_extensions_scripting-beanshell? ( java )
-	libreoffice_extensions_scripting-javascript? ( java )
-	libreoffice_extensions_wiki-publisher? ( java )
 "
 
 PATCHES=(
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.4-system-pyuno.patch"
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
+	"${FILESDIR}/${PN}-6.0.3.2-disable-flaky-tests-1.patch" #bug 656676
+	# 6.1 branch
+	"${FILESDIR}/${PN}-6.0.4.2-glm-0.9.9.patch" # bug 657178
 
 	# TODO: upstream
 	"${FILESDIR}/${PN}-5.2.5.1-glibc-2.24.patch"
+	"${FILESDIR}/${PN}-6.0.3.2-testTdf108947.patch" #bug 656600
 
 	# gtk3-kde5 vcl plugin backported from master
 	"${WORKDIR}"/${PATCHSET/.tar.xz/}
 )
+
+S="${WORKDIR}/${PN}-${REAL_PV}"
+
+_check_reqs() {
+	CHECKREQS_MEMORY="512M"
+	if is-flagq "-g*" && ! is-flagq "-g*0" ; then
+		CHECKREQS_DISK_BUILD="22G"
+	else
+		CHECKREQS_DISK_BUILD="6G"
+	fi
+}
 
 pkg_pretend() {
 	use java || \
@@ -266,12 +280,7 @@ pkg_pretend() {
 	fi
 
 	if [[ ${MERGE_TYPE} != binary ]]; then
-		CHECKREQS_MEMORY="512M"
-		if is-flagq "-g*" && ! is-flagq "-g*0" ; then
-			CHECKREQS_DISK_BUILD="22G"
-		else
-			CHECKREQS_DISK_BUILD="6G"
-		fi
+		_check_reqs
 		check-reqs_pkg_pretend
 	fi
 }
@@ -282,12 +291,7 @@ pkg_setup() {
 	xdg_environment_reset
 
 	if [[ ${MERGE_TYPE} != binary ]]; then
-		CHECKREQS_MEMORY="512M"
-		if is-flagq "-g*" && ! is-flagq "-g*0" ; then
-			CHECKREQS_DISK_BUILD="22G"
-		else
-			CHECKREQS_DISK_BUILD="6G"
-		fi
+		_check_reqs
 		check-reqs_pkg_setup
 	fi
 }
@@ -295,12 +299,12 @@ pkg_setup() {
 src_unpack() {
 	default
 
-	if [[ ${PV} = *9999* ]]; then
+	if [[ ${REAL_PV} = *9999* ]]; then
 		local base_uri branch mypv
 		base_uri="https://anongit.freedesktop.org/git"
 		branch="master"
-		mypv=${PV/.9999}
-		[[ ${mypv} != ${PV} ]] && branch="${PN}-${mypv/./-}"
+		mypv=${REAL_PV/.9999}
+		[[ ${mypv} != ${REAL_PV} ]] && branch="${PN}-${mypv/./-}"
 		git-r3_fetch "${base_uri}/${PN}/core" "refs/heads/${branch}"
 		git-r3_checkout "${base_uri}/${PN}/core"
 
@@ -343,7 +347,7 @@ src_prepare() {
 
 	if use branding; then
 		# hack...
-		mv -v "${WORKDIR}/branding-intro.png" "${S}/icon-themes/galaxy/brand/intro.png" || die
+		mv -v "${WORKDIR}/branding-intro.png" "icon-themes/galaxy/brand/intro.png" || die
 	fi
 
 	# Don't list pdfimport support in desktop when built with none, bug # 605464
@@ -555,10 +559,6 @@ src_install() {
 
 	pax-mark -m "${ED}"usr/$(get_libdir)/libreoffice/program/soffice.bin
 	pax-mark -m "${ED}"usr/$(get_libdir)/libreoffice/program/unopkg.bin
-}
-
-pkg_preinst() {
-	gnome2_icon_savelist
 }
 
 pkg_postinst() {
