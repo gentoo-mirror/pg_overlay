@@ -15,10 +15,10 @@ else
 fi
 
 DESCRIPTION="A vector graphics library with cross-device output support"
-HOMEPAGE="http://cairographics.org/"
+HOMEPAGE="https://www.cairographics.org"
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
-IUSE="X aqua debug directfb gles2 +glib opengl static-libs +svg valgrind xcb"
+IUSE="X aqua debug gles2 +glib opengl static-libs +svg valgrind xcb"
 # gtk-doc regeneration doesn't seem to work with out-of-source builds
 #[[ ${PV} == *9999* ]] && IUSE="${IUSE} doc" # API docs are provided in tarball, no need to regenerate
 
@@ -43,17 +43,11 @@ RDEPEND=">=dev-libs/lzo-2.06-r1[${MULTILIB_USEDEP}]
 	)
 	xcb? (
 		>=x11-libs/libxcb-1.9.1[${MULTILIB_USEDEP}]
-	)
-	abi_x86_32? (
-		!<=app-emulation/emul-linux-x86-gtklibs-20131008-r1
-		!app-emulation/emul-linux-x86-gtklibs[-abi_x86_32(-)]
 	)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	>=sys-devel/libtool-2
-	X? (
-		>=x11-proto/renderproto-0.11.1-r1[${MULTILIB_USEDEP}]
-	)"
+	X? ( x11-base/xorg-proto )"
 #[[ ${PV} == *9999* ]] && DEPEND="${DEPEND}
 #	doc? (
 #		>=dev-util/gtk-doc-1.6
@@ -63,10 +57,6 @@ DEPEND="${RDEPEND}
 REQUIRED_USE="
 	gles2? ( !opengl )
 "
-
-MULTILIB_WRAPPED_HEADERS=(
-	/usr/include/cairo/cairo-directfb.h
-)
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
@@ -99,12 +89,6 @@ multilib_src_configure() {
 	use elibc_FreeBSD && myopts+=" --disable-symbol-lookup"
 	[[ ${CHOST} == *-darwin* ]] && myopts+=" --disable-symbol-lookup"
 
-	# TODO: remove this (and add USE-dep) when DirectFB is converted,
-	# bug #484248 -- but beware of the circular dep.
-	if ! multilib_is_native_abi; then
-		myopts+=" --disable-directfb"
-	fi
-
 	# TODO: remove this (and add USE-dep) when qtgui is converted, bug #498010
 	if ! multilib_is_native_abi; then
 		myopts+=" --disable-qt"
@@ -122,7 +106,6 @@ multilib_src_configure() {
 		$(use_enable aqua quartz) \
 		$(use_enable aqua quartz-image) \
 		$(use_enable debug test-surfaces) \
-		$(use_enable directfb) \
 		$(use_enable gles2 glesv2) \
 		$(use_enable glib gobject) \
 		$(use_enable opengl gl) \
@@ -136,6 +119,7 @@ multilib_src_configure() {
 		--enable-png \
 		--enable-ps \
 		--disable-drm \
+		--disable-directfb \
 		--disable-gallium \
 		--disable-qt \
 		--disable-vg \
