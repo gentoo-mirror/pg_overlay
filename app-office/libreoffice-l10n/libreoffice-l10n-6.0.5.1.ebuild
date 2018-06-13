@@ -75,7 +75,7 @@ src_configure() { :; }
 src_compile() { :; }
 
 src_install() {
-	local dir="${S}"/opt/${PN/-l10n/}$(get_version_component_range 1-2)/
+	local dir="${S}"/opt/${PN/-l10n/}$(ver_cut 1-2)/
 	# Condition required for people that do not install anything eg no l10n
 	# or just english with no offlinehelp.
 	if [[ -d "${dir}" ]] ; then
