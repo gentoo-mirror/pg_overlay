@@ -110,6 +110,7 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
+		ccache = true
 		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		link-jobs = $(makeopts_jobs)
