@@ -68,6 +68,9 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )"
 
 S="${WORKDIR}/${MY_P}-src"
 
+PATCHES=( "${FILESDIR}/0001-Ensure-libraries-built-in-stage0-have-unique-metadat.patch"
+		"${FILESDIR}/0001-Fix-new-renamed_and_removed_lints-warning-247.patch" )
+
 toml_usex() {
 	usex "$1" true false
 }
