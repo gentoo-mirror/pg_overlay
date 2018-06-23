@@ -6,7 +6,7 @@ EAPI=6
 inherit autotools toolchain-funcs multilib versionator
 
 DESCRIPTION="xfs filesystem utilities"
-HOMEPAGE="http://oss.sgi.com/projects/xfs/"
+HOMEPAGE="https://xfs.wiki.kernel.org/"
 MY_PV="${PV/_/-}"
 SRC_URI="https://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git/snapshot/${PN}-dev-${MY_PV}.tar.gz"
 
