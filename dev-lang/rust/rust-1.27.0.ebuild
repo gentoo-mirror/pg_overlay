@@ -76,12 +76,12 @@ toml_usex() {
 }
 
 src_prepare() {
-	local rust_stage0_root="${WORKDIR}"/rust-stage0
+#	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	local rust_stage0_name="RUST_STAGE0_${ARCH}"
-	local rust_stage0="${!rust_stage0_name}"
+#	local rust_stage0_name="RUST_STAGE0_${ARCH}"
+#	local rust_stage0="${!rust_stage0_name}"
 
-	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
+#	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	default
 }
@@ -99,7 +99,7 @@ src_configure() {
 	fi
 	rust_targets="${rust_targets#,}"
 
-	local rust_stage0_root="${WORKDIR}"/rust-stage0
+#	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
 	rust_target_name="CHOST_${ARCH}"
 	rust_target="${!rust_target_name}"
