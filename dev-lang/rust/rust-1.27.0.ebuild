@@ -122,9 +122,9 @@ src_configure() {
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
-		submodules = false
+		submodules = true
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = $(toml_usex extended)
 		verbose = 0
@@ -149,6 +149,7 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(toml_usex wasm)
+		deny-warnings = false
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
