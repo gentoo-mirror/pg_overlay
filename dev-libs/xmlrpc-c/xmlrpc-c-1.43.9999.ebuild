@@ -46,6 +46,7 @@ src_prepare() {
 
 	sed 's/xmlParserCtx /xmlParserCtxt/g' -i src/xmlrpc_libxml2.c || die
 
+	eapply ${PATCHES[@]}
 	eapply_user
 }
 
