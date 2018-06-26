@@ -38,7 +38,7 @@ RDEPEND=">=dev-libs/libevent-2.0.10:=
 		dev-qt/qtwidgets:5
 		)"
 DEPEND="${RDEPEND}
-	>=dev-libs/glib-2.32
+	virtual/pkgconfig
 	nls? (
 		virtual/libintl
 		gtk? (
@@ -46,12 +46,8 @@ DEPEND="${RDEPEND}
 			sys-devel/gettext
 		)
     )
-	virtual/os-headers
-	virtual/pkgconfig
 	qt5? ( dev-qt/linguist-tools:5 )
 	xfs? ( sys-fs/xfsprogs )"
-
-REQUIRED_USE="ayatana? ( gtk )"
 
 DOCS=( AUTHORS NEWS qt/README.txt )
 
