@@ -29,9 +29,7 @@ DEPEND="
 	libxml2? ( dev-libs/libxml2 )"
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-1.32.05-Wimplicit.patch"
-)
+PATCHES=()
 
 pkg_setup() {
 	use curl || ewarn "Curl support disabled: No client library will be built"
