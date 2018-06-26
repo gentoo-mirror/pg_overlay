@@ -1,0 +1,119 @@
+
+# HG changeset patch
+# User Mike Hommey <mh+mozilla@glandium.org>
+# Date 1527491713 -32400
+# Node ID c28becad0c10b906454d7e424f9a9402799ea8dd
+# Parent  86eaa6799cf51660c0b598937121305b8f70c84d
+Bug 1464766 - Allow to relax the addon signature requirements. r?rhelmer
+
+diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
+--- a/modules/libpref/init/all.js
++++ b/modules/libpref/init/all.js
+@@ -1134,16 +1134,19 @@ pref("print.print_via_parent", true);
+ pref("print.print_via_parent", false);
+ #endif
+ 
+ // Pref used by the spellchecker extension to control the
+ // maximum number of misspelled words that will be underlined
+ // in a document.
+ pref("extensions.spellcheck.inline.max-misspellings", 500);
+ 
++// Add-on manager scoped allowing unsigned addons. None by default.
++pref("extensions.unsignedScopes", 12, locked);
++
+ // Prefs used by libeditor. Prefs specific to seamonkey composer
+ // belong in comm-central/editor/ui/composer.js
+ 
+ pref("editor.use_custom_colors", false);
+ pref("editor.singleLine.pasteNewlines",      2);
+ pref("editor.use_css",                       false);
+ pref("editor.css.default_length_unit",       "px");
+ pref("editor.resizing.preserve_ratio",       true);
+diff --git a/toolkit/mozapps/extensions/content/extensions.js b/toolkit/mozapps/extensions/content/extensions.js
+--- a/toolkit/mozapps/extensions/content/extensions.js
++++ b/toolkit/mozapps/extensions/content/extensions.js
+@@ -42,16 +42,17 @@ XPCOMUtils.defineLazyPreferenceGetter(th
+ const PREF_DISCOVERURL = "extensions.webservice.discoverURL";
+ const PREF_DISCOVER_ENABLED = "extensions.getAddons.showPane";
+ const PREF_GETADDONS_CACHE_ENABLED = "extensions.getAddons.cache.enabled";
+ const PREF_GETADDONS_CACHE_ID_ENABLED = "extensions.%ID%.getAddons.cache.enabled";
+ const PREF_UI_TYPE_HIDDEN = "extensions.ui.%TYPE%.hidden";
+ const PREF_UI_LASTCATEGORY = "extensions.ui.lastCategory";
+ const PREF_LEGACY_EXCEPTIONS = "extensions.legacy.exceptions";
+ const PREF_LEGACY_ENABLED = "extensions.legacy.enabled";
++const PREF_UNSIGNED_SCOPES = "extensions.unsignedScopes";
+ 
+ const LOADING_MSG_DELAY = 100;
+ 
+ const UPDATES_RECENT_TIMESPAN = 2 * 24 * 3600000; // 2 days (in milliseconds)
+ const UPDATES_RELEASENOTES_TRANSFORMFILE = "chrome://mozapps/content/extensions/updateinfo.xsl";
+ 
+ const XMLURI_PARSE_ERROR = "http://www.mozilla.org/newlayout/xml/parsererror.xml";
+ 
+@@ -223,19 +224,21 @@ function loadView(aViewId) {
+ 
+ function isCorrectlySigned(aAddon) {
+   // Add-ons without an "isCorrectlySigned" property are correctly signed as
+   // they aren't the correct type for signing.
+   return aAddon.isCorrectlySigned !== false;
+ }
+ 
+ function isDisabledUnsigned(addon) {
+-  let signingRequired = (addon.type == "locale") ?
+-                        AddonSettings.LANGPACKS_REQUIRE_SIGNING :
+-                        AddonSettings.REQUIRE_SIGNING;
++  let unsignedScopes = Services.prefs.getIntPref(PREF_UNSIGNED_SCOPES, 0);
++  let signingRequired = !(addon.scope & unsignedScopes) &&
++                        ((addon.type == "locale") ?
++                         AddonSettings.LANGPACKS_REQUIRE_SIGNING :
++                         AddonSettings.REQUIRE_SIGNING);
+   return signingRequired && !isCorrectlySigned(addon);
+ }
+ 
+ function isLegacyExtension(addon) {
+   let legacy = false;
+   if (addon.type == "extension" && !addon.isWebExtension) {
+     legacy = true;
+   }
+diff --git a/toolkit/mozapps/extensions/internal/XPIDatabase.jsm b/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
+--- a/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
++++ b/toolkit/mozapps/extensions/internal/XPIDatabase.jsm
+@@ -78,16 +78,17 @@ const KEY_PROFILEDIR                  = 
+ const FILE_JSON_DB                    = "extensions.json";
+ 
+ // The last version of DB_SCHEMA implemented in SQLITE
+ const LAST_SQLITE_DB_SCHEMA           = 14;
+ 
+ const PREF_BLOCKLIST_ITEM_URL         = "extensions.blocklist.itemURL";
+ const PREF_DB_SCHEMA                  = "extensions.databaseSchema";
+ const PREF_EM_AUTO_DISABLED_SCOPES    = "extensions.autoDisableScopes";
++const PREF_EM_UNSIGNED_SCOPES         = "extensions.unsignedScopes";
+ const PREF_EM_EXTENSION_FORMAT        = "extensions.";
+ const PREF_PENDING_OPERATIONS         = "extensions.pendingOperations";
+ const PREF_XPI_SIGNATURES_DEV_ROOT    = "xpinstall.signatures.dev-root";
+ 
+ const TOOLKIT_ID                      = "toolkit@mozilla.org";
+ 
+ const KEY_APP_SYSTEM_ADDONS           = "app-system-addons";
+ const KEY_APP_SYSTEM_DEFAULTS         = "app-system-defaults";
+@@ -1959,17 +1960,19 @@ this.XPIDatabase = {
+    * Calculates whether an add-on should be appDisabled or not.
+    *
+    * @param {AddonInternal} aAddon
+    *        The add-on to check
+    * @returns {boolean}
+    *        True if the add-on should not be appDisabled
+    */
+   isUsableAddon(aAddon) {
+-    if (this.mustSign(aAddon.type) && !aAddon.isCorrectlySigned) {
++    let unsignedScopes = Services.prefs.getIntPref(PREF_EM_UNSIGNED_SCOPES, 0);
++    if (!(aAddon._installLocation.scope & unsignedScopes) &&
++        this.mustSign(aAddon.type) && !aAddon.isCorrectlySigned) {
+       logger.warn(`Add-on ${aAddon.id} is not correctly signed.`);
+       if (Services.prefs.getBoolPref(PREF_XPI_SIGNATURES_DEV_ROOT, false)) {
+         logger.warn(`Preference ${PREF_XPI_SIGNATURES_DEV_ROOT} is set.`);
+       }
+       return false;
+     }
+ 
+     if (aAddon.blocklistState == nsIBlocklistService.STATE_BLOCKED) {

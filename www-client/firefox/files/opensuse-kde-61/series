@@ -1,7 +1,7 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
 mozilla-bmo256180.patch
-mozilla-enable-csd.patch
+mozilla-bmo1464766.patch
 
 firefox-kde.patch
 firefox-branded-icons.patch

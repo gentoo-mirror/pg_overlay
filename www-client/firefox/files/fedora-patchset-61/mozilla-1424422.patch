@@ -1,0 +1,129 @@
+diff -up firefox-61.0/browser/base/content/browser.js.1424422 firefox-61.0/browser/base/content/browser.js
+diff -up firefox-61.0/browser/base/content/browser-tabsintitlebar.js.1424422 firefox-61.0/browser/base/content/browser-tabsintitlebar.js
+--- firefox-61.0/browser/base/content/browser-tabsintitlebar.js.1424422	2018-06-19 01:03:32.000000000 +0200
++++ firefox-61.0/browser/base/content/browser-tabsintitlebar.js	2018-06-20 14:59:44.121827553 +0200
+@@ -36,6 +36,7 @@ var TabsInTitlebar = {
+     window.addEventListener("resize", this);
+ 
+     gDragSpaceObserver.init();
++    gLightThemeObserver.init();
+ 
+     this._initialized = true;
+     this.update();
+@@ -302,6 +303,7 @@ var TabsInTitlebar = {
+     this._menuObserver.disconnect();
+     CustomizableUI.removeListener(this);
+     gDragSpaceObserver.uninit();
++    gLightThemeObserver.uninit();
+   }
+ };
+ 
+@@ -343,3 +345,21 @@ var gDragSpaceObserver = {
+     TabsInTitlebar.update();
+   },
+ };
++
++var gLightThemeObserver = {
++  init() {
++    Services.obs.addObserver(this, "lightweight-theme-styling-update");
++  },
++
++  uninit() {
++    Services.obs.removeObserver(this, "lightweight-theme-styling-update");
++  },
++
++  observe(aSubject, aTopic, aData) {
++    switch (aTopic) {
++      case "lightweight-theme-styling-update":
++        TabsInTitlebar.updateAppearance(true);
++        break;
++    }
++  },
++};
+diff -up firefox-61.0/browser/themes/linux/browser.css.1424422 firefox-61.0/browser/themes/linux/browser.css
+--- firefox-61.0/browser/themes/linux/browser.css.1424422	2018-06-19 01:03:33.000000000 +0200
++++ firefox-61.0/browser/themes/linux/browser.css	2018-06-20 14:17:43.193681172 +0200
+@@ -709,12 +709,20 @@ notification[value="translation"] menuli
+   }
+ 
+   @media (-moz-gtk-csd-maximize-button) {
+-    #titlebar-max {
++    #titlebar-max:not(:-moz-lwtheme) {
+       -moz-appearance: -moz-window-button-maximize;
+     }
+-    :root[sizemode="maximized"] #titlebar-max {
++    #titlebar-max:-moz-lwtheme {
++      -moz-appearance: none !important;
++      list-style-image: url(chrome://browser/skin/window-controls/maximize-themes.svg);
++    }
++    :root[sizemode="maximized"] #titlebar-max:not(:-moz-lwtheme) {
+       -moz-appearance: -moz-window-button-restore;
+     }
++    :root[sizemode="maximized"] #titlebar-max:-moz-lwtheme {
++      -moz-appearance: none !important;
++      list-style-image: url(chrome://browser/skin/window-controls/restore-themes.svg);
++    }
+   }
+   @media (-moz-gtk-csd-maximize-button: 0) {
+     #titlebar-max {
+@@ -723,9 +731,13 @@ notification[value="translation"] menuli
+   }
+ 
+   @media (-moz-gtk-csd-close-button) {
+-    #titlebar-close {
++    #titlebar-close:not(:-moz-lwtheme) {
+       -moz-appearance: -moz-window-button-close;
+     }
++    #titlebar-close:-moz-lwtheme {
++      -moz-appearance: none !important;
++      list-style-image: url(chrome://browser/skin/window-controls/close-themes.svg);
++    }
+   }
+   @media (-moz-gtk-csd-close-button: 0) {
+     #titlebar-close {
+diff -up firefox-61.0/browser/themes/linux/jar.mn.1424422 firefox-61.0/browser/themes/linux/jar.mn
+diff -up firefox-61.0/browser/themes/linux/window-controls/close-themes.svg.1424422 firefox-61.0/browser/themes/linux/window-controls/close-themes.svg
+--- firefox-61.0/browser/themes/linux/window-controls/close-themes.svg.1424422	2018-06-20 14:17:43.194681169 +0200
++++ firefox-61.0/browser/themes/linux/window-controls/close-themes.svg	2018-06-20 14:17:43.194681169 +0200
+@@ -0,0 +1,7 @@
++<!-- This Source Code Form is subject to the terms of the Mozilla Public
++   - License, v. 2.0. If a copy of the MPL was not distributed with this
++   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
++<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg">
++  <path stroke="black" stroke-width="3.6" stroke-opacity=".75" d="M1,1 l 10,10 M1,11 l 10,-10"/>
++  <path stroke="white" stroke-width="1.9" d="M1.75,1.75 l 8.5,8.5 M1.75,10.25 l 8.5,-8.5"/>
++</svg>
+diff -up firefox-61.0/browser/themes/linux/window-controls/maximize-themes.svg.1424422 firefox-61.0/browser/themes/linux/window-controls/maximize-themes.svg
+--- firefox-61.0/browser/themes/linux/window-controls/maximize-themes.svg.1424422	2018-06-20 14:17:43.194681169 +0200
++++ firefox-61.0/browser/themes/linux/window-controls/maximize-themes.svg	2018-06-20 14:17:43.194681169 +0200
+@@ -0,0 +1,7 @@
++<!-- This Source Code Form is subject to the terms of the Mozilla Public
++   - License, v. 2.0. If a copy of the MPL was not distributed with this
++   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
++<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" fill="none">
++  <rect stroke="black" stroke-width="3.6" stroke-opacity=".75" x="2" y="2" width="8" height="8"/>
++  <rect stroke="white" stroke-width="1.9" x="2" y="2" width="8" height="8"/>
++</svg>
+diff -up firefox-61.0/browser/themes/linux/window-controls/minimize-themes.svg.1424422 firefox-61.0/browser/themes/linux/window-controls/minimize-themes.svg
+--- firefox-61.0/browser/themes/linux/window-controls/minimize-themes.svg.1424422	2018-06-20 14:17:43.194681169 +0200
++++ firefox-61.0/browser/themes/linux/window-controls/minimize-themes.svg	2018-06-20 14:17:43.194681169 +0200
+@@ -0,0 +1,7 @@
++<!-- This Source Code Form is subject to the terms of the Mozilla Public
++   - License, v. 2.0. If a copy of the MPL was not distributed with this
++   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
++<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges">
++  <line stroke="black" stroke-width="3.6" stroke-opacity=".75" x1="0" y1="6" x2="12" y2="6"/>
++  <line stroke="white" stroke-width="1.9" x1="1" y1="6" x2="11" y2="6"/>
++</svg>
+diff -up firefox-61.0/browser/themes/linux/window-controls/restore-themes.svg.1424422 firefox-61.0/browser/themes/linux/window-controls/restore-themes.svg
+--- firefox-61.0/browser/themes/linux/window-controls/restore-themes.svg.1424422	2018-06-20 14:17:43.194681169 +0200
++++ firefox-61.0/browser/themes/linux/window-controls/restore-themes.svg	2018-06-20 14:17:43.194681169 +0200
+@@ -0,0 +1,8 @@
++<!-- This Source Code Form is subject to the terms of the Mozilla Public
++   - License, v. 2.0. If a copy of the MPL was not distributed with this
++   - file, You can obtain one at http://mozilla.org/MPL/2.0/. -->
++<svg width="12" height="12" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" fill="none" stroke="white">
++  <path stroke="black" stroke-width="3.6" stroke-opacity=".75" d="M2,4 l 6,0 l 0,6 l -6,0z M2.5,1.5 l 8,0 l 0,8"/>
++  <rect stroke-width="1.9" x="2" y="4" width="6" height="6"/>
++  <polyline stroke-width=".9" points="3.5,1.5 10.5,1.5 10.5,8.5"/>
++</svg>
