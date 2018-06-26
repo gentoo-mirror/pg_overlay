@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-inherit autotools flag-o-matic git-r3
+inherit autotools git-r3 toolchain-funcs
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -31,25 +31,37 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? ( dev-util/cppunit )"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-0001-Fix-the-DH-parameters-generation-with-OpenSSL-1.1.patch"
+	"${FILESDIR}/${PN}-openssl-1.1-part2.patch"
+	"${FILESDIR}/${PN}-openssl-1.1-part3.patch"
+)
+
 src_prepare() {
 	default
 	eautoreconf
 }
 
 src_configure() {
-	append-cflags -fno-strict-aliasing -Wno-terminate
-	append-cxxflags -fno-strict-aliasing -Wno-terminate
+	# bug 518582
+	local disable_instrumentation
+	echo -e "#include <inttypes.h>\nint main(){ int64_t var = 7; __sync_add_and_fetch(&var, 1); return 0;}" > "${T}/sync_add_and_fetch.c" || die
+	$(tc-getCC) ${CFLAGS} -o /dev/null -x c "${T}/sync_add_and_fetch.c" >/dev/null 2>&1
+	if [[ $? -ne 0 ]]; then
+		disable_instrumentation="--disable-instrumentation"
+	fi
 
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		--enable-aligned \
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
+		${disable_instrumentation} \
 		--with-posix-fallocate
 }
 
 src_install() {
 	default
 
-	prune_libtool_files --all
+	find "${D}" -name '*.la' -delete
 }
