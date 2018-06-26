@@ -29,7 +29,10 @@ DEPEND="
 	libxml2? ( dev-libs/libxml2 )"
 RDEPEND="${DEPEND}"
 
-PATCHES=()
+PATCHES=( "${FILESDIR}"/0001-xmlrpc_server_abyss-use-va_args-properly.patch
+	"${FILESDIR}"/0002-chmod-x-xml-rpc-api2txt.patch
+	"${FILESDIR}"/0003-allow-30x-redirections.patch
+	"${FILESDIR}"/1001-Remove-trace-statements-accidentally-committed-with-.patch )
 
 pkg_setup() {
 	use curl || ewarn "Curl support disabled: No client library will be built"
