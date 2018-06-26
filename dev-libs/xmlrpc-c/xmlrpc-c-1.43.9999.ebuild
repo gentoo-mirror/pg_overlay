@@ -11,7 +11,7 @@ inherit subversion
 # Because of this, we are following the "Super Stable" release channel
 
 DESCRIPTION="A lightweigt RPC library based on XML and HTTP"
-HOMEPAGE="http://xmlrpc-c.sourceforge.net/"
+HOMEPAGE="https://xmlrpc-c.sourceforge.net/"
 ESVN_REPO_URI="svn://svn.code.sf.net/p/xmlrpc-c/code/stable"
 
 LICENSE="BSD"
