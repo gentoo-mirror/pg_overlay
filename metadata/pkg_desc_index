@@ -3,7 +3,6 @@ app-misc/workrave 1.10.20: Helpful utility to attack Repetitive Strain Injury (R
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1: Quote arguments or standard input for usage in POSIX shell by eval
 dev-libs/libsigc++ 2.99.10 2.99.11: Typesafe callback system for standard C++
-dev-libs/xmlrpc-c 1.39.12: A lightweigt RPC library based on XML and HTTP
 dev-python/python-mpd2 9999: Python MPD client library
 media-fonts/unifont 10.0.07: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
