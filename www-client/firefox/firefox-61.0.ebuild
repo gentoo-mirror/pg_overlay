@@ -52,7 +52,7 @@ ASM_DEPEND=">=dev-lang/yasm-1.1"
 RDEPEND="
 	system-icu? ( >=dev-libs/icu-60.2 )
 	jack? ( virtual/jack )
-	>=dev-libs/nss-3.37.3
+	>=dev-libs/nss-3.38
 	>=dev-libs/nspr-4.19
 	selinux? ( sec-policy/selinux-mozilla )
 	kde? ( kde-apps/kdialog:5
@@ -122,6 +122,8 @@ src_unpack() {
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
 
+	eapply "${FILESDIR}/bug_1461221.patch"
+
 	# Enable gnomebreakpad
 	if use debug ; then
 		sed -i -e "s:GNOME_DISABLE_CRASH_DIALOG=1:GNOME_DISABLE_CRASH_DIALOG=0:g" \
@@ -177,7 +179,6 @@ src_prepare() {
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
-	#for i in $(cat "${FILESDIR}/ubuntu-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/ubuntu-patchset-$(get_major_version)/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
