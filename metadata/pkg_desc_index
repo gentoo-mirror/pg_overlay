@@ -6,4 +6,3 @@ dev-libs/libsigc++ 2.99.10 2.99.11: Typesafe callback system for standard C++
 dev-python/python-mpd2 9999: Python MPD client library
 media-fonts/unifont 10.0.07: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
-x11-libs/gdk-pixbuf 2.36.11: Image loading library for GTK+
