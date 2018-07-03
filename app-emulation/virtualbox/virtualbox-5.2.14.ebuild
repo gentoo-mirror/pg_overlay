@@ -202,7 +202,6 @@ src_prepare() {
 
 	eapply "${FILESDIR}/python3_support.patch"
 	eapply "${FILESDIR}/fixes_for_python.patch"
-	eapply "${FILESDIR}/qt-5.11.patch"
 	eapply "${FILESDIR}/switch_to_python3.6.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
