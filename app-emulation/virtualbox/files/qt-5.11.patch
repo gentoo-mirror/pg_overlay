@@ -1,15 +1,7 @@
---- a/src/VBox/Frontends/VirtualBox/src/settings/global/UIGlobalSettingsProxy.cpp	2018-04-13 23:37:17.000000000 +0700
-+++ b/src/VBox/Frontends/VirtualBox/src/settings/global/UIGlobalSettingsProxy.cpp	2018-04-18 19:42:30.207128585 +0700
-@@ -21,6 +21,7 @@
- 
- /* Qt includes: */
- # include <QRegExpValidator>
-+# include <QButtonGroup>
- 
- /* GUI includes: */
- # include "QIWidgetValidator.h"
---- a/src/VBox/Frontends/VirtualBox/src/precomp_vcc.h
-+++ b/src/VBox/Frontends/VirtualBox/src/precomp_vcc.h
+Index: VirtualBox-5.2.14/src/VBox/Frontends/VirtualBox/src/precomp_vcc.h
+===================================================================
+--- VirtualBox-5.2.14.orig/src/VBox/Frontends/VirtualBox/src/precomp_vcc.h
++++ VirtualBox-5.2.14/src/VBox/Frontends/VirtualBox/src/precomp_vcc.h
 @@ -83,6 +83,7 @@
  #include <QtWidgets/qgraphicsitem.h>
  #include <QtWidgets/qgraphicslayoutitem.h>
@@ -18,3 +10,15 @@
  #include <QtCore/QMetaType>
  #include <QtGui/qevent.h>
  #include <QtGui/qtouchdevice.h>
+Index: VirtualBox-5.2.14/src/VBox/Frontends/VirtualBox/src/settings/global/UIGlobalSettingsProxy.cpp
+===================================================================
+--- VirtualBox-5.2.14.orig/src/VBox/Frontends/VirtualBox/src/settings/global/UIGlobalSettingsProxy.cpp
++++ VirtualBox-5.2.14/src/VBox/Frontends/VirtualBox/src/settings/global/UIGlobalSettingsProxy.cpp
+@@ -22,6 +22,7 @@
+ /* Qt includes: */
+ # include <QButtonGroup>
+ # include <QRegExpValidator>
++#include <QButtonGroup>
+ 
+ /* GUI includes: */
+ # include "QIWidgetValidator.h"
