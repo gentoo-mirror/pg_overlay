@@ -4,7 +4,7 @@
 EAPI=6
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="5.4.8"
+MOZ_LIGHTNING_VER="5.4.9"
 MOZ_LIGHTNING_GDATA_VER="3.3"
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
@@ -60,7 +60,7 @@ DEPEND="rust? ( dev-lang/rust )
 
 RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-thunderbird )
-	crypt? ( >=x11-plugins/enigmail-1.9.8.3-r1 )
+	crypt? ( >=x11-plugins/enigmail-2.0.5 )
 "
 
 S="${WORKDIR}/${MOZ_P}"
