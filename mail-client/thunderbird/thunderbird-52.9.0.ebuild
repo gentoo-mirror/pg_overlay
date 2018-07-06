@@ -201,6 +201,7 @@ src_configure() {
 
 	# Settings
 	mozconfig_annotate '' --enable-default-toolkit=cairo-gtk3
+	mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-pie
