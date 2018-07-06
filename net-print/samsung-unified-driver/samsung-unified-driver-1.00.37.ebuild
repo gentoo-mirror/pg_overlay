@@ -5,11 +5,11 @@ EAPI=6
 
 inherit linux-info udev vcs-snapshot
 
-EXTRA_PV=00.99
+EXTRA_PV=01.17
 
 DESCRIPTION="Samsung Unified Linux Driver for printers and MFDs"
 HOMEPAGE="http://www.samsung.com"
-SRC_URI="http://downloadcenter.samsung.com/content/DR/201512/20151211135958538/ULD_v${PV}_${EXTRA_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://ftp.hp.com/pub/softlib/software13/printers/SS/SL-M4580FX/uld_V${PV}_${EXTRA_PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Samsung-EULA"
 SLOT="0"
