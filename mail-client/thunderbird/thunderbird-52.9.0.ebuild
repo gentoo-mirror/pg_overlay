@@ -136,6 +136,7 @@ src_prepare() {
 	eapply_user
 
 	eapply "${FILESDIR}/0001-Bug-1338655-Don-t-try-to-build-mp4parse-bindings.patch"
+	eapply "${FILESDIR}/gfxFont_cpp.patch"
 
 	# OpenSUSE-KDE patchset
 	if use kde ; then
