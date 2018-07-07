@@ -122,7 +122,11 @@ src_compile() {
 			host_jsoplengen.o || die
 	fi
 
-	MOZ_MAKE_FLAGS="${MAKEOPTS}" emake
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" \
+	emake \
+		MOZ_OPTIMIZE_FLAGS="" MOZ_DEBUG_FLAGS="" \
+		HOST_OPTIMIZE_FLAGS="" MODULE_OPTIMIZE_FLAGS="" \
+		MOZ_PGO_OPTIMIZE_FLAGS=""
 }
 
 src_test() {
