@@ -1,4 +1,4 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -99,22 +99,13 @@ src_install() {
 		dosym libsane-smfp.so.1.0.1 /usr/$(get_libdir)/sane/libsane-smfp.so.1
 
 		udev_newrules "${FILESDIR}/${PV}-libsane-smfp.rules" 40-libsane-smfp.rules
+		insinto /etc/sane.d/dll.d
+		echo smfp > "${ED}"/etc/sane.d/dll.d/samsung.conf
 	fi
 
 	# Network support.
 	if use network; then
 		exeinto /usr/libexec/cups/backend
 		doexe ${MY_ARCH}/smfpnetdiscovery
-	fi
-}
-
-pkg_postinst() {
-	if use scanner && ! has_version ${CATEGORY}/${PN}[scanner]; then
-		elog "You need to manually add 'smfp' backend to /etc/sane.d/dll.conf:"
-		elog "# echo smfp >> /etc/sane.d/dll.conf"
-	fi
-	if use network && ! has_version ${CATEGORY}/${PN}[network]; then
-		elog "If you are behind a firewall, you need to allow SNMP UDP packets"
-		elog "with source port 161 and destination port 22161."
 	fi
 }
