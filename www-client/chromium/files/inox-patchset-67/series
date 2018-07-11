@@ -1,12 +1,11 @@
 remove-dependency-on-ffmpeg-internals-for-start-time.patch
-
+x11-fix-mixup-between-DIP-pixel-coordinates.patch
+blink-disable-XML-catalogs-at-runtime.patch
 chromium-skia-harmony.patch
-
 chromium-arflags.patch
 
 0001-fix-building-without-safebrowsing.patch
 0002-fix-building-without-reporting.patch
-
 0003-disable-autofill-download-manager.patch
 0004-disable-google-url-tracker.patch
 0005-disable-default-extensions.patch
