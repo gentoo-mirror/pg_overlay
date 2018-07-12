@@ -26,7 +26,6 @@ CHOST_amd64=x86_64-unknown-linux-gnu
 CHOST_x86=i686-unknown-linux-gnu
 CHOST_arm64=aarch64-unknown-linux-gnu
 
-#RUST_STAGE0_VERSION="1.$(($(get_version_component_range 2) - 1)).2"
 RUST_STAGE0_VERSION="${PV}" #Use current version for stage0
 RUST_STAGE0_amd64="rust-${RUST_STAGE0_VERSION}-${CHOST_amd64}"
 RUST_STAGE0_x86="rust-${RUST_STAGE0_VERSION}-${CHOST_x86}"
