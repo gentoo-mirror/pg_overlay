@@ -1,6 +1,7 @@
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI=6
 GNOME_ORG_MODULE="vala"
 
 inherit gnome.org
@@ -10,8 +11,7 @@ HOMEPAGE="https://wiki.gnome.org/Projects/Vala"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="*"
-
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~x64-macos ~x64-solaris"
 IUSE=""
 
 # Previously ${PN} was part of dev-lang/vala
