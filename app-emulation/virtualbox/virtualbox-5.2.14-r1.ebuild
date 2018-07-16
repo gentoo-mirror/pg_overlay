@@ -221,7 +221,7 @@ src_configure() {
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
 		$(usex vnc --enable-vnc '')
-		#$(usex system-opus --enable-system-libopus '')
+		$(usex system-opus --enable-system-libopus '')
 	)
 	if ! use headless ; then
 		myconf+=(
@@ -364,6 +364,7 @@ src_install() {
 
 			insinto /usr/share/${PN}
 			doins -r nls
+			doins -r UnattendedTemplates
 
 			newmenu "${FILESDIR}"/${PN}-ose.desktop-2 ${PN}.desktop
 		fi
