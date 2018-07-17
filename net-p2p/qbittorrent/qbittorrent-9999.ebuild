@@ -49,7 +49,7 @@ src_prepare() {
 	l10n_find_plocales_changes "${loc_dir}" "${PN}_" ".ts"
 	rm_loc() {
 		rm -vf "${loc_dir}/${PN}_${1}.ts" || die
-		sed -i s/${PN})${1}.qm// src/lang/lang.qrc || die
+		sed -i s/${PN}_${1}.qm// src/lang/lang.qrc || die
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
