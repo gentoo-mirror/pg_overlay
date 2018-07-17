@@ -55,8 +55,8 @@ src_prepare() {
 	cmake-utils_src_prepare
 
 	#To last stable version for Pedro's BTMusic
-	sed -i s/"VER_MINOR = 1"/"VER_MINOR = 0"/g version.pri || die
-	sed -i s/"VER_BUGFIX = 0"/"VER_BUGFIX = 4"/g version.pri || die
+	sed -i s/"VER_MINOR = 1"/"VER_MINOR = 1"/g version.pri || die
+	sed -i s/"VER_BUGFIX = 1"/"VER_BUGFIX = 1"/g version.pri || die
 	sed -i s/"VER_STATUS = alpha"/"VER_STATUS ="/g version.pri || die
 }
 
