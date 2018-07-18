@@ -54,14 +54,6 @@ Index: virtualbox/configure
      --disable-udptunnel)
        WITH_UDPTUNNEL=0
        ;;
-@@ -2754,6 +2791,7 @@
-   check_ssl
-   check_curl
-   [ $WITH_LIBVPX -eq 1 ] && check_vpx
-+  check_libopus
-  [ "$OS" != "darwin"  ] && check_z
-   [ "$OS" != "darwin"  ] && check_png
-   [ $OSE -eq 0 -a "$OS" = "linux" ] && check_pam
 diff --git a/Config.kmk b/Config.kmk
 index ee6f70771..0d2408384 100644
 --- a/Config.kmk
