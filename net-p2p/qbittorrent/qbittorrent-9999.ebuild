@@ -63,7 +63,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DSTACKTRACE=OFF
+		-DSTACKTRACE=$(usex debug)
 		-DWEBUI=$(usex webui)
 	)
 	cmake-utils_src_configure
