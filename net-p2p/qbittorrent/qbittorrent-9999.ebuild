@@ -63,9 +63,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DSYSTEM_QTSINGLEAPPLICATION=ON
-		-DDBUS=$(usex dbus)
-		-DGUI=$(usex X)
+		-DSTACKTRACE=$(usex debug)
 		-DWEBUI=$(usex webui)
 	)
 	cmake-utils_src_configure
