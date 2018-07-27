@@ -470,7 +470,7 @@ src_configure() {
 	
 	#myconf_gn+=" enable_one_click_signin=false"
 	myconf_gn+=" enable_reading_list=false"
-	myconf_gn+=" enable_service_discovery=false"
+	#myconf_gn+=" enable_service_discovery=false"
 
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false"
