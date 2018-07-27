@@ -40,7 +40,6 @@ warnings/null-destination.patch
 
 system/vpx.patch
 system/icu.patch
-system/jpeg.patch
 system/webp.patch
 system/nspr.patch
 system/zlib.patch
