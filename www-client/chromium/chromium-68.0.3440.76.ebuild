@@ -468,10 +468,9 @@ src_configure() {
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	
-	myconf_gn+=" enable_one_click_signin=false"
+	#myconf_gn+=" enable_one_click_signin=false"
 	myconf_gn+=" enable_reading_list=false"
 	myconf_gn+=" enable_service_discovery=false"
-	myconf_gn+=" exclude_unwind_tables=true"
 
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false"
