@@ -443,7 +443,6 @@ src_configure() {
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
 	#
-	myconf_gn+=" enable_webrtc=true"
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 
