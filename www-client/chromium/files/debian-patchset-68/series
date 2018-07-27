@@ -3,7 +3,6 @@ gn/parallel.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
-fixes/widevine.patch
 fixes/optimize.patch
 fixes/ps-print.patch
 fixes/as-needed.patch
@@ -14,7 +13,6 @@ fixes/stringpiece.patch
 fixes/map-insertion.patch
 fixes/missing-includes.patch
 fixes/ambiguous-aliases.patch
-fixes/widevine-revision.patch
 fixes/widevine-locations.patch
 fixes/include-collisions.patch
 fixes/connection-message.patch
