@@ -464,8 +464,6 @@ src_configure() {
 	append-cppflags -DNO_UNWIND_TABLES
 
 	# Ungoogled-Chromium
-	myconf_gn+=" blink_symbol_level=0"
-
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
