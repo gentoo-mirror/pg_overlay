@@ -451,8 +451,8 @@ src_configure() {
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_swiftshader=false"
+	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
 	if use inox; then
@@ -464,13 +464,20 @@ src_configure() {
 	append-cppflags -DNO_UNWIND_TABLES
 
 	# Ungoogled-Chromium
+	myconf_gn+=" blink_symbol_level=0"
+
+	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	myconf_gn+=" enable_hevc_demuxing=true"
+	
+	myconf_gn+=" enable_one_click_signin=false"
+	myconf_gn+=" enable_reading_list=false"
+	myconf_gn+=" enable_service_discovery=false"
+	myconf_gn+=" exclude_unwind_tables=true"
 
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false"
-	myconf_gn+=" enable_reading_list=false"
+	#myconf_gn+=" enable_reading_list=false"
 	myconf_gn+=" use_system_lcms2=true"
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
