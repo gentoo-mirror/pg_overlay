@@ -1,8 +1,16 @@
 app-arch/p7zip 16.02-r2: Port of 7-Zip archiver for Unix
+app-crypt/gpgme 1.11.1: GnuPG Made Easy is a library for making GnuPG easier to use
 app-misc/workrave 1.10.20: Helpful utility to attack Repetitive Strain Injury (RSI)
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1: Quote arguments or standard input for usage in POSIX shell by eval
+dev-libs/libixion 0.13.0: General purpose formula parser & interpreter
+dev-libs/liborcus 0.13.4: Standalone file import filter library for spreadsheet documents
+dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-libs/libsigc++ 2.99.10 2.99.11: Typesafe callback system for standard C++
+dev-libs/libxml2 2.9.8: XML C parser and toolkit
 dev-python/python-mpd2 9999: Python MPD client library
 media-fonts/unifont 10.0.07: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
+media-libs/alsa-lib 1.1.2: Advanced Linux Sound Architecture Library
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
+sys-libs/cracklib 2.9.6-r1: Password Checking Library
+x11-base/xcb-proto 1.13: X C-language Bindings protocol headers
