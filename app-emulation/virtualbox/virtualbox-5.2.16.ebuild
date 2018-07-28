@@ -109,7 +109,7 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/VBoxREM32.so
 	usr/lib/virtualbox/VBoxPython.so
 	usr/lib/virtualbox/VBoxPython2_7.so
-	usr/lib/virtualbox/VBoxPython3_6.so
+	usr/lib/virtualbox/VBoxPython3_7.so
 	usr/lib/virtualbox/VBoxXPCOMC.so
 	usr/lib/virtualbox/VBoxOGLhostcrutil.so
 	usr/lib/virtualbox/VBoxNetDHCP.so
@@ -203,7 +203,7 @@ src_prepare() {
 
 	eapply "${FILESDIR}/python3_support.patch"
 	eapply "${FILESDIR}/fixes_for_python.patch"
-	eapply "${FILESDIR}/switch_to_python3.6.patch"
+	eapply "${FILESDIR}/switch_to_python3.7.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
