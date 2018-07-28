@@ -3,10 +3,10 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_5,3_6} )
+PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6,3_7} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=1.9.15
+WAF_PV=2.0.9
 
 inherit eapi7-ver flag-o-matic gnome2-utils pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
@@ -29,15 +29,15 @@ DOCS+=( README.md etc/{mpv,input}.conf DOCS/{client-api,interface}-changes.rst)
 LICENSE="LGPL-2.1+ GPL-2+ BSD ISC samba? ( GPL-3+ )"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda doc drm dvb
-	dvd +egl gbm +iconv jack javascript jpeg lcms +libass libav libcaca libmpv
-	+lua luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
+	dvd +egl gbm +iconv jack javascript jpeg lcms +libass libcaca libmpv +lua
+	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
 	selinux test tools +uchardet v4l vaapi vdpau vulkan wayland +X +xv zlib
 	zsh-completion"
 
 REQUIRED_USE="
 	|| ( cli libmpv )
 	aqua? ( opengl )
-	cuda? ( !libav opengl )
+	cuda? ( opengl )
 	egl? ( || ( gbm X wayland ) )
 	gbm? ( drm egl opengl )
 	lcms? ( opengl )
@@ -59,8 +59,7 @@ REQUIRED_USE="
 "
 
 COMMON_DEPEND="
-	!libav? ( >=media-video/ffmpeg-4.0:0=[threads,vaapi?,vdpau?] )
-	libav? ( ~media-video/libav-9999:0=[threads,vaapi?,vdpau?] )
+	>=media-video/ffmpeg-4.0:0=[threads,vaapi?,vdpau?]
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.0.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
@@ -137,6 +136,10 @@ RDEPEND="${COMMON_DEPEND}
 	tools? ( ${PYTHON_DEPS} )
 "
 
+PATCHES=(
+	"${FILESDIR}/${PN}-0.29.0-make-ffmpeg-version-check-non-fatal.patch"
+)
+
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
@@ -169,9 +172,9 @@ src_configure() {
 		--disable-libmpv-static
 		--disable-static-build
 		# See deep down below for build-date.
-		#--disable-optimize		# Don't add '-O2' to CFLAGS.
-		--disable-debug-build	# Don't add '-g' to CFLAGS.
-		--disable-html-build
+		--disable-optimize # Don't add '-O2' to CFLAGS.
+		--disable-debug-build # Don't add '-g' to CFLAGS.
+		--enable-html-build
 
 		$(use_enable doc pdf-build)
 		$(use_enable cplugins)
