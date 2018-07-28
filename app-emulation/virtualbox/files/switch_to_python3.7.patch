@@ -19,7 +19,7 @@ Index: VirtualBox-5.2.12/configure
  EOF
    found=
 -  SUPPYTHONLIBS="python2.7 python2.6 python3.1 python3.2 python3.3 python3.4 python3.4m python3.5 python3.5m python3.6 python3.6m"
-+  SUPPYTHONLIBS="python3.6 python3.6m"
++  SUPPYTHONLIBS="python3.7 python3.7m"
    for p in $PYTHONDIR; do
      for d in $SUPPYTHONLIBS; do
        for b in lib/x86_64-linux-gnu lib/i386-linux-gnu lib64 lib/64 lib; do
@@ -88,7 +88,7 @@ Index: VirtualBox-5.2.12/src/VBox/ValidationKit/testboxscript/setup.sh
  sys.exit(not x);\
  ";
 -    for python in python2.7 python2.6 python2.5 python;
-+    for python in python3.6 python2.7 python2.6 python2.5 python;
++    for python in python3.7 python2.7 python2.6 python2.5 python;
      do
          python=`which ${python} 2> /dev/null`
          if [ -n "${python}" -a -x "${python}" ]; then
