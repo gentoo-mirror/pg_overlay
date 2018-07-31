@@ -6,6 +6,7 @@ app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-crypt/gpgme:common-lisp - Install common-lisp files
 app-misc/workrave:mate - Add support for MATE panel
 app-misc/workrave:xfce - Add support for XFCE panel
+app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
 media-fonts/unifont:fontforge - Use media-gfx/fontforge to build fonts from source

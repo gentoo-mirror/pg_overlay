@@ -4,11 +4,13 @@ app-misc/workrave 1.10.20: Helpful utility to attack Repetitive Strain Injury (R
 app-shells/push 3.0: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/iso-codes 3.76: ISO language, territory, currency, script codes and their translations
+app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
 dev-libs/libixion 0.13.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.13.4: Standalone file import filter library for spreadsheet documents
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-libs/libsigc++ 2.99.10 2.99.11: Typesafe callback system for standard C++
 dev-libs/libxml2 2.9.8: XML C parser and toolkit
+dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
 dev-python/python-mpd2 9999: Python MPD client library
 dev-util/ninja 1.8.2: A small build system similar to make
