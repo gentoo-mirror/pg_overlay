@@ -1,7 +1,7 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit readme.gentoo-r1
 
@@ -11,7 +11,7 @@ SRC_URI="https://www.samba.org/ftp/ccache/${P}.tar.xz"
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 sparc x86 ~amd64-fbsd"
 IUSE=""
 
 DEPEND="app-arch/xz-utils
@@ -23,18 +23,12 @@ RDEPEND="${DEPEND}
 src_prepare() {
 	# make sure we always use system zlib
 	rm -rf zlib || die
-	eapply "${FILESDIR}"/${PN}-3.3-size-on-disk.patch #456178
-	eapply_user
-	sed \
-		-e "/^EPREFIX=/s:'':'${EPREFIX}':" \
-		"${FILESDIR}"/ccache-config-3 > ccache-config || die
+	default
 }
 
 src_install() {
-	DOCS=( doc/{AUTHORS.adoc,MANUAL.adoc,NEWS.adoc} README.md )
 	default
 
-	dobin ccache-config
 	insinto /usr/share/shadowman/tools
 	newins - ccache <<<'/usr/lib/ccache/bin'
 
@@ -53,15 +47,12 @@ ccache now supports sys-devel/clang and dev-lang/icc, too!"
 }
 
 pkg_prerm() {
-	if [[ -z ${REPLACED_BY_VERSION} && ${ROOT} == / ]] ; then
+	[ -n "${REPLACED_BY_VERSION}${ROOT}" ] || \
 		eselect compiler-shadow remove ccache
-	fi
 }
 
 pkg_postinst() {
-	if [[ ${ROOT} == / ]]; then
-		eselect compiler-shadow update ccache
-	fi
+	[ -n "${ROOT}" ] || eselect compiler-shadow update ccache
 
 	# nuke broken symlinks from previous versions that shouldn't exist
 	rm -rf "${EROOT}"/usr/lib/ccache.backup || die
