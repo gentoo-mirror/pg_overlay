@@ -3,9 +3,9 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{5,6} pypy )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
 
-inherit multiprocessing multilib-build python-any-r1 versionator toolchain-funcs
+inherit multiprocessing multilib-build python-any-r1 toolchain-funcs versionator
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
@@ -34,7 +34,7 @@ RUST_STAGE0_arm64="rust-${RUST_STAGE0_VERSION}-${CHOST_arm64}"
 CARGO_DEPEND_VERSION="0.$(($(get_version_component_range 2) + 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
-HOMEPAGE="http://www.rust-lang.org/"
+HOMEPAGE="https://www.rust-lang.org/"
 
 SRC_URI="https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
 	amd64? ( https://static.rust-lang.org/dist/${RUST_STAGE0_amd64}.tar.xz )
@@ -49,21 +49,29 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="debug doc extended +jemalloc wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="cargo debug doc +jemalloc rls rustfmt wasm ${ALL_LLVM_TARGETS[*]}"
 
 RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		jemalloc? ( dev-libs/jemalloc )"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	>=sys-devel/gcc-4.7
+	|| (
+		>=sys-devel/gcc-4.7
+		>=sys-devel/clang-3.5
+	)
+	cargo? ( !dev-util/cargo )
+	rustfmt? ( !dev-util/rustfmt )
 	dev-util/cmake
 	dev-util/ninja
 "
-PDEPEND="!extended? ( >=dev-util/cargo-${CARGO_DEPEND_VERSION} )"
+PDEPEND="!cargo? ( >=dev-util/cargo-${CARGO_DEPEND_VERSION} )"
 
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )"
 
 S="${WORKDIR}/${MY_P}-src"
+
+PATCHES=( "${FILESDIR}"/rust-52760-test_loading_atoi.patch
+	"${FILESDIR}"/rust-52876-const-endianess.patch )
 
 toml_usex() {
 	usex "$1" true false
@@ -78,6 +86,17 @@ src_prepare() {
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	default
+
+	# This tests a problem of exponential growth, which seems to be less-reliably
+	# fixed when running on older LLVM and/or some arches.  Just skip it for now.
+	sed -i.ignore -e '1i // ignore-test may still be exponential...' \
+	src/test/run-pass/issue-41696.rs
+
+	# The configure macro will modify some autoconf-related files, which upsets
+	# cargo when it tries to verify checksums in those files.  If we just truncate
+	# that file list, cargo won't have anything to complain about.
+	find src/vendor -name .cargo-checksum.json \
+	-exec sed -i.uncheck -e 's/"files":{[^}]*}/"files":{ }/' '{}' '+'
 }
 
 src_configure() {
@@ -92,6 +111,20 @@ src_configure() {
 		rust_targets="${rust_targets},\"wasm32-unknown-unknown\""
 	fi
 	rust_targets="${rust_targets#,}"
+
+	local extended="false" tools=""
+	if use cargo; then
+		extended="true"
+		tools="\"cargo\","
+	fi
+	if use rls; then
+		extended="true"
+		tools="\"rls\",$tools"
+	fi
+	if use rustfmt; then
+		extended="true"
+		tools="\"rustfmt\",$tools"
+	fi
 
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
@@ -119,7 +152,8 @@ src_configure() {
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
-		extended = $(toml_usex extended)
+		extended = ${extended}
+		tools = [${tools}]
 		verbose = 0
 		sanitizers = false
 		profiler = false
@@ -142,6 +176,7 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(toml_usex wasm)
+		deny-warnings = false
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
@@ -171,7 +206,8 @@ src_configure() {
 
 src_compile() {
 	env $(cat "${S}"/config.env)\
-		./x.py build --verbose --config="${S}"/config.toml -j$(makeopts_jobs) || die
+		./x.py build --config="${S}"/config.toml -j$(makeopts_jobs) \
+		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
@@ -183,6 +219,16 @@ src_install() {
 	mv "${D}/usr/bin/rustdoc" "${D}/usr/bin/rustdoc-${PV}" || die
 	mv "${D}/usr/bin/rust-gdb" "${D}/usr/bin/rust-gdb-${PV}" || die
 	mv "${D}/usr/bin/rust-lldb" "${D}/usr/bin/rust-lldb-${PV}" || die
+	if use cargo; then
+		mv "${D}/usr/bin/cargo" "${D}/usr/bin/cargo-${PV}" || die
+	fi
+	if use rls; then
+		mv "${D}/usr/bin/rls" "${D}/usr/bin/rls-${PV}" || die
+	fi
+	if use rustfmt; then
+		mv "${D}/usr/bin/rustfmt" "${D}/usr/bin/rustfmt-${PV}" || die
+		mv "${D}/usr/bin/cargo-fmt" "${D}/usr/bin/cargo-fmt-${PV}" || die
+	fi
 
 	# Copy shared library versions of standard libraries for all targets
 	# into the system's abi-dependent lib directories because the rust
@@ -213,6 +259,16 @@ src_install() {
 		/usr/bin/rust-gdb
 		/usr/bin/rust-lldb
 	EOF
+	if use cargo; then
+	    echo /usr/bin/cargo >> "${T}/provider-${P}"
+	fi
+	if use rls; then
+	    echo /usr/bin/rls >> "${T}/provider-${P}"
+	fi
+	if use rustfmt; then
+	    echo /usr/bin/rustfmt >> "${T}/provider-${P}"
+	    echo /usr/bin/cargo-fmt >> "${T}/provider-${P}"
+	fi
 	dodir /etc/env.d/rust
 	insinto /etc/env.d/rust
 	doins "${T}/provider-${P}"
