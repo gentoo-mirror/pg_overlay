@@ -54,12 +54,8 @@ IUSE="cargo debug doc +jemalloc libressl rls rustfmt wasm ${ALL_LLVM_TARGETS[*]}
 RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		jemalloc? ( dev-libs/jemalloc )
 		cargo? (
-			sys-libs/zlib
 			!libressl? ( dev-libs/openssl:0= )
 			libressl? ( dev-libs/libressl:0= )
-			net-libs/libssh2
-			net-libs/http-parser
-			net-misc/curl[ssl]
 		)"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
