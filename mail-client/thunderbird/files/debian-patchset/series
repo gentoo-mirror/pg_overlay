@@ -1,2 +1,4 @@
 debian-hacks/Don-t-build-testing-suites-and-stuff.patch
-debian-hacks/Force-use-the-i686-rust-target.patch
+debian-hacks/icu-use-locale.h-instead-of-xlocale.h.patch
+debian-hacks/shellutil.py-ignore-tilde-as-special-character.patch
+debian-hacks/Don-t-build-testing-suites-and-stuff-part-2.patch
