@@ -204,7 +204,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-gio
 	mozconfig_annotate '' --disable-updater
 
 	mozlinguas_mozconfig
