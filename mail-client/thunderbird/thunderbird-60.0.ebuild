@@ -189,7 +189,7 @@ src_configure() {
 
 	# Disabling ldap support causes build failures with 60.0b10
 	#mozconfig_use_enable ldap
-	mozconfig_annotate '' --disable-ldap
+	mozconfig_annotate '' --enable-ldap
 	if use hardened; then
 		append-ldflags "-Wl,-z,relro,-z,now"
 		mozconfig_use_enable hardened hardening
@@ -198,9 +198,9 @@ src_configure() {
 	# Settings
 	mozconfig_annotate '' --enable-default-toolkit=cairo-gtk3
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-hardening
+	#mozconfig_annotate '' --enable-hardening
 	mozconfig_annotate '' --enable-linker=gold
-	mozconfig_annotate '' --enable-optimize
+	mozconfig_annotate '' --enable-optimize='-s -O2'
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --disable-crashreporter
