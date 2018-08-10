@@ -141,13 +141,12 @@ src_prepare() {
 	eapply_user
 	# remove the symlink
 	rm -f mozilla
+	popd &>/dev/null || die
 
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series");do eapply "${FILESDIR}/kde-opensuse/$i";done
 	# Debian pacthes
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
-
-	popd &>/dev/null || die
 
 		# Confirm the version of lightning being grabbed for langpacks is the same
 	# as that used in thunderbird
