@@ -12,5 +12,5 @@
 -    'pocket',
 -    'screenshots',
      'webcompat',
--     'webcompat-reporter'
+-    'webcompat-reporter'
  ]
