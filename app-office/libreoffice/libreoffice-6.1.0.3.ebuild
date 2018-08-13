@@ -346,6 +346,8 @@ src_prepare() {
 			-e ":Keywords: s:pdf;::" \
 			sysui/desktop/menus/draw.desktop || die
 	fi
+
+	sed -i 's/hb/harfbuzz\/hb/g'vcl/inc/sallayout.hxx || die
 }
 
 src_configure() {
