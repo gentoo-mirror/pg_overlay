@@ -4,8 +4,8 @@
 EAPI=6
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="5.4.9"
-MOZ_LIGHTNING_GDATA_VER="3.3"
+MOZ_LIGHTNING_VER="6.2"
+MOZ_LIGHTNING_GDATA_VER="4.4.1"
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
 MOZ_LANGS=(en en-GB en-US ru )
@@ -134,6 +134,7 @@ src_prepare() {
 	# Apply our Thunderbird patchset
 	pushd "${S}"/comm &>/dev/null || doe
 	eapply "${FILESDIR}"/1000_fix_gentoo_preferences.patch
+	eapply "${FILESDIR}"/tb60-build-gdata-provider.patch
 
 	# simulate old directory structure just in case it helps eapply_user
 	ln -s .. mozilla || die
@@ -141,21 +142,22 @@ src_prepare() {
 	eapply_user
 	# remove the symlink
 	rm -f mozilla
+
+	# Confirm the version of lightning being grabbed for langpacks is the same
+	# as that used in thunderbird
+	local THIS_MOZ_LIGHTNING_VER=$(${PYTHON} calendar/lightning/build/makeversion.py ${PV})
+	if [[ ${MOZ_LIGHTNING_VER} != ${THIS_MOZ_LIGHTNING_VER} ]]; then
+		eqawarn "The version of lightning used for localization differs from the version"
+		eqawarn "in thunderbird.  Please update MOZ_LIGHTNING_VER in the ebuild from ${MOZ_LIGHTNING_VER}"
+		eqawarn "to ${THIS_MOZ_LIGHTNING_VER}"
+	fi
+
 	popd &>/dev/null || die
 
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series");do eapply "${FILESDIR}/kde-opensuse/$i";done
 	# Debian pacthes
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
-
-		# Confirm the version of lightning being grabbed for langpacks is the same
-	# as that used in thunderbird
-	local THIS_MOZ_LIGHTNING_VER=$(python "${S}"/calendar/lightning/build/makeversion.py ${PV})
-	if [[ ${MOZ_LIGHTNING_VER} != ${THIS_MOZ_LIGHTNING_VER} ]]; then
-		eqawarn "The version of lightning used for localization differs from the version"
-		eqawarn "in thunderbird.  Please update MOZ_LIGHTNING_VER in the ebuild from ${MOZ_LIGHTNING_VER}"
-		eqawarn "to ${THIS_MOZ_LIGHTNING_VER}"
-	fi
 
 	eautoreconf old-configure.in
 	# Ensure we run eautoreconf in spidermonkey to regenerate configure
@@ -309,12 +311,13 @@ src_install() {
 
 	local emid
 	# stage extra locales for lightning and install over existing
-	mozlinguas_xpistage_langpacks "${BUILD_OBJ_DIR}"/dist/xpi-stage/lightning \
+	rm -f "${ED}"/${MOZILLA_FIVE_HOME}/distribution/extensions/${emid}.xpi || die
+	mozlinguas_xpistage_langpacks "${BUILD_OBJ_DIR}"/dist/bin/distribution/extensions/${emid} \
 		"${WORKDIR}"/lightning-${MOZ_LIGHTNING_VER} lightning calendar
 
 	emid='{e2fda1a4-762b-4020-b5ad-a41df1933103}'
 	mkdir -p "${T}/${emid}" || die
-	cp -RLp -t "${T}/${emid}" "${BUILD_OBJ_DIR}"/dist/xpi-stage/lightning/* || die
+	cp -RLp -t "${T}/${emid}" "${BUILD_OBJ_DIR}"/dist/bin/distribution/extensions/${emid}/* || die
 	insinto ${MOZILLA_FIVE_HOME}/distribution/extensions
 	doins -r "${T}/${emid}"
 
