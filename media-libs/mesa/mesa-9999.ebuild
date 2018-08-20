@@ -368,9 +368,6 @@ multilib_src_configure() {
 			emesonargs+=(-Dgallium-nine=false)
 		fi
 
-		emesonargs+=($(meson_use vaapi gallium-va))
-		use vaapi && emesonargs+=( -Dva-libs-path=/usr/$(get_libdir)/va/drivers )
-
 		if use video_cards_r300 ||
 		   use video_cards_r600 ||
 		   use video_cards_radeonsi ||
@@ -455,6 +452,8 @@ multilib_src_configure() {
 		local drivers="$(sort -u <<< "${1// /$'\n'}")"
 		echo "${drivers//$'\n'/,}"
 	}
+
+	use vaapi && emesonargs+=( -Dva-libs-path=/usr/$(get_libdir)/va/drivers ) && emesonargs+=($(meson_use vaapi gallium-va))
 
 	emesonargs+=(
 		$(meson_use test build-tests)
