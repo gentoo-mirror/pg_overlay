@@ -453,7 +453,7 @@ multilib_src_configure() {
 		echo "${drivers//$'\n'/,}"
 	}
 
-	use vaapi && emesonargs+=( -Dva-libs-path=/usr/$(get_libdir)/va/drivers ) && emesonargs+=($(meson_use vaapi gallium-va))
+	use vaapi && emesonargs+=( -Dva-libs-path=/usr/$(get_libdir)/va/drivers )
 
 	emesonargs+=(
 		$(meson_use test build-tests)
