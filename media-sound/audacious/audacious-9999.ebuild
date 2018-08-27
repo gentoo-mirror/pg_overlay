@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PLOCALES="ar ast be bg ca cmn cs da de el en_GB eo es_AR es_MX es et eu fa_IR fi fr gl he hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ro ru si sk sq sr@latin sr sr_RS sv ta tr uk vi zh_CN zh_TW"
+PLOCALES="ar be bg ca cmn cs da de el en_GB es es_AR es_MX et eu fa_IR fi fr gl hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ro ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
 
 inherit autotools eutils git-r3 gnome2-utils l10n xdg-utils
 
