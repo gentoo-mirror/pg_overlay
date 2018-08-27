@@ -8,7 +8,7 @@ PLOCALES="ar ast be bg ca cmn cs da de el en_GB eo es_AR es_MX es et eu fa_IR fi
 inherit autotools eutils git-r3 gnome2-utils l10n xdg-utils
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
-HOMEPAGE="http://audacious-media-player.org/"
+HOMEPAGE="https://audacious-media-player.org/"
 EGIT_REPO_URI="https://github.com/${PN}-media-player/${PN}.git"
 
 SRC_URI+="mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2"

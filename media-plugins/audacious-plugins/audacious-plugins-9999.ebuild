@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -8,15 +8,16 @@ PLOCALES="ar be bg ca cmn cs da de el en_GB es_AR es_MX es et eu fa_IR fi fr gl 
 inherit autotools git-r3 l10n
 
 DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
-HOMEPAGE="http://audacious-media-player.org/"
+HOMEPAGE="https://audacious-media-player.org/"
 EGIT_REPO_URI="https://github.com/audacious-media-player/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="aac +adplug alsa ampache aosd bs2b cdda cue ffmpeg flac fluidsynth gnome hotkeys http gme gtk3 jack lame libav
+IUSE="aac adplug alsa ampache aosd bs2b cdda cue ffmpeg flac fluidsynth gnome hotkeys http gme gtk3 jack lame libav
 	libnotify libsamplerate lirc mms modplug mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile soxr speedpitch vorbis wavpack"
 REQUIRED_USE="
 	^^ ( gtk3 qt5 )
+	qt5? ( !libnotify )
 	|| ( alsa jack pulseaudio sdl )
 	ampache? ( qt5 http )"
 
