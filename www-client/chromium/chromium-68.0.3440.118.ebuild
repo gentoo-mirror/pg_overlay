@@ -445,6 +445,7 @@ src_configure() {
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 
 	# Inox
+	myconf_gn+=" use_cfi_icall=false"
 	myconf_gn+=" is_cfi=true"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
