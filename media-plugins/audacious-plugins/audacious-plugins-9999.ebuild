@@ -16,7 +16,7 @@ SLOT="0"
 IUSE="aac adplug alsa ampache aosd bs2b cdda cue ffmpeg flac fluidsynth gnome hotkeys http gme gtk3 jack lame libav
 	libnotify libsamplerate lirc mms modplug mp3 nls pulseaudio qt5 scrobbler sdl sid sndfile soxr speedpitch vorbis wavpack"
 REQUIRED_USE="
-	^^ ( gtk gtk3 qt5 )
+	^^ ( gtk3 qt5 )
 	qt5? ( !libnotify )
 	|| ( alsa jack pulseaudio sdl )
 	ampache? ( qt5 http )"
