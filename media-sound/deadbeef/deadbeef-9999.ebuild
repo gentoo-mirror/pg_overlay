@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,7 +7,7 @@ PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja k
 
 PLOCALE_BACKUP="en_GB"
 
-inherit autotools eutils fdo-mime git-r3 gnome2-utils l10n
+inherit autotools eutils git-r3 gnome2-utils l10n xdg-utils
 
 EGIT_REPO_URI="https://github.com/Alexey-Yakovenko/${PN}.git"
 EGIT_BRANCH="master"
@@ -80,6 +80,7 @@ REQUIRED_USE="cdparanoia? ( cdda )
 	cover? ( || ( gtk2 gtk3 ) )
 	ffmpeg? ( !libav )
 	lastfm? ( curl )
+	libav? ( !ffmpeg )
 	mp3? ( || ( mad mpg123 ) )
 	playlist-browser? ( || ( gtk2 gtk3 ) )
 	shell-exec? ( || ( gtk2 gtk3 ) )
@@ -131,19 +132,9 @@ DEPEND="${RDEPEND}
 		amd64? ( dev-lang/yasm:0 ) )"
 
 src_prepare() {
-	if ! use_if_iuse l10n_pt_BR && use_if_iuse l10n_ru ; then
-		eapply "${FILESDIR}/${P}-remove-pt_br-help-translation.patch"
-		#rm -v "${S}/translation/help.pt_BR.txt" || die
-	fi
-
-	if ! use_if_iuse l10n_ru && use_if_iuse l10n_pt_BR ; then
+	if ! use_if_iuse linguas_ru ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
-	fi
-
-	if ! use_if_iuse l10n_pt_BR && ! use_if_iuse l10n_ru ; then
-		eapply "${FILESDIR}/${P}-remove-pt_br-and-ru-help-translation.patch"
-		#rm -v "${S}/translation/help.pt_BR.txt" "${S}/translation/help.ru.txt" || die
 	fi
 
 	if use midi ; then
@@ -163,10 +154,17 @@ src_prepare() {
 }
 
 src_configure() {
+	if use ffmpeg && ! use libav ; then
+		ffmpeg_configure="$(use_enable ffmpeg)"
+	elif use libav && ! use ffmpeg ; then
+		ffmpeg_configure="$(use_enable libav ffmpeg)"
+	fi
+
 	econf --disable-coreaudio \
 		--disable-portable \
 		--disable-static \
 		--docdir=/usr/share/${PN} \
+		"${ffmpeg_configure}" \
 		$(use_enable aac) \
 		$(use_enable adplug) \
 		$(use_enable alac) \
@@ -181,14 +179,12 @@ src_configure() {
 		$(use_enable dts dca) \
 		$(use_enable dumb) \
 		$(use_enable equalizer supereq) \
-		$(use_enable ffmpeg) \
 		$(use_enable flac) \
 		$(use_enable gme) \
 		$(use_enable gtk2) \
 		$(use_enable gtk3) \
 		$(use_enable hotkeys) \
 		$(use_enable lastfm lfm) \
-		$(use_enable libav ffmpeg) \
 		$(use_enable libnotify notify) \
 		$(use_enable libsamplerate src) \
 		$(use_enable m3u) \
@@ -225,8 +221,8 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	fdo-mime_desktop_database_update
-	fdo-mime_mime_database_update
+	xdg_desktop_database_update
+	xdg_mimeinfo_database_update
 
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_cache_update
@@ -234,8 +230,8 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	fdo-mime_desktop_database_update
-	fdo-mime_mime_database_update
+	xdg_desktop_database_update
+	xdg_mimeinfo_database_update
 
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_cache_update
