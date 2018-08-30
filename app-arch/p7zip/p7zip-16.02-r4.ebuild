@@ -29,8 +29,10 @@ S=${WORKDIR}/${PN}_${PV}
 DOCS=( ChangeLog README TODO )
 
 PATCHES=(
+	"${FILESDIR}"/CVE-2016-9296.patch
 	"${FILESDIR}"/CVE-2017-17969.patch
 	"${FILESDIR}"/CVE-2018-5996.patch
+	"${FILESDIR}"/CVE-2018-10115.patch
 )
 
 src_prepare() {
