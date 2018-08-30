@@ -1,5 +1,5 @@
 app-admin/webapp-config 1.55-r1: Gentoo's installer for web-based applications
-app-arch/p7zip 16.02-r2: Port of 7-Zip archiver for Unix
+app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-crypt/gpgme 1.11.1: GnuPG Made Easy is a library for making GnuPG easier to use
 app-shells/quoter 4.1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/iso-codes 3.76: ISO language, territory, currency, script codes and their translations
