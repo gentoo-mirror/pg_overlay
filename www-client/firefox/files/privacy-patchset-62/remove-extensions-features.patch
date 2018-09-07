@@ -8,9 +8,9 @@
 -    'aushelper',
 -    'formautofill',
 -    'onboarding',
--     'pdfjs',
+-    'pdfjs',
 -    'pocket',
 -    'screenshots',
--     'webcompat',
+-    'webcompat',
 -    'webcompat-reporter'
 - ]
