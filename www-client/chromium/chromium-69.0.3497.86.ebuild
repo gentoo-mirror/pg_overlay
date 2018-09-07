@@ -161,7 +161,7 @@ pre_build_checks() {
 		CHECKREQS_DISK_BUILD="25G"
 		if ! use component-build; then
 			CHECKREQS_MEMORY="16G"
-		f
+		fi
 	fi
 	eshopts_pop
 	check-reqs_pkg_setup
