@@ -512,9 +512,9 @@ src_install() {
 		|| die
 	fi
 
-	#cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
-	#"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-	#|| die
+	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
+	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	|| die
 
 	cd "${S}"
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
