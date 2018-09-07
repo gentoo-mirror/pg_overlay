@@ -465,6 +465,7 @@ src_configure() {
 	myconf_gn+=" "
 
 	if use ungoogled; then
+		myconf_gn+=" enable_mdns=false"
 		myconf_gn+=" enable_one_click_signin=false"
 		myconf_gn+=" enable_reporting=false"
 		myconf_gn+=" enable_service_discovery=false"
