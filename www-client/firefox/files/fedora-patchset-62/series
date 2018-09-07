@@ -4,5 +4,3 @@ Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 mozilla-1424422.patch
 rb244676.patch
 rb246462.patch
-
-complete-csd-window-offset-mozilla-1457691.patch
