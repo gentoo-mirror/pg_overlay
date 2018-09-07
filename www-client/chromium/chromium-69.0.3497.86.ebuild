@@ -161,7 +161,7 @@ pre_build_checks() {
 		CHECKREQS_DISK_BUILD="25G"
 		if ! use component-build; then
 			CHECKREQS_MEMORY="16G"
-		fi
+		f
 	fi
 	eshopts_pop
 	check-reqs_pkg_setup
@@ -190,6 +190,10 @@ src_prepare() {
 
 	# Debian patches
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
+
+	# Debian patches
+	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
+
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
