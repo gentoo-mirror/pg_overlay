@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +debian +inox +thin-lto vaapi"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine debian inox +thin-lto vaapi +ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 COMMON_DEPEND="
@@ -133,7 +133,6 @@ GTK+ icon theme.
 
 PATCHES=(
 	"${FILESDIR}/chromium-compiler-r4.patch"
-	"${FILESDIR}/chromium-widevine-r2.patch"
 	"${FILESDIR}/chromium-webrtc-r0.patch"
 	"${FILESDIR}/chromium-memcpy-r0.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
@@ -185,7 +184,6 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
-	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 
 	# Inox patches
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
@@ -452,14 +450,13 @@ src_configure() {
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	
-	#myconf_gn+=" enable_one_click_signin=false"
 	myconf_gn+=" enable_reading_list=false"
-	#myconf_gn+=" enable_service_discovery=false"
-
+	if use ungoogled; then
+		myconf_gn+=" enable_one_click_signin=false"
+		myconf_gn+=" enable_service_discovery=false"
+	fi
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false"
-	#myconf_gn+=" enable_reading_list=false"
 	myconf_gn+=" use_system_lcms2=true"
 	# Ubuntu's Chromium
 	myconf_gn+=" use_swiftshader_with_subzero=false"
@@ -500,7 +497,7 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
-	if use debian; then
+	if use debian || use ungoogled; then
 		gn_system_libraries+=( libevent )
 	fi
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
