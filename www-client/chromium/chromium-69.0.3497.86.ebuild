@@ -456,9 +456,12 @@ src_configure() {
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_reading_list=false"
 	if use ungoogled; then
+		myconf_gn+=" enable_reporting=false"
+		myconf_gn+=" safe_browsing_mode=0"
 		myconf_gn+=" enable_one_click_signin=false"
 		myconf_gn+=" enable_service_discovery=false"
 	fi
+
 	# Dedian's Chromium
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" use_system_lcms2=true"
