@@ -451,15 +451,25 @@ src_configure() {
 	append-cppflags -DNO_UNWIND_TABLES
 
 	# Ungoogled-Chromium
+	myconf_gn+=" blink_symbol_level=0"
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_reading_list=false"
+	myconf_gn+=" exclude_unwind_tables=true"
+	myconf_gn+=" "
+	myconf_gn+=" "
+	myconf_gn+=" "
+	myconf_gn+=" "
+	myconf_gn+=" "
+	myconf_gn+=" "
+
 	if use ungoogled; then
-		myconf_gn+=" enable_reporting=false"
-		myconf_gn+=" safe_browsing_mode=0"
 		myconf_gn+=" enable_one_click_signin=false"
+		myconf_gn+=" enable_reporting=false"
 		myconf_gn+=" enable_service_discovery=false"
+		myconf_gn+=" safe_browsing_mode=0"
+			
 	fi
 
 	# Dedian's Chromium
