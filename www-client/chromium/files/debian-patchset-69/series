@@ -14,11 +14,9 @@ fixes/connection-message.patch
 disable/signin.patch
 disable/android.patch
 disable/fuzzers.patch
-disable/openh264.patch
 disable/perfetto.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
-disable/third-party-cookies.patch
 disable/device-notifications.patch
 
 warnings/printf.patch
