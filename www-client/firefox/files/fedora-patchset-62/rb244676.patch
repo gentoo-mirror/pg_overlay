@@ -1,0 +1,27 @@
+diff --git a/toolkit/system/gnome/nsGIOService.cpp b/toolkit/system/gnome/nsGIOService.cpp
+--- a/toolkit/system/gnome/nsGIOService.cpp
++++ b/toolkit/system/gnome/nsGIOService.cpp
+@@ -521,16 +521,22 @@ nsGIOService::GetAppForMimeType(const ns
+     return NS_OK;
+   }
+ 
+   char *content_type =
+     g_content_type_from_mime_type(PromiseFlatCString(aMimeType).get());
+   if (!content_type)
+     return NS_ERROR_FAILURE;
+ 
++  // GIO returns "unknown" appinfo for the application/octet-stream, which is
++  // useless. It's better to fallback to create appinfo from file extension later.
++  if (g_content_type_is_unknown(content_type)) {
++    return NS_ERROR_NOT_AVAILABLE;
++  }
++
+   GAppInfo *app_info = g_app_info_get_default_for_type(content_type, false);
+   if (app_info) {
+     nsGIOMimeApp *mozApp = new nsGIOMimeApp(app_info);
+     NS_ENSURE_TRUE(mozApp, NS_ERROR_OUT_OF_MEMORY);
+     NS_ADDREF(*aApp = mozApp);
+   } else {
+     g_free(content_type);
+     return NS_ERROR_FAILURE;
+

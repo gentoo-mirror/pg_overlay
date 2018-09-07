@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  8671b358718cb8898a55fada20fc9999408daefe
+# Parent  989a507ffc5faf9a3bd950c2391a24afa9f463c8
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  using namespace mozilla;
  
  #ifdef DEBUG
-@@ -4201,25 +4202,37 @@ Preferences::InitInitialObjects(bool aIs
+@@ -4189,25 +4190,37 @@ Preferences::InitInitialObjects(bool aIs
    // application pref files for backwards compatibility.
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -65,7 +65,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  
    // Load jar:$app/omni.jar!/defaults/preferences/*.js
    // or jar:$gre/omni.jar!/defaults/preferences/*.js.
-@@ -4268,17 +4281,17 @@ Preferences::InitInitialObjects(bool aIs
+@@ -4256,17 +4269,17 @@ Preferences::InitInitialObjects(bool aIs
        }
  
        nsCOMPtr<nsIFile> path = do_QueryInterface(elem);
@@ -132,7 +132,7 @@ diff --git a/python/mozbuild/mozpack/chrome/flags.py b/python/mozbuild/mozpack/c
 diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpack/chrome/manifest.py
 --- a/python/mozbuild/mozpack/chrome/manifest.py
 +++ b/python/mozbuild/mozpack/chrome/manifest.py
-@@ -34,16 +34,17 @@ class ManifestEntry(object):
+@@ -39,16 +39,17 @@ class ManifestEntry(object):
          'platformversion',
          'os',
          'osversion',
@@ -171,7 +171,7 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
 diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
 --- a/toolkit/content/jar.mn
 +++ b/toolkit/content/jar.mn
-@@ -68,16 +68,18 @@ toolkit.jar:
+@@ -69,16 +69,18 @@ toolkit.jar:
     content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
     content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
     content/global/bindings/datekeeper.js       (widgets/datekeeper.js)
@@ -848,7 +848,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -65,17 +65,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+@@ -71,17 +71,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
          '../components/printingui',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
@@ -1291,7 +1291,7 @@ diff --git a/uriloader/exthandler/HandlerServiceParent.cpp b/uriloader/exthandle
  using mozilla::dom::RemoteHandlerApp;
  
  namespace {
-@@ -264,17 +264,17 @@ HandlerServiceParent::RecvExists(const H
+@@ -265,17 +265,17 @@ HandlerServiceParent::RecvExists(const H
  }
  
  mozilla::ipc::IPCResult
@@ -2166,7 +2166,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    const char* directive;
    int argc;
  
-@@ -441,16 +442,17 @@ ParseManifest(NSLocationType aType, File
+@@ -437,16 +438,17 @@ ParseManifest(NSLocationType aType, File
    NS_NAMED_LITERAL_STRING(kRemoteEnabled, "remoteenabled");
    NS_NAMED_LITERAL_STRING(kRemoteRequired, "remoterequired");
    NS_NAMED_LITERAL_STRING(kApplication, "application");
@@ -2184,7 +2184,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    NS_NAMED_LITERAL_STRING(kMain, "main");
    NS_NAMED_LITERAL_STRING(kContent, "content");
  
-@@ -496,44 +498,49 @@ ParseManifest(NSLocationType aType, File
+@@ -492,44 +494,49 @@ ParseManifest(NSLocationType aType, File
          CopyUTF8toUTF16(s, abi);
          abi.Insert(char16_t('_'), 0);
          abi.Insert(osTarget, 0);
@@ -2234,7 +2234,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
      process = kMain;
    }
  
-@@ -635,25 +642,27 @@ ParseManifest(NSLocationType aType, File
+@@ -631,25 +638,27 @@ ParseManifest(NSLocationType aType, File
      TriState stOsVersion = eUnspecified;
      TriState stOs = eUnspecified;
      TriState stABI = eUnspecified;
@@ -2262,7 +2262,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        }
  
  #if defined(MOZ_WIDGET_ANDROID)
-@@ -698,16 +707,17 @@ ParseManifest(NSLocationType aType, File
+@@ -694,16 +703,17 @@ ParseManifest(NSLocationType aType, File
      }
  
      if (!ok ||
@@ -2300,7 +2300,7 @@ diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
 diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
 --- a/xpcom/io/nsLocalFileUnix.cpp
 +++ b/xpcom/io/nsLocalFileUnix.cpp
-@@ -46,16 +46,17 @@
+@@ -47,16 +47,17 @@
  #include "prproces.h"
  #include "nsIDirectoryEnumerator.h"
  #include "nsISimpleEnumerator.h"
@@ -2318,14 +2318,14 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "prmem.h"
  #include "plbase64.h"
  
-@@ -1955,59 +1956,74 @@ nsLocalFile::SetPersistentDescriptor(con
-   return InitWithNativePath(aPersistentDescriptor);
- #endif
- }
- 
+@@ -1999,63 +2000,78 @@ nsLocalFile::SetPersistentDescriptor(con
  NS_IMETHODIMP
  nsLocalFile::Reveal()
  {
+   if (!FilePreferences::IsAllowedPath(mPath)) {
+     return NS_ERROR_FILE_ACCESS_DENIED;
+   }
+ 
  #ifdef MOZ_WIDGET_GTK
 -  nsCOMPtr<nsIGIOService> giovfs = do_GetService(NS_GIOSERVICE_CONTRACTID);
 -  if (!giovfs) {
@@ -2384,6 +2384,10 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  NS_IMETHODIMP
  nsLocalFile::Launch()
  {
+   if (!FilePreferences::IsAllowedPath(mPath)) {
+     return NS_ERROR_FILE_ACCESS_DENIED;
+   }
+ 
  #ifdef MOZ_WIDGET_GTK
 +  if( nsKDEUtils::kdeSupport()) {
 +    nsTArray<nsCString> command;
