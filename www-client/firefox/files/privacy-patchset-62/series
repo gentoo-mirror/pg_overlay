@@ -1,6 +1,4 @@
-firefox-60-disable-pocket-leftovers.patch
-firefox-60-disable-newtab-page-remote.patch
-firefox-60-disable-location.services.mozilla.com.patch
+firefox-62-disable-pocket-leftovers.patch
 firefox-60-prefs.patch
 firefox-60-disable-telemetry.patch
 firefox-60-disable-data-sharing-infobar.patch
