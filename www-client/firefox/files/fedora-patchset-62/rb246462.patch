@@ -1,0 +1,80 @@
+diff --git a/uriloader/exthandler/nsExternalHelperAppService.cpp b/uriloader/exthandler/nsExternalHelperAppService.cpp
+--- a/uriloader/exthandler/nsExternalHelperAppService.cpp
++++ b/uriloader/exthandler/nsExternalHelperAppService.cpp
+@@ -2590,26 +2590,21 @@ NS_IMETHODIMP nsExternalHelperAppService
+         }
+       }
+     }
+   }
+ 
+   // (3) No match yet. Ask extras.
+   if (!found) {
+     rv = NS_ERROR_FAILURE;
+-#ifdef XP_WIN
+-    /* XXX Gross hack to wallpaper over the most common Win32
+-     * extension issues caused by the fix for bug 116938.  See bug
+-     * 120327, comment 271 for why this is needed.  Not even sure we
+-     * want to remove this once we have fixed all this stuff to work
+-     * right; any info we get from extras on this type is pretty much
+-     * useless....
+-     */
++    // Getting info for application/octet-stream content-type from extras
++    // does not make a sense because this tends to open all octet-streams
++    // as Binary file with exe, com or bin extension regardless the real
++    // extension.
+     if (!typeToUse.Equals(APPLICATION_OCTET_STREAM, nsCaseInsensitiveCStringComparator()))
+-#endif
+       rv = FillMIMEInfoForMimeTypeFromExtras(typeToUse, *_retval);
+     LOG(("Searched extras (by type), rv 0x%08" PRIX32 "\n", static_cast<uint32_t>(rv)));
+     // If that didn't work out, try file extension from extras
+     if (NS_FAILED(rv) && !aFileExt.IsEmpty()) {
+       rv = FillMIMEInfoForExtensionFromExtras(aFileExt, *_retval);
+       LOG(("Searched extras (by ext), rv 0x%08" PRIX32 "\n", static_cast<uint32_t>(rv)));
+     }
+     // If that still didn't work, set the file description to "ext File"
+diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exthandler/unix/nsOSHelperAppService.cpp
+--- a/uriloader/exthandler/unix/nsOSHelperAppService.cpp
++++ b/uriloader/exthandler/unix/nsOSHelperAppService.cpp
+@@ -26,16 +26,17 @@
+ #include "nsISupportsPrimitives.h"
+ #include "nsCRT.h"
+ #include "nsDirectoryServiceDefs.h"
+ #include "nsDirectoryServiceUtils.h"
+ #include "ContentHandlerService.h"
+ #include "prenv.h"      // for PR_GetEnv()
+ #include "nsAutoPtr.h"
+ #include "mozilla/Preferences.h"
++#include "nsMimeTypes.h"
+ 
+ using namespace mozilla;
+ 
+ #define LOG(args) MOZ_LOG(mLog, mozilla::LogLevel::Debug, args)
+ #define LOG_ENABLED() MOZ_LOG_TEST(mLog, mozilla::LogLevel::Debug)
+ 
+ static nsresult
+ FindSemicolon(nsAString::const_iterator& aSemicolon_iter,
+@@ -1445,17 +1446,22 @@ nsOSHelperAppService::GetFromType(const 
+ }
+ 
+ 
+ already_AddRefed<nsIMIMEInfo>
+ nsOSHelperAppService::GetMIMEInfoFromOS(const nsACString& aType,
+                                         const nsACString& aFileExt,
+                                         bool       *aFound) {
+   *aFound = true;
+-  RefPtr<nsMIMEInfoBase> retval = GetFromType(PromiseFlatCString(aType));
++  RefPtr<nsMIMEInfoBase> retval;
++  // Fallback to lookup by extension when generic 'application/octet-stream'
++  // content type is received.
++  if (!aType.EqualsLiteral(APPLICATION_OCTET_STREAM)) {
++    retval = GetFromType(PromiseFlatCString(aType));
++  }
+   bool hasDefault = false;
+   if (retval)
+     retval->GetHasDefaultHandler(&hasDefault);
+   if (!retval || !hasDefault) {
+     RefPtr<nsMIMEInfoBase> miByExt = GetFromExtension(PromiseFlatCString(aFileExt));
+     // If we had no extension match, but a type match, use that
+     if (!miByExt && retval)
+       return retval.forget();
+
