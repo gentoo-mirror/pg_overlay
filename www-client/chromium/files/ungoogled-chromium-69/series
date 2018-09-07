@@ -28,7 +28,6 @@ inox-patchset/0021-disable-rlz.patch
 debian/gn/parallel.patch
 debian/fixes/mojo.patch
 debian/fixes/sizet.patch
-debian/fixes/optimize.patch
 debian/fixes/ps-print.patch
 debian/fixes/as-needed.patch
 debian/fixes/inspector.patch
