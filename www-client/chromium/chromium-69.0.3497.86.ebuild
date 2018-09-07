@@ -19,7 +19,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
 IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine debian inox +thin-lto vaapi +ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
-REQUIRED_USE="inox? ( debian !ungoogled)
+REQUIRED_USE="inox? ( debian !ungoogled )
 			|| ( inox ungoogled )"
 
 COMMON_DEPEND="
