@@ -1,6 +1,6 @@
 --- a/browser/extensions/moz.build	2018-08-30 23:44:17.000000000 +0700
 +++ b/browser/extensions/moz.build	2018-09-08 10:26:32.730614766 +0700
-@@ -5,14 +5,6 @@
+@@ -5,14 +5,7 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  DIRS += [
@@ -9,7 +9,7 @@
 -    'formautofill',
 -    'onboarding',
 -    'pdfjs',
--    'screenshots',
+     'screenshots',
 -    'webcompat',
 -    'webcompat-reporter'
  ]
