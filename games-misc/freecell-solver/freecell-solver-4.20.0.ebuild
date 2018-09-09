@@ -18,6 +18,7 @@ REQUIRED_USE=""
 DEPEND="
 	dev-perl/Path-Tiny
 	dev-perl/Template-Toolkit
+	dev-python/random2
 	dev-util/gperf
 "
 src_prepare() {
