@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -34,7 +34,7 @@ REQUIRED_USE="
 	webdav? ( curl expat )
 "
 
-CDEPEND="
+COMMON_DEPEND="
 	adplug? ( media-libs/adplug )
 	alsa? (
 		media-libs/alsa-lib
@@ -97,15 +97,17 @@ CDEPEND="
 	zeroconf? ( net-dns/avahi[dbus] )
 	zip? ( dev-libs/zziplib )
 	zlib? ( sys-libs/zlib )"
-DEPEND="${CDEPEND}
+DEPEND="${COMMON_DEPEND}
 	dev-libs/boost
 	virtual/pkgconfig"
-RDEPEND="${CDEPEND}
+RDEPEND="${COMMON_DEPEND}
 	!<sys-cluster/mpich2-1.4_rc2
 	selinux? ( sec-policy/selinux-mpd )
 "
 
-PATCHES=( "${FILESDIR}"/${PN}-0.18.conf.patch )
+PATCHES=(
+	"${FILESDIR}"/${PN}-0.18.conf.patch
+)
 
 pkg_setup() {
 	use network || ewarn "Icecast and Shoutcast streaming needs networking."
@@ -236,7 +238,7 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	default
 
 	insinto /etc
 	newins doc/mpdconf.dist mpd.conf
@@ -249,6 +251,5 @@ src_install() {
 	fi
 
 	insinto /etc/logrotate.d
-	newins "${FILESDIR}"/${PN}-0.20.4.logrotate ${PN}
-
+	newins "${FILESDIR}"/${PN}-0.20.12.logrotate ${PN}
 }
