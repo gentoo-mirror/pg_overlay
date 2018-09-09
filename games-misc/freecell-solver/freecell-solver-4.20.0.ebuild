@@ -19,6 +19,7 @@ DEPEND="
 	dev-perl/Path-Tiny
 	dev-perl/Template-Toolkit
 	dev-python/random2
+	dev-python/six
 	dev-util/gperf
 "
 src_prepare() {
