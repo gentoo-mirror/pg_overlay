@@ -22,6 +22,9 @@ DEPEND="
 	dev-python/six
 	dev-util/gperf
 "
+
+PATCHES="${FILESDIR/fix-rpmlint-errors.patch}"
+
 src_prepare() {
 	mycmakeargs=(
 		-DFCS_WITH_TEST_SUITE=OFF \

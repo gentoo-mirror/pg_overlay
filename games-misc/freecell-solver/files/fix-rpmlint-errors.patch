@@ -1,0 +1,50 @@
+commit 9a2917edf0d13bbefef82a39b896ef14f62da876
+Author: Shlomi Fish <shlomif@shlomifish.org>
+Date:   Thu May 24 14:10:43 2018 +0300
+
+    Fix gcc warnings in a branch.
+    
+    Blocking the openSUSE package for KDE.
+
+diff --git a/lib.c b/lib.c
+index 52a035509..769e6d6fa 100644
+--- a/lib.c
++++ b/lib.c
+@@ -1607,7 +1607,7 @@ static inline fc_solve_solve_process_ret_t fc_solve_patsolve_do_solve(
+     case FCS_PATS__NOSOL:
+         return FCS_STATE_IS_NOT_SOLVEABLE;
+ 
+-    case FCS_PATS__FAIL:
++    default:
+         return FCS_STATE_SUSPEND_PROCESS;
+     }
+ }
+@@ -1618,9 +1618,6 @@ static inline int fc_solve__soft_thread__do_solve(
+ {
+     switch (soft_thread->super_method_type)
+     {
+-    case FCS_SUPER_METHOD_DFS:
+-        return fc_solve_soft_dfs_do_solve(soft_thread);
+-
+     case FCS_SUPER_METHOD_BEFS_BRFS:
+         return fc_solve_befs_or_bfs_do_solve(soft_thread);
+ 
+@@ -1628,6 +1625,9 @@ static inline int fc_solve__soft_thread__do_solve(
+     case FCS_SUPER_METHOD_PATSOLVE:
+         return fc_solve_patsolve_do_solve(soft_thread);
+ #endif
++
++    default:
++        return fc_solve_soft_dfs_do_solve(soft_thread);
+     }
+ }
+ 
+@@ -4539,7 +4539,7 @@ fc_solve_user_INTERNAL_get_flares_plan_item_type(
+         return "RunIndef";
+     case FLARES_PLAN_RUN_COUNT_ITERS:
+         return "Run";
+-    case FLARES_PLAN_CHECKPOINT:
++    default:
+         return "CP";
+     }
+ #else
