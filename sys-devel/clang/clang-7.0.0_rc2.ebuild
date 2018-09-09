@@ -110,7 +110,7 @@ src_unpack() {
 
 	if ! use doc; then
 		einfo "Unpacking llvm-${PV}-manpages.tar.bz2 ..."
-		tar -xf "${DISTDIR}/llvm-${PV}-manpages.tar.bz2" || die
+		tar -xf "${DISTDIR}/llvm-${PV/_rc?/}-manpages.tar.bz2" || die
 	fi
 }
 
