@@ -22,10 +22,13 @@ DEPEND="
 	dev-python/six
 	dev-util/gperf
 "
+
 src_prepare() {
 	mycmakeargs=(
+		-DBUILD_STATIC_LIBRARY=OFF \
 		-DFCS_WITH_TEST_SUITE=OFF \
-		-DBUILD_STATIC_LIBRARY=OFF
+		-DFCS_AVOID_TCMALLOC=ON \
+		-DFCS_BUILD_DOCS=OFF
 	)
 
 	cmake-utils_src_prepare
