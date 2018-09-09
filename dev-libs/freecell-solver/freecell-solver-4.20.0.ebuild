@@ -12,6 +12,7 @@ SRC_URI="https://fc-solve.shlomifish.org/downloads/fc-solve/${P}.tar.xz"
 
 LICENSE="GPLv3"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
 REQUIRED_USE=""
 
