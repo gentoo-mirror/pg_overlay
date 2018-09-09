@@ -438,7 +438,7 @@ src_configure() {
 	myconf_gn+=" use_cfi_icall=false"
 	myconf_gn+=" is_cfi=true"
 	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" remove_webcore_debug_symbols=true"
+	#myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
@@ -459,12 +459,6 @@ src_configure() {
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_reading_list=false"
 	myconf_gn+=" exclude_unwind_tables=true"
-	myconf_gn+=" "
-	myconf_gn+=" "
-	myconf_gn+=" "
-	myconf_gn+=" "
-	myconf_gn+=" "
-	myconf_gn+=" "
 
 	if use ungoogled; then
 		myconf_gn+=" enable_mdns=false"
