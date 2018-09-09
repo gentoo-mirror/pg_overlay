@@ -9,7 +9,7 @@ inherit kde5
 
 DESCRIPTION="KDE patience game"
 HOMEPAGE="https://games.kde.org/game.php?game=kpat"
-KEYWORDS=""
+KEYWORDS="amd64 x86"
 IUSE=""
 
 DEPEND="
@@ -29,6 +29,7 @@ DEPEND="
 	$(add_qt_dep qtgui)
 	$(add_qt_dep qtsvg)
 	$(add_qt_dep qtwidgets)
+	dev-libs/freecell-solver
 	x11-misc/shared-mime-info
 "
 RDEPEND="${DEPEND}"
