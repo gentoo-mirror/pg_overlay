@@ -27,7 +27,8 @@ src_prepare() {
 	mycmakeargs=(
 		-DBUILD_STATIC_LIBRARY=OFF \
 		-DFCS_WITH_TEST_SUITE=OFF \
-		-DFCS_AVOID_TCMALLOC=ON
+		-DFCS_AVOID_TCMALLOC=ON \
+		-DFCS_BUILD_DOCS=OFF
 	)
 
 	cmake-utils_src_prepare
