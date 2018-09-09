@@ -17,9 +17,8 @@ REQUIRED_USE=""
 
 DEPEND="
 	dev-perl/Path-Tiny
-	freecell-solver
+	dev-perl/Template-Toolkit
 	dev-util/gperf
-	
 "
 src_prepare() {
 	mycmakeargs=(
