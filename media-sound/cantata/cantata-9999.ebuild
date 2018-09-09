@@ -3,8 +3,8 @@
 
 EAPI=6
 
-PLOCALES="cs da de en_GB es fr hu it ja ko pl ru zh_CN"
-inherit cmake-utils git-r3 gnome2-utils l10n qmake-utils xdg
+PLOCALES="cs da de en_GB es fr hu it ja ko pl pt_BR ru zh_CN"
+inherit cmake-utils git-r3 gnome2-utils l10n qmake-utils xdg-utils
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
 HOMEPAGE="https://github.com/CDrummond/cantata"
@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/CDrummond/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks"
+IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks zeroconf"
 REQUIRED_USE="
 	?? ( cdda cdio )
 	cdda? ( udisks || ( cddb musicbrainz ) )
@@ -46,11 +46,12 @@ COMMON_DEPEND="
 		media-sound/mpg123
 		virtual/ffmpeg
 	)
-	streaming? ( media-video/vlc:0= )
+	streaming? ( dev-qt/qtmultimedia:5 )
 	taglib? (
 		media-libs/taglib
 		udisks? ( sys-fs/udisks:2 )
 	)
+	zeroconf? ( net-dns/avahi )
 "
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl[ithreads]
@@ -63,7 +64,10 @@ DEPEND="${COMMON_DEPEND}
 # cantata has no tests
 RESTRICT="test"
 
-PATCHES=( "${FILESDIR}/${P}-headers.patch" )
+PATCHES=(
+	"${FILESDIR}/${P}-headers.patch"
+	"${FILESDIR}/${P}-opusfile.patch"
+)
 
 src_prepare() {
 	remove_locale() {
@@ -94,6 +98,7 @@ src_configure() {
 		-DENABLE_HTTP_STREAM_PLAYBACK=$(usex streaming)
 		-DENABLE_TAGLIB=$(usex taglib)
 		-DENABLE_DEVICES_SUPPORT=$(usex udisks)
+		-DENABLE_AVAHI=$(usex zeroconf)
 		-DENABLE_REMOTE_DEVICES=OFF
 		-DENABLE_UDISKS2=OFF
 	)
@@ -101,20 +106,20 @@ src_configure() {
 	cmake-utils_src_configure
 }
 
-pkg_preinst() {
-	gnome2_icon_savelist
-	xdg_pkg_preinst
-}
-
 pkg_postinst() {
 	gnome2_icon_cache_update
-	xdg_pkg_postinst
+	xdg_desktop_database_update
 
 	has_version media-sound/mpd || \
 		elog "An instance of media-sound/mpd, local or remote, is required to set up Cantata."
+
+	if ! has_version app-misc/media-player-info; then
+		elog "Install app-misc/media-player-info to enable identification"
+		elog "and querying of portable media players"
+	fi
 }
 
 pkg_postrm() {
 	gnome2_icon_cache_update
-	xdg_pkg_postrm
+	xdg_desktop_database_update
 }
