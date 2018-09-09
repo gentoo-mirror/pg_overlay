@@ -289,7 +289,7 @@ multilib_src_install_all() {
 	# install pre-generated manpages
 	if ! use doc; then
 		insinto "/usr/lib/llvm/${SLOT}/share/man/man1"
-		doins "${WORKDIR}/x/y/llvm-${PV}-manpages/clang"/*.1
+		doins "${WORKDIR}/x/y/llvm-${PV/_rc?/}-manpages/clang"/*.1
 	fi
 
 	docompress "/usr/lib/llvm/${SLOT}/share/man"

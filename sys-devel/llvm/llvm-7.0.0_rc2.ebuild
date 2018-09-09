@@ -242,7 +242,7 @@ multilib_src_install_all() {
 	if ! use doc; then
 		# (doman does not support custom paths)
 		insinto "/usr/lib/llvm/${SLOT}/share/man/man1"
-		doins "${WORKDIR}/${P}-manpages/llvm"/*.1
+		doins "${WORKDIR}/${P/_rc?/}-manpages/llvm"/*.1
 	fi
 
 	docompress "/usr/lib/llvm/${SLOT}/share/man"
