@@ -23,12 +23,11 @@ DEPEND="
 	dev-util/gperf
 "
 
-PATCHES="${FILESDIR/fix-rpmlint-errors.patch}"
-
 src_prepare() {
 	mycmakeargs=(
+		-DBUILD_STATIC_LIBRARY=OFF \
 		-DFCS_WITH_TEST_SUITE=OFF \
-		-DBUILD_STATIC_LIBRARY=OFF
+		-DFCS_AVOID_TCMALLOC=ON
 	)
 
 	cmake-utils_src_prepare
