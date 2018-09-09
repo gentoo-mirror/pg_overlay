@@ -1,6 +1,6 @@
 # Add ungoogled-chromium-specific code to third_party/ungoogled/
 
---- a/dev/null
+--- /dev/null
 +++ b/third_party/ungoogled/BUILD.gn
 @@ -0,0 +1,10 @@
 +# Copyright (c) 2018 The ungoogled-chromium Authors. All rights reserved.
@@ -13,7 +13,7 @@
 +    "ungoogled_switches.cc",
 +  ]
 +}
---- a/dev/null
+--- /dev/null
 +++ b/third_party/ungoogled/ungoogled_switches.cc
 @@ -0,0 +1,15 @@
 +// Copyright (c) 2018 The ungoogled-chromium Authors. All rights reserved.
@@ -31,7 +31,7 @@
 +const char kFingerprintingCanvasMeasureTextNoise[] = "fingerprinting-canvas-measuretext-noise";
 +
 +}  // namespace switches
---- a/dev/null
+--- /dev/null
 +++ b/third_party/ungoogled/ungoogled_switches.h
 @@ -0,0 +1,17 @@
 +// Copyright (c) 2018 The ungoogled-chromium Authors. All rights reserved.
