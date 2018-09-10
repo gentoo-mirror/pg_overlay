@@ -68,11 +68,6 @@ S=${WORKDIR}/x/y/${MY_P}
 # least intrusive of all
 CMAKE_BUILD_TYPE=RelWithDebInfo
 
-PATCHES=(
-	# add Prefix include paths for Darwin
-	"${FILESDIR}"/6.0.1/darwin_prefix-include-paths.patch
-)
-
 # Multilib notes:
 # 1. ABI_* flags control ABIs libclang* is built for only.
 # 2. clang is always capable of compiling code for all ABIs for enabled
