@@ -473,7 +473,6 @@ src_configure() {
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" use_system_lcms2=true"
 	# Ubuntu's Chromium
-	myconf_gn+=" use_swiftshader_with_subzero=false"
 	myconf_gn+=" enable_vr=false"
 	myconf_gn+=" enable_wayland_server=false"
 	if use thin-lto; then
