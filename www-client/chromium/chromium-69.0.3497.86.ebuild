@@ -436,9 +436,9 @@ src_configure() {
 
 	# Inox
 	myconf_gn+=" use_cfi_icall=false"
-	#myconf_gn+=" is_cfi=true"
+	myconf_gn+=" is_cfi=true"
 	myconf_gn+=" symbol_level=0"
-	#myconf_gn+=" remove_webcore_debug_symbols=true"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
@@ -453,7 +453,7 @@ src_configure() {
 	append-cppflags -DNO_UNWIND_TABLES
 
 	# Ungoogled-Chromium
-	myconf_gn+=" blink_symbol_level=0"
+	#myconf_gn+=" blink_symbol_level=0"
 	myconf_gn+=" enable_hevc_demuxing=true"
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
@@ -473,7 +473,6 @@ src_configure() {
 	myconf_gn+=" use_ozone=false"
 	myconf_gn+=" use_system_lcms2=true"
 	# Ubuntu's Chromium
-	myconf_gn+=" use_swiftshader_with_subzero=false"
 	myconf_gn+=" enable_vr=false"
 	myconf_gn+=" enable_wayland_server=false"
 	if use thin-lto; then
