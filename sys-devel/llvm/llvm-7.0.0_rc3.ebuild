@@ -1,4 +1,4 @@
-# # Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -13,8 +13,8 @@ inherit cmake-utils eapi7-ver flag-o-matic multilib-minimal \
 
 DESCRIPTION="Low Level Virtual Machine"
 HOMEPAGE="https://llvm.org/"
-SRC_URI="https://prereleases.llvm.org/${PV/_//}/${P/_/}.src.tar.xz
-	!doc? ( https://dev.gentoo.org/~mgorny/dist/llvm/${P/_rc?/}-manpages.tar.bz2 )"
+SRC_URI="https://prereleases.llvm.org/${PV/_//}/${P/_/}.src.tar.xz"
+#	!doc? ( https://dev.gentoo.org/~mgorny/dist/llvm/${P}-manpages.tar.bz2 )"
 
 # Keep in sync with CMakeLists.txt
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
@@ -68,7 +68,8 @@ PDEPEND="sys-devel/llvm-common
 	gold? ( >=sys-devel/llvmgold-${SLOT} )"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
-	|| ( ${ALL_LLVM_TARGETS[*]} )"
+	|| ( ${ALL_LLVM_TARGETS[*]} )
+	doc"
 
 S=${WORKDIR}/${P/_/}.src
 
@@ -242,7 +243,7 @@ multilib_src_install_all() {
 	if ! use doc; then
 		# (doman does not support custom paths)
 		insinto "/usr/lib/llvm/${SLOT}/share/man/man1"
-		doins "${WORKDIR}/${P/_rc?/}-manpages/llvm"/*.1
+		doins "${WORKDIR}/${P}-manpages/llvm"/*.1
 	fi
 
 	docompress "/usr/lib/llvm/${SLOT}/share/man"
