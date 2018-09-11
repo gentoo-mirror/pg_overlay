@@ -433,7 +433,7 @@ src_configure() {
 	#
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
-	myconf_gn+=" enable_vulkan=true"
+	#myconf_gn+=" enable_vulkan=true"
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
@@ -456,7 +456,7 @@ src_configure() {
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_reading_list=false"
-	myconf_gn+=" exclude_unwind_tables=true"
+	#myconf_gn+=" exclude_unwind_tables=true"
 
 	if use ungoogled; then
 		myconf_gn+=" enable_mdns=false"
