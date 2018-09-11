@@ -139,6 +139,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/chromium-ffmpeg-ebp-r1.patch"
+	"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
@@ -456,8 +457,7 @@ src_configure() {
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_reading_list=false"
-	#myconf_gn+=" exclude_unwind_tables=true"
-
+	myconf_gn+=" exclude_unwind_tables=true"
 	if use ungoogled; then
 		myconf_gn+=" enable_mdns=false"
 		myconf_gn+=" enable_one_click_signin=false"
