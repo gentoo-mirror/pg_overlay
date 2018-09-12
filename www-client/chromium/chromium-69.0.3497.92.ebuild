@@ -190,7 +190,7 @@ src_prepare() {
 
 	if use inox; then
 		# Inox patchset
-		#for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
+		for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
 		# Debian patchset
 		for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
 	fi
@@ -445,10 +445,10 @@ src_configure() {
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
-	if use inox; then
-		myconf_gn+=" enable_reporting=false"
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
+	#if use inox; then
+	#	myconf_gn+=" enable_reporting=false"
+	#	myconf_gn+=" safe_browsing_mode=0"
+	#fi
 	append-cflags -fno-unwind-tables -fno-asynchronous-unwind-tables
 	append-cxxflags -fno-unwind-tables -fno-asynchronous-unwind-tables
 	append-cppflags -DNO_UNWIND_TABLES
