@@ -31,11 +31,10 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? ( dev-util/cppunit )"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-0001-Fix-the-DH-parameters-generation-with-OpenSSL-1.1.patch"
-	"${FILESDIR}/${PN}-openssl-1.1-part2.patch"
-	"${FILESDIR}/${PN}-openssl-1.1-part3.patch"
-)
+#PATCHES=(
+#	"${FILESDIR}/${PN}-openssl-1.1-part2.patch"
+#	"${FILESDIR}/${PN}-openssl-1.1-part3.patch"
+#)
 
 src_prepare() {
 	default
@@ -57,7 +56,8 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
 		${disable_instrumentation} \
-		--with-posix-fallocate
+		--with-posix-fallocate \
+		--with-zlib="${EROOT%/}/usr/"
 }
 
 src_install() {
