@@ -190,12 +190,12 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$i";done
 
 	# Inox patchset
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/$i";don
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/$i";done
 	
 	# Debian patchset
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
 
-	rm -f base/third_party/libevent/BUILD.gn build/config/freetype/freetype.gni
+	rm -f base/third_party/libevent/BUILD.gn build/config/freetype/freetype.gni || die
 
 	# Ungoogled patchset
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
