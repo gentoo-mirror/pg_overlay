@@ -1,4 +1,3 @@
-inox-patchset/chromium-arflags.patch
 inox-patchset/chromium-clang-compiler-flags.patch
 inox-patchset/chromium-exclude_unwind_tables.patch
 inox-patchset/chromium-skia-harmony.patch
