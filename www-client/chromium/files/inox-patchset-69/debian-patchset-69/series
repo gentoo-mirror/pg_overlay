@@ -25,7 +25,6 @@ warnings/macro-redefined.patch
 warnings/unused-typedefs.patch
 
 system/vpx.patch
-system/icu.patch
 system/nspr.patch
 system/event.patch
 system/openjpeg.patch
