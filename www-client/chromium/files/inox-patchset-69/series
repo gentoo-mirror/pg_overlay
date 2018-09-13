@@ -1,5 +1,4 @@
 chromium-arflags.patch
-chromium-clang-compiler-flags.patch
 chromium-exclude_unwind_tables.patch
 chromium-skia-harmony.patch
 chromium-widevine-r2.patch

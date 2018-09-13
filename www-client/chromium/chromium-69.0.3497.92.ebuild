@@ -195,8 +195,6 @@ src_prepare() {
 	# Debian patchset
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
 
-	rm -f base/third_party/libevent/BUILD.gn build/config/freetype/freetype.gni || die
-
 	# Ungoogled patchset
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
 
@@ -446,10 +444,10 @@ src_configure() {
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
-	#if use inox; then
-	#	myconf_gn+=" enable_reporting=false"
-	#	myconf_gn+=" safe_browsing_mode=0"
-	#fi
+	if use inox; then
+		myconf_gn+=" enable_reporting=false"
+		myconf_gn+=" safe_browsing_mode=0"
+	fi
 	append-cflags -fno-unwind-tables -fno-asynchronous-unwind-tables
 	append-cxxflags -fno-unwind-tables -fno-asynchronous-unwind-tables
 	append-cppflags -DNO_UNWIND_TABLES
