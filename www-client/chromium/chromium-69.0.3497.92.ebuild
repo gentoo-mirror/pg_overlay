@@ -437,7 +437,7 @@ src_configure() {
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_cfi=true"
+	myconf_gn+=" is_cfi=false"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" enable_swiftshader=false"
