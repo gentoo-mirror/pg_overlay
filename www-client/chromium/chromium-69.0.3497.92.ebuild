@@ -267,7 +267,6 @@ src_prepare() {
 		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
-		third_party/freetype
 		third_party/glslang-angle
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
@@ -332,7 +331,6 @@ src_prepare() {
 		third_party/spirv-headers
 		third_party/spirv-tools-angle
 		third_party/sqlite
-		third_party/tcmalloc
 		third_party/unrar
 		third_party/usrsctp
 		third_party/vulkan
