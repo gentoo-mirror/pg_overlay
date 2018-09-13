@@ -332,6 +332,7 @@ src_prepare() {
 		third_party/spirv-headers
 		third_party/spirv-tools-angle
 		third_party/sqlite
+		third_party/tcmalloc
 		third_party/unrar
 		third_party/usrsctp
 		third_party/vulkan
@@ -514,6 +515,7 @@ src_configure() {
 		gn_system_libraries+=( libvpx )
 	fi
 	gn_system_libraries+=( libevent )
+
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
