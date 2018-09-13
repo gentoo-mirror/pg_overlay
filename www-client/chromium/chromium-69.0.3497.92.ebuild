@@ -195,8 +195,6 @@ src_prepare() {
 	# Debian patchset
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
 
-	rm -f base/third_party/libevent/BUILD.gn
-
 	# Ungoogled patchset
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
 
