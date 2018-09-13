@@ -1,17 +1,3 @@
-fixes/mojo.patch
-fixes/ps-print.patch
-fixes/inspector.patch
-fixes/gpu-timeout.patch
-fixes/ownership-error.patch
-fixes/connection-message.patch
-
-disable/signin.patch
-disable/android.patch
-disable/fuzzers.patch
-disable/welcome-page.patch
-disable/google-api-warning.patch
-disable/device-notifications.patch
-
 system/vpx.patch
 system/nspr.patch
 system/event.patch
