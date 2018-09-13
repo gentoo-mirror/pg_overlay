@@ -8,7 +8,6 @@ fixes/connection-message.patch
 disable/signin.patch
 disable/android.patch
 disable/fuzzers.patch
-disable/perfetto.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/device-notifications.patch
