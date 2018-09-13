@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine inox +debian +thin-lto vaapi ungoogled"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +inox debian +thin-lto vaapi ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="^^ ( debian inox ungoogled )"
 
@@ -185,15 +185,17 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
-	use vaapi && eapply "${FILESDIR}/vaapi-patchset-69/enable_vaapi_on_linux_2.diff"
+	#use vaapi && eapply "${FILESDIR}/vaapi-patchset-69/enable_vaapi_on_linux_2.diff"
 
 	for i in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$i";done
 
 	# Inox patchset
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/$i";don
 	
 	# Debian patchset
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
+
+	rm -f base/third_party/libevent/BUILD.gn build/config/freetype/freetype.gni
 
 	# Ungoogled patchset
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
