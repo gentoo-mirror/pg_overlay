@@ -433,10 +433,11 @@ src_configure() {
 	#
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
-	#myconf_gn+=" enable_vulkan=true"
+	myconf_gn+=" enable_vulkan=true"
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" is_cfi=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" enable_swiftshader=false"
