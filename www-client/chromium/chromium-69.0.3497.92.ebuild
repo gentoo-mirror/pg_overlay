@@ -139,6 +139,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/chromium-ffmpeg-ebp-r1.patch"
+	"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
@@ -185,9 +186,7 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
-	#use vaapi && eapply "${FILESDIR}/vaapi-patchset-69/enable_vaapi_on_linux_2.diff"
-
-	for i in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$i";done
+	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 
 	# Inox patchset
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/$i";done
@@ -448,6 +447,11 @@ src_configure() {
 		myconf_gn+=" enable_reporting=false"
 		myconf_gn+=" safe_browsing_mode=0"
 	fi
+
+	append-cflags -Wno-builtin-macro-redefined
+	append-cxxflags -Wno-builtin-macro-redefined
+	append-cxxflags -D__DATE__=  -D__TIME__=  -D__TIMESTAMP__=
+
 	append-cflags -fno-unwind-tables -fno-asynchronous-unwind-tables
 	append-cxxflags -fno-unwind-tables -fno-asynchronous-unwind-tables
 	append-cppflags -DNO_UNWIND_TABLES
