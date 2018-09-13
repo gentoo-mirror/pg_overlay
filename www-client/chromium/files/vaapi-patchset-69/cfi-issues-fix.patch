@@ -16,9 +16,11 @@ Commit-Queue: Peter Collingbourne <pcc@chromium.org>
 Cr-Commit-Position: refs/heads/master@{#589034}
 ---
 
+diff --git a/tools/cfi/blacklist.txt b/tools/cfi/blacklist.txt
+index 761574a..bffce27 100644
 --- a/tools/cfi/blacklist.txt
 +++ b/tools/cfi/blacklist.txt
-@@ -146,6 +146,7 @@ fun:*FunctorTraits*
+@@ -143,6 +143,7 @@
  
  # Calls to auto-generated stubs by generate_stubs.py
  src:*audio/pulse/pulse_stubs.cc
