@@ -1,5 +1,5 @@
-gn/libcxx.patch
-gn/parallel.patch
+#gn/libcxx.patch
+#gn/parallel.patch
 
 fixes/mojo.patch
 fixes/ps-print.patch
