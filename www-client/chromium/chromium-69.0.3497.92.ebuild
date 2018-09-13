@@ -433,6 +433,7 @@ src_configure() {
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 	myconf_gn+=" enable_vulkan=true"
+	myconf_gn+=" is_official_build=true"
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
