@@ -5,7 +5,6 @@ fixes/mojo.patch
 fixes/ps-print.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
-fixes/empty-array.patch
 fixes/ownership-error.patch
 fixes/connection-message.patch
 
