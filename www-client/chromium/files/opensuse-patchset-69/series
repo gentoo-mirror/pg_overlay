@@ -1,5 +1,4 @@
 chromium-dma-buf.patch
-chromium-non-void-return.patch
 chromium-drm.patch
 chromium-sandbox-pie.patch
 chromium-warnings.patch
