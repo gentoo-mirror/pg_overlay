@@ -1,0 +1,8 @@
+chromium-dma-buf.patch
+chromium-non-void-return.patch
+chromium-drm.patch
+chromium-sandbox-pie.patch
+chromium-warnings.patch
+chromium-system-icu.patch
+chromium-skia-system-fontconfig.patch
+chromium-prop-codecs.patch

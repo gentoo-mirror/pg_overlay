@@ -1,1 +1,1 @@
-enable_vaapi_on_linux_2.diff
+chromium-vaapi.patch

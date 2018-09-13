@@ -17,9 +17,9 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +inox +thin-lto vaapi ungoogled"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine inox +debian +thin-lto vaapi ungoogled"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
-REQUIRED_USE="^^ ( inox ungoogled )"
+REQUIRED_USE="^^ ( debian inox ungoogled )"
 
 COMMON_DEPEND="
 	app-accessibility/at-spi2-atk:2
@@ -139,7 +139,6 @@ PATCHES=(
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/chromium-ffmpeg-ebp-r1.patch"
-	"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
@@ -186,18 +185,18 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
-	use vaapi && eapply "${FILESDIR}/vaapi-patchset-69/enable_vaapi_on_linux_2.diff"
+	use vaapi && eapply "${FILESDIR}/vaapi-patchset-69/chromium-vaapi.patch"
 
-	if use inox; then
-		# Inox patchset
-		for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
-		# Debian patchset
-		for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
-	fi
+	# Inox patchset
+	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done
+	
+	# Debian patchset
+	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
 
 	# Ungoogled patchset
 	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
 
+	for i in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$i";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -458,7 +457,6 @@ src_configure() {
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_reading_list=false"
-	myconf_gn+=" exclude_unwind_tables=true"
 	if use ungoogled; then
 		myconf_gn+=" enable_mdns=false"
 		myconf_gn+=" enable_one_click_signin=false"
