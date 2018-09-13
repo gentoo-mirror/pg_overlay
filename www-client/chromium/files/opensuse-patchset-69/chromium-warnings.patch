@@ -1,0 +1,14 @@
+--- chromium-67.0.3396.87/build/config/compiler/BUILD.gn.orig	2018-06-16 13:57:27.583106343 +0200
++++ chromium-67.0.3396.87/build/config/compiler/BUILD.gn	2018-06-16 14:24:26.713631391 +0200
+@@ -1325,6 +1325,11 @@
+       # comments
+       # https://gcc.gnu.org/bugzilla/show_bug.cgi?id=61638
+       cflags += [ "-Wno-comments" ]
++
++      # too many warnings
++      cflags += [ "-Wno-class-memaccess" ]
++      cflags += [ "-Wno-packed-not-aligned" ]
++      cflags += [ "-Wno-int-in-bool-context" ]
+     }
+   }
+ 
