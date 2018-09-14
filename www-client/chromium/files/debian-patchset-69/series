@@ -2,7 +2,6 @@ gn/libcxx.patch
 gn/parallel.patch
 
 fixes/mojo.patch
-fixes/sizet.patch
 fixes/ps-print.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
