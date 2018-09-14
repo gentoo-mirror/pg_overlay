@@ -441,6 +441,8 @@ src_configure() {
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_harfbuzz=true"
+	myconf_gn+=" jumbo_file_merge_limit=12"
+	myconf_gn+=" concurrent_links=1"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
