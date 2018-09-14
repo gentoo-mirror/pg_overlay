@@ -189,6 +189,8 @@ src_prepare() {
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 
 	# Inox patchset
+	  # Allow building against system libraries in official builds
+	sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
 	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/$i";done
 	
 	# Debian patchset
@@ -433,11 +435,12 @@ src_configure() {
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 	myconf_gn+=" enable_vulkan=true"
-	myconf_gn+=" is_official_build=true"
 
 	# Inox
 	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_cfi=false"
+	myconf_gn+=" is_official_build=true"
+	myconf_gn+=" use_cfi_icall=false"
+	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" enable_swiftshader=false"
