@@ -17,9 +17,8 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +inox debian +thin-lto vaapi ungoogled"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +debian +thin-lto vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
-REQUIRED_USE="^^ ( debian inox ungoogled )"
 
 COMMON_DEPEND="
 	app-accessibility/at-spi2-atk:2
@@ -188,16 +187,9 @@ src_prepare() {
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 
-	# Inox patchset
-	  # Allow building against system libraries in official builds
-	sed -i 's/OFFICIAL_BUILD/GOOGLE_CHROME_BUILD/' tools/generate_shim_headers/generate_shim_headers.py
-	use inox && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/$i";done && for i in $(cat "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/inox-patchset-$(get_major_version)/debian-patchset-$(get_major_version)/$i";done
-	
+
 	# Debian patchset
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
-
-	# Ungoogled patchset
-	use ungoogled && for i in $(cat "${FILESDIR}/ungoogled-chromium-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-chromium-$(get_major_version)/$i";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -436,57 +428,20 @@ src_configure() {
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 	myconf_gn+=" enable_vulkan=true"
 
-	# Inox
-	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" is_official_build=true"
-	myconf_gn+=" is_cfi=false"
-	myconf_gn+=" fieldtrial_testing_like_official_build=true"
+	# Debian
+	myconf_gn+=" use_libjpeg_turbo=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
-	myconf_gn+=" enable_remoting=false"
 	myconf_gn+=" enable_google_now=false"
-	if use inox; then
-		myconf_gn+=" enable_reporting=false"
-		myconf_gn+=" safe_browsing_mode=0"
-	fi
-
-	append-cflags -Wno-builtin-macro-redefined
-	append-cxxflags -Wno-builtin-macro-redefined
-	append-cxxflags -D__DATE__=  -D__TIME__=  -D__TIMESTAMP__=
-
-	append-cflags -fno-unwind-tables -fno-asynchronous-unwind-tables
-	append-cxxflags -fno-unwind-tables -fno-asynchronous-unwind-tables
-	append-cppflags -DNO_UNWIND_TABLES
-
-	# Ungoogled-Chromium
-	myconf_gn+=" enable_hevc_demuxing=true"
-	myconf_gn+=" enable_iterator_debugging=false"
-	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
 	myconf_gn+=" enable_reading_list=false"
-	if use ungoogled; then
-		myconf_gn+=" enable_mdns=false"
-		myconf_gn+=" enable_one_click_signin=false"
-		myconf_gn+=" enable_reporting=false"
-		myconf_gn+=" enable_service_discovery=false"
-		myconf_gn+=" safe_browsing_mode=0"
-			
-	fi
-
-	# Dedian's Chromium
-	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" enable_iterator_debugging=false"
+	myconf_gn+=" link_pulseaudio=true"
+	myconf_gn+=" use_system_zlib=true"
 	myconf_gn+=" use_system_lcms2=true"
-
-	# Ubuntu's Chromium
-	myconf_gn+=" enable_vr=false"
-	myconf_gn+=" enable_wayland_server=false"
-	if use thin-lto; then
-		myconf_gn+=" use_thin_lto=true"
-	fi
-
-	# OpenSUSE
+	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_freetype=true"
+	myconf_gn+=" use_system_harfbuzz=true"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
