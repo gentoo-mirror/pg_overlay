@@ -6,7 +6,6 @@ fixes/ps-print.patch
 fixes/as-needed.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
-fixes/empty-array.patch
 fixes/ownership-error.patch
 fixes/connection-message.patch
 
