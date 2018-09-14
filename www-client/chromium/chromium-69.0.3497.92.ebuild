@@ -439,7 +439,6 @@ src_configure() {
 	# Inox
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" is_official_build=true"
-	myconf_gn+=" use_cfi_icall=false"
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
