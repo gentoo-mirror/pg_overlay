@@ -187,7 +187,6 @@ src_prepare() {
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 
-
 	# Debian patchset
 	use debian && for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
 
