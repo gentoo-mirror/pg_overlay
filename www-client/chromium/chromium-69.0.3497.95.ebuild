@@ -80,7 +80,6 @@ COMMON_DEPEND="
 # For nvidia-drivers blocker, see bug #413637 .
 RDEPEND="${COMMON_DEPEND}
 	!<www-plugins/chrome-binary-plugins-57
-	dev-util/gn
 	x11-misc/xdg-utils
 	virtual/opengl
 	virtual/ttf-fonts
@@ -96,14 +95,13 @@ DEPEND="${COMMON_DEPEND}
 		dev-lang/yasm
 	)
 	dev-lang/perl
+	dev-util/gn
 	>=dev-util/gperf-3.0.3
 	>=dev-util/ninja-1.7.2
 	>=net-libs/nodejs-6.9.4
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
 	sys-devel/flex
-	>=sys-devel/clang-5
-	>=sys-devel/lld-5
 	virtual/pkgconfig
 	dev-vcs/git
 "
