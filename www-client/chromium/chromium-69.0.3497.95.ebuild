@@ -194,6 +194,8 @@ src_prepare() {
 	local keeplibs=(
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
+		base/third_party/icu
+		base/third_party/nspr
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
@@ -256,6 +258,7 @@ src_prepare() {
 		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
+		third_party/freetype
 		third_party/glslang-angle
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
