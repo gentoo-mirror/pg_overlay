@@ -1,4 +1,3 @@
-
 gn/libcxx.patch
 gn/parallel.patch
 
@@ -29,10 +28,6 @@ warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
 
-system/icu.patch
-system/jpeg.patch
-system/nspr.patch
 system/zlib.patch
 system/openjpeg.patch
-system/fontconfig.patch
 disable/swiftshader.patch
