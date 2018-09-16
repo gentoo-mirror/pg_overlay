@@ -28,6 +28,5 @@ warnings/initialization.patch
 warnings/unused-typedefs.patch
 warnings/null-destination.patch
 
-system/zlib.patch
 system/openjpeg.patch
 disable/swiftshader.patch
