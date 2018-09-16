@@ -435,7 +435,6 @@ src_configure() {
 	myconf_gn+=" use_system_lcms2=true"
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_freetype=true"
-	myconf_gn+=" use_system_harfbuzz=true"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
