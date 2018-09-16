@@ -129,13 +129,14 @@ GTK+ icon theme.
 "
 
 PATCHES=(
-	"${FILESDIR}/chromium-compiler-r4.patch"
-	"${FILESDIR}/chromium-webrtc-r0.patch"
-	"${FILESDIR}/chromium-memcpy-r0.patch"
-	"${FILESDIR}/chromium-math.h-r0.patch"
-	"${FILESDIR}/chromium-stdint.patch"
-	"${FILESDIR}/chromium-ffmpeg-ebp-r1.patch"
-	"${FILESDIR}/chromium-system-icu.patch"
+	"${FILESDIR}/${PN}-compiler-r4.patch"
+	"${FILESDIR}/${PN}-webrtc-r0.patch"
+	"${FILESDIR}/${PN}-memcpy-r0.patch"
+	"${FILESDIR}/${PN}-math.h-r0.patch"
+	"${FILESDIR}/${PN}-stdint.patch"
+	"${FILESDIR}/${PN}-ffmpeg-ebp-r1.patch"
+	"${FILESDIR}/${PN}-skia-harmony.patch"
+	"${FILESDIR}/${PN}-system-icu.patch"
 )
 
 pre_build_checks() {
@@ -184,6 +185,8 @@ src_prepare() {
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
+	for i in $(cat "${FILESDIR}/ungoogled-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-patchset-$(get_major_version)/$i";done
+
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
