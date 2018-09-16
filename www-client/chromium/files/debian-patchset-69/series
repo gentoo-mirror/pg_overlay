@@ -2,9 +2,7 @@ gn/libcxx.patch
 gn/parallel.patch
 
 fixes/mojo.patch
-fixes/sizet.patch
 fixes/ps-print.patch
-fixes/as-needed.patch
 fixes/inspector.patch
 fixes/gpu-timeout.patch
 fixes/ownership-error.patch
@@ -18,15 +16,6 @@ disable/welcome-page.patch
 disable/google-api-warning.patch
 disable/third-party-cookies.patch
 disable/device-notifications.patch
-
-warnings/printf.patch
-warnings/attribute.patch
-warnings/multichar.patch
-warnings/enum-compare.patch
-warnings/sequence-point.patch
-warnings/initialization.patch
-warnings/unused-typedefs.patch
-warnings/null-destination.patch
 
 system/openjpeg.patch
 disable/swiftshader.patch
