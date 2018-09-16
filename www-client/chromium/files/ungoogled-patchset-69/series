@@ -105,3 +105,5 @@ bromite/fingerprinting-flags-client-rects-and-measuretext.patch
 bromite/flag-max-connections-per-host.patch
 
 ungoogled-chromium/linux/use-system-libraries-in-official-build.patch
+
+ungoogled-chromium/add-third-party-ungoogled_2.patch
