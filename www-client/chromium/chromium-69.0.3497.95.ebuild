@@ -427,7 +427,6 @@ src_configure() {
 
 	# Debian
 	myconf_gn+=" use_libjpeg_turbo=true"
-	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_google_now=false"
@@ -438,6 +437,22 @@ src_configure() {
 	myconf_gn+=" use_system_lcms2=true"
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_freetype=true"
+
+	#
+	myconf_gn+=" blink_symbol_level=0"
+	myconf_gn+=" enable_ac3_eac3_audio_demuxing=true"
+	myconf_gn+=" enable_hevc_demuxing=true"
+	myconf_gn+=" enable_mdns=false"
+	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
+	myconf_gn+=" enable_one_click_signin=false"
+	myconf_gn+=" enable_remoting=false"
+	myconf_gn+=" enable_reporting=false"
+	myconf_gn+=" enable_service_discovery=false"
+	myconf_gn+=" exclude_unwind_tables=true"
+	myconf_gn+=" is_official_build=true"
+	myconf_gn+=" safe_browsing_mode=0"
+	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" use_sysroot=false"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
@@ -467,6 +482,7 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
+	gn_system_libraries+=( libevent )
 
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
