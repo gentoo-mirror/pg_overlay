@@ -29,7 +29,6 @@ debian/fixes/ps-print.patch
 debian/fixes/as-needed.patch
 debian/fixes/inspector.patch
 debian/fixes/gpu-timeout.patch
-debian/fixes/empty-array.patch
 debian/fixes/ownership-error.patch
 debian/fixes/widevine-locations.patch
 debian/fixes/connection-message.patch
