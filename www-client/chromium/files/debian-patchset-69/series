@@ -1,7 +1,6 @@
 system/vpx.patch
 system/icu.patch
 system/jpeg.patch
-system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/openjpeg.patch
