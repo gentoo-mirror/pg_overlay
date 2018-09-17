@@ -101,6 +101,8 @@ DEPEND="${COMMON_DEPEND}
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
 	sys-devel/flex
+	>=sys-devel/clang-5
+	>=sys-devel/lld-5
 	virtual/pkgconfig
 	dev-vcs/git
 "
