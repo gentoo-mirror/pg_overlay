@@ -25,9 +25,11 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -377,4 +377,5 @@ def WriteGNNinja(path, platform, host, o
-           '-lpthread',
+@@ -369,6 +369,7 @@ def WriteGNNinja(path, platform, host, o
+         cflags.append('--sysroot=' + linux_sysroot)
+         ldflags.append('--sysroot=' + linux_sysroot)
+       libs.extend([
 +          '-levent',
-       ])
-     elif platform.is_darwin():
-       min_mac_version_flag = '-mmacosx-version-min=10.9'
+           '-lnspr4',
+           # These are needed by libc++.
+           '-ldl',
