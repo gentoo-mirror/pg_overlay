@@ -154,8 +154,8 @@ src_prepare() {
 	sed -i -e '/lock-autospawn-test /d' src/Makefile.am || die
 	sed -i -e 's/lock-autospawn-test$(EXEEXT) //' src/Makefile.in || die
 
-	#eautoreconf
-	eautoconf
+	eautoreconf
+	#eautoconf
 }
 
 multilib_src_configure() {
