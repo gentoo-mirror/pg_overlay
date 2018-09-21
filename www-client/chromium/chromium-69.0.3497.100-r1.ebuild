@@ -258,7 +258,6 @@ src_prepare() {
 		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
-		third_party/freetype
 		third_party/glslang-angle
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
@@ -425,21 +424,19 @@ src_configure() {
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 	myconf_gn+=" enable_vulkan=true"
 
-	# Debian
-	myconf_gn+=" use_libjpeg_turbo=true"
+	# 	#myconf_gn+=" use_libjpeg_turbo=true"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_reading_list=false"
 	myconf_gn+=" enable_iterator_debugging=false"
 	myconf_gn+=" link_pulseaudio=true"
-	myconf_gn+=" use_system_zlib=true"
-	myconf_gn+=" use_system_lcms2=true"
-	myconf_gn+=" use_system_libjpeg=true"
+	#myconf_gn+=" use_system_zlib=true"
+	#myconf_gn+=" use_system_lcms2=true"
+	#myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_freetype=true"
 
 	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" use_sysroot=false"
 
 	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
