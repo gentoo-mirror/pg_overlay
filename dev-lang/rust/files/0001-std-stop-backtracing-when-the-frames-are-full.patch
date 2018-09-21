@@ -1,0 +1,122 @@
+From f4e8d57b6ad6f599de54c020ba185db83cb011a3 Mon Sep 17 00:00:00 2001
+From: Josh Stone <jistone@redhat.com>
+Date: Thu, 16 Aug 2018 11:26:27 -0700
+Subject: [PATCH] std: stop backtracing when the frames are full
+
+---
+ src/libstd/sys/cloudabi/backtrace.rs           | 18 ++++++++++--------
+ src/libstd/sys/redox/backtrace/tracing.rs      | 18 ++++++++++--------
+ src/libstd/sys/unix/backtrace/tracing/gcc_s.rs | 18 ++++++++++--------
+ 3 files changed, 30 insertions(+), 24 deletions(-)
+
+diff --git a/src/libstd/sys/cloudabi/backtrace.rs b/src/libstd/sys/cloudabi/backtrace.rs
+index 1b970187558c..2c43b5937ce5 100644
+--- a/src/libstd/sys/cloudabi/backtrace.rs
++++ b/src/libstd/sys/cloudabi/backtrace.rs
+@@ -64,6 +64,10 @@ extern "C" fn trace_fn(
+     arg: *mut libc::c_void,
+ ) -> uw::_Unwind_Reason_Code {
+     let cx = unsafe { &mut *(arg as *mut Context) };
++    if cx.idx >= cx.frames.len() {
++        return uw::_URC_NORMAL_STOP;
++    }
++
+     let mut ip_before_insn = 0;
+     let mut ip = unsafe { uw::_Unwind_GetIPInfo(ctx, &mut ip_before_insn) as *mut libc::c_void };
+     if !ip.is_null() && ip_before_insn == 0 {
+@@ -73,14 +77,12 @@ extern "C" fn trace_fn(
+     }
+ 
+     let symaddr = unsafe { uw::_Unwind_FindEnclosingFunction(ip) };
+-    if cx.idx < cx.frames.len() {
+-        cx.frames[cx.idx] = Frame {
+-            symbol_addr: symaddr as *mut u8,
+-            exact_position: ip as *mut u8,
+-            inline_context: 0,
+-        };
+-        cx.idx += 1;
+-    }
++    cx.frames[cx.idx] = Frame {
++        symbol_addr: symaddr as *mut u8,
++        exact_position: ip as *mut u8,
++        inline_context: 0,
++    };
++    cx.idx += 1;
+ 
+     uw::_URC_NO_REASON
+ }
+diff --git a/src/libstd/sys/redox/backtrace/tracing.rs b/src/libstd/sys/redox/backtrace/tracing.rs
+index bb70ca360370..c0414b78f8d6 100644
+--- a/src/libstd/sys/redox/backtrace/tracing.rs
++++ b/src/libstd/sys/redox/backtrace/tracing.rs
+@@ -68,6 +68,10 @@ pub fn unwind_backtrace(frames: &mut [Frame])
+ extern fn trace_fn(ctx: *mut uw::_Unwind_Context,
+                    arg: *mut libc::c_void) -> uw::_Unwind_Reason_Code {
+     let cx = unsafe { &mut *(arg as *mut Context) };
++    if cx.idx >= cx.frames.len() {
++        return uw::_URC_NORMAL_STOP;
++    }
++
+     let mut ip_before_insn = 0;
+     let mut ip = unsafe {
+         uw::_Unwind_GetIPInfo(ctx, &mut ip_before_insn) as *mut libc::c_void
+@@ -94,14 +98,12 @@ extern fn trace_fn(ctx: *mut uw::_Unwind_Context,
+         unsafe { uw::_Unwind_FindEnclosingFunction(ip) }
+     };
+ 
+-    if cx.idx < cx.frames.len() {
+-        cx.frames[cx.idx] = Frame {
+-            symbol_addr: symaddr as *mut u8,
+-            exact_position: ip as *mut u8,
+-            inline_context: 0,
+-        };
+-        cx.idx += 1;
+-    }
++    cx.frames[cx.idx] = Frame {
++        symbol_addr: symaddr as *mut u8,
++        exact_position: ip as *mut u8,
++        inline_context: 0,
++    };
++    cx.idx += 1;
+ 
+     uw::_URC_NO_REASON
+ }
+diff --git a/src/libstd/sys/unix/backtrace/tracing/gcc_s.rs b/src/libstd/sys/unix/backtrace/tracing/gcc_s.rs
+index 1b92fc0e6ad0..6e8415686792 100644
+--- a/src/libstd/sys/unix/backtrace/tracing/gcc_s.rs
++++ b/src/libstd/sys/unix/backtrace/tracing/gcc_s.rs
+@@ -68,6 +68,10 @@ pub fn unwind_backtrace(frames: &mut [Frame])
+ extern fn trace_fn(ctx: *mut uw::_Unwind_Context,
+                    arg: *mut libc::c_void) -> uw::_Unwind_Reason_Code {
+     let cx = unsafe { &mut *(arg as *mut Context) };
++    if cx.idx >= cx.frames.len() {
++        return uw::_URC_NORMAL_STOP;
++    }
++
+     let mut ip_before_insn = 0;
+     let mut ip = unsafe {
+         uw::_Unwind_GetIPInfo(ctx, &mut ip_before_insn) as *mut libc::c_void
+@@ -94,14 +98,12 @@ extern fn trace_fn(ctx: *mut uw::_Unwind_Context,
+         unsafe { uw::_Unwind_FindEnclosingFunction(ip) }
+     };
+ 
+-    if cx.idx < cx.frames.len() {
+-        cx.frames[cx.idx] = Frame {
+-            symbol_addr: symaddr as *mut u8,
+-            exact_position: ip as *mut u8,
+-            inline_context: 0,
+-        };
+-        cx.idx += 1;
+-    }
++    cx.frames[cx.idx] = Frame {
++        symbol_addr: symaddr as *mut u8,
++        exact_position: ip as *mut u8,
++        inline_context: 0,
++    };
++    cx.idx += 1;
+ 
+     uw::_URC_NO_REASON
+ }
+-- 
+2.17.1
+

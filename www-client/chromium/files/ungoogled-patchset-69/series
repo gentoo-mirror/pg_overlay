@@ -1,8 +1,5 @@
 inox-patchset/chromium-arflags.patch
 inox-patchset/chromium-exclude_unwind_tables.patch
-inox-patchset/disable-cfi-icall-for-va_stubs.patch
-inox-patchset/fix-cfi-icall-failure-with-use_system_libjpeg-true.patch
-inox-patchset/only-disable-cfi-icall-when-use_system_libjpeg-true.patch
 inox-patchset/0001-fix-building-without-safebrowsing.patch
 inox-patchset/0003-disable-autofill-download-manager.patch
 inox-patchset/0004-disable-google-url-tracker.patch
@@ -21,32 +18,6 @@ inox-patchset/0017-disable-new-avatar-menu.patch
 inox-patchset/0018-disable-first-run-behaviour.patch
 inox-patchset/0019-disable-battery-status-service.patch
 inox-patchset/0021-disable-rlz.patch
-
-debian/gn/parallel.patch
-debian/fixes/mojo.patch
-debian/fixes/sizet.patch
-debian/fixes/ps-print.patch
-debian/fixes/as-needed.patch
-debian/fixes/inspector.patch
-debian/fixes/gpu-timeout.patch
-debian/fixes/ownership-error.patch
-debian/fixes/connection-message.patch
-debian/disable/android.patch
-debian/disable/fuzzers.patch
-debian/disable/perfetto.patch
-debian/disable/welcome-page.patch
-debian/disable/google-api-warning.patch
-debian/disable/device-notifications.patch
-debian/disable/swiftshader.patch
-debian/warnings/attribute.patch
-debian/warnings/enum-compare.patch
-debian/warnings/initialization.patch
-debian/warnings/multichar.patch
-debian/warnings/null-destination.patch
-debian/warnings/printf.patch
-debian/warnings/sequence-point.patch
-debian/warnings/unused-typedefs.patch
-debian/system/fontconfig.patch
 
 iridium-browser/net-cert-increase-default-key-length-for-newly-gener.patch
 iridium-browser/mime_util-force-text-x-suse-ymp-to-be-downloaded.patch
@@ -100,8 +71,8 @@ ungoogled-chromium/fix-building-without-safebrowsing.patch
 ungoogled-chromium/searx.patch
 ungoogled-chromium/remove-third-party-analytics.patch
 ungoogled-chromium/gn-bootstrap-remove-gn-gen.patch
+ungoogled-chromium/disable-webgl-renderer-info.patch
 
 bromite/fingerprinting-flags-client-rects-and-measuretext.patch
 bromite/flag-max-connections-per-host.patch
-
-ungoogled-chromium/linux/use-system-libraries-in-official-build.patch
+bromite/flag-fingerprinting-canvas-image-data-noise.patch

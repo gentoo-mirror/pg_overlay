@@ -8,7 +8,7 @@ CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
 	sv sw ta te th tr uk vi zh-CN zh-TW"
 
-inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib ninja-utils pax-utils portability python-any-r1 readme.gentoo-r1 toolchain-funcs xdg-utils versionator
+inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib ninja-utils pax-utils portability python-any-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
@@ -16,7 +16,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="amd64 ~x86"
 IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine +thin-lto vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
@@ -184,11 +184,9 @@ src_prepare() {
 
 	default
 
+	use system-libvpx && eapply "${FILESDIR}/${PN}-system-libvpx.patch"
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
-	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
-	for i in $(cat "${FILESDIR}/ungoogled-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-patchset-$(get_major_version)/$i";done
-
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -362,7 +360,6 @@ src_prepare() {
 	if use tcmalloc; then
 		keeplibs+=( third_party/tcmalloc )
 	fi
-	keeplibs+=( third_party/ungoogled )
 
 	# Remove most bundled libraries. Some are still needed.
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
@@ -424,7 +421,6 @@ src_configure() {
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
-	#
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 	myconf_gn+=" enable_vulkan=true"
@@ -442,19 +438,7 @@ src_configure() {
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_freetype=true"
 
-	#
-	myconf_gn+=" blink_symbol_level=0"
-	myconf_gn+=" enable_ac3_eac3_audio_demuxing=true"
-	myconf_gn+=" enable_hevc_demuxing=true"
-	myconf_gn+=" enable_mdns=false"
-	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	myconf_gn+=" enable_one_click_signin=false"
-	myconf_gn+=" enable_remoting=false"
-	myconf_gn+=" enable_reporting=false"
-	myconf_gn+=" enable_service_discovery=false"
-	myconf_gn+=" exclude_unwind_tables=true"
-	myconf_gn+=" safe_browsing_mode=0"
-	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
 	myconf_gn+=" use_sysroot=false"
 
 	# libevent: https://bugs.gentoo.org/593458
@@ -485,8 +469,6 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
-	gn_system_libraries+=( libevent )
-
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
