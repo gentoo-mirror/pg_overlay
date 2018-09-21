@@ -90,10 +90,6 @@ bromite/fingerprinting-flags-client-rects-and-measuretext.patch
 bromite/flag-max-connections-per-host.patch
 bromite/flag-fingerprinting-canvas-image-data-noise.patch
 
-debian/gn/libcxx.patch
-debian/system/vpx.patch
-debian/system/jpeg.patch
-debian/system/zlib.patch
 debian/system/event.patch
 
 ungoogled-chromium/linux/use-system-libraries-in-official-build.patch
