@@ -183,8 +183,8 @@ src_prepare() {
 	python_setup
 
 	default
-
-	use system-libvpx && eapply "${FILESDIR}/${PN}-system-libvpx.patch" 
+	use system-libvpx && eapply "${FILESDIR}/${PN}-system-libevent.patch" && gn_system_libraries+=( libevent )
+	use system-libvpx && eapply "${FILESDIR}/${PN}-system-libvpx.patch"
 	use widevine && eapply "${FILESDIR}/${PN}-widevine-r2.patch"
 	use vaapi && for i in $(cat "${FILESDIR}/vaapi-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/vaapi-patchset-$(get_major_version)/$i";done
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i";done
@@ -485,7 +485,6 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
-	gn_system_libraries+=( libevent )
 
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
