@@ -23,8 +23,6 @@ inox-patchset/0019-disable-battery-status-service.patch
 inox-patchset/0021-disable-rlz.patch
 
 debian/gn/parallel.patch
-debian/arm/skia.patch
-debian/arm/gcc_skcms_ice.patch
 debian/fixes/mojo.patch
 debian/fixes/sizet.patch
 debian/fixes/optimize.patch
