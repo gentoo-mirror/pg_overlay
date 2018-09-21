@@ -93,7 +93,6 @@ bromite/flag-fingerprinting-canvas-image-data-noise.patch
 debian/gn/libcxx.patch
 debian/system/vpx.patch
 debian/system/jpeg.patch
-debian/system/nspr.patch
 debian/system/zlib.patch
 debian/system/event.patch
 
