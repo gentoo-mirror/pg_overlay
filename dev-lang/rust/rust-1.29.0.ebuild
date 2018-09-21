@@ -76,7 +76,7 @@ S="${WORKDIR}/${MY_P}-src"
 
 PATCHES=( "${FILESDIR}"/rust-52876-const-endianess.patch
 	"${FILESDIR}"/0001-std-stop-backtracing-when-the-frames-are-full.patch
-	"${FILESDIR}"0001-Set-more-llvm-function-attributes-for-__rust_try.patch )
+	"${FILESDIR}"/0001-Set-more-llvm-function-attributes-for-__rust_try.patch )
 
 toml_usex() {
 	usex "$1" true false
