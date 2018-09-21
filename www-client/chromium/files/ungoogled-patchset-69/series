@@ -22,11 +22,9 @@ inox-patchset/0021-disable-rlz.patch
 debian/gn/parallel.patch
 debian/disable/android.patch
 debian/disable/fuzzers.patch
-debian/disable/perfetto.patch
 debian/disable/welcome-page.patch
 debian/disable/google-api-warning.patch
 debian/disable/device-notifications.patch
-debian/disable/swiftshader.patch
 debian/system/fontconfig.patch
 
 iridium-browser/net-cert-increase-default-key-length-for-newly-gener.patch
@@ -88,5 +86,3 @@ bromite/flag-max-connections-per-host.patch
 bromite/flag-fingerprinting-canvas-image-data-noise.patch
 
 debian/system/event.patch
-
-ungoogled-chromium/linux/use-system-libraries-in-official-build.patch
