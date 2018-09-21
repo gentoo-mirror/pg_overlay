@@ -19,14 +19,6 @@ inox-patchset/0018-disable-first-run-behaviour.patch
 inox-patchset/0019-disable-battery-status-service.patch
 inox-patchset/0021-disable-rlz.patch
 
-debian/gn/parallel.patch
-debian/disable/android.patch
-debian/disable/fuzzers.patch
-debian/disable/welcome-page.patch
-debian/disable/google-api-warning.patch
-debian/disable/device-notifications.patch
-debian/system/fontconfig.patch
-
 iridium-browser/net-cert-increase-default-key-length-for-newly-gener.patch
 iridium-browser/mime_util-force-text-x-suse-ymp-to-be-downloaded.patch
 iridium-browser/prefs-only-keep-cookies-until-exit.patch
