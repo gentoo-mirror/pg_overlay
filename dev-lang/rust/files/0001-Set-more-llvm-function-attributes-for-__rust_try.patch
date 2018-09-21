@@ -1,0 +1,186 @@
+From 4b95b1a4fd035a73998dc21b265ce4594e35f8ae Mon Sep 17 00:00:00 2001
+From: Alex Crichton <alex@alexcrichton.com>
+Date: Thu, 16 Aug 2018 13:19:04 -0700
+Subject: [PATCH] Set more llvm function attributes for __rust_try
+
+This shim is generated elsewhere in the compiler so this commit adds support to
+ensure it goes through similar paths as the rest of the compiler to set llvm
+function attributes like target features.
+
+cc #53372
+---
+ src/librustc_codegen_llvm/attributes.rs | 52 +++++++++++++++++++------
+ src/librustc_codegen_llvm/base.rs       | 21 ----------
+ src/librustc_codegen_llvm/callee.rs     |  2 +-
+ src/librustc_codegen_llvm/intrinsic.rs  |  2 +
+ src/librustc_codegen_llvm/mono_item.rs  |  2 +-
+ 5 files changed, 44 insertions(+), 35 deletions(-)
+
+diff --git a/src/librustc_codegen_llvm/attributes.rs b/src/librustc_codegen_llvm/attributes.rs
+index 3b5f927d52f0..2a79ce2f2285 100644
+--- a/src/librustc_codegen_llvm/attributes.rs
++++ b/src/librustc_codegen_llvm/attributes.rs
+@@ -11,7 +11,7 @@
+ 
+ use std::ffi::{CStr, CString};
+ 
+-use rustc::hir::CodegenFnAttrFlags;
++use rustc::hir::{CodegenFnAttrFlags, CodegenFnAttrs};
+ use rustc::hir::def_id::{DefId, LOCAL_CRATE};
+ use rustc::session::Session;
+ use rustc::session::config::Sanitizer;
+@@ -123,11 +123,37 @@ pub fn llvm_target_features(sess: &Session) -> impl Iterator<Item = &str> {
+ 
+ /// Composite function which sets LLVM attributes for function depending on its AST (#[attribute])
+ /// attributes.
+-pub fn from_fn_attrs(cx: &CodegenCx, llfn: ValueRef, id: DefId) {
+-    let codegen_fn_attrs = cx.tcx.codegen_fn_attrs(id);
++pub fn from_fn_attrs(
++    cx: &CodegenCx,
++    llfn: ValueRef,
++    id: Option<DefId>,
++) {
++    let codegen_fn_attrs = id.map(|id| cx.tcx.codegen_fn_attrs(id))
++        .unwrap_or(CodegenFnAttrs::new());
+ 
+     inline(llfn, codegen_fn_attrs.inline);
+ 
++    // The `uwtable` attribute according to LLVM is:
++    //
++    //     This attribute indicates that the ABI being targeted requires that an
++    //     unwind table entry be produced for this function even if we can show
++    //     that no exceptions passes by it. This is normally the case for the
++    //     ELF x86-64 abi, but it can be disabled for some compilation units.
++    //
++    // Typically when we're compiling with `-C panic=abort` (which implies this
++    // `no_landing_pads` check) we don't need `uwtable` because we can't
++    // generate any exceptions! On Windows, however, exceptions include other
++    // events such as illegal instructions, segfaults, etc. This means that on
++    // Windows we end up still needing the `uwtable` attribute even if the `-C
++    // panic=abort` flag is passed.
++    //
++    // You can also find more info on why Windows is whitelisted here in:
++    //      https://bugzilla.mozilla.org/show_bug.cgi?id=1302078
++    if !cx.sess().no_landing_pads() ||
++       cx.sess().target.target.options.requires_uwtable {
++        attributes::emit_uwtable(llfn, true);
++    }
++
+     set_frame_pointer_elimination(cx, llfn);
+     set_probestack(cx, llfn);
+ 
+@@ -151,7 +177,7 @@ pub fn from_fn_attrs(cx: &CodegenCx, llfn: ValueRef, id: DefId) {
+     // *in Rust code* may unwind. Foreign items like `extern "C" {
+     // fn foo(); }` are assumed not to unwind **unless** they have
+     // a `#[unwind]` attribute.
+-    } else if !cx.tcx.is_foreign_item(id) {
++    } else if id.map(|id| !cx.tcx.is_foreign_item(id)).unwrap_or(false) {
+         Some(true)
+     } else {
+         None
+@@ -188,14 +214,16 @@ pub fn from_fn_attrs(cx: &CodegenCx, llfn: ValueRef, id: DefId) {
+     // Note that currently the `wasm-import-module` doesn't do anything, but
+     // eventually LLVM 7 should read this and ferry the appropriate import
+     // module to the output file.
+-    if cx.tcx.sess.target.target.arch == "wasm32" {
+-        if let Some(module) = wasm_import_module(cx.tcx, id) {
+-            llvm::AddFunctionAttrStringValue(
+-                llfn,
+-                llvm::AttributePlace::Function,
+-                cstr("wasm-import-module\0"),
+-                &module,
+-            );
++    if let Some(id) = id {
++        if cx.tcx.sess.target.target.arch == "wasm32" {
++            if let Some(module) = wasm_import_module(cx.tcx, id) {
++                llvm::AddFunctionAttrStringValue(
++                    llfn,
++                    llvm::AttributePlace::Function,
++                    cstr("wasm-import-module\0"),
++                    &module,
++                );
++            }
+         }
+     }
+ }
+diff --git a/src/librustc_codegen_llvm/base.rs b/src/librustc_codegen_llvm/base.rs
+index 223c04f420f3..b0461582ddcb 100644
+--- a/src/librustc_codegen_llvm/base.rs
++++ b/src/librustc_codegen_llvm/base.rs
+@@ -486,27 +486,6 @@ pub fn codegen_instance<'a, 'tcx>(cx: &CodegenCx<'a, 'tcx>, instance: Instance<'
+ 
+     cx.stats.borrow_mut().n_closures += 1;
+ 
+-    // The `uwtable` attribute according to LLVM is:
+-    //
+-    //     This attribute indicates that the ABI being targeted requires that an
+-    //     unwind table entry be produced for this function even if we can show
+-    //     that no exceptions passes by it. This is normally the case for the
+-    //     ELF x86-64 abi, but it can be disabled for some compilation units.
+-    //
+-    // Typically when we're compiling with `-C panic=abort` (which implies this
+-    // `no_landing_pads` check) we don't need `uwtable` because we can't
+-    // generate any exceptions! On Windows, however, exceptions include other
+-    // events such as illegal instructions, segfaults, etc. This means that on
+-    // Windows we end up still needing the `uwtable` attribute even if the `-C
+-    // panic=abort` flag is passed.
+-    //
+-    // You can also find more info on why Windows is whitelisted here in:
+-    //      https://bugzilla.mozilla.org/show_bug.cgi?id=1302078
+-    if !cx.sess().no_landing_pads() ||
+-       cx.sess().target.target.options.requires_uwtable {
+-        attributes::emit_uwtable(lldecl, true);
+-    }
+-
+     let mir = cx.tcx.instance_mir(instance.def);
+     mir::codegen_mir(cx, lldecl, &mir, instance, sig);
+ }
+diff --git a/src/librustc_codegen_llvm/callee.rs b/src/librustc_codegen_llvm/callee.rs
+index 2c01bd42cc77..97f07792ede8 100644
+--- a/src/librustc_codegen_llvm/callee.rs
++++ b/src/librustc_codegen_llvm/callee.rs
+@@ -97,7 +97,7 @@ pub fn get_fn<'a, 'tcx>(cx: &CodegenCx<'a, 'tcx>,
+         if instance.def.is_inline(tcx) {
+             attributes::inline(llfn, attributes::InlineAttr::Hint);
+         }
+-        attributes::from_fn_attrs(cx, llfn, instance.def.def_id());
++        attributes::from_fn_attrs(cx, llfn, Some(instance.def.def_id()));
+ 
+         let instance_def_id = instance.def_id();
+ 
+diff --git a/src/librustc_codegen_llvm/intrinsic.rs b/src/librustc_codegen_llvm/intrinsic.rs
+index 9c5c0f730c16..f69fce15dc55 100644
+--- a/src/librustc_codegen_llvm/intrinsic.rs
++++ b/src/librustc_codegen_llvm/intrinsic.rs
+@@ -10,6 +10,7 @@
+ 
+ #![allow(non_upper_case_globals)]
+ 
++use attributes;
+ use intrinsics::{self, Intrinsic};
+ use llvm;
+ use llvm::{ValueRef};
+@@ -936,6 +937,7 @@ fn gen_fn<'a, 'tcx>(cx: &CodegenCx<'a, 'tcx>,
+         Abi::Rust
+     )));
+     let llfn = declare::define_internal_fn(cx, name, rust_fn_ty);
++    attributes::from_fn_attrs(cx, llfn, None);
+     let bx = Builder::new_block(cx, llfn, "entry-block");
+     codegen(bx);
+     llfn
+diff --git a/src/librustc_codegen_llvm/mono_item.rs b/src/librustc_codegen_llvm/mono_item.rs
+index a528008e3b4b..32d8b24e3c15 100644
+--- a/src/librustc_codegen_llvm/mono_item.rs
++++ b/src/librustc_codegen_llvm/mono_item.rs
+@@ -183,7 +183,7 @@ fn predefine_fn<'a, 'tcx>(cx: &CodegenCx<'a, 'tcx>,
+     if instance.def.is_inline(cx.tcx) {
+         attributes::inline(lldecl, attributes::InlineAttr::Hint);
+     }
+-    attributes::from_fn_attrs(cx, lldecl, instance.def.def_id());
++    attributes::from_fn_attrs(cx, lldecl, Some(instance.def.def_id()));
+ 
+     cx.instances.borrow_mut().insert(instance, lldecl);
+ }
+-- 
+2.17.1
+
