@@ -165,7 +165,6 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = false
-		#python = "python3.7"
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
