@@ -92,6 +92,11 @@ src_prepare() {
 
 	default
 
+	rm -rf src/llvm/
+
+	# We never enable emscripten.
+	rm -rf src/llvm-emscripten/
+
 	# This tests a problem of exponential growth, which seems to be less-reliably
 	# fixed when running on older LLVM and/or some arches.  Just skip it for now.
 	sed -i.ignore -e '1i // ignore-test may still be exponential...' \
@@ -137,14 +142,14 @@ src_configure() {
 	rust_target="${!rust_target_name}"
 
 	cat <<- EOF > "${S}"/config.toml
-		[llvm]
-		enabled = true
-		optimize = $(toml_usex !debug)
-		release-debuginfo = $(toml_usex debug)
-		assertions = $(toml_usex debug)
-		ninja = true
-		targets = "${LLVM_TARGETS// /;}"
-		link-jobs = $(makeopts_jobs)
+		#[llvm]
+		#enabled = true
+		#optimize = $(toml_usex !debug)
+		#release-debuginfo = $(toml_usex debug)
+		#assertions = $(toml_usex debug)
+		#ninja = true
+		#targets = "${LLVM_TARGETS// /;}"
+		#link-jobs = $(makeopts_jobs)
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
