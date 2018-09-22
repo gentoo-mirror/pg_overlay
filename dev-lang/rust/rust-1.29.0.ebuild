@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
+PYTHON_COMPAT=( python2_7 python3_7 )
 
 inherit multiprocessing multilib-build python-any-r1 toolchain-funcs versionator llvm
 
@@ -151,7 +151,6 @@ src_configure() {
 		[llvm]
 		enabled = true
 		optimize = $(toml_usex !debug)
-		thin-lto = true
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
@@ -166,7 +165,8 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = false
-		python = "${EPYTHON}"
+		python = "python3.7"
+		#python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
 		extended = ${extended}
