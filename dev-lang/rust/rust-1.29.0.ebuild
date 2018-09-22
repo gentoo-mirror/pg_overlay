@@ -148,7 +148,7 @@ src_configure() {
 	rust_target="${!rust_target_name}"
 
 	cat <<- EOF > "${S}"/config.toml
-		#[llvm]
+		[llvm]
 		enabled = true
 		optimize = $(toml_usex !debug)
 		thin-lto=true
