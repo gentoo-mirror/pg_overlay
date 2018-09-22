@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
 
-inherit multiprocessing multilib-build python-any-r1 toolchain-funcs versionator
+inherit multiprocessing multilib-build python-any-r1 toolchain-funcs versionator llvm
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
