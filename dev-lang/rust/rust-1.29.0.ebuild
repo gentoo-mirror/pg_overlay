@@ -49,7 +49,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="cargo debug doc +jemalloc libressl rls rustfmt wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="cargo debug doc +jemalloc libressl rls rustfmt wasm ${ALL_LLVM_TARGETS[*]} system-llvm"
 
 RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		jemalloc? ( dev-libs/jemalloc )
@@ -92,10 +92,11 @@ src_prepare() {
 
 	default
 
-	rm -rf src/llvm/
-
-	# We never enable emscripten.
-	rm -rf src/llvm-emscripten/
+	if use system-llvm; then
+		rm -rf src/llvm/
+		# We never enable emscripten.
+		rm -rf src/llvm-emscripten/
+	fi
 
 	# This tests a problem of exponential growth, which seems to be less-reliably
 	# fixed when running on older LLVM and/or some arches.  Just skip it for now.
@@ -110,6 +111,11 @@ src_prepare() {
 }
 
 src_configure() {
+	if use system-llvm; then
+		export LLVM_LINK_SHARED=1
+		local llvm_config="$(get_llvm_prefix)/bin/${CBUILD}-llvm-config"
+	fi
+
 	local rust_target="" rust_targets="" rust_target_name arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -143,13 +149,14 @@ src_configure() {
 
 	cat <<- EOF > "${S}"/config.toml
 		#[llvm]
-		#enabled = true
-		#optimize = $(toml_usex !debug)
-		#release-debuginfo = $(toml_usex debug)
-		#assertions = $(toml_usex debug)
-		#ninja = true
-		#targets = "${LLVM_TARGETS// /;}"
-		#link-jobs = $(makeopts_jobs)
+		enabled = true
+		optimize = $(toml_usex !debug)
+		thin-lto=true
+		release-debuginfo = $(toml_usex debug)
+		assertions = $(toml_usex debug)
+		ninja = true
+		targets = "${LLVM_TARGETS// /;}"
+		link-jobs = $(makeopts_jobs)
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -204,6 +211,12 @@ src_configure() {
 			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
 		EOF
+
+		if use system-llvm; then
+			cat <<- EOF >> "${S}"/config.toml
+				llvm-config = "${llvm_config}"
+			EOF
+		fi
 	done
 
 	if use wasm; then
@@ -211,6 +224,12 @@ src_configure() {
 			[target.wasm32-unknown-unknown]
 			linker = "lld"
 		EOF
+
+		if use system-llvm; then
+			cat <<- EOF >> "${S}"/config.toml
+				llvm-config = "${llvm_config}"
+			EOF
+		fi
 	fi
 }
 
