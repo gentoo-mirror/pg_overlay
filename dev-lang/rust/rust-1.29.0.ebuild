@@ -151,7 +151,7 @@ src_configure() {
 		[llvm]
 		enabled = true
 		optimize = $(toml_usex !debug)
-		thin-lto=true
+		thin-lto = true
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
