@@ -5,7 +5,7 @@ EAPI=6
 
 PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
 
-inherit multiprocessing multilib-build python-any-r1 toolchain-funcs versionator
+inherit multiprocessing multilib-build python-any-r1 toolchain-funcs versionator llvm
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
@@ -148,10 +148,10 @@ src_configure() {
 	rust_target="${!rust_target_name}"
 
 	cat <<- EOF > "${S}"/config.toml
-		#[llvm]
+		[llvm]
 		enabled = true
 		optimize = $(toml_usex !debug)
-		thin-lto=true
+		thin-lto = true
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
