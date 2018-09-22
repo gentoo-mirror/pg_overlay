@@ -3,9 +3,9 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_7 )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
 
-inherit multiprocessing multilib-build python-any-r1 toolchain-funcs versionator llvm
+inherit llvm multiprocessing multilib-build python-any-r1 toolchain-funcs versionator
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
@@ -165,8 +165,8 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = false
-		python = "python3.7"
-		#python = "${EPYTHON}"
+		#python = "python3.7"
+		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
 		extended = ${extended}
