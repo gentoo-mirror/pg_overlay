@@ -7,7 +7,7 @@ MOZ_ESR=""
 MOZ_LIGHTNING_VER="6.2"
 MOZ_LIGHTNING_GDATA_VER="4.4.1"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_7 )
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
 MOZ_LANGS=(en en-GB en-US ru )
