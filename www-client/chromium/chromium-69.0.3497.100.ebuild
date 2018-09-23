@@ -529,7 +529,6 @@ src_configure() {
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" use_ozone=false"
-	myconf_gn+=" optimize_for_size=false"
 	myconf_gn+=" use_vaapi=true"
 	myconf_gn+=" link_pulseaudio=true"
 	myconf_gn+=" use_gio=false"
