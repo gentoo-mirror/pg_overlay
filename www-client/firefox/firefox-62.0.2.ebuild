@@ -484,7 +484,7 @@ src_configure() {
 
 	# Enable good features
 	#mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-pie
+	mozconfig_annotate '' --enable-llvm-hacks
 	mozconfig_annotate '' --enable-rust-simd
 	#mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
