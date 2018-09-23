@@ -38,9 +38,10 @@ KEYWORDS="~amd64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist dbus debug eme-free +gmp-autoupdate hardened hwaccel jack neon
-	pulseaudio +screenshot selinux startup-notification system-harfbuzz system-icu
-	system-jpeg system-libevent system-sqlite system-libvpx test wifi clang jit kde"
+IUSE="bindist clang dbus debug eme-free geckodriver +gmp-autoupdate hardened hwaccel
+	jack lto neon pulseaudio +screenshot selinux startup-notification
+	system-harfbuzz system-icu system-jpeg system-libevent system-sqlite
+	system-libvpx test wifi jit kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -101,19 +102,22 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
-	>=sys-devel/binutils-2.16.1
+	>=sys-devel/binutils-2.30
 	sys-apps/findutils
-	pulseaudio? ( media-sound/pulseaudio )
-	elibc_glibc? ( || (
-		( >=dev-lang/rust-1.24.0[-extended(-)] >=dev-util/cargo-0.25.0 )
-		>=dev-lang/rust-1.24.0[extended]
-		( >=dev-lang/rust-bin-1.24.0 >=dev-util/cargo-0.25.0 )
-	) )
-	elibc_musl? ( || ( >=dev-lang/rust-1.24.0
-		>=dev-util/cargo-0.25.0
-	) )
 	>=sys-devel/llvm-4.0.1
 	>=sys-devel/clang-4.0.1
+	clang? (
+		>=sys-devel/lld-4.0.1
+	)
+	pulseaudio? ( media-sound/pulseaudio )
+	elibc_glibc? (
+		virtual/cargo
+		virtual/rust
+	)
+	elibc_musl? (
+		virtual/cargo
+		virtual/rust
+	)
 	amd64? ( >=dev-lang/yasm-1.1 virtual/opengl )
 	x86? ( >=dev-lang/yasm-1.1 virtual/opengl )"
 
@@ -151,8 +155,8 @@ pkg_setup() {
 		einfo
 		elog "You are enabling official branding. You may not redistribute this build"
 		elog "to any users on your network or the internet. Doing so puts yourself into"
-		elog "a legal problem with Mozilla Foundation"
-		elog "You can disable it by emerging ${PN} _with_ the bindist USE-flag"
+		elog "a legal problem with Mozilla Foundation."
+		elog "You can disable it by emerging ${PN} _with_ the bindist USE-flag."
 	fi
 
 	addpredict /proc/self/oom_score_adj
@@ -176,6 +180,10 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
+
+	eapply "${FILESDIR}"/${PN}-60.0-blessings-TERM.patch # 654316
+	eapply "${FILESDIR}"/${PN}-60.0-do-not-force-lld.patch
+	eapply "${FILESDIR}"/${PN}-60.0-sandbox-lto.patch # 666580
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -254,6 +262,28 @@ src_configure() {
 	# get your own set of keys.
 	_google_api_key=AIzaSyDEAOvatFo0eTgsV_ZlEzx0ObmepsMzfAc
 
+	# Add information about TERM to output (build.log) to aid debugging
+	# blessings problems
+	if [[ -n "${TERM}" ]] ; then
+		einfo "TERM is set to: \"${TERM}\""
+	else
+		einfo "TERM is unset."
+	fi
+
+	if use clang && ! tc-is-clang ; then
+		# Force clang
+		einfo "Enforcing the use of clang due to USE=clang ..."
+		CC=${CHOST}-clang
+		CXX=${CHOST}-clang++
+		strip-unsupported-flags
+	elif ! use clang && ! tc-is-gcc ; then
+		# Force gcc
+		einfo "Enforcing the use of gcc due to USE=-clang ..."
+		CC=${CHOST}-gcc
+		CXX=${CHOST}-gcc++
+		strip-unsupported-flags
+	fi
+
 	####################################
 	#
 	# mozconfig, CFLAGS and CXXFLAGS setup
@@ -266,17 +296,32 @@ src_configure() {
 		--with-system-zlib \
 		--with-system-bz2
 
-	# Stylo is only broken on x86 builds
-	use x86 && mozconfig_annotate 'Upstream bug 1341234' --disable-stylo
-
 	# Must pass release in order to properly select linker
 	mozconfig_annotate 'Enable by Gentoo' --enable-release
 
-	# Must pass --enable-gold if using ld.gold
-	if tc-ld-is-gold ; then
-		mozconfig_annotate 'tc-ld-is-gold=true' --enable-gold
+	# Don't let user's LTO flags clash with upstream's flags
+	filter-flags -flto*
+
+	if use lto ; then
+		if use clang ; then
+			# Upstream only supports lld when using clang
+			mozconfig_annotate "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
+		else
+			# Linking only works when using ld.gold when LTO is enabled
+			mozconfig_annotate "forcing ld=gold due to USE=lto" --enable-linker=gold
+		fi
+
+		mozconfig_annotate '+lto' --enable-lto=full
 	else
-		mozconfig_annotate 'tc-ld-is-gold=false' --disable-gold
+		# Avoid auto-magic on linker
+		if use clang ; then
+			# This is upstream's default
+			mozconfig_annotate "forcing ld=lld due to USE=clang" --enable-linker=lld
+		elif tc-ld-is-gold ; then
+			mozconfig_annotate "linker is set to gold" --enable-linker=gold
+		else
+			mozconfig_annotate "linker is set to bfd" --enable-linker=bfd
+		fi
 	fi
 
 	# It doesn't compile on alpha without this LDFLAGS
@@ -369,6 +414,8 @@ src_configure() {
 	mozconfig_use_enable dbus
 
 	mozconfig_use_enable wifi necko-wifi
+
+	mozconfig_use_enable geckodriver
 
 	# enable JACK, bug 600002
 	mozconfig_use_enable jack
