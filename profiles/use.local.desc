@@ -12,4 +12,15 @@ media-fonts/unifont:fontforge - Use media-gfx/fontforge to build fonts from sour
 media-fonts/unifont:utils - Install unifont utilities
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
+www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
+www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
+www-client/chromium:jumbo-build - Combine source files to speed up build process.
+www-client/chromium:pic - Disable optimized assembly code that is not PIC friendly
+www-client/chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3
+www-client/chromium:suid - Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels
+www-client/chromium:system-ffmpeg - Use system ffmpeg instead of the bundled one
+www-client/chromium:system-icu - Use system icu instead of the bundled one
+www-client/chromium:system-libvpx - Use system libvpx instead of the bundled one
+www-client/chromium:tcmalloc - Use bundled tcmalloc instead of system malloc
+www-client/chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
 x11-libs/libxcb:xkb - Enable the XCB keyboard extension
