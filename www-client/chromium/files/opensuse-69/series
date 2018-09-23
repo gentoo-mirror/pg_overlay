@@ -1,4 +1,5 @@
 chromium-dma-buf.patch
 chromium-non-void-return.patch
 chromium-drm.patch
+chromium-warnings.patch
 chromium-gcc8-alignof.patch
