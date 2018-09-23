@@ -229,9 +229,6 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	# Patch for Clang
-	use clang && eapply "${FILESDIR}/${PN}-clang.patch"
-
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
 
