@@ -180,8 +180,8 @@ src_prepare() {
 
 	default
 
-	for p in $(cat "${FILESDIR}/ungoogled-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-$(get_major_version)/$i";done
-	for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$i";done
+	for p in $(cat "${FILESDIR}/ungoogled-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-$(get_major_version)/$p";done
+	for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
