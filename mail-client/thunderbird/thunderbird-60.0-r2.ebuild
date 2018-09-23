@@ -61,7 +61,7 @@ DEPEND="rust? ( dev-lang/rust )
 RDEPEND="${CDEPEND}
 	selinux? ( sec-policy/selinux-thunderbird )
 	crypt? ( >=x11-plugins/enigmail-1.9.8.3-r1 )
-	kde? (	kde-apps/kdialog:5
+	kde? (	kde-apps/kdialog
 			kde-misc/kmozillahelper )"
 
 S="${WORKDIR}/${MOZ_P%b[0-9]*}"

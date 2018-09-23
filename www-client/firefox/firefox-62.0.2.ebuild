@@ -97,7 +97,9 @@ RDEPEND="${CDEPEND}
 	jack? ( virtual/jack )
 	pulseaudio? ( || ( media-sound/pulseaudio
 		>=media-sound/apulse-0.1.9 ) )
-	selinux? ( sec-policy/selinux-mozilla )"
+	selinux? ( sec-policy/selinux-mozilla )
+	kde? (	kde-apps/kdialog
+		kde-misc/kmozillahelper )"
 
 DEPEND="${CDEPEND}
 	app-arch/zip
