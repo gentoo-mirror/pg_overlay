@@ -551,8 +551,6 @@ src_configure() {
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_zlib=true"
 
-	myconf_gn+=" use_swiftshader_with_subzero=false"
-
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
 	if ! use custom-cflags; then
 		replace-flags "-Os" "-O2"
