@@ -19,7 +19,7 @@ SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
-sudo 
+
 COMMON_DEPEND="
 	app-accessibility/at-spi2-atk:2
 	app-arch/bzip2:=
