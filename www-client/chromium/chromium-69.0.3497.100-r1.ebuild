@@ -376,7 +376,7 @@ src_prepare() {
 
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
+	python_setup '-2'
 
 	local myconf_gn=""
 
@@ -604,7 +604,7 @@ src_configure() {
 
 src_compile() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
+	python_setup '-2'
 
 	#"${EPYTHON}" tools/clang/scripts/update.py --force-local-build --gcc-toolchain /usr --skip-checkout --use-system-cmake --without-android || die
 
