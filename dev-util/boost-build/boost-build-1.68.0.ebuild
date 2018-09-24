@@ -1,26 +1,26 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 RESTRICT="test"
 
 PYTHON_COMPAT=( python2_7 )
-inherit eutils flag-o-matic python-single-r1 toolchain-funcs versionator poly-c_ebuilds
+inherit eutils flag-o-matic python-single-r1 toolchain-funcs
 
-REAL_PV="$(replace_all_version_separators _ ${MY_PV})"
+MY_PV="$(ver_rs 1- _)"
 
 DESCRIPTION="A system for large project software construction, simple to use and powerful"
-HOMEPAGE="http://www.boost.org/doc/tools/build/index.html"
-SRC_URI="https://downloads.sourceforge.net/project/boost/boost/${MY_PV}/boost_${REAL_PV}.tar.bz2"
+HOMEPAGE="https://boostorg.github.io/build/"
+SRC_URI="https://downloads.sourceforge.net/project/boost/boost/${PV}/boost_${MY_PV}.tar.bz2"
 
 LICENSE="Boost-1.0"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="examples python test"
 
 RDEPEND="python? ( ${PYTHON_DEPS} )
-	!<dev-libs/boost-1.34.0
+	!<dev-libs/boost-1.35.0
 	!<=dev-util/boost-build-1.35.0-r1"
 DEPEND="${RDEPEND}
 	test? ( sys-apps/diffutils
@@ -29,15 +29,13 @@ DEPEND="${RDEPEND}
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )
 	test? ( ${PYTHON_REQUIRED_USE} )"
 
-S="${WORKDIR}/boost_${REAL_PV}/tools/build/src"
+S="${WORKDIR}/boost_${MY_PV}/tools/build/src"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.48.0-disable_python_rpath.patch"
 	"${FILESDIR}/${PN}-1.50.0-respect-c_ld-flags.patch"
-	"${FILESDIR}/${PN}-1.49.0-darwin-gentoo-toolchain.patch"
-	"${FILESDIR}/${PN}-1.52.0-darwin-no-python-framework.patch"
 	"${FILESDIR}/${PN}-1.54.0-support_dots_in_python-buildid.patch"
-	"${FILESDIR}/${PN}-1.55.0-ppc-aix.patch"
+	"${FILESDIR}/${PN}-1.66.0-add-none-feature-options.patch"
 )
 
 pkg_setup() {
@@ -47,7 +45,7 @@ pkg_setup() {
 }
 
 src_unpack() {
-	tar xjf "${DISTDIR}/${A}" boost_${REAL_PV}/tools/build || die "unpacking tar failed"
+	tar xojf "${DISTDIR}/${A}" boost_${MY_PV}/tools/build || die "unpacking tar failed"
 }
 
 src_prepare() {
@@ -72,11 +70,11 @@ src_prepare() {
 	# and stripping flags when bjam is used as build-system
 	# We simply extend the optimization and debug-symbols feature
 	# with empty dummies called 'none'
-#	cd "${S}" || die
-#	sed -i \
-#		-e 's/\(off speed space\)/\1 none/' \
-#		-e 's/\(debug-symbols      : on off\)/\1 none/' \
-#		tools/builtin.jam || die "sed failed"
+	cd "${S}" || die
+	sed -i \
+		-e 's/\(off speed space\)/\1 none/' \
+		-e 's/\(debug-symbols      : on off\)/\1 none/' \
+		tools/builtin.jam || die "sed failed"
 }
 
 src_configure() {
@@ -107,9 +105,8 @@ src_compile() {
 src_install() {
 	dobin engine/bin.*/{bjam,b2}
 
-	cp "${FILESDIR}/site-config.jam-1.66.0" "${T}/site-config.jam" || die
 	insinto /usr/share/boost-build
-	doins -r "${T}/site-config.jam" \
+	doins -r "${FILESDIR}/site-config.jam" \
 		../boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
 		build kernel options tools util
 
