@@ -180,7 +180,7 @@ src_prepare() {
 
 	default
 
-	for p in $(cat "${FILESDIR}/ungoogled-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-$(get_major_version)/$p";done
+	for p in $(cat "${FILESDIR}/ungoogled-$(get_major_version)/patches/series");do eapply "${FILESDIR}/ungoogled-$(get_major_version)/patches/$p";done
 	for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
