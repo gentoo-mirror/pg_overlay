@@ -191,6 +191,7 @@ src_prepare() {
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py patches apply -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux ./
 	echo 'Applying domain substitution'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
+	for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
 
 	python_setup '-2'
 
