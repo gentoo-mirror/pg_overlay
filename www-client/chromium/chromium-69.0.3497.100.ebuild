@@ -360,7 +360,7 @@ src_prepare() {
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
 
 	# Remove binaries
-	rm -fv $(cat "${FILESDIR}/opensuse-$(get_major_version)/pruning.list")
+	rm -fv $(cat "${FILESDIR}/ungoogled-$(get_major_version)/pruning.list")
 }
 
 src_configure() {
