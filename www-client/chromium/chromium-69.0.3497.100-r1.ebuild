@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_7} )
 
 CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
@@ -184,7 +184,7 @@ src_prepare() {
 	#for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
 
 	#
-	python_setup -3
+	python_setup '-3'
 	echo 'Pruning binaries'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py prune -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux ./
 	echo 'Applying patches'
@@ -192,7 +192,7 @@ src_prepare() {
 	echo 'Applying domain substitution'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
 
-	python_setup 'python2*'
+	python_setup '-2'
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
