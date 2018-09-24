@@ -184,15 +184,17 @@ src_prepare() {
 	#for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
 
 	#
-	python_setup -3
+	python_setup '-3'
 	echo 'Pruning binaries'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py prune -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux ./
 	echo 'Applying patches'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py patches apply -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux ./
 	echo 'Applying domain substitution'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
+	for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
 
-	python_setup -2
+	python_setup '-2'
+
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
@@ -217,7 +219,6 @@ src_prepare() {
 		net/third_party/spdy
 		third_party/WebKit
 		third_party/abseil-cpp
-		third_party/analytics
 		third_party/angle
 		third_party/angle/src/common/third_party/base
 		third_party/angle/src/common/third_party/smhasher
@@ -367,7 +368,7 @@ src_prepare() {
 	keeplibs+=( third_party/ungoogled )
 
 	# Remove most bundled libraries. Some are still needed.
-	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
+	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 
 	# Remove binaries
 	rm -fv $(cat "${FILESDIR}/ungoogled-$(get_major_version)/pruning.list")
@@ -375,7 +376,7 @@ src_prepare() {
 
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
+	python_setup '-2'
 
 	local myconf_gn=""
 
@@ -550,8 +551,6 @@ src_configure() {
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_zlib=true"
 
-	myconf_gn+=" use_swiftshader_with_subzero=false"
-
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
 	if ! use custom-cflags; then
 		replace-flags "-Os" "-O2"
@@ -603,7 +602,7 @@ src_configure() {
 
 src_compile() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
+	python_setup '-2'
 
 	#"${EPYTHON}" tools/clang/scripts/update.py --force-local-build --gcc-toolchain /usr --skip-checkout --use-system-cmake --without-android || die
 
