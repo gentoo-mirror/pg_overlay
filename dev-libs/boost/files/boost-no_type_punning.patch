@@ -1,7 +1,7 @@
 Index: libs/python/src/dict.cpp
 ===================================================================
---- libs/python/src/dict.cpp.orig
-+++ libs/python/src/dict.cpp
+--- a/libs/python/src/dict.cpp
++++ b/libs/python/src/dict.cpp
 @@ -28,9 +28,9 @@ namespace
  
  detail::new_reference dict_base::call(object const& arg_)
@@ -16,8 +16,8 @@ Index: libs/python/src/dict.cpp
  dict_base::dict_base()
 Index: libs/python/src/list.cpp
 ===================================================================
---- libs/python/src/list.cpp.orig
-+++ libs/python/src/list.cpp
+--- a/libs/python/src/list.cpp
++++ b/libs/python/src/list.cpp
 @@ -10,11 +10,11 @@ namespace boost { namespace python { nam
  
  detail::new_non_null_reference list_base::call(object const& arg_)
@@ -34,8 +34,8 @@ Index: libs/python/src/list.cpp
  list_base::list_base()
 Index: libs/python/src/long.cpp
 ===================================================================
---- libs/python/src/long.cpp.orig
-+++ libs/python/src/long.cpp
+--- a/libs/python/src/long.cpp
++++ b/libs/python/src/long.cpp
 @@ -8,16 +8,16 @@ namespace boost { namespace python { nam
  
  new_non_null_reference long_base::call(object const& arg_)
@@ -73,8 +73,8 @@ Index: libs/python/src/long.cpp
      : object(long_base::call(arg))
 Index: libs/python/src/object/class.cpp
 ===================================================================
---- libs/python/src/object/class.cpp.orig
-+++ libs/python/src/object/class.cpp
+--- a/libs/python/src/object/class.cpp
++++ b/libs/python/src/object/class.cpp
 @@ -616,9 +616,11 @@ namespace objects
    void class_base::add_property(
      char const* name, object const& fget, char const* docstr)
@@ -103,8 +103,8 @@ Index: libs/python/src/object/class.cpp
    }
 Index: libs/python/src/str.cpp
 ===================================================================
---- libs/python/src/str.cpp.orig
-+++ libs/python/src/str.cpp
+--- a/libs/python/src/str.cpp
++++ b/libs/python/src/str.cpp
 @@ -9,14 +9,14 @@ namespace boost { namespace python { nam
  
  detail::new_reference str_base::call(object const& arg_)
@@ -127,8 +127,8 @@ Index: libs/python/src/str.cpp
  str_base::str_base()
 Index: libs/python/src/tuple.cpp
 ===================================================================
---- libs/python/src/tuple.cpp.orig
-+++ libs/python/src/tuple.cpp
+--- a/libs/python/src/tuple.cpp
++++ b/libs/python/src/tuple.cpp
 @@ -8,9 +8,10 @@ namespace boost { namespace python { nam
  
  detail::new_reference tuple_base::call(object const& arg_)
