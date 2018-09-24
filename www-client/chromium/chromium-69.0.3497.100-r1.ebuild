@@ -176,7 +176,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	#python_setup
+	python_setup
 
 	default
 
@@ -192,7 +192,7 @@ src_prepare() {
 	echo 'Applying domain substitution'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
 
-	python_setup 'python2*'
+	python_setup '-2'
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -218,7 +218,6 @@ src_prepare() {
 		net/third_party/spdy
 		third_party/WebKit
 		third_party/abseil-cpp
-		third_party/analytics
 		third_party/angle
 		third_party/angle/src/common/third_party/base
 		third_party/angle/src/common/third_party/smhasher
