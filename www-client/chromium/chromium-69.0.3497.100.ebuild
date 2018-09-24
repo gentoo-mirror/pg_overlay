@@ -180,7 +180,7 @@ src_prepare() {
 
 	default
 
-	for p in $(cat "${FILESDIR}/ungoogled-$(get_major_version)/patches/series");do eapply "${FILESDIR}/ungoogled-$(get_major_version)/patches/$p";done
+	for p in $(cat "${FILESDIR}/ungoogled-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-$(get_major_version)/$p";done
 	for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
@@ -360,13 +360,8 @@ src_prepare() {
 	python2 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
 
 	# Remove binaries
-	#rm -fv $(cat "${FILESDIR}/ungoogled-$(get_major_version)/pruning.list")
+	rm -fv $(cat "${FILESDIR}/ungoogled-$(get_major_version)/pruning.list")
 	echo 'Pruning binaries'
-	python3 ${FILESDIR}/ungoogled-$(get_major_version)/run_buildkit_cli.py prune -b ${FILESDIR}/ungoogled-$(get_major_version)/config_bundles/commom ./
-	#msg2 'Applying patches'
-	#python "$_buildkit_cli" patches apply -b "$_config_bundle" ./
-	echo 'Applying domain substitution'
-	python3 ${FILESDIR}/ungoogled-$(get_major_version)/run_buildkit_cli.py domains apply -b ${FILESDIR}/ungoogled-$(get_major_version)/config_bundles/commom -c domainsubcache.tar.gz ./
 }
 
 src_configure() {
