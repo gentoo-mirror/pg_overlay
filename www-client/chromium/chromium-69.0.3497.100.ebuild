@@ -362,11 +362,11 @@ src_prepare() {
 	# Remove binaries
 	#rm -fv $(cat "${FILESDIR}/ungoogled-$(get_major_version)/pruning.list")
 	echo 'Pruning binaries'
-	python ${FILESDIR}/ungoogled-$(get_major_version)/run_buildkit_cli.py prune -b ${FILESDIR}/ungoogled-$(get_major_version)/config_bundles/commom ./
+	python3 ${FILESDIR}/ungoogled-$(get_major_version)/run_buildkit_cli.py prune -b ${FILESDIR}/ungoogled-$(get_major_version)/config_bundles/commom ./
 	#msg2 'Applying patches'
 	#python "$_buildkit_cli" patches apply -b "$_config_bundle" ./
-	msg2 'Applying domain substitution'
-	python ${FILESDIR}/ungoogled-$(get_major_version)/run_buildkit_cli.py domains apply -b ${FILESDIR}/ungoogled-$(get_major_version)/config_bundles/commom -c domainsubcache.tar.gz ./
+	echo 'Applying domain substitution'
+	python3 ${FILESDIR}/ungoogled-$(get_major_version)/run_buildkit_cli.py domains apply -b ${FILESDIR}/ungoogled-$(get_major_version)/config_bundles/commom -c domainsubcache.tar.gz ./
 }
 
 src_configure() {
