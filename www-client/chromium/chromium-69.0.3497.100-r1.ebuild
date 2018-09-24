@@ -19,6 +19,7 @@ SLOT="0"
 KEYWORDS="amd64 ~x86"
 IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
+REQUIRED_USE="( $(python_gen_useflags 'python2*' ) )"
 
 COMMON_DEPEND="
 	app-accessibility/at-spi2-atk:2
@@ -192,7 +193,7 @@ src_prepare() {
 	echo 'Applying domain substitution'
 	"${FILESDIR}/ungoogled-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
 
-	python_setup 'python2.7'
+	python_setup 'python2*'
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
