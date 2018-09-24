@@ -1,21 +1,20 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 PYTHON_COMPAT=( python{2_7,3_{4,5,6,7}} )
 
-inherit eutils flag-o-matic multiprocessing python-r1 toolchain-funcs versionator multilib-minimal poly-c_ebuilds
+inherit eutils flag-o-matic multiprocessing python-r1 toolchain-funcs multilib-minimal
 
-REAL_P="${PN}_$(replace_all_version_separators _ ${MY_PV})"
-MAJOR_V="$(get_version_component_range 1-2)"
+MY_P="${PN}_$(ver_rs 1- _)"
+MAJOR_V="$(ver_cut 1-2)"
 
 DESCRIPTION="Boost Libraries for C++"
 HOMEPAGE="https://www.boost.org/"
-SRC_URI="https://downloads.sourceforge.net/project/boost/${PN}/${MY_PV}/${REAL_P}.tar.bz2"
-SRC_URI="https://dl.bintray.com/boostorg/release/${MY_PV}/source/${REAL_P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/project/boost/${PN}/${PV}/${MY_P}.tar.bz2"
 
 LICENSE="Boost-1.0"
-SLOT="0/${MY_PV}" # ${MY_PV} instead ${MAJOR_V} due to bug 486122
+SLOT="0/${PV}" # ${PV} instead ${MAJOR_V} due to bug 486122
 #KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris ~x86-winnt"
 
 IUSE="context debug doc icu +nls mpi python static-libs +threads tools"
@@ -23,7 +22,10 @@ IUSE="context debug doc icu +nls mpi python static-libs +threads tools"
 RDEPEND="icu? ( >=dev-libs/icu-3.6:=[${MULTILIB_USEDEP}] )
 	!icu? ( virtual/libiconv[${MULTILIB_USEDEP}] )
 	mpi? ( >=virtual/mpi-2.0-r4[${MULTILIB_USEDEP},cxx,threads] )
-	python? ( ${PYTHON_DEPS} )
+	python? (
+		${PYTHON_DEPS}
+		>dev-python/numpy-1.7[${PYTHON_USEDEP}]
+	)
 	app-arch/bzip2[${MULTILIB_USEDEP}]
 	sys-libs/zlib[${MULTILIB_USEDEP}]
 	!app-admin/eselect-boost"
@@ -33,7 +35,7 @@ REQUIRED_USE="
 	mpi? ( threads )
 	python? ( ${PYTHON_REQUIRED_USE} )"
 
-S="${WORKDIR}/${REAL_P}"
+S="${WORKDIR}/${MY_P}"
 
 # the tests will never fail because these are not intended as sanity
 # tests at all. They are more a way for upstream to check their own code
@@ -47,7 +49,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-1.55.0-context-x32.patch"
 	"${FILESDIR}/${PN}-1.56.0-build-auto_index-tool.patch"
 	"${FILESDIR}/${PN}-1.67.0-fix-python.patch"
-	"${FILESDIR}/${PN}-1.67.0-strict_aliasing.patch"
 )
 
 python_bindings_needed() {
@@ -141,6 +142,21 @@ src_configure() {
 		"-j$(makeopts_jobs)"
 		-q
 		-d+2
+		pch=off
+		$(usex icu "-sICU_PATH=${EPREFIX}/usr" '--disable-icu boost.locale.icu=off')
+		$(usex mpi '' '--without-mpi')
+		$(usex nls '' '--without-locale')
+		$(usex context '' '--without-context --without-coroutine --without-fiber')
+		$(usex threads '' '--without-thread')
+		--boost-build="${EPREFIX}"/usr/share/boost-build
+		--prefix="${ED%/}/usr"
+		--layout=system
+		# building with threading=single is currently not possible
+		# https://svn.boost.org/trac/boost/ticket/7105
+		threading=multi
+		link=$(usex static-libs shared,static shared)
+		$([[ ${CHOST} == *-winnt* ]] && printf -- '-sNO_BZIP2=1\n')
+		optimization=speed
 	)
 
 	if [[ ${CHOST} == *-darwin* ]]; then
@@ -153,7 +169,7 @@ src_configure() {
 			compilerVersion=trunk
 		else
 			compilerVersion=$($(tc-getCXX) -v | sed '1q' \
-				| sed -e 's,\([a-z]*\) \([0-9]\.[0-9]\.[0-9][^ \t]*\) .*,\2,')
+				| sed -e 's,\([a-z]*\) \([0-9]\.[0-9]\.[0-9][^ \t]*\) .*,\2,') || die "sed failed"
 		fi
 		compilerExecutable=$(tc-getCXX)
 	fi
@@ -165,44 +181,6 @@ src_configure() {
 
 	# Use C++14 globally as of 1.62
 	append-cxxflags -std=c++14
-
-	use icu && OPTIONS+=(
-			"-sICU_PATH=${EPREFIX}/usr"
-		)
-	use icu || OPTIONS+=(
-			--disable-icu
-			boost.locale.icu=off
-		)
-	use mpi || OPTIONS+=(
-			--without-mpi
-		)
-	use nls || OPTIONS+=(
-			--without-locale
-		)
-	use context || OPTIONS+=(
-			--without-context
-			--without-coroutine
-			--without-fiber
-		)
-	use threads || OPTIONS+=(
-			--without-thread
-		)
-
-	OPTIONS+=(
-		optimization=speed
-		pch=off
-		--boost-build="${EPREFIX}"/usr/share/boost-build
-		--prefix="${ED%/}/usr"
-		--layout=system
-		# building with threading=single is currently not possible
-		# https://svn.boost.org/trac/boost/ticket/7105
-		threading=multi
-		link=$(usex static-libs shared,static shared)
-	)
-
-	[[ ${CHOST} == *-winnt* ]] && OPTIONS+=(
-			-sNO_BZIP2=1
-		)
 }
 
 multilib_src_compile() {
@@ -339,7 +317,7 @@ multilib_src_install() {
 			install || die "Installation of Boost libraries failed"
 
 		if python_bindings_needed; then
-			rm -rf ${PYTHON_DIRS} || die
+			rm -r ${PYTHON_DIRS} || die
 
 			# Move mpi.so Python module to Python site-packages directory.
 			# https://svn.boost.org/trac/boost/ticket/2838
