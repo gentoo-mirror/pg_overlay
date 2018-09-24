@@ -176,7 +176,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
+	#python_setup
 
 	default
 
