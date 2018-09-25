@@ -106,7 +106,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	python_setup '-2'
 	# Apply our patchset from firefox to thunderbird as well
 	rm -f   "${WORKDIR}"/firefox/2007_fix_nvidia_latest.patch \
 		"${WORKDIR}"/firefox/2005_ffmpeg4.patch \
@@ -169,7 +168,6 @@ src_prepare() {
 }
 
 src_configure() {
-	python_setup '-2'
 	MEXTENSIONS="default"
 
 	####################################
