@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_7} )
 
 CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
 	sv sw ta te th tr uk vi zh-CN zh-TW"
 
-inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib ninja-utils pax-utils portability python-any-r1 readme.gentoo-r1 toolchain-funcs xdg-utils versionator
+inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils versionator
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
-IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
+IUSE="component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine thin-lto vaapi"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 COMMON_DEPEND="
@@ -28,6 +28,7 @@ COMMON_DEPEND="
 	dev-libs/expat:=
 	dev-libs/glib:2
 	system-icu? ( >=dev-libs/icu-59:= )
+	dev-libs/libevent
 	>=dev-libs/libxml2-2.9.4-r3:=[icu]
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
@@ -175,13 +176,20 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
-
 	default
 
-	for p in $(cat "${FILESDIR}/ungoogled-$(get_major_version)/series");do eapply "${FILESDIR}/ungoogled-$(get_major_version)/$p";done
-	for p in $(cat "${FILESDIR}/opensuse-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-$(get_major_version)/$p";done
+	# Applying Ungoogled-Chromium features
+	python_setup '-3'
+	echo 'Pruning binaries'
+	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py prune -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./
+	echo 'Applying patches'
+	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py patches apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./
+	echo 'Applying domain substitution'
+	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
+	# Patches form OpenSUSE
+	for p in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$p";done
+
+	python_setup '-2'
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -207,7 +215,6 @@ src_prepare() {
 		net/third_party/spdy
 		third_party/WebKit
 		third_party/abseil-cpp
-		third_party/analytics
 		third_party/angle
 		third_party/angle/src/common/third_party/base
 		third_party/angle/src/common/third_party/smhasher
@@ -357,15 +364,12 @@ src_prepare() {
 	keeplibs+=( third_party/ungoogled )
 
 	# Remove most bundled libraries. Some are still needed.
-	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
-
-	# Remove binaries
-	rm -fv $(cat "${FILESDIR}/ungoogled-$(get_major_version)/pruning.list")
+	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 }
 
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
+	python_setup '-2'
 
 	local myconf_gn=""
 
@@ -513,8 +517,9 @@ src_configure() {
 	# Disable fatal linker warnings, bug 506268.
 	myconf_gn+=" fatal_linker_warnings=false"
 
-	#
+	# Ungoogled-Chromium
 	myconf_gn+=" blink_symbol_level=0"
+	myconf_gn+=" clang_use_chrome_plugins=false"
 	myconf_gn+=" enable_ac3_eac3_audio_demuxing=true"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hevc_demuxing=true"
@@ -532,15 +537,18 @@ src_configure() {
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" use_ozone=false"
-	myconf_gn+=" use_vaapi=true"
-	myconf_gn+=" link_pulseaudio=true"
+
+	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
+	myconf_gn+=" linux_use_bundled_binutils=false"
+	myconf_gn+=" optimize_for_size=false"
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_lcms2=true"
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_zlib=true"
+	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 
-	myconf_gn+=" use_swiftshader_with_subzero=false"
+	myconf_gn+=" use_thin_lto=$(usex thin-lto true false)"
 
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
 	if ! use custom-cflags; then
@@ -568,8 +576,7 @@ src_configure() {
 	# https://bugs.gentoo.org/654216
 	addpredict /dev/dri/ #nowarn
 
-	#if ! use system-ffmpeg; then
-	if false; then
+	if ! use system-ffmpeg; then
 		local build_ffmpeg_args=""
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"
@@ -593,7 +600,7 @@ src_configure() {
 
 src_compile() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup
+	python_setup '-2'
 
 	#"${EPYTHON}" tools/clang/scripts/update.py --force-local-build --gcc-toolchain /usr --skip-checkout --use-system-cmake --without-android || die
 
