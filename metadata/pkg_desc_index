@@ -19,6 +19,6 @@ media-fonts/unifont 10.0.07: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 fon
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 sys-libs/cracklib 2.9.6-r1: Password Checking Library
 virtual/cargo 1.29.0: Package manager for Rust
-www-client/chromium 69.0.3497.100 69.0.3497.100-r1: Open-source version of Google Chrome web browser
+www-client/chromium 69.0.3497.100: Open-source version of Google Chrome web browser
 x11-base/xcb-proto 1.13: X C-language Bindings protocol headers
 x11-libs/libxcb 1.13: X C-language Bindings library
