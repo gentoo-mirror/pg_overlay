@@ -178,6 +178,7 @@ pkg_setup() {
 src_prepare() {
 	default
 
+	use widevine && eapply "${FILESDIR}/chromium-widevine-r2.patch"
 	# Applying Ungoogled-Chromium features
 	python_setup '-3'
 	echo 'Pruning binaries'
