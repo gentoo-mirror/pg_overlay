@@ -20,12 +20,12 @@ MULTILIB_CHOST_TOOLS=(
 	/usr/bin/nspr-config
 )
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-4.7.0-prtime.patch
-	"${FILESDIR}"/${PN}-4.8.9-link-flags.patch
+#PATCHES=(
+#	"${FILESDIR}"/${PN}-4.7.0-prtime.patch
+#	"${FILESDIR}"/${PN}-4.8.9-link-flags.patch
 	# We do not need to pass -L$libdir via nspr-config --libs
-	"${FILESDIR}"/${PN}-4.9.5_nspr_config.patch
-)
+#	"${FILESDIR}"/${PN}-4.9.5_nspr_config.patch
+#)
 
 src_prepare() {
 	cd "${S}"/nspr || die
