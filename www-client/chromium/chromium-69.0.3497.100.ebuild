@@ -548,7 +548,7 @@ src_configure() {
 	myconf_gn+=" use_system_zlib=true"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
 
-	myconf_gn+=" use_thin-lto=$(usex thin-lto true false)"
+	myconf_gn+=" use_thin_lto=$(usex thin-lto true false)"
 
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
 	if ! use custom-cflags; then
