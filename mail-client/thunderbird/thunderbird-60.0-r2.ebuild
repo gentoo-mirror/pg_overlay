@@ -168,7 +168,7 @@ src_prepare() {
 }
 
 src_configure() {
-	python_setup '-2'
+	python_setup '-3'
 	MEXTENSIONS="default"
 
 	####################################
