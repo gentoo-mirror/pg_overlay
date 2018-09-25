@@ -98,7 +98,7 @@ src_configure() {
 		-Dhtml=$(usex doc auto false)
 		-Dpam=$(usex pam true false)
 		-Dselinux=$(usex selinux true false)
-		$debugmode
+		-Ddebug=
 	)
 
 	meson_src_configure
