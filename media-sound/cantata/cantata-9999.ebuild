@@ -66,7 +66,6 @@ RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}/${P}-headers.patch"
-	"${FILESDIR}/${P}-opusfile.patch"
 )
 
 src_prepare() {
