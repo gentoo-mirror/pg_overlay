@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -7,7 +7,7 @@ inherit autotools git-r3 flag-o-matic linux-info user
 
 DESCRIPTION="The Music Player Daemon (mpd) with SACD & DVD-Audio support"
 HOMEPAGE="https://www.musicpd.org"
-EGIT_REPO_URI="git://git.musicpd.org/manisiutkin/{PN}.git"
+EGIT_REPO_URI="https://git.code.sf.net/p/sacddecoder/mpd/MPD.gitt"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -16,8 +16,8 @@ IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
 	+fifo +ffmpeg flac fluidsynth gme +icu +id3tag +inotify +ipv6 jack
 	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
 	mpg123 musepack +network nfs ogg openal opus oss pipe pulseaudio recorder
-	samba selinux sid +signalfd sndfile soundcloud sqlite tcpd twolame
-	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib +sacd"
+	samba selinux sid +signalfd sndfile soundcloud sqlite systemd tcpd twolame
+	unicode upnp vorbis wavpack wildmidi zeroconf zip zlib webdav +sacd"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio recorder"
 DECODER_PLUGINS="adplug audiofile faad ffmpeg flac fluidsynth mad mikmod
@@ -33,16 +33,19 @@ REQUIRED_USE="
 	upnp? ( expat )
 	sacd? ( cdio upnp )"
 
-CDEPEND="!<sys-cluster/mpich2-1.4_rc2
+COMMON_DEPEND="
 	adplug? ( media-libs/adplug )
 	alsa? (
-		media-sound/alsa-utils
 		media-libs/alsa-lib
+		media-sound/alsa-utils
 	)
 	ao? ( media-libs/libao[alsa?,pulseaudio?] )
 	audiofile? ( media-libs/audiofile )
 	bzip2? ( app-arch/bzip2 )
-	cdio? ( dev-libs/libcdio-paranoia )
+	cdio? (
+		dev-libs/libcdio:=
+		dev-libs/libcdio-paranoia
+	)
 	curl? ( net-misc/curl )
 	expat? ( dev-libs/expat )
 	faad? ( media-libs/faad2 )
@@ -59,6 +62,7 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	lame? ( network? ( media-sound/lame ) )
 	libmpdclient? ( media-libs/libmpdclient )
 	libsamplerate? ( media-libs/libsamplerate )
+	libsoxr? ( media-libs/soxr )
 	mad? ( media-libs/libmad )
 	mikmod? ( media-libs/libmikmod:0 )
 	mms? ( media-libs/libmms )
@@ -75,10 +79,12 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	opus? ( media-libs/opus )
 	pulseaudio? ( media-sound/pulseaudio )
 	samba? ( >=net-fs/samba-4.0.25 )
-	sid? ( || ( media-libs/libsidplay:2 media-libs/libsidplayfp ) )
+	sid? ( || (
+		media-libs/libsidplay:2
+		media-libs/libsidplayfp
+	) )
 	sndfile? ( media-libs/libsndfile )
 	soundcloud? ( >=dev-libs/yajl-2:= )
-	libsoxr? ( media-libs/soxr )
 	sqlite? ( dev-db/sqlite:3 )
 	tcpd? ( sys-apps/tcp-wrappers )
 	twolame? ( media-sound/twolame )
@@ -88,12 +94,12 @@ CDEPEND="!<sys-cluster/mpich2-1.4_rc2
 	wildmidi? ( media-sound/wildmidi )
 	zeroconf? ( net-dns/avahi[dbus] )
 	zip? ( dev-libs/zziplib )
-	zlib? ( sys-libs/zlib )
-	!media-sound/mpd"
-DEPEND="${CDEPEND}
+	zlib? ( sys-libs/zlib )"
+DEPEND="${COMMON_DEPEND}
 	dev-libs/boost
 	virtual/pkgconfig"
-RDEPEND="${CDEPEND}
+RDEPEND="${COMMON_DEPEND}
+	!<sys-cluster/mpich2-1.4_rc2
 	selinux? ( sec-policy/selinux-mpd )
 "
 
@@ -104,8 +110,6 @@ PATCHES=(
 pkg_setup() {
 	use network || ewarn "Icecast and Shoutcast streaming needs networking."
 	use fluidsynth && ewarn "Using fluidsynth is discouraged by upstream."
-
-	enewuser mpd "" "" "/var/lib/mpd" audio
 
 	if use eventfd; then
 		CONFIG_CHECK+=" ~EVENTFD"
@@ -220,8 +224,10 @@ src_configure() {
 		$(use_enable wildmidi)
 		$(use_enable zip zzip)
 		$(use_enable icu)
+		$(use_enable webdav)
 		$(use_enable faad aac)
 		$(use_with zeroconf zeroconf avahi)
+		--with-boost="${EPREFIX}"/usr
 		--with-systemdsystemunitdir=
 		--with-systemduserunitdir=
 		$(use_enable sacd sacdiso)
@@ -232,7 +238,7 @@ src_configure() {
 }
 
 src_install() {
-	emake DESTDIR="${D}" install
+	default
 
 	insinto /etc
 	newins doc/mpdconf.dist mpd.conf
@@ -245,18 +251,5 @@ src_install() {
 	fi
 
 	insinto /etc/logrotate.d
-	newins "${FILESDIR}"/${PN}-0.20.4.logrotate ${PN}
-
-	use prefix || diropts -m0755 -o mpd -g audio
-	dodir /var/lib/mpd
-	keepdir /var/lib/mpd
-	dodir /var/lib/mpd/music
-	keepdir /var/lib/mpd/music
-	dodir /var/lib/mpd/playlists
-	keepdir /var/lib/mpd/playlists
-}
-
-pkg_postinst() {
-	# also change the homedir if the user has existed before
-	usermod -d "/var/lib/mpd" mpd
+	newins "${FILESDIR}"/${PN}-0.20.12.logrotate ${PN}
 }
