@@ -88,7 +88,7 @@ COMMON_DEPEND="
 	sqlite? ( dev-db/sqlite:3 )
 	tcpd? ( sys-apps/tcp-wrappers )
 	twolame? ( media-sound/twolame )
-	upnp? ( net-libs/libupnp:= )
+	upnp? ( net-libs/libupnp:0= )
 	vorbis? ( media-libs/libvorbis )
 	wavpack? ( media-sound/wavpack )
 	wildmidi? ( media-sound/wildmidi )
