@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://git.code.sf.net/p/sacddecoder/mpd/MPD.gitt"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~x86"
 IUSE="adplug +alsa ao audiofile bzip2 cdio +curl debug +eventfd expat faad
 	+fifo +ffmpeg flac fluidsynth gme +icu +id3tag +inotify +ipv6 jack
 	lame mms libav libmpdclient libsamplerate libsoxr +mad mikmod modplug
