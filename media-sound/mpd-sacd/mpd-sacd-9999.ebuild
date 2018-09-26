@@ -7,7 +7,7 @@ inherit autotools git-r3 flag-o-matic linux-info user
 
 DESCRIPTION="The Music Player Daemon (mpd) with SACD & DVD-Audio support"
 HOMEPAGE="https://www.musicpd.org"
-EGIT_REPO_URI="https://git.code.sf.net/p/sacddecoder/mpd/MPD.gitt"
+EGIT_REPO_URI="https://git.code.sf.net/p/sacddecoder/mpd/MPD.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -88,7 +88,7 @@ COMMON_DEPEND="
 	sqlite? ( dev-db/sqlite:3 )
 	tcpd? ( sys-apps/tcp-wrappers )
 	twolame? ( media-sound/twolame )
-	upnp? ( net-libs/libupnp:= )
+	upnp? ( net-libs/libupnp:0= )
 	vorbis? ( media-libs/libvorbis )
 	wavpack? ( media-sound/wavpack )
 	wildmidi? ( media-sound/wildmidi )
