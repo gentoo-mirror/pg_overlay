@@ -30,8 +30,8 @@ REQUIRED_USE="
 	network? ( || ( ${ENCODER_PLUGINS} ) )
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
 	opus? ( ogg )
-	upnp? ( expat )"
-#	sacd? ( cdio upnp )"
+	upnp? ( expat )
+	sacd? ( cdio upnp )"
 
 COMMON_DEPEND="
 	adplug? ( media-libs/adplug )
