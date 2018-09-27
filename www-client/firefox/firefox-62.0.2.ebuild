@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -109,6 +109,7 @@ DEPEND="${CDEPEND}
 	>=sys-devel/llvm-4.0.1
 	>=sys-devel/clang-4.0.1
 	clang? (
+		>=sys-devel/llvm-4.0.1[gold]
 		>=sys-devel/lld-4.0.1
 	)
 	pulseaudio? ( media-sound/pulseaudio )
@@ -237,7 +238,7 @@ src_prepare() {
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
-	rm -fr browser/extensions/{activity-stream,aushelper,followonsearch,formautofill,onboarding,pdfjs,pocket,webcompat,webcompat-reporter} || die
+	rm -fr browser/extensions/{activity-stream,aushelper,formautofill,onboarding,pdfjs,pocket,webcompat,webcompat-reporter} || die
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
@@ -336,8 +337,12 @@ src_configure() {
 	# Modifications to better support ARM, bug 553364
 	if use neon ; then
 		mozconfig_annotate '' --with-fpu=neon
-		mozconfig_annotate '' --with-thumb=yes
-		mozconfig_annotate '' --with-thumb-interwork=no
+
+		if ! tc-is-clang ; then
+			# thumb options aren't supported when using clang, bug 666966
+			mozconfig_annotate '' --with-thumb=yes
+			mozconfig_annotate '' --with-thumb-interwork=no
+		fi
 	fi
 	if [[ ${CHOST} == armv* ]] ; then
 		mozconfig_annotate '' --with-float-abi=hard
@@ -632,6 +637,14 @@ PROFILE_EOF
 			 >> "${ED}/usr/share/applications/${PN}.desktop" \
 			|| die
 	fi
+
+	# Don't install llvm-symbolizer from sys-devel/llvm package
+	[[ -f "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer" ]] && \
+		rm "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer"
+
+	# firefox and firefox-bin are identical
+	rm "${ED%/}"${MOZILLA_FIVE_HOME}/firefox-bin || die
+	dosym firefox ${MOZILLA_FIVE_HOME}/firefox-bin
 
 	# Required in order to use plugins and even run firefox on hardened.
 	pax-mark m "${ED}"${MOZILLA_FIVE_HOME}/{firefox,plugin-container}
