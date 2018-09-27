@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
-PYTHON_COMPAT=( python{2_7,3_7} )
+PYTHON_COMPAT=( python2_7 )
 
 CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
@@ -176,11 +176,13 @@ pkg_setup() {
 }
 
 src_prepare() {
+	# Calling this here supports resumption via FEATURES=keepwork
+	python_setup
+
 	default
 
 	use widevine && eapply "${FILESDIR}/chromium-widevine-r2.patch"
 	# Applying Ungoogled-Chromium features
-	python_setup '-3'
 	echo 'Pruning binaries'
 	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py prune -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./
 	echo 'Applying patches'
@@ -189,8 +191,6 @@ src_prepare() {
 	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
 	# Patches form OpenSUSE
 	for p in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$p";done
-
-	python_setup '-2'
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -370,7 +370,7 @@ src_prepare() {
 
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup '-2'
+	python_setup
 
 	local myconf_gn=""
 
