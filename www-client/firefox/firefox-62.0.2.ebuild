@@ -495,7 +495,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
 	else
-	mozconfig_annotate '' --enable-clang-plugin
+	mozconfig_annotate '' --disable-elf-hack
 	mozconfig_annotate '' --enable-llvm-hacks
 	fi
 
