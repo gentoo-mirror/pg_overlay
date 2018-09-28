@@ -28,6 +28,8 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 MOZ_P="${PN}-${MOZ_PV}"
 
+MOZCONFIG_OPTIONAL_JIT=1
+
 inherit check-reqs flag-o-matic toolchain-funcs gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils autotools mozlinguas-v2
 
 DESCRIPTION="Thunderbird Mail Client"
@@ -38,7 +40,7 @@ SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang dbus debug hardened jack lightning mozdom neon pulseaudio
 	selinux startup-notification system-harfbuzz system-icu system-jpeg
-	system-libevent system-libvpx system-sqlite wifi"
+	system-libevent system-libvpx system-sqlite wifi +jit kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/{${PATCHTB},${PATCHFF}}.tar.xz )
