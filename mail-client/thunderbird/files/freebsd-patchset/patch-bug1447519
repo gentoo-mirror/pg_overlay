@@ -2,8 +2,8 @@ Enable SkiaGL by default on OpenGL compositing platforms
 
 diff --git modules/libpref/init/all.js modules/libpref/init/all.js
 index 93e56b00a961..61a2174c3384 100644
---- modules/libpref/init/all.js
-+++ modules/libpref/init/all.js
+--- a/modules/libpref/init/all.js
++++ b/modules/libpref/init/all.js
 @@ -882,15 +882,9 @@ pref("gfx.font_rendering.opentype_svg.enabled", true);
  pref("gfx.canvas.azure.backends", "direct2d1.1,skia,cairo");
  pref("gfx.content.azure.backends", "direct2d1.1,skia,cairo");
