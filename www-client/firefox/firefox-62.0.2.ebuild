@@ -435,7 +435,14 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# Disable unnecessary  features
-	if ! use clang; then
+	if use clang; then
+		mozconfig_annotate '' --disable-elf-hack
+		mozconfig_annotate '' --enable-llvm-hacks
+	else
+		mozconfig_annotate '' --enable-elf-hack
+		mozconfig_annotate '' --disable-llvm-hacks
+	fi
+
 	mozconfig_annotate '' --disable-accessibility
 
 	mozconfig_annotate '' --disable-callgrind
@@ -489,15 +496,10 @@ src_configure() {
 	mozconfig_annotate '' --without-debug-label
 
 	# Enable good features
-	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
-	else
-	mozconfig_annotate '' --disable-elf-hack
-	mozconfig_annotate '' --enable-llvm-hacks
-	fi
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
