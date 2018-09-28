@@ -435,6 +435,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# Disable unnecessary  features
+	if ! use clang; then
 	mozconfig_annotate '' --disable-accessibility
 
 	mozconfig_annotate '' --disable-callgrind
@@ -493,6 +494,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
+	fi
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
