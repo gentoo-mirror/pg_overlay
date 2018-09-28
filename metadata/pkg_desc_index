@@ -12,7 +12,6 @@ dev-libs/libxml2 2.9.8: XML C parser and toolkit
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
 dev-python/python-mpd2 9999: Python MPD client library
-dev-qt/qtnetwork 5.9.6: Network abstraction library for the Qt5 framework
 dev-util/ccache 3.4.2: fast compiler cache
 dev-util/ninja 1.8.2: A small build system similar to make
 kde-apps/kpat 18.08.1: KDE patience game
