@@ -494,6 +494,9 @@ src_configure() {
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
+	else
+	mozconfig_annotate '' --disable-elf-hack
+	mozconfig_annotate '' --enable-llvm-hacks
 	fi
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
