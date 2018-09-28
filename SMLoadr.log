@@ -1,9 +1,0 @@
-[Fri Sep 28 2018 19:03:05 GMT+0700 (+07)] DEBUG Checking for update
-[Fri Sep 28 2018 19:03:05 GMT+0700 (+07)] DEBUG Checked for update on Pastebin. Response: "1.9.4"
-[Fri Sep 28 2018 19:03:05 GMT+0700 (+07)] DEBUG Init Deezer API
-[Fri Sep 28 2018 19:03:06 GMT+0700 (+07)] DEBUG Successfully logged in
-[Fri Sep 28 2018 19:03:07 GMT+0700 (+07)] DEBUG Successfully initiated Deezer API. Checkform: "nKXYvW6t6jjkFAvhIOnGz8W3R7tTeO0d"
-[Fri Sep 28 2018 19:03:07 GMT+0700 (+07)] DEBUG ------------------------------------------
-[Fri Sep 28 2018 19:03:07 GMT+0700 (+07)] DEBUG Started download task: "https://www.deezer.com/us/artist/416792"
-[Fri Sep 28 2018 19:03:07 GMT+0700 (+07)] DEBUG Got artist infos for "artist/416792"
-[Fri Sep 28 2018 19:03:08 GMT+0700 (+07)] DEBUG Got all albums for "artist/416792"
