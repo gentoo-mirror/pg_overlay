@@ -64,3 +64,4 @@ pref("datdatareporting.healthreport.infoURL","");
 pref("datareporting.policy.dataSubmissionEnabled",false);
 // disable crash reports
 pref("breakpad.reportURL","");
+pref("pdfjs.disabled", true);
