@@ -244,7 +244,6 @@ src_prepare() {
 	# FreeBSD patches
 	for i in $(cat "${FILESDIR}/freebsd-patchset/series");do eapply "${FILESDIR}/freebsd-patchset/$i";done
 
-
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
@@ -376,12 +375,6 @@ src_configure() {
 
 	# use the gtk3 toolkit (the only one supported at this point)
 	mozconfig_annotate '' --enable-default-toolkit=cairo-gtk3
-	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-linker=gold
-	mozconfig_annotate '' --enable-rust-simd
-	mozconfig_annotate '' --enable-strip
-	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-updater
 
 	mozconfig_use_enable startup-notification
 	mozconfig_use_enable system-sqlite
@@ -440,6 +433,52 @@ src_configure() {
 	# Use an objdir to keep things organized.
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
+
+	#
+	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --enable-rust-simd
+	mozconfig_annotate '' --enable-strip
+	mozconfig_annotate '' --disable-crashreporter
+	mozconfig_annotate '' --disable-updater
+	mozconfig_annotate '' --disable-tests
+	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-rust-debug
+	mozconfig_annotate '' --disable-macos-target
+	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --disable-address-sanitizer
+	mozconfig_annotate '' --disable-jprof
+	mozconfig_annotate '' --disable-dmd
+	mozconfig_annotate '' --disable-instruments
+	mozconfig_annotate '' --disable-callgrind
+	mozconfig_annotate '' --disable-profiling
+	mozconfig_annotate '' --disable-vtune
+	mozconfig_annotate '' --disable-gc-trace
+	mozconfig_annotate '' --disable-trace-logging
+	mozconfig_annotate '' --disable-rust-tests
+	mozconfig_annotate '' --disable-eme
+	mozconfig_annotate '' --disable-ipdl-tests
+	mozconfig_annotate '' --disable-marionette
+	mozconfig_annotate '' --disable-mortar
+	mozconfig_annotate '' --disable-geckodriver
+	mozconfig_annotate '' --disable-address-sanitizer-reporter
+	mozconfig_annotate '' --disable-accessibility
+	mozconfig_annotate '' --disable-gtest-in-build
+	mozconfig_annotate '' --disable-debug-js-modules
+	mozconfig_annotate '' --disable-dtrace
+	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --enable-llvm-hacks
+	mozconfig_annotate '' --disable-memory-sanitizer
+	mozconfig_annotate '' --disable-maintenance-service
+	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-necko-wifi
+	mozconfig_annotate '' --disable-parental-controls 
+	mozconfig_annotate '' --disable-tasktracer
+	mozconfig_annotate '' --disable-thread-sanitizer
+	mozconfig_annotate '' --disable-valgrind
+	mozconfig_annotate '' --disable-verify-mar
+	mozconfig_annotate '' --without-debug-label
+	mozconfig_annotate '' --with-pthreads
 
 	# Finalize and report settings
 	mozconfig_final
