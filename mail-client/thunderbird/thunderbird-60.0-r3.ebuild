@@ -457,7 +457,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-rust-tests
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-ipdl-tests
-	mozconfig_annotate '' --disable-marionette
 	mozconfig_annotate '' --disable-mortar
 	mozconfig_annotate '' --disable-geckodriver
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
