@@ -49,7 +49,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="cargo debug doc +jemalloc libressl rls rustfmt wasm ${ALL_LLVM_TARGETS[*]} system-llvm"
+IUSE="cargo clippy debug doc +jemalloc libressl rls rustfmt wasm ${ALL_LLVM_TARGETS[*]} system-llvm"
 
 RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		jemalloc? ( dev-libs/jemalloc )
