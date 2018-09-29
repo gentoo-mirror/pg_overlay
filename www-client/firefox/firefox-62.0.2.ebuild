@@ -307,13 +307,13 @@ src_configure() {
 		if use clang ; then
 			# Upstream only supports lld when using clang
 			mozconfig_annotate "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
+			mozconfig_annotate '+lto' --enable-lto=thin
 		else
 			# Linking only works when using ld.gold when LTO is enabled
 			mozconfig_annotate "forcing ld=gold due to USE=lto" --enable-linker=gold
+			mozconfig_annotate '+lto' --enable-lto=full
 		fi
-
-		mozconfig_annotate '+lto' --enable-lto=full
-	else
+		else
 		# Avoid auto-magic on linker
 		if use clang ; then
 			# This is upstream's default
@@ -444,6 +444,8 @@ src_configure() {
 	fi
 
 	mozconfig_annotate '' --disable-accessibility
+	mozconfig_annotate '' --disable-address-sanitizer
+	mozconfig_annotate '' --disable-address-sanitizer-reporter
 
 	mozconfig_annotate '' --disable-callgrind
 	mozconfig_annotate '' --disable-crashreporter
@@ -471,7 +473,11 @@ src_configure() {
 	mozconfig_annotate '' --disable-logrefcnt
 
 	mozconfig_annotate '' --disable-maintenance-service
+	mozconfig_annotate '' --disable-marionette
+	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-mobile-optimize
+	mozconfig_annotate '' --disable-mortar 
+	
 
 	mozconfig_annotate '' --disable-necko-wifi
 
@@ -481,6 +487,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-reflow-perf
 	mozconfig_annotate '' --disable-rust-debug
+	mozconfig_annotate '' --disable-rust-tests
 
 	mozconfig_annotate '' --disable-signmar
 
@@ -492,6 +499,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-valgrind
 	mozconfig_annotate '' --disable-verify-mar
 	mozconfig_annotate '' --disable-vtune
+
+	mozconfig_annotate '' --disaable-warnings-as-errors
 
 	mozconfig_annotate '' --without-debug-label
 
