@@ -454,6 +454,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-debug-js-modules
 	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-dmd
+	mozconfig_annotate '' --disable-dtrace 
 	mozconfig_annotate '' --disable-dump-painting 
 
 	mozconfig_annotate '' --disable-faststripe
