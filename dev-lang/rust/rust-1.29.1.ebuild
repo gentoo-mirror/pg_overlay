@@ -133,9 +133,13 @@ src_configure() {
 		extended="true"
 		tools="\"cargo\","
 	fi
+	if use clippy; then
+		extended="true"
+		tools="\"clippy\",$tools"
+	fi
 	if use rls; then
 		extended="true"
-		tools="\"rls\",$tools"
+		tools="\"rls\",\"analysis\",\"src\",$tools"
 	fi
 	if use rustfmt; then
 		extended="true"
@@ -221,7 +225,7 @@ src_configure() {
 	if use wasm; then
 		cat <<- EOF >> "${S}"/config.toml
 			[target.wasm32-unknown-unknown]
-			linker = "lld"
+			linker = "rust-lld"
 		EOF
 
 		if use system-llvm; then
@@ -234,14 +238,14 @@ src_configure() {
 
 src_compile() {
 	env $(cat "${S}"/config.env)\
-		./x.py build --config="${S}"/config.toml -j$(makeopts_jobs) \
+		"${EPYTHON}" ./x.py build --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
 	local rust_target abi_libdir
 
-	env DESTDIR="${D}" ./x.py install || die
+	env DESTDIR="${D}" "${EPYTHON}" ./x.py install || die
 
 	mv "${D}/usr/bin/rustc" "${D}/usr/bin/rustc-${PV}" || die
 	mv "${D}/usr/bin/rustdoc" "${D}/usr/bin/rustdoc-${PV}" || die
@@ -249,6 +253,10 @@ src_install() {
 	mv "${D}/usr/bin/rust-lldb" "${D}/usr/bin/rust-lldb-${PV}" || die
 	if use cargo; then
 		mv "${D}/usr/bin/cargo" "${D}/usr/bin/cargo-${PV}" || die
+	fi
+	if use clippy; then
+		mv "${D}/usr/bin/clippy-driver" "${D}/usr/bin/clippy-driver-${PV}" || die
+		mv "${D}/usr/bin/cargo-clippy" "${D}/usr/bin/cargo-clippy-${PV}" || die
 	fi
 	if use rls; then
 		mv "${D}/usr/bin/rls" "${D}/usr/bin/rls-${PV}" || die
@@ -288,14 +296,18 @@ src_install() {
 		/usr/bin/rust-lldb
 	EOF
 	if use cargo; then
-	    echo /usr/bin/cargo >> "${T}/provider-${P}"
+		echo /usr/bin/cargo >> "${T}/provider-${P}"
+	fi
+	if use clippy; then
+		echo /usr/bin/clippy-driver >> "${T}/provider-${P}"
+		echo /usr/bin/cargo-clippy >> "${T}/provider-${P}"
 	fi
 	if use rls; then
-	    echo /usr/bin/rls >> "${T}/provider-${P}"
+		echo /usr/bin/rls >> "${T}/provider-${P}"
 	fi
 	if use rustfmt; then
-	    echo /usr/bin/rustfmt >> "${T}/provider-${P}"
-	    echo /usr/bin/cargo-fmt >> "${T}/provider-${P}"
+		echo /usr/bin/rustfmt >> "${T}/provider-${P}"
+		echo /usr/bin/cargo-fmt >> "${T}/provider-${P}"
 	fi
 	dodir /etc/env.d/rust
 	insinto /etc/env.d/rust
