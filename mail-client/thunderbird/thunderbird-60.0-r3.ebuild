@@ -476,6 +476,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-thread-sanitizer
 	mozconfig_annotate '' --disable-valgrind
 	mozconfig_annotate '' --disable-verify-mar
+	mozconfig_annotate '' --disable-warnings-as-errors
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --with-pthreads
 

@@ -500,7 +500,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-verify-mar
 	mozconfig_annotate '' --disable-vtune
 
-	mozconfig_annotate '' --disaable-warnings-as-errors
+	mozconfig_annotate '' --disable-warnings-as-errors
 
 	mozconfig_annotate '' --without-debug-label
 
