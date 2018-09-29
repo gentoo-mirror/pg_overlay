@@ -411,7 +411,7 @@ src_configure() {
 
 	# Disable built-in ccache support to avoid sandbox violation, #665420
 	# Use FEATURES=ccache instead!
-	#mozconfig_annotate '' --without-ccache
+	mozconfig_annotate '' --without-ccache
 	sed -i -e 's/ccache_stats = None/return None/' \
 		python/mozbuild/mozbuild/controller/building.py || \
 		die "Failed to disable ccache stats call"
@@ -473,12 +473,10 @@ src_configure() {
 	mozconfig_annotate '' --disable-logrefcnt
 
 	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-marionette
 	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-mobile-optimize
 	mozconfig_annotate '' --disable-mortar 
 	
-
 	mozconfig_annotate '' --disable-necko-wifi
 
 	mozconfig_annotate '' --disable-parental-controls
@@ -509,7 +507,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
-	mozconfig_annotate '' --with-pthreads
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
