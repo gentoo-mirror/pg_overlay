@@ -29,7 +29,7 @@ DEPEND="
 	$(add_qt_dep qtgui)
 	$(add_qt_dep qtsvg)
 	$(add_qt_dep qtwidgets)
-	dev-libs/freecell-solver
+	games-board/freecell-solver
 	x11-misc/shared-mime-info
 "
 RDEPEND="${DEPEND}"
