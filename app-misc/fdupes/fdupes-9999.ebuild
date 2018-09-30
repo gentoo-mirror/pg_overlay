@@ -20,3 +20,12 @@ SRC_URI=""
 S="${WORKDIR}/${MY_P}"
 
 DOCS=( CHANGES CONTRIBUTORS README )
+
+src_prepare() {
+	default
+	eautoreconf
+}
+
+src_install() {
+	default
+}
