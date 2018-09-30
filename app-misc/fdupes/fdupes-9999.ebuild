@@ -23,6 +23,11 @@ S="${WORKDIR}/${MY_P}"
 
 DOCS=( CHANGES CONTRIBUTORS README )
 
+src_prepare() {
+	default
+	append-lfs-flags
+}
+
 src_configure() {
 	append-lfs-flags
 	tc-export CC
