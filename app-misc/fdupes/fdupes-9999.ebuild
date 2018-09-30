@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit flag-o-matic git-r3 toolchain-funcs
+inherit autotools git-r3 toolchain-funcs
 
 MY_P="${PN}-${PV/_pre/-PR}"
 
@@ -19,25 +19,4 @@ SRC_URI=""
 
 S="${WORKDIR}/${MY_P}"
 
-#PATCHES=( "${FILESDIR}"/${P}-gentoo.patch )
-
 DOCS=( CHANGES CONTRIBUTORS README )
-
-src_prepare() {
-	default
-	append-lfs-flags
-}
-
-src_configure() {
-	append-lfs-flags
-	tc-export CC
-}
-
-src_compile() {
-	emake CC=$(tc-getCC)
-}
-
-src_install() {
-	emake PREFIX="/usr" DESTDIR="${D}" install
-	einstalldocs
-}
