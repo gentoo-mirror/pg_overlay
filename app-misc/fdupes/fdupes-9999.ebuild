@@ -28,6 +28,10 @@ src_configure() {
 	tc-export CC
 }
 
+src_compile() {
+	emake CC=$(tc-getCC)
+}
+
 src_install() {
 	emake PREFIX="/usr" DESTDIR="${D}" install
 	einstalldocs
