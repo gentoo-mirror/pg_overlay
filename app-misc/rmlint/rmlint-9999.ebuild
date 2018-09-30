@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{5,6,7} )
 
 inherit eutils git-r3 gnome2-utils python-r1 scons-utils
 
@@ -19,12 +19,14 @@ IUSE="X doc"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="X? ( x11-libs/gtksourceview:3.0
-		dev-python/colorlog[${PYTHON_USEDEP}]
-		dev-python/pygobject:3[${PYTHON_USEDEP}] )"
+		dev-python/pygobject:3[${PYTHON_USEDEP}]
+		gnome-base/librsvg:2
+		x11-libs/gtk+:3 )"
 DEPEND="${RDEPEND}
 		dev-util/scons[${PYTHON_USEDEP}]
 		dev-python/sphinx[${PYTHON_USEDEP}]
-		sys-devel/gettext"
+		sys-devel/gettext
+		virtual/pkgconfig"
 
 src_compile(){
 	escons CC="$(tc-getCC)"
