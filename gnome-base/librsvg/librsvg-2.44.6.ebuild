@@ -41,9 +41,6 @@ DEPEND="${RDEPEND}
 PATCHES=(
 	# https://bugzilla.gnome.org/show_bug.cgi?id=653323
 	"${FILESDIR}"/${PN}-2.40.12-gtk-optional.patch
-
-	# https://bugzilla.gnome.org/show_bug.cgi?id=731826
-	"${FILESDIR}"/${PN}-2.40.2-vala-out-of-source.patch
 )
 
 src_prepare() {
