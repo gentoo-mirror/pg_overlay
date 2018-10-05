@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
@@ -59,6 +59,7 @@ COMMON_DEPEND="
 	x11-libs/cairo:=
 	x11-libs/gdk-pixbuf:2
 	x11-libs/gtk+:3[X]
+	vaapi? ( >=x11-libs/libva-2.1.0:= )
 	x11-libs/libX11:=
 	x11-libs/libXcomposite:=
 	x11-libs/libXcursor:=
@@ -199,7 +200,6 @@ src_prepare() {
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
 		base/third_party/icu
-		base/third_party/nspr
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
@@ -285,7 +285,6 @@ src_prepare() {
 		third_party/libwebm
 		third_party/libxml/chromium
 		third_party/libyuv
-		third_party/llvm
 		third_party/lss
 		third_party/lzma_sdk
 		third_party/markupsafe
@@ -306,7 +305,6 @@ src_prepare() {
 		third_party/pdfium/third_party/libpng16
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
-		third_party/perfetto
 		third_party/ply
 		third_party/polymer
 		third_party/protobuf
@@ -342,7 +340,6 @@ src_prepare() {
 		v8/third_party/inspector_protocol
 
 		# gyp -> gn leftovers
-		base/third_party/libevent
 		third_party/adobe
 		third_party/speech-dispatcher
 		third_party/usb_ids
@@ -365,7 +362,7 @@ src_prepare() {
 	keeplibs+=( third_party/ungoogled )
 
 	# Remove most bundled libraries. Some are still needed.
-	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
+	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
 }
 
 src_configure() {

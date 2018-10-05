@@ -1,4 +1,5 @@
 inox-patchset/chromium-arflags.patch
+inox-patchset/chromium-clang-compiler-flags.patch
 inox-patchset/chromium-exclude_unwind_tables.patch
 inox-patchset/chromium-skia-harmony.patch
 inox-patchset/disable-cfi-icall-for-va_stubs.patch
@@ -33,7 +34,6 @@ debian/fixes/inspector.patch
 debian/fixes/gpu-timeout.patch
 debian/fixes/empty-array.patch
 debian/fixes/ownership-error.patch
-debian/fixes/widevine-locations.patch
 debian/fixes/connection-message.patch
 debian/disable/android.patch
 debian/disable/fuzzers.patch
@@ -109,3 +109,4 @@ ungoogled-chromium/disable-webgl-renderer-info.patch
 bromite/fingerprinting-flags-client-rects-and-measuretext.patch
 bromite/flag-max-connections-per-host.patch
 bromite/flag-fingerprinting-canvas-image-data-noise.patch
+bromite/disable-fetching-field-trials.patch
