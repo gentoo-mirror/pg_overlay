@@ -183,13 +183,13 @@ src_prepare() {
 	# Applying Ungoogled-Chromium features
 	python_setup '-3'
 	echo 'Pruning binaries'
-	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py prune -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./
+	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py prune -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./ || die
 	echo 'Applying patches'
-	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py patches apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./
+	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py patches apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./ || die
 	echo 'Applying domain substitution'
-	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./
+	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./ || die
 	# Patches form OpenSUSE
-	for p in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$p";done
+	for p in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$p";done || die
 
 	python_setup '-2'
 
