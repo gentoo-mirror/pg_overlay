@@ -193,12 +193,6 @@ src_prepare() {
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX%/}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
-	# Apply extra patches
-	local ep
-	for ep in "${FILESDIR}/extra-$(ver_cut 1-1)"/*.patch; do
-		eapply "${ep}"
-	done
-
 	# Adapt ungoogled-chromium to *Gentoo* way
 	local ugc_cli="${UGC_WD}/run_buildkit_cli.py"
 	local ugc_config="${UGC_WD}/config_bundles/archlinux"
