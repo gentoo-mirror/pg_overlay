@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>gentoo@chaoslab.org</email>
+		<name>Ian Moone</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">Eloston/ungoogled-chromium</remote-id>
+		<doc>https://ungoogled-software.github.io/ungoogled-chromium-wiki/</doc>
+	</upstream>
+	<longdescription>
+		Modifications to Google Chromium for removing Google integration
+		and enhancing privacy, control, and transparency
+	</longdescription>
+	<use>
+		<flag name="component-build">
+			Split build into more shared libraries to speed up linking,
+			mostly intended for debugging and development (NOT RECOMMENDED
+			for general use)
+		</flag>
+		<flag name="jumbo-build">
+			Combine source files to speed up build process
+		</flag>
+		<flag name="openh264">
+			Use <pkg>media-libs/openh264</pkg> instead of the bundled one
+		</flag>
+		<flag name="proprietary-codecs">
+			Enable proprietary codecs like H.264, MP3
+		</flag>
+		<flag name="suid">
+			Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels
+		</flag>
+		<flag name="system-ffmpeg">
+			Use system ffmpeg instead of the bundled one
+		</flag>
+		<flag name="system-icu">
+			Use system icu instead of the bundled one
+		</flag>
+		<flag name="system-libevent">
+			Use system libevent instead of the bundled one
+		</flag>
+		<flag name="system-libvpx">
+			Use system libvpx instead of the bundled one
+		</flag>
+		<flag name="tcmalloc">
+			Use bundled tcmalloc instead of system malloc
+		</flag>
+		<flag name="widevine">
+			Unsupported closed-source DRM capability (required by Netflix VOD)
+		</flag>
+	</use>
+</pkgmetadata>
