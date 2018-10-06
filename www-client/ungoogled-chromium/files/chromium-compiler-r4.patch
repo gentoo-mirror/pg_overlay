@@ -1,0 +1,33 @@
+From 777d166eec22c1894108dce985498f75ac5931e8 Mon Sep 17 00:00:00 2001
+From: Mike Gilbert <floppym@gentoo.org>
+Date: Wed, 25 Apr 2018 13:22:49 -0400
+Subject: [PATCH] Disable various compiler configs
+
+---
+ build/config/compiler/BUILD.gn | 61 ++++++++++------------------------
+ 1 file changed, 18 insertions(+), 43 deletions(-)
+
+diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
+index 6e38ad782d38..87bbd423f67f 100644
+--- a/build/config/compiler/BUILD.gn
++++ b/build/config/compiler/BUILD.gn
+@@ -225,8 +225,6 @@ config("compiler") {
+ 
+   configs += [
+     # See the definitions below.
+-    ":clang_revision",
+-    ":compiler_cpu_abi",
+     ":compiler_codegen",
+   ]
+ 
+@@ -1473,10 +1459,6 @@ config("default_warnings") {
+         cflags += [
+           # TODO(thakis): https://crbug.com/753973
+           "-Wno-enum-compare-switch",
+-
+-          # Ignore warnings about MSVC optimization pragmas.
+-          # TODO(thakis): Only for no_chromium_code? http://crbug.com/505314
+-          "-Wno-ignored-pragma-optimize",
+         ]
+       }
+     }
