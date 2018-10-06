@@ -157,10 +157,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-memcpy-r0.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
-	"${FILESDIR}/chromium-ffmpeg-ebp-r1.patch"
 )
-
-S="${WORKDIR}/chromium-${PV}"
 
 pre_build_checks() {
 	# Check build requirements (Bug #541816, #471810)
