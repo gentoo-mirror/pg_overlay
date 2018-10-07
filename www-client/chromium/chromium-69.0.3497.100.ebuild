@@ -107,8 +107,10 @@ DEPEND="${COMMON_DEPEND}
 	>=net-libs/nodejs-6.9.4
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
+	>=sys-devel/clang-6
 	sys-devel/flex
-	>=sys-devel/clang-5
+	>=sys-devel/lld-6
+	>=sys-devel/llvm-6
 	virtual/pkgconfig
 	dev-vcs/git
 "
@@ -142,6 +144,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-memcpy-r0.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
+	"${FILESDIR}/chromium-ffmpeg-ebp-r1.patch"
 )
 
 pre_build_checks() {
@@ -396,12 +399,12 @@ src_configure() {
 	# Make sure the build system will use the right tools, bug #340795.
 	tc-export AR CC CXX NM
 
-	#if ! tc-is-clang; then
-		# Force clang since gcc is pretty broken at the moment.
-	#	CC=${CHOST}-clang
-	#	CXX=${CHOST}-clang++
-		strip-unsupported-flags
-	#fi
+	# Force clang
+	CC=${CHOST}-clang
+	CXX=${CHOST}-clang++
+	AR=llvm-ar
+	NM=llvm-nm
+	strip-unsupported-flags
 
 	# shellcheck disable=SC2086
 	if has ccache ${FEATURES}; then
@@ -508,17 +511,6 @@ src_configure() {
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
 	myconf_gn+=" ffmpeg_branding=\"${ffmpeg_branding}\""
-
-	# Set up Google API keys, see http://www.chromium.org/developers/how-tos/api-keys .
-	# Note: these are for Gentoo use ONLY. For your own distribution,
-	# please get your own set of keys. Feel free to contact chromium@gentoo.org
-	# for more info.
-	local google_api_key="AIzaSyDEAOvatFo0eTgsV_ZlEzx0ObmepsMzfAc"
-	local google_default_client_id="329227923882.apps.googleusercontent.com"
-	local google_default_client_secret="vgKG0NNv7GoDpbtoFNLxCUXu"
-	myconf_gn+=" google_api_key=\"${google_api_key}\""
-	myconf_gn+=" google_default_client_id=\"${google_default_client_id}\""
-	myconf_gn+=" google_default_client_secret=\"${google_default_client_secret}\""
 
 	local myarch="$(tc-arch)"
 	if [[ $myarch = amd64 ]] ; then
@@ -648,7 +640,7 @@ src_configure() {
 	myconf_gn+=" use_gtk3=true"
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
 	myconf_gn+=" use_lld=true"
-	myconf_gn+=" use_openh264=$(usex openh264 true false)"
+	myconf_gn+=" use_openh264=true"
 	myconf_gn+=" use_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_harfbuzz=true"
