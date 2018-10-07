@@ -207,8 +207,8 @@ src_prepare() {
 
 	python_setup '-2'
 
-	mkdir -p third_party/node/linux/node-linux-x64/bin || die
-	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
+	#mkdir -p third_party/node/linux/node-linux-x64/bin || die
+	#ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
 	local keeplibs=(
 		base/third_party/dmg_fp
@@ -392,7 +392,7 @@ src_configure() {
 		# Force clang since gcc is pretty broken at the moment.
 	#	CC=${CHOST}-clang
 	#	CXX=${CHOST}-clang++
-	#	strip-unsupported-flags
+		strip-unsupported-flags
 	#fi
 
 	# shellcheck disable=SC2086
@@ -446,7 +446,6 @@ src_configure() {
 	# TODO: use_system_ssl (http://crbug.com/58087).
 	# TODO: use_system_sqlite (http://crbug.com/22208).
 
-	# libevent: https://bugs.gentoo.org/593458
 	local gn_system_libraries=(
 		flac
 		fontconfig
@@ -488,8 +487,6 @@ src_configure() {
 	myconf_gn+=" use_gnome_keyring=$(usex gnome-keyring true false)"
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
 	myconf_gn+=" use_pulseaudio=$(usex pulseaudio true false)"
-
-	# TODO: link_pulseaudio=true for GN.
 
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
 
@@ -543,7 +540,6 @@ src_configure() {
 
 	# Ungoogled-Chromium
 	myconf_gn+=" blink_symbol_level=0"
-	myconf_gn+=" clang_use_chrome_plugins=false"
 	myconf_gn+=" enable_ac3_eac3_audio_demuxing=true"
 	myconf_gn+=" enable_google_now=false"
 	myconf_gn+=" enable_hevc_demuxing=true"
@@ -562,6 +558,7 @@ src_configure() {
 	myconf_gn+=" google_default_client_id=\"\""
 	myconf_gn+=" google_default_client_secret=\"\""
 	myconf_gn+=" is_official_build=true"
+	#myconf_gn+=" optimize_webui=false"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" use_official_google_api_keys=false"
