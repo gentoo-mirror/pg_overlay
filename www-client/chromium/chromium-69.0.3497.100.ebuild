@@ -8,7 +8,7 @@ CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
 	sv sw ta te th tr uk vi zh-CN zh-TW"
 
-inherit check-reqs chromium-2 gnome2-utils eapi7-ver flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
+inherit check-reqs chromium-2 gnome2-utils eapi7-ver flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils versionator
 
 UG_PV="${PV}-2"
 UG_P="ungoogled-${PN}-${UG_PV}"
@@ -187,6 +187,11 @@ src_prepare() {
 	sed -i \
 		-e '/icu.patch/d' \
 		"${UG_WORKDIR}/config_bundles/linux_rooted/patch_order.list" || die
+
+	if ! use widevine; then
+		sed -i '/widevine/d' \
+			"${UG_WORKDIR}/config_bundles/common/patch_order.list" || die
+	fi
 
 	if ! use vaapi; then
 		sed -i '/patchset\/chromium-vaapi-r18.patch/d' \
