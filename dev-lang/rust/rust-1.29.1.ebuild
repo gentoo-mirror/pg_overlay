@@ -56,6 +56,7 @@ RDEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		cargo? (
 			!libressl? ( dev-libs/openssl:0= )
 			libressl? ( dev-libs/libressl:0= )
+			net-libs/http-parser:=
 		)"
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}

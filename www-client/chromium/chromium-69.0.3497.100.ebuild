@@ -10,6 +10,10 @@ CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 
 inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils versionator
 
+UG_PV="${PV}-2"
+UG_P="ungoogled-${PN}-${UG_PV}"
+UG_WORKDIR="${WORKDIR}/${UG_P}"
+
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
 SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz
@@ -182,21 +186,36 @@ src_prepare() {
 
 	use widevine && eapply "${FILESDIR}/chromium-widevine-r2.patch"
 	
-	UGC_PV="${PV}-2"
-	UGC_P="ungoogled-chromium-${UGC_PV}"
-	UGC_WD="${WORKDIR}/${UGC_P}"
-	
-	
 	# Applying Ungoogled-Chromium features
+		# Remove redundant patch and remove arm/gcc patches
+	sed -i \
+		-e '/chromium-clang-compiler-flags.patch/d' \
+		-e '/arm\/skia.patch/d' \
+		-e '/arm\/gcc_skcms_ice.patch/d' \
+		"${UG_WORKDIR}/config_bundles/common/patch_order.list" || die
+
+	if ! use vaapi; then
+		sed -i '/patchset\/chromium-vaapi-r18.patch/d' \
+			"${UG_WORKDIR}/config_bundles/linux_rooted/patch_order.list" || die
+	fi
+	
 	python_setup '-3'
-	echo 'Pruning binaries'
-	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py prune -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./ || die
-	echo 'Applying patches'
-	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py patches apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux ./ || die
-	echo 'Applying domain substitution'
-	"${FILESDIR}/ungoogled-chromium-$(get_major_version)"/run_buildkit_cli.py domains apply -b "${FILESDIR}/ungoogled-chromium-$(get_major_version)"/config_bundles/archlinux -c domainsubcache.tar.gz ./ || die
+
+	ebegin "Pruning binaries"
+	"${UG_WORKDIR}/run_buildkit_cli.py" prune -b "${UG_WORKDIR}/config_bundles/archlinux" ./ || die
+	eend $?
+
+	ebegin "Applying ungoogled-chromium patches"
+	"${UG_WORKDIR}/run_buildkit_cli.py" patches apply -b "${UG_WORKDIR}/config_bundles/archlinux" ./ || die
+	eend $?
+
+	ebegin "Applying domain substitution"
+	"${UG_WORKDIR}/run_buildkit_cli.py" domains apply -b "${UG_WORKDIR}/config_bundles/archlinux" -c domainsubcache.tar.gz ./ || die
+	eend $?
+
 	# Patches form OpenSUSE
-	for p in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$p";done || die
+	local osp
+	for osp in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$osp";done || die
 
 	python_setup '-2'
 
@@ -437,6 +456,7 @@ src_configure() {
 		# Need harfbuzz_from_pkgconfig target
 		harfbuzz-ng
 		libdrm
+		libevent
 		libjpeg
 		libpng
 		libwebp
@@ -481,7 +501,7 @@ src_configure() {
 	myconf_gn+=" use_gold=true use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	# Disable forced lld, bug 641556
-	myconf_gn+=" use_lld=false"
+	myconf_gn+=" use_lld=true"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
@@ -540,12 +560,19 @@ src_configure() {
 	myconf_gn+=" enable_service_discovery=false"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" exclude_unwind_tables=true"
+	myconf_gn+=" google_api_key=\"\""
+	myconf_gn+=" google_default_client_id=\"\""
+	myconf_gn+=" google_default_client_secret=\"\""
+	myconf_gn+=" is_official_build=true"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" use_official_google_api_keys=false"
 	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" use_unofficial_version_number=false"
 
+	myconf_gn+=" gold_path=\"\""
+	myconf_gn+=" goma_dir=\"\""
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-	myconf_gn+=" linux_use_bundled_binutils=false"
 	myconf_gn+=" optimize_for_size=false"
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_system_freetype=true"
