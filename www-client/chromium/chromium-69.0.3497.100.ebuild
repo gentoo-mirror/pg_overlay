@@ -8,7 +8,7 @@ CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
 	sv sw ta te th tr uk vi zh-CN zh-TW"
 
-inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils versionator
+inherit check-reqs chromium-2 gnome2-utils eapi7-ver flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
 UG_PV="${PV}-2"
 UG_P="ungoogled-${PN}-${UG_PV}"
@@ -145,19 +145,7 @@ PATCHES=(
 )
 
 pre_build_checks() {
-	#if [[ ${MERGE_TYPE} != binary ]]; then
-	#	local -x CPP="$(tc-getCXX) -E"
-	#	if tc-is-clang && ! version_is_at_least "3.9.1" "$(clang-fullversion)"; then
-	#		# bugs: #601654
-	#		die "At least clang 3.9.1 is required"
-	#	fi
-	#	if tc-is-gcc && ! version_is_at_least 5.0 "$(gcc-version)"; then
-	#		# bugs: #535730, #525374, #518668, #600288, #627356
-	#		die "At least gcc 5.0 is required"
-	#	fi
-	#fi
-
-	# Check build requirements, bug #541816 and bug #471810 .
+	# Check build requirements (Bug #541816, #471810)
 	CHECKREQS_MEMORY="3G"
 	CHECKREQS_DISK_BUILD="5G"
 	eshopts_push -s extglob
@@ -226,7 +214,6 @@ src_prepare() {
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
 		base/third_party/icu
-		base/third_party/nspr
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
@@ -350,6 +337,7 @@ src_prepare() {
 		third_party/spirv-headers
 		third_party/spirv-tools-angle
 		third_party/sqlite
+		third_party/ungoogled
 		third_party/unrar
 		third_party/usrsctp
 		third_party/vulkan
@@ -386,7 +374,6 @@ src_prepare() {
 	if use tcmalloc; then
 		keeplibs+=( third_party/tcmalloc )
 	fi
-	keeplibs+=( third_party/ungoogled )
 
 	# Remove most bundled libraries. Some are still needed.
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
@@ -620,22 +607,6 @@ src_configure() {
 	# https://bugs.gentoo.org/654216
 	addpredict /dev/dri/ #nowarn
 
-	if ! use system-ffmpeg; then
-		local build_ffmpeg_args=""
-		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
-			build_ffmpeg_args+=" --disable-asm"
-		fi
-
-		# Re-configure bundled ffmpeg. See bug #491378 for example reasons.
-		einfo "Configuring bundled ffmpeg..."
-		pushd third_party/ffmpeg > /dev/null || die
-		chromium/scripts/build_ffmpeg.py linux ${ffmpeg_target_arch} \
-			--branding ${ffmpeg_branding} -- ${build_ffmpeg_args} || die
-		chromium/scripts/copy_config.sh || die
-		chromium/scripts/generate_gn.py || die
-		popd > /dev/null || die
-	fi
-
 	einfo "Configuring Chromium..."
 	set -- gn gen --args="${myconf_gn} ${EXTRA_GN}" out/Release
 	echo "$@"
@@ -646,9 +617,7 @@ src_compile() {
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup '-2'
 
-	#"${EPYTHON}" tools/clang/scripts/update.py --force-local-build --gcc-toolchain /usr --skip-checkout --use-system-cmake --without-android || die
-
-	# Build mksnapshot and pax-mark it.
+	# Build mksnapshot and pax-mark it
 	local x
 	for x in mksnapshot v8_context_snapshot_generator; do
 		if tc-is-cross-compiler; then
@@ -712,12 +681,7 @@ src_install() {
 	doins -r out/Release/locales
 	doins -r out/Release/resources
 
-	if [[ -d out/Release/swiftshader ]]; then
-		insinto "${CHROMIUM_HOME}/swiftshader"
-		doins out/Release/swiftshader/*.so
-	fi
-
-	# Install icons and desktop entry.
+	# Install icons and desktop entry
 	local branding size
 	for size in 16 22 24 32 48 64 128 256 ; do
 		case ${size} in
