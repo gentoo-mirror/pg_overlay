@@ -1,4 +1,3 @@
 chromium-dma-buf.patch
 chromium-drm.patch
 chromium-warnings.patch
-chromium-gcc8-alignof.patch
