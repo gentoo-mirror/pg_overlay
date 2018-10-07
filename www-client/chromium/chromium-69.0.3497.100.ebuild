@@ -12,7 +12,8 @@ inherit check-reqs chromium-2 eutils gnome2-utils flag-o-matic multilib ninja-ut
 
 DESCRIPTION="Open-source version of Google Chrome web browser"
 HOMEPAGE="http://chromium.org/"
-SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz"
+SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}.tar.xz
+	https://github.com/Eloston/ungoogled-${PN}/archive/${PV}-2.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -180,6 +181,12 @@ src_prepare() {
 	default
 
 	use widevine && eapply "${FILESDIR}/chromium-widevine-r2.patch"
+	
+	UGC_PV="${PV}-2"
+	UGC_P="ungoogled-chromium-${UGC_PV}"
+	UGC_WD="${WORKDIR}/${UGC_P}"
+	
+	
 	# Applying Ungoogled-Chromium features
 	python_setup '-3'
 	echo 'Pruning binaries'
