@@ -184,6 +184,9 @@ src_prepare() {
 		-e '/arm\/skia.patch/d' \
 		-e '/arm\/gcc_skcms_ice.patch/d' \
 		"${UG_WORKDIR}/config_bundles/common/patch_order.list" || die
+	sed -i \
+		-e '/icu.patch/d' \
+		"${UG_WORKDIR}/config_bundles/linux_rooted/patch_order.list" || die
 
 	if ! use vaapi; then
 		sed -i '/patchset\/chromium-vaapi-r18.patch/d' \
@@ -557,7 +560,7 @@ src_configure() {
 	myconf_gn+=" google_default_client_id=\"\""
 	myconf_gn+=" google_default_client_secret=\"\""
 	myconf_gn+=" is_official_build=true"
-	myconf_gn+=" optimize_webui=false"
+	#myconf_gn+=" optimize_webui=false"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" use_official_google_api_keys=false"
@@ -568,7 +571,7 @@ src_configure() {
 	myconf_gn+=" goma_dir=\"\""
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" optimize_for_size=false"
-	myconf_gn+=" use_gio=false"
+	myconf_gn+=" use_gio=true"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_lcms2=true"
 	myconf_gn+=" use_system_libjpeg=true"
