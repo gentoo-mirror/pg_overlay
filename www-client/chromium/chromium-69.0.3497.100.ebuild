@@ -184,6 +184,9 @@ src_prepare() {
 		-e '/arm\/skia.patch/d' \
 		-e '/arm\/gcc_skcms_ice.patch/d' \
 		"${UG_WORKDIR}/config_bundles/common/patch_order.list" || die
+	sed -i \
+		-e '/icu.patch/d' \
+		"${UG_WORKDIR}/config_bundles/linux_rooted/patch_order.list" || die
 
 	if ! use vaapi; then
 		sed -i '/patchset\/chromium-vaapi-r18.patch/d' \
