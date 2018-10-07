@@ -172,6 +172,9 @@ pkg_setup() {
 src_prepare() {
 	default
 
+	mkdir -p third_party/node/linux/node-linux-x64/bin || die
+	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
+
 	use widevine && eapply "${FILESDIR}/chromium-widevine-r2.patch"
 	
 	# Applying Ungoogled-Chromium features
@@ -206,9 +209,6 @@ src_prepare() {
 	for osp in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$osp";done || die
 
 	python_setup '-2'
-
-	#mkdir -p third_party/node/linux/node-linux-x64/bin || die
-	#ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
 	local keeplibs=(
 		base/third_party/dmg_fp
@@ -557,7 +557,7 @@ src_configure() {
 	myconf_gn+=" google_default_client_id=\"\""
 	myconf_gn+=" google_default_client_secret=\"\""
 	myconf_gn+=" is_official_build=true"
-	#myconf_gn+=" optimize_webui=false"
+	myconf_gn+=" optimize_webui=false"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" use_official_google_api_keys=false"
