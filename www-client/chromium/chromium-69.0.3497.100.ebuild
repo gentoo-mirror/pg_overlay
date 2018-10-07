@@ -8,7 +8,7 @@ CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
 	sv sw ta te th tr uk vi zh-CN zh-TW"
 
-inherit check-reqs chromium-2 gnome2-utils eapi7-ver flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
+inherit check-reqs chromium-2 gnome2-utils eapi7-ver flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils versionator
 
 UG_PV="${PV}-2"
 UG_P="ungoogled-${PN}-${UG_PV}"
@@ -187,6 +187,11 @@ src_prepare() {
 	sed -i \
 		-e '/icu.patch/d' \
 		"${UG_WORKDIR}/config_bundles/linux_rooted/patch_order.list" || die
+
+	if ! use widevine; then
+		sed -i '/widevine/d' \
+			"${UG_WORKDIR}/config_bundles/common/patch_order.list" || die
+	fi
 
 	if ! use vaapi; then
 		sed -i '/patchset\/chromium-vaapi-r18.patch/d' \
@@ -560,7 +565,7 @@ src_configure() {
 	myconf_gn+=" google_default_client_id=\"\""
 	myconf_gn+=" google_default_client_secret=\"\""
 	myconf_gn+=" is_official_build=true"
-	#myconf_gn+=" optimize_webui=false"
+	myconf_gn+=" optimize_webui=false"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" use_official_google_api_keys=false"
@@ -580,6 +585,78 @@ src_configure() {
 
 	myconf_gn+=" use_thin_lto=$(usex thin-lto true false)"
 
+	#---------------------------------------------------------
+	# Keep in sync with config_bundles/common/gn_flags.map
+	myconf_gn+=" blink_symbol_level=0"
+	myconf_gn+=" clang_use_chrome_plugins=false"
+	myconf_gn+=" enable_ac3_eac3_audio_demuxing=true"
+	myconf_gn+=" enable_google_now=false"
+	myconf_gn+=" enable_hangout_services_extension=false"
+	myconf_gn+=" enable_hevc_demuxing=true"
+	myconf_gn+=" enable_iterator_debugging=false"
+	myconf_gn+=" enable_mdns=false"
+	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
+	myconf_gn+=" enable_nacl=false"
+	myconf_gn+=" enable_nacl_nonsfi=false"
+	myconf_gn+=" enable_one_click_signin=false"
+	myconf_gn+=" enable_reading_list=false"
+	myconf_gn+=" enable_remoting=false"
+	myconf_gn+=" enable_reporting=false"
+	myconf_gn+=" enable_service_discovery=false"
+	myconf_gn+=" enable_swiftshader=false"
+	myconf_gn+=" enable_widevine=$(usex widevine true false)"
+	myconf_gn+=" exclude_unwind_tables=true"
+	myconf_gn+=" fatal_linker_warnings=false"
+	myconf_gn+=" ffmpeg_branding=\"${ffmpeg_branding}\""
+	myconf_gn+=" fieldtrial_testing_like_official_build=true"
+	myconf_gn+=" google_api_key=\"\""
+	myconf_gn+=" google_default_client_id=\"\""
+	myconf_gn+=" google_default_client_secret=\"\""
+	myconf_gn+=" is_clang=true"
+	myconf_gn+=" is_debug=false"
+	myconf_gn+=" is_official_build=true"
+	myconf_gn+=" optimize_webui=false"
+	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
+	myconf_gn+=" safe_browsing_mode=0"
+	myconf_gn+=" symbol_level=0"
+	myconf_gn+=" treat_warnings_as_errors=false"
+	myconf_gn+=" use_gnome_keyring=$(usex gnome-keyring true false)"
+	myconf_gn+=" use_jumbo_build=$(usex jumbo-build true false)"
+	myconf_gn+=" use_official_google_api_keys=false"
+	myconf_gn+=" use_ozone=false"
+	myconf_gn+=" use_sysroot=false"
+	myconf_gn+=" use_unofficial_version_number=false"
+	# Keep in sync with config_bundles/linux_rooted/gn_flags.map
+	myconf_gn+=" custom_toolchain=\"//build/toolchain/linux/unbundle:default\""
+	myconf_gn+=" gold_path=\"\""
+	myconf_gn+=" goma_dir=\"\""
+	if tc-is-cross-compiler; then
+		tc-export BUILD_{AR,CC,CXX,NM}
+		myconf_gn+=" host_toolchain=\"//build/toolchain/linux/unbundle:host\""
+		myconf_gn+=" v8_snapshot_toolchain=\"//build/toolchain/linux/unbundle:host\""
+	else
+		myconf_gn+=" host_toolchain=\"//build/toolchain/linux/unbundle:default\""
+	fi
+	myconf_gn+=" link_pulseaudio=true"
+	myconf_gn+=" linux_use_bundled_binutils=false"
+	myconf_gn+=" optimize_for_size=false"
+	myconf_gn+=" use_allocator=$(usex tcmalloc \"tcmalloc\" \"none\")"
+	myconf_gn+=" use_cups=$(usex cups true false)"
+	myconf_gn+=" use_custom_libcxx=false"
+	myconf_gn+=" use_gio=true"
+	myconf_gn+=" use_gold=true"
+	myconf_gn+=" use_gtk3=true"
+	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
+	myconf_gn+=" use_lld=true"
+	myconf_gn+=" use_openh264=$(usex openh264 true false)"
+	myconf_gn+=" use_pulseaudio=$(usex pulseaudio true false)"
+	myconf_gn+=" use_system_freetype=true"
+	myconf_gn+=" use_system_harfbuzz=true"
+	myconf_gn+=" use_system_lcms2=true"
+	myconf_gn+=" use_system_libjpeg=true"
+	myconf_gn+=" use_system_zlib=true"
+	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
+	#------------------------------------------------------------------
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
 	if ! use custom-cflags; then
 		replace-flags "-Os" "-O2"
