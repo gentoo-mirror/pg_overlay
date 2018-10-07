@@ -107,8 +107,10 @@ DEPEND="${COMMON_DEPEND}
 	>=net-libs/nodejs-6.9.4
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
+	>=sys-devel/clang-6
 	sys-devel/flex
-	>=sys-devel/clang-5
+	>=sys-devel/lld-6
+	>=sys-devel/llvm-6
 	virtual/pkgconfig
 	dev-vcs/git
 "
