@@ -648,7 +648,7 @@ src_configure() {
 	myconf_gn+=" use_gtk3=true"
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
 	myconf_gn+=" use_lld=true"
-	myconf_gn+=" use_openh264=$(usex openh264 true false)"
+	myconf_gn+=" use_openh264=true"
 	myconf_gn+=" use_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_harfbuzz=true"
