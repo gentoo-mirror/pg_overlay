@@ -408,6 +408,17 @@ src_configure() {
 	#	strip-unsupported-flags
 	#fi
 
+	# shellcheck disable=SC2086
+	if has ccache ${FEATURES}; then
+		# Avoid falling back to preprocessor mode when sources contain time macros
+		export CCACHE_SLOPPINESS=time_macros
+	fi
+
+	# Facilitate deterministic builds (taken from build/config/compiler/BUILD.gn)
+	append-cflags -Wno-builtin-macro-redefined
+	append-cxxflags -Wno-builtin-macro-redefined
+	append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
+
 	if tc-is-clang; then
 		myconf_gn+=" is_clang=true clang_use_chrome_plugins=false"
 	else
