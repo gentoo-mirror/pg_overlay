@@ -450,7 +450,6 @@ src_configure() {
 		flac
 		fontconfig
 		freetype
-		# Need harfbuzz_from_pkgconfig target
 		harfbuzz-ng
 		libdrm
 		libevent
@@ -474,7 +473,7 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
-	gn_system_libraries+=( libevent )
+
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
