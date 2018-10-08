@@ -231,11 +231,12 @@ src_prepare() {
 	if ! use system-libvpx; then
 		sed -i '/system\/vpx.patch/d' \
 			"${ugc_rooted_dir}/patch_order.list" || die
-	fi
 
 	if ! use widevine; then
 		sed -i '/widevine/d' \
 			"${ugc_common_dir}/patch_order.list" || die
+	fi
+
 	fi
 
 	if ! use vaapi; then
