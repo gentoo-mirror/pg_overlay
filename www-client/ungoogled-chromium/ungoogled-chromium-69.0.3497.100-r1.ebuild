@@ -232,9 +232,9 @@ src_prepare() {
 		sed -i '/system\/vpx.patch/d' \
 			"${ugc_rooted_dir}/patch_order.list" || die
 
-	if use widevine; then
+	if ! use widevine; then
 		sed -i '/widevine/d' \
-			"${ugc_common_dir}/patch_order.list" || die
+			"${ugc_common_dir}/patch_order.list" || echo "shit"
 	fi
 
 	fi
