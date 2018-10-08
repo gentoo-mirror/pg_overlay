@@ -234,9 +234,7 @@ src_prepare() {
 
 	if ! use widevine; then
 		sed -i '/widevine/d' \
-			"${ugc_common_dir}/patch_order.list" || echo "shit"
-	fi
-
+			"${ugc_common_dir}/patch_order.list" || die
 	fi
 
 	if ! use vaapi; then
