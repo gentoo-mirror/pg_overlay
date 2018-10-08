@@ -210,14 +210,13 @@ src_prepare() {
 	ebegin "Applying ungoogled-chromium patches"
 	"${UG_WORKDIR}/run_buildkit_cli.py" patches apply -b "${UG_WORKDIR}/config_bundles/archlinux" ./ || die
 	eend $?
+	# Patches form OpenSUSE
+	local osp
+	for osp in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$osp";done || die
 
 	ebegin "Applying domain substitution"
 	"${UG_WORKDIR}/run_buildkit_cli.py" domains apply -b "${UG_WORKDIR}/config_bundles/archlinux" -c domainsubcache.tar.gz ./ || die
 	eend $?
-
-	# Patches form OpenSUSE
-	local osp
-	for osp in $(cat "${FILESDIR}/opensuse-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/opensuse-patchset-$(get_major_version)/$osp";done || die
 
 	python_setup '-2'
 
