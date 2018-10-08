@@ -233,7 +233,7 @@ src_prepare() {
 			"${ugc_rooted_dir}/patch_order.list" || die
 
 	if ! use widevine; then
-		sed -i '/widevine/d' \
+		sed -i -e '/widevine/d' \
 			"${ugc_common_dir}/patch_order.list" || die
 	fi
 
