@@ -26,9 +26,7 @@ SRC_URI="
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="component-build cups custom-cflags gnome-keyring jumbo-build kerberos
-	openh264 +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg
-	+system-icu +system-libevent +system-libvpx +tcmalloc vaapi widevine"
+IUSE="component-build cups custom-cflags gnome-keyring jumbo-build kerberos openh264 +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libevent +system-libvpx +tcmalloc vaapi widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 
 COMMON_DEPEND="
