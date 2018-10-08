@@ -448,11 +448,6 @@ src_configure() {
 	NM=llvm-nm
 	strip-unsupported-flags
 
-	# Facilitate deterministic builds (taken from build/config/compiler/BUILD.gn)
-	append-cflags -Wno-builtin-macro-redefined
-	append-cxxflags -Wno-builtin-macro-redefined
-	append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
-
 	# Use system-provided libraries
 	# TODO: freetype -- remove sources (https://bugs.chromium.org/p/pdfium/issues/detail?id=733)
 	# TODO: use_system_hunspell (upstream changes needed)
