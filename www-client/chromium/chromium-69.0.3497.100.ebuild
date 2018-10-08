@@ -410,7 +410,15 @@ src_configure() {
 		# Force clang since gcc is pretty broken at the moment.
 		CC=${CHOST}-clang
 		CXX=${CHOST}-clang++
+		AR=llvm-ar
+		NM=llvm-nm
 		strip-unsupported-flags
+	fi
+
+	# shellcheck disable=SC2086
+	if has ccache ${FEATURES}; then
+		# Avoid falling back to preprocessor mode when sources contain time macros
+		export CCACHE_SLOPPINESS=time_macros
 	fi
 
 	# Facilitate deterministic builds (taken from build/config/compiler/BUILD.gn)
@@ -577,6 +585,8 @@ src_configure() {
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" optimize_for_size=false"
 	myconf_gn+=" use_gio=false"
+	myconf_gn+=" use_gtk3=true"
+	myconf_gn+=" use_openh264=true"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_lcms2=true"
 	myconf_gn+=" use_system_libjpeg=true"
