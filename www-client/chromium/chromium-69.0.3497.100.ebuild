@@ -573,7 +573,7 @@ src_configure() {
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" is_official_build=true"
-	#myconf_gn+=" optimize_webui=false"
+	myconf_gn+=" optimize_webui=false"
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" use_official_google_api_keys=false"
