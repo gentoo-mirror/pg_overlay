@@ -483,7 +483,6 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
-
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
@@ -634,7 +633,7 @@ src_configure() {
 	myconf_gn+=" use_allocator=$(usex tcmalloc \"tcmalloc\" \"none\")"
 	myconf_gn+=" use_cups=$(usex cups true false)"
 	myconf_gn+=" use_custom_libcxx=false"
-	myconf_gn+=" use_gio=true"
+	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_gold=true"
 	myconf_gn+=" use_gtk3=true"
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
@@ -684,7 +683,7 @@ src_compile() {
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup '-2'
 
-	# Build mksnapshot and pax-mark it
+	# Build mksnapshot and pax-mark it.
 	local x
 	for x in mksnapshot v8_context_snapshot_generator; do
 		if tc-is-cross-compiler; then
@@ -748,7 +747,12 @@ src_install() {
 	doins -r out/Release/locales
 	doins -r out/Release/resources
 
-	# Install icons and desktop entry
+	if [[ -d out/Release/swiftshader ]]; then
+		insinto "${CHROMIUM_HOME}/swiftshader"
+		doins out/Release/swiftshader/*.so
+	fi
+
+	# Install icons and desktop entry.
 	local branding size
 	for size in 16 22 24 32 48 64 128 256 ; do
 		case ${size} in
