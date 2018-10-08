@@ -214,6 +214,9 @@ src_prepare() {
 		-e '/arm\/skia.patch/d' \
 		-e '/arm\/gcc_skcms_ice.patch/d' \
 		"${ugc_common_dir}/patch_order.list" || die
+	sed -i \
+		-e '/icu.patch/d' \
+		"${ugc_rooted_dir}/patch_order.list" || die
 
 	if ! use system-icu; then
 		sed -i '/common\/icudtl.dat/d' \
@@ -228,6 +231,12 @@ src_prepare() {
 	if ! use system-libvpx; then
 		sed -i '/system\/vpx.patch/d' \
 			"${ugc_rooted_dir}/patch_order.list" || die
+
+	if ! use widevine; then
+		sed -i '/widevine/d' \
+			"${ugc_rooted_dir}/patch_order.list" || die
+	fi
+
 	fi
 
 	if ! use vaapi; then
