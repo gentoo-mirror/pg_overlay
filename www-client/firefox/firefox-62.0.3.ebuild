@@ -310,13 +310,13 @@ src_configure() {
 		if use clang ; then
 			# Upstream only supports lld when using clang
 			mozconfig_annotate "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
-			mozconfig_annotate '+lto' --enable-lto=thin
 		else
 			# Linking only works when using ld.gold when LTO is enabled
 			mozconfig_annotate "forcing ld=gold due to USE=lto" --enable-linker=gold
-			mozconfig_annotate '+lto' --enable-lto=full
 		fi
-		else
+
+		mozconfig_annotate '+lto' --enable-lto=thin
+	else
 		# Avoid auto-magic on linker
 		if use clang ; then
 			# This is upstream's default
