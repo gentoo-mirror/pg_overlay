@@ -1,5 +1,8 @@
 app-admin/webapp-config 1.55-r1: Gentoo's installer for web-based applications
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
+app-crypt/acme 0.27.1: An implementation of the ACME protocol
+app-crypt/certbot 0.27.1: Let's encrypt client to automate deployment of X.509 certificates
+app-crypt/certbot-nginx 0.27.1: Nginx plugin for certbot (Let's Encrypt Client)
 app-crypt/gpgme 1.11.1: GnuPG Made Easy is a library for making GnuPG easier to use
 app-shells/quoter 4.1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/iso-codes 3.76: ISO language, territory, currency, script codes and their translations
