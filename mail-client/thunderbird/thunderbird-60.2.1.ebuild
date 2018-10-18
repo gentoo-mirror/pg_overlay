@@ -5,7 +5,7 @@ EAPI=6
 VIRTUALX_REQUIRED="pgo"
 WANT_AUTOCONF="2.1"
 MOZ_ESR=""
-MOZ_LIGHTNING_VER="6.2"
+MOZ_LIGHTNING_VER="6.2.2.1"
 MOZ_LIGHTNING_GDATA_VER="4.4.1"
 
 PYTHON_COMPAT=( python3_{5,6,7} )
@@ -19,7 +19,7 @@ MOZ_PV="${PV/_beta/b}"
 
 # Patches
 PATCHTB="thunderbird-60.0-patches-0"
-PATCHFF="firefox-60.0-patches-02"
+PATCHFF="firefox-60.0-patches-03"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -583,11 +583,11 @@ src_install() {
 
 	local emid
 	# stage extra locales for lightning and install over existing
+	emid='{e2fda1a4-762b-4020-b5ad-a41df1933103}'
 	rm -f "${ED}"/${MOZILLA_FIVE_HOME}/distribution/extensions/${emid}.xpi || die
 	mozlinguas_xpistage_langpacks "${BUILD_OBJ_DIR}"/dist/bin/distribution/extensions/${emid} \
 		"${WORKDIR}"/lightning-${MOZ_LIGHTNING_VER} lightning calendar
 
-	emid='{e2fda1a4-762b-4020-b5ad-a41df1933103}'
 	mkdir -p "${T}/${emid}" || die
 	cp -RLp -t "${T}/${emid}" "${BUILD_OBJ_DIR}"/dist/bin/distribution/extensions/${emid}/* || die
 	insinto ${MOZILLA_FIVE_HOME}/distribution/extensions
