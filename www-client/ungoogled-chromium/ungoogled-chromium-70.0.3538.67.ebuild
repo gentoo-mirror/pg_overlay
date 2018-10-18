@@ -12,7 +12,7 @@ CHROMIUM_LANGS="
 
 inherit check-reqs chromium-2 gnome2-utils eapi7-ver flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
-UGC_PV="master"
+UGC_PV="69.0.3497.100-2"
 UGC_P="ungoogled-chromium-${UGC_PV}"
 UGC_WD="${WORKDIR}/${UGC_P}"
 
@@ -20,9 +20,8 @@ DESCRIPTION="Modifications to Chromium for removing Google integration and enhan
 HOMEPAGE="https://github.com/Eloston/ungoogled-chromium https://www.chromium.org/"
 SRC_URI="
 	https://commondatastorage.googleapis.com/chromium-browser-official/chromium-${PV}.tar.xz
-	https://github.com/Eloston/${PN}/archive/master.zip -> ${UGC_P}.tar.gz"
-#https://github.com/Eloston/${PN}/archive/${UGC_PV}.tar.gz -> ${UGC_P}.tar.gz
-
+	https://github.com/Eloston/${PN}/archive/${UGC_PV}.tar.gz -> ${UGC_P}.tar.gz
+"
 
 LICENSE="BSD"
 SLOT="0"
@@ -48,7 +47,7 @@ COMMON_DEPEND="
 	>=media-libs/alsa-lib-1.0.19:=
 	media-libs/fontconfig:=
 	media-libs/freetype:=
-	>=media-libs/harfbuzz-1.6.0:=[icu(-)]
+	>=media-libs/harfbuzz-1.8.8:=[icu(-)]
 	media-libs/libjpeg-turbo:=
 	media-libs/libpng:=
 	system-libvpx? ( >=media-libs/libvpx-1.7.0:=[postproc,svc] )
@@ -156,7 +155,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-memcpy-r0.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
-	"${FILESDIR}/chromium-ffmpeg-ebp-r1.patch"
+	"${FILESDIR}/chromium-pdfium-stdlib-r0.patch"
 )
 
 S="${WORKDIR}/chromium-${PV}"
@@ -336,6 +335,8 @@ src_prepare() {
 		third_party/libXNVCtrl
 		third_party/libaddressinput
 		third_party/libaom
+		third_party/libaom/source/libaom/third_party/vector
+		third_party/libaom/source/libaom/third_party/x86inc
 		third_party/libjingle
 		third_party/libphonenumber
 		third_party/libsecret
@@ -391,14 +392,21 @@ src_prepare() {
 		third_party/web-animations-js
 		third_party/webdriver
 		third_party/webrtc
+		third_party/webrtc/common_audio/third_party/fft4g
+		third_party/webrtc/common_audio/third_party/spl_sqrt_floor
+		third_party/webrtc/modules/third_party/fft
+		third_party/webrtc/modules/third_party/g711
+		third_party/webrtc/modules/third_party/g722
+		third_party/webrtc/rtc_base/third_party/base64
+		third_party/webrtc/rtc_base/third_party/sigslot
 		third_party/widevine
 		third_party/woff2
 		third_party/zlib/google
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/src/third_party/utf8-decoder
-		v8/third_party/antlr4
 		v8/third_party/inspector_protocol
+		v8/third_party/v8
 
 		# gyp -> gn leftovers
 		third_party/adobe
