@@ -274,6 +274,7 @@ src_prepare() {
 		net/third_party/nss
 		net/third_party/quic
 		net/third_party/spdy
+		net/third_party/uri_template
 		third_party/WebKit
 		third_party/abseil-cpp
 		third_party/angle
