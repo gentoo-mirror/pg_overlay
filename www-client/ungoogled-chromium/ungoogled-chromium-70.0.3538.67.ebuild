@@ -211,6 +211,7 @@ src_prepare() {
 		-e '/chromium-clang-compiler-flags.patch/d' \
 		-e '/arm\/skia.patch/d' \
 		-e '/arm\/gcc_skcms_ice.patch/d' \
+		-e '/include-stdint.h-in-pdfium_mem_buffer_file_write/d' \
 		"${ugc_common_dir}/patch_order.list" || die
 	sed -i \
 		-e '/icu.patch/d' \
