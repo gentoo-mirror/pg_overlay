@@ -637,6 +637,10 @@ src_compile() {
 		fi
 	done
 
+	# Work around broken deps
+	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom.h
+	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom-shared.h
+
 	# Even though ninja autodetects number of CPUs, we respect
 	# user's options, for debugging with -j 1 or any other reason
 	eninja -C out/Release chrome chromedriver
