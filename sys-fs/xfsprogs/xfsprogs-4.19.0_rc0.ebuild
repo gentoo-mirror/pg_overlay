@@ -48,6 +48,8 @@ src_prepare() {
 		include/builddefs.in || die
 	find -name Makefile -exec \
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
+
+	emake configure
 }
 
 src_configure() {
@@ -70,8 +72,6 @@ src_configure() {
 	econf "${myconf[@]}"
 
 	#MAKEOPTS+=" V=1"
-
-	emake configure
 }
 
 src_install() {
