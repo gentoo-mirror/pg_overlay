@@ -31,11 +31,6 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 	test? ( dev-util/cppunit )"
 
-#PATCHES=(
-#	"${FILESDIR}/${PN}-openssl-1.1-part2.patch"
-#	"${FILESDIR}/${PN}-openssl-1.1-part3.patch"
-#)
-
 src_prepare() {
 	default
 	eautoreconf

@@ -1,14 +1,14 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{4,5,6} )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} )
 PYTHON_REQ_USE="threads"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1 eutils git-r3
+inherit autotools distutils-r1 flag-o-matic git-r3
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
@@ -39,12 +39,9 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	eaclocal
-	_elibtoolize
-	eautoheader
-	eautoconf
-	config_rpath_update build-aux
-	eautomake
+	mkdir -p build-aux
+	config_rpath_update "${S}/build-aux"
+	eautoreconf
 	default
 
 	# bug 578026
@@ -62,7 +59,7 @@ src_configure() {
 		$(use_enable debug)
 		$(use_enable debug logging)
 		$(use_enable debug disk-stats)
-		$(use_enable dht dht $(usex debug logging yes))
+		$(use_enable dht dht $(usex debug logging $(usex ('yes' 'no'))))
 		$(use_enable examples)
 		$(use_enable ssl encryption)
 		$(use_enable static-libs static)
