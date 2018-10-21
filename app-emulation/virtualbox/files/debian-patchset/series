@@ -11,5 +11,7 @@
 32-disable-guest-version-check.patch
 35-libvdeplug-soname.patch
 36-fix-vnc-version-string.patch
+37-python-3.7-support.patch
+python3.7-fix.patch
 new-gcc.patch
 do-not-run-if-not-in-vm.patch
