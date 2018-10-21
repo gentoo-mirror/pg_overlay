@@ -48,16 +48,6 @@ src_prepare() {
 		include/builddefs.in || die
 	find -name Makefile -exec \
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
-
-	emake configure
-	
-	# TODO: Write a patch for configure.ac to use pkg-config for the uuid-part.
-	if use static && use readline ; then
-		sed -i \
-			-e 's|-lreadline|& -lncurses|' \
-			-e 's|-lblkid|& -luuid|' \
-			configure || die
-	fi
 }
 
 src_configure() {
@@ -79,7 +69,9 @@ src_configure() {
 
 	econf "${myconf[@]}"
 
-	MAKEOPTS+=" V=1"
+	#MAKEOPTS+=" V=1"
+
+	emake configure
 }
 
 src_install() {
