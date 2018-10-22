@@ -197,6 +197,7 @@ multilib_src_configure() {
 		$(use_enable systemd systemd-journal)
 		$(use_enable ipv6)
 		$(use_with caps)
+		--enable-elogind-login
 	)
 
 	if use bluetooth; then
