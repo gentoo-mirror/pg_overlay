@@ -74,7 +74,7 @@ src_configure() {
 	)
 
 	# https://github.com/vaeth/eix/issues/35
-	append-cxxflags -std=c++11
+	append-cxxflags -std=c++14
 
 	econf "${myconf[@]}"
 }

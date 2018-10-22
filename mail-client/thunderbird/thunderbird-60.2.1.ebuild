@@ -19,7 +19,7 @@ MOZ_PV="${PV/_beta/b}"
 
 # Patches
 PATCHTB="thunderbird-60.0-patches-0"
-PATCHFF="firefox-60.0-patches-03"
+PATCHFF="firefox-60.0-patches-04"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -200,7 +200,6 @@ src_prepare() {
 		"${WORKDIR}"/firefox/2005_ffmpeg4.patch \
 		|| die
 	eapply "${WORKDIR}/firefox"
-	eapply "${FILESDIR}"/${PN}-60.0-blessings-TERM.patch # 654316
 	eapply "${FILESDIR}"/${PN}-60.0-rust-1.29-comp.patch
 	eapply "${FILESDIR}"/${PN}-60.0-missing-errno_h-in-SandboxOpenedFiles_cpp.patch
 
@@ -479,6 +478,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-warnings-as-errors
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --with-pthreads
+
+	mozlinguas_mozconfig
 
 	# Finalize and report settings
 	mozconfig_final
