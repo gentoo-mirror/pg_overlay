@@ -1,4 +1,0 @@
-fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-debian-hacks/Don-t-build-image-gtests.patch
-debian-hacks/Don-t-err-on-tildes-when-using-shellutil.split.patch
-debian-hacks/Use-remoting-name-for-call-to-gdk_set_program_class.patch
