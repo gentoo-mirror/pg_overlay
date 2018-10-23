@@ -1,0 +1,69 @@
+
+# HG changeset patch
+# User Martin Stransky <stransky@redhat.com>
+# Date 1523525760 -7200
+# Node ID 6654f42bc0e615e3fd2328d23b4a2283cad9ad45
+# Parent  b4bc6b2401738b78fd47127a4c716bb9178e1a09
+Bug 1447775 - Change persist mode immediately after sizemodechange change, r?jimm
+
+Recently the window sizemode attribute is updated with 500ms delay (on Linux). It causes race condition
+between reflow/CSS rule and window resize callbacks and also causes visual glitch when toolbar dragspace
+is enabled.
+
+TabsToolbar height is used at resize callback to do dragspace calculation. It has old values here
+because it depends on 'window[sizemode="normal"] #TabsToolbar' css rule which is applied with 500ms delay.
+
+So we use old TabsToolbar height for the dragspace, then the sizemode us updated by PersistenceTimer and
+a new TabsToolbar height is calculated but the dragspace size stays as we're not notified
+about the TabsToolbar height update.
+
+MozReview-Commit-ID: AiensY5LMDO
+
+diff --git a/xpfe/appshell/nsWebShellWindow.cpp b/xpfe/appshell/nsWebShellWindow.cpp
+--- a/xpfe/appshell/nsWebShellWindow.cpp
++++ b/xpfe/appshell/nsWebShellWindow.cpp
+@@ -350,20 +350,16 @@ nsWebShellWindow::SizeModeChanged(nsSize
+   if (sizeMode == nsSizeMode_Maximized || sizeMode == nsSizeMode_Fullscreen) {
+     uint32_t zLevel;
+     GetZLevel(&zLevel);
+     if (zLevel > nsIXULWindow::normalZ)
+       SetZLevel(nsIXULWindow::normalZ);
+   }
+   mWindow->SetSizeMode(sizeMode);
+ 
+-  // Persist mode, but not immediately, because in many (all?)
+-  // cases this will merge with the similar call in NS_SIZE and
+-  // write the attribute values only once.
+-  SetPersistenceTimer(PAD_MISC);
+   nsCOMPtr<nsPIDOMWindowOuter> ourWindow =
+     mDocShell ? mDocShell->GetWindow() : nullptr;
+   if (ourWindow) {
+     // Ensure that the fullscreen state is synchronized between
+     // the widget and the outer window object.
+     if (sizeMode == nsSizeMode_Fullscreen) {
+       ourWindow->SetFullScreen(true);
+     }
+@@ -384,16 +380,22 @@ nsWebShellWindow::SizeModeChanged(nsSize
+     ourWindow->DispatchCustomEvent(NS_LITERAL_STRING("sizemodechange"));
+   }
+ 
+   nsIPresShell* presShell;
+   if ((presShell = GetPresShell())) {
+     presShell->GetPresContext()->SizeModeChanged(sizeMode);
+   }
+ 
++  // Persist mode immediately as the timer causes race condition
++  // between css rules dependent on window sizemode and
++  // sizemodechange/resize listener which calculates TabsToolbar height.
++  PersistentAttributesDirty(PAD_MISC);
++  SavePersistentAttributes();
++
+   // Note the current implementation of SetSizeMode just stores
+   // the new state; it doesn't actually resize. So here we store
+   // the state and pass the event on to the OS. The day is coming
+   // when we'll handle the event here, and the return result will
+   // then need to be different.
+ }
+ 
+ void
+
