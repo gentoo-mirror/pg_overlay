@@ -2,6 +2,5 @@ mozilla-1500366.patch
 mozilla-1494037.patch
 
 mozilla-1196777.patch
-mozilla-256180.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 mozilla-1447775.patch

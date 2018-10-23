@@ -439,7 +439,7 @@ src_configure() {
 
 	if use clang ; then
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1423822
-		mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack
+		mozconfig_annotate 'elf-hack is broken when using Clang' --enable-elf-hack
 		mozconfig_annotate '' --enable-llvm-hacks
 	fi
 
