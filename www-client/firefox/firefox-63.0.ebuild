@@ -437,7 +437,7 @@ src_configure() {
 	# disable webrtc for now, bug 667642
 	use arm && mozconfig_annotate 'broken on arm' --disable-webrtc
 
-	mozconfig_annotate '' --enable-llvm-hacks
+	#mozconfig_annotate '' --enable-llvm-hacks
 
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-address-sanitizer
