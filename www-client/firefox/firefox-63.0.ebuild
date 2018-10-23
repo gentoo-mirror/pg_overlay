@@ -7,7 +7,7 @@ WANT_AUTOCONF="2.1"
 MOZ_ESR=""
 
 PYTHON_COMPAT=( python3_{5,6,7} )
-PYTHON_REQ_USE='ncurses,sqlite,ssl,threads'
+PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 
 # This list can be updated with scripts/get_langs.sh from the mozilla overlay
 MOZ_LANGS=( en en-US ru )
@@ -23,7 +23,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 
 # Patch version
-PATCH="${PN}-62.0-patches-01"
+PATCH="${PN}-63.0-patches-01"
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
 MOZCONFIG_OPTIONAL_JIT=1
@@ -72,7 +72,7 @@ CDEPEND="
 	>=x11-libs/pixman-0.19.2
 	>=dev-libs/glib-2.26:2
 	>=sys-libs/zlib-1.2.3
-	>=virtual/libffi-3.0.10
+	>=virtual/libffi-3.0.10:=
 	virtual/ffmpeg
 	x11-libs/libX11
 	x11-libs/libXcomposite
@@ -104,6 +104,8 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
+	dev-util/cbindgen
+	>=net-libs/nodejs-8.11.0
 	>=sys-devel/binutils-2.30
 	sys-apps/findutils
 	>=sys-devel/llvm-4.0.1
@@ -183,11 +185,6 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
-
-	eapply "${FILESDIR}"/${PN}-60.0-blessings-TERM.patch # 654316
-	eapply "${FILESDIR}"/${PN}-60.0-do-not-force-lld.patch
-	eapply "${FILESDIR}"/${PN}-60.0-sandbox-lto.patch # 666580
-	eapply "${FILESDIR}"/${PN}-60.0-missing-errno_h-in-SandboxOpenedFiles_cpp.patch
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -284,7 +281,7 @@ src_configure() {
 		# Force gcc
 		einfo "Enforcing the use of gcc due to USE=-clang ..."
 		CC=${CHOST}-gcc
-		CXX=${CHOST}-gcc++
+		CXX=${CHOST}-g++
 		strip-unsupported-flags
 	fi
 
@@ -310,13 +307,13 @@ src_configure() {
 		if use clang ; then
 			# Upstream only supports lld when using clang
 			mozconfig_annotate "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
-			mozconfig_annotate '+lto' --enable-lto=thin
 		else
 			# Linking only works when using ld.gold when LTO is enabled
 			mozconfig_annotate "forcing ld=gold due to USE=lto" --enable-linker=gold
-			mozconfig_annotate '+lto' --enable-lto=full
 		fi
-		else
+
+		mozconfig_annotate '+lto' --enable-lto=thin
+	else
 		# Avoid auto-magic on linker
 		if use clang ; then
 			# This is upstream's default
@@ -437,13 +434,13 @@ src_configure() {
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
-	# Disable unnecessary  features
-	if use clang; then
-		mozconfig_annotate '' --disable-elf-hack
+	# disable webrtc for now, bug 667642
+	use arm && mozconfig_annotate 'broken on arm' --disable-webrtc
+
+	if use clang ; then
+		# https://bugzilla.mozilla.org/show_bug.cgi?id=1423822
+		mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack
 		mozconfig_annotate '' --enable-llvm-hacks
-	else
-		mozconfig_annotate '' --enable-elf-hack
-		mozconfig_annotate '' --disable-llvm-hacks
 	fi
 
 	mozconfig_annotate '' --disable-accessibility
