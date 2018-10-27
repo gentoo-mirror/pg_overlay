@@ -246,7 +246,7 @@ src_prepare() {
 	# The licensing issue only matters to Debian folks, it also
 	# depends on system icu (https://bugs.debian.org/900596)
 	sed -i '/system\/convertutf.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
-	sed -i '/system\/icu.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
+	#sed -i '/system\/icu.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
 
 	if ! use system-icu; then
 		sed -i '/common\/icudtl.dat/d' "${ugc_rooted_dir}/pruning.list" || die
@@ -585,7 +585,7 @@ src_configure() {
 	myconf_gn+=" use_allocator=\"$(usex tcmalloc tcmalloc none)\""
 	myconf_gn+=" use_cups=$(usex cups true false)"
 	myconf_gn+=" use_custom_libcxx=false"
-	myconf_gn+=" use_gio=false"
+	myconf_gn+=" use_gio=true"
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
 	myconf_gn+=" use_openh264=$(usex !openh264 true false)" # Enable this to
 	# build OpenH264 for encoding, hence the restriction: !openh264? ( bindist )
