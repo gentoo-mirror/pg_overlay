@@ -137,7 +137,6 @@ src_configure() {
 		[llvm]
 		enabled = true
 		optimize = $(toml_usex !debug)
-		thin-lto = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		targets = "${LLVM_TARGETS// /;}"
