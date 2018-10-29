@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_6 )
+PYTHON_COMPAT=( python3_7 )
 PYTHON_REQ_USE="ncurses"
 
 inherit distutils-r1 eutils
