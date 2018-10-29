@@ -10,7 +10,7 @@ app-text/pastebinit 1.5: A software that lets you send anything you want directl
 dev-libs/libixion 0.13.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.13.4: Standalone file import filter library for spreadsheet documents
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
-dev-libs/libsigc++ 2.99.10 2.99.11: Typesafe callback system for standard C++
+dev-libs/libsigc++ 2.99.11: Typesafe callback system for standard C++
 dev-libs/libxml2 2.9.8: XML C parser and toolkit
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/josepy 1.1.0: JOSE protocol implementation in Python
@@ -19,12 +19,10 @@ dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
 dev-python/python-mpd2 9999: Python MPD client library
 dev-python/requests-toolbelt 0.8.0: A utility belt for advanced users of python-requests
 dev-util/ccache 3.4.2: fast compiler cache
-dev-util/ninja 1.8.2: A small build system similar to make
 kde-apps/kpat 18.08.2: KDE patience game
 media-fonts/unifont 10.0.07: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Mozilla packages
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 sys-libs/cracklib 2.9.6-r1: Password Checking Library
-www-client/chromium 69.0.3497.100: Open-source version of Google Chrome web browser
 x11-base/xcb-proto 1.13: X C-language Bindings protocol headers
-x11-libs/libxcb 1.13 1.13.1: X C-language Bindings library
+x11-libs/libxcb 1.13.1: X C-language Bindings library
