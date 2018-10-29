@@ -137,8 +137,10 @@ src_configure() {
 		[llvm]
 		enabled = true
 		optimize = $(toml_usex !debug)
+		thin-lto = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
+		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
