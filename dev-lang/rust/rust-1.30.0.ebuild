@@ -153,6 +153,7 @@ src_configure() {
 		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		link-jobs = $(makeopts_jobs)
+		link-shared = true
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
