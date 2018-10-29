@@ -215,7 +215,7 @@ src_configure() {
 }
 
 src_install() {
-	use static || find "${ED}" -name '*.la' -delete
+	find "${ED}" -name '*.la' -delete
 }
 
 pkg_preinst() {
