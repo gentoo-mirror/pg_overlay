@@ -215,7 +215,7 @@ src_configure() {
 }
 
 src_install() {
-	find "${ED}" -name '*.la' -delete
+	find "${D}" -name '*.la' -delete || die
 }
 
 pkg_preinst() {
