@@ -63,7 +63,6 @@ DEPEND="${RDEPEND}
 	cargo? ( !dev-util/cargo )
 	rustfmt? ( !dev-util/rustfmt )
 	dev-util/cmake
-	dev-util/ninja
 "
 PDEPEND="!cargo? ( >=dev-util/cargo-${CARGO_DEPEND_VERSION} )"
 
@@ -148,11 +147,12 @@ src_configure() {
 		[llvm]
 		enabled = true
 		optimize = $(toml_usex !debug)
+		thin-lto = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
-		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		link-jobs = $(makeopts_jobs)
+		link-shared = true
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
