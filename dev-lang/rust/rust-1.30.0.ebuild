@@ -72,8 +72,6 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 
 S="${WORKDIR}/${MY_P}-src"
 
-PATCHES=( "${FILESDIR}"/${PV}-clippy-sysroot.patch )
-
 toml_usex() {
 	usex "$1" true false
 }
