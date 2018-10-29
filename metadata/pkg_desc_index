@@ -3,7 +3,6 @@ app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-crypt/acme 0.27.1: An implementation of the ACME protocol
 app-crypt/certbot 0.27.1: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 0.27.1: Nginx plugin for certbot (Let's Encrypt Client)
-app-crypt/gpgme 1.11.1: GnuPG Made Easy is a library for making GnuPG easier to use
 app-shells/quoter 4.1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/iso-codes 3.76: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
@@ -20,7 +19,6 @@ dev-python/python-mpd2 9999: Python MPD client library
 dev-python/requests-toolbelt 0.8.0: A utility belt for advanced users of python-requests
 dev-util/ccache 3.4.2: fast compiler cache
 kde-apps/kpat 18.08.2: KDE patience game
-media-fonts/unifont 10.0.07: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Mozilla packages
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 sys-libs/cracklib 2.9.6-r1: Password Checking Library
