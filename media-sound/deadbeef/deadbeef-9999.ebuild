@@ -214,6 +214,10 @@ src_configure() {
 		$(use_enable zip vfs-zip)
 }
 
+src_install() {
+	use static || find "${ED}" -name '*.la' -delete
+}
+
 pkg_preinst() {
 	if use gtk2 || use gtk3 ; then
 		gnome2_icon_savelist
