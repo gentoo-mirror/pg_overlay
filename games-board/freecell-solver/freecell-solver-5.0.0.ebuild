@@ -17,8 +17,9 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 REQUIRED_USE=""
 
-RDEPEND="dev-python/random2[${PYTHON_USEDEP}]
-	dev-python/six[${PYTHON_USEDEP}]"
+RDEPEND="dev-python/random2
+	dev-python/six"
+
 DEPEND="${RDEPEND}
 	dev-perl/Path-Tiny
 	dev-perl/Template-Toolkit
