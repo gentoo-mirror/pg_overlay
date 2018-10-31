@@ -3,7 +3,7 @@
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
+PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
 PYTHON_REQ_USE="xml"
 
 inherit python-single-r1 poly-c_ebuilds
