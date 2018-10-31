@@ -17,14 +17,12 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 REQUIRED_USE=""
 
-DEPEND="
+RDEPEND="dev-python/random2[${PYTHON_USEDEP}]
+	dev-python/six[${PYTHON_USEDEP}]"
+DEPEND="${RDEPEND}
 	dev-perl/Path-Tiny
 	dev-perl/Template-Toolkit
 	dev-util/gperf"
-
-RDEPEND="${DEPEND}
-	dev-python/random2[${PYTHON_USEDEP}]
-	dev-python/six[${PYTHON_USEDEP}]"
 
 src_prepare() {
 	mycmakeargs=(
