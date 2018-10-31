@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=5
 
-PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
+PYTHON_COMPAT=( python{2_7,3_{4,5,6}} )
 PYTHON_REQ_USE="xml"
 
 inherit python-single-r1 poly-c_ebuilds
@@ -15,7 +15,7 @@ SRC_URI="http://files.itstool.org/itstool/${MY_P}.tar.bz2"
 # files in /usr/share/itstool/its are HPND/as-is || GPL-3
 LICENSE="GPL-3+ || ( HPND GPL-3+ )"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~arm-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-linux"
 IUSE=""
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
