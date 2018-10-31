@@ -4,7 +4,7 @@
 EAPI=6
 PYTHON_COMPAT=( python3_{5,6,7} )
 
-inherit cmake-utils python-any-r1
+inherit cmake-utils distutils-r1
 
 DESCRIPTION="A program that automatically solves layouts of Freecell and similar variants of Card Solitaire"
 HOMEPAGE="https://fc-solve.shlomifish.org"
