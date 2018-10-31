@@ -31,6 +31,7 @@ REQUIRED_USE="
 	recorder? ( || ( ${ENCODER_PLUGINS} ) )
 	opus? ( ogg )
 	upnp? ( expat )
+	webdav? ( curl expat )
 	sacd? ( cdio upnp )"
 
 COMMON_DEPEND="

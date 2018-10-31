@@ -39,13 +39,12 @@ HOMEPAGE="https://www.mozilla.org/thunderbird"
 KEYWORDS="~amd64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-IUSE="bindist clang dbus debug hardened jack lightning mozdom neon pulseaudio
+IUSE="bindist clang dbus debug hardened jack lightning neon pulseaudio
 	selinux startup-notification system-harfbuzz system-icu system-jpeg
 	system-libevent system-libvpx system-sqlite wifi +jit kde"
 RESTRICT="!bindist? ( bindist )"
 
-PATCH_URIS=( https://dev.gentoo.org/~whissi/dist/firefox/${PATCHFF}.tar.xz https://dev.gentoo.org/~{anarchy,axs,polynomial-c}/mozilla/patchsets/{${PATCHTB},${PATCHFF}}.tar.xz )
-
+PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/{${PATCHTB},${PATCHFF}}.tar.xz )
 SRC_URI="${SRC_URI}
 	${MOZ_HTTP_URI}/${MOZ_PV}/source/${MOZ_P}.source.tar.xz
 	https://dev.gentoo.org/~axs/distfiles/lightning-${MOZ_LIGHTNING_VER}.tar.xz
@@ -255,8 +254,6 @@ src_prepare() {
 }
 
 src_configure() {
-	MEXTENSIONS="default"
-
 	# Add information about TERM to output (build.log) to aid debugging
 	# blessings problems
 	if [[ -n "${TERM}" ]] ; then
@@ -400,14 +397,6 @@ src_configure() {
 	mozconfig_annotate '' --with-user-appdir=.thunderbird
 
 	mozconfig_annotate '' --enable-ldap
-
-	# Bug #72667
-	if use mozdom; then
-		MEXTENSIONS="${MEXTENSIONS},inspector"
-	fi
-
-	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
-
 	mozconfig_annotate '' --enable-calendar
 
 	# Disable built-in ccache support to avoid sandbox violation, #665420
