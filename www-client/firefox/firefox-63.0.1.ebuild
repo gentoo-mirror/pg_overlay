@@ -104,7 +104,7 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
-	dev-util/cbindgen
+	<dev-util/cbindgen-0.6.7
 	>=net-libs/nodejs-8.11.0
 	>=sys-devel/binutils-2.30
 	sys-apps/findutils
@@ -180,6 +180,9 @@ src_unpack() {
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
 
+	# Allow user to apply any additional patches without modifing ebuild
+	eapply_user
+
 	# Enable gnomebreakpad
 	if use debug ; then
 		sed -i -e "s:GNOME_DISABLE_CRASH_DIALOG=1:GNOME_DISABLE_CRASH_DIALOG=0:g" \
@@ -221,8 +224,10 @@ src_prepare() {
 	sed '/^MOZ_DEV_EDITION=1/d' \
 		-i "${S}"/browser/branding/aurora/configure.sh || die
 
-	# Allow user to apply any additional patches without modifing ebuild
-	eapply_user
+	# rustfmt, a tool to format Rust code, is optional and not required to build Firefox.
+	# However, when available, an unsupported version can cause problems, bug #669548
+	sed -i -e "s@check_prog('RUSTFMT', add_rustup_path('rustfmt')@check_prog('RUSTFMT', add_rustup_path('rustfmt_do_not_use')@" \
+		"${S}"/build/moz.configure/rust.configure || die
 
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
