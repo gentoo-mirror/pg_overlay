@@ -245,7 +245,7 @@ src_prepare() {
 	# FreeBSD patches
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
-	eapply "${FILESDIR}/001-Keep-mozilla-release-building-with-newer-cbindgen-ve.patch"
+	eapply "${FILESDIR}/0001-Keep-mozilla-release-building-with-newer-cbindgen-ve.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
