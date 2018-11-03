@@ -49,7 +49,10 @@ src_prepare() {
 	find -name Makefile -exec \
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
-	emake configure
+	cp include/install-sh .
+	eautoreconf
+
+	#emake configure
 }
 
 src_configure() {
