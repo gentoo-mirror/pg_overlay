@@ -50,6 +50,7 @@ src_prepare() {
 		sed -i -r -e '/^LLDFLAGS [+]?= -static(-libtool-libs)?$/d' {} +
 
 	cp include/install-sh .
+	eautoreconf
 	eautoconf
 
 	#emake configure
