@@ -5,8 +5,6 @@
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
-dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
-dev-libs/liborcus:tools - Build various low-level parsers
 media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with Mozilla packages
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
