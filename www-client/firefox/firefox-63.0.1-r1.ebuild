@@ -180,6 +180,8 @@ src_unpack() {
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
 
+	eapply "${FILESDIR}"/${P}-support-latest-cbindgen.patch
+
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
@@ -244,8 +246,6 @@ src_prepare() {
 
 	# FreeBSD patches
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
-
-	eapply "${FILESDIR}/0001-Keep-mozilla-release-building-with-newer-cbindgen-ve.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -662,6 +662,10 @@ PROFILE_EOF
 		icon="${PN}"
 		name="Mozilla Firefox"
 	fi
+
+	# Disable built-in auto-update because we update firefox through package manager
+	insinto ${MOZILLA_FIVE_HOME}/distribution/
+	newins "${FILESDIR}"/disable-auto-update.policy.json policies.json
 
 	# Install icons and .desktop for menu entry
 	for size in ${sizes}; do
