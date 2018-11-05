@@ -646,7 +646,7 @@ qt5_base_configure() {
 		-no-cups -no-evdev -no-tslib -no-icu -no-fontconfig -no-dbus
 
 		# let portage handle stripping
-		-strip
+		-no-strip
 
 		# precompiled headers can cause problems on hardened, so turn them off
 		-pch

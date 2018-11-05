@@ -1,5 +1,10 @@
 {
   "policies": {
-    "DisableAppUpdate": true
+    "DisableAppUpdate": true,
+    "DisableFirefoxStudies": true,
+    "DisablePocket": true,
+    "DisableSystemAddonUpdate": true,
+    "DisableTelemetry": true,
+    "DontCheckDefaultBrowser": true
   }
 }
