@@ -167,7 +167,7 @@ src_configure() {
 		$(qt_use xcb xcb system)
 		$(qt_use xcb xkbcommon-x11 system)
 		$(usex xcb '-xcb-xlib -xinput2 -xkb' '')
-		-nostrip
+		-no-strip
 	)
 	qt5-build_src_configure
 }
