@@ -31,7 +31,7 @@ src_prepare() {
 		rm "${PN}_${1}.qm" || die "removing of ${1}.qm failed"
 	}
 
-	l10n_find_plocales_changes lang "${PN}_" ".ts"
+	l10n_find_plocales_changes "${PN}_" ".ts"
 	l10n_for_each_disabled_locale_do rem_locale
 }
 
