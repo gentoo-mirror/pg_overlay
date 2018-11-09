@@ -6,7 +6,7 @@ EAPI="6"
 PYTHON_COMPAT=( python2_7 )
 DISTUTILS_SINGLE_IMPL=1
 PLOCALES="af ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fo fr fy ga gl he hi hr hu id is it iu ja ka kk km kn ko ku ky la lb lt lv mk ml ms nap nb nds nl nn oc pl pms pt pt_BR ro ru si sk sl sr sv ta te th tl tlh tr uk ur vi zh_CN zh_HK zh_TW"
-inherit distutils-r1 eutils systemd user l10n
+inherit distutils-r1 eutils user l10n
 
 DESCRIPTION="BitTorrent client with a client/server model"
 HOMEPAGE="https://deluge-torrent.org/"
@@ -128,11 +128,6 @@ pkg_postinst() {
 	elog "or modify /etc/conf.d/deluged and run"
 	elog "/etc/init.d/deluged start as root"
 	elog "You can still use deluge the old way"
-	elog
-	elog "Systemd unit files for deluged and deluge-web no longer source"
-	elog "/etc/conf.d/deluge* files. Environment variable customization now"
-	elog "happens in /etc/systemd/system/deluged.service.d/00gentoo.conf"
-	elog "and /etc/systemd/system/deluge-web.service.d/00gentoo.conf"
 	elog
 	elog "For more information look at https://dev.deluge-torrent.org/wiki/Faq"
 	elog
