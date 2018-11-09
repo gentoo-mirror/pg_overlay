@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/soramimi/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="debug"
+IUSE=""
 
 RDEPEND="dev-qt/qtcore:5
 	dev-qt/qtgui:5
@@ -27,8 +27,8 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	default
 	rem_locale() {
-		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
-		rm "lang/${PN}_${1}.qm" || die "removing of ${1}.qm failed"
+		rm "${PN}_${1}.ts" || die "removing of ${1}.ts failed"
+		rm "${PN}_${1}.qm" || die "removing of ${1}.qm failed"
 	}
 
 	l10n_find_plocales_changes lang "${PN}_" ".ts"
