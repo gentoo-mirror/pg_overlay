@@ -29,6 +29,7 @@ src_prepare() {
 	rem_locale() {
 		rm "${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 		rm "${PN}_${1}.qm" || die "removing of ${1}.qm failed"
+		sed -i "s/${PN}_${1}.ts/" ${PN}.pro || die "removing of ${1}.ts failed"
 	}
 
 	l10n_for_each_disabled_locale_do rem_locale
