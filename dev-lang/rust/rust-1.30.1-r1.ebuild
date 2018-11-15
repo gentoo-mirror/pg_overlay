@@ -130,7 +130,6 @@ src_configure() {
 
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	rust_target_name="CHOST_${ARCH}"
 	rust_target="$(rust_abi)"
 
 	cat <<- EOF > "${S}"/config.toml
