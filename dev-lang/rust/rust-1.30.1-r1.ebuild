@@ -70,21 +70,20 @@ toml_usex() {
 src_prepare() {
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	local rust_stage0_name="RUST_STAGE0_${ARCH}"
-	local rust_stage0="${!rust_stage0_name}"
+	local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	default
 
 	if use system-llvm; then
-		rm -rf src/llvm/
+		rm -rfv src/llvm/
 		# We never enable emscripten.
-		rm -rf src/llvm-emscripten/
+		rm -rfv src/llvm-emscripten/
 		# We never enable other LLVM tools.
-		rm -rf src/tools/clang
-		rm -rf src/tools/lld
-		rm -rf src/tools/lldb
+		rm -rfv src/tools/clang
+		rm -rfv src/tools/lld
+		rm -rfv src/tools/lldb
 	fi
 
 	# The configure macro will modify some autoconf-related files, which upsets
