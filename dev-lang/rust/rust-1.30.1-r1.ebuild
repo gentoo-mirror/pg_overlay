@@ -43,7 +43,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc +jemalloc libressl rls rustfmt wasm ${ALL_LLVM_TARGETS[*]} system-llvm"
+IUSE="clippy cpu_flags_x86_sse2 debug doc +jemalloc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
 
 COMMON_DEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		jemalloc? ( dev-libs/jemalloc )
@@ -52,7 +52,8 @@ COMMON_DEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		libressl? ( dev-libs/libressl:0= )
 		net-libs/libssh2
 		net-libs/http-parser:=
-		net-misc/curl[ssl]"
+		net-misc/curl[ssl]
+		system-llvm? ( >=sys-devel/llvm-6:= )"
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	|| (
@@ -74,6 +75,11 @@ toml_usex() {
 	usex "$1" true false
 }
 
+pkg_setup() {
+	python-any-r1_pkg_setup
+	llvm_pkg_setup
+}
+
 src_prepare() {
 	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
@@ -84,13 +90,13 @@ src_prepare() {
 	default
 
 	if use system-llvm; then
-		rm -rfv src/llvm/
+		rm -rf src/llvm/ || die
 		# We never enable emscripten.
-		rm -rfv src/llvm-emscripten/
+		rm -rf src/llvm-emscripten/ || die
 		# We never enable other LLVM tools.
-		rm -rfv src/tools/clang
-		rm -rfv src/tools/lld
-		rm -rfv src/tools/lldb
+		rm -rf src/tools/clang/ || die
+		rm -rf src/tools/lld/ || die
+		rm -rf src/tools/lldb/ || die
 	fi
 
 	# The configure macro will modify some autoconf-related files, which upsets
@@ -141,7 +147,7 @@ src_configure() {
 		thin-lto = true
 		targets = "${LLVM_TARGETS// /;}"
 		link-jobs = $(makeopts_jobs)
-		link-shared = true
+		link-shared = $(toml_usex system-llvm)
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -182,7 +188,7 @@ src_configure() {
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
-		rust_target=$(get_abi_CHOST ${v##*.})
+		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
 		arch_cflags="$(get_abi_CFLAGS ${v##*.})"
 
 		cat <<- EOF >> "${S}"/config.env
@@ -196,10 +202,9 @@ src_configure() {
 			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
 		EOF
-
 		if use system-llvm; then
 			cat <<- EOF >> "${S}"/config.toml
-				llvm-config = "${llvm_config}"
+			    llvm-config = "$(get_llvm_prefix)/bin/llvm-config"
 			EOF
 		fi
 	done
@@ -209,12 +214,6 @@ src_configure() {
 			[target.wasm32-unknown-unknown]
 			linker = "rust-lld"
 		EOF
-
-		if use system-llvm; then
-			cat <<- EOF >> "${S}"/config.toml
-				llvm-config = "${llvm_config}"
-			EOF
-		fi
 	fi
 }
 
@@ -254,10 +253,9 @@ src_install() {
 			continue
 		fi
 		abi_libdir=$(get_abi_LIBDIR ${v##*.})
-		rust_target=$(get_abi_CHOST ${v##*.})
-		rust_abi=$(rust_abi $rust_target)
+		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
 		mkdir -p "${D}/usr/${abi_libdir}"
-		cp "${D}/usr/$(get_libdir)/${P}/rustlib/${rust_abi}/lib"/*.so \
+		cp "${D}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
 		   "${D}/usr/${abi_libdir}" || die
 	done
 
