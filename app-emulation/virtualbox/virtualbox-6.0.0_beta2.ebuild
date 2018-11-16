@@ -205,6 +205,7 @@ src_prepare() {
 	eapply "${FILESDIR}/python3_support.patch"
 	eapply "${FILESDIR}/fixes_for_python.patch"
 	eapply "${FILESDIR}/switch_to_python3.7.patch"
+	eapply "${FILESDIR}/disable_opus.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
@@ -223,6 +224,7 @@ src_configure() {
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
 		$(usex vnc --enable-vnc '')
+		--disable-libopus
 	)
 	if ! use headless ; then
 		myconf+=(

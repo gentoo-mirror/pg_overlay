@@ -1,0 +1,15 @@
+--- a/src/libs/Makefile.kmk	2018-11-15 22:31:25.000000000 +0700
++++ b/src/libs/Makefile.kmk	2018-11-16 22:45:23.045000324 +0700
+@@ -79,12 +79,6 @@
+   include $(PATH_SUB_CURRENT)/libvpx-1.6.1/Makefile.kmk
+  endif
+ 
+- # Opus for supporting audio when doing video capturing.
+- if defined(VBOX_WITH_LIBOPUS) && !defined(VBOX_ONLY_DOCS) && !defined(VBOX_WITH_SDK) && !defined(VBOX_ONLY_EXTPACKS) \
+-   && ("$(SDK_VBOX_OPUS_INCS)" == "$(SDK_VBOX_OPUS_DEFAULT_INCS)")
+-  include $(PATH_SUB_CURRENT)/libopus-1.2.1/Makefile.kmk
+- endif
+-
+ endif
+ 
+ if  !defined(VBOX_ONLY_EXTPACKS_USE_IMPLIBS) \
