@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_7} )
+PYTHON_COMPAT=( python3_7 )
 inherit flag-o-matic gnome2-utils java-pkg-opt-2 linux-info pax-utils python-single-r1 tmpfiles toolchain-funcs udev xdg-utils
 
 MY_PV="${PV/beta/BETA}"
@@ -108,8 +108,6 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/components/VBoxREM.so
 	usr/lib/virtualbox/components/VBoxVMM.so
 	usr/lib/virtualbox/VBoxREM32.so
-	usr/lib/virtualbox/VBoxPython.so
-	usr/lib/virtualbox/VBoxPython2_7.so
 	usr/lib/virtualbox/VBoxPython3_7.so
 	usr/lib/virtualbox/VBoxXPCOMC.so
 	usr/lib/virtualbox/VBoxOGLhostcrutil.so
@@ -217,7 +215,7 @@ src_configure() {
 		$(usex doc '' --disable-docs)
 		$(usex java '' --disable-java)
 		$(usex lvm '' --disable-devmapper)
-		$(usex opus --build-libopus '')
+		$(usex opus '' --disable-libopus)
 		$(usex pulseaudio '' --disable-pulse)
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
