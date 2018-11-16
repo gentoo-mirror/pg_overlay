@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -19,7 +19,7 @@ LICENSE="GPL-2"
 SLOT="0"
 [[ "${PV}" == *_beta* ]] || [[ "${PV}" == *_rc* ]] || \
 KEYWORDS="~amd64 ~x86"
-IUSE="alsa debug doc headless java libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
+IUSE="alsa debug doc headless java libressl lvm +opus pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
 
 RDEPEND="!app-emulation/virtualbox-bin
 	~app-emulation/virtualbox-modules-${PV}
@@ -29,7 +29,6 @@ RDEPEND="!app-emulation/virtualbox-bin
 	dev-libs/libxml2
 	media-libs/libpng:0=
 	media-libs/libvpx:0=
-	media-libs/opus:0=
 	sys-libs/zlib
 	!headless? (
 		media-libs/libsdl:0[X,video]
@@ -52,6 +51,7 @@ RDEPEND="!app-emulation/virtualbox-bin
 	libressl? ( dev-libs/libressl:= )
 	!libressl? ( dev-libs/openssl:0= )
 	lvm? ( sys-fs/lvm2 )
+	opus? ( media-libs/opus )
 	udev? ( >=virtual/udev-171 )
 	vnc? ( >=net-libs/libvncserver-0.9.9 )"
 DEPEND="${RDEPEND}
@@ -158,9 +158,6 @@ src_prepare() {
 	sed -e 's@^check_gcc$@cc_maj="$(gcc -dumpversion | cut -d. -f1)" ; cc_min="$(gcc -dumpversion | cut -d. -f2)"@' \
 		-i configure || die
 
-	# Don't use "echo -n"
-	sed 's@ECHO_N="echo -n"@ECHO_N="printf"@' -i configure || die
-
 	# Disable things unused or split into separate ebuilds
 	sed -e "s@MY_LIBDIR@$(get_libdir)@" \
 		"${FILESDIR}"/${PN}-5-localconfig > LocalConfig.kmk || die
@@ -220,11 +217,11 @@ src_configure() {
 		$(usex doc '' --disable-docs)
 		$(usex java '' --disable-java)
 		$(usex lvm '' --disable-devmapper)
+		$(usex opus --build-libopus '')
 		$(usex pulseaudio '' --disable-pulse)
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
 		$(usex vnc --enable-vnc '')
-		--disable-libopus
 	)
 	if ! use headless ; then
 		myconf+=(
