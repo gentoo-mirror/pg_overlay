@@ -224,7 +224,7 @@ src_configure() {
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
 		$(usex vnc --enable-vnc '')
-		--disable-opus
+		--disable-libopus
 	)
 	if ! use headless ; then
 		myconf+=(
