@@ -283,8 +283,3 @@ src_install() {
 	doman doc/mpd.1
 	doman doc/mpd.conf.5
 }
-
-pkg_postinst() {
-	# also change the homedir if the user has existed before
-	usermod -d "/var/lib/mpd" mpd || die "usermod failed"
-}
