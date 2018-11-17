@@ -251,8 +251,8 @@ src_configure() {
 		-Ddsd=true
 		-Dtcp=true
 
-		-Dsystemd_system_unit_dir="$(systemd_get_systemunitdir)"
-		-Dsystemd_user_unit_dir="$(systemd_get_userunitdir)"
+		-Dsystemd_system_unit_dir=
+		-Dsystemd_user_unit_dir=
 		)
 
 	if use icu; then
