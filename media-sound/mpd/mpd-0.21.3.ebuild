@@ -20,7 +20,7 @@ IUSE="adplug +alsa ao audiofile bzip2 cdio chromaprint +cue +curl +dbus debug
 	modplug mpg123 musepack +network nfs openal opus oss pipe pulseaudio qobuz
 	recorder samba selinux sid signalfd sndfile soundcloud sqlite tcpd
 	test tidal twolame udisks unicode vorbis wavpack webdav wildmidi upnp
-	zeroconf zip zlib iso"
+	zeroconf zip zlib"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio recorder"
 DECODER_PLUGINS="adplug audiofile faad ffmpeg flac fluidsynth mad mikmod
@@ -161,7 +161,7 @@ src_configure() {
 		-Did3tag=$(usex id3tag enabled disabled)
 		-Dinotify=$(usex inotify true false)
 		-Dipv6=$(usex ipv6 enabled disabled)
-		-Diso9660=$(usex iso enabled disabled)
+		-Diso9660=$(usex cdio enabled disabled)
 		-Dlibmpdclient=$(usex libmpdclient enabled disabled)
 		-Dlibsamplerate=$(usex libsamplerate enabled disabled)
 		-Dlibwrap=$(usex tcpd enabled disabled)
