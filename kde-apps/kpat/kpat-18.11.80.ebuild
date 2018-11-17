@@ -56,4 +56,8 @@ src_prepare() {
 	sed -i '/fcs/d' patsolve/simonsolver.cpp
 	sed -i '/fcs/d' patsolve/simonsolver.h
 	sed -i '/fcs/d' patsolve/freecellsolver.h
+
+	sed -i '/freecell_solver/d' patsolve/freecellsolver.cpp
+	sed -i '/freecell_solver/d' patsolve/abstract_fc_solve_solver.cpp
+	sed -i '/freecell_solver/d' patsolve/simonsolver.cpp
 }
