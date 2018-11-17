@@ -200,9 +200,9 @@ src_prepare() {
 
 	eapply_user
 
-	eapply "${FILESDIR}/python3_support.patch"
-	eapply "${FILESDIR}/fixes_for_python.patch"
-	eapply "${FILESDIR}/switch_to_python3.7.patch"
+	eapply "${FILESDIR}/python37/python3_support.patch"
+	eapply "${FILESDIR}/python37/fixes_for_python.patch"
+	eapply "${FILESDIR}/python37/switch_to_python3.7.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
@@ -355,7 +355,7 @@ src_install() {
 		done
 
 		if use qt5 ; then
-			vbox_inst VirtualBox 4750
+			vbox_inst VirtualBox
 			pax-mark -m "${ED%/}"${vbox_inst_path}/VirtualBox
 
 			if use opengl ; then
