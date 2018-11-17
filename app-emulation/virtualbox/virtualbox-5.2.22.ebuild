@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -13,12 +13,12 @@ MY_P=VirtualBox-${MY_PV}
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
 SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
-	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-5.2.16-patches-01.tar.xz"
+	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-5.2.16-patches-02.tar.xz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="alsa debug doc headless java libressl lvm pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
+IUSE="alsa debug doc headless java libressl lvm +opus pam pax_kernel pulseaudio +opengl python +qt5 +sdk +udev vboxwebsrv vnc"
 
 RDEPEND="!app-emulation/virtualbox-bin
 	~app-emulation/virtualbox-modules-${PV}
@@ -28,11 +28,11 @@ RDEPEND="!app-emulation/virtualbox-bin
 	dev-libs/libxml2
 	media-libs/libpng:0=
 	media-libs/libvpx:0=
-	media-libs/opus:0=
-	sys-libs/zlib
+	sys-libs/zlib:=
 	!headless? (
 		media-libs/libsdl:0[X,video]
 		x11-libs/libX11
+		x11-libs/libxcb:=
 		x11-libs/libXcursor
 		x11-libs/libXext
 		x11-libs/libXmu
@@ -51,6 +51,7 @@ RDEPEND="!app-emulation/virtualbox-bin
 	libressl? ( dev-libs/libressl:= )
 	!libressl? ( dev-libs/openssl:0= )
 	lvm? ( sys-fs/lvm2 )
+	opus? ( media-libs/opus )
 	udev? ( >=virtual/udev-171 )
 	vnc? ( >=net-libs/libvncserver-0.9.9 )"
 DEPEND="${RDEPEND}
@@ -107,7 +108,6 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/components/VBoxREM.so
 	usr/lib/virtualbox/components/VBoxVMM.so
 	usr/lib/virtualbox/VBoxREM32.so
-	usr/lib/virtualbox/VBoxPython.so
 	usr/lib/virtualbox/VBoxPython2_7.so
 	usr/lib/virtualbox/VBoxPython3_7.so
 	usr/lib/virtualbox/VBoxXPCOMC.so
@@ -157,9 +157,6 @@ src_prepare() {
 	sed -e 's@^check_gcc$@cc_maj="$(gcc -dumpversion | cut -d. -f1)" ; cc_min="$(gcc -dumpversion | cut -d. -f2)"@' \
 		-i configure || die
 
-	# Don't use "echo -n"
-	sed 's@ECHO_N="echo -n"@ECHO_N="printf"@' -i configure || die
-
 	# Disable things unused or split into separate ebuilds
 	sed -e "s@MY_LIBDIR@$(get_libdir)@" \
 		"${FILESDIR}"/${PN}-5-localconfig > LocalConfig.kmk || die
@@ -207,6 +204,11 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
+doecho() {
+	echo "$@"
+	"$@" || die
+}
+
 src_configure() {
 	local myconf=(
 		--with-gcc="$(tc-getCC)"
@@ -218,6 +220,7 @@ src_configure() {
 		$(usex doc '' --disable-docs)
 		$(usex java '' --disable-java)
 		$(usex lvm '' --disable-devmapper)
+		$(usex opus '' --disable-libopus)
 		$(usex pulseaudio '' --disable-pulse)
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
@@ -238,7 +241,7 @@ src_configure() {
 		myconf+=( --disable-vmmraw )
 	fi
 	# not an autoconf script
-	./configure ${myconf[@]} || die "configure failed"
+	doecho ./configure ${myconf[@]}
 }
 
 src_compile() {
