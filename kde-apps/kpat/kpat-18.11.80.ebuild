@@ -29,54 +29,7 @@ DEPEND="
 	$(add_qt_dep qtgui)
 	$(add_qt_dep qtsvg)
 	$(add_qt_dep qtwidgets)
+	games-board/freecell-solver
 	x11-misc/shared-mime-info
 "
 RDEPEND="${DEPEND}"
-
-src_prepare() {
-	default
-
-	sed -i "/freecell-solver/d" CMakeLists.txt
-	sed -i "/freecell-solver/d" patsolve/solverinterface.h
-	sed -i "/freecell-solver/d" patsolve/freecellsolver.cpp
-	sed -i "/freecell-solver/d" patsolve/abstract_fc_solve_solver.cpp
-	sed -i "/freecell-solver/d" patsolve/simonsolver.cpp
-
-	sed -i "/freecellsolver/d" CMakeLists.txt
-	sed -i "/freecellsolver/d" freecell.cpp
-	sed -i "/freecellsolver/d" freecell.h
-	sed -i "/freecellsolver/d" patsolve/freecellsolver.cpp
-	sed -i "/freecellsolver/d" patsolve/freecellsolver.h
-
-	sed -i 's/libfcs_SRCS//g' CMakeLists.txt
-	sed -i "/fcs/d" patsolve/abstract_fc_solve_solver.cpp
-	sed -i "/fcs/d" patsolve/abstract_fc_solve_solver.h
-	sed -i "/fcs/d" patsolve/freecellsolver.h	
-	sed -i "/fcs/d" patsolve/freecellsolver.cpp
-	sed -i "/fcs/d" patsolve/simonsolver.cpp
-	sed -i "/fcs/d" patsolve/simonsolver.h
-	sed -i "/fcs/d" patsolve/solverinterface.h
-
-
-	sed -i "/FCS/d" patsolve/abstract_fc_solve_solver.cpp
-	sed -i "/FCS/d" patsolve/abstract_fc_solve_solver.h
-	sed -i "/FCS/d" patsolve/simonsolver.cpp
-	sed -i "/FCS/d" patsolve/simonsolver.h
-	sed -i "/FCS/d" patsolve/freecellsolver.cpp
-	sed -i "/FCS/d" patsolve/freecellsolver.h
-
-	sed -i "/FcS/d" patsolve/abstract_fc_solve_solver.cpp
-	sed -i "/FcS/d" patsolve/abstract_fc_solve_solver.h
-	sed -i "/FcS/d" patsolve/simonsolver.cpp
-	sed -i "/FcS/d" patsolve/simonsolver.h
-	sed -i "/FcS/d" patsolve/freecellsolver.cpp
-	sed -i "/FcS/d" patsolve/freecellsolver.h
-
-	sed -i "/freecell_solver/d" patsolve/freecellsolver.cpp
-	sed -i "/freecell_solver/d" patsolve/abstract_fc_solve_solver.cpp
-	sed -i "/freecell_solver/d" patsolve/simonsolver.cpp
-
-	sed -i "/abstract_fc_solve/d" CMakeLists.txt
-	sed -i "/abstract_fc_solve/d" patsolve/freecellsolver.h
-	sed -i "/abstract_fc_solve/d" patsolve/simonsolver.h
-}
