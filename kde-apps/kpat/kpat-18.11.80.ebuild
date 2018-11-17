@@ -36,11 +36,11 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	default
 
-	sed -i 's/freecell-solver/d' CMakeLists.txt
-	sed -i 's/freecell-solver/d' patsolve/solverinterface.h
-	sed -i 's/freecell-solver/d' patsolve/freecellsolver.cpp
-	sed -i 's/freecell-solver/d' patsolve/abstract_fc_solve_solver.cpp
-	sed -i 's/freecell-solver/d' patsolve/simonsolver.cpp
+	sed -i '/freecell-solver/d' CMakeLists.txt
+	sed -i '/freecell-solver/d' patsolve/solverinterface.h
+	sed -i '/freecell-solver/d' patsolve/freecellsolver.cpp
+	sed -i '/freecell-solver/d' patsolve/abstract_fc_solve_solver.cpp
+	sed -i '/freecell-solver/d' patsolve/simonsolver.cpp
 
 	sed -i '/freecellsolver/d' CMakeLists.txt
 	sed -i '/freecellsolver/d' freecell.cpp
@@ -49,15 +49,15 @@ src_prepare() {
 	sed -i '/freecellsolver/d' patsolve/freecellsolver.h
 
 	sed -i 's/\ ${libfcs_SRCS}\/' CMakeLists.txt
-	sed -i 's/fcs/d' patsolve/solverinterface.h
-	sed -i 's/fcs/d' patsolve/abstract_fc_solve_solver.h
-	sed -i 's/fcs/d' patsolve/freecellsolver.cpp
-	sed -i 's/fcs/d' patsolve/abstract_fc_solve_solver.cpp
-	sed -i 's/fcs/d' patsolve/simonsolver.cpp
-	sed -i 's/fcs/d' patsolve/simonsolver.h
-	sed -i 's/fcs/d' patsolve/freecellsolver.h
+	sed -i '/fcs/d' patsolve/solverinterface.h
+	sed -i '/fcs/d' patsolve/abstract_fc_solve_solver.h
+	sed -i '/fcs/d' patsolve/freecellsolver.cpp
+	sed -i '/fcs/d' patsolve/abstract_fc_solve_solver.cpp
+	sed -i '/fcs/d' patsolve/simonsolver.cpp
+	sed -i '/fcs/d' patsolve/simonsolver.h
+	sed -i '/fcs/d' patsolve/freecellsolver.h
 
-	sed -i 's/freecell_solver/d' patsolve/freecellsolver.cpp
-	sed -i 's/freecell_solver/d' patsolve/abstract_fc_solve_solver.cpp
-	sed -i 's/freecell_solver/d' patsolve/simonsolver.cpp
+	sed -i '/freecell_solver/d' patsolve/freecellsolver.cpp
+	sed -i '/freecell_solver/d' patsolve/abstract_fc_solve_solver.cpp
+	sed -i '/freecell_solver/d' patsolve/simonsolver.cpp
 }
