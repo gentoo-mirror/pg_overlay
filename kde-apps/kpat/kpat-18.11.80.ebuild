@@ -48,7 +48,7 @@ src_prepare() {
 	sed -i '/freecellsolver/d' patsolve/freecellsolver.cpp
 	sed -i '/freecellsolver/d' patsolve/freecellsolver.h
 
-	sed -i 's/\ ${libfcs_SRCS}\/' CMakeLists.txt
+	sed -i 's/libfcs_SRCS//g' CMakeLists.txt
 	sed -i '/fcs/d' patsolve/solverinterface.h
 	sed -i '/fcs/d' patsolve/abstract_fc_solve_solver.h
 	sed -i '/fcs/d' patsolve/freecellsolver.cpp
