@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 PYTHON_COMPAT=(python{2_7,3_5,3_6,3_7})
 inherit bash-completion-r1 distutils-r1 readme.gentoo-r1
 
