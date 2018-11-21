@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_7} )
+PYTHON_COMPAT=( python3_7 )
 inherit flag-o-matic gnome2-utils java-pkg-opt-2 linux-info pax-utils python-single-r1 tmpfiles toolchain-funcs udev xdg-utils
 
 MY_PV="${PV/beta/BETA}"
@@ -108,7 +108,6 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/components/VBoxREM.so
 	usr/lib/virtualbox/components/VBoxVMM.so
 	usr/lib/virtualbox/VBoxREM32.so
-	usr/lib/virtualbox/VBoxPython2_7.so
 	usr/lib/virtualbox/VBoxPython3_7.so
 	usr/lib/virtualbox/VBoxXPCOMC.so
 	usr/lib/virtualbox/VBoxOGLhostcrutil.so
@@ -198,9 +197,9 @@ src_prepare() {
 
 	eapply_user
 
-	eapply "${FILESDIR}/python3_support.patch"
-	eapply "${FILESDIR}/fixes_for_python.patch"
-	eapply "${FILESDIR}/switch_to_python3.7.patch"
+	eapply "${FILESDIR}/python37/python3_support.patch"
+	eapply "${FILESDIR}/python37/fixes_for_python.patch"
+	eapply "${FILESDIR}/python37/switch_to_python3.7.patch"
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
