@@ -247,7 +247,7 @@ src_prepare() {
 	# depends on system icu (https://bugs.debian.org/900596)
 	sed -i '/system\/convertutf.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
 	sed -i '/system\/icu.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
-	#sed -i '/opensuse\/system-libdrm.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
+	sed -i '/opensuse\/system-libdrm.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
 
 	if ! use system-icu; then
 		sed -i '/common\/icudtl.dat/d' "${ugc_rooted_dir}/pruning.list" || die
