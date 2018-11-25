@@ -95,8 +95,8 @@ multilib_src_install() {
 	cmake-utils_src_install
 
 	if use cube; then
-		mv "${ED%/}"/usr/bin/cube "${ED%/}"/usr/bin/vulkancube || die
-		mv "${ED%/}"/usr/bin/cubepp "${ED%/}"/usr/bin/vulkancubecpp || die
+		mv "${ED%/}"/usr/bin/vkcube "${ED%/}"/usr/bin/vulkancube || die
+		mv "${ED%/}"/usr/bin/vkcubepp "${ED%/}"/usr/bin/vulkancubecpp || die
 	fi
 }
 
