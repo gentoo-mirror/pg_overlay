@@ -262,7 +262,7 @@ src_prepare() {
 	fi
 
 	if use system-openjpeg; then
-		sed -i '/system\/nspr.patch/a debian/system/openjpeg.patch' \
+		sed -i '/system\/nspr.patch/a debian_buster/system/openjpeg.patch' \
 			"${ugc_rooted_dir}/patch_order.list" || die
 	fi
 
