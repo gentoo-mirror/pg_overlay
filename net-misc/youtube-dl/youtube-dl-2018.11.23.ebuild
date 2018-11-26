@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI="7"
 PYTHON_COMPAT=(python{2_7,3_5,3_6,3_7})
 inherit bash-completion-r1 distutils-r1 readme.gentoo-r1
 
@@ -85,10 +85,10 @@ python_install_all() {
 	newbashcomp ${PN}.bash-completion ${PN}
 
 	insinto /usr/share/zsh/site-functions
-	newins youtube-dl.zsh _youtube-dl
+	newins ${PN}.zsh _${PN}
 
 	insinto /usr/share/fish/vendor_completions.d
-	doins youtube-dl.fish
+	doins ${PN}.fish
 
 	distutils-r1_python_install_all
 
@@ -97,8 +97,8 @@ python_install_all() {
 }
 
 pkg_postinst() {
-	elog "youtube-dl(1) / https://bugs.gentoo.org/355661 /"
-	elog "https://github.com/rg3/youtube-dl/blob/master/README.md#faq :"
+	elog "${PN}(1) / https://bugs.gentoo.org/355661 /"
+	elog "https://github.com/rg3/${PN}/blob/master/README.md#faq :"
 	elog
 	elog "${PN} works fine on its own on most sites. However, if you want"
 	elog "to convert video/audio, you'll need avconf (media-video/libav) or"
