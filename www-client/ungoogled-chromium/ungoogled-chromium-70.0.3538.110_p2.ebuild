@@ -27,12 +27,13 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="
-	+cfi cups custom-cflags gnome jumbo-build kerberos new-tcmalloc +openh264
-	optimize-webui +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg
-	system-harfbuzz +system-icu +system-libevent +system-libvpx +system-openjpeg
-	+tcmalloc +thinlto vaapi widevine
+	+cfi cups custom-cflags gnome gold jumbo-build kerberos +lld new-tcmalloc
+	+openh264 optimize-webui +proprietary-codecs pulseaudio selinux +suid
+	+system-ffmpeg system-harfbuzz +system-icu +system-libevent +system-libvpx
+	+system-openjpeg +tcmalloc +thinlto vaapi widevine
 "
 REQUIRED_USE="
+	^^ ( gold lld )
 	|| ( $(python_gen_useflags 'python3*') )
 	|| ( $(python_gen_useflags 'python2*') )
 	cfi? ( thinlto )
@@ -59,7 +60,7 @@ COMMON_DEPEND="
 	>=dev-libs/re2-0.2016.05.01:=
 	>=media-libs/alsa-lib-1.0.19:=
 	media-libs/fontconfig:=
-	media-libs/freetype:=
+	system-harfbuzz? ( media-libs/freetype:= )
 	system-harfbuzz? ( >=media-libs/harfbuzz-2.0.0:0=[icu(-)] )
 	media-libs/libjpeg-turbo:=
 	media-libs/libpng:=
@@ -127,8 +128,8 @@ BDEPEND="
 	>=sys-devel/clang-7.0.0
 	cfi? ( >=sys-devel/clang-runtime-7.0.0[sanitize] )
 	sys-devel/flex
-	>=sys-devel/lld-7.0.0
-	>=sys-devel/llvm-7.0.0
+	lld? ( >=sys-devel/lld-7.0.0 )
+	>=sys-devel/llvm-7.0.0[gold?]
 	virtual/libusb:1
 	virtual/pkgconfig
 	dev-vcs/git
@@ -164,6 +165,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-memcpy-r0.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
+	"${FILESDIR}/${PN}-gold-r0.patch"
 )
 
 S="${WORKDIR}/chromium-${PV/_*}"
@@ -479,6 +481,12 @@ setup_compile_flags() {
 		if [[ ${myarch} == amd64 || ${myarch} == x86 ]]; then
 			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
 		fi
+
+		# 'gcc_s' is required if 'compiler-rt' is Clang's default
+		(has_version 'sys-devel/clang[default-compiler-rt]') && \
+			append-ldflags "-Wl,-lgcc_s"
+
+		# TODO: Fix ldflags if sys-devel/clang[default-libcxx]
 	fi
 
 	# TODO: Build against sys-libs/{libcxx,libcxxabi}
@@ -567,12 +575,13 @@ src_configure() {
 
 	local myconf_gn=""
 	# Clang features
-	myconf_gn+=" is_clang=true" # Implies use_lld=true
+	myconf_gn+=" is_clang=true"
 	myconf_gn+=" clang_use_chrome_plugins=false"
 	myconf_gn+=" use_thin_lto=$(usetf thinlto)"
-	myconf_gn+=" treat_warnings_as_errors=false"
+	myconf_gn+=" use_lld=$(usetf lld)"
 	myconf_gn+=" is_cfi=$(usetf cfi)"
 	myconf_gn+=" use_cfi_cast=$(usetf cfi)"
+	myconf_gn+=" treat_warnings_as_errors=false"
 
 	# UGC's "common" GN flags (config_bundles/common/gn_flags.map)
 	myconf_gn+=" blink_symbol_level=0"
@@ -630,8 +639,8 @@ src_configure() {
 	myconf_gn+=" use_custom_libcxx=false"
 	myconf_gn+=" use_gio=$(usetf gnome)"
 	myconf_gn+=" use_kerberos=$(usetf kerberos)"
-	myconf_gn+=" use_openh264=$(usetf !openh264)" # Enable this to
-	# build OpenH264 for encoding, hence the restriction: !openh264? ( bindist )
+	myconf_gn+=" use_openh264=$(usetf !openh264)" # Enable this to build
+	# OpenH264 for encoding, hence the restriction: !openh264? ( bindist )
 	myconf_gn+=" use_pulseaudio=$(usetf pulseaudio)"
 	# HarfBuzz and FreeType need to be built together in a specific way
 	# to get FreeType autohinting to work properly. Chromium bundles
@@ -697,8 +706,7 @@ src_compile() {
 	done
 
 	# Work around broken deps
-	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom.h
-	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom-shared.h
+	eninja -C out/Release gen/ui/accessibility/ax_enums.mojom{,-shared}.h
 
 	# Even though ninja autodetects number of CPUs, we respect
 	# user's options, for debugging with -j 1 or any other reason
@@ -709,8 +717,7 @@ src_compile() {
 }
 
 src_install() {
-	# SC2155
-	local CHROMIUM_HOME
+	local CHROMIUM_HOME # SC2155
 	CHROMIUM_HOME="/usr/$(get_libdir)/chromium-browser"
 	exeinto "${CHROMIUM_HOME}"
 	doexe out/Release/chrome
