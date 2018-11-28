@@ -7,6 +7,7 @@
 	</maintainer>
 	<upstream>
 		<remote-id type="github">Eloston/ungoogled-chromium</remote-id>
+		<bugs-to>https://github.com/Eloston/ungoogled-chromium/issues</bugs-to>
 		<doc>https://ungoogled-software.github.io/ungoogled-chromium-wiki/</doc>
 	</upstream>
 	<longdescription>
@@ -14,9 +15,21 @@
 		and enhancing privacy, control, and transparency
 	</longdescription>
 	<use>
+		<flag name="cfi">
+			Build with CFI (Control Flow Integrity) enabled (recommended)
+		</flag>
+		<flag name="gnome">
+			Improve integration with Gnome by enabling support for GIO (libgio)
+		</flag>
+		<flag name="gold">Use gold linker</flag>
 		<flag name="jumbo-build">
-			Combine source files to speed up build process, at the expense
-			of more memory during build time
+			Coalesce translation units together, making builds faster on single
+			machines, at the expense of more memory during build time. This flag
+			is not automatically tested by Chromium developers, so it may not
+			work all the time.
+		</flag>
+		<flag name="lld">
+			Use LLVM's linker (recommended), depend on <pkg>sys-devel/lld</pkg>
 		</flag>
 		<flag name="new-tcmalloc">
 			Use the new tcmalloc (EXPERIMENTAL)
@@ -56,6 +69,9 @@
 		</flag>
 		<flag name="tcmalloc">
 			Use bundled tcmalloc instead of system malloc
+		</flag>
+		<flag name="thinlto">
+			Build with ThinLTO support (highly recommended)
 		</flag>
 		<flag name="widevine">
 			Unsupported closed-source DRM capability (required by Netflix VOD)
