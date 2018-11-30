@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,7 +9,7 @@ if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/Vulkan-Headers.git"
 	inherit git-r3
 else
-	EGIT_COMMIT="114c3546e195819bd53a34b39f5194b2989a5b12"
+	EGIT_COMMIT="4ca8ea36379b1be079d7f4b80c942af4c3172534"
 	KEYWORDS="~amd64"
 	SRC_URI="https://github.com/KhronosGroup/Vulkan-Headers/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/Vulkan-Headers-${EGIT_COMMIT}"

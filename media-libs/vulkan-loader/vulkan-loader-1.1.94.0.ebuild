@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -10,7 +10,7 @@ if [[ "${PV}" == "9999" ]]; then
 	inherit git-r3
 else
 	KEYWORDS="~amd64"
-	EGIT_COMMIT="abe5c2b3c33e42fff883d32d4c168556fb29b3ba"
+	EGIT_COMMIT="5cdde103accaecaf6cc4a67243dd504da48b95f7"
 	SRC_URI="https://github.com/KhronosGroup/Vulkan-Loader/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/Vulkan-Loader-${EGIT_COMMIT}"
 fi
@@ -26,7 +26,7 @@ IUSE="layers wayland X"
 
 PDEPEND="layers? ( media-libs/vulkan-layers:=[${MULTILIB_USEDEP}] )"
 DEPEND="${PYTHON_DEPS}
-	>=dev-util/vulkan-headers-1.1.82.0
+	>=dev-util/vulkan-headers-1.1.92.0
 	wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 	X? (
 		x11-libs/libX11:=[${MULTILIB_USEDEP}]

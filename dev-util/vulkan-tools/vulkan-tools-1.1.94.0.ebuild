@@ -24,8 +24,6 @@ LICENSE="Apache-2.0"
 SLOT="0"
 IUSE="+cube +vulkaninfo X wayland"
 
-# Old packaging will cause file collisions
-RDEPEND="!<=media-libs/vulkan-loader-1.1.70.0-r999"
 DEPEND="${PYTHON_DEPS}
 	cube? ( dev-util/glslang:=[${MULTILIB_USEDEP}] )
 	dev-util/vulkan-headers
@@ -49,8 +47,8 @@ pkg_setup() {
 
 	if use cube; then
 		MULTILIB_CHOST_TOOLS+=(
-			/usr/bin/vulkancube
-			/usr/bin/vulkancubecpp
+			/usr/bin/vkcube
+			/usr/bin/vkcubepp
 		)
 	fi
 
@@ -93,14 +91,4 @@ multilib_src_configure() {
 
 multilib_src_install() {
 	cmake-utils_src_install
-
-	if use cube; then
-		mv "${ED%/}"/usr/bin/vkcube "${ED%/}"/usr/bin/vulkancube || die
-		mv "${ED%/}"/usr/bin/vkcubepp "${ED%/}"/usr/bin/vulkancubecpp || die
-	fi
-}
-
-pkg_postinst() {
-	einfo "The cube and cubepp demos have been renamed to"
-	einfo "vulkancube and vulkancubecpp to prevent collisions"
 }
