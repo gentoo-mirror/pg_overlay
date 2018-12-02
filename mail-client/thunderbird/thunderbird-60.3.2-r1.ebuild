@@ -202,7 +202,7 @@ src_prepare() {
 		|| die
 	eapply "${WORKDIR}/firefox"
 
-	eapply "${FILESDIR}"/sqlite3-fts3-tokenizer.patch
+	eapply "${FILESDIR}"/thunderbird-60-sqlite3-fts3-tokenizer.patch
 
 	# Ensure that are plugins dir is enabled as default
 	sed -i -e "s:/usr/lib/mozilla/plugins:/usr/lib/nsbrowser/plugins:" \
@@ -529,13 +529,6 @@ src_install() {
 		echo "sticky_pref(\"gfx.content.azure.backends\",\"cairo\");" \
 			>>"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" || die
 	fi
-
-	# dev-db/sqlite does not have FTS3_TOKENIZER support.
-	# gloda needs it to function, and bad crashes happen when its enabled and doesn't work
-	#if use system-sqlite ; then
-	#	echo "sticky_pref(\"mailnews.database.global.indexer.enabled\", false);" \
-	#		>>"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" || die
-	#fi
 
 	if use kde ; then
 		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
