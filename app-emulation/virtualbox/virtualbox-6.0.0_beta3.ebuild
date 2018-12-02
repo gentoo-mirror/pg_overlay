@@ -196,7 +196,7 @@ src_prepare() {
 
 	eapply "${WORKDIR}/patches"
 
-	eapply "${FILESDIR}"/${P}-no_libopus.patch
+	#eapply "${FILESDIR}"/${P}-no_libopus.patch
 
 	eapply_user
 
