@@ -9,6 +9,7 @@ app-text/pastebinit 1.5: A software that lets you send anything you want directl
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-libs/libsigc++ 2.99.11: Typesafe callback system for standard C++
 dev-libs/libxml2 2.9.8: XML C parser and toolkit
+dev-libs/nettle 3.4.1_rc1: Low-level cryptographic library
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/josepy 1.1.0: JOSE protocol implementation in Python
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
