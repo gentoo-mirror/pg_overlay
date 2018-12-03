@@ -18,7 +18,7 @@ UGC_P="ungoogled-chromium-${UGC_PV}"
 UGC_WD="${WORKDIR}/${UGC_P}"
 
 DESCRIPTION="Modifications to Chromium for removing Google integration and enhancing privacy"
-HOMEPAGE="https://github.com/Eloston/ungoogled-chromium https://www.chromium.org/"
+HOMEPAGE="https://www.chromium.org/Home https://github.com/Eloston/ungoogled-chromium"
 SRC_URI="
 	https://commondatastorage.googleapis.com/chromium-browser-official/chromium-${PV/_*}.tar.xz
 	https://github.com/Eloston/${PN}/archive/${UGC_PV}.tar.gz -> ${UGC_P}.tar.gz
@@ -52,7 +52,7 @@ COMMON_DEPEND="
 	dev-libs/atk
 	dev-libs/expat:=
 	dev-libs/glib:2
-	system-icu? ( >=dev-libs/icu-59:= )
+	system-icu? ( >=dev-libs/icu-58.2:= )
 	system-libevent? ( dev-libs/libevent )
 	>=dev-libs/libxml2-2.9.4-r3:=[icu]
 	dev-libs/libxslt:=
@@ -177,10 +177,8 @@ pre_build_checks() {
 	# Check build requirements (Bug #541816)
 	CHECKREQS_MEMORY="3G"
 	CHECKREQS_DISK_BUILD="5G"
-	if use custom-cflags; then
-		if ( shopt -s extglob; is-flagq '-g?(gdb)?([1-9])' ); then
-			CHECKREQS_DISK_BUILD="25G"
-		fi
+	if use custom-cflags && ( shopt -s extglob; is-flagq '-g?(gdb)?([1-9])' ); then
+		CHECKREQS_DISK_BUILD="25G"
 	fi
 	check-reqs_pkg_setup
 }
@@ -246,6 +244,7 @@ src_prepare() {
 		-e '/gn-bootstrap-remove-gn-gen.patch/d' \
 		-e '/no-such-option-no-sysroot.patch/d' \
 		"${ugc_common_dir}/patch_order.list" || die
+
 	sed -i '/gn\/libcxx.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
 
 	if ! use system-icu; then
@@ -275,16 +274,16 @@ src_prepare() {
 	fi
 
 	ebegin "Pruning binaries"
-	"${ugc_cli}" prune -b "${ugc_config}" ./ || die
-	eend $?
+	"${ugc_cli}" prune -b "${ugc_config}" ./
+	eend $? || die
 
 	ebegin "Applying ungoogled-chromium patches"
-	"${ugc_cli}" patches apply -b "${ugc_config}" ./ || die
-	eend $?
+	"${ugc_cli}" patches apply -b "${ugc_config}" ./
+	eend $? || die
 
 	ebegin "Applying domain substitution"
-	"${ugc_cli}" domains apply -b "${ugc_config}" -c domainsubcache.tar.gz ./ || die
-	eend $?
+	"${ugc_cli}" domains apply -b "${ugc_config}" -c domainsubcache.tar.gz ./
+	eend $? || die
 
 	local keeplibs=(
 		base/third_party/dmg_fp
@@ -584,7 +583,7 @@ src_configure() {
 	myconf_gn+=" clang_use_chrome_plugins=false"
 	myconf_gn+=" use_thin_lto=$(usetf thinlto)"
 	myconf_gn+=" use_lld=$(usetf lld)"
-	myconf_gn+=" is_cfi=$(usetf cfi)"
+	myconf_gn+=" is_cfi=$(usetf cfi)" # Implies use_cfi_icall=true
 
 	# UGC's "common" GN flags (config_bundles/common/gn_flags.map)
 	myconf_gn+=" blink_symbol_level=0"
@@ -657,7 +656,7 @@ src_configure() {
 	myconf_gn+=" use_system_zlib=true"
 	myconf_gn+=" use_vaapi=$(usetf vaapi)"
 
-	# Enable the experimental tcmalloc (https://crbug.com/724399)
+	# Enables the experimental tcmalloc (https://crbug.com/724399)
 	# It is relevant only when use_allocator == "tcmalloc"
 	myconf_gn+=" use_new_tcmalloc=$(usetf new-tcmalloc)"
 
@@ -694,8 +693,8 @@ src_compile() {
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup 'python2*'
 
-	# Avoid falling back to preprocessor mode when sources contain time macros
 	# shellcheck disable=SC2086
+	# Avoid falling back to preprocessor mode when sources contain time macros
 	has ccache ${FEATURES} && \
 		export CCACHE_SLOPPINESS="${CCACHE_SLOPPINESS:-time_macros}"
 
@@ -801,8 +800,8 @@ usetf() {
 update_caches() {
 	if type gtk-update-icon-cache &>/dev/null; then
 		ebegin "Updating GTK icon cache"
-		gtk-update-icon-cache "${EROOT}/usr/share/icons/hicolor" || die
-		eend $?
+		gtk-update-icon-cache "${EROOT}/usr/share/icons/hicolor"
+		eend $? || die
 	fi
 	xdg_desktop_database_update
 }
