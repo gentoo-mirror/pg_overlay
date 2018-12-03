@@ -34,9 +34,6 @@
 		<flag name="new-tcmalloc">
 			Use the new tcmalloc (EXPERIMENTAL)
 		</flag>
-		<flag name="openh264">
-			Use <pkg>media-libs/openh264</pkg> instead of the bundled one
-		</flag>
 		<flag name="optimize-webui">
 			Optimize parts of Chromium's UI written with web technologies
 			(HTML/CSS/JS) for runtime performance purposes. This does more
@@ -62,6 +59,9 @@
 		</flag>
 		<flag name="system-libvpx">
 			Use system <pkg>media-libs/libvpx</pkg> instead of the bundled one
+		</flag>
+		<flag name="system-openh264">
+			Use <pkg>media-libs/openh264</pkg> instead of the bundled one
 		</flag>
 		<flag name="system-openjpeg">
 			Use system <pkg>media-libs/openjpeg</pkg> instead of the bundled
