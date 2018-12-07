@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=(python{2_7,3_5,3_6,3_7})
+PYTHON_COMPAT=(python{2_7,3_4,3_5,3_6})
 
 if [[ ${PV} == 9999* ]]; then
 	EGIT_REPO_URI="https://github.com/certbot/certbot.git"
@@ -24,7 +24,7 @@ IUSE="test"
 CDEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="
 	${CDEPEND}
-	>=app-crypt/acme-0.26.0[${PYTHON_USEDEP}]
+	>=app-crypt/acme-0.29.0[${PYTHON_USEDEP}]
 	>=dev-python/configargparse-0.9.3[${PYTHON_USEDEP}]
 	dev-python/configobj[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-1.2[${PYTHON_USEDEP}]
@@ -38,16 +38,9 @@ RDEPEND="
 DEPEND="
 	${CDEPEND}
 	test? (
-		>=dev-python/astroid-1.3.5[${PYTHON_USEDEP}]
-		dev-python/coverage[${PYTHON_USEDEP}]
-		dev-python/ipdb[${PYTHON_USEDEP}]
 		dev-python/pytest[${PYTHON_USEDEP}]
-		dev-python/pytest-cov[${PYTHON_USEDEP}]
-		dev-python/pytest-xdist[${PYTHON_USEDEP}]
-		>=dev-python/pylint-1.4.2[${PYTHON_USEDEP}]
-		dev-python/wheel[${PYTHON_USEDEP}]
 	)"
 
 python_test() {
-	nosetests -v ${PN} || die
+	pytest -vv ${PN} || die
 }
