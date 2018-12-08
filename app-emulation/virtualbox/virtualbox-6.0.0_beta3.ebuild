@@ -351,8 +351,8 @@ src_install() {
 		done
 
 		if use qt5 ; then
-			vbox_inst Virtualbox
-			vbox_inst VirtualboxVM 4750
+			vbox_inst VirtualBox
+			vbox_inst VirtualBoxVM 4750
 			for each in VirtualBox{,VM} ; do
 				pax-mark -m "${ED%/}"${vbox_inst_path}/${each}
 			done
