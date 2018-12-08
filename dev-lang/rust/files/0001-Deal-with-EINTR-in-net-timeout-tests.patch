@@ -1,0 +1,118 @@
+From f107514aef0b25b0d959941df1e45b18a478151b Mon Sep 17 00:00:00 2001
+From: Josh Stone <jistone@redhat.com>
+Date: Fri, 30 Nov 2018 15:33:40 -0800
+Subject: [PATCH] Deal with EINTR in net timeout tests
+
+We've seen sporadic QE failures in the timeout tests on this assertion:
+
+    assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut);
+
+So there's an error, but not either of the expected kinds.  Adding a
+format to show the kind revealed `ErrorKind::Interrupted` (`EINTR`).
+
+For the cases that were using `read`, we can just use `read_exact` to
+keep trying after interruption.  For those using `recv_from`, we have to
+manually loop until we get a non-interrupted result.
+---
+ src/libstd/net/tcp.rs          | 10 ++++++----
+ src/libstd/net/udp.rs          | 20 ++++++++++++++++----
+ src/libstd/sys/unix/ext/net.rs | 10 ++++++----
+ 3 files changed, 28 insertions(+), 12 deletions(-)
+
+diff --git a/src/libstd/net/tcp.rs b/src/libstd/net/tcp.rs
+index ad212a547579..be797803233a 100644
+--- a/src/libstd/net/tcp.rs
++++ b/src/libstd/net/tcp.rs
+@@ -1548,8 +1548,9 @@ mod tests {
+ 
+         let mut buf = [0; 10];
+         let start = Instant::now();
+-        let kind = stream.read(&mut buf).err().expect("expected error").kind();
+-        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut);
++        let kind = stream.read_exact(&mut buf).err().expect("expected error").kind();
++        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut,
++                "unexpected_error: {:?}", kind);
+         assert!(start.elapsed() > Duration::from_millis(400));
+         drop(listener);
+     }
+@@ -1570,8 +1571,9 @@ mod tests {
+         assert_eq!(b"hello world", &buf[..]);
+ 
+         let start = Instant::now();
+-        let kind = stream.read(&mut buf).err().expect("expected error").kind();
+-        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut);
++        let kind = stream.read_exact(&mut buf).err().expect("expected error").kind();
++        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut,
++                "unexpected_error: {:?}", kind);
+         assert!(start.elapsed() > Duration::from_millis(400));
+         drop(listener);
+     }
+diff --git a/src/libstd/net/udp.rs b/src/libstd/net/udp.rs
+index 0ebe3284b4f0..fc68abae05a0 100644
+--- a/src/libstd/net/udp.rs
++++ b/src/libstd/net/udp.rs
+@@ -1030,8 +1030,14 @@ mod tests {
+         let mut buf = [0; 10];
+ 
+         let start = Instant::now();
+-        let kind = stream.recv_from(&mut buf).err().expect("expected error").kind();
+-        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut);
++        loop {
++            let kind = stream.recv_from(&mut buf).err().expect("expected error").kind();
++            if kind != ErrorKind::Interrupted {
++                assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut,
++                        "unexpected_error: {:?}", kind);
++                break;
++            }
++        }
+         assert!(start.elapsed() > Duration::from_millis(400));
+     }
+ 
+@@ -1049,8 +1055,14 @@ mod tests {
+         assert_eq!(b"hello world", &buf[..]);
+ 
+         let start = Instant::now();
+-        let kind = stream.recv_from(&mut buf).err().expect("expected error").kind();
+-        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut);
++        loop {
++            let kind = stream.recv_from(&mut buf).err().expect("expected error").kind();
++            if kind != ErrorKind::Interrupted {
++                assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut,
++                        "unexpected_error: {:?}", kind);
++                break;
++            }
++        }
+         assert!(start.elapsed() > Duration::from_millis(400));
+     }
+ 
+diff --git a/src/libstd/sys/unix/ext/net.rs b/src/libstd/sys/unix/ext/net.rs
+index 55f43ccd7db4..737437c76b7c 100644
+--- a/src/libstd/sys/unix/ext/net.rs
++++ b/src/libstd/sys/unix/ext/net.rs
+@@ -1654,8 +1654,9 @@ mod test {
+         or_panic!(stream.set_read_timeout(Some(Duration::from_millis(1000))));
+ 
+         let mut buf = [0; 10];
+-        let kind = stream.read(&mut buf).err().expect("expected error").kind();
+-        assert!(kind == io::ErrorKind::WouldBlock || kind == io::ErrorKind::TimedOut);
++        let kind = stream.read_exact(&mut buf).err().expect("expected error").kind();
++        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut,
++                "unexpected_error: {:?}", kind);
+     }
+ 
+     #[test]
+@@ -1675,8 +1676,9 @@ mod test {
+         or_panic!(stream.read(&mut buf));
+         assert_eq!(b"hello world", &buf[..]);
+ 
+-        let kind = stream.read(&mut buf).err().expect("expected error").kind();
+-        assert!(kind == io::ErrorKind::WouldBlock || kind == io::ErrorKind::TimedOut);
++        let kind = stream.read_exact(&mut buf).err().expect("expected error").kind();
++        assert!(kind == ErrorKind::WouldBlock || kind == ErrorKind::TimedOut,
++                "unexpected_error: {:?}", kind);
+     }
+ 
+     // Ensure the `set_read_timeout` and `set_write_timeout` calls return errors
+-- 
+2.19.1
+
