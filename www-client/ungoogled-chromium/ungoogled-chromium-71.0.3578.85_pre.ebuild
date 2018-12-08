@@ -249,8 +249,6 @@ src_prepare() {
 		-e '/no-such-option-no-sysroot.patch/d' \
 		"${ugc_common_dir}/patch_order.list" || die
 
-	#sed -i '/gn\/libcxx.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
-
 	if ! use system-icu; then
 		sed -i '/common\/icudtl.dat/d' "${ugc_rooted_dir}/pruning.list" || die
 	fi
@@ -298,6 +296,8 @@ src_prepare() {
 		base/third_party/valgrind
 		base/third_party/xdg_mime
 		base/third_party/xdg_user_dirs
+		buildtools/third_party/libc++
+		buildtools/third_party/libc++abi
 		chrome/third_party/mozilla_security_manager
 		courgette/third_party
 		net/third_party/http2
@@ -486,22 +486,8 @@ setup_compile_flags() {
 		if [[ "${ARCH}" == amd64 ]] || [[ "${ARCH}" == x86 ]]; then
 			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
 		fi
-
-		# Building with 'libc++' is not fully supported yet. At least
-		# I haven't been able to successfully build. If you have a happy
-		# story to share, please let me know. (:
-		#has_version 'sys-devel/clang[default-libcxx]' && \
-		#	append-cxxflags "-stdlib=libstdc++"
-
-		# 'gcc_s' is required if 'compiler-rt' is Clang's default
-		has_version 'sys-devel/clang[default-compiler-rt]' && \
-			append-ldflags "-Wl,-lgcc_s"
 	fi
 
-	# TODO: Build against sys-libs/{libcxx,libcxxabi}
-	append-cxxflags "-stdlib=libc++"
-	append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
-	
 	if use thinlto; then
 		# We need to change the default value of import-instr-limit in
 		# LLVM to limit the text size increase. The default value is
