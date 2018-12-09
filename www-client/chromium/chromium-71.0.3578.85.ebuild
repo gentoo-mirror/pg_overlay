@@ -195,6 +195,11 @@ src_prepare() {
 
 	for p in $(cat "${FILESDIR}"/opensuse-patches-71/series);do eapply "${FILESDIR}"/opensuse-patches-71/$p;done
 
+	# Hack for libusb stuff (taken from openSUSE)
+	rm third_party/libusb/src/libusb/libusb.h || die
+	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
+		third_party/libusb/src/libusb/libusb.h || die	
+
 	local keeplibs=(
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
@@ -468,6 +473,9 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
+
+	gn_system_libraries+=( libwebp )
+
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
@@ -536,6 +544,33 @@ src_configure() {
 
 	# Disable fatal linker warnings, bug 506268.
 	myconf_gn+=" fatal_linker_warnings=false"
+
+	# Debian
+	myconf_gn+=" use_openh264=false"
+	myconf_gn+=" use_libjpeg_turbo=true"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
+	myconf_gn+=" optimize_webui=true"
+	myconf_gn+=" enable_swiftshader=false"
+	myconf_gn+=" enable_nacl=false"
+	myconf_gn+=" enable_nacl_nonsfi=false"
+	myconf_gn+=" enable_reading_list=false"
+	myconf_gn+=" enable_one_click_signin=false"
+	myconf_gn+=" enable_iterator_debugging=false"
+	myconf_gn+=" goma_dir=\"\""
+	myconf_gn+=" gold_path=\"\""
+	myconf_gn+=" linux_use_bundled_binutils=false"
+	myconf_gn+=" use_gio=false"
+	myconf_gn+=" link_pulseaudio=true"
+	myconf_gn+=" use_system_zlib=true"
+	myconf_gn+=" use_system_lcms2=true"
+	myconf_gn+=" use_system_libjpeg=true"
+	myconf_gn+=" use_system_freetype=true"
+	myconf_gn+=" use_system_harfbuzz=true"
+	myconf_gn+=" optimize_for_size=false"
+
+	# OpenSUSE
+	myconf_gn+=" enable_vulkan=true"
+	myconf_gn+=" enable_hevc_demuxing=true"
 
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
 	if ! use custom-cflags; then
