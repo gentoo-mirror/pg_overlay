@@ -473,8 +473,8 @@ src_configure() {
 		gn_system_libraries+=( libvpx )
 	fi
 
-	gn_system_libraries+=( libwebp )
 	gn_system_libraries+=( libevent )
+	gn_system_libraries+=( libusb )
 
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
