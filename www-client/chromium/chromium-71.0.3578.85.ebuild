@@ -474,6 +474,7 @@ src_configure() {
 	fi
 
 	gn_system_libraries+=( libwebp )
+	gn_system_libraries+=( libevent )
 
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
