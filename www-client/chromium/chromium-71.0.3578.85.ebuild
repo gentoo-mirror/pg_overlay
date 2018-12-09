@@ -364,7 +364,6 @@ src_prepare() {
 		v8/third_party/v8
 
 		# gyp -> gn leftovers
-		base/third_party/libevent
 		third_party/adobe
 		third_party/speech-dispatcher
 		third_party/usb_ids
@@ -475,6 +474,7 @@ src_configure() {
 	fi
 
 	gn_system_libraries+=( libwebp )
+	gn_system_libraries+=( libevent )
 
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
