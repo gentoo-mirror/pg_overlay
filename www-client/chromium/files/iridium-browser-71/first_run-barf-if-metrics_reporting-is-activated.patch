@@ -1,0 +1,43 @@
+From acc16a39f9094e306bd0512d1ab3ff33ba52fff4 Mon Sep 17 00:00:00 2001
+From: Robert Nagy <robert@openbsd.org>
+Date: Sat, 1 Oct 2016 11:23:40 +0200
+Subject: [PATCH 52/60] first_run: barf if metrics_reporting is activated
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+This patch is for debugging purposes and is meant for discovering
+whether  despite our patching efforts  metrics_reporting is still
+enabled somehow, and if so, say so on stderr.
+
+Result: As of October 2014, metrics_reporting seems successfully
+disabled, as no message is emitted.
+---
+ chrome/browser/first_run/first_run_internal_posix.cc | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/chrome/browser/first_run/first_run_internal_posix.cc b/chrome/browser/first_run/first_run_internal_posix.cc
+index f09d410e6a91..be88f43f56f7 100644
+--- a/chrome/browser/first_run/first_run_internal_posix.cc
++++ b/chrome/browser/first_run/first_run_internal_posix.cc
+@@ -22,6 +22,7 @@
+ #include "components/metrics/metrics_reporting_default_state.h"
+ #include "components/prefs/pref_service.h"
+ #include "components/startup_metric_utils/browser/startup_metric_utils.h"
++#include <cstdio>
+ 
+ namespace first_run {
+ 
+@@ -70,6 +71,9 @@ bool ShouldShowFirstRunDialog() {
+   // For real first runs, Mac and Desktop Linux initialize the default metrics
+   // reporting state when the first run dialog is shown.
+   bool is_opt_in = first_run::IsMetricsReportingOptIn();
++      if (is_opt_in) {
++        fprintf(stderr, "*** metrics_reporting = 1\n");
++      }
+   metrics::RecordMetricsReportingDefaultState(
+       g_browser_process->local_state(),
+       is_opt_in ? metrics::EnableMetricsDefault::OPT_IN
+-- 
+2.19.1
+

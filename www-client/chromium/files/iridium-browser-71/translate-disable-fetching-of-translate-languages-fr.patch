@@ -1,0 +1,34 @@
+From f3aa2066094c9cae2f3fb51d4867aa115bc60ddd Mon Sep 17 00:00:00 2001
+From: Simon Eisenmann <simon@struktur.de>
+Date: Mon, 26 Oct 2015 14:18:05 +0100
+Subject: [PATCH 49/60] translate: disable fetching of translate languages from
+ server
+
+GH issue #18.
+---
+ components/translate/core/browser/translate_language_list.cc | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/components/translate/core/browser/translate_language_list.cc b/components/translate/core/browser/translate_language_list.cc
+index e6016abb0dc7..713600181d3b 100644
+--- a/components/translate/core/browser/translate_language_list.cc
++++ b/components/translate/core/browser/translate_language_list.cc
+@@ -207,6 +207,7 @@ GURL TranslateLanguageList::TranslateLanguageUrl() {
+ }
+ 
+ void TranslateLanguageList::RequestLanguageList() {
++#if 0
+   // If resource requests are not allowed, we'll get a callback when they are.
+   if (!resource_requests_allowed_) {
+     request_pending_ = true;
+@@ -236,6 +237,7 @@ void TranslateLanguageList::RequestLanguageList() {
+     if (!result)
+       NotifyEvent(__LINE__, "Request is omitted due to retry limit");
+   }
++#endif
+ }
+ 
+ void TranslateLanguageList::SetResourceRequestsAllowed(bool allowed) {
+-- 
+2.19.1
+
