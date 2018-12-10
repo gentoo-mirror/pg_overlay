@@ -40,7 +40,7 @@ index d1bb5597f..7f80814f8 100644
 -        ]
 +        if (use_lld) {
 +          ldflags += [
-+            "-Wl,--thinlto-jobs=9",
++            "-Wl,--thinlto-jobs=8",
 +            "-Wl,--thinlto-cache-dir=" +
 +                rebase_path("$root_out_dir/thinlto-cache", root_build_dir),
 +            "-Wl,--thinlto-cache-policy,$cache_policy",
@@ -48,7 +48,7 @@ index d1bb5597f..7f80814f8 100644
 +        }
 +        if (use_gold) {
 +          ldflags += [
-+            "-Wl,-plugin-opt,jobs=9",
++            "-Wl,-plugin-opt,jobs=8",
 +            "-Wl,-plugin-opt,cache-dir=" +
 +                rebase_path("$root_out_dir/thinlto-cache", root_build_dir),
 +            "-Wl,-plugin-opt,cache-policy=$cache_policy",

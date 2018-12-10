@@ -13,7 +13,7 @@ CHROMIUM_LANGS="
 
 inherit check-reqs chromium-2 desktop flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
-UGC_PV="907d2a3f55c02f566d317f2ce817615ad2350f75"
+UGC_PV="95d355fad1ab3a7f554db34f5d878477f1f3d7c3"
 UGC_P="ungoogled-chromium-${UGC_PV}"
 UGC_WD="${WORKDIR}/${UGC_P}"
 
@@ -21,17 +21,17 @@ DESCRIPTION="Modifications to Chromium for removing Google integration and enhan
 HOMEPAGE="https://www.chromium.org/Home https://github.com/Eloston/ungoogled-chromium"
 SRC_URI="
 	https://commondatastorage.googleapis.com/chromium-browser-official/chromium-${PV/_*}.tar.xz
-	https://github.com/xsmile/${PN}/archive/${UGC_PV}.tar.gz -> ${UGC_P}.tar.gz
+	https://github.com/Eloston/${PN}/archive/${UGC_PV}.tar.gz -> ${UGC_P}.tar.gz
 "
 
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="
-	+cfi cups custom-cflags gnome gold jumbo-build kerberos +lld new-tcmalloc
+	+cfi cups custom-cflags gnome gold jumbo-build kerberos libcxx +lld new-tcmalloc
 	optimize-webui +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg
-	system-harfbuzz +system-icu +system-libevent +system-libvpx +system-openh264
-	+system-openjpeg +tcmalloc +thinlto vaapi widevine
+	system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx
+	+system-openh264 +system-openjpeg +tcmalloc +thinlto vaapi widevine
 "
 REQUIRED_USE="
 	^^ ( gold lld )
@@ -51,7 +51,7 @@ COMMON_DEPEND="
 	cups? ( >=net-print/cups-1.3.11:= )
 	>=dev-libs/atk-2.26
 	dev-libs/expat:=
-	dev-libs/jsoncpp
+	system-jsoncpp? ( dev-libs/jsoncpp )
 	dev-libs/glib:2
 	system-icu? ( >=dev-libs/icu-58.2:= )
 	system-libevent? ( dev-libs/libevent )
@@ -82,6 +82,10 @@ COMMON_DEPEND="
 	)
 	sys-apps/dbus:=
 	sys-apps/pciutils:=
+	libcxx? (
+		sys-libs/libcxx
+		sys-libs/libcxxabi
+	)
 	virtual/udev
 	x11-libs/cairo:=
 	x11-libs/gdk-pixbuf:2
@@ -165,10 +169,10 @@ GTK+ icon theme.
 
 PATCHES=(
 	"${FILESDIR}/${PN}-compiler-r4.patch"
-	"${FILESDIR}/chromium-webrtc-r0.patch"
-	"${FILESDIR}/chromium-memcpy-r0.patch"
-	"${FILESDIR}/chromium-math.h-r0.patch"
-	"${FILESDIR}/chromium-stdint.patch"
+	#"${FILESDIR}/chromium-webrtc-r0.patch"
+	#"${FILESDIR}/chromium-memcpy-r0.patch"
+	#"${FILESDIR}/chromium-math.h-r0.patch"
+	#"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/${PN}-gold-r0.patch"
 )
 
@@ -185,14 +189,12 @@ pre_build_checks() {
 }
 
 pkg_pretend() {
-	ewarn
-	ewarn "This version haven't been blessed by upstream yet! Use at your own risk."
-	ewarn
 	if use custom-cflags && [[ "${MERGE_TYPE}" != binary ]]; then
 		ewarn
 		ewarn "USE=custom-cflags bypass strip-flags; you are on your own."
 		ewarn "Expect build failures. Don't file bugs using that unsupported USE flag!"
 		ewarn
+		use libcxx && ewarn "USE=libcxx has no effect with 'custom-cflags'."
 	fi
 	pre_build_checks
 }
@@ -215,9 +217,9 @@ src_prepare() {
 	use system-harfbuzz && eapply "${FILESDIR}/chromium-harfbuzz-r0.patch"
 
 	# Apply extra patches (taken from openSUSE)
-	local ep
-	for ep in "${FILESDIR}/extra-70"/*.patch; do
-		eapply "${ep}"
+	local p
+	for p in "${FILESDIR}/extra-70"/*.patch; do
+		eapply "${p}"
 	done
 
 	# Hack for libusb stuff (taken from openSUSE)
@@ -231,36 +233,50 @@ src_prepare() {
 	local ugc_common_dir="${UGC_WD}/config_bundles/common"
 	local ugc_rooted_dir="${UGC_WD}/config_bundles/linux_rooted"
 
-	# Remove unneeded ARM & GCC patches. Also, as we will use
-	# dev-util/gn, remove redundant patches related to GN bootstrap
-	sed -i \
-		-e '/arm\/skia.patch/d' \
-		-e '/arm\/gcc_skcms_ice.patch/d' \
-		-e '/fixes\/alignof.patch/d' \
-		-e '/fixes\/as-needed.patch/d' \
-		-e '/fixes\/member-assignment.patch/d' \
-		-e '/fixes\/sizet.patch/d' \
-		-e '/warnings\/attribute.patch/d' \
-		-e '/warnings\/enum-compare.patch/d' \
-		-e '/warnings\/multichar.patch/d' \
-		-e '/warnings\/null-destination.patch/d' \
-		-e '/gn\/parallel.patch/d' \
-		-e '/gn-bootstrap-remove-gn-gen.patch/d' \
-		-e '/no-such-option-no-sysroot.patch/d' \
-		"${ugc_common_dir}/patch_order.list" || die
+	local ugc_unneeded=(
+		# ARM related patch
+		common:gcc_skcms_ice
+		# GCC fixes/warnings
+		common:alignof
+		common:as-needed
+		common:enum-compare
+		common:int-in-bool-context
+		common:multichar
+		common:null-destination
+		common:sizet
+		rooted:attribute
+		# We already have "-Wno-unknown-warning-option" defined below
+		common:clang-compiler-flags
+		# GN bootstrap
+		common:no-such-option-no-sysroot
+		common:parallel
+		rooted:libcxx
+	)
 
-	sed -i '/gn\/libcxx.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
+	local ugc_use=(
+		system-jsoncpp:jsoncpp
+		system-libevent:event
+		system-libvpx:vpx
+		vaapi:chromium-vaapi-r18
+	)
+
+	local ugc_p ugc_dir
+	for p in "${ugc_unneeded[@]}"; do
+		ugc_p="${p#*:}"
+		ugc_dir="ugc_${p%:*}_dir"
+		einfo "Removing ${ugc_p}.patch"
+		sed -i "/${ugc_p}.patch/d" "${!ugc_dir}/patch_order.list" || die
+	done
+
+	for p in "${ugc_use[@]}"; do
+		ugc_p="${p#*:}"
+		use "${p%:*}" && break
+		einfo "Removing ${ugc_p}.patch"
+		sed -i "/${ugc_p}.patch/d" "${ugc_rooted_dir}/patch_order.list" || die
+	done
 
 	if ! use system-icu; then
 		sed -i '/common\/icudtl.dat/d' "${ugc_rooted_dir}/pruning.list" || die
-	fi
-
-	if ! use system-libevent; then
-		sed -i '/system\/event.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
-	fi
-
-	if ! use system-libvpx; then
-		sed -i '/system\/vpx.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
 	fi
 
 	if use system-openjpeg; then
@@ -268,13 +284,9 @@ src_prepare() {
 			"${ugc_rooted_dir}/patch_order.list" || die
 	fi
 
-	if ! use vaapi; then
-		sed -i '/chromium-vaapi-r18.patch/d' "${ugc_rooted_dir}/patch_order.list" || die
-	else
-		if has_version '<x11-libs/libva-2.0.0'; then
-			sed -i "/build.patch/i ${PN}/linux/fix-libva1-compatibility.patch" \
-				"${ugc_rooted_dir}/patch_order.list" || die
-		fi
+	if use vaapi && has_version '<x11-libs/libva-2.0.0'; then
+		sed -i "/build.patch/i ${PN}/linux/fix-libva1-compatibility.patch" \
+			"${ugc_rooted_dir}/patch_order.list" || die
 	fi
 
 	ebegin "Pruning binaries"
@@ -419,7 +431,6 @@ src_prepare() {
 		third_party/spirv-tools-angle
 		third_party/sqlite
 		third_party/ungoogled
-		third_party/unrar
 		third_party/usrsctp
 		third_party/vulkan
 		third_party/vulkan-validation-layers
@@ -456,6 +467,7 @@ src_prepare() {
 		keeplibs+=( third_party/harfbuzz-ng )
 	fi
 	use system-icu || keeplibs+=( third_party/icu )
+	use system-jsoncpp || keeplibs+=( third_party/jsoncpp )
 	use system-libevent || keeplibs+=( base/third_party/libevent )
 	if ! use system-libvpx; then
 		keeplibs+=( third_party/libvpx )
@@ -487,22 +499,18 @@ setup_compile_flags() {
 			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
 		fi
 
-		# Building with 'libc++' is not fully supported yet. At least
-		# I haven't been able to successfully build. If you have a happy
-		# story to share, please let me know. (:
-		has_version 'sys-devel/clang[default-libcxx]' && \
-			append-cxxflags "-stdlib=libstdc++"
+		if use libcxx; then
+			append-cxxflags "-stdlib=libc++"
+			append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
+		else
+			has_version 'sys-devel/clang[default-libcxx]' && \
+				append-cxxflags "-stdlib=libstdc++"
+		fi
 
-		# 'gcc_s' is required if 'compiler-rt' is Clang's default
+		# 'gcc_s' is still required if 'compiler-rt' is Clang's default rtlib
 		has_version 'sys-devel/clang[default-compiler-rt]' && \
 			append-ldflags "-Wl,-lgcc_s"
 	fi
-
-	# TODO: Build against sys-libs/{libcxx,libcxxabi}
-	#if use libcxx; then
-	#	append-cxxflags "-stdlib=libc++"
-	#	append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
-	#fi
 
 	if use thinlto; then
 		# We need to change the default value of import-instr-limit in
