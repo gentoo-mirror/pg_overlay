@@ -191,6 +191,7 @@ src_prepare() {
 
 	default
 
+	for p in $(cat "${FILESDIR}/iridium-browser-71/series");do eapply "${FILESDIR}/iridium-browser-71/$p";done
 	for p in $(cat "${FILESDIR}/debian-patches-71/series");do eapply "${FILESDIR}/debian-patches-71/$p";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
@@ -489,7 +490,7 @@ src_configure() {
 	# Never use bundled gold binary. Disable gold linker flags for now.
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
+	myconf_gn+=" use_gold=tru use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	# Disable forced lld, bug 641556
 	myconf_gn+=" use_lld=false"
@@ -553,6 +554,25 @@ src_configure() {
 			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
 		fi
 	fi
+
+	# Debian
+	myconf_gn+=" use_openh264=false"
+	myconf_gn+=" use_libjpeg_turbo=true"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
+	myconf_gn+=" optimize_webui=true"
+	myconf_gn+=" enable_swiftshader=false"
+	myconf_gn+=" enable_nacl_nonsfi=false"
+	myconf_gn+=" enable_reading_list=false"
+	myconf_gn+=" enable_one_click_signin=false"
+	myconf_gn+=" enable_iterator_debugging=false"
+	myconf_gn+=" use_gio=false"
+	myconf_gn+=" link_pulseaudio=true"
+	myconf_gn+=" use_system_zlib=true"
+	myconf_gn+=" use_system_lcms2=true"
+	myconf_gn+=" use_system_libjpeg=true"
+	myconf_gn+=" use_system_freetype=true"
+	myconf_gn+=" use_system_harfbuzz=true"
+	myconf_gn+=" optimize_for_size=false"
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)

@@ -1,0 +1,38 @@
+From b140a8d43e982f826872b73a42c7baf5dc407e13 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Fri, 9 Nov 2018 11:31:17 +0100
+Subject: [PATCH 57/60] components: disable subdomain stripping
+
+https://www.bleepingcomputer.com/news/security/chrome-69-shows-the-www-and-m-subdomains-again-but-it-s-only-temporary/
+---
+ components/toolbar/toolbar_field_trial.cc | 8 --------
+ 1 file changed, 8 deletions(-)
+
+diff --git a/components/toolbar/toolbar_field_trial.cc b/components/toolbar/toolbar_field_trial.cc
+index a8c412a757a4..fc2ccba86333 100644
+--- a/components/toolbar/toolbar_field_trial.cc
++++ b/components/toolbar/toolbar_field_trial.cc
+@@ -13,20 +13,12 @@ namespace features {
+ 
+ const base::Feature kHideSteadyStateUrlScheme {
+   "OmniboxUIExperimentHideSteadyStateUrlScheme",
+-#if defined(OS_IOS)
+-      base::FEATURE_ENABLED_BY_DEFAULT
+-#else
+       base::FEATURE_DISABLED_BY_DEFAULT
+-#endif
+ };
+ 
+ const base::Feature kHideSteadyStateUrlTrivialSubdomains {
+   "OmniboxUIExperimentHideSteadyStateUrlTrivialSubdomains",
+-#if defined(OS_IOS)
+-      base::FEATURE_ENABLED_BY_DEFAULT
+-#else
+       base::FEATURE_DISABLED_BY_DEFAULT
+-#endif
+ };
+ 
+ bool IsHideSteadyStateUrlSchemeEnabled() {
+-- 
+2.19.1
+

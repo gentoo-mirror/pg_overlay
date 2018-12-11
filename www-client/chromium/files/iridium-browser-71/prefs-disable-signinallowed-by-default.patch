@@ -1,0 +1,25 @@
+From 30cfdb7c2b8c631688aab37feaa76a8a85942fcb Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Fri, 9 Nov 2018 11:59:50 +0100
+Subject: [PATCH 58/60] prefs: disable signinallowed by default
+
+---
+ components/signin/core/browser/signin_manager_base.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/components/signin/core/browser/signin_manager_base.cc b/components/signin/core/browser/signin_manager_base.cc
+index 4089566b5e1a..1a23cc7c0b74 100644
+--- a/components/signin/core/browser/signin_manager_base.cc
++++ b/components/signin/core/browser/signin_manager_base.cc
+@@ -56,7 +56,7 @@ void SigninManagerBase::RegisterProfilePrefs(PrefRegistrySimple* registry) {
+   registry->RegisterBooleanPref(prefs::kReverseAutologinEnabled, true);
+   registry->RegisterListPref(prefs::kReverseAutologinRejectedEmailList,
+                              std::make_unique<base::ListValue>());
+-  registry->RegisterBooleanPref(prefs::kSigninAllowed, true);
++  registry->RegisterBooleanPref(prefs::kSigninAllowed, false);
+   registry->RegisterInt64Pref(prefs::kSignedInTime,
+                               base::Time().ToInternalValue());
+ 
+-- 
+2.19.1
+
