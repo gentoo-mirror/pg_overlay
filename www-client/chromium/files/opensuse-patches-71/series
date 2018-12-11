@@ -1,5 +1,4 @@
 chromium-libusb_interrupt_event_handler.patch
-exclude_ymp.patch
 chromium-dma-buf.patch
 chromium-non-void-return.patch
 chromium-drm.patch
