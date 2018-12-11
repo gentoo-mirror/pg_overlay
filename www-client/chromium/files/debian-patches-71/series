@@ -4,7 +4,6 @@ gn/parallel.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
-fixes/alignof.patch
 fixes/polymer.patch
 fixes/optimize.patch
 fixes/ps-print.patch
