@@ -138,11 +138,11 @@ GTK+ icon theme.
 
 PATCHES=(
 	"${FILESDIR}/chromium-compiler-r6.patch"
-	"${FILESDIR}/chromium-widevine-r3.patch"
 	"${FILESDIR}/chromium-webrtc-r0.patch"
 	"${FILESDIR}/chromium-memcpy-r0.patch"
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
+	"${FILESDIR}/chromium-harfbuzz-r0.patch"
 )
 
 pre_build_checks() {
@@ -188,12 +188,6 @@ src_prepare() {
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
-
-	#for p in $(cat "${FILESDIR}"/iridium-browser-71/series);do eapply "${FILESDIR}"/iridium-browser-71/$p;done
-
-	for p in $(cat "${FILESDIR}"/opensuse-patches-71/series);do eapply "${FILESDIR}"/opensuse-patches-71/$p;done
-
-	for p in $(cat "${FILESDIR}"/debian-patches-71/series);do eapply "${FILESDIR}"/debian-patches-71/$p;done
 
 	local keeplibs=(
 		base/third_party/dmg_fp
@@ -446,7 +440,7 @@ src_configure() {
 		fontconfig
 		freetype
 		# Need harfbuzz_from_pkgconfig target
-		harfbuzz-ng
+		#harfbuzz-ng
 		libdrm
 		libjpeg
 		libpng
@@ -468,7 +462,6 @@ src_configure() {
 	if use system-libvpx; then
 		gn_system_libraries+=( libvpx )
 	fi
-
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
 	# See dependency logic in third_party/BUILD.gn
@@ -492,7 +485,7 @@ src_configure() {
 	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	# Disable forced lld, bug 641556
-	myconf_gn+=" use_lld=true"
+	myconf_gn+=" use_lld=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
@@ -537,19 +530,6 @@ src_configure() {
 
 	# Disable fatal linker warnings, bug 506268.
 	myconf_gn+=" fatal_linker_warnings=false"
-
-	# OpenSUSE
-	myconf_gn+=" enable_nacl=false"
-	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" enable_reading_list=false"
-	myconf_gn+=" link_pulseaudio=true"
-	myconf_gn+=" use_vaapi=true"
-	myconf_gn+=" use_system_harfbuzz=true"
-	myconf_gn+=" use_system_freetype=true"
-	myconf_gn+=" enable_vulkan=true"
-	myconf_gn+=" enable_hevc_demuxing=true"
-
-	myconf_gn+=" use_thin_lto=true"
 
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
 	if ! use custom-cflags; then
