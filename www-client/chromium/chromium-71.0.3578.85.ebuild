@@ -144,6 +144,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-math.h-r0.patch"
 	"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/chromium-harfbuzz-r0.patch"
+	"${FILESDIR}/chromium-71-gcc-0.patch"
 )
 
 pre_build_checks() {
