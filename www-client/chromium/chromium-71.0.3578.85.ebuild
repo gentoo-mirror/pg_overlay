@@ -147,7 +147,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-71-gcc-0.patch"
 
 	"${FILESDIR}/chromium-skia-harmony.patch"
-	"${FILESDIR}/chromium-system-icu.patch"
+	#"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
@@ -190,6 +190,8 @@ src_prepare() {
 	python_setup
 
 	default
+
+	for p in $(cat "${FILESDIR}/debian-patches-71/series");do eapply "${FILESDIR}/debian-patches-71/$p";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
