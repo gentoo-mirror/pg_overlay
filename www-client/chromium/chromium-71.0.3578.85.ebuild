@@ -193,6 +193,8 @@ src_prepare() {
 
 	for p in $(cat "${FILESDIR}"/opensuse-patches-71/series);do eapply "${FILESDIR}"/opensuse-patches-71/$p;done
 
+	eapply "${FILESDIR}"/debian-patches-71/system/vpx.patch
+
 	local keeplibs=(
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
