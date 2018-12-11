@@ -48,7 +48,6 @@ system/vpx.patch
 system/icu.patch
 system/jpeg.patch
 system/zlib.patch
-system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch
