@@ -24,7 +24,6 @@ search_engines-add-DuckDuckGo-as-selectable-and-defa.patch
 search_engines-add-Qwant-as-selectable-and-default-s.patch
 prefs-disable-translation-service.patch
 first_run-deactivate-autoupdate-globally.patch
-build-fix-OSX-branded-build-crashes-on-OSX.patch
 src-use-cached-copy-of-safebrowsing-lists-at-iridium.patch
 build-build-the-sandbox-with-PIE.patch
 updater-disable-auto-update.patch
@@ -51,5 +50,4 @@ Disable-smooth-scrolling-on-Linux.patch
 doc-add-README.md-for-github.patch
 components-disable-subdomain-stripping.patch
 prefs-disable-signinallowed-by-default.patch
-build-work-around-gcc-bug-86997.patch
 treewide-fix-google-shitcode-without-returns.patch
