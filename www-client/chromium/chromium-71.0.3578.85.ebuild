@@ -145,6 +145,9 @@ PATCHES=(
 	"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/chromium-harfbuzz-r0.patch"
 	"${FILESDIR}/chromium-71-gcc-0.patch"
+
+	"${FILESDIR}/chromium-skia-harmony.patch"
+	"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
@@ -442,7 +445,7 @@ src_configure() {
 		fontconfig
 		freetype
 		# Need harfbuzz_from_pkgconfig target
-		#harfbuzz-ng
+		harfbuzz-ng
 		libdrm
 		libjpeg
 		libpng
