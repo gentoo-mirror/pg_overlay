@@ -145,9 +145,6 @@ PATCHES=(
 	"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/chromium-harfbuzz-r0.patch"
 	"${FILESDIR}/chromium-71-gcc-0.patch"
-
-	"${FILESDIR}/chromium-skia-harmony.patch"
-	#"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
@@ -193,6 +190,11 @@ src_prepare() {
 
 	for p in $(cat "${FILESDIR}/iridium-browser-71/series");do eapply "${FILESDIR}/iridium-browser-71/$p";done
 	for p in $(cat "${FILESDIR}/debian-patches-71/series");do eapply "${FILESDIR}/debian-patches-71/$p";done
+	# Hack for libusb stuff (taken from openSUSE)
+	rm third_party/libusb/src/libusb/libusb.h || die
+	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
+		third_party/libusb/src/libusb/libusb.h || die
+	for p in $(cat "${FILESDIR}/opensuse-patches-71/series");do eapply "${FILESDIR}/opensuse-patches-71/$p";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -265,7 +267,7 @@ src_prepare() {
 		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
-		third_party/freetype
+		third_party/glslang
 		third_party/glslang-angle
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
@@ -290,10 +292,10 @@ src_prepare() {
 		third_party/libsrtp
 		third_party/libsync
 		third_party/libudev
+		third_party/libusb
 		third_party/libwebm
 		third_party/libxml/chromium
 		third_party/libyuv
-		third_party/llvm
 		third_party/lss
 		third_party/lzma_sdk
 		third_party/markupsafe
@@ -447,7 +449,6 @@ src_configure() {
 		flac
 		fontconfig
 		freetype
-		# Need harfbuzz_from_pkgconfig target
 		harfbuzz-ng
 		libdrm
 		libjpeg
@@ -455,6 +456,7 @@ src_configure() {
 		libwebp
 		libxml
 		libxslt
+		libusb
 		openh264
 		re2
 		snappy
@@ -573,6 +575,10 @@ src_configure() {
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_harfbuzz=true"
 	myconf_gn+=" optimize_for_size=false"
+
+	#OpenSUSE
+	myconf_gn+=" use_vaapi=true"
+	myconf_gn+=" enable_hevc_demuxing=true"
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
