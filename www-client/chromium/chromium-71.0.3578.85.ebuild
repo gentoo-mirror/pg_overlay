@@ -442,7 +442,7 @@ src_configure() {
 		fontconfig
 		freetype
 		# Need harfbuzz_from_pkgconfig target
-		#harfbuzz-ng
+		harfbuzz-ng
 		libdrm
 		libjpeg
 		libpng
