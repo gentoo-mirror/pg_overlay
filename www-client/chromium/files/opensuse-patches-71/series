@@ -1,8 +1,6 @@
 chromium-libusb_interrupt_event_handler.patch
 chromium-dma-buf.patch
 chromium-drm.patch
-chromium-gcc8-alignof.patch
-chromium-system-icu.patch
 chromium-system-libusb.patch
 chromium-initialize-list.patch
 chromium-vaapi.patch
