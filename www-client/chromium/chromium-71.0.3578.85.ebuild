@@ -145,7 +145,9 @@ PATCHES=(
 	"${FILESDIR}/chromium-stdint.patch"
 	"${FILESDIR}/chromium-harfbuzz-r0.patch"
 	"${FILESDIR}/chromium-71-gcc-0.patch"
-	"${FILESDIR}chromium-system-icu.patch"
+
+	"${FILESDIR}/chromium-skia-harmony.patch"
+	"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
