@@ -189,7 +189,7 @@ src_prepare() {
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
-	for p in $(cat "${FILESDIR}"/iridium-browser-71/series);do eapply "${FILESDIR}"/iridium-browser-71/$p;done
+	#for p in $(cat "${FILESDIR}"/iridium-browser-71/series);do eapply "${FILESDIR}"/iridium-browser-71/$p;done
 
 	for p in $(cat "${FILESDIR}"/opensuse-patches-71/series);do eapply "${FILESDIR}"/opensuse-patches-71/$p;done
 
