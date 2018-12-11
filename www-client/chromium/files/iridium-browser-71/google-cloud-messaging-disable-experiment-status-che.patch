@@ -1,0 +1,46 @@
+From 7d3709651c0b02ba80b18005dda0d59f771338d7 Mon Sep 17 00:00:00 2001
+From: Joachim Bauch <jojo@struktur.de>
+Date: Mon, 1 Jun 2015 17:14:34 +0200
+Subject: [PATCH 37/60] google-cloud-messaging: disable experiment status check
+
+This avoids trk:263 from triggering.
+---
+ components/gcm_driver/gcm_channel_status_request.cc | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/components/gcm_driver/gcm_channel_status_request.cc b/components/gcm_driver/gcm_channel_status_request.cc
+index 15d16e044163..38a2c0f4d21f 100644
+--- a/components/gcm_driver/gcm_channel_status_request.cc
++++ b/components/gcm_driver/gcm_channel_status_request.cc
+@@ -24,8 +24,10 @@ namespace gcm {
+ 
+ namespace {
+ 
++#if 0
+ const char kRequestContentType[] = "application/octet-stream";
+ const char kGCMChannelTag[] = "gcm_channel";
++#endif
+ const int kDefaultPollIntervalSeconds = 60 * 60;  // 60 minutes.
+ const int kMinPollIntervalSeconds = 30 * 60;  // 30 minutes.
+ 
+@@ -61,6 +63,7 @@ void GCMChannelStatusRequest::Start() {
+   if (!url_loader_factory_)
+     return;
+ 
++#if 0
+   DCHECK(!simple_url_loader_);
+ 
+   GURL request_url(channel_status_request_url_);
+@@ -124,6 +127,9 @@ void GCMChannelStatusRequest::Start() {
+       url_loader_factory_.get(),
+       base::BindOnce(&GCMChannelStatusRequest::OnSimpleLoaderComplete,
+                      base::Unretained(this)));
++#endif
++  // Simulate an empty response and disable GCM.
++  callback_.Run(false, false, 0);
+ }
+ 
+ void GCMChannelStatusRequest::OnSimpleLoaderComplete(
+-- 
+2.19.1
+

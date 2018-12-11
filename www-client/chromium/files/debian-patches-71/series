@@ -1,11 +1,9 @@
-
 gn/libcxx.patch
 gn/sysroot.patch
 gn/parallel.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
-fixes/alignof.patch
 fixes/polymer.patch
 fixes/optimize.patch
 fixes/ps-print.patch
@@ -30,7 +28,6 @@ disable/installer.patch
 disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
-disable/third-party-cookies.patch
 disable/device-notifications.patch
 
 warnings/printf.patch

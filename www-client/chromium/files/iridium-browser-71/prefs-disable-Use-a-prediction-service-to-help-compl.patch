@@ -1,0 +1,33 @@
+From 31e311c3080a445522ec6011c737efb294de6a8b Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sat, 13 Sep 2014 15:06:39 +0200
+Subject: [PATCH 13/60] prefs: disable "Use a prediction service to help
+ complete searches..."
+
+This autocomplete service would send search queries as soon as you
+started typing, even if not yet done typing. Some regard this as an
+information leak, others as a waste of bytes sent over the network.
+Either reason is fine for me to disable this by default.
+
+Impl. details:
+Set suggest_enabled to false by default.
+---
+ chrome/browser/profiles/profile.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/chrome/browser/profiles/profile.cc b/chrome/browser/profiles/profile.cc
+index 3bb5207dc4e6..a4595dda6d17 100644
+--- a/chrome/browser/profiles/profile.cc
++++ b/chrome/browser/profiles/profile.cc
+@@ -138,7 +138,7 @@ const char Profile::kProfileKey[] = "__PROFILE__";
+ void Profile::RegisterProfilePrefs(user_prefs::PrefRegistrySyncable* registry) {
+   registry->RegisterBooleanPref(
+       prefs::kSearchSuggestEnabled,
+-      true,
++      false,
+       user_prefs::PrefRegistrySyncable::SYNCABLE_PREF);
+ #if defined(OS_ANDROID)
+   registry->RegisterStringPref(
+-- 
+2.19.1
+

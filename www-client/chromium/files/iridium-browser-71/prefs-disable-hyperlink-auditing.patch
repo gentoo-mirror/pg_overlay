@@ -1,0 +1,32 @@
+From e188ad134f7480cbc271a11c3a9aa4deb3a00ee8 Mon Sep 17 00:00:00 2001
+From: Jan Engelhardt <jengelh@inai.de>
+Date: Sat, 13 Sep 2014 17:03:17 +0200
+Subject: [PATCH 19/60] prefs: disable hyperlink auditing
+
+"Disable sending hyperlink auditing pings", i.e. pings to
+URLs in <a ping="..."> when clicked.
+
+The feature is already switchable through chrome://flags, so no
+new UI elements need to be added.
+
+https://html.spec.whatwg.org/multipage/semantics.html#hyperlink-auditing .
+---
+ chrome/browser/chrome_content_browser_client.cc | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/chrome/browser/chrome_content_browser_client.cc b/chrome/browser/chrome_content_browser_client.cc
+index 6eb6f848e620..2c3e678f95fb 100644
+--- a/chrome/browser/chrome_content_browser_client.cc
++++ b/chrome/browser/chrome_content_browser_client.cc
+@@ -1055,7 +1055,7 @@ void ChromeContentBrowserClient::RegisterLocalStatePrefs(
+ void ChromeContentBrowserClient::RegisterProfilePrefs(
+     user_prefs::PrefRegistrySyncable* registry) {
+   registry->RegisterBooleanPref(prefs::kDisable3DAPIs, false);
+-  registry->RegisterBooleanPref(prefs::kEnableHyperlinkAuditing, true);
++  registry->RegisterBooleanPref(prefs::kEnableHyperlinkAuditing, false);
+   registry->RegisterListPref(prefs::kEnableDeprecatedWebPlatformFeatures);
+   // Register user prefs for mapping SitePerProcess and IsolateOrigins in
+   // user policy in addition to the same named ones in Local State (which are
+-- 
+2.19.1
+
