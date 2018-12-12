@@ -481,8 +481,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-dtrace 
 	mozconfig_annotate '' --disable-dump-painting 
 
-	mozconfig_annotate '' --disable-faststripe
-
 	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-gconf
