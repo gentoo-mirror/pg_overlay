@@ -245,7 +245,6 @@ src_prepare() {
 		# GN bootstrap
 		common:no-such-option-no-sysroot
 		common:parallel
-		rooted:libcxx
 	)
 
 	local ugc_use=(
@@ -541,7 +540,7 @@ src_configure() {
 	python_setup 'python2*'
 
 	# Make sure the build system will use the right tools (Bug #340795)
-	tc-export AR CC CXX NM RANLIB
+	#tc-export AR CC CXX NM RANLIB
 
 	# Force clang
 	#CC=${CHOST}-clang
@@ -586,7 +585,7 @@ src_configure() {
 
 	local myconf_gn=""
 	# Clang features
-	#myconf_gn+=" is_clang=true"
+	myconf_gn+=" is_clang=false"
 	myconf_gn+=" clang_use_chrome_plugins=false"
 	myconf_gn+=" use_thin_lto=$(usetf thinlto)"
 	myconf_gn+=" use_lld=$(usetf lld)"
