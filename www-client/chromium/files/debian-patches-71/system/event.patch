@@ -25,10 +25,9 @@ author: Michael Gilbert <mgilbert@debian.org>
  #include "build/build_config.h"
 --- a/tools/gn/build/gen.py
 +++ b/tools/gn/build/gen.py
-@@ -320,6 +320,7 @@ def WriteGNNinja(path, platform, host, o
+@@ -320,5 +320,6 @@ def WriteGNNinja(path, platform, host, o
            '-lpthread',
            # Additional system libraries that are used.
-           '-lnspr4',
 +          '-levent',
        ])
      elif platform.is_darwin():

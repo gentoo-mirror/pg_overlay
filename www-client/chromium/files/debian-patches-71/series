@@ -46,7 +46,6 @@ warnings/explicit-constructor.patch
 
 system/vpx.patch
 system/jpeg.patch
-system/nspr.patch
 system/zlib.patch
 system/event.patch
 system/jsoncpp.patch
