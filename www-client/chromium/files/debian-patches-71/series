@@ -4,6 +4,7 @@ gn/parallel.patch
 
 fixes/mojo.patch
 fixes/sizet.patch
+fixes/alignof.patch
 fixes/polymer.patch
 fixes/optimize.patch
 fixes/ps-print.patch
@@ -16,7 +17,11 @@ fixes/gpu-timeout.patch
 fixes/empty-array.patch
 fixes/ownership-error.patch
 fixes/autocompletematch.patch
+fixes/widevine-revision.patch
+fixes/widevine-locations.patch
 fixes/connection-message.patch
+fixes/ambiguous-overloads.patch
+fixes/chromedriver-revision.patch
 
 disable/unrar.patch
 disable/signin.patch
@@ -28,6 +33,7 @@ disable/installer.patch
 disable/swiftshader.patch
 disable/welcome-page.patch
 disable/google-api-warning.patch
+disable/third-party-cookies.patch
 disable/device-notifications.patch
 
 warnings/printf.patch
@@ -44,7 +50,11 @@ warnings/explicit-constructor.patch
 system/vpx.patch
 system/icu.patch
 system/jpeg.patch
+system/nspr.patch
 system/zlib.patch
+system/event.patch
+system/jsoncpp.patch
+system/harfbuzz.patch
 system/openjpeg.patch
 system/convertutf.patch
 system/fontconfig.patch

@@ -188,7 +188,7 @@ src_prepare() {
 
 	default
 
-	for p in $(cat "${FILESDIR}/iridium-browser-71/series");do eapply "${FILESDIR}/iridium-browser-71/$p";done
+	#for p in $(cat "${FILESDIR}/iridium-browser-71/series");do eapply "${FILESDIR}/iridium-browser-71/$p";done
 	for p in $(cat "${FILESDIR}/debian-patches-71/series");do eapply "${FILESDIR}/debian-patches-71/$p";done
 	# Hack for libusb stuff (taken from openSUSE)
 	rm third_party/libusb/src/libusb/libusb.h || die
