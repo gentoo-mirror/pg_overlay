@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_7 )
+PYTHON_COMPAT=( python2_7 )
 inherit flag-o-matic gnome2-utils java-pkg-opt-2 linux-info pax-utils python-single-r1 tmpfiles toolchain-funcs udev xdg-utils
 
 MY_PV="${PV/beta/BETA}"
@@ -109,7 +109,7 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/components/VBoxREM.so
 	usr/lib/virtualbox/components/VBoxVMM.so
 	usr/lib/virtualbox/VBoxREM32.so
-	usr/lib/virtualbox/VBoxPython3_7.so
+	usr/lib/virtualbox/VBoxPython2_7.so
 	usr/lib/virtualbox/VBoxXPCOMC.so
 	usr/lib/virtualbox/VBoxOGLhostcrutil.so
 	usr/lib/virtualbox/VBoxNetDHCP.so
@@ -197,11 +197,6 @@ src_prepare() {
 	eapply "${WORKDIR}/patches"
 
 	eapply_user
-
-	eapply "${FILESDIR}/python37/python3_support.patch"
-	eapply "${FILESDIR}/python37/fixes_for_python.patch"
-	eapply "${FILESDIR}/python37/switch_to_python3.7.patch"
-	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 }
 
 doecho() {
@@ -362,7 +357,8 @@ src_install() {
 				pax-mark -m "${ED%/}"${vbox_inst_path}/VBoxTestOGL
 			fi
 
-			for each in virtualbox{,vm} VirtualBox{,VM} ; do
+			#for each in virtualbox{,vm} VirtualBox{,VM} ; do
+			for each in virtualbox VirtualBox ; do
 				dosym ${vbox_inst_path}/VBox /usr/bin/${each}
 			done
 
