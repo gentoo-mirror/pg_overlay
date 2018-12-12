@@ -203,7 +203,7 @@ src_prepare() {
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
 		base/third_party/icu
-		base/third_party/nspr
+		#base/third_party/nspr
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
@@ -363,7 +363,7 @@ src_prepare() {
 		v8/third_party/v8
 
 		# gyp -> gn leftovers
-		base/third_party/libevent
+		#base/third_party/libevent
 		third_party/adobe
 		third_party/speech-dispatcher
 		third_party/usb_ids
