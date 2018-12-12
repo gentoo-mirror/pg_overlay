@@ -277,7 +277,7 @@ src_prepare() {
 		third_party/iccjpeg
 		third_party/inspector_protocol
 		third_party/jinja2
-		third_party/jsoncpp
+		#third_party/jsoncpp
 		third_party/jstemplate
 		third_party/khronos
 		third_party/leveldatabase
@@ -312,7 +312,7 @@ src_prepare() {
 		third_party/pdfium/third_party/bigint
 		third_party/pdfium/third_party/freetype
 		third_party/pdfium/third_party/lcms
-		third_party/pdfium/third_party/libopenjpeg20
+		#third_party/pdfium/third_party/libopenjpeg20
 		third_party/pdfium/third_party/libpng16
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
@@ -451,6 +451,7 @@ src_configure() {
 		freetype
 		harfbuzz-ng
 		libdrm
+		libevent
 		libjpeg
 		libpng
 		libwebp
