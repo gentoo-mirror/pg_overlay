@@ -517,17 +517,17 @@ setup_compile_flags() {
 	fi
 
 	# Enable std::vector []-operator bounds checking (https://crbug.com/333391)
-	append-cxxflags -D__google_stl_debug_vector=1
+	#append-cxxflags -D__google_stl_debug_vector=1
 
 	# Don't complain if Chromium uses a diagnostic option that is not yet
 	# implemented in the compiler version used by the user. This is only
 	# supported by Clang.
-	append-flags -Wno-unknown-warning-option
+	#append-flags -Wno-unknown-warning-option
 
 	# Facilitate deterministic builds (taken from build/config/compiler/BUILD.gn)
-	append-cflags -Wno-builtin-macro-redefined
-	append-cxxflags -Wno-builtin-macro-redefined
-	append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
+	#append-cflags -Wno-builtin-macro-redefined
+	#append-cxxflags -Wno-builtin-macro-redefined
+	#append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
 
 	local flags
 	einfo "Building with the compiler settings:"
@@ -586,7 +586,7 @@ src_configure() {
 
 	local myconf_gn=""
 	# Clang features
-	myconf_gn+=" is_clang=true"
+	#myconf_gn+=" is_clang=true"
 	myconf_gn+=" clang_use_chrome_plugins=false"
 	myconf_gn+=" use_thin_lto=$(usetf thinlto)"
 	myconf_gn+=" use_lld=$(usetf lld)"
