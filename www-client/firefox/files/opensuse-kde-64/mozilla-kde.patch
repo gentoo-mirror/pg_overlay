@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  06a62125ffbb15e88dacb486169d8e6a9595bd78
+# Parent  d685597ba96ea004052e40ec0c80f422ea0e365c
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -9,7 +9,7 @@ Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=140751
 diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
 --- a/modules/libpref/Preferences.cpp
 +++ b/modules/libpref/Preferences.cpp
-@@ -80,16 +80,17 @@
+@@ -81,16 +81,17 @@
  #include "nsXPCOMCID.h"
  #include "nsXPCOM.h"
  #include "nsXULAppAPI.h"
@@ -27,7 +27,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #ifdef XP_WIN
  #include "windows.h"
  #endif
-@@ -4932,25 +4933,37 @@ Preferences::InitInitialObjects(bool aIs
+@@ -4908,25 +4909,37 @@ Preferences::InitInitialObjects(bool aIs
    // application pref files for backwards compatibility.
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -65,7 +65,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  
    // Load jar:$app/omni.jar!/defaults/preferences/*.js
    // or jar:$gre/omni.jar!/defaults/preferences/*.js.
-@@ -4999,17 +5012,17 @@ Preferences::InitInitialObjects(bool aIs
+@@ -4975,17 +4988,17 @@ Preferences::InitInitialObjects(bool aIs
        }
  
        nsCOMPtr<nsIFile> path = do_QueryInterface(elem);
@@ -171,9 +171,9 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
 diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
 --- a/toolkit/content/jar.mn
 +++ b/toolkit/content/jar.mn
-@@ -70,16 +70,18 @@ toolkit.jar:
+@@ -68,16 +68,18 @@ toolkit.jar:
+    content/global/bindings/calendar.js         (widgets/calendar.js)
     content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
-    content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
     content/global/bindings/datekeeper.js       (widgets/datekeeper.js)
     content/global/bindings/datepicker.js       (widgets/datepicker.js)
     content/global/bindings/datetimepopup.xml   (widgets/datetimepopup.xml)
@@ -182,7 +182,6 @@ diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
  *  content/global/bindings/dialog.xml          (widgets/dialog.xml)
 +*  content/global/bindings/dialog-kde.xml      (widgets/dialog-kde.xml)
 +% override chrome://global/content/bindings/dialog.xml chrome://global/content/bindings/dialog-kde.xml desktop=kde
- *  content/global/bindings/findbar.xml         (widgets/findbar.xml)
     content/global/bindings/general.xml         (widgets/general.xml)
     content/global/bindings/groupbox.xml        (widgets/groupbox.xml)
     content/global/bindings/menu.xml            (widgets/menu.xml)
@@ -190,6 +189,7 @@ diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
     content/global/bindings/notification.xml    (widgets/notification.xml)
     content/global/bindings/numberbox.xml       (widgets/numberbox.xml)
     content/global/bindings/popup.xml           (widgets/popup.xml)
+    content/global/bindings/radio.xml           (widgets/radio.xml)
 diff --git a/toolkit/content/widgets/dialog-kde.xml b/toolkit/content/widgets/dialog-kde.xml
 new file mode 100644
 --- /dev/null
@@ -673,7 +673,7 @@ new file mode 100644
 diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downloads/nsHelperAppDlg.js
 --- a/toolkit/mozapps/downloads/nsHelperAppDlg.js
 +++ b/toolkit/mozapps/downloads/nsHelperAppDlg.js
-@@ -1030,30 +1030,60 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -1031,30 +1031,60 @@ nsUnknownContentTypeDialog.prototype = {
  
        if (params.handlerApp &&
            params.handlerApp.executable &&
@@ -845,7 +845,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -67,17 +67,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+@@ -68,17 +68,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
          '../components/printingui',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
@@ -1688,7 +1688,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  #include "nsIURL.h"
  #include "nsIFileStreams.h"
  #include "nsILineInputStream.h"
-@@ -1125,17 +1125,17 @@ nsOSHelperAppService::GetHandlerAndDescr
+@@ -1122,17 +1122,17 @@ nsOSHelperAppService::GetHandlerAndDescr
  
  nsresult nsOSHelperAppService::OSProtocolHandlerExists(const char * aProtocolScheme, bool * aHandlerExists)
  {
@@ -1707,7 +1707,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
      nsCOMPtr<nsIHandlerService> handlerSvc = do_GetService(NS_HANDLERSERVICE_CONTRACTID, &rv);
      if (NS_SUCCEEDED(rv) && handlerSvc) {
        rv = handlerSvc->ExistsForProtocol(nsCString(aProtocolScheme), aHandlerExists);
-@@ -1143,17 +1143,17 @@ nsresult nsOSHelperAppService::OSProtoco
+@@ -1140,17 +1140,17 @@ nsresult nsOSHelperAppService::OSProtoco
    }
  
    return rv;
@@ -1726,7 +1726,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
  nsresult nsOSHelperAppService::GetFileTokenForPath(const char16_t * platformAppPath, nsIFile ** aFile)
  {
-@@ -1240,17 +1240,17 @@ nsOSHelperAppService::GetFromExtension(c
+@@ -1237,17 +1237,17 @@ nsOSHelperAppService::GetFromExtension(c
                                           mime_types_description,
                                           true);
  
@@ -1745,7 +1745,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
      rv = LookUpTypeAndDescription(NS_ConvertUTF8toUTF16(aFileExt),
                                    majorType,
-@@ -1361,17 +1361,17 @@ nsOSHelperAppService::GetFromType(const 
+@@ -1358,17 +1358,17 @@ nsOSHelperAppService::GetFromType(const 
    nsAutoString extensions, mime_types_description;
    LookUpExtensionsAndDescription(majorType,
                                   minorType,
@@ -1884,8 +1884,7 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
  
    GtkFileChooserAction action = GetGtkFileChooserAction(mMode);
  
-@@ -608,8 +635,233 @@ nsFilePicker::Done(GtkWidget* file_choos
-   if (mCallback) {
+@@ -600,16 +627,241 @@ nsFilePicker::Done(void* file_chooser, g
      mCallback->Done(result);
      mCallback = nullptr;
    } else {
@@ -1893,7 +1892,7 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
    }
    NS_RELEASE_THIS();
  }
-+
+ 
 +nsCString nsFilePicker::kdeMakeFilter( int index )
 +    {
 +    nsCString buf = mFilters[ index ];
@@ -2118,10 +2117,19 @@ diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
 +    return NS_OK;
 +    }
 +
++
+ // All below functions available as of GTK 3.20+
+ 
+ void *
+ nsFilePicker::GtkFileChooserNew(
+         const gchar *title, GtkWindow *parent,
+         GtkFileChooserAction action,
+         const gchar *accept_label)
+ {
 diff --git a/widget/gtk/nsFilePicker.h b/widget/gtk/nsFilePicker.h
 --- a/widget/gtk/nsFilePicker.h
 +++ b/widget/gtk/nsFilePicker.h
-@@ -69,14 +69,20 @@ protected:
+@@ -69,16 +69,22 @@ protected:
    nsString  mDefaultExtension;
  
    nsTArray<nsCString> mFilters;
@@ -2136,12 +2144,14 @@ diff --git a/widget/gtk/nsFilePicker.h b/widget/gtk/nsFilePicker.h
 +  NS_IMETHODIMP kdeAppsDialog(PRInt16 *aReturn);
 +  nsCString kdeMakeFilter( int index );
 +
- #ifdef MOZ_WIDGET_GTK
-   GtkFileChooserWidget *mFileChooserDelegate;
- #endif
- };
- 
- #endif
+   void *GtkFileChooserNew(
+           const gchar *title, GtkWindow *parent,
+           GtkFileChooserAction action,
+           const gchar *accept_label);
+   void GtkFileChooserShow(void *file_chooser);
+   void GtkFileChooserDestroy(void *file_chooser);
+   void GtkFileChooserSetModal(void *file_chooser, GtkWindow* parent_widget,
+           gboolean modal);
 diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestParser.cpp
 --- a/xpcom/components/ManifestParser.cpp
 +++ b/xpcom/components/ManifestParser.cpp
@@ -2163,7 +2173,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    const char* directive;
    int argc;
  
-@@ -419,16 +420,17 @@ ParseManifest(NSLocationType aType, File
+@@ -421,16 +422,17 @@ ParseManifest(NSLocationType aType, File
    NS_NAMED_LITERAL_STRING(kRemoteEnabled, "remoteenabled");
    NS_NAMED_LITERAL_STRING(kRemoteRequired, "remoterequired");
    NS_NAMED_LITERAL_STRING(kApplication, "application");
@@ -2181,7 +2191,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    NS_NAMED_LITERAL_STRING(kMain, "main");
    NS_NAMED_LITERAL_STRING(kContent, "content");
  
-@@ -474,44 +476,49 @@ ParseManifest(NSLocationType aType, File
+@@ -476,44 +478,49 @@ ParseManifest(NSLocationType aType, File
          CopyUTF8toUTF16(s, abi);
          abi.Insert(char16_t('_'), 0);
          abi.Insert(osTarget, 0);
@@ -2231,7 +2241,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
      process = kMain;
    }
  
-@@ -598,25 +605,27 @@ ParseManifest(NSLocationType aType, File
+@@ -600,25 +607,27 @@ ParseManifest(NSLocationType aType, File
      TriState stOsVersion = eUnspecified;
      TriState stOs = eUnspecified;
      TriState stABI = eUnspecified;
@@ -2259,7 +2269,7 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
        }
  
  #if defined(MOZ_WIDGET_ANDROID)
-@@ -661,16 +670,17 @@ ParseManifest(NSLocationType aType, File
+@@ -663,16 +672,17 @@ ParseManifest(NSLocationType aType, File
      }
  
      if (!ok ||
