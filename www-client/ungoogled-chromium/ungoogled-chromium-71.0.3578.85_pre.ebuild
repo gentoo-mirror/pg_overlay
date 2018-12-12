@@ -540,7 +540,7 @@ src_configure() {
 	python_setup 'python2*'
 
 	# Make sure the build system will use the right tools (Bug #340795)
-	#tc-export AR CC CXX NM RANLIB
+	tc-export AR CC CXX NM RANLIB
 
 	# Force clang
 	#CC=${CHOST}-clang
