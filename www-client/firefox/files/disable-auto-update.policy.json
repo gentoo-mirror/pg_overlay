@@ -7,7 +7,6 @@
     "DisablePocket": true,
     "DisableSystemAddonUpdate": true,
     "DisableTelemetry": true,
-    "DontCheckDefaultBrowser": true,
-    "SanitizeOnShutdown": true
+    "DontCheckDefaultBrowser": true
   }
 }
