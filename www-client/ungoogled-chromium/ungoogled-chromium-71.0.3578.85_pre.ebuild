@@ -502,8 +502,8 @@ setup_compile_flags() {
 		fi
 
 		# 'gcc_s' is still required if 'compiler-rt' is Clang's default rtlib
-		#has_version 'sys-devel/clang[default-compiler-rt]' && \
-		#	append-ldflags "-Wl,-lgcc_s"
+		has_version 'sys-devel/clang[default-compiler-rt]' && \
+			append-ldflags "-Wl,-lgcc_s"
 	fi
 
 	if use thinlto; then
@@ -544,11 +544,11 @@ src_configure() {
 	tc-export AR CC CXX NM RANLIB
 
 	# Force clang
-	CC=${CHOST}-clang
-	CXX=${CHOST}-clang++
-	AR=llvm-ar
-	NM=llvm-nm
-	RANLIB=llvm-ranlib
+	#CC=${CHOST}-clang
+	#CXX=${CHOST}-clang++
+	#AR=llvm-ar
+	#NM=llvm-nm
+	#RANLIB=llvm-ranlib
 	strip-unsupported-flags
 
 	# Use system-provided libraries
