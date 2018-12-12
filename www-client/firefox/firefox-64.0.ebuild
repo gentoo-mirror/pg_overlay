@@ -52,7 +52,7 @@ SRC_URI="${SRC_URI}
 CDEPEND="
 	>=dev-libs/nss-3.40.1
 	>=dev-libs/nspr-4.19
-	>=app-text/hunspell-1.5.4:=
+	>=app-text/hunspell-1.5.4:*
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
@@ -481,9 +481,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-dtrace 
 	mozconfig_annotate '' --disable-dump-painting 
 
-	mozconfig_annotate '' --disable-faststripe
-
-	mozconfig_annotate '' --disable-gamepad
 	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-gtest-in-build
@@ -497,7 +494,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
 
-	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-mobile-optimize
 	mozconfig_annotate '' --disable-mortar 
