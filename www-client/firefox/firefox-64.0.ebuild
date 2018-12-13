@@ -74,6 +74,7 @@ CDEPEND="
 	>=sys-libs/zlib-1.2.3
 	>=virtual/libffi-3.0.10:=
 	virtual/ffmpeg
+	x11-base/xorg-server[xvfb]
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXdamage
