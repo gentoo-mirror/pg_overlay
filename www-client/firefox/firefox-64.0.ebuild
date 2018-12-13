@@ -537,7 +537,6 @@ src_configure() {
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
-	echo "ac_add_options MOZ_PGO=1" >> "${S}"/.mozconfig
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
@@ -546,13 +545,13 @@ src_configure() {
 	mozconfig_final
 
 	# workaround for funky/broken upstream configure...
-	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 MOZ_PGO=1 \
+	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	./mach configure || die
 }
 
 src_compile() {
 	ulimit -n 4096
-	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 MOZ_PGO=1 \
+	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	./mach build --verbose || die
 }
 
