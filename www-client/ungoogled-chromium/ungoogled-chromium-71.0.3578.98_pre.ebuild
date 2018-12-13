@@ -504,7 +504,7 @@ setup_compile_flags() {
 
 	fi
 
-	use libcxx && append-cxxflags "-stdlib=libc++" && append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
+	use libcxx && append-cxxflags "-stdlib=libc++" && append-ldflags "-stdlib=libc++ -Wl,-lc++abi -Wl,-lgcc_s"
 
 	if use thinlto; then
 		# We need to change the default value of import-instr-limit in
