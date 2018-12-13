@@ -13,7 +13,7 @@ CHROMIUM_LANGS="
 
 inherit check-reqs chromium-2 desktop flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
-UGC_PV="95d355fad1ab3a7f554db34f5d878477f1f3d7c3"
+UGC_PV="9c8823d2b75e7dce06c445453657d7be8627120d"
 UGC_P="ungoogled-chromium-${UGC_PV}"
 UGC_WD="${WORKDIR}/${UGC_P}"
 
@@ -38,6 +38,7 @@ REQUIRED_USE="
 	|| ( $(python_gen_useflags 'python3*') )
 	|| ( $(python_gen_useflags 'python2*') )
 	cfi? ( thinlto )
+	libcxx? ( new-tcmalloc )
 	new-tcmalloc? ( tcmalloc )
 "
 RESTRICT="mirror
@@ -90,7 +91,7 @@ COMMON_DEPEND="
 	x11-libs/cairo:=
 	x11-libs/gdk-pixbuf:2
 	x11-libs/gtk+:3[X]
-	vaapi? ( x11-libs/libva:= )
+	vaapi? ( >=x11-libs/libva-2.0.0:= )
 	x11-libs/libX11:=
 	x11-libs/libXcomposite:=
 	x11-libs/libXcursor:=
@@ -284,9 +285,9 @@ src_prepare() {
 			"${ugc_rooted_dir}/patch_order.list" || die
 	fi
 
-	if use vaapi && has_version '<x11-libs/libva-2.0.0'; then
-		eapply "${FILESDIR}/fix-libva1-compatibility.patch"
-	fi
+	#if use vaapi && has_version '<x11-libs/libva-2.0.0'; then
+	#	eapply "${FILESDIR}/fix-libva1-compatibility.patch"
+	#fi
 
 	ebegin "Pruning binaries"
 	"${ugc_cli}" prune -b "${ugc_config}" ./
