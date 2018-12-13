@@ -514,7 +514,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-signmar
 
-	mozconfig_annotate '' --disable-tests
+	#mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-trace-logging
 
 	mozconfig_annotate '' --disable-updater
