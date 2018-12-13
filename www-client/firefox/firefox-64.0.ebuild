@@ -550,7 +550,8 @@ src_configure() {
 }
 
 src_compile() {
-	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
+	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 MOZ_PGO=1 \
+	xvfb-run \
 	./mach build --verbose || die
 }
 
