@@ -81,7 +81,6 @@ CDEPEND="
 	x11-libs/libXfixes
 	x11-libs/libXrender
 	x11-libs/libXt
-	x11-misc/xvfb-run
 	system-icu? ( >=dev-libs/icu-60.2:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0= )
@@ -511,7 +510,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-signmar
 
-	#mozconfig_annotate '' --disable-tests
+	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-trace-logging
 
 	mozconfig_annotate '' --disable-updater
@@ -536,7 +535,6 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
@@ -550,7 +548,6 @@ src_configure() {
 }
 
 src_compile() {
-	ulimit -n 4096
 	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	./mach build --verbose || die
 }
