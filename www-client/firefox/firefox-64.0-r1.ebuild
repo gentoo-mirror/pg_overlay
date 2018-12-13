@@ -74,6 +74,7 @@ CDEPEND="
 	>=sys-libs/zlib-1.2.3
 	>=virtual/libffi-3.0.10:=
 	virtual/ffmpeg
+	x11-misc/xvfb-run
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXdamage
@@ -510,7 +511,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-signmar
 
-	mozconfig_annotate '' --disable-tests
+	mozconfig_annotate '' --enable-tests
 	mozconfig_annotate '' --disable-trace-logging
 
 	mozconfig_annotate '' --disable-updater
@@ -535,6 +536,8 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
+	echo "ac_add_options MOZ_PGO=1" >> "${S}"/.mozconfig
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
@@ -549,6 +552,8 @@ src_configure() {
 
 src_compile() {
 	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
+	xvfb-run \
+	-a \
 	./mach build --verbose || die
 }
 
