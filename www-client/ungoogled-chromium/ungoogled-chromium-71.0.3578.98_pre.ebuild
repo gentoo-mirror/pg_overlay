@@ -501,10 +501,12 @@ setup_compile_flags() {
 		if [[ "${ARCH}" == amd64 ]] || [[ "${ARCH}" == x86 ]]; then
 			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
 		fi
-
 	fi
 
-	use libcxx && append-cxxflags "-stdlib=libc++" && append-ldflags "-stdlib=libc++ -Wl,-lc++abi -Wl,-lgcc_s"
+	if use libcxx; then 
+	append-cxxflags "-stdlib=libc++" 
+	append-ldflags "-stdlib=libc++ -Wl,-lc++abi -Wl,-lgcc_s"
+	fi
 
 	if use thinlto; then
 		# We need to change the default value of import-instr-limit in
