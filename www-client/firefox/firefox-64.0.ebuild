@@ -74,7 +74,6 @@ CDEPEND="
 	>=sys-libs/zlib-1.2.3
 	>=virtual/libffi-3.0.10:=
 	virtual/ffmpeg
-	x11-base/xorg-server[xvfb]
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXdamage
@@ -82,6 +81,7 @@ CDEPEND="
 	x11-libs/libXfixes
 	x11-libs/libXrender
 	x11-libs/libXt
+	x11-misc/xvfb-run
 	system-icu? ( >=dev-libs/icu-60.2:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0= )
@@ -551,7 +551,6 @@ src_configure() {
 
 src_compile() {
 	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 MOZ_PGO=1 \
-	xvfb-run \
 	./mach build --verbose || die
 }
 
