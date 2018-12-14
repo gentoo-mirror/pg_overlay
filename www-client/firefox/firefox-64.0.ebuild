@@ -236,7 +236,7 @@ src_prepare() {
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
-	rm -fr browser/extensions/{formautofill,mortar,webcompat,webcompat-reporter} || die
+	#rm -fr browser/extensions/{formautofill,mortar,webcompat,webcompat-reporter} || die
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
