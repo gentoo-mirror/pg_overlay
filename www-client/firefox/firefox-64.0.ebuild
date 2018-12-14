@@ -467,6 +467,10 @@ src_configure() {
 		mozconfig_annotate '' --enable-llvm-hacks
 	fi
 
+		echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
+	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
+
+	#
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
@@ -535,9 +539,9 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
-
-	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
-	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
+	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
+	echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
+	#
 
 	# Finalize and report settings
 	mozconfig_final

@@ -462,12 +462,12 @@ src_configure() {
 	mozconfig_final
 
 	# workaround for funky/broken upstream configure...
-	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 MOZ_PGO=1 \
+	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	./mach configure || die
 }
 
 src_compile() {
-	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 MOZ_PGO=1 \
+	MOZ_MAKE_FLAGS="${MAKEOPTS} -O" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	./mach build --verbose || die
 }
 
