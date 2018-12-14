@@ -41,7 +41,7 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang dbus debug eme-free geckodriver +gmp-autoupdate hardened hwaccel
 	jack lto neon pulseaudio +screenshot selinux startup-notification
 	system-harfbuzz system-icu system-jpeg system-libevent system-sqlite
-	system-libvpx test wifi jit kde"
+	system-libvpx test wifi jit kde pgo"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -236,7 +236,7 @@ src_prepare() {
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
-	#rm -fr browser/extensions/{formautofill,mortar,webcompat,webcompat-reporter} || die
+	use pgo || rm -fr browser/extensions/{formautofill,mortar,webcompat,webcompat-reporter} || die
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
@@ -382,7 +382,7 @@ src_configure() {
 	mozconfig_use_enable !bindist official-branding
 
 	mozconfig_use_enable debug
-	mozconfig_use_enable debug tests
+	#mozconfig_use_enable debug tests
 	if ! use debug ; then
 		mozconfig_annotate 'disabled by Gentoo' --disable-debug-symbols
 	else
@@ -469,7 +469,7 @@ src_configure() {
 		mozconfig_annotate '' --enable-llvm-hacks
 	fi
 
-		echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
+	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
@@ -489,11 +489,11 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-gtest-in-build
+	use pgo || mozconfig_annotate '' --disable-gtest-in-build
 
 	mozconfig_annotate '' --disable-instruments
 	mozconfig_annotate '' --disable-ios-target
-	mozconfig_annotate '' --disable-ipdl-tests
+	use pgo || mozconfig_annotate '' --disable-ipdl-tests
 
 	mozconfig_annotate '' --disable-jprof
 
@@ -512,11 +512,11 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-reflow-perf
 	mozconfig_annotate '' --disable-rust-debug
-	mozconfig_annotate '' --disable-rust-tests
+	use pgo || mozconfig_annotate '' --disable-rust-tests
 
 	mozconfig_annotate '' --disable-signmar
 
-	mozconfig_annotate '' --enable-tests
+	use pgo || mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-trace-logging
 
 	mozconfig_annotate '' --disable-updater
@@ -541,7 +541,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
+	use pgo && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
 	#echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
 	#
 
@@ -631,6 +631,8 @@ src_install() {
 
 		dosym ${MOZILLA_FIVE_HOME}/geckodriver /usr/bin/geckodriver
 	fi
+
+	use pgo && rm -fv ${MOZILLA_FIVE_HOME}/browser/features/*
 
 	# Install language packs
 	MOZ_INSTALL_L10N_XPIFILE="1" mozlinguas_src_install
