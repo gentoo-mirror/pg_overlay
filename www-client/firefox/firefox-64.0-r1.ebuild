@@ -455,6 +455,8 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
 
+	use test && mozconfig_annotate '' --enable-tests
+
 	# Finalize and report settings
 	mozconfig_final
 
