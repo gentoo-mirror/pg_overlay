@@ -621,7 +621,7 @@ src_install() {
 	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 	|| die
 
-	use pgo && rm -fv "${BUILD_OBJ_DIR}"/dist/firefox/browser/features/*
+	use pgo && rm -frv "${BUILD_OBJ_DIR}"/dist/bin/firefox/browser/features/*
 
 	cd "${S}"
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
