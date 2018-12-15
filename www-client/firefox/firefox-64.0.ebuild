@@ -688,7 +688,7 @@ PROFILE_EOF
 		rm "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer"
 
 	#
-	use pgo && rm -fv "${ED%/}${MOZILLA_FIVE_HOME}/browser/features/*"
+	use pgo && rm -fv "${ED}"${MOZILLA_FIVE_HOME}/browser/features/*
 
 	# firefox and firefox-bin are identical
 	rm "${ED%/}"${MOZILLA_FIVE_HOME}/firefox-bin || die
