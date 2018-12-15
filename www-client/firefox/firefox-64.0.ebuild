@@ -632,8 +632,6 @@ src_install() {
 		dosym ${MOZILLA_FIVE_HOME}/geckodriver /usr/bin/geckodriver
 	fi
 
-	use pgo && rm -fv "${ED%/}${MOZILLA_FIVE_HOME}/browser/features/*"
-
 	# Install language packs
 	MOZ_INSTALL_L10N_XPIFILE="1" mozlinguas_src_install
 
@@ -688,6 +686,9 @@ PROFILE_EOF
 	# Don't install llvm-symbolizer from sys-devel/llvm package
 	[[ -f "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer" ]] && \
 		rm "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer"
+
+	#
+	use pgo && rm -fv "${ED%/}${MOZILLA_FIVE_HOME}/browser/features/*"
 
 	# firefox and firefox-bin are identical
 	rm "${ED%/}"${MOZILLA_FIVE_HOME}/firefox-bin || die
