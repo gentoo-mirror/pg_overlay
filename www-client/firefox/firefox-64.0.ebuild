@@ -621,6 +621,8 @@ src_install() {
 	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 	|| die
 
+	use pgo && rm -frv "${BUILD_OBJ_DIR}"/dist/bin/firefox/browser/features/*
+
 	cd "${S}"
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	DESTDIR="${D}" ./mach install || die
@@ -686,9 +688,6 @@ PROFILE_EOF
 	# Don't install llvm-symbolizer from sys-devel/llvm package
 	[[ -f "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer" ]] && \
 		rm "${ED%/}${MOZILLA_FIVE_HOME}/llvm-symbolizer"
-
-	#
-	use pgo && rm -fv "${ED}"${MOZILLA_FIVE_HOME}/browser/features/*
 
 	# firefox and firefox-bin are identical
 	rm "${ED%/}"${MOZILLA_FIVE_HOME}/firefox-bin || die
