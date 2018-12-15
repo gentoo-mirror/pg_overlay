@@ -382,7 +382,7 @@ src_configure() {
 	mozconfig_use_enable !bindist official-branding
 
 	mozconfig_use_enable debug
-	#mozconfig_use_enable debug tests
+	use pgo || mozconfig_use_enable debug tests
 	if ! use debug ; then
 		mozconfig_annotate 'disabled by Gentoo' --disable-debug-symbols
 	else
@@ -632,7 +632,7 @@ src_install() {
 		dosym ${MOZILLA_FIVE_HOME}/geckodriver /usr/bin/geckodriver
 	fi
 
-	use pgo && rm -fv ${MOZILLA_FIVE_HOME}/browser/features/*
+	use pgo && rm -fv "${ED%/}${MOZILLA_FIVE_HOME}/browser/features/*"
 
 	# Install language packs
 	MOZ_INSTALL_L10N_XPIFILE="1" mozlinguas_src_install
