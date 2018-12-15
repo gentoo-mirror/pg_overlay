@@ -114,7 +114,7 @@ DEPEND="${CDEPEND}
 	clang? (
 		>=sys-devel/llvm-4.0.1[gold]
 		>=sys-devel/lld-4.0.1
-		>=sys-libs/compiler-rt-sanitizers-4.0.1[profile]
+		pgo? ( >=sys-libs/compiler-rt-sanitizers-4.0.1[profile] )
 	)
 	pulseaudio? ( media-sound/pulseaudio )
 	>=virtual/cargo-1.28.0
@@ -542,7 +542,8 @@ src_configure() {
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	use pgo && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
-	#echo "mk_add_options PROFILE_GEN_SCRIPT='EXTRA_TEST_ARGS=10 \$(MAKE) -C \$(MOZ_OBJDIR) pgo-profile-run'" >> "${S}"/.mozconfig
+	use pgo && echo "ac_add_options MOZ_PGO=1" >> "${S}".mozconfig
+	use pgo && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
 	#
 
 	# Finalize and report settings
@@ -613,7 +614,10 @@ src_install() {
 
 	if use kde ; then
 		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/kde.js" \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
+		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/kde.js" \
 		|| die
 	fi
 
@@ -621,7 +625,7 @@ src_install() {
 	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 	|| die
 
-	use pgo && rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/*
+	use pgo && rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
 
 	cd "${S}"
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
