@@ -11,9 +11,9 @@ CHROMIUM_LANGS="
 	th tr uk vi zh-CN zh-TW
 "
 
-inherit check-reqs chromium-2 desktop flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
+inherit check-reqs chromium-2 desktop flag-o-matic ninja-utils pax-utils python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
-UGC_PV="e7414d0b603cffdcc16192201f7d8518aa3f30f0"
+UGC_PV="${PV/_p/-}"
 UGC_P="${PN}-${UGC_PV}"
 UGC_WD="${WORKDIR}/${UGC_P}"
 
@@ -191,7 +191,6 @@ pkg_pretend() {
 		ewarn "USE=custom-cflags bypass strip-flags; you are on your own."
 		ewarn "Expect build failures. Don't file bugs using that unsupported USE flag!"
 		ewarn
-		use libcxx && ewarn "USE=libcxx has no effect with 'custom-cflags'."
 	fi
 	pre_build_checks
 }
@@ -207,11 +206,6 @@ src_prepare() {
 
 	default
 
-	# Fix typo
-	# https://github.com/Eloston/ungoogled-chromium/commit/4a0af9e309f5bea9282e773722e4ae6b467dc9f0#commitcomment-31664028
-	sed -i "s|command_line|command_line_|" \
-		"${UGC_WD}/patches/${PN}/add-flag-to-hide-crashed-bubble.patch" || die
-
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}/usr/bin/node" third_party/node/linux/node-linux-x64/bin/node || die
 
@@ -220,7 +214,7 @@ src_prepare() {
 
 	# Apply extra patches (taken from openSUSE)
 	local p
-	for p in "${FILESDIR}/extra-70"/*.patch; do
+	for p in "${FILESDIR}/extra-$(ver_cut 1-1)"/*.patch; do
 		eapply "${p}"
 	done
 
@@ -498,15 +492,20 @@ setup_compile_flags() {
 		filter-flags '-fuse-ld=*' '-g*' '-Wl,*'
 
 		# Prevent libvpx build failures (Bug #530248, #544702, #546984)
-		if [[ "${ARCH}" == amd64 ]] || [[ "${ARCH}" == x86 ]]; then
-			filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
-		fi
+		filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
 	fi
 
-	if use libcxx; then 
-	append-cxxflags "-stdlib=libc++" 
-	append-ldflags "-stdlib=libc++ -Wl,-lc++abi -Wl,-lgcc_s"
+	if use libcxx; then
+		append-cxxflags "-stdlib=libc++"
+		append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
+	else
+		has_version 'sys-devel/clang[default-libcxx]' && \
+			append-cxxflags "-stdlib=libstdc++"
 	fi
+
+	# 'gcc_s' is still required if 'compiler-rt' is Clang's default rtlib
+	has_version 'sys-devel/clang[default-compiler-rt]' && \
+		append-ldflags "-Wl,-lgcc_s"
 
 	if use thinlto; then
 		# We need to change the default value of import-instr-limit in
@@ -636,13 +635,7 @@ src_configure() {
 	myconf_gn+=" custom_toolchain=\"//build/toolchain/linux/unbundle:default\""
 	myconf_gn+=" gold_path=\"\""
 	myconf_gn+=" goma_dir=\"\""
-	if tc-is-cross-compiler; then
-		tc-export BUILD_{AR,CC,CXX,NM}
-		myconf_gn+=" host_toolchain=\"//build/toolchain/linux/unbundle:host\""
-		myconf_gn+=" v8_snapshot_toolchain=\"//build/toolchain/linux/unbundle:host\""
-	else
-		myconf_gn+=" host_toolchain=\"//build/toolchain/linux/unbundle:default\""
-	fi
+	myconf_gn+=" host_toolchain=\"//build/toolchain/linux/unbundle:default\""
 	myconf_gn+=" link_pulseaudio=$(usetf pulseaudio)"
 	myconf_gn+=" linux_use_bundled_binutils=false"
 	myconf_gn+=" optimize_for_size=false"
@@ -668,14 +661,6 @@ src_configure() {
 	# Enables the experimental tcmalloc (https://crbug.com/724399)
 	# It is relevant only when use_allocator == "tcmalloc"
 	myconf_gn+=" use_new_tcmalloc=$(usetf new-tcmalloc)"
-
-	if [[ "${ARCH}" = amd64 ]]; then
-		myconf_gn+=" target_cpu=\"x64\""
-	elif [[ "${ARCH}" = x86 ]]; then
-		myconf_gn+=" target_cpu=\"x86\""
-	else
-		die "Failed to determine target arch, got '${ARCH}'."
-	fi
 
 	setup_compile_flags
 
@@ -708,13 +693,8 @@ src_compile() {
 	# Build mksnapshot and pax-mark it
 	local x
 	for x in mksnapshot v8_context_snapshot_generator; do
-		if tc-is-cross-compiler; then
-			eninja -C out/Release "host/${x}"
-			pax-mark m "out/Release/host/${x}"
-		else
-			eninja -C out/Release "${x}"
-			pax-mark m "out/Release/${x}"
-		fi
+		eninja -C out/Release "${x}"
+		pax-mark m "out/Release/${x}"
 	done
 
 	# Work around broken deps
