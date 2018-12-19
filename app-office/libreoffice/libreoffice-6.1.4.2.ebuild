@@ -302,6 +302,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	eapply "${FILESDIR}/patches/"
 	default
 
 	# sandbox violations on many systems, we don't need it. Bug #646406
