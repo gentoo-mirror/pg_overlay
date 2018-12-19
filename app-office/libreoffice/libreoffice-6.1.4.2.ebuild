@@ -345,7 +345,7 @@ src_prepare() {
 			-e ":Keywords: s:pdf;::" \
 			sysui/desktop/menus/draw.desktop || die
 	fi
-	eapply "${FILESDIR}/patches/*"
+	eapply "${FILESDIR}/patches/"
 }
 
 src_configure() {
