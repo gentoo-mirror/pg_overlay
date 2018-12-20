@@ -70,7 +70,7 @@ src_configure() {
 	fi
 
 	if use debug; then
-		debugmode="-Ddebug=elogind"
+		debugmode="-Ddebug-extra=elogind"
 	fi
 
 	# Duplicating C[XX]FLAGS in LDFLAGS is deprecated and will become

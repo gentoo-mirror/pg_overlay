@@ -28,16 +28,17 @@ LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="
-	+cfi cups custom-cflags gnome gold jumbo-build kerberos libcxx +lld new-tcmalloc
-	optimize-webui +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg
-	system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx
-	+system-openh264 +system-openjpeg +tcmalloc +thinlto vaapi widevine
+	+atk cfi cups custom-cflags gnome gold jumbo-build kerberos libcxx +lld
+	new-tcmalloc optimize-webui +proprietary-codecs pulseaudio selinux +suid
+	+system-ffmpeg system-harfbuzz +system-icu +system-jsoncpp +system-libevent
+	+system-libvpx +system-openh264 +system-openjpeg +tcmalloc +thinlto vaapi
+	widevine
 "
 REQUIRED_USE="
 	^^ ( gold lld )
 	|| ( $(python_gen_useflags 'python3*') )
 	|| ( $(python_gen_useflags 'python2*') )
-	cfi? ( thinlto )
+	cfi? ( amd64 thinlto )
 	libcxx? ( new-tcmalloc )
 	new-tcmalloc? ( tcmalloc )
 "
@@ -47,10 +48,12 @@ RESTRICT="
 "
 
 COMMON_DEPEND="
-	>=app-accessibility/at-spi2-atk-2.26:2
+	atk? (
+		>=app-accessibility/at-spi2-atk-2.26:2
+		>=dev-libs/atk-2.26
+	)
 	app-arch/bzip2:=
 	cups? ( >=net-print/cups-1.3.11:= )
-	>=dev-libs/atk-2.26
 	dev-libs/expat:=
 	system-jsoncpp? ( dev-libs/jsoncpp )
 	dev-libs/glib:2
@@ -169,6 +172,7 @@ GTK+ icon theme.
 "
 
 PATCHES=(
+	"${FILESDIR}/${PN}-atk-r0.patch"
 	"${FILESDIR}/${PN}-compiler-r4.patch"
 	"${FILESDIR}/${PN}-gold-r0.patch"
 )
@@ -209,9 +213,6 @@ src_prepare() {
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}/usr/bin/node" third_party/node/linux/node-linux-x64/bin/node || die
 
-	# Fix build with harfbuzz-2 (Bug #669034)
-	use system-harfbuzz && eapply "${FILESDIR}/chromium-harfbuzz-r0.patch"
-
 	# Apply extra patches (taken from openSUSE)
 	local p
 	for p in "${FILESDIR}/extra-$(ver_cut 1-1)"/*.patch; do
@@ -233,12 +234,15 @@ src_prepare() {
 		# ARM related patch
 		common:gcc_skcms_ice
 		# GCC fixes/warnings
-		common:alignof
+		#common:alignof
 		common:as-needed
 		common:enum-compare
+		common:explicit-constructor
+		common:initialization
 		common:int-in-bool-context
 		common:multichar
 		common:null-destination
+		common:printf
 		common:sizet
 		rooted:attribute
 		# We already have "-Wno-unknown-warning-option" defined below
@@ -251,6 +255,7 @@ src_prepare() {
 
 	local ugc_use=(
 		system-icu:convertutf
+		system-icu:icu
 		system-jsoncpp:jsoncpp
 		system-libevent:event
 		system-libvpx:vpx
@@ -274,6 +279,12 @@ src_prepare() {
 
 	if ! use system-icu; then
 		sed -i '/common\/icudtl.dat/d' "${ugc_rooted_dir}/pruning.list" || die
+	fi
+
+	# Fix build with harfbuzz-2 (Bug #669034)
+	if use system-harfbuzz; then
+		sed -i '/system\/jpeg.patch/i debian_buster/system/harfbuzz.patch' \
+			"${ugc_rooted_dir}/patch_order.list" || die
 	fi
 
 	if use system-openjpeg; then
@@ -624,6 +635,7 @@ src_configure() {
 	myconf_gn+=" safe_browsing_mode=0"
 	myconf_gn+=" symbol_level=0"
 	myconf_gn+=" treat_warnings_as_errors=false"
+	myconf_gn+=" use_atk=$(usetf atk)"
 	myconf_gn+=" use_gnome_keyring=false" # Deprecated by libsecret
 	myconf_gn+=" use_jumbo_build=$(usetf jumbo-build)"
 	myconf_gn+=" use_official_google_api_keys=false"
