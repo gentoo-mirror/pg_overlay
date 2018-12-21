@@ -29,10 +29,10 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="
 	+atk cfi cups custom-cflags gnome gold jumbo-build kerberos libcxx +lld
-	new-tcmalloc optimize-webui +proprietary-codecs pulseaudio selinux +suid
-	+system-ffmpeg system-harfbuzz +system-icu +system-jsoncpp +system-libevent
-	+system-libvpx +system-openh264 +system-openjpeg +tcmalloc +thinlto vaapi
-	widevine
+	new-tcmalloc optimize-thinlto optimize-webui +proprietary-codecs pulseaudio
+	selinux +suid +system-ffmpeg system-harfbuzz +system-icu +system-jsoncpp
+	+system-libevent +system-libvpx +system-openh264 +system-openjpeg +tcmalloc
+	+thinlto vaapi widevine
 "
 REQUIRED_USE="
 	^^ ( gold lld )
@@ -41,6 +41,7 @@ REQUIRED_USE="
 	cfi? ( amd64 thinlto )
 	libcxx? ( new-tcmalloc )
 	new-tcmalloc? ( tcmalloc )
+	optimize-thinlto? ( thinlto )
 "
 RESTRICT="
 	!system-ffmpeg? ( proprietary-codecs? ( bindist ) )
@@ -598,11 +599,12 @@ src_configure() {
 
 	local myconf_gn=""
 	# Clang features
+	myconf_gn+=" is_cfi=$(usetf cfi)" # Implies use_cfi_icall=true
 	myconf_gn+=" is_clang=true"
 	myconf_gn+=" clang_use_chrome_plugins=false"
-	myconf_gn+=" use_thin_lto=$(usetf thinlto)"
+	myconf_gn+=" thin_lto_enable_optimizations=$(usetf optimize-thinlto)"
 	myconf_gn+=" use_lld=$(usetf lld)"
-	myconf_gn+=" is_cfi=$(usetf cfi)" # Implies use_cfi_icall=true
+	myconf_gn+=" use_thin_lto=$(usetf thinlto)"
 
 	# UGC's "common" GN flags (config_bundles/common/gn_flags.map)
 	myconf_gn+=" blink_symbol_level=0"
