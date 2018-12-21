@@ -173,7 +173,7 @@ GTK+ icon theme.
 
 PATCHES=(
 	"${FILESDIR}/${PN}-atk-r0.patch"
-	"${FILESDIR}/${PN}-compiler-r4.patch"
+	"${FILESDIR}/${PN}-compiler-r5.patch"
 	"${FILESDIR}/${PN}-gold-r0.patch"
 )
 
