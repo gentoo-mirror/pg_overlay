@@ -44,6 +44,11 @@
 			for system linkers and runs much faster than them (recommended).
 		</flag>
 		<flag name="new-tcmalloc">Use the new tcmalloc (EXPERIMENTAL).</flag>
+		<flag name="optimize-thinlto">
+			Whether to enable ThinLTO optimizations. Turning ThinLTO
+			optimizations on can substantially increase link time and binary
+			size, but they generally also make binaries a fair bit faster.
+		</flag>
 		<flag name="optimize-webui">
 			Optimize parts of Chromium's UI written with web technologies
 			(HTML/CSS/JS) for runtime performance purposes. This does more
