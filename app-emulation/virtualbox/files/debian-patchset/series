@@ -2,7 +2,6 @@
 04-vboxdrv-references.patch
 07-vboxnetflt-reference.patch
 13-module-mismatch.patch
-18-system-xorg.patch
 23-remove-invalid-chars-check.patch
 27-hide-host-cache-warning.patch
 28-no-selinux-fedora.patch
