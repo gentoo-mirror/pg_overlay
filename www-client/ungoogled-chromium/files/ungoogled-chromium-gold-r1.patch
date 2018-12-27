@@ -1,8 +1,6 @@
-diff --git a/build/config/compiler/BUILD.gn b/build/config/compiler/BUILD.gn
-index d1bb5597f..7f80814f8 100644
 --- a/build/config/compiler/BUILD.gn
 +++ b/build/config/compiler/BUILD.gn
-@@ -432,7 +432,7 @@ config("compiler") {
+@@ -433,7 +433,7 @@ config("compiler") {
        # On Android, this isn't needed.  gcc in the NDK knows to look next to
        # it with -fuse-ld=gold, and clang gets a --gcc-toolchain flag passed
        # above.
@@ -22,7 +20,7 @@ index d1bb5597f..7f80814f8 100644
  
      cflags += [ "-flto=thin" ]
  
-@@ -651,17 +651,27 @@ config("compiler") {
+@@ -651,19 +651,25 @@ config("compiler") {
        # Limit the parallelism to avoid too aggressive competition between
        # linker jobs. This is still suboptimal to a potential dynamic
        # resource allocation scheme, but should be good enough.
@@ -38,9 +36,10 @@ index d1bb5597f..7f80814f8 100644
 -              rebase_path("$root_out_dir/thinlto-cache", root_build_dir),
 -          "-Wl,--thinlto-cache-policy,$cache_policy",
 -        ]
+-      } else {
+-        ldflags += [ "-Wl,-plugin-opt,jobs=8" ]
 +        if (use_lld) {
 +          ldflags += [
-+            "-Wl,--thinlto-jobs=8",
 +            "-Wl,--thinlto-cache-dir=" +
 +                rebase_path("$root_out_dir/thinlto-cache", root_build_dir),
 +            "-Wl,--thinlto-cache-policy,$cache_policy",
@@ -48,12 +47,11 @@ index d1bb5597f..7f80814f8 100644
 +        }
 +        if (use_gold) {
 +          ldflags += [
-+            "-Wl,-plugin-opt,jobs=8",
 +            "-Wl,-plugin-opt,cache-dir=" +
 +                rebase_path("$root_out_dir/thinlto-cache", root_build_dir),
 +            "-Wl,-plugin-opt,cache-policy=$cache_policy",
 +          ]
 +        }
-       } else {
-         ldflags += [ "-Wl,-plugin-opt,jobs=8" ]
        }
+ 
+       if (use_lld) {

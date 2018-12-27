@@ -29,19 +29,21 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="
 	+atk cfi cups custom-cflags gnome gold jumbo-build kerberos libcxx +lld
-	new-tcmalloc optimize-thinlto optimize-webui +proprietary-codecs pulseaudio
-	selinux +suid +system-ffmpeg system-harfbuzz +system-icu +system-jsoncpp
-	+system-libevent +system-libvpx +system-openh264 +system-openjpeg +tcmalloc
-	+thinlto vaapi widevine
+	new-tcmalloc optimize-thinlto optimize-webui +pdf +proprietary-codecs
+	pulseaudio selinux +suid +system-ffmpeg system-harfbuzz +system-icu
+	+system-jsoncpp +system-libevent +system-libvpx +system-openh264
+	+system-openjpeg +tcmalloc +thinlto vaapi widevine
 "
 REQUIRED_USE="
 	^^ ( gold lld )
 	|| ( $(python_gen_useflags 'python3*') )
 	|| ( $(python_gen_useflags 'python2*') )
 	cfi? ( amd64 thinlto )
+	cups? ( pdf )
 	libcxx? ( new-tcmalloc )
 	new-tcmalloc? ( tcmalloc )
 	optimize-thinlto? ( thinlto )
+	system-openjpeg? ( pdf )
 "
 RESTRICT="
 	!system-ffmpeg? ( proprietary-codecs? ( bindist ) )
@@ -162,6 +164,7 @@ are not displayed properly:
 - media-fonts/droid
 - media-fonts/ipamonafont
 - media-fonts/noto
+- media-fonts/noto-emoji
 - media-fonts/ja-ipafonts
 - media-fonts/takao-fonts
 - media-fonts/wqy-microhei
@@ -175,7 +178,7 @@ GTK+ icon theme.
 PATCHES=(
 	"${FILESDIR}/${PN}-atk-r0.patch"
 	"${FILESDIR}/${PN}-compiler-r5.patch"
-	"${FILESDIR}/${PN}-gold-r0.patch"
+	"${FILESDIR}/${PN}-gold-r1.patch"
 )
 
 S="${WORKDIR}/chromium-${PV/_*}"
@@ -234,13 +237,14 @@ src_prepare() {
 	local ugc_unneeded=(
 		# ARM related patch
 		common:gcc_skcms_ice
-		# GCC fixes/warnings
-		#common:alignof
+		# GCC specific fixes/warnings
+		common:alignof
 		common:as-needed
 		common:enum-compare
 		common:explicit-constructor
 		common:initialization
 		common:int-in-bool-context
+		common:member-assignment
 		common:multichar
 		common:null-destination
 		common:printf
@@ -411,15 +415,6 @@ src_prepare() {
 		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
 		third_party/openmax_dl
 		third_party/ots
-		third_party/pdfium
-		third_party/pdfium/third_party/agg23
-		third_party/pdfium/third_party/base
-		third_party/pdfium/third_party/bigint
-		third_party/pdfium/third_party/freetype
-		third_party/pdfium/third_party/lcms
-		third_party/pdfium/third_party/libpng16
-		third_party/pdfium/third_party/libtiff
-		third_party/pdfium/third_party/skia_shared
 		third_party/ply
 		third_party/polymer
 		third_party/protobuf
@@ -459,7 +454,6 @@ src_prepare() {
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/src/third_party/utf8-decoder
-		v8/third_party/inspector_protocol
 		v8/third_party/v8
 
 		# gyp -> gn leftovers
@@ -470,20 +464,36 @@ src_prepare() {
 		third_party/yasm/run_yasm.py
 	)
 
-	use system-ffmpeg || keeplibs+=( third_party/ffmpeg third_party/opus )
-	if ! use system-harfbuzz; then
-		keeplibs+=( third_party/freetype )
-		keeplibs+=( third_party/harfbuzz-ng )
+	if use pdf; then
+		keeplibs+=(
+			third_party/pdfium
+			third_party/pdfium/third_party/agg23
+			third_party/pdfium/third_party/base
+			third_party/pdfium/third_party/bigint
+			third_party/pdfium/third_party/freetype
+			third_party/pdfium/third_party/lcms
+			third_party/pdfium/third_party/libpng16
+			third_party/pdfium/third_party/libtiff
+			third_party/pdfium/third_party/skia_shared
+		)
+		use system-openjpeg || keeplibs+=(
+			third_party/pdfium/third_party/libopenjpeg20
+		)
 	fi
+
+	use system-ffmpeg || keeplibs+=( third_party/ffmpeg third_party/opus )
+	use system-harfbuzz || keeplibs+=(
+		third_party/freetype
+		third_party/harfbuzz-ng
+	)
 	use system-icu || keeplibs+=( third_party/icu )
 	use system-jsoncpp || keeplibs+=( third_party/jsoncpp )
 	use system-libevent || keeplibs+=( base/third_party/libevent )
-	if ! use system-libvpx; then
-		keeplibs+=( third_party/libvpx )
-		keeplibs+=( third_party/libvpx/source/libvpx/third_party/x86inc )
-	fi
+	use system-libvpx || keeplibs+=(
+		third_party/libvpx
+		third_party/libvpx/source/libvpx/third_party/x86inc
+	)
 	use system-openh264 || keeplibs+=( third_party/openh264 )
-	use system-openjpeg || keeplibs+=( third_party/pdfium/third_party/libopenjpeg20 )
 	use tcmalloc && keeplibs+=( third_party/tcmalloc )
 
 	# Remove most bundled libraries, some are still needed
@@ -526,7 +536,16 @@ setup_compile_flags() {
 		# from 25% to 10%. The performance number of page_cycler is the
 		# same on two of the thinLTO configurations, we got 1% slowdown
 		# on speedometer when changing import-instr-limit from 100 to 30.
-		append-ldflags "-Wl,-plugin-opt,-import-instr-limit=30"
+		local thinlto_ldflag=( "-Wl,-plugin-opt,-import-instr-limit=30" )
+
+		use gold && thinlto_ldflag+=(
+			"-Wl,-plugin-opt=thinlto"
+			"-Wl,-plugin-opt,jobs=$(makeopts_jobs)"
+		)
+
+		use lld && thinlto_ldflag+=( "-Wl,--thinlto-jobs=$(makeopts_jobs)" )
+
+		append-ldflags "${thinlto_ldflag[*]}"
 	fi
 
 	# Enable std::vector []-operator bounds checking (https://crbug.com/333391)
@@ -597,84 +616,90 @@ src_configure() {
 
 	build/linux/unbundle/replace_gn_files.py --system-libraries "${gn_system_libraries[@]}" || die
 
-	local myconf_gn=""
-	# Clang features
-	myconf_gn+=" is_cfi=$(usetf cfi)" # Implies use_cfi_icall=true
-	myconf_gn+=" is_clang=true"
-	myconf_gn+=" clang_use_chrome_plugins=false"
-	myconf_gn+=" thin_lto_enable_optimizations=$(usetf optimize-thinlto)"
-	myconf_gn+=" use_lld=$(usetf lld)"
-	myconf_gn+=" use_thin_lto=$(usetf thinlto)"
+	local myconf_gn=(
+		# Clang features
+		"is_cfi=$(usetf cfi)" # Implies use_cfi_icall=true
+		"is_clang=true"
+		"clang_use_chrome_plugins=false"
+		"thin_lto_enable_optimizations=$(usetf optimize-thinlto)"
+		"use_lld=$(usetf lld)"
+		"use_thin_lto=$(usetf thinlto)"
 
-	# UGC's "common" GN flags (config_bundles/common/gn_flags.map)
-	myconf_gn+=" blink_symbol_level=0"
-	myconf_gn+=" enable_ac3_eac3_audio_demuxing=true"
-	myconf_gn+=" enable_hangout_services_extension=false"
-	myconf_gn+=" enable_hevc_demuxing=true"
-	myconf_gn+=" enable_iterator_debugging=false"
-	myconf_gn+=" enable_mdns=false"
-	myconf_gn+=" enable_mse_mpeg2ts_stream_parser=true"
-	myconf_gn+=" enable_nacl=false"
-	myconf_gn+=" enable_nacl_nonsfi=false"
-	myconf_gn+=" enable_one_click_signin=false"
-	myconf_gn+=" enable_reading_list=false"
-	myconf_gn+=" enable_remoting=false"
-	myconf_gn+=" enable_reporting=false"
-	myconf_gn+=" enable_service_discovery=false"
-	myconf_gn+=" enable_swiftshader=false"
-	myconf_gn+=" enable_widevine=$(usetf widevine)"
-	myconf_gn+=" exclude_unwind_tables=true"
-	myconf_gn+=" fatal_linker_warnings=false"
-	myconf_gn+=" ffmpeg_branding=\"$(usex proprietary-codecs Chrome Chromium)\""
-	myconf_gn+=" fieldtrial_testing_like_official_build=true"
-	myconf_gn+=" google_api_key=\"\""
-	myconf_gn+=" google_default_client_id=\"\""
-	myconf_gn+=" google_default_client_secret=\"\""
-	myconf_gn+=" is_debug=false"
-	myconf_gn+=" is_official_build=true"
-	myconf_gn+=" optimize_webui=$(usetf optimize-webui)"
-	myconf_gn+=" proprietary_codecs=$(usetf proprietary-codecs)"
-	myconf_gn+=" safe_browsing_mode=0"
-	myconf_gn+=" symbol_level=0"
-	myconf_gn+=" treat_warnings_as_errors=false"
-	myconf_gn+=" use_atk=$(usetf atk)"
-	myconf_gn+=" use_gnome_keyring=false" # Deprecated by libsecret
-	myconf_gn+=" use_jumbo_build=$(usetf jumbo-build)"
-	myconf_gn+=" use_official_google_api_keys=false"
-	myconf_gn+=" use_ozone=false"
-	myconf_gn+=" use_sysroot=false"
-	myconf_gn+=" use_unofficial_version_number=false"
+		# UGC's "common" GN flags (config_bundles/common/gn_flags.map)
+		"blink_symbol_level=0"
+		"enable_ac3_eac3_audio_demuxing=true"
+		"enable_hangout_services_extension=false"
+		"enable_hevc_demuxing=true"
+		"enable_iterator_debugging=false"
+		"enable_mdns=false"
+		"enable_mse_mpeg2ts_stream_parser=true"
+		"enable_nacl=false"
+		"enable_nacl_nonsfi=false"
+		"enable_one_click_signin=false"
+		"enable_pdf=$(usetf pdf)"
+		"enable_print_preview=$(usetf pdf)"
+		"enable_reading_list=false"
+		"enable_remoting=false"
+		"enable_reporting=false"
+		"enable_service_discovery=false"
+		"enable_swiftshader=false"
+		"enable_widevine=$(usetf widevine)"
+		"exclude_unwind_tables=true"
+		"fatal_linker_warnings=false"
+		"ffmpeg_branding=\"$(usex proprietary-codecs Chrome Chromium)\""
+		"fieldtrial_testing_like_official_build=true"
+		"google_api_key=\"\""
+		"google_default_client_id=\"\""
+		"google_default_client_secret=\"\""
+		"is_debug=false"
+		"is_official_build=true"
+		"optimize_webui=$(usetf optimize-webui)"
+		"proprietary_codecs=$(usetf proprietary-codecs)"
+		"safe_browsing_mode=0"
+		"symbol_level=0"
+		"treat_warnings_as_errors=false"
+		"use_atk=$(usetf atk)"
+		"use_gnome_keyring=false" # Deprecated by libsecret
+		"use_jumbo_build=$(usetf jumbo-build)"
+		"use_official_google_api_keys=false"
+		"use_ozone=false"
+		"use_sysroot=false"
+		"use_unofficial_version_number=false"
 
-	# UGC's "linux_rooted" GN flags (config_bundles/linux_rooted/gn_flags.map)
-	myconf_gn+=" custom_toolchain=\"//build/toolchain/linux/unbundle:default\""
-	myconf_gn+=" gold_path=\"\""
-	myconf_gn+=" goma_dir=\"\""
-	myconf_gn+=" host_toolchain=\"//build/toolchain/linux/unbundle:default\""
-	myconf_gn+=" link_pulseaudio=$(usetf pulseaudio)"
-	myconf_gn+=" linux_use_bundled_binutils=false"
-	myconf_gn+=" optimize_for_size=false"
-	myconf_gn+=" use_allocator=\"$(usex tcmalloc tcmalloc none)\""
-	myconf_gn+=" use_cups=$(usetf cups)"
-	myconf_gn+=" use_custom_libcxx=false"
-	myconf_gn+=" use_gio=$(usetf gnome)"
-	myconf_gn+=" use_kerberos=$(usetf kerberos)"
-	# If enabled, it will build the bundled OpenH264 for encoding,
-	# hence the restriction: !system-openh264? ( bindist )
-	myconf_gn+=" use_openh264=$(usetf !system-openh264)"
-	myconf_gn+=" use_pulseaudio=$(usetf pulseaudio)"
-	# HarfBuzz and FreeType need to be built together in a specific way
-	# to get FreeType autohinting to work properly. Chromium bundles
-	# FreeType and HarfBuzz to meet that need. (https://crbug.com/694137)
-	myconf_gn+=" use_system_freetype=$(usetf system-harfbuzz)"
-	myconf_gn+=" use_system_harfbuzz=$(usetf system-harfbuzz)"
-	myconf_gn+=" use_system_lcms2=true"
-	myconf_gn+=" use_system_libjpeg=true"
-	myconf_gn+=" use_system_zlib=true"
-	myconf_gn+=" use_vaapi=$(usetf vaapi)"
+		# UGC's "linux_rooted" GN flags (config_bundles/linux_rooted/gn_flags.map)
+		"custom_toolchain=\"//build/toolchain/linux/unbundle:default\""
+		"gold_path=\"\""
+		"goma_dir=\"\""
+		"host_toolchain=\"//build/toolchain/linux/unbundle:default\""
+		"link_pulseaudio=$(usetf pulseaudio)"
+		"linux_use_bundled_binutils=false"
+		"optimize_for_size=false"
+		"use_allocator=\"$(usex tcmalloc tcmalloc none)\""
+		"use_cups=$(usetf cups)"
+		"use_custom_libcxx=false"
+		"use_gio=$(usetf gnome)"
+		"use_kerberos=$(usetf kerberos)"
+		# If enabled, it will build the bundled OpenH264 for encoding,
+		# hence the restriction: !system-openh264? ( bindist )
+		"use_openh264=$(usetf !system-openh264)"
+		"use_pulseaudio=$(usetf pulseaudio)"
+		# HarfBuzz and FreeType need to be built together in a specific way
+		# to get FreeType autohinting to work properly. Chromium bundles
+		# FreeType and HarfBuzz to meet that need. (https://crbug.com/694137)
+		"use_system_freetype=$(usetf system-harfbuzz)"
+		"use_system_harfbuzz=$(usetf system-harfbuzz)"
+		"use_system_lcms2=true"
+		"use_system_libjpeg=true"
+		"use_system_zlib=true"
+		"use_vaapi=$(usetf vaapi)"
 
-	# Enables the experimental tcmalloc (https://crbug.com/724399)
-	# It is relevant only when use_allocator == "tcmalloc"
-	myconf_gn+=" use_new_tcmalloc=$(usetf new-tcmalloc)"
+		# Enables the soon-to-be default tcmalloc (https://crbug.com/724399)
+		# It is relevant only when use_allocator == "tcmalloc"
+		"use_new_tcmalloc=$(usetf new-tcmalloc)"
+	)
+
+	# use_cfi_icall only works with LLD
+	use cfi && myconf_gn+=( "use_cfi_icall=$(usetf lld)" )
 
 	setup_compile_flags
 
@@ -687,14 +712,14 @@ src_configure() {
 	addpredict /dev/dri/ #nowarn
 
 	einfo "Configuring Chromium..."
-	set -- gn gen --args="${myconf_gn} ${EXTRA_GN}" out/Release
+	set -- gn gen --args="${myconf_gn[*]} ${EXTRA_GN}" out/Release
 	echo "$@"
 	"$@" || die
 }
 
 src_compile() {
 	# Final link uses lots of file descriptors
-	ulimit -n 2048
+	ulimit -n 4096
 
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup 'python2*'
