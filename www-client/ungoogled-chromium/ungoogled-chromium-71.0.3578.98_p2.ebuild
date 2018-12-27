@@ -39,7 +39,6 @@ REQUIRED_USE="
 	|| ( $(python_gen_useflags 'python3*') )
 	|| ( $(python_gen_useflags 'python2*') )
 	cfi? ( amd64 thinlto )
-	cups? ( pdf )
 	libcxx? ( new-tcmalloc )
 	new-tcmalloc? ( tcmalloc )
 	optimize-thinlto? ( thinlto )
@@ -50,54 +49,29 @@ RESTRICT="
 	!system-openh264? ( bindist )
 "
 
-COMMON_DEPEND="
-	atk? (
-		>=app-accessibility/at-spi2-atk-2.26:2
-		>=dev-libs/atk-2.26
-	)
+CDEPEND="
 	app-arch/bzip2:=
-	cups? ( >=net-print/cups-1.3.11:= )
+	app-arch/snappy:=
 	dev-libs/expat:=
-	system-jsoncpp? ( dev-libs/jsoncpp )
 	dev-libs/glib:2
-	system-icu? ( >=dev-libs/icu-58.2:= )
-	system-libevent? ( dev-libs/libevent )
 	>=dev-libs/libxml2-2.9.4-r3:=[icu]
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
 	>=dev-libs/nss-3.26:=
 	>=dev-libs/re2-0.2016.11.01:=
 	>=media-libs/alsa-lib-1.0.19:=
+	media-libs/flac:=
 	media-libs/fontconfig:=
-	system-harfbuzz? (
-		media-libs/freetype:=
-		>=media-libs/harfbuzz-2.0.0:0=[icu(-)]
-	)
 	media-libs/libjpeg-turbo:=
 	media-libs/libpng:=
-	system-libvpx? ( >=media-libs/libvpx-1.7.0:=[postproc,svc] )
-	system-openh264? ( >=media-libs/openh264-1.6.0:= )
-	system-openjpeg? ( media-libs/openjpeg:2 )
-	pulseaudio? ( media-sound/pulseaudio:= )
-	system-ffmpeg? (
-		>=media-video/ffmpeg-4:=
-		|| (
-			media-video/ffmpeg[-samba]
-			>=net-fs/samba-4.5.16[-debug(-)]
-		)
-		media-libs/opus:=
-	)
+	>=media-libs/libwebp-0.4.0:=
 	sys-apps/dbus:=
 	sys-apps/pciutils:=
-	libcxx? (
-		sys-libs/libcxx
-		sys-libs/libcxxabi
-	)
+	sys-libs/zlib:=[minizip]
 	virtual/udev
 	x11-libs/cairo:=
 	x11-libs/gdk-pixbuf:2
 	x11-libs/gtk+:3[X]
-	vaapi? ( x11-libs/libva:= )
 	x11-libs/libX11:=
 	x11-libs/libXcomposite:=
 	x11-libs/libXcursor:=
@@ -110,26 +84,47 @@ COMMON_DEPEND="
 	x11-libs/libXScrnSaver:=
 	x11-libs/libXtst:=
 	x11-libs/pango:=
-	app-arch/snappy:=
-	media-libs/flac:=
-	>=media-libs/libwebp-0.4.0:=
-	sys-libs/zlib:=[minizip]
+	atk? (
+		>=app-accessibility/at-spi2-atk-2.26:2
+		>=dev-libs/atk-2.26
+	)
+	cups? ( >=net-print/cups-1.3.11:= )
 	kerberos? ( virtual/krb5 )
+	pulseaudio? ( media-sound/pulseaudio:= )
+	system-ffmpeg? (
+		>=media-video/ffmpeg-4:=
+		|| (
+			media-video/ffmpeg[-samba]
+			>=net-fs/samba-4.5.16[-debug(-)]
+		)
+		media-libs/opus:=
+	)
+	system-harfbuzz? (
+		media-libs/freetype:=
+		>=media-libs/harfbuzz-2.0.0:0=[icu(-)]
+	)
+	system-icu? ( >=dev-libs/icu-58.2:= )
+	system-jsoncpp? ( dev-libs/jsoncpp )
+	system-libevent? ( dev-libs/libevent )
+	system-libvpx? ( >=media-libs/libvpx-1.7.0:=[postproc,svc] )
+	system-openh264? ( >=media-libs/openh264-1.6.0:= )
+	system-openjpeg? ( media-libs/openjpeg:2= )
+	vaapi? ( x11-libs/libva:= )
 "
 # For nvidia-drivers blocker (Bug #413637)
-RDEPEND="${COMMON_DEPEND}
-	x11-misc/xdg-utils
+RDEPEND="${CDEPEND}
 	virtual/opengl
 	virtual/ttf-fonts
+	x11-misc/xdg-utils
 	selinux? ( sec-policy/selinux-chromium )
 	tcmalloc? ( !<x11-drivers/nvidia-drivers-331.20 )
-	!x86? ( widevine? ( www-plugins/chrome-binary-plugins[widevine(-)] ) )
 	!www-client/chromium
 	!www-client/ungoogled-chromium-bin
+	!x86? ( widevine? ( www-plugins/chrome-binary-plugins[widevine(-)] ) )
 "
 # dev-vcs/git (Bug #593476)
 # sys-apps/sandbox - https://crbug.com/586444
-DEPEND="${COMMON_DEPEND}"
+DEPEND="${CDEPEND}"
 BDEPEND="
 	>=app-arch/gzip-1.7
 	dev-lang/perl
@@ -137,17 +132,21 @@ BDEPEND="
 	dev-util/gn
 	>=dev-util/gperf-3.0.3
 	>=dev-util/ninja-1.7.2
-	>net-libs/nodejs-6[inspector]
+	dev-vcs/git
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
 	>=sys-devel/clang-7.0.0
-	cfi? ( >=sys-devel/clang-runtime-7.0.0[sanitize] )
 	sys-devel/flex
-	lld? ( >=sys-devel/lld-7.0.0 )
 	>=sys-devel/llvm-7.0.0[gold?]
 	virtual/libusb:1
 	virtual/pkgconfig
-	dev-vcs/git
+	cfi? ( >=sys-devel/clang-runtime-7.0.0[sanitize] )
+	libcxx? (
+		sys-libs/libcxx
+		sys-libs/libcxxabi
+	)
+	lld? ( >=sys-devel/lld-7.0.0 )
+	optimize-webui? ( >=net-libs/nodejs-7.6.0[inspector] )
 "
 
 # shellcheck disable=SC2086
@@ -214,8 +213,11 @@ src_prepare() {
 
 	default
 
-	mkdir -p third_party/node/linux/node-linux-x64/bin || die
-	ln -s "${EPREFIX}/usr/bin/node" third_party/node/linux/node-linux-x64/bin/node || die
+	if use optimize-webui; then
+		mkdir -p third_party/node/linux/node-linux-x64/bin || die
+		ln -s "${EPREFIX}/usr/bin/node" \
+			third_party/node/linux/node-linux-x64/bin/node || die
+	fi
 
 	# Apply extra patches (taken from openSUSE)
 	local p
@@ -333,6 +335,7 @@ src_prepare() {
 		net/third_party/uri_template
 		third_party/WebKit
 		third_party/abseil-cpp
+		third_party/adobe
 		third_party/angle
 		third_party/angle/src/common/third_party/base
 		third_party/angle/src/common/third_party/smhasher
@@ -411,8 +414,6 @@ src_prepare() {
 		third_party/mesa
 		third_party/metrics_proto
 		third_party/modp_b64
-		third_party/node
-		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
 		third_party/openmax_dl
 		third_party/ots
 		third_party/ply
@@ -430,11 +431,13 @@ src_prepare() {
 		third_party/skia/third_party/skcms
 		third_party/skia/third_party/vulkan
 		third_party/smhasher
+		third_party/speech-dispatcher
 		third_party/spirv-headers
 		third_party/SPIRV-Tools
 		third_party/spirv-tools-angle
 		third_party/sqlite
 		third_party/ungoogled
+		third_party/usb_ids
 		third_party/usrsctp
 		third_party/vulkan
 		third_party/vulkan-validation-layers
@@ -450,37 +453,33 @@ src_prepare() {
 		third_party/webrtc/rtc_base/third_party/sigslot
 		third_party/widevine
 		third_party/woff2
+		third_party/xdg-utils
+		third_party/yasm/run_yasm.py
 		third_party/zlib/google
 		url/third_party/mozilla
 		v8/src/third_party/valgrind
 		v8/src/third_party/utf8-decoder
 		v8/third_party/v8
-
-		# gyp -> gn leftovers
-		third_party/adobe
-		third_party/speech-dispatcher
-		third_party/usb_ids
-		third_party/xdg-utils
-		third_party/yasm/run_yasm.py
 	)
 
-	if use pdf; then
-		keeplibs+=(
-			third_party/pdfium
-			third_party/pdfium/third_party/agg23
-			third_party/pdfium/third_party/base
-			third_party/pdfium/third_party/bigint
-			third_party/pdfium/third_party/freetype
-			third_party/pdfium/third_party/lcms
-			third_party/pdfium/third_party/libpng16
-			third_party/pdfium/third_party/libtiff
-			third_party/pdfium/third_party/skia_shared
-		)
-		use system-openjpeg || keeplibs+=(
-			third_party/pdfium/third_party/libopenjpeg20
-		)
-	fi
-
+	use optimize-webui && keeplibs+=(
+		third_party/node
+		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
+	)
+	use pdf && keeplibs+=(
+		third_party/pdfium
+		third_party/pdfium/third_party/agg23
+		third_party/pdfium/third_party/base
+		third_party/pdfium/third_party/bigint
+		third_party/pdfium/third_party/freetype
+		third_party/pdfium/third_party/lcms
+		third_party/pdfium/third_party/libpng16
+		third_party/pdfium/third_party/libtiff
+		third_party/pdfium/third_party/skia_shared
+	)
+	use pdf && use system-openjpeg || keeplibs+=(
+		third_party/pdfium/third_party/libopenjpeg20
+	)
 	use system-ffmpeg || keeplibs+=( third_party/ffmpeg third_party/opus )
 	use system-harfbuzz || keeplibs+=(
 		third_party/freetype
@@ -546,6 +545,8 @@ setup_compile_flags() {
 		use lld && thinlto_ldflag+=( "-Wl,--thinlto-jobs=$(makeopts_jobs)" )
 
 		append-ldflags "${thinlto_ldflag[*]}"
+	else
+		use gold && append-ldflags "-Wl,--threads -Wl,--thread-count=$(makeopts_jobs)"
 	fi
 
 	# Enable std::vector []-operator bounds checking (https://crbug.com/333391)
@@ -582,14 +583,6 @@ src_configure() {
 	NM=llvm-nm
 	RANLIB=llvm-ranlib
 	strip-unsupported-flags
-
-	# Use system-provided libraries
-	# TODO: freetype -- remove sources (https://crbug.com/pdfium/733)
-	# TODO: use_system_hunspell (upstream changes needed)
-	# TODO: use_system_libsrtp (Bug #459932)
-	# TODO: use_system_protobuf (Bug #525560)
-	# TODO: use_system_ssl (https://crbug.com/58087)
-	# TODO: use_system_sqlite (https://crbug.com/22208)
 
 	local gn_system_libraries=(
 		flac
@@ -636,8 +629,6 @@ src_configure() {
 		"enable_nacl=false"
 		"enable_nacl_nonsfi=false"
 		"enable_one_click_signin=false"
-		"enable_pdf=$(usetf pdf)"
-		"enable_print_preview=$(usetf pdf)"
 		"enable_reading_list=false"
 		"enable_remoting=false"
 		"enable_reporting=false"
@@ -658,7 +649,6 @@ src_configure() {
 		"safe_browsing_mode=0"
 		"symbol_level=0"
 		"treat_warnings_as_errors=false"
-		"use_atk=$(usetf atk)"
 		"use_gnome_keyring=false" # Deprecated by libsecret
 		"use_jumbo_build=$(usetf jumbo-build)"
 		"use_official_google_api_keys=false"
@@ -693,6 +683,11 @@ src_configure() {
 		"use_system_zlib=true"
 		"use_vaapi=$(usetf vaapi)"
 
+		# Additional flags
+		"enable_pdf=$(usetf pdf)"
+		"enable_print_preview=$(usetf pdf)"
+		"use_atk=$(usetf atk)"
+		"use_icf=true"
 		# Enables the soon-to-be default tcmalloc (https://crbug.com/724399)
 		# It is relevant only when use_allocator == "tcmalloc"
 		"use_new_tcmalloc=$(usetf new-tcmalloc)"
@@ -708,7 +703,7 @@ src_configure() {
 	# shellcheck disable=SC2174
 	mkdir -p -m 755 "${TMPDIR}" || die
 
-	# But #654216
+	# Bug #654216
 	addpredict /dev/dri/ #nowarn
 
 	einfo "Configuring Chromium..."
