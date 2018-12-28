@@ -25,6 +25,7 @@ REQUIRED_USE="
 RDEPEND="
 	>=dev-libs/libuv-1.24.1:=
 	>=net-dns/c-ares-1.15.0
+	>net-libs/http-parser-2.8.1:=
 	>=net-libs/nghttp2-1.34.0
 	sys-libs/zlib
 	icu? ( >=dev-libs/icu-63.1:= )
@@ -36,12 +37,12 @@ DEPEND="
 	systemtap? ( dev-util/systemtap )
 	test? ( net-misc/curl )
 "
-S="${WORKDIR}/node-v${PV}"
 PATCHES=(
 	"${FILESDIR}"/${PN}-10.3.0-global-npm-config.patch
 	"${FILESDIR}"/${PN}-11.4.0-stdarg_h.patch
 	"${FILESDIR}"/${PN}-99999999-llhttp.patch
 )
+S="${WORKDIR}/node-v${PV}"
 
 pkg_pretend() {
 	(use x86 && ! use cpu_flags_x86_sse2) && \
@@ -94,7 +95,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=( --shared-cares --experimental-http-parser --shared-libuv --shared-nghttp2 --shared-zlib )
+	local myconf=( --shared-cares --shared-http-parser --shared-libuv --shared-nghttp2 --shared-zlib )
 	use debug && myconf+=( --debug )
 	use icu && myconf+=( --with-intl=system-icu ) || myconf+=( --with-intl=none )
 	use inspector || myconf+=( --without-inspector )
