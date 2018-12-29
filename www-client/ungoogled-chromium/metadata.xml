@@ -43,7 +43,7 @@
 			LLD is a linker from the LLVM project. That is a drop-in replacement
 			for system linkers and runs much faster than them (recommended).
 		</flag>
-		<flag name="new-tcmalloc">Use the new tcmalloc (EXPERIMENTAL).</flag>
+		<flag name="new-tcmalloc">Use the soon-to-be default tcmalloc.</flag>
 		<flag name="optimize-thinlto">
 			Whether to enable ThinLTO optimizations. Turning ThinLTO
 			optimizations on can substantially increase link time and binary
@@ -54,6 +54,7 @@
 			(HTML/CSS/JS) for runtime performance purposes. This does more
 			work at compile time for speed benefits at runtime.
 		</flag>
+		<flag name="pdf">Enable PDF (Portable Document Format) viewer</flag>
 		<flag name="proprietary-codecs">
 			Enable proprietary codecs like H.264, MP3.
 		</flag>
