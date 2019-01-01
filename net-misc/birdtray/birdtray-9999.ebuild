@@ -24,7 +24,7 @@ src_configure() {
 	eqmake5
 }
 
-src_configure() {
+src_install() {
 	emake install
 }
 
