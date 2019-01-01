@@ -24,10 +24,6 @@ src_configure() {
 	eqmake5
 }
 
-src_install() {
-	default
-}
-
 pkg_preinst() { gnome2_icon_savelist; }
 pkg_postinst() { gnome2_icon_cache_update; }
 pkg_postrm() { gnome2_icon_cache_update; }
