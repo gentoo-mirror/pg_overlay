@@ -118,7 +118,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/nss
 	>=dev-libs/redland-1.0.16
 	>=dev-libs/xmlsec-1.2.24[nss]
-	media-gfx/fontforge
 	media-gfx/graphite2
 	media-libs/fontconfig
 	media-libs/freetype:2
