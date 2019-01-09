@@ -1,5 +1,4 @@
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
-app-office/libreoffice 6.1.4.2: A full office productivity suite
 app-shells/quoter 4.1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/iso-codes 3.76: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
