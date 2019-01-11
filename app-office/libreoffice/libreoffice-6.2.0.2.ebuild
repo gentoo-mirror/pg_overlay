@@ -102,6 +102,8 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-text/mythes
 	>=dev-cpp/clucene-2.3.3.4-r2
 	=dev-cpp/libcmis-0.5*
+	dev-db/mariadb
+	dev-db/mariadb-connector-c
 	dev-db/unixODBC
 	dev-lang/perl
 	dev-libs/boost:=[nls]
@@ -118,7 +120,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/nss
 	>=dev-libs/redland-1.0.16
 	>=dev-libs/xmlsec-1.2.24[nss]
-	dev-db/mariadb
 	media-gfx/fontforge
 	media-gfx/graphite2
 	media-libs/fontconfig
