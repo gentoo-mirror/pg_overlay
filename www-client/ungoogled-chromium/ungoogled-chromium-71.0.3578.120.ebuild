@@ -46,7 +46,7 @@ REQUIRED_USE="
 	system-openjpeg? ( pdf )
 	x86? ( !lld !thinlto !widevine )
 "
-RESTRICT="
+RESTRICT="mirror
 	!system-ffmpeg? ( proprietary-codecs? ( bindist ) )
 	!system-openh264? ( bindist )
 "
@@ -59,7 +59,7 @@ CDEPEND="
 	dev-libs/libxslt:=
 	dev-libs/nspr:=
 	>=dev-libs/nss-3.26:=
-	>=dev-libs/re2-0.2016.11.01:=
+	>=dev-libs/re2-0.2018.10.01:=
 	>=media-libs/alsa-lib-1.0.19:=
 	media-libs/flac:=
 	media-libs/fontconfig:=
@@ -262,8 +262,6 @@ src_prepare() {
 		common:no-such-option-no-sysroot
 		common:parallel
 		rooted:libcxx
-		# Remove "optimize_for_size" redundancy
-		common:optimize
 	)
 
 	local ugc_use=(
@@ -529,8 +527,10 @@ setup_compile_flags() {
 		append-cxxflags "-stdlib=libc++"
 		append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
 	else
-		has_version 'sys-devel/clang[default-libcxx]' && \
+		if has_version 'sys-devel/clang[default-libcxx]'; then
 			append-cxxflags "-stdlib=libstdc++"
+			append-ldflags "-stdlib=libstdc++"
+		fi
 	fi
 
 	# 'gcc_s' is still required if 'compiler-rt' is Clang's default rtlib
