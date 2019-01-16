@@ -527,8 +527,10 @@ setup_compile_flags() {
 		append-cxxflags "-stdlib=libc++"
 		append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
 	else
-		has_version 'sys-devel/clang[default-libcxx]' && \
+		if has_version 'sys-devel/clang[default-libcxx]'; then
 			append-cxxflags "-stdlib=libstdc++"
+			append-ldflags "-stdlib=libstdc++"
+		fi
 	fi
 
 	# 'gcc_s' is still required if 'compiler-rt' is Clang's default rtlib
