@@ -258,7 +258,6 @@ src_configure() {
 		# Miscellaneous features:
 		--disable-apple-remote	# Needs testing first. See Gentoo bug 577332.
 		--jobs=$(makeopts_jobs)
-		$(use_enable vulkan shaderc-shared)
 	)
 
 	if use vaapi && use X; then
