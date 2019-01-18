@@ -35,7 +35,7 @@ all_ruby_prepare() {
 	sed -i -e '/maruku/d' .yardopts || die
 
 	# Keep VERSION_DATE around since we don't create a new package
-	sed -i -e '/at_exit/,/end/ s:^:#:' Rakefile || die
+	#sed -i -e '/at_exit/,/end/ s:^:#:' Rakefile || die
 }
 
 each_ruby_test() {
