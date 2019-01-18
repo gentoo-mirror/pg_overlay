@@ -83,4 +83,6 @@ multilib_src_install() {
 		use doc && local HTML_DOCS=( "${BUILD_DIR}/glslc/README.html" )
 	fi
 	cmake-utils_src_install
+
+	doins libshaderc_util/include/libshaderc_util "${EPREFIX}/usr/include/${EPREFIX}/libshaderc_util"
 }
