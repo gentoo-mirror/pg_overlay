@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python{2_7,3_4,3_5,3_6} )
+PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7} )
 
 inherit cmake-multilib python-any-r1 git-r3
 
@@ -33,7 +33,7 @@ DEPEND="${RDEPEND}
 # https://github.com/google/shaderc/issues/470
 RESTRICT=test
 
-PATCHES=( "${FILESDIR}/${PN}-2017.2-fix-glslang-link-order.patch" )
+#PATCHES=( "${FILESDIR}/${PN}-2017.2-fix-glslang-link-order.patch" )
 
 python_check_deps() {
 	if use test; then
