@@ -86,5 +86,5 @@ multilib_src_install() {
 
 	dodir "${EPREFIX}/usr/include/libshaderc_util/"
 	insinto "${EPREFIX}/usr/include/libshaderc_util/"
-	doins libshaderc_util/include/libshaderc_util/*
+	doins ${S}/libshaderc_util/include/libshaderc_util/*
 }
