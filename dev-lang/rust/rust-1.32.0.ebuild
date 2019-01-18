@@ -18,10 +18,17 @@ else
 	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
-	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
+	KEYWORDS="~amd64 ~arm64 ~x86"
 fi
 
-RUST_STAGE0_VERSION="${PV}"
+CHOST_amd64=x86_64-unknown-linux-gnu
+CHOST_x86=i686-unknown-linux-gnu
+CHOST_arm64=aarch64-unknown-linux-gnu
+
+RUST_STAGE0_VERSION="${PV}" #Use current version for stage0
+RUST_STAGE0_amd64="rust-${RUST_STAGE0_VERSION}-${CHOST_amd64}"
+RUST_STAGE0_x86="rust-${RUST_STAGE0_VERSION}-${CHOST_x86}"
+RUST_STAGE0_arm64="rust-${RUST_STAGE0_VERSION}-${CHOST_arm64}"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
