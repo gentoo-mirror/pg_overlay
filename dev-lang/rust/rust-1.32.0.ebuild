@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python2_7 python3_{5,6} pypy )
+PYTHON_COMPAT=( python2_7 python3_{5,6,7} pypy )
 
 inherit check-reqs eapi7-ver estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
@@ -21,7 +21,7 @@ else
 	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 fi
 
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).1"
+RUST_STAGE0_VERSION="${PV}"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -36,9 +36,10 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc +jemalloc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
 
 COMMON_DEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
+		jemalloc? ( dev-libs/jemalloc )
 		sys-libs/zlib
 		!libressl? ( dev-libs/openssl:0= )
 		libressl? ( dev-libs/libressl:0= )
@@ -61,7 +62,9 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 
 S="${WORKDIR}/${MY_P}-src"
 
-PATCHES=( "${FILESDIR}"/1.30.1-clippy-sysroot.patch )
+PATCHES=( "${FILESDIR}"/1.30.1-clippy-sysroot.patch 
+		"${FILESDIR}"/0001-Try-to-get-the-target-triple-from-rustc-itself.patch
+		"${FILESDIR}"/0001-lldb_batchmode.py-try-import-_thread-for-Python-3.patch)
 
 toml_usex() {
 	usex "$1" true false
@@ -99,6 +102,22 @@ src_prepare() {
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	default
+
+	if use system-llvm; then
+		rm -rf src/llvm/ || die
+		# We never enable emscripten.
+		rm -rf src/llvm-emscripten/ || die
+		# We never enable other LLVM tools.
+		rm -rf src/tools/clang/ || die
+		rm -rf src/tools/lld/ || die
+		rm -rf src/tools/lldb/ || die
+	fi
+
+	# The configure macro will modify some autoconf-related files, which upsets
+	# cargo when it tries to verify checksums in those files.  If we just truncate
+	# that file list, cargo won't have anything to complain about.
+	find vendor -name .cargo-checksum.json \
+	-exec sed -i.uncheck -e 's/"files":{[^}]*}/"files":{ }/' '{}' '+'
 }
 
 src_configure() {
@@ -130,10 +149,13 @@ src_configure() {
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
+		enabled = true
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
+		thin-lto = true
 		targets = "${LLVM_TARGETS// /;}"
+		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
 		[build]
 		build = "${rust_target}"
@@ -142,25 +164,36 @@ src_configure() {
 		cargo = "${rust_stage0_root}/bin/cargo"
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
+		compiler-docs = $(toml_usex doc)
 		submodules = false
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = ${extended}
 		tools = [${tools}]
+		verbose = 0
+		sanitizers = false
+		profiler = false
 		[install]
 		prefix = "${EPREFIX}/usr"
 		libdir = "$(get_libdir)/${P}"
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
+		debug = $(toml_usex debug)
 		optimize = $(toml_usex !debug)
-		debuginfo = $(toml_usex debug)
+		codegen-units = 1
 		debug-assertions = $(toml_usex debug)
+		debuginfo = $(toml_usex debug)
+		use-jemalloc = $(toml_usex jemalloc)
+		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
 		channel = "stable"
 		rpath = false
+		codegen-tests = $(toml_usex debug)
+		dist-src = $(toml_usex debug)
 		lld = $(toml_usex wasm)
+		deny-warnings = false
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
