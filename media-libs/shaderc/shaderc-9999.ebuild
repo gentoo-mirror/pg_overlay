@@ -84,5 +84,5 @@ multilib_src_install() {
 	fi
 	cmake-utils_src_install
 
-	doins -r ${S}/libshaderc_util/include/libshaderc_util "${EPREFIX}/usr/include/"
+	doins -r ${S}/libshaderc_util/include/libshaderc_util/* "${EPREFIX}/usr/include/"
 }
