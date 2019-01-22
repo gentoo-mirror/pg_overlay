@@ -65,7 +65,7 @@ src_configure() {
 
 src_compile() {
 	# Parallel builds are fixed in v 1.43.x or newer
-	emake -j1
+	emake
 	use tools && emake -rC "${S}"/tools
 }
 
