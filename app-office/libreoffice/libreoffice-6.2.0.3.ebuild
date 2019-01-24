@@ -251,11 +251,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.4-system-pyuno.patch"
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
-
-	# master branch
-	"${FILESDIR}"/${PN}-6.2.0.1-poppler-0.71-{1,2}.patch
-	"${FILESDIR}"/${PN}-6.2.0.1-poppler-0.72.patch
-	"${FILESDIR}"/${P}-poppler-0.73.patch
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
@@ -407,6 +402,7 @@ src_configure() {
 		--enable-randr
 		--enable-release-build
 		--disable-breakpad
+		--disable-bundle-mariadb
 		--disable-ccache
 		--disable-dependency-tracking
 		--disable-epm
@@ -555,7 +551,7 @@ src_install() {
 		insinto /usr/$(get_libdir)/${PN}/program
 		newins "${WORKDIR}/branding-sofficerc" sofficerc
 		dodir /etc/env.d
-		echo "CONFIG_PROTECT=/usr/$(get_libdir)/${PN}/program/sofficerc" > "${ED}"etc/env.d/99${PN} || die
+		echo "CONFIG_PROTECT=/usr/$(get_libdir)/${PN}/program/sofficerc" > "${ED%/}"/etc/env.d/99${PN} || die
 	fi
 
 	# Hack for offlinehelp, this needs fixing upstream at some point.
@@ -564,8 +560,8 @@ src_install() {
 	insinto /usr/$(get_libdir)/libreoffice/help
 	doins xmlhelp/util/*.xsl
 
-	pax-mark -m "${ED}"usr/$(get_libdir)/libreoffice/program/soffice.bin
-	pax-mark -m "${ED}"usr/$(get_libdir)/libreoffice/program/unopkg.bin
+	pax-mark -m "${ED%/}"/usr/$(get_libdir)/libreoffice/program/soffice.bin
+	pax-mark -m "${ED%/}"/usr/$(get_libdir)/libreoffice/program/unopkg.bin
 }
 
 pkg_postinst() {
