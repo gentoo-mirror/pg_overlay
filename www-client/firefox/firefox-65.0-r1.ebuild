@@ -526,7 +526,6 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-mortar 
 	
 	mozconfig_annotate '' --disable-necko-wifi
 
