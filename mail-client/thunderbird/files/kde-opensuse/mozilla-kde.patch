@@ -1,16 +1,20 @@
 # HG changeset patch
-# Parent  d7a4d772ba2afb3ac43e2f2f234ffa55bcf50e70
+# Parent  58a0b60e25e7160c9877299a37a2f10660888e9a
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
 Bug: https://bugzilla.mozilla.org/show_bug.cgi?id=140751
      https://bugzilla.novell.com/show_bug.cgi?id=170055
 
-Index: firefox-60.2.0/modules/libpref/Preferences.cpp
-===================================================================
---- firefox-60.2.0.orig/modules/libpref/Preferences.cpp	2018-09-05 21:49:23.102829401 +0200
-+++ firefox-60.2.0/modules/libpref/Preferences.cpp	2018-09-05 21:49:31.498872824 +0200
-@@ -81,6 +81,7 @@
+diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
+--- a/modules/libpref/Preferences.cpp
++++ b/modules/libpref/Preferences.cpp
+@@ -76,16 +76,17 @@
+ #include "nsXPCOMCID.h"
+ #include "nsXPCOM.h"
+ #include "nsXULAppAPI.h"
+ #include "nsZipArchive.h"
+ #include "plbase64.h"
  #include "PLDHashTable.h"
  #include "plstr.h"
  #include "prlink.h"
@@ -18,7 +22,17 @@ Index: firefox-60.2.0/modules/libpref/Preferences.cpp
  
  #ifdef XP_WIN
  #include "windows.h"
-@@ -3873,6 +3874,7 @@ Preferences::InitInitialObjects()
+ #endif
+ 
+ using namespace mozilla;
+ 
+ #ifdef DEBUG
+@@ -3519,25 +3520,37 @@ static nsresult pref_ReadPrefFromJar(nsZ
+   // application pref files for backwards compatibility.
+   static const char* specialFiles[] = {
+ #if defined(XP_MACOSX)
+     "macprefs.js"
+ #elif defined(XP_WIN)
      "winpref.js"
  #elif defined(XP_UNIX)
      "unix.js"
@@ -26,7 +40,9 @@ Index: firefox-60.2.0/modules/libpref/Preferences.cpp
  #if defined(_AIX)
      ,
      "aix.js"
-@@ -3882,6 +3884,17 @@ Preferences::InitInitialObjects()
+ #endif
+ #elif defined(XP_BEOS)
+     "beos.js"
  #endif
    };
  
@@ -41,10 +57,20 @@ Index: firefox-60.2.0/modules/libpref/Preferences.cpp
 +    }
 +  }
 +
-   rv = pref_LoadPrefsInDir(
-     defaultPrefDir, specialFiles, ArrayLength(specialFiles));
+   rv = pref_LoadPrefsInDir(defaultPrefDir, specialFiles,
+                            ArrayLength(specialFiles));
    if (NS_FAILED(rv)) {
-@@ -3940,7 +3953,7 @@ Preferences::InitInitialObjects()
+     NS_WARNING("Error parsing application default preferences.");
+   }
+ 
+   // Load jar:$app/omni.jar!/defaults/preferences/*.js
+   // or jar:$gre/omni.jar!/defaults/preferences/*.js.
+@@ -3585,17 +3598,17 @@ static nsresult pref_ReadPrefFromJar(nsZ
+       }
+ 
+       nsCOMPtr<nsIFile> path = do_QueryInterface(elem);
+       if (!path) {
+         continue;
        }
  
        // Do we care if a file provided by this process fails to load?
@@ -53,11 +79,20 @@ Index: firefox-60.2.0/modules/libpref/Preferences.cpp
      }
    }
  
-Index: firefox-60.2.0/modules/libpref/moz.build
-===================================================================
---- firefox-60.2.0.orig/modules/libpref/moz.build	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/modules/libpref/moz.build	2018-09-05 21:49:31.498872824 +0200
-@@ -32,6 +32,10 @@ UNIFIED_SOURCES += [
+ #ifdef MOZ_WIDGET_ANDROID
+   // Set up the correct default for toolkit.telemetry.enabled. If this build
+   // has MOZ_TELEMETRY_ON_BY_DEFAULT *or* we're on the beta channel, telemetry
+   // is on by default, otherwise not. This is necessary so that beta users who
+   // are testing final release builds don't flipflop defaults.
+diff --git a/modules/libpref/moz.build b/modules/libpref/moz.build
+--- a/modules/libpref/moz.build
++++ b/modules/libpref/moz.build
+@@ -27,16 +27,20 @@ XPIDL_MODULE = 'pref'
+ EXPORTS.mozilla += [
+     'Preferences.h',
+ ]
+ 
+ UNIFIED_SOURCES += [
      'Preferences.cpp',
  ]
  
@@ -68,11 +103,20 @@ Index: firefox-60.2.0/modules/libpref/moz.build
  include('/ipc/chromium/chromium-config.mozbuild')
  
  FINAL_LIBRARY = 'xul'
-Index: firefox-60.2.0/python/mozbuild/mozpack/chrome/flags.py
-===================================================================
---- firefox-60.2.0.orig/python/mozbuild/mozpack/chrome/flags.py	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/python/mozbuild/mozpack/chrome/flags.py	2018-09-05 21:49:31.498872824 +0200
-@@ -225,6 +225,7 @@ class Flags(OrderedDict):
+ 
+ DEFINES['OS_ARCH'] = CONFIG['OS_ARCH']
+ DEFINES['MOZ_WIDGET_TOOLKIT'] = CONFIG['MOZ_WIDGET_TOOLKIT']
+ if CONFIG['MOZ_ENABLE_WEBRENDER']:
+     DEFINES['MOZ_ENABLE_WEBRENDER'] = True
+diff --git a/python/mozbuild/mozpack/chrome/flags.py b/python/mozbuild/mozpack/chrome/flags.py
+--- a/python/mozbuild/mozpack/chrome/flags.py
++++ b/python/mozbuild/mozpack/chrome/flags.py
+@@ -220,16 +220,17 @@ class Flags(OrderedDict):
+         'contentaccessible': Flag,
+         'os': StringFlag,
+         'osversion': VersionFlag,
+         'abi': StringFlag,
+         'platform': Flag,
          'xpcnativewrappers': Flag,
          'tablet': Flag,
          'process': StringFlag,
@@ -80,11 +124,20 @@ Index: firefox-60.2.0/python/mozbuild/mozpack/chrome/flags.py
      }
      RE = re.compile(r'([!<>=]+)')
  
-Index: firefox-60.2.0/python/mozbuild/mozpack/chrome/manifest.py
-===================================================================
---- firefox-60.2.0.orig/python/mozbuild/mozpack/chrome/manifest.py	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/python/mozbuild/mozpack/chrome/manifest.py	2018-09-05 21:49:31.498872824 +0200
-@@ -39,6 +39,7 @@ class ManifestEntry(object):
+     def __init__(self, *flags):
+         '''
+         Initialize a set of flags given in string form.
+            flags = Flags('contentaccessible=yes', 'appversion>=3.5')
+         '''
+diff --git a/python/mozbuild/mozpack/chrome/manifest.py b/python/mozbuild/mozpack/chrome/manifest.py
+--- a/python/mozbuild/mozpack/chrome/manifest.py
++++ b/python/mozbuild/mozpack/chrome/manifest.py
+@@ -34,16 +34,17 @@ class ManifestEntry(object):
+         'platformversion',
+         'os',
+         'osversion',
+         'abi',
+         'xpcnativewrappers',
          'tablet',
          'process',
          'contentaccessible',
@@ -92,11 +145,20 @@ Index: firefox-60.2.0/python/mozbuild/mozpack/chrome/manifest.py
      ]
  
      def __init__(self, base, *flags):
-Index: firefox-60.2.0/toolkit/components/downloads/moz.build
-===================================================================
---- firefox-60.2.0.orig/toolkit/components/downloads/moz.build	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/toolkit/components/downloads/moz.build	2018-09-05 21:49:31.498872824 +0200
-@@ -46,5 +46,9 @@ if CONFIG['MOZ_PLACES']:
+         '''
+         Initialize a manifest entry with the given base path and flags.
+         '''
+         self.base = base
+         self.flags = Flags(*flags)
+diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloads/moz.build
+--- a/toolkit/components/downloads/moz.build
++++ b/toolkit/components/downloads/moz.build
+@@ -41,10 +41,14 @@ EXTRA_JS_MODULES += [
+ 
+ if CONFIG['MOZ_PLACES']:
+     EXTRA_JS_MODULES += [
+         'DownloadHistory.jsm',
+     ]
  
  FINAL_LIBRARY = 'xul'
  
@@ -106,11 +168,15 @@ Index: firefox-60.2.0/toolkit/components/downloads/moz.build
 +
  with Files('**'):
      BUG_COMPONENT = ('Toolkit', 'Download Manager')
-Index: firefox-60.2.0/toolkit/content/jar.mn
-===================================================================
---- firefox-60.2.0.orig/toolkit/content/jar.mn	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/toolkit/content/jar.mn	2018-09-05 21:49:31.498872824 +0200
-@@ -74,6 +74,8 @@ toolkit.jar:
+diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
+--- a/toolkit/content/jar.mn
++++ b/toolkit/content/jar.mn
+@@ -69,16 +69,18 @@ toolkit.jar:
+    content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
+    content/global/bindings/colorpicker.xml     (widgets/colorpicker.xml)
+    content/global/bindings/datekeeper.js       (widgets/datekeeper.js)
+    content/global/bindings/datepicker.js       (widgets/datepicker.js)
+    content/global/bindings/datetimepopup.xml   (widgets/datetimepopup.xml)
     content/global/bindings/datetimebox.xml     (widgets/datetimebox.xml)
     content/global/bindings/datetimebox.css     (widgets/datetimebox.css)
  *  content/global/bindings/dialog.xml          (widgets/dialog.xml)
@@ -119,10 +185,15 @@ Index: firefox-60.2.0/toolkit/content/jar.mn
     content/global/bindings/editor.xml          (widgets/editor.xml)
     content/global/bindings/filefield.xml       (widgets/filefield.xml)
  *  content/global/bindings/findbar.xml         (widgets/findbar.xml)
-Index: firefox-60.2.0/toolkit/content/widgets/dialog-kde.xml
-===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ firefox-60.2.0/toolkit/content/widgets/dialog-kde.xml	2018-09-05 21:49:31.498872824 +0200
+    content/global/bindings/general.xml         (widgets/general.xml)
+    content/global/bindings/groupbox.xml        (widgets/groupbox.xml)
+    content/global/bindings/listbox.xml         (widgets/listbox.xml)
+    content/global/bindings/menu.xml            (widgets/menu.xml)
+    content/global/bindings/menulist.xml        (widgets/menulist.xml)
+diff --git a/toolkit/content/widgets/dialog-kde.xml b/toolkit/content/widgets/dialog-kde.xml
+new file mode 100644
+--- /dev/null
++++ b/toolkit/content/widgets/dialog-kde.xml
 @@ -0,0 +1,478 @@
 +<?xml version="1.0"?>
 +<!-- This Source Code Form is subject to the terms of the Mozilla Public
@@ -602,11 +673,15 @@ Index: firefox-60.2.0/toolkit/content/widgets/dialog-kde.xml
 +  </binding>
 +
 +</bindings>
-Index: firefox-60.2.0/toolkit/mozapps/downloads/nsHelperAppDlg.js
-===================================================================
---- firefox-60.2.0.orig/toolkit/mozapps/downloads/nsHelperAppDlg.js	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/toolkit/mozapps/downloads/nsHelperAppDlg.js	2018-09-05 21:49:31.498872824 +0200
-@@ -632,7 +632,7 @@ nsUnknownContentTypeDialog.prototype = {
+diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downloads/nsHelperAppDlg.js
+--- a/toolkit/mozapps/downloads/nsHelperAppDlg.js
++++ b/toolkit/mozapps/downloads/nsHelperAppDlg.js
+@@ -627,17 +627,17 @@ nsUnknownContentTypeDialog.prototype = {
+       else
+         typeString = mimeInfo.MIMEType;
+     }
+     // When the length is unknown, contentLength would be -1
+     if (this.mLauncher.contentLength >= 0) {
        let [size, unit] = DownloadUtils.
                           convertByteUnits(this.mLauncher.contentLength);
        type.value = this.dialogElement("strings")
@@ -615,7 +690,17 @@ Index: firefox-60.2.0/toolkit/mozapps/downloads/nsHelperAppDlg.js
                                             [typeString, size, unit]);
      }
      else {
-@@ -806,7 +806,7 @@ nsUnknownContentTypeDialog.prototype = {
+       type.value = typeString;
+     }
+   },
+ 
+   // Returns true if opening the default application makes sense.
+@@ -801,17 +801,17 @@ nsUnknownContentTypeDialog.prototype = {
+       switch (this.dialogElement("openHandler").selectedIndex) {
+       case 0:
+         // No app need be specified in this case.
+         ok = true;
+         break;
        case 1:
          // only enable the OK button if we have a default app to use or if
          // the user chose an app....
@@ -624,7 +709,17 @@ Index: firefox-60.2.0/toolkit/mozapps/downloads/nsHelperAppDlg.js
          break;
        }
      }
-@@ -1071,20 +1071,50 @@ nsUnknownContentTypeDialog.prototype = {
+ 
+     // Enable Ok button if ok to press.
+     this.mDialog.document.documentElement.getButton("accept").disabled = !ok;
+   },
+ 
+@@ -1066,30 +1066,60 @@ nsUnknownContentTypeDialog.prototype = {
+ 
+       if (params.handlerApp &&
+           params.handlerApp.executable &&
+           params.handlerApp.executable.isFile()) {
+         // Remember the file they chose to run.
          this.chosenApp = params.handlerApp;
        }
      } else if ("@mozilla.org/applicationchooser;1" in Cc) {
@@ -689,38 +784,77 @@ Index: firefox-60.2.0/toolkit/mozapps/downloads/nsHelperAppDlg.js
      } else {
        var nsIFilePicker = Ci.nsIFilePicker;
        var fp = Cc["@mozilla.org/filepicker;1"]
-Index: firefox-60.2.0/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
-===================================================================
---- firefox-60.2.0.orig/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp	2018-09-05 21:49:31.498872824 +0200
-@@ -20,6 +20,7 @@
+                  .createInstance(nsIFilePicker);
+       fp.init(this.mDialog,
+               this.dialogElement("strings").getString("chooseAppFilePickerTitle"),
+               nsIFilePicker.modeOpen);
+ 
+diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
+--- a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
++++ b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
+@@ -15,16 +15,17 @@
+ #include "nsPrintfCString.h"
+ #include "nsNetCID.h"
+ #include "nsNetUtil.h"
+ #include "nsISupportsPrimitives.h"
+ #include "nsIGSettingsService.h"
  #include "nsInterfaceHashtable.h"
  #include "mozilla/Attributes.h"
  #include "nsIURI.h"
 +#include "nsKDEUtils.h"
  
  class nsUnixSystemProxySettings final : public nsISystemProxySettings {
- public:
-@@ -44,6 +45,7 @@ private:
-   nsresult GetProxyFromGConf(const nsACString& aScheme, const nsACString& aHost, int32_t aPort, nsACString& aResult);
-   nsresult GetProxyFromGSettings(const nsACString& aScheme, const nsACString& aHost, int32_t aPort, nsACString& aResult);
-   nsresult SetProxyResultFromGSettings(const char* aKeyBase, const char* aType, nsACString& aResult);
+  public:
+   NS_DECL_ISUPPORTS
+   NS_DECL_NSISYSTEMPROXYSETTINGS
+ 
+   nsUnixSystemProxySettings() : mSchemeProxySettings(4) {}
+   nsresult Init();
+@@ -42,16 +43,17 @@ class nsUnixSystemProxySettings final : 
+                                    nsACString& aResult);
+   nsresult GetProxyFromGConf(const nsACString& aScheme, const nsACString& aHost,
+                              int32_t aPort, nsACString& aResult);
+   nsresult GetProxyFromGSettings(const nsACString& aScheme,
+                                  const nsACString& aHost, int32_t aPort,
+                                  nsACString& aResult);
+   nsresult SetProxyResultFromGSettings(const char* aKeyBase, const char* aType,
+                                        nsACString& aResult);
 +  nsresult GetProxyFromKDE(const nsACString& aScheme, const nsACString& aHost, PRInt32 aPort, nsACString& aResult);
  };
  
  NS_IMPL_ISUPPORTS(nsUnixSystemProxySettings, nsISystemProxySettings)
-@@ -510,6 +512,9 @@ nsUnixSystemProxySettings::GetProxyForUR
-                                           const int32_t      aPort,
-                                           nsACString & aResult)
- {
+ 
+ NS_IMETHODIMP
+ nsUnixSystemProxySettings::GetMainThreadOnly(bool* aMainThreadOnly) {
+   // dbus prevents us from being threadsafe, but this routine should not block
+   // anyhow
+@@ -488,16 +490,19 @@ nsresult nsUnixSystemProxySettings::GetP
+   return NS_OK;
+ }
+ 
+ nsresult nsUnixSystemProxySettings::GetProxyForURI(const nsACString& aSpec,
+                                                    const nsACString& aScheme,
+                                                    const nsACString& aHost,
+                                                    const int32_t aPort,
+                                                    nsACString& aResult) {
 +  if (nsKDEUtils::kdeSupport())
 +    return GetProxyFromKDE(aScheme, aHost, aPort, aResult);
 +
    if (mProxySettings) {
      nsresult rv = GetProxyFromGSettings(aScheme, aHost, aPort, aResult);
-     if (NS_SUCCEEDED(rv))
-@@ -545,3 +550,29 @@ static const mozilla::Module kUnixProxyM
- };
+     if (NS_SUCCEEDED(rv)) return rv;
+   }
+   if (mGConf) return GetProxyFromGConf(aScheme, aHost, aPort, aResult);
+ 
+   return GetProxyFromEnvironment(aScheme, aHost, aPort, aResult);
+ }
+@@ -521,8 +526,34 @@ static const mozilla::Module::CIDEntry k
+ static const mozilla::Module::ContractIDEntry kUnixProxyContracts[] = {
+     {NS_SYSTEMPROXYSETTINGS_CONTRACTID, &kNS_UNIXSYSTEMPROXYSERVICE_CID},
+     {nullptr}};
+ 
+ static const mozilla::Module kUnixProxyModule = {
+     mozilla::Module::kVersion, kUnixProxyCIDs, kUnixProxyContracts};
  
  NSMODULE_DEFN(nsUnixProxyModule) = &kUnixProxyModule;
 +
@@ -749,11 +883,15 @@ Index: firefox-60.2.0/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 +  return NS_OK;
 +}
 +
-Index: firefox-60.2.0/toolkit/xre/moz.build
-===================================================================
---- firefox-60.2.0.orig/toolkit/xre/moz.build	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/toolkit/xre/moz.build	2018-09-05 21:49:31.498872824 +0200
-@@ -70,7 +70,9 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'ui
+diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
+--- a/toolkit/xre/moz.build
++++ b/toolkit/xre/moz.build
+@@ -65,17 +65,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+         '../components/printingui',
+     ]
+ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
+     UNIFIED_SOURCES += [
+         'nsNativeAppSupportDefault.cpp',
          'UIKitDirProvider.mm',
      ]
  elif 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
@@ -763,10 +901,15 @@ Index: firefox-60.2.0/toolkit/xre/moz.build
          'nsNativeAppSupportUnix.cpp',
      ]
  else:
-Index: firefox-60.2.0/toolkit/xre/nsKDEUtils.cpp
-===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ firefox-60.2.0/toolkit/xre/nsKDEUtils.cpp	2018-09-05 21:49:31.498872824 +0200
+     UNIFIED_SOURCES += [
+         'nsNativeAppSupportDefault.cpp',
+     ]
+ 
+ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk3':
+diff --git a/toolkit/xre/nsKDEUtils.cpp b/toolkit/xre/nsKDEUtils.cpp
+new file mode 100644
+--- /dev/null
++++ b/toolkit/xre/nsKDEUtils.cpp
 @@ -0,0 +1,344 @@
 +/* -*- Mode: C++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -1112,10 +1255,10 @@ Index: firefox-60.2.0/toolkit/xre/nsKDEUtils.cpp
 +    fputs( "\\E\n", commandFile ); // done as \E, so it cannot happen in normal data
 +    fflush( commandFile );
 +    }
-Index: firefox-60.2.0/toolkit/xre/nsKDEUtils.h
-===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ firefox-60.2.0/toolkit/xre/nsKDEUtils.h	2018-09-05 21:49:31.498872824 +0200
+diff --git a/toolkit/xre/nsKDEUtils.h b/toolkit/xre/nsKDEUtils.h
+new file mode 100644
+--- /dev/null
++++ b/toolkit/xre/nsKDEUtils.h
 @@ -0,0 +1,48 @@
 +/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -1165,11 +1308,14 @@ Index: firefox-60.2.0/toolkit/xre/nsKDEUtils.h
 +    };
 +
 +#endif // nsKDEUtils
-Index: firefox-60.2.0/uriloader/exthandler/HandlerServiceParent.cpp
-===================================================================
---- firefox-60.2.0.orig/uriloader/exthandler/HandlerServiceParent.cpp	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/uriloader/exthandler/HandlerServiceParent.cpp	2018-09-05 21:49:31.502872845 +0200
-@@ -5,7 +5,7 @@
+diff --git a/uriloader/exthandler/HandlerServiceParent.cpp b/uriloader/exthandler/HandlerServiceParent.cpp
+--- a/uriloader/exthandler/HandlerServiceParent.cpp
++++ b/uriloader/exthandler/HandlerServiceParent.cpp
+@@ -1,16 +1,16 @@
+ #include "mozilla/Logging.h"
+ #include "HandlerServiceParent.h"
+ #include "nsIHandlerService.h"
+ #include "nsIMIMEInfo.h"
  #include "ContentHandlerService.h"
  #include "nsStringEnumerator.h"
  #ifdef MOZ_WIDGET_GTK
@@ -1177,9 +1323,19 @@ Index: firefox-60.2.0/uriloader/exthandler/HandlerServiceParent.cpp
 +#include "unix/nsCommonRegistry.h"
  #endif
  
+ using mozilla::dom::ContentHandlerService;
+ using mozilla::dom::HandlerApp;
  using mozilla::dom::HandlerInfo;
-@@ -269,7 +269,7 @@ HandlerServiceParent::RecvExistsForProto
- {
+ using mozilla::dom::RemoteHandlerApp;
+ 
+ namespace {
+@@ -245,17 +245,17 @@ mozilla::ipc::IPCResult HandlerServicePa
+   handlerSvc->Exists(info, exists);
+   return IPC_OK();
+ }
+ 
+ mozilla::ipc::IPCResult HandlerServiceParent::RecvExistsForProtocol(
+     const nsCString& aProtocolScheme, bool* aHandlerExists) {
  #ifdef MOZ_WIDGET_GTK
    // Check the GNOME registry for a protocol handler
 -  *aHandlerExists = nsGNOMERegistry::HandlerExists(aProtocolScheme.get());
@@ -1187,11 +1343,20 @@ Index: firefox-60.2.0/uriloader/exthandler/HandlerServiceParent.cpp
  #else
    *aHandlerExists = false;
  #endif
-Index: firefox-60.2.0/uriloader/exthandler/moz.build
-===================================================================
---- firefox-60.2.0.orig/uriloader/exthandler/moz.build	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/uriloader/exthandler/moz.build	2018-09-05 21:49:31.502872845 +0200
-@@ -82,7 +82,9 @@ else:
+   return IPC_OK();
+ }
+ 
+ mozilla::ipc::IPCResult HandlerServiceParent::RecvGetTypeFromExtension(
+     const nsCString& aFileExtension, nsCString* type) {
+diff --git a/uriloader/exthandler/moz.build b/uriloader/exthandler/moz.build
+--- a/uriloader/exthandler/moz.build
++++ b/uriloader/exthandler/moz.build
+@@ -77,17 +77,19 @@ else:
+     SOURCES += [
+         osdir + '/nsOSHelperAppService.cpp',
+     ]
+     if CONFIG['CC_TYPE'] in ('clang', 'gcc'):
+         CXXFLAGS += ['-Wno-error=shadow']
  
  if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
      UNIFIED_SOURCES += [
@@ -1201,7 +1366,17 @@ Index: firefox-60.2.0/uriloader/exthandler/moz.build
          'unix/nsMIMEInfoUnix.cpp',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'android':
-@@ -129,6 +131,7 @@ LOCAL_INCLUDES += [
+     UNIFIED_SOURCES += [
+         'android/nsAndroidHandlerApp.cpp',
+         'android/nsExternalSharingAppService.cpp',
+         'android/nsExternalURLHandlerService.cpp',
+         'android/nsMIMEInfoAndroid.cpp',
+@@ -124,16 +126,17 @@ include('/ipc/chromium/chromium-config.m
+ FINAL_LIBRARY = 'xul'
+ 
+ LOCAL_INCLUDES += [
+     '/docshell/base',
+     '/dom/base',
      '/dom/ipc',
      '/netwerk/base',
      '/netwerk/protocol/http',
@@ -1209,10 +1384,15 @@ Index: firefox-60.2.0/uriloader/exthandler/moz.build
  ]
  
  if CONFIG['MOZ_ENABLE_DBUS']:
-Index: firefox-60.2.0/uriloader/exthandler/unix/nsCommonRegistry.cpp
-===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ firefox-60.2.0/uriloader/exthandler/unix/nsCommonRegistry.cpp	2018-09-05 21:49:31.502872845 +0200
+     CXXFLAGS += CONFIG['TK_CFLAGS']
+     CXXFLAGS += CONFIG['MOZ_DBUS_CFLAGS']
+ 
+ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk3':
+     CXXFLAGS += CONFIG['TK_CFLAGS']
+diff --git a/uriloader/exthandler/unix/nsCommonRegistry.cpp b/uriloader/exthandler/unix/nsCommonRegistry.cpp
+new file mode 100644
+--- /dev/null
++++ b/uriloader/exthandler/unix/nsCommonRegistry.cpp
 @@ -0,0 +1,53 @@
 +/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -1267,10 +1447,10 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsCommonRegistry.cpp
 +        return nsKDERegistry::GetFromType( aMIMEType );
 +    return nsGNOMERegistry::GetFromType( aMIMEType );
 +}
-Index: firefox-60.2.0/uriloader/exthandler/unix/nsCommonRegistry.h
-===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ firefox-60.2.0/uriloader/exthandler/unix/nsCommonRegistry.h	2018-09-05 21:49:31.502872845 +0200
+diff --git a/uriloader/exthandler/unix/nsCommonRegistry.h b/uriloader/exthandler/unix/nsCommonRegistry.h
+new file mode 100644
+--- /dev/null
++++ b/uriloader/exthandler/unix/nsCommonRegistry.h
 @@ -0,0 +1,28 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1300,10 +1480,10 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsCommonRegistry.h
 +};
 +
 +#endif
-Index: firefox-60.2.0/uriloader/exthandler/unix/nsKDERegistry.cpp
-===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ firefox-60.2.0/uriloader/exthandler/unix/nsKDERegistry.cpp	2018-09-05 21:49:31.502872845 +0200
+diff --git a/uriloader/exthandler/unix/nsKDERegistry.cpp b/uriloader/exthandler/unix/nsKDERegistry.cpp
+new file mode 100644
+--- /dev/null
++++ b/uriloader/exthandler/unix/nsKDERegistry.cpp
 @@ -0,0 +1,87 @@
 +/* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 +/* This Source Code Form is subject to the terms of the Mozilla Public
@@ -1392,10 +1572,10 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsKDERegistry.cpp
 +        }
 +    return nullptr;
 +}
-Index: firefox-60.2.0/uriloader/exthandler/unix/nsKDERegistry.h
-===================================================================
---- /dev/null	1970-01-01 00:00:00.000000000 +0000
-+++ firefox-60.2.0/uriloader/exthandler/unix/nsKDERegistry.h	2018-09-05 21:49:31.502872845 +0200
+diff --git a/uriloader/exthandler/unix/nsKDERegistry.h b/uriloader/exthandler/unix/nsKDERegistry.h
+new file mode 100644
+--- /dev/null
++++ b/uriloader/exthandler/unix/nsKDERegistry.h
 @@ -0,0 +1,34 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -1431,11 +1611,14 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsKDERegistry.h
 +};
 +
 +#endif //nsKDERegistry_h__
-Index: firefox-60.2.0/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
-===================================================================
---- firefox-60.2.0.orig/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp	2018-09-05 21:49:31.502872845 +0200
-@@ -5,7 +5,7 @@
+diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
+--- a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
++++ b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
+@@ -1,47 +1,50 @@
+ /* -*- Mode: C++; tab-width: 3; indent-tabs-mode: nil; c-basic-offset: 2 -*-
+  *
+  * This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this
   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
  
  #include "nsMIMEInfoUnix.h"
@@ -1444,7 +1627,7 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
  #include "nsIGIOService.h"
  #include "nsNetCID.h"
  #include "nsIIOService.h"
-@@ -13,11 +13,14 @@
+ #include "nsAutoPtr.h"
  #ifdef MOZ_ENABLE_DBUS
  #include "nsDBusHandlerApp.h"
  #endif
@@ -1452,23 +1635,27 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
 +#include "nsKDEUtils.h"
 +#endif
  
- nsresult
- nsMIMEInfoUnix::LoadUriInternal(nsIURI * aURI)
- {
+ nsresult nsMIMEInfoUnix::LoadUriInternal(nsIURI *aURI) {
 -  return nsGNOMERegistry::LoadURL(aURI);
 +  return nsCommonRegistry::LoadURL(aURI);
  }
  
  NS_IMETHODIMP
-@@ -32,14 +35,14 @@ nsMIMEInfoUnix::GetHasDefaultHandler(boo
+ nsMIMEInfoUnix::GetHasDefaultHandler(bool *_retval) {
+   // if mDefaultApplication is set, it means the application has been set from
+   // either /etc/mailcap or ${HOME}/.mailcap, in which case we don't want to
+   // give the GNOME answer.
+   if (mDefaultApplication) return nsMIMEInfoImpl::GetHasDefaultHandler(_retval);
+ 
    *_retval = false;
  
    if (mClass == eProtocolInfo) {
 -    *_retval = nsGNOMERegistry::HandlerExists(mSchemeOrType.get());
 +    *_retval = nsCommonRegistry::HandlerExists(mSchemeOrType.get());
    } else {
--    RefPtr<nsMIMEInfoBase> mimeInfo = nsGNOMERegistry::GetFromType(mSchemeOrType);
-+    RefPtr<nsMIMEInfoBase> mimeInfo = nsCommonRegistry::GetFromType(mSchemeOrType);
+     RefPtr<nsMIMEInfoBase> mimeInfo =
+-        nsGNOMERegistry::GetFromType(mSchemeOrType);
++        nsCommonRegistry::GetFromType(mSchemeOrType);
      if (!mimeInfo) {
        nsAutoCString ext;
        nsresult rv = GetPrimaryExtension(ext);
@@ -1477,8 +1664,18 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
 +        mimeInfo = nsCommonRegistry::GetFromExtension(ext);
        }
      }
-     if (mimeInfo)
-@@ -64,6 +67,23 @@ nsMIMEInfoUnix::LaunchDefaultWithFile(ns
+     if (mimeInfo) *_retval = true;
+   }
+ 
+   if (*_retval) return NS_OK;
+ 
+   return NS_OK;
+@@ -51,16 +54,33 @@ nsresult nsMIMEInfoUnix::LaunchDefaultWi
+   // if mDefaultApplication is set, it means the application has been set from
+   // either /etc/mailcap or ${HOME}/.mailcap, in which case we don't want to
+   // give the GNOME answer.
+   if (mDefaultApplication) return nsMIMEInfoImpl::LaunchDefaultWithFile(aFile);
+ 
    nsAutoCString nativePath;
    aFile->GetNativePath(nativePath);
  
@@ -1502,11 +1699,20 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
    nsCOMPtr<nsIGIOService> giovfs = do_GetService(NS_GIOSERVICE_CONTRACTID);
    if (!giovfs) {
      return NS_ERROR_FAILURE;
-Index: firefox-60.2.0/uriloader/exthandler/unix/nsOSHelperAppService.cpp
-===================================================================
---- firefox-60.2.0.orig/uriloader/exthandler/unix/nsOSHelperAppService.cpp	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/uriloader/exthandler/unix/nsOSHelperAppService.cpp	2018-09-05 21:49:31.502872845 +0200
-@@ -10,7 +10,7 @@
+   }
+ 
+   // nsGIOMimeApp->Launch wants a URI string instead of local file
+   nsresult rv;
+   nsCOMPtr<nsIIOService> ioservice =
+diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exthandler/unix/nsOSHelperAppService.cpp
+--- a/uriloader/exthandler/unix/nsOSHelperAppService.cpp
++++ b/uriloader/exthandler/unix/nsOSHelperAppService.cpp
+@@ -5,17 +5,17 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ 
  #include "nsOSHelperAppService.h"
  #include "nsMIMEInfoUnix.h"
  #ifdef MOZ_WIDGET_GTK
@@ -1515,7 +1721,17 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsOSHelperAppService.cpp
  #endif
  #include "nsISupports.h"
  #include "nsString.h"
-@@ -1133,7 +1133,7 @@ nsresult nsOSHelperAppService::OSProtoco
+ #include "nsReadableUtils.h"
+ #include "nsUnicharUtils.h"
+ #include "nsIURL.h"
+ #include "nsIFileStreams.h"
+ #include "nsILineInputStream.h"
+@@ -1040,17 +1040,17 @@ nsresult nsOSHelperAppService::GetHandle
+ 
+ nsresult nsOSHelperAppService::OSProtocolHandlerExists(
+     const char* aProtocolScheme, bool* aHandlerExists) {
+   nsresult rv = NS_OK;
+ 
    if (!XRE_IsContentProcess()) {
  #ifdef MOZ_WIDGET_GTK
      // Check the GNOME registry for a protocol handler
@@ -1524,38 +1740,77 @@ Index: firefox-60.2.0/uriloader/exthandler/unix/nsOSHelperAppService.cpp
  #else
      *aHandlerExists = false;
  #endif
-@@ -1151,7 +1151,7 @@ nsresult nsOSHelperAppService::OSProtoco
- NS_IMETHODIMP nsOSHelperAppService::GetApplicationDescription(const nsACString& aScheme, nsAString& _retval)
- {
+   } else {
+     *aHandlerExists = false;
+     nsCOMPtr<nsIHandlerService> handlerSvc =
+         do_GetService(NS_HANDLERSERVICE_CONTRACTID, &rv);
+     if (NS_SUCCEEDED(rv) && handlerSvc) {
+@@ -1060,17 +1060,17 @@ nsresult nsOSHelperAppService::OSProtoco
+   }
+ 
+   return rv;
+ }
+ 
+ NS_IMETHODIMP nsOSHelperAppService::GetApplicationDescription(
+     const nsACString& aScheme, nsAString& _retval) {
  #ifdef MOZ_WIDGET_GTK
 -  nsGNOMERegistry::GetAppDescForScheme(aScheme, _retval);
 +  nsCommonRegistry::GetAppDescForScheme(aScheme, _retval);
    return _retval.IsEmpty() ? NS_ERROR_NOT_AVAILABLE : NS_OK;
  #else
    return NS_ERROR_NOT_AVAILABLE;
-@@ -1248,7 +1248,7 @@ nsOSHelperAppService::GetFromExtension(c
+ #endif
+ }
+ 
+ nsresult nsOSHelperAppService::GetFileTokenForPath(
+     const char16_t* platformAppPath, nsIFile** aFile) {
+@@ -1151,17 +1151,17 @@ already_AddRefed<nsMIMEInfoBase> nsOSHel
+   nsresult rv =
+       LookUpTypeAndDescription(NS_ConvertUTF8toUTF16(aFileExt), majorType,
+                                minorType, mime_types_description, true);
+ 
+   if (NS_FAILED(rv) || majorType.IsEmpty()) {
  #ifdef MOZ_WIDGET_GTK
      LOG(("Looking in GNOME registry\n"));
      RefPtr<nsMIMEInfoBase> gnomeInfo =
--      nsGNOMERegistry::GetFromExtension(aFileExt);
-+      nsCommonRegistry::GetFromExtension(aFileExt);
+-        nsGNOMERegistry::GetFromExtension(aFileExt);
++        nsCommonRegistry::GetFromExtension(aFileExt);
      if (gnomeInfo) {
        LOG(("Got MIMEInfo from GNOME registry\n"));
        return gnomeInfo.forget();
-@@ -1369,7 +1369,7 @@ nsOSHelperAppService::GetFromType(const
+     }
+ #endif
+ 
+     rv = LookUpTypeAndDescription(NS_ConvertUTF8toUTF16(aFileExt), majorType,
+                                   minorType, mime_types_description, false);
+@@ -1263,17 +1263,17 @@ already_AddRefed<nsMIMEInfoBase> nsOSHel
+ 
+   // Now look up our extensions
+   nsAutoString extensions, mime_types_description;
+   LookUpExtensionsAndDescription(majorType, minorType, extensions,
+                                  mime_types_description);
  
  #ifdef MOZ_WIDGET_GTK
    if (handler.IsEmpty()) {
 -    RefPtr<nsMIMEInfoBase> gnomeInfo = nsGNOMERegistry::GetFromType(aMIMEType);
 +    RefPtr<nsMIMEInfoBase> gnomeInfo = nsCommonRegistry::GetFromType(aMIMEType);
      if (gnomeInfo) {
-       LOG(("Got MIMEInfo from GNOME registry without extensions; setting them "
-            "to %s\n", NS_LossyConvertUTF16toASCII(extensions).get()));
-Index: firefox-60.2.0/widget/gtk/moz.build
-===================================================================
---- firefox-60.2.0.orig/widget/gtk/moz.build	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/widget/gtk/moz.build	2018-09-05 21:49:31.502872845 +0200
-@@ -126,6 +126,7 @@ LOCAL_INCLUDES += [
+       LOG(
+           ("Got MIMEInfo from GNOME registry without extensions; setting them "
+            "to %s\n",
+            NS_LossyConvertUTF16toASCII(extensions).get()));
+ 
+       NS_ASSERTION(!gnomeInfo->HasExtensions(), "How'd that happen?");
+       gnomeInfo->SetFileExtensions(NS_ConvertUTF16toUTF8(extensions));
+diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
+--- a/widget/gtk/moz.build
++++ b/widget/gtk/moz.build
+@@ -121,16 +121,17 @@ else:
+ include('/ipc/chromium/chromium-config.mozbuild')
+ 
+ FINAL_LIBRARY = 'xul'
+ 
+ LOCAL_INCLUDES += [
      '/layout/generic',
      '/layout/xul',
      '/other-licenses/atk-1.0',
@@ -1563,11 +1818,20 @@ Index: firefox-60.2.0/widget/gtk/moz.build
      '/widget',
      '/widget/headless',
  ]
-Index: firefox-60.2.0/widget/gtk/nsFilePicker.cpp
-===================================================================
---- firefox-60.2.0.orig/widget/gtk/nsFilePicker.cpp	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/widget/gtk/nsFilePicker.cpp	2018-09-05 21:49:31.502872845 +0200
-@@ -9,6 +9,7 @@
+ 
+ if CONFIG['MOZ_X11']:
+     LOCAL_INCLUDES += [
+         '/widget/x11',
+     ]
+diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
+--- a/widget/gtk/nsFilePicker.cpp
++++ b/widget/gtk/nsFilePicker.cpp
+@@ -4,32 +4,34 @@
+  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ #include "mozilla/Types.h"
+ #include <sys/types.h>
+ #include <sys/stat.h>
  #include <unistd.h>
  
  #include <gtk/gtk.h>
@@ -1575,7 +1839,16 @@ Index: firefox-60.2.0/widget/gtk/nsFilePicker.cpp
  
  #include "nsGtkUtils.h"
  #include "nsIFileURL.h"
-@@ -25,6 +26,7 @@
+ #include "nsIURI.h"
+ #include "nsIWidget.h"
+ #include "nsIFile.h"
+ #include "nsIStringBundle.h"
+ 
+ #include "nsArrayEnumerator.h"
+ #include "nsMemory.h"
+ #include "nsEnumeratorUtils.h"
+ #include "nsNetUtil.h"
+ #include "nsReadableUtils.h"
  #include "mozcontainer.h"
  
  #include "nsFilePicker.h"
@@ -1583,8 +1856,18 @@ Index: firefox-60.2.0/widget/gtk/nsFilePicker.cpp
  
  using namespace mozilla;
  
-@@ -251,7 +253,9 @@ nsFilePicker::AppendFilter(const nsAStri
- {
+ #define MAX_PREVIEW_SIZE 180
+ // bug 1184009
+ #define MAX_PREVIEW_SOURCE_SIZE 4096
+ 
+ nsIFile *nsFilePicker::mPrevDisplayDirectory = nullptr;
+@@ -225,17 +227,19 @@ nsFilePicker::AppendFilters(int32_t aFil
+   mAllowURLs = !!(aFilterMask & filterAllowURLs);
+   return nsBaseFilePicker::AppendFilters(aFilterMask);
+ }
+ 
+ NS_IMETHODIMP
+ nsFilePicker::AppendFilter(const nsAString &aTitle, const nsAString &aFilter) {
    if (aFilter.EqualsLiteral("..apps")) {
      // No platform specific thing we can do here, really....
 -    return NS_OK;
@@ -1594,9 +1877,19 @@ Index: firefox-60.2.0/widget/gtk/nsFilePicker.cpp
    }
  
    nsAutoCString filter, name;
-@@ -376,6 +380,29 @@ nsFilePicker::Open(nsIFilePickerShownCal
-   if (mRunning)
-     return NS_ERROR_NOT_AVAILABLE;
+   CopyUTF16toUTF8(aFilter, filter);
+   CopyUTF16toUTF8(aTitle, name);
+ 
+   mFilters.AppendElement(filter);
+   mFilterNames.AppendElement(name);
+@@ -335,16 +339,39 @@ nsresult nsFilePicker::Show(int16_t *aRe
+   return NS_OK;
+ }
+ 
+ NS_IMETHODIMP
+ nsFilePicker::Open(nsIFilePickerShownCallback *aCallback) {
+   // Can't show two dialogs concurrently with the same filepicker
+   if (mRunning) return NS_ERROR_NOT_AVAILABLE;
  
 +  // KDE file picker is not handled via callback
 +  if( nsKDEUtils::kdeSupport()) {
@@ -1624,7 +1917,17 @@ Index: firefox-60.2.0/widget/gtk/nsFilePicker.cpp
    nsCString title;
    title.Adopt(ToNewUTF8String(mTitle));
  
-@@ -613,3 +640,228 @@ nsFilePicker::Done(GtkWidget* file_choos
+   GtkWindow *parent_widget =
+       GTK_WINDOW(mParentWidget->GetNativeData(NS_NATIVE_SHELLWIDGET));
+ 
+   GtkFileChooserAction action = GetGtkFileChooserAction(mMode);
+ 
+@@ -572,8 +599,233 @@ void nsFilePicker::Done(GtkWidget *file_
+   if (mCallback) {
+     mCallback->Done(result);
+     mCallback = nullptr;
+   } else {
+     mResult = result;
    }
    NS_RELEASE_THIS();
  }
@@ -1853,13 +2156,17 @@ Index: firefox-60.2.0/widget/gtk/nsFilePicker.cpp
 +    return NS_OK;
 +    }
 +
-Index: firefox-60.2.0/widget/gtk/nsFilePicker.h
-===================================================================
---- firefox-60.2.0.orig/widget/gtk/nsFilePicker.h	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/widget/gtk/nsFilePicker.h	2018-09-05 21:49:31.502872845 +0200
-@@ -74,6 +74,12 @@ protected:
- private:
-   static nsIFile *mPrevDisplayDirectory;
+diff --git a/widget/gtk/nsFilePicker.h b/widget/gtk/nsFilePicker.h
+--- a/widget/gtk/nsFilePicker.h
++++ b/widget/gtk/nsFilePicker.h
+@@ -67,14 +67,20 @@ class nsFilePicker : public nsBaseFilePi
+   nsString mDefaultExtension;
+ 
+   nsTArray<nsCString> mFilters;
+   nsTArray<nsCString> mFilterNames;
+ 
+  private:
+   static nsIFile* mPrevDisplayDirectory;
  
 +  bool kdeRunning();
 +  bool getKdeRunning();
@@ -1868,13 +2175,20 @@ Index: firefox-60.2.0/widget/gtk/nsFilePicker.h
 +  nsCString kdeMakeFilter( int index );
 +
  #ifdef MOZ_WIDGET_GTK
-   GtkFileChooserWidget *mFileChooserDelegate;
+   GtkFileChooserWidget* mFileChooserDelegate;
  #endif
-Index: firefox-60.2.0/xpcom/components/ManifestParser.cpp
-===================================================================
---- firefox-60.2.0.orig/xpcom/components/ManifestParser.cpp	2018-09-05 21:49:23.106829422 +0200
-+++ firefox-60.2.0/xpcom/components/ManifestParser.cpp	2018-09-05 21:49:31.502872845 +0200
-@@ -38,6 +38,7 @@
+ };
+ 
+ #endif
+diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestParser.cpp
+--- a/xpcom/components/ManifestParser.cpp
++++ b/xpcom/components/ManifestParser.cpp
+@@ -33,16 +33,17 @@
+ #include "nsTextFormatter.h"
+ #include "nsVersionComparator.h"
+ #include "nsXPCOMCIDInternal.h"
+ 
+ #include "nsIConsoleService.h"
  #include "nsIScriptError.h"
  #include "nsIXULAppInfo.h"
  #include "nsIXULRuntime.h"
@@ -1882,7 +2196,17 @@ Index: firefox-60.2.0/xpcom/components/ManifestParser.cpp
  
  using namespace mozilla;
  
-@@ -449,6 +450,7 @@ ParseManifest(NSLocationType aType, File
+ struct ManifestDirective {
+   const char* directive;
+   int argc;
+ 
+   // Binary components are only allowed for APP locations.
+@@ -418,16 +419,17 @@ void ParseManifest(NSLocationType aType,
+   NS_NAMED_LITERAL_STRING(kRemoteEnabled, "remoteenabled");
+   NS_NAMED_LITERAL_STRING(kRemoteRequired, "remoterequired");
+   NS_NAMED_LITERAL_STRING(kApplication, "application");
+   NS_NAMED_LITERAL_STRING(kAppVersion, "appversion");
+   NS_NAMED_LITERAL_STRING(kGeckoVersion, "platformversion");
    NS_NAMED_LITERAL_STRING(kOs, "os");
    NS_NAMED_LITERAL_STRING(kOsVersion, "osversion");
    NS_NAMED_LITERAL_STRING(kABI, "abi");
@@ -1890,44 +2214,62 @@ Index: firefox-60.2.0/xpcom/components/ManifestParser.cpp
    NS_NAMED_LITERAL_STRING(kProcess, "process");
  #if defined(MOZ_WIDGET_ANDROID)
    NS_NAMED_LITERAL_STRING(kTablet, "tablet");
-@@ -504,6 +506,7 @@ ParseManifest(NSLocationType aType, File
+ #endif
+ 
+   NS_NAMED_LITERAL_STRING(kMain, "main");
+   NS_NAMED_LITERAL_STRING(kContent, "content");
+ 
+@@ -473,39 +475,44 @@ void ParseManifest(NSLocationType aType,
+         CopyUTF8toUTF16(s, abi);
+         abi.Insert(char16_t('_'), 0);
+         abi.Insert(osTarget, 0);
+       }
+     }
    }
  
    nsAutoString osVersion;
 +  nsAutoString desktop;
  #if defined(XP_WIN)
  #pragma warning(push)
- #pragma warning(disable:4996) // VC12+ deprecates GetVersionEx
-@@ -513,6 +516,7 @@ ParseManifest(NSLocationType aType, File
-                               info.dwMajorVersion,
+ #pragma warning(disable : 4996)  // VC12+ deprecates GetVersionEx
+   OSVERSIONINFO info = {sizeof(OSVERSIONINFO)};
+   if (GetVersionEx(&info)) {
+     nsTextFormatter::ssprintf(osVersion, u"%ld.%ld", info.dwMajorVersion,
                                info.dwMinorVersion);
    }
 +  desktop = NS_LITERAL_STRING("win");
  #pragma warning(pop)
  #elif defined(MOZ_WIDGET_COCOA)
    SInt32 majorVersion = nsCocoaFeatures::OSXVersionMajor();
-@@ -520,10 +524,12 @@ ParseManifest(NSLocationType aType, File
-   nsTextFormatter::ssprintf(osVersion, u"%ld.%ld",
-                             majorVersion,
-                             minorVersion);
+   SInt32 minorVersion = nsCocoaFeatures::OSXVersionMinor();
+   nsTextFormatter::ssprintf(osVersion, u"%ld.%ld", majorVersion, minorVersion);
 +  desktop = NS_LITERAL_STRING("macosx");
  #elif defined(MOZ_WIDGET_GTK)
-   nsTextFormatter::ssprintf(osVersion, u"%ld.%ld",
-                             gtk_major_version,
+   nsTextFormatter::ssprintf(osVersion, u"%ld.%ld", gtk_major_version,
                              gtk_minor_version);
 +  desktop = nsKDEUtils::kdeSession() ? NS_LITERAL_STRING("kde") : NS_LITERAL_STRING("gnome");
  #elif defined(MOZ_WIDGET_ANDROID)
    bool isTablet = false;
    if (mozilla::AndroidBridge::Bridge()) {
-@@ -532,6 +538,7 @@ ParseManifest(NSLocationType aType, File
-                                                            osVersion);
+     mozilla::AndroidBridge::Bridge()->GetStaticStringField(
+         "android/os/Build$VERSION", "RELEASE", osVersion);
      isTablet = java::GeckoAppShell::IsTablet();
    }
 +  desktop = NS_LITERAL_STRING("android");
  #endif
  
    if (XRE_IsContentProcess()) {
-@@ -643,6 +650,7 @@ ParseManifest(NSLocationType aType, File
+     process = kContent;
+   } else {
+     process = kMain;
+   }
+ 
+@@ -608,25 +615,27 @@ void ParseManifest(NSLocationType aType,
+     TriState stOsVersion = eUnspecified;
+     TriState stOs = eUnspecified;
+     TriState stABI = eUnspecified;
+     TriState stProcess = eUnspecified;
+ #if defined(MOZ_WIDGET_ANDROID)
      TriState stTablet = eUnspecified;
  #endif
      int flags = 0;
@@ -1935,7 +2277,9 @@ Index: firefox-60.2.0/xpcom/components/ManifestParser.cpp
  
      while ((token = nsCRT::strtok(whitespace, kWhitespace, &whitespace)) &&
             ok) {
-@@ -652,6 +660,7 @@ ParseManifest(NSLocationType aType, File
+       ToLowerCase(token);
+       NS_ConvertASCIItoUTF16 wtoken(token);
+ 
        if (CheckStringFlag(kApplication, wtoken, appID, stApp) ||
            CheckOsFlag(kOs, wtoken, osTarget, stOs) ||
            CheckStringFlag(kABI, wtoken, abi, stABI) ||
@@ -1943,19 +2287,39 @@ Index: firefox-60.2.0/xpcom/components/ManifestParser.cpp
            CheckStringFlag(kProcess, wtoken, process, stProcess) ||
            CheckVersionFlag(kOsVersion, wtoken, osVersion, stOsVersion) ||
            CheckVersionFlag(kAppVersion, wtoken, appVersion, stAppVersion) ||
-@@ -706,6 +715,7 @@ ParseManifest(NSLocationType aType, File
-         stGeckoVersion == eBad ||
-         stOs == eBad ||
-         stOsVersion == eBad ||
-+        stDesktop == eBad ||
+           CheckVersionFlag(kGeckoVersion, wtoken, geckoVersion,
+                            stGeckoVersion)) {
+         continue;
+       }
+ 
+@@ -663,17 +672,17 @@ void ParseManifest(NSLocationType aType,
+       }
+ 
+       LogMessageWithContext(
+           aFile, line, "Unrecognized chrome manifest modifier '%s'.", token);
+       ok = false;
+     }
+ 
+     if (!ok || stApp == eBad || stAppVersion == eBad ||
+-        stGeckoVersion == eBad || stOs == eBad || stOsVersion == eBad ||
++        stGeckoVersion == eBad || stOs == eBad || stOsVersion == eBad || stDesktop == eBad ||
  #ifdef MOZ_WIDGET_ANDROID
          stTablet == eBad ||
  #endif
-Index: firefox-60.2.0/xpcom/components/moz.build
-===================================================================
---- firefox-60.2.0.orig/xpcom/components/moz.build	2018-09-05 21:49:23.110829442 +0200
-+++ firefox-60.2.0/xpcom/components/moz.build	2018-09-05 21:49:31.502872845 +0200
-@@ -49,6 +49,7 @@ LOCAL_INCLUDES += [
+         stABI == eBad || stProcess == eBad) {
+       continue;
+     }
+ 
+     if (directive->regfunc) {
+diff --git a/xpcom/components/moz.build b/xpcom/components/moz.build
+--- a/xpcom/components/moz.build
++++ b/xpcom/components/moz.build
+@@ -44,12 +44,13 @@ FINAL_LIBRARY = 'xul'
+ LOCAL_INCLUDES += [
+     '!..',
+     '../base',
+     '../build',
+     '../ds',
      '../reflect/xptinfo',
      '/chrome',
      '/modules/libjar',
@@ -1963,11 +2327,16 @@ Index: firefox-60.2.0/xpcom/components/moz.build
  ]
  
  if 'gtk' in CONFIG['MOZ_WIDGET_TOOLKIT']:
-Index: firefox-60.2.0/xpcom/io/nsLocalFileUnix.cpp
-===================================================================
---- firefox-60.2.0.orig/xpcom/io/nsLocalFileUnix.cpp	2018-09-05 21:49:23.110829442 +0200
-+++ firefox-60.2.0/xpcom/io/nsLocalFileUnix.cpp	2018-09-05 21:56:47.649117623 +0200
-@@ -52,6 +52,7 @@
+     CXXFLAGS += CONFIG['TK_CFLAGS']
+diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
+--- a/xpcom/io/nsLocalFileUnix.cpp
++++ b/xpcom/io/nsLocalFileUnix.cpp
+@@ -47,16 +47,17 @@
+ #include "prproces.h"
+ #include "nsIDirectoryEnumerator.h"
+ #include "nsISimpleEnumerator.h"
+ #include "private/pprio.h"
+ #include "prlink.h"
  
  #ifdef MOZ_WIDGET_GTK
  #include "nsIGIOService.h"
@@ -1975,7 +2344,17 @@ Index: firefox-60.2.0/xpcom/io/nsLocalFileUnix.cpp
  #endif
  
  #ifdef MOZ_WIDGET_COCOA
-@@ -2010,18 +2011,16 @@ nsLocalFile::Reveal()
+ #include <Carbon/Carbon.h>
+ #include "CocoaFileUtils.h"
+ #include "prmem.h"
+ #include "plbase64.h"
+ 
+@@ -1901,62 +1902,77 @@ nsLocalFile::SetPersistentDescriptor(con
+ 
+ NS_IMETHODIMP
+ nsLocalFile::Reveal() {
+   if (!FilePreferences::IsAllowedPath(mPath)) {
+     return NS_ERROR_FILE_ACCESS_DENIED;
    }
  
  #ifdef MOZ_WIDGET_GTK
@@ -1997,7 +2376,13 @@ Index: firefox-60.2.0/xpcom/io/nsLocalFileUnix.cpp
    }
    if (NS_SUCCEEDED(giovfs->OrgFreedesktopFileManager1ShowItems(mPath))) {
      return NS_OK;
-@@ -2035,7 +2034,7 @@ nsLocalFile::Reveal()
+   }
+   nsCOMPtr<nsIFile> parentDir;
+   nsAutoCString dirPath;
+   if (NS_FAILED(GetParent(getter_AddRefs(parentDir)))) {
+     return NS_ERROR_FAILURE;
+   }
+   if (NS_FAILED(parentDir->GetNativePath(dirPath))) {
      return NS_ERROR_FAILURE;
    }
  
@@ -2006,7 +2391,11 @@ Index: firefox-60.2.0/xpcom/io/nsLocalFileUnix.cpp
  #elif defined(MOZ_WIDGET_COCOA)
    CFURLRef url;
    if (NS_SUCCEEDED(GetCFURL(&url))) {
-@@ -2047,6 +2046,17 @@ nsLocalFile::Reveal()
+     nsresult rv = CocoaFileUtils::RevealFileInFinder(url);
+     ::CFRelease(url);
+     return rv;
+   }
+   return NS_ERROR_FAILURE;
  #else
    return NS_ERROR_FAILURE;
  #endif
@@ -2024,7 +2413,9 @@ Index: firefox-60.2.0/xpcom/io/nsLocalFileUnix.cpp
  }
  
  NS_IMETHODIMP
-@@ -2057,6 +2067,12 @@ nsLocalFile::Launch()
+ nsLocalFile::Launch() {
+   if (!FilePreferences::IsAllowedPath(mPath)) {
+     return NS_ERROR_FILE_ACCESS_DENIED;
    }
  
  #ifdef MOZ_WIDGET_GTK
@@ -2037,3 +2428,8 @@ Index: firefox-60.2.0/xpcom/io/nsLocalFileUnix.cpp
    nsCOMPtr<nsIGIOService> giovfs = do_GetService(NS_GIOSERVICE_CONTRACTID);
    if (!giovfs) {
      return NS_ERROR_FAILURE;
+   }
+ 
+   return giovfs->ShowURIForInput(mPath);
+ #elif defined(MOZ_WIDGET_ANDROID)
+   // Try to get a mimetype, if this fails just use the file uri alone

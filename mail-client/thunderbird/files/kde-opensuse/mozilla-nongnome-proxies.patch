@@ -9,19 +9,20 @@ retrieving revision 1.1
 diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 --- a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 +++ b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
-@@ -54,23 +54,27 @@ nsUnixSystemProxySettings::GetMainThread
-   // dbus prevents us from being threadsafe, but this routine should not block anyhow
+@@ -55,24 +55,27 @@ NS_IMETHODIMP
+ nsUnixSystemProxySettings::GetMainThreadOnly(bool* aMainThreadOnly) {
+   // dbus prevents us from being threadsafe, but this routine should not block
+   // anyhow
    *aMainThreadOnly = true;
    return NS_OK;
  }
  
- nsresult
- nsUnixSystemProxySettings::Init()
- {
+ nsresult nsUnixSystemProxySettings::Init() {
 -  mGSettings = do_GetService(NS_GSETTINGSSERVICE_CONTRACTID);
 -  if (mGSettings) {
--    mGSettings->GetCollectionForSchema(NS_LITERAL_CSTRING("org.gnome.system.proxy"),
--                                       getter_AddRefs(mProxySettings));
+-    mGSettings->GetCollectionForSchema(
+-        NS_LITERAL_CSTRING("org.gnome.system.proxy"),
+-        getter_AddRefs(mProxySettings));
 -  }
 -  if (!mProxySettings) {
 -    mGConf = do_GetService(NS_GCONFSERVICE_CONTRACTID);
@@ -41,6 +42,6 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
    return NS_OK;
  }
  
- bool
- nsUnixSystemProxySettings::IsProxyMode(const char* aMode)
- {
+ bool nsUnixSystemProxySettings::IsProxyMode(const char* aMode) {
+   nsAutoCString mode;
+   return NS_SUCCEEDED(mGConf->GetString(
