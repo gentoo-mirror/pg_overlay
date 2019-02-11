@@ -21,9 +21,6 @@
 		Chromium.
 	</longdescription>
 	<use>
-		<flag name="atk">
-			Whether to use ATK, the Accessibility ToolKit library.
-		</flag>
 		<flag name="cfi">
 			Build with CFI (Control Flow Integrity) enabled (recommended).
 		</flag>
@@ -54,7 +51,7 @@
 			(HTML/CSS/JS) for runtime performance purposes. This does more
 			work at compile time for speed benefits at runtime.
 		</flag>
-		<flag name="pdf">Enable PDF (Portable Document Format) viewer</flag>
+		<flag name="pdf">Enable the built-in PDF viewer</flag>
 		<flag name="proprietary-codecs">
 			Enable proprietary codecs like H.264, MP3.
 		</flag>
