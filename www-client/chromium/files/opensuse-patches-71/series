@@ -1,7 +1,0 @@
-chromium-libusb_interrupt_event_handler.patch
-chromium-dma-buf.patch
-chromium-drm.patch
-chromium-system-libusb.patch
-chromium-vaapi.patch
-chromium-skia-system-fontconfig.patch
-chromium-prop-codecs.patch
