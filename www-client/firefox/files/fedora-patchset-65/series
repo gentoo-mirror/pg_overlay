@@ -1,7 +1,5 @@
 mozilla-1196777.patch
-mozilla-256180.patch
 mozilla-1337988.patch
-mozilla-1353817.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 bug1375074-save-restore-x28.patch
 
