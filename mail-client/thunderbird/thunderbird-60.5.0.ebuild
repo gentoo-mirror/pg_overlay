@@ -340,7 +340,7 @@ src_configure() {
 	mozconfig_annotate 'enabled by Gentoo' --enable-pie
 
 	mozconfig_use_enable debug
-	mozconfig_use_enable debug tests
+	#mozconfig_use_enable debug tests
 	if ! use debug ; then
 		mozconfig_annotate 'disabled by Gentoo' --disable-debug-symbols
 	else
