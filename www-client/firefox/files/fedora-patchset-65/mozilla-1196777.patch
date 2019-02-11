@@ -1,0 +1,13 @@
+diff -up firefox-65.0/widget/gtk/nsWindow.cpp.1196777 firefox-65.0/widget/gtk/nsWindow.cpp
+--- firefox-65.0/widget/gtk/nsWindow.cpp.1196777	2019-01-28 14:37:27.470163867 +0100
++++ firefox-65.0/widget/gtk/nsWindow.cpp	2019-01-28 14:41:52.479064393 +0100
+@@ -156,7 +156,8 @@ const gint kEvents =
+ #if GTK_CHECK_VERSION(3, 4, 0)
+     GDK_SMOOTH_SCROLL_MASK | GDK_TOUCH_MASK |
+ #endif
+-    GDK_SCROLL_MASK | GDK_POINTER_MOTION_MASK | GDK_PROPERTY_CHANGE_MASK;
++    GDK_SCROLL_MASK | GDK_POINTER_MOTION_MASK | GDK_PROPERTY_CHANGE_MASK |
++    GDK_FOCUS_CHANGE_MASK;
+ 
+ /* utility functions */
+ static bool is_mouse_in_window(GdkWindow *aWindow, gdouble aMouseX,
