@@ -403,7 +403,7 @@ src_configure() {
 	mozconfig_use_enable !bindist official-branding
 
 	mozconfig_use_enable debug
-	#mozconfig_use_enable debug tests
+	mozconfig_use_enable debug tests
 	if ! use debug ; then
 		mozconfig_annotate 'disabled by Gentoo' --disable-debug-symbols
 	else
@@ -534,8 +534,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-profiling
 
 	mozconfig_annotate '' --disable-reflow-perf
-	mozconfig_annotate '' --disable-rust-debug
-	mozconfig_annotate '' --disable-rust-tests
+	#mozconfig_annotate '' --disable-rust-debug
+	#mozconfig_annotate '' --disable-rust-tests
 
 	mozconfig_annotate '' --disable-signmar
 
