@@ -18,7 +18,7 @@ else
 	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
-	KEYWORDS="~amd64 ~arm64 ~x86"
+	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 fi
 
 RUST_STAGE0_VERSION="${PV}" #Use current version for stage0
@@ -45,7 +45,7 @@ COMMON_DEPEND=">=app-eselect/eselect-rust-0.3_pre20150425
 		net-libs/libssh2
 		net-libs/http-parser:=
 		net-misc/curl[ssl]
-		system-llvm? ( >=sys-devel/llvm-6:= )"
+		system-llvm? ( >=sys-devel/llvm-7:= )"
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	|| (
@@ -61,9 +61,12 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 
 S="${WORKDIR}/${MY_P}-src"
 
-PATCHES=( "${FILESDIR}"/1.30.1-clippy-sysroot.patch 
+PATCHES=( "${FILESDIR}"/1.30.1-clippy-sysroot.patch
+		"${FILESDIR}"/1.32.0-fix-configure-of-bundled-llvm.patch
+		"${FILESDIR}"/1.32.0-system-llvm-7-SIGSEGV.patch
 		"${FILESDIR}"/0001-Try-to-get-the-target-triple-from-rustc-itself.patch
-		"${FILESDIR}"/0001-lldb_batchmode.py-try-import-_thread-for-Python-3.patch)
+		"${FILESDIR}"/0001-lldb_batchmode.py-try-import-_thread-for-Python-3.patch
+)
 
 toml_usex() {
 	usex "$1" true false
