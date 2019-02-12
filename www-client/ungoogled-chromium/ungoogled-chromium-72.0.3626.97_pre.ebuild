@@ -13,7 +13,7 @@ CHROMIUM_LANGS="
 
 inherit check-reqs chromium-2 desktop flag-o-matic ninja-utils pax-utils python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
-UGC_PV="c68b9f4916d6a34dc6c843a565bfd1ca08b9fe4c"
+UGC_PV="${PV/97_pre/96-1}"
 UGC_P="${PN}-${UGC_PV}"
 UGC_WD="${WORKDIR}/${UGC_P}"
 
@@ -22,6 +22,7 @@ HOMEPAGE="https://www.chromium.org/Home https://github.com/Eloston/ungoogled-chr
 SRC_URI="
 	https://commondatastorage.googleapis.com/chromium-browser-official/chromium-${PV/_*}.tar.xz
 	https://github.com/Eloston/${PN}/archive/${UGC_PV}.tar.gz -> ${UGC_P}.tar.gz
+	https://dev.gentoo.org/~floppym/dist/chromium-webrtc-includes-r1.patch.xz
 "
 
 LICENSE="BSD"
@@ -176,7 +177,6 @@ GTK+ icon theme.
 PATCHES=(
 	"${FILESDIR}/${PN}-compiler-r5.patch"
 	"${FILESDIR}/${PN}-gold-r2.patch"
-	"${FILESDIR}/${PN}-system-nspr-r0.patch"
 	# Extra patches taken from openSUSE
 	"${FILESDIR}/${PN}-libusb-interrupt-event-handler-r0.patch"
 	"${FILESDIR}/${PN}-system-libusb-r0.patch"
@@ -215,13 +215,15 @@ src_prepare() {
 
 	default
 
+	pushd third_party/webrtc >/dev/null || die
+	eapply "${WORKDIR}"/chromium-webrtc-includes-r1.patch
+	popd >/dev/null || die
+
 	if use optimize-webui; then
 		mkdir -p third_party/node/linux/node-linux-x64/bin || die
 		ln -s "${EPREFIX}/usr/bin/node" \
 			third_party/node/linux/node-linux-x64/bin/node || die
 	fi
-
-	use system-libevent && eapply "${FILESDIR}/${PN}-system-event-r0.patch"
 
 	# Hack for libusb stuff (taken from openSUSE)
 	rm third_party/libusb/src/libusb/libusb.h || die
@@ -254,15 +256,13 @@ src_prepare() {
 		# GN bootstrap
 		common:parallel
 		rooted:libcxx
-		# Redundant patches
-		rooted:nspr
-		rooted:event
 	)
 
 	local ugc_use=(
 		system-icu:convertutf
 		system-icu:icu
 		system-jsoncpp:jsoncpp
+		system-libevent:event
 		system-libvpx:vpx
 		vaapi:enable-vaapi
 	)
@@ -468,6 +468,7 @@ src_prepare() {
 		third_party/pdfium/third_party/base
 		third_party/pdfium/third_party/bigint
 		third_party/pdfium/third_party/freetype
+		third_party/pdfium/third_party/lcms
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
 	)
@@ -675,8 +676,10 @@ src_configure() {
 		"use_vaapi=$(usetf vaapi)"
 
 		# Additional flags
+		"enable_desktop_in_product_help=false"
 		"enable_pdf=$(usetf pdf)"
 		"enable_print_preview=$(usetf pdf)"
+		"rtc_build_examples=false"
 		"use_icf=true"
 		# Enables the soon-to-be default tcmalloc (https://crbug.com/724399)
 		# It is relevant only when use_allocator == "tcmalloc"
