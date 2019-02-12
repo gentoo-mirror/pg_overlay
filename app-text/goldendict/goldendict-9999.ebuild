@@ -75,7 +75,7 @@ src_configure() {
 	fi
 
 	myconf+=( CONFIG+=no_qtmultimedia_player )
-	eqmake5 -project "${myconf[@]}"
+	eqmake5 -makefile "${myconf[@]}"
 }
 
 install_locale() {
