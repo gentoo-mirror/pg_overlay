@@ -63,8 +63,8 @@ src_prepare() {
 	# add trailing semicolon
 	sed -i -e '/^Categories/s/$/;/' redist/${PN}.desktop || die
 
-	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> goldendict.pro
-	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> goldendict.pro
+	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> ${PN}.pro
+	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
 }
 
 src_configure() {
@@ -75,7 +75,7 @@ src_configure() {
 	fi
 
 	myconf+=( CONFIG+=no_qtmultimedia_player )
-	eqmake5 "${myconf[@]}"
+	eqmake5 "${myconf[@]}" ${PN}.pro
 }
 
 install_locale() {
