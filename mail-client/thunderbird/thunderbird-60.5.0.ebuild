@@ -437,7 +437,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-rust-debug
+	#mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-macos-target
 	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-address-sanitizer
@@ -449,7 +449,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-vtune
 	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-trace-logging
-	mozconfig_annotate '' --disable-rust-tests
+	#mozconfig_annotate '' --disable-rust-tests
 	mozconfig_annotate '' --disable-eme
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-mortar
