@@ -1,18 +1,18 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2018 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 PYTHON_COMPAT=( python2_7 python3_{4,5,6,7} )
 PYTHON_REQ_USE="xml"
 
-inherit libtool flag-o-matic ltprune python-r1 autotools prefix multilib-minimal
+inherit libtool flag-o-matic ltprune python-r1 autotools prefix multilib-minimal poly-c_ebuilds
 
 DESCRIPTION="XML C parser and toolkit"
 HOMEPAGE="http://www.xmlsoft.org/"
 
 LICENSE="MIT"
 SLOT="2"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~s390 ~sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="debug examples icu ipv6 lzma python readline static-libs test"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -23,7 +23,7 @@ XSTS_TARBALL_1="xsts-2002-01-16.tar.gz"
 XSTS_TARBALL_2="xsts-2004-01-14.tar.gz"
 XMLCONF_TARBALL="xmlts20080827.tar.gz"
 
-SRC_URI="ftp://xmlsoft.org/${PN}/${PN}-${PV/_rc/-rc}.tar.gz
+SRC_URI="ftp://xmlsoft.org/${PN}/${PN}-${MY_PV/_rc/-rc}.tar.gz
 	test? (
 		${XSTS_HOME}/${XSTS_NAME_1}/${XSTS_TARBALL_1}
 		${XSTS_HOME}/${XSTS_NAME_2}/${XSTS_TARBALL_2}
@@ -42,7 +42,7 @@ DEPEND="${RDEPEND}
 	hppa? ( >=sys-devel/binutils-2.15.92.0.2 )
 "
 
-S="${WORKDIR}/${PN}-${PV%_rc*}"
+S="${WORKDIR}/${PN}-${MY_PV%_rc*}"
 
 MULTILIB_CHOST_TOOLS=(
 	/usr/bin/xml2-config
@@ -51,7 +51,7 @@ MULTILIB_CHOST_TOOLS=(
 src_unpack() {
 	# ${A} isn't used to avoid unpacking of test tarballs into $WORKDIR,
 	# as they are needed as tarballs in ${S}/xstc instead and not unpacked
-	unpack ${P/_rc/-rc}.tar.gz
+	unpack ${MY_P/_rc/-rc}.tar.gz
 	cd "${S}" || die
 
 	if use test; then
@@ -80,6 +80,9 @@ src_prepare() {
 	# Fix python detection, bug #567066
 	# https://bugzilla.gnome.org/show_bug.cgi?id=760458
 	eapply "${FILESDIR}"/${PN}-2.9.2-python-ABIFLAG.patch
+
+	# Fix python tests when building out of tree #565576
+	eapply "${FILESDIR}"/${PN}-2.9.8-out-of-tree-test.patch
 
 	if [[ ${CHOST} == *-darwin* ]] ; then
 		# Avoid final linking arguments for python modules
@@ -172,7 +175,7 @@ multilib_src_install_all() {
 		rm -rf "${ED}"/usr/bin/xmlcatalog
 	fi
 
-	rm -rf "${ED}"/usr/share/doc/${P}
+	rm -rf "${ED}"/usr/share/doc/${MY_P}
 	einstalldocs
 
 	if ! use examples; then
