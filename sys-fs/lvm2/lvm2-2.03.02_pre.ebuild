@@ -59,7 +59,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-2.02.56-lvm2create_initrd.patch
 	"${FILESDIR}"/${PN}-2.02.67-createinitrd.patch #301331
 	"${FILESDIR}"/${PN}-2.02.99-locale-muck.patch #330373
-	"${FILESDIR}"/${PN}-2.03.00-dynamic-static-ldflags.patch #332905
+	#"${FILESDIR}"/${PN}-2.03.00-dynamic-static-ldflags.patch #332905
 	"${FILESDIR}"/${PN}-2.02.178-static-pkgconfig-libs.patch #370217, #439414 + blkid
 	"${FILESDIR}"/${PN}-2.03.00-pthread-pkgconfig.patch #492450
 	"${FILESDIR}"/${PN}-2.02.171-static-libm.patch #617756
