@@ -52,7 +52,7 @@ S=${WORKDIR}/${PN/lvm/LVM}.${MY_PV}
 
 PATCHES=(
 	# Gentoo specific modification(s):
-	"${FILESDIR}"/${PN}-2.02.178-example.conf.in.patch
+	#"${FILESDIR}"/${PN}-2.02.178-example.conf.in.patch
 
 	# For upstream -- review and forward:
 	"${FILESDIR}"/${PN}-2.02.63-always-make-static-libdm.patch
