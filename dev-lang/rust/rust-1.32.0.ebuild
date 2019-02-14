@@ -153,7 +153,6 @@ src_configure() {
 		[llvm]
 		enabled = true
 		optimize = false
-		OPT_LEVEL = 0
 		#optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
