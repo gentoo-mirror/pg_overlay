@@ -143,59 +143,6 @@ index 71662e8b9414..98d2fb1e2d03 100644
          let name = pkgname(builder, "lldb");
  
          let tmp = tmpdir(builder);
-diff --git a/src/bootstrap/native.rs b/src/bootstrap/native.rs
-index f5bacd63e680..337c6965a30c 100644
---- a/src/bootstrap/native.rs
-+++ b/src/bootstrap/native.rs
-@@ -36,7 +36,10 @@ impl Step for Llvm {
-     const ONLY_HOSTS: bool = true;
- 
-     fn should_run(run: ShouldRun) -> ShouldRun {
--        run.path("src/llvm").path("src/llvm-emscripten")
-+        run.path("src/llvm-project")
-+            .path("src/llvm-project/llvm")
-+            .path("src/llvm")
-+            .path("src/llvm-emscripten")
-     }
- 
-     fn make_run(run: RunConfig) {
-@@ -97,7 +100,7 @@ impl Step for Llvm {
-         t!(fs::create_dir_all(&out_dir));
- 
-         // http://llvm.org/docs/CMake.html
--        let root = if self.emscripten { "src/llvm-emscripten" } else { "src/llvm" };
-+        let root = if self.emscripten { "src/llvm-emscripten" } else { "src/llvm-project/llvm" };
-         let mut cfg = cmake::Config::new(builder.src.join(root));
- 
-         let profile = match (builder.config.llvm_optimize, builder.config.llvm_release_debuginfo) {
-@@ -189,8 +192,7 @@ impl Step for Llvm {
-         }
- 
-         if want_lldb {
--            cfg.define("LLVM_EXTERNAL_CLANG_SOURCE_DIR", builder.src.join("src/tools/clang"));
--            cfg.define("LLVM_EXTERNAL_LLDB_SOURCE_DIR", builder.src.join("src/tools/lldb"));
-+            cfg.define("LLVM_ENABLE_PROJECTS", "clang;lldb");
-             // For the time being, disable code signing.
-             cfg.define("LLDB_CODESIGN_IDENTITY", "");
-         } else {
-@@ -411,7 +413,7 @@ impl Step for Lld {
-     const ONLY_HOSTS: bool = true;
- 
-     fn should_run(run: ShouldRun) -> ShouldRun {
--        run.path("src/tools/lld")
-+        run.path("src/llvm-project/lld").path("src/tools/lld")
-     }
- 
-     fn make_run(run: RunConfig) {
-@@ -441,7 +443,7 @@ impl Step for Lld {
-         let _time = util::timeit(&builder);
-         t!(fs::create_dir_all(&out_dir));
- 
--        let mut cfg = cmake::Config::new(builder.src.join("src/tools/lld"));
-+        let mut cfg = cmake::Config::new(builder.src.join("src/llvm-project/lld"));
-         configure_cmake(builder, target, &mut cfg);
- 
-         // This is an awful, awful hack. Discovered when we migrated to using
 diff --git a/src/ci/init_repo.sh b/src/ci/init_repo.sh
 index be2cadbbe6cf..6de433fd4c2d 100755
 --- a/src/ci/init_repo.sh
@@ -315,13 +262,6 @@ index 11e34f600c28..853c1ff0047e 100644
                                                    -> &'a DIType;
  
      pub fn LLVMRustDIBuilderCreateUnionType(Builder: &DIBuilder<'a>,
-diff --git a/src/llvm b/src/llvm
-deleted file mode 160000
-index f4728ed8fa22..000000000000
---- a/src/llvm
-+++ /dev/null
-@@ -1 +0,0 @@
--Subproject commit f4728ed8fa2296c5b009bb85550e157e1e57ed0b
 diff --git a/src/llvm-project b/src/llvm-project
 new file mode 160000
 index 000000000000..a27fbee5abae
@@ -527,27 +467,6 @@ index 98f07505f753..62cfef5a845e 100644
  // CHECK: {{.*}}DIEnumerator{{.*}}name: "A",{{.*}}value: {{[0-9].*}}
  // CHECK: {{.*}}DIEnumerator{{.*}}name: "B",{{.*}}value: {{[0-9].*}}
  // CHECK: {{.*}}DIEnumerator{{.*}}name: "C",{{.*}}value: {{[0-9].*}}
-diff --git a/src/tools/clang b/src/tools/clang
-deleted file mode 160000
-index 032312dd0140..000000000000
---- a/src/tools/clang
-+++ /dev/null
-@@ -1 +0,0 @@
--Subproject commit 032312dd0140a7074c9b89d305fe44eb0e44e407
-diff --git a/src/tools/lld b/src/tools/lld
-deleted file mode 160000
-index 1928c5eeb613..000000000000
---- a/src/tools/lld
-+++ /dev/null
-@@ -1 +0,0 @@
--Subproject commit 1928c5eeb613a4c6d232fc47ae91914bbfd92a79
-diff --git a/src/tools/lldb b/src/tools/lldb
-deleted file mode 160000
-index 8ad0817ce45b..000000000000
---- a/src/tools/lldb
-+++ /dev/null
-@@ -1 +0,0 @@
--Subproject commit 8ad0817ce45b0eef9d374691b23f2bd69c164254
 diff --git a/src/tools/tidy/src/lib.rs b/src/tools/tidy/src/lib.rs
 index a10332526d13..022c53f909c7 100644
 --- a/src/tools/tidy/src/lib.rs
@@ -567,17 +486,6 @@ Date: Thu, 17 Jan 2019 12:56:50 -0800
 Subject: [PATCH 2/8] Add two more wasm-related LLVM commits
 
 ---
- src/llvm-project | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/llvm-project b/src/llvm-project
-index a27fbee5abae..25bfc9f499de 160000
---- a/src/llvm-project
-+++ b/src/llvm-project
-@@ -1 +1 @@
--Subproject commit a27fbee5abaee63ac45c8cb9a0c73889c3b98471
-+Subproject commit 25bfc9f499dec435c8a7044b565a4bcd30d1fe00
-
 From cff075009032d11cff3a625663cf460e71e81609 Mon Sep 17 00:00:00 2001
 From: Josh Stone <jistone@redhat.com>
 Date: Tue, 22 Jan 2019 13:01:14 -0800
@@ -763,16 +671,6 @@ Date: Thu, 24 Jan 2019 10:42:52 -0800
 Subject: [PATCH 6/8] [rust-lldb] Adapt to changes in LLDB APIs
 
 ---
- src/llvm-project | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/llvm-project b/src/llvm-project
-index bf94cf8631db..683d3522690b 160000
---- a/src/llvm-project
-+++ b/src/llvm-project
-@@ -1 +1 @@
--Subproject commit bf94cf8631db93c464b7842bf922724583ee15a1
-+Subproject commit 683d3522690b7a9d0163e7e7e6586f2b1364ed02
 
 From 15cf179c9316740fb5ddff3bf8075e5436cece11 Mon Sep 17 00:00:00 2001
 From: Josh Stone <jistone@redhat.com>
