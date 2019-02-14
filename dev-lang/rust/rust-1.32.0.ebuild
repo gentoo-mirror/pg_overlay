@@ -152,8 +152,7 @@ src_configure() {
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
 		enabled = true
-		optimize = false
-		#optimize = $(toml_usex !debug)
+		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		thin-lto = true
@@ -184,7 +183,7 @@ src_configure() {
 		mandir = "share/${P}/man"
 		[rust]
 		debug = $(toml_usex debug)
-		optimize = $(toml_usex !debug)
+		#optimize = $(toml_usex !debug)
 		codegen-units = 1
 		debug-assertions = $(toml_usex debug)
 		debuginfo = $(toml_usex debug)
