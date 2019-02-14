@@ -143,7 +143,7 @@ PATCHES=(
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-	sed -i 's/2.0.9/2.0.12/g' bootstrap.py || die
+	sed -i 's/2.0.9/2.0.14/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 	default_src_prepare
 }
