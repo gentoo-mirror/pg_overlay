@@ -160,6 +160,7 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
 		[build]
+		opt_level = 0
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
@@ -182,7 +183,6 @@ src_configure() {
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
-		opt_level = 0
 		debug = $(toml_usex debug)
 		optimize = $(toml_usex !debug)
 		codegen-units = 1
