@@ -34,44 +34,6 @@ The src/llvm-emscripten fork is unchanged for now.
  delete mode 160000 src/tools/lld
  delete mode 160000 src/tools/lldb
 
-diff --git a/.gitmodules b/.gitmodules
-index c4763612dbf3..4e368c3ebafd 100644
---- a/.gitmodules
-+++ b/.gitmodules
-@@ -1,7 +1,3 @@
--[submodule "src/llvm"]
--	path = src/llvm
--	url = https://github.com/rust-lang/llvm.git
--	branch = master
- [submodule "src/rust-installer"]
- 	path = src/tools/rust-installer
- 	url = https://github.com/rust-lang/rust-installer.git
-@@ -38,20 +34,13 @@
- [submodule "src/stdsimd"]
- 	path = src/stdsimd
- 	url = https://github.com/rust-lang-nursery/stdsimd.git
--[submodule "src/tools/lld"]
--	path = src/tools/lld
--	url = https://github.com/rust-lang/lld.git
--[submodule "src/tools/lldb"]
--	path = src/tools/lldb
--	url = https://github.com/rust-lang-nursery/lldb.git
--	branch = rust-release-80-v2
--[submodule "src/tools/clang"]
--	path = src/tools/clang
--	url = https://github.com/rust-lang-nursery/clang.git
--	branch = rust-release-80-v2
- [submodule "src/doc/rustc-guide"]
- 	path = src/doc/rustc-guide
- 	url = https://github.com/rust-lang/rustc-guide.git
- [submodule "src/doc/edition-guide"]
- 	path = src/doc/edition-guide
--	url = https://github.com/rust-lang-nursery/edition-guide
-+	url = https://github.com/rust-lang-nursery/edition-guide.git
-+[submodule "src/llvm-project"]
-+	path = src/llvm-project
-+	url = https://github.com/rust-lang/llvm-project.git
-+	branch = rustc/8.0-2019-01-16
 diff --git a/COPYRIGHT b/COPYRIGHT
 index 6596c5a3d9af..dc9abf84b8e5 100644
 --- a/COPYRIGHT
