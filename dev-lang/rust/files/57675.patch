@@ -624,23 +624,6 @@ Date: Tue, 22 Jan 2019 19:50:45 -0800
 Subject: [PATCH 4/8] Update LLVM for a CodeView fix
 
 ---
- src/llvm-project | 2 +-
- 1 file changed, 1 insertion(+), 1 deletion(-)
-
-diff --git a/src/llvm-project b/src/llvm-project
-index 25bfc9f499de..bf94cf8631db 160000
---- a/src/llvm-project
-+++ b/src/llvm-project
-@@ -1 +1 @@
--Subproject commit 25bfc9f499dec435c8a7044b565a4bcd30d1fe00
-+Subproject commit bf94cf8631db93c464b7842bf922724583ee15a1
-
-From 400dec059e9d71b06e6cfa5cfe399b4c57eb8119 Mon Sep 17 00:00:00 2001
-From: Josh Stone <jistone@redhat.com>
-Date: Wed, 23 Jan 2019 16:17:24 -0800
-Subject: [PATCH 5/8] librustc_llvm: default to libc++ for darwin
-
----
  src/librustc_llvm/build.rs | 2 ++
  1 file changed, 2 insertions(+)
 
