@@ -62,10 +62,11 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 S="${WORKDIR}/${MY_P}-src"
 
 PATCHES=( "${FILESDIR}"/1.30.1-clippy-sysroot.patch
-		#"${FILESDIR}"/1.32.0-fix-configure-of-bundled-llvm.patch
+		"${FILESDIR}"/1.32.0-fix-configure-of-bundled-llvm.patch
 		"${FILESDIR}"/1.32.0-system-llvm-8-SIGSEGV.patch
 		"${FILESDIR}"/0001-Try-to-get-the-target-triple-from-rustc-itself.patch
 		"${FILESDIR}"/0001-lldb_batchmode.py-try-import-_thread-for-Python-3.patch
+		"${FILESDIR}"/57675.patch
 )
 
 toml_usex() {
