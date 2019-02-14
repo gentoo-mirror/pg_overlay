@@ -183,7 +183,7 @@ src_configure() {
 		mandir = "share/${P}/man"
 		[rust]
 		debug = $(toml_usex debug)
-		#optimize = $(toml_usex !debug)
+		optimize = $(toml_usex !debug)
 		codegen-units = 1
 		debug-assertions = $(toml_usex debug)
 		debuginfo = $(toml_usex debug)
@@ -229,7 +229,7 @@ src_configure() {
 
 src_compile() {
 	env $(cat "${S}"/config.env)\
-		"${EPYTHON}" ./x.py build --config="${S}"/config.toml -j$(makeopts_jobs) \
+		opt_level=0 "${EPYTHON}" ./x.py build --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
