@@ -23,7 +23,7 @@ DEPEND="
 src_compile() {
 	distutils-r1_src_compile
 
-	emake ${PN}.{bash-completion}
+	emake ${PN}.bash-completion
 }
 
 python_install_all() {
