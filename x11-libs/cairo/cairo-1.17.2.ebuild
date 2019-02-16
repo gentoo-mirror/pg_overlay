@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -11,21 +11,22 @@ if [[ ${PV} == *9999* ]]; then
 	SRC_URI=""
 else
 	SRC_URI="https://www.cairographics.org/snapshots/${P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~arm-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+	KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 fi
 
 DESCRIPTION="A vector graphics library with cross-device output support"
 HOMEPAGE="https://www.cairographics.org"
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
-IUSE="X aqua debug gles2 +glib opengl static-libs +svg valgrind xcb"
+IUSE="X aqua debug gles2 +glib opengl static-libs +svg utils valgrind xcb"
 # gtk-doc regeneration doesn't seem to work with out-of-source builds
 #[[ ${PV} == *9999* ]] && IUSE="${IUSE} doc" # API docs are provided in tarball, no need to regenerate
 
 # Test causes a circular depend on gtk+... since gtk+ needs cairo but test needs gtk+ so we need to block it
 RESTRICT="test"
 
-RDEPEND=">=dev-libs/lzo-2.06-r1[${MULTILIB_USEDEP}]
+RDEPEND="
+	>=dev-libs/lzo-2.06-r1[${MULTILIB_USEDEP}]
 	>=media-libs/fontconfig-2.10.92[${MULTILIB_USEDEP}]
 	>=media-libs/freetype-2.5.0.1:2[${MULTILIB_USEDEP}]
 	>=media-libs/libpng-1.6.10:0=[${MULTILIB_USEDEP}]
@@ -86,12 +87,6 @@ multilib_src_configure() {
 	[[ ${CHOST} == *-interix* ]] && append-flags -D_REENTRANT
 
 	use elibc_FreeBSD && myopts+=" --disable-symbol-lookup"
-	[[ ${CHOST} == *-darwin* ]] && myopts+=" --disable-symbol-lookup"
-
-	# TODO: remove this (and add USE-dep) when qtgui is converted, bug #498010
-	if ! multilib_is_native_abi; then
-		myopts+=" --disable-qt"
-	fi
 
 	# [[ ${PV} == *9999* ]] && myopts+=" $(use_enable doc gtk-doc)"
 
@@ -110,6 +105,7 @@ multilib_src_configure() {
 		$(use_enable opengl gl) \
 		$(use_enable static-libs static) \
 		$(use_enable svg) \
+		$(use_enable utils trace) \
 		$(use_enable valgrind) \
 		$(use_enable xcb) \
 		$(use_enable xcb xcb-shm) \
@@ -117,6 +113,8 @@ multilib_src_configure() {
 		--enable-pdf \
 		--enable-png \
 		--enable-ps \
+		--enable-script \
+		--enable-interpreter \
 		--disable-drm \
 		--disable-directfb \
 		--disable-gallium \
