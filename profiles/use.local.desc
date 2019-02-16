@@ -17,4 +17,9 @@ media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with M
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
+x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
+x11-libs/cairo:glib - Compile with GLib Object System support
+x11-libs/cairo:opengl - Build the OpenGL backend
+x11-libs/cairo:utils - Build support for Cairo script and trace utilities
+x11-libs/cairo:valgrind - Built-in support to mark memory regions
 x11-libs/libxcb:xkb - Enable the XCB keyboard extension

@@ -17,4 +17,5 @@ media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Moz
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 sys-libs/cracklib 2.9.6-r1: Password Checking Library
 x11-base/xcb-proto 1.13: X C-language Bindings protocol headers
+x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/libxcb 1.13.1: X C-language Bindings library
