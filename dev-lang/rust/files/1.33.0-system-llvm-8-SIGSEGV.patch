@@ -18,7 +18,7 @@ diff --git a/src/librustc_codegen_llvm/debuginfo/metadata.rs b/src/librustc_code
 index 6deedd0b5ea3..a354eef6887a 100644
 --- a/src/librustc_codegen_llvm/debuginfo/metadata.rs
 +++ b/src/librustc_codegen_llvm/debuginfo/metadata.rs
-@@ -1164,7 +1164,11 @@ fn use_enum_fallback(cx: &CodegenCx) -> bool {
+@@ -1166,7 +1166,11 @@ fn use_enum_fallback(cx: &CodegenCx) -> bool {
      // On MSVC we have to use the fallback mode, because LLVM doesn't
      // lower variant parts to PDB.
      return cx.sess().target.target.options.is_like_msvc
