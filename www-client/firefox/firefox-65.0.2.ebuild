@@ -260,6 +260,8 @@ src_prepare() {
 	# FreeBSD patches
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
+	eapply "${FILESDIR}"/D2028{8,9}.diff
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
