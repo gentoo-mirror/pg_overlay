@@ -193,6 +193,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	eapply "${FILESDIR}"/D2028{8,9}.diff
 	eapply "${WORKDIR}/firefox"
 
 	# Allow user to apply any additional patches without modifing ebuild
