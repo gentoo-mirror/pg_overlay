@@ -193,6 +193,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	eapply "${FILESDIR}"/D2028{8,9}.diff
 	eapply "${WORKDIR}/firefox"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -258,11 +259,9 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
 
 	# FreeBSD patches
-	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
+	#for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
-	eapply "${FILESDIR}"/D20289.diff
-
-	# Autotools configure is now called old-configure.in
+		# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
 	eautoreconf old-configure.in
