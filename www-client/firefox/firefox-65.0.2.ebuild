@@ -193,7 +193,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}"/D2028{8,9}.diff
 	eapply "${WORKDIR}/firefox"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -567,7 +566,7 @@ src_configure() {
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
-	#mozconfig_annotate '' --enable-rust-simd
+	mozconfig_annotate '' --disable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrender
 	mozconfig_annotate '' --enable-webrtc
