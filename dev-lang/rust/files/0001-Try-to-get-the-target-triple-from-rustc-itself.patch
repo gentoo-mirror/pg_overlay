@@ -16,10 +16,10 @@ code is kept as a fallback.
  src/loader.rs | 41 ++++++++++++++++++++++++++++++++++++++---
  1 file changed, 38 insertions(+), 3 deletions(-)
 
-diff --git a/vendor/rls-analysis/src/loader.rs b/vendor/rls-analysis/src/loader.rs
+diff --git a/src/loader.rs b/src/loader.rs
 index 645c95139164..fe92bef1c596 100644
---- a/vendor/rls-analysis/src/loader.rs
-+++ b/vendor/rls-analysis/src/loader.rs
+--- a/src/loader.rs
++++ b/src/loader.rs
 @@ -108,9 +108,33 @@ impl AnalysisLoader for CargoAnalysisLoader {
      }
  }
