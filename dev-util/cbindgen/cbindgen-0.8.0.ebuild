@@ -20,6 +20,7 @@ log-0.4.6
 proc-macro2-0.4.25
 quote-0.6.10
 rand-0.6.4
+rand_chacha-0.1.1
 rand_core-0.3.0
 redox_syscall-0.1.50
 redox_termios-0.1.1
