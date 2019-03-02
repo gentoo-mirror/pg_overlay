@@ -24,6 +24,7 @@ rand_core-0.3.0
 redox_syscall-0.1.50
 redox_termios-0.1.1
 remove_dir_all-0.5.1
+ryu-0.2.7
 serde-1.0.84
 serde_derive-1.0.84
 serde_json-1.0.36
