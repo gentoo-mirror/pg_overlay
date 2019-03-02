@@ -263,8 +263,7 @@ src_prepare() {
 	#eapply "${FILESDIR}"/22674.patch
 	eapply "${FILESDIR}"/1519629.patch
 
-
-		# Autotools configure is now called old-configure.in
+	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
 	eautoreconf old-configure.in
