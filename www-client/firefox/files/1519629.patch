@@ -10,12 +10,7 @@ Bug 1519629 - Document a few more macros.
 diff --git a/servo/components/style/gecko/regen_atoms.py b/servo/components/style/gecko/regen_atoms.py
 --- a/servo/components/style/gecko/regen_atoms.py
 +++ b/servo/components/style/gecko/regen_atoms.py
-@@ -125,16 +125,17 @@ PRELUDE = '''
- RULE_TEMPLATE = '''
-     ("{atom}") => {{{{
-         #[allow(unsafe_code)] #[allow(unused_unsafe)]
-         unsafe {{ $crate::string_cache::Atom::from_index({index}) }}
-     }}}};
+@@ -171,6 +171,7 @@
  '''[1:]
  
  MACRO_TEMPLATE = '''
@@ -23,11 +18,7 @@ diff --git a/servo/components/style/gecko/regen_atoms.py b/servo/components/styl
  #[macro_export]
  macro_rules! atom {{
  {body}\
- }}
- '''
- 
- def write_atom_macro(atoms, file_name):
-     with FileAvoidWrite(file_name) as f:
+
 diff --git a/servo/components/style/gecko_string_cache/namespace.rs b/servo/components/style/gecko_string_cache/namespace.rs
 --- a/servo/components/style/gecko_string_cache/namespace.rs
 +++ b/servo/components/style/gecko_string_cache/namespace.rs
