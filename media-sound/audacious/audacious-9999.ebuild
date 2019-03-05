@@ -1,58 +1,61 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PLOCALES="ar be bg ca cmn cs da de el en_GB es es_AR es_MX et eu fa_IR fi fr gl hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ro ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
 
-inherit autotools eutils git-r3 gnome2-utils l10n xdg-utils
+MY_P="${P/_/-}"
 
-DESCRIPTION="Audacious Player - Your music, your way, no exceptions"
+if [[ ${PV} == *9999 ]]; then
+	inherit autotools git-r3 l10n
+	EGIT_REPO_URI="https://github.com/audacious-media-player/audacious.git"
+else
+	SRC_URI="https://distfiles.audacious-media-player.org/${MY_P}.tar.bz2"
+	KEYWORDS="~amd64 ~x86"
+fi
+inherit xdg
+
+DESCRIPTION="Lightweight and versatile audio player"
 HOMEPAGE="https://audacious-media-player.org/"
-EGIT_REPO_URI="https://github.com/${PN}-media-player/${PN}.git"
-
-SRC_URI+="mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2"
+SRC_URI+=" mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2"
 
 LICENSE="BSD-2"
 SLOT="0"
-KEYWORDS=""
+IUSE="nls qt5"
 
-IUSE="gtk3 nls qt5"
-REQUIRED_USE="^^ ( gtk3 qt5 )"
-DOCS="AUTHORS"
-
-RDEPEND="
+BDEPEND="
+	virtual/pkgconfig
+	nls? ( dev-util/intltool )
+"
+DEPEND="
 	>=dev-libs/dbus-glib-0.60
 	>=dev-libs/glib-2.28
 	>=x11-libs/cairo-1.2.6
 	>=x11-libs/pango-1.8.0
 	virtual/freedesktop-icon-theme
-	gtk3? ( x11-libs/gtk+:3 )
+	!qt5? ( x11-libs/gtk+:2 )
 	qt5? (
 		dev-qt/qtcore:5
 		dev-qt/qtgui:5
 		dev-qt/qtwidgets:5
-	)"
-DEPEND="${RDEPEND}
-	virtual/pkgconfig
-	nls? ( dev-util/intltool )"
+	)
+"
+RDEPEND="${DEPEND}"
 PDEPEND="~media-plugins/audacious-plugins-${PV}"
+
+S="${WORKDIR}/${MY_P}"
 
 src_unpack() {
 	default
-	if use !gtk3; then
-		EGIT_BRANCH="master"
-		EGIT_COMMIT="$EGIT_BRANCH"
-		git-r3_src_unpack
-	else
-		EGIT_BRANCH="master-gtk3"
-		EGIT_COMMIT="$EGIT_BRANCH"		
-		git-r3_src_unpack
-	fi
+	[[ ${PV} == *9999 ]] && git-r3_src_unpack
 }
 
 src_prepare() {
 	default
+	if ! use nls; then
+		sed -e "/SUBDIRS/s/ po//" -i Makefile || die # bug #512698
+	fi
 
 	rm_locale() {
 		rm -vf "po/${1}.po" || die
@@ -61,8 +64,8 @@ src_prepare() {
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rm_locale
 
-	eautoreconf
-	}
+	[[ ${PV} == *9999 ]] && eautoreconf
+}
 
 src_configure() {
 	# D-Bus is a mandatory dependency, remote control,
@@ -73,8 +76,8 @@ src_configure() {
 	econf \
 		--disable-valgrind \
 		--enable-dbus \
-		$(use_enable gtk3 gtk) \
 		$(use_enable nls) \
+		$(use_enable !qt5 gtk) \
 		$(use_enable qt5 qt)
 }
 
@@ -86,14 +89,4 @@ src_install() {
 	doins -r "${WORKDIR}"/gentoo_ice/.
 	docinto gentoo_ice
 	dodoc "${WORKDIR}"/README
-}
-
-pkg_postinst() {
-	xdg_desktop_database_update
-	gnome2_icon_cache_update
-}
-
-pkg_postrm() {
-	xdg_desktop_database_update
-	gnome2_icon_cache_update
 }
