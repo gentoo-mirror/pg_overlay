@@ -8,7 +8,7 @@ PLOCALES="ar be bg ca cmn cs da de el en_GB es_AR es_MX es et eu fa_IR fi fr gl 
 MY_P="${P/_/-}"
 
 if [[ ${PV} == *9999 ]]; then
-	inherit autotools git-r3
+	inherit autotools git-r3 l10n
 	EGIT_REPO_URI="https://github.com/audacious-media-player/audacious-plugins.git"
 else
 	SRC_URI="https://distfiles.audacious-media-player.org/${MY_P}.tar.bz2"
