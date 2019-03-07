@@ -62,12 +62,12 @@ src_prepare() {
 
 		# for english we provide just helppack, as translation is always there
 		if [[ ${lang%:*} != en ]]; then
-			rpmdir="LibreOffice_${MY_PV}_Linux_x86_rpm_langpack_${dir}/RPMS/"
+			rpmdir="LibreOffice_${MY_PV}_Linux_x86-64_rpm_langpack_${dir}/RPMS/"
 			[[ -d ${rpmdir} ]] || die "Missing directory: ${rpmdir}"
 			rpm_unpack ./${rpmdir}/*.rpm
 		fi
 		if [[ "${LANGUAGES_HELP}" =~ " ${lang} " ]] && use offlinehelp; then
-			rpmdir="LibreOffice_${MY_PV}_Linux_x86_rpm_helppack_${dir}/RPMS/"
+			rpmdir="LibreOffice_${MY_PV}_Linux_x86-64_rpm_helppack_${dir}/RPMS/"
 			[[ -d ${rpmdir} ]] || die "Missing directory: ${rpmdir}"
 			rpm_unpack ./${rpmdir}/*.rpm
 		fi
