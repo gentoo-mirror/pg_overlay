@@ -259,7 +259,7 @@ src_prepare() {
 
 	eapply "${FILESDIR}"/thunderbird-60-sqlite3-fts3-tokenizer.patch
 
-	eapply "${FILESDIR}"Bug_1519629.patch
+	eapply "${FILESDIR}"/Bug_1519629.patch
 
 	# Ensure that are plugins dir is enabled as default
 	sed -i -e "s:/usr/lib/mozilla/plugins:/usr/lib/nsbrowser/plugins:" \
