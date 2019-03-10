@@ -10,8 +10,8 @@ Date:   Mon Mar 19 09:58:06 2018 +0100
 
 diff --git js/src/irregexp/NativeRegExpMacroAssembler.cpp js/src/irregexp/NativeRegExpMacroAssembler.cpp
 index 28a4c35e75bfe..c08b005cf856b 100644
---- js/src/irregexp/NativeRegExpMacroAssembler.cpp
-+++ js/src/irregexp/NativeRegExpMacroAssembler.cpp
+--- a/js/src/irregexp/NativeRegExpMacroAssembler.cpp
++++ b/js/src/irregexp/NativeRegExpMacroAssembler.cpp
 @@ -123,7 +123,15 @@ NativeRegExpMacroAssembler::GenerateCode(JSContext* cx, bool match_only)
      masm.bind(&entry_label_);
  
@@ -55,8 +55,8 @@ index 28a4c35e75bfe..c08b005cf856b 100644
 diff --git js/src/jit-test/tests/regexp/bug1445907.js js/src/jit-test/tests/regexp/bug1445907.js
 new file mode 100644
 index 0000000000000..75b23753eaf93
---- /dev/null
-+++ js/src/jit-test/tests/regexp/bug1445907.js
+--- a//dev/null
++++ b/js/src/jit-test/tests/regexp/bug1445907.js
 @@ -0,0 +1,15 @@
 +// On ARM64, we failed to save x28 properly when generating code for the regexp
 +// matcher.

@@ -14,8 +14,8 @@ Date:   Mon Mar 5 09:55:28 2018 +0100
 
 diff --git js/src/jit/ProcessExecutableMemory.cpp js/src/jit/ProcessExecutableMemory.cpp
 index e763a9d68dc17..8a6d50b6a7845 100644
---- js/src/jit/ProcessExecutableMemory.cpp
-+++ js/src/jit/ProcessExecutableMemory.cpp
+--- a/js/src/jit/ProcessExecutableMemory.cpp
++++ b/js/src/jit/ProcessExecutableMemory.cpp
 @@ -20,6 +20,9 @@
  #include "jsutil.h"
  

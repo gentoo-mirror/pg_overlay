@@ -72,8 +72,8 @@ Date:   Fri Feb 16 17:54:16 2018 +1100
 
 diff --git dom/ipc/ContentParent.cpp dom/ipc/ContentParent.cpp
 index e27f3eedc1b1..60be7005354b 100644
---- dom/ipc/ContentParent.cpp
-+++ dom/ipc/ContentParent.cpp
+--- a/dom/ipc/ContentParent.cpp
++++ b/dom/ipc/ContentParent.cpp
 @@ -7,6 +7,7 @@
  #include "mozilla/DebugOnly.h"
  
@@ -199,8 +199,8 @@ index e27f3eedc1b1..60be7005354b 100644
    }
 diff --git dom/ipc/ContentProcess.cpp dom/ipc/ContentProcess.cpp
 index e3c1f16910c6..2441c8cb9224 100644
---- dom/ipc/ContentProcess.cpp
-+++ dom/ipc/ContentProcess.cpp
+--- a/dom/ipc/ContentProcess.cpp
++++ b/dom/ipc/ContentProcess.cpp
 @@ -8,6 +8,8 @@
  
  #include "ContentProcess.h"
@@ -375,8 +375,8 @@ index e3c1f16910c6..2441c8cb9224 100644
                  IOThreadChild::channel(), childID, isForBrowser);
 diff --git dom/ipc/ContentProcess.h dom/ipc/ContentProcess.h
 index a3854c761e10..6582c94da496 100644
---- dom/ipc/ContentProcess.h
-+++ dom/ipc/ContentProcess.h
+--- a/dom/ipc/ContentProcess.h
++++ b/dom/ipc/ContentProcess.h
 @@ -45,6 +45,11 @@ class ContentProcess : public mozilla::ipc::ProcessChi
    DISALLOW_EVIL_CONSTRUCTORS(ContentProcess);
  };
@@ -391,8 +391,8 @@ index a3854c761e10..6582c94da496 100644
  
 diff --git ipc/chromium/src/base/process_util_win.cc ipc/chromium/src/base/process_util_win.cc
 index 3ed54cd744ac..46667985cd71 100644
---- ipc/chromium/src/base/process_util_win.cc
-+++ ipc/chromium/src/base/process_util_win.cc
+--- a/ipc/chromium/src/base/process_util_win.cc
++++ b/ipc/chromium/src/base/process_util_win.cc
 @@ -320,6 +320,11 @@ bool LaunchApp(const std::wstring& cmdline, const Laun
    LPPROC_THREAD_ATTRIBUTE_LIST lpAttributeList = NULL;
    std::vector<HANDLE> handlesToInherit;
@@ -407,8 +407,8 @@ index 3ed54cd744ac..46667985cd71 100644
  
 diff --git ipc/glue/GeckoChildProcessHost.cpp ipc/glue/GeckoChildProcessHost.cpp
 index d18ed9edd4ca..3be1c51d10bb 100644
---- ipc/glue/GeckoChildProcessHost.cpp
-+++ ipc/glue/GeckoChildProcessHost.cpp
+--- a/ipc/glue/GeckoChildProcessHost.cpp
++++ b/ipc/glue/GeckoChildProcessHost.cpp
 @@ -1018,9 +1018,6 @@ bool GeckoChildProcessHost::PerformAsyncLaunchInternal
  
    if (!CrashReporter::IsDummy()) {
@@ -482,8 +482,8 @@ index d18ed9edd4ca..3be1c51d10bb 100644
      *process_handle = handle;
 diff --git ipc/glue/GeckoChildProcessHost.h ipc/glue/GeckoChildProcessHost.h
 index 631c42066bc7..0345e221abcc 100644
---- ipc/glue/GeckoChildProcessHost.h
-+++ ipc/glue/GeckoChildProcessHost.h
+--- a/ipc/glue/GeckoChildProcessHost.h
++++ b/ipc/glue/GeckoChildProcessHost.h
 @@ -94,6 +94,16 @@ class GeckoChildProcessHost : public ChildProcessHost 
    task_t GetChildTask() { return mChildTask; }
  #endif
@@ -503,8 +503,8 @@ index 631c42066bc7..0345e221abcc 100644
     * ensure its OS resources are cleaned up.
 diff --git mobile/android/geckoview/src/main/aidl/org/mozilla/gecko/process/IChildProcess.aidl mobile/android/geckoview/src/main/aidl/org/mozilla/gecko/process/IChildProcess.aidl
 index ba26ae1ba06b..a2535f44c72b 100644
---- mobile/android/geckoview/src/main/aidl/org/mozilla/gecko/process/IChildProcess.aidl
-+++ mobile/android/geckoview/src/main/aidl/org/mozilla/gecko/process/IChildProcess.aidl
+--- a/mobile/android/geckoview/src/main/aidl/org/mozilla/gecko/process/IChildProcess.aidl
++++ b/mobile/android/geckoview/src/main/aidl/org/mozilla/gecko/process/IChildProcess.aidl
 @@ -12,6 +12,7 @@ import android.os.ParcelFileDescriptor;
  interface IChildProcess {
      int getPid();
@@ -516,8 +516,8 @@ index ba26ae1ba06b..a2535f44c72b 100644
  }
 diff --git mobile/android/geckoview/src/main/java/org/mozilla/gecko/GeckoThread.java mobile/android/geckoview/src/main/java/org/mozilla/gecko/GeckoThread.java
 index dfabfd05daf0..8311920afeec 100644
---- mobile/android/geckoview/src/main/java/org/mozilla/gecko/GeckoThread.java
-+++ mobile/android/geckoview/src/main/java/org/mozilla/gecko/GeckoThread.java
+--- a/mobile/android/geckoview/src/main/java/org/mozilla/gecko/GeckoThread.java
++++ b/mobile/android/geckoview/src/main/java/org/mozilla/gecko/GeckoThread.java
 @@ -128,6 +128,7 @@ public class GeckoThread extends Thread {
      public static final int FLAG_PRELOAD_CHILD = 2; // Preload child during main thread start.
  
@@ -574,8 +574,8 @@ index dfabfd05daf0..8311920afeec 100644
                                mExtras.getInt(EXTRA_CRASH_ANNOTATION_FD, -1));
 diff --git mobile/android/geckoview/src/main/java/org/mozilla/gecko/mozglue/GeckoLoader.java mobile/android/geckoview/src/main/java/org/mozilla/gecko/mozglue/GeckoLoader.java
 index b1830fd86945..ac128b651e7b 100644
---- mobile/android/geckoview/src/main/java/org/mozilla/gecko/mozglue/GeckoLoader.java
-+++ mobile/android/geckoview/src/main/java/org/mozilla/gecko/mozglue/GeckoLoader.java
+--- a/mobile/android/geckoview/src/main/java/org/mozilla/gecko/mozglue/GeckoLoader.java
++++ b/mobile/android/geckoview/src/main/java/org/mozilla/gecko/mozglue/GeckoLoader.java
 @@ -463,7 +463,7 @@ public final class GeckoLoader {
      public static native boolean verifyCRCs(String apkName);
  
@@ -587,8 +587,8 @@ index b1830fd86945..ac128b651e7b 100644
      private static native void loadNSSLibsNative(String apkName);
 diff --git mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoProcessManager.java mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoProcessManager.java
 index b762e1c9a3eb..dba329ba8f92 100644
---- mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoProcessManager.java
-+++ mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoProcessManager.java
+--- a/mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoProcessManager.java
++++ b/mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoProcessManager.java
 @@ -169,14 +169,14 @@ public final class GeckoProcessManager extends IProcessManager.Stub {
  
      @WrapForJNI
@@ -644,8 +644,8 @@ index b762e1c9a3eb..dba329ba8f92 100644
          try {
 diff --git mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoServiceChildProcess.java mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoServiceChildProcess.java
 index f1f6ce109fda..6dc19813fc10 100644
---- mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoServiceChildProcess.java
-+++ mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoServiceChildProcess.java
+--- a/mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoServiceChildProcess.java
++++ b/mobile/android/geckoview/src/main/java/org/mozilla/gecko/process/GeckoServiceChildProcess.java
 @@ -63,6 +63,7 @@ public class GeckoServiceChildProcess extends Service {
          public boolean start(final IProcessManager procMan,
                               final String[] args,
@@ -673,8 +673,8 @@ index f1f6ce109fda..6dc19813fc10 100644
                      }
 diff --git modules/libpref/Preferences.cpp modules/libpref/Preferences.cpp
 index 330ed4a09b54..b884591c9271 100644
---- modules/libpref/Preferences.cpp
-+++ modules/libpref/Preferences.cpp
+--- a/modules/libpref/Preferences.cpp
++++ b/modules/libpref/Preferences.cpp
 @@ -2637,7 +2637,7 @@ class AddPreferencesMemoryReporterRunnable : public Ru
  
  }  // namespace
@@ -828,8 +828,8 @@ index 330ed4a09b54..b884591c9271 100644
  /* static */ int32_t Preferences::GetType(const char* aPrefName) {
 diff --git modules/libpref/Preferences.h modules/libpref/Preferences.h
 index 1cb825ecbfe5..c149db62b525 100644
---- modules/libpref/Preferences.h
-+++ modules/libpref/Preferences.h
+--- a/modules/libpref/Preferences.h
++++ b/modules/libpref/Preferences.h
 @@ -41,6 +41,11 @@ class PrefValue;
  
  struct PrefsSizes;
@@ -871,8 +871,8 @@ index 1cb825ecbfe5..c149db62b525 100644
    // When a single pref is changed in the parent process, these methods are
 diff --git mozglue/android/APKOpen.cpp mozglue/android/APKOpen.cpp
 index 5f1ef55b605e..b57192488725 100644
---- mozglue/android/APKOpen.cpp
-+++ mozglue/android/APKOpen.cpp
+--- a/mozglue/android/APKOpen.cpp
++++ b/mozglue/android/APKOpen.cpp
 @@ -378,7 +378,8 @@ static void FreeArgv(char** argv, int argc) {
  extern "C" APKOPEN_EXPORT void MOZ_JNICALL
  Java_org_mozilla_gecko_mozglue_GeckoLoader_nativeRun(JNIEnv* jenv, jclass jc,
@@ -895,8 +895,8 @@ index 5f1ef55b605e..b57192488725 100644
      XREChildData childData;
 diff --git toolkit/xre/Bootstrap.cpp toolkit/xre/Bootstrap.cpp
 index 5688519822a9..7e857969a4fb 100644
---- toolkit/xre/Bootstrap.cpp
-+++ toolkit/xre/Bootstrap.cpp
+--- a/toolkit/xre/Bootstrap.cpp
++++ b/toolkit/xre/Bootstrap.cpp
 @@ -71,9 +71,11 @@ class BootstrapImpl final : public Bootstrap {
      ::GeckoStart(aEnv, argv, argc, aAppData);
    }
@@ -913,8 +913,8 @@ index 5688519822a9..7e857969a4fb 100644
  
 diff --git toolkit/xre/Bootstrap.h toolkit/xre/Bootstrap.h
 index 686d0a38e324..77adcef80e1f 100644
---- toolkit/xre/Bootstrap.h
-+++ toolkit/xre/Bootstrap.h
+--- a/toolkit/xre/Bootstrap.h
++++ b/toolkit/xre/Bootstrap.h
 @@ -112,8 +112,8 @@ class Bootstrap {
    virtual void GeckoStart(JNIEnv* aEnv, char** argv, int argc,
                            const StaticXREAppData& aAppData) = 0;
@@ -928,8 +928,8 @@ index 686d0a38e324..77adcef80e1f 100644
  #ifdef LIBFUZZER
 diff --git toolkit/xre/nsEmbedFunctions.cpp toolkit/xre/nsEmbedFunctions.cpp
 index 53bd2bc2eb47..83184e97ba92 100644
---- toolkit/xre/nsEmbedFunctions.cpp
-+++ toolkit/xre/nsEmbedFunctions.cpp
+--- a/toolkit/xre/nsEmbedFunctions.cpp
++++ b/toolkit/xre/nsEmbedFunctions.cpp
 @@ -226,9 +226,10 @@ GeckoProcessType sChildProcessType = GeckoProcessType_
  }  // namespace mozilla
  
@@ -944,8 +944,8 @@ index 53bd2bc2eb47..83184e97ba92 100644
    CrashReporter::SetCrashAnnotationPipeForChild(crashAnnotationFd);
 diff --git widget/android/GeneratedJNIWrappers.cpp widget/android/GeneratedJNIWrappers.cpp
 index e3f6af0cc575..4165df59f0e8 100644
---- widget/android/GeneratedJNIWrappers.cpp
-+++ widget/android/GeneratedJNIWrappers.cpp
+--- a/widget/android/GeneratedJNIWrappers.cpp
++++ b/widget/android/GeneratedJNIWrappers.cpp
 @@ -2355,9 +2355,9 @@ constexpr char GeckoProcessManager::GetEditableParent_t::signature[];
  constexpr char GeckoProcessManager::Start_t::name[];
  constexpr char GeckoProcessManager::Start_t::signature[];
@@ -960,8 +960,8 @@ index e3f6af0cc575..4165df59f0e8 100644
  const char GeckoServiceChildProcess::name[] =
 diff --git widget/android/GeneratedJNIWrappers.h widget/android/GeneratedJNIWrappers.h
 index ece79ac94a71..228affa1e550 100644
---- widget/android/GeneratedJNIWrappers.h
-+++ widget/android/GeneratedJNIWrappers.h
+--- a/widget/android/GeneratedJNIWrappers.h
++++ b/widget/android/GeneratedJNIWrappers.h
 @@ -6696,10 +6696,11 @@ public:
                  mozilla::jni::ObjectArray::Param,
                  int32_t,
@@ -986,8 +986,8 @@ index ece79ac94a71..228affa1e550 100644
              mozilla::jni::CallingThread::ANY;
 diff --git xpcom/build/nsXULAppAPI.h xpcom/build/nsXULAppAPI.h
 index 94f6daf864c9..d6ac10d51d76 100644
---- xpcom/build/nsXULAppAPI.h
-+++ xpcom/build/nsXULAppAPI.h
+--- a/xpcom/build/nsXULAppAPI.h
++++ b/xpcom/build/nsXULAppAPI.h
 @@ -378,7 +378,8 @@ XRE_API(const char*, XRE_ChildProcessTypeToString,
  
  #if defined(MOZ_WIDGET_ANDROID)

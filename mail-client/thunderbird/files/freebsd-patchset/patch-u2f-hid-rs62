@@ -2,8 +2,8 @@ https://github.com/jcjones/u2f-hid-rs/pull/62
 
 diff --git Cargo.lock Cargo.lock
 index 4bfba0eb2f52..cd4d80035d81 100644
---- Cargo.lock
-+++ Cargo.lock
+--- a/Cargo.lock
++++ b/Cargo.lock
 @@ -486,6 +486,15 @@ dependencies = [
   "unreachable 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  ]
@@ -61,8 +61,8 @@ index 4bfba0eb2f52..cd4d80035d81 100644
  "checksum num-iter 0.1.34 (registry+https://github.com/rust-lang/crates.io-index)" = "7485fcc84f85b4ecd0ea527b14189281cf27d60e583ae65ebc9c088b13dffe01"
 diff --git dom/webauthn/u2f-hid-rs/Cargo.toml dom/webauthn/u2f-hid-rs/Cargo.toml
 index a0ab8ce71067..046de1e46f15 100644
---- dom/webauthn/u2f-hid-rs/Cargo.toml
-+++ dom/webauthn/u2f-hid-rs/Cargo.toml
+--- a/dom/webauthn/u2f-hid-rs/Cargo.toml
++++ b/dom/webauthn/u2f-hid-rs/Cargo.toml
 @@ -6,6 +6,9 @@ authors = ["Kyle Machulis <kyle@nonpolynomial.com>", "J.C. Jones <jc@mozilla.com
  [target.'cfg(target_os = "linux")'.dependencies]
  libudev = "^0.2"
@@ -83,8 +83,8 @@ index a0ab8ce71067..046de1e46f15 100644
  env_logger = "0.4.1"
 diff --git dom/webauthn/u2f-hid-rs/README.md dom/webauthn/u2f-hid-rs/README.md
 index 2edf412211b5..a29905832e5e 100644
---- dom/webauthn/u2f-hid-rs/README.md
-+++ dom/webauthn/u2f-hid-rs/README.md
+--- a/dom/webauthn/u2f-hid-rs/README.md
++++ b/dom/webauthn/u2f-hid-rs/README.md
 @@ -5,7 +5,7 @@
  
  This is a cross-platform library for interacting with U2F Security Key-type devices via Rust.
@@ -96,8 +96,8 @@ index 2edf412211b5..a29905832e5e 100644
  
 diff --git dom/webauthn/u2f-hid-rs/examples/main.rs dom/webauthn/u2f-hid-rs/examples/main.rs
 index d0b02e61a05b..8ecf102f2136 100644
---- dom/webauthn/u2f-hid-rs/examples/main.rs
-+++ dom/webauthn/u2f-hid-rs/examples/main.rs
+--- a/dom/webauthn/u2f-hid-rs/examples/main.rs
++++ b/dom/webauthn/u2f-hid-rs/examples/main.rs
 @@ -3,10 +3,9 @@
   * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
  
@@ -152,8 +152,8 @@ index d0b02e61a05b..8ecf102f2136 100644
 diff --git dom/webauthn/u2f-hid-rs/src/freebsd/device.rs dom/webauthn/u2f-hid-rs/src/freebsd/device.rs
 new file mode 100644
 index 000000000000..5b9e7f2a912e
---- /dev/null
-+++ dom/webauthn/u2f-hid-rs/src/freebsd/device.rs
+--- a//dev/null
++++ b/dom/webauthn/u2f-hid-rs/src/freebsd/device.rs
 @@ -0,0 +1,88 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -246,8 +246,8 @@ index 000000000000..5b9e7f2a912e
 diff --git dom/webauthn/u2f-hid-rs/src/freebsd/mod.rs dom/webauthn/u2f-hid-rs/src/freebsd/mod.rs
 new file mode 100644
 index 000000000000..7ed5727157d5
---- /dev/null
-+++ dom/webauthn/u2f-hid-rs/src/freebsd/mod.rs
+--- a//dev/null
++++ b/dom/webauthn/u2f-hid-rs/src/freebsd/mod.rs
 @@ -0,0 +1,9 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -261,8 +261,8 @@ index 000000000000..7ed5727157d5
 diff --git dom/webauthn/u2f-hid-rs/src/freebsd/monitor.rs dom/webauthn/u2f-hid-rs/src/freebsd/monitor.rs
 new file mode 100644
 index 000000000000..174c11d8955c
---- /dev/null
-+++ dom/webauthn/u2f-hid-rs/src/freebsd/monitor.rs
+--- a//dev/null
++++ b/dom/webauthn/u2f-hid-rs/src/freebsd/monitor.rs
 @@ -0,0 +1,139 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -406,8 +406,8 @@ index 000000000000..174c11d8955c
 diff --git dom/webauthn/u2f-hid-rs/src/freebsd/transaction.rs dom/webauthn/u2f-hid-rs/src/freebsd/transaction.rs
 new file mode 100644
 index 000000000000..8f5ed990c8a0
---- /dev/null
-+++ dom/webauthn/u2f-hid-rs/src/freebsd/transaction.rs
+--- a//dev/null
++++ b/dom/webauthn/u2f-hid-rs/src/freebsd/transaction.rs
 @@ -0,0 +1,48 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -460,8 +460,8 @@ index 000000000000..8f5ed990c8a0
 diff --git dom/webauthn/u2f-hid-rs/src/freebsd/uhid.rs dom/webauthn/u2f-hid-rs/src/freebsd/uhid.rs
 new file mode 100644
 index 000000000000..dc7fd0ca7a3f
---- /dev/null
-+++ dom/webauthn/u2f-hid-rs/src/freebsd/uhid.rs
+--- a//dev/null
++++ b/dom/webauthn/u2f-hid-rs/src/freebsd/uhid.rs
 @@ -0,0 +1,90 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -556,8 +556,8 @@ index 000000000000..dc7fd0ca7a3f
 diff --git dom/webauthn/u2f-hid-rs/src/hidproto.rs dom/webauthn/u2f-hid-rs/src/hidproto.rs
 new file mode 100644
 index 000000000000..ea30890e0e1e
---- /dev/null
-+++ dom/webauthn/u2f-hid-rs/src/hidproto.rs
+--- a//dev/null
++++ b/dom/webauthn/u2f-hid-rs/src/hidproto.rs
 @@ -0,0 +1,158 @@
 +/* This Source Code Form is subject to the terms of the Mozilla Public
 + * License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -719,8 +719,8 @@ index 000000000000..ea30890e0e1e
 +}
 diff --git dom/webauthn/u2f-hid-rs/src/lib.rs dom/webauthn/u2f-hid-rs/src/lib.rs
 index 1307497e91ac..e0cdc5080924 100644
---- dom/webauthn/u2f-hid-rs/src/lib.rs
-+++ dom/webauthn/u2f-hid-rs/src/lib.rs
+--- a/dom/webauthn/u2f-hid-rs/src/lib.rs
++++ b/dom/webauthn/u2f-hid-rs/src/lib.rs
 @@ -5,6 +5,9 @@
  #[macro_use]
  mod util;
@@ -780,8 +780,8 @@ index 1307497e91ac..e0cdc5080924 100644
 -pub use consts::*;
 diff --git dom/webauthn/u2f-hid-rs/src/linux/device.rs dom/webauthn/u2f-hid-rs/src/linux/device.rs
 index 6ed57106920f..35569f88a190 100644
---- dom/webauthn/u2f-hid-rs/src/linux/device.rs
-+++ dom/webauthn/u2f-hid-rs/src/linux/device.rs
+--- a/dom/webauthn/u2f-hid-rs/src/linux/device.rs
++++ b/dom/webauthn/u2f-hid-rs/src/linux/device.rs
 @@ -11,8 +11,8 @@ use std::os::unix::prelude::*;
  
  use consts::CID_BROADCAST;
@@ -794,8 +794,8 @@ index 6ed57106920f..35569f88a190 100644
  pub struct Device {
 diff --git dom/webauthn/u2f-hid-rs/src/linux/hidraw.rs dom/webauthn/u2f-hid-rs/src/linux/hidraw.rs
 index 0ce5d379c3f7..182fe0ec5f2e 100644
---- dom/webauthn/u2f-hid-rs/src/linux/hidraw.rs
-+++ dom/webauthn/u2f-hid-rs/src/linux/hidraw.rs
+--- a/dom/webauthn/u2f-hid-rs/src/linux/hidraw.rs
++++ b/dom/webauthn/u2f-hid-rs/src/linux/hidraw.rs
 @@ -8,22 +8,16 @@ use std::io;
  use std::mem;
  use std::os::unix::io::RawFd;
@@ -1015,8 +1015,8 @@ index 0ce5d379c3f7..182fe0ec5f2e 100644
  }
 diff --git dom/webauthn/u2f-hid-rs/src/linux/monitor.rs dom/webauthn/u2f-hid-rs/src/linux/monitor.rs
 index 47c376ba9176..408ea4b7b9ad 100644
---- dom/webauthn/u2f-hid-rs/src/linux/monitor.rs
-+++ dom/webauthn/u2f-hid-rs/src/linux/monitor.rs
+--- a/dom/webauthn/u2f-hid-rs/src/linux/monitor.rs
++++ b/dom/webauthn/u2f-hid-rs/src/linux/monitor.rs
 @@ -65,13 +65,11 @@ where
  
          // Start listening for new devices.
@@ -1038,8 +1038,8 @@ index 47c376ba9176..408ea4b7b9ad 100644
              // Wait for new events, break on failure.
 diff --git dom/webauthn/u2f-hid-rs/src/macos/iokit.rs dom/webauthn/u2f-hid-rs/src/macos/iokit.rs
 index 7e550af2a445..79e53599004e 100644
---- dom/webauthn/u2f-hid-rs/src/macos/iokit.rs
-+++ dom/webauthn/u2f-hid-rs/src/macos/iokit.rs
+--- a/dom/webauthn/u2f-hid-rs/src/macos/iokit.rs
++++ b/dom/webauthn/u2f-hid-rs/src/macos/iokit.rs
 @@ -282,13 +282,13 @@ extern "C" {
  
  #[cfg(test)]
@@ -1057,8 +1057,8 @@ index 7e550af2a445..79e53599004e 100644
          let tx: &Sender<SendableRunLoop> = unsafe { &*(context as *mut _) };
 diff --git dom/webauthn/u2f-hid-rs/src/macos/monitor.rs dom/webauthn/u2f-hid-rs/src/macos/monitor.rs
 index c346fe5eff57..b971ed885d18 100644
---- dom/webauthn/u2f-hid-rs/src/macos/monitor.rs
-+++ dom/webauthn/u2f-hid-rs/src/macos/monitor.rs
+--- a/dom/webauthn/u2f-hid-rs/src/macos/monitor.rs
++++ b/dom/webauthn/u2f-hid-rs/src/macos/monitor.rs
 @@ -10,9 +10,9 @@ use core_foundation_sys::runloop::*;
  use libc::c_void;
  use platform::iokit::*;
@@ -1072,8 +1072,8 @@ index c346fe5eff57..b971ed885d18 100644
  struct DeviceData {
 diff --git dom/webauthn/u2f-hid-rs/src/manager.rs dom/webauthn/u2f-hid-rs/src/manager.rs
 index c9f92bdbfad5..ca8b80a9584a 100644
---- dom/webauthn/u2f-hid-rs/src/manager.rs
-+++ dom/webauthn/u2f-hid-rs/src/manager.rs
+--- a/dom/webauthn/u2f-hid-rs/src/manager.rs
++++ b/dom/webauthn/u2f-hid-rs/src/manager.rs
 @@ -7,8 +7,8 @@ use std::sync::mpsc::{channel, RecvTimeoutError, Sender};
  use std::time::Duration;
  
@@ -1086,8 +1086,8 @@ index c9f92bdbfad5..ca8b80a9584a 100644
  enum QueueAction {
 diff --git dom/webauthn/u2f-hid-rs/src/statemachine.rs dom/webauthn/u2f-hid-rs/src/statemachine.rs
 index 8e4abaa7cf02..55e7d36155a3 100644
---- dom/webauthn/u2f-hid-rs/src/statemachine.rs
-+++ dom/webauthn/u2f-hid-rs/src/statemachine.rs
+--- a/dom/webauthn/u2f-hid-rs/src/statemachine.rs
++++ b/dom/webauthn/u2f-hid-rs/src/statemachine.rs
 @@ -7,8 +7,8 @@ use platform::device::Device;
  use platform::transaction::Transaction;
  use std::thread;
@@ -1100,8 +1100,8 @@ index 8e4abaa7cf02..55e7d36155a3 100644
      transports.is_empty() || transports.contains(::AuthenticatorTransports::USB)
 diff --git dom/webauthn/u2f-hid-rs/src/u2fprotocol.rs dom/webauthn/u2f-hid-rs/src/u2fprotocol.rs
 index 4d6737b1289e..0b984407d873 100644
---- dom/webauthn/u2f-hid-rs/src/u2fprotocol.rs
-+++ dom/webauthn/u2f-hid-rs/src/u2fprotocol.rs
+--- a/dom/webauthn/u2f-hid-rs/src/u2fprotocol.rs
++++ b/dom/webauthn/u2f-hid-rs/src/u2fprotocol.rs
 @@ -5,9 +5,9 @@
  extern crate std;
  
@@ -1115,8 +1115,8 @@ index 4d6737b1289e..0b984407d873 100644
  use u2ftypes::*;
 diff --git dom/webauthn/u2f-hid-rs/src/util.rs dom/webauthn/u2f-hid-rs/src/util.rs
 index 27db864e2fcd..770e166d57d2 100644
---- dom/webauthn/u2f-hid-rs/src/util.rs
-+++ dom/webauthn/u2f-hid-rs/src/util.rs
+--- a/dom/webauthn/u2f-hid-rs/src/util.rs
++++ b/dom/webauthn/u2f-hid-rs/src/util.rs
 @@ -12,10 +12,12 @@ use boxfnonce::SendBoxFnOnce;
  macro_rules! try_or {
      ($val:expr, $or:expr) => {
@@ -1152,8 +1152,8 @@ index 27db864e2fcd..770e166d57d2 100644
  }
 diff --git dom/webauthn/u2f-hid-rs/src/windows/device.rs dom/webauthn/u2f-hid-rs/src/windows/device.rs
 index cbbe2811d672..5579cc052a6f 100644
---- dom/webauthn/u2f-hid-rs/src/windows/device.rs
-+++ dom/webauthn/u2f-hid-rs/src/windows/device.rs
+--- a/dom/webauthn/u2f-hid-rs/src/windows/device.rs
++++ b/dom/webauthn/u2f-hid-rs/src/windows/device.rs
 @@ -7,8 +7,8 @@ use std::io;
  use std::io::{Read, Write};
  use std::os::windows::io::AsRawHandle;
@@ -1166,8 +1166,8 @@ index cbbe2811d672..5579cc052a6f 100644
  
 diff --git dom/webauthn/u2f-hid-rs/src/windows/winapi.rs dom/webauthn/u2f-hid-rs/src/windows/winapi.rs
 index 18c6898e86ee..bd8a7e58d06a 100644
---- dom/webauthn/u2f-hid-rs/src/windows/winapi.rs
-+++ dom/webauthn/u2f-hid-rs/src/windows/winapi.rs
+--- a/dom/webauthn/u2f-hid-rs/src/windows/winapi.rs
++++ b/dom/webauthn/u2f-hid-rs/src/windows/winapi.rs
 @@ -60,7 +60,7 @@ extern "stdcall" {
  macro_rules! offset_of {
      ($ty:ty, $field:ident) => {
@@ -1180,16 +1180,16 @@ index 18c6898e86ee..bd8a7e58d06a 100644
 diff --git third_party/rust/devd-rs/.cargo-checksum.json third_party/rust/devd-rs/.cargo-checksum.json
 new file mode 100644
 index 000000000000..7f8c6af3141e
---- /dev/null
-+++ third_party/rust/devd-rs/.cargo-checksum.json
+--- a//dev/null
++++ b/third_party/rust/devd-rs/.cargo-checksum.json
 @@ -0,0 +1 @@
 +{"files":{".rustfmt.toml":"2af0439152afb5f592e67eb815db1a2711e3951d94d6ec2a3343ccf17cf7eb53","CODE_OF_CONDUCT.md":"62f073941a34756006851cef8d5d081f6332a986063e87deafeb621f3f6ff554","Cargo.toml":"82c3a9280afb5f4ac916fbca17ca4913b9f66f90c28eb48be1b66f5efe363e87","README.md":"27a78f684d46d92d64bdda18e8b55f132960836347a654d4024ede000e980bec","UNLICENSE":"7e12e5df4bae12cb21581ba157ced20e1986a0508dd10d0e8a4ab9a4cf94e85c","examples/main.rs":"734a87846b61d09d2aaca444c69dc61765f66df34602f3a4acf1255f95404226","src/data.rs":"677b52a636deb1f0ffc623dbdc5ed7acd78d915117825ced7031c6fa6f0c861e","src/lib.rs":"5e1539f2e197214f90cdcb5835c9b082773b0cd18f6c18e03067ebe04f18a6b7","src/parser.rs":"8459eed676eb9190f592b159d099d542bbcc447d6fb19b46f7a61c60a1ef8a8e","src/result.rs":"4088fc879652c115a13d8a6e6a71fab8571a7982e740af6a91115f3a82aef236"},"package":"e7c9ac481c38baf400d3b732e4a06850dfaa491d1b6379a249d9d40d14c2434c"}
 \ No newline at end of file
 diff --git third_party/rust/devd-rs/.rustfmt.toml third_party/rust/devd-rs/.rustfmt.toml
 new file mode 100644
 index 000000000000..6be7cd87020f
---- /dev/null
-+++ third_party/rust/devd-rs/.rustfmt.toml
+--- a//dev/null
++++ b/third_party/rust/devd-rs/.rustfmt.toml
 @@ -0,0 +1,9 @@
 +max_width = 256
 +fn_call_width = 96
@@ -1203,8 +1203,8 @@ index 000000000000..6be7cd87020f
 diff --git third_party/rust/devd-rs/CODE_OF_CONDUCT.md third_party/rust/devd-rs/CODE_OF_CONDUCT.md
 new file mode 100644
 index 000000000000..a375db8308be
---- /dev/null
-+++ third_party/rust/devd-rs/CODE_OF_CONDUCT.md
+--- a//dev/null
++++ b/third_party/rust/devd-rs/CODE_OF_CONDUCT.md
 @@ -0,0 +1,74 @@
 +# Contributor Covenant Code of Conduct
 +
@@ -1283,8 +1283,8 @@ index 000000000000..a375db8308be
 diff --git third_party/rust/devd-rs/Cargo.toml third_party/rust/devd-rs/Cargo.toml
 new file mode 100644
 index 000000000000..9c6f1250697f
---- /dev/null
-+++ third_party/rust/devd-rs/Cargo.toml
+--- a//dev/null
++++ b/third_party/rust/devd-rs/Cargo.toml
 @@ -0,0 +1,28 @@
 +# THIS FILE IS AUTOMATICALLY GENERATED BY CARGO
 +#
@@ -1317,8 +1317,8 @@ index 000000000000..9c6f1250697f
 diff --git third_party/rust/devd-rs/README.md third_party/rust/devd-rs/README.md
 new file mode 100644
 index 000000000000..c10c4081f189
---- /dev/null
-+++ third_party/rust/devd-rs/README.md
+--- a//dev/null
++++ b/third_party/rust/devd-rs/README.md
 @@ -0,0 +1,25 @@
 +[![crates.io](https://img.shields.io/crates/v/systemstat.svg)](https://crates.io/crates/systemstat)
 +[![unlicense](https://img.shields.io/badge/un-license-green.svg?style=flat)](http://unlicense.org)
@@ -1348,8 +1348,8 @@ index 000000000000..c10c4081f189
 diff --git third_party/rust/devd-rs/UNLICENSE third_party/rust/devd-rs/UNLICENSE
 new file mode 100644
 index 000000000000..68a49daad8ff
---- /dev/null
-+++ third_party/rust/devd-rs/UNLICENSE
+--- a//dev/null
++++ b/third_party/rust/devd-rs/UNLICENSE
 @@ -0,0 +1,24 @@
 +This is free and unencumbered software released into the public domain.
 +
@@ -1378,8 +1378,8 @@ index 000000000000..68a49daad8ff
 diff --git third_party/rust/devd-rs/examples/main.rs third_party/rust/devd-rs/examples/main.rs
 new file mode 100644
 index 000000000000..fee8612f1e6b
---- /dev/null
-+++ third_party/rust/devd-rs/examples/main.rs
+--- a//dev/null
++++ b/third_party/rust/devd-rs/examples/main.rs
 @@ -0,0 +1,12 @@
 +extern crate devd_rs;
 +
@@ -1396,8 +1396,8 @@ index 000000000000..fee8612f1e6b
 diff --git third_party/rust/devd-rs/src/data.rs third_party/rust/devd-rs/src/data.rs
 new file mode 100644
 index 000000000000..52084362e537
---- /dev/null
-+++ third_party/rust/devd-rs/src/data.rs
+--- a//dev/null
++++ b/third_party/rust/devd-rs/src/data.rs
 @@ -0,0 +1,9 @@
 +pub use std::collections::BTreeMap;
 +
@@ -1411,8 +1411,8 @@ index 000000000000..52084362e537
 diff --git third_party/rust/devd-rs/src/lib.rs third_party/rust/devd-rs/src/lib.rs
 new file mode 100644
 index 000000000000..10e43a328c4d
---- /dev/null
-+++ third_party/rust/devd-rs/src/lib.rs
+--- a//dev/null
++++ b/third_party/rust/devd-rs/src/lib.rs
 @@ -0,0 +1,98 @@
 +extern crate libc;
 +#[macro_use]
@@ -1515,8 +1515,8 @@ index 000000000000..10e43a328c4d
 diff --git third_party/rust/devd-rs/src/parser.rs third_party/rust/devd-rs/src/parser.rs
 new file mode 100644
 index 000000000000..59e5a9ce60e3
---- /dev/null
-+++ third_party/rust/devd-rs/src/parser.rs
+--- a//dev/null
++++ b/third_party/rust/devd-rs/src/parser.rs
 @@ -0,0 +1,164 @@
 +use std::str;
 +use nom::{alphanumeric, multispace};
@@ -1685,8 +1685,8 @@ index 000000000000..59e5a9ce60e3
 diff --git third_party/rust/devd-rs/src/result.rs third_party/rust/devd-rs/src/result.rs
 new file mode 100644
 index 000000000000..481cd808ed93
---- /dev/null
-+++ third_party/rust/devd-rs/src/result.rs
+--- a//dev/null
++++ b/third_party/rust/devd-rs/src/result.rs
 @@ -0,0 +1,26 @@
 +use std::{io, result};
 +
@@ -1717,16 +1717,16 @@ index 000000000000..481cd808ed93
 diff --git third_party/rust/nom-1.2.4/.cargo-checksum.json third_party/rust/nom-1.2.4/.cargo-checksum.json
 new file mode 100644
 index 000000000000..9d93bcc0afc2
---- /dev/null
-+++ third_party/rust/nom-1.2.4/.cargo-checksum.json
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/.cargo-checksum.json
 @@ -0,0 +1 @@
 +{"files":{".travis.yml":"6d4e81838b10c5e330749857c72c2f2b1a2e575e71abcd11c094f3b612347b2a","CHANGELOG.md":"d4722e028b2a5b88c466b0d759e463b90bdcfa1b79181a1c76cd313b0a27c615","Cargo.toml":"aebcb999933c3425db85012bea19f9ce78da8e7834dbab54d4a2966e8bc62149","LICENSE":"de730187d5563a81342a3c011d968f78dff37c934fac9b3701e8c762b6118a55","src/bits.rs":"97c9148f63e175489bb6199d039c594ddc56bdf0b7491b9f38b8d74e898bca80","src/bytes.rs":"8f29b976a5e8e6500eb618a9dead7f212688ba9eb06c7066a4016e2db99fed00","src/character.rs":"9ee081f56b508212231ff70d7455b1b85ae44722a39aa60223e8cd95c6570859","src/internal.rs":"ada499b9c178be2a7f9b56319ffb10a778f25fafcda39c78d26b364d89debd72","src/lib.rs":"34efb051214acfde2053e93a7ba718a4fd41b6e0d9edd65a1737605d99b994ab","src/macros.rs":"d39ce3a2cd2b1cb9dd57ce90c06a1ca84720a2dc75e6332cffebba6086cb75d3","src/methods.rs":"24bdbcb0e3570c8bf3fa270dd8d79dd6dfcb982276c82180a89a1e73c5e38019","src/nom.rs":"b0a9c7ce0d09388179bce8f8e23bf57df76b504d925815583c249ec3fc04baab","src/regexp.rs":"8fdae52b761dbad90179e6be87e0e66357fefa34d76af541fb0fcf550fd6ec08","src/str.rs":"198fa15d45c3636289d92c0a592002a07e5a04a431e8cfdf724266e44d484be2","src/stream.rs":"c1bd5b8e7a2061ff66eb2c954033146001f1d65a26d12efa06af8cf93ffa53e4","src/util.rs":"da40ebac865d3176567d3a37b01170234398a03e938553720ce30aa1f6005b6d","tests/arithmetic.rs":"b98936b7fa0228835ca022f6db5342b72a9c01cc3f16a4e05263bbe6424ba3e9","tests/arithmetic_ast.rs":"b18b9a46ba573ae13c40a31217425f6e8cf8fade09a75cdbbfa7146ec668f0b2","tests/cross_function_backtracking.rs":"b071d13031c1f12195473186e3775943991496b10f4590db3f36d511e9f98a1c","tests/ini.rs":"776f681542028564899e55f71533b3bcda5ed1bbb971f24b5b1b9578111ba0cb","tests/ini_str.rs":"315046d9b6dc38d6d306d3562d7ac6518c9ecce9aabcc58fb80c07577ad99789","tests/issues.rs":"2193c219397b7a417cc009b72c13adc42471e7a4917a2a4009aa0fca23c6ea8c","tests/mp4.rs":"b4bf0514fd645160851cc4da9ad6bf81d571cd14865bf134837c19578caaf6e6","tests/omnom.rs":"409d2349fa24f3503bd02e0079c1554a58ce3d40dd7eb0e5d4bb63b588afdae4","tests/test1.rs":"3e0c187bad91d822ebc113eb5cf30fc6585e53a961728304ac24e05ab2123d10"},"package":"a5b8c256fd9471521bcb84c3cdba98921497f1a331cbc15b8030fc63b82050ce"}
 \ No newline at end of file
 diff --git third_party/rust/nom-1.2.4/.travis.yml third_party/rust/nom-1.2.4/.travis.yml
 new file mode 100644
 index 000000000000..1d1e36c593aa
---- /dev/null
-+++ third_party/rust/nom-1.2.4/.travis.yml
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/.travis.yml
 @@ -0,0 +1,46 @@
 +language: rust
 +
@@ -1777,8 +1777,8 @@ index 000000000000..1d1e36c593aa
 diff --git third_party/rust/nom-1.2.4/CHANGELOG.md third_party/rust/nom-1.2.4/CHANGELOG.md
 new file mode 100644
 index 000000000000..f1c331585779
---- /dev/null
-+++ third_party/rust/nom-1.2.4/CHANGELOG.md
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/CHANGELOG.md
 @@ -0,0 +1,555 @@
 +# Change Log
 +
@@ -2338,8 +2338,8 @@ index 000000000000..f1c331585779
 diff --git third_party/rust/nom-1.2.4/Cargo.toml third_party/rust/nom-1.2.4/Cargo.toml
 new file mode 100644
 index 000000000000..ae8045bf1135
---- /dev/null
-+++ third_party/rust/nom-1.2.4/Cargo.toml
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/Cargo.toml
 @@ -0,0 +1,38 @@
 +[package]
 +
@@ -2382,8 +2382,8 @@ index 000000000000..ae8045bf1135
 diff --git third_party/rust/nom-1.2.4/LICENSE third_party/rust/nom-1.2.4/LICENSE
 new file mode 100644
 index 000000000000..0bd6a1c33dc6
---- /dev/null
-+++ third_party/rust/nom-1.2.4/LICENSE
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/LICENSE
 @@ -0,0 +1,20 @@
 +Copyright (c) 2015 Geoffroy Couprie
 +
@@ -2408,8 +2408,8 @@ index 000000000000..0bd6a1c33dc6
 diff --git third_party/rust/nom-1.2.4/src/bits.rs third_party/rust/nom-1.2.4/src/bits.rs
 new file mode 100644
 index 000000000000..a8bd8b24aa99
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/bits.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/bits.rs
 @@ -0,0 +1,220 @@
 +//! Bit level parsers and combinators
 +//!
@@ -2634,8 +2634,8 @@ index 000000000000..a8bd8b24aa99
 diff --git third_party/rust/nom-1.2.4/src/bytes.rs third_party/rust/nom-1.2.4/src/bytes.rs
 new file mode 100644
 index 000000000000..3f31598dc344
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/bytes.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/bytes.rs
 @@ -0,0 +1,1027 @@
 +//! Byte level parsers and combinators
 +//!
@@ -3667,8 +3667,8 @@ index 000000000000..3f31598dc344
 diff --git third_party/rust/nom-1.2.4/src/character.rs third_party/rust/nom-1.2.4/src/character.rs
 new file mode 100644
 index 000000000000..781065b35270
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/character.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/character.rs
 @@ -0,0 +1,184 @@
 +/// Character level parsers
 +
@@ -3857,8 +3857,8 @@ index 000000000000..781065b35270
 diff --git third_party/rust/nom-1.2.4/src/internal.rs third_party/rust/nom-1.2.4/src/internal.rs
 new file mode 100644
 index 000000000000..deb39a86654d
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/internal.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/internal.rs
 @@ -0,0 +1,347 @@
 +//! Basic types to build the parsers
 +
@@ -4210,8 +4210,8 @@ index 000000000000..deb39a86654d
 diff --git third_party/rust/nom-1.2.4/src/lib.rs third_party/rust/nom-1.2.4/src/lib.rs
 new file mode 100644
 index 000000000000..11b475d59517
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/lib.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/lib.rs
 @@ -0,0 +1,151 @@
 +//! nom, eating data byte by byte
 +//!
@@ -4367,8 +4367,8 @@ index 000000000000..11b475d59517
 diff --git third_party/rust/nom-1.2.4/src/macros.rs third_party/rust/nom-1.2.4/src/macros.rs
 new file mode 100644
 index 000000000000..3e346a94f522
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/macros.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/macros.rs
 @@ -0,0 +1,3561 @@
 +//! Macro combinators
 +//!
@@ -7934,8 +7934,8 @@ index 000000000000..3e346a94f522
 diff --git third_party/rust/nom-1.2.4/src/methods.rs third_party/rust/nom-1.2.4/src/methods.rs
 new file mode 100644
 index 000000000000..22868541a96c
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/methods.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/methods.rs
 @@ -0,0 +1,480 @@
 +//! Method macro combinators
 +//!
@@ -8420,8 +8420,8 @@ index 000000000000..22868541a96c
 diff --git third_party/rust/nom-1.2.4/src/nom.rs third_party/rust/nom-1.2.4/src/nom.rs
 new file mode 100644
 index 000000000000..74bac5bfb0c4
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/nom.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/nom.rs
 @@ -0,0 +1,950 @@
 +//! Useful parser combinators
 +//!
@@ -9376,8 +9376,8 @@ index 000000000000..74bac5bfb0c4
 diff --git third_party/rust/nom-1.2.4/src/regexp.rs third_party/rust/nom-1.2.4/src/regexp.rs
 new file mode 100644
 index 000000000000..17f8ede1a3f7
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/regexp.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/regexp.rs
 @@ -0,0 +1,644 @@
 +#[doc(hidden)]
 +#[macro_export]
@@ -10026,8 +10026,8 @@ index 000000000000..17f8ede1a3f7
 diff --git third_party/rust/nom-1.2.4/src/str.rs third_party/rust/nom-1.2.4/src/str.rs
 new file mode 100644
 index 000000000000..768786edaba1
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/str.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/str.rs
 @@ -0,0 +1,734 @@
 +//! Parsers and helper functions operating on strings, especially useful when writing parsers for
 +//! text-based formats.
@@ -10766,8 +10766,8 @@ index 000000000000..768786edaba1
 diff --git third_party/rust/nom-1.2.4/src/stream.rs third_party/rust/nom-1.2.4/src/stream.rs
 new file mode 100644
 index 000000000000..38d5c870c938
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/stream.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/stream.rs
 @@ -0,0 +1,1031 @@
 +/// Context:
 +/// * Rust does not have tail call optimization, so we cannot recurse wildly
@@ -11803,8 +11803,8 @@ index 000000000000..38d5c870c938
 diff --git third_party/rust/nom-1.2.4/src/util.rs third_party/rust/nom-1.2.4/src/util.rs
 new file mode 100644
 index 000000000000..e2428ead0a4d
---- /dev/null
-+++ third_party/rust/nom-1.2.4/src/util.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/src/util.rs
 @@ -0,0 +1,769 @@
 +use internal::{IResult,Err};
 +
@@ -12578,8 +12578,8 @@ index 000000000000..e2428ead0a4d
 diff --git third_party/rust/nom-1.2.4/tests/arithmetic.rs third_party/rust/nom-1.2.4/tests/arithmetic.rs
 new file mode 100644
 index 000000000000..eea990fb07cf
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/arithmetic.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/arithmetic.rs
 @@ -0,0 +1,80 @@
 +#[macro_use]
 +extern crate nom;
@@ -12664,8 +12664,8 @@ index 000000000000..eea990fb07cf
 diff --git third_party/rust/nom-1.2.4/tests/arithmetic_ast.rs third_party/rust/nom-1.2.4/tests/arithmetic_ast.rs
 new file mode 100644
 index 000000000000..9a8956936ff8
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/arithmetic_ast.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/arithmetic_ast.rs
 @@ -0,0 +1,137 @@
 +#[macro_use]
 +extern crate nom;
@@ -12807,8 +12807,8 @@ index 000000000000..9a8956936ff8
 diff --git third_party/rust/nom-1.2.4/tests/cross_function_backtracking.rs third_party/rust/nom-1.2.4/tests/cross_function_backtracking.rs
 new file mode 100644
 index 000000000000..592670c43999
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/cross_function_backtracking.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/cross_function_backtracking.rs
 @@ -0,0 +1,140 @@
 +/// this file tests a different backtracking behaviour. With the current
 +/// `error!` macro, an early return is done in the current function, but
@@ -12953,8 +12953,8 @@ index 000000000000..592670c43999
 diff --git third_party/rust/nom-1.2.4/tests/ini.rs third_party/rust/nom-1.2.4/tests/ini.rs
 new file mode 100644
 index 000000000000..a3a33431bf02
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/ini.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/ini.rs
 @@ -0,0 +1,234 @@
 +
 +#[macro_use]
@@ -13193,8 +13193,8 @@ index 000000000000..a3a33431bf02
 diff --git third_party/rust/nom-1.2.4/tests/ini_str.rs third_party/rust/nom-1.2.4/tests/ini_str.rs
 new file mode 100644
 index 000000000000..c69756dc2aca
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/ini_str.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/ini_str.rs
 @@ -0,0 +1,251 @@
 +
 +#[macro_use]
@@ -13450,8 +13450,8 @@ index 000000000000..c69756dc2aca
 diff --git third_party/rust/nom-1.2.4/tests/issues.rs third_party/rust/nom-1.2.4/tests/issues.rs
 new file mode 100644
 index 000000000000..6466d7f2e069
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/issues.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/issues.rs
 @@ -0,0 +1,131 @@
 +//#![feature(trace_macros)]
 +#[macro_use]
@@ -13587,8 +13587,8 @@ index 000000000000..6466d7f2e069
 diff --git third_party/rust/nom-1.2.4/tests/mp4.rs third_party/rust/nom-1.2.4/tests/mp4.rs
 new file mode 100644
 index 000000000000..8c128f57a928
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/mp4.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/mp4.rs
 @@ -0,0 +1,531 @@
 +#![cfg(feature = "stream")]
 +#![allow(dead_code)]
@@ -14124,8 +14124,8 @@ index 000000000000..8c128f57a928
 diff --git third_party/rust/nom-1.2.4/tests/omnom.rs third_party/rust/nom-1.2.4/tests/omnom.rs
 new file mode 100644
 index 000000000000..b8cfa04fb7e4
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/omnom.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/omnom.rs
 @@ -0,0 +1,160 @@
 +#![cfg(feature = "stream")]
 +
@@ -14290,8 +14290,8 @@ index 000000000000..b8cfa04fb7e4
 diff --git third_party/rust/nom-1.2.4/tests/test1.rs third_party/rust/nom-1.2.4/tests/test1.rs
 new file mode 100644
 index 000000000000..95f8fd45b6d4
---- /dev/null
-+++ third_party/rust/nom-1.2.4/tests/test1.rs
+--- a//dev/null
++++ b/third_party/rust/nom-1.2.4/tests/test1.rs
 @@ -0,0 +1,44 @@
 +#![cfg(feature = "stream")]
 +
@@ -14339,8 +14339,8 @@ index 000000000000..95f8fd45b6d4
 +}
 diff --git third_party/rust/nom/.cargo-checksum.json third_party/rust/nom/.cargo-checksum.json
 index 9d93bcc0afc2..5baf0864c842 100644
---- third_party/rust/nom/.cargo-checksum.json
-+++ third_party/rust/nom/.cargo-checksum.json
+--- a/third_party/rust/nom/.cargo-checksum.json
++++ b/third_party/rust/nom/.cargo-checksum.json
 @@ -1 +1 @@
 -{"files":{".travis.yml":"6d4e81838b10c5e330749857c72c2f2b1a2e575e71abcd11c094f3b612347b2a","CHANGELOG.md":"d4722e028b2a5b88c466b0d759e463b90bdcfa1b79181a1c76cd313b0a27c615","Cargo.toml":"aebcb999933c3425db85012bea19f9ce78da8e7834dbab54d4a2966e8bc62149","LICENSE":"de730187d5563a81342a3c011d968f78dff37c934fac9b3701e8c762b6118a55","src/bits.rs":"97c9148f63e175489bb6199d039c594ddc56bdf0b7491b9f38b8d74e898bca80","src/bytes.rs":"8f29b976a5e8e6500eb618a9dead7f212688ba9eb06c7066a4016e2db99fed00","src/character.rs":"9ee081f56b508212231ff70d7455b1b85ae44722a39aa60223e8cd95c6570859","src/internal.rs":"ada499b9c178be2a7f9b56319ffb10a778f25fafcda39c78d26b364d89debd72","src/lib.rs":"34efb051214acfde2053e93a7ba718a4fd41b6e0d9edd65a1737605d99b994ab","src/macros.rs":"d39ce3a2cd2b1cb9dd57ce90c06a1ca84720a2dc75e6332cffebba6086cb75d3","src/methods.rs":"24bdbcb0e3570c8bf3fa270dd8d79dd6dfcb982276c82180a89a1e73c5e38019","src/nom.rs":"b0a9c7ce0d09388179bce8f8e23bf57df76b504d925815583c249ec3fc04baab","src/regexp.rs":"8fdae52b761dbad90179e6be87e0e66357fefa34d76af541fb0fcf550fd6ec08","src/str.rs":"198fa15d45c3636289d92c0a592002a07e5a04a431e8cfdf724266e44d484be2","src/stream.rs":"c1bd5b8e7a2061ff66eb2c954033146001f1d65a26d12efa06af8cf93ffa53e4","src/util.rs":"da40ebac865d3176567d3a37b01170234398a03e938553720ce30aa1f6005b6d","tests/arithmetic.rs":"b98936b7fa0228835ca022f6db5342b72a9c01cc3f16a4e05263bbe6424ba3e9","tests/arithmetic_ast.rs":"b18b9a46ba573ae13c40a31217425f6e8cf8fade09a75cdbbfa7146ec668f0b2","tests/cross_function_backtracking.rs":"b071d13031c1f12195473186e3775943991496b10f4590db3f36d511e9f98a1c","tests/ini.rs":"776f681542028564899e55f71533b3bcda5ed1bbb971f24b5b1b9578111ba0cb","tests/ini_str.rs":"315046d9b6dc38d6d306d3562d7ac6518c9ecce9aabcc58fb80c07577ad99789","tests/issues.rs":"2193c219397b7a417cc009b72c13adc42471e7a4917a2a4009aa0fca23c6ea8c","tests/mp4.rs":"b4bf0514fd645160851cc4da9ad6bf81d571cd14865bf134837c19578caaf6e6","tests/omnom.rs":"409d2349fa24f3503bd02e0079c1554a58ce3d40dd7eb0e5d4bb63b588afdae4","tests/test1.rs":"3e0c187bad91d822ebc113eb5cf30fc6585e53a961728304ac24e05ab2123d10"},"package":"a5b8c256fd9471521bcb84c3cdba98921497f1a331cbc15b8030fc63b82050ce"}
 \ No newline at end of file
@@ -14349,8 +14349,8 @@ index 9d93bcc0afc2..5baf0864c842 100644
 diff --git third_party/rust/nom/.travis.yml third_party/rust/nom/.travis.yml
 deleted file mode 100644
 index 1d1e36c593aa..000000000000
---- third_party/rust/nom/.travis.yml
-+++ /dev/null
+--- a/third_party/rust/nom/.travis.yml
++++ b//dev/null
 @@ -1,46 +0,0 @@
 -language: rust
 -
@@ -14400,8 +14400,8 @@ index 1d1e36c593aa..000000000000
 -sudo: false
 diff --git third_party/rust/nom/CHANGELOG.md third_party/rust/nom/CHANGELOG.md
 index f1c331585779..35e523666bd4 100644
---- third_party/rust/nom/CHANGELOG.md
-+++ third_party/rust/nom/CHANGELOG.md
+--- a/third_party/rust/nom/CHANGELOG.md
++++ b/third_party/rust/nom/CHANGELOG.md
 @@ -4,6 +4,267 @@
  
  ### Changed
@@ -14741,8 +14741,8 @@ index f1c331585779..35e523666bd4 100644
  * [1.2.1]: https://github.com/Geal/nom/compare/1.2.0...1.2.1
 diff --git third_party/rust/nom/Cargo.toml third_party/rust/nom/Cargo.toml
 index ae8045bf1135..1ee10cf12c2b 100644
---- third_party/rust/nom/Cargo.toml
-+++ third_party/rust/nom/Cargo.toml
+--- a/third_party/rust/nom/Cargo.toml
++++ b/third_party/rust/nom/Cargo.toml
 @@ -1,38 +1,50 @@
 -[package]
 +# THIS FILE IS AUTOMATICALLY GENERATED BY CARGO
@@ -14821,8 +14821,8 @@ index ae8045bf1135..1ee10cf12c2b 100644
 +repository = "Geal/nom"
 diff --git third_party/rust/nom/LICENSE third_party/rust/nom/LICENSE
 index 0bd6a1c33dc6..a885458136ae 100644
---- third_party/rust/nom/LICENSE
-+++ third_party/rust/nom/LICENSE
+--- a/third_party/rust/nom/LICENSE
++++ b/third_party/rust/nom/LICENSE
 @@ -1,4 +1,4 @@
 -Copyright (c) 2015 Geoffroy Couprie
 +Copyright (c) 2015-2016 Geoffroy Couprie
@@ -14831,8 +14831,8 @@ index 0bd6a1c33dc6..a885458136ae 100644
  a copy of this software and associated documentation files (the
 diff --git third_party/rust/nom/src/bits.rs third_party/rust/nom/src/bits.rs
 index a8bd8b24aa99..d475cd32ebcd 100644
---- third_party/rust/nom/src/bits.rs
-+++ third_party/rust/nom/src/bits.rs
+--- a/third_party/rust/nom/src/bits.rs
++++ b/third_party/rust/nom/src/bits.rs
 @@ -36,6 +36,7 @@ macro_rules! bits (
    );
  );
@@ -15139,8 +15139,8 @@ index a8bd8b24aa99..d475cd32ebcd 100644
 diff --git third_party/rust/nom/src/branch.rs third_party/rust/nom/src/branch.rs
 new file mode 100644
 index 000000000000..a925437145a0
---- /dev/null
-+++ third_party/rust/nom/src/branch.rs
+--- a//dev/null
++++ b/third_party/rust/nom/src/branch.rs
 @@ -0,0 +1,871 @@
 +/// Try a list of parsers and return the result of the first successful one
 +///
@@ -16015,8 +16015,8 @@ index 000000000000..a925437145a0
 +}
 diff --git third_party/rust/nom/src/bytes.rs third_party/rust/nom/src/bytes.rs
 index 3f31598dc344..462ed0262f67 100644
---- third_party/rust/nom/src/bytes.rs
-+++ third_party/rust/nom/src/bytes.rs
+--- a/third_party/rust/nom/src/bytes.rs
++++ b/third_party/rust/nom/src/bytes.rs
 @@ -1,92 +1,81 @@
  //! Byte level parsers and combinators
  //!
@@ -17322,8 +17322,8 @@ index 3f31598dc344..462ed0262f67 100644
  }
 diff --git third_party/rust/nom/src/character.rs third_party/rust/nom/src/character.rs
 index 781065b35270..6748e0790b68 100644
---- third_party/rust/nom/src/character.rs
-+++ third_party/rust/nom/src/character.rs
+--- a/third_party/rust/nom/src/character.rs
++++ b/third_party/rust/nom/src/character.rs
 @@ -1,51 +1,39 @@
  /// Character level parsers
  
@@ -17567,8 +17567,8 @@ index 781065b35270..6748e0790b68 100644
  }
 diff --git third_party/rust/nom/src/internal.rs third_party/rust/nom/src/internal.rs
 index deb39a86654d..c5a51ee2bb09 100644
---- third_party/rust/nom/src/internal.rs
-+++ third_party/rust/nom/src/internal.rs
+--- a/third_party/rust/nom/src/internal.rs
++++ b/third_party/rust/nom/src/internal.rs
 @@ -2,27 +2,15 @@
  
  use self::IResult::*;
@@ -17999,8 +17999,8 @@ index deb39a86654d..c5a51ee2bb09 100644
  }
 diff --git third_party/rust/nom/src/lib.rs third_party/rust/nom/src/lib.rs
 index 11b475d59517..150ef85fce57 100644
---- third_party/rust/nom/src/lib.rs
-+++ third_party/rust/nom/src/lib.rs
+--- a/third_party/rust/nom/src/lib.rs
++++ b/third_party/rust/nom/src/lib.rs
 @@ -5,6 +5,318 @@
  //!
  //! The code is available on [Github](https://github.com/Geal/nom)
@@ -18542,8 +18542,8 @@ index 11b475d59517..150ef85fce57 100644
  mod str;
 diff --git third_party/rust/nom/src/macros.rs third_party/rust/nom/src/macros.rs
 index 3e346a94f522..2bbe4bca412d 100644
---- third_party/rust/nom/src/macros.rs
-+++ third_party/rust/nom/src/macros.rs
+--- a/third_party/rust/nom/src/macros.rs
++++ b/third_party/rust/nom/src/macros.rs
 @@ -61,7 +61,8 @@
  //!     take_while!($input, call!($f));
  //!   );
@@ -22389,8 +22389,8 @@ index 3e346a94f522..2bbe4bca412d 100644
  }
 diff --git third_party/rust/nom/src/methods.rs third_party/rust/nom/src/methods.rs
 index 22868541a96c..7bdabfd063f3 100644
---- third_party/rust/nom/src/methods.rs
-+++ third_party/rust/nom/src/methods.rs
+--- a/third_party/rust/nom/src/methods.rs
++++ b/third_party/rust/nom/src/methods.rs
 @@ -77,12 +77,12 @@
  //! counterparts:
  //! ```ignore
@@ -22596,8 +22596,8 @@ index 22868541a96c..7bdabfd063f3 100644
 diff --git third_party/rust/nom/src/multi.rs third_party/rust/nom/src/multi.rs
 new file mode 100644
 index 000000000000..f42164dcf2e3
---- /dev/null
-+++ third_party/rust/nom/src/multi.rs
+--- a//dev/null
++++ b/third_party/rust/nom/src/multi.rs
 @@ -0,0 +1,1614 @@
 +//! Parsers for applying parsers multiple times
 +
@@ -24215,8 +24215,8 @@ index 000000000000..f42164dcf2e3
 +}
 diff --git third_party/rust/nom/src/nom.rs third_party/rust/nom/src/nom.rs
 index 74bac5bfb0c4..7f48afc511bd 100644
---- third_party/rust/nom/src/nom.rs
-+++ third_party/rust/nom/src/nom.rs
+--- a/third_party/rust/nom/src/nom.rs
++++ b/third_party/rust/nom/src/nom.rs
 @@ -6,16 +6,18 @@
  //! but the macros system makes no promises.
  //!
@@ -25255,8 +25255,8 @@ index 74bac5bfb0c4..7f48afc511bd 100644
  }
 diff --git third_party/rust/nom/src/regexp.rs third_party/rust/nom/src/regexp.rs
 index 17f8ede1a3f7..b4a90f448cb2 100644
---- third_party/rust/nom/src/regexp.rs
-+++ third_party/rust/nom/src/regexp.rs
+--- a/third_party/rust/nom/src/regexp.rs
++++ b/third_party/rust/nom/src/regexp.rs
 @@ -28,11 +28,13 @@ macro_rules! re_match (
    ($i:expr, $re:expr) => (
      {
@@ -25857,8 +25857,8 @@ index 17f8ede1a3f7..b4a90f448cb2 100644
 diff --git third_party/rust/nom/src/sequence.rs third_party/rust/nom/src/sequence.rs
 new file mode 100644
 index 000000000000..0bbefe009aa2
---- /dev/null
-+++ third_party/rust/nom/src/sequence.rs
+--- a//dev/null
++++ b/third_party/rust/nom/src/sequence.rs
 @@ -0,0 +1,889 @@
 +/// `tuple!(I->IResult<I,A>, I->IResult<I,B>, ... I->IResult<I,X>) => I -> IResult<I, (A, B, ..., X)>`
 +/// chains parsers and assemble the sub results in a tuple.
@@ -26752,8 +26752,8 @@ index 000000000000..0bbefe009aa2
 diff --git third_party/rust/nom/src/simple_errors.rs third_party/rust/nom/src/simple_errors.rs
 new file mode 100644
 index 000000000000..04bddd4309bf
---- /dev/null
-+++ third_party/rust/nom/src/simple_errors.rs
+--- a//dev/null
++++ b/third_party/rust/nom/src/simple_errors.rs
 @@ -0,0 +1,153 @@
 +//! Error management
 +//!
@@ -26910,8 +26910,8 @@ index 000000000000..04bddd4309bf
 +);
 diff --git third_party/rust/nom/src/str.rs third_party/rust/nom/src/str.rs
 index 768786edaba1..4f8643bd3e68 100644
---- third_party/rust/nom/src/str.rs
-+++ third_party/rust/nom/src/str.rs
+--- a/third_party/rust/nom/src/str.rs
++++ b/third_party/rust/nom/src/str.rs
 @@ -21,15 +21,32 @@
  macro_rules! tag_s (
    ($i:expr, $tag: expr) => (
@@ -27305,8 +27305,8 @@ index 768786edaba1..4f8643bd3e68 100644
  }
 diff --git third_party/rust/nom/src/stream.rs third_party/rust/nom/src/stream.rs
 index 38d5c870c938..4d92bed75c8e 100644
---- third_party/rust/nom/src/stream.rs
-+++ third_party/rust/nom/src/stream.rs
+--- a/third_party/rust/nom/src/stream.rs
++++ b/third_party/rust/nom/src/stream.rs
 @@ -212,9 +212,11 @@ impl<'x,'b> Producer<'b,&'x[u8],Move> for MemProducer<'x> {
        }
      }
@@ -27408,8 +27408,8 @@ index 38d5c870c938..4d92bed75c8e 100644
 diff --git third_party/rust/nom/src/traits.rs third_party/rust/nom/src/traits.rs
 new file mode 100644
 index 000000000000..e8103336b147
---- /dev/null
-+++ third_party/rust/nom/src/traits.rs
+--- a//dev/null
++++ b/third_party/rust/nom/src/traits.rs
 @@ -0,0 +1,623 @@
 +//! Traits input types have to implement to work with nom combinators
 +//!
@@ -28036,8 +28036,8 @@ index 000000000000..e8103336b147
 +}
 diff --git third_party/rust/nom/src/util.rs third_party/rust/nom/src/util.rs
 index e2428ead0a4d..75663b958284 100644
---- third_party/rust/nom/src/util.rs
-+++ third_party/rust/nom/src/util.rs
+--- a/third_party/rust/nom/src/util.rs
++++ b/third_party/rust/nom/src/util.rs
 @@ -1,19 +1,27 @@
 -use internal::{IResult,Err};
  
@@ -28456,8 +28456,8 @@ index e2428ead0a4d..75663b958284 100644
 diff --git third_party/rust/nom/src/verbose_errors.rs third_party/rust/nom/src/verbose_errors.rs
 new file mode 100644
 index 000000000000..fe236b6c930a
---- /dev/null
-+++ third_party/rust/nom/src/verbose_errors.rs
+--- a//dev/null
++++ b/third_party/rust/nom/src/verbose_errors.rs
 @@ -0,0 +1,227 @@
 +//! Error management
 +//!
@@ -28689,8 +28689,8 @@ index 000000000000..fe236b6c930a
 diff --git third_party/rust/nom/src/whitespace.rs third_party/rust/nom/src/whitespace.rs
 new file mode 100644
 index 000000000000..3b8f7bd5bdae
---- /dev/null
-+++ third_party/rust/nom/src/whitespace.rs
+--- a//dev/null
++++ b/third_party/rust/nom/src/whitespace.rs
 @@ -0,0 +1,1056 @@
 +//! Support for whitespace delimited formats
 +//!
@@ -29750,8 +29750,8 @@ index 000000000000..3b8f7bd5bdae
 +}
 diff --git third_party/rust/nom/tests/arithmetic.rs third_party/rust/nom/tests/arithmetic.rs
 index eea990fb07cf..40ffc8cbfdcc 100644
---- third_party/rust/nom/tests/arithmetic.rs
-+++ third_party/rust/nom/tests/arithmetic.rs
+--- a/third_party/rust/nom/tests/arithmetic.rs
++++ b/third_party/rust/nom/tests/arithmetic.rs
 @@ -1,22 +1,24 @@
  #[macro_use]
  extern crate nom;
@@ -29838,8 +29838,8 @@ index eea990fb07cf..40ffc8cbfdcc 100644
  
 diff --git third_party/rust/nom/tests/arithmetic_ast.rs third_party/rust/nom/tests/arithmetic_ast.rs
 index 9a8956936ff8..d48b9028b9f7 100644
---- third_party/rust/nom/tests/arithmetic_ast.rs
-+++ third_party/rust/nom/tests/arithmetic_ast.rs
+--- a/third_party/rust/nom/tests/arithmetic_ast.rs
++++ b/third_party/rust/nom/tests/arithmetic_ast.rs
 @@ -86,27 +86,27 @@ fn fold_exprs(initial: Expr, remainder: Vec<(Oper, Expr)>) -> Expr {
      })
  }
@@ -29885,8 +29885,8 @@ index 9a8956936ff8..d48b9028b9f7 100644
 diff --git third_party/rust/nom/tests/blockbuf-arithmetic.rs third_party/rust/nom/tests/blockbuf-arithmetic.rs
 new file mode 100644
 index 000000000000..fe655185df54
---- /dev/null
-+++ third_party/rust/nom/tests/blockbuf-arithmetic.rs
+--- a//dev/null
++++ b/third_party/rust/nom/tests/blockbuf-arithmetic.rs
 @@ -0,0 +1,321 @@
 +/*
 +#[macro_use]
@@ -30211,8 +30211,8 @@ index 000000000000..fe655185df54
 +*/
 diff --git third_party/rust/nom/tests/cross_function_backtracking.rs third_party/rust/nom/tests/cross_function_backtracking.rs
 index 592670c43999..3163037377a0 100644
---- third_party/rust/nom/tests/cross_function_backtracking.rs
-+++ third_party/rust/nom/tests/cross_function_backtracking.rs
+--- a/third_party/rust/nom/tests/cross_function_backtracking.rs
++++ b/third_party/rust/nom/tests/cross_function_backtracking.rs
 @@ -5,9 +5,10 @@
  /// The solution here wraps `IResult` in a `Result`: a `Ok` indicates usual
  /// backtracking, `Err` indicates that we must "cut".
@@ -30282,8 +30282,8 @@ index 592670c43999..3163037377a0 100644
 diff --git third_party/rust/nom/tests/float.rs third_party/rust/nom/tests/float.rs
 new file mode 100644
 index 000000000000..5710e260365b
---- /dev/null
-+++ third_party/rust/nom/tests/float.rs
+--- a//dev/null
++++ b/third_party/rust/nom/tests/float.rs
 @@ -0,0 +1,46 @@
 +#[macro_use]
 +extern crate nom;
@@ -30333,8 +30333,8 @@ index 000000000000..5710e260365b
 +}
 diff --git third_party/rust/nom/tests/ini.rs third_party/rust/nom/tests/ini.rs
 index a3a33431bf02..c72177071697 100644
---- third_party/rust/nom/tests/ini.rs
-+++ third_party/rust/nom/tests/ini.rs
+--- a/third_party/rust/nom/tests/ini.rs
++++ b/third_party/rust/nom/tests/ini.rs
 @@ -1,83 +1,68 @@
 -
  #[macro_use]
@@ -30498,8 +30498,8 @@ index a3a33431bf02..c72177071697 100644
    println!("{:?}", res);
 diff --git third_party/rust/nom/tests/ini_str.rs third_party/rust/nom/tests/ini_str.rs
 index c69756dc2aca..330e4901f58a 100644
---- third_party/rust/nom/tests/ini_str.rs
-+++ third_party/rust/nom/tests/ini_str.rs
+--- a/third_party/rust/nom/tests/ini_str.rs
++++ b/third_party/rust/nom/tests/ini_str.rs
 @@ -1,4 +1,3 @@
 -
  #[macro_use]
@@ -30581,8 +30581,8 @@ index c69756dc2aca..330e4901f58a 100644
      IResult::Error(a)          => IResult::Error(a)
 diff --git third_party/rust/nom/tests/issues.rs third_party/rust/nom/tests/issues.rs
 index 6466d7f2e069..7a726dc0591b 100644
---- third_party/rust/nom/tests/issues.rs
-+++ third_party/rust/nom/tests/issues.rs
+--- a/third_party/rust/nom/tests/issues.rs
++++ b/third_party/rust/nom/tests/issues.rs
 @@ -1,9 +1,10 @@
  //#![feature(trace_macros)]
 +#![allow(dead_code)]
@@ -30727,8 +30727,8 @@ index 6466d7f2e069..7a726dc0591b 100644
 diff --git third_party/rust/nom/tests/json.rs third_party/rust/nom/tests/json.rs
 new file mode 100644
 index 000000000000..b0369166c3b1
---- /dev/null
-+++ third_party/rust/nom/tests/json.rs
+--- a//dev/null
++++ b/third_party/rust/nom/tests/json.rs
 @@ -0,0 +1,130 @@
 +//#![feature(trace_macros)]
 +
@@ -30862,8 +30862,8 @@ index 000000000000..b0369166c3b1
 +
 diff --git third_party/rust/nom/tests/mp4.rs third_party/rust/nom/tests/mp4.rs
 index 8c128f57a928..e6d5c9fce7c0 100644
---- third_party/rust/nom/tests/mp4.rs
-+++ third_party/rust/nom/tests/mp4.rs
+--- a/third_party/rust/nom/tests/mp4.rs
++++ b/third_party/rust/nom/tests/mp4.rs
 @@ -4,10 +4,9 @@
  #[macro_use]
  extern crate nom;
@@ -31059,8 +31059,8 @@ index 8c128f57a928..e6d5c9fce7c0 100644
 diff --git third_party/rust/nom/tests/multiline.rs third_party/rust/nom/tests/multiline.rs
 new file mode 100644
 index 000000000000..90164729f46a
---- /dev/null
-+++ third_party/rust/nom/tests/multiline.rs
+--- a//dev/null
++++ b/third_party/rust/nom/tests/multiline.rs
 @@ -0,0 +1,21 @@
 +#[macro_use]
 +extern crate nom;
@@ -31086,8 +31086,8 @@ index 000000000000..90164729f46a
 diff --git third_party/rust/nom/tests/named_args.rs third_party/rust/nom/tests/named_args.rs
 new file mode 100644
 index 000000000000..e998a0845d45
---- /dev/null
-+++ third_party/rust/nom/tests/named_args.rs
+--- a//dev/null
++++ b/third_party/rust/nom/tests/named_args.rs
 @@ -0,0 +1,108 @@
 +#[macro_use]
 +extern crate nom;
@@ -31199,8 +31199,8 @@ index 000000000000..e998a0845d45
 +}
 diff --git third_party/rust/nom/tests/omnom.rs third_party/rust/nom/tests/omnom.rs
 index b8cfa04fb7e4..f90b37919120 100644
---- third_party/rust/nom/tests/omnom.rs
-+++ third_party/rust/nom/tests/omnom.rs
+--- a/third_party/rust/nom/tests/omnom.rs
++++ b/third_party/rust/nom/tests/omnom.rs
 @@ -3,7 +3,7 @@
  #[macro_use]
  extern crate nom;
@@ -31213,8 +31213,8 @@ index b8cfa04fb7e4..f90b37919120 100644
 diff --git third_party/rust/nom/tests/overflow.rs third_party/rust/nom/tests/overflow.rs
 new file mode 100644
 index 000000000000..d20099fe42ed
---- /dev/null
-+++ third_party/rust/nom/tests/overflow.rs
+--- a//dev/null
++++ b/third_party/rust/nom/tests/overflow.rs
 @@ -0,0 +1,99 @@
 +#[macro_use]
 +extern crate nom;
@@ -31318,8 +31318,8 @@ index 000000000000..d20099fe42ed
 diff --git third_party/rust/nom/tests/reborrow_fold.rs third_party/rust/nom/tests/reborrow_fold.rs
 new file mode 100644
 index 000000000000..0527cb2c83ee
---- /dev/null
-+++ third_party/rust/nom/tests/reborrow_fold.rs
+--- a//dev/null
++++ b/third_party/rust/nom/tests/reborrow_fold.rs
 @@ -0,0 +1,16 @@
 +#![allow(dead_code)]
 +#![allow(unused_variables)]

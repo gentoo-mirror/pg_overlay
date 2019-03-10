@@ -17,8 +17,8 @@ Date:   Wed Apr 4 15:48:48 2018 +0200
 
 diff --git js/src/jit/arm64/MacroAssembler-arm64.cpp js/src/jit/arm64/MacroAssembler-arm64.cpp
 index 4ea64b1225d00..a212de0ec2f45 100644
---- js/src/jit/arm64/MacroAssembler-arm64.cpp
-+++ js/src/jit/arm64/MacroAssembler-arm64.cpp
+--- a/js/src/jit/arm64/MacroAssembler-arm64.cpp
++++ b/js/src/jit/arm64/MacroAssembler-arm64.cpp
 @@ -249,8 +249,9 @@ void MacroAssemblerCompat::profilerEnterFrame(Register
  }
  

@@ -11,8 +11,8 @@ Date:   Fri Jan 11 14:02:28 2019 +0100
 
 diff --git servo/components/style_traits/values.rs servo/components/style_traits/values.rs
 index 6da235c07b64..2851082c22e0 100644
---- servo/components/style_traits/values.rs
-+++ servo/components/style_traits/values.rs
+--- a/servo/components/style_traits/values.rs
++++ b/servo/components/style_traits/values.rs
 @@ -158,24 +158,6 @@ where
      }
  }
@@ -56,8 +56,8 @@ Date:   Fri Jan 11 14:03:44 2019 +0100
 
 diff --git servo/components/style/properties/properties.mako.rs servo/components/style/properties/properties.mako.rs
 index 2d91273be15a..9220c3b1a665 100644
---- servo/components/style/properties/properties.mako.rs
-+++ servo/components/style/properties/properties.mako.rs
+--- a/servo/components/style/properties/properties.mako.rs
++++ b/servo/components/style/properties/properties.mako.rs
 @@ -3821,7 +3821,14 @@ impl AliasId {
      }
  }
@@ -91,8 +91,8 @@ index 2d91273be15a..9220c3b1a665 100644
      ($macro_name: ident) => {
 diff --git servo/components/style_traits/values.rs servo/components/style_traits/values.rs
 index 2851082c22e0..0d7ee3f506ce 100644
---- servo/components/style_traits/values.rs
-+++ servo/components/style_traits/values.rs
+--- a/servo/components/style_traits/values.rs
++++ b/servo/components/style_traits/values.rs
 @@ -432,7 +432,7 @@ impl_to_css_for_predefined_type!(::cssparser::RGBA);
  impl_to_css_for_predefined_type!(::cssparser::Color);
  impl_to_css_for_predefined_type!(::cssparser::UnicodeRange);
@@ -118,8 +118,8 @@ Date:   Fri Jan 11 16:35:26 2019 +0100
 
 diff --git servo/components/style_traits/values.rs servo/components/style_traits/values.rs
 index 0d7ee3f506ce..582e34eb3db0 100644
---- servo/components/style_traits/values.rs
-+++ servo/components/style_traits/values.rs
+--- a/servo/components/style_traits/values.rs
++++ b/servo/components/style_traits/values.rs
 @@ -432,7 +432,7 @@ impl_to_css_for_predefined_type!(::cssparser::RGBA);
  impl_to_css_for_predefined_type!(::cssparser::Color);
  impl_to_css_for_predefined_type!(::cssparser::UnicodeRange);

@@ -9,8 +9,8 @@ Date:   Fri Mar 16 21:03:59 2018 +0900
 
 diff --git gfx/webrender_bindings/src/bindings.rs gfx/webrender_bindings/src/bindings.rs
 index 8517d7dd33e5..cf885ee713f3 100644
---- gfx/webrender_bindings/src/bindings.rs
-+++ gfx/webrender_bindings/src/bindings.rs
+--- a/gfx/webrender_bindings/src/bindings.rs
++++ b/gfx/webrender_bindings/src/bindings.rs
 @@ -312,8 +312,8 @@ struct WrExternalImage {
      size: usize,
  }

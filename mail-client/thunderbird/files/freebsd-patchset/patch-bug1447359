@@ -13,8 +13,8 @@ Date:   Thu Mar 22 10:28:13 2018 -0500
 
 diff --git js/src/jit/arm64/MacroAssembler-arm64-inl.h js/src/jit/arm64/MacroAssembler-arm64-inl.h
 index 7061cbfd93ebb..190442f7afa0a 100644
---- js/src/jit/arm64/MacroAssembler-arm64-inl.h
-+++ js/src/jit/arm64/MacroAssembler-arm64-inl.h
+--- a/js/src/jit/arm64/MacroAssembler-arm64-inl.h
++++ b/js/src/jit/arm64/MacroAssembler-arm64-inl.h
 @@ -268,6 +268,7 @@ void MacroAssembler::add64(Imm64 imm, Register64 dest)
  CodeOffset MacroAssembler::sub32FromStackPtrWithPatch(Register dest) {
    vixl::UseScratchRegisterScope temps(this);
@@ -25,8 +25,8 @@ index 7061cbfd93ebb..190442f7afa0a 100644
    movk(scratch, 0, 16);
 diff --git js/src/jit/arm64/MacroAssembler-arm64.cpp js/src/jit/arm64/MacroAssembler-arm64.cpp
 index 7b599b7e9d610..4e8fdb6a67019 100644
---- js/src/jit/arm64/MacroAssembler-arm64.cpp
-+++ js/src/jit/arm64/MacroAssembler-arm64.cpp
+--- a/js/src/jit/arm64/MacroAssembler-arm64.cpp
++++ b/js/src/jit/arm64/MacroAssembler-arm64.cpp
 @@ -666,6 +666,7 @@ void MacroAssembler::patchNearJumpToNop(uint8_t* jump)
  }
  
