@@ -1,3 +1,6 @@
+patch-bug292127
+patch-bug847568
+patch-bug991253
 patch-bug1144632
 patch-bug1288587
 patch-bug1411481
@@ -14,9 +17,6 @@ patch-bug1519629
 patch-bug1519729
 patch-bug1530098
 patch-bug1532851
-patch-bug292127
-patch-bug847568
-patch-bug991253
 patch-toolkit_moz.configure
 patch-u2f-hid-rs62
 patch-z-bug1436911
