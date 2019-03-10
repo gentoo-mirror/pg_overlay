@@ -1,5 +1,5 @@
---- comm/ldap/c-sdk/include/ldap.h~
-+++ comm/ldap/c-sdk/include/ldap.h
+--- a/comm/ldap/c-sdk/include/ldap.h~
++++ b/comm/ldap/c-sdk/include/ldap.h
 @@ -40,6 +40,229 @@
  #ifndef _LDAP_H
  #define _LDAP_H

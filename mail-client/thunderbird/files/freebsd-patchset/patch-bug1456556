@@ -9,8 +9,8 @@ Date:   Tue May 1 08:47:13 2018 +0200
 
 diff --git dom/fetch/FetchConsumer.cpp dom/fetch/FetchConsumer.cpp
 index 134bf7f2e703a..3c3687fea1d5a 100644
---- dom/fetch/FetchConsumer.cpp
-+++ dom/fetch/FetchConsumer.cpp
+--- a/dom/fetch/FetchConsumer.cpp
++++ b/dom/fetch/FetchConsumer.cpp
 @@ -560,7 +560,7 @@ void FetchBodyConsumer<Derived>::ContinueConsumeBody(n
  
    RefPtr<FetchBodyConsumer<Derived>> self = this;

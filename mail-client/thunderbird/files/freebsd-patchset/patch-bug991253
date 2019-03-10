@@ -1,5 +1,5 @@
---- extensions/spellcheck/hunspell/glue/mozHunspell.cpp~
-+++ extensions/spellcheck/hunspell/glue/mozHunspell.cpp
+--- a/extensions/spellcheck/hunspell/glue/mozHunspell.cpp~
++++ b/extensions/spellcheck/hunspell/glue/mozHunspell.cpp
 @@ -392,6 +392,14 @@ mozHunspell::LoadDictionaryList(bool aNo
      }
    }

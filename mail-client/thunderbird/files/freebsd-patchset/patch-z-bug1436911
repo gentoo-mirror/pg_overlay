@@ -36,8 +36,8 @@ Date:   Thu Mar 8 15:47:24 2018 +1100
 
 diff --git dom/ipc/ContentChild.cpp dom/ipc/ContentChild.cpp
 index f61ab07b81e2..af1ef9cf4c7e 100644
---- dom/ipc/ContentChild.cpp
-+++ dom/ipc/ContentChild.cpp
+--- a/dom/ipc/ContentChild.cpp
++++ b/dom/ipc/ContentChild.cpp
 @@ -1094,8 +1094,6 @@ void ContentChild::InitGraphicsDeviceData(const Conten
  void ContentChild::InitXPCOM(
      const XPCOMInitData& aXPCOMInit,
@@ -49,8 +49,8 @@ index f61ab07b81e2..af1ef9cf4c7e 100644
    BackgroundChild::Startup();
 diff --git dom/ipc/ContentParent.cpp dom/ipc/ContentParent.cpp
 index 208bb47a970b..4ce5c6bf23d5 100644
---- dom/ipc/ContentParent.cpp
-+++ dom/ipc/ContentParent.cpp
+--- a/dom/ipc/ContentParent.cpp
++++ b/dom/ipc/ContentParent.cpp
 @@ -197,7 +197,6 @@
  
  #include "nsLayoutStylesheetCache.h"
@@ -79,8 +79,8 @@ index 208bb47a970b..4ce5c6bf23d5 100644
 diff --git dom/ipc/ContentPrefs.cpp dom/ipc/ContentPrefs.cpp
 deleted file mode 100644
 index 808b797d9bee..000000000000
---- dom/ipc/ContentPrefs.cpp
-+++ /dev/null
+--- a/dom/ipc/ContentPrefs.cpp
++++ b//dev/null
 @@ -1,360 +0,0 @@
 -/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 -/* vim: set ts=8 sts=2 et sw=2 tw=80: */
@@ -445,8 +445,8 @@ index 808b797d9bee..000000000000
 diff --git dom/ipc/ContentPrefs.h dom/ipc/ContentPrefs.h
 deleted file mode 100644
 index 72ce8d236c11..000000000000
---- dom/ipc/ContentPrefs.h
-+++ /dev/null
+--- a/dom/ipc/ContentPrefs.h
++++ b//dev/null
 @@ -1,27 +0,0 @@
 -/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
 -/* vim: set ts=8 sts=2 et sw=2 tw=80: */
@@ -477,8 +477,8 @@ index 72ce8d236c11..000000000000
 -#endif
 diff --git dom/ipc/ContentProcess.cpp dom/ipc/ContentProcess.cpp
 index 2441c8cb9224..c00283dc5084 100644
---- dom/ipc/ContentProcess.cpp
-+++ dom/ipc/ContentProcess.cpp
+--- a/dom/ipc/ContentProcess.cpp
++++ b/dom/ipc/ContentProcess.cpp
 @@ -7,7 +7,6 @@
  #include "mozilla/ipc/IOThreadChild.h"
  
@@ -500,8 +500,8 @@ index 2441c8cb9224..c00283dc5084 100644
    mContent.Init(IOThreadChild::message_loop(), ParentPid(),
 diff --git dom/ipc/PContent.ipdl dom/ipc/PContent.ipdl
 index 5d077976569a..fb967ffc53a9 100644
---- dom/ipc/PContent.ipdl
-+++ dom/ipc/PContent.ipdl
+--- a/dom/ipc/PContent.ipdl
++++ b/dom/ipc/PContent.ipdl
 @@ -155,6 +155,12 @@ union MaybePrefValue {
    null_t;
  };
@@ -525,8 +525,8 @@ index 5d077976569a..fb967ffc53a9 100644
      GfxInfoFeatureStatus[] gfxFeatureStatus;
 diff --git dom/ipc/moz.build dom/ipc/moz.build
 index 3c5541c7791b..5e92a0d52b5d 100644
---- dom/ipc/moz.build
-+++ dom/ipc/moz.build
+--- a/dom/ipc/moz.build
++++ b/dom/ipc/moz.build
 @@ -26,7 +26,6 @@ EXPORTS.mozilla.dom += [
      'ContentBridgeParent.h',
      'ContentChild.h',
@@ -545,8 +545,8 @@ index 3c5541c7791b..5e92a0d52b5d 100644
      'ContentProcessManager.cpp',
 diff --git layout/style/nsCSSProps.h layout/style/nsCSSProps.h
 index dce44bf61b35..80288336a08b 100644
---- layout/style/nsCSSProps.h
-+++ layout/style/nsCSSProps.h
+--- a/layout/style/nsCSSProps.h
++++ b/layout/style/nsCSSProps.h
 @@ -640,7 +640,7 @@ class nsCSSProps {
      // In the child process, assert that we're not trying to parse stylesheets
      // before we've gotten all our prefs.
@@ -558,8 +558,8 @@ index dce44bf61b35..80288336a08b 100644
  
 diff --git modules/libpref/Preferences.cpp modules/libpref/Preferences.cpp
 index fe780686f2eb..488095f49236 100644
---- modules/libpref/Preferences.cpp
-+++ modules/libpref/Preferences.cpp
+--- a/modules/libpref/Preferences.cpp
++++ b/modules/libpref/Preferences.cpp
 @@ -15,7 +15,6 @@
  #include "mozilla/ArenaAllocator.h"
  #include "mozilla/ArrayUtils.h"
@@ -1102,8 +1102,8 @@ index fe780686f2eb..488095f49236 100644
  
 diff --git modules/libpref/Preferences.h modules/libpref/Preferences.h
 index 0d976483daae..901425b5b663 100644
---- modules/libpref/Preferences.h
-+++ modules/libpref/Preferences.h
+--- a/modules/libpref/Preferences.h
++++ b/modules/libpref/Preferences.h
 @@ -277,15 +277,10 @@ class Preferences final : public nsIPrefService,
    static nsresult AddFloatVarCache(float* aVariable, const char* aPref,
                                     float aDefault = 0.0f);

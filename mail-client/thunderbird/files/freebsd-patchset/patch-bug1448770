@@ -2,8 +2,8 @@ Disable GL_EXT_debug_marker due to crashes on x86 with Mesa drivers.
 
 diff --git gfx/webrender/src/query.rs gfx/webrender/src/query.rs
 index 999abc749115..68850ef025e4 100644
---- gfx/webrender/src/query.rs
-+++ gfx/webrender/src/query.rs
+--- a/gfx/webrender/src/query.rs
++++ b/gfx/webrender/src/query.rs
 @@ -274,17 +274,20 @@ pub struct GpuMarker {
  
  impl GpuMarker {

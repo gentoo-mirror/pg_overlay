@@ -1,7 +1,7 @@
 diff --git js/src/wasm/WasmSignalHandlers.cpp js/src/wasm/WasmSignalHandlers.cpp
 index fc49f361d82a..636537f84786 100644
---- js/src/wasm/WasmSignalHandlers.cpp
-+++ js/src/wasm/WasmSignalHandlers.cpp
+--- a/js/src/wasm/WasmSignalHandlers.cpp
++++ b/js/src/wasm/WasmSignalHandlers.cpp
 @@ -102,6 +102,11 @@ using mozilla::DebugOnly;
  #define EPC_sig(p) ((p)->sc_pc)
  #define RFP_sig(p) ((p)->sc_regs[30])

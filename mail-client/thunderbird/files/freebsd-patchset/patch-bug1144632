@@ -14,8 +14,8 @@ Date:   Thu May 24 14:50:31 2018 -0400
 
 diff --git gfx/skia/skia/include/core/SkColorPriv.h gfx/skia/skia/include/core/SkColorPriv.h
 index 0cd02e8034062..8a7f1501ba434 100644
---- gfx/skia/skia/include/core/SkColorPriv.h
-+++ gfx/skia/skia/include/core/SkColorPriv.h
+--- a/gfx/skia/skia/include/core/SkColorPriv.h
++++ b/gfx/skia/skia/include/core/SkColorPriv.h
 @@ -55,17 +55,10 @@ static inline U8CPU SkUnitScalarClampToByte(SkScalar x) {
   *  Here we enforce this constraint.
   */
@@ -40,8 +40,8 @@ index 0cd02e8034062..8a7f1501ba434 100644
  #define SkGetPackedR32(packed)      ((uint32_t)((packed) << (24 - SK_R32_SHIFT)) >> 24)
 diff --git gfx/skia/skia/include/core/SkImageInfo.h gfx/skia/skia/include/core/SkImageInfo.h
 index ece47f5c418a8..5b36ba1e4518a 100644
---- gfx/skia/skia/include/core/SkImageInfo.h
-+++ gfx/skia/skia/include/core/SkImageInfo.h
+--- a/gfx/skia/skia/include/core/SkImageInfo.h
++++ b/gfx/skia/skia/include/core/SkImageInfo.h
 @@ -84,7 +84,7 @@ enum SkColorType {
  #elif SK_PMCOLOR_BYTE_ORDER(R,G,B,A)
      kN32_SkColorType = kRGBA_8888_SkColorType,
@@ -53,8 +53,8 @@ index ece47f5c418a8..5b36ba1e4518a 100644
  
 diff --git gfx/skia/skia/include/gpu/GrTypes.h gfx/skia/skia/include/gpu/GrTypes.h
 index c88d9ee63b38f..fdca5f29e527b 100644
---- gfx/skia/skia/include/gpu/GrTypes.h
-+++ gfx/skia/skia/include/gpu/GrTypes.h
+--- a/gfx/skia/skia/include/gpu/GrTypes.h
++++ b/gfx/skia/skia/include/gpu/GrTypes.h
 @@ -344,15 +344,12 @@ enum GrPixelConfig {
  static const int kGrPixelConfigCnt = kLast_GrPixelConfig + 1;
  
@@ -74,8 +74,8 @@ index c88d9ee63b38f..fdca5f29e527b 100644
  /**
 diff --git gfx/skia/skia/src/core/SkColorData.h gfx/skia/skia/src/core/SkColorData.h
 index 3fc0113105a5b..43ae01eeaee3e 100644
---- gfx/skia/skia/src/core/SkColorData.h
-+++ gfx/skia/skia/src/core/SkColorData.h
+--- a/gfx/skia/skia/src/core/SkColorData.h
++++ b/gfx/skia/skia/src/core/SkColorData.h
 @@ -32,17 +32,10 @@
   *  Here we enforce this constraint.
   */

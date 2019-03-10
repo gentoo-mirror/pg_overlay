@@ -15,8 +15,8 @@ Date:   Wed Feb 28 13:57:52 2018 +0100
 diff --git js/src/jit-test/tests/bug1375074.js js/src/jit-test/tests/bug1375074.js
 new file mode 100644
 index 0000000000000..8bf01d96903fc
---- /dev/null
-+++ js/src/jit-test/tests/bug1375074.js
+--- a//dev/null
++++ b/js/src/jit-test/tests/bug1375074.js
 @@ -0,0 +1,18 @@
 +// This forces the VM to start creating unboxed objects and thus stresses a
 +// particular path into generated code for a specialized unboxed object
@@ -38,8 +38,8 @@ index 0000000000000..8bf01d96903fc
 +}
 diff --git js/src/vm/UnboxedObject.cpp js/src/vm/UnboxedObject.cpp
 index c8c178965c488..5badf328ede4f 100644
---- js/src/vm/UnboxedObject.cpp
-+++ js/src/vm/UnboxedObject.cpp
+--- a/js/src/vm/UnboxedObject.cpp
++++ b/js/src/vm/UnboxedObject.cpp
 @@ -86,8 +86,15 @@ static const uintptr_t CLEAR_CONSTRUCTOR_CODE_TOKEN = 
  #endif
  
