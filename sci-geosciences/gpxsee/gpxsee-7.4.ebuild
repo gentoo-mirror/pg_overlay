@@ -49,7 +49,7 @@ src_compile() {
 
 src_install() {
 	local lang
-	newbin ${MY_PN} ${PN}
+	#newbin ${MY_PN} ${PN}
 	dodoc README.md
 	insinto /usr/share/${PN}
 	doins -r pkg/maps pkg/csv
