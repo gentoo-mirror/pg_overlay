@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PLOCALES="cs da de en fi fr nb pl ru sv tr"
+PLOCALES="cs da de en es fi fr nb pl pt_BR ru sv tr"
 inherit qmake-utils l10n xdg-utils gnome2-utils
 
 MY_PN="GPXSee"
