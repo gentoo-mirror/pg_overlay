@@ -3,7 +3,7 @@
 
 EAPI=6
 
-ESVN_REPO_URI="svn://svn.code.sf.net/p/kuroo/code/kuroo4/"
+ESVN_REPO_URI="svn://svn.code.sf.net/p/kuroo/code/kuroo4/trunk/"
 ESVN_PROJECT="kuroo4"
 inherit cmake-utils subversion
 
