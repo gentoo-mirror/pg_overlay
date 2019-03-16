@@ -38,8 +38,7 @@ LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
 IUSE="clippy cpu_flags_x86_sse2 debug doc libressl rls rustfmt system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
 
-COMMON_DEPEND=">=app-eselect/eselect-rust-20190311
-		sys-libs/zlib
+COMMON_DEPEND="sys-libs/zlib
 		!libressl? ( dev-libs/openssl:0= )
 		libressl? ( dev-libs/libressl:0= )
 		net-libs/libssh2
@@ -54,6 +53,7 @@ DEPEND="${COMMON_DEPEND}
 	)
 	dev-util/cmake"
 RDEPEND="${COMMON_DEPEND}
+	>=app-eselect/eselect-rust-20190311
 	!dev-util/cargo
 	rustfmt? ( !dev-util/rustfmt )"
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
@@ -238,7 +238,7 @@ src_compile() {
 src_install() {
 	local rust_target abi_libdir
 
-	env DESTDIR="${D}" "${EPYTHON}" ./x.py install || die
+	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -v || die
 
 	mv "${D}/usr/bin/rustc" "${D}/usr/bin/rustc-${PV}" || die
 	mv "${D}/usr/bin/rustdoc" "${D}/usr/bin/rustdoc-${PV}" || die
