@@ -29,6 +29,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 MOZ_P="${PN}-${MOZ_PV}"
 
+LLVM_MAX_SLOT=8
 MOZCONFIG_OPTIONAL_JIT=1
 
 inherit check-reqs flag-o-matic toolchain-funcs gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils autotools mozlinguas-v2
