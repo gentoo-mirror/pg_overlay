@@ -118,11 +118,12 @@ src_prepare() {
 		sed -i -e "/search-utils/d" glib/tests/Makefile.am || die
 	else
 		# Don't build tests, also prevents extra deps, bug #512022
-		sed -i -e 's/ tests//' {.,gio,glib}/Makefile.am || die
+		echo 1
+		#sed -i -e 's/ tests//' {.,gio,glib}/Makefile.am || die
 	fi
 
 	# gdbus-codegen is a separate package
-	eapply "${FILESDIR}"/${PN}-2.58.2-external-gdbus-codegen.patch
+	#eapply "${FILESDIR}"/${PN}-2.58.2-external-gdbus-codegen.patch
 
 	# Tarball doesn't come with gtk-doc.make and we can't unconditionally depend on dev-util/gtk-doc due
 	# to circular deps during bootstramp. If actually not building gtk-doc, an almost empty file will do
@@ -133,6 +134,13 @@ EXTRA_DIST =
 CLEANFILES =
 EOF
 
+	# Leave python shebang alone - handled by python_replicate_script
+	# We could call python_setup and give configure a valid --with-python
+	# arg, but that would mean a build dep on python when USE=utils.
+	sed -e 's:@PYTHON@:python:' \
+		-i gobject/glib-{genmarshal.in,mkenums.in} || die
+	# Also needed to prevent cross-compile failures, see bug #267603
+	eautoreconf
 	gnome2_src_prepare
 	epunt_cxx
 }
