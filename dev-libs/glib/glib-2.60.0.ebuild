@@ -118,7 +118,8 @@ src_prepare() {
 		sed -i -e "/search-utils/d" glib/tests/Makefile.am || die
 	else
 		# Don't build tests, also prevents extra deps, bug #512022
-		sed -i -e 's/ tests//' {.,gio,glib}/Makefile.am || die
+		echo 1
+		#sed -i -e 's/ tests//' {.,gio,glib}/Makefile.am || die
 	fi
 
 	# gdbus-codegen is a separate package
