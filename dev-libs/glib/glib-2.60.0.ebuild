@@ -134,6 +134,13 @@ EXTRA_DIST =
 CLEANFILES =
 EOF
 
+	# Leave python shebang alone - handled by python_replicate_script
+	# We could call python_setup and give configure a valid --with-python
+	# arg, but that would mean a build dep on python when USE=utils.
+	sed -e 's:@PYTHON@:python:' \
+		-i gobject/glib-{genmarshal.in,mkenums.in} || die
+	# Also needed to prevent cross-compile failures, see bug #267603
+	eautoreconf
 	gnome2_src_prepare
 	epunt_cxx
 }
