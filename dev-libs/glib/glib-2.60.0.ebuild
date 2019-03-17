@@ -123,7 +123,7 @@ src_prepare() {
 	fi
 
 	# gdbus-codegen is a separate package
-	eapply "${FILESDIR}"/${PN}-2.58.2-external-gdbus-codegen.patch
+	#eapply "${FILESDIR}"/${PN}-2.58.2-external-gdbus-codegen.patch
 
 	# Tarball doesn't come with gtk-doc.make and we can't unconditionally depend on dev-util/gtk-doc due
 	# to circular deps during bootstramp. If actually not building gtk-doc, an almost empty file will do
