@@ -26,6 +26,18 @@ media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with M
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
+www-client/chromium:closure-compile - Enable closure type-checking for Chrome's web technology-based UI. Requires Java.
+www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
+www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
+www-client/chromium:jumbo-build - Combine source files to speed up build process.
+www-client/chromium:pic - Disable optimized assembly code that is not PIC friendly
+www-client/chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3
+www-client/chromium:suid - Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels
+www-client/chromium:system-ffmpeg - Use system ffmpeg instead of the bundled one
+www-client/chromium:system-icu - Use system icu instead of the bundled one
+www-client/chromium:system-libvpx - Use system libvpx instead of the bundled one
+www-client/chromium:tcmalloc - Use bundled tcmalloc instead of system malloc
+www-client/chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
 x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
