@@ -492,7 +492,7 @@ src_configure() {
 	# Never use bundled gold binary. Disable gold linker flags for now.
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=true use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
+	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	# Disable forced lld, bug 641556
 	myconf_gn+=" use_lld=true"
@@ -600,8 +600,14 @@ src_configure() {
 
 	#
 	myconf_gn+=" optimize_for_size=false"
+	myconf_gn+=" thin_lto_enable_optimizations=true"
 	myconf_gn+=" use_thin_lto=true"
 	myconf_gn+=" use_new_tcmalloc=true"
+
+	#
+	append-cxxflags "-stdlib=libc++"
+	append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
+	append-ldflags "-Wl,-lgcc_s"
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
