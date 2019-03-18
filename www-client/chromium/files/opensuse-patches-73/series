@@ -1,17 +1,10 @@
 chromium-libusb_interrupt_event_handler.patch
-exclude_ymp.patch
-chromium-master-prefs-path.patch
-fix_building_widevinecdm_with_chromium.patch
 chromium-dma-buf.patch
-chromium-buildname.patch
 chromium-non-void-return.patch
 chromium-drm.patch
 chromium-sandbox-pie.patch
 chromium-system-icu.patch
 chromium-system-libusb.patch
-chromium-old-glibc.patch
-chromium-skia-aarch64-buildfix.patch
-chromium-old-libva.patch
 chromium-fix_swiftshader.patch
 chromium-fix_crashpad.patch
 chromium-vaapi.patch
