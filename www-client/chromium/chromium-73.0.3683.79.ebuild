@@ -194,14 +194,14 @@ src_prepare() {
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
 		base/third_party/icu
-		#base/third_party/nspr
+		
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
 		base/third_party/xdg_mime
 		base/third_party/xdg_user_dirs
-		#buildtools/third_party/libc++
-		#buildtools/third_party/libc++abi
+		
+		
 		chrome/third_party/mozilla_security_manager
 		courgette/third_party
 		net/third_party/mozilla_security_manager
@@ -246,7 +246,7 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
 		third_party/cld_3
-		#third_party/closure_compiler
+		
 		third_party/crashpad
 		third_party/crashpad/crashpad/third_party/zlib
 		third_party/crc32c
@@ -257,7 +257,7 @@ src_prepare() {
 		third_party/flatbuffers
 		third_party/flot
 		third_party/glslang
-		#third_party/freetype
+		
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
 		third_party/google_input_tools/third_party/closure_library/third_party/closure
@@ -266,7 +266,7 @@ src_prepare() {
 		third_party/iccjpeg
 		third_party/inspector_protocol
 		third_party/jinja2
-		#third_party/jsoncpp
+		
 		third_party/jstemplate
 		third_party/khronos
 		third_party/leveldatabase
@@ -303,7 +303,7 @@ src_prepare() {
 		third_party/pdfium/third_party/bigint
 		third_party/pdfium/third_party/freetype
 		third_party/pdfium/third_party/lcms
-		#third_party/pdfium/third_party/libopenjpeg20
+		
 		third_party/pdfium/third_party/libpng16
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
@@ -355,7 +355,7 @@ src_prepare() {
 		v8/third_party/v8
 
 		# gyp -> gn leftovers
-		#base/third_party/libevent
+		
 		third_party/adobe
 		third_party/speech-dispatcher
 		third_party/usb_ids
