@@ -1,0 +1,1961 @@
+Index: chromium-73.0.3683.39/base/bind_internal.h
+===================================================================
+--- chromium-73.0.3683.39.orig/base/bind_internal.h
++++ chromium-73.0.3683.39/base/bind_internal.h
+@@ -749,6 +749,7 @@ bool QueryCancellationTraitsImpl(BindSta
+           functor, std::get<indices>(bound_args)...);
+   }
+   NOTREACHED();
++  __builtin_abort ();
+ }
+ 
+ // Relays |base| to corresponding CallbackCancellationTraits<>::Run(). Returns
+Index: chromium-73.0.3683.39/base/callback_internal.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/base/callback_internal.cc
++++ chromium-73.0.3683.39/base/callback_internal.cc
+@@ -21,6 +21,7 @@ bool QueryCancellationTraitsForNonCancel
+       return true;
+   }
+   NOTREACHED();
++  __builtin_abort ();
+ }
+ 
+ }  // namespace
+Index: chromium-73.0.3683.39/cc/input/snap_fling_controller.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/cc/input/snap_fling_controller.cc
++++ chromium-73.0.3683.39/cc/input/snap_fling_controller.cc
+@@ -26,6 +26,8 @@ bool SnapFlingController::FilterEventFor
+     case GestureScrollType::kEnd: {
+       return state_ == State::kActive || state_ == State::kFinished;
+     }
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/background_fetch/background_fetch_download_client.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/background_fetch/background_fetch_download_client.cc
++++ chromium-73.0.3683.39/chrome/browser/background_fetch/background_fetch_download_client.cc
+@@ -36,6 +36,8 @@ BackgroundFetchFailureReason ToBackgroun
+     case download::Client::FailureReason::ABORTED:
+     case download::Client::FailureReason::CANCELLED:
+       return BackgroundFetchFailureReason::CANCELLED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/download/offline_item_model.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/download/offline_item_model.cc
++++ chromium-73.0.3683.39/chrome/browser/download/offline_item_model.cc
+@@ -147,6 +147,8 @@ download::DownloadItem::DownloadState Of
+     case OfflineItemState::MAX_DOWNLOAD_STATE:
+       NOTREACHED();
+       return download::DownloadItem::CANCELLED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/download/offline_item_utils.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/download/offline_item_utils.cc
++++ chromium-73.0.3683.39/chrome/browser/download/offline_item_utils.cc
+@@ -153,6 +153,8 @@ FailState OfflineItemUtils::ConvertDownl
+     return offline_items_collection::FailState::name;
+ #include "components/download/public/common/download_interrupt_reason_values.h"
+ #undef INTERRUPT_REASON
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -172,6 +174,8 @@ OfflineItemUtils::ConvertFailStateToDown
+     return download::DOWNLOAD_INTERRUPT_REASON_##name;
+ #include "components/download/public/common/download_interrupt_reason_values.h"
+ #undef INTERRUPT_REASON
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/media/webrtc/media_stream_capture_indicator.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/media/webrtc/media_stream_capture_indicator.cc
++++ chromium-73.0.3683.39/chrome/browser/media/webrtc/media_stream_capture_indicator.cc
+@@ -252,6 +252,7 @@ int& MediaStreamCaptureIndicator::WebCon
+       NOTREACHED();
+       return video_stream_count_;
+   }
++  __builtin_abort ();
+ }
+ 
+ MediaStreamCaptureIndicator::MediaStreamCaptureIndicator() {}
+Index: chromium-73.0.3683.39/chrome/browser/resource_coordinator/tab_lifecycle_unit.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/resource_coordinator/tab_lifecycle_unit.cc
++++ chromium-73.0.3683.39/chrome/browser/resource_coordinator/tab_lifecycle_unit.cc
+@@ -159,6 +159,7 @@ bool IsValidStateChange(LifecycleUnitSta
+       }
+     }
+   }
++  __builtin_abort ();
+ }
+ 
+ StateChangeReason DiscardReasonToStateChangeReason(
+@@ -170,6 +171,8 @@ StateChangeReason DiscardReasonToStateCh
+       return StateChangeReason::BROWSER_INITIATED;
+     case LifecycleUnitDiscardReason::URGENT:
+       return StateChangeReason::SYSTEM_MEMORY_PRESSURE;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/ui/autofill/save_card_bubble_controller_impl.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/autofill/save_card_bubble_controller_impl.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/autofill/save_card_bubble_controller_impl.cc
+@@ -233,6 +233,8 @@ base::string16 SaveCardBubbleControllerI
+     case BubbleType::INACTIVE:
+       NOTREACHED();
+       return base::string16();
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/ui/views/autofill/autofill_popup_view_native_views.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/views/autofill/autofill_popup_view_native_views.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/views/autofill/autofill_popup_view_native_views.cc
+@@ -550,6 +550,8 @@ PopupItemLayoutType AutofillPopupSuggest
+         default:
+           return PopupItemLayoutType::kTrailingIcon;
+       }
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/ui/views/autofill/local_card_migration_dialog_view.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/views/autofill/local_card_migration_dialog_view.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/views/autofill/local_card_migration_dialog_view.cc
+@@ -399,6 +399,7 @@ bool LocalCardMigrationDialogView::Accep
+       controller_->OnDoneButtonClicked();
+       return true;
+   }
++  __builtin_abort ();
+ }
+ 
+ bool LocalCardMigrationDialogView::Cancel() {
+@@ -411,6 +412,7 @@ bool LocalCardMigrationDialogView::Cance
+       controller_->OnViewCardsButtonClicked();
+       return true;
+   }
++  __builtin_abort ();
+ }
+ 
+ bool LocalCardMigrationDialogView::Close() {
+@@ -482,6 +484,8 @@ base::string16 LocalCardMigrationDialogV
+     case LocalCardMigrationDialogState::kActionRequired:
+       return l10n_util::GetStringUTF16(
+           IDS_AUTOFILL_LOCAL_CARD_MIGRATION_DIALOG_BUTTON_LABEL_DONE);
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -495,6 +499,7 @@ base::string16 LocalCardMigrationDialogV
+       return l10n_util::GetStringUTF16(
+           IDS_AUTOFILL_LOCAL_CARD_MIGRATION_DIALOG_BUTTON_LABEL_VIEW_CARDS);
+   }
++  __builtin_abort ();
+ }
+ 
+ LocalCardMigrationDialog* CreateLocalCardMigrationDialogView(
+Index: chromium-73.0.3683.39/chrome/browser/ui/views/material_refresh_layout_provider.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/views/material_refresh_layout_provider.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/views/material_refresh_layout_provider.cc
+@@ -41,6 +41,8 @@ int MaterialRefreshLayoutProvider::GetCo
+       return 8;
+     case views::EMPHASIS_MAXIMUM:
+       return std::min(size.width(), size.height()) / 2;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -58,6 +60,8 @@ int MaterialRefreshLayoutProvider::GetSh
+       return 3;
+     case views::EMPHASIS_MAXIMUM:
+       return 16;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/ui/webui/discards/discards_ui.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/webui/discards/discards_ui.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/webui/discards/discards_ui.cc
+@@ -56,6 +56,8 @@ mojom::LifecycleUnitVisibility GetLifecy
+       return mojom::LifecycleUnitVisibility::OCCLUDED;
+     case content::Visibility::VISIBLE:
+       return mojom::LifecycleUnitVisibility::VISIBLE;
++    default:
++      __builtin_abort ();
+   }
+ #if defined(COMPILER_MSVC)
+   NOTREACHED();
+Index: chromium-73.0.3683.39/chrome/browser/ui/webui/media/media_engagement_ui.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/webui/media/media_engagement_ui.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/webui/media/media_engagement_ui.cc
+@@ -98,6 +98,7 @@ class MediaEngagementScoreDetailsProvide
+       case content::AutoplayPolicy::kDocumentUserActivationRequired:
+         return "document-user-activation-required";
+     }
++    __builtin_abort ();
+   }
+ 
+   const std::string GetPreloadVersion() {
+Index: chromium-73.0.3683.39/components/autofill/core/browser/autofill_external_delegate.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/autofill/core/browser/autofill_external_delegate.cc
++++ chromium-73.0.3683.39/components/autofill/core/browser/autofill_external_delegate.cc
+@@ -429,6 +429,8 @@ base::string16 AutofillExternalDelegate:
+     case PopupType::kPasswords:
+       NOTREACHED();
+       return base::string16();
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/autofill/core/browser/autofill_manager.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/autofill/core/browser/autofill_manager.cc
++++ chromium-73.0.3683.39/components/autofill/core/browser/autofill_manager.cc
+@@ -276,6 +276,7 @@ PopupType AutofillManager::GetPopupType(
+ 
+     default:
+       NOTREACHED();
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/autofill/core/browser/webdata/autofill_sync_bridge_util.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/autofill/core/browser/webdata/autofill_sync_bridge_util.cc
++++ chromium-73.0.3683.39/components/autofill/core/browser/webdata/autofill_sync_bridge_util.cc
+@@ -29,6 +29,8 @@ sync_pb::WalletMaskedCreditCard::WalletC
+       return sync_pb::WalletMaskedCreditCard::VALID;
+     case CreditCard::EXPIRED:
+       return sync_pb::WalletMaskedCreditCard::EXPIRED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -39,6 +41,8 @@ CreditCard::ServerStatus ServerToLocalSt
+       return CreditCard::OK;
+     case sync_pb::WalletMaskedCreditCard::EXPIRED:
+       return CreditCard::EXPIRED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -83,6 +87,8 @@ const char* CardNetworkFromWalletCardTyp
+     case sync_pb::WalletMaskedCreditCard::SWITCH:
+     case sync_pb::WalletMaskedCreditCard::UNKNOWN:
+       return kGenericCard;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -96,6 +102,7 @@ sync_pb::WalletMaskedCreditCard::WalletC
+     case CreditCard::CARD_TYPE_PREPAID:
+       return sync_pb::WalletMaskedCreditCard::PREPAID;
+     case CreditCard::CARD_TYPE_UNKNOWN:
++    default:
+       return sync_pb::WalletMaskedCreditCard::UNKNOWN_CARD_CLASS;
+   }
+ }
+@@ -111,6 +118,8 @@ CreditCard::CardType CardTypeFromWalletC
+       return CreditCard::CARD_TYPE_PREPAID;
+     case sync_pb::WalletMaskedCreditCard::UNKNOWN_CARD_CLASS:
+       return CreditCard::CARD_TYPE_UNKNOWN;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/autofill/core/browser/webdata/autofill_wallet_metadata_sync_bridge.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/autofill/core/browser/webdata/autofill_wallet_metadata_sync_bridge.cc
++++ chromium-73.0.3683.39/components/autofill/core/browser/webdata/autofill_wallet_metadata_sync_bridge.cc
+@@ -47,6 +47,8 @@ std::string GetClientTagForSpecificsId(W
+     case WalletMetadataSpecifics::UNKNOWN:
+       NOTREACHED();
+       return "";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -249,6 +251,8 @@ bool AddServerMetadata(AutofillTable* ta
+     case WalletMetadataSpecifics::UNKNOWN:
+       NOTREACHED();
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -263,6 +267,8 @@ bool RemoveServerMetadata(AutofillTable*
+     case WalletMetadataSpecifics::UNKNOWN:
+       NOTREACHED();
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -278,6 +284,8 @@ bool UpdateServerMetadata(AutofillTable*
+     case WalletMetadataSpecifics::UNKNOWN:
+       NOTREACHED();
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/data_reduction_proxy/core/browser/data_reduction_proxy_util.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/data_reduction_proxy/core/browser/data_reduction_proxy_util.cc
++++ chromium-73.0.3683.39/components/data_reduction_proxy/core/browser/data_reduction_proxy_util.cc
+@@ -322,6 +322,8 @@ PageloadMetrics_ConnectionType ProtoConn
+       return PageloadMetrics_ConnectionType_CONNECTION_NONE;
+     case net::NetworkChangeNotifier::CONNECTION_BLUETOOTH:
+       return PageloadMetrics_ConnectionType_CONNECTION_BLUETOOTH;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -364,6 +366,8 @@ ProtoLitePageRedirectStatusFromLitePageR
+       return HTTPSLitePagePreviewInfo_Status_FAILURE;
+     case previews::ServerLitePageStatus::kControl:
+       return HTTPSLitePagePreviewInfo_Status_CONTROL;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/password_manager/core/browser/browser_save_password_progress_logger.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/password_manager/core/browser/browser_save_password_progress_logger.cc
++++ chromium-73.0.3683.39/components/password_manager/core/browser/browser_save_password_progress_logger.cc
+@@ -74,6 +74,8 @@ std::string VoteTypeToString(
+       return "HTML classifier";
+     case AutofillUploadContents::Field::FIRST_USE:
+       return "First use";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/policy/core/common/cloud/cloud_policy_util.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/policy/core/common/cloud/cloud_policy_util.cc
++++ chromium-73.0.3683.39/components/policy/core/common/cloud/cloud_policy_util.cc
+@@ -171,6 +171,8 @@ em::Channel ConvertToProtoChannel(versio
+       return em::CHANNEL_BETA;
+     case version_info::Channel::STABLE:
+       return em::CHANNEL_STABLE;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/policy/core/common/policy_proto_decoders.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/policy/core/common/policy_proto_decoders.cc
++++ chromium-73.0.3683.39/components/policy/core/common/policy_proto_decoders.cc
+@@ -42,6 +42,8 @@ bool GetPolicyLevel(const AnyPolicyProto
+       return true;
+     case em::PolicyOptions::UNSET:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/previews/content/previews_hints.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/previews/content/previews_hints.cc
++++ chromium-73.0.3683.39/components/previews/content/previews_hints.cc
+@@ -123,6 +123,8 @@ base::Optional<PreviewsType> ConvertProt
+       return PreviewsType::RESOURCE_LOADING_HINTS;
+     case optimization_guide::proto::LITE_PAGE_REDIRECT:
+       return PreviewsType::LITE_PAGE_REDIRECT;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -147,6 +149,8 @@ net::EffectiveConnectionType ConvertProt
+     case optimization_guide::proto::EffectiveConnectionType::
+         EFFECTIVE_CONNECTION_TYPE_4G:
+       return net::EffectiveConnectionType::EFFECTIVE_CONNECTION_TYPE_4G;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/previews/core/previews_black_list.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/previews/core/previews_black_list.cc
++++ chromium-73.0.3683.39/components/previews/core/previews_black_list.cc
+@@ -34,6 +34,8 @@ PreviewsEligibilityReason BlacklistReaso
+       return PreviewsEligibilityReason::ALLOWED;
+     case blacklist::BlacklistReason::kAllowed:
+       return PreviewsEligibilityReason::ALLOWED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/signin/core/browser/about_signin_internals.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/signin/core/browser/about_signin_internals.cc
++++ chromium-73.0.3683.39/components/signin/core/browser/about_signin_internals.cc
+@@ -549,6 +549,8 @@ std::string AboutSigninInternals::Refres
+       return "Revoked";
+     case AboutSigninInternals::RefreshTokenEventType::kAllTokensLoaded:
+       return "Loaded";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/signin/core/browser/profile_oauth2_token_service.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/signin/core/browser/profile_oauth2_token_service.cc
++++ chromium-73.0.3683.39/components/signin/core/browser/profile_oauth2_token_service.cc
+@@ -53,6 +53,8 @@ std::string SourceToString(SourceForRefr
+       return "MachineLogon::CredentialProvider";
+     case SourceForRefreshTokenOperation::kTokenService_ExtractCredentials:
+       return "TokenService::ExtractCredentials";
++    default:
++      __builtin_abort ();
+   }
+ }
+ }  // namespace
+@@ -219,6 +221,8 @@ bool ProfileOAuth2TokenService::HasLoadC
+         LOAD_CREDENTIALS_FINISHED_WITH_NO_TOKEN_FOR_PRIMARY_ACCOUNT:
+       // Load credentials finished with success.
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/viz/service/display/skia_renderer.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/viz/service/display/skia_renderer.cc
++++ chromium-73.0.3683.39/components/viz/service/display/skia_renderer.cc
+@@ -1302,6 +1302,8 @@ GrContext* SkiaRenderer::GetGrContext()
+       return context_provider_->GrContext();
+     case DrawMode::SKPRECORD:
+       return nullptr;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/content/browser/cache_storage/cache_storage_quota_client.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/browser/cache_storage/cache_storage_quota_client.cc
++++ chromium-73.0.3683.39/content/browser/cache_storage/cache_storage_quota_client.cc
+@@ -98,6 +98,8 @@ storage::QuotaClient::ID CacheStorageQuo
+       return kServiceWorkerCache;
+     case CacheStorageOwner::kBackgroundFetch:
+       return kBackgroundFetch;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/content/browser/frame_host/frame_tree_node.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/browser/frame_host/frame_tree_node.cc
++++ chromium-73.0.3683.39/content/browser/frame_host/frame_tree_node.cc
+@@ -608,6 +608,7 @@ bool FrameTreeNode::UpdateUserActivation
+       return ClearUserActivation();
+   }
+   NOTREACHED() << "Invalid update_type.";
++  __builtin_abort ();
+ }
+ 
+ void FrameTreeNode::OnSetHasReceivedUserGestureBeforeNavigation(bool value) {
+Index: chromium-73.0.3683.39/content/browser/media/audio_output_stream_broker.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/browser/media/audio_output_stream_broker.cc
++++ chromium-73.0.3683.39/content/browser/media/audio_output_stream_broker.cc
+@@ -53,6 +53,8 @@ StreamBrokerDisconnectReason GetDisconne
+                  : StreamBrokerDisconnectReason::kDocumentDestroyed;
+     case DisconnectReason::kDefault:
+       return StreamBrokerDisconnectReason::kDefault;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/content/renderer/input/input_event_prediction.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/renderer/input/input_event_prediction.cc
++++ chromium-73.0.3683.39/content/renderer/input/input_event_prediction.cc
+@@ -108,6 +108,8 @@ std::unique_ptr<ui::InputPredictor> Inpu
+       return std::make_unique<ui::LeastSquaresPredictor>();
+     case PredictorType::kKalman:
+       return std::make_unique<ui::KalmanPredictor>();
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/content/renderer/media/stream/media_stream_audio_processor_options.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/renderer/media/stream/media_stream_audio_processor_options.cc
++++ chromium-73.0.3683.39/content/renderer/media/stream/media_stream_audio_processor_options.cc
+@@ -98,6 +98,8 @@ AudioProcessingProperties::ToAudioProces
+         return media::EchoCancellationType::kAec3;
+       case EchoCancellationType::kEchoCancellationSystem:
+         return media::EchoCancellationType::kSystemAec;
++      default:
++        __builtin_abort ();
+     }
+   };
+ 
+Index: chromium-73.0.3683.39/content/renderer/media/stream/media_stream_constraints_util_video_device.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/renderer/media/stream/media_stream_constraints_util_video_device.cc
++++ chromium-73.0.3683.39/content/renderer/media/stream/media_stream_constraints_util_video_device.cc
+@@ -554,6 +554,8 @@ blink::WebMediaStreamTrack::DisplayCaptu
+           kApplication;
+     case media::mojom::DisplayCaptureSurfaceType::BROWSER:
+       return blink::WebMediaStreamTrack::DisplayCaptureSurfaceType::kBrowser;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -566,6 +568,8 @@ blink::WebMediaStreamTrack::CursorCaptur
+       return blink::WebMediaStreamTrack::CursorCaptureType::kAlways;
+     case media::mojom::CursorCaptureType::MOTION:
+       return blink::WebMediaStreamTrack::CursorCaptureType::kMotion;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/content/renderer/media/webrtc/peer_connection_tracker.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/renderer/media/webrtc/peer_connection_tracker.cc
++++ chromium-73.0.3683.39/content/renderer/media/webrtc/peer_connection_tracker.cc
+@@ -118,6 +118,8 @@ static const char* SerializeDirection(
+       return "'recvonly'";
+     case webrtc::RtpTransceiverDirection::kInactive:
+       return "'inactive'";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/device/bluetooth/bluetooth_remote_gatt_characteristic.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/device/bluetooth/bluetooth_remote_gatt_characteristic.cc
++++ chromium-73.0.3683.39/device/bluetooth/bluetooth_remote_gatt_characteristic.cc
+@@ -396,6 +396,8 @@ bool BluetoothRemoteGattCharacteristic::
+       return hasNotify;
+     case NotificationType::kIndication:
+       return hasIndicate;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/extensions/browser/url_loader_factory_manager.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/extensions/browser/url_loader_factory_manager.cc
++++ chromium-73.0.3683.39/extensions/browser/url_loader_factory_manager.cc
+@@ -198,6 +198,8 @@ bool IsSpecialURLLoaderFactoryRequired(c
+              DoExtensionPermissionsCoverCorsOrCorbRelatedOrigins(extension);
+     case FactoryUser::kExtensionProcess:
+       return DoExtensionPermissionsCoverCorsOrCorbRelatedOrigins(extension);
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/gin/v8_isolate_memory_dump_provider.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/gin/v8_isolate_memory_dump_provider.cc
++++ chromium-73.0.3683.39/gin/v8_isolate_memory_dump_provider.cc
+@@ -131,6 +131,8 @@ std::string IsolateTypeString(IsolateHol
+       return "test";
+     case IsolateHolder::IsolateType::kUtility:
+       return "utility";
++    default:
++      __builtin_abort ();
+   }
+   LOG(FATAL) << "Unreachable code";
+ }
+@@ -147,6 +149,8 @@ bool CanHaveMultipleIsolates(IsolateHold
+     case IsolateHolder::IsolateType::kUtility:
+       // PDFium and ProxyResolver create one isolate per process.
+       return false;
++    default:
++      __builtin_abort ();
+   }
+   LOG(FATAL) << "Unreachable code";
+ }
+Index: chromium-73.0.3683.39/gpu/config/gpu_info.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/gpu/config/gpu_info.cc
++++ chromium-73.0.3683.39/gpu/config/gpu_info.cc
+@@ -84,6 +84,8 @@ const char* OverlayFormatToString(Overla
+       return "YUY2";
+     case OverlayFormat::kNV12:
+       return "NV12";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/audio/audio_processing.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/audio/audio_processing.cc
++++ chromium-73.0.3683.39/media/audio/audio_processing.cc
+@@ -19,6 +19,8 @@ std::string AudioProcessingSettings::ToS
+         return "experimental";
+       case AutomaticGainControlType::kHybridExperimental:
+         return "hybrid experimental";
++      default:
++        __builtin_abort ();
+     }
+   };
+ 
+@@ -32,6 +34,8 @@ std::string AudioProcessingSettings::ToS
+         return "aec3";
+       case EchoCancellationType::kSystemAec:
+         return "system aec";
++      default:
++        __builtin_abort ();
+     }
+   };
+ 
+@@ -43,6 +47,8 @@ std::string AudioProcessingSettings::ToS
+         return "default";
+       case NoiseSuppressionType::kExperimental:
+         return "experimental";
++      default:
++        __builtin_abort ();
+     }
+   };
+ 
+Index: chromium-73.0.3683.39/media/base/decode_status.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/base/decode_status.cc
++++ chromium-73.0.3683.39/media/base/decode_status.cc
+@@ -18,6 +18,8 @@ const char* GetDecodeStatusString(Decode
+       return "DecodeStatus::ABORTED";
+     case DecodeStatus::DECODE_ERROR:
+       return "DecodeStatus::DECODE_ERROR";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/base/decryptor.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/base/decryptor.cc
++++ chromium-73.0.3683.39/media/base/decryptor.cc
+@@ -17,6 +17,8 @@ const char* Decryptor::GetStatusName(Sta
+       return "need_more_data";
+     case kError:
+       return "error";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/base/demuxer_stream.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/base/demuxer_stream.cc
++++ chromium-73.0.3683.39/media/base/demuxer_stream.cc
+@@ -17,6 +17,8 @@ const char* DemuxerStream::GetTypeName(T
+       return "text";
+     case DemuxerStream::UNKNOWN:
+       return "unknown";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -31,6 +33,8 @@ const char* DemuxerStream::GetStatusName
+       return "config_changed";
+     case DemuxerStream::kError:
+       return "error";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/blink/watch_time_reporter.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/blink/watch_time_reporter.cc
++++ chromium-73.0.3683.39/media/blink/watch_time_reporter.cc
+@@ -571,6 +571,8 @@ WatchTimeKey WatchTimeReporter::GetDispl
+       return DISPLAY_TYPE_KEY(DisplayFullscreen);
+     case DisplayType::kPictureInPicture:
+       return DISPLAY_TYPE_KEY(DisplayPictureInPicture);
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/blink/webmediaplayer_impl.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/blink/webmediaplayer_impl.cc
++++ chromium-73.0.3683.39/media/blink/webmediaplayer_impl.cc
+@@ -199,6 +199,8 @@ EncryptionMode DetermineEncryptionMode(
+       return EncryptionMode::kCenc;
+     case EncryptionScheme::CIPHER_MODE_AES_CBC:
+       return EncryptionMode::kCbcs;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/capture/video/video_capture_device.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/capture/video/video_capture_device.cc
++++ chromium-73.0.3683.39/media/capture/video/video_capture_device.cc
+@@ -84,6 +84,8 @@ VideoCaptureFrameDropReason ConvertReser
+       return VideoCaptureFrameDropReason::kBufferPoolMaxBufferCountExceeded;
+     case VideoCaptureDevice::Client::ReserveResult::kAllocationFailed:
+       return VideoCaptureFrameDropReason::kBufferPoolBufferAllocationFailed;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/capture/video/video_capture_device_descriptor.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/capture/video/video_capture_device_descriptor.cc
++++ chromium-73.0.3683.39/media/capture/video/video_capture_device_descriptor.cc
+@@ -94,6 +94,8 @@ const char* VideoCaptureDeviceDescriptor
+       return "Virtual Device";
+     case VideoCaptureApi::UNKNOWN:
+       return "Unknown";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/cdm/cdm_helpers.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/cdm/cdm_helpers.cc
++++ chromium-73.0.3683.39/media/cdm/cdm_helpers.cc
+@@ -25,6 +25,8 @@ gfx::ColorSpace::RangeID ToGfxColorSpace
+       return gfx::ColorSpace::RangeID::FULL;
+     case cdm::ColorRange::kDerived:
+       return gfx::ColorSpace::RangeID::DERIVED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/filters/decoder_stream.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/filters/decoder_stream.cc
++++ chromium-73.0.3683.39/media/filters/decoder_stream.cc
+@@ -89,6 +89,8 @@ const char* GetStatusString(typename Dec
+       return "demuxer_read_aborted";
+     case DecoderStream<StreamType>::DECODE_ERROR:
+       return "decode_error";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/gpu/vaapi/vaapi_wrapper.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/gpu/vaapi/vaapi_wrapper.cc
++++ chromium-73.0.3683.39/media/gpu/vaapi/vaapi_wrapper.cc
+@@ -418,6 +418,8 @@ static VAEntrypoint GetVaEntryPoint(Vaap
+     case VaapiWrapper::kCodecModeMax:
+       NOTREACHED();
+       return VAEntrypointVLD;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/net/nqe/network_quality_estimator.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/net/nqe/network_quality_estimator.cc
++++ chromium-73.0.3683.39/net/nqe/network_quality_estimator.cc
+@@ -1128,6 +1128,8 @@ base::TimeDelta NetworkQualityEstimator:
+     case nqe::internal::OBSERVATION_CATEGORY_COUNT:
+       NOTREACHED();
+       return base::TimeDelta();
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/services/audio/public/cpp/audio_system_to_service_adapter.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/audio/public/cpp/audio_system_to_service_adapter.cc
++++ chromium-73.0.3683.39/services/audio/public/cpp/audio_system_to_service_adapter.cc
+@@ -66,6 +66,8 @@ const char* GetTraceEvent(Action action)
+       return "AudioSystemToServiceAdapter::GetAssociatedOutputDeviceID";
+     case kGetInputDeviceInfo:
+       return "AudioSystemToServiceAdapter::GetInputDeviceInfo";
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/services/network/cross_origin_read_blocking.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/network/cross_origin_read_blocking.cc
++++ chromium-73.0.3683.39/services/network/cross_origin_read_blocking.cc
+@@ -861,6 +861,8 @@ bool CrossOriginReadBlocking::ResponseAn
+       return sniffers_.empty() && !found_blockable_content_;
+     case kBlock:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -872,6 +874,8 @@ bool CrossOriginReadBlocking::ResponseAn
+       return sniffers_.empty() && found_blockable_content_;
+     case kBlock:
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/services/network/public/cpp/cors/cors.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/network/public/cpp/cors/cors.cc
++++ chromium-73.0.3683.39/services/network/public/cpp/cors/cors.cc
+@@ -539,6 +539,8 @@ bool IsCorsSameOriginResponseType(mojom:
+     case mojom::FetchResponseType::kOpaque:
+     case mojom::FetchResponseType::kOpaqueRedirect:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -552,6 +554,8 @@ bool IsCorsCrossOriginResponseType(mojom
+     case mojom::FetchResponseType::kOpaque:
+     case mojom::FetchResponseType::kOpaqueRedirect:
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -569,6 +573,8 @@ bool CalculateCredentialsFlag(mojom::Fet
+       return response_tainting == network::mojom::FetchResponseType::kBasic;
+     case network::mojom::FetchCredentialsMode::kInclude:
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/services/network/public/cpp/host_resolver_mojom_traits.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/network/public/cpp/host_resolver_mojom_traits.cc
++++ chromium-73.0.3683.39/services/network/public/cpp/host_resolver_mojom_traits.cc
+@@ -40,6 +40,8 @@ base::Optional<bool> FromTristate(DnsCon
+       return true;
+     case DnsConfigOverrides::Tristate::TRISTATE_FALSE:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -232,6 +234,8 @@ DnsQueryType EnumTraits<DnsQueryType, ne
+       return DnsQueryType::PTR;
+     case net::DnsQueryType::SRV:
+       return DnsQueryType::SRV;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -258,6 +262,8 @@ bool EnumTraits<DnsQueryType, net::DnsQu
+     case DnsQueryType::SRV:
+       *output = net::DnsQueryType::SRV;
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -274,6 +280,8 @@ EnumTraits<ResolveHostParameters::Source
+       return ResolveHostParameters::Source::DNS;
+     case net::HostResolverSource::MULTICAST_DNS:
+       return ResolveHostParameters::Source::MULTICAST_DNS;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -294,6 +302,8 @@ bool EnumTraits<ResolveHostParameters::S
+     case ResolveHostParameters::Source::MULTICAST_DNS:
+       *output = net::HostResolverSource::MULTICAST_DNS;
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -309,6 +319,8 @@ EnumTraits<MdnsListenClient::UpdateType,
+       return MdnsListenClient::UpdateType::CHANGED;
+     case net::HostResolver::MdnsListener::Delegate::UpdateType::REMOVED:
+       return MdnsListenClient::UpdateType::REMOVED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -327,6 +339,8 @@ bool EnumTraits<MdnsListenClient::Update
+     case MdnsListenClient::UpdateType::REMOVED:
+       *output = net::HostResolver::MdnsListener::Delegate::UpdateType::REMOVED;
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/services/ws/public/cpp/gpu/command_buffer_metrics.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/ws/public/cpp/gpu/command_buffer_metrics.cc
++++ chromium-73.0.3683.39/services/ws/public/cpp/gpu/command_buffer_metrics.cc
+@@ -96,6 +96,8 @@ std::string ContextTypeToString(ContextT
+       return "ForTesting";
+     case ContextType::XR_COMPOSITING:
+       return "XRCompositing";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/core/css/style_environment_variables.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/core/css/style_environment_variables.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/core/css/style_environment_variables.cc
+@@ -63,7 +63,7 @@ const AtomicString StyleEnvironmentVaria
+     case UADefinedVariable::kSafeAreaInsetRight:
+       return "safe-area-inset-right";
+     default:
+-      break;
++      __builtin_abort ();
+   }
+ 
+   NOTREACHED();
+Index: chromium-73.0.3683.39/third_party/blink/renderer/core/html/media/media_controls.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/core/html/media/media_controls.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/core/html/media/media_controls.cc
+@@ -36,6 +36,8 @@ AtomicString MediaControls::GetSizingCSS
+       return kMediaControlsSizingMediumCSSClass;
+     case MediaControlsSizingClass::kLarge:
+       return kMediaControlsSizingLargeCSSClass;
++    default:
++      __builtin_abort ();
+   }
+ 
+   NOTREACHED();
+Index: chromium-73.0.3683.39/third_party/blink/renderer/core/layout/layout_flexible_box.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/core/layout/layout_flexible_box.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/core/layout/layout_flexible_box.cc
+@@ -636,6 +636,8 @@ LayoutUnit LayoutFlexibleBox::FlowAwareC
+       return ContentLeft();
+     case TransformedWritingMode::kRightToLeftWritingMode:
+       return ContentInsetRight();
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+@@ -651,6 +653,8 @@ LayoutUnit LayoutFlexibleBox::FlowAwareC
+       return ContentInsetRight();
+     case TransformedWritingMode::kRightToLeftWritingMode:
+       return ContentLeft();
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/third_party/blink/renderer/core/loader/mixed_content_checker.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/core/loader/mixed_content_checker.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/core/loader/mixed_content_checker.cc
+@@ -240,6 +240,8 @@ bool MixedContentChecker::IsMixedContent
+ 
+     case HttpsState::kModern:
+       return IsInsecureUrl(url);
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/accessibility/ax_layout_object.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/accessibility/ax_layout_object.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/accessibility/ax_layout_object.cc
+@@ -1237,6 +1237,8 @@ ax::mojom::TextPosition AXLayoutObject::
+       return ax::mojom::TextPosition::kSubscript;
+     case EVerticalAlign::kSuper:
+       return ax::mojom::TextPosition::kSuperscript;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/accessibility/ax_position.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/accessibility/ax_position.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/accessibility/ax_position.cc
+@@ -768,6 +768,8 @@ const AXObject* AXPosition::FindNeighbor
+       }
+       return nullptr;
+     }
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/background_fetch/background_fetch_registration.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/background_fetch/background_fetch_registration.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/background_fetch/background_fetch_registration.cc
+@@ -351,6 +351,8 @@ const String BackgroundFetchRegistration
+       return "failure";
+     case mojom::BackgroundFetchResult::UNSET:
+       return "";
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+@@ -371,6 +373,8 @@ const String BackgroundFetchRegistration
+       return "quota-exceeded";
+     case mojom::BackgroundFetchFailureReason::DOWNLOAD_TOTAL_EXCEEDED:
+       return "download-total-exceeded";
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/cookie_store/cookie_change_event.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/cookie_store/cookie_change_event.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/cookie_store/cookie_change_event.cc
+@@ -53,6 +53,8 @@ String ToCookieListItemSameSite(network:
+       return "lax";
+     case network::mojom::CookieSameSite::NO_RESTRICTION:
+       return "unrestricted";
++    default:
++      __builtin_abort ();
+   }
+ 
+   NOTREACHED();
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/peerconnection/rtc_rtp_transceiver.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/peerconnection/rtc_rtp_transceiver.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/peerconnection/rtc_rtp_transceiver.cc
+@@ -28,6 +28,8 @@ String TransceiverDirectionToString(
+       return "recvonly";
+     case webrtc::RtpTransceiverDirection::kInactive:
+       return "inactive";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/storage/cached_storage_area.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/storage/cached_storage_area.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/storage/cached_storage_area.cc
+@@ -643,6 +643,8 @@ Vector<uint8_t> CachedStorageArea::Strin
+                   input.length() * sizeof(UChar));
+       return result;
+     }
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/webaudio/audio_param.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/webaudio/audio_param.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/webaudio/audio_param.cc
+@@ -145,7 +145,7 @@ String AudioParamHandler::GetParamName()
+     case kParamTypeAudioWorklet:
+       return custom_param_name_;
+     default:
+-      NOTREACHED();
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/platform/graphics/paint/scroll_paint_property_node.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/platform/graphics/paint/scroll_paint_property_node.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/platform/graphics/paint/scroll_paint_property_node.cc
+@@ -18,7 +18,7 @@ WTF::String OverscrollBehaviorTypeToStri
+     case OverscrollBehavior::kOverscrollBehaviorTypeContain:
+       return "contain";
+     default:
+-      NOTREACHED();
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/platform/heap/heap_stats_collector.h
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/platform/heap/heap_stats_collector.h
++++ chromium-73.0.3683.39/third_party/blink/renderer/platform/heap/heap_stats_collector.h
+@@ -94,6 +94,8 @@ class PLATFORM_EXPORT ThreadHeapStatsCol
+         return "BlinkGC.VisitPersistents";
+       case Id::kVisitStackRoots:
+         return "BlinkGC.VisitStackRoots";
++      default:
++        __builtin_abort ();
+     }
+   }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/platform/scheduler/common/metrics_helper.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/platform/scheduler/common/metrics_helper.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/platform/scheduler/common/metrics_helper.cc
+@@ -44,6 +44,8 @@ scheduling_metrics::ThreadType ConvertBl
+     case WebThreadType::kCount:
+       NOTREACHED();
+       return scheduling_metrics::ThreadType::kCount;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/platform/scheduler/main_thread/page_scheduler_impl.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/platform/scheduler/main_thread/page_scheduler_impl.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/platform/scheduler/main_thread/page_scheduler_impl.cc
+@@ -676,6 +676,8 @@ PageSchedulerImpl::PageLifecycleStateTra
+           NOTREACHED();
+           return base::nullopt;
+       }
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/platform/wtf/casting.h
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/platform/wtf/casting.h
++++ chromium-73.0.3683.39/third_party/blink/renderer/platform/wtf/casting.h
+@@ -57,6 +57,7 @@ struct DowncastTraits {
+   template <typename U>
+   static bool AllowFrom(const U&) {
+     static_assert(sizeof(U) == 0, "no downcast traits specialization for T");
++    return false;
+   }
+ };
+ 
+Index: chromium-73.0.3683.39/third_party/webrtc/modules/video_coding/codecs/vp8/temporal_layers_checker.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/webrtc/modules/video_coding/codecs/vp8/temporal_layers_checker.cc
++++ chromium-73.0.3683.39/third_party/webrtc/modules/video_coding/codecs/vp8/temporal_layers_checker.cc
+@@ -26,6 +26,8 @@ TemporalLayersChecker::CreateTemporalLay
+     case Vp8TemporalLayersType::kBitrateDynamic:
+       // Conference mode temporal layering for screen content in base stream.
+       return absl::make_unique<TemporalLayersChecker>(num_temporal_layers);
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/ui/accessibility/platform/ax_platform_node_auralinux.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/ui/accessibility/platform/ax_platform_node_auralinux.cc
++++ chromium-73.0.3683.39/ui/accessibility/platform/ax_platform_node_auralinux.cc
+@@ -1863,6 +1863,8 @@ AtkRole AXPlatformNodeAuraLinux::GetAtkR
+     case ax::mojom::Role::kPresentational:
+     case ax::mojom::Role::kUnknown:
+       return ATK_ROLE_REDUNDANT_OBJECT;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/ui/aura/mus/in_flight_change.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/ui/aura/mus/in_flight_change.cc
++++ chromium-73.0.3683.39/ui/aura/mus/in_flight_change.cc
+@@ -57,6 +57,8 @@ std::string ChangeTypeToString(ChangeTyp
+       return "TRANSFORM";
+     case ChangeType::VISIBLE:
+       return "VISIBLE";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/ui/base/mojo/clipboard_struct_traits.h
+===================================================================
+--- chromium-73.0.3683.39.orig/ui/base/mojo/clipboard_struct_traits.h
++++ chromium-73.0.3683.39/ui/base/mojo/clipboard_struct_traits.h
+@@ -20,6 +20,8 @@ struct EnumTraits<ui::mojom::ClipboardTy
+         return ui::mojom::ClipboardType::SELECTION;
+       case ui::CLIPBOARD_TYPE_DRAG:
+         return ui::mojom::ClipboardType::DRAG;
++      default:
++        __builtin_abort ();
+     }
+   }
+ 
+@@ -34,6 +36,8 @@ struct EnumTraits<ui::mojom::ClipboardTy
+       case ui::mojom::ClipboardType::DRAG:
+         *out = ui::CLIPBOARD_TYPE_DRAG;
+         return true;
++      default:
++        __builtin_abort ();
+     }
+     NOTREACHED();
+     return false;
+Index: chromium-73.0.3683.39/ui/gfx/skia_vector_animation.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/ui/gfx/skia_vector_animation.cc
++++ chromium-73.0.3683.39/ui/gfx/skia_vector_animation.cc
+@@ -163,6 +163,8 @@ float SkiaVectorAnimation::GetCurrentPro
+       // yet
+       DCHECK(timer_control_);
+       return timer_control_->GetNormalizedCurrentCycleProgress();
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/ui/views/layout/layout_provider.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/ui/views/layout/layout_provider.cc
++++ chromium-73.0.3683.39/ui/views/layout/layout_provider.cc
+@@ -155,6 +155,8 @@ int LayoutProvider::GetCornerRadiusMetri
+       return touch_ui ? 8 : 4;
+     case EMPHASIS_MAXIMUM:
+       return touch_ui ? std::min(size.width(), size.height()) / 2 : 4;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/flags_ui/feature_entry.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/flags_ui/feature_entry.cc
++++ chromium-73.0.3683.39/components/flags_ui/feature_entry.cc
+@@ -38,13 +38,16 @@ bool FeatureEntry::InternalNameMatches(c
+     case FeatureEntry::MULTI_VALUE:
+     case FeatureEntry::ENABLE_DISABLE_VALUE:
+     case FeatureEntry::FEATURE_VALUE:
+-    case FeatureEntry::FEATURE_WITH_PARAMS_VALUE:
++    case FeatureEntry::FEATURE_WITH_PARAMS_VALUE: {
+       // Check that the pattern matches what's produced by NameForOption().
+       int index = -1;
+       return name.size() > internal_name_length + 1 &&
+              name[internal_name_length] == kMultiSeparatorChar &&
+              base::StringToInt(name.substr(internal_name_length + 1), &index) &&
+              index >= 0 && index < num_options;
++    }
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/content/common/navigation_params.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/common/navigation_params.cc
++++ chromium-73.0.3683.39/content/common/navigation_params.cc
+@@ -47,6 +47,8 @@ bool IsNavigationDownloadAllowed(Navigat
+     case NavigationDownloadPolicy::kAllowOpenerCrossOrigin:
+     case NavigationDownloadPolicy::kAllowOpenerCrossOriginNoGesture:
+       return true;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/google_apis/gaia/google_service_auth_error.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/google_apis/gaia/google_service_auth_error.cc
++++ chromium-73.0.3683.39/google_apis/gaia/google_service_auth_error.cc
+@@ -29,6 +29,8 @@ const char* InvalidCredentialsReasonToSt
+     case InvalidGaiaCredentialsReason::NUM_REASONS:
+       NOTREACHED();
+       return "";
++    default:
++      __builtin_abort ();
+   }
+ }
+ }  // namespace
+@@ -238,6 +240,8 @@ std::string GoogleServiceAuthError::ToSt
+     case NUM_STATES:
+       NOTREACHED();
+       return std::string();
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/net/dns/dns_util.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/net/dns/dns_util.cc
++++ chromium-73.0.3683.39/net/dns/dns_util.cc
+@@ -246,6 +246,8 @@ uint16_t DnsQueryTypeToQtype(DnsQueryTyp
+       return dns_protocol::kTypePTR;
+     case DnsQueryType::SRV:
+       return dns_protocol::kTypeSRV;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/net/third_party/quic/core/qpack/qpack_instruction_decoder.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/net/third_party/quic/core/qpack/qpack_instruction_decoder.cc
++++ chromium-73.0.3683.39/net/third_party/quic/core/qpack/qpack_instruction_decoder.cc
+@@ -169,6 +169,8 @@ size_t QpackInstructionDecoder::DoVarint
+     case http2::DecodeStatus::kDecodeError:
+       OnError("Encoded integer too large.");
+       return bytes_consumed;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -194,6 +196,8 @@ size_t QpackInstructionDecoder::DoVarint
+     case http2::DecodeStatus::kDecodeError:
+       OnError("Encoded integer too large.");
+       return bytes_consumed;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/worklet/animation_and_paint_worklet_thread.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/worklet/animation_and_paint_worklet_thread.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/worklet/animation_and_paint_worklet_thread.cc
+@@ -92,10 +92,13 @@ AnimationAndPaintWorkletThread::CreateWo
+       return AnimationWorkletGlobalScope::Create(std::move(creation_params),
+                                                  this);
+     }
+-    case WorkletType::PAINT_WORKLET:
++    case WorkletType::PAINT_WORKLET: {
+       TRACE_EVENT0(TRACE_DISABLED_BY_DEFAULT("paint-worklet"),
+                    "AnimationAndPaintWorkletThread::CreateWorkerGlobalScope");
+       return PaintWorkletGlobalScope::Create(std::move(creation_params), this);
++    }
++    default:
++      __builtin_abort ();
+   };
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/webrtc/api/video_codecs/create_vp8_temporal_layers.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/webrtc/api/video_codecs/create_vp8_temporal_layers.cc
++++ chromium-73.0.3683.39/third_party/webrtc/api/video_codecs/create_vp8_temporal_layers.cc
+@@ -27,6 +27,8 @@ std::unique_ptr<Vp8TemporalLayers> Creat
+       // Conference mode temporal layering for screen content in base stream.
+       return absl::make_unique<ScreenshareLayers>(num_temporal_layers,
+                                                   Clock::GetRealTimeClock());
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/webrtc/audio/channel_receive.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/webrtc/audio/channel_receive.cc
++++ chromium-73.0.3683.39/third_party/webrtc/audio/channel_receive.cc
+@@ -68,6 +68,8 @@ webrtc::FrameType WebrtcFrameTypeForMedi
+         kDiscountinuousTransmission:
+       return kAudioFrameCN;
+       break;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/webrtc/rtc_base/key_derivation.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/webrtc/rtc_base/key_derivation.cc
++++ chromium-73.0.3683.39/third_party/webrtc/rtc_base/key_derivation.cc
+@@ -25,6 +25,8 @@ std::unique_ptr<KeyDerivation> KeyDeriva
+   switch (key_derivation_algorithm) {
+     case KeyDerivationAlgorithm::HKDF_SHA256:
+       return absl::make_unique<OpenSSLKeyDerivationHKDF>();
++    default:
++      __builtin_abort ();
+   }
+   RTC_NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/base/task/common/operations_controller.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/base/task/common/operations_controller.cc
++++ chromium-73.0.3683.39/base/task/common/operations_controller.cc
+@@ -52,6 +52,8 @@ OperationsController::OperationToken Ope
+     case State::kShuttingDown:
+       DecrementBy(1);
+       return OperationToken(nullptr);
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -101,4 +103,4 @@ void OperationsController::DecrementBy(u
+ }
+ 
+ }  // namespace internal
+-}  // namespace base
+\ No newline at end of file
++}  // namespace base
+Index: chromium-73.0.3683.39/chrome/browser/ui/content_settings/content_setting_image_model.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/content_settings/content_setting_image_model.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/content_settings/content_setting_image_model.cc
+@@ -474,6 +474,8 @@ bool ContentSettingDownloadsImageModel::
+     case DownloadRequestLimiter::DOWNLOAD_UI_DEFAULT:
+       // No need to show icon otherwise.
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/chrome/browser/ui/views/overlay/resize_handle_button.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/chrome/browser/ui/views/overlay/resize_handle_button.cc
++++ chromium-73.0.3683.39/chrome/browser/ui/views/overlay/resize_handle_button.cc
+@@ -57,6 +57,8 @@ int ResizeHandleButton::GetHTComponent()
+       return HTBOTTOMRIGHT;
+     case OverlayWindowViews::WindowQuadrant::kTopRight:
+       return HTBOTTOMLEFT;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/autofill/core/browser/autofill_metrics.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/autofill/core/browser/autofill_metrics.cc
++++ chromium-73.0.3683.39/components/autofill/core/browser/autofill_metrics.cc
+@@ -276,6 +276,8 @@ const char* GetSyncStateSuffix(AutofillS
+       return ".SignedInAndSyncFeature";
+     case AutofillSyncSigninState::kNumSyncStates:
+       return ".Unknown";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/content_settings/core/browser/host_content_settings_map.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/content_settings/core/browser/host_content_settings_map.cc
++++ chromium-73.0.3683.39/components/content_settings/core/browser/host_content_settings_map.cc
+@@ -231,6 +231,8 @@ const char* ContentSettingToString(Conte
+     case CONTENT_SETTING_NUM_SETTINGS:
+       NOTREACHED();
+       return nullptr;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/omnibox/browser/autocomplete_match.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/omnibox/browser/autocomplete_match.cc
++++ chromium-73.0.3683.39/components/omnibox/browser/autocomplete_match.cc
+@@ -263,6 +263,9 @@ const gfx::VectorIcon& AutocompleteMatch
+       NOTREACHED();
+       static const gfx::VectorIcon dummy = {};
+       return dummy;
++
++    default:
++      __builtin_abort ();
+   }
+ }
+ #endif
+Index: chromium-73.0.3683.39/components/viz/common/gl_scaler.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/viz/common/gl_scaler.cc
++++ chromium-73.0.3683.39/components/viz/common/gl_scaler.cc
+@@ -693,6 +693,8 @@ const char* GLScaler::GetShaderName(GLSc
+     CASE_RETURN_SHADER_STR(I422_NV61_MRT);
+     CASE_RETURN_SHADER_STR(DEINTERLEAVE_PAIRWISE_MRT);
+ #undef CASE_RETURN_SHADER_STR
++  default:
++    __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/services/network/mdns_responder.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/network/mdns_responder.cc
++++ chromium-73.0.3683.39/services/network/mdns_responder.cc
+@@ -474,6 +474,8 @@ class MdnsResponderManager::SocketHandle
+       case MdnsResponseSendOption::ResponseClass::UNSPECIFIED:
+         NOTREACHED();
+         return RateLimitScheme::PER_RESPONSE;
++      default:
++	__builtin_abort ();
+     }
+   }
+   // Returns null if the computed delay exceeds kMaxScheduledDelay and the next
+Index: chromium-73.0.3683.39/services/network/resource_scheduler.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/network/resource_scheduler.cc
++++ chromium-73.0.3683.39/services/network/resource_scheduler.cc
+@@ -79,6 +79,8 @@ const char* RequestStartTriggerString(Re
+       return "REQUEST_REPRIORITIZED";
+     case RequestStartTrigger::LONG_QUEUED_REQUESTS_TIMER_FIRED:
+       return "LONG_QUEUED_REQUESTS_TIMER_FIRED";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/core/css/properties/longhands/custom_property.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/core/css/properties/longhands/custom_property.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/core/css/properties/longhands/custom_property.cc
+@@ -101,6 +101,8 @@ const CSSValue* CustomProperty::ParseSin
+       if (registration_ && !ParseTyped(range, context, local_context))
+         return nullptr;
+       return ParseUntyped(range, context, local_context);
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/peerconnection/rtc_peer_connection.cc
+@@ -604,6 +604,8 @@ RTCSetSessionDescriptionOperation GetRTC
+         return RTCSetSessionDescriptionOperation::kSetRemoteDescriptionAnswer;
+       return RTCSetSessionDescriptionOperation::
+           kSetRemoteDescriptionInvalidType;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -629,6 +631,8 @@ SdpUsageCategory DeduceSdpUsageCategory(
+               sdp_semantics == webrtc::SdpSemantics::kUnifiedPlan)
+                  ? SdpUsageCategory::kSafe
+                  : SdpUsageCategory::kUnsafe;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/service_worker/wait_until_observer.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/service_worker/wait_until_observer.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/service_worker/wait_until_observer.cc
+@@ -188,6 +188,8 @@ bool WaitUntilObserver::IsEventActive(Sc
+     case EventDispatchState::kDispatched:
+     case EventDispatchState::kFailed:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/content/browser/cache_storage/cache_storage_cache_entry_handler.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/browser/cache_storage/cache_storage_cache_entry_handler.cc
++++ chromium-73.0.3683.39/content/browser/cache_storage/cache_storage_cache_entry_handler.cc
+@@ -162,6 +162,8 @@ CacheStorageCacheEntryHandler::CreateCac
+     case CacheStorageOwner::kBackgroundFetch:
+       return std::make_unique<background_fetch::CacheEntryHandlerImpl>(
+           std::move(blob_context));
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/content/browser/cache_storage/cache_storage_histogram_utils.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/browser/cache_storage/cache_storage_histogram_utils.cc
++++ chromium-73.0.3683.39/content/browser/cache_storage/cache_storage_histogram_utils.cc
+@@ -33,6 +33,8 @@ base::StringPiece UMAToName(CacheStorage
+       RETURN_LITERAL_STRING_PIECE("QueueDuration2");
+     case CacheStorageSchedulerUMA::kQueueLength:
+       RETURN_LITERAL_STRING_PIECE("QueueLength");
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -44,6 +46,8 @@ base::StringPiece ClientToName(CacheStor
+       RETURN_LITERAL_STRING_PIECE("Cache");
+     case CacheStorageSchedulerClient::kStorage:
+       RETURN_LITERAL_STRING_PIECE("CacheStorage");
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -88,6 +92,8 @@ base::StringPiece OpToName(CacheStorageS
+       RETURN_LITERAL_STRING_PIECE("WriteIndex");
+     case CacheStorageSchedulerOp::kWriteSideData:
+       RETURN_LITERAL_STRING_PIECE("WriteSideData");
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/content/browser/media/hardware_key_media_controller.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/browser/media/hardware_key_media_controller.cc
++++ chromium-73.0.3683.39/content/browser/media/hardware_key_media_controller.cc
+@@ -182,7 +182,9 @@ HardwareKeyMediaController::MediaSession
+     case MediaSessionAction::kSeekForward:
+     case MediaSessionAction::kSkipAd:
+       return base::nullopt;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+-}  // namespace content
+\ No newline at end of file
++}  // namespace content
+Index: chromium-73.0.3683.39/content/renderer/media/stream/media_stream_constraints_util_audio.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/content/renderer/media/stream/media_stream_constraints_util_audio.cc
++++ chromium-73.0.3683.39/content/renderer/media/stream/media_stream_constraints_util_audio.cc
+@@ -417,6 +417,8 @@ class EchoCancellationContainer {
+         return Score::EcModeScore::kAec3;
+       case EchoCancellationType::kEchoCancellationAec2:
+         return Score::EcModeScore::kAec2;
++      default:
++        __builtin_abort ();
+     }
+   }
+ 
+@@ -968,6 +970,8 @@ class ProcessingBasedContainer {
+         return DoubleRangeSet::FromValue(allowed_latency);
+       case ProcessingType::kUnprocessed:
+         return DoubleRangeSet::FromValue(allowed_latency);
++      default:
++        __builtin_abort ();
+     }
+   }
+ 
+@@ -988,6 +992,8 @@ class ProcessingBasedContainer {
+         return 2;
+       case ProcessingType::kApmProcessed:
+         return use_processing_by_default ? 3 : 1;
++      default:
++        __builtin_abort ();
+     }
+   }
+ 
+Index: chromium-73.0.3683.39/media/base/supported_types.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/base/supported_types.cc
++++ chromium-73.0.3683.39/media/base/supported_types.cc
+@@ -162,6 +162,8 @@ bool IsAudioCodecProprietary(AudioCodec
+     case media::kCodecPCM_ALAW:
+     case media::kUnknownAudioCodec:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -220,6 +222,8 @@ bool IsVideoCodecProprietary(VideoCodec
+     case kCodecVP9:
+     case kCodecAV1:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/services/media_session/audio_focus_manager.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/services/media_session/audio_focus_manager.cc
++++ chromium-73.0.3683.39/services/media_session/audio_focus_manager.cc
+@@ -522,6 +522,8 @@ bool AudioFocusManager::ShouldSessionBeS
+     case mojom::EnforcementMode::kDefault:
+       NOTIMPLEMENTED();
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+@@ -539,6 +541,8 @@ bool AudioFocusManager::ShouldSessionBeD
+     case mojom::EnforcementMode::kDefault:
+       NOTIMPLEMENTED();
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/core/trustedtypes/trusted_types_util.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/core/trustedtypes/trusted_types_util.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/core/trustedtypes/trusted_types_util.cc
+@@ -122,6 +122,8 @@ String GetStringFromSpecificTrustedType(
+       return GetStringFromTrustedURL(string_or_trusted_url, doc,
+                                      exception_state);
+     }
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/modules/idle/idle_status.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/modules/idle/idle_status.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/modules/idle/idle_status.cc
+@@ -87,6 +87,8 @@ String IdleStatus::state() const {
+       return "idle";
+     case IdleState::LOCKED:
+       return "locked";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/blink/renderer/platform/graphics/canvas_resource_provider.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/blink/renderer/platform/graphics/canvas_resource_provider.cc
++++ chromium-73.0.3683.39/third_party/blink/renderer/platform/graphics/canvas_resource_provider.cc
+@@ -509,6 +509,8 @@ const std::vector<CanvasResourceType>& G
+       return kAcceleratedCompositedFallbackList;
+     case CanvasResourceProvider::kAcceleratedDirectResourceUsage:
+       return kAcceleratedDirectFallbackList;
++    default:
++      __builtin_abort ();
+   }
+   NOTREACHED();
+ }
+Index: chromium-73.0.3683.39/third_party/webrtc/modules/audio_processing/audio_processing_impl.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/webrtc/modules/audio_processing/audio_processing_impl.cc
++++ chromium-73.0.3683.39/third_party/webrtc/modules/audio_processing/audio_processing_impl.cc
+@@ -122,6 +122,7 @@ NoiseSuppression::Level NsConfigLevelToI
+       return NoiseSuppression::kVeryHigh;
+     default:
+       RTC_NOTREACHED();
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/third_party/webrtc/pc/dtls_transport.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/third_party/webrtc/pc/dtls_transport.cc
++++ chromium-73.0.3683.39/third_party/webrtc/pc/dtls_transport.cc
+@@ -33,6 +33,8 @@ DtlsTransportState TranslateState(cricke
+     case cricket::DTLS_TRANSPORT_FAILED:
+       return DtlsTransportState::kFailed;
+       break;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/ui/accessibility/mojom/ax_tree_id_mojom_traits.h
+===================================================================
+--- chromium-73.0.3683.39.orig/ui/accessibility/mojom/ax_tree_id_mojom_traits.h
++++ chromium-73.0.3683.39/ui/accessibility/mojom/ax_tree_id_mojom_traits.h
+@@ -19,6 +19,8 @@ struct UnionTraits<ax::mojom::AXTreeIDDa
+         return ax::mojom::AXTreeIDDataView::Tag::UNKNOWN;
+       case ax::mojom::AXTreeIDType::kToken:
+         return ax::mojom::AXTreeIDDataView::Tag::TOKEN;
++      default:
++        __builtin_abort ();
+     }
+   }
+   static uint8_t unknown(const ui::AXTreeID& p) { return 0; }
+Index: chromium-73.0.3683.39/ui/views/layout/flex_layout_types.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/ui/views/layout/flex_layout_types.cc
++++ chromium-73.0.3683.39/ui/views/layout/flex_layout_types.cc
+@@ -62,8 +62,11 @@ int InterpolateSize(MinimumFlexSizeRule
+         return preferred_size;
+       case MaximumFlexSizeRule::kUnbounded:
+         return available_size;
++      default:
++        __builtin_abort ();
+     }
+   }
++  return 0;
+ }
+ 
+ gfx::Size GetPreferredSize(MinimumFlexSizeRule minimum_size_rule,
+Index: chromium-73.0.3683.39/components/invalidation/impl/fcm_network_handler.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/invalidation/impl/fcm_network_handler.cc
++++ chromium-73.0.3683.39/components/invalidation/impl/fcm_network_handler.cc
+@@ -287,6 +287,8 @@ std::string FCMNetworkHandlerDiagnostic:
+       return "InstanceID::UNKNOWN_ERROR";
+     case instance_id::InstanceID::NETWORK_ERROR:
+       return "InstanceID::NETWORK_ERROR";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/invalidation/public/invalidator_state.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/invalidation/public/invalidator_state.cc
++++ chromium-73.0.3683.39/components/invalidation/public/invalidator_state.cc
+@@ -20,6 +20,8 @@ const char* InvalidatorStateToString(Inv
+       return "INVALIDATOR_SHUTTING_DOWN";
+     case SUBSCRIPTION_FAILURE:
+       return "SUBSCRIPTION_FAILURE";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/previews/core/previews_lite_page_redirect.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/previews/core/previews_lite_page_redirect.cc
++++ chromium-73.0.3683.39/components/previews/core/previews_lite_page_redirect.cc
+@@ -29,6 +29,8 @@ std::string ServerLitePageStatusToString
+       // Control group penalty metrics are not recorded.
+       NOTREACHED();
+       return "Control";
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/safe_browsing/browser/threat_details.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/safe_browsing/browser/threat_details.cc
++++ chromium-73.0.3683.39/components/safe_browsing/browser/threat_details.cc
+@@ -111,11 +111,14 @@ ClientSafeBrowsingReportRequest::ReportT
+     case SB_THREAT_TYPE_API_ABUSE:
+     case SB_THREAT_TYPE_SUBRESOURCE_FILTER:
+     case SB_THREAT_TYPE_CSD_WHITELIST:
+-    case DEPRECATED_SB_THREAT_TYPE_URL_PASSWORD_PROTECTION_PHISHING:
++    case DEPRECATED_SB_THREAT_TYPE_URL_PASSWORD_PROTECTION_PHISHING: {
+       // Gated by SafeBrowsingBlockingPage::ShouldReportThreatDetails.
+       NOTREACHED() << "We should not send report for threat type: "
+                    << threat_type;
+       return ClientSafeBrowsingReportRequest::UNKNOWN;
++    }
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/components/signin/core/browser/mutable_profile_oauth2_token_service_delegate.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/components/signin/core/browser/mutable_profile_oauth2_token_service_delegate.cc
++++ chromium-73.0.3683.39/components/signin/core/browser/mutable_profile_oauth2_token_service_delegate.cc
+@@ -293,6 +293,8 @@ bool MutableProfileOAuth2TokenServiceDel
+     case GaiaAuthConsumer::TokenRevocationStatus::kInvalidRequest:
+     case GaiaAuthConsumer::TokenRevocationStatus::kUnknownError:
+       return false;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/media/audio/audio_input_device.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/media/audio/audio_input_device.cc
++++ chromium-73.0.3683.39/media/audio/audio_input_device.cc
+@@ -52,6 +52,8 @@ base::ThreadPriority ThreadPriorityFromP
+       return base::ThreadPriority::REALTIME_AUDIO;
+     case AudioInputDevice::Purpose::kLoopback:
+       return base::ThreadPriority::NORMAL;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/net/dns/host_resolver_mdns_listener_impl.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/net/dns/host_resolver_mdns_listener_impl.cc
++++ chromium-73.0.3683.39/net/dns/host_resolver_mdns_listener_impl.cc
+@@ -24,6 +24,8 @@ HostResolver::MdnsListener::Delegate::Up
+       return HostResolver::MdnsListener::Delegate::UpdateType::CHANGED;
+     case net::MDnsListener::RECORD_REMOVED:
+       return HostResolver::MdnsListener::Delegate::UpdateType::REMOVED;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/net/dns/host_resolver_mdns_task.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/net/dns/host_resolver_mdns_task.cc
++++ chromium-73.0.3683.39/net/dns/host_resolver_mdns_task.cc
+@@ -218,6 +218,8 @@ HostCache::Entry HostResolverMdnsTask::P
+     case DnsQueryType::SRV:
+       return ParseHostnameResult(parsed->rdata<SrvRecordRdata>()->target(),
+                                  parsed->rdata<SrvRecordRdata>()->port());
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
+Index: chromium-73.0.3683.39/net/third_party/quic/core/tls_handshaker.cc
+===================================================================
+--- chromium-73.0.3683.39.orig/net/third_party/quic/core/tls_handshaker.cc
++++ chromium-73.0.3683.39/net/third_party/quic/core/tls_handshaker.cc
+@@ -111,6 +111,8 @@ EncryptionLevel TlsHandshaker::QuicEncry
+       return ENCRYPTION_INITIAL;
+     case ssl_encryption_application:
+       return ENCRYPTION_FORWARD_SECURE;
++    default:
++      __builtin_abort ();
+   }
+ }
+ 
