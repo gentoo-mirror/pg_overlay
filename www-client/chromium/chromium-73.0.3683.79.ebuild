@@ -601,6 +601,7 @@ src_configure() {
 	#
 	myconf_gn+=" optimize_for_size=false"
 	myconf_gn+=" use_thin_lto=true"
+	myconf_gn+=" use_new_tcmalloc=true"
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
