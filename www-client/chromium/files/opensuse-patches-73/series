@@ -5,6 +5,5 @@ chromium-sandbox-pie.patch
 chromium-system-libusb.patch
 chromium-fix_swiftshader.patch
 chromium-fix_crashpad.patch
-chromium-vaapi.patch
 chromium-skia-system-fontconfig.patch
 chromium-prop-codecs.patch
