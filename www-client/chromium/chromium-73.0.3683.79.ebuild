@@ -194,14 +194,14 @@ src_prepare() {
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
 		base/third_party/icu
-		base/third_party/nspr
+		#base/third_party/nspr
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
 		base/third_party/xdg_mime
 		base/third_party/xdg_user_dirs
-		buildtools/third_party/libc++
-		buildtools/third_party/libc++abi
+		#buildtools/third_party/libc++
+		#buildtools/third_party/libc++abi
 		chrome/third_party/mozilla_security_manager
 		courgette/third_party
 		net/third_party/mozilla_security_manager
@@ -246,7 +246,7 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
 		third_party/cld_3
-		third_party/closure_compiler
+		#third_party/closure_compiler
 		third_party/crashpad
 		third_party/crashpad/crashpad/third_party/zlib
 		third_party/crc32c
@@ -256,7 +256,8 @@ src_prepare() {
 		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
-		third_party/freetype
+		third_party/glslang
+		#third_party/freetype
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
 		third_party/google_input_tools/third_party/closure_library/third_party/closure
@@ -265,7 +266,7 @@ src_prepare() {
 		third_party/iccjpeg
 		third_party/inspector_protocol
 		third_party/jinja2
-		third_party/jsoncpp
+		#third_party/jsoncpp
 		third_party/jstemplate
 		third_party/khronos
 		third_party/leveldatabase
@@ -280,6 +281,7 @@ src_prepare() {
 		third_party/libsrtp
 		third_party/libsync
 		third_party/libudev
+		third_party/libusb
 		third_party/libwebm
 		third_party/libxml/chromium
 		third_party/libyuv
@@ -301,7 +303,7 @@ src_prepare() {
 		third_party/pdfium/third_party/bigint
 		third_party/pdfium/third_party/freetype
 		third_party/pdfium/third_party/lcms
-		third_party/pdfium/third_party/libopenjpeg20
+		#third_party/pdfium/third_party/libopenjpeg20
 		third_party/pdfium/third_party/libpng16
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
@@ -353,7 +355,7 @@ src_prepare() {
 		v8/third_party/v8
 
 		# gyp -> gn leftovers
-		base/third_party/libevent
+		#base/third_party/libevent
 		third_party/adobe
 		third_party/speech-dispatcher
 		third_party/usb_ids
@@ -385,7 +387,13 @@ src_configure() {
 	local myconf_gn=""
 
 	# Make sure the build system will use the right tools, bug #340795.
-	tc-export AR CC CXX NM
+	tc-export AR CC CXX NM RANLIB
+	# Force clang
+	CC=${CHOST}-clang
+	CXX=${CHOST}-clang++
+	AR=llvm-ar
+	NM=llvm-nm
+	RANLIB=llvm-ranlib
 
 	if [[ ${CHROMIUM_FORCE_CLANG} == yes ]] && ! tc-is-clang; then
 		# Force clang since gcc is pretty broken at the moment.
@@ -567,15 +575,17 @@ src_configure() {
 	fi
 
 	# Debian
+	myconf_gn+=" use_goma=false"
 	myconf_gn+=" use_openh264=false"
 	myconf_gn+=" use_libjpeg_turbo=true"
-	myconf_gn+=" remove_webcore_debug_symbols=true"
-	myconf_gn+=" optimize_webui=true"
-	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_nacl_nonsfi=false"
+	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" enable_reading_list=false"
 	myconf_gn+=" enable_one_click_signin=false"
 	myconf_gn+=" enable_iterator_debugging=false"
+	myconf_gn+=" optimize_webui=true"
+	myconf_gn+=" remove_webcore_debug_symbols=true"
+
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" link_pulseaudio=true"
 	myconf_gn+=" use_system_zlib=true"
@@ -583,11 +593,14 @@ src_configure() {
 	myconf_gn+=" use_system_libjpeg=true"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_harfbuzz=true"
-	myconf_gn+=" optimize_for_size=false"
 
 	#OpenSUSE
 	myconf_gn+=" use_vaapi=true"
 	myconf_gn+=" enable_hevc_demuxing=true"
+
+	#
+	myconf_gn+=" optimize_for_size=false"
+	myconf_gn+=" use_thin_lto=true"
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
