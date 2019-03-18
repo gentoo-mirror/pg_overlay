@@ -1,7 +1,7 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PLOCALES="af ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa fi fo fr gl he hi hr hu hy ia id it ja ko ku ky lt lv ms my nb nds nl nn pl pt pt_BR ro ru se si sk sl sq sr sv ta te th tr ug uk uz vi zh_CN zh_TW"
 PYTHON_COMPAT=( python2_7 )
@@ -11,7 +11,7 @@ inherit desktop distutils-r1 l10n git-r3
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="http://bleachbit.org/"
-EGIT_REPO_URI="https://github.com/az0/${PN}.git"
+EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -19,9 +19,8 @@ KEYWORDS=""
 IUSE="+gtk"
 
 RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"
-
-DEPEND="${RDEPEND}
-	sys-devel/gettext"
+DEPEND="${RDEPEND}"
+BDEPEND="sys-devel/gettext"
 
 python_prepare_all() {
 	rem_locale() {
