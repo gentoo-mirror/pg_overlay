@@ -1,0 +1,43 @@
+
+# HG changeset patch
+# User Mike Hommey <mh+mozilla@glandium.org>
+# Date 1549401545 0
+# Node ID 9820df609ddf5ecda41c78d2535eca1aa33e8234
+# Parent  bdd5fb080b54e421753d6ab7587c91d8522c6690
+Bug 1515641 - Turn --enable-av1 around. r=nalexander
+
+AV1 is actually enabled everywhere by default (except 32-bits Windows
+when building with MSVC), so let's make the option --disable-av1 rather
+than --enable-av1. Also, since AV1 is backed by both libaom and
+libdav1d, remove mentions to libaom.
+
+Differential Revision: https://phabricator.services.mozilla.com/D18294
+
+diff --git a/toolkit/moz.configure b/toolkit/moz.configure
+--- a/toolkit/moz.configure
++++ b/toolkit/moz.configure
+@@ -415,20 +415,20 @@ def ffmpeg(value, target):
+         enabled = target.os not in ('Android', 'WINNT')
+     if enabled:
+         return True
+ 
+ set_config('MOZ_FFMPEG', ffmpeg)
+ set_define('MOZ_FFMPEG', ffmpeg)
+ imply_option('--enable-fmp4', ffmpeg, '--enable-ffmpeg')
+ 
+-# Libaom AV1 Video Codec Support
++# AV1 Video Codec Support
+ # ==============================================================
+-option('--enable-av1',
+-        help='Enable libaom for av1 video support')
++option('--disable-av1',
++        help='Disable av1 video support')
+ 
+ @depends('--enable-av1', target, c_compiler)
+ def av1(value, target, c_compiler):
+     enabled = bool(value)
+     if value.origin == 'default':
+         if target.os == 'WINNT' and target.cpu == 'x86' and \
+                 c_compiler and c_compiler.type == 'msvc':
+             enabled = False
+
