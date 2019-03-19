@@ -608,6 +608,10 @@ src_configure() {
 	append-cxxflags "-stdlib=libc++"
 	append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
 	append-ldflags "-Wl,-lgcc_s"
+	append-flags -Wno-unknown-warning-option
+	append-cflags -Wno-builtin-macro-redefined
+	append-cxxflags -Wno-builtin-macro-redefined
+	append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
