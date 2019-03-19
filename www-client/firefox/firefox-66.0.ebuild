@@ -310,7 +310,6 @@ src_prepare() {
 	# FreeBSD patches
 	#for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
-	#eapply "${FILESDIR}"/22674.patch
 	eapply "${FILESDIR}"/1519629.patch
 
 	# Autotools configure is now called old-configure.in
