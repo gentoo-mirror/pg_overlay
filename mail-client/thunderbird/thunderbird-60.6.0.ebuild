@@ -571,7 +571,7 @@ src_install() {
 	fi
 
 	if use kde ; then
-		cat "${FILESDIR}"/kde-opensuse/kde.js-1 >> \
+		cat "${FILESDIR}"/opensuse-kde/kde.js-1 >> \
 		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" \
 		|| die
 	fi
