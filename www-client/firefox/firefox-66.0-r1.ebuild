@@ -317,8 +317,6 @@ src_prepare() {
 
 	eapply "${FILESDIR}/0001-bz-1468911.patch"
 
-	cp -fr ${FILESDIR}/mozilla-central/* .
-
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
