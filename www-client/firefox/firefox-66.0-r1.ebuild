@@ -647,6 +647,7 @@ src_configure() {
 	# workaround for funky/broken upstream configure...
 	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
 	./mach configure || die
+	sed -i 's/ic 1.0.1/ic 1.3.0/g' Cargo.lock
 }
 
 src_compile() {
