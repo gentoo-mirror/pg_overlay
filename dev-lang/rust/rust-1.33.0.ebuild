@@ -67,6 +67,7 @@ PATCHES=("${FILESDIR}"/1.32.0-fix-configure-of-bundled-llvm.patch
 		"${FILESDIR}"/0001-rust-gdb-relax-the-GDB-version-regex.patch
 		"${FILESDIR}"/1.33.0-system-llvm-8-SIGSEGV.patch
 		"${FILESDIR}"/57675.patch
+		"${FILESDIR}"/59285.patch
 )
 
 toml_usex() {
