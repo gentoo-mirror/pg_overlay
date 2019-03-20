@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  ff3da33eabc1d8760ec41a87afbaf44ded300ede
+# Parent  f55e33a10c2a23625826ef6f8dbe18d5a455d29e
 Description: Add KDE integration to Firefox (toolkit parts)
 Author: Wolfgang Rosenauer <wolfgang@rosenauer.org>
 Author: Lubos Lunak <lunak@suse.com>
@@ -21,13 +21,13 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
 +#include "nsKDEUtils.h"
  
  #ifdef MOZ_MEMORY
- #include "mozmemory.h"
+ #  include "mozmemory.h"
  #endif
  
  #ifdef XP_WIN
- #include "windows.h"
+ #  include "windows.h"
  #endif
-@@ -4466,25 +4467,37 @@ float MOZ_MAYBE_UNUSED GetPref<float>(co
+@@ -4467,25 +4468,37 @@ float MOZ_MAYBE_UNUSED GetPref<float>(co
    // application pref files for backwards compatibility.
    static const char* specialFiles[] = {
  #if defined(XP_MACOSX)
@@ -37,10 +37,10 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  #elif defined(XP_UNIX)
      "unix.js"
 +    , "" // placeholder for KDE  (empty is otherwise harmless)
- #if defined(_AIX)
+ #  if defined(_AIX)
      ,
      "aix.js"
- #endif
+ #  endif
  #elif defined(XP_BEOS)
      "beos.js"
  #endif
@@ -65,7 +65,7 @@ diff --git a/modules/libpref/Preferences.cpp b/modules/libpref/Preferences.cpp
  
    // Load jar:$app/omni.jar!/defaults/preferences/*.js
    // or jar:$gre/omni.jar!/defaults/preferences/*.js.
-@@ -4532,17 +4545,17 @@ float MOZ_MAYBE_UNUSED GetPref<float>(co
+@@ -4533,17 +4546,17 @@ float MOZ_MAYBE_UNUSED GetPref<float>(co
        }
  
        nsCOMPtr<nsIFile> path = do_QueryInterface(elem);
@@ -171,12 +171,12 @@ diff --git a/toolkit/components/downloads/moz.build b/toolkit/components/downloa
 diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
 --- a/toolkit/content/jar.mn
 +++ b/toolkit/content/jar.mn
-@@ -67,16 +67,18 @@ toolkit.jar:
+@@ -65,16 +65,18 @@ toolkit.jar:
+    content/global/bindings/button.xml          (widgets/button.xml)
     content/global/bindings/calendar.js         (widgets/calendar.js)
     content/global/bindings/checkbox.xml        (widgets/checkbox.xml)
     content/global/bindings/datekeeper.js       (widgets/datekeeper.js)
     content/global/bindings/datepicker.js       (widgets/datepicker.js)
-    content/global/bindings/datetimepopup.xml   (widgets/datetimepopup.xml)
     content/global/bindings/datetimebox.xml     (widgets/datetimebox.xml)
     content/global/bindings/datetimebox.css     (widgets/datetimebox.css)
  *  content/global/bindings/dialog.xml          (widgets/dialog.xml)
@@ -186,15 +186,15 @@ diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
     content/global/bindings/menu.xml            (widgets/menu.xml)
     content/global/bindings/menulist.xml        (widgets/menulist.xml)
     content/global/bindings/notification.xml    (widgets/notification.xml)
-    content/global/bindings/numberbox.xml       (widgets/numberbox.xml)
     content/global/bindings/popup.xml           (widgets/popup.xml)
     content/global/bindings/radio.xml           (widgets/radio.xml)
     content/global/bindings/richlistbox.xml     (widgets/richlistbox.xml)
+    content/global/bindings/scrollbox.xml       (widgets/scrollbox.xml)
 diff --git a/toolkit/content/widgets/dialog-kde.xml b/toolkit/content/widgets/dialog-kde.xml
 new file mode 100644
 --- /dev/null
 +++ b/toolkit/content/widgets/dialog-kde.xml
-@@ -0,0 +1,477 @@
+@@ -0,0 +1,507 @@
 +<?xml version="1.0"?>
 +<!-- This Source Code Form is subject to the terms of the Mozilla Public
 +   - License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -229,7 +229,7 @@ new file mode 100644
 +        <xul:button dlgtype="accept" class="dialog-button" xbl:inherits="disabled=buttondisabledaccept"/>
 +#elif XP_UNIX
 +                >
-+	<xul:button dlgtype="help" class="dialog-button" hidden="true"/>
++        <xul:button dlgtype="help" class="dialog-button" hidden="true"/>
 +        <xul:button dlgtype="extra2" class="dialog-button" hidden="true"/>
 +        <xul:spacer anonid="spacer" flex="1"/>
 +        <xul:button dlgtype="accept" class="dialog-button" xbl:inherits="disabled=buttondisabledaccept"/>
@@ -265,6 +265,11 @@ new file mode 100644
 +        if (!document.documentElement.cancelDialog())
 +          event.preventDefault();
 +      })</field>
++
++      <!-- Gets populated by elements that are passed to document.l10n.setAttributes
++           to localize the dialog buttons. Needed to properly size the dialog after
++           the asynchronous translation. -->
++      <field name="_l10nButtons">[]</field>
 +
 +      <property name="buttons"
 +                onget="return this.getAttribute('buttons');"
@@ -365,15 +370,31 @@ new file mode 100644
 +        this._configureButtons(this.buttons);
 +
 +        // listen for when window is closed via native close buttons
-+        window.addEventListener("close", this._closeHandler);
++        window.addEventListener("close", this);
 +
 +        // for things that we need to initialize after onload fires
-+        window.addEventListener("load", this.postLoadInit);
++        window.addEventListener("load", this);
 +
 +        window.moveToAlertPosition = this.moveToAlertPosition;
 +        window.centerWindowOnScreen = this.centerWindowOnScreen;
 +      ]]>
 +      </constructor>
++
++      <method name="handleEvent">
++        <parameter name="aEvent"/>
++        <body><![CDATA[
++          switch (aEvent.type) {
++            case "close": {
++              this._closeHandler(aEvent);
++              break;
++            }
++            case "load": {
++              this.postLoadInit(aEvent);
++              break;
++            }
++          }
++        ]]></body>
++      </method>
 +
 +      <method name="postLoadInit">
 +        <parameter name="aEvent"/>
@@ -422,6 +443,12 @@ new file mode 100644
 +
 +          // Give focus after onload completes, see bug 103197.
 +          setTimeout(focusInit, 0);
++
++          if (this._l10nButtons.length) {
++            document.l10n.translateElements(this._l10nButtons).then(() => {
++              window.sizeToContent();
++            });
++          }
 +        ]]>
 +        </body>
 +      </method>
@@ -490,13 +517,14 @@ new file mode 100644
 +                button.setAttribute("label", this.getAttribute("buttonlabel" + dlgtype));
 +                if (this.hasAttribute("buttonaccesskey" + dlgtype))
 +                  button.setAttribute("accesskey", this.getAttribute("buttonaccesskey" + dlgtype));
++              } else if (this.hasAttribute("buttonid" + dlgtype)) {
++                document.l10n.setAttributes(button, this.getAttribute("buttonid" + dlgtype));
++                this._l10nButtons.push(button);
 +              } else if (dlgtype != "extra1" && dlgtype != "extra2") {
 +                button.setAttribute("label", this.mStrBundle.GetStringFromName("button-" + dlgtype));
 +                var accessKey = this.mStrBundle.GetStringFromName("accesskey-" + dlgtype);
 +                if (accessKey)
 +                  button.setAttribute("accesskey", accessKey);
-+              } else if (this.hasAttribute("buttonid" + dlgtype)) {
-+                document.l10n.setAttributes(button, this.getAttribute("buttonid" + dlgtype));
 +              }
 +            }
 +            // allow specifying alternate icons in the dialog header
@@ -664,7 +692,9 @@ new file mode 100644
 +      <handler event="focus" phase="capturing">
 +        var btn = this.getButton(this.defaultButton);
 +        if (btn)
-+          btn.setAttribute("default", event.originalTarget == btn || !(event.originalTarget instanceof Ci.nsIDOMXULButtonElement));
++          btn.setAttribute("default", event.originalTarget == btn ||
++                           !(event.originalTarget.localName == "button" ||
++                             event.originalTarget.localName == "toolbarbutton"));
 +      </handler>
 +#endif
 +    </handlers>
@@ -675,7 +705,7 @@ new file mode 100644
 diff --git a/toolkit/mozapps/downloads/nsHelperAppDlg.js b/toolkit/mozapps/downloads/nsHelperAppDlg.js
 --- a/toolkit/mozapps/downloads/nsHelperAppDlg.js
 +++ b/toolkit/mozapps/downloads/nsHelperAppDlg.js
-@@ -1030,30 +1030,60 @@ nsUnknownContentTypeDialog.prototype = {
+@@ -1033,30 +1033,60 @@ nsUnknownContentTypeDialog.prototype = {
  
        if (params.handlerApp &&
            params.handlerApp.executable &&
@@ -848,7 +878,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 diff --git a/toolkit/xre/moz.build b/toolkit/xre/moz.build
 --- a/toolkit/xre/moz.build
 +++ b/toolkit/xre/moz.build
-@@ -73,17 +73,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
+@@ -81,17 +81,19 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'co
          '../components/printingui',
      ]
  elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'uikit':
@@ -1281,8 +1311,8 @@ diff --git a/uriloader/exthandler/HandlerServiceParent.cpp b/uriloader/exthandle
  #include "ContentHandlerService.h"
  #include "nsStringEnumerator.h"
  #ifdef MOZ_WIDGET_GTK
--#include "unix/nsGNOMERegistry.h"
-+#include "unix/nsCommonRegistry.h"
+-#  include "unix/nsGNOMERegistry.h"
++#  include "unix/nsCommonRegistry.h"
  #endif
  
  using mozilla::dom::ContentHandlerService;
@@ -1591,7 +1621,7 @@ diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler
  #include "nsIIOService.h"
  #include "nsAutoPtr.h"
  #ifdef MOZ_ENABLE_DBUS
- #include "nsDBusHandlerApp.h"
+ #  include "nsDBusHandlerApp.h"
  #endif
 +#if defined(XP_UNIX) && !defined(XP_MACOSX)
 +#include "nsKDEUtils.h"
@@ -1678,8 +1708,8 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  #include "nsOSHelperAppService.h"
  #include "nsMIMEInfoUnix.h"
  #ifdef MOZ_WIDGET_GTK
--#include "nsGNOMERegistry.h"
-+#include "nsCommonRegistry.h"
+-#  include "nsGNOMERegistry.h"
++#  include "nsCommonRegistry.h"
  #endif
  #include "nsISupports.h"
  #include "nsString.h"
@@ -1688,7 +1718,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  #include "nsIURL.h"
  #include "nsIFileStreams.h"
  #include "nsILineInputStream.h"
-@@ -1031,17 +1031,17 @@ nsresult nsOSHelperAppService::GetHandle
+@@ -1025,17 +1025,17 @@ nsresult nsOSHelperAppService::GetHandle
  
  nsresult nsOSHelperAppService::OSProtocolHandlerExists(
      const char* aProtocolScheme, bool* aHandlerExists) {
@@ -1707,7 +1737,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
      nsCOMPtr<nsIHandlerService> handlerSvc =
          do_GetService(NS_HANDLERSERVICE_CONTRACTID, &rv);
      if (NS_SUCCEEDED(rv) && handlerSvc) {
-@@ -1051,17 +1051,17 @@ nsresult nsOSHelperAppService::OSProtoco
+@@ -1045,17 +1045,17 @@ nsresult nsOSHelperAppService::OSProtoco
    }
  
    return rv;
@@ -1726,7 +1756,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
  nsresult nsOSHelperAppService::GetFileTokenForPath(
      const char16_t* platformAppPath, nsIFile** aFile) {
-@@ -1142,17 +1142,17 @@ already_AddRefed<nsMIMEInfoBase> nsOSHel
+@@ -1136,17 +1136,17 @@ already_AddRefed<nsMIMEInfoBase> nsOSHel
    nsresult rv =
        LookUpTypeAndDescription(NS_ConvertUTF8toUTF16(aFileExt), majorType,
                                 minorType, mime_types_description, true);
@@ -1745,7 +1775,7 @@ diff --git a/uriloader/exthandler/unix/nsOSHelperAppService.cpp b/uriloader/exth
  
      rv = LookUpTypeAndDescription(NS_ConvertUTF8toUTF16(aFileExt), majorType,
                                    minorType, mime_types_description, false);
-@@ -1254,17 +1254,17 @@ already_AddRefed<nsMIMEInfoBase> nsOSHel
+@@ -1248,17 +1248,17 @@ already_AddRefed<nsMIMEInfoBase> nsOSHel
  
    // Now look up our extensions
    nsAutoString extensions, mime_types_description;
@@ -2201,15 +2231,15 @@ diff --git a/xpcom/components/ManifestParser.cpp b/xpcom/components/ManifestPars
    nsAutoString osVersion;
 +  nsAutoString desktop;
  #if defined(XP_WIN)
- #pragma warning(push)
- #pragma warning(disable : 4996)  // VC12+ deprecates GetVersionEx
+ #  pragma warning(push)
+ #  pragma warning(disable : 4996)  // VC12+ deprecates GetVersionEx
    OSVERSIONINFO info = {sizeof(OSVERSIONINFO)};
    if (GetVersionEx(&info)) {
      nsTextFormatter::ssprintf(osVersion, u"%ld.%ld", info.dwMajorVersion,
                                info.dwMinorVersion);
    }
 +  desktop = NS_LITERAL_STRING("win");
- #pragma warning(pop)
+ #  pragma warning(pop)
  #elif defined(MOZ_WIDGET_COCOA)
    SInt32 majorVersion = nsCocoaFeatures::OSXVersionMajor();
    SInt32 minorVersion = nsCocoaFeatures::OSXVersionMinor();
@@ -2310,15 +2340,15 @@ diff --git a/xpcom/io/nsLocalFileUnix.cpp b/xpcom/io/nsLocalFileUnix.cpp
  #include "prlink.h"
  
  #ifdef MOZ_WIDGET_GTK
- #include "nsIGIOService.h"
-+#include "nsKDEUtils.h"
+ #  include "nsIGIOService.h"
++#  include "nsKDEUtils.h"
  #endif
  
  #ifdef MOZ_WIDGET_COCOA
- #include <Carbon/Carbon.h>
- #include "CocoaFileUtils.h"
- #include "prmem.h"
- #include "plbase64.h"
+ #  include <Carbon/Carbon.h>
+ #  include "CocoaFileUtils.h"
+ #  include "prmem.h"
+ #  include "plbase64.h"
  
 @@ -1902,62 +1903,77 @@ nsLocalFile::SetPersistentDescriptor(con
  

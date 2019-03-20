@@ -3,7 +3,7 @@
 # User Lars T Hansen <lhansen@mozilla.com>
 # Date 1519822672 -3600
 # Node ID 800abe66894d6b07b24bccecbf6a65e2261076f6
-# Parent  13ecd3214b18e4cab73c54e12e16071d58bed11e
+# Parent  6fbe9ec020d822b1deef5b0afe76b905b82308a1
 Bug 1375074 - Save and restore non-volatile x28 on ARM64 for generated unboxed object constructor.  r=sstangl
 
 diff --git a/js/src/jit-test/tests/bug1375074.js b/js/src/jit-test/tests/bug1375074.js

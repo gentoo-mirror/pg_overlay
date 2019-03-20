@@ -1,5 +1,5 @@
 # HG changeset patch
-# Parent  8d4f57b44373d51f0e151eeaadf9fe293bcdfb7c
+# Parent  1f4171c3a5ca8a659154b0a846f9b9158c7f7923
 
 diff --git a/layout/generic/nsIFrame.h b/layout/generic/nsIFrame.h
 --- a/layout/generic/nsIFrame.h
