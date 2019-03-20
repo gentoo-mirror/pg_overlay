@@ -281,7 +281,7 @@ src_prepare() {
 	eapply_user
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/kde-opensuse/series");do eapply "${FILESDIR}/kde-opensuse/$i";done
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde/series");do eapply "${FILESDIR}/opensuse-kde/$i";done
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 	# FreeBSD patches
