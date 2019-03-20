@@ -316,7 +316,8 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
 	eapply "${FILESDIR}/0001-bz-1468911.patch"
-	sed -i "s/1.0.1/1.3.0/g" Cargo.lock
+# 	#sed -i "s/1.0.1/1.3.0/g" Cargo.lock
+	cp -f "${FILESDIR}"/Cargo.lock_git Cargo.lock
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
