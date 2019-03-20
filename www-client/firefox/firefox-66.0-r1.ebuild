@@ -315,6 +315,8 @@ src_prepare() {
 	# FreeBSD patches
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
+	eapply "${FILESDIR}/0001-bz-1468911.patch"
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
@@ -623,7 +625,7 @@ src_configure() {
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --disable-rust-simd
+	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrender
 	mozconfig_annotate '' --enable-webrtc
@@ -635,7 +637,6 @@ src_configure() {
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
-	echo "ac_add_options MOZ_PGO=1" >> "${S}".mozconfig
 	echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
 	#
 
