@@ -15,8 +15,8 @@ Date:   Wed Mar 6 08:17:51 2019 +0000
 
 diff --git widget/gtk/nsWindow.cpp widget/gtk/nsWindow.cpp
 index 96faeea1cf87..46956412f341 100644
---- widget/gtk/nsWindow.cpp
-+++ widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
 @@ -399,6 +399,10 @@ nsWindow::nsWindow() {
    mXDepth = 0;
  #endif /* MOZ_X11 */
@@ -92,8 +92,8 @@ index 96faeea1cf87..46956412f341 100644
  
 diff --git widget/gtk/nsWindow.h widget/gtk/nsWindow.h
 index 309905757431..ae2ebd350af4 100644
---- widget/gtk/nsWindow.h
-+++ widget/gtk/nsWindow.h
+--- a/widget/gtk/nsWindow.h
++++ b/widget/gtk/nsWindow.h
 @@ -433,6 +433,9 @@ class nsWindow final : public nsBaseWidget {
    bool mIsDragPopup;
    // Can we access X?

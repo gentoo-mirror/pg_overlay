@@ -19,8 +19,8 @@ Date:   Mon Feb 25 12:15:50 2019 +0000
 
 diff --git widget/gtk/mozcontainer.cpp widget/gtk/mozcontainer.cpp
 index 77ac02e2a049..efe5f7ba86e3 100644
---- widget/gtk/mozcontainer.cpp
-+++ widget/gtk/mozcontainer.cpp
+--- a/widget/gtk/mozcontainer.cpp
++++ b/widget/gtk/mozcontainer.cpp
 @@ -160,7 +160,7 @@ void moz_container_init(MozContainer *container) {
    // We can draw to x11 window any time.
    container->ready_to_draw = GDK_IS_X11_DISPLAY(gdk_display_get_default());
@@ -76,8 +76,8 @@ index 77ac02e2a049..efe5f7ba86e3 100644
  void moz_container_force_default_visual(MozContainer *container) {
 diff --git widget/gtk/mozcontainer.h widget/gtk/mozcontainer.h
 index ae6d656646c8..51be814ef975 100644
---- widget/gtk/mozcontainer.h
-+++ widget/gtk/mozcontainer.h
+--- a/widget/gtk/mozcontainer.h
++++ b/widget/gtk/mozcontainer.h
 @@ -9,6 +9,7 @@
  #define __MOZ_CONTAINER_H__
  
@@ -109,8 +109,8 @@ index ae6d656646c8..51be814ef975 100644
  #endif /* __MOZ_CONTAINER_H__ */
 diff --git widget/gtk/nsWindow.cpp widget/gtk/nsWindow.cpp
 index acb957d3fb55..54b121ec5514 100644
---- widget/gtk/nsWindow.cpp
-+++ widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
 @@ -675,6 +675,12 @@ void nsWindow::Destroy() {
      gFocusWindow = nullptr;
    }
@@ -196,8 +196,8 @@ index acb957d3fb55..54b121ec5514 100644
  #ifdef MOZ_X11
 diff --git widget/gtk/nsWindow.h widget/gtk/nsWindow.h
 index 5d119b4911e1..dbced693be1c 100644
---- widget/gtk/nsWindow.h
-+++ widget/gtk/nsWindow.h
+--- a/widget/gtk/nsWindow.h
++++ b/widget/gtk/nsWindow.h
 @@ -245,6 +245,9 @@ class nsWindow final : public nsBaseWidget {
  
    void DispatchContextMenuEventFromMouseEvent(uint16_t domButton,

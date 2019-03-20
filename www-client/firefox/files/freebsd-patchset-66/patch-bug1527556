@@ -16,8 +16,8 @@ Date:   Mon Feb 18 09:15:30 2019 +0000
 
 diff --git widget/gtk/nsWaylandDisplay.cpp widget/gtk/nsWaylandDisplay.cpp
 index 4c2804be2831..ac01e1f50347 100644
---- widget/gtk/nsWaylandDisplay.cpp
-+++ widget/gtk/nsWaylandDisplay.cpp
+--- a/widget/gtk/nsWaylandDisplay.cpp
++++ b/widget/gtk/nsWaylandDisplay.cpp
 @@ -14,7 +14,9 @@
  namespace mozilla {
  namespace widget {

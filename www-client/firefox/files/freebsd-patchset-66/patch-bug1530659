@@ -2,8 +2,8 @@ Always pass -Isilk/fixed to unbreak on aarch64 after bug 1522016
 
 diff --git media/libopus/moz.build media/libopus/moz.build
 index cc82c8e6a616..e83a70f94e0a 100644
---- media/libopus/moz.build
-+++ media/libopus/moz.build
+--- a/media/libopus/moz.build
++++ b/media/libopus/moz.build
 @@ -63,6 +63,8 @@ LOCAL_INCLUDES += [
      'celt',
      'include',
