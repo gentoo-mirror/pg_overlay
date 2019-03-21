@@ -28,6 +28,7 @@ COMMON_DEPEND="
 	>=dev-libs/atk-2.26
 	dev-libs/expat:=
 	dev-libs/glib:2
+	dev-libs/jsoncpp
 	system-icu? ( >=dev-libs/icu-59:= )
 	>=dev-libs/libxml2-2.9.4-r3:=[icu]
 	dev-libs/libxslt:=
