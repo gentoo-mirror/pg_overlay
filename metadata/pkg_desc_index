@@ -13,7 +13,6 @@ dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
 dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
 dev-python/python-mpd2 9999: Python MPD client library
 dev-python/requests-toolbelt 0.8.0: A utility belt for advanced users of python-requests
-mail-client/thunderbird 60.6.0: Thunderbird Mail Client
 media-gfx/fontforge 20170731-r4: postscript font editor and converter
 media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Mozilla packages
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
