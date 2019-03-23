@@ -9,6 +9,8 @@ dev-libs/libsigc++ 2.99.11: Typesafe callback system for standard C++
 dev-libs/nettle 3.4.1_rc1: Low-level cryptographic library
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/josepy 1.1.0: JOSE protocol implementation in Python
+dev-python/pygame 1.9.4: Python bindings for SDL multimedia library
+dev-python/pygame_sdl2 6.99.12.4: Reimplementation of portions of the pygame API using SDL2
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
 dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
 dev-python/python-mpd2 9999: Python MPD client library
