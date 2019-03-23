@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -18,13 +18,14 @@ SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sh ~sparc ~x86 ~amd64-fbsd ~amd64-linux ~x86-linux"
 
 # +alsa-plugin as discussed in bug #519530
-IUSE="+alsa +alsa-plugin +asyncns bluetooth +caps dbus doc equalizer gconf +gdbm
-+glib gtk ipv6 jack libsamplerate libressl lirc native-headset neon ofono-headset
-+orc oss qt5 realtime selinux sox ssl systemd system-wide tcpd test +udev
-+webrtc-aec +X zeroconf"
+IUSE="+alsa +alsa-plugin +asyncns bluetooth +caps dbus doc equalizer elogind gconf
++gdbm +glib gtk ipv6 jack libsamplerate libressl lirc native-headset neon
+ofono-headset +orc oss qt5 realtime selinux sox ssl systemd system-wide tcpd test
++udev +webrtc-aec +X zeroconf"
 
 # See "*** BLUEZ support not found (requires D-Bus)" in configure.ac
 REQUIRED_USE="
+	?? ( elogind systemd )
 	bluetooth? ( dbus )
 	equalizer? ( dbus )
 	ofono-headset? ( bluetooth )
@@ -76,6 +77,7 @@ CDEPEND="
 	media-libs/speexdsp
 	gdbm? ( sys-libs/gdbm:= )
 	webrtc-aec? ( >=media-libs/webrtc-audio-processing-0.2 )
+	elogind? ( sys-auth/elogind )
 	systemd? ( sys-apps/systemd:0=[${MULTILIB_USEDEP}] )
 	dev-libs/libltdl:0
 	selinux? ( sec-policy/selinux-pulseaudio )
@@ -193,12 +195,21 @@ multilib_src_configure() {
 		$(use_enable dbus)
 		$(use_enable X x11)
 		$(use_enable systemd systemd-daemon)
+		# systemd-login isn't necessary for non-native, but the rest of systemd are; not changing it at this point close to a meson port
 		$(use_enable systemd systemd-login)
 		$(use_enable systemd systemd-journal)
 		$(use_enable ipv6)
 		$(use_with caps)
 		--enable-elogind-login
 	)
+
+	if use elogind && multilib_is_native_abi; then
+		myconf+=(
+			--enable-systemd-login
+			SYSTEMDLOGIN_CFLAGS=`pkg-config --cflags "libelogind" 2>/dev/null`
+			SYSTEMDLOGIN_LIBS=`pkg-config --libs "libelogind" 2>/dev/null`
+		)
+	fi
 
 	if use bluetooth; then
 		myconf+=(
