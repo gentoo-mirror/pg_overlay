@@ -17,7 +17,8 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 REQUIRED_USE=""
 
-RDEPEND="dev-python/random2
+RDEPEND="dev-python/pysol-cards
+	dev-python/random2
 	dev-python/six"
 
 DEPEND="${RDEPEND}
