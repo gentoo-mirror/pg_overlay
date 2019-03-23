@@ -1,7 +1,6 @@
 build-disable-elfhack.patch
 mozilla-1515641-av1-build-1.patch
 mozilla-1515641-av1-build-2.patch
-mozilla-1533969.patch
 
 mozilla-1196777.patch
 mozilla-1353817.patch
