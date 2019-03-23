@@ -26,7 +26,7 @@ DEPEND="dev-python/six"
 RDEPEND="${DEPEND}
 	python_targets_python3_5? ( dev-python/random2[python_targets_python3_5] )
 	python_targets_python3_6? ( dev-python/random2[python_targets_python3_6] )
-	python_targets_python3_7? ( dev-python/random2[python_targets_python3_7] 
+	python_targets_python3_7? ( dev-python/random2[python_targets_python3_7] )
 	!minimal? ( dev-python/pillow[tk,${PYTHON_USEDEP}]
 		dev-tcltk/tktable )
 	sound? ( dev-python/pygame[${PYTHON_USEDEP}] )"
