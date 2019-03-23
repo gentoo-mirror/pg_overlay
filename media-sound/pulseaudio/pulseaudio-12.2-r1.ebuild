@@ -200,12 +200,12 @@ multilib_src_configure() {
 		$(use_enable systemd systemd-journal)
 		$(use_enable ipv6)
 		$(use_with caps)
-		--enable-elogind-login
+		#--enable-elogind-login
 	)
 
 	if use elogind && multilib_is_native_abi; then
 		myconf+=(
-			--enable-systemd-login
+			--enable-elogind-login
 			SYSTEMDLOGIN_CFLAGS=`pkg-config --cflags "libelogind" 2>/dev/null`
 			SYSTEMDLOGIN_LIBS=`pkg-config --libs "libelogind" 2>/dev/null`
 		)
