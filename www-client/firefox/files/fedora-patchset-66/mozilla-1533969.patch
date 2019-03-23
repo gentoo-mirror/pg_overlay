@@ -1,0 +1,29 @@
+diff -up firefox-66.0/js/src/util/NativeStack.cpp.mozilla-1533969 firefox-66.0/js/src/util/NativeStack.cpp
+--- firefox-66.0/js/src/util/NativeStack.cpp.mozilla-1533969	2019-03-14 23:12:13.000000000 +0100
++++ firefox-66.0/js/src/util/NativeStack.cpp	2019-03-22 15:17:08.338328211 +0100
+@@ -25,7 +25,7 @@
+ #    include <sys/syscall.h>
+ #    include <sys/types.h>
+ #    include <unistd.h>
+-static pid_t gettid() { return syscall(__NR_gettid); }
++#    define gettid() static_cast<pid_t>(syscall(__NR_gettid))
+ #  endif
+ #else
+ #  error "Unsupported platform"
+diff -up firefox-66.0/tools/profiler/core/platform.h.mozilla-1533969 firefox-66.0/tools/profiler/core/platform.h
+--- firefox-66.0/tools/profiler/core/platform.h.mozilla-1533969	2019-03-22 15:17:08.338328211 +0100
++++ firefox-66.0/tools/profiler/core/platform.h	2019-03-22 15:19:00.046748130 +0100
+@@ -47,11 +47,11 @@
+ #if defined(__GLIBC__)
+ #  include <unistd.h>
+ #  include <sys/syscall.h>
+-static inline pid_t gettid() { return (pid_t)syscall(SYS_gettid); }
++#  define gettid() static_cast<pid_t>(syscall(SYS_gettid))
+ #elif defined(GP_OS_darwin)
+ #  include <unistd.h>
+ #  include <sys/syscall.h>
+-static inline pid_t gettid() { return (pid_t)syscall(SYS_thread_selfid); }
++#  define gettid() static_cast<pid_t>(syscall(SYS_thread_selfid))
+ #elif defined(GP_OS_android)
+ #  include <unistd.h>
+ #elif defined(GP_OS_windows)
