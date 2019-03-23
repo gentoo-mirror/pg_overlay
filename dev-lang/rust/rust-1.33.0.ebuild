@@ -92,9 +92,7 @@ pkg_pretend() {
 pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
-	if use system-llvm; then
-		llvm_pkg_setup
-	fi
+	use system-llvm && llvm_pkg_setup
 }
 
 src_prepare() {
