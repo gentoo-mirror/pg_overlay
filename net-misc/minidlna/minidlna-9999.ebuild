@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit autotools git-r3 eutils linux-info toolchain-funcs user
+inherit autotools git-r3 eutils linux-info tmpfiles toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="http://minidlna.sourceforge.net/"
