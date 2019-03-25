@@ -39,6 +39,7 @@ src_prepare() {
 		-i minidlna.conf || die
 
 	default
+	eautoreconf
 }
 
 src_configure() {
