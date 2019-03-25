@@ -8,7 +8,6 @@ inherit autotools git-r3 eutils linux-info tmpfiles toolchain-funcs user
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="https://sourceforge.net/projects/minidlna/"
 EGIT_REPO_URI="https://git.code.sf.net/p/${PN}/git"
-SRC_URI="https://dev.gentoo.org/~xmw/minidlna-gentoo-artwork.patch.xz"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
@@ -31,7 +30,7 @@ DEPEND="${RDEPEND}
 CONFIG_CHECK="~INOTIFY_USER"
 
 PATCHES=(
-	"${WORKDIR}"/minidlna-gentoo-artwork.patch
+	"${FILESDIR}"/minidlna-gentoo-artwork.patch
 )
 
 src_prepare() {
