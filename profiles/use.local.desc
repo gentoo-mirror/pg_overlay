@@ -6,11 +6,12 @@ app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
 dev-python/pygame:midi - Enable midi support using media-libs/portmidi
-media-gfx/fontforge:truetype-debugger - Enable truetype debugger in fontforge
 media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with Mozilla packages
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
+net-misc/minidlna:netgear - Enable netgear branding
+net-misc/minidlna:readynas - Enable readynas branding
 www-client/chromium:closure-compile - Enable closure type-checking for Chrome's web technology-based UI. Requires Java.
 www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
