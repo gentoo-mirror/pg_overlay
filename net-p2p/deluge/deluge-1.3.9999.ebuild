@@ -13,8 +13,8 @@ HOMEPAGE="https://deluge-torrent.org/"
 
 if [[ ${PV} == 1.3.9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="git://deluge-torrent.org/${PN}.git
-		http://git.deluge-torrent.org/${PN}"
+	EGIT_REPO_URI="https://git.deluge-torrent.org/${PN}
+		git://deluge-torrent.org/${PN}.git"
 	EGIT_BRANCH="1.3-stable"
 	SRC_URI=""
 else

@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 PLOCALES="ar_SA ay_WI be_BY be_BY@latin bg_BG cs_CZ de_DE el_GR es_AR es_BO es_ES fa_IR fr_FR it_IT ja_JP ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR qu_WI ru_RU sk_SK sq_AL sr_SR sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
 
 inherit eutils qmake-utils git-r3 l10n
@@ -29,7 +29,7 @@ RDEPEND="
 	dev-qt/qtsvg:5
 	dev-qt/qtwebkit:5
 	dev-qt/qtwidgets:5
-	dev-qt/qtwebkit:5
+	dev-qt/qtx11extras:5
 	dev-qt/qtxml:5
 	media-libs/libvorbis
 	media-libs/tiff:0
@@ -42,7 +42,8 @@ RDEPEND="
 		!libav? ( media-video/ffmpeg:0= )
 	)
 "
-DEPEND="${RDEPEND}
+DEPEND="${RDEPEND}"
+BDEPEND="
 	dev-qt/linguist-tools:5
 	virtual/pkgconfig
 "
