@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -6,91 +6,106 @@ EAPI=6
 inherit autotools git-r3 eutils linux-info tmpfiles toolchain-funcs user
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
-HOMEPAGE="http://minidlna.sourceforge.net/"
+HOMEPAGE="https://sourceforge.net/projects/minidlna/"
 EGIT_REPO_URI="https://git.code.sf.net/p/${PN}/git"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="avahi netgear readynas tivo"
+IUSE="libav netgear readynas zeroconf tivo"
 
 RDEPEND="dev-db/sqlite:3
-	media-libs/flac
-	media-libs/libexif
-	media-libs/libid3tag
-	media-libs/libogg
-	media-libs/libvorbis
-	virtual/ffmpeg
-	virtual/jpeg:0
-	avahi? ( net-dns/avahi )"
+	media-libs/flac:=
+	media-libs/libexif:=
+	media-libs/libid3tag:=
+	media-libs/libogg:=
+	media-libs/libvorbis:=
+	virtual/jpeg:0=
+	libav? ( media-video/libav:0= )
+	!libav? ( media-video/ffmpeg:0= )
+	zeroconf? ( net-dns/avahi:= )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"
 
 CONFIG_CHECK="~INOTIFY_USER"
 
-PATCHES=( "${FILESDIR}"/${PN}-gentoo-artwork.patch
-	"${FILESDIR}"/${PN}-1.2.1-buildsystem.patch )
-
-pkg_setup() {
-	local my_is_new="yes"
-	[ -d "${EPREFIX}"/var/lib/${PN} ] && my_is_new="no"
-	enewgroup ${PN}
-	enewuser ${PN} -1 -1 /var/lib/${PN} ${PN}
-	if [ -d "${EPREFIX}"/var/lib/${PN} ] && [ "${my_is_new}" == "yes" ] ; then
-		# created by above enewuser command w/ wrong group and permissions
-		chown ${PN}:${PN} "${EPREFIX}"/var/lib/${PN} || die
-		chmod 0750 "${EPREFIX}"/var/lib/${PN} || die
-		# if user already exists, but /var/lib/minidlna is missing
-		# rely on ${D}/var/lib/minidlna created in src_install
-	fi
-
-	linux-info_pkg_setup
-}
+PATCHES=(
+	"${FILESDIR}"/minidlna-gentoo-artwork.patch
+)
 
 src_prepare() {
-	sed -e "/log_dir/s:/var/log:/var/log/${PN}:" \
+	sed -e "/log_dir/s:/var/log:/var/log/minidlna:" \
 		-e "/db_dir/s:/var/cache/:/var/lib/:" \
-		-i ${PN}.conf || die
+		-i minidlna.conf || die
 
 	default
-
 	eautoreconf
 }
 
 src_configure() {
-	econf \
-		--disable-silent-rules \
-		--with-db-path=/var/lib/${PN} \
-		--with-log-path=/var/log/${PN} \
-		$(use_enable avahi ) \
-		$(use_enable netgear) \
-		$(use_enable readynas) \
+	local myconf=(
+		--with-db-path=/var/lib/minidlna
+		--with-log-path=/var/log/minidlna
+		$(use_enable netgear)
+		$(use_enable readynas)
 		$(use_enable tivo)
+	)
+	use zeroconf || myconf+=(
+		ac_cv_lib_avahi_client_avahi_threaded_poll_new=no
+	)
+
+	econf "${myconf[@]}"
+}
+
+src_test() {
+	:
 }
 
 src_install() {
 	default
 
 	#bug 536532
-	dosym /usr/sbin/${PN}d /usr/bin/${PN}
+	dosym ../sbin/minidlnad /usr/bin/minidlna
 
 	insinto /etc
-	doins ${PN}.conf
+	doins minidlna.conf
 
-	newconfd "${FILESDIR}"/${PN}-1.0.25.confd ${PN}
-	newinitd "${FILESDIR}"/${PN}-1.1.5.initd ${PN}
+	newconfd "${FILESDIR}"/minidlna-1.0.25.confd minidlna
+	newinitd "${FILESDIR}"/minidlna-1.1.5.initd minidlna
+	newtmpfiles - minidlna.conf <<-EOF
+		d /run/minidlna 0755 minidlna minidlna -
+	EOF
 
-	dodir /var/{lib,log}/${PN}
-	fowners ${PN}:${PN} /var/{lib,log}/${PN}
-	fperms 0750 /var/{lib,log}/${PN}
+	keepdir /var/{lib,log}/minidlna
 
-	dodoc AUTHORS NEWS README TODO
-	doman ${PN}d.8 ${PN}.conf.5
+	doman minidlnad.8 minidlna.conf.5
+}
+
+pkg_preinst() {
+	local my_is_new=yes
+	[[ -d ${EROOT}/var/lib/minidlna ]] && my_is_new=no
+
+	enewgroup minidlna
+	enewuser minidlna -1 -1 /var/lib/minidlna minidlna
+
+	fowners minidlna:minidlna /var/{lib,log}/minidlna
+	fperms 0750 /var/{lib,log}/minidlna
+
+	if [[ -d ${EROOT}/var/lib/minidlna && ${my_is_new} == yes ]]; then
+		# created by above enewuser command w/ wrong group
+		# and permissions
+		chown minidlna:minidlna "${EROOT}"/var/lib/minidlna || die
+		chmod 0750 "${EROOT}"/var/lib/minidlna || die
+		# if user already exists, but /var/lib/minidlna is missing
+		# rely on ${D}/var/lib/minidlna created in src_install
+	fi
 }
 
 pkg_postinst() {
 	elog "minidlna now runs as minidlna:minidlna (bug 426726),"
 	elog "logfile is moved to /var/log/minidlna/minidlna.log,"
 	elog "cache is moved to /var/lib/minidlna."
-	elog "Please edit /etc/conf.d/${PN} and file ownerships to suit your needs."
+	elog "Please edit /etc/conf.d/minidlna and file ownerships to suit your needs."
+
+	tmpfiles_process minidlna.conf
 }
