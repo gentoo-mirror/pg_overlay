@@ -220,7 +220,6 @@ src_configure() {
 		$(use_enable networkmanager nm)
 		$(use_enable zeroconf avahi)
 		$(use_enable idn)
-		--with-python=
 	)
 
 	if use gnutls; then
