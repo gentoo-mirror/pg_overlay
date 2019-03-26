@@ -13,6 +13,7 @@ dev-python/python-mpd2 9999: Python MPD client library
 dev-python/requests-toolbelt 0.8.0: A utility belt for advanced users of python-requests
 media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Mozilla packages
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
+net-im/pidgin 2.13.0: GTK Instant Messenger client
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
 www-client/chromium 73.0.3683.90: Open-source version of Google Chrome web browser
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support

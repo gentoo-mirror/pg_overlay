@@ -10,6 +10,17 @@ media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with M
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
+net-im/pidgin:gadu - Enable Gadu Gadu protocol support
+net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
+net-im/pidgin:gstreamer - Enables voice and video sessions
+net-im/pidgin:gtk - Builds Pidgin, the GTK+ interface
+net-im/pidgin:meanwhile - Enable meanwhile support for Sametime protocol
+net-im/pidgin:ncurses - Build finch, console interface
+net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
+net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
+net-im/pidgin:silc - Enable SILC protocol support
+net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
+net-im/pidgin:zephyr - Enable Zephyr protocol support
 www-client/chromium:closure-compile - Enable closure type-checking for Chrome's web technology-based UI. Requires Java.
 www-client/chromium:component-build - Split build into more shared libraries to speed up linking. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
 www-client/chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
