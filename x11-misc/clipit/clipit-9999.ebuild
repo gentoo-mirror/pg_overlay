@@ -1,12 +1,12 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=5
+EAPI=6
 
 inherit autotools eutils fdo-mime git-r3
 
 DESCRIPTION="Lightweight GTK+ clipboard manager. Fork of Parcellite."
-HOMEPAGE="https://github.com/ChristianHenzel/ClipIt"
+HOMEPAGE="https://github.com/CristianHenzel/ClipIt"
 EGIT_REPO_URI="https://github.com/CristianHenzel/ClipIt.git"
 
 LICENSE="LGPL-3.0"
