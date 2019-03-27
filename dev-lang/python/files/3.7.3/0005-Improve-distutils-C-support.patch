@@ -1,5 +1,5 @@
---- Python-3.7.3/Lib/distutils/cygwinccompiler.py
-+++ Python-3.7.3/Lib/distutils/cygwinccompiler.py
+--- a/Lib/distutils/cygwinccompiler.py
++++ b/Lib/distutils/cygwinccompiler.py
 @@ -125,8 +125,10 @@
          # dllwrap 2.10.90 is buggy
          if self.ld_version >= "2.10.90":
@@ -56,8 +56,8 @@
                                             entry_point))
          # Maybe we should also append -mthreads, but then the finished
          # dlls need another dll (mingwm10.dll see Mingw32 docs)
---- Python-3.7.3/Lib/distutils/sysconfig.py
-+++ Python-3.7.3/Lib/distutils/sysconfig.py
+--- a/Lib/distutils/sysconfig.py
++++ b/Lib/distutils/sysconfig.py
 @@ -183,9 +183,12 @@
                  _osx_support.customize_compiler(_config_vars)
                  _config_vars['CUSTOMIZED_OSX_COMPILER'] = 'True'
@@ -122,8 +122,8 @@
              archiver=archiver)
  
          compiler.shared_lib_extension = shlib_suffix
---- Python-3.7.3/Lib/distutils/unixccompiler.py
-+++ Python-3.7.3/Lib/distutils/unixccompiler.py
+--- a/Lib/distutils/unixccompiler.py
++++ b/Lib/distutils/unixccompiler.py
 @@ -52,14 +52,17 @@
      # are pretty generic; they will probably have to be set by an outsider
      # (eg. using information discovered by the sysconfig about building
@@ -211,8 +211,8 @@
  
                  if sys.platform == 'darwin':
                      linker = _osx_support.compiler_fixup(linker, ld_args)
---- Python-3.7.3/Lib/_osx_support.py
-+++ Python-3.7.3/Lib/_osx_support.py
+--- a/Lib/_osx_support.py
++++ b/Lib/_osx_support.py
 @@ -14,13 +14,13 @@
  # configuration variables that may contain universal build flags,
  # like "-arch" or "-isdkroot", that may need customization for
@@ -230,8 +230,8 @@
  
  # prefix added to original configuration variable names
  _INITPRE = '_OSX_SUPPORT_INITIAL_'
---- Python-3.7.3/Makefile.pre.in
-+++ Python-3.7.3/Makefile.pre.in
+--- a/Makefile.pre.in
++++ b/Makefile.pre.in
 @@ -615,10 +615,10 @@
  	    *\ -s*|s*) quiet="-q";; \
  	    *) quiet="";; \
