@@ -317,6 +317,7 @@ src_prepare() {
 
 	#eapply "${FILESDIR}/0001-bz-1468911.patch"
 	touch third_party/rust/packed_simd/LICENSE-APACHE
+	sed -i s/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2/e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855/g third_party/rust/packed_simd/.cargo-checksum.json
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
