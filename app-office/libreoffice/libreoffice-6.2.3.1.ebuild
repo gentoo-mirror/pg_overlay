@@ -248,7 +248,6 @@ PATCHES=(
 	# master branch
 	"${FILESDIR}/${PN}-6.2-ldap-optional.patch"
 	# 6.2 stable branch
-	"${FILESDIR}/${PN}-6.2.2.2-boost-1.69.patch"
 	"${WORKDIR}"/${PATCHSET/.tar.xz/}
 
 	# not upstreamable stuff
