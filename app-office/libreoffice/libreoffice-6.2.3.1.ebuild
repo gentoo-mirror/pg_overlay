@@ -248,8 +248,7 @@ PATCHES=(
 	# master branch
 	"${FILESDIR}/${PN}-6.2-ldap-optional.patch"
 	# 6.2 stable branch
-	#"${WORKDIR}"/${PATCHSET/.tar.xz/
-	}
+	#"${WORKDIR}"/${PATCHSET/.tar.xz/}
 
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.4-system-pyuno.patch"
