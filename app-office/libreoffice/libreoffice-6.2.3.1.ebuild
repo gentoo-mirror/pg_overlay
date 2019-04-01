@@ -307,7 +307,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	rm "${WORKDIR}/${PATCHSET}/001-finetune-windowflags-w-focus-on-floating-toolbars.patch"
+	rm "${WORKDIR}/${PATCHSET/.tar.xz}/001-finetune-windowflags-w-focus-on-floating-toolbars.patch"
 	xdg_src_prepare
 
 	# sandbox violations on many systems, we don't need it. Bug #646406
