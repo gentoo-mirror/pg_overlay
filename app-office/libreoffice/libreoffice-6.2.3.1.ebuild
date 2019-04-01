@@ -309,8 +309,7 @@ src_unpack() {
 src_prepare() {
 	rm -v "${WORKDIR}/${PATCHSET/.tar.xz}"/001*
 	rm -v "${WORKDIR}/${PATCHSET/.tar.xz}"/002*
-	rm -v "${WORKDIR}/${PATCHSET/.tar.xz}/001-finetune-windowflags-w-focus-on-floating-toolbars.patch"
-	rm -v "${WORKDIR}/${PATCHSET/.tar.xz}/002-show-undocked-toolbar-only-when-ready.patch"
+	rm -v "${WORKDIR}/${PATCHSET/.tar.xz}"/003*
 	xdg_src_prepare
 
 	# sandbox violations on many systems, we don't need it. Bug #646406
