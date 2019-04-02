@@ -20,7 +20,7 @@ IUSE=""
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
-	dev-libs/libxml2[${PYTHON_USEDEP}]"
+	dev-libs/libxml2[python,${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}"
 
 PATCHES=(
