@@ -19,12 +19,12 @@ IUSE="X doc"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="X? ( x11-libs/gtksourceview:3.0
+		doc? dev-python/sphinx[${PYTHON_USEDEP}]
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
 		gnome-base/librsvg:2
 		x11-libs/gtk+:3 )"
 DEPEND="${RDEPEND}
 		dev-util/scons[${PYTHON_USEDEP}]
-		dev-python/sphinx[${PYTHON_USEDEP}]
 		sys-devel/gettext
 		virtual/pkgconfig"
 
