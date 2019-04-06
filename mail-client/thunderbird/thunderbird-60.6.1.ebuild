@@ -19,7 +19,7 @@ MOZ_PV="${PV/_beta/b}"
 
 # Patches
 PATCHTB="thunderbird-60.0-patches-0"
-PATCHFF="firefox-60.6-patches-02"
+PATCHFF="firefox-60.6-patches-03"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -468,7 +468,7 @@ src_configure() {
 
 	#
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --disable-rust-simd
+	#mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate '' --disable-updater
