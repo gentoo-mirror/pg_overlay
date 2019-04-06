@@ -42,5 +42,7 @@ DEPEND="
 	)"
 
 python_test() {
+	# acme is not installed, removing it here is fine, the dir just confuses tests
+	rm -R acme
 	pytest -vv ${PN} || die
 }
