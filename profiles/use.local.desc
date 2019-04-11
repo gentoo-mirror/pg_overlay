@@ -4,7 +4,6 @@
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
-dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
 dev-python/pygame:midi - Enable midi support using media-libs/portmidi
 media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with Mozilla packages
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities

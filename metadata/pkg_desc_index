@@ -1,7 +1,5 @@
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
-dev-libs/gobject-introspection 1.60.0: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.60.0: Build infrastructure for GObject Introspection
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/josepy 1.1.0: JOSE protocol implementation in Python
