@@ -82,8 +82,6 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	x86? ( cpu_flags_x86_sse2 )
 "
 
-PATCHES=( "${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch )
-
 S="${WORKDIR}/${MY_P}-src"
 
 toml_usex() {
@@ -123,6 +121,8 @@ src_prepare() {
 		rm -rf src/llvm-project/ || die
 		# We never enable emscripten.
 		rm -rf src/llvm-emscripten/ || die
+	else
+		eapply "${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
 	fi
 
 	# The configure macro will modify some autoconf-related files, which upsets
