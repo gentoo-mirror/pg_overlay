@@ -1,5 +1,4 @@
 02-gsoap-build-fix.patch
-04-vboxdrv-references.patch
 07-vboxnetflt-reference.patch
 13-module-mismatch.patch
 23-remove-invalid-chars-check.patch
