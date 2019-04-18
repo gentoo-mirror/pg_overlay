@@ -18,7 +18,7 @@ EGIT_BRANCH="RC_1_1"
 LICENSE="BSD"
 SLOT="0/9"
 KEYWORDS=""
-IUSE="debug dht doc examples libressl python +ssl static-libs test"
+IUSE="debug +dht doc examples libressl python +ssl static-libs test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
