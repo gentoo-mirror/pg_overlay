@@ -40,6 +40,7 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
+	sed -i s/1.2.0/1.1.12/g configure.ac || die
 	mkdir "${S}"/build-aux/ || die
 	touch "${S}"/build-aux/config.rpath || die
 	eautoreconf
@@ -52,8 +53,6 @@ src_prepare() {
 
 	# prepend -I${S}/... to ensure bindings use the right headers
 	sed -i -e "s|^|-I${S}/src/include |" bindings/python/compile_flags.in || die
-
-	sed -i s/1.2.0/1.1.12/g configure.ac
 
 	use python && distutils-r1_src_prepare
 }
