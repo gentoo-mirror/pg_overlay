@@ -76,6 +76,7 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
+	# Version
 	sed -i "s/=_version/='1.3.15'/g" setup.py || die
 
 	distutils-r1_python_prepare_all
