@@ -16,7 +16,7 @@ EGIT_REPO_URI="https://github.com/arvidn/libtorrent.git"
 EGIT_BRANCH="RC_1_2"
 
 LICENSE="BSD"
-SLOT="0/9"
+SLOT="0/10"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
 IUSE="debug +dht doc examples libressl python +ssl static-libs test"
 
