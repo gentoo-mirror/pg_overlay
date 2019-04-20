@@ -13,5 +13,4 @@ media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reportin
 net-im/pidgin 2.13.0: GTK Instant Messenger client
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
-www-client/chromium 73.0.3683.114: Open-source version of Google Chrome web browser
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
