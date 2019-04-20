@@ -112,6 +112,9 @@ python_install_all() {
 		rm -f "${D}/usr/bin/deluge-web" || die
 		rm -f "${D}/usr/share/man/man1/deluge-web.1" || die
 	fi
+	if ! use console gtk webinterface; then
+		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/" || die
+	fi
 	newinitd "${FILESDIR}"/deluged.init-2 deluged
 	newconfd "${FILESDIR}"/deluged.conf-2 deluged
 }
