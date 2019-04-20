@@ -76,7 +76,7 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
-	sed -i "s/get_version(prefix='deluge-', suffix='.dev0')/deluge-1.3.15/g" setup.py || die
+	sed -i "s/= _version/ = deluge-1.3.15/g" setup.py || die
 
 	distutils-r1_python_prepare_all
 }
