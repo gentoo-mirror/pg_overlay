@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_7 )
 DISTUTILS_SINGLE_IMPL=1
 PLOCALES="af ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fo fr fy ga gl he hi hr hu id is it iu ja ka kk km kn ko ku ky la lb lt lv mk ml ms nap nb nds nl nn oc pl pms pt pt_BR ro ru si sk sl sr sv ta te th tl tlh tr uk ur vi zh_CN zh_HK zh_TW"
 inherit distutils-r1 eutils user l10n
@@ -11,11 +11,11 @@ inherit distutils-r1 eutils user l10n
 DESCRIPTION="BitTorrent client with a client/server model"
 HOMEPAGE="https://deluge-torrent.org/"
 
-if [[ ${PV} == 1.3.9999 ]]; then
+if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://git.deluge-torrent.org/${PN}
 		git://deluge-torrent.org/${PN}.git"
-	EGIT_BRANCH="1.3-stable"
+	EGIT_BRANCH="develop"
 	SRC_URI=""
 else
 	SRC_URI="http://download.deluge-torrent.org/source/${P}.tar.bz2"
@@ -31,10 +31,10 @@ REQUIRED_USE="
 	libnotify? ( gtk )
 "
 PATCHES=(
-	"${FILESDIR}/${PN}-1.3.5-disable_libtorrent_internal_copy.patch"
+	"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
 )
 
-CDEPEND="net-libs/libtorrent-rasterbar[python,${PYTHON_USEDEP}]"
+CDEPEND=">=net-libs/libtorrent-rasterbar-1.2.0[python,${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-util/intltool"
@@ -44,10 +44,7 @@ RDEPEND="${CDEPEND}
 	dev-python/pyxdg[${PYTHON_USEDEP}]
 	dev-python/setproctitle[${PYTHON_USEDEP}]
 	|| ( >=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
-		(
-		>=dev-python/twisted-core-13.0[${PYTHON_USEDEP}]
 		>=dev-python/twisted-web-13.0[${PYTHON_USEDEP}]
-		)
 	)
 	geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 	gtk? (
