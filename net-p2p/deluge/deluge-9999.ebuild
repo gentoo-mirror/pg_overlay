@@ -31,7 +31,7 @@ REQUIRED_USE="
 	libnotify? ( gtk )
 "
 PATCHES=(
-	"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
+	#"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
 )
 
 CDEPEND=">=net-libs/libtorrent-rasterbar-1.2.0[python,${PYTHON_USEDEP}]"
