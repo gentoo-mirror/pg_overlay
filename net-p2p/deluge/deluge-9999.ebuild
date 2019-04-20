@@ -15,7 +15,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://git.deluge-torrent.org/${PN}
 		git://deluge-torrent.org/${PN}.git"
-	EGIT_BRANCH="1.3-stable"
+	EGIT_BRANCH="develop"
 	SRC_URI=""
 else
 	SRC_URI="http://download.deluge-torrent.org/source/${P}.tar.bz2"
@@ -34,7 +34,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
 )
 
-CDEPEND=">=net-libs/libtorrent-rasterbar-0.14.9[python,${PYTHON_USEDEP}]"
+CDEPEND=">=net-libs/libtorrent-rasterbar-1.2.0[python,${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-util/intltool"
