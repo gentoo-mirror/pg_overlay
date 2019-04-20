@@ -92,12 +92,12 @@ esetup.py() {
 python_install_all() {
 	distutils-r1_python_install_all
 	if ! use console ; then
-		rm -rf "${D}/usr/$(get_libdir)/python2.7/site-packages/deluge/ui/console/" || die
+		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/console/" || die
 		rm -f "${D}/usr/bin/deluge-console" || die
 		rm -f "${D}/usr/share/man/man1/deluge-console.1" ||die
 	fi
 	if ! use gtk ; then
-		rm -rf "${D}/usr/$(get_libdir)/python2.7/site-packages/deluge/ui/gtkui/" || die
+		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/gtkui/" || die
 		rm -rf "${D}/usr/share/icons/" || die
 		rm -f "${D}/usr/bin/deluge-gtk" || die
 		rm -f "${D}/usr/share/man/man1/deluge-gtk.1" || die
@@ -107,7 +107,7 @@ python_install_all() {
 		newinitd "${FILESDIR}/deluge-web.init" deluge-web
 		newconfd "${FILESDIR}/deluge-web.conf" deluge-web
 	else
-		rm -rf "${D}/usr/$(get_libdir)/python2.7/site-packages/deluge/ui/web/" || die
+		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/web/" || die
 		rm -f "${D}/usr/bin/deluge-web" || die
 		rm -f "${D}/usr/share/man/man1/deluge-web.1" || die
 	fi
