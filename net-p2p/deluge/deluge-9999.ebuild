@@ -98,7 +98,7 @@ python_install_all() {
 		rm -f "${D}/usr/share/man/man1/deluge-console.1" ||die
 	fi
 	if ! use gtk ; then
-		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/gtkui/" || die
+		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/gtk3/" || die
 		rm -rf "${D}/usr/share/icons/" || die
 		rm -f "${D}/usr/bin/deluge-gtk" || die
 		rm -f "${D}/usr/share/man/man1/deluge-gtk.1" || die
