@@ -37,7 +37,6 @@ DEPEND="${CDEPEND}
 RDEPEND="${CDEPEND}
 	dev-python/chardet[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
-	dev-python/pyasn1[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
 	dev-python/pyxdg[${PYTHON_USEDEP}]
 	dev-python/rencode[${PYTHON_USEDEP}]
