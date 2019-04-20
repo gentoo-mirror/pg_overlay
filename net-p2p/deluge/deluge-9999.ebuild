@@ -30,19 +30,19 @@ REQUIRED_USE="
 	sound? ( gtk )
 	libnotify? ( gtk )
 "
-PATCHES=(
-	#"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
-)
-
 CDEPEND=">=net-libs/libtorrent-rasterbar-1.2.0[python,${PYTHON_USEDEP}]"
 DEPEND="${CDEPEND}
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	dev-util/intltool"
 RDEPEND="${CDEPEND}
 	dev-python/chardet[${PYTHON_USEDEP}]
+	dev-python/pillow[${PYTHON_USEDEP}]
+	dev-python/pyasn1[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
 	dev-python/pyxdg[${PYTHON_USEDEP}]
+	dev-python/rencode[${PYTHON_USEDEP}]
 	dev-python/setproctitle[${PYTHON_USEDEP}]
+	dev-python/service_identity[${PYTHON_USEDEP}]
 	|| ( >=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
 		>=dev-python/twisted-web-13.0[${PYTHON_USEDEP}]
 	)
@@ -51,7 +51,6 @@ RDEPEND="${CDEPEND}
 	gtk? (
 		sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
-		dev-python/pillow[${PYTHON_USEDEP}]
 		>=dev-python/pygtk-2.12[python_targets_python2_7]
 		gnome-base/librsvg
 		libnotify? ( dev-python/notify-python[${PYTHON_USEDEP}] )
