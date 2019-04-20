@@ -46,10 +46,12 @@ RDEPEND="${CDEPEND}
 	|| ( >=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
 		>=dev-python/twisted-web-13.0[${PYTHON_USEDEP}]
 	)
+	dev-python/wheel[${PYTHON_USEDEP}]
 	geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 	gtk? (
 		sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
+		dev-python/pillow[${PYTHON_USEDEP}]
 		>=dev-python/pygtk-2.12[python_targets_python2_7]
 		gnome-base/librsvg
 		libnotify? ( dev-python/notify-python[${PYTHON_USEDEP}] )
