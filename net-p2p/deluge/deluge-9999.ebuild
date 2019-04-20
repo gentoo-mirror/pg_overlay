@@ -57,16 +57,16 @@ RDEPEND="${CDEPEND}
 	webinterface? ( dev-python/mako[${PYTHON_USEDEP}] )"
 
 python_prepare_all() {
-	local args=(
-		-e "/Compiling po file/a \\\tuptoDate = False"
-	)
-	sed -i "${args[@]}" -- 'setup.py' || die
-	args=(
-		-e 's|"new_release_check": True|"new_release_check": False|'
-		-e 's|"check_new_releases": True|"check_new_releases": False|'
-		-e 's|"show_new_releases": True|"show_new_releases": False|'
-	)
-	sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
+	#local args=(
+	#	-e "/Compiling po file/a \\\tuptoDate = False"
+	#)
+	#sed -i "${args[@]}" -- 'setup.py' || die
+	#args=(
+	#	-e 's|"new_release_check": True|"new_release_check": False|'
+	#	-e 's|"check_new_releases": True|"check_new_releases": False|'
+	#	-e 's|"show_new_releases": True|"show_new_releases": False|'
+	#)
+	#sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
 
 	local loc_dir="${S}/deluge/i18n"
 	l10n_find_plocales_changes "${loc_dir}" "" ".po"
