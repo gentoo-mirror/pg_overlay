@@ -6,7 +6,7 @@ EAPI="7"
 PYTHON_COMPAT=( python3_7 )
 DISTUTILS_SINGLE_IMPL=1
 PLOCALES="ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fr fy gl he hi hr hu id is it iu ja ka kk kn ko ku la lt lv mk ms nb nds nl pl pms pt pt_BR ro ru si sk sl sr sv ta th tl tlh tr uk vi zh_CN zh_HK zh_TW"
-inherit distutils-r1 eutils user l10n
+inherit distutils-r1 eutils l10n
 
 DESCRIPTION="BitTorrent client with a client/server model"
 HOMEPAGE="https://deluge-torrent.org/"
@@ -93,12 +93,12 @@ esetup.py() {
 python_install_all() {
 	distutils-r1_python_install_all
 	if ! use console ; then
-		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/console/" || die
+		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/console/" || die
 		rm -f "${D}/usr/bin/deluge-console" || die
 		rm -f "${D}/usr/share/man/man1/deluge-console.1" ||die
 	fi
 	if ! use gtk ; then
-		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/gtkui/" || die
+		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/gtkui/" || die
 		rm -rf "${D}/usr/share/icons/" || die
 		rm -f "${D}/usr/bin/deluge-gtk" || die
 		rm -f "${D}/usr/share/man/man1/deluge-gtk.1" || die
@@ -108,7 +108,7 @@ python_install_all() {
 		newinitd "${FILESDIR}/deluge-web.init" deluge-web
 		newconfd "${FILESDIR}/deluge-web.conf" deluge-web
 	else
-		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/web/" || die
+		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/web/" || die
 		rm -f "${D}/usr/bin/deluge-web" || die
 		rm -f "${D}/usr/share/man/man1/deluge-web.1" || die
 	fi
