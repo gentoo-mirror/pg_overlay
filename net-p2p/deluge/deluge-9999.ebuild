@@ -86,7 +86,7 @@ esetup.py() {
 	# This does not respect the distutils-r1 API. DONOT copy this example.
 	set -- "${PYTHON}" setup.py "$@"
 	echo "$@"
-	"$@" #|| die
+	"$@" || die
 }
 
 python_install_all() {
