@@ -36,6 +36,7 @@ DEPEND="${CDEPEND}
 	dev-util/intltool"
 RDEPEND="${CDEPEND}
 	dev-python/chardet[${PYTHON_USEDEP}]
+	dev-python/mako[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
 	dev-python/pyxdg[${PYTHON_USEDEP}]
