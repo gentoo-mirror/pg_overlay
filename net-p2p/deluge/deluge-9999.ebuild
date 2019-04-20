@@ -75,7 +75,7 @@ python_prepare_all() {
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 
-	sed -i '/tag_build = -dev/d' setup.cfg || die
+	#sed -i '/tag_build = -dev/d' setup.cfg || die
 
 	distutils-r1_python_prepare_all
 }
@@ -86,7 +86,7 @@ esetup.py() {
 	# This does not respect the distutils-r1 API. DONOT copy this example.
 	set -- "${PYTHON}" setup.py "$@"
 	echo "$@"
-	"$@" || die
+	"$@" #|| die
 }
 
 python_install_all() {
