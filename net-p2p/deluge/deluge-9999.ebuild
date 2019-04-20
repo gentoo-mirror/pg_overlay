@@ -31,7 +31,7 @@ REQUIRED_USE="
 	libnotify? ( gtk )
 "
 PATCHES=(
-	"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
+	#"${FILESDIR}/${PN}-1.3.12-fix_scheduler_plugin.patch"
 )
 
 CDEPEND=">=net-libs/libtorrent-rasterbar-1.2.0[python,${PYTHON_USEDEP}]"
@@ -49,8 +49,8 @@ RDEPEND="${CDEPEND}
 	geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 	gtk? (
 		sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
-		dev-python/pygobject:2[${PYTHON_USEDEP}]
-		>=dev-python/pygtk-2.12[${PYTHON_USEDEP}]
+		dev-python/pygobject:3[${PYTHON_USEDEP}]
+		>=dev-python/pygtk-2.12[python_targets_python2_7]
 		gnome-base/librsvg
 		libnotify? ( dev-python/notify-python[${PYTHON_USEDEP}] )
 	)
