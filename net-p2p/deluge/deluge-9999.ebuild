@@ -5,7 +5,7 @@ EAPI="7"
 
 PYTHON_COMPAT=( python3_7 )
 DISTUTILS_SINGLE_IMPL=1
-PLOCALES="af ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fo fr fy ga gl he hi hr hu id is it iu ja ka kk km kn ko ku ky la lb lt lv mk ml ms nap nb nds nl nn oc pl pms pt pt_BR ro ru si sk sl sr sv ta te th tl tlh tr uk ur vi zh_CN zh_HK zh_TW"
+PLOCALES="ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fr fy gl he hi hr hu id is it iu ja ka kk kn ko ku la lt lv mk ms nb nds nl pl pms pt pt_BR ro ru si sk sl sr sv ta th tl tlh tr uk vi zh_CN zh_HK zh_TW"
 inherit distutils-r1 eutils user l10n
 
 DESCRIPTION="BitTorrent client with a client/server model"
@@ -57,16 +57,16 @@ RDEPEND="${CDEPEND}
 	webinterface? ( dev-python/mako[${PYTHON_USEDEP}] )"
 
 python_prepare_all() {
-	#local args=(
-	#	-e "/Compiling po file/a \\\tuptoDate = False"
-	#)
+	local args=(
+		-e "/Compiling po file/a \\\tuptoDate = False"
+	)
 	#sed -i "${args[@]}" -- 'setup.py' || die
-	#args=(
-	#	-e 's|"new_release_check": True|"new_release_check": False|'
-	#	-e 's|"check_new_releases": True|"check_new_releases": False|'
-	#	-e 's|"show_new_releases": True|"show_new_releases": False|'
-	#)
-	#sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
+	args=(
+		-e 's|"new_release_check": True|"new_release_check": False|'
+		-e 's|"check_new_releases": True|"check_new_releases": False|'
+		-e 's|"show_new_releases": True|"show_new_releases": False|'
+	)
+	sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
 
 	local loc_dir="${S}/deluge/i18n"
 	l10n_find_plocales_changes "${loc_dir}" "" ".po"
