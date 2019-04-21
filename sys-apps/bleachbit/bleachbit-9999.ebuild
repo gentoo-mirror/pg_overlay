@@ -18,9 +18,9 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+gtk"
 
-RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP]
-	dev-python/setuptools[$PYTHON_USEDEP])"
-DEPEND="${RDEPEND}"
+RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP])"
+DEPEND="${RDEPEND}
+	dev-python/setuptools[$PYTHON_USEDEP]"
 BDEPEND="sys-devel/gettext"
 
 python_prepare_all() {
