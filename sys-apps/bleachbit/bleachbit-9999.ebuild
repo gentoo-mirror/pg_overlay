@@ -12,20 +12,21 @@ inherit desktop distutils-r1 l10n git-r3
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="https://bleachbit.org/"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
+EGIT_BRANCH="gtk3"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 IUSE="+gtk"
 
-RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP])"
+RDEPEND="gtk? ( dev-python/pygobject:3[$PYTHON_USEDEP])"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[$PYTHON_USEDEP]"
 BDEPEND="sys-devel/gettext"
 
 python_prepare_all() {
 	rem_locale() {
-		rm "po/${1}.po" || die "removing of ${1}.po failed"
+		rm -fv "po/${1}.po" || die "removing of ${1}.po failed"
 	}
 
 	l10n_find_plocales_changes po "" ".po"
