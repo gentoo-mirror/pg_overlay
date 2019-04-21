@@ -31,7 +31,7 @@ python_prepare_all() {
 
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rem_locale
-bleachbit/GUI.py
+
 	sed -i "s/bleachbit.bleachbit_exe_path, 'data', 'app-menu.ui'/bleachbit.bleachbit_exe_path, 'bleachbit', 'data', 'app-menu.ui'/g" bleachbit/GUI.py || die
 
 	# choose correct Python implementation, bug #465254
