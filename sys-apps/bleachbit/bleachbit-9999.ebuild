@@ -18,7 +18,8 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+gtk"
 
-RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP] )"
+RDEPEND="gtk? ( dev-python/pygtk:2[$PYTHON_USEDEP]
+	dev-python/setuptools[$PYTHON_USEDEP])"
 DEPEND="${RDEPEND}"
 BDEPEND="sys-devel/gettext"
 
