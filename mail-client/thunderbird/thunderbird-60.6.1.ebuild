@@ -240,6 +240,8 @@ src_prepare() {
 		"${WORKDIR}"/firefox/2005_ffmpeg4.patch \
 		"${WORKDIR}"/firefox/2012_update-cc-to-honor-CC.patch \
 		|| die
+	rm -f "${WORKDIR}"/firefox/2015_dont_use_gconf_for_proxy_configuration_bug1540145.patch || die
+
 	eapply "${WORKDIR}/firefox"
 
 	eapply "${FILESDIR}"/thunderbird-60-sqlite3-fts3-tokenizer.patch
