@@ -10,7 +10,7 @@ PYTHON_REQ_USE="sqlite(+)"
 inherit desktop distutils-r1 l10n git-r3
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
-HOMEPAGE="http://bleachbit.org/"
+HOMEPAGE="https://bleachbit.org/"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 
 LICENSE="GPL-3"
