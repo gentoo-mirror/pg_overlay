@@ -3,7 +3,6 @@ chromium-dma-buf.patch
 chromium-drm.patch
 chromium-sandbox-pie.patch
 chromium-system-libusb.patch
-chromium-fix_swiftshader.patch
 chromium-fix_crashpad.patch
 chromium-skia-system-fontconfig.patch
 chromium-prop-codecs.patch
