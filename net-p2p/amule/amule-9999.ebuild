@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
-WX_GTK_VER="3.0"
+WX_GTK_VER="3.0-gtk3"
 
 inherit git-r3 l10n wxwidgets
 
@@ -14,23 +14,30 @@ EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="daemon debug geoip gtk3 gui +nls stats +unicode upnp X +mmap +boost webserver"
+IUSE="daemon debug geoip gtk3 gui +nls stats +unicode upnp X +mmap webserver"
 
 COMMON_DEPEND="
-	dev-libs/crypto++
+	dev-libs/boost:=
+	dev-libs/crypto++:=
 	sys-libs/binutils-libs:0=
 	sys-libs/zlib
+	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
 	stats? ( media-libs/gd:=[jpeg,png] )
 	geoip? ( dev-libs/geoip )
-	gtk3? ( x11-libs/wxGTK:${WX_GTK_VER}-gtk3[X?] )
-	!gtk3? ( x11-libs/wxGTK:${WX_GTK_VER}[X?] )
 	upnp? ( net-libs/libupnp:* )
-	gui? ( media-libs/libpng:0=
-	unicode? ( media-libs/gd:= ) )
-	boost? ( dev-libs/boost:= )
+	webserver? ( media-libs/libpng:0= )
 	!net-p2p/imule"
 DEPEND="${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}"
+
+PATCHES=(
+	"${FILESDIR}/${PN}-2.3.2-fix-crash-shared-dir-utf8.patch"
+	"${FILESDIR}/${PN}-2.3.2-fix-crash-closing-last-search-tab-1.patch"
+	"${FILESDIR}/${PN}-2.3.2-fix-crash-closing-last-search-tab-2.patch"
+	"${FILESDIR}/${PN}-2.3.2-cryptopp-6.patch"
+	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
+	"${FILESDIR}/${PN}-2.3.2-fix-crash-when-shared-files-changed.patch"
+)
 
 pkg_setup() {
 	if use stats && ! use X; then
@@ -38,6 +45,8 @@ pkg_setup() {
 		einfo "to compile aMule Statistics GUI."
 		einfo "I will now compile console versions only."
 	fi
+
+	setup-wxwidgets
 }
 
 src_prepare() {
@@ -54,39 +63,25 @@ src_prepare() {
 src_configure() {
 	local myconf
 
-	if use gtk3 ; then
-		WX_GTK_VER="${WX_GTK_VER}-gtk3"
-		myconf="${myconf}
-			--with-toolkit=gtk3"
-	fi
-
-	if use X; then
-		einfo "wxGTK with X support will be used"
-		need-wxwidgets unicode
-	else
-		einfo "wxGTK without X support will be used"
-		need-wxwidgets base-unicode
-	fi
-
 	if use X ; then
-		use stats && myconf="${myconf}
-			--enable-wxcas
-			--enable-alc"
-		use gui && myconf="${myconf}
-			--enable-amule-gui
+		myconf="
+			$(use_enable gui amule-gui)
+			$(use_enable stats alc)
+			$(use_enable stats wxcas)
 			--disable-monolithic"
 	else
 		myconf="
 			--disable-monolithic
 			--disable-amule-gui
-			--disable-wxcas
-			--disable-alc"
+			--disable-alc
+			--disable-wxcas"
 	fi
 
 	econf \
 		--with-denoise-level=0 \
 		--with-wx-config="${WX_CONFIG}" \
 		--enable-amulecmd \
+		--with-boost \
 		$(use_enable debug) \
 		$(use_enable daemon amule-daemon) \
 		$(use_enable geoip) \
@@ -96,7 +91,6 @@ src_configure() {
 		$(use_enable stats alcc) \
 		$(use_enable upnp) \
 		$(use_enable mmap mmap) \
-		$(use_with boost) \
 		${myconf}
 }
 
