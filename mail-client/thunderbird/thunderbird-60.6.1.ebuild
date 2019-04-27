@@ -19,7 +19,7 @@ MOZ_PV="${PV/_beta/b}"
 
 # Patches
 PATCHTB="thunderbird-60.0-patches-0"
-PATCHFF="firefox-60.6-patches-05"
+PATCHFF="firefox-60.6-patches-07"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
@@ -61,7 +61,6 @@ CDEPEND="
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
-	>=x11-libs/gtk+-2.18:2
 	>=x11-libs/gtk+-3.4.0:3
 	x11-libs/gdk-pixbuf
 	>=x11-libs/pango-1.22.0
