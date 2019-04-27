@@ -1,0 +1,71 @@
+description: disable browser sign-in
+origin: https://raw.githubusercontent.com/Eloston/ungoogled-chromium/master/resources/patches/ungoogled-chromium/disable-signin.patch
+
+--- a/components/signin/core/browser/signin_manager_base.cc
++++ b/components/signin/core/browser/signin_manager_base.cc
+@@ -157,7 +157,7 @@ void SigninManagerBase::FinalizeInitBefo
+ bool SigninManagerBase::IsInitialized() const { return initialized_; }
+ 
+ bool SigninManagerBase::IsSigninAllowed() const {
+-  return client_->GetPrefs()->GetBoolean(prefs::kSigninAllowed);
++  return false;
+ }
+ 
+ AccountInfo SigninManagerBase::GetAuthenticatedAccountInfo() const {
+--- a/chrome/browser/ui/chrome_pages.cc
++++ b/chrome/browser/ui/chrome_pages.cc
+@@ -379,6 +379,7 @@ void ShowSearchEngineSettings(Browser* b
+ #if !defined(OS_ANDROID) && !defined(OS_CHROMEOS)
+ void ShowBrowserSignin(Browser* browser,
+                        signin_metrics::AccessPoint access_point) {
++#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
+   Profile* original_profile = browser->profile()->GetOriginalProfile();
+   DCHECK(original_profile->GetPrefs()->GetBoolean(prefs::kSigninAllowed));
+ 
+@@ -396,6 +397,7 @@ void ShowBrowserSignin(Browser* browser,
+           : profiles::BUBBLE_VIEW_MODE_GAIA_SIGNIN;
+   browser->signin_view_controller()->ShowSignin(bubble_view_mode, browser,
+                                                 access_point);
++#endif
+ }
+ 
+ void ShowBrowserSigninOrSettings(Browser* browser,
+--- a/chrome/browser/ui/BUILD.gn
++++ b/chrome/browser/ui/BUILD.gn
+@@ -1850,9 +1850,6 @@ jumbo_split_static_library("ui") {
+       "startup/default_browser_infobar_delegate.h",
+       "startup/default_browser_prompt.cc",
+       "startup/default_browser_prompt.h",
+-      "sync/one_click_signin_links_delegate.h",
+-      "sync/one_click_signin_links_delegate_impl.cc",
+-      "sync/one_click_signin_links_delegate_impl.h",
+       "user_manager.cc",
+       "user_manager.h",
+       "views/external_protocol_dialog.cc",
+@@ -3030,8 +3027,6 @@ jumbo_split_static_library("ui") {
+         "views/sync/dice_bubble_sync_promo_view.h",
+         "views/sync/dice_signin_button_view.cc",
+         "views/sync/dice_signin_button_view.h",
+-        "views/sync/one_click_signin_dialog_view.cc",
+-        "views/sync/one_click_signin_dialog_view.h",
+         "views/tabs/window_finder.cc",
+       ]
+       deps += [ "//ui/views/window/vector_icons" ]
+--- a/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
++++ b/chrome/browser/ui/webui/signin/inline_login_handler_impl.cc
+@@ -411,6 +411,7 @@ void InlineSigninHelper::OnClientOAuthSu
+     signin_metrics::LogSigninReason(
+         GetSigninReasonFromHandlerSigninReason(reason));
+   } else {
++#if BUILDFLAG(ENABLE_ONE_CLICK_SIGNIN)
+     if (confirm_untrusted_signin_) {
+       // Display a confirmation dialog to the user.
+       base::RecordAction(
+@@ -422,6 +423,7 @@ void InlineSigninHelper::OnClientOAuthSu
+                          base::Unretained(this), result.refresh_token));
+       return;
+     }
++#endif
+     CreateSyncStarter(result.refresh_token);
+   }
+   base::ThreadTaskRunnerHandle::Get()->DeleteSoon(FROM_HERE, this);
