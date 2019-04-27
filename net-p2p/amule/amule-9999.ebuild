@@ -14,7 +14,7 @@ EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="daemon debug geoip gtk3 gui +nls stats +unicode upnp X +mmap webserver"
+IUSE="daemon debug geoip gtk3 gui +nls stats upnp X +mmap webserver"
 
 COMMON_DEPEND="
 	dev-libs/boost:=
