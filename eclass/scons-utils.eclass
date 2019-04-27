@@ -131,7 +131,7 @@ elif [[ ${_PYTHON_SINGLE_R1} ]]; then
 		${PYTHON_DEPS}"
 elif [[ ${EAPI:-0} == [0123456] ]]; then
 	# in older EAPIs, just force Python 2.7
-	BDEPEND="${SCONS_DEPEND}[ || python_targets_python2_7 python_targets_python3_7 ]"
+	BDEPEND="${SCONS_DEPEND}[${PYTHON_USEDEP}]"
 elif [[ ${_PYTHON_R1} ]]; then
 	# when using python-r1, you need to depend on scons yourself
 	# (depending on whether you need any-r1 or full -r1 API)
