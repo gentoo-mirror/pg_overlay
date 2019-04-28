@@ -1,6 +1,7 @@
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
+dev-libs/nettle 3.4.1: Low-level cryptographic library
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/josepy 1.1.0: JOSE protocol implementation in Python
 dev-python/pygame 1.9.4: Python bindings for SDL multimedia library
