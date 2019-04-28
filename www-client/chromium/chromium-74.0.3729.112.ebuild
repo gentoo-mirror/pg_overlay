@@ -251,6 +251,7 @@ src_prepare() {
 		third_party/crashpad/crashpad/third_party/zlib
 		third_party/crc32c
 		third_party/cros_system_api
+		third_party/dav1d
 		third_party/devscripts
 		third_party/dom_distiller_js
 		third_party/fips181
