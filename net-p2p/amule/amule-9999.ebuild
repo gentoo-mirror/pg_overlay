@@ -31,8 +31,8 @@ DEPEND="${COMMON_DEPEND}"
 RDEPEND="${COMMON_DEPEND}"
 
 PATCHES=(
-	#"${FILESDIR}/${PN}-2.3.2-fix-crash-shared-dir-utf8.patch"
-	#"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
+	"${FILESDIR}/${PN}-2.3.2-fix-crash-shared-dir-utf8.patch"
+	"${FILESDIR}/${PN}-2.3.2-fix-crash-when-shared-files-changed.patch"
 )
 
 pkg_setup() {
