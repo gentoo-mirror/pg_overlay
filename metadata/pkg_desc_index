@@ -15,4 +15,3 @@ net-im/pidgin 2.13.0: GTK Instant Messenger client
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
 net-libs/serf 1.3.9: HTTP client library
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
-x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
