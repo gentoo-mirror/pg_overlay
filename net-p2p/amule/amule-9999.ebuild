@@ -32,11 +32,7 @@ RDEPEND="${COMMON_DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-fix-crash-shared-dir-utf8.patch"
-	"${FILESDIR}/${PN}-2.3.2-fix-crash-closing-last-search-tab-1.patch"
-	"${FILESDIR}/${PN}-2.3.2-fix-crash-closing-last-search-tab-2.patch"
-	"${FILESDIR}/${PN}-2.3.2-cryptopp-6.patch"
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
-	"${FILESDIR}/${PN}-2.3.2-fix-crash-when-shared-files-changed.patch"
 )
 
 pkg_setup() {
@@ -50,6 +46,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
 	}
@@ -57,7 +54,6 @@ src_prepare() {
 	l10n_for_each_disabled_locale_do rem_locale
 	
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
-	default
 }
 
 src_configure() {
