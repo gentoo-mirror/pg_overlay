@@ -1,5 +1,4 @@
 configure_ignore_gdlib-config_garbage.diff
 cas_configfile.c_good_default_paths.diff
 use_xdg-open_as_preview_default.diff
-17816ed02f59bab9c27310e7f24c73266b0a3003.patch
 libupnp1.8.patch
