@@ -32,7 +32,6 @@ RDEPEND="${COMMON_DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-fix-crash-shared-dir-utf8.patch"
-	"${FILESDIR}/${PN}-2.3.2-fix-crash-closing-last-search-tab-1.patch"
 	"${FILESDIR}/${PN}-2.3.2-fix-crash-closing-last-search-tab-2.patch"
 	"${FILESDIR}/${PN}-2.3.2-cryptopp-6.patch"
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
