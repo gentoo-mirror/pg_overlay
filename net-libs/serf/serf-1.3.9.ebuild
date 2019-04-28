@@ -25,7 +25,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	epatch "${FILESDIR}/libserf-python3.patch"
-	epatch "${FILESDIR}/libserf-python3-3.patch"
+	epatch "${FILESDIR}/libserf-python3-2.patch"
 	epatch "${FILESDIR}/${PN}-1.3.8-static-lib.patch"
 	epatch "${FILESDIR}/${PN}-1.3.8-openssl.patch"
 
