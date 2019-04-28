@@ -50,6 +50,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
 	}
@@ -57,7 +58,6 @@ src_prepare() {
 	l10n_for_each_disabled_locale_do rem_locale
 	
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
-	default
 }
 
 src_configure() {
