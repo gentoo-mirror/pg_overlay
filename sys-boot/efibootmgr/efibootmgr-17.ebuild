@@ -18,6 +18,8 @@ RDEPEND="sys-apps/pciutils
 	>=sys-libs/efivar-25:="
 DEPEND="${RDEPEND}"
 
+PATCHES=("${FILESDIR}/efivar.patch")
+
 src_prepare() {
 	default
 	sed -i -e 's/-Werror //' Make.defaults || die
