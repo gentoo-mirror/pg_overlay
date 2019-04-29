@@ -252,6 +252,7 @@ src_prepare() {
 		third_party/dav1d
 		third_party/devscripts
 		third_party/dom_distiller_js
+		third_party/emoji-segmenter
 		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
