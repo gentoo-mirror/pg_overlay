@@ -609,13 +609,16 @@ src_configure() {
 	myconf_gn+=" use_new_tcmalloc=true"
 
 	#
-	append-cxxflags "-stdlib=libc++"
-	append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
-	append-ldflags "-Wl,-lgcc_s"
+	append-cxxflags -stdlib=libc++
+	append-ldflags -stdlib=libc++ -Wl,-lc++abi
+	append-ldflags -Wl,-lgcc_s
 	append-flags -Wno-unknown-warning-option
 	append-cflags -Wno-builtin-macro-redefined
 	append-cxxflags -Wno-builtin-macro-redefined
-	append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
+	append-cppflags -D__DATE__= -D__TIME__= -D__TIMESTAMP__=
+	append-cflags -fno-unwind-tables -fno-asynchronous-unwind-tables
+    append-cxxflags -fno-unwind-tables -fno-asynchronous-unwind-tables
+    append-cppflags -DNO_UNWIND_TABLES
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
