@@ -6,7 +6,6 @@ chromium-sandbox-pie.patch
 chromium-system-libusb.patch
 chromium-gcc.patch
 00-basevalue.patch
-01-basevalue.patch
 02-basevalue.patch
 03-basevalue.patch
 04-basevalue.patch
