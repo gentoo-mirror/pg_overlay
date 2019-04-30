@@ -7,7 +7,6 @@ chromium-gcc.patch
 00-basevalue.patch
 02-basevalue.patch
 03-basevalue.patch
-quic.patch
 chromium-vaapi.patch
 chromium-skia-system-fontconfig.patch
 chromium-prop-codecs.patch
