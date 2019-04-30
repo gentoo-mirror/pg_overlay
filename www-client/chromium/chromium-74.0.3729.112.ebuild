@@ -636,8 +636,6 @@ src_configure() {
 		popd > /dev/null || die
 	fi
 
-	setup_compile_flags
-
 	einfo "Configuring Chromium..."
 	set -- gn gen --args="${myconf_gn} ${EXTRA_GN}" out/Release
 	echo "$@"
