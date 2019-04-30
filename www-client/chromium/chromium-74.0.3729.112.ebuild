@@ -391,72 +391,6 @@ src_prepare() {
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
 }
 
-setup_compile_flags() {
-	# Avoid CFLAGS problems (Bug #352457, #390147)
-	if ! use custom-cflags; then
-		replace-flags "-Os" "-O2"
-		strip-flags
-
-		# Filter common/redundant flags. See build/config/compiler/BUILD.gn
-		filter-flags -fomit-frame-pointer -fno-omit-frame-pointer \
-			-fstack-protector* -fno-stack-protector* -fuse-ld=* -g* -Wl,*
-
-		# Prevent libvpx build failures (Bug #530248, #544702, #546984)
-		filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
-	fi
-
-	if use libcxx; then
-		append-cxxflags "-stdlib=libc++"
-		append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
-	else
-		if has_version 'sys-devel/clang[default-libcxx]'; then
-			append-cxxflags "-stdlib=libstdc++"
-			append-ldflags "-stdlib=libstdc++"
-		fi
-	fi
-
-	# 'gcc_s' is still required if 'compiler-rt' is Clang's default rtlib
-	has_version 'sys-devel/clang[default-compiler-rt]' && \
-		append-ldflags "-Wl,-lgcc_s"
-
-	if use thinlto; then
-		# We need to change the default value of import-instr-limit in
-		# LLVM to limit the text size increase. The default value is
-		# 100, and we change it to 30 to reduce the text size increase
-		# from 25% to 10%. The performance number of page_cycler is the
-		# same on two of the thinLTO configurations, we got 1% slowdown
-		# on speedometer when changing import-instr-limit from 100 to 30.
-		local thinlto_ldflag=( "-Wl,-plugin-opt,-import-instr-limit=30" )
-
-		use gold && thinlto_ldflag+=(
-			"-Wl,-plugin-opt=thinlto"
-			"-Wl,-plugin-opt,jobs=$(makeopts_jobs)"
-		)
-
-		use lld && thinlto_ldflag+=( "-Wl,--thinlto-jobs=$(makeopts_jobs)" )
-
-		append-ldflags "${thinlto_ldflag[*]}"
-	else
-		use gold && append-ldflags "-Wl,--threads -Wl,--thread-count=$(makeopts_jobs)"
-	fi
-
-	# Don't complain if Chromium uses a diagnostic option that is not yet
-	# implemented in the compiler version used by the user. This is only
-	# supported by Clang.
-	append-flags -Wno-unknown-warning-option
-
-	# Facilitate deterministic builds (taken from build/config/compiler/BUILD.gn)
-	append-cflags -Wno-builtin-macro-redefined
-	append-cxxflags -Wno-builtin-macro-redefined
-	append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
-
-	local flags
-	einfo "Building with the compiler settings:"
-	for flags in {C,CXX,CPP,LD}FLAGS; do
-		einfo "  ${flags} = ${!flags}"
-	done
-}
-
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup
@@ -701,8 +635,6 @@ src_configure() {
 		chromium/scripts/generate_gn.py || die
 		popd > /dev/null || die
 	fi
-
-	setup_compile_flags
 
 	einfo "Configuring Chromium..."
 	set -- gn gen --args="${myconf_gn} ${EXTRA_GN}" out/Release
