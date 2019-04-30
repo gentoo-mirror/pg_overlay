@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PLOCALES="ar_SA ay_WI be_BY be_BY@latin bg_BG cs_CZ de_DE el_GR es_AR es_BO es_ES fa_IR fr_FR it_IT ja_JP ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR qu_WI ru_RU sk_SK sq_AL sr_SR sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
+PLOCALES="ar_SA ay_WI be_BY be_BY@latin bg_BG cs_CZ de_DE el_GR eo_EO es_AR es_BO es_ES fa_IR fi_FI fr_FR it_IT ja_JP ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR qt_es qt_it qt_lt qu_WI ru_RU sk_SK sq_AL sr_SR sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
 
 inherit eutils qmake-utils git-r3 l10n
 
@@ -66,6 +66,14 @@ src_prepare() {
 
 	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> ${PN}.pro
 	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
+
+	local loc_dir="${S}/locale"
+	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
+	rm_loc() {
+		rm -vf "${loc_dir}/${1}.ts" || die
+		sed -e "s;locale/${1}.ts;;" -i ${PN}.pro || die
+	}
+	l10n_for_each_disabled_locale_do rm_loc
 }
 
 src_configure() {
@@ -82,7 +90,7 @@ src_configure() {
 install_locale() {
 	insinto /usr/share/apps/${PN}/locale
 	doins "${S}"/locale/${1}.qm
-	eend $? || dir "failed to install $1 locale"
+	eend $? || die "failed to install $1 locale"
 }
 
 src_install() {
