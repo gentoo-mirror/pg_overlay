@@ -66,6 +66,13 @@ src_prepare() {
 
 	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> ${PN}.pro
 	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
+
+	local loc_dir="${S}/locale"
+	l10n_find_plocales_changes "${loc_dir}" "" ".po"
+	rm_loc() {
+		rm -vf "${loc_dir}/${1}.po" || die
+	}
+	l10n_for_each_disabled_locale_do rm_loc
 }
 
 src_configure() {
@@ -82,7 +89,7 @@ src_configure() {
 install_locale() {
 	insinto /usr/share/apps/${PN}/locale
 	doins "${S}"/locale/${1}.qm
-	eend $? || dir "failed to install $1 locale"
+	eend $? || die "failed to install $1 locale"
 }
 
 src_install() {
