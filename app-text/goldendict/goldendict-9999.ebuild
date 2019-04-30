@@ -71,7 +71,7 @@ src_prepare() {
 	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
 	rm_loc() {
 		rm -vf "locale/${1}.ts" || die
-		sed -i "s/locale/${1}.ts//g" ${PN}.pro || die
+		sed -i "/${1}.ts/d" ${PN}.pro || die
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 }
@@ -94,9 +94,9 @@ install_locale() {
 }
 
 src_install() {
-	dobin ${PN}
-	domenu redist/${PN}.desktop
-	doicon redist/icons/${PN}.png
+	newbin ${PN}
+	newmenu redist/${PN}.desktop
+	newicon redist/icons/${PN}.png
 
 	insinto /usr/share/${PN}/help
 	doins help/gdhelp_en.qch
