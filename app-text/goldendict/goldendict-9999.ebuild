@@ -71,7 +71,7 @@ src_prepare() {
 	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
 	rm_loc() {
 		rm -vf "${loc_dir}/${1}.ts" || die
-		sed -e "s;locale/${1}.ts;;" -i ${PN}.pro || die
+		sed -i "s/locale/${1}.ts//g" ${PN}.pro || die
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 }
