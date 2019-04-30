@@ -3,7 +3,6 @@ chromium-buildname.patch
 chromium-non-void-return.patch
 chromium-drm.patch
 chromium-sandbox-pie.patch
-chromium-system-icu.patch
 chromium-system-libusb.patch
 chromium-gcc.patch
 00-basevalue.patch
