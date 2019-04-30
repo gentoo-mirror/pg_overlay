@@ -96,7 +96,7 @@ install_locale() {
 src_install() {
 	dobin ${PN}
 	domenu redist/${PN}.desktop
-	doicon redist/icons/${PN}.png
+	doeicon redist/icons/${PN}.png
 
 	insinto /usr/share/${PN}/help
 	doins help/gdhelp_en.qch
