@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+closure-compile component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine gold +libcxx +lld +thinlto"
+IUSE="+closure-compile component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="component-build? ( !suid )"
 
@@ -465,12 +465,6 @@ src_configure() {
 
 	# Make sure the build system will use the right tools, bug #340795.
 	tc-export AR CC CXX NM RANLIB
-	# Force clang
-	CC=${CHOST}-clang
-	CXX=${CHOST}-clang++
-	AR=llvm-ar
-	NM=llvm-nm
-	RANLIB=llvm-ranlib
 
 	if [[ ${CHROMIUM_FORCE_CLANG} == yes ]] && ! tc-is-clang; then
 		# Force clang since gcc is pretty broken at the moment.
@@ -569,10 +563,10 @@ src_configure() {
 	# Never use bundled gold binary. Disable gold linker flags for now.
 	# Do not use bundled clang.
 	# Trying to use gold results in linker crash.
-	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
+	myconf_gn+=" use_gold=gold use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	# Disable forced lld, bug 641556
-	myconf_gn+=" use_lld=true"
+	myconf_gn+=" use_lld=false"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
@@ -677,8 +671,8 @@ src_configure() {
 
 	#
 	myconf_gn+=" optimize_for_size=false"
-	myconf_gn+=" thin_lto_enable_optimizations=true"
-	myconf_gn+=" use_thin_lto=true"
+	#myconf_gn+=" thin_lto_enable_optimizations=true"
+	#myconf_gn+=" use_thin_lto=true"
 	myconf_gn+=" use_new_tcmalloc=true"
 
 	# https://bugs.gentoo.org/588596
@@ -718,7 +712,7 @@ src_configure() {
 
 src_compile() {
 	# Final link uses lots of file descriptors.
-	ulimit -n 2048
+	ulimit -n 4096
 
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup
