@@ -68,9 +68,9 @@ src_prepare() {
 	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
 
 	local loc_dir="${S}/locale"
-	l10n_find_plocales_changes "${loc_dir}" "" ".po"
+	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
 	rm_loc() {
-		rm -vf "${loc_dir}/${1}.po" || die
+		rm -vf "${loc_dir}/${1}.ts" || die
 		sed -e "s;locale/${1}.ts;;" -i ${PN}.pro || die
 	}
 	l10n_for_each_disabled_locale_do rm_loc
