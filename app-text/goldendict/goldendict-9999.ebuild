@@ -4,7 +4,7 @@
 EAPI=7
 PLOCALES="ar_SA ay_WI be_BY be_BY@latin bg_BG cs_CZ de_DE el_GR eo_EO es_AR es_BO es_ES fa_IR fi_FI fr_FR it_IT ja_JP ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR qt_es qt_it qt_lt qu_WI ru_RU sk_SK sq_AL sr_SR sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
 
-inherit eutils qmake-utils git-r3 l10n
+inherit desktop eutils qmake-utils git-r3 l10n
 
 DESCRIPTION="Feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
@@ -71,7 +71,7 @@ src_prepare() {
 	l10n_find_plocales_changes "${loc_dir}" "" ".ts"
 	rm_loc() {
 		rm -vf "locale/${1}.ts" || die
-		sed -i "s/locale/${1}.ts//g" ${PN}.pro || die
+		sed -i "/${1}.ts/d" ${PN}.pro || die
 	}
 	l10n_for_each_disabled_locale_do rm_loc
 }
