@@ -17,7 +17,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+closure-compile component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine"
+IUSE="+closure-compile component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc widevine gold +libcxx +lld +thinlto"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="component-build? ( !suid )"
 
@@ -142,6 +142,7 @@ GTK+ icon theme.
 PATCHES=(
 	"${FILESDIR}/chromium-widevine-r4.patch"
 	"${FILESDIR}/chromium-fix-char_traits.patch"
+	"${FILESDIR}/chromium-glibc-2.29.patch"
 )
 
 pre_build_checks() {
@@ -186,6 +187,7 @@ src_prepare() {
 	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
 		third_party/libusb/src/libusb/libusb.h || die
 	for p in $(cat "${FILESDIR}/opensuse-patches-74/series");do eapply "${FILESDIR}/opensuse-patches-74/$p";done
+	for p in $(cat "${FILESDIR}/archlinux-patches-74/series");do eapply "${FILESDIR}/archlinux-patches-74/$p";done
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
@@ -245,7 +247,7 @@ src_prepare() {
 		third_party/ced
 		third_party/cld_3
 		third_party/crashpad
-		third_party/closure_compiler
+
 		third_party/crashpad/crashpad/third_party/zlib
 		third_party/crc32c
 		third_party/cros_system_api
@@ -265,7 +267,7 @@ src_prepare() {
 		third_party/iccjpeg
 		third_party/inspector_protocol
 		third_party/jinja2
-		third_party/jsoncpp
+
 		third_party/jstemplate
 		third_party/khronos
 		third_party/leveldatabase
@@ -294,7 +296,7 @@ src_prepare() {
 		third_party/nasm
 		third_party/node
 		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
-		third_party/openh264
+
 		third_party/openmax_dl
 		third_party/ots
 		third_party/perfetto
@@ -305,7 +307,7 @@ src_prepare() {
 		third_party/pdfium/third_party/eu-strip
 		third_party/pdfium/third_party/freetype
 		third_party/pdfium/third_party/lcms
-		third_party/pdfium/third_party/libopenjpeg20
+
 		third_party/pdfium/third_party/libpng16
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
@@ -332,7 +334,7 @@ src_prepare() {
 		third_party/swiftshader/third_party/llvm-7.0
 		third_party/swiftshader/third_party/llvm-subzero
 		third_party/swiftshader/third_party/subzero
-		third_party/tcmalloc
+
 		third_party/unrar
 		third_party/usrsctp
 		third_party/vulkan
@@ -380,8 +382,80 @@ src_prepare() {
 		keeplibs+=( third_party/tcmalloc )
 	fi
 
+	# https://crbug.com/893950
+	sed -i -e 's/\<xmlMalloc\>/malloc/' -e 's/\<xmlFree\>/free/' \
+		third_party/blink/renderer/core/xml/*.cc \
+		third_party/blink/renderer/core/xml/parser/xml_document_parser.cc \
+		third_party/libxml/chromium/libxml_utils.cc
+
 	# Remove most bundled libraries. Some are still needed.
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove || die
+}
+
+setup_compile_flags() {
+	# Avoid CFLAGS problems (Bug #352457, #390147)
+	if ! use custom-cflags; then
+		replace-flags "-Os" "-O2"
+		strip-flags
+
+		# Filter common/redundant flags. See build/config/compiler/BUILD.gn
+		filter-flags -fomit-frame-pointer -fno-omit-frame-pointer \
+			-fstack-protector* -fno-stack-protector* -fuse-ld=* -g* -Wl,*
+
+		# Prevent libvpx build failures (Bug #530248, #544702, #546984)
+		filter-flags -mno-mmx -mno-sse2 -mno-ssse3 -mno-sse4.1 -mno-avx -mno-avx2
+	fi
+
+	if use libcxx; then
+		append-cxxflags "-stdlib=libc++"
+		append-ldflags "-stdlib=libc++ -Wl,-lc++abi"
+	else
+		if has_version 'sys-devel/clang[default-libcxx]'; then
+			append-cxxflags "-stdlib=libstdc++"
+			append-ldflags "-stdlib=libstdc++"
+		fi
+	fi
+
+	# 'gcc_s' is still required if 'compiler-rt' is Clang's default rtlib
+	has_version 'sys-devel/clang[default-compiler-rt]' && \
+		append-ldflags "-Wl,-lgcc_s"
+
+	if use thinlto; then
+		# We need to change the default value of import-instr-limit in
+		# LLVM to limit the text size increase. The default value is
+		# 100, and we change it to 30 to reduce the text size increase
+		# from 25% to 10%. The performance number of page_cycler is the
+		# same on two of the thinLTO configurations, we got 1% slowdown
+		# on speedometer when changing import-instr-limit from 100 to 30.
+		local thinlto_ldflag=( "-Wl,-plugin-opt,-import-instr-limit=30" )
+
+		use gold && thinlto_ldflag+=(
+			"-Wl,-plugin-opt=thinlto"
+			"-Wl,-plugin-opt,jobs=$(makeopts_jobs)"
+		)
+
+		use lld && thinlto_ldflag+=( "-Wl,--thinlto-jobs=$(makeopts_jobs)" )
+
+		append-ldflags "${thinlto_ldflag[*]}"
+	else
+		use gold && append-ldflags "-Wl,--threads -Wl,--thread-count=$(makeopts_jobs)"
+	fi
+
+	# Don't complain if Chromium uses a diagnostic option that is not yet
+	# implemented in the compiler version used by the user. This is only
+	# supported by Clang.
+	append-flags -Wno-unknown-warning-option
+
+	# Facilitate deterministic builds (taken from build/config/compiler/BUILD.gn)
+	append-cflags -Wno-builtin-macro-redefined
+	append-cxxflags -Wno-builtin-macro-redefined
+	append-cppflags "-D__DATE__= -D__TIME__= -D__TIMESTAMP__="
+
+	local flags
+	einfo "Building with the compiler settings:"
+	for flags in {C,CXX,CPP,LD}FLAGS; do
+		einfo "  ${flags} = ${!flags}"
+	done
 }
 
 src_configure() {
@@ -607,18 +681,6 @@ src_configure() {
 	myconf_gn+=" thin_lto_enable_optimizations=true"
 	myconf_gn+=" use_thin_lto=true"
 	myconf_gn+=" use_new_tcmalloc=true"
-
-	#
-	append-cxxflags -stdlib=libc++
-	append-ldflags -stdlib=libc++ -Wl,-lc++abi
-	append-ldflags -Wl,-lgcc_s
-	append-flags -Wno-unknown-warning-option
-	append-cflags -Wno-builtin-macro-redefined
-	append-cxxflags -Wno-builtin-macro-redefined
-	append-cppflags -D__DATE__= -D__TIME__= -D__TIMESTAMP__=
-	append-cflags -fno-unwind-tables -fno-asynchronous-unwind-tables
-    append-cxxflags -fno-unwind-tables -fno-asynchronous-unwind-tables
-    append-cppflags -DNO_UNWIND_TABLES
 
 	# https://bugs.gentoo.org/588596
 	#append-cxxflags $(test-flags-CXX -fno-delete-null-pointer-checks)
