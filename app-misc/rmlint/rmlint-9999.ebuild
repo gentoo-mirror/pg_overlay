@@ -46,10 +46,10 @@ src_install(){
 
 pkg_postinst() {
 	use X && gnome2_schemas_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
 
 pkg_postrm() {
 	use X && gnome2_schemas_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
