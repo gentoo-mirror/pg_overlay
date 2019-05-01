@@ -118,7 +118,7 @@ pkg_preinst() {
 
 pkg_postinst() {
 	xdg_desktop_database_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 
 	elog "If you use transmission-daemon, please, set 'rpc-username' and"
 	elog "'rpc-password' (in plain text, transmission-daemon will hash it on"
@@ -134,5 +134,5 @@ pkg_postinst() {
 
 pkg_postrm() {
 	xdg_desktop_database_update
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 }
