@@ -1,0 +1,24 @@
+From 59a530d9456351b244ba19b24b2c4bfeaa4207ad Mon Sep 17 00:00:00 2001
+From: Luca Weiss <luca@z3ntu.xyz>
+Date: Mon, 5 Nov 2018 19:29:49 +0100
+Subject: [PATCH] Add the working directory to sys.path to fix out-of-tree
+ builds
+
+Fixes #125
+---
+ ui/setup.py.in | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/ui/setup.py.in b/ui/setup.py.in
+index dd5d7a6..2dccaec 100644
+--- a/ui/setup.py.in
++++ b/ui/setup.py.in
+@@ -1,5 +1,8 @@
+ #!/usr/bin/env python3
+ 
++import os
++import sys
++sys.path.insert(0, os.getcwd())
+ from distutils.core import setup
+ from pyrazer import RAZER_VERSION
+ 
