@@ -684,7 +684,7 @@ src_configure() {
 	#
 	myconf_gn+=" thin_lto_enable_optimizations=true"
 	myconf_gn+=" use_thin_lto=true"
-	#myconf_gn+=" use_new_tcmalloc=true"
+	myconf_gn+=" use_new_tcmalloc=true"
 
 	setup_compile_flags
 
