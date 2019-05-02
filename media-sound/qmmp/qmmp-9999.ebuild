@@ -103,9 +103,9 @@ src_prepare() {
 	fi
 
 	rm_locale() {
-		rm -vf "src/${PN}ui/translations/lib${PN}ui_${1}.ts" || die "removing of ${1}.ts failed"
+		rm -fv "src/${PN}ui/translations/lib${PN}ui_${1}.ts" || die "removing of ${1}.ts failed"
 		sed -i "/lib${PN}ui_${1}.qm/d" src/${PN}ui/translations/lib${PN}ui_locales.qrc || die "removing of ${1}.ts failed"
-		rm -vf "src/${PN}ui/txt/*${1}.txt" || die "removing of ${1}.txt failed"
+		rm -fv src/${PN}ui/txt/*${1}.txt || die "removing of ${1}.txt failed"
 		sed -i "/${1}.txt/d" src/${PN}ui/txt/txt.qrc || die "removing of ${1}.txt failed"
 	}
 	l10n_find_plocales_changes src/${PN}ui/translations "lib${PN}ui_" ".ts"
