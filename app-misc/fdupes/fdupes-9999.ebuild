@@ -9,7 +9,7 @@ MY_P="${PN}-${PV/_pre/-PR}"
 
 DESCRIPTION="Identify/delete duplicate files residing within specified directories"
 HOMEPAGE="https://github.com/adrianlopezroche/fdupes"
-EGIT_REPO_URI="https://github.com/adrianlopezroche/fdupes.git"
+EGIT_REPO_URI="https://github.com/adrianlopezroche/${PN}.git"
 
 LICENSE="MIT"
 SLOT="0"

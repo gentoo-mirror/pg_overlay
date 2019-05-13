@@ -10,8 +10,8 @@ PYTHON_COMPAT=( python2_7 )
 inherit eutils git-r3 l10n python-r1
 
 DESCRIPTION="A utility to find various forms of lint on a filesystem"
-HOMEPAGE="http://www.pixelbeat.org/fslint/"
-EGIT_REPO_URI="https://github.com/pixelb/fslint.git"
+HOMEPAGE="https://www.pixelbeat.org/fslint/"
+EGIT_REPO_URI="https://github.com/pixelb/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"

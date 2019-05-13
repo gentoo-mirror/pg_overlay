@@ -9,7 +9,7 @@ inherit eutils git-r3 gnome2-utils python-r1 scons-utils
 
 DESCRIPTION="rmlint finds space waste and other broken things on your filesystem and offers to remove it"
 HOMEPAGE="https://github.com/sahib/rmlint"
-EGIT_REPO_URI="https://github.com/sahib/rmlint.git"
+EGIT_REPO_URI="https://github.com/sahib/${PN}.git"
 EGIT_BRANCH="develop"
 
 LICENSE="GPL-3"
