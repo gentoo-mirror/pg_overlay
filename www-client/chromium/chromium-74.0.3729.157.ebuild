@@ -144,6 +144,7 @@ PATCHES=(
 	"${FILESDIR}/chromium-fix-char_traits.patch"
 	"${FILESDIR}/chromium-vaapi.patch"
 	"${FILESDIR}/chromium-deconst.patch"
+	"${FILESDIR}/chromium-system-icu.patch"
 )
 
 pre_build_checks() {
