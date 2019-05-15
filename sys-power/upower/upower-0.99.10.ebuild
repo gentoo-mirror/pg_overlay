@@ -51,13 +51,6 @@ QA_MULTILIB_PATHS="usr/lib/${PN}/.*"
 
 DOCS=( AUTHORS HACKING NEWS README )
 
-PATCHES=(
-	# daemon: Consider pending-charge when calculating the display state
-	# (from 'master')
-	"${FILESDIR}/${P}-pending-charge1.patch"
-	"${FILESDIR}/${P}-pending-charge2.patch"
-)
-
 src_prepare() {
 	default
 	xdg_environment_reset
