@@ -97,7 +97,7 @@ python_install_all() {
 	fi
 
 	for f in ${RM_CONTRIB[@]}; do
-		rm -r contrib/${f} || die
+		rm -frv contrib/${f} || die
 	done
 
 	dodoc -r contrib

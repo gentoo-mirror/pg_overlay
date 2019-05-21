@@ -10,11 +10,7 @@ PYTHON_COMPAT=( python3_{5,6,7} )
 PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 
 # This list can be updated with scripts/get_langs.sh from the mozilla overlay
-MOZ_LANGS=( ach af an ar as ast az bg bn-BD bn-IN br bs ca cak cs cy da de dsb
-el en en-GB en-US en-ZA eo es-AR es-CL es-ES es-MX et eu fa ff fi fr fy-NL ga-IE
-gd gl gn gu-IN he hi-IN hr hsb hu hy-AM id is it ja ka kab kk km kn ko lij lt lv
-mai mk ml mr ms nb-NO nl nn-NO or pa-IN pl pt-BR pt-PT rm ro ru si sk sl son sq
-sr sv-SE ta te th tr uk uz vi xh zh-CN zh-TW )
+MOZ_LANGS=( en en-US ru )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
@@ -39,6 +35,7 @@ if [[ "${PV}" == *_rc* ]]; then
 fi
 
 LLVM_MAX_SLOT=8
+MOZCONFIG_OPTIONAL_JIT=1
 
 inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
@@ -55,7 +52,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free geckodriver
 	+gmp-autoupdate hardened hwaccel jack lto neon pgo pulseaudio
 	+screenshot selinux startup-notification +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-sqlite +system-libvpx +system-webp test wayland wifi"
+	+system-sqlite +system-libvpx +system-webp test wayland wifi +jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -118,7 +115,9 @@ RDEPEND="${CDEPEND}
 	jack? ( virtual/jack )
 	pulseaudio? ( || ( media-sound/pulseaudio
 		>=media-sound/apulse-0.1.9 ) )
-	selinux? ( sec-policy/selinux-mozilla )"
+	selinux? ( sec-policy/selinux-mozilla )
+	kde? (	kde-apps/kdialog
+		kde-misc/kmozillahelper )"
 
 DEPEND="${CDEPEND}
 	app-arch/zip
@@ -167,7 +166,9 @@ DEPEND="${CDEPEND}
 # Due to a bug in GCC, profile guided optimization will produce
 # AVX2 instructions, bug #677052
 REQUIRED_USE="wifi? ( dbus )
-	pgo? ( lto )"
+	pgo? ( lto )
+	kde? ( !bindist )
+	^^ ( pgo )"
 
 S="${WORKDIR}/firefox-${PV%_*}"
 
@@ -299,6 +300,30 @@ src_prepare() {
 	# However, when available, an unsupported version can cause problems, bug #669548
 	sed -i -e "s@check_prog('RUSTFMT', add_rustup_path('rustfmt')@check_prog('RUSTFMT', add_rustup_path('rustfmt_do_not_use')@" \
 		"${S}"/build/moz.configure/rust.configure || die
+
+	# OpenSUSE-KDE patchset
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
+
+	# Privacy-esr patches
+	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
+	#rm -fr browser/extensions/{formautofill,mortar,webcompat,webcompat-reporter} || die
+
+	# Debian patches
+	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
+
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
+
+	# FreeBSD patches
+	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
+
+	#
+	touch third_party/rust/packed_simd/LICENSE-APACHE
+	echo a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2 > third_party/rust/packed_simd/LICENSE-APACHE
+	sed -i s/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2/c70a2264f910fd691ab6ee714b203dad74cc500893faf45396c9ecb17d5253b5/g third_party/rust/packed_simd/.cargo-checksum.json
+	touch third_party/rust/packed_simd/LICENSE-MIT
+	echo 6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb > third_party/rust/packed_simd/LICENSE-MIT
+	sed -i s/6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb/10f349490bd1bb90ceadb6a55dd01e9fa0313d29125f3e21fbe3974fadb5580a/g third_party/rust/packed_simd/.cargo-checksum.json
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -553,6 +578,80 @@ src_configure() {
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
+	#
+	mozconfig_annotate '' --disable-accessibility
+	mozconfig_annotate '' --disable-address-sanitizer
+	mozconfig_annotate '' --disable-address-sanitizer-reporter
+
+	mozconfig_annotate '' --disable-callgrind
+	mozconfig_annotate '' --disable-crashreporter
+
+	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-debug-js-modules
+	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --disable-dmd
+	mozconfig_annotate '' --disable-dtrace 
+	mozconfig_annotate '' --disable-dump-painting
+
+	mozconfig_annotate '' --disable-elf-hack
+
+	mozconfig_annotate '' --disable-gc-trace
+	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --disable-gtest-in-build
+
+	mozconfig_annotate '' --disable-instruments
+	mozconfig_annotate '' --disable-ios-target
+	mozconfig_annotate '' --disable-ipdl-tests
+
+	mozconfig_annotate '' --disable-jprof
+
+	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-logrefcnt
+
+	mozconfig_annotate '' --disable-memory-sanitizer
+	mozconfig_annotate '' --disable-mobile-optimize
+	
+	mozconfig_annotate '' --disable-necko-wifi
+
+	mozconfig_annotate '' --disable-parental-controls
+	mozconfig_annotate '' --disable-perf
+	mozconfig_annotate '' --disable-profiling
+
+	mozconfig_annotate '' --disable-reflow-perf
+	mozconfig_annotate '' --disable-rust-debug
+	mozconfig_annotate '' --disable-rust-tests
+
+	mozconfig_annotate '' --disable-signmar
+
+	mozconfig_annotate '' --disable-trace-logging
+
+	mozconfig_annotate '' --disable-updater
+
+	mozconfig_annotate '' --disable-valgrind
+	mozconfig_annotate '' --disable-verify-mar
+	mozconfig_annotate '' --disable-vtune
+
+	mozconfig_annotate '' --disable-warnings-as-errors
+
+	mozconfig_annotate '' --without-debug-label
+
+	# Enable good features
+	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --enable-rust-simd
+	mozconfig_annotate '' --enable-strip
+	mozconfig_annotate '' --enable-webrender
+	mozconfig_annotate '' --enable-webrtc
+
+	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
+	echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
+	#
+
 	# Finalize and report settings
 	mozconfig_final
 
@@ -631,6 +730,21 @@ src_install() {
 			"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 			|| die
 	done
+
+	if use kde ; then
+		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
+		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/kde.js" \
+		|| die
+	fi
+
+	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
+	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	|| die
+
+	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
 
 	cd "${S}"
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
@@ -727,7 +841,7 @@ pkg_preinst() {
 }
 
 pkg_postinst() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 	xdg_desktop_database_update
 
 	if ! use gmp-autoupdate && ! use eme-free ; then
@@ -747,6 +861,6 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_icon_cache_update
 	xdg_desktop_database_update
 }
