@@ -1,0 +1,19 @@
+diff -ur a/browser/extensions/moz.build b/browser/extensions/moz.build
+--- a/browser/extensions/moz.build	2018-09-27 21:02:03.422667363 +0300
++++ b/browser/extensions/moz.build	2018-09-28 08:12:39.194420333 +0300
+@@ -5,15 +5,5 @@
+ # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ 
+ DIRS += [
+-    'formautofill',
+-    'pdfjs',
+     'screenshots',
+-    'webcompat',
+-    'webcompat-reporter'
+ ]
+-
+-# Only include mortar system add-ons if we locally enable it
+-if CONFIG['MOZ_MORTAR']:
+-    DIRS += [
+-        'mortar',
+-    ]
