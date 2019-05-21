@@ -605,7 +605,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-jprof
 
-	mozconfig_annotate '' --disable-libproxy
+	#mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
 
 	mozconfig_annotate '' --disable-memory-sanitizer
@@ -641,6 +641,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrender
 	mozconfig_annotate '' --enable-webrtc
+	mozconfig_annotate '' --with-ccache
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
