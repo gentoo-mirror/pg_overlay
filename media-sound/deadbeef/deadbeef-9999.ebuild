@@ -152,11 +152,11 @@ src_prepare() {
 
 	#config_rpath_update "${S}/config.rpath"
 	eautopoint
-	eaclocal
-	eautoheader
-	eautoconf
-	_elibtoolize --copy --automake
-	eautomake --add-missing --copy --gnu
+	#eaclocal
+	#eautoheader
+	#eautoconf
+	#_elibtoolize --copy --automake
+	#eautomake --add-missing --copy --gnu
 	eautoreconf
 	default
 }
