@@ -150,8 +150,7 @@ src_prepare() {
 		eapply "${FILESDIR}/${P}-remove-unity-trash.patch"
 	fi
 
-	config_rpath_update "${S}/config.rpath"
-	#eautopoint
+	eautopoint
 	eautoreconf
 	default
 }
