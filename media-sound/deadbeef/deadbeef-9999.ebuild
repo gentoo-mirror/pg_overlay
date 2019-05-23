@@ -156,7 +156,7 @@ src_prepare() {
 	eaclocal
 	eautoheader
 	eautoconf
-	elibtoolize
+	_elibtoolize --copy --automake
 	eautomake --add-missing --copy --gnu
 	eintltoolize
 	default
