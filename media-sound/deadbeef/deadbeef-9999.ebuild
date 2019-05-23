@@ -150,13 +150,8 @@ src_prepare() {
 		eapply "${FILESDIR}/${P}-remove-unity-trash.patch"
 	fi
 
-	#config_rpath_update "${S}/config.rpath"
+	config_rpath_update "${S}/config.rpath"
 	#eautopoint
-	#eaclocal
-	#eautoheader
-	#eautoconf
-	#_elibtoolize --copy --automake
-	#eautomake --add-missing --copy --gnu
 	eautoreconf
 	default
 }
