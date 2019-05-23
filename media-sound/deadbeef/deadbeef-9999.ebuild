@@ -151,7 +151,14 @@ src_prepare() {
 	fi
 
 	config_rpath_update "${S}/config.rpath"
-	eautoreconf
+	#eautoreconf
+	eautopoint
+	eaclocal
+	eautoheader
+	eautoconf
+	elibtoolize
+	eautomake
+	eintltoolize
 	default
 }
 
