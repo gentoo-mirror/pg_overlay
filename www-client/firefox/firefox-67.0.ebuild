@@ -605,7 +605,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-jprof
 
-	#mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
 
 	mozconfig_annotate '' --disable-memory-sanitizer
