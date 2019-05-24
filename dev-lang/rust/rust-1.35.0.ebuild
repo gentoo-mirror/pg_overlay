@@ -171,7 +171,6 @@ src_configure() {
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
-		enabled = true
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
