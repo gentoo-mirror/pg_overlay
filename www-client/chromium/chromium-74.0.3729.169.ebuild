@@ -696,20 +696,12 @@ src_install() {
 }
 
 pkg_postrm() {
-	if type gtk-update-icon-cache &>/dev/null; then
-		ebegin "Updating GTK icon cache"
-		gtk-update-icon-cache "${EROOT}/usr/share/icons/hicolor"
-		eend $?
-	fi
+	xdg_icon_cache_update
 	xdg_desktop_database_update
 }
 
 pkg_postinst() {
-	if type gtk-update-icon-cache &>/dev/null; then
-		ebegin "Updating GTK icon cache"
-		gtk-update-icon-cache "${EROOT}/usr/share/icons/hicolor"
-		eend $?
-	fi
+	xdg_icon_cache_update
 	xdg_desktop_database_update
 	readme.gentoo_print_elog
 }
