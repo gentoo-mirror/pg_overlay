@@ -1,7 +1,7 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PLOCALES="ca cs da de el es fi fr ga gl he hu it ja ms nl pl pt ro ru sk sr sv tr uk vi zh_CN"
 
