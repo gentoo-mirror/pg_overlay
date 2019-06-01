@@ -9,7 +9,7 @@ retrieving revision 1.1
 diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 --- a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
 +++ b/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp
-@@ -57,25 +57,27 @@ NS_IMETHODIMP
+@@ -57,24 +57,27 @@ NS_IMETHODIMP
  nsUnixSystemProxySettings::GetMainThreadOnly(bool* aMainThreadOnly) {
    // dbus prevents us from being threadsafe, but this routine should not block
    // anyhow
@@ -26,7 +26,6 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 -  }
 -  if (!mProxySettings) {
 -    mGConf = do_GetService(NS_GCONFSERVICE_CONTRACTID);
--  }
 +  // only use GSettings if that is a GNOME session
 +  const char* sessionType = PR_GetEnv("DESKTOP_SESSION");
 +  if (sessionType && !strcmp(sessionType, "gnome")) {
@@ -38,6 +37,7 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
 +    if (!mProxySettings) {
 +      mGConf = do_GetService(NS_GCONFSERVICE_CONTRACTID);
 +    }
+   }
  }
  
  bool nsUnixSystemProxySettings::IsProxyMode(const char* aMode) {
@@ -45,4 +45,3 @@ diff --git a/toolkit/system/unixproxy/nsUnixSystemProxySettings.cpp b/toolkit/sy
    return NS_SUCCEEDED(mGConf->GetString(
               NS_LITERAL_CSTRING("/system/proxy/mode"), mode)) &&
           mode.EqualsASCII(aMode);
- }

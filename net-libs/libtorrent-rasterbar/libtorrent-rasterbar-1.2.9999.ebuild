@@ -41,8 +41,8 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	# Versions
-	sed -i s/1.2.1/1.1.12/g configure.ac || die
-	sed -i s/1.2.1.0/1.1.12.0/g include/libtorrent/version.hpp || die
+	sed -i s/1.2.1/1.1.13/g configure.ac || die
+	sed -i s/1.2.1.0/1.1.13.0/g include/libtorrent/version.hpp || die
 
 	mkdir "${S}"/build-aux/ || die
 	touch "${S}"/build-aux/config.rpath || die
