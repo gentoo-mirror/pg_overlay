@@ -10,20 +10,19 @@ diff -Naur firefox-60.0.bak/browser/app/profile/firefox.js firefox-60.0/browser/
  
  pref("lightweightThemes.update.enabled", true);
  pref("lightweightThemes.getMoreURL", "https://addons.mozilla.org/%LOCALE%/firefox/themes");
-@@ -1608,9 +1608,7 @@
+@@ -1626,8 +1626,6 @@
  // Enable browser frames for use on desktop.  Only exposed to chrome callers.
  pref("dom.mozBrowserFramesEnabled", true);
  
 -pref("extensions.pocket.enabled", true);
--pref("extensions.pocket.oAuthConsumerKey", "40249-e88c401e1b1f2242d9e441c4");
- 
+-
  pref("signon.schemeUpgrades", true);
  
  // Enable the "Simplify Page" feature in Print Preview. This feature
 diff -Naur firefox-60.0.bak/browser/components/uitour/UITour.jsm firefox-60.0/browser/components/uitour/UITour.jsm
 --- firefox-60.0.bak/browser/components/uitour/UITour.jsm
 +++ firefox-60.0/browser/components/uitour/UITour.jsm
-@@ -128,19 +128,6 @@
+@@ -149,18 +149,6 @@
      ["help",        {query: "#appMenu-help-button"}],
      ["home",        {query: "#home-button"}],
      ["library",     {query: "#appMenu-library-button"}],
@@ -36,7 +35,6 @@ diff -Naur firefox-60.0.bak/browser/components/uitour/UITour.jsm firefox-60.0/br
 -        if (node && !node.hidden) {
 -          return node;
 -        }
--        aDocument.ownerGlobal.BrowserPageActions.placeLazyActionsInPanel();
 -        return aDocument.getElementById("pageAction-panel-pocket");
 -      },
 -    }],
