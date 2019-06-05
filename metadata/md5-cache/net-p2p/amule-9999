@@ -1,11 +1,11 @@
 DEFINED_PHASES=configure install prepare setup unpack
-DEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:0= sys-libs/zlib >=x11-libs/wxGTK-3.0.4:3.0-gtk3[X?] stats? ( media-libs/gd:=[jpeg,png] ) geoip? ( dev-libs/geoip ) upnp? ( net-libs/libupnp:* ) webserver? ( media-libs/libpng:0= ) !net-p2p/imule >=dev-vcs/git-1.8.2.1[curl]
+DEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:0= sys-libs/zlib >=x11-libs/wxGTK-3.1.2:3.1-gtk3[X?] stats? ( media-libs/gd:=[jpeg,png] ) geoip? ( dev-libs/geoip ) upnp? ( net-libs/libupnp:* ) webserver? ( media-libs/libpng:0= ) !net-p2p/imule >=dev-vcs/git-1.8.2.1[curl]
 DESCRIPTION=aMule, the all-platform eMule p2p client
 EAPI=6
 HOMEPAGE=http://www.amule.org/
 IUSE=daemon debug geoip gui +nls stats upnp X +mmap webserver
 LICENSE=GPL-2
-RDEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:0= sys-libs/zlib >=x11-libs/wxGTK-3.0.4:3.0-gtk3[X?] stats? ( media-libs/gd:=[jpeg,png] ) geoip? ( dev-libs/geoip ) upnp? ( net-libs/libupnp:* ) webserver? ( media-libs/libpng:0= ) !net-p2p/imule
+RDEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:0= sys-libs/zlib >=x11-libs/wxGTK-3.1.2:3.1-gtk3[X?] stats? ( media-libs/gd:=[jpeg,png] ) geoip? ( dev-libs/geoip ) upnp? ( net-libs/libupnp:* ) webserver? ( media-libs/libpng:0= ) !net-p2p/imule
 SLOT=0
-_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	git-r3	0d4635eeb5a96cd5315597a47eba25c9	l10n	97f2753e3f1f3753d53d856c7c0bbb0b	ltprune	2729691420b6deeda2a90b1f1183fb55	multilib	1d91b03d42ab6308b5f4f6b598ed110e	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf	wxwidgets	ed63935305b6de2210ae97a407719d89
-_md5_=e78142cace0d3efecf5436e9364035b7
+_eclasses_=desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	a09389deba2c0a7108b581e02c7cecbf	git-r3	0d4635eeb5a96cd5315597a47eba25c9	l10n	97f2753e3f1f3753d53d856c7c0bbb0b	ltprune	2729691420b6deeda2a90b1f1183fb55	multilib	1d91b03d42ab6308b5f4f6b598ed110e	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf	wxwidgets	43fcc9ebe7fbfcdfa488e5fc56d97501
+_md5_=b752a01d9ca7a54edb9dadc79efd9003
