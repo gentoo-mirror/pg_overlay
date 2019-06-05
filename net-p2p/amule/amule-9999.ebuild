@@ -73,10 +73,11 @@ src_configure() {
 	fi
 
 	econf \
+		--with-boost \
 		--with-denoise-level=0 \
 		--with-wx-config="${WX_CONFIG}" \
 		--enable-amulecmd \
-		--with-boost \
+		--enable-optimize \
 		$(use_enable debug) \
 		$(use_enable daemon amule-daemon) \
 		$(use_enable geoip) \
