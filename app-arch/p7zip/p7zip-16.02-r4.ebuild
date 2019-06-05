@@ -3,7 +3,7 @@
 
 EAPI=6
 
-WX_GTK_VER="3.0-gtk3"
+WX_GTK_VER="3.1-gtk3"
 
 inherit toolchain-funcs wxwidgets
 
