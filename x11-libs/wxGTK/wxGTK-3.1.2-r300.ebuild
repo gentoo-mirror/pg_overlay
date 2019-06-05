@@ -166,7 +166,7 @@ multilib_src_install_all() {
 	# version bakefile presets
 	pushd "${D}"usr/share/bakefile/presets/ > /dev/null
 	for f in wx*; do
-		mv "${f}" "${f/wx/wx30gtk3}"
+		mv "${f}" "${f/wx/wx31gtk3}"
 	done
 	popd > /dev/null
 }
