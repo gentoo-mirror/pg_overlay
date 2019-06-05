@@ -21,7 +21,7 @@ COMMON_DEPEND="
 	dev-libs/crypto++:=
 	sys-libs/binutils-libs:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
+	>=x11-libs/wxGTK-3.1.2:${WX_GTK_VER}[X?]
 	stats? ( media-libs/gd:=[jpeg,png] )
 	geoip? ( dev-libs/geoip )
 	upnp? ( net-libs/libupnp:* )
