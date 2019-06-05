@@ -3,7 +3,7 @@
 
 EAPI=6
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
-WX_GTK_VER="3.0-gtk3"
+WX_GTK_VER="3.1-gtk3"
 
 inherit git-r3 l10n wxwidgets
 
@@ -21,7 +21,7 @@ COMMON_DEPEND="
 	dev-libs/crypto++:=
 	sys-libs/binutils-libs:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
+	>=x11-libs/wxGTK-3.1.2:${WX_GTK_VER}[X?]
 	stats? ( media-libs/gd:=[jpeg,png] )
 	geoip? ( dev-libs/geoip )
 	upnp? ( net-libs/libupnp:* )
