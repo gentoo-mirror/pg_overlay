@@ -178,8 +178,8 @@ src_prepare() {
 	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
 		third_party/libusb/src/libusb/libusb.h || die
 
-	#for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
-	#for p in $(cat "${FILESDIR}/archlinux-patches-75/series");do eapply "${FILESDIR}/archlinux-patches-75/$p";done
+	for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
+	for p in $(cat "${FILESDIR}/archlinux-patches-75/series");do eapply "${FILESDIR}/archlinux-patches-75/$p";done
 	sed -i '1s|python$|&2|' third_party/dom_distiller_js/protoc_plugins/*.py
 
 	default
@@ -190,8 +190,8 @@ src_prepare() {
 	local keeplibs=(
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
-		base/third_party/nspr
 		base/third_party/icu
+		base/third_party/nspr
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
@@ -221,6 +221,7 @@ src_prepare() {
 		third_party/angle/third_party/vulkan-tools
 		third_party/angle/third_party/vulkan-validation-layers
 		third_party/apple_apsl
+		third_party/axe-core
 		third_party/blink
 		third_party/boringssl
 		third_party/boringssl/src/third_party/fiat
@@ -231,6 +232,10 @@ src_prepare() {
 		third_party/catapult
 		third_party/catapult/common/py_vulcanize/third_party/rcssmin
 		third_party/catapult/common/py_vulcanize/third_party/rjsmin
+		third_party/catapult/third_party/beautifulsoup4
+		third_party/catapult/third_party/html5lib-python
+		third_party/catapult/third_party/polymer
+		third_party/catapult/third_party/six
 		third_party/catapult/tracing/third_party/d3
 		third_party/catapult/tracing/third_party/gl-matrix
 		third_party/catapult/tracing/third_party/jszip
@@ -239,16 +244,19 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
 		third_party/cld_3
+		third_party/closure_compiler
 		third_party/crashpad
 		third_party/crashpad/crashpad/third_party/zlib
 		third_party/crc32c
 		third_party/cros_system_api
 		third_party/dav1d
+		third_party/dawn
 		third_party/devscripts
 		third_party/dom_distiller_js
 		third_party/emoji-segmenter
 		third_party/flatbuffers
 		third_party/flot
+		third_party/freetype
 		third_party/glslang
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
@@ -273,10 +281,10 @@ src_prepare() {
 		third_party/libsrtp
 		third_party/libsync
 		third_party/libudev
-		third_party/libusb
 		third_party/libwebm
 		third_party/libxml/chromium
 		third_party/libyuv
+		third_party/llvm
 		third_party/lss
 		third_party/lzma_sdk
 		third_party/markupsafe
@@ -286,7 +294,7 @@ src_prepare() {
 		third_party/nasm
 		third_party/node
 		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
-		third_party/openmax_dl
+		third_party/openscreen
 		third_party/ots
 		third_party/pdfium
 		third_party/pdfium/third_party/agg23
@@ -299,6 +307,7 @@ src_prepare() {
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
 		third_party/perfetto
+		third_party/pffft
 		third_party/ply
 		third_party/polymer
 		third_party/protobuf
@@ -308,9 +317,11 @@ src_prepare() {
 		third_party/rnnoise
 		third_party/s2cellid
 		third_party/sfntly
+		third_party/simplejson
 		third_party/skia
+		third_party/skia/include/third_party/vulkan
+		third_party/skia/include/third_party/skcms
 		third_party/skia/third_party/gif
-		third_party/skia/third_party/skcms
 		third_party/skia/third_party/vulkan
 		third_party/smhasher
 		third_party/spirv-headers
@@ -341,8 +352,7 @@ src_prepare() {
 		v8/src/third_party/valgrind
 		v8/src/third_party/utf8-decoder
 		v8/third_party/inspector_protocol
-		v8/third_party/v8/builtins
-
+		v8/third_party/v8
 		# gyp -> gn leftovers
 		base/third_party/libevent
 		third_party/adobe
@@ -498,7 +508,7 @@ src_configure() {
 	#
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_swiftshader=false"
-	myconf_gn+=" exclude_unwind_tables=true"
+	yconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" optimize_webui=true"
 	myconf_gn+=" use_official_google_api_keys=false"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
