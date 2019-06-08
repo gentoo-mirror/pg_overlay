@@ -503,6 +503,10 @@ src_configure() {
 	myconf_gn+=" google_default_client_id=\"${google_default_client_id}\""
 	myconf_gn+=" google_default_client_secret=\"${google_default_client_secret}\""
 
+	#
+	"use_openh264=false"
+	"use_system_freetype"
+
 	local myarch="$(tc-arch)"
 
 	# Avoid CFLAGS problems, bug #352457, bug #390147.
