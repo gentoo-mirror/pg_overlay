@@ -1,0 +1,2 @@
+libstdc-do-not-assume-unique_ptr-has-ostream-operator.patch
+chromium-fix-window-flash-for-some-WMs.patch
