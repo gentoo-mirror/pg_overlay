@@ -139,15 +139,6 @@ theme that covers the appropriate MIME types, and configure this as your
 GTK+ icon theme.
 "
 
-PATCHES=(
-	"${FILESDIR}/chromium-widevine-r4.patch"
-	"${FILESDIR}/chromium-fix-char_traits.patch"
-	"${FILESDIR}/chromium-75-vaapi.patch"
-	"${FILESDIR}/chromium-deconst.patch"
-	"${FILESDIR}/chromium-75-vr-fix.patch"
-	"${FILESDIR}/chromium-75-libstdc.patch"
-)
-
 pre_build_checks() {
 	if [[ ${MERGE_TYPE} != binary ]]; then
 		local -x CPP="$(tc-getCXX) -E"
