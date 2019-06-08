@@ -251,7 +251,7 @@ src_prepare() {
 		third_party/devscripts
 		third_party/dom_distiller_js
 		third_party/emoji-segmenter
-		0third_party/flatbuffers
+		third_party/flatbuffers
 		third_party/flot
 		third_party/freetype
 		third_party/glslang
@@ -503,9 +503,11 @@ src_configure() {
 	myconf_gn+=" google_default_client_secret=\"${google_default_client_secret}\""
 
 	#
+	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_swiftshader=false"
 	myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" optimize_webui=true"
+	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_openh264=false"
 	myconf_gn+=" use_system_freetype=true"
