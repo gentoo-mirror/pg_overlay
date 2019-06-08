@@ -251,7 +251,7 @@ src_prepare() {
 		third_party/devscripts
 		third_party/dom_distiller_js
 		third_party/emoji-segmenter
-		third_party/flatbuffers
+		0third_party/flatbuffers
 		third_party/flot
 		third_party/freetype
 		third_party/glslang
@@ -503,11 +503,15 @@ src_configure() {
 	myconf_gn+=" google_default_client_secret=\"${google_default_client_secret}\""
 
 	#
-	"use_openh264=false"
-	"use_system_freetype=true"
-	"use_system_lcms2=true"
-	"use_system_libjpeg=true"
-	"use_system_zlib=true"
+	myconf_gn+=" enable_swiftshader=false"
+	myconf_gn+=" exclude_unwind_tables=true"
+	myconf_gn+=" optimize_webui=true"
+	myconf_gn+=" use_gio=false"
+	myconf_gn+=" use_openh264=false"
+	myconf_gn+=" use_system_freetype=true"
+	myconf_gn+=" use_system_lcms2=true"
+	myconf_gn+=" use_system_libjpeg=true"
+	myconf_gn+=" use_system_zlib=true"
 	
 
 	local myarch="$(tc-arch)"
