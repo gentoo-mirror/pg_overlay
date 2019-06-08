@@ -188,6 +188,7 @@ src_prepare() {
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
 	local keeplibs=(
+		base/third_party/cityhash
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
 		base/third_party/icu
@@ -221,9 +222,12 @@ src_prepare() {
 		third_party/angle/third_party/vulkan-tools
 		third_party/angle/third_party/vulkan-validation-layers
 		third_party/apple_apsl
+		third_party/axe-core
 		third_party/blink
 		third_party/boringssl
+		third_party/boringssl/linux-x86_64/crypto/third_party/sike/asm
 		third_party/boringssl/src/third_party/fiat
+		third_party/boringssl/src/third_party/sike
 		third_party/breakpad
 		third_party/breakpad/breakpad/src/third_party/curl
 		third_party/brotli
@@ -249,10 +253,10 @@ src_prepare() {
 		third_party/crc32c
 		third_party/cros_system_api
 		third_party/dav1d
+		third_party/dawn
 		third_party/devscripts
 		third_party/dom_distiller_js
 		third_party/emoji-segmenter
-		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
 		third_party/freetype
@@ -293,7 +297,7 @@ src_prepare() {
 		third_party/nasm
 		third_party/node
 		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
-		third_party/openmax_dl
+		third_party/openscreen
 		third_party/ots
 		third_party/pdfium
 		third_party/pdfium/third_party/agg23
@@ -306,6 +310,7 @@ src_prepare() {
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
 		third_party/perfetto
+		third_party/pffft
 		third_party/ply
 		third_party/polymer
 		third_party/protobuf
@@ -318,6 +323,7 @@ src_prepare() {
 		third_party/simplejson
 		third_party/skia
 		third_party/skia/include/third_party/vulkan
+		third_party/skia/include/third_party/skcms
 		third_party/skia/third_party/gif
 		third_party/skia/third_party/skcms
 		third_party/skia/third_party/vulkan
@@ -351,7 +357,6 @@ src_prepare() {
 		v8/src/third_party/utf8-decoder
 		v8/third_party/inspector_protocol
 		v8/third_party/v8
-
 		# gyp -> gn leftovers
 		base/third_party/libevent
 		third_party/adobe
