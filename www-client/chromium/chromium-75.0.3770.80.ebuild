@@ -199,7 +199,6 @@ src_prepare() {
 		base/third_party/xdg_user_dirs
 		buildtools/third_party/libc++
 		buildtools/third_party/libc++abi
-		buildtools/third_party/libunwind
 		chrome/third_party/mozilla_security_manager
 		courgette/third_party
 		net/third_party/mozilla_security_manager
@@ -222,7 +221,6 @@ src_prepare() {
 		third_party/angle/third_party/vulkan-tools
 		third_party/angle/third_party/vulkan-validation-layers
 		third_party/apple_apsl
-		third_party/axe-core
 		third_party/blink
 		third_party/boringssl
 		third_party/boringssl/src/third_party/fiat
@@ -231,7 +229,6 @@ src_prepare() {
 		third_party/brotli
 		third_party/cacheinvalidation
 		third_party/catapult
-		third_party/catapult/third_party/polymer
 		third_party/catapult/common/py_vulcanize/third_party/rcssmin
 		third_party/catapult/common/py_vulcanize/third_party/rjsmin
 		third_party/catapult/tracing/third_party/d3
@@ -243,13 +240,10 @@ src_prepare() {
 		third_party/ced
 		third_party/cld_3
 		third_party/crashpad
-		third_party/closure_compiler
 		third_party/crashpad/crashpad/third_party/zlib
-		third_party/crashpad/crashpad/third_party/lss
 		third_party/crc32c
 		third_party/cros_system_api
 		third_party/dav1d
-		third_party/dawn
 		third_party/devscripts
 		third_party/dom_distiller_js
 		third_party/emoji-segmenter
@@ -288,20 +282,16 @@ src_prepare() {
 		third_party/markupsafe
 		third_party/mesa
 		third_party/metrics_proto
-		third_party/minigbm
 		third_party/modp_b64
 		third_party/nasm
 		third_party/node
 		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
-		third_party/openh264
 		third_party/openmax_dl
 		third_party/ots
-		third_party/perfetto
 		third_party/pdfium
 		third_party/pdfium/third_party/agg23
 		third_party/pdfium/third_party/base
 		third_party/pdfium/third_party/bigint
-		third_party/pdfium/third_party/eu-strip
 		third_party/pdfium/third_party/freetype
 		third_party/pdfium/third_party/lcms
 		third_party/pdfium/third_party/libopenjpeg20
@@ -309,9 +299,7 @@ src_prepare() {
 		third_party/pdfium/third_party/libtiff
 		third_party/pdfium/third_party/skia_shared
 		third_party/perfetto
-		third_party/pffft
 		third_party/ply
-		third_party/pffft
 		third_party/polymer
 		third_party/protobuf
 		third_party/protobuf/third_party/six
@@ -324,7 +312,6 @@ src_prepare() {
 		third_party/skia/third_party/gif
 		third_party/skia/third_party/skcms
 		third_party/skia/third_party/vulkan
-		third_party/skia/include/third_party/vulkan/
 		third_party/smhasher
 		third_party/spirv-headers
 		third_party/SPIRV-Tools
@@ -333,12 +320,9 @@ src_prepare() {
 		third_party/swiftshader/third_party/llvm-7.0
 		third_party/swiftshader/third_party/llvm-subzero
 		third_party/swiftshader/third_party/subzero
-		third_party/tcmalloc
 		third_party/unrar
 		third_party/usrsctp
 		third_party/vulkan
-		third_party/wayland
-		third_party/wayland-protocols
 		third_party/web-animations-js
 		third_party/webdriver
 		third_party/webrtc
