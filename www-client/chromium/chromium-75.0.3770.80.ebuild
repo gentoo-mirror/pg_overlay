@@ -178,7 +178,7 @@ src_prepare() {
 	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
 		third_party/libusb/src/libusb/libusb.h || die
 
-	for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
+	#for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
 	for p in $(cat "${FILESDIR}/archlinux-patches-75/series");do eapply "${FILESDIR}/archlinux-patches-75/$p";done
 	sed -i '1s|python$|&2|' third_party/dom_distiller_js/protoc_plugins/*.py
 
@@ -512,18 +512,18 @@ eix
 	myconf_gn+=" google_default_client_secret=\"${google_default_client_secret}\""
 
 	#
-	#myconf_gn+=" enable_nacl_nonsfi=false"
-	#myconf_gn+=" enable_swiftshader=false"
-	#myconf_gn+=" exclude_unwind_tables=true"
-	#myconf_gn+=" optimize_webui=true"
-	#myconf_gn+=" use_official_google_api_keys=false"
-	#myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
-	#myconf_gn+=" use_gio=false"
-	#myconf_gn+=" use_openh264=false"
-	#myconf_gn+=" use_system_freetype=true"
-	#myconf_gn+=" use_system_lcms2=true"
-	#myconf_gn+=" use_system_libjpeg=true"
-	#myconf_gn+=" use_system_zlib=true"
+	myconf_gn+=" enable_nacl_nonsfi=false"
+	myconf_gn+=" enable_swiftshader=false"
+	myconf_gn+=" exclude_unwind_tables=true"
+	myconf_gn+=" optimize_webui=true"
+	myconf_gn+=" use_official_google_api_keys=false"
+	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
+	myconf_gn+=" use_gio=false"
+	myconf_gn+=" use_openh264=false"
+	myconf_gn+=" use_system_freetype=true"
+	myconf_gn+=" use_system_lcms2=true"
+	myconf_gn+=" use_system_libjpeg=true"
+	myconf_gn+=" use_system_zlib=true"
 	
 
 	local myarch="$(tc-arch)"
