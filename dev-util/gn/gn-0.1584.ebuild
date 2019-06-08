@@ -24,6 +24,8 @@ PATCHES=(
 	"${FILESDIR}"/gn-gen-r3.patch
 )
 
+S=${WORKDIR}
+
 pkg_setup() {
 	:
 }
