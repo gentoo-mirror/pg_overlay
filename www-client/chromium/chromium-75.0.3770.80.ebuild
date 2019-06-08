@@ -188,7 +188,6 @@ src_prepare() {
 	ln -s "${EPREFIX}"/usr/bin/node third_party/node/linux/node-linux-x64/bin/node || die
 
 	local keeplibs=(
-		base/third_party/cityhash
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
 		base/third_party/icu
@@ -225,9 +224,7 @@ src_prepare() {
 		third_party/axe-core
 		third_party/blink
 		third_party/boringssl
-		third_party/boringssl/linux-x86_64/crypto/third_party/sike/asm
 		third_party/boringssl/src/third_party/fiat
-		third_party/boringssl/src/third_party/sike
 		third_party/breakpad
 		third_party/breakpad/breakpad/src/third_party/curl
 		third_party/brotli
@@ -325,7 +322,6 @@ src_prepare() {
 		third_party/skia/include/third_party/vulkan
 		third_party/skia/include/third_party/skcms
 		third_party/skia/third_party/gif
-		third_party/skia/third_party/skcms
 		third_party/skia/third_party/vulkan
 		third_party/smhasher
 		third_party/spirv-headers
