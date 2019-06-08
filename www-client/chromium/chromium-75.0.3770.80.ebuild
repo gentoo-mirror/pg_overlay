@@ -16,7 +16,7 @@ SRC_URI="https://commondatastorage.googleapis.com/chromium-browser-official/${P}
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+#KEYWORDS="~amd64 ~x86"
 IUSE="+closure-compile component-build cups gnome-keyring +hangouts jumbo-build kerberos neon pic +proprietary-codecs pulseaudio selinux +suid +system-ffmpeg +system-icu +system-libvpx +tcmalloc vaapi widevine"
 RESTRICT="!system-ffmpeg? ( proprietary-codecs? ( bindist ) )"
 REQUIRED_USE="component-build? ( !suid )"
@@ -178,7 +178,7 @@ src_prepare() {
 	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
 		third_party/libusb/src/libusb/libusb.h || die
 
-	for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
+	#for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
 	#for p in $(cat "${FILESDIR}/archlinux-patches-75/series");do eapply "${FILESDIR}/archlinux-patches-75/$p";done
 	sed -i '1s|python$|&2|' third_party/dom_distiller_js/protoc_plugins/*.py
 
