@@ -483,7 +483,7 @@ src_configure() {
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
 	myconf_gn+=" use_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
-
+eix
 	# TODO: link_pulseaudio=true for GN.
 
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
@@ -513,8 +513,8 @@ src_configure() {
 
 	#
 	myconf_gn+=" enable_nacl_nonsfi=false"
-	myconf_gn+=" enable_swiftshader=false"
-	myconf_gn+=" exclude_unwind_tables=true"
+	#myconf_gn+=" enable_swiftshader=false"
+	#myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" optimize_webui=true"
 	myconf_gn+=" use_official_google_api_keys=false"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
