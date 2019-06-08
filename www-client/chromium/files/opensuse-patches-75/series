@@ -1,6 +1,6 @@
 chromium-libusb_interrupt_event_handler.patch
 chromium-dma-buf.patch
-chromium-non-void-return.patch
+
 chromium-drm.patch
 chromium-sandbox-pie.patch
 chromium-system-icu.patch
