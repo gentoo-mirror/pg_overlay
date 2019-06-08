@@ -178,8 +178,8 @@ src_prepare() {
 	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
 		third_party/libusb/src/libusb/libusb.h || die
 
-	#for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
-	for p in $(cat "${FILESDIR}/archlinux-patches-75/series");do eapply "${FILESDIR}/archlinux-patches-75/$p";done
+	for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
+	#for p in $(cat "${FILESDIR}/archlinux-patches-75/series");do eapply "${FILESDIR}/archlinux-patches-75/$p";done
 	sed -i '1s|python$|&2|' third_party/dom_distiller_js/protoc_plugins/*.py
 
 	default
@@ -483,7 +483,7 @@ src_configure() {
 	myconf_gn+=" use_kerberos=$(usex kerberos true false)"
 	myconf_gn+=" use_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_vaapi=$(usex vaapi true false)"
-eix
+
 	# TODO: link_pulseaudio=true for GN.
 
 	myconf_gn+=" fieldtrial_testing_like_official_build=true"
