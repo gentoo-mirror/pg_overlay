@@ -2,13 +2,13 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python{2_7,3_{5,6,7}} )
 
 inherit ninja-utils python-any-r1 toolchain-funcs
 
 DESCRIPTION="GN is a meta-build system that generates build files for Ninja"
 HOMEPAGE="https://gn.googlesource.com/"
-SRC_URI="https://dev.gentoo.org/~floppym/dist/${P}.tar.xz"
+SRC_URI="https://gn.googlesource.com/gn/+archive/8f8178c5cd01fd06ad6b7b527c255cf75e8e2ece.tar.gz -> ${P}.tag.gz"
 
 LICENSE="BSD"
 SLOT="0"
