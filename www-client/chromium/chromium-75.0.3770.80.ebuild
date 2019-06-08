@@ -251,7 +251,6 @@ src_prepare() {
 		third_party/devscripts
 		third_party/dom_distiller_js
 		third_party/emoji-segmenter
-		third_party/fips181
 		third_party/flatbuffers
 		third_party/flot
 		third_party/freetype
@@ -505,7 +504,11 @@ src_configure() {
 
 	#
 	"use_openh264=false"
-	"use_system_freetype"
+	"use_system_freetype=true"
+	"use_system_lcms2=true"
+	"use_system_libjpeg=true"
+	"use_system_zlib=true"
+	
 
 	local myarch="$(tc-arch)"
 
