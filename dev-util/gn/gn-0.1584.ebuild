@@ -34,7 +34,7 @@ src_configure() {
 	python_setup
 	tc-export AR CC CXX
 	#unset CFLAGS
-	set -- ${EPYTHON} build/gen.py --use-lto --no-last-commit-position --no-strip
+	set -- ${EPYTHON} build/gen.py --use-lto --no-last-commit-position
 	echo "$@" >&2
 	"$@" || die
 	cat >out/last_commit_position.h <<-EOF || die
