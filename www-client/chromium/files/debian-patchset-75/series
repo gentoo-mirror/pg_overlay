@@ -1,4 +1,3 @@
-fixes/vaapi.patch
 fixes/nullptr.patch
 fixes/as-needed.patch
 fixes/namespace.patch
