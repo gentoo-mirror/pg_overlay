@@ -13,11 +13,10 @@ ESVN_REPO_URI="svn://svn.code.sf.net/p/qmmp-dev/code/trunk/${PN}/"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="ffmpeg history"
+IUSE="ffmpeg"
 
 RDEPEND="
 	ffmpeg? ( =media-sound/qmmp-9999[ffmpeg] )
-	history? ( dev-qt/qtsql:5[sqlite] )
 	=media-sound/qmmp-9999
 	>=media-libs/taglib-1.10
 	dev-qt/qtcore:5
@@ -31,7 +30,6 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	mycmakeargs=(
 		-DUSE_FFVIDEO="$(usex ffmpeg)"
-		-DUSE_HISTORY="$(usex history)"
 		-DUSE_GOOM=0
 		)
 
