@@ -314,6 +314,7 @@ src_prepare() {
 		third_party/ply
 		third_party/pffft
 		third_party/polymer
+		third_party/protobuf
 		third_party/protobuf/third_party/six
 		third_party/pyjson5
 		third_party/qcms
