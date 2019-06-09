@@ -98,7 +98,7 @@ BDEPEND="
 		dev-lang/yasm
 	)
 	dev-lang/perl
-	dev-util/gn
+	<dev-util/gn-0.1583
 	dev-vcs/git
 	>=dev-util/gperf-3.0.3
 	>=dev-util/ninja-1.7.2
@@ -172,6 +172,11 @@ pkg_setup() {
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
 	python_setup
+	#
+	eapply "${FILESDIR}/chromium-75-vr-fix.patch"
+	eapply "${FILESDIR}/opensuse-patchset-75/system-icu.patch"
+	eapply "${FILESDIR}/opensuse-patchset-75/system-vaapi.patch"
+
 
 	default
 
@@ -437,7 +442,7 @@ src_configure() {
 		fontconfig
 		freetype
 		# Need harfbuzz_from_pkgconfig target
-		#harfbuzz-ng
+		harfbuzz-ng
 		libdrm
 		libjpeg
 		libpng
@@ -484,7 +489,7 @@ src_configure() {
 	myconf_gn+=" use_gold=false use_sysroot=false linux_use_bundled_binutils=false use_custom_libcxx=false"
 
 	# Disable forced lld, bug 641556
-	myconf_gn+=" use_lld=false"
+	myconf_gn+=" use_lld=true"
 
 	ffmpeg_branding="$(usex proprietary-codecs Chrome Chromium)"
 	myconf_gn+=" proprietary_codecs=$(usex proprietary-codecs true false)"
@@ -557,8 +562,7 @@ src_configure() {
 	# https://bugs.gentoo.org/654216
 	addpredict /dev/dri/ #nowarn
 
-	#if ! use system-ffmpeg; then
-	if false; then
+	if ! use system-ffmpeg; then
 		local build_ffmpeg_args=""
 		if use pic && [[ "${ffmpeg_target_arch}" == "ia32" ]]; then
 			build_ffmpeg_args+=" --disable-asm"
@@ -692,20 +696,12 @@ src_install() {
 }
 
 pkg_postrm() {
-	if type gtk-update-icon-cache &>/dev/null; then
-		ebegin "Updating GTK icon cache"
-		gtk-update-icon-cache "${EROOT}/usr/share/icons/hicolor"
-		eend $?
-	fi
+	xdg_icon_cache_update
 	xdg_desktop_database_update
 }
 
 pkg_postinst() {
-	if type gtk-update-icon-cache &>/dev/null; then
-		ebegin "Updating GTK icon cache"
-		gtk-update-icon-cache "${EROOT}/usr/share/icons/hicolor"
-		eend $?
-	fi
+	xdg_icon_cache_update
 	xdg_desktop_database_update
 	readme.gentoo_print_elog
 }
