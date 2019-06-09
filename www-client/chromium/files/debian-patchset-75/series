@@ -19,7 +19,6 @@ warnings/unused-functions.patch
 warnings/null-destination.patch
 warnings/int-in-bool-context.patch
 gn/libcxx.patch
-system/vpx.patch
 system/icu.patch
 system/jpeg.patch
 system/lcms.patch
