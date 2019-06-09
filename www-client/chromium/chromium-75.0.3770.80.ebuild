@@ -178,8 +178,9 @@ src_prepare() {
 	cp -a "${EPREFIX}/usr/include/libusb-1.0/libusb.h" \
 		third_party/libusb/src/libusb/libusb.h || die
 
-	for p in $(cat "${FILESDIR}/opensuse-patches-75/series");do eapply "${FILESDIR}/opensuse-patches-75/$p";done
-	for p in $(cat "${FILESDIR}/archlinux-patches-75/series");do eapply "${FILESDIR}/archlinux-patches-75/$p";done
+	for p in $(cat "${FILESDIR}/opensuse-patchset-75/series");do eapply "${FILESDIR}/opensuse-patchset-75/$p";done
+	for p in $(cat "${FILESDIR}/archlinux-patchset-75/series");do eapply "${FILESDIR}/archlinux-patchset-75/$p";done
+	for p in $(cat "${FILESDIR}/debian-patchset-75/series");do eapply "${FILESDIR}/debian-patchset-75/$p";done
 	sed -i '1s|python$|&2|' third_party/dom_distiller_js/protoc_plugins/*.py
 
 	default
