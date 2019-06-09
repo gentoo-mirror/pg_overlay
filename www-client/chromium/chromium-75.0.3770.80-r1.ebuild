@@ -174,8 +174,8 @@ src_prepare() {
 	python_setup
 	#
 	eapply "${FILESDIR}/chromium-75-vr-fix.patch"
-	eapply "${FILESDIR}/opensuse-patchset-75/system-icu.patch"
-	eapply "${FILESDIR}/opensuse-patchset-75/system-vaapi.patch"
+	eapply "${FILESDIR}/opensuse-patchset-75/chromium-system-icu.patch"
+	eapply "${FILESDIR}/opensuse-patchset-75/chromium-vaapi.patch"
 
 
 	default
