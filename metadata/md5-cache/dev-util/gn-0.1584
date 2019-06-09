@@ -9,4 +9,4 @@ LICENSE=BSD
 SLOT=0
 SRC_URI=https://gn.googlesource.com/gn/+archive/8f8178c5cd01fd06ad6b7b527c255cf75e8e2ece.tar.gz -> gn-0.1584.tar.gz
 _eclasses_=multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-any-r1	4900ae970f827a22d33d41bd8b8f9ace	python-utils-r1	08e17157a6807add7db1f8d01e7e391f	toolchain-funcs	8c7f9d80beedd16f2e5a7f612c609529
-_md5_=4468a696ad56ad516b8fcbacaf7d9d9e
+_md5_=d469abcce61ae717b068db1bf3853ce8
