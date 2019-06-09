@@ -21,7 +21,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/gn-gen-r3.patch
+	#"${FILESDIR}"/gn-gen-r3.patch
 )
 
 S=${WORKDIR}
