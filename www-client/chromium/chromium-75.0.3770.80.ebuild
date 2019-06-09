@@ -191,8 +191,8 @@ src_prepare() {
 	local keeplibs=(
 		base/third_party/dmg_fp
 		base/third_party/dynamic_annotations
-		base/third_party/icu
 		base/third_party/nspr
+		base/third_party/icu
 		base/third_party/superfasthash
 		base/third_party/symbolize
 		base/third_party/valgrind
@@ -200,6 +200,7 @@ src_prepare() {
 		base/third_party/xdg_user_dirs
 		buildtools/third_party/libc++
 		buildtools/third_party/libc++abi
+		buildtools/third_party/libunwind
 		chrome/third_party/mozilla_security_manager
 		courgette/third_party
 		net/third_party/mozilla_security_manager
@@ -231,12 +232,9 @@ src_prepare() {
 		third_party/brotli
 		third_party/cacheinvalidation
 		third_party/catapult
+		third_party/catapult/third_party/polymer
 		third_party/catapult/common/py_vulcanize/third_party/rcssmin
 		third_party/catapult/common/py_vulcanize/third_party/rjsmin
-		third_party/catapult/third_party/beautifulsoup4
-		third_party/catapult/third_party/html5lib-python
-		third_party/catapult/third_party/polymer
-		third_party/catapult/third_party/six
 		third_party/catapult/tracing/third_party/d3
 		third_party/catapult/tracing/third_party/gl-matrix
 		third_party/catapult/tracing/third_party/jszip
@@ -245,9 +243,10 @@ src_prepare() {
 		third_party/catapult/tracing/third_party/pako
 		third_party/ced
 		third_party/cld_3
-		third_party/closure_compiler
 		third_party/crashpad
+		third_party/closure_compiler
 		third_party/crashpad/crashpad/third_party/zlib
+		third_party/crashpad/crashpad/third_party/lss
 		third_party/crc32c
 		third_party/cros_system_api
 		third_party/dav1d
@@ -257,7 +256,6 @@ src_prepare() {
 		third_party/emoji-segmenter
 		third_party/flatbuffers
 		third_party/flot
-		third_party/freetype
 		third_party/glslang
 		third_party/google_input_tools
 		third_party/google_input_tools/third_party/closure_library
@@ -282,25 +280,29 @@ src_prepare() {
 		third_party/libsrtp
 		third_party/libsync
 		third_party/libudev
+		third_party/libusb
 		third_party/libwebm
 		third_party/libxml/chromium
 		third_party/libyuv
-		third_party/llvm
 		third_party/lss
 		third_party/lzma_sdk
 		third_party/markupsafe
 		third_party/mesa
 		third_party/metrics_proto
+		third_party/minigbm
 		third_party/modp_b64
 		third_party/nasm
 		third_party/node
 		third_party/node/node_modules/polymer-bundler/lib/third_party/UglifyJS2
-		third_party/openscreen
+		third_party/openh264
+		third_party/openmax_dl
 		third_party/ots
+		third_party/perfetto
 		third_party/pdfium
 		third_party/pdfium/third_party/agg23
 		third_party/pdfium/third_party/base
 		third_party/pdfium/third_party/bigint
+		third_party/pdfium/third_party/eu-strip
 		third_party/pdfium/third_party/freetype
 		third_party/pdfium/third_party/lcms
 		third_party/pdfium/third_party/libopenjpeg20
@@ -310,6 +312,7 @@ src_prepare() {
 		third_party/perfetto
 		third_party/pffft
 		third_party/ply
+		third_party/pffft
 		third_party/polymer
 		third_party/protobuf
 		third_party/protobuf/third_party/six
@@ -318,12 +321,11 @@ src_prepare() {
 		third_party/rnnoise
 		third_party/s2cellid
 		third_party/sfntly
-		third_party/simplejson
 		third_party/skia
-		third_party/skia/include/third_party/vulkan
 		third_party/skia/third_party/gif
 		third_party/skia/third_party/skcms
 		third_party/skia/third_party/vulkan
+		third_party/skia/include/third_party/vulkan/
 		third_party/smhasher
 		third_party/spirv-headers
 		third_party/SPIRV-Tools
@@ -332,9 +334,12 @@ src_prepare() {
 		third_party/swiftshader/third_party/llvm-7.0
 		third_party/swiftshader/third_party/llvm-subzero
 		third_party/swiftshader/third_party/subzero
+		third_party/tcmalloc
 		third_party/unrar
 		third_party/usrsctp
 		third_party/vulkan
+		third_party/wayland
+		third_party/wayland-protocols
 		third_party/web-animations-js
 		third_party/webdriver
 		third_party/webrtc
@@ -353,7 +358,7 @@ src_prepare() {
 		v8/src/third_party/valgrind
 		v8/src/third_party/utf8-decoder
 		v8/third_party/inspector_protocol
-		v8/third_party/v8
+		v8/third_party/v8/builtins
 		# gyp -> gn leftovers
 		base/third_party/libevent
 		third_party/adobe
