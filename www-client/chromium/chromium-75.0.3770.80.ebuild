@@ -514,15 +514,17 @@ src_configure() {
 	#
 	myconf_gn+=" enable_nacl_nonsfi=false"
 	myconf_gn+=" enable_swiftshader=false"
-	yconf_gn+=" exclude_unwind_tables=true"
+	myconf_gn+=" exclude_unwind_tables=true"
 	myconf_gn+=" optimize_webui=true"
 	myconf_gn+=" use_official_google_api_keys=false"
 	myconf_gn+=" link_pulseaudio=$(usex pulseaudio true false)"
 	myconf_gn+=" use_gio=false"
 	myconf_gn+=" use_openh264=false"
+	myconf_gn+=" use_libjpeg_turbo=true"
 	myconf_gn+=" use_system_freetype=true"
 	myconf_gn+=" use_system_lcms2=true"
 	myconf_gn+=" use_system_libjpeg=true"
+	myconf_gn+=" use_system_libopenjpeg2=true"
 	myconf_gn+=" use_system_zlib=true"
 	
 
