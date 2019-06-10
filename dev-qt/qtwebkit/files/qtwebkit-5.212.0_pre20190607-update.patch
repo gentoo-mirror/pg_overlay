@@ -1,0 +1,147 @@
+diff --git a/README b/README
+new file mode 100644
+index 000000000..8a2bc8c5b
+--- /dev/null
++++ b/README
+@@ -0,0 +1,15 @@
++# Qt Port of WebKit
++
++WebKit is an open source web browser engine. WebKit's HTML and JavaScript code began as a branch of the KHTML and KJS libraries from KDE. As part of KDE framework KHTML was based on Qt but during their porting efforts Apple's engineers made WebKit toolkit independent. QtWebKit is a project aiming at porting this fabulous engine back to Qt.
++
++The Qt port of WebKit currently compiles and runs on Linux, *BSD, Windows and macOS.
++
++# Building
++
++See instructions at https://github.com/annulen/webkit/wiki
++
++# Contacts
++
++* Mailing list: webkit-qt@lists.webkit.org
++* IRC: #qtwebkit on irc.freenode.net
++* Blog: http://qtwebkit.blogspot.com
+diff --git a/Source/WebCore/platform/network/NetworkingContext.h b/Source/WebCore/platform/network/NetworkingContext.h
+index 3de432e42..582bca647 100644
+--- a/Source/WebCore/platform/network/NetworkingContext.h
++++ b/Source/WebCore/platform/network/NetworkingContext.h
+@@ -28,10 +28,6 @@
+ #include <wtf/SchedulePair.h>
+ #endif
+ 
+-#if PLATFORM(QT)
+-#include <qglobal.h>
+-#endif
+-
+ #if PLATFORM(COCOA)
+ OBJC_CLASS NSOperationQueue;
+ #endif
+diff --git a/Source/WebCore/platform/network/qt/QNetworkReplyHandler.cpp b/Source/WebCore/platform/network/qt/QNetworkReplyHandler.cpp
+index 631adf37d..0ce68838e 100644
+--- a/Source/WebCore/platform/network/qt/QNetworkReplyHandler.cpp
++++ b/Source/WebCore/platform/network/qt/QNetworkReplyHandler.cpp
+@@ -609,6 +609,7 @@ void QNetworkReplyHandler::sendResponseIfNeeded()
+             response.setHTTPHeaderField(String(pair.first.constData(), pair.first.size()), String(pair.second.constData(), pair.second.size()));
+     }
+ 
++    // Note: Qt sets RedirectionTargetAttribute only for 3xx responses, so Location header in 201 responce won't affect this code
+     QUrl redirection = m_replyWrapper->reply()->attribute(QNetworkRequest::RedirectionTargetAttribute).toUrl();
+     if (redirection.isValid()) {
+         redirect(response, redirection);
+@@ -651,8 +652,10 @@ void QNetworkReplyHandler::redirect(ResourceResponse& response, const QUrl& redi
+     ASSERT(!m_queue.deferSignals());
+ 
+     QUrl currentUrl = m_replyWrapper->reply()->url();
++
++    // RFC7231 section 7.1.2
+     QUrl newUrl = currentUrl.resolved(redirection);
+-    if (currentUrl.hasFragment())
++    if (!newUrl.hasFragment() && currentUrl.hasFragment())
+         newUrl.setFragment(currentUrl.fragment());
+ 
+     ResourceHandleClient* client = m_resourceHandle->client();
+diff --git a/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp b/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp
+index c54a8115b..694e2a764 100644
+--- a/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp
++++ b/Source/WebCore/platform/network/qt/ResourceRequestQt.cpp
+@@ -27,16 +27,20 @@
+ #include <QNetworkRequest>
+ #include <QUrl>
+ 
+-// HTTP/2 is implemented since Qt 5.8, but QTBUG-64359 makes it unusable in browser
+-#if QT_VERSION >= QT_VERSION_CHECK(5, 9, 4)
++// HTTP/2 is implemented since Qt 5.8, but various QtNetwork bugs make it unusable in browser with Qt < 5.10.1
++// We also don't enable HTTP/2 for unencrypted connections because of possible compatibility issues; it can be
++// enabled manually by user application via custom QNAM subclass
++#if QT_VERSION >= QT_VERSION_CHECK(5, 10, 1)
++#include <QSslSocket>
+ #define USE_HTTP2 1
+-#endif
+ 
+-// HTTP2AllowedAttribute enforces HTTP/2 instead of negotiating, see QTBUG-61397
+-#if QT_VERSION < QT_VERSION_CHECK(5, 10, 0)
+-#define HTTP2_IS_BUGGY_WITHOUT_HTTPS 1
+-#else
+-#define HTTP2_IS_BUGGY_WITHOUT_HTTPS 0
++// Don't enable HTTP/2 when ALPN support status is unknown
++// Before QTBUG-65903 is implemented there is no better way than to check OpenSSL version
++static bool alpnIsSupported()
++{
++    return QSslSocket::sslLibraryVersionNumber() > 0x10002000L &&
++        QSslSocket::sslLibraryVersionString().startsWith(QLatin1String("OpenSSL"));
++}
+ #endif
+ 
+ namespace WebCore {
+@@ -74,15 +78,11 @@ QNetworkRequest ResourceRequest::toNetworkRequest(NetworkingContext *context) co
+     request.setOriginatingObject(context ? context->originatingObject() : 0);
+ 
+ #if USE(HTTP2)
+-#if HTTP2_IS_BUGGY_WITHOUT_HTTPS
+-    if (originalUrl.protocolIs("https"))
+-#endif
+-    {
++    static const bool NegotiateHttp2ForHttps = alpnIsSupported();
++    if (originalUrl.protocolIs("https") && NegotiateHttp2ForHttps)
+         request.setAttribute(QNetworkRequest::HTTP2AllowedAttribute, true);
+-    }
+ #endif // USE(HTTP2)
+ 
+-
+     const HTTPHeaderMap &headers = httpHeaderFields();
+     for (HTTPHeaderMap::const_iterator it = headers.begin(), end = headers.end();
+          it != end; ++it) {
+diff --git a/Source/WebKit/qt/README b/Source/WebKit/qt/README
+new file mode 100644
+index 000000000..8a2bc8c5b
+--- /dev/null
++++ b/Source/WebKit/qt/README
+@@ -0,0 +1,15 @@
++# Qt Port of WebKit
++
++WebKit is an open source web browser engine. WebKit's HTML and JavaScript code began as a branch of the KHTML and KJS libraries from KDE. As part of KDE framework KHTML was based on Qt but during their porting efforts Apple's engineers made WebKit toolkit independent. QtWebKit is a project aiming at porting this fabulous engine back to Qt.
++
++The Qt port of WebKit currently compiles and runs on Linux, *BSD, Windows and macOS.
++
++# Building
++
++See instructions at https://github.com/annulen/webkit/wiki
++
++# Contacts
++
++* Mailing list: webkit-qt@lists.webkit.org
++* IRC: #qtwebkit on irc.freenode.net
++* Blog: http://qtwebkit.blogspot.com
+diff --git a/Tools/qt/manifest.txt b/Tools/qt/manifest.txt
+index 6fe3e9546..39414cc5f 100644
+--- a/Tools/qt/manifest.txt
++++ b/Tools/qt/manifest.txt
+@@ -99,8 +99,9 @@ file Source/WebKit/win/Plugins
+ # Version
+ file Source/WebKit/mac/Configurations/Version.xcconfig
+ 
+-# Move LICENSE.LGPLv21 to the root
++# Move LICENSE.LGPLv21 and README to the root
+ file Source/WebKit/qt/LICENSE.LGPLv21 LICENSE.LGPLv21
++file Source/WebKit/qt/README README
+ 
+ directory Source/WebInspectorUI/UserInterface/Images
+ exclude Source/WebInspectorUI/UserInterface/Images/.*

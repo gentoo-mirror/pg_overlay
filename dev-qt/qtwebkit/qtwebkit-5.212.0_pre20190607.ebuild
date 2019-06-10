@@ -12,7 +12,7 @@ inherit check-reqs cmake-utils flag-o-matic python-any-r1 qmake-utils ruby-singl
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 HOMEPAGE="https://www.qt.io/"
-SRC_URI="https://download.qt.io/snapshots/ci/${PN}/${PV/.0_*/}/latest/src/submodules/${PN}-everywhere-src-${PV/.0_*/}.zip"
+SRC_URI="https://download.qt.io/snapshots/ci/${PN}/${PV/.0_*/}/latest/src/submodules/${PN}-everywhere-src-${PV/.0_*/}.tar.xz"
 
 LICENSE="BSD LGPL-2+"
 SLOT="5/5.212"
@@ -75,6 +75,10 @@ DEPEND="${RDEPEND}
 "
 
 S=${WORKDIR}/${PN}-everywhere-src-${PV/.0_*/}
+
+PATCHES=(
+	"${FILESDIR}/${P}-update.patch"
+)
 
 CHECKREQS_DISK_BUILD="16G" # bug 417307
 
