@@ -76,6 +76,10 @@ DEPEND="${RDEPEND}
 
 S=${WORKDIR}/${PN}-everywhere-src-${PV/.0_*/}
 
+PATCHES=(
+	"${FILESDIR}/${P}-update.patch"
+)
+
 CHECKREQS_DISK_BUILD="16G" # bug 417307
 
 _check_reqs() {
