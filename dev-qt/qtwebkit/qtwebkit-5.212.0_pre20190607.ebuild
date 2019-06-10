@@ -74,7 +74,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
-S=${WORKDIR}/${COMMIT}
+S=${WORKDIR}/${PN}-everywhere-src-${PV/.0_*/}
 
 PATCHES=(
 	"${FILESDIR}/${P}-functional.patch"
