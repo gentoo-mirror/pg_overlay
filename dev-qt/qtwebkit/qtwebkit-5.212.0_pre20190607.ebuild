@@ -77,7 +77,6 @@ DEPEND="${RDEPEND}
 S=${WORKDIR}/${PN}-everywhere-src-${PV/.0_*/}
 
 PATCHES=(
-	"${FILESDIR}/${P}-functional.patch"
 	"${FILESDIR}/${P}-fix-pkgconfig.patch"
 	"${FILESDIR}/${P}-cmake-fix-pkgconfig_deps-spelling.patch"
 	"${FILESDIR}/${P}-js-build-error.patch"
