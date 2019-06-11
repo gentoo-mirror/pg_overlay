@@ -19,7 +19,6 @@ HOMEPAGE="https://github.com/lz4/lz4"
 
 LICENSE="BSD-2 GPL-2"
 # https://abi-laboratory.pro/tracker/timeline/lz4/
-SLOT="0/r131"
 IUSE="static-libs"
 
 CMAKE_USE_DIR=${S}/contrib/cmake_unofficial
