@@ -1,0 +1,22 @@
+From: Christoph Goehre <chris@sigxcpu.org>
+Date: Mon, 16 Sep 2013 20:40:57 +0200
+Subject: Load-dependent-libraries-with-their-real-path-to-avo
+
+---
+ xpcom/glue/standalone/nsXPCOMGlue.cpp | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/xpcom/glue/standalone/nsXPCOMGlue.cpp b/xpcom/glue/standalone/nsXPCOMGlue.cpp
+index 60bc8ec..0693311 100644
+--- a/xpcom/glue/standalone/nsXPCOMGlue.cpp
++++ b/xpcom/glue/standalone/nsXPCOMGlue.cpp
+@@ -127,6 +127,9 @@ static bool ReadDependentCB(pathstr_t aDependentLib) {
+   // We do this unconditionally because of data in bug 771745
+   ReadAheadLib(aDependentLib);
+ #endif
++  char lib[MAXPATHLEN];
++  if (realpath(aDependentLib, lib))
++      aDependentLib = lib;
+   LibHandleType libHandle = GetLibHandle(aDependentLib);
+   if (libHandle) {
+     AppendDependentLib(libHandle);

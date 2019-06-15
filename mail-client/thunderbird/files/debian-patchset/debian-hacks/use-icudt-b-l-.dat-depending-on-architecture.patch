@@ -1,0 +1,63 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sun, 27 Aug 2017 21:14:01 +0200
+Subject: use icudt??{b,l}.dat depending on architecture
+
+Upstream doesn't really care about big endian platforms and so also don't
+care about a needed file icudt??b.dat on big endian platforms. Changing
+the m4 macro for ICU so the needed file will be depended on the build
+platform exported and let later the configure run automatically use the
+correct name for the ICU *.dat file so we not only depend on the
+prebuild *.dat file for little endian.
+
+The `case foo in ...` loop could be obviously more compressed with only
+one case entry for all architectures which are all big endian.
+
+---%<---
+    case $host in
+       dnl big endian architectures
+       hppa-*|m68k-*|...)
+--->%---
+
+For more readability the more exclusive extra list of all possible
+architectures with big endianness in Debian was choosen.
+---
+ build/autoconf/icu.m4 | 26 +++++++++++++++++++++++++-
+ 1 file changed, 25 insertions(+), 1 deletion(-)
+
+diff --git a/build/autoconf/icu.m4 b/build/autoconf/icu.m4
+index 4c59079..bc1873a 100644
+--- a/build/autoconf/icu.m4
++++ b/build/autoconf/icu.m4
+@@ -78,7 +78,31 @@ if test -n "$USE_ICU"; then
+     # TODO: the l is actually endian-dependent
+     # We could make this set as 'l' or 'b' for little or big, respectively,
+     # but we'd need to check in a big-endian version of the file.
+-    ICU_DATA_FILE="icudt${version}l.dat"
++    case $host in
++        dnl big endian architectures
++        hppa-*)
++            ICU_DATA_FILE="icudt${version}b.dat"
++            ;;
++        m68k-*)
++            ICU_DATA_FILE="icudt${version}b.dat"
++            ;;
++        mips-*)
++            ICU_DATA_FILE="icudt${version}b.dat"
++            ;;
++        powerpc-* | powerpc64-*)
++            ICU_DATA_FILE="icudt${version}b.dat"
++            ;;
++        s390*-*)
++            ICU_DATA_FILE="icudt${version}b.dat"
++            ;;
++        sparc*-*)
++            ICU_DATA_FILE="icudt${version}b.dat"
++            ;;
++        dnl assume little endian by default
++        *)
++            ICU_DATA_FILE="icudt${version}l.dat"
++            ;;
++    esac
+ 
+     MOZ_ICU_DATA_ARCHIVE=
+ fi

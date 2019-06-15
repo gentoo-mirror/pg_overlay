@@ -1,0 +1,49 @@
+From: Rob Lemley <rob@thunderbird.net>
+Date: Thu, 21 Feb 2019 15:14:17 -0500
+Subject: Bug 1526744 - find-dupes.py: Calculate md5 by chunk.
+
+Read the file in chunks and use md5.update() rather than reading the entire
+file into RAM and calculating the hash all at once. This prevents out of memory
+errors on build systems with low RAM.
+---
+ toolkit/mozapps/installer/find-dupes.py | 18 ++++++++++++++----
+ 1 file changed, 14 insertions(+), 4 deletions(-)
+
+diff --git a/toolkit/mozapps/installer/find-dupes.py b/toolkit/mozapps/installer/find-dupes.py
+index 3935b79..0ff7efc 100644
+--- a/toolkit/mozapps/installer/find-dupes.py
++++ b/toolkit/mozapps/installer/find-dupes.py
+@@ -39,19 +39,29 @@ def is_l10n_file(path):
+ def normalize_path(p):
+     return normalize_osx_path(p)
+ 
++def md5hash_size(fp, chunk_size=1024*10):
++    md5 = hashlib.md5()
++    size = 0
++    while True:
++        data = fp.read(chunk_size)
++        if not data:
++            break
++        md5.update(data)
++        size += len(data)
++
++    return md5.digest(), size
+ 
+ def find_dupes(source, allowed_dupes, bail=True):
+     allowed_dupes = set(allowed_dupes)
+     md5s = OrderedDict()
+     for p, f in UnpackFinder(source):
+-        content = f.open().read()
+-        m = hashlib.md5(content).digest()
++        m, content_size = md5hash_size(f.open())
+         if m not in md5s:
+             if isinstance(f, DeflatedFile):
+                 compressed = f.file.compressed_size
+             else:
+-                compressed = len(content)
+-            md5s[m] = (len(content), compressed, [])
++                compressed = content_size
++            md5s[m] = (content_size, compressed, [])
+         md5s[m][2].append(p)
+     total = 0
+     total_compressed = 0
