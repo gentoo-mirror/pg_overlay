@@ -318,12 +318,12 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
 	#
-	touch third_party/rust/packed_simd/LICENSE-APACHE
-	echo a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2 > third_party/rust/packed_simd/LICENSE-APACHE
-	sed -i s/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2/c70a2264f910fd691ab6ee714b203dad74cc500893faf45396c9ecb17d5253b5/g third_party/rust/packed_simd/.cargo-checksum.json
-	touch third_party/rust/packed_simd/LICENSE-MIT
-	echo 6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb > third_party/rust/packed_simd/LICENSE-MIT
-	sed -i s/6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb/10f349490bd1bb90ceadb6a55dd01e9fa0313d29125f3e21fbe3974fadb5580a/g third_party/rust/packed_simd/.cargo-checksum.json
+	#touch third_party/rust/packed_simd/LICENSE-APACHE
+	#echo a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2 > third_party/rust/packed_simd/LICENSE-APACHE
+	#sed -i s/a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2/c70a2264f910fd691ab6ee714b203dad74cc500893faf45396c9ecb17d5253b5/g third_party/rust/packed_simd/.cargo-checksum.json
+	#touch third_party/rust/packed_simd/LICENSE-MIT
+	#echo 6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb > third_party/rust/packed_simd/LICENSE-MIT
+	#sed -i s/6485b8ed310d3f0340bf1ad1f47645069ce4069dcc6bb46c7d5c6faf41de1fdb/10f349490bd1bb90ceadb6a55dd01e9fa0313d29125f3e21fbe3974fadb5580a/g third_party/rust/packed_simd/.cargo-checksum.json
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
