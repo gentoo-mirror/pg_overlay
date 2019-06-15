@@ -28,6 +28,8 @@ RDEPEND=""
 
 RESTRICT="!test? ( test )"
 
+PATCHES=( "${FILESDIR}/${PN}-update.patch" )
+
 S="${WORKDIR}/${PN}-1.8.4"
 
 pkg_setup() {
