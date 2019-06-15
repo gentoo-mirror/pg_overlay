@@ -36,7 +36,7 @@ pkg_setup() {
 
 src_configure() {
 	local emesonargs=(
-		-Ddefault-library shared build
+		-Ddefault-library=shared
 	)
 	meson_src_configure
 }
