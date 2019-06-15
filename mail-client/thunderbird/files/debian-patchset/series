@@ -7,7 +7,8 @@ fixes/Load-dependent-libraries-with-their-real-path-to-avo.patch
 fixes/Bug-628252-os2.cc-fails-to-compile-against-GCC-4.6-m.patch
 fixes/fix-function-nsMsgComposeAndSend-to-respect-Replo.patch
 debian-hacks/use-icudt-b-l-.dat-depending-on-architecture.patch
-debian-hacks/Build-against-system-libjsoncpp.patch
+debian-hacks/Build-against-system-jsoncpp.patch
+debian-hacks/Build-against-system-jsoncpp_2.patch
 debian-hacks/icu-use-locale.h-instead-of-xlocale.h.patch
 debian-hacks/shellutil.py-ignore-tilde-as-special-character.patch
 fixes/Fix-big-endian-build-for-SKIA.patch
