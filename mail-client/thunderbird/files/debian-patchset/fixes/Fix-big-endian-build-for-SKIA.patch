@@ -1,0 +1,118 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sat, 14 Apr 2018 18:00:02 +0200
+Subject: Fix big endian build for SKIA
+
+Some parts of the skia source are currently not prepared for building on
+big endian platforms.
+Thanks Adrian Glaubitz for the updated patch.
+---
+ gfx/skia/skia/include/core/SkColorPriv.h | 15 ++++-----------
+ gfx/skia/skia/include/core/SkImageInfo.h |  2 +-
+ gfx/skia/skia/include/gpu/GrTypes.h      |  6 ++----
+ gfx/skia/skia/include/private/GrColor.h  |  4 ++++
+ gfx/skia/skia/src/core/SkColorData.h     | 15 ++++-----------
+ 5 files changed, 15 insertions(+), 27 deletions(-)
+
+diff --git a/gfx/skia/skia/include/core/SkColorPriv.h b/gfx/skia/skia/include/core/SkColorPriv.h
+index 0cd02e8..8a7f150 100644
+--- a/gfx/skia/skia/include/core/SkColorPriv.h
++++ b/gfx/skia/skia/include/core/SkColorPriv.h
+@@ -55,17 +55,10 @@ static inline U8CPU SkUnitScalarClampToByte(SkScalar x) {
+  *  Here we enforce this constraint.
+  */
+ 
+-#ifdef SK_CPU_BENDIAN
+-    #define SK_RGBA_R32_SHIFT   24
+-    #define SK_RGBA_G32_SHIFT   16
+-    #define SK_RGBA_B32_SHIFT   8
+-    #define SK_RGBA_A32_SHIFT   0
+-#else
+-    #define SK_RGBA_R32_SHIFT   0
+-    #define SK_RGBA_G32_SHIFT   8
+-    #define SK_RGBA_B32_SHIFT   16
+-    #define SK_RGBA_A32_SHIFT   24
+-#endif
++#define SK_RGBA_R32_SHIFT   0
++#define SK_RGBA_G32_SHIFT   8
++#define SK_RGBA_B32_SHIFT   16
++#define SK_RGBA_A32_SHIFT   24
+ 
+ #define SkGetPackedA32(packed)      ((uint32_t)((packed) << (24 - SK_A32_SHIFT)) >> 24)
+ #define SkGetPackedR32(packed)      ((uint32_t)((packed) << (24 - SK_R32_SHIFT)) >> 24)
+diff --git a/gfx/skia/skia/include/core/SkImageInfo.h b/gfx/skia/skia/include/core/SkImageInfo.h
+index ece47f5..e3dec42 100644
+--- a/gfx/skia/skia/include/core/SkImageInfo.h
++++ b/gfx/skia/skia/include/core/SkImageInfo.h
+@@ -84,7 +84,7 @@ enum SkColorType {
+ #elif SK_PMCOLOR_BYTE_ORDER(R,G,B,A)
+     kN32_SkColorType = kRGBA_8888_SkColorType,
+ #else
+-    #error "SK_*32_SHIFT values must correspond to BGRA or RGBA byte order"
++    kN32_SkColorType = kBGRA_8888_SkColorType
+ #endif
+ };
+ 
+diff --git a/gfx/skia/skia/include/gpu/GrTypes.h b/gfx/skia/skia/include/gpu/GrTypes.h
+index c88d9ee..bfa9452 100644
+--- a/gfx/skia/skia/include/gpu/GrTypes.h
++++ b/gfx/skia/skia/include/gpu/GrTypes.h
+@@ -344,15 +344,13 @@ enum GrPixelConfig {
+ static const int kGrPixelConfigCnt = kLast_GrPixelConfig + 1;
+ 
+ // Aliases for pixel configs that match skia's byte order.
+-#ifndef SK_CPU_LENDIAN
+-    #error "Skia gpu currently assumes little endian"
+-#endif
+ #if SK_PMCOLOR_BYTE_ORDER(B,G,R,A)
+     static const GrPixelConfig kSkia8888_GrPixelConfig = kBGRA_8888_GrPixelConfig;
+ #elif SK_PMCOLOR_BYTE_ORDER(R,G,B,A)
+     static const GrPixelConfig kSkia8888_GrPixelConfig = kRGBA_8888_GrPixelConfig;
+ #else
+-    #error "SK_*32_SHIFT values must correspond to GL_BGRA or GL_RGBA format."
++    static const GrPixelConfig kSkia8888_GrPixelConfig = kBGRA_8888_GrPixelConfig;
++    static const GrPixelConfig kSkiaGamma8888_GrPixelConfig = kSBGRA_8888_GrPixelConfig;
+ #endif
+ 
+ /**
+diff --git a/gfx/skia/skia/include/private/GrColor.h b/gfx/skia/skia/include/private/GrColor.h
+index b4a461d..14c5eb9 100644
+--- a/gfx/skia/skia/include/private/GrColor.h
++++ b/gfx/skia/skia/include/private/GrColor.h
+@@ -74,7 +74,11 @@ static inline GrColor GrColorPackA4(unsigned a) {
+  *  Since premultiplied means that alpha >= color, we construct a color with
+  *  each component==255 and alpha == 0 to be "illegal"
+  */
++#ifdef SK_CPU_BENDIAN
++#define GrColor_ILLEGAL     0xFFFFFF00
++#else
+ #define GrColor_ILLEGAL     (~(0xFF << GrColor_SHIFT_A))
++#endif
+ 
+ #define GrColor_WHITE 0xFFFFFFFF
+ #define GrColor_TRANSPARENT_BLACK 0x0
+diff --git a/gfx/skia/skia/src/core/SkColorData.h b/gfx/skia/skia/src/core/SkColorData.h
+index 3fc0113..43ae01e 100644
+--- a/gfx/skia/skia/src/core/SkColorData.h
++++ b/gfx/skia/skia/src/core/SkColorData.h
+@@ -32,17 +32,10 @@
+  *  Here we enforce this constraint.
+  */
+ 
+-#ifdef SK_CPU_BENDIAN
+-    #define SK_BGRA_B32_SHIFT   24
+-    #define SK_BGRA_G32_SHIFT   16
+-    #define SK_BGRA_R32_SHIFT   8
+-    #define SK_BGRA_A32_SHIFT   0
+-#else
+-    #define SK_BGRA_B32_SHIFT   0
+-    #define SK_BGRA_G32_SHIFT   8
+-    #define SK_BGRA_R32_SHIFT   16
+-    #define SK_BGRA_A32_SHIFT   24
+-#endif
++#define SK_BGRA_B32_SHIFT   0
++#define SK_BGRA_G32_SHIFT   8
++#define SK_BGRA_R32_SHIFT   16
++#define SK_BGRA_A32_SHIFT   24
+ 
+ #if defined(SK_PMCOLOR_IS_RGBA) && defined(SK_PMCOLOR_IS_BGRA)
+     #error "can't define PMCOLOR to be RGBA and BGRA"
