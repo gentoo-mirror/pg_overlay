@@ -28,6 +28,8 @@ RDEPEND=""
 
 RESTRICT="!test? ( test )"
 
+S="${WORKDIR}/${PN}-1.8.4"
+
 pkg_setup() {
 	if use doc || use test; then
 		python-any-r1_pkg_setup
