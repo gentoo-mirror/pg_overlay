@@ -87,7 +87,7 @@ index 59022733ce0d..20b9733957d2 100644
  
  LOCAL_INCLUDES += [
 -    '/toolkit/components/jsoncpp/include',
-+    '%/usr/include/jsoncpp',
++    '%/usr/include',
  ]
  
  if CONFIG['OS_TARGET'] != 'WINNT':
