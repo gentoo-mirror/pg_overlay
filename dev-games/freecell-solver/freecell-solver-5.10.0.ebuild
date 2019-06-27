@@ -40,6 +40,8 @@ src_configure() {
 		-DBUILD_STATIC_LIBRARY=OFF
 		-DFCS_BUILD_DOCS=OFF
 		-DFCS_WITH_TEST_SUITE=OFF #requires unpackaged dependencies
+		-DFCS_AVOID_TCMALLOC=OFF
+		-DOPTIMIZATION_OMIT_FRAME_POINTER=ON
 	)
 
 	cmake-utils_src_configure
