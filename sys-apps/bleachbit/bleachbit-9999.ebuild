@@ -12,7 +12,7 @@ inherit desktop distutils-r1 l10n git-r3
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="https://bleachbit.org/"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-EGIT_BRANCH="gtk3"
+#EGIT_BRANCH="gtk3"
 
 LICENSE="GPL-3"
 SLOT="0"
