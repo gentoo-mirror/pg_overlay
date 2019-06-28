@@ -60,8 +60,8 @@ python_install_all() {
 	doicon ${PN}.png
 	domenu ${PN}.desktop
 
-	#insinto /usr/lib64/python2.7/site-packages/bleachbit/data
-	#doins data/app-menu.ui
+	insinto /usr/lib64/python2.7/site-packages/data
+	doins data/app-menu.ui
 	
 }
 
