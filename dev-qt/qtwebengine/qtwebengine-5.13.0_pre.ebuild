@@ -76,13 +76,7 @@ DEPEND="${RDEPEND}
 	dev-util/re2c
 	sys-devel/bison
 	pax_kernel? ( sys-apps/elfix )
-	!!=sys-devel/binutils-2.31.1-r5
-	!!=sys-devel/binutils-2.32-r0
 "
-
-PATCHES+=(
-	"${FILESDIR}/${PN}-5.12.0-nouveau-disable-gpu.patch" # bug 609752
-)
 
 src_prepare() {
 	use pax_kernel && PATCHES+=( "${FILESDIR}/${PN}-5.11.2-paxmark-mksnapshot.patch" )
@@ -96,6 +90,9 @@ src_prepare() {
 	find "${S}" -type f -name "*.pr[fio]" | xargs sed -i -e 's|INCLUDEPATH += |&$$QTWEBENGINE_ROOT/include |' || die
 
 	qt_use_disable_config alsa webengine-alsa src/core/config/linux.pri
+	qt_use_disable_config geolocation webengine-geolocation \
+		src/core/core_chromium.pri \
+		src/core/core_common.pri
 	qt_use_disable_config pulseaudio webengine-pulseaudio src/core/config/linux.pri
 
 	qt_use_disable_mod designer webenginewidgets src/plugins/plugins.pro
@@ -132,9 +129,9 @@ src_install() {
 	qt5-build_src_install
 
 	# bug 601472
-	if [[ ! -f ${D%/}${QT5_LIBDIR}/libQt5WebEngine.so ]]; then
+	if [[ ! -f ${D}${QT5_LIBDIR}/libQt5WebEngine.so ]]; then
 		die "${CATEGORY}/${PF} failed to build anything. Please report to https://bugs.gentoo.org/"
 	fi
 
-	pax-mark m "${D%/}${QT5_LIBEXECDIR}"/QtWebEngineProcess
+	pax-mark m "${D}${QT5_LIBEXECDIR}"/QtWebEngineProcess
 }
