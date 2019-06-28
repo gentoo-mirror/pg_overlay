@@ -12,7 +12,7 @@ inherit desktop distutils-r1 l10n git-r3
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="https://bleachbit.org/"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-EGIT_BRANCH="gtk3"
+#EGIT_BRANCH="gtk3"
 
 LICENSE="GPL-3"
 SLOT="0"
@@ -32,7 +32,7 @@ python_prepare_all() {
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rem_locale
 
-	sed -i "s/bleachbit.bleachbit_exe_path, 'data', 'app-menu.ui'/bleachbit.bleachbit_exe_path, 'bleachbit', 'data', 'app-menu.ui'/g" bleachbit/GUI.py || die
+	#sed -i "s/bleachbit.bleachbit_exe_path, 'data', 'app-menu.ui'/bleachbit.bleachbit_exe_path, 'bleachbit', 'data', 'app-menu.ui'/g" bleachbit/GUI.py || die
 
 	# choose correct Python implementation, bug #465254
 	sed -i 's/python/$(PYTHON)/g' po/Makefile || die
@@ -60,8 +60,8 @@ python_install_all() {
 	doicon ${PN}.png
 	domenu ${PN}.desktop
 
-	insinto /usr/lib64/python2.7/site-packages/bleachbit/data
-	doins data/app-menu.ui
+	#insinto /usr/lib64/python2.7/site-packages/bleachbit/data
+	#doins data/app-menu.ui
 	
 }
 
