@@ -1,7 +1,6 @@
 app-arch/lz4 1.9.1: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
-dev-libs/jsoncpp 1.9.0: C++ JSON reader and writer
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-libs/nettle 3.4.1: Low-level cryptographic library
 dev-python/configobj 5.0.6: Simple config file reader and writer
