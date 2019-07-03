@@ -38,6 +38,7 @@ src_configure() {
 	local emesonargs=(
 		--buildtype release
 		-Ddefault_library=shared
+		-includedir=include/jsoncpp
 	)
 	meson_src_configure
 }
