@@ -6,7 +6,7 @@ EAPI=6
 inherit meson git-r3
 
 DESCRIPTION="A library for interfacing Music Player Daemon (media-sound/mpd)"
-HOMEPAGE="http://www.musicpd.org"
+HOMEPAGE="https://www.musicpd.org"
 EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
 LICENSE="BSD"
