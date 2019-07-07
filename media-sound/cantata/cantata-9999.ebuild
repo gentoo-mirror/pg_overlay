@@ -1,10 +1,10 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-PLOCALES="cs da de en_GB es fr hu it ja ko pl pt_BR ru zh_CN"
-inherit cmake-utils git-r3 gnome2-utils l10n qmake-utils xdg-utils
+PLOCALES="cs da de en_GB es fi fr hu it ja ko pl pt_BR ru zh_CN"
+inherit cmake-utils git-r3 l10n qmake-utils xdg-utils
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
 HOMEPAGE="https://github.com/CDrummond/cantata"
@@ -12,8 +12,8 @@ EGIT_REPO_URI="https://github.com/CDrummond/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks zeroconf"
+KEYWORDS="amd64 x86"
+IUSE="cdda cddb cdio http-server libav mtp musicbrainz replaygain streaming taglib udisks zeroconf"
 REQUIRED_USE="
 	?? ( cdda cdio )
 	cdda? ( udisks || ( cddb musicbrainz ) )
@@ -24,6 +24,9 @@ REQUIRED_USE="
 	replaygain? ( taglib )
 "
 
+BDEPEND="
+	dev-qt/linguist-tools:5
+"
 COMMON_DEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
@@ -33,7 +36,6 @@ COMMON_DEPEND="
 	dev-qt/qtsvg:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
-	|| ( kde-frameworks/breeze-icons:5 kde-frameworks/oxygen-icons:* )
 	sys-libs/zlib
 	virtual/libudev:=
 	cdda? ( media-sound/cdparanoia )
@@ -44,7 +46,8 @@ COMMON_DEPEND="
 	replaygain? (
 		media-libs/libebur128
 		media-sound/mpg123
-		virtual/ffmpeg
+		libav? ( media-video/libav:= )
+		!libav? ( media-video/ffmpeg:0= )
 	)
 	streaming? ( dev-qt/qtmultimedia:5 )
 	taglib? (
@@ -55,10 +58,10 @@ COMMON_DEPEND="
 "
 RDEPEND="${COMMON_DEPEND}
 	dev-lang/perl[ithreads]
+	|| ( kde-frameworks/breeze-icons:5 kde-frameworks/oxygen-icons:* )
 "
 DEPEND="${COMMON_DEPEND}
 	dev-qt/qtconcurrent:5
-	dev-qt/linguist-tools:5
 "
 
 # cantata has no tests
@@ -99,7 +102,7 @@ src_configure() {
 		-DENABLE_DEVICES_SUPPORT=$(usex udisks)
 		-DENABLE_AVAHI=$(usex zeroconf)
 		-DENABLE_REMOTE_DEVICES=OFF
-		-DENABLE_UDISKS2=OFF
+		-DENABLE_UDISKS2=$(usex udisks)
 	)
 
 	cmake-utils_src_configure
