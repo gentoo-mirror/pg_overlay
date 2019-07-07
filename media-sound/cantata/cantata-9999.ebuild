@@ -102,7 +102,7 @@ src_configure() {
 		-DENABLE_DEVICES_SUPPORT=$(usex udisks)
 		-DENABLE_AVAHI=$(usex zeroconf)
 		-DENABLE_REMOTE_DEVICES=OFF
-		-DENABLE_UDISKS2=OFF
+		-DENABLE_UDISKS2=$(usex udisks)
 	)
 
 	cmake-utils_src_configure
