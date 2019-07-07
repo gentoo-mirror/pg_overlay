@@ -15,6 +15,9 @@ dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
 media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with Mozilla packages
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
+media-sound/cantata:cdio - Use dev-libs/libcdio-paranoia for CD support (instead of cdparanoia)
+media-sound/cantata:http-server - Enable internal HTTP server to play non-MPD files
+media-sound/cantata:replaygain - Enable ReplayGain support, for relative volume adjustments
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
 net-im/pidgin:gadu - Enable Gadu Gadu protocol support
