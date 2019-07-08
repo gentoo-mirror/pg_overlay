@@ -104,4 +104,6 @@ src_configure() {
 	)
 
 	kde5_src_configure
+	sed -i s:usr/lib/:usr/lib64/:g ${WORKDIR}/${PN}-${PV}_build/build.ninja
+	
 }
