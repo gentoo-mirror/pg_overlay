@@ -100,12 +100,9 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake-utils_use_find_package caps Libcap) \
-		-DCMAKE_INSTALL_LIBDIR=lib64 \
-		-DCMAKE_INSTALL_LIBEXECDIR=lib64
+		$(cmake-utils_use_find_package caps Libcap)
 	)
 
 	kde5_src_configure
-	#sed -i s:usr/lib/:usr/lib64/:g ${WORKDIR}/${PN}-${PV}_build/build.ninja
-	
+	sed -i s:usr/lib/:usr/lib64/:g ${WORKDIR}/${PN}-${PV}_build/build.ninja
 }
