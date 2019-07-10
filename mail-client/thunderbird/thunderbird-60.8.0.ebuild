@@ -478,27 +478,35 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --with-pthreads
 
+	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
+
+	mozconfig_annotate '' --disable-callgrind
 	mozconfig_annotate '' --disable-crashreporter
+
 	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --disable-dmd
+
+	mozconfig_annotate '' --disable-eme
+	
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-macos-target
-	mozconfig_annotate '' --disable-debug-symbols
+
 	mozconfig_annotate '' --disable-jprof
-	mozconfig_annotate '' --disable-dmd
 	mozconfig_annotate '' --disable-instruments
-	mozconfig_annotate '' --disable-callgrind
+	mozconfig_annotate '' --disable-ldap
+
 	mozconfig_annotate '' --disable-profiling
 	mozconfig_annotate '' --disable-vtune
 	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-trace-logging
 	mozconfig_annotate '' --disable-rust-tests
-	mozconfig_annotate '' --disable-eme
+
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-mortar
 	mozconfig_annotate '' --disable-geckodriver
-	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-gtest-in-build
 	mozconfig_annotate '' --disable-debug-js-modules
 	mozconfig_annotate '' --disable-dtrace
