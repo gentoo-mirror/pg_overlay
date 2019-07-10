@@ -470,11 +470,15 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
+	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-install-strip
-	#mozconfig_annotate '' --enable-rust-simd
+	mozconfig_annotate '' --enable-llvm-hacks
+	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
+	mozconfig_annotate '' --with-pthreads
+
+	mozconfig_annotate '' --disable-address-sanitizer-reporter
 	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-rust-debug
@@ -494,14 +498,12 @@ src_configure() {
 	mozconfig_annotate '' --disable-ipdl-tests
 	mozconfig_annotate '' --disable-mortar
 	mozconfig_annotate '' --disable-geckodriver
-	mozconfig_annotate '' --disable-address-sanitizer-reporter
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-gtest-in-build
 	mozconfig_annotate '' --disable-debug-js-modules
 	mozconfig_annotate '' --disable-dtrace
 	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-libproxy
-	mozconfig_annotate '' --enable-llvm-hacks
 	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-maintenance-service
 	mozconfig_annotate '' --disable-mobile-optimize
@@ -509,11 +511,11 @@ src_configure() {
 	mozconfig_annotate '' --disable-parental-controls 
 	mozconfig_annotate '' --disable-tasktracer
 	mozconfig_annotate '' --disable-thread-sanitizer
+	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-valgrind
 	mozconfig_annotate '' --disable-verify-mar
 	mozconfig_annotate '' --disable-warnings-as-errors
 	mozconfig_annotate '' --without-debug-label
-	mozconfig_annotate '' --with-pthreads
 
 	mozlinguas_mozconfig
 
