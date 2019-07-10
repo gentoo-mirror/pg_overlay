@@ -471,7 +471,9 @@ src_configure() {
 
 	#
 	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --enable-jemalloc
 	mozconfig_annotate '' --enable-linker=gold
 	mozconfig_annotate '' --enable-llvm-hacks
 	mozconfig_annotate '' --enable-rust-simd
