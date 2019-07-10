@@ -1,6 +1,7 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
 mozilla-cubeb-noreturn.patch
+mozilla-reduce-rust-debuginfo.patch
 
 firefox-kde.patch
 firefox-branded-icons.patch
