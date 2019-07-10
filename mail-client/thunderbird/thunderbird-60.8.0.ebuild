@@ -478,14 +478,13 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --with-pthreads
 
+	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
 	mozconfig_annotate '' --disable-crashreporter
-	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-debug
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-macos-target
 	mozconfig_annotate '' --disable-debug-symbols
-	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-jprof
 	mozconfig_annotate '' --disable-dmd
 	mozconfig_annotate '' --disable-instruments
@@ -511,6 +510,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-parental-controls 
 	mozconfig_annotate '' --disable-tasktracer
+	mozconfig_annotate '' --disable-tests
 	mozconfig_annotate '' --disable-thread-sanitizer
 	mozconfig_annotate '' --disable-updater
 	mozconfig_annotate '' --disable-valgrind
