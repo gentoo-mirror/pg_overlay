@@ -30,7 +30,6 @@ DEPEND="${COMMON_DEPEND}
 DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
-	"${FILESDIR}/${PN}-0.9.7-tinfo.patch"
 )
 
 pkg_setup() {
