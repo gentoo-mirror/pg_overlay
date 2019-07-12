@@ -9,7 +9,7 @@ PLOCALE_BACKUP="en_GB"
 
 inherit autotools eutils git-r3 gnome2-utils l10n xdg-utils
 
-EGIT_REPO_URI="https://github.com/Alexey-Yakovenko/${PN}.git"
+EGIT_REPO_URI="https://github.com/DeadBeeF-Player/${PN}.git"
 EGIT_BRANCH="master"
 
 KEYWORDS=""
@@ -134,10 +134,17 @@ DEPEND="${RDEPEND}
 		amd64? ( dev-lang/yasm:0 ) )"
 
 src_prepare() {
-	if ! use_if_iuse linguas_ru ; then
+	if [[ $(l10n_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
 	fi
+
+	remove_locale() {
+		sed -e "/${1}/d" \
+			-i "${S}/po/LINGUAS" || die
+	}
+
+        l10n_for_each_disabled_locale_do remove_locale
 
 	if use midi ; then
 		# set default gentoo path
@@ -150,9 +157,10 @@ src_prepare() {
 		eapply "${FILESDIR}/${P}-remove-unity-trash.patch"
 	fi
 
-	eautopoint
+	eapply_user
+
+	config_rpath_update "${S}/config.rpath"
 	eautoreconf
-	default
 }
 
 src_configure() {
