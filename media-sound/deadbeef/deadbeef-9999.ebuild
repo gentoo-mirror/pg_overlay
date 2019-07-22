@@ -160,6 +160,13 @@ src_prepare() {
 	eapply_user
 
 	config_rpath_update "${S}/config.rpath"
+	eautopoint -f
+	eaclocal $ACLOCAL_FLAGS -I m4
+	eautoheader
+	eautoconf
+	elibtoolize --copy --automake
+	eautomake --add-missing --copy --gnu
+	eintltoolize --force --automake
 	eautoreconf
 }
 
