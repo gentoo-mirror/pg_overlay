@@ -43,7 +43,8 @@ src_prepare() {
 
 src_configure() {
 	# Generate binary translations.
-	lrelease ${PN}qt.pro || die
+	lrelease ${PN}qt.pro
+	#|| die
 
 	# noccache is required to call the correct compiler.
 	eqmake5 CONFIG+="noccache $(use debug && echo dbg)"
