@@ -164,7 +164,7 @@ src_prepare() {
 	eaclocal $ACLOCAL_FLAGS
 	eautoheader
 	eautoconf
-	elibtoolize --automake
+	elibtoolize
 	eautomake --add-missing --copy --gnu
 	eintltoolize --force --automake
 	eautoreconf
