@@ -161,10 +161,10 @@ src_prepare() {
 
 	config_rpath_update "${S}/config.rpath"
 	eautopoint -f
-	eaclocal $ACLOCAL_FLAGS -I m4
+	eaclocal $ACLOCAL_FLAGS
 	eautoheader
 	eautoconf
-	elibtoolize --copy --automake
+	elibtoolize --automake
 	eautomake --add-missing --copy --gnu
 	eintltoolize --force --automake
 	eautoreconf
