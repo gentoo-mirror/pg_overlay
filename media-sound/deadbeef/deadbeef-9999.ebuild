@@ -165,7 +165,7 @@ src_prepare() {
 	eautoheader
 	eautoconf
 	elibtoolize
-	eautomake --add-missing --copy --gnu
+	eautomake
 	eintltoolize --force --automake
 	eautoreconf
 }
