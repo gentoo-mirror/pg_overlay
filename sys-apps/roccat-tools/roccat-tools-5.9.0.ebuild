@@ -3,12 +3,12 @@
 
 EAPI=7
 
-inherit readme.gentoo-r1 cmake-utils udev user xdg poly-c_ebuilds
+inherit readme.gentoo-r1 cmake-utils udev user xdg
 
 DESCRIPTION="Utility for advanced configuration of Roccat devices"
 
 HOMEPAGE="http://roccat.sourceforge.net/"
-SRC_URI="mirror://sourceforge/roccat/${MY_P}.tar.bz2"
+SRC_URI="mirror://sourceforge/roccat/${P}.tar.bz2"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -81,6 +81,7 @@ src_configure() {
 	mycmakeargs=(
 		-DDEVICES="${USED_MODELS/;/}"
 		-DUDEVDIR="${EPREFIX}$(get_udevdir)/rules.d"
+		-DWITH_LUA=5.1
 	)
 	cmake-utils_src_configure
 }

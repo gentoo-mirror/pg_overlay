@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,8 +9,8 @@ if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/Vulkan-Headers.git"
 	inherit git-r3
 else
-	EGIT_COMMIT="4ca8ea36379b1be079d7f4b80c942af4c3172534"
-	KEYWORDS="~amd64"
+	EGIT_COMMIT="737f4c1cd96283747967c2024a0108b742214455"
+	KEYWORDS="~amd64 ~x86"
 	SRC_URI="https://github.com/KhronosGroup/Vulkan-Headers/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/Vulkan-Headers-${EGIT_COMMIT}"
 fi
@@ -20,6 +20,3 @@ HOMEPAGE="https://github.com/KhronosGroup/Vulkan-Headers"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-
-# Old packaging will cause file collisions
-RDEPEND="!<=media-libs/vulkan-loader-1.1.70.0-r999"
