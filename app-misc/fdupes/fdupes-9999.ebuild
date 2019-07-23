@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools git-r3 toolchain-funcs
+inherit autotools flag-o-matic git-r3 toolchain-funcs
 
 DESCRIPTION="Identify/delete duplicate files residing within specified directories"
 HOMEPAGE="https://github.com/adrianlopezroche/fdupes"
