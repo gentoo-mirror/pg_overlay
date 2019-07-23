@@ -12,7 +12,9 @@ dev-python/python-mpd2 9999: Python MPD client library
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/requests-toolbelt 0.8.0: A utility belt for advanced users of python-requests
 dev-qt/qtwebkit 5.212.0_pre20190626: WebKit rendering library for the Qt5 framework (deprecated)
+dev-util/vulkan-tools 1.1.114: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Mozilla packages
+media-libs/vulkan-layers 1.1.114: Vulkan Validation Layers
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 net-im/pidgin 2.13.0: GTK Instant Messenger client
