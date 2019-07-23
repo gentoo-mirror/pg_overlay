@@ -72,6 +72,11 @@ pkg_setup() {
 	done
 }
 
+# Required because xdg.eclass overrides src_prepare() from cmake-utils.eclass
+src_prepare() {
+	cmake-utils_src_prepare
+}
+
 src_configure() {
 	mycmakeargs=(
 		-DDEVICES="${USED_MODELS/;/}"
