@@ -27,10 +27,6 @@ src_configure() {
 	tc-export CC
 }
 
-src_compile() {
-	emake CC=$(tc-getCC)
-}
-
 src_install() {
 	default
 }
