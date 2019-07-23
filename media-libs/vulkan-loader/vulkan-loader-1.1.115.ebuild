@@ -1,16 +1,16 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-PYTHON_COMPAT=( python3_{4,5,6,7} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/Vulkan-Loader.git"
 	EGIT_SUBMODULES=()
 	inherit git-r3
 else
-	KEYWORDS="~amd64"
-	EGIT_COMMIT="5cdde103accaecaf6cc4a67243dd504da48b95f7"
+	KEYWORDS="~amd64 ~x86"
+	EGIT_COMMIT="36d28090e2054baac5a9f25d8df6102ef0ec8fa9"
 	SRC_URI="https://github.com/KhronosGroup/Vulkan-Loader/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	S="${WORKDIR}/Vulkan-Loader-${EGIT_COMMIT}"
 fi
@@ -26,7 +26,7 @@ IUSE="layers wayland X"
 
 PDEPEND="layers? ( media-libs/vulkan-layers:=[${MULTILIB_USEDEP}] )"
 DEPEND="${PYTHON_DEPS}
-	>=dev-util/vulkan-headers-1.1.92.0
+	>=dev-util/vulkan-headers-1.1.114
 	wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 	X? (
 		x11-libs/libX11:=[${MULTILIB_USEDEP}]
