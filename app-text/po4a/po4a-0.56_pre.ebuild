@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="6"
-PLOCALES="af ca cs da de eo es et eu fr hr id it ja kn ko nb nl pl pt_BR pt ru sl sv uk vi zh_CN zh_HK"
+PLOCALES="af ar ca cs da de eo es et eu fr hr id it ja kn ko nb nl pl pt pt_BR ru sl sv uk vi zh_CN zh_HK"
 
 inherit perl-module l10n poly-c_ebuilds
 
