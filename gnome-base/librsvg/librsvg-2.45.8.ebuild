@@ -37,11 +37,6 @@ DEPEND="${RDEPEND}
 "
 # >=gtk-doc-am-1.13, gobject-introspection-common, vala-common needed by eautoreconf
 
-PATCHES=(
-	# https://bugzilla.gnome.org/show_bug.cgi?id=653323
-	"${FILESDIR}"/${PN}-2.40.12-gtk-optional.patch
-)
-
 src_prepare() {
 	use vala && vala_src_prepare
 	gnome2_src_prepare
