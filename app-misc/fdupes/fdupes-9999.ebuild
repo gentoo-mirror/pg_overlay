@@ -18,9 +18,15 @@ DOCS=( CHANGES CONTRIBUTORS README )
 
 src_prepare() {
 	default
-	append-lfs-flags
 	eautoreconf
+	append-lfs-flags
 }
+
+src_configure() {
+	append-lfs-flags
+	tc-export CC
+}
+
 src_compile() {
 	emake CC=$(tc-getCC)
 }
