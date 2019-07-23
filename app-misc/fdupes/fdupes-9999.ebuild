@@ -20,7 +20,6 @@ src_prepare() {
 	default
 	eautoreconf
 }
-
 src_install() {
 	default
 }
