@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools flag-o-matic git-r3 toolchain-funcs
+inherit autotools git-r3 toolchain-funcs
 
 DESCRIPTION="Identify/delete duplicate files residing within specified directories"
 HOMEPAGE="https://github.com/adrianlopezroche/fdupes"
@@ -19,14 +19,7 @@ DOCS=( CHANGES CONTRIBUTORS README )
 src_prepare() {
 	default
 	eautoreconf
-	append-lfs-flags
 }
-
-src_configure() {
-	append-lfs-flags
-	tc-export CC
-}
-
 src_install() {
 	default
 }
