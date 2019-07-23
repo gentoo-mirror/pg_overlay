@@ -1,9 +1,9 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit readme.gentoo-r1 cmake-utils gnome2-utils udev user poly-c_ebuilds
+inherit readme.gentoo-r1 cmake-utils udev user xdg poly-c_ebuilds
 
 DESCRIPTION="Utility for advanced configuration of Roccat devices"
 
@@ -72,11 +72,15 @@ pkg_setup() {
 	done
 }
 
+# Required because xdg.eclass overrides src_prepare() from cmake-utils.eclass
+src_prepare() {
+	cmake-utils_src_prepare
+}
+
 src_configure() {
 	mycmakeargs=(
 		-DDEVICES="${USED_MODELS/;/}"
-		-DUDEVDIR="$(get_udevdir)/rules.d"
-		-DWITH_LUA=5.1
+		-DUDEVDIR="${EPREFIX}$(get_udevdir)/rules.d"
 	)
 	cmake-utils_src_configure
 }
@@ -91,11 +95,11 @@ src_install() {
 }
 
 pkg_preinst() {
-	gnome2_icon_savelist
+	xdg_pkg_preinst
 }
 
 pkg_postinst() {
-	gnome2_icon_cache_update
+	xdg_pkg_postinst
 	readme.gentoo_print_elog
 	ewarn
 	ewarn "This version breaks stored data for some devices. Before reporting bugs please delete"
@@ -104,5 +108,5 @@ pkg_postinst() {
 }
 
 pkg_postrm() {
-	gnome2_icon_cache_update
+	xdg_pkg_postrm
 }
