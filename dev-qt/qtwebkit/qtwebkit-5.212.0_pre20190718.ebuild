@@ -73,7 +73,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${MY_P}"
+S=${WORKDIR}/${PN}-everywhere-src-${PV/.0_*/}
 
 CHECKREQS_DISK_BUILD="16G" # bug 417307
 
