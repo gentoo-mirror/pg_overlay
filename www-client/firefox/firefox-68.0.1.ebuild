@@ -423,7 +423,7 @@ src_configure() {
 			sleep 5
 		fi
 
-		mozconfig_annotate '+lto' --enable-lto=thin
+		mozconfig_annotate '+lto' --enable-lto=full
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
