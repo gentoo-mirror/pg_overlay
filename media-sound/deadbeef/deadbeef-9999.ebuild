@@ -166,7 +166,7 @@ src_prepare() {
 	eautoconf
 	elibtoolize
 	#eautomake
-	eintltoolize --force --automake
+	#eintltoolize --force --automake
 	eautoreconf
 }
 
