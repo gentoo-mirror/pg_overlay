@@ -9,7 +9,7 @@ VIRTUALX_REQUIRED="test"
 inherit kde5
 
 DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
-SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.gz -> ${PF}.tar.gz"
 LICENSE="GPL-2+"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="caps gles2 multimedia"
