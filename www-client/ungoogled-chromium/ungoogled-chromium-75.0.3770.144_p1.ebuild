@@ -516,10 +516,10 @@ src_configure() {
 	tc-export AR CC CXX NM
 
 	# Force clang
-	CC=${CHOST}-clang
-	CXX=${CHOST}-clang++
-	AR=llvm-ar
-	NM=llvm-nm
+	#CC=${CHOST}-clang
+	#CXX=${CHOST}-clang++
+	#AR=llvm-ar
+	#NM=llvm-nm
 	strip-unsupported-flags
 
 	local gn_system_libraries=(
