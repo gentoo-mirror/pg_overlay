@@ -134,17 +134,17 @@ BDEPEND="
 	dev-vcs/git
 	sys-apps/hwids[usb(+)]
 	>=sys-devel/bison-2.4.3
-	>=sys-devel/clang-7.0.0
+	>=sys-devel/clang-8.0.0
 	sys-devel/flex
-	>=sys-devel/llvm-7.0.0[gold?]
+	>=sys-devel/llvm-8.0.0[gold?]
 	virtual/libusb:1
 	virtual/pkgconfig
-	cfi? ( >=sys-devel/clang-runtime-7.0.0[sanitize] )
+	cfi? ( >=sys-devel/clang-runtime-8.0.0[sanitize] )
 	libcxx? (
 		sys-libs/libcxx
 		sys-libs/libcxxabi
 	)
-	lld? ( >=sys-devel/lld-7.0.0 )
+	lld? ( >=sys-devel/lld-8.0.0 )
 	optimize-webui? ( >=net-libs/nodejs-7.6.0[inspector] )
 "
 
