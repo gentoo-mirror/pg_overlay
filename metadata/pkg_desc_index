@@ -3,6 +3,7 @@ app-accessibility/at-spi2-core 2.33.2: D-Bus accessibility specifications and re
 app-arch/lz4 1.9.1: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
+dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-libs/nettle 3.4.1: Low-level cryptographic library
 dev-python/configobj 5.0.6: Simple config file reader and writer
