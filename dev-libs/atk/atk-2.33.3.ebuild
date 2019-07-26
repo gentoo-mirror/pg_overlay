@@ -25,10 +25,6 @@ DEPEND="${RDEPEND}
 	>=sys-devel/gettext-0.19.8
 "
 
-PATCHES=(
-	"${FILESDIR}"/${P}-use-basename-instead-of-filename.patch
-)
-
 multilib_src_configure() {
 	local emesonargs=(
 		-Ddocs=$(multilib_native_usex gtk-doc true false)
