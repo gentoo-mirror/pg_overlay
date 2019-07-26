@@ -1,3 +1,5 @@
+app-accessibility/at-spi2-atk 2.33.2: Gtk module for bridging AT-SPI to Atk
+app-accessibility/at-spi2-core 2.33.2: D-Bus accessibility specifications and registration daemon
 app-arch/lz4 1.9.1: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
