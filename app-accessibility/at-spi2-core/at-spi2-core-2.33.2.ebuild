@@ -39,9 +39,9 @@ PATCHES=(
 
 multilib_src_configure() {
 	local emesonargs=(
-		-Denable_docs=$(multilib_native_usex gtk-doc true false)
-		-Denable-introspection=$(multilib_native_usex introspection)
-		-Denable-x11=$(usex X)
+		-Ddocs=$(multilib_native_usex gtk-doc true false)
+		-Dintrospection=$(multilib_native_usex introspection)
+		-Dx11=$(usex X)
 		-Dsystemd_user_dir="$(systemd_get_userunitdir)"
 	)
 	meson_src_configure
