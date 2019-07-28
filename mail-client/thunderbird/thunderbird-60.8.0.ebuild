@@ -288,7 +288,7 @@ src_prepare() {
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
+	#for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 	# FreeBSD patches
 	#for i in $(cat "${FILESDIR}/freebsd-patchset/series");do eapply "${FILESDIR}/freebsd-patchset/$i";done
 
