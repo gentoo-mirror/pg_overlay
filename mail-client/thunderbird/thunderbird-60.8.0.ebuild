@@ -283,7 +283,6 @@ src_prepare() {
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
 
-	eapply "${FILESDIR}"/rust-1.35.patch
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde/series");do eapply "${FILESDIR}/opensuse-kde/$i";done
 	# Fedora patches
@@ -478,7 +477,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-jemalloc
 	mozconfig_annotate '' --enable-linker=gold
-	mozconfig_annotate '' --enable-llvm-hacks
+	mozconfig_annotate '' --disable-llvm-hacks
 	#mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --with-pthreads
@@ -521,7 +520,6 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-rust-tests
-
 
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-parental-controls 
