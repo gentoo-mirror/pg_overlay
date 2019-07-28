@@ -288,7 +288,7 @@ src_prepare() {
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
 	# Debian patches
-	#for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
+	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 	# FreeBSD patches
 	#for i in $(cat "${FILESDIR}/freebsd-patchset/series");do eapply "${FILESDIR}/freebsd-patchset/$i";done
 
@@ -477,7 +477,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-jemalloc
 	mozconfig_annotate '' --enable-linker=gold
-	mozconfig_annotate '' --disable-llvm-hacks
+	mozconfig_annotate '' --enable-llvm-hacks
 	#mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --with-pthreads
