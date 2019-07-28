@@ -4,5 +4,6 @@ Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 thunderbird-debug.patch
 
 mozilla-1245783.patch
+mozilla-1460871-ldap-query.patch
 
 mozilla-526293.patch

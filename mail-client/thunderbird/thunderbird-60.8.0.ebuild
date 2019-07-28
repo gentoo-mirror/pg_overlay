@@ -472,7 +472,7 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
-	mozconfig_annotate '' --disable-elf-hack
+	mozconfig_annotate '' --enable-elf-hack
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-jemalloc
@@ -507,7 +507,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-jprof
 
-	mozconfig_annotate '' --disable-ldap
+	#mozconfig_annotate '' --disable-ldap
 	mozconfig_annotate '' --disable-libproxy
 
 	mozconfig_annotate '' --disable-macos-target
