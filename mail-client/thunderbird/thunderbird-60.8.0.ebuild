@@ -286,9 +286,9 @@ src_prepare() {
 	# OpenSUSE-KDE patchset
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde/series");do eapply "${FILESDIR}/opensuse-kde/$i";done
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
 	# Debian patches
-	#for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
+	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 	# FreeBSD patches
 	#for i in $(cat "${FILESDIR}/freebsd-patchset/series");do eapply "${FILESDIR}/freebsd-patchset/$i";done
 
@@ -472,12 +472,12 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
-	mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --disable-elf-hack
 	mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-jemalloc
 	mozconfig_annotate '' --enable-linker=gold
-	mozconfig_annotate '' --enable-llvm-hacks
+	mozconfig_annotate '' --disable-llvm-hacks
 	#mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --with-pthreads
@@ -520,7 +520,6 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-rust-tests
-
 
 	mozconfig_annotate '' --disable-necko-wifi
 	mozconfig_annotate '' --disable-parental-controls 
