@@ -1,5 +1,4 @@
 debian-hacks/Strip-version-number-from-application-before-installation.patch
-porting-kfreebsd-hurd/LDAP-support-building-on-GNU-kFreeBSD-and-GNU-Hurd.patch
 fixes/Properly-launch-applications-set-in-HOME-.mailcap.patch
 debian-hacks/Don-t-error-out-when-run-time-libsqlite-is-older-tha.patch
 debian-hacks/stop-configure-if-with-system-bz2-was-passed-but-no-.patch
