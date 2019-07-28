@@ -1,7 +1,6 @@
 rust-1.33-build.patch
 rhbz-1354671.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-rhbz-1219542-s390-build.patch
 thunderbird-debug.patch
 
 mozilla-1245783.patch
