@@ -472,72 +472,72 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
-	mozconfig_annotate '' --enable-elf-hack
-	mozconfig_annotate '' --enable-gold
-	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-jemalloc
-	mozconfig_annotate '' --enable-linker=gold
-	mozconfig_annotate '' --enable-llvm-hacks
+	#mozconfig_annotate '' --enable-elf-hack
+	#mozconfig_annotate '' --enable-gold
+	#mozconfig_annotate '' --enable-install-strip
+	#mozconfig_annotate '' --enable-jemalloc
+	#mozconfig_annotate '' --enable-linker=gold
+	#mozconfig_annotate '' --enable-llvm-hacks
 	#mozconfig_annotate '' --enable-rust-simd
-	mozconfig_annotate '' --enable-strip
-	mozconfig_annotate '' --with-pthreads
+	#mozconfig_annotate '' --enable-strip
+	#mozconfig_annotate '' --with-pthreads
 
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-address-sanitizer
-	mozconfig_annotate '' --disable-address-sanitizer-reporter
+	#mozconfig_annotate '' --disable-accessibility
+	#mozconfig_annotate '' --disable-address-sanitizer
+	#mozconfig_annotate '' --disable-address-sanitizer-reporter
 
-	mozconfig_annotate '' --disable-callgrind
-	mozconfig_annotate '' --disable-crashreporter
+	#mozconfig_annotate '' --disable-callgrind
+	#mozconfig_annotate '' --disable-crashreporter
 
-	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-debug-js-modules
-	mozconfig_annotate '' --disable-debug-symbols
-	mozconfig_annotate '' --disable-dmd
-	mozconfig_annotate '' --disable-dtrace
+	#mozconfig_annotate '' --disable-debug
+	#mozconfig_annotate '' --disable-debug-js-modules
+	#mozconfig_annotate '' --disable-debug-symbols
+	#mozconfig_annotate '' --disable-dmd
+	#mozconfig_annotate '' --disable-dtrace
 
-	mozconfig_annotate '' --disable-eme
+	#mozconfig_annotate '' --disable-eme
 
-	mozconfig_annotate '' --disable-gc-trace
-	mozconfig_annotate '' --disable-gconf
-	mozconfig_annotate '' --disable-geckodriver
-	mozconfig_annotate '' --disable-gtest-in-build
+	#mozconfig_annotate '' --disable-gc-trace
+	#mozconfig_annotate '' --disable-gconf
+	#mozconfig_annotate '' --disable-geckodriver
+	#mozconfig_annotate '' --disable-gtest-in-build
 
-	mozconfig_annotate '' --disable-instruments
-	mozconfig_annotate '' --disable-ipdl-tests
+	#mozconfig_annotate '' --disable-instruments
+	#mozconfig_annotate '' --disable-ipdl-tests
 
-	mozconfig_annotate '' --disable-jprof
+	#mozconfig_annotate '' --disable-jprof
 
 	#mozconfig_annotate '' --disable-ldap
-	mozconfig_annotate '' --disable-libproxy
+	#mozconfig_annotate '' --disable-libproxy
 
-	mozconfig_annotate '' --disable-macos-target
-	mozconfig_annotate '' --disable-maintenance-service
-	mozconfig_annotate '' --disable-memory-sanitizer
-	mozconfig_annotate '' --disable-mobile-optimize
-	mozconfig_annotate '' --disable-mortar
+	#mozconfig_annotate '' --disable-macos-target
+	#mozconfig_annotate '' --disable-maintenance-service
+	#mozconfig_annotate '' --disable-memory-sanitizer
+	#mozconfig_annotate '' --disable-mobile-optimize
+	#mozconfig_annotate '' --disable-mortar
 
-	mozconfig_annotate '' --disable-profiling
+	#mozconfig_annotate '' --disable-profiling
 
-	mozconfig_annotate '' --disable-rust-debug
-	mozconfig_annotate '' --disable-rust-tests
+	#mozconfig_annotate '' --disable-rust-debug
+	#mozconfig_annotate '' --disable-rust-tests
 
-	mozconfig_annotate '' --disable-necko-wifi
-	mozconfig_annotate '' --disable-parental-controls 
+	#mozconfig_annotate '' --disable-necko-wifi
+	#mozconfig_annotate '' --disable-parental-controls 
 
-	mozconfig_annotate '' --disable-tasktracer
-	mozconfig_annotate '' --disable-tests
-	mozconfig_annotate '' --disable-thread-sanitizer
-	mozconfig_annotate '' --disable-trace-logging
+	#mozconfig_annotate '' --disable-tasktracer
+	#mozconfig_annotate '' --disable-tests
+	#mozconfig_annotate '' --disable-thread-sanitizer
+	#mozconfig_annotate '' --disable-trace-logging
 
-	mozconfig_annotate '' --disable-updater
+	#mozconfig_annotate '' --disable-updater
 
-	mozconfig_annotate '' --disable-valgrind
-	mozconfig_annotate '' --disable-verify-mar
-	mozconfig_annotate '' --disable-vtune
+	#mozconfig_annotate '' --disable-valgrind
+	#mozconfig_annotate '' --disable-verify-mar
+	#mozconfig_annotate '' --disable-vtune
 
-	mozconfig_annotate '' --disable-warnings-as-errors
+	#mozconfig_annotate '' --disable-warnings-as-errors
 
-	mozconfig_annotate '' --without-debug-label
+	#mozconfig_annotate '' --without-debug-label
 
 	use pgo && mozconfig_annotate '+pgo' MOZ_PGO=1 && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
 
