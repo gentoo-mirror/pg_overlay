@@ -11,6 +11,5 @@ debian-hacks/icu-use-locale.h-instead-of-xlocale.h.patch
 debian-hacks/shellutil.py-ignore-tilde-as-special-character.patch
 fixes/Fix-big-endian-build-for-SKIA.patch
 fixes/Use-msse-2-fpmath-C-CXXFLAGS-only-on-x86_64-platforms.patch
-fixes/Build-also-gdata-provider-as-xpi-file.patch
 fixes/Bug-1526744-find-dupes.py-Calculate-md5-by-chunk.patch
 fixes/rust-ignore-not-available-documentation.patch
