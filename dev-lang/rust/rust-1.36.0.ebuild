@@ -216,7 +216,7 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		deny-warnings = false
-		lld = $(toml_usex system-llvm)
+		lld = $(usex system-llvm false $(toml_usex wasm))
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
