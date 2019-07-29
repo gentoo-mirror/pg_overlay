@@ -179,6 +179,8 @@ src_configure() {
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
+		use-libcxx = true
+		use-linker = "lld"
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -213,8 +215,9 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = $(usex system-llvm false $(toml_usex wasm))
 		deny-warnings = false
+		lld = $(toml_usex system-llvm)
+		llvm-libunwind = $(toml_usex system-llvm)
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
