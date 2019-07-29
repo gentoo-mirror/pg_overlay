@@ -284,13 +284,13 @@ src_prepare() {
 	eapply_user
 
 	# OpenSUSE-KDE patchset
-	#use kde && for i in $(cat "${FILESDIR}/opensuse-kde/series");do eapply "${FILESDIR}/opensuse-kde/$i";done
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde/series");do eapply "${FILESDIR}/opensuse-kde/$i";done
 	# Fedora patches
-	#for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
+	for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
 	# Debian patches
-	#for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
+	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 	# FreeBSD patches
-	#for i in $(cat "${FILESDIR}/freebsd-patchset/series");do eapply "${FILESDIR}/freebsd-patchset/$i";done
+	for i in $(cat "${FILESDIR}/freebsd-patchset/series");do eapply "${FILESDIR}/freebsd-patchset/$i";done
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
