@@ -90,7 +90,6 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 PATCHES=(
 	"${FILESDIR}"/1.34.2-fix-custom-libdir.patch
 	"${FILESDIR}"/1.35.0-revert-commits-triggering-multiple-llvm-rebuilds.patch
-	"${FILESDIR}"/1.36.0-libressl.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
