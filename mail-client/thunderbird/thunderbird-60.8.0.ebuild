@@ -42,7 +42,7 @@ SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang dbus debug hardened jack lightning neon pulseaudio
 	selinux startup-notification system-harfbuzz system-icu system-jpeg
-	system-libevent system-libvpx system-sqlite wifi +jit kde pgo"
+	system-libevent system-libvpx system-sqlite wifi +jit kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/{${PATCHTB},${PATCHFF}}.tar.xz )
@@ -539,7 +539,7 @@ src_configure() {
 
 	mozconfig_annotate '' --without-debug-label
 
-	use pgo && mozconfig_annotate '+pgo' MOZ_PGO=1 && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
+	#use pgo && mozconfig_annotate '+pgo' MOZ_PGO=1 && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
 
 	mozlinguas_mozconfig
 
