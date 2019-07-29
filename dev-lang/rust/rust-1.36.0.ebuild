@@ -88,6 +88,10 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 "
 
 PATCHES=(
+	"${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
+	"${FILESDIR}"/1.34.2-fix-custom-libdir.patch
+	"${FILESDIR}"/1.35.0-revert-commits-triggering-multiple-llvm-rebuilds.patch
+	"${FILESDIR}"/1.36.0-libressl.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -284,9 +288,9 @@ src_install() {
 		fi
 		abi_libdir=$(get_abi_LIBDIR ${v##*.})
 		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
-		mkdir -p "${ED}/usr/${abi_libdir}"
+		mkdir -p "${ED}/usr/${abi_libdir}/${P}"
 		cp "${ED}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
-		   "${ED}/usr/${abi_libdir}" || die
+		   "${ED}/usr/${abi_libdir}/${P}" || die
 	done
 
 	dodoc COPYRIGHT
@@ -340,12 +344,8 @@ pkg_postinst() {
 	if has_version app-editors/gvim || has_version app-editors/vim; then
 		elog "install app-vim/rust-vim to get vim support for rust."
 	fi
-
-	if has_version 'app-shells/zsh'; then
-		elog "install app-shells/rust-zshcomp to get zsh completion for rust."
-	fi
 }
 
 pkg_postrm() {
-	eselect rust unset --if-invalid
+	eselect rust cleanup
 }
