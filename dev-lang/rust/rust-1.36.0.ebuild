@@ -88,7 +88,6 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 "
 
 PATCHES=(
-	"${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
 	"${FILESDIR}"/1.34.2-fix-custom-libdir.patch
 	"${FILESDIR}"/1.35.0-revert-commits-triggering-multiple-llvm-rebuilds.patch
 	"${FILESDIR}"/1.36.0-libressl.patch
