@@ -217,7 +217,6 @@ src_configure() {
 		dist-src = $(toml_usex debug)
 		deny-warnings = false
 		lld = $(toml_usex system-llvm)
-		llvm-libunwind = $(toml_usex system-llvm)
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
