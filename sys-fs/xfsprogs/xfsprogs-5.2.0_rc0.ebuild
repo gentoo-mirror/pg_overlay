@@ -12,7 +12,7 @@ SRC_URI="https://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git/snapshot/${PN}-dev-
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
 IUSE="icu libedit nls readline static-libs"
 
 LIB_DEPEND=">=sys-apps/util-linux-2.17.2[static-libs(+)]
@@ -62,7 +62,7 @@ src_configure() {
 	unset PLATFORM # if set in user env, this breaks configure
 
 	local myconf=(
-		--disable-lto #655638
+		--enaable-lto #655638
 		--enable-blkid
 		--with-crond-dir="${EPREFIX}/etc/cron.d"
 		--without-systemd-unit-dir
