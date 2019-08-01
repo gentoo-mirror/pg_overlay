@@ -207,6 +207,7 @@ src_configure() {
 		debug = $(toml_usex debug)
 		optimize = $(toml_usex !debug)
 		debug-assertions = $(toml_usex debug)
+		codegen-units-std = 1
 		debuginfo = $(toml_usex debug)
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
