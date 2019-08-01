@@ -507,7 +507,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-jprof
 
-	mozconfig_annotate '' --disable-ldap
+	#mozconfig_annotate '' --disable-ldap
 	mozconfig_annotate '' --disable-libproxy
 
 	mozconfig_annotate '' --disable-macos-target
