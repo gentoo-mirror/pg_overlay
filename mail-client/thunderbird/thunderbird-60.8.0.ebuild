@@ -472,7 +472,7 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
-	#mozconfig_annotate '' --enable-elf-hack
+	mozconfig_annotate '' --enable-elf-hack
 	#mozconfig_annotate '' --enable-gold
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-jemalloc
