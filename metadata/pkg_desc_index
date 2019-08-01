@@ -14,6 +14,7 @@ dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
 dev-python/python-mpd2 9999: Python MPD client library
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/requests-toolbelt 0.8.0: A utility belt for advanced users of python-requests
+dev-python/scandir 1.10.0: A better directory iterator and faster os.walk()
 dev-qt/qtwebkit 5.212.0_pre20190626: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/vulkan-tools 1.1.114: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Mozilla packages
