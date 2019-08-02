@@ -21,7 +21,8 @@ IUSE="+gtk"
 
 RDEPEND="gtk? ( dev-python/pygobject:3[$PYTHON_USEDEP] )"
 DEPEND="${RDEPEND}
-	dev-python/setuptools[$PYTHON_USEDEP]"
+	dev-python/setuptools[$PYTHON_USEDEP]
+	dev-python/scandir[$PYTHON_USEDEP]"
 BDEPEND="sys-devel/gettext"
 
 python_prepare_all() {
