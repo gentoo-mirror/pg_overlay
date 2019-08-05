@@ -1,4 +1,4 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -33,6 +33,7 @@ DEPEND="${RDEPEND}
 	>=virtual/rust-1.20
 	>=dev-util/gtk-doc-am-1.13
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
+	virtual/cargo
 	vala? ( $(vala_depend) )
 "
 # >=gtk-doc-am-1.13, gobject-introspection-common, vala-common needed by eautoreconf
