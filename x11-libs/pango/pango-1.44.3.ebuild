@@ -8,7 +8,6 @@ inherit gnome2 multilib-minimal toolchain-funcs
 
 DESCRIPTION="Internationalized text layout and rendering library"
 HOMEPAGE="https://www.pango.org/"
-SRC_URI+=" https://dev.gentoo.org/~leio/distfiles/${PN}-1.42.4-patchset.tar.xz"
 
 LICENSE="LGPL-2+ FTL"
 SLOT="0"
@@ -38,17 +37,7 @@ DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )
 	!<=sys-devel/autoconf-2.63:2.5
 "
-
-PATCHES=(
-	"${WORKDIR}"/patches/ # bug fix cherry-picks from master by 20190216; each patch has commit id of origin/master included and will be part of 1.43.1/1.44
-)
-
 src_prepare() {
-	rm -f   "${WORKDIR}"/patches/0001-Add-missing-transfer-none-annotation-to-pango_layout.patch
-	rm -f   "${WORKDIR}"/patches/0002-Fix-crash-in-pango_fc_font_key_get_variations-when-k.patch
-	rm -f   "${WORKDIR}"/patches/0003-pango-th_brk_new-may-return-NULL.patch
-	rm -f   "${WORKDIR}"/patches/0004*
-	rm -f   "${WORKDIR}"/patches/0005*
 	gnome2_src_prepare
 	# This should be updated if next release fails to pre-generate the manpage as well, or src_prepare removed if is properly generated
 	# https://gitlab.gnome.org/GNOME/pango/issues/270
