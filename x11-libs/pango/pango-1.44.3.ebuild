@@ -4,7 +4,7 @@
 EAPI=6
 GNOME2_LA_PUNT="yes"
 
-inherit gnome2 multilib-minimal toolchain-funcs
+inherit gnome2 meson multilib-minimal toolchain-funcs
 
 DESCRIPTION="Internationalized text layout and rendering library"
 HOMEPAGE="https://www.pango.org/"
@@ -47,19 +47,20 @@ src_prepare() {
 multilib_src_configure() {
 	tc-export CXX
 
-	ECONF_SOURCE=${S} \
-	gnome2_src_configure \
-		--with-cairo \
-		$(multilib_native_use_enable introspection) \
-		$(use_with X xft) \
-		"$(usex X --x-includes="${EPREFIX}/usr/include" "")" \
-		"$(usex X --x-libraries="${EPREFIX}/usr/$(get_libdir)" "")"
+	local emesonargs=(
+		-Dgtk_doc="false"
+		-Dintrospection="$(usex introspection true false)"
+		-Dinstall-tests="$(usex test true false)"
+		-Duse_fontconfig="$(usex X true false)"
+		)
 
-	if multilib_is_native_abi; then
-		ln -s "${S}"/docs/html docs/html || die
-	fi
+	meson_src_configure
+}
+
+multilib_src_compile() {
+	meson_src_compile
 }
 
 multilib_src_install() {
-	gnome2_src_install
+	meson_src_install
 }
