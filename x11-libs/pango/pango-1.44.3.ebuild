@@ -48,6 +48,7 @@ src_prepare() {
 	rm -f   "${WORKDIR}"/patches/0002-Fix-crash-in-pango_fc_font_key_get_variations-when-k.patch
 	rm -f   "${WORKDIR}"/patches/0003-pango-th_brk_new-may-return-NULL.patch
 	rm -f   "${WORKDIR}"/patches/0004*
+	rm -f   "${WORKDIR}"/patches/0005*
 	gnome2_src_prepare
 	# This should be updated if next release fails to pre-generate the manpage as well, or src_prepare removed if is properly generated
 	# https://gitlab.gnome.org/GNOME/pango/issues/270
