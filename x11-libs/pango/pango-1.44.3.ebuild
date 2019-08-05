@@ -55,8 +55,4 @@ multilib_src_configure() {
 		)
 
 	meson_src_configure
-
-	if multilib_is_native_abi; then
-		ln -s "${S}"/docs/html docs/html || die
-	fi
 }
