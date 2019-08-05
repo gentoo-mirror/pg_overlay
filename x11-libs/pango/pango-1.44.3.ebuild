@@ -48,7 +48,7 @@ multilib_src_configure() {
 	tc-export CXX
 
 	local emesonargs=(
-		-Dgtk-doc="false"
+		-Dgtk_doc="false"
 		-Dintrospection="$(usex introspection true false)"
 		-Dinstall-tests="$(usex test true false)"
 		-Duse_fontconfig="$(usex X true false)"
