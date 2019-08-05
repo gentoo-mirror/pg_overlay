@@ -44,6 +44,8 @@ PATCHES=(
 )
 
 src_prepare() {
+	rm -f   "${WORKDIR}"/patches/0001-Add-missing-transfer-none-annotation-to-pango_layout.patch
+	
 	gnome2_src_prepare
 	# This should be updated if next release fails to pre-generate the manpage as well, or src_prepare removed if is properly generated
 	# https://gitlab.gnome.org/GNOME/pango/issues/270
