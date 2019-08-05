@@ -24,8 +24,8 @@ IUSE="-debug -libressl +ssl -test"
 RDEPEND="
 	sys-libs/zlib
 	ssl? (
-	    !libressl? ( dev-libs/openssl:0= )
-	    libressl? ( dev-libs/libressl:= )
+		!libressl? ( dev-libs/openssl:0= )
+		libressl? ( dev-libs/libressl:= )
 	)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
