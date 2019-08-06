@@ -23,7 +23,7 @@ if [[ ${MOZ_ESR} == 1 ]] ; then
 fi
 
 # Patch version
-PATCH="${PN}-68.0-patches-08"
+PATCH="${PN}-68.0-patches-09"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
@@ -168,8 +168,7 @@ DEPEND="${CDEPEND}
 # AVX2 instructions, bug #677052
 REQUIRED_USE="wifi? ( dbus )
 	pgo? ( lto )
-	kde? ( !bindist )
-	^^ ( pgo )"
+	kde? ( !bindist )"
 
 S="${WORKDIR}/firefox-${PV%_*}"
 
@@ -637,8 +636,8 @@ src_configure() {
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
-	echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
-	echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
+	use pgo && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
+	use pgo && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
 	#
 
 	# Finalize and report settings

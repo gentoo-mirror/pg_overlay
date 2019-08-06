@@ -1,10 +1,9 @@
 # Copyright 1999-2016 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
-# $Header: $
 
-EAPI="5"
+EAPI=7
 
-PYTHON_COMPAT=( python3_{3,4,5} )
+PYTHON_COMPAT=( python3_{6,7} )
 
 inherit cmake-utils python-single-r1
 
