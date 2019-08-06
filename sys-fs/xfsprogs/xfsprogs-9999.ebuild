@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools toolchain-funcs multilib usr-ldscript
+inherit autotools toolchain-funcs multilib usr-ldscript git-r3
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://oss.sgi.com/projects/xfs/"
