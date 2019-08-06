@@ -157,8 +157,8 @@ DEPEND="${CDEPEND}
 		)
 	)
 	pulseaudio? ( media-sound/pulseaudio )
-	>=virtual/cargo-1.31.0
-	>=virtual/rust-1.31.0
+	>=virtual/cargo-1.34.0
+	>=virtual/rust-1.34.0
 	wayland? ( >=x11-libs/gtk+-3.11:3[wayland] )
 	amd64? ( >=dev-lang/yasm-1.1 virtual/opengl )
 	x86? ( >=dev-lang/yasm-1.1 virtual/opengl )
@@ -306,7 +306,6 @@ src_prepare() {
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
-	#rm -fr browser/extensions/{formautofill,mortar,webcompat,webcompat-reporter} || die
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
