@@ -75,7 +75,7 @@ src_configure() {
 
 	econf "${myconf[@]}"
 
-	#MAKEOPTS+=" V=1"
+	MAKEOPTS+=" V=1"
 }
 
 src_install() {
