@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit toolchain-funcs multilib systemd usr-ldscript
+inherit autotools toolchain-funcs multilib usr-ldscript
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
@@ -65,7 +65,7 @@ src_configure() {
 		--disable-lto #655638
 		--enable-blkid
 		--with-crond-dir="${EPREFIX}/etc/cron.d"
-		--with-systemd-unit-dir="$(systemd_get_systemunitdir)"
+		--without-systemd-unit-dir
 		$(use_enable icu libicu)
 		$(use_enable nls gettext)
 		$(use_enable readline)
