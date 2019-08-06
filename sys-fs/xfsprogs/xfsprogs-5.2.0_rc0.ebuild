@@ -62,7 +62,7 @@ src_configure() {
 	unset PLATFORM # if set in user env, this breaks configure
 
 	local myconf=(
-		--enaable-lto #655638
+		--disable-lto #655638
 		--enable-blkid
 		--with-crond-dir="${EPREFIX}/etc/cron.d"
 		--without-systemd-unit-dir
