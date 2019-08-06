@@ -10,4 +10,4 @@ RDEPEND=>=sys-apps/util-linux-2.17.2 icu? ( dev-libs/icu:= ) readline? ( sys-lib
 SLOT=0
 SRC_URI=https://git.kernel.org/pub/scm/fs/xfs/xfsprogs-dev.git/snapshot/xfsprogs-dev-5.2.0-rc0.tar.gz
 _eclasses_=autotools	1bf086cdd7356f5c9a4acd9727bd2065	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	a3a237ef6c0c58546bf23b2c382f9e56	usr-ldscript	766f0a506b45f02361ad1b8ca205b7e1
-_md5_=bcdd84991811d78308009ba102ac3ed9
+_md5_=d9e930b28139ab0c1b5e5f985e6eb3d6
