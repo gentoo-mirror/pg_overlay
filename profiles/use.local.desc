@@ -3,8 +3,65 @@
 # * generated automatically using pmaint *
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
+app-emulation/virtualbox:headless - Build without any graphic frontend
+app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
+app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels.
+app-emulation/virtualbox:sdk - Enable building of SDK
+app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
+app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
+app-misc/worker:avfs - Enable support for sys-fs/avfs
+app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
+app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
+app-office/libreoffice:googledrive - Enable support for remote files on Google Drive
+app-office/libreoffice:gtk2 - Enable legacy gtk2 frontend
+app-office/libreoffice:mariadb - Prefer mariadb connector over mysql connector
+app-office/libreoffice:odk - Build the Office Development Kit
+app-office/libreoffice:pdfimport - Enable PDF import via the Poppler library
+app-office/libreoffice:vlc - Use media-video/vlc for video embedding
+app-office/libreoffice-l10n:offlinehelp - Install help files locally instead of using the LibreOffice Wiki
+app-portage/eix:debug - Build with upstream's CXXFLAGS/LDFLAGS for debugging support; not recommended for normal use.
+app-portage/eix:dep - Make DEP=true the default which enables support for {,R,P,B}DEPEND but requires roughly double disk and memory.
+app-portage/eix:doc - Create description of the eix cache file additionally in html format
+app-portage/eix:jumbo-build - Compile faster and produce better binary. Recommended unless compiling on a quite memory-restricted system.
+app-portage/eix:meson - Build with meson instead of autotools. Faster but less compatible
+app-portage/eix:optimization - Accept upstream's choices for CXXFLAGS/LDFLAGS for optimization. Absense of this USE flag does not strip user's *FLAGS
+app-portage/eix:required-use - Make REQUIRED_USE=true the default which enables support for REQUIRED_USE but requires more disk and memory.
+app-portage/eix:security - This adds some checks which can prevent certain exploits if e.g. the eix code has a bug. If you use the hardened toolchain, using this flag does not increase security and can even lead to problems.
+app-portage/eix:sqlite - Compile in support for portage's sqlite backend; to actually use it you need additional configuration of portage and eix
+app-portage/eix:src-uri - Make SRC_URI=true the default which enables support for SRC_URI but requires roughly double disk and memory.
+app-portage/eix:strong-optimization - Adds several more agressive CXXFLAGS/LDFLAGS for optimization like graphite (if available). May cause trouble with some buggy compiler versions. Absense of this USE flag does not strip user's *FLAGS
+app-portage/eix:strong-security - Add many checks to prevent exploits if eix code has a bug. This will slow down eix considerably. Use only if you are paranoid or have reasons to suspect a bug.
+app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
+app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
+app-text/qstardict:stardict - build stardict plugin
+app-text/qstardict:swac - 
+app-text/qstardict:web - build web plugin
+dev-lang/rust:cargo - Install cargo component
+dev-lang/rust:clippy - Install clippy component
+dev-lang/rust:rls - Install rls component
+dev-lang/rust:rustfmt - Install rustfmt component
+dev-lang/rust:system-llvm - Use the system LLVM install
+dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
+dev-libs/boost:context - Build and install the Boost.Context (and Boost.Fiber) library and all other Boost libraries that depend on it
+dev-libs/boost:debug - Build and install only the debug version of the Boost libraries. Only enable this flag if you're developing against boost.
+dev-libs/boost:doc - Install the full API documentation documentation. This takes over 200MB of extra disk space.
+dev-libs/boost:nls - Build libboost_locale. This library requires compatible C library interfaces, which might not be provided by uClibc or other embedded libraries.
+dev-libs/boost:threads - Build multi-thread-compatible libraries instead of single-threaded only.
+dev-libs/boost:tools - Build and install the boost tools (bcp, quickbook, inspect, wave)
+dev-libs/glib:dbus - Enable dependencies required by glib libraries using dbus service to manage settings saving
+dev-libs/glib:mime - Pull in shared MIME database that many glib-based applications require at runtime to detect or open files. Warning: do not disable this flag unless installing on a headless server.
+dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap
+dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
+dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
+dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
+dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
+dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
+dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
 dev-python/pygame:midi - Enable midi support using media-libs/portmidi
+dev-python/twisted:conch - include Twisted SSHv2 implementation
+dev-python/twisted:http2 - include http2 support
+dev-python/twisted:serial - include serial port support
 dev-qt/qtwebkit:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebkit:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer using SLOT 1.0
@@ -15,13 +72,230 @@ dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
 dev-util/vulkan-tools:cube - Build the cube/cubepp demos
 dev-util/vulkan-tools:vulkaninfo - Build the vulkaninfo utility
+dev-vcs/mercurial:bugzilla - Support bugzilla integration.
+dev-vcs/mercurial:chg - Support Mercurial command server client
+dev-vcs/mercurial:gpg - Support signing with GnuPG.
+dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
+games-board/pysolfc:extra-cardsets - Install extra cardsets
+games-board/pysolfc:sound - Enable sound support using dev-python/pygame
+gnome-base/librsvg:tools - Build svg viewer tool
+kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
+kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
+mail-client/thunderbird:bindist - Disable official Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.
+mail-client/thunderbird:clang - Use Clang compiler instead of GCC
+mail-client/thunderbird:crypt - Enable encryption support with enigmail
+mail-client/thunderbird:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
+mail-client/thunderbird:gtk2 - Use the cairo-gtk2 rendering engine instead of the default cairo-gtk3
+mail-client/thunderbird:lightning - Enable app-global calendar support (note 38.0 and above bundles calendar support when this flag is off)
+mail-client/thunderbird:minimal - Remove the software development kit and headers
+mail-client/thunderbird:mozdom - Enable Mozilla's DOM inspector
+mail-client/thunderbird:rust - Enable support for using rust compiler (experimental)
+mail-client/thunderbird:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
+mail-client/thunderbird:system-harfbuzz - Use the system-wide media-libs/harfbuzz and media-gfx/graphite2 instead of bundled.
+mail-client/thunderbird:system-icu - Use the system-wide dev-libs/icu instead of bundled.
+mail-client/thunderbird:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled.
+mail-client/thunderbird:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
+mail-client/thunderbird:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
+mail-client/thunderbird:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
+media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
+media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
+media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
+media-libs/libplacebo:vulkan - Add support for the vulkan graphics API
 media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with Mozilla packages
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
+media-libs/vulkan-loader:layers - Include the vulkan layers
+media-plugins/audacious-plugins:adplug - Build with AdPlug (Adlib sound card emulation) support
+media-plugins/audacious-plugins:ampache - Support controlling audacious via www-apps/ampache
+media-plugins/audacious-plugins:aosd - Enable support for Audacious OSD
+media-plugins/audacious-plugins:bs2b - Enable Bauer Bauer stereophonic-to-binaural headphone filter
+media-plugins/audacious-plugins:cue - Support CUE sheets using the libcue library
+media-plugins/audacious-plugins:fluidsynth - Support FluidSynth as MIDI synth backend
+media-plugins/audacious-plugins:gme - Support various gaming console music formats
+media-plugins/audacious-plugins:gtk3 - Link against version 3 of the GIMP Toolkit instead of version 2 (x11-libs/gtk+)
+media-plugins/audacious-plugins:hotkeys - Enable support for controlling via hotkeys
+media-plugins/audacious-plugins:http - Support HTTP streams through neon
+media-plugins/audacious-plugins:midi - Build with amidi-plug (MIDI synth) support
+media-plugins/audacious-plugins:scrobbler - Build with scrobbler/LastFM submission support
+media-plugins/audacious-plugins:sid - Build with SID (Commodore 64 Audio) support
+media-plugins/audacious-plugins:soxr - Build with SoX Resampler support
+media-sound/audacious:chardet - Try to handle non-UTF8 chinese/japanese/korean ID3 tags
+media-sound/audacious:gtk3 - Link against version 3 of the GIMP Toolkit instead of version 2 (x11-libs/gtk+)
 media-sound/cantata:cdio - Use dev-libs/libcdio-paranoia for CD support (instead of cdparanoia)
 media-sound/cantata:http-server - Enable internal HTTP server to play non-MPD files
 media-sound/cantata:replaygain - Enable ReplayGain support, for relative volume adjustments
+media-sound/deadbeef:aac - Advanced Audio Coding (AAC) plugin
+media-sound/deadbeef:adplug - Adplug plugin
+media-sound/deadbeef:alac - Apple Lossless Audio Codec (ALAC) plugin
+media-sound/deadbeef:cdda - Compact Disc Digital Audio (CDDA) plugin
+media-sound/deadbeef:converter - Support for converting media files
+media-sound/deadbeef:cover - Album artwork plugin
+media-sound/deadbeef:cover-imlib2 - Album artwork (with support for imlib2) plugin
+media-sound/deadbeef:cover-network - Plugin for downloading album artwork from internet
+media-sound/deadbeef:curl - cURL plugin
+media-sound/deadbeef:dts - Digital Theater System (DTS) plugin
+media-sound/deadbeef:dumb - Tracker music (MOD, S3M, XM, IT, STM, 669, PTM, PSM, MTM, DSM, ASYLUM AMF, UMX, J2B) plugin
+media-sound/deadbeef:equalizer - Equalizer plugin
+media-sound/deadbeef:ffmpeg - FFmpeg plugin
+media-sound/deadbeef:flac - Free Lossless Audio Codec (FLAC) plugin
+media-sound/deadbeef:gme - Game Music Emu (NSF, AY and other formats) plugin
+media-sound/deadbeef:gtk2 - GTK2 based user interface
+media-sound/deadbeef:gtk3 - GTK3 based user interface
+media-sound/deadbeef:hotkeys - Hotkeys support plugin
+media-sound/deadbeef:lastfm - Last.fm scrobbling plugin
+media-sound/deadbeef:libav - Libav plugin
+media-sound/deadbeef:libnotify - Notification daemon support plugin
+media-sound/deadbeef:libsamplerate - Sample rate conversion plugin
+media-sound/deadbeef:m3u - m3u playlist plugin
+media-sound/deadbeef:mac - Monkey's Audio plugin
+media-sound/deadbeef:mad - MPEG-1/2/2.5 Layer 3 (MP3) support through mad/libmad
+media-sound/deadbeef:midi - midi support (via timidity) plugin
+media-sound/deadbeef:mms - Microsoft Media Server (MMS) plugin
+media-sound/deadbeef:mono2stereo - mono2stereo plugin
+media-sound/deadbeef:mp3 - MPEG-1/2/2.5 Layer 3 (MP3) support plugin. It is a virtual use for mad/libmad or mpg123/libmpg123 since deadbeef 0.6.3
+media-sound/deadbeef:mpg123 - MPEG-1/2/2.5 Layer 3 (MP3) support through mpg123/libmpg123
+media-sound/deadbeef:nls - Native Language Support (NLS)
+media-sound/deadbeef:nullout - NULL output plugin
+media-sound/deadbeef:oss - Open Sound System (OSS) output plugin
+media-sound/deadbeef:playlist-browser - Playlist browser user interface plugin
+media-sound/deadbeef:psf - AOSDK-based PSF(QSF,SSF,DSF) plugin
+media-sound/deadbeef:pulseaudio - PulseAudio output plugin
+media-sound/deadbeef:sc68 - Atari ST and Amiga music plugin
+media-sound/deadbeef:shell-exec - Support for running shell commands
+media-sound/deadbeef:shn - Shorten (SHN) plugin
+media-sound/deadbeef:sid - Commodore64 SID music player plugin
+media-sound/deadbeef:sndfile - PCM wave support (via libsndfile) plugin
+media-sound/deadbeef:tta - True Audio TTA plugin
+media-sound/deadbeef:unity - Gnome Unity support
+media-sound/deadbeef:vorbis - Ogg Vorbis plugin
+media-sound/deadbeef:vtx - Libayemy VTX ZX-Spectrum music player plugin
+media-sound/deadbeef:wavpack - WavPack plugin
+media-sound/deadbeef:wma - Windows media audio plugin
+media-sound/deadbeef:zip - vfs_zip plugin
+media-sound/mpd:adplug - Enable the AdPlug decoder plugin
+media-sound/mpd:cdio - Use libcdio for ISO9660 parsing support
+media-sound/mpd:chromaprint - Enable ChromaPrint / AcoustID support
+media-sound/mpd:cue - Enable CUE sheet support
+media-sound/mpd:curl - Support for web stream listening
+media-sound/mpd:eventfd - Use the eventfd function in MPD's event loop
+media-sound/mpd:faad - Use external faad library for AAC decoding
+media-sound/mpd:fifo - Support writing audio to a FIFO
+media-sound/mpd:fluidsynth - Enables Fluidsynth MIDI software synthesis (discouraged)
+media-sound/mpd:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
+media-sound/mpd:id3tag - Support for ID3 tags
+media-sound/mpd:inotify - Use the Linux kernel inotify subsystem to notice changes to mpd music library
+media-sound/mpd:lame - Support for MP3 streaming via Icecast2
+media-sound/mpd:libmpdclient - Enable support for remote mpd databases
+media-sound/mpd:libsoxr - Enable the libsoxr resampler
+media-sound/mpd:mpg123 - Enable support for mp3 decoding over media-sound/mpg123
+media-sound/mpd:network - Enables network streaming support
+media-sound/mpd:nfs - Enable support for the Network File System
+media-sound/mpd:pipe - Support writing audio to a pipe
+media-sound/mpd:qobuz - Build plugin to access qobuz
+media-sound/mpd:recorder - Enables output plugin for recording radio streams
+media-sound/mpd:sid - Build with SID (Commodore 64 Audio) support
+media-sound/mpd:signalfd - Use the signalfd function in MPD's event loop
+media-sound/mpd:soundcloud - Build plugin to access soundcloud
+media-sound/mpd:systemd - Enable support for systemd socket activation
+media-sound/mpd:tidal - Build plugin to access tidal
+media-sound/mpd:twolame - Support twolame MPEG-2 encoding
+media-sound/mpd:webdav - Enable using music from a WebDAV share
+media-sound/mpd:wildmidi - Enable MIDI support via wildmidi
+media-sound/mpd-sacd:adplug - Enable the AdPlug decoder plugin
+media-sound/mpd-sacd:cdio - Use libcdio for ISO9660 parsing support
+media-sound/mpd-sacd:curl - Support for web stream listening
+media-sound/mpd-sacd:eventfd - Use the eventfd function in MPD's event loop
+media-sound/mpd-sacd:faad - Use external faad library for AAC decoding
+media-sound/mpd-sacd:fifo - Support writing audio to a FIFO
+media-sound/mpd-sacd:fluidsynth - Enables Fluidsynth MIDI software synthesis (discouraged)
+media-sound/mpd-sacd:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
+media-sound/mpd-sacd:id3tag - Support for ID3 tags
+media-sound/mpd-sacd:inotify - Use the Linux kernel inotify subsystem to notice changes to mpd music library
+media-sound/mpd-sacd:lame - Support for MP3 streaming via Icecast2
+media-sound/mpd-sacd:libmpdclient - Enable support for remote mpd databases
+media-sound/mpd-sacd:libsoxr - Enable the libsoxr resampler
+media-sound/mpd-sacd:mpg123 - Enable support for mp3 decoding over media-sound/mpg123
+media-sound/mpd-sacd:network - Enables network streaming support
+media-sound/mpd-sacd:nfs - Enable support for the Network File System
+media-sound/mpd-sacd:opus - Enable Opus codec support
+media-sound/mpd-sacd:pipe - Support writing audio to a pipe
+media-sound/mpd-sacd:recorder - Enables output plugin for recording radio streams
+media-sound/mpd-sacd:sid - Build with SID (Commodore 64 Audio) support
+media-sound/mpd-sacd:signalfd - Use the signalfd function in MPD's event loop
+media-sound/mpd-sacd:soundcloud - Build plugin to access soundcloud
+media-sound/mpd-sacd:systemd - Enable support for systemd socket activation
+media-sound/mpd-sacd:twolame - Support twolame MPEG-2 encoding
+media-sound/mpd-sacd:webdav - Enable using music from a WebDAV share
+media-sound/mpd-sacd:wildmidi - Enable MIDI support via wildmidi
+media-sound/mpd-sacd:zip - Support for ZIP files
+media-sound/qmmp:analyzer - Enable visual analyzer
+media-sound/qmmp:archive - Enable archiving plugin via app-arch/libarchive.
+media-sound/qmmp:bs2b - Enable Bauer stereophonic-to-binaural headphone filter
+media-sound/qmmp:cover - Enable album cover support
+media-sound/qmmp:crossfade - Enable crossfade effect when switching tracks
+media-sound/qmmp:cue - enable CUE sheet parsing
+media-sound/qmmp:dbus - Enable DBus notifiications and MPRIS support
+media-sound/qmmp:enca - Detects the character encoding automatically
+media-sound/qmmp:game - Enable Game music support
+media-sound/qmmp:gnome - Enable Gnome hotkey support (requires Qt5DBus)
+media-sound/qmmp:lyrics - Fetch track lyrics from the web
+media-sound/qmmp:midi - Enable midi support using wildmidi library
+media-sound/qmmp:notifier - Enable qmmps' notifier system
+media-sound/qmmp:projectm - Enable projectm music visualization plugin
+media-sound/qmmp:qsui - Enable QMMP simple UI
+media-sound/qmmp:qtmedia - Enable playback via dev-qt/qtmultimedia
+media-sound/qmmp:scrobbler - Enable audioscrobbler/last.fm support
+media-sound/qmmp:shout - Enable shoutcast plug-in via media-libs/libshout.
+media-sound/qmmp:sid - Build with SID (Commodore 64 Audio) support
+media-sound/qmmp:sndfile - Enable wav playback support via media-libs/libsndfile
+media-sound/qmmp:soxr - Use the SoX resampling library
+media-sound/qmmp:stereo - Enable stereo effect
+media-sound/qmmp:tray - Build tray icon
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
+media-video/mpv:archive - Enable support for various archive formats via app-arch/libarchive
+media-video/mpv:bluray - Enable playback of Blu-ray filesystems
+media-video/mpv:cli - Build mpv CLI player
+media-video/mpv:cplugins - Enable C plugins support
+media-video/mpv:cuda - Enable hardware video decoding via Nvidia CUDA
+media-video/mpv:drm - Enable Kernel Mode Setting / Direct Rendering Manager based video output
+media-video/mpv:egl - Enable support for various EGL-based video outputs / backends
+media-video/mpv:enca - Enable subtitles charset discovery via app-i18n/enca
+media-video/mpv:gbm - Enable Graphics Buffer Manager based EGL video backend
+media-video/mpv:jpeg - Enable support for saving screenshots in JPEG format
+media-video/mpv:libass - Enable OSD (On Screen Display) and subtitles support via media-libs/libass
+media-video/mpv:libguess - Enable subtitles charset discovery via app-i18n/libguess
+media-video/mpv:libmpv - Build mpv shared library
+media-video/mpv:lua - Enable Lua scripting, OSC (On Screen Controller) GUI and net-misc/youtube-dl hook-script
+media-video/mpv:luajit - Use dev-lang/luajit instead of dev-lang/lua
+media-video/mpv:opengl - Enable the recommended 'opengl' video output
+media-video/mpv:raspberry-pi - Enable support for the Raspberry Pi
+media-video/mpv:rubberband - Enable high quality pitch correction via media-libs/rubberband
+media-video/mpv:sdl - Enable media-libs/libsdl2 based video and audio outputs (Note: these outputs exist for compatibility reasons only, avoid if possible)
+media-video/mpv:tools - Install extra tools: mpv_identify.sh, mpv_idet.sh, and umpv
+media-video/mpv:uchardet - Enable subtitles charset discovery via app-i18n/uchardet
+media-video/mpv:vf-dlopen - Install additional video filters to be used with -vf dlopen
+net-fs/nfs-utils:junction - Enable NFS junction support in nfsref
+net-fs/nfs-utils:ldap - Add ldap support
+net-fs/nfs-utils:libmount - Link mount.nfs with libmount
+net-fs/nfs-utils:nfsdcld - Enable nfsdcld NFSv4 clientid tracking daemon
+net-fs/nfs-utils:nfsidmap - Enable support for newer nfsidmap helper
+net-fs/nfs-utils:nfsv4 - Enable support for NFSv4
+net-fs/nfs-utils:nfsv41 - Enable support for NFSv4.1
+net-fs/nfs-utils:uuid - Support UUID lookups in rpc.mountd
+net-im/gajim:crypt - End to end encryption and GPG encryption
+net-im/gajim:geolocation - Sharing your location
+net-im/gajim:idle - Enable idle module
+net-im/gajim:jingle - Audio and video calls
+net-im/gajim:keyring - Saving your password to your system keyring
+net-im/gajim:networkmanager - Network lose detection using NetworkManager
+net-im/gajim:remote - Controling Gajim instance from command line with gajim-remote
+net-im/gajim:rst - Generating XHTML output from RST code
+net-im/gajim:spell - Spellchecking of composed messages
+net-im/gajim:srv - SRV capabilities
+net-im/gajim:upnp - Ability to request your router to forward port for file transfer
+net-im/gajim:webp - Support WebP avatars
+net-im/gajim:xhtml - Enable XHTML support
+net-im/gajim:zeroconf - Serverless chatting with autodetected clients in a local network
 net-im/pidgin:gadu - Enable Gadu Gadu protocol support
 net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
 net-im/pidgin:gstreamer - Enables voice and video sessions
@@ -35,4 +309,80 @@ net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idl
 net-im/pidgin:zephyr - Enable Zephyr protocol support
 net-libs/glib-networking:gnome - Extract HTTP/HTTPS/SOCKS proxy configuration stored using GSettings
 net-libs/glib-networking:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration
+net-libs/libsoup:gssapi - Enable GSSAPI support
+net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
+net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
+net-misc/minidlna:netgear - Enable netgear branding
+net-misc/minidlna:readynas - Enable readynas branding
+net-p2p/amule:daemon - Enable amule daemon
+net-p2p/amule:remote - Enable remote controlling of the client
+net-p2p/amule:stats - Enable statistic reporting
+net-p2p/deluge:console - Enable default console UI
+net-p2p/deluge:webinterface - Install dependencies needed for the web interface
+net-p2p/qbittorrent:webui - Enable the Web UI
+net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
+net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
+net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
+net-print/samsung-unified-driver:network - Enable network printing support
+sci-geosciences/googleearth:bundled-libs - Use bundled libraries.
+sci-geosciences/googleearth:bundled-qt - Use bundled qt.
+sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
+www-client/firefox:clang - Use Clang compiler instead of GCC
+www-client/firefox:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)
+www-client/firefox:eme-free - Disable EME (DRM plugin) cabability at build time
+www-client/firefox:geckodriver - Enable WebDriver support
+www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
+www-client/firefox:gtk2 - Use the cairo-gtk2 rendering engine
+www-client/firefox:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
+www-client/firefox:lto - Enable Link Time Optimization (LTO). Requires Gold linker when using GCC or LDD linker when using Clang
+www-client/firefox:pgo - Add support for profile-guided optimization using gcc-4.5, for faster binaries. This option will double the compile time.
+www-client/firefox:rust - Enable support for using rust compiler (experimental)
+www-client/firefox:screenshot - Allow to disable screenshot extension in global profile
+www-client/firefox:system-av1 - Use the system-wide media-libs/dav1d and media-libs/libaom library instead of bundled.
+www-client/firefox:system-cairo - Use the system-wide x11-libs/cairo instead of bundled.
+www-client/firefox:system-harfbuzz - Use the system-wide media-libs/harfbuzz and media-gfx/graphite2 instead of bundled.
+www-client/firefox:system-icu - Use the system-wide dev-libs/icu instead of bundled.
+www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled.
+www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
+www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
+www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
+www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
+www-client/otter:webengine - Use dev-qt/qtwebengine as backend instead of dev-qt/qtwebkit (experimental)
+www-client/ungoogled-chromium:cfi - Build with CFI (Control Flow Integrity) enabled (recommended).
+www-client/ungoogled-chromium:closure-compile - Enable closure type-checking for Chrome's web technology-based UI. Requires Java.
+www-client/ungoogled-chromium:gnome - Improve integration with GIO (libgio).
+www-client/ungoogled-chromium:gold - Use GNU's gold linker.
+www-client/ungoogled-chromium:jumbo-build - Coalesce translation units together, making builds faster on single machines, at the expense of more memory during build time. This flag is not automatically tested by Chromium developers, so it may not work all the time.
+www-client/ungoogled-chromium:libcxx - Build against sys-devel/libcxx, which requires that all C++ dependencies must be built with '-stdlib=libc++' (EXPERIMENTAL).
+www-client/ungoogled-chromium:lld - LLD is a linker from the LLVM project. That is a drop-in replacement for system linkers and runs much faster than them (recommended).
+www-client/ungoogled-chromium:new-tcmalloc - Use the soon-to-be default tcmalloc.
+www-client/ungoogled-chromium:optimize-thinlto - Whether to enable ThinLTO optimizations. Turning ThinLTO optimizations on can substantially increase link time and binary size, but they generally also make binaries a fair bit faster.
+www-client/ungoogled-chromium:optimize-webui - Optimize parts of Chromium's UI written with web technologies (HTML/CSS/JS) for runtime performance purposes. This does more work at compile time for speed benefits at runtime.
+www-client/ungoogled-chromium:pdf - Enable the built-in PDF viewer
+www-client/ungoogled-chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3.
+www-client/ungoogled-chromium:suid - Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels.
+www-client/ungoogled-chromium:system-ffmpeg - Use the system media-video/ffmpeg instead of bundled.
+www-client/ungoogled-chromium:system-harfbuzz - Use the system media-libs/harfbuzz instead of bundled.
+www-client/ungoogled-chromium:system-icu - Use the system dev-libs/icu instead of bundled.
+www-client/ungoogled-chromium:system-jsoncpp - Use the system dev-libs/jsoncpp instead of bundled.
+www-client/ungoogled-chromium:system-libevent - Use the system dev-libs/libevent instead of bundled.
+www-client/ungoogled-chromium:system-libvpx - Use the system media-libs/libvpx instead of bundled.
+www-client/ungoogled-chromium:system-openh264 - Use the system media-libs/openh264 instead of bundled. If disabled, it will restrict USE=bindist.
+www-client/ungoogled-chromium:system-openjpeg - Use the system-wide media-libs/openjpeg instead of bundled. OpenJPEG use are exclusively for Chromium's PDF viewer.
+www-client/ungoogled-chromium:tcmalloc - Use bundled tcmalloc instead of system malloc.
+www-client/ungoogled-chromium:thinlto - Build with ThinLTO support. LTO (Link Time Optimization) achieves better runtime performance through whole-program analysis and cross-module optimization (highly recommended).
+www-client/ungoogled-chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD).
+x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
+x11-libs/cairo:glib - Compile with GLib Object System support
+x11-libs/cairo:opengl - Build the OpenGL backend
+x11-libs/cairo:utils - Build support for Cairo script and trace utilities
+x11-libs/cairo:valgrind - Built-in support to mark memory regions
+x11-libs/gtk+:adwaita-icon-theme - Force the adwaita-icon-theme
+x11-libs/gtk+:atk-bridge - Enable the gtk3-atk-bridge, hard depending on app-accessibility/at-spi2-atk and thus on sys-apps/dbus
+x11-libs/gtk+:broadway - Enable the GDK Broadway backend.
+x11-libs/gtk+:cloudprint - Enable printing via Google Cloud Print.
+x11-libs/gtk+:colord - Use x11-misc/colord for color management in printing
 x11-libs/pango:X - Build and install the legacy pangoxft library
+x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
+x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
