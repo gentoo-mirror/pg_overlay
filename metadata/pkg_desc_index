@@ -113,7 +113,7 @@ games-board/aisleriot 3.22.8: A collection of solitaire card games for GNOME
 games-board/pysolfc 2.6.2: An exciting collection of more than 1000 solitaire card games
 gnome-base/librsvg 2.45.90: Scalable Vector Graphics (SVG) rendering library
 kde-frameworks/kjsembed 5.60.0: Framework binding JavaScript objects to QObjects
-kde-frameworks/kross 5.60.0: Framework for embedding scripting into applications
+kde-frameworks/kross 5.61.0: Framework for embedding scripting into applications
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/playbar2 9999: MPRIS2 client, written in QML for Plasma 5
 kde-plasma/kwin 5.16.4: Flexible, composited Window Manager for windowing systems on Linux
