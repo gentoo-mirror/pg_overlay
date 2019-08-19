@@ -550,11 +550,6 @@ src_configure() {
 	# Enable/Disable eme support
 	use eme-free && mozconfig_annotate '+eme-free' --disable-eme
 
-	# Setup api key for location services and safebrowsing, https://bugzilla.mozilla.org/show_bug.cgi?id=1531176#c34
-	echo -n "${_google_api_key}" > "${S}"/google-api-key
-	mozconfig_annotate '' --with-google-location-service-api-keyfile="${S}/google-api-key"
-	mozconfig_annotate '' --with-google-safebrowsing-api-keyfile="${S}/google-api-key"
-
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# disable webrtc for now, bug 667642
@@ -629,6 +624,8 @@ src_configure() {
 	mozconfig_annotate '' --disable-warnings-as-errors
 
 	mozconfig_annotate '' --without-debug-label
+	mozconfig_annotate "" --without-google-location-service-api-keyfile
+	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
