@@ -32,7 +32,6 @@ dev-libs/gobject-introspection 1.60.2: Introspection system for GObject-based li
 dev-libs/gobject-introspection-common 1.60.2: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/jsoncpp 1.9.1: C++ JSON reader and writer
-dev-libs/libassuan 2.5.3_pre: IPC library used by GnuPG and GPGME
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
 dev-libs/re2 0.2019.07.01: An efficient, principled regular expression library
@@ -101,8 +100,8 @@ dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applic
 dev-util/gdbus-codegen 2.61.2: GDBus code and documentation generator
 dev-util/glib-utils 2.61.2: Build utilities for GLib using projects
 dev-util/gn 0.1584: GN is a meta-build system that generates build files for Ninja
-dev-util/gtk-doc 1.30_pre: GTK+ Documentation Generator
-dev-util/gtk-doc-am 1.30_pre: Automake files from gtk-doc
+dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
+dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/meson 0.51.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -137,7 +136,7 @@ media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/mpDris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/mpd 0.21.11: The Music Player Daemon (mpd)
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
-media-sound/pulseaudio 12.99.1: A networked sound server with an advanced plugin system
+media-sound/pulseaudio 12.99.2: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
@@ -149,7 +148,6 @@ net-fs/nfs-utils 2.3.3: NFS client and server daemons
 net-im/gajim 1.1.2: Jabber client written in PyGTK
 net-im/pidgin 2.13.0: GTK Instant Messenger client
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
-net-libs/gnutls 3.6.7.1_pre 3.6.8_pre: A TLS 1.2 and SSL 3.0 implementation for the GNU project
 net-libs/libsoup 2.66.0: An HTTP library implementation in C
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.1.9999 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
@@ -184,8 +182,6 @@ sys-libs/slang 2.3.3_pre9: Multi-platform library designed to allow a developer 
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
 www-client/firefox 68.0.2: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
-www-client/pybugz 9999: Command line interface to (Gentoo) Bugzilla
-www-client/ungoogled-chromium 75.0.3770.144_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
