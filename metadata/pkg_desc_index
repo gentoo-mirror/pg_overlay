@@ -99,6 +99,7 @@ dev-util/cbindgen 0.8.3: A tool for generating C bindings to Rust code
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.61.2: GDBus code and documentation generator
 dev-util/glib-utils 2.61.2: Build utilities for GLib using projects
+dev-util/glslang 7.11.3214: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1584: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
@@ -123,7 +124,7 @@ media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.18.0 9999: Reusable library for GPU-accelerated image processing primitives
 media-libs/openh264 1.8.0: Cisco OpenH264 library and Gecko Media Plugin for Mozilla packages
-media-libs/shaderc 9999: Collection of tools, libraries and tests for shader compilation
+media-libs/shaderc 2019.0 9999: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.1.114: Vulkan Validation Layers
 media-libs/vulkan-loader 1.1.115: Vulkan Installable Client Driver (ICD) Loader
 media-libs/x265 3.1.1_pre: Library for encoding video streams into the H.265/HEVC format
