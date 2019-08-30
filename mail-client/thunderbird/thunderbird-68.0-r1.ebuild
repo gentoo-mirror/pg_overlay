@@ -585,7 +585,7 @@ src_compile() {
 		addpredict /etc/gconf
 	fi
 
-	touch ${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" | die
+	touch "${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" | die
 
 	GDK_BACKEND=x11 \
 		MOZ_MAKE_FLAGS="${MAKEOPTS} -O" \
