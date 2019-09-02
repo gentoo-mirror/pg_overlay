@@ -30,10 +30,10 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	dev-libs/gobject-introspection-common
+	dev-util/cargo
 	>=virtual/rust-1.20
 	>=dev-util/gtk-doc-am-1.13
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
-	virtual/cargo
 	vala? ( $(vala_depend) )
 "
 # >=gtk-doc-am-1.13, gobject-introspection-common, vala-common needed by eautoreconf
@@ -62,6 +62,7 @@ multilib_src_configure() {
 		$(multilib_native_use_with tools gtk3) \
 		$(multilib_native_use_enable vala) \
 		--enable-pixbuf-loader \
+		--disable-gtk-doc \
 		"${myconf[@]}"
 
 	if multilib_is_native_abi; then
