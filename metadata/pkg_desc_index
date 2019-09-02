@@ -111,7 +111,8 @@ dev-util/vulkan-tools 1.1.114: Official Vulkan Tools and Utilities for Windows, 
 dev-vcs/mercurial 5.0: Scalable distributed SCM
 games-board/aisleriot 3.22.8: A collection of solitaire card games for GNOME
 games-board/pysolfc 2.6.2: An exciting collection of more than 1000 solitaire card games
-gnome-base/librsvg 2.45.90: Scalable Vector Graphics (SVG) rendering library
+gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
+gnome-base/librsvg 2.45.91: Scalable Vector Graphics (SVG) rendering library
 kde-frameworks/kjsembed 5.60.0: Framework binding JavaScript objects to QObjects
 kde-frameworks/kross 5.61.0: Framework for embedding scripting into applications
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
