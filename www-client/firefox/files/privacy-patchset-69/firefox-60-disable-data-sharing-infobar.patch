@@ -1,6 +1,6 @@
 --- a/browser/base/content/browser.js
 +++ b/browser/base/content/browser.js
-@@ -2045,11 +2045,6 @@
+@@ -2045,10 +2045,6 @@
        MenuTouchModeObserver.init();
      }
  
