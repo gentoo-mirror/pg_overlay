@@ -1,12 +1,13 @@
---- firefox-60.0.bak/browser/base/content/browser.js
-+++ firefox-60.0/browser/base/content/browser.js
-@@ -1530,9 +1530,6 @@
+--- a/browser/base/content/browser.js
++++ b/browser/base/content/browser.js
+@@ -2045,11 +2045,6 @@
        MenuTouchModeObserver.init();
      }
  
--    if (AppConstants.MOZ_DATA_REPORTING)
+-    if (AppConstants.MOZ_DATA_REPORTING) {
 -      gDataNotificationInfoBar.init();
+-    }
 -
-     if (!AppConstants.MOZILLA_OFFICIAL)
+     if (!AppConstants.MOZILLA_OFFICIAL) {
        DevelopmentHelpers.init();
  
