@@ -88,14 +88,13 @@ dev-qt/qtvirtualkeyboard 5.13.0_pre: Customizable input framework and virtual ke
 dev-qt/qtwayland 5.13.0_pre: Wayland platform plugin for Qt
 dev-qt/qtwebchannel 5.13.0_pre: Qt5 module for integrating C++ and QML applications with HTML/JavaScript clients
 dev-qt/qtwebengine 5.13.0_pre: Library for rendering dynamic web content in Qt5 C++ and QML applications
-dev-qt/qtwebkit 5.212.0_pre20190816: WebKit rendering library for the Qt5 framework (deprecated)
+dev-qt/qtwebkit 5.212.0_pre20190902: WebKit rendering library for the Qt5 framework (deprecated)
 dev-qt/qtwebsockets 5.13.0_pre: Implementation of the WebSocket protocol for the Qt5 framework
 dev-qt/qtwidgets 5.13.0_pre: Set of components for creating classic desktop-style UIs for the Qt5 framework
 dev-qt/qtx11extras 5.13.0_pre: Linux/X11-specific support library for the Qt5 framework
 dev-qt/qtxml 5.13.0_pre: Implementation of SAX and DOM for the Qt5 framework
 dev-qt/qtxmlpatterns 5.13.0_pre: XPath, XQuery, XSLT, and XML Schema validation library for the Qt5 framework
 dev-util/boost-build 1.69.0: A system for large project software construction, simple to use and powerful
-dev-util/cbindgen 0.8.3: A tool for generating C bindings to Rust code
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.61.2: GDBus code and documentation generator
 dev-util/glib-utils 2.61.2: Build utilities for GLib using projects
@@ -182,7 +181,7 @@ sys-fs/xfsprogs 4.20.0_rc1 5.2.0_pre 5.2.0_rc0 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.4: Kernel config generator
 sys-libs/slang 2.3.3_pre9: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
-www-client/firefox 68.0.2: Firefox Web Browser
+www-client/firefox 68.0.2 69.0: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
