@@ -10,4 +10,4 @@
 -
      if (!AppConstants.MOZILLA_OFFICIAL) {
        DevelopmentHelpers.init();
- 
+     }
