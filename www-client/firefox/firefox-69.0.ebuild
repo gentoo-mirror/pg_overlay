@@ -61,8 +61,8 @@ SRC_URI="${SRC_URI}
 	${PATCH_URIS[@]}"
 
 CDEPEND="
-	>=dev-libs/nss-3.44.1
-	>=dev-libs/nspr-4.21
+	>=dev-libs/nss-3.46
+	>=dev-libs/nspr-4.22
 	dev-libs/atk
 	dev-libs/expat
 	dev-libs/jsoncpp
