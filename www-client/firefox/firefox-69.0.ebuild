@@ -65,7 +65,6 @@ CDEPEND="
 	>=dev-libs/nspr-4.22
 	dev-libs/atk
 	dev-libs/expat
-	dev-libs/jsoncpp
 	>=x11-libs/cairo-1.10[X]
 	>=x11-libs/gtk+-2.18:2
 	>=x11-libs/gtk+-3.4.0:3=[X]
