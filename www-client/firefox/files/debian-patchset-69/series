@@ -15,8 +15,3 @@ debian-hacks/Allow-to-override-ICU_DATA_FILE-from-the-environment.patch
 debian-hacks/Set-program-name-from-the-remoting-name.patch
 debian-hacks/Use-remoting-name-for-call-to-gdk_set_program_class.patch
 debian-hacks/Use-build-id-as-langpack-version-for-reproducibility.patch
-
-debian-hacks/Build-against-system-jsoncpp.patch
-debian-hacks/Build-against-system-jsoncpp_2.patch
-debian-hacks/Build-against-system-jsoncpp_3.patch
-debian-hacks/Build-against-system-jsoncpp_4.patch
