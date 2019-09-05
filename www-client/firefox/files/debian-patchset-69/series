@@ -18,3 +18,5 @@ debian-hacks/Use-build-id-as-langpack-version-for-reproducibility.patch
 
 debian-hacks/Build-against-system-jsoncpp.patch
 debian-hacks/Build-against-system-jsoncpp_2.patch
+debian-hacks/Build-against-system-jsoncpp_3.patch
+debian-hacks/Build-against-system-jsoncpp_4.patch
