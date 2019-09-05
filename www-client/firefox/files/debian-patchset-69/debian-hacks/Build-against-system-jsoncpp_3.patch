@@ -1,6 +1,6 @@
 --- a/caps/moz.build	2019-08-27 08:31:51.000000000 +0700
 +++ b/caps/moz.build	2019-09-05 09:38:17.394140009 +0700
-@@ -66,7 +66,7 @@
+@@ -66,7 +66,10 @@
      '/js/xpconnect/src',
      '/netwerk/base',
      '/netwerk/cookie',
