@@ -5,10 +5,10 @@
      '/netwerk/base',
      '/netwerk/cookie',
 -    '/toolkit/components/jsoncpp/include',
- ]
++]
 +
 +LOCAL_INCLUDES += [
 +    '%/usr/include',
-+]
+ ]
  
  if CONFIG['ENABLE_TESTS']:
