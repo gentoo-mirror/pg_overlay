@@ -57,43 +57,7 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/twisted 19.2.0: An asynchronous networking framework written in Python
 dev-python/wokkel 0.7.1: Twisted Jabber support library
 dev-python/zope-component 4.4.1: Zope Component Architecture
-dev-qt/designer 5.13.0_pre: WYSIWYG tool for designing and building graphical user interfaces with QtWidgets
-dev-qt/linguist-tools 5.13.0_pre: Tools for working with Qt translation data files
-dev-qt/qdbus 5.13.0_pre: Interface to Qt applications communicating over D-Bus
-dev-qt/qtbluetooth 5.13.0_pre: Bluetooth support library for the Qt5 framework
-dev-qt/qtcharts 5.13.0_pre: Chart component library for the Qt5 framework
-dev-qt/qtconcurrent 5.13.0_pre: Multi-threading concurrence support library for the Qt5 framework
-dev-qt/qtcore 5.13.0_pre: Cross-platform application development framework
-dev-qt/qtdbus 5.13.0_pre: Qt5 module for inter-process communication over the D-Bus protocol
-dev-qt/qtdeclarative 5.13.0_pre: The QML and Quick modules for the Qt5 framework
-dev-qt/qtgraphicaleffects 5.13.0_pre: Set of QML types for adding visual effects to user interfaces
-dev-qt/qtgui 5.13.0_pre: The GUI module and platform plugins for the Qt5 framework
-dev-qt/qthelp 5.13.0_pre: Qt5 module for integrating online documentation into applications
-dev-qt/qtimageformats 5.13.0_pre: Additional format plugins for the Qt image I/O system
-dev-qt/qtmultimedia 5.13.0_pre: Multimedia (audio, video, radio, camera) library for the Qt5 framework
-dev-qt/qtnetwork 5.13.0_pre: Network abstraction library for the Qt5 framework
-dev-qt/qtnetworkauth 5.13.0_pre: Network authorization library for the Qt5 framework
-dev-qt/qtopengl 5.13.0_pre: OpenGL support library for the Qt5 framework (deprecated)
-dev-qt/qtpaths 5.13.0_pre: Command line client to QStandardPaths
-dev-qt/qtprintsupport 5.13.0_pre: Printing support library for the Qt5 framework
-dev-qt/qtquickcontrols 5.13.0_pre: Set of Qt Quick controls to create complete user interfaces (deprecated)
-dev-qt/qtquickcontrols2 5.13.0_pre: Set of next generation Qt Quick controls for the Qt5 framework
-dev-qt/qtscript 5.13.0_pre: Application scripting library for the Qt5 framework (deprecated)
-dev-qt/qtsensors 5.13.0_pre: Hardware sensor access library for the Qt5 framework
-dev-qt/qtspeech 5.13.0_pre: Text-to-speech library for the Qt5 framework
-dev-qt/qtsql 5.13.0_pre: SQL abstraction library for the Qt5 framework
-dev-qt/qtsvg 5.13.0_pre: SVG rendering library for the Qt5 framework
-dev-qt/qttest 5.13.0_pre: Unit testing library for the Qt5 framework
-dev-qt/qtvirtualkeyboard 5.13.0_pre: Customizable input framework and virtual keyboard for Qt
-dev-qt/qtwayland 5.13.0_pre: Wayland platform plugin for Qt
-dev-qt/qtwebchannel 5.13.0_pre: Qt5 module for integrating C++ and QML applications with HTML/JavaScript clients
-dev-qt/qtwebengine 5.13.0_pre: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-qt/qtwebkit 5.212.0_pre20190902: WebKit rendering library for the Qt5 framework (deprecated)
-dev-qt/qtwebsockets 5.13.0_pre: Implementation of the WebSocket protocol for the Qt5 framework
-dev-qt/qtwidgets 5.13.0_pre: Set of components for creating classic desktop-style UIs for the Qt5 framework
-dev-qt/qtx11extras 5.13.0_pre: Linux/X11-specific support library for the Qt5 framework
-dev-qt/qtxml 5.13.0_pre: Implementation of SAX and DOM for the Qt5 framework
-dev-qt/qtxmlpatterns 5.13.0_pre: XPath, XQuery, XSLT, and XML Schema validation library for the Qt5 framework
 dev-util/boost-build 1.69.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.61.2: GDBus code and documentation generator
