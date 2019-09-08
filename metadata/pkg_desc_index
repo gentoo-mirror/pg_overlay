@@ -111,7 +111,7 @@ dev-vcs/mercurial 5.0: Scalable distributed SCM
 games-board/aisleriot 3.22.8: A collection of solitaire card games for GNOME
 games-board/pysolfc 2.6.2: An exciting collection of more than 1000 solitaire card games
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
-gnome-base/librsvg 2.45.91: Scalable Vector Graphics (SVG) rendering library
+gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
 kde-frameworks/kjsembed 5.60.0: Framework binding JavaScript objects to QObjects
 kde-frameworks/kross 5.61.0: Framework for embedding scripting into applications
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
@@ -144,10 +144,12 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/QMPlay2 9999: Qt-based video player, which can play all formats and stream
+media-video/ffmpeg 4.2.1_pre: Complete solution to record, convert and stream audio and video. Includes libavcodec
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-fs/nfs-utils 2.3.3: NFS client and server daemons
 net-im/gajim 1.1.2: Jabber client written in PyGTK
 net-im/pidgin 2.13.0: GTK Instant Messenger client
+net-irc/irssi 1.2.2_pre: A modular textUI IRC client with IPv6 support
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
 net-libs/libsoup 2.66.0: An HTTP library implementation in C
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
@@ -186,7 +188,7 @@ www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using 
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
-x11-libs/gtk+ 2.24.32-r1 3.24.10: Gimp ToolKit +
+x11-libs/gtk+ 2.24.32-r1 3.24.11: Gimp ToolKit +
 x11-libs/pango 1.44.3 1.44.5_pre: Internationalized text layout and rendering library
 x11-libs/wxGTK 3.1.2-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
