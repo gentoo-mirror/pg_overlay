@@ -567,6 +567,80 @@ src_configure() {
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
+	#
+	mozconfig_annotate '' --disable-accessibility
+	mozconfig_annotate '' --disable-address-sanitizer
+	mozconfig_annotate '' --disable-address-sanitizer-reporter
+
+	mozconfig_annotate '' --disable-callgrind
+	mozconfig_annotate '' --disable-crashreporter
+
+	mozconfig_annotate '' --disable-debug
+	mozconfig_annotate '' --disable-debug-js-modules
+	mozconfig_annotate '' --disable-debug-symbols
+	mozconfig_annotate '' --disable-dmd
+	mozconfig_annotate '' --disable-dtrace 
+	mozconfig_annotate '' --disable-dump-painting
+
+	mozconfig_annotate '' --disable-elf-hack
+
+	mozconfig_annotate '' --disable-gc-trace
+	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --disable-gtest-in-build
+
+	mozconfig_annotate '' --disable-instruments
+	mozconfig_annotate '' --disable-ios-target
+	mozconfig_annotate '' --disable-ipdl-tests
+
+	mozconfig_annotate '' --disable-jprof
+
+	mozconfig_annotate '' --disable-libproxy
+	mozconfig_annotate '' --disable-logrefcnt
+
+	mozconfig_annotate '' --disable-memory-sanitizer
+	mozconfig_annotate '' --disable-mobile-optimize
+	
+	mozconfig_annotate '' --disable-necko-wifi
+
+	mozconfig_annotate '' --disable-parental-controls
+	mozconfig_annotate '' --disable-perf
+	mozconfig_annotate '' --disable-profiling
+
+	mozconfig_annotate '' --disable-reflow-perf
+	mozconfig_annotate '' --disable-rust-debug
+	mozconfig_annotate '' --disable-rust-tests
+
+	mozconfig_annotate '' --disable-signmar
+
+	mozconfig_annotate '' --disable-trace-logging
+
+	mozconfig_annotate '' --disable-updater
+
+	mozconfig_annotate '' --disable-valgrind
+	mozconfig_annotate '' --disable-verify-mar
+	mozconfig_annotate '' --disable-vtune
+
+	mozconfig_annotate '' --disable-warnings-as-errors
+	mozconfig_annotate '' --disable-webrtc
+
+	mozconfig_annotate '' --without-debug-label
+	mozconfig_annotate "" --without-google-location-service-api-keyfile
+	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
+
+	# Enable good features
+	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --enable-rust-simd
+	mozconfig_annotate '' --enable-strip
+
+	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	use pgo && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
+	use pgo && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
+	#
+
 	# Finalize and report settings
 	mozconfig_final
 
@@ -638,6 +712,15 @@ src_install() {
 			"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/all-gentoo.js" \
 			|| die
 	done
+
+	if use kde ; then
+		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+		|| die
+		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
+		"${BUILD_OBJ_DIR}/dist/bin/defaults/pref/kde.js" \
+		|| die
+	fi
 
 	cd "${S}"
 	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
