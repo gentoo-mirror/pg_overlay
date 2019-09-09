@@ -32,6 +32,7 @@ fi
 MOZ_P="${PN}-${MOZ_PV}"
 
 LLVM_MAX_SLOT=8
+MOZCONFIG_OPTIONAL_JIT=1
 
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="https://www.mozilla.org/thunderbird"
@@ -254,6 +255,9 @@ src_prepare() {
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
+
+	# OpenSUSE-KDE patchset
+	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
