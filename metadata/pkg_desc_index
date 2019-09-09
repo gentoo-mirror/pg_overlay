@@ -13,8 +13,8 @@ app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.0.1: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.3.1.2: A full office productivity suite
-app-office/libreoffice-l10n 6.2.5.2 6.3.1.2: Translations for the Libreoffice suite
+app-office/libreoffice 6.3.2.1: A full office productivity suite
+app-office/libreoffice-l10n 6.2.5.2 6.3.2.1: Translations for the Libreoffice suite
 app-portage/eix 0.33.9_alpha190613: Search and query ebuilds
 app-portage/kuroo 9999: Graphical Portage frontend based on KDE Frameworks
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
