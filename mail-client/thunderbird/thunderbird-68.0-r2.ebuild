@@ -44,7 +44,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
 	+gmp-autoupdate hardened jack lightning lto neon pgo pulseaudio
 	 selinux startup-notification +system-av1 +system-harfbuzz +system-icu
 	+system-jpeg +system-libevent +system-sqlite +system-libvpx
-	+system-webp test wayland wifi"
+	+system-webp test wayland wifi +jit kde"
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
 
