@@ -262,6 +262,9 @@ src_prepare() {
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 
+	# Fedora patches
+	for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
+
 	# Enable gnomebreakpad
 	if use debug ; then
 		sed -i -e "s:GNOME_DISABLE_CRASH_DIALOG=1:GNOME_DISABLE_CRASH_DIALOG=0:g" \
