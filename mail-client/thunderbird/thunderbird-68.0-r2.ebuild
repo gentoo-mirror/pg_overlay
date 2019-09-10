@@ -260,10 +260,10 @@ src_prepare() {
 	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
+	for i in $(cat "${FILESDIR}/debian-patchset$(get_major_version)/series");do eapply "${FILESDIR}/debian-patchset$(get_major_version)/$i";done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset/series");do eapply "${FILESDIR}/fedora-patchset/$i";done
+	for i in $(cat "${FILESDIR}/fedora-patchset$(get_major_version)/series");do eapply "${FILESDIR}/fedora-patchset$(get_major_version)/$i";done
 
 	# Enable gnomebreakpad
 	if use debug ; then
