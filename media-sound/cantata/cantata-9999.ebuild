@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="cs da de en_GB es fi fr hu it ja ko nl pl pt_BR ru zh_CN"
-inherit cmake-utils git-r3 l10n qmake-utils xdg-utils
+inherit cmake-utils git-r3 l10n qmake-utils xdg
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
 HOMEPAGE="https://github.com/CDrummond/cantata"
@@ -109,8 +109,7 @@ src_configure() {
 }
 
 pkg_postinst() {
-	xdg_icon_cache_update
-	xdg_desktop_database_update
+	xdg_pkg_postinst
 
 	has_version media-sound/mpd || \
 		elog "An instance of media-sound/mpd, local or remote, is required to set up Cantata."
@@ -119,9 +118,4 @@ pkg_postinst() {
 		elog "Install app-misc/media-player-info to enable identification"
 		elog "and querying of portable media players"
 	fi
-}
-
-pkg_postrm() {
-	xdg_icon_cache_update
-	xdg_desktop_database_update
 }
