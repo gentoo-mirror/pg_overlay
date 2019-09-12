@@ -48,8 +48,8 @@ src_prepare() {
 	# Fix broken tests, https://bugzilla.gnome.org/show_bug.cgi?id=709304
 	epatch "${FILESDIR}/${P}-test_dialog.patch"
 
-	# Fix build on Darwin
-	epatch "${FILESDIR}/${PN}-2.24.0-quartz-objc.patch"
+	# From Arch
+	epatch "${FILESDIR}/python27.patch"
 
 	# Examples is handled "manually"
 	sed -e 's/\(SUBDIRS = .* \)examples/\1/' \
