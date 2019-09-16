@@ -76,11 +76,10 @@ games-board/aisleriot 3.22.8: A collection of solitaire card games for GNOME
 games-board/pysolfc 2.6.2: An exciting collection of more than 1000 solitaire card games
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
-kde-frameworks/kjsembed 5.60.0: Framework binding JavaScript objects to QObjects
-kde-frameworks/kross 5.61.0: Framework for embedding scripting into applications
+kde-frameworks/kross 5.62.0: Framework for embedding scripting into applications
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.16.5: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 68.0-r2: Thunderbird Mail Client
+mail-client/thunderbird 68.1.0: Thunderbird Mail Client
 media-gfx/gimp 2.10.12_pre: GNU Image Manipulation Program
 media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
 media-libs/glm 0.9.9.5_pre: OpenGL Mathematics
@@ -158,3 +157,4 @@ x11-libs/pango 1.44.3 1.44.6_pre: Internationalized text layout and rendering li
 x11-libs/wxGTK 3.1.2-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/xvfb-run 1.20.3_p1: Run a command in a virtual X server environment
+x11-themes/adwaita-icon-theme 3.32.0: GNOME default icon theme
