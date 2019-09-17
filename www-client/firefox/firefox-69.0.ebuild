@@ -343,13 +343,13 @@ src_configure() {
 		einfo "Enforcing the use of clang due to USE=clang ..."
 		CC=${CHOST}-clang
 		CXX=${CHOST}-clang++
-		strip-unsupported-flags
+		#strip-unsupported-flags
 	elif ! use clang && ! tc-is-gcc ; then
 		# Force gcc
 		einfo "Enforcing the use of gcc due to USE=-clang ..."
 		CC=${CHOST}-gcc
 		CXX=${CHOST}-g++
-		strip-unsupported-flags
+		#strip-unsupported-flags
 	fi
 
 	####################################
@@ -556,7 +556,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# disable webrtc for now, bug 667642
-	use arm && mozconfig_annotate 'broken on arm' --disable-webrtc
+	#use arm && mozconfig_annotate 'broken on arm' --disable-webrtc
 
 	# allow elfhack to work in combination with unstripped binaries
 	# when they would normally be larger than 2GiB.
