@@ -87,7 +87,7 @@ src_configure() {
 			myconf+=( --disable-lto )
 		fi
 	fi
-	emake configure "${myconf[@]}"
+	emake configure
 
 	econf "${myconf[@]}"
 
