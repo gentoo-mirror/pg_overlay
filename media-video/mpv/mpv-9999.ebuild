@@ -248,7 +248,6 @@ src_configure() {
 		$(use_enable cuda cuda-hwaccel)
 
 		# TV features:
-		$(use_enable v4l audio-input)
 		$(use_enable dvb dvbin)
 
 		# Miscellaneous features:
