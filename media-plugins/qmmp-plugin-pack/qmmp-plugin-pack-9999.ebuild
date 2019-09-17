@@ -8,8 +8,7 @@ inherit cmake-utils subversion
 DESCRIPTION="A set of extra plugins for Qmmp"
 HOMEPAGE="http://qmmp.ylsoftware.com/"
 
-ESVN_REPO_URI="svn://svn.code.sf.net/p/qmmp-dev/code/trunk/${PN}/
-	https://svn.code.sf.net/p/qmmp-dev/code/trunk/${PN}/"
+ESVN_REPO_URI="https://svn.code.sf.net/p/qmmp-dev/code/trunk/${PN}/"
 
 LICENSE="GPL-2"
 SLOT="0"
