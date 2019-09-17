@@ -62,7 +62,7 @@ src_configure() {
 	# https://www.spinics.net/lists/linux-xfs/msg30185.html
 	# https://www.spinics.net/lists/linux-xfs/msg30272.html
 	local myconf=(
-		--disable-lto #655638
+		--enable-lto #655638
 		--enable-blkid
 		--with-crond-dir="${EPREFIX}/etc/cron.d"
 		--without-systemd-unit-dir
@@ -87,7 +87,7 @@ src_configure() {
 			myconf+=( --disable-lto )
 		fi
 	fi
-	emake configure
+	emake configure "${myconf[@]}"
 
 	econf "${myconf[@]}"
 
