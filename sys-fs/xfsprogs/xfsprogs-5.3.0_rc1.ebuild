@@ -90,6 +90,7 @@ src_configure() {
 
 	econf "${myconf[@]}"
 
+	emake configure
 	emake V=1
 }
 
