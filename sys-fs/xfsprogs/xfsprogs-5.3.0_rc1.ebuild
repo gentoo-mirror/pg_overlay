@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools toolchain-funcs multilib usr-ldscript
+inherit autotools toolchain-funcs multilib
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
