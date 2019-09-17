@@ -56,7 +56,7 @@ src_prepare() {
 src_configure() {
 	export DEBUG=-DNDEBUG
 	export OPTIMIZER=${CFLAGS}
-	unset PLATFORM # if set in user env, this breaks configure
+	#unset PLATFORM # if set in user env, this breaks configure
 
 	# Upstream does NOT support --disable-static anymore,
 	# https://www.spinics.net/lists/linux-xfs/msg30185.html
@@ -87,10 +87,10 @@ src_configure() {
 			myconf+=( --disable-lto )
 		fi
 	fi
+	emake configure
 
 	econf "${myconf[@]}"
 
-	emake configure
 	emake V=1
 }
 
