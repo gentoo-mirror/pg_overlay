@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools toolchain-funcs multilib
+inherit autotools flag-o-matic toolchain-funcs
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
