@@ -34,7 +34,7 @@ dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plu
 dev-libs/jsoncpp 1.9.1: C++ JSON reader and writer
 dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
 dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
-dev-libs/re2 0.2019.07.01: An efficient, principled regular expression library
+dev-libs/re2 0.2019.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.51.9999: A lightweigt RPC library based on XML and HTTP
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/josepy 1.1.0: JOSE protocol implementation in Python
