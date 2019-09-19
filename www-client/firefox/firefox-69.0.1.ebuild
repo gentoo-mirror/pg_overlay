@@ -44,7 +44,7 @@ inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="https://www.mozilla.com/firefox"
 
-KEYWORDS="~amd64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
@@ -52,7 +52,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+gmp-autoupdate hardened hwaccel jack lto neon pgo pulseaudio
 	+screenshot selinux startup-notification +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-sqlite +system-libvpx +system-webp test wayland wifi +jit +kde"
+	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus +jit +kde"
 RESTRICT="!bindist? ( bindist )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/${PATCH}.tar.xz )
@@ -257,6 +257,7 @@ src_unpack() {
 src_prepare() {
 	use !wayland && rm -f "${WORKDIR}/firefox/2019_mozilla-bug1539471.patch"
 	eapply "${WORKDIR}/firefox"
+	eapply "${FILESDIR}/${PN}-69.0-lto-gcc-fix.patch"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
@@ -312,6 +313,8 @@ src_prepare() {
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
+
+	!use dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -395,9 +398,6 @@ src_configure() {
 			if [[ $(gcc-major-version) -lt 8 ]] ; then
 				show_old_compiler_warning=1
 			fi
-
-			# Bug 689358
-			append-cxxflags -flto
 
 			if ! use cpu_flags_x86_avx2 ; then
 				local _gcc_version_with_ipa_cdtor_fix="8.3"
@@ -572,6 +572,7 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
+	!use dbus && mozconfig_annotate '' --disable-dbus
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
@@ -627,7 +628,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-warnings-as-errors
 
 	mozconfig_annotate '' --without-debug-label
-	mozconfig_annotate "" --without-google-location-service-api-keyfile
+	mozconfig_annotate '' --without-google-location-service-api-keyfile
 	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
 
 	# Enable good features
