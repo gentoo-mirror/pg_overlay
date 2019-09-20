@@ -252,8 +252,7 @@ src_configure() {
 
 	if use vaapi && use X; then
 		mywafargs+=(
-			$(use_enable opengl vaapi-glx)
-			$(use_enable egl vaapi-x-egl)
+		$(use_enable egl vaapi-x-egl)
 		)
 	fi
 
