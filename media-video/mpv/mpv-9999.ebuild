@@ -235,7 +235,6 @@ src_configure() {
 		$(use_enable vulkan shaderc)
 		$(use_enable raspberry-pi rpi)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
-		--disable-mali-fbdev # Only available in overlays.
 		$(usex opengl '' '--disable-gl')
 		$(use_enable vulkan)
 
