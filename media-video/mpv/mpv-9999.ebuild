@@ -194,7 +194,6 @@ src_configure() {
 		$(use_enable rubberband)
 		$(use_enable lcms lcms2)
 		--disable-vapoursynth # Only available in overlays.
-		--disable-vapoursynth-lazy
 		$(use_enable archive libarchive)
 
 		--enable-libavdevice
