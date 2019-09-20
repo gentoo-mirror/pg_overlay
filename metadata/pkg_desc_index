@@ -78,7 +78,7 @@ gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for
 gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
 kde-frameworks/kross 5.62.0: Framework for embedding scripting into applications
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kwin 5.16.5: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 5.16.5 5.16.90: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.1.0: Thunderbird Mail Client
 media-gfx/gimp 2.10.12_pre: GNU Image Manipulation Program
 media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
@@ -149,6 +149,7 @@ sys-libs/slang 2.3.3_pre9: Multi-platform library designed to allow a developer 
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
 www-client/firefox 69.0.1: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
+www-client/ungoogled-chromium 77.0.3865.90_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
