@@ -79,6 +79,7 @@ gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
 kde-frameworks/kross 5.62.0: Framework for embedding scripting into applications
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.16.5 5.16.90: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/plasma-browser-integration 5.16.90: Integrate Chrome/Firefox better into Plasma through browser extensions
 mail-client/thunderbird 68.1.0: Thunderbird Mail Client
 media-gfx/gimp 2.10.12_pre: GNU Image Manipulation Program
 media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
