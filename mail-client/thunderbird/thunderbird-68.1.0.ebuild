@@ -28,7 +28,7 @@ if [[ ${MOZ_ESR} == 1 ]]; then
 fi
 MOZ_P="${PN}-${MOZ_PV}"
 
-LLVM_MAX_SLOT=8
+LLVM_MAX_SLOT=9
 MOZCONFIG_OPTIONAL_JIT=1
 
 DESCRIPTION="Thunderbird Mail Client"
@@ -128,12 +128,12 @@ DEPEND="${CDEPEND}
 			)
 		)
 		(
-			sys-devel/clang:7
-			!clang? ( sys-devel/llvm:7 )
+			sys-devel/clang:9
+			!clang? ( sys-devel/llvm:9 )
 			clang? (
-				=sys-devel/lld-7*
-				sys-devel/llvm:7[gold]
-				pgo? ( =sys-libs/compiler-rt-sanitizers-7*[profile] )
+				=sys-devel/lld-9*
+				sys-devel/llvm:9[gold]
+				pgo? ( =sys-libs/compiler-rt-sanitizers-9*[profile] )
 			)
 		)
 		(
