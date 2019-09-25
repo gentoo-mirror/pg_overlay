@@ -34,6 +34,11 @@ pkg_setup() {
 	fi
 }
 
+src_prepare() {
+	sed -E "s|(version : )'1.9.0'|\1'${PVR}'|" -i meson.build
+}
+
+
 src_configure() {
 	local emesonargs=(
 		--buildtype release
