@@ -42,7 +42,6 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
-		#--buildtype release
 		-Dbuildtype=release
 		-Ddefault_library=shared
 	)
