@@ -1,0 +1,10 @@
+--- rustc-1.38.0-src/src/bootstrap/builder.rs	2019-09-23 14:15:52.000000000 -0700
++++ rustc-1.38.0-src/src/bootstrap/builder.rs	2019-09-26 10:45:49.663995011 -0700
+@@ -140,6 +140,7 @@
+ 
+ impl StepDescription {
+     fn from<S: Step>() -> StepDescription {
++        #[allow(unused_unsafe)] // for rebuild bootstrapping
+         StepDescription {
+             default: S::DEFAULT,
+             only_hosts: S::ONLY_HOSTS,
