@@ -4,7 +4,6 @@ build-aarch64-skia.patch
 build-disable-elfhack.patch
 build-arm-libopus.patch
 
-firefox-enable-addons.patch
 rhbz-1173156.patch
 firefox-fedora-ua.patch
 mozilla-1170092.patch
