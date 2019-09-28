@@ -13,12 +13,8 @@ rhbz-1754460.patch
 
 mozilla-1196777.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-mozilla-1512162.patch
 mozilla-1568569.patch
 mozilla-1566876-webrtc-ind.patch
 mozilla-1579023.patch
-mozilla-1580174-webrtc-popup.patch
 
-pgo.patch
 mozilla-1516081.patch
-mozilla-1516803.patch
