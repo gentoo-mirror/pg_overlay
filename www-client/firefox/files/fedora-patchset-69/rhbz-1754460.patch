@@ -1,0 +1,127 @@
+diff --git a/toolkit/components/enterprisepolicies/EnterprisePolicies.js b/toolkit/components/enterprisepolicies/EnterprisePolicies.js
+--- a/toolkit/components/enterprisepolicies/EnterprisePolicies.js
++++ b/toolkit/components/enterprisepolicies/EnterprisePolicies.js
+@@ -447,21 +447,28 @@ class JSONPoliciesProvider {
+ 
+   get failed() {
+     return this._failed;
+   }
+ 
+   _getConfigurationFile() {
+     let configFile = null;
+     try {
+-      configFile = Services.dirsvc.get("XREAppDist", Ci.nsIFile);
++      configFile = Services.dirsvc.get("XREAppDistUser", Ci.nsIFile);
+       configFile.append(POLICIES_FILENAME);
+-    } catch (ex) {
+-      // Getting the correct directory will fail in xpcshell tests. This should
+-      // be handled the same way as if the configFile simply does not exist.
++    } catch (ex) {}
++
++    if (!configFile) {
++      try {
++        configFile = Services.dirsvc.get("XREAppDist", Ci.nsIFile);
++        configFile.append(POLICIES_FILENAME);
++      } catch (ex) {
++        // Getting the correct directory will fail in xpcshell tests. This should
++        // be handled the same way as if the configFile simply does not exist.
++      }
+     }
+ 
+     let alternatePath = Services.prefs.getStringPref(PREF_ALTERNATE_PATH, "");
+ 
+     // Check if we are in automation *before* we use the synchronous
+     // nsIFile.exists() function or allow the config file to be overriden
+     // An alternate policy path can also be used in Nightly builds (for
+     // testing purposes), but the Background Update Agent will be unable to
+diff --git a/toolkit/xre/nsXREDirProvider.cpp b/toolkit/xre/nsXREDirProvider.cpp
+--- a/toolkit/xre/nsXREDirProvider.cpp
++++ b/toolkit/xre/nsXREDirProvider.cpp
+@@ -40,16 +40,17 @@
+ #include "mozilla/dom/ScriptSettings.h"
+ 
+ #include "mozilla/AutoRestore.h"
+ #include "mozilla/Components.h"
+ #include "mozilla/Services.h"
+ #include "mozilla/Omnijar.h"
+ #include "mozilla/Preferences.h"
+ #include "mozilla/Telemetry.h"
++#include "nsPrintfCString.h"
+ 
+ #include <stdlib.h>
+ 
+ #ifdef XP_WIN
+ #  include <windows.h>
+ #  include <shlobj.h>
+ #  include "WinUtils.h"
+ #endif
+@@ -98,17 +99,17 @@ static already_AddRefed<nsIFile> CreateP
+ nsXREDirProvider* gDirServiceProvider = nullptr;
+ nsIFile* gDataDirHomeLocal = nullptr;
+ nsIFile* gDataDirHome = nullptr;
+ nsCOMPtr<nsIFile> gDataDirProfileLocal = nullptr;
+ nsCOMPtr<nsIFile> gDataDirProfile = nullptr;
+ 
+ // These are required to allow nsXREDirProvider to be usable in xpcshell tests.
+ // where gAppData is null.
+-#if defined(XP_MACOSX) || defined(XP_WIN)
++#if defined(XP_MACOSX) || defined(XP_WIN) || defined(XP_UNIX)
+ static const char* GetAppName() {
+   if (gAppData) {
+     return gAppData->name;
+   }
+   return nullptr;
+ }
+ #endif
+ 
+@@ -456,16 +457,23 @@ nsXREDirProvider::GetFile(const char* aP
+   else if (!strcmp(aProperty, XRE_USER_SYS_EXTENSION_DIR)) {
+ #ifdef ENABLE_SYSTEM_EXTENSION_DIRS
+     return GetSysUserExtensionsDirectory(aFile);
+ #else
+     return NS_ERROR_FAILURE;
+ #endif
+   } else if (!strcmp(aProperty, XRE_USER_SYS_EXTENSION_DEV_DIR)) {
+     return GetSysUserExtensionsDevDirectory(aFile);
++  } else if (!strcmp(aProperty, XRE_APP_DISTRIBUTION_USER_DIR)) {
++#  ifndef MOZ_WIDGET_GTK
++    return NS_ERROR_FAILURE;
++#  endif
++    return NS_NewNativeLocalFile(
++      nsPrintfCString("/run/user/%d/%s/", getuid(), GetAppName()),
++        false, aFile);
+   } else if (!strcmp(aProperty, XRE_APP_DISTRIBUTION_DIR)) {
+     bool persistent = false;
+     rv = GetFile(NS_GRE_DIR, &persistent, getter_AddRefs(file));
+     if (NS_SUCCEEDED(rv))
+       rv = file->AppendNative(NS_LITERAL_CSTRING("distribution"));
+   } else if (!strcmp(aProperty, XRE_APP_FEATURES_DIR)) {
+     rv = GetAppDir()->Clone(getter_AddRefs(file));
+     if (NS_SUCCEEDED(rv))
+diff --git a/xpcom/build/nsXULAppAPI.h b/xpcom/build/nsXULAppAPI.h
+--- a/xpcom/build/nsXULAppAPI.h
++++ b/xpcom/build/nsXULAppAPI.h
+@@ -137,16 +137,23 @@
+ 
+ /**
+  * A directory service key which specifies the location for app dir add-ons.
+  * Should be a synonym for XCurProcD everywhere except in tests.
+  */
+ #define XRE_ADDON_APP_DIR "XREAddonAppDir"
+ 
+ /**
++ * A directory service key which specifies the distribution specific files for
++ * the application unique for each user.
++ * It's located at /run/user/$PID/<product name>/
++ */
++#define XRE_APP_DISTRIBUTION_USER_DIR "XREAppDistUser"
++
++/**
+  * A directory service key which provides the update directory. Callers should
+  * fall back to appDir.
+  * Windows:    If vendor name exists:
+  *             ProgramData\<vendor name>\updates\
+  *             <hash of the path to XRE_EXECUTABLE_FILE's parent directory>
+  *
+  *             If vendor name doesn't exist, but product name exists:
+  *             ProgramData\<product name>\updates\
