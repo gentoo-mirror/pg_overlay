@@ -89,10 +89,10 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 QA_FLAGS_IGNORED="usr/bin/* usr/lib*/${P}"
 
 PATCHES=(
-	#"${FILESDIR}"/1.38.0-fix-custom-libdir.patch
-	#"${FILESDIR}"/1.38.0-fix-multiple-llvm-rebuilds.patch
-	#"${FILESDIR}"/rustc-1.38.0-rebuild-bootstrap.patch
-	#"${FILESDIR}"/0001-WIP-minimize-the-rust-std-component.patch
+	"${FILESDIR}"/1.38.0-fix-custom-libdir.patch
+	"${FILESDIR}"/1.38.0-fix-multiple-llvm-rebuilds.patch
+	"${FILESDIR}"/rustc-1.38.0-rebuild-bootstrap.patch
+	"${FILESDIR}"/0001-WIP-minimize-the-rust-std-component.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -129,9 +129,9 @@ src_prepare() {
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	if use system-llvm; then
-		#rm -rf src/llvm-project/ || die
+		rm -rf src/llvm-project/ || die
 		# We never enable emscripten.
-		#rm -rf src/llvm-emscripten/ || die
+		rm -rf src/llvm-emscripten/ || die
 		echo 1
 	else
 		eapply "${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
@@ -139,11 +139,11 @@ src_prepare() {
 
 
 	# Remove other unused vendored libraries            
-	#rm -rf vendor/curl-sys/curl/            
-	#rm -rf vendor/jemalloc-sys/jemalloc/            
-	#rm -rf vendor/libz-sys/src/zlib/            
-	#rm -rf vendor/lzma-sys/xz-*/            
-	#rm -rf vendor/openssl-src/openssl/
+	rm -rf vendor/curl-sys/curl/            
+	rm -rf vendor/jemalloc-sys/jemalloc/            
+	rm -rf vendor/libz-sys/src/zlib/            
+	rm -rf vendor/lzma-sys/xz-*/            
+	rm -rf vendor/openssl-src/openssl/
 
 	# The configure macro will modify some autoconf-related files, which upsets
 	# cargo when it tries to verify checksums in those files.  If we just truncate
