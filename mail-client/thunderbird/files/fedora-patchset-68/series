@@ -6,7 +6,6 @@ rhbz-1219542-s390-build.patch
 thunderbird-debug.patch
 
 mozilla-1245783.patch
-build-big-endian.patch
 mozilla-1353817.patch
 build-disable-elfhack.patch
 
