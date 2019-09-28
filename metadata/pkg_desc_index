@@ -4,7 +4,6 @@ app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-arch/lz4 1.9.1: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-crypt/gpgme 1.13.1_pre: GnuPG Made Easy is a library for making GnuPG easier to use
 app-dicts/myspell-ru 20180627: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/virtualbox 6.0.6: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
@@ -21,7 +20,6 @@ app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
-app-text/po4a 0.56_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-games/freecell-solver 5.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/rust 1.38.0: Systems programming language from Mozilla
