@@ -132,10 +132,7 @@ src_prepare() {
 		rm -rf src/llvm-project/ || die
 		# We never enable emscripten.
 		rm -rf src/llvm-emscripten/ || die
-	else
-		eapply "${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
 	fi
-
 
 	# Remove other unused vendored libraries            
 	rm -rf vendor/curl-sys/curl/            
