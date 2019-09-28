@@ -92,7 +92,7 @@ PATCHES=(
 	#"${FILESDIR}"/1.38.0-fix-custom-libdir.patch
 	#"${FILESDIR}"/1.38.0-fix-multiple-llvm-rebuilds.patch
 	#"${FILESDIR}"/rustc-1.38.0-rebuild-bootstrap.patch
-	"${FILESDIR}"/0001-WIP-minimize-the-rust-std-component.patch
+	#"${FILESDIR}"/0001-WIP-minimize-the-rust-std-component.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
