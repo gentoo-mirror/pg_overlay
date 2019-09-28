@@ -18,7 +18,7 @@ MOZ_LANGS=(en en-GB en-US ru)
 MOZ_PV="${PV/_beta/b}"
 
 # Patches
-PATCHFF="firefox-68.0-patches-11"
+PATCHFF="firefox-68.0-patches-12"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 
