@@ -1,0 +1,23 @@
+diff --git a/security/manager/ssl/nsNSSComponent.cpp b/security/manager/ssl/nsNSSComponent.cpp
+--- a/security/manager/ssl/nsNSSComponent.cpp
++++ b/security/manager/ssl/nsNSSComponent.cpp
+@@ -683,10 +683,17 @@
+   AutoSECMODListReadLock secmodLock;
+   SECMODModuleList* list = SECMOD_GetDefaultModuleList();
+   while (list) {
+-    if (SECMOD_HasRemovableSlots(list->module)) {
++    SECMODModule* module = list->module;
++    if (SECMOD_HasRemovableSlots(module)) {
+       *result = true;
+       return NS_OK;
+     }
++    for (int i = 0; i < module->slotCount; i++) {
++      if (!PK11_IsFriendly(module->slots[i])) {
++        *result = true;
++        return NS_OK;
++      }
++    }
+     list = list->next;
+   }
+ #endif
+
