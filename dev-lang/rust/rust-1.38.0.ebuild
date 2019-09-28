@@ -129,9 +129,10 @@ src_prepare() {
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	if use system-llvm; then
-		rm -rf src/llvm-project/ || die
+		#rm -rf src/llvm-project/ || die
 		# We never enable emscripten.
-		rm -rf src/llvm-emscripten/ || die
+		#rm -rf src/llvm-emscripten/ || die
+		echo 1
 	else
 		eapply "${FILESDIR}"/0001-llvm-cmake-Add-additional-headers-only-if-they-exist.patch
 	fi
