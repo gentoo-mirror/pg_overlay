@@ -93,6 +93,8 @@ PATCHES=(
 	"${FILESDIR}"/1.38.0-fix-multiple-llvm-rebuilds.patch
 	"${FILESDIR}"/1.36.0-libressl.patch
 	"${FILESDIR}"/1.36.0-libressl3.patch
+	"${FILESDIR}"/rustc-1.38.0-rebuild-bootstrap.patch
+	"${FILESDIR}"/0001-WIP-minimize-the-rust-std-component.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -137,18 +139,22 @@ src_prepare() {
 	fi
 
 
-# Remove other unused vendored libraries            
-	#rm -rf vendor/curl-sys/curl/            
-	#rm -rf vendor/jemalloc-sys/jemalloc/            
-	#rm -rf vendor/libz-sys/src/zlib/            
-	#rm -rf vendor/lzma-sys/xz-*/            
-	#rm -rf vendor/openssl-src/openssl/
+	# Remove other unused vendored libraries            
+	rm -rf vendor/curl-sys/curl/            
+	rm -rf vendor/jemalloc-sys/jemalloc/            
+	rm -rf vendor/libz-sys/src/zlib/            
+	rm -rf vendor/lzma-sys/xz-*/            
+	rm -rf vendor/openssl-src/openssl/
 
 	# The configure macro will modify some autoconf-related files, which upsets
 	# cargo when it tries to verify checksums in those files.  If we just truncate
 	# that file list, cargo won't have anything to complain about.
 	find vendor -name .cargo-checksum.json \
 		-exec sed -i.uncheck -e 's/"files":{[^}]*}/"files":{ }/' '{}' '+'
+
+	# Sometimes Rust sources start with #![...] attributes, and "smart" editors think
+	# it's a shebang and make them executable. Then brp-mangle-shebangs gets upset...
+	find -name '*.rs' -type f -perm /111 -exec chmod -v -x '{}' '+'
 
 	default
 }
