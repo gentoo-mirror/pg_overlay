@@ -186,13 +186,14 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
-		thin-lto = false
+		thin-lto = $(toml_usex system-llvm)
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
-		use-libcxx = true
+		use-libcxx = $(toml_usex system-llvm)
 		use-linker = "lld"
+		allow-old-toolchain = false
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -201,9 +202,9 @@ src_configure() {
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
-		submodules = false
+		submodules = true
 		python = "${EPYTHON}"
-		locked-deps = false
+		locked-deps = true
 		vendor = true
 		extended = ${extended}
 		tools = [${tools}]
