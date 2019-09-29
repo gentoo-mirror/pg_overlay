@@ -186,14 +186,11 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
-		thin-lto = $(toml_usex system-llvm)
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
-		use-libcxx = $(toml_usex system-llvm)
-		use-linker = "$(usex system-llvm lld)"
-		allow-old-toolchain = false
+		use-libcxx = false
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -230,8 +227,6 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = $(usex system-llvm)
-		llvm-libunwind = $(toml_usex system-llvm)
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
@@ -262,14 +257,10 @@ src_configure() {
 			linker = "$(usex system-llvm lld rust-lld)"
 		EOF
 	fi
-
-	RUSTFLAGS='-C lto=thin'
 }
 
 src_compile() {
-	export RUSTFLAGS='-C lto=thin'
-
-	env $(cat "${S}"/config.env)\
+	env $(cat "${S}"/config.env) \
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
