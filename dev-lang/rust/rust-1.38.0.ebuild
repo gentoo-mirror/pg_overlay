@@ -128,18 +128,18 @@ src_prepare() {
 
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
-	#if use system-llvm; then
-	#	rm -rf src/llvm-project/ || die
+	if use system-llvm; then
+		rm -rf src/llvm-project/ || die
 		# We never enable emscripten.
-	#	rm -rf src/llvm-emscripten/ || die
-	#fi
+		rm -rf src/llvm-emscripten/ || die
+	fi
 
 	# Remove other unused vendored libraries            
-	#rm -rf vendor/curl-sys/curl/            
-	#rm -rf vendor/jemalloc-sys/jemalloc/            
-	#rm -rf vendor/libz-sys/src/zlib/            
-	#rm -rf vendor/lzma-sys/xz-*/            
-	#rm -rf vendor/openssl-src/openssl/
+	rm -rf vendor/curl-sys/curl/            
+	rm -rf vendor/jemalloc-sys/jemalloc/            
+	rm -rf vendor/libz-sys/src/zlib/            
+	rm -rf vendor/lzma-sys/xz-*/            
+	rm -rf vendor/openssl-src/openssl/
 
 	# The configure macro will modify some autoconf-related files, which upsets
 	# cargo when it tries to verify checksums in those files.  If we just truncate
@@ -226,11 +226,12 @@ src_configure() {
 		debuginfo-level = 0
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
-		channel = "dev"
+		channel = "stable"
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		llvm-libunwind = $(toml_usex system-llvm)
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
