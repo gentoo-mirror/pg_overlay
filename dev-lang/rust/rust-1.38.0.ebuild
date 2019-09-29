@@ -203,14 +203,16 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = true
+		fast-submodules = true
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = ${extended}
 		tools = [${tools}]
-		verbose = 0
+		verbose = 2
 		sanitizers = false
 		profiler = false
+		local-rebuild = false
 		[install]
 		prefix = "${EPREFIX}/usr"
 		libdir = "$(get_libdir)/${P}"
@@ -228,7 +230,6 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		deny-warnings = false
 		lld = $(usex system-llvm false $(toml_usex wasm))
 	EOF
 
