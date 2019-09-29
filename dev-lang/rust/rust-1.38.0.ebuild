@@ -192,9 +192,9 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
 		use-libcxx = $(toml_usex system-llvm)
-		use-linker = "$(usex system-llvm lld "
+		use-linker = "$(usex system-llvm lld)"
 		allow-old-toolchain = false
-		[build]"lld"
+		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
