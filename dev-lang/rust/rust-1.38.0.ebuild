@@ -183,7 +183,7 @@ src_configure() {
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
-		optimize = false
+		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		thin-lto = false
@@ -220,6 +220,7 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
+		#debuginfo-level = 0
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
 		channel = "stable"
