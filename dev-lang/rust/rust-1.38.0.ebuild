@@ -262,9 +262,13 @@ src_configure() {
 			linker = "$(usex system-llvm lld rust-lld)"
 		EOF
 	fi
+
+	RUSTFLAGS='-C lto=thin'
 }
 
 src_compile() {
+	export RUSTFLAGS='-C lto=thin'
+
 	env $(cat "${S}"/config.env)\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
