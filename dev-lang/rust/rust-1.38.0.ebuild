@@ -193,7 +193,7 @@ src_configure() {
 		link-shared = $(toml_usex system-llvm)
 		use-libcxx = true
 		use-linker = "lld"
-		allow-old-toolchain = false
+		allow-old-toolchain = true
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
