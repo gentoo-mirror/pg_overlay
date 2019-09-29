@@ -207,12 +207,12 @@ src_configure() {
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
-		full-bootstrap = true
 		extended = ${extended}
 		tools = [${tools}]
 		verbose = 2
 		sanitizers = false
 		profiler = false
+		local-rebuild = false
 		[install]
 		prefix = "${EPREFIX}/usr"
 		libdir = "$(get_libdir)/${P}"
