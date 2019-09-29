@@ -226,7 +226,7 @@ src_configure() {
 		debuginfo-level = 0
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
-		channel = "dev"
+		channel = "beta"
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
