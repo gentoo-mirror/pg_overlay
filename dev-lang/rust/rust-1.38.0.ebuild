@@ -135,11 +135,11 @@ src_prepare() {
 	fi
 
 	# Remove other unused vendored libraries            
-	rm -rf vendor/curl-sys/curl/            
-	rm -rf vendor/jemalloc-sys/jemalloc/            
-	rm -rf vendor/libz-sys/src/zlib/            
-	rm -rf vendor/lzma-sys/xz-*/            
-	rm -rf vendor/openssl-src/openssl/
+	#rm -rf vendor/curl-sys/curl/            
+	#rm -rf vendor/jemalloc-sys/jemalloc/            
+	#rm -rf vendor/libz-sys/src/zlib/            
+	#rm -rf vendor/lzma-sys/xz-*/            
+	#rm -rf vendor/openssl-src/openssl/
 
 	# The configure macro will modify some autoconf-related files, which upsets
 	# cargo when it tries to verify checksums in those files.  If we just truncate
