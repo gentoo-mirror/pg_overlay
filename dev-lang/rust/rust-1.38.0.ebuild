@@ -216,11 +216,11 @@ src_configure() {
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
-		debug = $(toml_usex debug)
 		optimize = $(toml_usex !debug)
+		debug = $(toml_usex debug)
 		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
-		#debuginfo-level = 0
+		debuginfo-level = 0
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
 		channel = "stable"
