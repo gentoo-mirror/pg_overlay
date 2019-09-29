@@ -128,11 +128,11 @@ src_prepare() {
 
 	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
-	if use system-llvm; then
-		rm -rf src/llvm-project/ || die
+	#if use system-llvm; then
+	#	rm -rf src/llvm-project/ || die
 		# We never enable emscripten.
-		rm -rf src/llvm-emscripten/ || die
-	fi
+	#	rm -rf src/llvm-emscripten/ || die
+	#fi
 
 	# Remove other unused vendored libraries            
 	#rm -rf vendor/curl-sys/curl/            
@@ -186,7 +186,7 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
-		thin-lto = true
+		thin-lto = false
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
@@ -216,10 +216,11 @@ src_configure() {
 		docdir = "share/doc/${P}"
 		mandir = "share/${P}/man"
 		[rust]
-		debug = $(toml_usex debug)
 		optimize = $(toml_usex !debug)
+		debug = $(toml_usex debug)
 		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
+		debuginfo-level = 0
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
 		channel = "stable"
