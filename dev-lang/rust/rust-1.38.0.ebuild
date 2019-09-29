@@ -191,9 +191,9 @@ src_configure() {
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
-		use-libcxx = true
+		use-libcxx = $(toml_usex system-llvm)
 		use-linker = "lld"
-		allow-old-toolchain = true
+		allow-old-toolchain = false
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -204,7 +204,7 @@ src_configure() {
 		compiler-docs = $(toml_usex doc)
 		submodules = true
 		python = "${EPYTHON}"
-		locked-deps = false
+		locked-deps = true
 		vendor = true
 		extended = ${extended}
 		tools = [${tools}]
