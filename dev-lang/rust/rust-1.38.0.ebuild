@@ -207,6 +207,7 @@ src_configure() {
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
+		full-bootstrap = true
 		extended = ${extended}
 		tools = [${tools}]
 		verbose = 2
