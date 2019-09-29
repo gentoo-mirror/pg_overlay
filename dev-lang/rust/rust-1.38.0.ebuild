@@ -183,7 +183,7 @@ src_configure() {
 
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
-		optimize = $(toml_usex !debug)
+		optimize = false
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		thin-lto = false
