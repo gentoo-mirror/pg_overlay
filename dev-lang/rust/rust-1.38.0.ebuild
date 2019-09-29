@@ -192,7 +192,7 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
 		use-libcxx = $(toml_usex system-llvm)
-		use-linker = "lld"
+		use-linker = "$(usex system-llvm lld)"
 		allow-old-toolchain = false
 		[build]
 		build = "${rust_target}"
@@ -226,7 +226,7 @@ src_configure() {
 		debuginfo-level = 0
 		backtrace = $(toml_usex debug)
 		default-linker = "$(tc-getCC)"
-		channel = "stable"
+		channel = "dev"
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
