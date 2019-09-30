@@ -244,16 +244,16 @@ src_configure() {
 
 		cat <<- EOF >> "${S}"/config.toml
 			[target.${rust_target}]
-			cc = "x86_64-pc-linux-gnu-$(tc-getBUILD_CC)"
-			cxx = "x86_64-pc-linux-gnu-$(tc-getBUILD_CXX)"
-			linker = "x86_64-pc-linux-gnu-$(tc-getCC)"
+			cc = "$(tc-getBUILD_CC)"
+			cxx = "$(tc-getBUILD_CXX)"
+			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
 		EOF
 		cat <<- EOF >> "${S}"/config.toml
 			[host.${rust_target}]
-			cc = "x86_64-pc-linux-gnu-$(tc-getBUILD_CC)"
-			cxx = "x86_64-pc-linux-gnu-$(tc-getBUILD_CXX)"
-			linker = "x86_64-pc-linux-gnu-$(tc-getCC)"
+			cc = "$(tc-getBUILD_CC)"
+			cxx = "$(tc-getBUILD_CXX)"
+			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
 		EOF
 		if use system-llvm; then
