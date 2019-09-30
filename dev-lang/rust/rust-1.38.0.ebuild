@@ -266,7 +266,7 @@ src_configure() {
 
 src_compile() {
 	env $(cat "${S}"/config.env) \
-		"${EPYTHON}" ./x.py build --stage 1 -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
+		"${EPYTHON}" ./x.py build --keep-stage 0 --keep-stage 1 -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
