@@ -311,6 +311,9 @@ src_prepare() {
 	sed -i -e "s@check_prog('RUSTFMT', add_rustup_path('rustfmt')@check_prog('RUSTFMT', add_rustup_path('rustfmt_do_not_use')@" \
 		"${S}"/build/moz.configure/rust.configure || die
 
+	# Fix PGO freeze
+	sed -i /"ret = runner.wait()"/d build/pgo/profileserver.py || die
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
