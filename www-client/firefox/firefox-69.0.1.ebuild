@@ -651,6 +651,9 @@ src_configure() {
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	use lto && mozconfig_annotate '+lto' MOZ_LTO=1
+	use lto && echo "export MOZ_LOO=1" >> "${S}"/.mozconfig
+	use lto && echo "mk_add_options MOZ_LTO=1" >> "${S}".mozconfig
 	use pgo && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
 	use pgo && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
 	#
