@@ -1,8 +1,6 @@
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 firefox-SIOCGSTAMP.patch
-build-aarch64-user_vfp.patch
 mozilla-1512162.patch
-rhbz-1219542-s390-build.patch
 thunderbird-debug.patch
 
 mozilla-1245783.patch
