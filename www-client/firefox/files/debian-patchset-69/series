@@ -1,7 +1,6 @@
 fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
 fixes/Bug-1526653-Include-struct-definitions-for-user_vfp-.patch
 fixes/Bug-1574761-Avoid-race-condition-creating-old-config.patch
-fixes/Bug-1531309-Don-t-use-__PRETTY_FUNCTION__-or-__FUNCT.patch
 prefs/Set-javascript.options.showInConsole.patch
 prefs/Set-DPI-to-system-settings.patch
 prefs/Don-t-auto-disable-extensions-in-system-directories.patch

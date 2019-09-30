@@ -2,15 +2,10 @@ mozilla-nongnome-proxies.patch
 mozilla-kde.patch
 mozilla-ntlm-full-path.patch
 mozilla-openaes-decl.patch
-mozilla-aarch64-startup-crash.patch
 mozilla-bmo1463035.patch
 mozilla-cubeb-noreturn.patch
-mozilla-fix-aarch64-libopus.patch
 mozilla-disable-wasm-emulate-arm-unaligned-fp-access.patch
-mozilla-s390-context.patch
-mozilla-s390-bigendian.patch
 mozilla-reduce-rust-debuginfo.patch
-mozilla-ppc-altivec_static_inline.patch
 mozilla-bmo1005535.patch
 mozilla-bmo1568145.patch
 mozilla-bmo1573381.patch
