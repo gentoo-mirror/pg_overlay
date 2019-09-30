@@ -683,7 +683,7 @@ src_compile() {
 	GDK_BACKEND=x11 \
 		MOZ_MAKE_FLAGS="${MAKEOPTS} -O" \
 		SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
-		MOZ_NOSPAM=1 MOZ_PGO=1 MOZ_LTO=1 \
+		MOZ_NOSPAM=1 \
 		${_virtx} \
 		./mach build --verbose \
 		|| die
