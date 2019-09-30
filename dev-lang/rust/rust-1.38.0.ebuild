@@ -186,17 +186,19 @@ src_configure() {
 		optimize = $(toml_usex !debug)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
+		thin-lto = $(toml_usex system-llvm)
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared = $(toml_usex system-llvm)
-		use-libcxx = false
+		use-libcxx = $(toml_usex system-llvm)
+		use-linker = "$(usex system-llvm lld)"
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
-		cargo = "${rust_stage0_root}/bin/cargo"
-		rustc = "${rust_stage0_root}/bin/rustc"
+		cargo = "/usr/bin/cargo"
+		rustc = "/usr/bin/rustc"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = true
@@ -227,6 +229,8 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
+		lld = $(usex system-llvm)
+		llvm-libunwind = $(toml_usex system-llvm)
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
