@@ -9,7 +9,7 @@ inherit git-r3 l10n wxwidgets
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
-EGIT_REPO_URI="git://repo.or.cz/${PN}.git"
+EGIT_REPO_URI="https://repo.or.cz/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
