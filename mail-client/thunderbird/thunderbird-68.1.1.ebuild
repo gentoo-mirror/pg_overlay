@@ -271,6 +271,9 @@ src_prepare() {
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i";done
 
+	# PGO freeze fix
+	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
+
 	# Enable gnomebreakpad
 	if use debug ; then
 		sed -i -e "s:GNOME_DISABLE_CRASH_DIALOG=1:GNOME_DISABLE_CRASH_DIALOG=0:g" \
@@ -310,9 +313,6 @@ src_prepare() {
 	# However, when available, an unsupported version can cause problems, bug #669548
 	sed -i -e "s@check_prog('RUSTFMT', add_rustup_path('rustfmt')@check_prog('RUSTFMT', add_rustup_path('rustfmt_do_not_use')@" \
 		"${S}"/build/moz.configure/rust.configure || die
-
-	# Fix PGO freeze
-	sed -i /"ret = runner.wait()"/d build/pgo/profileserver.py || die
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
