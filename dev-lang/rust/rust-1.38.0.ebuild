@@ -230,7 +230,7 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = $(usex system-llvm)
+		lld = $(toml_usex system-llvm)
 		llvm-libunwind = $(toml_usex system-llvm)
 	EOF
 
@@ -246,7 +246,7 @@ src_configure() {
 			[target.${rust_target}]
 			cc = "$(tc-getBUILD_CC)"
 			cxx = "$(tc-getBUILD_CXX)"
-			linker = "gold"
+			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
 		EOF
 		if use system-llvm; then
