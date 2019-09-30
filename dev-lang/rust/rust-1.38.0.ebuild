@@ -122,11 +122,11 @@ pkg_setup() {
 }
 
 src_prepare() {
-	#local rust_stage0_root="${WORKDIR}"/rust-stage0
+	local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	#local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
+	local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
-	#"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
+	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	if use system-llvm; then
 		rm -rf src/llvm-project/ || die
@@ -266,7 +266,7 @@ src_configure() {
 
 src_compile() {
 	env $(cat "${S}"/config.env) \
-		"${EPYTHON}" ./x.py build --keep-stage 0 --keep-stage 1 --stage 2 -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
+		"${EPYTHON}" ./x.py build --incremental -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
