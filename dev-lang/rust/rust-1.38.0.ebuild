@@ -205,7 +205,8 @@ src_configure() {
 		fast-submodules = true
 		python = "${EPYTHON}"
 		locked-deps = false
-		vendor = false
+		vendor = true
+		full-bootstrap = true
 		extended = ${extended}
 		tools = [${tools}]
 		verbose = 2
