@@ -1,3 +1,4 @@
+mozilla-build-arm.patch
 build-disable-elfhack.patch
 
 mozilla-1170092.patch
