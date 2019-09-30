@@ -122,11 +122,11 @@ pkg_setup() {
 }
 
 src_prepare() {
-	local rust_stage0_root="${WORKDIR}"/rust-stage0
+	#local rust_stage0_root="${WORKDIR}"/rust-stage0
 
-	local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
+	#local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
-	"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
+	#"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig --destdir="${rust_stage0_root}" --prefix=/ || die
 
 	if use system-llvm; then
 		rm -rf src/llvm-project/ || die
