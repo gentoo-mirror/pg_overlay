@@ -225,7 +225,7 @@ src_configure() {
 		debug-assertions = $(toml_usex debug)
 		debuginfo-level = 0
 		backtrace = $(toml_usex debug)
-		default-linker = "$(tc-getCC)"
+		default-linker = "lld"
 		channel = "stable"
 		rpath = false
 		codegen-tests = $(toml_usex debug)
@@ -246,7 +246,7 @@ src_configure() {
 			[target.${rust_target}]
 			cc = "$(tc-getBUILD_CC)"
 			cxx = "$(tc-getBUILD_CXX)"
-			linker = "$(tc-getCC)"
+			linker = "lld"
 			ar = "$(tc-getAR)"
 		EOF
 		if use system-llvm; then
