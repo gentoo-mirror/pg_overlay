@@ -135,10 +135,10 @@ src_prepare() {
 	fi
 
 	# Remove other unused vendored libraries            
-	rm -rf vendor/curl-sys/curl/            
+	#rm -rf vendor/curl-sys/curl/            
 	rm -rf vendor/jemalloc-sys/jemalloc/            
 	rm -rf vendor/libz-sys/src/zlib/            
-	rm -rf vendor/lzma-sys/xz-*/            
+	#rm -rf vendor/lzma-sys/xz-*/            
 	rm -rf vendor/openssl-src/openssl/
 
 	# The configure macro will modify some autoconf-related files, which upsets
@@ -197,12 +197,11 @@ src_configure() {
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
-		cargo = "/usr/bin/cargo"
-		rustc = "/usr/bin/rustc"
+		cargo = "${rust_stage0_root}/bin/cargo"
+		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = true
-		fast-submodules = true
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
@@ -229,8 +228,7 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = $(toml_usex system-llvm)
-		llvm-libunwind = $(toml_usex system-llvm)
+		lld = $(usex system-llvm false $(toml_usex wasm))
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
