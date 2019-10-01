@@ -201,9 +201,9 @@ src_configure() {
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
-		submodules = false
+		submodules = true
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = ${extended}
 		tools = [${tools}]
@@ -228,7 +228,7 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = $(toml_usex system-llvm)
+		lld = $(usex system-llvm false $(toml_usex wasm))
 		llvm-tools = $(usex system-llvm false true)
 	EOF
 
