@@ -206,7 +206,6 @@ src_configure() {
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
-		full-bootstrap = true
 		extended = ${extended}
 		tools = [${tools}]
 		verbose = 2
@@ -249,13 +248,6 @@ src_configure() {
 			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
 		EOF
-		cat <<- EOF >> "${S}"/config.toml
-			[host.${rust_target}]
-			cc = "$(tc-getBUILD_CC)"
-			cxx = "$(tc-getBUILD_CXX)"
-			linker = "$(tc-getCC)"
-			ar = "$(tc-getAR)"
-		EOF
 		if use system-llvm; then
 			cat <<- EOF >> "${S}"/config.toml
 				llvm-config = "$(get_llvm_prefix "${LLVM_MAX_SLOT}")/bin/llvm-config"
@@ -272,7 +264,7 @@ src_configure() {
 }
 
 src_compile() {
-	env $(cat "${S}"/config.env) \
+	env $(cat "${S}"/config.env)\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
