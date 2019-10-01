@@ -135,7 +135,7 @@ src_prepare() {
 	fi
 
 	# Remove other unused vendored libraries            
-	rm -rf vendor/curl-sys/curl/            
+	#rm -rf vendor/curl-sys/curl/            
 	rm -rf vendor/jemalloc-sys/jemalloc/            
 	rm -rf vendor/libz-sys/src/zlib/            
 	rm -rf vendor/lzma-sys/xz-*/            
