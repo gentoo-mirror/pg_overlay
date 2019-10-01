@@ -229,8 +229,9 @@ src_configure() {
 		rpath = false
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = $(usex system-llvm false $(toml_usex wasm))
-		llvm-libunwind = $(usex system-llvm false $(toml_usex wasm))
+		lld = $(toml_usex system-llvm)
+		llvm-libunwind = $(toml_usex system-llvm)
+		llvm-tools = $(usex system-llvm false true)
 	EOF
 
 	for v in $(multilib_get_enabled_abi_pairs); do
