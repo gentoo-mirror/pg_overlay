@@ -202,7 +202,6 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = true
-		fast-submodules = true
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
