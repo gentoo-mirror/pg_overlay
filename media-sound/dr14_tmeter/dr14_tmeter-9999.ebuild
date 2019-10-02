@@ -19,8 +19,6 @@ IUSE=""
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="virtual/ffmpeg[encode]
 	media-libs/flac
-	media-sound/lame
-	media-sound/vorbis-tools
 	dev-python/numpy[${PYTHON_USEDEP}]"
 
 src_prepare() {
