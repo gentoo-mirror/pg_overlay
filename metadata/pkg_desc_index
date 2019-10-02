@@ -95,6 +95,7 @@ media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
 media-sound/audacious 9999: Lightweight and versatile audio player
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: foobar2k-like music player
+media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mpDris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/mpd 0.21.11: The Music Player Daemon (mpd)
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
