@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/OtterBrowser/otter-browser"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="+webengine webkit spell"
+IUSE="webengine webkit spell"
 REQUIRED_USE="
 	|| ( webengine webkit )
 "
