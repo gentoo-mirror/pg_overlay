@@ -65,7 +65,7 @@ dev-util/gn 0.1584: GN is a meta-build system that generates build files for Nin
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
-dev-util/meson 0.51.0_pre: Open source build system
+dev-util/meson 0.52.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/vulkan-headers 1.1.115: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.1.114: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
@@ -112,6 +112,7 @@ net-im/gajim 1.1.2: Jabber client written in PyGTK
 net-im/pidgin 2.13.0: GTK Instant Messenger client
 net-irc/irssi 1.2.2_pre: A modular textUI IRC client with IPv6 support
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
+net-libs/gnutls 3.6.10_pre: A TLS 1.2 and SSL 3.0 implementation for the GNU project
 net-libs/libsoup 2.66.0: An HTTP library implementation in C
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.1.9999 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
