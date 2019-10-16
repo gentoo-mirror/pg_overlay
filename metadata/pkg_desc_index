@@ -64,7 +64,7 @@ games-board/pysolfc 2.6.2: An exciting collection of more than 1000 solitaire ca
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kwin 5.16.5 5.17.0: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 5.16.5: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.1.1: Thunderbird Mail Client
 media-gfx/gimp 2.10.12_pre: GNU Image Manipulation Program
 media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
