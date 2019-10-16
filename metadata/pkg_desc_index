@@ -34,27 +34,16 @@ dev-libs/libpwquality 1.4.0: Library for password quality checking and generatin
 dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
 dev-libs/re2 0.2019.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.51.9999: A lightweigt RPC library based on XML and HTTP
-dev-python/configobj 5.0.6: Simple config file reader and writer
-dev-python/josepy 1.1.0: JOSE protocol implementation in Python
-dev-python/pbr 5.1.3: Inject some useful and sensible default behaviors into setuptools
-dev-python/precis-i18n 1.0.0: Internationalized Usernames and Passwords
-dev-python/pycairo 1.18.0: Python bindings for the cairo library
-dev-python/pygame 1.9.4: Python bindings for SDL multimedia library
+dev-python/pbr 5.4.3: Inject some useful and sensible default behaviors into setuptools
+dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
-dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
-dev-python/pysol_cards 0.4.1: Deal PySol FreeCell cards
 dev-python/python-mpd2 9999: Python MPD client library
 dev-python/python-nbxmpp 0.6.10: Python library to use Jabber/XMPP networks in a non-blocking way
-dev-python/random2 1.0.1: Python-2.7 random module ported to python-3
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
-dev-python/requests-toolbelt 0.8.0: A utility belt for advanced users of python-requests
-dev-python/scandir 1.10.0: A better directory iterator and faster os.walk()
 dev-python/service_identity 18.1.0: Service identity verification for pyOpenSSL
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/twisted 19.7.0: An asynchronous networking framework written in Python
-dev-python/wokkel 0.7.1: Twisted Jabber support library
-dev-python/zope-component 4.4.1: Zope Component Architecture
 dev-qt/qtwebkit 5.13.1_pre20190919 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/boost-build 1.69.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
