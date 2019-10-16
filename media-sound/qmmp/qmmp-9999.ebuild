@@ -1,7 +1,7 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
 
 inherit cmake-utils l10n xdg-utils
@@ -73,7 +73,7 @@ RDEPEND="
 	projectm? (
 		dev-qt/qtgui:5[-gles2]
 		dev-qt/qtopengl:5
-		media-libs/libprojectm
+		media-libs/libprojectm:=
 	)
 	pulseaudio? ( >=media-sound/pulseaudio-0.9.9 )
 	qtmedia? ( dev-qt/qtmultimedia:5 )
