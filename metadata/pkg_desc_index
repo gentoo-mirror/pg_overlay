@@ -21,6 +21,7 @@ app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX s
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
+dev-db/sqlite 3.30.1: SQL database engine
 dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/rust 1.38.0: Systems programming language from Mozilla
 dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
