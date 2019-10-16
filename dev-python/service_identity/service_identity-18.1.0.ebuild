@@ -25,6 +25,8 @@ DEPEND="
 	dev-python/setuptools[${PYTHON_USEDEP}]
 	test? ( dev-python/pytest[${PYTHON_USEDEP}] )"
 
+	S="${WORKDIR}/${P}/_/-"
+
 python_prepare_all() {
 	# Prevent un-needed download during build
 	sed -e "/^    'sphinx.ext.intersphinx',/d" -i docs/conf.py || die
