@@ -16,10 +16,9 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://git.deluge-torrent.org/${PN}
 		git://deluge-torrent.org/${PN}.git"
 	EGIT_BRANCH="develop"
-	SRC_URI=""
 else
-	SRC_URI="http://download.deluge-torrent.org/source/${P}.tar.bz2"
-	KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
+	SRC_URI="http://download.deluge-torrent.org/source/2.0/${P}.tar.xz"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-2"
@@ -27,40 +26,44 @@ SLOT="0"
 IUSE="console geoip gtk libnotify sound webinterface"
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
-	sound? ( gtk )
 	libnotify? ( gtk )
+	sound? ( gtk )
 "
-CDEPEND=">=net-libs/libtorrent-rasterbar-1.2.0[python,${PYTHON_USEDEP}]"
-DEPEND="${CDEPEND}
+
+DEPEND="net-libs/libtorrent-rasterbar[python,${PYTHON_USEDEP}]
 	dev-python/setuptools[${PYTHON_USEDEP}]
-	dev-util/intltool"
-RDEPEND="${CDEPEND}
-	dev-python/chardet[${PYTHON_USEDEP}]
-	dev-python/mako[${PYTHON_USEDEP}]
+	dev-util/intltool
+	dev-python/wheel[${PYTHON_USEDEP}]
+	acct-group/deluge
+	acct-user/deluge"
+RDEPEND="dev-python/chardet[${PYTHON_USEDEP}]
 	dev-python/pillow[${PYTHON_USEDEP}]
 	dev-python/pyopenssl[${PYTHON_USEDEP}]
 	dev-python/pyxdg[${PYTHON_USEDEP}]
 	dev-python/rencode[${PYTHON_USEDEP}]
 	dev-python/setproctitle[${PYTHON_USEDEP}]
-	dev-python/service_identity[${PYTHON_USEDEP}]
-	|| ( >=dev-python/twisted-16.0.0[${PYTHON_USEDEP}]
-		>=dev-python/twisted-web-13.0[${PYTHON_USEDEP}]
-	)
-	dev-python/wheel[${PYTHON_USEDEP}]
+	>=dev-python/twisted-17.1.0[${PYTHON_USEDEP}]
+	>=dev-python/zope-interface-4.4.2[${PYTHON_USEDEP}]
 	geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 	gtk? (
 		sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
 		gnome-base/librsvg
-		libnotify? ( dev-python/notify-python[${PYTHON_USEDEP}] )
+		libnotify? ( x11-libs/libnotify )
 	)
+	net-libs/libtorrent-rasterbar[python,${PYTHON_USEDEP}]
 	webinterface? ( dev-python/mako[${PYTHON_USEDEP}] )"
+
+PATCHES=(
+	"${FILESDIR}/${PN}-2.0.3-setup.py.patch"
+	"${FILESDIR}/${PN}-2.0.3-UI-status.patch"
+)
 
 python_prepare_all() {
 	local args=(
 		-e "/Compiling po file/a \\\tuptoDate = False"
 	)
-	#sed -i "${args[@]}" -- 'setup.py' || die
+	sed -i "${args[@]}" -- 'setup.py' || die
 	args=(
 		-e 's|"new_release_check": True|"new_release_check": False|'
 		-e 's|"check_new_releases": True|"check_new_releases": False|'
@@ -93,12 +96,12 @@ esetup.py() {
 python_install_all() {
 	distutils-r1_python_install_all
 	if ! use console ; then
-		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/console/" || die
+		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/console/" || die
 		rm -f "${D}/usr/bin/deluge-console" || die
 		rm -f "${D}/usr/share/man/man1/deluge-console.1" ||die
 	fi
 	if ! use gtk ; then
-		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/gtk3/" || die
+		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/gtkui/" || die
 		rm -rf "${D}/usr/share/icons/" || die
 		rm -f "${D}/usr/bin/deluge-gtk" || die
 		rm -f "${D}/usr/share/man/man1/deluge-gtk.1" || die
@@ -108,7 +111,7 @@ python_install_all() {
 		newinitd "${FILESDIR}/deluge-web.init" deluge-web
 		newconfd "${FILESDIR}/deluge-web.conf" deluge-web
 	else
-		rm -rf "${D}/usr/lib/python3.7/site-packages/deluge/ui/web/" || die
+		rm -rf "${D}/usr/$(get_libdir)/python3.7/site-packages/deluge/ui/web/" || die
 		rm -f "${D}/usr/bin/deluge-web" || die
 		rm -f "${D}/usr/share/man/man1/deluge-web.1" || die
 	fi
