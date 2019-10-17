@@ -51,7 +51,7 @@ dev-util/boost-build 1.69.0: A system for large project software construction, s
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.61.2: GDBus code and documentation generator
 dev-util/glib-utils 2.61.2: Build utilities for GLib using projects
-dev-util/glslang 7.11.3214: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
+dev-util/glslang 7.11.3214 7.12.3352: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1584: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
