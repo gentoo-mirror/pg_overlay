@@ -7,7 +7,7 @@ PLOCALES="ca cs da de el es fi fr ga gl he hu it ja ms nl pl pt ro ru sk sr sv t
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit desktop eutils git-r3 l10n python-r1
+inherit desktop git-r3 l10n python-r1
 
 DESCRIPTION="A utility to find various forms of lint on a filesystem"
 HOMEPAGE="https://www.pixelbeat.org/fslint/"
@@ -36,7 +36,7 @@ src_prepare() {
 
 	# Change some paths to make ${PN}-gui run with our filesystem layout.
 	# These commands are taken from the debian/rules file.
-	sed -e "s:^liblocation=.*$:liblocation='${EROOT}usr/share/${PN}':" \
+	sed -e "s:^liblocation=.*$:liblocation='${EROOT}/usr/share/${PN}':" \
 		-e "s:^locale_base=.*$:locale_base=None:" \
 		-i "${PN}-gui" \
 		|| die "failed to fix liblocation and locale_base in ${PN}-gui"
