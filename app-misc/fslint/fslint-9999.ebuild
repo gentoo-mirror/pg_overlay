@@ -7,7 +7,7 @@ PLOCALES="ca cs da de el es fi fr ga gl he hu it ja ms nl pl pt ro ru sk sr sv t
 
 PYTHON_COMPAT=( python2_7 )
 
-inherit eutils git-r3 l10n python-r1
+inherit desktop git-r3 l10n python-r1
 
 DESCRIPTION="A utility to find various forms of lint on a filesystem"
 HOMEPAGE="https://www.pixelbeat.org/fslint/"
