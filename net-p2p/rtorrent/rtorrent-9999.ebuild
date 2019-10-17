@@ -29,9 +29,6 @@ DEPEND="${COMMON_DEPEND}
 
 DOCS=( doc/rtorrent.rc )
 
-PATCHES=(
-)
-
 pkg_setup() {
 	if ! linux_config_exists || ! linux_chkconfig_present IPV6; then
 		ewarn "rtorrent will not start without IPv6 support in your kernel"
