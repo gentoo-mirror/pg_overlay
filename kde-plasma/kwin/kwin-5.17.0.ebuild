@@ -91,7 +91,7 @@ RESTRICT+=" test"
 
 src_prepare() {
 	kde5_src_prepare
-	use multimedia || eapply "${FILESDIR}/${PN}-5.15.80-gstreamer-optional.patch"
+	use multimedia || eapply "${FILESDIR}/${PN}-5.16.80-gstreamer-optional.patch"
 
 	# Access violations, bug #640432
 	sed -e "s/^ecm_find_qmlmodule.*QtMultimedia/#&/" \
@@ -104,5 +104,4 @@ src_configure() {
 	)
 
 	kde5_src_configure
-	sed -i s:usr/lib/:usr/lib64/:g ${WORKDIR}/${PN}-${PV}_build/build.ninja
 }
