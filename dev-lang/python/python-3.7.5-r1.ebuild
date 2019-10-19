@@ -66,6 +66,7 @@ src_prepare() {
 	rm -fr Modules/zlib
 
 	local PATCHES=(
+		"${FILESDIR}/python-3.7.5-hashlib.patch"
 		"${WORKDIR}/patches"
 	)
 
@@ -140,6 +141,8 @@ src_configure() {
 		--without-ensurepip
 		--with-system-expat
 		--with-system-ffi
+		--enable-optimizations
+		--with-lto
 	)
 
 	OPT="" econf "${myeconfargs[@]}"
