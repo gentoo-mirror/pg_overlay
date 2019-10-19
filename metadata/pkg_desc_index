@@ -113,6 +113,7 @@ net-misc/curl 7.66.0_pre: A Client that groks URLs
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/wget2 1.99.2: GNU Wget2 is a file and recursive website downloader
 net-misc/youtube-dl 99999999: Download videos from YouTube.com (and more sites...)
+net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
