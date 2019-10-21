@@ -2,8 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+PLOCALES="cs da de en eo es fi fr gl he hu it ko nb nl ru pl pt_BR sk sv uk zh_CN"
 
-inherit meson git-r3
+inherit meson git-r3 l10n
 
 DESCRIPTION="Ncurses client for the Music Player Daemon (MPD)"
 HOMEPAGE="https://www.musicpd.org/clients/ncmpc/ https://github.com/MusicPlayerDaemon/ncmpc"
@@ -39,6 +40,13 @@ src_prepare() {
 	# use correct (html) docdir
 	sed -e "/install_dir:.*doc/s/meson.project_name()/'${PF}'/" \
 		-i doc/meson.build || die
+
+	rm_locale() {
+		rm -vf "po/${1}.po" || die
+		sed -i "/${1}/d" po/LINGUAS || die "removing of ${1}.po failed"
+	}
+	l10n_find_plocales_changes "po" "" ".po"
+	l10n_for_each_disabled_locale_do rm_locale
 }
 
 src_configure() {
