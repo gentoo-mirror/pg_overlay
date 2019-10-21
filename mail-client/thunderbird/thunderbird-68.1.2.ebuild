@@ -34,7 +34,7 @@ MOZCONFIG_OPTIONAL_JIT=1
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="https://www.mozilla.org/thunderbird"
 
-KEYWORDS="~amd64 ~ppc64 ~x86 ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
@@ -54,7 +54,7 @@ SRC_URI="${SRC_URI}
 
 inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
-		autotools mozlinguas-v2 virtualx
+		autotools mozlinguas-v2 virtualx multiprocessing
 
 CDEPEND="
 	>=dev-libs/nss-3.44.1
@@ -156,7 +156,6 @@ DEPEND="${CDEPEND}
 		)
 	)
 	pulseaudio? ( media-sound/pulseaudio )
-	>=virtual/cargo-1.34.0
 	>=virtual/rust-1.34.0
 	wayland? ( >=x11-libs/gtk+-3.11:3[wayland] )
 	amd64? ( >=dev-lang/yasm-1.1 virtual/opengl )
@@ -563,9 +562,6 @@ src_configure() {
 
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
-	# disable webrtc for now, bug 667642
-	mozconfig_annotate 'broken on arm' --disable-webrtc
-
 	# allow elfhack to work in combination with unstripped binaries
 	# when they would normally be larger than 2GiB.
 	append-ldflags "-Wl,--compress-debug-sections=zlib"
@@ -636,7 +632,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-webrtc
 
 	mozconfig_annotate '' --without-debug-label
-	mozconfig_annotate "" --without-google-location-service-api-keyfile
+	mozconfig_annotate '' --without-google-location-service-api-keyfile
 	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
 
 	# Enable good features
