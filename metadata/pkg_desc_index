@@ -27,6 +27,7 @@ dev-lang/python 3.7.5-r1: An interpreted, interactive, object-oriented programmi
 dev-lang/rust 1.38.0: Systems programming language from Mozilla
 dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
 dev-libs/boost 1.69.0: Boost Libraries for C++
+dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.61.2: The GLib library of C routines
 dev-libs/gobject-introspection 1.60.2: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.60.2: Build infrastructure for GObject Introspection
