@@ -15,7 +15,6 @@ IUSE="utils"
 
 RESTRICT="bindist"
 
-RDEPEND="!<www-client/firefox-${MOZVER}"
 DEPEND="
 	abi_x86_32? ( dev-lang/nasm )
 	abi_x86_64? ( dev-lang/nasm )"
