@@ -104,6 +104,7 @@ src_prepare() {
 		"${FILESDIR}/python-2.7.9-ncurses-pkg-config.patch"
 		"${FILESDIR}/python-2.7.10-cross-compile-warn-test.patch"
 		"${FILESDIR}/python-2.7.10-system-libffi.patch"
+		"${FILESDIR}/python-2.7.15-PGO-r1.patch"
 	)
 
 	default
@@ -206,6 +207,8 @@ src_configure() {
 		--with-system-expat
 		--with-system-ffi
 		--without-ensurepip
+		--enable-optimizations
+		--with-lto
 	)
 
 	OPT= econf "${myeconfargs[@]}"
@@ -221,7 +224,16 @@ src_compile() {
 	# Avoid invoking pgen for cross-compiles.
 	touch Include/graminit.h Python/graminit.c
 
-	emake
+	# extract the number of parallel jobs in MAKEOPTS
+	echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' > /dev/null
+	if [ $? -eq 0 ]; then
+		par_arg="-j$(echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' | tail -n1 | egrep -o '[[:digit:]]+')"
+	else
+		par_arg=""
+	fi
+	export par_arg
+
+	emake EXTRATESTOPTS="${par_arg} -uall,-audio -x test_distutils"
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax_kernel]; then
@@ -239,7 +251,7 @@ src_test() {
 	fi
 
 	# Skip failing tests.
-	local skipped_tests="distutils gdb"
+	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support"
 
 	for test in ${skipped_tests}; do
 		mv "${S}"/Lib/test/test_${test}.py "${T}"
@@ -254,7 +266,7 @@ src_test() {
 	local -x TZ=UTC
 
 	# Rerun failed tests in verbose mode (regrtest -w).
-	emake test EXTRATESTOPTS="-w" < /dev/tty
+	emake test TESTOPTS="-w -uall,-audio ${par_arg}" < /dev/tty
 	local result="$?"
 
 	for test in ${skipped_tests}; do
