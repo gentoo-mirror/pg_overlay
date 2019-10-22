@@ -6,7 +6,7 @@ EAPI=7
 PLOCALES="de en"
 PYTHON_COMPAT=( python3_7 )
 
-inherit desktop distutils-r1 l10n git-r3
+inherit desktop distutils-r1 gnome2-utils l10n git-r3
 
 DESCRIPTION="CoverGrid (mcg) is a client for the Music Player Daemon (MPD), focusing on albums instead of single tracks. It is not intended to be a replacement for your favorite MPD client but an addition to get a better album-experience"
 HOMEPAGE="https://www.suruatoel.xyz/codes/mcg"
@@ -35,7 +35,7 @@ python_compile() {
 	local build_args=(
 		--no-compile-schemas
 	)
-	distutils-r1_python_compile ${build_args[@]}
+	distutils-r1_python_compile
 }
 
 python_install() {
@@ -48,4 +48,7 @@ python_install() {
 
 python_install_all() {
 	distutils-r1_python_install_all
+}
+pkg_postinst() {
+	gnome2_schemas_update
 }
