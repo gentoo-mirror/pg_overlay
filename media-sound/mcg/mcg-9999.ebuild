@@ -40,7 +40,7 @@ python_install_all() {
 	distutils-r1_python_install_all
 	emake -C po DESTDIR="${D}" install
 
-	doexe ${PN}/${PN}.py
+	newexe ${PN}/${PN}.py ${PN}.py
 
 	doicon ${PN}/${PN}.svg
 	domenu ${PN}/${PN}.desktop
