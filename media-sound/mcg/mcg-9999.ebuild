@@ -48,8 +48,4 @@ python_install() {
 
 python_install_all() {
 	distutils-r1_python_install_all
-	#emake -C DESTDIR="${D}" install
-
-	#doicon ${PN}/${PN}.svg
-	#domenu ${PN}/${PN}.desktop
 }
