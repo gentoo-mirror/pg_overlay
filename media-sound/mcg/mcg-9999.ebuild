@@ -23,7 +23,7 @@ DEPEND="${RDEPEND}
 python_prepare_all() {
 	rem_locale() {
 		rm -frv "locale/${1}" || die "removing of ${1}.po failed"
-		sed -i 's:locale/${1}/LC_MESSAGES/mcg.mo::g' setup.py
+		sed -i 's:locale/de/LC_MESSAGES/mcg.mo::g' setup.py
 	}
 
 	l10n_for_each_disabled_locale_do rem_locale
@@ -40,7 +40,9 @@ python_install_all() {
 	distutils-r1_python_install_all
 	emake -C po DESTDIR="${D}" install
 
+	newexe ${PN}/${PN}.py
+
 	doicon ${PN}/${PN}.svg
 	domenu ${PN}/${PN}.desktop
-	
+
 }
