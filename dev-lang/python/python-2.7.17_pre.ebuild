@@ -179,6 +179,8 @@ src_configure() {
 	# Please query BSD team before removing this!
 	append-ldflags "-L."
 
+	append-ldflags "${CFLAGS}"
+
 	local dbmliborder
 	if use gdbm; then
 		dbmliborder+="${dbmliborder:+:}gdbm"
@@ -187,12 +189,11 @@ src_configure() {
 		dbmliborder+="${dbmliborder:+:}bdb"
 	fi
 
-	local myeconfargs=(
-		# The check is broken on clang, and gives false positive:
-		# https://bugs.gentoo.org/596798
-		# (upstream dropped this flag in 3.2a4 anyway)
-		ac_cv_opt_olimit_ok=no
+	BUILD_DIR="${WORKDIR}/${CHOST}"
+	mkdir -p "${BUILD_DIR}" || die
+	cd "${BUILD_DIR}" || die
 
+	local myeconfargs=(
 		--with-fpectl
 		--enable-shared
 		$(use_enable ipv6)
@@ -210,8 +211,7 @@ src_configure() {
 		--enable-optimizations
 		--with-lto
 	)
-
-	OPT= econf "${myeconfargs[@]}"
+	ECONF_SOURCE="${S}" OPT="" econf "${myeconfargs[@]}"
 
 	if use threads && grep -q "#define POSIX_SEMAPHORES_NOT_ENABLED 1" pyconfig.h; then
 		eerror "configure has detected that the sem_open function is broken."
@@ -223,6 +223,8 @@ src_configure() {
 src_compile() {
 	# Avoid invoking pgen for cross-compiles.
 	touch Include/graminit.h Python/graminit.c
+
+	cd "${BUILD_DIR}" || die
 
 	# extract the number of parallel jobs in MAKEOPTS
 	echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' > /dev/null
@@ -249,6 +251,8 @@ src_test() {
 		elog "Disabling tests due to crosscompiling."
 		return
 	fi
+
+	cd "${BUILD_DIR}" || die
 
 	# Skip failing tests.
 	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support"
@@ -290,6 +294,7 @@ src_test() {
 src_install() {
 	local libdir=${ED}/usr/$(get_libdir)/python${SLOT}
 
+	cd "${BUILD_DIR}" || die
 	emake DESTDIR="${D}" altinstall
 
 	sed -e "s/\(LDFLAGS=\).*/\1/" -i "${libdir}/config/Makefile" || die "sed failed"
