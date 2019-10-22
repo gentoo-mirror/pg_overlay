@@ -23,23 +23,23 @@ DEPEND="${RDEPEND}
 python_prepare_all() {
 	rem_locale() {
 		rm -frv "locale/${1}" || die "removing of ${1}.po failed"
+		sed -i 's:'locale/de/LC_MESSAGES/mcg.mo'::g' setup.py
 	}
 
-	l10n_for_each_disabled_locale_do rem_locale
+	#l10n_for_each_disabled_locale_do rem_locale
 
 	distutils-r1_python_prepare_all
 }
 
 python_install() {
 	distutils-r1_python_install
-	python_newscript ${PN}.py ${PN}
+	python_newscript ${PN}/${PN}.py ${PN}
 }
 
 python_install_all() {
 	distutils-r1_python_install_all
-	emake -C po DESTDIR="${D}" install
+	#emake -C DESTDIR="${D}" install
 
-	doicon ${PN}/${PN}.svg
-	domenu ${PN}/${PN}.desktop
-	
+	#doicon ${PN}/${PN}.svg
+	#domenu ${PN}/${PN}.desktop
 }
