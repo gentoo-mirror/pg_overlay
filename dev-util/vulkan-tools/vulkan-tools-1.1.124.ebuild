@@ -11,8 +11,8 @@ if [[ "${PV}" == "9999" ]]; then
 else
 	EGIT_COMMIT="fb1fd1d63eb20cc6f922228f04d8b96cec452b46"
 	KEYWORDS="amd64"
-	SRC_URI="https://github.com/KhronosGroup/Vulkan-Tools/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/Vulkan-Tools-${EGIT_COMMIT}"
+	SRC_URI="https://github.com/KhronosGroup/Vulkan-Tools/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/Vulkan-Tools-${PV}"
 fi
 
 inherit python-any-r1 cmake-multilib
@@ -22,7 +22,7 @@ HOMEPAGE="https://github.com/KhronosGroup/Vulkan-Tools"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-IUSE="+cube +vulkaninfo X wayland"
+IUSE="+cube +vulkaninfo +X wayland"
 COMMON_DEPEND="media-libs/vulkan-loader:=[${MULTILIB_USEDEP},wayland?,X?]
 	wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 	X? (
@@ -37,7 +37,7 @@ RDEPEND="${COMMON_DEPEND}"
 
 # Vulkaninfo does not support wayland
 REQUIRED_USE="|| ( X wayland )
-			  vulkaninfo? ( X )"
+			vulkaninfo? ( X )"
 
 pkg_setup() {
 	MULTILIB_CHOST_TOOLS=()
