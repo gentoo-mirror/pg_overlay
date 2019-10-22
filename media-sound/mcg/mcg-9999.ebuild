@@ -26,7 +26,7 @@ python_prepare_all() {
 		sed -i 's:'locale/de/LC_MESSAGES/mcg.mo'::g' setup.py
 	}
 
-	l10n_for_each_disabled_locale_do rem_locale
+	#l10n_for_each_disabled_locale_do rem_locale
 
 	distutils-r1_python_prepare_all
 }
