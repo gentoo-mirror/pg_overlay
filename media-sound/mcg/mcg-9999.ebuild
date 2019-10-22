@@ -33,14 +33,12 @@ python_prepare_all() {
 
 python_install() {
 	distutils-r1_python_install
-	python_newscript ${PN}.py ${PN}
+	python_newscript ${PN}/${PN}.py ${PN}
 }
 
 python_install_all() {
 	distutils-r1_python_install_all
 	emake -C po DESTDIR="${D}" install
-
-	newexe ${PN}/${PN}.py ${PN}.py
 
 	doicon ${PN}/${PN}.svg
 	domenu ${PN}/${PN}.desktop
