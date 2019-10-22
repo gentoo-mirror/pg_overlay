@@ -179,10 +179,7 @@ src_configure() {
 	# Please query BSD team before removing this!
 	append-ldflags "-L."
 
-	# LTO needs this
-	if use lto; then
-		append-ldflags "${CFLAGS}"
-	fi
+	append-ldflags "${CFLAGS}"
 
 	local dbmliborder
 	if use gdbm; then
