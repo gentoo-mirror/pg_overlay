@@ -28,7 +28,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/${PN^}_${PV}"
+S="${WORKDIR}/${PN^}_${PV}_source"
 
 DOCS=( changelog FAQ.txt README )
 
