@@ -31,13 +31,17 @@ python_prepare_all() {
 	distutils-r1_python_prepare_all
 }
 
+python_compile() {
+	distutils-r1_python_compile --no-compile-schemas
+}
+
 python_install() {
-	distutils-r1_python_install --no-compile-schemas
+	distutils-r1_python_install
 	python_newscript ${PN}/${PN}.py ${PN}
 }
 
 python_install_all() {
-	distutils-r1_python_install_all --no-compile-schemas
+	distutils-r1_python_install_all
 	#emake -C DESTDIR="${D}" install
 
 	#doicon ${PN}/${PN}.svg
