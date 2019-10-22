@@ -32,14 +32,17 @@ python_prepare_all() {
 }
 
 python_compile() {
-	local install_args=(
+	local build_args=(
 		--no-schemas-compile
 	)
-	distutils-r1_python_install ${install_args[@]}
+	distutils-r1_python_compile ${build_args[@]}
 }
 
 python_install() {
-	distutils-r1_python_install
+	local install_args=(
+		--optimize=1
+	)
+	distutils-r1_python_install ${install_args[@]}
 	python_newscript ${PN}/${PN}.py ${PN}
 }
 
