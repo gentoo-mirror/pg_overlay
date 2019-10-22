@@ -32,9 +32,6 @@ python_prepare_all() {
 }
 
 python_compile() {
-	local build_args=(
-		--no-compile-schemas
-	)
 	distutils-r1_python_compile
 }
 
