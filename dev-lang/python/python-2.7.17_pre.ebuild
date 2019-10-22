@@ -4,7 +4,7 @@
 EAPI="6"
 WANT_LIBTOOL="none"
 
-inherit autotools flag-o-matic pax-utils python-utils-r1 toolchain-funcs poly-c_ebuilds
+inherit autotools flag-o-matic pax-utils python-utils-r1 toolchain-funcs poly-c_ebuilds multiprocessing
 
 REAL_P="Python-${MY_PV}"
 PATCHSET_VERSION="2.7.16"
