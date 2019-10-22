@@ -23,6 +23,7 @@ DEPEND="${RDEPEND}
 python_prepare_all() {
 	rem_locale() {
 		rm -frv "locale/${1}" || die "removing of ${1}.po failed"
+		sed -i 's:locale/${1}/LC_MESSAGES/mcg.mo::g' setup.py
 	}
 
 	l10n_for_each_disabled_locale_do rem_locale
