@@ -16,7 +16,7 @@ LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
 
-RDEPEND="dev-python/pygobject:3[$PYTHON_USEDEP] )"
+RDEPEND="dev-python/pygobject:3[$PYTHON_USEDEP]"
 DEPEND="${RDEPEND}
 	dev-python/setuptools[$PYTHON_USEDEP]"
 
