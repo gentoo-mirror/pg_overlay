@@ -11,8 +11,8 @@ if [[ "${PV}" == "9999" ]]; then
 else
 	EGIT_COMMIT="737f4c1cd96283747967c2024a0108b742214455"
 	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://github.com/KhronosGroup/Vulkan-Headers/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/Vulkan-Headers-${EGIT_COMMIT}"
+	SRC_URI="https://github.com/KhronosGroup/Vulkan-Headers/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/Vulkan-Headers-${PV}"
 fi
 
 DESCRIPTION="Vulkan Header files and API registry"

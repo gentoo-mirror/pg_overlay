@@ -11,8 +11,8 @@ if [[ "${PV}" == "9999" ]]; then
 else
 	KEYWORDS="~amd64 ~x86"
 	EGIT_COMMIT="36d28090e2054baac5a9f25d8df6102ef0ec8fa9"
-	SRC_URI="https://github.com/KhronosGroup/Vulkan-Loader/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
-	S="${WORKDIR}/Vulkan-Loader-${EGIT_COMMIT}"
+	SRC_URI="https://github.com/KhronosGroup/Vulkan-Loader/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	S="${WORKDIR}/Vulkan-Loader-${PV}"
 fi
 
 inherit python-any-r1 cmake-multilib
