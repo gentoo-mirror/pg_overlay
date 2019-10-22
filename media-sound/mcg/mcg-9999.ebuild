@@ -32,14 +32,12 @@ python_prepare_all() {
 }
 
 python_compile() {
-	local build_args=(
-		--no-compile-schemas
-	)
 	distutils-r1_python_compile
 }
 
 python_install() {
 	local install_args=(
+		--no-compile-schemas
 		--optimize=1
 	)
 	distutils-r1_python_install ${install_args[@]}
