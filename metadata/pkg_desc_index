@@ -104,7 +104,6 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-fs/nfs-utils 2.3.3: NFS client and server daemons
 net-im/gajim 1.1.2: Jabber client written in PyGTK
 net-im/pidgin 2.13.0: GTK Instant Messenger client
-net-irc/irssi 1.2.2_pre: A modular textUI IRC client with IPv6 support
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
 net-libs/libsoup 2.66.0: An HTTP library implementation in C
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
