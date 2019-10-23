@@ -1,9 +1,9 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit eutils flag-o-matic multilib-minimal pax-utils
+inherit flag-o-matic meson multilib-minimal pax-utils
 
 DESCRIPTION="The Oil Runtime Compiler, a just-in-time compiler for array operations"
 HOMEPAGE="https://gstreamer.freedesktop.org/"
@@ -22,14 +22,6 @@ DEPEND="${RDEPEND}
 
 DOCS=( README RELEASE )
 
-src_prepare() {
-	default
-
-	# Do not build examples
-	sed -e '/SUBDIRS/ s:examples::' \
-		-i Makefile.am Makefile.in || die
-}
-
 multilib_src_configure() {
 	# any optimisation on PPC/Darwin yields in a complaint from the assembler
 	# Parameter error: r0 not allowed for parameter %lu (code as 0 not r0)
@@ -38,32 +30,30 @@ multilib_src_configure() {
 	[[ ${CHOST} == *-darwin* ]] && filter-flags -O*
 
 	# FIXME: handle backends per arch? What about cross-compiling for the other arches?
-	ECONF_SOURCE="${S}" econf \
-		--disable-gtk-doc \
-		--enable-backend=all \
-		$(use_enable static-libs static)
-		# TODO: bug #645232 - Not ready for this yet, as it installs some headers to live and gst-plugins-base:0.10 includes some
-		# Additionally it doesn't seem good that FEATURES=test would change what files are installed (headers + orctest.so + orc-bugreport)
-		# $(use_enable test tests)
+	local emesonargs=(
+		-Dorc-backend=all
+		-Dgtk_doc="$(multilib_native_usex gtk-doc true false)"
+		-Dtests="$(multilib_native_usex test true false)"
+		-Dorc-test="$(multilib_native_usex test true false)"
+		-Dbenchmarks="$(multilib_native_usex test true false)"
+		-Dexapmles="$(multilib_native_usex test true false)"
+		-Dtools="$(multilib_native_usex test true false)"
+		)
+	meson_src_configure
+}
+
+muiltilib_src_compile() {
+	meson_src_compile
 }
 
 multilib_src_install() {
-	emake DESTDIR="${D}" install
+	meson_src_install
 	prune_libtool_files --all
 
 	if use pax_kernel; then
 		pax-mark m "${ED}"usr/bin/orc-bugreport
 		pax-mark m "${ED}"usr/bin/orcc
 		pax-mark m "${ED}"usr/$(get_libdir)/liborc*.so*
-	fi
-}
-
-multilib_src_install_all() {
-	einstalldocs
-
-	if use examples; then
-		insinto /usr/share/doc/${PF}/examples
-		doins examples/{*.c,*.orc}
 	fi
 }
 
