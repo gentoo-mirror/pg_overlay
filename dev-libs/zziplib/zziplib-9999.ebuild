@@ -5,11 +5,12 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_7 )
 
-inherit autotools libtool flag-o-matic python-any-r1
+inherit autotools libtool flag-o-matic python-any-r1 git-r3
 
 DESCRIPTION="Lightweight library for extracting data from files archived in a single zip file"
 HOMEPAGE="http://zziplib.sourceforge.net/"
-SRC_URI="https://github.com/gdraheim/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="https://github.com/gdraheim/${PN}.git"
+EGIT_BRANCH="develop"
 
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
