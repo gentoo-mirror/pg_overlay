@@ -30,11 +30,11 @@ multilib_src_configure() {
 	local emesonargs=(
 		-Dorc-backend=all
 		-Dgtk_doc=disabled
+		-Dtools=enabled
 		-Dexamples="$(multilib_native_usex examples enabled disabled)"
 		-Dorc-test="$(multilib_native_usex examples enabled disabled)"
 		-Dbenchmarks="$(multilib_native_usex examples enabled disabled)"
 		-Dtests="$(multilib_native_usex examples enabled disabled)"
-		-Dtools=enabled
 		)
 	meson_src_configure
 }
