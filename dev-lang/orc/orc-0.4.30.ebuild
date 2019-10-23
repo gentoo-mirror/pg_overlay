@@ -31,12 +31,12 @@ multilib_src_configure() {
 	# FIXME: handle backends per arch? What about cross-compiling for the other arches?
 	local emesonargs=(
 		-Dorc-backend=all
-		-Dgtk_doc=false
-		-Dexapmles="$(multilib_native_usex examples true false)"
-		-Dorc-test="$(multilib_native_usex examples true false)"
-		-Dbenchmarks="$(multilib_native_usex examples true false)"
-		-Dtests="$(multilib_native_usex examples true false)"
-		-Dtools="$(multilib_native_usex examples true false)"
+		-Dgtk_doc=disabled
+		-Dexapmles="$(multilib_native_usex examples enabled disabled)"
+		-Dorc-test="$(multilib_native_usex examples enabled disabled)"
+		-Dbenchmarks="$(multilib_native_usex examples enabled disabled)"
+		-Dtests="$(multilib_native_usex examples enabled disabled)"
+		-Dtools="$(multilib_native_usex examples enabled disabled)"
 		)
 	meson_src_configure
 }
