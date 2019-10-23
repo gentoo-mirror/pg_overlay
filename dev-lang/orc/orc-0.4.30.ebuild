@@ -32,11 +32,11 @@ multilib_src_configure() {
 	local emesonargs=(
 		-Dorc-backend=all
 		-Dgtk_doc=false
-		-Dtests="$(multilib_native_usex test true false)"
-		-Dorc-test="$(multilib_native_usex test true false)"
-		-Dbenchmarks="$(multilib_native_usex test true false)"
-		-Dexapmles="$(multilib_native_usex test true false)"
-		-Dtools="$(multilib_native_usex test true false)"
+		-Dexapmles="$(multilib_native_usex examples true false)"
+		-Dorc-test="$(multilib_native_usex examples true false)"
+		-Dbenchmarks="$(multilib_native_usex examples true false)"
+		-Dtests="$(multilib_native_usex examples true false)"
+		-Dtools="$(multilib_native_usex examples true false)"
 		)
 	meson_src_configure
 }
