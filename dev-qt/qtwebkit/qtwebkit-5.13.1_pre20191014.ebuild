@@ -3,9 +3,8 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 )
-USE_RUBY="ruby24 ruby25 ruby26"
-MY_P="${PN}-${PV/_pre20190629/-alpha3}" # present as upgrade over previous snapshot
+PYTHON_COMPAT=( python3_7 )
+USE_RUBY="ruby25 ruby26"
 inherit check-reqs cmake-utils flag-o-matic python-any-r1 qmake-utils ruby-single toolchain-funcs
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
@@ -13,7 +12,7 @@ HOMEPAGE="https://www.qt.io/"
 SRC_URI="https://download.qt.io/snapshots/ci/${PN}/5.212/latest/src/submodules/${PN}-everywhere-src-${PV/_*/}.tar.xz"
 
 LICENSE="BSD LGPL-2+"
-SLOT="5/5.212"
+SLOT="5/5.13"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
 IUSE="geolocation gles2 +gstreamer +hyphen +jit multimedia nsplugin opengl orientation +printsupport qml webp X"
 
@@ -24,7 +23,7 @@ REQUIRED_USE="
 "
 
 # Dependencies found at Source/cmake/OptionsQt.cmake
-QT_MIN_VER="5.9.1:5"
+QT_MIN_VER="5.13.1:5"
 BDEPEND="
 	${PYTHON_DEPS}
 	${RUBY_DEPS}
@@ -120,10 +119,8 @@ src_configure() {
 
 	if has_version "virtual/rubygems[ruby_targets_ruby26]"; then
 		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby26) )
-	elif has_version "virtual/rubygems[ruby_targets_ruby25]"; then
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby25) )
 	else
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby24) )
+		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby25) )
 	fi
 
 	cmake-utils_src_configure
