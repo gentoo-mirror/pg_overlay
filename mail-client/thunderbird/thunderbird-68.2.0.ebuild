@@ -253,6 +253,7 @@ src_unpack() {
 src_prepare() {
 	# Apply firefox patchset then apply thunderbird patches
 	rm "${WORKDIR}"/firefox/2013_avoid_noinline_on_GCC_with_skcms.patch || die
+	rm "${WORKDIR}"/firefox/2015_fix_cssparser.patch || die
 	eapply "${WORKDIR}/firefox"
 	pushd "${S}"/comm &>/dev/null || die
 	eapply "${FILESDIR}/1000_fix_gentoo_preferences.patch"
