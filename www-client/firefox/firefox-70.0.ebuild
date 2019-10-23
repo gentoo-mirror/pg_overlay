@@ -577,7 +577,7 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
-	!use dbus && mozconfig_annotate '' --disable-dbus
+	use !dbus && mozconfig_annotate '' --disable-dbus
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
