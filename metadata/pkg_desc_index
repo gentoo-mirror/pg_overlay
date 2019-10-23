@@ -37,6 +37,7 @@ dev-libs/libpwquality 1.4.0: Library for password quality checking and generatin
 dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
 dev-libs/re2 0.2019.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.51.9999: A lightweigt RPC library based on XML and HTTP
+dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-python/pbr 5.4.3: Inject some useful and sensible default behaviors into setuptools
 dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
