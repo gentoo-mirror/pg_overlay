@@ -17,7 +17,6 @@ IUSE="examples pax_kernel static-libs"
 RDEPEND=""
 DEPEND="${RDEPEND}
 	app-arch/xz-utils
-	>=dev-util/gtk-doc-am-1.12
 "
 
 DOCS=( README RELEASE )
@@ -32,7 +31,7 @@ multilib_src_configure() {
 	# FIXME: handle backends per arch? What about cross-compiling for the other arches?
 	local emesonargs=(
 		-Dorc-backend=all
-		-Dgtk_doc="$(multilib_native_usex gtk-doc true false)"
+		-Dgtk_doc=false
 		-Dtests="$(multilib_native_usex test true false)"
 		-Dorc-test="$(multilib_native_usex test true false)"
 		-Dbenchmarks="$(multilib_native_usex test true false)"
