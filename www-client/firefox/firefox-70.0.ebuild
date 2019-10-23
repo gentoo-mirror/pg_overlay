@@ -620,8 +620,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-rust-tests
 
-	mozconfig_annotate '' --disable-signmar
-
 	mozconfig_annotate '' --disable-trace-logging
 
 	mozconfig_annotate '' --disable-updater
