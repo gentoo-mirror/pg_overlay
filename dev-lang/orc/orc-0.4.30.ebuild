@@ -19,7 +19,7 @@ DEPEND="${RDEPEND}
 	app-arch/xz-utils
 "
 
-DOCS=( README RELEASE )
+#DOCS=( README RELEASE )
 
 multilib_src_configure() {
 	# any optimisation on PPC/Darwin yields in a complaint from the assembler
@@ -32,7 +32,7 @@ multilib_src_configure() {
 	local emesonargs=(
 		-Dorc-backend=all
 		-Dgtk_doc=disabled
-		-Dexapmles="$(multilib_native_usex examples enabled disabled)"
+		-Dexamples="$(multilib_native_usex examples enabled disabled)"
 		-Dorc-test="$(multilib_native_usex examples enabled disabled)"
 		-Dbenchmarks="$(multilib_native_usex examples enabled disabled)"
 		-Dtests="$(multilib_native_usex examples enabled disabled)"
