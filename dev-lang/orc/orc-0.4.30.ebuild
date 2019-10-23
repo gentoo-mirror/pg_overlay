@@ -19,8 +19,6 @@ DEPEND="${RDEPEND}
 	app-arch/xz-utils
 "
 
-#DOCS=( README RELEASE )
-
 multilib_src_configure() {
 	# any optimisation on PPC/Darwin yields in a complaint from the assembler
 	# Parameter error: r0 not allowed for parameter %lu (code as 0 not r0)
@@ -36,7 +34,7 @@ multilib_src_configure() {
 		-Dorc-test="$(multilib_native_usex examples enabled disabled)"
 		-Dbenchmarks="$(multilib_native_usex examples enabled disabled)"
 		-Dtests="$(multilib_native_usex examples enabled disabled)"
-		-Dtools="$(multilib_native_usex examples enabled disabled)"
+		-Dtools=enabled
 		)
 	meson_src_configure
 }
