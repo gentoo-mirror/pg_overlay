@@ -70,7 +70,6 @@ gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.1: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.2.0: Thunderbird Mail Client
-media-gfx/gimp 2.10.12_pre: GNU Image Manipulation Program
 media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
 media-libs/glm 0.9.9.5_pre: OpenGL Mathematics
 media-libs/libcue 2.2.1: CUE Sheet Parser Library
@@ -83,6 +82,7 @@ media-libs/vulkan-layers 1.1.125: Vulkan Validation Layers
 media-libs/vulkan-loader 1.1.125: Vulkan Installable Client Driver (ICD) Loader
 media-libs/x265 3.1.1_pre: Library for encoding video streams into the H.265/HEVC format
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
+media-plugins/deadbeef-mpris 9999: DeaDBeeF MPRIS plugin
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
 media-sound/audacious 9999: Lightweight and versatile audio player
