@@ -82,7 +82,6 @@ media-libs/vulkan-layers 1.1.125: Vulkan Validation Layers
 media-libs/vulkan-loader 1.1.125: Vulkan Installable Client Driver (ICD) Loader
 media-libs/x265 3.1.1_pre: Library for encoding video streams into the H.265/HEVC format
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
-media-plugins/deadbeef-mpris 9999: DeaDBeeF MPRIS plugin
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
 media-sound/audacious 9999: Lightweight and versatile audio player
