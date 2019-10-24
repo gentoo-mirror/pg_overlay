@@ -12,6 +12,7 @@ EGIT_REPO_URI="https://github.com/Serranya/deadbeef-mpris2-plugin.git"
 LICENSE="GPL-3"
 KEYWORDS=""
 IUSE=""
+SLOT="0"
 
 src_prepare() {
 	default
