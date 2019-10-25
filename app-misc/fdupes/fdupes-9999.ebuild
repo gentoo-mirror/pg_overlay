@@ -13,7 +13,7 @@ LICENSE="MIT"
 SLOT="0"
 
 KEYWORDS=""
-USE="ncurses"
+IUSE="ncurses"
 
 DEPEND="dev-libs/libpcre2[pcre32]"
 
