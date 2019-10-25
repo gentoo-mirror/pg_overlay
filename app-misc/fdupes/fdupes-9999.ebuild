@@ -13,12 +13,18 @@ LICENSE="MIT"
 SLOT="0"
 
 KEYWORDS=""
+USE="ncurses"
+
+DEPEND="dev-libs/libpcre2[pcre32]"
 
 DOCS=( CHANGES CONTRIBUTORS README )
 
 src_prepare() {
 	default
 	eautoreconf
+}
+src_configure() {
+	econf $(use_with ncurses)
 }
 src_install() {
 	default
