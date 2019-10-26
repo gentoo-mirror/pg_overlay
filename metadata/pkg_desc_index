@@ -63,7 +63,7 @@ dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applicat
 dev-util/vulkan-headers 1.1.126: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.1.124: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.0: Scalable distributed SCM
-games-board/aisleriot 3.22.8: A collection of solitaire card games for GNOME
+games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/pysolfc 2.6.2: An exciting collection of more than 1000 solitaire card games
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
