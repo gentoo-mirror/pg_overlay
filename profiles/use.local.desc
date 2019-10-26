@@ -82,8 +82,6 @@ dev-vcs/mercurial:bugzilla - Support bugzilla integration.
 dev-vcs/mercurial:chg - Support Mercurial command server client
 dev-vcs/mercurial:gpg - Support signing with GnuPG.
 dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
-games-board/pysolfc:extra-cardsets - Install extra cardsets
-games-board/pysolfc:sound - Enable sound support using dev-python/pygame
 gnome-base/librsvg:tools - Build svg viewer tool
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM

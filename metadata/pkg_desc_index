@@ -12,8 +12,8 @@ app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.1.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.3.3.1: A full office productivity suite
-app-office/libreoffice-l10n 6.3.3.1: Translations for the Libreoffice suite
+app-office/libreoffice 6.3.3.2: A full office productivity suite
+app-office/libreoffice-l10n 6.3.3.2: Translations for the Libreoffice suite
 app-portage/eix 0.33.9_alpha190613: Search and query ebuilds
 app-portage/kuroo 9999: Graphical Portage frontend based on KDE Frameworks
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
@@ -65,7 +65,6 @@ dev-util/vulkan-headers 1.1.126: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.1.124: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.0: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
-games-board/pysolfc 2.6.2: An exciting collection of more than 1000 solitaire card games
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
