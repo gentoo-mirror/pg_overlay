@@ -31,9 +31,6 @@ DEPEND="${COMMON_DEPEND}
 	app-text/yelp-tools
 	dev-libs/libxml2:2
 	dev-util/glib-utils
-	>=dev-util/intltool-0.40.4
-	gnome-base/gnome-common
-	sys-apps/lsb-release
 	sys-devel/autoconf-archive
 	>=sys-devel/gettext-0.12
 	virtual/pkgconfig
@@ -58,7 +55,7 @@ src_configure() {
 	else
 		myconf+=(
 			--with-platform=gtk-only
-			--without-help-method
+			--with-help-method=library
 		)
 	fi
 
