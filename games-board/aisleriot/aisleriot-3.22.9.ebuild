@@ -58,7 +58,7 @@ src_configure() {
 	else
 		myconf+=(
 			--with-platform=gtk-only
-			--with-help-method=library
+			--without-help-method
 		)
 	fi
 
@@ -74,7 +74,7 @@ src_configure() {
 	gnome2_src_configure \
 		--with-gtk=3.0 \
 		--with-guile=2.2 \
-		$(usex debug --enable-debug=yes --enable-debug=minimum) \
+		$(usex debug --enable-debug-ui --disable-debug-ui) \
 		--enable-sound \
 		--with-pysol-card-theme-path="${EPREFIX}${GAMES_DATADIR}"/pysolfc \
 		${myconf[@]}
