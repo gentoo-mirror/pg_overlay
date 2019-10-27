@@ -70,7 +70,7 @@ gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kwin 5.17.1: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 5.17.1-r2: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.2.0: Thunderbird Mail Client
 media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
 media-libs/glm 0.9.9.5_pre: OpenGL Mathematics
