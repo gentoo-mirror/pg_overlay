@@ -13,7 +13,7 @@ to disable the "set as default browser" dialog.
  1 file changed, 2 insertions(+)
 
 diff --git a/toolkit/xre/nsXREDirProvider.cpp b/toolkit/xre/nsXREDirProvider.cpp
-index 1d6ffb748e4e..175820ab9ade 100644
+index 2c9547826f26..87105bb977f0 100644
 --- a/toolkit/xre/nsXREDirProvider.cpp
 +++ b/toolkit/xre/nsXREDirProvider.cpp
 @@ -850,6 +850,7 @@ static nsresult DeleteDirIfExists(nsIFile* dir) {

@@ -12,18 +12,21 @@ inherit desktop distutils-r1 l10n git-r3
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="https://bleachbit.org/"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-#EGIT_BRANCH="gtk3"
 
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="+gtk"
+IUSE=""
 
-RDEPEND="gtk? ( dev-python/pygobject:3[$PYTHON_USEDEP] )"
-DEPEND="${RDEPEND}
+RDEPEND="
+	dev-python/chardet[$PYTHON_USEDEP]
+	dev-python/pygobject:3[$PYTHON_USEDEP]
+	dev-python/scandir[$PYTHON_USEDEP]
+"
+BDEPEND="
 	dev-python/setuptools[$PYTHON_USEDEP]
-	dev-python/scandir[$PYTHON_USEDEP]"
-BDEPEND="sys-devel/gettext"
+	sys-devel/gettext
+"
 
 python_prepare_all() {
 	rem_locale() {
@@ -33,10 +36,8 @@ python_prepare_all() {
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rem_locale
 
-	#sed -i "s/bleachbit.bleachbit_exe_path, 'data', 'app-menu.ui'/bleachbit.bleachbit_exe_path, 'bleachbit', 'data', 'app-menu.ui'/g" bleachbit/GUI.py || die
-
 	# choose correct Python implementation, bug #465254
-	sed -i 's/python/$(PYTHON)/g' po/Makefile || die
+	sed -i 's/python/${EPYTHON}/g' po/Makefile || die
 
 	distutils-r1_python_prepare_all
 }
@@ -58,16 +59,9 @@ python_install_all() {
 	insinto /usr/share/${PN}/cleaners
 	doins cleaners/*.xml
 
+	insinto /usr/share/${PN}
+	doins data/app-menu.ui
+
 	doicon ${PN}.png
 	domenu ${PN}.desktop
-
-	insinto /usr/lib64/python2.7/site-packages/data
-	doins data/app-menu.ui
-	
-}
-
-pkg_postinst() {
-	elog "Bleachbit has optional notification support. To enable, please install:"
-	elog ""
-	elog "  dev-python/notify-python"
 }

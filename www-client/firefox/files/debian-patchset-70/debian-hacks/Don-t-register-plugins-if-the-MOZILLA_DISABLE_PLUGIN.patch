@@ -8,7 +8,7 @@ Subject: Don't register plugins if the MOZILLA_DISABLE_PLUGINS environment
  1 file changed, 4 insertions(+)
 
 diff --git a/dom/plugins/base/nsPluginHost.cpp b/dom/plugins/base/nsPluginHost.cpp
-index db149b7c3a48..969ff297c840 100644
+index adbecebd8a86..07610c1c08fd 100644
 --- a/dom/plugins/base/nsPluginHost.cpp
 +++ b/dom/plugins/base/nsPluginHost.cpp
 @@ -362,6 +362,10 @@ nsPluginHost::nsPluginHost()
