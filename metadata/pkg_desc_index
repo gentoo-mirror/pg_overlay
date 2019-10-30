@@ -106,7 +106,6 @@ media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/QMPlay2 9999: Qt-based video player, which can play all formats and stream
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-net-fs/nfs-utils 2.3.3: NFS client and server daemons
 net-im/gajim 1.1.2: Jabber client written in PyGTK
 net-im/pidgin 2.13.0: GTK Instant Messenger client
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
@@ -150,7 +149,7 @@ x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.32-r1 3.24.12: Gimp ToolKit +
-x11-libs/pango 1.44.3 1.44.7_pre: Internationalized text layout and rendering library
+x11-libs/pango 1.44.7_pre: Internationalized text layout and rendering library
 x11-libs/wxGTK 3.1.2-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/xvfb-run 1.20.3_p1: Run a command in a virtual X server environment
