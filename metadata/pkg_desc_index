@@ -71,7 +71,7 @@ gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.2: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 68.2.0: Thunderbird Mail Client
+mail-client/thunderbird 68.2.1: Thunderbird Mail Client
 media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
 media-libs/glm 0.9.9.5_pre: OpenGL Mathematics
 media-libs/libcue 2.2.1: CUE Sheet Parser Library
@@ -142,7 +142,7 @@ sys-fs/xfsprogs 5.3.0_rc1 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/slang 2.3.3_pre9: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
-www-client/firefox 70.0: Firefox Web Browser
+www-client/firefox 70.0.1: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
