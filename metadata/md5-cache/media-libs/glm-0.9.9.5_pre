@@ -1,6 +1,5 @@
-BDEPEND=dev-util/ninja >=dev-util/cmake-3.9.6
+BDEPEND=||( dev-util/ninja dev-util/samurai ) >=dev-util/cmake-3.9.6
 DEFINED_PHASES=compile configure install prepare test
-DEPEND=>=dev-util/samurai-0.7
 DESCRIPTION=OpenGL Mathematics
 EAPI=7
 HOMEPAGE=http://glm.g-truc.net/
@@ -11,5 +10,5 @@ RDEPEND=virtual/opengl
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://github.com/g-truc/glm/archive/0.9.9.5.tar.gz -> glm-0.9.9.5.tar.gz
-_eclasses_=cmake-utils	d7d13c6ac9fbaeb5d98fae15928a5bda	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	6a30ff56e967441c7d32f56064aa5e19	poly-c_ebuilds	94632ea3c879766ab5e30bb33d1a3bba	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
+_eclasses_=cmake-utils	b2b1c0fc7a46b93e825a5b88e1e533e2	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	d09515940968e511f7a539e13e30b465	poly-c_ebuilds	94632ea3c879766ab5e30bb33d1a3bba	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
 _md5_=f6bdc667925e7c1b0d1f0ba3cdc5fe84
