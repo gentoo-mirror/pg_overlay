@@ -139,7 +139,7 @@ case ${CMAKE_MAKEFILE_GENERATOR} in
 		BDEPEND="sys-devel/make"
 		;;
 	samu)
-		BDEPEND="dev-util/samurairai"
+		BDEPEND="dev-util/samurai"
 		;;
 	*)
 		eerror "Unknown value for \${CMAKE_MAKEFILE_GENERATOR}"
