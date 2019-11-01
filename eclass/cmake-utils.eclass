@@ -252,12 +252,12 @@ _cmake_generator_to_use() {
 			case ${EAPI} in
 				5|6)
 					if ! ROOT=/ has_version dev-util/ninja && ! ROOT=/ has_version dev-util/samurai; then
-						die "CMAKE_MAKEFILE_GENERATOR is set to ninja, but ninja is not installed. Please install dev-util/ninja or unset CMAKE_MAKEFILE_GENERATOR."
+						die "CMAKE_MAKEFILE_GENERATOR is set to ninja, but ninja is not installed. Please install dev-util/ninja or dev-util/samurai or unset CMAKE_MAKEFILE_GENERATOR."
 					fi
 				;;
 				*)
 					if ! has_version -b dev-util/ninja && ! has_version -b dev-util/samurai; then
-						die "CMAKE_MAKEFILE_GENERATOR is set to ninja, but ninja is not installed. Please install dev-util/ninja or unset CMAKE_MAKEFILE_GENERATOR."
+						die "CMAKE_MAKEFILE_GENERATOR is set to ninja, but ninja is not installed. Please install dev-util/ninja or dev-util/samurai or unset CMAKE_MAKEFILE_GENERATOR."
 					fi
 				;;
 			esac
