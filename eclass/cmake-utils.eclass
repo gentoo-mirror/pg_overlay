@@ -251,7 +251,7 @@ _cmake_generator_to_use() {
 			# this could happen if ninja is manually enabled (eg. make.conf) but not installed
 			case ${EAPI} in
 				5|6)
-					if ! ROOT=/ has_version dev-util/ninja || has_version dev-util/samurai; then
+					if ! ROOT=/ has_version dev-util/ninja || ! ROOT=/ has_version dev-util/samurai; then
 						die "CMAKE_MAKEFILE_GENERATOR is set to ninja, but ninja is not installed. Please install dev-util/ninja or unset CMAKE_MAKEFILE_GENERATOR."
 					fi
 				;;
