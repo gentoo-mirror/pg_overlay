@@ -1,4 +1,4 @@
-BDEPEND=dev-util/ninja >=dev-util/cmake-3.9.6
+BDEPEND=dev-util/samurai >=dev-util/cmake-3.9.6
 DEFINED_PHASES=compile configure install prepare setup test
 DEPEND=>=dev-libs/glib-2.34 gtk? ( x11-libs/gtk+:3 ) introspection? ( dev-libs/gobject-introspection ) lua? ( || ( >=dev-lang/lua-5.1:= >=dev-lang/luajit-2 ) dev-lua/lgi ) nls? ( sys-devel/gettext ) perl? ( dev-lang/perl ) python? ( dev-python/pygobject:3[python_targets_python3_6(-)?,python_targets_python3_7(-)?,-python_single_target_jython2_7(-),-python_single_target_pypy(-),-python_single_target_pypy3(-),-python_single_target_python2_7(-),-python_single_target_python3_5(-),python_single_target_python3_6(+)?,python_single_target_python3_7(+)?] ) nls? ( sys-devel/gettext )
 DESCRIPTION=GObject based library that implements a reusable plugin system
@@ -11,5 +11,5 @@ RDEPEND=>=dev-libs/glib-2.34 gtk? ( x11-libs/gtk+:3 ) introspection? ( dev-libs/
 REQUIRED_USE=lua? ( introspection ) perl? ( introspection ) python? ( introspection )
 SLOT=0
 SRC_URI=https://bitbucket.org/gplugin/main/downloads/gplugin-0.27.0.tar.bz2
-_eclasses_=cmake-utils	91d6ef31dc426240577497cacbf2508c	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-single-r1	3a0fc81f484bfdbd9c2b7448015a36e4	python-utils-r1	08e17157a6807add7db1f8d01e7e391f	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
+_eclasses_=cmake-utils	1edc945aed448f6a116ebab5b8f59b20	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	python-single-r1	3a0fc81f484bfdbd9c2b7448015a36e4	python-utils-r1	08e17157a6807add7db1f8d01e7e391f	samu-utils	da0679ff78dddf4a262cb838d4d9d2b2	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
 _md5_=d2c29aa5f3ecace7b2343116cc331a98
