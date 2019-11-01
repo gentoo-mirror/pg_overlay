@@ -42,6 +42,7 @@ inherit multiprocessing
 # Call Ninja, passing the NINJAOPTS (or converted MAKEOPTS), followed
 # by the supplied arguments. This function dies if ninja fails. Starting
 # with EAPI 6, it also supports being called via 'nonfatal'.
+DEPEND=">=dev-util/samurai-0.7"
 eninja() {
 	local nonfatal_args=()
 	[[ ${EAPI:-0} != [245] ]] && nonfatal_args+=( -n )
