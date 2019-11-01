@@ -12,4 +12,5 @@ KEYWORDS="~amd64 ~arm ~x86"
 
 src_install() {
     emake DESTDIR="${D}" PREFIX=/usr install
+    dosym samu ninja
 }
