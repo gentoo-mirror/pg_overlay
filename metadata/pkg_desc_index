@@ -126,6 +126,7 @@ net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
+sci-calculators/speedcrunch 0.12.0: Fast and usable calculator for power users
 sci-geosciences/googleearth 7.3.1: A 3D interface to the planet
 sci-geosciences/gpxsee 7.13: A viewer and analyzer that supports gpx, tcx, kml, fit, igc and nmea files
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
