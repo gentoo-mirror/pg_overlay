@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-# @ECLASS: samu-utils.eclass
+# @ECLASS: ninja-utils.eclass
 # @MAINTAINER:
 # Michał Górny <mgorny@gentoo.org>
 # Mike Gilbert <floppym@gentoo.org>
@@ -9,16 +9,16 @@
 # Michał Górny <mgorny@gentoo.org>
 # Mike Gilbert <floppym@gentoo.org>
 # @SUPPORTED_EAPIS: 2 4 5 6 7
-# @BLURB: common bits to run dev-util/samu builder
+# @BLURB: common bits to run dev-util/ninja builder
 # @DESCRIPTION:
-# This eclass provides a single function -- esamu -- that can be used
-# to run the samu builder alike emake. It does not define any
-# dependencies, you need to depend on dev-util/samu yourself. Since
-# samu is rarely used stand-alone, most of the time this eclass will
+# This eclass provides a single function -- eninja -- that can be used
+# to run the ninja builder alike emake. It does not define any
+# dependencies, you need to depend on dev-util/ninja yourself. Since
+# ninja is rarely used stand-alone, most of the time this eclass will
 # be used indirectly by the eclasses for other build systems (CMake,
 # Meson).
 
-if [[ -z ${_SAMU_UTILS_ECLASS} ]]; then
+if [[ -z ${_NINJA_UTILS_ECLASS} ]]; then
 
 case ${EAPI:-0} in
 	0|1|3) die "EAPI=${EAPI:-0} is not supported (too old)";;
@@ -27,32 +27,32 @@ case ${EAPI:-0} in
 	*) die "EAPI=${EAPI} is not yet supported" ;;
 esac
 
-# @ECLASS-VARIABLE: SAMUOPTS
+# @ECLASS-VARIABLE: NINJAOPTS
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # The default set of options to pass to Ninja. Similar to MAKEOPTS,
-# supposed to be set in make.conf. If unset, esamu() will convert
+# supposed to be set in make.conf. If unset, eninja() will convert
 # MAKEOPTS instead.
 
 inherit multiprocessing
 
-# @FUNCTION: esamu
+# @FUNCTION: eninja
 # @USAGE: [<args>...]
 # @DESCRIPTION:
-# Call Ninja, passing the SAMUOPTS (or converted MAKEOPTS), followed
-# by the supplied arguments. This function dies if samu fails. Starting
+# Call Ninja, passing the NINJAOPTS (or converted MAKEOPTS), followed
+# by the supplied arguments. This function dies if ninja fails. Starting
 # with EAPI 6, it also supports being called via 'nonfatal'.
-esamu() {
+eninja() {
 	local nonfatal_args=()
 	[[ ${EAPI:-0} != [245] ]] && nonfatal_args+=( -n )
 
-	if [[ -z ${SAMUOPTS+set} ]]; then
-		SAMUOPTS="-j$(makeopts_jobs)"
+	if [[ -z ${NINJAOPTS+set} ]]; then
+		NINJAOPTS="-j$(makeopts_jobs)"
 	fi
-	set -- samu -v ${SAMUOPTS} "$@"
+	set -- ninja -v ${NINJAOPTS} "$@"
 	echo "$@" >&2
 	"$@" || die "${nonfatal_args[@]}" "${*} failed"
 }
 
-_SAMU_UTILS_ECLASS=1
+_NINJA_UTILS_ECLASS=1
 fi
