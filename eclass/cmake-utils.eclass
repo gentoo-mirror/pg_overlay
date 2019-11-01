@@ -734,7 +734,7 @@ cmake-utils_src_compile() {
 _cmake_samu_src_make() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	[[ -e build.samu ]] || die "build.samu not found. Error during configure stage."
+	[[ -e build.ninja ]] || die "build.ninja not found. Error during configure stage."
 
 	esamu "$@"
 }
