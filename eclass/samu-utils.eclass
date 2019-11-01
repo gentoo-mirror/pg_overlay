@@ -18,7 +18,7 @@
 # be used indirectly by the eclasses for other build systems (CMake,
 # Meson).
 
-if [[ -z ${_NINJA_UTILS_ECLASS} ]]; then
+if [[ -z ${_SAMU_UTILS_ECLASS} ]]; then
 
 case ${EAPI:-0} in
 	0|1|3) die "EAPI=${EAPI:-0} is not supported (too old)";;
@@ -27,7 +27,7 @@ case ${EAPI:-0} in
 	*) die "EAPI=${EAPI} is not yet supported" ;;
 esac
 
-# @ECLASS-VARIABLE: NINJAOPTS
+# @ECLASS-VARIABLE: SAMUOPTS
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # The default set of options to pass to Ninja. Similar to MAKEOPTS,
@@ -39,20 +39,20 @@ inherit multiprocessing
 # @FUNCTION: esamu
 # @USAGE: [<args>...]
 # @DESCRIPTION:
-# Call Ninja, passing the NINJAOPTS (or converted MAKEOPTS), followed
+# Call Ninja, passing the SAMUOPTS (or converted MAKEOPTS), followed
 # by the supplied arguments. This function dies if samu fails. Starting
 # with EAPI 6, it also supports being called via 'nonfatal'.
 esamu() {
 	local nonfatal_args=()
 	[[ ${EAPI:-0} != [245] ]] && nonfatal_args+=( -n )
 
-	if [[ -z ${NINJAOPTS+set} ]]; then
-		NINJAOPTS="-j$(makeopts_jobs)"
+	if [[ -z ${SAMUOPTS+set} ]]; then
+		SAMUOPTS="-j$(makeopts_jobs)"
 	fi
-	set -- samu -v ${NINJAOPTS} "$@"
+	set -- samu -v ${SAMUOPTS} "$@"
 	echo "$@" >&2
 	"$@" || die "${nonfatal_args[@]}" "${*} failed"
 }
 
-_NINJA_UTILS_ECLASS=1
+_SAMU_UTILS_ECLASS=1
 fi
