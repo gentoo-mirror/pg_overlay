@@ -1,5 +1,5 @@
 DEFINED_PHASES=compile configure install prepare test
-DEPEND=sys-devel/make >=dev-util/cmake-3.9.6
+DEPEND=>=dev-util/samurai-0.7 sys-devel/make >=dev-util/cmake-3.9.6
 DESCRIPTION=Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 EAPI=6
 HOMEPAGE=https://github.com/Martchus/cpp-utilities
@@ -7,5 +7,5 @@ KEYWORDS=~amd64 ~x86
 LICENSE=GPL-2+
 SLOT=5
 SRC_URI=https://github.com/Martchus/cpp-utilities/archive/v4.16.0.tar.gz -> cpp-utilities-4.16.0.tar.gz
-_eclasses_=cmake-utils	1edc945aed448f6a116ebab5b8f59b20	desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	ltprune	2729691420b6deeda2a90b1f1183fb55	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	preserve-libs	ef207dc62baddfddfd39a164d9797648	samu-utils	ba0b152a977ea8379fa708878692aaae	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
+_eclasses_=cmake-utils	91d6ef31dc426240577497cacbf2508c	desktop	b1d22ac8bdd4679ab79c71aca235009d	epatch	a1bf4756dba418a7238f3be0cb010c54	estack	43ddf5aaffa7a8d0482df54d25a66a1f	eutils	6e6c2737b59a4b982de6fb3ecefd87f8	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	ltprune	2729691420b6deeda2a90b1f1183fb55	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	6a30ff56e967441c7d32f56064aa5e19	preserve-libs	ef207dc62baddfddfd39a164d9797648	toolchain-funcs	2f8b8f320bee13b71a8a54cc6d09e08a	vcs-clean	2a0f74a496fa2b1552c4f3398258b7bf	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
 _md5_=973733d4ad4dde0daa62b4cdae199268
