@@ -242,7 +242,27 @@ _cmake_check_build_dir() {
 }
 
 # Determine which generator to use
-#
+_cmake_generator_to_use() {
+	local generator_name
+
+	case ${CMAKE_MAKEFILE_GENERATOR} in
+		ninja)
+			# if ninja is enabled but not installed, the build could fail
+			# this could happen if ninja is manually enabled (eg. make.conf) but not installed
+			generator_name="Ninja"
+			;;
+		emake)
+			generator_name="Unix Makefiles"
+			;;
+		*)
+			eerror "Unknown value for \${CMAKE_MAKEFILE_GENERATOR}"
+			die "Value ${CMAKE_MAKEFILE_GENERATOR} is not supported"
+			;;
+	esac
+
+	echo ${generator_name}
+}
+
 # @FUNCTION: cmake_comment_add_subdirectory
 # @USAGE: <subdirectory>
 # @DESCRIPTION:
