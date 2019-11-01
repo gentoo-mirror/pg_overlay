@@ -139,7 +139,7 @@ case ${CMAKE_MAKEFILE_GENERATOR} in
 		BDEPEND="sys-devel/make"
 		;;
 	samu)
-		BDEPEND="dev-util/samurai"
+		BDEPEND="dev-util/samurairai"
 		;;
 	*)
 		eerror "Unknown value for \${CMAKE_MAKEFILE_GENERATOR}"
@@ -251,13 +251,13 @@ _cmake_generator_to_use() {
 			# this could happen if samu is manually enabled (eg. make.conf) but not installed
 			case ${EAPI} in
 				5|6)
-					if ! ROOT=/ has_version dev-util/samu; then
-						die "CMAKE_MAKEFILE_GENERATOR is set to samu, but samu is not installed. Please install dev-util/samu or unset CMAKE_MAKEFILE_GENERATOR."
+					if ! ROOT=/ has_version dev-util/samurai; then
+						die "CMAKE_MAKEFILE_GENERATOR is set to samu, but samu is not installed. Please install dev-util/samurai or unset CMAKE_MAKEFILE_GENERATOR."
 					fi
 				;;
 				*)
-					if ! has_version -b dev-util/samu; then
-						die "CMAKE_MAKEFILE_GENERATOR is set to samu, but samu is not installed. Please install dev-util/samu or unset CMAKE_MAKEFILE_GENERATOR."
+					if ! has_version -b dev-util/samurai; then
+						die "CMAKE_MAKEFILE_GENERATOR is set to samu, but samu is not installed. Please install dev-util/samurai or unset CMAKE_MAKEFILE_GENERATOR."
 					fi
 				;;
 			esac
