@@ -132,7 +132,7 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 sci-geosciences/googleearth 7.3.1: A 3D interface to the planet
 sci-geosciences/gpxsee 7.13: A viewer and analyzer that supports gpx, tcx, kml, fit, igc and nmea files
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
-sci-libs/libqalculate 3.2.0-r1: A modern multi-purpose calculator library
+sci-libs/libqalculate 3.5.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/openrazer 9999: Razer Drivers for Linux
@@ -144,7 +144,7 @@ sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.3.0_rc1 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
-sys-libs/ncurses 6.1_p20191026: console display library
+sys-libs/ncurses 6.1_p20191102: console display library
 sys-libs/slang 2.3.3_pre9: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
 www-client/firefox 70.0.1: Firefox Web Browser
