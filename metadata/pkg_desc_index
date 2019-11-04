@@ -20,6 +20,7 @@ app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
+app-text/po4a 0.57_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.30.1: SQL database engine
 dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell and some other solitaire variants
@@ -34,8 +35,10 @@ dev-libs/gobject-introspection 1.60.2: Introspection system for GObject-based li
 dev-libs/gobject-introspection-common 1.60.2: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/jsoncpp 1.9.1: C++ JSON reader and writer
-dev-libs/libpwquality 1.4.0: Library for password quality checking and generating random passwords
+dev-libs/libpwquality 1.4.2_pre: Library for password quality checking and generating random passwords
 dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
+dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
+dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/re2 0.2019.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.51.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
@@ -141,6 +144,7 @@ sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.3.0_rc1 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
+sys-libs/ncurses 6.1_p20191026: console display library
 sys-libs/slang 2.3.3_pre9: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
 www-client/firefox 70.0.1: Firefox Web Browser
