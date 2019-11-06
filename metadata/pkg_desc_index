@@ -42,29 +42,55 @@ dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/re2 0.2019.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.51.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
+dev-perl/App-pwhich 1.160.0: Perl-only 'which'
 dev-perl/Archive-Zip 1.670.0: A wrapper that lets you read Zip archive members as if they were files
+dev-perl/Canary-Stability 2013.0.0: Canary to check perl compatibility for schmorp's modules
 dev-perl/Class-Inspector 1.360.0: Provides information about Classes
+dev-perl/DateTime 1.510.0: A date and time object
+dev-perl/DateTime-Locale 1.250.0: Localization support for DateTime
+dev-perl/DateTime-TimeZone 2.370.0: Time zone object base class and factory
 dev-perl/Devel-Size 0.830.0: Perl extension for finding the memory usage of Perl variables
+dev-perl/Devel-StackTrace 2.40.0: An object representing a stack trace
+dev-perl/EV 4.270.0: Perl interface to libev, a high performance full-featured event loop
+dev-perl/Exception-Class 1.440.0: A module that allows you to declare real exception classes in Perl
 dev-perl/ExtUtils-InstallPaths 0.12.0: Build.PL install path logic made easy
 dev-perl/File-BaseDir 0.80.0: Use the Freedesktop.org base directory specification
+dev-perl/File-HomeDir 1.4.0: Get home directory for self or other user
 dev-perl/File-MimeInfo 0.290.0: Determine file type
 dev-perl/File-ShareDir 1.116.0: Locate per-dist and per-module shared files
 dev-perl/File-ShareDir-Install 0.130.0: Install shared files
+dev-perl/File-Which 1.230.0: Perl module implementing 'which' internally
 dev-perl/HTTP-Cookies 6.50.0: Storage of cookies
 dev-perl/HTTP-Message 6.180.0: Base class for Request/Response
 dev-perl/LWP-MediaTypes 6.40.0: Media types and mailcap processing
 dev-perl/Module-Build 0.422.900: Build and install Perl modules
+dev-perl/Mojolicious 8.260.0: Real-time web framework
+dev-perl/MusicBrainz-DiscID 0.60.0: Perl interface for the MusicBrainz libdiscid library
 dev-perl/Net-HTTP 6.190.0: Low-level HTTP connection (client)
+dev-perl/Package-Stash 0.380.0: Routines for manipulating stashes
+dev-perl/Package-Stash-XS 0.290.0: Faster and more correct implementation of the Package::Stash API
+dev-perl/Params-ValidationCompiler 0.300.0: Build an optimized subroutine parameter validator once, use it forever
+dev-perl/Path-Tiny 0.108.0: File path utility
+dev-perl/Ref-Util 0.204.0: Utility functions for checking references
+dev-perl/Ref-Util-XS 0.117.0: XS Implementation for Ref::Util
+dev-perl/Role-Tiny 2.1.4: Roles. Like a nouvelle cuisine portion size slice of Moose
 dev-perl/Socket6 0.290.0: IPv6 related part of the C socket.h defines and structure manipulators
+dev-perl/Specio 0.440.0: Type constraints and coercions for Perl
 dev-perl/Sub-Name 0.260.0: (Re)name a sub
+dev-perl/Sub-Quote 2.6.6: Efficient generation of subroutines via string eval
+dev-perl/Template-Toolkit 2.290.0: The Template Toolkit
 dev-perl/TermReadKey 2.380.0: Change terminal modes, and perform non-blocking reads
+dev-perl/Text-Autoformat 1.750.0: Automatic text wrapping and reformatting
 dev-perl/URI 1.760.0: Uniform Resource Identifiers (absolute and relative)
 dev-perl/Unicode-EastAsianWidth 12.0: East Asian Width properties
 dev-perl/Unicode-LineBreak 2019.1.0: UAX #14 Unicode Line Breaking Algorithm
+dev-perl/WebService-MusicBrainz 1.0.5: Web service API to MusicBrainz database
 dev-perl/XML-Parser 2.460.0: A Perl extension interface to James Clark's XML parser, expat
+dev-perl/XML-RSS 1.610.0: a basic framework for creating and maintaining RSS files
 dev-perl/XML-SAX 1.2.0: Perl module for using and building Perl SAX2 XML parsers, filters, and drivers
 dev-perl/XML-XPath 1.440.0: A XPath Perl Module
 dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
+dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/pbr 5.4.3: Inject some useful and sensible default behaviors into setuptools
 dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
