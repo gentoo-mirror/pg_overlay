@@ -44,6 +44,5 @@ PERL_RM_FILES=(
 	t/zz-url2.t
 )
 PATCHES=(
-	"${FILESDIR}/${PN}-2.27-no-dot-inc.patch"
 	"${FILESDIR}/${PN}-2.27-cgipm.patch"
 )
