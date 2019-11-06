@@ -42,6 +42,29 @@ dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/re2 0.2019.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.51.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
+dev-perl/Archive-Zip 1.670.0: A wrapper that lets you read Zip archive members as if they were files
+dev-perl/Class-Inspector 1.360.0: Provides information about Classes
+dev-perl/Devel-Size 0.830.0: Perl extension for finding the memory usage of Perl variables
+dev-perl/ExtUtils-InstallPaths 0.12.0: Build.PL install path logic made easy
+dev-perl/File-BaseDir 0.80.0: Use the Freedesktop.org base directory specification
+dev-perl/File-MimeInfo 0.290.0: Determine file type
+dev-perl/File-ShareDir 1.116.0: Locate per-dist and per-module shared files
+dev-perl/File-ShareDir-Install 0.130.0: Install shared files
+dev-perl/HTTP-Cookies 6.50.0: Storage of cookies
+dev-perl/HTTP-Message 6.180.0: Base class for Request/Response
+dev-perl/LWP-MediaTypes 6.40.0: Media types and mailcap processing
+dev-perl/Module-Build 0.422.900: Build and install Perl modules
+dev-perl/Net-HTTP 6.190.0: Low-level HTTP connection (client)
+dev-perl/Socket6 0.290.0: IPv6 related part of the C socket.h defines and structure manipulators
+dev-perl/Sub-Name 0.260.0: (Re)name a sub
+dev-perl/TermReadKey 2.380.0: Change terminal modes, and perform non-blocking reads
+dev-perl/URI 1.760.0: Uniform Resource Identifiers (absolute and relative)
+dev-perl/Unicode-EastAsianWidth 12.0: East Asian Width properties
+dev-perl/Unicode-LineBreak 2019.1.0: UAX #14 Unicode Line Breaking Algorithm
+dev-perl/XML-Parser 2.460.0: A Perl extension interface to James Clark's XML parser, expat
+dev-perl/XML-SAX 1.2.0: Perl module for using and building Perl SAX2 XML parsers, filters, and drivers
+dev-perl/XML-XPath 1.440.0: A XPath Perl Module
+dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-python/pbr 5.4.3: Inject some useful and sensible default behaviors into setuptools
 dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
@@ -86,7 +109,6 @@ media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 enco
 media-libs/shaderc 2019.0 9999: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.1.125: Vulkan Validation Layers
 media-libs/vulkan-loader 1.1.125: Vulkan Installable Client Driver (ICD) Loader
-media-libs/x265 3.1.1_pre: Library for encoding video streams into the H.265/HEVC format
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt

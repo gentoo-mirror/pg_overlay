@@ -1,0 +1,14 @@
+BDEPEND=dev-lang/perl
+DEFINED_PHASES=compile configure install prepare test
+DEPEND=>=virtual/perl-Exporter-5.570.0 virtual/perl-XSLoader virtual/perl-ExtUtils-MakeMaker test? ( suggested? ( dev-perl/Devel-CheckBin ) virtual/perl-File-Spec virtual/perl-Module-Metadata >=virtual/perl-Test-Simple-0.880.0 virtual/perl-if ) dev-lang/perl
+DESCRIPTION=(Re)name a sub
+EAPI=7
+HOMEPAGE=https://metacpan.org/release/Sub-Name
+IUSE=test suggested
+KEYWORDS=alpha amd64 arm arm64 hppa ia64 ~m68k ~mips ppc ppc64 ~riscv s390 ~sh sparc x86 ~ppc-aix ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris
+LICENSE=|| ( Artistic GPL-1+ )
+RDEPEND=>=virtual/perl-Exporter-5.570.0 virtual/perl-XSLoader dev-lang/perl:=
+SLOT=0
+SRC_URI=mirror://cpan/authors/id/E/ET/ETHER/Sub-Name-0.26.tar.gz
+_eclasses_=multiprocessing	cac3169468f893670dac3e7cb940e045	perl-functions	6ec4c4d8fc8324200f1c14e8d158c59b	perl-module	97206c028d9bdc9f248e022ac5c9fc83
+_md5_=739274fd231bd64ac90d476e49efdff0
