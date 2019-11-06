@@ -1,9 +1,9 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=5
 
-MODULE_AUTHOR=GAAS
+MODULE_AUTHOR=OALDERS
 MODULE_VERSION=6.04
 inherit perl-module
 

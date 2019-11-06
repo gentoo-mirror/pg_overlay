@@ -17,5 +17,4 @@ IUSE=""
 RDEPEND="dev-perl/MIME-Charset
 	virtual/perl-Encode"
 DEPEND="${RDEPEND}"
-PATCHES=("${FILESDIR}/${PN}-2017.004-dotinc.patch")
 PERL_RM_FILES=("t/pod.t")
