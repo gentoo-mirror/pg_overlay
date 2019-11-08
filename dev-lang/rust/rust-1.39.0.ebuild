@@ -90,7 +90,6 @@ QA_FLAGS_IGNORED="usr/bin/* usr/lib*/${P}"
 
 PATCHES=(
 	"${FILESDIR}"/rust-pr65474-split-rustc-dev.patch
-	"${FILESDIR}"/0001-WIP-minimize-the-rust-std-component.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
