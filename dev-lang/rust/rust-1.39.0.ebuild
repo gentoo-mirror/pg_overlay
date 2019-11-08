@@ -259,7 +259,7 @@ src_configure() {
 src_compile() {
 	env $(cat "${S}"/config.env)\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
-		--exclude src/tools/miri --enable-llvm-link-shared || die # https://github.com/rust-lang/rust/issues/52305
+		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
