@@ -21,7 +21,7 @@ else
 	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 fi
 
-RUST_STAGE0_VERSION="${PV}" #Use current version for stage0
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
