@@ -132,10 +132,8 @@ src_prepare() {
 	fi
 
 	# Remove other unused vendored libraries            
-	#rm -rf vendor/curl-sys/curl/            
 	rm -rf vendor/jemalloc-sys/jemalloc/            
 	rm -rf vendor/libz-sys/src/zlib/            
-	#rm -rf vendor/lzma-sys/xz-*/            
 	rm -rf vendor/openssl-src/openssl/
 
 	# The configure macro will modify some autoconf-related files, which upsets
@@ -261,7 +259,7 @@ src_configure() {
 src_compile() {
 	env $(cat "${S}"/config.env)\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
-		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
+		--exclude src/tools/miri --enable-llvm-link-shared || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
