@@ -88,9 +88,9 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 "
 QA_FLAGS_IGNORED="usr/bin/* usr/lib*/${P}"
 
-#PATCHES=(
-#	"${FILESDIR}"/rust-pr65474-split-rustc-dev.patch
-#)
+PATCHES=(
+	"${FILESDIR}"/rust-pr65474-split-rustc-dev.patch
+)
 
 S="${WORKDIR}/${MY_P}-src"
 
@@ -196,9 +196,9 @@ src_configure() {
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
-		submodules = true
+		submodules = false
 		python = "${EPYTHON}"
-		locked-deps = false
+		locked-deps = true
 		vendor = true
 		extended = ${extended}
 		tools = [${tools}]
