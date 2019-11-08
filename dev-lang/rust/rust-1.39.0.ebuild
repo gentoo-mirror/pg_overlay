@@ -88,9 +88,9 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 "
 QA_FLAGS_IGNORED="usr/bin/* usr/lib*/${P}"
 
-PATCHES=(
-	"${FILESDIR}"/rust-pr65474-split-rustc-dev.patch
-)
+#PATCHES=(
+#	"${FILESDIR}"/rust-pr65474-split-rustc-dev.patch
+#)
 
 S="${WORKDIR}/${MY_P}-src"
 
