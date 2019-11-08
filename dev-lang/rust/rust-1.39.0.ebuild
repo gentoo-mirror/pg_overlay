@@ -196,9 +196,9 @@ src_configure() {
 		rustc = "${rust_stage0_root}/bin/rustc"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
-		submodules = false
+		submodules = true
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = ${extended}
 		tools = [${tools}]
