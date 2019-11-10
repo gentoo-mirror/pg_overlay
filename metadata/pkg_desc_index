@@ -124,7 +124,7 @@ dev-util/vulkan-tools 1.1.124: Official Vulkan Tools and Utilities for Windows, 
 dev-vcs/mercurial 5.0: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
-gnome-base/librsvg 2.45.92: Scalable Vector Graphics (SVG) rendering library
+gnome-base/librsvg 2.46.3: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-apps/ark 19.08.3: KDE Archiving tool
