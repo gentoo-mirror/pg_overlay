@@ -15,7 +15,6 @@ app-misc/worker 4.1.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 6.3.3.2: A full office productivity suite
 app-office/libreoffice-l10n 6.3.3.2: Translations for the Libreoffice suite
 app-portage/eix 0.33.9_alpha190613: Search and query ebuilds
-app-portage/kuroo 9999: Graphical Portage frontend based on KDE Frameworks
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
