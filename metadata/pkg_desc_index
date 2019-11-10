@@ -1,7 +1,7 @@
 app-accessibility/at-spi2-atk 2.33.2: Gtk module for bridging AT-SPI to Atk
 app-accessibility/at-spi2-core 2.33.2: D-Bus accessibility specifications and registration daemon
 app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
-app-arch/lz4 1.9.1: Extremely Fast Compression algorithm
+app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-dicts/myspell-ru 20180627: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
