@@ -55,7 +55,6 @@ multilib_src_configure() {
 		-Dintrospection="$(multilib_native_usex introspection true false)"
 		-Dinstall-tests="$(multilib_native_usex test true false)"
 		-Duse_fontconfig="$(multilib_native_usex X true false)"
-		-DPANGO_DISABLE_DEPRECATED=false
 	)
 	meson_src_configure
 }
