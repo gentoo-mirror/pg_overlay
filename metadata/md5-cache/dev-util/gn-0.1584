@@ -8,5 +8,5 @@ KEYWORDS=~amd64 ~x86
 LICENSE=BSD
 SLOT=0
 SRC_URI=https://gn.googlesource.com/gn/+archive/8f8178c5cd01fd06ad6b7b527c255cf75e8e2ece.tar.gz -> gn-0.1584.tar.gz
-_eclasses_=multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	d09515940968e511f7a539e13e30b465	python-any-r1	b5f01473006ccc2cd78bc3dab20fced4	python-utils-r1	25291c381052933ddf86bcffbfaff2ed	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
+_eclasses_=multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	d09515940968e511f7a539e13e30b465	python-any-r1	b5f01473006ccc2cd78bc3dab20fced4	python-utils-r1	93ff6f0f8518926f2951ca70ce36e887	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
 _md5_=a81c7d7bca55d411161c47f0302257ca
