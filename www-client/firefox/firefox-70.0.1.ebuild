@@ -53,7 +53,12 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+screenshot selinux startup-notification +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
 	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus +jit +kde"
-RESTRICT="!bindist? ( bindist )"
+
+REQUIRED_USE="pgo? ( lto )
+	kde? ( !bindist )"
+
+RESTRICT="!bindist? ( bindist )
+	!test? ( test )"
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/${PATCH}.tar.xz )
 SRC_URI="${SRC_URI}
@@ -96,7 +101,7 @@ CDEPEND="
 		>=media-libs/libaom-1.0.0:=
 	)
 	system-harfbuzz? ( >=media-libs/harfbuzz-2.5.3:0= >=media-gfx/graphite2-1.3.13 )
-	system-icu? ( >=dev-libs/icu-63.1:= )
+	system-icu? ( >=dev-libs/icu-64.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
 	system-libvpx? ( =media-libs/libvpx-1.7*:0=[postproc] )
@@ -172,11 +177,6 @@ DEPEND="${CDEPEND}
 		amd64? ( >=dev-lang/nasm-2.13 )
 		x86? ( >=dev-lang/nasm-2.13 )
 	)"
-
-REQUIRED_USE="pgo? ( lto )
-	kde? ( !bindist )"
-
-RESTRICT="!test? ( test )"
 
 S="${WORKDIR}/firefox-${PV%_*}"
 
@@ -266,6 +266,8 @@ src_prepare() {
 	use !wayland && rm -f "${WORKDIR}/firefox/2019_mozilla-bug1539471.patch"
 	eapply "${WORKDIR}/firefox"
 	eapply "${FILESDIR}/${PN}-69.0-lto-gcc-fix.patch"
+
+	eapply "${FILESDIR}"/${PN}-70.0.1-rust-1.39+.patch
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
