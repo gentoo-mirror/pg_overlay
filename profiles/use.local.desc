@@ -87,62 +87,6 @@ dev-vcs/mercurial:chg - Support Mercurial command server client
 dev-vcs/mercurial:gpg - Support signing with GnuPG.
 dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 gnome-base/librsvg:tools - Build svg viewer tool
-kde-apps/ark:zip - Enable ZIP archive support via dev-libs/libzip
-kde-apps/dolphin:activities - Track which folders are frequently accessed on a Plasma desktop
-kde-apps/dolphin:thumbnail - Enables thumbnail generation
-kde-apps/gwenview:activities - Enable kactivities support
-kde-apps/gwenview:fits - Enable support for NASA's sci-libs/cfitsio library
-kde-apps/gwenview:kipi - Enable support for the KDE Image Plugin Interface
-kde-apps/gwenview:mpris - Enable support for MPRIS2 interface, requiring dev-qt/qtdbus as dependency.
-kde-apps/gwenview:share - Enable support for a share menu using kde-frameworks/purpose
-kde-apps/kate:activities - Enable Plasma Activities support via kde-frameworks/kactivities
-kde-apps/kate:addons - Build and install additional plugins
-kde-apps/kio-extras:activities - Enable activities kioslave and fileitem plugin
-kde-apps/kio-extras:man - Enable manpages kioslave
-kde-apps/kio-extras:phonon - Enable file audio preview plugin using media-libs/phonon
-kde-apps/kio-extras:sftp - Enable SFTP protocol support using net-libs/libssh
-kde-apps/kio-extras:taglib - Enable audio thumbnails via media-libs/taglib
-kde-apps/kipi-plugins:flashexport - Build the flash export plugin
-kde-apps/kipi-plugins:mediawiki - Build the mediawiki export plugin
-kde-apps/kipi-plugins:remotestorage - Build plugin for remote storage using network protocols such as FTP, SSH, SAMBA via kde-frameworks/kio
-kde-apps/kipi-plugins:vkontakte - Build plugin for vkontakte.ru
-kde-apps/kopete:addbookmarks - Automatically add incoming urls to bookmarks.
-kde-apps/kopete:autoreplace - Automatically replace selected text
-kde-apps/kopete:contactnotes - Enables writing personal notes for contacts.
-kde-apps/kopete:gadu - Enable the Gadu protocol handler.
-kde-apps/kopete:groupwise - Enable the Groupwise protocol handler.
-kde-apps/kopete:highlight - Allows you to specify highlights on specific events.
-kde-apps/kopete:history - Enables saving chat history.
-kde-apps/kopete:jingle - Enable voice calls for jabber
-kde-apps/kopete:latex - Embed latex formatted text into messages.
-kde-apps/kopete:meanwhile - Enable the Sametime protocol handler.
-kde-apps/kopete:nowlistening - Shows song you currently listen to in your status/etc. Bindings for many players.
-kde-apps/kopete:oscar - Enable Oscar (AIM/ICQ) IM protocol support
-kde-apps/kopete:otr - Allows crypting your chat (drugs and talking nonsense are considered as good alternatives ;]).
-kde-apps/kopete:pipes - Send messages to external pipe.
-kde-apps/kopete:privacy - Filter for incoming messages
-kde-apps/kopete:statistics - Everybody loves statistic graphs, especially cake ones. ;]
-kde-apps/kopete:testbed - Enable the testbed protocol.
-kde-apps/kopete:texteffect - Various fancy text effects for your messages (don't ever consider writing us with this enabled ;]).
-kde-apps/kopete:translator - Translate incoming and outgoing messages.
-kde-apps/kopete:urlpicpreview - Enables in conversation pictures preview.
-kde-apps/kopete:webpresence - Show your status and some more information on web.
-kde-apps/kopete:winpopup - Enable pop-up messages sending on windows. (same as good old "net send" messages ;])
-kde-apps/kopete:zeroconf - Enable Link-Local Messaging via the bonjour protocol.
-kde-apps/kpimtextedit:designer - Build plugins for dev-qt/designer
-kde-apps/libkleo:fancyviewer - Use kde-apps/kpimtextedit for an improved audit log viewer
-kde-apps/libksane:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
-kde-apps/okular:chm - Enable support for Microsoft Compiled HTML Help files
-kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
-kde-apps/okular:image-backend - Enable image viewing support
-kde-apps/okular:markdown - Enable Markdown support via app-text/discount
-kde-apps/okular:mobi - Enable mobipocket support
-kde-apps/okular:mobile - Enable Plasma mobile support
-kde-apps/okular:plucker - Enable Plucker E-Book for Palm OS devices support
-kde-apps/okular:share - Enable support for a share menu using kde-frameworks/purpose
-kde-apps/okular:speech - Enable text-to-speech support
-kde-apps/spectacle:kipi - Enable support for the KDE Image Plugin Interface
-kde-apps/spectacle:share - Enable support for a share menu using kde-frameworks/purpose
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
 mail-client/thunderbird:bindist - Disable official Firefox/Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.

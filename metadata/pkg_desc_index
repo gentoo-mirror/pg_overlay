@@ -127,34 +127,6 @@ gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for
 gnome-base/librsvg 2.46.3: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
-kde-apps/ark 19.08.3: KDE Archiving tool
-kde-apps/bovo 19.08.3: Five-in-a-row Board Game
-kde-apps/dolphin 19.08.3: Plasma filemanager focusing on usability
-kde-apps/dolphin-plugins-git 19.08.3: Dolphin plugin for Git integration
-kde-apps/gwenview 19.08.3: Image viewer by KDE
-kde-apps/kate 19.08.3: Multi-document editor with network transparency, Plasma integration and more
-kde-apps/kcalc 19.08.3: KDE calculator
-kde-apps/kdialog 19.08.3: Can be used to show nice dialog boxes from shell scripts
-kde-apps/kfind 19.08.3: File finder utility based on KDE Frameworks
-kde-apps/kidentitymanagement 19.08.3: Library for managing identitites
-kde-apps/kio-extras 19.08.3: KIO plugins present a filesystem-like view of arbitrary data
-kde-apps/kipi-plugins 19.08.3: Plugins for the KDE Image Plugin Interface
-kde-apps/kolourpaint 19.08.3: Paint Program by KDE
-kde-apps/kompare 19.08.3: A program to view the differences between files
-kde-apps/konsole 19.08.3: KDE's terminal emulator
-kde-apps/kopete 19.08.3: Multi-protocol IM client based on KDE Frameworks
-kde-apps/kpat 19.08.3: KDE patience game
-kde-apps/kpimtextedit 19.08.3: A textedit with PIM-specific features
-kde-apps/libkdegames 19.08.3: Base library common to many KDE games
-kde-apps/libkexiv2 19.08.3: Wrapper around exiv2 library
-kde-apps/libkipi 19.08.3: A library for image plugins accross KDE applications
-kde-apps/libkleo 19.08.3: Library for encryption handling
-kde-apps/libkomparediff2 19.08.3: KDE library to compare files and strings
-kde-apps/libksane 19.08.3: SANE Library interface based on KDE Frameworks
-kde-apps/okular 19.08.3: Universal document viewer based on KDE Frameworks
-kde-apps/print-manager 19.08.3: Manage print jobs and printers in Plasma
-kde-apps/spectacle 19.08.3: Screenshot capture utility
-kde-apps/sweeper 19.08.3: Privacy settings widget to clean unwanted traces on the system
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.2: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.2.2: Thunderbird Mail Client
