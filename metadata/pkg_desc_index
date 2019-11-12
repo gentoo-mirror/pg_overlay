@@ -24,7 +24,7 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.30.1: SQL database engine
 dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/orc 0.4.30: The Oil Runtime Compiler, a just-in-time compiler for array operations
-dev-lang/python 2.7.17_pre 3.7.5-r1: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.17_pre 2.7.17 3.7.5-r1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.39.0: Systems programming language from Mozilla
 dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
 dev-libs/boost 1.69.0: Boost Libraries for C++
