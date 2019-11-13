@@ -78,8 +78,8 @@ src_install() {
 	python_foreach_impl python_doscript "${PN}/supprt/rmlint/merge_hardlinks"
 
 	if use sqlite; then
-		python_scriptinto "/usr/share/${PN}/${PN}/supprt"
-		python_foreach_impl python_doscript "${PN}/supprt/database"
+		exeinto "/usr/share/${PN}/${PN}/supprt"
+		doexe "${PN}/supprt/database"
 	fi
 
 	doicon "${PN}_icon.png"
