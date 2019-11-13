@@ -16,17 +16,21 @@ EGIT_REPO_URI="https://github.com/pixelb/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="nls"
+IUSE="nls sqlite"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
 	dev-python/pygtk:2[${PYTHON_USEDEP}]
-	gnome-base/libglade:2.0"
+	gnome-base/libglade:2.0
+	sqlite? ( dev-db/sqlite )"
 
 DEPEND="nls? ( sys-devel/gettext:* )"
 
 src_prepare() {
 	default
+
+	use sqlite && eapply "${FILESDIR}/sqlite_support.patch"
+
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
 	}
