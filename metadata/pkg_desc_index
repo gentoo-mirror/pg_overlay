@@ -192,7 +192,7 @@ sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat device
 sys-auth/elogind 241.9999: The systemd project's logind, extracted to a standalone package
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
-sys-fs/xfsprogs 5.3.0_rc1 9999: xfs filesystem utilities
+sys-fs/xfsprogs 5.3.0_rc2 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/ncurses 6.1_p20191102: console display library
 sys-libs/slang 2.3.3_pre9: Multi-platform library designed to allow a developer to create robust software
