@@ -112,15 +112,15 @@ dev-util/boost-build 1.69.0: A system for large project software construction, s
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.62.2: GDBus code and documentation generator
 dev-util/glib-utils 2.62.2: Build utilities for GLib using projects
-dev-util/glslang 7.11.3214 7.12.3352: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
+dev-util/glslang 7.13.3496: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1584: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 0.7: ninja-compatible build tool written in C
-dev-util/vulkan-headers 1.1.126: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.1.124: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.1.127: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.1.126: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.0: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
@@ -130,16 +130,13 @@ gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.3: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.2.2: Thunderbird Mail Client
-media-libs/babl 0.1.66_pre: A dynamic, any to any, pixel format conversion library
-media-libs/glm 0.9.9.5_pre: OpenGL Mathematics
 media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.21.0 9999: Reusable library for GPU-accelerated image processing primitives
 media-libs/libvpx 1.8.1: WebM VP8 and VP9 Codec SDK
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
-media-libs/shaderc 2019.0 9999: Collection of tools, libraries and tests for shader compilation
-media-libs/vulkan-layers 1.1.125: Vulkan Validation Layers
-media-libs/vulkan-loader 1.1.125: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.1.127: Vulkan Validation Layers
+media-libs/vulkan-loader 1.1.127: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
