@@ -28,7 +28,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
-	"${FILESDIR}"/${PN}-4.15.0-sharedlibs.patch
 	"${FILESDIR}"/${PN}-4.15.0-docdir.patch
 )
 
