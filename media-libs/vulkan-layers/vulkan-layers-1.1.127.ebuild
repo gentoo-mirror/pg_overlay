@@ -1,8 +1,8 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python3_{6,7} )
+EAPI=7
+PYTHON_COMPAT=( python3_{5,6,7} )
 
 if [[ "${PV}" == "9999" ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/Vulkan-ValidationLayers.git"
@@ -25,9 +25,9 @@ SLOT="0"
 IUSE="X wayland"
 
 DEPEND="${PYTHON_DEPS}
-		>=dev-util/glslang-7.11.3114_pre20190415:=[${MULTILIB_USEDEP}]
-		>=dev-util/spirv-tools-2019.1-r1:=[${MULTILIB_USEDEP}]
-		>=dev-util/vulkan-headers-1.1.106
+		>=dev-util/glslang-7.12.3353_pre20191027-r1:=[${MULTILIB_USEDEP}]
+		~dev-util/spirv-tools-2019.10_pre20191027:=[${MULTILIB_USEDEP}]
+		>=dev-util/vulkan-headers-1.1.125
 		wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 		X? (
 		   x11-libs/libX11:=[${MULTILIB_USEDEP}]
