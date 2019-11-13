@@ -95,7 +95,7 @@ src_configure() {
 
 src_install() {
 	emake DIST_ROOT="${ED}" install
-	emake DIST_ROOT="${ED}" install-dev
+	#emake DIST_ROOT="${ED}" install-dev
 
 	# removing unnecessary .la files if not needed
 	find "${ED}" -type f -name '*.la' -delete || die
