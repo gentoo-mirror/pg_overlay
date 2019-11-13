@@ -11,7 +11,8 @@ inherit desktop git-r3 l10n python-r1
 
 DESCRIPTION="A utility to find various forms of lint on a filesystem"
 HOMEPAGE="https://www.pixelbeat.org/fslint/"
-EGIT_REPO_URI="https://github.com/pixelb/${PN}.git"
+EGIT_REPO_URI="https://github.com/pixelb/${PN}.git
+	sqlite? (  https://github.com/dipietro-salvatore/${PN}.git )"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -29,7 +30,7 @@ DEPEND="nls? ( sys-devel/gettext:* )"
 src_prepare() {
 	default
 
-	use sqlite && eapply "${FILESDIR}/sqlite_support.patch"
+	#use sqlite && eapply "${FILESDIR}/sqlite_support.patch"
 
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
