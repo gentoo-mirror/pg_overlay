@@ -11,8 +11,9 @@ inherit desktop git-r3 l10n python-r1
 
 DESCRIPTION="A utility to find various forms of lint on a filesystem"
 HOMEPAGE="https://www.pixelbeat.org/fslint/"
-EGIT_REPO_URI="https://github.com/pixelb/${PN}.git
-	sqlite? (  https://github.com/dipietro-salvatore/${PN}.git )"
+EGIT_REPO_URI="
+	!sqlite ( https://github.com/pixelb/${PN}.git )
+	sqlite? ( https://github.com/dipietro-salvatore/${PN}.git )"
 
 LICENSE="GPL-2"
 SLOT="0"
