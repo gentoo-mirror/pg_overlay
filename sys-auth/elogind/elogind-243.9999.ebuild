@@ -42,7 +42,7 @@ PDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-241.1-docs.patch"
+	"${FILESDIR}/${PN}-243.1-docs.patch"
 )
 
 pkg_setup() {
