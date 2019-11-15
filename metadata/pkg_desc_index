@@ -33,7 +33,7 @@ dev-libs/glib 2.62.2: The GLib library of C routines
 dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.62.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
-dev-libs/jsoncpp 1.9.1: C++ JSON reader and writer
+dev-libs/jsoncpp 1.9.2: C++ JSON reader and writer
 dev-libs/libpwquality 1.4.2_pre: Library for password quality checking and generating random passwords
 dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
