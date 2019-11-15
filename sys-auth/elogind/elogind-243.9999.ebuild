@@ -1,19 +1,19 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit flag-o-matic git-r3 linux-info meson pam udev xdg-utils
 
 DESCRIPTION="The systemd project's logind, extracted to a standalone package"
 HOMEPAGE="https://github.com/elogind/elogind"
 EGIT_REPO_URI="https://github.com/elogind/elogind.git"
-EGIT_BRANCH="v241-stable"
+EGIT_BRANCH="v243-stable"
 EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+acl debug doc +pam +policykit selinux"
 
 COMMON_DEPEND="
@@ -21,7 +21,7 @@ COMMON_DEPEND="
 	sys-libs/libcap
 	virtual/libudev:=
 	acl? ( sys-apps/acl )
-	pam? ( virtual/pam )
+	pam? ( sys-libs/pam )
 	selinux? ( sys-libs/libselinux )
 "
 DEPEND="${COMMON_DEPEND}
