@@ -189,7 +189,7 @@ sys-apps/openrazer 9999: Razer Drivers for Linux
 sys-apps/polychromatic 9999: A graphical front end for managing Razer peripherals under GNU/Linux.
 sys-apps/razercfg 0.40: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
-sys-auth/elogind 241.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.3.0_rc2 9999: xfs filesystem utilities
