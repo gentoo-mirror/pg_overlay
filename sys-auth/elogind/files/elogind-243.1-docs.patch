@@ -1,5 +1,5 @@
---- meson.build	2019-11-15 15:38:11.189476145 +0700
-+++ meson.build_new	2019-11-15 15:39:22.269371474 +0700
+--- a/meson.build	2019-11-15 15:38:11.189476145 +0700
++++ b/meson.build	2019-11-15 15:39:22.269371474 +0700
 @@ -3342,24 +3342,7 @@
  # install_data('modprobe.d/systemd.conf',
  #              install_dir : modprobedir)
