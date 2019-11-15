@@ -12,8 +12,8 @@ HOMEPAGE="https://github.com/open-source-parsers/jsoncpp"
 SRC_URI="https://github.com/open-source-parsers/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="|| ( public-domain MIT )"
-SLOT="0/21"
-#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd"
+SLOT="0/22"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 IUSE="doc test"
 
 DEPEND="
@@ -28,6 +28,8 @@ RDEPEND=""
 
 RESTRICT="!test? ( test )"
 
+PATCHES="${FILESDIR}/include_dir.patch"
+
 pkg_setup() {
 	if use doc || use test; then
 		python-any-r1_pkg_setup
@@ -35,14 +37,12 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed -E "s|(version : )'1.9.0'|\1'${PVR}'|" -i meson.build
 	default
 }
 
 
 src_configure() {
 	local emesonargs=(
-		--buildtype release
 		-Ddefault_library=shared
 	)
 	meson_src_configure
