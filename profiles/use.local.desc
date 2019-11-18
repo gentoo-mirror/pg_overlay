@@ -3,12 +3,6 @@
 # * generated automatically using pmaint *
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
-app-emulation/virtualbox:headless - Build without any graphic frontend
-app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
-app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels.
-app-emulation/virtualbox:sdk - Enable building of SDK
-app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
-app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
 app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
@@ -82,10 +76,6 @@ dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
 dev-util/vulkan-tools:cube - Build the cube/cubepp demos
 dev-util/vulkan-tools:vulkaninfo - Build the vulkaninfo utility
-dev-vcs/mercurial:bugzilla - Support bugzilla integration.
-dev-vcs/mercurial:chg - Support Mercurial command server client
-dev-vcs/mercurial:gpg - Support signing with GnuPG.
-dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 gnome-base/librsvg:tools - Build svg viewer tool
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
