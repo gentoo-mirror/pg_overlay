@@ -130,7 +130,7 @@ kde-plasma/kwin 5.17.3: Flexible, composited Window Manager for windowing system
 mail-client/thunderbird 68.2.2: Thunderbird Mail Client
 media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
-media-libs/libplacebo 1.21.0 9999: Reusable library for GPU-accelerated image processing primitives
+media-libs/libplacebo 1.21.0-r1 9999: Reusable library for GPU-accelerated image processing primitives
 media-libs/libvpx 1.8.1: WebM VP8 and VP9 Codec SDK
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
 media-libs/vulkan-layers 1.1.127: Vulkan Validation Layers
