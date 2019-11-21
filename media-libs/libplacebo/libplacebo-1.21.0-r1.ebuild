@@ -12,7 +12,7 @@ else
 	S="${WORKDIR}/${PN}-v${PV}"
 fi
 
-inherit meson multilib-minimal
+inherit meson multilib-minimal flag-o-matic
 
 DESCRIPTION="Reusable library for GPU-accelerated image processing primitives"
 HOMEPAGE="https://github.com/haasn/libplacebo"
@@ -29,6 +29,8 @@ RDEPEND="glslang? ( dev-util/glslang[${MULTILIB_USEDEP}] )
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
+RESTRICT="!test? ( test )"
+
 multilib_src_configure() {
 	local emesonargs=(
 		$(meson_feature glslang)
@@ -41,6 +43,7 @@ multilib_src_configure() {
 }
 
 multilib_src_compile() {
+	append-cxxflags -I/usr/include/glslang
 	meson_src_compile
 }
 
