@@ -16,7 +16,7 @@ HOMEPAGE="https://www.khronos.org/opengles/sdk/tools/Reference-Compiler/"
 LICENSE="BSD"
 SLOT="0"
 
-PATCHES=( "${FILESDIR}/${P}-fix-relative-includes.patch" )
+PATCHES=( "${FILESDIR}/${PN}-7.12.3353_pre20191027-fix-relative-includes.patch" )
 
 RDEPEND="!<media-libs/shaderc-2019-r1"
 BDEPEND="${PYTHON_DEPS}"
