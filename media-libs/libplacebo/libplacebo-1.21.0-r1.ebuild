@@ -32,6 +32,8 @@ BDEPEND="virtual/pkgconfig"
 RESTRICT="!test? ( test )"
 
 multilib_src_configure() {
+	append-cflags -I/usr/include/glslang
+	append-cxxflags -I/usr/include/glslang
 	local emesonargs=(
 		$(meson_feature glslang)
 		$(meson_feature lcms)
@@ -43,7 +45,6 @@ multilib_src_configure() {
 }
 
 multilib_src_compile() {
-	append-cxxflags -I/usr/include/glslang
 	meson_src_compile
 }
 
