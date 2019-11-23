@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=(python{3_6,3_7})
 
-inherit cmake-multilib cmake-utils
+inherit cmake-multilib cmake-utils python-any-r1
 
 SRC_URI="https://github.com/KhronosGroup/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 KEYWORDS="amd64 x86"
