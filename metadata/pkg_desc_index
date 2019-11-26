@@ -5,6 +5,10 @@ app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-dicts/myspell-ru 20180627: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
+app-emulation/virtualbox 6.1.0_rc1: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox-additions 6.1.0_rc1: CD image containing guest additions for VirtualBox
+app-emulation/virtualbox-extpack-oracle 6.1.0.134891_rc1: PUEL extensions for VirtualBox
+app-emulation/virtualbox-modules 6.1.0_rc1: Kernel Modules for Virtualbox
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
