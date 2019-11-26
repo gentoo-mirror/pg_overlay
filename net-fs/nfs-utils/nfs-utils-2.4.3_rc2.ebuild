@@ -64,7 +64,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.1.4-mtab-sym.patch
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
 	"${FILESDIR}"/${PN}-2.4.2-no-werror.patch
 	"${FILESDIR}"/${PN}-2.4.1-statx.patch #688644
