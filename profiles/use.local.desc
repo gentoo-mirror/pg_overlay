@@ -299,6 +299,14 @@ media-video/mpv:sdl - Enable media-libs/libsdl2 based video and audio outputs (N
 media-video/mpv:tools - Install extra tools: mpv_identify.sh, mpv_idet.sh, and umpv
 media-video/mpv:uchardet - Enable subtitles charset discovery via app-i18n/uchardet
 media-video/mpv:vf-dlopen - Install additional video filters to be used with -vf dlopen
+net-fs/nfs-utils:junction - Enable NFS junction support in nfsref
+net-fs/nfs-utils:ldap - Add ldap support
+net-fs/nfs-utils:libmount - Link mount.nfs with libmount
+net-fs/nfs-utils:nfsdcld - Enable nfsdcld NFSv4 clientid tracking daemon
+net-fs/nfs-utils:nfsidmap - Enable support for newer nfsidmap helper
+net-fs/nfs-utils:nfsv4 - Enable support for NFSv4
+net-fs/nfs-utils:nfsv41 - Enable support for NFSv4.1
+net-fs/nfs-utils:uuid - Support UUID lookups in rpc.mountd
 net-im/gajim:crypt - End to end encryption and GPG encryption
 net-im/gajim:geolocation - Sharing your location
 net-im/gajim:idle - Enable idle module

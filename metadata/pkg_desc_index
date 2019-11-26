@@ -160,6 +160,7 @@ media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/QMPlay2 9999: Qt-based video player, which can play all formats and stream
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
+net-fs/nfs-utils 2.4.3_rc2: NFS client and server daemons
 net-im/gajim 1.1.2: Jabber client written in PyGTK
 net-im/pidgin 2.13.0: GTK Instant Messenger client
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
