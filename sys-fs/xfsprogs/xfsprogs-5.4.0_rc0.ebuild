@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools flag-o-matic toolchain-funcs
+inherit autotools flag-o-matic toolchain-funcs usr-ldscript
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
@@ -27,8 +27,8 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.9.0-underlinking.patch
 	"${FILESDIR}"/${PN}-4.15.0-docdir.patch
+	"${FILESDIR}"/${PN}-5.3.0-libdir.patch
 )
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
@@ -53,8 +53,17 @@ src_prepare() {
 }
 
 src_configure() {
+	# include/builddefs.in will add FCFLAGS to CFLAGS which will
+	# unnecessarily clutter CFLAGS (and fortran isn't used)
+	#unset FCFLAGS
+
 	export DEBUG=-DNDEBUG
-	export OPTIMIZER=${CFLAGS}
+
+	# Package is honoring CFLAGS; No need to use OPTIMIZER anymore.
+	# However, we have to provide an empty value to avoid default
+	# flags.
+	#export OPTIMIZER=" "
+
 	#unset PLATFORM # if set in user env, this breaks configure
 
 	# Upstream does NOT support --disable-static anymore,
@@ -89,14 +98,15 @@ src_configure() {
 	emake configure
 
 	econf "${myconf[@]}"
+}
 
+src_compile() {
 	emake V=1
 }
 
 src_install() {
 	emake DIST_ROOT="${ED}" install
-	#emake DIST_ROOT="${ED}" install-dev
+	emake DIST_ROOT="${ED}" install-dev
 
-	# removing unnecessary .la files if not needed
-	find "${ED}" -type f -name '*.la' -delete || die
+	gen_usr_ldscript -a handle
 }
