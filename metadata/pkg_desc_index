@@ -15,8 +15,8 @@ app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.1.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.3.3.2: A full office productivity suite
-app-office/libreoffice-l10n 6.3.3.2: Translations for the Libreoffice suite
+app-office/libreoffice 6.3.4.1: A full office productivity suite
+app-office/libreoffice-l10n 6.3.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.33.9_alpha190613: Search and query ebuilds
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
@@ -106,7 +106,6 @@ dev-python/python-nbxmpp 0.6.10: Python library to use Jabber/XMPP networks in a
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
-dev-python/twisted 19.7.0: An asynchronous networking framework written in Python
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-scheme/guile 2.2.6_pre: GNU Ubiquitous Intelligent Language for Extensions
 dev-util/boost-build 1.69.0: A system for large project software construction, simple to use and powerful
