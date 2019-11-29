@@ -245,9 +245,6 @@ src_configure() {
 			--disable-opengl
 		)
 	fi
-	if use amd64 && ! has_multilib_profile ; then
-		myconf+=( --disable-vmmraw )
-	fi
 	# not an autoconf script
 	doecho ./configure ${myconf[@]}
 }
@@ -308,12 +305,7 @@ src_install() {
 	insinto ${vbox_inst_path}
 	doins -r components
 
-	# *.rc files for x86_64 are only available on multilib systems
-	local rcfiles="*.rc"
-	if use amd64 && ! has_multilib_profile ; then
-		rcfiles=""
-	fi
-	for each in VBox{Autostart,BalloonCtrl,BugReport,CpuReport,ExtPackHelperApp,Manage,SVC,Tunctl,VMMPreload,XPCOMIPCD} *so *r0 ${rcfiles} iPxeBaseBin ; do
+	for each in VBox{Autostart,BalloonCtrl,BugReport,CpuReport,ExtPackHelperApp,Manage,SVC,Tunctl,VMMPreload,XPCOMIPCD} *so *r0 iPxeBaseBin ; do
 		vbox_inst ${each}
 	done
 

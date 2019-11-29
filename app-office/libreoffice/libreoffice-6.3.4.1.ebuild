@@ -244,6 +244,8 @@ else
 fi
 
 PATCHES=(
+	# master branch
+	"${FILESDIR}/${PN}-6.3.3.2-mysql-connector-c-8.patch" # bug #692422
 	# "${WORKDIR}"/${PATCHSET/.tar.xz/}
 
 	# not upstreamable stuff
