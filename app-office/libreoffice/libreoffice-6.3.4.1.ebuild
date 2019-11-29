@@ -245,7 +245,7 @@ fi
 
 PATCHES=(
 	# master branch
-	"${FILESDIR}/${P}-mysql-connector-c-8.patch" # bug #692422
+	"${FILESDIR}/${PN}-6.3.3.2-mysql-connector-c-8.patch" # bug #692422
 	"${FILESDIR}/${PN}-6.2.8.2-poppler-0.82.patch"
 	# "${WORKDIR}"/${PATCHSET/.tar.xz/}
 
