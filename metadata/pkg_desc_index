@@ -31,9 +31,9 @@ dev-lang/rust 1.39.0: Systems programming language from Mozilla
 dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
 dev-libs/boost 1.69.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/glib 2.62.2: The GLib library of C routines
-dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.62.0: Build infrastructure for GObject Introspection
+dev-libs/glib 2.63.2: The GLib library of C routines
+dev-libs/gobject-introspection 1.63.1: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection-common 1.63.1: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/jsoncpp 1.9.2: C++ JSON reader and writer
 dev-libs/libpwquality 1.4.2_pre: Library for password quality checking and generating random passwords
@@ -110,8 +110,8 @@ dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library
 dev-scheme/guile 2.2.6_pre: GNU Ubiquitous Intelligent Language for Extensions
 dev-util/boost-build 1.69.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.62.2: GDBus code and documentation generator
-dev-util/glib-utils 2.62.2: Build utilities for GLib using projects
+dev-util/gdbus-codegen 2.63.2: GDBus code and documentation generator
+dev-util/glib-utils 2.63.2: Build utilities for GLib using projects
 dev-util/glslang 7.13.3496: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1584: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
@@ -202,7 +202,7 @@ www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using 
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
-x11-libs/gtk+ 2.24.32-r1 3.24.12: Gimp ToolKit +
+x11-libs/gtk+ 2.24.32-r1 3.24.13: Gimp ToolKit +
 x11-libs/pango 1.44.7_pre: Internationalized text layout and rendering library
 x11-libs/wxGTK 3.1.2-r300 3.1.3-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
