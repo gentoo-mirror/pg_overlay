@@ -53,9 +53,9 @@ src_configure() {
 
 	# To prevent crosscompiling problems, bug #414105
 	local emesonargs=(
-		-Dcairo=$(usex cairo enabled disabled) \
-		-Ddoctool=$(usex doctool enabled disabled) \
-		-Dgtk_doc=$(usex doctool enabled disabled)
+		-Dcairo=$(usex cairo true false) \
+		-Ddoctool=$(usex doctool true false) \
+		-Dgtk_doc=$(usex doctool true false)
 		-Dpython=python3
 	)
 	meson_src_configure
