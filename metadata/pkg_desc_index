@@ -32,8 +32,8 @@ dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
 dev-libs/boost 1.69.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.63.2: The GLib library of C routines
-dev-libs/gobject-introspection 1.63.1: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.63.1: Build infrastructure for GObject Introspection
+dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection-common 1.62.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/jsoncpp 1.9.2: C++ JSON reader and writer
 dev-libs/libpwquality 1.4.2_pre: Library for password quality checking and generating random passwords
@@ -123,7 +123,7 @@ dev-util/vulkan-headers 1.1.127: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.1.126: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
-gnome-base/librsvg 2.46.3: Scalable Vector Graphics (SVG) rendering library
+gnome-base/librsvg 2.47.1: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
