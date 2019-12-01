@@ -17,7 +17,7 @@ EGIT_BRANCH="RC_1_2"
 
 LICENSE="BSD"
 SLOT="0/10"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86 ~x86-fbsd"
+KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
 IUSE="debug +dht doc examples libressl python +ssl static-libs test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
