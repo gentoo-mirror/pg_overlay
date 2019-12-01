@@ -74,8 +74,7 @@ src_configure() {
 		$(use_enable test tests)
 		--with-libiconv
 	)
-
-	!use python && econf "${myeconfargs[@]}"
+	econf "${myeconfargs[@]}"
 
 	if use python; then
 		python_configure() {
