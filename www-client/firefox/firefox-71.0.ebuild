@@ -638,23 +638,26 @@ src_configure() {
 	mozconfig_annotate '' --without-google-location-service-api-keyfile
 	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
 
+	mozconfig_annotate '' MOZ_DATA_REPORTING=0
+	mozconfig_annotate '' MOZ_LOGGING=0
+	mozconfig_annotate '' MOZ_PAY=0
+	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
+	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
+	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
+
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
 
-	mozconfig_annotate '' MOZ_DATA_REPORTING=
-	mozconfig_annotate '' MOZ_DEVICES=
-	mozconfig_annotate '' MOZ_PAY=
-	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=
-	mozconfig_annotate '' MOZ_SERVICES_METRICS=
-	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
-
-
 	use lto && mozconfig_annotate '+lto' MOZ_LTO=1
-	use lto && echo "ac_add_options MOZ_LTO=1" >> "${S}".mozconfig
-	use pgo && echo "ac_add_options MOZ_PGO=1" >> "${S}".mozconfig
+	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
