@@ -11,7 +11,6 @@ mozilla-1583466.patch
 
 mozilla-1196777.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-bug1375074-save-restore-x28.patch
 mozilla-1568569.patch
 mozilla-1580174-webrtc-popup.patch
 D53011-remote-content-disappear-fix.diff
