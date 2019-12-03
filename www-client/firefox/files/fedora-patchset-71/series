@@ -1,13 +1,7 @@
 mozilla-build-arm.patch
 rhbz-1219542-s390-build.patch
-build-icu-big-endian.patch
-build-rust-ppc64le.patch
-build-ppc-jit.patch
-build-jit-atomic-always-lucky.patch
-build-cacheFlush-missing.patch
 build-aarch64-skia.patch
 build-disable-elfhack.patch
-build-arm-libopus.patch
 
 firefox-enable-addons.patch
 mozilla-1170092.patch
