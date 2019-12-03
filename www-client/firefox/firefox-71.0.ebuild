@@ -81,8 +81,8 @@ CDEPEND="
 	>=media-libs/freetype-2.4.10
 	kernel_linux? ( !pulseaudio? ( media-libs/alsa-lib ) )
 	virtual/freedesktop-icon-theme
-	sys-apps/dbus
-	dev-libs/dbus-glib
+	dbus? ( sys-apps/dbus
+		dev-libs/dbus-glib )
 	startup-notification? ( >=x11-libs/startup-notification-0.8 )
 	>=x11-libs/pixman-0.19.2
 	>=dev-libs/glib-2.26:2
@@ -219,6 +219,10 @@ pkg_setup() {
 	if use pgo ; then
 		if ! has usersandbox $FEATURES ; then
 			die "You must enable usersandbox as X server can not run as root!"
+		fi
+
+		if ! use clang ; then
+			die "Using GCC and PGO is currently broken!"
 		fi
 	fi
 
