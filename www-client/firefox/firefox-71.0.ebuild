@@ -653,7 +653,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
 
-	use lto && mozconfig_annotate '+lto' MOZ_LTO=1
+	use lto && mozconfig_annotate '+lto-cross' MOZ_LTO=cross
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
