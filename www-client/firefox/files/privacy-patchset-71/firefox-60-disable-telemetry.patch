@@ -1,6 +1,6 @@
 --- firefox-60.0.bak/browser/confvars.sh
 +++ firefox-60.0/browser/confvars.sh
-@@ -62,3 +62,10 @@
+@@ -62,3 +62,12 @@
  
  # Include the DevTools client, not just the server (which is the default)
  MOZ_DEVTOOLS=all
@@ -10,4 +10,6 @@
 +MOZ_TELEMETRY_REPORTING=0
 +MOZ_CRASHREPORTER=0
 +MOZ_SERVICES_HEALTHREPORT=0
++MOZ_PAY=0
++MOZ_SERVICES_METRICS=0
 +
