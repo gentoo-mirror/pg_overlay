@@ -645,6 +645,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-webrtc
 
 	mozconfig_annotate '' MOZ_DATA_REPORTING=0
+	mozconfig_annotate '' MOZ_LOGGING=0
 	mozconfig_annotate '' MOZ_PAY=0
 	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
