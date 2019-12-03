@@ -1,6 +1,5 @@
 mozilla-build-arm.patch
 rhbz-1219542-s390-build.patch
-build-icu-big-endian.patch
 build-rust-ppc64le.patch
 build-ppc-jit.patch
 build-jit-atomic-always-lucky.patch
