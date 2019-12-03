@@ -14,7 +14,6 @@ mozilla-1568569.patch
 D53011-remote-content-disappear-fix.diff
 D53965-dropdown-missing-on-multimonitor.diff
 
-firefox-pipewire.patch
 firefox-wayland-cache-missing.patch
 mozilla-1593408.patch
 
