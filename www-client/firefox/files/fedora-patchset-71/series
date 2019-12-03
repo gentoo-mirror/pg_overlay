@@ -8,15 +8,10 @@ mozilla-1170092.patch
 rhbz-1354671.patch
 firefox-locale-debug.patch
 mozilla-1583466.patch
-mozilla-gnome-shell-search-provider.patch
-mozilla-gnome-shell-search-provider-icons.patch
 
 mozilla-1196777.patch
-mozilla-1337988.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-bug1375074-save-restore-x28.patch
 mozilla-1568569.patch
-mozilla-1580174-webrtc-popup.patch
 D53011-remote-content-disappear-fix.diff
 D53965-dropdown-missing-on-multimonitor.diff
 
