@@ -324,6 +324,8 @@ src_prepare() {
 
 	use !dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
+	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-accessibility.patch"
+
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
