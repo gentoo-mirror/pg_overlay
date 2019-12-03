@@ -390,7 +390,7 @@ src_configure() {
 	fi
 
 	# Don't let user's LTO flags clash with upstream's flags
-	filter-flags -flto*
+	#filter-flags -flto*
 
 	if use lto ; then
 		local show_old_compiler_warning=
@@ -443,7 +443,8 @@ src_configure() {
 			sleep 5
 		fi
 
-		mozconfig_annotate '+lto' --enable-lto=full
+		mozconfig_annotate '+lto' --enable-lto
+		mozconfig_annotate '+lto' --enable-lto=cross
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
@@ -647,11 +648,12 @@ src_configure() {
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
+	mozconfig_annotate '' --enable-cross-pgo
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
 
-	use lto && mozconfig_annotate '+lto' MOZ_LTO=1
+	use lto && mozconfig_annotate '+lto-cross' MOZ_LTO=cross
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
