@@ -12,7 +12,8 @@ HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncu
 
 if [[ "${PV}" == *_p* ]] ; then
 	SRC_URI+=" ftp://ftp.invisible-island.net/${PN}/current/${P/_p/-}.tgz
-		https://invisible-mirror.net/archives/${PN}/current/${P/_p/-}.tgz"
+		https://invisible-mirror.net/archives/${PN}/current/${P/_p/-}.tgz
+		https://dev.gentoo.org/~polynomial-c/dist/${P/_p/-}.tgz"
 	S="${WORKDIR}/${P/_p/-}"
 else
 	SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz"
