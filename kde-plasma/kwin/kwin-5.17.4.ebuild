@@ -17,6 +17,7 @@ LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="caps gles2 multimedia"
+S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
 
 COMMON_DEPEND="
 	>=kde-frameworks/kactivities-${KFMIN}:5
