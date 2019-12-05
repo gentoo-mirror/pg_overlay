@@ -29,14 +29,12 @@ dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell a
 dev-lang/python 2.7.17 3.7.5-r1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.39.0: Systems programming language from Mozilla
 dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
-dev-libs/boost 1.69.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.63.2: The GLib library of C routines
 dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.62.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/jsoncpp 1.9.2: C++ JSON reader and writer
-dev-libs/libpwquality 1.4.2_pre: Library for password quality checking and generating random passwords
 dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
@@ -101,14 +99,12 @@ dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
 dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
-dev-python/python-mpd2 9999: Python MPD client library
 dev-python/python-nbxmpp 0.6.10: Python library to use Jabber/XMPP networks in a non-blocking way
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-scheme/guile 2.2.6_pre: GNU Ubiquitous Intelligent Language for Extensions
-dev-util/boost-build 1.69.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.63.2: GDBus code and documentation generator
 dev-util/glib-utils 2.63.2: Build utilities for GLib using projects
@@ -144,8 +140,6 @@ media-sound/audacious 9999: Lightweight and versatile audio player
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
-media-sound/mcg 9999: CoverGrid (mcg) is a client for the Music Player Daemon (MPD), focusing on albums instead of single tracks. It is not intended to be a replacement for your favorite MPD client but an addition to get a better album-experience
-media-sound/mpDris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/mpd 0.21.11: The Music Player Daemon (mpd)
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
@@ -160,10 +154,7 @@ media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), I
 media-video/QMPlay2 9999: Qt-based video player, which can play all formats and stream
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-fs/nfs-utils 2.4.3_rc2: NFS client and server daemons
-net-im/gajim 1.1.2: Jabber client written in PyGTK
-net-im/pidgin 2.13.0: GTK Instant Messenger client
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
-net-libs/libsoup 2.66.0: An HTTP library implementation in C
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.1.9999 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
@@ -172,7 +163,6 @@ net-misc/birdtray 9999: Birdtray is a free system tray notification for new mail
 net-misc/curl 7.66.0_pre: A Client that groks URLs
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/wget2 1.99.2: GNU Wget2 is a file and recursive website downloader
-net-misc/youtube-dl 99999999: Download videos from YouTube.com (and more sites...)
 net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
@@ -186,9 +176,7 @@ sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain pr
 sci-libs/libqalculate 3.5.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/openrazer 9999: Razer Drivers for Linux
-sys-apps/polychromatic 9999: A graphical front end for managing Razer peripherals under GNU/Linux.
-sys-apps/razercfg 0.40: Utility for advanced configuration of Razer mice
+sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager

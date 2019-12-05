@@ -49,12 +49,6 @@ dev-lang/rust:rls - Install rls component
 dev-lang/rust:rustfmt - Install rustfmt component
 dev-lang/rust:system-llvm - Use the system LLVM install
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
-dev-libs/boost:context - Build and install the Boost.Context (and Boost.Fiber) library and all other Boost libraries that depend on it
-dev-libs/boost:debug - Build and install only the debug version of the Boost libraries. Only enable this flag if you're developing against boost.
-dev-libs/boost:doc - Install the full API documentation documentation. This takes over 200MB of extra disk space.
-dev-libs/boost:nls - Build libboost_locale. This library requires compatible C library interfaces, which might not be provided by uClibc or other embedded libraries.
-dev-libs/boost:threads - Build multi-thread-compatible libraries instead of single-threaded only.
-dev-libs/boost:tools - Build and install the boost tools (bcp, quickbook, inspect, wave)
 dev-libs/glib:dbus - Enable dependencies required by glib libraries using dbus service to manage settings saving
 dev-libs/glib:mime - Pull in shared MIME database that many glib-based applications require at runtime to detect or open files. Warning: do not disable this flag unless installing on a headless server.
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap
@@ -303,35 +297,8 @@ net-fs/nfs-utils:nfsidmap - Enable support for newer nfsidmap helper
 net-fs/nfs-utils:nfsv4 - Enable support for NFSv4
 net-fs/nfs-utils:nfsv41 - Enable support for NFSv4.1
 net-fs/nfs-utils:uuid - Support UUID lookups in rpc.mountd
-net-im/gajim:crypt - End to end encryption and GPG encryption
-net-im/gajim:geolocation - Sharing your location
-net-im/gajim:idle - Enable idle module
-net-im/gajim:jingle - Audio and video calls
-net-im/gajim:keyring - Saving your password to your system keyring
-net-im/gajim:networkmanager - Network lose detection using NetworkManager
-net-im/gajim:remote - Controling Gajim instance from command line with gajim-remote
-net-im/gajim:rst - Generating XHTML output from RST code
-net-im/gajim:spell - Spellchecking of composed messages
-net-im/gajim:srv - SRV capabilities
-net-im/gajim:upnp - Ability to request your router to forward port for file transfer
-net-im/gajim:webp - Support WebP avatars
-net-im/gajim:xhtml - Enable XHTML support
-net-im/gajim:zeroconf - Serverless chatting with autodetected clients in a local network
-net-im/pidgin:gadu - Enable Gadu Gadu protocol support
-net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
-net-im/pidgin:gstreamer - Enables voice and video sessions
-net-im/pidgin:gtk - Builds Pidgin, the GTK+ interface
-net-im/pidgin:meanwhile - Enable meanwhile support for Sametime protocol
-net-im/pidgin:ncurses - Build finch, console interface
-net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
-net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
-net-im/pidgin:silc - Enable SILC protocol support
-net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
-net-im/pidgin:zephyr - Enable Zephyr protocol support
 net-libs/glib-networking:gnome - Extract HTTP/HTTPS/SOCKS proxy configuration stored using GSettings
 net-libs/glib-networking:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration
-net-libs/libsoup:gssapi - Enable GSSAPI support
-net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
