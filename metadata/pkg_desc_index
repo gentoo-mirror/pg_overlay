@@ -19,6 +19,7 @@ app-office/libreoffice 6.3.4.1: A full office productivity suite
 app-office/libreoffice-l10n 6.3.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.33.9: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
+app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
@@ -124,6 +125,7 @@ gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for
 gnome-base/librsvg 2.47.1: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
+kde-frameworks/ki18n 5.64.0: Framework based on Gettext for internationalizing user interface text
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.3 5.17.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.2.2: Thunderbird Mail Client
