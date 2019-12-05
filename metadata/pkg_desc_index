@@ -18,6 +18,7 @@ app-misc/worker 4.1.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 6.3.4.1: A full office productivity suite
 app-office/libreoffice-l10n 6.3.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.33.9: Search and query ebuilds
+app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
