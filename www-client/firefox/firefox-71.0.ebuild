@@ -453,7 +453,6 @@ src_configure() {
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
 			mozconfig_annotate '+Enable PGO on Rust code' --enable-cross-pgo
-
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -660,6 +659,7 @@ src_configure() {
 
 	use lto && mozconfig_annotate '+lto' MOZ_LTO=1 && mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
 	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig

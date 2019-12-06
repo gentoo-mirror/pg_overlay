@@ -377,7 +377,7 @@ src_configure() {
 	fi
 
 	# Don't let user's LTO flags clash with upstream's flags
-	filter-flags -flto*
+	#filter-flags -flto*
 
 	if use lto ; then
 		local show_old_compiler_warning=
@@ -437,6 +437,8 @@ src_configure() {
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
+			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
+			mozconfig_annotate '+Enable PGO on Rust code' --enable-cross-pgo
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -638,18 +640,26 @@ src_configure() {
 	mozconfig_annotate '' --without-google-location-service-api-keyfile
 	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
 
+	mozconfig_annotate '' MOZ_DATA_REPORTING=0
+	mozconfig_annotate '' MOZ_LOGGING=0
+	mozconfig_annotate '' MOZ_PAY=0
+	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
+	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
+	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
+	
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 
+	use lto && mozconfig_annotate '+lto' MOZ_LTO=1 && mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
+	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
-	use pgo && echo "export MOZ_PGO=1" >> "${S}"/.mozconfig
-	use pgo && echo "mk_add_options MOZ_PGO=1" >> "${S}".mozconfig
+	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
