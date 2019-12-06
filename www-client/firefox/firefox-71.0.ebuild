@@ -447,11 +447,12 @@ src_configure() {
 			sleep 5
 		fi
 
-		mozconfig_annotate '+lto' --enable-lto
-		mozconfig_annotate '+lto' --enable-lto=cross
+		#mozconfig_annotate '+lto' --enable-lto
+		mozconfig_annotate '+lto' --enable-lto=full,cross
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
+			mozconfig_annotate '+pgo' MOZ_PGO_RUST=1
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -657,7 +658,7 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
 
-	use lto && mozconfig_annotate '+lto-cross' MOZ_LTO=cross
+	use lto && mozconfig_annotate '+lto-cross' MOZ_LTO=1 && mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
