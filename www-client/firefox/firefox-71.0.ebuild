@@ -446,12 +446,14 @@ src_configure() {
 			ewarn ""
 			sleep 5
 		fi
-
-		mozconfig_annotate '+lto' --enable-lto=full
+		mozconfig_annotate '+lto-cross' --enable-lto=cross
+		mozconfig_annotate '+lto-full' --enable-lto=full
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
-			mozconfig_annotate '+pgo' MOZ_PGO_RUST=1
+			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
+			mozconfig_annotate '+Enable PGO on Rust code' --enable-cross-pgo
+
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -652,7 +654,6 @@ src_configure() {
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '+Enable PGO on Rust code' --enable-cross-pgo
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
