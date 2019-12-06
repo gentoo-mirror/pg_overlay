@@ -4,6 +4,9 @@ app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
+app-crypt/acme 0.40.1: An implementation of the ACME protocol
+app-crypt/certbot 0.40.1: Let's encrypt client to automate deployment of X.509 certificates
+app-crypt/certbot-nginx 0.40.1: Nginx plugin for certbot (Let's Encrypt Client)
 app-dicts/myspell-ru 20180627: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/virtualbox 6.1.0_rc1: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
