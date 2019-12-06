@@ -75,8 +75,7 @@ src_prepare() {
 	sed -i -e "s:@@GENTOO_LIBDIR@@:$(get_libdir):g" \
 		setup.py || die "sed failed to replace @@GENTOO_LIBDIR@@"
     
-	sed -i s/ax_cv_c_float_words_bigendian=unknown/ax_cv_c_float_words_bigendian=no/g configure
-	sed -i s/ax_cv_c_float_words_bigendian=unknown/ax_cv_c_float_words_bigendian=no/g configure.ac
+	export ax_cv_c_float_words_bigendian=no
 
 	eautoreconf
 }
