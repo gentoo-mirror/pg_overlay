@@ -10,7 +10,6 @@ app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels
 app-emulation/virtualbox:sdk - Enable building of SDK
 app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
 app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
-app-emulation/virtualbox-modules:pax_kernel - Apply patch needed for pax enabled kernels
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
 app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
@@ -34,6 +33,7 @@ app-portage/eix:strong-optimization - Adds several more agressive CXXFLAGS/LDFLA
 app-portage/eix:strong-security - Add many checks to prevent exploits if eix code has a bug. This will slow down eix considerably. Use only if you are paranoid or have reasons to suspect a bug.
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
+app-text/asciidoc:highlight - Enable source code highlighting
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
@@ -49,6 +49,13 @@ dev-lang/rust:rls - Install rls component
 dev-lang/rust:rustfmt - Install rustfmt component
 dev-lang/rust:system-llvm - Use the system LLVM install
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
+dev-libs/boost:context - Build and install the Boost.Context (and Boost.Fiber) library and all other Boost libraries that depend on it
+dev-libs/boost:debug - Build and install only the debug version of the Boost libraries. Only enable this flag if you're developing against boost.
+dev-libs/boost:doc - Install the full API documentation documentation. This takes over 200MB of extra disk space.
+dev-libs/boost:nls - Build libboost_locale. This library requires compatible C library interfaces, which might not be provided by uClibc or other embedded libraries.
+dev-libs/boost:numpy - Optionally build NumPy extensions when Boost.Python is enabled
+dev-libs/boost:threads - Build multi-thread-compatible libraries instead of single-threaded only.
+dev-libs/boost:tools - Build and install the boost tools (bcp, quickbook, inspect, wave)
 dev-libs/glib:dbus - Enable dependencies required by glib libraries using dbus service to manage settings saving
 dev-libs/glib:mime - Pull in shared MIME database that many glib-based applications require at runtime to detect or open files. Warning: do not disable this flag unless installing on a headless server.
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap
@@ -106,6 +113,27 @@ media-libs/libplacebo:vulkan - Add support for the vulkan graphics API
 media-libs/libvpx:highbitdepth - Enable 10 and 12 bit support for VP9.
 media-libs/libvpx:postproc - Enable additional post processing filters
 media-libs/libvpx:svc - Enable spatial-svc support (experimental)
+media-libs/mesa:classic - Build drivers based on the classic architecture.
+media-libs/mesa:d3d9 - Enable Direct 3D9 API through Nine state tracker. Can be used together with patched wine.
+media-libs/mesa:dri3 - Enable DRI3 support.
+media-libs/mesa:egl - Enable EGL support.
+media-libs/mesa:gallium - Build drivers based on Gallium3D, the new architecture for 3D graphics drivers.
+media-libs/mesa:gbm - Enable the Graphics Buffer Manager for EGL on KMS.
+media-libs/mesa:gles1 - Enable GLESv1 support.
+media-libs/mesa:gles2 - Enable GLESv2 support.
+media-libs/mesa:libglvnd - Use libglvnd for dispatch.
+media-libs/mesa:llvm - Enable LLVM backend for Gallium3D.
+media-libs/mesa:opencl - Enable the Clover Gallium OpenCL state tracker.
+media-libs/mesa:osmesa - Build the Mesa library for off-screen rendering.
+media-libs/mesa:pax_kernel - Enable if the user plans to run the package under a pax enabled hardened kernel
+media-libs/mesa:pic - disable optimized assembly code that is not PIC friendly
+media-libs/mesa:valgrind - Compile in valgrind memory hints
+media-libs/mesa:vdpau - Enable the VDPAU acceleration interface for the Gallium3D Video Layer.
+media-libs/mesa:vulkan - Enable Vulkan drivers
+media-libs/mesa:vulkan-overlay - Build vulkan-overlay-layer which displays Frames Per Second and other statistics
+media-libs/mesa:wayland - Enable support for dev-libs/wayland
+media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
+media-libs/mesa:xvmc - Enable the XvMC acceleration interface for the Gallium3D Video Layer.
 media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with Mozilla packages
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
 media-libs/vulkan-loader:layers - Include the vulkan layers
@@ -319,6 +347,25 @@ net-print/samsung-unified-driver:network - Enable network printing support
 sci-geosciences/googleearth:bundled-libs - Use bundled libraries.
 sci-geosciences/googleearth:bundled-qt - Use bundled qt.
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
+sys-devel/clang:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
+sys-devel/clang:static-analyzer - Install the Clang static analyzer
+sys-devel/clang:z3 - Enable the static analyzer constraint manager backend using sci-mathematics/z3
+sys-devel/llvm:doc - Build and install the HTML documentation and regenerate the man pages
+sys-devel/llvm:exegesis - Enable performance counter support for llvm-exegesis tool that can be used to measure host machine instruction characteristics
+sys-devel/llvm:gold - Build the gold linker plugin
+sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
+sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
+sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
+sys-libs/libblockdev:bcache - Enable block device cache support.
+sys-libs/libblockdev:cryptsetup - Enable sys-fs/cryptsetup support
+sys-libs/libblockdev:device-mapper - Enable support for device-mapper from sys-fs/lvm2
+sys-libs/libblockdev:dmraid - Support for dmraid devices, also known as ATA-RAID, or Fake RAID.
+sys-libs/libblockdev:escrow - Support for building crypto plugin with escrow device support
+sys-libs/libblockdev:kbd - Enable kernel block device support.
+sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-fs/lvm2.
+sys-libs/libblockdev:tools - Build tools
+sys-libs/libblockdev:vdo - Enable Virtual Data Optimizer support.
 www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
 www-client/firefox:clang - Use Clang compiler instead of GCC
 www-client/firefox:custom-optimization - Build with user-specified compiler optimizations (-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)

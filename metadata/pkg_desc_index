@@ -6,9 +6,6 @@ app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-dicts/myspell-ru 20180627: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/virtualbox 6.1.0_rc1: Family of powerful x86 virtualization products for enterprise and home use
-app-emulation/virtualbox-additions 6.1.0_rc1: CD image containing guest additions for VirtualBox
-app-emulation/virtualbox-extpack-oracle 6.1.0.134891_rc1: PUEL extensions for VirtualBox
-app-emulation/virtualbox-modules 6.1.0_rc1: Kernel Modules for Virtualbox
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
@@ -19,9 +16,11 @@ app-office/libreoffice 6.3.4.1: A full office productivity suite
 app-office/libreoffice-l10n 6.3.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.33.9: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
+app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
+app-text/asciidoc 9.0.0_rc1: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
 app-text/po4a 0.57_pre: Tools to ease the translation of documentation
@@ -31,6 +30,7 @@ dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell a
 dev-lang/python 2.7.17 3.7.5-r1 3.8.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.39.0: Systems programming language from Mozilla
 dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
+dev-libs/boost 1.71.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.63.2: The GLib library of C routines
 dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
@@ -125,6 +125,7 @@ dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext
 dev-util/meson 0.52.1_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 0.7: ninja-compatible build tool written in C
+dev-util/scons 3.1.1: Extensible Python-based build utility
 dev-util/vulkan-headers 1.1.127: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.1.126: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
@@ -140,6 +141,7 @@ media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.21.0-r1 9999: Reusable library for GPU-accelerated image processing primitives
 media-libs/libvpx 1.8.1: WebM VP8 and VP9 Codec SDK
+media-libs/mesa 19.3.0_rc6 9999: OpenGL-like graphic library for Linux
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
 media-libs/vulkan-layers 1.1.127: Vulkan Validation Layers
 media-libs/vulkan-loader 1.1.127: Vulkan Installable Client Driver (ICD) Loader
@@ -191,9 +193,12 @@ sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
+sys-devel/clang 9.0.1_rc1: C language family frontend for LLVM
+sys-devel/llvm 9.0.1_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.4.0_rc0 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
+sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/ncurses 6.1_p20191130: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
