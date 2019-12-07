@@ -40,13 +40,13 @@ src_prepare() {
 src_compile() {
 	emake -C po
 	xsltproc --nonet \
-		"${EROOT}"usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl \
+		"${EROOT}"/usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl \
 		pastebinit.xml || die
 }
 
 src_install() {
 	dobin pastebinit utils/pbput
-	python_fix_shebang "${ED}usr/bin/${PN}"
+	python_fix_shebang "${ED}/usr/bin/${PN}"
 	dosym pbput /usr/bin/pbget
 	use crypt && dosym pbput /usr/bin/pbputs
 	dodoc README

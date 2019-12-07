@@ -161,7 +161,7 @@ escons() {
 	debug-print-function ${FUNCNAME} "${@}"
 
 	if [[ ! ${EPYTHON} ]]; then
-		if [[ ${EAPI:-0} != [0123456] ]]; then
+		if [[ ${EAPI:-0} != [01234567] ]]; then
 			eerror "EPYTHON is unset while calling escons. This most likely means that"
 			eerror "the ebuild did not call the appropriate eclass function before calling scons."
 			if [[ ${_PYTHON_ANY_R1} ]]; then
