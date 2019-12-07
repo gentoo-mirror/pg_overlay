@@ -24,6 +24,7 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="app-text/docbook-xsl-stylesheets"
 
 src_prepare() {
+	default
 	local mo=""
 
 	for lang in ${LINGUAS}; do
