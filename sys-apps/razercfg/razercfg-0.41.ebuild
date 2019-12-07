@@ -30,8 +30,7 @@ DEPEND="${PYTHON_DEPS}
 	virtual/pkgconfig
 "
 
-PATCHES=( "${FILESDIR}/${P}-unit-variables.patch" 
-    "${FILESDIR}/59a530d9456351b244ba19b24b2c4bfeaa4207ad.patch")
+PATCHES=( "${FILESDIR}/${P}-unit-variables.patch" )
 
 src_prepare() {
 	cmake-utils_src_prepare
