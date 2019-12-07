@@ -7,9 +7,11 @@ PYTHON_COMPAT=(python{2_7,3_{6,7,8}})
 if [[ ${PV} == 9999* ]]; then
 	EGIT_REPO_URI="https://github.com/certbot/certbot.git"
 	inherit git-r3
+	S=${WORKDIR}/${P}/${PN}
 else
 	SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+	S=${WORKDIR}/certbot-${PV}/certbot
 fi
 
 inherit distutils-r1
@@ -25,7 +27,7 @@ RESTRICT="!test? ( test )"
 CDEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="
 	${CDEPEND}
-	>=app-crypt/acme-0.40.0[${PYTHON_USEDEP}]
+	>=app-crypt/acme-0.29.0[${PYTHON_USEDEP}]
 	>=dev-python/configargparse-0.9.3[${PYTHON_USEDEP}]
 	dev-python/configobj[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-1.2.3[${PYTHON_USEDEP}]
