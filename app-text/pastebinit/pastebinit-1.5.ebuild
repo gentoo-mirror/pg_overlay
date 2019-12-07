@@ -40,7 +40,7 @@ src_prepare() {
 src_compile() {
 	emake -C po
 	xsltproc --nonet \
-		"${EROOT}"usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl \
+		"${EROOT}"/usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl \
 		pastebinit.xml || die
 }
 
