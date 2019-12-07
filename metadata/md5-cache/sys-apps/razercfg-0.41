@@ -12,4 +12,4 @@ REQUIRED_USE=^^ ( python_single_target_python3_6 python_single_target_python3_7 
 SLOT=0
 SRC_URI=https://bues.ch/razercfg/razercfg-0.41.tar.bz2
 _eclasses_=cmake-utils	d932b225217d5cb2c187242bb0898d89	eutils	fcb2aa98e1948b835b5ae66ca52868c5	flag-o-matic	8a43b9830f1e64a7a5fc0a276afa0275	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	d09515940968e511f7a539e13e30b465	python-single-r1	3a0fc81f484bfdbd9c2b7448015a36e4	python-utils-r1	02ef27875ec5afcc2202b9d062d57f07	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c	udev	452708c3f55cf6e918b045adb949a9e6	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
-_md5_=87a4afde4583f7910e887ef58fba762a
+_md5_=b9013b96f81dea8abd794c44c8305e16
