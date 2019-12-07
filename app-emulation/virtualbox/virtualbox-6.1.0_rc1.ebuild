@@ -222,6 +222,7 @@ src_configure() {
 		--with-g++="$(tc-getCXX)"
 		--disable-dbus
 		--disable-kmods
+		--nofatal
 		$(usex alsa '' --disable-alsa)
 		$(usex debug --build-debug '')
 		$(usex doc '' --disable-docs)
