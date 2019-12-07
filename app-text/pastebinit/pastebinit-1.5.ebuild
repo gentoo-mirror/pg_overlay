@@ -46,7 +46,7 @@ src_compile() {
 
 src_install() {
 	dobin pastebinit utils/pbput
-	python_fix_shebang "${ED}usr/bin/${PN}"
+	python_fix_shebang "${ED}/usr/bin/${PN}"
 	dosym pbput /usr/bin/pbget
 	use crypt && dosym pbput /usr/bin/pbputs
 	dodoc README
