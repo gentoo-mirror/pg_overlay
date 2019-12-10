@@ -212,7 +212,6 @@ sys-libs/ncurses 6.1_p20191130: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
 www-client/firefox 71.0 71.0-r1: Firefox Web Browser
-www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
