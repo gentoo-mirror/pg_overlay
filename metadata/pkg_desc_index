@@ -206,11 +206,12 @@ sys-devel/llvm 9.0.1_rc2: Low Level Virtual Machine
 sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.4.0_rc0 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
+sys-libs/glibc 2.30-r3: GNU libc C library
 sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/ncurses 6.1_p20191130: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
-www-client/firefox 71.0: Firefox Web Browser
+www-client/firefox 71.0 71.0-r1: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
