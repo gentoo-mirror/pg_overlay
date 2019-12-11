@@ -16,8 +16,8 @@ app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.1.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.3.4.1: A full office productivity suite
-app-office/libreoffice-l10n 6.3.4.1: Translations for the Libreoffice suite
+app-office/libreoffice 6.3.4.2: A full office productivity suite
+app-office/libreoffice-l10n 6.3.4.2: Translations for the Libreoffice suite
 app-portage/eix 0.33.9: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
