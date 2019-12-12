@@ -455,14 +455,15 @@ src_configure() {
 
 		if use lto ; then
 			mozconfig_annotate '+lto-full' --enable-lto=full
+			mozconfig_annotate '+lto-full' MOZ_LTO=1
 			mozconfig_annotate '+lto-full' MOZ_LTO=full
 		fi
 
 		if use thinlto ; then
 			mozconfig_annotate '+lto-thin' --enable-lto=thin
+			mozconfig_annotate '+lto-thin' MOZ_LTO=1
 			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
 		fi
-
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
