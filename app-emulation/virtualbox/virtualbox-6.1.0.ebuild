@@ -118,7 +118,7 @@ QA_TEXTRELS_x86="usr/lib/virtualbox-ose/VBoxGuestPropSvc.so
 	usr/lib/virtualbox/components/VBoxREM.so
 	usr/lib/virtualbox/components/VBoxVMM.so
 	usr/lib/virtualbox/VBoxREM32.so
-	usr/lib/virtualbox/VBoxPython3_7.so
+	usr/lib/virtualbox/VBoxPython3_8.so
 	usr/lib/virtualbox/VBoxXPCOMC.so
 	usr/lib/virtualbox/VBoxOGLhostcrutil.so
 	usr/lib/virtualbox/VBoxNetDHCP.so
