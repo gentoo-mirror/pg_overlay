@@ -208,7 +208,7 @@ sys-fs/xfsprogs 5.4.0_rc0 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/glibc 2.30-r3: GNU libc C library
 sys-libs/libblockdev 2.23: A library for manipulating block devices
-sys-libs/ncurses 6.1_p20191130: console display library
+sys-libs/ncurses 6.1_p20191207: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
 sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
 www-client/firefox 71.0 71.0-r1: Firefox Web Browser
