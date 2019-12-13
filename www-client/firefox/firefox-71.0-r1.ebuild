@@ -55,8 +55,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus +jit +kde cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( ^^ ( cross-lto lto thinlto ) )
-	kde? ( !bindist )
-	"
+	kde? ( !bindist )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
