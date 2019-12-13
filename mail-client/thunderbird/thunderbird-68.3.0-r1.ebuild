@@ -34,7 +34,7 @@ MOZCONFIG_OPTIONAL_JIT=1
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="https://www.mozilla.org/thunderbird"
 
-KEYWORDS="~amd64 ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+#KEYWORDS="~amd64 ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
