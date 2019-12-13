@@ -44,7 +44,8 @@ IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
 	+system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( ^^ ( cross-lto lto thinlto ) )
-	kde? ( !bindist )"
+	kde? ( !bindist )
+	wifi? ( dbus )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
@@ -168,9 +169,6 @@ DEPEND="${CDEPEND}
 		amd64? ( >=dev-lang/nasm-2.13 )
 		x86? ( >=dev-lang/nasm-2.13 )
 	)"
-
-REQUIRED_USE="wifi? ( dbus )
-	pgo? ( lto )"
 
 S="${WORKDIR}/${MOZ_P%b[0-9]*}"
 
