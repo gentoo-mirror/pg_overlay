@@ -453,7 +453,7 @@ src_configure() {
 			#mozconfig_annotate '+lto-full' --enable-lto=full
 			#mozconfig_annotate '+lto-cross' --enable-lto=cross,full
 			mozconfig_annotate '+lto-cross' --enable-lto=cross
-			mozconfig_annotate '+lto-full' MOZ_LTO=cross
+			#mozconfig_annotate '+lto-full' MOZ_LTO=cross
 			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
 		fi
 
