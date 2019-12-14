@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} pypy )
 
-inherit check-reqs estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
+inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
@@ -21,7 +21,7 @@ else
 	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 fi
 
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2))).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -267,6 +267,13 @@ src_install() {
 
 	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml \
 	--exclude src/tools/miri || die
+
+	# bug #689562, #689160
+	rm "${D}/etc/bash_completion.d/cargo" || die
+	pushd "${D}" > /dev/null || die
+	rmdir -p etc/bash_completion.d || die
+	popd > /dev/null || die
+	dobashcomp build/tmp/dist/cargo-image/etc/bash_completion.d/cargo
 
 	mv "${ED}/usr/bin/rustc" "${ED}/usr/bin/rustc-${PV}" || die
 	mv "${ED}/usr/bin/rustdoc" "${ED}/usr/bin/rustdoc-${PV}" || die
