@@ -454,15 +454,11 @@ src_configure() {
 			mozconfig_annotate '+lto-cross' MOZ_LTO=1
 			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
 			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
-		fi
-
-		if use thinlto ; then
+		elif use thinlto ; then
 			mozconfig_annotate '+lto-thin' --enable-lto=thin
 			mozconfig_annotate '+lto-thin' MOZ_LTO=1
 			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
-		fi
-
-		if ! use cross-lto && ! use thinlto; then
+		else
 			mozconfig_annotate '+lto-full' --enable-lto=full
 			mozconfig_annotate '+lto-full' MOZ_LTO=1
 			mozconfig_annotate '+lto-full' MOZ_LTO=full
@@ -471,7 +467,7 @@ src_configure() {
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
-			mozconfig_annotate 'Enable PGO on Rust code' --enable-cross-pgo
+			mozconfig_annotate 'enable PGO on Rust code' --enable-cross-pgo
 		fi
 	else
 		# Avoid auto-magic on linker
