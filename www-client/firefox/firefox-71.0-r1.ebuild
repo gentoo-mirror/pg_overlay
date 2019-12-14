@@ -56,7 +56,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 
 REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( lto )
-	thinlto ( lto )
+	thinlto? ( lto )
 	kde? ( !bindist )
 	wifi? ( dbus )
 	|| ( cross-lto thinlto )"
