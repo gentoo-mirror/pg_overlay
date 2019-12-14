@@ -43,9 +43,12 @@ IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
 	+system-icu +system-jpeg +system-libevent +system-sqlite
 	+system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto"
 
-REQUIRED_USE="pgo? ( ^^ ( cross-lto lto thinlto ) )
+REQUIRED_USE="pgo? ( lto )
+	cross-lto? ( lto )
+	thinlto ( lto )
 	kde? ( !bindist )
-	wifi? ( dbus )"
+	wifi? ( dbus )
+	|| ( cross-lto thinlto )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
