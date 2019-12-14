@@ -439,20 +439,15 @@ src_configure() {
 		fi
 
 		if use cross-lto ; then
-			mozconfig_annotate '+lto-full' --enable-lto=full
-			mozconfig_annotate '+lto-cross' --enable-lto=cross,full
 			mozconfig_annotate '+lto-cross' --enable-lto=cross
-			mozconfig_annotate '+lto-full' MOZ_LTO=1
+			mozconfig_annotate '+lto-cross' MOZ_LTO=1
+			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
 			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
-		fi
-
-		if use thinlto ; then
+		elif use thinlto ; then
 			mozconfig_annotate '+lto-thin' --enable-lto=thin
 			mozconfig_annotate '+lto-thin' MOZ_LTO=1
 			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
-		fi
-
-		if ! use cross-lto && ! use thinlto; then
+		else
 			mozconfig_annotate '+lto-full' --enable-lto=full
 			mozconfig_annotate '+lto-full' MOZ_LTO=1
 			mozconfig_annotate '+lto-full' MOZ_LTO=full
