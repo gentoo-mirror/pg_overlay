@@ -43,9 +43,12 @@ IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
 	+system-icu +system-jpeg +system-libevent +system-sqlite
 	+system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto"
 
-REQUIRED_USE="pgo? ( ^^ ( cross-lto lto thinlto ) )
+REQUIRED_USE="pgo? ( lto )
+	cross-lto? ( lto )
+	thinlto? ( lto )
 	kde? ( !bindist )
-	wifi? ( dbus )"
+	wifi? ( dbus )
+	|| ( cross-lto thinlto )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
@@ -443,16 +446,16 @@ src_configure() {
 			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
 		fi
 
-		if use lto ; then
-			mozconfig_annotate '+lto-full' --enable-lto=full
-			mozconfig_annotate '+lto-full' MOZ_LTO=1
-			mozconfig_annotate '+lto-full' MOZ_LTO=full
-		fi
-
 		if use thinlto ; then
 			mozconfig_annotate '+lto-thin' --enable-lto=thin
 			mozconfig_annotate '+lto-thin' MOZ_LTO=1
 			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
+		fi
+
+		if ! use cross-lto && ! use thinlto; then
+			mozconfig_annotate '+lto-full' --enable-lto=full
+			mozconfig_annotate '+lto-full' MOZ_LTO=1
+			mozconfig_annotate '+lto-full' MOZ_LTO=full
 		fi
 
 		if use pgo ; then
