@@ -5,18 +5,18 @@ EAPI=7
 
 PYTHON_COMPAT=( python{2_7,3_{6,7,8}} )
 
-inherit flag-o-matic multiprocessing python-r1 toolchain-funcs multilib-minimal
+inherit flag-o-matic multiprocessing python-r1 toolchain-funcs multilib-minimal poly-c_ebuilds
 
-MY_PV="$(ver_rs 1- _)"
-MAJOR_V="$(ver_cut 1-2)"
+REAL_PV="$(ver_rs 1- _ ${MY_PV})"
+MAJOR_V="$(ver_cut 1-2 ${MY_PV})"
 
 DESCRIPTION="Boost Libraries for C++"
 HOMEPAGE="https://www.boost.org/"
-SRC_URI="https://dl.bintray.com/boostorg/release/${PV}/source/boost_${MY_PV}.tar.bz2"
+SRC_URI="https://dl.bintray.com/boostorg/release/${MY_PV}/source/boost_${REAL_PV}.tar.bz2"
 
 LICENSE="Boost-1.0"
-SLOT="0/${PV}" # ${PV} instead ${MAJOR_V} due to bug 486122
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~ppc-aix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris ~x86-winnt"
+SLOT="0/${MY_PV}" # ${MY_PV} instead ${MAJOR_V} due to bug 486122
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris ~x86-winnt"
 IUSE="bzip2 context debug doc icu lzma +nls mpi numpy python static-libs +threads tools zlib zstd"
 REQUIRED_USE="
 	mpi? ( threads )
@@ -46,7 +46,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="=dev-util/boost-build-${MAJOR_V}*"
 
-S="${WORKDIR}/${PN}_${MY_PV}"
+S="${WORKDIR}/${PN}_${REAL_PV}"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-disable_icu_rpath.patch
