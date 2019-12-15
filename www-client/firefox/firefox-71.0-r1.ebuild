@@ -331,6 +331,9 @@ src_prepare() {
 	use !dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-accessibility.patch"
+	# In 72 upstream
+	eapply "${FILESDIR}/${PN}-$(get_major_version)-Use_-import-instr-limit_to_mitigate_size_growth_from-ThinLTO.patch"
+	eapply "${FILESDIR}/${PN}-$(get_major_version)-Fix_GCC-LTO_build_break.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
