@@ -76,10 +76,6 @@ dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
 dev-util/vulkan-tools:cube - Build the cube/cubepp demos
 dev-util/vulkan-tools:vulkaninfo - Build the vulkaninfo utility
 gnome-base/librsvg:tools - Build svg viewer tool
-kde-frameworks/kfilemetadata:epub - Enable support for reading EPUB ebook metadata
-kde-frameworks/kfilemetadata:office - Enable support for reading ODF and OOXML metadata
-kde-frameworks/kio:designer - Build plugins for dev-qt/designer
-kde-frameworks/kio:kwallet - Enable permanent storage of passwords for kpasswdserver with kde-frameworks/kwallet
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
 mail-client/thunderbird:bindist - Disable official Firefox/Thunderbird branding (icons, name) which are not binary-redistributable according to upstream.

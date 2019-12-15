@@ -18,7 +18,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/worker 4.1.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 6.3.4.2: A full office productivity suite
 app-office/libreoffice-l10n 6.3.4.2: Translations for the Libreoffice suite
-app-portage/eix 0.33.9: Search and query ebuilds
+app-portage/eix 0.33.9-r1: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
@@ -142,8 +142,6 @@ gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for
 gnome-base/librsvg 2.47.1: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
-kde-frameworks/kfilemetadata 5.65.0: Library for extracting file metadata
-kde-frameworks/kio 5.65.0: Framework providing transparent file and data management
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.3 5.17.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.2.2 68.3.0 68.3.0-r1: Thunderbird Mail Client
