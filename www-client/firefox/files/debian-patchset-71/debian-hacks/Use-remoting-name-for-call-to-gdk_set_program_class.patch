@@ -8,7 +8,7 @@ Closes: #907574
  1 file changed, 3 insertions(+), 4 deletions(-)
 
 diff --git a/widget/gtk/nsAppShell.cpp b/widget/gtk/nsAppShell.cpp
-index b4010bf38d91..2af4072ebe17 100644
+index 0daa78fdbbad..49038d0bb1c8 100644
 --- a/widget/gtk/nsAppShell.cpp
 +++ b/widget/gtk/nsAppShell.cpp
 @@ -24,6 +24,7 @@
@@ -19,7 +19,7 @@ index b4010bf38d91..2af4072ebe17 100644
  #include "ScreenHelperGTK.h"
  #include "HeadlessScreenHelper.h"
  #include "mozilla/widget/ScreenManager.h"
-@@ -174,10 +175,8 @@ nsresult nsAppShell::Init() {
+@@ -175,10 +176,8 @@ nsresult nsAppShell::Init() {
      // option when program uses gdk_set_program_class().
      //
      // See https://bugzilla.gnome.org/show_bug.cgi?id=747634

@@ -7,15 +7,15 @@ Subject: Set DPI to system settings
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
-index a6ecdeebae17..76bf48de23bd 100644
+index f155ecf81d2c..96571b44f24c 100644
 --- a/modules/libpref/init/all.js
 +++ b/modules/libpref/init/all.js
-@@ -2863,7 +2863,7 @@ pref("layout.css.report_errors", true);
+@@ -2540,7 +2540,7 @@ pref("layout.selection.caret_style", 0);
  // A value of 0 means use the system DPI. A positive value is used as the DPI.
  // This sets the physical size of a device pixel and thus controls the
  // interpretation of physical units such as "pt".
 -pref("layout.css.dpi", -1);
 +pref("layout.css.dpi", 0);
  
- // Set the threshold distance in CSS pixels below which scrolling will snap to
- // an edge, when scroll snapping is set to "proximity".
+ // pref for which side vertical scrollbars should be on
+ // 0 = end-side in UI direction
