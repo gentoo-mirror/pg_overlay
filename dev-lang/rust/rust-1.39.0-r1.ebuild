@@ -71,7 +71,8 @@ DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	|| (
 		>=sys-devel/gcc-8.3
-		>=sys-devel/clang-8.0 [default-libcxx]
+		>=sys-devel/clang-8.0
+		>=sys-devel/clang-runtime-8.0[libcxx]
 	)
 	dev-util/cmake
 "
