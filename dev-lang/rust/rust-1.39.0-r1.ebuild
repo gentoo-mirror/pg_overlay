@@ -64,6 +64,7 @@ COMMON_DEPEND="
 	net-misc/curl[ssl]
 	system-llvm? (
 		${LLVM_DEPEND}
+		>=sys-devel/clang-runtime-8.0[libcxx]
 	)
 "
 
@@ -72,8 +73,7 @@ DEPEND="${COMMON_DEPEND}
 	|| (
 		>=sys-devel/gcc-8.3
 		>=sys-devel/clang-8.0
-		>=sys-devel/clang-runtime-8.0[libcxx]
-	)
+		)
 	dev-util/cmake
 "
 
