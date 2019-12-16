@@ -72,8 +72,8 @@ DEPEND="${COMMON_DEPEND}
 	|| (
 		>=sys-devel/gcc-8.3
 		>=sys-devel/clang-8.0
-		>=sys-devel/clang-runtime-8.0[libcxx]
-	)
+		)
+	>=sys-devel/clang-runtime-8.0[libcxx]
 	dev-util/cmake
 "
 
