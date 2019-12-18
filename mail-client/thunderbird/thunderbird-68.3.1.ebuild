@@ -38,10 +38,18 @@ KEYWORDS="~amd64 ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
-	+gmp-autoupdate hardened jack lightning lto neon pgo pulseaudio
-	 selinux startup-notification +system-av1 +system-harfbuzz +system-icu
-	+system-jpeg +system-libevent +system-sqlite +system-libvpx
-	+system-webp test wayland wifi +jit kde"
+	+gmp-autoupdate hardened jack lightning lto cpu_flags_arm_neon pgo
+	pulseaudio selinux startup-notification +system-av1 +system-harfbuzz
+	+system-icu +system-jpeg +system-libevent +system-sqlite
+	+system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto"
+
+REQUIRED_USE="pgo? ( lto )
+	cross-lto? ( lto )
+	thinlto? ( lto )
+	kde? ( !bindist )
+	wifi? ( dbus )
+	|| ( cross-lto thinlto )"
+
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
 
@@ -164,9 +172,6 @@ DEPEND="${CDEPEND}
 		amd64? ( >=dev-lang/nasm-2.13 )
 		x86? ( >=dev-lang/nasm-2.13 )
 	)"
-
-REQUIRED_USE="wifi? ( dbus )
-	pgo? ( lto )"
 
 S="${WORKDIR}/${MOZ_P%b[0-9]*}"
 
@@ -377,7 +382,7 @@ src_configure() {
 	fi
 
 	# Don't let user's LTO flags clash with upstream's flags
-	#filter-flags -flto*
+	filter-flags -flto*
 
 	if use lto ; then
 		local show_old_compiler_warning=
@@ -433,12 +438,24 @@ src_configure() {
 			sleep 5
 		fi
 
-		mozconfig_annotate '+lto' --enable-lto=full
+		if use cross-lto ; then
+			mozconfig_annotate '+lto-cross' --enable-lto=cross
+			mozconfig_annotate '+lto-cross' MOZ_LTO=1
+			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
+			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
+		elif use thinlto ; then
+			mozconfig_annotate '+lto-thin' --enable-lto=thin
+			mozconfig_annotate '+lto-thin' MOZ_LTO=1
+			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
+		else
+			mozconfig_annotate '+lto-full' --enable-lto=full
+			mozconfig_annotate '+lto-full' MOZ_LTO=1
+			mozconfig_annotate '+lto-full' MOZ_LTO=full
+		fi
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
-			mozconfig_annotate '+Enable PGO on Rust code' --enable-cross-pgo
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -462,7 +479,7 @@ src_configure() {
 	fi
 
 	# Modifications to better support ARM, bug 553364
-	if use neon ; then
+	if use cpu_flags_arm_neon ; then
 		mozconfig_annotate '' --with-fpu=neon
 
 		if ! tc-is-clang ; then
@@ -471,6 +488,7 @@ src_configure() {
 			mozconfig_annotate '' --with-thumb-interwork=no
 		fi
 	fi
+
 	if [[ ${CHOST} == armv*h* ]] ; then
 		mozconfig_annotate '' --with-float-abi=hard
 		if ! use system-libvpx ; then
@@ -652,7 +670,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 
-	use lto && mozconfig_annotate '+lto' MOZ_LTO=1 && mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
 	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
