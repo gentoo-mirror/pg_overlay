@@ -129,8 +129,8 @@ dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext
 dev-util/meson 0.52.1_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 0.7: ninja-compatible build tool written in C
-dev-util/vulkan-headers 1.1.127: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.1.126: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.1.130: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.1.130: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.47.1: Scalable Vector Graphics (SVG) rendering library
@@ -141,12 +141,12 @@ kde-plasma/kwin 5.17.3 5.17.4: Flexible, composited Window Manager for windowing
 mail-client/thunderbird 68.2.2 68.3.0 68.3.0-r1: Thunderbird Mail Client
 media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
-media-libs/libplacebo 1.21.0-r1 9999: Reusable library for GPU-accelerated image processing primitives
+media-libs/libplacebo 1.21.0-r1: Reusable library for GPU-accelerated image processing primitives
 media-libs/libvpx 1.8.1: WebM VP8 and VP9 Codec SDK
 media-libs/mesa 19.3.0 9999: OpenGL-like graphic library for Linux
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
-media-libs/vulkan-layers 1.1.127: Vulkan Validation Layers
-media-libs/vulkan-loader 1.1.127: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.1.130: Vulkan Validation Layers
+media-libs/vulkan-loader 1.1.130: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
@@ -158,7 +158,6 @@ media-sound/mpd 0.21.11: The Music Player Daemon (mpd)
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
-media-sound/pulseaudio 12.99.2: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/quimup 1.4.4: A Qt5 client for the music player daemon (MPD) written in C++
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
@@ -167,14 +166,13 @@ media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/QMPlay2 9999: Qt-based video player, which can play all formats and stream
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-net-fs/nfs-utils 2.4.3_rc2: NFS client and server daemons
+net-fs/nfs-utils 2.4.3_rc3: NFS client and server daemons
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.1.9999 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9: HTTP client library
 net-misc/birdtray 9999: Birdtray is a free system tray notification for new mail for Thunderbird. Its primary platform is Linux/X Windows
-net-misc/curl 7.66.0_pre: A Client that groks URLs
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/wget2 1.99.2: GNU Wget2 is a file and recursive website downloader
 net-misc/youtube-dl 2019.11.28 99999999: Download videos from YouTube.com (and more sites...)
@@ -185,10 +183,8 @@ net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
-sci-geosciences/googleearth 7.3.1: A 3D interface to the planet
-sci-geosciences/gpxsee 7.13: A viewer and analyzer that supports gpx, tcx, kml, fit, igc and nmea files
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
-sci-libs/libqalculate 3.5.0: A modern multi-purpose calculator library
+sci-libs/libqalculate 3.6.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
@@ -197,14 +193,12 @@ sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalo
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-devel/clang 9.0.1_rc3: C language family frontend for LLVM
 sys-devel/llvm 9.0.1_rc3: Low Level Virtual Machine
-sys-fs/f2fs-tools 1.12.0-r1: Tools for Flash-Friendly File System (F2FS)
-sys-fs/xfsprogs 5.4.0_rc0 9999: xfs filesystem utilities
+sys-fs/xfsprogs 5.4.0_rc1 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/glibc 2.30-r3: GNU libc C library
 sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/ncurses 6.1_p20191207: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
-sys-power/upower 0.99.10: D-Bus abstraction for enumerating power devices, querying history and statistics
 www-client/firefox 71.0 71.0-r1: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
