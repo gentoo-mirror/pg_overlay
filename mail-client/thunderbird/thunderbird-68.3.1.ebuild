@@ -653,6 +653,9 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-warnings-as-errors
 	mozconfig_annotate '' --disable-webrtc
+	mozconfig_annotate '' --disable-webspeech
+	mozconfig_annotate '' --disable-webspeechtestbackend
+
 
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --without-google-location-service-api-keyfile
@@ -664,6 +667,7 @@ src_configure() {
 	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
 	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
+	mozconfig_annotate '' RUSTC_OPT_LEVEL=3
 	
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
@@ -677,6 +681,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
+	echo "export RUSTC_OPT_LEVEL=3" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
