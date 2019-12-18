@@ -8,7 +8,6 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/acme 1.0.0: An implementation of the ACME protocol
 app-crypt/certbot 1.0.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.0.0: Nginx plugin for certbot (Let's Encrypt Client)
-app-dicts/myspell-ru 20180627: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/virtualbox 6.1.0: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
@@ -32,14 +31,12 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 2.7.17 3.7.5-r1 3.8.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.39.0 1.39.0-r1: Systems programming language from Mozilla
-dev-libs/atk 2.33.3: GTK+ & GNOME Accessibility Toolkit
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/glib 2.63.2: The GLib library of C routines
+dev-libs/glib 2.63.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.62.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/jsoncpp 1.9.2: C++ JSON reader and writer
-dev-libs/libverto 0.3.1_pre: Main event loop abstraction library
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/re2 0.2019.12.01: An efficient, principled regular expression library
@@ -122,10 +119,10 @@ dev-python/twisted 19.10.0: An asynchronous networking framework written in Pyth
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.63.2: GDBus code and documentation generator
-dev-util/glib-utils 2.63.2: Build utilities for GLib using projects
+dev-util/gdbus-codegen 2.63.3: GDBus code and documentation generator
+dev-util/glib-utils 2.63.3: Build utilities for GLib using projects
 dev-util/glslang 7.13.3496: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
-dev-util/gn 0.1584: GN is a meta-build system that generates build files for Ninja
+dev-util/gn 0.1616: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
