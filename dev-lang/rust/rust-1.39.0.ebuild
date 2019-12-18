@@ -64,15 +64,16 @@ COMMON_DEPEND="
 	net-misc/curl[ssl]
 	system-llvm? (
 		${LLVM_DEPEND}
+		>=sys-devel/clang-runtime-8.0[libcxx]
 	)
 "
 
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	|| (
-		>=sys-devel/gcc-4.7
-		>=sys-devel/clang-3.5
-	)
+		>=sys-devel/gcc-8.3
+		>=sys-devel/clang-8.0
+		)
 	dev-util/cmake
 "
 
