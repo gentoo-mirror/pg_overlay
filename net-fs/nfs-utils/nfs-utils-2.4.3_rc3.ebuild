@@ -66,7 +66,6 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.2.8-cross-build.patch
 	"${FILESDIR}"/${PN}-2.4.2-no-werror.patch
-	"${FILESDIR}"/${PN}-2.4.1-statx.patch #688644
 	"${FILESDIR}"/${PN}-2.4.2-Ensure-consistent-struct-stat.patch
 )
 
