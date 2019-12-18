@@ -654,8 +654,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-warnings-as-errors
 	mozconfig_annotate '' --disable-webrtc
 	mozconfig_annotate '' --disable-webspeech
-	mozconfig_annotate '' --disable-webspeechtestbackend
-
 
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --without-google-location-service-api-keyfile
