@@ -52,10 +52,14 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon pgo
 	pulseaudio +screenshot selinux startup-notification +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus +jit +kde"
+	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus +jit +kde cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( lto )
-	kde? ( !bindist )"
+	cross-lto? ( clang lto )
+	thinlto? ( lto )
+	kde? ( !bindist )
+	wifi? ( dbus )
+	|| ( cross-lto thinlto )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
@@ -220,10 +224,6 @@ pkg_setup() {
 		if ! has usersandbox $FEATURES ; then
 			die "You must enable usersandbox as X server can not run as root!"
 		fi
-
-		if ! use clang ; then
-			die "Using GCC and PGO is currently broken!"
-		fi
 	fi
 
 	# Avoid PGO profiling problems due to enviroment leakage
@@ -270,6 +270,7 @@ src_prepare() {
 	use !wayland && rm -f "${WORKDIR}/firefox/2019_mozilla-bug1539471.patch"
 	eapply "${WORKDIR}/firefox"
 	eapply "${FILESDIR}/${PN}-69.0-lto-gcc-fix.patch"
+	eapply "${FILESDIR}/mozilla-bug1601707-gcc-fixup.patch"
 	eapply "${FILESDIR}/${PN}-71.0-bug1602358-fix-older-builds-with-newer-cbindgen.patch"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -330,6 +331,9 @@ src_prepare() {
 	use !dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-accessibility.patch"
+	# In 72 upstream
+	eapply "${FILESDIR}/${PN}-$(get_major_version)-Use_-import-instr-limit_to_mitigate_size_growth_from-ThinLTO.patch"
+	eapply "${FILESDIR}/${PN}-$(get_major_version)-Fix_GCC-LTO_build_break.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -395,7 +399,7 @@ src_configure() {
 	fi
 
 	# Don't let user's LTO flags clash with upstream's flags
-	#filter-flags -flto*
+	filter-flags -flto*
 
 	if use lto ; then
 		local show_old_compiler_warning=
@@ -447,13 +451,27 @@ src_configure() {
 			ewarn ""
 			sleep 5
 		fi
-		mozconfig_annotate '+lto-cross' --enable-lto=cross
-		mozconfig_annotate '+lto-full' --enable-lto=full
+
+		if use cross-lto ; then
+			mozconfig_annotate '+lto-cross' --enable-lto=cross
+			mozconfig_annotate '+lto-cross' MOZ_LTO=1
+			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
+			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
+			append-flags --target=x86_64-unknown-linux-gnu
+		elif use thinlto ; then
+			mozconfig_annotate '+lto-thin' --enable-lto=thin
+			mozconfig_annotate '+lto-thin' MOZ_LTO=1
+			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
+		else
+			mozconfig_annotate '+lto-full' --enable-lto=full
+			mozconfig_annotate '+lto-full' MOZ_LTO=1
+			mozconfig_annotate '+lto-full' MOZ_LTO=full
+		fi
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
-			mozconfig_annotate '+Enable PGO on Rust code' --enable-cross-pgo
+			mozconfig_annotate 'enable PGO on Rust code' --enable-cross-pgo
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -651,6 +669,7 @@ src_configure() {
 	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
 	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
+	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
@@ -658,7 +677,6 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
 
-	use lto && mozconfig_annotate '+lto' MOZ_LTO=1 && mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
 	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
@@ -666,6 +684,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
+	echo "export RUSTFLAGS=-Copt-level=3" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
