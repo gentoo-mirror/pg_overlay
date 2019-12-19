@@ -200,7 +200,6 @@ sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/ncurses 6.1_p20191207: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
 www-client/firefox 71.0: Firefox Web Browser
-www-client/ungoogled-chromium 79.0.3945.88_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
