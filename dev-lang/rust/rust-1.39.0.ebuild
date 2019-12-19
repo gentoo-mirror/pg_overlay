@@ -259,14 +259,14 @@ src_configure() {
 
 src_compile() {
 	env $(cat "${S}"/config.env)\
-		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) --opt-level=3 \
+		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) RUSTFLAGS=-Copt-level=3 \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
 	local rust_target abi_libdir
 
-	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml --opt-level=3 \
+	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml RUSTFLAGS=-Copt-level=3 \
 	--exclude src/tools/miri || die
 
 	# bug #689562, #689160
