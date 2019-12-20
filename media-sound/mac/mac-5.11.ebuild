@@ -42,5 +42,5 @@ src_compile() {
 }
 
 src_install() {
-    emake DESTDIR=${D} prefix=${EPREFIX}/usr libdir=${EPREFIX}/$(get_libdir) install
+    emake DESTDIR=${D} prefix=${EPREFIX}/usr libdir=${EPREFIX}/usr/$(get_libdir) install
 }
