@@ -14,15 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND=""
-DEPEND="
-	sys-apps/sed
-"
-
-#S=${WORKDIR}/MAC_SDK_511
-
-DOCS=( AUTHORS ChangeLog NEWS TODO REAls DME src/History.txt src/Credits.txt ChangeLog.shntool )
-
-RESTRICT="mirror"
+DEPEND=""
 
 src_unpack() {
 	mkdir ${S}
@@ -33,9 +25,7 @@ src_unpack() {
 src_prepare() {
 	default
 	cp Source/Projects/NonWindows/Makefile .
-	#sed -i s:/usr/local:/usr:g Makefile
-	#sed -i s:$(prefix)/lib:$(prefix)/lib64:g Makefile
-	 }
+}
 
 src_compile() {
 	emake prefix=${EPREFIX}/usr libdir=${EPREFIX}/usr/$(get_libdir)
