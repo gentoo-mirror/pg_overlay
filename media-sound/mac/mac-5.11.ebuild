@@ -33,12 +33,12 @@ src_unpack() {
 src_prepare() {
 	default
 	cp Source/Projects/NonWindows/Makefile .
-	sed -i s:/usr/local:/usr:g Makefile
-	 sed -i s:$(prefix)/lib:$(prefix)/lib64:g Makefile
+	#sed -i s:/usr/local:/usr:g Makefile
+	#sed -i s:$(prefix)/lib:$(prefix)/lib64:g Makefile
 	 }
 
 src_compile() {
-	emake
+	emake DESTDIR="${D}" PREFIX=/usr LIBDIR=$(get_libdir)
 }
 
 src_install() {
