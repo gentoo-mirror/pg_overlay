@@ -20,7 +20,7 @@ DEPEND="
 
 #S=${WORKDIR}/MAC_SDK_511
 
-DOCS=( AUTHORS ChangeLog NEWS TODO README src/History.txt src/Credits.txt ChangeLog.shntool )
+DOCS=( AUTHORS ChangeLog NEWS TODO REAls DME src/History.txt src/Credits.txt ChangeLog.shntool )
 
 RESTRICT="mirror"
 
@@ -42,5 +42,5 @@ src_compile() {
 }
 
 src_install() {
-    emake PREFIX= EPREFIX="${EPREFIX}" BINDIR=$(get_usr) LIBDIR=$(get_libdir) install
+    emake DESTDIR="${ED}" PREFIX= EPREFIX="${EPREFIX}" BINDIR=$(get_usr) LIBDIR=$(get_libdir) install
 }
