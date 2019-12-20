@@ -38,7 +38,7 @@ src_prepare() {
 	 }
 
 src_compile() {
-	emake prefix=${EPREFIX}/usr libdir=$(get_libdir)
+	emake prefix=${EPREFIX}/usr libdir=${EPREFIX}/usr/$(get_libdir)
 }
 
 src_install() {
