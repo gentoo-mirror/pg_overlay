@@ -9,6 +9,7 @@ app-crypt/acme 1.0.0: An implementation of the ACME protocol
 app-crypt/certbot 1.0.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.0.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-emulation/virtualbox 6.1.0: Family of powerful x86 virtualization products for enterprise and home use
+app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
@@ -144,6 +145,7 @@ mail-client/thunderbird 68.3.1: Thunderbird Mail Client
 media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.21.0-r1: Reusable library for GPU-accelerated image processing primitives
+media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
 media-libs/libvpx 1.8.2: WebM VP8 and VP9 Codec SDK
 media-libs/mesa 19.3.1 9999: OpenGL-like graphic library for Linux
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
@@ -202,6 +204,7 @@ sys-libs/glibc 2.30-r3: GNU libc C library
 sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/ncurses 6.1_p20191207: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
+sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 www-client/firefox 71.0: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
