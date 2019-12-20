@@ -10,4 +10,4 @@ RESTRICT=mirror
 SLOT=0
 SRC_URI=http://monkeysaudio.com/files/MAC_SDK_511.zip -> mac-5.11.zip
 _eclasses_=autotools	ea7865c8fba1ea8d3639f355fffe1a3c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
-_md5_=a8fa48fdaface93043be0c10ed3bc273
+_md5_=58db25926211e84d417a6936a35a04cf
