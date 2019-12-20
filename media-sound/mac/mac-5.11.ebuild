@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools prefix
+inherit autotools
 
 DESCRIPTION="Monkey's Audio Codecs"
 HOMEPAGE="https://www.monkeysaudio.com"
@@ -38,9 +38,9 @@ src_prepare() {
 	 }
 
 src_compile() {
-	emake DESTDIR="${D}" PREFIX=/usr LIBDIR=$(get_libdir)
+	emake PREFIX= EPREFIX="${EPREFIX}" BINDIR=$(get_usr)/bin LIBDIR=$(get_libdir)
 }
 
 src_install() {
-    emake DESTDIR="${D}" PREFIX=/usr install
+    emake PREFIX= EPREFIX="${EPREFIX}" BINDIR=$(get_usr)/bin LIBDIR=$(get_libdir) install
 }
