@@ -142,7 +142,7 @@ mail-client/thunderbird 68.3.1: Thunderbird Mail Client
 media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.21.0-r1: Reusable library for GPU-accelerated image processing primitives
-media-libs/libvpx 1.8.1: WebM VP8 and VP9 Codec SDK
+media-libs/libvpx 1.8.2: WebM VP8 and VP9 Codec SDK
 media-libs/mesa 19.3.0 9999: OpenGL-like graphic library for Linux
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
 media-libs/vulkan-layers 1.1.130: Vulkan Validation Layers
