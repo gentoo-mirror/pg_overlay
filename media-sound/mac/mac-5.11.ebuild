@@ -31,7 +31,9 @@ DOCS=( AUTHORS ChangeLog NEWS TODO README src/History.txt src/Credits.txt Change
 RESTRICT="mirror"
 
 src_unpack() {
-	unpack ${A} ${P}
+	mkdir ${S}
+	cd ${S}
+	unpack ${A}
 }
 
 src_prepare() {
