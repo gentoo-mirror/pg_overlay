@@ -21,7 +21,8 @@ else
 	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 fi
 
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+RUST_STAGE0_VERSION=${PV}
+#RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -90,7 +91,8 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 QA_FLAGS_IGNORED="usr/bin/* usr/lib*/${P}"
 
 PATCHES=(
-	"${FILESDIR}"/rust-pr65474-split-rustc-dev.patch
+	"${FILESDIR}"/rust-pr66317-bindir-relative.patch
+	"${FILESDIR}"/rust-issue-67242-ignore-arm-foreign-exceptions.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -272,9 +274,7 @@ src_install() {
 
 	# bug #689562, #689160
 	rm "${D}/etc/bash_completion.d/cargo" || die
-	pushd "${D}" > /dev/null || die
-	rmdir -p etc/bash_completion.d || die
-	popd > /dev/null || die
+	rmdir "${D}"/etc{/bash_completion.d,} || die
 	dobashcomp build/tmp/dist/cargo-image/etc/bash_completion.d/cargo
 
 	mv "${ED}/usr/bin/rustc" "${ED}/usr/bin/rustc-${PV}" || die
