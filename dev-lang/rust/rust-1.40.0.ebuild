@@ -153,6 +153,7 @@ src_prepare() {
 }
 
 src_configure() {
+	export RUSTFLAGS=-Copt-level=3
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -260,14 +261,14 @@ src_configure() {
 }
 
 src_compile() {
-	#export RUSTFLAGS=-Copt-level=3
+	export RUSTFLAGS=-Copt-level=3
 	env $(cat "${S}"/config.env)\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
-	#export RUSTFLAGS=-Copt-level=3
+	export RUSTFLAGS=-Copt-level=3
 	local rust_target abi_libdir
 
 	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml \
