@@ -5,23 +5,17 @@ EAPI=7
 
 inherit autotools
 
-MY_PN=monkeys-audio
-MY_PV=$(ver_cut 1-2)-u$(ver_cut 3)-b$(ver_cut 4)-s$(ver_cut 5)
-MY_P=${MY_PN}_${MY_PV}
-
 DESCRIPTION="Monkey's Audio Codecs"
 HOMEPAGE="https://www.monkeysaudio.com"
 SRC_URI="http://monkeysaudio.com/files/MAC_SDK_511.zip -> ${P}.zip"
 
 LICENSE="mac"
 SLOT="0"
-KEYWORDS="alpha amd64 ppc ppc64 sparc x86"
-IUSE="cpu_flags_x86_mmx static-libs"
+KEYWORDS="~amd64"
 
 RDEPEND=""
 DEPEND="
 	sys-apps/sed
-	cpu_flags_x86_mmx? ( dev-lang/yasm )
 "
 
 #S=${WORKDIR}/MAC_SDK_511
@@ -39,8 +33,9 @@ src_unpack() {
 src_prepare() {
 	default
 	cp Source/Projects/NonWindows/Makefile .
-	 sed -i s:/usr/local:/usr:g Makefile
-}
+	sed -i s:/usr/local:/usr:g Makefile
+	 sed -i s:$(prefix)/lib:$(prefix)/lib64:g Makefile
+	 }
 
 src_compile() {
 	emake
