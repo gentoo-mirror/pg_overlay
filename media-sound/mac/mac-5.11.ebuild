@@ -38,9 +38,9 @@ src_prepare() {
 	 }
 
 src_compile() {
-	emake PREFIX= EPREFIX="${EPREFIX}" BINDIR=$(get_usr) LIBDIR=$(get_libdir)
+	emake --prefix=${EPREFIX}/usr
 }
 
 src_install() {
-    emake DESTDIR="${ED}" PREFIX= EPREFIX="${EPREFIX}" BINDIR=$(get_usr) LIBDIR=$(get_libdir) install
+    emake --prefix=${EPREFIX}/usr install
 }
