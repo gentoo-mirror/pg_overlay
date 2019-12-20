@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools
+inherit autotools prefix
 
 DESCRIPTION="Monkey's Audio Codecs"
 HOMEPAGE="https://www.monkeysaudio.com"
