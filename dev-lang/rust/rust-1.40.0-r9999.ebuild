@@ -262,7 +262,7 @@ src_configure() {
 
 src_compile() {
 	export RUSTFLAGS=-Copt-level=3
-	"${EPYTHON}" ./x.py dist -vv -j$(makeopts_jobs)
+	"${EPYTHON}" ./x.py dist -vv --config="${S}"/config.toml -j$(makeopts_jobs) --exclude src/tools/miri 
 
 	env $(cat "${S}"/config.env)\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
