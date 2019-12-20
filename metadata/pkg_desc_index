@@ -25,6 +25,7 @@ app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/asciidoc 9.0.0_rc1: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
+app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5: A software that lets you send anything you want directly to a pastebin
 app-text/po4a 0.57_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
@@ -36,6 +37,7 @@ dev-libs/glib 2.63.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.62.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
+dev-libs/icu 65.1: International Components for Unicode
 dev-libs/jsoncpp 1.9.2: C++ JSON reader and writer
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
