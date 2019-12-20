@@ -39,6 +39,7 @@ src_unpack() {
 src_prepare() {
 	default
 	cp Source/Projects/NonWindows/Makefile .
+	 sed -i s:/usr/local:/usr:g Makefile
 }
 
 src_compile() {
