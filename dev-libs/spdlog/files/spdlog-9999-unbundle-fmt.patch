@@ -30,16 +30,3 @@ index 9902898f..5e92a592 100644
  #endif
 +
 +#include <fmt/ostream.h>
-diff --git a/src/spdlog.cpp b/src/spdlog.cpp
-index be91412d..d68dd522 100644
---- a/src/spdlog.cpp
-+++ b/src/spdlog.cpp
-@@ -104,7 +104,7 @@ template std::shared_ptr<spdlog::logger> spdlog::stderr_logger_st<spdlog::async_
- // All rights reserved.
- 
- #if !defined(SPDLOG_FMT_EXTERNAL)
--#include "spdlog/fmt/bundled/format-inl.h"
-+#include <fmt/format-inl.h>
- 
- FMT_BEGIN_NAMESPACE
- template struct internal::basic_data<void>;
