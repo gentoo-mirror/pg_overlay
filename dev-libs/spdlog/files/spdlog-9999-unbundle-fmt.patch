@@ -36,5 +36,6 @@ index be91412d..d68dd522 100644
 +++ b/src/spdlog.cpp
 @@ -19,3 +19,3 @@
  #include "spdlog/details/null_mutex.h"
+-
 +#include <fmt/format-inl.h> 
  #include <mutex>
