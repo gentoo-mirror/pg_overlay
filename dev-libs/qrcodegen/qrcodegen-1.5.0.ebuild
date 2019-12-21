@@ -20,6 +20,8 @@ RDEPEND=""
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}"
 
+S=${WORDDIR}/QR-Code-genetor-${PV}
+
 PATCHES=( "${FILESDIR}/batch-test.patch"
 		"${FILESDIR}/c-lib.patch"
 		"${FILESDIR}/cpp-lib.patch" )
