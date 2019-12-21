@@ -39,7 +39,6 @@ dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based li
 dev-libs/gobject-introspection-common 1.62.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 65.1: International Components for Unicode
-dev-libs/jsoncpp 1.9.2: C++ JSON reader and writer
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/re2 0.2019.12.01: An efficient, principled regular expression library
@@ -129,6 +128,7 @@ dev-util/gn 0.1616: GN is a meta-build system that generates build files for Nin
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
+dev-util/mdds 1.5.0: A collection of multi-dimensional data structure and indexing algorithm
 dev-util/meson 0.52.1_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 0.7: ninja-compatible build tool written in C
