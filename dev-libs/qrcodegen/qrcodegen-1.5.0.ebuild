@@ -3,11 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
-
-inherit autotools libtool python-any-r1
-
-DESCRIPTION="Lightweight library for extracting data from files archived in a single zip file"
+DESCRIPTION="High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust."
 HOMEPAGE="https://www.nayuki.io/page/qr-code-generator-library/"
 SRC_URI="https://github.com/nayuki/QR-Code-generator/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
@@ -27,12 +23,12 @@ PATCHES=( "${FILESDIR}/batch-test.patch"
 		"${FILESDIR}/cpp-lib.patch" )
 
 src_compile() {
-	default
 	cd "${S}"/cpp
 	emake
 }
 
 src_install() {
-	default
+	cd "${S}"/cpp
+	emake DESTDIR=${D} install-header
+	emake DESTDIR=${D} LIBDIR=${D}/usr/$(get_libdir) install-shared
 }
-
