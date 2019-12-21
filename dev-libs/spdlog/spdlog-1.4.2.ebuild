@@ -26,19 +26,18 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-#PATCHES=( "${FILESDIR}/${PN}-9999-unbundle-fmt.patch" )
+PATCHES=( "${FILESDIR}/include_cassert.patch" )
 
 src_configure() {
-	#rm -r include/spdlog/fmt/bundled || die
-	filter-flags -Wfatal*
-	filter-flags *errors
-	append-flags -Wno-error -Wno-error=all
+	rm -r include/spdlog/fmt/bundled || die
 
 	local mycmakeargs=(
-		-DSPDLOG_BUILD_EXAMPLE=no
-		-DSPDLOG_BUILD_BENCH=no
+		-DSPDLOG_BUILD_EXAMPLE=OFF
+		-DSPDLOG_BUILD_BENCH=OFF
 		-DSPDLOG_BUILD_TESTS=$(usex test)
-		-DSPDLOG_FMT_EXTERNAL=yes
+		-DCMAKE_BUILD_TYPE=Release
+		-DSPDLOG_BUILD_SHARED=ON
+		-DSPDLOG_FMT_EXTERNAL=ON
 	)
 
 	cmake-utils_src_configure
