@@ -35,6 +35,7 @@ src_compile() {
 src_install() {
 	default
 	cd "${S}"/cpp
-	emake DESTDIR=${D} install
+	emake DESTDIR=${D} install-header
+	emake DESTDIR=${D} LIBDIR=${D}/usr/$(get_libdir) install-header
 }
 
