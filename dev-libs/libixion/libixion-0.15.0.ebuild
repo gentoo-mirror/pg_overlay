@@ -28,7 +28,9 @@ RDEPEND="
 	>=dev-util/mdds-1.5.0:1=
 	python? ( ${PYTHON_DEPS} )
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	dev-libs/spdlog
+"
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
