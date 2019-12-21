@@ -43,11 +43,7 @@ diff --git a/src/fmt.cpp b/src/fmt.cpp
 index be91412d..d68dd522 100644
 --- a/src/fmt.cpp
 +++ b/src/fmt.cpp
-@@ -1,10 +1,7 @@
- #ifndef SPDLOG_COMPILED_LIB
- #error Please define SPDLOG_COMPILED_LIB to compile this file.
- #endif
- 
+@@ -5,6 +5,3 @@
  // Slightly modified version of fmt lib's format.cc source file.
  // Copyright (c) 2012 - 2016, Victor Zverovich
  // All rights reserved.
