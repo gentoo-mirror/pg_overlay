@@ -34,6 +34,7 @@ src_compile() {
 
 src_install() {
 	default
-	make DESTDIR=${D} install
+	cd "${S}"/cpp
+	emake DESTDIR=${D} install
 }
 
