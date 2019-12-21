@@ -26,13 +26,11 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-#PATCHES=( "${FILESDIR}/${PN}-9999-unbundle-fmt.patch" )
+PATCHES=( "${FILESDIR}/${PN}-unbundle-fmt.patch"
+        "${FILESDIR}/include_cassert.patch" )
 
 src_configure() {
-	#rm -r include/spdlog/fmt/bundled || die
-	filter-flags -Wfatal*
-	filter-flags *errors
-	append-flags -Wno-error -Wno-error=all
+	rm -r include/spdlog/fmt/bundled || die
 
 	local mycmakeargs=(
 		-DSPDLOG_BUILD_EXAMPLE=no
