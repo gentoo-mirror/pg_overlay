@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils flag-o-matic
+inherit cmake-utils
 
 DESCRIPTION="Very fast, header only, C++ logging library"
 HOMEPAGE="https://github.com/gabime/spdlog"
@@ -22,15 +22,15 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 DEPEND="
-	>=dev-libs/libfmt-5.0.0
+	>=dev-libs/libfmt-6.0.0
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/include_cassert.patch" )
+PATCHES=( "${FILESDIR}/${PN}-fix-cassert.patch"
+		"${FILESDIR}/${PN}-fix-cmake.patch"
+		"${FILESDIR}/${PN}-external-fmt.patch" )
 
 src_configure() {
-	rm -r include/spdlog/fmt/bundled || die
-
 	local mycmakeargs=(
 		-DSPDLOG_BUILD_EXAMPLE=OFF
 		-DSPDLOG_BUILD_BENCH=OFF
