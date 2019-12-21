@@ -35,6 +35,7 @@ src_configure() {
 		-DSPDLOG_BUILD_EXAMPLE=no
 		-DSPDLOG_BUILD_BENCH=no
 		-DSPDLOG_BUILD_TESTS=$(usex test)
+		-DSPDLOG_FMT_EXTERNAL=yes
 	)
 
 	cmake-utils_src_configure

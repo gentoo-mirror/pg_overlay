@@ -39,17 +39,3 @@ index be91412d..d68dd522 100644
 -
 +#include <fmt/format-inl.h> 
  #include <mutex>
-diff --git a/src/fmt.cpp b/src/fmt.cpp
-index be91412d..d68dd522 100644
---- a/src/fmt.cpp
-+++ b/src/fmt.cpp
-@@ -6,9 +6,6 @@
- // Copyright (c) 2012 - 2016, Victor Zverovich
- // All rights reserved.
- 
--#if !defined(SPDLOG_FMT_EXTERNAL)
--#include "spdlog/fmt/bundled/format-inl.h"
--
- FMT_BEGIN_NAMESPACE
- template struct internal::basic_data<void>;
- template FMT_API internal::locale_ref::locale_ref(const std::locale &loc);
