@@ -31,7 +31,7 @@ RDEPEND="${DEPEND}"
 src_configure() {
 	#rm -r include/spdlog/fmt/bundled || die
 
-	append-flags -Wno-fatal-error -Wno-error
+	append-flags -Wno-error -Wno-error=fatal
 
 	local mycmakeargs=(
 		-DSPDLOG_BUILD_EXAMPLE=no
