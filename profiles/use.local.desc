@@ -351,6 +351,12 @@ sys-devel/llvm:gold - Build the gold linker plugin
 sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
 sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
 sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
+sys-libs/compiler-rt:clang - Force building using installed clang (rather than the default CC/CXX).
+sys-libs/compiler-rt-sanitizers:clang - Force building using installed clang (rather than the default CC/CXX).
+sys-libs/compiler-rt-sanitizers:libfuzzer - Build fuzzing runtime.
+sys-libs/compiler-rt-sanitizers:profile - Build profiling runtime.
+sys-libs/compiler-rt-sanitizers:sanitize - Build sanitizer runtimes.
+sys-libs/compiler-rt-sanitizers:xray - Build XRay runtime.
 sys-libs/glibc:cet - Enable Intel Control-flow Enforcement Technology (needs binutils 2.29 and gcc 8)
 sys-libs/glibc:compile-locales - build *all* locales in src_install; this is generally meant for stage building only as it ignores /etc/locale.gen file and can be pretty slow
 sys-libs/glibc:crypt - build and install libcrypt and crypt.h
@@ -371,6 +377,14 @@ sys-libs/libblockdev:kbd - Enable kernel block device support.
 sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-fs/lvm2.
 sys-libs/libblockdev:tools - Build tools
 sys-libs/libblockdev:vdo - Enable Virtual Data Optimizer support.
+sys-libs/libcxx:libcxxabi - Build on top of sys-libs/libcxxabi instead of gcc's libsupc++ (avoids depending on gcc).
+sys-libs/libcxx:libcxxrt - Build on top of sys-libs/libcxxrt instead of gcc's libsupc++ (avoids depending on gcc).
+sys-libs/libcxx:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependence on gcc.
+sys-libs/libcxxabi:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependency on gcc
+sys-libs/libomp:cuda - Build CUDA offloading plugin (only with USE=offload)
+sys-libs/libomp:hwloc - Enable CPU affinity support via hwloc
+sys-libs/libomp:offload - Support offloading OpenMP using libomptarget
+sys-libs/libomp:ompt - Enable OpenMP Tools Interface support
 sys-process/htop:openvz - Enable openvz support
 sys-process/htop:vserver - Enable vserver support
 www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
