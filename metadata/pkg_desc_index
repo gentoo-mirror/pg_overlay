@@ -201,8 +201,8 @@ sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
-sys-devel/clang 9.0.1_rc3: C language family frontend for LLVM
-sys-devel/llvm 9.0.1_rc3: Low Level Virtual Machine
+sys-devel/clang 9.0.1: C language family frontend for LLVM
+sys-devel/llvm 9.0.1: Low Level Virtual Machine
 sys-fs/xfsprogs 5.4.0_rc1 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/glibc 2.30-r3: GNU libc C library
