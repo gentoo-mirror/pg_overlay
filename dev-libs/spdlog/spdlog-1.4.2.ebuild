@@ -29,6 +29,8 @@ RDEPEND="${DEPEND}"
 PATCHES=( "${FILESDIR}/include_cassert.patch" )
 
 src_configure() {
+	rm -r include/spdlog/fmt/bundled || die
+
 	local mycmakeargs=(
 		-DSPDLOG_BUILD_EXAMPLE=OFF
 		-DSPDLOG_BUILD_BENCH=OFF
