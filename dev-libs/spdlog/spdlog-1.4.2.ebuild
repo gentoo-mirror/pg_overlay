@@ -30,7 +30,8 @@ RDEPEND="${DEPEND}"
 
 src_configure() {
 	#rm -r include/spdlog/fmt/bundled || die
-
+	filter-flags -Wfatal*
+	filter-flags *errors
 	append-flags -Wno-error -Wno-error=all
 
 	local mycmakeargs=(
