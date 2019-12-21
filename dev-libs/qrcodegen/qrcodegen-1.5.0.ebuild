@@ -34,5 +34,6 @@ src_compile() {
 
 src_install() {
 	default
+	make DESTDIR=${D} install
 }
 
