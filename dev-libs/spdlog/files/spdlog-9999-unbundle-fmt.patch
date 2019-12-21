@@ -30,3 +30,11 @@ index 9902898f..5e92a592 100644
  #endif
 +
 +#include <fmt/ostream.h>
+diff --git a/src/spdlog.cpp b/src/spdlog.cpp
+index be91412d..d68dd522 100644
+--- a/src/spdlog.cpp
++++ b/src/spdlog.cpp
+@@ -19,3 +19,3 @@ template std::shared_ptr<spdlog::logger> spdlog::stderr_logger_st<spdlog::async_
+ #include "spdlog/details/null_mutex.h"
++#include <fmt/format-inl.h> 
+ #include <mutex>
