@@ -26,7 +26,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/${PN}-9999-unbundle-fmt.patch" )
+#PATCHES=( "${FILESDIR}/${PN}-9999-unbundle-fmt.patch" )
 
 src_configure() {
 	rm -r include/spdlog/fmt/bundled || die
