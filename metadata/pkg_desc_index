@@ -144,6 +144,7 @@ gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for
 gnome-base/librsvg 2.47.1: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
+kde-apps/libkleo 19.12.0: Library for encryption handling
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.3 5.17.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.3.1: Thunderbird Mail Client
