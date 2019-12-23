@@ -21,6 +21,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	default
+	sed -i s/-Wl,//g src/include/defaults.mk || die
 }
 
 src_configure() {
