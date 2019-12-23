@@ -21,6 +21,8 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	default
+	rm src/include/defaults.mk || die
+	touch src/include/defaults.mk || die
 }
 
 src_configure() {
