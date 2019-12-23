@@ -1,4 +1,4 @@
-From d4de5a672d8c03b82ba70c1b737926bcf078f761 Mon Sep 17 00:00:00 2001
+From 1c0241847e845a8da265aa89f297d3db6ae483b1 Mon Sep 17 00:00:00 2001
 From: Bert Huijben <rhuijben@apache.org>
 Date: Wed, 4 Oct 2017 14:56:22 +0000
 Subject: [PATCH] Fix syntax of a print() in the scons file to unbreak building
