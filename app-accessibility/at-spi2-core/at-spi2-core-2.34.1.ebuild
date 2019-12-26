@@ -1,17 +1,17 @@
 # Copyright 1999-2019 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit gnome.org meson multilib-minimal systemd virtualx xdg
+inherit gnome.org meson multilib-minimal virtualx xdg
 
 DESCRIPTION="D-Bus accessibility specifications and registration daemon"
 HOMEPAGE="https://wiki.gnome.org/Accessibility"
 
-LICENSE="LGPL-2+"
+LICENSE="LGPL-2.1+"
 SLOT="2"
 IUSE="X gtk-doc +introspection"
-KEYWORDS="alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 s390 ~sparc x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-macos ~x86-macos"
 
 RDEPEND="
 	>=sys-apps/dbus-1.5[${MULTILIB_USEDEP}]
@@ -23,7 +23,9 @@ RDEPEND="
 		x11-libs/libXi[${MULTILIB_USEDEP}]
 	)
 "
-DEPEND="${RDEPEND}
+DEPEND="${RDEPEND}"
+BDEPEND="
+	>=dev-util/meson-0.50.0
 	dev-util/glib-utils
 	gtk-doc? (
 		>=dev-util/gtk-doc-1.25
@@ -39,10 +41,10 @@ PATCHES=(
 
 multilib_src_configure() {
 	local emesonargs=(
+		-Dsystemd_user_dir=""
 		-Ddocs=$(multilib_native_usex gtk-doc true false)
 		-Dintrospection=$(multilib_native_usex introspection)
 		-Dx11=$(usex X)
-		-Dsystemd_user_dir="$(systemd_get_userunitdir)"
 	)
 	meson_src_configure
 }

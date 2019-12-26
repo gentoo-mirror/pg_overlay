@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python2_7 )
-USE_RUBY="ruby25 ruby26"
+USE_RUBY="ruby26 ruby27"
 inherit check-reqs cmake-utils flag-o-matic python-any-r1 qmake-utils ruby-single toolchain-funcs
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
@@ -117,10 +117,10 @@ src_configure() {
 		-DENABLE_X11_TARGET=$(usex X)
 	)
 
-	if has_version "virtual/rubygems[ruby_targets_ruby26]"; then
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby26) )
+	if has_version "virtual/rubygems[ruby_targets_ruby27]"; then
+		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby27) )
 	else
-		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby25) )
+		mycmakeargs+=( -DRUBY_EXECUTABLE=$(type -P ruby26) )
 	fi
 
 	cmake-utils_src_configure
