@@ -46,7 +46,7 @@ dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/qrcodegen 1.5.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2019.12.01: An efficient, principled regular expression library
 dev-libs/spdlog 1.4.2: Very fast, header only, C++ logging library
-dev-libs/xmlrpc-c 1.51.9999: A lightweigt RPC library based on XML and HTTP
+dev-libs/xmlrpc-c 1.51.9999 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-perl/Alien-Build 1.920.0: Build external dependencies for use in CPAN
 dev-perl/Alien-Libxml2 0.110.0: Install the C libxml2 library on your system
@@ -143,7 +143,6 @@ gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for
 gnome-base/librsvg 2.47.1: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
-kde-apps/libkleo 19.12.0: Library for encryption handling
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.3 5.17.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.3.1: Thunderbird Mail Client
