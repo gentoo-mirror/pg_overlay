@@ -46,7 +46,7 @@ dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/qrcodegen 1.5.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2019.12.01: An efficient, principled regular expression library
 dev-libs/spdlog 1.4.2: Very fast, header only, C++ logging library
-dev-libs/xmlrpc-c 1.51.9999 1.54.9999: A lightweigt RPC library based on XML and HTTP
+dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-perl/Alien-Build 1.920.0: Build external dependencies for use in CPAN
 dev-perl/Alien-Libxml2 0.110.0: Install the C libxml2 library on your system
