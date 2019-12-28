@@ -207,7 +207,6 @@ sys-fs/xfsprogs 5.4.0_rc1 9999: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/compiler-rt 9.0.1: Compiler runtime library for clang (built-in part)
 sys-libs/compiler-rt-sanitizers 9.0.1: Compiler runtime libraries for clang (sanitizers & xray)
-sys-libs/glibc 2.30-r3: GNU libc C library
 sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/libcxx 9.0.1: New implementation of the C++ standard library, targeting C++11
 sys-libs/libcxxabi 9.0.1: Low level support for a standard C++ library
