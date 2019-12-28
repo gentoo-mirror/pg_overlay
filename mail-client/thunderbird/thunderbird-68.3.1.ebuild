@@ -443,12 +443,12 @@ src_configure() {
 			mozconfig_annotate '+lto-cross' MOZ_LTO=1
 			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
 			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
-			append-flags --target=x86_64-unknown-linux-gnu
-			append-ldflags --target=x86_64-unknown-linux-gnu
 		elif use thinlto ; then
 			mozconfig_annotate '+lto-thin' --enable-lto=thin
 			mozconfig_annotate '+lto-thin' MOZ_LTO=1
 			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
+			append-flags -flto=thin
+			append-ldflags -flto=thin
 		else
 			mozconfig_annotate '+lto-full' --enable-lto=full
 			mozconfig_annotate '+lto-full' MOZ_LTO=1
