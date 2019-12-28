@@ -43,9 +43,9 @@ src_prepare() {
 	l10n_find_plocales_changes lang "${PN}_" ".ts"
 	l10n_for_each_disabled_locale_do rem_locale
 
-	sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
+	#sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
 
-	rm -rv zlib/ || die
+	rm -rv quazip/ zlib/ || die
 }
 
 src_configure() {
