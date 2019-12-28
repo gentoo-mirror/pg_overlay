@@ -108,7 +108,7 @@ CDEPEND="
 	system-icu? ( >=dev-libs/icu-64.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
-	system-libvpx? ( =media-libs/libvpx-1.7*:0=[postproc] )
+	system-libvpx? ( >=media-libs/libvpx-1.8.2:0=[postproc] )
 	system-sqlite? ( >=dev-db/sqlite-3.29.0:3[secure-delete,debug=] )
 	system-webp? ( >=media-libs/libwebp-1.0.2:0= )
 	wifi? (
@@ -457,15 +457,20 @@ src_configure() {
 			mozconfig_annotate '+lto-cross' MOZ_LTO=1
 			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
 			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
-			append-flags --target=x86_64-unknown-linux-gnu
+			append-flags -flto=thin
+			append-ldflags -flto=thin
 		elif use thinlto ; then
 			mozconfig_annotate '+lto-thin' --enable-lto=thin
 			mozconfig_annotate '+lto-thin' MOZ_LTO=1
 			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
+			append-flags -flto=thin
+			append-ldflags -flto=thin
 		else
 			mozconfig_annotate '+lto-full' --enable-lto=full
 			mozconfig_annotate '+lto-full' MOZ_LTO=1
 			mozconfig_annotate '+lto-full' MOZ_LTO=full
+			append-flags -flto=full
+			append-ldflags -flto=full
 		fi
 
 		if use pgo ; then
