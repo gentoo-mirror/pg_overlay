@@ -16,6 +16,7 @@ IUSE="debug"
 
 RDEPEND="
 	dev-libs/crypto++:=
+	dev-libs/quazip
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtnetwork:5
@@ -42,8 +43,6 @@ src_prepare() {
 
 	l10n_find_plocales_changes lang "${PN}_" ".ts"
 	l10n_for_each_disabled_locale_do rem_locale
-
-	#sed 's/LIBS += -lz/LIBS += -lz -lcryptopp/' -i rbutilqt.pro || die
 
 	rm -rv quazip/ zlib/ || die
 }
