@@ -199,8 +199,7 @@ src_configure() {
 		--enable-optimizations
 		--with-lto
 	)
-
-	OPT="" econf "${myeconfargs[@]}"
+	ECONF_SOURCE="${S}" OPT="" econf "${myeconfargs[@]}"
 
 	if use threads && grep -q "#define POSIX_SEMAPHORES_NOT_ENABLED 1" pyconfig.h; then
 		eerror "configure has detected that the sem_open function is broken."
