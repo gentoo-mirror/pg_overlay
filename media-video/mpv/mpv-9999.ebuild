@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python3_{6,7,8} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=2.0.18
+WAF_PV=2.0.19
 
 inherit eapi7-ver flag-o-matic pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
@@ -139,7 +139,7 @@ src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
 
-	sed -i 's/2.0.9/2.0.18/g' bootstrap.py || die
+	sed -i 's/2.0.9/2.0.19/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 
 	default
@@ -259,6 +259,7 @@ src_configure() {
 		--disable-egl-android
 		--disable-uwp
 		--disable-audiounit
+		--disable-macos-media-player
 		--disable-wasapi
 		--disable-ios-gl
 		--disable-macos-touchbar
