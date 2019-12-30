@@ -73,9 +73,6 @@ COMMON_DEPEND="
 	system-llvm? (
 		${LLVM_DEPEND}
 		>=sys-devel/clang-runtime-8.0[libcxx]
-		dev-util/cmake
-		|| ( dev-util/ninja
-			dev-util/samurai )
 	)
 "
 
@@ -86,6 +83,11 @@ DEPEND="${COMMON_DEPEND}
 		>=sys-devel/clang-8.0
 	)
 	system-bootstrap? ( ${BOOTSTRAP_DEPEND}	)
+	system-llvm? (
+		dev-util/cmake
+		|| ( dev-util/ninja
+			dev-util/samurai )
+	)
 "
 
 RDEPEND="${COMMON_DEPEND}
@@ -101,7 +103,7 @@ REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 QA_FLAGS_IGNORED="
 	usr/bin/*-${PV}
 	usr/lib*/lib*.so
-	usr/lib/rurstlib/*/codegen-backends/librustc_codegen_llvm-llvm.so
+	usr/lib/rustlib/*/codegen-backends/librustc_codegen_llvm-llvm.so
 	usr/lib/rustlib/*/lib/lib*.so
 "
 
