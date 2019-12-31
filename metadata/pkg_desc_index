@@ -115,7 +115,6 @@ dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
 dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
 dev-python/pyhamcrest 1.9.0-r1: Hamcrest framework for matcher objects
 dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
-dev-python/pysol_cards 0.8.6: Deal PySol FreeCell cards
 dev-python/python-nbxmpp 0.6.10: Python library to use Jabber/XMPP networks in a non-blocking way
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/setproctitle 1.1.10-r1: Allow customization of the process title
