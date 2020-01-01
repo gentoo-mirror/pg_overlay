@@ -57,9 +57,9 @@ _CMAKE_ECLASS=1
 
 # @ECLASS-VARIABLE: CMAKE_REMOVE_MODULES_LIST
 # @DESCRIPTION:
-# Space-separated list of CMake modules that will be removed in $S during
-# src_prepare, in order to force packages to use the system version.
-# Set to empty to disable removing modules entirely.
+# Array of CMake modules that will be removed in $S during src_prepare,
+# in order to force packages to use the system version.
+# Set to "none" to disable removing modules entirely.
 : ${CMAKE_REMOVE_MODULES_LIST:=FindBLAS FindLAPACK}
 
 # @ECLASS-VARIABLE: CMAKE_USE_DIR
