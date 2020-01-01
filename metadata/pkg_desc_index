@@ -32,7 +32,7 @@ app-text/po4a 0.57_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 2.7.17-r1 3.8.1: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.40.0 1.40.0-r1: Systems programming language from Mozilla
+dev-lang/rust 1.40.0-r1: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.63.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.62.0: Introspection system for GObject-based libraries
@@ -123,7 +123,7 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/twisted 19.10.0: An asynchronous networking framework written in Python
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
-dev-util/cbindgen 0.12.0: A tool for generating C bindings to Rust code
+dev-util/cbindgen 0.12.1: A tool for generating C bindings to Rust code
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.63.3: GDBus code and documentation generator
 dev-util/glib-utils 2.63.3: Build utilities for GLib using projects
@@ -146,7 +146,6 @@ gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.3 5.17.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.3.1: Thunderbird Mail Client
-media-libs/libcue 2.2.1: CUE Sheet Parser Library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.29.1: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
