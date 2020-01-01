@@ -4,7 +4,7 @@
 EAPI=7
 PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
 
-inherit cmake-utils l10n xdg-utils
+inherit cmake l10n xdg-utils
 [[ ${PV} = 9999 ]] && inherit subversion
 
 DESCRIPTION="Qt5-based audio player with winamp/xmms skins support"
@@ -116,7 +116,7 @@ src_prepare() {
 	l10n_find_plocales_changes src/${PN}ui/translations "lib${PN}ui_" ".ts"
 	l10n_for_each_disabled_locale_do rm_locale
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -171,7 +171,7 @@ src_configure() {
 		-DUSE_SB=OFF
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 pkg_postinst() {
