@@ -21,10 +21,9 @@ DOCS=( CHANGES CONTRIBUTORS README )
 
 src_prepare() {
 	default
-	eautoreconf
 }
-src_configure() {
-	econf $(use_with ncurses)
+src_compile() {
+	emake
 }
 src_install() {
 	default
