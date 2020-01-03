@@ -26,5 +26,5 @@ src_compile() {
 	emake
 }
 src_install() {
-	default
+	emake DESTDIR="${D}" prefix="${EPREFIX}/usr" install
 }
