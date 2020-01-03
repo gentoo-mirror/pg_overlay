@@ -173,6 +173,7 @@ media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reportin
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
+media-video/ffmpeg 4.2.2_pre: Complete solution to record, convert and stream audio and video. Includes libavcodec
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-fs/nfs-utils 2.4.3_rc3: NFS client and server daemons
 net-libs/glib-networking 2.60.1: Network-related giomodules for glib
