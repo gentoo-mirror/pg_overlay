@@ -17,7 +17,7 @@ IUSE="ncurses"
 
 DEPEND="dev-libs/libpcre2[pcre32]"
 
-DOCS=( CHANGES CONTRIBUTORS README )
+DOCS=( CHANGES README )
 
 src_prepare() {
 	default
