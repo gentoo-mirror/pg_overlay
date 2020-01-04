@@ -13,6 +13,7 @@ app-misc/fdupes 9999: Identify/delete duplicate files residing within specified 
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
 app-misc/lfm 3.1: Last File Manager is a powerful file manager for the console
+app-misc/media-player-info 24: A repository of data files describing media player capabilities
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.2.0: Worker Filemanager: Amiga Directory Opus 4 clone
