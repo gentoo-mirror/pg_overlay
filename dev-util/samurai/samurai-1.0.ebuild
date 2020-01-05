@@ -10,6 +10,8 @@ LICENSE="ISC Apache-2.0 MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
+RDEPEND="!dev-util/ninja"
+
 src_install() {
     emake DESTDIR="${D}" PREFIX=/usr install
     dosym samu /usr/bin/ninja
