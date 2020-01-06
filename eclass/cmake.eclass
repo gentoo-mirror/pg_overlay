@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: cmake.eclass
@@ -103,6 +103,7 @@ inherit toolchain-funcs ninja-utils flag-o-matic multiprocessing xdg-utils
 
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_test src_install
 
+[[ ${CMAKE_MIN_VERSION} ]] && die "CMAKE_MIN_VERSION is banned; if necessary, set BDEPEND=\">=dev-util/cmake-${CMAKE_MIN_VERSION}\" directly"
 [[ ${CMAKE_BUILD_DIR} ]] && die "The ebuild must be migrated to BUILD_DIR"
 [[ ${CMAKE_REMOVE_MODULES} ]] && die "CMAKE_REMOVE_MODULES is banned, set CMAKE_REMOVE_MODULES_LIST=\"\" instead"
 [[ ${CMAKE_UTILS_QA_SRC_DIR_READONLY} ]] && die "Use CMAKE_QA_SRC_DIR_READONLY instead"
@@ -293,6 +294,8 @@ _cmake_modify-cmakelists() {
 cmake_src_prepare() {
 	debug-print-function ${FUNCNAME} "$@"
 
+	pushd "${S}" > /dev/null || die
+
 	default_src_prepare
 	_cmake_check_build_dir
 
@@ -325,6 +328,8 @@ cmake_src_prepare() {
 
 	# Remove dangerous things.
 	_cmake_modify-cmakelists
+
+	popd > /dev/null || die
 
 	# make ${S} read-only in order to detect broken build-systems
 	if [[ ${CMAKE_QA_SRC_DIR_READONLY} && ! ${CMAKE_IN_SOURCE_BUILD} ]]; then
@@ -562,7 +567,7 @@ cmake_build() {
 		emake)
 			[[ -e Makefile ]] || die "Makefile not found. Error during configure stage."
 			[[ "${CMAKE_VERBOSE}" != "OFF" ]] && local verbosity="VERBOSE=1"
-			emake "${verbosity} ""$@"
+			emake "${verbosity}" "$@"
 			;;
 		ninja)
 			[[ -e build.ninja ]] || die "build.ninja not found. Error during configure stage."
