@@ -1,5 +1,3 @@
-build-jit-atomic-always-lucky.patch
-build-cacheFlush-missing.patch
 build-disable-elfhack.patch
 
 firefox-enable-addons.patch
@@ -10,16 +8,10 @@ firefox-locale-debug.patch
 mozilla-gnome-shell-search-provider.patch
 mozilla-gnome-shell-search-provider-icons.patch
 kiosk-workaround.patch
-mozilla-1601707.patch
 
 mozilla-1196777.patch
-mozilla-1337988.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-bug1375074-save-restore-x28.patch
 mozilla-1568569.patch
-mozilla-1580174-webrtc-popup.patch
 mozilla-1603112-accept-lang.patch
 
-pgo.patch
 mozilla-1516081.patch
-mozilla-1516803.patch

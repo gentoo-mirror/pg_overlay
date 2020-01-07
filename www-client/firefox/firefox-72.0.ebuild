@@ -10,7 +10,7 @@ PYTHON_COMPAT=( python3_{6,7,8} )
 PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 
 # This list can be updated with scripts/get_langs.sh from the mozilla overlay
-MOZ_LANGS=( en en-US ru )
+MOZ_LANGS=( de en en-GB en-US ru )
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
@@ -105,6 +105,7 @@ CDEPEND="
 		>=media-libs/dav1d-0.3.0:=
 		>=media-libs/libaom-1.0.0:=
 	)
+	system-harfbuzz? ( >=media-libs/harfbuzz-2.5.3:0= >=media-gfx/graphite2-1.3.13 )
 	system-icu? ( >=dev-libs/icu-64.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
@@ -262,6 +263,7 @@ src_prepare() {
 	eapply "${WORKDIR}/firefox"
 	eapply "${FILESDIR}/${PN}-69.0-lto-gcc-fix.patch"
 	eapply "${FILESDIR}/mozilla-bug1601707-gcc-fixup-72.patch"
+	eapply "${FILESDIR}/patch-bug847568.patch"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
@@ -321,9 +323,6 @@ src_prepare() {
 	use !dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-accessibility.patch"
-	# In 72 upstream
-	eapply "${FILESDIR}/${PN}-$(get_major_version)-Use_-import-instr-limit_to_mitigate_size_growth_from-ThinLTO.patch"
-	eapply "${FILESDIR}/${PN}-$(get_major_version)-Fix_GCC-LTO_build_break.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -552,8 +551,8 @@ src_configure() {
 	mozconfig_use_enable startup-notification
 	mozconfig_use_enable system-sqlite
 	mozconfig_use_with system-av1
-	#mozconfig_use_with system-harfbuzz
-	#mozconfig_use_with system-harfbuzz system-graphite2
+	mozconfig_use_with system-harfbuzz
+	mozconfig_use_with system-harfbuzz system-graphite2
 	mozconfig_use_with system-icu
 	mozconfig_use_with system-jpeg
 	mozconfig_use_with system-libvpx
@@ -726,10 +725,10 @@ src_install() {
 		>>"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" || die
 
 	# force the graphite pref if system-harfbuzz is enabled, since the pref cant disable it
-	#if use system-harfbuzz ; then
-	#	echo "sticky_pref(\"gfx.font_rendering.graphite.enabled\",true);" \
-	#		>>"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" || die
-	#fi
+	if use system-harfbuzz ; then
+		echo "sticky_pref(\"gfx.font_rendering.graphite.enabled\",true);" \
+			>>"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" || die
+	fi
 
 	# force cairo as the canvas renderer on platforms without skia support
 	if [[ $(tc-endian) == "big" ]] ; then
