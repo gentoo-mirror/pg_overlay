@@ -1,4 +1,3 @@
-build-jit-atomic-always-lucky.patch
 build-cacheFlush-missing.patch
 build-disable-elfhack.patch
 
