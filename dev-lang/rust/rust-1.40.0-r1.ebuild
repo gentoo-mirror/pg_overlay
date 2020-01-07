@@ -219,6 +219,7 @@ src_configure() {
 		link-shared = $(toml_usex system-llvm)
 		use-libcxx = $(toml_usex system-llvm)
 		use-linker = "$(usex system-llvm lld)"
+
 		[build]
 		build = "${rust_target}"
 		host = ["${rust_target}"]
@@ -237,11 +238,13 @@ src_configure() {
 		sanitizers = false
 		profiler = false
 		local-rebuild = false
+
 		[install]
 		prefix = "${EPREFIX}/usr"
 		libdir = "lib"
 		docdir = "share/doc/${PF}"
 		mandir = "share/man"
+
 		[rust]
 		optimize = $(toml_usex !debug)
 		debug = $(toml_usex debug)
@@ -256,6 +259,8 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		llvm-libunwind = $(toml_usex system-llvm)
+
 		[dist]
 		src-tarball = false
 	EOF
