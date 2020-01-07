@@ -1,6 +1,0 @@
-fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-prefs/Set-DPI-to-system-settings.patch
-debian-hacks/Don-t-build-image-gtests.patch
-debian-hacks/Allow-to-override-ICU_DATA_FILE-from-the-environment.patch
-debian-hacks/Set-program-name-from-the-remoting-name.patch
-debian-hacks/Use-remoting-name-for-call-to-gdk_set_program_class.patch
