@@ -1,0 +1,11 @@
+diff -up firefox-63.0.1/intl/locale/LocaleService.cpp.old firefox-63.0.1/intl/locale/LocaleService.cpp
+--- firefox-63.0.1/intl/locale/LocaleService.cpp.old	2018-11-14 13:34:16.338285161 +0100
++++ firefox-63.0.1/intl/locale/LocaleService.cpp	2018-11-14 13:34:21.438270308 +0100
+@@ -708,7 +708,6 @@ LocaleService::GetDefaultLocale(nsACStri
+     GetGREFileContents("update.locale", &locale);
+     locale.Trim(" \t\n\r");
+     // This should never be empty.
+-    MOZ_ASSERT(!locale.IsEmpty());
+     if (SanitizeForBCP47(locale, true)) {
+       mDefaultLocale.Assign(locale);
+     }
