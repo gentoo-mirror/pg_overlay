@@ -321,9 +321,6 @@ src_prepare() {
 	use !dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-accessibility.patch"
-	# In 72 upstream
-	eapply "${FILESDIR}/${PN}-$(get_major_version)-Use_-import-instr-limit_to_mitigate_size_growth_from-ThinLTO.patch"
-	eapply "${FILESDIR}/${PN}-$(get_major_version)-Fix_GCC-LTO_build_break.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -552,8 +549,8 @@ src_configure() {
 	mozconfig_use_enable startup-notification
 	mozconfig_use_enable system-sqlite
 	mozconfig_use_with system-av1
-	#mozconfig_use_with system-harfbuzz
-	#mozconfig_use_with system-harfbuzz system-graphite2
+	mozconfig_use_with system-harfbuzz
+	mozconfig_use_with system-harfbuzz system-graphite2
 	mozconfig_use_with system-icu
 	mozconfig_use_with system-jpeg
 	mozconfig_use_with system-libvpx
