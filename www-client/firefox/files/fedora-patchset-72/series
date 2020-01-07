@@ -12,7 +12,6 @@ kiosk-workaround.patch
 mozilla-1196777.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 mozilla-1568569.patch
-mozilla-1580174-webrtc-popup.patch
 mozilla-1603112-accept-lang.patch
 
 pgo.patch
