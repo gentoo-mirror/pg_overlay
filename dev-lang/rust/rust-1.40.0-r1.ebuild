@@ -175,7 +175,7 @@ src_prepare() {
 }
 
 src_configure() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
+	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3 -Clto=thin -Clinker-plugin-lto"
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -291,14 +291,14 @@ src_configure() {
 }
 
 src_compile() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
+	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3 -Clto=thin -Clinker-plugin-lto"
 	env $(cat "${S}"/config.env)\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
 		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
 }
 
 src_install() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
+	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3 -Clto=thin -Clinker-plugin-lto"
 	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml \
 	--exclude src/tools/miri || die
 
