@@ -136,6 +136,7 @@ dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/mdds 1.5.0: A collection of multi-dimensional data structure and indexing algorithm
 dev-util/meson 0.52.1: Open source build system
+dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.0: ninja-compatible build tool written in C
 dev-util/vulkan-headers 1.1.130: Vulkan Header files and API registry
@@ -175,6 +176,7 @@ media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reportin
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
+media-sound/wavpack 5.2.0: Hybrid lossless audio compression tools
 media-video/ffmpeg 4.2.2_pre: Complete solution to record, convert and stream audio and video. Includes libavcodec
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 net-fs/nfs-utils 2.4.3_rc3: NFS client and server daemons
