@@ -259,7 +259,6 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
-		llvm-libunwind = $(toml_usex system-llvm)
 
 		[dist]
 		src-tarball = false

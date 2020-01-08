@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,14 +12,12 @@ QTMIN=5.12.3
 inherit ecm kde.org
 
 DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
-SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PV/r/}.tar.gz -> ${PF}.tar.gz"
-#SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.gz -> ${PF}.tar.gz"
+SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.gz -> ${PF}.tar.gz"
 LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~arm ~arm64 ~x86"
 IUSE="caps gles2 multimedia"
-S=${WORKDIR}/${PN}-lowlatency-${PV/r/}
-#S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
+S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
 
 COMMON_DEPEND="
 	>=kde-frameworks/kactivities-${KFMIN}:5
@@ -94,8 +92,6 @@ PDEPEND="
 "
 
 RESTRICT+=" test"
-
-PATCHES=( "${FILESDIR}"/${P}-possible-kdecoration-crash-in-systemsettings.patch )
 
 src_prepare() {
 	ecm_src_prepare
