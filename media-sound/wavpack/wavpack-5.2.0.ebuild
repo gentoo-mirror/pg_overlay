@@ -18,7 +18,7 @@ DEPEND="${RDEPEND}"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-armv7.patch
-	"${FILESDIR}"/${P}-CVE-2018-{6767,7253,7254}.patch
+	"${FILESDIR}"/${P}-CVE-2018-{7253,7254}.patch
 	"${FILESDIR}"/${P}-CVE-2018-10536-CVE-2018-10537.patch
 	"${FILESDIR}"/${P}-CVE-2018-10538-CVE-2018-10539-CVE-2018-10540.patch
 	"${FILESDIR}"/${P}-memleaks.patch
