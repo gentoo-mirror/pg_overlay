@@ -332,6 +332,11 @@ net-fs/nfs-utils:uuid - Support UUID lookups in rpc.mountd
 net-libs/glib-networking:gnome - Extract HTTP/HTTPS/SOCKS proxy configuration stored using GSettings
 net-libs/glib-networking:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
+net-libs/nodejs:inspector - Enable V8 inspector
+net-libs/nodejs:npm - Enable NPM package manager
+net-libs/nodejs:pax_kernel - Enable building under a PaX enabled kernel
+net-libs/nodejs:snapshot - Enable snapshot creation for faster startup
+net-libs/nodejs:systemtap - Enable SystemTAP/DTrace tracing
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
 net-nntp/nzbget:parcheck - Enable support for checking PAR archives
