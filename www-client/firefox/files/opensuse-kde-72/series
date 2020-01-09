@@ -8,9 +8,12 @@ mozilla-bmo1568145.patch
 mozilla-bmo1504834-part1.patch
 mozilla-bmo1504834-part2.patch
 mozilla-bmo1504834-part3.patch
+mozilla-bmo1554971.patch
+mozilla-bmo1512162.patch
 mozilla-fix-top-level-asm.patch
 mozilla-bmo1504834-part4.patch
 mozilla-bmo849632.patch
+mozilla-bmo1601707.patch
 
 firefox-kde.patch
 firefox-branded-icons.patch
