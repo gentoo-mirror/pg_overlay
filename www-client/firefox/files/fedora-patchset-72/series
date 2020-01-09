@@ -1,5 +1,3 @@
-build-disable-elfhack.patch
-
 firefox-enable-addons.patch
 mozilla-1170092.patch
 
