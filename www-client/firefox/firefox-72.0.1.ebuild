@@ -615,6 +615,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-gc-trace
 	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --disable-gold
 	mozconfig_annotate '' --disable-gtest-in-build
 
 	mozconfig_annotate '' --disable-instruments
@@ -654,11 +655,12 @@ src_configure() {
 	mozconfig_annotate '' --without-google-location-service-api-keyfile
 	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
 
-	mozconfig_annotate '' MOZ_DATA_REPORTING=0
-	mozconfig_annotate '' MOZ_LOGGING=0
-	mozconfig_annotate '' MOZ_PAY=0
-	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
-	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
+	mozconfig_annotate '' MOZ_DATA_REPORTING=
+	mozconfig_annotate '' MOZ_DEVICES=
+	mozconfig_annotate '' MOZ_LOGGING=
+	mozconfig_annotate '' MOZ_PAY=
+	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=
+	mozconfig_annotate '' MOZ_SERVICES_METRICS=
 	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
@@ -670,12 +672,12 @@ src_configure() {
 	mozconfig_annotate '' --enable-strip
 	mozconfig_annotate '' --enable-webrtc
 
-	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
-	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DATA_REPORTING=" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=" >> "${S}"/.mozconfig
+	echo "export MOZ_LOGGING=" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
 	#
