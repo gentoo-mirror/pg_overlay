@@ -5,8 +5,6 @@ mozilla-1170092.patch
 
 rhbz-1354671.patch
 firefox-locale-debug.patch
-mozilla-gnome-shell-search-provider.patch
-mozilla-gnome-shell-search-provider-icons.patch
 kiosk-workaround.patch
 
 mozilla-1196777.patch
