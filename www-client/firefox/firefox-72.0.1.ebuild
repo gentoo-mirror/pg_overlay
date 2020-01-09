@@ -663,7 +663,7 @@ src_configure() {
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
 	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
-	mozconfig_annotate '' 'RUSTFLAGS=-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'
+	mozconfig_annotate '' "RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'"
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
