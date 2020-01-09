@@ -660,8 +660,7 @@ src_configure() {
 	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
 	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
-	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
-	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
+	mozconfig_annotate '' RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
@@ -676,7 +675,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3'" >> "${S}"/.mozconfig
+	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
