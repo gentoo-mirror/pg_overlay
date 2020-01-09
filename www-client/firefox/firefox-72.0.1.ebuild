@@ -676,8 +676,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS=-Ctarget-cpu=native" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS=-Copt-level=3" >> "${S}"/.mozconfig
+	echo "export "RUSTFLAGS=-Ctarget-cpu=native -Copt-level=3"" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
