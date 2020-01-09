@@ -141,7 +141,7 @@ DEPEND="${CDEPEND}
 			!clang? ( sys-devel/llvm:9 )
 			clang? (
 				=sys-devel/lld-9*
-				sys-devel/llvm:9[gold]
+				sys-devel/llvm:9
 				pgo? ( =sys-libs/compiler-rt-sanitizers-9*[profile] )
 			)
 		)
@@ -150,7 +150,7 @@ DEPEND="${CDEPEND}
 			!clang? ( sys-devel/llvm:8 )
 			clang? (
 				=sys-devel/lld-8*
-				sys-devel/llvm:8[gold]
+				sys-devel/llvm:8
 				pgo? ( =sys-libs/compiler-rt-sanitizers-8*[profile] )
 			)
 		)
@@ -159,7 +159,7 @@ DEPEND="${CDEPEND}
 			!clang? ( sys-devel/llvm:7 )
 			clang? (
 				=sys-devel/lld-7*
-				sys-devel/llvm:7[gold]
+				sys-devel/llvm:7
 				pgo? ( =sys-libs/compiler-rt-sanitizers-7*[profile] )
 			)
 		)
@@ -608,7 +608,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-debug-js-modules
 	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-dmd
-	mozconfig_annotate '' --disable-dtrace 
+	mozconfig_annotate '' --disable-dtrace
 	mozconfig_annotate '' --disable-dump-painting
 
 	mozconfig_annotate '' --enable-elf-hack
