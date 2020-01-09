@@ -131,7 +131,7 @@ DEPEND="${CDEPEND}
 			!clang? ( sys-devel/llvm:9 )
 			clang? (
 				=sys-devel/lld-9*
-				sys-devel/llvm:9[gold]
+				sys-devel/llvm:9
 				pgo? ( =sys-libs/compiler-rt-sanitizers-9*[profile] )
 			)
 		)
@@ -140,7 +140,7 @@ DEPEND="${CDEPEND}
 			!clang? ( sys-devel/llvm:8 )
 			clang? (
 				=sys-devel/lld-8*
-				sys-devel/llvm:8[gold]
+				sys-devel/llvm:8
 				pgo? ( =sys-libs/compiler-rt-sanitizers-8*[profile] )
 			)
 		)
@@ -149,7 +149,7 @@ DEPEND="${CDEPEND}
 			!clang? ( sys-devel/llvm:7 )
 			clang? (
 				=sys-devel/lld-7*
-				sys-devel/llvm:7[gold]
+				sys-devel/llvm:7
 				pgo? ( =sys-libs/compiler-rt-sanitizers-7*[profile] )
 			)
 		)
@@ -158,7 +158,7 @@ DEPEND="${CDEPEND}
 			!clang? ( sys-devel/llvm:6 )
 			clang? (
 				=sys-devel/lld-6*
-				sys-devel/llvm:6[gold]
+				sys-devel/llvm:6
 				pgo? ( =sys-libs/compiler-rt-sanitizers-6*[profile] )
 			)
 		)
@@ -610,7 +610,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-debug-js-modules
 	mozconfig_annotate '' --disable-debug-symbols
 	mozconfig_annotate '' --disable-dmd
-	mozconfig_annotate '' --disable-dtrace 
+	mozconfig_annotate '' --disable-dtrace
 	mozconfig_annotate '' --disable-dump-painting
 
 	mozconfig_annotate '' --disable-elf-hack
@@ -664,7 +664,9 @@ src_configure() {
 	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
 	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
-	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native -Copt-level=3
+	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
+	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
+	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
@@ -678,7 +680,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS=-Ctarget-cpu=native -Copt-level=3" >> "${S}"/.mozconfig
+	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
