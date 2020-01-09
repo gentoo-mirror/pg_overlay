@@ -1,5 +1,4 @@
 fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-fixes/Bug-1526653-Include-struct-definitions-for-user_vfp-.patch
 fixes/Bug-1601707-Work-around-lack-of-support-for-http-eel.patch
 prefs/Set-javascript.options.showInConsole.patch
 prefs/Set-DPI-to-system-settings.patch
