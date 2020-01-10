@@ -1,9 +1,13 @@
+rhbz-1354671.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 firefox-SIOCGSTAMP.patch
 mozilla-1512162.patch
+bindgen-d0dfc52706f23db9dc9d74642eeebd89d73cb8d0.patch
 thunderbird-debug.patch
 
+mozilla-1245783.patch
 mozilla-1353817.patch
 build-disable-elfhack.patch
 
 mozilla-526293.patch
+mozilla-1576268.patch
