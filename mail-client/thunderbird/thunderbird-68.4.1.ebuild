@@ -12,7 +12,7 @@ PYTHON_COMPAT=( python3_{6,7,8} )
 PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
-MOZ_LANGS=(en en-GB en-US ru)
+MOZ_LANGS=(de en en-GB en-US ru)
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
 MOZ_PV="${PV/_beta/b}"
@@ -263,8 +263,6 @@ src_prepare() {
 	pushd "${S}"/comm &>/dev/null || die
 	eapply "${FILESDIR}/1000_fix_gentoo_preferences.patch"
 	popd &>/dev/null || die
-
-	eapply "${FILESDIR}"/${PN}-68.2.2-rust-1.39+.patch
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
