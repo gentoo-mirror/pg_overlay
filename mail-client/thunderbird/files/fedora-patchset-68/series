@@ -1,4 +1,3 @@
-rhbz-1354671.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 firefox-SIOCGSTAMP.patch
 mozilla-1512162.patch
