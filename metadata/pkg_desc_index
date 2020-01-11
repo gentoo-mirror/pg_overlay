@@ -9,6 +9,7 @@ app-crypt/certbot 1.0.0: Let's encrypt client to automate deployment of X.509 ce
 app-crypt/certbot-nginx 1.0.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-emulation/virtualbox 6.1.0: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
+app-misc/dupeguru 9999: dupeGuru is a cross-platform GUI tool to find duplicate files in a system
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
@@ -108,6 +109,7 @@ dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/constantly 15.1.0-r1: Symbolic constants in Python
 dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
+dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
 dev-python/incremental 17.5.0: Incremental is a small library that versions your Python projects
 dev-python/josepy 1.2.0: JOSE protocol implementation in Python
 dev-python/mako 1.1.0: A Python templating language
@@ -119,6 +121,7 @@ dev-python/pyhamcrest 1.9.0-r1: Hamcrest framework for matcher objects
 dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
 dev-python/python-nbxmpp 0.6.10: Python library to use Jabber/XMPP networks in a non-blocking way
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
+dev-python/send2trash 1.5.0: Sends files to the Trash (or Recycle Bin)
 dev-python/setproctitle 1.1.10-r1: Allow customization of the process title
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
@@ -135,7 +138,7 @@ dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/mdds 1.5.0: A collection of multi-dimensional data structure and indexing algorithm
-dev-util/meson 0.53.0_pre-r1 0.53.0: Open source build system
+dev-util/meson 0.53.0: Open source build system
 dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.0: ninja-compatible build tool written in C
