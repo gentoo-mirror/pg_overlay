@@ -32,7 +32,7 @@ PATCHES=(
 )
 
 src_compile() {
-	emake PYTHON=${EPYTHON} all build
+	emake PYTHON=${EPYTHON} build
 }
 
 src_install() {
