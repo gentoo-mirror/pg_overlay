@@ -57,9 +57,9 @@ _CMAKE_ECLASS=1
 
 # @ECLASS-VARIABLE: CMAKE_REMOVE_MODULES_LIST
 # @DESCRIPTION:
-# Array of CMake modules that will be removed in $S during src_prepare,
-# in order to force packages to use the system version.
-# Set to "none" to disable removing modules entirely.
+# Space-separated list of CMake modules that will be removed in $S during
+# src_prepare, in order to force packages to use the system version.
+# Set to empty to disable removing modules entirely.
 : ${CMAKE_REMOVE_MODULES_LIST:=FindBLAS FindLAPACK}
 
 # @ECLASS-VARIABLE: CMAKE_USE_DIR
@@ -294,6 +294,8 @@ _cmake_modify-cmakelists() {
 cmake_src_prepare() {
 	debug-print-function ${FUNCNAME} "$@"
 
+	# FIXME: workaround from cmake-utils; use current working directory instead, bug #704524
+	# esp. test with 'special' pkgs like: app-arch/brotli, media-gfx/gmic, net-libs/quiche
 	pushd "${S}" > /dev/null || die
 
 	default_src_prepare
@@ -566,8 +568,10 @@ cmake_build() {
 	case ${CMAKE_MAKEFILE_GENERATOR} in
 		emake)
 			[[ -e Makefile ]] || die "Makefile not found. Error during configure stage."
-			[[ "${CMAKE_VERBOSE}" != "OFF" ]] && local verbosity="VERBOSE=1"
-			emake "${verbosity}" "$@"
+			case ${CMAKE_VERBOSE} in
+				OFF) emake "$@" ;;
+				*) emake VERBOSE=1 "$@" ;;
+			esac
 			;;
 		ninja)
 			[[ -e build.ninja ]] || die "build.ninja not found. Error during configure stage."
@@ -583,7 +587,7 @@ cmake_build() {
 # @DESCRIPTION:
 # Banned. Use cmake_build instead.
 cmake-utils_src_make() {
-	die "cmake_src_make is banned. Use cmake_build instead"
+	die "cmake-utils_src_make is banned. Use cmake_build instead"
 }
 
 # @FUNCTION: cmake_src_test
