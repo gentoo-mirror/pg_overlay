@@ -28,11 +28,11 @@ DEPEND="${RDEPEND}
 
 PATCHES=(
     # Recent pip update in Gentoo requires us to use --user at all times, even in venvs :(
-	#"${FILESDIR}/fix-pip-call-in-makefile.patch"
+	"${FILESDIR}/fix-pip-call-in-makefile.patch"
 )
 
 src_compile() {
-	emake PYTHON=${EPYTHON}
+	emake PYTHON=${EPYTHON} build
 }
 
 src_install() {
