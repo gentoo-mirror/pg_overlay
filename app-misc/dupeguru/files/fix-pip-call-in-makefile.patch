@@ -1,6 +1,5 @@
---- a/Makefile
-+++ b/Makefile
-@@ -67,7 +67,7 @@
+--- a/Makefile	2020-01-11 17:18:03.772531703 +0700
++++ b/Makefile	2020-01-11 17:18:53.061153146 +0700
 @@ -67,7 +67,7 @@
  ifndef NO_VENV
  	@echo "Creating our virtualenv"
