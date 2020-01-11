@@ -34,6 +34,10 @@ DEPEND="${RDEPEND}
 	)
 "
 
+PATCHES=(
+	"${FILESDIR}/${PN}-0.53.0-invalid_linker.patch"
+)
+
 python_prepare_all() {
 	# ASAN and sandbox both want control over LD_PRELOAD
 	# https://bugs.gentoo.org/673016
