@@ -82,6 +82,10 @@ dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
 dev-util/mdds:valgrind - Add support for memory debugging using dev-util/valgrind
 dev-util/vulkan-tools:cube - Build the cube/cubepp demos
 dev-util/vulkan-tools:vulkaninfo - Build the vulkaninfo utility
+dev-vcs/mercurial:bugzilla - Support bugzilla integration.
+dev-vcs/mercurial:chg - Support Mercurial command server client
+dev-vcs/mercurial:gpg - Support signing with GnuPG.
+dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 gnome-base/librsvg:tools - Build svg viewer tool
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
