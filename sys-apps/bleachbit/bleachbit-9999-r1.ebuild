@@ -40,6 +40,8 @@ python_prepare_all() {
 	# choose correct Python implementation, bug #465254
 	sed -i 's/python/${EPYTHON}/g' po/Makefile || die
 
+	sed -i 's/python2/${EPYTHON}/g' ${PN}.py
+
 	distutils-r1_python_prepare_all
 }
 
