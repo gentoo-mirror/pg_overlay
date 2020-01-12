@@ -11,7 +11,7 @@ inherit git-r3 eutils python-single-r1
 
 DESCRIPTION="Find duplicate files on your system"
 HOMEPAGE="https://dupeguru.voltaicideas.net"
-EGIT_URI="https://github.com/arsenetar/${PN}.git"
+EGIT_REPO_URI="https://github.com/arsenetar/${PN}.git"
 
 LICENSE="GPL-3+"
 SLOT="0"
