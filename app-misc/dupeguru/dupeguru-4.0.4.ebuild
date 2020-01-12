@@ -11,9 +11,7 @@ inherit eutils python-single-r1
 
 DESCRIPTION="Find duplicate files on your system"
 HOMEPAGE="https://dupeguru.voltaicideas.net"
-MY_P="${PN}-src-${PV}"
 SRC_URI="https://github.com/arsenetar/dupeguru/archive/${PV}.tar.gz -> ${P}.tar.gz"
-S=${WORKDIR}
 
 LICENSE="GPL-3+"
 SLOT="0"
