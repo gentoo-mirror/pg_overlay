@@ -7,11 +7,11 @@ EAPI=7
 PYTHON_COMPAT=( python3_{6,7,8} )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils python-single-r1
+inherit git-r3 eutils python-single-r1
 
 DESCRIPTION="Find duplicate files on your system"
 HOMEPAGE="https://dupeguru.voltaicideas.net"
-SRC_URI="https://github.com/arsenetar/dupeguru/archive/${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/arsenetar/${PN}.git"
 
 LICENSE="GPL-3+"
 SLOT="0"
