@@ -9,6 +9,7 @@ app-crypt/certbot 1.0.0: Let's encrypt client to automate deployment of X.509 ce
 app-crypt/certbot-nginx 1.0.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-emulation/virtualbox 6.1.0: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
+app-misc/dupeguru 4.0.4: Find duplicate files on your system
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
