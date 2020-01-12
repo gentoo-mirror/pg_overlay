@@ -24,7 +24,8 @@ RDEPEND="${PYTHON_DEPS}
 	>=dev-python/hsaudiotag3k-1.1.3[${PYTHON_USEDEP}]
 	>=dev-python/send2trash-1.3.0[${PYTHON_USEDEP}]"
 DEPEND="${RDEPEND}
-	dev-python/polib[${PYTHON_USEDEP}]"
+	dev-python/polib[${PYTHON_USEDEP}]
+	dev-python/sphinx[${PYTHON_USEDEP}]"
 
 PATCHES=(
     # Recent pip update in Gentoo requires us to use --user at all times, even in venvs :(
