@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_8 )
-PYTHON_REQ_USE="threads"
+#PYTHON_REQ_USE="threads"
 
 inherit bash-completion-r1 elisp-common eutils distutils-r1 flag-o-matic
 
