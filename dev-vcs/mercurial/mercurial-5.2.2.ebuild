@@ -34,6 +34,7 @@ RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-3.0.1-po_fixes.patch"
+	"${FILESDIR}/${PN}-5.2-unbundle_zstd.patch"
 )
 
 python_prepare_all() {
