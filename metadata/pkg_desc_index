@@ -138,7 +138,6 @@ dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/mdds 1.5.0: A collection of multi-dimensional data structure and indexing algorithm
-dev-util/meson 0.53.0: Open source build system
 dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.0: ninja-compatible build tool written in C
@@ -157,7 +156,6 @@ media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (med
 media-libs/libplacebo 1.29.1: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
 media-libs/libvpx 1.8.2: WebM VP8 and VP9 Codec SDK
-media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
 media-libs/pulseaudio-qt 1.2: Qt bindings for libpulse
 media-libs/vulkan-layers 1.1.130: Vulkan Validation Layers
