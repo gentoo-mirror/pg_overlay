@@ -62,8 +62,8 @@ REQUIRED_USE="
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
 	"${FILESDIR}"/${PN}-respect-fontconfig.patch
-	"${FILESDIR}"/${P}-pdf-add-missing-flush.patch
-	"${FILESDIR}"/${P}-ft-Use-FT_Done_MM_Var-instead-of-free-when-available.patch
+	"${FILESDIR}"/${PN}-1.16.0-pdf-add-missing-flush.patch
+	"${FILESDIR}"/${PN}-1.16.0-ft-Use-FT_Done_MM_Var-instead-of-free-when-available.patch
 )
 
 src_prepare() {
