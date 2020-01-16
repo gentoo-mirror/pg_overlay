@@ -48,7 +48,8 @@ src_prepare() {
 	# Fix broken tests, https://bugzilla.gnome.org/show_bug.cgi?id=709304
 	epatch "${FILESDIR}/${P}-test_dialog.patch"
 
-	# From Arch
+	#
+	epatch "${FILESDIR}/pygtk-Drop-the-PangoFont-find_shaper-virtual-method.patch"
 	epatch "${FILESDIR}/python27.patch"
 
 	# Examples is handled "manually"
