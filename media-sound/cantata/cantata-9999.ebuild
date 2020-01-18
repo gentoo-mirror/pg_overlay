@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="cs da de en_GB es fi fr hu it ja ko nl pl pt_BR ru zh_CN"
-inherit cmake-utils git-r3 l10n qmake-utils xdg
+inherit cmake git-r3 l10n qmake-utils xdg
 
 DESCRIPTION="Featureful and configurable Qt client for the music player daemon (MPD)"
 HOMEPAGE="https://github.com/CDrummond/cantata"
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/CDrummond/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="amd64 x86"
+KEYWORDS=""
 IUSE="cdda cddb cdio http-server libav mtp musicbrainz replaygain streaming taglib udisks zeroconf"
 REQUIRED_USE="
 	?? ( cdda cdio )
@@ -76,7 +76,7 @@ src_prepare() {
 		rm -vf "translations/${PN}_${1}".ts || die
 	}
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 
 	# Unbundle 3rd party libs
 	rm -r 3rdparty/{ebur128,qtsingleapplication} || die
@@ -105,7 +105,7 @@ src_configure() {
 		-DENABLE_UDISKS2=$(usex udisks)
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 pkg_postinst() {

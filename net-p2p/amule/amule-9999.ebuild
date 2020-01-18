@@ -1,7 +1,7 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
 WX_GTK_VER="3.1-gtk3"
 
@@ -16,31 +16,29 @@ SLOT="0"
 KEYWORDS=""
 IUSE="daemon debug geoip gui +nls stats upnp X +mmap webserver"
 
-COMMON_DEPEND="
+RDEPEND="
 	dev-libs/boost:=
 	dev-libs/crypto++:=
 	sys-libs/binutils-libs:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.1.2:${WX_GTK_VER}[X?]
-	stats? ( media-libs/gd:=[jpeg,png] )
+	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
+	daemon? ( acct-user/amule )
 	geoip? ( dev-libs/geoip )
-	upnp? ( net-libs/libupnp:* )
-	webserver? ( media-libs/libpng:0= )
-	!net-p2p/imule"
-DEPEND="${COMMON_DEPEND}"
-RDEPEND="${COMMON_DEPEND}"
+	webserver? (
+		acct-user/amule
+		media-libs/libpng:0=
+	)
+	stats? ( media-libs/gd:=[jpeg,png] )
+	upnp? ( net-libs/libupnp:0 )
+"
+DEPEND="${RDEPEND}"
+BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
 )
 
 pkg_setup() {
-	if use stats && ! use X; then
-		einfo "Note: You would need both the X and stats USE flags"
-		einfo "to compile aMule Statistics GUI."
-		einfo "I will now compile console versions only."
-	fi
-
 	setup-wxwidgets
 }
 
@@ -56,52 +54,80 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf
+	local myconf=(
+		--with-denoise-level=0
+		--with-wx-config="${WX_CONFIG}"
+		--disable-amulecmd
+		--with-boost
+		$(use_enable debug)
+		$(use_enable daemon amule-daemon)
+		$(use_enable geoip)
+		$(use_enable nls)
+		$(use_enable webserver)
+		$(use_enable stats cas)
+		$(use_enable stats alcc)
+		$(use_enable upnp)
+		$(use_enable mmap)
+	)
 
-	if use X ; then
-		myconf="
+	if use X; then
+		myconf+=(
 			$(use_enable gui amule-gui)
 			$(use_enable stats alc)
 			$(use_enable stats wxcas)
-			--disable-monolithic"
+		)
 	else
-		myconf="
+		myconf+=(
 			--disable-monolithic
 			--disable-amule-gui
 			--disable-alc
-			--disable-wxcas"
+			--disable-wxcas
+		)
 	fi
 
-	econf \
-		--with-boost \
-		--with-denoise-level=0 \
-		--with-wx-config="${WX_CONFIG}" \
-		--enable-amulecmd \
-		--enable-optimize \
-		$(use_enable debug) \
-		$(use_enable daemon amule-daemon) \
-		$(use_enable geoip) \
-		$(use_enable nls) \
-		$(use_enable webserver) \
-		$(use_enable stats cas) \
-		$(use_enable stats alcc) \
-		$(use_enable upnp) \
-		$(use_enable mmap mmap) \
-		${myconf}
+	econf "${myconf[@]}"
 }
 
 src_install() {
 	default
 
 	if use daemon; then
-		newconfd "${FILESDIR}"/amuled.confd amuled
+		newconfd "${FILESDIR}"/amuled.confd-r1 amuled
 		newinitd "${FILESDIR}"/amuled.initd amuled
 	fi
 	if use webserver; then
-		newconfd "${FILESDIR}"/amuleweb.confd amuleweb
+		newconfd "${FILESDIR}"/amuleweb.confd-r1 amuleweb
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
-    if use gui; then
-        rm ${D}/usr/bin/amule
-    fi
+
+	if use daemon || use webserver; then
+		keepdir /var/lib/${PN}
+		fowners amule:amule /var/lib/${PN}
+		fperms 0750 /var/lib/${PN}
+	fi
+
+	if use gui; then
+		rm ${D}/usr/bin/amule
+	fi
+}
+
+pkg_postinst() {
+	local ver
+
+	if use daemon || use webserver; then
+		for ver in ${REPLACING_VERSIONS}; do
+			if ver_test ${ver} -lt "2.3.2-r4"; then
+				elog "Default user under which amuled and amuleweb daemons are started"
+				elog "have been changed from p2p to amule. Default home directory have been"
+				elog "changed as well."
+				echo
+				elog "If you want to preserve old download/share location, you can create"
+				elog "symlink /var/lib/amule/.aMule pointing to the old location and adjust"
+				elog "files ownership *or* restore AMULEUSER and AMULEHOME variables in"
+				elog "/etc/conf.d/{amuled,amuleweb} to the old values."
+
+				break
+			fi
+		done
+	fi
 }
