@@ -1,6 +1,3 @@
-# Copyright 1999-2005 Gentoo Foundation
-# Distributed under the terms of the GNU General Public License v2
-
 # owner of amuleweb process (must be existing)
 AMULEUSER="$USER"
 
@@ -8,7 +5,7 @@ AMULEUSER="$USER"
 AMULEHOME="$HOME"
 
 # log file (/dev/null for nowhere)
-LOG=/dev/null
+LOG=/var/log/amuleweb.log
 
 # aMule password (note: not your webserver password, but the external
 # connection one)

@@ -46,4 +46,3 @@ stop() {
 	start-stop-daemon --stop --pidfile /var/run/amuleweb.pid 2>&1 >/dev/null
 	eend $?
 }
-
