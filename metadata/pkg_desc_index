@@ -145,8 +145,8 @@ dev-util/vulkan-headers 1.1.130: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.1.130: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.2.2: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
-gnome-base/gsettings-desktop-schemas 3.33.1: Collection of GSettings schemas for GNOME desktop
-gnome-base/librsvg 2.47.1: Scalable Vector Graphics (SVG) rendering library
+gnome-base/gsettings-desktop-schemas 3.34.0: Collection of GSettings schemas for GNOME desktop
+gnome-base/librsvg 2.47.2: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
