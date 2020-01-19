@@ -12,4 +12,4 @@ RDEPEND=app-arch/bzip2:= >=sys-libs/zlib-1.1.3:= virtual/libffi:= virtual/libint
 SLOT=2.7
 SRC_URI=https://www.python.org/ftp/python/2.7.17/Python-2.7.17.tar.xz https://dev.gentoo.org/~mgorny/dist/python/python-gentoo-patches-2.7.17-r1.tar.xz
 _eclasses_=autotools	ea7865c8fba1ea8d3639f355fffe1a3c	eutils	fcb2aa98e1948b835b5ae66ca52868c5	flag-o-matic	cabe101302b461f32ecbc3767dfb9e23	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	multiprocessing	cac3169468f893670dac3e7cb940e045	pax-utils	a41d1fd1c111289ffa04490de6ee79d7	python-utils-r1	611c493a4cfef5254350fabc04b606f5	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
-_md5_=19053edabedfd2632c15af4ba1cfed91
+_md5_=aceb2700e904acf70e8e8800a06936ce
