@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -172,10 +172,6 @@ src_configure() {
 		dbmliborder+="${dbmliborder:+:}bdb"
 	fi
 
-	BUILD_DIR="${WORKDIR}/${CHOST}"
-	mkdir -p "${BUILD_DIR}" || die
-	cd "${BUILD_DIR}" || die
-
 	local myeconfargs=(
 		# The check is broken on clang, and gives false positive:
 		# https://bugs.gentoo.org/596798
@@ -199,7 +195,8 @@ src_configure() {
 		--enable-optimizations
 		--with-lto
 	)
-	ECONF_SOURCE="${S}" OPT="" econf "${myeconfargs[@]}"
+
+	OPT="" econf "${myeconfargs[@]}"
 
 	if use threads && grep -q "#define POSIX_SEMAPHORES_NOT_ENABLED 1" pyconfig.h; then
 		eerror "configure has detected that the sem_open function is broken."
@@ -215,8 +212,6 @@ src_compile() {
 
 	# Avoid invoking pgen for cross-compiles.
 	touch Include/graminit.h Python/graminit.c
-
-	cd "${BUILD_DIR}" || die
 
 	# extract the number of parallel jobs in MAKEOPTS
 	echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' > /dev/null
@@ -244,8 +239,6 @@ src_test() {
 		return
 	fi
 
-	cd "${BUILD_DIR}" || die
-
 	# Skip failing tests.
 	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support"
 
@@ -262,7 +255,7 @@ src_test() {
 	local -x TZ=UTC
 
 	# Rerun failed tests in verbose mode (regrtest -w).
-	emake test TESTOPTS="-w -uall,-audio ${par_arg}" < /dev/tty
+	emake test EXTRATESTOPTS="-w -uall,-audio ${par_arg}" < /dev/tty
 	local result="$?"
 
 	for test in ${skipped_tests}; do
@@ -286,7 +279,6 @@ src_test() {
 src_install() {
 	local libdir=${ED}/usr/$(get_libdir)/python${PYVER}
 
-	cd "${BUILD_DIR}" || die
 	emake DESTDIR="${D}" altinstall
 
 	sed -e "s/\(LDFLAGS=\).*/\1/" -i "${libdir}/config/Makefile" || die
@@ -305,11 +297,11 @@ src_install() {
 	use threads || rm -r "${libdir}/multiprocessing" || die
 	use wininst || rm "${libdir}/distutils/command/"wininst-*.exe || die
 
-	dodoc "${S}"/Misc/{ACKS,HISTORY,NEWS}
+	dodoc Misc/{ACKS,HISTORY,NEWS}
 
 	if use examples; then
 		docinto examples
-		dodoc -r "${S}"/Tools
+		dodoc -r Tools
 	fi
 	insinto /usr/share/gdb/auto-load/usr/$(get_libdir) #443510
 	local libname=$(printf 'e:\n\t@echo $(INSTSONAME)\ninclude Makefile\n' | \
