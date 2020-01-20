@@ -1,12 +1,21 @@
 {
-  "policies": {
-    "AppUpdateURL": "",
-    "DisableAppUpdate": true,
-    "DisableFeedbackCommands": true,
-    "DisableFirefoxStudies": true,
-    "DisablePocket": true,
-    "DisableSystemAddonUpdate": true,
-    "DisableTelemetry": true,
-    "DontCheckDefaultBrowser": true
-  }
+	"policies": {
+		"AppUpdateURL": "",
+		"DisableAppUpdate": true,
+		"DisableFirefoxStudies": true,
+		"DisablePocket": true,
+		"DisableTelemetry": true,
+		"DontCheckDefaultBrowser": true,
+		"DisableFeedbackCommands": true,
+		"DisableFirefoxAccounts": false,
+		"DisableFirefoxScreenshots": true,
+		"DisableFirefoxStudies": true,
+		"DisableMasterPasswordCreation": true,
+		"DisableSetDesktopBackground": true,
+		"DisableSystemAddonUpdate": true,
+		"DontCheckDefaultBrowser": true,
+		"ExtensionUpdate": true,
+		"NetworkPrediction": false,
+		"OverridePostUpdatePage": "",
+	}
 }
