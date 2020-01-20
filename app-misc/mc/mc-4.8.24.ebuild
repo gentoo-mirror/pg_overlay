@@ -44,6 +44,9 @@ RESTRICT="!test? ( test )"
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-4.8.23-gettext.patch
+	"${FILESDIR}"/${PN}-4.8.23-gettext-test.patch
+
 	"${FILESDIR}"/${PN}-4.8.13-restore_saved_replace_string.patch
 	"${FILESDIR}"/${PN}-4.8.23-shorten-too-long-german-strings.patch
 )
