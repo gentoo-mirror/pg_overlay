@@ -47,7 +47,6 @@ PATCHES=(
 
 	"${FILESDIR}"/${PN}-4.8.23-gettext.patch
 	"${FILESDIR}"/${PN}-4.8.23-gettext-test.patch
-	"${FILESDIR}"/${PN}-4.8.23-vfs-gc-SEGV.patch
 	"${FILESDIR}"/${PN}-4.8.23-gcc-10.patch
 
 	"${FILESDIR}"/${PN}-4.8.13-restore_saved_replace_string.patch
