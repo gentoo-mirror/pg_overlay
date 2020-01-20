@@ -44,6 +44,9 @@ RESTRICT="!test? ( test )"
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-4.8.23-3933-iso9660-1.patch
+	"${FILESDIR}"/${PN}-4.8.23-3933-iso9660-2.patch
+	
 	"${FILESDIR}"/${PN}-4.8.23-gettext.patch
 	"${FILESDIR}"/${PN}-4.8.23-gettext-test.patch
 
