@@ -13,6 +13,7 @@ mozilla-bmo1512162.patch
 mozilla-fix-top-level-asm.patch
 mozilla-bmo1504834-part4.patch
 mozilla-bmo849632.patch
+mozilla-bmo1601707.patch
 
 firefox-kde.patch
 firefox-branded-icons.patch
