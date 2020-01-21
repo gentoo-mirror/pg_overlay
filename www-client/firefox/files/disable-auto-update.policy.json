@@ -7,7 +7,7 @@
 		"DisableTelemetry": true,
 		"DontCheckDefaultBrowser": true,
 		"DisableFeedbackCommands": true,
-		"DisableFirefoxAccounts": false,
+		"DisableFirefoxAccounts": true,
 		"DisableFirefoxScreenshots": true,
 		"DisableFirefoxStudies": true,
 		"DisableMasterPasswordCreation": true,
