@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -14,7 +14,7 @@ EGIT_SUBMODULES=()
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+acl debug doc +pam +policykit selinux"
+IUSE="+acl debug doc efi +pam +policykit selinux"
 
 COMMON_DEPEND="
 	sys-apps/util-linux
@@ -42,7 +42,7 @@ PDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-243.1-docs.patch"
+	"${FILESDIR}/${PN}-243.4-docs.patch"
 )
 
 pkg_setup() {
@@ -78,27 +78,28 @@ src_configure() {
 	filter-ldflags $CFLAGS $CXXFLAGS
 
 	local emesonargs=(
-		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
-		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
-		-Dpamlibdir=$(getpam_mod_dir)
-		-Dudevrulesdir="$(get_udevdir)"/rules.d
+		$debugmode
+		--buildtype $(usex debug debug release)
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
-		-Drootlibdir="${EPREFIX}"/$(get_libdir)
-		-Drootlibexecdir="${EPREFIX}"/$(get_libdir)/elogind
-		-Drootprefix="${EPREFIX}/"
+		-Dacl=$(usex acl true false)
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
-		-Dzshcompletiondir="${EPREFIX}/usr/share/zsh/site-functions"
-		-Dman=auto
-		-Dsmack=true
 		-Dcgroup-controller=openrc
 		-Ddefault-hierarchy=${cgroupmode}
 		-Ddefault-kill-user-processes=false
-		-Dacl=$(usex acl true false)
-		--buildtype $(usex debug debug release)
+		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
+		-Defi=$(usex efi true false)
 		-Dhtml=$(usex doc auto false)
+		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
+		-Dman=auto
 		-Dpam=$(usex pam true false)
+		-Dpamlibdir=$(getpam_mod_dir)
+		-Drootlibdir="${EPREFIX}"/$(get_libdir)
+		-Drootlibexecdir="${EPREFIX}"/$(get_libdir)/elogind
+		-Drootprefix="${EPREFIX}/"
 		-Dselinux=$(usex selinux true false)
-		$debugmode
+		-Dsmack=true
+		-Dudevrulesdir="$(get_udevdir)"/rules.d
+		-Dzshcompletiondir="${EPREFIX}/usr/share/zsh/site-functions"
 	)
 
 	meson_src_configure
