@@ -36,9 +36,9 @@ dev-lang/python 2.7.17-r1 3.8.1: An interpreted, interactive, object-oriented pr
 dev-lang/rust 1.40.0-r1: Systems programming language from Mozilla
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/glib 2.63.3: The GLib library of C routines
-dev-libs/gobject-introspection 1.62.0 1.63.2: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.62.0 1.63.2: Build infrastructure for GObject Introspection
+dev-libs/glib 2.63.3 2.63.4: The GLib library of C routines
+dev-libs/gobject-introspection 1.63.2: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 65.1: International Components for Unicode
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
@@ -130,9 +130,9 @@ dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cbindgen 0.12.1: A tool for generating C bindings to Rust code
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.63.3: GDBus code and documentation generator
-dev-util/glib-utils 2.63.3: Build utilities for GLib using projects
-dev-util/glslang 7.13.3496: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
+dev-util/gdbus-codegen 2.63.3 2.63.4: GDBus code and documentation generator
+dev-util/glib-utils 2.63.3 2.63.4: Build utilities for GLib using projects
+dev-util/glslang 7.13.3496 8.13.3559: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1616: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
@@ -141,8 +141,8 @@ dev-util/mdds 1.5.0: A collection of multi-dimensional data structure and indexi
 dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.0: ninja-compatible build tool written in C
-dev-util/vulkan-headers 1.1.130: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.1.130: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.1.130 1.2.132: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.1.130 1.2.131: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.2.2: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.34.0: Collection of GSettings schemas for GNOME desktop
@@ -158,8 +158,8 @@ media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing f
 media-libs/libvpx 1.8.2: WebM VP8 and VP9 Codec SDK
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
 media-libs/pulseaudio-qt 1.2: Qt bindings for libpulse
-media-libs/vulkan-layers 1.1.130: Vulkan Validation Layers
-media-libs/vulkan-loader 1.1.130: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.1.130 1.2.131: Vulkan Validation Layers
+media-libs/vulkan-loader 1.1.130 1.2.131: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
