@@ -2,7 +2,7 @@ app-accessibility/at-spi2-atk 2.34.1: Gtk module for bridging AT-SPI to Atk
 app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
-app-arch/p7zip 16.02-r4: Port of 7-Zip archiver for Unix
+app-arch/p7zip 16.02-r4 16.02-r5: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.1.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.1.0: Nginx plugin for certbot (Let's Encrypt Client)
