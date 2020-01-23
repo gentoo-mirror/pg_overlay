@@ -24,7 +24,7 @@ SLOT="${WXRELEASE}/${WXVERSION}"
 
 RDEPEND="
 	dev-libs/expat[${MULTILIB_USEDEP}]
-	sdl? ( media-libs/libsdl[${MULTILIB_USEDEP}] )
+	sdl? ( media-libs/libsdl2[${MULTILIB_USEDEP}] )
 	X? (
 		>=dev-libs/glib-2.22:2[${MULTILIB_USEDEP}]
 		media-libs/libpng:0=[${MULTILIB_USEDEP}]
