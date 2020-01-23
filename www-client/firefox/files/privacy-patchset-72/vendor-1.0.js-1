@@ -233,7 +233,7 @@ pref("privacy.trackingprotection.introURL", "");
 pref("app.normandy.enabled", false);
 pref("app.normandy.api_url", "");
 pref("app.normandy.user_id", "");
-pref("extensions.systemAddon.update.url", "");
+//pref("extensions.systemAddon.update.url", "");
 pref("browser.ping-centre.telemetry", false);
 pref("extensions.screenshots.disabled", true);
 pref("extensions.screenshots.upload-disabled", true);
@@ -550,11 +550,11 @@ pref("extensions.enabledScopes", 5);
 pref("extensions.autoDisableScopes", 15);
 pref("extensions.update.enabled", false);
 pref("xpinstall.signatures.required", false);
-pref("extensions.getAddons.cache.enabled",	false);
+//pref("extensions.getAddons.cache.enabled",	false);
 pref("lightweightThemes.update.enabled", false);
-pref("extensions.systemAddon.update.enabled", false);
+//pref("extensions.systemAddon.update.enabled", false);
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr", false);
-pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
+//pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.addons", false);
 pref("browser.newtabpage.activity-stream.asrouter.userprefs.cfr.features", false);
 
 //

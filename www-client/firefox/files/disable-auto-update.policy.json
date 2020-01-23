@@ -12,9 +12,7 @@
 		"DisableFirefoxStudies": true,
 		"DisableMasterPasswordCreation": true,
 		"DisableSetDesktopBackground": true,
-		"DisableSystemAddonUpdate": true,
 		"DontCheckDefaultBrowser": true,
-		"ExtensionUpdate": true,
 		"NetworkPrediction": false,
 		"OverridePostUpdatePage": "",
 	}
