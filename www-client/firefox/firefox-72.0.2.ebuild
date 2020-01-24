@@ -59,8 +59,7 @@ REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
 	thinlto? ( lto )
 	kde? ( !bindist )
-	wifi? ( dbus )
-	|| ( cross-lto thinlto )"
+	wifi? ( dbus )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
