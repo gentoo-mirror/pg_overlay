@@ -112,6 +112,7 @@ dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac a
 dev-python/incremental 17.5.0: Incremental is a small library that versions your Python projects
 dev-python/josepy 1.2.0: JOSE protocol implementation in Python
 dev-python/mako 1.1.0: A Python templating language
+dev-python/numpy 1.18.1: Fast array and numerical python library
 dev-python/parsedatetime 2.5: Parse human-readable date/time strings
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
 dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
