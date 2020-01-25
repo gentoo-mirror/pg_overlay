@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -47,8 +47,7 @@ REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( lto )
 	thinlto? ( lto )
 	kde? ( !bindist )
-	wifi? ( dbus )
-	|| ( cross-lto thinlto )"
+	wifi?"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
