@@ -66,5 +66,8 @@ python_install_all() {
 	doins data/app-menu.ui
 
 	doicon ${PN}.png
-	domenu ${PN}.desktop
+	domenu org.${PN}.BleachBit.desktop
+
+	insinto /usr/share/polkit-1/actions
+	doins org.${PN}.policy
 }
