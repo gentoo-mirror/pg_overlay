@@ -36,7 +36,7 @@ dev-lang/python 2.7.17-r1 3.8.1: An interpreted, interactive, object-oriented pr
 dev-lang/rust 1.40.0-r1: Systems programming language from Mozilla
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/glib 2.63.3 2.63.4: The GLib library of C routines
+dev-libs/glib 2.63.4: The GLib library of C routines
 dev-libs/gobject-introspection 1.63.2: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
@@ -131,14 +131,15 @@ dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cbindgen 0.12.1: A tool for generating C bindings to Rust code
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.63.3 2.63.4: GDBus code and documentation generator
-dev-util/glib-utils 2.63.3 2.63.4: Build utilities for GLib using projects
+dev-util/gdbus-codegen 2.63.4: GDBus code and documentation generator
+dev-util/glib-utils 2.63.4: Build utilities for GLib using projects
 dev-util/glslang 7.13.3496 8.13.3559: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1616: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/mdds 1.5.0: A collection of multi-dimensional data structure and indexing algorithm
+dev-util/meson 0.53.1_pre: Open source build system
 dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.0: ninja-compatible build tool written in C
