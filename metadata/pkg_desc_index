@@ -18,7 +18,6 @@ app-misc/worker 4.2.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 6.4.0.2: A full office productivity suite
 app-office/libreoffice-l10n 6.4.0.2: Translations for the Libreoffice suite
 app-portage/eix 0.33.9-r1: Search and query ebuilds
-app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
