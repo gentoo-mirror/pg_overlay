@@ -9,7 +9,7 @@ inherit python-single-r1
 
 DESCRIPTION="A software that lets you send anything you want directly to a pastebin"
 HOMEPAGE="https://launchpad.net/pastebinit"
-SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
+SRC_URI="https://github.com/felixonmars/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
