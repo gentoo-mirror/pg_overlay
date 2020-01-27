@@ -9,7 +9,7 @@ inherit python-single-r1
 
 DESCRIPTION="A software that lets you send anything you want directly to a pastebin"
 HOMEPAGE="https://launchpad.net/pastebinit"
-SRC_URI="https://launchpad.net/${PN}/trunk/${PV}/+download/${P}.tar.bz2"
+SRC_URI="https://github.com/felixonmars/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -40,13 +40,13 @@ src_prepare() {
 src_compile() {
 	emake -C po
 	xsltproc --nonet \
-		"${EROOT}"/usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl \
+		"${EROOT}"usr/share/sgml/docbook/xsl-stylesheets/manpages/docbook.xsl \
 		pastebinit.xml || die
 }
 
 src_install() {
 	dobin pastebinit utils/pbput
-	python_fix_shebang "${ED}/usr/bin/${PN}"
+	python_fix_shebang "${ED}usr/bin/${PN}"
 	dosym pbput /usr/bin/pbget
 	use crypt && dosym pbput /usr/bin/pbputs
 	dodoc README
