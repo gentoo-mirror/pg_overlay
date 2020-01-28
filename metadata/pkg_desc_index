@@ -6,7 +6,7 @@ app-arch/p7zip 16.02-r4 16.02-r5: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.1.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.1.0: Nginx plugin for certbot (Let's Encrypt Client)
-app-emulation/virtualbox 6.1.0: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox-modules 6.1.2: Kernel Modules for Virtualbox
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
@@ -126,7 +126,7 @@ dev-python/setproctitle 1.1.10-r1: Allow customization of the process title
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/twisted 19.10.0: An asynchronous networking framework written in Python
-dev-python/wheel 0.34.0: A built-package format for Python
+dev-python/wheel 0.34.1: A built-package format for Python
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cbindgen 0.12.1: A tool for generating C bindings to Rust code
