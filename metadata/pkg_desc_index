@@ -39,6 +39,7 @@ dev-libs/gobject-introspection 1.63.2: Introspection system for GObject-based li
 dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 65.1: International Components for Unicode
+dev-libs/libevdev 1.8.0: Handler library for evdev events
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
@@ -127,6 +128,7 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/twisted 19.10.0: An asynchronous networking framework written in Python
 dev-python/wheel 0.34.1: A built-package format for Python
 dev-python/zope-component 4.6: Zope Component Architecture
+dev-qt/qtdeclarative 5.14.0: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cbindgen 0.12.1: A tool for generating C bindings to Rust code
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -153,6 +155,7 @@ gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.17.5: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.4.2: Thunderbird Mail Client
+media-libs/libepoxy 1.5.4: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.29.1: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
