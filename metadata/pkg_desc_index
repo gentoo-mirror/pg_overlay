@@ -6,7 +6,6 @@ app-arch/p7zip 16.02-r4 16.02-r5: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.1.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.1.0: Nginx plugin for certbot (Let's Encrypt Client)
-app-emulation/virtualbox-modules 6.1.2: Kernel Modules for Virtualbox
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
@@ -29,7 +28,7 @@ app-text/libetonyek 0.1.9: Library parsing Apple Keynote presentations
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/po4a 0.57_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
-dev-db/sqlite 3.31.0: SQL database engine
+dev-db/sqlite 3.31.1: SQL database engine
 dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 2.7.17-r1 3.8.1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.40.0-r1: Systems programming language from Mozilla

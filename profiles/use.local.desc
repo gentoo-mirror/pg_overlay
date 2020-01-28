@@ -4,7 +4,6 @@
 
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
-app-emulation/virtualbox-modules:pax_kernel - Apply patch needed for pax enabled kernels
 app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
