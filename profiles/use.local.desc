@@ -47,6 +47,13 @@ dev-lang/rust:rustfmt - Install rustfmt component
 dev-lang/rust:system-bootstrap - Bootstrap using installed rust compiler
 dev-lang/rust:system-llvm - Use the system LLVM install
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
+dev-libs/boost:context - Build and install the Boost.Context (and Boost.Fiber) library and all other Boost libraries that depend on it
+dev-libs/boost:debug - Build and install only the debug version of the Boost libraries. Only enable this flag if you're developing against boost.
+dev-libs/boost:doc - Install the full API documentation documentation. This takes over 200MB of extra disk space.
+dev-libs/boost:nls - Build libboost_locale. This library requires compatible C library interfaces, which might not be provided by uClibc or other embedded libraries.
+dev-libs/boost:numpy - Optionally build NumPy extensions when Boost.Python is enabled
+dev-libs/boost:threads - Build multi-thread-compatible libraries instead of single-threaded only.
+dev-libs/boost:tools - Build and install the boost tools (bcp, quickbook, inspect, wave)
 dev-libs/glib:dbus - Enable dependencies required by glib libraries using dbus service to manage settings saving
 dev-libs/glib:mime - Pull in shared MIME database that many glib-based applications require at runtime to detect or open files. Warning: do not disable this flag unless installing on a headless server.
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap

@@ -33,6 +33,7 @@ dev-games/freecell-solver 5.14.0: C library for automatically solving Freecell a
 dev-lang/python 2.7.17-r1 3.8.1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.40.0-r1: Systems programming language from Mozilla
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
+dev-libs/boost 1.72.0-r1: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.63.4: The GLib library of C routines
 dev-libs/gobject-introspection 1.63.2: Introspection system for GObject-based libraries
