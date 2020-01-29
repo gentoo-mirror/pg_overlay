@@ -121,9 +121,6 @@ media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
 media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
 media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
 media-libs/libplacebo:vulkan - Add support for the vulkan graphics API
-media-libs/libvpx:highbitdepth - Enable 10 and 12 bit support for VP9.
-media-libs/libvpx:postproc - Enable additional post processing filters
-media-libs/libvpx:svc - Enable spatial-svc support (experimental)
 media-libs/openh264:plugin - Install the Gecko Media Plugin (GMP) for use with Mozilla packages
 media-libs/openh264:utils - Install the CLI encoder and decoder utilities
 media-libs/vulkan-loader:layers - Include the vulkan layers
