@@ -78,10 +78,12 @@ src_prepare() {
 	sed -e 's:elseif (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "i386"):\0\n  set(ARCH "x86")\nelseif (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "i586"):' \
 		-i "${S}"/boringssl/CMakeLists.txt || die #668792
 
-	cd "${S}"/core || die
+	pushd "${S}"/core || die
 	eapply "${FILESDIR}"/android-tools-8.1.0_p1-build.patch
 	eapply "${FILESDIR}"/fix_build_core.patch
-	pushd e2fsprogs
+	popd
+	
+	pushd "${S}"/e2fsprogs || die
 		eapply "${FILESDIR}"/fix_build_e2fsprogs.patch
 	popd
 	#eapply "${DISTDIR}/${GLIBC_GETTID_PATCH}"
