@@ -64,7 +64,7 @@ src_unpack() {
 	unpack_into "${MY_P}-e2fsprogs.tar.gz" ./e2fsprogs
 	unpack_into "${MY_P}-extras.tar.gz" ./extras
 	unpack_into "${MY_P}-f2fs-tools.tar.gz" ./f2fs-tools
-	#unpack_into "${MY_P}-selinux.tar.gz" ./selinux
+	unpack_into "${MY_P}-selinux.tar.gz" ./selinux
 	unpack_into boringssl-${BORINGSSL_SHA1}.tar.gz boringssl
 
 	#unpack "android-tools-9.0.0_r3.ninja.xz"
@@ -100,7 +100,7 @@ src_prepare() {
 	cd "${S}" || die
 	default
 
-	ruby "${WORKDIR}"/generate_build.rb | tee build.ninja
+	ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
 
 	sed -E \
 		-e "s|^(CC =).*|\\1 $(tc-getCC)|g" \
