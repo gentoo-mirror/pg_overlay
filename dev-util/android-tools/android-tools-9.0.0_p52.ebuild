@@ -61,7 +61,7 @@ unpack_into() {
 src_unpack() {
 	#unpack_into "${MY_P}-arch.tar.xz" arch
 	unpack_into "${MY_P}-core.tar.gz" core
-	unpack_into "${MY_P}-e2fsprogs.tar.gz" e2fsprogs
+	unpack_into "${MY_P}-e2fsprogs.tar.gz" ./e2fsprogs
 	unpack_into "${MY_P}-extras.tar.gz" extras
 	unpack_into "${MY_P}-f2fs-tools.tar.gz" f2fs-tools
 	unpack_into "${MY_P}-selinux.tar.gz" selinux
