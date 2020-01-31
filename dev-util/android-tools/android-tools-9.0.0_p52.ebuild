@@ -24,7 +24,7 @@ SRC_URI="https://github.com/android/platform_system_core/archive/android-${MY_PV
 	https://android.googlesource.com/platform/system/extras/+archive/android-9.0.0_r52.tar.gz -> ${MY_P}-extras.tar.gz
 	https://android.googlesource.com/platform/external/selinux/+archive/android-9.0.0_r52.tar.gz -> ${MY_P}-selinux.tar.gz
 	https://android.googlesource.com/platform/external/f2fs-tools/+archive/android-9.0.0_r52.tar.gz -> ${MY_P}-f2fs-tools.tar.gz
-
+	mirror://gentoo/android-tools-9.0.0_r3.ninja.xz https://dev.gentoo.org/~zmedico/dist/android-tools-9.0.0_r3.ninja.xz
 	https://raw.githubusercontent.com/nmeum/android-tools/8a30dba5768304176fd78aaa131242f6b880f828/patches/core/0022-Use-glibc-s-gettid-when-using-glibc-2.30.patch -> ${GLIBC_GETTID_PATCH}"
 
 # The entire source code is Apache-2.0, except for fastboot which is BSD-2.
@@ -67,8 +67,8 @@ src_unpack() {
 	unpack_into "${MY_P}-selinux.tar.gz" ./selinux
 	unpack_into boringssl-${BORINGSSL_SHA1}.tar.gz boringssl
 
-	#unpack "${MY_P}.ninja.xz"
-	#mv "${MY_P}.ninja" "build.ninja" || die
+	unpack "android-tools-9.0.0_r3.ninja.xz"
+	mv "android-tools-9.0.0_r3.ninja" "build.ninja" || die
 
 	# Avoid depending on gtest just for its prod headers when boringssl bundles it.
 	ln -s ../../boringssl/third_party/googletest/include/gtest core/include/ || die
