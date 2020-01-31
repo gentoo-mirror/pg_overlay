@@ -67,8 +67,8 @@ src_unpack() {
 	#unpack_into "${MY_P}-selinux.tar.gz" ./selinux
 	unpack_into boringssl-${BORINGSSL_SHA1}.tar.gz boringssl
 
-	unpack "android-tools-9.0.0_r3.ninja.xz"
-	mv "android-tools-9.0.0_r3.ninja" "build.ninja" || die
+	#unpack "android-tools-9.0.0_r3.ninja.xz"
+	#mv "android-tools-9.0.0_r3.ninja" "build.ninja" || die
 
 	# Avoid depending on gtest just for its prod headers when boringssl bundles it.
 	ln -s ../../boringssl/third_party/googletest/include/gtest core/include/ || die
@@ -99,6 +99,8 @@ src_prepare() {
 
 	cd "${S}" || die
 	default
+
+	ruby "${WORKDIR}"/generate_build.rb | tee build.ninja
 
 	sed -E \
 		-e "s|^(CC =).*|\\1 $(tc-getCC)|g" \
