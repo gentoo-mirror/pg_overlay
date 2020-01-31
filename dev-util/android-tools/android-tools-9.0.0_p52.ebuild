@@ -81,7 +81,7 @@ src_prepare() {
 	cd "${S}"/core || die
 	#eapply "${FILESDIR}"/fix_build_core.patch
 	eapply "${FILESDIR}"/android-tools-8.1.0_p1-build.patch
-	eapply "${DISTDIR}/${GLIBC_GETTID_PATCH}"
+	#eapply "${DISTDIR}/${GLIBC_GETTID_PATCH}"
 
 
 	cd "${S}"/extras
