@@ -64,11 +64,11 @@ src_unpack() {
 	unpack_into "${MY_P}-e2fsprogs.tar.gz" ./e2fsprogs
 	unpack_into "${MY_P}-extras.tar.gz" ./extras
 	unpack_into "${MY_P}-f2fs-tools.tar.gz" ./f2fs-tools
-	unpack_into "${MY_P}-selinux.tar.gz" ./selinux
+	#unpack_into "${MY_P}-selinux.tar.gz" ./selinux
 	unpack_into boringssl-${BORINGSSL_SHA1}.tar.gz boringssl
 
-	unpack "android-tools-9.0.0_r3.ninja.xz"
-	mv "android-tools-9.0.0_r3.ninja" "build.ninja" || die
+	#unpack "android-tools-9.0.0_r3.ninja.xz"
+	#mv "android-tools-9.0.0_r3.ninja" "build.ninja" || die
 
 	# Avoid depending on gtest just for its prod headers when boringssl bundles it.
 	ln -s ../../boringssl/third_party/googletest/include/gtest core/include/ || die
@@ -78,11 +78,18 @@ src_prepare() {
 	sed -e 's:elseif (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "i386"):\0\n  set(ARCH "x86")\nelseif (${CMAKE_SYSTEM_PROCESSOR} STREQUAL "i586"):' \
 		-i "${S}"/boringssl/CMakeLists.txt || die #668792
 
-	cd "${S}"/core || die
+	pushd "${S}"/core || die
 	eapply "${FILESDIR}"/android-tools-8.1.0_p1-build.patch
 	eapply "${FILESDIR}"/fix_build_core.patch
+	popd
+	
+	pushd "${S}"/e2fsprogs || die
+		eapply "${FILESDIR}"/fix_build_e2fsprogs.patch
+	popd
 	#eapply "${DISTDIR}/${GLIBC_GETTID_PATCH}"
 
+	grep -Z -l -r --include=\*.{c,cpp,h,def,policy} '\bgettid\b' | \
+		xargs -0 sed -i'.bak' 's/\bgettid\b/sys_gettid/g'
 
 	cd "${S}"/extras
 	sed -e 's|^#include <sys/cdefs.h>$|/*\0*/|' \
@@ -92,6 +99,8 @@ src_prepare() {
 
 	cd "${S}" || die
 	default
+
+	ruby "${WORKDIR}"/generate_build.rb | tee build.ninja
 
 	sed -E \
 		-e "s|^(CC =).*|\\1 $(tc-getCC)|g" \
