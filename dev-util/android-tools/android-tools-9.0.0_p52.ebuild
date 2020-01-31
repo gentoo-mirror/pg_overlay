@@ -79,8 +79,8 @@ src_prepare() {
 		-i "${S}"/boringssl/CMakeLists.txt || die #668792
 
 	cd "${S}"/core || die
-	#eapply "${FILESDIR}"/fix_build_core.patch
 	eapply "${FILESDIR}"/android-tools-8.1.0_p1-build.patch
+	eapply "${FILESDIR}"/fix_build_core.patch
 	#eapply "${DISTDIR}/${GLIBC_GETTID_PATCH}"
 
 
