@@ -125,7 +125,7 @@ src_configure() {
 
 src_compile() {
 	# We only need a few libs from boringssl.
-	#cmake-utils_src_compile libcrypto.a libssl.a
+	cmake-utils_src_compile libcrypto.a libssl.a
 
 	eninja
 }
