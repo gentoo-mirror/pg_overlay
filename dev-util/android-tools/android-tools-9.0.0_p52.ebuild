@@ -59,16 +59,16 @@ unpack_into() {
 }
 
 src_unpack() {
-	unpack_into "${MY_P}-arch.tar.xz" arch
+	#unpack_into "${MY_P}-arch.tar.xz" arch
 	unpack_into "${MY_P}-core.tar.gz" core
-	unpack_into "${MY_P}-e2fsprogs.tar.xz" ./e2fsprogs
-	unpack_into "${MY_P}-extras.tar.xz" extras
-	unpack_into "${MY_P}-f2fs-tools.tar.xz" ./f2fs-tools
-	unpack_into "${MY_P}-selinux.tar.xz" ./selinux
+	unpack_into "${MY_P}-e2fsprogs.tar.gz" ./e2fsprogs
+	unpack_into "${MY_P}-extras.tar.gz" extras
+	unpack_into "${MY_P}-f2fs-tools.tar.gz" ./f2fs-tools
+	unpack_into "${MY_P}-selinux.tar.gz" ./selinux
 	unpack_into boringssl-${BORINGSSL_SHA1}.tar.gz boringssl
 
-	unpack "${MY_P}.ninja.xz"
-	mv "${MY_P}.ninja" "build.ninja" || die
+	#unpack "${MY_P}.ninja.xz"
+	#mv "${MY_P}.ninja" "build.ninja" || die
 
 	# Avoid depending on gtest just for its prod headers when boringssl bundles it.
 	ln -s ../../boringssl/third_party/googletest/include/gtest core/include/ || die
