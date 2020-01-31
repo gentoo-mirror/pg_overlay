@@ -81,8 +81,11 @@ src_prepare() {
 	cd "${S}"/core || die
 	eapply "${FILESDIR}"/android-tools-8.1.0_p1-build.patch
 	eapply "${FILESDIR}"/fix_build_core.patch
+	eapply "${FILESDIR}"/fix_build_e2fsprogs.patch
 	#eapply "${DISTDIR}/${GLIBC_GETTID_PATCH}"
 
+	grep -Z -l -r --include=\*.{c,cpp,h,def,policy} '\bgettid\b' | \
+		xargs -0 sed -i'.bak' 's/\bgettid\b/sys_gettid/g'
 
 	cd "${S}"/extras
 	sed -e 's|^#include <sys/cdefs.h>$|/*\0*/|' \
