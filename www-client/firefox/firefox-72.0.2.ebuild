@@ -34,7 +34,7 @@ if [[ "${PV}" == *_rc* ]]; then
 	MOZ_SRC_URI="${MOZ_HTTP_URI}/source/${PN}-${MOZ_PV}.source.tar.xz -> $P.tar.xz"
 fi
 
-LLVM_MAX_SLOT=9
+LLVM_MAX_SLOT=10
 MOZCONFIG_OPTIONAL_JIT=1
 
 inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
@@ -136,6 +136,15 @@ DEPEND="${CDEPEND}
 	sys-apps/findutils
 	|| (
 		(
+			sys-devel/clang:10
+			!clang? ( sys-devel/llvm:10 )
+			clang? (
+				=sys-devel/lld-10*
+				sys-devel/llvm:10
+				pgo? ( =sys-libs/compiler-rt-sanitizers-10*[profile] )
+			)
+		)
+		(
 			sys-devel/clang:9
 			!clang? ( sys-devel/llvm:9 )
 			clang? (
@@ -151,15 +160,6 @@ DEPEND="${CDEPEND}
 				=sys-devel/lld-8*
 				sys-devel/llvm:8
 				pgo? ( =sys-libs/compiler-rt-sanitizers-8*[profile] )
-			)
-		)
-		(
-			sys-devel/clang:7
-			!clang? ( sys-devel/llvm:7 )
-			clang? (
-				=sys-devel/lld-7*
-				sys-devel/llvm:7
-				pgo? ( =sys-libs/compiler-rt-sanitizers-7*[profile] )
 			)
 		)
 	)
