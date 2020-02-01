@@ -41,6 +41,7 @@ dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject I
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 65.1: International Components for Unicode
 dev-libs/libevdev 1.8.0: Handler library for evdev events
+dev-libs/libgit2 0.28.4: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
