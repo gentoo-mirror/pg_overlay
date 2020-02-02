@@ -9,7 +9,7 @@ inherit git-r3 l10n wxwidgets
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
-EGIT_REPO_URI="https://repo.or.cz/${PN}.git"
+EGIT_REPO_URI="https://github.com/${PN}-project/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -51,6 +51,8 @@ src_prepare() {
 	l10n_for_each_disabled_locale_do rem_locale
 	
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
+
+	eautoreconf
 }
 
 src_configure() {
