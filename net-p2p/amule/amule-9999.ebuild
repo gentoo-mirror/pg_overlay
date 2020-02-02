@@ -52,6 +52,8 @@ src_prepare() {
 	
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
 
+	cd src/pixmaps/flags_xpm
+	./makeflags.sh
 	eautoreconf
 }
 
