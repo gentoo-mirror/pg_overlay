@@ -60,7 +60,7 @@ src_prepare() {
 	./makeflags.sh
 	popd
 
-	eautomake
+	eautoreconf
 }
 
 src_configure() {
