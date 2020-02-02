@@ -5,11 +5,11 @@ EAPI=7
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
 WX_GTK_VER="3.1-gtk3"
 
-inherit git-r3 l10n wxwidgets
+inherit autotools git-r3 l10n wxwidgets
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
-EGIT_REPO_URI="https://repo.or.cz/${PN}.git"
+EGIT_REPO_URI="https://github.com/${PN}-project/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -51,6 +51,12 @@ src_prepare() {
 	l10n_for_each_disabled_locale_do rem_locale
 	
 	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
+
+	pushd src/pixmaps/flags_xpm
+	./makeflags.sh
+	popd
+
+	eautoreconf
 }
 
 src_configure() {
