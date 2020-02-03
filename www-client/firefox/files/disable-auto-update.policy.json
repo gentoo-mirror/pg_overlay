@@ -12,7 +12,6 @@
         "DisableMasterPasswordCreation": true,
         "DisableSetDesktopBackground": true,
         "DisableSystemAddonUpdate": true,
-        "DontCheckDefaultBrowser": true,
         "NetworkPrediction": false,
         "OverridePostUpdatePage": "",
         "CaptivePortal": false

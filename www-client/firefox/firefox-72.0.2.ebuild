@@ -777,9 +777,9 @@ src_install() {
 	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
 	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 	|| die
-	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/vendor-1.0.js-1 >> \
-	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-	|| die
+	#cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/vendor-1.0.js-1 >> \
+	#"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	#|| die
 
 	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
 
