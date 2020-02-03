@@ -23,8 +23,8 @@ else
 fi
 
 #RUST_STAGE0_VERSION=beta
-RUST_STAGE0_VERSION=${PV}
-#RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+#RUST_STAGE0_VERSION=${PV}
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
