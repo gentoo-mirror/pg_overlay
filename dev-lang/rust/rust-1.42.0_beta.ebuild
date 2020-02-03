@@ -63,6 +63,7 @@ LLVM_MAX_SLOT=10
 BOOTSTRAP_DEPEND="|| ( >=dev-lang/rust-1.$(($(ver_cut 2) - 1)).0-r1 >=dev-lang/rust-bin-1.$(($(ver_cut 2) - 1)) )"
 
 COMMON_DEPEND="
+	dev-libs/libgit2:=
 	net-libs/libssh2:=
 	net-libs/http-parser:=
 	net-misc/curl:=[ssl]
@@ -139,7 +140,7 @@ pkg_setup() {
 
 	# use bundled for now, #707746
 	# will need dev-libs/libgit2 slotted dep if re-enabled
-	#export LIBGIT2_SYS_USE_PKG_CONFIG=1
+	export LIBGIT2_SYS_USE_PKG_CONFIG=1
 	export LIBSSH2_SYS_USE_PKG_CONFIG=1
 	export PKG_CONFIG_ALLOW_CROSS=1
 
@@ -172,7 +173,7 @@ src_prepare() {
 	rm -rf vendor/jemalloc-sys/jemalloc/            
 	rm -rf vendor/libz-sys/src/zlib/            
 	rm -rf vendor/openssl-src/openssl/
-	#rm -rf vendor/libgit2-sys/libgit2/
+	rm -rf vendor/libgit2-sys/libgit2/
 	rm -rf vendor/libssh2-sys/libssh2/
 
 	# The configure macro will modify some autoconf-related files, which upsets
