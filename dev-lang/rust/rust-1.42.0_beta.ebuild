@@ -63,7 +63,7 @@ LLVM_MAX_SLOT=10
 BOOTSTRAP_DEPEND="|| ( >=dev-lang/rust-1.$(($(ver_cut 2) - 1)).0-r1 >=dev-lang/rust-bin-1.$(($(ver_cut 2) - 1)) )"
 
 COMMON_DEPEND="
-	dev-libs/libgit
+	dev-libs/libgit2:=
 	net-libs/libssh2:=
 	net-libs/http-parser:=
 	net-misc/curl:=[ssl]
