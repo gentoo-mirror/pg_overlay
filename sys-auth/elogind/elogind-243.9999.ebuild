@@ -16,7 +16,15 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+acl debug doc efi +pam +policykit selinux"
 
-COMMON_DEPEND="
+BDEPEND="
+	app-text/docbook-xml-dtd:4.2
+	app-text/docbook-xml-dtd:4.5
+	app-text/docbook-xsl-stylesheets
+	dev-util/gperf
+	dev-util/intltool
+	virtual/pkgconfig
+"
+DEPEND="
 	sys-apps/util-linux
 	sys-libs/libcap
 	virtual/libudev:=
@@ -24,16 +32,7 @@ COMMON_DEPEND="
 	pam? ( sys-libs/pam )
 	selinux? ( sys-libs/libselinux )
 "
-DEPEND="${COMMON_DEPEND}
-	app-text/docbook-xml-dtd:4.2
-	app-text/docbook-xml-dtd:4.5
-	app-text/docbook-xsl-stylesheets
-	dev-util/gperf
-	dev-util/intltool
-	sys-devel/libtool
-	virtual/pkgconfig
-"
-RDEPEND="${COMMON_DEPEND}
+RDEPEND="${DEPEND}
 	!sys-apps/systemd
 "
 PDEPEND="
@@ -42,15 +41,13 @@ PDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-243.4-docs.patch"
+	"${FILESDIR}/${PN}-243.4-nodocs.patch"
 )
 
 pkg_setup() {
 	local CONFIG_CHECK="~CGROUPS ~EPOLL ~INOTIFY_USER ~SIGNALFD ~TIMERFD"
 
-	if use kernel_linux; then
-		linux-info_pkg_setup
-	fi
+	use kernel_linux && linux-info_pkg_setup
 }
 
 src_prepare() {
@@ -59,23 +56,14 @@ src_prepare() {
 }
 
 src_configure() {
-	local rccgroupmode="$(grep rc_cgroup_mode /etc/rc.conf | cut -d '"' -f 2)"
+	local rccgroupmode="$(grep rc_cgroup_mode ${EPREFIX}/etc/rc.conf | cut -d '"' -f 2)"
 	local cgroupmode="legacy"
-	local debugmode=""
 
-	if [[ "xhybrid" = "x${rccgroupmode}" ]]; then
+	if [[ "xhybrid" = "x${rccgroupmode}" ]] ; then
 		cgroupmode="hybrid"
-	elif [[ "xunified" = "x${rccgroupmode}" ]]; then
+	elif [[ "xunified" = "x${rccgroupmode}" ]] ; then
 		cgroupmode="unified"
 	fi
-
-	if use debug; then
-		debugmode="-Ddebug-extra=elogind"
-	fi
-
-	# Duplicating C[XX]FLAGS in LDFLAGS is deprecated and will become
-	# a hard error in future meson versions:
-	filter-ldflags $CFLAGS $CXXFLAGS
 
 	local emesonargs=(
 		$debugmode
@@ -85,7 +73,7 @@ src_configure() {
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
 		-Dcgroup-controller=openrc
 		-Ddefault-hierarchy=${cgroupmode}
-		-Ddefault-kill-user-processes=false
+		-Ddefault-kill-user-processes=true
 		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
 		-Defi=$(usex efi true false)
 		-Dhtml=$(usex doc auto false)
@@ -98,8 +86,8 @@ src_configure() {
 		-Drootprefix="${EPREFIX}/"
 		-Dselinux=$(usex selinux true false)
 		-Dsmack=true
-		-Dudevrulesdir="$(get_udevdir)"/rules.d
-		-Dzshcompletiondir="${EPREFIX}/usr/share/zsh/site-functions"
+		-Dudevrulesdir="${EPREFIX}$(get_udevdir)"/rules.d
+		-Dutmp=$(usex elibc_musl false true)
 	)
 
 	meson_src_configure
@@ -126,8 +114,17 @@ pkg_postinst() {
 		ewarn "# rc-update del elogind default"
 		ewarn "# rc-update add elogind boot"
 	else
-		ewarn "elogind is currently not started from any runlevel."
-		ewarn "You may add it to the boot runlevel by:"
-		ewarn "# rc-update add elogind boot"
+		elog "elogind is currently not started from any runlevel."
+		elog "You may add it to the boot runlevel by:"
+		elog "# rc-update add elogind boot"
+		elog
+		elog "Alternatively, you can leave elogind out of any"
+		elog "runlevel. It will then be started automatically"
+		if use pam; then
+			elog "when the first service calls it via dbus, or"
+			elog "the first user logs into the system."
+		else
+			elog "when the first service calls it via dbus."
+		fi
 	fi
 }
