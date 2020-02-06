@@ -398,6 +398,8 @@ www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead
 www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
 www-client/firefox:thinlto - Enable ThinLTO insted of Full LTO.
+www-plugins/freshplayerplugin:gles2 - Use system GLESv2 libraries instead of ANGLE for shader translation
+www-plugins/freshplayerplugin:v4l - Use libv4l2 for colorspace conversion
 x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
