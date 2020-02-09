@@ -5,8 +5,8 @@ app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/lzma 19.00: LZMA Stream Compressor from the SDK
 app-arch/p7zip 16.02-r4 16.02-r5: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-crypt/certbot 1.1.0: Let's encrypt client to automate deployment of X.509 certificates
-app-crypt/certbot-nginx 1.1.0: Nginx plugin for certbot (Let's Encrypt Client)
+app-crypt/certbot 1.2.0-r1: Let's encrypt client to automate deployment of X.509 certificates
+app-crypt/certbot-nginx 1.2.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
@@ -213,18 +213,18 @@ sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
-sys-devel/clang 9.0.1 10.0.0_rc1: C language family frontend for LLVM
-sys-devel/lld 9.0.1 10.0.0_rc1: The LLVM linker (link editor)
-sys-devel/llvm 9.0.1 10.0.0_rc1: Low Level Virtual Machine
+sys-devel/clang 10.0.0_rc1: C language family frontend for LLVM
+sys-devel/lld 10.0.0_rc1: The LLVM linker (link editor)
+sys-devel/llvm 10.0.0_rc1: Low Level Virtual Machine
 sys-fs/xfsprogs 5.5.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
-sys-libs/compiler-rt 9.0.1 10.0.0_rc1: Compiler runtime library for clang (built-in part)
-sys-libs/compiler-rt-sanitizers 9.0.1 10.0.0_rc1: Compiler runtime libraries for clang (sanitizers & xray)
+sys-libs/compiler-rt 10.0.0_rc1: Compiler runtime library for clang (built-in part)
+sys-libs/compiler-rt-sanitizers 10.0.0_rc1: Compiler runtime libraries for clang (sanitizers & xray)
 sys-libs/libblockdev 2.23: A library for manipulating block devices
-sys-libs/libcxx 9.0.1 10.0.0_rc1: New implementation of the C++ standard library, targeting C++11
-sys-libs/libcxxabi 9.0.1 10.0.0_rc1: Low level support for a standard C++ library
-sys-libs/libomp 9.0.1 10.0.0_rc1: OpenMP runtime library for LLVM/clang compiler
-sys-libs/llvm-libunwind 9.0.1 10.0.0_rc1: C++ runtime stack unwinder from LLVM
+sys-libs/libcxx 10.0.0_rc1: New implementation of the C++ standard library, targeting C++11
+sys-libs/libcxxabi 10.0.0_rc1: Low level support for a standard C++ library
+sys-libs/libomp 10.0.0_rc1: OpenMP runtime library for LLVM/clang compiler
+sys-libs/llvm-libunwind 10.0.0_rc1: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.1_p20200118: console display library
 sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
