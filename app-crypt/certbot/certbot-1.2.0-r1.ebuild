@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=(python{2_7,3_7,3_8})
+PYTHON_COMPAT=(python3_{7,8})
 
 if [[ ${PV} == 9999* ]]; then
 	EGIT_REPO_URI="https://github.com/certbot/certbot.git"
@@ -38,14 +38,12 @@ RDEPEND="
 	dev-python/pytz[${PYTHON_USEDEP}]
 	dev-python/zope-component[${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]"
-DEPEND="
-	${CDEPEND}
-	test? (
-		dev-python/pytest[${PYTHON_USEDEP}]
-	)"
+DEPEND="${CDEPEND}"
 
-python_test() {
-	# acme is not installed, removing it here is fine, the dir just confuses tests
-	rm -R ../acme
-	pytest -vv ${PN} || die
+distutils_enable_tests pytest
+
+python_prepare_all() {
+	# required as deps of deps can trigger this too...
+	echo '    ignore:.*collections\.abc:DeprecationWarning' >> ../pytest.ini
+	distutils-r1_python_prepare_all
 }
