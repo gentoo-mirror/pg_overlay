@@ -341,22 +341,6 @@ net-p2p/transmission:lightweight - Optimize transmission for low-resource system
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
 net-print/samsung-unified-driver:network - Enable network printing support
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
-sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
-sys-devel/clang:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
-sys-devel/clang:static-analyzer - Install the Clang static analyzer
-sys-devel/clang:z3 - Enable the static analyzer constraint manager backend using sci-mathematics/z3
-sys-devel/llvm:doc - Build and install the HTML documentation and regenerate the man pages
-sys-devel/llvm:exegesis - Enable performance counter support for llvm-exegesis tool that can be used to measure host machine instruction characteristics
-sys-devel/llvm:gold - Build the gold linker plugin
-sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
-sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
-sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
-sys-libs/compiler-rt:clang - Force building using installed clang (rather than the default CC/CXX).
-sys-libs/compiler-rt-sanitizers:clang - Force building using installed clang (rather than the default CC/CXX).
-sys-libs/compiler-rt-sanitizers:libfuzzer - Build fuzzing runtime.
-sys-libs/compiler-rt-sanitizers:profile - Build profiling runtime.
-sys-libs/compiler-rt-sanitizers:sanitize - Build sanitizer runtimes.
-sys-libs/compiler-rt-sanitizers:xray - Build XRay runtime.
 sys-libs/libblockdev:bcache - Enable block device cache support.
 sys-libs/libblockdev:cryptsetup - Enable sys-fs/cryptsetup support
 sys-libs/libblockdev:device-mapper - Enable support for device-mapper from sys-fs/lvm2
@@ -367,13 +351,9 @@ sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-
 sys-libs/libblockdev:tools - Build tools
 sys-libs/libblockdev:vdo - Enable Virtual Data Optimizer support.
 sys-libs/libcxx:libcxxabi - Build on top of sys-libs/libcxxabi instead of gcc's libsupc++ (avoids depending on gcc).
-sys-libs/libcxx:libcxxrt - Build on top of sys-libs/libcxxrt instead of gcc's libsupc++ (avoids depending on gcc).
+sys-libs/libcxx:libcxxrt - Build on top of libcxxrt instead of gcc's libsupc++ (avoids depending on gcc).
 sys-libs/libcxx:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependence on gcc.
 sys-libs/libcxxabi:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependency on gcc
-sys-libs/libomp:cuda - Build CUDA offloading plugin (only with USE=offload)
-sys-libs/libomp:hwloc - Enable CPU affinity support via hwloc
-sys-libs/libomp:offload - Support offloading OpenMP using libomptarget
-sys-libs/libomp:ompt - Enable OpenMP Tools Interface support
 sys-process/htop:openvz - Enable openvz support
 sys-process/htop:vserver - Enable vserver support
 www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
