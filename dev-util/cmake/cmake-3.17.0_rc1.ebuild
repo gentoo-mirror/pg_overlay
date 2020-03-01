@@ -25,6 +25,7 @@ RDEPEND="
 	app-crypt/rhash
 	>=app-arch/libarchive-3.0.0:=
 	>=dev-libs/expat-2.0.1
+	>=dev-libs/jsoncpp-1.9.2-r2:0=
 	>=dev-libs/libuv-1.10.0:=
 	>=net-misc/curl-7.21.5[ssl]
 	sys-libs/zlib
@@ -57,8 +58,8 @@ PATCHES=(
 	#"${FILESDIR}"/${PN}-3.1.0-darwin-isysroot.patch
 
 	# handle gentoo packaging in find modules
-	"${FILESDIR}"/${PN}-3.15.0_rc2-FindBLAS.patch
-	"${FILESDIR}"/${PN}-3.14.0_rc1-FindLAPACK.patch
+	"${FILESDIR}"/${PN}-3.17.0_rc1-FindBLAS.patch
+	"${FILESDIR}"/${PN}-3.17.0_rc1-FindLAPACK.patch
 	"${FILESDIR}"/${PN}-3.5.2-FindQt4.patch
 
 	# respect python eclasses
@@ -150,8 +151,6 @@ src_configure() {
 
 	local mycmakeargs=(
 		-DCMAKE_USE_SYSTEM_LIBRARIES=ON
-		-DCMAKE_USE_SYSTEM_LIBRARY_JSONCPP=OFF
-		-DCMAKE_INSTALL_PREFIX="${EPREFIX}"/usr
 		-DCMAKE_DOC_DIR=/share/doc/${PF}
 		-DCMAKE_MAN_DIR=/share/man
 		-DCMAKE_DATA_DIR=/share/${PN}

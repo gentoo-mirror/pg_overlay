@@ -1,6 +1,6 @@
-From 4de8287ce3b098ea579a28155d442eb589db8617 Mon Sep 17 00:00:00 2001
+From f4009d1efccf571d229e89fab846b0d5873e7a5b Mon Sep 17 00:00:00 2001
 From: Lars Wendler <polynomial-c@gentoo.org>
-Date: Sat, 22 Jun 2019 16:09:05 +0200
+Date: Thu, 13 Feb 2020 13:12:45 +0100
 Subject: [PATCH] Prefer pkgconfig in FindBLAS
 
 ---
@@ -8,7 +8,7 @@ Subject: [PATCH] Prefer pkgconfig in FindBLAS
  1 file changed, 7 insertions(+)
 
 diff --git a/Modules/FindBLAS.cmake b/Modules/FindBLAS.cmake
-index 77f9d0e40c..bbe155caa9 100644
+index 9b6d09c2f9..c2af42468c 100644
 --- a/Modules/FindBLAS.cmake
 +++ b/Modules/FindBLAS.cmake
 @@ -7,6 +7,10 @@ FindBLAS
@@ -20,18 +20,18 @@ index 77f9d0e40c..bbe155caa9 100644
 +all further checks.
 +
  This module finds an installed Fortran library that implements the
- BLAS linear-algebra interface (see http://www.netlib.org/blas/).  The
- list of libraries searched for is taken from the ``autoconf`` macro file,
-@@ -92,6 +96,9 @@ installation.
+ BLAS linear-algebra interface (see http://www.netlib.org/blas/).
  
- #]=======================================================================]
+@@ -107,6 +111,9 @@ if(NOT (CMAKE_C_COMPILER_LOADED OR CMAKE_CXX_COMPILER_LOADED OR CMAKE_Fortran_CO
+   endif()
+ endif()
  
 +# first, try PkgConfig
 +set(BLA_PREFER_PKGCONFIG On)
 +
- include(${CMAKE_CURRENT_LIST_DIR}/CheckFunctionExists.cmake)
- include(${CMAKE_CURRENT_LIST_DIR}/CheckFortranFunctionExists.cmake)
- include(${CMAKE_CURRENT_LIST_DIR}/CMakePushCheckState.cmake)
+ if(CMAKE_Fortran_COMPILER_LOADED)
+   include(${CMAKE_CURRENT_LIST_DIR}/CheckFortranFunctionExists.cmake)
+ else()
 -- 
-2.22.0
+2.25.0
 
