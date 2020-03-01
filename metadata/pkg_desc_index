@@ -134,7 +134,7 @@ dev-qt/qtdeclarative 5.14.0: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cbindgen 0.12.1: A tool for generating C bindings to Rust code
-dev-util/cmake 3.16.4: Cross platform Make
+dev-util/cmake 3.17.0_rc1: Cross platform Make
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.63.4: GDBus code and documentation generator
 dev-util/glib-utils 2.63.4: Build utilities for GLib using projects
@@ -143,7 +143,7 @@ dev-util/gn 0.1616: GN is a meta-build system that generates build files for Nin
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
-dev-util/mdds 1.5.0: A collection of multi-dimensional data structure and indexing algorithm
+dev-util/mdds 1.5.0 1.6.0: A collection of multi-dimensional data structure and indexing algorithm
 dev-util/meson 0.53.1_pre: Open source build system
 dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
