@@ -25,7 +25,6 @@ RDEPEND="
 	app-crypt/rhash
 	>=app-arch/libarchive-3.0.0:=
 	>=dev-libs/expat-2.0.1
-	>=dev-libs/jsoncpp-1.9.2-r2:0=
 	>=dev-libs/libuv-1.10.0:=
 	>=net-misc/curl-7.21.5[ssl]
 	sys-libs/zlib
@@ -151,6 +150,7 @@ src_configure() {
 
 	local mycmakeargs=(
 		-DCMAKE_USE_SYSTEM_LIBRARIES=ON
+		-DCMAKE_USE_SYSTEM_LIBRARY_JSONCPP=OFF
 		-DCMAKE_DOC_DIR=/share/doc/${PF}
 		-DCMAKE_MAN_DIR=/share/man
 		-DCMAKE_DATA_DIR=/share/${PN}
