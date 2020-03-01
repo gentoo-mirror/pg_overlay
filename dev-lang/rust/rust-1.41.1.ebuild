@@ -58,18 +58,16 @@ LLVM_DEPEND="
 "
 LLVM_MAX_SLOT=10
 
-# FIXME:
-# this should be '>=virtual/rust-1.$(($(ver_cut 2) - 1))', but we can't do it yet
-# as the first gentoo-built rust that can bootstap new compiler is 1.40.0-r1
-BOOTSTRAP_DEPEND="|| ( =dev-lang/rust-${PVR} =dev-lang/rust-bin-${PV}* )"
+BOOTSTRAP_DEPEND="|| ( >=dev-lang/rust-1.$(($(ver_cut 2) - 1)).0-r1 >=dev-lang/rust-bin-1.$(($(ver_cut 2) - 1)) )"
 
 COMMON_DEPEND="
-	sys-libs/zlib
+	dev-libs/libgit2:=
+	net-libs/libssh2:=
+	net-libs/http-parser:=
+	net-misc/curl:=[ssl]
+	sys-libs/zlib:=
 	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:0= )
-	net-libs/libssh2
-	net-libs/http-parser:=
-	net-misc/curl[ssl]
 	elibc_musl? ( sys-libs/libunwind )
 	system-llvm? (
 		${LLVM_DEPEND}
@@ -111,8 +109,6 @@ QA_FLAGS_IGNORED="
 QA_SONAME="usr/lib.*/librustc_macros.*.so"
 
 PATCHES=(
-	"${FILESDIR}"/rust-pr66317-bindir-relative.patch
-	"${FILESDIR}"/rust-issue-67242-ignore-arm-foreign-exceptions.patch
 	"${FILESDIR}"/1.40.0-add-soname.patch
 )
 
@@ -126,7 +122,7 @@ pre_build_checks() {
 	CHECKREQS_DISK_BUILD="9G"
 	eshopts_push -s extglob
 	if is-flagq '-g?(gdb)?([1-9])'; then
-		CHECKREQS_DISK_BUILD="14G"
+		CHECKREQS_DISK_BUILD="15G"
 	fi
 	eshopts_pop
 	check-reqs_pkg_setup
@@ -139,7 +135,21 @@ pkg_pretend() {
 pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
-	use system-llvm && llvm_pkg_setup
+
+	# use bundled for now, #707746
+	# will need dev-libs/libgit2 slotted dep if re-enabled
+	export LIBGIT2_SYS_USE_PKG_CONFIG=1
+	export LIBSSH2_SYS_USE_PKG_CONFIG=1
+	export PKG_CONFIG_ALLOW_CROSS=1
+
+	if use system-llvm; then
+		llvm_pkg_setup
+
+		local llvm_config="$(get_llvm_prefix "$LLVM_MAX_SLOT")/bin/llvm-config"
+
+		export LLVM_LINK_SHARED=1
+		export RUSTFLAGS="${RUSTFLAGS} -Lnative=$("${llvm_config}" --libdir)"
+	fi
 }
 
 src_prepare() {
@@ -161,6 +171,8 @@ src_prepare() {
 	rm -rf vendor/jemalloc-sys/jemalloc/            
 	rm -rf vendor/libz-sys/src/zlib/            
 	rm -rf vendor/openssl-src/openssl/
+	rm -rf vendor/libgit2-sys/libgit2/
+	rm -rf vendor/libssh2-sys/libssh2/
 
 	# The configure macro will modify some autoconf-related files, which upsets
 	# cargo when it tries to verify checksums in those files.  If we just truncate
@@ -247,7 +259,7 @@ src_configure() {
 		mandir = "share/man"
 
 		[rust]
-		optimize = $(toml_usex !debug)
+		optimize = true
 		debug = $(toml_usex debug)
 		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
@@ -260,6 +272,7 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		backtrace-on-ice = true
 
 		[dist]
 		src-tarball = false
@@ -364,7 +377,7 @@ src_install() {
 		echo /usr/bin/rustfmt >> "${T}/provider-${P}"
 		echo /usr/bin/cargo-fmt >> "${T}/provider-${P}"
 	fi
-	dodir /etc/env.d/rust
+
 	insinto /etc/env.d/rust
 	doins "${T}/provider-${P}"
 }

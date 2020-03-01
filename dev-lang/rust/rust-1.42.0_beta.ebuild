@@ -24,7 +24,7 @@ fi
 
 #RUST_STAGE0_VERSION=beta
 #RUST_STAGE0_VERSION=${PV}
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).1"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -121,7 +121,7 @@ toml_usex() {
 }
 
 pre_build_checks() {
-	CHECKREQS_DISK_BUILD="10G"
+	CHECKREQS_DISK_BUILD="9G"
 	eshopts_push -s extglob
 	if is-flagq '-g?(gdb)?([1-9])'; then
 		CHECKREQS_DISK_BUILD="15G"
@@ -261,7 +261,7 @@ src_configure() {
 		mandir = "share/man"
 
 		[rust]
-		optimize = $(toml_usex !debug)
+		optimize = true
 		debug = $(toml_usex debug)
 		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
@@ -274,6 +274,7 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		backtrace-on-ice = true
 
 		[dist]
 		src-tarball = false

@@ -3,30 +3,24 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{6,7} )
 inherit cmake-multilib llvm llvm.org multiprocessing python-any-r1
 
-DESCRIPTION="Low level support for a standard C++ library"
-HOMEPAGE="https://libcxxabi.llvm.org/"
-# libcxx is needed uncondtionally for the headers
-LLVM_COMPONENTS=( libcxx{abi,} )
+DESCRIPTION="C++ runtime stack unwinder from LLVM"
+HOMEPAGE="https://github.com/llvm-mirror/libunwind"
+LLVM_COMPONENTS=( libunwind )
+LLVM_TEST_COMPONENTS=( libcxx{,abi} )
 llvm.org_set_globals
 
 LICENSE="Apache-2.0-with-LLVM-exceptions || ( UoI-NCSA MIT )"
 SLOT="0"
 KEYWORDS=""
-IUSE="+libunwind +static-libs test elibc_musl"
+IUSE="debug +static-libs test"
 RESTRICT="!test? ( test )"
 
-RDEPEND="
-	libunwind? (
-		|| (
-			>=sys-libs/libunwind-1.0.1-r1[static-libs?,${MULTILIB_USEDEP}]
-			>=sys-libs/llvm-libunwind-3.9.0-r1[static-libs?,${MULTILIB_USEDEP}]
-		)
-	)"
+RDEPEND="!sys-libs/libunwind"
 # llvm-6 for new lit options
-DEPEND="${RDEPEND}
+DEPEND="
 	>=sys-devel/llvm-6"
 BDEPEND="
 	test? ( >=sys-devel/clang-3.9.0
@@ -40,34 +34,21 @@ python_check_deps() {
 }
 
 pkg_setup() {
-	llvm_pkg_setup
 	use test && python-any-r1_pkg_setup
 }
 
 multilib_src_configure() {
-	# link against compiler-rt instead of libgcc if we are using clang with libunwind
-	local want_compiler_rt=OFF
-	if use libunwind && tc-is-clang; then
-		local compiler_rt=$($(tc-getCC) ${CFLAGS} ${CPPFLAGS} \
-			${LDFLAGS} -print-libgcc-file-name)
-		if [[ ${compiler_rt} == *libclang_rt* ]]; then
-			want_compiler_rt=ON
-		fi
-	fi
-
 	local libdir=$(get_libdir)
-	local mycmakeargs=(
-		-DLIBCXXABI_LIBDIR_SUFFIX=${libdir#lib}
-		-DLIBCXXABI_ENABLE_SHARED=ON
-		-DLIBCXXABI_ENABLE_STATIC=$(usex static-libs)
-		-DLIBCXXABI_USE_LLVM_UNWINDER=$(usex libunwind)
-		-DLIBCXXABI_INCLUDE_TESTS=$(usex test)
-		-DLIBCXXABI_USE_COMPILER_RT=${want_compiler_rt}
 
-		-DLIBCXXABI_LIBCXX_INCLUDES="${WORKDIR}"/libcxx/include
-		# upstream is omitting standard search path for this
-		# probably because gcc & clang are bundling their own unwind.h
-		-DLIBCXXABI_LIBUNWIND_INCLUDES="${EPREFIX}"/usr/include
+	local mycmakeargs=(
+		-DLLVM_LIBDIR_SUFFIX=${libdir#lib}
+		-DLIBUNWIND_ENABLE_ASSERTIONS=$(usex debug)
+		-DLIBUNWIND_ENABLE_STATIC=$(usex static-libs)
+		-DLLVM_INCLUDE_TESTS=$(usex test)
+
+		# support non-native unwinding; given it's small enough,
+		# enable it unconditionally
+		-DLIBUNWIND_ENABLE_CROSS_UNWINDING=ON
 	)
 	if use test; then
 		local clang_path=$(type -P "${CHOST:+${CHOST}-}clang" 2>/dev/null)
@@ -78,13 +59,34 @@ multilib_src_configure() {
 		mycmakeargs+=(
 			-DLLVM_EXTERNAL_LIT="${EPREFIX}/usr/bin/lit"
 			-DLLVM_LIT_ARGS="-vv;-j;${jobs};--param=cxx_under_test=${clang_path}"
+			-DLIBUNWIND_LIBCXX_PATH="${WORKDIR}/libcxx"
 		)
 	fi
+
 	cmake-utils_src_configure
 }
 
-build_libcxx() {
+build_libcxxabi() {
 	local -x LDFLAGS="${LDFLAGS} -L${BUILD_DIR}/$(get_libdir)"
+	local CMAKE_USE_DIR=${WORKDIR}/libcxxabi
+	local BUILD_DIR=${BUILD_DIR}/libcxxabi
+	local mycmakeargs=(
+		-DLIBCXXABI_LIBDIR_SUFFIX=
+		-DLIBCXXABI_ENABLE_SHARED=OFF
+		-DLIBCXXABI_ENABLE_STATIC=ONF
+		-DLIBCXXABI_USE_LLVM_UNWINDER=ON
+		-DLIBCXXABI_INCLUDE_TESTS=OFF
+
+		-DLIBCXXABI_LIBCXX_INCLUDES="${WORKDIR}"/libcxx/include
+		-DLIBCXXABI_LIBUNWIND_INCLUDES="${S}"/include
+	)
+
+	cmake-utils_src_configure
+	cmake-utils_src_compile
+}
+
+build_libcxx() {
+	local -x LDFLAGS="${LDFLAGS} -L${BUILD_DIR}/libcxxabi/lib -L${BUILD_DIR}/$(get_libdir)"
 	local CMAKE_USE_DIR=${WORKDIR}/libcxx
 	local BUILD_DIR=${BUILD_DIR}/libcxx
 	local mycmakeargs=(
@@ -92,8 +94,9 @@ build_libcxx() {
 		-DLIBCXX_ENABLE_SHARED=OFF
 		-DLIBCXX_ENABLE_STATIC=ON
 		-DLIBCXX_ENABLE_EXPERIMENTAL_LIBRARY=OFF
+		-DLIBCXXABI_USE_LLVM_UNWINDER=ON
 		-DLIBCXX_CXX_ABI=libcxxabi
-		-DLIBCXX_CXX_ABI_INCLUDE_PATHS="${S}"/include
+		-DLIBCXX_CXX_ABI_INCLUDE_PATHS="${WORKDIR}"/libcxxabi/include
 		-DLIBCXX_ENABLE_ABI_LINKER_SCRIPT=OFF
 		-DLIBCXX_HAS_MUSL_LIBC=$(usex elibc_musl)
 		-DLIBCXX_HAS_GCC_S_LIB=OFF
@@ -105,15 +108,19 @@ build_libcxx() {
 }
 
 multilib_src_test() {
-	# build a local copy of libc++ for testing to avoid circular dep
+	# build local copies of libc++ & libc++abi for testing to avoid
+	# circular deps
+	build_libcxxabi
 	build_libcxx
-	mv "${BUILD_DIR}"/libcxx/lib/libc++* "${BUILD_DIR}/$(get_libdir)/" || die
+	mv "${BUILD_DIR}"/libcxx*/lib/libc++* "${BUILD_DIR}/$(get_libdir)/" || die
 
 	local -x LIT_PRESERVES_TMP=1
-	cmake-utils_src_make check-libcxxabi
+	cmake-utils_src_make check-unwind
 }
 
-multilib_src_install_all() {
-	insinto /usr/include/libcxxabi
-	doins -r include/.
+multilib_src_install() {
+	cmake-utils_src_install
+
+	# install headers like sys-libs/libunwind
+	doheader "${S}"/include/*.h
 }
