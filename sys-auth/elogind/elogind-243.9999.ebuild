@@ -41,7 +41,7 @@ PDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-243.4-nodocs.patch"
+	"${FILESDIR}/${PN}-243.6-docs.patch"
 )
 
 pkg_setup() {

@@ -1,6 +1,6 @@
---- a/meson.build	2020-01-17 18:34:55.572888655 +0100
-+++ b/meson.build	2020-01-17 18:35:42.547887045 +0100
-@@ -3342,24 +3342,7 @@
+--- a/meson.build	2020-02-13 07:53:43.511226758 +0100
++++ b/meson.build	2020-02-13 07:54:43.633227581 +0100
+@@ -3352,24 +3352,7 @@
  # install_data('modprobe.d/systemd.conf',
  #              install_dir : modprobedir)
  #endif // 0
@@ -9,7 +9,7 @@
 -#if 0 /// elogind has upgraded to markdown, and the NEWS file is useless
 -#              'NEWS',
 -#              'README',
--#else
+-#else // 0
 -             'README.md',
 -#endif // 0
 -             'docs/CODING_STYLE.md',
