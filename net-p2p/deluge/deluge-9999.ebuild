@@ -36,7 +36,6 @@ DEPEND="
 		dev-python/wheel[${PYTHON_MULTI_USEDEP}]
 	')
 	dev-util/intltool
-	dev-python/wheel[${PYTHON_USEDEP}]
 	acct-group/deluge
 	acct-user/deluge"
 RDEPEND="
