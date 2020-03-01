@@ -25,7 +25,9 @@ RDEPEND="${PYTHON_DEPS}
 	qt5? ( dev-python/PyQt5 )
 "
 DEPEND="${PYTHON_DEPS}
-	dev-python/setuptools[${PYTHON_USEDEP}]
+	$(python_gen_cond_dep '
+		dev-python/setuptools[${PYTHON_MULTI_USEDEP}]
+	')
 	virtual/libusb:1
 	virtual/pkgconfig
 "
