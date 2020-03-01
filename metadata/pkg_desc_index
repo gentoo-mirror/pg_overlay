@@ -40,7 +40,7 @@ dev-libs/glib 2.63.4: The GLib library of C routines
 dev-libs/gobject-introspection 1.63.2: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
-dev-libs/icu 65.1: International Components for Unicode
+dev-libs/icu 65.1-r1: International Components for Unicode
 dev-libs/libevdev 1.8.0: Handler library for evdev events
 dev-libs/libgit2 0.28.4: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
