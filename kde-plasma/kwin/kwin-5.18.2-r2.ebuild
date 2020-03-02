@@ -5,17 +5,17 @@ EAPI=7
 
 ECM_HANDBOOK="optional"
 ECM_TEST="optional"
-VIRTUALX_REQUIRED="test"
-KFMIN=5.64.0
+KFMIN=5.66.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.12.3
+VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
 DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
 SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.gz -> ${PF}.tar.gz"
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS="~amd64 ~arm ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 IUSE="caps gles2 multimedia"
 S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
 
