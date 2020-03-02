@@ -6,19 +6,14 @@ EAPI=7
 PYTHON_COMPAT=( python3_{6,7,8} )
 inherit cmake python-any-r1
 
-if [[ ${PV} == "9999" ]] ; then
-	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-	inherit git-r3
-else
-	SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="amd64 ~arm arm64 ~ppc ~ppc64 x86 ~ppc-macos"
-fi
-
 DESCRIPTION="A linkable library for Git"
 HOMEPAGE="https://libgit2.org"
+SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+S=${WORKDIR}/${P/_/-}
 
 LICENSE="GPL-2-with-linking-exception"
-SLOT="0/28"
+SLOT="0/0.99"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86 ~ppc-macos"
 IUSE="examples gssapi libressl +ssh test +threads trace"
 RESTRICT="!test? ( test )"
 
@@ -35,16 +30,25 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
-S=${WORKDIR}/${P/_/-}
+PATCHES=(
+	"${FILESDIR}"/${P}-pkg-config.patch
+)
+
+src_prepare() {
+	cmake_src_prepare
+	# relying on forked http-parser to support some obscure URI form
+	sed -i -e '/empty_port/s:test:_&:' tests/network/urlparse.c || die
+}
 
 src_configure() {
 	local mycmakeargs=(
 		-DLIB_INSTALL_DIR="${EPREFIX}/usr/$(get_libdir)"
 		-DBUILD_CLAR=$(usex test)
-		-DENABLE_TRACE=$(usex trace)
-		-DUSE_GSSAPI=$(usex gssapi)
+		-DENABLE_TRACE=$(usex trace ON OFF)
+		-DUSE_GSSAPI=$(usex gssapi ON OFF)
 		-DUSE_SSH=$(usex ssh)
 		-DTHREADSAFE=$(usex threads)
+		-DUSE_HTTP_PARSER=system
 	)
 	cmake_src_configure
 }
