@@ -41,8 +41,7 @@
 		installation with secure-delete enabled</flag>
 	<flag name="system-webp">Use the system-wide <pkg>media-libs/libwebp</pkg>
 		instead of bundled.</flag>
-	<flag name="cross-lto">Enable LTO between C++ code and Rust code.</flag>
-	<flag name="thinlto">Enable ThinLTO insted of Full LTO.</flag>
+
 
 </use>
 </pkgmetadata>
