@@ -15,8 +15,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.2.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.4.0.3: A full office productivity suite
-app-office/libreoffice-l10n 6.4.0.3: Translations for the Libreoffice suite
+app-office/libreoffice 6.4.2.1: A full office productivity suite
+app-office/libreoffice-l10n 6.4.2.1: Translations for the Libreoffice suite
 app-portage/eix 0.33.9-r1: Search and query ebuilds
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
@@ -41,7 +41,7 @@ dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject I
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 65.1-r1: International Components for Unicode
 dev-libs/libevdev 1.8.0: Handler library for evdev events
-dev-libs/libgit2 0.28.4: A linkable library for Git
+dev-libs/libgit2 0.99.0-r1: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
