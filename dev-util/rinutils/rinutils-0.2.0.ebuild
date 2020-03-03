@@ -18,14 +18,6 @@ IUSE=""
 RDEPEND=""
 DEPEND="${RDEPEND}"
 
-src_prepare() {
-	sed -i -e "s|share/doc/freecell-solver/|share/doc/${P}|" CMakeLists.txt || die
-
-	python_fix_shebang board_gen
-
-	cmake_src_prepare
-}
-
 src_configure() {
 	local mycmakeargs=(
 		-DWITH_TEST_SUITE=OFF
