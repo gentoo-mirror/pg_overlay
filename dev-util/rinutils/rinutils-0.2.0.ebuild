@@ -18,8 +18,6 @@ IUSE=""
 RDEPEND=""
 DEPEND="${RDEPEND}"
 
-DOCS=( README.html )
-
 src_prepare() {
 	sed -i -e "s|share/doc/freecell-solver/|share/doc/${P}|" CMakeLists.txt || die
 
