@@ -476,7 +476,7 @@ src_configure() {
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
 			mozconfig_annotate 'enable PGO on Rust code' --enable-profile-generate=cross
-			mozconfig_annotate 'enable PGO on Rust code' --enable-profile-use=cross
+			#mozconfig_annotate 'enable PGO on Rust code' --enable-profile-use=cross
 		fi
 	else
 		# Avoid auto-magic on linker
