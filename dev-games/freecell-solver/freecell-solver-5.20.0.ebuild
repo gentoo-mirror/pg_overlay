@@ -32,8 +32,6 @@ DEPEND="${RDEPEND}
 
 DOCS=( README.html )
 
-PATCHES=( "${FILESDIR}/${PN}-5.14.0-cmake.patch" )
-
 src_prepare() {
 	sed -i -e "s|share/doc/freecell-solver/|share/doc/${P}|" CMakeLists.txt || die
 
