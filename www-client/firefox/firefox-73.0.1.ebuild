@@ -404,6 +404,7 @@ src_configure() {
 
 	# Don't let user's LTO flags clash with upstream's flags
 	filter-flags -flto*
+	filter-flags -fno-plt
 
 	if use lto ; then
 		local show_old_compiler_warning=
@@ -474,7 +475,8 @@ src_configure() {
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
-			mozconfig_annotate 'enable PGO on Rust code' --enable-cross-pgo
+			mozconfig_annotate 'enable PGO on Rust code' --enable-profile-generate=cross
+			mozconfig_annotate 'enable PGO on Rust code' --enable-profile-use=cross
 		fi
 	else
 		# Avoid auto-magic on linker
