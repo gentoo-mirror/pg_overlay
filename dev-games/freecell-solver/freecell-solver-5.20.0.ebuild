@@ -22,6 +22,7 @@ RDEPEND="${PYTHON_DEPS}
 		dev-python/pysol_cards[${PYTHON_MULTI_USEDEP}]
 		dev-python/random2[${PYTHON_MULTI_USEDEP}]
 		dev-python/six[${PYTHON_MULTI_USEDEP}]
+		dev-util/rinutils
 	')
 	tcmalloc? ( dev-util/google-perftools )
 "
