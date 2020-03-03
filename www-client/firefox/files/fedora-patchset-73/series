@@ -9,7 +9,6 @@ kiosk-workaround.patch
 
 mozilla-1196777.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-bug1375074-save-restore-x28.patch
 mozilla-1580174-webrtc-popup.patch
 mozilla-1607404-fix-remote-offset.patch
 mozilla-1609732-no-full-hide.patch
