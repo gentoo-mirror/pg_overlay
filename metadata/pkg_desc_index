@@ -148,7 +148,7 @@ dev-util/mdds 1.5.0 1.6.0: A collection of multi-dimensional data structure and 
 dev-util/meson 0.53.1_pre: Open source build system
 dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/runutils 0.2.0: C library for automatically solving Freecell and some other solitaire variants
+dev-util/rinutils 0.2.0: C11 / gnu11 utilities C library
 dev-util/samurai 1.0: ninja-compatible build tool written in C
 dev-util/vulkan-headers 1.1.130 1.2.132: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.1.130 1.2.131: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
