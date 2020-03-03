@@ -1,0 +1,786 @@
+diff -up firefox-73.0/browser/components/shell/moz.build.gnome-shell-search-provider firefox-73.0/browser/components/shell/moz.build
+--- firefox-73.0/browser/components/shell/moz.build.gnome-shell-search-provider	2020-02-07 22:12:59.000000000 +0100
++++ firefox-73.0/browser/components/shell/moz.build	2020-02-11 09:03:31.638803105 +0100
+@@ -34,6 +34,11 @@ elif CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gt
+     SOURCES += [
+         'nsGNOMEShellService.cpp',
+     ]
++    if CONFIG['MOZ_ENABLE_DBUS']:
++        SOURCES += [
++            'nsGNOMEShellSearchProvider.cpp',
++        ]
++
+ elif CONFIG['OS_ARCH'] == 'WINNT':
+     XPIDL_SOURCES += [
+         'nsIWindowsShellService.idl',
+@@ -60,6 +65,8 @@ for var in ('MOZ_APP_NAME', 'MOZ_APP_VER
+     DEFINES[var] = '"%s"' % CONFIG[var]
+ 
+ CXXFLAGS += CONFIG['TK_CFLAGS']
++if CONFIG['MOZ_ENABLE_DBUS']:
++    CXXFLAGS += CONFIG['MOZ_DBUS_GLIB_CFLAGS']
+ 
+ with Files('**'):
+     BUG_COMPONENT = ('Firefox', 'Shell Integration')
+diff -up firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.cpp.gnome-shell-search-provider firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.cpp
+--- firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.cpp.gnome-shell-search-provider	2020-02-11 09:00:59.350512802 +0100
++++ firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.cpp	2020-02-11 09:00:59.350512802 +0100
+@@ -0,0 +1,621 @@
++/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* vim:expandtab:shiftwidth=2:tabstop=2:
++ */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#include "nsGNOMEShellSearchProvider.h"
++
++#include "nsIBaseWindow.h"
++#include "nsIDocShell.h"
++#include "nsPIDOMWindow.h"
++#include "mozilla/ModuleUtils.h"
++#include "mozilla/Base64.h"
++#include "nsIServiceManager.h"
++#include "nsIWidget.h"
++#include "nsIAppShellService.h"
++#include "nsAppShellCID.h"
++#include "nsPrintfCString.h"
++#include "nsCOMPtr.h"
++#include "nsGTKToolkit.h"
++#include "nsINavHistoryService.h"
++#include "nsToolkitCompsCID.h"
++#include "nsIFaviconService.h"
++#include "RemoteUtils.h"
++#include "nsIStringBundle.h"
++
++#include <dbus/dbus.h>
++#include <dbus/dbus-glib-lowlevel.h>
++
++#define MAX_SEARCH_RESULTS_NUM 9
++#define KEYWORD_SEARCH_STRING "special:search"
++#define KEYWORD_SEARCH_STRING_LEN 14
++
++#define DBUS_BUS_NAME "org.mozilla.Firefox.SearchProvider"
++#define DBUS_OBJECT_PATH "/org/mozilla/Firefox/SearchProvider"
++
++static const char* introspect_template =
++    "<!DOCTYPE node PUBLIC \"-//freedesktop//DTD D-BUS Object Introspection "
++    "1.0//EN\"\n"
++    "\"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd\";>\n"
++    "<node>\n"
++    " <interface name=\"org.freedesktop.DBus.Introspectable\">\n"
++    "   <method name=\"Introspect\">\n"
++    "     <arg name=\"data\" direction=\"out\" type=\"s\"/>\n"
++    "   </method>\n"
++    " </interface>\n"
++    " <interface name=\"org.gnome.Shell.SearchProvider2\">\n"
++    "   <method name=\"GetInitialResultSet\">\n"
++    "     <arg type=\"as\" name=\"terms\" direction=\"in\" />\n"
++    "     <arg type=\"as\" name=\"results\" direction=\"out\" />\n"
++    "   </method>\n"
++    "   <method name=\"GetSubsearchResultSet\">\n"
++    "     <arg type=\"as\" name=\"previous_results\" direction=\"in\" />\n"
++    "     <arg type=\"as\" name=\"terms\" direction=\"in\" />\n"
++    "     <arg type=\"as\" name=\"results\" direction=\"out\" />\n"
++    "   </method>\n"
++    "   <method name=\"GetResultMetas\">\n"
++    "     <arg type=\"as\" name=\"identifiers\" direction=\"in\" />\n"
++    "     <arg type=\"aa{sv}\" name=\"metas\" direction=\"out\" />\n"
++    "   </method>\n"
++    "   <method name=\"ActivateResult\">\n"
++    "     <arg type=\"s\" name=\"identifier\" direction=\"in\" />\n"
++    "     <arg type=\"as\" name=\"terms\" direction=\"in\" />\n"
++    "     <arg type=\"u\" name=\"timestamp\" direction=\"in\" />\n"
++    "   </method>\n"
++    "   <method name=\"LaunchSearch\">\n"
++    "     <arg type=\"as\" name=\"terms\" direction=\"in\" />\n"
++    "     <arg type=\"u\" name=\"timestamp\" direction=\"in\" />\n"
++    "   </method>\n"
++    "</interface>\n"
++    "</node>\n";
++
++DBusHandlerResult nsGNOMEShellSearchProvider::Introspect(DBusMessage* aMsg) {
++  DBusMessage* reply;
++
++  reply = dbus_message_new_method_return(aMsg);
++  if (!reply) return DBUS_HANDLER_RESULT_NEED_MEMORY;
++
++  dbus_message_append_args(reply, DBUS_TYPE_STRING, &introspect_template,
++                           DBUS_TYPE_INVALID);
++
++  dbus_connection_send(mConnection, reply, nullptr);
++  dbus_message_unref(reply);
++
++  return DBUS_HANDLER_RESULT_HANDLED;
++}
++
++nsresult nsGNOMEShellSearchProvider::QueryHistory(const char* aSearchTerm) {
++  nsresult rv;
++  nsCOMPtr<nsINavHistoryQuery> histQuery;
++  rv = mHistoryService->GetNewQuery(getter_AddRefs(histQuery));
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  nsAutoCString searchTerm(aSearchTerm);
++  rv = histQuery->SetSearchTerms(NS_ConvertUTF8toUTF16(searchTerm));
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  nsCOMPtr<nsINavHistoryQueryOptions> histQueryOpts;
++  rv = mHistoryService->GetNewQueryOptions(getter_AddRefs(histQueryOpts));
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  // We want to get the URIs for every item in the user's history with the
++  // given host
++  rv = histQueryOpts->SetResultType(nsINavHistoryQueryOptions::RESULTS_AS_URI);
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  rv = histQueryOpts->SetSortingMode(
++      nsINavHistoryQueryOptions::SORT_BY_VISITCOUNT_DESCENDING);
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  rv = histQueryOpts->SetMaxResults(MAX_SEARCH_RESULTS_NUM);
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  // We only search history, because searching both bookmarks and history
++  // is not supported, and history tends to be more comprehensive.
++  rv = histQueryOpts->SetQueryType(
++      nsINavHistoryQueryOptions::QUERY_TYPE_HISTORY);
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  nsCOMPtr<nsINavHistoryResult> histResult;
++  rv = mHistoryService->ExecuteQuery(histQuery, histQueryOpts,
++                                     getter_AddRefs(histResult));
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  // Delete former search results
++  mHistResultContainer = nullptr;
++
++  rv = histResult->GetRoot(getter_AddRefs(mHistResultContainer));
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  rv = mHistResultContainer->SetContainerOpen(true);
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  uint32_t childCount = 0;
++  rv = mHistResultContainer->GetChildCount(&childCount);
++  NS_ENSURE_SUCCESS(rv, rv);
++
++  return childCount != 0 ? NS_OK : NS_ERROR_FAILURE;
++}
++
++bool nsGNOMEShellSearchProvider::IsHistoryResultNodeURI(
++    nsINavHistoryResultNode* aHistoryNode) {
++  uint32_t type;
++  nsresult rv = aHistoryNode->GetType(&type);
++  if (NS_FAILED(rv) || type != nsINavHistoryResultNode::RESULT_TYPE_URI)
++    return false;
++
++  nsAutoCString title;
++  rv = aHistoryNode->GetTitle(title);
++  if (NS_SUCCEEDED(rv) && !title.IsEmpty()) {
++    return true;
++  }
++
++  rv = aHistoryNode->GetUri(title);
++  return NS_SUCCEEDED(rv) && !title.IsEmpty();
++}
++
++void nsGNOMEShellSearchProvider::GetIDKeyForURI(int aIndex, nsAutoCString& aUri,
++                                                nsAutoCString& aIDKey) {
++  // Compose ID as NN:URL where NN is index to our current history
++  // result container.
++  aIDKey = nsPrintfCString("%.2d:%s", aIndex, aUri.get());
++}
++
++int nsGNOMEShellSearchProvider::GetIndexFromIDKey(const char* aIDKey) {
++  // ID is NN:URL where NN is index to our current history
++  // result container.
++  char tmp[] = {aIDKey[0], aIDKey[1], '\0'};
++  return atoi(tmp);
++}
++
++void nsGNOMEShellSearchProvider::ComposeSearchResultReply(
++    DBusMessage* reply, const char* aSearchTerm) {
++  uint32_t childCount = 0;
++  nsresult rv = mHistResultContainer->GetChildCount(&childCount);
++  if (NS_FAILED(rv) || childCount == 0) {
++    return;
++  }
++
++  if (childCount > MAX_SEARCH_RESULTS_NUM) {
++    childCount = MAX_SEARCH_RESULTS_NUM;
++  }
++
++  DBusMessageIter iter;
++  dbus_message_iter_init_append(reply, &iter);
++  DBusMessageIter iterArray;
++  dbus_message_iter_open_container(&iter, DBUS_TYPE_ARRAY, "s", &iterArray);
++
++  for (uint32_t i = 0; i < childCount; i++) {
++    nsCOMPtr<nsINavHistoryResultNode> child;
++    mHistResultContainer->GetChild(i, getter_AddRefs(child));
++    if (NS_WARN_IF(NS_FAILED(rv))) {
++      continue;
++    }
++    if (!IsHistoryResultNodeURI(child)) {
++      continue;
++    }
++
++    nsAutoCString uri;
++    child->GetUri(uri);
++
++    nsAutoCString idKey;
++    GetIDKeyForURI(i, uri, idKey);
++
++    const char* id = idKey.get();
++    dbus_message_iter_append_basic(&iterArray, DBUS_TYPE_STRING, &id);
++  }
++
++  nsPrintfCString searchString("%s:%s", KEYWORD_SEARCH_STRING, aSearchTerm);
++  const char* search = searchString.get();
++  dbus_message_iter_append_basic(&iterArray, DBUS_TYPE_STRING, &search);
++
++  dbus_message_iter_close_container(&iter, &iterArray);
++}
++
++DBusHandlerResult nsGNOMEShellSearchProvider::GetInitialResultSet(
++    DBusMessage* aMsg) {
++  DBusMessage* reply;
++  char** stringArray;
++  int elements;
++
++  if (!dbus_message_get_args(aMsg, nullptr, DBUS_TYPE_ARRAY, DBUS_TYPE_STRING,
++                             &stringArray, &elements, DBUS_TYPE_INVALID) ||
++      elements == 0) {
++    reply = dbus_message_new_error(aMsg, DBUS_BUS_NAME, "Wrong argument");
++  } else {
++    reply = dbus_message_new_method_return(aMsg);
++    nsresult rv = QueryHistory(stringArray[0]);
++    if (NS_SUCCEEDED(rv)) {
++      ComposeSearchResultReply(reply, stringArray[0]);
++    }
++    dbus_free_string_array(stringArray);
++  }
++
++  dbus_connection_send(mConnection, reply, nullptr);
++  dbus_message_unref(reply);
++
++  return DBUS_HANDLER_RESULT_HANDLED;
++}
++
++DBusHandlerResult nsGNOMEShellSearchProvider::GetSubsearchResultSet(
++    DBusMessage* aMsg) {
++  DBusMessage* reply;
++
++  char **unusedArray = nullptr, **stringArray = nullptr;
++  int unusedNum, elements;
++
++  if (!dbus_message_get_args(aMsg, nullptr, DBUS_TYPE_ARRAY, DBUS_TYPE_STRING,
++                             &unusedArray, &unusedNum, DBUS_TYPE_ARRAY,
++                             DBUS_TYPE_STRING, &stringArray, &elements,
++                             DBUS_TYPE_INVALID) ||
++      elements == 0) {
++    reply = dbus_message_new_error(aMsg, DBUS_BUS_NAME, "Wrong argument");
++  } else {
++    reply = dbus_message_new_method_return(aMsg);
++    nsresult rv = QueryHistory(stringArray[0]);
++    if (NS_SUCCEEDED(rv)) {
++      ComposeSearchResultReply(reply, stringArray[0]);
++    }
++  }
++
++  if (unusedArray) {
++    dbus_free_string_array(unusedArray);
++  }
++  if (stringArray) {
++    dbus_free_string_array(stringArray);
++  }
++
++  dbus_connection_send(mConnection, reply, nullptr);
++  dbus_message_unref(reply);
++
++  return DBUS_HANDLER_RESULT_HANDLED;
++}
++
++static void appendStringDictionary(DBusMessageIter* aIter, const char* aKey,
++                                   const char* aValue) {
++  DBusMessageIter iterDict, iterVar;
++  dbus_message_iter_open_container(aIter, DBUS_TYPE_DICT_ENTRY, nullptr,
++                                   &iterDict);
++  dbus_message_iter_append_basic(&iterDict, DBUS_TYPE_STRING, &aKey);
++  dbus_message_iter_open_container(&iterDict, DBUS_TYPE_VARIANT, "s", &iterVar);
++  dbus_message_iter_append_basic(&iterVar, DBUS_TYPE_STRING, &aValue);
++  dbus_message_iter_close_container(&iterDict, &iterVar);
++  dbus_message_iter_close_container(aIter, &iterDict);
++}
++
++/* We can return those fields at GetResultMetas:
++  "id": the result ID
++  "name": the display name for the result
++  "icon": a serialized GIcon (see g_icon_serialize()), or alternatively,
++  "gicon": a textual representation of a GIcon (see g_icon_to_string()),
++           or alternativly,
++  "icon-data": a tuple of type (iiibiiay) describing a pixbuf with width,
++              height, rowstride, has-alpha, bits-per-sample, and image data
++  "description": an optional short description (1-2 lines)
++*/
++void nsGNOMEShellSearchProvider::AppendResultID(DBusMessageIter* aIter,
++                                                const char* aID) {
++  nsCOMPtr<nsINavHistoryResultNode> child;
++  mHistResultContainer->GetChild(GetIndexFromIDKey(aID), getter_AddRefs(child));
++  nsAutoCString title;
++  if (NS_FAILED(child->GetTitle(title))) {
++    return;
++  }
++
++  if (title.IsEmpty()) {
++    if (NS_FAILED(child->GetUri(title)) || title.IsEmpty()) {
++      return;
++    }
++  }
++
++  const char* titleStr = title.get();
++  appendStringDictionary(aIter, "id", aID);
++  appendStringDictionary(aIter, "name", titleStr);
++  appendStringDictionary(aIter, "gicon", "text-html");
++}
++
++void nsGNOMEShellSearchProvider::AppendSearchID(DBusMessageIter* aIter,
++                                                const char* aID) {
++  if (strlen(aID) < KEYWORD_SEARCH_STRING_LEN + 2) {
++    return;
++  }
++  appendStringDictionary(aIter, "id", KEYWORD_SEARCH_STRING);
++  mSearchTerm = nsAutoCStringN<32>(aID + KEYWORD_SEARCH_STRING_LEN + 1);
++  nsPrintfCString searchString(mGnomeSearchTitle.get(), mSearchTerm.get());
++  appendStringDictionary(aIter, "name", searchString.get());
++  appendStringDictionary(aIter, "gicon", "org.mozilla.Firefox");
++}
++
++DBusHandlerResult nsGNOMEShellSearchProvider::GetResultMetas(
++    DBusMessage* aMsg) {
++  DBusMessage* reply;
++  char** stringArray;
++  int elements;
++
++  if (!dbus_message_get_args(aMsg, nullptr, DBUS_TYPE_ARRAY, DBUS_TYPE_STRING,
++                             &stringArray, &elements, DBUS_TYPE_INVALID) ||
++      elements == 0) {
++    reply = dbus_message_new_error(aMsg, DBUS_BUS_NAME, "Wrong argument");
++  } else {
++    reply = dbus_message_new_method_return(aMsg);
++
++    DBusMessageIter iter;
++    dbus_message_iter_init_append(reply, &iter);
++    DBusMessageIter iterArray;
++    dbus_message_iter_open_container(&iter, DBUS_TYPE_ARRAY, "a{sv}",
++                                     &iterArray);
++
++    DBusMessageIter iterArray2;
++    for (int i = 0; i < elements; i++) {
++      dbus_message_iter_open_container(&iterArray, DBUS_TYPE_ARRAY, "{sv}",
++                                       &iterArray2);
++      if (strncmp(stringArray[i], KEYWORD_SEARCH_STRING,
++                  KEYWORD_SEARCH_STRING_LEN) == 0) {
++        AppendSearchID(&iterArray2, stringArray[i]);
++      } else {
++        AppendResultID(&iterArray2, stringArray[i]);
++      }
++      dbus_message_iter_close_container(&iterArray, &iterArray2);
++    }
++
++    dbus_message_iter_close_container(&iter, &iterArray);
++    dbus_free_string_array(stringArray);
++  }
++
++  dbus_connection_send(mConnection, reply, nullptr);
++  dbus_message_unref(reply);
++
++  return DBUS_HANDLER_RESULT_HANDLED;
++}
++
++void nsGNOMEShellSearchProvider::LaunchWithID(const char* aID,
++                                              uint32_t aTimeStamp) {
++  char* commandLine = nullptr;
++  int tmp;
++
++  if (strncmp(aID, KEYWORD_SEARCH_STRING, KEYWORD_SEARCH_STRING_LEN) == 0) {
++    nsPrintfCString searchString("search:%s", mSearchTerm.get());
++    const char* urlList[2] = {"unused", searchString.get()};
++    commandLine = ConstructCommandLine(2, (char**)urlList, 0, &tmp);
++  } else {
++    int keyIndex = atoi(aID);
++    nsCOMPtr<nsINavHistoryResultNode> child;
++    mHistResultContainer->GetChild(keyIndex, getter_AddRefs(child));
++
++    nsAutoCString uri;
++    nsresult rv = child->GetUri(uri);
++    if (NS_FAILED(rv)) {
++      return;
++    }
++
++    const char* urlList[2] = {"unused", uri.get()};
++    commandLine = ConstructCommandLine(2, (char**)urlList, 0, &tmp);
++  }
++
++  if (commandLine) {
++    HandleCommandLine(commandLine, aTimeStamp);
++    free(commandLine);
++  }
++}
++
++void nsGNOMEShellSearchProvider::LaunchWithAllResults(uint32_t aTimeStamp) {
++  uint32_t childCount = 0;
++  nsresult rv = mHistResultContainer->GetChildCount(&childCount);
++  if (NS_FAILED(rv) || childCount == 0) {
++    return;
++  }
++
++  if (childCount > MAX_SEARCH_RESULTS_NUM) {
++    childCount = MAX_SEARCH_RESULTS_NUM;
++  }
++
++  char** urlList = (char**)moz_xmalloc(sizeof(char*) * (childCount + 2));
++  int urlListElements = 0;
++
++  urlList[urlListElements++] = strdup("unused");
++
++  for (uint32_t i = 0; i < childCount; i++) {
++    nsCOMPtr<nsINavHistoryResultNode> child;
++    mHistResultContainer->GetChild(i, getter_AddRefs(child));
++
++    if (!IsHistoryResultNodeURI(child)) {
++      continue;
++    }
++
++    nsAutoCString uri;
++    nsresult rv = child->GetUri(uri);
++    if (NS_FAILED(rv)) {
++      continue;
++    }
++    urlList[urlListElements++] = strdup(uri.get());
++  }
++
++  nsPrintfCString searchString("search:%s", mSearchTerm.get());
++  urlList[urlListElements++] = strdup(searchString.get());
++
++  int tmp;
++  char* commandLine = ConstructCommandLine(urlListElements, urlList, 0, &tmp);
++  if (commandLine) {
++    HandleCommandLine(commandLine, aTimeStamp);
++    free(commandLine);
++  }
++
++  for (int i = 0; i < urlListElements; i++) {
++    free(urlList[i]);
++  }
++  free(urlList);
++}
++
++DBusHandlerResult nsGNOMEShellSearchProvider::ActivateResult(
++    DBusMessage* aMsg) {
++  DBusMessage* reply;
++  char* resultID;
++  char** stringArray;
++  int elements;
++  uint32_t timestamp;
++
++  if (!dbus_message_get_args(aMsg, nullptr, DBUS_TYPE_STRING, &resultID,
++                             DBUS_TYPE_ARRAY, DBUS_TYPE_STRING, &stringArray,
++                             &elements, DBUS_TYPE_UINT32, &timestamp,
++                             DBUS_TYPE_INVALID) ||
++      resultID == nullptr) {
++    reply = dbus_message_new_error(aMsg, DBUS_BUS_NAME, "Wrong argument");
++  } else {
++    reply = dbus_message_new_method_return(aMsg);
++    LaunchWithID(resultID, timestamp);
++    dbus_free_string_array(stringArray);
++  }
++
++  dbus_connection_send(mConnection, reply, nullptr);
++  dbus_message_unref(reply);
++
++  return DBUS_HANDLER_RESULT_HANDLED;
++}
++
++DBusHandlerResult nsGNOMEShellSearchProvider::LaunchSearch(DBusMessage* aMsg) {
++  DBusMessage* reply;
++  char** stringArray;
++  int elements;
++  uint32_t timestamp;
++
++  if (!dbus_message_get_args(aMsg, nullptr, DBUS_TYPE_ARRAY, DBUS_TYPE_STRING,
++                             &stringArray, &elements, DBUS_TYPE_UINT32,
++                             &timestamp, DBUS_TYPE_INVALID) ||
++      elements == 0) {
++    reply = dbus_message_new_error(aMsg, DBUS_BUS_NAME, "Wrong argument");
++  } else {
++    reply = dbus_message_new_method_return(aMsg);
++    LaunchWithAllResults(timestamp);
++    dbus_free_string_array(stringArray);
++  }
++
++  dbus_connection_send(mConnection, reply, nullptr);
++  dbus_message_unref(reply);
++
++  return DBUS_HANDLER_RESULT_HANDLED;
++}
++
++DBusHandlerResult nsGNOMEShellSearchProvider::HandleDBusMessage(
++    DBusConnection* aConnection, DBusMessage* aMsg) {
++  NS_ASSERTION(mConnection == aConnection, "Wrong D-Bus connection.");
++
++  const char* method = dbus_message_get_member(aMsg);
++  const char* iface = dbus_message_get_interface(aMsg);
++
++  if ((strcmp("Introspect", method) == 0) &&
++      (strcmp("org.freedesktop.DBus.Introspectable", iface) == 0)) {
++    return Introspect(aMsg);
++  }
++
++  if (strcmp("org.gnome.Shell.SearchProvider2", iface) == 0) {
++    if (strcmp("GetInitialResultSet", method) == 0) {
++      return GetInitialResultSet(aMsg);
++    }
++    if (strcmp("GetSubsearchResultSet", method) == 0) {
++      return GetSubsearchResultSet(aMsg);
++    }
++    if (strcmp("GetResultMetas", method) == 0) {
++      return GetResultMetas(aMsg);
++    }
++    if (strcmp("ActivateResult", method) == 0) {
++      return ActivateResult(aMsg);
++    }
++    if (strcmp("LaunchSearch", method) == 0) {
++      return LaunchSearch(aMsg);
++    }
++  }
++
++  return DBUS_HANDLER_RESULT_NOT_YET_HANDLED;
++}
++
++void nsGNOMEShellSearchProvider::UnregisterDBusInterface(
++    DBusConnection* aConnection) {
++  NS_ASSERTION(mConnection == aConnection, "Wrong D-Bus connection.");
++  // Not implemented
++}
++
++static DBusHandlerResult message_handler(DBusConnection* conn,
++                                         DBusMessage* aMsg, void* user_data) {
++  auto interface = static_cast<nsGNOMEShellSearchProvider*>(user_data);
++  return interface->HandleDBusMessage(conn, aMsg);
++}
++
++static void unregister(DBusConnection* conn, void* user_data) {
++  auto interface = static_cast<nsGNOMEShellSearchProvider*>(user_data);
++  interface->UnregisterDBusInterface(conn);
++}
++
++static DBusObjectPathVTable remoteHandlersTable = {
++    .unregister_function = unregister,
++    .message_function = message_handler,
++};
++
++nsresult nsGNOMEShellSearchProvider::Startup() {
++  if (mConnection && dbus_connection_get_is_connected(mConnection)) {
++    // We're already connected so we don't need to reconnect
++    return NS_ERROR_ALREADY_INITIALIZED;
++  }
++
++  nsCOMPtr<nsIStringBundleService> sbs =
++      do_GetService(NS_STRINGBUNDLE_CONTRACTID);
++  if (NS_WARN_IF(!sbs)) {
++    return NS_ERROR_FAILURE;
++  }
++
++  nsCOMPtr<nsIStringBundle> bundle;
++  sbs->CreateBundle("chrome://browser/locale/browser.properties",
++                    getter_AddRefs(bundle));
++  if (NS_WARN_IF(!bundle)) {
++    return NS_ERROR_FAILURE;
++  }
++
++  nsAutoString searchTitle;
++  bundle->GetStringFromName("gnomeSearchProviderSearch", searchTitle);
++  mGnomeSearchTitle = NS_ConvertUTF16toUTF8(searchTitle);
++
++  mHistoryService = do_GetService(NS_NAVHISTORYSERVICE_CONTRACTID);
++  if (!mHistoryService) {
++    return NS_ERROR_FAILURE;
++  }
++
++  mConnection =
++      already_AddRefed<DBusConnection>(dbus_bus_get(DBUS_BUS_SESSION, nullptr));
++  if (!mConnection) {
++    return NS_ERROR_FAILURE;
++  }
++  dbus_connection_set_exit_on_disconnect(mConnection, false);
++  dbus_connection_setup_with_g_main(mConnection, nullptr);
++
++  DBusError err;
++  dbus_error_init(&err);
++  dbus_bus_request_name(mConnection, DBUS_BUS_NAME, DBUS_NAME_FLAG_DO_NOT_QUEUE,
++                        &err);
++  // The interface is already owned - there is another application/profile
++  // instance already running.
++  if (dbus_error_is_set(&err)) {
++    dbus_error_free(&err);
++    mConnection = nullptr;
++    return NS_ERROR_FAILURE;
++  }
++
++  if (!dbus_connection_register_object_path(mConnection, DBUS_OBJECT_PATH,
++                                            &remoteHandlersTable, this)) {
++    mConnection = nullptr;
++    return NS_ERROR_FAILURE;
++  }
++
++  return NS_OK;
++}
++
++void nsGNOMEShellSearchProvider::Shutdown() {
++  if (!mConnection) {
++    return;
++  }
++
++  dbus_connection_unregister_object_path(mConnection, DBUS_OBJECT_PATH);
++
++  // dbus_connection_unref() will be called by RefPtr here.
++  mConnection = nullptr;
++}
+diff -up firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.h.gnome-shell-search-provider firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.h
+--- firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.h.gnome-shell-search-provider	2020-02-11 09:00:59.350512802 +0100
++++ firefox-73.0/browser/components/shell/nsGNOMEShellSearchProvider.h	2020-02-11 09:00:59.350512802 +0100
+@@ -0,0 +1,55 @@
++/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* vim:expandtab:shiftwidth=2:tabstop=2:
++ */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#ifndef __nsGNOMEShellSearchProvider_h__
++#define __nsGNOMEShellSearchProvider_h__
++
++#include "mozilla/DBusHelpers.h"
++#include "nsINavHistoryService.h"
++#include "nsUnixRemoteServer.h"
++#include "nsCOMPtr.h"
++
++class nsGNOMEShellSearchProvider : public nsUnixRemoteServer {
++ public:
++  nsGNOMEShellSearchProvider() : mConnection(nullptr) {}
++  ~nsGNOMEShellSearchProvider() { Shutdown(); }
++
++  nsresult Startup();
++  void Shutdown();
++
++  DBusHandlerResult HandleDBusMessage(DBusConnection* aConnection,
++                                      DBusMessage* msg);
++  void UnregisterDBusInterface(DBusConnection* aConnection);
++
++ private:
++  DBusHandlerResult Introspect(DBusMessage* msg);
++
++  DBusHandlerResult GetInitialResultSet(DBusMessage* msg);
++  DBusHandlerResult GetSubsearchResultSet(DBusMessage* msg);
++  DBusHandlerResult GetResultMetas(DBusMessage* msg);
++  DBusHandlerResult ActivateResult(DBusMessage* msg);
++  DBusHandlerResult LaunchSearch(DBusMessage* msg);
++
++  nsresult QueryHistory(const char* aSearchTerm);
++  void GetIDKeyForURI(int aIndex, nsAutoCString& aUri, nsAutoCString& aIDKey);
++  int GetIndexFromIDKey(const char* aIDKey);
++  bool IsHistoryResultNodeURI(nsINavHistoryResultNode* aHistoryNode);
++  void AppendResultID(DBusMessageIter* aIter, const char* aID);
++  void AppendSearchID(DBusMessageIter* aIter, const char* aID);
++  void ComposeSearchResultReply(DBusMessage* aReply, const char* aSearchTerm);
++  void LaunchWithID(const char* aID, uint32_t aTimeStamp);
++  void LaunchWithAllResults(uint32_t aTimeStamp);
++
++  // The connection is owned by DBus library
++  RefPtr<DBusConnection> mConnection;
++  nsCOMPtr<nsINavHistoryContainerResultNode> mHistResultContainer;
++  nsCOMPtr<nsINavHistoryService> mHistoryService;
++  nsAutoCStringN<32> mSearchTerm;
++  nsAutoCString mGnomeSearchTitle;
++};
++
++#endif  // __nsGNOMEShellSearchProvider_h__
+diff -up firefox-73.0/browser/components/shell/nsGNOMEShellService.cpp.gnome-shell-search-provider firefox-73.0/browser/components/shell/nsGNOMEShellService.cpp
+--- firefox-73.0/browser/components/shell/nsGNOMEShellService.cpp.gnome-shell-search-provider	2020-02-07 22:12:59.000000000 +0100
++++ firefox-73.0/browser/components/shell/nsGNOMEShellService.cpp	2020-02-11 09:00:59.350512802 +0100
+@@ -89,6 +89,14 @@ nsresult nsGNOMEShellService::Init() {
+ 
+   if (!giovfs && !gsettings) return NS_ERROR_NOT_AVAILABLE;
+ 
++#ifdef MOZ_ENABLE_DBUS
++  const char* currentDesktop = getenv("XDG_CURRENT_DESKTOP");
++  if (currentDesktop && strstr(currentDesktop, "GNOME") != nullptr &&
++      Preferences::GetBool("browser.gnome-search-provider.enabled", false)) {
++    mSearchProvider.Startup();
++  }
++#endif
++
+   // Check G_BROKEN_FILENAMES.  If it's set, then filenames in glib use
+   // the locale encoding.  If it's not set, they use UTF-8.
+   mUseLocaleFilenames = PR_GetEnv("G_BROKEN_FILENAMES") != nullptr;
+diff -up firefox-73.0/browser/components/shell/nsGNOMEShellService.h.gnome-shell-search-provider firefox-73.0/browser/components/shell/nsGNOMEShellService.h
+--- firefox-73.0/browser/components/shell/nsGNOMEShellService.h.gnome-shell-search-provider	2020-02-07 22:12:59.000000000 +0100
++++ firefox-73.0/browser/components/shell/nsGNOMEShellService.h	2020-02-11 09:00:59.350512802 +0100
+@@ -10,6 +10,9 @@
+ #include "nsToolkitShellService.h"
+ #include "nsString.h"
+ #include "mozilla/Attributes.h"
++#ifdef MOZ_ENABLE_DBUS
++#  include "nsGNOMEShellSearchProvider.h"
++#endif
+ 
+ class nsGNOMEShellService final : public nsIGNOMEShellService,
+                                   public nsToolkitShellService {
+@@ -28,6 +31,9 @@ class nsGNOMEShellService final : public
+   bool KeyMatchesAppName(const char* aKeyValue) const;
+   bool CheckHandlerMatchesAppName(const nsACString& handler) const;
+ 
++#ifdef MOZ_ENABLE_DBUS
++  nsGNOMEShellSearchProvider mSearchProvider;
++#endif
+   bool GetAppPathFromLauncher();
+   bool mUseLocaleFilenames;
+   nsCString mAppPath;
+diff -up firefox-73.0/browser/locales/en-US/chrome/browser/browser.properties.gnome-shell-search-provider firefox-73.0/browser/locales/en-US/chrome/browser/browser.properties
+--- firefox-73.0/browser/locales/en-US/chrome/browser/browser.properties.gnome-shell-search-provider	2020-02-07 22:13:00.000000000 +0100
++++ firefox-73.0/browser/locales/en-US/chrome/browser/browser.properties	2020-02-11 09:00:59.350512802 +0100
+@@ -1047,3 +1047,7 @@ confirmationHint.breakageReport.label =
+ # Used by the export of user's live bookmarks to an OPML file as a title for the file.
+ # %S will be replaced with brandShortName
+ livebookmarkMigration.title                      = %S Live Bookmarks
++
++# LOCALIZATION NOTE (gnomeSearchProviderSearch):
++# Used for search by Gnome Shell activity screen, %s is a searched string.
++gnomeSearchProviderSearch=Search the web for “%s”
+diff -up firefox-73.0/toolkit/components/remote/moz.build.gnome-shell-search-provider firefox-73.0/toolkit/components/remote/moz.build
+--- firefox-73.0/toolkit/components/remote/moz.build.gnome-shell-search-provider	2020-02-07 22:13:54.000000000 +0100
++++ firefox-73.0/toolkit/components/remote/moz.build	2020-02-11 09:00:59.351512811 +0100
+@@ -25,6 +25,10 @@ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'gtk'
+             'nsDBusRemoteServer.cpp',
+         ]
+         CXXFLAGS += CONFIG['MOZ_DBUS_GLIB_CFLAGS']
++        EXPORTS += [
++            'nsUnixRemoteServer.h',
++            'RemoteUtils.h',
++        ]
+     CXXFLAGS += CONFIG['TK_CFLAGS']
+ 
+ if CONFIG['MOZ_WIDGET_TOOLKIT'] == 'windows':
+diff -up firefox-73.0/toolkit/components/remote/nsDBusRemoteServer.cpp.gnome-shell-search-provider firefox-73.0/toolkit/components/remote/nsDBusRemoteServer.cpp
+--- firefox-73.0/toolkit/components/remote/nsDBusRemoteServer.cpp.gnome-shell-search-provider	2020-02-07 22:13:54.000000000 +0100
++++ firefox-73.0/toolkit/components/remote/nsDBusRemoteServer.cpp	2020-02-11 09:00:59.351512811 +0100
+@@ -23,7 +23,7 @@
+ 
+ #include <dlfcn.h>
+ 
+-const char* introspect_template =
++static const char* introspect_template =
+     "<!DOCTYPE node PUBLIC \"-//freedesktop//DTD D-BUS Object Introspection "
+     "1.0//EN\"\n"
+     "\"http://www.freedesktop.org/standards/dbus/1.0/introspect.dtd\";>\n"
