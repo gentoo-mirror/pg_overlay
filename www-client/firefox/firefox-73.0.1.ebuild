@@ -48,7 +48,6 @@ KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-# Remove system-harfbuzz until new working patch is generated
 IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon pgo
 	pulseaudio +screenshot selinux startup-notification +system-av1
@@ -129,6 +128,7 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	app-arch/zip
 	app-arch/unzip
+	dev-lang/python:2.7
 	>=dev-util/cbindgen-0.12.0
 	>=net-libs/nodejs-8.11.0
 	>=sys-devel/binutils-2.30
@@ -475,7 +475,6 @@ src_configure() {
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
-			mozconfig_annotate 'enable PGO on Rust code' --enable-profile-generate=cross
 		fi
 	else
 		# Avoid auto-magic on linker
