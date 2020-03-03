@@ -52,14 +52,13 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon pgo
 	pulseaudio +screenshot selinux startup-notification +system-av1
-	+system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-sqlite +system-libvpx +system-webp test wayland wifi +dbus +jit +kde cross-lto thinlto"
+	+system-harfbuzz +system-icu +system-jpeg +system-libevent +system-sqlite
+	+system-libvpx +system-webp test wayland wifi +jit +kde cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
 	thinlto? ( lto )
-	kde? ( !bindist )
-	wifi? ( dbus )"
+	kde? ( !bindist )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
@@ -337,10 +336,6 @@ src_prepare() {
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
 
-	use !dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
-
-	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-accessibility.patch"
-
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
 	# shell wrapper configure script
@@ -409,6 +404,7 @@ src_configure() {
 
 	# Don't let user's LTO flags clash with upstream's flags
 	filter-flags -flto*
+	filter-flags -fno-plt
 
 	if use lto ; then
 		local show_old_compiler_warning=
@@ -479,7 +475,7 @@ src_configure() {
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
-			mozconfig_annotate 'enable PGO on Rust code' --enable-cross-pgo
+			mozconfig_annotate 'enable PGO on Rust code' --enable-profile-use=cross
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -613,8 +609,6 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
-	use !dbus && mozconfig_annotate '' --disable-dbus
-	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
 
