@@ -25,7 +25,7 @@ BDEPEND="${PYTHON_DEPS}
 
 PATCHES=( "${FILESDIR}/${P}-Respect-CMAKE_INSTALL_LIBDIR-in-installed-CMake-files.patch" )
 
-S="${WORKDIR}/SPIRV-Tools-${EGIT_COMMIT}"
+S="${WORKDIR}/SPIRV-Tools-${PV}"
 
 multilib_src_configure() {
 	local mycmakeargs=(
