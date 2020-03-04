@@ -1,4 +1,5 @@
 app-accessibility/at-spi2-atk 2.34.1: Gtk module for bridging AT-SPI to Atk
+app-accessibility/at-spi2-core 2.35.1: D-Bus accessibility specifications and registration daemon
 app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
@@ -47,9 +48,11 @@ dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
+dev-libs/protobuf 3.11.3_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qrcodegen 1.5.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2020.03.02: An efficient, principled regular expression library
 dev-libs/spdlog 1.4.2: Very fast, header only, C++ logging library
+dev-libs/wayland 1.18.0_pre: Wayland protocol libraries
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-perl/Alien-Build 1.920.0: Build external dependencies for use in CPAN
@@ -135,15 +138,15 @@ dev-qt/qtdeclarative 5.14.0: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20190905: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.63.4: GDBus code and documentation generator
-dev-util/glib-utils 2.63.4: Build utilities for GLib using projects
+dev-util/gdbus-codegen 2.63.6: GDBus code and documentation generator
+dev-util/glib-utils 2.63.6: Build utilities for GLib using projects
 dev-util/glslang 7.13.3496 8.13.3559: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1616: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/mdds 1.5.0 1.6.0: A collection of multi-dimensional data structure and indexing algorithm
-dev-util/meson 0.53.1_pre: Open source build system
+dev-util/meson 0.53.2_pre: Open source build system
 dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/rinutils 0.2.0: C11 / gnu11 utilities C library
@@ -154,7 +157,7 @@ dev-util/vulkan-tools 1.2.133: Official Vulkan Tools and Utilities for Windows, 
 dev-vcs/mercurial 5.2.2 5.2.2-r1: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.34.0: Collection of GSettings schemas for GNOME desktop
-gnome-base/librsvg 2.47.2: Scalable Vector Graphics (SVG) rendering library
+gnome-base/librsvg 2.47.3: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
@@ -181,6 +184,7 @@ media-sound/mpd 0.21.11: The Music Player Daemon (mpd)
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
+media-sound/pulseaudio 13.99.1: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/quimup 1.4.4: A Qt5 client for the music player daemon (MPD) written in C++
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
