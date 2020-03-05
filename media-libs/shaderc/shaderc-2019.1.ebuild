@@ -33,8 +33,7 @@ DEPEND="${RDEPEND}
 # https://github.com/google/shaderc/issues/470
 RESTRICT=test
 
-PATCHES=("${FILESDIR}/${P}-fix-glslang-link-order.patch"
-		 "${FILESDIR}/${P}-fix-build-against-new-glslang.patch" )
+PATCHES=("${FILESDIR}/${P}-fix-glslang-link-order.patch")
 
 python_check_deps() {
 	if use test; then
