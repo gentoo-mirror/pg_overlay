@@ -33,7 +33,8 @@ DEPEND="${RDEPEND}
 # https://github.com/google/shaderc/issues/470
 RESTRICT=test
 
-PATCHES=("${FILESDIR}/${P}-fix-glslang-link-order.patch")
+PATCHES=("${FILESDIR}/${P}-fix-glslang-link-order.patch"
+		"${FILESDIR}"/0001-Handle-new-Glslang-profile-enum-in-switch.patch)
 
 python_check_deps() {
 	if use test; then
