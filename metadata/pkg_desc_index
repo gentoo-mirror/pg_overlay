@@ -9,6 +9,7 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.2.0-r1: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.2.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
+app-misc/dupeguru 4.0.4: Find duplicate files on your system
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
@@ -42,7 +43,6 @@ dev-libs/gobject-introspection 1.63.2: Introspection system for GObject-based li
 dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 65.1-r1: International Components for Unicode
-dev-libs/libevdev 1.8.0: Handler library for evdev events
 dev-libs/libgit2 0.99.0-r1: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
@@ -52,7 +52,6 @@ dev-libs/protobuf 3.11.3_pre: Google's Protocol Buffers - Extensible mechanism f
 dev-libs/qrcodegen 1.5.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2020.03.02: An efficient, principled regular expression library
 dev-libs/spdlog 1.4.2: Very fast, header only, C++ logging library
-dev-libs/wayland 1.18.0_pre: Wayland protocol libraries
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-perl/Alien-Build 1.920.0: Build external dependencies for use in CPAN
