@@ -169,7 +169,7 @@ media-libs/libplacebo 1.29.1: Reusable library for GPU-accelerated image process
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
 media-libs/pulseaudio-qt 1.2: Qt bindings for libpulse
-media-libs/shaderc 2019.1: Collection of tools, libraries and tests for shader compilation
+media-libs/shaderc 2019.1 9999: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.2.133: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.133: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
