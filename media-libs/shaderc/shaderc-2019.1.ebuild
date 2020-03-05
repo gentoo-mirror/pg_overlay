@@ -34,7 +34,6 @@ DEPEND="${RDEPEND}
 RESTRICT=test
 
 PATCHES=("${FILESDIR}/0001-Fix-the-link-order-of-libglslang-and-libHLSL.patch"
-		"${FILESDIR}/0001-Drop-third-party-code-in-CMakeLists.txt.patch"
 		"${FILESDIR}/0001-Fix-SPIRV-includes-location.patch"
 		"${FILESDIR}/0001-Handle-new-Glslang-profile-enum-in-switch.patch")
 
