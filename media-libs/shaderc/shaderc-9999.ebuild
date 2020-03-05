@@ -5,11 +5,11 @@ EAPI=6
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit cmake-multilib python-any-r1
+inherit cmake-multilib git-r3 python-any-r1
 
 DESCRIPTION="Collection of tools, libraries and tests for shader compilation"
 HOMEPAGE="https://github.com/google/shaderc"
-SRC_URI="https://github.com/google/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+EGIT_REPO_URI="https://github.com/google/${PN}.git"
 
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -33,9 +33,7 @@ DEPEND="${RDEPEND}
 # https://github.com/google/shaderc/issues/470
 RESTRICT=test
 
-PATCHES=("${FILESDIR}/0001-Fix-the-link-order-of-libglslang-and-libHLSL.patch"
-		"${FILESDIR}/0001-Fix-SPIRV-includes-location.patch"
-		"${FILESDIR}/0001-Handle-new-Glslang-profile-enum-in-switch.patch")
+PATCHES=("${FILESDIR}/0001-Fix-the-link-order-of-libglslang-and-libHLSL.patch")
 
 python_check_deps() {
 	if use test; then
@@ -61,6 +59,8 @@ src_prepare() {
 		"$(best_version dev-util/spirv-tools)\n"
 		"$(best_version dev-util/glslang)\n"
 	EOF
+
+	sed -i s/EShTargetVulkan_1_1/EShTargetVulkan_1_2/g libshaderc_util/src/compiler.cc
 
 	cmake-utils_src_prepare
 }
