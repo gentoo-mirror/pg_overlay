@@ -19,7 +19,7 @@ SLOT="0"
 KEYWORDS="amd64 ~arm"
 IUSE=""
 
-RDEPEND="${PYTHON_DEPS}
+RDEPEND="(python_gen_cond_dep)
 	dev-python/PyQt5[${PYTHON_MULTI_USEDEP},gui,widgets]
 	>=dev-qt/qtgui-5.5[jpeg,png,gif]
 	>=dev-python/hsaudiotag3k-1.1.3[${PYTHON_MULTI_USEDEP}]
