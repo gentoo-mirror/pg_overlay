@@ -25,7 +25,6 @@ DEPEND="
 	dev-qt/qtgui:5=
 	dev-qt/qtnetwork:5[ssl]
 	dev-qt/qtscript:5
-	dev-qt/qtsingleapplication[X,qt5(+)]
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
 	sys-libs/zlib
