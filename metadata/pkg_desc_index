@@ -135,7 +135,7 @@ dev-python/twisted 19.10.0: An asynchronous networking framework written in Pyth
 dev-python/wheel 0.34.1: A built-package format for Python
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtdeclarative 5.14.0: The QML and Quick modules for the Qt5 framework
-dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200303: WebKit rendering library for the Qt5 framework (deprecated)
+dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200304: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.63.6: GDBus code and documentation generator
