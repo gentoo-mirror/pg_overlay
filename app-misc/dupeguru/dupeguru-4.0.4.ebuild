@@ -20,13 +20,13 @@ KEYWORDS="amd64 ~arm"
 IUSE=""
 
 RDEPEND="${PYTHON_DEPS}
-	dev-python/PyQt5[${PYTHON_USEDEP},gui,widgets]
+	dev-python/PyQt5[${PYTHON_MULTI_USEDEP},gui,widgets]
 	>=dev-qt/qtgui-5.5[jpeg,png,gif]
-	>=dev-python/hsaudiotag3k-1.1.3[${PYTHON_USEDEP}]
-	>=dev-python/send2trash-1.3.0[${PYTHON_USEDEP}]"
+	>=dev-python/hsaudiotag3k-1.1.3[${PYTHON_MULTI_USEDEP}]
+	>=dev-python/send2trash-1.3.0[${PYTHON_MULTI_USEDEP}]"
 DEPEND="${RDEPEND}
-	dev-python/polib[${PYTHON_USEDEP}]
-	dev-python/sphinx[${PYTHON_USEDEP}]"
+	dev-python/polib[${PYTHON_MULTI_USEDEP}]
+	dev-python/sphinx[${PYTHON_MULTI_USEDEP}]"
 
 PATCHES=(
     # Recent pip update in Gentoo requires us to use --user at all times, even in venvs :(
