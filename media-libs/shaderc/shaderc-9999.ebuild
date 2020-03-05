@@ -60,6 +60,8 @@ src_prepare() {
 		"$(best_version dev-util/glslang)\n"
 	EOF
 
+	sed -i s/EShTargetVulkan_1_1/EShTargetVulkan_1_2/g libshaderc_util/src/compiler.cc
+
 	cmake-utils_src_prepare
 }
 
