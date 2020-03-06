@@ -6,8 +6,8 @@ app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/lzma 19.00: LZMA Stream Compressor from the SDK
 app-arch/p7zip 16.02-r4 16.02-r5: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-crypt/certbot 1.2.0-r1: Let's encrypt client to automate deployment of X.509 certificates
-app-crypt/certbot-nginx 1.2.0: Nginx plugin for certbot (Let's Encrypt Client)
+app-crypt/certbot 1.3.0: Let's encrypt client to automate deployment of X.509 certificates
+app-crypt/certbot-nginx 1.3.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
 app-misc/dupeguru 4.0.4: Find duplicate files on your system
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
