@@ -4,7 +4,7 @@ app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/lzma 19.00: LZMA Stream Compressor from the SDK
-app-arch/p7zip 16.02-r4 16.02-r5: Port of 7-Zip archiver for Unix
+app-arch/p7zip 16.02-r5: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.3.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.3.0: Nginx plugin for certbot (Let's Encrypt Client)
@@ -33,7 +33,7 @@ app-text/po4a 0.57_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-db/sqlite 3.31.1: SQL database engine
 dev-games/freecell-solver 5.20.0: C library for automatically solving Freecell and some other solitaire variants
-dev-lang/python 2.7.17-r1 3.8.1 3.8.2: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.17-r1 3.8.2: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.41.1 1.42.0_beta: Systems programming language from Mozilla
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
 dev-libs/boost 1.72.0-r1: Boost Libraries for C++
@@ -133,8 +133,7 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/twisted 19.10.0: An asynchronous networking framework written in Python
 dev-python/wheel 0.34.1: A built-package format for Python
 dev-python/zope-component 4.6: Zope Component Architecture
-dev-qt/qtdeclarative 5.14.0: The QML and Quick modules for the Qt5 framework
-dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200304: WebKit rendering library for the Qt5 framework (deprecated)
+dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200305: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.63.6: GDBus code and documentation generator
@@ -161,7 +160,7 @@ gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.18.2-r2: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 68.4.2 68.5.0: Thunderbird Mail Client
+mail-client/thunderbird 68.5.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 1.29.1: Reusable library for GPU-accelerated image processing primitives
@@ -179,7 +178,6 @@ media-sound/cantata 9999: Featureful and configurable Qt client for the music pl
 media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mac 5.11: Monkey's Audio Codecs
-media-sound/mpd 0.21.11: The Music Player Daemon (mpd)
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
@@ -193,8 +191,6 @@ media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), I
 media-sound/wavpack 5.2.0: Hybrid lossless audio compression tools
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
-net-fs/nfs-utils 2.4.3_rc3: NFS client and server daemons
-net-libs/glib-networking 2.60.1: Network-related giomodules for glib
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 13.9.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
@@ -211,14 +207,14 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
-sci-libs/libqalculate 3.6.0: A modern multi-purpose calculator library
+sci-libs/libqalculate 3.8.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999 9999-r1: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
-sys-fs/xfsprogs 5.5.0_rc0: xfs filesystem utilities
+sys-fs/xfsprogs 5.5.0_rc1: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/libcxx 10.0.0_rc3: New implementation of the C++ standard library, targeting C++11
@@ -229,13 +225,10 @@ sys-libs/slang 2.3.3_pre15: Multi-platform library designed to allow a developer
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/rust 1.42.0_beta: Virtual for Rust language compiler
 www-client/firefox 73.0.1: Firefox Web Browser
-www-plugins/freshplayerplugin 0.3.11: PPAPI-host NPAPI-plugin adapter for flashplayer in npapi based browsers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
-x11-drivers/xf86-video-nouveau 9999: Accelerated Open Source driver for nVidia cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.32-r1 3.24.14: Gimp ToolKit +
 x11-libs/libva-intel-driver 2.4.0: HW video decode support for Intel integrated graphics
-x11-libs/libxcb 1.13.1: X C-language Bindings library
 x11-libs/pango 1.44.7_pre: Internationalized text layout and rendering library
 x11-libs/wxGTK 3.1.2-r300 3.1.3-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.

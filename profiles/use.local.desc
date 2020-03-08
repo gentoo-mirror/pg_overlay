@@ -76,9 +76,6 @@ dev-perl/Sub-Name:suggested - Install extra dependencies needed for extended reg
 dev-python/twisted:conch - include Twisted SSHv2 implementation
 dev-python/twisted:http2 - include http2 support
 dev-python/twisted:serial - include serial port support
-dev-qt/qtdeclarative:gles2 - Use GLES 2.0 or later instead of full OpenGL
-dev-qt/qtdeclarative:localstorage - Build the LocalStorage import for QtQuick (requires QtSql)
-dev-qt/qtdeclarative:widgets - Enable QtWidgets support
 dev-qt/qtwebkit:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebkit:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer using SLOT 1.0
@@ -192,35 +189,6 @@ media-sound/deadbeef:vtx - Libayemy VTX ZX-Spectrum music player plugin
 media-sound/deadbeef:wavpack - WavPack plugin
 media-sound/deadbeef:wma - Windows media audio plugin
 media-sound/deadbeef:zip - vfs_zip plugin
-media-sound/mpd:adplug - Enable the AdPlug decoder plugin
-media-sound/mpd:cdio - Use libcdio for ISO9660 parsing support
-media-sound/mpd:chromaprint - Enable ChromaPrint / AcoustID support
-media-sound/mpd:cue - Enable CUE sheet support
-media-sound/mpd:curl - Support for web stream listening
-media-sound/mpd:eventfd - Use the eventfd function in MPD's event loop
-media-sound/mpd:faad - Use external faad library for AAC decoding
-media-sound/mpd:fifo - Support writing audio to a FIFO
-media-sound/mpd:fluidsynth - Enables Fluidsynth MIDI software synthesis (discouraged)
-media-sound/mpd:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
-media-sound/mpd:id3tag - Support for ID3 tags
-media-sound/mpd:inotify - Use the Linux kernel inotify subsystem to notice changes to mpd music library
-media-sound/mpd:lame - Support for MP3 streaming via Icecast2
-media-sound/mpd:libmpdclient - Enable support for remote mpd databases
-media-sound/mpd:libsoxr - Enable the libsoxr resampler
-media-sound/mpd:mpg123 - Enable support for mp3 decoding over media-sound/mpg123
-media-sound/mpd:network - Enables network streaming support
-media-sound/mpd:nfs - Enable support for the Network File System
-media-sound/mpd:pipe - Support writing audio to a pipe
-media-sound/mpd:qobuz - Build plugin to access qobuz
-media-sound/mpd:recorder - Enables output plugin for recording radio streams
-media-sound/mpd:sid - Build with SID (Commodore 64 Audio) support
-media-sound/mpd:signalfd - Use the signalfd function in MPD's event loop
-media-sound/mpd:soundcloud - Build plugin to access soundcloud
-media-sound/mpd:systemd - Enable support for systemd socket activation
-media-sound/mpd:tidal - Build plugin to access tidal
-media-sound/mpd:twolame - Support twolame MPEG-2 encoding
-media-sound/mpd:webdav - Enable using music from a WebDAV share
-media-sound/mpd:wildmidi - Enable MIDI support via wildmidi
 media-sound/mpd-sacd:adplug - Enable the AdPlug decoder plugin
 media-sound/mpd-sacd:cdio - Use libcdio for ISO9660 parsing support
 media-sound/mpd-sacd:curl - Support for web stream listening
@@ -310,16 +278,6 @@ media-video/mpv:uchardet - Enable subtitles charset discovery via app-i18n/uchar
 media-video/mpv:vf-dlopen - Install additional video filters to be used with -vf dlopen
 media-video/smplayer:autoshutdown - Enable the option to shutdown your computer after finishing the playlist. This requires dev-qt/qtdbus as dependency.
 media-video/smplayer:mpris - Enable support for MPRIS2 (Media Player Remote Interfacing Specification, version 2), a DBus interface for remote control, which requires dev-qt/qtdbus as dependency.
-net-fs/nfs-utils:junction - Enable NFS junction support in nfsref
-net-fs/nfs-utils:ldap - Add ldap support
-net-fs/nfs-utils:libmount - Link mount.nfs with libmount
-net-fs/nfs-utils:nfsdcld - Enable nfsdcld NFSv4 clientid tracking daemon
-net-fs/nfs-utils:nfsidmap - Enable support for newer nfsidmap helper
-net-fs/nfs-utils:nfsv4 - Enable support for NFSv4
-net-fs/nfs-utils:nfsv41 - Enable support for NFSv4.1
-net-fs/nfs-utils:uuid - Support UUID lookups in rpc.mountd
-net-libs/glib-networking:gnome - Extract HTTP/HTTPS/SOCKS proxy configuration stored using GSettings
-net-libs/glib-networking:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:npm - Enable NPM package manager
@@ -377,8 +335,6 @@ www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent inste
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
-www-plugins/freshplayerplugin:gles2 - Use system GLESv2 libraries instead of ANGLE for shader translation
-www-plugins/freshplayerplugin:v4l - Use libv4l2 for colorspace conversion
 x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
@@ -389,7 +345,6 @@ x11-libs/gtk+:atk-bridge - Enable the gtk3-atk-bridge, hard depending on app-acc
 x11-libs/gtk+:broadway - Enable the GDK Broadway backend.
 x11-libs/gtk+:cloudprint - Enable printing via Google Cloud Print.
 x11-libs/gtk+:colord - Use x11-misc/colord for color management in printing
-x11-libs/libxcb:xkb - Enable the XCB keyboard extension
 x11-libs/pango:X - Build and install the legacy pangoxft library
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
