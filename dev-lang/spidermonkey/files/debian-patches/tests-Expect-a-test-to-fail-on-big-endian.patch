@@ -1,0 +1,24 @@
+From: Simon McVittie <smcv@debian.org>
+Date: Fri, 28 Sep 2018 09:51:33 +0100
+Subject: tests: Expect a test to fail on big-endian
+
+Signed-off-by: Simon McVittie <smcv@debian.org>
+Forwarded: no
+---
+ js/src/tests/jstests.list | 3 +++
+ 1 file changed, 3 insertions(+)
+
+Index: mozjs-60.8.0/js/src/tests/jstests.list
+===================================================================
+--- mozjs-60.8.0.orig/js/src/tests/jstests.list
++++ mozjs-60.8.0/js/src/tests/jstests.list
+@@ -467,6 +467,9 @@ fails-if(xulRuntime.debian.DEB_HOST_ARCH
+ skip script non262/Intl/DateTimeFormat/tz-environment-variable.js
+ skip script non262/Intl/NumberFormat/formatToParts.js
+ 
++# Assumes little-endian IEEE representation of floating point numbers
++fails-if(xulRuntime.debian.DEB_HOST_ARCH_ENDIAN=="big") script test262/built-ins/TypedArray/prototype/set/typedarray-arg-set-values-same-buffer-other-type.js
++
+ ###########################################################
+ # Tests disabled due to issues in test262 importer script #
+ ###########################################################
