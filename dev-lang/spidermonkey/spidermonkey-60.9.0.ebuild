@@ -43,7 +43,9 @@ src_prepare() {
 	#eapply "${WORKDIR}/${PN}"
 	eapply "${FILESDIR}/${PN}-60.5.2-ia64-support.patch"
 
+	pushd ../..
 	for p in $(cat "${FILESDIR}/debian-patches/series");do eapply "${FILESDIR}/debian-patches/$p";done
+	popd
 
 	eapply_user
 
