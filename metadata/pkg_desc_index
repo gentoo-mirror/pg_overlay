@@ -35,6 +35,7 @@ dev-db/sqlite 3.31.1: SQL database engine
 dev-games/freecell-solver 5.20.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 2.7.17-r1 3.8.2: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.41.1 1.42.0_beta: Systems programming language from Mozilla
+dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
 dev-libs/boost 1.72.0-r1: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
