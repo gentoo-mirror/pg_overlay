@@ -16,7 +16,6 @@ tests-Expect-a-test-to-fail-on-armel.patch
 tests-Use-DEB_HOST_ARCH_BITS-to-skip-some-tests-on-64-bit.patch
 Skip-some-i18n-tests-because-we-are-now-using-system-ICU.patch
 tests-Expect-a-test-to-fail-on-big-endian.patch
-enddianness.patch
 jsproperty-endian.patch
 tests-Skip-a-test-on-s390x.patch
 Bug-1375074-Save-and-restore-non-volatile-x28-on-ARM64-fo.patch
