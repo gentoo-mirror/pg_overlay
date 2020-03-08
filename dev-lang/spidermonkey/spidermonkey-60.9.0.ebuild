@@ -17,7 +17,8 @@ IUSE="debug +jit minimal +system-icu test"
 
 RESTRICT="!test? ( test ) ia64? ( test )"
 
-S="${WORKDIR}/firefox-${PV}/js/src"
+#S="${WORKDIR}/firefox-${PV}/js/src"
+S="${WORKDIR}/firefox-${PV}"
 
 BUILDDIR="${S}/jsobj"
 
@@ -40,12 +41,12 @@ pkg_setup() {
 }
 
 src_prepare() {
-	pushd ../..
+	#pushd ../..
 	eapply "${WORKDIR}/${PN}"
 	eapply "${FILESDIR}/${PN}-60.5.2-ia64-support.patch"
 
 	for p in $(cat "${FILESDIR}/debian-patches/series");do eapply "${FILESDIR}/debian-patches/$p";done
-	popd
+	#popd
 
 	eapply_user
 
