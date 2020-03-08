@@ -10,7 +10,6 @@ icu_sources_data.py-Decouple-from-Mozilla-build-system.patch
 icu_sources_data-Write-command-output-to-our-stderr.patch
 tests-increase-timeout.patch
 ia64-support.patch
-Add-disable-layoutex-when-running-ICU-configure.patch
 tests-Add-the-ability-to-skip-tests-according-to-dpkg-arc.patch
 tests-Expect-some-floating-point-tests-to-fail-on-i386.patch
 tests-Expect-a-test-to-fail-on-armel.patch
