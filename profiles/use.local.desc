@@ -301,6 +301,9 @@ net-p2p/qbittorrent:webui - Enable the Web UI
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
 net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
+net-print/cups-filters:foomatic - Build the included foomatic-rip printer driver. Strongly recommended.
+net-print/cups-filters:ipp_autosetup - Let cups-browsed automatically set up IPP network printers by default.
+net-print/cups-filters:pclm - Enable PCLm support
 net-print/samsung-unified-driver:network - Enable network printing support
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
 sys-libs/libblockdev:bcache - Enable block device cache support.

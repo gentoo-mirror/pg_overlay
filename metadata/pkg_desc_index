@@ -206,6 +206,7 @@ net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
+net-print/cups-filters 1.27.2: Cups filters
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sci-libs/libqalculate 3.8.0: A modern multi-purpose calculator library
