@@ -119,6 +119,7 @@ src_prepare() {
 
 src_configure() {
 	append-lfs-flags
+	append-ldflags -Wl,-z,relro,-z,now -pie
 
 	cmake-utils_src_configure
 }
