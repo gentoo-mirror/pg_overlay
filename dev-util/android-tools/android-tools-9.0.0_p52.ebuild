@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=( python2_7 python3_{7,8} )
+PYTHON_COMPAT=( python3_{7,8} )
 CMAKE_MAKEFILE_GENERATOR="ninja"
 
 inherit flag-o-matic bash-completion-r1 ninja-utils toolchain-funcs cmake-utils python-r1
@@ -100,7 +100,7 @@ src_prepare() {
 	cd "${S}" || die
 	default
 
-	ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
+	#ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
 
 	sed -E \
 		-e "s|^(CC =).*|\\1 $(tc-getCC)|g" \
@@ -130,6 +130,7 @@ src_compile() {
 	# We only need a few libs from boringssl.
 	cmake-utils_src_compile libcrypto.a libssl.a
 
+	ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
 	eninja
 }
 
