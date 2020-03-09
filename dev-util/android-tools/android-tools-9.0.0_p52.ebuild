@@ -100,17 +100,17 @@ src_prepare() {
 	cd "${S}" || die
 	default
 
-	ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
+	#ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
 
-	sed -E \
-		-e "s|^(CC =).*|\\1 $(tc-getCC)|g" \
-		-e "s|^(CXX =).*|\\1 $(tc-getCXX)|g" \
-		-e "s|^(CFLAGS =).*|\\1 ${CFLAGS}|g" \
-		-e "s|^(CPPFLAGS =).*|\\1 ${CPPFLAGS}|g" \
-		-e "s|^(CXXFLAGS =).*|\\1 ${CXXFLAGS}|g" \
-		-e "s|^(LDFLAGS =).*|\\1 ${LDFLAGS}|g" \
-		-e "s|^(PKGVER =).*|\\1 ${MY_PV}|g" \
-		-i build.ninja || die
+	#sed -E \
+	#	-e "s|^(CC =).*|\\1 $(tc-getCC)|g" \
+	#	-e "s|^(CXX =).*|\\1 $(tc-getCXX)|g" \
+	#	-e "s|^(CFLAGS =).*|\\1 ${CFLAGS}|g" \
+	#	-e "s|^(CPPFLAGS =).*|\\1 ${CPPFLAGS}|g" \
+	#	-e "s|^(CXXFLAGS =).*|\\1 ${CXXFLAGS}|g" \
+	#	-e "s|^(LDFLAGS =).*|\\1 ${LDFLAGS}|g" \
+	#	-e "s|^(PKGVER =).*|\\1 ${MY_PV}|g" \
+	#	-i build.ninja || die
 
 	# The pregenerated ninja file expects the build/ dir.
 	BUILD_DIR="${CMAKE_USE_DIR}/build"
