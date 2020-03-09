@@ -100,7 +100,7 @@ src_prepare() {
 	cd "${S}" || die
 	default
 
-	#ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
+	ruby "${FILESDIR}"/generate_build.rb | tee build.ninja
 
 	sed -E \
 		-e "s|^(CC =).*|\\1 $(tc-getCC)|g" \
