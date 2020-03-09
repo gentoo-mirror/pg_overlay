@@ -119,6 +119,8 @@ src_prepare() {
 
 src_configure() {
 	append-lfs-flags
+	append-cflags -I$PWD/include/ -fPIE
+	append-cxxflags -I$PWD/include/ -fPIE
 	append-ldflags -Wl,-z,relro,-z,now -pie
 
 	cmake-utils_src_configure
@@ -126,8 +128,7 @@ src_configure() {
 
 src_compile() {
 	# We only need a few libs from boringssl.
-	cmake-utils_src_compile
-	#libcrypto.a libssl.a
+	cmake-utils_src_compile libcrypto.a libssl.a
 
 	eninja
 }
