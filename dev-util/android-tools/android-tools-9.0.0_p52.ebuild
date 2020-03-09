@@ -3,7 +3,7 @@
 
 EAPI="6"
 
-PYTHON_COMPAT=( python2_7 python3_{6,7} )
+PYTHON_COMPAT=( python3_{7,8} )
 CMAKE_MAKEFILE_GENERATOR="ninja"
 
 inherit flag-o-matic bash-completion-r1 ninja-utils toolchain-funcs cmake-utils python-r1
@@ -119,6 +119,9 @@ src_prepare() {
 
 src_configure() {
 	append-lfs-flags
+	append-cflags -I$PWD/include/ -fPIE
+	append-cxxflags -I$PWD/include/ -fPIE
+	append-ldflags -Wl,-z,relro,-z,now -pie
 
 	cmake-utils_src_configure
 }
