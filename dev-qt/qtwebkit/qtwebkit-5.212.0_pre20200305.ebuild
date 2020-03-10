@@ -43,6 +43,7 @@ DEPEND="
 	>=dev-qt/qtnetwork-${QT_MIN_VER}
 	>=dev-qt/qtwidgets-${QT_MIN_VER}=
 	media-libs/libpng:0=
+	media-libs/woff2
 	virtual/jpeg:0
 	geolocation? ( >=dev-qt/qtpositioning-${QT_MIN_VER} )
 	gstreamer? (
