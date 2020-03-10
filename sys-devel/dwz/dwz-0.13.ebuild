@@ -19,6 +19,7 @@ IUSE=""
 DEPEND="dev-libs/elfutils"
 RDEPEND="${DEPEND}"
 BDEPEND=""
+S="${WORKDIR}/${PN}"
 
 src_prepare() {
 	default
