@@ -30,6 +30,7 @@ BDEPEND="
 	dev-lang/perl
 	dev-util/gperf
 	>=sys-devel/bison-2.4.3
+	>=sys-devel/dwz-0.13
 	sys-devel/flex
 	virtual/pkgconfig
 "
