@@ -160,7 +160,7 @@ gnome-base/librsvg 2.47.3: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kwin 5.18.2-r2: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 5.18.3: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.5.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
