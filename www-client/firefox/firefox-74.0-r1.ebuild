@@ -475,6 +475,7 @@ src_configure() {
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
+			mozconfig_annotate '+pgo-rust' --enable-profile-generate=cross
 		fi
 	else
 		# Avoid auto-magic on linker
