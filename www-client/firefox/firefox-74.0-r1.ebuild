@@ -458,7 +458,7 @@ src_configure() {
 
 		if use cross-lto ; then
 			filter-flags -fno-plt
-			append-flags -target=x86_64-unknown-linux-gnu
+			append-flags -target x86_64-unknown-linux-gnu
 			mozconfig_annotate '+lto-cross' --enable-lto=cross
 			mozconfig_annotate '+lto-cross' MOZ_LTO=1
 			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
