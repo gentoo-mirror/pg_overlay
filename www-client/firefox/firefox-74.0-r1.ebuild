@@ -404,7 +404,6 @@ src_configure() {
 
 	# Don't let user's LTO flags clash with upstream's flags
 	filter-flags -flto*
-	filter-flags -fno-plt
 
 	if use lto ; then
 		local show_old_compiler_warning=
@@ -458,6 +457,8 @@ src_configure() {
 		fi
 
 		if use cross-lto ; then
+			filter-flags -fno-plt
+			append-flags --target=x86_64-unknown-linux-gnu
 			mozconfig_annotate '+lto-cross' --enable-lto=cross
 			mozconfig_annotate '+lto-cross' MOZ_LTO=1
 			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
@@ -475,7 +476,7 @@ src_configure() {
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
 			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
-			mozconfig_annotate '+pgo-rust' --enable-profile-generate=cross
+			#mozconfig_annotate '+pgo-rust' --enable-profile-generate=cross
 		fi
 	else
 		# Avoid auto-magic on linker
