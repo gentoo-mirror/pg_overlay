@@ -1,0 +1,25 @@
+From 31dcdc9e13c324d33a18db3aed7f4b3208ff3744 Mon Sep 17 00:00:00 2001
+From: Mark Rousskov <mark.simulacrum@gmail.com>
+Date: Fri, 31 Jan 2020 12:30:17 -0500
+Subject: [PATCH] Drop cfg(bootstrap) code
+
+---
+ src/bootstrap/lib.rs | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/bootstrap/lib.rs b/src/bootstrap/lib.rs
+index 1fee3fd9ac1d..637323331f58 100644
+--- a/src/bootstrap/lib.rs
++++ b/src/bootstrap/lib.rs
+@@ -1026,7 +1026,7 @@ impl Build {
+     }
+ 
+     fn llvm_link_tools_dynamically(&self, target: Interned<String>) -> bool {
+-        (target.contains("linux-gnu") || target.contains("apple-darwin"))
++        target.contains("linux-gnu") || target.contains("apple-darwin")
+     }
+ 
+     /// Returns the `version` string associated with this compiler for Rust
+-- 
+2.24.1
+

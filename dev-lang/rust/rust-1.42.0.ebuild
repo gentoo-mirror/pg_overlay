@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{6,7,8} pypy )
+PYTHON_COMPAT=( python3_{7,8} pypy )
 
 inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
@@ -110,6 +110,7 @@ QA_SONAME="usr/lib.*/librustc_macros.*.so"
 
 PATCHES=(
 	"${FILESDIR}"/1.40.0-add-soname.patch
+	"${FILESDIR}"/0001-Drop-cfg-bootstrap-code.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
