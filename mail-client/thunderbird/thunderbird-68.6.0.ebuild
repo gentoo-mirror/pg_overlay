@@ -580,11 +580,6 @@ src_configure() {
 	# Enable/Disable eme support
 	use eme-free && mozconfig_annotate '+eme-free' --disable-eme
 
-	# Setup api key for location services and safebrowsing, https://bugzilla.mozilla.org/show_bug.cgi?id=1531176#c34
-	echo -n "${_google_api_key}" > "${S}"/google-api-key
-	mozconfig_annotate '' --with-google-location-service-api-keyfile="${S}/google-api-key"
-	mozconfig_annotate '' --with-google-safebrowsing-api-keyfile="${S}/google-api-key"
-
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# allow elfhack to work in combination with unstripped binaries
@@ -660,11 +655,11 @@ src_configure() {
 	mozconfig_annotate '' --without-google-location-service-api-keyfile
 	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
 
-	mozconfig_annotate '' MOZ_DATA_REPORTING=0
-	mozconfig_annotate '' MOZ_LOGGING=0
-	mozconfig_annotate '' MOZ_PAY=0
-	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=0
-	mozconfig_annotate '' MOZ_SERVICES_METRICS=0
+	mozconfig_annotate '' MOZ_DATA_REPORTING=
+	mozconfig_annotate '' MOZ_LOGGING=
+	mozconfig_annotate '' MOZ_PAY=
+	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=
+	mozconfig_annotate '' MOZ_SERVICES_METRICS=
 	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
@@ -675,12 +670,12 @@ src_configure() {
 	mozconfig_annotate '' --enable-rust-simd
 	mozconfig_annotate '' --enable-strip
 
-	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
-	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DATA_REPORTING=" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=" >> "${S}"/.mozconfig
+	echo "export MOZ_LOGGING=" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
 	#
