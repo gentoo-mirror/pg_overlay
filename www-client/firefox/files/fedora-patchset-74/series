@@ -5,5 +5,3 @@ rhbz-1354671.patch
 mozilla-1196777.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 mozilla-1620973.patch
-
-mozilla-1609538.patch
