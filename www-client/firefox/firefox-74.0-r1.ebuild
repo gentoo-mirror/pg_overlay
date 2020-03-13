@@ -600,7 +600,7 @@ src_configure() {
 	if use clang && ! use arm64; then
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1482204
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1483822
-	mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack
+		mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack
 	fi
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
