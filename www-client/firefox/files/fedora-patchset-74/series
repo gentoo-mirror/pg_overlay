@@ -1,7 +1,6 @@
 firefox-enable-addons.patch
 mozilla-1170092.patch
 rhbz-1354671.patch
-kiosk-workaround.patch
 
 mozilla-1196777.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
