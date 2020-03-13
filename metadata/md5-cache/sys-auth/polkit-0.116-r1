@@ -1,0 +1,17 @@
+BDEPEND=acct-user/polkitd app-text/docbook-xml-dtd:4.1.2 app-text/docbook-xsl-stylesheets dev-libs/gobject-introspection-common dev-libs/libxslt dev-util/glib-utils dev-util/gtk-doc-am dev-util/intltool sys-devel/gettext virtual/pkgconfig introspection? ( dev-libs/gobject-introspection ) >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 virtual/pkgconfig
+DEFINED_PHASES=compile configure install postinst prepare
+DEPEND=dev-lang/duktape dev-libs/glib:2 dev-libs/expat elogind? ( sys-auth/elogind ) pam? ( sys-auth/pambase sys-libs/pam ) systemd? ( sys-apps/systemd:0=[policykit] )
+DESCRIPTION=Policy framework for controlling privileges for system-wide services
+EAPI=7
+HOMEPAGE=https://www.freedesktop.org/wiki/Software/polkit https://gitlab.freedesktop.org/polkit/polkit
+IUSE=consolekit elogind examples gtk +introspection kde nls pam selinux systemd test
+KEYWORDS=~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86
+LICENSE=LGPL-2
+PDEPEND=consolekit? ( sys-auth/consolekit[policykit] ) gtk? ( || ( >=gnome-extra/polkit-gnome-0.105 >=lxde-base/lxsession-0.5.2 ) ) kde? ( kde-plasma/polkit-kde-agent )
+RDEPEND=dev-lang/duktape dev-libs/glib:2 dev-libs/expat elogind? ( sys-auth/elogind ) pam? ( sys-auth/pambase sys-libs/pam ) systemd? ( sys-apps/systemd:0=[policykit] ) acct-user/polkitd selinux? ( sec-policy/selinux-policykit )
+REQUIRED_USE=^^ ( consolekit elogind systemd )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://www.freedesktop.org/software/polkit/releases/polkit-0.116.tar.gz
+_eclasses_=autotools	ea7865c8fba1ea8d3639f355fffe1a3c	eutils	fcb2aa98e1948b835b5ae66ca52868c5	flag-o-matic	3719195b17f75382c225c2155e81198c	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	1d91b03d42ab6308b5f4f6b598ed110e	pam	a1771fc1e5831c201eaf18451747d94b	pax-utils	a41d1fd1c111289ffa04490de6ee79d7	systemd	71fd8d2065d102753fb9e4d20eaf3e9f	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
+_md5_=876f0848c744f5aed57060e1ecfda35b

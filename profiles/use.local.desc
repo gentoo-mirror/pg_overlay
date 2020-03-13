@@ -310,6 +310,9 @@ net-print/cups-filters:ipp_autosetup - Let cups-browsed automatically set up IPP
 net-print/cups-filters:pclm - Enable PCLm support
 net-print/samsung-unified-driver:network - Enable network printing support
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+sys-auth/polkit:consolekit - Use sys-auth/consolekit for session tracking
+sys-auth/polkit:elogind - Use sys-auth/elogind for session tracking
+sys-auth/polkit:systemd - Use sys-apps/systemd for session tracking
 sys-libs/libblockdev:bcache - Enable block device cache support.
 sys-libs/libblockdev:cryptsetup - Enable sys-fs/cryptsetup support
 sys-libs/libblockdev:device-mapper - Enable support for device-mapper from sys-fs/lvm2

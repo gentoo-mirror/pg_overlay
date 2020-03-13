@@ -215,6 +215,7 @@ sys-apps/bleachbit 9999 9999-r1: Clean junk to free disk space and to maintain p
 sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system-wide services
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
 sys-fs/xfsprogs 5.5.0_rc1: xfs filesystem utilities
