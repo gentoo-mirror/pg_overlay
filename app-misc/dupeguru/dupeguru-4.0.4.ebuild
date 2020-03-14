@@ -7,7 +7,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_8 )
 PYTHON_REQ_USE="sqlite"
 
-inherit eutils python-single-r1
+inherit eutils distutils-r1
 
 DESCRIPTION="Find duplicate files on your system"
 HOMEPAGE="https://dupeguru.voltaicideas.net"
