@@ -1,5 +1,5 @@
 app-accessibility/at-spi2-atk 2.34.1: Gtk module for bridging AT-SPI to Atk
-app-accessibility/at-spi2-core 2.35.1: D-Bus accessibility specifications and registration daemon
+app-accessibility/at-spi2-core 2.36.0: D-Bus accessibility specifications and registration daemon
 app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
@@ -38,11 +38,11 @@ dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
 dev-libs/boost 1.72.0-r1: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/glib 2.63.4: The GLib library of C routines
-dev-libs/gobject-introspection 1.63.2: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.63.2: Build infrastructure for GObject Introspection
+dev-libs/glib 2.64.1: The GLib library of C routines
+dev-libs/gobject-introspection 1.64.0: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection-common 1.64.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
-dev-libs/icu 65.1-r1: International Components for Unicode
+dev-libs/icu 65.1-r1 66.1_pre: International Components for Unicode
 dev-libs/libgit2 0.99.0-r1: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
@@ -137,8 +137,8 @@ dev-qt/qtwebengine 5.14.1: Library for rendering dynamic web content in Qt5 C++ 
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200305: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.63.6: GDBus code and documentation generator
-dev-util/glib-utils 2.63.6: Build utilities for GLib using projects
+dev-util/gdbus-codegen 2.64.1: GDBus code and documentation generator
+dev-util/glib-utils 2.64.1: Build utilities for GLib using projects
 dev-util/glslang 7.13.3496 8.13.3559 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1726: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
@@ -156,7 +156,7 @@ dev-util/vulkan-tools 1.2.133: Official Vulkan Tools and Utilities for Windows, 
 dev-vcs/mercurial 5.2.2 5.2.2-r1: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.34.0: Collection of GSettings schemas for GNOME desktop
-gnome-base/librsvg 2.47.3: Scalable Vector Graphics (SVG) rendering library
+gnome-base/librsvg 2.48.0: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
