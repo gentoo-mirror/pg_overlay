@@ -1,0 +1,12 @@
+diff -up firefox-74.0/widget/gtk/nsWindow.cpp.1615098 firefox-74.0/widget/gtk/nsWindow.cpp
+--- firefox-74.0/widget/gtk/nsWindow.cpp.1615098	2020-03-13 09:34:03.623433935 +0100
++++ firefox-74.0/widget/gtk/nsWindow.cpp	2020-03-13 09:38:44.382941288 +0100
+@@ -4879,8 +4879,6 @@ void nsWindow::UpdateTopLevelOpaqueRegio
+   if (window) {
+     gdk_window_invalidate_rect(window, &rect, false);
+   }
+-
+-  moz_container_update_opaque_region(mContainer, aSubtractCorners);
+ }
+ #endif
+ 
