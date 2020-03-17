@@ -11,7 +11,7 @@
 +ARFILE = lib$(LIB).a
 +SO_NAME = $(LIBFILE).1
 +REAL_NAME = $(LIBFILE).$(VERSION)
-+HEADERS = BitBuffer.hpp QrCode.hpp QrSegment.hpp
++HEADERS = QrCode.hpp
  LIBOBJ = QrCode.o
  MAINS = QrCodeGeneratorDemo QrCodeGeneratorWorker
  
