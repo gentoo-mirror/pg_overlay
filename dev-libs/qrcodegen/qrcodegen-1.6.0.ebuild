@@ -18,15 +18,27 @@ DEPEND="${RDEPEND}
 
 S=${WORKDIR}/QR-Code-generator-${PV}
 
-PATCHES=()
+PATCHES=("${FILESDIR}/c-lib.patch"
+		"${FILESDIR}/cpp-lib.patch")
 
 src_compile() {
-	cd "${S}"/cpp
+	pushd c
 	emake
+	popd
+
+	pushd cpp
+	emake
+	popd
 }
 
 src_install() {
-	cd "${S}"/cpp
-	emake DESTDIR=${D} install
+	pushd c
+	emake DESTDIR=${D} install-header
 	emake DESTDIR=${D} LIBDIR=${D}/usr/$(get_libdir) install-shared
+	popd
+
+	pushd cpp
+	emake DESTDIR=${D} install-header
+	emake DESTDIR=${D} LIBDIR=${D}/usr/$(get_libdir) install-shared
+	popd
 }
