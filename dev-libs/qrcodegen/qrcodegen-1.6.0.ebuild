@@ -27,6 +27,6 @@ src_compile() {
 
 src_install() {
 	cd "${S}"/cpp
-	emake DESTDIR=${D} install-header
+	emake DESTDIR=${D} install
 	emake DESTDIR=${D} LIBDIR=${D}/usr/$(get_libdir) install-shared
 }
