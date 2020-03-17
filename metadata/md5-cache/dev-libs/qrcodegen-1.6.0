@@ -7,4 +7,4 @@ KEYWORDS=~amd64
 LICENSE=MIT
 SLOT=0
 SRC_URI=https://github.com/nayuki/QR-Code-generator/archive/v1.6.0.tar.gz -> qrcodegen-1.6.0.tar.gz
-_md5_=24970a1361eebb3a0a74ae1651d0431d
+_md5_=de7207b8c8e4bb430aca4a5272a485b7
