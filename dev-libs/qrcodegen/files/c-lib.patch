@@ -1,6 +1,19 @@
 --- a/c/Makefile	2020-03-06 02:00:48.000000000 +0700
-+++ b/c/Makefile	2020-03-17 11:32:40.152700889 +0700
-@@ -51,18 +51,45 @@
++++ b/c/Makefile	2020-03-17 12:06:35.350538735 +0700
+@@ -34,6 +34,8 @@
+ # Extra flags for diagnostics:
+ # CFLAGS += -g -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -fsanitize=undefined,address
+ 
++# Version information
++VERSION = 1.6.0
+ 
+ # ---- Controlling make ----
+ 
+@@ -47,22 +49,48 @@
+ .DEFAULT_GOAL = all
+ .PHONY: all clean
+ 
+-
  # ---- Targets to build ----
  
  LIB = qrcodegen
@@ -49,7 +62,7 @@
  # Executable files
  %: %.o $(LIBFILE)
  	$(CC) $(CFLAGS) -o $@ $< -L . -l $(LIB)
-@@ -72,12 +99,16 @@
+@@ -72,12 +100,16 @@
  	$(CC) $(CFLAGS) -DQRCODEGEN_TEST -o $@ $^
  
  # The library
