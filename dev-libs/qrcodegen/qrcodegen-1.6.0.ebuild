@@ -18,8 +18,7 @@ DEPEND="${RDEPEND}
 
 S=${WORKDIR}/QR-Code-generator-${PV}
 
-PATCHES=( "${FILESDIR}/c-lib.patch"
-		"${FILESDIR}/cpp-lib.patch" )
+PATCHES=("${FILESDIR}/cpp-lib.patch" )
 
 src_compile() {
 	cd "${S}"/cpp
