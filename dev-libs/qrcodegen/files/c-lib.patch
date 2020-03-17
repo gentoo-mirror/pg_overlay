@@ -1,5 +1,11 @@
 --- a/c/Makefile	2020-03-06 02:00:48.000000000 +0700
-+++ b/c/Makefile	2020-03-17 10:29:43.001276480 +0700
++++ b/c/Makefile	2020-03-17 11:32:40.152700889 +0700
+@@ -1,4 +1,4 @@
+-# 
++o# 
+ # Makefile for QR Code generator (C)
+ # 
+ # Copyright (c) Project Nayuki. (MIT License)
 @@ -51,18 +51,45 @@
  # ---- Targets to build ----
  
@@ -19,7 +25,8 @@
 +LIBDIR ?= $(DESTDIR)/usr/lib/$(MULTIARCH)
 +
  # Build all binaries
- all: $(LIBFILE) $(MAINS)
+-all: $(LIBFILE) $(MAINS)
++all: $(LIBFILE) $(ARFILE) $(MAINS)
  
  # Delete build output
  clean:
