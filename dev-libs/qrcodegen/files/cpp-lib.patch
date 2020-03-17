@@ -54,7 +54,7 @@
  
  # The library
 -$(LIBFILE): $(LIBOBJ)
-++$(ARFILE): $(LIBOBJ)
++$(ARFILE): $(LIBOBJ)
  	$(AR) -crs $@ -- $^
  
 +$(LIBFILE): $(LIBOBJ)
