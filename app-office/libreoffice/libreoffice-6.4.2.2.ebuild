@@ -120,7 +120,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/icu:=
 	dev-libs/libassuan
 	dev-libs/libgpg-error
-	>=dev-libs/liborcus-0.14.0
+	>=dev-libs/liborcus-0.15.0
 	dev-libs/librevenge
 	dev-libs/libxml2
 	dev-libs/libxslt
@@ -154,9 +154,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	x11-libs/libXrandr
 	x11-libs/libXrender
 	accessibility? (
-		$(python_gen_cond_dep '
-			dev-python/lxml[${PYTHON_MULTI_USEDEP}]
-		')
+		$(python_gen_cond_dep 'dev-python/lxml[${PYTHON_MULTI_USEDEP}]')
 	)
 	bluetooth? (
 		dev-libs/glib:2
@@ -211,7 +209,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-perl/Archive-Zip
 	>=dev-util/cppunit-1.14.0
 	>=dev-util/gperf-3.1
-	>=dev-util/mdds-1.4.1:1=
+	>=dev-util/mdds-1.5.0:1=
 	media-libs/glm
 	sys-devel/ucpp
 	x11-base/xorg-proto
@@ -273,12 +271,6 @@ pkg_pretend() {
 	fi
 
 	use java || ewarn "Without java, several wizards are not going to be available."
-
-	if has_version "<app-office/libreoffice-5.3.0[firebird]"; then
-		ewarn "Firebird has been upgraded to version 3. It is unable to read back Firebird 2.5 data, so"
-		ewarn "embedded firebird odb files created in LibreOffice pre-5.3 can't be opened with this version."
-		ewarn "See also: https://wiki.documentfoundation.org/ReleaseNotes/5.3#Base"
-	fi
 
 	[[ ${MERGE_TYPE} != binary ]] && _check_reqs pkg_pretend
 }
@@ -391,6 +383,7 @@ src_configure() {
 	# --without-system-sane: just sane.h header that is used for scan in writer,
 	#   not linked or anything else, worthless to depend on
 	# --disable-pdfium: not yet packaged
+	# --without-system-qrencode: has no real build system and LO is the only user
 	local myeconfargs=(
 		--with-system-dicts
 		--with-system-epoxy
@@ -408,7 +401,6 @@ src_configure() {
 		--disable-breakpad
 		--disable-bundle-mariadb
 		--disable-ccache
-		--disable-dependency-tracking
 		--disable-epm
 		--disable-fetch-external
 		--disable-gtk3-kde5
@@ -517,7 +509,7 @@ src_test() {
 
 src_install() {
 	# This is not Makefile so no buildserver
-	make DESTDIR="${D}" distro-pack-install -o build -o check || die
+	emake DESTDIR="${D}" distro-pack-install -o build -o check
 
 	# bug 593514
 	if use gtk; then
