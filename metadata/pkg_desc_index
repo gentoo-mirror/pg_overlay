@@ -16,8 +16,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.3.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.4.2.1: A full office productivity suite
-app-office/libreoffice-l10n 6.4.2.1: Translations for the Libreoffice suite
+app-office/libreoffice 6.4.2.2: A full office productivity suite
+app-office/libreoffice-l10n 6.4.2.2: Translations for the Libreoffice suite
 app-portage/eix 0.33.9-r1: Search and query ebuilds
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
