@@ -75,9 +75,6 @@ dev-perl/File-Which:pwhich - Install dev-perl/App-pwhich which used to be a part
 dev-perl/JSON:xs - Install C-based dev-perl/JSON-XS for faster performance
 dev-perl/Ref-Util:xs - Install C-Based dev-perl/Ref-Util-XS for accelerated performance
 dev-perl/Sub-Name:suggested - Install extra dependencies needed for extended regression tests
-dev-python/twisted:conch - include Twisted SSHv2 implementation
-dev-python/twisted:http2 - include http2 support
-dev-python/twisted:serial - include serial port support
 dev-qt/qtwebengine:designer - Install the QWebEngineView plugin used to add widgets in dev-qt/designer forms that display web pages.
 dev-qt/qtwebengine:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebengine:jumbo-build - Combine source files to speed up build process.

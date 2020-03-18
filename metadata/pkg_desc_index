@@ -110,28 +110,15 @@ dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/configobj 5.0.6: Simple config file reader and writer
-dev-python/constantly 15.1.0-r1: Symbolic constants in Python
 dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
-dev-python/incremental 17.5.0: Incremental is a small library that versions your Python projects
-dev-python/josepy 1.2.0: JOSE protocol implementation in Python
-dev-python/mako 1.1.0: A Python templating language
 dev-python/numpy 1.18.1: Fast array and numerical python library
 dev-python/parsedatetime 2.5: Parse human-readable date/time strings
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
-dev-python/precis-i18n 1.0.1: Internationalized Usernames and Passwords
-dev-python/pygtk 2.24.0-r4: GTK+2 bindings for Python
-dev-python/pyhamcrest 1.9.0-r1: Hamcrest framework for matcher objects
-dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
-dev-python/python-nbxmpp 0.6.10: Python library to use Jabber/XMPP networks in a non-blocking way
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/scandir 1.10.0-r1: A better directory iterator and faster os.walk()
-dev-python/send2trash 1.5.0: Sends files to the Trash (or Recycle Bin)
-dev-python/setproctitle 1.1.10-r1: Allow customization of the process title
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
-dev-python/twisted 19.10.0: An asynchronous networking framework written in Python
-dev-python/wheel 0.34.1: A built-package format for Python
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebengine 5.14.1: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200305: WebKit rendering library for the Qt5 framework (deprecated)
