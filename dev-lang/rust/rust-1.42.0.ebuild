@@ -39,7 +39,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc libressl nightly parallel-compiler rls rustfmt system-bootstrap system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compiler rls rustfmt system-bootstrap system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -82,7 +82,7 @@ DEPEND="${COMMON_DEPEND}
 		>=sys-devel/clang-8.0
 	)
 	system-bootstrap? ( ${BOOTSTRAP_DEPEND}	)
-	system-llvm? (
+	!system-llvm? (
 		dev-util/cmake
 		|| ( dev-util/ninja
 			dev-util/samurai )
@@ -94,6 +94,7 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
+	miri? ( nightly )
 	parallel-compiler? ( nightly )
 	wasm? ( llvm_targets_WebAssembly )
 	x86? ( cpu_flags_x86_sse2 )
@@ -205,6 +206,9 @@ src_configure() {
 	if use clippy; then
 		tools="\"clippy\",$tools"
 	fi
+	if use miri; then
+		tools="\"miri\",$tools"
+	fi
 	if use rls; then
 		tools="\"rls\",\"analysis\",\"src\",$tools"
 	fi
@@ -313,19 +317,20 @@ src_configure() {
 			linker = "$(usex system-llvm lld rust-lld)"
 		EOF
 	fi
+
+	einfo "Rust configured with the following settings:"
+	cat "${S}"/config.toml || die
 }
 
 src_compile() {
 	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
 	env $(cat "${S}"/config.env)\
-		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) \
-		--exclude src/tools/miri || die # https://github.com/rust-lang/rust/issues/52305
+		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 }
 
 src_install() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
-	env DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml \
-	--exclude src/tools/miri || die
+	env $(cat "${S}"/config.env) DESTDIR="${D}" \
+		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml || die
 
 	# bug #689562, #689160
 	rm "${D}/etc/bash_completion.d/cargo" || die
@@ -341,6 +346,10 @@ src_install() {
 	if use clippy; then
 		mv "${ED}/usr/bin/clippy-driver" "${ED}/usr/bin/clippy-driver-${PV}" || die
 		mv "${ED}/usr/bin/cargo-clippy" "${ED}/usr/bin/cargo-clippy-${PV}" || die
+	fi
+	if use miri; then
+		mv "${ED}/usr/bin/miri" "${ED}/usr/bin/miri-${PV}" || die
+		mv "${ED}/usr/bin/cargo-miri" "${ED}/usr/bin/cargo-miri-${PV}" || die
 	fi
 	if use rls; then
 		mv "${ED}/usr/bin/rls" "${ED}/usr/bin/rls-${PV}" || die
@@ -370,6 +379,10 @@ src_install() {
 	if use clippy; then
 		echo /usr/bin/clippy-driver >> "${T}/provider-${P}"
 		echo /usr/bin/cargo-clippy >> "${T}/provider-${P}"
+	fi
+	if use miri; then
+		echo /usr/bin/miri >> "${T}/provider-${P}"
+		echo /usr/bin/cargo-miri >> "${T}/provider-${P}"
 	fi
 	if use rls; then
 		echo /usr/bin/rls >> "${T}/provider-${P}"
