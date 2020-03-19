@@ -140,7 +140,6 @@ dev-util/samurai 1.0: ninja-compatible build tool written in C
 dev-util/spirv-tools 2020.1: Provides an API and commands for processing SPIR-V modules
 dev-util/vulkan-headers 1.2.133: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.133: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
-dev-vcs/mercurial 5.2.2-r1 5.3.1_pre: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.34.0: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.48.0: Scalable Vector Graphics (SVG) rendering library
