@@ -23,7 +23,7 @@ app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
-app-text/asciidoc 9.0.0_rc1: A plain text human readable/writable document format
+app-text/asciidoc 9.0.0_rc2: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
 app-text/libetonyek 0.1.9: Library parsing Apple Keynote presentations
