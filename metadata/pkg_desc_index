@@ -26,7 +26,6 @@ app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX s
 app-text/asciidoc 9.0.0_rc2: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
-app-text/libetonyek 0.1.9-r1: Library parsing Apple Keynote presentations
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/po4a 0.57_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
