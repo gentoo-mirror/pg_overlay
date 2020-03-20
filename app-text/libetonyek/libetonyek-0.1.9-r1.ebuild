@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-if [[ ${PV} = *9999 ]]; then
+if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://anongit.freedesktop.org/git/libreoffice/libetonyek.git"
 	inherit autotools git-r3
 else
@@ -39,17 +39,21 @@ DEPEND="${RDEPEND}
 src_prepare() {
 	default
 	[[ -d m4 ]] || mkdir "m4"
-	[[ ${PV} == 9999 ]] && eautoreconf
+	[[ ${PV} == *9999 ]] && eautoreconf
 }
 
 src_configure() {
 	local myeconfargs=(
 		--disable-werror
-		--with-mdds=1.5
 		$(use_with doc docs)
 		$(use_enable static-libs static)
 		$(use_enable test tests)
 	)
+	if has_version ">=dev-util/mdds-1.5"; then
+		myeconfargs+=( --with-mdds=1.6 )
+	else
+		myeconfargs+=( --with-mdds=1.4 )
+	fi
 
 	econf "${myeconfargs[@]}"
 }
