@@ -26,7 +26,7 @@ app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX s
 app-text/asciidoc 9.0.0_rc2: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
-app-text/libetonyek 0.1.9: Library parsing Apple Keynote presentations
+app-text/libetonyek 0.1.9-r1: Library parsing Apple Keynote presentations
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/po4a 0.57_pre: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
@@ -42,7 +42,7 @@ dev-libs/glib 2.64.1: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.0: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.64.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
-dev-libs/icu 65.1-r1 66.1_pre: International Components for Unicode
+dev-libs/icu 66.1: International Components for Unicode
 dev-libs/libgit2 0.99.0-r1: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
