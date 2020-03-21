@@ -120,7 +120,7 @@ dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebengine 5.14.1: Library for rendering dynamic web content in Qt5 C++ and QML applications
-dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200305: WebKit rendering library for the Qt5 framework (deprecated)
+dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200319: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.64.1: GDBus code and documentation generator
@@ -195,7 +195,7 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
 sci-libs/libqalculate 3.8.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
-sys-apps/bleachbit 9999 9999-r1: Clean junk to free disk space and to maintain privacy
+sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
