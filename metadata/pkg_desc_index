@@ -39,7 +39,6 @@ dev-libs/boost 1.72.0-r1: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.64.1: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.0: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.64.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 66.1: International Components for Unicode
 dev-libs/libgit2 0.99.0-r1: A linkable library for Git
@@ -123,16 +122,13 @@ dev-qt/qtwebengine 5.14.1: Library for rendering dynamic web content in Qt5 C++ 
 dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200319: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.64.1: GDBus code and documentation generator
-dev-util/glib-utils 2.64.1: Build utilities for GLib using projects
 dev-util/glslang 7.13.3496 8.13.3559 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1726: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
-dev-util/mdds 1.5.0 1.6.0: A collection of multi-dimensional data structure and indexing algorithm
+dev-util/mdds 1.6.0: A collection of multi-dimensional data structure and indexing algorithm
 dev-util/meson 0.53.2_pre: Open source build system
-dev-util/ninja 1.9.0: A small build system similar to make
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/rinutils 0.2.0: C11 / gnu11 utilities C library
 dev-util/samurai 1.0: ninja-compatible build tool written in C
