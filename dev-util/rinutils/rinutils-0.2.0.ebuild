@@ -8,7 +8,6 @@ inherit cmake
 DESCRIPTION="C11 / gnu11 utilities C library"
 HOMEPAGE="https://www.shlomifish.org/open-source/projects/"
 SRC_URI="https://github.com/shlomif/${PN}/releases/download/${PV}/${P}.tar.xz"
-https://github.com/shlomif/rinutils/releases/download/0.2.0/rinutils-0.2.0.tar.xz
 
 LICENSE="MIT"
 SLOT="0"
