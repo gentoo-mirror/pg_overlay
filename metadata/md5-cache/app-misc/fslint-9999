@@ -7,8 +7,8 @@ HOMEPAGE=https://www.pixelbeat.org/fslint/
 IUSE=nls sqlite python_targets_python2_7
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=python_targets_python2_7? ( >=dev-lang/python-2.7.5-r2:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] dev-python/pygtk:2[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] gnome-base/libglade:2.0 sqlite? ( dev-db/sqlite )
+RDEPEND=python_targets_python2_7? ( >=dev-lang/python-2.7.17-r1:2.7 ) >=dev-lang/python-exec-2:=[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] dev-python/pygtk:2[python_targets_python2_7(-)?,-python_single_target_python2_7(-)] gnome-base/libglade:2.0 sqlite? ( dev-db/sqlite )
 REQUIRED_USE=|| ( python_targets_python2_7 )
 SLOT=0
-_eclasses_=desktop	3b1f1d9a6b749c9ce2d5182877265b23	git-r3	86a0188f2ad9eb3d65e4d031ab8a0422	l10n	97f2753e3f1f3753d53d856c7c0bbb0b	multibuild	40fe59465edacd730c644ec2bc197809	multilib	1d91b03d42ab6308b5f4f6b598ed110e	python-r1	8386b016a2b3bbefa88443fdaa898057	python-utils-r1	e03f98555f2634bb9fb3160a8e30e3ec	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
+_eclasses_=desktop	3b1f1d9a6b749c9ce2d5182877265b23	git-r3	86a0188f2ad9eb3d65e4d031ab8a0422	l10n	97f2753e3f1f3753d53d856c7c0bbb0b	multibuild	40fe59465edacd730c644ec2bc197809	multilib	1d91b03d42ab6308b5f4f6b598ed110e	python-r1	8386b016a2b3bbefa88443fdaa898057	python-utils-r1	6f5996d2ae01e0c6f2869ed18f023239	toolchain-funcs	512eb3367f507ebaa1d1d43ab7d66e6c
 _md5_=4ed3e41c3956f804f7d8911fd544b825
