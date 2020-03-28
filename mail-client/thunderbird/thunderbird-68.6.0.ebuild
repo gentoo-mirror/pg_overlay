@@ -41,7 +41,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
 	+gmp-autoupdate hardened jack lightning lto cpu_flags_arm_neon pgo
 	pulseaudio selinux startup-notification +system-av1 +system-harfbuzz
 	+system-icu +system-jpeg +system-libevent +system-sqlite
-	+system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto"
+	+system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto ccache"
 
 REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
@@ -560,10 +560,10 @@ src_configure() {
 
 	# Disable built-in ccache support to avoid sandbox violation, #665420
 	# Use FEATURES=ccache instead!
-	mozconfig_annotate '' --without-ccache
-	sed -i -e 's/ccache_stats = None/return None/' \
-		python/mozbuild/mozbuild/controller/building.py || \
-		die "Failed to disable ccache stats call"
+	mozconfig_use_with ccache
+	#sed -i -e 's/ccache_stats = None/return None/' \
+	#	python/mozbuild/mozbuild/controller/building.py || \
+	#	die "Failed to disable ccache stats call"
 
 	mozconfig_use_enable dbus
 
