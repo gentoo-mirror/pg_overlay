@@ -118,7 +118,7 @@ dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebengine 5.14.1: Library for rendering dynamic web content in Qt5 C++ and QML applications
-dev-qt/qtwebkit 5.13.1_pre20191014 5.212.0_pre20200319: WebKit rendering library for the Qt5 framework (deprecated)
+dev-qt/qtwebkit 5.212.0_pre20200323: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glslang 7.13.3496 8.13.3559 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
