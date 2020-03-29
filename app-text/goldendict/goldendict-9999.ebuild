@@ -9,6 +9,7 @@ inherit desktop git-r3 qmake-utils l10n
 DESCRIPTION="Feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
 EGIT_REPO_URI="https://github.com/goldendict/goldendict.git"
+EGIT_SUBMODULES=()
 
 LICENSE="GPL-3"
 SLOT="0"
