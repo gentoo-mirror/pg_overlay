@@ -164,6 +164,14 @@ DEPEND="${CDEPEND}
 				pgo? ( =sys-libs/compiler-rt-sanitizers-8*[profile] )
 			)
 		)
+		(
+		)
+	)
+	pulseaudio? (
+		|| (
+			media-sound/pulseaudio
+			>=media-sound/apulse-0.1.12-r4[sdk]
+		)
 	)
 	>=virtual/rust-1.39.0
 	wayland? ( >=x11-libs/gtk+-3.11:3[wayland] )
@@ -603,7 +611,7 @@ src_configure() {
 
 	# Disable built-in ccache support to avoid sandbox violation, #665420
 	# Use FEATURES=ccache instead!
-	mozconfig_use_with ccache
+	mozconfig_annotate '' --without-ccache
 	sed -i -e 's/ccache_stats = None/return None/' \
 		python/mozbuild/mozbuild/controller/building.py || \
 		die "Failed to disable ccache stats call"
