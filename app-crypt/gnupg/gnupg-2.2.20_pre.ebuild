@@ -1,6 +1,5 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id: ba7ae751e334528eb58e998079587caef2d7d185 $
 
 EAPI=7
 
@@ -79,9 +78,9 @@ src_configure() {
 	fi
 
 	# Remove when https://dev.gnupg.org/T4831 gets released.
-	[[ $PV != 2.2.19 ]] && die "Check if -fcommon workaround is still needed."
+	#[[ $PV != 2.2.19 ]] && die "Check if -fcommon workaround is still needed."
 	# Workaround gcc-10 build failure (bug #705884).
-	append-cflags -fcommon
+	#append-cflags -fcommon
 
 	if use elibc_SunOS || use elibc_AIX; then
 		myconf+=( --disable-symcryptrun )
