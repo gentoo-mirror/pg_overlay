@@ -119,8 +119,12 @@ CDEPEND="
 
 RDEPEND="${CDEPEND}
 	jack? ( virtual/jack )
-	pulseaudio? ( || ( media-sound/pulseaudio
-		>=media-sound/apulse-0.1.9 ) )
+	pulseaudio? (
+		|| (
+			media-sound/pulseaudio
+			>=media-sound/apulse-0.1.12-r4
+		)
+	)
 	selinux? ( sec-policy/selinux-mozilla )
 	kde? ( kde-apps/kdialog
 		kde-misc/kmozillahelper )"
@@ -161,7 +165,12 @@ DEPEND="${CDEPEND}
 			)
 		)
 	)
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? (
+		|| (
+			media-sound/pulseaudio
+			>=media-sound/apulse-0.1.12-r4[sdk]
+		)
+	)
 	>=virtual/rust-1.39.0
 	wayland? ( >=x11-libs/gtk+-3.11:3[wayland] )
 	amd64? ( >=dev-lang/yasm-1.1 virtual/opengl )
