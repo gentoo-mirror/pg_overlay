@@ -119,12 +119,8 @@ CDEPEND="
 
 RDEPEND="${CDEPEND}
 	jack? ( virtual/jack )
-	pulseaudio? (
-		|| (
-			media-sound/pulseaudio
-			>=media-sound/apulse-0.1.12-r4
-		)
-	)
+	pulseaudio? ( || ( media-sound/pulseaudio
+		>=media-sound/apulse-0.1.9 ) )
 	selinux? ( sec-policy/selinux-mozilla )
 	kde? ( kde-apps/kdialog
 		kde-misc/kmozillahelper )"
@@ -165,6 +161,7 @@ DEPEND="${CDEPEND}
 			)
 		)
 	)
+	pulseaudio? ( media-sound/pulseaudio )
 	>=virtual/rust-1.39.0
 	wayland? ( >=x11-libs/gtk+-3.11:3[wayland] )
 	amd64? ( >=dev-lang/yasm-1.1 virtual/opengl )
@@ -603,7 +600,7 @@ src_configure() {
 
 	# Disable built-in ccache support to avoid sandbox violation, #665420
 	# Use FEATURES=ccache instead!
-	mozconfig_use_with ccache
+	mozconfig_annotate '' --without-ccache
 	sed -i -e 's/ccache_stats = None/return None/' \
 		python/mozbuild/mozbuild/controller/building.py || \
 		die "Failed to disable ccache stats call"
