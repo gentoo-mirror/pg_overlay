@@ -3,18 +3,19 @@
 
 EAPI=7
 
-inherit gnome2-utils meson multilib-minimal toolchain-funcs xdg poly-c_ebuilds
+inherit gnome2-utils meson multilib-minimal toolchain-funcs xdg
 
 DESCRIPTION="Internationalized text layout and rendering library"
 HOMEPAGE="https://www.pango.org/"
-SRC_URI="http://ftp.gnome.org/pub/GNOME/sources/pango/$(ver_cut 1-2)/${MY_P}.tar.xz"
+SRC_URI="http://ftp.gnome.org/pub/GNOME/sources/pango/$(ver_cut 1-2)/${P}.tar.xz"
 
 LICENSE="LGPL-2+ FTL"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 
 # X USE flag is simply a stub until all revdeps have been adjusted to use X(+)
 IUSE="gtk-doc +introspection test +X"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	>=dev-libs/fribidi-0.19.7[${MULTILIB_USEDEP}]
@@ -65,6 +66,10 @@ muiltilib_src_compile() {
 
 multilib_src_install() {
 	meson_src_install
+}
+
+multilib_src_test() {
+	meson_src_test
 }
 
 pkg_postinst() {
