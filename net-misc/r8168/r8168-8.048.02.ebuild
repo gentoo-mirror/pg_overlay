@@ -17,6 +17,8 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
 
+S=${WORKDIR}/${PN}-dkms-${PV}
+
 MODULE_NAMES="r8168(net:${S}/src)"
 BUILD_TARGETS="modules"
 
@@ -26,8 +28,6 @@ ERROR_R8169="${P} requires Realtek 8169 PCI Gigabit Ethernet adapter (CONFIG_R81
 PATCHES=(
 	"${FILESDIR}"/r8168-5_6_0.patch
 )
-
-S=${WORKDIR}/${PN}-dkms-${PV}
 
 pkg_setup() {
 	linux-mod_pkg_setup
