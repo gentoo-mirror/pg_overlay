@@ -23,6 +23,10 @@ BUILD_TARGETS="modules"
 CONFIG_CHECK="!R8169"
 ERROR_R8169="${P} requires Realtek 8169 PCI Gigabit Ethernet adapter (CONFIG_R8169) to be DISABLED"
 
+PATCHES=(
+	"${FILESDIR}"/r8168-5_6_0.patch
+)
+
 S=${WORKDIR}/${PN}-dkms-${PV}
 
 pkg_setup() {
