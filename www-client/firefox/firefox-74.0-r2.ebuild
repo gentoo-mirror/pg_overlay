@@ -52,7 +52,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon pgo
 	pulseaudio +screenshot selinux startup-notification +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent +system-sqlite
-	+system-libvpx +system-webp test wayland wifi +jit +kde cross-lto thinlto ccache"
+	+system-libvpx +system-webp test wayland wifi +jit +kde cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
@@ -899,11 +899,14 @@ PROFILE_EOF
 				newbin "${FILESDIR}"/firefox-wayland.sh firefox-wayland
 				;;
 			X11)
-				exec_command='firefox-x11 --name firefox-x11'
-				if use wayland ; then
-					# Only needed when there's actually a choice
-					newbin "${FILESDIR}"/firefox-x11.sh firefox-x11
+				if ! use wayland ; then
+					# Exit loop here because there's no choice so
+					# we don't need wrapper/.desktop file for X11.
+					continue
 				fi
+
+				exec_command='firefox-x11 --name firefox-x11'
+				newbin "${FILESDIR}"/firefox-x11.sh firefox-x11
 				;;
 			*)
 				app_name="${name}"
