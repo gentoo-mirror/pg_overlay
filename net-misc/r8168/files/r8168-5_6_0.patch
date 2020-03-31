@@ -1,5 +1,5 @@
---- src/r8168_n.c	2019-11-26 08:32:35.000000000 +0000
-+++ src/r8168_n.c	2020-03-16 12:34:04.893511463 +0000
+--- a/src/r8168_n.c	2019-11-26 08:32:35.000000000 +0000
++++ b/src/r8168_n.c	2020-03-16 12:34:04.893511463 +0000
 @@ -456,7 +456,13 @@ static void rtl8168_hw_config(struct net
  static void rtl8168_hw_start(struct net_device *dev);
  static int rtl8168_close(struct net_device *dev);
