@@ -7,7 +7,7 @@ inherit autotools
 
 DESCRIPTION="Monkey's Audio Codecs"
 HOMEPAGE="https://www.monkeysaudio.com"
-SRC_URI="http://monkeysaudio.com/files/MAC_SDK_511.zip -> ${P}.zip"
+SRC_URI="http://monkeysaudio.com/files/MAC_SDK_${PV/.}.zip -> ${P}.zip"
 
 LICENSE="mac"
 SLOT="0"
