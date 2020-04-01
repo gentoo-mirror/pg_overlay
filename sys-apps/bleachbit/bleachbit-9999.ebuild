@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -7,7 +7,7 @@ PLOCALES="af ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa 
 PYTHON_COMPAT=( python3_8 )
 PYTHON_REQ_USE="sqlite(+)"
 
-inherit desktop distutils-r1 l10n git-r3
+inherit desktop distutils-r1 l10n git-r3 virtualx
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="https://bleachbit.org/"
@@ -16,19 +16,38 @@ EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE=""
 
 RDEPEND="
 	dev-python/chardet[$PYTHON_USEDEP]
 	dev-python/pygobject:3[$PYTHON_USEDEP]
-	dev-python/scandir[$PYTHON_USEDEP]
 "
 BDEPEND="
-	dev-python/setuptools[$PYTHON_USEDEP]
 	sys-devel/gettext
+	test? ( dev-python/mock[${PYTHON_USEDEP}] )
 "
 
+distutils_enable_tests unittest
+
+# tests fail under FEATURES=usersandbox
+RESTRICT="test"
+
 python_prepare_all() {
+	if use test; then
+		# avoid tests requiring internet access
+		rm tests/Test{Chaff,Update}.py || die
+
+		# fails due to non-existent $HOME/.profile
+		rm tests/TestInit.py || die
+
+		# permission error on $PORTAGE_TMPDIR
+		sed -e "s/test_encoding(self)/_&/" \
+			-i tests/TestCLI.py || die
+
+		# fails on upstream Travis CI as well as on Gentoo
+		sed -e "s/test_get_proc_swaps(self)/_&/" \
+			-i tests/TestMemory.py || die
+	fi
+
 	rem_locale() {
 		rm -fv "po/${1}.po" || die "removing of ${1}.po failed"
 	}
@@ -67,4 +86,7 @@ python_install_all() {
 
 	insinto /usr/share/polkit-1/actions
 	doins org.${PN}.policy
+}
+python_test() {
+	virtx emake tests
 }
