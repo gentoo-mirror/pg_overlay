@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -11,8 +11,9 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS=""
-IUSE="doc examples static test"
+KEYWORDS="~alpha amd64 arm ppc ppc64 ~sparc x86"
+IUSE="doc examples test"
+RESTRICT="!test? ( test )"
 
 RDEPEND=""
 DEPEND="
@@ -34,7 +35,7 @@ src_prepare() {
 src_configure() {
 	local emesonargs=(
 		-Ddocumentation="$(usex doc true false)"
-		--default-library="$(usex static static shared)"
+		--default-library=shared
 		-Dtest=$(usex test true false)
 	)
 	meson_src_configure
