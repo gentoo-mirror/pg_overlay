@@ -137,7 +137,33 @@ gnome-base/librsvg 2.48.0: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
+kde-plasma/breeze 5.18.4.1: Breeze visual style for the Plasma desktop
+kde-plasma/breeze-gtk 5.18.4.1: Official GTK+ port of Plasma's Breeze widget style
+kde-plasma/kactivitymanagerd 5.18.4.1: System service to manage user's activities, track the usage patterns etc.
+kde-plasma/kde-cli-tools 5.18.4.1: Tools based on KDE Frameworks 5 to better interact with the system
+kde-plasma/kde-gtk-config 5.18.4.1: GTK2 and GTK3 configurator for KDE Plasma
+kde-plasma/kdecoration 5.18.4.1: Plugin based library to create window decorations
+kde-plasma/kdeplasma-addons 5.18.4.1: Extra Plasma applets and engines
+kde-plasma/khotkeys 5.18.4.1: KDE Plasma workspace hotkey module
+kde-plasma/kmenuedit 5.18.4.1: KDE Plasma menu editor
+kde-plasma/kscreen 5.18.4.1: KDE Plasma screen management
+kde-plasma/kscreenlocker 5.18.4.1: Library and components for secure lock screen architecture
+kde-plasma/ksysguard 5.18.4.1: Network-enabled task manager and system monitor
 kde-plasma/kwin 5.18.4: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/libkscreen 5.18.4.1: Plasma screen management library
+kde-plasma/libksysguard 5.18.4.1: Task management and system monitoring library
+kde-plasma/libkworkspace 5.18.4.1: Workspace library to interact with the Plasma session manager
+kde-plasma/milou 5.18.4.1: Dedicated search application built on top of Baloo
+kde-plasma/oxygen 5.18.4.1: Oxygen visual style for the Plasma desktop
+kde-plasma/plasma-browser-integration 5.18.4.1: Integrate Chrome/Firefox better into Plasma through browser extensions
+kde-plasma/plasma-desktop 5.18.4.1: KDE Plasma desktop
+kde-plasma/plasma-integration 5.18.4.1: Qt Platform Theme integration plugins for the Plasma workspaces
+kde-plasma/plasma-pa 5.18.4.1: Plasma applet for audio volume management using PulseAudio
+kde-plasma/plasma-workspace 5.18.4.1: KDE Plasma workspace
+kde-plasma/polkit-kde-agent 5.18.4.1: PolKit agent module for KDE Plasma
+kde-plasma/powerdevil 5.18.4.1: Power management for KDE Plasma Shell
+kde-plasma/systemsettings 5.18.4.1: Control Center to configure KDE Plasma desktop
+kde-plasma/xembed-sni-proxy 5.18.4.1: Legacy xembed tray icons support for SNI-only system trays
 mail-client/thunderbird 68.6.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
