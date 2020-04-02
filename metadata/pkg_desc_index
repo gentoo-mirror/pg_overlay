@@ -39,7 +39,6 @@ dev-libs/glib 2.64.1: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 66.1: International Components for Unicode
-dev-libs/libgit2 0.99.0-r1: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
