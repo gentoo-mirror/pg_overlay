@@ -149,7 +149,7 @@ kde-plasma/kmenuedit 5.18.4.1: KDE Plasma menu editor
 kde-plasma/kscreen 5.18.4.1: KDE Plasma screen management
 kde-plasma/kscreenlocker 5.18.4.1: Library and components for secure lock screen architecture
 kde-plasma/ksysguard 5.18.4.1: Network-enabled task manager and system monitor
-kde-plasma/kwin 5.18.4: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 5.18.4-r2: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/libkscreen 5.18.4.1: Plasma screen management library
 kde-plasma/libksysguard 5.18.4.1: Task management and system monitoring library
 kde-plasma/libkworkspace 5.18.4.1: Workspace library to interact with the Plasma session manager
