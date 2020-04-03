@@ -151,8 +151,6 @@ src_configure() {
 
 	local mywafargs=(
 		--confdir="${EPREFIX}/etc/${PN}"
-		--docdir="${EPREFIX}/usr/share/doc/${PF}"
-		--htmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 
 		$(usex cli '' '--disable-cplayer')
 		$(use_enable libmpv libmpv-shared)
@@ -217,6 +215,7 @@ src_configure() {
 		$(use_enable libcaca caca)
 		$(use_enable jpeg)
 		$(use_enable vulkan shaderc)
+		$(use_enable vulkan libplacebo)
 		$(use_enable raspberry-pi rpi)
 		$(usex libmpv "$(use_enable opengl plain-gl)" '--disable-plain-gl')
 		$(usex opengl '' '--disable-gl')
@@ -328,17 +327,6 @@ pkg_postinst() {
 		elog "Since version 0.25.0 the 'opengl' USE flag is mapped to"
 		elog "the 'opengl' video output and no longer explicitly requires"
 		elog "X11 or Mac OS Aqua. Consider enabling the 'opengl' USE flag."
-	fi
-
-	if use cli && ! has_version 'app-shells/mpv-bash-completion'; then
-		elog "If you want to have command-line completion via bash-completion,"
-		elog "please install app-shells/mpv-bash-completion."
-	fi
-
-	if use cli && [[ -n ${REPLACING_VERSIONS} ]] &&
-			has_version 'app-shells/mpv-bash-completion'; then
-		elog "If command-line completion doesn't work after mpv update,"
-		elog "please rebuild app-shells/mpv-bash-completion."
 	fi
 
 	elog "If you want URL support, please install net-misc/youtube-dl."
