@@ -60,7 +60,7 @@ COMMON_DEPEND="
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/libepoxy
-	media-libs/mesa[egl,gbm,gles2?,wayland,X(+)]
+	media-libs/mesa[egl,gbm,wayland,X(+)]
 	virtual/libudev:=
 	x11-libs/libICE
 	x11-libs/libSM
@@ -74,6 +74,7 @@ COMMON_DEPEND="
 	x11-libs/xcb-util-keysyms
 	x11-libs/xcb-util-wm
 	caps? ( sys-libs/libcap )
+	gles2? ( media-libs/mesa[gles2] )
 "
 RDEPEND="${COMMON_DEPEND}
 	>=kde-frameworks/kirigami-${KFMIN}:5
