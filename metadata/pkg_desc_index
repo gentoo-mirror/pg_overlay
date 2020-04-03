@@ -198,13 +198,10 @@ kde-plasma/kwin 5.18.4-r2: Flexible, composited Window Manager for windowing sys
 mail-client/thunderbird 68.6.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
-media-libs/libplacebo 1.29.1: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
 media-libs/openh264 2.0.0: OpenH264 is a codec library which supports H.264 encoding and decoding. It is suitable for use in real time applications such as WebRTC.
 media-libs/pulseaudio-qt 1.2: Qt bindings for libpulse
 media-libs/shaderc 2019.1 9999: Collection of tools, libraries and tests for shader compilation
-media-libs/vulkan-layers 1.2.133: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.133: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
