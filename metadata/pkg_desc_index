@@ -259,7 +259,7 @@ sys-libs/ncurses 6.1_p20200118: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/rust 1.42.0_beta 1.42.0: Virtual for Rust language compiler
-www-client/firefox 74.0-r3: Firefox Web Browser
+www-client/firefox 74.0.1: Firefox Web Browser
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.32-r1 3.24.16: Gimp ToolKit +
