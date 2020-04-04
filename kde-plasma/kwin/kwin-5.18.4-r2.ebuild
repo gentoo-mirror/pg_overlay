@@ -16,7 +16,7 @@ SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.g
 LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-IUSE="caps gles2 multimedia"
+IUSE="caps gles2-only multimedia"
 S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
 
 COMMON_DEPEND="
@@ -50,7 +50,7 @@ COMMON_DEPEND="
 	>=kde-plasma/kscreenlocker-${PVCUT}:5
 	>=dev-qt/qtdbus-${QTMIN}:5
 	>=dev-qt/qtdeclarative-${QTMIN}:5
-	>=dev-qt/qtgui-${QTMIN}:5=[gles2=]
+	>=dev-qt/qtgui-${QTMIN}:5=[gles2-only=]
 	>=dev-qt/qtscript-${QTMIN}:5
 	>=dev-qt/qtsensors-${QTMIN}:5
 	>=dev-qt/qtwidgets-${QTMIN}:5
@@ -74,7 +74,7 @@ COMMON_DEPEND="
 	x11-libs/xcb-util-keysyms
 	x11-libs/xcb-util-wm
 	caps? ( sys-libs/libcap )
-	gles2? ( media-libs/mesa[gles2] )
+	gles2-only? ( media-libs/mesa[gles2] )
 "
 RDEPEND="${COMMON_DEPEND}
 	>=kde-frameworks/kirigami-${KFMIN}:5
