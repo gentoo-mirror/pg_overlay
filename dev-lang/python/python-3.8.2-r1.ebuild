@@ -66,6 +66,7 @@ src_prepare() {
 
 	local PATCHES=(
 		"${WORKDIR}/${PATCHSET}"
+		"${FILESDIR}/test.support.unlink-ignore-PermissionError.patch"
 	)
 
 	default
@@ -130,6 +131,11 @@ src_configure() {
 	fi
 
 	local myeconfargs=(
+		# glibc-2.30 removes it; since we can't cleanly force-rebuild
+		# Python on glibc upgrade, remove it proactively to give
+		# a chance for users rebuilding python before glibc
+		ac_cv_header_stropts_h=no
+
 		--enable-shared
 		$(use_enable ipv6)
 		--infodir='${prefix}/share/info'
