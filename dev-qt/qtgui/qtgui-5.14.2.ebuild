@@ -42,7 +42,7 @@ RDEPEND="
 		x11-libs/libdrm
 	)
 	evdev? ( sys-libs/mtdev )
-	gles2-only? ( media-libs/mesa[gles2-only] )
+	gles2-only? ( media-libs/mesa[gles2] )
 	jpeg? ( virtual/jpeg:0 )
 	libinput? (
 		dev-libs/libinput:=
