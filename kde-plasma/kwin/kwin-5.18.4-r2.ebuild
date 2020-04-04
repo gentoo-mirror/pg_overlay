@@ -74,7 +74,7 @@ COMMON_DEPEND="
 	x11-libs/xcb-util-keysyms
 	x11-libs/xcb-util-wm
 	caps? ( sys-libs/libcap )
-	gles2-only? ( media-libs/mesa[gles2-only] )
+	gles2-only? ( media-libs/mesa[gles2] )
 "
 RDEPEND="${COMMON_DEPEND}
 	>=kde-frameworks/kirigami-${KFMIN}:5
