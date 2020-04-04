@@ -27,8 +27,9 @@ IUSE="-berkdb bluetooth build elibc_uclibc examples gdbm hardened ipv6 libressl 
 # patchset. See bug 447752.
 
 RDEPEND="app-arch/bzip2:=
+	dev-libs/libffi:=
 	>=sys-libs/zlib-1.1.3:=
-	virtual/libffi:=
+	virtual/libcrypt:=
 	virtual/libintl
 	berkdb? ( || (
 		sys-libs/db:5.3
@@ -87,6 +88,7 @@ src_prepare() {
 
 	local PATCHES=(
 		"${WORKDIR}/${PATCHSET}"
+		"${FILESDIR}/test.support.unlink-ignore-EPERM.patch"
 		"${FILESDIR}/python-2.7.15-PGO-r1.patch"
 	)
 
@@ -177,6 +179,10 @@ src_configure() {
 		# https://bugs.gentoo.org/596798
 		# (upstream dropped this flag in 3.2a4 anyway)
 		ac_cv_opt_olimit_ok=no
+		# glibc-2.30 removes it; since we can't cleanly force-rebuild
+		# Python on glibc upgrade, remove it proactively to give
+		# a chance for users rebuilding python before glibc
+		ac_cv_header_stropts_h=no
 
 		--with-fpectl
 		--enable-shared
