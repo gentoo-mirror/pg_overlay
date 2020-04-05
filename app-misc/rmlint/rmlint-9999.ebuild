@@ -3,6 +3,7 @@
 
 EAPI=7
 
+PLOCALES="de es fr"
 PYTHON_COMPAT=( python3_{6,7,8} )
 
 inherit eutils git-r3 gnome2-utils l10n python-r1 scons-utils
@@ -32,7 +33,7 @@ src_prepare() {
 	default
 
 	# DEBUG=1 - don't strip binary
-	scons_opts="DEBUG=0 --libdir=/usr/$(get_libdir) --prefix="${ED}"/usr \
+	scons_opts="DEBUG=0 --libdir=/usr/$(get_libdir) --prefix="${ED%/}"/usr --actual-prefix={ED%/}/usr \
 		--with-sse  \
 		$(usex X --with-gui --without-gui)"
 
@@ -53,7 +54,7 @@ src_compile(){
 
 src_install(){
 	escons "${scons_opts}" install
-    rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
+    rm -f ${ED%/}/usr/share/glib-2.0/schemas/gschemas.compiled
     if ! use X; then
     	rm -rf "${D}"/usr/share/{glib-2.0,icons,applications}
     	rm -rf "${D}"/usr/lib
