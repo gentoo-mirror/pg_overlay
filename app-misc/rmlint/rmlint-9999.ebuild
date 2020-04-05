@@ -40,7 +40,7 @@ src_prepare(){
 }
 
 src_configure(){
-	escons config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr
+	escons config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
 }
 
 src_compile(){
