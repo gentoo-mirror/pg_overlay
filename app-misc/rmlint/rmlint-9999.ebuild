@@ -29,6 +29,15 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
+arc_prepare(){
+	default
+	l10n_prepare() {
+	rm po/"${1}".po || die "removing of ${1}.po failed"
+	}
+	l10n_find_plocales_changes po "" .po
+	l10n_for_each_disabled_locale_do l10n_prepare
+}
+
 src_compile(){
 		escons CC="$(tc-getCC)" --with-gui
 		"${PYTHON}" -O -m compileall -q -f -d "${sitedir}" "${D}${sitedir}"
