@@ -32,11 +32,12 @@ DEPEND="${RDEPEND}
 
 arc_prepare(){
 	default
-	l10n_prepare() {
-		rm -rfv ${S}/po/"${1}".po || die "removing of ${1}.po failed"
-	}
 	l10n_find_plocales_changes po "" .po
-	l10n_for_each_disabled_locale_do l10n_prepare
+	rm_locale() {
+		rm -fv ${S}/po/"${1}".po || die "removing of ${1}.po failed"
+	}
+	l10n_for_each_disabled_locale_do rm_locale
+	
 }
 
 src_compile(){
