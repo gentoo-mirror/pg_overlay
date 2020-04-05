@@ -30,7 +30,7 @@ DEPEND="${RDEPEND}
                 virtual/pkgconfig"
 
 src_compile(){
-        escons CC="$(tc-getCC)" --with-gui --with-sse
+        escons CC="$(tc-getCC)" --with-gui
 }
 
 src_install(){
