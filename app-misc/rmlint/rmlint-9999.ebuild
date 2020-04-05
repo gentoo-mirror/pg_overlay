@@ -30,11 +30,11 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 	virtual/pkgconfig"
 
-arc_prepare(){
+src_prepare(){
 	default
 	l10n_find_plocales_changes po "" .po
 	rm_locale() {
-		rm -fv ${S}/po/"${1}".po || die "removing of ${1}.po failed"
+		rm -fv po/"${1}".po || die "removing of ${1}.po failed"
 	}
 	l10n_for_each_disabled_locale_do rm_locale
 	
