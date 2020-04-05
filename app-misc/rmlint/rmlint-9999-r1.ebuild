@@ -33,7 +33,7 @@ src_prepare() {
 	default
 
 	# DEBUG=1 - don't strip binary
-	scons_opts="DEBUG=0 LIBDIR=/usr/$(get_libdir) --prefix=/usr --actual-prefix=/usr \
+	scons_opts="DEBUG=0 libdir=/usr/$(get_libdir) --prefix=${ED%/}/usr \
 		--with-sse \
 		$(usex X --with-gui --without-gui)"
 
@@ -44,12 +44,8 @@ src_prepare() {
 	l10n_for_each_disabled_locale_do l10n_prepare
 }
 
-src_configure() {
-	escons config "${scons_opts}"
-}
-
 src_compile(){
-	escons CC="$(tc-getCC)"  "${scons_opts}"
+	escons CC="$(tc-getCC)" "${scons_opts}"
 }
 
 src_install(){
