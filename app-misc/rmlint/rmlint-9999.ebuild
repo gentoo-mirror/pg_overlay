@@ -3,9 +3,10 @@
 
 EAPI=7
 
+PLOCALES="de es fr"
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit eutils git-r3 gnome2-utils python-r1 scons-utils
+inherit eutils git-r3 gnome2-utils l10n python-r1 scons-utils
 
 DESCRIPTION="rmlint finds space waste and other broken things on your filesystem and offers to remove it"
 HOMEPAGE="https://github.com/sahib/rmlint"
@@ -32,7 +33,7 @@ DEPEND="${RDEPEND}
 arc_prepare(){
 	default
 	l10n_prepare() {
-	rm po/"${1}".po || die "removing of ${1}.po failed"
+		rm po/"${1}".po || die "removing of ${1}.po failed"
 	}
 	l10n_find_plocales_changes po "" .po
 	l10n_for_each_disabled_locale_do l10n_prepare
@@ -40,8 +41,6 @@ arc_prepare(){
 
 src_compile(){
 		escons CC="$(tc-getCC)" --with-gui
-		"${PYTHON}" -O -m compileall -q -f -d "${sitedir}" "${D}${sitedir}"
-
 }
 
 src_install(){
@@ -54,7 +53,6 @@ src_install(){
 	if ! use doc; then
 		rm -rf "${D}"/usr/share/man
 	fi
-	"${PYTHON}" -O -m compileall -q -f -d "${sitedir}" "${D}${sitedir}"
 }
 
 pkg_postinst() {
