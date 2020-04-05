@@ -31,10 +31,12 @@ DEPEND="${RDEPEND}
 
 src_compile(){
         escons CC="$(tc-getCC)" --with-gui
+        python_optimize
 }
 
 src_install(){
     escons install LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --with-gui
+    python_optimize
     rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
     if ! use X; then
         rm -rf "${D}"/usr/share/{glib-2.0,icons,applications}
