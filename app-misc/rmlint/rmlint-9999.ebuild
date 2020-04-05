@@ -37,15 +37,15 @@ src_prepare(){
 		rm -fv po/"${1}".po || die "removing of ${1}.po failed"
 	}
 	l10n_for_each_disabled_locale_do rm_locale
-	
 }
 
 src_compile(){
-		escons CC="$(tc-getCC)" --with-gui
+		escons CC="$(tc-getCC)"
 }
 
 src_install(){
-	escons install LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --with-gui
+	default
+	escons install LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr
 	rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
 	if ! use X; then
 		rm -rf "${D}"/usr/share/{glib-2.0,icons,applications}
