@@ -39,8 +39,12 @@ src_prepare(){
 	l10n_for_each_disabled_locale_do rm_locale
 }
 
+src_configure(){
+	escons config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr
+}
+
 src_compile(){
-		escons CC="$(tc-getCC)"
+	escons CC="$(tc-getCC)"
 }
 
 src_install(){
