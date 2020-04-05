@@ -33,7 +33,7 @@ src_prepare() {
 	default
 
 	# DEBUG=1 - don't strip binary
-	scons_opts="DEBUG=0 LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr \
+	scons_opts="DEBUG=0 LIBDIR=/usr/$(get_libdir) --prefix=/usr --actual-prefix=/usr \
 		--with-sse \
 		$(usex X --with-gui --without-gui)"
 
