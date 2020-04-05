@@ -45,7 +45,7 @@ src_prepare() {
 }
 
 src_configure() {
-	escons config "${scons_opts}"
+	escons config
 }
 
 src_compile(){
