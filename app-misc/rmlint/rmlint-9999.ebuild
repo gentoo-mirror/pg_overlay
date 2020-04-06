@@ -49,7 +49,7 @@ src_compile(){
 
 src_install(){
 	default
-	escons install LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr 
+	escons install DEBUG=0 LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr 
 	rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
 	if ! use X; then
 		rm -rf "${D}"/usr/share/{glib-2.0,icons,applications}
