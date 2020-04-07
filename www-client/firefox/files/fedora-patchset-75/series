@@ -5,5 +5,3 @@ firefox-enable-addons.patch
 mozilla-1170092.patch
 
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-
-mozilla-1516803.patch
