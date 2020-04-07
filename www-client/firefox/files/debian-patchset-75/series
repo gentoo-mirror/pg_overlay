@@ -1,5 +1,3 @@
-fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-fixes/Bug-1613263-Use-io.open-rather-than-open-in-mozbuild.patch
 fixes/Bug-1621518-Fix-build-errors-with-Werror-format-secu.patch
 prefs/Set-DPI-to-system-settings.patch
 debian-hacks/Don-t-build-image-gtests.patch

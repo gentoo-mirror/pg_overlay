@@ -2,8 +2,8 @@ Silence Service.profiler errors on Tier3 after bug 1613390
     
 diff --git browser/components/BrowserGlue.jsm browser/components/BrowserGlue.jsm
 index 8f86bf0584a99..2ce53c6921d15 100644
---- browser/components/BrowserGlue.jsm
-+++ browser/components/BrowserGlue.jsm
+--- a/browser/components/BrowserGlue.jsm
++++ b/browser/components/BrowserGlue.jsm
 @@ -2300,7 +2300,9 @@ BrowserGlue.prototype = {
        ChromeUtils.idleDispatch(
          () => {
