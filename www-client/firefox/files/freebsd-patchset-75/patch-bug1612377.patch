@@ -16,8 +16,8 @@ Date:   Thu Mar 26 12:12:40 2020 +0000
 
 diff --git widget/gtk/mozcontainer.cpp widget/gtk/mozcontainer.cpp
 index 0c3833bc8ce3e..d438b67f9baea 100644
---- widget/gtk/mozcontainer.cpp
-+++ widget/gtk/mozcontainer.cpp
+--- a/widget/gtk/mozcontainer.cpp
++++ b/widget/gtk/mozcontainer.cpp
 @@ -230,7 +230,6 @@ void moz_container_init(MozContainer* container) {
    container->subsurface_dy = 0;
    container->surface_position_needs_update = 0;
@@ -44,8 +44,8 @@ index 0c3833bc8ce3e..d438b67f9baea 100644
  void moz_container_force_default_visual(MozContainer* container) {
 diff --git widget/gtk/mozcontainer.h widget/gtk/mozcontainer.h
 index 6befb992515dc..885dce5c27a1a 100644
---- widget/gtk/mozcontainer.h
-+++ widget/gtk/mozcontainer.h
+--- a/widget/gtk/mozcontainer.h
++++ b/widget/gtk/mozcontainer.h
 @@ -87,7 +87,6 @@ struct _MozContainer {
    gboolean surface_needs_clear;
    gboolean ready_to_draw;
@@ -64,8 +64,8 @@ index 6befb992515dc..885dce5c27a1a 100644
  #endif /* __MOZ_CONTAINER_H__ */
 diff --git widget/gtk/nsWindow.cpp widget/gtk/nsWindow.cpp
 index 728c1ed7d3226..dbcd8b8ae4941 100644
---- widget/gtk/nsWindow.cpp
-+++ widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
 @@ -4138,7 +4138,6 @@ nsresult nsWindow::Create(nsIWidget* aParent, nsNativeWidget aNativeParent,
            self->mNeedsCompositorResume = true;
            self->MaybeResumeCompositor();
@@ -98,8 +98,8 @@ Date:   Thu Mar 26 12:12:48 2020 +0000
 
 diff --git widget/gtk/mozcontainer.cpp widget/gtk/mozcontainer.cpp
 index d438b67f9baea..eff25264d5678 100644
---- widget/gtk/mozcontainer.cpp
-+++ widget/gtk/mozcontainer.cpp
+--- a/widget/gtk/mozcontainer.cpp
++++ b/widget/gtk/mozcontainer.cpp
 @@ -595,6 +595,22 @@ static void moz_container_set_opaque_region(MozContainer* container) {
    container->opaque_region_needs_update = false;
  }
@@ -142,8 +142,8 @@ index d438b67f9baea..eff25264d5678 100644
      container->eglwindow =
 diff --git widget/gtk/mozcontainer.h widget/gtk/mozcontainer.h
 index 885dce5c27a1a..8d40560cf634b 100644
---- widget/gtk/mozcontainer.h
-+++ widget/gtk/mozcontainer.h
+--- a/widget/gtk/mozcontainer.h
++++ b/widget/gtk/mozcontainer.h
 @@ -112,8 +112,7 @@ void moz_container_move_resize(MozContainer* container, int dx, int dy,
                                 int width, int height);
  void moz_container_egl_window_set_size(MozContainer* container, int width,
@@ -156,8 +156,8 @@ index 885dce5c27a1a..8d40560cf634b 100644
  wl_surface* moz_gtk_widget_get_wl_surface(GtkWidget* aWidget);
 diff --git widget/gtk/nsWindow.cpp widget/gtk/nsWindow.cpp
 index dbcd8b8ae4941..be9c29a02ba32 100644
---- widget/gtk/nsWindow.cpp
-+++ widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
 @@ -2713,7 +2713,7 @@ gboolean nsWindow::OnConfigureEvent(GtkWidget* aWidget,
      OnSizeAllocate(&allocation);
    }
