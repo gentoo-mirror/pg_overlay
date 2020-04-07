@@ -398,6 +398,16 @@ media-video/mpv:uchardet - Enable subtitles charset discovery via app-i18n/uchar
 media-video/mpv:vf-dlopen - Install additional video filters to be used with -vf dlopen
 media-video/smplayer:autoshutdown - Enable the option to shutdown your computer after finishing the playlist. This requires dev-qt/qtdbus as dependency.
 media-video/smplayer:mpris - Enable support for MPRIS2 (Media Player Remote Interfacing Specification, version 2), a DBus interface for remote control, which requires dev-qt/qtdbus as dependency.
+net-im/pidgin:gadu - Enable Gadu Gadu protocol support
+net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
+net-im/pidgin:gstreamer - Enables voice and video sessions
+net-im/pidgin:gtk - Builds Pidgin, the GTK+ interface
+net-im/pidgin:meanwhile - Enable meanwhile support for Sametime protocol
+net-im/pidgin:ncurses - Build finch, console interface
+net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
+net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
+net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
+net-im/pidgin:zephyr - Enable Zephyr protocol support
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:npm - Enable NPM package manager
@@ -474,3 +484,4 @@ x11-libs/gtk+:colord - Use x11-misc/colord for color management in printing
 x11-libs/pango:X - Build and install the legacy pangoxft library
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
+x11-plugins/pidgin-telegram:gcrypt - Use dev-libs/libgcrypt instead of dev-libs/openssl.
