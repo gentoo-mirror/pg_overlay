@@ -4,7 +4,7 @@ firefox-nss-version.patch
 firefox-enable-addons.patch
 mozilla-1170092.patch
 
--1238661---fix-mozillaSignalTrampoline-to-work-.patch
+1238661---fix-mozillaSignalTrampoline-to-work-.patch
 bug1375074-save-restore-x28.patch
 mozilla-1580174-webrtc-popup.patch
 mozilla-1623106.patch
