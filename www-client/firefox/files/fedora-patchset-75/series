@@ -5,7 +5,6 @@ firefox-enable-addons.patch
 mozilla-1170092.patch
 
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-mozilla-1580174-webrtc-popup.patch
 mozilla-1623106.patch
 
 mozilla-1623060.patch
