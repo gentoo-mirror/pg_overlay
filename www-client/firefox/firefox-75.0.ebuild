@@ -23,7 +23,7 @@ if [[ ${MOZ_ESR} == 1 ]] ; then
 fi
 
 # Patch version
-PATCH="${PN}-74.0-patches-06"
+PATCH="${PN}-75.0-patches-2"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
@@ -68,7 +68,7 @@ SRC_URI="${SRC_URI}
 	${PATCH_URIS[@]}"
 
 CDEPEND="
-	>=dev-libs/nss-3.50
+	>=dev-libs/nss-3.51
 	>=dev-libs/nspr-4.25
 	dev-libs/atk
 	dev-libs/expat
@@ -171,7 +171,7 @@ DEPEND="${CDEPEND}
 			>=media-sound/apulse-0.1.12-r4[sdk]
 		)
 	)
-	>=virtual/rust-1.39.0
+	>=virtual/rust-1.41.0
 	wayland? ( >=x11-libs/gtk+-3.11:3[wayland] )
 	amd64? ( >=dev-lang/yasm-1.1 virtual/opengl )
 	x86? ( >=dev-lang/yasm-1.1 virtual/opengl )
@@ -307,12 +307,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	use !wayland && rm -f "${WORKDIR}/firefox/2019_mozilla-bug1539471.patch"
 	eapply "${WORKDIR}/firefox"
-
-	eapply "${FILESDIR}/${PN}-73.0_fix_lto_pgo_builds.patch"
-	eapply "${FILESDIR}/${PN}-73.0_fix_llvm9.patch"
-	eapply "${FILESDIR}/${PN}-74.0-bug1607052-font-selection-regression.patch"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
@@ -365,6 +360,9 @@ src_prepare() {
 
 	# Debian patches
 	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
+
+	# FreeBSD patches
+	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
 	# Fedora patches
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done

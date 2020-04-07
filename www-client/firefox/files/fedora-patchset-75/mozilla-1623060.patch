@@ -1,0 +1,257 @@
+diff -up firefox-75.0/modules/libpref/init/StaticPrefList.yaml.mozilla-1623060 firefox-75.0/modules/libpref/init/StaticPrefList.yaml
+--- firefox-75.0/modules/libpref/init/StaticPrefList.yaml.mozilla-1623060	2020-04-03 21:34:57.000000000 +0200
++++ firefox-75.0/modules/libpref/init/StaticPrefList.yaml	2020-04-06 23:03:37.631884410 +0200
+@@ -8600,15 +8600,6 @@
+   type: RelaxedAtomicBool
+   value: false
+   mirror: always
+-
+-# Wayland basic (non-accelerated) compositor cache mode.
+-# 0 = Default (everything is cached).
+-# 1 = Cache only missing drawing.
+-# 2 = No cache
+-- name: widget.wayland-cache-mode
+-  type: RelaxedAtomicInt32
+-  value: 0
+-  mirror: always
+ #endif
+ 
+ #---------------------------------------------------------------------------
+diff -up firefox-75.0/widget/gtk/nsWaylandDisplay.cpp.mozilla-1623060 firefox-75.0/widget/gtk/nsWaylandDisplay.cpp
+--- firefox-75.0/widget/gtk/nsWaylandDisplay.cpp.mozilla-1623060	2020-04-03 21:35:43.000000000 +0200
++++ firefox-75.0/widget/gtk/nsWaylandDisplay.cpp	2020-04-06 23:03:37.632884403 +0200
+@@ -523,9 +523,6 @@ bool nsWaylandDisplay::IsDMABufVAAPIEnab
+   return IsDMABufEnabled() &&
+          StaticPrefs::widget_wayland_dmabuf_vaapi_enabled();
+ }
+-int nsWaylandDisplay::GetRenderingCacheModePref() {
+-  return StaticPrefs::widget_wayland_cache_mode();
+-}
+ 
+ void* nsGbmLib::sGbmLibHandle = nullptr;
+ void* nsGbmLib::sXf86DrmLibHandle = nullptr;
+diff -up firefox-75.0/widget/gtk/nsWaylandDisplay.h.mozilla-1623060 firefox-75.0/widget/gtk/nsWaylandDisplay.h
+--- firefox-75.0/widget/gtk/nsWaylandDisplay.h.mozilla-1623060	2020-04-03 21:35:39.000000000 +0200
++++ firefox-75.0/widget/gtk/nsWaylandDisplay.h	2020-04-06 23:03:37.632884403 +0200
+@@ -93,7 +93,6 @@ class nsWaylandDisplay {
+   static bool IsDMABufTexturesEnabled();
+   static bool IsDMABufWebGLEnabled();
+   static bool IsDMABufVAAPIEnabled();
+-  static int GetRenderingCacheModePref();
+ 
+  private:
+   bool ConfigureGbm();
+diff -up firefox-75.0/widget/gtk/nsWindow.cpp.mozilla-1623060 firefox-75.0/widget/gtk/nsWindow.cpp
+--- firefox-75.0/widget/gtk/nsWindow.cpp.mozilla-1623060	2020-04-06 23:03:37.627884434 +0200
++++ firefox-75.0/widget/gtk/nsWindow.cpp	2020-04-06 23:03:37.633884397 +0200
+@@ -7925,3 +7925,15 @@ void nsWindow::SetEGLNativeWindowSize(
+ 
+ nsWindow* nsWindow::GetFocusedWindow() { return gFocusWindow; }
+ #endif
++
++LayoutDeviceIntRect nsWindow::GetMozContainerSize() {
++  LayoutDeviceIntRect size(0, 0, 0, 0);
++  if (mContainer) {
++    GtkAllocation allocation;
++    gtk_widget_get_allocation(GTK_WIDGET(mContainer), &allocation);
++    int scale = GdkScaleFactor();
++    size.width = allocation.width * scale;
++    size.height = allocation.height * scale;
++  }
++  return size;
++}
+diff -up firefox-75.0/widget/gtk/nsWindow.h.mozilla-1623060 firefox-75.0/widget/gtk/nsWindow.h
+--- firefox-75.0/widget/gtk/nsWindow.h.mozilla-1623060	2020-04-03 21:35:39.000000000 +0200
++++ firefox-75.0/widget/gtk/nsWindow.h	2020-04-06 23:03:37.632884403 +0200
+@@ -293,6 +293,7 @@ class nsWindow final : public nsBaseWidg
+                                                 int32_t aVertical) override;
+ 
+   MozContainer* GetMozContainer() { return mContainer; }
++  LayoutDeviceIntRect GetMozContainerSize();
+   // GetMozContainerWidget returns the MozContainer even for undestroyed
+   // descendant windows
+   GtkWidget* GetMozContainerWidget();
+diff -up firefox-75.0/widget/gtk/WindowSurfaceWayland.cpp.mozilla-1623060 firefox-75.0/widget/gtk/WindowSurfaceWayland.cpp
+--- firefox-75.0/widget/gtk/WindowSurfaceWayland.cpp.mozilla-1623060	2020-04-03 21:35:43.000000000 +0200
++++ firefox-75.0/widget/gtk/WindowSurfaceWayland.cpp	2020-04-06 23:03:37.632884403 +0200
+@@ -527,9 +527,6 @@ WindowSurfaceWayland::WindowSurfaceWayla
+     mShmBackupBuffer[i] = nullptr;
+     mDMABackupBuffer[i] = nullptr;
+   }
+-  mRenderingCacheMode = static_cast<RenderingCacheMode>(
+-      mWaylandDisplay->GetRenderingCacheModePref());
+-  LOGWAYLAND(("WindowSurfaceWayland Cache mode %d\n", mRenderingCacheMode));
+ }
+ 
+ WindowSurfaceWayland::~WindowSurfaceWayland() {
+@@ -650,14 +647,13 @@ WindowBackBuffer* WindowSurfaceWayland::
+   LOGWAYLAND(
+       ("WindowSurfaceWayland::NewWaylandBuffer [%p] Requested buffer [%d "
+        "x %d] DMABuf %d\n",
+-       (void*)this, mBufferScreenRect.width, mBufferScreenRect.height,
+-       aUseDMABufBackend));
++       (void*)this, mWidgetRect.width, mWidgetRect.height, aUseDMABufBackend));
+ 
+   mWaylandBuffer = WaylandBufferFindAvailable(
+-      mBufferScreenRect.width, mBufferScreenRect.height, aUseDMABufBackend);
++      mWidgetRect.width, mWidgetRect.height, aUseDMABufBackend);
+   if (!mWaylandBuffer) {
+-    mWaylandBuffer = CreateWaylandBuffer(
+-        mBufferScreenRect.width, mBufferScreenRect.height, aUseDMABufBackend);
++    mWaylandBuffer = CreateWaylandBuffer(mWidgetRect.width, mWidgetRect.height,
++                                         aUseDMABufBackend);
+   }
+ 
+   return mWaylandBuffer;
+@@ -667,7 +663,7 @@ WindowBackBuffer* WindowSurfaceWayland::
+   LOGWAYLAND(
+       ("WindowSurfaceWayland::GetWaylandBufferRecent [%p] Requested buffer [%d "
+        "x %d]\n",
+-       (void*)this, mBufferScreenRect.width, mBufferScreenRect.height));
++       (void*)this, mWidgetRect.width, mWidgetRect.height));
+ 
+   // There's no buffer created yet, create a new one for partial screen updates.
+   if (!mWaylandBuffer) {
+@@ -679,10 +675,9 @@ WindowBackBuffer* WindowSurfaceWayland::
+     return nullptr;
+   }
+ 
+-  if (mWaylandBuffer->IsMatchingSize(mBufferScreenRect.width,
+-                                     mBufferScreenRect.height)) {
+-    LOGWAYLAND(("    Size is ok, use the buffer [%d x %d]\n",
+-                mBufferScreenRect.width, mBufferScreenRect.height));
++  if (mWaylandBuffer->IsMatchingSize(mWidgetRect.width, mWidgetRect.height)) {
++    LOGWAYLAND(("    Size is ok, use the buffer [%d x %d]\n", mWidgetRect.width,
++                mWidgetRect.height));
+     return mWaylandBuffer;
+   }
+ 
+@@ -697,7 +692,7 @@ WindowBackBuffer* WindowSurfaceWayland::
+   LOGWAYLAND(
+       ("WindowSurfaceWayland::GetWaylandBufferWithSwitch [%p] Requested buffer "
+        "[%d x %d]\n",
+-       (void*)this, mBufferScreenRect.width, mBufferScreenRect.height));
++       (void*)this, mWidgetRect.width, mWidgetRect.height));
+ 
+   // There's no buffer created yet or actual buffer is attached, get a new one.
+   // Use DMABuf for fullscreen updates only.
+@@ -706,18 +701,21 @@ WindowBackBuffer* WindowSurfaceWayland::
+   }
+ 
+   // Reuse existing buffer
+-  LOGWAYLAND(("    Reuse buffer with resize [%d x %d]\n",
+-              mBufferScreenRect.width, mBufferScreenRect.height));
++  LOGWAYLAND(("    Reuse buffer with resize [%d x %d]\n", mWidgetRect.width,
++              mWidgetRect.height));
+ 
+   // OOM here, just return null to skip this frame.
+-  if (!mWaylandBuffer->Resize(mBufferScreenRect.width,
+-                              mBufferScreenRect.height)) {
++  if (!mWaylandBuffer->Resize(mWidgetRect.width, mWidgetRect.height)) {
+     return nullptr;
+   }
+   return mWaylandBuffer;
+ }
+ 
+ already_AddRefed<gfx::DrawTarget> WindowSurfaceWayland::LockWaylandBuffer() {
++  // Allocated wayland buffer must match widget size, otherwise wayland
++  // compositor is confused and may produce various rendering artifacts.
++  mWidgetRect = mWindow->GetMozContainerSize();
++
+   // mCanSwitchWaylandBuffer set means we're getting buffer for fullscreen
+   // update. We can use DMABuf and we can get a new buffer for drawing.
+   WindowBackBuffer* buffer = mCanSwitchWaylandBuffer
+@@ -858,12 +856,12 @@ already_AddRefed<gfx::DrawTarget> Window
+   LOGWAYLAND(("   windowRedraw = %d\n", windowRedraw));
+ 
+ #if MOZ_LOGGING
+-  if (!(mBufferScreenRect == lockedScreenRect)) {
++  if (!(mLockedScreenRect == lockedScreenRect)) {
+     LOGWAYLAND(("   screen size changed\n"));
+   }
+ #endif
+ 
+-  if (!(mBufferScreenRect == lockedScreenRect)) {
++  if (!(mLockedScreenRect == lockedScreenRect)) {
+     // Screen (window) size changed and we still have some painting pending
+     // for the last window size. That can happen when window is resized.
+     // We can't commit them any more as they're for former window size, so
+@@ -878,17 +876,21 @@ already_AddRefed<gfx::DrawTarget> Window
+       // as it produces artifacts.
+       return nullptr;
+     }
+-    mBufferScreenRect = lockedScreenRect;
++    mLockedScreenRect = lockedScreenRect;
+   }
+ 
+-  if (mRenderingCacheMode == CACHE_ALL) {
+-    mDrawToWaylandBufferDirectly = windowRedraw;
+-  } else if (mRenderingCacheMode == CACHE_MISSING) {
++  LayoutDeviceIntRect size = mWindow->GetMozContainerSize();
++
++  // We can draw directly only when widget has the same size as wl_buffer
++  mDrawToWaylandBufferDirectly = (size.width == mLockedScreenRect.width &&
++                                  size.height == mLockedScreenRect.height);
++
++  // We can draw directly only when we redraw significant part of the window
++  // to avoid flickering.
++  if (mDrawToWaylandBufferDirectly) {
+     mDrawToWaylandBufferDirectly =
+         windowRedraw || (lockSize.width * 3 > lockedScreenRect.width &&
+                          lockSize.height * 3 > lockedScreenRect.height);
+-  } else {
+-    mDrawToWaylandBufferDirectly = true;
+   }
+ 
+   if (mDrawToWaylandBufferDirectly) {
+@@ -903,11 +905,6 @@ already_AddRefed<gfx::DrawTarget> Window
+     }
+   }
+ 
+-  // Any caching is disabled and we don't have any back buffer available.
+-  if (mRenderingCacheMode == CACHE_NONE) {
+-    return nullptr;
+-  }
+-
+   // We do indirect drawing because there isn't any front buffer available.
+   // Do indirect drawing to mImageSurface which is commited to wayland
+   // wl_buffer by DrawDelayedImageCommits() later.
+@@ -1151,7 +1148,7 @@ void WindowSurfaceWayland::Commit(const
+         ("WindowSurfaceWayland::Commit [%p] damage size [%d, %d] -> [%d x %d]"
+          "screenSize [%d x %d]\n",
+          (void*)this, lockSize.x, lockSize.y, lockSize.width, lockSize.height,
+-         mBufferScreenRect.width, mBufferScreenRect.height));
++         mLockedScreenRect.width, mLockedScreenRect.height));
+     LOGWAYLAND(("    mDrawToWaylandBufferDirectly = %d\n",
+                 mDrawToWaylandBufferDirectly));
+   }
+diff -up firefox-75.0/widget/gtk/WindowSurfaceWayland.h.mozilla-1623060 firefox-75.0/widget/gtk/WindowSurfaceWayland.h
+--- firefox-75.0/widget/gtk/WindowSurfaceWayland.h.mozilla-1623060	2020-04-03 21:35:39.000000000 +0200
++++ firefox-75.0/widget/gtk/WindowSurfaceWayland.h	2020-04-06 23:03:37.631884410 +0200
+@@ -261,8 +261,14 @@ class WindowSurfaceWayland : public Wind
+   nsWindow* mWindow;
+   // Buffer screen rects helps us understand if we operate on
+   // the same window size as we're called on WindowSurfaceWayland::Lock().
+-  // mBufferScreenRect is window size when our wayland buffer was allocated.
+-  LayoutDeviceIntRect mBufferScreenRect;
++  // mLockedScreenRect is window size when our wayland buffer was allocated.
++  LayoutDeviceIntRect mLockedScreenRect;
++
++  // WidgetRect is an actual size of mozcontainer widget. It can be
++  // different than mLockedScreenRect during resize when mBounds are updated
++  // immediately but actual GtkWidget size is updated asynchronously
++  // (see Bug 1489463).
++  LayoutDeviceIntRect mWidgetRect;
+   nsWaylandDisplay* mWaylandDisplay;
+ 
+   // Actual buffer (backed by wl_buffer) where all drawings go into.
+@@ -327,9 +333,6 @@ class WindowSurfaceWayland : public Wind
+ 
+   bool mIsMainThread;
+ 
+-  // Image caching strategy, see RenderingCacheMode for details.
+-  RenderingCacheMode mRenderingCacheMode;
+-
+   static bool UseDMABufBackend();
+   static bool mUseDMABufInitialized;
+   static bool mUseDMABuf;
