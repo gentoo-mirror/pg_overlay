@@ -67,8 +67,6 @@ DEPEND="${COMMON_DEPEND}
 # cantata has no tests
 RESTRICT="test"
 
-PATCHES=( "${FILESDIR}/${PN}-2.2.0-headers.patch" )
-
 src_prepare() {
 	remove_locale() {
 		rm -vf "translations/${PN}_${1}".ts || die
