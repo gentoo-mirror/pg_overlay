@@ -30,7 +30,7 @@ LICENSE="LGPL-2.1+ GPL-2+ BSD ISC"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda debug doc drm dvb
 	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
-	luajit openal +opengl pulseaudio raspberry-pi rubberband sdl
+	luajit openal +opengl oss pulseaudio raspberry-pi rubberband sdl
 	selinux test tools +uchardet vaapi vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
@@ -59,11 +59,13 @@ REQUIRED_USE="
 RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
-	>=media-video/ffmpeg-4.0:0=[threads,vaapi?,vdpau?]
+	!!app-shells/mpv-bash-completion
+	>=media-video/ffmpeg-4.0:0=[encode,threads,vaapi?,vdpau?]
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.4.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
-	cdda? ( dev-libs/libcdio-paranoia )
+	cdda? ( dev-libs/libcdio-paranoia
+			dev-libs/libcdio:= )
 	drm? ( x11-libs/libdrm )
 	dvd? (
 		>=media-libs/libdvdnav-4.2.0:=
@@ -79,6 +81,8 @@ COMMON_DEPEND="
 	javascript? ( >=dev-lang/mujs-1.0.0 )
 	jpeg? ( virtual/jpeg:0 )
 	lcms? ( >=media-libs/lcms-2.6:2 )
+	>=media-libs/libass-0.12.1:=[fontconfig,harfbuzz]
+	virtual/ttf-fonts
 	libcaca? ( >=media-libs/libcaca-0.99_beta18 )
 	lua? (
 		!luajit? ( <dev-lang/lua-5.3:= )
@@ -185,6 +189,9 @@ src_configure() {
 
 		# Audio outputs:
 		$(use_enable sdl sdl2) # Listed under audio, but also includes video.
+		$(use_enable oss oss-audio)
+		--disable-rsound # Only available in overlays.
+		--disable-sndio # Only available in overlays.
 		$(use_enable pulseaudio pulse)
 		$(use_enable jack)
 		$(use_enable openal)
