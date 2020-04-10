@@ -16,8 +16,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.3.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.4.2.2: A full office productivity suite
-app-office/libreoffice-l10n 6.4.2.2: Translations for the Libreoffice suite
+app-office/libreoffice 6.4.3.2: A full office productivity suite
+app-office/libreoffice-l10n 6.4.3.2: Translations for the Libreoffice suite
 app-portage/eix 0.33.12_alpha: Search and query ebuilds
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
@@ -124,7 +124,6 @@ dev-util/gn 0.1726: GN is a meta-build system that generates build files for Nin
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
-dev-util/mdds 1.6.0: A collection of multi-dimensional data structure and indexing algorithm
 dev-util/meson 0.53.2_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
