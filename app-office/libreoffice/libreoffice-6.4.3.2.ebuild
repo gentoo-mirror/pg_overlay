@@ -78,6 +78,7 @@ RESTRICT="!test? ( test )"
 
 LICENSE="|| ( LGPL-3 MPL-1.1 )"
 SLOT="0"
+
 [[ ${MY_PV} == *9999* ]] || \
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86 ~amd64-linux ~x86-linux"
 
@@ -209,7 +210,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-perl/Archive-Zip
 	>=dev-util/cppunit-1.14.0
 	>=dev-util/gperf-3.1
-	>=dev-util/mdds-1.5.0:1=
+	dev-util/mdds:1/1.5
 	media-libs/glm
 	sys-devel/ucpp
 	x11-base/xorg-proto
