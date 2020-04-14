@@ -166,6 +166,7 @@ media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-sound/wavpack 5.2.0: Hybrid lossless audio compression tools
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
+media-video/pipewire 0.3.2: Multimedia processing graphs
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.13.0-r8: GTK Instant Messenger client
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
