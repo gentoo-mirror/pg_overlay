@@ -62,7 +62,7 @@ src_prepare() {
 	}
 
 	default
-	spa_use bluetooth sbc
+	spa_use bluetooth bluez5
 	spa_use ffmpeg libavcodec
 	spa_use ffmpeg libavformat
 	spa_use ffmpeg libavfilter
