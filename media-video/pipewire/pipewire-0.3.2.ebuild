@@ -63,10 +63,9 @@ src_prepare() {
 
 	default
 	spa_use bluetooth bluez5
+	spa_use bluetooth sbc
 	spa_use ffmpeg libavcodec
 	spa_use ffmpeg libavformat
-	spa_use ffmpeg libavfilter
-	spa_use vaapi libva
 	spa_use sdl sdl2
 	spa_use X x11
 }
@@ -77,6 +76,7 @@ src_configure() {
 		$(meson_use bluetooth bluez5)
 		$(meson_use doc docs)
 		$(meson_use gstreamer)
+		$(meson_use ffmpeg)
 		$(meson_use jack)
 		$(meson_use systemd)
 		$(meson_use vulkan)
