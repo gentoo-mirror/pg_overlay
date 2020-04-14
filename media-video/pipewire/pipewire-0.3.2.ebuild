@@ -73,6 +73,8 @@ src_prepare() {
 src_configure() {
 	local emesonargs=(
 		-Dman=true
+		-Dexamples=false
+		-Dtests=false
 		$(meson_use bluetooth bluez5)
 		$(meson_use doc docs)
 		$(meson_use gstreamer)
