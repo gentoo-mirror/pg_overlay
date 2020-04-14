@@ -74,6 +74,7 @@ src_prepare() {
 src_configure() {
 	local emesonargs=(
 		-Dman=true
+		$(meson_use bluetooth bluez5)
 		$(meson_use doc docs)
 		$(meson_use gstreamer)
 		$(meson_use jack)
