@@ -40,8 +40,10 @@ dev-libs/glib 2.64.1: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 66.1: International Components for Unicode
+dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
+dev-libs/libuinputplus 0.1.4: Easy-to-use uinput library in C++
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/protobuf 3.11.3_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
