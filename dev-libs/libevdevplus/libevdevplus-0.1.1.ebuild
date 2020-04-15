@@ -16,3 +16,5 @@ IUSE=""
 
 RDEPEND=""
 DEPEND="${RDEPEND}"
+
+S=${WORKDIR}/libevdevPlus-${PV}
