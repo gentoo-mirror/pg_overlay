@@ -140,7 +140,6 @@ gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 gui-libs/wlroots 0.10.1: Pluggable, composable, unopinionated modules for building a Wayland compositor
-kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.18.4-r2 5.18.4.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.7.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Epoxy is a library for handling OpenGL function pointer management for you
