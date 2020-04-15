@@ -18,3 +18,16 @@ RDEPEND=""
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libevdevPlus-${PV}
+
+src_prepare() {
+	cmake-utils_src_prepare
+}
+
+src_configure() {
+	local -a mycmakeargs
+	mycmakeargs=(
+		"-DSTATIC_LINKING:BOOL=OFF"
+	)
+
+	cmake-utils_src_configure
+}
