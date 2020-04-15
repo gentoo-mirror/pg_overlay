@@ -26,7 +26,7 @@ src_prepare() {
 src_configure() {
 	local -a mycmakeargs
 	mycmakeargs=(
-		"-DSTATIC_LINKING:BOOL=OFF"
+		"-DSTATIC:BOOL=OFF"
 	)
 
 	cmake_src_configure
