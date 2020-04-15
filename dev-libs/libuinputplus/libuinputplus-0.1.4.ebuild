@@ -18,3 +18,9 @@ RDEPEND=""
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libuInputPlus-${PV}
+
+src_install() {
+	default
+	cmake_src_install
+	find "${D}" -name '*.a' -delete || die
+}
