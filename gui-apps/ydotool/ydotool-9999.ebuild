@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/ReimuNotMoe/ydotool"
 EGIT_REPO_URI="https://github.com/ReimuNotMoe/${PN}.git"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
+KEYWORDS=""
 IUSE=""
 
 RDEPEND="dev-libs/boost
