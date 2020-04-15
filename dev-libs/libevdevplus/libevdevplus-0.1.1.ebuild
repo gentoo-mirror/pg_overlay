@@ -20,7 +20,7 @@ DEPEND="${RDEPEND}"
 S=${WORKDIR}/libevdevPlus-${PV}
 
 src_prepare() {
-	cmake-src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -29,5 +29,5 @@ src_configure() {
 		"-DSTATIC_LINKING:BOOL=OFF"
 	)
 
-	cmake-src_configure
+	cmake_src_configure
 }

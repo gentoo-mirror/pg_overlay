@@ -18,3 +18,16 @@ RDEPEND=""
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libuInputPlus-${PV}
+
+src_prepare() {
+	cmake_src_prepare
+}
+
+src_configure() {
+	local -a mycmakeargs
+	mycmakeargs=(
+		"-DSTATIC_LINKING:BOOL=OFF"
+	)
+
+	cmake_src_configure
+}
