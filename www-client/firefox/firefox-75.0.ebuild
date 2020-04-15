@@ -23,7 +23,7 @@ if [[ ${MOZ_ESR} == 1 ]] ; then
 fi
 
 # Patch version
-PATCH="${PN}-75.0-patches-2"
+PATCH="${PN}-75.0-patches-3"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/firefox-${MOZ_PV}.source.tar.xz"
@@ -35,7 +35,6 @@ if [[ "${PV}" == *_rc* ]]; then
 fi
 
 LLVM_MAX_SLOT=10
-MOZCONFIG_OPTIONAL_JIT=1
 
 inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
@@ -307,6 +306,12 @@ src_unpack() {
 
 src_prepare() {
 	eapply "${WORKDIR}/firefox"
+
+	# Make LTO respect MAKEOPTS
+	sed -i \
+		-e "s/multiprocessing.cpu_count()/$(makeopts_jobs)/" \
+		"${S}"/build/moz.configure/lto-pgo.configure \
+		|| die "sed failed to set num_cores"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
