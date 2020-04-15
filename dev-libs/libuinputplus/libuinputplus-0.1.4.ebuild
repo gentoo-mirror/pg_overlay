@@ -19,15 +19,8 @@ DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libuInputPlus-${PV}
 
-src_prepare() {
-	cmake_src_prepare
-}
-
-src_configure() {
-	local -a mycmakeargs
-	mycmakeargs=(
-		"-DSTATIC:BOOL=OFF"
-	)
-
-	cmake_src_configure
+src_install() {
+	default
+	cmake_src_install
+	find "${D}" -name '*.a' -delete || die
 }
