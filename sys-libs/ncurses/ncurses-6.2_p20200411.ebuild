@@ -12,8 +12,8 @@ HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncu
 SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz"
 
 if [[ "${PV}" == *_p* ]] ; then
-	SRC_URI+=" ftp://ftp.invisible-island.net/${PN}/${PV/_p*}/${P/_p/-}.patch.gz
-		https://invisible-mirror.net/archives/${PN}/${PV/_p*}/${P/_p/-}.patch.gz"
+	SRC_URI+=" ftp://ftp.invisible-island.net/${PN}/current/${P/_p/-}.tgz
+		https://invisible-mirror.net/archives/${PN}/current/${P/_p/-}.tgz"
 fi
 
 LICENSE="MIT"
