@@ -46,7 +46,7 @@ PATCHES=(
 
 src_prepare() {
 	if [[ "${PV}" == *_p* ]] ; then
-		eapply "${WORKDIR}"/${P/_p/-}-patch.sh
+		eapply "${WORKDIR}"/${P/_p/-}.patch
 	fi
 	default
 }
