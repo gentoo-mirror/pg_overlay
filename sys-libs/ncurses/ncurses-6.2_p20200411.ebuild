@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,21 +9,17 @@ MY_PV="${PV:0:3}"
 MY_P="${PN}-${MY_PV}"
 DESCRIPTION="console display library"
 HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncurses/"
+SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz"
 
 if [[ "${PV}" == *_p* ]] ; then
-	SRC_URI+=" ftp://ftp.invisible-island.net/${PN}/current/${P/_p/-}.tgz
-		https://invisible-mirror.net/archives/${PN}/current/${P/_p/-}.tgz
-		https://dev.gentoo.org/~polynomial-c/dist/${P/_p/-}.tgz"
-	S="${WORKDIR}/${P/_p/-}"
-else
-	SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz"
-	S="${WORKDIR}/${MY_P}"
+	SRC_URI+=" ftp://ftp.invisible-island.net/${PN}/${PV/_p*}/${P/_p/-}.patch.gz
+		https://invisible-mirror.net/archives/${PN}/${PV/_p*}/${P/_p/-}.patch.gz"
 fi
 
 LICENSE="MIT"
 # The subslot reflects the SONAME.
 SLOT="0/6"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sh ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 IUSE="ada +cxx debug doc gpm minimal profile static-libs test threads tinfo trace unicode"
 RESTRICT="!test? ( test )"
 
@@ -36,6 +32,7 @@ RDEPEND="${DEPEND}
 	!<x11-terms/rxvt-unicode-9.06-r3
 	!<x11-terms/st-0.6-r1"
 
+S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-5.7-nongnu.patch"
@@ -44,7 +41,15 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.9-gcc-5.patch" #545114
 	"${FILESDIR}/${PN}-6.0-ticlib.patch" #557360
 	"${FILESDIR}/${PN}-6.0-cppflags-cross.patch" #601426
+	"${FILESDIR}/${PN}-6.2-no_user_ldflags_in_libs.patch"
 )
+
+src_prepare() {
+	if [[ "${PV}" == *_p* ]] ; then
+		eapply "${WORKDIR}"/${P/_p/-}-patch.sh
+	fi
+	default
+}
 
 src_configure() {
 	unset TERMINFO #115036
