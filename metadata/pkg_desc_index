@@ -203,7 +203,7 @@ sys-libs/libblockdev 2.23: A library for manipulating block devices
 sys-libs/libcxx 10.0.0: New implementation of the C++ standard library, targeting C++11
 sys-libs/libcxxabi 10.0.0: Low level support for a standard C++ library
 sys-libs/llvm-libunwind 10.0.0: C++ runtime stack unwinder from LLVM
-sys-libs/ncurses 6.1_p20200118: console display library
+sys-libs/ncurses 6.2_p20200411: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/rust 1.42.0_beta 1.42.0: Virtual for Rust language compiler

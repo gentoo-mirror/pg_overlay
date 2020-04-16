@@ -317,6 +317,9 @@ sys-libs/libcxx:libcxxabi - Build on top of sys-libs/libcxxabi instead of gcc's 
 sys-libs/libcxx:libcxxrt - Build on top of libcxxrt instead of gcc's libsupc++ (avoids depending on gcc).
 sys-libs/libcxx:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependence on gcc.
 sys-libs/libcxxabi:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependency on gcc
+sys-libs/ncurses:ada - Add bindings for the ADA programming language
+sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
+sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
 sys-process/htop:openvz - Enable openvz support
 sys-process/htop:vserver - Enable vserver support
 www-client/firefox:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
