@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{6,7,8} )
 
-inherit cmake-utils python-single-r1 udev
+inherit cmake python-single-r1 udev
 
 DESCRIPTION="Utility for advanced configuration of Razer mice"
 HOMEPAGE="https://bues.ch/cms/hacking/razercfg.html"
@@ -14,7 +14,7 @@ SRC_URI="https://bues.ch/${PN}/${P}.tar.bz2"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+pm-utils +udev qt5"
+IUSE="pm-utils +udev qt5"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
@@ -35,7 +35,7 @@ DEPEND="${PYTHON_DEPS}
 PATCHES=( "${FILESDIR}/${P}-unit-variables.patch" )
 
 src_prepare() {
-	cmake-utils_src_prepare
+	cmake_src_prepare
 
 	sed -i CMakeLists.txt \
 		-e '/udevadm control/{N;d}' \
@@ -60,11 +60,11 @@ src_configure() {
 		-DSYSTEMD_UNIT_DIR=""
 		-DUDEV_DIR="$(get_udevdir)"
 	)
-	RAZERCFG_PKG_BUILD=1 cmake-utils_src_configure
+	RAZERCFG_PKG_BUILD=1 cmake_src_configure
 }
 
 src_install() {
-	RAZERCFG_PKG_BUILD=1 cmake-utils_src_install
+	RAZERCFG_PKG_BUILD=1 cmake_src_install
 
 	newinitd "${FILESDIR}"/razerd.init.d-r2 razerd
 	dodoc README.* HACKING.* razer.conf

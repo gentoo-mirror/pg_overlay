@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils subversion
+inherit cmake subversion
 
 DESCRIPTION="A set of extra plugins for Qmmp"
 HOMEPAGE="http://qmmp.ylsoftware.com/"
@@ -35,5 +35,5 @@ src_prepare() {
 		-DUSE_GOOM=0
 		)
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 	}
