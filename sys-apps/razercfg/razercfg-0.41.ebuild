@@ -20,7 +20,7 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 RDEPEND="${PYTHON_DEPS}
 	virtual/libusb:1
-	pm-utils? ( sys-power/pm)
+	pm-utils? ( sys-power/pm-utils )
 	udev? ( virtual/udev )
 	qt5? ( dev-python/PyQt5 )
 "
