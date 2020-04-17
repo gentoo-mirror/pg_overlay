@@ -4,6 +4,14 @@
 
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
+app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
+app-emulation/virtualbox:headless - Build without any graphic frontend
+app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
+app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels.
+app-emulation/virtualbox:sdk - Enable building of SDK
+app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
+app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
+app-emulation/virtualbox-modules:pax_kernel - Apply patch needed for pax enabled kernels
 app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
@@ -29,7 +37,6 @@ app-portage/eix:strong-security - Add many checks to prevent exploits if eix cod
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
-app-text/asciidoc:highlight - Enable source code highlighting
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
@@ -292,10 +299,7 @@ net-p2p/amule:remote - Enable remote controlling of the client
 net-p2p/amule:stats - Enable statistic reporting
 net-p2p/deluge:console - Enable default console UI
 net-p2p/deluge:webinterface - Install dependencies needed for the web interface
-net-p2p/qbittorrent:webui - Enable the Web UI
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
-net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
-net-p2p/transmission:xfs - Enable XFS filesystem capabilities by using sys-fs/xfsprogs headers (in building of fdlimit(.c))
 net-print/cups-filters:foomatic - Build the included foomatic-rip printer driver. Strongly recommended.
 net-print/cups-filters:ipp_autosetup - Let cups-browsed automatically set up IPP network printers by default.
 net-print/cups-filters:pclm - Enable PCLm support
@@ -343,6 +347,28 @@ www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent inste
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 www-client/firefox:system-sqlite - Use the system-wide dev-db/sqlite installation with secure-delete enabled
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
+www-client/ungoogled-chromium:cfi - Build with CFI (Control Flow Integrity) enabled (recommended).
+www-client/ungoogled-chromium:clang - Use Clang compiler instead of GCC
+www-client/ungoogled-chromium:closure-compile - Enable closure type-checking for Chrome's web technology-based UI. Requires Java and bundled binary compiler.jar in sources tree
+www-client/ungoogled-chromium:convert-dict - Patch and build the convert_dict utility. The script will be installed into /usr/lib64/chromium-browser/ungoogled-chromium-update-dicts.sh More info here: https://github.com/Eloston/ungoogled-chromium/issues/188#issuecomment-444752907
+www-client/ungoogled-chromium:enable-driver - Build chromedriver
+www-client/ungoogled-chromium:gnome - Improve integration with GIO (libgio).
+www-client/ungoogled-chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
+www-client/ungoogled-chromium:optimize-thinlto - Whether to enable ThinLTO optimizations. Turning ThinLTO optimizations on can substantially increase link time and binary size, but they generally also make binaries a fair bit faster.
+www-client/ungoogled-chromium:optimize-webui - Optimize parts of Chromium's UI written with web technologies (HTML/CSS/JS) for runtime performance purposes. This does more work at compile time for speed benefits at runtime.
+www-client/ungoogled-chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3.
+www-client/ungoogled-chromium:suid - Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels.
+www-client/ungoogled-chromium:system-ffmpeg - Use the system media-video/ffmpeg instead of bundled.
+www-client/ungoogled-chromium:system-harfbuzz - Use the system media-libs/harfbuzz instead of bundled.
+www-client/ungoogled-chromium:system-icu - Use the system dev-libs/icu instead of bundled.
+www-client/ungoogled-chromium:system-jsoncpp - Use the system dev-libs/jsoncpp instead of bundled.
+www-client/ungoogled-chromium:system-libevent - Use the system dev-libs/libevent instead of bundled.
+www-client/ungoogled-chromium:system-libvpx - Use the system media-libs/libvpx instead of bundled.
+www-client/ungoogled-chromium:system-openh264 - Use the system media-libs/openh264 instead of bundled. If disabled, it will restrict USE=bindist.
+www-client/ungoogled-chromium:system-openjpeg - Use the system-wide media-libs/openjpeg instead of bundled. OpenJPEG use are exclusively for Chromium's PDF viewer.
+www-client/ungoogled-chromium:tcmalloc - Use bundled tcmalloc instead of system malloc.
+www-client/ungoogled-chromium:thinlto - Build with ThinLTO support. LTO (Link Time Optimization) achieves better runtime performance through whole-program analysis and cross-module optimization (highly recommended).
+www-client/ungoogled-chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD).
 x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
