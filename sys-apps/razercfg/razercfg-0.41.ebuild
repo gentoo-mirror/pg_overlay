@@ -14,7 +14,7 @@ SRC_URI="https://bues.ch/${PN}/${P}.tar.bz2"
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="+pm+udev qt5"
+IUSE="pm-utils +udev qt5"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
