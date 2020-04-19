@@ -12,7 +12,7 @@ SRC_URI="https://dev.gentoo.org/~floppym/dist/${P}.tar.xz"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 IUSE="vim-syntax"
 
 BDEPEND="
@@ -59,6 +59,6 @@ src_install() {
 
 	if use vim-syntax; then
 		insinto /usr/share/vim/vimfiles
-		doins -r tools/gn/misc/vim/{autoload,ftdetect,ftplugin,syntax}
+		doins -r misc/vim/{autoload,ftdetect,ftplugin,syntax}
 	fi
 }
