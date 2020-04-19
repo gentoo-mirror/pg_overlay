@@ -8,10 +8,6 @@ app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.3.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.3.0: Nginx plugin for certbot (Let's Encrypt Client)
-app-emulation/virtualbox 6.1.6: Family of powerful x86 virtualization products for enterprise and home use
-app-emulation/virtualbox-additions 6.1.6: CD image containing guest additions for VirtualBox
-app-emulation/virtualbox-extpack-oracle 6.1.6.137129: PUEL extensions for VirtualBox
-app-emulation/virtualbox-modules 6.1.6: Kernel Modules for Virtualbox
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
@@ -32,7 +28,6 @@ app-text/iso-codes 4.4: ISO language, territory, currency, script codes and thei
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
-dev-lang/perl 5.30.2: Larry Wall's Practical Extraction and Report Language
 dev-lang/python 2.7.17-r2 3.8.2-r1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.42.0_beta 1.42.0: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library

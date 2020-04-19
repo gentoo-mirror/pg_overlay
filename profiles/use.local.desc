@@ -4,14 +4,6 @@
 
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
-app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
-app-emulation/virtualbox:headless - Build without any graphic frontend
-app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
-app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels.
-app-emulation/virtualbox:sdk - Enable building of SDK
-app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
-app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
-app-emulation/virtualbox-modules:pax_kernel - Apply patch needed for pax enabled kernels
 app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
@@ -41,7 +33,6 @@ app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
-dev-lang/perl:ithreads - Enable Perl threads, has some compatibility problems
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:threads - Enable threading support. (DON'T DISABLE THIS UNLESS YOU KNOW WHAT YOU'RE DOING)
 dev-lang/python:wide-unicode - Enable wide Unicode implementation which uses 4-byte Unicode characters. Switching of this USE flag changes ABI of Python and requires reinstallation of many Python modules. (DON'T DISABLE THIS UNLESS YOU KNOW WHAT YOU'RE DOING)
