@@ -24,9 +24,8 @@ src_prepare() {
 }
 
 src_configure() {
-	local -a mycmakeargs
-	mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=Release \
+	local mycmakeargs=(
+		-DCMAKE_BUILD_TYPE=Release
 		-DSTATIC_BUILD=0
 	)
 
