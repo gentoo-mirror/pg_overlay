@@ -134,6 +134,7 @@ gnome-base/gsettings-desktop-schemas 3.36.0: Collection of GSettings schemas for
 gnome-base/librsvg 2.48.0: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
+gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 gui-libs/wlroots 0.10.1: Pluggable, composable, unopinionated modules for building a Wayland compositor
@@ -201,6 +202,7 @@ sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/rust 1.42.0_beta 1.42.0: Virtual for Rust language compiler
 www-client/firefox 75.0: Firefox Web Browser
+www-client/ungoogled-chromium 81.0.4044.113_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.32-r1 3.24.18: Gimp ToolKit +
