@@ -115,7 +115,7 @@ COMMON_DEPEND="
 	system-libevent? ( dev-libs/libevent )
 	system-openjpeg? ( media-libs/openjpeg:2= )
 	vaapi? ( x11-libs/libva:= )
-	wayland& ( dev-libs/wayland )
+	wayland? ( dev-libs/wayland )
 "
 # For nvidia-drivers blocker, see bug #413637 .
 RDEPEND="${COMMON_DEPEND}
