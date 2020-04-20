@@ -28,6 +28,7 @@ src_configure() {
 	mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release \
 		-DSTATIC_BUILD=0
+		-DCMAKE_INSTALL_LIBDIR=$(get_libdir)
 	)
 
 	cmake_src_configure
