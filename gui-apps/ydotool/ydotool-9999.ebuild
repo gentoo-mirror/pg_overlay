@@ -34,5 +34,5 @@ src_configure() {
 }
 src_install() {
 	cmake_src_install
-	mv /usr/"{bin,lib}"/libydotool.so
+	mv /usr/bin/libydotool.so /usr/$(get_libdir)/ || die
 }
