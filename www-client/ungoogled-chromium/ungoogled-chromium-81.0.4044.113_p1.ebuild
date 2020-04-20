@@ -244,10 +244,6 @@ src_prepare() {
 
 	default
 
-	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' \) -print -delete || die
-	find "${S}"/third_party -type f \( -name '*.la' -o -name '*.a' \) -print -delete || die
-
 	use custom-cflags && eapply "${FILESDIR}/chromium-compiler-r11.patch"
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
@@ -273,7 +269,7 @@ src_prepare() {
 	if use vaapi
 	then
 		eapply "${FILESDIR}/vaapi-build-fix.patch"
-		eapply "${FILESDIR}/vdpau-support.patch"
+		#eapply "${FILESDIR}/vdpau-support.patch"
 		elog "Even though ${PN} is built with vaapi support, #ignore-gpu-blacklist"
 		elog "should be enabled via flags or commandline for it to work."
 	fi
@@ -309,6 +305,10 @@ src_prepare() {
 	ebegin "Applying domain substitution"
 	"${UGC_WD}/utils/domain_substitution.py" -q apply -r "${UGC_WD}/domain_regex.list" -f "${UGC_WD}/domain_substitution.list" -c build/domsubcache.tar.gz .
 	eend $? || die
+
+	einfo "Removing pre-built binaries ..."
+	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' \) -print -delete || die
+	find "${S}"/third_party -type f \( -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	local keeplibs=(
 		base/third_party/cityhash
