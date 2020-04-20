@@ -655,6 +655,8 @@ src_configure() {
 		myconf_gn+=" ozone_platform_x11=true"
 		myconf_gn+=" ozone_auto_platforms=false"
 		myconf_gn+=" use_system_libwayland=true"
+		myconf_gn+=" use_system_minigbm=true"
+		myconf_gn+=" use_system_libdrm=true'"
 	fi
 
 	myconf_gn+=" use_thin_lto=$(usex thinlto true false)"
