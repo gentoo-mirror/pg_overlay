@@ -84,10 +84,6 @@ dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
 dev-util/vulkan-tools:cube - Build the cube/cubepp demos
 dev-util/vulkan-tools:vulkaninfo - Build the vulkaninfo utility
 gnome-base/librsvg:tools - Build svg viewer tool
-gui-libs/wlroots:X - Enable support for X11 applications (XWayland)
-gui-libs/wlroots:elogind - Enable support for rootless session via elogind
-gui-libs/wlroots:icccm - Use xcb-icccm (from x11-libs/xcb-util-wm) util library for improved Xwayland introspection
-gui-libs/wlroots:x11-backend - Enable support for handling input/output devices through x11-libs/libxcb
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
 mail-client/thunderbird:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
