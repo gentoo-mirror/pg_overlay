@@ -24,15 +24,15 @@ src_prepare() {
 }
 
 src_configure() {
-	local -a mycmakeargs
-	mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=Release \
+	local mycmakeargs=(
+		-DCMAKE_BUILD_TYPE=Release
 		-DSTATIC_BUILD=0
 	)
 
 	cmake_src_configure
 }
 src_install() {
+	default
 	cmake_src_install
 	mkdir ${D}/usr/$(get_libdir)
 	mv ${D}/usr/bin/libydotool.so ${D}/usr/$(get_libdir)/ || die
