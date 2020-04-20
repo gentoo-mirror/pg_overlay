@@ -244,6 +244,10 @@ src_prepare() {
 
 	default
 
+	einfo "Removing pre-built binaries ..."
+	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' \) -print -delete || die
+	find "${S}"/third_party -type f \( -name '*.la' -o -name '*.a' \) -print -delete || die
+
 	use custom-cflags && eapply "${FILESDIR}/chromium-compiler-r11.patch"
 
 	mkdir -p third_party/node/linux/node-linux-x64/bin || die
