@@ -531,6 +531,8 @@ src_prepare() {
 		keeplibs+=( third_party/wayland-protocols )
 	fi
 
+	keeplibs+=( third_party/libjpeg_turbo )
+
 	ebegin "Removing unneeded bundled libraries"
 	python_setup 'python2*'
 
@@ -656,7 +658,7 @@ src_configure() {
 		myconf_gn+=" ozone_auto_platforms=false"
 		myconf_gn+=" use_system_libwayland=true"
 		myconf_gn+=" use_system_minigbm=true"
-		myconf_gn+=" use_system_libdrm=true'"
+		myconf_gn+=" use_system_libdrm=true"
 	fi
 
 	myconf_gn+=" use_thin_lto=$(usex thinlto true false)"
@@ -695,7 +697,7 @@ src_configure() {
 	myconf_gn+=" is_official_build=true"
 
 	# Additional flags
-	myconf_gn+=" use_system_libjpeg=true"
+	myconf_gn+=" use_system_libjpeg=false"
 	myconf_gn+=" use_system_zlib=true"
 	myconf_gn+=" rtc_build_examples=false"
 
