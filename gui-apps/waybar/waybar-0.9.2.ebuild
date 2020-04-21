@@ -27,6 +27,7 @@ BDEPEND="
 
 DEPEND="
 	dev-cpp/gtkmm:3.0
+	gui-libs/gtk-layer-shell
 	dev-libs/jsoncpp:=
 	dev-libs/libinput:=
 	dev-libs/libsigc++:3
@@ -55,6 +56,7 @@ src_configure() {
 		$(meson_feature pulseaudio)
 		$(meson_feature tray dbusmenu-gtk)
 		$(meson_feature udev libudev)
+		-Dsystemd=elogind
 	)
 	meson_src_configure
 }
