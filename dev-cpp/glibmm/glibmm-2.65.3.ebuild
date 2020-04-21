@@ -14,7 +14,7 @@ IUSE="doc debug test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	dev-libs/libsigc++[${MULTILIB_USEDEP}]
+	dev-libs/libsigc++:2[${MULTILIB_USEDEP}]
 	>=dev-libs/glib-2.61.2:2[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}
