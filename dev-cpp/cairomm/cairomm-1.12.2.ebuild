@@ -8,6 +8,7 @@ inherit gnome2 multilib-minimal
 
 DESCRIPTION="C++ bindings for the Cairo vector graphics library"
 HOMEPAGE="https://cairographics.org/cairomm/"
+SRC_URI="https://www.cairographics.org/releases/${P}.tar.gz"
 
 LICENSE="LGPL-2+"
 SLOT="0"
