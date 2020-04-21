@@ -29,7 +29,7 @@ DEPEND="
 	dev-cpp/gtkmm:3.0
 	dev-libs/jsoncpp:=
 	dev-libs/libinput:=
-	dev-libs/libsigc++:2
+	dev-libs/libsigc++:3
 	>=dev-libs/libfmt-5.3.0:=
 	>=dev-libs/spdlog-1.3.1:=
 	dev-libs/wayland
