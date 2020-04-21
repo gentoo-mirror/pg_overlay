@@ -32,6 +32,7 @@ dev-lang/python 2.7.18 3.8.2-r1: An interpreted, interactive, object-oriented pr
 dev-lang/rust 1.42.0_beta 1.42.0: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
+dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.72.0-r1: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/glib 2.64.1: The GLib library of C routines
