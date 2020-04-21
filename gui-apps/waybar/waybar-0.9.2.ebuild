@@ -56,7 +56,7 @@ src_configure() {
 		$(meson_feature pulseaudio)
 		$(meson_feature tray dbusmenu-gtk)
 		$(meson_feature udev libudev)
-		-Dsystemd=elogind
+		-Dsystemd=auto
 	)
 	meson_src_configure
 }
