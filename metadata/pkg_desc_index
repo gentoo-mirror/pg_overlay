@@ -28,11 +28,11 @@ app-text/iso-codes 4.4: ISO language, territory, currency, script codes and thei
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/atkmm 2.29.1: C++ interface for the ATK library
-dev-cpp/cairomm 1.15.4: C++ bindings for the Cairo vector graphics library
-dev-cpp/glibmm 2.64.2: C++ interface for glib2
+dev-cpp/cairomm 1.12.2: C++ bindings for the Cairo vector graphics library
+dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/gtkmm 3.24.2: C++ interface for GTK+
 dev-cpp/mm-common 1.0.0: Build infrastructure and utilities for GNOME C++ bindings
-dev-cpp/pangomm 2.43.2: C++ interface for pango
+dev-cpp/pangomm 2.42.1: C++ interface for pango
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
 dev-lang/python 2.7.18 3.8.2-r1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.42.0_beta 1.42.0: Systems programming language from Mozilla
@@ -42,6 +42,7 @@ dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.72.0-r1: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
+dev-libs/date 2.4.1_p20200125: A date and time library based on the C++11/14/17 <chrono> header
 dev-libs/glib 2.64.1: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
@@ -56,6 +57,7 @@ dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/protobuf 3.11.3_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2020.03.02: An efficient, principled regular expression library
+dev-libs/spdlog 1.5.0: Very fast, header only, C++ logging library
 dev-libs/vala-common 0.48.4: Build infrastructure for packages that use Vala
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
