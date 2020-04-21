@@ -27,7 +27,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DSTATIC_BUILD=0
 	)
-
 	cmake_src_configure
 }
 src_install() {
