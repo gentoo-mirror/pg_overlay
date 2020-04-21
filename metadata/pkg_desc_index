@@ -146,7 +146,7 @@ gnome-base/gsettings-desktop-schemas 3.36.0: Collection of GSettings schemas for
 gnome-base/librsvg 2.48.0: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
-gui-apps/waybar 0.9.2: Highly customizable Wayland bar for Sway and Wlroots based compositors.
+gui-apps/waybar 0.9.2 9999: Highly customizable Wayland bar for Sway and Wlroots based compositors.
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
