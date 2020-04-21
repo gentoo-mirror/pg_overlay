@@ -27,10 +27,17 @@ app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
+dev-cpp/atkmm 2.29.1: C++ interface for the ATK library
+dev-cpp/cairomm 1.15.4: C++ bindings for the Cairo vector graphics library
+dev-cpp/glibmm 2.64.2: C++ interface for glib2
+dev-cpp/gtkmm 3.24.2: C++ interface for GTK+
+dev-cpp/mm-common 1.0.0: Build infrastructure and utilities for GNOME C++ bindings
+dev-cpp/pangomm 2.43.2: C++ interface for pango
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
 dev-lang/python 2.7.18 3.8.2-r1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.42.0_beta 1.42.0: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
+dev-lang/vala 0.48.4: Compiler for the GObject type system
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.72.0-r1: Boost Libraries for C++
@@ -42,12 +49,14 @@ dev-libs/icu 66.1: International Components for Unicode
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
+dev-libs/libsigc++ 3.0.3: Typesafe callback system for standard C++
 dev-libs/libuinputplus 0.1.4: Easy-to-use uinput library in C++
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/protobuf 3.11.3_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2020.03.02: An efficient, principled regular expression library
+dev-libs/vala-common 0.48.4: Build infrastructure for packages that use Vala
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-perl/Alien-Build 1.920.0: Build external dependencies for use in CPAN
@@ -135,6 +144,7 @@ gnome-base/gsettings-desktop-schemas 3.36.0: Collection of GSettings schemas for
 gnome-base/librsvg 2.48.0: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/yelp 3.34.0: Help browser for GNOME
 gnome-extra/yelp-xsl 3.34.0: XSL stylesheets for yelp
+gui-apps/waybar 0.9.2: Highly customizable Wayland bar for Sway and Wlroots based compositors.
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
