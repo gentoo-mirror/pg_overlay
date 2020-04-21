@@ -6,7 +6,7 @@ inherit meson
 
 DESCRIPTION="Launcher/menu program for wlroots based wayland compositors such as sway"
 HOMEPAGE="https://cloudninja.pw/docs/wofi.html"
-SRC_URI="https://hg.sr.ht/~scoopta/${PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://hg.sr.ht/~scoopta/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3"
 SLOT="0"
