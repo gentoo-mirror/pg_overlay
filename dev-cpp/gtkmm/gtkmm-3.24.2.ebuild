@@ -22,7 +22,7 @@ RDEPEND="
 	>=dev-cpp/atkmm-2.24.2[${MULTILIB_USEDEP}]
 	>=dev-cpp/cairomm-1.12.0[${MULTILIB_USEDEP}]
 	>=dev-cpp/pangomm-2.38.2:1.4[${MULTILIB_USEDEP}]
-	>=dev-libs/libsigc++[${MULTILIB_USEDEP}]
+	dev-libs/libsigc++[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}
 	virtual/pkgconfig

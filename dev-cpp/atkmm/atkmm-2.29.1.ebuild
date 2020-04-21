@@ -15,7 +15,7 @@ IUSE="doc"
 COMMON_DEPEND="
 	>=dev-cpp/glibmm-2.46.2:2[doc?,${MULTILIB_USEDEP}]
 	>=dev-libs/atk-2.18.0[${MULTILIB_USEDEP}]
-	>=dev-libs/libsigc++[${MULTILIB_USEDEP}]
+	dev-libs/libsigc++[${MULTILIB_USEDEP}]
 "
 RDEPEND="${COMMON_DEPEND}
 	!<dev-cpp/gtkmm-2.22.0
