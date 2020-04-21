@@ -39,10 +39,6 @@ python_prepare_all() {
 		# fails due to non-existent $HOME/.profile
 		rm tests/TestInit.py || die
 
-		# permission error on $PORTAGE_TMPDIR
-		sed -e "s/test_encoding(self)/_&/" \
-			-i tests/TestCLI.py || die
-
 		# fails on upstream Travis CI as well as on Gentoo
 		sed -e "s/test_get_proc_swaps(self)/_&/" \
 			-i tests/TestMemory.py || die
@@ -55,14 +51,15 @@ python_prepare_all() {
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rem_locale
 
-	# choose correct Python implementation, bug #465254
-	sed -i 's/python/${EPYTHON}/g' po/Makefile || die
-
 	distutils-r1_python_prepare_all
 }
 
 python_compile_all() {
 	emake -C po local
+}
+
+python_test() {
+	virtx emake tests
 }
 
 python_install() {
@@ -74,7 +71,6 @@ python_install_all() {
 	distutils-r1_python_install_all
 	emake -C po DESTDIR="${D}" install
 
-	# https://bugs.gentoo.org/388999
 	insinto /usr/share/${PN}/cleaners
 	doins cleaners/*.xml
 
@@ -86,7 +82,4 @@ python_install_all() {
 
 	insinto /usr/share/polkit-1/actions
 	doins org.${PN}.policy
-}
-python_test() {
-	virtx emake tests
 }
