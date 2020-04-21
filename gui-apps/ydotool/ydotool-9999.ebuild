@@ -25,10 +25,8 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=Release
 		-DSTATIC_BUILD=0
 	)
-
 	cmake_src_configure
 }
 src_install() {
