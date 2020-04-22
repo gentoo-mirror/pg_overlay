@@ -8,7 +8,7 @@ inherit autotools flag-o-matic pax-utils python-utils-r1 toolchain-funcs multipr
 
 MY_P="Python-${PV}"
 PYVER=$(ver_cut 1-2)
-PATCHSET="python-gentoo-patches-2.7.17-r1"
+PATCHSET="python-gentoo-patches-2.7.18"
 
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="https://www.python.org/"
@@ -18,7 +18,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="PSF-2"
 SLOT="${PYVER}"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 IUSE="-berkdb bluetooth build elibc_uclibc examples gdbm hardened ipv6 libressl +ncurses +readline sqlite +ssl +threads tk +wide-unicode wininst +xml"
 
 # Do not add a dependency on dev-lang/python to this ebuild.
@@ -88,7 +88,6 @@ src_prepare() {
 
 	local PATCHES=(
 		"${WORKDIR}/${PATCHSET}"
-		"${FILESDIR}/test.support.unlink-ignore-EPERM.patch"
 		"${FILESDIR}/python-2.7.15-PGO-r1.patch"
 	)
 
@@ -322,42 +321,40 @@ src_install() {
 		-i "${ED}/etc/conf.d/pydoc-${PYVER}" \
 		"${ED}/etc/init.d/pydoc-${PYVER}" || die "sed failed"
 
-	# for python-exec
-	local vars=( EPYTHON PYTHON_SITEDIR PYTHON_SCRIPTDIR )
-
+	local -x EPYTHON=python${PYVER}
 	# if not using a cross-compiler, use the fresh binary
 	if ! tc-is-cross-compiler; then
 		local -x PYTHON=./python
 		local -x LD_LIBRARY_PATH=${LD_LIBRARY_PATH+${LD_LIBRARY_PATH}:}${PWD}
 	else
-		vars=( PYTHON "${vars[@]}" )
+		local -x PYTHON=${EPREFIX}/usr/bin/${EPYTHON}
 	fi
 
-	python_export "python${PYVER}" "${vars[@]}"
 	echo "EPYTHON='${EPYTHON}'" > epython.py || die
 	python_domodule epython.py
 
 	# python-exec wrapping support
 	local pymajor=${PYVER%.*}
-	mkdir -p "${D}${PYTHON_SCRIPTDIR}" || die
+	local scriptdir=${D}$(python_get_scriptdir)
+	mkdir -p "${scriptdir}" || die
 	# python and pythonX
 	ln -s "../../../bin/python${PYVER}" \
-		"${D}${PYTHON_SCRIPTDIR}/python${pymajor}" || die
-	ln -s "python${pymajor}" "${D}${PYTHON_SCRIPTDIR}/python" || die
+		"${scriptdir}/python${pymajor}" || die
+	ln -s "python${pymajor}" "${scriptdir}/python" || die
 	# python-config and pythonX-config
 	ln -s "../../../bin/python${PYVER}-config" \
-		"${D}${PYTHON_SCRIPTDIR}/python${pymajor}-config" || die
+		"${scriptdir}/python${pymajor}-config" || die
 	ln -s "python${pymajor}-config" \
-		"${D}${PYTHON_SCRIPTDIR}/python-config" || die
+		"${scriptdir}/python-config" || die
 	# 2to3, pydoc, pyvenv
 	ln -s "../../../bin/2to3-${PYVER}" \
-		"${D}${PYTHON_SCRIPTDIR}/2to3" || die
+		"${scriptdir}/2to3" || die
 	ln -s "../../../bin/pydoc${PYVER}" \
-		"${D}${PYTHON_SCRIPTDIR}/pydoc" || die
+		"${scriptdir}/pydoc" || die
 	# idle
 	if use tk; then
 		ln -s "../../../bin/idle${PYVER}" \
-			"${D}${PYTHON_SCRIPTDIR}/idle" || die
+			"${scriptdir}/idle" || die
 	fi
 }
 
