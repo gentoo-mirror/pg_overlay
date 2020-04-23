@@ -15,7 +15,7 @@ UGC_PV="${PV/_p/-}"
 UGC_P="${PN}-${UGC_PV}"
 UGC_WD="${WORKDIR}/${UGC_P}"
 UGC_URL="https://github.com/Eloston/${PN}/archive/"
-#UGC_COMMIT_ID="15b9b394f07feaa5c1ffc12eb37692bd764bc665"
+UGC_COMMIT_ID="9075ad464baa25266d8487db2ecafdf87f4d7956"
 
 if [ -z "$UGC_COMMIT_ID" ]
 then
@@ -34,8 +34,8 @@ SRC_URI="
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="amd64 ~x86"
-IUSE="cfi +clang closure-compile convert-dict cups custom-cflags enable-driver gnome hangouts kerberos optimize-thinlto optimize-webui ozone +proprietary-codecs pulseaudio selinux suid +system-ffmpeg +system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx +system-openh264 system-openjpeg +tcmalloc thinlto vaapi vdpau widevine wayland"
+KEYWORDS="~amd64 ~x86"
+IUSE="cfi +clang closure-compile convert-dict cups custom-cflags enable-driver gnome hangouts kerberos optimize-thinlto optimize-webui ozone +proprietary-codecs pulseaudio selinux suid +system-ffmpeg +system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx +system-openh264 system-openjpeg +tcmalloc thinlto vaapi vdpau wayland widevine"
 RESTRICT="
 	!system-ffmpeg? ( proprietary-codecs? ( bindist ) )
 	!system-openh264? ( bindist )
@@ -223,7 +223,12 @@ pkg_pretend() {
 		ewarn "Consider disabling this USE flag if something breaks"
 		ewarn
 	fi
-
+	if use cfi; then
+		ewarn
+		ewarn "USE=cfi is known to break compilation: #32"
+		ewarn "Consider disabling this USE flag if something breaks"
+		ewarn
+	fi
 	if use wayland; then
 		ewarn
 		ewarn "You've enabled USE=wayland"
@@ -231,6 +236,7 @@ pkg_pretend() {
 		ewarn "otherwise something can break"
 		ewarn
 	fi
+
 	pre_build_checks
 }
 
@@ -654,21 +660,20 @@ src_configure() {
 		myconf_gn+=" use_cfi_cast=true"
 	fi
 
-	if use ozone; then
+	if use ozone || use wayland; then
 		myconf_gn+=" use_ozone=true"
 		myconf_gn+=" ozone_auto_platforms=false"
-		myconf_gn+=" ozone_platform_x11=true"
 		myconf_gn+=" use_system_minigbm=true"
 		myconf_gn+=" use_system_libdrm=true"
 	fi
 
+	if use ozone; then
+		myconf_gn+=" ozone_platform_x11=true"
+	fi
+
 	if use wayland; then
-		myconf_gn+=" use_ozone=true"
-		myconf_gn+=" ozone_auto_platforms=false"
 		myconf_gn+=" ozone_platform_wayland=true"
 		myconf_gn+=" use_system_libwayland=true"
-		myconf_gn+=" use_system_minigbm=true"
-		myconf_gn+=" use_system_libdrm=true"
 	fi
 
 	myconf_gn+=" use_thin_lto=$(usex thinlto true false)"
