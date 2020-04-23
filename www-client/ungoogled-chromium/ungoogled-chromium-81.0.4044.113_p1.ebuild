@@ -35,7 +35,7 @@ SRC_URI="
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="amd64 ~x86"
-IUSE="cfi +clang closure-compile convert-dict cups custom-cflags enable-driver gnome hangouts kerberos optimize-thinlto optimize-webui +proprietary-codecs pulseaudio selinux suid +system-ffmpeg +system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx +system-openh264 system-openjpeg +tcmalloc thinlto vaapi widevine wayland"
+IUSE="cfi +clang closure-compile convert-dict cups custom-cflags enable-driver gnome hangouts kerberos optimize-thinlto optimize-webui ozone +proprietary-codecs pulseaudio selinux suid +system-ffmpeg +system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx +system-openh264 system-openjpeg +tcmalloc thinlto vaapi vdpau widevine wayland"
 RESTRICT="
 	!system-ffmpeg? ( proprietary-codecs? ( bindist ) )
 	!system-openh264? ( bindist )
@@ -269,10 +269,11 @@ src_prepare() {
 	if use vaapi
 	then
 		eapply "${FILESDIR}/vaapi-build-fix.patch"
-		#eapply "${FILESDIR}/vdpau-support.patch"
 		elog "Even though ${PN} is built with vaapi support, #ignore-gpu-blacklist"
 		elog "should be enabled via flags or commandline for it to work."
 	fi
+
+	use vdpau && eapply "${FILESDIR}/vdpau-support.patch"
 
 	# From here we adapt ungoogled-chromium's patches to our needs
 	local ugc_pruning_list="${UGC_WD}/pruning.list"
@@ -653,11 +654,18 @@ src_configure() {
 		myconf_gn+=" use_cfi_cast=true"
 	fi
 
+	if use ozone; then
+		myconf_gn+=" use_ozone=true"
+		myconf_gn+=" ozone_auto_platforms=false"
+		myconf_gn+=" ozone_platform_x11=true"
+		myconf_gn+=" use_system_minigbm=true"
+		myconf_gn+=" use_system_libdrm=true"
+	fi
+
 	if use wayland; then
 		myconf_gn+=" use_ozone=true"
-		myconf_gn+=" ozone_platform_wayland=true"
-		myconf_gn+=" ozone_platform_x11=true"
 		myconf_gn+=" ozone_auto_platforms=false"
+		myconf_gn+=" ozone_platform_wayland=true"
 		myconf_gn+=" use_system_libwayland=true"
 		myconf_gn+=" use_system_minigbm=true"
 		myconf_gn+=" use_system_libdrm=true"
