@@ -82,8 +82,6 @@ dev-qt/qtwebkit:multimedia - Enable HTML5 audio/video support via dev-qt/qtmulti
 dev-qt/qtwebkit:orientation - Enable device orientation detection via dev-qt/qtsensors
 dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
-dev-util/vulkan-tools:cube - Build the cube/cubepp demos
-dev-util/vulkan-tools:vulkaninfo - Build the vulkaninfo utility
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/waybar:mpd - Enable support for the Music Player Daemon
 gui-apps/waybar:network - Enable libnl support for network related features

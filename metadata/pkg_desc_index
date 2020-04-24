@@ -54,7 +54,6 @@ dev-libs/libsigc++ 3.0.3: Typesafe callback system for standard C++
 dev-libs/libuinputplus 0.1.4: Easy-to-use uinput library in C++
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
-dev-libs/protobuf 3.11.3_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2020.03.02: An efficient, principled regular expression library
 dev-libs/spdlog 1.5.0: Very fast, header only, C++ logging library
@@ -128,18 +127,13 @@ dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
-dev-util/android-tools 9.0.0_p52: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/glslang 7.13.3496 8.13.3559 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1726: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
-dev-util/spirv-tools 2020.1: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.133: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.2.133: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.36.0: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.48.0: Scalable Vector Graphics (SVG) rendering library
