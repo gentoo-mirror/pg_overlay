@@ -663,8 +663,6 @@ src_configure() {
 	if use ozone || use wayland; then
 		myconf_gn+=" use_ozone=true"
 		myconf_gn+=" ozone_auto_platforms=false"
-		myconf_gn+=" use_system_minigbm=true"
-		myconf_gn+=" use_system_libdrm=true"
 	fi
 
 	if use ozone; then
@@ -674,6 +672,8 @@ src_configure() {
 	if use wayland; then
 		myconf_gn+=" ozone_platform_wayland=true"
 		myconf_gn+=" use_system_libwayland=true"
+		myconf_gn+=" use_system_minigbm=true"
+		myconf_gn+=" use_system_libdrm=true"
 	fi
 
 	myconf_gn+=" use_thin_lto=$(usex thinlto true false)"
