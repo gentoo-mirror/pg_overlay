@@ -18,6 +18,5 @@ IUSE=""
 DOCS=( CHANGES README.md )
 
 src_install() {
-	default
 	emake DESTDIR="${D}" PREFIX=/usr install
 }
