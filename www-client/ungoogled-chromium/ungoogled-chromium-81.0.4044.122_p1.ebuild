@@ -529,10 +529,10 @@ src_prepare() {
 	if ! use system-openh264; then
 		keeplibs+=( third_party/openh264 )
 	fi
-	if use ozone; then
-		keeplibs+=( third_party/wayland )
-		keeplibs+=( third_party/wayland-protocols )
-	fi
+	#if use ozone; then
+	#	keeplibs+=( third_party/wayland )
+	#	keeplibs+=( third_party/wayland-protocols )
+	#fi
 
 	ebegin "Removing unneeded bundled libraries"
 	python_setup 'python2*'
@@ -656,7 +656,7 @@ src_configure() {
 		myconf_gn+=" use_ozone=true"
 		myconf_gn+=" ozone_auto_platforms=false"
 		myconf_gn+=" ozone_platform_x11=true"
-		myconf_gn+=" ozone_platform_wayland=true"
+		myconf_gn+=" ozone_platform_gbm=true"
 		myconf_gn+=" use_system_minigbm=true"
 		myconf_gn+=" use_system_libdrm=true"
 	fi
