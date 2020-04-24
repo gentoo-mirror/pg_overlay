@@ -529,10 +529,11 @@ src_prepare() {
 	if ! use system-openh264; then
 		keeplibs+=( third_party/openh264 )
 	fi
-	#if use ozone; then
-	#	keeplibs+=( third_party/wayland )
+	if use ozone; then
+		keeplibs+=( third_party/libdrm )
+		#keeplibs+=( third_party/wayland )
 	#	keeplibs+=( third_party/wayland-protocols )
-	#fi
+	fi
 
 	ebegin "Removing unneeded bundled libraries"
 	python_setup 'python2*'
