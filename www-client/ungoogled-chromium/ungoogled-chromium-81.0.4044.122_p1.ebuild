@@ -35,7 +35,7 @@ SRC_URI="
 LICENSE="BSD"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="cfi +clang closure-compile convert-dict cups custom-cflags enable-driver gnome hangouts kerberos optimize-thinlto optimize-webui ozone +proprietary-codecs pulseaudio selinux suid +system-ffmpeg +system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx +system-openh264 system-openjpeg +tcmalloc thinlto vaapi vdpau widevine"
+IUSE="cfi +clang closure-compile convert-dict cups custom-cflags enable-driver gnome hangouts kerberos optimize-thinlto optimize-webui +proprietary-codecs pulseaudio selinux suid +system-ffmpeg +system-harfbuzz +system-icu +system-jsoncpp +system-libevent +system-libvpx +system-openh264 system-openjpeg +tcmalloc thinlto vaapi vdpau wayland widevine"
 RESTRICT="
 	!system-ffmpeg? ( proprietary-codecs? ( bindist ) )
 	!system-openh264? ( bindist )
@@ -115,6 +115,7 @@ COMMON_DEPEND="
 	system-libevent? ( dev-libs/libevent )
 	system-openjpeg? ( media-libs/openjpeg:2= )
 	vaapi? ( x11-libs/libva:= )
+	wayland? ( dev-libs/wayland )
 "
 # For nvidia-drivers blocker, see bug #413637 .
 RDEPEND="${COMMON_DEPEND}
@@ -226,6 +227,13 @@ pkg_pretend() {
 		ewarn
 		ewarn "USE=cfi is known to break compilation: #32"
 		ewarn "Consider disabling this USE flag if something breaks"
+		ewarn
+	fi
+	if use wayland; then
+		ewarn
+		ewarn "You've enabled USE=wayland"
+		ewarn "Consider enabling this USE flag globally"
+		ewarn "otherwise something can break"
 		ewarn
 	fi
 
@@ -529,10 +537,9 @@ src_prepare() {
 	if ! use system-openh264; then
 		keeplibs+=( third_party/openh264 )
 	fi
-	if use ozone; then
-		keeplibs+=( third_party/libdrm )
-		#keeplibs+=( third_party/wayland )
-	#	keeplibs+=( third_party/wayland-protocols )
+	if use wayland; then
+		keeplibs+=( third_party/wayland )
+		keeplibs+=( third_party/wayland-protocols )
 	fi
 
 	ebegin "Removing unneeded bundled libraries"
@@ -653,13 +660,14 @@ src_configure() {
 		myconf_gn+=" use_cfi_cast=true"
 	fi
 
-	if use ozone; then
+	if use use wayland; then
 		myconf_gn+=" use_ozone=true"
 		myconf_gn+=" ozone_auto_platforms=false"
+		myconf_gn+=" ozone_platform_wayland=true"
 		myconf_gn+=" ozone_platform_x11=true"
-		myconf_gn+=" ozone_platform_gbm=true"
-		myconf_gn+=" use_system_minigbm=true"
 		myconf_gn+=" use_system_libdrm=true"
+		myconf_gn+=" use_system_libwayland=true"
+		myconf_gn+=" use_system_minigbm=true"
 	fi
 
 	myconf_gn+=" use_thin_lto=$(usex thinlto true false)"
