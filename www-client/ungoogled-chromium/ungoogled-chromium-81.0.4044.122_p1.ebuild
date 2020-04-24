@@ -660,7 +660,7 @@ src_configure() {
 		myconf_gn+=" use_cfi_cast=true"
 	fi
 
-	if use use wayland; then
+	if use wayland; then
 		myconf_gn+=" use_ozone=true"
 		myconf_gn+=" ozone_auto_platforms=false"
 		myconf_gn+=" ozone_platform_wayland=true"
