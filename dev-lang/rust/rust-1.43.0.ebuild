@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7,8} pypy )
+PYTHON_COMPAT=( python3_{7,8} )
 
 inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
 
@@ -108,6 +108,10 @@ QA_FLAGS_IGNORED="
 	usr/lib/rustlib/.*/lib/lib.*.so
 "
 
+# tests need a bit more work, currently they are causing multiple
+# re-compilations and somewhat fragile.
+RESTRICT="test"
+
 QA_SONAME="usr/lib.*/librustc_macros.*.so"
 
 PATCHES=(
@@ -141,8 +145,6 @@ pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
 
-	# use bundled for now, #707746
-	# will need dev-libs/libgit2 slotted dep if re-enabled
 	export LIBGIT2_SYS_USE_PKG_CONFIG=1
 	export LIBSSH2_SYS_USE_PKG_CONFIG=1
 	export PKG_CONFIG_ALLOW_CROSS=1
@@ -209,7 +211,7 @@ src_configure() {
 	fi
 	rust_targets="${rust_targets#,}"
 
-	local extended="true" tools="\"cargo\","
+	local tools="\"cargo\","
 	if use clippy; then
 		tools="\"clippy\",$tools"
 	fi
@@ -235,9 +237,10 @@ src_configure() {
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
 		optimize = $(toml_usex !debug)
+		thin-lto = $(toml_usex system-llvm)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
-		thin-lto = $(toml_usex system-llvm)
+		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
@@ -257,11 +260,12 @@ src_configure() {
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
-		extended = ${extended}
+		extended = true
 		tools = [${tools}]
 		verbose = 2
 		sanitizers = false
 		profiler = false
+		cargo-native-static = false
 		local-rebuild = false
 
 		[install]
@@ -276,15 +280,20 @@ src_configure() {
 		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
 		debuginfo-level = 0
+		debuginfo-level-rustc = 0
 		backtrace = $(toml_usex debug)
+		incremental = false
 		default-linker = "$(tc-getCC)"
 		parallel-compiler = $(toml_usex parallel-compiler)
 		channel = "$(usex nightly nightly stable)"
 		rpath = false
+		verbose-tests = false
+		optimize-tests = $(toml_usex !debug)
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
 		backtrace-on-ice = true
+		jemalloc = false
 
 		[dist]
 		src-tarball = false
@@ -334,6 +343,22 @@ src_compile() {
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 }
 
+src_test() {
+	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
+		"${EPYTHON}" ./x.py test -vv --config="${S}"/config.toml -j$(makeopts_jobs) --no-doc --no-fail-fast \
+		src/test/codegen \
+		src/test/codegen-units \
+		src/test/compile-fail \
+		src/test/incremental \
+		src/test/mir-opt \
+		src/test/pretty \
+		src/test/run-fail \
+		src/test/run-make \
+		src/test/run-make-fulldeps \
+		src/test/ui \
+		src/test/ui-fulldeps || die
+}
+
 src_install() {
 	env $(cat "${S}"/config.env) DESTDIR="${D}" \
 		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml || die
@@ -373,15 +398,18 @@ src_install() {
 	fi
 
 	dodoc COPYRIGHT
+	rm "${ED}/usr/share/doc/${P}"/*.old || die
+	rm "${ED}/usr/share/doc/${P}/LICENSE-APACHE" || die
+	rm "${ED}/usr/share/doc/${P}/LICENSE-MIT" || die
 
 	# note: eselect-rust adds EROOT to all paths below
 	cat <<-EOF > "${T}/provider-${P}"
+		/usr/bin/cargo
 		/usr/bin/rustdoc
 		/usr/bin/rust-gdb
 		/usr/bin/rust-gdbgui
 		/usr/bin/rust-lldb
 	EOF
-	echo /usr/bin/cargo >> "${T}/provider-${P}"
 	if use clippy; then
 		echo /usr/bin/clippy-driver >> "${T}/provider-${P}"
 		echo /usr/bin/cargo-clippy >> "${T}/provider-${P}"
@@ -407,10 +435,6 @@ pkg_postinst() {
 
 	elog "Rust installs a helper script for calling GDB and LLDB,"
 	elog "for your convenience it is installed under /usr/bin/rust-{gdb,lldb}-${PV}."
-
-	ewarn "cargo is now installed from dev-lang/rust{,-bin} instead of dev-util/cargo."
-	ewarn "This might have resulted in a dangling symlink for /usr/bin/cargo on some"
-	ewarn "systems. This can be resolved by calling 'sudo eselect rust set ${P}'."
 
 	if has_version app-editors/emacs; then
 		elog "install app-emacs/rust-mode to get emacs support for rust."
