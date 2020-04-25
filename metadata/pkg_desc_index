@@ -35,7 +35,7 @@ dev-cpp/mm-common 1.0.0: Build infrastructure and utilities for GNOME C++ bindin
 dev-cpp/pangomm 2.42.1: C++ interface for pango
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
 dev-lang/python 2.7.18 3.8.2-r2: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.42.0_beta 1.42.0: Systems programming language from Mozilla
+dev-lang/rust 1.42.0_beta 1.42.0 1.43.0: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-lang/vala 0.48.4: Compiler for the GObject type system
 dev-libs/atk 2.35.1: GTK+ & GNOME Accessibility Toolkit
@@ -205,7 +205,7 @@ sys-libs/llvm-libunwind 10.0.0: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.2_p20200411: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
-virtual/rust 1.42.0_beta 1.42.0: Virtual for Rust language compiler
+virtual/rust 1.42.0_beta 1.43.0: Virtual for Rust language compiler
 www-client/firefox 75.0: Firefox Web Browser
 www-client/ungoogled-chromium 81.0.4044.122_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
