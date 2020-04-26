@@ -291,7 +291,7 @@ pkg_setup() {
 	# Workaround for #627726
 	if has ccache ${FEATURES} ; then
 		if use clang && use pgo ; then
-			einfo "Using FEATURES=ccache with USE=clang and USE=pgo is currently known to be broken (bug #718632)."
+			die "Using FEATURES=ccache with USE=clang and USE=pgo is currently known to be broken (bug #718632)."
 		fi
 
 		einfo "Fixing PATH for FEATURES=ccache ..."
@@ -322,7 +322,7 @@ src_prepare() {
 	eapply_user
 
 	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+	find "${S}" -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	# Enable gnomebreakpad
 	if use debug ; then
