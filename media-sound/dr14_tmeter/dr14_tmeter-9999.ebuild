@@ -17,7 +17,7 @@ KEYWORDS="~amd64 ~x86"
 IUSE=""
 
 DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
-RDEPEND="virtual/ffmpeg[encode]
+RDEPEND="media-video/ffmpeg[encode]
 	media-libs/flac
 	dev-python/numpy[${PYTHON_USEDEP}]"
 
