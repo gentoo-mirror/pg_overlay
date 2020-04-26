@@ -9,7 +9,7 @@ inherit check-reqs cmake flag-o-matic python-any-r1 qmake-utils ruby-single tool
 
 DESCRIPTION="WebKit rendering library for the Qt5 framework (deprecated)"
 HOMEPAGE="https://www.qt.io/"
-SRC_URI="https://download.qt.io/snapshots/ci/${PN}/${PV/.0_*/}/latest/src/submodules/${PN}-opensource-src-${PV/.0_*/}.tar.xz"
+SRC_URI="https://download.qt.io/snapshots/ci/${PN}/${PV/.0_*/}/latest/src/submodules/${PN}-opensource-src-${PV/.0_*/}.tar.xz -> ${P}.tar.xz"
 
 LICENSE="BSD LGPL-2+"
 SLOT="5/5.212"

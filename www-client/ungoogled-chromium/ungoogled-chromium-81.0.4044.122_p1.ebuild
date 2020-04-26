@@ -313,8 +313,7 @@ src_prepare() {
 	eend $? || die
 
 	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' \) -print -delete || die
-	find "${S}"/third_party -type f \( -name '*.la' -o -name '*.a' \) -print -delete || die
+	find "${S}" -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	local keeplibs=(
 		base/third_party/cityhash
