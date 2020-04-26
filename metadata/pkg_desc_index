@@ -118,7 +118,7 @@ dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
-dev-python/numpy 1.18.1: Fast array and numerical python library
+dev-python/numpy 1.18.3: Fast array and numerical python library
 dev-python/parsedatetime 2.5: Parse human-readable date/time strings
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
