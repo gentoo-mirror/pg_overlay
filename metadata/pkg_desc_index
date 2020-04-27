@@ -144,7 +144,7 @@ gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.18.4-r2 5.18.4.4: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 68.7.0 68.7.0-r777: Thunderbird Mail Client
+mail-client/thunderbird 68.7.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Epoxy is a library for handling OpenGL function pointer management for you
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
@@ -205,7 +205,7 @@ sys-libs/ncurses 6.2_p20200411: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/rust 1.42.0_beta 1.43.0: Virtual for Rust language compiler
-www-client/firefox 75.0: Firefox Web Browser
+www-client/firefox 75.0 75.0-r777: Firefox Web Browser
 www-client/ungoogled-chromium 81.0.4044.122_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
