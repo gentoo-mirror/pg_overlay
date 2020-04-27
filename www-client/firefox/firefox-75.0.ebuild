@@ -712,10 +712,11 @@ src_configure() {
 	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=
 	mozconfig_annotate '' MOZ_SERVICES_METRICS=
 	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
+	mozconfig_annotate '' RUSTC_OPT_LEVEL=3
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
 	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
-
+	
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-rust-simd

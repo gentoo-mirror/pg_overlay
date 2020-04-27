@@ -715,6 +715,8 @@ src_configure() {
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
 	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
+	mozconfig_annotate '' RUSTC_OPT_LEVEL=3
+	mozconfig_annotate '' RUSTC_WRAPPER=/usr/bin/sccache
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
