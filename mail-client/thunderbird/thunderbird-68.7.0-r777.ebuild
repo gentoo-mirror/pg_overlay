@@ -684,7 +684,6 @@ src_configure() {
 	#
 	mozconfig_annotate '' CCACHE="/usr/bin/sccache"
 	echo CCACHE="/usr/bin/sccache" >> "${S}"/.mozconfig
-	
 
 	# Finalize and report settings
 	mozconfig_final
