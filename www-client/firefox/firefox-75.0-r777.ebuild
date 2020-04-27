@@ -44,7 +44,7 @@ inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 DESCRIPTION="Firefox Web Browser"
 HOMEPAGE="https://www.mozilla.com/firefox"
 
-#KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
@@ -291,7 +291,7 @@ pkg_setup() {
 	# Workaround for #627726
 	if has ccache ${FEATURES} ; then
 		if use clang && use pgo ; then
-			warn "Using FEATURES=ccache with USE=clang and USE=pgo is currently known to be broken (bug #718632)."
+			einfo "Using FEATURES=ccache with USE=clang and USE=pgo is currently known to be broken (bug #718632)."
 		fi
 
 		einfo "Fixing PATH for FEATURES=ccache ..."
@@ -322,7 +322,7 @@ src_prepare() {
 	eapply_user
 
 	einfo "Removing pre-built binaries ..."
-	#find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -618,7 +618,7 @@ src_configure() {
 
 	# Disable built-in ccache support to avoid sandbox violation, #665420
 	# Use FEATURES=ccache instead!
-	mozconfig_annotate '' --with-ccache=/usr/bin/sccache
+	mozconfig_annotate '' --without-ccache
 	sed -i -e 's/ccache_stats = None/return None/' \
 		python/mozbuild/mozbuild/controller/building.py || \
 		die "Failed to disable ccache stats call"
@@ -715,7 +715,7 @@ src_configure() {
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
 	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
-
+	
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
 	mozconfig_annotate '' --enable-rust-simd
@@ -731,7 +731,6 @@ src_configure() {
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
 	#
-	mozconfig_annotate '' CCACHE="/usr/bin/sccache"
 
 	# Finalize and report settings
 	mozconfig_final
@@ -755,7 +754,7 @@ src_compile() {
 		addpredict /etc/gconf
 	fi
 
-	CCACHE=/usr/bin/sccache SCCACHE_DIR="/var/tmp/sccache" SCCACHE_CACHE_SIZE="17G" GDK_BACKEND=x11 \
+	GDK_BACKEND=x11 \
 		MOZ_MAKE_FLAGS="${MAKEOPTS} -O" \
 		SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 		MOZ_NOSPAM=1 \
