@@ -755,7 +755,7 @@ src_compile() {
 		addpredict /etc/gconf
 	fi
 
-	GDK_BACKEND=x11 \
+	CCACHE=/usr/bin/sccache SCCACHE_DIR="/var/tmp/sccache" SCCACHE_CACHE_SIZE="17G" GDK_BACKEND=x11 \
 		MOZ_MAKE_FLAGS="${MAKEOPTS} -O" \
 		SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 		MOZ_NOSPAM=1 \
