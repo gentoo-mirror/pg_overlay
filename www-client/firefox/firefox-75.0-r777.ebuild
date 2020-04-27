@@ -322,7 +322,7 @@ src_prepare() {
 	eapply_user
 
 	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+	#find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -715,7 +715,6 @@ src_configure() {
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
 	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
-	mozconfig_annotate '' RUSTC_WRAPPER=/usr/bin/sccache
 
 	# Enable good features
 	mozconfig_annotate '' --enable-install-strip
@@ -756,7 +755,7 @@ src_compile() {
 		addpredict /etc/gconf
 	fi
 
-	GDK_BACKEND=x11 \
+	CCACHE=/usr/bin/sccache SCCACHE_DIR="/var/tmp/sccache" SCCACHE_CACHE_SIZE="17G" GDK_BACKEND=x11 \
 		MOZ_MAKE_FLAGS="${MAKEOPTS} -O" \
 		SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
 		MOZ_NOSPAM=1 \
