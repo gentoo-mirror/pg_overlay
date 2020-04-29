@@ -63,7 +63,6 @@ dev-libs/zziplib 9999: Lightweight library for extracting data from files archiv
 dev-perl/Alien-Build 1.920.0: Build external dependencies for use in CPAN
 dev-perl/Alien-Libxml2 0.110.0: Install the C libxml2 library on your system
 dev-perl/App-pwhich 1.160.0: Perl-only 'which'
-dev-perl/Archive-Zip 1.670.0: A wrapper that lets you read Zip archive members as if they were files
 dev-perl/Canary-Stability 2013.0.0: Canary to check perl compatibility for schmorp's modules
 dev-perl/Class-Inspector 1.360.0: Provides information about Classes
 dev-perl/DateTime 1.510.0: A date and time object
