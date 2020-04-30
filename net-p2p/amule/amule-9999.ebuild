@@ -11,7 +11,7 @@ DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
 EGIT_REPO_URI="https://github.com/${PN}-project/${PN}.git"
 
-LICENSE="GPL-2"
+LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS=""
 IUSE="daemon debug geoip gui +nls stats upnp X +mmap webserver"
@@ -20,10 +20,12 @@ RDEPEND="
 	dev-libs/boost:=
 	dev-libs/crypto++:=
 	sys-libs/binutils-libs:0=
+	sys-libs/readline:0=
 	sys-libs/zlib
 	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
 	daemon? ( acct-user/amule )
 	geoip? ( dev-libs/geoip )
+	nls? ( virtual/libintl )
 	webserver? (
 		acct-user/amule
 		media-libs/libpng:0=
@@ -31,8 +33,13 @@ RDEPEND="
 	stats? ( media-libs/gd:=[jpeg,png] )
 	upnp? ( net-libs/libupnp:0 )
 "
-DEPEND="${RDEPEND}"
-BDEPEND="virtual/pkgconfig"
+DEPEND="${RDEPEND}
+	X? ( dev-util/desktop-file-utils )
+"
+BDEPEND="
+	virtual/pkgconfig
+	nls? ( sys-devel/gettext )
+"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
@@ -136,4 +143,10 @@ pkg_postinst() {
 			fi
 		done
 	fi
+
+	use X && xdg_desktop_database_update
+}
+
+pkg_postrm() {
+	use X && xdg_desktop_database_update
 }
