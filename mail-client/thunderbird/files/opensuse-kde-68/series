@@ -9,8 +9,6 @@ mozilla-bmo1504834-part3.patch
 mozilla-bmo1602730.patch
 mozilla-bmo1504834-part4.patch
 
-mozilla-bmo1580963.patch
-
 firefox-kde.patch
 firefox-branded-icons.patch
 firefox-add-kde.js-in-order-to-survive-PGO-build.patch
