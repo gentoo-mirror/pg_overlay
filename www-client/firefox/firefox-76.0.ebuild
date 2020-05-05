@@ -678,7 +678,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-address-sanitizer-reporter
 
 	mozconfig_annotate '' --disable-callgrind
-	mozconfig_annotate '' --enable-clang-plugin
 	mozconfig_annotate '' --disable-crashreporter
 
 	mozconfig_annotate '' --disable-debug
@@ -701,6 +700,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
+	mozconfig_annotate '' --enable-llvm-hacks
 
 	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-mobile-optimize
