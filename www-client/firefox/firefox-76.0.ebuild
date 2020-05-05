@@ -372,7 +372,7 @@ src_prepare() {
 		if [ $? -eq 0 ]; then
 			eapply "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
 		else
-			einfo -------------;einfo Patch $p is NOT applied and deleted;einfo -------------;rm "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p
+			einfo -------------;einfo Patch $p is NOT applied and deleted;einfo -------------
 		fi
 	done
 
