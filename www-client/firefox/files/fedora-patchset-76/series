@@ -1,11 +1,6 @@
 mozilla-build-arm.patch
 rhbz-1219542-s390-build.patch
-build-rust-ppc64le.patch
-build-ppc-jit.patch
-build-jit-atomic-always-lucky.patch
-build-cacheFlush-missing.patch
 build-aarch64-skia.patch
-build-arm-libopus.patch
 build-arm-libaom.patch
 
 rhbz-1173156.patch
@@ -17,4 +12,6 @@ kiosk-workaround.patch
 
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 
-mozilla-1516803.patch
+mozilla-1625431.patch           
+mozilla-1628690.patch
+mozilla-1619543.patch
