@@ -10,8 +10,8 @@ Date:   Wed Jan 8 15:06:00 2020 -0800
 
 diff --git config/system-headers.mozbuild config/system-headers.mozbuild
 index 88afca1070f86..beff3e2542c9f 100644
---- config/system-headers.mozbuild
-+++ config/system-headers.mozbuild
+--- a/config/system-headers.mozbuild
++++ b/config/system-headers.mozbuild
 @@ -816,6 +816,7 @@ system_headers = [
      'sys/bitypes.h',
      'sys/byteorder.h',
@@ -22,8 +22,8 @@ index 88afca1070f86..beff3e2542c9f 100644
      'sys/elf.h',
 diff --git ipc/chromium/src/base/shared_memory_posix.cc ipc/chromium/src/base/shared_memory_posix.cc
 index 0be9cce0b4bed..89e67483e4c16 100644
---- ipc/chromium/src/base/shared_memory_posix.cc
-+++ ipc/chromium/src/base/shared_memory_posix.cc
+--- a/ipc/chromium/src/base/shared_memory_posix.cc
++++ b/ipc/chromium/src/base/shared_memory_posix.cc
 @@ -16,6 +16,10 @@
  #  include <linux/ashmem.h>
  #endif

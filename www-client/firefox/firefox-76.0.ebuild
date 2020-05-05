@@ -700,6 +700,7 @@ src_configure() {
 
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
+	mozconfig_annotate '' --enable-llvm-hacks
 
 	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-mobile-optimize
