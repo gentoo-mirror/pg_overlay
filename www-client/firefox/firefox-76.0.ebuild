@@ -365,9 +365,8 @@ src_prepare() {
 		"${S}"/build/moz.configure/rust.configure || die
 
 	# OpenSUSE-KDE patchset
-	#use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
 
-	for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
+	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
 			eapply "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
@@ -376,19 +375,31 @@ src_prepare() {
 		fi
 	done
 
-
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
 
 	# Debian patches
-	for i in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/debian-patchset-$(get_major_version)/$i"; done
+	for p in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(get_major_version)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/debian-patchset-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
+		else
+			einfo -------------;einfo Patch $p is NOT applied and ingored;einfo -------------
+		fi
+	done
 
 	# FreeBSD patches
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
 	# Fedora patches
-	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i"; done
-
+	for p in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
+		else
+			einfo -------------;einfo Patch $p is NOT applied and ingored;einfo -------------
+		fi
+	done
 	# Force merging of Content-Security-Policy header. Fixed in 77
 	eapply "${FILESDIR}/D63554.diff"
 
