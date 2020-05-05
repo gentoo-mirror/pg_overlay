@@ -1,7 +1,0 @@
-build-disable-elfhack.patch
-firefox-nss-version.patch
-
-firefox-enable-addons.patch
-mozilla-1170092.patch
-
-Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
