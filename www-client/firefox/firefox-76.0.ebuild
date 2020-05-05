@@ -368,11 +368,11 @@ src_prepare() {
 	#use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
 
 	for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
-		eapply --dry-run --silent "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p 2>/dev/null
+		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
 			eapply "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
 		else
-			einfo -------------;einfo Patch $p is NOT applied and deleted;einfo -------------
+			einfo -------------;einfo Patch $p is NOT applied and ingored;einfo -------------
 		fi
 	done
 
