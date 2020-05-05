@@ -16,7 +16,6 @@ rhbz-1354671.patch
 firefox-locale-debug.patch
 kiosk-workaround.patch
 
-mozilla-1196777.patch
 mozilla-1337988.patch
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 bug1375074-save-restore-x28.patch
