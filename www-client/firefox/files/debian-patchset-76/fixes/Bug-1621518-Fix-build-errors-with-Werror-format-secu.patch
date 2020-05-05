@@ -1,0 +1,66 @@
+From: Mike Hommey <mh+mozilla@glandium.org>
+Date: Wed, 11 Mar 2020 12:12:47 +0900
+Subject: Bug 1621518 - Fix build errors with -Werror=format-security with GCC.
+ r?jgilbert
+
+---
+ dom/canvas/ClientWebGLContext.h |  5 +++++
+ dom/canvas/WebGLContext.h       | 10 ++++++++++
+ 2 files changed, 15 insertions(+)
+
+diff --git a/dom/canvas/ClientWebGLContext.h b/dom/canvas/ClientWebGLContext.h
+index 192043662de..14207c9d6f6 100644
+--- a/dom/canvas/ClientWebGLContext.h
++++ b/dom/canvas/ClientWebGLContext.h
+@@ -825,10 +825,15 @@ class ClientWebGLContext final : public nsICanvasRenderingContextInternal,
+ #ifdef __clang__
+ #  pragma clang diagnostic push
+ #  pragma clang diagnostic ignored "-Wformat-security"
++#elif defined(__GNUC__)
++#  pragma GCC diagnostic push
++#  pragma GCC diagnostic ignored "-Wformat-security"
+ #endif
+     text.AppendPrintf(format, args...);
+ #ifdef __clang__
+ #  pragma clang diagnostic pop
++#elif defined(__GNUC__)
++#  pragma GCC diagnostic pop
+ #endif
+ 
+     EnqueueErrorImpl(error, text);
+diff --git a/dom/canvas/WebGLContext.h b/dom/canvas/WebGLContext.h
+index f2c0e4dfe2a..c56b1a77531 100644
+--- a/dom/canvas/WebGLContext.h
++++ b/dom/canvas/WebGLContext.h
+@@ -439,10 +439,15 @@ class WebGLContext : public VRefCounted, public SupportsWeakPtr<WebGLContext> {
+ #ifdef __clang__
+ #  pragma clang diagnostic push
+ #  pragma clang diagnostic ignored "-Wformat-security"
++#elif defined(__GNUC__)
++#  pragma GCC diagnostic push
++#  pragma GCC diagnostic ignored "-Wformat-security"
+ #endif
+     text.AppendPrintf(fmt, args...);
+ #ifdef __clang__
+ #  pragma clang diagnostic pop
++#elif defined(__GNUC__)
++#  pragma GCC diagnostic pop
+ #endif
+ 
+     GenerateErrorImpl(err, text);
+@@ -1297,10 +1302,15 @@ class WebGLContext : public VRefCounted, public SupportsWeakPtr<WebGLContext> {
+ #ifdef __clang__
+ #  pragma clang diagnostic push
+ #  pragma clang diagnostic ignored "-Wformat-security"
++#elif defined(__GNUC__)
++#  pragma GCC diagnostic push
++#  pragma GCC diagnostic ignored "-Wformat-security"
+ #endif
+     msg.AppendPrintf(fmt, args...);
+ #ifdef __clang__
+ #  pragma clang diagnostic pop
++#elif defined(__GNUC__)
++#  pragma GCC diagnostic pop
+ #endif
+ 
+     GenerateErrorImpl(0, msg);
