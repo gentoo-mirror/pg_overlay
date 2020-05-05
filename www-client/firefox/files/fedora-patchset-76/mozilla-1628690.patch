@@ -1,0 +1,67 @@
+diff --git a/dom/media/platforms/ffmpeg/FFmpegDecoderModule.h b/dom/media/platforms/ffmpeg/FFmpegDecoderModule.h
+--- a/dom/media/platforms/ffmpeg/FFmpegDecoderModule.h
++++ b/dom/media/platforms/ffmpeg/FFmpegDecoderModule.h
+@@ -49,7 +49,9 @@
+     RefPtr<MediaDataDecoder> decoder = new FFmpegVideoDecoder<V>(
+         mLib, aParams.mTaskQueue, aParams.VideoConfig(),
+         aParams.mKnowsCompositor, aParams.mImageContainer,
+-        aParams.mOptions.contains(CreateDecoderParams::Option::LowLatency));
++        aParams.mOptions.contains(CreateDecoderParams::Option::LowLatency),
++        aParams.mOptions.contains(
++            CreateDecoderParams::Option::HardwareDecoderNotAllowed));
+     return decoder.forget();
+   }
+ 
+diff --git a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h
+--- a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h
++++ b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h
+@@ -48,7 +48,8 @@
+  public:
+   FFmpegVideoDecoder(FFmpegLibWrapper* aLib, TaskQueue* aTaskQueue,
+                      const VideoInfo& aConfig, KnowsCompositor* aAllocator,
+-                     ImageContainer* aImageContainer, bool aLowLatency);
++                     ImageContainer* aImageContainer, bool aLowLatency,
++                     bool aDisableHardwareDecoding);
+ 
+   RefPtr<InitPromise> Init() override;
+   void InitCodecContext() override;
+@@ -109,6 +110,7 @@
+ 
+ #ifdef MOZ_WAYLAND_USE_VAAPI
+   AVBufferRef* mVAAPIDeviceContext;
++  const bool mDisableHardwareDecoding;
+ #endif
+   RefPtr<KnowsCompositor> mImageAllocator;
+   RefPtr<ImageContainer> mImageContainer;
+diff --git a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
+--- a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
++++ b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
+@@ -270,10 +270,11 @@
+ FFmpegVideoDecoder<LIBAV_VER>::FFmpegVideoDecoder(
+     FFmpegLibWrapper* aLib, TaskQueue* aTaskQueue, const VideoInfo& aConfig,
+     KnowsCompositor* aAllocator, ImageContainer* aImageContainer,
+-    bool aLowLatency)
++    bool aLowLatency, bool aDisableHardwareDecoding)
+     : FFmpegDataDecoder(aLib, aTaskQueue, GetCodecId(aConfig.mMimeType)),
+ #ifdef MOZ_WAYLAND_USE_VAAPI
+       mVAAPIDeviceContext(nullptr),
++      mDisableHardwareDecoding(aDisableHardwareDecoding),
+ #endif
+       mImageAllocator(aAllocator),
+       mImageContainer(aImageContainer),
+@@ -289,9 +290,11 @@
+   MediaResult rv;
+ 
+ #ifdef MOZ_WAYLAND_USE_VAAPI
+-  rv = InitVAAPIDecoder();
+-  if (NS_SUCCEEDED(rv)) {
+-    return InitPromise::CreateAndResolve(TrackInfo::kVideoTrack, __func__);
++  if (!mDisableHardwareDecoding) {
++    rv = InitVAAPIDecoder();
++    if (NS_SUCCEEDED(rv)) {
++      return InitPromise::CreateAndResolve(TrackInfo::kVideoTrack, __func__);
++    }
+   }
+ #endif
+ 
+

@@ -1,0 +1,41 @@
+diff --git a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
+--- a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
++++ b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
+@@ -178,7 +178,12 @@
+   AVHWDeviceContext* hwctx = (AVHWDeviceContext*)mVAAPIDeviceContext->data;
+   AVVAAPIDeviceContext* vactx = (AVVAAPIDeviceContext*)hwctx->hwctx;
+ 
+-  mDisplay = mLib->vaGetDisplayWl(widget::WaylandDisplayGet()->GetDisplay());
++  wl_display* display = widget::WaylandDisplayGetWLDisplay();
++  if (!display) {
++    FFMPEG_LOG("Can't get default wayland display.");
++    return false;
++  }
++  mDisplay = mLib->vaGetDisplayWl(display);
+ 
+   hwctx->user_opaque = new VAAPIDisplayHolder(mLib, mDisplay);
+   hwctx->free = VAAPIDisplayReleaseCallback;
+diff --git a/widget/gtk/nsWaylandDisplay.cpp b/widget/gtk/nsWaylandDisplay.cpp
+--- a/widget/gtk/nsWaylandDisplay.cpp
++++ b/widget/gtk/nsWaylandDisplay.cpp
+@@ -35,6 +35,9 @@
+ wl_display* WaylandDisplayGetWLDisplay(GdkDisplay* aGdkDisplay) {
+   if (!aGdkDisplay) {
+     aGdkDisplay = gdk_display_get_default();
++    if (!aGdkDisplay || GDK_IS_X11_DISPLAY(aGdkDisplay)) {
++      return nullptr;
++    }
+   }
+ 
+   // Available as of GTK 3.8+
+@@ -537,8 +540,7 @@
+          StaticPrefs::widget_wayland_dmabuf_webgl_enabled();
+ }
+ bool nsWaylandDisplay::IsDMABufVAAPIEnabled() {
+-  return IsDMABufEnabled() &&
+-         StaticPrefs::widget_wayland_dmabuf_vaapi_enabled();
++  return StaticPrefs::widget_wayland_dmabuf_vaapi_enabled();
+ }
+ 
+ void* nsGbmLib::sGbmLibHandle = nullptr;
+

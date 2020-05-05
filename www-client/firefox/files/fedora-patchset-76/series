@@ -17,4 +17,10 @@ kiosk-workaround.patch
 
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
 
+mozilla-1625431.patch            
+mozilla-1628690.patch            
+mozilla-1630754.patch            
+mozilla-1619543.patch            
+mozilla-1632059.patch
+
 mozilla-1516803.patch
