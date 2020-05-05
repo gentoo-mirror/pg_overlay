@@ -1,7 +1,7 @@
 Don't pass --target when CC/CXX contains clang
 
---- third_party/rust/cc/src/lib.rs.orig	2020-04-10 00:57:23 UTC
-+++ third_party/rust/cc/src/lib.rs
+--- a/third_party/rust/cc/src/lib.rs.orig	2020-04-10 00:57:23 UTC
++++ b/third_party/rust/cc/src/lib.rs
 @@ -2344,28 +2344,7 @@ impl Tool {
      }
  
