@@ -369,9 +369,14 @@ src_prepare() {
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
+			eapply "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
 		else
-			einfo -------------;einfo Patch $p is NOT applied and ingored;einfo -------------
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
 		fi
 	done
 
@@ -382,9 +387,14 @@ src_prepare() {
 	for p in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/debian-patchset-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
+			eapply "${FILESDIR}/debian-patchset-$(get_major_version)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
 		else
-			einfo -------------;einfo Patch $p is NOT applied and ingored;einfo -------------
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
 		fi
 	done
 
@@ -395,9 +405,14 @@ src_prepare() {
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
+			eapply "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
 		else
-			einfo -------------;einfo Patch $p is NOT applied and ingored;einfo -------------
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
 		fi
 	done
 	# Force merging of Content-Security-Policy header. Fixed in 77
