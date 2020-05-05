@@ -365,7 +365,17 @@ src_prepare() {
 		"${S}"/build/moz.configure/rust.configure || die
 
 	# OpenSUSE-KDE patchset
-	use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
+	#use kde && for i in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)/series"); do eapply "${FILESDIR}/opensuse-kde-$(get_major_version)/$i"; done
+
+	for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
+		eapplay --dry-run --silent "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p;einfo +++++++++++++;einfo Patch $p is APPLIED;einfo +++++++++++++
+		else
+			einfo -------------;einfo Patch $p is NOT applied and deleted;einfo -------------;rm "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p
+		fi
+	done
+
 
 	# Privacy-esr patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
