@@ -424,17 +424,6 @@ diff -up firefox-56.0/js/src/gc/Barrier.h.1337988 firefox-56.0/js/src/gc/Barrier
  } /* namespace js */
  
  #endif /* gc_Barrier_h */
-diff -up firefox-56.0/js/src/jsapi-tests/testGCHeapPostBarriers.cpp.1337988 firefox-56.0/js/src/jsapi-tests/testGCHeapPostBarriers.cpp
---- firefox-56.0/js/src/jsapi-tests/testGCHeapPostBarriers.cpp.1337988	2017-09-14 22:16:02.000000000 +0200
-+++ firefox-56.0/js/src/jsapi-tests/testGCHeapPostBarriers.cpp	2017-09-25 10:34:11.206611695 +0200
-@@ -5,7 +5,6 @@
-  * License, v. 2.0. If a copy of the MPL was not distributed with this
-  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
--#include "mozilla/TypeTraits.h"
- #include "mozilla/UniquePtr.h"
- 
- #include "js/RootingAPI.h"
 diff -up firefox-56.0/js/src/vm/SharedMem.h.1337988 firefox-56.0/js/src/vm/SharedMem.h
 --- firefox-56.0/js/src/vm/SharedMem.h.1337988	2017-06-15 22:52:29.000000000 +0200
 +++ firefox-56.0/js/src/vm/SharedMem.h	2017-09-25 10:34:11.206611695 +0200
