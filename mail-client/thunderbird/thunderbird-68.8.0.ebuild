@@ -144,24 +144,6 @@ DEPEND="${CDEPEND}
 				pgo? ( =sys-libs/compiler-rt-sanitizers-9*[profile] )
 			)
 		)
-		(
-			sys-devel/clang:8
-			!clang? ( sys-devel/llvm:8 )
-			clang? (
-				=sys-devel/lld-8*
-				sys-devel/llvm:8
-				pgo? ( =sys-libs/compiler-rt-sanitizers-8*[profile] )
-			)
-		)
-		(
-			sys-devel/clang:7
-			!clang? ( sys-devel/llvm:7 )
-			clang? (
-				=sys-devel/lld-7*
-				sys-devel/llvm:7
-				pgo? ( =sys-libs/compiler-rt-sanitizers-7*[profile] )
-			)
-		)
 	)
 	pulseaudio? ( media-sound/pulseaudio )
 	>=virtual/rust-1.34.0
