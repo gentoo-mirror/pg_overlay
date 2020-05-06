@@ -14,24 +14,27 @@ DESCRIPTION="Workspace library to interact with the Plasma session manager"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+KEYWORDS="~amd64"
 IUSE=""
 
 COMMON_DEPEND="
+	>=dev-qt/qtdbus-${QTMIN}:5
+	>=dev-qt/qtx11extras-${QTMIN}:5
 	>=kde-frameworks/kcoreaddons-${KFMIN}:5
 	>=kde-frameworks/ki18n-${KFMIN}:5
 	>=kde-frameworks/kwindowsystem-${KFMIN}:5
 	>=kde-frameworks/plasma-${KFMIN}:5
 	>=kde-plasma/kscreenlocker-${PVCUT}:5
-	>=dev-qt/qtdbus-${QTMIN}:5
-	>=dev-qt/qtx11extras-${QTMIN}:5
 	x11-libs/libICE
 	x11-libs/libSM
 	x11-libs/libX11
 	x11-libs/libXau
 "
 DEPEND="${COMMON_DEPEND}
-	>=kde-plasma/kwin-${PVCUT}:5
+	|| (
+		>=kde-plasma/kwin-${PVCUT}:5
+		>=gui-wm/kwinft-$(ver_cut 1-2):5
+	)
 "
 RDEPEND="${COMMON_DEPEND}
 	!<kde-plasma/plasma-workspace-5.14.2:5
