@@ -15,7 +15,7 @@ DESCRIPTION="KDE Plasma workspace"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
+KEYWORDS="~amd64"
 IUSE="appstream +calendar geolocation gps qalculate qrcode +semantic-desktop systemd telemetry"
 
 REQUIRED_USE="gps? ( geolocation )"
@@ -69,7 +69,10 @@ COMMON_DEPEND="
 	>=kde-frameworks/plasma-${KFMIN}:5
 	>=kde-frameworks/solid-${KFMIN}:5
 	>=kde-plasma/kscreenlocker-${PVCUT}:5
-	>=kde-plasma/kwin-${PVCUT}:5
+	|| (
+		>=kde-plasma/kwin-${PVCUT}:5
+		>=gui-wm/kwinft-$(ver_cut 1-2):5
+	)
 	>=kde-plasma/libkscreen-${PVCUT}:5
 	>=kde-plasma/libksysguard-${PVCUT}:5
 	>=kde-plasma/libkworkspace-${PVCUT}:5
