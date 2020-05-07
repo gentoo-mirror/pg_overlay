@@ -114,6 +114,7 @@ dev-perl/XML-XPath 1.440.0: A XPath Perl Module
 dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
+dev-python/click 7.1.2: A Python package for creating beautiful command line interfaces
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
