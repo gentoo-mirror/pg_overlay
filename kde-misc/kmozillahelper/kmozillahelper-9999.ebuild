@@ -21,6 +21,7 @@ else
 fi
 
 LICENSE="MIT"
+SLOT="5"
 IUSE=""
 
 COMMON_DEPEND="
