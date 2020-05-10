@@ -204,7 +204,7 @@ sys-libs/llvm-libunwind 10.0.0: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.2_p20200411: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
-www-client/firefox 75.0 76.0: Firefox Web Browser
+www-client/firefox 75.0 76.0.1: Firefox Web Browser
 www-client/ungoogled-chromium 81.0.4044.122_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
