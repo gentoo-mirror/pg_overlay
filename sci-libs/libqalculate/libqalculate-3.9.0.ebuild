@@ -5,7 +5,7 @@ EAPI=7
 
 DESCRIPTION="A modern multi-purpose calculator library"
 HOMEPAGE="https://qalculate.github.io/"
-SRC_URI="https://github.com/Qalculate/${PN}/releases/download/v${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/Qalculate/${PN}/releases/download/v${PV}/${P}a.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0/21"
