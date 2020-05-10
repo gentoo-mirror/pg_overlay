@@ -1,13 +1,8 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
-mozilla-aarch64-startup-crash.patch
 mozilla-bmo1463035.patch
 mozilla-sandbox-fips.patch
-mozilla-fix-aarch64-libopus.patch
-mozilla-s390-context.patch
-mozilla-s390-bigendian.patch
 mozilla-reduce-rust-debuginfo.patch
-mozilla-ppc-altivec_static_inline.patch
 mozilla-bmo1005535.patch
 mozilla-bmo1568145.patch
 mozilla-bmo1504834-part1.patch
