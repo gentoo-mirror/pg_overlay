@@ -125,9 +125,9 @@ src_install() {
 
 	if use kde || use wxwidgets; then
 		make_wrapper 7zG "/usr/$(get_libdir)/${PN}/7zG"
-		make_wrapper 7zFM "/usr/$(get_libdir)/${PN}/7zFM"
+		#make_wrapper 7zFM "/usr/$(get_libdir)/${PN}/7zFM"
 
-		make_desktop_entry 7zFM "${PN} FM" ${PN} "GTK;Utility;Archiving;Compression"
+		#make_desktop_entry 7zFM "${PN} FM" ${PN} "GTK;Utility;Archiving;Compression"
 
 		dobin GUI/p7zipForFilemanager
 		exeinto /usr/$(get_libdir)/${PN}
