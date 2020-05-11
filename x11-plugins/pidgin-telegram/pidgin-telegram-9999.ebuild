@@ -35,8 +35,6 @@ BDEPEND="
 
 DOCS=( "AUTHORS" "CHANGELOG.md" "HACKING.md" "HACKING.BUILD.md" "README.md" )
 
-PATCHES="${FILESDIR}/${PN}-1.4.3-change-metadata-location.patch"
-
 src_prepare() {
 	default
 
