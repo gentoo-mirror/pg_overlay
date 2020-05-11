@@ -1,0 +1,8 @@
+# This file is deprecated as per GLEP 56 in favor of metadata.xml. Please add
+# your descriptions to your package's metadata.xml ONLY.
+# * generated automatically using egencache *
+
+mail-client/thunderbird:cross-lto - Enable ThinLTO across C++ and Rust code. Requires Clang and LDD linker
+mail-client/thunderbird:thinlto - Enable ThinLTO. Requires Clang and LDD linker
+www-client/firefox:cross-lto - Enable ThinLTO across C++ and Rust code. Requires Clang and LDD linker
+www-client/firefox:thinlto - Enable ThinLTO. Requires Clang and LDD linker
