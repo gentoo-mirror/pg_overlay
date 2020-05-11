@@ -3,6 +3,8 @@
 
 EAPI=7
 
+inherit git-r3
+
 DESCRIPTION="A libpurple protocol plugin that adds support for the Telegram messenger"
 HOMEPAGE="https://github.com/majn/telegram-purple"
 EGIT_REPO_URI="https://github.com/majn/telegram-purple.git"
