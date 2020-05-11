@@ -9,6 +9,7 @@
 	<flag name="bindist">Disable official Firefox branding (icons, name) which 
 		are not binary-redistributable according to upstream.</flag>
 	<flag name="clang">Use Clang compiler instead of GCC</flag>
+	<flag name="cross-lto">Enable ThinLTO across C++ and Rust code</flag>
 	<flag name="custom-optimization">Build with user-specified compiler optimizations
 		(-Os, -O0, -O1, -O2, -O3) from CFLAGS (unsupported)</flag>
 	<flag name="eme-free">Disable EME (DRM plugin) cabability at build time</flag>
@@ -36,6 +37,7 @@
 		installation with secure-delete enabled</flag>
 	<flag name="system-webp">Use the system-wide <pkg>media-libs/libwebp</pkg>
 		instead of bundled.</flag>
+	<flag name="thinlto">Enable ThinLTO</flag>
 
 
 </use>
