@@ -215,5 +215,5 @@ x11-libs/pango 1.44.7: Internationalized text layout and rendering library
 x11-libs/wxGTK 3.1.2-r300 3.1.3-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/xvfb-run 1.20.3_p1: Run a command in a virtual X server environment
-x11-plugins/pidgin-telegram 9999: A libpurple protocol plugin that adds support for the Telegram messenger
+x11-plugins/pidgin-telegram 1.4.9999 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-themes/adwaita-icon-theme 3.36.1: GNOME default icon theme
