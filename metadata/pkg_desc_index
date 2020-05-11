@@ -186,7 +186,7 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-print/cups-filters 1.27.2: Cups filters
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
-sci-libs/libqalculate 3.9.0: A modern multi-purpose calculator library
+sci-libs/libqalculate 3.10.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
