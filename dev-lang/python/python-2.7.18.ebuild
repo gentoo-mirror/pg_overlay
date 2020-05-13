@@ -88,7 +88,6 @@ src_prepare() {
 
 	local PATCHES=(
 		"${WORKDIR}/${PATCHSET}"
-		"${FILESDIR}/python-2.7.15-PGO-r1.patch"
 	)
 
 	default
@@ -214,7 +213,10 @@ src_compile() {
 	# Ensure sed works as expected
 	# https://bugs.gentoo.org/594768
 	local -x LC_ALL=C
-
+	# disable distcc and ccache
+	export DISTCC_HOSTS=""
+	export CCACHE_DISABLE=1
+	
 	# Avoid invoking pgen for cross-compiles.
 	touch Include/graminit.h Python/graminit.c
 
