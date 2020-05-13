@@ -24,7 +24,7 @@ RDEPEND="${PYTHON_DEPS}
 	')
 	gnome-base/gsettings-desktop-schemas
 	>=x11-libs/gtk+-3.20:3[introspection]
-	>=x11-libs/gtksourceview-3.20.0:3.0[introspection]
+	>=x11-libs/gtksourceview-4.4.0:4.0[introspection]
 	>=x11-libs/pango-1.34[introspection]
 	x11-themes/hicolor-icon-theme
 "
