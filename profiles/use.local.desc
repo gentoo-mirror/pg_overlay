@@ -3,6 +3,8 @@
 # * generated automatically using pmaint *
 
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
+app-arch/file-roller:nautilus - Build contextual menu extension for gnome-base/nautilus.
+app-arch/file-roller:packagekit - Enable support for the distro-neutral package manager GUI app-admin/packagekit
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/worker:avfs - Enable support for sys-fs/avfs
