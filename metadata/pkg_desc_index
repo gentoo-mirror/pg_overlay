@@ -36,7 +36,7 @@ dev-cpp/gtkmm 3.24.2: C++ interface for GTK+
 dev-cpp/mm-common 1.0.0: Build infrastructure and utilities for GNOME C++ bindings
 dev-cpp/pangomm 2.42.1: C++ interface for pango
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
-dev-lang/python 2.7.18 3.8.2-r2: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.18 3.8.3: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.43.1: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-lang/vala 0.48.4: Compiler for the GObject type system
