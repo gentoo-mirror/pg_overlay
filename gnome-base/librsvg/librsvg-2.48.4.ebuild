@@ -19,18 +19,18 @@ IUSE="debug +introspection tools vala"
 REQUIRED_USE="vala? ( introspection )"
 
 RDEPEND="
-	>=dev-libs/glib-2.52.3:2[${MULTILIB_USEDEP}]
-	>=x11-libs/cairo-1.12.14-r4[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
+	>=media-libs/freetype-2.8.0[${MULTILIB_USEDEP}]
+	>=x11-libs/cairo-1.16.0[${MULTILIB_USEDEP}]
 	>=x11-libs/pango-1.38.0[${MULTILIB_USEDEP}]
 	>=dev-libs/libxml2-2.9.1-r4:2[${MULTILIB_USEDEP}]
-	>=dev-libs/libcroco-0.6.8-r1[${MULTILIB_USEDEP}]
 	>=x11-libs/gdk-pixbuf-2.30.7:2[introspection?,${MULTILIB_USEDEP}]
 	introspection? ( >=dev-libs/gobject-introspection-0.10.8:= )
 	tools? ( >=x11-libs/gtk+-3.10.0:3 )
 "
 DEPEND="${RDEPEND}
+	>=virtual/rust-1.43.0[${MULTILIB_USEDEP}]
 	dev-libs/gobject-introspection-common
-	>=virtual/rust-1.20
 	>=dev-util/gtk-doc-am-1.13
 	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
 	vala? ( $(vala_depend) )
@@ -53,12 +53,13 @@ multilib_src_configure() {
 	# --disable-tools even when USE=tools; the tools/ subdirectory is useful
 	# only for librsvg developers
 	ECONF_SOURCE=${S} \
+	cross_compiling=yes \
 	gnome2_src_configure \
 		--disable-static \
 		--disable-tools \
 		$(use_enable debug) \
+		$(use_enable tools) \
 		$(multilib_native_use_enable introspection) \
-		$(multilib_native_use_with tools tools) \
 		$(multilib_native_use_enable vala) \
 		--enable-pixbuf-loader \
 		--disable-gtk-doc \
