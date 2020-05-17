@@ -252,6 +252,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-poppler-0.86.patch"
+	"${FILESDIR}/${PN}-boost-1.73.patch"
 	)
 
 S="${WORKDIR}/${PN}-${MY_PV}"
