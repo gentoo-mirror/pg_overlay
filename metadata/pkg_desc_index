@@ -197,6 +197,7 @@ sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalo
 sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system-wide services
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
+sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.6.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/libblockdev 2.23: A library for manipulating block devices
