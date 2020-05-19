@@ -4,7 +4,6 @@ app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/file-roller 3.36.2: Archive manager for GNOME
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
-app-arch/lzma 19.00: LZMA Stream Compressor from the SDK
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.4.0: Let's encrypt client to automate deployment of X.509 certificates
@@ -207,7 +206,7 @@ sys-libs/llvm-libunwind 10.0.0: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.2_p20200411: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
-www-client/firefox 75.0 76.0.1: Firefox Web Browser
+www-client/firefox 76.0.1: Firefox Web Browser
 www-client/ungoogled-chromium 81.0.4044.122_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
