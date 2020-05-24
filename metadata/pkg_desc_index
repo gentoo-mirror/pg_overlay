@@ -9,6 +9,10 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/certbot 1.4.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.4.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
+app-emulation/virtualbox 6.1.8: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox-additions 6.1.8: CD image containing guest additions for VirtualBox
+app-emulation/virtualbox-extpack-oracle 6.1.8.137981: PUEL extensions for VirtualBox
+app-emulation/virtualbox-modules 6.1.8: Kernel Modules for Virtualbox
 app-misc/ca-certificates 20190110.3.43: Common CA Certificates PEM files
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
