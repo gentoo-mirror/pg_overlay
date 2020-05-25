@@ -350,7 +350,7 @@ pkg_setup() {
 }
 
 multilib_src_configure() {
-	${EPYTHON} ${S}/bin/git_sha1_gen.py ${S}/include/git_sha1.h
+	${EPYTHON} ${S}/bin/git_sha1_gen.py --output ${S}/include/git_sha1.h
 	local emesonargs=()
 
 	if use classic; then
