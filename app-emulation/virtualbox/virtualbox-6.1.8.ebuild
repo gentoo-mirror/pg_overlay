@@ -207,7 +207,7 @@ src_prepare() {
 		eapply "${FILESDIR}"/virtualbox-5.2.8-paxmark-bldprogs.patch
 	fi
 
-	#eapply "${FILESDIR}"/gcc10.1_vbox_gcc_version.patch
+	eapply "${FILESDIR}"/fixes_for_gcc10.patch
 
 	eapply "${WORKDIR}/patches"
 
