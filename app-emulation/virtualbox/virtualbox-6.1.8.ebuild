@@ -267,7 +267,7 @@ src_compile() {
 		TOOL_GCC3_AS="$(tc-getCC)" TOOL_GCC3_AR="$(tc-getAR)" \
 		TOOL_GCC3_LD="$(tc-getCXX)" TOOL_GCC3_LD_SYSMOD="$(tc-getLD)" \
 		TOOL_GCC3_CFLAGS="${CFLAGS}" TOOL_GCC3_CXXFLAGS="${CXXFLAGS}" \
-		VBOX_GCC_OPT="${CXXFLAGS} -Wno-narrowing" \
+		VBOX_GCC_OPT="${CXXFLAGS}" \
 		TOOL_YASM_AS=yasm KBUILD_VERBOSE=2 \
 		VBOX_WITH_VBOXIMGMOUNT=1 \
 		all
