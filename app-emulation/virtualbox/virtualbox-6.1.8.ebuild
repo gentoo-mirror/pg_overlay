@@ -207,6 +207,8 @@ src_prepare() {
 		eapply "${FILESDIR}"/virtualbox-5.2.8-paxmark-bldprogs.patch
 	fi
 
+	eapply "${FILESDIR}"/gcc10.1_vbox_gcc_version.patch
+
 	eapply "${WORKDIR}/patches"
 
 	eapply_user
@@ -265,7 +267,7 @@ src_compile() {
 		TOOL_GCC3_AS="$(tc-getCC)" TOOL_GCC3_AR="$(tc-getAR)" \
 		TOOL_GCC3_LD="$(tc-getCXX)" TOOL_GCC3_LD_SYSMOD="$(tc-getLD)" \
 		TOOL_GCC3_CFLAGS="${CFLAGS}" TOOL_GCC3_CXXFLAGS="${CXXFLAGS}" \
-		VBOX_GCC_OPT="${CXXFLAGS}" \
+		VBOX_GCC_OPT="${CXXFLAGS} -Wno-narrowing" \
 		TOOL_YASM_AS=yasm KBUILD_VERBOSE=2 \
 		VBOX_WITH_VBOXIMGMOUNT=1 \
 		all
