@@ -332,7 +332,6 @@ meson_src_configure() {
 		--native-file "$(_meson_create_native_file)"
 		--optimization=3
 		-D b_lto=true
-		-D b_pgo=true
 	)
 
 	if tc-is-cross-compiler; then
