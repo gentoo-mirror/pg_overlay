@@ -321,7 +321,7 @@ meson_src_configure() {
 
 	local mesonargs=(
 		meson setup
-		--buildtype plain
+		--buildtype release
 		--libdir "$(get_libdir)"
 		--localstatedir "${EPREFIX}/var/lib"
 		--prefix "${EPREFIX}/usr"
