@@ -53,6 +53,7 @@ dev-libs/glib 2.64.1: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 66.1: International Components for Unicode
+dev-libs/jsoncpp 1.9.3_pre20200521: C++ JSON reader and writer
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.3: Standalone file import filter library for spreadsheet documents
