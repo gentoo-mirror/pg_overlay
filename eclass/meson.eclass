@@ -330,7 +330,7 @@ meson_src_configure() {
 		--build.pkg-config-path "${BUILD_PKG_CONFIG_PATH}${BUILD_PKG_CONFIG_PATH:+:}${EPREFIX}/usr/share/pkgconfig"
 		--pkg-config-path "${PKG_CONFIG_PATH}${PKG_CONFIG_PATH:+:}${EPREFIX}/usr/share/pkgconfig"
 		--native-file "$(_meson_create_native_file)"
-		--optimization=3
+		-Doptimization=3
 		-D b_lto=true
 	)
 
