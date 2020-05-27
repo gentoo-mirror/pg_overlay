@@ -520,7 +520,7 @@ qt5_base_configure() {
 			if tc-is-gcc; then
 				echo -platform linux-g++
 			elif tc-is-clang; then
-				echo -platform linux-clang-libc++
+				echo -platform linux-clang
 			fi
 		fi)
 
