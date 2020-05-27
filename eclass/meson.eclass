@@ -321,7 +321,7 @@ meson_src_configure() {
 
 	local mesonargs=(
 		meson setup
-		--buildtype plain
+		--buildtype release
 		--libdir "$(get_libdir)"
 		--localstatedir "${EPREFIX}/var/lib"
 		--prefix "${EPREFIX}/usr"
@@ -330,8 +330,6 @@ meson_src_configure() {
 		--build.pkg-config-path "${BUILD_PKG_CONFIG_PATH}${BUILD_PKG_CONFIG_PATH:+:}${EPREFIX}/usr/share/pkgconfig"
 		--pkg-config-path "${PKG_CONFIG_PATH}${PKG_CONFIG_PATH:+:}${EPREFIX}/usr/share/pkgconfig"
 		--native-file "$(_meson_create_native_file)"
-		-Doptimization=3
-		-Ddebug=false
 		-D b_lto=true
 	)
 
