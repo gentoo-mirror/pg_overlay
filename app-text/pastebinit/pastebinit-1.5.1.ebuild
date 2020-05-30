@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 PYTHON_REQ_USE="xml"
 
 inherit python-single-r1
@@ -26,7 +26,6 @@ RDEPEND="${PYTHON_DEPS}
 DEPEND="app-text/docbook-xsl-stylesheets"
 
 src_prepare() {
-	default
 	local mo=""
 
 	for lang in ${LINGUAS}; do
@@ -36,7 +35,7 @@ src_prepare() {
 	done
 
 	sed -i -e "/^build-mo/s/:.*/:${mo}/" po/Makefile || die
-	sed -i -e "/#!/s/python3/python/" pastebinit || die
+	eapply_user
 }
 
 src_compile() {

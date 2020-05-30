@@ -1,8 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit flag-o-matic gnome.org gnome2-utils linux-info meson multilib multilib-minimal python-any-r1 toolchain-funcs xdg
 
@@ -12,13 +12,17 @@ HOMEPAGE="https://www.gtk.org/"
 LICENSE="LGPL-2.1+"
 SLOT="2"
 IUSE="dbus debug elibc_glibc fam gtk-doc kernel_linux +mime selinux static-libs systemtap test utils xattr"
+RESTRICT="!test? ( test )"
 
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
 
 # * libelf isn't strictly necessary, but makes gresource tool more useful, and
 # the check is automagic in gio/meson.build. gresource is not a multilib tool
 # right now, thus it doesn't matter if non-native ABI libelf exists or not
 # (non-native binary is overwritten, it doesn't matter if libelf was linked to).
+# * elfutils (via libelf) does not build on Windows. gresources are not embedded
+# within ELF binaries on that platform anyway and inspecting ELF binaries from
+# other platforms is not that useful so exclude the dependency in this case.
 # * Technically static-libs is needed on zlib, util-linux and perhaps more, but
 # these are used by GIO, which glib[static-libs] consumers don't really seem
 # to need at all, thus not imposing the deps for now and once some consumers
@@ -35,7 +39,7 @@ RDEPEND="
 	kernel_linux? ( >=sys-apps/util-linux-2.23[${MULTILIB_USEDEP}] )
 	selinux? ( >=sys-libs/libselinux-2.2.2-r5[${MULTILIB_USEDEP}] )
 	xattr? ( !elibc_glibc? ( >=sys-apps/attr-2.4.47-r1[${MULTILIB_USEDEP}] ) )
-	virtual/libelf:0=
+	!kernel_Winnt? ( virtual/libelf:0= )
 	fam? ( >=virtual/fam-0-r1[${MULTILIB_USEDEP}] )
 "
 DEPEND="${RDEPEND}"
@@ -66,7 +70,7 @@ MULTILIB_CHOST_TOOLS=(
 )
 
 PATCHES=(
-	"${FILESDIR}"/${P}-mark-gdbus-server-auth-test-flaky.patch
+	"${FILESDIR}"/${PN}-2.64.1-mark-gdbus-server-auth-test-flaky.patch
 )
 
 pkg_setup() {
@@ -261,6 +265,13 @@ pkg_postinst() {
 		ewarn "your final image for performance reasons and re-run it when packages"
 		ewarn "installing GIO modules get upgraded or added to the image."
 	fi
+
+	for v in ${REPLACING_VERSIONS}; do
+		if ver_test "$v" "-lt" "2.63.6"; then
+			ewarn "glib no longer installs the gio-launch-desktop binary. You may need"
+			ewarn "to restart your session for \"Open With\" dialogs to work."
+		fi
+	done
 }
 
 pkg_postrm() {
