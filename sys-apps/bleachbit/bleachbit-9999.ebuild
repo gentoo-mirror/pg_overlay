@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="af ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa fi fr gl he hi hr hu ia id it ja ko ku ky lt lv ms my nb nds nl nn pl pt pt_BR ro ru se sk sl sq sr sv ta te th tr ug uk uz vi yi zh_CN zh_TW"
-PYTHON_COMPAT=( python3_8 )
+PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE="sqlite(+)"
 
 inherit desktop distutils-r1 l10n git-r3 virtualx

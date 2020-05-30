@@ -3,7 +3,7 @@
 
 EAPI=7
 GNOME_ORG_MODULE="gtk-doc"
-PYTHON_COMPAT=( python3_{6,7,8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit gnome.org python-single-r1 poly-c_gnome
 
