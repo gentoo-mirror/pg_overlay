@@ -3,12 +3,12 @@ DEPEND=app-text/docbook-xsl-stylesheets
 DESCRIPTION=A software that lets you send anything you want directly to a pastebin
 EAPI=7
 HOMEPAGE=https://launchpad.net/pastebinit
-IUSE=crypt python_single_target_python3_6 python_single_target_python3_7 python_single_target_python3_8
+IUSE=crypt python_single_target_python3_7 python_single_target_python3_8 python_single_target_python3_9
 KEYWORDS=amd64 x86
 LICENSE=GPL-2
-RDEPEND=python_single_target_python3_6? ( dev-lang/python:3.6[xml] >=dev-lang/python-exec-2:=[python_targets_python3_6] ) python_single_target_python3_7? ( dev-lang/python:3.7[xml] >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_8? ( dev-lang/python:3.8[xml] >=dev-lang/python-exec-2:=[python_targets_python3_8] ) python_single_target_python3_6? ( dev-python/configobj[python_targets_python3_6(-)] ) python_single_target_python3_7? ( dev-python/configobj[python_targets_python3_7(-)] ) python_single_target_python3_8? ( dev-python/configobj[python_targets_python3_8(-)] ) crypt? ( app-crypt/gnupg )
-REQUIRED_USE=^^ ( python_single_target_python3_6 python_single_target_python3_7 python_single_target_python3_8 )
+RDEPEND=python_single_target_python3_7? ( dev-lang/python:3.7[xml] >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_8? ( dev-lang/python:3.8[xml] >=dev-lang/python-exec-2:=[python_targets_python3_8] ) python_single_target_python3_9? ( dev-lang/python:3.9[xml] >=dev-lang/python-exec-2:=[python_targets_python3_9] ) python_single_target_python3_7? ( dev-python/configobj[python_targets_python3_7(-)] ) python_single_target_python3_8? ( dev-python/configobj[python_targets_python3_8(-)] ) python_single_target_python3_9? ( dev-python/configobj[python_targets_python3_9(-)] ) crypt? ( app-crypt/gnupg )
+REQUIRED_USE=^^ ( python_single_target_python3_7 python_single_target_python3_8 python_single_target_python3_9 )
 SLOT=0
 SRC_URI=https://github.com/felixonmars/pastebinit/archive/1.5.1.tar.gz -> pastebinit-1.5.1.tar.gz
 _eclasses_=multilib	0914eab919f4f11dd9e0407b92af4726	python-single-r1	2d2617a730e75e491e1d17af87841ec5	python-utils-r1	ace0a9a129fcfeaae542c0d15c07f36a	toolchain-funcs	d3e75048a89c0445838d2f44e5c65d97
-_md5_=178242a9f63aca67f18bd2b64fd59117
+_md5_=d01c12b0e62d5f1e852f3b0a0c0a425c
