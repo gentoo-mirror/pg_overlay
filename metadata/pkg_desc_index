@@ -38,7 +38,7 @@ dev-cpp/mm-common 1.0.0: Build infrastructure and utilities for GNOME C++ bindin
 dev-cpp/pangomm 2.42.1: C++ interface for pango
 dev-db/sqlite 3.32.0: SQL database engine
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
-dev-lang/python 2.7.18 3.8.3: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.18 3.8.3 3.9.0_beta1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.43.1: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-lang/vala 0.48.4: Compiler for the GObject type system
