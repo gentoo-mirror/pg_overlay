@@ -149,7 +149,7 @@ media-libs/libepoxy 1.5.4: Library for handling OpenGL function pointer manageme
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
-media-libs/shaderc 2020.4_pre20200405: Collection of tools, libraries and tests for shader compilation
+media-libs/shaderc 2020.4_pre20200526: Collection of tools, libraries and tests for shader compilation
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
