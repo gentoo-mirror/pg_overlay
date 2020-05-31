@@ -27,6 +27,7 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 "
 src_prepare() {
+    default
 	need-wxwidgets unicode
 	eapply \
 		"${FILESDIR}"/${PN}-disable-updates.patch \
