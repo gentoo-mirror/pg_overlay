@@ -27,8 +27,9 @@ DEPEND="${RDEPEND}
 	sys-devel/gettext
 "
 src_prepare() {
+    default
 	need-wxwidgets unicode
-	epatch \
+	eapply \
 		"${FILESDIR}"/${PN}-disable-updates.patch \
 		"${FILESDIR}"/${PN}-replace-gnu+11-with-c++11.patch \
 		"${FILESDIR}"/${PN}-stdlib.patch
