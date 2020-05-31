@@ -41,6 +41,7 @@ dev-cpp/gtkmm 3.24.2: C++ interface for GTK+
 dev-cpp/mm-common 1.0.0: Build infrastructure and utilities for GNOME C++ bindings
 dev-cpp/pangomm 2.42.1: C++ interface for pango
 dev-db/sqlite 3.32.0: SQL database engine
+dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
 dev-lang/python 2.7.18 3.8.3 3.9.0_beta1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.43.1: Systems programming language from Mozilla
@@ -121,11 +122,14 @@ dev-perl/XML-XPath 1.440.0: A XPath Perl Module
 dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
+dev-python/configargparse 1.2.3: Drop-in replacement for argparse supporting config files and env variables
 dev-python/configobj 5.0.6: Simple config file reader and writer
+dev-python/dbus-python 1.2.16: Python bindings for the D-Bus messagebus
 dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
 dev-python/josepy 1.3.0: JOSE protocol implementation in Python
 dev-python/numpy 1.18.3: Fast array and numerical python library
+dev-python/olefile 0.46: Python package to parse, read and write Microsoft OLE2 files
 dev-python/parsedatetime 2.5: Parse human-readable date/time strings
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
 dev-python/pillow 7.1.2: Python Imaging Library (fork)
@@ -133,13 +137,16 @@ dev-python/pycairo 1.19.1: Python bindings for the cairo library
 dev-python/pygobject 3.36.1: Python bindings for GObject Introspection
 dev-python/pymountboot 0.2.3: Python extension module to (re)mount /boot
 dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
+dev-python/pysol_cards 0.8.16: Deal PySol FreeCell cards
 dev-python/pyxdg 0.26-r1: A Python module to deal with freedesktop.org specifications
+dev-python/random2 1.0.1-r1: Python-2.7 random module ported to python-3
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/scandir 1.10.0-r1: A better directory iterator and faster os.walk()
 dev-python/setproctitle 1.1.10-r1: Allow customization of the process title
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
+dev-python/zstandard 0.13.0: Zstandard Bindings for Python
 dev-qt/qtwebkit 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.64.3: GDBus code and documentation generator
