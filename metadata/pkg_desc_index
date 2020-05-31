@@ -5,6 +5,7 @@ app-arch/file-roller 3.36.2: Archive manager for GNOME
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
+app-crypt/acme 1.4.0: An implementation of the ACME protocol
 app-crypt/certbot 1.4.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.4.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
@@ -23,10 +24,12 @@ app-misc/worker 4.4.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 6.4.4.2: A full office productivity suite
 app-office/libreoffice-l10n 6.4.4.2: Translations for the Libreoffice suite
 app-portage/eix 0.34.3: Search and query ebuilds
+app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-portage/smart-live-rebuild 9999: Check live packages for updates and emerge them as necessary
 app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
+app-text/asciidoc 9.0.0_rc2: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
@@ -122,22 +125,34 @@ dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
 dev-python/josepy 1.3.0: JOSE protocol implementation in Python
+dev-python/numpy 1.18.3: Fast array and numerical python library
 dev-python/parsedatetime 2.5: Parse human-readable date/time strings
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
+dev-python/pillow 7.1.2: Python Imaging Library (fork)
+dev-python/pycairo 1.19.1: Python bindings for the cairo library
+dev-python/pygobject 3.36.1: Python bindings for GObject Introspection
+dev-python/pymountboot 0.2.3: Python extension module to (re)mount /boot
+dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
+dev-python/pyxdg 0.26-r1: A Python module to deal with freedesktop.org specifications
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/scandir 1.10.0-r1: A better directory iterator and faster os.walk()
+dev-python/setproctitle 1.1.10-r1: Allow customization of the process title
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/gdbus-codegen 2.64.3: GDBus code and documentation generator
+dev-util/glib-utils 2.64.3: Build utilities for GLib using projects
 dev-util/gn 0.1726: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
-dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
+dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/meson 0.54.2: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
+dev-util/scons 3.1.2: Extensible Python-based build utility
+dev-vcs/mercurial 5.4: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.36.0: Collection of GSettings schemas for GNOME desktop
 gnome-base/librsvg 2.48.4: Scalable Vector Graphics (SVG) rendering library
@@ -145,6 +160,7 @@ gui-apps/waybar 0.9.2 9999: Highly customizable Wayland bar for Sway and Wlroots
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
+kde-frameworks/ki18n 5.70.0: Framework based on Gettext for internationalizing user interface text
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.18.4.4 5.18.90: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.8.1: Thunderbird Mail Client
@@ -205,6 +221,7 @@ sys-fs/xfsprogs 5.6.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/compiler-rt 10.0.1_rc1: Compiler runtime library for clang (built-in part)
 sys-libs/compiler-rt-sanitizers 10.0.1_rc1: Compiler runtime libraries for clang (sanitizers & xray)
+sys-libs/libblockdev 2.24: A library for manipulating block devices
 sys-libs/libcxx 10.0.1_rc1: New implementation of the C++ standard library, targeting C++11
 sys-libs/libcxxabi 10.0.1_rc1: Low level support for a standard C++ library
 sys-libs/libomp 10.0.1_rc1: OpenMP runtime library for LLVM/clang compiler

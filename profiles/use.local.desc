@@ -40,6 +40,7 @@ app-portage/eix:strong-security - Add many checks to prevent exploits if eix cod
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
+app-text/asciidoc:highlight - Enable source code highlighting
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
@@ -87,6 +88,7 @@ dev-perl/File-Which:pwhich - Install dev-perl/App-pwhich which used to be a part
 dev-perl/JSON:xs - Install C-based dev-perl/JSON-XS for faster performance
 dev-perl/Ref-Util:xs - Install C-Based dev-perl/Ref-Util-XS for accelerated performance
 dev-perl/Sub-Name:suggested - Install extra dependencies needed for extended regression tests
+dev-python/pillow:imagequant - Build with Image Quantization Library support
 dev-qt/qtwebkit:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebkit:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer using SLOT 1.0
@@ -95,6 +97,9 @@ dev-qt/qtwebkit:multimedia - Enable HTML5 audio/video support via dev-qt/qtmulti
 dev-qt/qtwebkit:orientation - Enable device orientation detection via dev-qt/qtsensors
 dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
+dev-vcs/mercurial:chg - Support Mercurial command server client
+dev-vcs/mercurial:gpg - Support signing with GnuPG.
+dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/waybar:mpd - Enable support for the Music Player Daemon
 gui-apps/waybar:network - Enable libnl support for network related features
@@ -339,6 +344,15 @@ sys-libs/compiler-rt-sanitizers:libfuzzer - Build fuzzing runtime.
 sys-libs/compiler-rt-sanitizers:profile - Build profiling runtime.
 sys-libs/compiler-rt-sanitizers:sanitize - Build sanitizer runtimes.
 sys-libs/compiler-rt-sanitizers:xray - Build XRay runtime.
+sys-libs/libblockdev:bcache - Enable block device cache support.
+sys-libs/libblockdev:cryptsetup - Enable sys-fs/cryptsetup support
+sys-libs/libblockdev:device-mapper - Enable support for device-mapper from sys-fs/lvm2
+sys-libs/libblockdev:dmraid - Support for dmraid devices, also known as ATA-RAID, or Fake RAID.
+sys-libs/libblockdev:escrow - Support for building crypto plugin with escrow device support
+sys-libs/libblockdev:kbd - Enable kernel block device support.
+sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-fs/lvm2.
+sys-libs/libblockdev:tools - Build tools
+sys-libs/libblockdev:vdo - Enable Virtual Data Optimizer support.
 sys-libs/libcxx:libcxxabi - Build on top of sys-libs/libcxxabi instead of gcc's libsupc++ (avoids depending on gcc).
 sys-libs/libcxx:libcxxrt - Build on top of libcxxrt instead of gcc's libsupc++ (avoids depending on gcc).
 sys-libs/libcxx:libunwind - Use libunwind instead of libgcc_s for stack unwinding, thus avoiding dependence on gcc.
