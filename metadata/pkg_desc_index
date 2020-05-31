@@ -122,6 +122,8 @@ dev-perl/XML-XPath 1.440.0: A XPath Perl Module
 dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
+dev-python/PyQt5 5.14.2: Python bindings for the Qt framework
+dev-python/PyQt5-sip 4.19.22 5.2.0: Private sip module for PyQt5
 dev-python/configargparse 1.2.3: Drop-in replacement for argparse supporting config files and env variables
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/dbus-python 1.2.16: Python bindings for the D-Bus messagebus
@@ -143,6 +145,7 @@ dev-python/random2 1.0.1-r1: Python-2.7 random module ported to python-3
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
 dev-python/scandir 1.10.0-r1: A better directory iterator and faster os.walk()
 dev-python/setproctitle 1.1.10-r1: Allow customization of the process title
+dev-python/sip 4.19.22 5.2.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
