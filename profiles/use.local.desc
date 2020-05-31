@@ -77,6 +77,9 @@ dev-libs/glib:mime - Pull in shared MIME database that many glib-based applicati
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap
 dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
 dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
+dev-libs/libgit2:gssapi - Enable GSSAPI support for SPNEGO auth
+dev-libs/libgit2:ssh - Enable SSH transport support
+dev-libs/libgit2:trace - Enable tracing support
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
@@ -113,6 +116,9 @@ dev-python/PyQt5:widgets - Build bindings for the QtWidgets module
 dev-python/PyQt5:x11extras - Build bindings for the QtX11Extras module
 dev-python/PyQt5:xmlpatterns - Build bindings for the QtXmlPatterns module
 dev-python/pillow:imagequant - Build with Image Quantization Library support
+dev-qt/qtdeclarative:localstorage - Build the LocalStorage import for QtQuick (requires QtSql)
+dev-qt/qtdeclarative:vulkan - Enable support for Vulkan
+dev-qt/qtdeclarative:widgets - Enable QtWidgets support
 dev-qt/qtwebkit:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebkit:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer using SLOT 1.0
@@ -170,6 +176,7 @@ media-libs/mesa:vulkan-overlay - Build vulkan-overlay-layer which displays Frame
 media-libs/mesa:wayland - Enable support for dev-libs/wayland
 media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
 media-libs/mesa:xvmc - Enable the XvMC acceleration interface for the Gallium3D Video Layer.
+media-libs/vulkan-loader:layers - Include the vulkan layers
 media-plugins/audacious-plugins:adplug - Build with AdPlug (Adlib sound card emulation) support
 media-plugins/audacious-plugins:ampache - Support controlling audacious via www-apps/ampache
 media-plugins/audacious-plugins:aosd - Enable support for Audacious OSD
@@ -338,6 +345,12 @@ net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with py
 net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/pidgin:zephyr - Enable Zephyr protocol support
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
+net-libs/nodejs:inspector - Enable V8 inspector
+net-libs/nodejs:npm - Enable NPM package manager
+net-libs/nodejs:pax_kernel - Enable building under a PaX enabled kernel
+net-libs/nodejs:snapshot - Enable snapshot creation for faster startup
+net-libs/nodejs:system-ssl - Use system OpenSSL instead of the bundled one
+net-libs/nodejs:systemtap - Enable SystemTAP/DTrace tracing
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
 net-nntp/nzbget:parcheck - Enable support for checking PAR archives
@@ -437,6 +450,7 @@ x11-libs/gtk+:cloudprint - Enable printing via Google Cloud Print.
 x11-libs/gtk+:colord - Use x11-misc/colord for color management in printing
 x11-libs/libva:drm - Enables VA/DRM API support.
 x11-libs/libva:utils - Install VA-API utility programs.
+x11-libs/libxcb:xkb - Enable the XCB keyboard extension
 x11-libs/pango:X - Build and install the legacy pangoxft library
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.

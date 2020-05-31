@@ -55,7 +55,9 @@ dev-libs/glib 2.64.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.1: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 67.1: International Components for Unicode
+dev-libs/libevdev 1.9.0: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
+dev-libs/libgit2 1.0.0-r1: A linkable library for Git
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.4: Standalone file import filter library for spreadsheet documents
 dev-libs/libsigc++ 3.0.3: Typesafe callback system for standard C++
@@ -150,10 +152,12 @@ dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-python/zstandard 0.13.0: Zstandard Bindings for Python
+dev-qt/qtdeclarative 5.15.0: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.64.3: GDBus code and documentation generator
 dev-util/glib-utils 2.64.3: Build utilities for GLib using projects
+dev-util/glslang 8.13.3560_pre20200404 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1726: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
@@ -162,6 +166,7 @@ dev-util/meson 0.54.2: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 3.1.2: Extensible Python-based build utility
+dev-util/spirv-tools 2020.4_pre20200529 9999: Provides an API and commands for processing SPIR-V modules
 dev-vcs/mercurial 5.4: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 gnome-base/gsettings-desktop-schemas 3.36.0: Collection of GSettings schemas for GNOME desktop
@@ -172,13 +177,16 @@ gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 kde-frameworks/ki18n 5.70.0: Framework based on Gettext for internationalizing user interface text
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
+kde-plasma/breeze-gtk 5.18.90: Official GTK+ port of Plasma's Breeze widget style
 kde-plasma/kwin 5.18.4.4 5.18.90: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.8.1: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Library for handling OpenGL function pointer management
+media-libs/libglvnd 1.3.1 9999: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libsndfile 1.0.29_pre2_p20191024: C library for reading and writing files containing sampled sound
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.4_pre20200526: Collection of tools, libraries and tests for shader compilation
+media-libs/vulkan-loader 1.2.137: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
@@ -205,6 +213,7 @@ media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.13.0-r8: GTK Instant Messenger client
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
+net-libs/nodejs 14.3.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r2: HTTP client library
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
@@ -247,10 +256,12 @@ x11-libs/cairo 1.17.2: A vector graphics library with cross-device output suppor
 x11-libs/gtk+ 2.24.32-r1 3.24.20: Gimp ToolKit +
 x11-libs/libva 2.7.1: Video Acceleration (VA) API for Linux
 x11-libs/libva-intel-driver 2.4.0: HW video decode support for Intel integrated graphics
+x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.44.7: Internationalized text layout and rendering library
 x11-libs/wxGTK 3.1.2-r300 3.1.3-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/mozo 1.24.0: Mozo menu editor for MATE
+x11-misc/xkeyboard-config 2.29: X keyboard configuration database
 x11-misc/xvfb-run 1.20.3_p1: Run a command in a virtual X server environment
 x11-plugins/pidgin-telegram 1.4.9999 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-themes/adwaita-icon-theme 3.36.1: GNOME default icon theme
