@@ -1,3 +1,4 @@
+app-admin/eclean-kernel 2.99.1: Remove outdated built kernels
 app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/file-roller 3.36.2: Archive manager for GNOME
@@ -120,6 +121,7 @@ dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
+dev-python/josepy 1.3.0: JOSE protocol implementation in Python
 dev-python/parsedatetime 2.5: Parse human-readable date/time strings
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
@@ -133,6 +135,7 @@ dev-util/gn 0.1726: GN is a meta-build system that generates build files for Nin
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6_pre: Translation tool for XML documents that uses gettext files and ITS rules
+dev-util/meson 0.54.2: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
@@ -193,17 +196,24 @@ sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat device
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system-wide services
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
+sys-devel/clang 10.0.1_rc1: C language family frontend for LLVM
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
+sys-devel/lld 10.0.1_rc1: The LLVM linker (link editor)
+sys-devel/llvm 10.0.1_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.6.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
+sys-libs/compiler-rt 10.0.1_rc1: Compiler runtime library for clang (built-in part)
+sys-libs/compiler-rt-sanitizers 10.0.1_rc1: Compiler runtime libraries for clang (sanitizers & xray)
 sys-libs/libcxx 10.0.1_rc1: New implementation of the C++ standard library, targeting C++11
 sys-libs/libcxxabi 10.0.1_rc1: Low level support for a standard C++ library
+sys-libs/libomp 10.0.1_rc1: OpenMP runtime library for LLVM/clang compiler
 sys-libs/llvm-libunwind 10.0.1_rc1: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.2_p20200411: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 www-client/firefox 76.0.1: Firefox Web Browser
+x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.32-r1 3.24.20: Gimp ToolKit +
