@@ -153,7 +153,7 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-python/zstandard 0.13.0: Zstandard Bindings for Python
 dev-qt/qtdeclarative 5.15.0: The QML and Quick modules for the Qt5 framework
-dev-qt/qtwebkit 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
+dev-qt/qtwebkit 5.212.0_pre20200309-r1 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.64.3: GDBus code and documentation generator
 dev-util/glib-utils 2.64.3: Build utilities for GLib using projects
