@@ -138,6 +138,7 @@ dev-python/parsedatetime 2.5: Parse human-readable date/time strings
 dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
 dev-python/pillow 7.1.2: Python Imaging Library (fork)
 dev-python/pycairo 1.19.1: Python bindings for the cairo library
+dev-python/pycryptodomex 3.9.7: A self-contained cryptographic library for Python
 dev-python/pygobject 3.36.1: Python bindings for GObject Introspection
 dev-python/pymountboot 0.2.3: Python extension module to (re)mount /boot
 dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
