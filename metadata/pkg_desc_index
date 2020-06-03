@@ -13,7 +13,7 @@ app-emulation/virtualbox 6.1.8: Family of powerful x86 virtualization products f
 app-emulation/virtualbox-additions 6.1.8: CD image containing guest additions for VirtualBox
 app-emulation/virtualbox-extpack-oracle 6.1.8.137981: PUEL extensions for VirtualBox
 app-emulation/virtualbox-modules 6.1.8: Kernel Modules for Virtualbox
-app-misc/ca-certificates 20190110.3.53: Common CA Certificates PEM files
+app-misc/ca-certificates 20200601.3.53: Common CA Certificates PEM files
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
@@ -214,7 +214,7 @@ media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.13.0-r8: GTK Instant Messenger client
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
-net-libs/nodejs 14.3.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
+net-libs/nodejs 14.4.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r2: HTTP client library
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
