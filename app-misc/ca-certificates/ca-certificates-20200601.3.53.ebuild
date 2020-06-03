@@ -59,7 +59,7 @@ fi
 
 LICENSE="MPL-1.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~m68k ~mips ppc ppc64 ~riscv s390 sparc x86 ~ppc-aix ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris ~x86-winnt"
 IUSE=""
 ${PRECOMPILED} || IUSE+=" cacert"
 
@@ -87,7 +87,15 @@ pkg_setup() {
 }
 
 src_unpack() {
-	${PRECOMPILED} || default
+	if ! ${PRECOMPILED}; then
+		default
+		# Initial 20200601 deb release had bad naming inside the debian source tarball.
+		DEB_S="${WORKDIR}/${PN}-${DEB_VER}"
+		DEB_BAD_S="${WORKDIR}/work"
+		if [[ -d "${DEB_BAD_S}" ]] && [[ ! -d "${DEB_S}" ]]; then
+			mv "${DEB_BAD_S}" "${DEB_S}"
+		fi
+	fi
 
 	# Do all the work in the image subdir to avoid conflicting with source
 	# dirs in ${WORKDIR}.  Need to perform everything in the offset #381937
