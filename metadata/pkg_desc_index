@@ -129,13 +129,11 @@ dev-python/PyQt5-sip 4.19.22 5.2.0: Private sip module for PyQt5
 dev-python/configargparse 1.2.3: Drop-in replacement for argparse supporting config files and env variables
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/dbus-python 1.2.16: Python bindings for the D-Bus messagebus
-dev-python/distro 1.4.0: Reliable machine-readable Linux distribution information for Python
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
 dev-python/josepy 1.3.0: JOSE protocol implementation in Python
 dev-python/numpy 1.18.3: Fast array and numerical python library
 dev-python/olefile 0.46: Python package to parse, read and write Microsoft OLE2 files
 dev-python/parsedatetime 2.5: Parse human-readable date/time strings
-dev-python/pbr 5.4.4: Inject some useful and sensible default behaviors into setuptools
 dev-python/pillow 7.1.2: Python Imaging Library (fork)
 dev-python/pycairo 1.19.1: Python bindings for the cairo library
 dev-python/pycryptodomex 3.9.7: A self-contained cryptographic library for Python
@@ -180,7 +178,7 @@ kde-frameworks/ki18n 5.70.0: Framework based on Gettext for internationalizing u
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/breeze-gtk 5.18.90: Official GTK+ port of Plasma's Breeze widget style
 kde-plasma/kwin 5.18.4.4 5.18.91: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 68.8.1: Thunderbird Mail Client
+mail-client/thunderbird 68.9.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Library for handling OpenGL function pointer management
 media-libs/libglvnd 1.3.1 9999: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
@@ -251,7 +249,7 @@ sys-libs/llvm-libunwind 10.0.1_rc1: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.2_p20200411: console display library
 sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
-www-client/firefox 76.0.1: Firefox Web Browser
+www-client/firefox 76.0.1 77.0.1: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
