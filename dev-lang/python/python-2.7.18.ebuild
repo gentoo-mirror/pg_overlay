@@ -196,8 +196,6 @@ src_configure() {
 		--with-system-expat
 		--with-system-ffi
 		--without-ensurepip
-		--enable-optimizations
-		--with-lto
 	)
 
 	OPT="" econf "${myeconfargs[@]}"
