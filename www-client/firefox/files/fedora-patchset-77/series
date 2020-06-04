@@ -7,7 +7,6 @@ rhbz-1354671.patch
 firefox-locale-debug.patch
 
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-mozilla-1639197.patch
 
 firefox-disable-ffvpx-with-vapi.patch
 firefox-vaapi-extra-frames.patch
