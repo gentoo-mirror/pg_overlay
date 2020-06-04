@@ -7,7 +7,6 @@ rhbz-1354671.patch
 firefox-locale-debug.patch
 
 Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
-bug1375074-save-restore-x28.patch
 mozilla-1580174-webrtc-popup.patch
 mozilla-1634293.patch
 mozilla-1639197.patch
