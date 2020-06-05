@@ -9,4 +9,4 @@ RDEPEND=sys-apps/pciutils >=sys-libs/efivar-25:=
 SLOT=0
 SRC_URI=https://github.com/rhboot/efibootmgr/archive/17.tar.gz -> efibootmgr-17.tar.gz
 _eclasses_=multilib	0914eab919f4f11dd9e0407b92af4726	toolchain-funcs	d3e75048a89c0445838d2f44e5c65d97
-_md5_=e8492c6d8e1d5f5eec9aef3934afa9dd
+_md5_=3ecc6446cdcdcb33e9a0a5083e325626

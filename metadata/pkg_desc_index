@@ -44,7 +44,7 @@ dev-db/sqlite 3.32.0: SQL database engine
 dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
 dev-lang/python 2.7.18 3.8.3 3.9.0_beta1: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.43.1: Systems programming language from Mozilla
+dev-lang/rust 1.44.0: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-lang/vala 0.48.4: Compiler for the GObject type system
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
