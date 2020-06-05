@@ -220,11 +220,6 @@ pkg_pretend() {
 		fi
 	fi
 
-	if ! use clang && [[ $(gcc-major-version) -eq 10 ]] ; then
-		# bug 727028
-		die "Using GCC 10 to compile firefox is currently known to be broken. Set USE=clang or select <gcc-10 to continue."
-	fi
-
 	# Ensure we have enough disk space to compile
 	if use pgo || use lto || use debug || use test ; then
 		CHECKREQS_DISK_BUILD="8G"
@@ -390,7 +385,7 @@ src_prepare() {
 		fi
 	done
 
-	! USE dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
+	! use dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -599,6 +594,7 @@ src_configure() {
 	# Set both --target and --host as mozilla uses python to guess values otherwise
 	mozconfig_annotate '' --target="${CHOST}"
 	mozconfig_annotate '' --host="${CBUILD:-${CHOST}}"
+	mozconfig_annotate '' --with-toolchain-prefix="${CHOST}-"
 	if use system-libevent ; then
 		mozconfig_annotate '' --with-system-libevent="${SYSROOT}${EPREFIX}"/usr
 	fi
