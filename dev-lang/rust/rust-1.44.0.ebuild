@@ -119,7 +119,6 @@ RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}"/0012-Ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/1.44.0-libressl.patch
 	"${FILESDIR}"/rust-pr71782-Use-a-non-existent-test-path.patch
 )
 
