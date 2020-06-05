@@ -18,7 +18,8 @@ RDEPEND="sys-apps/pciutils
 	>=sys-libs/efivar-25:="
 DEPEND="${RDEPEND}"
 
-PATCHES=("${FILESDIR}/efivar.patch")
+PATCHES=("${FILESDIR}/efivar.patch"
+	"${FILESDIR}/97668ae0bce776a36ea2001dea63d376be8274ac.patch")
 
 src_prepare() {
 	default

@@ -108,17 +108,19 @@ QA_FLAGS_IGNORED="
 	usr/lib/rustlib/.*/lib/lib.*.so
 "
 
+QA_SONAME="
+	usr/lib.*/lib.*.so
+	usr/lib.*/librustc_macros.*.s
+"
+
 # tests need a bit more work, currently they are causing multiple
 # re-compilations and somewhat fragile.
 RESTRICT="test"
 
-QA_SONAME="usr/lib.*/librustc_macros.*.so"
-
 PATCHES=(
-	"${FILESDIR}"/1.40.0-add-soname.patch
-	"${FILESDIR}"/rust-pr70123-ensure-llvm-is-in-the-link-path.patch
-	"${FILESDIR}"/rust-pr70591-ensure-llvm-is-in-the-link-path.patch
-	"${FILESDIR}"/rust-pr70163-prepare-for-llvm-10-upgrade.patch
+	"${FILESDIR}"/0012-Ignore-broken-and-non-applicable-tests.patch
+	"${FILESDIR}"/1.44.0-libressl.patch
+	"${FILESDIR}"/rust-pr71782-Use-a-non-existent-test-path.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -145,6 +147,8 @@ pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
 
+	# required to link agains system libs, otherwise
+	# crates use bundled sources and compile own static version
 	export LIBGIT2_SYS_USE_PKG_CONFIG=1
 	export LIBSSH2_SYS_USE_PKG_CONFIG=1
 	export PKG_CONFIG_ALLOW_CROSS=1
@@ -338,12 +342,12 @@ src_configure() {
 }
 
 src_compile() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
-	env $(cat "${S}"/config.env)\
+	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 }
 
 src_test() {
+	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
 	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
 		"${EPYTHON}" ./x.py test -vv --config="${S}"/config.toml -j$(makeopts_jobs) --no-doc --no-fail-fast \
 		src/test/codegen \
@@ -360,6 +364,7 @@ src_test() {
 }
 
 src_install() {
+	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
 	env $(cat "${S}"/config.env) DESTDIR="${D}" \
 		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml || die
 
