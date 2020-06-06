@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -9,12 +9,12 @@ DESCRIPTION="Multi-platform library designed to allow a developer to create robu
 HOMEPAGE="http://www.jedsoft.org/slang/"
 if [[ "${PV}" = *_pre* ]] ; then
 	MY_P="${PN}-pre${PV/_pre/-}"
-	SRC_URI="https://www.jedsoft.org/snapshots/${MY_P}.tar.gz"
+	SRC_URI="http://www.jedsoft.org/snapshots/${MY_P}.tar.gz"
 	S="${WORKDIR}/${MY_P}"
 else
 	SRC_URI="http://www.jedsoft.org/releases/${PN}/${P}.tar.bz2
 		http://www.jedsoft.org/releases/${PN}/old/${P}.tar.bz2"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x86-solaris"
 fi
 LICENSE="GPL-2"
 SLOT="0"
