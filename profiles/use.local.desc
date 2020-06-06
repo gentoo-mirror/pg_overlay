@@ -375,6 +375,7 @@ sys-devel/llvm:gold - Build the gold linker plugin
 sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
 sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
 sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
+sys-fs/android-file-transfer-linux:fuse - Add FUSE mount helper
 sys-libs/compiler-rt:clang - Force building using installed clang (rather than the default CC/CXX).
 sys-libs/compiler-rt-sanitizers:clang - Force building using installed clang (rather than the default CC/CXX).
 sys-libs/compiler-rt-sanitizers:libfuzzer - Build fuzzing runtime.
