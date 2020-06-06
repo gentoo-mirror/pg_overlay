@@ -44,6 +44,7 @@ src_prepare() {
 	l10n_find_plocales_changes lang "${PN}_" ".ts"
 	l10n_for_each_disabled_locale_do rem_locale
 
+	xdg_src_prepare
 	rm -rv quazip/ zlib/ || die
 }
 
