@@ -371,6 +371,7 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
 	# Fedora patches
+	! use wayland && rm "${FILESDIR}/fedora-patchset-$(get_major_version)"/mozilla-1634213.patch
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
