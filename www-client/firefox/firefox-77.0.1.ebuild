@@ -375,7 +375,7 @@ src_prepare() {
 
 	# Fedora patches
 	einfo "Applying Fedora's patches"
-	! use wayland && rm "${FILESDIR}/fedora-patchset-$(get_major_version)"/mozilla-1634213.patch
+	use wayland && eapply "${FILESDIR}/fedora-patchset-$(get_major_version)"/mozilla-1634213.patch
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
