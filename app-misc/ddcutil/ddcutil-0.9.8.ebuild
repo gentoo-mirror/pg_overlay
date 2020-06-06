@@ -53,7 +53,7 @@ src_prepare() {
 
 src_configure() {
 	# Bug 607818.
-	replace-flags -O3 -O2
+	#replace-flags -O3 -O2
 
 	local myeconfargs=(
 		$(use_enable drm)
