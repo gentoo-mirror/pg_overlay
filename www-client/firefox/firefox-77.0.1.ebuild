@@ -58,7 +58,7 @@ REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
 	thinlto? ( lto )
 	kde? ( !bindist )
-	|| ( cross-lto thinlto )"
+	^^ ( cross-lto thinlto )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
