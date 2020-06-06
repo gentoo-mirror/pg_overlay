@@ -198,6 +198,8 @@ src_prepare() {
 	# it's a shebang and make them executable. Then brp-mangle-shebangs gets upset...
 	find -name '*.rs' -type f -perm /111 -exec chmod -v -x '{}' '+'
 
+	use libressl && eapply ${FILESDIR}/${PV}-libressl.patch
+
 	default
 }
 
