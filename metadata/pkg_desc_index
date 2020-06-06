@@ -14,6 +14,7 @@ app-emulation/virtualbox-additions 6.1.10: CD image containing guest additions f
 app-emulation/virtualbox-extpack-oracle 6.1.10.138449: PUEL extensions for VirtualBox
 app-emulation/virtualbox-modules 6.1.10: Kernel Modules for Virtualbox
 app-misc/ca-certificates 20200601.3.53: Common CA Certificates PEM files
+app-misc/ddcutil 0.9.8: Program for querying and changing monitor settings
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
