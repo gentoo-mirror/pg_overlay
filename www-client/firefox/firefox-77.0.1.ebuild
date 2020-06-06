@@ -334,7 +334,7 @@ src_prepare() {
 		"${S}"/build/moz.configure/rust.configure || die
 
 	# OpenSUSE-KDE patchset
-
+	einfo Applying OpenSUSE-KDE patches
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
@@ -350,9 +350,11 @@ src_prepare() {
 	done
 
 	# Privacy-esr patches
+	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
 
 	# Debian patches
+	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(get_major_version)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
@@ -368,9 +370,11 @@ src_prepare() {
 	done
 
 	# FreeBSD patches
+	einfo "Applying FreeBSD's patches"
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
 
 	# Fedora patches
+	einfo "Applying Fedora's patches"
 	! use wayland && rm "${FILESDIR}/fedora-patchset-$(get_major_version)"/mozilla-1634213.patch
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p 2>/dev/null
