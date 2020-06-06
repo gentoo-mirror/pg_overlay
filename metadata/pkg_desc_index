@@ -237,6 +237,7 @@ sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
 sys-devel/lld 10.0.1_rc1: The LLVM linker (link editor)
 sys-devel/llvm 10.0.1_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
+sys-fs/udisks 2.9.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.6.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/compiler-rt 10.0.1_rc1: Compiler runtime library for clang (built-in part)
@@ -247,8 +248,8 @@ sys-libs/libcxx 10.0.1_rc1: New implementation of the C++ standard library, targ
 sys-libs/libcxxabi 10.0.1_rc1: Low level support for a standard C++ library
 sys-libs/libomp 10.0.1_rc1: OpenMP runtime library for LLVM/clang compiler
 sys-libs/llvm-libunwind 10.0.1_rc1: C++ runtime stack unwinder from LLVM
-sys-libs/ncurses 6.2_p20200411: console display library
-sys-libs/slang 2.3.3_pre19: Multi-platform library designed to allow a developer to create robust software
+sys-libs/ncurses 6.2_p20200531: console display library
+sys-libs/slang 2.3.3_pre24: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 www-client/firefox 77.0.1: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
@@ -265,4 +266,5 @@ x11-misc/mozo 1.24.0: Mozo menu editor for MATE
 x11-misc/xkeyboard-config 2.29: X keyboard configuration database
 x11-misc/xvfb-run 1.20.3_p1: Run a command in a virtual X server environment
 x11-plugins/pidgin-telegram 1.4.9999 9999: A libpurple protocol plugin that adds support for the Telegram messenger
-x11-themes/adwaita-icon-theme 3.36.1: GNOME default icon theme
+x11-plugins/purple-matrix 9999: Libpurple protocol plugin for matrix
+x11-themes/adwaita-icon-theme 3.37.2: GNOME default icon theme
