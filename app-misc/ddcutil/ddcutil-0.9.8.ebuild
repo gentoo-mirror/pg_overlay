@@ -12,7 +12,7 @@ SRC_URI="https://github.com/rockowitz/ddcutil/archive/v${PV}.tar.gz -> ${P}.tar.
 SLOT="0"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-IUSE="drm usb-monitor user-permissions video_cards_nvidia X"
+IUSE="drm +usb-monitor user-permissions video_cards_nvidia X"
 REQUIRED_USE="drm? ( X )"
 
 RDEPEND="dev-libs/glib:2
@@ -20,7 +20,6 @@ RDEPEND="dev-libs/glib:2
 	virtual/udev
 	drm? ( x11-libs/libdrm )
 	usb-monitor? (
-		dev-libs/hidapi
 		virtual/libusb:1
 		sys-apps/usbutils
 	)
