@@ -37,10 +37,6 @@ PATCH_DEV=dilfridge
 SRC_URI+=" https://dev.gentoo.org/~${PATCH_DEV}/distfiles/${P}-patches-${PATCH_VER}.tar.xz"
 SRC_URI+=" https://gitweb.gentoo.org/proj/locale-gen.git/snapshot/locale-gen-${LOCALE_GEN_VER}.tar.gz"
 SRC_URI+=" multilib? ( https://dev.gentoo.org/~dilfridge/distfiles/gcc-multilib-bootstrap-${GCC_BOOTSTRAP_VER}.tar.xz )"
-SRC_URI+="
-	https://dev.gentoo.org/~slyfox/distfiles/glibc-2.31-sparc-patch1-reg-kabi.patch
-	https://dev.gentoo.org/~slyfox/distfiles/glibc-2.31-sparc-patch2-reg-fix-clobber.patch
-"
 
 IUSE="audit caps cet compile-locales +crypt custom-cflags doc gd headers-only +multiarch multilib nscd profile selinux +ssp +static-libs static-pie suid systemtap test vanilla"
 
@@ -750,8 +746,6 @@ src_prepare() {
 	if ! use vanilla ; then
 		elog "Applying Gentoo Glibc Patchset ${RELEASE_VER}-${PATCH_VER}"
 		eapply "${WORKDIR}"/patches
-		#eapply "${DISTDIR}"/glibc-2.31-sparc-patch1-reg-kabi.patch
-		#eapply "${DISTDIR}"/glibc-2.31-sparc-patch2-reg-fix-clobber.patch
 		einfo "Done."
 	fi
 
