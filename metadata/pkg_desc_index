@@ -1,5 +1,5 @@
 app-admin/eclean-kernel 2.99.1: Remove outdated built kernels
-app-admin/profile-cleaner 2.37: Vacuum and reindex browser sqlite databases
+app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/file-roller 3.36.2: Archive manager for GNOME
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
