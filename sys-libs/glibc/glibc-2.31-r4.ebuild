@@ -750,8 +750,8 @@ src_prepare() {
 	if ! use vanilla ; then
 		elog "Applying Gentoo Glibc Patchset ${RELEASE_VER}-${PATCH_VER}"
 		eapply "${WORKDIR}"/patches
-		eapply "${DISTDIR}"/glibc-2.31-sparc-patch1-reg-kabi.patch
-		eapply "${DISTDIR}"/glibc-2.31-sparc-patch2-reg-fix-clobber.patch
+		#eapply "${DISTDIR}"/glibc-2.31-sparc-patch1-reg-kabi.patch
+		#eapply "${DISTDIR}"/glibc-2.31-sparc-patch2-reg-fix-clobber.patch
 		einfo "Done."
 	fi
 
