@@ -326,6 +326,8 @@ multilib_src_configure() {
 
 		# disable OCaml bindings (now in dev-ml/llvm-ocaml)
 		-DOCAMLFIND=NO
+		# Polly
+		-DLLVM_EXTERNAL_POLLY_SOURCE_DIR="${WORKDIR}/polly"
 	)
 
 	if is_libcxx_linked; then
