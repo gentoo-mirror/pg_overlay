@@ -264,9 +264,6 @@ get_distribution_components() {
 
 			# python modules
 			opt-viewer
-			# Polly
-			polly
-			install-polly-stripped
 		)
 
 		use doc && out+=(
@@ -331,6 +328,8 @@ multilib_src_configure() {
 		-DOCAMLFIND=NO
 		# Polly
 		-DLLVM_EXTERNAL_POLLY_SOURCE_DIR="${WORKDIR}/polly"
+		-DPOLLY_ENABLE_GPGPU_CODEGEN=ON
+		-DLLVM_POLLY_LINK_INTO_TOOLS=OFF
 	)
 
 	if is_libcxx_linked; then
