@@ -58,5 +58,5 @@ src_test() {
 src_install() {
 	cmake-utils_src_install
 	# LLD has no shared libraries, so strip it all for the time being
-	rm -r "${ED}"/usr/{include,lib*} || die
+	#rm -r "${ED}"/usr/{include,lib*} || die
 }
