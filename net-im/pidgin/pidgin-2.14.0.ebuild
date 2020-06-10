@@ -138,16 +138,13 @@ DYNAMIC_PRPLS="irc,jabber,oscar,simple"
 #	x11-plugins/pidgimpd
 
 PATCHES=(
-	"${FILESDIR}/${PN}-2.10.0-gold.patch"
+	"${FILESDIR}/${PN}-2.14.0-gold.patch"
 	"${WORKDIR}/${PN}-eds-3.6.patch"
 	"${FILESDIR}/${PN}-2.10.9-fix-gtkmedia.patch"
 	"${FILESDIR}/${PN}-2.10.10-eds-3.6-configure.ac.patch"
 	"${FILESDIR}/${PN}-2.10.11-tinfo.patch"
 	"${DISTDIR}/${PN}-2.10.9-irc_join_sleep.patch" # 577286
 	"${FILESDIR}/${PN}-2.13.0-disable-one-jid-test.patch" # 593338
-	"${FILESDIR}/${PN}-2.13.0-python3_support.patch" #459996
-	"${FILESDIR}/${PN}-2.13.0-gnutls_sni_support.patch" #708226
-	"${FILESDIR}/${PN}-2.13.0-fix-build-against-nm-1.0.patch"
 	"${FILESDIR}/${PN}-2.13.0-metainfo.patch"
 )
 
