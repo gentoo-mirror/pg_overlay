@@ -257,7 +257,6 @@ get_distribution_components() {
 			llvm-xray
 			obj2yaml
 			opt
-			polly
 			sancov
 			sanstats
 			verify-uselistorder
@@ -265,6 +264,9 @@ get_distribution_components() {
 
 			# python modules
 			opt-viewer
+			# Polly
+			polly
+			install-polly-stripped
 		)
 
 		use doc && out+=(
