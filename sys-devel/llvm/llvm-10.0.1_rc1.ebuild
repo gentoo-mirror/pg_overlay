@@ -257,6 +257,7 @@ get_distribution_components() {
 			llvm-xray
 			obj2yaml
 			opt
+			polly
 			sancov
 			sanstats
 			verify-uselistorder
