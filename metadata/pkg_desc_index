@@ -209,7 +209,7 @@ media-video/libva-utils 2.7.1: Collection of utilities and tests for VA-API
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.2: Multimedia processing graphs
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
-net-im/pidgin 2.13.0-r8: GTK Instant Messenger client
+net-im/pidgin 2.14.0: GTK Instant Messenger client
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 14.4.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
