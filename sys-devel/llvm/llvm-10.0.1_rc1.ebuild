@@ -9,7 +9,7 @@ inherit cmake-utils llvm.org multilib-minimal multiprocessing \
 
 DESCRIPTION="Low Level Virtual Machine"
 HOMEPAGE="https://llvm.org/"
-LLVM_COMPONENTS=( llvm )
+LLVM_COMPONENTS=( llvm polly )
 llvm.org_set_globals
 
 # Those are in lib/Targets, without explicit CMakeLists.txt mention
