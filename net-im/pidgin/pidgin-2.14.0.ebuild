@@ -138,7 +138,6 @@ DYNAMIC_PRPLS="irc,jabber,oscar,simple"
 #	x11-plugins/pidgimpd
 
 PATCHES=(
-	"${FILESDIR}/${PN}-2.14.0-gold.patch"
 	"${WORKDIR}/${PN}-eds-3.6.patch"
 	"${FILESDIR}/${PN}-2.10.9-fix-gtkmedia.patch"
 	"${FILESDIR}/${PN}-2.10.10-eds-3.6-configure.ac.patch"
