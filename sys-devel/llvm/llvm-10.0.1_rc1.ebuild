@@ -9,7 +9,7 @@ inherit cmake-utils llvm.org multilib-minimal multiprocessing \
 
 DESCRIPTION="Low Level Virtual Machine"
 HOMEPAGE="https://llvm.org/"
-LLVM_COMPONENTS=( llvm polly )
+LLVM_COMPONENTS=( llvm )
 llvm.org_set_globals
 
 # Those are in lib/Targets, without explicit CMakeLists.txt mention
@@ -326,9 +326,6 @@ multilib_src_configure() {
 
 		# disable OCaml bindings (now in dev-ml/llvm-ocaml)
 		-DOCAMLFIND=NO
-		# Polly
-		-DLLVM_EXTERNAL_POLLY_SOURCE_DIR="${WORKDIR}/polly"
-		-DLLVM_POLLY_LINK_INTO_TOOLS=OFF
 	)
 
 	if is_libcxx_linked; then
