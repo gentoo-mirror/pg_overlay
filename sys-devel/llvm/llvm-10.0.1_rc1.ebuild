@@ -243,7 +243,7 @@ multilib_src_configure() {
 		-DBUILD_SHARED_LIBS=OFF
 		-DLLVM_BUILD_LLVM_DYLIB=ON
 		-DLLVM_LINK_LLVM_DYLIB=ON
-		-DLLVM_DISTRIBUTION_COMPONENTS=$(get_distribution_components)
+		#-DLLVM_DISTRIBUTION_COMPONENTS=$(get_distribution_components)
 
 		# cheap hack: LLVM combines both anyway, and the only difference
 		# is that the former list is explicitly verified at cmake time
