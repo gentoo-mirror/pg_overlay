@@ -335,7 +335,7 @@ multilib_src_configure() {
 	use debug || local -x CPPFLAGS="${CPPFLAGS} -DNDEBUG"
 	cmake-utils_src_configure
 
-	multilib_is_native_abi && check_distribution_components
+	multilib_is_native_abi
 }
 
 multilib_src_compile() {
