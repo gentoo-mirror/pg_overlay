@@ -36,8 +36,7 @@ pkg_setup() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=OFF
-		-DLLVM_LINK_LLVM_DYLIB=ON
+		-DBUILD_SHARED_LIBS=ON
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 	)
 	use test && mycmakeargs+=(
@@ -53,8 +52,4 @@ src_configure() {
 src_test() {
 	local -x LIT_PRESERVES_TMP=1
 	cmake-utils_src_make check-polly
-}
-
-src_install() {
-	cmake-utils_src_install
 }
