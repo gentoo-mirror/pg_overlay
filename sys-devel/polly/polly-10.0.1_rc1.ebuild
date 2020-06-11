@@ -36,7 +36,7 @@ pkg_setup() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_SHARED_LIBS=OFF
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 	)
 	use test && mycmakeargs+=(
