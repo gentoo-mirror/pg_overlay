@@ -81,62 +81,6 @@ python_check_deps() {
 	has_version -b "dev-python/sphinx[${PYTHON_USEDEP}]"
 }
 
-check_distribution_components() {
-	if [[ ${CMAKE_MAKEFILE_GENERATOR} == ninja ]]; then
-		local all_targets=() my_targets=() l
-		cd "${BUILD_DIR}" || die
-
-		while read -r l; do
-			if [[ ${l} == install-*-stripped:* ]]; then
-				l=${l#install-}
-				l=${l%%-stripped*}
-
-				case ${l} in
-					# shared libs
-					LLVM|LLVMgold)
-						;;
-					# TableGen lib + deps
-					LLVMDemangle|LLVMSupport|LLVMTableGen)
-						;;
-					# static libs
-					LLVM*)
-						continue
-						;;
-					# meta-targets
-					distribution|llvm-libraries)
-						continue
-						;;
-				esac
-
-				all_targets+=( "${l}" )
-			fi
-		done < <(ninja -t targets all)
-
-		while read -r l; do
-			my_targets+=( "${l}" )
-		done < <(get_distribution_components $"\n")
-
-		local add=() remove=()
-		for l in "${all_targets[@]}"; do
-			if ! has "${l}" "${my_targets[@]}"; then
-				add+=( "${l}" )
-			fi
-		done
-		for l in "${my_targets[@]}"; do
-			if ! has "${l}" "${all_targets[@]}"; then
-				remove+=( "${l}" )
-			fi
-		done
-
-		if [[ ${#add[@]} -gt 0 || ${#remove[@]} -gt 0 ]]; then
-			eqawarn "get_distribution_components() is outdated!"
-			eqawarn "   Add: ${add[*]}"
-			eqawarn "Remove: ${remove[*]}"
-		fi
-		cd - >/dev/null || die
-	fi
-}
-
 src_prepare() {
 	# Fix llvm-config for shared linking and sane flags
 	# https://bugs.gentoo.org/show_bug.cgi?id=565358
