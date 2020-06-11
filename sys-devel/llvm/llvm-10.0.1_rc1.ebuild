@@ -240,9 +240,9 @@ multilib_src_configure() {
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
 		-DLLVM_LIBDIR_SUFFIX=${libdir#lib}
 
-		-DBUILD_SHARED_LIBS=OFF
-		-DLLVM_BUILD_LLVM_DYLIB=ON
-		-DLLVM_LINK_LLVM_DYLIB=ON
+		-DBUILD_SHARED_LIBS=ON
+		-DLLVM_BUILD_LLVM_DYLIB=OFF
+		-DLLVM_LINK_LLVM_DYLIB=OFF
 		#-DLLVM_DISTRIBUTION_COMPONENTS=$(get_distribution_components)
 
 		# cheap hack: LLVM combines both anyway, and the only difference
@@ -375,7 +375,7 @@ src_install() {
 }
 
 multilib_src_install() {
-	DESTDIR=${D} cmake-utils_src_make install-distribution
+	DESTDIR=${D} cmake-utils_src_make
 
 	# move headers to /usr/include for wrapping
 	rm -rf "${ED}"/usr/include || die
