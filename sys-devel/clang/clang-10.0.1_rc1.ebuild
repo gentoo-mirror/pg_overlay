@@ -96,7 +96,7 @@ multilib_src_configure() {
 		-DCLANG_RESOURCE_DIR="../../../../lib/clang/${clang_version}"
 
 		-DBUILD_SHARED_LIBS=ON
-		-DCLANG_LINK_CLANG_DYLIB=ON
+		-DCLANG_LINK_CLANG_DYLIB=OFF
 		#-DLLVM_DISTRIBUTION_COMPONENTS=$(get_distribution_components)
 
 		-DLLVM_TARGETS_TO_BUILD="${LLVM_TARGETS// /;}"
