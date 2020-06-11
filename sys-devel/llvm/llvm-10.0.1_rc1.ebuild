@@ -81,6 +81,62 @@ python_check_deps() {
 	has_version -b "dev-python/sphinx[${PYTHON_USEDEP}]"
 }
 
+check_distribution_components() {
+	if [[ ${CMAKE_MAKEFILE_GENERATOR} == ninja ]]; then
+		local all_targets=() my_targets=() l
+		cd "${BUILD_DIR}" || die
+
+		while read -r l; do
+			if [[ ${l} == install-*-stripped:* ]]; then
+				l=${l#install-}
+				l=${l%%-stripped*}
+
+				case ${l} in
+					# shared libs
+					LLVM|LLVMgold)
+						;;
+					# TableGen lib + deps
+					LLVMDemangle|LLVMSupport|LLVMTableGen)
+						;;
+					# static libs
+					LLVM*)
+						continue
+						;;
+					# meta-targets
+					distribution|llvm-libraries)
+						continue
+						;;
+				esac
+
+				all_targets+=( "${l}" )
+			fi
+		done < <(ninja -t targets all)
+
+		while read -r l; do
+			my_targets+=( "${l}" )
+		done < <(get_distribution_components $"\n")
+
+		local add=() remove=()
+		for l in "${all_targets[@]}"; do
+			if ! has "${l}" "${my_targets[@]}"; then
+				add+=( "${l}" )
+			fi
+		done
+		for l in "${my_targets[@]}"; do
+			if ! has "${l}" "${all_targets[@]}"; then
+				remove+=( "${l}" )
+			fi
+		done
+
+		if [[ ${#add[@]} -gt 0 || ${#remove[@]} -gt 0 ]]; then
+			eqawarn "get_distribution_components() is outdated!"
+			eqawarn "   Add: ${add[*]}"
+			eqawarn "Remove: ${remove[*]}"
+		fi
+		cd - >/dev/null || die
+	fi
+}
+
 src_prepare() {
 	# Fix llvm-config for shared linking and sane flags
 	# https://bugs.gentoo.org/show_bug.cgi?id=565358
@@ -240,10 +296,10 @@ multilib_src_configure() {
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
 		-DLLVM_LIBDIR_SUFFIX=${libdir#lib}
 
-		-DBUILD_SHARED_LIBS=ON
-		-DLLVM_BUILD_LLVM_DYLIB=OFF
-		-DLLVM_LINK_LLVM_DYLIB=OFF
-		#-DLLVM_DISTRIBUTION_COMPONENTS=$(get_distribution_components)
+		-DBUILD_SHARED_LIBS=OFF
+		-DLLVM_BUILD_LLVM_DYLIB=ON
+		-DLLVM_LINK_LLVM_DYLIB=ON
+		-DLLVM_DISTRIBUTION_COMPONENTS=$(get_distribution_components)
 
 		# cheap hack: LLVM combines both anyway, and the only difference
 		# is that the former list is explicitly verified at cmake time
@@ -335,7 +391,7 @@ multilib_src_configure() {
 	use debug || local -x CPPFLAGS="${CPPFLAGS} -DNDEBUG"
 	cmake-utils_src_configure
 
-	multilib_is_native_abi
+	multilib_is_native_abi && check_distribution_components
 }
 
 multilib_src_compile() {
@@ -375,7 +431,7 @@ src_install() {
 }
 
 multilib_src_install() {
-	DESTDIR=${D} cmake-utils_src_install
+	DESTDIR=${D} cmake-utils_src_make install-distribution
 
 	# move headers to /usr/include for wrapping
 	rm -rf "${ED}"/usr/include || die

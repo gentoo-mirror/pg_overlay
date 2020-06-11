@@ -36,7 +36,7 @@ pkg_setup() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_SHARED_LIBS=OFF
 
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 	)
@@ -53,4 +53,10 @@ src_configure() {
 src_test() {
 	local -x LIT_PRESERVES_TMP=1
 	cmake-utils_src_make check-lld
+}
+
+src_install() {
+	cmake-utils_src_install
+	# LLD has no shared libraries, so strip it all for the time being
+	rm -r "${ED}"/usr/{include,lib*} || die
 }
