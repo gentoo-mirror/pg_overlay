@@ -184,6 +184,9 @@ get_distribution_components() {
 		LLVMDemangle
 		LLVMSupport
 		LLVMTableGen
+		#
+		bugpoint
+		opt
 	)
 
 	if multilib_is_native_abi; then
