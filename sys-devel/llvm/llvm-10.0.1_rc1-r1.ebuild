@@ -18,7 +18,8 @@ llvm.org_set_globals
 
 # Keep in sync with CMakeLists.txt
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
-	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
+	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore
+	"${ALL_LLVM_EXPERIMENTAL_TARGETS[@]}" )
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 
 # Additional licenses:
@@ -144,7 +145,7 @@ multilib_src_configure() {
 		-DLLVM_ENABLE_RTTI=ON
 		-DLLVM_ENABLE_Z3_SOLVER=$(usex z3)
 
-		-DWITH_POLLY=OFF # TODO
+		-DWITH_POLLY=ON # TODO
 
 		-DLLVM_HOST_TRIPLE="${CHOST}"
 
