@@ -93,7 +93,7 @@ check_distribution_components() {
 
 				case ${l} in
 					# shared libs
-					LLVM|LLVMgold)
+					LLVM|LLVMgold|Polly)
 						;;
 					# TableGen lib + deps
 					LLVMDemangle|LLVMSupport|LLVMTableGen)
