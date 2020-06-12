@@ -172,6 +172,7 @@ get_distribution_components() {
 		LLVM
 		LTO
 		Remarks
+		Polly
 
 		# tools
 		llvm-config
@@ -264,8 +265,6 @@ get_distribution_components() {
 
 			# python modules
 			opt-viewer
-			#
-			polly
 		)
 
 		use doc && out+=(
