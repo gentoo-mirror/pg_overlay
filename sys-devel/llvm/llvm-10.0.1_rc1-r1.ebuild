@@ -106,8 +106,6 @@ check_distribution_components() {
 					distribution|llvm-libraries)
 						continue
 						;;
-					opt);;
-					bugpoint);;
 				esac
 
 				all_targets+=( "${l}" )
@@ -267,8 +265,7 @@ get_distribution_components() {
 			# python modules
 			opt-viewer
 			#
-			bugpoint
-			opt
+			polly
 		)
 
 		use doc && out+=(
