@@ -22,8 +22,10 @@ llvm.org_set_globals
 S=${WORKDIR}/x/y/clang
 
 # Keep in sync with sys-devel/llvm
+ALL_LLVM_EXPERIMENTAL_TARGETS=( ARC AVR )
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
-	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
+	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore
+	"${ALL_LLVM_EXPERIMENTAL_TARGETS[@]}" )
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
