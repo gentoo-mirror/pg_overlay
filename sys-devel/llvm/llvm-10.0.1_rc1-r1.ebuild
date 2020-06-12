@@ -13,7 +13,7 @@ DESCRIPTION="Low Level Virtual Machine"
 HOMEPAGE="https://llvm.org/"
 SRC_URI="
 	!doc? ( https://dev.gentoo.org/~mgorny/dist/llvm/${MANPAGE_P}.tar.bz2 )"
-LLVM_COMPONENTS=( llvm )
+LLVM_COMPONENTS=( llvm polly )
 llvm.org_set_globals
 
 # Those are in lib/Targets, without explicit CMakeLists.txt mention
@@ -158,6 +158,9 @@ multilib_src_configure() {
 
 		# disable OCaml bindings (now in dev-ml/llvm-ocaml)
 		-DOCAMLFIND=NO
+		#
+		-DLLVM_EXTERNAL_POLLY_SOURCE_DIR="${WORKDIR}/polly"
+		-DLLVM_ENABLE_PROJECTS=polly
 	)
 
 	if is_libcxx_linked; then
