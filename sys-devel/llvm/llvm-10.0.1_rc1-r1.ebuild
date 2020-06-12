@@ -160,7 +160,6 @@ multilib_src_configure() {
 		-DOCAMLFIND=NO
 		#
 		-DLLVM_EXTERNAL_POLLY_SOURCE_DIR="${WORKDIR}/polly"
-		-DLLVM_ENABLE_PROJECTS=polly
 	)
 
 	if is_libcxx_linked; then
