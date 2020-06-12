@@ -93,7 +93,7 @@ check_distribution_components() {
 
 				case ${l} in
 					# shared libs
-					LLVM|LLVMgold)
+					LLVM|LLVMgold|Polly)
 						;;
 					# TableGen lib + deps
 					LLVMDemangle|LLVMSupport|LLVMTableGen)
@@ -172,6 +172,7 @@ get_distribution_components() {
 		LLVM
 		LTO
 		Remarks
+		Polly
 
 		# tools
 		llvm-config
@@ -184,9 +185,6 @@ get_distribution_components() {
 		LLVMDemangle
 		LLVMSupport
 		LLVMTableGen
-		#
-		bugpoint
-		opt
 	)
 
 	if multilib_is_native_abi; then
