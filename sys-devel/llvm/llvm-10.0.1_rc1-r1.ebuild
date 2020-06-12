@@ -106,6 +106,8 @@ check_distribution_components() {
 					distribution|llvm-libraries)
 						continue
 						;;
+					opt);;
+					bugpoint);;
 				esac
 
 				all_targets+=( "${l}" )
