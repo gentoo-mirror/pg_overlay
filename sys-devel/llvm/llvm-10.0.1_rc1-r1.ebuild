@@ -184,9 +184,6 @@ get_distribution_components() {
 		LLVMDemangle
 		LLVMSupport
 		LLVMTableGen
-		#
-		bugpoint
-		opt
 	)
 
 	if multilib_is_native_abi; then
@@ -267,6 +264,9 @@ get_distribution_components() {
 
 			# python modules
 			opt-viewer
+			#
+			bugpoint
+			opt
 		)
 
 		use doc && out+=(
