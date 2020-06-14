@@ -175,6 +175,26 @@ gui-apps/waybar 0.9.2 9999: Highly customizable Wayland bar for Sway and Wlroots
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
+kde-apps/ark 20.04.2: KDE Archiving tool
+kde-apps/dolphin 20.04.2: Plasma filemanager focusing on usability
+kde-apps/dolphin-plugins-git 20.04.2: Dolphin plugin for Git integration
+kde-apps/gwenview 20.04.2: Image viewer by KDE
+kde-apps/kate 20.04.2: Multi-document editor with network transparency, Plasma integration and more
+kde-apps/kcalc 20.04.2: KDE calculator
+kde-apps/kdialog 20.04.2: Can be used to show nice dialog boxes from shell scripts
+kde-apps/kfind 20.04.2: File finder utility based on KDE Frameworks
+kde-apps/kio-extras 20.04.2-r1: KIO plugins present a filesystem-like view of arbitrary data
+kde-apps/kipi-plugins 20.04.2: Plugins for the KDE Image Plugin Interface
+kde-apps/kolourpaint 20.04.2: Paint Program by KDE
+kde-apps/kompare 20.04.2: A program to view the differences between files
+kde-apps/konsole 20.04.2: KDE's terminal emulator
+kde-apps/kpat 20.04.2: KDE patience game
+kde-apps/libkdegames 20.04.2: Base library common to many KDE games
+kde-apps/libkipi 20.04.2: A library for image plugins accross KDE applications
+kde-apps/libkomparediff2 20.04.2: KDE library to compare files and strings
+kde-apps/okular 20.04.2: Universal document viewer based on KDE Frameworks
+kde-apps/spectacle 20.04.2: Screenshot capture utility
+kde-apps/sweeper 20.04.2: Privacy settings widget to clean unwanted traces on the system
 kde-frameworks/ki18n 5.70.0: Framework based on Gettext for internationalizing user interface text
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.18.4.4 5.19.0: Flexible, composited Window Manager for windowing systems on Linux

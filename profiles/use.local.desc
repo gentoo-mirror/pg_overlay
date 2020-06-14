@@ -137,6 +137,41 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/waybar:mpd - Enable support for the Music Player Daemon
 gui-apps/waybar:network - Enable libnl support for network related features
 gui-apps/waybar:tray - Enable support for tray
+kde-apps/ark:zip - Enable ZIP archive support via dev-libs/libzip
+kde-apps/dolphin:activities - Track which folders are frequently accessed on a Plasma desktop
+kde-apps/gwenview:activities - Enable kactivities support
+kde-apps/gwenview:fits - Enable support for NASA's sci-libs/cfitsio library
+kde-apps/gwenview:kipi - Enable support for the KDE Image Plugin Interface
+kde-apps/gwenview:mpris - Enable support for MPRIS2 interface, requiring dev-qt/qtdbus as dependency.
+kde-apps/gwenview:share - Enable support for a share menu using kde-frameworks/purpose
+kde-apps/kate:activities - Enable Plasma Activities support via kde-frameworks/kactivities
+kde-apps/kate:filebrowser - Enable File System browser tool view
+kde-apps/kate:lspclient - Enable LSP (Language Server Protocol) client plugin
+kde-apps/kate:plasma - Enable Session Applet addon for KDE Plasma
+kde-apps/kate:projects - Enable Project plugin for executing queries on SQL DBs
+kde-apps/kate:snippets - Enable Snippets Tool View plugin to manage or download code snippets
+kde-apps/kate:sql - Enable SQL plugin for executing queries on SQL DBs
+kde-apps/kio-extras:activities - Enable activities kioslave and fileitem plugin
+kde-apps/kio-extras:man - Enable manpages kioslave
+kde-apps/kio-extras:nfs - Enable NFS support using net-libs/libtirpc
+kde-apps/kio-extras:phonon - Enable file audio preview plugin using media-libs/phonon
+kde-apps/kio-extras:sftp - Enable SFTP protocol support using net-libs/libssh
+kde-apps/kio-extras:taglib - Enable audio thumbnails via media-libs/taglib
+kde-apps/kipi-plugins:flashexport - Build the flash export plugin
+kde-apps/kipi-plugins:mediawiki - Build the mediawiki export plugin
+kde-apps/kipi-plugins:remotestorage - Build plugin for remote storage using network protocols such as FTP, SSH, SAMBA via kde-frameworks/kio
+kde-apps/kipi-plugins:vkontakte - Build plugin for vkontakte.ru
+kde-apps/okular:chm - Enable support for Microsoft Compiled HTML Help files
+kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
+kde-apps/okular:image-backend - Enable image viewing support
+kde-apps/okular:markdown - Enable Markdown support via app-text/discount
+kde-apps/okular:mobi - Enable mobipocket support
+kde-apps/okular:mobile - Enable Plasma mobile support
+kde-apps/okular:plucker - Enable Plucker E-Book for Palm OS devices support
+kde-apps/okular:share - Enable support for a share menu using kde-frameworks/purpose
+kde-apps/okular:speech - Enable text-to-speech support
+kde-apps/spectacle:kipi - Enable support for the KDE Image Plugin Interface
+kde-apps/spectacle:share - Enable support for a share menu using kde-frameworks/purpose
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
 mail-client/thunderbird:bindist - Disable official Firefox branding (icons, name) which are not binary-redistributable according to upstream.
