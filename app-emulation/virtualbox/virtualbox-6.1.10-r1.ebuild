@@ -13,7 +13,7 @@ MY_P=VirtualBox-${MY_PV}
 DESCRIPTION="Family of powerful x86 virtualization products for enterprise and home use"
 HOMEPAGE="https://www.virtualbox.org/"
 SRC_URI="https://download.virtualbox.org/virtualbox/${MY_PV}/${MY_P}.tar.bz2
-	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-6.1.14-patches-01.tar.xz"
+	https://dev.gentoo.org/~polynomial-c/${PN}/patchsets/${PN}-6.1.10-patches-01.tar.xz"
 
 LICENSE="GPL-2 dtrace? ( CDDL )"
 SLOT="0"
@@ -206,8 +206,6 @@ src_prepare() {
 	if use pax_kernel ; then
 		eapply "${FILESDIR}"/virtualbox-5.2.8-paxmark-bldprogs.patch
 	fi
-
-	eapply "${FILESDIR}"/fixes_for_gcc10.patch
 
 	eapply "${WORKDIR}/patches"
 
