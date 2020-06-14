@@ -6,7 +6,7 @@ EAPI=7
 ECM_HANDBOOK="optional"
 ECM_TEST="true"
 KFMIN=5.70.0
-QTMIN=5.12.3
+QTMIN=5.14.1
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -52,12 +52,6 @@ DEPEND="
 	X? ( x11-libs/libX11 )
 "
 RDEPEND="${DEPEND}"
-
-PATCHES=(
-	"${FILESDIR}/${P}-crash-on-close.patch" # bug 723214, in 20.04.2
-	"${FILESDIR}/${P}-qt-5.15-set-text-encoding-crash.patch" # KDE-Bug 419526; pending
-	"${FILESDIR}/${P}-segfault-on-close.patch" # KDE-Bug 415762; pending
-)
 
 src_configure() {
 	local mycmakeargs=(
