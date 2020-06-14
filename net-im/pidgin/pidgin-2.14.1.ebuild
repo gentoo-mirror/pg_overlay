@@ -177,8 +177,8 @@ src_prepare() {
 
 src_configure() {
 	# Stabilize things, for your own good
-	strip-flags
-	replace-flags -O? -O2
+	#strip-flags
+	#replace-flags -O? -O2
 	use pie && append-cflags -fPIE -pie
 
 	use gadu 	&& DYNAMIC_PRPLS+=",gg"
