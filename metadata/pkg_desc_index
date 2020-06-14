@@ -53,7 +53,7 @@ dev-libs/boost 1.73.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/date 2.4.1_p20200125: A date and time library based on the C++11/14/17 <chrono> header
 dev-libs/glib 2.64.3: The GLib library of C routines
-dev-libs/gobject-introspection 1.64.1: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection 1.64.1-r1: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
 dev-libs/icu 67.1: International Components for Unicode
 dev-libs/libevdev 1.9.0: Handler library for evdev events
