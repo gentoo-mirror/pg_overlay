@@ -19,8 +19,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.4.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 6.4.4.2: A full office productivity suite
-app-office/libreoffice-l10n 6.4.4.2: Translations for the Libreoffice suite
+app-office/libreoffice 6.4.5.1: A full office productivity suite
+app-office/libreoffice-l10n 6.4.5.1: Translations for the Libreoffice suite
 app-portage/eix 0.34.4: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
@@ -152,7 +152,7 @@ dev-qt/qtwebkit 5.212.0_pre20200309-r1 5.212.0_pre20200414: WebKit rendering lib
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.64.3: GDBus code and documentation generator
 dev-util/glib-utils 2.64.3: Build utilities for GLib using projects
-dev-util/glslang 8.13.3560_pre20200404 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
+dev-util/glslang 8.13.3743-r1 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1726: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
