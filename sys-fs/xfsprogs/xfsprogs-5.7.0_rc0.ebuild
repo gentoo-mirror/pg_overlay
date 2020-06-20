@@ -12,7 +12,7 @@ SRC_URI="https://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git/snapshot/${PN}-dev-
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 IUSE="icu libedit nls readline"
 
 LIB_DEPEND=">=sys-apps/util-linux-2.17.2[static-libs(+)]
@@ -66,11 +66,16 @@ src_configure() {
 
 	#unset PLATFORM # if set in user env, this breaks configure
 
+	# Avoid automagic on libdevmapper, #709694
+	export ac_cv_search_dm_task_create=no
+
+	# Build fails with -O3 (bug #712698)
+	#replace-flags -O3 -O2
+
 	# Upstream does NOT support --disable-static anymore,
 	# https://www.spinics.net/lists/linux-xfs/msg30185.html
 	# https://www.spinics.net/lists/linux-xfs/msg30272.html
 	local myconf=(
-		--enable-lto #655638
 		--enable-blkid
 		--with-crond-dir="${EPREFIX}/etc/cron.d"
 		--without-systemd-unit-dir
@@ -80,20 +85,10 @@ src_configure() {
 		$(usex readline --disable-editline $(use_enable libedit editline))
 	)
 
-	if is-flagq -fno-lto ; then
-		einfo "LTO disabled via {C,CXX,F,FC}FLAGS"
-		myconf+=( --disable-lto )
+	if is-flagq -flto ; then
+		myconf+=( --enable-lto )
 	else
-		if is-flagq -flto ; then
-			einfo "LTO forced via {C,CXX,F,FC}FLAGS"
-			myconf+=( --enable-lto )
-		elif use amd64 || use x86  ; then
-			# match upstream default
-			myconf+=( --enable-lto )
-		else
-			# LTO can cause problems on some architectures, bug 655638
-			myconf+=( --disable-lto )
-		fi
+		myconf+=( --disable-lto )
 	fi
 	emake configure
 
