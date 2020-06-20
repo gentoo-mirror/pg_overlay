@@ -1,12 +1,21 @@
-From 193b49763a03d63ba79db50c1fa0563ec0d6b0c3 Mon Sep 17 00:00:00 2001
+From 55c724b93dfd4c9a1afb10d60fbc2d7a9a66cf61 Mon Sep 17 00:00:00 2001
 From: =?UTF-8?q?Caol=C3=A1n=20McNamara?= <caolanm@redhat.com>
 Date: Wed, 29 Jan 2020 12:44:52 +0000
-Subject: [PATCH] replace boost::bimap in sdext pdfimport
+Subject: replace boost::bimap in sdext pdfimport
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+the error message with boost 1.69 and gcc 10 is so ungodly its easier to throw
+bimap out and use something simpler
 
 Change-Id: Ie324a0b81931bbd427483878a87beeca455ada18
+Reviewed-on: https://gerrit.libreoffice.org/c/core/+/87683
+Tested-by: Jenkins
+Reviewed-by: Caolán McNamara <caolanm@redhat.com>
 ---
- sdext/source/pdfimport/inc/pdfiprocessor.hxx  | 12 ++++-------
- sdext/source/pdfimport/tree/pdfiprocessor.cxx | 21 +++++++++++--------
+ sdext/source/pdfimport/inc/pdfiprocessor.hxx  | 12 ++++--------
+ sdext/source/pdfimport/tree/pdfiprocessor.cxx | 21 ++++++++++++---------
  2 files changed, 16 insertions(+), 17 deletions(-)
 
 diff --git a/sdext/source/pdfimport/inc/pdfiprocessor.hxx b/sdext/source/pdfimport/inc/pdfiprocessor.hxx
@@ -106,5 +115,4 @@ index c6baa7fee8b2..ed2eaf6510b9 100644
  }
  
 -- 
-2.24.1
-
+cgit v1.2.1
