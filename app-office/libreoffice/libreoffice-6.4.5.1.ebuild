@@ -62,12 +62,13 @@ unset ADDONS_SRC
 # Extensions that need extra work:
 LO_EXTS="nlpsolver scripting-beanshell scripting-javascript wiki-publisher"
 
-IUSE="accessibility bluetooth +branding coinmp +cups dbus debug eds firebird
+IUSE="accessibility bluetooth +branding coinmp +cups +dbus debug eds firebird
 googledrive gstreamer +gtk kde ldap +mariadb odk pdfimport postgres test
 $(printf 'libreoffice_extensions_%s ' ${LO_EXTS})"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
 	bluetooth? ( dbus )
+	gtk? ( dbus )
 	libreoffice_extensions_nlpsolver? ( java )
 	libreoffice_extensions_scripting-beanshell? ( java )
 	libreoffice_extensions_scripting-javascript? ( java )
@@ -115,7 +116,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=dev-cpp/libcmis-0.5.2
 	dev-db/unixODBC
 	dev-lang/perl
-	dev-libs/boost:=[nls]
+	>=dev-libs/boost-1.72.0:=[nls]
 	dev-libs/expat
 	dev-libs/hyphen
 	dev-libs/icu:=
@@ -163,7 +164,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	)
 	coinmp? ( sci-libs/coinor-mp )
 	cups? ( net-print/cups )
-	dbus? ( sys-apps/dbus )
+	dbus? ( sys-apps/dbus[X] )
 	eds? (
 		dev-libs/glib:2
 		gnome-base/dconf
@@ -251,9 +252,13 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.4-system-pyuno.patch"
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
-	"${FILESDIR}/${PN}-poppler-0.86.patch"
-	"${FILESDIR}/${PN}-boost-1.73.patch"
-	)
+
+	# git master
+	"${FILESDIR}/${PN}-6.4.3.2-boost-1.73.patch" # bug 721806
+
+	# TODO: upstream (for now taken from Arch Linux)
+	"${FILESDIR}/${PN}-6.4.2.2-poppler-0.86.patch" # bug 711102
+)
 
 S="${WORKDIR}/${PN}-${MY_PV}"
 
