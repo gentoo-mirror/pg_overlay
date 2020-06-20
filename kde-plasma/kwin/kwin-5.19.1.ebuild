@@ -7,7 +7,7 @@ ECM_HANDBOOK="optional"
 ECM_TEST="optional"
 KFMIN=5.70.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.14.1
+QTMIN=5.14.2
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -82,6 +82,7 @@ RDEPEND="${COMMON_DEPEND}
 	>=dev-qt/qtquickcontrols2-${QTMIN}:5
 	>=dev-qt/qtvirtualkeyboard-${QTMIN}:5
 	>=kde-frameworks/kirigami-${KFMIN}:5
+	>=kde-frameworks/kitemmodels-${KFMIN}:5[qml]
 	multimedia? ( >=dev-qt/qtmultimedia-${QTMIN}:5[gstreamer,qml] )
 "
 DEPEND="${COMMON_DEPEND}
