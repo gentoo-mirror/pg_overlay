@@ -227,21 +227,12 @@ sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat device
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system-wide services
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
-sys-devel/clang 10.0.1_rc1: C language family frontend for LLVM
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
-sys-devel/lld 10.0.1_rc1: The LLVM linker (link editor)
-sys-devel/llvm 10.0.1_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.7.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
-sys-libs/compiler-rt 10.0.1_rc1: Compiler runtime library for clang (built-in part)
-sys-libs/compiler-rt-sanitizers 10.0.1_rc1: Compiler runtime libraries for clang (sanitizers & xray)
 sys-libs/glibc 2.31-r5: GNU libc C library
 sys-libs/libblockdev 2.24: A library for manipulating block devices
-sys-libs/libcxx 10.0.1_rc1: New implementation of the C++ standard library, targeting C++11
-sys-libs/libcxxabi 10.0.1_rc1: Low level support for a standard C++ library
-sys-libs/libomp 10.0.1_rc1: OpenMP runtime library for LLVM/clang compiler
-sys-libs/llvm-libunwind 10.0.1_rc1: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.2_p20200531: console display library
 sys-libs/polly 10.0.1_rc1: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre24: Multi-platform library designed to allow a developer to create robust software
