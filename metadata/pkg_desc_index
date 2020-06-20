@@ -232,8 +232,7 @@ sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
 sys-devel/lld 10.0.1_rc1: The LLVM linker (link editor)
 sys-devel/llvm 10.0.1_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
-sys-fs/udisks 2.9.0_pre: Daemon providing interfaces to work with storage devices
-sys-fs/xfsprogs 5.6.0_rc0: xfs filesystem utilities
+sys-fs/xfsprogs 5.7.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/compiler-rt 10.0.1_rc1: Compiler runtime library for clang (built-in part)
 sys-libs/compiler-rt-sanitizers 10.0.1_rc1: Compiler runtime libraries for clang (sanitizers & xray)
