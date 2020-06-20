@@ -41,7 +41,7 @@ dev-db/sqlite 3.32.0: SQL database engine
 dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
 dev-lang/python 2.7.18 3.8.3 3.9.0_beta3: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.44.0: Systems programming language from Mozilla
+dev-lang/rust 1.44.1: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-lang/vala 0.48.4: Compiler for the GObject type system
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
@@ -122,6 +122,7 @@ dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/PyQt5 5.14.2: Python bindings for the Qt framework
 dev-python/PyQt5-sip 4.19.22 5.2.0: Private sip module for PyQt5
+dev-python/commonmark 0.9.1: Python parser for the CommonMark Markdown spec
 dev-python/configargparse 1.2.3: Drop-in replacement for argparse supporting config files and env variables
 dev-python/configobj 5.0.6: Simple config file reader and writer
 dev-python/dbus-python 1.2.16: Python bindings for the D-Bus messagebus
