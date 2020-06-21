@@ -50,11 +50,12 @@ dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific accel
 dev-libs/date 2.4.1_p20200125: A date and time library based on the C++11/14/17 <chrono> header
 dev-libs/glib 2.64.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.1-r1: Introspection system for GObject-based libraries
-dev-libs/gplugin 0.27.0-r1: GObject based library that implements a reusable plugin system
+dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 67.1: International Components for Unicode
 dev-libs/libevdev 1.9.0: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
 dev-libs/libgit2 1.0.1: A linkable library for Git
+dev-libs/libgnt 9999: Toolkit for creating text-mode graphical user interfaces
 dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.4: Standalone file import filter library for spreadsheet documents
 dev-libs/libsigc++ 3.0.3: Typesafe callback system for standard C++
@@ -204,7 +205,7 @@ media-video/libva-utils 2.7.1: Collection of utilities and tests for VA-API
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.2: Multimedia processing graphs
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
-net-im/pidgin 2.14.1: GTK Instant Messenger client
+net-im/pidgin 2.14.1 9999: GTK Instant Messenger client
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 14.4.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
@@ -246,6 +247,7 @@ x11-libs/libva 2.7.1: Video Acceleration (VA) API for Linux
 x11-libs/libva-intel-driver 2.4.0: HW video decode support for Intel integrated graphics
 x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.45.1: Internationalized text layout and rendering library
+x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.2-r300 3.1.3-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/mozo 1.24.0: Mozo menu editor for MATE
