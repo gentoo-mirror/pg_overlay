@@ -60,6 +60,7 @@ src_configure() {
 		$(meson_use man help2man)
 		$(meson_use introspection gobject-introspection)
 		$(meson_use test tests)
+		-Dvapi=false
 	)
 	meson_src_configure
 }
