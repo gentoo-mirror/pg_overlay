@@ -3,20 +3,20 @@
 
 EAPI=7
 
-inherit autotools flag-o-matic prefix systemd
+inherit flag-o-matic prefix systemd
 
 DESCRIPTION="File transfer program to keep remote files into sync"
 HOMEPAGE="https://rsync.samba.org/"
 if [[ "${PV}" == *9999 ]] ; then
 	PYTHON_COMPAT=( python3_{7..9} )
-	inherit git-r3 python-any-r1
+	inherit autotools git-r3 python-any-r1
 	EGIT_REPO_URI="https://github.com/WayneD/rsync.git"
 else
 	if [[ "${PV}" == *_pre* ]] ; then
 		SRC_DIR="src-previews"
 	else
 		SRC_DIR="src"
-		KEYWORDS="~alpha ~amd64 ~arm arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc x86 ~ppc-aix ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+		KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~m68k-mint ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 	fi
 	SRC_URI="https://rsync.samba.org/ftp/rsync/${SRC_DIR}/${P/_/}.tar.gz"
 	S="${WORKDIR}/${P/_/}"
@@ -56,17 +56,13 @@ python_check_deps() {
 	has_version "dev-python/commonmark[${PYTHON_USEDEP}]"
 }
 
-PATCHES=(
-	"${FILESDIR}/${P}-simd_check.patch"
-	"${FILESDIR}/${P}-noexecstack.patch" #728882
-)
-
 src_prepare() {
 	default
-
-	eaclocal -I m4
-	eautoconf -o configure.sh
-	eautoheader && touch config.h.in
+	if [[ "${PV}" == *9999 ]] ; then
+		eaclocal -I m4
+		eautoconf -o configure.sh
+		eautoheader && touch config.h.in
+	fi
 }
 
 src_configure() {
@@ -102,7 +98,7 @@ src_install() {
 	newconfd "${FILESDIR}"/rsyncd.conf.d rsyncd
 	newinitd "${FILESDIR}"/rsyncd.init.d-r1 rsyncd
 
-	dodoc NEWS.md OLDNEWS.md README.md TODO tech_report.tex
+	dodoc NEWS.md README.md TODO tech_report.tex
 
 	insinto /etc
 	newins "${FILESDIR}"/rsyncd.conf-3.0.9-r1 rsyncd.conf
