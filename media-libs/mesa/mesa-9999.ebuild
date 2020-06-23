@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..8} )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit llvm meson multilib-minimal python-any-r1 linux-info
 
@@ -228,7 +228,6 @@ BDEPEND="
 	)
 	sys-devel/bison
 	sys-devel/flex
-	sys-devel/gettext
 	virtual/pkgconfig
 	$(python_gen_any_dep ">=dev-python/mako-0.8.0[\${PYTHON_USEDEP}]")
 "
