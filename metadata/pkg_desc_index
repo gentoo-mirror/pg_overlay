@@ -48,7 +48,7 @@ dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.73.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/date 2.4.1_p20200125: A date and time library based on the C++11/14/17 <chrono> header
-dev-libs/glib 2.64.3: The GLib library of C routines
+dev-libs/glib 2.65.0: The GLib library of C routines
 dev-libs/gobject-introspection 1.64.1-r1: Introspection system for GObject-based libraries
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 67.1: International Components for Unicode
@@ -151,8 +151,8 @@ dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtdeclarative 5.15.0: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200309-r1 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.64.3: GDBus code and documentation generator
-dev-util/glib-utils 2.64.3: Build utilities for GLib using projects
+dev-util/gdbus-codegen 2.65.0: GDBus code and documentation generator
+dev-util/glib-utils 2.65.0: Build utilities for GLib using projects
 dev-util/glslang 8.13.3743-r1 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gn 0.1726: GN is a meta-build system that generates build files for Ninja
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
