@@ -15,7 +15,7 @@ SRC_URI="
 LICENSE="Apache-1.1 Apache-2.0 BSD BSD-2 MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x64-macos"
-IUSE="cpu_flags_x86_sse2 debug doc icu inspector +npm pax_kernel +snapshot +ssl +system-ssl systemtap test"
+IUSE="cpu_flags_x86_sse2 debug doc +icu inspector +npm pax_kernel +snapshot +ssl +system-ssl systemtap test"
 REQUIRED_USE="
 	inspector? ( icu ssl )
 	npm? ( ssl )
@@ -23,7 +23,7 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	>=dev-libs/libuv-1.37.0:=
+	>=dev-libs/libuv-1.38.0:=
 	>=net-dns/c-ares-1.16.0
 	>=net-libs/nghttp2-1.41.0
 	sys-libs/zlib
@@ -54,7 +54,7 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	tc-export CC CXX PKG_CONFIG
+	tc-export AR CC CXX PKG_CONFIG
 	export V=1
 	export BUILDTYPE=Release
 
