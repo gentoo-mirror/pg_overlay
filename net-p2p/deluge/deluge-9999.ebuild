@@ -18,7 +18,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_BRANCH="develop"
 else
 	SRC_URI="http://download.deluge-torrent.org/source/2.0/${P}.tar.xz"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64 ~arm ~sparc ~x86"
 fi
 
 LICENSE="GPL-2"
@@ -63,6 +63,7 @@ RDEPEND="
 PATCHES=(
 	"${FILESDIR}/${PN}-2.0.3-setup.py.patch"
 	"${FILESDIR}/${PN}-2.0.3-UI-status.patch"
+	"${FILESDIR}/${PN}-2.0.3-gettext.patch"
 )
 
 python_prepare_all() {
@@ -103,23 +104,23 @@ python_install_all() {
 	distutils-r1_python_install_all
 	if ! use console ; then
 		rm -r "${D}/$(python_get_sitedir)/deluge/ui/console/" || die
-		rm "${D}/usr/bin/deluge-console" || die
-		rm "${D}/usr/share/man/man1/deluge-console.1" ||die
+		rm "${ED}/usr/bin/deluge-console" || die
+		rm "${ED}/usr/share/man/man1/deluge-console.1" ||die
 	fi
 	if ! use gtk ; then
 		rm -r "${D}/$(python_get_sitedir)/deluge/ui/gtk3/" || die
-		rm -r "${D}/usr/share/icons/" || die
-		rm "${D}/usr/bin/deluge-gtk" || die
-		rm "${D}/usr/share/man/man1/deluge-gtk.1" || die
-		rm "${D}/usr/share/applications/deluge.desktop" || die
+		rm -r "${ED}/usr/share/icons/" || die
+		rm "${ED}/usr/bin/deluge-gtk" || die
+		rm "${ED}/usr/share/man/man1/deluge-gtk.1" || die
+		rm "${ED}/usr/share/applications/deluge.desktop" || die
 	fi
 	if use webinterface; then
 		newinitd "${FILESDIR}/deluge-web.init-2" deluge-web
 		newconfd "${FILESDIR}/deluge-web.conf" deluge-web
 	else
 		rm -r "${D}/$(python_get_sitedir)/deluge/ui/web/" || die
-		rm "${D}/usr/bin/deluge-web" || die
-		rm "${D}/usr/share/man/man1/deluge-web.1" || die
+		rm "${ED}/usr/bin/deluge-web" || die
+		rm "${ED}/usr/share/man/man1/deluge-web.1" || die
 	fi
 	newinitd "${FILESDIR}"/deluged.init-2 deluged
 	newconfd "${FILESDIR}"/deluged.conf-2 deluged
