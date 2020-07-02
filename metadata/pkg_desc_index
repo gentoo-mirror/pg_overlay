@@ -31,12 +31,8 @@ app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
-dev-cpp/atkmm 2.29.1: C++ interface for the ATK library
-dev-cpp/cairomm 1.12.2: C++ bindings for the Cairo vector graphics library
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
-dev-cpp/gtkmm 3.24.2: C++ interface for GTK+
 dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindings
-dev-cpp/pangomm 2.42.1: C++ interface for pango
 dev-db/sqlite 3.32.0: SQL database engine
 dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
