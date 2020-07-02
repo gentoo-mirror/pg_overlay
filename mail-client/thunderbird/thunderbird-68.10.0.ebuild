@@ -15,33 +15,46 @@ PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 MOZ_LANGS=(de en en-GB en-US ru)
 
 # Convert the ebuild version to the upstream mozilla version, used by mozlinguas
-MOZ_PV="${PV/_beta/b}"
+MOZ_PV="${PV/_alpha/a}" # Handle alpha for SRC_URI
+MOZ_PV="${MOZ_PV/_beta/b}" # Handle beta for SRC_URI
+MOZ_PV="${MOZ_PV%%_rc*}" # Handle rc for SRC_URI
+
+if [[ ${MOZ_ESR} == 1 ]] ; then
+	# ESR releases have slightly different version numbers
+	MOZ_PV="${MOZ_PV}esr"
+fi
 
 # Patches
 PATCHFF="firefox-68.0-patches-14"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
+MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/${PN}-${MOZ_PV}.source.tar.xz"
 
-# ESR releases have slightly version numbers
-if [[ ${MOZ_ESR} == 1 ]]; then
-	MOZ_PV="${MOZ_PV}esr"
+if [[ "${PV}" == *_rc* ]]; then
+	MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/candidates/${MOZ_PV}-candidates/build${PV##*_rc}"
+	MOZ_LANGPACK_PREFIX="linux-i686/xpi/"
+	MOZ_SRC_URI="${MOZ_HTTP_URI}/source/${PN}-${MOZ_PV}.source.tar.xz -> $P.tar.xz"
 fi
-MOZ_P="${PN}-${MOZ_PV}"
 
 LLVM_MAX_SLOT=10
 MOZCONFIG_OPTIONAL_JIT=1
+
+inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
+		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
+		autotools mozlinguas-v2 multiprocessing virtualx
 
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="https://www.mozilla.org/thunderbird"
 
 KEYWORDS="~amd64 ~ppc64 ~x86 ~amd64-linux ~x86-linux"
+
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang cpu_flags_x86_avx2 dbus debug eme-free
-	+gmp-autoupdate hardened jack lightning lto cpu_flags_arm_neon pgo
-	pulseaudio selinux startup-notification +system-av1 +system-harfbuzz
-	+system-icu +system-jpeg +system-libevent +system-sqlite
-	+system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto"
+	+gmp-autoupdate hardened jack lightning lto cpu_flags_arm_neon
+	pgo pulseaudio selinux startup-notification +system-av1
+	+system-harfbuzz +system-icu +system-jpeg +system-libevent
+	+system-sqlite +system-libvpx +system-webp test wayland wifi +jit kde cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
@@ -54,18 +67,14 @@ RESTRICT="!bindist? ( bindist )
 
 PATCH_URIS=( https://dev.gentoo.org/~{anarchy,axs,polynomial-c,whissi}/mozilla/patchsets/${PATCHFF}.tar.xz )
 SRC_URI="${SRC_URI}
-	${MOZ_HTTP_URI}/${MOZ_PV}/source/${MOZ_P}.source.tar.xz
+	${MOZ_SRC_URI}
 	https://dev.gentoo.org/~axs/distfiles/lightning-${MOZ_LIGHTNING_VER}.tar.xz
 	lightning? ( https://dev.gentoo.org/~axs/distfiles/gdata-provider-${MOZ_LIGHTNING_GDATA_VER}.tar.xz )
 	system-libvpx? ( https://dev.gentoo.org/~anarchy/patches/2013_update_libvpx_esr.patch )
 	${PATCH_URIS[@]}"
 
-inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
-		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
-		autotools mozlinguas-v2 virtualx multiprocessing
-
 CDEPEND="
-	>=dev-libs/nss-3.44.1
+	>=dev-libs/nss-3.44.4
 	>=dev-libs/nspr-4.21
 	dev-libs/atk
 	dev-libs/expat
@@ -86,7 +95,7 @@ CDEPEND="
 	>=x11-libs/pixman-0.19.2
 	>=dev-libs/glib-2.26:2
 	>=sys-libs/zlib-1.2.3
-	>=virtual/libffi-3.0.10:=
+	>=dev-libs/libffi-3.0.10:=
 	media-video/ffmpeg
 	x11-libs/libX11
 	x11-libs/libXcomposite
@@ -188,14 +197,34 @@ llvm_check_deps() {
 	einfo "Will use LLVM slot ${LLVM_SLOT}!" >&2
 }
 
-pkg_setup() {
-	moz_pkgsetup
-
+pkg_pretend() {
 	if use pgo ; then
 		if ! has usersandbox $FEATURES ; then
 			die "You must enable usersandbox as X server can not run as root!"
 		fi
 	fi
+
+	# Ensure we have enough disk space to compile
+	if use pgo || use lto || use debug || use test ; then
+		CHECKREQS_DISK_BUILD="8G"
+	else
+		CHECKREQS_DISK_BUILD="4500M"
+	fi
+
+	check-reqs_pkg_pretend
+}
+
+pkg_setup() {
+	moz_pkgsetup
+
+	# Ensure we have enough disk space to compile
+	if use pgo || use lto || use debug || use test ; then
+		CHECKREQS_DISK_BUILD="8G"
+	else
+		CHECKREQS_DISK_BUILD="4500M"
+	fi
+
+	check-reqs_pkg_setup
 
 	# Avoid PGO profiling problems due to enviroment leakage
 	# These should *always* be cleaned up anyway
@@ -203,6 +232,7 @@ pkg_setup() {
 		DISPLAY \
 		ORBIT_SOCKETDIR \
 		SESSION_MANAGER \
+		XDG_CACHE_HOME \
 		XDG_SESSION_COOKIE \
 		XAUTHORITY
 
@@ -219,19 +249,8 @@ pkg_setup() {
 	llvm_pkg_setup
 }
 
-pkg_pretend() {
-	# Ensure we have enough disk space to compile
-	if use pgo || use lto || use debug || use test ; then
-		CHECKREQS_DISK_BUILD="8G"
-	else
-		CHECKREQS_DISK_BUILD="4G"
-	fi
-
-	check-reqs_pkg_setup
-}
-
 src_unpack() {
-	unpack ${A}
+	default
 
 	# Unpack language packs
 	mozlinguas_src_unpack
@@ -264,6 +283,12 @@ src_prepare() {
 
 	# PGO freeze fix
 	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
+
+	# Make LTO respect MAKEOPTS
+	sed -i \
+		-e "s/multiprocessing.cpu_count()/$(makeopts_jobs)/" \
+		"${S}"/build/moz.configure/toolchain.configure \
+		|| die "sed failed to set num_cores"
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -572,7 +597,7 @@ src_configure() {
 	# when they would normally be larger than 2GiB.
 	append-ldflags "-Wl,--compress-debug-sections=zlib"
 
-	if use clang ; then
+	if use clang && ! use arm64; then
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1482204
 		# https://bugzilla.mozilla.org/show_bug.cgi?id=1483822
 		mozconfig_annotate 'elf-hack is broken when using Clang' --disable-elf-hack
