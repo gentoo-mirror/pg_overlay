@@ -30,6 +30,8 @@ BDEPEND="
 
 ECONF_SOURCE="${S}"
 
+PATCHES=( "${FILESDIR}/*.patch" )
+
 multilib_src_configure() {
 	# Don't use Python to find sitedir here.
 	PYTHON=true default
