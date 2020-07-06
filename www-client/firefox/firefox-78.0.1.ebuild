@@ -681,7 +681,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-gtest-in-build
 
 	mozconfig_annotate '' --disable-instruments
-	mozconfig_annotate '' --disable-ios-target
 	mozconfig_annotate '' --disable-ipdl-tests
 
 	mozconfig_annotate '' --disable-jprof
