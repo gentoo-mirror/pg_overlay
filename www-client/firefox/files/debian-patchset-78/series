@@ -1,0 +1,8 @@
+fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
+fixes/Bug-1526653-Include-struct-definitions-for-user_vfp-.patch
+fixes/Bug-1632429-enum34-and-enum-virtualenv-packages-are-.patch
+fixes/Bug-1642265-MIPS64-Add-branchTestSymbol-and-fallible.patch
+fixes/Bug-1650299-Unify-the-inclusion-of-the-ICU-data-file.patch
+fixes/Bug-1264836-Automatically-convert-the-little-endian-.patch
+prefs/Set-DPI-to-system-settings.patch
+debian-hacks/Don-t-build-image-gtests.patch
