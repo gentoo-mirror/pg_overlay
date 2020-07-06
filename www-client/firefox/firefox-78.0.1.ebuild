@@ -677,8 +677,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-dtrace
 	mozconfig_annotate '' --disable-dump-painting
 
-	mozconfig_annotate '' --disable-gc-trace
-	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-gold
 	mozconfig_annotate '' --disable-gtest-in-build
 
