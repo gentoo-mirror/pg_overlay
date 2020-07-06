@@ -36,7 +36,7 @@ dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindin
 dev-db/sqlite 3.32.0: SQL database engine
 dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
-dev-lang/python 2.7.18 3.8.3 3.9.0_beta3: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.18 3.8.3-r1 3.9.0_beta4: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.44.1: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-lang/vala 0.48.4: Compiler for the GObject type system
@@ -233,7 +233,7 @@ sys-libs/ncurses 6.2_p20200627: console display library
 sys-libs/polly 10.0.1_rc1: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre24: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
-www-client/firefox 77.0.1: Firefox Web Browser
+www-client/firefox 78.0.1: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
