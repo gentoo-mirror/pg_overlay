@@ -1,6 +1,5 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
-mozilla-ntlm-full-path.patch
 mozilla-aarch64-startup-crash.patch
 mozilla-bmo1463035.patch
 mozilla-sandbox-fips.patch
