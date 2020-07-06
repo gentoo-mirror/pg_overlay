@@ -1,6 +1,7 @@
 app-admin/eclean-kernel 2.99.1: Remove outdated built kernels
 app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
+app-arch/brotli 1.0.7: Generic-purpose lossless compression algorithm
 app-arch/file-roller 3.36.2: Archive manager for GNOME
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
@@ -202,6 +203,7 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.2: Multimedia processing graphs
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.1 9999: GTK Instant Messenger client
+net-im/telegram-desktop 2.1.17: Official desktop client for Telegram
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 14.5.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
