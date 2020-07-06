@@ -30,7 +30,9 @@ BDEPEND="
 
 ECONF_SOURCE="${S}"
 
-PATCHES=( "${FILESDIR}/*.patch" )
+PATCHES=( "${FILESDIR}/20200321.patch"
+		"${FILESDIR}/20200601-1.patch"
+		"${FILESDIR}/20200601-2.patch" )
 
 multilib_src_configure() {
 	# Don't use Python to find sitedir here.
