@@ -7,9 +7,6 @@ build-cacheFlush-missing.patch
 build-aarch64-skia.patch
 build-disable-elfhack.patch
 build-arm-libopus.patch
-firefox-nss-version.patch
-fedora-shebang-build.patch
-build-arm-wasm.patch
 build-arm-libaom.patch
 
 rhbz-1173156.patch
