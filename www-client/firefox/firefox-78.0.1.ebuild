@@ -432,8 +432,7 @@ src_configure() {
 	mozconfig_init
 	# common config components
 	mozconfig_annotate 'system_libs' \
-		--with-system-zlib \
-		--with-system-bz2
+		--with-system-zlib
 
 	# Must pass release in order to properly select linker
 	mozconfig_annotate 'Enable by Gentoo' --enable-release
@@ -579,7 +578,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-crashreporter
 	mozconfig_annotate 'Gentoo default' --with-system-png
 	mozconfig_annotate '' --enable-system-ffi
-	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --with-intl-api
 	mozconfig_annotate '' --enable-system-pixman
 	# Instead of the standard --build= and --host=, mozilla uses --host instead
@@ -679,20 +677,16 @@ src_configure() {
 	mozconfig_annotate '' --disable-dtrace
 	mozconfig_annotate '' --disable-dump-painting
 
-	mozconfig_annotate '' --disable-gc-trace
-	mozconfig_annotate '' --disable-gconf
 	mozconfig_annotate '' --disable-gold
 	mozconfig_annotate '' --disable-gtest-in-build
 
 	mozconfig_annotate '' --disable-instruments
-	mozconfig_annotate '' --disable-ios-target
 	mozconfig_annotate '' --disable-ipdl-tests
 
 	mozconfig_annotate '' --disable-jprof
 
 	mozconfig_annotate '' --disable-libproxy
 	mozconfig_annotate '' --disable-logrefcnt
-	mozconfig_annotate '' --enable-llvm-hacks
 
 	mozconfig_annotate '' --disable-memory-sanitizer
 	mozconfig_annotate '' --disable-mobile-optimize
