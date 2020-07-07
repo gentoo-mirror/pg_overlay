@@ -21,11 +21,11 @@ IUSE="doc test"
 
 RDEPEND="
 	>=dev-util/glslang-8.13.3560_pre20200404[${MULTILIB_USEDEP}]
-	>=dev-util/spirv-tools-2019.10_pre20191027[${MULTILIB_USEDEP}]
+	>=dev-util/spirv-tools-2020.3[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	>=dev-util/spirv-headers-1.5.1
+	>=dev-util/spirv-headers-1.5.3
 	doc? ( dev-ruby/asciidoctor )
 	test? (
 		dev-cpp/gtest
