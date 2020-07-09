@@ -205,7 +205,7 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.2: Multimedia processing graphs
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.1 9999: GTK Instant Messenger client
-net-im/telegram-desktop 2.1.17: Official desktop client for Telegram
+net-im/telegram-desktop 2.1.18: Official desktop client for Telegram
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 14.5.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
