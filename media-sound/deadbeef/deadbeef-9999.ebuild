@@ -11,7 +11,7 @@ inherit autotools eutils git-r3 gnome2-utils l10n xdg-utils
 
 EGIT_REPO_URI="https://github.com/DeadBeeF-Player/${PN}.git"
 EGIT_BRANCH="master"
-EGIT_SUBMODULES=()
+#EGIT_SUBMODULES=()
 
 KEYWORDS=""
 
