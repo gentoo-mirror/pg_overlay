@@ -5,9 +5,9 @@ app-arch/file-roller 3.36.2: Archive manager for GNOME
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-crypt/acme 1.5.0: An implementation of the ACME protocol
-app-crypt/certbot 1.5.0: Let's encrypt client to automate deployment of X.509 certificates
-app-crypt/certbot-nginx 1.5.0: Nginx plugin for certbot (Let's Encrypt Client)
+app-crypt/acme 1.6.0: An implementation of the ACME protocol
+app-crypt/certbot 1.6.0: Let's encrypt client to automate deployment of X.509 certificates
+app-crypt/certbot-nginx 1.6.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
 app-emulation/virtualbox 6.1.10-r1: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/ca-certificates 20200601.3.53: Common CA Certificates PEM files
@@ -203,6 +203,7 @@ media-sound/wavpack 5.2.0: Hybrid lossless audio compression tools
 media-video/libva-utils 2.7.1: Collection of utilities and tests for VA-API
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.2: Multimedia processing graphs
+media-video/qmplay2 20.07.04: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 2.1.18: Official desktop client for Telegram
