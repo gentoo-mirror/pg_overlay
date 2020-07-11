@@ -3,8 +3,7 @@
 
 EAPI=7
 
-# False positive due to commented code in setup.py
-DISTUTILS_USE_SETUPTOOLS=manual
+DISTUTILS_USE_SETUPTOOLS=rdepend
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE="threads(+)"
 
@@ -22,7 +21,7 @@ SRC_URI="
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ~arm64 hppa ~ia64 ~m68k ~mips ppc ppc64 s390 sparc x86 ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 IUSE="doc test"
 RESTRICT="!test? ( test )"
 
@@ -37,9 +36,9 @@ S=${WORKDIR}/${P}/src
 
 PATCHES=(
 	# support env passthrough for Gentoo ebuilds
-	"${FILESDIR}"/scons-3.0.1-env-passthrough.patch
+	"${FILESDIR}"/scons-4.0.0-env-passthrough.patch
 	# respect CC, CXX, C*FLAGS, LDFLAGS by default
-	"${FILESDIR}"/scons-3.0.3-respect-cc-etc-r1.patch
+	"${FILESDIR}"/scons-4.0.0-respect-cc-etc-r1.patch
 )
 
 src_unpack() {

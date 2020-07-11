@@ -4,16 +4,16 @@ Date: Thu, 10 May 2018 08:01:08 +0200
 Subject: [PATCH] posix: Also force common toolchain vars for Gentoo
 
 ---
- src/engine/SCons/Platform/posix.py | 20 ++++++++++++++++++++
- src/engine/SCons/Tool/cc.py        |  3 ++-
- src/engine/SCons/Tool/cxx.py       |  3 ++-
- src/engine/SCons/Tool/link.py      |  3 ++-
+ src/SCons/Platform/posix.py | 20 ++++++++++++++++++++
+ src/SCons/Tool/cc.py        |  3 ++-
+ src/SCons/Tool/cxx.py       |  3 ++-
+ src/SCons/Tool/link.py      |  3 ++-
  4 files changed, 26 insertions(+), 3 deletions(-)
 
-diff --git a/src/engine/SCons/Platform/posix.py b/src/engine/SCons/Platform/posix.py
+diff --git a/src/SCons/Platform/posix.py b/src/SCons/Platform/posix.py
 index 739310a1..ef7528e0 100644
---- a/src/engine/SCons/Platform/posix.py
-+++ b/src/engine/SCons/Platform/posix.py
+--- a/src/SCons/Platform/posix.py
++++ b/src/SCons/Platform/posix.py
 @@ -95,6 +95,26 @@ def generate(env):
          if 'ENV' in env:
              new_env.update(env['ENV'])
@@ -41,10 +41,10 @@ index 739310a1..ef7528e0 100644
      else:
          if 'ENV' not in env:
              env['ENV']        = {}
-diff --git a/src/engine/SCons/Tool/cc.py b/src/engine/SCons/Tool/cc.py
+diff --git a/src/SCons/Tool/cc.py b/src/SCons/Tool/cc.py
 index 590ec5fd..5f9229a0 100644
---- a/src/engine/SCons/Tool/cc.py
-+++ b/src/engine/SCons/Tool/cc.py
+--- a/src/SCons/Tool/cc.py
++++ b/src/SCons/Tool/cc.py
 @@ -80,7 +80,8 @@ def generate(env):
  
      if 'CC' not in env:
@@ -55,10 +55,10 @@ index 590ec5fd..5f9229a0 100644
      env['CCCOM']     = '$CC -o $TARGET -c $CFLAGS $CCFLAGS $_CCCOMCOM $SOURCES'
      env['SHCC']      = '$CC'
      env['SHCFLAGS'] = SCons.Util.CLVar('$CFLAGS')
-diff --git a/src/engine/SCons/Tool/cxx.py b/src/engine/SCons/Tool/cxx.py
+diff --git a/src/SCons/Tool/cxx.py b/src/SCons/Tool/cxx.py
 index 430851c8..ca5ab563 100644
---- a/src/engine/SCons/Tool/cxx.py
-+++ b/src/engine/SCons/Tool/cxx.py
+--- a/src/SCons/Tool/cxx.py
++++ b/src/SCons/Tool/cxx.py
 @@ -74,7 +74,8 @@ def generate(env):
  
      if 'CXX' not in env:
@@ -69,10 +69,10 @@ index 430851c8..ca5ab563 100644
      env['CXXCOM']     = '$CXX -o $TARGET -c $CXXFLAGS $CCFLAGS $_CCCOMCOM $SOURCES'
      env['SHCXX']      = '$CXX'
      env['SHCXXFLAGS'] = SCons.Util.CLVar('$CXXFLAGS')
-diff --git a/src/engine/SCons/Tool/link.py b/src/engine/SCons/Tool/link.py
+diff --git a/src/SCons/Tool/link.py b/src/SCons/Tool/link.py
 index 5adc6ca2..a12ea8ed 100644
---- a/src/engine/SCons/Tool/link.py
-+++ b/src/engine/SCons/Tool/link.py
+--- a/src/SCons/Tool/link.py
++++ b/src/SCons/Tool/link.py
 @@ -318,7 +318,8 @@ def generate(env):
  
      env['SMARTLINK'] = smart_link
