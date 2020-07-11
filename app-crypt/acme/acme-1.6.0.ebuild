@@ -28,7 +28,7 @@ RDEPEND="
 	>=dev-python/cryptography-1.3.4[${PYTHON_USEDEP}]
 	>=dev-python/idna-2.0.0[${PYTHON_USEDEP}]
 	>=dev-python/josepy-1.1.0[${PYTHON_USEDEP}]
-	>=dev-python/pyopenssl-0.13.1[${PYTHON_USEDEP}]
+	>=dev-python/pyopenssl-0.15.1[${PYTHON_USEDEP}]
 	dev-python/pyrfc3339[${PYTHON_USEDEP}]
 	dev-python/pytz[${PYTHON_USEDEP}]
 	>=dev-python/requests-2.10[${PYTHON_USEDEP}]
