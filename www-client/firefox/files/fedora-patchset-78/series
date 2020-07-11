@@ -2,7 +2,6 @@ mozilla-build-arm.patch
 rhbz-1219542-s390-build.patch
 build-aarch64-skia.patch
 build-disable-elfhack.patch
-build-arm-libaom.patch
 
 mozilla-1170092.patch
 rhbz-1354671.patch
