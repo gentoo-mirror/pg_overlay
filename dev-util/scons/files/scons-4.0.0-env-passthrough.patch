@@ -7,13 +7,13 @@ Support GENTOO_SCONS_ENV_PASSTHROUGH=1 variable to override the default
 of wiping the environment and resetting PATH to default, and instead
 pass all variables through.
 ---
- src/engine/SCons/Platform/posix.py | 14 +++++++++++---
+ src/SCons/Platform/posix.py | 14 +++++++++++---
  1 file changed, 11 insertions(+), 3 deletions(-)
 
-diff --git a/src/engine/SCons/Platform/posix.py b/src/engine/SCons/Platform/posix.py
+diff --git a/src/SCons/Platform/posix.py b/src/SCons/Platform/posix.py
 index 8db08db1..af34650c 100644
---- a/src/engine/SCons/Platform/posix.py
-+++ b/src/engine/SCons/Platform/posix.py
+--- a/src/SCons/Platform/posix.py
++++ b/src/SCons/Platform/posix.py
 @@ -87,9 +87,17 @@ def generate(env):
      pspawn = piped_env_spawn
      # Note that this means that 'escape' is no longer used
