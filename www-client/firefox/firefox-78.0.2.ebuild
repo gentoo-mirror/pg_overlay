@@ -23,7 +23,7 @@ if [[ ${MOZ_ESR} == 1 ]] ; then
 fi
 
 # Patch version
-PATCH="${PN}-78.0-patches-01"
+PATCH="${PN}-78.0-patches-03"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/${PN}-${MOZ_PV}.source.tar.xz"
@@ -49,7 +49,7 @@ SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+gmp-autoupdate hardened hwaccel jack lto cpu_flags_arm_neon
-	+openh264 pgo pulseaudio +screenshot selinux +system-av1
+	+openh264 pgo pulseaudio screencast +screenshot selinux +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
 	+system-libvpx +system-webp test wayland wifi
 	dbus +jit +kde cross-lto thinlto"
@@ -98,6 +98,7 @@ CDEPEND="
 	x11-libs/libXfixes
 	x11-libs/libXrender
 	x11-libs/libXt
+	screencast? ( media-video/pipewire:0/0.3 )
 	system-av1? (
 		>=media-libs/dav1d-0.3.0:=
 		>=media-libs/libaom-1.0.0:=
@@ -275,6 +276,18 @@ src_prepare() {
 		-e "s/multiprocessing.cpu_count()/$(makeopts_jobs)/" \
 		"${S}"/build/moz.configure/lto-pgo.configure \
 		|| die "sed failed to set num_cores"
+
+	# Make ICU respect MAKEOPTS
+	sed -i \
+		-e "s/multiprocessing.cpu_count()/$(makeopts_jobs)/" \
+		"${S}"/intl/icu_sources_data.py \
+		|| die "sed failed to set num_cores"
+
+	# sed-in toolchain prefix
+	sed -i \
+		-e "s/objdump/${CHOST}-objdump/" \
+		"${S}"/python/mozbuild/mozbuild/configure/check_debug_ranges.py \
+		|| die "sed failed to set toolchain prefix"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
@@ -628,6 +641,8 @@ src_configure() {
 
 	# enable JACK, bug 600002
 	mozconfig_use_enable jack
+
+	mozconfig_use_enable screencast pipewire
 
 	# Enable/Disable eme support
 	use eme-free && mozconfig_annotate '+eme-free' --disable-eme
