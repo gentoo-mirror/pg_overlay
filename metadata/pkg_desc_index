@@ -158,7 +158,7 @@ dev-util/kbuild 0.1.9998.3149: A makefile framework for writing simple makefiles
 dev-util/meson 0.54.3: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
-dev-util/scons 3.1.2: Extensible Python-based build utility
+dev-util/scons 4.0.0: Extensible Python-based build utility
 dev-util/spirv-tools 2020.4_pre20200529 9999: Provides an API and commands for processing SPIR-V modules
 dev-util/vulkan-headers 1.2.146: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.145: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
