@@ -162,8 +162,8 @@ src_configure() {
 		--disable-libmpv-static
 		--disable-static-build
 		# See deep down below for build-date.
-		#--disable-optimize # Don't add '-O2' to CFLAGS.
-		$(use_enable debug debug-build)
+		--disable-optimize # Don't add '-O2' to CFLAGS.
+		$(usex debug '' '--disable-debug-build')
 
 		$(use_enable doc html-build)
 		$(use_enable doc pdf-build)
