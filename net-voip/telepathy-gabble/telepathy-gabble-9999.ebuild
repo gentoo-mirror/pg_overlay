@@ -83,7 +83,8 @@ src_configure() {
 		$(use_enable jingle voip) \
 		$(use_enable jingle google-relay) \
 		$(use_enable plugins) \
-		--with-tls=$(usex gnutls gnutls openssl)
+		--with-tls=$(usex gnutls gnutls openssl) \
+		--enable-sunmodules
 }
 
 src_test() {
