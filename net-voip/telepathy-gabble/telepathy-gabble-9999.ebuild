@@ -84,7 +84,7 @@ src_configure() {
 		$(use_enable jingle google-relay) \
 		$(use_enable plugins) \
 		--with-tls=$(usex gnutls gnutls openssl) \
-		--enable-sunmodules
+		--enable-submodules
 }
 
 src_test() {
