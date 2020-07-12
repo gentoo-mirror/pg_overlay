@@ -69,6 +69,10 @@ pkg_setup() {
 	python-any-r1_pkg_setup
 }
 
+src_prepare() {
+	gnome2_src_prepare
+}
+
 src_configure() {
 	gnome2_src_configure \
 		--disable-coding-style-checks \
