@@ -6,7 +6,7 @@
 	<name>Gentoo Mozilla Team</name>
 </maintainer>
 <use>
-	<flag name="bindist">Disable official Firefox branding (icons, name) which 
+	<flag name="bindist">Disable official Firefox/Thunderbird branding (icons, name) which 
 		are not binary-redistributable according to upstream.</flag>
 	<flag name="clang">Use Clang compiler instead of GCC</flag>
 	<flag name="cross-lto">Enable ThinLTO across C++ and Rust code</flag>
@@ -37,8 +37,7 @@
 		installation with secure-delete enabled</flag>
 	<flag name="system-webp">Use the system-wide <pkg>media-libs/libwebp</pkg>
 		instead of bundled.</flag>
-	<flag name="thinlto">Enable ThinLTO</flag>
-
+	<flag name="thinlto">Enable ThinLTO. Requires LDD linker when using Clang</flag>
 
 </use>
 </pkgmetadata>
