@@ -6,31 +6,31 @@ EAPI=6
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=2.0.19
+WAF_PV=2.0.9
 
-inherit bash-completion-r1 eapi7-ver flag-o-matic pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
+inherit bash-completion-r1 eapi7-ver flag-o-matic gnome2-utils pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
 
 if [[ ${PV} != *9999* ]]; then
-	SRC_URI="https://github.com/${PN}-player/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86 ~amd64-linux"
+	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ppc ppc64 x86 ~amd64-linux"
 	DOCS=( RELEASE_NOTES )
 else
-	EGIT_REPO_URI="https://github.com/${PN}-player/${PN}.git"
+	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 	inherit git-r3
 	DOCS=(); SRC_URI=""
 fi
 SRC_URI+=" https://waf.io/waf-${WAF_PV}"
-DOCS+=( README.md etc/{mpv,input}.conf DOCS/{client-api,interface}-changes.rst)
+DOCS+=( README.md DOCS/{client-api,interface}-changes.rst )
 
 # See Copyright in sources and Gentoo bug 506946. Waf is BSD, libmpv is ISC.
-LICENSE="LGPL-2.1+ GPL-2+ BSD ISC"
+LICENSE="LGPL-2.1+ GPL-2+ BSD ISC samba? ( GPL-3+ )"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda debug doc drm dvb
-	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
-	luajit openal +opengl pulseaudio raspberry-pi rubberband sdl
+	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms +libass libcaca libmpv +lua
+	luajit openal +opengl oss pulseaudio raspberry-pi rubberband samba sdl
 	selinux test tools +uchardet vaapi vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
@@ -60,7 +60,7 @@ RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
 	!!app-shells/mpv-bash-completion
-	>=media-video/ffmpeg-4.0:0=[threads,vaapi?,vdpau?]
+	>=media-video/ffmpeg-4.0:0=[encode,threads,vaapi?,vdpau?]
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.4.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
@@ -81,8 +81,10 @@ COMMON_DEPEND="
 	javascript? ( >=dev-lang/mujs-1.0.0 )
 	jpeg? ( virtual/jpeg:0 )
 	lcms? ( >=media-libs/lcms-2.6:2 )
-	>=media-libs/libass-0.12.1:=[fontconfig,harfbuzz]
-	virtual/ttf-fonts
+	libass? (
+		>=media-libs/libass-0.12.1:=[fontconfig,harfbuzz]
+		virtual/ttf-fonts
+	)
 	libcaca? ( >=media-libs/libcaca-0.99_beta18 )
 	lua? (
 		!luajit? ( <dev-lang/lua-5.3:= )
@@ -92,6 +94,7 @@ COMMON_DEPEND="
 	pulseaudio? ( media-sound/pulseaudio )
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
+	samba? ( net-fs/samba )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
 	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
 	vdpau? ( x11-libs/libvdpau )
@@ -122,9 +125,9 @@ COMMON_DEPEND="
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
 	virtual/pkgconfig
+	dev-python/docutils
 	cuda? ( >=media-libs/nv-codec-headers-8.2.15.7 )
-	doc? (  dev-python/docutils
-			dev-python/rst2pdf )
+	doc? ( dev-python/rst2pdf )
 	dvb? ( virtual/linuxtv-dvb-headers )
 	test? ( >=dev-util/cmocka-1.0.0 )
 "
@@ -137,10 +140,6 @@ RDEPEND="${COMMON_DEPEND}
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
-
-	sed -i 's/2.0.9/2.0.19/g' bootstrap.py || die
-	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
-
 	default
 }
 
@@ -162,19 +161,22 @@ src_configure() {
 		--disable-libmpv-static
 		--disable-static-build
 		# See deep down below for build-date.
-		#--disable-optimize # Don't add '-O2' to CFLAGS.
+		--disable-optimize # Don't add '-O2' to CFLAGS.
 		$(usex debug '' '--disable-debug-build')
 
 		$(use_enable doc html-build)
 		$(use_enable doc pdf-build)
-		$(use_enable doc manpage-build)
+		--enable-manpage-build
 		$(use_enable cplugins)
 		$(use_enable test)
 
 		$(use_enable iconv)
+		$(use_enable samba libsmbclient)
 		$(use_enable lua)
 		$(usex luajit '--lua=luajit' '')
 		$(use_enable javascript)
+		$(use_enable libass)
+		$(use_enable libass libass-osd)
 		$(use_enable zlib)
 		$(use_enable bluray libbluray)
 		$(use_enable dvd dvdnav)
@@ -189,6 +191,9 @@ src_configure() {
 
 		# Audio outputs:
 		$(use_enable sdl sdl2) # Listed under audio, but also includes video.
+		$(use_enable oss oss-audio)
+		--disable-rsound # Only available in overlays.
+		--disable-sndio # Only available in overlays.
 		$(use_enable pulseaudio pulse)
 		$(use_enable jack)
 		$(use_enable openal)
@@ -236,8 +241,6 @@ src_configure() {
 
 		# Miscellaneous features:
 		$(use_enable zimg)
-		#
-		--jobs=$(makeopts_jobs)
 	)
 
 	if use vaapi && use X; then
@@ -335,12 +338,12 @@ pkg_postinst() {
 
 	elog "If you want URL support, please install net-misc/youtube-dl."
 
-	xdg_icon_cache_update
+	gnome2_icon_cache_update
 	xdg_desktop_database_update
 }
 
 pkg_postrm() {
-	xdg_icon_cache_update
+	gnome2_icon_cache_update
 	xdg_desktop_database_update
 }
 
