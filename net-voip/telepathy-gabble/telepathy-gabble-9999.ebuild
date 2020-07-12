@@ -5,10 +5,11 @@ EAPI=6
 # Python is used during build for some scripted source files generation (and twisted tests)
 PYTHON_COMPAT=( python2_7 )
 
-inherit python-any-r1 git-r3
+inherit gnome2 python-any-r1 git-r3
 
 DESCRIPTION="A XMPP connection manager, handles single and multi user chats and voice calls"
 HOMEPAGE="https://telepathy.freedesktop.org/"
+SRC_URI=""
 EGIT_REPO_URI="https://github.com/TelepathyIM/${PN}.git"
 
 LICENSE="LGPL-2.1"
