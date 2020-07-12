@@ -70,6 +70,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	eautoreconf
 	gnome2_src_prepare
 }
 
