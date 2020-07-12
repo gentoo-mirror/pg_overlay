@@ -6,9 +6,9 @@ EAPI=7
 inherit mercurial meson
 
 DESCRIPTION="Toolkit for creating text-mode graphical user interfaces"
-HOMEPAGE="https://pidgin.im/"
+HOMEPAGE="https://keep.imfreedom.org/libgnt/libgnt"
 SRC_URI=""
-EHG_REPO_URI="https://bitbucket.org/pidgin/libgnt"
+EHG_REPO_URI="https://keep.imfreedom.org/libgnt/libgnt"
 
 LICENSE="GPL-2"
 SLOT="0"

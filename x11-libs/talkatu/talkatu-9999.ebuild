@@ -3,17 +3,19 @@
 
 EAPI=7
 
-inherit mercurial meson virtualx
+inherit mercurial meson vala virtualx
 
 DESCRIPTION="GTK widgets for chat applications"
-HOMEPAGE="https://pidgin.im/"
+HOMEPAGE="https://keep.imfreedom.org/talkatu/talkatu"
 SRC_URI=""
-EHG_REPO_URI="https://bitbucket.org/pidgin/talkatu"
+EHG_REPO_URI="https://keep.imfreedom.org/talkatu/talkatu"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="doc man +introspection nls test"
+IUSE="doc man +introspection nls test vala"
+
+REQUIRED_USE="vala? ( introspection )"
 
 RESTRICT="!test? ( test )"
 
@@ -35,6 +37,7 @@ BDEPEND="
 	man? ( sys-apps/help2man[nls?] )
 	nls? ( sys-devel/gettext )
 	test? ( x11-misc/xvfb-run )
+	vala? ( $(vala_depend) )
 "
 
 DOCS=( AUTHORS HACKING INSTALL README.md ChangeLog logo.png )
@@ -45,6 +48,8 @@ src_unpack() {
 
 src_prepare() {
 	default
+
+	use vala && vala_src_prepare
 
 	# We do not want to create packages for other distros
 	sed -i -e '/subdir.*packaging/d' meson.build || die
@@ -60,7 +65,7 @@ src_configure() {
 		$(meson_use man help2man)
 		$(meson_use introspection gobject-introspection)
 		$(meson_use test tests)
-		-Dvapi=false
+		$(meson_use vala vapi)
 	)
 	meson_src_configure
 }
