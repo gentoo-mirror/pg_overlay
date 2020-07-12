@@ -61,8 +61,8 @@ DEPEND="${RDEPEND}
 #)
 
 PATCHES=(
-	"${FILESDIR}"/${P}-build-fix-no-jingle.patch # build with USE=-jingle, bug #523230
-	"${FILESDIR}"/${P}-openssl-1.1.patch # bug #658902
+	"${FILESDIR}"/${PN}-0.18.4-build-fix-no-jingle.patch # build with USE=-jingle, bug #523230
+	"${FILESDIR}"/${PN}-0.18.4-openssl-1.1.patch # bug #658902
 )
 
 pkg_setup() {
