@@ -8,7 +8,7 @@ inherit mercurial meson xdg
 DESCRIPTION="GTK Instant Messenger client"
 HOMEPAGE="https://pidgin.im/"
 SRC_URI=""
-EHG_REPO_URI="https://bitbucket.org/pidgin/main"
+EHG_REPO_URI="https://keep.imfreedom.org/pidgin/pidgin"
 
 LICENSE="GPL-2"
 SLOT="0/3"
@@ -38,6 +38,7 @@ RDEPEND="
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
 		>=net-libs/farstream-0.2.7:0.2= )
+	plugins? ( >=media-libs/libcanberra-0.30 )
 	X? (
 		x11-base/xorg-proto
 		x11-libs/libX11 )

@@ -12,7 +12,7 @@ HOMEPAGE="https://keep.imfreedom.org/gplugin/gplugin"
 
 if [[ ${PV} = *9999* ]] ; then
 	inherit mercurial
-	EHG_REPO_URI="https://bitbucket.org/gplugin/gplugin/src"
+	EHG_REPO_URI="https://keep.imfreedom.org/gplugin/gplugin"
 	EHG_REVISION="develop"
 else
 	SRC_URI="https://bitbucket.org/gplugin/gplugin/downloads/${P}.tar.xz"
