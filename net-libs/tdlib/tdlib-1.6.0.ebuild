@@ -69,7 +69,6 @@ src_prepare() {
 		-e 's/install.*TARGETS/& tg_cli/' \
 		-e '/install.*TARGETS/ s/tdcore[a-z]*//g' \
 		-e '/install.*TARGETS/ s/tdjson_[a-z]*//g' \
-	#	-e '/install.*TARGETS/ s/Td[A-Za-z]*Static//g' \
 		CMakeLists.txt || die
 
 	if use test
