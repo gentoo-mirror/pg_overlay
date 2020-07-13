@@ -219,6 +219,7 @@ net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focus
 net-libs/nodejs 14.5.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r2: HTTP client library
+net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
 net-libs/telegram-qt 9999: Telegram binding for Qt
 net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protocol
 net-libs/telepathy-qt 0.9.8 9999: Qt bindings for the Telepathy D-Bus protocol
@@ -266,4 +267,5 @@ x11-misc/xkeyboard-config 2.30: X keyboard configuration database
 x11-misc/xvfb-run 1.20.3_p1: Run a command in a virtual X server environment
 x11-plugins/pidgin-telegram 1.4.9999 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-plugins/purple-matrix 9999: Libpurple protocol plugin for matrix
+x11-plugins/tdlib-purple 9999: New libpurple plugin for Telegram
 x11-themes/adwaita-icon-theme 3.37.2: GNOME default icon theme
