@@ -63,6 +63,9 @@ src_prepare() {
 	sed -i \
 		-e '/add_subdirectory.*benchmark/d' \
 		-e '/add_subdirectory.*sqlite/d' \
+		-e 's/install.*TARGETS/& tg_cli/' \
+		-e '/install.*TARGETS/ s/tdcore[a-z]*//g' \
+		-e '/install.*TARGETS/ s/tdjson_[a-z]*//g' \
 		CMakeLists.txt || die
 
 	if use test
@@ -73,9 +76,6 @@ src_prepare() {
 		sed -i \
 			-e '/enable_testing/d' \
 			-e '/add_subdirectory.*test/d' \
-			-e 's/install.*TARGETS/& tg_cli/' \
-			-e '/install.*TARGETS/ s/tdcore[a-z]*//g' \
-			-e '/install.*TARGETS/ s/tdjson_[a-z]*//g' \
 			CMakeLists.txt || die
 	fi
 
