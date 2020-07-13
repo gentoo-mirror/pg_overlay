@@ -37,9 +37,6 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	#sed -i -e '/^install/,/^)/d' \
-	#	td{actor,db,net,utils}/CMakeLists.txt || die
-
 	sed -i -e '/example/d' \
 		tdactor/CMakeLists.txt || die
 
@@ -63,7 +60,6 @@ src_prepare() {
 	sed -i \
 		-e '/add_subdirectory.*benchmark/d' \
 		-e '/add_subdirectory.*sqlite/d' \
-		-e 's/install.*TARGETS/& tg_cli/' \
 		CMakeLists.txt || die
 
 	if use test
