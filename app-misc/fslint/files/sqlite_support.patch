@@ -1,0 +1,407 @@
+From e959588703c92310720f6ea26d672f202d1b7f1a Mon Sep 17 00:00:00 2001
+From: Salvatore Dipietro <s.dipietro14@imperial.ac.uk>
+Date: Sat, 4 Aug 2018 01:08:49 +0100
+Subject: [PATCH 1/5] database support
+
+---
+ README.md              |  8 +++++
+ fslint/findup          |  6 ++--
+ fslint/supprt/database | 72 ++++++++++++++++++++++++++++++++++++++++++
+ 3 files changed, 83 insertions(+), 3 deletions(-)
+ create mode 100644 README.md
+ create mode 100755 fslint/supprt/database
+
+diff --git a/README.md b/README.md
+new file mode 100644
+index 0000000..f8c976d
+--- /dev/null
++++ b/README.md
+@@ -0,0 +1,8 @@
++# FSlint
++Linux file system lint checker/cleaner with database support to reduce time and operations if you need to scan twice the same files in the folders or subfolders.
++
++Each hashing algorithm saves the hash values of the files that it calculates on a specific database. In addition to the hash value, it saves the file creation and last modification time. If one of these two parameters changed from the last execution of FSlint, the hashing algorithm re-calculates the hash value otherwise it considers the existing hash value of the file as valid.
++
++To accomplish it, the fslint/supprt/database file has been created and the fslint/findup file has been modified to pass the information to the database script and reduce the execution time for the hashing calculation. Moreover, with the database support, the find duplication file process can be stopped and re-started avoiding to re-calculate the hash from the beginning.
++  
++The usage of the command line or GUI has not been modified, so you can use the FSlint as normal. 
+\ No newline at end of file
+diff --git a/fslint/findup b/fslint/findup
+index fe8aee8..18403e0 100755
+--- a/fslint/findup
++++ b/fslint/findup
+@@ -180,7 +180,7 @@ tr '\0\1\n' ' \t\0' |#reset any space & tabs etc and delimit names with \0
+ # even more so if they are large. This usually adds a small amount of
+ # runtime, however it can save a large amount of time in certain situations.
+ if "$script_dir"/supprt/md5sum_approx </dev/null 2>/dev/null; then
+-    xargs -r0 "$script_dir"/supprt/md5sum_approx |
++    xargs -r0 "$script_dir"/supprt/database "$script_dir"/../databases/md5sum512.sqlite "$script_dir"/supprt/md5sum_approx |
+     sort |                     #group duplicate files together
+     uniq --all-repeated -w32 | #pick just duplicates
+     cut -d' ' -f3- |           #get filenames
+@@ -191,7 +191,7 @@ else
+ fi |
+ 
+ # This block selects duplicates using md5sum of whole file
+-xargs -r0 md5sum -- |      #calculate md5sums for possible duplicates
++xargs -r0 "$script_dir"/supprt/database "$script_dir"/../databases/md5sum.sqlite md5sum  |      #calculate md5sums for possible duplicates
+ cleanup_sum |              #undo any backslash escaping
+ sort |                     #group duplicate files together
+ uniq --all-repeated=$sep_mode -w32 | #pick just duplicates
+@@ -202,7 +202,7 @@ uniq --all-repeated=$sep_mode -w32 | #pick just duplicates
+ cut -s -d' ' -f3- |        #get filenames
+ sort |                     #sort by paths to try to minimise disk seeks
+ tr '\n' '\0' |             #delimit names with \0
+-xargs -r0 sha1sum -- |     #to be sure to be sure
++xargs -r0 "$script_dir"/supprt/database "$script_dir"/../databases/sha1sum.sqlite sha1sum  |     #to be sure to be sure
+ cleanup_sum |              #undo any backslash escaping
+ sort |                     #group duplicate files together
+ uniq --all-repeated=$sep_mode -w40 | #pick just duplicates
+diff --git a/fslint/supprt/database b/fslint/supprt/database
+new file mode 100755
+index 0000000..0e1f957
+--- /dev/null
++++ b/fslint/supprt/database
+@@ -0,0 +1,72 @@
++#!/usr/bin/env python2
++import sys, os, subprocess
++import sqlite3
++
++HASH_CMD = None
++DEBUG = False
++
++def hash_file(path):
++    cmd_output = subprocess.check_output([HASH_CMD, path]).decode("utf-8")
++    hash = cmd_output.split(' ')[0]
++    return hash
++
++
++
++
++
++
++
++
++if __name__ == "__main__":
++    if len(sys.argv) < 3:
++        print("Error, provide the <database path>, <hashing command> and <files list with \\0> ")
++
++    db_path = sys.argv[1]
++    HASH_CMD = sys.argv[2]
++    files_list = sys.argv[3:]
++    files_hashes = dict()
++
++    if not os.path.exists(db_path):
++        directory = os.path.dirname(db_path)
++        print(directory)
++        if not os.path.exists(directory):
++            os.makedirs(directory)
++        db = sqlite3.connect(db_path)
++        cursor = db.cursor()
++        cursor.execute(''' CREATE TABLE files(id INTEGER PRIMARY KEY, path TEXT, ctime VARCHAR(50), mtime VARCHAR(50), hash TEXT )  ''')
++        db.commit()
++    else:
++        db = sqlite3.connect(db_path)
++        cursor = db.cursor()
++
++
++    for file_path in files_list:
++        cursor.execute('''SELECT * FROM files WHERE path=?''', (file_path,))
++        file_record = cursor.fetchone()
++        if file_record is not None and len(file_record) > 0:
++            if str(os.path.getctime(file_path)) == file_record[2] and str(os.path.getmtime(file_path)) == file_record[3]:
++                if DEBUG: print("Found")
++                files_hashes[file_path] = file_record[4]
++            else:
++                if DEBUG: print("Update")
++                hash = hash_file(file_path)
++                cursor.execute('''UPDATE files SET ctime=?, mtime=?, hash=? WHERE path=?''',
++                               (str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash, file_path))
++                db.commit()
++                files_hashes[file_path] = hash
++        else:
++            if DEBUG: print("Insert")
++            hash = hash_file(file_path)
++            cursor.execute('''INSERT INTO files (path, ctime, mtime, hash) VALUES (?,?,?,?)''',
++                           (str(file_path), str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash))
++            db.commit()
++            files_hashes[file_path] = hash
++
++    db.commit()
++    db.close()
++
++
++    for file_hash in files_hashes:
++        sys.stdout.write("%s  %s\n" % (files_hashes[file_hash], file_hash))
++
++
+
+From 00a1e3d8eb27c7053116949a80e664ef8164cab2 Mon Sep 17 00:00:00 2001
+From: Salvatore Dipietro <s.dipietro14@imperial.ac.uk>
+Date: Sat, 4 Aug 2018 01:41:51 +0100
+Subject: [PATCH 2/5] added "Execution Time" in Duplicates (GUI)
+
+---
+ fslint-gui | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/fslint-gui b/fslint-gui
+index c961e5f..cff86e1 100755
+--- a/fslint-gui
++++ b/fslint-gui
+@@ -1038,6 +1038,8 @@ on your system at present."))
+         return (str(row) + _(" files"), pe)
+ 
+     def findup(self, clist_dups):
++        import time
++        start_time = time.time()
+         po, pe = self.get_fslint("./findup --gui" + self.findParams)
+ 
+         numdups = 0
+@@ -1088,9 +1090,10 @@ on your system at present."))
+                 clist_dups.set_row_data(row,file[2]) #mtime
+                 row += 1
+ 
++        execTime = str(time.time() - start_time)
+         return (human_num(byteWaste,1000).strip() + 'B' + _(" wasted in ") +
+                 str(numWaste) + _(" files (in ") + str(len(alldups)) +
+-                _(" groups)"), pe)
++                _(" groups).") + " Execution time: " + execTime + " sec.", pe)
+ 
+     find_dispatch = (findup,findpkgs,findnl,findsn,findtf,
+                      findbl,findid,finded,findns,findrs) #order NB
+
+From 469b79a17d0300e44706f965a651060068fef7a4 Mon Sep 17 00:00:00 2001
+From: Salvatore Dipietro <s.dipietro14@imperial.ac.uk>
+Date: Wed, 8 Aug 2018 20:50:00 +0100
+Subject: [PATCH 3/5] database file single select query
+
+---
+ fslint/supprt/database | 62 +++++++++++++++++++++++++++++++-----------
+ 1 file changed, 46 insertions(+), 16 deletions(-)
+
+diff --git a/fslint/supprt/database b/fslint/supprt/database
+index 0e1f957..c76f4f5 100755
+--- a/fslint/supprt/database
++++ b/fslint/supprt/database
+@@ -1,7 +1,10 @@
+ #!/usr/bin/env python2
++# encoding: utf8
++
+ import sys, os, subprocess
+ import sqlite3
+ 
++
+ HASH_CMD = None
+ DEBUG = False
+ 
+@@ -40,26 +43,53 @@ if __name__ == "__main__":
+         cursor = db.cursor()
+ 
+ 
+-    for file_path in files_list:
+-        cursor.execute('''SELECT * FROM files WHERE path=?''', (file_path,))
+-        file_record = cursor.fetchone()
+-        if file_record is not None and len(file_record) > 0:
+-            if str(os.path.getctime(file_path)) == file_record[2] and str(os.path.getmtime(file_path)) == file_record[3]:
+-                if DEBUG: print("Found")
+-                files_hashes[file_path] = file_record[4]
+-            else:
+-                if DEBUG: print("Update")
++    #Existing Files
++    if len(files_list) > 0:
++        cursor.execute('''SELECT * FROM files WHERE path IN ({seq})'''.format(seq=','.join(['?']*len(files_list))), ([str(f) for f in files_list]))
++        commit_count = 0
++        for file_record in cursor.fetchall():
++            file_path = str(file_record[1])
++            try:
++                if str(os.path.getctime(file_path)) == file_record[2] and str(os.path.getmtime(file_path)) == file_record[3]:
++                    if DEBUG: print("Found")
++                    files_hashes[file_path] = file_record[4]
++                    files_list.remove(file_path)
++                else:
++                    if DEBUG: print("Update")
++                    hash = hash_file(file_path)
++                    cursor.execute('''UPDATE files SET ctime=?, mtime=?, hash=? WHERE path=?''',
++                                   (str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash, file_path))
++                    commit_count += 1
++                    files_hashes[file_path] = hash
++
++                if commit_count == 1000:
++                    commit_count = 0
++                    db.commit()
++
++            # except UnicodeDecodeError as ude:
++            except Exception as e:
+                 hash = hash_file(file_path)
+-                cursor.execute('''UPDATE files SET ctime=?, mtime=?, hash=? WHERE path=?''',
+-                               (str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash, file_path))
+-                db.commit()
+                 files_hashes[file_path] = hash
+-        else:
++
++
++    #New files
++    for file_path in files_list:
++        file_path = str(file_path)
++        try:
+             if DEBUG: print("Insert")
+             hash = hash_file(file_path)
+             cursor.execute('''INSERT INTO files (path, ctime, mtime, hash) VALUES (?,?,?,?)''',
+-                           (str(file_path), str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash))
+-            db.commit()
++                         (str(file_path), str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash))
++            commit_count += 1
++            files_hashes[file_path] = hash
++
++            if commit_count == 1000:
++                commit_count = 0
++                db.commit()
++
++        #except UnicodeDecodeError as ude:
++        except Exception as e:
++            hash = hash_file(file_path)
+             files_hashes[file_path] = hash
+ 
+     db.commit()
+@@ -67,6 +97,6 @@ if __name__ == "__main__":
+ 
+ 
+     for file_hash in files_hashes:
+-        sys.stdout.write("%s  %s\n" % (files_hashes[file_hash], file_hash))
++        sys.stdout.write("%s  %s\n" % (files_hashes[file_hash], str(file_hash)))
+ 
+ 
+
+From 4ba300583f4c73285756b57c02c8e5f284e33f17 Mon Sep 17 00:00:00 2001
+From: Salvatore Dipietro <s.dipietro14@imperial.ac.uk>
+Date: Thu, 9 Aug 2018 20:28:22 +0100
+Subject: [PATCH 4/5] database file: support UFT-8 filename
+
+---
+ fslint/supprt/database | 55 +++++++++++++++++++++---------------------
+ 1 file changed, 27 insertions(+), 28 deletions(-)
+
+diff --git a/fslint/supprt/database b/fslint/supprt/database
+index c76f4f5..46710d0 100755
+--- a/fslint/supprt/database
++++ b/fslint/supprt/database
+@@ -9,7 +9,7 @@ HASH_CMD = None
+ DEBUG = False
+ 
+ def hash_file(path):
+-    cmd_output = subprocess.check_output([HASH_CMD, path]).decode("utf-8")
++    cmd_output = subprocess.check_output([HASH_CMD, path.encode('utf-8')]) #.decode("utf-8")
+     hash = cmd_output.split(' ')[0]
+     return hash
+ 
+@@ -26,7 +26,7 @@ if __name__ == "__main__":
+ 
+     db_path = sys.argv[1]
+     HASH_CMD = sys.argv[2]
+-    files_list = sys.argv[3:]
++    files_list = [f.decode("utf-8") for f in sys.argv[3:]]
+     files_hashes = dict()
+ 
+     if not os.path.exists(db_path):
+@@ -35,6 +35,7 @@ if __name__ == "__main__":
+         if not os.path.exists(directory):
+             os.makedirs(directory)
+         db = sqlite3.connect(db_path)
++        #db.text_factory = str
+         cursor = db.cursor()
+         cursor.execute(''' CREATE TABLE files(id INTEGER PRIMARY KEY, path TEXT, ctime VARCHAR(50), mtime VARCHAR(50), hash TEXT )  ''')
+         db.commit()
+@@ -44,37 +45,35 @@ if __name__ == "__main__":
+ 
+ 
+     #Existing Files
+-    if len(files_list) > 0:
+-        cursor.execute('''SELECT * FROM files WHERE path IN ({seq})'''.format(seq=','.join(['?']*len(files_list))), ([str(f) for f in files_list]))
+-        commit_count = 0
+-        for file_record in cursor.fetchall():
+-            file_path = str(file_record[1])
+-            try:
+-                if str(os.path.getctime(file_path)) == file_record[2] and str(os.path.getmtime(file_path)) == file_record[3]:
+-                    if DEBUG: print("Found")
+-                    files_hashes[file_path] = file_record[4]
+-                    files_list.remove(file_path)
+-                else:
+-                    if DEBUG: print("Update")
+-                    hash = hash_file(file_path)
+-                    cursor.execute('''UPDATE files SET ctime=?, mtime=?, hash=? WHERE path=?''',
+-                                   (str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash, file_path))
+-                    commit_count += 1
+-                    files_hashes[file_path] = hash
+-
+-                if commit_count == 1000:
+-                    commit_count = 0
+-                    db.commit()
+-
+-            # except UnicodeDecodeError as ude:
+-            except Exception as e:
++    cursor.execute('''SELECT * FROM files WHERE path IN ({seq})'''.format(seq=','.join(['?']*len(files_list))), ([f for f in files_list]))
++    commit_count = 0
++    for file_record in cursor.fetchall():
++        file_path = str(file_record[1])
++        try:
++            if str(os.path.getctime(file_path)) == file_record[2] and str(os.path.getmtime(file_path)) == file_record[3]:
++                if DEBUG: print("Found")
++                files_hashes[file_path] = file_record[4]
++                files_list.remove(file_path)
++            else:
++                if DEBUG: print("Update")
+                 hash = hash_file(file_path)
++                cursor.execute('''UPDATE files SET ctime=?, mtime=?, hash=? WHERE path=?''',
++                               (str(os.path.getctime(file_path)), str(os.path.getmtime(file_path)), hash, file_path))
++                commit_count += 1
+                 files_hashes[file_path] = hash
+ 
++            if commit_count == 1000:
++                commit_count = 0
++                db.commit()
++
++        # except UnicodeDecodeError as ude:
++        except Exception as e:
++            hash = hash_file(file_path)
++            files_hashes[file_path] = hash
++
+ 
+     #New files
+     for file_path in files_list:
+-        file_path = str(file_path)
+         try:
+             if DEBUG: print("Insert")
+             hash = hash_file(file_path)
+@@ -97,6 +96,6 @@ if __name__ == "__main__":
+ 
+ 
+     for file_hash in files_hashes:
+-        sys.stdout.write("%s  %s\n" % (files_hashes[file_hash], str(file_hash)))
++        sys.stdout.write("%s  %s\n" % (files_hashes[file_hash], file_hash.encode('utf-8')))
+ 
+ 
+
+From 8e923de96eb4ddf19880681cb54e7c8a25429f8a Mon Sep 17 00:00:00 2001
+From: Salvatore <dipietro.salvatore@gmail.com>
+Date: Sun, 29 Sep 2019 14:07:45 +0100
+Subject: [PATCH 5/5] Update findup
+
+---
+ fslint/findup | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/fslint/findup b/fslint/findup
+index 18403e0..432119b 100755
+--- a/fslint/findup
++++ b/fslint/findup
+@@ -202,7 +202,8 @@ uniq --all-repeated=$sep_mode -w32 | #pick just duplicates
+ cut -s -d' ' -f3- |        #get filenames
+ sort |                     #sort by paths to try to minimise disk seeks
+ tr '\n' '\0' |             #delimit names with \0
+-xargs -r0 "$script_dir"/supprt/database "$script_dir"/../databases/sha1sum.sqlite sha1sum  |     #to be sure to be sure
++# Disabled to do the last test before show the results
++#xargs -r0 "$script_dir"/supprt/database "$script_dir"/../databases/sha1sum.sqlite sha1sum  |     #to be sure to be sure
+ cleanup_sum |              #undo any backslash escaping
+ sort |                     #group duplicate files together
+ uniq --all-repeated=$sep_mode -w40 | #pick just duplicates

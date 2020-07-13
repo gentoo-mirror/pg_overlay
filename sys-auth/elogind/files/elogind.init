@@ -1,0 +1,36 @@
+#!/sbin/openrc-run
+# Copyright 1999-2019 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	need dbus
+
+	# Make sure elogind is up before xdm starts any dm
+	before xdm
+}
+
+start() {
+	ebegin "Starting elogind"
+
+	start-stop-daemon --start --quiet \
+		--pidfile "${ELOGIND_PIDFILE}" \
+		--exec "${ELOGIND_EXEC}" -- --daemon
+	eend $?
+}
+
+stop() {
+	local stop_timeout="SIGTERM/10/SIGKILL/3"
+
+	if [ ${RC_CMD} = "restart" ] ; then
+		ebegin "Interrupting elogind"
+		stop_timeout="SIGINT/10/SIGINT/5/${stop_timeout}"
+	else
+		ebegin "Stopping elogind"
+	fi
+
+	start-stop-daemon --stop --quiet \
+		--retry ${stop_timeout} \
+		--pidfile "${ELOGIND_PIDFILE}"
+
+	eend $?
+}

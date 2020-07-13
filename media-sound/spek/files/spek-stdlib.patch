@@ -1,0 +1,18 @@
+--- a/src/spek-events.cc_old      2016-07-02 19:12:46.000000000 +0700
++++ b/src/spek-events.cc  2016-07-02 19:57:26.185167251 +0700
+@@ -1,5 +1,5 @@
+ #include "spek-events.h"
+-
++#include <stdlib.h>
+ //IMPLEMENT_DYNAMIC_CLASS(SpekHaveSampleEvent, wxEvent)
+ DEFINE_EVENT_TYPE(SPEK_HAVE_SAMPLE)
+
+--- a/src/spek-fft.cc_old 2016-07-02 19:12:46.000000000 +0700
++++ b/src/spek-fft.cc     2016-07-02 19:57:35.816287793 +0700
+@@ -1,5 +1,5 @@
+ #include <cmath>
+-
++#include <stdlib.h>
+ #define __STDC_CONSTANT_MACROS
+ extern "C" {
+ #include <libavcodec/avfft.h>

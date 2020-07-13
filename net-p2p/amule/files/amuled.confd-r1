@@ -1,0 +1,8 @@
+# owner of amuled process (must be existing)
+AMULEUSER="$USER"
+
+# home directory for amuled (must be existing)
+AMULEHOME="$HOME"
+
+# log file (/dev/null for nowhere)
+LOG=/var/log/amuled.log
