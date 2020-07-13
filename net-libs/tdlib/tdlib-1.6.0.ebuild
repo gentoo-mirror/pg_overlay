@@ -30,41 +30,14 @@ BDEPEND="
 	java? ( virtual/jdk )
 "
 RDEPEND="
-	dev-db/sqlite
 	dev-libs/openssl
 	sys-libs/zlib
 "
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	sed -i -e '/^install/,/^)/d' \
-		td{actor,db,net,utils}/CMakeLists.txt || die
-
-	sed -i -e '/example/d' \
-		tdactor/CMakeLists.txt || die
-
-	local findPkgConfig="find_package(PkgConfig REQUIRED)"
-	local pkgCheckModules="pkg_check_modules(SQLITE3 REQUIRED sqlite3)"
-
-	sed -i \
-		-e "/add_library.*tddb/i ${findPkgConfig}" \
-		-e "/add_library.*tddb/i ${pkgCheckModules}" \
-		-e 's/target_include_directories.*PUBLIC/& ${SQLITE3_INCLUDE_DIRS}/' \
-		-e 's/\(target_link_libraries.*\)tdsqlite/\1${SQLITE3_LIBRARIES}/' \
-		-e '/binlog_dump/d' \
-		tddb/CMakeLists.txt || die
-
-	sed -i \
-		-e 's/\(include.*sqlite\).*sqlite/\1/' \
-		tddb/td/db/detail/RawSqliteDb.cpp \
-		tddb/td/db/SqliteStatement.cpp \
-		tddb/td/db/SqliteDb.cpp || die
-
-	sed -i \
-		-e '/add_subdirectory.*benchmark/d' \
-		-e '/add_subdirectory.*sqlite/d' \
-		-e 's/install.*TARGETS/& tg_cli/' \
-		CMakeLists.txt || die
+	sed 's/tdnet/tdcore tdnet/' -i benchmark/CMakeLists.txt
+	sed '/target_link_libraries(tdjson_private/s/tdutils/tdutils tdcore/' -i CMakeLists.txt
 
 	if use test
 	then
@@ -74,8 +47,6 @@ src_prepare() {
 		sed -i \
 			-e '/enable_testing/d' \
 			-e '/add_subdirectory.*test/d' \
-			-e '/install.*TARGETS/ s/tdcore[a-z]*//g' \
-			-e '/install.*TARGETS/ s/tdjson_[a-z]*//g' \
 			CMakeLists.txt || die
 	fi
 
