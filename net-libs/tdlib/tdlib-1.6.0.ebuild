@@ -90,8 +90,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DTD_ENABLE_DOTNET=OFF
 		-DTD_ENABLE_JNI=$(usex java)
-		-DTD_ENABLE_LTO=ON
-		-DBUILD_STATIC_LIBS:BOOL=ON
+		#-DTD_ENABLE_LTO=ON
 	)
 
 	cmake_src_configure
