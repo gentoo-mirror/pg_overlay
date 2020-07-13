@@ -91,6 +91,7 @@ src_configure() {
 		-DTD_ENABLE_DOTNET=OFF
 		-DTD_ENABLE_JNI=$(usex java)
 		-DTD_ENABLE_LTO=ON
+		-DBUILD_STATIC_LIBS=ON
 	)
 
 	cmake_src_configure
