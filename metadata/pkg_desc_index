@@ -206,6 +206,7 @@ media-video/mpv 0.32.0-r1 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.2: Multimedia processing graphs
 media-video/qmplay2 20.07.04: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
+net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 2.1.18: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
