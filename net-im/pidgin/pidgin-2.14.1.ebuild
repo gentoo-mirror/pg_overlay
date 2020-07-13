@@ -142,7 +142,7 @@ PATCHES=(
 	#"${WORKDIR}/${PN}-eds-3.6.patch"
 	#"${FILESDIR}/${PN}-2.10.9-fix-gtkmedia.patch"
 	#"${FILESDIR}/${PN}-2.10.10-eds-3.6-configure.ac.patch"
-	#"${FILESDIR}/${PN}-2.10.11-tinfo.patch"
+	"${FILESDIR}/${PN}-2.10.11-tinfo.patch"
 	#"${DISTDIR}/${PN}-2.10.9-irc_join_sleep.patch" # 577286
 	#"${FILESDIR}/${PN}-2.13.0-disable-one-jid-test.patch" # 593338
 	#"${FILESDIR}/${PN}-2.13.0-metainfo.patch"
