@@ -17,6 +17,7 @@ then
 else
 	SRC_URI="https://github.com/${PN}/td/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~x86"
+	S=${WORKDIR}/td-${PV}
 fi
 
 LICENSE="Boost-1.0"
