@@ -64,7 +64,6 @@ src_prepare() {
 		-e '/add_subdirectory.*benchmark/d' \
 		-e '/add_subdirectory.*sqlite/d' \
 		-e 's/install.*TARGETS/& tg_cli/' \
-		-e '/install.*TARGETS/ s/tdcore[a-z]*//g' \
 		CMakeLists.txt || die
 
 	if use test
