@@ -119,6 +119,7 @@ src_configure() {
 		--doc=1 \
 		--strip=0 \
 		--verbose=1 \
+		--purple=1 \
 		"${myconf[@]}" || die
 
 	sed -i \
