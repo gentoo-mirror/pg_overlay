@@ -37,8 +37,8 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 src_prepare() {
-	sed -i -e '/^install/,/^)/d' \
-		td{actor,db,net,utils}/CMakeLists.txt || die
+	#sed -i -e '/^install/,/^)/d' \
+	#	td{actor,db,net,utils}/CMakeLists.txt || die
 
 	sed -i -e '/example/d' \
 		tdactor/CMakeLists.txt || die
