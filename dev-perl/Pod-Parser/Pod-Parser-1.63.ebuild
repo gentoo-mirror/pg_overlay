@@ -4,10 +4,8 @@
 
 EAPI=7
 
-MODULE_AUTHOR="MAREKR"
-MODULE_VERSION="1.63"
-
-
+DIST_AUTHOR="MAREKR"
+DIST_VERSION="1.63"
 inherit perl-module
 
 DESCRIPTION="base class for creating POD filters and translators"
