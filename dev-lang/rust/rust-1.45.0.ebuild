@@ -61,8 +61,22 @@ LLVM_MAX_SLOT=10
 
 BOOTSTRAP_DEPEND="|| ( >=dev-lang/rust-1.$(($(ver_cut 2) - 1)) >=dev-lang/rust-bin-1.$(($(ver_cut 2) - 1)) )"
 
-COMMON_DEPEND="
-	dev-libs/libgit2:=
+BDEPEND="${PYTHON_DEPS}
+	app-eselect/eselect-rust
+	|| (
+		>=sys-devel/gcc-4.7
+		>=sys-devel/clang-3.5
+	)
+	system-bootstrap? ( ${BOOTSTRAP_DEPEND} )
+	!system-llvm? (
+		dev-util/cmake
+		dev-util/ninja
+	)
+"
+
+# libgit2 should be at least same as bundled into libgit-sys #707746
+DEPEND="
+	>=dev-libs/libgit2-0.99:=
 	net-libs/libssh2:=
 	net-libs/http-parser:=
 	net-misc/curl:=[ssl]
@@ -76,22 +90,8 @@ COMMON_DEPEND="
 	)
 "
 
-DEPEND="${COMMON_DEPEND}
-	${PYTHON_DEPS}
-	|| (
-		>=sys-devel/gcc-8.3
-		>=sys-devel/clang-8.0
-	)
-	system-bootstrap? ( ${BOOTSTRAP_DEPEND}	)
-	!system-llvm? (
-		dev-util/cmake
-		|| ( dev-util/ninja
-			dev-util/samurai )
-	)
-"
-
-RDEPEND="${COMMON_DEPEND}
-	>=app-eselect/eselect-rust-20190311
+RDEPEND="${DEPEND}
+	app-eselect/eselect-rust
 "
 
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
@@ -119,7 +119,6 @@ RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}"/0012-Ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/rust-pr71782-Use-a-non-existent-test-path.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -404,7 +403,7 @@ src_configure() {
 		sed -i "/^target = \[/ s#\[.*\]#\[${rust_targets}\]#" config.toml || die
 
 		ewarn
-		ewarn "Enabled ${rust_target} rust target"
+		ewarn "Enabled ${cross_rust_target} rust target"
 		ewarn "Using ${cross_toolchain} cross toolchain"
 		ewarn
 		if ! has_version -b 'sys-devel/binutils[multitarget]' ; then

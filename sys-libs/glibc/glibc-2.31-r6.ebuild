@@ -16,7 +16,7 @@ SLOT="2.2"
 EMULTILIB_PKG="true"
 
 # Gentoo patchset (ignored for live ebuilds)
-PATCH_VER=7
+PATCH_VER=8
 PATCH_DEV=dilfridge
 
 if [[ ${PV} == 9999* ]]; then
@@ -92,7 +92,6 @@ BDEPEND="
 	${PYTHON_DEPS}
 	>=app-misc/pax-utils-0.1.10
 	sys-devel/bison
-	!<sys-devel/bison-2.7
 	doc? ( sys-apps/texinfo )
 "
 COMMON_DEPEND="
@@ -297,12 +296,6 @@ setup_target_flags() {
 				export CFLAGS_x86="${CFLAGS_x86} -march=${t}"
 				einfo "Auto adding -march=${t} to CFLAGS_x86 #185404 (ABI=${ABI})"
 			fi
-		;;
-		ia64)
-			# Workaround GPREL22 overflow by slightly pessimizing global
-			# references to go via 64-bit relocations instead of 22-bit ones.
-			# This allows building glibc on ia64 without an overflow: #723268
-			append-flags -fcommon
 		;;
 		mips)
 			# The mips abi cannot support the GNU style hashes. #233233

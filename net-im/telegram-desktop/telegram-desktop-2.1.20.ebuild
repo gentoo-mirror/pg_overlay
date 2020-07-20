@@ -31,6 +31,7 @@ RDEPEND="
 	dev-qt/qtnetwork:5
 	dev-qt/qtsvg:5
 	dev-qt/qtwidgets:5[png,X(-)?]
+	dev-qt/qtx11extras:5
 	media-fonts/open-sans
 	media-libs/fontconfig:=
 	~media-libs/libtgvoip-2.4.4_p20200704[alsa?,pulseaudio?]
@@ -75,6 +76,8 @@ REQUIRED_USE="
 "
 
 S="${WORKDIR}/${MY_P}"
+
+PATCHES=( "${FILESDIR}/${PV}-qt-includes.patch" )
 
 pkg_pretend() {
 	if has ccache ${FEATURES}; then
