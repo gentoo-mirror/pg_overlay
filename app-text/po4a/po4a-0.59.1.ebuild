@@ -21,6 +21,7 @@ RESTRICT="!test? ( test )"
 RDEPEND="app-text/opensp
 	dev-libs/libxslt
 	dev-perl/Locale-gettext
+	dev-perl/Pod-Parser
 	dev-perl/SGMLSpm
 	dev-perl/TermReadKey
 	dev-perl/Text-WrapI18N
