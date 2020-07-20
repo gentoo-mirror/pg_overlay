@@ -51,5 +51,5 @@ src_prepare() {
 	}
 	l10n_for_each_disabled_locale_do rm_locale
 
-	perl-module_src_prepare create_packlist=0
+	perl-module_src_prepare
 }
