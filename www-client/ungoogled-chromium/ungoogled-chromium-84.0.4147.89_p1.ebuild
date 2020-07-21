@@ -139,6 +139,11 @@ COMMON_DEPEND="
 	libcxx? (
 		sys-libs/libcxx
 	)
+	app-arch/snappy:=
+	dev-libs/libxslt:=
+	>=dev-libs/re2-0.2019.08.01:=
+	>=media-libs/openh264-1.6.0:=
+	system-icu? ( >=dev-libs/icu-67.1:= )
 "
 # For nvidia-drivers blocker, see bug #413637 .
 RDEPEND="${COMMON_DEPEND}
