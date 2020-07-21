@@ -14,10 +14,10 @@ KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-li
 BDEPEND="app-text/asciidoc"
 
 src_configure() {
-	econf --disable-static
+	econf --enable-static --enable-shared --disable-debug
 }
 
 src_install() {
 	default
-	find "${D}" -name '*.la' -delete || die
+	find "${D}" -name '*.la' -o -name "*.a"-delete || die
 }
