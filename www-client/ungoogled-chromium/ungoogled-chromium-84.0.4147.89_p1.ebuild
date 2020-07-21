@@ -564,15 +564,8 @@ src_prepare() {
 	if use ozone && use wayland && ! use headless ; then
 		keeplibs+=( third_party/wayland )
 	fi
-	if use libcxx; then
-		keeplibs+=( third_party/libxml )
-		keeplibs+=( third_party/libxslt )
-		keeplibs+=( third_party/openh264 )
-		keeplibs+=( third_party/re2 )
-		keeplibs+=( third_party/snappy )
-		if use system-icu; then
-			keeplibs+=( third_party/icu )
-		fi
+	if use system-icu; then
+		keeplibs+=( third_party/icu )
 	fi
 
 	ebegin "Removing unneeded bundled libraries"
