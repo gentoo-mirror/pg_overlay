@@ -271,7 +271,7 @@ _check_reqs() {
 }
 
 pkg_pretend() {
-	use base ||
+	use firebird ||
 		ewarn "If you plan to use Base application you must enable USE base."
 	use java ||
 		ewarn "Without USE java, several wizards are not going to be available."
