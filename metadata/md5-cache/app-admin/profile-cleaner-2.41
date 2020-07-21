@@ -1,0 +1,10 @@
+DEFINED_PHASES=install
+DESCRIPTION=Vacuum and reindex browser sqlite databases
+EAPI=7
+HOMEPAGE=https://github.com/graysky2/profile-cleaner
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+RDEPEND=app-shells/bash sys-devel/bc sys-apps/coreutils sys-apps/findutils sys-apps/grep sys-apps/sed sys-process/parallel dev-db/sqlite:3
+SLOT=0
+SRC_URI=https://github.com/graysky2/profile-cleaner/archive/v2.41.tar.gz -> profile-cleaner-2.41.tar.gz
+_md5_=ebaf627cb1508d5465cc42d539a5325d
