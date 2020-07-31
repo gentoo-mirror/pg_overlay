@@ -3,15 +3,12 @@ rhbz-1219542-s390-build.patch
 build-aarch64-skia.patch
 build-disable-elfhack.patch
 build-arm-libopus.patch
-mozilla-1640982.patch
 
-firefox-enable-addons.patch
 rhbz-1173156.patch
 mozilla-1170092.patch
 rhbz-1354671.patch
 firefox-locale-debug.patch
 
-mozilla-1196777.patch
 mozilla-1337988.patch
 bug1375074-save-restore-x28.patch
 mozilla-1580174-webrtc-popup.patch
