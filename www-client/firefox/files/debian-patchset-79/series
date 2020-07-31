@@ -1,0 +1,17 @@
+fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
+fixes/Bug-1526653-Include-struct-definitions-for-user_vfp-.patch
+fixes/Bug-1650299-Unify-the-inclusion-of-the-ICU-data-file.patch
+fixes/Bug-1264836-Automatically-convert-the-little-endian-.patch
+prefs/Set-javascript.options.showInConsole.patch
+prefs/Set-DPI-to-system-settings.patch
+prefs/Don-t-auto-disable-extensions-in-system-directories.patch
+debian-hacks/Avoid-wrong-sessionstore-data-to-keep-windows-out-of.patch
+debian-hacks/Add-another-preferences-directory-for-applications-p.patch
+debian-hacks/Don-t-register-plugins-if-the-MOZILLA_DISABLE_PLUGIN.patch
+debian-hacks/Don-t-build-image-gtests.patch
+debian-hacks/Set-program-name-from-the-remoting-name.patch
+debian-hacks/Use-the-Mozilla-Location-Service-key-when-the-Google.patch
+debian-hacks/Avoid-using-vmrs-vmsr-on-armel.patch
+debian-hacks/Use-remoting-name-for-call-to-gdk_set_program_class.patch
+debian-hacks/Use-build-id-as-langpack-version-for-reproducibility.patch
+debian-hacks/Don-t-build-ICU-in-parallel.patch

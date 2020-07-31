@@ -1,0 +1,21 @@
+diff -up firefox-72.0.2/js/src/wasm/WasmSignalHandlers.cpp.old firefox-72.0.2/js/src/wasm/WasmSignalHandlers.cpp
+--- firefox-72.0.2/js/src/wasm/WasmSignalHandlers.cpp.old	2020-01-17 23:34:41.000000000 +0200
++++ firefox-72.0.2/js/src/wasm/WasmSignalHandlers.cpp	2020-02-02 08:07:54.670341986 +0200
+@@ -249,7 +249,16 @@ using mozilla::DebugOnly;
+ #endif
+ 
+ #ifdef WASM_EMULATE_ARM_UNALIGNED_FP_ACCESS
+-#  include <sys/user.h>
++struct user_vfp {
++  unsigned long long fpregs[32];
++  unsigned long fpscr;
++};
++
++struct user_vfp_exc {
++  unsigned long fpexc;
++  unsigned long fpinst;
++  unsigned long fpinst2;
++};
+ #endif
+ 
+ #if defined(ANDROID)
