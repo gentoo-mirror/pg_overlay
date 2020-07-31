@@ -36,7 +36,7 @@ if [[ "${PV}" == *_rc* ]]; then
 	MOZ_SRC_URI="${MOZ_HTTP_URI}/source/${PN}-${MOZ_PV}.source.tar.xz -> $P.tar.xz"
 fi
 
-LLVM_MAX_SLOT=10
+LLVM_MAX_SLOT=11
 MOZCONFIG_OPTIONAL_JIT=1
 
 inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
@@ -138,21 +138,21 @@ DEPEND="${CDEPEND}
 	>=virtual/rust-1.34.0
 	|| (
 		(
+			sys-devel/clang:11
+			!clang? ( sys-devel/llvm:11 )
+			clang? (
+				=sys-devel/lld-11*
+				sys-devel/llvm:11
+				pgo? ( =sys-libs/compiler-rt-sanitizers-11*[profile] )
+			)
+		)
+		(
 			sys-devel/clang:10
 			!clang? ( sys-devel/llvm:10 )
 			clang? (
 				=sys-devel/lld-10*
 				sys-devel/llvm:10
 				pgo? ( =sys-libs/compiler-rt-sanitizers-10*[profile] )
-			)
-		)
-		(
-			sys-devel/clang:9
-			!clang? ( sys-devel/llvm:9 )
-			clang? (
-				=sys-devel/lld-9*
-				sys-devel/llvm:9
-				pgo? ( =sys-libs/compiler-rt-sanitizers-9*[profile] )
 			)
 		)
 	)
@@ -685,7 +685,6 @@ src_configure() {
 	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
 	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
 	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
-	mozconfig_annotate '' RUSTFLAGS=-Cembed-bitcode=yes
 
 
 	# Enable good features
@@ -700,7 +699,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0 -Cembed-bitcode=yes'" >> "${S}"/.mozconfig
+	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
 	#
 
 	# Finalize and report settings
