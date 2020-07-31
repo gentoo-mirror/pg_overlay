@@ -1,5 +1,4 @@
 fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-fixes/Bug-1526653-Include-struct-definitions-for-user_vfp-.patch
 fixes/Bug-1650299-Unify-the-inclusion-of-the-ICU-data-file.patch
 fixes/Bug-1264836-Automatically-convert-the-little-endian-.patch
 prefs/Set-javascript.options.showInConsole.patch
