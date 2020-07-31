@@ -148,7 +148,7 @@ dev-python/sip 4.19.22 5.2.0: Python extension module generator for C and C++ li
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
-dev-qt/qtdeclarative 5.15.0: The QML and Quick modules for the Qt5 framework
+dev-qt/qtdeclarative 5.15.0-r1: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200309-r1 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.65.0: GDBus code and documentation generator
@@ -174,7 +174,7 @@ gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kwin 5.18.4.4 5.19.3: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 5.18.4.4 5.19.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.11.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Library for handling OpenGL function pointer management
 media-libs/libglvnd 1.3.2 9999: The GL Vendor-Neutral Dispatch library
