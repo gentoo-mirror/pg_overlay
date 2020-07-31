@@ -3,7 +3,6 @@ rhbz-1219542-s390-build.patch
 build-aarch64-skia.patch
 build-disable-elfhack.patch
 build-arm-libopus.patch
-build-arm-libaom.patch
 mozilla-1640982.patch
 
 firefox-enable-addons.patch
