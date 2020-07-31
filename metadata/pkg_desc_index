@@ -238,7 +238,7 @@ sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain pr
 sci-libs/libqalculate 3.10.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/razercfg 0.41: Utility for advanced configuration of Razer mice
+sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system-wide services
