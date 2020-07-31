@@ -40,7 +40,7 @@ dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell a
 dev-lang/duktape 2.5.0: Embeddable Javascript engine
 dev-lang/perl 5.32.0: Larry Wall's Practical Extraction and Report Language
 dev-lang/python 2.7.18-r1 3.9.0_beta5: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.45.0: Systems programming language from Mozilla
+dev-lang/rust 1.45.1: Systems programming language from Mozilla
 dev-lang/spidermonkey 60.9.0: Stand-alone JavaScript C++ library
 dev-lang/vala 0.48.4: Compiler for the GObject type system
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
