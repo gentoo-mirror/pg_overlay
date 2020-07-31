@@ -9,7 +9,6 @@ mozilla-1170092.patch
 rhbz-1354671.patch
 firefox-locale-debug.patch
 
-bug1375074-save-restore-x28.patch
 mozilla-1580174-webrtc-popup.patch
 
 firefox-disable-ffvpx-with-vapi.patch
