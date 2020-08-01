@@ -313,7 +313,6 @@ media-sound/qmmp:stereo - Enable stereo effect
 media-sound/qmmp:tray - Build tray icon
 media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
 media-sound/shntool:mac - Add support for Monkey's Audio files
-media-video/libva-utils:drm - Enables VA/DRM API support.
 media-video/mpv:archive - Enable support for various archive formats via app-arch/libarchive
 media-video/mpv:bluray - Enable playback of Blu-ray filesystems
 media-video/mpv:cli - Build mpv CLI player
@@ -355,8 +354,6 @@ media-video/qmplay2:sid - Build Chiptune with SIDPLAY support
 media-video/qmplay2:videofilters - Build with VideoFilters module
 media-video/qmplay2:visualizations - Build with Visualizations module
 media-video/qmplay2:vulkan - Build with Vulkan support
-media-video/smplayer:autoshutdown - Enable the option to shutdown your computer after finishing the playlist. This requires dev-qt/qtdbus as dependency.
-media-video/smplayer:mpris - Enable support for MPRIS2 (Media Player Remote Interfacing Specification, version 2), a DBus interface for remote control, which requires dev-qt/qtdbus as dependency.
 net-im/bitlbee:libevent - Use libevent for event handling
 net-im/bitlbee:msn - Enable MSN Messenger IM protocol support.
 net-im/bitlbee:nss - Use NSS for SSL support in MSN and Jabber

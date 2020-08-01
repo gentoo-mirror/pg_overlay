@@ -71,9 +71,6 @@ dev-perl/Alien-Libxml2 0.110.0: Install the C libxml2 library on your system
 dev-perl/App-pwhich 1.160.0: Perl-only 'which'
 dev-perl/Canary-Stability 2013.0.0: Canary to check perl compatibility for schmorp's modules
 dev-perl/Class-Inspector 1.360.0: Provides information about Classes
-dev-perl/DateTime 1.510.0: A date and time object
-dev-perl/DateTime-Locale 1.250.0: Localization support for DateTime
-dev-perl/DateTime-TimeZone 2.370.0: Time zone object base class and factory
 dev-perl/Devel-Size 0.830.0: Perl extension for finding the memory usage of Perl variables
 dev-perl/Devel-StackTrace 2.40.0: An object representing a stack trace
 dev-perl/EV 4.270.0: Perl interface to libev, a high performance full-featured event loop
@@ -203,12 +200,9 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-sound/wavpack 5.2.0: Hybrid lossless audio compression tools
-media-video/ffmpeg 4.3.1_pre: Complete solution to record/convert/stream audio and video. Includes libavcodec
-media-video/libva-utils 2.7.1: Collection of utilities and tests for VA-API
 media-video/mpv 0.32.0-r1 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.2: Multimedia processing graphs
 media-video/qmplay2 20.07.04: A Qt-based video player, which can play most formats and codecs
-media-video/smplayer 19.10.2: Great Qt GUI front-end for mplayer/mpv
 net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 2.2.0-r1: Official desktop client for Telegram
@@ -253,10 +247,7 @@ sys-libs/ncurses 6.2_p20200627: console display library
 sys-libs/polly 10.0.1_rc1: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre24: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
-virtual/perl-CPAN-Meta 2.150.10-r3: Virtual for CPAN-Meta
-virtual/perl-CPAN-Meta-YAML 0.18.0-r5: Virtual for CPAN-Meta-YAML
 virtual/perl-Compress-Raw-Zlib 2.84.0: Virtual for Compress-Raw-Zlib
-virtual/perl-Data-Dumper 2.174.0: Virtual for Data-Dumper
 virtual/perl-Digest 1.170.100_rc-r9: Virtual for Digest
 virtual/perl-Digest-MD5 2.550.0-r2: Virtual for Digest-MD5
 virtual/perl-Digest-SHA 6.20.0: Virtual for Digest-SHA
