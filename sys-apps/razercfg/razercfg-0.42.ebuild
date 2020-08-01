@@ -31,7 +31,7 @@ RDEPEND="${DEPEND}
 	udev? ( virtual/udev )
 "
 
-PATCHES=( "${FILESDIR}/${PN}-0.39-unit-variables.patch" )
+PATCHES=( "${FILESDIR}/${PN}-0.41-unit-variables.patch" )
 
 src_prepare() {
 	cmake_src_prepare
