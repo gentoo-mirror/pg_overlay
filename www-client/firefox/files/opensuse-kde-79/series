@@ -4,7 +4,6 @@ mozilla-ntlm-full-path.patch
 mozilla-aarch64-startup-crash.patch
 mozilla-sandbox-fips.patch
 mozilla-fix-aarch64-libopus.patch
-mozilla-disable-wasm-emulate-arm-unaligned-fp-access.patch
 mozilla-s390-context.patch
 mozilla-reduce-rust-debuginfo.patch
 mozilla-ppc-altivec_static_inline.patch
