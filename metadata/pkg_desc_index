@@ -31,7 +31,6 @@ app-text/asciidoc 9.0.0_rc2: A plain text human readable/writable document forma
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
-app-text/po4a 0.59.1: Tools to ease the translation of documentation
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindings
@@ -248,16 +247,6 @@ sys-libs/polly 10.0.1_rc1: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre24: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/perl-Digest-MD5 2.550.0-r2: Virtual for Digest-MD5
-virtual/perl-Digest-SHA 6.20.0: Virtual for Digest-SHA
-virtual/perl-Encode 3.10.0: Virtual for Encode
-virtual/perl-Exporter 5.730.0-r2: Virtual for Exporter
-virtual/perl-ExtUtils-CBuilder 0.280.231: Virtual for ExtUtils-CBuilder
-virtual/perl-ExtUtils-Install 2.140.0-r2: Virtual for ExtUtils-Install
-virtual/perl-ExtUtils-MakeMaker 7.340.0-r2: Virtual for ExtUtils-MakeMaker
-virtual/perl-ExtUtils-Manifest 1.720.0: Virtual for ExtUtils-Manifest
-virtual/perl-ExtUtils-ParseXS 3.400.0: Virtual for ExtUtils-ParseXS
-virtual/perl-File-Path 2.160.0: Virtual for File-Path
-virtual/perl-File-Spec 3.780.0: Virtual for File-Spec
 virtual/perl-Getopt-Long 2.500.0-r2: Virtual for Getopt-Long
 virtual/perl-IO 1.400.0: Virtual for IO
 virtual/perl-IO-Compress 2.84.0: Virtual for IO-Compress
