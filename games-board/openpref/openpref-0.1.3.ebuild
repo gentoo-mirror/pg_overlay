@@ -32,7 +32,7 @@ src_prepare() {
 src_install() {
 	cmake_src_install
 	insinto /usr/share/applications
-	donins ${FILESDIR}/openpref.desktop
+	doins ${FILESDIR}/openpref.desktop
 	insinto usr/share/pixmaps
-	donins ${FILESDIR}/openpref.xpm
+	doins ${FILESDIR}/openpref.xpm
 }
