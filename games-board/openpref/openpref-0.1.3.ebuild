@@ -8,7 +8,7 @@ inherit cmake
 DESCRIPTION="OpenPref is open source implementation of European trick-taking game Preferans against two virtual players."
 HOMEPAGE="https://sourceforge.net/projects/openpref"
 
-SRC_URI="https://sourceforge.net/projects/${PN}/files/OpenPref-Qt4/${P}/${P}.tar.gz/download"
+SRC_URI="https://sourceforge.net/projects/${PN}/files/OpenPref-Qt4/${P}/${P}.tar.gz/download -> ${P}.tar.gz"
 
 LICENSE="GPLv3"
 SLOT="0"
