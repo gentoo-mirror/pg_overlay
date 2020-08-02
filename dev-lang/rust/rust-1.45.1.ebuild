@@ -51,10 +51,10 @@ IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compile
 # 3. Specify LLVM_MAX_SLOT, e.g. 10.
 LLVM_DEPEND="
 	|| (
+		sys-devel/llvm:11[${LLVM_TARGET_USEDEPS// /,}]
 		sys-devel/llvm:10[${LLVM_TARGET_USEDEPS// /,}]
-		sys-devel/llvm:9[${LLVM_TARGET_USEDEPS// /,}]
 	)
-	<sys-devel/llvm-11:=
+	<sys-devel/llvm-12:=
 	wasm? ( sys-devel/lld )
 "
 LLVM_MAX_SLOT=11
