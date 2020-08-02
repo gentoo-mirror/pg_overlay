@@ -1,0 +1,113 @@
+Author: Reiner Herrmann <reiner@reiner-h.de>
+Description: Port to Qt5
+Bug-Debian: https://bugs.debian.org/875074
+
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -69,21 +69,22 @@
+ 	openpref_ru.ts
+ )
+ 
+-set(QT_MIN_VERSION "4.4.0")
+-FIND_PACKAGE( Qt4 REQUIRED )
++find_package(Qt5 COMPONENTS Core Widgets REQUIRED)
+ find_package(Linguist)
+ 
+-INCLUDE( ${QT_USE_FILE} )
+-QT4_ADD_RESOURCES( RC_SRCS ${RCS} )
+-QT4_WRAP_UI( UI_HEADERS ${UIS})
+-QT4_WRAP_CPP( MOC_SRCS ${HEADERS} )
+-QT4_WRAP_TS( QMS ${QM_SRCS} )
++include_directories(${Qt5Widgets_INCLUDES})
++add_definitions(${Qt5Widgets_DEFINITIONS})
++
++QT5_ADD_RESOURCES( RC_SRCS ${RCS} )
++QT5_WRAP_UI( UI_HEADERS ${UIS})
++QT5_WRAP_CPP( MOC_SRCS ${HEADERS} )
++QT5_WRAP_TS( QMS ${QM_SRCS} )
+ 
+ 
+ INCLUDE_DIRECTORIES( ${CMAKE_BINARY_DIR} )
+ ADD_EXECUTABLE( openpref ${SOURCES} ${MOC_SRCS} ${RC_SRCS} ${UI_HEADERS} ${QMS} )
+ 
+-TARGET_LINK_LIBRARIES( openpref ${QT_LIBRARIES} )
++TARGET_LINK_LIBRARIES( openpref ${Qt5Widgets_LIBRARIES} )
+ 
+ INSTALL (TARGETS openpref DESTINATION "games")
+ install(FILES ${QMS} DESTINATION "share/openpref/i18n")
+--- a/openpref.pro
++++ b/openpref.pro
+@@ -1,7 +1,7 @@
+ TEMPLATE = app
+ TARGET = openpref
+ 
+-QT += gui
++QT += widgets
+ 
+ CONFIG += qt warn_on
+ CONFIG += debug_and_release
+--- a/src/desk/deskview.cpp
++++ b/src/desk/deskview.cpp
+@@ -81,7 +81,7 @@
+     for (int suit = 1; suit <= 4; suit++) {
+       QString fname, resname;
+       resname.sprintf("%i%i", face, suit);
+-      fname.sprintf(QString(":/pics/cards/"+deckPath+"%i%i.png").toAscii(), face, suit);
++      fname.sprintf(QString(":/pics/cards/"+deckPath+"%i%i.png").toLatin1(), face, suit);
+       cardI[resname] = new QImage(fname);
+       // build highlighted image
+       QImage *im = new QImage(fname);
+--- a/src/forms/formbid.cpp
++++ b/src/forms/formbid.cpp
+@@ -91,7 +91,7 @@
+ 
+ QList<QPushButton *> FormBid::buttonList () {
+   QList<QPushButton *> res;
+-  QList<QWidget *> wList = qFindChildren<QWidget *>(this);
++  QList<QWidget *> wList = findChildren<QWidget *>();
+   foreach (QWidget *widget, wList) {
+     QPushButton *b = dynamic_cast<QPushButton *>(widget);
+     if (b) res << b;
+@@ -102,7 +102,7 @@
+ 
+ QList<QBidButton *> FormBid::bidButtonList () {
+   QList<QBidButton *> res;
+-  QList<QWidget *> wList = qFindChildren<QWidget *>(this);
++  QList<QWidget *> wList = findChildren<QWidget *>();
+   foreach (QWidget *widget, wList) {
+     QBidButton *b = dynamic_cast<QBidButton *>(widget);
+     if (b) res << b;
+--- a/cmake/FindLinguist.cmake
++++ b/cmake/FindLinguist.cmake
+@@ -1,7 +1,7 @@
+ # First remove these from cache
+ set(QT_LRELEASE_EXECUTABLE NOTFOUND CACHE FILEPATH "" FORCE)
+ 
+-FIND_PROGRAM(QT_LRELEASE_EXECUTABLE NAMES lrelease-qt4 lrelease PATHS
++FIND_PROGRAM(QT_LRELEASE_EXECUTABLE NAMES lrelease-qt5 lrelease PATHS
+   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Qt3Versions\\4.0.0;InstallDir]/bin"
+   "[HKEY_CURRENT_USER\\Software\\Trolltech\\Versions\\4.0.0;InstallDir]/bin"
+   $ENV{QTDIR}/bin
+@@ -15,13 +15,13 @@
+ 
+ mark_as_advanced(QT_LRELEASE_EXECUTABLE)
+ 
+-# QT4_WRAP_TS(outfiles infiles ...)
++# QT5_WRAP_TS(outfiles infiles ...)
+ # outfiles receives .qm generated files from
+ # .ts files in arguments
+ # a target lupdate is created for you
+ # update/generate your translations files
+-# example: QT4_WRAP_TS(foo_QM ${foo_TS})
+-MACRO (QT4_WRAP_TS outfiles)
++# example: QT5_WRAP_TS(foo_QM ${foo_TS})
++MACRO (QT5_WRAP_TS outfiles)
+   FOREACH (it ${ARGN})
+     GET_FILENAME_COMPONENT(it ${it} ABSOLUTE)
+     GET_FILENAME_COMPONENT(outfile ${it} NAME_WE)
+@@ -35,4 +35,4 @@
+ 
+     SET(${outfiles} ${${outfiles}} ${outfile})
+   ENDFOREACH (it)
+-ENDMACRO (QT4_WRAP_TS)
++ENDMACRO (QT5_WRAP_TS)
