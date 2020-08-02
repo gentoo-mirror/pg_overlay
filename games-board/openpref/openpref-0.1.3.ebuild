@@ -12,8 +12,8 @@ SRC_URI="https://sourceforge.net/projects/${PN}/files/OpenPref-Qt4/${P}/${P}.tar
 
 LICENSE="GPLv3"
 SLOT="0"
+KEYWORDS="~amd64 ~x86"
 IUSE=""
-REQUIRED_USE=""
 
 RDEPEND="
 	dev-qt/qtcore:5
