@@ -46,7 +46,7 @@ src_prepare() {
 	xdg_src_prepare
 	rm -rv quazip/ zlib/ || die
 
-	use clang && eaplly -R "${FILESDIR}/rockbox_clang.patch"
+	use clang && eapply -R "${FILESDIR}/rockbox_clang.patch"
 }
 
 src_configure() {
