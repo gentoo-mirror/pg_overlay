@@ -57,7 +57,7 @@ LLVM_DEPEND="
 	<sys-devel/llvm-11:=
 	wasm? ( sys-devel/lld )
 "
-LLVM_MAX_SLOT=10
+LLVM_MAX_SLOT=11
 
 BOOTSTRAP_DEPEND="|| ( >=dev-lang/rust-1.$(($(ver_cut 2) - 1)) >=dev-lang/rust-bin-1.$(($(ver_cut 2) - 1)) )"
 
