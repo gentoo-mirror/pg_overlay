@@ -27,11 +27,12 @@ PATCHES=( ${FILESDIR}/${PN}-qt5.patch )
 src_prepare() {
 	default
 	sed -i s/games/binn/g CMakeLists.txt
-
+	cmake_src_prepare
 }
 
 src_install() {
 	default
+	cmake_src_install
 	insinto /usr/share/applications
 	donins ${FILESDIR}/openpref.desktop
 	insinto usr/share/pixmaps
