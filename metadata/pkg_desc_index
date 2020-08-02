@@ -25,8 +25,8 @@ app-office/libreoffice-l10n 6.4.5.2 7.0.0.2: Translations for the Libreoffice su
 app-portage/eix 0.34.4: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
-app-shells/push 3.1-r4: A POSIX shell function to treat a variable like an array, quoting args
-app-shells/quoter 4.1-r1: Quote arguments or standard input for usage in POSIX shell by eval
+app-shells/push 3.3: A POSIX shell function to treat a variable like an array, quoting args
+app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/asciidoc 9.0.0_rc2: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
