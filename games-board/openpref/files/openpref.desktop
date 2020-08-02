@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Openpref
+Name[ru]=Openpref
+Name[pl]=Openpref
+GenericName=Card game of preferans
+GenericName[pl]=Gra karciana preferans
+GenericName[ru]=преферанс
+Comment=Single player variant of Preferans
+Comment[pl]=Jednoosobowa gra w preferans
+Comment[ru]=Single player variant of Preferans
+Exec=openpref
+Icon=openpref
+Terminal=false
+Type=Application
+Categories=Qt;Game;CardGame;
+Keywords=Game;CardGame;
