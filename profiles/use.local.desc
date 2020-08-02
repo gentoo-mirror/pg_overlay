@@ -14,9 +14,6 @@ app-emulation/virtualbox:sdk - Enable building of SDK
 app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
 app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
 app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
-app-misc/ddcutil:drm - Use x11-libs/libdrm for more verbose diagnostics.
-app-misc/ddcutil:usb-monitor - Adds support for monitors attached via USB.
-app-misc/ddcutil:user-permissions - Adds a udev rules to allow non-root users in the i2c group to access the /dev/i2c-* devices. If usb-monitor is selected, users will need to be added to the video group to access the USB monitor. Otherwise, only root will be able to use ddcutil.
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
 app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
