@@ -7,14 +7,14 @@ Pass the machine options for libs to the c++ compiler as well.
 
 Change-Id: I56bfbbe4aca4b3a7b86bb0d5323a1f7d78d4f60c
 ---
- rbutilqt/Makefile.libs | 1 +
- rbutilqt/rbutilqt.pro  | 3 ++-
+ Makefile.libs | 1 +
+ rbutilqt.pro  | 3 ++-
  2 files changed, 3 insertions(+), 1 deletion(-)
 
-diff --git a/rbutilqt/Makefile.libs b/rbutilqt/Makefile.libs
+diff --git a/Makefile.libs b/Makefile.libs
 index 24fe85e269..6d5c8c5354 100644
---- a/rbutilqt/Makefile.libs
-+++ b/rbutilqt/Makefile.libs
+--- a/Makefile.libs
++++ b/Makefile.libs
 @@ -28,6 +28,7 @@ export SYS_SPEEX
  export TARGET_DIR
  export RBBASE_DIR
@@ -23,10 +23,10 @@ index 24fe85e269..6d5c8c5354 100644
  export CC=$(EXTRALIBS_CC)
  export CXX=$(EXTRALIBS_CXX)
  export AR=$(EXTRALIBS_AR)
-diff --git a/rbutilqt/rbutilqt.pro b/rbutilqt/rbutilqt.pro
+diff --git a/rbutilqt.pro b/rbutilqt.pro
 index a845c3ca36..f51d3608b3 100644
---- a/rbutilqt/rbutilqt.pro
-+++ b/rbutilqt/rbutilqt.pro
+--- a/rbutilqt.pro
++++ b/rbutilqt.pro
 @@ -33,7 +33,8 @@ unix:!mac:!noccache {
  MACHINEFLAGS = $$find(QMAKE_CFLAGS, -m[63][42])
  EXTRALIBS_OPTS += EXTRALIBS_CC=\"$$QMAKE_CC\"
