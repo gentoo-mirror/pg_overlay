@@ -140,7 +140,7 @@ check_distribution_components() {
 						continue
 						;;
 					# PollyISL
-					PollyISL)
+					Polly|PollyISL)
 						continue
 						;;
 				esac
