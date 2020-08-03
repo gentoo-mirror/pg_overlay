@@ -245,7 +245,7 @@ multilib_src_configure() {
 		-DCLANG_ENABLE_ARCMT=$(usex static-analyzer)
 		-DCLANG_ENABLE_STATIC_ANALYZER=$(usex static-analyzer)
 
-		-DLLVM_ENABLE_PROJECTS='polly;clang'
+		-DLLVM_ENABLE_PROJECTS='polly;clang;clang-tools-extra'
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
