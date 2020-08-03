@@ -9,7 +9,7 @@ inherit cmake llvm.org multilib-minimal pax-utils python-any-r1 \
 
 DESCRIPTION="Low Level Virtual Machine"
 HOMEPAGE="https://llvm.org/"
-LLVM_COMPONENTS=( llvm clang polly )
+LLVM_COMPONENTS=( llvm polly )
 llvm.org_set_globals
 
 # Those are in lib/Targets, without explicit CMakeLists.txt mention
@@ -365,7 +365,7 @@ multilib_src_configure() {
 		# disable OCaml bindings (now in dev-ml/llvm-ocaml)
 		-DOCAMLFIND=NO
 
-		-DLLVM_ENABLE_PROJECTS='polly;clang'
+		-DLLVM_ENABLE_PROJECTS='llvm;polly'
 	)
 
 	if is_libcxx_linked; then
