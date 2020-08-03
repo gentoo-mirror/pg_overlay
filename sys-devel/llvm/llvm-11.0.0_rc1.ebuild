@@ -366,6 +366,7 @@ multilib_src_configure() {
 		-DOCAMLFIND=NO
 
 		-DLLVM_ENABLE_PROJECTS='polly'
+		-DLLVM_EXTENSION_LIBS='LLVMExtensions'
 	)
 
 	if is_libcxx_linked; then
