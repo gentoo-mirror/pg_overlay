@@ -365,7 +365,7 @@ multilib_src_configure() {
 		# disable OCaml bindings (now in dev-ml/llvm-ocaml)
 		-DOCAMLFIND=NO
 
-		-DLLVM_ENABLE_PROJECTS='llvm;polly'
+		-DLLVM_ENABLE_PROJECTS='polly'
 	)
 
 	if is_libcxx_linked; then

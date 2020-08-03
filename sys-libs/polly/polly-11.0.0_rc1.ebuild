@@ -8,7 +8,7 @@ inherit cmake llvm llvm.org python-any-r1
 
 DESCRIPTION="Polyhedral optimizations for LLVM"
 HOMEPAGE="https://llvm.org/"
-LLVM_COMPONENTS=( polly )
+LLVM_COMPONENTS=( polly clang llvm)
 LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
 llvm.org_set_globals
 
@@ -38,6 +38,7 @@ src_configure() {
 		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 		-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
+		 -DLLVM_ENABLE_PROJECTS='polly;clang'
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_BUILD_TESTS=ON
