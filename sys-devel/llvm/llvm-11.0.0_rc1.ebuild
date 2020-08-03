@@ -225,6 +225,23 @@ get_distribution_components() {
 		# librarie needed for clang with polly
 		LLVMExtensions
 		Polly
+		LLVMCore
+		LLVMScalarOpts
+		LLVMInstCombine
+		LLVMTransformUtils
+		LLVMAnalysis
+		LLVMipo
+		LLVMMC
+		LLVMPasses
+		LLVMLinker
+		LLVMIRReader
+		LLVMAnalysis
+		LLVMBitReader
+		LLVMMCParser
+		LLVMObject
+		LLVMProfileData
+		LLVMTarget
+		LLVMVectorize
 	)
 
 	if multilib_is_native_abi; then
