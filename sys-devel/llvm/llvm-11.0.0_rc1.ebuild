@@ -259,6 +259,7 @@ get_distribution_components() {
 		LLVMAggressiveInstCombine
 		LLVMCoroutines
 		LLVMInstrumentation
+		LLVMDebugInfoMSF
 	)
 
 	if multilib_is_native_abi; then
