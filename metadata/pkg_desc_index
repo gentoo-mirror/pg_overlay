@@ -233,6 +233,7 @@ sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-devel/clang 11.0.0_rc1: C language family frontend for LLVM
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
+sys-devel/llvm 11.0.0_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/xfsprogs 5.7.0_rc1: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
