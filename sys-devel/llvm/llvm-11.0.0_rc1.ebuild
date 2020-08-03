@@ -241,6 +241,24 @@ get_distribution_components() {
 		LLVMProfileData
 		LLVMTarget
 		LLVMVectorize
+		LLVMBinaryFormat
+		LLVMRemarks
+		LLVMAsmParser
+		LLVMBitstreamReader
+		LLVMAggressiveInstCombine
+		LLVMAggressiveInstCombine
+		LLVMBitWriter
+		LLVMFrontendOpenMP
+		LLVMInstrumentation
+		LLVMBinaryFormat
+		LLVMBinaryFormat
+		LLVMDebugInfoCodeView
+		LLVMBinaryFormat
+		LLVMTextAPI
+		LLVMAggressiveInstCombine
+		LLVMCoroutines
+		LLVMInstrumentation
+		LLVMDebugInfoMSF
 	)
 
 	if multilib_is_native_abi; then
