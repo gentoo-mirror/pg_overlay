@@ -9,7 +9,7 @@ inherit cmake llvm llvm.org multilib-minimal pax-utils \
 
 DESCRIPTION="C language family frontend for LLVM"
 HOMEPAGE="https://llvm.org/"
-LLVM_COMPONENTS=( clang clang-tools-extra polly )
+LLVM_COMPONENTS=( clang clang-tools-extra llvm polly )
 LLVM_TEST_COMPONENTS=(
 	llvm/lib/Testing/Support
 	llvm/utils/{lit,llvm-lit,unittest}
@@ -245,8 +245,7 @@ multilib_src_configure() {
 		-DCLANG_ENABLE_ARCMT=$(usex static-analyzer)
 		-DCLANG_ENABLE_STATIC_ANALYZER=$(usex static-analyzer)
 
-		# polly
-		-DLLVM_ENABLE_PROJECTS='polly;clang;clang-tools-extra'
+		-DLLVM_ENABLE_PROJECTS='polly;clang'
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
