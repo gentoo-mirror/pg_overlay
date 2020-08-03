@@ -125,7 +125,7 @@ check_distribution_components() {
 					LLVM|LLVMgold)
 						;;
 					# TableGen lib + deps
-					LLVMDemangle|LLVMSupport|LLVMTableGen)
+					LLVMDemangle|LLVMSupport|LLVMTableGen|PollyISL)
 						;;
 					# static libs
 					LLVM*)
