@@ -222,42 +222,6 @@ get_distribution_components() {
 		LLVMDemangle
 		LLVMSupport
 		LLVMTableGen
-		# librarie needed for clang with polly
-		LLVMCore
-		LLVMScalarOpts
-		LLVMInstCombine
-		LLVMTransformUtils
-		LLVMAnalysis
-		LLVMipo
-		LLVMMC
-		LLVMPasses
-		LLVMLinker
-		LLVMIRReader
-		LLVMAnalysis
-		LLVMBitReader
-		LLVMMCParser
-		LLVMObject
-		LLVMProfileData
-		LLVMTarget
-		LLVMVectorize
-		LLVMBinaryFormat
-		LLVMRemarks
-		LLVMAsmParser
-		LLVMBitstreamReader
-		LLVMAggressiveInstCombine
-		LLVMAggressiveInstCombine
-		LLVMBitWriter
-		LLVMFrontendOpenMP
-		LLVMInstrumentation
-		LLVMBinaryFormat
-		LLVMBinaryFormat
-		LLVMDebugInfoCodeView
-		LLVMBinaryFormat
-		LLVMTextAPI
-		LLVMAggressiveInstCombine
-		LLVMCoroutines
-		LLVMInstrumentation
-		LLVMDebugInfoMSF
 	)
 
 	if multilib_is_native_abi; then
@@ -513,6 +477,9 @@ src_install() {
 
 	# move wrapped headers back
 	mv "${ED}"/usr/include "${ED}"/usr/lib/llvm/${SLOT}/include || die
+
+	#Polly hack
+	rm "{ED}"/usr/lib/llvm/${SLOT}/$(get_libdir)/libPolly.a
 }
 
 multilib_src_install() {
