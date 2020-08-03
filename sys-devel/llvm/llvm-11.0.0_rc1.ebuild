@@ -253,7 +253,7 @@ get_distribution_components() {
 		LLVMInstrumentation
 		LLVMBinaryFormat
 		LLVMBinaryFormat
-		LLVMDebugInfoCodeView
+
 		LLVMBinaryFormat
 		LLVMTextAPI
 		LLVMAggressiveInstCombine
