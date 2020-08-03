@@ -231,7 +231,6 @@ sys-apps/roccat-tools 5.9.0: Utility for advanced configuration of Roccat device
 sys-auth/elogind 243.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system-wide services
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
-sys-devel/clang 11.0.0_rc1: C language family frontend for LLVM
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
 sys-devel/llvm 11.0.0_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
