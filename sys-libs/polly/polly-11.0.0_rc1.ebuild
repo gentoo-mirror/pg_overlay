@@ -13,7 +13,7 @@ LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
 llvm.org_set_globals
 
 LICENSE="Apache-2.0-with-LLVM-exceptions UoI-NCSA"
-SLOT="0"
+SLOT="$(ver_cut 1)"
 KEYWORDS=""
 IUSE="test"
 RESTRICT="!test? ( test )"
