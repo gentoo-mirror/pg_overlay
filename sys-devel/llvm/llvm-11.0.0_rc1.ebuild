@@ -223,7 +223,6 @@ get_distribution_components() {
 		LLVMSupport
 		LLVMTableGen
 		# librarie needed for clang with polly
-		LLVMExtensions
 		LLVMCore
 		LLVMScalarOpts
 		LLVMInstCombine
