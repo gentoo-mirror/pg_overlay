@@ -128,7 +128,7 @@ check_distribution_components() {
 					LLVMDemangle|LLVMSupport|LLVMTableGen)
 						;;
 					# static libs
-					LLVM*|LLVMExtensions)
+					LLVM*)
 						continue
 						;;
 					# meta-targets
