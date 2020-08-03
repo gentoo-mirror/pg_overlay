@@ -139,10 +139,6 @@ check_distribution_components() {
 					docs-llvm-html)
 						continue
 						;;
-					# PollyISL
-					PollyISL)
-						continue
-						;;
 				esac
 
 				all_targets+=( "${l}" )
@@ -228,7 +224,6 @@ get_distribution_components() {
 		LLVMTableGen
 		# librarie needed for clang with polly
 		Polly
-		PollyISL
 		LLVMExtensions
 		LLVMCore
 		LLVMScalarOpts
@@ -265,7 +260,6 @@ get_distribution_components() {
 		LLVMCoroutines
 		LLVMInstrumentation
 		LLVMDebugInfoMSF
-		install-PollyISL-stripped
 	)
 
 	if multilib_is_native_abi; then
