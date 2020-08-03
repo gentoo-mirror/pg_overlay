@@ -139,10 +139,6 @@ check_distribution_components() {
 					docs-llvm-html)
 						continue
 						;;
-					# PollyISL
-					PollyISL)
-						continue
-						;;
 				esac
 
 				all_targets+=( "${l}" )
@@ -228,7 +224,6 @@ get_distribution_components() {
 		LLVMTableGen
 		# librarie needed for clang with polly
 		Polly
-		LLVMExtensions
 		LLVMCore
 		LLVMScalarOpts
 		LLVMInstCombine
@@ -351,9 +346,13 @@ get_distribution_components() {
 			docs-dsymutil-man
 			docs-llvm-dwarfdump-man
 			docs-llvm-man
+
+			docs-polly-man
 		)
 		use doc && out+=(
 			docs-llvm-html
+
+			docs-polly-html
 		)
 
 		use gold && out+=(
