@@ -125,7 +125,7 @@ check_distribution_components() {
 					LLVM|LLVMgold)
 						;;
 					# TableGen lib + deps
-					LLVMDemangle|LLVMSupport|LLVMTableGen|PollyISL)
+					LLVMDemangle|LLVMSupport|LLVMTableGen)
 						;;
 					# static libs
 					LLVM*)
@@ -140,7 +140,7 @@ check_distribution_components() {
 						continue
 						;;
 					# PollyISL
-					Polly|PollyISL)
+					PollyISL)
 						continue
 						;;
 				esac
@@ -228,7 +228,6 @@ get_distribution_components() {
 		LLVMTableGen
 		# librarie needed for clang with polly
 		Polly
-		PollyISL
 		LLVMExtensions
 		LLVMCore
 		LLVMScalarOpts
