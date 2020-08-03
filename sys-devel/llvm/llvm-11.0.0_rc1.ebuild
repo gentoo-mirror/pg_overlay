@@ -176,7 +176,7 @@ src_prepare() {
 	eapply "${FILESDIR}"/9999/0007-llvm-config-Clean-up-exported-values-update-for-shar.patch
 
 	# Disable LLVMExtensions
-	"${FILESDIR}"/disable_llvmextensions.patch
+	#"${FILESDIR}"/disable_llvmextensions.patch
 
 	# disable use of SDK on OSX, bug #568758
 	sed -i -e 's/xcrun/false/' utils/lit/lit/util.py || die
@@ -222,6 +222,8 @@ get_distribution_components() {
 		LLVMDemangle
 		LLVMSupport
 		LLVMTableGen
+		# librarie needed for clang with polly
+		LLVMExtensions
 	)
 
 	if multilib_is_native_abi; then
