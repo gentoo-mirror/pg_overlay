@@ -224,6 +224,7 @@ get_distribution_components() {
 		LLVMTableGen
 		# librarie needed for clang with polly
 		LLVMExtensions
+		Polly
 	)
 
 	if multilib_is_native_abi; then
