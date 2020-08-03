@@ -228,6 +228,7 @@ get_distribution_components() {
 		LLVMTableGen
 		# librarie needed for clang with polly
 		Polly
+		PollyISL
 		LLVMExtensions
 		LLVMCore
 		LLVMScalarOpts
@@ -264,6 +265,7 @@ get_distribution_components() {
 		LLVMCoroutines
 		LLVMInstrumentation
 		LLVMDebugInfoMSF
+		install-PollyISL-stripped
 	)
 
 	if multilib_is_native_abi; then
@@ -351,9 +353,13 @@ get_distribution_components() {
 			docs-dsymutil-man
 			docs-llvm-dwarfdump-man
 			docs-llvm-man
+
+			docs-polly-man
 		)
 		use doc && out+=(
 			docs-llvm-html
+
+			docs-polly-html
 		)
 
 		use gold && out+=(
