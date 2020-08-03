@@ -139,6 +139,10 @@ check_distribution_components() {
 					docs-llvm-html)
 						continue
 						;;
+					# PollyISL
+					PollyISL)
+						continue
+						;;
 				esac
 
 				all_targets+=( "${l}" )
