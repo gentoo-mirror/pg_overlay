@@ -223,8 +223,8 @@ get_distribution_components() {
 		LLVMSupport
 		LLVMTableGen
 		# librarie needed for clang with polly
-		LLVMExtensions
 		Polly
+		LLVMExtensions
 		LLVMCore
 		LLVMScalarOpts
 		LLVMInstCombine
@@ -242,6 +242,23 @@ get_distribution_components() {
 		LLVMProfileData
 		LLVMTarget
 		LLVMVectorize
+		LLVMBinaryFormat
+		LLVMRemarks
+		LLVMAsmParser
+		LLVMBitstreamReader
+		LLVMAggressiveInstCombine
+		LLVMAggressiveInstCombine
+		LLVMBitWriter
+		LLVMFrontendOpenMP
+		LLVMInstrumentation
+		LLVMBinaryFormat
+		LLVMBinaryFormat
+		LLVMDebugInfoCodeView
+		LLVMBinaryFormat
+		LLVMTextAPI
+		LLVMAggressiveInstCombine
+		LLVMCoroutines
+		LLVMInstrumentation
 	)
 
 	if multilib_is_native_abi; then
