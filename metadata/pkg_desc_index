@@ -271,7 +271,7 @@ virtual/perl-parent 0.237.0: Virtual for parent
 virtual/perl-podlators 4.110.0: Virtual for podlators
 virtual/perl-version 0.992.400: Virtual for version
 virtual/rust 1.46.0_beta: Virtual for Rust language compiler
-www-client/firefox 79.0: Firefox Web Browser
+www-client/firefox 79.0-r1: Firefox Web Browser
 www-client/ungoogled-chromium 84.0.4147.105_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
