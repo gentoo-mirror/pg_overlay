@@ -23,7 +23,7 @@ if [[ ${MOZ_ESR} == 1 ]] ; then
 fi
 
 # Patch version
-PATCH="${PN}-79.0-patches-02"
+PATCH="${PN}-79.0-patches-04"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/${PN}-${MOZ_PV}.source.tar.xz"
@@ -58,7 +58,8 @@ REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
 	thinlto? ( lto )
 	kde? ( !bindist )
-	?? ( cross-lto thinlto )"
+	?? ( cross-lto thinlto )
+	screencast? ( wayland )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
