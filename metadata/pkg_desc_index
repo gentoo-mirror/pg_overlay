@@ -34,9 +34,8 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindings
 dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell and some other solitaire variants
-dev-lang/perl 5.32.0: Larry Wall's Practical Extraction and Report Language
-dev-lang/python 2.7.18-r1 3.9.0_beta5: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.45.1 1.46.0_beta: Systems programming language from Mozilla
+dev-lang/python 2.7.18-r1 3.9.0_beta5 3.9.0_rc1: An interpreted, interactive, object-oriented programming language
+dev-lang/rust 1.45.2 1.46.0_beta: Systems programming language from Mozilla
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.73.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
@@ -149,7 +148,6 @@ dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3149: A makefile framework for writing simple makefiles for complex tasks
-dev-util/meson 0.55.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 4.0.1: Extensible Python-based build utility
@@ -207,7 +205,7 @@ net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management libr
 net-libs/libpsl 0.21.0: C library for the Public Suffix List
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
-net-libs/nodejs 14.7.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
+net-libs/nodejs 14.8.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r2: HTTP client library
 net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
@@ -233,50 +231,32 @@ sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
-sys-fs/xfsprogs 5.7.0_rc1: xfs filesystem utilities
+sys-fs/xfsprogs 5.8.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
-sys-libs/glibc 2.31-r6: GNU libc C library
+sys-libs/glibc 2.32: GNU libc C library
 sys-libs/libblockdev 2.24: A library for manipulating block devices
 sys-libs/ncurses 6.2_p20200627: console display library
 sys-libs/polly 10.0.1_rc1 11.0.0_rc1: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre24: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/perl-Digest-MD5 2.550.0-r2: Virtual for Digest-MD5
-virtual/perl-Getopt-Long 2.500.0-r2: Virtual for Getopt-Long
-virtual/perl-IO 1.400.0: Virtual for IO
 virtual/perl-IO-Compress 2.84.0: Virtual for IO-Compress
 virtual/perl-IO-Socket-IP 0.390.0-r2: Virtual for IO-Socket-IP
-virtual/perl-JSON-PP 4.20.0: Virtual for JSON-PP
-virtual/perl-MIME-Base64 3.150.0-r6: Virtual for MIME-Base64
 virtual/perl-Memoize 1.30.100_rc-r9: Virtual for Memoize
 virtual/perl-Module-Load 0.340.0: Virtual for Module-Load
-virtual/perl-Module-Metadata 1.0.36: Virtual for Module-Metadata
-virtual/perl-Parse-CPAN-Meta 2.150.10-r3: Virtual for Parse-CPAN-Meta
-virtual/perl-Perl-OSType 1.10.0-r3: Virtual for Perl-OSType
 virtual/perl-Pod-Parser 1.630.0-r6: Virtual for Pod-Parser
-virtual/perl-Scalar-List-Utils 1.500.0-r2: Virtual for Scalar::Util and List::Util, also distributed as Scalar::List::Utils
 virtual/perl-Socket 2.27.0-r2: Virtual for Socket
 virtual/perl-Storable 3.150.0: Virtual for Storable
 virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
-virtual/perl-Test-Harness 3.420.0-r2: Virtual for Test-Harness
 virtual/perl-Test-Simple 1.302.162: Virtual for Test-Simple
-virtual/perl-Text-ParseWords 3.300.0-r6: Virtual for Text-ParseWords
-virtual/perl-Text-Tabs+Wrap 2013.52.300-r9: Virtual for Text::Tabs and Text::Wrap, also distributed as Text::Tabs+Wrap
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
-virtual/perl-Time-Local 1.280.0: Virtual for Time-Local
-virtual/perl-XSLoader 0.300.0-r2: Virtual for XSLoader
-virtual/perl-if 0.60.800-r2: Virtual for if
-virtual/perl-libnet 3.110.0-r2: Virtual for libnet
-virtual/perl-parent 0.237.0: Virtual for parent
-virtual/perl-podlators 4.110.0: Virtual for podlators
-virtual/perl-version 0.992.400: Virtual for version
 virtual/rust 1.46.0_beta: Virtual for Rust language compiler
-www-client/firefox 79.0-r1: Firefox Web Browser
+www-client/firefox 79.0-r2: Firefox Web Browser
 www-client/ungoogled-chromium 84.0.4147.105_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
-x11-libs/gtk+ 2.24.32-r1 3.24.21: Gimp ToolKit +
+x11-libs/gtk+ 2.24.32-r1 3.24.22: Gimp ToolKit +
 x11-libs/libva 2.7.1: Video Acceleration (VA) API for Linux
 x11-libs/libva-intel-driver 2.4.0: HW video decode support for Intel integrated graphics
 x11-libs/libxcb 1.14: X C-language Bindings library
