@@ -12,7 +12,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/${MY_PN}.git"
 	inherit git-r3
 else
-	SNAPSHOT_COMMIT="13dc28ce71d45570e83abd83e7b8640b3a64ea7a"
+	SNAPSHOT_COMMIT="c20995ef80ca20291aa8ce5d1057459f15f7b4ec"
 	SRC_URI="https://github.com/KhronosGroup/${MY_PN}/archive/${SNAPSHOT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~ppc64 ~x86"
 	S="${WORKDIR}"/${MY_PN}-${SNAPSHOT_COMMIT}
@@ -31,6 +31,8 @@ DEPEND="${COMMON_DEPEND}"
 RDEPEND=""
 BDEPEND="${PYTHON_DEPS}
 	${COMMON_DEPEND}"
+
+PATCHES=( "${FILESDIR}/0001-Revert-CMake-Enable-building-with-BUILD_SHARED_LIBS-.patch" )
 
 multilib_src_configure() {
 	local mycmakeargs=(
