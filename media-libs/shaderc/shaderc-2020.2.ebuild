@@ -1,9 +1,11 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 PYTHON_COMPAT=( python3_{7..9} )
+
+CMAKE_ECLASS=cmake
 
 inherit cmake-multilib python-any-r1
 
@@ -13,7 +15,7 @@ SRC_URI="https://github.com/google/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="amd64 ~ppc64 x86"
+KEYWORDS="~amd64 ~ppc64 ~x86"
 IUSE="doc test"
 
 RDEPEND="
@@ -30,12 +32,12 @@ DEPEND="${RDEPEND}
 	)
 "
 
+PATCHES=(
+		"${FILESDIR}"/${PN}-2020.1-fix-build.patch
+)
+
 # https://github.com/google/shaderc/issues/470
 RESTRICT=test
-
-PATCHES=(
-	"${FILESDIR}"/${P}-fix-build.patch
-)
 
 python_check_deps() {
 	if use test; then
@@ -62,26 +64,26 @@ src_prepare() {
 		"$(best_version dev-util/glslang)\n"
 	EOF
 
-	cmake-utils_src_prepare
+	cmake_src_prepare
 }
 
 multilib_src_configure() {
 	local mycmakeargs=(
 		-DSHADERC_SKIP_TESTS="$(usex !test)"
 	)
-	cmake-utils_src_configure
+	cmake_src_configure
 }
 
 multilib_src_compile() {
 	if multilib_is_native_abi && use doc; then
-		cmake-utils_src_make glslc_doc_README
+		cmake_src_make glslc_doc_README
 	fi
-	cmake-utils_src_compile
+	cmake_src_compile
 }
 
 multilib_src_install() {
 	if multilib_is_native_abi; then
 		use doc && local HTML_DOCS=( "${BUILD_DIR}/glslc/README.html" )
 	fi
-	cmake-utils_src_install
+	cmake_src_install
 }
