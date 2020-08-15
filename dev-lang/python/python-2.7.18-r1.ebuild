@@ -227,7 +227,7 @@ src_compile() {
 	fi
 	export par_arg
 
-	emake EXTRATESTOPTS="${par_arg} -uall,-audio -x test_distutils"
+	emake EXTRATESTOPTS="${par_arg} -uall,-audio -x test_distutils --pgo-extended"
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax_kernel]; then
