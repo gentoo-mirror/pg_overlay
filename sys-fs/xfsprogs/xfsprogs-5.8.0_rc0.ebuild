@@ -32,13 +32,6 @@ PATCHES=(
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
 
-pkg_setup() {
-	if use readline && use libedit ; then
-		ewarn "You have USE='readline libedit' but these are exclusive."
-		ewarn "Defaulting to readline; please disable this USE flag if you want libedit."
-	fi
-}
-
 src_prepare() {
 	default
 
@@ -80,8 +73,7 @@ src_configure() {
 		--without-systemd-unit-dir
 		$(use_enable icu libicu)
 		$(use_enable nls gettext)
-		$(use_enable readline)
-		$(usex readline --disable-editline $(use_enable libedit editline))
+		$(use_enable libedit editline)
 	)
 
 	if is-flagq -flto ; then
