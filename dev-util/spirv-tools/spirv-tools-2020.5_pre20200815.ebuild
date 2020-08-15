@@ -38,6 +38,7 @@ multilib_src_configure() {
 	local mycmakeargs=(
 		"-DSPIRV-Headers_SOURCE_DIR=/usr/"
 		"-DSPIRV_WERROR=OFF"
+		"-GNinja"
 	)
 
 	cmake_src_configure
