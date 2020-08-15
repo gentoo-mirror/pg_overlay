@@ -59,14 +59,11 @@ dev-libs/re2 0.2020.03.02 0.2020.07.06: An efficient, principled regular express
 dev-libs/vala-common 0.48.4: Build infrastructure for packages that use Vala
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-perl/Alien-Build 1.920.0: Build external dependencies for use in CPAN
-dev-perl/Alien-Libxml2 0.110.0: Install the C libxml2 library on your system
 dev-perl/App-pwhich 1.160.0: Perl-only 'which'
 dev-perl/Canary-Stability 2013.0.0: Canary to check perl compatibility for schmorp's modules
 dev-perl/Class-Inspector 1.360.0: Provides information about Classes
 dev-perl/Devel-Size 0.830.0: Perl extension for finding the memory usage of Perl variables
 dev-perl/Devel-StackTrace 2.40.0: An object representing a stack trace
-dev-perl/EV 4.270.0: Perl interface to libev, a high performance full-featured event loop
 dev-perl/Exception-Class 1.440.0: A module that allows you to declare real exception classes in Perl
 dev-perl/ExtUtils-InstallPaths 0.12.0: Build.PL install path logic made easy
 dev-perl/File-BaseDir 0.80.0: Use the Freedesktop.org base directory specification
@@ -89,7 +86,6 @@ dev-perl/Package-Stash 0.380.0: Routines for manipulating stashes
 dev-perl/Package-Stash-XS 0.290.0: Faster and more correct implementation of the Package::Stash API
 dev-perl/Params-ValidationCompiler 0.300.0: Build an optimized subroutine parameter validator once, use it forever
 dev-perl/Path-Tiny 0.108.0: File path utility
-dev-perl/Pod-Parser 1.63: base class for creating POD filters and translators
 dev-perl/Ref-Util 0.204.0: Utility functions for checking references
 dev-perl/Ref-Util-XS 0.117.0: XS Implementation for Ref::Util
 dev-perl/Role-Tiny 2.1.4: Roles. Like a nouvelle cuisine portion size slice of Moose
@@ -147,7 +143,7 @@ dev-util/glslang 8.13.3743-r1 9999: Khronos reference front-end for GLSL and ESS
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
-dev-util/kbuild 0.1.9998.3149: A makefile framework for writing simple makefiles for complex tasks
+dev-util/kbuild 0.1.9998.3149 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 4.0.1: Extensible Python-based build utility
@@ -231,6 +227,7 @@ sys-auth/polkit 0.116-r1: Policy framework for controlling privileges for system
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
+sys-fs/udisks 2.9.1: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.8.0_rc0: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/glibc 2.32: GNU libc C library
@@ -241,14 +238,11 @@ sys-libs/slang 2.3.3_pre24: Multi-platform library designed to allow a developer
 sys-process/htop 2.2.0 3.0.0_beta5: interactive process viewer
 virtual/perl-Digest-MD5 2.550.0-r2: Virtual for Digest-MD5
 virtual/perl-IO-Compress 2.84.0: Virtual for IO-Compress
-virtual/perl-IO-Socket-IP 0.390.0-r2: Virtual for IO-Socket-IP
 virtual/perl-Memoize 1.30.100_rc-r9: Virtual for Memoize
 virtual/perl-Module-Load 0.340.0: Virtual for Module-Load
 virtual/perl-Pod-Parser 1.630.0-r6: Virtual for Pod-Parser
 virtual/perl-Socket 2.27.0-r2: Virtual for Socket
-virtual/perl-Storable 3.150.0: Virtual for Storable
 virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
-virtual/perl-Test-Simple 1.302.162: Virtual for Test-Simple
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
 virtual/rust 1.46.0_beta: Virtual for Rust language compiler
 www-client/firefox 79.0-r2: Firefox Web Browser
