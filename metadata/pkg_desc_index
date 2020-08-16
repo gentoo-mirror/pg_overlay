@@ -191,6 +191,7 @@ media-sound/wavpack 5.2.0: Hybrid lossless audio compression tools
 media-video/mpv 0.32.0-r1 9999: Media player based on MPlayer and mplayer2
 media-video/qmplay2 20.07.04: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 20.6.0: Great Qt GUI front-end for mplayer/mpv
+net-ftp/filezilla 3.49.1: FTP client with lots of useful features and an intuitive interface
 net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 2.2.0-r1: Official desktop client for Telegram
