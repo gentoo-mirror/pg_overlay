@@ -12,7 +12,7 @@ SRC_URI="https://fc-solve.shlomifish.org/downloads/fc-solve/${P}.tar.xz"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~x86"
+KEYWORDS="~amd64 ~x86"
 IUSE="tcmalloc"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
@@ -26,6 +26,7 @@ RDEPEND="${PYTHON_DEPS}
 	tcmalloc? ( dev-util/google-perftools )
 "
 DEPEND="${RDEPEND}
+	dev-perl/Moo
 	dev-perl/Path-Tiny
 	dev-perl/Template-Toolkit
 "
@@ -43,7 +44,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_STATIC_LIBRARY=OFF
 		-DFCS_BUILD_DOCS=OFF
-		-DFCS_WITH_TEST_SUITE=OFF #requires unpackaged dependencies
+		-DFCS_WITH_TEST_SUITE=OFF # requires unpackaged dependencies
 		-DFCS_AVOID_TCMALLOC=$(usex !tcmalloc)
 	)
 
