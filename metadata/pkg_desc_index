@@ -33,7 +33,7 @@ app-text/pastebinit 1.5.1: A software that lets you send anything you want direc
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindings
-dev-games/freecell-solver 5.24.0: C library for automatically solving Freecell and some other solitaire variants
+dev-games/freecell-solver 6.0.1: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 2.7.18-r1 3.9.0_rc1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.45.2 1.46.0_beta: Systems programming language from Mozilla
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
