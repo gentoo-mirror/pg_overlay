@@ -149,7 +149,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2.13.0-disable-one-jid-test.patch" # 593338
 	"${FILESDIR}/${PN}-2.13.0-metainfo.patch"
 	"${FILESDIR}/${PN}-nonblock-common.patch"
-	"${FILESDIR}/configure.patch" #FreeBSD
+	#"${FILESDIR}/configure.patch" #FreeBSD
 )
 
 src_unpack() {
