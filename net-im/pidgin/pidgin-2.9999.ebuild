@@ -151,6 +151,10 @@ PATCHES=(
 	"${FILESDIR}/configure.patch" #FreeBSD
 )
 
+src_unpack() {
+	mercurial_src_unpack
+}
+
 pkg_pretend() {
 	if ! use gtk && ! use ncurses ; then
 		elog "You did not pick the ncurses or gtk use flags, only libpurple"
