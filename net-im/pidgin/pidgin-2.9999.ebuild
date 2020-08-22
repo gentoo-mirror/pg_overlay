@@ -13,7 +13,8 @@ HOMEPAGE="https://pidgin.im/"
 SRC_URI="
 	https://dev.gentoo.org/~polynomial-c/${PN}-eds-3.6.patch.bz2
 	https://gist.githubusercontent.com/imcleod/77f38d11af11b2413ada/raw/46e9d6cb4d2f839832dad2d697bb141a88028e04/pidgin-irc-join-sleep.patch -> ${PN}-2.10.9-irc_join_sleep.patch"
-EHG_REPO_URI="https://keep.imfreedom.org/pidgin/pidgin"
+EHG_REPO_URI="https://keep.imfreedom.org/${PN}/${PN}"
+EHG_REVISION="release-2.x.y"
 HG_REV_BRANCH="release-2.x.y"
 
 LICENSE="GPL-2"
@@ -140,7 +141,7 @@ DYNAMIC_PRPLS="irc,jabber,oscar,simple"
 #	x11-plugins/pidgimpd
 
 PATCHES=(
-	"${WORKDIR}/${PN}-eds-3.6.patch"
+	#"${WORKDIR}/${PN}-eds-3.6.patch"
 	"${FILESDIR}/${PN}-2.10.9-fix-gtkmedia.patch"
 	"${FILESDIR}/${PN}-2.10.10-eds-3.6-configure.ac.patch"
 	"${FILESDIR}/${PN}-2.10.11-tinfo.patch"
@@ -148,8 +149,12 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2.13.0-disable-one-jid-test.patch" # 593338
 	"${FILESDIR}/${PN}-2.13.0-metainfo.patch"
 	"${FILESDIR}/${PN}-nonblock-common.patch"
-	"${FILESDIR}/configure.patch" #FreeBSD
+	#"${FILESDIR}/configure.patch" #FreeBSD
 )
+
+src_unpack() {
+	mercurial_src_unpack
+}
 
 pkg_pretend() {
 	if ! use gtk && ! use ncurses ; then
