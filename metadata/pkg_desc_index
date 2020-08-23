@@ -175,25 +175,22 @@ media-sound/audacious 9999: Lightweight and versatile audio player
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: foobar2k-like music player
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
-media-sound/mac 5.26: Monkey's Audio Codecs
+media-sound/mac 5.50: Monkey's Audio Codecs
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
-media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
 media-sound/pulseaudio 13.99.1: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
-media-sound/quimup 1.4.4: A Qt5 client for the music player daemon (MPD) written in C++
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
-media-sound/wavpack 5.2.0: Hybrid lossless audio compression tools
 media-video/mpv 0.32.0-r1 9999: Media player based on MPlayer and mplayer2
 media-video/qmplay2 20.07.04: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 20.6.0: Great Qt GUI front-end for mplayer/mpv
 net-ftp/filezilla 3.49.1: FTP client with lots of useful features and an intuitive interface
 net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 2.9999 9999: GTK Instant Messenger client
-net-im/telegram-desktop 2.3.0: Official desktop client for Telegram
+net-im/telegram-desktop 2.3.1: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/glib-networking 2.65.1: Network-related giomodules for glib
