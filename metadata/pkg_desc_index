@@ -190,7 +190,7 @@ media-video/smplayer 20.6.0: Great Qt GUI front-end for mplayer/mpv
 net-ftp/filezilla 3.49.1: FTP client with lots of useful features and an intuitive interface
 net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 2.9999 9999: GTK Instant Messenger client
-net-im/telegram-desktop 2.3.1: Official desktop client for Telegram
+net-im/telegram-desktop 2.3.2: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/glib-networking 2.65.1: Network-related giomodules for glib
