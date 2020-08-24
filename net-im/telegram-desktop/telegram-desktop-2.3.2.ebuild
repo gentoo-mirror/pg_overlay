@@ -7,11 +7,13 @@ PYTHON_COMPAT=( python3_{7..9} )
 
 inherit cmake desktop flag-o-matic python-any-r1 xdg-utils
 
-MY_P="tdesktop-${PV}-full"
+#MY_P="tdesktop-${PV}-full"
+MY_P="tdesktop-${PV}"
 
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
-SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz"
+#SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz"
+SRC_URI="https://github.com/telegramdesktop/tdesktop/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3-with-openssl-exception"
 SLOT="0"
@@ -104,9 +106,6 @@ src_configure() {
 		-DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 		-DDESKTOP_APP_USE_PACKAGED=ON
-		-DDESKTOP_APP_USE_PACKAGED_EXPECTED=OFF
-		-DDESKTOP_APP_USE_PACKAGED_RLOTTIE=OFF
-		-DDESKTOP_APP_USE_PACKAGED_VARIANT=OFF
 		-DTDESKTOP_DISABLE_GTK_INTEGRATION="$(usex gtk OFF ON)"
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION="$(usex dbus OFF ON)"
