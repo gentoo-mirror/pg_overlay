@@ -7,17 +7,15 @@ PYTHON_COMPAT=( python3_{7..9} )
 
 inherit cmake desktop flag-o-matic python-any-r1 xdg-utils
 
-#MY_P="tdesktop-${PV}-full"
-MY_P="tdesktop-${PV}"
+MY_P="tdesktop-${PV}-full"
 
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
-#SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz"
-SRC_URI="https://github.com/telegramdesktop/tdesktop/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz"
 
 LICENSE="GPL-3-with-openssl-exception"
 SLOT="0"
-#KEYWORDS="~amd64 ~ppc64"
+KEYWORDS="~amd64 ~ppc64"
 IUSE="+alsa +dbus enchant +gtk +hunspell libressl pulseaudio +spell wayland +X"
 
 RDEPEND="
