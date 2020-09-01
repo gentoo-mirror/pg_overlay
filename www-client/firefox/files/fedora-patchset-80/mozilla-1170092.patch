@@ -12,7 +12,7 @@ diff -up firefox-75.0/extensions/pref/autoconfig/src/nsReadConfig.cpp.1170092 fi
 +                                  getter_AddRefs(jsFile));
 +      NS_ENSURE_SUCCESS(rv, rv);
 +
-+      rv = jsFile->AppendNative(NS_LITERAL_CSTRING("pref"));
++      rv = jsFile->AppendNative(nsLiteralCString("pref"));
 +      NS_ENSURE_SUCCESS(rv, rv);
 +      rv = jsFile->AppendNative(nsDependentCString(aFileName));
 +      NS_ENSURE_SUCCESS(rv, rv);
@@ -54,7 +54,7 @@ diff -up firefox-75.0/toolkit/xre/nsXREDirProvider.cpp.1170092 firefox-75.0/tool
 +
 +#if defined(XP_UNIX)
 +  if (!strcmp(aProperty, NS_APP_PREFS_SYSTEM_CONFIG_DIR)) {
-+    nsCString sysConfigDir = NS_LITERAL_CSTRING("/etc/");
++    nsCString sysConfigDir = nsLiteralCString("/etc/");
 +    nsCOMPtr<nsIXULAppInfo> appInfo = do_GetService("@mozilla.org/xre/app-info;1");
 +    if (!appInfo)
 +      return NS_ERROR_NOT_AVAILABLE;
@@ -78,7 +78,7 @@ diff -up firefox-75.0/toolkit/xre/nsXREDirProvider.cpp.1170092 firefox-75.0/tool
 +    rv = NS_GetSpecialDirectory(NS_APP_PREFS_SYSTEM_CONFIG_DIR,
 +                                getter_AddRefs(systemPrefDir));
 +    if (NS_SUCCEEDED(rv)) {
-+      rv = systemPrefDir->AppendNative(NS_LITERAL_CSTRING("pref"));
++      rv = systemPrefDir->AppendNative(nsLiteralCString("pref"));
 +      if (NS_SUCCEEDED(rv))
 +        directories.AppendObject(systemPrefDir);
 +    }

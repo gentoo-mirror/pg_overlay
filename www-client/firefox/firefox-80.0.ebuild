@@ -23,7 +23,7 @@ if [[ ${MOZ_ESR} == 1 ]] ; then
 fi
 
 # Patch version
-PATCH="${PN}-79.0-patches-04"
+PATCH="${PN}-80.0-patches-02"
 
 MOZ_HTTP_URI="https://archive.mozilla.org/pub/${PN}/releases"
 MOZ_SRC_URI="${MOZ_HTTP_URI}/${MOZ_PV}/source/${PN}-${MOZ_PV}.source.tar.xz"
@@ -52,7 +52,7 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free geckodriver
 	+openh264 pgo pulseaudio screencast +screenshot selinux +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
 	+system-libvpx +system-webp test wayland wifi
-	dbus +jit +kde cross-lto thinlto"
+	+jit +kde cross-lto thinlto"
 
 REQUIRED_USE="pgo? ( lto )
 	cross-lto? ( clang lto )
@@ -70,8 +70,8 @@ SRC_URI="${SRC_URI}
 	${PATCH_URIS[@]}"
 
 CDEPEND="
-	>=dev-libs/nss-3.54
-	>=dev-libs/nspr-4.25
+	>=dev-libs/nss-3.55
+	>=dev-libs/nspr-4.26
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
@@ -220,7 +220,7 @@ pkg_pretend() {
 
 		# Ensure we have enough disk space to compile
 		if use pgo || use lto || use debug || use test ; then
-			CHECKREQS_DISK_BUILD="10G"
+			CHECKREQS_DISK_BUILD="11G"
 		else
 			CHECKREQS_DISK_BUILD="5G"
 		fi
@@ -235,7 +235,7 @@ pkg_setup() {
 	if [[ ${MERGE_TYPE} != binary ]] ; then
 		# Ensure we have enough disk space to compile
 		if use pgo || use lto || use debug || use test ; then
-			CHECKREQS_DISK_BUILD="10G"
+			CHECKREQS_DISK_BUILD="11G"
 		else
 			CHECKREQS_DISK_BUILD="5G"
 		fi
@@ -274,6 +274,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	use pgo && rm "${WORKDIR}"/firefox/0032-LTO-Only-enable-LTO-for-Rust-when-complete-build-use.patch
 	eapply "${WORKDIR}/firefox"
 
 	# Make LTO respect MAKEOPTS
@@ -340,13 +341,6 @@ src_prepare() {
 	sed -i -e "s@check_prog('RUSTFMT', add_rustup_path('rustfmt')@check_prog('RUSTFMT', add_rustup_path('rustfmt_do_not_use')@" \
 		"${S}"/build/moz.configure/rust.configure || die
 
-	if has_version ">=virtual/rust-1.45.0" ; then
-		einfo "Unbreak build with >=rust-1.45.0, bmo#1640982 ..."
-		sed -i \
-			-e 's/\(^cargo_rustc_flags +=.* \)-Clto\( \|$\)/\1/' \
-			"${S}/config/makefiles/rust.mk" || die
-	fi
-
 	# OpenSUSE-KDE patchset
 	einfo Applying OpenSUSE-KDE patches
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
@@ -402,8 +396,6 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-
-	! use dbus && eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -687,8 +679,6 @@ src_configure() {
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
 
 	#
-	! use dbus && mozconfig_annotate '' --disable-dbus
-
 	mozconfig_annotate '' --disable-accessibility
 	mozconfig_annotate '' --disable-address-sanitizer
 	mozconfig_annotate '' --disable-address-sanitizer-reporter

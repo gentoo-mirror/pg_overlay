@@ -3,6 +3,6 @@ rhbz-1219542-s390-build.patch
 build-aarch64-skia.patch
 build-disable-elfhack.patch
 
+rhbz-1173156.patch
 mozilla-1170092.patch
 rhbz-1354671.patch
-firefox-locale-debug.patch

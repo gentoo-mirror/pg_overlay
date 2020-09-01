@@ -1,0 +1,28 @@
+diff -up firefox-79.0/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp.mozilla-1656436 firefox-79.0/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
+--- firefox-79.0/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp.mozilla-1656436	2020-08-04 13:31:49.476663242 +0200
++++ firefox-79.0/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp	2020-08-04 13:32:28.201448682 +0200
+@@ -766,6 +766,11 @@ MediaResult FFmpegVideoDecoder<LIBAV_VER
+     mDMABufSurfaces.EmplaceBack(surface, mLib);
+     surfaceWrapper = &(mDMABufSurfaces[mDMABufSurfaces.Length() - 1]);
+   } else {
++    // Release VAAPI surface data before we reuse it.
++    if (mVAAPIDeviceContext) {
++      surfaceWrapper->ReleaseVAAPIData();
++    }
++
+     surface = surfaceWrapper->GetDMABufSurface();
+     bool ret;
+ 
+diff -up firefox-79.0/widget/gtk/DMABufSurface.cpp.mozilla-1656436 firefox-79.0/widget/gtk/DMABufSurface.cpp
+--- firefox-79.0/widget/gtk/DMABufSurface.cpp.mozilla-1656436	2020-08-04 13:31:49.477663237 +0200
++++ firefox-79.0/widget/gtk/DMABufSurface.cpp	2020-08-04 13:33:07.666230023 +0200
+@@ -744,7 +744,8 @@ bool DMABufSurfaceYUV::UpdateYUVData(con
+     return false;
+   }
+   if (mDmabufFds[0] >= 0) {
+-    ReleaseSurface();
++    NS_WARNING("DMABufSurfaceYUV is already created!");
++    return false;
+   }
+ 
+   mSurfaceFormat = gfx::SurfaceFormat::NV12;

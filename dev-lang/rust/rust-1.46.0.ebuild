@@ -141,7 +141,7 @@ boostrap_rust_version_check() {
 
 	if ver_test "${rustc_version}" -lt "${rustc_wanted}" ; then
 		eerror "Rust >=${rustc_wanted} is required"
-		eerror "please run \'eselect rust\' and set correct rust version" 
+		eerror "please run \'eselect rust\' and set correct rust version"
 		die
 	else
 		einfo "Using rust ${rustc_version} to build"
@@ -310,10 +310,9 @@ src_configure() {
 
 		[install]
 		prefix = "${EPREFIX}/usr"
-		libdir = "lib"
+		libdir = "$(get_libdir)/${P}"
 		docdir = "share/doc/${PF}"
-		mandir = "share/man"
-
+		mandir = "share/${P}/man"
 		[rust]
 		optimize = true
 		debug = $(toml_usex debug)
