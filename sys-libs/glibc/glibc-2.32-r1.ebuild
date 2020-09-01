@@ -25,6 +25,7 @@ else
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 	SRC_URI="mirror://gnu/glibc/${P}.tar.xz"
 	SRC_URI+=" https://dev.gentoo.org/~${PATCH_DEV}/distfiles/${P}-patches-${PATCH_VER}.tar.xz"
+	SRC_URI+=" riscv? ( https://dev.gentoo.org/~dilfridge/distfiles/backport-rv32.txz )"
 fi
 
 RELEASE_VER=${PV}
@@ -300,6 +301,14 @@ setup_target_flags() {
 		mips)
 			# The mips abi cannot support the GNU style hashes. #233233
 			filter-ldflags -Wl,--hash-style=gnu -Wl,--hash-style=both
+		;;
+		ppc)
+			# Many arch-specific implementations do not work on ppc with
+			# cache-block not equal to 128 bytes. This breaks memset:
+			#   https://sourceware.org/PR26522
+			#   https://bugs.gentoo.org/737996
+			# Use default -mcpu=. For ppc it means non-multiarch setup.
+			filter-flags '-mcpu=*'
 		;;
 		sparc)
 			# Both sparc and sparc64 can use -fcall-used-g6.  -g7 is bad, though.
@@ -740,6 +749,7 @@ src_unpack() {
 
 	cd "${WORKDIR}" || die
 	unpack locale-gen-${LOCALE_GEN_VER}.tar.gz
+	use riscv && unpack backport-rv32.txz
 }
 
 src_prepare() {
@@ -753,6 +763,12 @@ src_prepare() {
 		elog "Applying Gentoo Glibc Patchset ${patchsetname}"
 		eapply "${WORKDIR}"/patches
 		einfo "Done."
+
+		if use riscv ; then
+			elog "Adding rv32 backport patchset for glibc-2.32 (experimental)"
+			eapply "${WORKDIR}"/backport-rv32
+			einfo "Done."
+		fi
 	fi
 
 	default
