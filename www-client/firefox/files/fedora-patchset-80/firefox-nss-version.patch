@@ -1,0 +1,12 @@
+diff -up firefox-78.0/toolkit/moz.configure.nss-version firefox-78.0/toolkit/moz.configure
+--- firefox-78.0/toolkit/moz.configure.nss-version	2020-06-30 08:47:09.657501414 +0200
++++ firefox-78.0/toolkit/moz.configure	2020-06-30 08:47:12.652510169 +0200
+@@ -2089,7 +2089,7 @@ option('--with-system-nss', help='Use sy
+ 
+ imply_option('--with-system-nspr', True, when='--with-system-nss')
+ 
+-nss_pkg = pkg_check_modules('NSS', 'nss >= 3.53.1', when='--with-system-nss', config=False)
++nss_pkg = pkg_check_modules('NSS', 'nss >= 3.53.0', when='--with-system-nss', config=False)
+ 
+ set_config('MOZ_SYSTEM_NSS', True, when='--with-system-nss')
+ 

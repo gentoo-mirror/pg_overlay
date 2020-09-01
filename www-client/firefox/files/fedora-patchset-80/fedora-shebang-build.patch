@@ -1,0 +1,9 @@
+diff -up firefox-73.0/build/unix/run-mozilla.sh.old firefox-73.0/build/unix/run-mozilla.sh
+--- firefox-73.0/build/unix/run-mozilla.sh.old	2020-02-12 09:58:00.150895904 +0100
++++ firefox-73.0/build/unix/run-mozilla.sh	2020-02-12 09:58:06.505860696 +0100
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!/usr/bin/sh
+ #
+ # This Source Code Form is subject to the terms of the Mozilla Public
+ # License, v. 2.0. If a copy of the MPL was not distributed with this

@@ -1,0 +1,28 @@
+diff -up firefox-80.0/dom/system/IOUtils.cpp.nspr-build firefox-80.0/dom/system/IOUtils.cpp
+--- firefox-80.0/dom/system/IOUtils.cpp.nspr-build	2020-08-19 17:38:00.895018639 +0200
++++ firefox-80.0/dom/system/IOUtils.cpp	2020-08-19 17:38:09.965978725 +0200
+@@ -14,9 +14,9 @@
+ #include "mozilla/Services.h"
+ #include "mozilla/Span.h"
+ #include "mozilla/TextUtils.h"
+-#include "nspr/prio.h"
+-#include "nspr/private/pprio.h"
+-#include "nspr/prtypes.h"
++#include "prio.h"
++#include "private/pprio.h"
++#include "prtypes.h"
+ #include "nsDirectoryServiceDefs.h"
+ #include "nsIFile.h"
+ #include "nsIGlobalObject.h"
+diff -up firefox-80.0/dom/system/IOUtils.h.nspr-build firefox-80.0/dom/system/IOUtils.h
+--- firefox-80.0/dom/system/IOUtils.h.nspr-build	2020-08-17 22:13:15.000000000 +0200
++++ firefox-80.0/dom/system/IOUtils.h	2020-08-19 17:20:33.332711771 +0200
+@@ -14,7 +14,7 @@
+ #include "mozilla/dom/TypedArray.h"
+ #include "mozilla/ErrorResult.h"
+ #include "mozilla/MozPromise.h"
+-#include "nspr/prio.h"
++#include "prio.h"
+ #include "nsIAsyncShutdown.h"
+ #include "nsISerialEventTarget.h"
+ #include "nsLocalFile.h"

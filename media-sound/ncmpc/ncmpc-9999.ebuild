@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PLOCALES="cs da de en eo es fi fr gl he hu ie it ko nb nl pl pt_BR ru sk sv uk zh_CN"
+PLOCALES="cs da de en eo es fi fr gl he hu ie it ko nb nl pl pt pt_BR ru sk sv uk zh_CN"
 
 inherit meson git-r3 l10n
 
