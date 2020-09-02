@@ -18,7 +18,7 @@ pref("geo.enabled", false);
 pref("geo.provider.use_gpsd", false);
 pref("browser.search.geoip.url", "");
 pref("browser.search.geoSpecificDefaults", false);
-pref("browser.search.geoSpecificDefaults.url", "")
+pref("browser.search.geoSpecificDefaults.url", "");
 //
 pref("urlclassifier.malwareTable", "");
 pref("urlclassifier.phishTable", "");
@@ -90,4 +90,4 @@ pref("browser.tabs.crashReporting.sendReport", false);
 pref("browser.crashReports.unsubmittedCheck.enabled", false);
 pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 //
-pref("pdfjs.disabled",  true);
+pref("pdfjs.disabled", true);
