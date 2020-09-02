@@ -87,6 +87,15 @@ pkg_pretend() {
 	fi
 }
 
+src_prepare() {
+	sed -i \
+		-e '/third_party\/abseil-cpp/d' \
+		-e 's:\${webrtc_libs_list}:webrtc:' \
+		cmake/external/webrtc/CMakeLists.txt || die
+
+	cmake_src_prepare
+}
+
 src_configure() {
 	local mycxxflags=(
 		-Wno-deprecated-declarations
