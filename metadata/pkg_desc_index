@@ -159,7 +159,6 @@ gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors such as sway
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kscreenlocker 5.19.5: Library and components for secure lock screen architecture
 kde-plasma/kwin 5.18.4.4 5.19.4: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 68.12.0: Thunderbird Mail Client
 media-libs/libepoxy 1.5.4: Library for handling OpenGL function pointer management

@@ -11,5 +11,5 @@ RDEPEND=dev-libs/apr:1= dev-libs/apr-util:1= !libressl? ( dev-libs/openssl:0= ) 
 RESTRICT=test
 SLOT=1
 SRC_URI=mirror://apache/serf/serf-1.3.9.tar.bz2
-_eclasses_=eutils	fcb2aa98e1948b835b5ae66ca52868c5	flag-o-matic	09a8beb8e6a8e02dc1e1bd83ac353741	multilib	2477ebe553d3e4d2c606191fe6c33602	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	bae936266b68e0c374a74f2b0d0aaa44	scons-utils	e0280667866a0a52da7ee4cfcf6a6f48	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb
+_eclasses_=eutils	fcb2aa98e1948b835b5ae66ca52868c5	flag-o-matic	09a8beb8e6a8e02dc1e1bd83ac353741	multilib	2477ebe553d3e4d2c606191fe6c33602	multiprocessing	cac3169468f893670dac3e7cb940e045	python-any-r1	54a3178500786b0a7ede4a23b7f2a6ad	python-utils-r1	bae936266b68e0c374a74f2b0d0aaa44	scons-utils	bd53ea299f3cc8c9dc24e4c59c92965f	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb
 _md5_=40eb636ffbd3c1cca2dd8764564dc47f
