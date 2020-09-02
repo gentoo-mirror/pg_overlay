@@ -43,7 +43,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${P}-tests-test-break.c-Only-test-Thai-breaks-with-libtha.patch
+	"${FILESDIR}"/${PN}-1.44.7-tests-test-break.c-Only-test-Thai-breaks-with-libtha.patch
 )
 
 src_prepare() {
