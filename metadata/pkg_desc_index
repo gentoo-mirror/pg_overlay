@@ -124,7 +124,7 @@ dev-python/pycryptodomex 3.9.7: A self-contained cryptographic library for Pytho
 dev-python/pygobject 3.36.1: Python bindings for GObject Introspection
 dev-python/pymountboot 0.2.3: Python extension module to (re)mount /boot
 dev-python/pyrfc3339 1.1: Generates and parses RFC 3339 timestamps
-dev-python/pysol_cards 0.8.16: Deal PySol FreeCell cards
+dev-python/pysol_cards 0.10.1: Deal PySol FreeCell cards
 dev-python/pyxdg 0.26-r1: A Python module to deal with freedesktop.org specifications
 dev-python/random2 1.0.1-r1: Python-2.7 random module ported to python-3
 dev-python/rencode 1.0.6: similar to bencode from the BitTorrent project
