@@ -74,7 +74,7 @@ multilib_src_configure() {
 		$(meson_feature gssapi)
 		-Dkrb5_config="${CHOST}-krb5-config"
 		$(meson_feature samba ntlm)
-# 		#$(meson_feature brotli)
+ 		$(meson_feature brotli)
 		-Dntlm_auth="${EPREFIX}/usr/bin/ntlm_auth"
 		-Dtls_check=false # disables check, we still rdep on glib-networking
 		-Dgnome=false
