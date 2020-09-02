@@ -862,9 +862,6 @@ src_install() {
 	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
 	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
 	|| die
-	echo "pref(\"app.update.channel\", release);" >> \
-		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-		|| die
 
 	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
 
