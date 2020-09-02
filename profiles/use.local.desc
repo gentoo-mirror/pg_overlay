@@ -361,6 +361,9 @@ net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking b
 net-libs/glib-networking:gnome - Extract HTTP/HTTPS/SOCKS proxy configuration stored using GSettings
 net-libs/glib-networking:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration
 net-libs/libpsl:man - Build man-pages
+net-libs/libsoup:brotli - Enable brotli decompression support
+net-libs/libsoup:gssapi - Enable GSSAPI support
+net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:npm - Enable NPM package manager
