@@ -251,7 +251,7 @@ x11-libs/gtk+ 2.24.32-r1 3.24.22: Gimp ToolKit +
 x11-libs/libva 2.7.1: Video Acceleration (VA) API for Linux
 x11-libs/libva-intel-driver 2.4.0: HW video decode support for Intel integrated graphics
 x11-libs/libxcb 1.14: X C-language Bindings library
-x11-libs/pango 1.45.1: Internationalized text layout and rendering library
+x11-libs/pango 1.46.1: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
