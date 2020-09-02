@@ -31,17 +31,20 @@ RDEPEND="
 	introspection? ( >=dev-libs/gobject-introspection-0.9.5:= )
 "
 DEPEND="${RDEPEND}
-	dev-util/glib-utils
 	x11-base/xorg-proto
 "
 BDEPEND="
-	virtual/pkgconfig[${MULTILIB_USEDEP}]
+	virtual/pkgconfig
 	gtk-doc? (
 		>=dev-util/gtk-doc-1.20
 		app-text/docbook-xml-dtd:4.2
 		app-text/docbook-xml-dtd:4.5
 	)
 "
+
+PATCHES=(
+	"${FILESDIR}"/${P}-tests-test-break.c-Only-test-Thai-breaks-with-libtha.patch
+)
 
 src_prepare() {
 	xdg_src_prepare
