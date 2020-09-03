@@ -112,9 +112,6 @@ src_install() {
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
 
-	if [[ ${EUID} == 0 ]]; then
-		diropts -o transmission -g transmission
-	fi
 	keepdir /var/lib/transmission
 }
 
