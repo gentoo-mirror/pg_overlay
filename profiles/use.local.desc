@@ -381,6 +381,8 @@ net-p2p/amule:stats - Enable statistic reporting
 net-p2p/deluge:console - Enable default console UI
 net-p2p/deluge:webinterface - Install dependencies needed for the web interface
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
+net-p2p/transmission:lightweight - Optimize transmission for low-resource systems (smaller cache size, prefer unencrypted peer connections, etc.)
+net-p2p/transmission:mbedtls - Use mbed TLS instead of OpenSSL
 net-print/samsung-unified-driver:network - Enable network printing support
 net-voip/telepathy-gabble:jingle - Enable voice calls for jabber
 net-voip/telepathy-gabble:plugins - Enable plugin loader

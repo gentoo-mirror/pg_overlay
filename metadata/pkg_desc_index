@@ -212,6 +212,7 @@ net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
+net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
 sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy

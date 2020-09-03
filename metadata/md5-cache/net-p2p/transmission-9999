@@ -1,0 +1,14 @@
+BDEPEND=acct-group/transmission acct-user/transmission virtual/pkgconfig nls? ( gtk? ( dev-util/intltool sys-devel/gettext ) qt5? ( dev-qt/linguist-tools:5 ) ) || ( dev-util/ninja dev-util/samurai ) dev-util/cmake >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install postinst postrm prepare test unpack
+DEPEND=>=dev-libs/libevent-2.0.10:= !mbedtls? ( !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) ) mbedtls? ( net-libs/mbedtls:0= ) >=net-misc/curl-7.16.3[ssl] sys-libs/zlib:= nls? ( virtual/libintl ) gtk? ( >=dev-libs/dbus-glib-0.100 >=dev-libs/glib-2.32:2 >=x11-libs/gtk+-3.4:3 appindicator? ( >=dev-libs/libappindicator-0.4.30:3 ) ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 dev-qt/qtnetwork:5 dev-qt/qtdbus:5 ) nls? ( virtual/libintl gtk? ( dev-util/intltool sys-devel/gettext ) qt5? ( dev-qt/linguist-tools:5 ) )
+DESCRIPTION=A fast, easy, and free BitTorrent client
+EAPI=7
+HOMEPAGE=https://transmissionbt.com/
+IUSE=appindicator gtk libressl lightweight nls mbedtls qt5 test
+LICENSE=|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT
+PROPERTIES=live
+RDEPEND=>=dev-libs/libevent-2.0.10:= !mbedtls? ( !libressl? ( dev-libs/openssl:0= ) libressl? ( dev-libs/libressl:0= ) ) mbedtls? ( net-libs/mbedtls:0= ) >=net-misc/curl-7.16.3[ssl] sys-libs/zlib:= nls? ( virtual/libintl ) gtk? ( >=dev-libs/dbus-glib-0.100 >=dev-libs/glib-2.32:2 >=x11-libs/gtk+-3.4:3 appindicator? ( >=dev-libs/libappindicator-0.4.30:3 ) ) qt5? ( dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 dev-qt/qtnetwork:5 dev-qt/qtdbus:5 ) acct-group/transmission acct-user/transmission
+RESTRICT=!test? ( test )
+SLOT=0
+_eclasses_=cmake	780ee2399d07a518d7fc548050830f12	eutils	fcb2aa98e1948b835b5ae66ca52868c5	flag-o-matic	09a8beb8e6a8e02dc1e1bd83ac353741	git-r3	3e7ec3d6619213460c85e2aa48398441	multilib	2477ebe553d3e4d2c606191fe6c33602	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
+_md5_=75b60f4e9d07b4a4542227d06fefcfe9
