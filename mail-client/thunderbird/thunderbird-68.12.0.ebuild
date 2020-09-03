@@ -286,7 +286,7 @@ src_prepare() {
 	for i in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)/series");do eapply "${FILESDIR}/fedora-patchset-$(get_major_version)/$i";done
 
 	# PGO freeze fix
-	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
+	#use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
 
 	# Make LTO respect MAKEOPTS
 	sed -i \
