@@ -37,7 +37,8 @@ if [[ "${PV}" == *_rc* ]]; then
 	MOZ_SRC_URI="${MOZ_HTTP_URI}/source/${PN}-${MOZ_PV}.source.tar.xz -> $P.tar.xz"
 fi
 
-LLVM_MAX_SLOT=10
+LLVM_MAX_SLOT=11
+MOZCONFIG_OPTIONAL_JIT=1
 
 inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 		gnome2-utils llvm mozcoreconf-v6 pax-utils xdg-utils \
@@ -140,46 +141,22 @@ DEPEND="${CDEPEND}
 	>=virtual/rust-1.43.0
 	|| (
 		(
+			sys-devel/clang:11
+			!clang? ( sys-devel/llvm:11 )
+			clang? (
+				=sys-devel/lld-11*
+				sys-devel/llvm:11
+				pgo? ( =sys-libs/compiler-rt-sanitizers-11*[profile] )
+			)
+		)
+		(
 			sys-devel/clang:10
 			!clang? ( sys-devel/llvm:10 )
 			clang? (
 				=sys-devel/lld-10*
-				sys-devel/llvm:10[gold]
+				sys-devel/llvm:10
 				pgo? ( =sys-libs/compiler-rt-sanitizers-10*[profile] )
 			)
-		)
-		(
-			sys-devel/clang:9
-			!clang? ( sys-devel/llvm:9 )
-			clang? (
-				=sys-devel/lld-9*
-				sys-devel/llvm:9[gold]
-				pgo? ( =sys-libs/compiler-rt-sanitizers-9*[profile] )
-			)
-		)
-		(
-			sys-devel/clang:8
-			!clang? ( sys-devel/llvm:8 )
-			clang? (
-				=sys-devel/lld-8*
-				sys-devel/llvm:8[gold]
-				pgo? ( =sys-libs/compiler-rt-sanitizers-8*[profile] )
-			)
-		)
-		(
-			sys-devel/clang:7
-			!clang? ( sys-devel/llvm:7 )
-			clang? (
-				=sys-devel/lld-7*
-				sys-devel/llvm:7[gold]
-				pgo? ( =sys-libs/compiler-rt-sanitizers-7*[profile] )
-			)
-		)
-	)
-	pulseaudio? (
-		|| (
-			media-sound/pulseaudio
-			>=media-sound/apulse-0.1.12-r4[sdk]
 		)
 	)
 	wayland? ( >=x11-libs/gtk+-3.11:3[wayland] )
