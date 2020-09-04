@@ -440,7 +440,7 @@ src_configure() {
 			fi
 
 			# Linking only works when using ld.gold when LTO is enabled
-			mozconfig_annotate "forcing ld=gold due to USE=lto" --enable-linker=gold
+			mozconfig_annotate "no forcing ld=gold due to USE=lto" --enable-linker=bfd
 		fi
 
 		if [[ -n "${show_old_compiler_warning}" ]] ; then
