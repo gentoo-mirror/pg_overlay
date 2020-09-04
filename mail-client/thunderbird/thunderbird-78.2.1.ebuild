@@ -706,14 +706,10 @@ src_configure() {
 	mozconfig_annotate '' --disable-dtrace
 	mozconfig_annotate '' --disable-dump-painting
 
-	mozconfig_annotate '' --disable-elf-hack
-
-	mozconfig_annotate '' --disable-gc-trace
-	mozconfig_annotate '' --disable-gconf
+	mozconfig_annotate '' --disable-gold
 	mozconfig_annotate '' --disable-gtest-in-build
 
 	mozconfig_annotate '' --disable-instruments
-	mozconfig_annotate '' --disable-ios-target
 	mozconfig_annotate '' --disable-ipdl-tests
 
 	mozconfig_annotate '' --disable-jprof
@@ -733,8 +729,7 @@ src_configure() {
 	mozconfig_annotate '' --disable-reflow-perf
 	mozconfig_annotate '' --disable-rust-debug
 	mozconfig_annotate '' --disable-rust-tests
-
-	mozconfig_annotate '' --disable-signmar
+	mozconfig_annotate '' --disable-system-extension-dirs
 
 	mozconfig_annotate '' --disable-trace-logging
 
@@ -745,7 +740,6 @@ src_configure() {
 	mozconfig_annotate '' --disable-vtune
 
 	mozconfig_annotate '' --disable-warnings-as-errors
-	mozconfig_annotate '' --disable-webrtc
 
 	mozconfig_annotate '' --without-debug-label
 	mozconfig_annotate '' --without-google-location-service-api-keyfile
