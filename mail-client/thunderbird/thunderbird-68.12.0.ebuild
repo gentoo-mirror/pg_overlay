@@ -370,13 +370,13 @@ src_configure() {
 		einfo "Enforcing the use of clang due to USE=clang ..."
 		CC=${CHOST}-clang
 		CXX=${CHOST}-clang++
-		#strip-unsupported-flags
+		strip-unsupported-flags
 	elif ! use clang && ! tc-is-gcc ; then
 		# Force gcc
 		einfo "Enforcing the use of gcc due to USE=-clang ..."
 		CC=${CHOST}-gcc
 		CXX=${CHOST}-g++
-		#strip-unsupported-flags
+		strip-unsupported-flags
 	fi
 
 	####################################
