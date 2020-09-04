@@ -8,7 +8,7 @@ MOZ_ESR=""
 MOZ_LIGHTNING_VER="6.2.5"
 MOZ_LIGHTNING_GDATA_VER="4.4.1"
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{7,8,9} )
 PYTHON_REQ_USE='ncurses,sqlite,ssl,threads(+)'
 
 # This list can be updated using scripts/get_langs.sh from the mozilla overlay
@@ -47,7 +47,7 @@ inherit check-reqs eapi7-ver flag-o-matic toolchain-funcs eutils \
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="https://www.mozilla.org/thunderbird"
 
-KEYWORDS="amd64 ~arm64 ~ppc64 x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
 SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
@@ -55,13 +55,9 @@ IUSE="bindist clang cpu_flags_x86_avx2 debug eme-free
 	+gmp-autoupdate hardened jack lightning lto cpu_flags_arm_neon
 	pgo pulseaudio selinux +system-av1
 	+system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-libvpx +system-webp test wayland wifi
-	 +jit kde cross-lto thinlto"
+	+system-libvpx +system-webp test wayland wifi"
 
-REQUIRED_USE="pgo? ( lto )
-	cross-lto? ( clang lto )
-	thinlto? ( lto )
-	kde? ( !bindist )"
+REQUIRED_USE="pgo? ( lto )"
 
 RESTRICT="!bindist? ( bindist )
 	!test? ( test )"
@@ -272,14 +268,11 @@ src_prepare() {
 	rm "${WORKDIR}"/firefox/0029-bmo-1632429-enum34-and-enum-virtualenv-packages-are-.patch || die
 	eapply "${WORKDIR}/firefox"
 	pushd "${S}"/comm &>/dev/null || die
-	#eapply "${FILESDIR}/1000_fix_gentoo_preferences_78.2.0.patch"
+	eapply "${FILESDIR}/1000_fix_gentoo_preferences_78.2.0.patch"
 	popd &>/dev/null || die
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
-
-	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	# Make LTO respect MAKEOPTS
 	sed -i \
@@ -303,7 +296,7 @@ src_prepare() {
 	eapply_user
 
 	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' \) -print -delete || die
 
 	# Enable gnomebreakpad
 	if use debug ; then
@@ -351,63 +344,6 @@ src_prepare() {
 			-e 's/\(^cargo_rustc_flags +=.* \)-Clto\( \|$\)/\1/' \
 			"${S}/config/makefiles/rust.mk" || die
 	fi
-
-	# OpenSUSE-KDE patchset
-	einfo Applying OpenSUSE-KDE patches
-	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(get_major_version)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p 2>/dev/null
-		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/opensuse-kde-$(get_major_version)"/$p;
-			einfo +++++++++++++++++++++++++;
-			einfo Patch $p is APPLIED;
-			einfo +++++++++++++++++++++++++
-		else
-			einfo -------------------------;
-			einfo Patch $p is NOT applied and IGNORED;
-			einfo -------------------------
-		fi
-	done
-
-	# Privacy-esr patches
-	einfo Applying privacy patches
-	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
-
-	# Debian patches
-	einfo "Applying Debian's patches"
-	for p in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(get_major_version)"/$p 2>/dev/null
-		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/debian-patchset-$(get_major_version)"/$p;
-			einfo +++++++++++++++++++++++++;
-			einfo Patch $p is APPLIED;
-			einfo +++++++++++++++++++++++++
-		else
-			einfo -------------------------;
-			einfo Patch $p is NOT applied and IGNORED;
-			einfo -------------------------
-		fi
-	done
-
-	# FreeBSD patches
-	einfo "Applying FreeBSD's patches"
-	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i"; done
-
-	# Fedora patches
-	einfo "Applying Fedora's patches"
-	for p in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p 2>/dev/null
-		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p;
-			einfo +++++++++++++++++++++++++;
-			einfo Patch $p is APPLIED;
-			einfo +++++++++++++++++++++++++
-		else
-			einfo -------------------------;
-			einfo Patch $p is NOT applied and IGNORED;
-			einfo -------------------------
-		fi
-	done
-	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	# Autotools configure is now called old-configure.in
 	# This works because there is still a configure.in that happens to be for the
@@ -529,27 +465,10 @@ src_configure() {
 			sleep 5
 		fi
 
-		if use cross-lto ; then
-			filter-flags -fno-plt
-			append-flags --target=x86_64-unknown-linux-gnu
-			append-ldflags --target=x86_64-unknown-linux-gnu
-			mozconfig_annotate '+lto-cross' --enable-lto=cross
-			mozconfig_annotate '+lto-cross' MOZ_LTO=1
-			mozconfig_annotate '+lto-cross' MOZ_LTO=cross
-			mozconfig_annotate '+lto-cross' MOZ_LTO_RUST=1
-		elif use thinlto ; then
-			mozconfig_annotate '+lto-thin' --enable-lto=thin
-			mozconfig_annotate '+lto-thin' MOZ_LTO=1
-			mozconfig_annotate '+lto-thin' MOZ_LTO=thin
-		else
-			mozconfig_annotate '+lto-full' --enable-lto=full
-			mozconfig_annotate '+lto-full' MOZ_LTO=1
-			mozconfig_annotate '+lto-full' MOZ_LTO=full
-		fi
+		mozconfig_annotate '+lto' --enable-lto=thin
 
 		if use pgo ; then
 			mozconfig_annotate '+pgo' MOZ_PGO=1
-			mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -664,6 +583,11 @@ src_configure() {
 	# Enable/Disable eme support
 	use eme-free && mozconfig_annotate '+eme-free' --disable-eme
 
+	# Setup api key for location services and safebrowsing, https://bugzilla.mozilla.org/show_bug.cgi?id=1531176#c34
+	echo -n "${_google_api_key}" > "${S}"/google-api-key
+	mozconfig_annotate '' --with-google-location-service-api-keyfile="${S}/google-api-key"
+	mozconfig_annotate '' --with-google-safebrowsing-api-keyfile="${S}/google-api-key"
+
 	mozconfig_annotate '' --enable-extensions="${MEXTENSIONS}"
 
 	# allow elfhack to work in combination with unstripped binaries
@@ -690,86 +614,6 @@ src_configure() {
 
 	echo "mk_add_options MOZ_OBJDIR=${BUILD_OBJ_DIR}" >> "${S}"/.mozconfig
 	echo "mk_add_options XARGS=/usr/bin/xargs" >> "${S}"/.mozconfig
-
-	#
-	mozconfig_annotate '' --disable-accessibility
-	mozconfig_annotate '' --disable-address-sanitizer
-	mozconfig_annotate '' --disable-address-sanitizer-reporter
-
-	mozconfig_annotate '' --disable-callgrind
-	mozconfig_annotate '' --disable-crashreporter
-
-	mozconfig_annotate '' --disable-debug
-	mozconfig_annotate '' --disable-debug-js-modules
-	mozconfig_annotate '' --disable-debug-symbols
-	mozconfig_annotate '' --disable-dmd
-	mozconfig_annotate '' --disable-dtrace
-	mozconfig_annotate '' --disable-dump-painting
-
-	mozconfig_annotate '' --disable-gold
-	mozconfig_annotate '' --disable-gtest-in-build
-
-	mozconfig_annotate '' --disable-instruments
-	mozconfig_annotate '' --disable-ipdl-tests
-
-	mozconfig_annotate '' --disable-jprof
-
-	mozconfig_annotate '' --disable-libproxy
-	mozconfig_annotate '' --disable-logrefcnt
-
-	mozconfig_annotate '' --disable-memory-sanitizer
-	mozconfig_annotate '' --disable-mobile-optimize
-	
-	mozconfig_annotate '' --disable-necko-wifi
-
-	mozconfig_annotate '' --disable-parental-controls
-	mozconfig_annotate '' --disable-perf
-	mozconfig_annotate '' --disable-profiling
-
-	mozconfig_annotate '' --disable-reflow-perf
-	mozconfig_annotate '' --disable-rust-debug
-	mozconfig_annotate '' --disable-rust-tests
-	mozconfig_annotate '' --disable-system-extension-dirs
-
-	mozconfig_annotate '' --disable-trace-logging
-
-	mozconfig_annotate '' --disable-updater
-
-	mozconfig_annotate '' --disable-valgrind
-	mozconfig_annotate '' --disable-verify-mar
-	mozconfig_annotate '' --disable-vtune
-
-	mozconfig_annotate '' --disable-warnings-as-errors
-
-	mozconfig_annotate '' --without-debug-label
-	mozconfig_annotate '' --without-google-location-service-api-keyfile
-	mozconfig_annotate '' --without-google-safebrowsing-api-keyfile
-
-	mozconfig_annotate '' MOZ_DATA_REPORTING=
-	mozconfig_annotate '' MOZ_LOGGING=
-	mozconfig_annotate '' MOZ_PAY=
-	mozconfig_annotate '' MOZ_SERVICES_HEALTHREPORTER=
-	mozconfig_annotate '' MOZ_SERVICES_METRICS=
-	mozconfig_annotate '' MOZ_TELEMETRY_REPORTING=
-	mozconfig_annotate '' RUSTFLAGS=-Ctarget-cpu=native
-	mozconfig_annotate '' RUSTFLAGS=-Copt-level=3
-	mozconfig_annotate '' RUSTFLAGS=-Cdebuginfo=0
-
-
-	# Enable good features
-	mozconfig_annotate '' --enable-install-strip
-	mozconfig_annotate '' --enable-rust-simd
-	mozconfig_annotate '' --enable-strip
-
-	echo "export MOZ_DATA_REPORTING=" >> "${S}"/.mozconfig
-	echo "export MOZ_DEVICES=" >> "${S}"/.mozconfig
-	echo "export MOZ_LOGGING=" >> "${S}"/.mozconfig
-	echo "export MOZ_PAY=" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
-	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
-	#
 
 	# Finalize and report settings
 	mozconfig_final
