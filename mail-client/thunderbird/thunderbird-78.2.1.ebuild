@@ -272,7 +272,7 @@ src_prepare() {
 	rm "${WORKDIR}"/firefox/0029-bmo-1632429-enum34-and-enum-virtualenv-packages-are-.patch || die
 	eapply "${WORKDIR}/firefox"
 	pushd "${S}"/comm &>/dev/null || die
-	eapply "${FILESDIR}/1000_fix_gentoo_preferences_78.2.0.patch"
+	#eapply "${FILESDIR}/1000_fix_gentoo_preferences_78.2.0.patch"
 	popd &>/dev/null || die
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -303,7 +303,7 @@ src_prepare() {
 	eapply_user
 
 	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' \) -print -delete || die
+	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	# Enable gnomebreakpad
 	if use debug ; then
