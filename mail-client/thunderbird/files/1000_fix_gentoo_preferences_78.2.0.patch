@@ -1,0 +1,11 @@
+diff -ruN a/mail/installer/package-manifest.in b/mail/installer/package-manifest.in
+--- a/mail/installer/package-manifest.in	2020-08-21 14:39:34.000000000 +0200
++++ b/mail/installer/package-manifest.in	2020-08-27 20:35:35.308786093 +0200
+@@ -270,6 +270,7 @@
+ ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+ 
+ ; default pref files
++@RESPATH@/defaults/pref/all-gentoo.js
+ @RESPATH@/defaults/pref/all-thunderbird.js
+ @RESPATH@/defaults/pref/channel-prefs.js
+ @RESPATH@/defaults/pref/composer.js
