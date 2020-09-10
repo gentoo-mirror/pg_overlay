@@ -1,3 +1,4 @@
+app-accessibility/at-spi2-core 2.36.1: D-Bus accessibility specifications and registration daemon
 app-admin/eclean-kernel 2.99.1: Remove outdated built kernels
 app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
@@ -9,7 +10,7 @@ app-crypt/acme 1.7.0: An implementation of the ACME protocol
 app-crypt/certbot 1.7.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.7.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
-app-emulation/virtualbox 6.1.12a: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox 6.1.14a: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/ca-certificates 20200601.3.53: Common CA Certificates PEM files
 app-misc/ddcui 0.1.2: Graphical user interface for ddcutil
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
@@ -21,10 +22,10 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/worker 4.5.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.0.1.2: A full office productivity suite
 app-office/libreoffice-l10n 7.0.1.2: Translations for the Libreoffice suite
-app-portage/eix 0.34.4: Search and query ebuilds
+app-portage/eix 0.34.8: Search and query ebuilds
 app-portage/gentoolkit 9999: Collection of administration scripts for Gentoo
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
-app-shells/push 3.3: A POSIX shell function to treat a variable like an array, quoting args
+app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/iso-codes 4.4: ISO language, territory, currency, script codes and their translations
@@ -150,7 +151,7 @@ dev-util/scons 4.0.1: Extensible Python-based build utility
 dev-util/spirv-tools 2020.4 2020.5_pre20200815 9999: Provides an API and commands for processing SPIR-V modules
 dev-util/vulkan-headers 1.2.152: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.151 9999: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
-dev-vcs/mercurial 5.4.2: Scalable distributed SCM
+dev-vcs/mercurial 5.5.1: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 gnome-base/gsettings-desktop-schemas 3.36.1: Collection of GSettings schemas for GNOME desktop
@@ -248,7 +249,7 @@ www-client/firefox 80.0.1: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
-x11-libs/gtk+ 2.24.32-r1 3.24.22: Gimp ToolKit +
+x11-libs/gtk+ 2.24.32-r1 3.24.23: Gimp ToolKit +
 x11-libs/libva 2.7.1: Video Acceleration (VA) API for Linux
 x11-libs/libva-intel-driver 2.4.0: HW video decode support for Intel integrated graphics
 x11-libs/libxcb 1.14: X C-language Bindings library
