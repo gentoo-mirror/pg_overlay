@@ -1,16 +1,17 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
 
-inherit cmake l10n xdg-utils
+inherit cmake xdg l10n
 [[ ${PV} = 9999 ]] && inherit subversion
 
 DESCRIPTION="Qt5-based audio player with winamp/xmms skins support"
 HOMEPAGE="http://qmmp.ylsoftware.com"
 if [[ ${PV} != 9999 ]]; then
-	SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2"
+	SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2
+		mirror://sourceforge/${PN}-dev/files/${P}.tar.bz2"
 	KEYWORDS="~amd64 ~x86"
 else
 	ESVN_REPO_URI="svn://svn.code.sf.net/p/${PN}-dev/code/trunk/${PN}"
@@ -20,7 +21,7 @@ LICENSE="GPL-2"
 SLOT="0"
 # KEYWORDS further up
 IUSE="aac +alsa analyzer archive bs2b cdda cover crossfade cue curl +dbus enca ffmpeg flac game
-gnome jack ladspa libav lyrics +mad midi mms modplug mplayer musepack notifier opus oss projectm
+gnome jack ladspa lyrics +mad midi mms modplug mplayer musepack notifier opus oss projectm
 pulseaudio qsui qtmedia scrobbler shout sid sndfile soxr stereo tray udisks +vorbis wavpack"
 
 REQUIRED_USE="
@@ -49,17 +50,14 @@ RDEPEND="
 	curl? ( net-misc/curl )
 	dbus? ( dev-qt/qtdbus:5 )
 	enca? ( app-i18n/enca )
-	ffmpeg? (
-		!libav? ( media-video/ffmpeg:= )
-		libav? ( media-video/libav:= )
-	)
+	ffmpeg? ( media-video/ffmpeg:= )
 	flac? ( media-libs/flac )
 	game? ( media-libs/game-music-emu )
 	jack? (
 		media-libs/libsamplerate
-		media-sound/jack-audio-connection-kit
+		virtual/jack
 	)
-	ladspa? ( media-libs/ladspa-cmt )
+	ladspa? ( media-plugins/cmt-plugins )
 	mad? ( || (
 		media-libs/libmad
 		media-sound/mpg123
@@ -172,12 +170,4 @@ src_configure() {
 	)
 
 	cmake_src_configure
-}
-
-pkg_postinst() {
-	xdg_desktop_database_update
-}
-
-pkg_postrm() {
-	xdg_desktop_database_update
 }
