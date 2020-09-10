@@ -6,9 +6,9 @@ app-arch/file-roller 3.36.2: Archive manager for GNOME
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-crypt/acme 1.7.0: An implementation of the ACME protocol
-app-crypt/certbot 1.7.0: Let's encrypt client to automate deployment of X.509 certificates
-app-crypt/certbot-nginx 1.7.0: Nginx plugin for certbot (Let's Encrypt Client)
+app-crypt/acme 1.8.0: An implementation of the ACME protocol
+app-crypt/certbot 1.8.0: Let's encrypt client to automate deployment of X.509 certificates
+app-crypt/certbot-nginx 1.8.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
 app-emulation/virtualbox 6.1.14a: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/ca-certificates 20200601.3.53: Common CA Certificates PEM files
