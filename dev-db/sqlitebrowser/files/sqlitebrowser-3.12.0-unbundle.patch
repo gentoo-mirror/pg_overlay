@@ -1,43 +1,3 @@
-diff -rupN sqlitebrowser-3.12.0/cmake/FindQCustomPlot.cmake sqlitebrowser-3.12.0-new/cmake/FindQCustomPlot.cmake
---- sqlitebrowser-3.12.0/cmake/FindQCustomPlot.cmake	2020-06-14 06:08:29.000000000 +0200
-+++ sqlitebrowser-3.12.0-new/cmake/FindQCustomPlot.cmake	2020-06-16 10:40:42.248894648 +0200
-@@ -31,7 +31,7 @@
- # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- 
- 
--find_library(QCUSTOMPLOT_LIBRARY qcustomplot)
-+find_library(QCUSTOMPLOT_LIBRARY qcustomplot-qt5)
- set(QCUSTOMPLOT_LIBRARIES "${QCUSTOMPLOT_LIBRARY}")
- 
- find_path(QCUSTOMPLOT_INCLUDE_DIR qcustomplot.h)
-diff -rupN sqlitebrowser-3.12.0/cmake/FindQHexEdit.cmake sqlitebrowser-3.12.0-new/cmake/FindQHexEdit.cmake
---- sqlitebrowser-3.12.0/cmake/FindQHexEdit.cmake	2020-06-14 06:08:29.000000000 +0200
-+++ sqlitebrowser-3.12.0-new/cmake/FindQHexEdit.cmake	2020-06-16 10:40:08.745876980 +0200
-@@ -31,10 +31,10 @@
- # THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- 
- 
--find_library(QHEXEDIT_LIBRARY qhexedit)
-+find_library(QHEXEDIT_LIBRARY qhexedit-qt5)
- set(QHEXEDIT_LIBRARIES "${QHEXEDIT_LIBRARY}")
- 
--find_path(QHEXEDIT_INCLUDE_DIR qhexedit.h)
-+find_path(QHEXEDIT_INCLUDE_DIR qhexedit.h PATH_SUFFIXES qhexedit2)
- set(QHEXEDIT_INCLUDE_DIRS "${QHEXEDIT_INCLUDE_DIR}")
- 
- include(FindPackageHandleStandardArgs)
-diff -rupN sqlitebrowser-3.12.0/cmake/FindQScintilla.cmake sqlitebrowser-3.12.0-new/cmake/FindQScintilla.cmake
---- sqlitebrowser-3.12.0/cmake/FindQScintilla.cmake	2020-06-14 06:08:29.000000000 +0200
-+++ sqlitebrowser-3.12.0-new/cmake/FindQScintilla.cmake	2020-06-16 10:42:00.437917679 +0200
-@@ -92,7 +92,7 @@ if ( QScintilla_FIND_VERSION AND QSCINTI
- endif ()
- 
- find_library ( QSCINTILLA_LIBRARY
--  NAMES qscintilla2 qscintilla2_qt5
-+  NAMES qscintilla2 qscintilla2-qt5
-   HINTS /usr/local/lib /usr/local/opt/qscintilla2/lib
- )
- 
 diff -rupN sqlitebrowser-3.12.0/CMakeLists.txt sqlitebrowser-3.12.0-new/CMakeLists.txt
 --- sqlitebrowser-3.12.0/CMakeLists.txt	2020-06-14 06:08:29.000000000 +0200
 +++ sqlitebrowser-3.12.0-new/CMakeLists.txt	2020-06-16 10:29:34.518119985 +0200
@@ -46,7 +6,7 @@ diff -rupN sqlitebrowser-3.12.0/CMakeLists.txt sqlitebrowser-3.12.0-new/CMakeLis
      target_link_libraries(${PROJECT_NAME} ${QSCINTILLA_LIBRARIES})
  else()
 -    target_link_libraries(${PROJECT_NAME} qscintilla2)
-+    target_link_libraries(${PROJECT_NAME} qscintilla2-qt5)
++    target_link_libraries(${PROJECT_NAME} qscintilla2_qt5)
  endif()
  
  if(WIN32 AND MSVC)

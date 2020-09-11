@@ -43,11 +43,11 @@ PATCHES=( "${FILESDIR}"/${P}-unbundle.patch )
 src_prepare() {
 	cmake_src_prepare
 	#rm -r libs || die
-	sed -i 's#"src/qhexedit.h"#<qhexedit.h>#' src/EditDialog.cpp || die
+	#sed -i 's#"src/qhexedit.h"#<qhexedit.h>#' src/EditDialog.cpp || die
 	rm -rf libs/{qcustomplot-source,qhexedit,qscintilla}
 	#find libs/{antlr-2.7.7,qcustomplot-source,qscintilla} -delete || die
 
-	sed -e "/^project/ s/\".*\"/sqlitebrowser/" -i CMakeLists.txt || die
+	#sed -e "/^project/ s/\".*\"/sqlitebrowser/" -i CMakeLists.txt || die
 
 	if ! use test; then
 		sed -e "/find_package/ s/ Test//" -i CMakeLists.txt || die
@@ -58,6 +58,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DENABLE_TESTING=$(usex test)
+		-DUSE_QT5=1
 		-DFORCE_INTERNAL_QCUSTOMPLOT=OFF \
 		-DFORCE_INTERNAL_QHEXEDIT=OFF 
 	)
@@ -66,5 +67,5 @@ src_configure() {
 
 src_install() {
 	cmake_src_install
-	doicon images/sqlitebrowser.svg
+	doicon images/sqlitebrowser.png
 }
