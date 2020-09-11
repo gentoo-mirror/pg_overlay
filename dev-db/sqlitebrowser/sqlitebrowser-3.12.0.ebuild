@@ -38,12 +38,13 @@ RDEPEND="${DEPEND}
 	dev-qt/qtsvg:5
 "
 
-PATCHES=( "${FILESDIR}"/${PN}-3.11.1-unbundle.patch )
+PATCHES=( "${FILESDIR}"/${P}-unbundle.patch )
 
 src_prepare() {
 	cmake_src_prepare
-	rm -r libs || die
+	#rm -r libs || die
 	sed -i 's#"src/qhexedit.h"#<qhexedit.h>#' src/EditDialog.cpp || die
+	rm -rf libs/{qcustomplot-source,qhexedit,qscintilla}
 	#find libs/{antlr-2.7.7,qcustomplot-source,qscintilla} -delete || die
 
 	sed -e "/^project/ s/\".*\"/sqlitebrowser/" -i CMakeLists.txt || die
@@ -57,6 +58,8 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DENABLE_TESTING=$(usex test)
+		-DFORCE_INTERNAL_QCUSTOMPLOT=OFF \
+		-DFORCE_INTERNAL_QHEXEDIT=OFF 
 	)
 	cmake_src_configure
 }
