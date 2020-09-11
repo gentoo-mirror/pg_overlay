@@ -6,6 +6,7 @@ app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-a
 app-arch/file-roller:nautilus - Build contextual menu extension for gnome-base/nautilus.
 app-arch/file-roller:packagekit - Enable support for the distro-neutral package manager GUI app-admin/packagekit
 app-arch/p7zip:rar - Enable support for non-free rar decoder
+app-editors/qhexedit2:gui - Install Qt5 hex editor
 app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
 app-emulation/virtualbox:headless - Build without any graphic frontend
 app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
