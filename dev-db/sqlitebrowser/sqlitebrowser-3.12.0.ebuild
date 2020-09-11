@@ -38,7 +38,7 @@ RDEPEND="${DEPEND}
 	dev-qt/qtsvg:5
 "
 
-PATCHES=( "${FILESDIR}"/${PN}-3.11.1-unbundle.patch )
+PATCHES=( "${FILESDIR}"/${P}-unbundle.patch )
 
 src_prepare() {
 	cmake_src_prepare
