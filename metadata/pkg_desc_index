@@ -34,6 +34,7 @@ app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindings
 dev-db/sqlite 3.33.0_pre-r1: SQL database engine
+dev-db/sqlitebrowser 3.12.0: SQLite Database Browser
 dev-games/freecell-solver 6.0.1: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 2.7.18-r2 3.9.0_rc1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.46.0: Systems programming language from Mozilla
@@ -135,7 +136,7 @@ dev-python/sip 4.19.22 5.2.0: Python extension module generator for C and C++ li
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
-dev-qt/qtdeclarative 5.15.0-r1 5.15.1: The QML and Quick modules for the Qt5 framework
+dev-qt/qtdeclarative 5.15.1: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200309-r1 5.212.0_pre20200414: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.65.2: GDBus code and documentation generator
