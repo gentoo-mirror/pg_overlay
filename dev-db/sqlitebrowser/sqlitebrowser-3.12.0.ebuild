@@ -58,6 +58,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DENABLE_TESTING=$(usex test)
+		-DUSE_QT5=1
 		-DFORCE_INTERNAL_QCUSTOMPLOT=OFF \
 		-DFORCE_INTERNAL_QHEXEDIT=OFF 
 	)
