@@ -43,11 +43,11 @@ PATCHES=( "${FILESDIR}"/${P}-unbundle.patch )
 src_prepare() {
 	cmake_src_prepare
 	#rm -r libs || die
-	sed -i 's#"src/qhexedit.h"#<qhexedit.h>#' src/EditDialog.cpp || die
+	#sed -i 's#"src/qhexedit.h"#<qhexedit.h>#' src/EditDialog.cpp || die
 	rm -rf libs/{qcustomplot-source,qhexedit,qscintilla}
 	#find libs/{antlr-2.7.7,qcustomplot-source,qscintilla} -delete || die
 
-	sed -e "/^project/ s/\".*\"/sqlitebrowser/" -i CMakeLists.txt || die
+	#sed -e "/^project/ s/\".*\"/sqlitebrowser/" -i CMakeLists.txt || die
 
 	if ! use test; then
 		sed -e "/find_package/ s/ Test//" -i CMakeLists.txt || die
