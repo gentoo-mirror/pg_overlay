@@ -14,7 +14,7 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 PLOCALES="de ru"
-IUSE="debug +dep doc +jumbo-build"
+IUSE="cpu_flags_x86_sse2 debug +dep doc +jumbo-build"
 for i in ${PLOCALES}; do
 	IUSE+=" l10n_${i}"
 done
@@ -30,7 +30,7 @@ BDEPEND="meson? (
 		>=dev-util/ninja-1.7.2
 		strong-optimization? ( >=sys-devel/gcc-config-1.9.1 )
 	)
-	protobuf? ( dev-libs/protobuf )
+	protobuf? ( dev-libs/protobuf:= )
 	app-arch/xz-utils
 	nls? ( sys-devel/gettext )"
 
@@ -68,6 +68,7 @@ src_configure() {
 		$(meson_use debug debugging)
 		$(meson_use swap-remote)
 		$(meson_use prefix always-accept-keywords)
+		$(meson_use cpu_flags_x86_sse2 sse2)
 		$(meson_use dep dep-default)
 		$(meson_use required-use required-use-default)
 		$(meson_use src-uri src-uri-default)
@@ -98,6 +99,7 @@ src_configure() {
 		$(use_enable debug debugging)
 		$(use_enable swap-remote)
 		$(use_with prefix always-accept-keywords)
+		$(use_with cpu_flags_x86_sse2 sse2)
 		$(use_with dep dep-default)
 		$(use_with required-use required-use-default)
 		$(use_with src-uri src-uri-default)
