@@ -11,8 +11,8 @@ SRC_URI="https://www.freedesktop.org/software/${PN}/releases/${P}.tar.gz"
 
 LICENSE="LGPL-2"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sh ~sparc ~x86"
-IUSE="consolekit elogind examples gtk +introspection kde nls pam selinux systemd test"
+KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc64 ~s390 ~x86"
+IUSE="consolekit elogind examples gtk +introspection jit kde nls pam selinux systemd test"
 RESTRICT="!test? ( test )"
 
 REQUIRED_USE="^^ ( consolekit elogind systemd )"
@@ -59,6 +59,7 @@ DOCS=( docs/TODO HACKING NEWS README )
 PATCHES=(
 	# bug 660880
 	"${FILESDIR}"/polkit-0.115-elogind.patch
+	#https://bugs.gentoo.org/698910
 	"${FILESDIR}"/polkit-0.116-duktape.patch
 )
 
@@ -118,8 +119,8 @@ src_install() {
 	default
 
 	if use examples; then
-		insinto /usr/share/doc/${PF}/examples
-		doins src/examples/{*.c,*.policy*}
+		docinto examples
+		dodoc src/examples/{*.c,*.policy*}
 	fi
 
 	diropts -m 0700 -o polkitd
