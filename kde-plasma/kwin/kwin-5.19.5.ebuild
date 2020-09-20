@@ -5,9 +5,9 @@ EAPI=7
 
 ECM_HANDBOOK="optional"
 ECM_TEST="optional"
-KFMIN=5.71.0
+KFMIN=5.74.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.14.2
+QTMIN=5.15.0
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -21,7 +21,6 @@ S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
 
 COMMON_DEPEND="
 	>=dev-libs/libinput-1.14
-	>=dev-libs/wayland-1.2
 	>=dev-qt/qtdbus-${QTMIN}:5
 	>=dev-qt/qtdeclarative-${QTMIN}:5
 	>=dev-qt/qtgui-${QTMIN}:5=[gles2-only=]

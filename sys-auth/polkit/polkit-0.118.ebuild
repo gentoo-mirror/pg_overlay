@@ -60,7 +60,7 @@ PATCHES=(
 	# bug 660880
 	"${FILESDIR}"/polkit-0.115-elogind.patch
 	#https://bugs.gentoo.org/698910
-	"${FILESDIR}"/polkit-0.116-duktape.patch
+	"${FILESDIR}"/polkit-0.118-duktape.patch
 )
 
 QA_MULTILIB_PATHS="
