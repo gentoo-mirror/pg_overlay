@@ -14,7 +14,7 @@ MY_P=${MY_PN}-${PV/_pre/.dev}
 if [[ ${PV} == *_pre* ]]; then
 	SRC_URI="https://dev.gentoo.org/~pesa/distfiles/${MY_P}.tar.gz"
 else
-	SRC_URI="https://files.pythonhosted.org/packages/af/68/c603a9d6319ef1126187c42e0b13ac5fcf556d040feded2e574e1a6a27e4/${MY_P}.tar.gz https://www.riverbankcomputing.com/static/Downloads/${PN}/${PV}/${P}.tar.gz"
+	SRC_URI="https://files.pythonhosted.org/packages/af/68/c603a9d6319ef1126187c42e0b13ac5fcf556d040feded2e574e1a6a27e4/${MY_P}.tar.gz https://www.riverbankcomputing.com/static/Downloads/${MY_PN}/${PV}/${MY_P}.tar.gz"
 fi
 
 # Sub-slot based on SIP_API_MAJOR_NR from siplib/sip.h
