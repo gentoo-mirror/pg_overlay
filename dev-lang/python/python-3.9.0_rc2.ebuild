@@ -9,7 +9,7 @@ inherit autotools check-reqs flag-o-matic multiprocessing pax-utils \
 
 MY_P="Python-${PV/_/}"
 PYVER=$(ver_cut 1-2)
-PATCHSET="python-gentoo-patches-${PV/_/}"
+PATCHSET="python-gentoo-patches-3.9.0rc1"
 
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="https://www.python.org/"
@@ -91,8 +91,6 @@ src_prepare() {
 	sed -i -e "s:-j0:-j${jobs}:" Makefile.pre.in || die
 	sed -i -e "/self\.parallel/s:True:${jobs}:" setup.py || die
 
-	export ax_cv_c_float_words_bigendian=no
-
 	eautoreconf
 }
 
@@ -129,6 +127,11 @@ src_configure() {
 	if is-flagq -O3; then
 		is-flagq -fstack-protector-all && replace-flags -O3 -O2
 		use hardened && replace-flags -O3 -O2
+	fi
+
+	# https://bugs.gentoo.org/700012
+	if is-flagq -flto || is-flagq '-flto=*'; then
+		append-cflags $(test-flags-CC -ffat-lto-objects)
 	fi
 
 	# Export CXX so it ends up in /usr/lib/python3.X/config/Makefile.
@@ -174,17 +177,7 @@ src_compile() {
 	# https://bugs.gentoo.org/594768
 	local -x LC_ALL=C
 
-	# The following code borrowed from https://github.com/stefantalpalaru/gentoo-overlay
-	# extract the number of parallel jobs in MAKEOPTS
-	echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' > /dev/null
-	if [ $? -eq 0 ]; then
-		par_arg="-j$(echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' | tail -n1 | egrep -o '[[:digit:]]+')"
-	else
-		par_arg=""
-	fi
-	export par_arg
-
-	emake profile-opt PROFILE_TASK="-m test.regrtest ${par_arg} -w -uall,-audio -x test_gdb test_multiprocessing test_subprocess test_tokenize test_signal test_faulthandler test_asyncio test_ctypes test_compileall test_pyexpat test_runpy test_support test_threaded_import test_xmlrpc_net test_multiprocessing_spawn test_httpservers test_logging test_xmlrpc --pgo-extended"
+	emake CPPFLAGS= CFLAGS= LDFLAGS=
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax_kernel]; then
