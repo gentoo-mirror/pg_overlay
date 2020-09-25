@@ -238,7 +238,7 @@ x86? (
 	usr/lib*/libGLESv2.so.2.0.0
 	usr/lib*/libGL.so.1.2.0
 	usr/lib*/libOSMesa.so.8.0.0
-	libglvnd? ( usr/lib/libGLX_mesa.so.0.0.0 )
+	usr/lib/libGLX_mesa.so.0.0.0
 )"
 
 llvm_check_deps() {
