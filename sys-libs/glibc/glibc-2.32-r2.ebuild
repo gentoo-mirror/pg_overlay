@@ -16,7 +16,7 @@ SLOT="2.2"
 EMULTILIB_PKG="true"
 
 # Gentoo patchset (ignored for live ebuilds)
-PATCH_VER=1
+PATCH_VER=2
 PATCH_DEV=dilfridge
 
 if [[ ${PV} == 9999* ]]; then
@@ -302,7 +302,7 @@ setup_target_flags() {
 			# The mips abi cannot support the GNU style hashes. #233233
 			filter-ldflags -Wl,--hash-style=gnu -Wl,--hash-style=both
 		;;
-		ppc)
+		ppc|ppc64)
 			# Many arch-specific implementations do not work on ppc with
 			# cache-block not equal to 128 bytes. This breaks memset:
 			#   https://sourceware.org/PR26522
