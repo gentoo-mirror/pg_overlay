@@ -12,11 +12,12 @@ VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
 DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
-
+SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.gz -> ${PF}.tar.gz"
 LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 IUSE="accessibility caps gles2-only multimedia screencast"
+S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
 
 COMMON_DEPEND="
 	>=dev-libs/libinput-1.14
