@@ -492,7 +492,7 @@ multilib_src_configure() {
 		$(meson_use test build-tests)
 		-Dglx=$(usex X dri disabled)
 		-Dglvnd=true
-		-Dshared-glapi=enabled
+		-Dshared-glapi=true
 		$(meson_feature dri3)
 		$(meson_feature egl)
 		$(meson_feature gbm)
