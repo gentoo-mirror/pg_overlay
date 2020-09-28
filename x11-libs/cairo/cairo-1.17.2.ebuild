@@ -62,6 +62,8 @@ REQUIRED_USE="
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
 	"${FILESDIR}"/${PN}-respect-fontconfig.patch
+	"${FILESDIR}"/${PN}-1.16.0-binutils-2.34.patch
+	"${FILESDIR}"/${PN}-up-to-date.patch
 )
 
 src_prepare() {
