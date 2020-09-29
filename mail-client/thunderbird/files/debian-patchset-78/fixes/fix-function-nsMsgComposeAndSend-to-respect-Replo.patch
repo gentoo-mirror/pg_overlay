@@ -1,0 +1,22 @@
+From: Carsten Schoenert <c.schoenert@t-online.de>
+Date: Sat, 9 Mar 2013 20:30:54 +0100
+Subject: fix function nsMsgComposeAndSend to respect ReploToSend
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=522450
+Closes: #565903
+---
+ comm/mailnews/compose/src/nsMsgSend.cpp | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/comm/mailnews/compose/src/nsMsgSend.cpp b/comm/mailnews/compose/src/nsMsgSend.cpp
+index a1e1b40..b0525a3 100644
+--- a/comm/mailnews/compose/src/nsMsgSend.cpp
++++ b/comm/mailnews/compose/src/nsMsgSend.cpp
+@@ -2326,6 +2326,7 @@ nsresult nsMsgComposeAndSend::InitCompositionFields(
+           (aType == nsIMsgCompType::Reply ||
+            aType == nsIMsgCompType::ReplyAll ||
+            aType == nsIMsgCompType::ReplyToGroup ||
++           aType == nsIMsgCompType::ReplyToList ||
+            aType == nsIMsgCompType::ReplyToSender ||
+            aType == nsIMsgCompType::ReplyToSenderAndGroup ||
+            aType == nsIMsgCompType::ReplyWithTemplate)) {
