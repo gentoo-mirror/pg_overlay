@@ -32,6 +32,4 @@ src_configure() {
 src_install() {
 	default
 	cmake_src_install
-	mkdir ${D}/usr/$(get_libdir)
-	mv ${D}/usr/bin/libydotool.so ${D}/usr/$(get_libdir)/ || die
 }
