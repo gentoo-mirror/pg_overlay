@@ -1,5 +1,4 @@
 fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-fixes/Bug-1526653-Include-struct-definitions-for-user_vfp-.patch
 fixes/Bug-1666646-Bump-CodeAlignment-to-8-in-MacroAssemble.patch
 fixes/Bug-1667007-Fix-AsyncLogger-TracePayload-s-mName-siz.patch
 prefs/Set-javascript.options.showInConsole.patch
@@ -11,4 +10,3 @@ debian-hacks/Add-a-2-minutes-timeout-on-xpcshell-tests.patch
 debian-hacks/Don-t-build-image-gtests.patch
 debian-hacks/Set-program-name-from-the-remoting-name.patch
 debian-hacks/Use-remoting-name-for-call-to-gdk_set_program_class.patch
-debian-hacks/Use-build-id-as-langpack-version-for-reproducibility.patch
