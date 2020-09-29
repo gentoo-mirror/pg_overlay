@@ -1,0 +1,24 @@
+diff --git a/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp b/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp
+--- a/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp
++++ b/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp
+@@ -86,7 +86,7 @@ bool GMPDecoderModule::SupportsMimeType(
+ 
+ bool GMPDecoderModule::SupportsMimeType(
+     const nsACString& aMimeType, DecoderDoctorDiagnostics* aDiagnostics) const {
+-  return false;
++  return MP4Decoder::IsH264(aMimeType);
+ }
+ 
+ }  // namespace mozilla
+diff --git a/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp b/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp
+--- a/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp
++++ b/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp
+@@ -67,6 +67,8 @@ void GMPVideoDecoder::Decoded(GMPVideoi4
+   RefPtr<GMPVideoDecoder> self = this;
+   if (v) {
+     mDecodedData.AppendElement(std::move(v));
++    mDecodePromise.ResolveIfExists(std::move(mDecodedData), __func__);
++    mDecodedData = DecodedData();
+   } else {
+     mDecodedData.Clear();
+     mDecodePromise.RejectIfExists(

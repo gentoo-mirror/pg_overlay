@@ -1,0 +1,14 @@
+diff -up firefox-81.0/toolkit/modules/GMPInstallManager.jsm.old firefox-81.0/toolkit/modules/GMPInstallManager.jsm
+--- firefox-81.0/toolkit/modules/GMPInstallManager.jsm.old	2020-09-25 10:39:04.769458703 +0200
++++ firefox-81.0/toolkit/modules/GMPInstallManager.jsm	2020-09-25 10:39:22.038504747 +0200
+@@ -54,10 +54,6 @@ function getScopedLogger(prefix) {
+ 
+ const LOCAL_GMP_SOURCES = [
+   {
+-    id: "gmp-gmpopenh264",
+-    src: "chrome://global/content/gmp-sources/openh264.json",
+-  },
+-  {
+     id: "gmp-widevinecdm",
+     src: "chrome://global/content/gmp-sources/widevinecdm.json",
+   },
