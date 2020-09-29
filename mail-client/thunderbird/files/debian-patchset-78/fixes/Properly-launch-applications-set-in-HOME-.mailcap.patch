@@ -1,0 +1,24 @@
+From: Mike Hommey <glandium@debian.org>
+Date: Sat, 22 Nov 2008 09:35:23 +0100
+Subject: Properly launch applications set in $HOME/.mailcap
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=444440
+---
+ uriloader/exthandler/unix/nsMIMEInfoUnix.cpp | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
+index 7cbefcc..c4bafef 100644
+--- a/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
++++ b/uriloader/exthandler/unix/nsMIMEInfoUnix.cpp
+@@ -53,6 +53,10 @@ nsresult nsMIMEInfoUnix::LaunchDefaultWithFile(nsIFile* aFile) {
+   if (mDefaultApplication) return nsMIMEInfoImpl::LaunchDefaultWithFile(aFile);
+ 
+   nsAutoCString nativePath;
++/* the name of the function has changed
++ * the old was the following:
++  nsCAutoString nativePath;
++  */
+   aFile->GetNativePath(nativePath);
+ 
+   nsCOMPtr<nsIGIOService> giovfs = do_GetService(NS_GIOSERVICE_CONTRACTID);

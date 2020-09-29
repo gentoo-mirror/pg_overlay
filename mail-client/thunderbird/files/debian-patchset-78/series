@@ -1,4 +1,9 @@
-fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
-fixes/Bug-1642265-MIPS64-Add-branchTestSymbol-and-fallible.patch
-prefs/Set-DPI-to-system-settings.patch
-debian-hacks/Don-t-build-image-gtests.patch
+fixes/Properly-launch-applications-set-in-HOME-.mailcap.patch
+debian-hacks/Don-t-register-plugins-if-the-MOZILLA_DISABLE_PLUGIN.patch
+fixes/Load-dependent-libraries-with-their-real-path-to-avo.patch
+prefs/Set-javascript.options.showInConsole.patch
+prefs/Don-t-auto-disable-extensions-in-system-directories.patch
+fixes/fix-function-nsMsgComposeAndSend-to-respect-Replo.patch
+fixes/Allow-.js-preference-files-to-set-locked-prefs-with-lockP.patch
+debian-hacks/Set-program-name-from-the-remoting-name.patch
+debian-hacks/Use-remoting-name-for-call-to-gdk_set_program_class.patch

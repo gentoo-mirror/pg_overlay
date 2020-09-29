@@ -1,0 +1,33 @@
+From: Mike Hommey <glandium@debian.org>
+Date: Sat, 8 Dec 2007 19:24:40 +0100
+Subject: Set javascript.options.showInConsole
+
+---
+ modules/libpref/init/all.js | 9 +++++++++
+ 1 file changed, 9 insertions(+)
+
+diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
+index aa373d1..a211fe5 100644
+--- a/modules/libpref/init/all.js
++++ b/modules/libpref/init/all.js
+@@ -1148,11 +1148,20 @@ pref("javascript.options.ion.offthread_compilation", true);
+ // memory, but makes things like Function.prototype.toSource()
+ // fail.
+ pref("javascript.options.discardSystemSource", false);
++pref("javascript.options.showInConsole",    true);
+ 
+ // Many of the the following preferences tune the SpiderMonkey GC, if you
+ // change the defaults here please also consider changing them in
+ // js/src/jsgc.cpp.  They're documented in js/src/jsapi.h.
+ 
++// JSGC_MAX_MALLOC_BYTES
++// How much malloc memory can be allocated before triggering a GC, in MB.
++// This preference limits the memory usage of javascript.
++// If you want to change these values for your device,
++// please find Bug 417052 comment 17 and Bug 456721
++// Comment 32 and Bug 613551.
++pref("javascript.options.mem.high_water_mark", 128);
++
+ // JSGC_MAX_BYTES
+ // SpiderMonkey defaults to 2^32-1 bytes, but this is measured in MB so that
+ // cannot be represented directly in order to show it in about:config.
