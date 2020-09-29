@@ -361,6 +361,7 @@ src_prepare() {
 		fi
 	done
 
+	eapply "${FILESDIR}/no-gtk2.patch"
 	# Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
