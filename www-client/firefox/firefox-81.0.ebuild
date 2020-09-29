@@ -278,8 +278,8 @@ src_unpack() {
 }
 
 src_prepare() {
-	use pgo && rm "${WORKDIR}"/firefox/0032-LTO-Only-enable-LTO-for-Rust-when-complete-build-use.patch
-	eapply "${WORKDIR}/firefox"
+	use pgo && rm "${WORKDIR}"/firefox-patches/0030-LTO-Only-enable-LTO-for-Rust-when-complete-build-use.patch
+	eapply "${WORKDIR}/firefox-patches"
 
 	# Make LTO respect MAKEOPTS
 	sed -i \
@@ -771,7 +771,7 @@ src_configure() {
 	mkdir -p "${S}"/third_party/rust/libloading/.deps
 
 	# workaround for funky/broken upstream configure...
-	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
+	SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 MACH_USE_SYSTEM_PYTHON=1 \
 	./mach configure || die
 }
 
@@ -789,6 +789,7 @@ src_compile() {
 	GDK_BACKEND=x11 \
 		MOZ_MAKE_FLAGS="${MAKEOPTS} -O" \
 		SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
+		MACH_USE_SYSTEM_PYTHON=1 \
 		MOZ_NOSPAM=1 \
 		${_virtx} \
 		./mach build --verbose \
@@ -866,8 +867,9 @@ src_install() {
 	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
 
 	cd "${S}"
-	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" MOZ_NOSPAM=1 \
-	DESTDIR="${D}" ./mach install || die
+	MOZ_MAKE_FLAGS="${MAKEOPTS}" SHELL="${SHELL:-${EPREFIX}/bin/bash}" \
+		MOZ_NOSPAM=1 MACH_USE_SYSTEM_PYTHON=1 DESTDIR="${D}" \
+		./mach install || die
 
 	if use geckodriver ; then
 		cp "${BUILD_OBJ_DIR}"/dist/bin/geckodriver "${ED%/}"${MOZILLA_FIVE_HOME} || die
