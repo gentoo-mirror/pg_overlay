@@ -473,7 +473,7 @@ src_prepare() {
 	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
 
 	# Initialize .mozconfig
-	cp browser/config/mozconfig .mozconfig || die
+	cp comm/mail/config/mozconfig .mozconfig || die
 
 	xdg_src_prepare
 }
