@@ -128,7 +128,7 @@ src_configure () {
 		"--disable-soundtouch"
 		"--disable-src"
 		"--disable-tta"
-		"$(use_enable vfs-zip)"
+		"$(use_enable zip vfs-zip)"
 		"--disable-vtx"
 		"$(use_enable wavpack)"
 		"--disable-wildmidi"
