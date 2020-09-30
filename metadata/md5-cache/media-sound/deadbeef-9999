@@ -12,4 +12,4 @@ RDEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson aac? ( media-libs/faad
 REQUIRED_USE=|| ( alsa oss pulseaudio nullout )
 SLOT=0
 _eclasses_=autotools	7d999b62b8749fad43fff00620cedf47	git-r3	3e7ec3d6619213460c85e2aa48398441	l10n	8cdd85e169b835d518bc2fd59f780d8e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	98584e405e2b0264d37e8f728327fed1	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
-_md5_=d3e9861323626f7a2af306a1c08180d7
+_md5_=c277945455a674aed5d7f2dc8c47b6ba
