@@ -826,6 +826,7 @@ src_configure() {
 
 	mozconfig_add_options_ac '' --disable-callgrind
 	mozconfig_add_options_ac '' --disable-crashreporter
+	mozconfig_add_options_ac '' --disable-cdp
 
 	mozconfig_add_options_ac '' --disable-debug
 	mozconfig_add_options_ac '' --disable-debug-js-modules
@@ -835,6 +836,7 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-dump-painting
 
 	mozconfig_add_options_ac '' --disable-gold
+	mozconfig_add_options_ac '' --disable-gpsd
 	mozconfig_add_options_ac '' --disable-gtest-in-build
 
 	mozconfig_add_options_ac '' --disable-instruments
@@ -868,11 +870,14 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-vtune
 
 	mozconfig_add_options_ac '' --disable-warnings-as-errors
+	mozconfig_add_options_ac '' --disable-webrender-debugger
 	mozconfig_add_options_ac '' --disable-webrtc
+	mozconfig_add_options_ac '' --disable-webspeech
 
 	mozconfig_add_options_ac '' --without-debug-label
 	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
 	mozconfig_add_options_ac '' --without-google-safebrowsing-api-keyfile
+	mozconfig_add_options_ac '' --without-pocket-api-keyfile
 
 	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=
 	mozconfig_add_options_ac '' MOZ_LOGGING=
@@ -886,6 +891,7 @@ src_configure() {
 
 
 	# Enable good features
+	mozconfig_add_options_ac '' --enable-icf
 	mozconfig_add_options_ac '' --enable-install-strip
 	mozconfig_add_options_ac '' --enable-rust-simd
 	mozconfig_add_options_ac '' --enable-strip
