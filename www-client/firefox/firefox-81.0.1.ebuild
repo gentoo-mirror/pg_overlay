@@ -826,7 +826,10 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-dtrace
 	mozconfig_add_options_ac '' --disable-dump-painting
 
+	mozconfig_add_options_ac '' --disable-frame-pointers
+
 	mozconfig_add_options_ac '' --disable-gold
+	mozconfig_add_options_ac '' --disable-gpsd
 	mozconfig_add_options_ac '' --disable-gtest-in-build
 
 	mozconfig_add_options_ac '' --disable-instruments
@@ -849,10 +852,16 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-reflow-perf
 	mozconfig_add_options_ac '' --disable-rust-debug
 	mozconfig_add_options_ac '' --disable-rust-tests
+
+	mozconfig_add_options_ac '' --disable-signed-overflow-sanitizer
+	mozconfig_add_options_ac '' --disable-spidermonkey-telemetry
 	mozconfig_add_options_ac '' --disable-system-extension-dirs
 
+	mozconfig_add_options_ac '' --disable-thread-sanitizer
 	mozconfig_add_options_ac '' --disable-trace-logging
 
+	mozconfig_add_options_ac '' --disable-undefined-sanitizer
+	mozconfig_add_options_ac '' --disable-unsigned-overflow-sanitizer
 	mozconfig_add_options_ac '' --disable-updater
 
 	mozconfig_add_options_ac '' --disable-valgrind
@@ -860,10 +869,13 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-vtune
 
 	mozconfig_add_options_ac '' --disable-warnings-as-errors
+	mozconfig_add_options_ac '' --disable-wasm-codegen-debug
+	mozconfig_add_options_ac '' --disable-webrender-debugger
 
 	mozconfig_add_options_ac '' --without-debug-label
 	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
 	mozconfig_add_options_ac '' --without-google-safebrowsing-api-keyfile
+	mozconfig_add_options_ac '' --without-pocket-api-keyfile
 
 	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=
 	mozconfig_add_options_ac '' MOZ_DEVICES=
@@ -877,6 +889,7 @@ src_configure() {
 	mozconfig_add_options_ac '' RUSTFLAGS=-Cdebuginfo=0
 	
 	# Enable good features
+	mozconfig_add_options_ac '' --enable-icf
 	mozconfig_add_options_ac '' --enable-install-strip
 	mozconfig_add_options_ac '' --enable-rust-simd
 	mozconfig_add_options_ac '' --enable-strip
