@@ -15,7 +15,7 @@ EGIT_BRANCH="master"
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys mp3 musepack nls notify nullout opus oss pulseaudio shellexec +supereq threads vorbis mac wavpack zip"
+IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys mp3 musepack nls notify nullout opus oss pulseaudio shellexec +supereq threads vorbis +mac +wavpack +zip"
 
 REQUIRED_USE="
 	|| ( alsa oss pulseaudio nullout )
