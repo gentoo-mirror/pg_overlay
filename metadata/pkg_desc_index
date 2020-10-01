@@ -36,7 +36,7 @@ dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindings
 dev-db/sqlitebrowser 3.12.0: SQLite Database Browser
 dev-games/freecell-solver 6.0.1: C library for automatically solving Freecell and some other solitaire variants
-dev-lang/python 2.7.18-r3 3.9.0_rc2: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.18-r4 3.9.0_rc2: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.46.0: Systems programming language from Mozilla
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.73.0: Boost Libraries for C++
