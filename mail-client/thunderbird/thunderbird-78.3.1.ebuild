@@ -145,7 +145,9 @@ CDEPEND="
 		)
 	)
 	jack? ( virtual/jack )
-	selinux? ( sec-policy/selinux-mozilla )"
+	selinux? ( sec-policy/selinux-mozilla )
+	kde? ( kde-apps/kdialog
+		kde-misc/kmozillahelper )"
 
 RDEPEND="${CDEPEND}
 	jack? ( virtual/jack )
@@ -866,6 +868,7 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-vtune
 
 	mozconfig_add_options_ac '' --disable-warnings-as-errors
+	mozconfig_add_options_ac '' --disable-webrtc
 
 	mozconfig_add_options_ac '' --without-debug-label
 	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
@@ -967,6 +970,16 @@ src_install() {
 		sticky_pref("gfx.font_rendering.graphite.enabled", true);
 		EOF
 	fi
+
+	if use kde ; then
+		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
+		"${GENTOO_PREFS}" \
+		|| die
+	fi
+
+	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
+	"${GENTOO_PREFS}" \
+	|| die
 
 	# Install language packs
 	local langpacks=( $(find "${WORKDIR}/language_packs" -type f -name '*.xpi') )
