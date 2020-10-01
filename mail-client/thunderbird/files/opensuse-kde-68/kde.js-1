@@ -1,3 +1,0 @@
-pref("intl.locale.requested", "");
-pref("intl.multilingual.enabled", true);
-pref("spellchecker.dictionary_path", "/usr/share/myspell");
