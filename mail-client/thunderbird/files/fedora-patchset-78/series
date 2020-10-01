@@ -1,6 +1,8 @@
+rhbz-1354671.patch
+Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
+firefox-SIOCGSTAMP.patch
+mozilla-1512162.patch
+
 build-disable-elfhack.patch
 
-mozilla-1170092.patch
-rhbz-1354671.patch
-
-Bug-1238661---fix-mozillaSignalTrampoline-to-work-.patch
+mozilla-526293.patch
