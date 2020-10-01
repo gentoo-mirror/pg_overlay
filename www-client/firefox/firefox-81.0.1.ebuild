@@ -971,15 +971,12 @@ src_install() {
 	###
 	if use kde ; then
 		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-		|| die
-		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}//dist/bin/browser/defaults/preferences/kde.js" \
+		"${GENTOO_PREFS}" \
 		|| die
 	fi
 
 	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
-	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	"${GENTOO_PREFS}" \
 	|| die
 
 	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
