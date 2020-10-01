@@ -6,6 +6,7 @@ EAPI="7"
 FIREFOX_PATCHSET="firefox-esr-78-patches-02.tar.xz"
 
 LLVM_MAX_SLOT=11
+MOZCONFIG_OPTIONAL_JIT=1
 
 PYTHON_COMPAT=( python3_{6..9} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
@@ -53,7 +54,8 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="clang cpu_flags_arm_neon dbus debug eme-free +gmp-autoupdate
 	hardened jack lto +openh264 pgo pulseaudio selinux
 	+system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-libvpx +system-webp wayland wifi"
+	+system-libvpx +system-webp wayland wifi
+	+jit +kde"
 
 BDEPEND="${PYTHON_DEPS}
 	app-arch/unzip
@@ -76,14 +78,6 @@ BDEPEND="${PYTHON_DEPS}
 			clang? (
 				=sys-devel/lld-10*
 				pgo? ( =sys-libs/compiler-rt-sanitizers-10*[profile] )
-			)
-		)
-		(
-			sys-devel/clang:9
-			sys-devel/llvm:9
-			clang? (
-				=sys-devel/lld-9*
-				pgo? ( =sys-libs/compiler-rt-sanitizers-9*[profile] )
 			)
 		)
 	)
