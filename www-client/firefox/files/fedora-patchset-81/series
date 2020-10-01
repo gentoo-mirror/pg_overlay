@@ -8,3 +8,5 @@ disable-openh264-download.patch
 mozilla-1665324.patch
 mozilla-1665329.patch
 mozilla-1663844.patch
+mozilla-1640567.patch
+mozilla-1661192.patch
