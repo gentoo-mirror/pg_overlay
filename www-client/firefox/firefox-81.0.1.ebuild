@@ -6,6 +6,7 @@ EAPI="7"
 FIREFOX_PATCHSET="firefox-81-patches-01.tar.xz"
 
 LLVM_MAX_SLOT=11
+MOZCONFIG_OPTIONAL_JIT=1
 
 PYTHON_COMPAT=( python3_{6..9} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
@@ -53,7 +54,8 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="clang cpu_flags_arm_neon dbus debug eme-free geckodriver +gmp-autoupdate
 	hardened hwaccel jack lto +openh264 pgo pulseaudio screencast selinux
 	+system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-libvpx +system-webp wayland wifi"
+	+system-libvpx +system-webp wayland wifi
+	+jit +kde"
 
 REQUIRED_USE="screencast? ( wayland )"
 
@@ -157,7 +159,9 @@ RDEPEND="${CDEPEND}
 			>=media-sound/apulse-0.1.12-r4
 		)
 	)
-	selinux? ( sec-policy/selinux-mozilla )"
+	selinux? ( sec-policy/selinux-mozilla )
+	kde? ( kde-apps/kdialog
+		kde-misc/kmozillahelper )"
 
 DEPEND="${CDEPEND}
 	pulseaudio? (
