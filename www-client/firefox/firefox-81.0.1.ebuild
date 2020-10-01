@@ -53,11 +53,13 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="clang cpu_flags_arm_neon dbus debug eme-free geckodriver +gmp-autoupdate
 	hardened hwaccel jack lto +openh264 pgo pulseaudio screencast selinux
 	+system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent
-	+system-libvpx +system-webp wayland wifi
-	+jit +kde cross-lto thinlto"
+	+system-libvpx +system-webp wayland wifi"
+
+REQUIRED_USE="screencast? ( wayland )"
 
 BDEPEND="${PYTHON_DEPS}
 	app-arch/unzip
+	app-arch/zip
 	>=dev-util/cbindgen-0.14.3
 	>=net-libs/nodejs-10.19.0
 	virtual/pkgconfig
@@ -464,9 +466,6 @@ src_prepare() {
 
 	# Write API keys to disk
 	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
-
-	# Initialize .mozconfig
-	cp browser/config/mozconfig .mozconfig || die
 
 	# My stuff
 	eapply "${FILESDIR}/no-gtk2.patch"
@@ -971,15 +970,12 @@ src_install() {
 	###
 	if use kde ; then
 		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
-		|| die
-		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
-		"${BUILD_OBJ_DIR}//dist/bin/browser/defaults/preferences/kde.js" \
+		"${GENTOO_PREFS}" \
 		|| die
 	fi
 
 	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
-	"${BUILD_OBJ_DIR}/dist/bin/browser/defaults/preferences/all-gentoo.js" \
+	"${GENTOO_PREFS}" \
 	|| die
 
 	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
