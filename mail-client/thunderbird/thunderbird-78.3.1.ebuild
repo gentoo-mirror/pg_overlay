@@ -520,7 +520,6 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-	eapply "${FILESDIR}/${PN}-$(get_major_version)-no-dbus.patch"
 
 	xdg_src_prepare
 }
