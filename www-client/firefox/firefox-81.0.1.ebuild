@@ -475,14 +475,14 @@ src_prepare() {
 	eapply "${FILESDIR}/no-gtk2.patch"
 	# Privacy-esr patches
 	einfo Applying privacy patches
-	for i in $(cat "${FILESDIR}/privacy-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/privacy-patchset-$(get_major_version)/$i"; done
+	for i in $(cat "${FILESDIR}/privacy-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/privacy-patchset-$(ver_cut 1)/$i"; done
 
 	# Debian patches
 	einfo "Applying Debian's patches"
-	for p in $(cat "${FILESDIR}/debian-patchset-$(get_major_version)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(get_major_version)"/$p 2>/dev/null
+	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/debian-patchset-$(get_major_version)"/$p;
+			eapply "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p;
 			einfo +++++++++++++++++++++++++;
 			einfo Patch $p is APPLIED;
 			einfo +++++++++++++++++++++++++
@@ -495,14 +495,14 @@ src_prepare() {
 
 	# FreeBSD patches
 	einfo "Applying FreeBSD's patches"
-	for i in $(cat "${FILESDIR}/freebsd-patchset-$(get_major_version)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(get_major_version)/$i";	done
+	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
 
 	# Fedora patches
 	einfo "Applying Fedora's patches"
-	for p in $(cat "${FILESDIR}/fedora-patchset-$(get_major_version)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p 2>/dev/null
+	for p in $(cat "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/fedora-patchset-$(get_major_version)"/$p;
+			eapply "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p;
 			einfo +++++++++++++++++++++++++;
 			einfo Patch $p is APPLIED;
 			einfo +++++++++++++++++++++++++
@@ -986,12 +986,12 @@ src_install() {
 
 	###
 	if use kde ; then
-		cat "${FILESDIR}"/opensuse-kde-$(get_major_version)/kde.js-1 >> \
+		cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js-1 >> \
 		"${GENTOO_PREFS}" \
 		|| die
 	fi
 
-	cat "${FILESDIR}"/privacy-patchset-$(get_major_version)/privacy.js-1 >> \
+	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js-1 >> \
 	"${GENTOO_PREFS}" \
 	|| die
 
