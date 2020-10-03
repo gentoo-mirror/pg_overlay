@@ -33,8 +33,8 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-	"${FILESDIR}/${P}-musl-clang.patch" # bug 714018
-	"${FILESDIR}/${P}-bashism.patch" # bug 723128
+	"${FILESDIR}/${PN}-0.15.0-musl-clang.patch" # bug 714018
+	"${FILESDIR}/${PN}-0.15.0-bashism.patch" # bug 723128
 )
 
 pkg_setup() {
