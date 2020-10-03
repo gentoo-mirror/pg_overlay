@@ -405,6 +405,9 @@ pkg_setup() {
 		if [[ -z "${MOZ_API_KEY_GOOGLE+set}" ]] ; then
 			MOZ_API_KEY_GOOGLE="AIzaSyDEAOvatFogGaPi0eTgsV_ZlEzx0ObmepsMzfAc"
 		fi
+
+		# Ensure we use C locale when building, bug #746215
+		export LC_ALL=C
 	fi
 }
 
@@ -605,16 +608,10 @@ src_configure() {
 
 	mozconfig_use_enable debug
 	if use debug ; then
-		if is-flag '-g*' ; then
-			mozconfig_add_options_ac '+debug' --enable-debug-symbols=$(get-flag '-g*')
-		else
-			mozconfig_add_options_ac '+debug' --enable-debug-symbols
-		fi
-
 		mozconfig_add_options_ac '+debug' --disable-optimize
 	else
 		if is-flag '-g*' ; then
-			mozconfig_add_options_ac '+debug' --enable-debug-symbols=$(get-flag '-g*')
+			mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols=$(get-flag '-g*')
 		else
 			mozconfig_add_options_ac 'Gentoo default' --disable-debug-symbols
 		fi
