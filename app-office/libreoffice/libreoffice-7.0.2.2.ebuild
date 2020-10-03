@@ -538,6 +538,33 @@ src_install() {
 	# bug 703474
 	insinto /usr/include
 	doins -r include/LibreOfficeKit
+
+	local lodir=/usr/$(get_libdir)/libreoffice
+	# patching this would break tests
+	cat <<-EOF > "${T}"/uno.py
+import sys, os
+sys.path.append('${EPREFIX}${lodir}/program')
+os.putenv('URE_BOOTSTRAP', 'vnd.sun.star.pathname:${EPREFIX}${lodir}/program/fundamentalrc')
+EOF
+	sed -e "/^import sys/d" -e "/^import os/d" \
+		-i "${D}"${lodir}/program/uno.py || die "cleanup dupl imports failed"
+	cat "${D}"${lodir}/program/uno.py >> "${T}"/uno.py || die
+	cp "${T}"/uno.py "${D}"${lodir}/program/uno.py || die
+
+	# more system pyuno mess
+	sed -e "/sOffice = \"\" # lets hope for the best/s:\"\":\"${EPREFIX}${lodir}/program\":" \
+		-i "${D}"${lodir}/program/officehelper.py || die
+
+	python_optimize "${D}"${lodir}/program
+	# link python bridge in site-packages, bug 667802
+	local py pyc loprogdir=$(get_libdir)/libreoffice/program
+	for py in uno.py unohelper.py officehelper.py; do
+		dosym ../../../${loprogdir}/${py} $(python_get_sitedir)/${py}
+		while IFS="" read -d $'\0' -r pyc; do
+			pyc=${pyc//*\/}
+			dosym ../../../../${loprogdir}/__pycache__/${pyc} $(python_get_sitedir)/__pycache__/${pyc}
+		done < <(find "${D}"${lodir}/program -type f -name ${py/.py/*.pyc} -print0)
+	done
 }
 
 pkg_postinst() {
