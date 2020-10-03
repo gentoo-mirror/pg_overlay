@@ -526,6 +526,7 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
+	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
 
 	xdg_src_prepare
 }
