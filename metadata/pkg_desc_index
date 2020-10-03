@@ -50,8 +50,8 @@ dev-libs/libevdev 1.9.0: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
 dev-libs/libgit2 1.0.1: A linkable library for Git
 dev-libs/libgnt 9999: Toolkit for creating text-mode graphical user interfaces
-dev-libs/libixion 0.15.0: General purpose formula parser & interpreter
-dev-libs/liborcus 0.15.4: Standalone file import filter library for spreadsheet documents
+dev-libs/libixion 0.15.0 0.16.1: General purpose formula parser & interpreter
+dev-libs/liborcus 0.15.4 0.16.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libsigc++ 3.0.3: Typesafe callback system for standard C++
 dev-libs/libuinputplus 0.1.4: Easy-to-use uinput library in C++
 dev-libs/libxml2 2.9.10_pre: XML C parser and toolkit
@@ -133,6 +133,7 @@ dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
+dev-util/mdds 1.7.0: A collection of multi-dimensional data structure and indexing algorithm
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 4.0.1: Extensible Python-based build utility
