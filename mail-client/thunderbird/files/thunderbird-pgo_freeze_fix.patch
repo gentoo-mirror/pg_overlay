@@ -8,6 +8,7 @@
 +        process_args = {'universal_newlines': True}
          if 'UPLOAD_PATH' in env:
              process_args['logfile'] = os.path.join(env['UPLOAD_PATH'], 'profile-run-1.log')
+
 @@ -137,7 +137,6 @@
                                 env=env,
                                 process_args=process_args)
