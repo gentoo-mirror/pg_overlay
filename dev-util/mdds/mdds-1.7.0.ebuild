@@ -32,7 +32,6 @@ RDEPEND="${DEPEND}"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-1.5.0-buildsystem.patch"
-	"${FILESDIR}/${PN}-1.6.0-bashism.patch" # bug 723094
 )
 
 pkg_pretend() {
