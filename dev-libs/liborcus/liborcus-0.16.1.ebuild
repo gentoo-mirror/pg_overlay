@@ -33,8 +33,6 @@ DEPEND="${RDEPEND}
 	dev-util/mdds:1/1.5
 "
 
-PATCHES=( "${FILESDIR}/${PN}-0.15.4-bashism.patch" ) # bug 723130
-
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
