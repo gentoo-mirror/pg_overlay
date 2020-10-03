@@ -32,10 +32,6 @@ DEPEND="${RDEPEND}
 	dev-libs/spdlog
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-0.15.0-bashism.patch" # bug 723128
-)
-
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
