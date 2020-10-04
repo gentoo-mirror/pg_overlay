@@ -8,7 +8,7 @@ FIREFOX_PATCHSET="firefox-81-patches-01.tar.xz"
 LLVM_MAX_SLOT=11
 MOZCONFIG_OPTIONAL_JIT=1
 
-PYTHON_COMPAT=( python3_{6..9} )
+PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
 
 WANT_AUTOCONF="2.1"
@@ -602,7 +602,11 @@ src_configure() {
 		mozconfig_add_options_ac '+debug' --disable-optimize
 	else
 		if is-flag '-g*' ; then
-			mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols=$(get-flag '-g*')
+			if use clang ; then
+				mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols=$(get-flag '-g*')
+			else
+				mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols
+			fi
 		else
 			mozconfig_add_options_ac 'Gentoo default' --disable-debug-symbols
 		fi
