@@ -40,11 +40,11 @@ COMMON_DEPEND="
 	virtual/libudev:=
 	cdda? ( media-sound/cdparanoia )
 	cddb? ( media-libs/libcddb )
-	cdio? ( dev-libs/libcdio-paranoia )
-	mtp? ( media-libs/libmtp )
+	cdio? ( dev-libs/libcdio-paranoia:= )
+	mtp? ( media-libs/libmtp:= )
 	musicbrainz? ( media-libs/musicbrainz:5= )
 	replaygain? (
-		media-libs/libebur128
+		media-libs/libebur128:=
 		media-sound/mpg123
 		media-video/ffmpeg:0=
 	)
@@ -68,7 +68,7 @@ RESTRICT="test"
 
 src_prepare() {
 	remove_locale() {
-		rm -vf "translations/${PN}_${1}".ts || die
+		rm "translations/${PN}_${1}".ts || die
 	}
 
 	cmake_src_prepare
