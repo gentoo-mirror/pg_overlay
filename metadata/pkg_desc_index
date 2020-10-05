@@ -42,8 +42,9 @@ dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.73.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/date 2.4.1_p20200125: A date and time library based on the C++11/14/17 <chrono> header
-dev-libs/glib 2.65.2: The GLib library of C routines
-dev-libs/gobject-introspection 1.64.1-r1: Introspection system for GObject-based libraries
+dev-libs/glib 2.66.1: The GLib library of C routines
+dev-libs/gobject-introspection 1.66.1: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection-common 1.66.1: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 67.1: International Components for Unicode
 dev-libs/libevdev 1.9.0: Handler library for evdev events
@@ -126,8 +127,8 @@ dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtdeclarative 5.15.1: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200924: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.65.2: GDBus code and documentation generator
-dev-util/glib-utils 2.65.2: Build utilities for GLib using projects
+dev-util/gdbus-codegen 2.66.1: GDBus code and documentation generator
+dev-util/glib-utils 2.66.1: Build utilities for GLib using projects
 dev-util/glslang 8.13.3743-r1 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/gtk-doc 1.32_pre: GTK+ Documentation Generator
 dev-util/gtk-doc-am 1.32_pre: Automake files from gtk-doc
@@ -138,8 +139,8 @@ dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applicat
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 4.0.1: Extensible Python-based build utility
 dev-util/spirv-tools 2020.4 2020.5_pre20200815 9999: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.152: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.2.151 9999: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.2.156: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.2.154 9999: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.5.1-r1: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
@@ -157,8 +158,8 @@ media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (med
 media-libs/mesa 9999 9999-r1: OpenGL-like graphic library for Linux
 media-libs/mutagen 1.45.1: Audio metadata tag reader and writer implemented in pure Python
 media-libs/shaderc 2020.2 2020.4_pre20200707: Collection of tools, libraries and tests for shader compilation
-media-libs/vulkan-layers 1.2.151 9999: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.151 9999: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.2.154 9999: Vulkan Validation Layers
+media-libs/vulkan-loader 1.2.154 9999: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
