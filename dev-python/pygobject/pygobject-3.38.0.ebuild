@@ -45,7 +45,7 @@ RESTRICT="!test? ( test )"
 src_configure() {
 	configuring() {
 		meson_src_configure \
-			$(meson_use cairo pycairo) \
+			$(meson_feature cairo pycairo) \
 			$(meson_use test tests) \
 			-Dpython="${EPYTHON}"
 	}
