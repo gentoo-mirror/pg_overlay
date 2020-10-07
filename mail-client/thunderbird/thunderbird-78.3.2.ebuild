@@ -571,9 +571,8 @@ src_configure() {
 
 	if use lto ; then
 		if use clang ; then
-			filter-flags -fno-plt
-			append-flags --target=x86_64-unknown-linux-gnu
-			append-ldflags --target=x86_64-unknown-linux-gnu
+			#append-flags --target=x86_64-unknown-linux-gnu
+			#append-ldflags --target=x86_64-unknown-linux-gnu
 			# Upstream only supports lld when using clang
 			mozconfig_add_options_ac "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
 
