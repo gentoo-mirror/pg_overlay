@@ -33,7 +33,7 @@ BDEPEND="${PYTHON_DEPS}
 
 multilib_src_configure() {
 	local mycmakeargs=(
-		"-DBUILD_SHARED_LIBS=ON"
+		"-DSPIRV_Tools_shared=ON"
 		"-DSPIRV-Headers_SOURCE_DIR=/usr/"
 		"-DSPIRV_WERROR=OFF"
 		"-GNinja"
