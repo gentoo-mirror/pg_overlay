@@ -50,7 +50,7 @@ SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz
 DESCRIPTION="Thunderbird Mail Client"
 HOMEPAGE="https://www.mozilla.org/thunderbird"
 
-KEYWORDS="amd64 ~arm64 ~ppc64 x86"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
 SLOT="0/$(ver_cut 1)"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
@@ -427,7 +427,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	use pgo && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
+	use lto && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
 	eapply "${WORKDIR}/firefox-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -813,17 +813,7 @@ src_configure() {
 		done
 	fi
 
-	echo
-	echo "=========================================================="
-	echo "Building ${PF} with the following configuration"
-	grep ^ac_add_options "${MOZCONFIG}" | while read ac opt hash reason; do
-		[[ -z ${hash} || ${hash} == \# ]] \
-			|| die "error reading mozconfig: ${ac} ${opt} ${hash} ${reason}"
-		printf "    %-30s  %s\n" "${opt}" "${reason:-mozilla.org default}"
-	done
-	echo "=========================================================="
-	echo
-
+	####### Disable features
 	mozconfig_add_options_ac '' --disable-accessibility
 	mozconfig_add_options_ac '' --disable-address-sanitizer
 	mozconfig_add_options_ac '' --disable-address-sanitizer-reporter
@@ -893,8 +883,7 @@ src_configure() {
 	mozconfig_add_options_ac '' RUSTFLAGS=-Copt-level=3
 	mozconfig_add_options_ac '' RUSTFLAGS=-Cdebuginfo=0
 
-
-	# Enable good features
+	####### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
 	mozconfig_add_options_ac '' --enable-install-strip
 	mozconfig_add_options_ac '' --enable-rust-simd
@@ -908,6 +897,18 @@ src_configure() {
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
+	#######
+
+	echo
+	echo "=========================================================="
+	echo "Building ${PF} with the following configuration"
+	grep ^ac_add_options "${MOZCONFIG}" | while read ac opt hash reason; do
+		[[ -z ${hash} || ${hash} == \# ]] \
+			|| die "error reading mozconfig: ${ac} ${opt} ${hash} ${reason}"
+		printf "    %-30s  %s\n" "${opt}" "${reason:-mozilla.org default}"
+	done
+	echo "=========================================================="
+	echo
 
 	./mach configure || die
 }

@@ -435,7 +435,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	use pgo && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
+	use lto && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
 	eapply "${WORKDIR}/firefox-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -477,13 +477,13 @@ src_prepare() {
 	# Write API keys to disk
 	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
 
-	# My stuff
+	####### My stuff
 	eapply "${FILESDIR}/no-gtk2.patch"
-	# Privacy-esr patches
+	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/privacy-patchset-$(ver_cut 1)/$i"; done
 
-	# Debian patches
+	### Debian patches
 	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p 2>/dev/null
@@ -499,11 +499,11 @@ src_prepare() {
 		fi
 	done
 
-	# FreeBSD patches
+	### FreeBSD patches
 	einfo "Applying FreeBSD's patches"
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
 
-	# Fedora patches
+	### Fedora patches
 	einfo "Applying Fedora's patches"
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p 2>/dev/null
@@ -518,6 +518,7 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
+	#######
 
 	xdg_src_prepare
 }
@@ -809,17 +810,8 @@ src_configure() {
 		done
 	fi
 
-	echo
-	echo "=========================================================="
-	echo "Building ${PF} with the following configuration"
-	grep ^ac_add_options "${MOZCONFIG}" | while read ac opt hash reason; do
-		[[ -z ${hash} || ${hash} == \# ]] \
-			|| die "error reading mozconfig: ${ac} ${opt} ${hash} ${reason}"
-		printf "    %-30s  %s\n" "${opt}" "${reason:-mozilla.org default}"
-	done
-	echo "=========================================================="
-	echo
-	#
+	#######
+	### Disable features
 	mozconfig_add_options_ac '' --disable-accessibility
 	mozconfig_add_options_ac '' --disable-address-sanitizer
 	mozconfig_add_options_ac '' --disable-address-sanitizer-reporter
@@ -896,7 +888,7 @@ src_configure() {
 	mozconfig_add_options_ac '' RUSTFLAGS=-Copt-level=3
 	mozconfig_add_options_ac '' RUSTFLAGS=-Cdebuginfo=0
 	
-	# Enable good features
+	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
 	mozconfig_add_options_ac '' --enable-install-strip
 	mozconfig_add_options_ac '' --enable-rust-simd
@@ -911,7 +903,18 @@ src_configure() {
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
-	#
+	#######
+
+	echo
+	echo "=========================================================="
+	echo "Building ${PF} with the following configuration"
+	grep ^ac_add_options "${MOZCONFIG}" | while read ac opt hash reason; do
+		[[ -z ${hash} || ${hash} == \# ]] \
+			|| die "error reading mozconfig: ${ac} ${opt} ${hash} ${reason}"
+		printf "    %-30s  %s\n" "${opt}" "${reason:-mozilla.org default}"
+	done
+	echo "=========================================================="
+	echo
 
 	./mach configure || die
 }
@@ -992,7 +995,7 @@ src_install() {
 		EOF
 	fi
 
-	###
+	#######
 	if use kde ; then
 		cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js-1 >> \
 		"${GENTOO_PREFS}" \
@@ -1004,7 +1007,7 @@ src_install() {
 	|| die
 
 	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
-	###
+	#######
 
 	# Install language packs
 	local langpacks=( $(find "${WORKDIR}/language_packs" -type f -name '*.xpi') )
