@@ -3,6 +3,7 @@
 
 EAPI=7
 PYTHON_COMPAT=(python3_{7..9})
+DISTUTILS_USE_SETUPTOOLS=rdepend
 
 if [[ ${PV} == 9999* ]]; then
 	EGIT_REPO_URI="https://github.com/certbot/certbot.git"
@@ -20,13 +21,9 @@ HOMEPAGE="https://github.com/certbot/certbot https://letsencrypt.org/"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-IUSE="test"
-RESTRICT="!test? ( test )"
 
-CDEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="
-	${CDEPEND}
-	>=app-crypt/acme-1.6.0[${PYTHON_USEDEP}]
+	>=app-crypt/acme-1.8.0[${PYTHON_USEDEP}]
 	>=dev-python/configargparse-0.9.3[${PYTHON_USEDEP}]
 	dev-python/configobj[${PYTHON_USEDEP}]
 	>=dev-python/cryptography-2.8[${PYTHON_USEDEP}]
@@ -37,12 +34,3 @@ RDEPEND="
 	dev-python/pytz[${PYTHON_USEDEP}]
 	dev-python/zope-component[${PYTHON_USEDEP}]
 	dev-python/zope-interface[${PYTHON_USEDEP}]"
-DEPEND="${CDEPEND}"
-
-distutils_enable_tests pytest
-
-python_prepare_all() {
-	# required as deps of deps can trigger this too...
-	echo '    ignore:.*collections\.abc:DeprecationWarning' >> ../pytest.ini
-	distutils-r1_python_prepare_all
-}
