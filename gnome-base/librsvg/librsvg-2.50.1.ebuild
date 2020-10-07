@@ -39,6 +39,8 @@ DEPEND="${RDEPEND}
 
 RESTRICT="test" # Lots of issues on 32bit builds, 64bit build seems to get into an infinite compilation sometimes, etc.
 
+PATCHES=( "${FILESDIR}/lto.diff" )
+
 src_prepare() {
 	use vala && vala_src_prepare
 	gnome2_src_prepare
