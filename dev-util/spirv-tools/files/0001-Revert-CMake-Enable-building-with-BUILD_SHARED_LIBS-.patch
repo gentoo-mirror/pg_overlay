@@ -41,18 +41,6 @@ index f5009fde..5b341598 100644
  if (DEFINED SPIRV-Headers_SOURCE_DIR)
    # This allows flexible position of the SPIRV-Headers repo.
    set(SPIRV_HEADER_DIR ${SPIRV-Headers_SOURCE_DIR})
-@@ -74,11 +61,7 @@ if (NOT ${SPIRV_SKIP_TESTS})
-           "Use shared (DLL) run-time lib even when Google Test is built as static lib."
-           ON)
-       endif()
--      # gtest requires special defines for building as a shared 
--      # library, simply always build as static.
--      push_variable(BUILD_SHARED_LIBS 0) 
-       add_subdirectory(${GMOCK_DIR} EXCLUDE_FROM_ALL)
--      pop_variable(BUILD_SHARED_LIBS) 
-     endif()
-   endif()
-   if (TARGET gmock)
 @@ -125,9 +108,7 @@ if (NOT ${SPIRV_SKIP_TESTS})
        if (NOT TARGET effcee)
          set(EFFCEE_BUILD_TESTING OFF CACHE BOOL "Do not build Effcee test suite")
