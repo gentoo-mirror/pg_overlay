@@ -1,4 +1,5 @@
 build-disable-elfhack.patch
+pgo-build-python.patch
 
 mozilla-1170092.patch
 rhbz-1354671.patch
@@ -11,3 +12,4 @@ mozilla-1663844.patch
 mozilla-1640567.patch
 mozilla-1661192.patch
 mozilla-1668771.patch
+mozilla-1656727.patch
