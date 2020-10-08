@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils git-r3 l10n qmake-utils
+inherit git-r3 qmake-utils xdg
 
 DESCRIPTION="Music player for the large local collections"
 HOMEPAGE="https://olegantonyan.github.io/mpz/"
