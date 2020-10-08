@@ -20,3 +20,11 @@ RDEPEND="
 "
 
 DEPEND="${RDEPEND}"
+
+src_configure() {
+	# Generate binary translations.
+	lrelease ${PN}.pro || die
+
+	# noccache is required to call the correct compiler.
+	eqmake5
+}
