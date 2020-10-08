@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit git-r3 qmake-utils xdg
+inherit eutils git-r3 qmake-utils xdg
 
 DESCRIPTION="Music player for the large local collections"
 HOMEPAGE="https://olegantonyan.github.io/mpz/"
@@ -31,4 +31,5 @@ src_configure() {
 
 src_install() {
 	default
+	emake install INSTALL_ROOT="${D}"
 }
