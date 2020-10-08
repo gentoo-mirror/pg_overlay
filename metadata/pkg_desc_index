@@ -169,6 +169,7 @@ media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mac 5.55: Monkey's Audio Codecs
 media-sound/mpd-sacd 9999: The Music Player Daemon (mpd) with SACD & DVD-Audio support
+media-sound/mpz 9999: Music player for the large local collections
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/pulseaudio 13.99.2: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
