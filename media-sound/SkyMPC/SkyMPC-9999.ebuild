@@ -1,7 +1,7 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 PLOCALES="ja"
 
 inherit desktop gnome2-utils qmake-utils git-r3 l10n
