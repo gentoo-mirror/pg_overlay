@@ -28,3 +28,8 @@ src_configure() {
 	# noccache is required to call the correct compiler.
 	eqmake5
 }
+
+src_install() {
+	emake install
+	#INSTALL_ROOT="${D}"
+}
