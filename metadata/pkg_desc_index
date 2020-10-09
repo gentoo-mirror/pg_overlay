@@ -36,7 +36,7 @@ dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindin
 dev-db/sqlitebrowser 3.12.0: SQLite Database Browser
 dev-games/freecell-solver 6.0.1: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 2.7.18-r4 3.9.0: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.46.0: Systems programming language from Mozilla
+dev-lang/rust 1.46.0 1.47.0: Systems programming language from Mozilla
 dev-libs/bemenu 0.4.1: dmenu clone for wayland
 dev-libs/boost 1.73.0: Boost Libraries for C++
 dev-libs/crc32c 1.1.0: CRC32C implementation with support for CPU-specific acceleration instructions
@@ -235,7 +235,7 @@ virtual/perl-Pod-Parser 1.630.0-r6: Virtual for Pod-Parser
 virtual/perl-Socket 2.27.0-r2: Virtual for Socket
 virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
-virtual/rust 1.46.0_beta: Virtual for Rust language compiler
+virtual/rust 1.46.0_beta 1.47.0: Virtual for Rust language compiler
 www-client/firefox 80.0.1 81.0.1: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
