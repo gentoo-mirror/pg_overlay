@@ -18,7 +18,7 @@ IUSE=""
 DOCS=( CHANGES README.md )
 
 src_prepare() {
-	sed -e '62d' Makefile
+	sed -i '62d' Makefile
 }
 
 src_install() {
