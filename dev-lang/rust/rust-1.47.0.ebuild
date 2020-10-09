@@ -197,7 +197,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	export RUSTFLAGS="-Cembed-bitcode=yes -Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Clto=thin -Copt-level=3 -Ctarget-cpu=native"
+	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Copt-level=3 -Ctarget-cpu=native"
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
@@ -237,7 +237,7 @@ src_prepare() {
 }
 
 src_configure() {
-	export RUSTFLAGS="-Cembed-bitcode=yes -Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Clto=thin -Copt-level=3 -Ctarget-cpu=native"
+	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Copt-level=3 -Ctarget-cpu=native"
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -289,7 +289,6 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
 		use-libcxx = true
-		#use-linker = "lld"
 
 		[build]
 		build = "${rust_target}"
@@ -335,8 +334,7 @@ src_configure() {
 		optimize-tests = $(toml_usex !debug)
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = true
-		#lld = $(usex system-llvm false $(toml_usex wasm))
+		lld = $(usex system-llvm false $(toml_usex wasm))
 		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
@@ -462,7 +460,7 @@ src_configure() {
 }
 
 src_compile() {
-	export RUSTFLAGS="-Cembed-bitcode=yes -Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Clto=thin -Copt-level=3 -Ctarget-cpu=native"
+	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Copt-level=3 -Ctarget-cpu=native"
 	# we need \n IFS to have config.env with spaces loaded properly. #734018
 	(
 	IFS=$'\n'
@@ -528,7 +526,7 @@ src_test() {
 }
 
 src_install() {
-	export RUSTFLAGS="-Cembed-bitcode=yes -Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Clto=thin -Copt-level=3 -Ctarget-cpu=native"
+	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Clinker-plugin-lto -Copt-level=3 -Ctarget-cpu=native"
 	# https://github.com/rust-lang/rust/issues/77721
 	# also 1.46.0-don-t-create-prefix-at-time-of-check.patch
 	dodir "/usr/lib/${PN}/${PV}"
