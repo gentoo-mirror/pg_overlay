@@ -17,6 +17,11 @@ IUSE=""
 
 DOCS=( CHANGES README.md )
 
+src_prepare() {
+	default
+	sed -i '62d' Makefile
+}
+
 src_install() {
 	emake DESTDIR="${D}" PREFIX=/usr install
 }

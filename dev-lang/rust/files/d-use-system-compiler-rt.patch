@@ -1,0 +1,40 @@
+Description: Use system compiler-rt from clang
+Forwarded: not-needed
+--- a/src/bootstrap/compile.rs
++++ b/src/bootstrap/compile.rs
+@@ -200,6 +200,12 @@
+         let mut features = builder.std_features();
+         features.push_str(&compiler_builtins_c_feature);
+ 
++        // In Debian this is always available
++        let llvm_config = builder.ensure(native::Llvm {
++            target: builder.config.build,
++            emscripten: false,
++        });
++        cargo.env("LLVM_CONFIG", llvm_config);
+         if compiler.stage != 0 && builder.config.sanitizers {
+             // This variable is used by the sanitizer runtime crates, e.g.
+             // rustc_lsan, to build the sanitizer runtime from C code
+@@ -208,11 +214,6 @@
+             // missing
+             // We also only build the runtimes when --enable-sanitizers (or its
+             // config.toml equivalent) is used
+-            let llvm_config = builder.ensure(native::Llvm {
+-                target: builder.config.build,
+-                emscripten: false,
+-            });
+-            cargo.env("LLVM_CONFIG", llvm_config);
+             cargo.env("RUSTC_BUILD_SANITIZERS", "1");
+         }
+ 
+--- a/vendor/compiler_builtins/Cargo.toml
++++ b/vendor/compiler_builtins/Cargo.toml
+@@ -49,7 +49,7 @@
+ # LLVM_CONFIG or CLANG (more reliable) must be set.
+ c-system = []
+ 
+-c = ["c-vendor"]
++c = ["c-system"]
+ compiler-builtins = []
+ default = ["compiler-builtins"]
+ mangled-names = []
