@@ -526,7 +526,7 @@ src_test() {
 }
 
 src_install() {
-	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
+	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Clinker=clang -Clinker-plugin-lto -Clinker=clang -Copt-level=3 -Ctarget-cpu=native"
 	# https://github.com/rust-lang/rust/issues/77721
 	# also 1.46.0-don-t-create-prefix-at-time-of-check.patch
 	dodir "/usr/lib/${PN}/${PV}"
