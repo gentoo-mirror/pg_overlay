@@ -279,16 +279,16 @@ src_configure() {
 	cat <<- EOF > "${S}"/config.toml
 		[llvm]
 		optimize = $(toml_usex !debug)
-		thin-lto = $(toml_usex system-llvm)
+		thin-lto = true
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
-		link-shared = $(toml_usex system-llvm)
-		use-libcxx = $(toml_usex system-llvm)
-		use-linker = "$(usex system-llvm lld)"
+		link-shared = true
+		use-libcxx = true
+		use-linker = "lld"
 
 		[build]
 		build = "${rust_target}"
