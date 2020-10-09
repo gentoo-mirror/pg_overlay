@@ -18,6 +18,7 @@ IUSE=""
 DOCS=( CHANGES README.md )
 
 src_prepare() {
+	default
 	sed -i '62d' Makefile
 }
 
