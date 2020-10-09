@@ -48,8 +48,8 @@ IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compile
 
 # How to use it:
 # 1. List all the working slots (with min versions) in ||, newest first.
-# 2. Update the := to specify *max* version, e.g. < 11.
-# 3. Specify LLVM_MAX_SLOT, e.g. 10.
+# 2. Update the := to specify *max* version, e.g. < 12.
+# 3. Specify LLVM_MAX_SLOT, e.g. 11.
 LLVM_DEPEND="
 	|| (
 		sys-devel/llvm:11[${LLVM_TARGET_USEDEPS// /,}]
@@ -125,7 +125,6 @@ PATCHES=(
 	"${FILESDIR}"/1.46.0-don-t-create-prefix-at-time-of-check.patch
 	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/gentoo-musl-target-specs.patch
-	"${FILESDIR}"/d-use-system-compiler-rt.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -136,6 +135,7 @@ toml_usex() {
 
 boostrap_rust_version_check() {
 	# never call from pkg_pretend. eselect-rust may be not installed yet.
+	[[ ${MERGE_TYPE} == binary ]] && return
 	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 1))"
 	local rustc_version=( $(eselect --brief rust show 2>/dev/null) )
 	rustc_version=${rustc_version[0]#rust-bin-}
@@ -458,6 +458,7 @@ src_configure() {
 }
 
 src_compile() {
+	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
 	# we need \n IFS to have config.env with spaces loaded properly. #734018
 	(
 	IFS=$'\n'
@@ -523,6 +524,7 @@ src_test() {
 }
 
 src_install() {
+	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
 	# https://github.com/rust-lang/rust/issues/77721
 	# also 1.46.0-don-t-create-prefix-at-time-of-check.patch
 	dodir "/usr/lib/${PN}/${PV}"
