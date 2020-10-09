@@ -288,7 +288,7 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
 		use-libcxx = true
-		use-linker = "$(usex system-llvm lld)"
+		use-linker = "lld"
 
 		[build]
 		build = "${rust_target}"
@@ -335,8 +335,10 @@ src_configure() {
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
+		llvm-libunwind = $(toml_usex !system-llvm)
 
 		[dist]
 		src-tarball = false
