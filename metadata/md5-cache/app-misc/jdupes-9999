@@ -1,5 +1,5 @@
 BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
-DEFINED_PHASES=install unpack
+DEFINED_PHASES=install prepare unpack
 DESCRIPTION=A powerful duplicate file finder and an enhanced fork of 'fdupes'.
 EAPI=7
 HOMEPAGE=https://github.com/jbruchon/jdupes
@@ -7,4 +7,4 @@ LICENSE=MIT
 PROPERTIES=live
 SLOT=0
 _eclasses_=git-r3	3e7ec3d6619213460c85e2aa48398441
-_md5_=98371f5f9e4488fa51e6d42d1cd89168
+_md5_=f78f7a6b0abb6fb0620995938cf8ae18
