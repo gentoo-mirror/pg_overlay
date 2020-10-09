@@ -289,7 +289,6 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
 		use-libcxx = true
-		#use-linker = "lld"
 
 		[build]
 		build = "${rust_target}"
@@ -335,8 +334,7 @@ src_configure() {
 		optimize-tests = $(toml_usex !debug)
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = true
-		#lld = $(usex system-llvm false $(toml_usex wasm))
+		lld = $(usex system-llvm false $(toml_usex wasm))
 		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
