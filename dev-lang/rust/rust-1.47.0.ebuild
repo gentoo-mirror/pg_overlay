@@ -120,7 +120,7 @@ QA_SONAME="
 RESTRICT="test"
 
 PATCHES=(
-	"${FILESDIR}"/0012-Ignore-broken-and-non-applicable-tests.patch
+	#"${FILESDIR}"/0012-Ignore-broken-and-non-applicable-tests.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
