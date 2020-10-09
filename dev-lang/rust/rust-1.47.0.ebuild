@@ -236,7 +236,7 @@ src_prepare() {
 }
 
 src_configure() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
+	export RUSTFLAGS="Cdebuginfo=0 -Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -288,7 +288,7 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
 		use-libcxx = true
-		#use-linker = "lld"
+		use-linker = "lld"
 
 		[build]
 		build = "${rust_target}"
@@ -334,8 +334,9 @@ src_configure() {
 		optimize-tests = $(toml_usex !debug)
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = $(usex system-llvm false $(toml_usex wasm))
-		use-lld = true
+		lld = true
+		#lld = $(usex system-llvm false $(toml_usex wasm))
+		#use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
 		llvm-libunwind = $(toml_usex !system-llvm)
@@ -460,7 +461,7 @@ src_configure() {
 }
 
 src_compile() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
+	export RUSTFLAGS="Cdebuginfo=0 -Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
 	# we need \n IFS to have config.env with spaces loaded properly. #734018
 	(
 	IFS=$'\n'
