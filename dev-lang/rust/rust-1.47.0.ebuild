@@ -32,14 +32,15 @@ SRC_URI="
 	!system-bootstrap? ( $(rust_all_arch_uris rust-${RUST_STAGE0_VERSION}) )
 "
 
-ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM BPF Hexagon Lanai Mips MSP430
+# keep in sync with llvm ebuild of the same version as bundled one.
+ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM AVR BPF Hexagon Lanai Mips MSP430
 	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compiler rls rustfmt system-bootstrap system-llvm wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compiler rls rustfmt +system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -83,7 +84,7 @@ DEPEND="
 	sys-libs/zlib:=
 	!libressl? ( dev-libs/openssl:0= )
 	libressl? ( dev-libs/libressl:0= )
-	elibc_musl? ( sys-libs/libunwind )
+	elibc_musl? ( sys-libs/libunwind:= )
 	system-llvm? (
 		${LLVM_DEPEND}
 		>=sys-devel/clang-runtime-8.0[libcxx]
@@ -97,30 +98,34 @@ RDEPEND="${DEPEND}
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	miri? ( nightly )
 	parallel-compiler? ( nightly )
+	test? ( ${ALL_LLVM_TARGETS[*]} )
 	wasm? ( llvm_targets_WebAssembly )
 	x86? ( cpu_flags_x86_sse2 )
 "
 
-# we don't use cmake.eclass, but can get a warnin -l
+# we don't use cmake.eclass, but can get a warnings
 CMAKE_WARN_UNUSED_CLI=no
 
 QA_FLAGS_IGNORED="
-	usr/bin/.*-${PV}
-	usr/lib.*/${P}/lib.*.so.*
-	usr/lib.*/${P}/rustlib/.*/bin/.*
-	usr/lib.*/${P}/rustlib/.*/lib/lib.*.so.*
+	usr/lib/${PN}/${PV}/bin/.*
+	usr/lib/${PN}/${PV}/lib/lib.*.so
+	usr/lib/${PN}/${PV}/lib/rustlib/.*/bin/.*
+	usr/lib/${PN}/${PV}/lib/rustlib/.*/lib/lib.*.so
 "
 
 QA_SONAME="
-	usr/lib.*/${P}/lib.*.so.*
-	usr/lib.*/${P}/rustlib/.*/lib/lib.*.so.*
+	usr/lib/${PN}/${PV}/lib/lib.*.so.*
+	usr/lib/${PN}/${PV}/lib/rustlib/.*/lib/lib.*.so
 "
 
-# still disabled, almost ready to enable
+# causes double bootstrap
 RESTRICT="test"
 
 PATCHES=(
-	#"${FILESDIR}"/0012-Ignore-broken-and-non-applicable-tests.patch
+	"${FILESDIR}"/1.46.0-don-t-create-prefix-at-time-of-check.patch
+	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
+	"${FILESDIR}"/gentoo-musl-target-specs.patch
+	"${FILESDIR}"/d-use-system-compiler-rt.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -227,8 +232,6 @@ src_prepare() {
 	# it's a shebang and make them executable. Then brp-mangle-shebangs gets upset...
 	find -name '*.rs' -type f -perm /111 -exec chmod -v -x '{}' '+'
 
-	use libressl && eapply ${FILESDIR}/${PV}-libressl.patch
-
 	default
 }
 
@@ -308,10 +311,12 @@ src_configure() {
 		local-rebuild = false
 
 		[install]
-		prefix = "${EPREFIX}/usr"
-		libdir = "$(get_libdir)/${P}"
-		docdir = "share/doc/${PF}"
-		mandir = "share/${P}/man"
+		prefix = "${EPREFIX}/usr/lib/${PN}/${PV}"
+		sysconfdir = "etc"
+		docdir = "share/doc/rust"
+		bindir = "bin"
+		libdir = "lib"
+		mandir = "share/man"
 		[rust]
 		optimize = true
 		debug = $(toml_usex debug)
@@ -371,7 +376,7 @@ src_configure() {
 		EOF
 	fi
 
-	if [[ -n ${I_KNOW_WHAT_I_AM_DOING_CROSS} ]]; then #whitespace intentionally shifted below
+	if [[ -n ${I_KNOW_WHAT_I_AM_DOING_CROSS} ]]; then # whitespace intentionally shifted below
 	# experimental cross support
 	# discussion: https://bugs.gentoo.org/679878
 	# TODO: c*flags, clang, system-llvm, cargo.eclass target support
@@ -453,8 +458,12 @@ src_configure() {
 }
 
 src_compile() {
+	# we need \n IFS to have config.env with spaces loaded properly. #734018
+	(
+	IFS=$'\n'
 	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
 		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
+	)
 }
 
 src_test() {
@@ -472,10 +481,11 @@ src_test() {
 	)
 
 	# fails if llvm is not built with ALL targets.
-	# use system-llvm || tests+=( assembly )
+	# and known to fail with system llvm sometimes.
+	use system-llvm || tests+=( assembly )
 
 	# fragile/expensive/less important tests
-	# or tests that require extra build time
+	# or tests that require extra builds
 	# TODO: instead of skipping, just make some nonfatal.
 	if [[ ${ERUST_RUN_EXTRA_TESTS:-no} != no ]]; then
 		tests+=(
@@ -494,10 +504,13 @@ src_test() {
 	for i in "${tests[@]}"; do
 		local t="src/test/${i}"
 		einfo "rust_src_test: running ${t}"
-		if ! nonfatal env $(cat "${S}"/config.env) RUST_BACKTRACE=1 \
-			"${EPYTHON}" ./x.py test -vv --config="${S}"/config.toml \
-			-j$(makeopts_jobs) --no-doc --no-fail-fast "${t}"; then
-
+		if ! (
+				IFS=$'\n'
+				env $(cat "${S}"/config.env) RUST_BACKTRACE=1 \
+				"${EPYTHON}" ./x.py test -vv --config="${S}"/config.toml \
+				-j$(makeopts_jobs) --no-doc --no-fail-fast "${t}"
+			)
+		then
 				failed+=( "${t}" )
 				eerror "rust_src_test: ${t} failed"
 		fi
@@ -510,64 +523,53 @@ src_test() {
 }
 
 src_install() {
-	export RUSTFLAGS="-Ctarget-cpu=native -Copt-level=3"
+	# https://github.com/rust-lang/rust/issues/77721
+	# also 1.46.0-don-t-create-prefix-at-time-of-check.patch
+	dodir "/usr/lib/${PN}/${PV}"
+	(
+	IFS=$'\n'
 	env $(cat "${S}"/config.env) DESTDIR="${D}" \
 		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml || die
+	)
 
 	# bug #689562, #689160
-	rm "${D}/etc/bash_completion.d/cargo" || die
-	rmdir "${D}"/etc{/bash_completion.d,} || die
+	rm -v "${D}/usr/lib/${PN}/${PV}/etc/bash_completion.d/cargo" || die
+	rmdir -v "${D}/usr/lib/${PN}/${PV}"/etc{/bash_completion.d,} || die
 	dobashcomp build/tmp/dist/cargo-image/etc/bash_completion.d/cargo
 
-	mv "${ED}/usr/bin/rustc" "${ED}/usr/bin/rustc-${PV}" || die
-	mv "${ED}/usr/bin/rustdoc" "${ED}/usr/bin/rustdoc-${PV}" || die
-	mv "${ED}/usr/bin/rust-gdb" "${ED}/usr/bin/rust-gdb-${PV}" || die
-	mv "${ED}/usr/bin/rust-gdbgui" "${ED}/usr/bin/rust-gdbgui-${PV}" || die
-	mv "${ED}/usr/bin/rust-lldb" "${ED}/usr/bin/rust-lldb-${PV}" || die
-	mv "${ED}/usr/bin/cargo" "${ED}/usr/bin/cargo-${PV}" || die
-	if use clippy; then
-		mv "${ED}/usr/bin/clippy-driver" "${ED}/usr/bin/clippy-driver-${PV}" || die
-		mv "${ED}/usr/bin/cargo-clippy" "${ED}/usr/bin/cargo-clippy-${PV}" || die
-	fi
-	if use miri; then
-		mv "${ED}/usr/bin/miri" "${ED}/usr/bin/miri-${PV}" || die
-		mv "${ED}/usr/bin/cargo-miri" "${ED}/usr/bin/cargo-miri-${PV}" || die
-	fi
-	if use rls; then
-		mv "${ED}/usr/bin/rls" "${ED}/usr/bin/rls-${PV}" || die
-	fi
-	if use rustfmt; then
-		mv "${ED}/usr/bin/rustfmt" "${ED}/usr/bin/rustfmt-${PV}" || die
-		mv "${ED}/usr/bin/cargo-fmt" "${ED}/usr/bin/cargo-fmt-${PV}" || die
-	fi
+	local symlinks=(
+		rustc
+		rustdoc
+		rust-gdb
+		rust-gdbgui
+		rust-lldb
+		cargo
+	)
 
-	# Copy shared library versions of standard libraries for all targets
-	# into the system's abi-dependent lib directories because the rust
-	# installer only does so for the native ABI.
+	use clippy && symlinks+=( clippy-driver cargo-clippy )
+	use miri && symlinks+=( miri cargo-miri )
+	use rls && symlinks+=( rls )
+	use rustfmt && symlinks+=( rustfmt cargo-fmt )
 
-	local abi_libdir rust_target
-	for v in $(multilib_get_enabled_abi_pairs); do
-		if [ ${v##*.} = ${DEFAULT_ABI} ]; then
-			continue
-		fi
-		abi_libdir=$(get_abi_LIBDIR ${v##*.})
-		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
-		mkdir -p "${ED}/usr/${abi_libdir}/${P}"
-		cp "${ED}/usr/$(get_libdir)/${P}/rustlib/${rust_target}/lib"/*.so \
-			"${ED}/usr/${abi_libdir}/${P}" || die
+	local i
+	for i in "${symlinks[@]}"; do
+		# we need realpath on /usr/bin/* symlink return version-appended binary path.
+		# so /usr/bin/rustc should point to /usr/lib/rust/<ver>/bin/rustc-<ver>
+		# need to fix eselect-rust to remove this hack.
+		mv -v "${ED}/usr/lib/${PN}/${PV}/bin/${i}" "${ED}/usr/lib/${PN}/${PV}/bin/${i}-${PV}" || die
+		ln -v "${ED}/usr/lib/${PN}/${PV}/bin/${i}-${PV}" "${ED}/usr/lib/${PN}/${PV}/bin/${i}" || die
+		dosym "../lib/${PN}/${PV}/bin/${i}-${PV}" "/usr/bin/${i}-${PV}"
 	done
+	dosym "../../lib/${PN}/${PV}/share/doc" "/usr/share/doc/${P}"
 
-	# versioned libdir/mandir support
 	newenvd - "50${P}" <<-_EOF_
-		LDPATH="${EPREFIX}/usr/$(get_libdir)/${P}"
-		MANPATH="${EPREFIX}/usr/share/${P}/man"
+		LDPATH="${EPREFIX}/usr/lib/${PN}/${PV}/lib"
+		MANPATH="${EPREFIX}/usr/lib/${PN}/${PV}/share/man"
+		$(usex elibc_musl 'CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS="-C target-feature=-crt-static"' '')
 	_EOF_
 
-	dodoc COPYRIGHT
-	rm -rf "${ED}/usr/$(get_libdir)/${P}"/*.old || die
-	rm "${ED}/usr/share/doc/${P}"/*.old || die
-	rm "${ED}/usr/share/doc/${P}/LICENSE-APACHE" || die
-	rm "${ED}/usr/share/doc/${P}/LICENSE-MIT" || die
+	rm -rf "${ED}/usr/lib/${PN}/${PV}"/*.old || die
+	rm -rf "${ED}/usr/lib/${PN}/${PV}/doc"/*.old || die
 
 	# note: eselect-rust adds EROOT to all paths below
 	cat <<-EOF > "${T}/provider-${P}"
@@ -576,6 +578,7 @@ src_install() {
 		/usr/bin/rust-gdb
 		/usr/bin/rust-gdbgui
 		/usr/bin/rust-lldb
+		/usr/share/doc/rust
 	EOF
 	if use clippy; then
 		echo /usr/bin/clippy-driver >> "${T}/provider-${P}"
@@ -609,15 +612,6 @@ pkg_postinst() {
 
 	if has_version app-editors/gvim || has_version app-editors/vim; then
 		elog "install app-vim/rust-vim to get vim support for rust."
-	fi
-
-	if use elibc_musl; then
-		ewarn "${PN} on *-musl targets is configured with crt-static"
-		ewarn ""
-		ewarn "you will need to set RUSTFLAGS=\"-C target-feature=-crt-static\" in make.conf"
-		ewarn "to use it with portage, otherwise you may see failures like"
-		ewarn "error: cannot produce proc-macro for serde_derive v1.0.98 as the target "
-		ewarn "x86_64-unknown-linux-musl does not support these crate types"
 	fi
 }
 
