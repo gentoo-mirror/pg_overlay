@@ -335,8 +335,8 @@ src_configure() {
 		optimize-tests = $(toml_usex !debug)
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
-		lld = true
-		#lld = $(usex system-llvm false $(toml_usex wasm))
+		#lld = true
+		lld = $(usex system-llvm false $(toml_usex wasm))
 		#use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
