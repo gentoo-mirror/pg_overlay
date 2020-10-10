@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit meson git-r3
 
@@ -11,20 +11,17 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm ppc ppc64 ~sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
 IUSE="doc examples test"
 RESTRICT="!test? ( test )"
 
-RDEPEND=""
-DEPEND="
-	doc? ( app-doc/doxygen )
-	test? ( dev-libs/check )
-"
+BDEPEND="doc? ( app-doc/doxygen )"
+DEPEND="test? ( dev-libs/check )"
 
 src_prepare() {
 	default
 
-	sed -i "s:@top_srcdir@:.:" doc/doxygen.conf.in || die
+	sed -e "s:@top_srcdir@:.:" -i doc/doxygen.conf.in || die
 
 	# meson doesn't support setting docdir
 	sed -e "/^docdir =/s/meson.project_name()/'${PF}'/" \
@@ -43,7 +40,5 @@ src_configure() {
 
 src_install() {
 	meson_src_install
-
 	use examples && dodoc src/example.c
-	use doc || rm -rf "${ED}"/usr/share/doc/${PF}/html
 }
