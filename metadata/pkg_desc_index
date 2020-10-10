@@ -61,19 +61,7 @@ dev-libs/re2 0.2020.10.01: An efficient, principled regular expression library
 dev-libs/vala-common 0.48.4: Build infrastructure for packages that use Vala
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-perl/App-pwhich 1.160.0: Perl-only 'which'
-dev-perl/Canary-Stability 2013.0.0: Canary to check perl compatibility for schmorp's modules
-dev-perl/Class-Inspector 1.360.0: Provides information about Classes
-dev-perl/Devel-Size 0.830.0: Perl extension for finding the memory usage of Perl variables
-dev-perl/Devel-StackTrace 2.40.0: An object representing a stack trace
-dev-perl/Exception-Class 1.440.0: A module that allows you to declare real exception classes in Perl
-dev-perl/ExtUtils-InstallPaths 0.12.0: Build.PL install path logic made easy
-dev-perl/File-BaseDir 0.80.0: Use the Freedesktop.org base directory specification
 dev-perl/File-HomeDir 1.4.0: Get home directory for self or other user
-dev-perl/File-MimeInfo 0.290.0: Determine file type
-dev-perl/File-ShareDir 1.116.0: Locate per-dist and per-module shared files
-dev-perl/File-ShareDir-Install 0.130.0: Install shared files
-dev-perl/File-Which 1.230.0: Perl module implementing 'which' internally
 dev-perl/HTTP-Cookies 6.50.0: Storage of cookies
 dev-perl/HTTP-Message 6.180.0: Base class for Request/Response
 dev-perl/JSON 4.20.0: JSON (JavaScript Object Notation) encoder/decoder
@@ -81,7 +69,6 @@ dev-perl/JSON-XS 4.20.0: JSON::XS - JSON serialising/deserialising, done correct
 dev-perl/LWP-MediaTypes 6.40.0: Media types and mailcap processing
 dev-perl/Log-Agent 1.3.0: A general logging framework
 dev-perl/Module-Build 0.422.900: Build and install Perl modules
-dev-perl/Mojolicious 8.260.0: Real-time web framework
 dev-perl/MusicBrainz-DiscID 0.60.0: Perl interface for the MusicBrainz libdiscid library
 dev-perl/Net-HTTP 6.190.0: Low-level HTTP connection (client)
 dev-perl/Package-Stash 0.380.0: Routines for manipulating stashes
@@ -100,7 +87,6 @@ dev-perl/TermReadKey 2.380.0: Change terminal modes, and perform non-blocking re
 dev-perl/Text-Autoformat 1.750.0: Automatic text wrapping and reformatting
 dev-perl/URI 1.760.0: Uniform Resource Identifiers (absolute and relative)
 dev-perl/Unicode-EastAsianWidth 12.0: East Asian Width properties
-dev-perl/Unicode-LineBreak 2019.1.0: UAX #14 Unicode Line Breaking Algorithm
 dev-perl/WebService-MusicBrainz 1.0.5: Web service API to MusicBrainz database
 dev-perl/XML-Parser 2.460.0: A Perl extension interface to James Clark's XML parser, expat
 dev-perl/XML-RSS 1.610.0: a basic framework for creating and maintaining RSS files
