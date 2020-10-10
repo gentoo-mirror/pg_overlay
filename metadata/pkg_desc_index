@@ -220,7 +220,6 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.1: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.8.0_rc1: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
-sys-libs/glibc 2.32-r2 9999: GNU libc C library
 sys-libs/libblockdev 2.24: A library for manipulating block devices
 sys-libs/ncurses 6.2_p20201003: console display library
 sys-libs/polly 11.0.0_rc6: Polyhedral optimizations for LLVM
