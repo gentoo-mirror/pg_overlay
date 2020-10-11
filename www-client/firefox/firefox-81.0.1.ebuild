@@ -498,10 +498,25 @@ src_prepare() {
 
 	####### My stuff
 	eapply "${FILESDIR}/no-gtk2.patch"
+	eapply "${FILESDIR}/rust-1.47.0.patch"
+	### OpenSUSE-KDE patchset
+	einfo Applying OpenSUSE-KDE patches
+	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
+		else
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
+		fi
+	done
 	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/privacy-patchset-$(ver_cut 1)/$i"; done
-
 	### Debian patches
 	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
@@ -517,7 +532,6 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-
 	### FreeBSD patches
 	einfo "Applying FreeBSD's patches"
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
