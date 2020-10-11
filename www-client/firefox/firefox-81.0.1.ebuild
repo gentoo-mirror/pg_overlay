@@ -498,6 +498,7 @@ src_prepare() {
 
 	####### My stuff
 	eapply "${FILESDIR}/no-gtk2.patch"
+	eapply "${FILESDIR}/rust-1.47.0.patch"
 	### OpenSUSE-KDE patchset
 	einfo Applying OpenSUSE-KDE patches
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/series);do
