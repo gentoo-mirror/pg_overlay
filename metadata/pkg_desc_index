@@ -138,7 +138,7 @@ gui-apps/wofi 1.1.2: Launcher/menu program for wlroots based wayland compositors
 gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.19.90: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 68.12.0 78.3.2: Thunderbird Mail Client
+mail-client/thunderbird 78.3.2: Thunderbird Mail Client
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.3 2020.4_pre20200707: Collection of tools, libraries and tests for shader compilation
@@ -218,7 +218,7 @@ virtual/perl-Pod-Parser 1.630.0-r6: Virtual for Pod-Parser
 virtual/perl-Socket 2.27.0-r2: Virtual for Socket
 virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
-www-client/firefox 80.0.1 81.0.1: Firefox Web Browser
+www-client/firefox 81.0.1: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
