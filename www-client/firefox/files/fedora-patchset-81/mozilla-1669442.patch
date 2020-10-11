@@ -1,0 +1,13 @@
+diff --git a/config/recurse.mk b/config/recurse.mk
+--- a/config/recurse.mk
++++ b/config/recurse.mk
+@@ -206,7 +206,7 @@
+ # Interdependencies that moz.build world don't know about yet for compilation.
+ # Note some others are hardcoded or "guessed" in recursivemake.py and emitter.py
+ ifeq ($(MOZ_WIDGET_TOOLKIT),gtk)
+-toolkit/library/target: widget/gtk/mozgtk/gtk3/target
++toolkit/library/build/target: widget/gtk/mozgtk/gtk3/target
+ endif
+ 
+ ifndef MOZ_FOLD_LIBS
+
