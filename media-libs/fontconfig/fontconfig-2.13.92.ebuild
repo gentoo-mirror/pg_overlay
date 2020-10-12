@@ -37,11 +37,11 @@ PDEPEND="!x86-winnt? ( app-eselect/eselect-fontconfig )
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.10.2-docbook.patch # 310157
 	"${FILESDIR}"/${PN}-2.12.3-latin-update.patch # 130466 + make liberation default
-	"${FILESDIR}"/${P}-revert_delete_.uuid_for_empty_directory.patch # 666418
+	"${FILESDIR}"/${PN}-2.13.1-revert_delete_.uuid_for_empty_directory.patch # 666418
 
 	# Patches from upstream (can usually be removed with next version bump)
-	"${FILESDIR}"/${P}-static_build.patch
-	"${FILESDIR}"/${P}-proper_homedir.patch
+	"${FILESDIR}"/${PN}-2.13.1-static_build.patch
+	"${FILESDIR}"/${PN}-2.13.1-proper_homedir.patch
 )
 
 MULTILIB_CHOST_TOOLS=( /usr/bin/fc-cache$(get_exeext) )
