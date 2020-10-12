@@ -37,9 +37,6 @@ PDEPEND="!x86-winnt? ( app-eselect/eselect-fontconfig )
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.10.2-docbook.patch # 310157
 	"${FILESDIR}"/${PN}-2.12.3-latin-update.patch # 130466 + make liberation default
-
-	# Patches from upstream (can usually be removed with next version bump)
-	"${FILESDIR}"/${PN}-2.13.1-proper_homedir.patch
 )
 
 MULTILIB_CHOST_TOOLS=( /usr/bin/fc-cache$(get_exeext) )
