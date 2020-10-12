@@ -139,6 +139,7 @@ gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.19.90: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 78.3.2: Thunderbird Mail Client
+media-libs/fontconfig 2.13.92: A library for configuring and customizing font access
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.3 2020.4_pre20200707: Collection of tools, libraries and tests for shader compilation
