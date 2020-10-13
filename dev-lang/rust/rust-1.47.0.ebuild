@@ -338,7 +338,7 @@ src_configure() {
 		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
-		llvm-libunwind = $(toml_usex !system-llvm)
+		llvm-libunwind = true
 
 		[dist]
 		src-tarball = false
