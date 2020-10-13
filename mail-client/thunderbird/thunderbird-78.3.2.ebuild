@@ -488,7 +488,8 @@ src_prepare() {
 	# Write API keys to disk
 	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
 
-	# OpenSUSE-KDE patchset
+	#######
+	### OpenSUSE-KDE patchset
 	einfo Applying OpenSUSE-KDE patches
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/$p 2>/dev/null
@@ -503,12 +504,10 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-
-	# Privacy-esr patches
+	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/privacy-patchset-$(ver_cut 1)/$i"; done
-
-	# Debian patches
+	### Debian patches
 	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p 2>/dev/null
@@ -523,12 +522,10 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-
-	# FreeBSD patches
+	### FreeBSD patches
 	einfo "Applying FreeBSD's patches"
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i"; done
-
-	# Fedora patches
+	### Fedora patches
 	einfo "Applying Fedora's patches"
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p 2>/dev/null
@@ -544,6 +541,7 @@ src_prepare() {
 		fi
 	done
 	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
+	#######
 
 	xdg_src_prepare
 }
@@ -847,7 +845,8 @@ src_configure() {
 		done
 	fi
 
-	####### Disable features
+	#######
+	### Disable features
 	mozconfig_add_options_ac '' --disable-accessibility
 	mozconfig_add_options_ac '' --disable-address-sanitizer
 	mozconfig_add_options_ac '' --disable-address-sanitizer-reporter
@@ -917,7 +916,7 @@ src_configure() {
 	mozconfig_add_options_ac '' RUSTFLAGS=-Copt-level=3
 	mozconfig_add_options_ac '' RUSTFLAGS=-Cdebuginfo=0
 
-	####### Enable good features
+	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
 	mozconfig_add_options_ac '' --enable-install-strip
 	mozconfig_add_options_ac '' --enable-rust-simd
@@ -1006,15 +1005,16 @@ src_install() {
 		EOF
 	fi
 
+	#######
 	if use kde ; then
 		cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js-1 >> \
 		"${GENTOO_PREFS}" \
 		|| die
 	fi
-
 	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js-1 >> \
 	"${GENTOO_PREFS}" \
 	|| die
+	#######
 
 	# Install language packs
 	local langpacks=( $(find "${WORKDIR}/language_packs" -type f -name '*.xpi') )
