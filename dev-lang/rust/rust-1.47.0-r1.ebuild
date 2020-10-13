@@ -196,7 +196,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
+	#export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
@@ -249,7 +249,7 @@ src_prepare() {
 }
 
 src_configure() {
-	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
+	#export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -471,7 +471,7 @@ src_configure() {
 }
 
 src_compile() {
-	export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
+	#export RUSTFLAGS="-Clink-args=-fuse-ld=lld -Copt-level=3 -Ctarget-cpu=native"
 	# we need \n IFS to have config.env with spaces loaded properly. #734018
 	(
 	IFS=$'\n'
