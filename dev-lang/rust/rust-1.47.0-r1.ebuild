@@ -206,9 +206,16 @@ src_prepare() {
 	fi
 
 	if use system-llvm; then
-		rm -rf src/llvm-project/ || die
-		rm -rf src/llvm/ || die
-		sed -i.ffi -e '$a #[link(name = "ffi")] extern {}' src/librustc_llvm/lib.rs
+		rm -rf src/llvm-project/
+		rm -rf src/llvm/
+		# We never enable emscripten.
+		rm -rf src/llvm-emscripten/
+		# We never enable other LLVM tools.
+		rm -rf src/tools/clang
+		rm -rf src/tools/lld
+		rm -rf src/tools/lldb
+		# CI tooling won't be used
+		rm -rf src/ci
 	fi
 
 	# Remove other unused vendored libraries 
@@ -218,6 +225,10 @@ src_prepare() {
 	rm -rf vendor/openssl-src/openssl/
 	rm -rf vendor/libgit2-sys/libgit2/
 	rm -rf vendor/libssh2-sys/libssh2/
+	# Remove hidden files from source
+	find src/ -type f -name '.appveyor.yml' -exec rm -v '{}' '+'
+	find src/ -type f -name '.travis.yml' -exec rm -v '{}' '+'
+	find src/ -type f -name '.cirrus.yml' -exec rm -v '{}' '+'
 
 	# This only affects the transient rust-installer, but let it use our dynamic xz-libs
 	sed -i.lzma -e '/LZMA_API_STATIC/d' src/bootstrap/tool.rs
@@ -231,6 +242,8 @@ src_prepare() {
 	# Sometimes Rust sources start with #![...] attributes, and "smart" editors think
 	# it's a shebang and make them executable. Then brp-mangle-shebangs gets upset...
 	find -name '*.rs' -type f -perm /111 -exec chmod -v -x '{}' '+'
+
+	use libressl && eapply ${FILESDIR}/${PV}-libressl.patch
 
 	default
 }
