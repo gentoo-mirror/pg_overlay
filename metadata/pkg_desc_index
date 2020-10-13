@@ -219,7 +219,7 @@ virtual/perl-Pod-Parser 1.630.0-r6: Virtual for Pod-Parser
 virtual/perl-Socket 2.27.0-r2: Virtual for Socket
 virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
-www-client/firefox 81.0.1: Firefox Web Browser
+www-client/firefox 81.0.2: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
