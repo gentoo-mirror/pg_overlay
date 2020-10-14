@@ -205,8 +205,8 @@ src_prepare() {
 	fi
 
 	if use system-llvm; then
-		rm -rf src/llvm-project/
-		rm -rf src/llvm/
+		#rm -rf src/llvm-project/
+		#rm -rf src/llvm/
 		# We never enable emscripten.
 		rm -rf src/llvm-emscripten/
 		# We never enable other LLVM tools.
