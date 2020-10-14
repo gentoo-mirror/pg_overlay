@@ -1,9 +1,11 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit eutils toolchain-funcs
+LUA_COMPAT=( lua5-{1..2} )
+
+inherit lua-single
 
 DESCRIPTION="Worker Filemanager: Amiga Directory Opus 4 clone"
 HOMEPAGE="http://www.boomerangsworld.de/cms/worker/"
@@ -14,14 +16,17 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~hppa ~ppc ~ppc64 ~x86"
 IUSE="avfs debug dbus examples libnotify lua +magic xinerama xft"
 
+REQUIRED_USE="lua? ( ${LUA_REQUIRED_USE} )"
+
 RDEPEND="x11-libs/libX11
 	avfs? ( >=sys-fs/avfs-0.9.5 )
 	dbus? (	dev-libs/dbus-glib )
-	lua? ( dev-lang/lua:0 )
+	lua? ( ${LUA_DEPS} )
 	magic? ( sys-apps/file )
 	xft? ( x11-libs/libXft )
 	xinerama? ( x11-libs/libXinerama )"
 DEPEND="${RDEPEND}"
+BDEPEND="virtual/pkgconfig"
 
 DOCS=( AUTHORS ChangeLog INSTALL NEWS README README_LARGEFILES THANKS )
 
