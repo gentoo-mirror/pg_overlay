@@ -299,7 +299,7 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
 		use-libcxx = true
-		linker = lld
+		use-linker = lld
 
 		[build]
 		build = "${rust_target}"
