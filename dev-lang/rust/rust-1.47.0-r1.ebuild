@@ -368,6 +368,7 @@ src_configure() {
 			cxx = "$(tc-getBUILD_CXX)"
 			linker = "$(tc-getCC)"
 			ar = "$(tc-getAR)"
+			ranlib = "$(tc-getRANLIB)"
 		_EOF_
 		# librustc_target/spec/linux_musl_base.rs sets base.crt_static_default = true;
 		if use elibc_musl; then
