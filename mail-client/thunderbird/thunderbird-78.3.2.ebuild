@@ -912,9 +912,6 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=
 	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
-	mozconfig_add_options_ac '' RUSTFLAGS=-Ctarget-cpu=native
-	mozconfig_add_options_ac '' RUSTFLAGS=-Copt-level=3
-	mozconfig_add_options_ac '' RUSTFLAGS=-Cdebuginfo=0
 
 	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
@@ -929,7 +926,6 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS='-Ctarget-cpu=native -Copt-level=3 -Cdebuginfo=0'" >> "${S}"/.mozconfig
 	#######
 
 	echo
