@@ -929,13 +929,6 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=
 	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
-	mozconfig_add_options_ac '' RUSTFLAGS=-Cdebuginfo=0
-	mozconfig_add_options_ac '' RUSTFLAGS=-Clink-arg=-fuse-ld=lld
-	mozconfig_add_options_ac '' RUSTFLAGS=-Clinker=clang
-	mozconfig_add_options_ac '' RUSTFLAGS=-Clinker-plugin-lto
-	mozconfig_add_options_ac '' RUSTFLAGS=-Clto=thin
-	mozconfig_add_options_ac '' RUSTFLAGS=-Copt-level=3
-	mozconfig_add_options_ac '' RUSTFLAGS=-Ctarget-cpu=native
 
 	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
@@ -951,7 +944,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export RUSTFLAGS='-Cdebuginfo=0 -Clink-arg=-fuse-ld=lld -Clinker=clang -Clinker-plugin-lto -Clto=thin -Copt-level=3 -Ctarget-cpu=native'" >> "${S}"/.mozconfig
+	#echo "export RUSTFLAGS='-Cdebuginfo=0 -Clink-arg=-fuse-ld=lld -Clinker=clang -Clinker-plugin-lto -Clto=thin -Copt-level=3 -Ctarget-cpu=native'" >> "${S}"/.mozconfig
 	#######
 
 	echo
