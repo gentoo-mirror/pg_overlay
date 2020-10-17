@@ -118,7 +118,7 @@ twg(){
 	unset BUILD_DIR
 }
 
-cmake_src_prepare() {
+src_prepare() {
 	twg
 }
 
