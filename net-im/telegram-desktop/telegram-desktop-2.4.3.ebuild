@@ -88,7 +88,7 @@ pkg_pretend() {
 }
 
 twg_prepare(){
-	S=${WORKDIR}/Libraries/tg_owt
+	#S=${WORKDIR}/Libraries/tg_owt
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
 	cp -r "${WORKDIR}"/tg_owt-master Libraries/tg_owt
@@ -98,12 +98,11 @@ twg_prepare(){
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
 	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_prepare
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" CMAKE_USE_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_prepare
 }
 
 twg_configure() {
 	twg_prepare
-	S=${WORKDIR}/Libraries/tg_owt
 	pushd ${WORKDIR}/Libraries/tg_owt
 	local mycmakeargs=(
 		-G Ninja \
@@ -116,31 +115,32 @@ twg_configure() {
 		-DTDESKTOP_API_ID="611335" \
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_configure
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" CMAKE_USE_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_configure
 }
 
 twg_compile() {
 	twg_configure
-	S=${WORKDIR}/Libraries/tg_owt
 	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" CMAKE_USE_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
-	cp libtg_out.a out/Gentoo
-	unset S
-	S="${WORKDIR}/${MY_P}"
+	cp libtg_owt.a out/Gentoo
 	popd
 }	
 
+S="${WORKDIR}/${MY_P}"
 src_prepare() {
 	twg_compile
 	S="${WORKDIR}/${MY_P}"
-	cd $S
-	cmake_src_prepare	
-}
+	BUILD_DIR="${WORKDIR}/${MY_P}_build"
+	pushd $S
+	cmake_src_prepare
+	default
+	einfo +++++++
+	einfo $(pwd)
+	einfo +++++++
+	}
 
-S="${WORKDIR}/${MY_P}"
 src_configure() {
-	S="${WORKDIR}/${MY_P}"
 	local mycxxflags=(
 		-Wno-deprecated-declarations
 		-Wno-error=deprecated-declarations
@@ -191,9 +191,6 @@ src_configure() {
 		)
 	fi
 
-	einfo +++++++
-	einfo $S
-	einfo +++++++
 	cmake_src_configure
 	einfo +++++++
 	einfo $S
