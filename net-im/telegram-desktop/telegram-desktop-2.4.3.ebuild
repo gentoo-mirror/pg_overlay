@@ -89,7 +89,7 @@ pkg_pretend() {
 
 src_prepare(){
 	default
-	#eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
+	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
 	mv "${WORKDIR}"/tg_owt-master Libraries/tg_owt
 	pushd Libraries
