@@ -99,9 +99,6 @@ twg_prepare(){
 	popd
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_prepare
-	#mkdir -p out/Gentoo
-	#cp libtwg_out.a out/Gentoo
-	#unset BUILD_DIR
 }
 
 twg_configure() {
@@ -112,15 +109,14 @@ twg_configure() {
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DTG_OWT_SPECIAL_TARGET=linux \
-		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include \
-		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include/openssl \
-		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus \
-		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include/ffmpeg \
+		-DTG_OWT_LIBJPEG_INCLUDE_PATH=$(includedir) \
+		-DTG_OWT_OPENSSL_INCLUDE_PATH=$(includedir)/openssl \
+		-DTG_OWT_OPUS_INCLUDE_PATH=$(includedir)/opus \
+		-DTG_OWT_FFMPEG_INCLUDE_PATH=$(includedir)/ffmpeg \
 		-DTDESKTOP_API_ID="611335" \
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_configure
-	#unset BUILD_DIR
 }
 
 twg_compile() {
@@ -130,10 +126,12 @@ twg_compile() {
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
 	cp libtwg_out.a out/Gentoo
+	unset S
 }	
 
 src_prepare() {
 	twg_compile
+	S="${WORKDIR}/${MY_P}"
 }
 
 src_configure() {
