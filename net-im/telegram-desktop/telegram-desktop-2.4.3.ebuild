@@ -109,7 +109,7 @@ twg_configure() {
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
 	local mycmakeargs=(
-		-G Ninja \
+		#-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
 		-DTG_OWT_SPECIAL_TARGET=linux \
 		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include \
