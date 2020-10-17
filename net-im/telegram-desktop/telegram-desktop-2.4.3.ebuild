@@ -87,7 +87,7 @@ pkg_pretend() {
 	fi
 }
 
-twg_prepare(){
+src_prepare(){
 	default
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
