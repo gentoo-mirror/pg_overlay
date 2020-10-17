@@ -123,7 +123,7 @@ src_configure() {
 		-DTDESKTOP_API_ID="611335"
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
-	cmake_src_configure
+	cmake_src_configure .
 	popd
 	unset CMAKE_BUILD_DIR
 	######
