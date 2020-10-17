@@ -135,6 +135,7 @@ src_prepare() {
 }
 
 src_configure() {
+	S="${WORKDIR}/${MY_P}"
 	local mycxxflags=(
 		-Wno-deprecated-declarations
 		-Wno-error=deprecated-declarations
