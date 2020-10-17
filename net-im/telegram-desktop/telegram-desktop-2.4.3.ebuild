@@ -91,10 +91,13 @@ src_prepare(){
 	default
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
-	mv "${WORKDIR}"/tg_owt-master Libraries/tg_owt
+	cp -r "${WORKDIR}"/tg_owt-master Libraries/tg_owt
+	mkdir "${WORKDIR}"/Libraries
+	mv "${WORKDIR}"/tg_owt-master "${WORKDIR}"/Libraries/tg_owt
 	pushd Libraries
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -115,6 +118,8 @@ src_configure() {
 		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include/openssl \
 		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus \
 		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include/ffmpeg
+		-DTDESKTOP_API_ID="611335"
+		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
 	cmake_src_configure
 	popd
