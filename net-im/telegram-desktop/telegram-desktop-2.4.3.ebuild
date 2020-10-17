@@ -93,7 +93,7 @@ src_prepare(){
 	mkdir Libraries
 	mv "${WORKDIR}"/tg_owt-master Libraries/tg_owt
 	pushd Libraries/tg_owt
-	eapply "${FILESDIR}0002-tg_owt-fix-name-confliction.patch"
+	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
 }
 
