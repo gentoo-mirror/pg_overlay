@@ -121,7 +121,7 @@ src_configure() {
 		-DTDESKTOP_API_ID="611335"
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
-	#cmake_src_configure tg_owt
+	cmake_src_configure
 	popd
 	######
 
@@ -129,7 +129,7 @@ src_configure() {
 	# it fals with tl-expected-1.0.0, so we use bundled for now to avoid git rev snapshots
 	# EXPECTED VARIANT
 	# gtk is really needed for image copy-paste due to https://bugreports.qt.io/browse/QTBUG-56595
-	local mycmakeargs+=(
+	local mycmakeargs=(
 		-DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 		-DDESKTOP_APP_USE_PACKAGED=ON
