@@ -141,7 +141,7 @@ src_prepare() {
 	cmake_src_prepare
 	default
 	einfo +++++++
-	einfo $S
+	einfo $(pwd)
 	einfo +++++++
 	}
 
