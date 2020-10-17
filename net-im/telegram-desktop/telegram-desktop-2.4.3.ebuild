@@ -142,6 +142,7 @@ src_prepare() {
 	einfo +++++++
 	einfo $S
 	einfo +++++++
+	pushd $S
 }
 
 src_configure() {
