@@ -99,6 +99,15 @@ twg_prepare(){
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
 	cmake_src_prepare
+	#mkdir -p out/Gentoo
+	#cp libtwg_out.a out/Gentoo
+	#unset BUILD_DIR
+}
+
+twg_configure() {
+	twg_prepare
+	pushd ${WORKDIR}/Libraries/tg_owt
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
 	local mycmakeargs=(
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
@@ -111,14 +120,17 @@ twg_prepare(){
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
 	cmake_src_configure
-	cmake_src_compile
-	#mkdir -p out/Gentoo
-	#cp libtwg_out.a out/Gentoo
-	#unset BUILD_DIR
 }
 
+twg_compile() {
+	twg_configure
+	pushd ${WORKDIR}/Libraries/tg_owt
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
+	cmake_src_compile
+}	
+
 src_prepare() {
-	twg_prepare
+	twg_compile
 	cmake_src_prepare
 }
 
