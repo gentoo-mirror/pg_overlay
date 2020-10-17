@@ -88,6 +88,7 @@ pkg_pretend() {
 }
 
 twg_prepare(){
+	S=${WORKDIR}/Libraries/tg_owt
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
 	cp -r "${WORKDIR}"/tg_owt-master Libraries/tg_owt
@@ -105,6 +106,7 @@ twg_prepare(){
 
 twg_configure() {
 	twg_prepare
+	S=${WORKDIR}/Libraries/tg_owt
 	pushd ${WORKDIR}/Libraries/tg_owt
 	local mycmakeargs=(
 		-G Ninja \
@@ -123,6 +125,7 @@ twg_configure() {
 
 twg_compile() {
 	twg_configure
+	S=${WORKDIR}/Libraries/tg_owt
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
