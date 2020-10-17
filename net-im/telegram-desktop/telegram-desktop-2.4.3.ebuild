@@ -116,6 +116,8 @@ src_configure() {
 		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include/openssl \
 		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus \
 		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include/ffmpeg
+		-DTDESKTOP_API_ID="611335"
+		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
 	cmake_src_configure
 	popd
