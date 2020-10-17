@@ -130,7 +130,8 @@ twg_compile() {
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
 	cp libtwg_out.a out/Gentoo
-	#unset BUILD_DIR
+	mkdir -p out/Gentoo
+	cp libtwg_out.a out/Gentoo
 }	
 
 src_prepare() {
