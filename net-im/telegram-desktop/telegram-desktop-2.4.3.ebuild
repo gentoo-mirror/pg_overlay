@@ -92,7 +92,7 @@ src_prepare(){
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
 	mv "${WORKDIR}"/tg_owt-master Libraries/tg_owt
-	pushd Libraries/tg_owt
+	pushd Libraries
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
 }
