@@ -127,6 +127,7 @@ twg_compile() {
 	mkdir -p out/Gentoo
 	cp libtwg_out.a out/Gentoo
 	unset S
+	S="${WORKDIR}/${MY_P}"
 }	
 
 src_prepare() {
@@ -134,6 +135,7 @@ src_prepare() {
 	S="${WORKDIR}/${MY_P}"
 }
 
+S="${WORKDIR}/${MY_P}"
 src_configure() {
 	S="${WORKDIR}/${MY_P}"
 	local mycxxflags=(
