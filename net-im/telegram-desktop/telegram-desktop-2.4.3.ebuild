@@ -119,7 +119,7 @@ twg(){
 }
 
 src_prepare() {
-	twg
+	_twg
 }
 
 src_configure() {
