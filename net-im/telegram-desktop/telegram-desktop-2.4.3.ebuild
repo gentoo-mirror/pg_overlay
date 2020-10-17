@@ -97,8 +97,7 @@ twg_prepare(){
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
 	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
-	cmake_src_prepare
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_prepare
 	#mkdir -p out/Gentoo
 	#cp libtwg_out.a out/Gentoo
 	#unset BUILD_DIR
@@ -107,7 +106,6 @@ twg_prepare(){
 twg_configure() {
 	twg_prepare
 	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
 	local mycmakeargs=(
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
@@ -119,19 +117,19 @@ twg_configure() {
 		-DTDESKTOP_API_ID="611335" \
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
-	cmake_src_configure
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_configure
 }
 
 twg_compile() {
 	twg_configure
 	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
-	cmake_src_compile
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
+	mkdir -p out/Gentoo
+	cp libtwg_out.a out/Gentoo
 }	
 
 src_prepare() {
-	twg_prepare
-	cmake_src_prepare
+	twg_compile
 }
 
 src_configure() {
