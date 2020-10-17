@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{7..9} )
 
-inherit cmake desktop flag-o-matic python-any-r1 xdg-utils
+inherit cmake desktop flag-o-matic python-any-r1 xdg-utils toolchain-funcs
 
 MY_P="tdesktop-${PV}-full"
 
@@ -87,8 +87,7 @@ pkg_pretend() {
 	fi
 }
 
-src_prepare(){
-	default
+twg_prepare(){
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
 	cp -r "${WORKDIR}"/tg_owt-master Libraries/tg_owt
@@ -98,8 +97,16 @@ src_prepare(){
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
 	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
-	cmake_src_prepare
+	#BUILD_DIR="${WORKDIR}/Libraries/tg_owt" 
+	CMAKE_IN_SOURCE_BUILD cmake_src_prepare
+	#mkdir -p out/Gentoo
+	#cp libtwg_out.a out/Gentoo
+	#unset BUILD_DIR
+}
+
+twg_configure() {
+	twg_prepare
+	pushd ${WORKDIR}/Libraries/tg_owt
 	local mycmakeargs=(
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
@@ -111,10 +118,23 @@ src_prepare(){
 		-DTDESKTOP_API_ID="611335" \
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
-	#cmake_src_configure
-	#cmake_src_compile
-	#mkdir -p out/Gentoo
-	#cp libtwg_out.a out/Gentoo
+	#BUILD_DIR="${WORKDIR}/Libraries/tg_owt" 
+	CMAKE_IN_SOURCE_BUILD cmake_src_configure
+	#unset BUILD_DIR
+}
+
+twg_compile() {
+	twg_configure
+	pushd ${WORKDIR}/Libraries/tg_owt
+	#BUILD_DIR="${WORKDIR}/Libraries/tg_owt" 
+	CMAKE_IN_SOURCE_BUILD cmake_src_compile
+	mkdir -p out/Gentoo
+	cp libtwg_out.a out/Gentoo
+	#unset BUILD_DIR
+}	
+
+src_prepare() {
+	twg_compile
 }
 
 src_configure() {
