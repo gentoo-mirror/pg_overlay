@@ -118,6 +118,10 @@ twg(){
 	unset BUILD_DIR
 }
 
+cmake_src_prepare() {
+	twg
+}
+
 src_configure() {
 	local mycxxflags=(
 		-Wno-deprecated-declarations
