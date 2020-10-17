@@ -128,6 +128,7 @@ twg_compile() {
 	cp libtwg_out.a out/Gentoo
 	unset S
 	S="${WORKDIR}/${MY_P}"
+	popd
 }	
 
 src_prepare() {
