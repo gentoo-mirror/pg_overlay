@@ -191,7 +191,7 @@ src_configure() {
 		)
 	fi
 
-	cmake_src_configure
+	cmake_src_configure $S
 	einfo $S
 }
 
