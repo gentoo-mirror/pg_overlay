@@ -125,7 +125,7 @@ twg_compile() {
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
-	cp libtg_out.a out/Gentoo
+	cp libtg_owt.a out/Gentoo
 	unset S
 	S="${WORKDIR}/${MY_P}"
 	popd
@@ -135,7 +135,10 @@ src_prepare() {
 	twg_compile
 	S="${WORKDIR}/${MY_P}"
 	cd $S
-	cmake_src_prepare	
+	cmake_src_prepare
+	einfo +++++++
+	einfo $S
+	einfo +++++++
 }
 
 S="${WORKDIR}/${MY_P}"
@@ -191,9 +194,6 @@ src_configure() {
 		)
 	fi
 
-	einfo +++++++
-	einfo $S
-	einfo +++++++
 	cmake_src_configure
 	einfo +++++++
 	einfo $S
