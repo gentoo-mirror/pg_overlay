@@ -91,7 +91,7 @@ src_prepare(){
 	default
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
-	mv tg_owt-master Libraries/tg_owt
+	mv "${WORKDIR}"/tg_owt-master Libraries/tg_owt
 	eapply "${FILESDIR}0002-tg_owt-fix-name-confliction.patch" -d Libraries/tg_owt
 }
 
