@@ -101,20 +101,20 @@ src_prepare(){
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
 	cmake_src_prepare
 	local mycmakeargs=(
-		-G Ninja
-		-DCMAKE_BUILD_TYPE=Release
-		-DTG_OWT_SPECIAL_TARGET=linux
-		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include
-		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include/openssl
-		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus
-		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include/ffmpeg
-		-DTDESKTOP_API_ID="611335"
+		-G Ninja \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DTG_OWT_SPECIAL_TARGET=linux \
+		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include \
+		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include/openssl \
+		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus \
+		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include/ffmpeg \
+		-DTDESKTOP_API_ID="611335" \
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
-	cmake_src_configure
-	cmake_src_compile
-	mkdir -p out/Gentoo
-	cp libtwg_out.a out/Gentoo
+	#cmake_src_configure
+	#cmake_src_compile
+	#mkdir -p out/Gentoo
+	#cp libtwg_out.a out/Gentoo
 }
 
 src_configure() {
