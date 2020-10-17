@@ -109,7 +109,7 @@ src_configure() {
 
 	#######
 	pushd Libraries/tg_owt
-	local mycmakeargs=(
+	local mycmakeargs1=(
 		-DCMAKE_BUILD_TYPE=Release \
 		-DTG_OWT_SPECIAL_TARGET=linux \
 		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include \
@@ -119,7 +119,7 @@ src_configure() {
 		-DTDESKTOP_API_ID="611335"
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
-	cmake_src_configure
+	cmake_src_configure mycmakeargs1
 	popd
 	######
 
