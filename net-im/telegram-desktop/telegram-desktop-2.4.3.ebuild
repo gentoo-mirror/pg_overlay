@@ -110,7 +110,9 @@ src_configure() {
 	append-cxxflags "${mycxxflags[@]}"
 
 	#######
-	pushd Libraries/tg_owt
+	unset CMAKE_BUILD_DIR
+	pushd ${WORKDIR}/Libraries/tg_owt
+	CMAKE_BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release \
 		-DTG_OWT_SPECIAL_TARGET=linux \
@@ -123,6 +125,7 @@ src_configure() {
 	)
 	cmake_src_configure
 	popd
+	unset CMAKE_BUILD_DIR
 	######
 
 	# TODO: unbundle header-only libs, ofc telegram uses git versions...
@@ -133,9 +136,6 @@ src_configure() {
 		-DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 		-DDESKTOP_APP_USE_PACKAGED=ON
-		-DDESKTOP_APP_USE_PACKAGED_EXPECTED=OFF
-		-DDESKTOP_APP_USE_PACKAGED_RLOTTIE=OFF
-		-DDESKTOP_APP_USE_PACKAGED_VARIANT=OFF
 		-DTDESKTOP_DISABLE_GTK_INTEGRATION="$(usex gtk OFF ON)"
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION="$(usex dbus OFF ON)"
