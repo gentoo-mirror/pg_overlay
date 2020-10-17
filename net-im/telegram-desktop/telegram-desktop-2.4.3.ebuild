@@ -95,6 +95,7 @@ src_prepare(){
 	pushd Libraries
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
+	cmake_src_prepare
 }
 
 src_configure() {
