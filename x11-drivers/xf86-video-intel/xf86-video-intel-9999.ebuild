@@ -53,13 +53,9 @@ RDEPEND="
 DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
 
-src_prepare() {
-	default
+src_configure() {
 	sed -i s/master/primary/g src/sna/sna_accel.c
 	sed -i s/slave/secondary/g src/sna/sna_accel.c
-}
-
-src_configure() {
 	replace-flags -Os -O2
 	XORG_CONFIGURE_OPTIONS=(
 		--disable-dri1
