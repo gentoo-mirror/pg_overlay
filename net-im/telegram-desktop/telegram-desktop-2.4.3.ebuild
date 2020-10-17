@@ -119,7 +119,8 @@ twg_prepare(){
 }
 
 src_prepare() {
-	twg
+	default
+	twg_prepare
 }
 
 src_configure() {
