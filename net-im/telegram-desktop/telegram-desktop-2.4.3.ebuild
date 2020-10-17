@@ -88,7 +88,6 @@ pkg_pretend() {
 }
 
 twg_prepare(){
-	default
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
 	cp -r "${WORKDIR}"/tg_owt-master Libraries/tg_owt
@@ -99,7 +98,6 @@ twg_prepare(){
 	popd
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
-	cmake_src_prepare
 	local mycmakeargs=(
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
@@ -119,8 +117,8 @@ twg_prepare(){
 }
 
 src_prepare() {
-	default
 	twg_prepare
+	default
 }
 
 src_configure() {
