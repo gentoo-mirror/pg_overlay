@@ -98,7 +98,7 @@ twg_prepare(){
 	popd
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
-	#cmake_src_prepare
+	cmake_src_prepare
 	local mycmakeargs=(
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release \
