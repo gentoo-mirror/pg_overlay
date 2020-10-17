@@ -132,6 +132,7 @@ twg_compile() {
 	popd
 }	
 
+S="${WORKDIR}/${MY_P}"
 src_prepare() {
 	twg_compile
 	einfo +++++++
@@ -139,9 +140,7 @@ src_prepare() {
 	einfo +++++++
 }
 
-S="${WORKDIR}/${MY_P}"
 src_configure() {
-	S="${WORKDIR}/${MY_P}"
 	local mycxxflags=(
 		-Wno-deprecated-declarations
 		-Wno-error=deprecated-declarations
