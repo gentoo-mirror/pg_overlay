@@ -192,7 +192,7 @@ src_configure() {
 	fi
 
 	cmake_src_configure
-	einfo S
+	einfo $S
 }
 
 pkg_postinst() {
