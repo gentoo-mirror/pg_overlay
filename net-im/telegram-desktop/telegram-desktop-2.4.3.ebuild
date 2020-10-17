@@ -137,13 +137,13 @@ src_prepare() {
 	twg_compile
 	S="${WORKDIR}/${MY_P}"
 	BUILD_DIR="${WORKDIR}/${MY_P}_build"
+	pushd $S
 	cmake_src_prepare
 	default
 	einfo +++++++
 	einfo $S
 	einfo +++++++
-	pushd $S
-}
+	}
 
 src_configure() {
 	local mycxxflags=(
