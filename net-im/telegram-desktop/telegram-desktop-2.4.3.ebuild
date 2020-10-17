@@ -87,7 +87,7 @@ pkg_pretend() {
 	fi
 }
 
-src_prepare(){
+twg(){
 	default
 	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
@@ -115,6 +115,7 @@ src_prepare(){
 	#cmake_src_compile
 	#mkdir -p out/Gentoo
 	#cp libtwg_out.a out/Gentoo
+	unset BUILD_DIR
 }
 
 src_configure() {
