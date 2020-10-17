@@ -97,7 +97,24 @@ src_prepare(){
 	pushd "${WORKDIR}"/Libraries
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
+	pushd ${WORKDIR}/Libraries/tg_owt
+	BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
 	cmake_src_prepare
+	local mycmakeargs=(
+		-G Ninja \
+		-DCMAKE_BUILD_TYPE=Release \
+		-DTG_OWT_SPECIAL_TARGET=linux \
+		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include \
+		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include/openssl \
+		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus \
+		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include/ffmpeg \
+		-DTDESKTOP_API_ID="611335" \
+		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
+	)
+	#cmake_src_configure
+	#cmake_src_compile
+	#mkdir -p out/Gentoo
+	#cp libtwg_out.a out/Gentoo
 }
 
 src_configure() {
@@ -110,23 +127,7 @@ src_configure() {
 	append-cxxflags "${mycxxflags[@]}"
 
 	#######
-	unset CMAKE_BUILD_DIR
-	pushd ${WORKDIR}/Libraries/tg_owt
-	CMAKE_BUILD_DIR="${WORKDIR}/Libraries/tg_owt"
-	local mycmakeargs=(
-		-G Ninja
-		-DCMAKE_BUILD_TYPE=Release
-		-DTG_OWT_SPECIAL_TARGET=linux
-		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include
-		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include/openssl
-		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus
-		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include/ffmpeg
-		-DTDESKTOP_API_ID="611335"
-		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
-	)
-	cmake_src_configure ${WORKDIR}/Libraries/tg_owt
-	popd
-	unset CMAKE_BUILD_DIR
+
 	######
 
 	# TODO: unbundle header-only libs, ofc telegram uses git versions...
