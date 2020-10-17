@@ -100,7 +100,7 @@ twg_prepare(){
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_prepare
 	#mkdir -p out/Gentoo
 	#cp libtwg_out.a out/Gentoo
-	#unset BUILD_DIR
+	unset BUILD_DIR
 }
 
 twg_configure() {
@@ -118,6 +118,7 @@ twg_configure() {
 		-DTDESKTOP_API_HASH="d524b414d21f4d37f08684c1df41ac9c"
 	)
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_configure
+	unset BUILD_DIR
 }
 
 twg_compile() {
@@ -126,6 +127,7 @@ twg_compile() {
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
 	cp libtwg_out.a out/Gentoo
+	unset BUILD_DIR
 }	
 
 src_prepare() {
