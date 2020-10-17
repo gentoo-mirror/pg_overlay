@@ -130,7 +130,7 @@ twg_compile() {
 }	
 
 src_prepare() {
-	twg_compile
+	twg_configure
 	cmake_src_prepare
 }
 
