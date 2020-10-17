@@ -133,9 +133,6 @@ twg_compile() {
 
 src_prepare() {
 	twg_compile
-	S="${WORKDIR}/${MY_P}"
-	cd $S
-	cmake_src_prepare
 	einfo +++++++
 	einfo $S
 	einfo +++++++
