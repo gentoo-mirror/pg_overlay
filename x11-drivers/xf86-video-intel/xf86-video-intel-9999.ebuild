@@ -54,6 +54,7 @@ DEPEND="${RDEPEND}
 	x11-base/xorg-proto"
 
 src_prepare() {
+	deafult
 	sed -i s/master/primary/g src/sna/sna_accel.c
 	sed -i s/slave/secondary/g src/sna/sna_accel.c
 }
