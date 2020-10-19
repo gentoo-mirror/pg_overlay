@@ -127,18 +127,11 @@ twg_compile() {
 	popd
 }	
 
-S="${WORKDIR}/${MY_P}"
 src_prepare() {
 	twg_compile
-	S="${WORKDIR}/${MY_P}"
-	BUILD_DIR="${WORKDIR}/${MY_P}_build"
-	pushd $S
 	cmake_src_prepare
 	default
-	einfo +++++++
-	einfo $(pwd)
-	einfo +++++++
-	}
+}
 
 src_configure() {
 	local mycxxflags=(
@@ -192,9 +185,6 @@ src_configure() {
 	fi
 
 	cmake_src_configure
-	einfo +++++++
-	einfo $S
-	einfo +++++++
 }
 
 pkg_postinst() {
