@@ -15,7 +15,7 @@ if [[ ${PV} = *9999* ]]; then
 	if [[ ${PV} != 9999 ]]; then
 		EGIT_BRANCH="Plasma/$(ver_cut 1-2)"
 	fi
-	EGIT_REPO_URI="https://gitlab.com/kwinft/kwinft.git"
+	EGIT_REPO_URI="https://gitlab.com/${PN}/${PN}.git"
 	inherit git-r3
 else
 	SRC_URI="https://gitlab.com/${PN}/${PN}/-/archive/${P/-/@}/${PN}-${P/-/@}.tar.gz"
@@ -71,7 +71,7 @@ COMMON_DEPEND="
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/libepoxy
-	media-libs/mesa[egl,gbm,wayland,X(+)]
+	media-libs/mesa[egl,gbm,wayland?,X(+)]
 	virtual/libudev:=
 	x11-libs/libICE
 	x11-libs/libSM

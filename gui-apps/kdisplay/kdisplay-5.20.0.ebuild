@@ -13,7 +13,7 @@ if [[ ${PV} = *9999* ]]; then
 	if [[ ${PV} != 9999 ]]; then
 		EGIT_BRANCH="Plasma/$(ver_cut 1-2)"
 	fi
-	EGIT_REPO_URI="https://gitlab.com/kwinft/wrapland.git"
+	EGIT_REPO_URI="https://gitlab.com/kwinft/${PN}.git"
 	inherit git-r3
 else
 	SRC_URI="https://gitlab.com/kwinft/${PN}/-/archive/${P/-/@}/${PN}-${P/-/@}.tar.gz"
@@ -21,7 +21,7 @@ else
 	KEYWORDS="~amd64"
 fi
 
-DESCRIPTION="Small display management app. KScreen replacement"
+DESCRIPTION="A small display management app. KScreen replacement"
 HOMEPAGE="https://gitlab.com/kwinft/kdisplay"
 
 LICENSE="GPL-2" # TODO: CHECK

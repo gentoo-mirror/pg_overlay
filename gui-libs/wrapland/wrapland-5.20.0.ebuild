@@ -12,7 +12,7 @@ if [[ ${PV} = *9999* ]]; then
 	if [[ ${PV} != 9999 ]]; then
 		EGIT_BRANCH="Plasma/$(ver_cut 1-2)"
 	fi
-	EGIT_REPO_URI="https://gitlab.com/kwinft/wrapland.git"
+	EGIT_REPO_URI="https://gitlab.com/kwinft/${PN}.git"
 	inherit git-r3
 else
 	MY_PV=0.${PV/./}
