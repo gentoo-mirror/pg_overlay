@@ -102,6 +102,9 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/waybar:mpd - Enable support for the Music Player Daemon
 gui-apps/waybar:network - Enable libnl support for network related features
 gui-apps/waybar:tray - Enable support for tray
+gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
+gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
+gui-wm/kwinft:tools - Build internal tools for performance analysis at runtime.
 kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
