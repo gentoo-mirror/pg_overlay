@@ -1,0 +1,41 @@
+changeset:   552978:b50cb0696eef
+tag:         tip
+parent:      552976:2ce12e3e063c
+user:        stransky <stransky@redhat.com>
+date:        Fri Oct 02 12:19:53 2020 +0200
+files:       widget/gtk/WindowSurfaceWayland.cpp
+description:
+Bug 1668771 [Wayland] Use timeout for frame callbacks for basic compositor, r?jhorak
+
+Differential Revision: https://phabricator.services.mozilla.com/D92200
+
+
+diff --git a/widget/gtk/WindowSurfaceWayland.cpp b/widget/gtk/WindowSurfaceWayland.cpp
+--- a/widget/gtk/WindowSurfaceWayland.cpp
++++ b/widget/gtk/WindowSurfaceWayland.cpp
+@@ -37,6 +37,9 @@ extern mozilla::LazyLogModule gWidgetWay
+ // Maximal compositing timeout it miliseconds
+ #define COMPOSITING_TIMEOUT 200
+ 
++// Maximal timeout between frame callbacks
++#define FRAME_CALLBACK_TIMEOUT 20
++
+ namespace mozilla {
+ namespace widget {
+ 
+@@ -941,8 +944,12 @@ void WindowSurfaceWayland::CommitWayland
+     if (waylandSurface == mLastCommittedSurface) {
+       LOGWAYLAND(("    [%p] wait for frame callback.\n", (void*)this));
+       // We have an active frame callback pending from our recent surface.
+-      // It means we should defer the commit to FrameCallbackHandler().
+-      return;
++      // It means we should defer the commit to FrameCallbackHandler(),
++      // but only if we're under frame callback timeout range.
++      if (mLastCommitTime && (g_get_monotonic_time() / 1000) - mLastCommitTime <
++                                 FRAME_CALLBACK_TIMEOUT) {
++        return;
++      }
+     }
+     // If our stored wl_surface does not match the actual one it means the frame
+     // callback is no longer active and we should release it.
+

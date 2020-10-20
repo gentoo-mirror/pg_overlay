@@ -1,7 +1,8 @@
 mozilla-nongnome-proxies.patch
 mozilla-kde.patch
-mozilla-ntlm-full-path.patch
 mozilla-sandbox-fips.patch
+mozilla-fix-aarch64-libopus.patch
+mozilla-disable-wasm-emulate-arm-unaligned-fp-access.patch
 mozilla-reduce-rust-debuginfo.patch
 mozilla-bmo1005535.patch
 mozilla-bmo1568145.patch
@@ -13,10 +14,12 @@ mozilla-bmo1512162.patch
 mozilla-fix-top-level-asm.patch
 mozilla-bmo1504834-part4.patch
 mozilla-bmo849632.patch
+mozilla-pipewire-0-3.patch
 mozilla-bmo1602730.patch
 mozilla-bmo998749.patch
 mozilla-bmo1626236.patch
 mozilla-libavcodec58_91.patch
+revert-795c8762b16b.patch
 
 firefox-kde.patch
 firefox-branded-icons.patch
