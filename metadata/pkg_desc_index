@@ -10,6 +10,7 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/acme 1.9.0: An implementation of the ACME protocol
 app-crypt/certbot 1.9.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.9.0: Nginx plugin for certbot (Let's Encrypt Client)
+app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/virtualbox 6.1.14a: Family of powerful x86 virtualization products for enterprise and home use
@@ -142,6 +143,7 @@ gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
+kde-frameworks/sonnet 5.75.0: Framework for providing spell-checking through abstraction of popular backends
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.20.0: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 78.3.3: Thunderbird Mail Client
