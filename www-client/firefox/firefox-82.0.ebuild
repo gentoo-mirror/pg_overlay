@@ -634,6 +634,7 @@ src_configure() {
 			if use clang ; then
 				# Used in build/pgo/profileserver.py
 				export LLVM_PROFDATA="llvm-profdata"
+				mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
 			fi
 		fi
 	else
@@ -1016,7 +1017,7 @@ src_install() {
 	insinto "${MOZILLA_FIVE_HOME}/distribution"
 	#######
 	if use privacy; then 
-		newins "${FILESDIR}"/enable-privacy.json policies.json
+		newins "${FILESDIR}"/enable-privacy.policy.json policies.json
 	else
 		newins "${FILESDIR}"/disable-auto-update.policy.json policies.json
 	fi
