@@ -98,7 +98,7 @@ src_configure() {
 
 	local myconf=(
 		--shared-brotli
-		--shared-cares
+		#--shared-cares
 		--shared-libuv
 		--shared-nghttp2
 		--shared-zlib
