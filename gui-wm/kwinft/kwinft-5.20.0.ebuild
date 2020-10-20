@@ -71,7 +71,7 @@ COMMON_DEPEND="
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/libepoxy
-	media-libs/mesa[egl,gbm,wayland?,X(+)]
+	media-libs/mesa[egl,gbm,X(+)]
 	virtual/libudev:=
 	x11-libs/libICE
 	x11-libs/libSM
