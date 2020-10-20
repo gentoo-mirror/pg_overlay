@@ -28,7 +28,9 @@ app-portage/eix 0.34.9: Search and query ebuilds
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
+app-text/enchant 2.2.12: Spellchecker wrapping library
 app-text/goldendict 9999: Feature-rich dictionary lookup program
+app-text/nuspell 4.0.0: Spell checker library and CLI for complex natural languages
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
