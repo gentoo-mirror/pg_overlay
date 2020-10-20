@@ -3,10 +3,9 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-81-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-82-patches-01.tar.xz"
 
 LLVM_MAX_SLOT=11
-MOZCONFIG_OPTIONAL_JIT=1
 
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
@@ -17,10 +16,16 @@ VIRTUALX_REQUIRED="pgo"
 
 MOZ_ESR=
 
-# Convert the ebuild version to the upstream mozilla version, used by mozlinguas
-MOZ_PV="${PV/_alpha/a}"    # Handle alpha for SRC_URI
-MOZ_PV="${MOZ_PV/_beta/b}" # Handle beta for SRC_URI
-MOZ_PV="${MOZ_PV%%_rc*}"   # Handle rc for SRC_URI
+MOZ_PV=${PV}
+MOZ_PV_SUFFIX=
+if [[ ${PV} =~ (_(alpha|beta|rc).*)$ ]] ; then
+	MOZ_PV_SUFFIX=${BASH_REMATCH[1]}
+
+	# Convert the ebuild version to the upstream Mozilla version
+	MOZ_PV="${MOZ_PV/_alpha/a}" # Handle alpha for SRC_URI
+	MOZ_PV="${MOZ_PV/_beta/b}"  # Handle beta for SRC_URI
+	MOZ_PV="${MOZ_PV%%_rc*}"    # Handle rc for SRC_URI
+fi
 
 if [[ -n ${MOZ_ESR} ]] ; then
 	# ESR releases have slightly different version numbers
@@ -29,6 +34,8 @@ fi
 
 MOZ_PN="${PN%-bin}"
 MOZ_P="${MOZ_PN}-${MOZ_PV}"
+MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
+MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
 inherit autotools check-reqs desktop flag-o-matic gnome2-utils llvm \
 	multiprocessing pax-utils python-any-r1 toolchain-funcs \
@@ -44,7 +51,7 @@ PATCH_URIS=(
 	https://dev.gentoo.org/~{axs,polynomial-c,whissi}/mozilla/patchsets/${FIREFOX_PATCHSET}
 )
 
-SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz
+SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.sources.tar.xz
 	${PATCH_URIS[@]}"
 
 DESCRIPTION="Firefox Web Browser"
@@ -58,7 +65,7 @@ IUSE="clang cpu_flags_arm_neon dbus debug eme-free geckodriver +gmp-autoupdate
 	hardened hwaccel jack lto +openh264 pgo pulseaudio screencast selinux
 	+system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent
 	+system-libvpx +system-webp wayland wifi
-	+jit +kde"
+	+jit +kde +privacy"
 
 REQUIRED_USE="screencast? ( wayland )"
 
@@ -98,8 +105,8 @@ BDEPEND="${PYTHON_DEPS}
 	)"
 
 CDEPEND="
-	>=dev-libs/nss-3.56
-	>=dev-libs/nspr-4.28
+	>=dev-libs/nss-3.57
+	>=dev-libs/nspr-4.29
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
@@ -233,7 +240,7 @@ mozilla_set_globals() {
 		fi
 
 		SRC_URI+=" l10n_${xflag/[_@]/-}? ("
-		SRC_URI+=" ${MOZ_SRC_BASE_URI}/linux-x86_64/xpi/${lang}.xpi -> ${MOZ_P}-${lang}.xpi"
+		SRC_URI+=" ${MOZ_SRC_BASE_URI}/linux-x86_64/xpi/${lang}.xpi -> ${MOZ_P_DISTFILES}-${lang}.xpi"
 		SRC_URI+=" )"
 		IUSE+=" l10n_${xflag/[_@]/-}"
 	done
@@ -357,7 +364,7 @@ pkg_pretend() {
 		if use pgo || use lto || use debug ; then
 			CHECKREQS_DISK_BUILD="13G"
 		else
-			CHECKREQS_DISK_BUILD="5G"
+			CHECKREQS_DISK_BUILD="5600M"
 		fi
 
 		check-reqs_pkg_pretend
@@ -376,7 +383,7 @@ pkg_setup() {
 		if use pgo || use lto || use debug ; then
 			CHECKREQS_DISK_BUILD="13G"
 		else
-			CHECKREQS_DISK_BUILD="5G"
+			CHECKREQS_DISK_BUILD="5600M"
 		fi
 
 		check-reqs_pkg_setup
@@ -566,14 +573,20 @@ src_configure() {
 		# Force clang
 		einfo "Enforcing the use of clang due to USE=clang ..."
 		have_switched_compiler=yes
+		AR=llvm-ar
 		CC=${CHOST}-clang
 		CXX=${CHOST}-clang++
+		NM=llvm-nm
+		RANLIB=llvm-ranlib
 	elif ! use clang && ! tc-is-gcc ; then
 		# Force gcc
 		have_switched_compiler=yes
 		einfo "Enforcing the use of gcc due to USE=-clang ..."
+		AR=gcc-ar
 		CC=${CHOST}-gcc
 		CXX=${CHOST}-g++
+		NM=gcc-nm
+		RANLIB=gcc-ranlib
 	fi
 
 	if [[ -n "${have_switched_compiler}" ]] ; then
@@ -618,7 +631,11 @@ src_configure() {
 
 		if use pgo ; then
 			mozconfig_add_options_ac '+pgo' MOZ_PGO=1
-			mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
+
+			if use clang ; then
+				# Used in build/pgo/profileserver.py
+				export LLVM_PROFDATA="llvm-profdata"
+			fi
 		fi
 	else
 		# Avoid auto-magic on linker
@@ -944,7 +961,6 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	#echo "export RUSTFLAGS='-Cdebuginfo=0 -Clink-args=-Wl,-O2 -Clink-args=-Wl,--as-needed -Clink-args=-Wl,--gc-sections -Clink-args=-Wl,--icf=all -Clink-args=-Wl,--lto-O3 -Clink-args=-Wl,--thinlto-jobs=9 -Clink-args=-Wl,-z,norelro -Clink-args=-fuse-ld=lld -Clink-args=-stdlib=libc++ -Clink-args=-rtlib=compiler-rt -Clink-args=-unwindlib=libunwind -Clink-args=-march=native -Clink-args=-mtune=native -Clink-args=-O3 -Clink-args=-pipe -Clink-args=-mllvm -Clink-args=-polly -Clink-args=-fdata-sections -Clink-args=-ffunction-sections -Clink-args=-flto=thin -Clink-args=-fomit-frame-pointer -Clink-args=-fslp-vectorize -Clink-args=-fvectorize -Clink-args=-fno-asynchronous-unwind-tables -Clink-args=-fno-common -Clink-args=-fno-plt -Clink-args=-fno-stack-protector -Clink-args=-fno-unwind-tables -Clinker-plugin-lto -Clto=thin -Copt-level=3 -Ctarget-cpu=native'" >> "${S}"/.mozconfig
 	#######
 
 	echo
@@ -999,7 +1015,13 @@ src_install() {
 
 	# Install policy (currently only used to disable application updates)
 	insinto "${MOZILLA_FIVE_HOME}/distribution"
-	newins "${FILESDIR}"/disable-auto-update.policy.json policies.json
+	#######
+	if use privacy; then 
+		newins "${FILESDIR}"/enable-privacy.json policies.json
+	else
+		newins "${FILESDIR}"/disable-auto-update.policy.json policies.json
+	fi
+	#######
 
 	# Install system-wide preferences
 	local PREFS_DIR="${MOZILLA_FIVE_HOME}/browser/defaults/preferences"
@@ -1038,11 +1060,9 @@ src_install() {
 	fi
 
 	#######
-	if use kde ; then
-		cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js-1 >> \
-		"${GENTOO_PREFS}" \
-		|| die
-	fi
+	use kde && cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js-1 >> \
+	"${GENTOO_PREFS}" \
+	|| die
 
 	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js-1 >> \
 	"${GENTOO_PREFS}" \
