@@ -41,9 +41,6 @@ BDEPEND="
 DEPEND="
 	${RDEPEND}
 "
-PATCHES=(
-	"${FILESDIR}"/${PN}-10.3.0-global-npm-config.patch
-)
 RESTRICT="test"
 S="${WORKDIR}/node-v${PV}"
 
