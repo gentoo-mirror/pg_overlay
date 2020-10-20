@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://git.rockbox.org/rockbox.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="clang debug"
+IUSE="debug"
 
 RDEPEND="
 	dev-libs/crypto++:=
@@ -45,8 +45,6 @@ src_prepare() {
 
 	xdg_src_prepare
 	rm -rv quazip/ zlib/ || die
-
-	use clang && eapply -R "${FILESDIR}/rockbox_clang.patch"
 }
 
 src_configure() {

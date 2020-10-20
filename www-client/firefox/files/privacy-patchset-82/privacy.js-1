@@ -8,13 +8,18 @@ pref("browser.tabs.warnOnClose", false);
 pref("dom.enable_performance_observer", false);
 pref("extensions.blocklist.enabled", false);
 pref("general.warnOnAboutConfig", false);
+pref("media.peerconnection.ice.default_address_only", true);
 pref("middlemouse.contentLoadURL", false);
 pref("network.captive-portal-service.enabled", false);
+pref("network.http.sendRefererHeader", 0);
 pref("network.http.speculative-parallel-limit", 0);
 pref("network.prefetch-next", false);
 pref("network.traffic_analyzer.enabled", false);
+pref("privacy.resistFingerprinting", true);
 pref("startup.homepage_welcome_url", "about:blank");
-// disable geo
+//
+// Disable Geolocation
+//
 pref("browser.search.geoip.url", "");
 pref("browser.search.geoSpecificDefaults", false);
 pref("browser.search.geoSpecificDefaults.url", "");
@@ -24,7 +29,9 @@ pref("geo.provider.use_gpsd", false);
 pref("urlclassifier.downloadBlockTable", "");
 pref("urlclassifier.malwareTable", "");
 pref("urlclassifier.phishTable", "");
-// disable safebrowsing
+//
+// Disable Safebrowsing
+//
 pref("browser.safebrowsing.downloads.enabled", false);
 pref("browser.safebrowsing.downloads.remote.enabled", false);
 pref("browser.safebrowsing.downloads.remote.url", "");
@@ -49,13 +56,20 @@ pref("browser.safebrowsing.reportPhishURL", "");
 pref("privacy.trackingprotection.introURL", "");
 //
 pref("browser.bookmarks.showMobileBookmarks", false);
+//
+// Disable Pocket
+//
 pref("extensions.pocket.enabled", false);
-// disable telemetry
+pref("extensions.pocket.api", "");
+pref("extensions.pocket.site", "");
+pref("extensions.pocket.oAuthConsumerKey", "");
+//
+// Disable Telemetry
+//
 pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 pref("browser.newtabpage.activity-stream.telemetry", false);
 pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion", false);
 pref("browser.ping-centre.telemetry", false);
-
 pref("security.certerrors.recordEventTelemetry", false);
 pref("security.identitypopup.recordEventElemetry", false);
 pref("toolkit.telemetry.archive.enabled", false);
@@ -76,15 +90,25 @@ pref("toolkit.telemetry.server", "data:,");
 pref("toolkit.telemetry.server_owner", "");
 pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 pref("toolkit.telemetry.shutdownPingSender.enabledFirstSession", false);
+//
+pref("toolkit.telemetry.testing.overridePreRelease". true);
+pref("toolkit.telemetry.testing.overrideProductsCheck", true);
+//
 pref("toolkit.telemetry.updatePing.enabled", false);
 pref("toolkit.telemetry.unified", false);
 pref("toolkit.telemetry.unifiedIsOptIn", false);
-// disable experiments
+//
+// Disable Experiments
+//
 pref("experiments.activeExperiment", false);
 pref("experiments.enabled", false);
 pref("experiments.manifest.uri", "");
 pref("experiments.supported", false);
-// disable data report
+pref("network.allow-experiments", false);
+
+//
+// Disable Data reporting
+//
 pref("datareporting.healthreport.about.reportUrl", "0.0.0.0");
 pref("datareporting.healthreport.documentServerURI", "0.0.0.0");
 pref("datareporting.healthreport.uploadEnabled", false);
@@ -93,7 +117,9 @@ pref("datareporting.policy.dataSubmissionPolicyBypassNotification", true);
 pref("datareporting.policy.dataSubmissionPolicyVersion", 2);
 pref("datareporting.policy.firstRunTime", 0);
 pref("datareporting.policy.firstRunURL", "");
-// disable crash reports
+//
+// Disable Crash Reports
+//
 pref("breakpad.reportURL", "");
 pref("browser.crashReports.unsubmittedCheck.autoSubmit2", false);
 pref("browser.crashReports.unsubmittedCheck.enabled", false);
