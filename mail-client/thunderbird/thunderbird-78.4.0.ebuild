@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-esr-78-patches-03.tar.xz"
+FIREFOX_PATCHSET="firefox-78esr-patches-04.tar.xz"
 
 LLVM_MAX_SLOT=11
 MOZCONFIG_OPTIONAL_JIT=1
@@ -52,7 +52,7 @@ PATCH_URIS=(
 	https://dev.gentoo.org/~{axs,polynomial-c,whissi}/mozilla/patchsets/${FIREFOX_PATCHSET}
 )
 
-SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.sources.tar.xz
+SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
 	${PATCH_URIS[@]}"
 
 DESCRIPTION="Thunderbird Mail Client"
@@ -357,7 +357,7 @@ pkg_pretend() {
 		if use pgo || use lto || use debug ; then
 			CHECKREQS_DISK_BUILD="13G"
 		else
-			CHECKREQS_DISK_BUILD="5400M"
+			CHECKREQS_DISK_BUILD="5800M"
 		fi
 
 		check-reqs_pkg_pretend
@@ -376,7 +376,7 @@ pkg_setup() {
 		if use pgo || use lto || use debug ; then
 			CHECKREQS_DISK_BUILD="13G"
 		else
-			CHECKREQS_DISK_BUILD="5400M"
+			CHECKREQS_DISK_BUILD="5800M"
 		fi
 
 		check-reqs_pkg_setup
@@ -605,83 +605,8 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-application=comm/mail
 	mozconfig_add_options_ac '' --enable-calendar
 
-	if use lto ; then
-		if use clang ; then
-			#append-flags --target=x86_64-unknown-linux-gnu
-			#append-ldflags --target=x86_64-unknown-linux-gnu
-			# Upstream only supports lld when using clang
-			mozconfig_add_options_ac "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
-
-			mozconfig_add_options_ac '+lto' --enable-lto=cross
-			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=1
-			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=cross
-			mozconfig_add_options_ac '+lto-cross' MOZ_LTO_RUST=1
-		else
-			# Linking only works when using ld.gold when LTO is enabled
-			mozconfig_add_options_ac "forcing ld=gold due to USE=lto" --enable-linker=gold
-
-			# ThinLTO is currently broken, see bmo#1644409
-			mozconfig_add_options_ac '+lto' --enable-lto=full
-		fi
-
-		if use pgo ; then
-			mozconfig_add_options_ac '+pgo' MOZ_PGO=1
-			mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
-
-			if use clang ; then
-				# Used in build/pgo/profileserver.py
-				export LLVM_PROFDATA="llvm-profdata"
-			fi
-		fi
-	else
-		# Avoid auto-magic on linker
-		if use clang ; then
-			# This is upstream's default
-			mozconfig_add_options_ac "forcing ld=lld due to USE=clang" --enable-linker=lld
-		elif tc-ld-is-gold ; then
-			mozconfig_add_options_ac "linker is set to gold" --enable-linker=gold
-		else
-			mozconfig_add_options_ac "linker is set to bfd" --enable-linker=bfd
-		fi
-	fi
-
-	# LTO flag was handled via configure
-	filter-flags '-flto*'
-
-	mozconfig_use_enable debug
-	if use debug ; then
-		mozconfig_add_options_ac '+debug' --disable-optimize
-	else
-		if is-flag '-g*' ; then
-			if use clang ; then
-				mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols=$(get-flag '-g*')
-			else
-				mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols
-			fi
-		else
-			mozconfig_add_options_ac 'Gentoo default' --disable-debug-symbols
-		fi
-
-		if is-flag '-O0' ; then
-			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O0
-		elif is-flag '-O4' ; then
-			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O4
-		elif is-flag '-O3' ; then
-			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O3
-		elif is-flag '-O1' ; then
-			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O1
-		elif is-flag '-Os' ; then
-			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-Os
-		else
-			mozconfig_add_options_ac "Gentoo default" --enable-optimize=-O2
-		fi
-	fi
-
-	# Debug flag was handled via configure
-	filter-flags '-g*'
-
-	# Optimization flag was handled via configure
-	filter-flags '-O*'
+	# Set Gentoo defaults
+	export MOZILLA_OFFICIAL=1
 
 	mozconfig_add_options_ac 'Gentoo default' \
 		--allow-addon-sideload \
@@ -766,6 +691,81 @@ src_configure() {
 		mozconfig_add_options_ac '' --enable-default-toolkit=cairo-gtk3
 	fi
 
+	if use lto ; then
+		if use clang ; then
+			# Upstream only supports lld when using clang
+			mozconfig_add_options_ac "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
+
+			mozconfig_add_options_ac '+lto' --enable-lto=cross
+			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=cross
+			mozconfig_add_options_ac '+lto-cross' MOZ_LTO_RUST=1
+		else
+			# Linking only works when using ld.gold when LTO is enabled
+			mozconfig_add_options_ac "forcing ld=gold due to USE=lto" --enable-linker=gold
+
+			# ThinLTO is currently broken, see bmo#1644409
+			mozconfig_add_options_ac '+lto' --enable-lto=full
+		fi
+
+		if use pgo ; then
+			mozconfig_add_options_ac '+pgo' MOZ_PGO=1
+
+			if use clang ; then
+				# Used in build/pgo/profileserver.py
+				export LLVM_PROFDATA="llvm-profdata"
+				mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
+			fi
+		fi
+	else
+		# Avoid auto-magic on linker
+		if use clang ; then
+			# This is upstream's default
+			mozconfig_add_options_ac "forcing ld=lld due to USE=clang" --enable-linker=lld
+		elif tc-ld-is-gold ; then
+			mozconfig_add_options_ac "linker is set to gold" --enable-linker=gold
+		else
+			mozconfig_add_options_ac "linker is set to bfd" --enable-linker=bfd
+		fi
+	fi
+
+	# LTO flag was handled via configure
+	filter-flags '-flto*'
+
+	mozconfig_use_enable debug
+	if use debug ; then
+		mozconfig_add_options_ac '+debug' --disable-optimize
+	else
+		if is-flag '-g*' ; then
+			if use clang ; then
+				mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols=$(get-flag '-g*')
+			else
+				mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols
+			fi
+		else
+			mozconfig_add_options_ac 'Gentoo default' --disable-debug-symbols
+		fi
+
+		if is-flag '-O0' ; then
+			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O0
+		elif is-flag '-O4' ; then
+			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O4
+		elif is-flag '-O3' ; then
+			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O3
+		elif is-flag '-O1' ; then
+			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-O1
+		elif is-flag '-Os' ; then
+			mozconfig_add_options_ac "from CFLAGS" --enable-optimize=-Os
+		else
+			mozconfig_add_options_ac "Gentoo default" --enable-optimize=-O2
+		fi
+	fi
+
+	# Debug flag was handled via configure
+	filter-flags '-g*'
+
+	# Optimization flag was handled via configure
+	filter-flags '-O*'
+
 	# Modifications to better support ARM, bug #553364
 	if use cpu_flags_arm_neon ; then
 		mozconfig_add_options_ac '+cpu_flags_arm_neon' --with-fpu=neon
@@ -809,12 +809,12 @@ src_configure() {
 
 	# Additional ARCH support
 	case "${ARCH}" in
-		arm | ppc64)
+		arm)
 			# Reduce the memory requirements for linking
 			if use clang ; then
 				# Nothing to do
 				:;
-			elif tc-ld-is-gold ; then
+			elif tc-ld-is-gold || use lto ; then
 				append-ldflags -Wl,--no-keep-memory
 			else
 				append-ldflags -Wl,--no-keep-memory -Wl,--reduce-memory-overheads
