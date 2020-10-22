@@ -6,6 +6,7 @@ app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/file-roller 3.36.2: Archive manager for GNOME
 app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
+app-arch/unrar 6.0.1: Uncompress rar files
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/acme 1.9.0: An implementation of the ACME protocol
 app-crypt/certbot 1.9.0: Let's encrypt client to automate deployment of X.509 certificates
