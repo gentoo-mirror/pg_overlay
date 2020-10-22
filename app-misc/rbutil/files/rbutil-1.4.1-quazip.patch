@@ -47,10 +47,8 @@ diff -Naur a/rbutilqt.pro b/rbutilqt.pro
  # append all RBLIBS to LIBS
  for(rblib, RBLIBS) {
      LIBS += -l$$rblib
-@@ -142,7 +142,6 @@
+@@ -148,5 +148,4 @@
  
- # on win32 libz is linked implicitly.
- !win32 {
 -    LIBS += -lz
  }
  
