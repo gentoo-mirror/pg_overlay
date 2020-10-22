@@ -49,7 +49,7 @@ diff -Naur a/rbutilqt.pro b/rbutilqt.pro
      LIBS += -l$$rblib
 @@ -148,4 +148,3 @@
  
--    LIBS += -lz
+-LIBS += -lz
   
  # Add a (possibly found) libspeex now, don't do this before -lrbspeex!
 @@ -271,5 +270,4 @@
