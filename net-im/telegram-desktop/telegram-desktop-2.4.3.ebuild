@@ -127,7 +127,7 @@ twg_compile() {
 
 src_prepare() {
 	# Unbundling libraries...
-	rm -rfv Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,expected,libdbusmenu-qt,libtgvoip,lz4,minizip,variant,xxHash}
+	rm -rfv Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,libdbusmenu-qt,libtgvoip,lz4,minizip,variant,xxHash}
 	twg_compile
 	cmake_src_prepare
 	default
