@@ -144,7 +144,6 @@ gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
-kde-frameworks/sonnet 5.75.0: Framework for providing spell-checking through abstraction of popular backends
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.20.1: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 78.4.0: Thunderbird Mail Client
