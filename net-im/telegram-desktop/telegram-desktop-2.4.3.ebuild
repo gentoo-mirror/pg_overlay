@@ -91,7 +91,7 @@ twg_prepare(){
 	#eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	pushd "${WORKDIR}"
 	mv tg_owt-master tg_owt
-	#eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
+	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	BUILD_DIR="${WORKDIR}/tg_owt" CMAKE_USE_DIR="${WORKDIR}/tg_owt" cmake_src_prepare
 }
 
