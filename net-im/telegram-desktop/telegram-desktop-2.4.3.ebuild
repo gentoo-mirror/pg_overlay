@@ -100,6 +100,7 @@ twg_configure() {
 	pushd "${WORKDIR}"
 	local mycmakeargs=(
 		-G Ninja \
+		-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
 		-DCMAKE_BUILD_TYPE=Release
 		-DTG_OWT_SPECIAL_TARGET=linux
 		-DTG_OWT_LIBJPEG_INCLUDE_PATH=${EPREFIX}/usr/include
@@ -116,7 +117,7 @@ twg_compile() {
 	pushd "${WORKDIR}"
 	BUILD_DIR="${WORKDIR}/tg_owt" CMAKE_USE_DIR="${WORKDIR}/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
-	cp libtg_owt.a out/Gentoo
+	cp tg_owt/libtg_owt.a out/Gentoo
 	popd
 }	
 
@@ -146,6 +147,7 @@ src_configure() {
 	# EXPECTED VARIANT
 	# gtk is really needed for image copy-paste due to https://bugreports.qt.io/browse/QTBUG-56595
 	local mycmakeargs=(
+		-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
 		-DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 		-DDESKTOP_APP_QTWAYLANDCLIENT_PRIVATE_HEADERS=OFF
