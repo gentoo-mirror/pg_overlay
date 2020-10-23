@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PLOCALES="ar be bg ca cmn cs da de el en_GB es_AR es_MX es et eu fa_IR fi fr gl hu id_ID it ja ko ky lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
+PLOCALES="ar be bg ca cmn cs da de el en_GB es es_AR es_MX et fi fr gl hu id_ID it ja ko lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
 
 MY_P="${P/_/-}"
 
@@ -178,8 +178,8 @@ src_configure() {
 	sed -i 's/pls //' extra.mk || die
 	sed -i 's/xspf //' extra.mk || die
 	sed -i '/EFFECT_PLUGIN/d' extra.mk || die
-	sed -i 's/playlist-manager-qt //' extra.mk || die
-	sed -i 's/search-tool-qt //' extra.mk || die
+	#sed -i 's/playlist-manager-qt //' extra.mk || die
+	#sed -i 's/search-tool-qt //' extra.mk || die
 	sed -i 's/skins-qt //' extra.mk || die
 	sed -i 's/delete-files //' extra.mk || die
 	sed -i 's/skins-data //' extra.mk || die
@@ -190,6 +190,6 @@ src_configure() {
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/ filewriter//' extra.mk || die
-	sed -i 's/gio //' extra.mk || die
+	sed -i 's/ gio//' extra.mk || die
 	sed -i '/VISUALIZATION_PLUGIN/d' extra.mk || die
 }
