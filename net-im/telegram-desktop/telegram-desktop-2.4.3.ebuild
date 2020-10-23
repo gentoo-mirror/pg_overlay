@@ -12,7 +12,7 @@ MY_P="tdesktop-${PV}-full"
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
 SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz
-		https://github.com/perfect7gentleman/binaries/raw/main/tg_owt-master.zip"
+		https://github.com/desktop-app/tg_owt/archive/master.zip -> tg_owt.zip"
 
 LICENSE="GPL-3-with-openssl-exception"
 SLOT="0"
