@@ -178,8 +178,8 @@ src_configure() {
 	sed -i 's/pls //' extra.mk || die
 	sed -i 's/xspf //' extra.mk || die
 	sed -i '/EFFECT_PLUGIN/d' extra.mk || die
-	sed -i 's/playlist-manager-qt //' extra.mk || die
-	sed -i 's/search-tool-qt //' extra.mk || die
+	#sed -i 's/playlist-manager-qt //' extra.mk || die
+	#sed -i 's/search-tool-qt //' extra.mk || die
 	sed -i 's/skins-qt //' extra.mk || die
 	sed -i 's/delete-files //' extra.mk || die
 	sed -i 's/skins-data //' extra.mk || die
@@ -190,6 +190,6 @@ src_configure() {
 	sed -i 's/vtx //' extra.mk || die
 	sed -i 's/xsf //' extra.mk || die
 	sed -i 's/ filewriter//' extra.mk || die
-	sed -i 's/gio //' extra.mk || die
+	sed -i 's/ gio//' extra.mk || die
 	sed -i '/VISUALIZATION_PLUGIN/d' extra.mk || die
 }
