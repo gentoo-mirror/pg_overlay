@@ -89,7 +89,7 @@ pkg_pretend() {
 
 twg_prepare(){
 	#S=${WORKDIR}/Libraries/tg_owt
-	eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
+	#eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
 	mkdir Libraries
 	cp -r "${WORKDIR}"/tg_owt-master Libraries/tg_owt
 	mkdir "${WORKDIR}"/Libraries
@@ -126,6 +126,10 @@ twg_compile() {
 }	
 
 src_prepare() {
+	# Unbundling libraries...
+	rm -rfv Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,libdbusmenu-qt,libtgvoip,lz4,minizip,variant,xxHash}
+	# Unbundling libraries...
+	rm -rf Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,fcitx-qt5,fcitx5-qt,hime,hunspell,libdbusmenu-qt,libqtxdg,libtgvoip,lxqt-qtplugin,lz4,materialdecoration,minizip,nimf,qt5ct,range-v3,xxHash}
 	twg_compile
 	cmake_src_prepare
 	default
@@ -151,7 +155,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
-		-DDESKTOP_APP_USE_PACKAGED=ON
 		-DDESKTOP_APP_QTWAYLANDCLIENT_PRIVATE_HEADERS=OFF
 		-DTDESKTOP_DISABLE_GTK_INTEGRATION="$(usex gtk OFF ON)"
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
