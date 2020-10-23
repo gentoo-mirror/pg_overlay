@@ -12,7 +12,7 @@ MY_P="tdesktop-${PV}-full"
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
 SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz
-		https://github.com/perfect7gentleman/binaries/raw/main/tg_owt-master.zip"
+		https://github.com/desktop-app/tg_owt/archive/master.zip -> tg_owt.zip"
 
 LICENSE="GPL-3-with-openssl-exception"
 SLOT="0"
@@ -88,22 +88,16 @@ pkg_pretend() {
 }
 
 twg_prepare(){
-	#S=${WORKDIR}/Libraries/tg_owt
 	#eapply "${FILESDIR}/0001-use-bundled-ranged-exptected-gsl.patch"
-	mkdir Libraries
-	cp -r "${WORKDIR}"/tg_owt-master Libraries/tg_owt
-	mkdir "${WORKDIR}"/Libraries
-	mv "${WORKDIR}"/tg_owt-master "${WORKDIR}"/Libraries/tg_owt
-	pushd "${WORKDIR}"/Libraries
+	pushd "${WORKDIR}"
+	mv tg_owt-master tg_owt
 	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
-	popd
-	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" CMAKE_USE_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_prepare
+	BUILD_DIR="${WORKDIR}/tg_owt" CMAKE_USE_DIR="${WORKDIR}/tg_owt" cmake_src_prepare
 }
 
 twg_configure() {
 	twg_prepare
-	pushd ${WORKDIR}/Libraries/tg_owt
+	pushd "${WORKDIR}"
 	local mycmakeargs=(
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release
@@ -112,14 +106,15 @@ twg_configure() {
 		-DTG_OWT_OPENSSL_INCLUDE_PATH=${EPREFIX}/usr/include/openssl
 		-DTG_OWT_OPUS_INCLUDE_PATH=${EPREFIX}/usr/include/opus
 		-DTG_OWT_FFMPEG_INCLUDE_PATH=${EPREFIX}/usr/include/ffmpeg
+		-DTG_OWT_PACKAGED_BUILD=ON
 		)
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" CMAKE_USE_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_configure
+	BUILD_DIR="${WORKDIR}/tg_owt" CMAKE_USE_DIR="${WORKDIR}/tg_owt" cmake_src_configure
 }
 
 twg_compile() {
 	twg_configure
-	pushd ${WORKDIR}/Libraries/tg_owt
-	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" CMAKE_USE_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_compile
+	pushd "${WORKDIR}"
+	BUILD_DIR="${WORKDIR}/tg_owt" CMAKE_USE_DIR="${WORKDIR}/tg_owt" cmake_src_compile
 	mkdir -p out/Gentoo
 	cp libtg_owt.a out/Gentoo
 	popd
@@ -127,9 +122,7 @@ twg_compile() {
 
 src_prepare() {
 	# Unbundling libraries...
-	rm -rfv Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,libdbusmenu-qt,libtgvoip,lz4,minizip,variant,xxHash}
-	# Unbundling libraries...
-	rm -rf Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,fcitx-qt5,fcitx5-qt,hime,hunspell,libdbusmenu-qt,libqtxdg,libtgvoip,lxqt-qtplugin,lz4,materialdecoration,minizip,nimf,qt5ct,range-v3,xxHash}
+	rm -rf Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,fcitx-qt5,fcitx5-qt,hime,hunspell,libdbusmenu-qt,libqtxdg,libtgvoip,lxqt-qtplugin,lz4,materialdecoration,minizip,nimf,qt5ct,range-v3,variantxxHash}
 	twg_compile
 	cmake_src_prepare
 	default
@@ -156,7 +149,7 @@ src_configure() {
 		-DDESKTOP_APP_DISABLE_CRASH_REPORTS=ON
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 		-DDESKTOP_APP_QTWAYLANDCLIENT_PRIVATE_HEADERS=OFF
-		-Dtg_owt_DIR:PATH="${WORKDIR}/Libraries/tg_owt"
+		-Dtg_owt_DIR:PATH="${WORKDIR}/tg_owt"
 		-DTDESKTOP_DISABLE_GTK_INTEGRATION="$(usex gtk OFF ON)"
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION="$(usex dbus OFF ON)"
