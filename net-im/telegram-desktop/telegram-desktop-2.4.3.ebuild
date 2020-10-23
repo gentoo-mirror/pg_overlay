@@ -95,7 +95,7 @@ twg_prepare(){
 	mkdir "${WORKDIR}"/Libraries
 	mv "${WORKDIR}"/tg_owt-master "${WORKDIR}"/Libraries/tg_owt
 	pushd "${WORKDIR}"/Libraries
-	eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
+	#eapply "${FILESDIR}/0002-tg_owt-fix-name-confliction.patch"
 	popd
 	pushd ${WORKDIR}/Libraries/tg_owt
 	BUILD_DIR="${WORKDIR}/Libraries/tg_owt" CMAKE_USE_DIR="${WORKDIR}/Libraries/tg_owt" cmake_src_prepare
@@ -129,7 +129,7 @@ src_prepare() {
 	# Unbundling libraries...
 	rm -rfv Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,libdbusmenu-qt,libtgvoip,lz4,minizip,variant,xxHash}
 	# Unbundling libraries...
-	rm -rf Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,fcitx-qt5,fcitx5-qt,hime,hunspell,libdbusmenu-qt,libqtxdg,libtgvoip,lxqt-qtplugin,lz4,materialdecoration,minizip,nimf,qt5ct,range-v3,xxHash}
+	rm -rf Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,fcitx-qt5,fcitx5-qt,expected,hime,hunspell,libdbusmenu-qt,libqtxdg,libtgvoip,lxqt-qtplugin,lz4,materialdecoration,minizip,nimf,qt5ct,range-v3,xxHash}
 	twg_compile
 	cmake_src_prepare
 	default
