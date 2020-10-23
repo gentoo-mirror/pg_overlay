@@ -102,10 +102,11 @@ twg_configure() {
 		-G Ninja \
 		-DCMAKE_BUILD_TYPE=Release
 		-DTG_OWT_SPECIAL_TARGET=linux
-		-DTG_OWT_LIBJPEG_INCLUDE_PATH=${EPREFIX}/usr/include
-		-DTG_OWT_OPENSSL_INCLUDE_PATH=${EPREFIX}/usr/include/openssl
-		-DTG_OWT_OPUS_INCLUDE_PATH=${EPREFIX}/usr/include/opus
-		-DTG_OWT_FFMPEG_INCLUDE_PATH=${EPREFIX}/usr/include/ffmpeg
+		#-DTG_OWT_LIBJPEG_INCLUDE_PATH=${EPREFIX}/usr/include
+		#-DTG_OWT_OPENSSL_INCLUDE_PATH=${EPREFIX}/usr/include/openssl
+		#-DTG_OWT_OPUS_INCLUDE_PATH=${EPREFIX}/usr/include/opus
+		#-DTG_OWT_FFMPEG_INCLUDE_PATH=${EPREFIX}/usr/include/ffmpeg
+		-DTG_OWT_PACKAGED_BUILD=ON
 		)
 	BUILD_DIR="${WORKDIR}/tg_owt" CMAKE_USE_DIR="${WORKDIR}/tg_owt" cmake_src_configure
 }
