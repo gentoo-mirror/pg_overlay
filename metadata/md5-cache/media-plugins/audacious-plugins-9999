@@ -11,4 +11,4 @@ RDEPEND=app-arch/unzip dev-libs/dbus-glib dev-libs/glib dev-libs/libxml2:2 dev-q
 REQUIRED_USE=ampache? ( http ) streamtuner? ( http )
 SLOT=0
 _eclasses_=autotools	7d999b62b8749fad43fff00620cedf47	git-r3	3e7ec3d6619213460c85e2aa48398441	l10n	8cdd85e169b835d518bc2fd59f780d8e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	98584e405e2b0264d37e8f728327fed1	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb
-_md5_=2121f5bd09a23494f18bd474f4dee897
+_md5_=39e418130bd96c9b8a4c3d686f30a4f6
