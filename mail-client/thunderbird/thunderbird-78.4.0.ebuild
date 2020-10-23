@@ -1022,11 +1022,11 @@ src_install() {
 
 	#######
 	if use kde ; then
-		cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js-1 >> \
+		cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js >> \
 		"${GENTOO_PREFS}" \
 		|| die
 	fi
-	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js-1 >> \
+	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
 	#######

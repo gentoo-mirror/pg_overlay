@@ -1039,7 +1039,7 @@ src_install() {
 
 	# Force hwaccel prefs if USE=hwaccel is enabled
 	if use hwaccel ; then
-		cat "${FILESDIR}"/gentoo-hwaccel-prefs.js-1 \
+		cat "${FILESDIR}"/gentoo-hwaccel-prefs.js \
 		>>"${GENTOO_PREFS}" \
 		|| die "failed to add prefs to force hardware-accelerated rendering to all-gentoo.js"
 	fi
@@ -1062,11 +1062,11 @@ src_install() {
 	fi
 
 	#######
-	use kde && cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js-1 >> \
+	use kde && cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
 
-	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js-1 >> \
+	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
 
