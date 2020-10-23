@@ -126,6 +126,8 @@ twg_compile() {
 }	
 
 src_prepare() {
+	# Unbundling libraries...
+	rm -rfv Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,expected,libdbusmenu-qt,libtgvoip,lz4,minizip,variant,xxHash}
 	twg_compile
 	cmake_src_prepare
 	default
@@ -153,6 +155,7 @@ src_configure() {
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 		-DDESKTOP_APP_USE_PACKAGED=ON
 		-DDESKTOP_APP_QTWAYLANDCLIENT_PRIVATE_HEADERS=OFF
+		-DTDESKTOP_USE_PACKAGED_TGVOIP=OFF
 		-DTDESKTOP_DISABLE_GTK_INTEGRATION="$(usex gtk OFF ON)"
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION="$(usex dbus OFF ON)"
