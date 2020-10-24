@@ -5,7 +5,7 @@ EAPI=7
 
 MYSPELL_DICT=( ru_RU.{dic,aff} )
 MYSPELL_HYPH=( hyph_ru_RU.dic )
-MYSPELL_THES=( ru_th_aot.{dat,idx} )
+MYSPELL_THES=( th_ru_RU_v2.{dat,idx} )
 
 inherit myspell-r2
 
