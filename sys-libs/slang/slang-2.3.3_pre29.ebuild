@@ -9,7 +9,7 @@ DESCRIPTION="Multi-platform library designed to allow a developer to create robu
 HOMEPAGE="http://www.jedsoft.org/slang/"
 if [[ "${PV}" = *_pre* ]] ; then
 	MY_P="${PN}-pre${PV/_pre/-}"
-	SRC_URI="http://www.jedsoft.org/snapshots/${MY_P}.tar.gz"
+	SRC_URI="https://www.jedsoft.org/snapshots/${MY_P}.tar.gz"
 	S="${WORKDIR}/${MY_P}"
 else
 	SRC_URI="http://www.jedsoft.org/releases/${PN}/${P}.tar.bz2
