@@ -29,6 +29,5 @@ src_unpack() {
 }
 
 src_configure() {
-	#cargo_gen_config
-	cargo_src_configure
+	cargo_src_configure --no-default-features
 }
