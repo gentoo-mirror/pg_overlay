@@ -29,7 +29,8 @@ src_unpack() {
 }
 
 src_configure() {
-	cargo_src_configure $(usex gtk '--bin czkawka_gui' '--bin czkawka_cli')
+	cargo_src_configure --bin czkawka_gui
+	#cargo_src_configure $(usex gtk '--bin czkawka_gui' '--bin czkawka_cli')
 }
 
 src_compile() {
@@ -38,5 +39,5 @@ src_compile() {
 
 src_install() {
 	pushd target/release
-	cargo_src_install --path
+	cargo_src_install --path ${S}
 }
