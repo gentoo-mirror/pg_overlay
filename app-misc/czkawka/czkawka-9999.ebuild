@@ -1,0 +1,24 @@
+# Copyright 2017-2020 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+EAPI=7
+
+CRATES=""
+
+inherit cargo git-r3 optfeature
+
+DESCRIPTION="Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust"
+HOMEPAGE="https://github.com/qarmin/czkawka"
+
+EGIT_REPO_URI="https://github.com/qarmin/${PN}.git"
+KEYWORDS=""
+
+LICENSE="MIT"
+SLOT="0"
+IUSE="gtk"
+
+DEPEND="
+	gtk? ( x11-libs/gtk+:3 )
+"
+
+RDEPEND="${DEPEND}"
