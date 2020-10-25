@@ -46,6 +46,12 @@ app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
+dev-java/openjdk:gentoo-vm - Allow this JDK to be recognised by Gentoo (package manager, eselect, java-config, EXPERIMENTAL!)
+dev-java/openjdk:headless-awt - Don't install the X backend for AWT, needed by some GUIs
+dev-java/openjdk:javafx - Import OpenJFX modules at build time, via dev-java/openjfx
+dev-java/openjdk:jbootstrap - Build OpenJDK twice, the second time using the result of the first
+dev-java/openjdk:source - Install JVM sources
+dev-java/openjdk:systemtap - Enable SystemTAP/DTrace tracing
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:threads - Enable threading support. (DON'T DISABLE THIS UNLESS YOU KNOW WHAT YOU'RE DOING)
 dev-lang/python:wide-unicode - Enable wide Unicode implementation which uses 4-byte Unicode characters. Switching of this USE flag changes ABI of Python and requires reinstallation of many Python modules. (DON'T DISABLE THIS UNLESS YOU KNOW WHAT YOU'RE DOING)
