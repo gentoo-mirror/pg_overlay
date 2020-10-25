@@ -238,7 +238,7 @@ DEPEND="${COMMON_DEPEND}
 	x11-libs/libXtst
 	java? (
 		dev-java/ant-core
-		>=virtual/jdk-1.8
+		>=virtual/jdk-11
 	)
 	test? (
 		app-crypt/gnupg
