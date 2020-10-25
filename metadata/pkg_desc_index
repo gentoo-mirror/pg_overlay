@@ -40,8 +40,12 @@ dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindin
 dev-cpp/range-v3 0.11.0: Range library for C++14/17/20, basis for C++20's std::ranges
 dev-db/sqlitebrowser 3.12.0: SQLite Database Browser
 dev-games/freecell-solver 6.2.0: C library for automatically solving Freecell and some other solitaire variants
+dev-java/ant-core 1.10.9: Java-based build tool similar to 'make' that uses XML configuration files
 dev-java/java-config 2.3.1 9999: Java environment configuration query tool
+dev-java/javatoolkit 0.6.3: Collection of Gentoo-specific tools for Java
 dev-java/openjdk 15.0.1_p9: Open source implementation of the Java programming language
+dev-java/openjdk-bin 15.0.1_p9: Prebuilt Java JDK binaries provided by AdoptOpenJDK
+dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by AdoptOpenJDK
 dev-lang/duktape 2.6.0: Embeddable Javascript engine
 dev-lang/python 2.7.18-r4 3.9.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.46.0 1.47.0-r1: Systems programming language from Mozilla
@@ -225,6 +229,8 @@ sys-libs/ncurses 6.2_p20201003: console display library
 sys-libs/polly 11.0.0: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre29: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 3.0.2: interactive process viewer
+virtual/jdk 15: Virtual for Java Development Kit (JDK)
+virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/perl-Digest-MD5 2.550.0-r2: Virtual for Digest-MD5
 virtual/perl-IO-Compress 2.84.0: Virtual for IO-Compress
 virtual/perl-Memoize 1.30.100_rc-r9: Virtual for Memoize
