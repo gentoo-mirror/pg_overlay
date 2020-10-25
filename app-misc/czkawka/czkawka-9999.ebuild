@@ -29,9 +29,9 @@ src_unpack() {
 }
 
 src_configure() {
-	cargo_src_configure
+	cargo_src_configure --bin
 }
 
 src_compile() {
-	cargo_src_compile
+	cargo_src_compile --bin
 }
