@@ -64,6 +64,6 @@ src_install() {
 	done
 
 	dobin RockboxUtility
-	#make_desktop_entry RockboxUtility "Rockbox Utility" rockbox
+	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox Utility
 	dodoc changelog.txt
 }
