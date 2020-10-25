@@ -47,7 +47,7 @@ ADDONS_SRC=(
 	# not packaged in Gentoo, https://www.netlib.org/fp/dtoa.c
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
-	"${ADDONS_URI}/skia-m87-a0c82f08df58dcd0e1d143db9ccab38f8d823b95.tar.xz"
+	"${ADDONS_URI}/skia-m85-e684c6daef6bfb774a325a069eda1f76ca6ac26c.tar.xz"
 	"base? (
 		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
 		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
