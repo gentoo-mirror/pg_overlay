@@ -39,7 +39,7 @@ src_compile() {
 src_install() {
 	if use gtk ; then
 		cargo_src_install --path ./czkawka_gui
-		insinto	/usr/share/applications
+		insinto /usr/share/applications
 		doins pkgs/com.github.qarmin.czkawka.desktop
 	else
 		cargo_src_install --path ./czkawka_cli
