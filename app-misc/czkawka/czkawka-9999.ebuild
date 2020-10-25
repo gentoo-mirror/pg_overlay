@@ -22,3 +22,7 @@ DEPEND="
 "
 
 RDEPEND="${DEPEND}"
+
+src_configure() {
+	cargo_src_configure
+}
