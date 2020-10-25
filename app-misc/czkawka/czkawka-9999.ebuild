@@ -15,7 +15,7 @@ KEYWORDS=""
 
 LICENSE="MIT"
 SLOT="0"
-IUSE="gtk"
+IUSE="+gtk"
 
 DEPEND="
 	gtk? ( x11-libs/gtk+:3 )
@@ -30,6 +30,7 @@ src_unpack() {
 
 src_configure() {
 	cargo_src_configure --bin czkawka_gui
+	#cargo_src_configure $(usex gtk '--bin czkawka_gui' '--bin czkawka_cli')
 }
 
 src_compile() {
@@ -37,5 +38,7 @@ src_compile() {
 }
 
 src_install() {
-	cargo_src_install
+	cargo_src_install --path ${S}/czkawka_gui
+	insinto	"${D}/usr/share/applications/"
+	doins pkgs/com.github.qarmin.czkawka.desktop
 }
