@@ -38,6 +38,7 @@ src_compile() {
 }
 
 src_install() {
-	#pushd target/release
 	cargo_src_install --path ${S}/czkawka_gui
+	insinto	"${D}/usr/share/applications/"
+	doins pkgs/com.github.qarmin.czkawka.desktop
 }
