@@ -37,5 +37,6 @@ src_compile() {
 }
 
 src_install() {
+	pushd target/release
 	cargo_src_install
 }
