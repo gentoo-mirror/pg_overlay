@@ -27,7 +27,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/worker 4.5.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.0.3.1: A full office productivity suite
 app-office/libreoffice-l10n 7.0.3.1: Translations for the Libreoffice suite
-app-portage/eix 0.34.9: Search and query ebuilds
+app-portage/eix 0.34.10: Search and query ebuilds
 app-portage/repoman 9999: Repoman is a Quality Assurance tool for Gentoo ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
