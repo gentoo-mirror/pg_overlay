@@ -47,7 +47,21 @@ ADDONS_SRC=(
 	# not packaged in Gentoo, https://www.netlib.org/fp/dtoa.c
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
-	"${ADDONS_URI}/skia-m84-c1baf6e1c2a5454148adb516f0f833483b5a0353.tar.xz"
+	"${ADDONS_URI}/skia-m87-a0c82f08df58dcd0e1d143db9ccab38f8d823b95.tar.xz"
+	"base? (
+		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
+		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
+		${ADDONS_URI}/d8bd5eed178db6e2b18eeed243f85aa8-flute-1.1.6.zip
+		${ADDONS_URI}/eeb2c7ddf0d302fba4bfc6e97eac9624-libbase-1.1.6.zip
+		${ADDONS_URI}/3bdf40c0d199af31923e900d082ca2dd-libfonts-1.1.6.zip
+		${ADDONS_URI}/3404ab6b1792ae5f16bbd603bd1e1d03-libformula-1.1.7.zip
+		${ADDONS_URI}/db60e4fde8dd6d6807523deb71ee34dc-liblayout-0.2.10.zip
+		${ADDONS_URI}/97b2d4dba862397f446b217e2b623e71-libloader-1.1.6.zip
+		${ADDONS_URI}/8ce2fcd72becf06c41f7201d15373ed9-librepository-1.1.6.zip
+		${ADDONS_URI}/f94d9870737518e3b597f9265f4e9803-libserializer-1.1.6.zip
+		${ADDONS_URI}/ace6ab49184e329db254e454a010f56d-libxml-1.1.7.zip
+		${ADDONS_URI}/39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip
+	)"
 	"java? ( ${ADDONS_URI}/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip )"
 	# no release for 8 years, should we package it?
 	"libreoffice_extensions_wiki-publisher? ( ${ADDONS_URI}/a7983f859eafb2677d7ff386a023bc40-xsltml_2.1.2.zip )"
@@ -66,11 +80,12 @@ unset ADDONS_SRC
 # Extensions that need extra work:
 LO_EXTS="nlpsolver scripting-beanshell scripting-javascript wiki-publisher"
 
-IUSE="accessibility bluetooth +branding coinmp +cups +dbus debug eds firebird
+IUSE="accessibility base bluetooth +branding coinmp +cups +dbus debug eds firebird
 googledrive gstreamer +gtk kde ldap +mariadb odk pdfimport postgres test
 $(printf 'libreoffice_extensions_%s ' ${LO_EXTS})"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
+	base? ( firebird java )
 	bluetooth? ( dbus )
 	gtk? ( dbus )
 	libreoffice_extensions_nlpsolver? ( java )
@@ -272,7 +287,7 @@ _check_reqs() {
 }
 
 pkg_pretend() {
-	use firebird ||
+	use base ||
 		ewarn "If you plan to use Base application you must enable USE base."
 	use java ||
 		ewarn "Without USE java, several wizards are not going to be available."
@@ -318,12 +333,6 @@ src_prepare() {
 	# hack in the autogen.sh
 	touch autogen.lastrun
 
-	# system pyuno mess
-	sed -i \
-		-e "s:%eprefix%:${EPREFIX}:g" \
-		-e "s:%libdir%:$(get_libdir):g" \
-		pyuno/source/module/uno.py \
-		pyuno/source/officehelper.py || die
 	# sed in the tests
 	sed -i \
 		-e "s#all : build unitcheck#all : build#g" \
@@ -412,7 +421,6 @@ src_configure() {
 		--disable-online-update
 		--disable-openssl
 		--disable-pdfium
-		--disable-report-builder
 		--disable-vlc
 		--with-build-version="${gentoo_buildid}"
 		--enable-extension-integration
@@ -434,6 +442,7 @@ src_configure() {
 		--without-system-jfreereport
 		--without-system_apache_commons
 		--without-system-sane
+		$(use_enable base report-builder)
 		$(use_enable bluetooth sdremote-bluetooth)
 		$(use_enable coinmp)
 		$(use_enable cups)
