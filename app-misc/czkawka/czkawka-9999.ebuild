@@ -29,13 +29,13 @@ src_unpack() {
 }
 
 src_configure() {
-	cargo_src_configure czkawka_gui
+	cargo_src_configure --bin czkawka_gui
 }
 
 src_compile() {
-	cargo_src_compile czkawka_gui
+	cargo_src_compile
 }
 
 src_install() {
-	cargo_src_install czkawka_gui
+	cargo_src_install
 }
