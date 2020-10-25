@@ -29,7 +29,7 @@ src_unpack() {
 }
 
 src_configure() {
-	cargo_src_configure --bin
+	cargo_src_configure czkawka_gui
 }
 
 src_compile() {
