@@ -16,6 +16,7 @@ app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/virtualbox 6.1.16: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/ca-certificates 20200601.3.53: Common CA Certificates PEM files
+app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.1.2: Graphical user interface for ddcutil
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
