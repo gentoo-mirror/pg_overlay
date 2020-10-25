@@ -38,7 +38,6 @@ src_compile() {
 
 src_install() {
 	cargo_src_install $(usex gtk '--path ./czkawka_gui' '--path ./czkawka_cli')
-	#cargo_src_install --path ./czkawka_gui
 	insinto	/usr/share/applications
 	doins pkgs/com.github.qarmin.czkawka.desktop
 }
