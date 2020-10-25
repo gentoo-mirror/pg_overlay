@@ -29,6 +29,6 @@ src_unpack() {
 }
 
 src_configure() {
-	cargo_gen_config
+	#cargo_gen_config
 	cargo_src_configure
 }
