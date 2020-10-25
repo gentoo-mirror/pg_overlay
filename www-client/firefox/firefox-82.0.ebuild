@@ -1062,7 +1062,7 @@ src_install() {
 	fi
 
 	#######
-	use kde && cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js >> \
+	cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
 
