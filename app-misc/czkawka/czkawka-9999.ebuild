@@ -35,3 +35,7 @@ src_configure() {
 src_compile() {
 	cargo_src_compile czkawka_gui
 }
+
+src_install() {
+	cargo_src_install czkawka_gui
+}
