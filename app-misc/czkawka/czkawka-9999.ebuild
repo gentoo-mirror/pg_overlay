@@ -29,8 +29,7 @@ src_unpack() {
 }
 
 src_configure() {
-	cargo_src_configure --bin czkawka_gui
-	#cargo_src_configure $(usex gtk '--bin czkawka_gui' '--bin czkawka_cli')
+	cargo_src_configure $(usex gtk '--bin czkawka_gui' '--bin czkawka_cli')
 }
 
 src_compile() {
@@ -38,7 +37,11 @@ src_compile() {
 }
 
 src_install() {
-	cargo_src_install --path ${S}/czkawka_gui
-	insinto	"${D}/usr/share/applications/"
-	doins pkgs/com.github.qarmin.czkawka.desktop
+	if use gtk ; then
+		cargo_src_install --path ./czkawka_gui
+		insinto /usr/share/applications
+		doins pkgs/com.github.qarmin.czkawka.desktop
+	else
+		cargo_src_install --path ./czkawka_cli
+	fi
 }
