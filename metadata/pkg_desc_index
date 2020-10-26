@@ -12,6 +12,7 @@ app-crypt/acme 1.9.0: An implementation of the ACME protocol
 app-crypt/certbot 1.9.0: Let's encrypt client to automate deployment of X.509 certificates
 app-crypt/certbot-nginx 1.9.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
+app-editors/jed 0.99.20_pre144: Console S-Lang-based editor
 app-editors/pluma 1.24.0: Pluma text editor for the MATE desktop
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/virtualbox 6.1.16: Family of powerful x86 virtualization products for enterprise and home use
@@ -227,7 +228,7 @@ sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/libblockdev 2.24: A library for manipulating block devices
 sys-libs/ncurses 6.2_p20201003: console display library
 sys-libs/polly 11.0.0: Polyhedral optimizations for LLVM
-sys-libs/slang 2.3.3_pre29: Multi-platform library designed to allow a developer to create robust software
+sys-libs/slang 2.3.3_pre30: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 3.0.2: interactive process viewer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
