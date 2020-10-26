@@ -34,6 +34,7 @@ app-shells/push 3.4: A POSIX shell function to treat a variable like an array, q
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/enchant 2.2.12: Spellchecker wrapping library
 app-text/goldendict 9999: Feature-rich dictionary lookup program
+app-text/master-pdf-editor 5.6.49: A complete solution for viewing and editing PDF files
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
