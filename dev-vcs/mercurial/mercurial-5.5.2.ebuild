@@ -3,8 +3,9 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python2_7 python3_{7..9} )
+PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE="threads(+)"
+DISTUTILS_USE_SETUPTOOLS=no
 
 inherit bash-completion-r1 elisp-common eutils distutils-r1 flag-o-matic
 
