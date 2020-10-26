@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit java-vm-2 toolchain-funcs
+inherit java-vm-2 toolchain-funcs eapi7-ver
 
 abi_uri() {
 	echo "${2-$1}? (
@@ -31,7 +31,7 @@ RDEPEND="
 	media-libs/fontconfig:1.0
 	media-libs/freetype:2
 	>=sys-apps/baselayout-java-0.1.0-r1
-	>=sys-libs/glibc-2.2.5:*
+	>=sys-libs/glibc-2.29-r7:*
 	sys-libs/zlib
 	alsa? ( media-libs/alsa-lib )
 	cups? ( net-print/cups )
