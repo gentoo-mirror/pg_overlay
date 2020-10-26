@@ -34,7 +34,6 @@ RDEPEND="
 	dev-qt/qtwidgets:5[png,X(-)?]
 	media-fonts/open-sans
 	media-libs/fontconfig:=
-	~media-libs/libtgvoip-2.4.4_p20200704[alsa?,pulseaudio?]
 	media-libs/openal[alsa?,pulseaudio?]
 	media-libs/opus:=
 	media-video/ffmpeg:=[alsa?,opus,pulseaudio?]
@@ -123,7 +122,7 @@ twg_compile() {
 
 src_prepare() {
 	# Unbundling libraries...
-	rm -rf Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,fcitx-qt5,fcitx5-qt,hime,hunspell,libdbusmenu-qt,libqtxdg,libtgvoip,lxqt-qtplugin,lz4,materialdecoration,minizip,nimf,qt5ct,range-v3,variantxxHash}
+	rm -rf Telegram/ThirdParty/{Catch,GSL,QR,SPMediaKeyTap,fcitx-qt5,fcitx5-qt,hime,hunspell,libdbusmenu-qt,libqtxdg,lxqt-qtplugin,lz4,materialdecoration,minizip,nimf,qt5ct,range-v3,variantxxHash}
 	twg_compile
 	cmake_src_prepare
 	default
