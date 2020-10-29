@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="cs de el en_GB es et fr hr hu it ja nl pl pt ru sl sv th uk zh_CN"
-PYTHON_COMPAT=( python2_7 )
+PYTHON_COMPAT=( python3_{7..9} )
 
 inherit distutils-r1 l10n git-r3
 
