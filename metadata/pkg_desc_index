@@ -212,8 +212,7 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
-sci-geosciences/gpxviewer 9999: Clean junk to free disk space and to maintain privacy
-sci-libs/libqalculate 3.12.0: A modern multi-purpose calculator library
+sci-libs/libqalculate 3.14.0: A modern multi-purpose calculator library
 sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
