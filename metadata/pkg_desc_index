@@ -40,7 +40,6 @@ dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.1: Build infrastructure and utilities for GNOME C++ bindings
 dev-cpp/range-v3 0.11.0: Range library for C++14/17/20, basis for C++20's std::ranges
 dev-db/sqlitebrowser 3.12.0: SQLite Database Browser
-dev-games/freecell-solver 6.2.0: C library for automatically solving Freecell and some other solitaire variants
 dev-java/ant-core 1.10.9: Java-based build tool similar to 'make' that uses XML configuration files
 dev-java/java-config 2.3.1 9999: Java environment configuration query tool
 dev-java/javatoolkit 0.6.3: Collection of Gentoo-specific tools for Java
@@ -58,7 +57,7 @@ dev-libs/glib 2.66.2: The GLib library of C routines
 dev-libs/gobject-introspection 1.66.1: Introspection system for GObject-based libraries
 dev-libs/gobject-introspection-common 1.66.1: Build infrastructure for GObject Introspection
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
-dev-libs/icu 67.1: International Components for Unicode
+dev-libs/icu 68.1: International Components for Unicode
 dev-libs/libevdev 1.9.0: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
 dev-libs/libgit2 1.0.1: A linkable library for Git
@@ -246,8 +245,6 @@ x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.32-r1 3.24.23: Gimp ToolKit +
-x11-libs/libva 2.7.1: Video Acceleration (VA) API for Linux
-x11-libs/libva-intel-driver 2.4.0: HW video decode support for Intel integrated graphics
 x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.46.2: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
