@@ -29,6 +29,7 @@ src_prepare() {
 			Makefile.am || die "sed tests failed"
 	fi
 
+	eautoreconf
 	gnome2_src_prepare
 }
 
