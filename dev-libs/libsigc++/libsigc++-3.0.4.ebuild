@@ -28,8 +28,9 @@ src_prepare() {
 		sed -i 's|^\(SUBDIRS =.*\)tests\(.*\)$|\1\2|' \
 			Makefile.am || die "sed tests failed"
 	fi
-
-	eautoreconf --install
+	
+	mm-common-prepare
+	eautoreconf
 	gnome2_src_prepare
 }
 
