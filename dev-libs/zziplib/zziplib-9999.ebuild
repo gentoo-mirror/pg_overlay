@@ -1,92 +1,72 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 PYTHON_COMPAT=( python3_{7..9} )
 
-inherit autotools libtool flag-o-matic python-any-r1 git-r3
+inherit cmake flag-o-matic python-any-r1
 
 DESCRIPTION="Lightweight library for extracting data from files archived in a single zip file"
-HOMEPAGE="http://zziplib.sourceforge.net/"
+HOMEPAGE="https://github.com/gdraheim/zziplib http://zziplib.sourceforge.net/"
 EGIT_REPO_URI="https://github.com/gdraheim/${PN}.git"
 EGIT_BRANCH="develop"
 
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
-SLOT="0"
-KEYWORDS="alpha amd64 arm arm64 hppa ia64 ~mips ppc ppc64 s390 ~sh sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE="doc sdl static-libs test"
+SLOT="0/13"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+IUSE="sdl static-libs test"
+# Tests fail for now, only recently added.
+# Restricted to avoid blocking stabilisations.
+# https://github.com/gdraheim/zziplib/issues/97
+RESTRICT="test"
+#RESTRICT="!test? ( test )"
 
-RDEPEND="
-	sys-libs/zlib
-	sdl? ( >=media-libs/libsdl-1.2.6 )"
-DEPEND="${RDEPEND}
+BDEPEND="
 	${PYTHON_DEPS}
-	virtual/pkgconfig
-	test? ( app-arch/zip )"
+	test? ( app-arch/zip )
+"
+DEPEND="
+	sys-libs/zlib
+	sdl? ( >=media-libs/libsdl-1.2.6 )
+"
+RDEPEND="${DEPEND}"
+
+S="${WORKDIR}/${PN}-${MY_COMMIT}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.13.69-SDL-test.patch
+	"${FILESDIR}"/${PN}-0.13.69-009-perror.patch
+	"${FILESDIR}"/${PN}-0.13.71-installing-man3-pages.patch
 )
 
+pkg_setup() {
+	python-any-r1_pkg_setup
+}
+
 src_prepare() {
-	default
-	eautoreconf
-
-	python_fix_shebang .
-
-	# workaround AX_CREATE_PKGCONFIG_INFO bug #353195
-	sed -i \
-		-e '/ax_create_pkgconfig_ldflags/s:$LDFLAGS::' \
-		-e '/ax_create_pkgconfig_cppflags/s:$CPPFLAGS::' \
-		configure || die
-
-	# zziplib tries to install backwards compat symlinks we dont want
-	sed -i -e '/^zzip-postinstall:/s|$|\ndisable-this:|' Makefile.in || die
-	sed -i -e '/^install-exec-hook:/s|$|\ndisable-this:|' zzip/Makefile.in || die
-
-	elibtoolize
-
-	# Do an out-of-tree build as their configure will do it automatically
-	# otherwise and that can lead to funky errors. #492816
-	mkdir -p build
+	sed -e "/^topsrcdir/s:..\/..::" \
+		-e "/^bindir/s:\.\.:${WORKDIR}/${P}_build:" \
+		-e 's:\(..\/\)\+{exe}:{exe}:' \
+		-i test/zziptests.py || die
+	cmake_src_prepare
 }
 
 src_configure() {
-	cd "${S}"/build
-
 	append-flags -fno-strict-aliasing # bug reported upstream
-	export ac_cv_path_XMLTO= # man pages are bundled in .tar's
 
-	local myeconfargs=(
-		$(use_enable sdl)
-		$(use_enable static-libs static)
+	local mycmakeargs=(
+		-DZZIPSDL="$(usex sdl)"
+		-DBUILD_STATIC_LIBS="$(usex static-libs)"
+		-DBUILD_TESTS="$(usex test)"
+		-DZZIPTEST="$(usex test)"
+		-DZZIPDOCS=ON
+		-DZZIPWRAP=OFF
 	)
 
-	# Disable aclocal probing as the default path works #449156
-	ECONF_SOURCE=${S} ACLOCAL=true \
-		econf "${myeconfargs[@]}"
-	MAKEOPTS+=' -C build'
-}
-
-src_install() {
-	default
-
-	# fowners fails when we don't have enough permissions (Prefix)
-	if [[ ${EUID} == 0 ]] ; then
-		fowners -R root /usr/share/man #321975
-	fi
-
-	find "${ED}" -name "*.la" -delete || die
-
-	if use doc ; then
-		docinto html
-		dodoc -r docs/*
-	fi
+	cmake_src_configure
 }
 
 src_test() {
-	# need this because `make test` will always return true
-	# tests fail with -j > 1 (bug #241186)
-	emake -j1 check
+	cd "$S"/test/ || die
+	"${EPYTHON}" "$S"/test/zziptests.py || die "Tests failed with ${EPYTHON}"
 }
