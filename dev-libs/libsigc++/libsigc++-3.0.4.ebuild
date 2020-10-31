@@ -21,12 +21,12 @@ DEPEND="sys-devel/m4
 src_prepare() {
 	# don't waste time building examples
 	sed -i 's|^\(SUBDIRS =.*\)examples\(.*\)$|\1\2|' \
-		Makefile.am Makefile.in || die "sed examples failed"
+		Makefile.am || die "sed examples failed"
 
 	# don't waste time building tests unless USE=test
 	if ! use test ; then
 		sed -i 's|^\(SUBDIRS =.*\)tests\(.*\)$|\1\2|' \
-			Makefile.am Makefile.in || die "sed tests failed"
+			Makefile.am || die "sed tests failed"
 	fi
 
 	gnome2_src_prepare
