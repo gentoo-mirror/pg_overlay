@@ -30,7 +30,7 @@ src_prepare() {
 	fi
 	
 	mm-common-prepare
-	#eautoreconf
+	eautoreconf
 	gnome2_src_prepare
 }
 
