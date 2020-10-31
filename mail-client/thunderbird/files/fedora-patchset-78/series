@@ -4,3 +4,4 @@ firefox-SIOCGSTAMP.patch
 build-disable-elfhack.patch
 
 mozilla-526293.patch
+rust-1.47.patch
