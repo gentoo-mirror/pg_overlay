@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-inherit gnome2 flag-o-matic multilib-minimal
+inherit autotools gnome2 flag-o-matic multilib-minimal
 
 DESCRIPTION="Typesafe callback system for standard C++"
 HOMEPAGE="https://developer.gnome.org/libsigc++/3.0"
