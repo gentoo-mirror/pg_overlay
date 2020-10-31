@@ -153,6 +153,16 @@ mail-client/thunderbird:system-jpeg - Use the system-wide media-libs/libjpeg-tur
 mail-client/thunderbird:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 mail-client/thunderbird:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 mail-client/thunderbird:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
+media-libs/libsdl2:fcitx4 - Enable support for app-i18n/fcitx 4
+media-libs/libsdl2:gles2 - include OpenGL ES 2.0 support
+media-libs/libsdl2:haptic - Enable the haptic (force feedback) subsystem
+media-libs/libsdl2:ibus - Enable support for app-i18n/ibus
+media-libs/libsdl2:joystick - Control joystick support (disable at your own risk)
+media-libs/libsdl2:kms - Build the KMSDRM video driver
+media-libs/libsdl2:sound - Control audio support (disable at your own risk)
+media-libs/libsdl2:tslib - Build with tslib support for touchscreen devices
+media-libs/libsdl2:video - Control video support (disable at your own risk)
+media-libs/libsdl2:vulkan - Enable Vulkan support
 media-libs/mesa:classic - Build drivers based on the classic architecture.
 media-libs/mesa:d3d9 - Enable Direct 3D9 API through Nine state tracker. Can be used together with patched wine.
 media-libs/mesa:dri3 - Enable DRI3 support.
