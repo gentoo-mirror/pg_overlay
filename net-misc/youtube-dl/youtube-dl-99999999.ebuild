@@ -6,8 +6,8 @@ PYTHON_COMPAT=(python3_{7..9})
 inherit bash-completion-r1 distutils-r1 git-r3 readme.gentoo-r1
 
 DESCRIPTION="Download videos from YouTube.com (and more sites...)"
-HOMEPAGE="https://github.com/ytdl-org/youtube-dl/"
-EGIT_REPO_URI="https://github.com/ytdl-org/youtube-dl/"
+HOMEPAGE="https://github.com/l1ving/youtube-dl"
+EGIT_REPO_URI="https://github.com/l1ving/youtube-dl"
 LICENSE="public-domain"
 
 KEYWORDS=""
