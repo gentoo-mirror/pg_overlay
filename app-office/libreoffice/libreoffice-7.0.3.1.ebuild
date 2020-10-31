@@ -278,7 +278,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/0001-Upgrade-liborcus-to-0.16.0.patch"
-	"${FILESDIR}/${P}-fix-non-pdfium-build"
+	"${FILESDIR}/${P}-fix-non-pdfium-build.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
