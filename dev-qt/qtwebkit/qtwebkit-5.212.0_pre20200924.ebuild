@@ -76,7 +76,9 @@ RDEPEND="${DEPEND}"
 
 S=${WORKDIR}/${PN}-opensource-src-${PV/.0_*/}
 
-CHECKREQS_DISK_BUILD="16G" # bug 417307
+PATCHES=(
+	"${FILESDIR}/${P}-icu68.patch"
+)
 
 _check_reqs() {
 	if [[ ${MERGE_TYPE} != binary ]] && is-flagq "-g*" && ! is-flagq "-g*0"; then
