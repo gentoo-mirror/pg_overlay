@@ -3,8 +3,6 @@
 # * generated automatically using pmaint *
 
 app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
-app-arch/file-roller:nautilus - Build contextual menu extension for gnome-base/nautilus.
-app-arch/file-roller:packagekit - Enable support for the distro-neutral package manager GUI app-admin/packagekit
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-editors/qhexedit2:gui - Install Qt5 hex editor
 app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
@@ -14,7 +12,6 @@ app-emulation/virtualbox:pax_kernel - Apply patch needed for pax enabled kernels
 app-emulation/virtualbox:sdk - Enable building of SDK
 app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
 app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
-app-misc/ca-certificates:cacert - Include root certificates from CAcert (http://www.cacert.org/) and Software in the Public Interest (http://www.spi-inc.org/)
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
 app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
@@ -57,6 +54,43 @@ dev-java/openjdk-bin:headless-awt - Don't install the X backend for AWT, needed 
 dev-java/openjdk-bin:source - Install JVM sources
 dev-java/openjdk-jre-bin:gentoo-vm - Allow this JDK to be recognised by Gentoo (package manager, eselect, java-config, EXPERIMENTAL!)
 dev-java/openjdk-jre-bin:headless-awt - Don't install the X backend for AWT, needed by some GUIs (used to be X flag)
+dev-lang/php:argon2 - Enable password hashing algorithm from app-crypt/argon2
+dev-lang/php:bcmath - Add support for libbcmath
+dev-lang/php:cli - Enable CLI SAPI
+dev-lang/php:coverage - Include gcov symbols for test coverage and lcov reports. Only useful for extension developers, and requires GCC.
+dev-lang/php:ctype - Enable ctype functions
+dev-lang/php:embed - Enable embed SAPI
+dev-lang/php:enchant - Add supports Enchant spelling library.
+dev-lang/php:ffi - Add foreign function interface (ffi extension) support
+dev-lang/php:fileinfo - Add fileinfo extension support
+dev-lang/php:filter - Add filter extension support
+dev-lang/php:flatfile - Add dbm support for flat files
+dev-lang/php:fpm - Enable the FastCGI Process Manager SAPI
+dev-lang/php:gd - Adds support for gd (bundled with PHP)
+dev-lang/php:hash - Enable the hash extension
+dev-lang/php:inifile - Add dbm support for .ini files
+dev-lang/php:intl - Enables the intl extension for extended internalization support
+dev-lang/php:json - Enable JSON support
+dev-lang/php:ldap-sasl - Add SASL support for the PHP LDAP extension
+dev-lang/php:lmdb - Enable support for dev-db/lmdb db backend
+dev-lang/php:opcache - Enables built-in opcode cache, replacing pecl-apc et al.
+dev-lang/php:pcntl - Add support for process creation functions
+dev-lang/php:pdo - Enable the bundled PDO extensions
+dev-lang/php:phar - Enables the phar extension to provide phar archive support
+dev-lang/php:phpdbg - Enable the PHP Debug Command Line SAPI (like gdb for php)
+dev-lang/php:session-mm - Include dev-libs/mm support for session storage
+dev-lang/php:sharedmem - Add support for shared memory use
+dev-lang/php:simplexml - Support for SimpleXML
+dev-lang/php:sodium - Enable support for crypto through dev-libs/libsodium
+dev-lang/php:sysvipc - Support for System V-compatible inter-process communication
+dev-lang/php:tokenizer - Add support for the PHP file parser
+dev-lang/php:tokyocabinet - Enable support for dev-db/tokyocabinet db backend
+dev-lang/php:wddx - Add support for Web Distributed Data eXchange
+dev-lang/php:webp - Enable webp support for GD in php-7.x
+dev-lang/php:xmlreader - Enable XMLReader support
+dev-lang/php:xmlwriter - Enable XMLWriter support
+dev-lang/php:xslt - Enable the XSL extension
+dev-lang/php:zip-encryption - Enable ZIP file encryption from dev-libs/libzip
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:threads - Enable threading support. (DON'T DISABLE THIS UNLESS YOU KNOW WHAT YOU'RE DOING)
 dev-lang/python:wide-unicode - Enable wide Unicode implementation which uses 4-byte Unicode characters. Switching of this USE flag changes ABI of Python and requires reinstallation of many Python modules. (DON'T DISABLE THIS UNLESS YOU KNOW WHAT YOU'RE DOING)
@@ -70,21 +104,11 @@ dev-lang/rust:rustfmt - Install rustfmt, Rust code formatter
 dev-lang/rust:system-bootstrap - Bootstrap using installed rust compiler
 dev-lang/rust:system-llvm - Use the system LLVM install
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
-dev-libs/boost:context - Build and install the Boost.Context (and Boost.Fiber) library and all other Boost libraries that depend on it
-dev-libs/boost:debug - Build and install only the debug version of the Boost libraries. Only enable this flag if you're developing against boost.
-dev-libs/boost:doc - Install the full API documentation documentation. This takes over 200MB of extra disk space.
-dev-libs/boost:nls - Build libboost_locale. This library requires compatible C library interfaces, which might not be provided by uClibc or other embedded libraries.
-dev-libs/boost:numpy - Optionally build NumPy extensions when Boost.Python is enabled
-dev-libs/boost:threads - Build multi-thread-compatible libraries instead of single-threaded only.
-dev-libs/boost:tools - Build and install the boost tools (bcp, quickbook, inspect, wave)
 dev-libs/glib:dbus - Enable dependencies required by glib libraries using dbus service to manage settings saving
 dev-libs/glib:mime - Pull in shared MIME database that many glib-based applications require at runtime to detect or open files. Warning: do not disable this flag unless installing on a headless server.
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap
 dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
 dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
-dev-libs/libgit2:gssapi - Enable GSSAPI support for SPNEGO auth
-dev-libs/libgit2:ssh - Enable SSH transport support
-dev-libs/libgit2:trace - Enable tracing support
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
@@ -112,9 +136,6 @@ dev-vcs/mercurial:chg - Support Mercurial command server client
 dev-vcs/mercurial:gpg - Support signing with GnuPG.
 dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 gnome-base/librsvg:tools - Build svg viewer tool
-gui-apps/waybar:mpd - Enable support for the Music Player Daemon
-gui-apps/waybar:network - Enable libnl support for network related features
-gui-apps/waybar:tray - Enable support for tray
 gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
 gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
 gui-wm/kwinft:tools - Build internal tools for performance analysis at runtime.
@@ -216,33 +237,6 @@ media-sound/deadbeef:vtx - Libayemy VTX ZX-Spectrum music player plugin
 media-sound/deadbeef:wavpack - WavPack plugin
 media-sound/deadbeef:wma - Windows media audio plugin
 media-sound/deadbeef:zip - vfs_zip plugin
-media-sound/mpd-sacd:adplug - Enable the AdPlug decoder plugin
-media-sound/mpd-sacd:cdio - Use libcdio for ISO9660 parsing support
-media-sound/mpd-sacd:curl - Support for web stream listening
-media-sound/mpd-sacd:eventfd - Use the eventfd function in MPD's event loop
-media-sound/mpd-sacd:faad - Use external faad library for AAC decoding
-media-sound/mpd-sacd:fifo - Support writing audio to a FIFO
-media-sound/mpd-sacd:fluidsynth - Enables Fluidsynth MIDI software synthesis (discouraged)
-media-sound/mpd-sacd:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
-media-sound/mpd-sacd:id3tag - Support for ID3 tags
-media-sound/mpd-sacd:inotify - Use the Linux kernel inotify subsystem to notice changes to mpd music library
-media-sound/mpd-sacd:lame - Support for MP3 streaming via Icecast2
-media-sound/mpd-sacd:libmpdclient - Enable support for remote mpd databases
-media-sound/mpd-sacd:libsoxr - Enable the libsoxr resampler
-media-sound/mpd-sacd:mpg123 - Enable support for mp3 decoding over media-sound/mpg123
-media-sound/mpd-sacd:network - Enables network streaming support
-media-sound/mpd-sacd:nfs - Enable support for the Network File System
-media-sound/mpd-sacd:opus - Enable Opus codec support
-media-sound/mpd-sacd:pipe - Support writing audio to a pipe
-media-sound/mpd-sacd:recorder - Enables output plugin for recording radio streams
-media-sound/mpd-sacd:sid - Build with SID (Commodore 64 Audio) support
-media-sound/mpd-sacd:signalfd - Use the signalfd function in MPD's event loop
-media-sound/mpd-sacd:soundcloud - Build plugin to access soundcloud
-media-sound/mpd-sacd:systemd - Enable support for systemd socket activation
-media-sound/mpd-sacd:twolame - Support twolame MPEG-2 encoding
-media-sound/mpd-sacd:webdav - Enable using music from a WebDAV share
-media-sound/mpd-sacd:wildmidi - Enable MIDI support via wildmidi
-media-sound/mpd-sacd:zip - Support for ZIP files
 media-sound/ncmpc:async-connect - Enable asynchronous connect
 media-sound/ncmpc:chat-screen - Enable the chat screen
 media-sound/ncmpc:help-screen - Enable the help screen
@@ -354,13 +348,8 @@ net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
 net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/pidgin:zephyr - Enable Zephyr protocol support
-net-im/telegram-desktop:enchant - Enable the app-text/aspell spell-checking backend
-net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking backend
-net-im/telegram-desktop:system-rlottie - Use system version of media-libs/rlottie ( may alter sticker color )
-net-im/telegram-desktop:webrtc - WebRTC based video call support
 net-libs/glib-networking:gnome - Extract HTTP/HTTPS/SOCKS proxy configuration stored using GSettings
 net-libs/glib-networking:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration
-net-libs/libpsl:man - Build man-pages
 net-libs/libsoup:brotli - Enable brotli decompression support
 net-libs/libsoup:gssapi - Enable GSSAPI support
 net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
@@ -374,9 +363,6 @@ net-libs/nodejs:systemtap - Enable SystemTAP/DTrace tracing
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
-net-misc/rsync:stunnel - Provide helper scripts for using rsync via >=net-misc/stunnel-4
-net-misc/rsync:system-zlib - Use system zlib instead of bundled one. This is incompatible with older rsync releases!
-net-misc/rsync:xxhash - Enable dev-libs/xxhash support for hashing
 net-nntp/nzbget:parcheck - Enable support for checking PAR archives
 net-p2p/amule:daemon - Enable amule daemon
 net-p2p/amule:remote - Enable remote controlling of the client
