@@ -119,7 +119,6 @@ dev-util/glib-utils 2.66.2: Build utilities for GLib using projects
 dev-util/glslang 8.13.3743-r1 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
-dev-util/mdds 1.7.0: A collection of multi-dimensional data structure and indexing algorithm
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 4.0.1: Extensible Python-based build utility
