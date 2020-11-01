@@ -11,16 +11,3 @@ index f3dc6ed..1dacd88 100644
      if ( !U_SUCCESS(status) ) throw ERROR;
      status = U_ZERO_ERROR;
      body->setTime( fR - (nZoneOffset + nDSTOffset), status );
-diff --git a/svx/source/dialog/fntctrl.cxx b/svx/source/dialog/fntctrl.cxx
-index d312d7a..10c84ca 100644
---- a/svx/source/dialog/fntctrl.cxx
-+++ b/svx/source/dialog/fntctrl.cxx
-@@ -1014,7 +1014,7 @@ void SvxFontPrevWindow::SetFromItemSet(const SfxItemSet &rSet, bool bPreviewBack
-          rCTLFont.SetFillColor( rColor );
-     }
-     else
--        bTransparent = TRUE;
-+        bTransparent = true;
- 
-     rFont.SetTransparent( bTransparent );
-     rCJKFont.SetTransparent( bTransparent );
