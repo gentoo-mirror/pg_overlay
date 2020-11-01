@@ -279,6 +279,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/0001-Upgrade-liborcus-to-0.16.0.patch"
 	"${FILESDIR}/${P}-fix-non-pdfium-build.patch"
+	"${FILESDIR}/${PN}-icu-68-support.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
