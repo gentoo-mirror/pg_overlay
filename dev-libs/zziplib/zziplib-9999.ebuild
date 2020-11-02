@@ -32,8 +32,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-S="${WORKDIR}/${PN}-${MY_COMMIT}"
-
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.13.69-009-perror.patch
 	"${FILESDIR}"/${PN}-0.13.71-installing-man3-pages.patch
