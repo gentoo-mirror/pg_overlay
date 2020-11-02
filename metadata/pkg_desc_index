@@ -43,7 +43,6 @@ dev-java/openjdk 15.0.1_p9: Open source implementation of the Java programming l
 dev-java/openjdk-bin 15.0.1_p9: Prebuilt Java JDK binaries provided by AdoptOpenJDK
 dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by AdoptOpenJDK
 dev-lang/duktape 2.6.0: Embeddable Javascript engine
-dev-lang/php 7.4.12: The PHP language runtime engine
 dev-lang/python 2.7.18-r4 3.9.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.46.0 1.47.0-r1: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
