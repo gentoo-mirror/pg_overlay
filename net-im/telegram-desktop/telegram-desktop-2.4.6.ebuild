@@ -3,7 +3,6 @@
 
 EAPI=7
 
-CMAKE_MAKEFILE_GENERATOR="ninja"
 PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit cmake desktop flag-o-matic ninja-utils python-any-r1 xdg-utils
@@ -17,7 +16,7 @@ SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc64"
-IUSE="+dbus enchant +gtk +hunspell libressl lto pulseaudio +spell +X"
+IUSE="+dbus enchant +gtk +hunspell libressl lto pulseaudio +spell +webrtc +X"
 
 RDEPEND="
 	!net-im/telegram-desktop-bin
@@ -35,11 +34,9 @@ RDEPEND="
 	media-fonts/open-sans
 	media-libs/alsa-lib
 	media-libs/fontconfig:=
-	media-libs/libjpeg-turbo:=
 	~media-libs/libtgvoip-2.4.4_p20201030[pulseaudio=]
 	media-libs/openal[alsa]
 	media-libs/opus:=
-	~media-libs/tg_owt-0_pre20201030[pulseaudio=]
 	media-video/ffmpeg:=[alsa,opus]
 	sys-libs/zlib[minizip]
 	virtual/libiconv
@@ -58,6 +55,10 @@ RDEPEND="
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	!pulseaudio? ( media-sound/apulse[sdk] )
 	pulseaudio? ( media-sound/pulseaudio )
+	webrtc? (
+		media-libs/libjpeg-turbo:=
+		~media-libs/tg_owt-0_pre20201030[pulseaudio=]
+	)
 "
 
 DEPEND="
@@ -77,6 +78,7 @@ REQUIRED_USE="
 	spell? (
 		^^ ( enchant hunspell )
 	)
+	webrtc? ( !libressl )
 "
 
 S="${WORKDIR}/${MY_P}"
@@ -89,6 +91,12 @@ pkg_pretend() {
 		ewarn "check bug https://bugs.gentoo.org/715114 for more info"
 		ewarn
 	fi
+}
+
+src_prepare() {
+	# conditional patching is bad, but we want vanilla telegram with webrtc.
+	use webrtc || local PATCHES=( "${FILESDIR}/no-webrtc-build.patch" )
+	cmake_src_prepare
 }
 
 src_configure() {
@@ -116,6 +124,7 @@ src_configure() {
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION="$(usex dbus OFF ON)"
 		-DDESKTOP_APP_DISABLE_SPELLCHECK="$(usex spell OFF ON)" # enables hunspell (recommended)
+		-DDESKTOP_APP_DISABLE_WEBRTC_INTEGRATION="$(usex webrtc OFF ON)"
 		-DDESKTOP_APP_USE_ENCHANT="$(usex enchant ON OFF)" # enables enchant and disables hunspell
 		$(usex lto "-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON" '')
 	)
