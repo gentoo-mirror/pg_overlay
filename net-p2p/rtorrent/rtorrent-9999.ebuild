@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
@@ -13,7 +13,8 @@ EGIT_BRANCH="feature-bind"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="+daemon debug ipv6 selinux test +xmlrpc"
+IUSE="daemon debug selinux test xmlrpc"
+RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="=net-libs/libtorrent-9999
 	>=net-misc/curl-7.19.1

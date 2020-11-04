@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://git.code.sf.net/p/${PN}/git"
 LICENSE="BSD GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="libav netgear readynas zeroconf tivo"
+IUSE="netgear readynas zeroconf tivo"
 
 RDEPEND="dev-db/sqlite:3
 	media-libs/flac:=
@@ -20,9 +20,8 @@ RDEPEND="dev-db/sqlite:3
 	media-libs/libid3tag:=
 	media-libs/libogg:=
 	media-libs/libvorbis:=
+	media-video/ffmpeg:0=
 	virtual/jpeg:0=
-	libav? ( media-video/libav:0= )
-	!libav? ( media-video/ffmpeg:0= )
 	zeroconf? ( net-dns/avahi:= )"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig"

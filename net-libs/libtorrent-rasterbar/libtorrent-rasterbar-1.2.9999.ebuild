@@ -18,7 +18,7 @@ EGIT_SUBMODULES=()
 
 LICENSE="BSD"
 SLOT="0/10"
-#KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS=""
 IUSE="debug +dht doc examples libressl python +ssl static-libs test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
@@ -74,7 +74,7 @@ src_configure() {
 		$(use_enable ssl encryption)
 		$(use_enable static-libs static)
 		$(use_enable test tests)
-		--with-boost="${EPREFIX}/usr"
+		--with-boost
 		--with-libiconv
 	)
 	econf "${myeconfargs[@]}"
@@ -84,6 +84,9 @@ src_configure() {
 			econf "${myeconfargs[@]}" \
 				--enable-python-binding \
 				--with-boost-python="boost_${EPYTHON/./}"
+				# git rid of c++11
+				sed s/-std=c++11//g < bindings/python/compile_cmd > bindings/python/compile_cmd.new || die
+				mv -f bindings/python/compile_cmd.new bindings/python/compile_cmd || die
 		}
 		distutils-r1_src_configure
 	fi
