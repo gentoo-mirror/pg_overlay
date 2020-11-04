@@ -149,6 +149,7 @@ media-libs/shaderc 2020.3: Collection of tools, libraries and tests for shader c
 media-libs/vulkan-layers 1.2.157 9999: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.157 9999: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
+media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
 media-sound/audacious 9999: Lightweight and versatile audio player
@@ -184,7 +185,6 @@ net-libs/telegram-qt 9999: Telegram binding for Qt
 net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protocol
 net-libs/telepathy-qt 0.9.8 9999: Qt bindings for the Telepathy D-Bus protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
-net-misc/youtube-dl 99999997 99999999: Download videos from YouTube.com (and more sites...)
 net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
 net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
