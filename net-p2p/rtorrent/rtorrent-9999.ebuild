@@ -54,6 +54,7 @@ src_configure() {
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		--disable-dependency-tracking \
+		--disable-static \
 		$(use_enable debug) \
 		$(use_enable ipv6) \
 		$(use_with xmlrpc xmlrpc-c)
