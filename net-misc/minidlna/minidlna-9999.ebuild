@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit autotools git-r3 eutils linux-info tmpfiles toolchain-funcs user
 
@@ -30,6 +30,8 @@ CONFIG_CHECK="~INOTIFY_USER"
 
 PATCHES=(
 	"${FILESDIR}"/minidlna-gentoo-artwork.patch
+	# fix https://sourceforge.net/p/minidlna/bugs/297/
+	"${FILESDIR}"/minidlna_listen_interface.patch
 )
 
 src_prepare() {
