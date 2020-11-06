@@ -49,6 +49,7 @@ src_prepare() {
 
 	mkdir "${S}"/build-aux/ || die
 	touch "${S}"/build-aux/config.rpath || die
+	append-cxxflags -std=c++14
 	eautoreconf
 
 	default
