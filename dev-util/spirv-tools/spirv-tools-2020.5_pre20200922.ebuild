@@ -12,9 +12,10 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/${MY_PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://github.com/KhronosGroup/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="amd64 ~arm ~arm64 ~ppc ~ppc64 x86"
-	S="${WORKDIR}"/${MY_PN}-${PV}
+	EGIT_COMMIT="0a1fb588cd365f7737cb121fdd64553923e0cef6"
+	SRC_URI="https://github.com/KhronosGroup/${MY_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
+	S="${WORKDIR}"/${MY_PN}-${EGIT_COMMIT}
 fi
 
 DESCRIPTION="Provides an API and commands for processing SPIR-V modules"
@@ -31,15 +32,14 @@ RDEPEND=""
 BDEPEND="${PYTHON_DEPS}
 	${COMMON_DEPEND}"
 
-PATCHES=( "${FILESDIR}/0001-Revert-CMake-Enable-building-with-BUILD_SHARED_LIBS-.patch" )
-
+PATCHES=(
+        "${FILESDIR}"/"${PN}"-2020.5-Fix-build.patch
+)
 
 multilib_src_configure() {
 	local mycmakeargs=(
-		"-DBUILD_SHARED_LIBS=ON"
 		"-DSPIRV-Headers_SOURCE_DIR=/usr/"
 		"-DSPIRV_WERROR=OFF"
-		"-GNinja"
 	)
 
 	cmake_src_configure
