@@ -1,14 +1,14 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit autotools git-r3 toolchain-funcs
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
-EGIT_BRANCH="feature-bind"
+EGIT_BRANCH="feature/bind-merge"
 
 LICENSE="GPL-2"
 
