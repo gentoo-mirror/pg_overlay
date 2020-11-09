@@ -8,7 +8,7 @@ inherit autotools git-r3 linux-info
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
-EGIT_BRANCH="feature/bind-merge"
+EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"
 SLOT="0"

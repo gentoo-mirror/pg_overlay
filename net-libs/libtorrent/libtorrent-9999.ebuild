@@ -8,7 +8,7 @@ inherit autotools git-r3 toolchain-funcs
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
-EGIT_BRANCH="feature/bind-merge"
+EGIT_BRANCH="feature-bind"
 
 LICENSE="GPL-2"
 
