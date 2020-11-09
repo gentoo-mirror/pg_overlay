@@ -370,6 +370,11 @@ src_prepare() {
 }
 
 src_configure() {
+	export CLANG_C="$(tc-getCC)"
+	export CLANG_CXX="$(tc-getCXX)"
+	export LO_CLANG_CC="$(tc-getCC)"
+	export LO_CLANG_CXX="$(tc-getCXX)"
+
 	# Set up Google API keys, see https://www.chromium.org/developers/how-tos/api-keys
 	# Note: these are for Gentoo use ONLY. For your own distribution, please get
 	# your own set of keys. Feel free to contact chromium@gentoo.org for more info.
