@@ -38,10 +38,6 @@ BDEPEND="${PYTHON_DEPS}
 	test? ( net-misc/curl )"
 DEPEND="${RDEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-14.15.0-fix_ppc64_crashes.patch
-)
-
 S="${WORKDIR}/node-v${PV}"
 
 pkg_pretend() {
