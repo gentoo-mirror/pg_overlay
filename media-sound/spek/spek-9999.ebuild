@@ -7,7 +7,7 @@ WX_GTK_VER="3.1-gtk3"
 inherit autotools eutils git-r3 toolchain-funcs wxwidgets
 
 DESCRIPTION="Analyse your audio files by showing their spectrogram"
-HOMEPAGE="http://www.spek-project.org/"
+HOMEPAGE="http://spek.cc"
 EGIT_REPO_URI="https://github.com/alexkay/${PN}.git"
 
 LICENSE="GPL-3"
