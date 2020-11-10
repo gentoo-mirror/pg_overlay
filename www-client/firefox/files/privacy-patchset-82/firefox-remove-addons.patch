@@ -1,6 +1,6 @@
-diff -Nuar firefox-82.0.2_a/browser/extensions/moz.build firefox-82.0.2_b/browser/extensions/moz.build
---- firefox-82.0.2_a/browser/extensions/moz.build	2020-10-28 06:46:49.000000000 +0700
-+++ firefox-82.0.2_b/browser/extensions/moz.build	2020-11-04 10:09:25.845224351 +0700
+diff -Nuar a/browser/extensions/moz.build b/browser/extensions/moz.build
+--- a/browser/extensions/moz.build	2020-10-28 06:46:49.000000000 +0700
++++ b/browser/extensions/moz.build	2020-11-04 10:09:25.845224351 +0700
 @@ -3,11 +3,3 @@
  # This Source Code Form is subject to the terms of the Mozilla Public
  # License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -13,9 +13,9 @@ diff -Nuar firefox-82.0.2_a/browser/extensions/moz.build firefox-82.0.2_b/browse
 -    'webcompat',
 -    'report-site-issue'
 -]
-diff -Nuar firefox-82.0.2_a/browser/locales/filter.py firefox-82.0.2_b/browser/locales/filter.py
---- firefox-82.0.2_a/browser/locales/filter.py	2020-10-28 06:46:49.000000000 +0700
-+++ firefox-82.0.2_b/browser/locales/filter.py	2020-11-04 10:15:42.493668294 +0700
+diff -Nuar a/browser/locales/filter.py b/browser/locales/filter.py
+--- a/browser/locales/filter.py	2020-10-28 06:46:49.000000000 +0700
++++ b/browser/locales/filter.py	2020-11-04 10:15:42.493668294 +0700
 @@ -11,9 +11,6 @@
      if mod not in ("netwerk", "dom", "toolkit", "security/manager",
                     "devtools/client", "devtools/shared", "devtools/startup",
@@ -26,9 +26,9 @@ diff -Nuar firefox-82.0.2_a/browser/locales/filter.py firefox-82.0.2_b/browser/l
                     "extensions/spellcheck",
                     "other-licenses/branding/firefox",
                     "browser/branding/official",
-diff -Nuar firefox-82.0.2_a/browser/locales/l10n.ini firefox-82.0.2_b/browser/locales/l10n.ini
---- firefox-82.0.2_a/browser/locales/l10n.ini	2020-10-28 06:46:49.000000000 +0700
-+++ firefox-82.0.2_b/browser/locales/l10n.ini	2020-11-04 10:16:00.500880870 +0700
+diff -Nuar a/browser/locales/l10n.ini b/browser/locales/l10n.ini
+--- a/browser/locales/l10n.ini	2020-10-28 06:46:49.000000000 +0700
++++ b/browser/locales/l10n.ini	2020-11-04 10:16:00.500880870 +0700
 @@ -12,9 +12,6 @@
       browser/branding/official
       devtools/client
@@ -39,9 +39,9 @@ diff -Nuar firefox-82.0.2_a/browser/locales/l10n.ini firefox-82.0.2_b/browser/lo
  
  [includes]
  # non-central apps might want to use %(topsrcdir)s here, or other vars
-diff -Nuar firefox-82.0.2_a/browser/locales/l10n.toml firefox-82.0.2_b/browser/locales/l10n.toml
---- firefox-82.0.2_a/browser/locales/l10n.toml	2020-10-28 06:46:49.000000000 +0700
-+++ firefox-82.0.2_b/browser/locales/l10n.toml	2020-11-04 10:16:40.669355062 +0700
+diff -Nuar a/browser/locales/l10n.toml b/browser/locales/l10n.toml
+--- a/browser/locales/l10n.toml	2020-10-28 06:46:49.000000000 +0700
++++ b/browser/locales/l10n.toml	2020-11-04 10:16:40.669355062 +0700
 @@ -126,18 +126,6 @@
      l10n = "{l}browser/branding/official/**"
  
@@ -61,9 +61,9 @@ diff -Nuar firefox-82.0.2_a/browser/locales/l10n.toml firefox-82.0.2_b/browser/l
      reference = "services/sync/locales/en-US/**"
      l10n = "{l}services/sync/**"
  
-diff -Nuar firefox-82.0.2_a/browser/locales/Makefile.in firefox-82.0.2_b/browser/locales/Makefile.in
---- firefox-82.0.2_a/browser/locales/Makefile.in	2020-10-28 06:46:43.000000000 +0700
-+++ firefox-82.0.2_b/browser/locales/Makefile.in	2020-11-04 10:10:21.704882716 +0700
+diff -Nuar a/browser/locales/Makefile.in b/browser/locales/Makefile.in
+--- a/browser/locales/Makefile.in	2020-10-28 06:46:43.000000000 +0700
++++ b/browser/locales/Makefile.in	2020-11-04 10:10:21.704882716 +0700
 @@ -58,10 +58,6 @@
  	@$(MAKE) -C ../../toolkit/locales l10n-$* XPI_ROOT_APPID='$(XPI_ROOT_APPID)'
  	@$(MAKE) -C ../../services/sync/locales AB_CD=$* XPI_NAME=locale-$*
@@ -90,3 +90,14 @@ diff -Nuar firefox-82.0.2_a/browser/locales/Makefile.in firefox-82.0.2_b/browser
  
  package-win32-installer: $(SUBMAKEFILES)
  	$(MAKE) -C ../installer/windows CONFIG_DIR=l10ngen ZIP_IN='$(ZIP_OUT)' installer
+diff -Nuar a/browser/locales/Makefile.in b/browser/locales/Makefile.in
+--- a/browser/installer/package-manifest.in	2020-11-10 12:49:54.575993696 +0700
++++ b//browser/installer/package-manifest.in2020-11-10 12:50:36.920538743 +0700
+@@ -265,7 +265,6 @@
+ @RESPATH@/browser/chrome/icons/default/default128.png
+ @RESPATH@/browser/chrome/icons/default/default256.png
+ #endif
+-@RESPATH@/browser/features/*
+ 
+ ; [DevTools Startup Files]
+ @RESPATH@/browser/chrome/devtools-startup@JAREXT@
