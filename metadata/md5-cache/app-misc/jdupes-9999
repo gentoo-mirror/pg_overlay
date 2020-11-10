@@ -1,5 +1,6 @@
 BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=install prepare unpack
+DEPEND=dev-libs/libpcre2[pcre32]
 DESCRIPTION=A powerful duplicate file finder and an enhanced fork of 'fdupes'.
 EAPI=7
 HOMEPAGE=https://github.com/jbruchon/jdupes
@@ -7,4 +8,4 @@ LICENSE=MIT
 PROPERTIES=live
 SLOT=0
 _eclasses_=git-r3	3e7ec3d6619213460c85e2aa48398441
-_md5_=f78f7a6b0abb6fb0620995938cf8ae18
+_md5_=b2681b85a0f8a360eaa7628345313924
