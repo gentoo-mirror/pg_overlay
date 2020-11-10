@@ -1072,10 +1072,9 @@ src_install() {
 	|| die
 
 	rm -rv "${BUILD_DIR}"/browser/extensions/* || die
-	#rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
+	rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
 	rm -rv "${BUILD_DIR}"/instrumented/browser/extensions/* || die
 	rm -rv "${BUILD_DIR}"/instrumented/dist/bin/browser/features/* || die
-	rm -rv "${BUILD_DIR}"/instrumented/dist/firefox/browser/features/* || die
 	#######
 
 	# Install language packs
