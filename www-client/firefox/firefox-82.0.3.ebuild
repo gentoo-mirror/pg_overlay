@@ -1070,7 +1070,7 @@ src_install() {
 	"${GENTOO_PREFS}" \
 	|| die
 
-	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
+	rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
 	#######
 
 	# Install language packs
