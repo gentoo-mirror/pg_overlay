@@ -27,7 +27,6 @@ RESTRICT="test"
 
 RDEPEND=">=app-arch/brotli-1.0.9
 	>=dev-libs/libuv-1.40.0:=
-	>=net-dns/c-ares-1.16.1
 	>=net-libs/nghttp2-1.41.0
 	sys-libs/zlib
 	system-icu? ( >=dev-libs/icu-67:= )
@@ -88,10 +87,10 @@ src_configure() {
 
 	local myconf=(
 		--shared-brotli
-		#--shared-cares
 		--shared-libuv
 		--shared-nghttp2
 		--shared-zlib
+	    --experimental-http-parser
 	)
 	use debug && myconf+=( --debug )
 	if use system-icu; then
@@ -158,11 +157,11 @@ src_install() {
 		# We need to temporarily replace default config path since
 		# npm otherwise tries to write outside of the sandbox
 		local npm_config="usr/$(get_libdir)/node_modules/npm/lib/config/core.js"
-		sed -i -e "s|'/etc'|'${ED}/etc'|g" "${ED}/${npm_config}" || die
+		sed -i -e "s|'/etc'|'${ED}/etc'|g" "${ED}/${npm_config}"
 		local tmp_npm_completion_file="$(TMPDIR="${T}" mktemp -t npm.XXXXXXXXXX)"
 		"${ED}/usr/bin/npm" completion > "${tmp_npm_completion_file}"
 		newbashcomp "${tmp_npm_completion_file}" npm
-		sed -i -e "s|'${ED}/etc'|'/etc'|g" "${ED}/${npm_config}" || die
+		sed -i -e "s|'${ED}/etc'|'/etc'|g" "${ED}/${npm_config}"
 
 		# Move man pages
 		doman "${LIBDIR}"/node_modules/npm/man/man{1,5,7}/*
