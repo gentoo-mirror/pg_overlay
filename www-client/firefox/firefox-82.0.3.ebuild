@@ -522,6 +522,7 @@ src_prepare() {
 	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/privacy-patchset-$(ver_cut 1)/$i"; done
+	rm -rv browser/extensions/{doh-rollout,screenshots,webcompat,report-site-issue}
 	### Debian patches
 	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
