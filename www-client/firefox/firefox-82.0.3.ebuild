@@ -522,6 +522,7 @@ src_prepare() {
 	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/privacy-patchset-$(ver_cut 1)/$i"; done
+	rm -rv browser/extensions/{doh-rollout,webcompat,report-site-issue}
 	### Debian patches
 	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
@@ -1070,7 +1071,7 @@ src_install() {
 	"${GENTOO_PREFS}" \
 	|| die
 
-	rm -frv "${BUILD_OBJ_DIR}"/dist/bin/browser/features/* || die
+	rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
 	#######
 
 	# Install language packs

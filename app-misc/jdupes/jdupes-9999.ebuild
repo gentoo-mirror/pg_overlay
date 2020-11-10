@@ -15,6 +15,8 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
+DEPEND="dev-libs/libpcre2[pcre32]"
+
 DOCS=( CHANGES README.md )
 
 src_prepare() {
