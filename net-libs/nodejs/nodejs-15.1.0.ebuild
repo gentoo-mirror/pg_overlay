@@ -90,7 +90,7 @@ src_configure() {
 		--shared-libuv
 		--shared-nghttp2
 		--shared-zlib
-	    --experimental-http-parser
+		--experimental-http-parser
 	)
 	use debug && myconf+=( --debug )
 	if use system-icu; then
