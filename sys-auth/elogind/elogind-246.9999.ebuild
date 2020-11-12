@@ -82,7 +82,7 @@ src_configure() {
 		-Dsmack=true
 		-Dcgroup-controller=openrc
 		-Ddefault-hierarchy=${cgroupmode}
-		-Ddefault-kill-user-processes=false
+		-Ddefault-kill-user-processes=true
 		-Dacl=$(usex acl true false)
 		-Daudit=$(usex audit true false)
 		--buildtype $(usex debug debug release)
@@ -90,6 +90,7 @@ src_configure() {
 		-Dpam=$(usex pam true false)
 		-Dselinux=$(usex selinux true false)
 		-Dutmp=$(usex elibc_musl false true)
+		-Defi=$(usex efi true false)
 	)
 
 	meson_src_configure
