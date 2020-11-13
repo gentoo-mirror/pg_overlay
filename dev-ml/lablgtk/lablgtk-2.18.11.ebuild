@@ -26,6 +26,10 @@ BDEPEND="dev-ml/findlib
 
 DOCS=( CHANGES README CHANGES.API )
 
+PATCHES=(
+	"${FILESDIR}"/${P}-cflags.patch
+)
+
 src_configure() {
 	local myeconfargs=(
 		$(use_enable debug)
