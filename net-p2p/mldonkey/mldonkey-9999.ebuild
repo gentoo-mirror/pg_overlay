@@ -42,8 +42,7 @@ DEPEND="${RDEPEND}
 	bittorrent? (
 		dev-lang/ocaml[ocamlopt?]
 		dev-ml/num
-	)
-)"
+	)"
 
 RESTRICT="!ocamlopt? ( strip )"
 
