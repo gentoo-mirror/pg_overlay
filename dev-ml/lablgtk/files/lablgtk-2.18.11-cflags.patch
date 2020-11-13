@@ -73,17 +73,6 @@
  .ml.cmo:
  	$(COMPILER) $(PRINCIPAL) $<
  .mli.cmi:
---- a/src/ml_gdk.h	2020-05-14 22:19:59.045394874 +0200
-+++ b/src/ml_gdk.h	2020-05-14 22:20:06.694277819 +0200
-@@ -102,7 +102,7 @@
- CAMLexport int OptFlags_GdkModifier_val (value);
- CAMLexport int Flags_GdkModifier_val (value);
- CAMLexport int Flags_Event_mask_val (value);
--CAMLexport lookup_info *ml_table_extension_events;
-+extern lookup_info *ml_table_extension_events;
- #define Extension_events_val(key) ml_lookup_to_c(ml_table_extension_events,key)
- 
- #define GdkDragContext_val(val) check_cast(GDK_DRAG_CONTEXT,val)
 --- a/src/ml_gdk.c	2020-05-14 22:21:39.244861128 +0200
 +++ b/src/ml_gdk.c	2020-05-14 22:21:57.571580518 +0200
 @@ -55,6 +55,8 @@
