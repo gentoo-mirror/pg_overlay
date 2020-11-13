@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/ygrek/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm ~hppa ~ia64 ppc ~ppc64 x86"
+KEYWORDS=""
 
 IUSE="bittorrent doc fasttrack gd gnutella gtk guionly magic +ocamlopt upnp"
 
@@ -38,17 +38,15 @@ RDEPEND="dev-lang/perl
 # -unsafe-string usage:
 # https://github.com/ygrek/mldonkey/issues/46
 DEPEND="${RDEPEND}
-	<dev-lang/ocaml-4.10:=[ocamlopt?]
+	dev-lang/ocaml:=[ocamlopt?]
 	bittorrent? (
 		|| (
-			<dev-lang/ocaml-4.06[ocamlopt?]
+			dev-lang/ocaml[ocamlopt?]
 			dev-ml/num
 		)
 	)"
 
 RESTRICT="!ocamlopt? ( strip )"
-
-S="${WORKDIR}/${P}-2"
 
 pkg_setup() {
 	if use gtk; then
