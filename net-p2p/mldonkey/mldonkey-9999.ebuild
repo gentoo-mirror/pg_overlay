@@ -48,8 +48,6 @@ DEPEND="${RDEPEND}
 
 RESTRICT="!ocamlopt? ( strip )"
 
-S="${WORKDIR}/${P}-2"
-
 pkg_setup() {
 	if use gtk; then
 		echo ""
