@@ -1,0 +1,16 @@
+BDEPEND=>=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install postinst prepare setup unpack
+DEPEND=dev-lang/perl dev-ml/camlp4:= gd? ( media-libs/gd[truetype] ) gtk? ( gnome-base/librsvg dev-ml/lablgtk:2=[svg] ) guionly? ( gnome-base/librsvg dev-ml/lablgtk:2=[svg] ) magic? ( sys-apps/file ) upnp? ( net-libs/libnatpmp net-libs/miniupnpc:= ) <dev-lang/ocaml-4.10:=[ocamlopt?] bittorrent? ( || ( <dev-lang/ocaml-4.06[ocamlopt?] dev-ml/num ) )
+DESCRIPTION=Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
+EAPI=7
+HOMEPAGE=http://mldonkey.sourceforge.net/ https://github.com/ygrek/mldonkey
+IUSE=bittorrent doc fasttrack gd gnutella gtk guionly magic +ocamlopt upnp
+KEYWORDS=~alpha amd64 ~arm ~hppa ~ia64 ppc ~ppc64 x86
+LICENSE=GPL-2
+PROPERTIES=live
+RDEPEND=dev-lang/perl dev-ml/camlp4:= gd? ( media-libs/gd[truetype] ) gtk? ( gnome-base/librsvg dev-ml/lablgtk:2=[svg] ) guionly? ( gnome-base/librsvg dev-ml/lablgtk:2=[svg] ) magic? ( sys-apps/file ) upnp? ( net-libs/libnatpmp net-libs/miniupnpc:= )
+REQUIRED_USE=guionly? ( gtk )
+RESTRICT=!ocamlopt? ( strip )
+SLOT=0
+_eclasses_=autotools	7d999b62b8749fad43fff00620cedf47	desktop	7fd20552ce4cc97e8acb132a499a7dd8	edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	2d5b3f4b315094768576b6799e4f926e	flag-o-matic	09a8beb8e6a8e02dc1e1bd83ac353741	git-r3	3e7ec3d6619213460c85e2aa48398441	l10n	8cdd85e169b835d518bc2fd59f780d8e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	98584e405e2b0264d37e8f728327fed1	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb	wrapper	4251d4c84c25f59094fd557e0063a974
+_md5_=78a294808e403cb206eae7b30ee9bef0
