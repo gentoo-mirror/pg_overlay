@@ -40,11 +40,10 @@ RDEPEND="dev-lang/perl
 DEPEND="${RDEPEND}
 	dev-lang/ocaml:=[ocamlopt?]
 	bittorrent? (
-		|| (
-			dev-lang/ocaml[ocamlopt?]
-			dev-ml/num
-		)
-	)"
+		dev-lang/ocaml[ocamlopt?]
+		dev-ml/num
+	)
+)"
 
 RESTRICT="!ocamlopt? ( strip )"
 
