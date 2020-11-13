@@ -61,6 +61,8 @@ dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
+dev-ml/lablgtk 2.18.11: Objective CAML interface for Gtk+2
+dev-ml/num 1.4: Library for arbitrary-precision integer and rational arithmetic
 dev-perl/File-HomeDir 1.4.0: Get home directory for self or other user
 dev-perl/HTTP-Cookies 6.50.0: Storage of cookies
 dev-perl/HTTP-Message 6.180.0: Base class for Request/Response
