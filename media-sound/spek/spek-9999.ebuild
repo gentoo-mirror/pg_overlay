@@ -24,9 +24,9 @@ BDEPEND="
 	virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.8.1-disable-updates.patch
-	"${FILESDIR}"/${P}-replace-gnu+11-with-c++11.patch
-	"${FILESDIR}"/${P}-stdlib.patch
+	"${FILESDIR}"/${PN}-disable-updates.patch
+	"${FILESDIR}"/${PN}-replace-gnu+11-with-c++11.patch
+	"${FILESDIR}"/${PN}-stdlib.patch
 )
 
 src_prepare() {
