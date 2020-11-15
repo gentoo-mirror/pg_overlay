@@ -1,6 +1,6 @@
-BDEPEND=>=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1[curl]
-DEFINED_PHASES=prepare unpack
-DEPEND=media-video/ffmpeg:0= x11-libs/wxGTK:3.1-gtk3[X] dev-util/intltool virtual/pkgconfig >=sys-devel/gcc-4.7 sys-devel/gettext
+BDEPEND=dev-util/intltool sys-devel/gettext virtual/pkgconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure prepare unpack
+DEPEND=media-video/ffmpeg:0= x11-libs/wxGTK:3.1-gtk3[X]
 DESCRIPTION=Analyse your audio files by showing their spectrogram
 EAPI=7
 HOMEPAGE=http://spek.cc
@@ -10,4 +10,4 @@ PROPERTIES=live
 RDEPEND=media-video/ffmpeg:0= x11-libs/wxGTK:3.1-gtk3[X]
 SLOT=0
 _eclasses_=autotools	7d999b62b8749fad43fff00620cedf47	edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	2d5b3f4b315094768576b6799e4f926e	flag-o-matic	09a8beb8e6a8e02dc1e1bd83ac353741	git-r3	3e7ec3d6619213460c85e2aa48398441	l10n	8cdd85e169b835d518bc2fd59f780d8e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	98584e405e2b0264d37e8f728327fed1	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb	wrapper	4251d4c84c25f59094fd557e0063a974	wxwidgets	e09bd8449bce1f2e8206dcc2ab8f8c58
-_md5_=11e770fbcb63c4b84d89bbd3512f7e6b
+_md5_=b698eb07079d540ca64aa70d01dbd0ab
