@@ -58,6 +58,7 @@ dev-libs/liborcus 0.15.4 0.16.1: Standalone file import filter library for sprea
 dev-libs/libsigc++ 3.0.4: Typesafe callback system for standard C++
 dev-libs/libuinputplus 0.1.4: Easy-to-use uinput library in C++
 dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
+dev-libs/protobuf 3.14.0_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
