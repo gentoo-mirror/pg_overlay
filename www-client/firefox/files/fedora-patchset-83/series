@@ -1,31 +1,14 @@
 build-disable-elfhack.patch
 mozilla-1669639.patch
 
-firefox-enable-addons.patch
 rhbz-1173156.patch
 mozilla-1170092.patch
 rhbz-1354671.patch
 firefox-locale-debug.patch
 disable-openh264-download.patch
 
-mozilla-1196777.patch
 mozilla-1667096.patch
 mozilla-1663844.patch
 mozilla-1670333.patch
 mozilla-1673202.patch
-mozilla-1673313.patch
 mozilla-1885133.patch
-
-pw1.patch
-pw2.patch
-pw3.patch
-pw4.patch
-pw5.patch
-pw6.patch
-pw7.patch
-
-firefox-disable-ffvpx-with-vapi.patch
-firefox-vaapi-extra-frames.patch
-
-pgo.patch
-mozilla-1516803.patch
