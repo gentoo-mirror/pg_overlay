@@ -3,7 +3,7 @@ app-accessibility/at-spi2-core 2.38.0: D-Bus accessibility specifications and re
 app-admin/eclean-kernel 2.99.2: Remove outdated built kernels
 app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
-app-arch/lz4 1.9.2: Extremely Fast Compression algorithm
+app-arch/lz4 1.9.3: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-crypt/acme 1.9.0: An implementation of the ACME protocol
@@ -42,7 +42,6 @@ dev-java/javatoolkit 0.6.3: Collection of Gentoo-specific tools for Java
 dev-java/openjdk 15.0.1_p9: Open source implementation of the Java programming language
 dev-java/openjdk-bin 15.0.1_p9: Prebuilt Java JDK binaries provided by AdoptOpenJDK
 dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by AdoptOpenJDK
-dev-lang/duktape 2.6.0: Embeddable Javascript engine
 dev-lang/python 2.7.18-r4 3.9.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.46.0 1.47.0-r1: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
