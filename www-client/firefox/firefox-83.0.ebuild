@@ -558,7 +558,6 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-	eapply "${FILESDIR}/patch-bug1440203.patch"
 	#######
 
 	xdg_src_prepare
