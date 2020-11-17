@@ -1029,10 +1029,9 @@ src_install() {
 	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
-	rm -rv "${BUILD_DIR}"/browser/extensions/* || die
-	rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
-	rm -rv "${BUILD_DIR}"/instrumented/browser/extensions/* || die
-	rm -rv "${BUILD_DIR}"/instrumented/dist/bin/browser/features/* || die
+	rm -rv "${BUILD_DIR}"/comm/mail/extensions/* || die
+	rm -rv "${BUILD_DIR}"/dist/bin/features/* || die
+	rm -rv "${BUILD_DIR}"/dist/thunderbird/features/* || die
 	#######
 
 	# Install language packs
