@@ -1030,9 +1030,9 @@ src_install() {
 	"${GENTOO_PREFS}" \
 	|| die
 	rm -rv "${BUILD_DIR}"/comm/mail/components/cloudfile/wetransfer/* || die
-	rm -rv "${BUILD_DIR}"/comm/mail/extensions/* || die
-	rm -rv "${BUILD_DIR}"/dist/bin/features/* || die
-	rm -rv "${BUILD_DIR}"/dist/thunderbird/features/* || die
+	rm -rv "${BUILD_DIR}"/comm/mail/extensions/ || die
+	rm -rv "${BUILD_DIR}"/dist/bin/features/ || die
+	rm -rv "${BUILD_DIR}"/dist/thunderbird/features/ || die
 	#######
 
 	# Install language packs
