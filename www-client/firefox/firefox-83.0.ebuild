@@ -723,7 +723,7 @@ src_configure() {
 			if use clang ; then
 				# Used in build/pgo/profileserver.py
 				export LLVM_PROFDATA="llvm-profdata"
-				mozconfig_annotate '+pgo-rust' MOZ_PGO_RUST=1
+				mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
 			fi
 		fi
 	else
