@@ -1066,7 +1066,7 @@ src_install() {
 	"${GENTOO_PREFS}" \
 	|| die
 
-	cat "${FILESDIR}"/privacy-patchset-$(ver_cut 1)/privacy.js >> \
+	cat "${FILESDIR}"/privacy-patchset/privacy.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
 

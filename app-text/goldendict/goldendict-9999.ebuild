@@ -13,8 +13,8 @@ EGIT_SUBMODULES=()
 
 LICENSE="GPL-3"
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="debug ffmpeg libav"
+KEYWORDS=""
+IUSE="debug ffmpeg "
 
 RDEPEND="
 	app-arch/bzip2
@@ -39,8 +39,7 @@ RDEPEND="
 	x11-libs/libXtst
 	ffmpeg? (
 		media-libs/libao
-		libav? ( media-video/libav:0= )
-		!libav? ( media-video/ffmpeg:0= )
+		media-video/ffmpeg:0=
 	)
 "
 DEPEND="${RDEPEND}"
@@ -53,14 +52,10 @@ src_prepare() {
 	default
 
 	# disable git
-	sed -i \
-		-e '/git describe/s/^/#/' \
-		${PN}.pro || die
+	sed -i -e '/git describe/s/^/#/' ${PN}.pro || die
 
 	# fix installation path
-	sed -i \
-		-e '/PREFIX = /s:/usr/local:/usr:' \
-		${PN}.pro || die
+	sed -i -e '/PREFIX = /s:/usr/local:/usr:' ${PN}.pro || die
 
 	# add trailing semicolon
 	sed -i -e '/^Categories/s/$/;/' redist/${PN}.desktop || die
@@ -80,7 +75,7 @@ src_prepare() {
 src_configure() {
 	local myconf=()
 
-	if ! use ffmpeg && ! use libav ; then
+	if ! use ffmpeg ; then
 		myconf+=( CONFIG+=no_ffmpeg_player )
 	fi
 
