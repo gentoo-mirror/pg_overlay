@@ -295,7 +295,7 @@ src_configure() {
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
-# 		#use-libcxx = true
+		use-libcxx = true
 		use-linker = "lld"
 
 		[build]
@@ -346,7 +346,7 @@ src_configure() {
 		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
-		llvm-libunwind = true
+		#llvm-libunwind = true
 
 		[dist]
 		src-tarball = false
