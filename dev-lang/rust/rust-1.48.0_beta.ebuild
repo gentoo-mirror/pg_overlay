@@ -12,7 +12,7 @@ if [[ ${PV} = *beta* ]]; then
 	BETA_SNAPSHOT=""
 	MY_P="rustc-beta"
 	SLOT="beta/${PV}"
-	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz"
+	SRC="rustc-beta-src.tar.xz"
 else
 	ABI_VER="$(ver_cut 1-2)"
 	SLOT="stable/${ABI_VER}"
