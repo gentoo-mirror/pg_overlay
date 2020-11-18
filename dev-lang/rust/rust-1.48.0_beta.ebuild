@@ -12,7 +12,7 @@ if [[ ${PV} = *beta* ]]; then
 	BETA_SNAPSHOT=""
 	MY_P="rustc-beta"
 	SLOT="beta/${PV}"
-	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz -> rustc-${PV}-src.tar.xz"
+	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz"
 else
 	ABI_VER="$(ver_cut 1-2)"
 	SLOT="stable/${ABI_VER}"
@@ -22,16 +22,15 @@ else
 fi
 
 #RUST_STAGE0_VERSION=${PV}
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).1"
+RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
 
-#SRC_URI="
-#	https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
-#	!system-bootstrap? ( $(rust_all_arch_uris rust-${RUST_STAGE0_VERSION}) )
-#"
-
+SRC_URI="
+	https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
+	!system-bootstrap? ( $(rust_all_arch_uris rust-${RUST_STAGE0_VERSION}) )
+"
 # keep in sync with llvm ebuild of the same version as bundled one.
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM AVR BPF Hexagon Lanai Mips MSP430
 	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
