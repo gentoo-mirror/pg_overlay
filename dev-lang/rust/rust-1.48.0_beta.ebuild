@@ -295,7 +295,7 @@ src_configure() {
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared = true
-		use-libcxx = true
+# 		#use-libcxx = true
 		use-linker = "lld"
 
 		[build]
