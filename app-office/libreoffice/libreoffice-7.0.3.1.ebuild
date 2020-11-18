@@ -238,10 +238,7 @@ DEPEND="${COMMON_DEPEND}
 	x11-libs/libXtst
 	java? (
 		dev-java/ant-core
-		|| (
-			dev-java/openjdk:15
-			dev-java/openjdk-bin:15
-		)
+		>=virtual/jdk-1.9
 	)
 	test? (
 		app-crypt/gnupg
@@ -256,11 +253,7 @@ RDEPEND="${COMMON_DEPEND}
 	!app-office/openoffice
 	media-fonts/liberation-fonts
 	|| ( x11-misc/xdg-utils kde-plasma/kde-cli-tools )
-	java? ( || (
-		dev-java/openjdk:15
-		dev-java/openjdk-jre-bin:15
-		>=virtual/jre-1.8
-	) )
+	java? ( >=virtual/jre-1.9 )
 	kde? ( kde-frameworks/breeze-icons:* )
 "
 if [[ ${MY_PV} != *9999* ]] && [[ ${PV} != *_* ]]; then
@@ -409,8 +402,9 @@ src_configure() {
 	# --disable-report-builder: too much java packages pulled in without pkgs
 	# --without-system-sane: just sane.h header that is used for scan in writer,
 	#   not linked or anything else, worthless to depend on
+	# --without-system-qrcodegen: see https://bugs.gentoo.org/691740
 	# --disable-pdfium: not yet packaged
-	# --without-system-qrcodegen: has no real build system and LO is the only user
+	# --without-system-qrencode: has no real build system and LO is the only user
 	local myeconfargs=(
 		--with-system-dicts
 		--with-system-epoxy
@@ -435,7 +429,7 @@ src_configure() {
 		--disable-openssl
 		--disable-pdfium
 		--disable-vlc
-		--with-extra-buildid="${gentoo_buildid}"
+		--with-build-version="${gentoo_buildid}"
 		--enable-extension-integration
 		--with-external-dict-dir="${EPREFIX}/usr/share/myspell"
 		--with-external-hyph-dir="${EPREFIX}/usr/share/myspell"
@@ -500,14 +494,9 @@ src_configure() {
 			--without-junit
 			--without-system-hsqldb
 			--with-ant-home="${ANT_HOME}"
-			#--with-jdk-home=$(java-config --jdk-home 2>/dev/null)
+			--with-jdk-home=$(java-config --jdk-home 2>/dev/null)
 			--with-jvm-path="${EPREFIX}/usr/lib/"
 		)
-		if has_version "dev-java/openjdk:15"; then
-			myeconfargs+=( -with-jdk-home="${EPREFIX}/usr/$(get_libdir)/openjdk-15" )
-		elif has_version "dev-java/openjdk-bin:15"; then
-			myeconfargs+=( --with-jdk-home="/opt/openjdk-bin-15" )
-		fi
 
 		use libreoffice_extensions_scripting-beanshell && \
 			myeconfargs+=( --with-beanshell-jar=$(java-pkg_getjar bsh bsh.jar) )
