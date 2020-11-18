@@ -346,7 +346,7 @@ src_configure() {
 		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
-		llvm-libunwind = true
+		#llvm-libunwind = true
 
 		[dist]
 		src-tarball = false
