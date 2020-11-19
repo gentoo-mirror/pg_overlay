@@ -241,6 +241,10 @@ src_prepare() {
 	# it's a shebang and make them executable. Then brp-mangle-shebangs gets upset...
 	find -name '*.rs' -type f -perm /111 -exec chmod -v -x '{}' '+'
 
+	# LLVM LibUwind hack
+	sed -i /std=c99/d library/unwind/build.rs
+	sed -i /std=c++11/d library/unwind/build.rs
+
 	use libressl && eapply ${FILESDIR}/${PV}-libressl.patch
 
 	default
