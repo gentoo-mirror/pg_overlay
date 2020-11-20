@@ -3,7 +3,7 @@
 
 EAPI=6
 
-inherit gnome2 git-r3
+inherit autotools gnome2 git-r3
 
 DESCRIPTION="GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC"
 HOMEPAGE="https://github.com/transmission-remote-gtk/transmission-remote-gtk"
@@ -34,6 +34,10 @@ DEPEND="${RDEPEND}
 	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
 " # eautoreconf needs sys-devel/autoconf-archive
+
+src_prepare() {
+	eautoreconf
+}
 
 src_configure() {
 	# Disable overly strict appdata validation
