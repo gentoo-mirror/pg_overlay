@@ -327,10 +327,6 @@ net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
 net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/pidgin:zephyr - Enable Zephyr protocol support
-net-im/telegram-desktop:enchant - Enable the app-text/aspell spell-checking backend
-net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking backend
-net-im/telegram-desktop:lto - Enable Link Time Optimization (LTO / IPO)
-net-im/telegram-desktop:webrtc - WebRTC based audio/video call support ( via media-libs/tg_owt )
 net-libs/glib-networking:gnome - Extract HTTP/HTTPS/SOCKS proxy configuration stored using GSettings
 net-libs/glib-networking:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration
 net-libs/libsoup:brotli - Enable brotli decompression support
