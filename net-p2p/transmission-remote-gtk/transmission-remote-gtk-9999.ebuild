@@ -1,14 +1,14 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit autotools gnome2 git-r3
+inherit autotools git-r3
 
 DESCRIPTION="GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC"
 HOMEPAGE="https://github.com/transmission-remote-gtk/transmission-remote-gtk"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-SRC_URI=""
+#SRC_URI=""
 
 LICENSE="GPL-2+"
 SLOT="0"
@@ -36,6 +36,7 @@ DEPEND="${RDEPEND}
 " # eautoreconf needs sys-devel/autoconf-archive
 
 src_prepare() {
+	default
 	eautoreconf
 }
 
