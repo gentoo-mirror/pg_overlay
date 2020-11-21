@@ -229,6 +229,7 @@ virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
 virtual/rust 1.48.0: Virtual for Rust language compiler
 www-client/firefox 83.0: Firefox Web Browser
+www-client/ungoogled-chromium 87.0.4280.66_p1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-drivers/xf86-video-intel 9999: X.Org driver for Intel cards
