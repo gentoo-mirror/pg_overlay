@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE="threads(+)"
 
-inherit bash-completion-r1 flag-o-matic python-any-r1 toolchain-funcs xdg-utils
+inherit bash-completion-r1 flag-o-matic pax-utils python-any-r1 toolchain-funcs xdg-utils
 
 DESCRIPTION="A JavaScript runtime built on Chrome's V8 JavaScript engine"
 HOMEPAGE="https://nodejs.org/"
@@ -16,7 +16,7 @@ LICENSE="Apache-1.1 Apache-2.0 BSD BSD-2 MIT"
 SLOT="0/$(ver_cut 1)"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x64-macos"
 
-IUSE="cpu_flags_x86_sse2 debug doc +icu inspector +npm +snapshot +ssl system-icu +system-ssl systemtap test"
+IUSE="cpu_flags_x86_sse2 debug doc +icu inspector +npm pax_kernel +snapshot +ssl system-icu +system-ssl systemtap test"
 REQUIRED_USE="inspector? ( icu ssl )
 	npm? ( ssl )
 	system-icu? ( icu )
@@ -27,7 +27,7 @@ RESTRICT="test"
 
 RDEPEND=">=app-arch/brotli-1.0.9
 	>=dev-libs/libuv-1.40.0:=
-	>=net-dns/c-ares-1.16.1
+	>=net-dns/c-ares-1.17.1
 	>=net-libs/nghttp2-1.41.0
 	sys-libs/zlib
 	system-icu? ( >=dev-libs/icu-67:= )
@@ -35,7 +35,8 @@ RDEPEND=">=app-arch/brotli-1.0.9
 BDEPEND="${PYTHON_DEPS}
 	sys-apps/coreutils
 	systemtap? ( dev-util/systemtap )
-	test? ( net-misc/curl )"
+	test? ( net-misc/curl )
+	pax_kernel? ( sys-apps/elfix )"
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/node-v${PV}"
@@ -79,6 +80,9 @@ src_prepare() {
 		sed -i -e "s|out/Release/|out/Debug/|g" tools/install.py || die
 		BUILDTYPE=Debug
 	fi
+
+	# We need to disable mprotect on two files when it builds Bug 694100.
+	use pax_kernel && PATCHES+=( "${FILESDIR}"/${PN}-13.8.0-paxmarking.patch )
 
 	default
 }
@@ -139,6 +143,8 @@ src_compile() {
 src_install() {
 	local LIBDIR="${ED}/usr/$(get_libdir)"
 	default
+
+	pax-mark -m "${ED}"/usr/bin/node
 
 	# set up a symlink structure that node-gyp expects..
 	dodir /usr/include/node/deps/{v8,uv}
