@@ -8,7 +8,7 @@ inherit flag-o-matic git-r3 linux-info meson pam udev xdg-utils
 DESCRIPTION="The systemd project's logind, extracted to a standalone package"
 HOMEPAGE="https://github.com/elogind/elogind"
 EGIT_REPO_URI="https://github.com/elogind/elogind.git"
-EGIT_BRANCH="v243-stable"
+EGIT_BRANCH="v246-stable"
 EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
@@ -16,16 +16,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="+acl debug doc efi +pam +policykit selinux"
 
-BDEPEND="
-	app-text/docbook-xml-dtd:4.2
-	app-text/docbook-xml-dtd:4.5
-	app-text/docbook-xsl-stylesheets
-	dev-util/gperf
-	dev-util/intltool
-	virtual/pkgconfig
-"
-DEPEND="
-	audit? ( sys-process/audit )
+COMMON_DEPEND="
 	sys-apps/util-linux
 	sys-libs/libcap
 	virtual/libudev:=
@@ -33,15 +24,22 @@ DEPEND="
 	pam? ( sys-libs/pam )
 	selinux? ( sys-libs/libselinux )
 "
-RDEPEND="${DEPEND}
+DEPEND="${COMMON_DEPEND}
+	app-text/docbook-xml-dtd:4.2
+	app-text/docbook-xml-dtd:4.5
+	app-text/docbook-xsl-stylesheets
+	dev-util/gperf
+	dev-util/intltool
+	sys-devel/libtool
+	virtual/pkgconfig
+"
+RDEPEND="${COMMON_DEPEND}
 	!sys-apps/systemd
 "
 PDEPEND="
 	sys-apps/dbus
 	policykit? ( sys-auth/polkit )
 "
-
-DOCS=( README.md src/libelogind/sd-bus/GVARIANT-SERIALIZATION )
 
 PATCHES=(
 	"${FILESDIR}/${PN}-243.6-docs.patch"
@@ -50,7 +48,9 @@ PATCHES=(
 pkg_setup() {
 	local CONFIG_CHECK="~CGROUPS ~EPOLL ~INOTIFY_USER ~SIGNALFD ~TIMERFD"
 
-	use kernel_linux && linux-info_pkg_setup
+	if use kernel_linux; then
+		linux-info_pkg_setup
+	fi
 }
 
 src_prepare() {
@@ -59,25 +59,33 @@ src_prepare() {
 }
 
 src_configure() {
-	local rccgroupmode="$(grep rc_cgroup_mode ${EPREFIX}/etc/rc.conf | cut -d '"' -f 2)"
+	local rccgroupmode="$(grep rc_cgroup_mode /etc/rc.conf | cut -d '"' -f 2)"
 	local cgroupmode="legacy"
+	local debugmode=""
 
-	if [[ "xhybrid" = "x${rccgroupmode}" ]] ; then
+	if [[ "xhybrid" = "x${rccgroupmode}" ]]; then
 		cgroupmode="hybrid"
-	elif [[ "xunified" = "x${rccgroupmode}" ]] ; then
+	elif [[ "xunified" = "x${rccgroupmode}" ]]; then
 		cgroupmode="unified"
 	fi
+
+	if use debug; then
+		debugmode="-Ddebug-extra=elogind"
+	fi
+
+	# Duplicating C[XX]FLAGS in LDFLAGS is deprecated and will become
+	# a hard error in future meson versions:
+	filter-ldflags $CFLAGS $CXXFLAGS
 
 	local emesonargs=(
 		$debugmode
 		--buildtype $(usex debug debug release)
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
 		-Dacl=$(usex acl true false)
-		-Daudit=$(usex audit true false)
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
 		-Dcgroup-controller=openrc
 		-Ddefault-hierarchy=${cgroupmode}
-		-Ddefault-kill-user-processes=true
+		-Ddefault-kill-user-processes=false
 		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
 		-Defi=$(usex efi true false)
 		-Dhtml=$(usex doc auto false)
@@ -90,8 +98,8 @@ src_configure() {
 		-Drootprefix="${EPREFIX}/"
 		-Dselinux=$(usex selinux true false)
 		-Dsmack=true
-		-Dudevrulesdir="${EPREFIX}$(get_udevdir)"/rules.d
-		-Dutmp=$(usex elibc_musl false true)
+		-Dudevrulesdir="$(get_udevdir)"/rules.d
+		-Dzshcompletiondir="${EPREFIX}/usr/share/zsh/site-functions"
 	)
 
 	meson_src_configure
@@ -109,16 +117,6 @@ src_install() {
 }
 
 pkg_postinst() {
-	if ! use pam; then
-		ewarn "${PN} will not be managing user logins/seats without USE=\"pam\"!"
-		ewarn "In other words, it will be useless for most applications."
-		ewarn
-	fi
-	if ! use policykit; then
-		ewarn "loginctl will not be able to perform privileged operations without"
-		ewarn "USE=\"policykit\"! That means e.g. no suspend or hibernate."
-		ewarn
-	fi
 	if [[ "$(rc-config list boot | grep elogind)" != "" ]]; then
 		elog "elogind is currently started from boot runlevel."
 	elif [[ "$(rc-config list default | grep elogind)" != "" ]]; then
@@ -128,17 +126,8 @@ pkg_postinst() {
 		ewarn "# rc-update del elogind default"
 		ewarn "# rc-update add elogind boot"
 	else
-		elog "elogind is currently not started from any runlevel."
-		elog "You may add it to the boot runlevel by:"
-		elog "# rc-update add elogind boot"
-		elog
-		elog "Alternatively, you can leave elogind out of any"
-		elog "runlevel. It will then be started automatically"
-		if use pam; then
-			elog "when the first service calls it via dbus, or"
-			elog "the first user logs into the system."
-		else
-			elog "when the first service calls it via dbus."
-		fi
+		ewarn "elogind is currently not started from any runlevel."
+		ewarn "You may add it to the boot runlevel by:"
+		ewarn "# rc-update add elogind boot"
 	fi
 }
