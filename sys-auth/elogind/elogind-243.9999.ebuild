@@ -13,8 +13,8 @@ EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~x86"
-IUSE="+acl debug doc efi +pam +policykit selinux"
+KEYWORDS=""
+IUSE="+acl audit debug doc efi +pam +policykit selinux"
 
 BDEPEND="
 	app-text/docbook-xml-dtd:4.2
