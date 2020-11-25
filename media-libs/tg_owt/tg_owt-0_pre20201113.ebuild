@@ -51,5 +51,4 @@ src_configure() {
 		-DTG_OWT_USE_PROTOBUF=TRUE
 	)
 	cmake_src_configure
-	eninja
 }
