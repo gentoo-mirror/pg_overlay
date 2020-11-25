@@ -29,7 +29,7 @@ app-shells/push 3.4: A POSIX shell function to treat a variable like an array, q
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/enchant 2.2.12: Spellchecker wrapping library
 app-text/goldendict 9999: Feature-rich dictionary lookup program
-app-text/master-pdf-editor 5.6.49: A complete solution for viewing and editing PDF files
+app-text/master-pdf-editor 5.6.80: A complete solution for viewing and editing PDF files
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
@@ -149,7 +149,6 @@ media-libs/libsdl2 2.0.12-r2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20201106: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.3 2020.4_pre20201106: Collection of tools, libraries and tests for shader compilation
-media-libs/tg_owt 0_pre20201113: WebRTC build for Telegram
 media-libs/vulkan-layers 1.2.159 9999: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.159 9999: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
@@ -173,7 +172,6 @@ media-video/qmplay2 20.07.04 9999: A Qt-based video player, which can play most 
 media-video/smplayer 20.6.0: Great Qt GUI front-end for mplayer/mpv
 net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 2.9999 9999: GTK Instant Messenger client
-net-im/telegram-desktop 2.4.11: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/glib-networking 2.66.0: Network-related giomodules for glib
