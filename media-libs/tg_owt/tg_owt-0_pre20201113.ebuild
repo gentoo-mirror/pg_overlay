@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake flag-o-matic ninja-utils
+inherit cmake flag-o-matic
 
 TG_OWT_COMMIT="10b988aa9111fd25358443ac34d0d422b5108029"
 
@@ -46,6 +46,11 @@ src_configure() {
 	local mycmakeargs=(
 		-G Ninja
 		-DCMAKE_BUILD_TYPE=Release
+		-DTG_OWT_SPECIAL_TARGET=linux
+		-DTG_OWT_LIBJPEG_INCLUDE_PATH=/usr/include
+		-DTG_OWT_OPENSSL_INCLUDE_PATH=/usr/include
+		-DTG_OWT_OPUS_INCLUDE_PATH=/usr/include/opus
+		-DTG_OWT_FFMPEG_INCLUDE_PATH=/usr/include
 		-DBUILD_SHARED_LIBS=TRUE
 		-DTG_OWT_PACKAGED_BUILD=TRUE
 		-DTG_OWT_USE_PROTOBUF=TRUE
