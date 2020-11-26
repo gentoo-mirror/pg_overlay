@@ -34,7 +34,6 @@ app-text/pastebinit 1.5.1: A software that lets you send anything you want direc
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.2: Build infrastructure and utilities for GNOME C++ bindings
-dev-cpp/range-v3 0.11.0: Range library for C++14/17/20, basis for C++20's std::ranges
 dev-db/sqlitebrowser 3.12.0: SQLite Database Browser
 dev-java/ant-core 1.10.9: Java-based build tool similar to 'make' that uses XML configuration files
 dev-java/java-config 2.3.1 9999: Java environment configuration query tool
@@ -111,7 +110,7 @@ dev-python/sip 5.4.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
-dev-qt/qtdeclarative 5.15.1: The QML and Quick modules for the Qt5 framework
+dev-qt/qtdeclarative 5.15.2: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200924: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.66.2: GDBus code and documentation generator
