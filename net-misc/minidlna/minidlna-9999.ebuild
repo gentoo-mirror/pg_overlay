@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit autotools git-r3 eutils linux-info tmpfiles toolchain-funcs user
+inherit autotools git-r3 tmpfiles
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="https://sourceforge.net/projects/minidlna/"
@@ -11,10 +11,13 @@ EGIT_REPO_URI="https://git.code.sf.net/p/${PN}/git"
 
 LICENSE="BSD GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE="netgear readynas zeroconf tivo"
+KEYWORDS="~amd64 ~arm ~x86"
+IUSE="elibc_musl netgear readynas zeroconf tivo"
 
-RDEPEND="dev-db/sqlite:3
+RDEPEND="
+	acct-group/minidlna
+	acct-user/minidlna
+	dev-db/sqlite:3
 	media-libs/flac:=
 	media-libs/libexif:=
 	media-libs/libid3tag:=
@@ -22,8 +25,10 @@ RDEPEND="dev-db/sqlite:3
 	media-libs/libvorbis:=
 	media-video/ffmpeg:0=
 	virtual/jpeg:0=
+	elibc_musl? ( sys-libs/queue-standalone )
 	zeroconf? ( net-dns/avahi:= )"
-DEPEND="${RDEPEND}
+DEPEND=${RDEPEND}
+BDEPEND="
 	virtual/pkgconfig"
 
 CONFIG_CHECK="~INOTIFY_USER"
@@ -86,27 +91,10 @@ pkg_preinst() {
 	local my_is_new=yes
 	[[ -d ${EROOT}/var/lib/minidlna ]] && my_is_new=no
 
-	enewgroup minidlna
-	enewuser minidlna -1 -1 /var/lib/minidlna minidlna
-
 	fowners minidlna:minidlna /var/{lib,log}/minidlna
 	fperms 0750 /var/{lib,log}/minidlna
-
-	if [[ -d ${EROOT}/var/lib/minidlna && ${my_is_new} == yes ]]; then
-		# created by above enewuser command w/ wrong group
-		# and permissions
-		chown minidlna:minidlna "${EROOT}"/var/lib/minidlna || die
-		chmod 0750 "${EROOT}"/var/lib/minidlna || die
-		# if user already exists, but /var/lib/minidlna is missing
-		# rely on ${D}/var/lib/minidlna created in src_install
-	fi
 }
 
 pkg_postinst() {
-	elog "minidlna now runs as minidlna:minidlna (bug 426726),"
-	elog "logfile is moved to /var/log/minidlna/minidlna.log,"
-	elog "cache is moved to /var/lib/minidlna."
-	elog "Please edit /etc/conf.d/minidlna and file ownerships to suit your needs."
-
 	tmpfiles_process minidlna.conf
 }
