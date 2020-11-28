@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://git.code.sf.net/p/${PN}/git"
 LICENSE="BSD GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="elibc_musl netgear readynas zeroconf"
+IUSE="elibc_musl netgear readynas zeroconf tivo"
 
 RDEPEND="
 	acct-group/minidlna
