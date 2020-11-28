@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit tmpfiles
+inherit git-r3 tmpfiles
 
 DESCRIPTION="DLNA/UPnP-AV compliant media server"
 HOMEPAGE="https://sourceforge.net/projects/minidlna/"
