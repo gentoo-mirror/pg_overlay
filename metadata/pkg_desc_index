@@ -123,7 +123,7 @@ dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applicat
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 4.0.1: Extensible Python-based build utility
 dev-util/spirv-tools 2020.5_pre20200815 2020.5_pre20200922 2020.5 9999: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.163: Vulkan Header files and API registry
+dev-util/vulkan-headers 1.2.161 1.2.162 1.2.163: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.162 9999: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/git-cola 3.8: The highly caffeinated git GUI
 dev-vcs/mercurial 5.6: Scalable distributed SCM
@@ -143,7 +143,6 @@ kde-plasma/kwin 5.20.3: Flexible, composited Window Manager for windowing system
 mail-client/thunderbird 78.5.0: Thunderbird Mail Client
 media-libs/fontconfig 2.13.92: A library for configuring and customizing font access
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
-media-libs/libplacebo 2.72.2: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.12-r2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20201106: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
