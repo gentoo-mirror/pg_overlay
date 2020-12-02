@@ -22,8 +22,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.6.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.0.3.1: A full office productivity suite
-app-office/libreoffice-l10n 7.0.3.1: Translations for the Libreoffice suite
+app-office/libreoffice 7.0.4.1: A full office productivity suite
+app-office/libreoffice-l10n 7.0.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.34.11: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
@@ -140,7 +140,7 @@ gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.20.4: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 78.5.0: Thunderbird Mail Client
+mail-client/thunderbird 78.5.1: Thunderbird Mail Client
 media-libs/fontconfig 2.13.92: A library for configuring and customizing font access
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libsdl2 2.0.12-r2: Simple Direct Media Layer
