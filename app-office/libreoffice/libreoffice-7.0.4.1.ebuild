@@ -293,7 +293,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-7.0.3.1-qt5detect.patch"
 
 	# 7.0 branch
-	"${FILESDIR}/${PN}-6.4.7.2-icu-68-1.patch" # bug 752021
 	"${FILESDIR}/0001-Upgrade-liborcus-to-0.16.0.patch"
 )
 
