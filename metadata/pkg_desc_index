@@ -1,14 +1,9 @@
-app-accessibility/at-spi2-atk 2.38.0: Gtk module for bridging AT-SPI to Atk
-app-accessibility/at-spi2-core 2.38.0: D-Bus accessibility specifications and registration daemon
 app-admin/eclean-kernel 2.99.2: Remove outdated built kernels
 app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.3: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
 app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
-app-crypt/acme 1.9.0: An implementation of the ACME protocol
-app-crypt/certbot 1.9.0: Let's encrypt client to automate deployment of X.509 certificates
-app-crypt/certbot-nginx 1.9.0: Nginx plugin for certbot (Let's Encrypt Client)
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre144: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
@@ -44,9 +39,7 @@ dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by Adopt
 dev-lang/python 2.7.18-r4 3.9.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.47.0-r1 1.48.0: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/glib 2.66.2: The GLib library of C routines
-dev-libs/gobject-introspection 1.66.1: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.66.1: Build infrastructure for GObject Introspection
+dev-libs/glib 2.66.3: The GLib library of C routines
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 68.1: International Components for Unicode
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
@@ -113,17 +106,17 @@ dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtdeclarative 5.15.2: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200924: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.66.2: GDBus code and documentation generator
-dev-util/glib-utils 2.66.2: Build utilities for GLib using projects
-dev-util/glslang 8.13.3743-r1 10.11.0.0 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
+dev-util/gdbus-codegen 2.66.3: GDBus code and documentation generator
+dev-util/glib-utils 2.66.3: Build utilities for GLib using projects
+dev-util/glslang 10.11.0.0 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/meson 0.56.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
 dev-util/scons 4.0.1: Extensible Python-based build utility
-dev-util/spirv-tools 2020.5_pre20200815 2020.5_pre20200922 2020.5 9999: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.160 1.2.163: Vulkan Header files and API registry
+dev-util/spirv-tools 2020.5 9999: Provides an API and commands for processing SPIR-V modules
+dev-util/vulkan-headers 1.2.163: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.162 9999: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/git-cola 3.8: The highly caffeinated git GUI
 dev-vcs/mercurial 5.6: Scalable distributed SCM
@@ -172,7 +165,6 @@ net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 2.9999 9999: GTK Instant Messenger client
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
-net-libs/glib-networking 2.66.0: Network-related giomodules for glib
 net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management library for GLib applications
 net-libs/libsoup 2.72.0: HTTP client/server library for GNOME
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
@@ -228,7 +220,7 @@ x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.32-r1 3.24.23: Gimp ToolKit +
 x11-libs/libxcb 1.14: X C-language Bindings library
-x11-libs/pango 1.46.2: Internationalized text layout and rendering library
+x11-libs/pango 1.46.2 1.48.0: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
