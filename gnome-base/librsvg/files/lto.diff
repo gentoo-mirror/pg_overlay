@@ -5,6 +5,7 @@ index 818fa620..c776b113 100644
 @@ -8,3 +8,5 @@ members = [
  
  [profile.release]
- debug = true
+-debug = true
++debug = false
 +lto = "thin"
 +codegen-units = 1
