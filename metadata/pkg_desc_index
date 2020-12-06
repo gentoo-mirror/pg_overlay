@@ -215,7 +215,7 @@ www-client/firefox 83.0: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
-x11-libs/gtk+ 2.24.32-r1 3.24.23: Gimp ToolKit +
+x11-libs/gtk+ 2.24.32-r1 3.24.24: Gimp ToolKit +
 x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.46.2 1.48.0: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
