@@ -39,7 +39,6 @@ dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by Adopt
 dev-lang/python 2.7.18-r4 3.9.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.47.0-r1 1.48.0: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/glib 2.66.3: The GLib library of C routines
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 68.1: International Components for Unicode
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
@@ -106,8 +105,6 @@ dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtdeclarative 5.15.2: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200924: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.66.3: GDBus code and documentation generator
-dev-util/glib-utils 2.66.3: Build utilities for GLib using projects
 dev-util/glslang 10.11.0.0 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
