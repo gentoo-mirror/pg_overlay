@@ -31,8 +31,7 @@ RDEPEND=""
 BDEPEND="${PYTHON_DEPS}
 	${COMMON_DEPEND}"
 
-PATCHES=( "${FILESDIR}/0001-Revert-CMake-Enable-building-with-BUILD_SHARED_LIBS-.patch"
-		"${FILESDIR}"/"${PN}"-2020.5-Fix-build.patch )
+PATCHES=( "${FILESDIR}"/"${PN}"-2020.5-Fix-build.patch )
 
 
 multilib_src_configure() {
