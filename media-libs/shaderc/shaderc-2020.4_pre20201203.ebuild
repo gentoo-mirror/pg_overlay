@@ -11,7 +11,7 @@ inherit cmake-multilib python-any-r1
 
 DESCRIPTION="Collection of tools, libraries and tests for shader compilation"
 HOMEPAGE="https://github.com/google/shaderc"
-EGIT_COMMIT="fcafd5b49266d65ab7e4268c825224e8b6c1b8bb"
+EGIT_COMMIT="1520e40f5e2b6d480f06a467406dade164195bf9"
 SRC_URI="https://github.com/google/${PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${EGIT_COMMIT}"
 
