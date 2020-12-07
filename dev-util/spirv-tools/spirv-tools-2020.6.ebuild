@@ -31,7 +31,7 @@ RDEPEND=""
 BDEPEND="${PYTHON_DEPS}
 	${COMMON_DEPEND}"
 
-PATCHES=( "${FILESDIR}"/"${PN}"-2020.5-Fix-build.patch )
+#PATCHES=( "${FILESDIR}"/"${PN}"-2020.5-Fix-build.patch )
 
 
 multilib_src_configure() {
