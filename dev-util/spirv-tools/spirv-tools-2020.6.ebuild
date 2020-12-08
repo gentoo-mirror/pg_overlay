@@ -31,16 +31,12 @@ RDEPEND=""
 BDEPEND="${PYTHON_DEPS}
 	${COMMON_DEPEND}"
 
-PATCHES=( "${FILESDIR}/0001-Revert-CMake-Enable-building-with-BUILD_SHARED_LIBS-.patch"
-		"${FILESDIR}"/"${PN}"-2020.5-Fix-build.patch )
-
-
 multilib_src_configure() {
 	local mycmakeargs=(
-		"-DBUILD_SHARED_LIBS=ON"
 		"-DSPIRV-Headers_SOURCE_DIR=/usr/"
 		"-DSPIRV_WERROR=OFF"
-		"-GNinja"
+		"-DSPIRV_TOOLS_BUILD_STATIC=OFF"
+		"-DBUILD_SHARED_LIBS=ON"
 	)
 
 	cmake_src_configure
