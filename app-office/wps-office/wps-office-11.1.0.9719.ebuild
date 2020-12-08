@@ -50,7 +50,6 @@ RDEPEND="
 	sys-apps/attr
 	sys-apps/util-linux
 	sys-apps/dbus
-	sys-apps/tcp-wrappers
 	sys-libs/libcap
 	sys-libs/zlib:0
 	x11-libs/cairo
