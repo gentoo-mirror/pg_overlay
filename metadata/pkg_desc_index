@@ -7,7 +7,7 @@ app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre144: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
-app-emulation/virtualbox 6.1.16: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox 6.1.16-r1: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.1.2: Graphical user interface for ddcutil
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
