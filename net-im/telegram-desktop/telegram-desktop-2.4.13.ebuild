@@ -109,7 +109,6 @@ src_configure() {
 		-Wno-deprecated-declarations
 		-Wno-error=deprecated-declarations
 		-Wno-switch
-		-Wno-unknown-warning-option
 	)
 
 	append-cxxflags "${mycxxflags[@]}"
