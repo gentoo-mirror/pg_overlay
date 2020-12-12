@@ -17,8 +17,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.6.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.0.4.1: A full office productivity suite
-app-office/libreoffice-l10n 7.0.4.1: Translations for the Libreoffice suite
+app-office/libreoffice 7.0.4.2: A full office productivity suite
+app-office/libreoffice-l10n 7.0.4.2: Translations for the Libreoffice suite
 app-office/wps-office 11.1.0.9719: WPS Office is an office productivity suite
 app-portage/eix 0.34.11: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
@@ -90,6 +90,7 @@ dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/PyQt5-sip 5.4.0: Private sip module for PyQt5
+dev-python/chardet 4.0.0: Universal encoding detector
 dev-python/commonmark 0.9.1: Python parser for the CommonMark Markdown spec
 dev-python/eventlet 0.29.1: Highly concurrent networking library
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
