@@ -23,8 +23,4 @@ DEPEND="
 	test? ( dev-python/hypothesis[${PYTHON_USEDEP}] )
 "
 
-PATCHES=(
-	"${FILESDIR}"/${P}-pytest-4.patch
-)
-
 distutils_enable_tests pytest
