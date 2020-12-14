@@ -6,7 +6,7 @@ EAPI=6
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=2.0.20
+WAF_PV=2.0.21
 
 inherit bash-completion-r1 eapi7-ver flag-o-matic pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
@@ -59,8 +59,7 @@ REQUIRED_USE="
 RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
-	!!app-shells/mpv-bash-completion
-	>=media-video/ffmpeg-4.0:0=[threads,vaapi?,vdpau?]
+	>=media-video/ffmpeg-4.0:0=[encode,threads,vaapi?,vdpau?]
 	alsa? ( >=media-libs/alsa-lib-1.0.18 )
 	archive? ( >=app-arch/libarchive-3.4.0:= )
 	bluray? ( >=media-libs/libbluray-0.3.0:= )
@@ -138,7 +137,7 @@ src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
 
-	sed -i 's/2.0.9/2.0.20/g' bootstrap.py || die
+	sed -i 's/2.0.9/2.0.21/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 
 	default
