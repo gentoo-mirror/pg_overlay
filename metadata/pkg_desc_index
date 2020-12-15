@@ -132,7 +132,7 @@ gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.20.4: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 78.5.1: Thunderbird Mail Client
+mail-client/thunderbird 78.6.0: Thunderbird Mail Client
 media-libs/fontconfig 2.13.92: A library for configuring and customizing font access
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libsdl2 2.0.12-r2: Simple Direct Media Layer
@@ -215,6 +215,7 @@ virtual/perl-Socket 2.27.0-r2: Virtual for Socket
 virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
 virtual/rust 1.48.0: Virtual for Rust language compiler
+www-apps/nextcloud 20.0.3: Personal cloud that runs on your own server
 www-client/firefox 83.0: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
