@@ -1,9 +1,9 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-inherit readme.gentoo-r1 cmake udev user xdg
+inherit readme.gentoo-r1 cmake flag-o-matic toolchain-funcs udev user xdg
 
 DESCRIPTION="Utility for advanced configuration of Roccat devices"
 
@@ -42,7 +42,7 @@ IUSE_INPUT_DEVICES=(
 
 IUSE="${IUSE_INPUT_DEVICES[@]}"
 
-LUA_DEPEND="|| ( dev-lang/lua:5.1 dev-lang/lua:0 )"
+LUA_DEPEND="|| ( dev-lang/lua:5.2 dev-lang/lua:5.1 )"
 
 RDEPEND="
 	dev-libs/dbus-glib
@@ -62,6 +62,9 @@ RDEPEND="
 DEPEND="
 	${RDEPEND}
 "
+BDEPEND="
+	virtual/pkgconfig
+"
 
 DOCS=( Changelog KNOWN_LIMITATIONS README )
 
@@ -80,10 +83,15 @@ src_prepare() {
 }
 
 src_configure() {
+	if has_version \>=x11-libs/pango-1.44.0 ; then
+		# Fix build with pango-1.44 which depends on harfbuzz
+		local PKGCONF="$(tc-getPKG_CONFIG)"
+		append-cflags "$(${PKGCONF} --cflags harfbuzz)"
+	fi
+
 	mycmakeargs=(
 		-DDEVICES="${USED_MODELS/;/}"
 		-DUDEVDIR="${EPREFIX}$(get_udevdir)/rules.d"
-		-DCMAKE_C_FLAGS="$(pkg-config --cflags harfbuzz)"
 	)
 
 	local lua_use=(
@@ -111,10 +119,6 @@ src_install() {
 	readme.gentoo_create_doc
 }
 
-pkg_preinst() {
-	xdg_pkg_preinst
-}
-
 pkg_postinst() {
 	xdg_pkg_postinst
 	readme.gentoo_print_elog
@@ -122,8 +126,4 @@ pkg_postinst() {
 	ewarn "This version breaks stored data for some devices. Before reporting bugs please delete"
 	ewarn "affected folder(s) in /var/lib/roccat"
 	ewarn
-}
-
-pkg_postrm() {
-	xdg_pkg_postrm
 }
