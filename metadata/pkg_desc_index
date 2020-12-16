@@ -38,6 +38,7 @@ dev-java/javatoolkit 0.6.3: Collection of Gentoo-specific tools for Java
 dev-java/openjdk 15.0.1_p9: Open source implementation of the Java programming language
 dev-java/openjdk-bin 15.0.1_p9: Prebuilt Java JDK binaries provided by AdoptOpenJDK
 dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by AdoptOpenJDK
+dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 2.7.18-r5 3.9.1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.47.0-r1 1.48.0: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
