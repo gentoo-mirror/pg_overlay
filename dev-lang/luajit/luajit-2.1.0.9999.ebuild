@@ -5,9 +5,6 @@ EAPI=7
 
 inherit pax-utils toolchain-funcs git-r3
 
-MY_PV="$(ver_cut 1-5)"
-MY_P="LuaJIT-${MY_PV}"
-
 DESCRIPTION="Just-In-Time Compiler for the Lua programming language"
 HOMEPAGE="https://luajit.org/"
 EGIT_REPO_URI="https://github.com/LuaJIT/LuaJIT.git"
@@ -23,8 +20,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2-ldconfig.patch"
 	"${FILESDIR}/CVE-2020-15890.patch"
 )
-
-S="${WORKDIR}/${MY_P}"
 
 _emake() {
 	emake \
