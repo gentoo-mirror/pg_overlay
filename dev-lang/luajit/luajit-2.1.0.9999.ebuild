@@ -13,7 +13,7 @@ EGIT_BRANCH="v2.1"
 LICENSE="MIT"
 # this should probably be pkgmoved to 2.0 for sake of consistency.
 SLOT="2"
-KEYWORDS="~arm64"
+KEYWORDS=""
 IUSE="lua52compat static-libs"
 
 _emake() {
@@ -22,6 +22,8 @@ _emake() {
 		PREFIX="${EPREFIX}/usr" \
 		MULTILIB="$(get_libdir)" \
 		DESTDIR="${D}" \
+		CFLAGS="" \
+		LDFLAGS="" \
 		HOST_CC="$(tc-getBUILD_CC)" \
 		HOST_CFLAGS="${BUILD_CPPFLAGS} ${BUILD_CFLAGS}" \
 		HOST_LDFLAGS="${BUILD_LDFLAGS}" \
