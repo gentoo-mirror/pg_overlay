@@ -102,7 +102,7 @@ src_configure() {
 	local luse
 	for luse in ${lua_use[@]} ; do
 		if use ${luse} ; then
-			mycmakeargs+=( -DWITH_LUA="5.1" )
+			mycmakeargs+=( -DWITH_LUA="5.2" )
 			break
 		fi
 	done
