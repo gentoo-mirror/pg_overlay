@@ -9,5 +9,5 @@ LICENSE=MIT
 PROPERTIES=live
 RDEPEND=gtk? ( x11-libs/gtk+:3 )
 SLOT=0
-_eclasses_=cargo	7ffdd252643addc68abff0a08cca5306	git-r3	3e7ec3d6619213460c85e2aa48398441	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	optfeature	6c9aa35fc16df43d7142ef2660e00e25	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb
+_eclasses_=cargo	bd8499d18174b7d9e84e56a022ccd236	git-r3	3e7ec3d6619213460c85e2aa48398441	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	optfeature	6c9aa35fc16df43d7142ef2660e00e25	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb
 _md5_=a5c23f36f8bb09ca5cce386e4ba4101f
