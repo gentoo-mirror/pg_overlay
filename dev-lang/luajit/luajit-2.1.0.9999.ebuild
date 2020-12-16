@@ -22,8 +22,6 @@ _emake() {
 		PREFIX="${EPREFIX}/usr" \
 		MULTILIB="$(get_libdir)" \
 		DESTDIR="${D}" \
-		CFLAGS="" \
-		LDFLAGS="" \
 		HOST_CC="$(tc-getBUILD_CC)" \
 		HOST_CFLAGS="${BUILD_CPPFLAGS} ${BUILD_CFLAGS}" \
 		HOST_LDFLAGS="${BUILD_LDFLAGS}" \
