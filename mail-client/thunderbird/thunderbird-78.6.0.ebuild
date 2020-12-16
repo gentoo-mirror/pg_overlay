@@ -63,7 +63,7 @@ KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 SLOT="0/$(ver_cut 1)"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="+clang cpu_flags_arm_neon dbus debug eme-free
-	hardened jack lto +openh264 pgo pulseaudio selinux
+	hardened hwaccel jack lto +openh264 pgo pulseaudio selinux
 	+system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent
 	+system-libvpx +system-webp wayland wifi
 	+jit +kde"
@@ -999,6 +999,7 @@ src_install() {
 
 	# Install policy (currently only used to disable application updates)
 	insinto "${MOZILLA_FIVE_HOME}/distribution"
+	newins "${FILESDIR}"/distribution.ini distribution.ini
 	newins "${FILESDIR}"/disable-auto-update.policy.json policies.json
 
 	# Install system-wide preferences
@@ -1012,6 +1013,13 @@ src_install() {
 	cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to set spellchecker.dictionary_path pref"
 	pref("spellchecker.dictionary_path",       "${EPREFIX}/usr/share/myspell");
 	EOF
+
+	# Force hwaccel prefs if USE=hwaccel is enabled
+	if use hwaccel ; then
+		cat "${FILESDIR}"/gentoo-hwaccel-prefs.js \
+		>>"${GENTOO_PREFS}" \
+		|| die "failed to add prefs to force hardware-accelerated rendering to all-gentoo.js"
+	fi
 
 	# Force the graphite pref if USE=system-harfbuzz is enabled, since the pref cannot disable it
 	if use system-harfbuzz ; then
