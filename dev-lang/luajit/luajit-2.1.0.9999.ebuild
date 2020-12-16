@@ -17,7 +17,6 @@ KEYWORDS="~arm64"
 IUSE="lua52compat static-libs"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-2-ldconfig.patch"
 	"${FILESDIR}/CVE-2020-15890.patch"
 )
 
