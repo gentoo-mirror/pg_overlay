@@ -16,10 +16,6 @@ SLOT="2"
 KEYWORDS="~arm64"
 IUSE="lua52compat static-libs"
 
-PATCHES=(
-	"${FILESDIR}/CVE-2020-15890.patch"
-)
-
 _emake() {
 	emake \
 		Q= \
