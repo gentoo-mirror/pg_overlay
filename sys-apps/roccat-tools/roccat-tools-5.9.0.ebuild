@@ -42,7 +42,7 @@ IUSE_INPUT_DEVICES=(
 
 IUSE="${IUSE_INPUT_DEVICES[@]}"
 
-LUA_DEPEND="|| ( dev-lang/lua:5.1 dev-lang/lua:0 )"
+LUA_DEPEND="|| ( dev-lang/lua:5.2 dev-lang/lua:5.1 )"
 
 RDEPEND="
 	dev-libs/dbus-glib
