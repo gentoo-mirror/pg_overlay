@@ -41,6 +41,7 @@ dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by Adopt
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 2.7.18-r5 3.9.1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.47.0-r1 1.48.0: Systems programming language from Mozilla
+dev-libs/boost 1.75.0_pre: Boost Libraries for C++
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 68.1: International Components for Unicode
@@ -107,6 +108,7 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtdeclarative 5.15.2: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200924: WebKit rendering library for the Qt5 framework (deprecated)
+dev-util/boost-build 1.75.0_pre: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glslang 10.11.0.0 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
