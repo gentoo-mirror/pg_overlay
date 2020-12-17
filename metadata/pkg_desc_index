@@ -110,16 +110,12 @@ dev-qt/qtdeclarative 5.15.2: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200924: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/boost-build 1.75.0_pre: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/glslang 10.11.0.0 9999: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/meson 0.56.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.1: ninja-compatible build tool written in C
-dev-util/scons 4.0.1: Extensible Python-based build utility
-dev-util/spirv-tools 2020.6 9999: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.164: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.2.162 9999: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.2.165: Vulkan Header files and API registry
 dev-vcs/git-cola 3.8: The highly caffeinated git GUI
 dev-vcs/mercurial 5.6: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
@@ -143,8 +139,7 @@ media-libs/libtgvoip 2.4.4_p20201106: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.3 2020.4_pre20201203: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20201127: WebRTC build for Telegram
-media-libs/vulkan-layers 1.2.161 9999: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.162 9999: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 9999: Vulkan Validation Layers
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
@@ -219,7 +214,7 @@ virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
 virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
 virtual/rust 1.48.0: Virtual for Rust language compiler
 www-apps/nextcloud 20.0.4: Personal cloud that runs on your own server
-www-client/firefox 83.0 84.0: Firefox Web Browser
+www-client/firefox 84.0: Firefox Web Browser
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
