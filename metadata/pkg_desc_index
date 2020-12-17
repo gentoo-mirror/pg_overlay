@@ -140,6 +140,7 @@ media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.3 2020.4_pre20201203: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20201127: WebRTC build for Telegram
 media-libs/vulkan-layers 9999: Vulkan Validation Layers
+media-libs/vulkan-loader 1.2.162-r1: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
@@ -223,6 +224,7 @@ x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.46.2 1.48.0: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
+x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/mozo 1.24.0: Mozo menu editor for MATE
 x11-misc/safeeyes 2.0.9: Linux alternative to EyeLeo
 x11-misc/xkeyboard-config 2.30: X keyboard configuration database

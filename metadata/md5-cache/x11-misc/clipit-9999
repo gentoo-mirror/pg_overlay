@@ -1,0 +1,13 @@
+BDEPEND=>=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.1:1.16 >=sys-devel/automake-1.15.1:1.15 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure postinst postrm prepare unpack
+DEPEND=!gtk3? ( >=x11-libs/gtk+-2.10:2 ) gtk3? ( x11-libs/gtk+:3 ) >=dev-libs/glib-2.14 nls? ( dev-util/intltool sys-devel/gettext )
+DESCRIPTION=Lightweight GTK+ clipboard manager. Fork of Parcellite.
+EAPI=7
+HOMEPAGE=https://github.com/CristianHenzel/ClipIt
+IUSE=nls +gtk3
+LICENSE=LGPL-3.0
+PROPERTIES=live
+RDEPEND=!gtk3? ( >=x11-libs/gtk+-2.10:2 ) gtk3? ( x11-libs/gtk+:3 ) >=dev-libs/glib-2.14 nls? ( dev-util/intltool sys-devel/gettext ) x11-misc/xdotool
+SLOT=0
+_eclasses_=autotools	b8cf7d8850baf5b731738e6d4f00937a	edos2unix	33e347e171066657f91f8b0c72ec8773	eutils	69bd92aa099f708425db9f1f01d61213	git-r3	3e7ec3d6619213460c85e2aa48398441	l10n	8cdd85e169b835d518bc2fd59f780d8e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	605c126bed8d87e4378d5ff1645330cb	wrapper	4251d4c84c25f59094fd557e0063a974
+_md5_=a1311f100512f26805fccbcfcb890004

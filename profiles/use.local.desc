@@ -146,6 +146,7 @@ media-libs/mesa:wayland - Enable support for dev-libs/wayland
 media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
 media-libs/mesa:xvmc - Enable the XvMC acceleration interface for the Gallium3D Video Layer.
 media-libs/mesa:zink - Enable the Zink OpenGL-over-Vulkan Gallium driver
+media-libs/vulkan-loader:layers - Include the vulkan layers
 media-plugins/audacious-plugins:ampache - Support controlling audacious via ampache
 media-plugins/audacious-plugins:bs2b - Enable Bauer Bauer stereophonic-to-binaural headphone filter
 media-plugins/audacious-plugins:cue - Support CUE sheets using the libcue library
