@@ -223,7 +223,6 @@ x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.46.2 1.48.0: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
-x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-misc/mozo 1.24.0: Mozo menu editor for MATE
 x11-misc/safeeyes 2.0.9: Linux alternative to EyeLeo
 x11-misc/xkeyboard-config 2.30: X keyboard configuration database
