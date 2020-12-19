@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{6,7,8} )
 inherit autotools flag-o-matic multilib-minimal python-any-r1 toolchain-funcs
 
 DESCRIPTION="International Components for Unicode"
@@ -30,7 +30,7 @@ MULTILIB_CHOST_TOOLS=(
 
 PATCHES=(
 	"${FILESDIR}/${PN}-65.1-remove-bashisms.patch"
-	"${FILESDIR}/${PN}-64.2-darwin.patch"
+	"${FILESDIR}/${PN}-68.1-nonunicode.patch"
 )
 
 src_prepare() {
