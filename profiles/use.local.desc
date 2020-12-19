@@ -358,6 +358,16 @@ sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and 
 sys-auth/polkit:consolekit - Use sys-auth/consolekit for session tracking
 sys-auth/polkit:elogind - Use sys-auth/elogind for session tracking
 sys-auth/polkit:systemd - Use sys-apps/systemd for session tracking
+sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
+sys-devel/clang:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
+sys-devel/clang:default-lld - Use lld as the default linker for clang
+sys-devel/clang:static-analyzer - Install the Clang static analyzer
+sys-devel/llvm:doc - Build and install the HTML documentation and regenerate the man pages
+sys-devel/llvm:exegesis - Enable performance counter support for llvm-exegesis tool that can be used to measure host machine instruction characteristics
+sys-devel/llvm:gold - Build the gold linker plugin
+sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
+sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
+sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
 sys-fs/udisks:daemon - Build the system daemon, not just the client tool
 sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
 sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
