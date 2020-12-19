@@ -201,7 +201,7 @@ sys-fs/xfsprogs 5.9.0_rc1: xfs filesystem utilities
 sys-kernel/gentoo-sources 5.9.8: Full sources including the Gentoo patchset for the 5.9 kernel tree
 sys-libs/libblockdev 2.24: A library for manipulating block devices
 sys-libs/ncurses 6.2_p20201003: console display library
-sys-libs/polly 11.0.0 11.0.1_rc1: Polyhedral optimizations for LLVM
+sys-libs/polly 11.0.0 11.0.1_rc2: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre31: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 3.0.2: interactive process viewer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
