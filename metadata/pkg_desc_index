@@ -169,6 +169,7 @@ net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management libr
 net-libs/libsoup 2.72.0: HTTP client/server library for GNOME
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
+net-libs/nodejs 15.4.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r2: HTTP client library
 net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
