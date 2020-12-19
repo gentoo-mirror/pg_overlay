@@ -114,7 +114,7 @@ dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext 
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/meson 0.56.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/samurai 1.1: ninja-compatible build tool written in C
+dev-util/samurai 1.2: ninja-compatible build tool written in C
 dev-util/vulkan-headers 1.2.165: Vulkan Header files and API registry
 dev-vcs/git-cola 3.8: The highly caffeinated git GUI
 dev-vcs/mercurial 5.6: Scalable distributed SCM
