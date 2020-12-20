@@ -40,7 +40,6 @@ src_prepare() {
 }
 
 src_configure() {
-	hprefixify engine/Jambase
 	tc-export CXX
 }
 
@@ -56,7 +55,7 @@ src_test() {
 
 src_install() {
 	dobin engine/{bjam,b2}
-	#sed -i s:src/kernel:kernel:g ../boost-build.jam || die
+	sed -i s:src/kernel:kernel:g ../boost-build.jam || die
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
 		../boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
