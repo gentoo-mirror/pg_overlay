@@ -27,9 +27,9 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.74.0-no-implicit-march-flags.patch
 )
 
-src_unpack() {
-	tar xojf "${DISTDIR}/${A}" boost_${MY_PV}/tools/build || die "unpacking tar failed"
-}
+#src_unpack() {
+#	tar xojf "${DISTDIR}/${A}" boost_${MY_PV}/tools/build || die "unpacking tar failed"
+#}
 
 src_prepare() {
 	default
