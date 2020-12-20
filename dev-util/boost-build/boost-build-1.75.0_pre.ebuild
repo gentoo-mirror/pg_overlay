@@ -37,6 +37,7 @@ src_prepare() {
 	pushd .. >/dev/null || die
 	eapply "${FILESDIR}"/${PN}-1.71.0-fix-test.patch
 	popd >/dev/null || die
+	cd ..
 	./bootstrap.sh
 }
 
