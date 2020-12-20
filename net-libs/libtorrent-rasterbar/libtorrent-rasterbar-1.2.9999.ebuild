@@ -17,7 +17,7 @@ EGIT_BRANCH="RC_1_2"
 EGIT_SUBMODULES=()
 
 LICENSE="BSD"
-SLOT="0/11"
+SLOT="0/10"
 KEYWORDS=""
 IUSE="debug +dht doc examples libressl python +ssl static-libs test"
 
