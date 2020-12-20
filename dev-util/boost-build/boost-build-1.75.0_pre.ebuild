@@ -56,7 +56,7 @@ src_install() {
 
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
-		boost-build.jam bootstrap.jam build-system.jam example/user-config.jam *.py \
+		boost-build.jam src/bootstrap.jam src/build-system.jam example/user-config.jam *.py \
 		build kernel options tools util
 
 	find "${ED}"/usr/share/boost-build -iname '*.py' -delete || die
