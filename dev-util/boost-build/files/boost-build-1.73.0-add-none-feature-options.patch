@@ -1,5 +1,5 @@
---- a/src/tools/features/debug-feature.jam
-+++ b/src/tools/features/debug-feature.jam
+--- a/tools/features/debug-feature.jam
++++ b/tools/features/debug-feature.jam
 @@ -18,7 +18,7 @@
  |# # end::doc[]
  
@@ -9,8 +9,8 @@
      : propagated ;
  
  #| tag::prof-doc[]
---- a/src/tools/features/optimization-feature.jam
-+++ b/src/stools/features/optimization-feature.jam
+--- a/tools/features/optimization-feature.jam
++++ b/tools/features/optimization-feature.jam
 @@ -16,7 +16,7 @@
  |# # end::doc[]
  

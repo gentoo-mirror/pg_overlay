@@ -1,5 +1,5 @@
---- a/src/tools/gcc.jam
-+++ b/src/tools/gcc.jam
+--- a/tools/gcc.jam
++++ b/tools/gcc.jam
 @@ -1224,135 +1224,9 @@
  # x86 and compatible
  # The 'native' option appeared in gcc 4.2 so we cannot safely use it as default.
@@ -136,8 +136,8 @@
 -cpu-flags gcc OPTIONS : s390x : z15 : -march=z15 ;
  # AIX variant of RS/6000 & PowerPC
  toolset.flags gcc AROPTIONS <address-model>64/<target-os>aix : "-X64" ;
---- a/src/tools/gcc.py
-+++ b/src/tools/gcc.py
+--- a/tools/gcc.py
++++ b/tools/gcc.py
 @@ -745,138 +745,14 @@
  # x86 and compatible
  flags('gcc', 'OPTIONS', ['<architecture>x86/<address-model>32'], ['-m32'])
