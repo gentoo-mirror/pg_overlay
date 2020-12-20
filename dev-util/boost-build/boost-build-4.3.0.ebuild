@@ -17,7 +17,7 @@ KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 ~riscv ~s390 sparc x
 IUSE="examples"
 RESTRICT="test"
 
-#S="${WORKDIR}/boost_${MY_PV}/tools/build/src"
+S="${WORKDIR}/build-${PV}/src"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
@@ -26,10 +26,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-respect-c_ld-flags.patch
 	"${FILESDIR}"/${PN}-1.74.0-no-implicit-march-flags.patch
 )
-
-#src_unpack() {
-#	tar xojf "${DISTDIR}/${A}" boost_${MY_PV}/tools/build || die "unpacking tar failed"
-#}
 
 src_prepare() {
 	default
