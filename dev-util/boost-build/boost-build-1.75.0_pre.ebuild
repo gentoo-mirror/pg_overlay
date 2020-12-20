@@ -35,7 +35,7 @@ src_prepare() {
 	default
 
 	pushd .. >/dev/null || die
-	eapply "${FILESDIR}"/${PN}-1.71.0-fix-test.patch
+	#eapply "${FILESDIR}"/${PN}-1.71.0-fix-test.patch
 	popd >/dev/null || die
 }
 
