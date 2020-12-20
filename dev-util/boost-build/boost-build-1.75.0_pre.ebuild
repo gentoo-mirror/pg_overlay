@@ -20,11 +20,11 @@ RESTRICT="test"
 S="${WORKDIR}/boost_${REAL_PV}/tools/build/src"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
-	"${FILESDIR}"/${PN}-1.71.0-darwin-gentoo-toolchain.patch
-	"${FILESDIR}"/${PN}-1.73.0-add-none-feature-options.patch
-	"${FILESDIR}"/${PN}-1.71.0-respect-c_ld-flags.patch
-	"${FILESDIR}"/${PN}-1.74.0-no-implicit-march-flags.patch
+	#"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
+	#"${FILESDIR}"/${PN}-1.71.0-darwin-gentoo-toolchain.patch
+	#"${FILESDIR}"/${PN}-1.73.0-add-none-feature-options.patch
+	#"${FILESDIR}"/${PN}-1.71.0-respect-c_ld-flags.patch
+	#"${FILESDIR}"/${PN}-1.74.0-no-implicit-march-flags.patch
 )
 
 src_unpack() {
@@ -45,7 +45,7 @@ src_configure() {
 
 src_compile() {
 	cd engine || die
-	./build.sh cxx -d+2 --without-python --build-boost=/usr/share/boost-build/ || die "building bjam failed"
+	./build.sh cxx -d+2 --without-python || die "building bjam failed"
 }
 
 src_test() {
