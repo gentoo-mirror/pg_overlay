@@ -45,7 +45,7 @@ src_configure() {
 
 src_compile() {
 	cd engine || die
-	./build.sh cxx -d+2 --without-python || die "building bjam failed"
+	./build.sh cxx -d+2 --without-python --build-boost=/usr/share/boost-build/ || die "building bjam failed"
 }
 
 src_test() {
