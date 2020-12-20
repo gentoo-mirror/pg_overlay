@@ -1,5 +1,5 @@
---- a/engine/build.sh
-+++ b/engine/build.sh
+--- a/src/engine/build.sh
++++ b/src/engine/build.sh
 @@ -439,5 +439,5 @@
  if check_debug_build "$@" ; then B2_CXXFLAGS="${B2_CXXFLAGS_DEBUG}"
  else B2_CXXFLAGS="${B2_CXXFLAGS_RELEASE} -DNDEBUG"

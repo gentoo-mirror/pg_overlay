@@ -1,5 +1,5 @@
---- a/tools/python.jam
-+++ b/tools/python.jam
+--- a/src/tools/python.jam
++++ b/src/tools/python.jam
 @@ -1000,7 +1000,7 @@
              # linux).
            : $(usage-requirements)
