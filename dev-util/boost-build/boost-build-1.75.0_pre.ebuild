@@ -55,7 +55,7 @@ src_test() {
 
 src_install() {
 	dobin engine/{bjam,b2}
-	sed -i s/"src/kernel"/kernel/g ../boost-build.jam
+	sed -i s:src/kernel:kernel:g ../boost-build.jam
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
 		../boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
