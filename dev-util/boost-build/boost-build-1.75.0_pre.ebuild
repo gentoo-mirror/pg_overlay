@@ -17,7 +17,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~
 IUSE="examples"
 RESTRICT="test"
 
-S="${WORKDIR}/boost_${REAL_PV}/tools/build/src"
+S="${WORKDIR}/boost_${REAL_PV}/tools/build/"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
@@ -34,11 +34,7 @@ src_unpack() {
 src_prepare() {
 	default
 
-	pushd .. >/dev/null || die
 	eapply "${FILESDIR}"/${PN}-1.71.0-fix-test.patch
-	popd >/dev/null || die
-	cd ..
-	./bootstrap.sh
 }
 
 src_configure() {
@@ -46,7 +42,7 @@ src_configure() {
 }
 
 src_compile() {
-	cd engine || die
+	cd src/engine || die
 	./build.sh cxx -d+2 --without-python || die "building bjam failed"
 }
 
@@ -56,20 +52,20 @@ src_test() {
 }
 
 src_install() {
-	dobin engine/{bjam,b2}
+	dobin src/engine/{bjam,b2}
 
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
-		../boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
+		boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
 		build kernel options tools util
 
 	find "${ED}"/usr/share/boost-build -iname '*.py' -delete || die
 
-	dodoc ../notes/{changes,release_procedure,build_dir_option,relative_source_paths}.txt
+	dodoc notes/{changes,release_procedure,build_dir_option,relative_source_paths}.txt
 
 	if use examples; then
 		docinto examples
-		dodoc -r ../example/.
+		dodoc -r example/.
 		docompress -x /usr/share/doc/${PF}/examples
 	fi
 }
