@@ -45,7 +45,7 @@ src_configure() {
 
 src_compile() {
 	cd engine || die
-	./build.sh cxx -d+2 --without-python --build-boost=kernel || die "building bjam failed"
+	./build.sh cxx -d+2 --without-python || die "building bjam failed"
 }
 
 src_test() {
@@ -55,7 +55,7 @@ src_test() {
 
 src_install() {
 	dobin engine/{bjam,b2}
-	#sed -i s:src/kernel:kernel:g ../boost-build.jam
+	sed -i s:src/kernel:kernel:g ../boost-build.jam || die
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
 		../boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
