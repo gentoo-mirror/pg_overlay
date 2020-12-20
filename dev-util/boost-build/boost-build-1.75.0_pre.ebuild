@@ -37,8 +37,6 @@ src_prepare() {
 	pushd .. >/dev/null || die
 	eapply "${FILESDIR}"/${PN}-1.71.0-fix-test.patch
 	popd >/dev/null || die
-	cd ..
-	./bootstrap.sh
 }
 
 src_configure() {
@@ -57,7 +55,7 @@ src_test() {
 
 src_install() {
 	dobin engine/{bjam,b2}
-
+	sed -i s:src/kernel:kernel:g ../boost-build.jam || die
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
 		../boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
