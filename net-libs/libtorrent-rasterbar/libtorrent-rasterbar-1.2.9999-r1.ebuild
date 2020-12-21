@@ -8,7 +8,7 @@ PYTHON_REQ_USE="threads(+)"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools flag-o-matic distutils-r1 git-r3
+inherit cmake flag-o-matic distutils-r1 git-r3
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
@@ -19,7 +19,7 @@ EGIT_SUBMODULES=()
 LICENSE="BSD"
 SLOT="0/10"
 KEYWORDS=""
-IUSE="debug +dht doc examples libressl python +ssl static-libs test"
+IUSE="debug +dht doc examples libressl python +ssl test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
