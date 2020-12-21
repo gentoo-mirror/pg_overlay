@@ -61,6 +61,7 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DCMAKE_CXX_STANDARD=14
 		-GNinja
+		-Ddht=$(usex dht)
 		-Dbuild_examples=$(usex examples)
 		-Dbuild_tests=$(usex test)
 		-Dbuild_tools=ON
