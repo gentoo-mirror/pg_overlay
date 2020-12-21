@@ -341,7 +341,6 @@ src_configure() {
 		profiler = false
 		cargo-native-static = false
 		local-rebuild = false
-		rustflags = ["-Cdebuginfo=0","-Clink-args=-fuse-ld=lld","-Clinker=clang","-Copt-level=3","-Ctarget-cpu=native","-Zthinlto","-Clinker-plugin-lto"]
 
 		[install]
 		prefix = "${EPREFIX}/usr/lib/${PN}/${PV}"
@@ -372,7 +371,6 @@ src_configure() {
 		backtrace-on-ice = true
 		jemalloc = false
 		llvm-libunwind = true
-		lto = "thin"
 
 		[dist]
 		src-tarball = false
