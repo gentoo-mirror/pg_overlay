@@ -61,12 +61,12 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_STANDARD=14 \
 		-GNinja \
-		-Dbuild_examples=${usex examples} \
-		-Dbuild_tests=${usex test} \
-		-Dbuild_tools=ON \
-		-Dpython-bindings=${usex python} \
-		-Dpython-egg-info=${usex python} \
-		-Dpython-install-system-dir=${usex python} \
+		-DBUILD_EXAMPLES=${usex examples} \
+		-DBUILD_TESTS=${usex test} \
+		-DBUILD_TOOLS=ON \
+		-DPYTHON-BINDINGS=${usex python} \
+		-DPYTHON-EGG-INFO=${usex python} \
+		-DPYTHON-INSTALL-SYSTEM-DIR=${usex python} \
 	)
 
 	cmake_src_configure
