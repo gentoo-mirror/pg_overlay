@@ -18,6 +18,7 @@ heck-0.3.1
 hermit-abi-0.1.16
 indexmap-1.6.0
 itoa-0.4.6
+lazy_static-1.4.0
 libc-0.2.77
 lock_api-0.3.4
 log-0.4.11
