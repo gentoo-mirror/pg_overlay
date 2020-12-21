@@ -8,7 +8,7 @@ PYTHON_REQ_USE="threads(+)"
 DISTUTILS_OPTIONAL=true
 DISTUTILS_IN_SOURCE_BUILD=true
 
-inherit autotools distutils-r1 git-r3
+inherit cmake distutils-r1 git-r3
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
@@ -19,7 +19,7 @@ EGIT_SUBMODULES=()
 LICENSE="BSD"
 SLOT="0/10"
 #KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
-IUSE="debug +dht doc examples libressl python +ssl static-libs test"
+IUSE="debug doc examples libressl python +ssl test"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 
@@ -43,14 +43,6 @@ DEPEND="${RDEPEND}
 "
 
 src_prepare() {
-	# Versions
-	#sed -i s/1.2.2/1.1.13/g configure.ac || die
-	#sed -i s/1.2.2.0/1.1.13.0/g include/libtorrent/version.hpp || die
-
-	mkdir "${S}"/build-aux/ || die
-	touch "${S}"/build-aux/config.rpath || die
-	eautoreconf
-
 	default
 
 	# bug 578026
@@ -65,38 +57,24 @@ src_prepare() {
 
 src_configure() {
 
-	local myeconfargs=(
-		$(use_enable debug)
-		$(use_enable debug export-all)
-		$(use_enable debug logging)
-		$(use_enable dht)
-		$(use_enable examples)
-		$(use_enable ssl encryption)
-		$(use_enable static-libs static)
-		$(use_enable test tests)
-		--with-boost="${EPREFIX}/usr"
-		--with-libiconv
+	local mycmakeargs=(
+		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_CXX_STANDARD=14 \
+		-GNinja \
+		-Dbuild_examples=${usex examples} \
+		-Dbuild_tests=${usex test} \
+		-Dbuild_tools=ON \
+		-Dpython-bindings=${usex python} \
+		-Dpython-egg-info=${usex python} \
+		-Dpython-install-system-dir=${usex python} \
 	)
-	econf "${myeconfargs[@]}"
 
-	if use python; then
-		python_configure() {
-			econf "${myeconfargs[@]}" \
-				--enable-python-binding \
-				--with-boost-python="boost_${EPYTHON/./}"
-		}
-		distutils-r1_src_configure
-	fi
+	cmake_src_configure
 }
 
 src_compile() {
 	default
-
-	python_compile() {
-		cd "${BUILD_DIR}/../bindings/python" || die
-		distutils-r1_python_compile
-	}
-	use python && distutils-r1_src_compile
+	cmake_src_compile
 }
 
 src_install() {
@@ -104,11 +82,7 @@ src_install() {
 
 	default
 
-	python_install() {
-		cd "${BUILD_DIR}/../bindings/python" || die
-		distutils-r1_python_install
-	}
-	use python && distutils-r1_src_install
+	cmake_src_install
 
 	find "${D}" -name '*.la' -delete || die
 }
