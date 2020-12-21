@@ -14,7 +14,7 @@ DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalabilit
 HOMEPAGE="http://libtorrent.org"
 EGIT_REPO_URI="https://github.com/arvidn/libtorrent.git"
 EGIT_BRANCH="RC_2_0"
-EGIT_SUBMODULES=()
+#EGIT_SUBMODULES=()
 
 LICENSE="BSD"
 SLOT="0/10"
