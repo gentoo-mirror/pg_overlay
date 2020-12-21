@@ -52,7 +52,7 @@ src_prepare() {
 	# prepend -I${S}/... to ensure bindings use the right headers
 	#sed -i -e "s|^|-I${S}/src/include |" bindings/python/compile_flags.in || die
 
-	use python && distutils-r1_src_prepare
+	cmake_src_prepare
 }
 
 src_configure() {
