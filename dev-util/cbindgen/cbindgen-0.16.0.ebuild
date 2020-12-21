@@ -34,6 +34,7 @@ rand_hc-0.2.0
 redox_syscall-0.1.57
 remove_dir_all-0.5.3
 ryu-1.0.5
+scopeguard-1.1.0
 serde-1.0.116
 serde_derive-1.0.116
 serde_json-1.0.57
