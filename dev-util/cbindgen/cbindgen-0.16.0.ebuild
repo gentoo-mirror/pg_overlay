@@ -18,6 +18,7 @@ heck-0.3.1
 hermit-abi-0.1.16
 indexmap-1.6.0
 itoa-0.4.6
+lazy_static-1.4.0
 libc-0.2.77
 lock_api-0.3.4
 log-0.4.11
@@ -33,6 +34,7 @@ rand_hc-0.2.0
 redox_syscall-0.1.57
 remove_dir_all-0.5.3
 ryu-1.0.5
+scopeguard-1.1.0
 serde-1.0.116
 serde_derive-1.0.116
 serde_json-1.0.57
