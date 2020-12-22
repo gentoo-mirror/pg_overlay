@@ -8,3 +8,4 @@ firefox-locale-debug.patch
 disable-openh264-download.patch
 
 mozilla-1680505.patch
+mozilla-1631061.patch
