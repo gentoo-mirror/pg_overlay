@@ -169,7 +169,7 @@ src_configure() {
 
 		$(use_enable doc html-build)
 		--disable-pdf-build
-		--enable-manpage-build
+		$(use_enable doc manpage-build)
 		$(use_enable cplugins)
 		$(use_enable test)
 
