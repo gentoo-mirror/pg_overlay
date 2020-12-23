@@ -3,7 +3,7 @@
 
 EAPI=7
 
-LUA_COMPAT=( lua5-{1..2} luajit )
+LUA_COMPAT=( lua5-{2..3} luajit )
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE='threads(+)'
 
