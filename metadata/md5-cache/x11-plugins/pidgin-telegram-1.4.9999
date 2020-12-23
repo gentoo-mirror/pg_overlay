@@ -10,4 +10,4 @@ PROPERTIES=live
 RDEPEND=net-im/pidgin sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:0= ) !gcrypt? ( libressl? ( dev-libs/libressl:0= ) !libressl? ( dev-libs/openssl:0= ) ) webp? ( media-libs/libwebp:= )
 SLOT=0
 _eclasses_=git-r3	3e7ec3d6619213460c85e2aa48398441
-_md5_=de3d0664b6f00979dbf58eb8b0c02a91
+_md5_=f9c229cd658d42f927e36eae3a081893
