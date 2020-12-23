@@ -1,14 +1,15 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
+LUA_COMPAT=( lua5-{1..2} luajit )
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=2.0.21
 
-inherit bash-completion-r1 eapi7-ver flag-o-matic pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
+inherit bash-completion-r1 flag-o-matic lua-single pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
 DESCRIPTION="Media player based on MPlayer and mplayer2"
 HOMEPAGE="https://mpv.io/ https://github.com/mpv-player/mpv"
@@ -30,7 +31,7 @@ LICENSE="LGPL-2.1+ GPL-2+ BSD ISC"
 SLOT="0"
 IUSE="+alsa aqua archive bluray cdda +cli coreaudio cplugins cuda debug doc drm dvb
 	dvd +egl gamepad gbm +iconv jack javascript jpeg lcms libcaca libmpv +lua
-	luajit openal +opengl pulseaudio raspberry-pi rubberband sdl
+	openal +opengl pulseaudio raspberry-pi rubberband sdl
 	selinux test tools +uchardet vaapi vdpau vulkan wayland +X +xv zlib zimg"
 
 REQUIRED_USE="
@@ -41,7 +42,7 @@ REQUIRED_USE="
 	gamepad? ( sdl )
 	gbm? ( drm egl opengl )
 	lcms? ( opengl )
-	luajit? ( lua )
+	lua? ( ${LUA_REQUIRED_USE} )
 	opengl? ( || ( aqua egl X raspberry-pi !cli ) )
 	raspberry-pi? ( opengl )
 	test? ( opengl )
@@ -83,10 +84,7 @@ COMMON_DEPEND="
 	>=media-libs/libass-0.12.1:=[fontconfig,harfbuzz(+)]
 	virtual/ttf-fonts
 	libcaca? ( >=media-libs/libcaca-0.99_beta18 )
-	lua? (
-		!luajit? ( <dev-lang/lua-5.3:= )
-		luajit? ( dev-lang/luajit:2 )
-	)
+	lua? ( ${LUA_DEPS} )
 	openal? ( >=media-libs/openal-1.13 )
 	pulseaudio? ( media-sound/pulseaudio )
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
@@ -120,18 +118,23 @@ COMMON_DEPEND="
 "
 DEPEND="${COMMON_DEPEND}
 	${PYTHON_DEPS}
-	virtual/pkgconfig
 	cuda? ( >=media-libs/nv-codec-headers-8.2.15.7 )
-	doc? (  dev-python/docutils
-			dev-python/rst2pdf )
 	dvb? ( virtual/linuxtv-dvb-headers )
-	test? ( >=dev-util/cmocka-1.0.0 )
 "
 RDEPEND="${COMMON_DEPEND}
 	cuda? ( x11-drivers/nvidia-drivers[X] )
 	selinux? ( sec-policy/selinux-mplayer )
 	tools? ( ${PYTHON_DEPS} )
 "
+BDEPEND="
+	doc? ( dev-python/docutils )
+	virtual/pkgconfig
+	test? ( >=dev-util/cmocka-1.0.0 )
+"
+
+pkg_setup() {
+	use lua && lua-single_pkg_setup
+}
 
 src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
@@ -165,14 +168,13 @@ src_configure() {
 		$(usex debug '' '--disable-debug-build')
 
 		$(use_enable doc html-build)
-		$(use_enable doc pdf-build)
-		$(use_enable doc manpage-build)
+		--disable-pdf-build
+		--enable-manpage-build
 		$(use_enable cplugins)
 		$(use_enable test)
 
 		$(use_enable iconv)
 		$(use_enable lua)
-		$(usex luajit '--lua=luajit' '')
 		$(use_enable javascript)
 		$(use_enable zlib)
 		$(use_enable bluray libbluray)
@@ -238,6 +240,15 @@ src_configure() {
 		#
 		--jobs=$(makeopts_jobs)
 	)
+	if use lua; then
+		if use lua_single_target_luajit; then
+			mywafargs+=( --lua="luajit" )
+		else
+			# Because it would be too simple to just let the user directly
+			# specify the package name to check, wouldn't it.
+			mywafargs+=( --lua="$(ver_rs 1 '' $(ver_cut 1-2 $(lua_get_version)))" )
+		fi
+	fi
 
 	if use vaapi && use X; then
 		mywafargs+=(
@@ -279,14 +290,14 @@ src_install() {
 		doins -r TOOLS/lua
 	fi
 
-	if use cli && use luajit; then
-		pax-mark -m "${ED}"usr/bin/${PN}
+	if use cli && use lua_single_target_luajit; then
+		pax-mark -m "${ED}"/usr/bin/${PN}
 	fi
 
 	if use tools; then
 		dobin TOOLS/{mpv_identify.sh,umpv}
 		newbin TOOLS/idet.sh mpv_idet.sh
-		python_replicate_script "${ED}"usr/bin/umpv
+		python_replicate_script "${ED}"/usr/bin/umpv
 	fi
 }
 
