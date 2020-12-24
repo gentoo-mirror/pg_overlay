@@ -27,6 +27,7 @@ COMMON_DEPEND="
 	>=dev-libs/atk-2.10.0[introspection?,${MULTILIB_USEDEP}]
 	>=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}]
 	>=media-libs/fontconfig-2.10.92[${MULTILIB_USEDEP}]
+	virtual/libintl[${MULTILIB_USEDEP}]
 	>=x11-libs/cairo-1.12.14-r4:=[aqua?,svg,${MULTILIB_USEDEP}]
 	>=x11-libs/gdk-pixbuf-2.30.7:2[introspection?,${MULTILIB_USEDEP}]
 	>=x11-libs/pango-1.36.3[introspection?,${MULTILIB_USEDEP}]
@@ -48,19 +49,7 @@ COMMON_DEPEND="
 		xinerama? ( >=x11-libs/libXinerama-1.1.3[${MULTILIB_USEDEP}] )
 	)
 "
-# docbook-4.1.2 and xsl required for man pages
-# docbook-4.3 required for gtk-doc
 DEPEND="${COMMON_DEPEND}
-	doc? (
-		app-text/docbook-xsl-stylesheets
-		app-text/docbook-xml-dtd:4.1.2
-		app-text/docbook-xml-dtd:4.3
-		dev-libs/libxslt
-	)
-	dev-libs/gobject-introspection-common
-	>=dev-util/gtk-doc-am-1.20
-	>=sys-devel/gettext-0.18.3[${MULTILIB_USEDEP}]
-	>=virtual/pkgconfig-0-r1[${MULTILIB_USEDEP}]
 	!aqua? ( x11-base/xorg-proto )
 	test? (
 		media-fonts/font-cursor-misc
@@ -86,6 +75,22 @@ RDEPEND="${COMMON_DEPEND}
 PDEPEND="
 	adwaita-icon-theme? ( x11-themes/gtk-engines-adwaita )
 	vim-syntax? ( app-vim/gtk-syntax )
+"
+# docbook-4.1.2 and xsl required for man pages
+# docbook-4.3 required for gtk-doc
+BDEPEND="
+	doc? (
+		app-text/docbook-xml-dtd:4.1.2
+		app-text/docbook-xml-dtd:4.3
+		app-text/docbook-xsl-stylesheets
+	)
+	dev-libs/gobject-introspection-common
+	dev-libs/libxslt
+	dev-util/glib-utils
+	>=dev-util/gtk-doc-am-1.20
+	>=sys-devel/gettext-0.18.3
+	virtual/pkgconfig
+	examples? ( x11-libs/gdk-pixbuf )
 "
 
 DISABLE_AUTOFORMATTING="yes"
@@ -228,8 +233,8 @@ multilib_src_install_all() {
 	einstalldocs
 
 	# dev-util/gtk-builder-convert split off into a separate package, #402905
-	rm -f "${ED}"usr/bin/gtk-builder-convert || die
-	rm -f "${ED}"usr/share/man/man1/gtk-builder-convert.* || die
+	rm "${ED}"/usr/bin/gtk-builder-convert || die
+	rm "${ED}"/usr/share/man/man1/gtk-builder-convert.* || die
 
 	readme.gentoo_create_doc
 }
