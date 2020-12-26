@@ -3,7 +3,9 @@
 
 EAPI=7
 
-inherit readme.gentoo-r1 cmake flag-o-matic toolchain-funcs udev user xdg
+LUA_COMPAT=( lua5-3 lua5-2 luajit )
+
+inherit readme.gentoo-r1 cmake flag-o-matic lua-single toolchain-funcs udev user xdg
 
 DESCRIPTION="Utility for advanced configuration of Roccat devices"
 
@@ -42,7 +44,11 @@ IUSE_INPUT_DEVICES=(
 
 IUSE="${IUSE_INPUT_DEVICES[@]}"
 
-LUA_DEPEND="|| ( dev-lang/lua:5.2 dev-lang/lua:5.1 )"
+REQUIRED_USE="
+	input_devices_roccat_ryosmk? ( ${LUA_REQUIRED_USE} )
+	input_devices_roccat_ryosmkfx? ( ${LUA_REQUIRED_USE} )
+	input_devices_roccat_ryostkl? ( ${LUA_REQUIRED_USE} )
+"
 
 RDEPEND="
 	dev-libs/dbus-glib
@@ -54,9 +60,9 @@ RDEPEND="
 	x11-libs/gtk+:2
 	x11-libs/libX11
 	virtual/libusb:1
-	input_devices_roccat_ryosmk? ( ${LUA_DEPEND} )
-	input_devices_roccat_ryosmkfx? ( ${LUA_DEPEND} )
-	input_devices_roccat_ryostkl? ( ${LUA_DEPEND} )
+	input_devices_roccat_ryosmk? ( ${LUA_DEPS} )
+	input_devices_roccat_ryosmkfx? ( ${LUA_DEPS} )
+	input_devices_roccat_ryostkl? ( ${LUA_DEPS} )
 "
 
 DEPEND="
@@ -66,9 +72,18 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
+PATCHES=(
+	"${FILESDIR}"/${PN}-5.9.0-cmake_lua_impl.patch
+)
+
 DOCS=( Changelog KNOWN_LIMITATIONS README )
 
 pkg_setup() {
+	# Don't bother checking all the relevant USE flags, this is harmless
+	# to call even when no Lua implementations have been pulled in
+	# by dependencies.
+	lua-single_pkg_setup
+
 	enewgroup roccat
 
 	local model
@@ -102,7 +117,10 @@ src_configure() {
 	local luse
 	for luse in ${lua_use[@]} ; do
 		if use ${luse} ; then
-			mycmakeargs+=( -DWITH_LUA="5.2" )
+			mycmakeargs+=(
+				-DLUA_IMPL="${ELUA}"
+				-DWITH_LUA="$(ver_cut 1-2 $(lua_get_version))"
+			)
 			break
 		fi
 	done
