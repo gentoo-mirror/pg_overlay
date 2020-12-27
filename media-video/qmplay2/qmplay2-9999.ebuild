@@ -121,7 +121,6 @@ src_configure() {
 		-DUSE_MEDIABROWSER=OFF
 		-DUSE_MPRIS2=$(usex extensions)
 		-DUSE_NOTIFY=ON
-		-DUSE_PCH=ON
 		-DUSE_RADIO=OFF
 	)
 
