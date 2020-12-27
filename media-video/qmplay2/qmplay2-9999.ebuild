@@ -116,10 +116,13 @@ src_configure() {
 		# extensions
 		-DUSE_EXTENSIONS=$(usex extensions)
 		-DUSE_TAGLIB=$(usex extensions)
-		-DUSE_LASTFM=$(usex extensions)
-		-DUSE_LYRICS=$(usex extensions)
-		-DUSE_MEDIABROWSER=$(usex extensions)
+		-DUSE_LASTFM=OFF
+		-DUSE_LYRICS=OFF
+		-DUSE_MEDIABROWSER=OFF
 		-DUSE_MPRIS2=$(usex extensions)
+		-DUSE_NOTIFY=ON
+		-DUSE_PCH=ON
+		-DUSE_RADIO=OFF
 	)
 
 	# find and link vulkan libs permanently
