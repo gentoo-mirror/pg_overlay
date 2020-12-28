@@ -23,7 +23,7 @@ src_install() {
 
 	local FILE
 	for FILE in $(find ${MY_PN} -name *.h); do
-		insinto "/usr/include/${MY_PN}-${SLOT}/${FILE%/*}"
+		insinto "/usr/include/${PN}-${SLOT}/${FILE%/*}"
 		doins "${FILE}"
 	done
 }
