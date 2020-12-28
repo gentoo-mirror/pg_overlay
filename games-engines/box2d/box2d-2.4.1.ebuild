@@ -23,6 +23,7 @@ shared_library(
 	$(find ${MY_PN} -name "*.cpp" -printf "'%p', ")
 	soversion: '${SLOT}', install : true
 )
+target(1)
 EOF
 
 	default
