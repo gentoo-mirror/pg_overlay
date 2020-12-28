@@ -7,7 +7,7 @@ inherit cmake multilib
 
 DESCRIPTION="A C++ engine for simulating rigid bodies in 2D games"
 HOMEPAGE="https://box2d.org/"
-SRC_URI="https://github.com/erincatto/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/erincatto/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="ZLIB"
 SLOT="$(ver_cut 1-2).0"
 KEYWORDS="~amd64 ~x86"
