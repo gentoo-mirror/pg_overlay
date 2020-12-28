@@ -123,7 +123,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-text/liblangtag
 	>=app-text/libmspub-0.1.0
 	>=app-text/libmwaw-0.3.1
-	app-text/libnumbertext
+	>=app-text/libnumbertext-1.0.6
 	>=app-text/libodfgen-0.1.0
 	app-text/libqxp
 	app-text/libstaroffice
@@ -141,7 +141,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/icu:=
 	dev-libs/libassuan
 	dev-libs/libgpg-error
-	>=dev-libs/liborcus-0.16.0
+	dev-libs/liborcus:0/0.16
 	dev-libs/librevenge
 	dev-libs/libxml2
 	dev-libs/libxslt
@@ -291,9 +291,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.0.3.1-qt5detect.patch"
-
-	# 7.0 branch
-	"${FILESDIR}/0001-Upgrade-liborcus-to-0.16.0.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
@@ -416,13 +413,12 @@ src_configure() {
 	if use custom-cflags ; then
 		elog "USE=custom-cflags has been selected. You are on your own to make sure that"
 		elog "the build succeeds. Good luck!"
-		strip-unsupported-flags
 	else
 		strip-flags
 	fi
 
-	export CLANG_CC=${CC}
-	export CLANG_CXX=${CXX}
+	export LO_CLANG_CC=${CC}
+	export LO_CLANG_CXX=${CXX}
 
 	# Show flags set at the end
 	einfo "  Used CFLAGS:    ${CFLAGS}"
