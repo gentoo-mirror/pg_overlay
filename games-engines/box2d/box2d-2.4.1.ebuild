@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit meson multilib
+inherit cmake multilib
 
 DESCRIPTION="A C++ engine for simulating rigid bodies in 2D games"
 HOMEPAGE="https://box2d.org/"
@@ -13,28 +13,17 @@ SLOT="$(ver_cut 1-2).0"
 KEYWORDS="~amd64 ~x86"
 
 src_prepare() {
-	# This version supports CMake but upstream has dropped it since this
-	# release. They now use Premake but this Meson file is actually
-	# simpler! Installation is manual but that's true for Premake too.
-	cat > meson.build <<EOF || die
-project('${MY_PN}', 'cpp')
-shared_library(
-	'${MY_PN}',
-	$(find ${MY_PN} -name "*.cpp" -printf "'%p', ")
-	soversion: '${SLOT}', install : true
-)
-EOF
-
 	default
+	cmake_src_prepare
 }
 
 src_install() {
-	dodoc {Changes,Readme}.txt
-	dolib.so "${BUILD_DIR}"/lib${MY_PN}$(get_libname ${SLOT})
+	cmake_src_install
+	dodoc {CHANGELOG,README}.md
 
 	local FILE
 	for FILE in $(find ${MY_PN} -name *.h); do
-		insinto "/usr/include/${MY_PN}-${SLOT}/${FILE%/*}"
+		insinto "/usr/include/${PN}-${SLOT}/${FILE%/*}"
 		doins "${FILE}"
 	done
 }
