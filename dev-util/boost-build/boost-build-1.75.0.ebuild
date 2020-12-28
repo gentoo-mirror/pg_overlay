@@ -3,21 +3,21 @@
 
 EAPI=7
 
-inherit flag-o-matic prefix toolchain-funcs poly-c_ebuilds
+inherit flag-o-matic prefix toolchain-funcs
 
-REAL_PV="$(ver_rs 1- _ ${MY_PV})"
+MY_PV="$(ver_rs 1- _)"
 
 DESCRIPTION="A system for large project software construction, simple to use and powerful"
 HOMEPAGE="https://boostorg.github.io/build/"
-SRC_URI="https://dl.bintray.com/boostorg/release/${MY_PV}/source/boost_${REAL_PV}.tar.bz2"
+SRC_URI="https://dl.bintray.com/boostorg/release/${PV}/source/boost_${MY_PV}.tar.bz2"
 
 LICENSE="Boost-1.0"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~ppc-aix ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~x64-cygwin ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="examples"
 RESTRICT="test"
 
-S="${WORKDIR}/boost_${REAL_PV}/tools/build/src"
+S="${WORKDIR}/boost_${MY_PV}/tools/build/src"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
@@ -28,7 +28,7 @@ PATCHES=(
 )
 
 src_unpack() {
-	tar xojf "${DISTDIR}/${A}" boost_${REAL_PV}/tools/build || die "unpacking tar failed"
+	tar xojf "${DISTDIR}/${A}" boost_${MY_PV}/tools/build || die "unpacking tar failed"
 }
 
 src_prepare() {
@@ -41,6 +41,9 @@ src_prepare() {
 
 src_configure() {
 	tc-export CXX
+
+	# need to enable LFS explicitly for 64-bit offsets on 32-bit hosts (#761100)
+	append-lfs-flags
 }
 
 src_compile() {
