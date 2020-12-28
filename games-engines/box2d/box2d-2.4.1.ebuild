@@ -5,15 +5,12 @@ EAPI=7
 
 inherit meson multilib
 
-MY_PN="Box2D"
 DESCRIPTION="A C++ engine for simulating rigid bodies in 2D games"
 HOMEPAGE="https://box2d.org/"
 SRC_URI="https://github.com/erincatto/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="ZLIB"
 SLOT="$(ver_cut 1-2).0"
 KEYWORDS="~amd64 ~x86"
-
-S="${WORKDIR}/${MY_PN}-${PV}/${MY_PN}"
 
 src_prepare() {
 	# This version supports CMake but upstream has dropped it since this
