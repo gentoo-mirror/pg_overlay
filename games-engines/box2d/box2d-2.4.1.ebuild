@@ -14,9 +14,11 @@ KEYWORDS="~amd64 ~x86"
 
 src_prepare() {
 	default
+	cmake_src_prepare
 }
 
 src_install() {
+	cmake_src_install
 	dodoc {Changes,Readme}.txt
 	dolib.so "${BUILD_DIR}"/lib${MY_PN}$(get_libname ${SLOT})
 
