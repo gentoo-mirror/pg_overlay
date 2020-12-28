@@ -20,7 +20,6 @@ src_prepare() {
 src_install() {
 	cmake_src_install
 	dodoc {CHANGELOG,README}.md
-	dolib.so "${BUILD_DIR}"/lib${MY_PN}$(get_libname ${SLOT})
 
 	local FILE
 	for FILE in $(find ${MY_PN} -name *.h); do
