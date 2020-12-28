@@ -19,7 +19,7 @@ src_prepare() {
 
 src_install() {
 	cmake_src_install
-	dodoc {Changes,Readme}.txt
+	dodoc {CHANGELOG,README}.md
 	dolib.so "${BUILD_DIR}"/lib${MY_PN}$(get_libname ${SLOT})
 
 	local FILE
