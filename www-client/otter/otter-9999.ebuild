@@ -58,8 +58,9 @@ src_prepare() {
 
 src_configure() {
 	mycmakeargs=(
-		-DENABLE_QTWEBENGINE=true
-		-DENABLE_QTWEBKIT=false
+		-DENABLE_SPELLCHECK=$(usex spell)
+		-DENABLE_QTWEBENGINE=$(usex webengine)
+		-DENABLE_QTWEBKIT=$(usex webkit)
 	)
 
 	cmake_src_configure
