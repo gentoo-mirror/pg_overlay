@@ -28,7 +28,7 @@ DEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtxmlpatterns:5
 	spell? ( kde-frameworks/sonnet )
-	webengine> ( >=dev-qt/qtwebengine-5.9:5[widgets] )
+	webengine? ( >=dev-qt/qtwebengine-5.9:5[widgets] )
 	webkit? ( dev-qt/qtwebkit:5 )
 	"
 RDEPEND="
@@ -58,8 +58,9 @@ src_prepare() {
 
 src_configure() {
 	mycmakeargs=(
-		-DENABLE_QTWEBENGINE=true
-		-DENABLE_QTWEBKIT=false
+		-DENABLE_SPELLCHECK=$(usex spell)
+		-DENABLE_QTWEBENGINE=$(usex webengine)
+		-DENABLE_QTWEBKIT=$(usex webkit)
 	)
 
 	cmake_src_configure
