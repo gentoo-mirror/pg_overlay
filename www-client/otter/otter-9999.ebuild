@@ -28,7 +28,7 @@ DEPEND="
 	dev-qt/qtwidgets:5
 	dev-qt/qtxmlpatterns:5
 	spell? ( kde-frameworks/sonnet )
-	webengine> ( >=dev-qt/qtwebengine-5.9:5[widgets] )
+	webengine? ( >=dev-qt/qtwebengine-5.9:5[widgets] )
 	webkit? ( dev-qt/qtwebkit:5 )
 	"
 RDEPEND="
