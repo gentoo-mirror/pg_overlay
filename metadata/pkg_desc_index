@@ -136,7 +136,6 @@ media-libs/fontconfig 2.13.92: A library for configuring and customizing font ac
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libsdl2 2.0.12-r2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20201106: VoIP library for Telegram clients
-media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.3 2020.4_pre20201203: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20201127: WebRTC build for Telegram
 media-libs/vulkan-layers 9999: Vulkan Validation Layers
