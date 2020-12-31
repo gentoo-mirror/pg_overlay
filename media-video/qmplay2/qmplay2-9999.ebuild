@@ -120,8 +120,11 @@ src_configure() {
 		-DUSE_LYRICS=OFF
 		-DUSE_MEDIABROWSER=OFF
 		-DUSE_MPRIS2=$(usex extensions)
-		-DUSE_NOTIFY=ON
+
+		#
+		-DCMAKE_BUILD_TYPE=Release
 		-DUSE_RADIO=OFF
+		-DUSE_UPDATES=OFF
 	)
 
 	# find and link vulkan libs permanently
