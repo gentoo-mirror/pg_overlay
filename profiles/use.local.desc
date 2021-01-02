@@ -94,6 +94,7 @@ dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
 dev-vcs/mercurial:chg - Support Mercurial command server client
 dev-vcs/mercurial:gpg - Support signing with GnuPG.
+dev-vcs/mercurial:rust - Use Rust extensions.
 dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
