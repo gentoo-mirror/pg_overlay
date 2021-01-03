@@ -136,7 +136,7 @@ RESTRICT="test"
 PATCHES=(
 	"${FILESDIR}"/1.46.0-don-t-create-prefix-at-time-of-check.patch
 	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/1.48.0-gentoo-musl-target-specs.patch
+	#"${FILESDIR}"/1.48.0-gentoo-musl-target-specs.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
