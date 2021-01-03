@@ -349,6 +349,7 @@ src_configure() {
 		bindir = "bin"
 		libdir = "lib"
 		mandir = "share/man"
+
 		[rust]
 		optimize = true
 		debug = $(toml_usex debug)
@@ -370,7 +371,7 @@ src_configure() {
 		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
-		llvm-libunwind = true
+		llvm-libunwind = "$(usex system-llvm in-tree)"
 
 		[dist]
 		src-tarball = false
