@@ -371,7 +371,7 @@ src_configure() {
 		use-lld = true
 		backtrace-on-ice = true
 		jemalloc = false
-		llvm-libunwind = "$(usex system-llvm in-tree)"
+		llvm-libunwind = "$(usex system-llvm system)"
 
 		[dist]
 		src-tarball = false
