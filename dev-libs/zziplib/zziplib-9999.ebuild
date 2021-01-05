@@ -30,7 +30,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.13.71-58_manvolnum_should_be_in_.so.patch	# https://github.com/gdraheim/zziplib/commit/03ddd0c
 	"${FILESDIR}"/${PN}-0.13.71-copy_directory_instead_of_unpacking.patch # https://github.com/gdraheim/zziplib/commit/31d8a95
 	"${FILESDIR}"/${PN}-0.13.71-installing-man3-pages.patch # https://github.com/gdraheim/zziplib/issues/93#issuecomment-616219417
 )
