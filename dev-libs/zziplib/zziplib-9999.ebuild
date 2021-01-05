@@ -14,17 +14,14 @@ EGIT_BRANCH="develop"
 
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0/13"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-IUSE="sdl static-libs test"
-# Tests fail for now, only recently added.
-# Restricted to avoid blocking stabilisations.
-# https://github.com/gdraheim/zziplib/issues/97
-RESTRICT="test"
-#RESTRICT="!test? ( test )"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 s390 sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+IUSE="sdl static-libs"
+
+# Tests require internet access
+# https://github.com/gdraheim/zziplib/issues/24
 
 BDEPEND="
 	${PYTHON_DEPS}
-	test? ( app-arch/zip )
 "
 DEPEND="
 	sys-libs/zlib
@@ -33,38 +30,24 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.13.69-009-perror.patch
-	"${FILESDIR}"/${PN}-0.13.71-installing-man3-pages.patch
+	"${FILESDIR}"/${PN}-0.13.71-reorganize-ZZIP_OPTIONFLAGS.patch # https://github.com/gdraheim/zziplib/commit/5583ccc
+	"${FILESDIR}"/${PN}-0.13.71-58_manvolnum_should_be_in_.so.patch	# https://github.com/gdraheim/zziplib/commit/03ddd0c
+	"${FILESDIR}"/${PN}-0.13.71-copy_directory_instead_of_unpacking.patch # https://github.com/gdraheim/zziplib/commit/31d8a95
+	"${FILESDIR}"/${PN}-0.13.71-installing-man3-pages.patch # https://github.com/gdraheim/zziplib/issues/93#issuecomment-616219417
 )
 
-pkg_setup() {
-	python-any-r1_pkg_setup
-}
-
-src_prepare() {
-	sed -e "/^topsrcdir/s:..\/..::" \
-		-e "/^bindir/s:\.\.:${WORKDIR}/${P}_build:" \
-		-e 's:\(..\/\)\+{exe}:{exe}:' \
-		-i test/zziptests.py || die
-	cmake_src_prepare
-}
-
 src_configure() {
-	append-flags -fno-strict-aliasing # bug reported upstream
+	# https://github.com/gdraheim/zziplib/commit/f3bfc0dd6663b7df272cc0cf17f48838ad724a2f#diff-b7b1e314614cf326c6e2b6eba1540682R100
+	append-flags -fno-strict-aliasing
 
 	local mycmakeargs=(
 		-DZZIPSDL="$(usex sdl)"
 		-DBUILD_STATIC_LIBS="$(usex static-libs)"
-		-DBUILD_TESTS="$(usex test)"
-		-DZZIPTEST="$(usex test)"
+		-DBUILD_TESTS=OFF
+		-DZZIPTEST=OFF
 		-DZZIPDOCS=ON
 		-DZZIPWRAP=OFF
 	)
 
 	cmake_src_configure
-}
-
-src_test() {
-	cd "$S"/test/ || die
-	"${EPYTHON}" "$S"/test/zziptests.py || die "Tests failed with ${EPYTHON}"
 }
