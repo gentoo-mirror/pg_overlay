@@ -30,7 +30,6 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.13.71-installing-man3-pages.patch # https://github.com/gdraheim/zziplib/issues/93#issuecomment-616219417
 )
 
 src_configure() {
