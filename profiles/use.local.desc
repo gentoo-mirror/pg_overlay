@@ -306,13 +306,6 @@ net-libs/libsoup:brotli - Enable brotli decompression support
 net-libs/libsoup:gssapi - Enable GSSAPI support
 net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
-net-libs/nodejs:inspector - Enable V8 inspector
-net-libs/nodejs:npm - Enable NPM package manager
-net-libs/nodejs:pax_kernel - Enable building under a PaX enabled kernel
-net-libs/nodejs:snapshot - Enable snapshot creation for faster startup
-net-libs/nodejs:system-icu - Use system dev-libs/icu instead of the bundled version
-net-libs/nodejs:system-ssl - Use system OpenSSL instead of the bundled one
-net-libs/nodejs:systemtap - Enable SystemTAP/DTrace tracing
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
