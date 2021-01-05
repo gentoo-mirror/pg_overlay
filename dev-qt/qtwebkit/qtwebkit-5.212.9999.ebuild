@@ -82,6 +82,10 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
+PATCHES=(
+	"${FILESDIR}/${PN}-5.212.0_pre20200924-icu68.patch"
+)
+
 CHECKREQS_DISK_BUILD="16G" # bug 417307
 
 _check_reqs() {
