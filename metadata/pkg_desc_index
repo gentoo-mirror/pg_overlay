@@ -105,7 +105,7 @@ dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtdeclarative 5.15.2: The QML and Quick modules for the Qt5 framework
-dev-qt/qtwebkit 5.212.0_pre20200924: WebKit rendering library for the Qt5 framework (deprecated)
+dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/boost-build 1.75.0: A system for large project software construction, simple to use and powerful
 dev-util/cbindgen 0.16.0: A tool for generating C bindings to Rust code
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
