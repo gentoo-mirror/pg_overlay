@@ -177,6 +177,8 @@ src_prepare() {
 		strip_builddir SRC_SUBDIRS demos Makefile.{am,in}
 	fi
 
+	#
+	rm "${WORKDIR}"/patches/{0001*,0002*,0003*,0004*,0005*,0006*}
 	gnome2_src_prepare
 }
 
