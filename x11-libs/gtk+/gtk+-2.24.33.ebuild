@@ -178,7 +178,7 @@ src_prepare() {
 	fi
 
 	#
-	rm "${WORKDIR}"/patches/{0001-configure-Move-all-includes-to-the-first-argument-of.patch,0002-gtk-queryimmodules.c-Make-the-output-deterministic.patch,0003-Revert-Fix-abicheck.patch}
+	rm "${WORKDIR}"/patches/{0001-configure-Move-all-includes-to-the-first-argument-of.patch,0002-gtk-queryimmodules.c-Make-the-output-deterministic.patch,0003-Revert-Fix-abicheck.patch,0004-calendar-Use-the-new-OB-format-if-supported.patch}
 	gnome2_src_prepare
 }
 
