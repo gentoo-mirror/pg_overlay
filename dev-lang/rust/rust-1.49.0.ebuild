@@ -497,7 +497,7 @@ src_compile() {
 	# we need \n IFS to have config.env with spaces loaded properly. #734018
 	(
 	IFS=$'\n'
-	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
+	env $(cat "${S}"/config.env) RUSTFLAGS="-Cdebuginfo=0 -Clink-args=-Wl,-O2 -Clink-args=-Wl,--as-needed -Clink-args=-Wl,--gc-sections -Clink-args=-Wl,--icf=all -Clink-args=-Wl,--lto-O3 -Clink-args=-Wl,--thinlto-jobs=9 -Clink-args=-Wl,-z,norelro -Clink-args=-fuse-ld=lld -Clink-args=-stdlib=libc++ -Clink-args=-rtlib=compiler-rt -Clink-args=-unwindlib=libunwind -Clink-args=-march=native -Clink-args=-mtune=native -Clink-args=-O3 -Clink-args=-pipe -Clink-args=-mllvm -Clink-args=-polly -Clink-args=-fdata-sections -Clink-args=-ffunction-sections -Clink-args=-flto=thin -Clink-args=-fomit-frame-pointer -Clink-args=-fslp-vectorize -Clink-args=-fvectorize -Clink-args=-fno-asynchronous-unwind-tables -Clink-args=-fno-common -Clink-args=-fno-plt -Clink-args=-fno-stack-protector -Clink-args=-fno-unwind-tables -Clinker=clang -Clinker-plugin-lto -Copt-level=3 -Ctarget-cpu=native -Zthinlto" RUST_BACKTRACE=1\
 		"${EPYTHON}" ./x.py dist -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 	)
 }
