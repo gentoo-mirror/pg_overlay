@@ -104,7 +104,6 @@ dev-python/sip 5.4.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
-dev-qt/qtdeclarative 5.15.2: The QML and Quick modules for the Qt5 framework
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/boost-build 1.75.0: A system for large project software construction, simple to use and powerful
 dev-util/cbindgen 0.16.0: A tool for generating C bindings to Rust code
@@ -130,7 +129,7 @@ gui-libs/disman 5.20.0: A display management service and library. LibKScreen rep
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kwin 5.20.4: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 5.20.5: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 78.6.0: Thunderbird Mail Client
 media-libs/fontconfig 2.13.92: A library for configuring and customizing font access
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
@@ -221,7 +220,7 @@ www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using 
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support
-x11-libs/gtk+ 2.24.32-r1 3.24.24-r1: Gimp ToolKit +
+x11-libs/gtk+ 2.24.33 3.24.24-r1: Gimp ToolKit +
 x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.46.2 1.48.0: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications

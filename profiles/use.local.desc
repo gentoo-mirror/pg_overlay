@@ -81,9 +81,6 @@ dev-perl/File-HomeDir:xdg - Ensure XDG Semantics for returned paths via x11-misc
 dev-perl/JSON:xs - Install C-based dev-perl/JSON-XS for faster performance
 dev-perl/Ref-Util:xs - Install C-Based dev-perl/Ref-Util-XS for accelerated performance
 dev-perl/Sub-Name:suggested - Install extra dependencies needed for extended regression tests
-dev-qt/qtdeclarative:localstorage - Build the LocalStorage import for QtQuick (requires QtSql)
-dev-qt/qtdeclarative:vulkan - Enable support for Vulkan
-dev-qt/qtdeclarative:widgets - Enable QtWidgets support
 dev-qt/qtwebkit:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebkit:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer using SLOT 1.0
