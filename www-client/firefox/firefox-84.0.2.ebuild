@@ -462,10 +462,6 @@ src_unpack() {
 
 src_prepare() {
 	use lto && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
-	#
-	rm -v "${WORKDIR}"/firefox-patches/0030*
-	rm -v "${WORKDIR}"/firefox-patches/0031*
-	#
 	eapply "${WORKDIR}/firefox-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -508,7 +504,7 @@ src_prepare() {
 	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
 
 	####### My stuff
-	eapply "${FILESDIR}/${PN}-$(ver_cut 1)-no-gtk2.patch" 
+	#eapply "${FILESDIR}/${PN}-$(ver_cut 1)-no-gtk2.patch" 
 	### OpenSUSE-KDE patchset
 	einfo Applying OpenSUSE-KDE patches
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/series);do
