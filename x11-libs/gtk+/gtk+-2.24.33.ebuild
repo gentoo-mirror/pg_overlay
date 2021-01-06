@@ -177,6 +177,8 @@ src_prepare() {
 		strip_builddir SRC_SUBDIRS demos Makefile.{am,in}
 	fi
 
+	#
+	rm "${WORKDIR}"/patches/0001-configure-Move-all-includes-to-the-first-argument-of.patch
 	gnome2_src_prepare
 }
 
