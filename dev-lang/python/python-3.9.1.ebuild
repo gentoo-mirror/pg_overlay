@@ -183,7 +183,7 @@ src_compile() {
 	fi
 	export par_arg
 
-	emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall -j $(nproc) --pgo-extended"
+	emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_distutils -j $(nproc) --pgo-extended"
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax_kernel]; then
