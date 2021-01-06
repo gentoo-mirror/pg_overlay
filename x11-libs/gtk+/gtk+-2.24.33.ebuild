@@ -178,7 +178,7 @@ src_prepare() {
 	fi
 
 	#
-	rm "${WORKDIR}"/patches/000{1-5}*
+	rm "${WORKDIR}"/patches/{0001*,0002*,0003*,0004*,0005*,}
 	gnome2_src_prepare
 }
 
