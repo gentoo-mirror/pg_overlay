@@ -399,14 +399,14 @@ pkg_setup() {
 			#[[ -n ${version_llvm_rust} ]] && version_llvm_rust=$(ver_cut 1 "${version_llvm_rust}")
 			#[[ -z ${version_llvm_rust} ]] && die "Failed to read used LLVM version from rustc!"
 
-			if ver_test "${version_lld}" -ne "${version_llvm_rust}" ; then
-				eerror "Rust is using LLVM version ${version_llvm_rust} but ld.lld version belongs to LLVM version ${version_lld}."
-				eerror "You will be unable to link ${CATEGORY}/${PN}. To proceed you have the following options:"
-				eerror "  - Manually switch rust version using 'eselect rust' to match used LLVM version"
-				eerror "  - Switch to dev-lang/rust[system-llvm] which will guarantee matching version"
-				eerror "  - Build ${CATEGORY}/${PN} without USE=lto"
-				die "LLVM version used by Rust (${version_llvm_rust}) does not match with ld.lld version (${version_lld})!"
-			fi
+			#if ver_test "${version_lld}" -ne "${version_llvm_rust}" ; then
+			#	eerror "Rust is using LLVM version ${version_llvm_rust} but ld.lld version belongs to LLVM version ${version_lld}."
+			#	eerror "You will be unable to link ${CATEGORY}/${PN}. To proceed you have the following options:"
+			#	eerror "  - Manually switch rust version using 'eselect rust' to match used LLVM version"
+			#	eerror "  - Switch to dev-lang/rust[system-llvm] which will guarantee matching version"
+			#	eerror "  - Build ${CATEGORY}/${PN} without USE=lto"
+			#	die "LLVM version used by Rust (${version_llvm_rust}) does not match with ld.lld version (${version_lld})!"
+			#fi
 		fi
 
 		python-any-r1_pkg_setup
