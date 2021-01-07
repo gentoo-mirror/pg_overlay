@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -8,9 +8,6 @@ inherit cmake llvm llvm.org python-any-r1
 
 DESCRIPTION="Polyhedral optimizations for LLVM"
 HOMEPAGE="https://llvm.org/"
-LLVM_COMPONENTS=( polly )
-LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
-llvm.org_set_globals
 
 LICENSE="Apache-2.0-with-LLVM-exceptions UoI-NCSA"
 SLOT="$(ver_cut 1)"
@@ -20,7 +17,15 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="~sys-devel/llvm-${PV}"
 DEPEND="${RDEPEND}"
-BDEPEND="test? ( $(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]") )"
+BDEPEND="
+	test? (
+		>=dev-util/cmake-3.16
+		$(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]")
+	)"
+
+LLVM_COMPONENTS=( polly )
+LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
+llvm.org_set_globals
 
 python_check_deps() {
 	has_version -b "dev-python/lit[${PYTHON_USEDEP}]"
@@ -45,6 +50,7 @@ src_configure() {
 		-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
 		-DLLVM_EXTERNAL_LIT="${EPREFIX}/usr/bin/lit"
 		-DLLVM_LIT_ARGS="$(get_lit_flags)"
+		-DPython3_EXECUTABLE="${PYTHON}"
 	)
 
 	cmake_src_configure
