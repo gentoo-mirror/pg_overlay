@@ -503,7 +503,7 @@ multilib_src_install_all() {
 	_EOF_
 
 	docompress "/usr/lib/llvm/${SLOT}/share/man"
-	llvm_install_manpages
+	#llvm_install_manpages
 }
 
 pkg_postinst() {
