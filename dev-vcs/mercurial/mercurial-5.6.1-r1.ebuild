@@ -117,7 +117,7 @@ SRC_URI="https://www.mercurial-scm.org/release/${P}.tar.gz
 LICENSE="GPL-2+
 	rust? ( BSD Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD-2 ISC MIT PSF-2 Unlicense )"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 IUSE="+chg emacs gpg test tk rust zsh-completion"
 
 BDEPEND="rust? ( ${RUST_DEPEND} )"
@@ -151,7 +151,7 @@ python_prepare_all() {
 	sed -i -e 's:xcodebuild:nocodebuild:' setup.py || die
 	sed -i -e 's/__APPLE__/__NO_APPLE__/g' mercurial/cext/osutil.c || die
 	# Use absolute import for zstd
-	sed -i -e 's/from \.* import zstd/import zstd/' \
+	sed -i -e 's/from \.* import zstd/import zstandard as zstd/' \
 		mercurial/utils/compression.py \
 		mercurial/wireprotoframing.py || die
 
