@@ -414,7 +414,7 @@ multilib_src_install_all() {
 	fi
 
 	docompress "/usr/lib/llvm/${SLOT}/share/man"
-	llvm_install_manpages
+	#llvm_install_manpages
 	# match 'html' non-compression
 	use doc && docompress -x "/usr/share/doc/${PF}/tools-extra"
 	# +x for some reason; TODO: investigate
