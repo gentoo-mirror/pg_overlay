@@ -217,6 +217,7 @@ virtual/rust 1.49.0: Virtual for Rust language compiler
 www-apps/nextcloud 20.0.4: Personal cloud that runs on your own server
 www-client/firefox 84.0.2: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
+www-client/ungoogled-chromium 87.0.4280.141: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xcb-proto 1.14-r1: X C-language Bindings protocol headers
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.2: A vector graphics library with cross-device output support

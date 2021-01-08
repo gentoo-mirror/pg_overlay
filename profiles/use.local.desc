@@ -374,6 +374,31 @@ www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo in
 www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
+www-client/ungoogled-chromium:cfi - Build with CFI (Control Flow Integrity) enabled
+www-client/ungoogled-chromium:clang - Use Clang compiler instead of GCC
+www-client/ungoogled-chromium:closure-compile - Enable closure type-checking for Chrome's web technology-based UI. Requires Java and bundled binary compiler.jar in sources tree.
+www-client/ungoogled-chromium:convert-dict - Patch and build the convert_dict utility. The script will be installed into /usr/lib64/chromium-browser/update-dicts.sh. More info here: https://github.com/Eloston/ungoogled-chromium/issues/188#issuecomment-444752907
+www-client/ungoogled-chromium:enable-driver - Build chromedriver
+www-client/ungoogled-chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
+www-client/ungoogled-chromium:headless - Build Ozone only with headless backend, NOT RECOMMENDED for general uses
+www-client/ungoogled-chromium:official - Enable Official build instead of Developer build.
+www-client/ungoogled-chromium:optimize-thinlto - Whether to enable ThinLTO optimizations. Turning ThinLTO optimizations on can substantially increase link time and binary size, but they generally also make binaries a fair bit faster.
+www-client/ungoogled-chromium:optimize-webui - Optimize parts of Chromium's UI written with web technologies (HTML/CSS/JS) for runtime performance purposes. This does more work at compile time for speed benefits at runtime.
+www-client/ungoogled-chromium:pgo - Enable PGO. Requires clnang and bundled binary profile data in sources tree.
+www-client/ungoogled-chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3
+www-client/ungoogled-chromium:suid - Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels
+www-client/ungoogled-chromium:system-ffmpeg - Use the system media-video/ffmpeg instead of the bundled one
+www-client/ungoogled-chromium:system-harfbuzz - Use the system media-libs/harfbuzz instead of the bundled one
+www-client/ungoogled-chromium:system-icu - Use the system dev-libs/icu instead of the bundled one
+www-client/ungoogled-chromium:system-jsoncpp - Use the system dev-libs/jsoncpp instead of the bundled one
+www-client/ungoogled-chromium:system-libevent - Use the system dev-libs/libevent instead of the bundled one
+www-client/ungoogled-chromium:system-libvpx - Use the system media-libs/libvpx instead of the bundled one
+www-client/ungoogled-chromium:system-openh264 - Use the system media-libs/openh264 instead of the bundled one. If disabled, it will restrict USE=bindist.
+www-client/ungoogled-chromium:system-openjpeg - Use the system-wide media-libs/openjpeg instead of the bundled one. OpenJPEG use are exclusively for Chromium's PDF viewer.
+www-client/ungoogled-chromium:system-re2 - Use the system-wide dev-libs/re2 instead of the bundled one
+www-client/ungoogled-chromium:tcmalloc - Use bundled tcmalloc instead of system malloc
+www-client/ungoogled-chromium:thinlto - Build with ThinLTO support. LTO (Link Time Optimization) achieves better runtime performance through whole-program analysis and cross-module optimization (highly recommended).
+www-client/ungoogled-chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
 x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
