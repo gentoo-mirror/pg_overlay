@@ -344,15 +344,6 @@ sys-fs/udisks:systemd - Support sys-apps/systemd's logind
 sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
 sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
 sys-kernel/gentoo-sources:experimental - Apply experimental patches; for more information, see "https://wiki.gentoo.org/wiki/Project:Kernel/Experimental".
-sys-libs/libblockdev:bcache - Enable block device cache support.
-sys-libs/libblockdev:cryptsetup - Enable sys-fs/cryptsetup support
-sys-libs/libblockdev:device-mapper - Enable support for device-mapper from sys-fs/lvm2
-sys-libs/libblockdev:dmraid - Support for dmraid devices, also known as ATA-RAID, or Fake RAID.
-sys-libs/libblockdev:escrow - Support for building crypto plugin with escrow device support
-sys-libs/libblockdev:kbd - Enable kernel block device support.
-sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-fs/lvm2.
-sys-libs/libblockdev:tools - Build tools
-sys-libs/libblockdev:vdo - Enable Virtual Data Optimizer support.
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
 sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
