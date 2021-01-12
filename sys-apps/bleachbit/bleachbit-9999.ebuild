@@ -88,6 +88,6 @@ python_install_all() {
 	doicon ${PN}.png
 	domenu org.${PN}.BleachBit.desktop
 
-	#insinto /usr/share/polkit-1/actions
-	#doins org.${PN}.policy
+	insinto /usr/share/polkit-1/actions
+	doins org.${PN}.policy
 }
