@@ -1,11 +1,12 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PLOCALES="af ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa fi fr gl he hi hr hu ia id it ja ko ku ky lt lv ms my nb nds nl nn pl pt pt_BR ro ru se sk sl sq sr sv ta te th tr ug uk uz vi yi zh_CN zh_TW"
+PLOCALES="af ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa fi fr gl he hi hr hu ia id ie it ja ko ku ky lt lv ms my nb nds nl nn pl pt pt_BR ro ru se sk sl sq sr sv ta te th tr ug uk uz vi yi zh_CN zh_TW"
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE="sqlite(+)"
+DISTUTILS_SINGLE_IMPL=1
 
 inherit desktop distutils-r1 l10n git-r3 virtualx
 
@@ -18,12 +19,16 @@ SLOT="0"
 KEYWORDS=""
 
 RDEPEND="
-	dev-python/chardet[$PYTHON_USEDEP]
-	dev-python/pygobject:3[$PYTHON_USEDEP]
+	$(python_gen_cond_dep '
+		dev-python/chardet[${PYTHON_USEDEP}]
+		dev-python/pygobject:3[${PYTHON_USEDEP}]
+	')
 "
 BDEPEND="
 	sys-devel/gettext
-	test? ( dev-python/mock[${PYTHON_USEDEP}] )
+	test? (
+		$(python_gen_cond_dep 'dev-python/mock[${PYTHON_USEDEP}]')
+	)
 "
 
 distutils_enable_tests unittest
@@ -39,7 +44,10 @@ python_prepare_all() {
 		# fails due to non-existent $HOME/.profile
 		rm tests/TestInit.py || die
 
-		# fails on upstream Travis CI as well as on Gentoo
+		# these fail on upstream Travis CI as well as on Gentoo
+		sed -e "s/test_notify(self)/_&/" \
+			-i tests/TestGUI.py || die
+
 		sed -e "s/test_get_proc_swaps(self)/_&/" \
 			-i tests/TestMemory.py || die
 	fi
