@@ -44,7 +44,6 @@ dev-lang/tcl 8.6.11: Tool Command Language
 dev-lang/tk 8.6.11: Tk Widget Set
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
-dev-libs/icu 68.2: International Components for Unicode
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
 dev-libs/libgnt 9999: Toolkit for creating text-mode graphical user interfaces
 dev-libs/libixion 0.15.0 0.16.1: General purpose formula parser & interpreter
