@@ -20,7 +20,7 @@ app-misc/worker 4.6.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.1.0.1: A full office productivity suite
 app-office/libreoffice-l10n 7.1.0.1: Translations for the Libreoffice suite
 app-office/wps-office 11.1.0.9719: WPS Office is an office productivity suite
-app-portage/eix 0.34.11: Search and query ebuilds
+app-portage/eix 0.34.12: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/enchant 2.2.12: Spellchecker wrapping library
@@ -192,7 +192,6 @@ sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a
 sys-auth/polkit 0.118: Policy framework for controlling privileges for system-wide services
 sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-devel/clang 11.0.1 11.1.0_rc1: C language family frontend for LLVM
-sys-devel/dwz 0.13: DWARF optimization and duplicate removal tool
 sys-devel/llvm 11.0.1 11.1.0_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.1: Daemon providing interfaces to work with storage devices
