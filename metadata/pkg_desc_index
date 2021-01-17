@@ -40,8 +40,6 @@ dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by Adopt
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 2.7.18-r5 3.9.1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.49.0: Systems programming language from Mozilla
-dev-lang/tcl 8.6.11: Tool Command Language
-dev-lang/tk 8.6.11: Tk Widget Set
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/libevdevplus 0.1.1: Easy-to-use event device library in C++
