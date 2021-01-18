@@ -111,6 +111,10 @@ mail-client/thunderbird:system-jpeg - Use the system-wide media-libs/libjpeg-tur
 mail-client/thunderbird:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 mail-client/thunderbird:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 mail-client/thunderbird:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
+media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
+media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
+media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
+media-libs/libplacebo:vulkan - Add support for the vulkan graphics API
 media-libs/libsdl2:fcitx4 - Enable support for app-i18n/fcitx 4
 media-libs/libsdl2:gles2 - include OpenGL ES 2.0 support
 media-libs/libsdl2:haptic - Enable the haptic (force feedback) subsystem
