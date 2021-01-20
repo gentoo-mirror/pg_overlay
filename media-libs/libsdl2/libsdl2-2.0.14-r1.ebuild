@@ -1,7 +1,8 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
+
 inherit autotools flag-o-matic toolchain-funcs multilib-minimal
 
 MY_P="SDL2-${PV}"
@@ -11,9 +12,9 @@ SRC_URI="https://www.libsdl.org/release/${MY_P}.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~ppc ~ppc64 sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 
-IUSE="alsa aqua cpu_flags_ppc_altivec cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 custom-cflags dbus fcitx4 gles2 haptic ibus jack +joystick kms libsamplerate nas opengl oss pulseaudio +sound static-libs +threads tslib udev +video video_cards_vc4 vulkan wayland X xinerama xscreensaver"
+IUSE="alsa aqua cpu_flags_ppc_altivec cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 custom-cflags dbus fcitx4 gles2 haptic ibus jack +joystick kms libsamplerate nas opengl oss pulseaudio +sound static-libs +threads udev +video video_cards_vc4 vulkan wayland X xinerama xscreensaver"
 REQUIRED_USE="
 	alsa? ( sound )
 	fcitx4? ( dbus )
@@ -35,7 +36,7 @@ CDEPEND="
 	ibus? ( app-i18n/ibus )
 	jack? ( virtual/jack[${MULTILIB_USEDEP}] )
 	kms? (
-		>=x11-libs/libdrm-2.4.46[${MULTILIB_USEDEP}]
+		>=x11-libs/libdrm-2.4.82[${MULTILIB_USEDEP}]
 		>=media-libs/mesa-9.0.0[${MULTILIB_USEDEP},gbm]
 	)
 	libsamplerate? ( media-libs/libsamplerate[${MULTILIB_USEDEP}] )
@@ -48,11 +49,10 @@ CDEPEND="
 		>=virtual/glu-9.0-r1[${MULTILIB_USEDEP}]
 	)
 	pulseaudio? ( >=media-sound/pulseaudio-2.1-r1[${MULTILIB_USEDEP}] )
-	tslib? ( >=x11-libs/tslib-1.0-r3[${MULTILIB_USEDEP}] )
 	udev? ( >=virtual/libudev-208:=[${MULTILIB_USEDEP}] )
 	wayland? (
 		>=dev-libs/wayland-1.0.6[${MULTILIB_USEDEP}]
-		>=media-libs/mesa-9.1.6[${MULTILIB_USEDEP},egl,wayland]
+		>=media-libs/mesa-9.1.6[${MULTILIB_USEDEP},egl,gles2,wayland]
 		>=x11-libs/libxkbcommon-0.2.0[${MULTILIB_USEDEP}]
 	)
 	X? (
@@ -84,9 +84,8 @@ MULTILIB_WRAPPED_HEADERS=(
 )
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.0.12-static-libs.patch
-	"${FILESDIR}"/${PN}-2.0.12-vulkan-headers.patch
-	"${FILESDIR}"/${PN}-2.0.12-egl-detection.patch
+	"${FILESDIR}"/${PN}-2.0.14-static-libs.patch
+	"${FILESDIR}"/${PN}-2.0.14-vulkan.patch
 )
 
 S="${WORKDIR}/${MY_P}"
@@ -98,11 +97,22 @@ src_prepare() {
 	rm -r src/video/khronos || die
 	ln -s "${ESYSROOT}/usr/include" src/video/khronos || die
 
-	AT_M4DIR="/usr/share/aclocal acinclude" eautoreconf
+	# SDL seems to customize SDL_config.h.in to remove macros like
+	# PACKAGE_NAME. Add AT_NOEAUTOHEADER="yes" to prevent those macros from
+	# being reintroduced.
+	# https://bugs.gentoo.org/764959
+	AT_NOEAUTOHEADER="yes" AT_M4DIR="/usr/share/aclocal acinclude" \
+		eautoreconf
+
+	# libsdl2-2.0.14 build regression. Please check if still needed
+	multilib_copy_sources
 }
 
 multilib_src_configure() {
 	use custom-cflags || strip-flags
+
+	# libsdl2-2.0.14 build regression. Please check if still needed
+	append-flags -D__LINUX__
 
 	if use ibus; then
 		local -x IBUS_CFLAGS="-I${ESYSROOT}/usr/include/ibus-1.0 -I${ESYSROOT}/usr/include/glib-2.0 -I${ESYSROOT}/usr/$(get_libdir)/glib-2.0/include"
@@ -176,14 +186,14 @@ multilib_src_configure() {
 		$(use_enable dbus)
 		$(use_enable fcitx4 fcitx)
 		$(use_enable ibus)
-		$(use_enable tslib input-tslib)
 		--disable-directx
 		--disable-rpath
 		--disable-render-d3d
 		$(use_with X x)
 	)
 
-	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
+	#ECONF_SOURCE="${S}"
+	econf "${myeconfargs[@]}"
 }
 
 multilib_src_compile() {
