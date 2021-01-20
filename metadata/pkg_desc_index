@@ -38,7 +38,7 @@ dev-java/openjdk 15.0.1_p9: Open source implementation of the Java programming l
 dev-java/openjdk-bin 15.0.1_p9: Prebuilt Java JDK binaries provided by AdoptOpenJDK
 dev-java/openjdk-jre-bin 15.0.1_p9: Prebuilt Java JRE binaries provided by AdoptOpenJDK
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
-dev-lang/python 2.7.18-r5 3.9.1-r1: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.18-r6 3.9.1-r1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.49.0: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
@@ -149,7 +149,7 @@ media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mac 5.70: Monkey's Audio Codecs
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
-media-sound/pulseaudio 14.0_pre: A networked sound server with an advanced plugin system
+media-sound/pulseaudio 14.2_pre: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
@@ -199,7 +199,7 @@ sys-fs/xfsprogs 5.9.0_rc1: xfs filesystem utilities
 sys-kernel/gentoo-sources 5.9.8: Full sources including the Gentoo patchset for the 5.9 kernel tree
 sys-libs/ncurses 6.2_p20201003: console display library
 sys-libs/polly 11.0.0 11.0.1 11.1.0_rc1: Polyhedral optimizations for LLVM
-sys-libs/slang 2.3.3_pre31: Multi-platform library designed to allow a developer to create robust software
+sys-libs/slang 2.3.3_pre32: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 3.0.2: interactive process viewer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
