@@ -8,7 +8,7 @@ inherit autotools flag-o-matic pax-utils python-utils-r1 toolchain-funcs
 
 MY_P="Python-${PV}"
 PYVER=$(ver_cut 1-2)
-PATCHSET="python-gentoo-patches-2.7.18-r4"
+PATCHSET="python-gentoo-patches-2.7.18-r6"
 
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="https://www.python.org/"
@@ -18,7 +18,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="PSF-2"
 SLOT="${PYVER}"
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~m68k ~mips ppc ~ppc64 ~s390 sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 IUSE="-berkdb bluetooth build elibc_uclibc examples gdbm hardened ipv6 libressl +ncurses +readline sqlite +ssl +threads tk +wide-unicode wininst +xml"
 
 # Do not add a dependency on dev-lang/python to this ebuild.
@@ -65,7 +65,6 @@ DEPEND="${RDEPEND}
 RDEPEND+="
 	!build? ( app-misc/mime-types )
 	!<=dev-lang/python-exec-2.4.6-r1"
-PDEPEND=">=app-eselect/eselect-python-20140125-r1"
 
 pkg_setup() {
 	if use berkdb; then
@@ -104,8 +103,6 @@ src_prepare() {
 		Modules/Setup.dist \
 		Modules/getpath.c \
 		setup.py || die "sed failed to replace @@GENTOO_LIBDIR@@"
-
-	sed -i 's/test_subprocess$/test_subprocess test_distutils/' Makefile.pre.in || die
 
 	eautoreconf
 }
@@ -361,25 +358,4 @@ src_install() {
 	local pymajor=${PYVER%.*}
 	dosym "python${PYVER}" "/usr/bin/python${pymajor}"
 	dosym "python${PYVER}-config" "/usr/bin/python${pymajor}-config"
-}
-
-eselect_python_update() {
-	if [[ -z "$(eselect python show)" || \
-			! -f "${EROOT}/usr/bin/$(eselect python show)" ]]; then
-		eselect python update
-	fi
-
-	if [[ -z "$(eselect python show --python${PV%%.*})" || \
-			! -f "${EROOT}/usr/bin/$(eselect python show --python${PV%%.*})" ]]
-	then
-		eselect python update --python${PV%%.*}
-	fi
-}
-
-pkg_postinst() {
-	eselect_python_update
-}
-
-pkg_postrm() {
-	eselect_python_update
 }
