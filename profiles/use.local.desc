@@ -258,6 +258,9 @@ media-video/mpv:tools - Install extra tools: mpv_identify.sh, mpv_idet.sh, and u
 media-video/mpv:uchardet - Enable subtitles charset discovery via app-i18n/uchardet
 media-video/mpv:vulkan - Enable support for various Vulkan-based video backends
 media-video/mpv:zimg - Enable libzimg support (for vf_fingerprint)
+media-video/pipewire:jack - Enable SPA JACK plugin and emulation to be able to run JACK applications on top of PipeWire
+media-video/pipewire:pulseaudio - Enable emulation to be able to run PulseAudio applications on top of PipeWire
+media-video/pipewire:vulkan - Enable vulkan spa plugin integration
 media-video/qmplay2:audiofilters - Build with AudioFilters module
 media-video/qmplay2:avdevice - Build FFmpeg module with libavdevice suport
 media-video/qmplay2:avresample - Use libavresample instead of libswresample
