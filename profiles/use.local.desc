@@ -93,8 +93,8 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
 gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
 gui-wm/kwinft:tools - Build internal tools for performance analysis at runtime.
-kde-plasma/kwin:gles2 - Use OpenGL ES 2 instead of full GL
 kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
+kde-plasma/kwin:screencast - Enable screencast portal using media-video/pipewire
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) cabability at build time
 mail-client/thunderbird:lto - Enable Link Time Optimization (LTO). Requires Gold linker when using GCC or LDD linker when using Clang
