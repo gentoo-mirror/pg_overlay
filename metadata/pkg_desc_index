@@ -28,6 +28,7 @@ app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/master-pdf-editor 5.6.80: A complete solution for viewing and editing PDF files
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
+dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.65.3: C++ interface for glib2
 dev-cpp/mm-common 1.0.2: Build infrastructure and utilities for GNOME C++ bindings
 dev-db/sqlitebrowser 3.12.1: SQLite Database Browser
