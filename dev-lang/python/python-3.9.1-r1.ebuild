@@ -5,7 +5,7 @@ EAPI="7"
 WANT_LIBTOOL="none"
 
 inherit autotools check-reqs flag-o-matic multiprocessing pax-utils \
-	python-utils-r1 toolchain-funcs
+	python-utils-r1 toolchain-funcs verify-sig
 
 MY_P="Python-${PV/_/}"
 PYVER=$(ver_cut 1-2)
@@ -14,12 +14,15 @@ PATCHSET="python-gentoo-patches-3.9.1-r1"
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="https://www.python.org/"
 SRC_URI="https://www.python.org/ftp/python/${PV%_*}/${MY_P}.tar.xz
-	https://dev.gentoo.org/~mgorny/dist/python/${PATCHSET}.tar.xz"
+	https://dev.gentoo.org/~mgorny/dist/python/${PATCHSET}.tar.xz
+	verify-sig? (
+		https://www.python.org/ftp/python/${PV%_*}/${MY_P}.tar.xz.asc
+	)"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="PSF-2"
 SLOT="${PYVER}"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 sparc ~x86"
 IUSE="bluetooth build examples gdbm hardened ipv6 libressl +ncurses +readline sqlite +ssl test tk wininst +xml"
 RESTRICT="!test? ( test )"
 
@@ -53,10 +56,15 @@ RDEPEND="app-arch/bzip2:=
 # bluetooth requires headers from bluez
 DEPEND="${RDEPEND}
 	bluetooth? ( net-wireless/bluez )
-	test? ( app-arch/xz-utils[extra-filters(+)] )
+	test? ( app-arch/xz-utils[extra-filters(+)] )"
+BDEPEND="
 	virtual/pkgconfig
+	verify-sig? ( app-crypt/openpgp-keys-python )
 	!sys-devel/gcc[libffi(-)]"
 RDEPEND+=" !build? ( app-misc/mime-types )"
+PDEPEND="app-eselect/eselect-python"
+
+VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/python.org.asc
 
 # large file tests involve a 2.5G file being copied (duplicated)
 CHECKREQS_DISK_BUILD=5500M
@@ -67,6 +75,13 @@ pkg_pretend() {
 
 pkg_setup() {
 	use test && check-reqs_pkg_setup
+}
+
+src_unpack() {
+	if use verify-sig; then
+		verify-sig_verify_detached "${DISTDIR}"/${MY_P}.tar.xz{,.asc}
+	fi
+	default
 }
 
 src_prepare() {
