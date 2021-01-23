@@ -21,7 +21,7 @@ ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 # sorttable.js: MIT
 
 LICENSE="Apache-2.0-with-LLVM-exceptions UoI-NCSA MIT"
-SLOT="$(ver_cut 1)"
+SLOT="$(ver_cut 1)/$(ver_cut 1-2)"
 KEYWORDS=""
 IUSE="debug default-compiler-rt default-libcxx default-lld
 	doc +static-analyzer test xml kernel_FreeBSD ${ALL_LLVM_TARGETS[*]}"
@@ -30,13 +30,13 @@ REQUIRED_USE="${PYTHON_REQUIRED_USE}
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	~sys-devel/llvm-${PV}:${SLOT}=[debug=,${MULTILIB_USEDEP}]
+	~sys-devel/llvm-${PV}:${SLOT%/*}=[debug=,${MULTILIB_USEDEP}]
 	static-analyzer? ( dev-lang/perl:* )
 	xml? ( dev-libs/libxml2:2=[${MULTILIB_USEDEP}] )
 	${PYTHON_DEPS}"
 for x in "${ALL_LLVM_TARGETS[@]}"; do
 	RDEPEND+="
-		${x}? ( ~sys-devel/llvm-${PV}:${SLOT}[${x}] )"
+		${x}? ( ~sys-devel/llvm-${PV}:${SLOT%/*}[${x}] )"
 done
 unset x
 
@@ -81,7 +81,7 @@ PATCHES=(
 )
 
 pkg_setup() {
-	LLVM_MAX_SLOT=${SLOT} llvm_pkg_setup
+	LLVM_MAX_SLOT=${SLOT%/*} llvm_pkg_setup
 	python-single-r1_pkg_setup
 }
 
@@ -238,9 +238,9 @@ multilib_src_configure() {
 	local clang_version=$(ver_cut 1-3 "${llvm_version}")
 
 	local mycmakeargs=(
-		-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
-		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
-		-DCMAKE_INSTALL_MANDIR="${EPREFIX}/usr/lib/llvm/${SLOT}/share/man"
+		-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT%/*}/$(get_libdir)/cmake/llvm"
+		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT%/*}"
+		-DCMAKE_INSTALL_MANDIR="${EPREFIX}/usr/lib/llvm/${SLOT%/*}/share/man"
 		# relative to bindir
 		-DCLANG_RESOURCE_DIR="../../../../lib/clang/${clang_version}"
 
@@ -354,7 +354,7 @@ src_install() {
 	# Move runtime headers to /usr/lib/clang, where they belong
 	mv "${ED}"/usr/include/clangrt "${ED}"/usr/lib/clang || die
 	# move (remaining) wrapped headers back
-	mv "${ED}"/usr/include "${ED}"/usr/lib/llvm/${SLOT}/include || die
+	mv "${ED}"/usr/include "${ED}"/usr/lib/llvm/${SLOT%/*}/include || die
 
 	# Apply CHOST and version suffix to clang tools
 	# note: we use two version components here (vs 3 in runtime path)
@@ -374,9 +374,9 @@ src_install() {
 	# - clang, clang++, clang-cl, clang-cpp -> clang*-X
 	# also in CHOST variant
 	for i in "${clang_tools[@]:1}"; do
-		rm "${ED}/usr/lib/llvm/${SLOT}/bin/${i}" || die
-		dosym "clang-${clang_version}" "/usr/lib/llvm/${SLOT}/bin/${i}-${clang_version}"
-		dosym "${i}-${clang_version}" "/usr/lib/llvm/${SLOT}/bin/${i}"
+		rm "${ED}/usr/lib/llvm/${SLOT%/*}/bin/${i}" || die
+		dosym "clang-${clang_version}" "/usr/lib/llvm/${SLOT%/*}/bin/${i}-${clang_version}"
+		dosym "${i}-${clang_version}" "/usr/lib/llvm/${SLOT%/*}/bin/${i}"
 	done
 
 	# now create target symlinks for all supported ABIs
@@ -384,9 +384,9 @@ src_install() {
 		local abi_chost=$(get_abi_CHOST "${abi}")
 		for i in "${clang_tools[@]}"; do
 			dosym "${i}-${clang_version}" \
-				"/usr/lib/llvm/${SLOT}/bin/${abi_chost}-${i}-${clang_version}"
+				"/usr/lib/llvm/${SLOT%/*}/bin/${abi_chost}-${i}-${clang_version}"
 			dosym "${abi_chost}-${i}-${clang_version}" \
-				"/usr/lib/llvm/${SLOT}/bin/${abi_chost}-${i}"
+				"/usr/lib/llvm/${SLOT%/*}/bin/${abi_chost}-${i}"
 		done
 	done
 
@@ -402,22 +402,22 @@ multilib_src_install() {
 	# move headers to /usr/include for wrapping & ABI mismatch checks
 	# (also drop the version suffix from runtime headers)
 	rm -rf "${ED}"/usr/include || die
-	mv "${ED}"/usr/lib/llvm/${SLOT}/include "${ED}"/usr/include || die
-	mv "${ED}"/usr/lib/llvm/${SLOT}/$(get_libdir)/clang "${ED}"/usr/include/clangrt || die
+	mv "${ED}"/usr/lib/llvm/${SLOT%/*}/include "${ED}"/usr/include || die
+	mv "${ED}"/usr/lib/llvm/${SLOT%/*}/$(get_libdir)/clang "${ED}"/usr/include/clangrt || die
 }
 
 multilib_src_install_all() {
 	python_fix_shebang "${ED}"
 	if use static-analyzer; then
-		python_optimize "${ED}"/usr/lib/llvm/${SLOT}/share/scan-view
+		python_optimize "${ED}"/usr/lib/llvm/${SLOT%/*}/share/scan-view
 	fi
 
-	docompress "/usr/lib/llvm/${SLOT}/share/man"
+	docompress "/usr/lib/llvm/${SLOT%/*}/share/man"
 	#llvm_install_manpages
 	# match 'html' non-compression
 	use doc && docompress -x "/usr/share/doc/${PF}/tools-extra"
 	# +x for some reason; TODO: investigate
-	use static-analyzer && fperms a-x "/usr/lib/llvm/${SLOT}/share/man/man1/scan-build.1"
+	use static-analyzer && fperms a-x "/usr/lib/llvm/${SLOT%/*}/share/man/man1/scan-build.1"
 }
 
 pkg_postinst() {
@@ -426,7 +426,7 @@ pkg_postinst() {
 	fi
 
 	elog "You can find additional utility scripts in:"
-	elog "  ${EROOT}/usr/lib/llvm/${SLOT}/share/clang"
+	elog "  ${EROOT}/usr/lib/llvm/${SLOT%/*}/share/clang"
 	elog "Some of them are vim integration scripts (with instructions inside)."
 	elog "The run-clang-tidy.py script requires the following additional package:"
 	elog "  dev-python/pyyaml"
