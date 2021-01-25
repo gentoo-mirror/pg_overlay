@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit cmake-multilib
+inherit cmake
 
 DESCRIPTION="Header-only library for parsing TOML"
 HOMEPAGE="https://github.com/skystrife/cpptoml"
