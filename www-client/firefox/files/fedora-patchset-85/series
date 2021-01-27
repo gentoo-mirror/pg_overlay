@@ -13,6 +13,5 @@ rhbz-1354671.patch
 firefox-locale-debug.patch
 disable-openh264-download.patch
 
-mozilla-1667096.patch
 mozilla-1631061.patch
 mozilla-1679933.patch
