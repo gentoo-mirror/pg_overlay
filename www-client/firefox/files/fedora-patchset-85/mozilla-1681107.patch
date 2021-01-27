@@ -1,0 +1,47 @@
+
+# HG changeset patch
+# User sotaro <sotaro.ikeda.g@gmail.com>
+# Date 1610634595 0
+# Node ID c989e16ae8d0801b76efe712658abcbf3704a486
+# Parent  dc0d1d98e111aa781333980c2561f534ea1ebb0b
+Bug 1681107 - Fix race condition of calling CompositorBridgeChild::SendPause() r=rmader,stransky
+
+Differential Revision: https://phabricator.services.mozilla.com/D101693
+
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -5085,23 +5085,29 @@ void nsWindow::NativeMoveResize() {
+   if (mNeedsShow && mIsShown) {
+     NativeShow(true);
+   }
+ }
+ 
+ void nsWindow::PauseRemoteRenderer() {
+ #ifdef MOZ_WAYLAND
+   if (!mIsDestroyed) {
+-    if (mContainer && moz_container_wayland_has_egl_window(mContainer)) {
++    if (mContainer) {
+       // Because wl_egl_window is destroyed on moz_container_unmap(),
+       // the current compositor cannot use it anymore. To avoid crash,
+       // pause the compositor and destroy EGLSurface & resume the compositor
+       // and re-create EGLSurface on next expose event.
+-      MOZ_ASSERT(GetRemoteRenderer());
+-      if (CompositorBridgeChild* remoteRenderer = GetRemoteRenderer()) {
++
++      // moz_container_wayland_has_egl_window() could not be used here, since
++      // there is a case that resume compositor is not completed yet.
++
++      CompositorBridgeChild* remoteRenderer = GetRemoteRenderer();
++      bool needsCompositorPause = !mNeedsCompositorResume && !!remoteRenderer &&
++                                  mCompositorWidgetDelegate;
++      if (needsCompositorPause) {
+         // XXX slow sync IPC
+         remoteRenderer->SendPause();
+         // Re-request initial draw callback
+         RefPtr<nsWindow> self(this);
+         moz_container_wayland_add_initial_draw_callback(
+             mContainer, [self]() -> void {
+               self->mNeedsCompositorResume = true;
+               self->MaybeResumeCompositor();
+

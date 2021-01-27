@@ -1,0 +1,12 @@
+diff -up firefox-84.0.2/widget/gtk/WindowSurfaceWayland.cpp.old firefox-84.0.2/widget/gtk/WindowSurfaceWayland.cpp
+--- firefox-84.0.2/widget/gtk/WindowSurfaceWayland.cpp.old	2021-01-18 21:39:44.724484655 +0100
++++ firefox-84.0.2/widget/gtk/WindowSurfaceWayland.cpp	2021-01-18 21:40:59.905703810 +0100
+@@ -906,6 +906,8 @@ void WindowSurfaceWayland::CacheImageSur
+                     size.width, size.height));
+       }
+ #endif
++    } else {
++      mDelayedImageCommits.AppendElement(lastSurf);
+     }
+   }
+ 
