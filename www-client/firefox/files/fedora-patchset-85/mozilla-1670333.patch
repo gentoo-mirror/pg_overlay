@@ -1,0 +1,75 @@
+diff -up firefox-84.0/dom/media/mp4/MP4Demuxer.cpp.1670333 firefox-84.0/dom/media/mp4/MP4Demuxer.cpp
+--- firefox-84.0/dom/media/mp4/MP4Demuxer.cpp.1670333	2020-12-07 23:32:59.000000000 +0100
++++ firefox-84.0/dom/media/mp4/MP4Demuxer.cpp	2020-12-10 14:07:49.095266466 +0100
+@@ -31,6 +31,8 @@ mozilla::LogModule* GetDemuxerLog() { re
+   DDMOZ_LOG(gMediaDemuxerLog, mozilla::LogLevel::Debug, "::%s: " arg, \
+             __func__, ##__VA_ARGS__)
+ 
++extern bool gUseKeyframeFromContainer;
++
+ namespace mozilla {
+ 
+ DDLoggedTypeDeclNameAndBase(MP4TrackDemuxer, MediaTrackDemuxer);
+@@ -394,6 +396,12 @@ already_AddRefed<MediaRawData> MP4TrackD
+           [[fallthrough]];
+         case H264::FrameType::OTHER: {
+           bool keyframe = type == H264::FrameType::I_FRAME;
++          if (gUseKeyframeFromContainer) {
++            if (sample->mKeyframe && sample->mKeyframe != keyframe) {
++              sample->mKeyframe = keyframe;
++            }
++            break;
++          }
+           if (sample->mKeyframe != keyframe) {
+             NS_WARNING(nsPrintfCString("Frame incorrectly marked as %skeyframe "
+                                        "@ pts:%" PRId64 " dur:%" PRId64
+diff -up firefox-84.0/dom/media/platforms/PDMFactory.cpp.1670333 firefox-84.0/dom/media/platforms/PDMFactory.cpp
+--- firefox-84.0/dom/media/platforms/PDMFactory.cpp.1670333	2020-12-10 14:07:49.095266466 +0100
++++ firefox-84.0/dom/media/platforms/PDMFactory.cpp	2020-12-10 15:29:28.969006031 +0100
+@@ -52,6 +52,8 @@
+ 
+ #include <functional>
+ 
++bool gUseKeyframeFromContainer = false;
++
+ namespace mozilla {
+ 
+ // Set on the main thread, in content processes before any PDMFactory will ever
+@@ -522,9 +524,11 @@ void PDMFactory::CreateContentPDMs() {
+   }
+ #endif
+ #ifdef MOZ_FFMPEG
+-  if (StaticPrefs::media_ffmpeg_enabled() &&
+-      !CreateAndStartupPDM<FFmpegRuntimeLinker>()) {
+-    mFailureFlags += DecoderDoctorDiagnostics::Flags::FFmpegFailedToLoad;
++  if (StaticPrefs::media_ffmpeg_enabled()) {
++    mFFmpegUsed = CreateAndStartupPDM<FFmpegRuntimeLinker>();
++    if (!mFFmpegUsed) {
++      mFailureFlags += DecoderDoctorDiagnostics::Flags::FFmpegFailedToLoad;
++    }
+   }
+ #endif
+ #ifdef MOZ_WIDGET_ANDROID
+@@ -536,8 +540,9 @@ void PDMFactory::CreateContentPDMs() {
+ 
+   CreateAndStartupPDM<AgnosticDecoderModule>();
+ 
+-  if (StaticPrefs::media_gmp_decoder_enabled() &&
++  if (StaticPrefs::media_gmp_decoder_enabled() && !mFFmpegUsed &&
+       !CreateAndStartupPDM<GMPDecoderModule>()) {
++    gUseKeyframeFromContainer = true;
+     mFailureFlags += DecoderDoctorDiagnostics::Flags::GMPPDMFailedToStartup;
+   }
+ }
+diff -up firefox-84.0/dom/media/platforms/PDMFactory.h.1670333 firefox-84.0/dom/media/platforms/PDMFactory.h
+--- firefox-84.0/dom/media/platforms/PDMFactory.h.1670333	2020-12-10 14:07:49.096266493 +0100
++++ firefox-84.0/dom/media/platforms/PDMFactory.h	2020-12-10 15:27:42.363034881 +0100
+@@ -116,6 +116,8 @@ class PDMFactory final {
+ 
+   DecoderDoctorDiagnostics::FlagsSet mFailureFlags;
+ 
++  bool mFFmpegUsed = false;
++
+   friend class RemoteVideoDecoderParent;
+   static void EnsureInit();
+   template <class T>

@@ -1,4 +1,3 @@
-fixes/Properly-launch-applications-set-in-HOME-.mailcap.patch
 debian-hacks/Don-t-register-plugins-if-the-MOZILLA_DISABLE_PLUGIN.patch
 fixes/Load-dependent-libraries-with-their-real-path-to-avo.patch
 prefs/Set-javascript.options.showInConsole.patch
