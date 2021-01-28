@@ -1,8 +1,8 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PLOCALES="cs da de en eo es fi fr gl he hu ie it ko nb nl pl pt pt_BR ru sk sv uk zh_CN"
+PLOCALES="cs da de en eo es fi fr gl he hu ie it ja ko nb nl pl pt pt_BR ru sk sv uk zh_CN"
 
 inherit meson git-r3 l10n
 
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/ncmpc.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="amd64 ~hppa ppc ppc64 ~sparc x86"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc ~x86"
 IUSE="async-connect chat-screen doc +help-screen key-screen +library-screen lirc lyrics-screen +mouse nls outputs-screen pcre search-screen +song-screen"
 
 BDEPEND="
