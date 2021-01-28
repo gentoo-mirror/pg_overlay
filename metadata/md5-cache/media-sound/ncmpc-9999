@@ -5,10 +5,10 @@ DESCRIPTION=Ncurses client for the Music Player Daemon (MPD)
 EAPI=7
 HOMEPAGE=https://www.musicpd.org/clients/ncmpc/ https://github.com/MusicPlayerDaemon/ncmpc
 IUSE=async-connect chat-screen doc +help-screen key-screen +library-screen lirc lyrics-screen +mouse nls outputs-screen pcre search-screen +song-screen
-KEYWORDS=amd64 ~hppa ppc ppc64 ~sparc x86
+KEYWORDS=~amd64 ~ppc ~ppc64 ~sparc ~x86
 LICENSE=GPL-2+
 PROPERTIES=live
 RDEPEND=>=media-libs/libmpdclient-2.9 sys-libs/ncurses:0=[unicode] lirc? ( app-misc/lirc ) pcre? ( dev-libs/libpcre )
 SLOT=0
 _eclasses_=git-r3	3e7ec3d6619213460c85e2aa48398441	l10n	8cdd85e169b835d518bc2fd59f780d8e	meson	fdaf2a7b9376934c1c7ddbd32114defb	multilib	d410501a125f99ffb560b0c523cd3d1e	multiprocessing	cac3169468f893670dac3e7cb940e045	ninja-utils	132cbb376048d079b5a012f5467c4e7f	python-utils-r1	65bb60d137e5a51f58ada69bf3f366da	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
-_md5_=80fd3e2a4bf1bfc115bbc1eb4f0e63c1
+_md5_=fd4516f06920f0d52ea6121c0fb0f247
