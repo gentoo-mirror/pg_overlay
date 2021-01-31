@@ -44,7 +44,6 @@ RESTRICT="
 "
 REQUIRED_USE="
 	|| ( $(python_gen_useflags 'python3*') )
-	|| ( $(python_gen_useflags 'python2*') )
 	thinlto? ( clang )
 	optimize-thinlto? ( thinlto )
 	cfi? ( thinlto )
