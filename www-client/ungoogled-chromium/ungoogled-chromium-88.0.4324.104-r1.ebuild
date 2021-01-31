@@ -596,17 +596,15 @@ src_prepare() {
 		keeplibs+=( third_party/openh264 )
 	fi
 	ebegin "Removing unneeded bundled libraries"
-	export EPYTHON=python2.7
-
+	
 	# Remove most bundled libraries. Some are still needed.
-	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
+	python2.7 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 
 	eend $? || die
 }
 
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	export EPYTHON=python2.7
 
 	local myconf_gn=""
 
@@ -914,7 +912,6 @@ src_compile() {
 	ulimit -n 4096
 
 	# Calling this here supports resumption via FEATURES=keepwork
-	export EPYTHON=python2.7
 
 	# https://bugs.gentoo.org/717456
 	local -x PYTHONPATH="${WORKDIR}/setuptools-44.1.0:${PYTHONPATH+:}${PYTHONPATH}"
