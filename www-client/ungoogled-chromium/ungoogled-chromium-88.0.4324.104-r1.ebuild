@@ -43,7 +43,6 @@ RESTRICT="
 	!system-openh264? ( bindist )
 "
 REQUIRED_USE="
-	|| ( $(python_gen_useflags 'python3*') )
 	thinlto? ( clang )
 	optimize-thinlto? ( thinlto )
 	cfi? ( thinlto )
@@ -266,8 +265,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup 'python3*'
-
+	
 	rm "${WORKDIR}/patches/chromium-84-blink-disable-clang-format.patch" || die
 
 	use custom-cflags || rm "${WORKDIR}/patches/chromium-$(ver_cut 1)-compiler.patch" || die
@@ -598,17 +596,15 @@ src_prepare() {
 		keeplibs+=( third_party/openh264 )
 	fi
 	ebegin "Removing unneeded bundled libraries"
-	python_setup 'python2'
-
+	
 	# Remove most bundled libraries. Some are still needed.
-	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
+	python2.7 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 
 	eend $? || die
 }
 
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup 'python2*'
 
 	local myconf_gn=""
 
@@ -916,7 +912,6 @@ src_compile() {
 	ulimit -n 4096
 
 	# Calling this here supports resumption via FEATURES=keepwork
-	python_setup 'python2*'
 
 	# https://bugs.gentoo.org/717456
 	local -x PYTHONPATH="${WORKDIR}/setuptools-44.1.0:${PYTHONPATH+:}${PYTHONPATH}"
