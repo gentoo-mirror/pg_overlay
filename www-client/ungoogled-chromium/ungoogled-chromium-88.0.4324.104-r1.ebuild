@@ -598,7 +598,7 @@ src_prepare() {
 		keeplibs+=( third_party/openh264 )
 	fi
 	ebegin "Removing unneeded bundled libraries"
-	python_setup 'python2*'
+	python_setup 'python2'
 
 	# Remove most bundled libraries. Some are still needed.
 	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
