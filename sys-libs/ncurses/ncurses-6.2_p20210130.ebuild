@@ -39,8 +39,8 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.0-rxvt-unicode-9.15.patch" #192083 #383871
 	"${FILESDIR}/${PN}-6.0-pkg-config.patch"
 	"${FILESDIR}/${PN}-6.0-ticlib.patch" #557360
-	"${FILESDIR}/${PN}-6.2_p20210123-cppflags-cross.patch" #601426
-	"${FILESDIR}/${PN}-6.2_p20210123-no_user_ldflags_in_libs.patch"
+	"${FILESDIR}/${PN}-6.0-cppflags-cross.patch" #601426
+	"${FILESDIR}/${PN}-6.2-no_user_ldflags_in_libs.patch"
 )
 
 src_prepare() {
