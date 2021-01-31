@@ -265,8 +265,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	#python_setup
-
+	
 	rm "${WORKDIR}/patches/chromium-84-blink-disable-clang-format.patch" || die
 
 	use custom-cflags || rm "${WORKDIR}/patches/chromium-$(ver_cut 1)-compiler.patch" || die
@@ -600,7 +599,7 @@ src_prepare() {
 	export EPYTHON=python2.7
 
 	# Remove most bundled libraries. Some are still needed.
-	python2.7 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
+	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 
 	eend $? || die
 }
