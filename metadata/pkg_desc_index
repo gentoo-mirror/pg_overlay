@@ -11,7 +11,6 @@ app-emulation/virtualbox 6.1.18: Family of powerful x86 virtualization products 
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.1.2: Graphical user interface for ddcutil
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
-app-misc/fslint 9999: A utility to find various forms of lint on a filesystem
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
 app-misc/media-player-info 24: A repository of data files describing media player capabilities
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
@@ -49,7 +48,6 @@ dev-libs/libixion 0.15.0 0.16.1: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.4 0.16.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libsigc++ 3.0.4: Typesafe callback system for standard C++
 dev-libs/libuinputplus 0.1.4: Easy-to-use uinput library in C++
-dev-libs/libxslt 1.1.34_pre: XSLT libraries and tools
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
