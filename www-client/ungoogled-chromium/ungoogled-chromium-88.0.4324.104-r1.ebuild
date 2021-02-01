@@ -265,7 +265,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	
+
 	rm "${WORKDIR}/patches/chromium-84-blink-disable-clang-format.patch" || die
 
 	use custom-cflags || rm "${WORKDIR}/patches/chromium-$(ver_cut 1)-compiler.patch" || die
@@ -596,9 +596,9 @@ src_prepare() {
 		keeplibs+=( third_party/openh264 )
 	fi
 	ebegin "Removing unneeded bundled libraries"
-	
+
 	# Remove most bundled libraries. Some are still needed.
-	python2.7 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
+	python2 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 
 	eend $? || die
 }
@@ -908,6 +908,7 @@ src_configure() {
 }
 
 src_compile() {
+	export EPYTHON=python2
 	# Final link uses lots of file descriptors.
 	ulimit -n 4096
 
