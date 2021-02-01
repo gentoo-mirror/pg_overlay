@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python{2_7,3_{7..9}} )
+PYTHON_COMPAT=( python2_7 )
 PYTHON_REQ_USE="xml"
 
 CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
@@ -596,15 +596,17 @@ src_prepare() {
 		keeplibs+=( third_party/openh264 )
 	fi
 	ebegin "Removing unneeded bundled libraries"
+	python_setup
 
 	# Remove most bundled libraries. Some are still needed.
-	python2 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
+	build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 
 	eend $? || die
 }
 
 src_configure() {
 	# Calling this here supports resumption via FEATURES=keepwork
+	python_setup
 
 	local myconf_gn=""
 
@@ -908,11 +910,11 @@ src_configure() {
 }
 
 src_compile() {
-	export EPYTHON=python2
 	# Final link uses lots of file descriptors.
 	ulimit -n 4096
 
 	# Calling this here supports resumption via FEATURES=keepwork
+	python_setup
 
 	# https://bugs.gentoo.org/717456
 	local -x PYTHONPATH="${WORKDIR}/setuptools-44.1.0:${PYTHONPATH+:}${PYTHONPATH}"
