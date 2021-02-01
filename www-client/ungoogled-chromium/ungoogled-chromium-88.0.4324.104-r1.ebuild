@@ -9,7 +9,7 @@ CHROMIUM_LANGS="am ar bg bn ca cs da de el en-GB es es-419 et fa fi fil fr gu he
 	hi hr hu id it ja kn ko lt lv ml mr ms nb nl pl pt-BR pt-PT ro ru sk sl sr
 	sv sw ta te th tr uk vi zh-CN zh-TW"
 
-inherit check-reqs chromium-2 desktop flag-o-matic multilib ninja-utils pax-utils portability python-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
+inherit check-reqs chromium-2 desktop flag-o-matic multilib ninja-utils pax-utils portability python-any-r1 readme.gentoo-r1 toolchain-funcs xdg-utils
 
 UGC_PVR="${PVR/r}"
 UGC_PF="${PN}-${UGC_PVR}"
@@ -265,7 +265,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Calling this here supports resumption via FEATURES=keepwork
-	
+
 	rm "${WORKDIR}/patches/chromium-84-blink-disable-clang-format.patch" || die
 
 	use custom-cflags || rm "${WORKDIR}/patches/chromium-$(ver_cut 1)-compiler.patch" || die
@@ -596,9 +596,9 @@ src_prepare() {
 		keeplibs+=( third_party/openh264 )
 	fi
 	ebegin "Removing unneeded bundled libraries"
-	
+
 	# Remove most bundled libraries. Some are still needed.
-	python2.7 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
+	python2 build/linux/unbundle/remove_bundled_libraries.py "${keeplibs[@]}" --do-remove
 
 	eend $? || die
 }
@@ -908,6 +908,7 @@ src_configure() {
 }
 
 src_compile() {
+	export EPYTHON=python2
 	# Final link uses lots of file descriptors.
 	ulimit -n 4096
 
