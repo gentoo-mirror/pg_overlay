@@ -908,7 +908,8 @@ src_configure() {
 }
 
 src_compile() {
-	export EPYTHON=python2
+	python_setup -2
+	python_setup 2
 	# Final link uses lots of file descriptors.
 	ulimit -n 4096
 
