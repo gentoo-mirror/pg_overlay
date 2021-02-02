@@ -12,6 +12,8 @@ mozilla-1170092.patch
 rhbz-1354671.patch
 firefox-locale-debug.patch
 disable-openh264-download.patch
+firefox-kde-webrender.patch
 
-mozilla-1631061.patch
 mozilla-1679933.patch
+mozilla-1631061-1.patch
+mozilla-1631061-2.patch
