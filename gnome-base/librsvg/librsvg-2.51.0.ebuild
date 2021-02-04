@@ -38,11 +38,18 @@ DEPEND="${RDEPEND}
 
 RESTRICT="test" # Lots of issues on 32bit builds, 64bit build seems to get into an infinite compilation sometimes, etc.
 
-PATCHES=( "${FILESDIR}/lto.diff" )
-
 src_prepare() {
 	use vala && vala_src_prepare
 	gnome2_src_prepare
+	cat <<- _EOF_ > "${S}"/config.toml
+		[profile.release]
+		opt-level = 3
+		debug = false
+		debug-assertions = false
+		overflow-checks = false
+		lto = "thin"
+		codegen-units = 1
+	_EOF_
 }
 
 multilib_src_configure() {
