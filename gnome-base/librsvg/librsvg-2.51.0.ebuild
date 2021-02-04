@@ -1,8 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=6
-GNOME2_LA_PUNT="yes"
 VALA_USE_DEPEND="vapigen"
 
 inherit gnome2 multilib-minimal rust-toolchain vala
@@ -29,7 +28,7 @@ RDEPEND="
 	introspection? ( >=dev-libs/gobject-introspection-0.10.8:= )
 "
 DEPEND="${RDEPEND}
-	>=virtual/rust-1.39[${MULTILIB_USEDEP}]
+	>=virtual/rust-1.40[${MULTILIB_USEDEP}]
 	dev-util/glib-utils
 	>=sys-devel/gettext-0.19.8
 	virtual/pkgconfig
