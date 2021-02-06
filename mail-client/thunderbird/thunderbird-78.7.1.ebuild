@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-78esr-patches-07.tar.xz"
+FIREFOX_PATCHSET="firefox-78esr-patches-08.tar.xz"
 
 LLVM_MAX_SLOT=11
 MOZCONFIG_OPTIONAL_JIT=1
@@ -67,6 +67,9 @@ IUSE="+clang cpu_flags_arm_neon dbus debug eme-free
 	+system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent
 	+system-libvpx +system-webp wayland wifi
 	+jit +kde"
+
+REQUIRED_USE="x86? ( lto? ( clang ) )
+	wifi? ( dbus )"
 
 BDEPEND="${PYTHON_DEPS}
 	app-arch/unzip
@@ -383,24 +386,34 @@ pkg_setup() {
 
 		llvm_pkg_setup
 
-		#if use clang && use lto ; then
-		#	local version_lld=$(ld.lld --version 2>/dev/null | awk '{ print $2 }')
-		#	[[ -n ${version_lld} ]] && version_lld=$(ver_cut 1 "${version_lld}")
-		#	[[ -z ${version_lld} ]] && die "Failed to read ld.lld version!"
+		if use clang && use lto ; then
+			local version_lld=$(ld.lld --version 2>/dev/null | awk '{ print $2 }')
+			[[ -n ${version_lld} ]] && version_lld=$(ver_cut 1 "${version_lld}")
+			[[ -z ${version_lld} ]] && die "Failed to read ld.lld version!"
 
-		#	local version_llvm_rust=$(rustc -Vv 2>/dev/null | grep -F -- 'LLVM version:' | awk '{ print $3 }')
-		#	[[ -n ${version_llvm_rust} ]] && version_llvm_rust=$(ver_cut 1 "${version_llvm_rust}")
-		#	[[ -z ${version_llvm_rust} ]] && die "Failed to read used LLVM version from rustc!"
+			# temp fix for https://bugs.gentoo.org/768543
+			# we can assume that rust 1.49.0 always uses llvm 11
+			local version_rust=$(rustc -Vv 2>/dev/null | grep -F -- 'release:' | awk '{ print $2 }')
+			[[ -n ${version_rust} ]] && version_rust=$(ver_cut 1-2 "${version_rust}")
+			[[ -z ${version_rust} ]] && die "Failed to read version from rustc!"
 
-		#	if ver_test "${version_lld}" -ne "${version_llvm_rust}" ; then
-		#		eerror "Rust is using LLVM version ${version_llvm_rust} but ld.lld version belongs to LLVM version ${version_lld}."
-		#		eerror "You will be unable to link ${CATEGORY}/${PN}. To proceed you have the following options:"
-		#		eerror "  - Manually switch rust version using 'eselect rust' to match used LLVM version"
-		#		eerror "  - Switch to dev-lang/rust[system-llvm] which will guarantee matching version"
-		#		eerror "  - Build ${CATEGORY}/${PN} without USE=lto"
-		#		die "LLVM version used by Rust (${version_llvm_rust}) does not match with ld.lld version (${version_lld})!"
-		#	fi
-		#fi
+			if ver_test "${version_rust}" -eq "1.49" ; then
+				local version_llvm_rust="11"
+			else
+				local version_llvm_rust=$(rustc -Vv 2>/dev/null | grep -F -- 'LLVM version:' | awk '{ print $3 }')
+				[[ -n ${version_llvm_rust} ]] && version_llvm_rust=$(ver_cut 1 "${version_llvm_rust}")
+				[[ -z ${version_llvm_rust} ]] && die "Failed to read used LLVM version from rustc!"
+			fi
+
+			if ver_test "${version_lld}" -ne "${version_llvm_rust}" ; then
+				eerror "Rust is using LLVM version ${version_llvm_rust} but ld.lld version belongs to LLVM version ${version_lld}."
+				eerror "You will be unable to link ${CATEGORY}/${PN}. To proceed you have the following options:"
+				eerror "  - Manually switch rust version using 'eselect rust' to match used LLVM version"
+				eerror "  - Switch to dev-lang/rust[system-llvm] which will guarantee matching version"
+				eerror "  - Build ${CATEGORY}/${PN} without USE=lto"
+				die "LLVM version used by Rust (${version_llvm_rust}) does not match with ld.lld version (${version_lld})!"
+			fi
+		fi
 
 		python-any-r1_pkg_setup
 
@@ -556,10 +569,11 @@ src_prepare() {
 
 src_configure() {
 	# Show flags set at the beginning
-	einfo "Current CFLAGS:    ${CFLAGS}"
-	einfo "Current CXXFLAGS:  ${CXXFLAGS}"
-	einfo "Current LDFLAGS:   ${LDFLAGS}"
-	einfo "Current RUSTFLAGS: ${RUSTFLAGS}"
+	einfo "Current BINDGEN_CFLAGS:\t${BINDGEN_CFLAGS:-no value set}"
+	einfo "Current CFLAGS:\t\t${CFLAGS:-no value set}"
+	einfo "Current CXXFLAGS:\t\t${CXXFLAGS:-no value set}"
+	einfo "Current LDFLAGS:\t\t${LDFLAGS:-no value set}"
+	einfo "Current RUSTFLAGS:\t\t${RUSTFLAGS:-no value set}"
 
 	local have_switched_compiler=
 	if use clang && ! tc-is-clang ; then
@@ -592,6 +606,11 @@ src_configure() {
 	export HOST_CC="$(tc-getBUILD_CC)"
 	export HOST_CXX="$(tc-getBUILD_CXX)"
 	tc-export CC CXX LD AR NM OBJDUMP RANLIB PKG_CONFIG
+
+	# Pass the correct toolchain paths through cbindgen
+	if tc-is-cross-compiler ; then
+		export BINDGEN_CFLAGS="${SYSROOT:+--sysroot=${ESYSROOT}} --target=${CHOST} ${BINDGEN_CFLAGS-}"
+	fi
 
 	# Set MOZILLA_FIVE_HOME
 	export MOZILLA_FIVE_HOME="/usr/$(get_libdir)/${PN}"
@@ -855,10 +874,11 @@ src_configure() {
 	mozconfig_add_options_mk 'Gentoo default' "MOZ_OBJDIR=${BUILD_DIR}"
 
 	# Show flags we will use
-	einfo "Build CFLAGS:    ${CFLAGS}"
-	einfo "Build CXXFLAGS:  ${CXXFLAGS}"
-	einfo "Build LDFLAGS:   ${LDFLAGS}"
-	einfo "Build RUSTFLAGS: ${RUSTFLAGS}"
+	einfo "Build BINDGEN_CFLAGS:\t${BINDGEN_CFLAGS:-no value set}"
+	einfo "Build CFLAGS:\t\t${CFLAGS:-no value set}"
+	einfo "Build CXXFLAGS:\t\t${CXXFLAGS:-no value set}"
+	einfo "Build LDFLAGS:\t\t${LDFLAGS:-no value set}"
+	einfo "Build RUSTFLAGS:\t\t${RUSTFLAGS:-no value set}"
 
 	# Handle EXTRA_CONF and show summary
 	local ac opt hash reason
