@@ -8,7 +8,7 @@ inherit cmake
 DESCRIPTION="Easy-to-use event device library in C++"
 
 HOMEPAGE="https://github.com/YukiWorkshop/libevdevPlus"
-SRC_URI="https://github.com/YukiWorkshop/${PN}/archive/v${PV}.tar.gz"
+SRC_URI="https://github.com/YukiWorkshop/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
