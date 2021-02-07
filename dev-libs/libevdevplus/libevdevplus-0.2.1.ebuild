@@ -19,8 +19,8 @@ DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libevdevPlus-${PV}
 
-src_install() {
-	default
-	cmake_src_install
-	find "${D}" -name '*.a' -delete || die
-}
+#src_install() {
+#	default
+#	cmake_src_install
+#	find "${D}" -name '*.a' -delete || die
+#}
