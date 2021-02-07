@@ -19,8 +19,6 @@ DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libevdevPlus-${PV}
 
-CMAKE_MAKEFILE_GENERATOR=emake
-
 src_install() {
 	CMAKE_MAKEFILE_GENERATOR=emake
 	default
