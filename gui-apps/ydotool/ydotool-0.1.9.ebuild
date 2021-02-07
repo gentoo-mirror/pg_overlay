@@ -3,15 +3,15 @@
 
 EAPI=7
 
-inherit cmake git-r3
+inherit cmake
 
 DESCRIPTION="Generic command-line automation tool (no X!)"
 
 HOMEPAGE="https://github.com/ReimuNotMoe/ydotool"
-EGIT_REPO_URI="https://github.com/ReimuNotMoe/${PN}.git"
+SRC_URI="https://github.com/ReimuNotMoe/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND="dev-libs/boost
