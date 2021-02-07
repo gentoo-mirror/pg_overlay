@@ -31,7 +31,11 @@ src_configure() {
 	cmake_src_configure
 }
 
+src_compile() {
+	cmake_src_compile
+}
+
 src_install() {
-	default
+#	default
 	cmake_src_install
 }
