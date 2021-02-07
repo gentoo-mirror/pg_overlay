@@ -22,5 +22,6 @@ S=${WORKDIR}/libuInputPlus-${PV}
 src_install() {
 	default
 	DESTDIR="${D}" ${CMAKE_MAKEFILE_GENERATOR} -C build install
+	cmake_src_install
 	find "${D}" -name '*.a' -delete || die
 }
