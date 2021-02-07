@@ -20,8 +20,7 @@ DEPEND="${RDEPEND}"
 S=${WORKDIR}/libevdevPlus-${PV}
 
 src_install() {
-	CMAKE_MAKEFILE_GENERATOR=emake
 	default
-	cmake_src_install
+	DESTDIR="${D}" ${CMAKE_MAKEFILE_GENERATOR} -C build install
 	find "${D}" -name '*.a' -delete || die
 }
