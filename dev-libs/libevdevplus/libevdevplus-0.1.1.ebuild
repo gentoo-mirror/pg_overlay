@@ -18,24 +18,3 @@ RDEPEND=""
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libevdevPlus-${PV}
-
-src_prepare() {
-	cmake_src_prepare
-}
-
-src_configure() {
-	local mycmakeargs=(
-	-DCMAKE_BUILD_TYPE=Release
-	-G Ninja 
-	)
-	cmake_src_configure
-}
-
-src_compile() {
-	cmake_src_compile
-}
-
-src_install() {
-#	default
-	cmake_src_install
-}
