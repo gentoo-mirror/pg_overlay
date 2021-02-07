@@ -29,6 +29,7 @@ src_configure() {
 	)
 	cmake_src_configure
 }
+
 src_install() {
 	default
 	cmake_src_install
