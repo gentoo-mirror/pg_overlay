@@ -42,12 +42,12 @@ dev-lang/python 2.7.18-r6 3.9.1-r1: An interpreted, interactive, object-oriented
 dev-lang/rust 1.49.0: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
-dev-libs/libevdevplus 0.2.1: Easy-to-use event device library in C++
+dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libgnt 9999: Toolkit for creating text-mode graphical user interfaces
 dev-libs/libixion 0.15.0 0.16.1: General purpose formula parser & interpreter
 dev-libs/liborcus 0.15.4 0.16.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libsigc++ 3.0.4: Typesafe callback system for standard C++
-dev-libs/libuinputplus 0.2.1: Easy-to-use uinput library in C++
+dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2021.02.02: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
@@ -123,7 +123,7 @@ gnome-base/librsvg 2.51.0: Scalable Vector Graphics (SVG) rendering library
 gui-apps/kdisplay 5.20.0: A small display management app. KScreen replacement
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.2.2: Launcher/menu program for wlroots based wayland compositors such as sway
-gui-apps/ydotool 9999: Generic command-line automation tool (no X!)
+gui-apps/ydotool 0.1.9 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
