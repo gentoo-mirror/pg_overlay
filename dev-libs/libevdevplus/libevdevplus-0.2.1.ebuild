@@ -18,8 +18,3 @@ RDEPEND=""
 DEPEND="${RDEPEND}"
 
 S=${WORKDIR}/libevdevPlus-${PV}
-
-src_install() {
-	default
-	DESTDIR="${D}" ${CMAKE_MAKEFILE_GENERATOR} -C ${WORKDIR}/${P}_build install
-}
