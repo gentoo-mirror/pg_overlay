@@ -19,18 +19,10 @@ RDEPEND="dev-libs/boost
 		dev-libs/libuinputplus"
 DEPEND="${RDEPEND}"
 
-src_prepare() {
-	cmake_src_prepare
-}
-
 src_configure() {
 	local mycmakeargs=(
 		-DSTATIC_BUILD=0
+		-DCXXOPTS_ENABLE_INSTALL=OFF
 	)
 	cmake_src_configure
-}
-
-src_install() {
-	default
-	cmake_src_install
 }
