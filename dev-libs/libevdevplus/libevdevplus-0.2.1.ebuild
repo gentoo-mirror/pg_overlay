@@ -21,5 +21,5 @@ S=${WORKDIR}/libevdevPlus-${PV}
 
 src_install() {
 	default
-	DESTDIR="${D}" ${CMAKE_MAKEFILE_GENERATOR} -C ${P}_build install	
+	DESTDIR="${D}" ${CMAKE_MAKEFILE_GENERATOR} -C install
 }
