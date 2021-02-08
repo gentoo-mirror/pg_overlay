@@ -1,13 +1,13 @@
 BDEPEND=nls? ( sys-devel/gettext ) virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=configure prepare unpack
-DEPEND=net-im/pidgin sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:0= ) !gcrypt? ( libressl? ( dev-libs/libressl:0= ) !libressl? ( dev-libs/openssl:0= ) ) webp? ( media-libs/libwebp:= )
+DEPEND=net-im/pidgin sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:0= ) !gcrypt? ( libressl? ( dev-libs/libressl:0= ) !libressl? ( dev-libs/openssl:0= ) ) png? ( media-libs/libpng:0= ) webp? ( media-libs/libwebp:= )
 DESCRIPTION=A libpurple protocol plugin that adds support for the Telegram messenger
 EAPI=7
 HOMEPAGE=https://github.com/majn/telegram-purple
-IUSE=gcrypt libressl +nls +webp
+IUSE=gcrypt libressl +nls +png +webp
 LICENSE=GPL-2+
 PROPERTIES=live
-RDEPEND=net-im/pidgin sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:0= ) !gcrypt? ( libressl? ( dev-libs/libressl:0= ) !libressl? ( dev-libs/openssl:0= ) ) webp? ( media-libs/libwebp:= )
+RDEPEND=net-im/pidgin sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:0= ) !gcrypt? ( libressl? ( dev-libs/libressl:0= ) !libressl? ( dev-libs/openssl:0= ) ) png? ( media-libs/libpng:0= ) webp? ( media-libs/libwebp:= )
 SLOT=0
 _eclasses_=git-r3	3e7ec3d6619213460c85e2aa48398441
-_md5_=f223da7ccc5895df3a66d854745d3716
+_md5_=55f594160c968bdb22c9d99c6411fdfb
