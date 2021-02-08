@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/majn/telegram-purple.git"
 LICENSE="GPL-2+"
 KEYWORDS=""
 SLOT="0"
-IUSE="gcrypt libressl +nls +webp"
+IUSE="gcrypt libressl +nls +png +webp"
 
 RDEPEND="
 	net-im/pidgin
@@ -22,6 +22,7 @@ RDEPEND="
 		libressl? ( dev-libs/libressl:0= )
 		!libressl? ( dev-libs/openssl:0= )
 	)
+	png? ( media-libs/libpng:0= )
 	webp? ( media-libs/libwebp:= )
 "
 
@@ -38,13 +39,14 @@ src_prepare() {
 	default
 
 	# Remove '-Werror' to make it compile
-	find -name 'Makefile*' -exec sed -i -e 's/-Werror //'  {} + || die
+	find -name 'Makefile*' -exec sed -i -e 's/-Werror //' {} + || die
 }
 
 src_configure() {
 	local myeconfargs=(
 		$(use_enable gcrypt)
 		$(use_enable nls translation)
+		$(use_enable png libpng)
 		$(use_enable webp libwebp)
 	)
 
