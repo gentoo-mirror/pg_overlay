@@ -87,7 +87,6 @@ src_configure() {
 		# alsa plugin and jack/pulseaudio emulation
 		-Dpipewire-alsa=true
 		$(meson_use jack pipewire-jack)
-		$(meson_use pulseaudio pipewire-pulseaudio)
 		# spa-plugins
 		# we install alsa support unconditionally
 		$(meson_use bluetooth bluez5)
@@ -102,6 +101,8 @@ src_configure() {
 		$(meson_use systemd)
 		$(meson_use test test)
 		$(meson_use test tests)
+		-Dvolume=true
+		-Dudev=true
 	)
 	meson_src_configure
 }
