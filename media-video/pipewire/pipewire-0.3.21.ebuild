@@ -102,6 +102,8 @@ src_configure() {
 		$(meson_use systemd)
 		$(meson_use test test)
 		$(meson_use test tests)
+		-Dvolume=true
+		-Dudev=true
 	)
 	meson_src_configure
 }
