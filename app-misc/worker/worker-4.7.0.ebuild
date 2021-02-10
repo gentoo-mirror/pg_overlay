@@ -1,11 +1,11 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
 LUA_COMPAT=( lua5-{1..2} )
 
-inherit lua-single
+inherit autotools lua-single
 
 DESCRIPTION="Worker Filemanager: Amiga Directory Opus 4 clone"
 HOMEPAGE="http://www.boomerangsworld.de/cms/worker/"
@@ -20,7 +20,7 @@ REQUIRED_USE="lua? ( ${LUA_REQUIRED_USE} )"
 
 RDEPEND="x11-libs/libX11
 	avfs? ( >=sys-fs/avfs-0.9.5 )
-	dbus? (	dev-libs/dbus-glib )
+	dbus? (	sys-apps/dbus )
 	lua? ( ${LUA_DEPS} )
 	magic? ( sys-apps/file )
 	xft? ( x11-libs/libXft )
@@ -29,6 +29,14 @@ DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 DOCS=( AUTHORS ChangeLog INSTALL NEWS README README_LARGEFILES THANKS )
+
+src_prepare() {
+	default
+
+	# Don't use /usr/share/appdata
+	sed -i -e "s:/appdata:/metainfo:" contrib/Makefile.am || die
+	eautoreconf
+}
 
 src_configure() {
 	# there is no ./configure flag to disable libXinerama support
@@ -43,10 +51,6 @@ src_configure() {
 		$(use_enable lua) \
 		$(use_with magic libmagic) \
 		$(use_enable xft)
-}
-
-src_compile() {
-	emake
 }
 
 src_install() {
