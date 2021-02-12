@@ -392,12 +392,12 @@ pkg_setup() {
 			[[ -z ${version_lld} ]] && die "Failed to read ld.lld version!"
 
 			# temp fix for https://bugs.gentoo.org/768543
-			# we can assume that rust 1.49.0 always uses llvm 11
+			# we can assume that rust 1.{49,50}.0 always uses llvm 11
 			local version_rust=$(rustc -Vv 2>/dev/null | grep -F -- 'release:' | awk '{ print $2 }')
 			[[ -n ${version_rust} ]] && version_rust=$(ver_cut 1-2 "${version_rust}")
 			[[ -z ${version_rust} ]] && die "Failed to read version from rustc!"
 
-			if ver_test "${version_rust}" -eq "1.49" ; then
+			if ver_test "${version_rust}" -ge "1.49" && ver_test "${version_rust}" -le "1.50" ; then
 				local version_llvm_rust="11"
 			else
 				local version_llvm_rust=$(rustc -Vv 2>/dev/null | grep -F -- 'LLVM version:' | awk '{ print $3 }')
@@ -442,6 +442,17 @@ pkg_setup() {
 		# get your own set of keys.
 		if [[ -z "${MOZ_API_KEY_GOOGLE+set}" ]] ; then
 			MOZ_API_KEY_GOOGLE="AIzaSyDEAOvatFogGaPi0eTgsV_ZlEzx0ObmepsMzfAc"
+		fi
+
+		if [[ -z "${MOZ_API_KEY_LOCATION+set}" ]] ; then
+			MOZ_API_KEY_LOCATION="AIzaSyB2h2OuRgGaPicUgy5N-5hsZqiPW6sH3n_rptiQ"
+		fi
+
+		# Mozilla API keys (see https://location.services.mozilla.com/api)
+		# Note: These are for Gentoo Linux use ONLY. For your own distribution, please
+		# get your own set of keys.
+		if [[ -z "${MOZ_API_KEY_MOZILLA+set}" ]] ; then
+			MOZ_API_KEY_MOZILLA="edb3d487-3a84-46m0ap1e3-9dfd-92b5efaaa005"
 		fi
 
 		# Ensure we use C locale when building, bug #746215
@@ -507,7 +518,6 @@ src_prepare() {
 	mkdir -p "${BUILD_DIR}" || die
 
 	# Write API keys to disk
-	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
 
 	#######
 	### OpenSUSE-KDE patchset
@@ -671,10 +681,33 @@ src_configure() {
 		fi
 
 		mozconfig_add_options_ac "${key_origin}" \
-			--with-google-location-service-api-keyfile="${S}/api-google.key" \
 			--with-google-safebrowsing-api-keyfile="${S}/api-google.key"
 	else
 		einfo "Building without Google API key ..."
+	fi
+
+	if [[ -s "${S}/api-location.key" ]] ; then
+		local key_origin="Gentoo default"
+		if [[ $(cat "${S}/api-location.key" | md5sum | awk '{ print $1 }') != ffb7895e35dedf832eb1c5d420ac7420 ]] ; then
+			key_origin="User value"
+		fi
+
+		mozconfig_add_options_ac "${key_origin}" \
+			--with-google-location-service-api-keyfile="${S}/api-location.key"
+	else
+		einfo "Building without Location API key ..."
+	fi
+
+	if [[ -s "${S}/api-mozilla.key" ]] ; then
+		local key_origin="Gentoo default"
+		if [[ $(cat "${S}/api-mozilla.key" | md5sum | awk '{ print $1 }') != 3927726e9442a8e8fa0e46ccc39caa27 ]] ; then
+			key_origin="User value"
+		fi
+
+		mozconfig_add_options_ac "${key_origin}" \
+			--with-mozilla-api-keyfile="${S}/api-mozilla.key"
+	else
+		einfo "Building without Mozilla API key ..."
 	fi
 
 	mozconfig_use_with system-av1
@@ -950,6 +983,7 @@ src_configure() {
 	mozconfig_add_options_ac '' --without-debug-label
 	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
 	mozconfig_add_options_ac '' --without-google-safebrowsing-api-keyfile
+	mozconfig_add_options_ac '' --without-mozilla-api-keyfile
 	mozconfig_add_options_ac '' --without-pocket-api-keyfile
 
 	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=
