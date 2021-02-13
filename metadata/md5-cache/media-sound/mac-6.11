@@ -6,6 +6,6 @@ HOMEPAGE=https://www.monkeysaudio.com
 KEYWORDS=~amd64
 LICENSE=mac
 SLOT=0
-SRC_URI=http://monkeysaudio.com/files/MAC_SDK_570.zip -> mac-5.70.zip
+SRC_URI=http://monkeysaudio.com/files/MAC_SDK_611.zip -> mac-6.11.zip
 _eclasses_=autotools	9988ecbe04129214297a7bbf3d253710	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
 _md5_=62a4ff290252b59c991d30090f296def
