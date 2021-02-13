@@ -2,8 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-
-PLOCALES="ar be bg ca cmn cs da de el en_GB es es_AR es_MX et fi fr gl hu id_ID it ja ko lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sr sr_RS sv ta tr uk zh_CN zh_TW"
+PLOCALES="ar be bg ca cmn cs da de el en_GB es es_AR es_MX et fi fr gl hu id_ID it ja ko lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sl sq sr sr_RS sv ta tr uk zh_CN zh_TW"
 
 MY_P="${P/_/-}"
 
@@ -21,7 +20,7 @@ LICENSE="GPL-2"
 SLOT="0"
 IUSE="aac +alsa ampache bs2b cdda cue ffmpeg flac fluidsynth gme http jack
 	lame libnotify libsamplerate lirc mms modplug mp3 nls opengl pulseaudio
-	scrobbler sdl sid sndfile soxr speedpitch streamtuner vorbis wavpack X"
+	scrobbler sdl sid sndfile soxr speedpitch streamtuner vorbis wavpack"
 REQUIRED_USE="ampache? ( http ) streamtuner? ( http )"
 
 # The following plugins REQUIRE a GUI build of audacious, because non-GUI
@@ -98,7 +97,6 @@ DEPEND="
 		>=media-libs/libvorbis-1.2.0
 	)
 	wavpack? ( >=media-sound/wavpack-4.50.1-r1 )
-	X? ( dev-qt/qtx11extras:5 )
 "
 RDEPEND="${DEPEND}"
 
@@ -167,7 +165,6 @@ src_configure() {
 		$(use_enable streamtuner)
 		$(use_enable vorbis)
 		$(use_enable wavpack)
-		$(use_enable X qthotkey)
 		$(use_with ffmpeg ffmpeg ffmpeg)
 	)
 
