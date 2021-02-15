@@ -43,7 +43,7 @@ diff -Naur a/rbutilqt.pro b/rbutilqt.pro
  DEPENDPATH = $$INCLUDEPATH
  
 -LIBS += -L$$OUT_PWD -L$$MYLIBBUILDDIR
-+LIBS += -L$$OUT_PWD -L$$MYLIBBUILDDIR -lquazip5
++LIBS += -L$$OUT_PWD -L$$MYLIBBUILDDIR -lquazip1-qt5
  # append all RBLIBS to LIBS
  for(rblib, RBLIBS) {
      LIBS += -l$$rblib
