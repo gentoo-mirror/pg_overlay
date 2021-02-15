@@ -30,7 +30,7 @@ BDEPEND="dev-qt/linguist-tools:5"
 S="${WORKDIR}/${P}/${PN}/${PN}qt"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.4.1-quazip.patch
+	"${FILESDIR}"/${P}-quazip1.patch
 )
 
 src_prepare() {
