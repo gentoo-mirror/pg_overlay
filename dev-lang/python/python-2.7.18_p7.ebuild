@@ -279,7 +279,7 @@ src_test() {
 	local -x TZ=UTC
 
 	# Rerun failed tests in verbose mode (regrtest -w).
-	emake test EXTRATESTOPTS="-w -uall,-audio ${par_arg}" < /dev/tty
+	emake test EXTRATESTOPTS="-w -uall,-audio ${par_arg} -x test_posix" < /dev/tty
 	local result="$?"
 
 	for test in ${skipped_tests}; do
