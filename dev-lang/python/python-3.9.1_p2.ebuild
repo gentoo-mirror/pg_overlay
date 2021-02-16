@@ -7,9 +7,9 @@ WANT_LIBTOOL="none"
 inherit autotools check-reqs flag-o-matic multiprocessing pax-utils \
 	python-utils-r1 toolchain-funcs verify-sig
 
-MY_P="Python-${PV/_/}"
+MY_P="Python-${PV%_p*}"
 PYVER=$(ver_cut 1-2)
-PATCHSET="python-gentoo-patches-3.9.1-r1"
+PATCHSET="python-gentoo-patches-${PV}"
 
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="https://www.python.org/"
@@ -22,7 +22,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="PSF-2"
 SLOT="${PYVER}"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 sparc ~x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 IUSE="bluetooth build examples gdbm hardened ipv6 libressl +ncurses +readline sqlite +ssl test tk wininst +xml"
 RESTRICT="!test? ( test )"
 
@@ -145,11 +145,6 @@ src_configure() {
 
 	# Export CXX so it ends up in /usr/lib/python3.X/config/Makefile.
 	tc-export CXX
-
-	# Set LDFLAGS so we link modules with -lpython3.2 correctly.
-	# Needed on FreeBSD unless Python 3.2 is already installed.
-	# Please query BSD team before removing this!
-	append-ldflags "-L."
 
 	# Fix implicit declarations on cross and prefix builds. Bug #674070.
 	use ncurses && append-cppflags -I"${ESYSROOT}"/usr/include/ncursesw
