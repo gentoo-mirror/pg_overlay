@@ -103,6 +103,7 @@ src_prepare() {
 	rm -fr Modules/_ctypes/libffi* || die
 	rm -fr Modules/zlib || die
 
+	rm "${WORKDIR}/${PATCHSET}/024*"
 	local PATCHES=(
 		"${WORKDIR}/${PATCHSET}"
 	)
