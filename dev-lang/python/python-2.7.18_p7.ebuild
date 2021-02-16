@@ -103,7 +103,6 @@ src_prepare() {
 	rm -fr Modules/_ctypes/libffi* || die
 	rm -fr Modules/zlib || die
 
-	rm -fv "${WORKDIR}/${PATCHSET}"/0024*
 	local PATCHES=(
 		"${WORKDIR}/${PATCHSET}"
 	)
@@ -176,6 +175,11 @@ src_configure() {
 	# The configure script fails to use pkg-config correctly.
 	# http://bugs.python.org/issue15506
 	export ac_cv_path_PKG_CONFIG=$(tc-getPKG_CONFIG)
+
+	# Set LDFLAGS so we link modules with -lpython2.7 correctly.
+	# Needed on FreeBSD unless Python 2.7 is already installed.
+	# Please query BSD team before removing this!
+	append-ldflags "-L."
 
 	append-ldflags "${CFLAGS}"
 
