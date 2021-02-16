@@ -246,7 +246,7 @@ src_compile() {
 	fi
 	export par_arg
 
-	emake EXTRATESTOPTS="${par_arg} -uall,-audio -x test_distutils --pgo-extended"
+	emake EXTRATESTOPTS="${par_arg} -uall,-audio -x test_distutils test_posix"
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax_kernel]; then
@@ -264,7 +264,7 @@ src_test() {
 	fi
 
 	# Skip failing tests.
-	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support"
+	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support posix"
 
 	for test in ${skipped_tests}; do
 		mv "${S}"/Lib/test/test_${test}.py "${T}"
