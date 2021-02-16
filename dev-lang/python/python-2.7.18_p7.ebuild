@@ -120,6 +120,8 @@ src_prepare() {
 		Modules/getpath.c \
 		setup.py || die "sed failed to replace @@GENTOO_LIBDIR@@"
 
+	sed -i 's/test_subprocess$/test_subprocess test_distutils/' Makefile.pre.in || die
+
 	eautoreconf
 }
 
