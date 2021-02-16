@@ -1,8 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="7"
-
+EAPI=7
 inherit gnome.org meson multilib-minimal
 
 DESCRIPTION="C++ interface for glib2"
@@ -10,24 +9,29 @@ HOMEPAGE="https://www.gtkmm.org"
 
 LICENSE="LGPL-2.1+"
 SLOT="2"
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-macos ~sparc-solaris ~x86-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~sparc-solaris ~x86-solaris"
 IUSE="doc debug test"
-
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	dev-libs/libsigc++:3[${MULTILIB_USEDEP}]
-	>=dev-libs/glib-2.61.2:2[${MULTILIB_USEDEP}]
+	>=dev-libs/glib-2.63.0:2[${MULTILIB_USEDEP}]
+	dev-libs/libsigc++:3[doc?,${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
 	virtual/pkgconfig
-	doc? ( app-doc/doxygen )
-	>=dev-cpp/mm-common-1.0.0
+	doc? (
+		app-doc/doxygen[dot]
+		dev-lang/perl
+		dev-libs/libxslt
+	)
 "
 
 src_prepare() {
 	default
+
+	# giomm_tls_client requires FEATURES=-network-sandbox and glib-networking rdep
+	sed -i -e '/giomm_tls_client/d' tests/meson.build || die
 
 	if ! use test; then
 		sed -i -e "/^subdir('tests')/d" meson.build || die
@@ -36,7 +40,6 @@ src_prepare() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		-Dmaintainer-mode=true
 		-Dwarnings=min
 		-Dbuild-deprecated-api=true
 		-Dbuild-documentation=$(usex doc true false)
