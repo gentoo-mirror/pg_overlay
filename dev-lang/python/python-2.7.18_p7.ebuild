@@ -120,7 +120,7 @@ src_prepare() {
 		Modules/getpath.c \
 		setup.py || die "sed failed to replace @@GENTOO_LIBDIR@@"
 
-	sed -i 's/test_subprocess$/test_subprocess test_distutils/' Makefile.pre.in || die
+	sed -i 's/test_subprocess$/test_subprocess test_distutils test_posix/' Makefile.pre.in || die
 
 	eautoreconf
 }
@@ -175,11 +175,6 @@ src_configure() {
 	# The configure script fails to use pkg-config correctly.
 	# http://bugs.python.org/issue15506
 	export ac_cv_path_PKG_CONFIG=$(tc-getPKG_CONFIG)
-
-	# Set LDFLAGS so we link modules with -lpython2.7 correctly.
-	# Needed on FreeBSD unless Python 2.7 is already installed.
-	# Please query BSD team before removing this!
-	append-ldflags "-L."
 
 	append-ldflags "${CFLAGS}"
 
@@ -246,7 +241,7 @@ src_compile() {
 	fi
 	export par_arg
 
-	emake EXTRATESTOPTS="${par_arg} -uall,-audio -x test_distutils -x test_posix"
+	emake EXTRATESTOPTS="${par_arg} -uall,-audio -x test_distutils"
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax_kernel]; then
@@ -264,7 +259,7 @@ src_test() {
 	fi
 
 	# Skip failing tests.
-	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support posix"
+	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support"
 
 	for test in ${skipped_tests}; do
 		mv "${S}"/Lib/test/test_${test}.py "${T}"
@@ -279,7 +274,7 @@ src_test() {
 	local -x TZ=UTC
 
 	# Rerun failed tests in verbose mode (regrtest -w).
-	emake test EXTRATESTOPTS="-w -uall,-audio ${par_arg} -x test_posix" < /dev/tty
+	emake test EXTRATESTOPTS="-w -uall,-audio ${par_arg}" < /dev/tty
 	local result="$?"
 
 	for test in ${skipped_tests}; do
