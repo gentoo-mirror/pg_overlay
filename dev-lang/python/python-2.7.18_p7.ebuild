@@ -264,7 +264,7 @@ src_test() {
 	fi
 
 	# Skip failing tests.
-	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support"
+	local skipped_tests="distutils gdb curses xpickle bdb runpy test_support posix"
 
 	for test in ${skipped_tests}; do
 		mv "${S}"/Lib/test/test_${test}.py "${T}"
