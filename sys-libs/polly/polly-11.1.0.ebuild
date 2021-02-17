@@ -11,7 +11,7 @@ HOMEPAGE="https://llvm.org/"
 
 LICENSE="Apache-2.0-with-LLVM-exceptions UoI-NCSA"
 SLOT="$(ver_cut 1)"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86 ~amd64-linux ~ppc-macos ~x64-macos"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
