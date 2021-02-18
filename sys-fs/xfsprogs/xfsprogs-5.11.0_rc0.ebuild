@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -15,10 +15,10 @@ SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86"
 IUSE="icu libedit nls"
 
-LIB_DEPEND=">=sys-apps/util-linux-2.17.2[static-libs(+)]
-	icu? ( dev-libs/icu:=[static-libs(+)] )
-	libedit? ( dev-libs/libedit[static-libs(+)] )"
-RDEPEND="${LIB_DEPEND//\[static-libs(+)]}
+RDEPEND=">=sys-apps/util-linux-2.17.2
+	dev-libs/inih
+	icu? ( dev-libs/icu:= )
+	libedit? ( dev-libs/libedit )
 	!<sys-fs/xfsdump-3"
 DEPEND="${RDEPEND}"
 BDEPEND="
@@ -47,16 +47,16 @@ src_prepare() {
 src_configure() {
 	# include/builddefs.in will add FCFLAGS to CFLAGS which will
 	# unnecessarily clutter CFLAGS (and fortran isn't used)
-	#unset FCFLAGS
+	unset FCFLAGS
 
 	export DEBUG=-DNDEBUG
 
 	# Package is honoring CFLAGS; No need to use OPTIMIZER anymore.
 	# However, we have to provide an empty value to avoid default
 	# flags.
-	#export OPTIMIZER=" "
+	export OPTIMIZER=" "
 
-	#unset PLATFORM # if set in user env, this breaks configure
+	unset PLATFORM # if set in user env, this breaks configure
 
 	# Avoid automagic on libdevmapper, #709694
 	export ac_cv_search_dm_task_create=no
@@ -91,8 +91,8 @@ src_compile() {
 }
 
 src_install() {
-	emake DIST_ROOT="${ED}" install
-	emake DIST_ROOT="${ED}" install-dev
+	emake DIST_ROOT="${ED}" HAVE_ZIPPED_MANPAGES=false install
+	emake DIST_ROOT="${ED}" HAVE_ZIPPED_MANPAGES=false install-dev
 
 	gen_usr_ldscript -a handle
 }
