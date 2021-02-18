@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit meson
+inherit meson flag-o-matic
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/PipeWire/pipewire.git"
@@ -79,6 +79,8 @@ src_prepare() {
 }
 
 src_configure() {
+	append-ldflags -lelogind
+
 	local emesonargs=(
 		-Dexamples=true # contains required pipewire-media-session
 		-Dman=true
