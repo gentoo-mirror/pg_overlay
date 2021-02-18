@@ -34,9 +34,9 @@ PATCHES=(
 src_prepare() {
 	default
 
-	pushd .. >/dev/null || die
+	#pushd .. >/dev/null || die
 	eapply "${FILESDIR}"/${PN}-4.4.1-fix-test.patch
-	popd >/dev/null || die
+	#popd >/dev/null || die
 }
 
 src_configure() {
