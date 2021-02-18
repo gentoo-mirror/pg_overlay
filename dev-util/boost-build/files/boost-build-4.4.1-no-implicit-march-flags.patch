@@ -1,5 +1,5 @@
---- a/src/tools/gcc.jam
-+++ b/src/tools/gcc.jam
+--- a/build-4.4.1/src/tools/gcc.jam
++++ b/build-4.4.1/src/tools/gcc.jam
 @@ -1224,135 +1224,9 @@
  # x86 and compatible
  # The 'native' option appeared in gcc 4.2 so we cannot safely use it as default.

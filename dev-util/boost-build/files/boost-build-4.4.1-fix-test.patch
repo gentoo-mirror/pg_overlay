@@ -1,5 +1,5 @@
---- a/src/test/startup_v2.py
-+++ b/src/test/startup_v2.py
+--- a/build-4.4.1/src/test/startup_v2.py
++++ b/build-4.4.1/src/test/startup_v2.py
 @@ -50,7 +50,7 @@
      return re.match(expected, actual, re.DOTALL) != None
  
