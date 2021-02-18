@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit meson
+inherit meson flag-o-matic
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/PipeWire/pipewire.git"
