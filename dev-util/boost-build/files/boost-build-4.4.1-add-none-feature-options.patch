@@ -1,5 +1,5 @@
---- a/build-4.4.1/src/tools/features/debug-feature.jam
-+++ b/build-4.4.1/src/tools/features/debug-feature.jam
+--- a/src/tools/features/debug-feature.jam
++++ b/src/tools/features/debug-feature.jam
 @@ -18,7 +18,7 @@
  |# # end::doc[]
  
@@ -9,8 +9,8 @@
      : propagated ;
  
  #| tag::prof-doc[]
---- a/build-4.4.1/src/tools/features/optimization-feature.jam
-+++ b/build-4.4.1/src/tools/features/optimization-feature.jam
+--- a/src/tools/features/optimization-feature.jam
++++ b/src/tools/features/optimization-feature.jam
 @@ -16,7 +16,7 @@
  |# # end::doc[]
  
