@@ -9,7 +9,7 @@ MY_PV="$(ver_rs 1- _)"
 
 DESCRIPTION="A system for large project software construction, simple to use and powerful"
 HOMEPAGE="https://boostorg.github.io/build/"
-SRC_URI="https://dl.bintray.com/boostorg/release/${PV}/source/boost_${MY_PV}.tar.bz2"
+SRC_URI="https://github.com/boostorg/build/archive/${PV}.tar.gz"
 
 LICENSE="Boost-1.0"
 SLOT="0"
@@ -17,7 +17,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~
 IUSE="examples"
 RESTRICT="test"
 
-S="${WORKDIR}/boost_${MY_PV}/tools/build/src"
+#S="${WORKDIR}/boost_${MY_PV}/tools/build/src"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
@@ -58,7 +58,7 @@ src_test() {
 
 src_install() {
 	dobin engine/{bjam,b2}
-	sed -i s:src/kernel:kernel:g ../boost-build.jam || die
+
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
 		../boost-build.jam bootstrap.jam build-system.jam ../example/user-config.jam *.py \
