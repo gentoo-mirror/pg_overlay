@@ -107,8 +107,8 @@ dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles
 dev-util/meson 0.57.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2: ninja-compatible build tool written in C
-dev-util/vulkan-headers 1.2.168: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.2.166: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.2.170: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.2.169: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.7: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
@@ -131,8 +131,8 @@ media-libs/libsdl2 2.0.14-r1: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20201106: VoIP library for Telegram clients
 media-libs/shaderc 2020.3 2020.4_pre20201203: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20201127: WebRTC build for Telegram
-media-libs/vulkan-layers 1.2.166 9999: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.166: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.2.170 9999: Vulkan Validation Layers
+media-libs/vulkan-loader 1.2.170: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
