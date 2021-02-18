@@ -20,11 +20,11 @@ RESTRICT="test"
 S="${WORKDIR}/build-${PV}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
-	"${FILESDIR}"/${PN}-1.71.0-darwin-gentoo-toolchain.patch
-	"${FILESDIR}"/${PN}-1.73.0-add-none-feature-options.patch
-	"${FILESDIR}"/${PN}-1.71.0-respect-c_ld-flags.patch
-	"${FILESDIR}"/${PN}-1.74.0-no-implicit-march-flags.patch
+	"${FILESDIR}"/${PN}-4.4.1-disable_python_rpath.patch
+	"${FILESDIR}"/${PN}-4.4.1-darwin-gentoo-toolchain.patch
+	"${FILESDIR}"/${PN}-4.4.1-add-none-feature-options.patch
+	"${FILESDIR}"/${PN}-4.4.1-respect-c_ld-flags.patch
+	"${FILESDIR}"/${PN}-4.4.1-no-implicit-march-flags.patch
 )
 
 #src_unpack() {
@@ -35,7 +35,7 @@ src_prepare() {
 	default
 
 	pushd .. >/dev/null || die
-	eapply "${FILESDIR}"/${PN}-1.71.0-fix-test.patch
+	eapply "${FILESDIR}"/${PN}-4.4.1-fix-test.patch
 	popd >/dev/null || die
 }
 
