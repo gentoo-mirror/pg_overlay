@@ -79,6 +79,8 @@ src_prepare() {
 }
 
 src_configure() {
+	append-ldflags -lelogind
+
 	local emesonargs=(
 		-Dexamples=true # contains required pipewire-media-session
 		-Dman=true
