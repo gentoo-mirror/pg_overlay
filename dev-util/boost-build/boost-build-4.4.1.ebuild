@@ -17,7 +17,7 @@ SLOT="0"
 IUSE="examples"
 RESTRICT="test"
 
-#S="${WORKDIR}/boost_${MY_PV}/tools/build/src"
+S="${WORKDIR}/build-${PV}"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.71.0-disable_python_rpath.patch
