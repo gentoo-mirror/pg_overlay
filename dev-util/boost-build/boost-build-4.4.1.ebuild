@@ -47,7 +47,7 @@ src_configure() {
 }
 
 src_compile() {
-	cd engine || die
+	cd src/engine || die
 	./build.sh cxx -d+2 --without-python || die "building bjam failed"
 }
 
@@ -57,7 +57,7 @@ src_test() {
 }
 
 src_install() {
-	dobin engine/{bjam,b2}
+	dobin src/engine/{bjam,b2}
 
 	insinto /usr/share/boost-build
 	doins -r "${FILESDIR}/site-config.jam" \
