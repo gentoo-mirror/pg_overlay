@@ -23,7 +23,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-4.4.1-disable_python_rpath.patch
 	"${FILESDIR}"/${PN}-4.4.1-darwin-gentoo-toolchain.patch
 	"${FILESDIR}"/${PN}-4.4.1-add-none-feature-options.patch
-	"${FILESDIR}"/${PN}-4.4.1-respect-c_ld-flags.patch
+	#"${FILESDIR}"/${PN}-4.4.1-respect-c_ld-flags.patch
 	"${FILESDIR}"/${PN}-4.4.1-no-implicit-march-flags.patch
 )
 
