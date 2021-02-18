@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -33,6 +33,7 @@ RDEPEND="dev-lang/perl
 		net-libs/libnatpmp
 		net-libs/miniupnpc:=
 	)
+	!guionly? ( acct-user/p2p )
 "
 # Can't yet use newer OCaml
 # -unsafe-string usage:
@@ -131,7 +132,7 @@ src_install() {
 		done
 		use bittorrent && newbin "make_torrent${myext}" make_torrent
 
-		newconfd "${FILESDIR}/mldonkey.confd-2.8" mldonkey
+		newconfd "${FILESDIR}/mldonkey.confd" mldonkey
 		fperms 600 /etc/conf.d/mldonkey
 		newinitd "${FILESDIR}/mldonkey.initd" mldonkey
 	fi
