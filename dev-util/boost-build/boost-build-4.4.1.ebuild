@@ -44,7 +44,7 @@ src_configure() {
 
 src_compile() {
 	cd engine || die
-	./build.sh cxx -d+2 --without-python || die "building bjam failed"
+	./build.sh ${CC} -d+2 --without-python || die "building bjam failed"
 }
 
 src_test() {
