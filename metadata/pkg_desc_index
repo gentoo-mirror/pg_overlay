@@ -107,6 +107,7 @@ dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles
 dev-util/meson 0.57.0_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2: ninja-compatible build tool written in C
+dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
 dev-util/vulkan-headers 1.2.170: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.169: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.7: Scalable distributed SCM
