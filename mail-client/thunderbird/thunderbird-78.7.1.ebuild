@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-78esr-patches-08.tar.xz"
+FIREFOX_PATCHSET="firefox-78esr-patches-09.tar.xz"
 
 LLVM_MAX_SLOT=11
 MOZCONFIG_OPTIONAL_JIT=1
@@ -68,8 +68,7 @@ IUSE="+clang cpu_flags_arm_neon dbus debug eme-free
 	+system-libvpx +system-webp wayland wifi
 	+jit +kde"
 
-REQUIRED_USE="x86? ( lto? ( clang ) )
-	wifi? ( dbus )"
+REQUIRED_USE="wifi? ( dbus )"
 
 BDEPEND="${PYTHON_DEPS}
 	app-arch/unzip
