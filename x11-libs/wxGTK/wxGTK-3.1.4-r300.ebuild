@@ -108,7 +108,7 @@ multilib_src_configure() {
 	# wxGTK options
 	#   --enable-graphics_ctx - needed for webkit, editra
 	#   --without-gnomevfs - bug #203389
-	use X && \
+	#use X && \
 		myconf="${myconf}
 			--enable-graphics_ctx
 			--with-gtkprint
