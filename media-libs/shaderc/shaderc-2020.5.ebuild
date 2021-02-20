@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python{3_7,3_8,3_9} )
 
 CMAKE_ECLASS=cmake
 
@@ -15,16 +15,16 @@ SRC_URI="https://github.com/google/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc64 ~x86"
+KEYWORDS="amd64 ppc64 x86"
 IUSE="doc test"
 
 RDEPEND="
-	>=dev-util/glslang-8.13.3560_pre20200404[${MULTILIB_USEDEP}]
-	>=dev-util/spirv-tools-2020.3[${MULTILIB_USEDEP}]
+	>=dev-util/glslang-10.11.0.0_pre20201216[${MULTILIB_USEDEP}]
+	>=dev-util/spirv-tools-2020.6[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	>=dev-util/spirv-headers-1.5.3
+	>=dev-util/spirv-headers-1.5.4.1
 	doc? ( dev-ruby/asciidoctor )
 	test? (
 		dev-cpp/gtest
@@ -33,7 +33,7 @@ DEPEND="${RDEPEND}
 "
 
 PATCHES=(
-		"${FILESDIR}"/${PN}-2020.1-fix-build.patch
+		"${FILESDIR}"/${PN}-2020.4-fix-build.patch
 )
 
 # https://github.com/google/shaderc/issues/470
@@ -70,6 +70,7 @@ src_prepare() {
 multilib_src_configure() {
 	local mycmakeargs=(
 		-DSHADERC_SKIP_TESTS="$(usex !test)"
+		-DSHADERC_ENABLE_WERROR_COMPILE="false"
 	)
 	cmake_src_configure
 }
