@@ -1,9 +1,7 @@
-app-admin/eclean-kernel 2.99.2: Remove outdated built kernels
 app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.3: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6: Port of 7-Zip archiver for Unix
-app-cdr/kde-cdemu-manager 9999: CDEmu manager front end for KF5
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre144: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
@@ -21,9 +19,7 @@ app-office/wps-office 11.1.0.10161: WPS Office is an office productivity suite
 app-portage/eix 0.34.12: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
-app-text/enchant 2.2.12: Spellchecker wrapping library
 app-text/goldendict 9999: Feature-rich dictionary lookup program
-app-text/master-pdf-editor 5.6.80: A complete solution for viewing and editing PDF files
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML

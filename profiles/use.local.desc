@@ -37,8 +37,6 @@ app-portage/eix:strong-security - Add many checks to prevent exploits if eix cod
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
-app-text/enchant:aspell - Adds support for app-text/aspell spell checker
-app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
