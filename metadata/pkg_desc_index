@@ -9,7 +9,6 @@ app-editors/jed 0.99.20_pre144: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/virtualbox 6.1.18: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
-app-misc/ddcui 0.1.2: Graphical user interface for ddcutil
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
 app-misc/media-player-info 24: A repository of data files describing media player capabilities
