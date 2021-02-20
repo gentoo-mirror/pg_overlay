@@ -19,7 +19,7 @@ HOMEPAGE="https://pipewire.org/"
 
 LICENSE="LGPL-2.1+"
 SLOT="0/0.3"
-IUSE="bluetooth debug doc ffmpeg gstreamer jack pulseaudio systemd test vulkan X"
+IUSE="bluetooth debug doc ffmpeg gstreamer jack sdl sndfile systemd test vulkan X"
 
 BDEPEND="
 	app-doc/xmltoman
@@ -30,8 +30,6 @@ BDEPEND="
 "
 RDEPEND="
 	>=media-libs/alsa-lib-1.1.7
-	media-libs/libsdl2
-	>=media-libs/libsndfile-1.0.20
 	sys-apps/dbus
 	virtual/libudev
 	bluetooth? (
@@ -45,10 +43,8 @@ RDEPEND="
 		media-libs/gst-plugins-base:1.0
 	)
 	jack? ( >=media-sound/jack2-1.9.10:2 )
-	pulseaudio? (
-		dev-libs/glib:2
-		>=media-sound/pulseaudio-11.1
-	)
+	sdl? ( media-libs/libsdl2 )
+	sndfile? ( >=media-libs/libsndfile-1.0.20 )
 	systemd? ( sys-apps/systemd )
 	vulkan? ( media-libs/vulkan-loader )
 	X? ( x11-libs/libX11 )
@@ -86,7 +82,7 @@ src_configure() {
 		-Dman=true
 		-Dspa-plugins=true
 		--buildtype=$(usex debug debugoptimized plain)
-		# alsa plugin and jack/pulseaudio emulation
+		# alsa plugin and jack emulation
 		-Dpipewire-alsa=true
 		$(meson_use jack pipewire-jack)
 		# spa-plugins
@@ -100,11 +96,12 @@ src_configure() {
 		$(meson_use doc docs)
 		$(meson_use gstreamer)
 		$(meson_use gstreamer gstreamer-device-provider)
+		$(meson_feature sdl sdl2)
+		$(meson_feature sndfile)
 		$(meson_use systemd)
 		$(meson_use test test)
 		$(meson_use test tests)
 		-Dvolume=true
-		-Dudev=true
 	)
 	meson_src_configure
 }
@@ -128,11 +125,6 @@ pkg_postinst() {
 	if use jack; then
 		elog "Please note that even though the libraries for JACK emulation have"
 		elog "been installed, this ebuild is not yet wired up to replace a JACK server."
-		elog
-	fi
-	if use pulseaudio; then
-		elog "Please note that even though the libraries for PulseAudio emulation have"
-		elog "been installed, this ebuild is not yet wired up to replace PulseAudio."
 		elog
 	fi
 	elog "Read INSTALL.md for information about ALSA plugin or JACK/PulseAudio emulation."
