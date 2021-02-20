@@ -18,7 +18,7 @@ IUSE="abi_x86_x32 doc kde +pch rar static wxwidgets"
 
 REQUIRED_USE="kde? ( wxwidgets )"
 
-RDEPEND="wxwidgets? ( x11-libs/wxGTK:${WX_GTK_VER}[X] )"
+RDEPEND="wxwidgets? ( x11-libs/wxGTK:${WX_GTK_VER} )"
 DEPEND="${RDEPEND}
 	abi_x86_x32? ( >=dev-lang/yasm-1.2.0-r1 )
 	amd64? ( dev-lang/yasm )
