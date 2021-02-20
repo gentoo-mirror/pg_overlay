@@ -75,6 +75,7 @@ src_configure() {
 		$(use_enable debug)
 		$(use_enable daemon amule-daemon)
 		$(use_enable geoip)
+		$(use_enable gui amule-gui)
 		$(use_enable nls)
 		$(use_enable webserver)
 		$(use_enable stats cas)
@@ -85,14 +86,12 @@ src_configure() {
 
 	if use X; then
 		myconf+=(
-			$(use_enable gui amule-gui)
 			$(use_enable stats alc)
 			$(use_enable stats wxcas)
 		)
 	else
 		myconf+=(
-			--disable-monolithic
-			--disable-amule-gui
+			#--disable-monolithic
 			--disable-alc
 			--disable-wxcas
 		)
