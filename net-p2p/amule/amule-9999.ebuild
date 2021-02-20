@@ -86,14 +86,12 @@ src_configure() {
 
 	if use X; then
 		myconf+=(
-			$(use_enable gui amule-gui)
 			$(use_enable stats alc)
 			$(use_enable stats wxcas)
 		)
 	else
 		myconf+=(
 			#--disable-monolithic
-			#--disable-amule-gui
 			--disable-alc
 			--disable-wxcas
 		)
