@@ -135,10 +135,10 @@ multilib_src_configure() {
 			# cocoa toolkit seems to be broken
 
 	# wxBase options
-	if use !X && use !aqua ; then
-		myconf="${myconf}
-			--disable-gui"
-	fi
+	#if use !X && use !aqua ; then
+	#	myconf="${myconf}
+	#		--disable-gui"
+	#fi
 
 	ECONF_SOURCE="${S}" econf ${myconf}
 }
