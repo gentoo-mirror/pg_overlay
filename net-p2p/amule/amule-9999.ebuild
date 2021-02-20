@@ -91,8 +91,8 @@ src_configure() {
 		)
 	else
 		myconf+=(
-			--disable-monolithic
-			--disable-amule-gui
+			#--disable-monolithic
+			#--disable-amule-gui
 			--disable-alc
 			--disable-wxcas
 		)
