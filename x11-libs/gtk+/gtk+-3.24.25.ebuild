@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors and Martin V\"ath
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -96,7 +96,6 @@ BDEPEND="
 	>=dev-util/gdbus-codegen-2.48
 	dev-util/glib-utils
 	>=dev-util/gtk-doc-am-1.20
-	>=sys-devel/gettext-0.19.7
 	virtual/pkgconfig
 	gtk-doc? (
 		app-text/docbook-xml-dtd:4.3
