@@ -22,7 +22,7 @@ RDEPEND="
 	sys-libs/binutils-libs:0=
 	sys-libs/readline:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
+	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}
 	daemon? ( acct-user/amule )
 	geoip? ( dev-libs/geoip )
 	nls? ( virtual/libintl )
@@ -91,7 +91,7 @@ src_configure() {
 		)
 	else
 		myconf+=(
-			#--disable-monolithic
+			--disable-monolithic
 			--disable-alc
 			--disable-wxcas
 		)
