@@ -209,7 +209,7 @@ www-apps/nextcloud 20.0.7: Personal cloud that runs on your own server
 www-client/firefox 85.0.2: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
-x11-libs/cairo 1.17.4: A vector graphics library with cross-device output support
+x11-libs/cairo 1.17.4 9999 9999-r1: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33 3.24.25: Gimp ToolKit +
 x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/pango 1.46.2 1.48.0: Internationalized text layout and rendering library
