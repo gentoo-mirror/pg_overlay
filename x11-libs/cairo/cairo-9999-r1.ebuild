@@ -18,7 +18,7 @@ DESCRIPTION="A vector graphics library with cross-device output support"
 HOMEPAGE="https://www.cairographics.org/ https://gitlab.freedesktop.org/cairo/cairo"
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
-IUSE="X aqua debug gles2-only +glib opengl static-libs +svg utils valgrind"
+IUSE="X aqua debug gles2-only +glib opengl static-libs +png utils valgrind"
 # gtk-doc regeneration doesn't seem to work with out-of-source builds
 #[[ ${PV} == *9999* ]] && IUSE="${IUSE} doc" # API docs are provided in tarball, no need to regenerate
 
@@ -81,10 +81,15 @@ multilib_src_configure() {
 	local emesonargs=(
 		-Dfonconfig=enabled
 		-Dfreetype=enabled
-		-Ddrm=enabled
 		$(meson_feature X tee)
 		$(meson_feature X xlib)
 		$(meson_feature xcb)
+		$(meson_feature aqua quartz)
+		-Dgl-backend=$(multilib_native_usex opengl gl auto)
+		$(meson_feature png)
+		$(meson_feature )
+		$(meson_feature )
+		-Dtests=disabled
 	)
 }
 

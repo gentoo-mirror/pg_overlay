@@ -120,10 +120,10 @@ multilib_src_configure() {
 		--enable-png \
 		--enable-ps \
 		--enable-script \
-		--enable-drm \
+		--disable-drm \
 		--disable-directfb \
 		--disable-gallium \
-		--disable-qt \
+		--enable-qt \
 		--disable-vg \
 		--disable-xlib-xcb \
 		${myopts}
