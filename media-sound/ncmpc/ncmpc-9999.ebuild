@@ -8,7 +8,7 @@ inherit meson git-r3 l10n
 
 DESCRIPTION="Ncurses client for the Music Player Daemon (MPD)"
 HOMEPAGE="https://www.musicpd.org/clients/ncmpc/ https://github.com/MusicPlayerDaemon/ncmpc"
-EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/ncmpc.git" 
+EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git" 
 
 LICENSE="GPL-2+"
 SLOT="0"
