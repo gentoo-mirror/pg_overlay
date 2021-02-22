@@ -63,8 +63,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
 	"${FILESDIR}"/${PN}-respect-fontconfig.patch
 	"${FILESDIR}"/${PN}-1.16.0-binutils-2.34.patch
-	"${FILESDIR}"/${PN}-up-to-date.patch
-	#"${FILESDIR}"/0001-image-compositor-Remove-the-right-glyph-from-pixman-.patch
 	"${FILESDIR}"/${PN}-make-lcdfilter-default.patch
 	"${FILESDIR}"/${PN}-server-side-gradients.patch  
 	"${FILESDIR}"/${PN}-webkit-html5-fix.patch
