@@ -3,22 +3,22 @@
 
 EAPI=7
 
-inherit flag-o-matic autotools multilib-minimal
+inherit flag-o-matic meson multilib-minimal
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/cairo/cairo.git"
 	SRC_URI=""
 else
-	SRC_URI="https://www.cairographics.org/snapshots/${P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 s390 ~sh ~sparc ~x86 ~amd64-fbsd ~x86-fbsd ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x86-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
+	SRC_URI="https://www.cairographics.org/releases/${P}.tar.xz"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
 fi
 
 DESCRIPTION="A vector graphics library with cross-device output support"
 HOMEPAGE="https://www.cairographics.org/ https://gitlab.freedesktop.org/cairo/cairo"
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
-IUSE="X aqua debug gles2-only +glib opengl static-libs +svg utils valgrind xcb"
+IUSE="X aqua debug gles2-only +glib opengl static-libs +svg utils valgrind"
 # gtk-doc regeneration doesn't seem to work with out-of-source builds
 #[[ ${PV} == *9999* ]] && IUSE="${IUSE} doc" # API docs are provided in tarball, no need to regenerate
 
@@ -31,7 +31,7 @@ BDEPEND="
 RDEPEND="
 	>=dev-libs/lzo-2.06-r1[${MULTILIB_USEDEP}]
 	>=media-libs/fontconfig-2.10.92[${MULTILIB_USEDEP}]
-	>=media-libs/freetype-2.5.0.1:2[${MULTILIB_USEDEP}]
+	>=media-libs/freetype-2.5.0.1:2[png,${MULTILIB_USEDEP}]
 	>=media-libs/libpng-1.6.10:0=[${MULTILIB_USEDEP}]
 	sys-libs/binutils-libs:0=[${MULTILIB_USEDEP}]
 	>=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}]
@@ -75,58 +75,17 @@ src_prepare() {
 	if ! use X; then
 		sed -e '/^SUBDIRS/ s#boilerplate test perf# #' -i Makefile.am || die
 	fi
-
-	# Slightly messed build system YAY
-	if [[ ${PV} == *9999* ]]; then
-		touch boilerplate/Makefile.am.features
-		touch src/Makefile.am.features
-		touch ChangeLog
-	fi
-
-	eautoreconf
 }
 
 multilib_src_configure() {
-	local myopts
-
-	[[ ${CHOST} == *-interix* ]] && append-flags -D_REENTRANT
-
-	use elibc_FreeBSD && myopts+=" --disable-symbol-lookup"
-
-	# [[ ${PV} == *9999* ]] && myopts+=" $(use_enable doc gtk-doc)"
-
-	ECONF_SOURCE="${S}" \
-	econf \
-		--disable-dependency-tracking \
-		$(use_with X x) \
-		$(use_enable X tee) \
-		$(use_enable X xlib) \
-		$(use_enable X xlib-xrender) \
-		$(use_enable aqua quartz) \
-		$(use_enable aqua quartz-image) \
-		$(use_enable debug test-surfaces) \
-		$(use_enable gles2-only glesv2) \
-		$(use_enable glib gobject) \
-		$(use_enable opengl gl) \
-		$(use_enable static-libs static) \
-		$(use_enable svg) \
-		$(use_enable utils trace) \
-		$(use_enable valgrind) \
-		$(use_enable xcb) \
-		$(use_enable xcb xcb-shm) \
-		--enable-ft \
-		--enable-interpreter \
-		--enable-pdf \
-		--enable-png \
-		--enable-ps \
-		--enable-script \
-		--enable-drm \
-		--disable-directfb \
-		--disable-gallium \
-		--disable-qt \
-		--disable-vg \
-		--disable-xlib-xcb \
-		${myopts}
+	local emesonargs=(
+		-Dfonconfig=enabled
+		-Dfreetype=enabled
+		-Ddrm=enabled
+		$(meson_feature X tee)
+		$(meson_feature X xlib)
+		$(meson_feature xcb)
+	)
 }
 
 multilib_src_install_all() {
