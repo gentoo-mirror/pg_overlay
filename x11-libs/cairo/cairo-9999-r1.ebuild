@@ -85,6 +85,7 @@ multilib_src_configure() {
 		$(meson_feature X tee)
 		$(meson_feature X xlib)
 		$(meson_feature xcb)
+	)
 }
 
 multilib_src_install_all() {
