@@ -89,6 +89,8 @@ multilib_src_configure() {
 		-Dpng=enabled
 		-Dzlib=enabled
 		-Dtests=disabled
+		$(meson_feature glib)
+		-Dcairo-trace=disabled
 	)
 	meson_src_configure
 }
