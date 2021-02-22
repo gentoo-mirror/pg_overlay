@@ -92,7 +92,7 @@ multilib_src_configure() {
 		-Dtests=disabled
 		$(meson_feature glib)
 		-Dspectre=disabled
-		-DCAIRO_HAS_TRACE=0
+		-Dcairo-trace=false
 	)
 	meson_src_configure
 }
