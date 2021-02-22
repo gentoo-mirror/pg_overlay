@@ -123,7 +123,7 @@ multilib_src_configure() {
 		--disable-drm \
 		--disable-directfb \
 		--disable-gallium \
-		--enable-qt \
+		--disable-qt \
 		--disable-vg \
 		--disable-xlib-xcb \
 		${myopts}
