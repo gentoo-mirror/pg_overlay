@@ -66,6 +66,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-make-lcdfilter-default.patch
 	"${FILESDIR}"/${PN}-server-side-gradients.patch  
 	"${FILESDIR}"/${PN}-webkit-html5-fix.patch
+	"${FILESDIR}"/xlib-xcb.diff
 )
 
 src_prepare() {
