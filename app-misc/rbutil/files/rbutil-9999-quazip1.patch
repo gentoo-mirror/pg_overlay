@@ -48,21 +48,22 @@ index 25c3dce..7a6e08a 100644
  class ZipUtil : public ArchiveUtil
  {
 diff --git a/rbutil/rbutilqt/rbutilqt.pro b/rbutil/rbutilqt/rbutilqt.pro
-index d5caa77..40a62ff 100644
---- a/rbutil/rbutilqt/rbutilqt.pro
-+++ b/rbutil/rbutilqt/rbutilqt.pro
-@@ -140,11 +140,6 @@ for(rblib, RBLIBS) {
- # We need libcrypto++
- LIBS += -lcryptopp
+--- a/rbutil/rbutilqt/rbutilqt.pro	2019-11-10 06:45:50.000000000 +0000
++++ b/rbutil/rbutilqt/rbutilqt.pro	2019-12-04 22:43:30.144259710 +0000
+@@ -131,7 +131,7 @@
  
--# on win32 libz is linked implicitly.
--!win32 {
--    LIBS += -lz
--}
--
+ DEPENDPATH = $$INCLUDEPATH
+ 
+-LIBS += -L$$OUT_PWD -L$$MYLIBBUILDDIR
++LIBS += -L$$OUT_PWD -L$$MYLIBBUILDDIR -lquazip1-qt5
+ # append all RBLIBS to LIBS
+ for(rblib, RBLIBS) {
+     LIBS += -l$$rblib
+@@ -148,4 +148,3 @@
+ 
+-LIBS += -lz
+  
  # Add a (possibly found) libspeex now, don't do this before -lrbspeex!
- !static:!isEmpty(LIBSPEEX) {
-     LIBS += $$LIBSPEEX
 @@ -205,6 +200,9 @@ unix:!static:libusb0:!macx {
      LIBS += -lusb
  }

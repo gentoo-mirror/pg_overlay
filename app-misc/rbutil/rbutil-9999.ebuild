@@ -34,7 +34,6 @@ QTDIR="${PN}/${PN}qt"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-quazip1.patch
-	"${FILESDIR}"/0001-imxtools-sbtools-fix-compilation-with-gcc-10.patch
 	"${FILESDIR}"/${P}-fix-versionstring.patch # bug 734178
 )
 
@@ -71,14 +70,9 @@ src_compile() {
 src_install() {
 	cd "${QTDIR}" || die
 
-	local icon size
-	for icon in icons/rockbox-*.png; do
-		size=${icon##*-}
-		size=${size%%.*}
-		newicon -s "${size}" "${icon}" rockbox.png
-	done
+	newicon -s ${S}/debian/maemo/icons/rockbox.png rockbox.png
 
 	dobin RockboxUtility
-	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox
+	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox Utility
 	dodoc changelog.txt
 }
