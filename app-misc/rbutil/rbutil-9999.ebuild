@@ -34,7 +34,6 @@ QTDIR="${PN}/${PN}qt"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-quazip1.patch
-	"${FILESDIR}"/0001-imxtools-sbtools-fix-compilation-with-gcc-10.patch
 	"${FILESDIR}"/${P}-fix-versionstring.patch # bug 734178
 )
 
