@@ -6,30 +6,31 @@ EAPI=7
 PYTHON_COMPAT=( python3_{7..9} )
 inherit python-r1 toolchain-funcs
 
-DESCRIPTION="Python extension module generator for C and C++ libraries"
+DESCRIPTION="Private sip module for PyQt5"
 HOMEPAGE="https://www.riverbankcomputing.com/software/sip/intro"
 
-MY_P=${PN}-${PV/_pre/.dev}
+MY_PN=sip
+MY_P=${MY_PN}-${PV/_pre/.dev}
 if [[ ${PV} == *_pre* ]]; then
 	SRC_URI="https://dev.gentoo.org/~pesa/distfiles/${MY_P}.tar.gz"
 else
-	SRC_URI="https://files.pythonhosted.org/packages/af/68/c603a9d6319ef1126187c42e0b13ac5fcf556d040feded2e574e1a6a27e4/${MY_P}.tar.gz https://www.riverbankcomputing.com/static/Downloads/${PN}/${PV}/${P}.tar.gz"
+	SRC_URI="https://files.pythonhosted.org/packages/33/e9/27730ac17713c0a80d81d8f3bb56213f1549d96f9dc183fd16a7eec6287c/${MY_P}.tar.gz https://www.riverbankcomputing.com/static/Downloads/${MY_PN}/${PV}/${MY_P}.tar.gz"
 fi
 
 # Sub-slot based on SIP_API_MAJOR_NR from siplib/sip.h
 SLOT="0/12"
 LICENSE="|| ( GPL-2 GPL-3 SIP )"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
-IUSE="doc"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
+IUSE=""
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 DEPEND="${PYTHON_DEPS}"
-RDEPEND="${DEPEND}"
+RDEPEND="${DEPEND}
+	!<dev-python/PyQt5-5.12.2
+"
 
 S=${WORKDIR}/${MY_P}
-
-PATCHES=( "${FILESDIR}"/${PN}-4.18-darwin.patch )
 
 src_prepare() {
 	# Sub-slot sanity check
@@ -49,14 +50,12 @@ src_prepare() {
 
 src_configure() {
 	configuration() {
-		local incdir=$(python_get_includedir)
 		local myconf=(
 			"${PYTHON}"
 			"${S}"/configure.py
+			--sip-module PyQt5.sip
 			--sysroot="${ESYSROOT}/usr"
-			--bindir="${EPREFIX}/usr/bin"
-			--destdir="$(python_get_sitedir)"
-			--incdir="${incdir#${SYSROOT}}"
+			--no-tools
 			AR="$(tc-getAR) cqs"
 			CC="$(tc-getCC)"
 			CFLAGS="${CFLAGS}"
@@ -84,10 +83,8 @@ src_compile() {
 src_install() {
 	installation() {
 		emake DESTDIR="${D}" install
-		python_optimize
 	}
 	python_foreach_impl run_in_build_dir installation
 
 	einstalldocs
-	use doc && dodoc -r doc/html
 }
