@@ -47,9 +47,9 @@ index 25c3dce..7a6e08a 100644
  
  class ZipUtil : public ArchiveUtil
  {
-diff -Naur a/rbutilqt.pro b/rbutilqt.pro
---- a/rbutilqt.pro	2019-11-10 06:45:50.000000000 +0000
-+++ b/rbutilqt.pro	2019-12-04 22:43:30.144259710 +0000
+diff --git a/rbutil/rbutilqt/rbutilqt.pro b/rbutil/rbutilqt/rbutilqt.pro
+--- a/rbutil/rbutilqt/rbutilqt.pro	2019-11-10 06:45:50.000000000 +0000
++++ b/rbutil/rbutilqt/rbutilqt.pro	2019-12-04 22:43:30.144259710 +0000
 @@ -131,7 +131,7 @@
  
  DEPENDPATH = $$INCLUDEPATH
