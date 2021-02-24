@@ -29,7 +29,7 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/RockboxUtility-v${PV}"
+S="${WORKDIR}/${P}"
 QTDIR="${PN}/${PN}qt"
 
 PATCHES=(
