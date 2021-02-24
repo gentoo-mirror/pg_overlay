@@ -1,0 +1,578 @@
+diff -up firefox-86.0/Cargo.lock.1686888-dump-syms firefox-86.0/Cargo.lock
+--- firefox-86.0/Cargo.lock.1686888-dump-syms	2021-02-22 15:47:04.000000000 +0100
++++ firefox-86.0/Cargo.lock	2021-02-24 10:01:09.217178617 +0100
+@@ -1241,6 +1241,13 @@ dependencies = [
+ ]
+ 
+ [[package]]
++name = "dump_syms_rust_demangle"
++version = "0.1.0"
++dependencies = [
++ "rustc-demangle",
++]
++
++[[package]]
+ name = "dwrote"
+ version = "0.11.0"
+ source = "registry+https://github.com/rust-lang/crates.io-index"
+diff -up firefox-86.0/Cargo.toml.1686888-dump-syms firefox-86.0/Cargo.toml
+--- firefox-86.0/Cargo.toml.1686888-dump-syms	2021-02-22 15:47:04.000000000 +0100
++++ firefox-86.0/Cargo.toml	2021-02-24 10:01:09.217178617 +0100
+@@ -13,6 +13,7 @@ members = [
+   "netwerk/test/http3server",
+   "security/manager/ssl/osclientcerts",
+   "testing/geckodriver",
++  "toolkit/crashreporter/rust",
+   "toolkit/crashreporter/rust_minidump_writer_linux",
+   "toolkit/library/gtest/rust",
+   "toolkit/library/rust/",
+diff -up firefox-86.0/python/mozbuild/mozbuild/action/dumpsymbols.py.1686888-dump-syms firefox-86.0/python/mozbuild/mozbuild/action/dumpsymbols.py
+--- firefox-86.0/python/mozbuild/mozbuild/action/dumpsymbols.py.1686888-dump-syms	2021-02-22 14:43:46.000000000 +0100
++++ firefox-86.0/python/mozbuild/mozbuild/action/dumpsymbols.py	2021-02-24 10:01:09.218178640 +0100
+@@ -29,7 +29,29 @@ def dump_symbols(target, tracking_file,
+     # Build default args for symbolstore.py based on platform.
+     sym_store_args = []
+ 
+-    dump_syms_bin = buildconfig.substs["DUMP_SYMS"]
++    # Find the `dump_syms` binary to use.
++    dump_syms_bin = None
++    dump_syms_binaries = []
++
++    default_bin = buildconfig.substs.get("DUMP_SYMS")
++    if default_bin:
++        dump_syms_binaries.append(default_bin)
++
++    # Fallback to the in-tree breakpad version.
++    dump_syms_binaries.append(
++        os.path.join(
++            buildconfig.topobjdir,
++            "dist",
++            "host",
++            "bin",
++            "dump_syms" + buildconfig.substs["BIN_SUFFIX"],
++        )
++    )
++
++    for dump_syms_bin in dump_syms_binaries:
++        if os.path.exists(dump_syms_bin):
++            break
++
+     os_arch = buildconfig.substs["OS_ARCH"]
+     if os_arch == "WINNT":
+         sym_store_args.extend(["-c", "--vcs-info"])
+diff -up firefox-86.0/taskcluster/ci/toolchain/minidump_stackwalk.yml.1686888-dump-syms firefox-86.0/taskcluster/ci/toolchain/minidump_stackwalk.yml
+--- firefox-86.0/taskcluster/ci/toolchain/minidump_stackwalk.yml.1686888-dump-syms	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/taskcluster/ci/toolchain/minidump_stackwalk.yml	2021-02-24 10:01:09.218178640 +0100
+@@ -17,7 +17,9 @@ job-defaults:
+             - 'config/external/zlib'
+             - 'moz.configure'
+             - 'toolkit/crashreporter'
++            - 'toolkit/crashreporter/google-breakpad/src/common'
+             - 'toolkit/crashreporter/google-breakpad/src/processor'
++            - 'toolkit/crashreporter/rust'
+             - 'tools/crashreporter/'
+         toolchain-artifact: public/build/minidump_stackwalk.tar.xz
+     run-on-projects:
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/dwarf/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/dwarf/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/dwarf/moz.build.1686888-dump-syms	2021-02-24 10:01:09.218178640 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/dwarf/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -0,0 +1,35 @@
++# -*- Mode: python; indent-tabs-mode: nil; tab-width: 40 -*-
++# vim: set filetype=python:
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++
++HostLibrary('host_breakpad_dwarf_s')
++HOST_SOURCES += [
++    'bytereader.cc',
++    'dwarf2diehandler.cc',
++    'dwarf2reader.cc',
++    'elf_reader.cc',
++    'functioninfo.cc',
++]
++HOST_CXXFLAGS += [
++    '-O2',
++    '-g',
++]
++
++# need static lib
++FORCE_STATIC_LIB = True
++
++# This code is only compiled for build-time tools,
++# so enabling RTTI should be fine.
++HOST_CXXFLAGS += [
++    '-frtti',
++    '-funsigned-char',
++]
++
++if CONFIG['OS_ARCH'] == 'Darwin':
++    HOST_CXXFLAGS += [
++        '-stdlib=libc++',
++    ]
++
++include('/toolkit/crashreporter/crashreporter.mozbuild')
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/linux/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/linux/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/linux/moz.build.1686888-dump-syms	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/linux/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -21,6 +21,24 @@ if CONFIG['OS_TARGET'] != 'Android':
+         'http_upload.cc',
+     ]
+ 
++if CONFIG['HOST_OS_ARCH'] == 'Linux':
++    HostLibrary('host_breakpad_linux_common_s')
++
++    HOST_SOURCES += [
++        'crc32.cc',
++        'dump_symbols.cc',
++        'elf_symbols_to_module.cc',
++        'elfutils.cc',
++        'file_id.cc',
++        'linux_libc_support.cc',
++        'memory_mapped_file.cc',
++    ]
++
++    HOST_CXXFLAGS += [
++        '-O2',
++        '-g',
++    ]
++
+ if CONFIG['OS_TARGET'] == 'Android':
+     DEFINES['ANDROID_NDK_MAJOR_VERSION'] = CONFIG['ANDROID_NDK_MAJOR_VERSION']
+     DEFINES['ANDROID_NDK_MINOR_VERSION'] = CONFIG['ANDROID_NDK_MINOR_VERSION']
+@@ -36,6 +54,8 @@ if not CONFIG['HAVE_GETCONTEXT']:
+ 
+ Library('breakpad_linux_common_s')
+ 
++HOST_DEFINES['NO_STABS_SUPPORT'] = True
++
+ include('/toolkit/crashreporter/crashreporter.mozbuild')
+ 
+ if CONFIG['CC_TYPE'] in ('clang', 'gcc'):
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/mac/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/mac/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/mac/moz.build.1686888-dump-syms	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/mac/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -13,6 +13,26 @@ UNIFIED_SOURCES += [
+     'macho_walker.cc',
+ ]
+ 
++if CONFIG['HOST_OS_ARCH'] != 'Darwin':
++    HOST_CXXFLAGS += [
++        '-I%s/toolkit/crashreporter/google-breakpad/src/third_party/mac_headers/' % TOPSRCDIR,
++    ]
++
++# This is a little weird, but we're building a host and a target lib here.
++# The host lib is used for dump_syms, and the target lib for the
++# crash reporter client.  Therefore, we don't need all the srcs in both.
++if CONFIG['MOZ_CRASHREPORTER']:
++    HOST_SOURCES += UNIFIED_SOURCES
++    HOST_SOURCES += [
++        'dump_syms.cc',
++    ]
++    HOST_CXXFLAGS += [
++        '-O2',
++        '-g',
++        '-stdlib=libc++',
++    ]
++    HostLibrary('host_breakpad_mac_common_s')
++
+ SOURCES += [
+     'bootstrap_compat.cc',
+     'HTTPMultipartUpload.m',
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/moz.build.1686888-dump-syms	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -14,6 +14,51 @@ if CONFIG['OS_ARCH'] == 'Darwin':
+         'md5.cc',
+     ]
+ 
++if CONFIG['OS_ARCH'] == 'Linux':
++    HOST_DEFINES['HAVE_A_OUT_H'] = True
++elif CONFIG['OS_ARCH'] == 'Darwin':
++    HOST_DEFINES['HAVE_MACH_O_NLIST_H'] = True
++    HOST_SOURCES += [
++        'stabs_reader.cc',
++        'stabs_to_module.cc',
++    ]
++    if CONFIG['HOST_OS_ARCH'] != 'Darwin':
++        HOST_CXXFLAGS += [
++            '-I%s/toolkit/crashreporter/google-breakpad/src/third_party/mac_headers/' % TOPSRCDIR,
++        ]
++
++if CONFIG['HOST_OS_ARCH'] != 'WINNT':
++    if CONFIG['OS_ARCH'] in ('Darwin', 'Linux'):
++        DIRS += ['dwarf']
++
++    HOST_SOURCES += [
++        'arm_ex_reader.cc',
++        'arm_ex_to_module.cc',
++        'convert_UTF.cc',
++        'dwarf_cfi_to_module.cc',
++        'dwarf_cu_to_module.cc',
++        'dwarf_line_to_module.cc',
++        'dwarf_range_list_handler.cc',
++        'language.cc',
++        'md5.cc',
++        'module.cc',
++        'path_helper.cc',
++        'string_conversion.cc',
++    ]
++    if CONFIG['OS_ARCH'] == 'Darwin':
++        HOST_CXXFLAGS += [
++            '-stdlib=libc++',
++        ]
++    HOST_CXXFLAGS += [
++        '-O2',
++        '-g',
++    ]
++    HOST_DEFINES['HAVE_RUST_DEMANGLE'] = True
++    LOCAL_INCLUDES += [
++        '/toolkit/crashreporter/rust',
++    ]
++    HostLibrary('host_breakpad_common_s')
++
+ Library('breakpad_common_s')
+ 
+ include('/toolkit/crashreporter/crashreporter.mozbuild')
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/solaris/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/solaris/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/solaris/moz.build.1686888-dump-syms	2021-02-24 10:01:09.218178640 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/common/solaris/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -0,0 +1,34 @@
++# -*- Mode: python; indent-tabs-mode: nil; tab-width: 40 -*-
++# vim: set filetype=python:
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++
++UNIFIED_SOURCES += [
++    'dump_symbols.cc',
++    'file_id.cc',
++    'guid_creator.cc',
++]
++
++HostLibrary('host_breakpad_solaris_common_s')
++
++Library('breakpad_solaris_common_s')
++
++# not compiling http_upload.cc currently
++# since it depends on libcurl
++HOST_SOURCES += [
++    'dump_symbols.cc',
++    'file_id.cc',
++    'guid_creator.cc',
++]
++HOST_CXXFLAGS += [
++    '-O2',
++    '-g',
++]
++
++FINAL_LIBRARY = 'xul'
++
++LOCAL_INCLUDES += [
++    '../..',
++]
++
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/linux/dump_syms/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/linux/dump_syms/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/linux/dump_syms/moz.build.1686888-dump-syms	2021-02-24 10:01:09.218178640 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/linux/dump_syms/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -0,0 +1,45 @@
++# -*- Mode: python; indent-tabs-mode: nil; tab-width: 40 -*-
++# vim: set filetype=python:
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++
++HostProgram('dump_syms')
++
++HOST_SOURCES += [
++    'dump_syms.cc',
++]
++
++HOST_CXXFLAGS += [
++    '-O2',
++    '-g',
++]
++
++# host_breakpad_linux_common_s needs to come first
++HOST_USE_LIBS += [
++    'host_breakpad_linux_common_s',
++]
++HOST_USE_LIBS += [
++    'host_breakpad_common_s',
++    'host_breakpad_dwarf_s',
++]
++# Order matters here, but HOST_USE_LIBS must be sorted.
++HOST_USE_LIBS += [
++    'dump_syms_rust_demangle',
++]
++# Ideally, this should be derived from the output of rustc
++# --print=native-static-libs or something like that.
++HOST_OS_LIBS += [
++    'dl',
++    'pthread',
++]
++if CONFIG['HOST_OS_ARCH'] == 'Linux':
++    HOST_OS_LIBS += [
++        'rt',
++    ]
++
++LOCAL_INCLUDES += [
++    '../../../common/linux',
++]
++
++include('/toolkit/crashreporter/crashreporter.mozbuild')
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/mac/dump_syms/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/mac/dump_syms/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/mac/dump_syms/moz.build.1686888-dump-syms	2021-02-24 10:01:09.218178640 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/mac/dump_syms/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -0,0 +1,52 @@
++# -*- Mode: python; indent-tabs-mode: nil; tab-width: 40 -*-
++# vim: set filetype=python:
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++
++HostProgram('dump_syms')
++
++HOST_SOURCES += [
++    'dump_syms_tool.cc',
++]
++
++HOST_CXXFLAGS += [
++    '-O2',
++    '-g',
++    '-pthread',
++    '-stdlib=libc++',
++]
++
++# Order matters here, but HOST_USE_LIBS must be sorted.
++HOST_USE_LIBS += [
++    'host_breakpad_mac_common_s',
++]
++HOST_USE_LIBS += [
++    'host_breakpad_common_s',
++    'host_breakpad_dwarf_s',
++]
++# Order matters here, but HOST_USE_LIBS must be sorted.
++HOST_USE_LIBS += [
++    'dump_syms_rust_demangle',
++]
++# Ideally, this should be derived from the output of rustc
++# --print=native-static-libs or something like that.
++HOST_OS_LIBS += [
++    'dl',
++    'pthread',
++]
++if CONFIG['HOST_OS_ARCH'] == 'Linux':
++    HOST_OS_LIBS += [
++        'rt',
++    ]
++
++LOCAL_INCLUDES += [
++    '../../../common/mac',
++]
++
++if CONFIG['HOST_OS_ARCH'] != 'Darwin':
++    HOST_CXXFLAGS += [
++        '-I%s/toolkit/crashreporter/google-breakpad/src/third_party/mac_headers/' % TOPSRCDIR,
++    ]
++
++include('/toolkit/crashreporter/crashreporter.mozbuild')
+diff -up firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/solaris/dump_syms/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/solaris/dump_syms/moz.build
+--- firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/solaris/dump_syms/moz.build.1686888-dump-syms	2021-02-24 10:01:09.218178640 +0100
++++ firefox-86.0/toolkit/crashreporter/google-breakpad/src/tools/solaris/dump_syms/moz.build	2021-02-24 10:01:09.218178640 +0100
+@@ -0,0 +1,27 @@
++# -*- Mode: python; indent-tabs-mode: nil; tab-width: 40 -*-
++# vim: set filetype=python:
++# This Source Code Form is subject to the terms of the Mozilla Public
++# License, v. 2.0. If a copy of the MPL was not distributed with this
++# file, You can obtain one at http://mozilla.org/MPL/2.0/.
++
++HostProgram('dump_syms')
++
++HOST_SOURCES += [
++    'dump_syms.cc',
++]
++
++HOST_CXXFLAGS += [
++    '-O2',
++    '-g',
++]
++
++HOST_USE_LIBS += [
++    'host_breakpad_common_s',
++    'host_breakpad_solaris_common_s',
++]
++
++LOCAL_INCLUDES += [
++    '../../../common/solaris',
++]
++
++include('/toolkit/crashreporter/crashreporter.mozbuild')
+diff -up firefox-86.0/toolkit/crashreporter/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/moz.build
+--- firefox-86.0/toolkit/crashreporter/moz.build.1686888-dump-syms	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/toolkit/crashreporter/moz.build	2021-02-24 10:02:32.742171784 +0100
+@@ -43,6 +43,11 @@ if CONFIG["MOZ_CRASHREPORTER"]:
+             "google-breakpad/src/common/mac",
+             "google-breakpad/src/processor",
+         ]
++        if not CONFIG["DUMP_SYMS"]:
++            DIRS += [
++                "google-breakpad/src/tools/mac/dump_syms",
++                "rust",
++            ]
+ 
+     elif CONFIG["OS_ARCH"] == "Linux":
+         DIRS += [
+@@ -56,6 +61,12 @@ if CONFIG["MOZ_CRASHREPORTER"]:
+         if CONFIG["MOZ_OXIDIZED_BREAKPAD"]:
+             DIRS += ["rust_minidump_writer_linux"]
+ 
++        if not CONFIG["DUMP_SYMS"] and CONFIG["HOST_OS_ARCH"] == "Linux":
++            DIRS += [
++                "google-breakpad/src/tools/linux/dump_syms",
++                "rust",
++            ]
++
+     DIRS += [
+         "client",
+         "minidump-analyzer",
+diff -up firefox-86.0/toolkit/crashreporter/rust/Cargo.toml.1686888-dump-syms firefox-86.0/toolkit/crashreporter/rust/Cargo.toml
+--- firefox-86.0/toolkit/crashreporter/rust/Cargo.toml.1686888-dump-syms	2021-02-24 10:01:09.219178664 +0100
++++ firefox-86.0/toolkit/crashreporter/rust/Cargo.toml	2021-02-24 10:01:09.219178664 +0100
+@@ -0,0 +1,16 @@
++[package]
++name = "dump_syms_rust_demangle"
++version = "0.1.0"
++
++[dependencies]
++rustc-demangle = "0.1"
++
++[lib]
++path = "lib.rs"
++crate-type = ["staticlib"]
++test = false
++doctest = false
++bench = false
++doc = false
++plugin = false
++harness = false
+diff -up firefox-86.0/toolkit/crashreporter/rust/lib.rs.1686888-dump-syms firefox-86.0/toolkit/crashreporter/rust/lib.rs
+--- firefox-86.0/toolkit/crashreporter/rust/lib.rs.1686888-dump-syms	2021-02-24 10:01:09.219178664 +0100
++++ firefox-86.0/toolkit/crashreporter/rust/lib.rs	2021-02-24 10:01:09.219178664 +0100
+@@ -0,0 +1,32 @@
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this file,
++ * You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++extern crate rustc_demangle;
++
++use rustc_demangle::demangle;
++use std::ffi::{CStr, CString};
++use std::ptr;
++
++/// Demangle `name` as a Rust symbol.
++///
++/// The resulting pointer should be freed with `free_demangled_name`.
++#[no_mangle]
++pub extern "C" fn rust_demangle(name: *const std::os::raw::c_char) -> *mut std::os::raw::c_char {
++    let demangled = format!(
++        "{:#}",
++        demangle(&unsafe { CStr::from_ptr(name) }.to_string_lossy())
++    );
++    CString::new(demangled)
++        .map(|s| s.into_raw())
++        .unwrap_or(ptr::null_mut())
++}
++
++/// Free a string that was returned from `rust_demangle`.
++#[no_mangle]
++pub extern "C" fn free_rust_demangled_name(demangled: *mut std::os::raw::c_char) {
++    if demangled != ptr::null_mut() {
++        // Just take ownership here.
++        unsafe { CString::from_raw(demangled) };
++    }
++}
+diff -up firefox-86.0/toolkit/crashreporter/rust/moz.build.1686888-dump-syms firefox-86.0/toolkit/crashreporter/rust/moz.build
+--- firefox-86.0/toolkit/crashreporter/rust/moz.build.1686888-dump-syms	2021-02-24 10:01:09.219178664 +0100
++++ firefox-86.0/toolkit/crashreporter/rust/moz.build	2021-02-24 10:01:09.219178664 +0100
+@@ -0,0 +1 @@
++HostRustLibrary("dump_syms_rust_demangle")
+diff -up firefox-86.0/toolkit/crashreporter/rust/rust_demangle.h.1686888-dump-syms firefox-86.0/toolkit/crashreporter/rust/rust_demangle.h
+--- firefox-86.0/toolkit/crashreporter/rust/rust_demangle.h.1686888-dump-syms	2021-02-24 10:01:09.219178664 +0100
++++ firefox-86.0/toolkit/crashreporter/rust/rust_demangle.h	2021-02-24 10:01:09.219178664 +0100
+@@ -0,0 +1,21 @@
++/* -*- Mode: C++; tab-width: 8; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
++/* vim: set ts=8 sts=2 et sw=2 tw=80: */
++/* This Source Code Form is subject to the terms of the Mozilla Public
++ * License, v. 2.0. If a copy of the MPL was not distributed with this
++ * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
++
++#ifndef __RUST_DEMANGLE_H__
++#define __RUST_DEMANGLE_H__
++
++#ifdef __cplusplus
++extern "C" {
++#endif
++
++extern char* rust_demangle(const char*);
++extern void free_rust_demangled_name(char*);
++
++#ifdef __cplusplus
++}
++#endif
++
++#endif /* __RUST_DEMANGLE_H__ */
+diff -up firefox-86.0/toolkit/crashreporter/tools/unit-symbolstore.py.1686888-dump-syms firefox-86.0/toolkit/crashreporter/tools/unit-symbolstore.py
+--- firefox-86.0/toolkit/crashreporter/tools/unit-symbolstore.py.1686888-dump-syms	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/toolkit/crashreporter/tools/unit-symbolstore.py	2021-02-24 10:01:09.219178664 +0100
+@@ -539,9 +539,12 @@ class TestFunctional(HelperMixin, unitte
+         self.script_path = os.path.join(
+             self.topsrcdir, "toolkit", "crashreporter", "tools", "symbolstore.py"
+         )
+-        self.dump_syms = buildconfig.substs.get("DUMP_SYMS")
+-        if not self.dump_syms:
+-            self.skip_test = True
++        if "DUMP_SYMS" in buildconfig.substs:
++            self.dump_syms = buildconfig.substs["DUMP_SYMS"]
++        else:
++            self.dump_syms = os.path.join(
++                buildconfig.topobjdir, "dist", "host", "bin", "dump_syms"
++            )
+ 
+         if target_platform() == "WINNT":
+             self.target_bin = os.path.join(
+diff -up firefox-86.0/tools/crashreporter/app.mozbuild.1686888-dump-syms firefox-86.0/tools/crashreporter/app.mozbuild
+--- firefox-86.0/tools/crashreporter/app.mozbuild.1686888-dump-syms	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/tools/crashreporter/app.mozbuild	2021-02-24 10:01:09.219178664 +0100
+@@ -4,6 +4,20 @@
+ 
+ DIRS += [
+     '/config/external/zlib',
++    '/toolkit/crashreporter/google-breakpad/src/common',
+     '/toolkit/crashreporter/google-breakpad/src/processor',
++    '/toolkit/crashreporter/rust',
+     '/tools/crashreporter/minidump_stackwalk',
+ ]
++
++if CONFIG['OS_ARCH'] == 'Linux':
++    DIRS += [
++        '/toolkit/crashreporter/google-breakpad/src/common/linux',
++        '/toolkit/crashreporter/google-breakpad/src/tools/linux/dump_syms',
++    ]
++
++if CONFIG['OS_ARCH'] == 'Darwin':
++    DIRS += [
++        '/toolkit/crashreporter/google-breakpad/src/common/mac',
++        '/toolkit/crashreporter/google-breakpad/src/tools/mac/dump_syms',
++    ]
+diff -up firefox-86.0/tools/lint/clippy.yml.1686888-dump-syms firefox-86.0/tools/lint/clippy.yml
+--- firefox-86.0/tools/lint/clippy.yml.1686888-dump-syms	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/tools/lint/clippy.yml	2021-02-24 10:01:09.219178664 +0100
+@@ -63,6 +63,7 @@ clippy:
+         # not_unsafe_ptr_arg_deref
+         - modules/libpref/parser/
+         - tools/profiler/rust-helper/
++        - toolkit/crashreporter/rust/
+         - toolkit/library/rust/shared/
+         - toolkit/library/gtest/rust/
+         # not_unsafe_ptr_arg_deref

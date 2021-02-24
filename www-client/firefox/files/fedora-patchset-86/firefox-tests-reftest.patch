@@ -1,0 +1,472 @@
+diff -U0 firefox-86.0/dom/canvas/test/reftest/filters/reftest.list.firefox-tests-reftest firefox-86.0/dom/canvas/test/reftest/filters/reftest.list
+--- firefox-86.0/dom/canvas/test/reftest/filters/reftest.list.firefox-tests-reftest	2021-02-22 14:43:36.000000000 +0100
++++ firefox-86.0/dom/canvas/test/reftest/filters/reftest.list	2021-02-23 17:33:30.549621194 +0100
+@@ -21 +20,0 @@
+-== units-ex.html ref.html
+diff -U0 firefox-86.0/dom/html/reftests/reftest.list.firefox-tests-reftest firefox-86.0/dom/html/reftests/reftest.list
+--- firefox-86.0/dom/html/reftests/reftest.list.firefox-tests-reftest	2021-02-22 14:43:37.000000000 +0100
++++ firefox-86.0/dom/html/reftests/reftest.list	2021-02-23 17:33:30.549621194 +0100
+@@ -46 +45,0 @@
+-skip-if(isCoverageBuild) pref(layout.css.image-orientation.initial-from-image,true) fuzzy(0-2,0-830) == bug917595-iframe-1.html    bug917595-1-ref.html
+diff -U0 firefox-86.0/dom/media/test/reftest/reftest.list.firefox-tests-reftest firefox-86.0/dom/media/test/reftest/reftest.list
+--- firefox-86.0/dom/media/test/reftest/reftest.list.firefox-tests-reftest	2021-02-22 15:47:04.000000000 +0100
++++ firefox-86.0/dom/media/test/reftest/reftest.list	2021-02-23 17:33:30.549621194 +0100
+@@ -1,6 +0,0 @@
+-skip-if(Android) fuzzy-if(OSX,0-80,0-76800) fuzzy-if(winWidget,0-62,0-76799) fuzzy-if(gtkWidget&&layersGPUAccelerated,0-70,0-600) HTTP(..) == short.mp4.firstframe.html short.mp4.firstframe-ref.html
+-skip-if(Android) fuzzy-if(OSX,0-87,0-76797) fuzzy-if(winWidget,0-60,0-76797) fuzzy-if(gtkWidget&&layersGPUAccelerated,0-60,0-1800) HTTP(..) == short.mp4.lastframe.html short.mp4.lastframe-ref.html
+-skip-if(Android) skip-if(winWidget) fuzzy-if(gtkWidget&&layersGPUAccelerated,0-57,0-4281) fuzzy-if(OSX,55-80,4173-4417) HTTP(..) == bipbop_300_215kbps.mp4.lastframe.html bipbop_300_215kbps.mp4.lastframe-ref.html
+-skip-if(Android) fuzzy-if(OSX,0-25,0-175921) fuzzy-if(winWidget,0-71,0-179198) fuzzy-if((/^Windows\x20NT\x2010\.0/.test(http.oscpu))&&(/^aarch64-msvc/.test(xulRuntime.XPCOMABI)),0-255,0-179500) HTTP(..) == gizmo.mp4.seek.html gizmo.mp4.55thframe-ref.html
+-skip-if(Android) skip-if(MinGW) skip-if((/^Windows\x20NT\x2010\.0/.test(http.oscpu))&&(/^aarch64-msvc/.test(xulRuntime.XPCOMABI))) fuzzy(0-10,0-778236) == image-10bits-rendering-video.html image-10bits-rendering-ref.html
+-skip-if(Android) skip-if(MinGW) skip-if((/^Windows\x20NT\x2010\.0/.test(http.oscpu))&&(/^aarch64-msvc/.test(xulRuntime.XPCOMABI))) fuzzy(0-10,0-778536) == image-10bits-rendering-90-video.html image-10bits-rendering-90-ref.html
+diff -U0 firefox-86.0/dom/media/webvtt/test/reftest/reftest.list.firefox-tests-reftest firefox-86.0/dom/media/webvtt/test/reftest/reftest.list
+--- firefox-86.0/dom/media/webvtt/test/reftest/reftest.list.firefox-tests-reftest	2021-02-22 14:43:37.000000000 +0100
++++ firefox-86.0/dom/media/webvtt/test/reftest/reftest.list	2021-02-23 17:33:30.549621194 +0100
+@@ -1,2 +0,0 @@
+-skip-if(Android) fuzzy-if((/^Windows\x20NT\x2010\.0/.test(http.oscpu))&&(/^aarch64-msvc/.test(xulRuntime.XPCOMABI)),0-136,0-427680) == vtt_update_display_after_removed_cue.html vtt_update_display_after_removed_cue_ref.html
+-skip-if(Android) fuzzy-if(winWidget,0-170,0-170) == vtt_overlapping_time.html vtt_overlapping_time-ref.html
+diff -U0 firefox-86.0/gfx/layers/apz/test/reftest/reftest.list.firefox-tests-reftest firefox-86.0/gfx/layers/apz/test/reftest/reftest.list
+--- firefox-86.0/gfx/layers/apz/test/reftest/reftest.list.firefox-tests-reftest	2021-02-23 17:33:30.550621224 +0100
++++ firefox-86.0/gfx/layers/apz/test/reftest/reftest.list	2021-02-23 17:45:19.558639275 +0100
+@@ -6 +6 @@
+-fuzzy-if(Android,0-1,0-2) fuzzy-if(webrender&&gtkWidget&&!swgl,7-8,24-32) fuzzy-if(webrender&&cocoaWidget,22-22,44-44) skip-if(!asyncPan) pref(apz.allow_zooming,true) == async-scrollbar-1-v.html async-scrollbar-1-v-ref.html
++fuzzy-if(Android,0-1,0-2) fuzzy-if(webrender&&gtkWidget&&!swgl,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,22-22,44-44) skip-if(!asyncPan) pref(apz.allow_zooming,true) == async-scrollbar-1-v.html async-scrollbar-1-v-ref.html
+@@ -8,2 +8,2 @@
+-fuzzy-if(Android,0-6,0-6) fuzzy-if(webrender&&gtkWidget&&!swgl,2-2,19-20) fuzzy-if(webrender&&cocoaWidget,17-17,88-88) skip-if(!asyncPan) pref(apz.allow_zooming,true) == async-scrollbar-1-vh.html async-scrollbar-1-vh-ref.html
+-fuzzy-if(Android,0-1,0-2) fuzzy-if(webrender&&gtkWidget&&!swgl,7-8,24-32) fuzzy-if(webrender&&cocoaWidget,22-22,44-44) skip-if(!asyncPan) pref(apz.allow_zooming,true) == async-scrollbar-1-v-rtl.html async-scrollbar-1-v-rtl-ref.html
++fuzzy-if(Android,0-6,0-6) fuzzy-if(webrender&&gtkWidget&&!swgl,0-20,0-50) fuzzy-if(webrender&&cocoaWidget,17-17,88-88) skip-if(!asyncPan) pref(apz.allow_zooming,true) == async-scrollbar-1-vh.html async-scrollbar-1-vh-ref.html
++fuzzy-if(Android,0-1,0-2) fuzzy-if(webrender&&gtkWidget&&!swgl,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,22-22,44-44) skip-if(!asyncPan) pref(apz.allow_zooming,true) == async-scrollbar-1-v-rtl.html async-scrollbar-1-v-rtl-ref.html
+@@ -21 +21 @@
+-# On desktop, even more fuzz is needed because thumb scaling is not exactly proportional: making the page twice as long 
++# On desktop, even more fuzz is needed because thumb scaling is not exactly proportional: making the page twice as long
+diff -U0 firefox-86.0/gfx/tests/reftest/reftest.list.firefox-tests-reftest firefox-86.0/gfx/tests/reftest/reftest.list
+--- firefox-86.0/gfx/tests/reftest/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/gfx/tests/reftest/reftest.list	2021-02-23 17:33:30.550621224 +0100
+@@ -15 +14,0 @@
+-fuzzy-if(winWidget&&webrender,90-95,1000-1100) == 1451168.html 1451168-ref.html
+@@ -27 +25,0 @@
+-skip-if(!asyncPan||!webrender||Android) fuzzy-if(winWidget,94-94,3415-3415) pref(apz.allow_zooming,true) == picture-caching-on-async-zoom.html picture-caching-on-async-zoom.html?ref
+diff -U0 firefox-86.0/image/test/reftest/downscaling/reftest.list.firefox-tests-reftest firefox-86.0/image/test/reftest/downscaling/reftest.list
+--- firefox-86.0/image/test/reftest/downscaling/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/image/test/reftest/downscaling/reftest.list	2021-02-23 17:33:30.550621224 +0100
+@@ -90,4 +89,0 @@
+-# Skip on Android because it runs reftests via http, and moz-icon isn't
+-# accessible from http/https origins anymore.
+-fuzzy(0-17,0-3221) fuzzy-if(gtkWidget&&!webrender,4-4,2616-2616) fuzzy-if(gtkWidget&&!webrender&&!layersGPUAccelerated,4-4,2209-2209) fuzzy-if(gtkWidget&&webrender,0-0,0-0) skip-if(Android) == downscale-moz-icon-1.html downscale-moz-icon-1-ref.html # gtkWidget Bug 1592059: regular is 2616, no-accel is 2209, qr passes with 0
+-
+@@ -177,5 +172,0 @@
+-
+-# Skip on WinXP with skia content
+-# Skip on Android because it runs reftests via http, and moz-icon isn't
+-# accessible from http/https origins anymore.
+-fuzzy(0-53,0-6391) fuzzy-if(gtkWidget&&webrender,18-19,5502-5568) fails-if(/^Windows\x20NT\x205\.1/.test(http.oscpu)) skip-if(Android) == downscale-moz-icon-1.html downscale-moz-icon-1-ref.html # gtkWidget Bug 1592059
+diff -U0 firefox-86.0/layout/reftests/abs-pos/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/abs-pos/reftest.list
+--- firefox-86.0/layout/reftests/abs-pos/reftest.list.firefox-tests-reftest	2021-02-22 14:43:43.000000000 +0100
++++ firefox-86.0/layout/reftests/abs-pos/reftest.list	2021-02-23 17:33:30.550621224 +0100
+@@ -54 +53,0 @@
+-fuzzy-if(gtkWidget,0-1,0-1) fuzzy-if(Android,0-9,0-185) fuzzy-if(asyncPan&&!layersGPUAccelerated,0-140,0-144) == scrollframe-2.html scrollframe-2-ref.html #bug 756530
+@@ -58 +56,0 @@
+-fuzzy-if(gtkWidget,0-1,0-19) fuzzy-if(Android,0-17,0-726) fuzzy-if(asyncPan&&!layersGPUAccelerated,0-110,0-114) fuzzy-if(browserIsRemote&&winWidget,0-143,0-114) == select-3.html select-3-ref.html
+diff -U0 firefox-86.0/layout/reftests/async-scrolling/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/async-scrolling/reftest.list
+--- firefox-86.0/layout/reftests/async-scrolling/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/async-scrolling/reftest.list	2021-02-23 17:49:55.300775341 +0100
+@@ -27 +27 @@
+-fuzzy-if(Android,0-8,0-4) fuzzy-if(webrender&&gtkWidget,32-32,30-32) fuzzy-if(webrender&&cocoaWidget,21-21,44-44) skip-if(!asyncPan) == position-fixed-transformed-1.html position-fixed-transformed-1-ref.html # Bug 1604338
++fuzzy-if(Android,0-8,0-4) fuzzy-if(webrender&&gtkWidget,32-50,30-50) fuzzy-if(webrender&&cocoaWidget,21-21,44-44) skip-if(!asyncPan) == position-fixed-transformed-1.html position-fixed-transformed-1-ref.html # Bug 1604338
+@@ -38 +38 @@
+-skip-if(!asyncPan) fuzzy(0-2,0-2) fuzzy-if(cocoaWidget&&!webrender,1-1,7-16) == fixed-pos-scrollable-1.html fixed-pos-scrollable-1-ref.html
++skip-if(!asyncPan) fuzzy(0-2,0-2) fuzzy-if(gtkWidget,0-5,0-5) fuzzy-if(cocoaWidget&&!webrender,0-10,0-16) == fixed-pos-scrollable-1.html fixed-pos-scrollable-1-ref.html
+@@ -52,2 +52,2 @@
+-fuzzy-if(Android,0-6,0-4) fuzzy-if(skiaContent&&!Android,0-1,0-34) fuzzy-if(webrender&&gtkWidget,34-34,30-32) fuzzy-if(webrender&&cocoaWidget,7-7,38-39) skip-if(!asyncPan) == offscreen-clipped-blendmode-1.html offscreen-clipped-blendmode-ref.html # Bug 1604338
+-fuzzy-if(Android,0-6,0-4) fuzzy-if(webrender&&gtkWidget,34-34,30-32) fuzzy-if(webrender&&cocoaWidget,7-7,38-39) skip-if(!asyncPan) == offscreen-clipped-blendmode-2.html offscreen-clipped-blendmode-ref.html # Bug 1604338
++fuzzy-if(Android,0-6,0-4) fuzzy-if(skiaContent&&!Android,0-1,0-34) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,7-7,38-39) skip-if(!asyncPan) == offscreen-clipped-blendmode-1.html offscreen-clipped-blendmode-ref.html # Bug 1604338
++fuzzy-if(Android,0-6,0-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,7-7,38-39) skip-if(!asyncPan) == offscreen-clipped-blendmode-2.html offscreen-clipped-blendmode-ref.html # Bug 1604338
+@@ -55,2 +55,2 @@
+-fuzzy-if(Android,0-6,0-4) fuzzy-if(webrender&&gtkWidget,34-34,30-32) fuzzy-if(webrender&&cocoaWidget,7-7,38-39) skip-if(!asyncPan) == offscreen-clipped-blendmode-4.html offscreen-clipped-blendmode-ref.html # Bug 1604338
+-fuzzy-if(Android,0-7,0-1680) fuzzy-if(webrender&&gtkWidget&&!swgl,1-1,10-20) fuzzy-if(webrender&&cocoaWidget,1-2,16-18) skip-if(!asyncPan) == perspective-scrolling-1.html perspective-scrolling-1-ref.html # Bug 1604338
++fuzzy-if(Android,0-6,0-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,7-7,38-39) skip-if(!asyncPan) == offscreen-clipped-blendmode-4.html offscreen-clipped-blendmode-ref.html # Bug 1604338
++fuzzy-if(Android,0-7,0-1680) fuzzy-if(webrender&&gtkWidget&&!swgl,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,1-2,16-18) skip-if(!asyncPan) == perspective-scrolling-1.html perspective-scrolling-1-ref.html # Bug 1604338
+@@ -58,2 +58,2 @@
+-fuzzy-if(Android,0-19,0-4) fuzzy-if(webrender&&gtkWidget,13-13,28-32) fuzzy-if(webrender&&cocoaWidget,13-13,44-44) skip-if(!asyncPan) == perspective-scrolling-3.html perspective-scrolling-3-ref.html # Bug 1604338
+-fuzzy-if(Android,0-7,0-4) fuzzy-if(webrender&&gtkWidget,29-30,30-32) fuzzy-if(webrender&&cocoaWidget,19-20,44-44) skip-if(!asyncPan) == perspective-scrolling-4.html perspective-scrolling-4-ref.html # Bug 1604338
++fuzzy-if(Android,0-19,0-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,13-13,44-44) skip-if(!asyncPan) == perspective-scrolling-3.html perspective-scrolling-3-ref.html # Bug 1604338
++fuzzy-if(Android,0-7,0-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,19-20,44-44) skip-if(!asyncPan) == perspective-scrolling-4.html perspective-scrolling-4-ref.html # Bug 1604338
+@@ -65,4 +65,4 @@
+-fuzzy-if(Android,0-19,0-4) fuzzy-if(webrender&&gtkWidget,19-19,32-32) fuzzy-if(webrender&&cocoaWidget,21-21,44-44) skip-if(!asyncPan) == fixed-pos-scrolled-clip-1.html fixed-pos-scrolled-clip-1-ref.html # Bug 1604338
+-fuzzy-if(Android,0-44,0-10) fuzzy-if(webrender&&gtkWidget,26-26,60-64) fuzzy-if(webrender&&cocoaWidget,13-13,81-82) skip-if(!asyncPan) == fixed-pos-scrolled-clip-2.html fixed-pos-scrolled-clip-2-ref.html # Bug 1604338
+-fuzzy-if(Android,0-6,0-8) fuzzy-if(webrender&&gtkWidget,28-28,30-60) fuzzy-if(webrender&&cocoaWidget,18-19,70-75) skip-if(!asyncPan) == fixed-pos-scrolled-clip-3.html fixed-pos-scrolled-clip-3-ref.html # Bug 1604338
+-fuzzy-if(Android,0-6,0-8) fuzzy-if(webrender&&gtkWidget,28-28,30-60) fuzzy-if(webrender&&cocoaWidget,18-19,70-75) skip-if(!asyncPan) == fixed-pos-scrolled-clip-4.html fixed-pos-scrolled-clip-4-ref.html # Bug 1604338
++fuzzy-if(Android,0-19,0-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,21-21,44-44) skip-if(!asyncPan) == fixed-pos-scrolled-clip-1.html fixed-pos-scrolled-clip-1-ref.html # Bug 1604338
++fuzzy-if(Android,0-44,0-10) fuzzy-if(webrender&&gtkWidget,0-100,0-100) fuzzy-if(webrender&&cocoaWidget,13-13,81-82) skip-if(!asyncPan) == fixed-pos-scrolled-clip-2.html fixed-pos-scrolled-clip-2-ref.html # Bug 1604338
++fuzzy-if(Android,0-6,0-8) fuzzy-if(webrender&&gtkWidget,0-50,0-100) fuzzy-if(webrender&&cocoaWidget,18-19,70-75) skip-if(!asyncPan) == fixed-pos-scrolled-clip-3.html fixed-pos-scrolled-clip-3-ref.html # Bug 1604338
++fuzzy-if(Android,0-6,0-8) fuzzy-if(webrender&&gtkWidget,0-50,0-100) fuzzy-if(webrender&&cocoaWidget,18-19,70-75) skip-if(!asyncPan) == fixed-pos-scrolled-clip-4.html fixed-pos-scrolled-clip-4-ref.html # Bug 1604338
+@@ -71 +70,0 @@
+-fuzzy-if(Android,0-8,0-4) fuzzy-if(webrender&&gtkWidget,25-25,30-32) fuzzy-if(webrender&&cocoaWidget,16-16,44-44) skip-if(!asyncPan) == position-sticky-scrolled-clip-1.html position-sticky-scrolled-clip-1-ref.html # Bug 1604338
+@@ -76,3 +75,3 @@
+-fuzzy-if(Android&&!webrender,3-3,4-4) fuzzy-if(Android&&webrender,10-10,4-4) fuzzy-if(webrender&&gtkWidget,20-20,32-32) fuzzy-if(webrender&&cocoaWidget,15-16,44-44) skip-if(!asyncPan) == position-sticky-transformed-in-scrollframe-2.html position-sticky-transformed-in-scrollframe-2-ref.html # Bug 1604338
+-fuzzy-if(Android&&!webrender,3-3,4-4) fuzzy-if(Android&&webrender,13-13,4-4) fuzzy-if(webrender&&gtkWidget,26-27,30-32) fuzzy-if(webrender&&cocoaWidget,16-16,44-44) skip-if(!asyncPan) == position-sticky-in-transformed-scrollframe-1.html position-sticky-in-transformed-scrollframe-ref.html # Bug 1604338
+-fuzzy-if(Android&&!webrender,3-3,4-4) fuzzy-if(Android&&webrender,13-13,4-4) fuzzy-if(webrender&&gtkWidget,26-27,30-32) fuzzy-if(webrender&&cocoaWidget,16-16,44-44) skip-if(!asyncPan) == position-sticky-in-transformed-scrollframe-2.html position-sticky-in-transformed-scrollframe-ref.html # Bug 1604338
++fuzzy-if(Android&&!webrender,3-3,4-4) fuzzy-if(Android&&webrender,10-10,4-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,15-16,44-44) skip-if(!asyncPan) == position-sticky-transformed-in-scrollframe-2.html position-sticky-transformed-in-scrollframe-2-ref.html # Bug 1604338
++fuzzy-if(Android&&!webrender,3-3,4-4) fuzzy-if(Android&&webrender,13-13,4-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,16-16,44-44) skip-if(!asyncPan) == position-sticky-in-transformed-scrollframe-1.html position-sticky-in-transformed-scrollframe-ref.html # Bug 1604338
++fuzzy-if(Android&&!webrender,3-3,4-4) fuzzy-if(Android&&webrender,13-13,4-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,16-16,44-44) skip-if(!asyncPan) == position-sticky-in-transformed-scrollframe-2.html position-sticky-in-transformed-scrollframe-ref.html # Bug 1604338
+diff -U0 firefox-86.0/layout/reftests/bidi/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/bidi/reftest.list
+--- firefox-86.0/layout/reftests/bidi/reftest.list.firefox-tests-reftest	2021-02-22 14:43:43.000000000 +0100
++++ firefox-86.0/layout/reftests/bidi/reftest.list	2021-02-23 17:33:30.550621224 +0100
+@@ -33,2 +32,0 @@
+-fuzzy-if(Android,0-1,0-6) fuzzy-if(cocoaWidget,0-1,0-2) == mixedChartype-02.html mixedChartype-02-ref.html
+-fuzzy-if(Android,0-1,0-6) fuzzy-if(cocoaWidget,0-1,0-2) == mixedChartype-02-j.html mixedChartype-02-ref.html
+@@ -157,16 +154,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-1a-ltr.html brackets-1a-ltr-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-1a-rtl.html brackets-1a-rtl-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-1b-ltr.html brackets-1b-ltr-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-1b-rtl.html brackets-1b-rtl-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-1c-ltr.html brackets-1c-ltr-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-1c-rtl.html brackets-1c-rtl-ref.html # Bug 1392106
+-fuzzy-if(Android,0-1,0-6) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-2a-ltr.html brackets-2a-ltr-ref.html # Bug 1392106
+-fuzzy-if(cocoaWidget,0-1,0-2) fuzzy-if(Android,0-254,0-557) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-2a-rtl.html brackets-2a-rtl-ref.html # Bug 1392106
+-fuzzy-if(Android,0-1,0-8) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-2b-ltr.html brackets-2b-ltr-ref.html # Bug 1392106
+-fuzzy-if(cocoaWidget,0-1,0-2) fuzzy-if(Android,0-1,0-6) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-2b-rtl.html brackets-2b-rtl-ref.html # Bug 1392106
+-fuzzy-if(cocoaWidget,0-1,0-2) fuzzy-if(Android,0-1,0-6) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-2c-ltr.html brackets-2c-ltr-ref.html # Bug 1392106
+-fuzzy-if(Android,0-254,0-231) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-2c-rtl.html brackets-2c-rtl-ref.html # Bug 1392106
+-fuzzy-if(cocoaWidget,0-1,0-3) fuzzy-if(Android,0-1,0-8) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-3a-ltr.html brackets-3a-ltr-ref.html # Bug 1392106
+-fuzzy-if(cocoaWidget,0-1,0-2) fuzzy-if(Android,0-1,0-6) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-3a-rtl.html brackets-3a-rtl-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-3b-ltr.html brackets-3b-ltr-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == brackets-3b-rtl.html brackets-3b-rtl-ref.html # Bug 1392106
+diff -U0 firefox-86.0/layout/reftests/border-radius/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/border-radius/reftest.list
+--- firefox-86.0/layout/reftests/border-radius/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/border-radius/reftest.list	2021-02-23 17:33:30.550621224 +0100
+@@ -54 +53,0 @@
+-fuzzy-if(Android,0-8,0-469) fuzzy-if(skiaContent,0-21,0-76) fuzzy-if(winWidget,0-144,0-335) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == clipping-6.html clipping-6-ref.html # PaintedLayer and MaskLayer with transforms that aren't identical, bug 1392106
+diff -U0 firefox-86.0/layout/reftests/box-shadow/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/box-shadow/reftest.list
+--- firefox-86.0/layout/reftests/box-shadow/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/box-shadow/reftest.list	2021-02-23 17:33:30.550621224 +0100
+@@ -18 +17,0 @@
+-fuzzy-if(skiaContent,0-1,0-18) random-if(layersGPUAccelerated) == boxshadow-mixed.html boxshadow-mixed-ref.html
+diff -U0 firefox-86.0/layout/reftests/bugs/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/bugs/reftest.list
+--- firefox-86.0/layout/reftests/bugs/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/bugs/reftest.list	2021-02-23 17:33:30.550621224 +0100
+@@ -464 +463,0 @@
+-== 341043-1a.html 341043-1-ref.html
+@@ -553 +551,0 @@
+-== 363706-1.html 363706-1-ref.html
+@@ -672 +670 @@
+-== 376532-1.html 376532-1-ref.html
++fuzzy-if(gtkWidget,0-150,0-50) == 376532-1.html 376532-1-ref.html
+@@ -763 +761 @@
+-== 389074-1.html 389074-1-ref.html
++fuzzy-if(gtkWidget,0-150,0-80) == 389074-1.html 389074-1-ref.html
+@@ -927,2 +924,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == 411059-1.html 411059-1-ref.html # Bug 1392106
+-fuzzy-if(webrender&&winWidget,127-129,652-770) == 411334-1.xml 411334-1-ref.xml
+@@ -1001 +996,0 @@
+-== 422394-1.html 422394-1-ref.html
+@@ -1176 +1170,0 @@
+-fails-if(Android||cocoaWidget||winWidget) == chrome://reftest/content/bugs/456147.xhtml 456147-ref.html # bug 458047
+@@ -1387,2 +1380,0 @@
+-fuzzy-if(webrender&&winWidget,82-82,76-76) == 513153-2a.html 513153-2-ref.html
+-fuzzy-if(webrender&&OSX,34-34,138-138) == 513153-2b.html 513153-2-ref.html
+@@ -1831 +1822,0 @@
+-== 1062108-1.html 1062108-1-ref.html
+@@ -2032,2 +2022,0 @@
+-== 1404057.html 1404057-ref.html
+-!= 1404057.html 1404057-noref.html
+@@ -2077 +2065,0 @@
+-skip-if(!asyncPan) == 1544895.html 1544895-ref.html
+@@ -2090 +2077,0 @@
+-fuzzy-if(winWidget&&webrender,0-31,0-3) fuzzy-if(geckoview&&webrender,0-93,0-87) == 1562733-rotated-nastaliq-2.html 1562733-rotated-nastaliq-2-ref.html
+diff -U0 firefox-86.0/layout/reftests/canvas/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/canvas/reftest.list
+--- firefox-86.0/layout/reftests/canvas/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/canvas/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -51,2 +50,0 @@
+-!= text-font-lang.html text-font-lang-notref.html
+-
+@@ -54 +51,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == text-small-caps-1.html text-small-caps-1-ref.html # Bug 1392106
+diff -U0 firefox-86.0/layout/reftests/columns/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/columns/reftest.list
+--- firefox-86.0/layout/reftests/columns/reftest.list.firefox-tests-reftest	2021-02-22 14:43:43.000000000 +0100
++++ firefox-86.0/layout/reftests/columns/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -8 +7,0 @@
+-== min-width-2.html min-width-2-ref.html
+diff -U0 firefox-86.0/layout/reftests/css-blending/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/css-blending/reftest.list
+--- firefox-86.0/layout/reftests/css-blending/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/css-blending/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -90,3 +89,0 @@
+-fuzzy-if(webrender,0-1,0-49719) == background-blend-mode-body-image.html background-blend-mode-body-image-ref.html
+-fuzzy-if(/^Windows\x20NT\x2010\.0/.test(http.oscpu),0-1,0-16408) fuzzy-if(Android,0-4,0-768) fuzzy-if(gtkWidget,0-1,0-132) fuzzy-if(skiaContent,0-1,0-800) fuzzy-if(d2d,0-1,0-33208) fuzzy-if(webrender,0-1,0-78472) == background-blend-mode-body-transparent-image.html background-blend-mode-body-transparent-image-ref.html
+-
+diff -U0 firefox-86.0/layout/reftests/css-break/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/css-break/reftest.list
+--- firefox-86.0/layout/reftests/css-break/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/css-break/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -1,3 +0,0 @@
+-== box-decoration-break-1.html box-decoration-break-1-ref.html
+-fuzzy(0-1,0-20) fuzzy-if(skiaContent,0-1,0-700) == box-decoration-break-with-inset-box-shadow-1.html box-decoration-break-with-inset-box-shadow-1-ref.html
+-skip-if(verify) fuzzy(0-45,0-460) fuzzy-if(skiaContent,0-57,0-439) fuzzy-if(Android,0-70,0-1330) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == box-decoration-break-with-outset-box-shadow-1.html box-decoration-break-with-outset-box-shadow-1-ref.html # Bug 1386543, bug 1392106
+diff -U0 firefox-86.0/layout/reftests/css-grid/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/css-grid/reftest.list
+--- firefox-86.0/layout/reftests/css-grid/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/css-grid/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -74 +73,0 @@
+-== grid-track-intrinsic-sizing-001.html grid-track-intrinsic-sizing-001-ref.html
+diff -U0 firefox-86.0/layout/reftests/css-ruby/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/css-ruby/reftest.list
+--- firefox-86.0/layout/reftests/css-ruby/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/css-ruby/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -17,4 +16,0 @@
+-== relative-positioning-2.html relative-positioning-2-ref.html
+-== ruby-position-horizontal.html ruby-position-horizontal-ref.html
+-== ruby-position-vertical-lr.html ruby-position-vertical-lr-ref.html
+-== ruby-position-vertical-rl.html ruby-position-vertical-rl-ref.html
+@@ -26 +21,0 @@
+-pref(layout.css.ruby.intercharacter.enabled,true) fuzzy-if(Android,0-198,0-70) == ruby-intercharacter-1.htm ruby-intercharacter-1-ref.htm
+@@ -28 +22,0 @@
+-pref(layout.css.ruby.intercharacter.enabled,true) == ruby-intercharacter-2.htm ruby-intercharacter-2-ref.htm
+diff -U0 firefox-86.0/layout/reftests/font-face/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/font-face/reftest.list
+--- firefox-86.0/layout/reftests/font-face/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/font-face/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -9 +8,0 @@
+-== name-override-simple-1.html name-override-simple-1-ref.html
+@@ -57 +55,0 @@
+-== cross-iframe-1.html cross-iframe-1-ref.html
+@@ -81 +78,0 @@
+-random-if(cocoaWidget) == sheet-set-switch-1.html sheet-set-switch-1-ref.html # bug 468217
+@@ -93 +89,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == local-1.html local-1-ref.html # Bug 1392106
+@@ -171,7 +166,0 @@
+-HTTP(..) == reflow-sanity-1.html reflow-sanity-1-ref.html
+-HTTP(..) == reflow-sanity-1-data.html reflow-sanity-1-ref.html
+-HTTP(..) == reflow-sanity-1.html reflow-sanity-1-data.html
+-HTTP(..) == reflow-sanity-delay-1a.html reflow-sanity-1-ref.html
+-HTTP(..) == reflow-sanity-delay-1b.html reflow-sanity-1-ref.html
+-HTTP(..) == reflow-sanity-delay-1c.html reflow-sanity-1-ref.html
+-HTTP(..) == reflow-sanity-delay-1-metrics.html reflow-sanity-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/font-matching/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/font-matching/reftest.list
+--- firefox-86.0/layout/reftests/font-matching/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/font-matching/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -124 +123,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == italic-oblique-2.html italic-oblique-ref.html # Bug 1392106
+@@ -128 +126,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == italic-oblique-6.html italic-oblique-ref.html # Bug 1392106
+@@ -130,2 +127,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == italic-oblique-8.html italic-oblique-ref.html # Bug 1392106
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == italic-oblique-9.html italic-oblique-ref.html # Bug 1392106
+diff -U0 firefox-86.0/layout/reftests/forms/fieldset/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/forms/fieldset/reftest.list
+--- firefox-86.0/layout/reftests/forms/fieldset/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/forms/fieldset/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -8 +7,0 @@
+-fuzzy-if(winWidget&&!layersGPUAccelerated,0-142,0-276) == positioned-container-1.html positioned-container-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/forms/input/text/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/forms/input/text/reftest.list
+--- firefox-86.0/layout/reftests/forms/input/text/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/forms/input/text/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -2 +1,0 @@
+-fuzzy-if(asyncPan&&!layersGPUAccelerated,0-151,0-111) fuzzy-if(webrender,0-65,0-3) == size-1.html size-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/forms/placeholder/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/forms/placeholder/reftest.list
+--- firefox-86.0/layout/reftests/forms/placeholder/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/forms/placeholder/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -20,3 +19,0 @@
+-# This tests assumes that the overflowing placeholder won't eat the padding, which is just not true in some platforms...
+-fuzzy-if(winWidget,0-160,0-10) fuzzy-if(Android,0-160,0-41) fuzzy-if(asyncPan&&!layersGPUAccelerated,0-146,0-317) fuzzy-if(OSX==1010&&browserIsRemote,0-1,0-8) == placeholder-6.html placeholder-overflow-ref.html
+-
+diff -U0 firefox-86.0/layout/reftests/forms/textbox/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/forms/textbox/reftest.list
+--- firefox-86.0/layout/reftests/forms/textbox/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/forms/textbox/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -4 +3,0 @@
+-fuzzy-if(winWidget,0-1,0-3) skip-if(cocoaWidget||Android) fails-if(webrender) == chrome://reftest/content/forms/textbox/accesskey-2.xhtml chrome://reftest/content/forms/textbox/accesskey-2-ref.xhtml
+@@ -8 +6,0 @@
+-fuzzy-if(winWidget,0-1,0-3) skip-if(cocoaWidget||Android) fails-if(webrender&&!Android) == chrome://reftest/content/forms/textbox/accesskey-4.xhtml chrome://reftest/content/forms/textbox/accesskey-4-ref.xhtml
+diff -U0 firefox-86.0/layout/reftests/image-element/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/image-element/reftest.list
+--- firefox-86.0/layout/reftests/image-element/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/image-element/reftest.list	2021-02-23 17:33:30.551621254 +0100
+@@ -10 +9,0 @@
+-fuzzy-if(webrender&&winWidget,117-129,47-54) == element-paint-simple.html element-paint-simple-ref.html
+@@ -20 +18,0 @@
+-fuzzy-if(asyncPan,0-2,0-140) fuzzy-if(skiaContent,0-3,0-106) fuzzy-if(webrender&&winWidget,134-222,1197-1588) fuzzy-if(geckoview&&webrender,0-7,0-1321) == element-paint-native-widget.html element-paint-native-widget-ref.html   # in -ref the scrollframe is active and layerized differently with APZ
+diff -U0 firefox-86.0/layout/reftests/mathml/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/mathml/reftest.list
+--- firefox-86.0/layout/reftests/mathml/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/mathml/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -26 +25,0 @@
+-random-if(smallScreen&&Android) fuzzy(0-255,0-200) fuzzy-if(geckoview&&webrender,201-216,312-316) fuzzy-if(webrender&&winWidget,114-255,245-361) fuzzy-if(webrender&&OSX,79-153,307-314) == mirror-op-1.html mirror-op-1-ref.html
+@@ -66 +64,0 @@
+-== stretchy-largeop-2.html stretchy-largeop-2-ref.html
+@@ -256 +253,0 @@
+-fails-if(winWidget) fuzzy-if(gtkWidget,255-255,776226-776226) == subscript-italic-correction.html subscript-italic-correction-ref.html # bug 961482 (Windows), bug 1599640 (Linux)
+diff -U0 firefox-86.0/layout/reftests/outline/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/outline/reftest.list
+--- firefox-86.0/layout/reftests/outline/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/outline/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -18 +17,0 @@
+-== outline-wrapped-span-1.html outline-wrapped-span-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/position-dynamic-changes/relative/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/position-dynamic-changes/relative/reftest.list
+--- firefox-86.0/layout/reftests/position-dynamic-changes/relative/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/position-dynamic-changes/relative/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -1,4 +0,0 @@
+-fuzzy-if(cocoaWidget,0-1,0-2) fuzzy-if(d2d,0-47,0-26) fuzzy-if(asyncPan&&!layersGPUAccelerated,0-169,0-970) == move-right-bottom.html move-right-bottom-ref.html
+-fuzzy-if(cocoaWidget,0-1,0-2) fuzzy-if(asyncPan&&!layersGPUAccelerated,0-169,0-970) == move-top-left.html move-top-left-ref.html # Bug 688545
+-fuzzy-if(cocoaWidget,0-1,0-3) fuzzy-if(asyncPan&&!layersGPUAccelerated,0-144,0-580) == move-right-bottom-table.html move-right-bottom-table-ref.html
+-fuzzy-if(cocoaWidget,0-1,0-3) fuzzy-if(asyncPan&&!layersGPUAccelerated,0-144,0-580) == move-top-left-table.html move-top-left-table-ref.html # Bug 688545
+diff -U0 firefox-86.0/layout/reftests/position-sticky/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/position-sticky/reftest.list
+--- firefox-86.0/layout/reftests/position-sticky/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/position-sticky/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -53,3 +53,2 @@
+-fuzzy-if(Android,0-4,0-4) fuzzy-if(webrender&&gtkWidget,16-17,28-32) fuzzy-if(webrender&&cocoaWidget,8-8,38-42) skip-if(!asyncPan) == transformed-2.html transformed-2-ref.html # Bug 1604644
+-skip-if(!asyncPan) fuzzy-if(Android,0-10,0-4) fuzzy-if(webrender&&gtkWidget,29-30,30-32) fuzzy-if(webrender&&cocoaWidget,15-16,44-44) == nested-sticky-1.html nested-sticky-1-ref.html # Bug 1604644
+-skip-if(!asyncPan) fuzzy-if(Android,0-10,0-4) fuzzy-if(webrender&&gtkWidget,29-30,30-32) fuzzy-if(webrender&&cocoaWidget,15-16,44-44) fuzzy-if(/^Windows\x20NT\x206\.1/.test(http.oscpu),0-4,0-104) == nested-sticky-2.html nested-sticky-2-ref.html # Bug 1604644
++skip-if(!asyncPan) fuzzy-if(Android,0-10,0-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,15-16,44-44) == nested-sticky-1.html nested-sticky-1-ref.html # Bug 1604644
++skip-if(!asyncPan) fuzzy-if(Android,0-10,0-4) fuzzy-if(webrender&&gtkWidget,0-50,0-50) fuzzy-if(webrender&&cocoaWidget,15-16,44-44) fuzzy-if(/^Windows\x20NT\x206\.1/.test(http.oscpu),0-4,0-104) == nested-sticky-2.html nested-sticky-2-ref.html # Bug 1604644
+diff -U0 firefox-86.0/layout/reftests/reftest-sanity/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/reftest-sanity/reftest.list
+--- firefox-86.0/layout/reftests/reftest-sanity/reftest.list.firefox-tests-reftest	2021-02-22 14:43:45.000000000 +0100
++++ firefox-86.0/layout/reftests/reftest-sanity/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -131,6 +131,6 @@
+-pref(font.default.x-western,"serif") == font-serif.html font-default.html
+-pref(font.default.x-western,"serif") != font-sans-serif.html font-default.html
+-pref(font.default.x-western,"sans-serif") == font-sans-serif.html font-default.html
+-pref(font.default.x-western,"sans-serif") != font-serif.html font-default.html
+-fails pref(font.default.x-western,true) == font-serif.html font-default.html
+-fails pref(font.default.x-western,0) == font-serif.html font-default.html
++#pref(font.default.x-western,"serif") == font-serif.html font-default.html
++#pref(font.default.x-western,"serif") != font-sans-serif.html font-default.html
++#pref(font.default.x-western,"sans-serif") == font-sans-serif.html font-default.html
++#pref(font.default.x-western,"sans-serif") != font-serif.html font-default.html
++#fails pref(font.default.x-western,true) == font-serif.html font-default.html
++#fails pref(font.default.x-western,0) == font-serif.html font-default.html
+diff -U0 firefox-86.0/layout/reftests/svg/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/svg/reftest.list
+--- firefox-86.0/layout/reftests/svg/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/svg/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -474 +474 @@
+-random-if(winWidget) fuzzy-if(Android,0-10,0-2) == text-gradient-02.svg text-gradient-02-ref.svg # see bug 590101
++random-if(winWidget) fuzzy-if(gtkWidget,0-20,0-10) fuzzy-if(Android,0-10,0-2) == text-gradient-02.svg text-gradient-02-ref.svg # see bug 590101
+@@ -481 +480,0 @@
+-!= text-language-00.xhtml text-language-00-ref.xhtml
+@@ -483 +481,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == text-layout-01.svg text-layout-01-ref.svg # Bug 1392106
+@@ -491 +488,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == text-layout-09.svg pass.svg # Bug 1392106
+diff -U0 firefox-86.0/layout/reftests/svg/svg-integration/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/svg/svg-integration/reftest.list
+--- firefox-86.0/layout/reftests/svg/svg-integration/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/svg/svg-integration/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -50 +49,0 @@
+-fuzzy-if(Android,0-4,0-10) == box-decoration-break-01.xhtml box-decoration-break-01-ref.xhtml
+diff -U0 firefox-86.0/layout/reftests/svg/text/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/svg/text/reftest.list
+--- firefox-86.0/layout/reftests/svg/text/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/svg/text/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -1 +0,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) fuzzy-if(webrender&&winWidget,122-127,221-254) == simple.svg simple-ref.html # Bug 1392106
+@@ -3 +1,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) fuzzy-if(webrender&&winWidget,122-127,221-254) == simple-underline.svg simple-underline-ref.html # Bug 1392106
+@@ -5,7 +2,0 @@
+-fuzzy-if(webrender&&winWidget,119-166,255-318) fuzzy-if(webrender&&OSX,1-1,1-1) == simple-anchor-end-bidi.svg simple-anchor-end-bidi-ref.html
+-fuzzy-if(webrender&&winWidget,117-138,182-204) == simple-anchor-end-rtl.svg simple-anchor-end-rtl-ref.html
+-fuzzy-if(webrender&&winWidget,119-137,220-250) == simple-anchor-end.svg simple-anchor-end-ref.html
+-fuzzy-if(skiaContent&&dwrite,0-104,0-131) fuzzy-if(cocoaWidget,0-143,0-124) fuzzy-if(webrender&&!(gtkWidget||geckoview),79-200,59-319) == simple-anchor-middle-bidi.svg simple-anchor-middle-bidi-ref.html
+-fuzzy-if(webrender&&winWidget,132-138,188-207) == simple-anchor-middle-rtl.svg simple-anchor-middle-rtl-ref.html
+-fuzzy-if(skiaContent,0-111,0-81) fuzzy-if(webrender&&winWidget,122-181,221-257) == simple-anchor-middle.svg simple-anchor-middle-ref.html
+-fuzzy-if(webrender&&winWidget,132-138,261-319) == simple-bidi.svg simple-bidi-ref.html
+@@ -28 +18,0 @@
+-fuzzy-if(webrender&&winWidget,125-128,221-254) fuzzy-if(webrender&&OSX,23-65,195-196) == simple-fill-color.svg simple-fill-color-ref.html
+@@ -33 +22,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) fuzzy-if(webrender&&winWidget,122-127,221-254) == simple-multiple-dx.svg simple-multiple-dx-ref.html # Bug 1392106
+@@ -46 +34,0 @@
+-fuzzy-if(webrender&&winWidget,132-138,183-206) == simple-rtl.svg simple-rtl-ref.html
+@@ -113 +100,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) fuzzy-if(skiaContent,0-1,0-15) == textpath.svg textpath-ref.svg # Bug 1392106
+@@ -202,5 +188,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) fuzzy-if(webrender&&!geckoview,0-1,0-237) needs-focus fuzzy-if(webrender&&winWidget,125-148,221-254) == simple-selection.svg simple-selection-ref.html # Bug 1392106
+-fuzzy-if(skiaContent,0-1,0-100) needs-focus fuzzy-if(webrender&&winWidget,134-148,261-318) == simple-bidi-selection.svg simple-bidi-selection-ref.html
+-fuzzy-if(skiaContent,0-1,0-50) needs-focus fuzzy-if(webrender&&winWidget,127-148,221-254) fuzzy-if(webrender&&OSX,1-65,19-196) == simple-fill-color-selection.svg simple-fill-color-selection-ref.html
+-fuzzy-if(skiaContent,0-1,0-150) needs-focus fuzzy-if(webrender&&winWidget,125-148,221-254) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == simple-underline-selection.svg simple-underline-selection-ref.html # Bug 1392106
+-fuzzy-if(skiaContent,0-1,0-300) needs-focus fuzzy-if(webrender&&winWidget,134-152,432-501) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == multiple-text-selection.svg multiple-text-selection-ref.html # Bug 1392106
+@@ -208 +189,0 @@
+-fuzzy-if(skiaContent,0-1,0-200) needs-focus == textpath-selection.svg textpath-selection-ref.svg
+diff -U0 firefox-86.0/layout/reftests/tab-size/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/tab-size/reftest.list
+--- firefox-86.0/layout/reftests/tab-size/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/tab-size/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -2,6 +1,0 @@
+-== tab-size-8.html            spaces-8.html
+-== tab-size-4.html            spaces-4.html
+-== tab-size-4-span.html       spaces-4.html
+-== tab-size-4-spanoffset.html spaces-4-offset.html
+-== tab-size-4-multiple.html   spaces-4-multiple.html
+-== tab-size-1.html            spaces-1.html
+diff -U0 firefox-86.0/layout/reftests/text-decoration/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/text-decoration/reftest.list
+--- firefox-86.0/layout/reftests/text-decoration/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/text-decoration/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -1,2 +0,0 @@
+-fuzzy-if(webrender&&gtkWidget,0-208,0-12) == complex-decoration-style-quirks.html complex-decoration-style-quirks-ref.html
+-fuzzy-if(webrender&&gtkWidget,0-208,0-12) == complex-decoration-style-standards.html complex-decoration-style-standards-ref.html
+diff -U0 firefox-86.0/layout/reftests/text-overflow/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/text-overflow/reftest.list
+--- firefox-86.0/layout/reftests/text-overflow/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/text-overflow/reftest.list	2021-02-23 17:33:30.552621283 +0100
+@@ -6 +5,0 @@
+-skip-if(!gtkWidget) fuzzy-if(gtkWidget,0-124,0-289) == bidi-simple-scrolled.html bidi-simple-scrolled-ref.html # Fails on Windows and OSX due to anti-aliasing
+@@ -28 +26,0 @@
+-== float-edges-1.html float-edges-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/text/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/text/reftest.list
+--- firefox-86.0/layout/reftests/text/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/text/reftest.list	2021-02-23 17:41:42.928247385 +0100
+@@ -41 +40,0 @@
+-== pre-wrap-1.html pre-wrap-1-ref.html
+@@ -119 +117,0 @@
+-== white-space-3.html white-space-3-ref.html
+@@ -132 +129,0 @@
+-== wordwrap-01.html wordwrap-01-ref.html
+@@ -139,2 +135,0 @@
+-== wordwrap-06.html wordwrap-06-ref.html
+-== overflowwrap-06.html wordwrap-06-ref.html
+@@ -192 +186,0 @@
+-fails-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == 1320665-cmap-format-13.html 1320665-cmap-format-13-ref.html # see bug 1320665 comments 8-9
+@@ -196,2 +189,0 @@
+-fails-if(/^^Windows\x20NT\x2010\.0/.test(http.oscpu)) fuzzy-if(Android,0-128,0-233) == 1463020-letter-spacing-text-transform-1.html 1463020-letter-spacing-text-transform-1-ref.html
+-fails-if(Android) == 1463020-letter-spacing-text-transform-2.html 1463020-letter-spacing-text-transform-2-ref.html # missing font coverage on Android
+@@ -201 +192,0 @@
+-fuzzy-if(!webrender,0-42,0-1553) fuzzy-if(gtkWidget&&!webrender,0-255,0-50) == 1655364-1.html 1655364-1-ref.html
+@@ -335 +325,0 @@
+-== hyphenation-control-1.html hyphenation-control-1-ref.html
+@@ -340,2 +329,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == hyphenation-control-6.html hyphenation-control-6-ref.html # Bug 1392106
+-== hyphenation-control-7.html hyphenation-control-7-ref.html
+@@ -369 +357 @@
+-== color-opacity-rtl-1.html color-opacity-rtl-1-ref.html
++fuzzy-if(gtkWidget,0-5,0-5) == color-opacity-rtl-1.html color-opacity-rtl-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/text-shadow/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/text-shadow/reftest.list
+--- firefox-86.0/layout/reftests/text-shadow/reftest.list.firefox-tests-reftest	2021-02-22 14:43:44.000000000 +0100
++++ firefox-86.0/layout/reftests/text-shadow/reftest.list	2021-02-23 17:33:30.553621313 +0100
+@@ -30 +29,0 @@
+-fails-if(Android) fuzzy-if(skiaContent&&!Android,0-1,0-1000) needs-focus == text-shadow-selected-1.html text-shadow-selected-1-ref.html # different foreground selection color on Android
+@@ -32 +30,0 @@
+-fails-if(Android) fuzzy-if(skiaContent&&!Android,0-1,0-1400) needs-focus == text-shadow-selected-2.html text-shadow-selected-2-ref.html # different foreground selection color on Android
+diff -U0 firefox-86.0/layout/reftests/text-transform/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/text-transform/reftest.list
+--- firefox-86.0/layout/reftests/text-transform/reftest.list.firefox-tests-reftest	2021-02-22 14:43:45.000000000 +0100
++++ firefox-86.0/layout/reftests/text-transform/reftest.list	2021-02-23 17:33:30.553621313 +0100
+@@ -15,3 +14,0 @@
+-random-if(winWidget) == small-caps-1.html small-caps-1-ref.html # fails if default font supports 'smcp'
+-== fake-small-caps-1.html fake-small-caps-1-ref.html
+-== opentype-small-caps-1.html opentype-small-caps-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/transform-3d/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/transform-3d/reftest.list
+--- firefox-86.0/layout/reftests/transform-3d/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/transform-3d/reftest.list	2021-02-23 17:33:30.553621313 +0100
+@@ -14 +13,0 @@
+-fuzzy-if(gtkWidget||winWidget,0-8,0-376) fuzzy-if(Android,0-8,0-441) fuzzy-if(cocoaWidget,0-17,0-4) fuzzy-if(skiaContent,0-16,0-286) fuzzy-if(webrender&&cocoaWidget,0-200,0-310) fuzzy-if(webrender&&winWidget,0-175,0-250) == preserve3d-1a.html preserve3d-1-ref.html
+@@ -27,2 +25,0 @@
+-fuzzy-if(winWidget,0-143,0-689) fuzzy-if(OSX,0-224,0-924) fuzzy-if(winWidget,0-154,0-644) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == scale3d-all.html scale3d-1-ref.html # subpixel AA
+-fuzzy-if(winWidget,0-143,0-689) fuzzy-if(OSX,0-224,0-924) fuzzy-if(winWidget,0-154,0-644) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == scale3d-all-separate.html scale3d-1-ref.html # subpixel AA
+diff -U0 firefox-86.0/layout/reftests/writing-mode/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/writing-mode/reftest.list
+--- firefox-86.0/layout/reftests/writing-mode/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/writing-mode/reftest.list	2021-02-23 17:33:30.553621313 +0100
+@@ -34 +33,0 @@
+-fuzzy-if(Android,0-128,0-94) random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == 1111944-1-list-marker.html 1111944-1-list-marker-ref.html # Bug 1392106
+@@ -115 +113,0 @@
+-fails-if(geckoview) == 1135361-ruby-justify-1.html 1135361-ruby-justify-1-ref.html # Bug 1558513 for GV
+diff -U0 firefox-86.0/layout/reftests/writing-mode/tables/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/writing-mode/tables/reftest.list
+--- firefox-86.0/layout/reftests/writing-mode/tables/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/writing-mode/tables/reftest.list	2021-02-23 17:33:30.553621313 +0100
+@@ -34 +34 @@
+-== fixed-table-layout-027-vlr.html fixed-table-layout-025-ref.html
++fuzzy-if(gtkWidget,0-260,0-250) == fixed-table-layout-027-vlr.html fixed-table-layout-025-ref.html
+@@ -60 +60 @@
+-== fixed-table-layout-027-vrl.html fixed-table-layout-025-ref.html
++fuzzy-if(gtkWidget,0-260,0-250) == fixed-table-layout-027-vrl.html fixed-table-layout-025-ref.html
+@@ -77,2 +77,2 @@
+-fuzzy-if(Android,0-255,0-38) == table-caption-top-1.html table-caption-top-1-ref.html
+-fuzzy-if(Android,0-255,0-38) == table-caption-bottom-1.html table-caption-bottom-1-ref.html
++fuzzy-if(gtkWidget,0-70,0-70) fuzzy-if(Android,0-255,0-38) == table-caption-top-1.html table-caption-top-1-ref.html
++fuzzy-if(gtkWidget,0-70,0-70) fuzzy-if(Android,0-255,0-38) == table-caption-bottom-1.html table-caption-bottom-1-ref.html
+diff -U0 firefox-86.0/layout/reftests/xul/reftest.list.firefox-tests-reftest firefox-86.0/layout/reftests/xul/reftest.list
+--- firefox-86.0/layout/reftests/xul/reftest.list.firefox-tests-reftest	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/layout/reftests/xul/reftest.list	2021-02-23 17:33:30.553621313 +0100
+@@ -15 +14,0 @@
+-random-if(/^Windows\x20NT\x206\.1/.test(http.oscpu)) == chrome://reftest/content/xul/text-small-caps-1.xhtml chrome://reftest/content/xul/text-small-caps-1-ref.xhtml
