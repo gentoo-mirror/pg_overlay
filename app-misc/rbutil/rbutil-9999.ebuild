@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -23,40 +23,62 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	virtual/libusb:1
 "
-
 DEPEND="${RDEPEND}"
-BDEPEND="dev-qt/linguist-tools:5"
+BDEPEND="
+	dev-qt/linguist-tools:5
+	virtual/pkgconfig
+"
 
-S="${WORKDIR}/${P}/${PN}/${PN}qt"
+S="${WORKDIR}/RockboxUtility-v${PV}"
+QTDIR="${PN}/${PN}qt"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-quazip1.patch
+	"${FILESDIR}"/0001-imxtools-sbtools-fix-compilation-with-gcc-10.patch
+	"${FILESDIR}"/${P}-fix-versionstring.patch # bug 734178
 )
 
 src_prepare() {
+	xdg_src_prepare
+
 	rem_locale() {
 		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.ts//" ${PN}qt.pri || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.qm//" rbutilqt-lang.qrc || die "removing of ${1}.ts failed"
 	}
 
-	l10n_find_plocales_changes lang "${PN}_" ".ts"
-	l10n_for_each_disabled_locale_do rem_locale
+	if has_version "<dev-libs/quazip-1.0"; then
+		sed -e "/^PKGCONFIG/s/quazip1-qt5/quazip/" -i ${QTDIR}/${PN}qt.pro || die
+	fi
 
-	xdg_src_prepare
-	rm -rv quazip/ zlib/ || die
+	rm -rv "${QTDIR}"/{quazip,zlib}/ || die
 }
 
 src_configure() {
+	cd "${QTDIR}" || die
+
 	# Generate binary translations.
-	lrelease ${PN}qt.pro || die
+	"$(qt5_get_bindir)"/lrelease ${PN}qt.pro || die
 
 	# noccache is required to call the correct compiler.
 	eqmake5 CONFIG+="noccache $(use debug && echo dbg)"
 }
 
+src_compile() {
+	emake -C "${QTDIR}"
+}
+
 src_install() {
+	cd "${QTDIR}" || die
+
+	local icon size
+	for icon in icons/rockbox-*.png; do
+		size=${icon##*-}
+		size=${size%%.*}
+		newicon -s "${size}" "${icon}" rockbox.png
+	done
+
 	dobin RockboxUtility
-	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox Utility
+	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox
 	dodoc changelog.txt
 }
