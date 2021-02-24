@@ -4,7 +4,6 @@ mozilla-1669639.patch
 firefox-testing.patch
 
 firefox-tests-xpcshell.patch
-firefox-tests-reftest.patch
 
 rhbz-1173156.patch
 mozilla-1170092.patch
