@@ -68,8 +68,6 @@ src_compile() {
 }
 
 src_install() {
-	newicon -s debian/maemo/icons/rockbox.png rockbox.png
-
 	cd "${QTDIR}" || die
 
 	dobin RockboxUtility
