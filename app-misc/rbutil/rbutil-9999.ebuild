@@ -70,12 +70,7 @@ src_compile() {
 src_install() {
 	cd "${QTDIR}" || die
 
-	local icon size
-	for icon in ${S}/debian/maemo/icons/rockbox.png; do
-		size=${icon##*-}
-		size=${size%%.*}
-		newicon -s "${size}" "${icon}" rockbox.png
-	done
+	newicon -s ${S}/debian/maemo/icons/rockbox.png rockbox.png
 
 	dobin RockboxUtility
 	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox Utility
