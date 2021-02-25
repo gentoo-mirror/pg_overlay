@@ -35,7 +35,8 @@ src_configure() {
 		--mandir="${EPREFIX}/usr/share/man"
 		--prefix="${EPREFIX}/usr"
 		$(use_enable flambda)
-		$(use_enable spacetime)
+		--disable-debug-runtime
+		--disable-debugger
 	)
 	econf ${opt[@]}
 }
