@@ -77,6 +77,7 @@ dev-qt/qtwebkit:multimedia - Enable HTML5 audio/video support via dev-qt/qtmulti
 dev-qt/qtwebkit:orientation - Enable device orientation detection via dev-qt/qtsensors
 dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
+dev-util/cmake:system-jsoncpp - Use system copy of dev-libs/jsoncpp instead of bundled one.
 dev-util/sccache:azure - Enable Azure Blob Storage support
 dev-util/sccache:dist-client - Enables distributed support in the sccache client
 dev-util/sccache:dist-server - Enables the sccache-dist binary
