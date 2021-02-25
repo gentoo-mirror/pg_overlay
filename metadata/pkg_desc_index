@@ -183,7 +183,6 @@ sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r100: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.118: Policy framework for controlling privileges for system-wide services
-sys-boot/efibootmgr 17: User-space application to modify the EFI boot manager
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.2: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.11.0_rc0: xfs filesystem utilities
