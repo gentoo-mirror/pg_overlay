@@ -376,7 +376,6 @@ x11-libs/gtk+:atk-bridge - Enable the gtk3-atk-bridge, hard depending on app-acc
 x11-libs/gtk+:broadway - Enable the GDK Broadway backend.
 x11-libs/gtk+:cloudprint - Enable printing via Google Cloud Print.
 x11-libs/gtk+:colord - Use x11-misc/colord for color management in printing
-x11-libs/libxcb:xkb - Enable the XCB keyboard extension
 x11-libs/pango:X - Build and install the legacy pangoxft library
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
