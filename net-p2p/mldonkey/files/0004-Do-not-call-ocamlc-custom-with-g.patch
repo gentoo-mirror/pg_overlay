@@ -1,0 +1,21 @@
+From: Stephane Glondu <steph@glondu.net>
+Date: Tue, 4 Aug 2020 11:02:47 +0200
+Subject: Do not call "ocamlc -custom" with g++
+
+---
+ config/Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/config/Makefile.in b/config/Makefile.in
+index 66a5f3f..d9c3a43 100644
+--- a/config/Makefile.in
++++ b/config/Makefile.in
+@@ -305,7 +305,7 @@ Makefile: config/Makefile.in
+ MAIN_SRCS=$(COMMON)/commonMain.ml
+ 
+ ifeq ("$(DONKEY_SUI)", "yes")
+-  CRYPTOPP_LIBS_flags += -cc '$(CXX) $(CXXFLAGS)' -ccopt '$(CRYPTOPPFLAGS)'
++  CRYPTOPP_LIBS_flags += -cclib -lstdc++ -ccopt '$(CRYPTOPPFLAGS)'
+   DONKEY_SRCS += $(LIB)/CryptoPP.cc $(LIB)/CryptoPP_stubs.c $(SRC_DONKEY)/donkeySui1.ml $(SRC_DONKEY)/donkeySui.ml
+ else
+   DONKEY_SRCS += $(SRC_DONKEY)/donkeySui2.ml $(SRC_DONKEY)/donkeySui.ml
