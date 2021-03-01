@@ -14,5 +14,4 @@ disable-openh264-download.patch
 firefox-nss-addon-hack.patch
 firefox-kde-webrender.patch
 
-mozilla-1667096.patch
 mozilla-1683578.patch
