@@ -1,11 +1,11 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
 WX_GTK_VER="3.1-gtk3"
 
-inherit autotools git-r3 l10n wxwidgets xdg-utils
+inherit git-r3 l10n wxwidgets xdg-utils flag-o-matic
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"
@@ -22,7 +22,7 @@ RDEPEND="
 	sys-libs/binutils-libs:0=
 	sys-libs/readline:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}
+	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
 	daemon? ( acct-user/amule )
 	geoip? ( dev-libs/geoip )
 	nls? ( virtual/libintl )
@@ -57,25 +57,19 @@ src_prepare() {
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rem_locale
 	
-	for i in $(cat "${FILESDIR}/debian-patchset/series");do eapply "${FILESDIR}/debian-patchset/$i";done
-
-	pushd src/pixmaps/flags_xpm
-	./makeflags.sh
-	popd
-
-	eautoreconf
+	./autogen.sh || die
 }
 
 src_configure() {
+	append-flags -DASIO_SOCKETS=1
 	local myconf=(
 		--with-denoise-level=0
 		--with-wx-config="${WX_CONFIG}"
-		--disable-amulecmd
+		--enable-amulecmd
 		--with-boost
 		$(use_enable debug)
 		$(use_enable daemon amule-daemon)
 		$(use_enable geoip)
-		$(use_enable gui amule-gui)
 		$(use_enable nls)
 		$(use_enable webserver)
 		$(use_enable stats cas)
@@ -86,12 +80,14 @@ src_configure() {
 
 	if use X; then
 		myconf+=(
+			$(use_enable remote amule-gui)
 			$(use_enable stats alc)
 			$(use_enable stats wxcas)
 		)
 	else
 		myconf+=(
 			--disable-monolithic
+			--disable-amule-gui
 			--disable-alc
 			--disable-wxcas
 		)
@@ -118,7 +114,7 @@ src_install() {
 	#	fperms 0750 /var/lib/${PN}
 	#fi
 
-	if use gui; then
+	if use X && use remote; then
 		rm ${D}/usr/bin/amule
 	fi
 }
