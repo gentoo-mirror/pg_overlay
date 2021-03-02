@@ -58,7 +58,7 @@ src_prepare() {
 	sed -i -e '/PREFIX = /s:/usr/local:/usr:' ${PN}.pro || die
 
 	# add trailing semicolon
-	sed -i -e '/^Categories/s/$/;/' redist/${PN}.desktop || die
+	sed -i -e '/^Categories/s/$/;/' redist/ org.${PN}.GoldenDict.desktop || die
 
 	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> ${PN}.pro
 	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
