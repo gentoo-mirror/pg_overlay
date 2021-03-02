@@ -123,9 +123,7 @@ media-libs/fontconfig 2.13.92: A library for configuring and customizing font ac
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 3.104.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.14-r1: Simple Direct Media Layer
-media-libs/libtgvoip 2.4.4_p20201106: VoIP library for Telegram clients
 media-libs/shaderc 2020.5: Collection of tools, libraries and tests for shader compilation
-media-libs/tg_owt 0_pre20201127: WebRTC build for Telegram
 media-libs/vulkan-layers 1.2.170 9999: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.170: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
@@ -153,7 +151,7 @@ media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-ftp/filezilla 3.52.2: FTP client with lots of useful features and an intuitive interface
 net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
 net-im/pidgin 2.14.1 2.9999 9999: GTK Instant Messenger client
-net-im/telegram-desktop 2.4.14: Official desktop client for Telegram
+net-im/telegram-desktop 9999: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management library for GLib applications
