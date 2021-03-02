@@ -13,7 +13,7 @@ EGIT_REPO_URI="https://github.com/telegramdesktop/tdesktop.git"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc64"
+KEYWORDS=""
 IUSE="+dbus enchant +gtk +hunspell lto pulseaudio +spell wayland +webrtc +X"
 
 RDEPEND="
