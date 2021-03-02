@@ -7,8 +7,6 @@ PYTHON_COMPAT=( python3_{7,8,9} )
 
 inherit cmake desktop flag-o-matic ninja-utils python-any-r1 xdg-utils git-r3
 
-MY_P="tdesktop-${PV}-full"
-
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
 EGIT_REPO_URI="https://github.com/telegramdesktop/tdesktop.git"
@@ -73,8 +71,6 @@ REQUIRED_USE="
 		^^ ( enchant hunspell )
 	)
 "
-
-S="${WORKDIR}/${MY_P}"
 
 pkg_pretend() {
 	if has ccache ${FEATURES}; then
