@@ -72,7 +72,6 @@ REQUIRED_USE="
 	spell? (
 		^^ ( enchant hunspell )
 	)
-	webrtc? ( !libressl )
 "
 
 S="${WORKDIR}/${MY_P}"
