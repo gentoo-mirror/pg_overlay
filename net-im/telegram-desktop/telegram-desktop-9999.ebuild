@@ -5,25 +5,23 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{7,8,9} )
 
-inherit cmake desktop flag-o-matic ninja-utils python-any-r1 xdg-utils
+inherit cmake desktop flag-o-matic ninja-utils python-any-r1 xdg-utils git-r3
 
 MY_P="tdesktop-${PV}-full"
 
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
-SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz"
+EGIT_REPO_URI="https://github.com/telegramdesktop/tdesktop.git"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~ppc64"
-IUSE="+dbus enchant +gtk +hunspell libressl lto pulseaudio +spell wayland +webrtc +X"
+IUSE="+dbus enchant +gtk +hunspell lto pulseaudio +spell wayland +webrtc +X"
 
 RDEPEND="
 	!net-im/telegram-desktop-bin
 	app-arch/lz4:=
 	app-arch/xz-utils
-	!libressl? ( dev-libs/openssl:0= )
-	libressl? ( dev-libs/libressl:0= )
 	dev-libs/xxhash
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5[dbus?,jpeg,png,wayland?,X(-)?]
@@ -94,9 +92,6 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	# conditional patching is bad, but we want vanilla telegram with webrtc.
-	use webrtc || local PATCHES=( "${FILESDIR}/no-webrtc-build.patch" )
-
 	# no explicit toggle #752417
 	sed -i 's/DESKTOP_APP_USE_PACKAGED/NO_ONE_WILL_EVER_SET_THIS/' \
 		cmake/external/rlottie/CMakeLists.txt || die
