@@ -32,7 +32,6 @@ RDEPEND="
 	media-fonts/open-sans
 	media-libs/alsa-lib
 	media-libs/fontconfig:=
-	>=media-libs/libtgvoip-2.4.4_p20201030[pulseaudio=]
 	media-libs/openal[alsa]
 	media-libs/opus:=
 	media-video/ffmpeg:=[alsa,opus]
@@ -55,15 +54,12 @@ RDEPEND="
 	pulseaudio? ( media-sound/pulseaudio )
 	webrtc? (
 		media-libs/libjpeg-turbo:=
-		>=media-libs/tg_owt-0_pre20201112[pulseaudio=]
 	)
 "
 
 DEPEND="
 	${PYTHON_DEPS}
 	${RDEPEND}
-	dev-cpp/range-v3
-	=dev-cpp/ms-gsl-3*
 "
 
 BDEPEND="
