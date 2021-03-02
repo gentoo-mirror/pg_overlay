@@ -91,7 +91,7 @@ install_locale() {
 
 src_install() {
 	dobin ${PN}
-	domenu redist/${PN}.desktop
+	domenu redist/org.${PN}.GoldenDict.desktop
 	doicon redist/icons/${PN}.png
 
 	insinto /usr/share/${PN}/help
