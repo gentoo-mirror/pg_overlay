@@ -44,7 +44,8 @@ PDEPEND="
 DOCS=( README.md src/libelogind/sd-bus/GVARIANT-SERIALIZATION )
 
 PATCHES=(
-	"${FILESDIR}/${PN}-243.6-docs.patch"
+	"${FILESDIR}/${PN}-243.7-nodocs.patch"
+	"${FILESDIR}/${PN}-241.4-broken-test.patch" # bug 699116
 )
 
 pkg_setup() {
@@ -101,7 +102,7 @@ src_install() {
 
 	meson_src_install
 
-	newinitd "${FILESDIR}"/${PN}.init ${PN}
+	newinitd "${FILESDIR}"/${PN}.init-r1 ${PN}
 
 	sed -e "s/@libdir@/$(get_libdir)/" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
 	newconfd ${PN}.conf ${PN}
