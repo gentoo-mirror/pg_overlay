@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
 inherit autotools git-r3 toolchain-funcs
 
@@ -47,13 +47,15 @@ src_configure() {
 	fi
 
 	# configure needs bash or script bombs out on some null shift, bug #291229
-	CONFIG_SHELL=${BASH} econf \
+	local myeconfargs=(
 		--enable-aligned \
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
 		${disable_instrumentation} \
 		--with-posix-fallocate \
 		--with-zlib="${EROOT%/}/usr/"
+		)
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
