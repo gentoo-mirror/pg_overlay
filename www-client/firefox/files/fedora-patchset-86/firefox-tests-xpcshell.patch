@@ -1,65 +1,72 @@
-diff -U0 firefox-85.0.1/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini
---- firefox-85.0.1/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 16:52:46.000000000 +0100
-+++ firefox-85.0.1/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini	2021-02-23 17:26:03.907321729 +0100
+diff -U0 firefox-86.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini
+--- firefox-86.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 14:43:35.000000000 +0100
++++ firefox-86.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini	2021-03-02 15:21:43.002449859 +0100
 @@ -9 +8,0 @@
 -[test_appupdateurl.js]
-diff -U0 firefox-85.0.1/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini
---- firefox-85.0.1/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 16:52:47.000000000 +0100
-+++ firefox-85.0.1/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini	2021-02-23 17:26:03.908321759 +0100
+@@ -27 +25,0 @@
+-[test_sorted_alphabetically.js]
+diff -U0 firefox-86.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini
+--- firefox-86.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 14:43:36.000000000 +0100
++++ firefox-86.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini	2021-03-02 15:21:43.002449859 +0100
 @@ -9 +8,0 @@
 -[test_adb.js]
-diff -U0 firefox-85.0.1/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/netwerk/test/unit_ipc/xpcshell.ini
---- firefox-85.0.1/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 16:52:52.000000000 +0100
-+++ firefox-85.0.1/netwerk/test/unit_ipc/xpcshell.ini	2021-02-23 17:26:03.908321759 +0100
+diff -U0 firefox-86.0/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/netwerk/test/unit_ipc/xpcshell.ini
+--- firefox-86.0/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 15:19:41.000000000 +0100
++++ firefox-86.0/netwerk/test/unit_ipc/xpcshell.ini	2021-03-02 15:21:43.002449859 +0100
 @@ -73 +72,0 @@
 -[test_dns_service_wrap.js]
-diff -U0 firefox-85.0.1/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/netwerk/test/unit/xpcshell.ini
---- firefox-85.0.1/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 22:06:36.000000000 +0100
-+++ firefox-85.0.1/netwerk/test/unit/xpcshell.ini	2021-02-23 17:26:03.908321759 +0100
-@@ -202 +201,0 @@
+diff -U0 firefox-86.0/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/netwerk/test/unit/xpcshell.ini
+--- firefox-86.0/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/netwerk/test/unit/xpcshell.ini	2021-03-02 15:21:43.002449859 +0100
+@@ -203 +202,0 @@
 -[test_dns_service.js]
-@@ -226 +224,0 @@
+@@ -227 +225,0 @@
 -[test_file_protocol.js]
-@@ -334 +331,0 @@
+@@ -335 +332,0 @@
 -[test_unix_domain.js]
-@@ -346 +342,0 @@
+@@ -347 +343,0 @@
 -[test_udp_multicast.js]
-@@ -395,2 +390,0 @@
+@@ -396,2 +391,0 @@
 -[test_tls_flags.js]
 -skip-if = (verify && (os == 'linux')) || (os == "android" && processor == "x86_64")
-@@ -412 +405,0 @@
+@@ -413 +406,0 @@
 -[test_network_connectivity_service.js]
-diff -U0 firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell.ini
---- firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 22:06:36.000000000 +0100
-+++ firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell.ini	2021-02-23 17:26:03.908321759 +0100
-@@ -183 +182,0 @@
+@@ -508 +500,0 @@
+-[test_httpssvc_retry_with_ech.js]
+diff -U0 firefox-86.0/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/security/manager/ssl/tests/unit/xpcshell.ini
+--- firefox-86.0/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/security/manager/ssl/tests/unit/xpcshell.ini	2021-03-02 19:20:41.609012711 +0100
+@@ -115,2 +114,0 @@
+-[test_encrypted_client_hello.js]
+-run-sequentially = hardcoded ports
+@@ -182 +179,0 @@
 -[test_oskeystore.js]
-diff -U0 firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell-smartcards.ini
---- firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell	2021-02-04 16:52:52.000000000 +0100
-+++ firefox-85.0.1/security/manager/ssl/tests/unit/xpcshell-smartcards.ini	2021-02-23 17:26:03.908321759 +0100
+diff -U0 firefox-86.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell firefox-86.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini
+--- firefox-86.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell	2021-02-22 14:43:46.000000000 +0100
++++ firefox-86.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini	2021-03-02 15:21:43.003449884 +0100
 @@ -10 +9,0 @@
 -[test_pkcs11_module.js]
-diff -U0 firefox-85.0.1/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/toolkit/components/commandlines/test/unit/xpcshell.ini
---- firefox-85.0.1/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 16:52:57.000000000 +0100
-+++ firefox-85.0.1/toolkit/components/commandlines/test/unit/xpcshell.ini	2021-02-23 17:26:03.908321759 +0100
+diff -U0 firefox-86.0/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/toolkit/components/commandlines/test/unit/xpcshell.ini
+--- firefox-86.0/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 14:43:53.000000000 +0100
++++ firefox-86.0/toolkit/components/commandlines/test/unit/xpcshell.ini	2021-03-02 15:21:43.003449884 +0100
 @@ -10 +9,0 @@
 -[test_resolvefile.js]
-diff -U0 firefox-85.0.1/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell firefox-85.0.1/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini
---- firefox-85.0.1/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell	2021-02-04 22:06:37.000000000 +0100
-+++ firefox-85.0.1/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini	2021-02-23 17:26:03.908321759 +0100
-@@ -76,2 +75,0 @@
+diff -U0 firefox-86.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell firefox-86.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini
+--- firefox-86.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell	2021-02-22 15:47:05.000000000 +0100
++++ firefox-86.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini	2021-03-02 15:21:43.003449884 +0100
+@@ -79,2 +78,0 @@
 -[test_ext_downloads_misc.js]
 -skip-if = os == "android" || (os=='linux' && bits==32) || tsan # linux32: bug 1324870, tsan: bug 1612707
-@@ -244,2 +241,0 @@
+@@ -248,2 +245,0 @@
 -[test_proxy_listener.js]
 -skip-if = appname == "thunderbird"
-diff -U0 firefox-85.0.1/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini
---- firefox-85.0.1/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 16:52:57.000000000 +0100
-+++ firefox-85.0.1/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini	2021-02-23 17:26:03.909321789 +0100
+diff -U0 firefox-86.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini
+--- firefox-86.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini	2021-03-02 15:21:43.003449884 +0100
 @@ -10 +9,0 @@
 -[test_subprocess.js]
-diff -U0 firefox-85.0.1/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-85.0.1/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini
---- firefox-85.0.1/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-04 16:52:57.000000000 +0100
-+++ firefox-85.0.1/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini	2021-02-23 17:26:03.909321789 +0100
+diff -U0 firefox-86.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-86.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini
+--- firefox-86.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-02-22 14:43:54.000000000 +0100
++++ firefox-86.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini	2021-03-02 15:21:43.003449884 +0100
 @@ -97 +96,0 @@
 -[test_sideloads_after_rebuild.js]
