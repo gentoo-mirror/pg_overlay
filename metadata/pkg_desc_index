@@ -145,7 +145,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-media-video/pipewire 0.3.22: Multimedia processing graphs
+media-video/pipewire 0.3.22 0.3.23: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-ftp/filezilla 3.52.2: FTP client with lots of useful features and an intuitive interface
