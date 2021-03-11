@@ -61,7 +61,8 @@ src_prepare() {
 	./makeflags.sh
 	popd
 
-	eautoreconf #./autogen.sh || die
+	eautoreconf
+	#./autogen.sh || die
 }
 
 src_configure() {

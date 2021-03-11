@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
 LICENSE="BSD"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS=""
 IUSE="doc examples test"
 RESTRICT="!test? ( test )"
 
