@@ -4,6 +4,7 @@
 EAPI=7
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
 WX_GTK_VER="3.1-gtk3"
+WANT_AUTOCONF="2.5"
 
 inherit autotools git-r3 l10n wxwidgets xdg-utils flag-o-matic
 
