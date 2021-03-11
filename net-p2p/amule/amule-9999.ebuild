@@ -57,12 +57,12 @@ src_prepare() {
 	l10n_find_plocales_changes po "" ".po"
 	l10n_for_each_disabled_locale_do rem_locale
 
-	pushd src/pixmaps/flags_xpm
-	./makeflags.sh
-	popd
+	#pushd src/pixmaps/flags_xpm
+	#./makeflags.sh
+	#popd
 
-	eautoreconf
-	#./autogen.sh || die
+	#eautoreconf
+	./autogen.sh || die
 }
 
 src_configure() {
