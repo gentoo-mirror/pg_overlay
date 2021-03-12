@@ -3,9 +3,10 @@
 
 EAPI=7
 
+PYTHON_COMPAT=( python3_9 )
 WX_GTK_VER="3.1-gtk3"
 
-inherit eutils toolchain-funcs wxwidgets
+inherit eutils toolchain-funcs wxwidgets distutils-r1
 
 DESCRIPTION="Port of 7-Zip archiver for Unix"
 HOMEPAGE="http://p7zip.sourceforge.net/"
@@ -82,10 +83,10 @@ src_prepare() {
 	fi
 
 	#
-	#pushd Utils
-	#sed -i 's/_do_not_use//g' generate.py
-	#${EPYTHON} generate.py
-	#sudopopd
+	pushd Utils
+	sed -i 's/_do_not_use//g' generate.py
+	${EPYTHON} generate.py
+	popd
 	#
 
 	if use kde || use wxwidgets; then
