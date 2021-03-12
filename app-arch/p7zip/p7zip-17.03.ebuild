@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_9 )
+PYTHON_COMPAT=( python3_{7..9} )
 WX_GTK_VER="3.1-gtk3"
 
 inherit eutils toolchain-funcs wxwidgets python-single-r1
