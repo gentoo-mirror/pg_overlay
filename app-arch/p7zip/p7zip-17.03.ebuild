@@ -24,8 +24,6 @@ DEPEND="${RDEPEND}
 	amd64? ( dev-lang/yasm )
 	x86? ( dev-lang/nasm )"
 
-# #S=${WORKDIR}/${PN}_${PV}
-
 DOCS=( ChangeLog README TODO )
 
 src_prepare() {
