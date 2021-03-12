@@ -85,7 +85,7 @@ src_prepare() {
 	#pushd Utils
 	#sed -i 's/_do_not_use//g' generate.py
 	#${EPYTHON} generate.py
-	#popd
+	#sudopopd
 	#
 
 	if use kde || use wxwidgets; then
