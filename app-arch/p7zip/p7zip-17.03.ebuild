@@ -82,10 +82,10 @@ src_prepare() {
 	fi
 
 	#
-	pushd Utils
-	sed -i 's/_do_not_use//g' generate.py
-	${EPYTHON} generate.py
-	popd
+	#pushd Utils
+	#sed -i 's/_do_not_use//g' generate.py
+	#${EPYTHON} generate.py
+	#popd
 	#
 
 	if use kde || use wxwidgets; then
