@@ -3,6 +3,8 @@
 
 EAPI=7
 
+WX_GTK_VER="3.1-gtk3"
+
 inherit eutils toolchain-funcs
 
 DESCRIPTION="Port of 7-Zip archiver for Unix"
@@ -21,6 +23,55 @@ DOCS=( ChangeLog README TODO )
 
 src_prepare() {
 	default
+
+	if ! use pch; then
+		sed "s:PRE_COMPILED_HEADER=StdAfx.h.gch:PRE_COMPILED_HEADER=:g" -i makefile.* || die
+	fi
+
+	sed \
+		-e 's|-m32 ||g' \
+		-e 's|-m64 ||g' \
+		-e 's|-pipe||g' \
+		-e "/[ALL|OPT]FLAGS/s|-s||;/OPTIMIZE/s|-s||" \
+		-e "/CFLAGS=/s|=|+=|" \
+		-e "/CXXFLAGS=/s|=|+=|" \
+		-i makefile* || die
+
+	# remove non-free RAR codec
+	if use rar; then
+		ewarn "Enabling nonfree RAR decompressor"
+	else
+		sed \
+			-e '/Rar/d' \
+			-e '/RAR/d' \
+			-i makefile* CPP/7zip/Bundles/Format7zFree/makefile || die
+		rm -rf CPP/7zip/Compress/Rar || die
+	fi
+
+	if use amd64; then
+		cp -f makefile.linux_amd64_asm makefile.machine || die
+	elif use x86; then
+		cp -f makefile.linux_x86_asm_gcc_4.X makefile.machine || die
+	elif [[ ${CHOST} == *-darwin* ]] ; then
+		# Mac OS X needs this special makefile, because it has a non-GNU
+		# linker, it doesn't matter so much for bitwidth, for it doesn't
+		# do anything with it
+		cp -f makefile.macosx_llvm_64bits makefile.machine
+		# bundles have extension .bundle but don't die because USE=-rar
+		# removes the Rar directory
+		sed -i -e '/strcpy(name/s/\.so/.bundle/' \
+			CPP/Windows/DLL.cpp || die
+		sed -i -e '/^PROG=/s/\.so/.bundle/' \
+			CPP/7zip/Bundles/Format7zFree/makefile.list \
+			$(use rar && echo CPP/7zip/Compress/Rar/makefile.list) || die
+	elif use x86-fbsd; then
+		# FreeBSD needs this special makefile, because it hasn't -ldl
+		sed -e 's/-lc_r/-pthread/' makefile.freebsd > makefile.machine
+	fi
+
+	if use static; then
+		sed -i -e '/^LOCAL_LIBS=/s/LOCAL_LIBS=/&-static /' makefile.machine || die
+	fi
 }
 
 src_compile() {
