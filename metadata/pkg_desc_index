@@ -1,7 +1,7 @@
 app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.3: Extremely Fast Compression algorithm
-app-arch/p7zip 16.02-r6 17.03: Port of 7-Zip archiver for Unix
+app-arch/p7zip 16.02-r6 17.03 17.03-r1: Port of 7-Zip archiver for Unix
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre144: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
