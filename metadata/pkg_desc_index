@@ -166,7 +166,7 @@ net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protoco
 net-libs/telepathy-qt 0.9.8 9999: Qt bindings for the Telepathy D-Bus protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
-net-p2p/amule 9999: aMule, the all-platform eMule p2p client
+net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
