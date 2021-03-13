@@ -185,9 +185,9 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.2: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.11.0_rc1: xfs filesystem utilities
 sys-kernel/gentoo-sources 5.9.8: Full sources including the Gentoo patchset for the 5.9 kernel tree
-sys-libs/ncurses 6.2_p20210130: console display library
+sys-libs/ncurses 6.2_p20210306: console display library
 sys-libs/polly 11.0.1 11.1.0 12.0.0_rc1: Polyhedral optimizations for LLVM
-sys-libs/slang 2.3.3_pre33: Multi-platform library designed to allow a developer to create robust software
+sys-libs/slang 2.3.3_pre48: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 3.0.2: interactive process viewer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
