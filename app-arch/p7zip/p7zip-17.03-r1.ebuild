@@ -4,9 +4,8 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{7..9} )
-WX_GTK_VER="3.1-gtk3"
 
-inherit eutils toolchain-funcs wxwidgets python-single-r1
+inherit eutils toolchain-funcs python-single-r1
 
 DESCRIPTION="Port of 7-Zip archiver for Unix"
 HOMEPAGE="http://p7zip.sourceforge.net/"
