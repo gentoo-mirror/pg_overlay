@@ -102,7 +102,7 @@ src_configure() {
 		$(meson_use test test)
 		$(meson_use test tests)
 		-Dvolume=true
-		-Dpw-cat=enabled
+		-Dpw-cat=true
 	)
 	meson_src_configure
 }
