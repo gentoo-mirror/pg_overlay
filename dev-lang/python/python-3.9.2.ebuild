@@ -188,18 +188,7 @@ src_compile() {
 	# https://bugs.gentoo.org/594768
 	local -x LC_ALL=C
 
-	#The following code borrowed from https://github.com/stefantalpalaru/gentoo-overlay
-
-	# extract the number of parallel jobs in MAKEOPTS
-	echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' > /dev/null
-	if [ $? -eq 0 ]; then
-		par_arg="-j$(echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' | tail -n1 | egrep -o '[[:digit:]]+')"
-	else
-		par_arg=""
-	fi
-	export par_arg
-
-	emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_distutils test_socket -j $(nproc) --pgo-extended"
+	emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_distutils test_socket test_logging test_smtplib -j $(nproc) --pgo-extended"
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax_kernel]; then
