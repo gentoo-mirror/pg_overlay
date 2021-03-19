@@ -13,8 +13,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.7.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.1.1.2: A full office productivity suite
-app-office/libreoffice-l10n 7.1.1.2: Translations for the Libreoffice suite
+app-office/libreoffice 7.1.2.1: A full office productivity suite
+app-office/libreoffice-l10n 7.1.2.1: Translations for the Libreoffice suite
 app-office/wps-office 11.1.0.10161: WPS Office is an office productivity suite
 app-portage/eix 0.34.12: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
