@@ -232,15 +232,6 @@ SQLite revision: a26b6597e3ae272231b96f9982c3bcc17ddec2f2b6eb4df06a224b91089fed5
    SHA3Context *p,                 /* Add content to this context */
    const char *zFormat,
    ...
-@@ -622,7 +622,7 @@
-     nCol = sqlite3_column_count(pStmt);
-     z = sqlite3_sql(pStmt);
-     n = (int)strlen(z);
--    hash_step_vformat(&cx,"S%d:",n);
-+    sha3_hash_step_vformat(&cx,"S%d:",n);
-     SHA3Update(&cx,(unsigned char*)z,n);
- 
-     /* Compute a hash over the result of the query */
 @@ -665,14 +665,14 @@
            case SQLITE_TEXT: {
              int n2 = sqlite3_column_bytes(pStmt, i);
