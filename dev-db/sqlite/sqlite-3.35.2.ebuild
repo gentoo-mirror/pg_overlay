@@ -277,7 +277,7 @@ multilib_src_configure() {
 	# Support URI filenames.
 	# https://sqlite.org/compile.html#use_uri
 	# https://sqlite.org/uri.html
-	append-cppflags -DSQLITE_USE_URI
+	append-cppflags -DSQLITE_USE_URI -DSQLITE_ENABLE_MATH_FUNCTIONS
 
 	# debug USE flag.
 	options+=($(use_enable debug))
