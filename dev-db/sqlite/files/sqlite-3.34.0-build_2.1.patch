@@ -49,42 +49,6 @@ SQLite revision: a26b6597e3ae272231b96f9982c3bcc17ddec2f2b6eb4df06a224b91089fed5
  
  # Generated source code files
  #
-@@ -437,35 +461,21 @@
- # Statically linked extensions
- #
- TESTSRC += \
--  $(TOP)/ext/expert/sqlite3expert.c \
-   $(TOP)/ext/expert/test_expert.c \
--  $(TOP)/ext/misc/amatch.c \
--  $(TOP)/ext/misc/carray.c \
-   $(TOP)/ext/misc/cksumvfs.c \
-   $(TOP)/ext/misc/closure.c \
--  $(TOP)/ext/misc/csv.c \
--  $(TOP)/ext/misc/decimal.c \
--  $(TOP)/ext/misc/eval.c \
-   $(TOP)/ext/misc/explain.c \
--  $(TOP)/ext/misc/fileio.c \
-   $(TOP)/ext/misc/fuzzer.c \
-   $(TOP)/ext/fts5/fts5_tcl.c \
-   $(TOP)/ext/fts5/fts5_test_mi.c \
-   $(TOP)/ext/fts5/fts5_test_tok.c \
--  $(TOP)/ext/misc/ieee754.c \
-   $(TOP)/ext/misc/mmapwarm.c \
--  $(TOP)/ext/misc/nextchar.c \
-   $(TOP)/ext/misc/normalize.c \
--  $(TOP)/ext/misc/percentile.c \
-   $(TOP)/ext/misc/prefixes.c \
--  $(TOP)/ext/misc/regexp.c \
-   $(TOP)/ext/misc/remember.c \
--  $(TOP)/ext/misc/series.c \
-   $(TOP)/ext/misc/spellfix.c \
--  $(TOP)/ext/misc/totype.c \
-   $(TOP)/ext/misc/unionvtab.c \
-   $(TOP)/ext/misc/wholenumber.c \
--  $(TOP)/ext/misc/zipfile.c \
-   $(TOP)/ext/userauth/userauth.c
- 
- # Source code to the library files needed by the test fixture
 @@ -647,25 +657,25 @@
  
  libtclsqlite3.la:	tclsqlite.lo libsqlite3.la
@@ -150,20 +114,6 @@ SQLite revision: a26b6597e3ae272231b96f9982c3bcc17ddec2f2b6eb4df06a224b91089fed5
  	$(TOP)/ext/misc/memtrace.c \
          $(TOP)/src/test_windirent.c
  
-@@ -1263,11 +1261,11 @@
- 
- # Fuzz testing
- fuzztest:	fuzzcheck$(TEXE) $(FUZZDATA) sessionfuzz$(TEXE) $(TOP)/test/sessionfuzz-data1.db
--	./fuzzcheck$(TEXE) $(FUZZDATA)
-+	./fuzzcheck$(TEXE) --timeout 3600 $(FUZZDATA)
- 	./sessionfuzz$(TEXE) run $(TOP)/test/sessionfuzz-data1.db
- 
- valgrindfuzz:	fuzzcheck$(TEXT) $(FUZZDATA) sessionfuzz$(TEXE) $(TOP)/test/sessionfuzz-data1.db
--	valgrind ./fuzzcheck$(TEXE) --cell-size-check --limit-mem 10M --timeout 600 $(FUZZDATA)
-+	valgrind ./fuzzcheck$(TEXE) --cell-size-check --limit-mem 10M --timeout 3600 $(FUZZDATA)
- 	valgrind ./sessionfuzz$(TEXE) run $(TOP)/test/sessionfuzz-data1.db
- 
- # The veryquick.test TCL tests.
 @@ -1301,24 +1299,23 @@
  shelltest: $(TESTPROGS)
  	./testfixture$(TEXT) $(TOP)/test/permutations.test shell
