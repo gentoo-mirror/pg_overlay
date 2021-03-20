@@ -146,41 +146,6 @@ SQLite revision: a26b6597e3ae272231b96f9982c3bcc17ddec2f2b6eb4df06a224b91089fed5
 +#endif /* !defined(SQLITE_CORE) || defined(SQLITE_TEST) */
 --- /ext/misc/sha1.c
 +++ /ext/misc/sha1.c
-@@ -175,7 +175,7 @@
- }
- 
- /* Compute a string using sqlite3_vsnprintf() and hash it */
--static void hash_step_vformat(
-+static void sha1_hash_step_vformat(
-   SHA1Context *p,                 /* Add content to this context */
-   const char *zFormat,
-   ...
-@@ -306,7 +306,7 @@
-     nCol = sqlite3_column_count(pStmt);
-     z = sqlite3_sql(pStmt);
-     n = (int)strlen(z);
--    hash_step_vformat(&cx,"S%d:",n);
-+    sha1_hash_step_vformat(&cx,"S%d:",n);
-     hash_step(&cx,(unsigned char*)z,n);
- 
-     /* Compute a hash over the result of the query */
-@@ -349,14 +349,14 @@
-           case SQLITE_TEXT: {
-             int n2 = sqlite3_column_bytes(pStmt, i);
-             const unsigned char *z2 = sqlite3_column_text(pStmt, i);
--            hash_step_vformat(&cx,"T%d:",n2);
-+            sha1_hash_step_vformat(&cx,"T%d:",n2);
-             hash_step(&cx, z2, n2);
-             break;
-           }
-           case SQLITE_BLOB: {
-             int n2 = sqlite3_column_bytes(pStmt, i);
-             const unsigned char *z2 = sqlite3_column_blob(pStmt, i);
--            hash_step_vformat(&cx,"B%d:",n2);
-+            sha1_hash_step_vformat(&cx,"B%d:",n2);
-             hash_step(&cx, z2, n2);
-             break;
-           }
 @@ -370,6 +370,20 @@
  }
  
@@ -223,32 +188,6 @@ SQLite revision: a26b6597e3ae272231b96f9982c3bcc17ddec2f2b6eb4df06a224b91089fed5
 +#endif /* !defined(SQLITE_CORE) || defined(SQLITE_TEST) */
 --- /ext/misc/shathree.c
 +++ /ext/misc/shathree.c
-@@ -527,7 +527,7 @@
- /* Compute a string using sqlite3_vsnprintf() with a maximum length
- ** of 50 bytes and add it to the hash.
- */
--static void hash_step_vformat(
-+static void sha3_hash_step_vformat(
-   SHA3Context *p,                 /* Add content to this context */
-   const char *zFormat,
-   ...
-@@ -665,14 +665,14 @@
-           case SQLITE_TEXT: {
-             int n2 = sqlite3_column_bytes(pStmt, i);
-             const unsigned char *z2 = sqlite3_column_text(pStmt, i);
--            hash_step_vformat(&cx,"T%d:",n2);
-+            sha3_hash_step_vformat(&cx,"T%d:",n2);
-             SHA3Update(&cx, z2, n2);
-             break;
-           }
-           case SQLITE_BLOB: {
-             int n2 = sqlite3_column_bytes(pStmt, i);
-             const unsigned char *z2 = sqlite3_column_blob(pStmt, i);
--            hash_step_vformat(&cx,"B%d:",n2);
-+            sha3_hash_step_vformat(&cx,"B%d:",n2);
-             SHA3Update(&cx, z2, n2);
-             break;
-           }
 @@ -685,17 +685,8 @@
  }
  
