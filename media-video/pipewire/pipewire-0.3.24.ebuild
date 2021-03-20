@@ -83,26 +83,26 @@ src_configure() {
 		-Dspa-plugins=enabled
 		--buildtype=$(usex debug debugoptimized plain)
 		# alsa plugin and jack emulation
-		-Dpipewire-alsa=true
-		$(meson_use jack pipewire-jack)
+		-Dpipewire-alsa=enabled
+		$(meson_feature jack pipewire-jack)
 		# spa-plugins
 		# we install alsa support unconditionally
-		$(meson_use bluetooth bluez5)
-		$(meson_use ffmpeg)
-		$(meson_use jack)
-		$(meson_use vulkan)
+		$(meson_feature bluetooth bluez5)
+		$(meson_feature ffmpeg)
+		$(meson_feature jack)
+		$(meson_feature vulkan)
 		# libcamera is not packaged
 		# misc
-		$(meson_use doc docs)
-		$(meson_use gstreamer)
-		$(meson_use gstreamer gstreamer-device-provider)
+		$(meson_feature doc docs)
+		$(meson_featuregstreamer)
+		$(meson_featuregstreamer gstreamer-device-provider)
 		$(meson_feature sdl sdl2)
 		$(meson_feature sndfile)
-		$(meson_use systemd)
-		$(meson_use test test)
-		$(meson_use test tests)
-		-Dvolume=true
-		-Dpw-cat=true
+		$(meson_feature systemd)
+		$(meson_feature test test)
+		$(meson_featuretest tests)
+		-Dvolume=enabled
+		-Dpw-cat=enabled
 	)
 	meson_src_configure
 }
