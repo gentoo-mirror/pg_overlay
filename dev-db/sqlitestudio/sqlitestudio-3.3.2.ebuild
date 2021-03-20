@@ -39,7 +39,6 @@ DEPEND="${RDEPEND}
 BDEPEND="
 	dev-qt/linguist-tools:5
 "
-S="${WORKDIR}"
 core_build_dir="${S}/output/build"
 plugins_build_dir="${core_build_dir}/Plugins"
 
