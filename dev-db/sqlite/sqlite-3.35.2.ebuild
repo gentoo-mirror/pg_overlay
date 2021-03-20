@@ -136,8 +136,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/"{walmode,chunksize,defaultwal}.patch
-
 	eapply_user
 
 	eautoreconf
