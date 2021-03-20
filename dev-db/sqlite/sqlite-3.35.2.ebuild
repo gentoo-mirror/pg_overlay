@@ -136,6 +136,8 @@ src_unpack() {
 }
 
 src_prepare() {
+	eapply "${FILESDIR}/"${PN}-3.34.0-build_{1.1,2.1,2.2}.patch
+
 	eapply_user
 
 	eautoreconf
