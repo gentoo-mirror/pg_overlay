@@ -78,7 +78,7 @@ src_configure() {
 	append-ldflags -lelogind
 
 	local emesonargs=(
-		-Dexamples=true # contains required pipewire-media-session
+		-Dexamples=enabled # contains required pipewire-media-session
 		-Dman=true
 		-Dspa-plugins=true
 		--buildtype=$(usex debug debugoptimized plain)
