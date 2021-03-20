@@ -27,6 +27,7 @@ dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.68.0: C++ interface for glib2
 dev-cpp/mm-common 1.0.2: Build infrastructure and utilities for GNOME C++ bindings
 dev-db/sqlite 3.35.2: SQL database engine
+dev-db/sqlitestudio 3.3.2: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/ocaml 4.12.0: Programming language supporting functional, imperative & object-oriented styles
 dev-lang/python 2.7.18_p7 3.9.2: An interpreted, interactive, object-oriented programming language
