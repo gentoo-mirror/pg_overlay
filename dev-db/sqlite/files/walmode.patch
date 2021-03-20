@@ -1,6 +1,6 @@
 diff -up sqlite-autoconf-3270100/shell.c.0003~ sqlite-autoconf-3270100/shell.c
---- sqlite-autoconf-3270100/shell.c.0003~	2019-02-10 16:47:12.514344747 +0100
-+++ sqlite-autoconf-3270100/shell.c	2019-02-10 16:48:15.887430140 +0100
+--- sqlite-autoconf-3270100/shell.c	2019-02-10 16:47:12.514344747 +0100
++++ sqlite-autoconf-3270100_/shell.c	2019-02-10 16:48:15.887430140 +0100
 @@ -11610,6 +11610,7 @@ static void open_db(ShellState *p, int o
        }
        exit(1);
