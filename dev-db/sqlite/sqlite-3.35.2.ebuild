@@ -16,7 +16,7 @@ HOMEPAGE="https://sqlite.org/"
 if [[ "${PV}" == "9999" ]]; then
 	SRC_URI=""
 else
-	SRC_URI="https://sqlite.org/2021/${PN}-autoconf-${SRC_PV}.tar.gz
+	SRC_URI="https://sqlite.org/2021/${PN}-src-${SRC_PV}.zip
 		doc? ( https://sqlite.org/2021/${PN}-doc-${DOC_PV}.zip )"
 fi
 
@@ -47,7 +47,7 @@ DEPEND="${RDEPEND}
 if [[ "${PV}" == "9999" ]]; then
 	S="${WORKDIR}/${PN}"
 else
-	S="${WORKDIR}/${PN}-autoconf-${SRC_PV}"
+	S="${WORKDIR}/${PN}-src-${SRC_PV}"
 fi
 
 _fossil_fetch() {
