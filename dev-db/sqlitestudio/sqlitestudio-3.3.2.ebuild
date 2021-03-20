@@ -8,7 +8,7 @@ inherit desktop l10n qmake-utils xdg
 
 DESCRIPTION="Powerful cross-platform SQLite database manager"
 HOMEPAGE="https://sqlitestudio.pl"
-SRC_URI="https://github.com/pawelsalawa/${PN}/releases/download/${PV}/${P}.tar.xz"
+SRC_URI="https://github.com/pawelsalawa/${PN}/archive/refs/tags/${PV}.tar.gz"
 
 KEYWORDS="~amd64 ~x86"
 LICENSE="GPL-3"
