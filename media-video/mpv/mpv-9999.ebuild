@@ -7,7 +7,7 @@ LUA_COMPAT=( lua5-{2..3} luajit )
 PYTHON_COMPAT=( python3_{7..9} )
 PYTHON_REQ_USE='threads(+)'
 
-WAF_PV=2.0.21
+WAF_PV=2.0.22
 
 inherit bash-completion-r1 flag-o-matic lua-single pax-utils python-r1 toolchain-funcs waf-utils xdg-utils
 
@@ -140,7 +140,7 @@ src_prepare() {
 	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
 	chmod +x "${S}"/waf || die
 
-	sed -i 's/2.0.9/2.0.21/g' bootstrap.py || die
+	sed -i 's/2.0.9/2.0.22/g' bootstrap.py || die
 	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
 
 	default
