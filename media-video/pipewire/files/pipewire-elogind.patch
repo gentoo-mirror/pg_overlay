@@ -1,0 +1,26 @@
+diff -Nuar a/meson.build b/meson.build
+--- a/meson.build	2021-03-18 20:50:04.000000000 +0700
++++ b/meson.build	2021-03-20 10:40:53.132748647 +0700
+@@ -284,6 +284,11 @@
+   cdata.set('HAVE_SYSTEMD', 1)
+ endif
+ 
++libelogind_dep = dependency('libelogind', required : get_option('elogind'))
++if libelogind_dep.found()
++  cdata.set('HAVE_SYSTEMD', 1)
++endif
++
+ configinc = include_directories('.')
+ pipewire_inc = include_directories('src')
+ 
+diff -Nuar a/meson_options.txt b/meson_options.txt
+--- a/meson_options.txt	2021-03-18 20:50:04.000000000 +0700
++++ b/meson_options.txt	2021-03-20 10:39:26.230708308 +0700
+@@ -176,3 +176,7 @@
+        description: 'Enable code that depends on libsndfile',
+        type: 'feature',
+        value: 'auto')
++option('elogind',
++	description : 'Optional elogind support',
++	type : 'feature',
++	value : 'enabled')

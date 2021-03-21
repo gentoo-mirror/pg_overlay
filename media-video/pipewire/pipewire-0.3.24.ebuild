@@ -57,6 +57,8 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 RESTRICT="!test? ( test )"
 
+PATCHES=( "${FILESDIR}/${PN}-elogind.patch" )
+
 src_prepare() {
 	spa_use() {
 		if ! in_iuse ${1} || ! use ${1}; then
@@ -72,6 +74,9 @@ src_prepare() {
 	spa_use bluetooth bluez5
 	spa_use jack
 	spa_use vulkan
+
+	# too loud bug
+	sed -i s:volume = merge:volume = ignore:g spa/plugins/alsa/mixer/paths/analog-output.conf.common
 }
 
 src_configure() {
