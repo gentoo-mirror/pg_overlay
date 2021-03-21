@@ -3,11 +3,12 @@ DEPEND==net-libs/libtorrent-9999 >=net-misc/curl-7.19.1 sys-libs/ncurses:0= xmlr
 DESCRIPTION=BitTorrent Client using libtorrent
 EAPI=6
 HOMEPAGE=https://rakshasa.github.io/rtorrent/
+INHERIT=autotools git-r3 linux-info
 IUSE=daemon debug selinux test xmlrpc ipv6 kernel_linux
 LICENSE=GPL-2
 PROPERTIES=live
 RDEPEND==net-libs/libtorrent-9999 >=net-misc/curl-7.19.1 sys-libs/ncurses:0= xmlrpc? ( dev-libs/xmlrpc-c ) daemon? ( app-misc/screen ) selinux? ( sec-policy/selinux-rtorrent )
 RESTRICT=!test? ( test )
 SLOT=0
-_eclasses_=autotools	9988ecbe04129214297a7bbf3d253710	eapi7-ver	f9ec87e93172b25ce65a85303dc06964	git-r3	3e7ec3d6619213460c85e2aa48398441	libtool	f143db5a74ccd9ca28c1234deffede96	linux-info	c90a203b1c14cfa77bd3e37a0e96c955	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4
+_eclasses_=toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	d410501a125f99ffb560b0c523cd3d1e	libtool	f143db5a74ccd9ca28c1234deffede96	autotools	4ba6c345bf49883c84d5fa5c9bf40c0b	git-r3	3e7ec3d6619213460c85e2aa48398441	eapi7-ver	f9ec87e93172b25ce65a85303dc06964	linux-info	c90a203b1c14cfa77bd3e37a0e96c955
 _md5_=f6db16ed9e3f7a3ac5677ace4cc4cbbb

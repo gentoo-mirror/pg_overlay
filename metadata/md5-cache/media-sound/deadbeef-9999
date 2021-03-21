@@ -4,6 +4,7 @@ DEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson aac? ( media-libs/faad2
 DESCRIPTION=DeaDBeeF is a modular audio player similar to foobar2000
 EAPI=7
 HOMEPAGE=https://deadbeef.sourceforge.io/
+INHERIT=autotools xdg l10n git-r3
 IUSE=aac alsa cdda converter cover dts ffmpeg flac +hotkeys mp3 musepack nls notify nullout opus oss pulseaudio shellexec +supereq threads vorbis +mac +wavpack +zip
 KEYWORDS=~amd64 ~x86
 LICENSE=GPL-2 LGPL-2.1
@@ -11,5 +12,5 @@ PROPERTIES=live
 RDEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson aac? ( media-libs/faad2 ) alsa? ( media-libs/alsa-lib ) cdda? ( dev-libs/libcdio:0= media-libs/libcddb dev-libs/libcdio-paranoia:0= ) cover? ( media-libs/imlib2[jpeg,png] ) dts? ( media-libs/libdca ) ffmpeg? ( media-video/ffmpeg ) flac? ( media-libs/flac media-libs/libogg ) mp3? ( media-sound/mpg123 ) musepack? ( media-sound/musepack-tools ) nls? ( virtual/libintl ) notify? ( sys-apps/dbus ) opus? ( media-libs/opusfile ) pulseaudio? ( media-sound/pulseaudio ) vorbis? ( media-libs/libvorbis ) mac? ( dev-lang/yasm ) wavpack? ( media-sound/wavpack ) zip? ( dev-libs/libzip )
 REQUIRED_USE=|| ( alsa oss pulseaudio nullout )
 SLOT=0
-_eclasses_=autotools	9988ecbe04129214297a7bbf3d253710	git-r3	3e7ec3d6619213460c85e2aa48398441	l10n	8cdd85e169b835d518bc2fd59f780d8e	libtool	f143db5a74ccd9ca28c1234deffede96	multilib	d410501a125f99ffb560b0c523cd3d1e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	xdg-utils	ff2ff954e6b17929574eee4efc5152ba
+_eclasses_=toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	d410501a125f99ffb560b0c523cd3d1e	libtool	f143db5a74ccd9ca28c1234deffede96	autotools	4ba6c345bf49883c84d5fa5c9bf40c0b	xdg-utils	ff2ff954e6b17929574eee4efc5152ba	xdg	c7ba313ea1eaf266f95cc6235f7d6a07	l10n	8cdd85e169b835d518bc2fd59f780d8e	git-r3	3e7ec3d6619213460c85e2aa48398441
 _md5_=91dd6b7b3866165b6db8f3c2730e280e
