@@ -76,7 +76,7 @@ src_prepare() {
 	spa_use vulkan
 
 	# too loud bug
-	sed -i s:volume = merge:volume = ignore:g spa/plugins/alsa/mixer/paths/analog-output.conf.common || die
+	sed -i "s:volume = merge:volume = ignore:g" spa/plugins/alsa/mixer/paths/analog-output.conf.common || die
 }
 
 src_configure() {
