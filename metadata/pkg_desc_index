@@ -155,7 +155,6 @@ net-im/pidgin 2.14.1 2.9999 9999: GTK Instant Messenger client
 net-im/telegram-desktop 9999: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
-net-libs/glib-networking 2.68.0: Network-related giomodules for glib
 net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management library for GLib applications
 net-libs/libsoup 2.72.0: HTTP client/server library for GNOME
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
@@ -208,7 +207,6 @@ www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using 
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.4 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33 3.24.26: Gimp ToolKit +
-x11-libs/pango 1.48.2: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
