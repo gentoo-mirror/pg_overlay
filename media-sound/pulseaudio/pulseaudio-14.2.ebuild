@@ -2,12 +2,17 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-inherit autotools bash-completion-r1 flag-o-matic gnome2-utils linux-info systemd toolchain-funcs udev multilib-minimal tmpfiles poly-c_ebuilds
+inherit meson bash-completion-r1 flag-o-matic gnome2-utils linux-info systemd toolchain-funcs udev multilib-minimal
 
 DESCRIPTION="A networked sound server with an advanced plugin system"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/PulseAudio/"
-SRC_URI="https://freedesktop.org/software/pulseaudio/releases/${MY_P}.tar.xz"
-
+SRC_URI="https://freedesktop.org/software/pulseaudio/releases/${P}.tar.xz"
+if [[ ${PV} = 9999 ]]; then
+	inherit git-r3
+	SRC_URI=""
+	EGIT_BRANCH="master"
+	EGIT_REPO_URI="https://gitlab.freedesktop.org/pulseaudio/pulseaudio"
+fi
 # libpulse-simple and libpulse link to libpulse-core; this is daemon's
 # library and can link to gdbm and other GPL-only libraries. In this
 # cases, we have a fully GPL-2 package. Leaving the rest of the
@@ -19,7 +24,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-l
 
 # +alsa-plugin as discussed in bug #519530
 IUSE="+alsa +alsa-plugin +asyncns bluetooth +caps dbus doc equalizer elogind gconf
-+gdbm +glib gtk ipv6 jack libsamplerate libressl lirc native-headset cpu_flags_arm_neon
++gdbm +glib gtk ipv6 jack libsamplerate libressl lirc native-headset
 ofono-headset +orc oss qt5 realtime selinux sox ssl systemd system-wide tcpd test
 +udev +webrtc-aec +X zeroconf"
 
@@ -63,7 +68,7 @@ RDEPEND="
 	bluetooth? (
 		>=net-wireless/bluez-5
 		>=sys-apps/dbus-1.0.0
-		media-libs/sbc
+		media-libs/sbc[${MULTILIB_USEDEP}]
 	)
 	asyncns? ( net-libs/libasyncns[${MULTILIB_USEDEP}] )
 	udev? ( >=virtual/udev-143[hwdb(+)] )
@@ -121,10 +126,7 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-PATCHES=(
-	"${FILESDIR}/${PN}-13.0-hfp.patch"
-	"${FILESDIR}/${PN}-13.99.3-avoid_bashisms.patch"
-)
+PATCHES=( ${WORKDIR}/${P}-elogind.patch )
 
 pkg_pretend() {
 	CONFIG_CHECK="~HIGH_RES_TIMERS"
@@ -149,97 +151,77 @@ src_prepare() {
 	default
 
 	# Skip test that cannot work with sandbox, bug #501846
-	sed -i -e '/lock-autospawn-test /d' src/Makefile.am || die
-	sed -i -e 's/lock-autospawn-test$(EXEEXT) //' src/Makefile.in || die
+	#sed -i -e '/lock-autospawn-test /d' src/Makefile.am || die
+	#sed -i -e 's/lock-autospawn-test$(EXEEXT) //' src/Makefile.in || die
+}
 
-	eautoreconf
+pa_meson_multilib_native_use_enable() {
+	echo "-D ${2-${1}}=$(usex ${1} true false)"
+}
+
+
+pa_meson_multilib_native_use_feature() {
+	echo "-D ${2-${1}}=$(usex ${1} enabled disabled)"
 }
 
 multilib_src_configure() {
-	local myconf=(
-		--disable-adrian-aec
-		--disable-esound
-		--disable-gconf
-		--disable-solaris
-		--enable-largefile
+	local emesonargs=(
+		-D adrian-aec=false
 		--localstatedir="${EPREFIX}"/var
-		--with-systemduserunitdir=$(systemd_get_userunitdir)
-		--with-udev-rules-dir="${EPREFIX}/$(get_udevdir)"/rules.d
-		$(multilib_native_use_enable alsa)
-		$(multilib_native_use_enable bluetooth bluez5)
-		$(multilib_native_use_enable glib gsettings)
-		$(multilib_native_use_enable gtk gtk3)
-		$(multilib_native_use_enable jack)
-		$(multilib_native_use_enable libsamplerate samplerate)
-		$(multilib_native_use_enable lirc)
-		$(multilib_native_use_enable orc)
-		$(multilib_native_use_enable oss oss-output)
-		$(multilib_native_use_enable ssl openssl)
+		-D modlibexecdir="${EPREFIX}"/"usr/$(get_libdir)/pulseaudio-${PV}"
+		-D systemduserunitdir=$(systemd_get_userunitdir)
+		-D udevrulesdir="${EPREFIX}/$(get_udevdir)"/rules.d
+		-D bashcompletiondir="$(get_bashcompdir)"
+		$(pa_meson_multilib_native_use_feature alsa)
+		$(pa_meson_multilib_native_use_enable bluetooth bluez5)
+		$(pa_meson_multilib_native_use_feature glib gsettings)
+		$(pa_meson_multilib_native_use_feature gtk)
+		$(pa_meson_multilib_native_use_feature jack)
+		$(pa_meson_multilib_native_use_feature libsamplerate samplerate)
+		$(pa_meson_multilib_native_use_feature lirc)
+		$(pa_meson_multilib_native_use_feature orc)
+		$(pa_meson_multilib_native_use_feature oss oss-output)
+		$(pa_meson_multilib_native_use_feature ssl openssl)
 		# tests involve random modules, so just do them for the native
-		$(multilib_native_use_enable test default-build-tests)
-		$(multilib_native_use_enable udev)
-		$(multilib_native_use_enable webrtc-aec)
-		$(multilib_native_use_enable zeroconf avahi)
-		$(multilib_native_use_with equalizer fftw)
-		$(multilib_native_use_with sox soxr)
-		$(multilib_native_usex gdbm '--with-database=gdbm' '--with-database=simple')
-		$(use_enable glib glib2)
-		$(use_enable asyncns)
-		$(use_enable cpu_flags_arm_neon neon-opt)
-		$(use_enable tcpd tcpwrap)
-		$(use_enable dbus)
-		$(use_enable X x11)
-		$(use_enable systemd systemd-daemon)
-		# systemd-login isn't necessary for non-native, but the rest of systemd are; not changing it at this point close to a meson port
-		$(use_enable systemd systemd-login)
-		$(use_enable systemd systemd-journal)
-		$(use_enable ipv6)
-		$(use_with caps)
+		$(pa_meson_multilib_native_use_enable test tests)
+		$(pa_meson_multilib_native_use_feature udev)
+		$(pa_meson_multilib_native_use_feature webrtc-aec)
+		$(pa_meson_multilib_native_use_feature zeroconf avahi)
+		$(pa_meson_multilib_native_use_feature equalizer fftw)
+		$(pa_meson_multilib_native_use_feature sox soxr)
+		-D database=$(multilib_native_usex gdbm gdbm simple)
+		$(meson_feature glib)
+		$(meson_feature asyncns)
+		#$(meson_use cpu_flags_arm_neon neon-opt)
+		$(meson_feature tcpd tcpwrap)
+		$(meson_feature dbus)
+		$(meson_feature X x11)
+		$(meson_feature systemd)
+		$(meson_use ipv6)
 	)
 
-	if use elogind && multilib_is_native_abi; then
-		local PKGCONFIG="$(tc-getPKG_CONFIG)"
-		myconf+=(
-			--enable-systemd-login
-			SYSTEMDLOGIN_CFLAGS="$(${PKGCONFIG} --cflags "libelogind")"
-			SYSTEMDLOGIN_LIBS="$(${PKGCONFIG} --libs "libelogind")"
-		)
-	fi
-
 	if use bluetooth; then
-		myconf+=(
-			$(multilib_native_use_enable native-headset bluez5-native-headset)
-			$(multilib_native_use_enable ofono-headset bluez5-ofono-headset)
+		emesonargs+=(
+			$(pa_meson_multilib_native_use_enable native-headset bluez5-native-headset)
+			$(pa_meson_multilib_native_use_enable ofono-headset bluez5-ofono-headset)
 		)
 	fi
 
-	if ! multilib_is_native_abi; then
-		myconf+=(
-			# hack around unnecessary checks
-			# (results don't matter, we're not building anything using it)
-			ac_cv_lib_ltdl_lt_dladvise_init=yes
-			LIBSPEEX_CFLAGS=' '
-			LIBSPEEX_LIBS=' '
-		)
-	else
+	if multilib_is_native_abi; then
 		# Make padsp work for non-native ABI, supposedly only possible with glibc; this is used by /usr/bin/padsp that comes from native build, thus we need this argument for native build
 		if use elibc_glibc ; then
-			myconf+=( --with-pulsedsp-location="${EPREFIX}"'/usr/\\$$LIB/pulseaudio' )
+			emesonargs+=( -D pulsedsp-location="${EPREFIX}"'/usr/\\$$LIB/pulseaudio' )
 		fi
 	fi
 
-	ECONF_SOURCE=${S} \
-	econf "${myconf[@]}"
+	meson_src_configure
 }
 
 multilib_src_compile() {
+	meson_src_compile
+
 	if multilib_is_native_abi; then
-		emake
-		use doc && emake doxygen
-	else
-		local targets=( libpulse.la libpulsedsp.la libpulse-simple.la )
-		use glib && targets+=( libpulse-mainloop-glib.la )
-		emake -C src ${targets[*]}
+		use doc && meson_src_compile doxygen
 	fi
 }
 
@@ -248,26 +230,21 @@ multilib_src_test() {
 	# po/'s tests too, and they are broken. Officially, it should work
 	# with intltool 0.41, but that doesn't look like a stable release.
 	if multilib_is_native_abi; then
-		emake -C src check
+		meson_src_test
 	fi
 }
 
 multilib_src_install() {
+	meson_src_install
+
 	if multilib_is_native_abi; then
-		emake -j1 DESTDIR="${D}" bashcompletiondir="$(get_bashcompdir)" install
 		if use doc ; then
 			docinto html
 			dodoc -r doxygen/html/
 		fi
 	else
-		local targets=( libpulse.la libpulse-simple.la )
-		use glib && targets+=( libpulse-mainloop-glib.la )
-		emake DESTDIR="${D}" install-pkgconfigDATA
-		emake DESTDIR="${D}" -C src \
-			install-libLTLIBRARIES \
-			install-padsplibLTLIBRARIES \
-			lib_LTLIBRARIES="${targets[*]}" \
-			install-pulseincludeHEADERS
+		# remove foreign abi modules
+		rm -rf "${ED}"/usr/$(get_libdir)/pulse-*/
 	fi
 }
 
@@ -293,7 +270,7 @@ multilib_src_install_all() {
 		systemd_dounit "${FILESDIR}/${PN}.service"
 
 		# We need /var/run/pulse, bug #442852
-		newtmpfiles "${FILESDIR}/${PN}.tmpfiles" "${PN}.conf"
+		systemd_newtmpfilesd "${FILESDIR}/${PN}.tmpfiles" "${PN}.conf"
 	else
 		# Prevent warnings when system-wide is not used, bug #447694
 		if use dbus ; then

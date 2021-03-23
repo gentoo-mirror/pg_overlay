@@ -1,0 +1,54 @@
+diff --git a/meson.build b/meson.build
+index 7da784cc8e4a7888d32b622ea5e24e9de6484ed1..5a1df59d9d95c088be2697554b13bf4f1f7fa334 100644
+--- a/meson.build
++++ b/meson.build
+@@ -655,6 +655,11 @@ if systemd_dep.found() and systemduserunitdir == ''
+   systemduserunitdir = systemd_dep.get_pkgconfig_variable('systemduserunitdir')
+ endif
+ 
++libelogind_dep = dependency('libelogind', required : get_option('elogind'))
++if libelogind_dep.found()
++  cdata.set('HAVE_SYSTEMD_LOGIN', 1)
++endif
++
+ tcpwrap_dep = cc.find_library('wrap', required: get_option('tcpwrap'))
+ if cc.has_header('tcpd.h') and cc.has_function('hosts_access', dependencies : tcpwrap_dep)
+   cdata.set('HAVE_LIBWRAP', 1)
+@@ -899,6 +904,7 @@ summary = [
+   'Enable udev:                   @0@'.format(udev_dep.found()),
+   '  Enable HAL->udev compat:     @0@'.format(get_option('hal-compat')),
+   'Enable systemd:                @0@'.format(libsystemd_dep.found()),
++  'Enable elogind:                @0@'.format(libelogind_dep.found()),
+   'Enable TCP Wrappers:           @0@'.format(tcpwrap_dep.found()),
+   'Enable libsamplerate:          @0@'.format(samplerate_dep.found()),
+   'Enable IPv6:                   @0@'.format(get_option('ipv6')),
+diff --git a/meson_options.txt b/meson_options.txt
+index ca96ea8ecc9db15ed3a4d5f05fd7fc34c89b8b39..e2d08becdbf697f37c86ac796abef36eebd96f23 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -93,6 +93,9 @@ option('bluez5-ofono-headset',
+ option('dbus',
+        type : 'feature', value : 'auto',
+        description : 'Optional D-Bus support')
++option('elogind',
++       type : 'feature', value : 'auto',
++       description : 'Optional elogind support')
+ option('fftw',
+        type : 'feature', value : 'auto',
+        description : 'Optional FFTW support')
+diff --git a/src/modules/meson.build b/src/modules/meson.build
+index fce3c8814b47c076a3c3e05617a21270e354ec03..f9b46f844841446d453db4b5c474d7dfee55cbeb 100644
+--- a/src/modules/meson.build
++++ b/src/modules/meson.build
+@@ -203,9 +203,9 @@ if openssl_dep.found()
+   endif
+ endif
+ 
+-if libsystemd_dep.found()
++if libsystemd_dep.found() or libelogind_dep.found()
+   all_modules += [
+-    [ 'module-systemd-login', 'module-systemd-login.c', [], [], [libsystemd_dep] ],
++    [ 'module-systemd-login', 'module-systemd-login.c', [], [], [libsystemd_dep, libelogind_dep] ],
+   ]
+ endif
+ 
