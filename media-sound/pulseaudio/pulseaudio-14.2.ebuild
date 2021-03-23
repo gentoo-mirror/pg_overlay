@@ -166,7 +166,7 @@ pa_meson_multilib_native_use_feature() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		-D adrian-aec=false
+		-D adrian-aec=true
 		--localstatedir="${EPREFIX}"/var
 		-D modlibexecdir="${EPREFIX}"/"usr/$(get_libdir)/pulseaudio-${PV}"
 		-D systemduserunitdir=$(systemd_get_userunitdir)
