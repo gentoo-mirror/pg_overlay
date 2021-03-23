@@ -24,7 +24,7 @@ BDEPEND="
 		$(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]")
 	)"
 
-LLVM_COMPONENTS=( polly llvm/include )
+LLVM_COMPONENTS=( polly llvm)
 LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
 llvm.org_set_globals
 
@@ -52,7 +52,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
 		-DLLVM_LINK_LLVM_DYLIB=ON
-		#-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
+		-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
