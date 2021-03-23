@@ -4,14 +4,9 @@ firefox-testing.patch
 mozilla-1686888.patch
 
 firefox-tests-xpcshell.patch
-firefox-tests-reftest.patch
 
 rhbz-1173156.patch
 mozilla-1170092.patch
 rhbz-1354671.patch
-firefox-locale-debug.patch
 disable-openh264-download.patch
 firefox-nss-addon-hack.patch
-firefox-kde-webrender.patch
-
-mozilla-1683578.patch
