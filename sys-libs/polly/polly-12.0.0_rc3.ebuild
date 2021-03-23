@@ -50,7 +50,7 @@ src_unpack() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_SHARED_LIBS=OFF
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
 		#-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
 		-DLLVM_INCLUDE_TESTS=$(usex test)
