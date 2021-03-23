@@ -99,8 +99,8 @@ src_configure() {
 		# libcamera is not packaged
 		# misc
 		$(meson_feature doc docs)
-		$(meson_featuregstreamer)
-		$(meson_featuregstreamer gstreamer-device-provider)
+		$(meson_feature gstreamer)
+		$(meson_feature gstreamer gstreamer-device-provider)
 		$(meson_feature sdl sdl2)
 		$(meson_feature sndfile)
 		$(meson_feature systemd)
