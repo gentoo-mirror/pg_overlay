@@ -24,7 +24,7 @@ BDEPEND="
 		$(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]")
 	)"
 
-LLVM_COMPONENTS=( polly llvm/include)
+LLVM_COMPONENTS=( polly llvm clang )
 LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
 llvm.org_set_globals
 
@@ -37,15 +37,26 @@ pkg_setup() {
 	use test && python-any-r1_pkg_setup
 }
 
+src_unpack() {
+	llvm.org_src_unpack
+
+	# Directory ${WORKDIR}/llvm does not exist with USE="-test",
+	# but LLVM_MAIN_SRC_DIR="${WORKDIR}/llvm" is set below,
+	# and ${LLVM_MAIN_SRC_DIR}/../libunwind/include is used by build system
+	# (lld/MachO/CMakeLists.txt) and is expected to be resolvable
+	# to existent directory ${WORKDIR}/libunwind/include.
+	mkdir -p "${WORKDIR}/llvm" || die
+}
+
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=OFF
-		-DLLVM_LINK_LLVM_DYLIB=ON
+		-DBUILD_SHARED_LIBS=ON
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
+		-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
 		-DLLVM_INCLUDE_TESTS=$(usex test)
-		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
-		-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
-		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
+		#-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+		#-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+		#-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_BUILD_TESTS=ON
