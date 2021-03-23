@@ -50,13 +50,13 @@ src_unpack() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=OFF
+		-DBUILD_SHARED_LIBS=ON
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
-		#-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
+		-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
 		-DLLVM_INCLUDE_TESTS=$(usex test)
-		#-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
-		#-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
-		#-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
+		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+		-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_BUILD_TESTS=ON
