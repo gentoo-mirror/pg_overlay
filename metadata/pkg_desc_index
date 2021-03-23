@@ -139,7 +139,7 @@ media-sound/mac 6.11: Monkey's Audio Codecs
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
-media-sound/pulseaudio 14.2_pre: A networked sound server with an advanced plugin system
+media-sound/pulseaudio 14.2_pre 14.2: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
@@ -186,6 +186,8 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.2: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.11.0_rc1: xfs filesystem utilities
 sys-kernel/gentoo-sources 5.9.8: Full sources including the Gentoo patchset for the 5.9 kernel tree
+sys-libs/clang 12.0.0_rc3: C language family frontend for LLVM
+sys-libs/llvm 12.0.0_rc3: Low Level Virtual Machine
 sys-libs/ncurses 6.2_p20210306: console display library
 sys-libs/polly 11.0.1 11.1.0 12.0.0_rc3: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre48: Multi-platform library designed to allow a developer to create robust software
