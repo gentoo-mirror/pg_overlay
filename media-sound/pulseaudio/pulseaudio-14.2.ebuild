@@ -126,7 +126,7 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-PATCHES=( ${FILESDIR}/${P}-elogind.patch )
+#PATCHES=( ${FILESDIR}/${P}-elogind.patch )
 
 pkg_pretend() {
 	CONFIG_CHECK="~HIGH_RES_TIMERS"
