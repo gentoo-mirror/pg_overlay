@@ -15,8 +15,8 @@ KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND="dev-libs/boost
-		dev-libs/libevdevplus
-		dev-libs/libuinputplus"
+		<=dev-libs/libevdevplus-0.1.1
+		<=dev-libs/libuinputplus-0.1.4"
 DEPEND="${RDEPEND}"
 
 src_configure() {
