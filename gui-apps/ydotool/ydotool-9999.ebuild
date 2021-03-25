@@ -14,10 +14,9 @@ SLOT="0"
 KEYWORDS=""
 IUSE=""
 
-RDEPEND="dev-libs/boost
-		dev-libs/libevdevplus
-		dev-libs/libuinputplus"
-DEPEND="${RDEPEND}"
+RDEPEND="dev-libs/boost"
+DEPEND="${RDEPEND}
+		app-text/scdoc"
 
 src_configure() {
 	local mycmakeargs=(
