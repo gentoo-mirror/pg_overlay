@@ -1,7 +1,7 @@
-diff -up firefox-75.0/extensions/pref/autoconfig/src/nsReadConfig.cpp.1170092 firefox-75.0/extensions/pref/autoconfig/src/nsReadConfig.cpp
---- firefox-75.0/extensions/pref/autoconfig/src/nsReadConfig.cpp.1170092	2020-04-03 21:34:41.000000000 +0200
-+++ firefox-75.0/extensions/pref/autoconfig/src/nsReadConfig.cpp	2020-04-06 22:40:02.760674871 +0200
-@@ -244,8 +244,20 @@ nsresult nsReadConfig::openAndEvaluateJS
+diff -up firefox-87.0/extensions/pref/autoconfig/src/nsReadConfig.cpp.1170092 firefox-87.0/extensions/pref/autoconfig/src/nsReadConfig.cpp
+--- firefox-87.0/extensions/pref/autoconfig/src/nsReadConfig.cpp.1170092	2021-03-18 14:48:36.000000000 +0100
++++ firefox-87.0/extensions/pref/autoconfig/src/nsReadConfig.cpp	2021-03-22 19:20:02.429310184 +0100
+@@ -249,8 +249,20 @@ nsresult nsReadConfig::openAndEvaluateJS
      if (NS_FAILED(rv)) return rv;
  
      rv = NS_NewLocalFileInputStream(getter_AddRefs(inStr), jsFile);
@@ -23,10 +23,10 @@ diff -up firefox-75.0/extensions/pref/autoconfig/src/nsReadConfig.cpp.1170092 fi
    } else {
      nsAutoCString location("resource://gre/defaults/autoconfig/");
      location += aFileName;
-diff -up firefox-75.0/modules/libpref/Preferences.cpp.1170092 firefox-75.0/modules/libpref/Preferences.cpp
---- firefox-75.0/modules/libpref/Preferences.cpp.1170092	2020-04-06 22:40:02.761674865 +0200
-+++ firefox-75.0/modules/libpref/Preferences.cpp	2020-04-06 22:40:57.675325227 +0200
-@@ -4468,6 +4468,9 @@ nsresult Preferences::InitInitialObjects
+diff -up firefox-87.0/modules/libpref/Preferences.cpp.1170092 firefox-87.0/modules/libpref/Preferences.cpp
+--- firefox-87.0/modules/libpref/Preferences.cpp.1170092	2021-03-18 14:48:54.000000000 +0100
++++ firefox-87.0/modules/libpref/Preferences.cpp	2021-03-22 19:20:02.429310184 +0100
+@@ -4499,6 +4499,9 @@ nsresult Preferences::InitInitialObjects
    //
    // Thus, in the omni.jar case, we always load app-specific default
    // preferences from omni.jar, whether or not `$app == $gre`.
@@ -36,10 +36,10 @@ diff -up firefox-75.0/modules/libpref/Preferences.cpp.1170092 firefox-75.0/modul
  
    nsresult rv = NS_ERROR_FAILURE;
    UniquePtr<nsZipFind> find;
-diff -up firefox-75.0/toolkit/xre/nsXREDirProvider.cpp.1170092 firefox-75.0/toolkit/xre/nsXREDirProvider.cpp
---- firefox-75.0/toolkit/xre/nsXREDirProvider.cpp.1170092	2020-04-03 21:35:39.000000000 +0200
-+++ firefox-75.0/toolkit/xre/nsXREDirProvider.cpp	2020-04-06 22:40:02.761674865 +0200
-@@ -60,6 +60,7 @@
+diff -up firefox-87.0/toolkit/xre/nsXREDirProvider.cpp.1170092 firefox-87.0/toolkit/xre/nsXREDirProvider.cpp
+--- firefox-87.0/toolkit/xre/nsXREDirProvider.cpp.1170092	2021-03-18 14:52:00.000000000 +0100
++++ firefox-87.0/toolkit/xre/nsXREDirProvider.cpp	2021-03-22 19:37:56.574480347 +0100
+@@ -65,6 +65,7 @@
  #endif
  #ifdef XP_UNIX
  #  include <ctype.h>
@@ -47,7 +47,7 @@ diff -up firefox-75.0/toolkit/xre/nsXREDirProvider.cpp.1170092 firefox-75.0/tool
  #endif
  #ifdef XP_IOS
  #  include "UIKitDirProvider.h"
-@@ -533,6 +534,21 @@ nsXREDirProvider::GetFile(const char* aP
+@@ -552,6 +553,21 @@ nsXREDirProvider::GetFile(const char* aP
        }
      }
    }
@@ -69,12 +69,12 @@ diff -up firefox-75.0/toolkit/xre/nsXREDirProvider.cpp.1170092 firefox-75.0/tool
    if (NS_FAILED(rv) || !file) return NS_ERROR_FAILURE;
  
    if (ensureFilePermissions) {
-@@ -845,6 +861,16 @@ nsresult nsXREDirProvider::GetFilesInter
+@@ -874,6 +890,16 @@ nsresult nsXREDirProvider::GetFilesInter
+     }
+ #endif
  
-     LoadDirIntoArray(mXULAppDir, kAppendPrefDir, directories);
- 
-+    // Add /etc/<application>/pref/ directory if it exists
-+    nsCOMPtr<nsIFile> systemPrefDir;
++  // Add /etc/<application>/pref/ directory if it exists
++   nsCOMPtr<nsIFile> systemPrefDir;
 +    rv = NS_GetSpecialDirectory(NS_APP_PREFS_SYSTEM_CONFIG_DIR,
 +                                getter_AddRefs(systemPrefDir));
 +    if (NS_SUCCEEDED(rv)) {
@@ -86,10 +86,10 @@ diff -up firefox-75.0/toolkit/xre/nsXREDirProvider.cpp.1170092 firefox-75.0/tool
      rv = NS_NewArrayEnumerator(aResult, directories, NS_GET_IID(nsIFile));
    } else if (!strcmp(aProperty, NS_APP_CHROME_DIR_LIST)) {
      // NS_APP_CHROME_DIR_LIST is only used to get default (native) icons
-diff -up firefox-75.0/xpcom/io/nsAppDirectoryServiceDefs.h.1170092 firefox-75.0/xpcom/io/nsAppDirectoryServiceDefs.h
---- firefox-75.0/xpcom/io/nsAppDirectoryServiceDefs.h.1170092	2020-04-03 21:35:39.000000000 +0200
-+++ firefox-75.0/xpcom/io/nsAppDirectoryServiceDefs.h	2020-04-06 22:40:02.761674865 +0200
-@@ -60,6 +60,7 @@
+diff -up firefox-87.0/xpcom/io/nsAppDirectoryServiceDefs.h.1170092 firefox-87.0/xpcom/io/nsAppDirectoryServiceDefs.h
+--- firefox-87.0/xpcom/io/nsAppDirectoryServiceDefs.h.1170092	2021-03-18 14:51:58.000000000 +0100
++++ firefox-87.0/xpcom/io/nsAppDirectoryServiceDefs.h	2021-03-22 19:20:02.430310213 +0100
+@@ -59,6 +59,7 @@
  #define NS_APP_PREFS_DEFAULTS_DIR_LIST "PrefDL"
  #define NS_APP_PREFS_OVERRIDE_DIR \
    "PrefDOverride"  // Directory for per-profile defaults
