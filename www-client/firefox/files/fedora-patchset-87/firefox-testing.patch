@@ -1,6 +1,6 @@
-diff -up firefox-85.0/docshell/base/crashtests/crashtests.list.testing firefox-85.0/docshell/base/crashtests/crashtests.list
---- firefox-85.0/docshell/base/crashtests/crashtests.list.testing	2021-01-18 19:29:32.000000000 +0100
-+++ firefox-85.0/docshell/base/crashtests/crashtests.list	2021-01-21 09:45:17.767276466 +0100
+diff -up firefox-87.0/docshell/base/crashtests/crashtests.list.testing firefox-87.0/docshell/base/crashtests/crashtests.list
+--- firefox-87.0/docshell/base/crashtests/crashtests.list.testing	2021-03-18 14:48:29.000000000 +0100
++++ firefox-87.0/docshell/base/crashtests/crashtests.list	2021-03-22 19:07:27.214761368 +0100
 @@ -13,7 +13,6 @@ load 614499-1.html
  load 678872-1.html
  skip-if(Android) pref(dom.disable_open_during_load,false) load 914521.html # Android bug 1584562
@@ -9,9 +9,9 @@ diff -up firefox-85.0/docshell/base/crashtests/crashtests.list.testing firefox-8
  load 1341657.html
  load 1584467.html
  load 1614211-1.html
-diff -up firefox-85.0/dom/media/tests/crashtests/crashtests.list.testing firefox-85.0/dom/media/tests/crashtests/crashtests.list
---- firefox-85.0/dom/media/tests/crashtests/crashtests.list.testing	2021-01-21 09:45:17.767276466 +0100
-+++ firefox-85.0/dom/media/tests/crashtests/crashtests.list	2021-01-21 09:48:35.245124690 +0100
+diff -up firefox-87.0/dom/media/tests/crashtests/crashtests.list.testing firefox-87.0/dom/media/tests/crashtests/crashtests.list
+--- firefox-87.0/dom/media/tests/crashtests/crashtests.list.testing	2021-03-18 14:48:35.000000000 +0100
++++ firefox-87.0/dom/media/tests/crashtests/crashtests.list	2021-03-22 19:07:27.214761368 +0100
 @@ -25,7 +25,6 @@ asserts-if(Android,0-1) pref(browser.lin
  load 1443212.html
  asserts-if(Android,0-2) load 1453030.html
@@ -20,9 +20,9 @@ diff -up firefox-85.0/dom/media/tests/crashtests/crashtests.list.testing firefox
  load 1505957.html
  load 1509442.html
  load 1511130.html
-diff -up firefox-85.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py.testing firefox-85.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py
---- firefox-85.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py.testing	2021-01-18 19:30:26.000000000 +0100
-+++ firefox-85.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py	2021-01-21 09:45:17.767276466 +0100
+diff -up firefox-87.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py.testing firefox-87.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py
+--- firefox-87.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py.testing	2021-03-18 14:49:06.000000000 +0100
++++ firefox-87.0/testing/marionette/harness/marionette_harness/tests/unit/test_marionette.py	2021-03-22 19:07:27.214761368 +0100
 @@ -69,15 +69,7 @@ class TestMarionette(MarionetteTestCase)
  
      def test_application_update_disabled(self):
@@ -40,24 +40,28 @@ diff -up firefox-85.0/testing/marionette/harness/marionette_harness/tests/unit/t
          self.assertFalse(update_allowed)
  
  
-diff -up firefox-85.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt.testing firefox-85.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt
---- firefox-85.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt.testing	2021-01-18 19:30:19.000000000 +0100
-+++ firefox-85.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt	2021-01-21 09:45:17.767276466 +0100
+diff -up firefox-87.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt.testing firefox-87.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt
+--- firefox-87.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt.testing	2021-03-18 14:49:54.000000000 +0100
++++ firefox-87.0/testing/tools/websocketprocessbridge/websocketprocessbridge_requirements_3.txt	2021-03-22 19:07:27.214761368 +0100
 @@ -1,4 +1,5 @@
  # This file is the websocketprocess requirements.txt used with python 3.
 +pyrsistent
  
  # needed by txws, and we'd like pip to get it from the local server before setuptools tries pypi
  six
-diff -up firefox-85.0/toolkit/crashreporter/test/unit/xpcshell.ini.testing firefox-85.0/toolkit/crashreporter/test/unit/xpcshell.ini
---- firefox-85.0/toolkit/crashreporter/test/unit/xpcshell.ini.testing	2021-01-18 19:31:16.000000000 +0100
-+++ firefox-85.0/toolkit/crashreporter/test/unit/xpcshell.ini	2021-01-21 09:45:17.767276466 +0100
-@@ -37,7 +37,7 @@ skip-if = (os != 'win' && os != 'linux')
+diff -up firefox-87.0/toolkit/crashreporter/test/unit/xpcshell.ini.testing firefox-87.0/toolkit/crashreporter/test/unit/xpcshell.ini
+--- firefox-87.0/toolkit/crashreporter/test/unit/xpcshell.ini.testing	2021-03-22 19:07:27.214761368 +0100
++++ firefox-87.0/toolkit/crashreporter/test/unit/xpcshell.ini	2021-03-22 19:10:00.264361746 +0100
+@@ -37,7 +37,6 @@ skip-if = (os != 'win' && os != 'linux')
  
  [test_crash_AsyncShutdown.js]
  [test_event_files.js]
 -[test_crash_terminator.js]
-+#[test_crash_terminator.js]
  
- [test_crash_heap_corruption.js]
- skip-if = os != 'win'
+ [test_crash_backgroundtask_moz_crash.js]
+ 
+@@ -112,4 +111,3 @@ head = head_crashreporter.js head_win64c
+ skip-if = !(os == 'win' && bits == 64 && processor == 'x86_64')
+ reason = Windows test specific to the x86-64 architecture
+ support-files = test_crash_win64cfi_not_a_pe.exe
+-

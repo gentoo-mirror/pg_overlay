@@ -1,0 +1,29 @@
+diff -up firefox-87.0/dom/media/platforms/PDMFactory.cpp.ffvpx-with-vapi firefox-87.0/dom/media/platforms/PDMFactory.cpp
+--- firefox-87.0/dom/media/platforms/PDMFactory.cpp.ffvpx-with-vapi	2021-03-22 21:31:15.466328522 +0100
++++ firefox-87.0/dom/media/platforms/PDMFactory.cpp	2021-03-22 21:32:15.034156238 +0100
+@@ -462,12 +462,6 @@ void PDMFactory::CreateRddPDMs() {
+     CreateAndStartupPDM<AppleDecoderModule>();
+   }
+ #endif
+-#ifdef MOZ_FFVPX
+-  if (StaticPrefs::media_ffvpx_enabled() &&
+-      StaticPrefs::media_rdd_ffvpx_enabled()) {
+-    CreateAndStartupPDM<FFVPXRuntimeLinker>();
+-  }
+-#endif
+ #ifdef MOZ_FFMPEG
+   if (StaticPrefs::media_ffmpeg_enabled() &&
+       StaticPrefs::media_rdd_ffmpeg_enabled() &&
+@@ -477,6 +471,12 @@ void PDMFactory::CreateRddPDMs() {
+     mFailureFlags -= DecoderDoctorDiagnostics::Flags::FFmpegFailedToLoad;
+   }
+ #endif
++#ifdef MOZ_FFVPX
++  if (StaticPrefs::media_ffvpx_enabled() &&
++      StaticPrefs::media_rdd_ffvpx_enabled()) {
++    CreateAndStartupPDM<FFVPXRuntimeLinker>();
++  }
++#endif
+   CreateAndStartupPDM<AgnosticDecoderModule>();
+ }
+ 

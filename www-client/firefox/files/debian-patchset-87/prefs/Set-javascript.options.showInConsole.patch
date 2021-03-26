@@ -7,10 +7,10 @@ Subject: Set javascript.options.showInConsole
  1 file changed, 1 insertion(+)
 
 diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
-index dba747c..7d5b13e 100644
+index c7cde89..92e0ee3 100644
 --- a/modules/libpref/init/all.js
 +++ b/modules/libpref/init/all.js
-@@ -1083,6 +1083,7 @@ pref("javascript.options.ion",              true);
+@@ -1098,6 +1098,7 @@ pref("javascript.options.ion",              true);
  pref("javascript.options.ion.threshold",    1500);
  // Duplicated in JitOptions - ensure both match.
  pref("javascript.options.ion.frequent_bailout_threshold", 10);
