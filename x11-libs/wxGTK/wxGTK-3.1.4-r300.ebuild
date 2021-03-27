@@ -14,7 +14,6 @@ DESCRIPTION="GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit"
 HOMEPAGE="https://wxwidgets.org/"
 SRC_URI="
 	https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/wxWidgets-${PV}.tar.bz2
-	https://dev.gentoo.org/~leio/distfiles/wxGTK-3.0.4_p20190713.tar.xz
 	doc? ( https://github.com/wxWidgets/wxWidgets/releases/download/v${PV}/wxWidgets-${PV}-docs-html.tar.bz2 )"
 S="${WORKDIR}/wxWidgets-${PV}"
 
@@ -56,7 +55,6 @@ BDEPEND="
 	virtual/pkgconfig"
 
 PATCHES=(
-	"${WORKDIR}"/wxGTK-3.0.4_p20190713/
 	"${FILESDIR}"/wxGTK-${SLOT}-translation-domain.patch
 	"${FILESDIR}"/wxGTK-ignore-c++-abi.patch #676878
 )
