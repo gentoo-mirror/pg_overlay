@@ -124,6 +124,7 @@ media-libs/fontconfig 2.13.92: A library for configuring and customizing font ac
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 3.104.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.14-r1: Simple Direct Media Layer
+media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.5: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.2.170 9999: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.170: Vulkan Installable Client Driver (ICD) Loader
