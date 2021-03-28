@@ -252,7 +252,6 @@ rustc_version-0.2.3
 ryu-1.0.5
 safemem-0.3.3
 same-file-1.0.6
-sccache-0.2.15
 schannel-0.1.19
 scopeguard-1.1.0
 security-framework-2.0.0
@@ -403,7 +402,10 @@ SLOT="0"
 KEYWORDS="~amd64"
 IUSE="azure dist-client dist-server gcs memcached redis s3"
 
+BDEPEND="virtual/pkgconfig"
+
 DEPEND="
+	app-arch/zstd
 	dist-server? ( dev-libs/openssl:0= )
 	gcs? ( dev-libs/openssl:0= )
 "
