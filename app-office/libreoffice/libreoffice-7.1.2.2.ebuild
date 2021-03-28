@@ -134,6 +134,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=dev-cpp/clucene-2.3.3.4-r2
 	>=dev-cpp/libcmis-0.5.2
 	dev-db/unixODBC
+	>=games-engines/box2d-2.4.1:0
 	dev-lang/perl
 	>=dev-libs/boost-1.72.0:=[nls]
 	dev-libs/expat
@@ -150,7 +151,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/qrcodegen
 	>=dev-libs/redland-1.0.16
 	>=dev-libs/xmlsec-1.2.28[nss]
-	games-engines/box2d:=
 	media-gfx/fontforge
 	media-gfx/graphite2
 	media-libs/fontconfig
@@ -164,7 +164,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/libpng-1.4:0=
 	>=media-libs/libvisio-0.1.0
 	media-libs/libzmf
-	net-libs/neon
+	>=net-libs/neon-0.31.1:=
 	net-misc/curl
 	sci-mathematics/lpsolve
 	sys-libs/zlib
@@ -267,7 +267,6 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	!app-office/libreoffice-bin
 	!app-office/libreoffice-bin-debug
-	!app-office/openoffice
 	media-fonts/liberation-fonts
 	|| ( x11-misc/xdg-utils kde-plasma/kde-cli-tools )
 	java? ( || (
@@ -641,11 +640,6 @@ EOF
 			dosym8 -r ${loprogdir}/__pycache__/${pyc} $(python_get_sitedir)/__pycache__/${pyc}
 		done < <(find "${D}"${lodir}/program -type f -name ${py/.py/*.pyc} -print0)
 	done
-
-	# bug 709450
-	#mkdir -p "${ED}"/usr/share/metainfo || die
-	#mv "${ED}"/usr/share/appdata/* "${ED}"/usr/share/metainfo/ || die
-	#rmdir "${ED}"/usr/share/appdata || die
 }
 
 pkg_postinst() {
