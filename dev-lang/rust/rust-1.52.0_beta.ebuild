@@ -66,8 +66,8 @@ LLVM_MAX_SLOT=12
 # https://github.com/rust-lang/rust/blob/${PV}/src/stage0.txt
 BOOTSTRAP_DEPEND="||
 	(
-		=dev-lang/rust-$(ver_cut 1).$(($(ver_cut 2) - 1))*
-		=dev-lang/rust-bin-$(ver_cut 1).$(($(ver_cut 2) - 1))*
+		=dev-lang/rust-$(ver_cut 1).$(($(ver_cut 2) - 2))*
+		=dev-lang/rust-bin-$(ver_cut 1).$(($(ver_cut 2) - 2))*
 		=dev-lang/rust-$(ver_cut 1).$(ver_cut 2)*
 		=dev-lang/rust-bin-$(ver_cut 1).$(ver_cut 2)*
 	)
@@ -148,7 +148,7 @@ toml_usex() {
 boostrap_rust_version_check() {
 	# never call from pkg_pretend. eselect-rust may be not installed yet.
 	[[ ${MERGE_TYPE} == binary ]] && return
-	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 1))"
+	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 2))"
 	local rustc_toonew="$(ver_cut 1).$(($(ver_cut 2) + 1))"
 	local rustc_version=( $(eselect --brief rust show 2>/dev/null) )
 	rustc_version=${rustc_version[0]#rust-bin-}
