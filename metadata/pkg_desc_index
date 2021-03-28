@@ -2,6 +2,7 @@ app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.3: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6 17.03 17.03-r1: Port of 7-Zip archiver for Unix
+app-cdr/dolphin-plugins-mountiso 21.03.80: Dolphin plugin for ISO loopback device mounting
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre144: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
@@ -93,18 +94,15 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/boost-build 1.75.0: A system for large project software construction, simple to use and powerful
-dev-util/cmake 3.20.0_rc2: Cross platform Make
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/glslang 11.1.0.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/meson 0.57.1_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2: ninja-compatible build tool written in C
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
-dev-util/spirv-tools 2020.7: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.170: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.2.170: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.2.173: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.2.173: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 dev-vcs/mercurial 5.7: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
@@ -117,6 +115,233 @@ gui-apps/ydotool 0.1.9 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
+kde-apps/akonadi 21.03.80: Storage service for PIM data and libraries for PIM apps
+kde-apps/akonadi-calendar 21.03.80: Library for akonadi calendar integration
+kde-apps/akonadi-contacts 21.03.80: Library for akonadi contact integration
+kde-apps/akonadi-import-wizard 21.03.80: Assistant to import PIM data from other applications into Akonadi
+kde-apps/akonadi-mime 21.03.80: Library for akonadi mime types
+kde-apps/akonadi-notes 21.03.80: Library for akonadi notes integration
+kde-apps/akonadi-search 21.03.80: Libraries and daemons to implement searching in Akonadi
+kde-apps/akonadiconsole 21.03.80: Application for debugging Akonadi Resources
+kde-apps/akregator 21.03.80: News feed aggregator
+kde-apps/analitza 21.03.80: KDE library for mathematical features
+kde-apps/ark 21.03.80: File archiver by KDE
+kde-apps/artikulate 21.03.80: Language learning application that helps improving pronunciation skills
+kde-apps/audiocd-kio 21.03.80: kioslave for accessing audio CDs
+kde-apps/baloo-widgets 21.03.80: Widget library for baloo
+kde-apps/blinken 21.03.80: Memory enhancement game based on KDE Frameworks
+kde-apps/bomber 21.03.80: Single player arcade bombing game
+kde-apps/bovo 21.03.80: Five-in-a-row Board Game
+kde-apps/calendarjanitor 21.03.80: Tool to scan calendar data for buggy instances
+kde-apps/calendarsupport 21.03.80: Calendar support library
+kde-apps/cantor 21.03.80: Interface for doing mathematics and scientific computing
+kde-apps/cervisia 21.03.80: CVS frontend by KDE
+kde-apps/dolphin 21.03.80: Plasma filemanager focusing on usability
+kde-apps/dolphin-plugins-dropbox 21.03.80: Dolphin plugin for Dropbox service integration
+kde-apps/dolphin-plugins-git 21.03.80: Dolphin plugin for Git integration
+kde-apps/dolphin-plugins-mercurial 21.03.80: Dolphin plugin for Mercurial integration
+kde-apps/dolphin-plugins-subversion 21.03.80: Dolphin plugin for Subversion integration
+kde-apps/dragon 21.03.80: Simple video player
+kde-apps/eventviews 21.03.80: Calendar viewer for KDE PIM
+kde-apps/ffmpegthumbs 21.03.80: FFmpeg based thumbnail generator for video files
+kde-apps/filelight 21.03.80: Visualise disk usage with interactive map of concentric, segmented rings
+kde-apps/granatier 21.03.80: KDE Bomberman game
+kde-apps/grantlee-editor 21.03.80: Utilities and tools to manage themes in KDE PIM applications
+kde-apps/grantleetheme 21.03.80: Library for Grantlee plugins
+kde-apps/gwenview 21.03.80: Image viewer by KDE
+kde-apps/incidenceeditor 21.03.80: Incidence editor for korganizer
+kde-apps/juk 21.03.80: Jukebox and music manager by KDE
+kde-apps/k3b 21.03.80: Full-featured burning and ripping application based on KDE Frameworks
+kde-apps/kaccounts-integration 21.03.80: Administer web accounts for the sites and services across the Plasma desktop
+kde-apps/kaccounts-providers 21.03.80: KDE accounts providers
+kde-apps/kaddressbook 21.03.80: Address book application based on KDE Frameworks
+kde-apps/kajongg 21.03.80: Classical Mah Jongg for four players
+kde-apps/kalarm 21.03.80: Application to manage alarms and other timer based alerts for the desktop
+kde-apps/kalarmcal 21.03.80: Client library to access and handling of KAlarm calendar data
+kde-apps/kalgebra 21.03.80: MathML-based 2D and 3D graph calculator by KDE
+kde-apps/kalzium 21.03.80: Periodic table of the elements
+kde-apps/kamera 21.03.80: Plasma integration for gphoto2 cameras
+kde-apps/kamoso 21.03.80: Application to take pictures and videos from your webcam by KDE
+kde-apps/kanagram 21.03.80: Game based on anagrams of words
+kde-apps/kapman 21.03.80: Pac-Man clone by KDE
+kde-apps/kapptemplate 21.03.80: Shell script to create the necessary framework to develop KDE applications
+kde-apps/kate 21.03.80: Multi-document editor with network transparency, Plasma integration and more
+kde-apps/katomic 21.03.80: KDE Atomic Entertainment Game
+kde-apps/kbackup 21.03.80: Program that lets you back up any directories or files
+kde-apps/kblackbox 21.03.80: Game of hide and seek played on a grid of boxes
+kde-apps/kblocks 21.03.80: Single-player Tetris-like KDE game
+kde-apps/kbounce 21.03.80: KDE Bounce Ball Game
+kde-apps/kbreakout 21.03.80: Breakout-like game by KDE
+kde-apps/kbruch 21.03.80: Educational application to learn calculating with fractions
+kde-apps/kcachegrind 21.03.80: Frontend for Cachegrind by KDE
+kde-apps/kcalc 21.03.80: KDE calculator
+kde-apps/kcalutils 21.03.80: Library providing utility functions for the handling of calendar data
+kde-apps/kcharselect 21.03.80: KDE character selection utility
+kde-apps/kcolorchooser 21.03.80: KDE color selector/editor
+kde-apps/kcron 21.03.80: KDE Task Scheduler
+kde-apps/kde-apps-meta 21.03.80: Meta package for the KDE Release Service collection
+kde-apps/kde-dev-scripts 21.03.80: KDE Development Scripts
+kde-apps/kde-dev-utils 21.03.80: KDE Development Utilities
+kde-apps/kdeaccessibility-meta 21.03.80: kdeaccessibility - merge this to pull in all kdeaccessiblity-derived packages
+kde-apps/kdeadmin-meta 21.03.80: KDE administration tools - merge this to pull in all kdeadmin-derived packages
+kde-apps/kdebugsettings 21.03.80: Application to enable/disable qCDebug
+kde-apps/kdecore-meta 21.03.80: kdecore - merge this to pull in the most basic applications
+kde-apps/kdeedu-data 21.03.80: Shared icons, artwork and data files for educational applications
+kde-apps/kdeedu-meta 21.03.80: KDE educational apps - merge this to pull in all kdeedu-derived packages
+kde-apps/kdegames-meta 21.03.80: kdegames - merge this to pull in all kdegames-derived packages
+kde-apps/kdegraphics-meta 21.03.80: kdegraphics - merge this to pull in all kdegraphics-derived packages
+kde-apps/kdegraphics-mobipocket 21.03.80: Library to support mobipocket ebooks
+kde-apps/kdemultimedia-meta 21.03.80: kdemultimedia - merge this to pull in all kdemultimedia-derived packages
+kde-apps/kdenetwork-filesharing 21.03.80: SMB filesharing config module for systemsettings
+kde-apps/kdenetwork-meta 21.03.80: kdenetwork - merge this to pull in all kdenetwork-derived packages
+kde-apps/kdenlive 21.03.80: Non-linear video editing suite by KDE
+kde-apps/kdepim-addons 21.03.80: Plugins for KDE Personal Information Management Suite
+kde-apps/kdepim-meta 21.03.80: KDE PIM - merge this to pull in all kdepim-derived packages
+kde-apps/kdepim-runtime 21.03.80: Runtime plugin collection to extend the functionality of KDE PIM
+kde-apps/kdesdk-kioslaves 21.03.80: kioslaves from kdesdk package
+kde-apps/kdesdk-meta 21.03.80: KDE SDK - merge this to pull in all kdesdk-derived packages
+kde-apps/kdesdk-thumbnailers 21.03.80: Thumbnail generator for PO files
+kde-apps/kdeutils-meta 21.03.80: kdeutils - merge this to pull in all kdeutils-derived packages
+kde-apps/kdf 21.03.80: KDE free disk space utility
+kde-apps/kdialog 21.03.80: Can be used to show nice dialog boxes from shell scripts
+kde-apps/kdiamond 21.03.80: Single player three-in-a-row game
+kde-apps/keditbookmarks 21.03.80: Bookmarks editor based on KDE Frameworks
+kde-apps/kfind 21.03.80: File finder utility based on KDE Frameworks
+kde-apps/kfloppy 21.03.80: Straightforward graphical means to format 3.5" and 5.25" floppy disks
+kde-apps/kfourinline 21.03.80: KDE four-in-a-row game
+kde-apps/kgeography 21.03.80: Geography learning tool
+kde-apps/kget 21.03.80: Advanced download manager by KDE
+kde-apps/kgoldrunner 21.03.80: Game of action and puzzle solving by KDE
+kde-apps/kgpg 21.03.80: Frontend for GnuPG, a powerful encryption utility by KDE
+kde-apps/khangman 21.03.80: Classical hangman game by KDE
+kde-apps/khelpcenter 21.03.80: Application to read documentation for KDE Plasma, Applications, Utilities
+kde-apps/kidentitymanagement 21.03.80: Library for managing identitites
+kde-apps/kig 21.03.80: KDE Interactive Geometry tool
+kde-apps/kigo 21.03.80: Go game by KDE
+kde-apps/killbots 21.03.80: Kill the bots or they kill you!
+kde-apps/kimagemapeditor 21.03.80: Generator of HTML image maps
+kde-apps/kimap 21.03.80: Library for interacting with IMAP servers
+kde-apps/kio-extras 21.03.80: KIO plugins present a filesystem-like view of arbitrary data
+kde-apps/kipi-plugins 21.03.80: Plugins for the KDE Image Plugin Interface
+kde-apps/kiriki 21.03.80: An addictive and fun dice game
+kde-apps/kiten 21.03.80: KDE Japanese dictionary and reference
+kde-apps/kitinerary 21.03.80: Data Model and Extraction System for Travel Reservation information
+kde-apps/kjumpingcube 21.03.80: Tactical one or two player game
+kde-apps/kldap 21.03.80: Library for interacting with LDAP servers
+kde-apps/kleopatra 21.03.80: Certificate manager and GUI for OpenPGP and CMS cryptography
+kde-apps/klettres 21.03.80: Alphabet learning application
+kde-apps/klickety 21.03.80: An adaptation of the Clickomania game
+kde-apps/klines 21.03.80: A little KDE game about balls and how to get rid of them
+kde-apps/kmag 21.03.80: KDE screen magnifier
+kde-apps/kmahjongg 21.03.80: A tile matching game for one or two players
+kde-apps/kmail 21.03.80: Email client, supporting POP3 and IMAP mailboxes.
+kde-apps/kmail-account-wizard 21.03.80: Assistant for KMail accounts configuration
+kde-apps/kmailtransport 21.03.80: Mail transport service
+kde-apps/kmbox 21.03.80: Library for accessing MBox format mail storages
+kde-apps/kmime 21.03.80: Libary for handling mail messages and newsgroup articles
+kde-apps/kmines 21.03.80: Classic mine sweeper game
+kde-apps/kmix 21.03.80: Volume control gui based on KDE Frameworks
+kde-apps/kmousetool 21.03.80: KDE program that clicks the mouse for you
+kde-apps/kmouth 21.03.80: Text-to-speech synthesizer front end
+kde-apps/kmplot 21.03.80: Mathematical function plotter
+kde-apps/knavalbattle 21.03.80: Battleship clone by KDE
+kde-apps/knetwalk 21.03.80: KDE version of the popular NetWalk game for system administrators
+kde-apps/knights 21.03.80: Simple chess board based on KDE Frameworks
+kde-apps/knotes 21.03.80: Note taking application
+kde-apps/kolf 21.03.80: Minigolf game by KDE
+kde-apps/kollision 21.03.80: Simple ball dodging game
+kde-apps/kolourpaint 21.03.80: Paint Program by KDE
+kde-apps/kompare 21.03.80: A program to view the differences between files
+kde-apps/konqueror 21.03.80: Web browser and file manager based on KDE Frameworks
+kde-apps/konquest 21.03.80: Galactic Strategy KDE Game
+kde-apps/konsole 21.03.80: KDE's terminal emulator
+kde-apps/konsolekalendar 21.03.80: Command line interface to KDE calendars
+kde-apps/kontact 21.03.80: Container application to unify several major PIM applications within one
+kde-apps/kontactinterface 21.03.80: Library for embedding KParts in a Kontact component
+kde-apps/kopete 21.03.80: Multi-protocol IM client based on KDE Frameworks
+kde-apps/korganizer 21.03.80: Organizational assistant, providing calendars and other similar functionality
+kde-apps/kpat 21.03.80: KDE patience game
+kde-apps/kpimtextedit 21.03.80: Extended text editor for PIM applications
+kde-apps/kpkpass 21.03.80: Library to deal with Apple Wallet pass files
+kde-apps/kqtquickcharts 21.03.80: Qt Quick plugin for beautiful and interactive charts
+kde-apps/krdc 21.03.80: Remote desktop connection (RDP and VNC) client
+kde-apps/kreversi 21.03.80: Board game by KDE
+kde-apps/krfb 21.03.80: VNC-compatible server to share Plasma desktops
+kde-apps/kross-interpreters 21.03.80: Kross interpreter plugins for programming languages
+kde-apps/kruler 21.03.80: Screen ruler for Plasma
+kde-apps/kshisen 21.03.80: Solitaire-like game played using the standard set of Mahjong tiles
+kde-apps/ksirk 21.03.80: Port of the board game risk
+kde-apps/ksmtp 21.03.80: Job-based library to send email through an SMTP server
+kde-apps/ksnakeduel 21.03.80: KDE Tron game
+kde-apps/kspaceduel 21.03.80: Space Game by KDE
+kde-apps/ksquares 21.03.80: KDE clone of the game squares
+kde-apps/ksudoku 21.03.80: Logic-based symbol placement puzzle by KDE
+kde-apps/ksystemlog 21.03.80: System log viewer by KDE
+kde-apps/kteatime 21.03.80: KDE timer for making a fine cup of tea
+kde-apps/ktimer 21.03.80: Little tool to execute programs after some time
+kde-apps/ktouch 21.03.80: Program that helps to learn and practice touch typing
+kde-apps/ktp-accounts-kcm 21.03.80: KDE Telepathy account management kcm
+kde-apps/ktp-approver 21.03.80: KDE Telepathy notification handler
+kde-apps/ktp-auth-handler 21.03.80: KDE Telepathy authentication handler
+kde-apps/ktp-common-internals 21.03.80: KDE Telepathy common library
+kde-apps/ktp-contact-list 21.03.80: KDE Telepathy contact list
+kde-apps/ktp-contact-runner 21.03.80: KDE Telepathy krunner plugin
+kde-apps/ktp-desktop-applets 21.03.80: KDE Telepathy contact, presence and chat Plasma applets
+kde-apps/ktp-filetransfer-handler 21.03.80: KDE Telepathy file transfer handler
+kde-apps/ktp-kded-module 21.03.80: KDE Telepathy workspace integration
+kde-apps/ktp-send-file 21.03.80: KDE Telepathy file manager plugin to send files to contacts
+kde-apps/ktp-text-ui 21.03.80: KDE Telepathy text chat window
+kde-apps/ktuberling 21.03.80: Potato game for kids by KDE
+kde-apps/kturtle 21.03.80: Educational programming environment using the Logo programming language
+kde-apps/kubrick 21.03.80: Game based on the "Rubik's Cube" puzzle by KDE
+kde-apps/kwalletmanager 21.03.80: Tool to manage the passwords on your system using KDE Wallet
+kde-apps/kwave 21.03.80: Sound editor built on KDE Frameworks 5 that can edit many types of audio files
+kde-apps/kwordquiz 21.03.80: Powerful flashcard and vocabulary learning program
+kde-apps/kwrite 21.03.80: Simple text editor based on KDE Frameworks
+kde-apps/libgravatar 21.03.80: Library for gravatar integration
+kde-apps/libkcddb 21.03.80: KDE library for CDDB
+kde-apps/libkcompactdisc 21.03.80: Library for playing & ripping CDs
+kde-apps/libkdcraw 21.03.80: Digital camera raw image library wrapper
+kde-apps/libkdegames 21.03.80: Base library common to many KDE games
+kde-apps/libkdepim 21.03.80: Common PIM libraries
+kde-apps/libkeduvocdocument 21.03.80: Library for reading/writing KVTML
+kde-apps/libkexiv2 21.03.80: Wrapper around exiv2 library
+kde-apps/libkgapi 21.03.80: Library for accessing Google calendar and contact resources
+kde-apps/libkipi 21.03.80: A library for image plugins accross KDE applications
+kde-apps/libkleo 21.03.80: Library for encryption handling
+kde-apps/libkmahjongg 21.03.80: Mahjongg library based on Qt/KDE Frameworks
+kde-apps/libkomparediff2 21.03.80: KDE library to compare files and strings
+kde-apps/libksane 21.03.80: SANE Library interface based on KDE Frameworks
+kde-apps/libksieve 21.03.80: Common PIM libraries
+kde-apps/libktnef 21.03.80: Library for handling TNEF data
+kde-apps/lokalize 21.03.80: Localization tool for KDE software and other free and open source software
+kde-apps/lskat 21.03.80: Skat game by KDE
+kde-apps/mailcommon 21.03.80: Common mail library
+kde-apps/mailimporter 21.03.80: Library to import mail from various sources
+kde-apps/marble 21.03.80: Virtual Globe and World Atlas to learn more about Earth
+kde-apps/mbox-importer 21.03.80: Import mbox email archives from various sources into Akonadi
+kde-apps/messagelib 21.03.80: Libraries for messaging functions
+kde-apps/minuet 21.03.80: Music Education software by KDE
+kde-apps/okular 21.03.80: Universal document viewer based on KDE Frameworks
+kde-apps/palapeli 21.03.80: Jigsaw puzzle game by KDE
+kde-apps/parley 21.03.80: A vocabulary trainer to help you memorize things
+kde-apps/picmi 21.03.80: Nonogram logic game by KDE
+kde-apps/pim-data-exporter 21.03.80: Assistant to backup and archive PIM data and configuration
+kde-apps/pim-sieve-editor 21.03.80: Assistant for editing IMAP Sieve filters
+kde-apps/pimcommon 21.03.80: Common PIM libraries
+kde-apps/plasma-telepathy-meta 21.03.80: Plasma Telepathy client
+kde-apps/poxml 21.03.80: KDE utility to translate DocBook XML files using gettext po files
+kde-apps/print-manager 21.03.80: Manage print jobs and printers in Plasma
+kde-apps/rocs 21.03.80: Interface to work with Graph Theory
+kde-apps/signon-kwallet-extension 21.03.80: KWallet extension for signond
+kde-apps/spectacle 21.03.80: Screenshot capture utility
+kde-apps/step 21.03.80: Interactive physics simulator
+kde-apps/svgpart 21.03.80: Kpart for viewing SVGs
+kde-apps/sweeper 21.03.80: Privacy settings widget to clean unwanted traces on the system
+kde-apps/thumbnailers 21.03.80: Thumbnail generators for PDF/PS and RAW files
+kde-apps/umbrello 21.03.80: KDE UML Modeller
+kde-apps/yakuake 21.03.80: Quake-style terminal emulator based on konsole
+kde-apps/zeroconf-ioslave 21.03.80: DNSSD (DNS Service Discovery - part of Rendezvous) ioslave and kded module
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.20.5: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 78.9.0: Thunderbird Mail Client
@@ -126,8 +351,8 @@ media-libs/libplacebo 3.104.0: Reusable library for GPU-accelerated image proces
 media-libs/libsdl2 2.0.14-r1: Simple Direct Media Layer
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2020.5: Collection of tools, libraries and tests for shader compilation
-media-libs/vulkan-layers 1.2.170 9999: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.170: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.2.173 9999: Vulkan Validation Layers
+media-libs/vulkan-loader 1.2.173: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
