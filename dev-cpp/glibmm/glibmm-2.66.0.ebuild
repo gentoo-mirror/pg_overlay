@@ -15,13 +15,13 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="
 	>=dev-libs/glib-2.63.0:2[${MULTILIB_USEDEP}]
-	dev-libs/libsigc++:3[doc?,${MULTILIB_USEDEP}]
+	dev-libs/libsigc++:2[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
 	virtual/pkgconfig
 	doc? (
-		app-doc/doxygen[dot]
+		app-doc/doxygen
 		dev-lang/perl
 		dev-libs/libxslt
 	)
