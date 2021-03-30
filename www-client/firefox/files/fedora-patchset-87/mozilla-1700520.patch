@@ -1,0 +1,51 @@
+diff --git a/gfx/wr/swgl/src/blend.h b/gfx/wr/swgl/src/blend.h
+--- a/gfx/wr/swgl/src/blend.h
++++ b/gfx/wr/swgl/src/blend.h
+@@ -405,7 +405,7 @@
+   blend_key = BlendKey(AA_BLEND_KEY_NONE + blend_key);
+ }
+ 
+-static ALWAYS_INLINE WideRGBA8 blend_pixels(uint32_t* buf, PackedRGBA8 pdst,
++static PREFER_INLINE WideRGBA8 blend_pixels(uint32_t* buf, PackedRGBA8 pdst,
+                                             WideRGBA8 src, int span = 4) {
+   WideRGBA8 dst = unpack(pdst);
+   const WideRGBA8 RGB_MASK = {0xFFFF, 0xFFFF, 0xFFFF, 0,      0xFFFF, 0xFFFF,
+@@ -686,7 +686,7 @@
+   // clang-format on
+ }
+ 
+-static ALWAYS_INLINE WideR8 blend_pixels(uint8_t* buf, WideR8 dst, WideR8 src,
++static PREFER_INLINE WideR8 blend_pixels(uint8_t* buf, WideR8 dst, WideR8 src,
+                                          int span = 4) {
+ // clang-format off
+ #define BLEND_CASE_KEY(key)                          \
+diff --git a/gfx/wr/swgl/src/gl.cc b/gfx/wr/swgl/src/gl.cc
+--- a/gfx/wr/swgl/src/gl.cc
++++ b/gfx/wr/swgl/src/gl.cc
+@@ -58,10 +58,24 @@
+ }
+ 
+ #else
+-#  define ALWAYS_INLINE __attribute__((always_inline)) inline
++// GCC is slower when dealing with always_inline, especially in debug builds.
++// When using Clang, use always_inline more aggressively.
++#  if defined(__clang__) || defined(NDEBUG)
++#    define ALWAYS_INLINE __attribute__((always_inline)) inline
++#  else
++#    define ALWAYS_INLINE inline
++#  endif
+ #  define NO_INLINE __attribute__((noinline))
+ #endif
+ 
++// Some functions may cause excessive binary bloat if inlined in debug or with
++// GCC builds, so use PREFER_INLINE on these instead of ALWAYS_INLINE.
++#if defined(__clang__) && defined(NDEBUG)
++#  define PREFER_INLINE ALWAYS_INLINE
++#else
++#  define PREFER_INLINE inline
++#endif
++
+ #define UNREACHABLE __builtin_unreachable()
+ 
+ #define UNUSED [[maybe_unused]]
+
