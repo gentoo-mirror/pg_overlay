@@ -137,6 +137,7 @@ RESTRICT="test"
 
 PATCHES=(
 	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
+	"${FILESDIR}"/0001-Change-LLVM-targets.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
