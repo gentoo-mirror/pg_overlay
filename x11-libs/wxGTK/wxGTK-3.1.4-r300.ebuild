@@ -142,7 +142,7 @@ multilib_src_install_all() {
 	rm -f "${ED}"/usr/share/locale/it/LC_MESSAGES/wxmsw31-gtk3.mo || die
 
 	# Unversioned links
-	rm "${ED}"/usr/bin/wx{-config,rc} || die
+	rm "${ED}"/usr/bin/wx{-config,rc} # || die
 
 	# version bakefile presets
 	pushd "${ED}"/usr/share/bakefile/presets >/dev/null || die
