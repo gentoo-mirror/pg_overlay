@@ -78,7 +78,7 @@ src_configure() {
 
 	if use X; then
 		myconf+=(
-			$(use_enable remote amule-gui)
+			$(use_enable gui amule-gui)
 			$(use_enable stats alc)
 			$(use_enable stats wxcas)
 		)
@@ -106,7 +106,7 @@ src_install() {
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
 
-	if use X && use remote; then
+	if use X && use gui; then
 		rm ${D}/usr/bin/amule
 	fi
 }
