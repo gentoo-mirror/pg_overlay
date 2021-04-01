@@ -409,6 +409,7 @@ sys-devel/clang-common 12.0.0_rc4: Common files shared between multiple slots of
 sys-devel/clang-runtime 12.0.0_rc4: Meta-ebuild for clang runtime libraries
 sys-devel/lld 12.0.0_rc4: The LLVM linker (link editor)
 sys-devel/llvm 12.0.0_rc3 12.0.0_rc4: Low Level Virtual Machine
+sys-devel/llvm-common 12.0.0_rc4: Common files shared between multiple slots of LLVM
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.2: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.11.0_rc1: xfs filesystem utilities
