@@ -3,15 +3,16 @@
 
 EAPI=7
 
+CMAKE_ECLASS=cmake
 PYTHON_COMPAT=( python3_{6..9} )
-inherit cmake llvm llvm.org python-any-r1
+inherit cmake linux-info llvm llvm.org python-any-r1
 
 DESCRIPTION="Polyhedral optimizations for LLVM"
 HOMEPAGE="https://llvm.org/"
 
 LICENSE="Apache-2.0-with-LLVM-exceptions UoI-NCSA"
 SLOT="$(ver_cut 1)"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86 ~amd64-linux"
+KEYWORDS=""
 IUSE="test"
 RESTRICT="!test? ( test )"
 
@@ -23,9 +24,13 @@ BDEPEND="
 		$(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]")
 	)"
 
-LLVM_COMPONENTS=( polly )
+LLVM_COMPONENTS=( polly llvm )
 LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
 llvm.org_set_globals
+
+PATCHES=(
+	"${FILESDIR}/support-linking-ScopPassManager-against-LLVM-dylib.patch"
+)
 
 python_check_deps() {
 	has_version -b "dev-python/lit[${PYTHON_USEDEP}]"
@@ -38,7 +43,7 @@ pkg_setup() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DLLVM_LINK_LLVM_DYLIB=ON
+		-DBUILD_SHARED_LIBS=OFF
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
@@ -47,7 +52,6 @@ src_configure() {
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_BUILD_TESTS=ON
-		-DLLVM_MAIN_SRC_DIR="${WORKDIR}/llvm"
 		-DLLVM_EXTERNAL_LIT="${EPREFIX}/usr/bin/lit"
 		-DLLVM_LIT_ARGS="$(get_lit_flags)"
 		-DPython3_EXECUTABLE="${PYTHON}"
