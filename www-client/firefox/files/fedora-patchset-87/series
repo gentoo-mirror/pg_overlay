@@ -4,7 +4,6 @@ firefox-testing.patch
 mozilla-1686888.patch
 firefox-disable-ffvpx-with-vapi.patch
 firefox-crashreporter-build.patch
-mozilla-1700520.patch
 
 firefox-tests-xpcshell.patch
 firefox-tests-reftest.patch
