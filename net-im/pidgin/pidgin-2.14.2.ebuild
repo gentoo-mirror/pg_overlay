@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -17,7 +17,7 @@ SRC_URI="
 
 LICENSE="GPL-2"
 SLOT="0/2" # libpurple version
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~x86-macos"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux"
 IUSE="aqua dbus debug doc eds gadu gnutls groupwise +gstreamer +gtk idn
 meanwhile ncurses networkmanager nls perl pie prediction python sasl spell tcl
 tk +xscreensaver zephyr zeroconf"
@@ -72,7 +72,6 @@ RDEPEND="
 	sasl? ( dev-libs/cyrus-sasl:2 )
 	networkmanager? ( net-misc/networkmanager )
 	idn? ( net-dns/libidn:= )
-	!<x11-plugins/pidgin-facebookchat-1.69-r1
 "
 
 # We want nls in case gtk is enabled, bug #
@@ -188,6 +187,7 @@ src_configure() {
 
 	local myconf=(
 		--disable-mono
+		--disable-static
 		--with-dynamic-prpls="${DYNAMIC_PRPLS}"
 		--with-system-ssl-certs="${EPREFIX}/etc/ssl/certs/"
 		--x-includes="${EPREFIX}"/usr/include/X11
@@ -233,9 +233,9 @@ src_configure() {
 	fi
 
 	if use dbus || { use ncurses && use python ; } ; then
-		myconf+=( --with-python=${PYTHON} )
+		myconf+=( --with-python3=${PYTHON} )
 	else
-		myconf+=( --without-python )
+		myconf+=( --without-python3 )
 	fi
 
 	econf "${myconf[@]}"
@@ -249,9 +249,9 @@ src_install() {
 	if use gtk ; then
 		# Fix tray paths for e16 (x11-wm/enlightenment) and other
 		# implementations that are not complient with new hicolor theme yet, #323355
-		local pixmapdir
-		for d in 16 22 32 48; do
-			pixmapdir=${ED}/usr/share/pixmaps/pidgin/tray/hicolor/${d}x${d}/actions
+		local d f pixmapdir
+		for d in 16 22 32 48 ; do
+			pixmapdir="${ED}/usr/share/pixmaps/pidgin/tray/hicolor/${d}x${d}/actions"
 			mkdir "${pixmapdir}" || die
 			pushd "${pixmapdir}" >/dev/null || die
 			for f in ../status/*; do
@@ -270,7 +270,7 @@ src_install() {
 	dodoc ${DOCS[@]} finch/plugins/pietray.py
 	docompress -x /usr/share/doc/${PF}/pietray.py
 
-	find "${ED}" \( -name "*.a" -o -name "*.la" \) -delete || die
+	find "${ED}" -type f -name "*.la" -delete || die
 }
 
 src_test() {
