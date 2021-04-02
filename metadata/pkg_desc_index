@@ -404,24 +404,14 @@ sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r100: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.118: Policy framework for controlling privileges for system-wide services
-sys-devel/clang 12.0.0_rc3 12.0.0_rc4: C language family frontend for LLVM
-sys-devel/clang-common 12.0.0_rc4: Common files shared between multiple slots of clang
-sys-devel/clang-runtime 12.0.0_rc4: Meta-ebuild for clang runtime libraries
-sys-devel/lld 12.0.0_rc4: The LLVM linker (link editor)
-sys-devel/llvm 12.0.0_rc3 12.0.0_rc4: Low Level Virtual Machine
-sys-devel/llvm-common 12.0.0_rc4: Common files shared between multiple slots of LLVM
+sys-devel/clang 12.0.0_rc4: C language family frontend for LLVM
+sys-devel/llvm 12.0.0_rc4: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.2: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.11.0_rc1: xfs filesystem utilities
 sys-kernel/gentoo-sources 5.9.8: Full sources including the Gentoo patchset for the 5.9 kernel tree
-sys-libs/compiler-rt 12.0.0_rc4: Compiler runtime library for clang (built-in part)
-sys-libs/compiler-rt-sanitizers 12.0.0_rc4: Compiler runtime libraries for clang (sanitizers & xray)
-sys-libs/libcxx 12.0.0_rc4: New implementation of the C++ standard library, targeting C++11
-sys-libs/libcxxabi 12.0.0_rc4: Low level support for a standard C++ library
-sys-libs/libomp 12.0.0_rc4: OpenMP runtime library for LLVM/clang compiler
-sys-libs/llvm-libunwind 12.0.0_rc4: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.2_p20210306: console display library
-sys-libs/polly 11.1.0 12.0.0_rc3 12.0.0_rc4: Polyhedral optimizations for LLVM
+sys-libs/polly 11.1.0 12.0.0_rc4: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre48: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 3.0.2: interactive process viewer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
