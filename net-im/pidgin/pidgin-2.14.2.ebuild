@@ -142,7 +142,6 @@ PATCHES=(
 	"${DISTDIR}/${PN}-2.10.9-irc_join_sleep.patch" # 577286
 	"${FILESDIR}/${PN}-2.13.0-disable-one-jid-test.patch" # 593338
 	"${FILESDIR}/${PN}-2.13.0-metainfo.patch"
-	"${FILESDIR}/${PN}-nonblock-common.patch"
 	"${FILESDIR}/configure.patch" #FreeBSD
 )
 
