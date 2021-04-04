@@ -311,6 +311,7 @@ src_configure() {
 
 	cat <<- _EOF_ > "${S}"/config.toml
 		[llvm]
+		download-ci-llvm = false
 		optimize = $(toml_usex !debug)
 		thin-lto = true
 		release-debuginfo = $(toml_usex debug)
@@ -363,11 +364,13 @@ src_configure() {
 		default-linker = "$(tc-getCC)"
 		parallel-compiler = $(toml_usex parallel-compiler)
 		channel = "$(usex nightly nightly stable)"
+		description = "gentoo"
 		rpath = false
 		verbose-tests = false
 		optimize-tests = $(toml_usex !debug)
 		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
+		remap-debuginfo = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
 		use-lld = true
 		backtrace-on-ice = true
@@ -560,9 +563,6 @@ src_test() {
 }
 
 src_install() {
-	# https://github.com/rust-lang/rust/issues/77721
-	# also 1.46.0-don-t-create-prefix-at-time-of-check.patch
-	dodir "/usr/lib/${PN}/${PV}"
 	(
 	IFS=$'\n'
 	env $(cat "${S}"/config.env) DESTDIR="${D}" \
