@@ -3,15 +3,13 @@
 
 EAPI=7
 
-inherit git-r3
-
 DESCRIPTION="A libpurple protocol plugin that adds support for the Telegram messenger"
 HOMEPAGE="https://github.com/majn/telegram-purple"
-EGIT_REPO_URI="https://github.com/majn/telegram-purple.git"
-EGIT_SUBMODULES=()
+SRC_URI="https://github.com/majn/telegram-purple/releases/download/v${PV}/telegram-purple_${PV}.orig.tar.gz"
+S="${WORKDIR}/telegram-purple"
 
 LICENSE="GPL-2+"
-KEYWORDS=""
+KEYWORDS="amd64 x86"
 SLOT="0"
 IUSE="gcrypt libressl +nls +png +webp"
 
