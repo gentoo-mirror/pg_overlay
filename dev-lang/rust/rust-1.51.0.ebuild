@@ -216,7 +216,11 @@ pkg_setup() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/llvm-12"
+	eapply "${FILESDIR}/0004-55f345f32505c2095966a5dc46c4ae3290dbf7a1.patch"
+	eapply "${FILESDIR}/0005-9a8acea78355b604dbeb29bc38bd4dbf7bfce95f.patch"
+	eapply "${FILESDIR}/0006-65ed23c2827a5771718fe72762bca345dde6ec79.patch"
+	eapply "${FILESDIR}/0007-8357e573466d583991edd28e52433417b49dc4ae.patch"
+
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
