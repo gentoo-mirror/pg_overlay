@@ -521,7 +521,6 @@ src_prepare() {
 	# Write API keys to disk
 
 	####### My stuff
-	#eapply "${FILESDIR}/${PN}-$(ver_cut 1)-no-gtk2.patch" 
 	### OpenSUSE-KDE patchset
 	einfo Applying OpenSUSE-KDE patches
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/series);do
@@ -566,6 +565,21 @@ src_prepare() {
 		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
 			eapply "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
+		else
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
+		fi
+	done
+	### KissLinux patches
+	einfo "Applying Fedora's patches"
+	for p in $(cat "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p;
 			einfo +++++++++++++++++++++++++;
 			einfo Patch $p is APPLIED;
 			einfo +++++++++++++++++++++++++

@@ -216,6 +216,7 @@ pkg_setup() {
 }
 
 src_prepare() {
+	eapply "${FILESDIR}/llvm-12"
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
