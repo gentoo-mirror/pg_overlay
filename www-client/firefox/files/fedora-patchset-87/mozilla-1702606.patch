@@ -1,0 +1,41 @@
+changeset:   576316:5310862f0f2a
+tag:         tip
+parent:      576314:6159d3fc46c6
+user:        stransky <stransky@redhat.com>
+date:        Thu Apr 01 20:02:47 2021 +0200
+files:       widget/gtk/WindowSurfaceWayland.cpp widget/gtk/nsWaylandDisplay.cpp
+description:
+Bug 1702606 [Wayland] Don't call mWaylandDisplay::WaitForSyncEnd() from Compositor/Render thread, r?rmader
+
+Differential Revision: https://phabricator.services.mozilla.com/D110590
+
+
+diff --git a/widget/gtk/WindowSurfaceWayland.cpp b/widget/gtk/WindowSurfaceWayland.cpp
+--- a/widget/gtk/WindowSurfaceWayland.cpp
++++ b/widget/gtk/WindowSurfaceWayland.cpp
+@@ -737,10 +737,6 @@ already_AddRefed<gfx::DrawTarget> Window
+     return nullptr;
+   }
+ 
+-  // Wait until all pending events are processed. There may be queued
+-  // wl_buffer release event which releases our wl_buffer for further rendering.
+-  mWaylandDisplay->WaitForSyncEnd();
+-
+   // Lock the surface *after* WaitForSyncEnd() call as is can fire
+   // FlushPendingCommits().
+   MutexAutoLock lock(mSurfaceLock);
+diff --git a/widget/gtk/nsWaylandDisplay.cpp b/widget/gtk/nsWaylandDisplay.cpp
+--- a/widget/gtk/nsWaylandDisplay.cpp
++++ b/widget/gtk/nsWaylandDisplay.cpp
+@@ -239,6 +239,10 @@ void nsWaylandDisplay::QueueSyncBegin() 
+ }
+ 
+ void nsWaylandDisplay::WaitForSyncEnd() {
++  MOZ_RELEASE_ASSERT(
++      NS_IsMainThread(),
++      "nsWaylandDisplay::WaitForSyncEnd() can be called in main thread only!");
++
+   // We're done here
+   if (!mSyncCallback) {
+     return;
+
