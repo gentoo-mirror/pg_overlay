@@ -82,7 +82,6 @@ dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
 dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/PyQt5-sip 5.5.0: Private sip module for PyQt5
-dev-python/eventlet 0.30.1: Highly concurrent networking library
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
 dev-python/python-engineio 3.13.2: Python implementation of the Engine.IO realtime server.
 dev-python/python-mpd 3.0.4: Python MPD client library
@@ -370,7 +369,7 @@ media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/libva-utils 2.11.0: Collection of utilities and tests for VA-API
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-media-video/pipewire 0.3.24: Multimedia processing graphs
+media-video/pipewire 0.3.24 0.3.25: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-ftp/filezilla 3.52.2: FTP client with lots of useful features and an intuitive interface
