@@ -1,0 +1,28 @@
+changeset:   576616:8d1ea60136ed
+tag:         tip
+parent:      576614:144a345005ac
+user:        stransky <stransky@redhat.com>
+date:        Wed Apr 07 21:55:43 2021 +0200
+files:       widget/gtk/nsWindow.cpp
+description:
+Bug 1703657 [Wayland] Use wayland focus workaround if widget.wayland-focus-workaroud is set at nsWindow::SetFocus(), r?rmader
+
+Differential Revision: https://phabricator.services.mozilla.com/D111162
+
+
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -2220,9 +2220,9 @@ void nsWindow::SetFocus(Raise aRaise, mo
+     if (gRaiseWindows && owningWindow->mIsShown && owningWindow->mShell &&
+         !gtk_window_is_active(GTK_WINDOW(owningWindow->mShell))) {
+       if (!mIsX11Display &&
+-          Preferences::GetBool("testing.browserTestHarness.running", false)) {
++          Preferences::GetBool("widget.wayland-focus-workaroud", false)) {
+         // Wayland does not support focus changes so we need to workaround it
+-        // by window hide/show sequence but only when it's running in testsuite.
++        // by window hide/show sequence.
+         owningWindow->NativeShow(false);
+         owningWindow->NativeShow(true);
+         return;
+
