@@ -374,7 +374,7 @@ media-video/qmplay2 9999: A Qt-based video player, which can play most formats a
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-ftp/filezilla 3.52.2: FTP client with lots of useful features and an intuitive interface
 net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
-net-im/pidgin 2.14.2 2.9999 9999: GTK Instant Messenger client
+net-im/pidgin 2.14.2 2.14.3-r1 2.9999 9999: GTK Instant Messenger client
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management library for GLib applications
