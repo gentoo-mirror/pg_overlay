@@ -29,8 +29,8 @@ dev-cpp/mm-common 1.0.2: Build infrastructure and utilities for GNOME C++ bindin
 dev-db/sqlitestudio 3.3.2: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/ocaml 4.12.0: Programming language supporting functional, imperative & object-oriented styles
-dev-lang/python 2.7.18_p8 3.9.3 3.9.4: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.50.0 1.51.0 1.52.0_beta: Systems programming language from Mozilla
+dev-lang/python 2.7.18_p8 3.9.4: An interpreted, interactive, object-oriented programming language
+dev-lang/rust 1.51.0 1.52.0_beta: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/libbsd 0.11.3: An library to provide useful functions commonly found on BSD systems
@@ -369,7 +369,7 @@ media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/libva-utils 2.11.0: Collection of utilities and tests for VA-API
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-media-video/pipewire 0.3.24 0.3.25: Multimedia processing graphs
+media-video/pipewire 0.3.25: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-ftp/filezilla 3.52.2: FTP client with lots of useful features and an intuitive interface
@@ -381,7 +381,7 @@ net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management libr
 net-libs/libsoup 2.72.0: HTTP client/server library for GNOME
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
-net-libs/nodejs 15.11.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
+net-libs/nodejs 15.11.0 15.14.0_pre: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r2: HTTP client library
 net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
@@ -412,7 +412,7 @@ sys-fs/udisks 2.9.2: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.11.0_rc1: xfs filesystem utilities
 sys-kernel/gentoo-sources 5.9.8: Full sources including the Gentoo patchset for the 5.9 kernel tree
 sys-libs/ncurses 6.2_p20210306: console display library
-sys-libs/polly 11.1.0 12.0.0_rc4 12.0.0_rc5: Polyhedral optimizations for LLVM
+sys-libs/polly 11.1.0 12.0.0_rc5: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre48: Multi-platform library designed to allow a developer to create robust software
 sys-process/htop 3.0.2: interactive process viewer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
