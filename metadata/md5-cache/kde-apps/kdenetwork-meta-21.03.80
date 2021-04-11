@@ -1,9 +1,0 @@
-DEFINED_PHASES=-
-DESCRIPTION=kdenetwork - merge this to pull in all kdenetwork-derived packages
-EAPI=7
-HOMEPAGE=https://kde.org/
-IUSE=+bittorrent dropbox +webengine
-LICENSE=metapackage
-RDEPEND=>=kde-apps/kdenetwork-filesharing-21.03.80:5 >=kde-apps/kget-21.03.80:5 >=kde-apps/kopete-21.03.80:5 >=kde-apps/krdc-21.03.80:5 >=kde-apps/krfb-21.03.80:5 >=kde-apps/zeroconf-ioslave-21.03.80:5 >=kde-misc/kdeconnect-21.03.80:5 >=kde-misc/kio-gdrive-21.03.80:5 >=net-irc/konversation-21.03.80:5 bittorrent? ( >=net-libs/libktorrent-21.03.80:5 >=net-p2p/ktorrent-21.03.80:5 ) dropbox? ( >=kde-apps/dolphin-plugins-dropbox-21.03.80:5 ) webengine? ( >=kde-apps/plasma-telepathy-meta-21.03.80:5 )
-SLOT=5
-_md5_=87317e39b1ddf754b863898c5ac8c141
