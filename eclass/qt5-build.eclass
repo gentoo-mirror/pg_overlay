@@ -51,7 +51,6 @@ esac
 # system to obtain the global qmodule.pri file.
 
 # @ECLASS-VARIABLE: VIRTUALX_REQUIRED
-# @PRE_INHERIT
 # @DESCRIPTION:
 # For proper description see virtualx.eclass man page.
 # Here we redefine default value to be manual, if your package needs virtualx
@@ -259,22 +258,23 @@ qt5-build_src_install() {
 			"${D}${QT5_HEADERDIR}"/QtCore/qconfig.h \
 			|| die "sed failed (qconfig.h)"
 
-		# install qtchooser configuration file
-		cat > "${T}/qt5-${CHOST}.conf" <<-_EOF_ || die
-			${QT5_BINDIR}
-			${QT5_LIBDIR}
-		_EOF_
+		if ver_test -lt 5.15.2-r3; then
+			# install qtchooser configuration file
+			cat > "${T}/qt5-${CHOST}.conf" <<-_EOF_ || die
+				${QT5_BINDIR}
+				${QT5_LIBDIR}
+			_EOF_
 
-		(
-			insinto /etc/xdg/qtchooser
-			doins "${T}/qt5-${CHOST}.conf"
-		)
+			(
+				insinto /etc/xdg/qtchooser
+				doins "${T}/qt5-${CHOST}.conf"
+			)
 
-		# convenience symlinks
-		dosym qt5-"${CHOST}".conf /etc/xdg/qtchooser/5.conf
-		dosym qt5-"${CHOST}".conf /etc/xdg/qtchooser/qt5.conf
-		# TODO bug 522646: write an eselect module to manage default.conf
-		dosym qt5.conf /etc/xdg/qtchooser/default.conf
+			# convenience symlinks
+			dosym qt5-"${CHOST}".conf /etc/xdg/qtchooser/5.conf
+			dosym qt5-"${CHOST}".conf /etc/xdg/qtchooser/qt5.conf
+			dosym qt5.conf /etc/xdg/qtchooser/default.conf
+		fi
 	fi
 
 	qt5_install_module_config
