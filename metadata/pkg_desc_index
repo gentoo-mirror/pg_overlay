@@ -1,5 +1,4 @@
 app-admin/profile-cleaner 2.41: Vacuum and reindex browser sqlite databases
-app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/lz4 1.9.3: Extremely Fast Compression algorithm
 app-arch/p7zip 16.02-r6 17.03 17.04: Port of 7-Zip archiver for Unix
 app-cdr/dolphin-plugins-mountiso 21.03.90: Dolphin plugin for ISO loopback device mounting
@@ -13,7 +12,7 @@ app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of '
 app-misc/media-player-info 24: A repository of data files describing media player capabilities
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-misc/worker 4.7.0: Worker Filemanager: Amiga Directory Opus 4 clone
+app-misc/worker 4.8.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.1.2.2: A full office productivity suite
 app-office/libreoffice-l10n 7.1.2.2: Translations for the Libreoffice suite
 app-portage/eix 0.34.12: Search and query ebuilds
@@ -21,11 +20,9 @@ app-shells/push 3.4: A POSIX shell function to treat a variable like an array, q
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/asciidoc 9.1.0_pre: A plain text human readable/writable document format
 app-text/goldendict 9999: Feature-rich dictionary lookup program
-app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.66.0: C++ interface for glib2
-dev-cpp/mm-common 1.0.2: Build infrastructure and utilities for GNOME C++ bindings
 dev-db/sqlitestudio 3.3.2: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/ocaml 4.12.0: Programming language supporting functional, imperative & object-oriented styles
@@ -36,36 +33,19 @@ dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting 
 dev-libs/libbsd 0.11.3: An library to provide useful functions commonly found on BSD systems
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libgnt 9999: Toolkit for creating text-mode graphical user interfaces
-dev-libs/libixion 0.15.0 0.16.1: General purpose formula parser & interpreter
-dev-libs/liborcus 0.15.4 0.16.1: Standalone file import filter library for spreadsheet documents
-dev-libs/libsigc++ 3.0.4: Typesafe callback system for standard C++
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
-dev-libs/re2 0.2021.02.02: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/camlp4 4.12_p1: System for writing extensible parsers for programming languages
 dev-ml/lablgtk 2.18.11: Objective CAML interface for Gtk+2
 dev-ml/num 1.4: Library for arbitrary-precision integer and rational arithmetic
-dev-perl/File-HomeDir 1.4.0: Get home directory for self or other user
-dev-perl/HTTP-Cookies 6.50.0: Storage of cookies
-dev-perl/HTTP-Message 6.180.0: Base class for Request/Response
 dev-perl/JSON 4.20.0: JSON (JavaScript Object Notation) encoder/decoder
 dev-perl/JSON-XS 4.20.0: JSON::XS - JSON serialising/deserialising, done correctly and fast
-dev-perl/LWP-MediaTypes 6.40.0: Media types and mailcap processing
 dev-perl/Log-Agent 1.3.0: A general logging framework
 dev-perl/Module-Build 0.422.900: Build and install Perl modules
-dev-perl/MusicBrainz-DiscID 0.60.0: Perl interface for the MusicBrainz libdiscid library
-dev-perl/Net-HTTP 6.190.0: Low-level HTTP connection (client)
-dev-perl/Package-Stash 0.380.0: Routines for manipulating stashes
-dev-perl/Package-Stash-XS 0.290.0: Faster and more correct implementation of the Package::Stash API
-dev-perl/Params-ValidationCompiler 0.300.0: Build an optimized subroutine parameter validator once, use it forever
 dev-perl/Path-Tiny 0.108.0: File path utility
-dev-perl/Ref-Util 0.204.0: Utility functions for checking references
-dev-perl/Ref-Util-XS 0.117.0: XS Implementation for Ref::Util
 dev-perl/Role-Tiny 2.1.4: Roles. Like a nouvelle cuisine portion size slice of Moose
-dev-perl/Socket6 0.290.0: IPv6 related part of the C socket.h defines and structure manipulators
-dev-perl/Specio 0.440.0: Type constraints and coercions for Perl
 dev-perl/Sub-Name 0.260.0: (Re)name a sub
 dev-perl/Sub-Quote 2.6.6: Efficient generation of subroutines via string eval
 dev-perl/Template-Toolkit 2.290.0: The Template Toolkit
@@ -73,18 +53,11 @@ dev-perl/TermReadKey 2.380.0: Change terminal modes, and perform non-blocking re
 dev-perl/Text-Autoformat 1.750.0: Automatic text wrapping and reformatting
 dev-perl/URI 1.760.0: Uniform Resource Identifiers (absolute and relative)
 dev-perl/Unicode-EastAsianWidth 12.0: East Asian Width properties
-dev-perl/WebService-MusicBrainz 1.0.5: Web service API to MusicBrainz database
 dev-perl/XML-Parser 2.460.0: A Perl extension interface to James Clark's XML parser, expat
-dev-perl/XML-RSS 1.610.0: a basic framework for creating and maintaining RSS files
 dev-perl/XML-SAX 1.2.0: Perl module for using and building Perl SAX2 XML parsers, filters, and drivers
-dev-perl/XML-XPath 1.440.0: A XPath Perl Module
 dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
-dev-perl/libwww-perl 6.410.0: A collection of Perl Modules for the WWW
-dev-perl/namespace-autoclean 0.290.0: Keep imports out of your namespace
 dev-python/PyQt5-sip 5.5.0: Private sip module for PyQt5
 dev-python/hsaudiotag3k 1.1.3: Read metdata (tags) of mp3, mp4, wma, ogg, flac and aiff files.
-dev-python/python-engineio 3.13.2: Python implementation of the Engine.IO realtime server.
-dev-python/python-mpd 3.0.4: Python MPD client library
 dev-python/sip 5.5.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
@@ -92,7 +65,6 @@ dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/boost-build 1.75.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/itstool 2.0.6-r1: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/meson 0.57.1_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -100,7 +72,6 @@ dev-util/samurai 1.2: ninja-compatible build tool written in C
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
 dev-util/vulkan-headers 1.2.174: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.174: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
-dev-vcs/mercurial 5.7: Scalable distributed SCM
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 gnome-base/librsvg 2.51.0: Scalable Vector Graphics (SVG) rendering library
@@ -341,12 +312,10 @@ kde-apps/zeroconf-ioslave 21.03.90: DNSSD (DNS Service Discovery - part of Rende
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.20.5: Flexible, composited Window Manager for windowing systems on Linux
 mail-client/thunderbird 78.9.1: Thunderbird Mail Client
-media-libs/fontconfig 2.13.92: A library for configuring and customizing font access
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 3.120.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.14-r1: Simple Direct Media Layer
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
-media-libs/shaderc 2020.5: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.2.172 9999: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.174: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
@@ -372,18 +341,13 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.25: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
-net-ftp/filezilla 3.52.2: FTP client with lots of useful features and an intuitive interface
-net-im/bitlbee 3.6-r1 9999: irc to IM gateway that support multiple IM protocols
-net-im/pidgin 2.14.2 2.14.3-r1 2.9999 9999: GTK Instant Messenger client
+net-im/pidgin 2.14.3-r1 2.9999 9999: GTK Instant Messenger client
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
-net-libs/libaccounts-glib 1.25-r1: Accounts SSO (Single Sign-On) management library for GLib applications
-net-libs/libsoup 2.72.0: HTTP client/server library for GNOME
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 15.11.0 15.14.0_pre: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
-net-libs/serf 1.3.9-r2: HTTP client library
 net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
 net-libs/telegram-qt 9999: Telegram binding for Qt
 net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protocol
@@ -398,8 +362,7 @@ net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
-sci-libs/libqalculate 3.17.0: A modern multi-purpose calculator library
-sys-apps/accountsservice 0.6.55_pre: D-Bus interfaces for querying and manipulating user account information
+sci-libs/libqalculate 3.18.0: A modern multi-purpose calculator library
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r100: Utility for advanced configuration of Roccat devices
@@ -410,23 +373,12 @@ sys-devel/llvm 12.0.0_rc5: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.2: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.11.0_rc1: xfs filesystem utilities
-sys-kernel/gentoo-sources 5.9.8: Full sources including the Gentoo patchset for the 5.9 kernel tree
 sys-libs/ncurses 6.2_p20210306: console display library
 sys-libs/polly 11.1.0 12.0.0_rc5: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre48: Multi-platform library designed to allow a developer to create robust software
-sys-process/htop 3.0.2: interactive process viewer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
-virtual/perl-Digest-MD5 2.550.0-r2: Virtual for Digest-MD5
-virtual/perl-IO-Compress 2.84.0: Virtual for IO-Compress
-virtual/perl-Memoize 1.30.100_rc-r9: Virtual for Memoize
-virtual/perl-Module-Load 0.340.0: Virtual for Module-Load
-virtual/perl-Pod-Parser 1.630.0-r6: Virtual for Pod-Parser
-virtual/perl-Socket 2.27.0-r2: Virtual for Socket
-virtual/perl-Term-ANSIColor 4.60.0-r3: Virtual for Term-ANSIColor
-virtual/perl-Time-HiRes 1.976.0: Virtual for Time-HiRes
 virtual/rust 1.49.0 1.51.0 1.52.0: Virtual for Rust language compiler
-www-apps/nextcloud 21.0.0: Personal cloud that runs on your own server
 www-client/firefox 87.0: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
@@ -436,12 +388,7 @@ x11-libs/libva 2.11.0: Video Acceleration (VA) API for Linux
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
-x11-misc/mozo 1.24.0: Mozo menu editor for MATE
-x11-misc/safeeyes 2.0.9: Linux alternative to EyeLeo
-x11-misc/xkeyboard-config 2.30: X keyboard configuration database
-x11-misc/xvfb-run 1.20.3_p1: Run a command in a virtual X server environment
 x11-plugins/pidgin-skypeweb 9999: SkypeWeb Plugin for Pidgin
 x11-plugins/pidgin-telegram 1.4.7 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-plugins/purple-matrix 9999: Libpurple protocol plugin for matrix
 x11-plugins/tdlib-purple 9999: New libpurple plugin for Telegram
-x11-themes/adwaita-icon-theme 3.38.0: GNOME default icon theme

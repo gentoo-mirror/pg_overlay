@@ -2,7 +2,6 @@
 # Please add your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using pmaint *
 
-app-admin/webapp-config:portage - Propagete python_targets dependencies to sys-apps/portage
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-editors/qhexedit2:gui - Install Qt5 hex editor
 app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
@@ -37,7 +36,6 @@ app-portage/eix:strong-security - Add many checks to prevent exploits if eix cod
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
-app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 app-text/qstardict:stardict - build stardict plugin
 app-text/qstardict:swac - 
 app-text/qstardict:web - build web plugin
@@ -58,8 +56,6 @@ dev-lang/rust:rustfmt - Install rustfmt, Rust code formatter
 dev-lang/rust:system-bootstrap - Bootstrap using installed rust compiler
 dev-lang/rust:system-llvm - Use the system LLVM install
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
-dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
-dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
@@ -67,11 +63,8 @@ dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
 dev-ml/lablgtk:glade - Enable libglade bindings compilation.
 dev-ml/lablgtk:gnomecanvas - Enable libgnomecanvas bindings compilation.
 dev-ml/lablgtk:sourceview - Enable GtkSourceView support
-dev-perl/File-HomeDir:xdg - Ensure XDG Semantics for returned paths via x11-misc/xdg-user-dirs
 dev-perl/JSON:xs - Install C-based dev-perl/JSON-XS for faster performance
-dev-perl/Ref-Util:xs - Install C-Based dev-perl/Ref-Util-XS for accelerated performance
 dev-perl/Sub-Name:suggested - Install extra dependencies needed for extended regression tests
-dev-python/python-mpd:twisted - Enable twisted support
 dev-qt/qtwebkit:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebkit:gles2 - Use GLES 2.0 or later instead of full OpenGL
 dev-qt/qtwebkit:gstreamer - Enable HTML5 audio/video support via media-libs/gstreamer using SLOT 1.0
@@ -87,10 +80,6 @@ dev-util/sccache:gcs - Enable Google Cloud Storage support
 dev-util/sccache:redis - Enable Redis support
 dev-util/sccache:s3 - Enable Amazon S3 support
 dev-util/vulkan-tools:cube - Build the cube/cubepp demos
-dev-vcs/mercurial:chg - Support Mercurial command server client
-dev-vcs/mercurial:gpg - Support signing with GnuPG.
-dev-vcs/mercurial:rust - Use Rust extensions.
-dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
 gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
@@ -448,14 +437,6 @@ media-video/qmplay2:visualizations - Build with Visualizations module
 media-video/qmplay2:vulkan - Build with Vulkan support
 media-video/smplayer:autoshutdown - Enable the option to shutdown your computer after finishing the playlist. This requires dev-qt/qtdbus as dependency.
 media-video/smplayer:mpris - Enable support for MPRIS2 (Media Player Remote Interfacing Specification, version 2), a DBus interface for remote control, which requires dev-qt/qtdbus as dependency.
-net-im/bitlbee:libevent - Use libevent for event handling
-net-im/bitlbee:msn - Enable MSN Messenger IM protocol support.
-net-im/bitlbee:nss - Use NSS for SSL support in MSN and Jabber
-net-im/bitlbee:oscar - Enable Oscar (AIM/ICQ) IM protocol support
-net-im/bitlbee:otr - Enable support for encrypted conversations
-net-im/bitlbee:plugins - Enable support for plugins
-net-im/bitlbee:purple - Use libpurple instead of the built-in IM protocol support
-net-im/bitlbee:twitter - Enable Twitter protocol support
 net-im/pidgin:gadu - Enable Gadu Gadu protocol support
 net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
 net-im/pidgin:gstreamer - Enables voice and video sessions
@@ -466,9 +447,6 @@ net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
 net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/pidgin:zephyr - Enable Zephyr protocol support
-net-libs/libsoup:brotli - Enable brotli decompression support
-net-libs/libsoup:gssapi - Enable GSSAPI support
-net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:npm - Enable NPM package manager
@@ -517,12 +495,9 @@ sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
 sys-fs/udisks:systemd - Support sys-apps/systemd's logind
 sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
 sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
-sys-kernel/gentoo-sources:experimental - Apply experimental patches; for more information, see "https://wiki.gentoo.org/wiki/Project:Kernel/Experimental".
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
 sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
-sys-process/htop:openvz - Enable openvz support
-sys-process/htop:vserver - Enable vserver support
 www-client/firefox:clang - Use Clang compiler instead of GCC
 www-client/firefox:eme-free - Disable EME (DRM plugin) cabability at build time
 www-client/firefox:geckodriver - Enable WebDriver support
