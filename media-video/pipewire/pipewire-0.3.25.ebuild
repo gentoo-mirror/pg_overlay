@@ -110,7 +110,7 @@ src_prepare() {
 }
 
 src_configure() {
-	#append-ldflags -lelogind
+	append-ldflags -lelogind
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_feature doc docs)
