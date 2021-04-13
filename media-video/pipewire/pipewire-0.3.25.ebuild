@@ -107,6 +107,9 @@ src_prepare() {
 		eapply "${FILESDIR}"/${PN}-0.3.25-non-systemd-integration.patch
 		eapply "${FILESDIR}"/${PN}-elogind.patch
 	fi
+	# too loud bug
+	sed -i "s:volume = merge:volume = ignore:g" spa/plugins/alsa/mixer/paths/analog-output.conf.common || die
+
 }
 
 src_configure() {
