@@ -106,11 +106,11 @@ src_prepare() {
 		# significantly worse user experience on systemd then.
 		eapply "${FILESDIR}"/${PN}-0.3.25-non-systemd-integration.patch
 		eapply "${FILESDIR}"/${PN}-elogind.patch
-		append-ldflags -lelogind
 	fi
 }
 
 src_configure() {
+	append-ldflags -lelogind
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_feature doc docs)
