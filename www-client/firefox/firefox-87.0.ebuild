@@ -575,7 +575,7 @@ src_prepare() {
 		fi
 	done
 	### KissLinux patches
-	einfo "Applying Fedora's patches"
+	einfo "Applying KissLinux's patches"
 	for p in $(cat "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
