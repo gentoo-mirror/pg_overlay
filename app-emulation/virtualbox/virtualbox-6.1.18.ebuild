@@ -36,14 +36,14 @@ CDEPEND="
 	media-libs/libvpx:0=
 	sys-libs/zlib:=
 	!headless? (
-		media-libs/libsdl:0[X?,video]
+		media-libs/libsdl:0[video]
 		x11-libs/libX11
 		x11-libs/libxcb:=
 		x11-libs/libXcursor
 		x11-libs/libXext
 		x11-libs/libXmu
 		x11-libs/libXt
-		opengl? ( media-libs/libglvnd[X?] )
+		opengl? ( media-libs/libglvnd )
 		qt5? (
 			dev-qt/qtcore:5
 			dev-qt/qtgui:5
