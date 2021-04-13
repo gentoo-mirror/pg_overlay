@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit meson optfeature udev
+inherit meson optfeature udev flag-o-matic
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
@@ -106,11 +106,13 @@ src_prepare() {
 		# significantly worse user experience on systemd then.
 		eapply "${FILESDIR}"/${PN}-0.3.25-non-systemd-integration.patch
 		eapply "${FILESDIR}"/${PN}-elogind.patch
-		append-ldflags -lelogind
 	fi
 }
 
 src_configure() {
+	if ! use systemd; then
+		append-ldflags -lelogind
+	fi
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_feature doc docs)
