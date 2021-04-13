@@ -91,9 +91,9 @@ esac
 readonly QT5_BUILD_TYPE
 
 EGIT_REPO_URI=(
-	"https://code.qt.io/qt/${QT5_MODULE}.git"
-	"https://github.com/qt/${QT5_MODULE}.git"
+	"https://invent.kde.org/qt/qt/${QT5_MODULE}.git"
 )
+EGIT_BRANCH="kde/5.15"
 [[ ${QT5_BUILD_TYPE} == live ]] && inherit git-r3
 
 # @ECLASS-VARIABLE: QT5_BUILD_DIR
