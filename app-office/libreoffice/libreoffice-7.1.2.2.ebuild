@@ -171,7 +171,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	virtual/glu
 	virtual/jpeg:0
 	virtual/opengl
-	x11-libs/cairo[X]
+	x11-libs/cairo
 	x11-libs/libXinerama
 	x11-libs/libXrandr
 	x11-libs/libXrender
@@ -197,7 +197,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	)
 	coinmp? ( sci-libs/coinor-mp )
 	cups? ( net-print/cups )
-	dbus? ( sys-apps/dbus[X] )
+	dbus? ( sys-apps/dbus )
 	eds? (
 		dev-libs/glib:2
 		gnome-base/dconf
