@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit meson optfeature udev
+inherit meson optfeature udev flag-o-matic
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
@@ -110,7 +110,7 @@ src_prepare() {
 }
 
 src_configure() {
-	append-ldflags -lelogind
+	#append-ldflags -lelogind
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_feature doc docs)
