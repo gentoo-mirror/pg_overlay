@@ -1,4 +1,4 @@
-# Copyright 2017-2019 Haelwenn (lanodan) Monnier <contact@hacktivis.me>
+# Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -13,6 +13,6 @@ KEYWORDS="~amd64 ~arm ~x86"
 RDEPEND="!dev-util/ninja"
 
 src_install() {
-    emake DESTDIR="${D}" PREFIX=/usr install
+	emake DESTDIR="${D}" PREFIX="${EPREFIX}"/usr install
     dosym samu /usr/bin/ninja
 }
