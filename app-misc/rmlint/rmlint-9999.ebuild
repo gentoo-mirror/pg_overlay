@@ -39,15 +39,17 @@ src_prepare(){
 	l10n_for_each_disabled_locale_do rm_locale
 }
 
-src_configure(){
-	escons 03 config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
-}
+#src_configure(){
+#	EPYTHON=python3
+#	escons config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
+#}
 
-src_compile(){
-	escons 03 DEBUG=0 CC="$(tc-getCC)" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
-}
+#src_compile(){
+#	escons DEBUG=0 CC="$(tc-getCC)" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
+#}
 
 src_install(){
+	EPYTHON=python3
 	escons install DEBUG=0 LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr 
 	rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
 	if ! use gui; then
