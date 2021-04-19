@@ -6,7 +6,7 @@ EAPI=7
 PLOCALES="de es fr"
 PYTHON_COMPAT=( python3_{7..9} )
 
-inherit git-r3 gnome2-utils l10n python-r1 scons-utils
+inherit git-r3 gnome2-utils l10n python-any-r1 scons-utils
 
 DESCRIPTION="rmlint finds space waste and other broken things on your filesystem and offers to remove it"
 HOMEPAGE="https://github.com/sahib/rmlint"
@@ -47,12 +47,10 @@ src_configure(){
 }
 
 src_compile(){
-	EPYTHON=python3
 	escons "${MYSCONS[@]}" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
 }
 
 src_install(){
-	EPYTHON=python3
 	escons "${MYSCONS[@]}" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr install
 	rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
 	if ! use gui; then
