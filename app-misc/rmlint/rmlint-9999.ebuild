@@ -39,14 +39,10 @@ src_prepare(){
 	l10n_for_each_disabled_locale_do rm_locale
 }
 
-#src_configure(){
-#	EPYTHON=python3
-#	escons config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
-#}
-
-#src_compile(){
-#	escons DEBUG=0 CC="$(tc-getCC)" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
-#}
+src_compile(){
+	EPYTHON=python3
+	escons DEBUG=0 CC="$(tc-getCC)" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
+}
 
 src_install(){
 	EPYTHON=python3
