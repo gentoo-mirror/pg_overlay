@@ -16,10 +16,10 @@ EGIT_BRANCH="develop"
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="X doc"
+IUSE="gui doc"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND="X? ( x11-libs/gtksourceview:3.0
+RDEPEND="gui? ( x11-libs/gtksourceview:3.0
 		doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
 		dev-libs/json-glib
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
@@ -50,7 +50,7 @@ src_compile(){
 src_install(){
 	escons install DEBUG=0 LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr 
 	rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
-	if ! use X; then
+	if ! use gui; then
 		rm -rf "${D}"/usr/share/{glib-2.0,icons,applications}
 		rm -rf "${D}"/usr/lib
 	fi
@@ -60,11 +60,11 @@ src_install(){
 }
 
 pkg_postinst() {
-	use X && gnome2_schemas_update
+	use gui && gnome2_schemas_update
 	xdg_icon_cache_update
 }
 
 pkg_postrm() {
-	use X && gnome2_schemas_update
+	use gui && gnome2_schemas_update
 	xdg_icon_cache_update
 }
