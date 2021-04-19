@@ -44,7 +44,7 @@ src_configure(){
 }
 
 src_compile(){
-	escons DEBUG=0 CC="$(tc-getCC)" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
+	escons -O3 DEBUG=0 CC="$(tc-getCC)" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
 }
 
 src_install(){
