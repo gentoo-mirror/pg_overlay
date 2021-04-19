@@ -40,8 +40,7 @@ src_prepare(){
 }
 
 src_configure(){
-	CCFLAGS=${CFLAGS}
-	LINKFLAGS=${LDFLAGS}
+	EPYTHON=python3
 	escons config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
 }
 
