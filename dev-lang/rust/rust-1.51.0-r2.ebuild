@@ -177,12 +177,21 @@ boostrap_rust_version_check() {
 }
 
 pre_build_checks() {
-	local M=6144
+	local M=8192
+	# multiply requirements by 1.5 if we are doing x86-multilib
+	M=$(( $(usex abi_x86_32 15 10) * ${M} / 10 ))
 	M=$(( $(usex clippy 128 0) + ${M} ))
 	M=$(( $(usex miri 128 0) + ${M} ))
 	M=$(( $(usex rls 512 0) + ${M} ))
 	M=$(( $(usex rustfmt 256 0) + ${M} ))
-	M=$(( $(usex system-llvm 0 2048) + ${M} ))
+	# add 2G if we compile llvm and 256M per llvm_target
+	if ! use system-llvm; then
+		M=$(( 2048 + ${M} ))
+		local ltarget
+		for ltarget in ${ALL_LLVM_TARGETS[@]}; do
+			M=$(( $(usex ${ltarget} 256 0) + ${M} ))
+		done
+	fi
 	M=$(( $(usex wasm 256 0) + ${M} ))
 	M=$(( $(usex debug 15 10) * ${M} / 10 ))
 	eshopts_push -s extglob
@@ -231,7 +240,7 @@ src_prepare() {
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
-			--destdir="${rust_stage0_root}" --prefix=/ || die
+			--without=rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
 	fi
 
 	if use system-llvm; then
@@ -577,7 +586,7 @@ src_install() {
 	(
 	IFS=$'\n'
 	env $(cat "${S}"/config.env) DESTDIR="${D}" \
-		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml || die
+		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 	)
 
 	# bug #689562, #689160
