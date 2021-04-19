@@ -40,7 +40,9 @@ src_prepare(){
 }
 
 src_configure(){
-	escons -O3 config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
+	CCFLAGS=${CFLAGS}
+	LINKFLAGS=${LDFLAGS}
+	escons config LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
 }
 
 src_compile(){
