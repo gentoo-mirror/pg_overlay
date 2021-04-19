@@ -39,14 +39,20 @@ src_prepare(){
 	l10n_for_each_disabled_locale_do rm_locale
 }
 
+src_configure(){
+	MYSCONS=(
+		CC="$(tc-getCC)"
+		EPYTHON=python3
+		DEBUG=0
+	)
+}
+
 src_compile(){
-	EPYTHON=python3
-	escons DEBUG=0 CC="$(tc-getCC)" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
+	escons "${MYSCONS[@]}" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr
 }
 
 src_install(){
-	EPYTHON=python3
-	escons install DEBUG=0 LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr 
+	escons "${MYSCONS[@]}" LIBDIR=/usr/$(get_libdir) --prefix="${ED}"/usr --actual-prefix=/usr install
 	rm -f ${ED}/usr/share/glib-2.0/schemas/gschemas.compiled
 	if ! use gui; then
 		rm -rf "${D}"/usr/share/{glib-2.0,icons,applications}
