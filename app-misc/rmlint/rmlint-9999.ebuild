@@ -19,14 +19,16 @@ KEYWORDS=""
 IUSE="gui doc"
 REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
-RDEPEND="gui? ( x11-libs/gtksourceview:3.0
-		doc? ( dev-python/sphinx[${PYTHON_USEDEP}] )
+RDEPEND="gui? ( 
+		${PYTHON_DEPS}
+		x11-libs/gtksourceview:3.0
+		doc? ( dev-python/sphinx[${PYTHON_MULTI_USEDEP}] )
 		dev-libs/json-glib
-		dev-python/pygobject:3[${PYTHON_USEDEP}]
+		dev-python/pygobject:3[${PYTHON_MULTI_USEDEP}]
 		gnome-base/librsvg:2
 		x11-libs/gtk+:3 )"
 DEPEND="${RDEPEND}
-	dev-util/scons[${PYTHON_USEDEP}]
+	dev-util/scons[${PYTHON_MULTI_USEDEP}]
 	sys-devel/gettext
 	virtual/pkgconfig"
 
