@@ -1,15 +1,15 @@
-BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
-DEFINED_PHASES=install postinst postrm prepare unpack
-DEPEND=gui? ( x11-libs/gtksourceview:3.0 doc? ( dev-python/sphinx[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] ) dev-libs/json-glib dev-python/pygobject:3[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] gnome-base/librsvg:2 x11-libs/gtk+:3 ) dev-util/scons[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] sys-devel/gettext virtual/pkgconfig
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl] python_single_target_python3_7? ( dev-util/scons[python_targets_python3_7(-)] ) python_single_target_python3_8? ( dev-util/scons[python_targets_python3_8(-)] ) python_single_target_python3_9? ( dev-util/scons[python_targets_python3_9(-)] ) python_single_target_python3_7? ( dev-lang/python:3.7 >=dev-lang/python-exec-2:=[python_targets_python3_7] ) python_single_target_python3_8? ( dev-lang/python:3.8 >=dev-lang/python-exec-2:=[python_targets_python3_8] ) python_single_target_python3_9? ( dev-lang/python:3.9 >=dev-lang/python-exec-2:=[python_targets_python3_9] )
+DEFINED_PHASES=compile configure install postinst postrm prepare setup unpack
+DEPEND=gui? ( x11-libs/gtksourceview:3.0 doc? ( dev-python/sphinx[%PYTHON_USEDEP-NEEDS-TO-BE-USED-IN-PYTHON_GEN_COND_DEP%] ) dev-libs/json-glib dev-python/pygobject:3[%PYTHON_USEDEP-NEEDS-TO-BE-USED-IN-PYTHON_GEN_COND_DEP%] gnome-base/librsvg:2 x11-libs/gtk+:3 ) dev-util/scons[%PYTHON_USEDEP-NEEDS-TO-BE-USED-IN-PYTHON_GEN_COND_DEP%] sys-devel/gettext virtual/pkgconfig
 DESCRIPTION=rmlint finds space waste and other broken things on your filesystem and offers to remove it
 EAPI=7
 HOMEPAGE=https://github.com/sahib/rmlint
-INHERIT=git-r3 gnome2-utils l10n python-r1 scons-utils
-IUSE=gui doc python_targets_python3_7 python_targets_python3_8 python_targets_python3_9
+INHERIT=git-r3 gnome2-utils l10n python-single-r1 scons-utils
+IUSE=gui doc python_single_target_python3_7 python_single_target_python3_8 python_single_target_python3_9
 LICENSE=GPL-3
 PROPERTIES=live
-RDEPEND=gui? ( x11-libs/gtksourceview:3.0 doc? ( dev-python/sphinx[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] ) dev-libs/json-glib dev-python/pygobject:3[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] gnome-base/librsvg:2 x11-libs/gtk+:3 )
-REQUIRED_USE=|| ( python_targets_python3_7 python_targets_python3_8 python_targets_python3_9 )
+RDEPEND=gui? ( x11-libs/gtksourceview:3.0 doc? ( dev-python/sphinx[%PYTHON_USEDEP-NEEDS-TO-BE-USED-IN-PYTHON_GEN_COND_DEP%] ) dev-libs/json-glib dev-python/pygobject:3[%PYTHON_USEDEP-NEEDS-TO-BE-USED-IN-PYTHON_GEN_COND_DEP%] gnome-base/librsvg:2 x11-libs/gtk+:3 )
+REQUIRED_USE=^^ ( python_single_target_python3_7 python_single_target_python3_8 python_single_target_python3_9 )
 SLOT=0
-_eclasses_=git-r3	b8e8c92aa5fe8df7187e466138eb4e52	edos2unix	33e347e171066657f91f8b0c72ec8773	l10n	8cdd85e169b835d518bc2fd59f780d8e	wrapper	4251d4c84c25f59094fd557e0063a974	eutils	2d5b3f4b315094768576b6799e4f926e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	d410501a125f99ffb560b0c523cd3d1e	xdg-utils	ff2ff954e6b17929574eee4efc5152ba	gnome2-utils	c8e3fff820d850c0e003e22208d2eea3	multibuild	6b3d5ee849dafe6cdfd7b859c211fb01	python-utils-r1	3ea803de86891185c7b1db2c0b5bc8c8	python-r1	26e4ad0a4190b14f70973dc253e86535	multiprocessing	cac3169468f893670dac3e7cb940e045	scons-utils	90702ee8aff63a8d23f9bee315090adb
-_md5_=a077097f925ec851d3a6723bf1c92e7a
+_eclasses_=git-r3	b8e8c92aa5fe8df7187e466138eb4e52	edos2unix	33e347e171066657f91f8b0c72ec8773	l10n	8cdd85e169b835d518bc2fd59f780d8e	wrapper	4251d4c84c25f59094fd557e0063a974	eutils	2d5b3f4b315094768576b6799e4f926e	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	d410501a125f99ffb560b0c523cd3d1e	xdg-utils	ff2ff954e6b17929574eee4efc5152ba	gnome2-utils	c8e3fff820d850c0e003e22208d2eea3	python-utils-r1	3ea803de86891185c7b1db2c0b5bc8c8	python-single-r1	d25ac9d5d91fe9d44fda6ec192aca11a	multiprocessing	cac3169468f893670dac3e7cb940e045	scons-utils	90702ee8aff63a8d23f9bee315090adb
+_md5_=b476743644abae2120f0a319da1bc6b6
