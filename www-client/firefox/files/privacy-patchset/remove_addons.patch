@@ -61,7 +61,7 @@ diff --git a/browser/locales/l10n.toml b/browser/locales/l10n.toml
 index b9b18fe..af7c583 100644
 --- a/browser/locales/l10n.toml
 +++ b/browser/locales/l10n.toml
-@@ -133,10 +133,3 @@ locales = [
+@@ -133,10 +133,2 @@ locales = [
 -    reference = "browser/extensions/fxmonitor/locales/en-US/**"
 -    l10n = "{l}browser/extensions/fxmonitor/**"
 - 
@@ -69,7 +69,7 @@ index b9b18fe..af7c583 100644
 -    reference = "browser/extensions/report-site-issue/locales/en-US/**"
 -    l10n = "{l}browser/extensions/report-site-issue/**"
 -
- [[paths]]
+-[[paths]]
      reference = "services/sync/locales/en-US/**"
      l10n = "{l}services/sync/**"
 diff -Nuar a/browser/locales/Makefile.in b/browser/locales/Makefile.in
