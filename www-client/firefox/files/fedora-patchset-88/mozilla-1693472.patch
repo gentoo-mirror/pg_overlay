@@ -1,0 +1,111 @@
+changeset:   576074:12385afb25c9
+tag:         tip
+parent:      576071:a3bc2d23debb
+user:        stransky <stransky@redhat.com>
+date:        Wed Mar 31 16:37:22 2021 +0200
+files:       modules/libpref/init/StaticPrefList.yaml widget/gtk/WindowSurfaceWayland.cpp widget/gtk/WindowSurfaceWayland.h
+description:
+Bug 1693472 [Wayland] Always use direct drawing on KWim, r?jhorak
+
+Differential Revision: https://phabricator.services.mozilla.com/D110427
+
+
+diff --git a/modules/libpref/init/StaticPrefList.yaml b/modules/libpref/init/StaticPrefList.yaml
+--- a/modules/libpref/init/StaticPrefList.yaml
++++ b/modules/libpref/init/StaticPrefList.yaml
+@@ -10991,10 +10991,13 @@
+   mirror: always
+ #endif
+ 
+-# Use smooth rendering for Wayland basic compositor.
++# Smooth rendering mode for Wayland basic compositor.
++# 0 - direct draw
++# 1 - basic caching
++# 2 - all caching
+ - name: widget.wayland-smooth-rendering
+-  type: RelaxedAtomicBool
+-  value: false
++  type: RelaxedAtomicUint32
++  value: 1
+   mirror: always
+ 
+ # Use DMABuf backend for WebGL.
+diff --git a/widget/gtk/WindowSurfaceWayland.cpp b/widget/gtk/WindowSurfaceWayland.cpp
+--- a/widget/gtk/WindowSurfaceWayland.cpp
++++ b/widget/gtk/WindowSurfaceWayland.cpp
+@@ -487,6 +487,11 @@ WindowSurfaceWayland::WindowSurfaceWayla
+   for (int i = 0; i < BACK_BUFFER_NUM; i++) {
+     mShmBackupBuffer[i] = nullptr;
+   }
++  // Use slow compositing on KDE only.
++  const char* currentDesktop = getenv("XDG_CURRENT_DESKTOP");
++  if (currentDesktop && strstr(currentDesktop, "KDE") != nullptr) {
++    mSmoothRendering = CACHE_NONE;
++  }
+ }
+ 
+ WindowSurfaceWayland::~WindowSurfaceWayland() {
+@@ -817,13 +822,12 @@ already_AddRefed<gfx::DrawTarget> Window
+     mMozContainerRect = mozContainerSize;
+   }
+ 
+-  // We can draw directly only when we redraw significant part of the window
+-  // to avoid flickering or do only fullscreen updates in smooth mode.
+-  mDrawToWaylandBufferDirectly =
+-      mSmoothRendering
+-          ? windowRedraw
+-          : (windowRedraw || (lockSize.width * 2 > mozContainerSize.width &&
+-                              lockSize.height * 2 > mozContainerSize.height));
++  mDrawToWaylandBufferDirectly = windowRedraw || mSmoothRendering == CACHE_NONE;
++  if (!mDrawToWaylandBufferDirectly && mSmoothRendering == CACHE_SMALL) {
++    mDrawToWaylandBufferDirectly =
++        (lockSize.width * 2 > mozContainerSize.width &&
++         lockSize.height * 2 > mozContainerSize.height);
++  }
+ 
+   if (!mDrawToWaylandBufferDirectly) {
+     // Don't switch wl_buffers when we cache drawings.
+diff --git a/widget/gtk/WindowSurfaceWayland.h b/widget/gtk/WindowSurfaceWayland.h
+--- a/widget/gtk/WindowSurfaceWayland.h
++++ b/widget/gtk/WindowSurfaceWayland.h
+@@ -149,19 +149,6 @@ class WindowSurfaceWayland : public Wind
+ 
+   RefPtr<nsWaylandDisplay> GetWaylandDisplay() { return mWaylandDisplay; };
+ 
+-  // Image cache mode can be set by widget.wayland_cache_mode
+-  typedef enum {
+-    // Cache and clip all drawings, default. It's slowest
+-    // but also without any rendered artifacts.
+-    CACHE_ALL = 0,
+-    // Cache drawing only when back buffer is missing. May produce
+-    // some rendering artifacts and flickering when partial screen update
+-    // is rendered.
+-    CACHE_MISSING = 1,
+-    // Don't cache anything, draw only when back buffer is available.
+-    CACHE_NONE = 2
+-  } RenderingCacheMode;
+-
+  private:
+   WindowBackBuffer* GetWaylandBuffer();
+   WindowBackBuffer* SetNewWaylandBuffer();
+@@ -251,9 +238,18 @@ class WindowSurfaceWayland : public Wind
+   // This typically apply to popup windows.
+   bool mBufferNeedsClear;
+ 
++  typedef enum {
++    // Don't cache anything, always draw directly to wl_buffer
++    CACHE_NONE = 0,
++    // Cache only small paints (smaller than 1/2 of screen).
++    CACHE_SMALL = 1,
++    // Cache all painting except fullscreen updates.
++    CACHE_ALL = 2,
++  } RenderingCacheMode;
++
+   // Cache all drawings except fullscreen updates.
+   // Avoid any rendering artifacts for significant performance penality.
+-  bool mSmoothRendering;
++  unsigned int mSmoothRendering;
+ 
+   gint mSurfaceReadyTimerID;
+   mozilla::Mutex mSurfaceLock;
+
