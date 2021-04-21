@@ -37,10 +37,10 @@ diff --git a/browser/locales/filter.py b/browser/locales/filter.py
 index bb2e992..7d7768e 100644
 --- a/browser/locales/filter.py
 +++ b/browser/locales/filter.py
-@@ -20,7 +20,5 @@ def test(mod, path, entity=None):
+@@ -20,7 +20,6 @@ def test(mod, path, entity=None):
          "browser",
          "browser/extensions/formautofill",
--        "browser/extensions/fxmonitor",
+         "browser/extensions/fxmonitor",
 -        "browser/extensions/report-site-issue",
          "extensions/spellcheck",
          "other-licenses/branding/firefox",
@@ -49,10 +49,10 @@ diff --git a/browser/locales/l10n.ini b/browser/locales/l10n.ini
 index f4cb7ca..4efac13 100644
 --- a/browser/locales/l10n.ini
 +++ b/browser/locales/l10n.ini
-@@ -14,7 +14,5 @@ dirs = browser
+@@ -14,7 +14,6 @@ dirs = browser
       devtools/startup
       browser/extensions/formautofill
--     browser/extensions/fxmonitor
+      browser/extensions/fxmonitor
 -     browser/extensions/report-site-issue
  
  [includes]
@@ -61,25 +61,14 @@ diff --git a/browser/locales/l10n.toml b/browser/locales/l10n.toml
 index b9b18fe..af7c583 100644
 --- a/browser/locales/l10n.toml
 +++ b/browser/locales/l10n.toml
-@@ -133,10 +133,2 @@ locales = [
--    reference = "browser/extensions/fxmonitor/locales/en-US/**"
--    l10n = "{l}browser/extensions/fxmonitor/**"
-- 
+@@ -133,10 +133,6 @@ locales = [
+     reference = "browser/extensions/fxmonitor/locales/en-US/**"
+     l10n = "{l}browser/extensions/fxmonitor/**"
+ 
 -[[paths]]
 -    reference = "browser/extensions/report-site-issue/locales/en-US/**"
 -    l10n = "{l}browser/extensions/report-site-issue/**"
 -
--[[paths]]
+ [[paths]]
      reference = "services/sync/locales/en-US/**"
      l10n = "{l}services/sync/**"
-diff -Nuar a/browser/locales/Makefile.in b/browser/locales/Makefile.in
---- a/browser/installer/package-manifest.in	2020-11-10 12:49:54.575993696 +0700
-+++ b//browser/installer/package-manifest.in2020-11-10 12:50:36.920538743 +0700
-@@ -265,7 +265,6 @@
- @RESPATH@/browser/chrome/icons/default/default128.png
- @RESPATH@/browser/chrome/icons/default/default256.png
- #endif
--@RESPATH@/browser/features/*
- 
- ; [DevTools Startup Files]
- @RESPATH@/browser/chrome/devtools-startup@JAREXT@
