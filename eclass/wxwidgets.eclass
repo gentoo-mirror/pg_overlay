@@ -131,7 +131,7 @@ setup-wxwidgets() {
 }
 
 case ${EAPI:-0} in
-	0|1|2|3|4|5|6|7)
+	0|1|2|3|4|5|6)
 		# deprecated
 		need-wxwidgets() {
 			setup-wxwidgets
