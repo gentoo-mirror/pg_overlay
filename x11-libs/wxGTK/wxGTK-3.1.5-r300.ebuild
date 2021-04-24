@@ -55,7 +55,6 @@ BDEPEND="
 	virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}"/wxGTK-${SLOT}-translation-domain.patch
 	"${FILESDIR}"/wxGTK-ignore-c++-abi.patch #676878
 )
 
