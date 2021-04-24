@@ -112,7 +112,7 @@ setup-wxwidgets() {
 	# toolkit overrides
 	if has_version "x11-libs/wxGTK:${WX_GTK_VER}[aqua]"; then
 		wxtoolkit="mac"
-	elif ! has_version "x11-libs/wxGTK:${WX_GTK_VER}[X]"; then
+	elif ! has_version "x11-libs/wxGTK:${WX_GTK_VER}[gui]"; then
 		wxtoolkit="base"
 	fi
 
