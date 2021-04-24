@@ -20,13 +20,13 @@ S="${WORKDIR}/wxWidgets-${PV}"
 LICENSE="wxWinLL-3 GPL-2 doc? ( wxWinFDL-3 )"
 SLOT="${WXRELEASE}"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux"
-IUSE="+X doc debug gstreamer libnotify opengl sdl tiff webkit"
+IUSE="+gui doc debug gstreamer libnotify opengl sdl tiff webkit"
 
 RDEPEND="
 	>=app-eselect/eselect-wxwidgets-20131230
 	dev-libs/expat[${MULTILIB_USEDEP}]
 	sdl? ( media-libs/libsdl2[${MULTILIB_USEDEP}] )
-	X? (
+	gui? (
 		>=dev-libs/glib-2.22:2[${MULTILIB_USEDEP}]
 		media-libs/libpng:0=[${MULTILIB_USEDEP}]
 		sys-libs/zlib[${MULTILIB_USEDEP}]
@@ -34,9 +34,6 @@ RDEPEND="
 		x11-libs/cairo[${MULTILIB_USEDEP}]
 		x11-libs/gtk+:3[${MULTILIB_USEDEP}]
 		x11-libs/gdk-pixbuf[${MULTILIB_USEDEP}]
-		x11-libs/libSM[${MULTILIB_USEDEP}]
-		x11-libs/libX11[${MULTILIB_USEDEP}]
-		x11-libs/libXxf86vm[${MULTILIB_USEDEP}]
 		x11-libs/pango[${MULTILIB_USEDEP}]
 		gstreamer? (
 			media-libs/gstreamer:1.0[${MULTILIB_USEDEP}]
@@ -49,7 +46,7 @@ RDEPEND="
 	)"
 DEPEND="${RDEPEND}
 	opengl? ( virtual/glu[${MULTILIB_USEDEP}] )
-	X? ( x11-base/xorg-proto )"
+	gui? ( x11-base/xorg-proto )"
 BDEPEND="
 	>=app-eselect/eselect-wxwidgets-20131230
 	virtual/pkgconfig"
@@ -107,7 +104,7 @@ multilib_src_configure() {
 	# wxGTK options
 	#   --enable-graphics_ctx - needed for webkit, editra
 	#   --without-gnomevfs - bug #203389
-	use X && myeconfargs+=(
+	use gui && myeconfargs+=(
 		--enable-graphics_ctx
 		--with-gtkprint
 		--enable-gui
@@ -123,7 +120,7 @@ multilib_src_configure() {
 	)
 
 	# wxBase options
-	! use X && myeconfargs+=( --disable-gui )
+	! use gui && myeconfargs+=( --disable-gui )
 
 	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
 }
