@@ -114,6 +114,7 @@ setup-wxwidgets() {
 		wxtoolkit="mac"
 	elif ! has_version "x11-libs/wxGTK:${WX_GTK_VER}[gui]"; then
 		wxtoolkit="base"
+	else wxtoolkit="qt"
 	fi
 
 	wxconf="${wxtoolkit}-unicode-${wxdebug}${WX_GTK_VER}"
