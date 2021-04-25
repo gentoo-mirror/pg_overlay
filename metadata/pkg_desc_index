@@ -131,6 +131,7 @@ net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk,
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
+net-print/cups-filters 1.28.8: Cups filters
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
 sci-libs/libqalculate 3.18.0: A modern multi-purpose calculator library
