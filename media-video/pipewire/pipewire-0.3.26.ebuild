@@ -113,6 +113,7 @@ src_prepare() {
 
 src_configure() {
 	if ! use systemd; then
+		append-flags -lelogind
 		append-ldflags -lelogind
 	fi
 	local emesonargs=(
