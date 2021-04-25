@@ -112,9 +112,9 @@ src_prepare() {
 }
 
 src_configure() {
-	if ! use systemd; then
-		append-ldflags -lelogind
-	fi
+	#if ! use systemd; then
+	#	append-ldflags -lelogind
+	#fi
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_feature doc docs)
