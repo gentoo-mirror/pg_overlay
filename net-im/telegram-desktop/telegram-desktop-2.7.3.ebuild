@@ -66,7 +66,7 @@ REQUIRED_USE="
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-2.7.1-fix-disable-dbus-integration.patch"
+	"${FILESDIR}/fix-webview-includes.patch"
 )
 
 pkg_pretend() {
@@ -80,10 +80,6 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	cd "${S}/Telegram/ThirdParty/tgcalls" || die
-	eapply "${FILESDIR}/fix-tgcalls-gcc10.patch"
-
-	cd "${S}" || die
 	# no explicit toggle, doesn't build with the system one #752417
 	sed -i 's/DESKTOP_APP_USE_PACKAGED/NO_ONE_WILL_EVER_SET_THIS/' \
 		cmake/external/rlottie/CMakeLists.txt || die
