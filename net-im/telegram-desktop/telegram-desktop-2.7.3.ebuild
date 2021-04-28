@@ -66,7 +66,6 @@ REQUIRED_USE="
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-2.7.1-fix-disable-dbus-integration.patch"
 )
 
 pkg_pretend() {
@@ -80,8 +79,8 @@ pkg_pretend() {
 }
 
 src_prepare() {
-	cd "${S}/Telegram/ThirdParty/tgcalls" || die
-	eapply "${FILESDIR}/fix-tgcalls-gcc10.patch"
+	cd "${S}/Telegram/lib_webview" || die
+	eapply "${FILESDIR}/fix-webview-includes.patch"
 
 	cd "${S}" || die
 	# no explicit toggle, doesn't build with the system one #752417
