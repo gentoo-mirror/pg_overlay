@@ -91,6 +91,7 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cflags -D_GLIBCXX_ASSERTIONS
 	# gtk is really needed for image copy-paste due to https://bugreports.qt.io/browse/QTBUG-56595
 	local mycmakeargs=(
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
