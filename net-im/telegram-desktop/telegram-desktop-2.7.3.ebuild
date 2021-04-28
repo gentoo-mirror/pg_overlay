@@ -66,7 +66,6 @@ REQUIRED_USE="
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
-	"${FILESDIR}/fix-webview-includes.patch"
 )
 
 pkg_pretend() {
@@ -80,6 +79,10 @@ pkg_pretend() {
 }
 
 src_prepare() {
+	cd "${S}/Telegram/lib_webview" || die
+	eapply "${FILESDIR}/fix-webview-includes.patch"
+
+	cd "${S}" || die
 	# no explicit toggle, doesn't build with the system one #752417
 	sed -i 's/DESKTOP_APP_USE_PACKAGED/NO_ONE_WILL_EVER_SET_THIS/' \
 		cmake/external/rlottie/CMakeLists.txt || die
