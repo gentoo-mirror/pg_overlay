@@ -29,7 +29,7 @@ src_unpack() {
 }
 
 src_configure() {
-	cargo_src_configure $(usex gtk '--bin czkawka_gui' '--bin czkawka_cli')
+	cargo_src_configure $(usev gtk '--bin czkawka_gui' '--bin czkawka_cli')
 }
 
 src_compile() {
