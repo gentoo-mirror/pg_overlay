@@ -213,7 +213,7 @@ pa_meson_multilib_native_use_feature() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		-Dadrian-aec=false # Not packaged?
+		-Dadrian-aec=true # Not packaged?
 		--localstatedir="${EPREFIX}"/var
 		-Dmodlibexecdir="${EPREFIX}"/usr/"$(get_libdir)/${P}"
 #		-Dsystemduserunitdir=$(systemd_get_userunitdir)
