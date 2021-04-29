@@ -48,7 +48,7 @@ IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compile
 
 # How to use it:
 # List all the working slots in LLVM_VALID_SLOTS, newest first.
-LLVM_VALID_SLOTS=( 11 )
+LLVM_VALID_SLOTS=( 12 )
 LLVM_MAX_SLOT="${LLVM_VALID_SLOTS[0]}"
 
 # splitting usedeps needed to avoid CI/pkgcheck's UncheckableDep limitation
