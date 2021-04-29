@@ -40,6 +40,7 @@ DEPEND="${PYTHON_DEPS}
 src_prepare() {
 	sed 's/VK_QCOM_render_pass_store_ops_EXTENSION_NAME/\U&/g' layers/generated/vk_extension_helper.h
 	default
+	cmake_src_prepare
 }
 
 multilib_src_configure() {
