@@ -90,7 +90,7 @@ media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (med
 media-libs/libplacebo 3.120.1: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.14-r1: Simple Direct Media Layer
 media-libs/shaderc 2021.0: Collection of tools, libraries and tests for shader compilation
-media-libs/vulkan-layers 1.2.172 1.2.174 1.2.176 9999: Vulkan Validation Layers
+media-libs/vulkan-layers 1.2.176 9999: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.176: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
