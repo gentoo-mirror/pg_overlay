@@ -37,6 +37,11 @@ DEPEND="${PYTHON_DEPS}
 	)
 "
 
+src_prepare() {
+	sed 's/VK_QCOM_render_pass_store_ops_EXTENSION_NAME/\U&/g' layers/generated/vk_extension_helper.h
+	default
+}
+
 multilib_src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_SKIP_RPATH=ON
@@ -48,6 +53,7 @@ multilib_src_configure() {
 		-DGLSLANG_INSTALL_DIR="${EPREFIX}/usr"
 		-DCMAKE_INSTALL_INCLUDEDIR="${EPREFIX}/usr/include/vulkan/"
 		-DSPIRV_HEADERS_INSTALL_DIR="${EPREFIX}/usr/include/spirv"
+		-DUSE_ROBIN_HOOD_HASHING=OFF
 	)
 	cmake_src_configure
 }
