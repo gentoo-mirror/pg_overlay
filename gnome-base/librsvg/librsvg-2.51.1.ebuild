@@ -17,7 +17,7 @@ IUSE="+introspection +vala"
 REQUIRED_USE="vala? ( introspection )"
 
 RDEPEND="
-	>=x11-libs/cairo-1.16.0[${MULTILIB_USEDEP}]
+	>=x11-libs/cairo-1.16.0[glib,${MULTILIB_USEDEP}]
 	>=media-libs/freetype-2.9:2[${MULTILIB_USEDEP}]
 	>=x11-libs/gdk-pixbuf-2.20:2[introspection?,${MULTILIB_USEDEP}]
 	>=dev-libs/glib-2.50.0:2[${MULTILIB_USEDEP}]
@@ -88,6 +88,10 @@ multilib_src_compile() {
 
 multilib_src_install() {
 	gnome2_src_install
+}
+
+multilib_src_install_all() {
+	find "${ED}" -name '*.la' -delete || die
 }
 
 pkg_postinst() {
