@@ -37,6 +37,10 @@ DEPEND="${PYTHON_DEPS}
 	)
 "
 
+src_prepare() {
+	sed 's/VK_QCOM_render_pass_store_ops_EXTENSION_NAME/\U&/g' layers/generated/vk_extension_helper.h
+}
+
 multilib_src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_SKIP_RPATH=ON
