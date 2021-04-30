@@ -7,4 +7,4 @@ LICENSE=ISC Apache-2.0 MIT
 RDEPEND=!dev-util/ninja
 SLOT=0
 SRC_URI=https://github.com/michaelforney/samurai/releases/download/1.2/samurai-1.2.tar.gz
-_md5_=3784839f0f571540ecad2d7eb1bf31cd
+_md5_=8ba1175e0d88effb96b136feed4c63b0

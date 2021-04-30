@@ -68,7 +68,7 @@ dev-util/glslang 11.4.0: Khronos reference front-end for GLSL and ESSL, and samp
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/meson 0.57.1_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/samurai 1.2: ninja-compatible build tool written in C
+dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
 dev-util/spirv-tools 2021.1: Provides an API and commands for processing SPIR-V modules
 dev-util/vulkan-headers 1.2.177: Vulkan Header files and API registry
