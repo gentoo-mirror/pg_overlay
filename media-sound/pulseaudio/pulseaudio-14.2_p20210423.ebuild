@@ -39,7 +39,7 @@ SLOT="0"
 # NOTE: Add tdb IUSE?
 # TODO: Find out why webrtc-aec is always enabled - there's already the always available speexdsp-aec
 # NOTE: The current ebuild sets +X almost certainly just for the pulseaudio.desktop file
-IUSE="+alsa +alsa-plugin +asyncns bluetooth dbus +daemon doc equalizer +gdbm gstreamer gnome +glib
+IUSE="+alsa +alsa-plugin +asyncns bluetooth dbus +daemon doc elogind equalizer +gdbm gstreamer gnome +glib
 gtk ipv6 jack lirc native-headset ofono-headset +orc oss selinux sox ssl systemd system-wide tcpd
 test +udev +webrtc-aec +X zeroconf"
 
@@ -120,7 +120,7 @@ RDEPEND="
 	gdbm? ( sys-libs/gdbm:= )
 	webrtc-aec? ( >=media-libs/webrtc-audio-processing-0.2 )
 	systemd? ( sys-apps/systemd:0=[${MULTILIB_USEDEP}] )
-	!systemd? ( sys-auth/elogind )
+	!systemd? ( elogind? ( sys-auth/elogind ) )
 	daemon? ( dev-libs/libltdl:0[${MULTILIB_USEDEP}] )
 	selinux? ( sec-policy/selinux-pulseaudio )
 	gstreamer? (
