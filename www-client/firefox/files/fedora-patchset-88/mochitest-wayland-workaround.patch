@@ -1,0 +1,86 @@
+diff -up firefox-88.0/dom/base/test/browser_multiple_popups.js.mochitest-wayland-workaround firefox-88.0/dom/base/test/browser_multiple_popups.js
+--- firefox-88.0/dom/base/test/browser_multiple_popups.js.mochitest-wayland-workaround	2021-04-15 21:44:27.000000000 +0200
++++ firefox-88.0/dom/base/test/browser_multiple_popups.js	2021-04-22 15:17:36.905908990 +0200
+@@ -265,6 +265,7 @@ add_task(async _ => {
+   info("All opened from chrome.");
+   await withTestPage(2, { chrome: true }, async function(browser) {
+     await BrowserTestUtils.synthesizeMouseAtCenter("#openPopups", {}, browser);
++    await BrowserTestUtils.synthesizeMouseAtCenter("#openPopups", {}, browser);
+   });
+ });
+ 
+diff -up firefox-88.0/dom/ipc/BrowserChild.cpp.mochitest-wayland-workaround firefox-88.0/dom/ipc/BrowserChild.cpp
+--- firefox-88.0/dom/ipc/BrowserChild.cpp.mochitest-wayland-workaround	2021-04-16 01:11:48.000000000 +0200
++++ firefox-88.0/dom/ipc/BrowserChild.cpp	2021-04-22 15:17:36.905908990 +0200
+@@ -459,7 +459,7 @@ nsresult BrowserChild::Init(mozIDOMWindo
+   }
+   mPuppetWidget->InfallibleCreate(nullptr,
+                                   nullptr,  // no parents
+-                                  LayoutDeviceIntRect(0, 0, 0, 0),
++                                  LayoutDeviceIntRect(0, 0, 1000, 1000),
+                                   nullptr);  // HandleWidgetEvent
+ 
+   mWebBrowser = nsWebBrowser::Create(this, mPuppetWidget, mBrowsingContext,
+diff -up firefox-88.0/toolkit/components/browser/nsWebBrowser.cpp.mochitest-wayland-workaround firefox-88.0/toolkit/components/browser/nsWebBrowser.cpp
+--- firefox-88.0/toolkit/components/browser/nsWebBrowser.cpp.mochitest-wayland-workaround	2021-04-16 01:11:48.000000000 +0200
++++ firefox-88.0/toolkit/components/browser/nsWebBrowser.cpp	2021-04-22 15:17:36.905908990 +0200
+@@ -147,7 +147,8 @@ already_AddRefed<nsWebBrowser> nsWebBrow
+   // handler that always gets called (even for subframes) for any bubbling
+   // event.
+ 
+-  nsresult rv = docShell->InitWindow(nullptr, docShellParentWidget, 0, 0, 0, 0);
++  nsresult rv =
++      docShell->InitWindow(nullptr, docShellParentWidget, 0, 0, 1000, 1000);
+   if (NS_WARN_IF(NS_FAILED(rv))) {
+     return nullptr;
+   }
+diff -up firefox-88.0/widget/gtk/nsWindow.cpp.mochitest-wayland-workaround firefox-88.0/widget/gtk/nsWindow.cpp
+--- firefox-88.0/widget/gtk/nsWindow.cpp.mochitest-wayland-workaround	2021-04-22 15:17:36.903908930 +0200
++++ firefox-88.0/widget/gtk/nsWindow.cpp	2021-04-22 15:23:27.031343692 +0200
+@@ -2224,8 +2224,22 @@ void nsWindow::SetFocus(Raise aRaise, mo
+           Preferences::GetBool("widget.wayland-focus-workaroud", false)) {
+         // Wayland does not support focus changes so we need to workaround it
+         // by window hide/show sequence.
+-        owningWindow->NativeShow(false);
+-        owningWindow->NativeShow(true);
++        LOG(("Applying Wayland focus workaround for nsWindow %p\n",
++             owningWindow.get()));
++        GtkAllocation allocation;
++        gtk_widget_get_allocation(GTK_WIDGET(mContainer), &allocation);
++        LOG(("    mShell allocation %d %d -> %d %d\n", allocation.x,
++             allocation.y, allocation.width, allocation.height));
++        owningWindow->Show(false);
++        RefPtr<nsWindow> self(owningWindow);
++        const GtkAllocation alloc = allocation;
++        NS_DispatchToMainThread(
++            NS_NewRunnableFunction("nsWindow::Show()", [self, alloc]() -> void {
++              self->Show(true);
++              GtkAllocation al = alloc;
++              self->mBounds.width = self->mBounds.height = 1;
++              self->OnSizeAllocate(&al);
++            }));
+         return;
+       }
+ 
+@@ -7935,6 +7949,8 @@ nsresult nsWindow::SynthesizeNativeMouse
+     nsIObserver* aObserver) {
+   AutoObserverNotifier notifier(aObserver, "mouseevent");
+ 
++  LOG(("nsWindow::SynthesizeNativeMouseEvent [%p]\n", (void*)this));
++
+   if (!mGdkWindow) {
+     return NS_OK;
+   }
+@@ -7949,6 +7965,12 @@ nsresult nsWindow::SynthesizeNativeMouse
+   switch (aNativeMessage) {
+     case NativeMouseMessage::ButtonDown:
+     case NativeMouseMessage::ButtonUp: {
++      if (aNativeMessage == NativeMouseMessage::ButtonDown) {
++        LOG(("    NativeMouseMessage::ButtonDown()\n"));
++      } else {
++        LOG(("    NativeMouseMessage::ButtonUp()\n"));
++      }
++
+       GdkEvent event;
+       memset(&event, 0, sizeof(GdkEvent));
+       event.type = aNativeMessage == NativeMouseMessage::ButtonDown
