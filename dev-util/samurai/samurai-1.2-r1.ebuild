@@ -12,7 +12,12 @@ KEYWORDS="~amd64 ~arm ~x86"
 
 RDEPEND="!dev-util/ninja"
 
+PATCHES=(
+	"${FILESDIR}/${P}-null_pointer_fix.patch" #786957
+)
+
 src_install() {
 	emake DESTDIR="${D}" PREFIX="${EPREFIX}"/usr install
     dosym samu /usr/bin/ninja
+    dodoc README.md
 }
