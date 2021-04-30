@@ -12,4 +12,3 @@ rhbz-1354671.patch
 disable-openh264-download.patch
 
 mochitest-wayland-workaround.patch
-mozilla-1580595.patch
