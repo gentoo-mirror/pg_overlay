@@ -8,7 +8,6 @@ inherit flag-o-matic gnome2 multilib multilib-minimal readme.gentoo-r1 virtualx
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="https://www.gtk.org/"
-SRC_URI+=" https://dev.gentoo.org/~leio/distfiles/${PN}-2.24.32-patchset-r1.tar.xz"
 
 LICENSE="LGPL-2+"
 SLOT="2"
@@ -36,7 +35,7 @@ COMMON_DEPEND="
 	cups? ( >=net-print/cups-1.7.1-r2:=[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-0.9.3:= )
 	!aqua? (
-		>=x11-libs/cairo-1.12.14-r4:=[aqua?,svg,${MULTILIB_USEDEP}]
+		>=x11-libs/cairo-1.12.14-r4:=[aqua?,svg,X,${MULTILIB_USEDEP}]
 		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXcomposite-0.4.4-r1[${MULTILIB_USEDEP}]
 		>=x11-libs/libXcursor-1.1.14[${MULTILIB_USEDEP}]
@@ -108,8 +107,8 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-2.24.24-out-of-source.patch
 	# Rely on split gtk-update-icon-cache package, bug #528810
 	"${FILESDIR}"/${PN}-2.24.31-update-icon-cache.patch # requires eautoreconf
-	# Upstream gtk-2-24 branch up to 2018-09-08 state, bug #650536 safety
-	"${WORKDIR}"/patches/ # requires eautoreconf
+	# Respect ${NM}, bug #725852
+	"${FILESDIR}"/${PN}-2.24.33-respect-NM.patch # requires eautoreconf
 )
 
 strip_builddir() {
@@ -177,8 +176,6 @@ src_prepare() {
 		strip_builddir SRC_SUBDIRS demos Makefile.{am,in}
 	fi
 
-	#
-	rm "${WORKDIR}"/patches/{0001*,0002*,0003*,0004*,0005*,0006*,0008*,0012*,0013*,0014*,0016*,0017*,0018*,*0019*,0020*}
 	gnome2_src_prepare
 }
 
@@ -233,6 +230,7 @@ multilib_src_install_all() {
 	doins "${T}"/gtkrc
 
 	einstalldocs
+	rm "${ED}"/usr/share/doc/${P}/ChangeLog # empty file
 
 	# dev-util/gtk-builder-convert split off into a separate package, #402905
 	rm -f "${ED}"usr/bin/gtk-builder-convert || die
