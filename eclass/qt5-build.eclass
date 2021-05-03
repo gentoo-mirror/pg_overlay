@@ -21,12 +21,29 @@ case ${EAPI} in
 	*)	die "qt5-build.eclass: unsupported EAPI=${EAPI:-0}" ;;
 esac
 
+# @ECLASS-VARIABLE: QT5_BUILD_TYPE
+# @DESCRIPTION:
+# Default value is "release".
+# If PV matches "*9999*", this is automatically set to "live".
+QT5_BUILD_TYPE=release
+if [[ ${PV} = *9999* ]]; then
+	QT5_BUILD_TYPE=live
+fi
+readonly QT5_BUILD_TYPE
+
 # @ECLASS-VARIABLE: QT5_MODULE
 # @PRE_INHERIT
 # @DESCRIPTION:
 # The upstream name of the module this package belongs to. Used for
 # SRC_URI and EGIT_REPO_URI. Must be set before inheriting the eclass.
 : ${QT5_MODULE:=${PN}}
+
+# @ECLASS-VARIABLE: _QT5_P
+# @INTERNAL
+# @DESCRIPTION:
+# The upstream package name of the module this package belongs to.
+# Used for SRC_URI and S.
+_QT5_P=${QT5_MODULE}-everywhere-src-${PV}
 
 # @ECLASS-VARIABLE: QT5_TARGET_SUBDIRS
 # @DEFAULT_UNSET
@@ -64,32 +81,18 @@ HOMEPAGE="https://www.qt.io/"
 LICENSE="|| ( GPL-2 GPL-3 LGPL-3 ) FDL-1.3"
 SLOT=5/$(ver_cut 1-2)
 
-QT5_MINOR_VERSION=$(ver_cut 2)
-readonly QT5_MINOR_VERSION
-
 case ${PV} in
 	5.15.9999)
 		# KDE upstream for 5.15 patches
 		HOMEPAGE+=" https://invent.kde.org/qt/qt/"
-		QT5_BUILD_TYPE="live"
 		EGIT_BRANCH="kde/5.15"
-		;;
-	*_alpha*|*_beta*|*_rc*)
-		# development release
-		QT5_BUILD_TYPE="release"
-		MY_P=${QT5_MODULE}-everywhere-src-${PV/_/-}
-		SRC_URI="https://download.qt.io/development_releases/qt/${PV%.*}/${PV/_/-}/submodules/${MY_P}.tar.xz"
-		S=${WORKDIR}/${MY_P}
 		;;
 	*)
 		# official stable release
-		QT5_BUILD_TYPE="release"
-		MY_P=${QT5_MODULE}-everywhere-src-${PV}
-		SRC_URI="https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/submodules/${MY_P}.tar.xz"
-		S=${WORKDIR}/${MY_P}
+		SRC_URI="https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/submodules/${_QT5_P}.tar.xz"
+		S=${WORKDIR}/${_QT5_P}
 		;;
 esac
-readonly QT5_BUILD_TYPE
 
 EGIT_REPO_URI=( "https://invent.kde.org/qt/qt/${QT5_MODULE}.git" )
 
