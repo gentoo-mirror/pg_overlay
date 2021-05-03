@@ -19,14 +19,13 @@ LICENSE="GPL-2"
 SLOT="0"
 
 KEYWORDS=""
-IUSE="debug libressl ssl test"
+IUSE="debug ssl test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
 	sys-libs/zlib
 	ssl? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:= )
+		dev-libs/openssl:0=
 	)"
 DEPEND="${RDEPEND}
 	virtual/pkgconfig
