@@ -4,7 +4,7 @@
 EAPI=7
 
 DESCRIPTION="High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust."
-HOMEPAGE="https://www.nayuki.io/page/qr-code-generator-library/"
+HOMEPAGE="https://www.nayuki.io/page/qr-code-generator-library"
 SRC_URI="https://github.com/nayuki/QR-Code-generator/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="MIT"
