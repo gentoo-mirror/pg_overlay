@@ -14,10 +14,11 @@ LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86"
 
-IUSE="alsa aqua cpu_flags_ppc_altivec cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 custom-cflags dbus fcitx4 gles2 haptic ibus jack +joystick kms libsamplerate nas opengl oss pulseaudio +sound static-libs +threads udev +video video_cards_vc4 vulkan wayland X xinerama xscreensaver"
+IUSE="alsa aqua cpu_flags_ppc_altivec cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 custom-cflags dbus fcitx4 gles1 gles2 haptic ibus jack +joystick kms libsamplerate nas opengl oss pulseaudio +sound static-libs +threads udev +video video_cards_vc4 vulkan wayland X xinerama xscreensaver"
 REQUIRED_USE="
 	alsa? ( sound )
 	fcitx4? ( dbus )
+	gles1? ( video )
 	gles2? ( video )
 	ibus? ( dbus )
 	jack? ( sound )
@@ -32,6 +33,7 @@ CDEPEND="
 	alsa? ( >=media-libs/alsa-lib-1.0.27.2[${MULTILIB_USEDEP}] )
 	dbus? ( >=sys-apps/dbus-1.6.18-r1[${MULTILIB_USEDEP}] )
 	fcitx4? ( app-i18n/fcitx:4 )
+	gles1? ( media-libs/mesa[${MULTILIB_USEDEP},gles1] )
 	gles2? ( >=media-libs/mesa-9.1.6[${MULTILIB_USEDEP},gles2] )
 	ibus? ( app-i18n/ibus )
 	jack? ( virtual/jack[${MULTILIB_USEDEP}] )
@@ -103,13 +105,13 @@ src_prepare() {
 	# https://bugs.gentoo.org/764959
 	AT_NOEAUTOHEADER="yes" AT_M4DIR="/usr/share/aclocal acinclude" \
 		eautoreconf
-
-	# libsdl2-2.0.14 build regression. Please check if still needed
-	multilib_copy_sources
 }
 
 multilib_src_configure() {
 	use custom-cflags || strip-flags
+
+	# libsdl2-2.0.14 build regression. Please check if still needed
+	append-flags -D__LINUX__
 
 	if use ibus; then
 		local -x IBUS_CFLAGS="-I${ESYSROOT}/usr/include/ibus-1.0 -I${ESYSROOT}/usr/include/glib-2.0 -I${ESYSROOT}/usr/$(get_libdir)/glib-2.0/include"
@@ -176,7 +178,7 @@ multilib_src_configure() {
 		--disable-kmsdrm-shared
 		$(use_enable video video-dummy)
 		$(use_enable opengl video-opengl)
-		--disable-video-opengles1
+		$(use_enable gles1 video-opengles1)
 		$(use_enable gles2 video-opengles2)
 		$(use_enable vulkan video-vulkan)
 		$(use_enable udev libudev)
@@ -189,7 +191,7 @@ multilib_src_configure() {
 		$(use_with X x)
 	)
 
-	#ECONF_SOURCE="${S}"
+	ECONF_SOURCE="${S}" \
 	econf "${myeconfargs[@]}"
 }
 
