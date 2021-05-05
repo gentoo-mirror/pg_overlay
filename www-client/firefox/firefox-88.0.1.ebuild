@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-88-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-88-patches-03.tar.xz"
 
 LLVM_MAX_SLOT=12
 
@@ -438,18 +438,18 @@ pkg_setup() {
 		# Note: These are for Gentoo Linux use ONLY. For your own distribution, please
 		# get your own set of keys.
 		if [[ -z "${MOZ_API_KEY_GOOGLE+set}" ]] ; then
-			MOZ_API_KEY_GOOGLE="AIzaSyDEAOvatFogGaPi0eTgsV_ZlEzx0ObmepsMzfAc"
+			MOZ_API_KEY_GOOGLE=""
 		fi
 
 		if [[ -z "${MOZ_API_KEY_LOCATION+set}" ]] ; then
-			MOZ_API_KEY_LOCATION="AIzaSyB2h2OuRgGaPicUgy5N-5hsZqiPW6sH3n_rptiQ"
+			MOZ_API_KEY_LOCATION=""
 		fi
 
 		# Mozilla API keys (see https://location.services.mozilla.com/api)
 		# Note: These are for Gentoo Linux use ONLY. For your own distribution, please
 		# get your own set of keys.
 		if [[ -z "${MOZ_API_KEY_MOZILLA+set}" ]] ; then
-			MOZ_API_KEY_MOZILLA="edb3d487-3a84-46m0ap1e3-9dfd-92b5efaaa005"
+			MOZ_API_KEY_MOZILLA=""
 		fi
 
 		# Ensure we use C locale when building, bug #746215
