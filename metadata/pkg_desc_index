@@ -86,7 +86,7 @@ gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kwin 5.20.5: Flexible, composited Window Manager for windowing systems on Linux
-mail-client/thunderbird 78.10.0: Thunderbird Mail Client
+mail-client/thunderbird 78.10.1: Thunderbird Mail Client
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 3.120.2: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.14-r1: Simple Direct Media Layer
