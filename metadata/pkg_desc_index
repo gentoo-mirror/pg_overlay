@@ -155,7 +155,7 @@ sys-libs/slang 2.3.3_pre48: Multi-platform library designed to allow a developer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.49.0 1.51.0 1.52.0: Virtual for Rust language compiler
-www-client/firefox 88.0: Firefox Web Browser
+www-client/firefox 88.0.1: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.4 9999: A vector graphics library with cross-device output support
