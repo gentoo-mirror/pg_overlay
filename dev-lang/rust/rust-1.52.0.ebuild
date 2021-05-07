@@ -5,7 +5,8 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{7..9} )
 
-inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing multilib-build python-any-r1 rust-toolchain toolchain-funcs
+inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing \
+	multilib-build python-any-r1 rust-toolchain toolchain-funcs verify-sig
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
@@ -21,8 +22,8 @@ else
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 fi
 
-#RUST_STAGE0_VERSION=${PV}
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+RUST_STAGE0_VERSION=${PV}
+#RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -36,28 +37,37 @@ SRC_URI="
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM AVR BPF Hexagon Lanai Mips MSP430
 	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore )
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
-LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/?}
+LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/(-)?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc libressl miri nightly parallel-compiler rls rustfmt system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc miri nightly parallel-compiler rls rustfmt system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
 # simultaneously.
 
 # How to use it:
-# 1. List all the working slots (with min versions) in ||, newest first.
-# 2. Update the := to specify *max* version, e.g. < 12.
-# 3. Specify LLVM_MAX_SLOT, e.g. 11.
-LLVM_DEPEND="
-	|| (
-		sys-devel/llvm:12[${LLVM_TARGET_USEDEPS// /,}]
-	)
-	<sys-devel/llvm-13:=
+# List all the working slots in LLVM_VALID_SLOTS, newest first.
+LLVM_VALID_SLOTS=( 12 )
+LLVM_MAX_SLOT="${LLVM_VALID_SLOTS[0]}"
+
+# splitting usedeps needed to avoid CI/pkgcheck's UncheckableDep limitation
+# (-) usedep needed because we may build with older llvm without that target
+LLVM_DEPEND="|| ( "
+for _s in ${LLVM_VALID_SLOTS[@]}; do
+	LLVM_DEPEND+=" ( "
+	for _x in ${ALL_LLVM_TARGETS[@]}; do
+		LLVM_DEPEND+="
+			${_x}? ( sys-devel/llvm:${_s}[${_x}(-)] )"
+	done
+	LLVM_DEPEND+=" )"
+done
+unset _s _x
+LLVM_DEPEND+=" )
+	<sys-devel/llvm-$(( LLVM_MAX_SLOT + 1 )):=
 	wasm? ( sys-devel/lld )
 "
-LLVM_MAX_SLOT=12
 
 # to bootstrap we need at least exactly previous version, or same.
 # most of the time previous versions fail to bootstrap with newer
@@ -66,8 +76,8 @@ LLVM_MAX_SLOT=12
 # https://github.com/rust-lang/rust/blob/${PV}/src/stage0.txt
 BOOTSTRAP_DEPEND="||
 	(
-		=dev-lang/rust-$(ver_cut 1).$(($(ver_cut 2) - 2))*
-		=dev-lang/rust-bin-$(ver_cut 1).$(($(ver_cut 2) - 2))*
+		=dev-lang/rust-$(ver_cut 1).$(($(ver_cut 2) - 1))*
+		=dev-lang/rust-bin-$(ver_cut 1).$(($(ver_cut 2) - 1))*
 		=dev-lang/rust-$(ver_cut 1).$(ver_cut 2)*
 		=dev-lang/rust-bin-$(ver_cut 1).$(ver_cut 2)*
 	)
@@ -84,6 +94,8 @@ BDEPEND="${PYTHON_DEPS}
 		dev-util/cmake
 		dev-util/ninja
 	)
+	test? ( sys-devel/gdb )
+	verify-sig? ( app-crypt/openpgp-keys-rust )
 "
 
 DEPEND="
@@ -92,8 +104,7 @@ DEPEND="
 	net-libs/http-parser:=
 	net-misc/curl:=[http2,ssl]
 	sys-libs/zlib:=
-	!libressl? ( dev-libs/openssl:0= )
-	libressl? ( dev-libs/libressl:0= )
+	dev-libs/openssl:0=
 	elibc_musl? ( sys-libs/libunwind:= )
 	system-llvm? (
 		${LLVM_DEPEND}
@@ -135,9 +146,12 @@ QA_SONAME="
 # causes double bootstrap
 RESTRICT="test"
 
+VERIFY_SIG_OPENPGP_KEY_PATH="/usr/share/openpgp-keys/rust.asc"
+
 PATCHES=(
 	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/1.52-0001-Change-LLVM-targets.patch
+	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
+	"${FILESDIR}"/1.51.0-slow-doc-install.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -149,7 +163,7 @@ toml_usex() {
 boostrap_rust_version_check() {
 	# never call from pkg_pretend. eselect-rust may be not installed yet.
 	[[ ${MERGE_TYPE} == binary ]] && return
-	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 2))"
+	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 1))"
 	local rustc_toonew="$(ver_cut 1).$(($(ver_cut 2) + 1))"
 	local rustc_version=( $(eselect --brief rust show 2>/dev/null) )
 	rustc_version=${rustc_version[0]#rust-bin-}
@@ -171,14 +185,25 @@ boostrap_rust_version_check() {
 }
 
 pre_build_checks() {
-	local M=6144
+	local M=8192
+	# multiply requirements by 1.5 if we are doing x86-multilib
+	if use amd64; then
+		M=$(( $(usex abi_x86_32 15 10) * ${M} / 10 ))
+	fi
 	M=$(( $(usex clippy 128 0) + ${M} ))
 	M=$(( $(usex miri 128 0) + ${M} ))
 	M=$(( $(usex rls 512 0) + ${M} ))
 	M=$(( $(usex rustfmt 256 0) + ${M} ))
-	M=$(( $(usex system-llvm 0 2048) + ${M} ))
+	# add 2G if we compile llvm and 256M per llvm_target
+	if ! use system-llvm; then
+		M=$(( 2048 + ${M} ))
+		local ltarget
+		for ltarget in ${ALL_LLVM_TARGETS[@]}; do
+			M=$(( $(usex ${ltarget} 256 0) + ${M} ))
+		done
+	fi
 	M=$(( $(usex wasm 256 0) + ${M} ))
-	M=$(( $(usex debug 15 10) * ${M} / 10 ))
+	M=$(( $(usex debug 2 1) * ${M} ))
 	eshopts_push -s extglob
 	if is-flagq '-g?(gdb)?([1-9])'; then
 		M=$(( 15 * ${M} / 10 ))
@@ -187,6 +212,10 @@ pre_build_checks() {
 	M=$(( $(usex system-bootstrap 0 1024) + ${M} ))
 	M=$(( $(usex doc 256 0) + ${M} ))
 	CHECKREQS_DISK_BUILD=${M}M check-reqs_pkg_${EBUILD_PHASE}
+}
+
+llvm_check_deps() {
+	has_version -r "sys-devel/llvm:${LLVM_SLOT}[${LLVM_TARGET_USEDEPS// /,}]"
 }
 
 pkg_pretend() {
@@ -208,7 +237,7 @@ pkg_setup() {
 	if use system-llvm; then
 		llvm_pkg_setup
 
-		local llvm_config="$(get_llvm_prefix "$LLVM_MAX_SLOT")/bin/llvm-config"
+		local llvm_config="$(get_llvm_prefix "${LLVM_MAX_SLOT}")/bin/llvm-config"
 		export LLVM_LINK_SHARED=1
 		export RUSTFLAGS="${RUSTFLAGS} -Lnative=$("${llvm_config}" --libdir)"
 	fi
@@ -220,7 +249,7 @@ src_prepare() {
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
-			--destdir="${rust_stage0_root}" --prefix=/ || die
+			--without=rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
 	fi
 
 	if use system-llvm; then
@@ -263,8 +292,6 @@ src_prepare() {
 	# LLVM LibUwind hack
 	sed -i /std=c99/d library/unwind/build.rs
 	sed -i /std=c++11/d library/unwind/build.rs
-
-	use libressl && eapply ${FILESDIR}/${P}-1.47.0-libressl.patch
 
 	default
 }
@@ -330,6 +357,7 @@ src_configure() {
 		target = [${rust_targets}]
 		cargo = "${rust_stage0_root}/bin/cargo"
 		rustc = "${rust_stage0_root}/bin/rustc"
+		rustfmt = "${rust_stage0_root}/bin/rustfmt"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		submodules = true
@@ -357,8 +385,12 @@ src_configure() {
 		debug = $(toml_usex debug)
 		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
-		debuginfo-level = 0
-		debuginfo-level-rustc = 0
+		debug-assertions-std = $(toml_usex debug)
+		debuginfo-level = $(usex debug 2 0)
+		debuginfo-level-rustc = $(usex debug 2 0)
+		debuginfo-level-std = $(usex debug 2 0)
+		debuginfo-level-tools = $(usex debug 2 0)
+		debuginfo-level-tests = 0
 		backtrace = $(toml_usex debug)
 		incremental = false
 		default-linker = "$(tc-getCC)"
@@ -373,12 +405,17 @@ src_configure() {
 		remap-debuginfo = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
 		use-lld = true
+		# only deny warnings if doc+wasm are NOT requested, documenting stage0 wasm std fails without it
+		# https://github.com/rust-lang/rust/issues/74976
+		# https://github.com/rust-lang/rust/issues/76526
+		deny-warnings = $(usex wasm $(usex doc false true) true)
 		backtrace-on-ice = true
 		jemalloc = false
 		llvm-libunwind = "$(usex system-llvm system)"
 
 		[dist]
 		src-tarball = false
+		compression-formats = ["gz"]
 	_EOF_
 
 	for v in $(multilib_get_enabled_abi_pairs); do
@@ -493,8 +530,16 @@ src_configure() {
 	done
 	fi # I_KNOW_WHAT_I_AM_DOING_CROSS
 
-	einfo "Rust configured with the following settings:"
+	einfo "Rust configured with the following flags:"
+	echo
+	echo "RUSTFLAGS=\"${RUSTFLAGS:-}\""
+	echo "RUSTFLAGS_BOOTSTRAP=\"${RUSTFLAGS_BOOTSTRAP:-}\""
+	echo "RUSTFLAGS_NOT_BOOTSTRAP=\"${RUSTFLAGS_NOT_BOOTSTRAP:-}\""
+	cat "${S}"/config.env || die
+	echo
+	einfo "config.toml contents:"
 	cat "${S}"/config.toml || die
+	echo
 }
 
 src_compile() {
@@ -566,7 +611,7 @@ src_install() {
 	(
 	IFS=$'\n'
 	env $(cat "${S}"/config.env) DESTDIR="${D}" \
-		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml || die
+		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 	)
 
 	# bug #689562, #689160
