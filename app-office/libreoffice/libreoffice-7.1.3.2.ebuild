@@ -387,6 +387,8 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cflags -fno-strict-aliasing
+	append-cxxflags -fno-strict-aliasing -fpermissive
 	# Set up Google API keys, see https://www.chromium.org/developers/how-tos/api-keys
 	# Note: these are for Gentoo use ONLY. For your own distribution, please get
 	# your own set of keys. Feel free to contact chromium@gentoo.org for more info.
