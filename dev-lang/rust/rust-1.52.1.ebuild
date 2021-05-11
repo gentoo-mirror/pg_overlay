@@ -29,7 +29,8 @@ DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
 
 SRC_URI="
-	https://static.rust-lang.org/dist/${SRC} -> rustc-${PV}-src.tar.xz
+	https://static.rust-lang.org/dist/${SRC}
+	verify-sig? ( https://static.rust-lang.org/dist/${SRC}.asc )
 	!system-bootstrap? ( $(rust_all_arch_uris rust-${RUST_STAGE0_VERSION}) )
 "
 
@@ -160,7 +161,7 @@ toml_usex() {
 	usex "${1}" true false
 }
 
-boostrap_rust_version_check() {
+bootstrap_rust_version_check() {
 	# never call from pkg_pretend. eselect-rust may be not installed yet.
 	[[ ${MERGE_TYPE} == binary ]] && return
 	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 1))"
