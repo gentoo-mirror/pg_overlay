@@ -1,4 +1,4 @@
-# Copyright 2020 Gentoo Authors
+# Copyright 2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,7 +12,11 @@ HOMEPAGE="https://deadbeef.sourceforge.io/"
 EGIT_REPO_URI="https://github.com/DeadBeeF-Player/${PN}.git"
 EGIT_BRANCH="master"
 
-LICENSE="GPL-2 LGPL-2.1"
+LICENSE="
+	GPL-2
+	LGPL-2.1
+	wavpack? ( BSD )
+"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys mp3 musepack nls notify nullout opus oss pulseaudio shellexec +supereq threads vorbis +mac +wavpack +zip"
@@ -42,7 +46,10 @@ DEPEND="
 	mp3? ( media-sound/mpg123 )
 	musepack? ( media-sound/musepack-tools )
 	nls? ( virtual/libintl )
-	notify? ( sys-apps/dbus )
+	notify? (
+		sys-apps/dbus
+		dev-libs/libdispatch
+	)
 	opus? ( media-libs/opusfile	)
 	pulseaudio? ( media-sound/pulseaudio )
 	vorbis? ( media-libs/libvorbis )
@@ -55,6 +62,7 @@ RDEPEND="${DEPEND}"
 BDEPEND="
 	dev-util/intltool
 	sys-devel/gettext
+	virtual/pkgconfig
 "
 
 src_prepare() {
