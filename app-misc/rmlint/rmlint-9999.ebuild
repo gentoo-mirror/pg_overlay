@@ -40,6 +40,10 @@ src_prepare(){
 		rm -fv po/"${1}".po || die "removing of ${1}.po failed"
 	}
 	l10n_for_each_disabled_locale_do rm_locale
+
+	if ! use doc; then
+		rm -rf docs
+	fi
 }
 
 src_configure(){
@@ -61,7 +65,7 @@ src_install(){
 		rm -rf "${D}"/usr/lib
 	fi
 	if ! use doc; then
-		rm -rf "${D}"/usr/share/docs
+		rm -rf "${D}"/usr/share/man
 	fi
 }
 
