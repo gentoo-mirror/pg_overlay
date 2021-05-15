@@ -4,7 +4,6 @@ app-arch/p7zip 16.02-r6 17.03 17.04: Port of 7-Zip archiver for Unix
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
-app-emulation/virtualbox 6.1.18: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
@@ -92,7 +91,7 @@ media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (med
 media-libs/libplacebo 3.120.2: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.14-r2: Simple Direct Media Layer
 media-libs/shaderc 2021.0: Collection of tools, libraries and tests for shader compilation
-media-libs/vulkan-layers 1.2.177 9999: Vulkan Validation Layers
+media-libs/vulkan-layers 1.2.178 9999: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.178: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
@@ -122,7 +121,6 @@ net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatch
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
-net-libs/nodejs 15.11.0 15.14.0_pre: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
 net-libs/telegram-qt 9999: Telegram binding for Qt
