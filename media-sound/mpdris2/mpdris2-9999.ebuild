@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PYTHON_COMPAT=( python3_{7..9})
+PYTHON_COMPAT=( python3_{9,10})
 PLOCALES="fr nl"
 
 inherit python-r1 autotools git-r3 l10n

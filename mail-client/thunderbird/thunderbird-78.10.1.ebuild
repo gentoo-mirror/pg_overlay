@@ -8,7 +8,7 @@ FIREFOX_PATCHSET="firefox-78esr-patches-12.tar.xz"
 LLVM_MAX_SLOT=12
 MOZCONFIG_OPTIONAL_JIT=1
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{9,10} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
 
 WANT_AUTOCONF="2.1"
