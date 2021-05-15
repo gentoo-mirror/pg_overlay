@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="de es fr"
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{9..10} )
 
 inherit git-r3 gnome2-utils l10n python-single-r1 scons-utils
 
@@ -61,7 +61,7 @@ src_install(){
 		rm -rf "${D}"/usr/lib
 	fi
 	if ! use doc; then
-		rm -rf "${D}"/usr/share/man
+		rm -rf "${D}"/usr/share/docs
 	fi
 }
 
