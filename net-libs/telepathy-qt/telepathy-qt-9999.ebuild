@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..9} )
+PYTHON_COMPAT=( python3_{9,10} )
 
 if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI=( "https://gitlab.freedesktop.org/telepathy/${PN}" )

@@ -3,7 +3,7 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7,8} )
+PYTHON_COMPAT=( python3_{9,10} )
 inherit python-any-r1
 
 DESCRIPTION="A repository of data files describing media player capabilities"
