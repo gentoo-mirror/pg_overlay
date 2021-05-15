@@ -22,7 +22,7 @@ app-text/goldendict 9999: Feature-rich dictionary lookup program
 app-text/qstardict 9999: QStarDict is a StarDict clone written with using Qt
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.66.0: C++ interface for glib2
-dev-db/sqlitestudio 3.3.2: Powerful cross-platform SQLite database manager
+dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/ocaml 4.12.0: Programming language supporting functional, imperative & object-oriented styles
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
@@ -145,8 +145,6 @@ sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r100: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.118: Policy framework for controlling privileges for system-wide services
-sys-devel/clang 12.0.0_rc5: C language family frontend for LLVM
-sys-devel/llvm 12.0.0_rc5: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.2-r1: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.12.0_rc1: xfs filesystem utilities

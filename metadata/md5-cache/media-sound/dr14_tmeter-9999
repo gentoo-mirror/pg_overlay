@@ -1,16 +1,16 @@
-BDEPEND=python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_8? ( dev-lang/python:3.8 ) python_targets_python3_9? ( dev-lang/python:3.9 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] >=dev-python/setuptools-42.0.2[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] >=dev-vcs/git-1.8.2.1[curl]
+BDEPEND=python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_10? ( dev-lang/python:3.10 ) >=dev-lang/python-exec-2:=[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)] >=dev-python/setuptools-42.0.2[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)] >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install prepare test unpack
-DEPEND=dev-python/setuptools[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)]
+DEPEND=dev-python/setuptools[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)]
 DESCRIPTION=Compute the DR14 value of the given audio files
 EAPI=7
 HOMEPAGE=http://dr14tmeter.sourceforge.net/
 INHERIT=distutils-r1 git-r3
-IUSE=python_targets_python3_7 python_targets_python3_8 python_targets_python3_9
+IUSE=python_targets_python3_9 python_targets_python3_10
 KEYWORDS=~amd64 ~x86
 LICENSE=GPL-3+
 PROPERTIES=live
-RDEPEND=media-video/ffmpeg[encode] media-libs/flac dev-python/numpy[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)] python_targets_python3_7? ( dev-lang/python:3.7 ) python_targets_python3_8? ( dev-lang/python:3.8 ) python_targets_python3_9? ( dev-lang/python:3.9 ) >=dev-lang/python-exec-2:=[python_targets_python3_7(-)?,python_targets_python3_8(-)?,python_targets_python3_9(-)?,-python_single_target_python3_7(-),-python_single_target_python3_8(-),-python_single_target_python3_9(-)]
-REQUIRED_USE=|| ( python_targets_python3_7 python_targets_python3_8 python_targets_python3_9 )
+RDEPEND=media-video/ffmpeg[encode] media-libs/flac dev-python/numpy[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)] python_targets_python3_9? ( dev-lang/python:3.9 ) python_targets_python3_10? ( dev-lang/python:3.10 ) >=dev-lang/python-exec-2:=[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)]
+REQUIRED_USE=|| ( python_targets_python3_9 python_targets_python3_10 )
 SLOT=0
 _eclasses_=multiprocessing	cac3169468f893670dac3e7cb940e045	toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	d410501a125f99ffb560b0c523cd3d1e	multibuild	6b3d5ee849dafe6cdfd7b859c211fb01	python-utils-r1	d273d56dc725880edbeb1f6389faf5f1	python-r1	26e4ad0a4190b14f70973dc253e86535	distutils-r1	f0ca511df3fddd316b783632b804e8fb	git-r3	b8e8c92aa5fe8df7187e466138eb4e52
-_md5_=afae794e4dbdf45b37d5653fe75107bf
+_md5_=68ac076b0833eb725c0c914b932f954b
