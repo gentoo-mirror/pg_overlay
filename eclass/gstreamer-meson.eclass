@@ -39,18 +39,11 @@ case "${EAPI:-0}" in
 		;;
 esac
 
-# @ECLASS-VARIABLE: GST_PLUGINS_BUILD
-# @DESCRIPTION:
-# Defines the plugins to be built.
-# May be set by an ebuild and contain more than one indentifier, space
-# seperated (only src_configure can handle mutiple plugins at this time).
-: ${GST_PLUGINS_BUILD:=${PN/gst-plugins-/}}
-
 # @ECLASS-VARIABLE: GST_PLUGINS_BUILD_DIR
 # @DESCRIPTION:
 # Actual build directory of the plugin.
 # Most often the same as the configure switch name.
-: ${GST_PLUGINS_BUILD_DIR:=${PN/gst-plugins-/}}
+: ${GST_PLUGINS_BUILD_DIR:=${S}/gst
 
 # @ECLASS-VARIABLE: GST_TARBALL_SUFFIX
 # @DESCRIPTION:
