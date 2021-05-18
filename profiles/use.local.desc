@@ -4,6 +4,7 @@
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-editors/qhexedit2:gui - Install Qt5 hex editor
+app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
 app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
