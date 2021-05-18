@@ -39,19 +39,6 @@ case "${EAPI:-0}" in
 		;;
 esac
 
-# @ECLASS-VARIABLE: GST_PLUGINS_BUILD
-# @DESCRIPTION:
-# Defines the plugins to be built.
-# May be set by an ebuild and contain more than one indentifier, space
-# seperated (only src_configure can handle mutiple plugins at this time).
-: ${GST_PLUGINS_BUILD:=${PN/gst-plugins-/}}
-
-# @ECLASS-VARIABLE: GST_PLUGINS_BUILD_DIR
-# @DESCRIPTION:
-# Actual build directory of the plugin.
-# Most often the same as the configure switch name.
-: ${GST_PLUGINS_BUILD_DIR:=${PN/gst-plugins-/}}
-
 # @ECLASS-VARIABLE: GST_TARBALL_SUFFIX
 # @DESCRIPTION:
 # Most projects hosted on gstreamer.freedesktop.org mirrors provide
@@ -140,28 +127,6 @@ gstreamer_get_plugins() {
 		"${EMESON_SOURCE:-${S}}"/meson_options.txt)
 }
 
-# @FUNCTION: gstreamer_get_plugin_dir
-# @USAGE: gstreamer_get_plugin_dir [<build_dir>]
-# @INTERNAL
-# @DESCRIPTION:
-# Finds plugin build directory and output it.
-# Defaults to ${GST_PLUGINS_BUILD_DIR} if argument is not provided
-gstreamer_get_plugin_dir() {
-	local build_dir=${1:-${GST_PLUGINS_BUILD_DIR}}
-
-	if [[ ! -d ${S}/ext/${build_dir} ]]; then
-		if [[ ! -d ${S}/sys/${build_dir} ]]; then
-			ewarn "No such plugin directory"
-			die
-		fi
-		einfo "Building system plugin in ${build_dir}..." >&2
-		echo sys/${build_dir}
-	else
-		einfo "Building external plugin in ${build_dir}..." >&2
-		echo ext/${build_dir}
-	fi
-}
-
 # @FUNCTION: gstreamer_multilib_src_configure
 # @DESCRIPTION:
 # Handles logic common to configuring gstreamer plugins
@@ -206,50 +171,4 @@ gstreamer_multilib_src_configure() {
 		"${@}"
 	)
 	meson_src_configure
-	echo $GST_PLUGINS_BUILD_DIR
-	echo $BUILD_DIR
-}
-
-read -d '' __MESON_EXTRACT_TARGET_FILENAME <<"EOF"
-import json
-import sys
-
-with open("meson-info/intro-targets.json", "r") as targets_file:
-	data = json.load(targets_file)
-
-for i in range(len(data)):
-	target = data[i]
-	if target['installed']:
-		if sys.argv[1] in target['filename'][0]:
-			print(target['filename'][0] + ':' + target['install_filename'][0])
-EOF
-
-# @FUNCTION: _gstreamer_get_target_filename
-# @INTERNAL
-# @DESCRIPTION:
-# Extracts build and target filenames from meson-data for given submatch
-_gstreamer_get_target_filename() {
-	python -c "${__MESON_EXTRACT_TARGET_FILENAME}" "$@"
-}
-
-# @FUNCTION: gstreamer_multilib_src_compile
-# @DESCRIPTION:
-# Compiles requested gstreamer plugin.
-gstreamer_multilib_src_compile() {
-	meson_src_compile
-}
-
-# @FUNCTION: gstreamer_multilib_src_install
-# @DESCRIPTION:
-# Installs requested gstreamer plugin.
-gstreamer_multilib_src_install() {
-	meson_src_install
-}
-
-# @FUNCTION: gstreamer_multilib_src_install_all
-# @DESCRIPTION:
-# Installs documentation for requested gstreamer plugin, and removes .la
-# files.
-gstreamer_multilib_src_install_all() {
-	meson_src_install_all
 }
