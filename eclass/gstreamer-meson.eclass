@@ -200,6 +200,8 @@ gstreamer_multilib_src_configure() {
 	)
 	meson_src_configure
 	echo $GST_PLUGINS_BUILD_DIR
+	echo $build_dir
+	echo $BUILD_DIR
 }
 
 read -d '' __MESON_EXTRACT_TARGET_FILENAME <<"EOF"
