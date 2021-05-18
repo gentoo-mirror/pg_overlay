@@ -92,7 +92,7 @@ BDEPEND="
 	X? ( x11-base/xorg-proto )
 "
 
-DOCS="AUTHORS NEWS README RELEASE"
+#DOCS="AUTHORS NEWS README RELEASE"
 
 multilib_src_configure() {
 	filter-flags -mno-sse -mno-sse2 -mno-sse4.1 #610340
@@ -147,7 +147,5 @@ multilib_src_compile() {
 }
 
 multilib_src_install() {
-	DOCS="AUTHORS NEWS README RELEASE"
-	einstalldocs
 	meson_src_install
 }
