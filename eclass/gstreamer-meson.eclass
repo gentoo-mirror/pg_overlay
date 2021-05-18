@@ -95,11 +95,6 @@ if [[ ${PN} != ${GST_ORG_MODULE} ]]; then
 	RESTRICT="test"
 	RDEPEND="${RDEPEND}
 		>=media-libs/${GST_ORG_MODULE}-${PV}_pre:${SLOT}[${MULTILIB_USEDEP}]"
-
-	# Export multilib phases used for split builds.
-	multilib_src_compile() { gstreamer_multilib_src_compile; }
-	multilib_src_install() { gstreamer_multilib_src_install; }
-	multilib_src_install_all() { gstreamer_multilib_src_install_all; }
 else
 	IUSE="nls"
 	DEPEND="${DEPEND} nls? ( >=sys-devel/gettext-0.17 )"
