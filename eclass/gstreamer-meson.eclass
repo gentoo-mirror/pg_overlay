@@ -172,7 +172,7 @@ gstreamer_multilib_src_configure() {
 	gstreamer_environment_reset
 
 	for plugin in ${GST_PLUGINS_LIST} ; do
-		if has ${plugin} ${GST_PLUGINS_BUILD} ; then
+		if has ${plugin} ${GST_PLUGINS_ENABLED} ; then
 			emesonargs+=( -D${plugin}=enabled )
 		else
 			emesonargs+=( -D${plugin}=disabled )
