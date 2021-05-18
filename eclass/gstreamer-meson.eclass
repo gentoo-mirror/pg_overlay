@@ -196,7 +196,7 @@ gstreamer_multilib_src_configure() {
 	fi
 
 	if [[ ${PN} == ${GST_ORG_MODULE} ]]; then
-		emesonargs+=( -Dnls=$(usex nls) )
+		emesonargs+=( $(meson_feature nls) )
 	fi
 
 	einfo "Configuring to build ${GST_PLUGINS_BUILD} plugin(s) ..."
