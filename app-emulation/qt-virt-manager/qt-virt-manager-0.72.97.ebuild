@@ -45,5 +45,5 @@ src_configure() {
 		-DBUILD_QT_VERSION=5
 		-DWITH_LIBCACARD="$(usex smartcard ON OFF)"
 	)
-	cmake-src_configure
+	cmake_src_configure
 }
