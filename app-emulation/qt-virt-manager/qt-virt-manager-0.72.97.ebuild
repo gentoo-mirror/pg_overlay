@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit cmake-utils
+inherit cmake
 
 if [[ ${PV} == "9999" ]] ; then
 	EGIT_REPO_URI="https://github.com/F1ash/qt-virt-manager.git"
@@ -13,7 +13,7 @@ if [[ ${PV} == "9999" ]] ; then
 	KEYWORDS=""
 else
 	SRC_URI="https://github.com/F1ash/qt-virt-manager/archive/${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS=""
+	KEYWORDS="~amd64"
 fi
 
 DESCRIPTION="A GUI application for managing virtual machines"
