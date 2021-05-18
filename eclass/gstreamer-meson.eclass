@@ -199,7 +199,7 @@ gstreamer_multilib_src_configure() {
 		emesonargs+=( $(meson_feature nls) )
 	fi
 
-	einfo "Configuring to build ${GST_PLUGINS_BUILD} plugin(s) ..."
+	einfo "Configuring to build ${GST_PLUGINS_ENABLED} plugin(s) ..."
 	emesonargs+=(
 		-Dpackage-name="Gentoo GStreamer ebuild"
 		-Dpackage-origin="https://www.gentoo.org"
