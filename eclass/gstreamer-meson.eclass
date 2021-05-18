@@ -236,6 +236,7 @@ gstreamer_multilib_src_compile() {
 		echo $plugin
 		plugin_path="${plugin%%:*}"
 		echo $plugin_path
+		echo 1111111
 		eninja "${plugin_path/"${BUILD_DIR}/"}"
 	done
 }

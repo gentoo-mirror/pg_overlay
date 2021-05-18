@@ -142,3 +142,7 @@ multilib_src_configure() {
 
 	gstreamer_multilib_src_configure
 }
+
+multilib_src_complie() {
+	gstreamer_multilib_src_compile
+}
