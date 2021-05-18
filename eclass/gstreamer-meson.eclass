@@ -39,11 +39,18 @@ case "${EAPI:-0}" in
 		;;
 esac
 
+# @ECLASS-VARIABLE: GST_PLUGINS_BUILD
+# @DESCRIPTION:
+# Defines the plugins to be built.
+# May be set by an ebuild and contain more than one indentifier, space
+# seperated (only src_configure can handle mutiple plugins at this time).
+: ${GST_PLUGINS_BUILD:=${PN/gst-plugins-/}}
+
 # @ECLASS-VARIABLE: GST_PLUGINS_BUILD_DIR
 # @DESCRIPTION:
 # Actual build directory of the plugin.
 # Most often the same as the configure switch name.
-: ${GST_PLUGINS_BUILD_DIR:=${S}/gst}
+: ${GST_PLUGINS_BUILD_DIR:=${PN/gst-plugins-/}}
 
 # @ECLASS-VARIABLE: GST_TARBALL_SUFFIX
 # @DESCRIPTION:
@@ -142,7 +149,7 @@ gstreamer_get_plugins() {
 gstreamer_get_plugin_dir() {
 	local build_dir=${1:-${GST_PLUGINS_BUILD_DIR}}
 
-	if [[ ! -d ${S}/${build_dir} ]]; then
+	if [[ ! -d ${S}/ext/${build_dir} ]]; then
 		if [[ ! -d ${S}/sys/${build_dir} ]]; then
 			ewarn "No such plugin directory"
 			die
@@ -229,31 +236,14 @@ _gstreamer_get_target_filename() {
 # @DESCRIPTION:
 # Compiles requested gstreamer plugin.
 gstreamer_multilib_src_compile() {
-	local plugin_dir plugin
-
-	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
-		plugin=$(_gstreamer_get_target_filename $(gstreamer_get_plugin_dir ${plugin_dir}))
-		echo $plugin
-		plugin_path="${plugin%%:*}"
-		echo $plugin_path
-		echo 1111111
-		eninja "${plugin_path/"${BUILD_DIR}/"}"
-	done
+	meson_src_compile
 }
 
 # @FUNCTION: gstreamer_multilib_src_install
 # @DESCRIPTION:
 # Installs requested gstreamer plugin.
 gstreamer_multilib_src_install() {
-	local plugin_dir plugin
-
-	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
-		for plugin in $(_gstreamer_get_target_filename $(gstreamer_get_plugin_dir ${plugin_dir})); do
-			local install_filename="${plugin##*:}"
-			insinto "${install_filename%/*}"
-			doins "${plugin%%:*}"
-		done
-	done
+	meson_src_install
 }
 
 # @FUNCTION: gstreamer_multilib_src_install_all
@@ -261,10 +251,5 @@ gstreamer_multilib_src_install() {
 # Installs documentation for requested gstreamer plugin, and removes .la
 # files.
 gstreamer_multilib_src_install_all() {
-	local plugin_dir
-
-	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
-		local dir=$(gstreamer_get_plugin_dir ${plugin_dir})
-		[[ -e ${dir}/README ]] && dodoc "${dir}"/README
-	done
+	meson_src_install_all
 }
