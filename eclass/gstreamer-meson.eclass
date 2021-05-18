@@ -43,7 +43,7 @@ esac
 # @DESCRIPTION:
 # Actual build directory of the plugin.
 # Most often the same as the configure switch name.
-: ${GST_PLUGINS_BUILD_DIR:=${S}/gst}
+: ${GST_PLUGINS_BUILD_DIR:=gst}
 
 # @ECLASS-VARIABLE: GST_TARBALL_SUFFIX
 # @DESCRIPTION:
@@ -142,7 +142,7 @@ gstreamer_get_plugins() {
 gstreamer_get_plugin_dir() {
 	local build_dir=${1:-${GST_PLUGINS_BUILD_DIR}}
 
-	if [[ ! -d ${S}/ext/${build_dir} ]]; then
+	if [[ ! -d ${S}/${build_dir} ]]; then
 		if [[ ! -d ${S}/sys/${build_dir} ]]; then
 			ewarn "No such plugin directory"
 			die
