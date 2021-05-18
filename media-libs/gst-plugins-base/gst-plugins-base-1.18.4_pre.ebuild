@@ -145,3 +145,7 @@ multilib_src_configure() {
 multilib_src_compile() {
 	meson_src_compile
 }
+
+multilib_src_install() {
+	meson_src_install
+}
