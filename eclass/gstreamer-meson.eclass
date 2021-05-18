@@ -200,7 +200,6 @@ gstreamer_multilib_src_configure() {
 	)
 	meson_src_configure
 	echo $GST_PLUGINS_BUILD_DIR
-	echo $build_dir
 	echo $BUILD_DIR
 }
 
@@ -234,7 +233,9 @@ gstreamer_multilib_src_compile() {
 
 	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
 		plugin=$(_gstreamer_get_target_filename $(gstreamer_get_plugin_dir ${plugin_dir}))
+		echo $plugin
 		plugin_path="${plugin%%:*}"
+		echo $plugin_path
 		eninja "${plugin_path/"${BUILD_DIR}/"}"
 	done
 }
