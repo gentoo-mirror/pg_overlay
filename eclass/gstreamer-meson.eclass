@@ -236,13 +236,6 @@ _gstreamer_get_target_filename() {
 # @DESCRIPTION:
 # Compiles requested gstreamer plugin.
 gstreamer_multilib_src_compile() {
-	local plugin_dir plugin
-
-	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
-		plugin=$(_gstreamer_get_target_filename $(gstreamer_get_plugin_dir ${plugin_dir}))
-		plugin_path="${plugin%%:*}"
-		eninja "${plugin_path/"${BUILD_DIR}/"}"
-	done
 	meson_src_compile
 }
 
@@ -250,15 +243,6 @@ gstreamer_multilib_src_compile() {
 # @DESCRIPTION:
 # Installs requested gstreamer plugin.
 gstreamer_multilib_src_install() {
-	local plugin_dir plugin
-
-	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
-		for plugin in $(_gstreamer_get_target_filename $(gstreamer_get_plugin_dir ${plugin_dir})); do
-			local install_filename="${plugin##*:}"
-			insinto "${install_filename%/*}"
-			doins "${plugin%%:*}"
-		done
-	done
 	meson_src_install
 }
 
@@ -267,11 +251,5 @@ gstreamer_multilib_src_install() {
 # Installs documentation for requested gstreamer plugin, and removes .la
 # files.
 gstreamer_multilib_src_install_all() {
-	local plugin_dir
-
-	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
-		local dir=$(gstreamer_get_plugin_dir ${plugin_dir})
-		[[ -e ${dir}/README ]] && dodoc "${dir}"/README
-	done
 	meson_src_install_all
 }
