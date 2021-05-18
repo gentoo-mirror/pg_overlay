@@ -142,3 +142,6 @@ multilib_src_configure() {
 
 	gstreamer_multilib_src_configure
 }
+multilib_src_compile() {
+	meson_src_compile
+}
