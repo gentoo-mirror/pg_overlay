@@ -43,7 +43,7 @@ esac
 # @DESCRIPTION:
 # Actual build directory of the plugin.
 # Most often the same as the configure switch name.
-: ${GST_PLUGINS_BUILD_DIR:=${S}/gst
+: ${GST_PLUGINS_BUILD_DIR:=${S}/gst}
 
 # @ECLASS-VARIABLE: GST_TARBALL_SUFFIX
 # @DESCRIPTION:
@@ -142,7 +142,7 @@ gstreamer_get_plugins() {
 gstreamer_get_plugin_dir() {
 	local build_dir=${1:-${GST_PLUGINS_BUILD_DIR}}
 
-	if [[ ! -d ${S}/ext/${build_dir} ]]; then
+	if [[ ! -d ${S}/${build_dir} ]]; then
 		if [[ ! -d ${S}/sys/${build_dir} ]]; then
 			ewarn "No such plugin directory"
 			die
@@ -199,6 +199,8 @@ gstreamer_multilib_src_configure() {
 		"${@}"
 	)
 	meson_src_configure
+	echo $GST_PLUGINS_BUILD_DIR
+	echo $BUILD_DIR
 }
 
 read -d '' __MESON_EXTRACT_TARGET_FILENAME <<"EOF"
@@ -231,7 +233,9 @@ gstreamer_multilib_src_compile() {
 
 	for plugin_dir in ${GST_PLUGINS_BUILD_DIR} ; do
 		plugin=$(_gstreamer_get_target_filename $(gstreamer_get_plugin_dir ${plugin_dir}))
+		echo $plugin
 		plugin_path="${plugin%%:*}"
+		echo $plugin_path
 		eninja "${plugin_path/"${BUILD_DIR}/"}"
 	done
 }
