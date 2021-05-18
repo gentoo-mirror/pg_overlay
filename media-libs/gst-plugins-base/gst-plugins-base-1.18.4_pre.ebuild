@@ -147,5 +147,7 @@ multilib_src_compile() {
 }
 
 multilib_src_install() {
+	DOCS="AUTHORS NEWS README RELEASE"
+	einstalldocs
 	meson_src_install
 }
