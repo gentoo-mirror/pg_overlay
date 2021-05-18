@@ -43,7 +43,7 @@ esac
 # @DESCRIPTION:
 # Actual build directory of the plugin.
 # Most often the same as the configure switch name.
-: ${GST_PLUGINS_BUILD_DIR:=${S}/gst
+: ${GST_PLUGINS_BUILD_DIR:=${S}/gst}
 
 # @ECLASS-VARIABLE: GST_TARBALL_SUFFIX
 # @DESCRIPTION:
