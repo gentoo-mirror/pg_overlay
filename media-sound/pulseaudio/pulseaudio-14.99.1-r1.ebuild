@@ -167,6 +167,9 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
+PATCHES=( "${FILESDIR}/pulseaudio-557.patch" 
+	"${FILESDIR}/pulseaudio-558.patch")
+
 DOCS=( NEWS README ) # todo is useless to install
 
 pkg_pretend() {
@@ -251,6 +254,7 @@ multilib_src_configure() {
 		$(meson_feature X x11)
 		$(meson_feature systemd)
 		$(meson_use ipv6)
+		-Ddoxygen=false
 	)
 
 	if multilib_is_native_abi; then

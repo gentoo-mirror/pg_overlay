@@ -1,0 +1,29 @@
+diff --git a/meson.build b/meson.build
+index 790778988f4f6694f23981abb501005f908783ae..255c73a58a57498312db32eb6dd0f413efa83db2 100644
+--- a/meson.build
++++ b/meson.build
+@@ -781,7 +781,9 @@ check_dep = dependency('check', version : '>= 0.9.10', required : get_option('te
+ 
+ # Subdirs
+ 
+-subdir('doxygen')
++if get_option('doxygen')
++  subdir('doxygen')
++endif
+ subdir('po')
+ if get_option('man')
+   subdir('man')
+diff --git a/meson_options.txt b/meson_options.txt
+index 6be5864525332c464a4e7106ac2bdfca554f02ba..cdb3c6787097f7489e759abfaa104004af08926a 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -1,6 +1,9 @@
+ option('daemon',
+        type : 'boolean', value : true,
+        description : 'Enable building and installation of pulseaudio daemon and supporting configuration files')
++option('doxygen',
++       type : 'boolean', value : true,
++       description : 'Enable building and installation of documentation generated with doxygen')
+ option('gcov',
+        type : 'boolean', value : false,
+        description : 'Enable optional gcov coverage analysis')
