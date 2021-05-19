@@ -162,13 +162,16 @@ virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/perl-Digest-SHA 6.20.0-r2: Virtual for Digest-SHA
 virtual/perl-File-Temp 0.231.100: Virtual for File-Temp
 virtual/perl-IO 1.450.0: Virtual for IO
+virtual/perl-IPC-Cmd 1.40.0: Virtual for IPC-Cmd
 virtual/perl-JSON-PP 4.60.0: Virtual for JSON-PP
 virtual/perl-MIME-Base64 3.160.0: Virtual for MIME-Base64
+virtual/perl-Memoize 1.30.100_rc-r10: Virtual for Memoize
 virtual/perl-Module-Metadata 1.0.37: Virtual for Module-Metadata
 virtual/perl-Parse-CPAN-Meta 2.150.10-r4: Virtual for Parse-CPAN-Meta
 virtual/perl-Perl-OSType 1.10.0-r4: Virtual for Perl-OSType
 virtual/perl-Pod-Parser 1.630.0-r8: Virtual for Pod-Parser
 virtual/perl-Scalar-List-Utils 1.560.0: Virtual for Scalar::Util and List::Util, also distributed as Scalar::List::Utils
+virtual/perl-Storable 3.210.0: Virtual for Storable
 virtual/perl-Test-Harness 3.420.0-r3: Virtual for Test-Harness
 virtual/perl-Text-ParseWords 3.300.0-r7: Virtual for Text-ParseWords
 virtual/perl-Text-Tabs+Wrap 2013.52.300-r10: Virtual for Text::Tabs and Text::Wrap, also distributed as Text::Tabs+Wrap
