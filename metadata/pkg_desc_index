@@ -172,6 +172,7 @@ virtual/perl-Perl-OSType 1.10.0-r4: Virtual for Perl-OSType
 virtual/perl-Pod-Parser 1.630.0-r8: Virtual for Pod-Parser
 virtual/perl-Scalar-List-Utils 1.560.0: Virtual for Scalar::Util and List::Util, also distributed as Scalar::List::Utils
 virtual/perl-Storable 3.210.0: Virtual for Storable
+virtual/perl-Term-ANSIColor 5.10.0: Virtual for Term-ANSIColor
 virtual/perl-Test-Harness 3.420.0-r3: Virtual for Test-Harness
 virtual/perl-Text-ParseWords 3.300.0-r7: Virtual for Text-ParseWords
 virtual/perl-Text-Tabs+Wrap 2013.52.300-r10: Virtual for Text::Tabs and Text::Wrap, also distributed as Text::Tabs+Wrap
