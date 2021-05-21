@@ -59,6 +59,11 @@ pkg_setup() {
 	[[ ${MERGE_TYPE} != binary ]] && python-any-r1_pkg_setup
 }
 
+src_prepare() {
+	default
+	! use doc && sed -i '/doxygen/d' meson.build
+}
+
 src_configure() {
 	# Prevent sandbox violations, bug #586560
 	# https://bugzilla.gnome.org/show_bug.cgi?id=744134
