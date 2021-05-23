@@ -161,10 +161,7 @@ virtual/perl-MIME-Base64 3.160.0: Virtual for MIME-Base64
 virtual/perl-Pod-Parser 1.630.0-r8: Virtual for Pod-Parser
 virtual/perl-Scalar-List-Utils 1.560.0: Virtual for Scalar::Util and List::Util, also distributed as Scalar::List::Utils
 virtual/perl-Storable 3.210.0: Virtual for Storable
-virtual/perl-Term-ANSIColor 5.10.0: Virtual for Term-ANSIColor
-virtual/perl-Text-Tabs+Wrap 2013.52.300-r10: Virtual for Text::Tabs and Text::Wrap, also distributed as Text::Tabs+Wrap
 virtual/perl-Time-Local 1.300.0: Virtual for Time-Local
-virtual/perl-XSLoader 0.300.0-r3: Virtual for XSLoader
 virtual/perl-libnet 3.130.0: Virtual for libnet
 virtual/perl-version 0.992.900: Virtual for version
 virtual/rust 1.49.0 1.51.0 1.52.0: Virtual for Rust language compiler
