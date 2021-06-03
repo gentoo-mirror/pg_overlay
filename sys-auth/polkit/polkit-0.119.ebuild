@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -21,6 +21,7 @@ BDEPEND="
 	acct-user/polkitd
 	app-text/docbook-xml-dtd:4.1.2
 	app-text/docbook-xsl-stylesheets
+	dev-libs/glib
 	dev-libs/gobject-introspection-common
 	dev-libs/libxslt
 	dev-util/glib-utils
@@ -59,7 +60,7 @@ PATCHES=(
 	# bug 660880
 	"${FILESDIR}"/polkit-0.115-elogind.patch
 	#https://bugs.gentoo.org/698910
-	"${FILESDIR}"/polkit-0.118-duktape.patch
+	"${FILESDIR}"/polkit-0.119-duktape.patch
 )
 
 QA_MULTILIB_PATHS="
