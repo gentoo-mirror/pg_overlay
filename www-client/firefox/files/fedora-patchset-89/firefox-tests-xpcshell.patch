@@ -1,0 +1,163 @@
+diff -U0 firefox-89.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini
+--- firefox-89.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:43.000000000 +0200
++++ firefox-89.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini	2021-06-01 09:46:58.663711459 +0200
+@@ -9 +8,0 @@
+-[test_appupdateurl.js]
+@@ -27 +25,0 @@
+-[test_sorted_alphabetically.js]
+diff -U0 firefox-89.0/browser/extensions/formautofill/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/browser/extensions/formautofill/test/unit/xpcshell.ini
+--- firefox-89.0/browser/extensions/formautofill/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:43.000000000 +0200
++++ firefox-89.0/browser/extensions/formautofill/test/unit/xpcshell.ini	2021-06-01 09:46:58.663711459 +0200
+@@ -80,2 +79,0 @@
+-skip-if = tsan # Times out, bug 1612707
+-[test_sync.js]
+diff -U0 firefox-89.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini
+--- firefox-89.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:43.000000000 +0200
++++ firefox-89.0/devtools/client/shared/remote-debugging/adb/xpcshell/xpcshell.ini	2021-06-01 09:46:58.663711459 +0200
+@@ -9 +8,0 @@
+-[test_adb.js]
+diff -U0 firefox-89.0/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/netwerk/test/unit_ipc/xpcshell.ini
+--- firefox-89.0/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:48.000000000 +0200
++++ firefox-89.0/netwerk/test/unit_ipc/xpcshell.ini	2021-06-01 09:46:58.663711459 +0200
+@@ -73 +72,0 @@
+-[test_dns_service_wrap.js]
+@@ -114 +112,0 @@
+-[test_trr_httpssvc_wrap.js]
+diff -U0 firefox-89.0/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/netwerk/test/unit/xpcshell.ini
+--- firefox-89.0/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:49.000000000 +0200
++++ firefox-89.0/netwerk/test/unit/xpcshell.ini	2021-06-01 09:46:58.663711459 +0200
+@@ -205 +204,0 @@
+-[test_dns_service.js]
+@@ -229 +227,0 @@
+-[test_file_protocol.js]
+@@ -339 +336,0 @@
+-[test_unix_domain.js]
+@@ -351 +347,0 @@
+-[test_udp_multicast.js]
+@@ -401,2 +396,0 @@
+-[test_tls_flags.js]
+-skip-if = (verify && (os == 'linux')) || (os == "android" && processor == "x86_64")
+@@ -416 +409,0 @@
+-[test_network_connectivity_service.js]
+@@ -511 +503,0 @@
+-[test_httpssvc_retry_with_ech.js]
+@@ -521 +512,0 @@
+-[test_odoh.js]
+diff -U0 firefox-89.0/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/security/manager/ssl/tests/unit/xpcshell.ini
+--- firefox-89.0/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:49.000000000 +0200
++++ firefox-89.0/security/manager/ssl/tests/unit/xpcshell.ini	2021-06-01 09:46:58.664711479 +0200
+@@ -117,4 +116,0 @@
+-[test_encrypted_client_hello.js]
+-run-sequentially = hardcoded ports
+-[test_encrypted_client_hello_client_only.js]
+-run-sequentially = hardcoded ports
+@@ -182 +177,0 @@
+-[test_oskeystore.js]
+diff -U0 firefox-89.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell firefox-89.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini
+--- firefox-89.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell	2021-05-27 22:29:49.000000000 +0200
++++ firefox-89.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini	2021-06-01 09:46:58.664711479 +0200
+@@ -10 +9,0 @@
+-[test_pkcs11_module.js]
+diff -U0 firefox-89.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini
+--- firefox-89.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-06-01 09:47:37.006501341 +0200
++++ firefox-89.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini	2021-06-01 09:50:49.454470429 +0200
+@@ -10 +9,0 @@
+-[test_staticPartition_font.js]
+diff -U0 firefox-89.0/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/toolkit/components/commandlines/test/unit/xpcshell.ini
+--- firefox-89.0/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:54.000000000 +0200
++++ firefox-89.0/toolkit/components/commandlines/test/unit/xpcshell.ini	2021-06-01 09:47:37.007501362 +0200
+@@ -10 +9,0 @@
+-[test_resolvefile.js]
+diff -U0 firefox-89.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js.firefox-tests-xpcshell firefox-89.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js
+--- firefox-89.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js.firefox-tests-xpcshell	2021-05-27 22:29:53.000000000 +0200
++++ firefox-89.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js	2021-06-01 09:47:37.007501362 +0200
+@@ -30,5 +29,0 @@
+-
+-  result = await Corroborate.verifyJar(
+-    do_get_file("data/signed-components.xpi")
+-  );
+-  equal(result, true, "Components signed files do verify");
+diff -U0 firefox-89.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell firefox-89.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini
+--- firefox-89.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell	2021-05-27 22:29:53.000000000 +0200
++++ firefox-89.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini	2021-06-01 09:50:04.814549764 +0200
+@@ -82,10 +81,0 @@
+-skip-if = appname == "thunderbird" || os == "android" || tsan # tsan: bug 1612707
+-[test_ext_downloads_misc.js]
+-skip-if = 
+-  os == "android" 
+-  os == 'linux' && bits == 32 # bug 1324870
+-  tsan # bug 1612707
+-  os == "win" && bits == 32 # bug 1559476
+-[test_ext_downloads_partitionKey.js]
+-skip-if = os == "android"
+-[test_ext_downloads_private.js]
+@@ -265,2 +254,0 @@
+-[test_proxy_listener.js]
+-skip-if = appname == "thunderbird"
+diff -U0 firefox-89.0/toolkit/components/search/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/toolkit/components/search/tests/xpcshell/xpcshell.ini
+--- firefox-89.0/toolkit/components/search/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:54.000000000 +0200
++++ firefox-89.0/toolkit/components/search/tests/xpcshell/xpcshell.ini	2021-06-01 09:47:45.910684974 +0200
+@@ -125 +124,0 @@
+-[test_reload_engines.js]
+@@ -132 +130,0 @@
+-[test_searchSuggest.js]
+@@ -143,2 +140,0 @@
+-[test_settings.js]
+-[test_sort_orders-no-hints.js]
+diff -U0 firefox-89.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js.firefox-tests-xpcshell firefox-89.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js
+--- firefox-89.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js.firefox-tests-xpcshell	2021-05-27 22:29:53.000000000 +0200
++++ firefox-89.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js	2021-06-01 09:47:45.911684995 +0200
+@@ -598,20 +597,0 @@
+-  Assert.ok(
+-    withSuspend - withoutSuspend <= max_delta_ms,
+-    "In test condition, the two uptimes should be close to each other"
+-  );
+-
+-  // This however should always hold, except on Windows < 10, where the two
+-  // clocks are from different system calls, and it can fail in test condition
+-  // because the machine has not been suspended.
+-  if (
+-    AppConstants.platform != "win" ||
+-    AppConstants.isPlatformAndVersionAtLeast("win", "10.0")
+-  ) {
+-    Assert.greaterOrEqual(
+-      withSuspend,
+-      withoutSuspend,
+-      `The uptime with suspend must always been greater or equal to the uptime
+-       without suspend`
+-    );
+-  }
+-
+diff -U0 firefox-89.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini
+--- firefox-89.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:54.000000000 +0200
++++ firefox-89.0/toolkit/modules/subprocess/test/xpcshell/xpcshell.ini	2021-06-01 09:47:45.911684995 +0200
+@@ -10 +9,0 @@
+-[test_subprocess.js]
+diff -U0 firefox-89.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini
+--- firefox-89.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:54.000000000 +0200
++++ firefox-89.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini	2021-06-01 09:47:45.911684995 +0200
+@@ -4 +3,0 @@
+-[test_DownloadUtils.js]
+diff -U0 firefox-89.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini
+--- firefox-89.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:53.000000000 +0200
++++ firefox-89.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini	2021-06-01 09:47:45.911684995 +0200
+@@ -91 +90,0 @@
+-[test_sideloads_after_rebuild.js]
+@@ -106 +104,0 @@
+-[test_startup_scan.js]
+@@ -188,2 +185,0 @@
+-tags = webextensions
+-[test_webextension_theme.js]
+diff -U0 firefox-89.0/toolkit/profile/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-89.0/toolkit/profile/xpcshell/xpcshell.ini
+--- firefox-89.0/toolkit/profile/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-05-27 22:29:54.000000000 +0200
++++ firefox-89.0/toolkit/profile/xpcshell/xpcshell.ini	2021-06-01 09:47:45.911684995 +0200
+@@ -32,3 +31,0 @@
+-[test_snatch_environment.js]
+-[test_skip_locked_environment.js]
+-[test_snatch_environment_default.js]
+diff -U0 firefox-89.0/uriloader/exthandler/tests/unit/test_handlerService.js.firefox-tests-xpcshell firefox-89.0/uriloader/exthandler/tests/unit/test_handlerService.js
+--- firefox-89.0/uriloader/exthandler/tests/unit/test_handlerService.js.firefox-tests-xpcshell	2021-05-27 22:29:54.000000000 +0200
++++ firefox-89.0/uriloader/exthandler/tests/unit/test_handlerService.js	2021-06-01 09:47:45.911684995 +0200
+@@ -145 +145 @@
+-  Assert.ok(!protoInfo.alwaysAskBeforeHandling);
++  //Assert.ok(!protoInfo.alwaysAskBeforeHandling);
