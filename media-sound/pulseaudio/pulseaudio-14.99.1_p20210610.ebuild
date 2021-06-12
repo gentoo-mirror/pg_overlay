@@ -8,7 +8,7 @@ inherit meson-multilib bash-completion-r1 gnome2-utils optfeature systemd udev
 # When COMMIT is defined, this ebuild turns from a release into a snapshot ebuild:
 COMMIT="ba7198d5c8e7a32cc96429b2a63cf653c0e8a9ac"
 # Also set SNAPSHOT_PV to match the expected PV, so that the ebuild can detect a naive rename:
-SNAPSHOT_PV="14.99.1_p202106010"
+SNAPSHOT_PV="14.99.1_p20210610"
 # When COMMIT is defined, this enables a PA specific work-around for missing .tarball-version file:
 SNAPSHOT_FIX_GITVERSION=1
 
@@ -192,7 +192,7 @@ src_prepare() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		-Dadrian-aec=false # Not packaged?
+		-Dadrian-aec=true # Not packaged?
 		--localstatedir="${EPREFIX}"/var
 		-Dmodlibexecdir="${EPREFIX}/usr/$(get_libdir)/${PN}/modules" # Was $(get_libdir)/${P}
 #		-Dsystemduserunitdir=$(systemd_get_userunitdir)
