@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
-PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
+PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk ko lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
 
 inherit cmake xdg l10n
 [[ ${PV} = 9999 ]] && inherit subversion
