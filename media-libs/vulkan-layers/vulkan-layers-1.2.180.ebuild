@@ -27,8 +27,9 @@ IUSE="wayland X"
 
 BDEPEND=">=dev-util/cmake-3.10.2"
 DEPEND="${PYTHON_DEPS}
-	>=dev-util/glslang-11.2.0:=[${MULTILIB_USEDEP}]
-	>=dev-util/spirv-tools-2021.0_pre20210327:=[${MULTILIB_USEDEP}]
+	dev-cpp/robin-hood-hashing
+	>=dev-util/glslang-11.4.0:=[${MULTILIB_USEDEP}]
+	>=dev-util/spirv-tools-2021.0_pre20210526:=[${MULTILIB_USEDEP}]
 	>=dev-util/vulkan-headers-${PV}
 	wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 	X? (
@@ -48,7 +49,6 @@ multilib_src_configure() {
 		-DGLSLANG_INSTALL_DIR="${EPREFIX}/usr"
 		-DCMAKE_INSTALL_INCLUDEDIR="${EPREFIX}/usr/include/vulkan/"
 		-DSPIRV_HEADERS_INSTALL_DIR="${EPREFIX}/usr/include/spirv"
-		-DUSE_ROBIN_HOOD_HASHING=OFF
 	)
 	cmake_src_configure
 }
