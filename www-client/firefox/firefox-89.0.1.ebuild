@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-89-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-89-patches-03.tar.xz"
 
 LLVM_MAX_SLOT=12
 
@@ -413,6 +413,13 @@ pkg_setup() {
 				eerror "  - Build ${CATEGORY}/${PN} without USE=lto"
 				die "LLVM version used by Rust (${version_llvm_rust}) does not match with ld.lld version (${version_lld})!"
 			fi
+		fi
+
+		if ! use clang && [[ $(gcc-major-version) -eq 11 ]] \
+			&& ! has_version -b ">sys-devel/gcc-11.1.0:11" ; then
+			# bug 792705
+			eerror "Using GCC 11 to compile firefox is currently known to be broken (see bug #792705)."
+			die "Set USE=clang or select <gcc-11 to build ${CATEGORY}/${P}."
 		fi
 
 		python-any-r1_pkg_setup
