@@ -273,7 +273,6 @@ src_prepare() {
 
 	# Remove other unused vendored libraries 
 	rm -rf vendor/jemalloc-sys/jemalloc/
-	rm -rf vendor/lzma-sys/xz-*/
 	rm -rf vendor/openssl-src/openssl/
 
 	# Remove hidden files from source
