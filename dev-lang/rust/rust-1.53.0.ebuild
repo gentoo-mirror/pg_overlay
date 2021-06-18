@@ -232,13 +232,13 @@ pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
 
-	use system-bootstrap && bootstrap_rust_version_check
-
 	# required to link agains system libs, otherwise
 	# crates use bundled sources and compile own static version
 	export LIBGIT2_SYS_USE_PKG_CONFIG=1
 	export LIBSSH2_SYS_USE_PKG_CONFIG=1
 	export PKG_CONFIG_ALLOW_CROSS=1
+
+	use system-bootstrap && bootstrap_rust_version_check
 
 	if use system-llvm; then
 		llvm_pkg_setup
@@ -275,7 +275,7 @@ src_prepare() {
 	rm -rf vendor/curl-sys/curl/
 	rm -rf vendor/jemalloc-sys/jemalloc/
 	rm -rf vendor/libssh2-sys/libssh2/
-	rm -rf vendor/libz-sys/src/zlib/
+	#rm -rf vendor/libz-sys/src/zlib/
 	rm -rf vendor/libz-sys/src/zlib-ng/
 	rm -rf vendor/lzma-sys/xz-*/
 	rm -rf vendor/openssl-src/openssl/
