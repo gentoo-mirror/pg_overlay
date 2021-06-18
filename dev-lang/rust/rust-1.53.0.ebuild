@@ -155,6 +155,7 @@ PATCHES=(
 	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/1.53.0-rustversion-1.0.5.patch # https://github.com/rust-lang/rust/pull/86425
+	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -272,7 +273,7 @@ src_prepare() {
 	rm -rf vendor/curl-sys/curl/
 	rm -rf vendor/jemalloc-sys/jemalloc/
 	rm -rf vendor/libssh2-sys/libssh2/
-	rm -rf vendor/libz-sys/src/zlib/
+	#rm -rf vendor/libz-sys/src/zlib/
 	#rm -rf vendor/libz-sys/src/zlib-ng/
 	#rm -rf vendor/lzma-sys/xz-*/
 	rm -rf vendor/openssl-src/openssl/
