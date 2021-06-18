@@ -102,6 +102,7 @@ BDEPEND="${PYTHON_DEPS}
 "
 
 DEPEND="
+	>=app-arch/xz-utils-5.2
 	>=dev-libs/libgit2-1.1.0:=
 	net-libs/libssh2:=
 	net-libs/http-parser:=
@@ -153,9 +154,10 @@ VERIFY_SIG_OPENPGP_KEY_PATH="/usr/share/openpgp-keys/rust.asc"
 
 PATCHES=(
 	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/1.53.0-rustversion-1.0.5.patch # https://github.com/rust-lang/rust/pull/86425
+	"${FILESDIR}"/1.53.0-miri-vergen.patch # https://github.com/rust-lang/rust/issues/84182
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
+	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -270,14 +272,14 @@ src_prepare() {
 	fi
 
 	# Remove other unused vendored libraries 
-	#rm -rf vendor/curl-sys/curl/
+	rm -rf vendor/curl-sys/curl/
 	rm -rf vendor/jemalloc-sys/jemalloc/
-	#rm -rf vendor/libssh2-sys/libssh2/
-	#rm -rf vendor/libz-sys/src/zlib/
-	#rm -rf vendor/libz-sys/src/zlib-ng/
-	#rm -rf vendor/lzma-sys/xz-*/
+	rm -rf vendor/libssh2-sys/libssh2/
+	rm -rf vendor/libz-sys/src/zlib/
+	rm -rf vendor/libz-sys/src/zlib-ng/
+	rm -rf vendor/lzma-sys/xz-*/
 	rm -rf vendor/openssl-src/openssl/
-	#rm -rf vendor/libgit2-sys/libgit2/
+	rm -rf vendor/libgit2-sys/libgit2/
 
 	# Remove hidden files from source
 	find src/ -type f -name '.appveyor.yml' -exec rm -v '{}' '+'
@@ -305,10 +307,6 @@ src_prepare() {
 }
 
 src_configure() {
-	export LIBGIT2_SYS_USE_PKG_CONFIG=1
-	export LIBSSH2_SYS_USE_PKG_CONFIG=1
-	export PKG_CONFIG_ALLOW_CROSS=1
-
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -353,18 +351,19 @@ src_configure() {
 	rust_target="$(rust_abi)"
 
 	cat <<- _EOF_ > "${S}"/config.toml
+		changelog-seen = 2
 		[llvm]
 		download-ci-llvm = false
 		optimize = $(toml_usex !debug)
-		thin-lto = true
+		thin-lto =  $(toml_usex system-llvm)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
-		link-shared = true
-		use-libcxx = true
+		link-shared =  $(toml_usex system-llvm)
+		use-libcxx =  $(toml_usex system-llvm)
 		use-linker = "lld"
 
 		[build]
@@ -416,7 +415,7 @@ src_configure() {
 		rpath = false
 		verbose-tests = false
 		optimize-tests = $(toml_usex !debug)
-		codegen-tests = $(toml_usex debug)
+		codegen-tests = $(toml_usex !debug)
 		dist-src = $(toml_usex debug)
 		remap-debuginfo = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
@@ -568,8 +567,9 @@ src_compile() {
 	# we need \n IFS to have config.env with spaces loaded properly. #734018
 	(
 	IFS=$'\n'
-	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
-		"${EPYTHON}" ./x.py dist -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
+	env $(cat "${S}"/config.env) RUST_BACKTRACE=1 LIBGIT2_SYS_USE_PKG_CONFIG=1 LIBSSH2_SYS_USE_PKG_CONFIG=1 PKG_CONFIG_ALLOW_CROSS=1\
+		"${EPYTHON}" ./x.py build --stage 2 \
+			-vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 	)
 }
 
@@ -633,7 +633,7 @@ src_install() {
 	(
 	IFS=$'\n'
 	env $(cat "${S}"/config.env) DESTDIR="${D}" \
-		"${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
+		"${EPYTHON}" ./x.py install	-vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 	)
 
 	# bug #689562, #689160
