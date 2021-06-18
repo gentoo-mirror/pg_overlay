@@ -27,7 +27,7 @@ RDEPEND="${RDEPEND}"
 src_configure() {
 	local eplugins=()
 	for f in $PLUGINS; do
-		use "${f}" && eplugins+="("${f}")"
+		use "${f}" && eplugins+=(${f})
 	done
 	use kde && eplugins+=("kdeintegration")
 
