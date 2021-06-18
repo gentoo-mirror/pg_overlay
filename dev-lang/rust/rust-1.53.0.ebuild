@@ -277,6 +277,7 @@ src_prepare() {
 	rm -rf vendor/lzma-sys/xz-*/
 	rm -rf vendor/openssl-src/openssl/
 	rm -rf vendor/libgit2-sys/libgit2/
+
 	# Remove hidden files from source
 	find src/ -type f -name '.appveyor.yml' -exec rm -v '{}' '+'
 	find src/ -type f -name '.travis.yml' -exec rm -v '{}' '+'
