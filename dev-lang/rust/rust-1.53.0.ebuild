@@ -273,7 +273,7 @@ src_prepare() {
 	rm -rf vendor/jemalloc-sys/jemalloc/
 	rm -rf vendor/libssh2-sys/libssh2/
 	rm -rf vendor/libz-sys/src/zlib/
-	rm -rf vendor/libz-sys/src/zlib-ng/
+	#rm -rf vendor/libz-sys/src/zlib-ng/
 	#rm -rf vendor/lzma-sys/xz-*/
 	rm -rf vendor/openssl-src/openssl/
 	rm -rf vendor/libgit2-sys/libgit2/
