@@ -25,14 +25,14 @@ DEPEND="dev-qt/qtgui:5
 RDEPEND="${RDEPEND}"
 
 src_configure() {
-	local eplugins=()
+	local eplugins="()"
 	for f in $PLUGINS; do
 		use "${f}" && eplugins+=(${f})
 	done
-	use kde && eplugins+=("kdeintegration")
+	use kde && eplugins+=(kdeintegration)
 
 	QMAKE_FLAGS=(
-		"ENABLED_PLUGINS=${eplugins[@]}"
+		ENABLED_PLUGINS=${eplugins[@]}
 		LIB_DIR="${EPREFIX}/usr/$(get_libdir)/${PN}"
 	)
 	if ! use dbus; then
