@@ -257,6 +257,7 @@ src_prepare() {
 
 	if use system-llvm; then
 		rm -rf src/llvm-project/{clang,clang-tools-extra,compiler-rt,lld,lldb,llvm}
+		rm -rf src/llvm-project/libunwind/*
 		# We never enable emscripten.
 		rm -rf src/llvm-emscripten/
 		# We never enable other LLVM tools.
@@ -268,12 +269,14 @@ src_prepare() {
 	fi
 
 	# Remove other unused vendored libraries 
-	rm -rf vendor/jemalloc-sys/jemalloc/            
-	rm -rf vendor/libz-sys/src/zlib/    
+	rm -rf vendor/curl-sys/curl/
+	rm -rf vendor/jemalloc-sys/jemalloc/
+	rm -rf vendor/libssh2-sys/libssh2/
+	rm -rf vendor/libz-sys/src/zlib/
+	rm -rf vendor/libz-sys/src/zlib-ng/
 	rm -rf vendor/lzma-sys/xz-*/
 	rm -rf vendor/openssl-src/openssl/
 	rm -rf vendor/libgit2-sys/libgit2/
-	rm -rf vendor/libssh2-sys/libssh2/
 	# Remove hidden files from source
 	find src/ -type f -name '.appveyor.yml' -exec rm -v '{}' '+'
 	find src/ -type f -name '.travis.yml' -exec rm -v '{}' '+'
@@ -293,8 +296,8 @@ src_prepare() {
 	find -name '*.rs' -type f -perm /111 -exec chmod -v -x '{}' '+'
 
 	# LLVM LibUwind hack
-	sed -i /std=c99/d library/unwind/build.rs
-	sed -i /std=c++11/d library/unwind/build.rs
+	#sed -i /std=c99/d library/unwind/build.rs
+	#sed -i /std=c++11/d library/unwind/build.rs
 
 	default
 }
