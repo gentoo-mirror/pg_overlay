@@ -1,0 +1,26 @@
+From 3582a262d27fd5a2f8705bad6018241eaca8aadd Mon Sep 17 00:00:00 2001
+From: Ivan Mironov <mironov.ivan@gmail.com>
+Date: Sun, 8 Dec 2019 17:23:08 +0500
+Subject: [PATCH] Use lld provided by system for wasm
+
+---
+ compiler/rustc_target/src/spec/wasm_base.rs | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/compiler/rustc_target/src/spec/wasm_base.rs b/compiler/rustc_target/src/spec/wasm_base.rs
+index b208eb92f8ff..94a701a11c8b 100644
+--- a/compiler/rustc_target/src/spec/wasm_base.rs
++++ b/compiler/rustc_target/src/spec/wasm_base.rs
+@@ -98,8 +98,7 @@ pub fn options() -> TargetOptions {
+         // arguments just yet
+         limit_rdylib_exports: false,
+ 
+-        // we use the LLD shipped with the Rust toolchain by default
+-        linker: Some("rust-lld".to_owned()),
++        linker: Some("lld".to_owned()),
+         lld_flavor: LldFlavor::Wasm,
+ 
+         // No need for indirection here, simd types can always be passed by
+-- 
+2.31.1
+
