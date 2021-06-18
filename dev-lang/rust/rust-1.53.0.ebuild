@@ -285,8 +285,8 @@ src_prepare() {
 	# The configure macro will modify some autoconf-related files, which upsets
 	# cargo when it tries to verify checksums in those files.  If we just truncate
 	# that file list, cargo won't have anything to complain about.
-	find vendor -name .cargo-checksum.json \
-		-exec sed -i.uncheck -e 's/"files":{[^}]*}/"files":{ }/' '{}' '+'
+	#find vendor -name .cargo-checksum.json \
+	#	-exec sed -i.uncheck -e 's/"files":{[^}]*}/"files":{ }/' '{}' '+'
 
 	# Sometimes Rust sources start with #![...] attributes, and "smart" editors think
 	# it's a shebang and make them executable. Then brp-mangle-shebangs gets upset...
