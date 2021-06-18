@@ -272,7 +272,7 @@ src_prepare() {
 	# Remove other unused vendored libraries 
 	#rm -rf vendor/curl-sys/curl/
 	rm -rf vendor/jemalloc-sys/jemalloc/
-	rm -rf vendor/libssh2-sys/libssh2/
+	#rm -rf vendor/libssh2-sys/libssh2/
 	#rm -rf vendor/libz-sys/src/zlib/
 	#rm -rf vendor/libz-sys/src/zlib-ng/
 	#rm -rf vendor/lzma-sys/xz-*/
@@ -305,6 +305,10 @@ src_prepare() {
 }
 
 src_configure() {
+	export LIBGIT2_SYS_USE_PKG_CONFIG=1
+	export LIBSSH2_SYS_USE_PKG_CONFIG=1
+	export PKG_CONFIG_ALLOW_CROSS=1
+
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
