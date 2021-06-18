@@ -27,12 +27,12 @@ RDEPEND="${RDEPEND}"
 src_configure() {
 	local eplugins=()
 	for f in $PLUGINS; do
-		use "${f}" && eplugins+=(ENABLED_PLUGINS="${f}")
+		use "${f}" && eplugins+=(${f})
 	done
 	use kde && eplugins+=(kdeintegration)
 
 	QMAKE_FLAGS=(
-		"${eplugins[@]}"
+		ENABLED_PLUGINS='${eplugins[@]}'
 		LIB_DIR="${EPREFIX}/usr/$(get_libdir)/${PN}"
 	)
 	if ! use dbus; then
