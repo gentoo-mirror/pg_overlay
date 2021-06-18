@@ -46,7 +46,7 @@ src_configure() {
 	done
 
 	QMAKE_FLAGS=(
-		ENABLED_PLUGINS="kdeintegration stardict swac web"
+		ENABLED_PLUGINS="kdeintegration stardict web"
 		LIB_DIR="${EPREFIX}/usr/$(get_libdir)/${PN}"
 	)
 	if ! use dbus; then
