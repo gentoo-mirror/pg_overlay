@@ -229,7 +229,7 @@ pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
 
-	use system-bootstrap && boostrap_rust_version_check
+	use system-bootstrap && bootstrap_rust_version_check
 
 	# required to link agains system libs, otherwise
 	# crates use bundled sources and compile own static version
