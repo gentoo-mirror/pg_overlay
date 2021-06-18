@@ -257,6 +257,7 @@ src_prepare() {
 
 	if use system-llvm; then
 		rm -rf src/llvm-project/{clang,clang-tools-extra,compiler-rt,lld,lldb,llvm}
+		rm -rf src/llvm-project/libunwind/*
 		# We never enable emscripten.
 		rm -rf src/llvm-emscripten/
 		# We never enable other LLVM tools.
