@@ -32,7 +32,7 @@ src_configure() {
 	use kde && eplugins+=("kdeintegration")
 
 	QMAKE_FLAGS=(
-		ENABLED_PLUGINS="${eplugins[@]}"
+		"ENABLED_PLUGINS=${eplugins[@]}"
 		LIB_DIR="${EPREFIX}/usr/$(get_libdir)/${PN}"
 	)
 	if ! use dbus; then
