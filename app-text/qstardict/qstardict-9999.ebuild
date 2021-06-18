@@ -25,7 +25,7 @@ DEPEND="dev-qt/qtgui:5
 RDEPEND="${RDEPEND}"
 
 src_configure() {
-	local eplugins="()"
+	local eplugins=()
 	for f in $PLUGINS; do
 		use "${f}" && eplugins+=(${f})
 	done
