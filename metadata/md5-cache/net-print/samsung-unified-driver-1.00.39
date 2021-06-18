@@ -12,5 +12,5 @@ REQUIRED_USE=network? ( cups ) || ( cups scanner )
 RESTRICT=mirror strip
 SLOT=0
 SRC_URI=https://ftp.hp.com/pub/softlib/software13/printers/SS/SL-M4580FX/uld_V1.00.39_01.17.tar.gz -> samsung-unified-driver-1.00.39.tar.gz
-_eclasses_=toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	ebdbaed22e873a5abe6205f41349b479	eapi7-ver	f9ec87e93172b25ce65a85303dc06964	linux-info	30ded7f9adbdd03d3e848cdd74f6c395	udev	452708c3f55cf6e918b045adb949a9e6	vcs-snapshot	b1abf460a493fc59ebb25de0df3f09dd
+_eclasses_=toolchain-funcs	24921b57d6561d87cbef4916a296ada4	multilib	ebdbaed22e873a5abe6205f41349b479	eapi7-ver	f9ec87e93172b25ce65a85303dc06964	linux-info	e31d3106e784a7484040b23155922837	udev	452708c3f55cf6e918b045adb949a9e6	vcs-snapshot	b1abf460a493fc59ebb25de0df3f09dd
 _md5_=258678bf91a8f08bc2ac01d5f07cd31d
