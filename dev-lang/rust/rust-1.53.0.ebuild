@@ -361,6 +361,9 @@ src_configure() {
 		use-linker = "lld"
 
 		[build]
+		build-stage = 2
+		test-stage = 2
+		doc-stage = 2
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
@@ -561,9 +564,8 @@ src_compile() {
 	# we need \n IFS to have config.env with spaces loaded properly. #734018
 	(
 	IFS=$'\n'
-	env $(cat "${S}"/config.env) RUST_BACKTRACE=1 LIBGIT2_SYS_USE_PKG_CONFIG=1 LIBSSH2_SYS_USE_PKG_CONFIG=1 PKG_CONFIG_ALLOW_CROSS=1\
-		"${EPYTHON}" ./x.py build --stage 2 \
-			-vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
+	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
+		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 	)
 }
 
