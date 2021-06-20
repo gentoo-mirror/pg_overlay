@@ -23,7 +23,6 @@ CDEPEND="
 	libressl? ( dev-libs/libressl:0= )
 	>=x11-apps/iceauth-1.0.2
 	>=x11-apps/rgb-1.0.3
-	>=x11-apps/xauth-1.0.3
 	x11-apps/xkbcomp
 	>=x11-libs/libdrm-2.4.89
 	>=x11-libs/libpciaccess-0.12.901
@@ -43,7 +42,6 @@ CDEPEND="
 	>=dev-libs/wayland-1.3.0
 	>=media-libs/libepoxy-1.5.4[egl(+)]
 	>=dev-libs/wayland-protocols-1.18
-	>=x11-apps/xinit-1.3.3-r1
 "
 DEPEND="${CDEPEND}
 	>=x11-base/xorg-proto-2018.4
