@@ -682,7 +682,7 @@ linux-mod_src_compile() {
 			# fails.
 			eval "emake HOSTCC=\"$(tc-getBUILD_CC)\" \
 						CROSS_COMPILE=${CHOST}- \
-						LDFLAGS=\"$(get_abi_LDFLAGS)\" LDFLAGS="-Wl,--icf=none -Wl,--no-gc-sections" \
+						LDFLAGS=\"$(get_abi_LDFLAGS)\ --icf=none--no-gc-sections" \
 						${BUILD_FIXES} \
 						${BUILD_PARAMS} \
 						${BUILD_TARGETS} " \
