@@ -150,6 +150,7 @@ sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r100: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.119: Policy framework for controlling privileges for system-wide services
+sys-auth/polkit-qt 0.114.0: Qt wrapper around polkit-1 client libraries
 sys-devel/clang 12.0.1_rc2: C language family frontend for LLVM
 sys-devel/llvm 12.0.1_rc2: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
@@ -174,6 +175,8 @@ virtual/rust 1.53.0: Virtual for Rust language compiler
 www-client/firefox 89.0.1: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-base/xorg-proto 2021.4.99.2: X.Org combined protocol headers
+x11-base/xorg-server 1.20.11 9999: X.Org X servers
+x11-base/xwayland 21.1.1: Standalone Xwayland package
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.4 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33 3.24.29: Gimp ToolKit +

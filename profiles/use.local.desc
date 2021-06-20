@@ -319,6 +319,15 @@ www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo in
 www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
+x11-base/xorg-server:dmx - Build the Distributed Multiheaded X server
+x11-base/xorg-server:elogind - Use elogind to get control over framebuffer when running as regular user
+x11-base/xorg-server:kdrive - Build the kdrive X servers
+x11-base/xorg-server:unwind - Enable libunwind usage for backtraces
+x11-base/xorg-server:xcsecurity - Build Security extension
+x11-base/xorg-server:xephyr - Build the Xephyr server
+x11-base/xorg-server:xnest - Build the Xnest server
+x11-base/xorg-server:xorg - Build the Xorg X server (HIGHLY RECOMMENDED)
+x11-base/xorg-server:xvfb - Build the Xvfb server
 x11-libs/cairo:gles2 - Build the OpenGL ES 2 backend
 x11-libs/cairo:glib - Compile with GLib Object System support
 x11-libs/cairo:opengl - Build the OpenGL backend
