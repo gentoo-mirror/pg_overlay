@@ -10,5 +10,5 @@ LICENSE=|| ( Artistic GPL-1+ )
 RDEPEND=>=dev-perl/XML-SAX-Base-1.50.0 >=dev-perl/XML-NamespaceSupport-1.40.0 >=dev-libs/libxml2-2.4.1 virtual/perl-File-Temp dev-lang/perl:=
 SLOT=0
 SRC_URI=mirror://cpan/authors/id/G/GR/GRANTM/XML-SAX-1.02.tar.gz
-_eclasses_=multiprocessing	cac3169468f893670dac3e7cb940e045	perl-functions	fea344a91ebf37efadf172c6a3de5a72	perl-module	0ee2b2b92175720c966a5608c62b458d	edos2unix	33e347e171066657f91f8b0c72ec8773	l10n	8cdd85e169b835d518bc2fd59f780d8e	wrapper	4251d4c84c25f59094fd557e0063a974	eutils	2d5b3f4b315094768576b6799e4f926e
+_eclasses_=multiprocessing	65f88f0e80751d45b06bbcfc4b149ccc	perl-functions	fea344a91ebf37efadf172c6a3de5a72	perl-module	0ee2b2b92175720c966a5608c62b458d	edos2unix	33e347e171066657f91f8b0c72ec8773	l10n	6da6797255ab7fb848a02afa0cbc406f	wrapper	4251d4c84c25f59094fd557e0063a974	eutils	f93c6ebbcd4a4e3e3f2328a13511b73a
 _md5_=8de83bc19ee0ca7c533d838ac4641971
