@@ -58,6 +58,19 @@ BDEPEND="
 	dev-util/wayland-scanner
 "
 
+src_configure() {
+	local emesonargs=()
+	emesonargs+=(
+		-Dxcsecurity=false
+		-Dglamor=true
+		-Ddri3=true
+		-Dipv6=false
+		-Dxvfb=false
+		-Dxdmcp=false
+	)
+	meson_src_configure
+}
+
 src_install() {
 	meson_src_install
 	rm "${D}/usr/share/man/man1/Xserver.1"
