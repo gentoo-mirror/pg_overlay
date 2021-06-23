@@ -1,6 +1,6 @@
 BDEPEND=sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.2-r1:1.16 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=install prepare unpack
-DEPEND=>=dev-python/dbus-python-0.80[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)] >=dev-python/pygobject-3.28.3[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)] >=dev-python/python-mpd-0.3.0[python_targets_python3_9(-)?,python_targets_python3_10(-)?,-python_single_target_python3_9(-),-python_single_target_python3_10(-)]
+DEPEND=>=dev-python/dbus-python-0.80[python_targets_python3_9(-)?,python_targets_python3_10(-)?] >=dev-python/pygobject-3.28.3[python_targets_python3_9(-)?,python_targets_python3_10(-)?] >=dev-python/python-mpd-0.3.0[python_targets_python3_9(-)?,python_targets_python3_10(-)?]
 DESCRIPTION=An implementation of the MPRIS 2 interface as a client for MPD
 EAPI=7
 HOMEPAGE=https://github.com/eonpatapon/mpDris2
@@ -10,5 +10,5 @@ KEYWORDS=~amd64 ~ppc ~ppc64 ~x86
 LICENSE=GPL-3
 PROPERTIES=live
 SLOT=0
-_eclasses_=multibuild	6b3d5ee849dafe6cdfd7b859c211fb01	toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	97566c1a256d07b00848aa767e38a352	python-utils-r1	6e84b7d3d8d0bb1ee12774f4a66909e2	python-r1	26e4ad0a4190b14f70973dc253e86535	gnuconfig	262062cef0ba4f22b397193da514a350	libtool	241a8f577b9781a42a7421e53448a44e	autotools	9e63f92c2a5d867fea55ecb160c7d354	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da	l10n	3c7381c56a184f0dd5ba3fb824808f30
+_eclasses_=multibuild	05a584848db4901c97fcd94ae7cc3a97	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	97566c1a256d07b00848aa767e38a352	python-utils-r1	0cb5f4040aac0cd98d17cec3079de0a0	python-r1	e20b80360497e6215aed0dd4ca7d6bad	gnuconfig	262062cef0ba4f22b397193da514a350	libtool	241a8f577b9781a42a7421e53448a44e	autotools	9e63f92c2a5d867fea55ecb160c7d354	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da	l10n	3c7381c56a184f0dd5ba3fb824808f30
 _md5_=1dad566ce5d121f3cda50ddd14b26dd2
