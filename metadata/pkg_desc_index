@@ -172,7 +172,7 @@ virtual/perl-Time-Local 1.300.0: Virtual for Time-Local
 virtual/perl-libnet 3.130.0: Virtual for libnet
 virtual/perl-version 0.992.900: Virtual for version
 virtual/rust 1.53.0: Virtual for Rust language compiler
-www-client/firefox 89.0.1: Firefox Web Browser
+www-client/firefox 89.0.2: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-base/xorg-proto 2021.4.99.2: X.Org combined protocol headers
 x11-base/xorg-server 1.20.11 9999: X.Org X servers
