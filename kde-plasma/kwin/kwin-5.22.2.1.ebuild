@@ -5,28 +5,27 @@ EAPI=7
 
 ECM_HANDBOOK="optional"
 ECM_TEST="optional"
-KFMIN=5.74.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.1
+QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
-inherit ecm kde.org
+inherit ecm kde.org optfeature
 
 DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
-SRC_URI="https://github.com/tildearrow/${PN}-lowlatency/archive/v${PVR/r/}.tar.gz -> ${PF}.tar.gz"
+
 LICENSE="GPL-2+"
 SLOT="5"
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-IUSE="accessibility caps gles2-only multimedia screencast"
-S=${WORKDIR}/${PN}-lowlatency-${PVR/r/}
+IUSE="accessibility caps gles2-only multimedia plasma screencast"
+
+RESTRICT+=" test"
 
 COMMON_DEPEND="
 	>=dev-libs/libinput-1.14
 	>=dev-libs/wayland-1.2
 	>=dev-qt/qtdbus-${QTMIN}:5
 	>=dev-qt/qtdeclarative-${QTMIN}:5
-	>=dev-qt/qtgui-${QTMIN}:5=[gles2-only=]
-	>=dev-qt/qtscript-${QTMIN}:5
-	>=dev-qt/qtsensors-${QTMIN}:5
+	>=dev-qt/qtgui-${QTMIN}:5=[gles2-only=,libinput]
 	>=dev-qt/qtwidgets-${QTMIN}:5
 	>=dev-qt/qtx11extras-${QTMIN}:5
 	>=kde-frameworks/kactivities-${KFMIN}:5
@@ -59,11 +58,10 @@ COMMON_DEPEND="
 	>=kde-plasma/kwayland-server-${PVCUT}:5
 	media-libs/fontconfig
 	media-libs/freetype
+	media-libs/lcms:2
 	media-libs/libepoxy
-	media-libs/mesa[egl,gbm,X(+)]
+	media-libs/mesa[egl,gbm,wayland,X(+)]
 	virtual/libudev:=
-	x11-libs/libICE
-	x11-libs/libSM
 	x11-libs/libX11
 	x11-libs/libXi
 	x11-libs/libdrm
@@ -76,6 +74,7 @@ COMMON_DEPEND="
 	accessibility? ( media-libs/libqaccessibilityclient:5 )
 	caps? ( sys-libs/libcap )
 	gles2-only? ( media-libs/mesa[gles2] )
+	plasma? ( >=kde-frameworks/krunner-${KFMIN}:5 )
 	screencast? ( >=media-video/pipewire-0.3:= )
 "
 # TODO: sys-apps/hwdata? not packaged yet; commit 33a1777a, Gentoo-bug 717216
@@ -91,16 +90,18 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-qt/designer-${QTMIN}:5
 	>=dev-qt/qtconcurrent-${QTMIN}:5
 	x11-base/xorg-proto
+	test? (
+		>=dev-libs/wayland-protocols-1.19
+		>=dev-qt/qtwayland-${QTMIN}:5
+	)
 "
 PDEPEND="
 	>=kde-plasma/kde-cli-tools-${PVCUT}:5
 "
 
-RESTRICT+=" test"
-
 src_prepare() {
 	ecm_src_prepare
-	use multimedia || eapply "${FILESDIR}/${PN}-5.16.80-gstreamer-optional.patch"
+	use multimedia || eapply "${FILESDIR}/${PN}-5.21.80-gstreamer-optional.patch"
 
 	# TODO: try to get a build switch upstreamed
 	if ! use screencast; then
@@ -113,7 +114,21 @@ src_configure() {
 	local mycmakeargs=(
 		$(cmake_use_find_package accessibility QAccessibilityClient)
 		$(cmake_use_find_package caps Libcap)
+		$(cmake_use_find_package plasma KF5Runner)
 	)
 
 	ecm_src_configure
+}
+
+pkg_postinst() {
+	ecm_pkg_postinst
+	optfeature "color management support" x11-misc/colord
+	elog
+	elog "In Plasma 5.20, default behavior of the Task Switcher to move minimised"
+	elog "windows to the end of the list was changed so that it remains in the"
+	elog "original order. To revert to the well established behavior:"
+	elog
+	elog " - Edit ~/.config/kwinrc"
+	elog " - Find [TabBox] section"
+	elog " - Add \"MoveMinimizedWindowsToEndOfTabBoxFocusChain=true\""
 }
