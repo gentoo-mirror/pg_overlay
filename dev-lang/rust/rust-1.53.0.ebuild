@@ -361,9 +361,6 @@ src_configure() {
 		use-linker = "lld"
 
 		[build]
-		build-stage = 2
-		test-stage = 2
-		doc-stage = 2
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
@@ -412,7 +409,7 @@ src_configure() {
 		rpath = false
 		verbose-tests = false
 		optimize-tests = $(toml_usex !debug)
-		codegen-tests = $(toml_usex !debug)
+		codegen-tests = $(toml_usex debug)
 		dist-src = $(toml_usex debug)
 		remap-debuginfo = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
