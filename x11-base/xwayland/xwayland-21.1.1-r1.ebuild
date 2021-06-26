@@ -65,13 +65,13 @@ src_configure() {
 		-Ddpms=false
 		-Ddri3=true
 		-Dglamor=true
-		-Dglx=true
+		-Dglx=false
 		-Dscreensaver=false
 		-Dxace=false
 		-Dxdmcp=false
 		-Dxinerama=false
 		-Dxv=false
-		-Dxvfb=false
+		-Dxvfb=true
 		-Ddtrace=false
 	)
 
