@@ -66,6 +66,8 @@ src_configure() {
 		-Dglx=true
 		-Dxace=false
 		-Dxdmcp=false
+		-Dxinerama=false
+		-Dxv=true
 		-Dxvfb=true
 		-Ddtrace=false
 	)
