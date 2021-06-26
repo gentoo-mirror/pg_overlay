@@ -50,9 +50,9 @@ BDEPEND="
 	dev-util/wayland-scanner
 "
 
-#PATCHES=(
-#	"${FILESDIR}"/xwayland-drop-redundantly-installed-files.patch
-#)
+PATCHES=(
+	"${FILESDIR}"/xwayland-drop-redundantly-installed-files.patch
+)
 
 src_configure() {
 	local emesonargs=(
