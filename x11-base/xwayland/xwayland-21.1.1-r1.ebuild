@@ -61,17 +61,10 @@ src_configure() {
 		$(meson_use ipv6)
 		$(meson_use xcsecurity)
 		$(meson_use selinux xselinux)
-		-Dsha1=libcrypto
-		-Ddpms=false
 		-Ddri3=true
 		-Dglamor=true
-		#-Dglx=false
-		-Dscreensaver=false
-		-Dxace=false
 		-Dxdmcp=false
-		-Dxinerama=false
-		-Dxv=false
-		-Dxvfb=true
+		-Dxvfb=false
 		-Ddtrace=false
 	)
 
