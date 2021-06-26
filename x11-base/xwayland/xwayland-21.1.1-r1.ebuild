@@ -70,7 +70,7 @@ src_configure() {
 		-Dxace=false
 		-Dxdmcp=false
 		-Dxinerama=true
-		-Dxv=fasle
+		-Dxv=false
 		-Dxvfb=false
 		-Ddtrace=false
 	)
