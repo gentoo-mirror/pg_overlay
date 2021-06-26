@@ -361,7 +361,6 @@ src_configure() {
 		use-linker = "lld"
 
 		[build]
-		build-stage = 2
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
