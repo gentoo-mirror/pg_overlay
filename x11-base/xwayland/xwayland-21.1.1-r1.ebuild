@@ -63,6 +63,7 @@ src_configure() {
 		$(meson_use selinux xselinux)
 		-Ddri3=true
 		-Dglamor=true
+		-Dglx=true
 		-Dxdmcp=false
 		-Dxvfb=true
 		-Ddtrace=false
