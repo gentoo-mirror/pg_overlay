@@ -64,7 +64,7 @@ src_configure() {
 		-Ddri3=true
 		-Dglamor=true
 		-Dxdmcp=false
-		-Dxvfb=false
+		-Dxvfb=true
 		-Ddtrace=false
 	)
 
