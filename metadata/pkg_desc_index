@@ -64,12 +64,10 @@ dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
-dev-util/boost-build 1.75.0: A system for large project software construction, simple to use and powerful
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glslang 11.5.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/google-perftools 2.9.1: Fast, multi-threaded malloc() and nifty performance analysis tools
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
-dev-util/meson 0.58.1_pre: Open source build system
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
@@ -146,7 +144,6 @@ media-libs/gst-plugins-base 1.19.1: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.19.1: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.19.1: Open source multimedia framework
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
-media-libs/libplacebo 3.120.2: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.14-r2: Simple Direct Media Layer
 media-libs/shaderc 2021.1: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.2.182 9999: Vulkan Validation Layers
@@ -200,8 +197,7 @@ sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r100: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
-sys-auth/polkit 0.119-r1: Policy framework for controlling privileges for system-wide services
-sys-auth/polkit-qt 0.114.0: Qt wrapper around polkit-1 client libraries
+sys-auth/polkit 0.119-r2: Policy framework for controlling privileges for system-wide services
 sys-devel/clang 12.0.1_rc2: C language family frontend for LLVM
 sys-devel/llvm 12.0.1_rc2: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
