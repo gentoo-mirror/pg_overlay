@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -26,9 +26,6 @@ RESTRICT="!test? ( test )"
 RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/${MY_P}"
-
-PATCHES=(
-)
 
 pkg_setup() {
 	# set up the make options in here so that we can actually make use

@@ -19,12 +19,12 @@ KEYWORDS="~amd64 ~ppc64 ~x86"
 IUSE="doc test"
 
 RDEPEND="
-	>=dev-util/glslang-11.2.0[${MULTILIB_USEDEP}]
-	>=dev-util/spirv-tools-2021.0_pre20210327[${MULTILIB_USEDEP}]
+	>=dev-util/glslang-11.4.0[${MULTILIB_USEDEP}]
+	>=dev-util/spirv-tools-2021.1[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	>=dev-util/spirv-headers-1.5.4.2_pre20210327
+	>=dev-util/spirv-headers-1.5.4.2_pre20210526
 	doc? ( dev-ruby/asciidoctor )
 	test? (
 		dev-cpp/gtest
@@ -77,7 +77,7 @@ multilib_src_configure() {
 
 multilib_src_compile() {
 	if multilib_is_native_abi && use doc; then
-		cmake_src_make glslc_doc_README
+		cmake_src_compile glslc_doc_README
 	fi
 	cmake_src_compile
 }
