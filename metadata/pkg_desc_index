@@ -71,6 +71,7 @@ dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
+dev-util/spirv-headers 1.5.4.2_pre20210609: Machine-readable files for the SPIR-V Registry
 dev-util/spirv-tools 2021.2: Provides an API and commands for processing SPIR-V modules
 dev-util/vulkan-headers 1.2.182: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.182: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
