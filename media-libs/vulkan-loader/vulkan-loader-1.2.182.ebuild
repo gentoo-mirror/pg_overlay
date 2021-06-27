@@ -5,8 +5,7 @@ EAPI=7
 
 MY_PN=Vulkan-Loader
 CMAKE_ECLASS="cmake"
-PYTHON_COMPAT=( python3_{9,10} )
-inherit flag-o-matic cmake-multilib python-any-r1 toolchain-funcs
+inherit flag-o-matic cmake-multilib toolchain-funcs
 
 if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/${MY_PN}.git"
@@ -26,8 +25,8 @@ SLOT="0"
 IUSE="layers wayland X"
 
 BDEPEND=">=dev-util/cmake-3.10.2"
-DEPEND="${PYTHON_DEPS}
-	>=dev-util/vulkan-headers-${PV}
+DEPEND="
+	~dev-util/vulkan-headers-${PV}
 	wayland? ( dev-libs/wayland:=[${MULTILIB_USEDEP}] )
 	X? (
 		x11-libs/libX11:=[${MULTILIB_USEDEP}]
