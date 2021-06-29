@@ -110,12 +110,6 @@ limitsdfile=40-${PN}.conf
 src_prepare() {
 	default
 
-	if ! use systemd; then
-		# This can be applied non-conditionally but would make for a
-		# significantly worse user experience on systemd then.
-		eapply "${FILESDIR}"/${PN}-0.3.25-non-systemd-integration.patch
-	fi
-
 	einfo "Generating ${limitsdfile}"
 	cat > ${limitsdfile} <<- EOF || die
 		# Start of ${limitsdfile} from ${P}
