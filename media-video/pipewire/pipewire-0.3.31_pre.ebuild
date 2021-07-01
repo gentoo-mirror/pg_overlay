@@ -5,13 +5,13 @@ EAPI="7"
 
 PYTHON_COMPAT=( python3_{7..10} )
 
-inherit meson-multilib optfeature python-any-r1 udev
+inherit meson-multilib optfeature python-any-r1 udev poly-c_ebuilds
 
-if [[ ${PV} == 9999 ]]; then
+if [[ ${MY_PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://gitlab.freedesktop.org/${PN}/${PN}/-/archive/${PV}/${P}.tar.gz"
+	SRC_URI="https://gitlab.freedesktop.org/${PN}/${PN}/-/archive/${MY_PV}/${MY_P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
 fi
 
@@ -101,6 +101,7 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
+	"${FILESDIR}"/${PN}-0.3.31-revert-openaptx-restriction.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
@@ -110,13 +111,19 @@ limitsdfile=40-${PN}.conf
 src_prepare() {
 	default
 
+	if ! use systemd; then
+		# This can be applied non-conditionally but would make for a
+		# significantly worse user experience on systemd then.
+		eapply "${FILESDIR}"/${PN}-0.3.31-non-systemd-integration.patch
+	fi
+
 	einfo "Generating ${limitsdfile}"
 	cat > ${limitsdfile} <<- EOF || die
-		# Start of ${limitsdfile} from ${P}
+		# Start of ${limitsdfile} from ${MY_P}
 
 		@audio	-	memlock 256
 
-		# End of ${limitsdfile} from ${P}
+		# End of ${limitsdfile} from ${MY_P}
 	EOF
 }
 
