@@ -24,6 +24,7 @@ app-text/asciidoc 9.1.0_pre: A plain text human readable/writable document forma
 app-text/goldendict 9999: Feature-rich dictionary lookup program
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.66.0: C++ interface for glib2
+dev-db/sqlite 3.36.0: SQL database engine
 dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/ocaml 4.12.0: Programming language supporting functional, imperative & object-oriented styles
