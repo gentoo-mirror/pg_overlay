@@ -74,8 +74,8 @@ dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
 dev-util/spirv-headers 1.5.4.2_pre20210609: Machine-readable files for the SPIR-V Registry
 dev-util/spirv-tools 2021.2: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.182: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.2.182: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.2.183: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.2.183: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
@@ -148,8 +148,8 @@ media-libs/gstreamer 1.19.1: Open source multimedia framework
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libsdl2 2.0.14-r2: Simple Direct Media Layer
 media-libs/shaderc 2021.1: Collection of tools, libraries and tests for shader compilation
-media-libs/vulkan-layers 1.2.182 9999: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.182: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.2.182: Vulkan Validation Layers
+media-libs/vulkan-loader 1.2.183: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
