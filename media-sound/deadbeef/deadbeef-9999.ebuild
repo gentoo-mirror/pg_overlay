@@ -93,7 +93,7 @@ src_prepare() {
 		EOF
 	}
 
-	l10n_for_each_disabled_locale_do drop_from_linguas || die
+	plocale_for_each_disabled_locale drop_from_linguas || die
 
 	eautopoint --force
 	eautoreconf
