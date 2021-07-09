@@ -35,13 +35,9 @@ CDEPEND="
 	>=x11-libs/xtrans-1.3.5
 "
 
-DEPEND="
-	${CDEPEND}
-	!<=x11-base/xorg-server-1.20.11
-"
-
 RDEPEND="
 	${DEPEND}
+	!<=x11-base/xorg-server-1.20.11
 	selinux? ( sec-policy/selinux-xserver )
 "
 BDEPEND="
