@@ -1,0 +1,77 @@
+diff -up firefox-88.0/dom/media/platforms/PDMFactory.cpp.ffvpx-with-vapi firefox-88.0/dom/media/platforms/PDMFactory.cpp
+--- firefox-88.0/dom/media/platforms/PDMFactory.cpp.ffvpx-with-vapi	2021-04-15 21:44:28.000000000 +0200
++++ firefox-88.0/dom/media/platforms/PDMFactory.cpp	2021-04-19 13:27:07.808429721 +0200
+@@ -481,12 +481,6 @@ void PDMFactory::CreateRddPDMs() {
+     CreateAndStartupPDM<AppleDecoderModule>();
+   }
+ #endif
+-#ifdef MOZ_FFVPX
+-  if (StaticPrefs::media_ffvpx_enabled() &&
+-      StaticPrefs::media_rdd_ffvpx_enabled()) {
+-    CreateAndStartupPDM<FFVPXRuntimeLinker>();
+-  }
+-#endif
+ #ifdef MOZ_FFMPEG
+   if (StaticPrefs::media_ffmpeg_enabled() &&
+       StaticPrefs::media_rdd_ffmpeg_enabled() &&
+@@ -495,6 +489,12 @@ void PDMFactory::CreateRddPDMs() {
+         FFmpegRuntimeLinker::LinkStatusCode());
+   }
+ #endif
++#ifdef MOZ_FFVPX
++  if (StaticPrefs::media_ffvpx_enabled() &&
++      StaticPrefs::media_rdd_ffvpx_enabled()) {
++    CreateAndStartupPDM<FFVPXRuntimeLinker>();
++  }
++#endif
+   CreateAndStartupPDM<AgnosticDecoderModule>();
+ }
+ 
+@@ -525,11 +525,6 @@ void PDMFactory::CreateContentPDMs() {
+     CreateAndStartupPDM<OmxDecoderModule>();
+   }
+ #endif
+-#ifdef MOZ_FFVPX
+-  if (StaticPrefs::media_ffvpx_enabled()) {
+-    CreateAndStartupPDM<FFVPXRuntimeLinker>();
+-  }
+-#endif
+ #ifdef MOZ_FFMPEG
+   if (StaticPrefs::media_ffmpeg_enabled() &&
+       !CreateAndStartupPDM<FFmpegRuntimeLinker>()) {
+@@ -537,6 +532,11 @@ void PDMFactory::CreateContentPDMs() {
+         FFmpegRuntimeLinker::LinkStatusCode());
+   }
+ #endif
++#ifdef MOZ_FFVPX
++  if (StaticPrefs::media_ffvpx_enabled()) {
++    CreateAndStartupPDM<FFVPXRuntimeLinker>();
++  }
++#endif
+ #ifdef MOZ_WIDGET_ANDROID
+   if (StaticPrefs::media_android_media_codec_enabled()) {
+     StartupPDM(AndroidDecoderModule::Create(),
+@@ -571,11 +571,6 @@ void PDMFactory::CreateDefaultPDMs() {
+     CreateAndStartupPDM<OmxDecoderModule>();
+   }
+ #endif
+-#ifdef MOZ_FFVPX
+-  if (StaticPrefs::media_ffvpx_enabled()) {
+-    CreateAndStartupPDM<FFVPXRuntimeLinker>();
+-  }
+-#endif
+ #ifdef MOZ_FFMPEG
+   if (StaticPrefs::media_ffmpeg_enabled() &&
+       !CreateAndStartupPDM<FFmpegRuntimeLinker>()) {
+@@ -583,6 +578,11 @@ void PDMFactory::CreateDefaultPDMs() {
+         FFmpegRuntimeLinker::LinkStatusCode());
+   }
+ #endif
++#ifdef MOZ_FFVPX
++  if (StaticPrefs::media_ffvpx_enabled()) {
++    CreateAndStartupPDM<FFVPXRuntimeLinker>();
++  }
++#endif
+ #ifdef MOZ_WIDGET_ANDROID
+   if (StaticPrefs::media_android_media_codec_enabled()) {
+     StartupPDM(AndroidDecoderModule::Create(),
