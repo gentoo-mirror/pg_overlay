@@ -1,0 +1,24 @@
+diff --git a/security/sandbox/linux/SandboxFilter.cpp b/security/sandbox/linux/SandboxFilter.cpp
+--- a/security/sandbox/linux/SandboxFilter.cpp
++++ b/security/sandbox/linux/SandboxFilter.cpp
+@@ -858,6 +858,9 @@
+       case __NR_clone:
+         return ClonePolicy(InvalidSyscall());
+ 
++      case __NR_clone3:
++        return Error(ENOSYS);
++
+         // More thread creation.
+ #ifdef __NR_set_robust_list
+       case __NR_set_robust_list:
+@@ -1504,6 +1507,9 @@
+       case __NR_clone:
+         return ClonePolicy(Error(EPERM));
+ 
++      case __NR_clone3:
++        return Error(ENOSYS);
++
+ #  ifdef __NR_fadvise64
+       case __NR_fadvise64:
+         return Allow();
+

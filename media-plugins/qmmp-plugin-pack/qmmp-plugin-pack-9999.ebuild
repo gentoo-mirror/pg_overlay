@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -16,24 +16,26 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND="
-	=media-sound/qmmp-9999
-	>=media-libs/taglib-1.10
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtwidgets:5
+	media-libs/taglib
+	=media-sound/qmmp-$(ver_cut 1-2)*
+	
 "
 DEPEND="${RDEPEND}
 	dev-lang/yasm
-	dev-qt/linguist-tools:5"
+	dev-qt/linguist-tools:5
+"
 
 src_prepare() {
 	mycmakeargs=(
-		-DUSE_SRC=0
 		-DUSE_FFVIDEO=0
+		-DUSE_GOOM=0
+		-DUSE_SRC=0
 		-DUSE_XMP=0
 		-DUSE_YTB=0
-		-DUSE_GOOM=0
-		)
+	)
 
 	cmake_src_prepare
 	}
