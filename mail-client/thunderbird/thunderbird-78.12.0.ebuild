@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-78esr-patches-14.tar.xz"
+FIREFOX_PATCHSET="firefox-78esr-patches-15.tar.xz"
 
 LLVM_MAX_SLOT=12
 MOZCONFIG_OPTIONAL_JIT=1
@@ -111,7 +111,6 @@ CDEPEND="
 	dev-libs/atk
 	dev-libs/expat
 	>=x11-libs/cairo-1.10[X]
-	>=x11-libs/gtk+-2.18:2
 	>=x11-libs/gtk+-3.4.0:3[X]
 	x11-libs/gdk-pixbuf
 	>=x11-libs/pango-1.22.0
@@ -189,19 +188,19 @@ S="${WORKDIR}/${PN}-${PV%_*}"
 
 llvm_check_deps() {
 	if ! has_version -b "sys-devel/clang:${LLVM_SLOT}" ; then
-		ewarn "sys-devel/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
+		einfo "sys-devel/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 		return 1
 	fi
 
 	if use clang ; then
 		if ! has_version -b "=sys-devel/lld-${LLVM_SLOT}*" ; then
-			ewarn "=sys-devel/lld-${LLVM_SLOT}* is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
+			einfo "=sys-devel/lld-${LLVM_SLOT}* is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 			return 1
 		fi
 
 		if use pgo ; then
 			if ! has_version -b "=sys-libs/compiler-rt-sanitizers-${LLVM_SLOT}*" ; then
-				ewarn "=sys-libs/compiler-rt-sanitizers-${LLVM_SLOT}* is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
+				einfo "=sys-libs/compiler-rt-sanitizers-${LLVM_SLOT}* is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 				return 1
 			fi
 		fi
@@ -440,18 +439,18 @@ pkg_setup() {
 		# Note: These are for Gentoo Linux use ONLY. For your own distribution, please
 		# get your own set of keys.
 		if [[ -z "${MOZ_API_KEY_GOOGLE+set}" ]] ; then
-			MOZ_API_KEY_GOOGLE="AIzaSyDEAOvatFogGaPi0eTgsV_ZlEzx0ObmepsMzfAc"
+			MOZ_API_KEY_GOOGLE=""
 		fi
 
 		if [[ -z "${MOZ_API_KEY_LOCATION+set}" ]] ; then
-			MOZ_API_KEY_LOCATION="AIzaSyB2h2OuRgGaPicUgy5N-5hsZqiPW6sH3n_rptiQ"
+			MOZ_API_KEY_LOCATION=""
 		fi
 
 		# Mozilla API keys (see https://location.services.mozilla.com/api)
 		# Note: These are for Gentoo Linux use ONLY. For your own distribution, please
 		# get your own set of keys.
 		if [[ -z "${MOZ_API_KEY_MOZILLA+set}" ]] ; then
-			MOZ_API_KEY_MOZILLA="edb3d487-3a84-46m0ap1e3-9dfd-92b5efaaa005"
+			MOZ_API_KEY_MOZILLA=""
 		fi
 
 		# Ensure we use C locale when building, bug #746215
@@ -517,6 +516,9 @@ src_prepare() {
 	mkdir -p "${BUILD_DIR}" || die
 
 	# Write API keys to disk
+	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
+	echo -n "${MOZ_API_KEY_LOCATION//gGaPi/}" > "${S}"/api-location.key || die
+	echo -n "${MOZ_API_KEY_MOZILLA//m0ap1/}" > "${S}"/api-mozilla.key || die
 
 	#######
 	### OpenSUSE-KDE patchset
