@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS=""
 IUSE="async-connect chat-screen doc +help-screen key-screen +library-screen lirc lyrics-screen +mouse nls outputs-screen pcre search-screen +song-screen"
 
 BDEPEND="
@@ -21,7 +21,7 @@ BDEPEND="
 "
 RDEPEND="
 	>=media-libs/libmpdclient-2.9
-	sys-libs/ncurses:0=[unicode]
+	sys-libs/ncurses:=[unicode(+)]
 	lirc? ( app-misc/lirc )
 	pcre? ( dev-libs/libpcre )
 "

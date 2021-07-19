@@ -10,21 +10,22 @@ EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="clock outputs taglib visualizer"
+IUSE="clock lto outputs taglib visualizer"
 
 RDEPEND="
-	!dev-libs/boost:0/1.57.0
 	>=media-libs/libmpdclient-2.1
-	dev-libs/boost:=[icu,nls,threads]
+	dev-libs/boost:=[icu,nls,threads(+)]
 	dev-libs/icu:=
 	net-misc/curl
-	sys-libs/ncurses:=[unicode]
-	sys-libs/readline:*
+	sys-libs/ncurses:=[unicode(+)]
+	sys-libs/readline:=
 	taglib? ( media-libs/taglib )
 	visualizer? ( sci-libs/fftw:3.0= )
 "
-DEPEND="${RDEPEND}"
-BDEPEND="virtual/pkgconfig"
+DEPEND="
+	${RDEPEND}
+	virtual/pkgconfig
+"
 
 src_prepare() {
 	default
@@ -40,6 +41,7 @@ src_configure() {
 		$(use_enable clock) \
 		$(use_enable outputs) \
 		$(use_enable visualizer) \
+		$(use_with lto) \
 		$(use_with taglib) \
 		$(use_with visualizer fftw)
 }
@@ -53,7 +55,7 @@ src_install() {
 pkg_postinst() {
 	echo
 	elog "Example configuration files have been installed at"
-	elog "${EROOT}/usr/share/doc/${PF}"
+	elog "${ROOT}/usr/share/doc/${PF}"
 	elog "${P} uses ~/.ncmpcpp/config and ~/.ncmpcpp/bindings"
 	elog "as user configuration files."
 	echo
