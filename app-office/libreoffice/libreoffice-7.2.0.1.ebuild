@@ -151,6 +151,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/qrcodegen
 	>=dev-libs/redland-1.0.16
 	>=dev-libs/xmlsec-1.2.28[nss]
+	media-libs/zxing-cpp
 	media-gfx/fontforge
 	media-gfx/graphite2
 	media-libs/fontconfig
