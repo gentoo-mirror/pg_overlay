@@ -47,7 +47,7 @@ ADDONS_SRC=(
 	# not packaged in Gentoo, https://www.netlib.org/fp/dtoa.c
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
-	"${ADDONS_URI}/skia-m88-59bafeeaa7de9eb753e3778c414e01dcf013dcd8.tar.xz"
+	"${ADDONS_URI}/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz"
 	"base? (
 		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
 		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
@@ -472,7 +472,6 @@ src_configure() {
 		--enable-cairo-canvas
 		--enable-largefile
 		--enable-mergelibs
-		--enable-neon
 		--enable-python=system
 		--enable-randr
 		--enable-release-build
@@ -485,7 +484,6 @@ src_configure() {
 		--disable-online-update
 		--disable-openssl
 		--disable-pdfium
-		--disable-vlc
 		--with-extra-buildid="${gentoo_buildid}"
 		--enable-extension-integration
 		--with-external-dict-dir="${EPREFIX}/usr/share/myspell"
@@ -504,7 +502,6 @@ src_configure() {
 		--without-helppack-integration
 		--with-system-gpgmepp
 		--without-system-jfreereport
-		--without-system_apache_commons
 		--without-system-sane
 		$(use_enable base report-builder)
 		$(use_enable bluetooth sdremote-bluetooth)
