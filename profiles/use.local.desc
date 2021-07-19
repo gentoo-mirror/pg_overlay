@@ -82,56 +82,6 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
 gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
 gui-wm/kwinft:tools - Build internal tools for performance analysis at runtime.
-kde-plasma/discover:firmware - Enable support for firmware upgrades using sys-apps/fwupd
-kde-plasma/discover:flatpak - Enable support for flatpak repositories using sys-apps/flatpak
-kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
-kde-plasma/kdeplasma-addons:comic - Enable comic applet (requires deprecated kde-frameworks/kross)
-kde-plasma/kdeplasma-addons:share - Enable applet for quickly sharing data to a variety of sources
-kde-plasma/kdeplasma-addons:webengine - Enable dictionary and web browser applets using dev-qt/qtwebengine
-kde-plasma/kinfocenter:pci - Show advanced PCI information
-kde-plasma/ksysguard:networkmanager - Enable improved backend for Network statistics using kde-frameworks/networkmanager-qt
-kde-plasma/ksystemstats:networkmanager - Enable improved backend for Network statistics using kde-frameworks/networkmanager-qt
-kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
-kde-plasma/kwin:screencast - Enable screencast portal using media-video/pipewire
-kde-plasma/libksysguard:designer - Build plugins for dev-qt/designer
-kde-plasma/libksysguard:webengine - Enable display of detailed memory information using dev-qt/qtwebengine.
-kde-plasma/plasma-desktop:emoji - Build emojipicker applet using app-i18n/ibus and media-fonts/noto-emoji
-kde-plasma/plasma-desktop:ibus - Use ibus input method via app-i18n/ibus
-kde-plasma/plasma-desktop:kaccounts - Build the OpenDesktop integration plugin
-kde-plasma/plasma-desktop:policykit - Build the Users KCM using sys-apps/accountsservice and sys-auth/polkit
-kde-plasma/plasma-desktop:scim - Enable applets that use app-i18n/scim
-kde-plasma/plasma-firewall:firewalld - Build net-firewall/firewalld backend
-kde-plasma/plasma-firewall:ufw - Build net-firewall/ufw backend
-kde-plasma/plasma-meta:browser-integration - Enable integration with Chrome/Firefox with browser extensions
-kde-plasma/plasma-meta:colord - Enable kde-plasma/kwin color management via x11-misc/colord
-kde-plasma/plasma-meta:crash-handler - Pull in kde-plasma/drkonqi for assisted upstream crash reports
-kde-plasma/plasma-meta:crypt - Pull in kde-plasma/plasma-vault for encrypted vaults integration
-kde-plasma/plasma-meta:desktop-portal - Enable sys-apps/xdg-desktop-portal backend implementation for Plasma
-kde-plasma/plasma-meta:discover - Pull in resources management GUI; a centralised GHNS alternative and optional sys-apps/fwupd frontend
-kde-plasma/plasma-meta:display-manager - Pull in a graphical display manager
-kde-plasma/plasma-meta:firewall - Pull in kde-plasma/plasma-firewall for system firewall administration
-kde-plasma/plasma-meta:grub - Pull in Breeze theme for sys-boot/grub
-kde-plasma/plasma-meta:gtk - Enable Breeze widget style and system settings module for GTK+
-kde-plasma/plasma-meta:kwallet - Enable support for KWallet auto-unlocking via kde-plasma/kwallet-pam
-kde-plasma/plasma-meta:legacy-systray - Add support for legacy applications using kde-plasma/xembed-sni-proxy
-kde-plasma/plasma-meta:plymouth - Pull in Breeze theme for sys-boot/plymouth
-kde-plasma/plasma-meta:pulseaudio - Install Plasma applet for PulseAudio volume management
-kde-plasma/plasma-meta:qrcode - Enable support for easy WiFi network sharing using QR codes with kde-plasma/plasma-nm
-kde-plasma/plasma-meta:sddm - Pull in the x11-misc/sddm display manager and system settings module
-kde-plasma/plasma-meta:sdk - Pull in kde-plasma/plasma-sdk for Plasma development
-kde-plasma/plasma-meta:smart - Pull in kde-plasma/plasma-disks for disk health monitoring
-kde-plasma/plasma-meta:thunderbolt - Pull in kde-plasma/plasma-thunderbolt control center module
-kde-plasma/plasma-meta:wallpapers - Install wallpapers for the Plasma Workspace
-kde-plasma/plasma-nm:modemmanager - Enable support for mobile broadband devices
-kde-plasma/plasma-nm:openconnect - Build support for the OpenConnect VPN client
-kde-plasma/plasma-nm:teamd - Enable Teamd control support
-kde-plasma/plasma-workspace:appstream - Enable AppStream software metadata support
-kde-plasma/plasma-workspace:calculator - Enable calculator runner using sci-libs/libqalculate
-kde-plasma/plasma-workspace:geolocation - Enables dataengine providing location information
-kde-plasma/plasma-workspace:screencast - Enable screencast portal using media-video/pipewire
-kde-plasma/plasma-workspace:telemetry - Enable User Feedback control module for kde-plasma/systemsettings
-kde-plasma/powerdevil:brightness-control - Enable screen brightness control using app-misc/ddcutil
-kde-plasma/powerdevil:wireless - Enable wireless energy saving actions via kde-frameworks/bluez-qt and kde-frameworks/networkmanager-qt
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) cabability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
@@ -267,16 +217,6 @@ media-video/mpv:tools - Install extra tools: mpv_identify.sh, mpv_idet.sh, and u
 media-video/mpv:uchardet - Enable subtitles charset discovery via app-i18n/uchardet
 media-video/mpv:vulkan - Enable support for various Vulkan-based video backends
 media-video/mpv:zimg - Enable libzimg support (for vf_fingerprint)
-media-video/pipewire:aac - AAC over Bluetooth (iPhone compatible headphones)
-media-video/pipewire:aptx - aptX (HD) over Bluetooth (many Android compatible headphones)
-media-video/pipewire:extra - Build pw-cat/pw-play/pw-record
-media-video/pipewire:ffmpeg - Builds an unsupported SPA (file a Gentoo bug if you need this)
-media-video/pipewire:jack - Enable SPA JACK plugin and emulation to be able to run JACK applications on top of PipeWire
-media-video/pipewire:jack-client - Install a plugin for running PipeWire as a JACK client
-media-video/pipewire:jack-sdk - Use PipeWire as JACK replacement
-media-video/pipewire:ldac - LDAC over Bluetooth (primarily Sony headphones)
-media-video/pipewire:pipewire-alsa - Replace PulseAudio's ALSA plugin with PipeWire's plugin
-media-video/pipewire:vulkan - Uses Vulkan compute shaders to provide a CGI video source
 media-video/qmplay2:audiofilters - Build with AudioFilters module
 media-video/qmplay2:avdevice - Build FFmpeg module with libavdevice suport
 media-video/qmplay2:avresample - Use libavresample instead of libswresample
@@ -308,8 +248,6 @@ net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
 net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/pidgin:zephyr - Enable Zephyr protocol support
-net-im/telegram-desktop:enchant - Enable the app-text/aspell spell-checking backend
-net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking backend
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
 net-misc/minidlna:netgear - Enable netgear branding

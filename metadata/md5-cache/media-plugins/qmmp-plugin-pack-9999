@@ -1,13 +1,13 @@
 BDEPEND=|| ( dev-util/ninja dev-util/samurai ) dev-util/cmake dev-vcs/subversion[http(+)] net-misc/rsync
 DEFINED_PHASES=compile configure install preinst prepare test unpack
-DEPEND==media-sound/qmmp-9999 >=media-libs/taglib-1.10 dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 dev-lang/yasm dev-qt/linguist-tools:5
+DEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 media-libs/taglib =media-sound/qmmp-9999* dev-lang/yasm dev-qt/linguist-tools:5
 DESCRIPTION=A set of extra plugins for Qmmp
 EAPI=7
 HOMEPAGE=http://qmmp.ylsoftware.com/
 INHERIT=cmake subversion
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND==media-sound/qmmp-9999 >=media-libs/taglib-1.10 dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5
+RDEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 media-libs/taglib =media-sound/qmmp-9999*
 SLOT=0
 _eclasses_=toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	97566c1a256d07b00848aa767e38a352	multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	a4dab848a4490e8e48cf0baab3e61bc2	edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4251d4c84c25f59094fd557e0063a974	eutils	dab5d8ec471d025b79c9e6906bcf3bff	flag-o-matic	4134b5c0fb719b9161d10bdaba9e09e5	xdg-utils	27f9a2f19502b925ac117bd657aa2979	cmake	62bbf12fd3f56b5922c04a4fce6aef9f	estack	055c42df72f76a4f45ec92b35e83cd56	subversion	c500a1b7795f44153bd96fc2597e3c05
-_md5_=587ac833cb53eed2b7c7a0ab7ad3dd74
+_md5_=86f6d1212ad49f08d09efd7bc9138862
