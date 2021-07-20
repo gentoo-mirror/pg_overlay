@@ -68,8 +68,12 @@ pref("extensions.pocket.oAuthConsumerKey", "");
 //
 pref("browser.newtabpage.activity-stream.feeds.telemetry", false);
 pref("browser.newtabpage.activity-stream.telemetry", false);
+pref("browser.newtabpage.activity-stream.telemetry.ping.endpoint", "");
 pref("browser.newtabpage.activity-stream.telemetry.structuredIngestion", false);
+pref("browser.newtabpage.activity-stream.telemetry.ut.events", false);
 pref("browser.ping-centre.telemetry", false);
+pref("permissions.eventTelemetry.enabled", false);
+pref("permissions.eventTelemetry.enabled", false);
 pref("security.certerrors.recordEventTelemetry", false);
 pref("security.identitypopup.recordEventElemetry", false);
 pref("toolkit.telemetry.archive.enabled", false);
@@ -111,6 +115,7 @@ pref("network.allow-experiments", false);
 //
 pref("datareporting.healthreport.about.reportUrl", "0.0.0.0");
 pref("datareporting.healthreport.documentServerURI", "0.0.0.0");
+pref("datareporting.healthreport.service.enabled", false);
 pref("datareporting.healthreport.uploadEnabled", false);
 pref("datareporting.policy.dataSubmissionEnabled", false);
 pref("datareporting.policy.dataSubmissionPolicyBypassNotification", true);
