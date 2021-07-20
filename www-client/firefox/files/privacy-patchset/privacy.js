@@ -91,7 +91,7 @@ pref("toolkit.telemetry.server_owner", "");
 pref("toolkit.telemetry.shutdownPingSender.enabled", false);
 pref("toolkit.telemetry.shutdownPingSender.enabledFirstSession", false);
 //
-pref("toolkit.telemetry.testing.overridePreRelease". true);
+pref("toolkit.telemetry.testing.overridePreRelease", true);
 pref("toolkit.telemetry.testing.overrideProductsCheck", true);
 //
 pref("toolkit.telemetry.updatePing.enabled", false);
