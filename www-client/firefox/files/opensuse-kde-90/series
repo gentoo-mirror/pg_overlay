@@ -1,3 +1,5 @@
+mozilla-nongnome-proxies.patch
+mozilla-kde.patch
 mozilla-sandbox-fips.patch
 mozilla-reduce-rust-debuginfo.patch
 mozilla-bmo1005535.patch
