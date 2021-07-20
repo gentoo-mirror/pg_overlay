@@ -1,5 +1,4 @@
 {
-	"__COMMENT__ More Information": "https://github.com/mozilla/policy-templates/blob/master/README.md",
 	"policies": {
 		"CaptivePortal": false,
 		"DisableAppUpdate": true,
@@ -17,14 +16,13 @@
 		"NetworkPrediction": false,
 		"OverridePostUpdatePage": "",
 		"SearchSuggestEnabled": false,
-	},
-	"Extensions": {
-		"Uninstall": [
-			"google@search.mozilla.org",
-			"bing@search.mozilla.org",
-			"amazondotcom@search.mozilla.org",
-			"ebay@search.mozilla.org",
-			"twitter@search.mozilla.org"
-		]
+		"Extensions": {
+			"Uninstall": [
+				"amazondotcom@search.mozilla.org",
+				"bing@search.mozilla.org",
+				"ebay@search.mozilla.org",
+				"twitter@search.mozilla.org"
+			]
+		}
 	}
 }
