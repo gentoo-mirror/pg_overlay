@@ -10,15 +10,14 @@
 # @BLURB: Eclass for Qt5 split ebuilds.
 # @DESCRIPTION:
 # This eclass contains various functions that are used when building Qt5.
-# Requires EAPI 7.
 
 if [[ ${CATEGORY} != dev-qt ]]; then
-	die "qt5-build.eclass is only to be used for building Qt 5"
+	die "${ECLASS} is only to be used for building Qt 5"
 fi
 
 case ${EAPI} in
-	7)	: ;;
-	*)	die "qt5-build.eclass: unsupported EAPI=${EAPI:-0}" ;;
+	7) ;;
+	*) die "${ECLASS}: EAPI ${EAPI:-0} not supported" ;;
 esac
 
 # @ECLASS-VARIABLE: QT5_BUILD_TYPE
@@ -26,7 +25,7 @@ esac
 # Default value is "release".
 # If PV matches "*9999*", this is automatically set to "live".
 QT5_BUILD_TYPE=release
-if [[ ${PV} = *9999* ]]; then
+if [[ ${PV} == *9999* ]]; then
 	QT5_BUILD_TYPE=live
 fi
 readonly QT5_BUILD_TYPE
@@ -77,26 +76,17 @@ _QT5_P=${QT5_MODULE}-everywhere-src-${PV}
 
 inherit estack flag-o-matic toolchain-funcs virtualx
 
-HOMEPAGE="https://www.qt.io/"
-LICENSE="|| ( GPL-2 GPL-3 LGPL-3 ) FDL-1.3"
-SLOT=5/$(ver_cut 1-2)
-
-case ${PV} in
-	5.15.9999)
-		# KDE upstream for 5.15 patches
-		HOMEPAGE+=" https://invent.kde.org/qt/qt/"
-		EGIT_BRANCH="kde/5.15"
-		;;
-	*)
+if [[ ${PN} != qtwebengine ]]; then
+	if [[ ${QT5_BUILD_TYPE} == live ]] || [[ -n ${KDE_ORG_COMMIT} ]]; then
+		# KDE Qt5PatchCollection
+		inherit kde.org
+	else
 		# official stable release
+		HOMEPAGE="https://www.qt.io/"
 		SRC_URI="https://download.qt.io/official_releases/qt/${PV%.*}/${PV}/submodules/${_QT5_P}.tar.xz"
 		S=${WORKDIR}/${_QT5_P}
-		;;
-esac
-
-EGIT_REPO_URI=( "https://invent.kde.org/qt/qt/${QT5_MODULE}.git" )
-
-[[ ${QT5_BUILD_TYPE} == live ]] && inherit git-r3
+	fi
+fi
 
 # @ECLASS-VARIABLE: QT5_BUILD_DIR
 # @OUTPUT_VARIABLE
@@ -104,6 +94,8 @@ EGIT_REPO_URI=( "https://invent.kde.org/qt/qt/${QT5_MODULE}.git" )
 # Build directory for out-of-source builds.
 : ${QT5_BUILD_DIR:=${S}_build}
 
+LICENSE="|| ( GPL-2 GPL-3 LGPL-3 ) FDL-1.3"
+SLOT=5/$(ver_cut 1-2)
 IUSE="debug test"
 
 if [[ ${QT5_BUILD_TYPE} == release ]]; then
@@ -122,36 +114,22 @@ fi
 
 ######  Phase functions  ######
 
-EXPORT_FUNCTIONS src_unpack src_prepare src_configure src_compile src_install src_test pkg_postinst pkg_postrm
-
-# @FUNCTION: qt5-build_src_unpack
-# @DESCRIPTION:
-# Unpacks the sources.
-qt5-build_src_unpack() {
-	# bug 307861
-	if [[ ${PN} == qtwebengine ]]; then
-		eshopts_push -s extglob
-		if is-flagq '-g?(gdb)?([1-9])'; then
-			ewarn
-			ewarn "You have enabled debug info (probably have -g or -ggdb in your CFLAGS/CXXFLAGS)."
-			ewarn "You may experience really long compilation times and/or increased memory usage."
-			ewarn "If compilation fails, please try removing -g/-ggdb before reporting a bug."
-			ewarn
-		fi
-		eshopts_pop
-	fi
-
-	case ${QT5_BUILD_TYPE} in
-		live)    git-r3_src_unpack ;&
-		release) default ;;
-	esac
-}
+EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install src_test pkg_postinst pkg_postrm
 
 # @FUNCTION: qt5-build_src_prepare
 # @DESCRIPTION:
 # Prepares the environment and patches the sources if necessary.
 qt5-build_src_prepare() {
 	qt5_prepare_env
+
+	if [[ -n ${KDE_ORG_COMMIT} ]]; then
+		# Upstream bumped version in 5.15 branch after 5.15.2 release but their
+		# 5.15.3 release is closed and this will never be more than a Qt 5.15.2
+		# with patches on top.
+		einfo "Preparing KDE Qt5PatchCollection snapshot at ${KDE_ORG_COMMIT}"
+		sed -e "/^MODULE_VERSION/s/5\.15\.3/5\.15\.2/" -i .qmake.conf || die
+		mkdir -p .git || die # need to fake a git repository for configure
+	fi
 
 	if [[ ${QT5_MODULE} == qtbase ]]; then
 		qt5_symlink_tools_to_build_dir
