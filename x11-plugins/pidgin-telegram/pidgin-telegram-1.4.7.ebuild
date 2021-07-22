@@ -9,18 +9,15 @@ SRC_URI="https://github.com/majn/telegram-purple/releases/download/v${PV}/telegr
 S="${WORKDIR}/telegram-purple"
 
 LICENSE="GPL-2+"
-KEYWORDS="amd64 x86"
+KEYWORDS="~amd64 ~x86"
 SLOT="0"
-IUSE="gcrypt libressl +nls +png +webp"
+IUSE="gcrypt +nls +png +webp"
 
 RDEPEND="
 	net-im/pidgin
 	sys-libs/zlib:=
 	gcrypt? ( dev-libs/libgcrypt:0= )
-	!gcrypt? (
-		libressl? ( dev-libs/libressl:0= )
-		!libressl? ( dev-libs/openssl:0= )
-	)
+	!gcrypt? ( dev-libs/openssl:0= )
 	png? ( media-libs/libpng:0= )
 	webp? ( media-libs/libwebp:= )
 "

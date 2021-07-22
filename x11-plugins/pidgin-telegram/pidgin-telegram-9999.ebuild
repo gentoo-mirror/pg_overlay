@@ -13,16 +13,13 @@ EGIT_SUBMODULES=()
 LICENSE="GPL-2+"
 KEYWORDS=""
 SLOT="0"
-IUSE="gcrypt libressl +nls +png +webp"
+IUSE="gcrypt +nls +png +webp"
 
 RDEPEND="
 	net-im/pidgin
 	sys-libs/zlib:=
 	gcrypt? ( dev-libs/libgcrypt:0= )
-	!gcrypt? (
-		libressl? ( dev-libs/libressl:0= )
-		!libressl? ( dev-libs/openssl:0= )
-	)
+	!gcrypt? ( dev-libs/openssl:0= )
 	png? ( media-libs/libpng:0= )
 	webp? ( media-libs/libwebp:= )
 "
