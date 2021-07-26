@@ -3,6 +3,8 @@
 
 EAPI=7
 
+DISTUTILS_USE_SETUPTOOLS=no
+
 PYTHON_COMPAT=( python3_{9,10} )
 
 inherit distutils-r1 xdg-utils
