@@ -27,7 +27,7 @@ RESTRICT="
 "
 
 RADEON_CARDS="r100 r200 r300 r600 radeon radeonsi"
-VIDEO_CARDS="${RADEON_CARDS} freedreno i915 i965 intel iris lima nouveau panfrost v3d vc4 virgl vivante vmware crocus"
+VIDEO_CARDS="${RADEON_CARDS} crocus freedreno i915 i965 intel iris lima nouveau panfrost v3d vc4 virgl vivante vmware"
 for card in ${VIDEO_CARDS}; do
 	IUSE_VIDEO_CARDS+=" video_cards_${card}"
 done
@@ -38,14 +38,14 @@ IUSE="${IUSE_VIDEO_CARDS}
 	vulkan-overlay wayland +X xa xvmc zink +zstd"
 
 REQUIRED_USE="
-	d3d9?   ( || ( video_cards_iris video_cards_r300 video_cards_r600 video_cards_radeonsi video_cards_nouveau video_cards_vmware ) )
+	d3d9?   ( || ( video_cards_crocus video_cards_iris video_cards_r300 video_cards_r600 video_cards_radeonsi video_cards_nouveau video_cards_vmware ) )
 	gles1?  ( egl )
 	gles2?  ( egl )
 	osmesa? ( gallium )
 	vulkan? ( video_cards_radeonsi? ( llvm ) )
 	vulkan-overlay? ( vulkan )
 	wayland? ( egl gbm )
-	video_cards_crocus?   ( gallium )
+	video_cards_crocus? ( gallium )
 	video_cards_freedreno?  ( gallium )
 	video_cards_intel?  ( classic )
 	video_cards_i915?   ( || ( classic gallium ) )
@@ -407,7 +407,8 @@ multilib_src_configure() {
 			emesonargs+=(-Dgallium-nine=false)
 		fi
 
-		if use video_cards_r600 ||
+		if use video_cards_crocus ||
+		   use video_cards_r600 ||
 		   use video_cards_radeonsi ||
 		   use video_cards_nouveau; then
 			emesonargs+=($(meson_feature vaapi gallium-va))
@@ -468,6 +469,7 @@ multilib_src_configure() {
 			fi
 		fi
 
+		gallium_enable video_cards_crocus crocus
 		gallium_enable video_cards_iris iris
 
 		gallium_enable video_cards_r300 r300
