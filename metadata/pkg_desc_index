@@ -121,7 +121,7 @@ media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.6-r1 2.9999 9999: GTK Instant Messenger client
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
-net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
+net-libs/libtorrent 9999 9999-r1: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
@@ -134,7 +134,7 @@ net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 3.1.0: A fork of nicotine, a Soulseek client in Python
-net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
+net-p2p/rtorrent 9999 9999-r1: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/cups-filters 1.28.8: Cups filters
