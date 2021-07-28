@@ -464,7 +464,7 @@ multilib_src_configure() {
 			gallium_enable video_cards_i915 i915
 			if ! use video_cards_i915 && \
 				! use video_cards_i965; then
-				gallium_enable video_cards_intel i915
+				gallium_enable video_cards_intel crocus
 			fi
 		fi
 
