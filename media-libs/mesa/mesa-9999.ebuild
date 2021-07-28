@@ -38,7 +38,7 @@ IUSE="${IUSE_VIDEO_CARDS}
 	vulkan-overlay wayland +X xa xvmc zink +zstd"
 
 REQUIRED_USE="
-	d3d9?   ( || ( video_cards_iris video_cards_r300 video_cards_r600 video_cards_radeonsi video_cards_nouveau video_cards_vmware ) )
+	d3d9?   ( || ( video_cards_iris video_cards_r300 video_cards_r600 video_cards_radeonsi video_cards_nouveau video_cards_vmware video_cards_vmware crocus) )
 	gles1?  ( egl )
 	gles2?  ( egl )
 	osmesa? ( gallium )
@@ -468,6 +468,7 @@ multilib_src_configure() {
 			fi
 		fi
 
+		gallium_enable video_cards_crocus crocus
 		gallium_enable video_cards_iris iris
 
 		gallium_enable video_cards_r300 r300
