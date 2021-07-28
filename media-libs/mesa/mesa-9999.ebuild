@@ -407,7 +407,8 @@ multilib_src_configure() {
 			emesonargs+=(-Dgallium-nine=false)
 		fi
 
-		if use video_cards_r600 ||
+		if use video_cards_crocus ||
+		   use video_cards_r600 ||
 		   use video_cards_radeonsi ||
 		   use video_cards_nouveau; then
 			emesonargs+=($(meson_feature vaapi gallium-va))
