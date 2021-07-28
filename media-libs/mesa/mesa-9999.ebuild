@@ -47,7 +47,7 @@ REQUIRED_USE="
 	wayland? ( egl gbm )
 	video_cards_crocus? ( gallium )
 	video_cards_freedreno?  ( gallium )
-	video_cards_intel?  ( classic )
+	video_cards_intel?  ( || ( classic gallium ) )
 	video_cards_i915?   ( || ( classic gallium ) )
 	video_cards_i965?   ( classic )
 	video_cards_iris?   ( gallium )
@@ -407,8 +407,7 @@ multilib_src_configure() {
 			emesonargs+=(-Dgallium-nine=false)
 		fi
 
-		if use video_cards_crocus ||
-		   use video_cards_r600 ||
+		if use video_cards_r600 ||
 		   use video_cards_radeonsi ||
 		   use video_cards_nouveau; then
 			emesonargs+=($(meson_feature vaapi gallium-va))
