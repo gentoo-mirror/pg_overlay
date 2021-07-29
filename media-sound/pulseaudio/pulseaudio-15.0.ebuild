@@ -6,7 +6,7 @@ EAPI="7"
 MY_PV="${PV/_pre*}"
 MY_P="${PN}-${MY_PV}"
 
-inherit bash-completion-r1 gnome2-utils meson-multilib optfeature systemd udev
+inherit bash-completion-r1 gnome2-utils meson-multilib optfeature systemd tmpfiles udev
 
 DESCRIPTION="A networked sound server with an advanced plugin system"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/PulseAudio/"
@@ -17,7 +17,7 @@ if [[ ${PV} = 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}"
 else
 	SRC_URI="https://freedesktop.org/software/${PN}/releases/${MY_P}.tar.xz"
-	#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux"
 fi
 
 # libpulse-simple and libpulse link to libpulse-core; this is daemon's
@@ -32,7 +32,7 @@ SLOT="0"
 # TODO: Deal with bluez5-gstreamer
 # TODO: Find out why webrtc-aec is + prefixed - there's already the always available speexdsp-aec
 # NOTE: The current ebuild sets +X almost certainly just for the pulseaudio.desktop file
-IUSE="+alsa +alsa-plugin +asyncns bluetooth dbus +daemon doc elogind equalizer forget-missing +gdbm
+IUSE="+alsa +alsa-plugin +asyncns bluetooth dbus +daemon doc elogind equalizer +gdbm
 gstreamer +glib gtk ipv6 jack lirc native-headset ofono-headset +orc oss selinux sox ssl systemd
 system-wide tcpd test +udev +webrtc-aec +X zeroconf"
 
@@ -120,8 +120,8 @@ COMMON_DEPEND="
 	selinux? ( sec-policy/selinux-pulseaudio )
 	sox? ( >=media-libs/soxr-0.1.1 )
 	ssl? ( dev-libs/openssl:= )
-	systemd? ( sys-apps/systemd:=[${MULTILIB_USEDEP}] )
-	tcpd? ( sys-apps/tcp-wrappers[${MULTILIB_USEDEP}] )
+	systemd? ( sys-apps/systemd:= )
+	tcpd? ( sys-apps/tcp-wrappers )
 	udev? ( >=virtual/udev-143[hwdb(+)] )
 	webrtc-aec? ( >=media-libs/webrtc-audio-processing-0.2 )
 	X? (
@@ -165,11 +165,6 @@ DOCS=( NEWS README )
 
 S="${WORKDIR}/${MY_P}"
 
-PATCHES=(
-	"${FILESDIR}"/${MY_P}-require-GIO-for-RTP-GStreamer.patch
-	"${FILESDIR}"/${MY_P}-require-bluez-dependency.patch
-)
-
 src_prepare() {
 	default
 
@@ -195,6 +190,7 @@ multilib_src_configure() {
 		$(meson_native_use_feature gtk)
 		$(meson_native_use_feature jack)
 		-Dsamplerate=disabled # Matches upstream
+		-Dstream-restore-clear-old-devices=true
 		$(meson_native_use_feature lirc)
 		$(meson_native_use_feature orc)
 		$(meson_native_use_feature oss oss-output)
@@ -207,15 +203,14 @@ multilib_src_configure() {
 		$(meson_native_use_feature equalizer fftw)
 		$(meson_native_use_feature sox soxr)
 		-Ddatabase=$(multilib_native_usex gdbm gdbm simple) # tdb is also an option but no one cares about it
-		$(meson_use forget-missing stream-restore-clear-old-devices)
 		$(meson_feature glib) # WARNING: toggling this likely changes ABI
 		$(meson_feature asyncns)
 		#$(meson_use cpu_flags_arm_neon neon-opt)
 		$(meson_native_use_feature tcpd tcpwrap)
 		$(meson_feature dbus)
-		$(meson_feature elogind)
+		$(meson_native_use_feature elogind)
 		$(meson_feature X x11)
-		$(meson_feature systemd)
+		$(meson_native_use_feature systemd)
 		$(meson_use ipv6)
 	)
 
@@ -287,7 +282,7 @@ multilib_src_install_all() {
 		systemd_dounit "${FILESDIR}"/${PN}.service
 
 		# We need /var/run/pulse, bug 442852
-		systemd_newtmpfilesd "${FILESDIR}"/${PN}.tmpfiles ${PN}.conf
+		newtmpfiles "${FILESDIR}"/${PN}.tmpfiles ${PN}.conf
 	else
 		# Prevent warnings when system-wide is not used, bug 447694
 		if use dbus && use daemon; then
