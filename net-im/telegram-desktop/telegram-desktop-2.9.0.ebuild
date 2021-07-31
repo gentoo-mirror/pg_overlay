@@ -109,6 +109,7 @@ src_configure() {
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION=$(usex dbus OFF ON)
 		-DDESKTOP_APP_DISABLE_GTK_INTEGRATION=$(usex gtk OFF ON)
 		-DDESKTOP_APP_DISABLE_WEBKIT=$(usex webkit OFF ON)
+		-DDESKTOP_APP_DISABLE_WEBKIT_INTEGRATION=$(usex webkit OFF ON)
 		-DDESKTOP_APP_DISABLE_SPELLCHECK=$(usex spell OFF ON)  # enables hunspell (recommended)
 		-DDESKTOP_APP_USE_ENCHANT=$(usex enchant ON OFF)  # enables enchant and disables hunspell
 	)
