@@ -75,7 +75,7 @@ PATCHES=(
 	# https://github.com/desktop-app/lib_webview/pull/2
 	#"${FILESDIR}/tdesktop-2.8.9-disable-webkit-separately.patch"
 	# Not a proper fix, not upstreamed
-	"${FILESDIR}/tdesktop-2.8.9-webview-fix-glib.patch"
+	#"${FILESDIR}/tdesktop-2.8.9-webview-fix-glib.patch"
 	# Not upstreamed (yet)
 	"${FILESDIR}/tdesktop-2.8.10-jemalloc-only-telegram.patch"
 )
