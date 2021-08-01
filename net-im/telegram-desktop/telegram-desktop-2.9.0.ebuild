@@ -71,11 +71,6 @@ BDEPEND="
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
-	# https://github.com/desktop-app/cmake_helpers/pull/91
-	# https://github.com/desktop-app/lib_webview/pull/2
-	#"${FILESDIR}/tdesktop-2.8.9-disable-webkit-separately.patch"
-	# Not a proper fix, not upstreamed
-	#"${FILESDIR}/tdesktop-2.8.9-webview-fix-glib.patch"
 	# Not upstreamed (yet)
 	"${FILESDIR}/tdesktop-2.8.10-jemalloc-only-telegram.patch"
 )
@@ -103,7 +98,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON  # header only lib, some git version. prevents warnings.
-
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex X OFF ON)
 		-DDESKTOP_APP_DISABLE_WAYLAND_INTEGRATION=$(usex wayland OFF ON)
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION=$(usex dbus OFF ON)
