@@ -176,7 +176,7 @@ multilib_src_configure() {
 		-Dadrian-aec=true # Not packaged?
 		--localstatedir="${EPREFIX}"/var
 		-Dmodlibexecdir="${EPREFIX}/usr/$(get_libdir)/${PN}/modules" # Was $(get_libdir)/${P}
-		-Dsystemduserunitdir=
+		-Dsystemduserunitdir=$(systemd_get_userunitdir)
 		-Dudevrulesdir="${EPREFIX}$(get_udevdir)/rules.d"
 		-Dbashcompletiondir="$(get_bashcompdir)" # Alternatively DEPEND on app-shells/bash-completion for pkg-config to provide the value
 		$(meson_native_use_feature alsa)
@@ -304,6 +304,8 @@ pkg_postinst() {
 	gnome2_schemas_update
 
 	if use system-wide; then
+		tmpfiles_process "${PN}.conf"
+
 		elog "You have enabled the 'system-wide' USE flag for pulseaudio."
 		elog "This mode should only be used on headless servers, embedded systems,"
 		elog "or thin clients. It will usually require manual configuration, and is"
