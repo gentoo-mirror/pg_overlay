@@ -11,7 +11,7 @@ DESCRIPTION="C language family frontend for LLVM"
 HOMEPAGE="https://llvm.org/"
 
 # Keep in sync with sys-devel/llvm
-ALL_LLVM_EXPERIMENTAL_TARGETS=( ARC CSKY VE )
+ALL_LLVM_EXPERIMENTAL_TARGETS=( ARC CSKY M68k VE )
 ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM AVR BPF Hexagon Lanai Mips MSP430
 	NVPTX PowerPC RISCV Sparc SystemZ WebAssembly X86 XCore
 	"${ALL_LLVM_EXPERIMENTAL_TARGETS[@]}" )
@@ -67,7 +67,7 @@ LLVM_TEST_COMPONENTS=(
 	llvm/utils/{lit,llvm-lit,unittest}
 	llvm/utils/{UpdateTestChecks,update_cc_test_checks.py}
 )
-LLVM_PATCHSET=12.0.1-rc4-1
+LLVM_PATCHSET=9999-2
 llvm.org_set_globals
 
 # Multilib notes:
@@ -225,6 +225,7 @@ get_distribution_components() {
 			clang-check
 			clang-extdef-mapping
 			scan-build
+			scan-build-py
 			scan-view
 		)
 	fi
