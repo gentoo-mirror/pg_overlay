@@ -28,7 +28,7 @@ dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/ocaml 4.12.0: Programming language supporting functional, imperative & object-oriented styles
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
-dev-lang/python 2.7.18_p11 3.9.6: An interpreted, interactive, object-oriented programming language
+dev-lang/python 2.7.18_p11 3.9.6_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.54.0: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
@@ -170,7 +170,6 @@ virtual/perl-Storable 3.210.0: Virtual for Storable
 virtual/perl-Time-Local 1.300.0: Virtual for Time-Local
 virtual/perl-libnet 3.130.0: Virtual for libnet
 virtual/perl-version 0.992.900: Virtual for version
-virtual/rust 1.54.0: Virtual for Rust language compiler
 www-client/firefox 90.0.2: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-base/xorg-proto 2021.4.99.2: X.Org combined protocol headers
