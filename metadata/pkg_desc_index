@@ -153,7 +153,7 @@ sys-devel/clang 13.0.0_rc1: C language family frontend for LLVM
 sys-devel/llvm 13.0.0_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/ntfs3g 2017.3.23.6: Open source read-write NTFS driver that runs under FUSE
-sys-fs/udisks 2.9.2-r2: Daemon providing interfaces to work with storage devices
+sys-fs/udisks 2.9.3: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.13.0_rc1: xfs filesystem utilities
 sys-libs/ncurses 6.2_p20210718: console display library
 sys-libs/pam 1.5.1_p20210722: Linux-PAM (Pluggable Authentication Modules)
