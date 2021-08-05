@@ -150,7 +150,7 @@ QA_SONAME="
 # causes double bootstrap
 RESTRICT="test"
 
-VERIFY_SIG_OPENPGP_KEY_PATH="/usr/share/openpgp-keys/rust.asc"
+VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
 	"${FILESDIR}"/1.47.0-ignore-broken-and-non-applicable-tests.patch
@@ -190,7 +190,7 @@ bootstrap_rust_version_check() {
 }
 
 pre_build_checks() {
-	local M=8192
+	local M=4096
 	# multiply requirements by 1.5 if we are doing x86-multilib
 	if use amd64; then
 		M=$(( $(usex abi_x86_32 15 10) * ${M} / 10 ))
