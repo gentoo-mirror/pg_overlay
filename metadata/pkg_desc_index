@@ -174,7 +174,7 @@ www-client/firefox 90.0.2: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-base/xorg-proto 2021.4.99.2: X.Org combined protocol headers
 x11-base/xorg-server 1.20.13-r1: X.Org X servers
-x11-base/xwayland 21.1.2-r1: Standalone X server running under Wayland
+x11-base/xwayland 21.1.2-r2: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.4 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33 3.24.29: Gimp ToolKit +
