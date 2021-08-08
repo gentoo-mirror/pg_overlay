@@ -11,8 +11,6 @@ app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to 
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/jdupes 9999: A powerful duplicate file finder and an enhanced fork of 'fdupes'.
 app-misc/media-player-info 24: A repository of data files describing media player capabilities
-app-misc/rbutil 9999: Rockbox open source firmware manager for music players
-app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.21.5.25: Python scripts to manipulate trash cans via the command line
 app-misc/worker 4.8.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.2.0.2: A full office productivity suite
@@ -20,11 +18,9 @@ app-office/libreoffice-l10n 7.2.0.2: Translations for the Libreoffice suite
 app-portage/eix 0.35.2: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
-app-text/goldendict 9999: Feature-rich dictionary lookup program
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.66.0: C++ interface for glib2
 dev-db/sqlite 3.36.0: SQL database engine
-dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/ocaml 4.12.0: Programming language supporting functional, imperative & object-oriented styles
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
@@ -98,20 +94,12 @@ media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2021.1: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.2.184: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.186: Vulkan Installable Client Driver (ICD) Loader
-media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
-media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
-media-sound/audacious 9999: Lightweight and versatile audio player
-media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
-media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mac 6.23: Monkey's Audio Codecs
-media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
-media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
 media-sound/pulseaudio 15.0: A networked sound server with an advanced plugin system
-media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
@@ -119,7 +107,6 @@ media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), I
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.33: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.6-r1 2.9999 9999: GTK Instant Messenger client
 net-im/telegram-desktop 2.9.0: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
@@ -133,8 +120,6 @@ net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protoco
 net-libs/telepathy-qt 0.9.8 9999: Qt bindings for the Telepathy D-Bus protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
-net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client
-net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 3.1.0: A fork of nicotine, a Soulseek client in Python
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
@@ -145,7 +130,6 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
 sci-libs/libqalculate 3.18.0: A modern multi-purpose calculator library
 sci-mathematics/mathematica 12.3.0: Wolfram Mathematica
-sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r100: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
