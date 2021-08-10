@@ -8,7 +8,7 @@ PYTHON_COMPAT=( python3_{9,10} )
 PYTHON_REQ_USE="sqlite(+)"
 DISTUTILS_SINGLE_IMPL=1
 
-inherit desktop distutils-r1 l10n git-r3 virtualx
+inherit desktop distutils-r1 plocale git-r3 virtualx
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
 HOMEPAGE="https://bleachbit.org/"

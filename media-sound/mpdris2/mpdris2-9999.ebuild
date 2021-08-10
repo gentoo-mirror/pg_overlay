@@ -5,7 +5,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{9,10})
 PLOCALES="fr nl"
 
-inherit python-r1 autotools git-r3 l10n
+inherit python-r1 autotools git-r3 plocale
 
 MY_PN="${PN/d/D}"
 

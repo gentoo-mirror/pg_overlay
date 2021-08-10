@@ -4,7 +4,7 @@
 EAPI=7
 PLOCALES="ja"
 
-inherit desktop gnome2-utils qmake-utils git-r3 l10n
+inherit desktop gnome2-utils qmake-utils git-r3 plocale
 
 DESCRIPTION="a simple MPD (Music Player Daemon) client, powerd by Qt"
 HOMEPAGE="https://github.com/soramimi/SkyMPC"

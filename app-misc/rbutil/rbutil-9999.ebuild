@@ -4,7 +4,7 @@
 EAPI=7
 PLOCALES="cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW"
 
-inherit desktop git-r3 l10n qmake-utils xdg
+inherit desktop git-r3 plocale qmake-utils xdg
 
 DESCRIPTION="Rockbox open source firmware manager for music players"
 HOMEPAGE="https://www.rockbox.org/wiki/RockboxUtility"
