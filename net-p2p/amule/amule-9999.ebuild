@@ -6,7 +6,7 @@ PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH 
 WX_GTK_VER="3.1-gtk3"
 WANT_AUTOCONF="2.5"
 
-inherit autotools git-r3 l10n wxwidgets xdg-utils flag-o-matic
+inherit autotools git-r3 plocale wxwidgets xdg-utils flag-o-matic
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="http://www.amule.org/"

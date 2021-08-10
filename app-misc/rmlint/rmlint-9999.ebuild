@@ -6,7 +6,7 @@ EAPI=7
 PLOCALES="de es fr"
 PYTHON_COMPAT=( python3_{9,10} )
 
-inherit git-r3 gnome2-utils l10n python-single-r1 scons-utils
+inherit git-r3 gnome2-utils plocale python-single-r1 scons-utils
 
 DESCRIPTION="rmlint finds space waste and other broken things on your filesystem and offers to remove it"
 HOMEPAGE="https://github.com/sahib/rmlint"

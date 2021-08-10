@@ -4,7 +4,7 @@
 EAPI=7
 PLOCALES="cs da de en eo es fi fr gl he hu ie it ja ko nb nl pl pt pt_BR ru sk sv uk zh_CN"
 
-inherit meson git-r3 l10n
+inherit meson git-r3 plocale
 
 DESCRIPTION="Ncurses client for the Music Player Daemon (MPD)"
 HOMEPAGE="https://www.musicpd.org/clients/ncmpc/ https://github.com/MusicPlayerDaemon/ncmpc"

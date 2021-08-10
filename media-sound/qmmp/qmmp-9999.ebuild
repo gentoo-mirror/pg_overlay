@@ -4,7 +4,7 @@
 EAPI=7
 PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk ko lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
 
-inherit cmake xdg l10n
+inherit cmake xdg plocale
 [[ ${PV} = 9999 ]] && inherit subversion
 
 DESCRIPTION="Qt5-based audio player with winamp/xmms skins support"

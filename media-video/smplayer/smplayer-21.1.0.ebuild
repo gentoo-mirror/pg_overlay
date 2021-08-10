@@ -8,7 +8,7 @@ he_IL hr hu id it ja ka ko ku lt mk ms_MY nl nn_NO pl pt_BR pt ro_RO ru_RU
 sk sl_SI sq_AL sr sv th tr uk_UA uz vi_VN zh_CN zh_TW"
 PLOCALE_BACKUP="en_US"
 
-inherit l10n qmake-utils toolchain-funcs xdg
+inherit plocale qmake-utils toolchain-funcs xdg
 
 DESCRIPTION="Great Qt GUI front-end for mplayer/mpv"
 HOMEPAGE="https://www.smplayer.eu/"
