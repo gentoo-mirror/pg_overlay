@@ -1071,7 +1071,7 @@ src_compile() {
 	#	gnome2_environment_reset
 
 		addpredict /root
-		/dev/dri/renderD128
+		addpredict /dev/dri/renderD128
 	#fi
 
 	#local -x GDK_BACKEND=wayland
