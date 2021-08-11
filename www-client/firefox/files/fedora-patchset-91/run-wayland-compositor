@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 # Run wayland compositor and set WAYLAND_DISPLAY env variable
 
 set -x
