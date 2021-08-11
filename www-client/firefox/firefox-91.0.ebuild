@@ -1025,6 +1025,7 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=
 	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
+	mozconfig_add_options_ac '' MOZ_X11=0
 
 	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
@@ -1040,6 +1041,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
+	echo "export MOZ_X11=0" >> "${S}"/.mozconfig
 	#######
 
 	echo
@@ -1068,9 +1070,9 @@ src_compile() {
 		addpredict /root
 	fi
 
-	local -x GDK_BACKEND=x11
+	local -x GDK_BACKEND=wayland
 
-	${virtx_cmd} ./mach build --verbose \
+	MOZ_ENABLE_WAYLAND=1 ./mach build --verbose \
 		|| die
 }
 
