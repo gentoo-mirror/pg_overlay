@@ -1026,6 +1026,7 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=
 	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
 	mozconfig_add_options_ac '' MOZ_X11=0
+	mozconfig_add_options_ac '' USE_X11=0
 
 	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
@@ -1042,6 +1043,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export MOZ_X11=0" >> "${S}"/.mozconfig
+	echo "export USE_X11=0" >> "${S}"/.mozconfig
 	#######
 
 	echo
@@ -1061,14 +1063,14 @@ src_configure() {
 src_compile() {
 	local virtx_cmd=
 
-	if use pgo ; then
-		virtx_cmd=virtx
+	#if use pgo ; then
+	#	virtx_cmd=virtx
 
 		# Reset and cleanup environment variables used by GNOME/XDG
-		gnome2_environment_reset
+	#	gnome2_environment_reset
 
 		addpredict /root
-	fi
+	#fi
 
 	local -x GDK_BACKEND=wayland
 
