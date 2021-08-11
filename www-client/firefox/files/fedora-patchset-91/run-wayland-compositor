@@ -35,7 +35,7 @@ until [ $retry_count -gt $max_retries ]; do
     retry_count=$(($max_retries + 1))
   else
     retry_count=$(($retry_count + 1))
-    echo "Waiting for Mutter, retry: $retry_count"
+    echo "Waiting for kwin_wayland, retry: $retry_count"
     sleep 2
   fi
 done
