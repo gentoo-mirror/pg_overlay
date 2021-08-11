@@ -88,7 +88,7 @@ gui-libs/disman 5.20.0: A display management service and library. LibKScreen rep
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-mail-client/thunderbird 78.12.0: Thunderbird Mail Client
+mail-client/thunderbird 78.13.0: Thunderbird Mail Client
 media-libs/gst-plugins-base 1.19.1: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.19.1: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.19.1: Open source multimedia framework
