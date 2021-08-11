@@ -600,6 +600,7 @@ src_prepare() {
 		fi
 	done
 	#######
+	cp "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/run-wayland-compositor "${S}"
 
 	xdg_src_prepare
 }
@@ -1074,6 +1075,9 @@ src_compile() {
 
 	local -x GDK_BACKEND=wayland
 
+	pushd "${S}"
+	./run-wayland-compositor
+	popd
 	MOZ_ENABLE_WAYLAND=1 ./mach build --verbose \
 		|| die
 }
