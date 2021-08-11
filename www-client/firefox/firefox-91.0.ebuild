@@ -1075,9 +1075,7 @@ src_compile() {
 
 	local -x GDK_BACKEND=wayland
 
-	pushd "${S}"
 	./run-wayland-compositor
-	popd
 	MOZ_ENABLE_WAYLAND=1 ./mach build --verbose \
 		|| die
 }

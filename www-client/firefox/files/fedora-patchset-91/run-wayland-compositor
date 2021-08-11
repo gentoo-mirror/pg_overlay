@@ -19,7 +19,7 @@ if [ -z "$XDG_RUNTIME_DIR" ]; then
   export XDG_RUNTIME_DIR=$HOME
 fi
 
-. xvfb-run -s "-screen 0 1600x1200x24" -n 80 mutter --display=:80 --wayland --nested &
+. xvfb-run -s "-screen 0 1600x1200x24" -n 80 kwin_wayland --wayland-display=:80 &
 export DISPLAY=:80
 
 if [ -z "$WAYLAND_DISPLAY" ] ; then
