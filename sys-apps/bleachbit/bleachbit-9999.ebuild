@@ -44,6 +44,9 @@ python_prepare_all() {
 		# fails due to non-existent $HOME/.profile
 		rm tests/TestInit.py || die
 
+		# only applicable to Windows installer
+		rm tests/TestNsisUtilities.py || die
+
 		# these fail on upstream Travis CI as well as on Gentoo
 		sed -e "s/test_notify(self)/_&/" \
 			-i tests/TestGUI.py || die
