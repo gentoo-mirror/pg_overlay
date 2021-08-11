@@ -2,12 +2,12 @@ diff --git a/browser/extensions/moz.build b/browser/extensions/moz.build
 index 269dcb2..ed7c31d 100644
 --- a/browser/extensions/moz.build
 +++ b/browser/extensions/moz.build
-@@ -5,11 +5,6 @@
+@@ -5,11 +5,7 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  DIRS += [
 -    "doh-rollout",
--    "formautofill",
+     "formautofill",
 -    "screenshots",
 -    "webcompat",
 -    "report-site-issue",
@@ -38,10 +38,10 @@ diff --git a/browser/locales/filter.py b/browser/locales/filter.py
 index bb2e992..7d7768e 100644
 --- a/browser/locales/filter.py
 +++ b/browser/locales/filter.py
-@@ -19,7 +19,5 @@
+@@ -19,7 +19,6 @@
          "devtools/startup",
          "browser",
--        "browser/extensions/formautofill",
+         "browser/extensions/formautofill",
 -        "browser/extensions/report-site-issue",
          "extensions/spellcheck",
          "other-licenses/branding/firefox",
@@ -50,10 +50,10 @@ diff --git a/browser/locales/l10n.ini b/browser/locales/l10n.ini
 index f4cb7ca..4efac13 100644
 --- a/browser/locales/l10n.ini
 +++ b/browser/locales/l10n.ini
-@@ -13,7 +13,5 @@
+@@ -13,7 +13,6 @@
       devtools/client
       devtools/startup
--     browser/extensions/formautofill
+      browser/extensions/formautofill
 -     browser/extensions/report-site-issue
  
  [includes]
