@@ -1075,7 +1075,7 @@ src_compile() {
 
 	local -x GDK_BACKEND=wayland
 
-	MOZ_ENABLE_WAYLAND=1 ./mach build --verbose \
+	MOZ_ENABLE_WAYLAND=1 ${virtx_cmd} MOZ_ENABLE_WAYLAND=1 ./mach build --verbose \
 		|| die
 }
 
