@@ -1,15 +1,6 @@
 --- a/c/Makefile	2020-03-06 02:00:48.000000000 +0700
 +++ b/c/Makefile	2020-03-17 12:06:35.350538735 +0700
-@@ -34,6 +34,8 @@
- # Extra flags for diagnostics:
- # CFLAGS += -g -Wall -Wextra -Wpedantic -Wconversion -Wsign-conversion -fsanitize=undefined,address
- 
-+# Version information
-+VERSION = 1.6.0
- 
- # ---- Controlling make ----
- 
-@@ -47,22 +49,48 @@
+@@ -49,22 +49,49 @@
  .DEFAULT_GOAL = all
  .PHONY: all clean
  
@@ -19,12 +10,13 @@
  LIB = qrcodegen
 -LIBFILE = lib$(LIB).a
 +LIBFILE = lib$(LIB).so
++LIBFILE = lib$(LIB).so
 +ARFILE = lib$(LIB).a
 +SO_NAME = $(LIBFILE).1
 +REAL_NAME = $(LIBFILE).$(VERSION)
 +HEADERS = qrcodegen.h
  LIBOBJ = qrcodegen.o
- MAINS = qrcodegen-demo qrcodegen-test qrcodegen-worker
+ MAINS = qrcodegen-demo qrcodegen-test
  
 +MULTIARCH ?= $(shell $(CC) --print-multiarch)
 +
@@ -37,31 +29,31 @@
  
  # Delete build output
  clean:
--	rm -f -- $(LIBOBJ) $(LIBFILE) $(MAINS:=.o) $(MAINS)
-+	rm -f -- $(LIBOBJ) $(LIBFILE) $(ARFILE) $(MAINS:=.o) $(MAINS)
- 	rm -rf .deps
+-       rm -f -- $(LIBOBJ) $(LIBFILE) $(MAINS:=.o) $(MAINS)
++       rm -f -- $(LIBOBJ) $(LIBFILE) $(ARFILE) $(MAINS:=.o) $(MAINS)
+        rm -rf .deps
  
 +install-shared: $(LIBFILE)
-+	install -d $(LIBDIR) || true
-+	install -m 0644 $(LIBFILE) $(LIBDIR)/$(REAL_NAME)
-+	rm -f $(LIBDIR)/$(SO_NAME)
-+	ln -s $(REAL_NAME) $(LIBDIR)/$(SO_NAME)
-+	rm -f $(LIBDIR)/$(LIBFILE)
-+	ln -s $(SO_NAME) $(LIBDIR)/$(LIBFILE)
++       install -d $(LIBDIR) || true
++       install -m 0644 $(LIBFILE) $(LIBDIR)/$(REAL_NAME)
++       rm -f $(LIBDIR)/$(SO_NAME)
++       ln -s $(REAL_NAME) $(LIBDIR)/$(SO_NAME)
++       rm -f $(LIBDIR)/$(LIBFILE)
++       ln -s $(SO_NAME) $(LIBDIR)/$(LIBFILE)
 +
 +install-static: $(ARFILE)
-+	install -d $(LIBDIR) || true
-+	install -m 0644 $(ARFILE) $(LIBDIR)/$(ARFILE)
++       install -d $(LIBDIR) || true
++       install -m 0644 $(ARFILE) $(LIBDIR)/$(ARFILE)
 +
 +install-header: $(HEADERS)
-+	install -d $(INCLUDEDIR) || true
-+	install -m 0644 $(HEADERS) $(INCLUDEDIR)/
++       install -d $(INCLUDEDIR) || true
++       install -m 0644 $(HEADERS) $(INCLUDEDIR)/
 +
 +install: install-shared install-static install-header
 +
  # Executable files
  %: %.o $(LIBFILE)
- 	$(CC) $(CFLAGS) -o $@ $< -L . -l $(LIB)
+        $(CC) $(CFLAGS) $(LDFLAGS) -o $@ $< -L . -l $(LIB)
 @@ -72,12 +100,16 @@
  	$(CC) $(CFLAGS) -DQRCODEGEN_TEST -o $@ $^
  
