@@ -36,7 +36,7 @@ dev-libs/libbsd 0.11.3: An library to provide useful functions commonly found on
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libgnt 9999: Toolkit for creating text-mode graphical user interfaces
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
-dev-libs/qrcodegen 1.6.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
+dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/re2 0.2021.08.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
@@ -121,7 +121,7 @@ media-video/pipewire 0.3.33: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.6-r1 2.9999 9999: GTK Instant Messenger client
-net-im/telegram-desktop 2.9.0: Official desktop client for Telegram
+net-im/telegram-desktop 2.9.3: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
