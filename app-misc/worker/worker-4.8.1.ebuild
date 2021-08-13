@@ -3,7 +3,7 @@
 
 EAPI=7
 
-LUA_COMPAT=( lua5-{1,3} )
+LUA_COMPAT=( lua5-{1,3,4} )
 
 inherit autotools lua-single
 
