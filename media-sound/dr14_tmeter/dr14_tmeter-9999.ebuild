@@ -5,6 +5,8 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{9,10} )
 
+DISTUTILS_USE_SETUPTOOLS=no
+
 inherit distutils-r1 git-r3
 
 DESCRIPTION="Compute the DR14 value of the given audio files"
