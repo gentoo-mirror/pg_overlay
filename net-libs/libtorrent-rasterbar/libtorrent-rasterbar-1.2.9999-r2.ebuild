@@ -15,7 +15,7 @@ EGIT_SUBMODULES=()
 
 LICENSE="BSD"
 SLOT="0/10"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS=""
 IUSE="+dht debug python ssl test"
 
 RESTRICT="!test? ( test ) test" # not yet fixed
