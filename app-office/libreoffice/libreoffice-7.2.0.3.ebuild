@@ -469,6 +469,7 @@ src_configure() {
 		--with-system-libs
 		--enable-build-opensymbol
 		--enable-cairo-canvas
+		--enable-gui
 		--enable-largefile
 		--enable-mergelibs
 		--enable-python=system
@@ -494,7 +495,6 @@ src_configure() {
 		--with-system-ucpp
 		--with-tls=nss
 		--with-vendor="Gentoo Foundation"
-		--without-x
 		--without-fonts
 		--without-myspell-dicts
 		--with-help="html"
