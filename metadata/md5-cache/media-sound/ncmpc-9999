@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=>=media-libs/libmpdclient-2.9 sys-libs/ncurses:=[unicode(+)] lirc? ( app-misc/lirc ) pcre? ( dev-libs/libpcre )
 SLOT=0
 _eclasses_=multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	a4dab848a4490e8e48cf0baab3e61bc2	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	97566c1a256d07b00848aa767e38a352	python-utils-r1	6551f7b3f1289e7f2956f3a1632e9d26	meson	5bc3f1b890f90cc00cf1d1dddc10233e	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da	plocale	89c6aac5da68423465e6fd79fb4ad5fb
-_md5_=cbe81a7f50a6c5e00ba2b10adc62f459
+_md5_=45558521318f246e990078a1a6f77f3b
