@@ -32,7 +32,7 @@ src_prepare() {
 		sed -i "s/${PN}_${1}.ts//g" ${PN}.pro || die "removing of ${1}.ts failed"
 	}
 
-	l10n_for_each_disabled_locale_do rem_locale
+	plocale_for_each_disabled_locale rem_locale
 }
 
 src_configure() {

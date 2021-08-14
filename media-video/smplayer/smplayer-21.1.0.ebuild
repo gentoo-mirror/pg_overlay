@@ -87,7 +87,7 @@ src_prepare() {
 	fi
 
 	# Commented out because it gives false positives
-	#l10n_find_plocales_changes "${S}"/src/translations ${PN}_ .ts
+	#plocale_find_changes "${S}"/src/translations ${PN}_ .ts
 
 	# Do not default compress man page
 	sed '/gzip -9.*\.1$/d' -i Makefile || die
