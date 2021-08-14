@@ -40,7 +40,7 @@ pkg_setup() {
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
-		-Dboost-python-module-name='python3.9'
+		-Dboost-python-module-name='python'
 		-DCMAKE_CXX_STANDARD=14
 		-DBUILD_SHARED_LIBS=ON
 		-Dbuild_examples=OFF
@@ -52,7 +52,7 @@ src_configure() {
 		-Dbuild_tests=$(usex test ON OFF)
 	)
 
-	use python && mycmakeargs+=( -Dboost-python-module-name="${EPYTHON}" )
+	#use python && mycmakeargs+=( -Dboost-python-module-name="${EPYTHON}" )
 
 	cmake_src_configure
 }
