@@ -16,7 +16,7 @@ EGIT_SUBMODULES=()
 LICENSE="BSD"
 SLOT="0/10"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
-IUSE="+dht debug gnutls python ssl test"
+IUSE="+dht debug python ssl test"
 
 RESTRICT="!test? ( test ) test" # not yet fixed
 RDEPEND="dev-libs/boost:="
@@ -26,10 +26,7 @@ DEPEND="
 		$(python_gen_any_dep '
 			dev-libs/boost[python,${PYTHON_USEDEP}]')
 	)
-	ssl? (
-		gnutls? ( net-libs/gnutls:= )
-		!gnutls? ( dev-libs/openssl:= )
-	)
+	ssl? ( dev-libs/openssl:= )
 	${DEPEND}
 "
 
@@ -40,19 +37,19 @@ pkg_setup() {
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
-		-Dboost-python-module-name='python'
 		-DCMAKE_CXX_STANDARD=14
 		-DBUILD_SHARED_LIBS=ON
 		-Dbuild_examples=OFF
 		-Ddht=$(usex dht ON OFF)
 		-Dencryption=$(usex ssl ON OFF)
-		-Dgnutls=$(usex gnutls ON OFF)
 		-Dlogging=$(usex debug ON OFF)
+		-Dpython-egg-info=$(usex python ON OFF)
 		-Dpython-bindings=$(usex python ON OFF)
 		-Dbuild_tests=$(usex test ON OFF)
+		-Di2p=OFF
 	)
 
-	#use python && mycmakeargs+=( -Dboost-python-module-name="${EPYTHON}" )
+	use python && mycmakeargs+=( -Dboost-python-module-name=python )
 
 	cmake_src_configure
 }
