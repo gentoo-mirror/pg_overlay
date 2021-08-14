@@ -40,7 +40,7 @@ pkg_setup() {
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
-		-Dboost-python-module-name='boost_python'
+		-Dboost-python-module-name='python3.9'
 		-DCMAKE_CXX_STANDARD=14
 		-DBUILD_SHARED_LIBS=ON
 		-Dbuild_examples=OFF
