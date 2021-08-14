@@ -14,7 +14,7 @@ EGIT_BRANCH="RC_1_2"
 EGIT_SUBMODULES=()
 
 LICENSE="BSD"
-SLOT="0/2.0"
+SLOT="0/10"
 KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
 IUSE="+dht debug gnutls python ssl test"
 
