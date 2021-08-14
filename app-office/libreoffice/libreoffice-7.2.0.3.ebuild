@@ -132,7 +132,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=app-text/libwps-0.4
 	app-text/mythes
 	>=dev-cpp/clucene-2.3.3.4-r2
-	>=dev-cpp/libcmis-0.5.2
 	dev-db/unixODBC
 	>=games-engines/box2d-2.4.1:0
 	dev-lang/perl
@@ -477,7 +476,7 @@ src_configure() {
 		--enable-release-build
 		--disable-breakpad
 		--disable-bundle-mariadb
-		--disable-ccache
+		--disable-cmis
 		--disable-epm
 		--disable-fetch-external
 		--disable-gtk3-kde5
@@ -495,7 +494,7 @@ src_configure() {
 		--with-system-ucpp
 		--with-tls=nss
 		--with-vendor="Gentoo Foundation"
-		--with-x
+		--without-x
 		--without-fonts
 		--without-myspell-dicts
 		--with-help="html"
