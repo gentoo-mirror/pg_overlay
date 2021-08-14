@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{9,10} )
 
-inherit cmake python-any-r1
+inherit git-r3 cmake python-any-r1
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
