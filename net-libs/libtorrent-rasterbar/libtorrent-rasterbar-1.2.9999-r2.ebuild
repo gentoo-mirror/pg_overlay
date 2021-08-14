@@ -3,14 +3,15 @@
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{9,10} )
-inherit cmake python-any-r1
+PYTHON_COMPAT=( python{3_8,3_9} )
+
+inherit cmake flag-o-matic distutils-r1 git-r3
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
-HOMEPAGE="https://libtorrent.org/ https://github.com/arvidn/libtorrent"
+HOMEPAGE="http://libtorrent.org"
 EGIT_REPO_URI="https://github.com/arvidn/libtorrent.git"
-EGIT_BRANCH="RC_2_0"
-#EGIT_SUBMODULES=()
+EGIT_BRANCH="RC_1_2"
+EGIT_SUBMODULES=()
 
 LICENSE="BSD"
 SLOT="0/2.0"
@@ -18,7 +19,7 @@ KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
 IUSE="+dht debug gnutls python ssl test"
 
 RESTRICT="!test? ( test ) test" # not yet fixed
-RDEPEND="dev-libs/boost:="
+RDEPEND="dev-libs/boost:=[threads(+)]"
 DEPEND="
 	python? (
 		${PYTHON_DEPS}
