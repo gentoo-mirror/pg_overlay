@@ -124,7 +124,7 @@ net-im/pidgin 2.14.6-r1 2.9999 9999: GTK Instant Messenger client
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
-net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
+net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 1.2.9999-r2 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/tdlib 1.6.0 9999: Cross-platform library for building Telegram clients
 net-libs/telegram-qt 9999: Telegram binding for Qt
