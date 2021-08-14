@@ -43,6 +43,7 @@ src_configure() {
 		-Ddht=$(usex dht ON OFF)
 		-Dencryption=$(usex ssl ON OFF)
 		-Dlogging=$(usex debug ON OFF)
+		-Dpython-egg-info=$(usex python ON OFF)
 		-Dpython-bindings=$(usex python ON OFF)
 		-Dbuild_tests=$(usex test ON OFF)
 		-Di2p=OFF
