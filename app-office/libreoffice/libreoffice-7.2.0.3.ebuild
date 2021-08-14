@@ -494,7 +494,7 @@ src_configure() {
 		--with-system-ucpp
 		--with-tls=nss
 		--with-vendor="Gentoo Foundation"
-		--without-x
+		--with-x
 		--without-fonts
 		--without-myspell-dicts
 		--with-help="html"
