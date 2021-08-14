@@ -76,8 +76,8 @@ src_prepare() {
 	# Unbundle 3rd party libs
 	rm -r 3rdparty/{ebur128,qtsingleapplication} || die
 
-	l10n_find_plocales_changes "translations" "${PN}_" ".ts"
-	l10n_for_each_disabled_locale_do remove_locale
+	plocale_find_changes "translations" "${PN}_" ".ts"
+	plocale_for_each_disabled_locale remove_locale
 }
 
 src_configure() {

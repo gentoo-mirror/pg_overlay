@@ -113,8 +113,8 @@ src_prepare() {
 		rm -fv src/${PN}ui/txt/*${1}.txt || die "removing of ${1}.txt failed"
 		sed -i "/${1}.txt/d" src/${PN}ui/txt/txt.qrc || die "removing of ${1}.txt failed"
 	}
-	l10n_find_plocales_changes src/${PN}ui/translations "lib${PN}ui_" ".ts"
-	l10n_for_each_disabled_locale_do rm_locale
+	plocale_get_locales src/${PN}ui/translations "lib${PN}ui_" ".ts"
+	plocale_for_each_disabled_locale rm_locale
 
 	cmake_src_prepare
 }

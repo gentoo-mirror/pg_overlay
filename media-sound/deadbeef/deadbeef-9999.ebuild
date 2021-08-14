@@ -66,7 +66,7 @@ BDEPEND="
 "
 
 src_prepare() {
-	if [[ $(l10n_get_locales disabled) =~ "ru" ]] ; then
+	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
 	fi
@@ -75,7 +75,7 @@ src_prepare() {
 		sed -e "/${1}/d" \
 			-i "${S}/po/LINGUAS" || die
 	}
-	l10n_for_each_disabled_locale_do remove_locale
+	plocale_for_each_disabled_locale remove_locale
 
 	default
 

@@ -57,8 +57,8 @@ src_prepare() {
 		rm -vf "po/${1}.po" || die
 		sed -i s/${1}.po// po/Makefile || die
 	}
-	l10n_find_plocales_changes po "" ".po"
-	l10n_for_each_disabled_locale_do rm_locale
+	plocale_find_changes po "" ".po"
+	plocale_for_each_disabled_locale rm_locale
 
 	[[ ${PV} == *9999 ]] && eautoreconf
 }

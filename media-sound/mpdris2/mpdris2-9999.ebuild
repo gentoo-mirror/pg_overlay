@@ -29,11 +29,11 @@ src_prepare() {
 	default
 
 	local loc_dir="po"
-	l10n_find_plocales_changes "${loc_dir}" "" ".po"
+	plocale_find_changes "${loc_dir}" "" ".po"
 	rm_locale() {
 		rm -vf "${loc_dir}/${1}.po" || die
 	}
-	l10n_for_each_disabled_locale_do rm_locale
+	plocale_for_each_disabled_locale rm_locale
 
 	eautoreconf
 }

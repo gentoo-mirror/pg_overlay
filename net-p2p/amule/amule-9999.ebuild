@@ -55,8 +55,8 @@ src_prepare() {
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
 	}
-	l10n_find_plocales_changes po "" ".po"
-	l10n_for_each_disabled_locale_do rem_locale
+	plocale_find_changes po "" ".po"
+	plocale_for_each_disabled_locale rem_locale
 
 	#pushd src/pixmaps/flags_xpm
 	#./makeflags.sh
