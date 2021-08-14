@@ -26,7 +26,7 @@ REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
-	dev-libs/boost:=[threads]
+	dev-libs/boost:=
 	virtual/libiconv
 	examples? ( !net-p2p/mldonkey )
 	python? (
@@ -34,8 +34,7 @@ RDEPEND="
 		dev-libs/boost:=[python,${PYTHON_USEDEP}]
 	)
 	ssl? (
-		!libressl? ( dev-libs/openssl:0= )
-		libressl? ( dev-libs/libressl:= )
+		dev-libs/openssl:0=
 	)
 "
 DEPEND="${RDEPEND}
