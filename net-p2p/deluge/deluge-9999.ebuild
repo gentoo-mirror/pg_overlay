@@ -32,7 +32,7 @@ REQUIRED_USE="
 
 DEPEND="
 	$(python_gen_cond_dep '
-		net-libs/libtorrent-rasterbar[python,${PYTHON_USEDEP}]
+		net-libs/libtorrent-rasterbar[python]
 		dev-python/wheel[${PYTHON_USEDEP}]
 	')
 	dev-util/intltool
@@ -57,7 +57,7 @@ RDEPEND="
 			gnome-base/librsvg
 			libnotify? ( x11-libs/libnotify )
 		)
-		net-libs/libtorrent-rasterbar[python,${PYTHON_USEDEP}]
+		net-libs/libtorrent-rasterbar[python]
 		webinterface? ( dev-python/mako[${PYTHON_USEDEP}] )
 	')"
 
