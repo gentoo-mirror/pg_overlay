@@ -79,11 +79,11 @@ python_prepare_all() {
 	sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
 
 	local loc_dir="${S}/deluge/i18n"
-	l10n_find_plocales_changes "${loc_dir}" "" ".po"
+	plocale_find_changes "${loc_dir}" "" ".po"
 	rm_locale() {
 		rm -vf "${loc_dir}/${1}.po" || die
 	}
-	l10n_for_each_disabled_locale_do rm_locale
+	plocale_for_each_disabled_locale rm_locale
 
 	# Version
 	#sed -i "s/=_version/='1.3.15'/g" setup.py || die
