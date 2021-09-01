@@ -1,4 +1,4 @@
-BDEPEND=|| ( dev-util/ninja dev-util/samurai ) dev-util/cmake
+BDEPEND=|| ( dev-util/ninja dev-util/samurai ) >=dev-util/cmake-3.20
 DEFINED_PHASES=compile configure install prepare setup test
 DEPEND=python? ( || ( dev-lang/python:3.10 dev-lang/python:3.9 ) || ( ( dev-lang/python:3.10 dev-libs/boost[python,python_targets_python3_10(-)] ) ( dev-lang/python:3.9 dev-libs/boost[python,python_targets_python3_9(-)] ) ) ) ssl? ( gnutls? ( net-libs/gnutls:= ) !gnutls? ( dev-libs/openssl:= ) )
 DESCRIPTION=C++ BitTorrent implementation focusing on efficiency and scalability
@@ -11,5 +11,5 @@ LICENSE=BSD
 RDEPEND=dev-libs/boost:=
 RESTRICT=!test? ( test ) test
 SLOT=0/2.0
-_eclasses_=toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	97566c1a256d07b00848aa767e38a352	multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	a4dab848a4490e8e48cf0baab3e61bc2	edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4251d4c84c25f59094fd557e0063a974	eutils	dab5d8ec471d025b79c9e6906bcf3bff	flag-o-matic	4134b5c0fb719b9161d10bdaba9e09e5	xdg-utils	27f9a2f19502b925ac117bd657aa2979	cmake	033395a69048e6f48ef4adfb3702b99c	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	python-utils-r1	08d890890f70fe0096093016e55438d5	python-any-r1	901d9e22c7a848a1196502edf060f330
+_eclasses_=toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	97566c1a256d07b00848aa767e38a352	multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	a4dab848a4490e8e48cf0baab3e61bc2	edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4251d4c84c25f59094fd557e0063a974	eutils	dab5d8ec471d025b79c9e6906bcf3bff	flag-o-matic	4134b5c0fb719b9161d10bdaba9e09e5	xdg-utils	27f9a2f19502b925ac117bd657aa2979	cmake	73ed53eea5e730eadb0b2f9cff2c6d3e	eapi8-dosym	cd7d420bb5be5ee079f27239ce76b8f5	python-utils-r1	08d890890f70fe0096093016e55438d5	python-any-r1	901d9e22c7a848a1196502edf060f330
 _md5_=a2a2c4e362cd55cbdf4cf5182304d1d1
