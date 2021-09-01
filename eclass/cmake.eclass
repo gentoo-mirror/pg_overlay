@@ -9,7 +9,7 @@
 # Maciej Mrozowski <reavertm@gentoo.org>
 # (undisclosed contributors)
 # Original author: Zephyrus (zephyrus@mirach.it)
-# @SUPPORTED_EAPIS: 7
+# @SUPPORTED_EAPIS: 7 8
 # @BLURB: common ebuild functions for cmake-based packages
 # @DESCRIPTION:
 # The cmake eclass makes creating ebuilds for cmake-based packages much easier.
@@ -17,8 +17,8 @@
 # out-of-source builds (default), in-source builds and an implementation of the
 # well-known use_enable function for CMake.
 
-case ${EAPI:-0} in
-	7) ;;
+case ${EAPI} in
+	7|8) ;;
 	*) die "EAPI=${EAPI:-0} is not supported" ;;
 esac
 
@@ -28,26 +28,33 @@ if [[ -z ${_CMAKE_ECLASS} ]]; then
 _CMAKE_ECLASS=1
 
 # @ECLASS-VARIABLE: BUILD_DIR
+# @DEFAULT_UNSET
 # @DESCRIPTION:
 # Build directory where all cmake processed files should be generated.
 # For in-source build it's fixed to ${CMAKE_USE_DIR}.
 # For out-of-source build it can be overridden, by default it uses
-# ${WORKDIR}/${P}_build.
-: ${BUILD_DIR:=${WORKDIR}/${P}_build}
+# ${CMAKE_USE_DIR}_build (in EAPI-7: ${WORKDIR}/${P}_build).
+[[ ${EAPI} == 7 ]] && : ${BUILD_DIR:=${WORKDIR}/${P}_build}
+# EAPI-8: set inside _cmake_check_build_dir
 
 # @ECLASS-VARIABLE: CMAKE_BINARY
 # @DESCRIPTION:
 # Eclass can use different cmake binary than the one provided in by system.
 : ${CMAKE_BINARY:=cmake}
 
+[[ ${EAPI} == 7 ]] && : ${CMAKE_BUILD_TYPE:=Gentoo}
 # @ECLASS-VARIABLE: CMAKE_BUILD_TYPE
 # @DESCRIPTION:
 # Set to override default CMAKE_BUILD_TYPE. Only useful for packages
 # known to make use of "if (CMAKE_BUILD_TYPE MATCHES xxx)".
 # If about to be set - needs to be set before invoking cmake_src_configure.
-# You usually do *NOT* want nor need to set it as it pulls CMake default
-# build-type specific compiler flags overriding make.conf.
-: ${CMAKE_BUILD_TYPE:=Gentoo}
+#
+# The default is RelWithDebInfo as that is least likely to append undesirable
+# flags. However, you may still need to sed CMake files or choose a different
+# build type to achieve desirable results.
+#
+# In EAPI 7, the default was non-standard build type of Gentoo.
+: ${CMAKE_BUILD_TYPE:=RelWithDebInfo}
 
 # @ECLASS-VARIABLE: CMAKE_IN_SOURCE_BUILD
 # @DEFAULT_UNSET
@@ -64,17 +71,29 @@ _CMAKE_ECLASS=1
 : ${CMAKE_MAKEFILE_GENERATOR:=ninja}
 
 # @ECLASS-VARIABLE: CMAKE_REMOVE_MODULES_LIST
+# @PRE_INHERIT
+# @DEFAULT_UNSET
 # @DESCRIPTION:
-# Space-separated list of CMake modules that will be removed in $S during
-# src_prepare, in order to force packages to use the system version.
+# Array of .cmake modules to be removed in ${CMAKE_USE_DIR} (in EAPI-7: ${S})
+# during src_prepare, in order to force packages to use the system version.
+# By default, contains "FindBLAS" and "FindLAPACK".
 # Set to empty to disable removing modules entirely.
-: ${CMAKE_REMOVE_MODULES_LIST:=FindBLAS FindLAPACK}
+if [[ ${CMAKE_REMOVE_MODULES_LIST} ]]; then
+	if [[ ${EAPI} != 7 ]]; then
+		[[ ${CMAKE_REMOVE_MODULES_LIST@a} == *a* ]] ||
+			die "CMAKE_REMOVE_MODULES_LIST must be an array"
+	fi
+else
+	if ! [[ ${CMAKE_REMOVE_MODULES_LIST@a} == *a* && ${#CMAKE_REMOVE_MODULES_LIST[@]} -eq 0 ]]; then
+		CMAKE_REMOVE_MODULES_LIST=( FindBLAS FindLAPACK )
+	fi
+fi
 
 # @ECLASS-VARIABLE: CMAKE_USE_DIR
 # @DESCRIPTION:
 # Sets the directory where we are working with cmake, for example when
 # application uses autotools and only one plugin needs to be done by cmake.
-# By default it uses ${S}.
+# By default it uses current working directory (in EAPI-7: ${S}).
 
 # @ECLASS-VARIABLE: CMAKE_VERBOSE
 # @DESCRIPTION:
@@ -100,9 +119,9 @@ _CMAKE_ECLASS=1
 # @USER_VARIABLE
 # @DEFAULT_UNSET
 # @DESCRIPTION:
-# After running cmake_src_prepare, sets ${S} to read-only. This is
-# a user flag and should under _no circumstances_ be set in the ebuild.
-# Helps in improving QA of build systems that write to source tree.
+# After running cmake_src_prepare, sets ${CMAKE_USE_DIR} (in EAPI-7: ${S}) to
+# read-only. This is a user flag and should under _no circumstances_ be set in
+# the ebuild. Helps in improving QA of build systems that write to source tree.
 
 inherit toolchain-funcs ninja-utils flag-o-matic multiprocessing xdg-utils
 
@@ -127,7 +146,7 @@ case ${CMAKE_MAKEFILE_GENERATOR} in
 esac
 
 if [[ ${PN} != cmake ]]; then
-	BDEPEND+=" dev-util/cmake"
+	BDEPEND+=" >=dev-util/cmake-3.20"
 fi
 
 # @FUNCTION: cmake_run_in
@@ -264,14 +283,22 @@ cmake-utils_useno() { _cmake_banned_func "" "$@" ; }
 # @DESCRIPTION:
 # Determine using IN or OUT source build
 _cmake_check_build_dir() {
-	: ${CMAKE_USE_DIR:=${S}}
+	if [[ ${EAPI} == 7 ]]; then
+		: ${CMAKE_USE_DIR:=${S}}
+	else
+		: ${CMAKE_USE_DIR:=${PWD}}
+	fi
 	if [[ -n ${CMAKE_IN_SOURCE_BUILD} ]]; then
 		# we build in source dir
 		BUILD_DIR="${CMAKE_USE_DIR}"
+	else
+		: ${BUILD_DIR:=${CMAKE_USE_DIR}_build}
 	fi
 
+	einfo "Source directory (CMAKE_USE_DIR): \"${CMAKE_USE_DIR}\""
+	einfo "Build directory  (BUILD_DIR):     \"${BUILD_DIR}\""
+
 	mkdir -p "${BUILD_DIR}" || die
-	einfo "Working in BUILD_DIR: \"$BUILD_DIR\""
 }
 
 # @FUNCTION: _cmake_modify-cmakelists
@@ -320,12 +347,14 @@ _cmake_modify-cmakelists() {
 cmake_src_prepare() {
 	debug-print-function ${FUNCNAME} "$@"
 
-	# FIXME: workaround from cmake-utils; use current working directory instead, bug #704524
-	# esp. test with 'special' pkgs like: app-arch/brotli, media-gfx/gmic, net-libs/quiche
-	pushd "${S}" > /dev/null || die
+	if [[ ${EAPI} == 7 ]]; then
+		pushd "${S}" > /dev/null || die # workaround from cmake-utils
+		# in EAPI-8, we use current working directory instead, bug #704524
+		# esp. test with 'special' pkgs like: app-arch/brotli, media-gfx/gmic, net-libs/quiche
+	fi
+	_cmake_check_build_dir
 
 	default_src_prepare
-	_cmake_check_build_dir
 
 	# check if CMakeLists.txt exist and if no then die
 	if [[ ! -e ${CMAKE_USE_DIR}/CMakeLists.txt ]] ; then
@@ -343,25 +372,36 @@ cmake_src_prepare() {
 	fi
 
 	local modules_list
-	if [[ $(declare -p CMAKE_REMOVE_MODULES_LIST) == "declare -a"* ]]; then
-		modules_list=( "${CMAKE_REMOVE_MODULES_LIST[@]}" )
-	else
+	if [[ ${EAPI} == 7 && $(declare -p CMAKE_REMOVE_MODULES_LIST) != "declare -a"* ]]; then
 		modules_list=( ${CMAKE_REMOVE_MODULES_LIST} )
+	else
+		modules_list=( "${CMAKE_REMOVE_MODULES_LIST[@]}" )
 	fi
 
 	local name
 	for name in "${modules_list[@]}" ; do
-		find "${S}" -name ${name}.cmake -exec rm -v {} + || die
+		if [[ ${EAPI} == 7 ]]; then
+			find "${S}" -name ${name}.cmake -exec rm -v {} + || die
+		else
+			find -name "${name}.cmake" -exec rm -v {} + || die
+		fi
 	done
 
 	# Remove dangerous things.
 	_cmake_modify-cmakelists
 
-	popd > /dev/null || die
+	if [[ ${EAPI} == 7 ]]; then
+		popd > /dev/null || die
+	fi
 
-	# make ${S} read-only in order to detect broken build-systems
+	# Make ${CMAKE_USE_DIR} (in EAPI-7: ${S}) read-only in order to detect
+	# broken build systems.
 	if [[ ${CMAKE_QA_SRC_DIR_READONLY} && ! ${CMAKE_IN_SOURCE_BUILD} ]]; then
-		chmod -R a-w "${S}"
+		if [[ ${EAPI} == 7 ]]; then
+			chmod -R a-w "${S}"
+		else
+			chmod -R a-w "${CMAKE_USE_DIR}"
+		fi
 	fi
 
 	_CMAKE_SRC_PREPARE_HAS_RUN=1
@@ -500,6 +540,11 @@ cmake_src_configure() {
 
 	if [[ "${NOCOLOR}" = true || "${NOCOLOR}" = yes ]]; then
 		echo 'set(CMAKE_COLOR_MAKEFILE OFF CACHE BOOL "pretty colors during make" FORCE)' >> "${common_config}" || die
+	fi
+
+	# See bug 735820
+	if [[ ${EAPI} != 7 ]]; then
+		echo 'set(CMAKE_INSTALL_ALWAYS 1)' >> "${common_config}" || die
 	fi
 
 	# Wipe the default optimization flags out of CMake
@@ -657,9 +702,15 @@ cmake_src_install() {
 		die "died running ${CMAKE_MAKEFILE_GENERATOR} install"
 	popd > /dev/null || die
 
-	pushd "${S}" > /dev/null || die
-	einstalldocs
-	popd > /dev/null || die
+	if [[ ${EAPI} == 7 ]]; then
+		pushd "${S}" > /dev/null || die
+		einstalldocs
+		popd > /dev/null || die
+	else
+		pushd "${CMAKE_USE_DIR}" > /dev/null || die
+		einstalldocs
+		popd > /dev/null || die
+	fi
 }
 
 fi
