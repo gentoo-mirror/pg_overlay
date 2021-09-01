@@ -15,8 +15,8 @@ app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.21.5.25: Python scripts to manipulate trash cans via the command line
 app-misc/worker 4.8.1: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.2.0.3: A full office productivity suite
-app-office/libreoffice-l10n 7.2.0.3: Translations for the Libreoffice suite
+app-office/libreoffice 7.2.0.4: A full office productivity suite
+app-office/libreoffice-l10n 7.2.0.4: Translations for the Libreoffice suite
 app-portage/eix 0.35.2: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
@@ -117,7 +117,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-media-video/pipewire 0.3.33: Multimedia processing graphs
+media-video/pipewire 0.3.34: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.6-r1 2.9999 9999: GTK Instant Messenger client
@@ -172,7 +172,6 @@ virtual/perl-libnet 3.130.0: Virtual for libnet
 virtual/perl-version 0.992.900: Virtual for version
 www-client/firefox 91.0: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
-x11-base/xorg-proto 2021.4.99.2: X.Org combined protocol headers
 x11-base/xorg-server 1.20.13-r1: X.Org X servers
 x11-base/xwayland 21.1.2-r2: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
