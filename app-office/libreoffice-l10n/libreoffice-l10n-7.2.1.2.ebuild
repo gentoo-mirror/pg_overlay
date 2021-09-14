@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit rpm
 
@@ -12,11 +12,10 @@ MY_PV="${MY_PV/_beta/.beta}"
 
 DESCRIPTION="Translations for the Libreoffice suite"
 HOMEPAGE="https://www.libreoffice.org"
-BASE_SRC_URI_TESTING="
-	https://download.documentfoundation.org/${PN/-l10n/}/testing/${BASE_PV}/rpm
-	https://downloadarchive.documentfoundation.org/libreoffice/old/${MY_PV}/rpm
-"
-BASE_SRC_URI_STABLE="https://download.documentfoundation.org/${PN/-l10n/}/stable/${BASE_PV}/rpm"
+BASE_SRC_URI_TESTING="https://download.documentfoundation.org/${PN/-l10n/}/testing/${BASE_PV}/rpm
+	https://downloadarchive.documentfoundation.org/libreoffice/old/${MY_PV}/rpm"
+BASE_SRC_URI_STABLE="https://download.documentfoundation.org/${PN/-l10n/}/stable/${BASE_PV}/rpm
+	https://downloadarchive.documentfoundation.org/libreoffice/old/${MY_PV}/rpm"
 
 LICENSE="|| ( LGPL-3 MPL-1.1 )"
 SLOT="0"
