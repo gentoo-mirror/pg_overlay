@@ -371,7 +371,7 @@ src_configure() {
 		rustfmt = "${rust_stage0_root}/bin/rustfmt"
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
-		submodules = true
+		submodules = false
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
