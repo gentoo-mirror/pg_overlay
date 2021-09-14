@@ -1017,13 +1017,13 @@ src_configure() {
 	mozconfig_add_options_ac '' --without-mozilla-api-keyfile
 	mozconfig_add_options_ac '' --without-pocket-api-keyfile
 
-	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=
-	mozconfig_add_options_ac '' MOZ_DEVICES=
-	mozconfig_add_options_ac '' MOZ_LOGGING=
-	mozconfig_add_options_ac '' MOZ_PAY=
-	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=
-	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=
-	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
+	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=0
+	mozconfig_add_options_ac '' MOZ_DEVICES=0
+	mozconfig_add_options_ac '' MOZ_LOGGING=0
+	mozconfig_add_options_ac '' MOZ_PAY=0
+	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
+	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
+	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=0
 	mozconfig_add_options_ac '' MOZ_X11=0
 	mozconfig_add_options_ac '' USE_X11=0
 
@@ -1034,13 +1034,13 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-strip
 	mozconfig_add_options_ac '' --enable-webrtc
 
-	echo "export MOZ_DATA_REPORTING=" >> "${S}"/.mozconfig
-	echo "export MOZ_DEVICES=" >> "${S}"/.mozconfig
-	echo "export MOZ_LOGGING=" >> "${S}"/.mozconfig
-	echo "export MOZ_PAY=" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
-	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
+	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
+	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	echo "export MOZ_TELEMETRY_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_X11=0" >> "${S}"/.mozconfig
 	echo "export USE_X11=0" >> "${S}"/.mozconfig
 	#######
