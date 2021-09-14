@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-91-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-92-patches-01.tar.xz"
 
 LLVM_MAX_SLOT=12
 
@@ -99,7 +99,7 @@ BDEPEND="${PYTHON_DEPS}
 	x86? ( >=dev-lang/nasm-2.13 )"
 
 CDEPEND="
-	>=dev-libs/nss-3.68
+	>=dev-libs/nss-3.69
 	>=dev-libs/nspr-4.32
 	dev-libs/atk
 	dev-libs/expat
@@ -124,7 +124,6 @@ CDEPEND="
 	x11-libs/libXext
 	x11-libs/libXfixes
 	x11-libs/libXrender
-	x11-libs/libXt
 	dbus? (
 		sys-apps/dbus
 		dev-libs/dbus-glib
@@ -138,7 +137,7 @@ CDEPEND="
 		>=media-libs/harfbuzz-2.8.1:0=
 		>=media-gfx/graphite2-1.3.13
 	)
-	system-icu? ( >=dev-libs/icu-67.1:= )
+	system-icu? ( >=dev-libs/icu-69.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1 )
 	system-libevent? ( >=dev-libs/libevent-2.0:0=[threads] )
 	system-libvpx? ( >=media-libs/libvpx-1.8.2:0=[postproc] )
@@ -600,7 +599,6 @@ src_prepare() {
 		fi
 	done
 	#######
-	cp "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/run-wayland-compositor "${S}"
 
 	xdg_src_prepare
 }
@@ -1196,7 +1194,7 @@ src_install() {
 
 	# Install menu
 	local app_name="Mozilla ${MOZ_PN^}"
-	local desktop_file="${FILESDIR}/icon/${PN}-r2.desktop"
+	local desktop_file="${FILESDIR}/icon/${PN}-r3.desktop"
 	local desktop_filename="${PN}.desktop"
 	local exec_command="${PN}"
 	local icon="${PN}"

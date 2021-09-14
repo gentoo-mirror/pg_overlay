@@ -1,0 +1,5 @@
+fix-clang-as.patch
+fix-linux-header.patch
+no-fribidi.patch
+no-x11.patch
+99-disable-x11-in-webrtc.patch
