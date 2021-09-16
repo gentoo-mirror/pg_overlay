@@ -19,12 +19,12 @@ KEYWORDS="~amd64 ~ppc64 ~x86"
 IUSE="doc test"
 
 RDEPEND="
-	>=dev-util/glslang-11.4.0[${MULTILIB_USEDEP}]
-	>=dev-util/spirv-tools-2021.1[${MULTILIB_USEDEP}]
+	>=dev-util/glslang-11.6.0[${MULTILIB_USEDEP}]
+	>=dev-util/spirv-tools-20210825[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	>=dev-util/spirv-headers-1.5.4.2_pre20210526
+	>=dev-util/spirv-headers-20210817
 	doc? ( dev-ruby/asciidoctor )
 	test? (
 		dev-cpp/gtest
