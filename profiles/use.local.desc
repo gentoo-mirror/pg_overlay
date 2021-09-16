@@ -66,11 +66,6 @@ dev-qt/qtwebkit:multimedia - Enable HTML5 audio/video support via dev-qt/qtmulti
 dev-qt/qtwebkit:orientation - Enable device orientation detection via dev-qt/qtsensors
 dev-qt/qtwebkit:printsupport - Enable printing via dev-qt/qtprintsupport
 dev-qt/qtwebkit:qml - Build QML/QtQuick bindings
-dev-util/google-perftools:debug - Build a set of libraries with debug support (so-called debugalloc). These are available by default but are not needed unless you're actually developing using tcmalloc.
-dev-util/google-perftools:largepages - Use (experimental) larger pages for tcmalloc, this increases memory usage, but should speed up the allocation/free operations.
-dev-util/google-perftools:largepages64k - Use (experimental) 64K pages for tcmalloc, this increases memory usage, but should speed up the allocation/free operations.
-dev-util/google-perftools:minimal - Only build the tcmalloc_minimal library, ignoring the heap checker and the profilers.
-dev-util/google-perftools:optimisememory - To build libtcmalloc with smaller internal caches.
 dev-util/sccache:azure - Enable Azure Blob Storage support
 dev-util/sccache:dist-client - Enables distributed support in the sccache client
 dev-util/sccache:dist-server - Enables the sccache-dist binary
@@ -105,6 +100,10 @@ media-libs/gst-plugins-base:pango - Enable pango GStreamer plugin
 media-libs/gst-plugins-base:wayland - Enable Wayland EGL windowing system support (requires egl and at least one of gles2 or opengl)
 media-libs/gstreamer:orc - Disable some PaX memory protections to allow plugins that use dev-lang/orc for runtime optimization to be used on hardened PaX systems
 media-libs/gstreamer:unwind - Enable sys-libs/libunwind usage for better backtrace support in leaks tracer module
+media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
+media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
+media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
+media-libs/libplacebo:vulkan - Add support for the vulkan graphics API
 media-libs/libsdl2:fcitx4 - Enable support for app-i18n/fcitx 4
 media-libs/libsdl2:gles1 - include OpenGL ES 1.0 support
 media-libs/libsdl2:gles2 - include OpenGL ES 2.0 support
