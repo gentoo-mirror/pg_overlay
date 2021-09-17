@@ -40,8 +40,6 @@ BDEPEND="
 	dev-lang/sassc
 "
 
-PATCHES=( "${FILESDIR}/${PN}-5.22.90-drop-gtk2-dep.patch" )
-
 src_configure() {
 	local mycmakeargs=(
 		-DDATA_INSTALL_DIR="${EPREFIX}/usr/share"

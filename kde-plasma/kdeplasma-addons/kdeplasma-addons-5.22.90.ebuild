@@ -55,8 +55,6 @@ RDEPEND="${DEPEND}
 	>=kde-plasma/plasma-workspace-${PVCUT}:5
 "
 
-PATCHES=( "${FILESDIR}/${PN}-5.19.3-kross-optional.patch" ) # downstream patch
-
 src_configure() {
 	local mycmakeargs=(
 		$(cmake_use_find_package comic KF5Kross)
