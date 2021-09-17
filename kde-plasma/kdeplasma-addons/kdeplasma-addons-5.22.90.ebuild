@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=9999
+KFMIN=5.86.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -14,7 +14,7 @@ DESCRIPTION="Extra Plasma applets and engines"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="share webengine"
 
 RESTRICT="test" # bug 727846

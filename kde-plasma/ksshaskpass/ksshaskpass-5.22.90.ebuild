@@ -3,7 +3,7 @@
 
 EAPI=8
 
-KFMIN=9999
+KFMIN=5.86.0
 QTMIN=5.15.2
 inherit ecm kde.org
 
@@ -12,7 +12,7 @@ HOMEPAGE+=" https://invent.kde.org/plasma/ksshaskpass"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="

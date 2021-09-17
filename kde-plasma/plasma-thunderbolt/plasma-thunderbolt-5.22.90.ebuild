@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_TEST="true"
-KFMIN=9999
+KFMIN=5.86.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 inherit ecm kde.org
@@ -14,7 +14,7 @@ HOMEPAGE="https://invent.kde.org/plasma/plasma-thunderbolt"
 
 LICENSE="|| ( GPL-2 GPL-3+ )"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 # tests require DBus

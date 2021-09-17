@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_QTHELP="true"
 ECM_TEST="forceoptional"
-KFMIN=9999
+KFMIN=5.86.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -15,7 +15,7 @@ DESCRIPTION="Plasma screen management library"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5/7"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 # requires running session

@@ -3,7 +3,7 @@
 
 EAPI=8
 
-KFMIN=9999
+KFMIN=5.86.0
 PVCUT=$(ver_cut 1-3)
 inherit cmake kde.org
 
@@ -11,7 +11,7 @@ DESCRIPTION="Breeze theme for Plymouth"
 
 LICENSE="GPL-2+ GPL-3+"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 BDEPEND=">=kde-frameworks/extra-cmake-modules-${KFMIN}:5"

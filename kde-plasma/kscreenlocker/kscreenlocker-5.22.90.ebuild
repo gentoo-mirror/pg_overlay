@@ -4,7 +4,7 @@
 EAPI=7
 
 ECM_TEST="forceoptional"
-KFMIN=9999
+KFMIN=5.86.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -14,7 +14,7 @@ DESCRIPTION="Library and components for secure lock screen architecture"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="+pam"
 
 RESTRICT+=" test"

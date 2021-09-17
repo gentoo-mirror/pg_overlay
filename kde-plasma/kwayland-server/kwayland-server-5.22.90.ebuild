@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_QTHELP="true"
 ECM_TEST="true"
-KFMIN=9999
+KFMIN=5.86.0
 PVCUT=$(ver_cut 1-2)
 QTMIN=5.15.2
 inherit ecm kde.org
@@ -15,7 +15,7 @@ HOMEPAGE="https://invent.kde.org/plasma/kwayland-server"
 
 LICENSE="LGPL-2.1"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 # All failing, I guess we need a virtual wayland server

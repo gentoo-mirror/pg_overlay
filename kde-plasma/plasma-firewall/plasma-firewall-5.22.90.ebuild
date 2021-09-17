@@ -4,7 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
-KFMIN=9999
+KFMIN=5.86.0
 QTMIN=5.15.2
 inherit ecm kde.org python-single-r1
 
@@ -13,7 +13,7 @@ HOMEPAGE="https://invent.kde.org/network/plasma-firewall"
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="firewalld +ufw"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE} || ( firewalld ufw )"
