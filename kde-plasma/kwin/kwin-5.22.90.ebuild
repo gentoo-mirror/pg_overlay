@@ -104,7 +104,6 @@ PDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${P}-libglvnd-1.3.4.patch" # KDE-bug 440372, bug 810511
 	"${FILESDIR}/${P}-32bit.patch" # bug 813228
 )
 
