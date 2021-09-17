@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -34,8 +34,8 @@ RDEPEND="
 	>=dev-libs/glib-2.16
 	>=dev-libs/libxml2-2.6.18
 	ncurses? (
-		>=dev-libs/libgnt-2.14.0
-		sys-libs/ncurses:0=[unicode]
+		>=dev-libs/libgnt-$(ver_cut 1-2)
+		sys-libs/ncurses:=[unicode(+)]
 		dbus? ( ${PYTHON_DEPS} )
 		python? ( ${PYTHON_DEPS} )
 	)
@@ -58,7 +58,7 @@ RDEPEND="
 		>=dev-libs/dbus-glib-0.71
 		>=sys-apps/dbus-0.90
 		$(python_gen_cond_dep '
-			dev-python/dbus-python[${PYTHON_MULTI_USEDEP}]
+			dev-python/dbus-python[${PYTHON_USEDEP}]
 		')
 	)
 	perl? ( >=dev-lang/perl-5.16:= )
@@ -74,7 +74,6 @@ RDEPEND="
 	sasl? ( dev-libs/cyrus-sasl:2 )
 	networkmanager? ( net-misc/networkmanager )
 	idn? ( net-dns/libidn:= )
-	!<x11-plugins/pidgin-facebookchat-1.69-r1
 "
 
 # We want nls in case gtk is enabled, bug #
@@ -104,7 +103,7 @@ REQUIRED_USE="
 "
 
 # Enable Default protocols
-DYNAMIC_PRPLS="irc,jabber,oscar,simple"
+DYNAMIC_PRPLS="irc,jabber,simple"
 
 # List of plugins
 #   app-accessibility/pidgin-festival
@@ -138,15 +137,7 @@ DYNAMIC_PRPLS="irc,jabber,oscar,simple"
 #	x11-plugins/pidgimpd
 
 PATCHES=(
-	#"${WORKDIR}/${PN}-eds-3.6.patch"
-	"${FILESDIR}/${PN}-2.10.9-fix-gtkmedia.patch"
-	"${FILESDIR}/${PN}-2.10.10-eds-3.6-configure.ac.patch"
-	"${FILESDIR}/${PN}-2.10.11-tinfo.patch"
 	"${DISTDIR}/${PN}-2.10.9-irc_join_sleep.patch" # 577286
-	"${FILESDIR}/${PN}-2.13.0-disable-one-jid-test.patch" # 593338
-	"${FILESDIR}/${PN}-2.13.0-metainfo.patch"
-	"${FILESDIR}/${PN}-nonblock-common.patch"
-	#"${FILESDIR}/configure.patch" #FreeBSD
 )
 
 src_unpack() {
@@ -176,7 +167,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	default
+	xdg_src_prepare
 	eautoreconf
 }
 
@@ -194,6 +185,7 @@ src_configure() {
 
 	local myconf=(
 		--disable-mono
+		--disable-static
 		--with-dynamic-prpls="${DYNAMIC_PRPLS}"
 		--with-system-ssl-certs="${EPREFIX}/etc/ssl/certs/"
 		--x-includes="${EPREFIX}"/usr/include/X11
@@ -239,9 +231,9 @@ src_configure() {
 	fi
 
 	if use dbus || { use ncurses && use python ; } ; then
-		myconf+=( --with-python=${PYTHON} )
+		myconf+=( --with-python3=${PYTHON} )
 	else
-		myconf+=( --without-python )
+		myconf+=( --without-python3 )
 	fi
 
 	econf "${myconf[@]}"
@@ -254,10 +246,10 @@ src_install() {
 
 	if use gtk ; then
 		# Fix tray paths for e16 (x11-wm/enlightenment) and other
-		# implementations that are not complient with new hicolor theme yet, #323355
-		local pixmapdir
-		for d in 16 22 32 48; do
-			pixmapdir=${ED}/usr/share/pixmaps/pidgin/tray/hicolor/${d}x${d}/actions
+		# implementations that are not compliant with new hicolor theme yet, #323355
+		local d f pixmapdir
+		for d in 16 22 32 48 ; do
+			pixmapdir="${ED}/usr/share/pixmaps/pidgin/tray/hicolor/${d}x${d}/actions"
 			mkdir "${pixmapdir}" || die
 			pushd "${pixmapdir}" >/dev/null || die
 			for f in ../status/*; do
@@ -268,8 +260,8 @@ src_install() {
 	fi
 	use perl && perl_delete_localpod
 
-	if use python && use dbus ; then
-		python_fix_shebang "${ED}"
+	use dbus && python_fix_shebang "${ED}"
+	if use python || use dbus ; then
 		python_optimize
 	fi
 
@@ -281,6 +273,7 @@ src_install() {
 
 src_test() {
 	# make default build logs slightly more useful
+	local -x GST_PLUGIN_SYSTEM_PATH_1_0=
 	emake check VERBOSE=1
 }
 
