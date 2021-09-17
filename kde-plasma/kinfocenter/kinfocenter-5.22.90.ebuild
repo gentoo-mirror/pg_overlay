@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 inherit ecm kde.org optfeature
@@ -15,7 +15,7 @@ SRC_URI+=" https://www.gentoo.org/assets/img/logo/gentoo-3d-small.png -> glogo-s
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE="gles2-only ieee1394 +opengl +pci usb wayland +X"
 
 REQUIRED_USE="opengl? ( X ) wayland? ( || ( opengl gles2-only ) )"
@@ -92,8 +92,6 @@ pkg_postinst() {
 	if [[ -z "${REPLACING_VERSIONS}" ]]; then
 		optfeature "NFS information module" net-fs/nfs-utils
 		optfeature "Samba status information module" net-fs/samba
-		optfeature "Vulkan graphics API information module" dev-util/vulkan-tools
-		optfeature "advanced CPU information module" sys-apps/util-linux
 	fi
 	ecm_pkg_postinst
 }

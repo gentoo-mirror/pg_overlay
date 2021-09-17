@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="true"
-KFMIN=5.86.0
+KFMIN=5.82.0
 QTMIN=5.15.2
 inherit ecm kde.org
 
@@ -13,7 +13,7 @@ HOMEPAGE="https://invent.kde.org/plasma/plasma-disks"
 
 LICENSE="|| ( GPL-3 GPL-2 )"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE=""
 
 DEPEND="

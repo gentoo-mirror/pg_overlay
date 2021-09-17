@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_TEST="true"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 inherit ecm kde.org
@@ -13,7 +13,7 @@ DESCRIPTION="KDE Plasma applet for NetworkManager"
 
 LICENSE="GPL-2 LGPL-2.1"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE="modemmanager openconnect teamd"
 
 DEPEND="
@@ -59,21 +59,12 @@ RDEPEND="${DEPEND}
 	>=kde-frameworks/kirigami-${KFMIN}:5
 	>=kde-plasma/kde-cli-tools-${PVCUT}:5
 "
-BDEPEND="virtual/pkgconfig"
-
-src_prepare() {
-	ecm_src_prepare
-
-	# TODO: try to get a build switch upstreamed
-	if ! use openconnect; then
-		sed -e "s/^pkg_check_modules.*openconnect/#&/" -i CMakeLists.txt || die
-	fi
-}
 
 src_configure() {
 	local mycmakeargs=(
 		-DDISABLE_MODEMMANAGER_SUPPORT=$(usex !modemmanager)
 		$(cmake_use_find_package modemmanager KF5ModemManagerQt)
+		$(cmake_use_find_package openconnect OpenConnect)
 	)
 
 	ecm_src_configure

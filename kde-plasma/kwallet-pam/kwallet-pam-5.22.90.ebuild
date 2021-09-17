@@ -3,7 +3,7 @@
 
 EAPI=8
 
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 inherit ecm kde.org
 
@@ -11,7 +11,7 @@ DESCRIPTION="PAM module to not enter KWallet password again after login"
 
 LICENSE="LGPL-2.1"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE=""
 
 DEPEND="

@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_DESIGNERPLUGIN="true"
 ECM_TEST="true"
-KFMIN=5.86.0
+KFMIN=5.82.0
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
@@ -14,7 +14,7 @@ DESCRIPTION="Task management and system monitoring library"
 
 LICENSE="LGPL-2+"
 SLOT="5/9"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE="webengine X"
 
 COMMON_DEPEND="
@@ -57,8 +57,6 @@ RDEPEND="${COMMON_DEPEND}
 	!<kde-plasma/ksysguard-5.21.90:5
 	!<kde-plasma/plasma-workspace-5.18.80:5
 "
-
-PATCHES=( "${FILESDIR}/${PN}-5.22.80-no-detailed-mem-message.patch" )
 
 src_configure() {
 	local mycmakeargs=(

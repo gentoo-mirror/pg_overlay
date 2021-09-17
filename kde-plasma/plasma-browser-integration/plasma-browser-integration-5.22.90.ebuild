@@ -3,7 +3,7 @@
 
 EAPI=8
 
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 inherit ecm kde.org
@@ -13,7 +13,7 @@ HOMEPAGE+=" https://community.kde.org/Plasma/Browser_Integration"
 
 LICENSE="GPL-3+"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE=""
 
 DEPEND="
