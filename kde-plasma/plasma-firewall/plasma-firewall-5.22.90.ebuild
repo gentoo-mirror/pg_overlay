@@ -4,7 +4,7 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
-KFMIN=5.82.0
+KFMIN=5.86.0
 QTMIN=5.15.2
 inherit ecm kde.org python-single-r1
 
