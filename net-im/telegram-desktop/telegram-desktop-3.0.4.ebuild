@@ -21,10 +21,9 @@ REQUIRED_USE="
 	spell? (
 		^^ ( enchant hunspell )
 	)
-	webkit? ( gtk )
 	gtk? ( dbus )
+	webkit? ( dbus )
 "
-# Future: webkit doesn't depend on gtk anymore (version: >2.9.3)
 
 RDEPEND="
 	!net-im/telegram-desktop-bin
