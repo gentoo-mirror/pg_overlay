@@ -3,7 +3,7 @@
 
 EAPI=8
 
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -13,7 +13,7 @@ DESCRIPTION="Qt Platform Theme integration plugins for the Plasma workspaces"
 
 LICENSE="LGPL-2+"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE=""
 
 # requires running kde environment

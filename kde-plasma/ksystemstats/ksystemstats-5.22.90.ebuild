@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_HANDBOOK="forceoptional"
 ECM_TEST="forceoptional"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -15,7 +15,7 @@ DESCRIPTION="Plugin-based system monitoring daemon"
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE="lm-sensors networkmanager"
 
 DEPEND="

@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_HANDBOOK="optional"
 ECM_TEST="optional"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -15,7 +15,7 @@ DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE="accessibility caps gles2-only multimedia plasma screencast"
 
 RESTRICT="test"
@@ -41,6 +41,7 @@ COMMON_DEPEND="
 	>=kde-frameworks/ki18n-${KFMIN}:5
 	>=kde-frameworks/kiconthemes-${KFMIN}:5
 	>=kde-frameworks/kidletime-${KFMIN}:5=
+	>=kde-frameworks/kio-${KFMIN}:5
 	>=kde-frameworks/knewstuff-${KFMIN}:5
 	>=kde-frameworks/knotifications-${KFMIN}:5
 	>=kde-frameworks/kpackage-${KFMIN}:5
@@ -59,7 +60,7 @@ COMMON_DEPEND="
 	media-libs/freetype
 	media-libs/lcms:2
 	media-libs/libepoxy
-	>=media-libs/mesa-21.1[egl(+),gbm(+),wayland,X]
+	media-libs/mesa[egl(+),gbm(+),wayland,X(+)]
 	virtual/libudev:=
 	x11-libs/libX11
 	x11-libs/libXi

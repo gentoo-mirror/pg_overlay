@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -14,8 +14,8 @@ DESCRIPTION="Extra Plasma applets and engines"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="5"
-KEYWORDS="~amd64"
-IUSE="share webengine"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
+IUSE="comic share webengine"
 
 RESTRICT="test" # bug 727846
 
@@ -45,6 +45,7 @@ DEPEND="
 	>=kde-frameworks/kxmlgui-${KFMIN}:5
 	>=kde-frameworks/plasma-${KFMIN}:5
 	>=kde-frameworks/sonnet-${KFMIN}:5
+	comic? ( >=kde-frameworks/kross-${KFMIN}:5 )
 	share? ( >=kde-frameworks/purpose-${KFMIN}:5 )
 	webengine? ( >=dev-qt/qtwebengine-${QTMIN}:5 )
 "
@@ -54,8 +55,11 @@ RDEPEND="${DEPEND}
 	>=kde-plasma/plasma-workspace-${PVCUT}:5
 "
 
+PATCHES=( "${FILESDIR}/${PN}-5.19.3-kross-optional.patch" ) # downstream patch
+
 src_configure() {
 	local mycmakeargs=(
+		$(cmake_use_find_package comic KF5Kross)
 		$(cmake_use_find_package share KF5Purpose)
 		$(cmake_use_find_package webengine Qt5WebEngine)
 	)

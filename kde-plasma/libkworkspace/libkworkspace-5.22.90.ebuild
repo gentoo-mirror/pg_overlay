@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_TEST="true"
 KDE_ORG_NAME="plasma-workspace"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 inherit ecm kde.org
@@ -14,7 +14,7 @@ DESCRIPTION="Workspace library to interact with the Plasma session manager"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE=""
 
 RDEPEND="
@@ -45,7 +45,7 @@ src_prepare() {
 		cp -a ../po ./ || die
 	fi
 
-	eapply "${FILESDIR}/${PN}-5.22.80-standalone.patch"
+	eapply "${FILESDIR}/${PN}-5.21.90-standalone.patch"
 	sed -e "/set/s/GENTOO_PV/$(ver_cut 1-3)/" -i CMakeLists.txt || die
 	cat >> CMakeLists.txt <<- _EOF_ || die
 		ki18n_install(po)

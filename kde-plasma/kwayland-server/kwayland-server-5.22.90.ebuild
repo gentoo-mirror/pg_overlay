@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_QTHELP="true"
 ECM_TEST="true"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-2)
 QTMIN=5.15.2
 inherit ecm kde.org
@@ -15,7 +15,7 @@ HOMEPAGE="https://invent.kde.org/plasma/kwayland-server"
 
 LICENSE="LGPL-2.1"
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE=""
 
 # All failing, I guess we need a virtual wayland server
@@ -31,6 +31,6 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	>=dev-libs/plasma-wayland-protocols-1.3.0
-	>=dev-libs/wayland-protocols-1.21
+	>=dev-libs/wayland-protocols-1.18
 "
 BDEPEND="dev-util/wayland-scanner"

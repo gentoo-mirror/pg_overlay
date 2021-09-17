@@ -4,7 +4,7 @@
 EAPI=8
 
 ECM_TEST="true"
-KFMIN=5.86.0
+KFMIN=5.82.0
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
@@ -14,7 +14,7 @@ HOMEPAGE="https://userbase.kde.org/Discover"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE="+firmware flatpak telemetry"
 
 # libmarkdown (app-text/discount) only used in PackageKitBackend
@@ -46,7 +46,7 @@ DEPEND="
 	>=kde-frameworks/kxmlgui-${KFMIN}:5
 	firmware? ( >=sys-apps/fwupd-1.5.0 )
 	flatpak? (
-		>=dev-libs/appstream-0.14.4:=
+		>=dev-libs/appstream-0.12.8:=
 		sys-apps/flatpak
 	)
 	telemetry? ( dev-libs/kuserfeedback:5 )
@@ -56,7 +56,10 @@ RDEPEND="${DEPEND}
 	>=kde-frameworks/kirigami-${KFMIN}:5
 "
 
-PATCHES=( "${FILESDIR}/${PN}-5.21.90-tests-optional.patch" )
+PATCHES=(
+	"${FILESDIR}/${PN}-5.21.90-tests-optional.patch"
+	"${FILESDIR}/${PN}-5.22.5-no-updates-kcm.patch"
+)
 
 src_prepare() {
 	ecm_src_prepare

@@ -3,8 +3,8 @@
 
 EAPI=8
 
-ECM_HANDBOOK="optional"
-KFMIN=5.86.0
+ECM_HANDBOOK="forceoptional"
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 inherit ecm kde.org optfeature
@@ -13,7 +13,7 @@ DESCRIPTION="Control Center to configure KDE Plasma desktop"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE=""
 
 DEPEND="
@@ -39,9 +39,7 @@ DEPEND="
 	>=kde-frameworks/kirigami-${KFMIN}:5
 	>=kde-frameworks/kitemmodels-${KFMIN}:5
 	>=kde-frameworks/kitemviews-${KFMIN}:5
-	>=kde-frameworks/knotifications-${KFMIN}:5
 	>=kde-frameworks/kpackage-${KFMIN}:5
-	>=kde-frameworks/krunner-${KFMIN}:5
 	>=kde-frameworks/kservice-${KFMIN}:5
 	>=kde-frameworks/kwidgetsaddons-${KFMIN}:5
 	>=kde-frameworks/kwindowsystem-${KFMIN}:5

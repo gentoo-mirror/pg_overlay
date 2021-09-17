@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_HANDBOOK="forceoptional"
 ECM_TEST="forceoptional"
-KFMIN=5.86.0
+KFMIN=5.82.0
 PVCUT=$(ver_cut 1-3)
 QTMIN=5.15.2
 VIRTUALX_REQUIRED="test"
@@ -15,7 +15,7 @@ DESCRIPTION="KDE Plasma workspace"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS="~amd64"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 IUSE="appstream +calculator +calendar +fontconfig geolocation gps screencast
 +semantic-desktop systemd telemetry"
 
@@ -146,7 +146,10 @@ RDEPEND="${COMMON_DEPEND}
 BDEPEND="virtual/pkgconfig"
 PDEPEND=">=kde-plasma/kde-cli-tools-${PVCUT}:5"
 
-PATCHES=( "${FILESDIR}/${PN}-5.21.5-split-libkworkspace.patch" ) # downstream
+PATCHES=(
+	"${FILESDIR}/${PN}-5.21.5-split-libkworkspace.patch" # downstream
+	"${FILESDIR}/${P}-fix-powermanagement-inhibition.patch" # KDE-bug 433675
+)
 
 src_prepare() {
 	ecm_src_prepare
