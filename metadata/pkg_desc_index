@@ -17,7 +17,7 @@ app-misc/trash-cli 0.21.5.25: Python scripts to manipulate trash cans via the co
 app-misc/worker 4.8.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.2.0.4 7.2.1.2: A full office productivity suite
 app-office/libreoffice-l10n 7.2.0.4 7.2.1.2: Translations for the Libreoffice suite
-app-portage/eix 0.35.2: Search and query ebuilds
+app-portage/eix 0.35.3: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999: Feature-rich dictionary lookup program
@@ -173,7 +173,7 @@ media-video/pipewire 0.3.36: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.7 2.9999 9999: GTK Instant Messenger client
-net-im/telegram-desktop 3.0.4: Official desktop client for Telegram
+net-im/telegram-desktop 3.0.4 3.1.0: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
