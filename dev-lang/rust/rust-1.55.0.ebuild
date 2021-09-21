@@ -103,7 +103,6 @@ BDEPEND="${PYTHON_DEPS}
 
 DEPEND="
 	>=app-arch/xz-utils-5.2
-	# >=dev-libs/libgit2-1.1.0:=
 	net-libs/libssh2:=
 	net-libs/http-parser:=
 	net-misc/curl:=[http2,ssl]
