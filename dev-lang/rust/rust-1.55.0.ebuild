@@ -232,7 +232,7 @@ pkg_setup() {
 
 	# required to link agains system libs, otherwise
 	# crates use bundled sources and compile own static version
-	#export LIBGIT2_SYS_USE_PKG_CONFIG=1
+	export LIBGIT2_SYS_USE_PKG_CONFIG=0
 	export LIBGIT2_NO_PKG_CONFIG=1 #749381
 	export LIBSSH2_SYS_USE_PKG_CONFIG=1
 	export PKG_CONFIG_ALLOW_CROSS=1
@@ -372,7 +372,7 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		#
-		submodules = false
+		submodules = true
 		#
 		python = "${EPYTHON}"
 		locked-deps = false

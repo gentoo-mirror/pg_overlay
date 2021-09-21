@@ -24,6 +24,10 @@ src_prepare() {
 	sed -i '62d' Makefile
 }
 
+src_configure() {
+	sed -in 's/local//' Makefile || die
+}
+
 src_install() {
 	emake DESTDIR="${D}" PREFIX=/usr install
 }
