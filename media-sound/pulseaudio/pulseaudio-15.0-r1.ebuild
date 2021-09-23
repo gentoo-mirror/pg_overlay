@@ -17,7 +17,7 @@ if [[ ${PV} = 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}"
 else
 	SRC_URI="https://freedesktop.org/software/${PN}/releases/${MY_P}.tar.xz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux"
 fi
 
 # libpulse-simple and libpulse link to libpulse-core; this is daemon's
@@ -29,7 +29,7 @@ LICENSE="!gdbm? ( LGPL-2.1 ) gdbm? ( GPL-2 )"
 SLOT="0"
 
 # +alsa-plugin as discussed in bug #519530
-# TODO: Deal with bluez5-gstreamer
+# TODO: Deal with bluez5-gstreamer - requires ldacenc and rtpldacpay gstreamer elements
 # TODO: Find out why webrtc-aec is + prefixed - there's already the always available speexdsp-aec
 # NOTE: The current ebuild sets +X almost certainly just for the pulseaudio.desktop file
 IUSE="+alsa +alsa-plugin +asyncns bluetooth dbus +daemon doc elogind equalizer +gdbm
@@ -51,6 +51,7 @@ REQUIRED_USE="
 		!bluetooth
 		!equalizer
 		!gdbm
+		!gstreamer
 		!gtk
 		!jack
 		!lirc
@@ -88,7 +89,6 @@ BDEPEND="
 # - media-libs/speexdsp is providing echo canceller implementation
 COMMON_DEPEND="
 	>=media-libs/libsndfile-1.0.20[${MULTILIB_USEDEP}]
-	>=media-libs/speexdsp-1.2[${MULTILIB_USEDEP}]
 	virtual/libc
 	alsa? ( >=media-libs/alsa-lib-1.0.24 )
 	asyncns? ( >=net-libs/libasyncns-0.1[${MULTILIB_USEDEP}] )
@@ -123,7 +123,7 @@ COMMON_DEPEND="
 	systemd? ( sys-apps/systemd:= )
 	tcpd? ( sys-apps/tcp-wrappers )
 	udev? ( >=virtual/udev-143[hwdb(+)] )
-	webrtc-aec? ( >=media-libs/webrtc-audio-processing-0.2 )
+	webrtc-aec? ( >=media-libs/webrtc-audio-processing-0.2:0 )
 	X? (
 		>=x11-libs/libxcb-1.6[${MULTILIB_USEDEP}]
 		daemon? (
@@ -136,8 +136,11 @@ COMMON_DEPEND="
 	zeroconf? ( >=net-dns/avahi-0.6.12[dbus] )
 "
 
+# pulseaudio ships a bundle xmltoman, which uses XML::Parser
 DEPEND="
 	${COMMON_DEPEND}
+	dev-lang/perl
+	dev-perl/XML-Parser
 	dev-libs/libatomic_ops
 	dev-libs/libpcre:*
 	test? ( >=dev-libs/check-0.9.10 )
@@ -165,6 +168,10 @@ DOCS=( NEWS README )
 
 S="${WORKDIR}/${MY_P}"
 
+PATCHES=(
+	"${FILESDIR}"/pulseaudio-15.0-xice-xsm-xtst-daemon-only.patch
+)
+
 src_prepare() {
 	default
 
@@ -173,18 +180,35 @@ src_prepare() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		-Dadrian-aec=true # Not packaged?
 		--localstatedir="${EPREFIX}"/var
+
+		$(meson_native_use_bool daemon)
+		$(meson_native_use_bool doc doxygen)
+		-Dgcov=false
+		# tests involve random modules, so just do them for the native # TODO: tests should run always
+		$(meson_native_use_bool test tests)
+		-Ddatabase=$(multilib_native_usex gdbm gdbm simple) # tdb is also an option but no one cares about it
+		-Dstream-restore-clear-old-devices=true
+		-Drunning-from-build-tree=false
+
+		# Paths
 		-Dmodlibexecdir="${EPREFIX}/usr/$(get_libdir)/${PN}/modules" # Was $(get_libdir)/${P}
 		-Dsystemduserunitdir=$(systemd_get_userunitdir)
 		-Dudevrulesdir="${EPREFIX}$(get_udevdir)/rules.d"
 		-Dbashcompletiondir="$(get_bashcompdir)" # Alternatively DEPEND on app-shells/bash-completion for pkg-config to provide the value
+
+		# Optional features
 		$(meson_native_use_feature alsa)
+		$(meson_feature asyncns)
+		$(meson_native_use_feature zeroconf avahi)
 		$(meson_native_use_feature bluetooth bluez5)
-		$(meson_native_use_bool daemon)
-		$(meson_native_use_bool doc doxygen)
+		-Dbluez5-gstreamer=disabled # no ldacenc/rtpldacpay gst elements packaged yet
 		$(meson_native_use_bool native-headset bluez5-native-headset)
 		$(meson_native_use_bool ofono-headset bluez5-ofono-headset)
+		$(meson_feature dbus)
+		$(meson_native_use_feature elogind)
+		$(meson_native_use_feature equalizer fftw)
+		$(meson_feature glib) # WARNING: toggling this likely changes ABI
 		$(meson_native_use_feature glib gsettings) # Supposedly correct?
 		$(meson_native_use_feature gstreamer)
 		$(meson_native_use_feature gtk)
@@ -194,24 +218,18 @@ multilib_src_configure() {
 		$(meson_native_use_feature lirc)
 		$(meson_native_use_feature orc)
 		$(meson_native_use_feature oss oss-output)
-		$(meson_native_use_feature ssl openssl)
-		# tests involve random modules, so just do them for the native # TODO: tests should run always
-		$(meson_native_use_bool test tests)
-		$(meson_native_use_feature udev)
-		$(meson_native_use_feature webrtc-aec)
-		$(meson_native_use_feature zeroconf avahi)
-		$(meson_native_use_feature equalizer fftw)
+		-Dsamplerate=disabled # Matches upstream
 		$(meson_native_use_feature sox soxr)
-		-Ddatabase=$(multilib_native_usex gdbm gdbm simple) # tdb is also an option but no one cares about it
-		$(meson_feature glib) # WARNING: toggling this likely changes ABI
-		$(meson_feature asyncns)
-		#$(meson_use cpu_flags_arm_neon neon-opt)
-		$(meson_native_use_feature tcpd tcpwrap)
-		$(meson_feature dbus)
-		$(meson_native_use_feature elogind)
-		$(meson_feature X x11)
+		-Dspeex=disabled
 		$(meson_native_use_feature systemd)
-		$(meson_use ipv6)
+		$(meson_native_use_feature tcpd tcpwrap)
+		$(meson_native_use_feature udev)
+		-Dvalgrind=disabled
+		$(meson_feature X x11)
+
+		# Echo cancellation
+		-Dadrian-aec=true # Not packaged?
+		$(meson_native_use_feature webrtc-aec)
 	)
 
 	if multilib_is_native_abi; then
@@ -222,6 +240,7 @@ multilib_src_configure() {
 			emesonargs+=( -Dpulsedsp-location="${EPREFIX}"'/usr/\\$$LIB/pulseaudio' )
 		fi
 	else
+		emesonargs+=( -Dman=false )
 		if ! use elibc_glibc; then
 			# Non-glibc multilib is probably non-existent but just in case:
 			ewarn "padsp wrapper for OSS emulation will only work with native ABI applications!"
@@ -268,7 +287,7 @@ multilib_src_install_all() {
 			use "${1}" && echo "-D${define}" || echo "-U${define}"
 		}
 
-		unifdef \
+		unifdef -x 1 \
 			$(use_define zeroconf AVAHI) \
 			$(use_define alsa) \
 			$(use_define bluetooth) \
