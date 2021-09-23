@@ -212,10 +212,11 @@ multilib_src_configure() {
 		$(meson_native_use_feature glib gsettings) # Supposedly correct?
 		$(meson_native_use_feature gstreamer)
 		$(meson_native_use_feature gtk)
+		-Dhal-compat=true # Consider disabling on next revbump
+		$(meson_use ipv6)
 		$(meson_native_use_feature jack)
-		-Dsamplerate=disabled # Matches upstream
-		-Dstream-restore-clear-old-devices=true
 		$(meson_native_use_feature lirc)
+		$(meson_native_use_feature ssl openssl)
 		$(meson_native_use_feature orc)
 		$(meson_native_use_feature oss oss-output)
 		-Dsamplerate=disabled # Matches upstream
