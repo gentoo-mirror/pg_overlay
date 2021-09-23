@@ -17,7 +17,7 @@ IUSE="bittorrent doc fasttrack gd gnutella gtk guionly magic +ocamlopt upnp"
 
 REQUIRED_USE="guionly? ( gtk )"
 
-RDEPEND="dev-lang/perl
+COMMON_DEPEND="dev-lang/perl
 	dev-ml/camlp4:=
 	gd? ( media-libs/gd[truetype] )
 	gtk? (
@@ -47,7 +47,6 @@ DEPEND="${RDEPEND}
 RESTRICT="!ocamlopt? ( strip )"
 
 PATCHES=( "${FILESDIR}/6952c2165a498080d2f52ee0a3644730a281fce5.patch" )
-		#"${FILESDIR}/0004-Do-not-call-ocamlc-custom-with-g.patch")
 
 pkg_setup() {
 	if use gtk; then
