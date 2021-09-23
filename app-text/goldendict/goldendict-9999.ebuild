@@ -96,5 +96,5 @@ src_install() {
 
 	insinto /usr/share/${PN}/help
 	doins help/gdhelp_en.qch
-	plocate_for_each_locale install_locale
+	plocale_for_each_locale install_locale
 }
