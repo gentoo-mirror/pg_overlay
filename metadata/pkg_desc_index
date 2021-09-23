@@ -110,7 +110,7 @@ media-sound/mac 6.23: Monkey's Audio Codecs
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
-media-sound/pulseaudio 15.0: A networked sound server with an advanced plugin system
+media-sound/pulseaudio 15.0-r1: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
