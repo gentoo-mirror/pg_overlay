@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-92-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-92-patches-02.tar.xz"
 
 LLVM_MAX_SLOT=12
 
@@ -599,6 +599,7 @@ src_prepare() {
 		fi
 	done
 	#######
+	eapply "${FILESDIR}/fix-wayland.patch"
 
 	xdg_src_prepare
 }
