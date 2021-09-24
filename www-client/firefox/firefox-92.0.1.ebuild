@@ -599,6 +599,7 @@ src_prepare() {
 		fi
 	done
 	#######
+	eapply "${FILESDIR}/fix-wayland.patch"
 
 	xdg_src_prepare
 }
