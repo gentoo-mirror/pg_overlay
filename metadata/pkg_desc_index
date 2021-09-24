@@ -170,7 +170,7 @@ virtual/perl-Storable 3.210.0: Virtual for Storable
 virtual/perl-Time-Local 1.300.0: Virtual for Time-Local
 virtual/perl-libnet 3.130.0: Virtual for libnet
 virtual/perl-version 0.992.900: Virtual for version
-www-client/firefox 92.0: Firefox Web Browser
+www-client/firefox 92.0.1: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-base/xorg-server 1.20.13-r1: X.Org X servers
 x11-base/xwayland 21.1.2-r2: Standalone X server running under Wayland
