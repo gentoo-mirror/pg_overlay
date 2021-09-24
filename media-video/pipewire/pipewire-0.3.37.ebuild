@@ -96,9 +96,6 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
-	"${FILESDIR}"/${P}-fix-crash-uaf-media-session.patch
-	"${FILESDIR}"/${P}-fix-version.patch
-	"${FILESDIR}"/${P}-missing-limits-include.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
@@ -115,7 +112,7 @@ src_prepare() {
 	if ! use systemd; then
 		# This can be applied non-conditionally but would make for a
 		# significantly worse user experience on systemd then.
-		eapply "${FILESDIR}"/${PN}-0.3.35-non-systemd-integration.patch
+		eapply "${FILESDIR}"/${PN}-0.3.36-non-systemd-integration.patch
 	fi
 
 	einfo "Generating ${limitsdfile}"
@@ -276,9 +273,13 @@ pkg_postinst() {
 	optfeature_header "The following can be installed for optional runtime features:"
 	optfeature "restricted realtime capabilities via D-Bus" sys-auth/rtkit
 
-	# Once hsphfpd lands in tree, both it and ofono will need to be checked for presence here!
-	if use bluetooth; then
-		optfeature "better BT headset support (daemon startup required)" net-misc/ofono
-		#optfeature "an oFono alternative (not packaged)" foo-bar/hsphfpd
+	if has_version 'net-misc/ofono' ; then
+		ewarn "Native backend has become default. Please disable oFono via:"
+		if systemd_is_booted ; then
+			ewarn "systemctl disable --now ofono"
+		else
+			ewarn "rc-update delete ofono"
+		fi
+		ewarn
 	fi
 }
