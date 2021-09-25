@@ -35,10 +35,11 @@ COMMON_DEPEND="dev-lang/perl
 	)
 	!guionly? ( acct-user/p2p )
 "
+RDEPEND="${COMMON_DEPEND}"
 # Can't yet use newer OCaml
 # -unsafe-string usage:
 # https://github.com/ygrek/mldonkey/issues/46
-DEPEND="${RDEPEND}
+DEPEND="${COMMON_DEPEND}
 	dev-lang/ocaml:=[ocamlopt?]
 	bittorrent? (
 		dev-ml/num
