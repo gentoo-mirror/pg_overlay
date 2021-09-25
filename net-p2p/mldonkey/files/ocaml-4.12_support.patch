@@ -1,0 +1,13 @@
+--- a/src/networks/donkey/donkeyClient.ml	2021-09-25 10:11:48.211287053 +0700
++++ b/src/networks/donkey/donkeyClient.ml	2021-09-25 10:12:32.348854429 +0700
+@@ -810,10 +810,6 @@
+           query_id ip port id
+         end
+ 
+-
+-external hash_param : int -> int -> 'a -> int = "caml_hash_univ_param" "noalloc"
+-let hash x = hash_param 10 100 x
+-
+ let shared_of_file file =
+   match file.file_shared with
+     | None  -> None
