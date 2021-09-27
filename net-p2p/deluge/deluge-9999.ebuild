@@ -53,7 +53,7 @@ RDEPEND="
 		dev-python/six[${PYTHON_USEDEP}]
 		>=dev-python/twisted-17.1.0[crypt,${PYTHON_USEDEP}]
 		>=dev-python/zope-interface-4.4.2[${PYTHON_USEDEP}]
-		<net-libs/libtorrent-rasterbar-2.0.0[python,${PYTHON_USEDEP}]
+		<net-libs/libtorrent-rasterbar-2.0.0[python]
 		geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 		gtk? (
 			sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
