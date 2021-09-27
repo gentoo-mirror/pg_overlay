@@ -12,10 +12,8 @@ MY_PV="${MY_PV/_beta/.beta}"
 
 DESCRIPTION="Translations for the Libreoffice suite"
 HOMEPAGE="https://www.libreoffice.org"
-BASE_SRC_URI_TESTING="https://download.documentfoundation.org/${PN/-l10n/}/testing/${BASE_PV}/rpm
-	https://downloadarchive.documentfoundation.org/libreoffice/old/${MY_PV}/rpm"
-BASE_SRC_URI_STABLE="https://download.documentfoundation.org/${PN/-l10n/}/stable/${BASE_PV}/rpm
-	https://downloadarchive.documentfoundation.org/libreoffice/old/${MY_PV}/rpm"
+BASE_SRC_URI_TESTING="https://download.documentfoundation.org/${PN/-l10n/}/testing/${BASE_PV}/rpm"
+BASE_SRC_URI_STABLE="https://download.documentfoundation.org/${PN/-l10n/}/stable/${BASE_PV}/rpm"
 
 LICENSE="|| ( LGPL-3 MPL-1.1 )"
 SLOT="0"
@@ -26,8 +24,8 @@ IUSE="offlinehelp"
 # when changing the language lists, please be careful to preserve the spaces (bug 491728)
 #
 # "en:en-US" for mapping from Gentoo "en" to upstream "en-US" etc.
-LANGUAGES_HELP=" de en-GB en:en-US ru "
-LANGUAGES="${LANGUAGES_HELP} "
+LANGUAGES_HELP=" de en-GB en:en-US en-ZA ru "
+LANGUAGES="${LANGUAGES_HELP}"
 
 for lang in ${LANGUAGES_HELP}; do
 	helppack="offlinehelp? ( ${BASE_SRC_URI_STABLE}/x86_64/LibreOffice${PN_DEV}_${BASE_PV}_Linux_x86-64_rpm_helppack_${lang#*:}.tar.gz -> LibreOffice_${MY_PV}_Linux_x86-64_rpm_helppack_${lang#*:}.tar.gz ${BASE_SRC_URI_TESTING}/x86_64/LibreOffice${PN_DEV}_${MY_PV}_Linux_x86-64_rpm_helppack_${lang#*:}.tar.gz -> LibreOffice_${MY_PV}_Linux_x86-64_rpm_helppack_${lang#*:}.tar.gz )"
