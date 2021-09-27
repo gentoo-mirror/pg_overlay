@@ -35,7 +35,7 @@ REQUIRED_USE="
 # instead. It doesn't seem like Deluge supports >= 2 right now.
 DEPEND="
 	$(python_gen_cond_dep '
-		<net-libs/libtorrent-rasterbar-2.0.0[python,${PYTHON_USEDEP}]
+		<net-libs/libtorrent-rasterbar-2.0.0[python]
 		dev-python/wheel[${PYTHON_USEDEP}]
 	')
 	dev-util/intltool
