@@ -15,8 +15,8 @@ app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.21.5.25: Python scripts to manipulate trash cans via the command line
 app-misc/worker 4.8.1: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.2.0.4 7.2.1.2: A full office productivity suite
-app-office/libreoffice-l10n 7.2.0.4 7.2.1.2: Translations for the Libreoffice suite
+app-office/libreoffice 7.2.1.2 7.2.2.1: A full office productivity suite
+app-office/libreoffice-l10n 7.2.1.2 7.2.2.1: Translations for the Libreoffice suite
 app-portage/eix 0.35.3: Search and query ebuilds
 app-shells/push 3.4: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
@@ -87,7 +87,7 @@ gui-libs/disman 5.20.0: A display management service and library. LibKScreen rep
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-mail-client/thunderbird 78.13.0: Thunderbird Mail Client
+mail-client/thunderbird 78.14.0: Thunderbird Mail Client
 media-libs/gst-plugins-base 1.19.1: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.19.1: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.19.1: Open source multimedia framework
