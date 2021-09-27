@@ -16,7 +16,7 @@ EGIT_SUBMODULES=()
 LICENSE="BSD"
 SLOT="0/10"
 KEYWORDS=""
-IUSE="+dht debug python ssl test"
+IUSE="+dht debug gnutls python ssl test"
 
 RESTRICT="!test? ( test ) test" # not yet fixed
 RDEPEND="dev-libs/boost:="
