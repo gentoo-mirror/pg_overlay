@@ -289,7 +289,6 @@ PATCHES=(
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
-	"${FILESDIR}/libreoffice-7.1.5.2-bison-3.8.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
