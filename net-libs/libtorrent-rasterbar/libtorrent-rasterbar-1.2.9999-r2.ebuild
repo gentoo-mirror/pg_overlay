@@ -5,7 +5,7 @@ EAPI=7
 
 PYTHON_COMPAT=( python3_{9,10} )
 
-inherit git-r3 cmake python-any-r1
+inherit git-r3 cmake python-single-r1
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="http://libtorrent.org"
@@ -21,14 +21,19 @@ IUSE="+dht debug python ssl test"
 RESTRICT="!test? ( test ) test" # not yet fixed
 RDEPEND="dev-libs/boost:="
 DEPEND="
+	dev-libs/boost:=[threads(+)]
 	python? (
 		${PYTHON_DEPS}
-		$(python_gen_any_dep '
-			dev-libs/boost[python,${PYTHON_USEDEP}]')
+		$(python_gen_cond_dep '
+			dev-libs/boost[python,${PYTHON_USEDEP}]
+		')
 	)
-	ssl? ( dev-libs/openssl:= )
-	${DEPEND}
+	ssl? (
+		gnutls? ( net-libs/gnutls:= )
+		!gnutls? ( dev-libs/openssl:= )
+	)
 "
+RDEPEND="${DEPEND}"
 
 pkg_setup() {
 	use python && python-any-r1_pkg_setup
@@ -42,6 +47,7 @@ src_configure() {
 		-Dbuild_examples=OFF
 		-Ddht=$(usex dht ON OFF)
 		-Dencryption=$(usex ssl ON OFF)
+		-Dgnutls=$(usex gnutls ON OFF)
 		-Dlogging=$(usex debug ON OFF)
 		-Dpython-egg-info=$(usex python ON OFF)
 		-Dpython-bindings=$(usex python ON OFF)
@@ -49,7 +55,7 @@ src_configure() {
 		-Di2p=OFF
 	)
 
-	use python && mycmakeargs+=( -Dboost-python-module-name=python )
+	use python && mycmakeargs+=( -Dboost-python-module-name="${EPYTHON/./}" )
 
 	cmake_src_configure
 }
