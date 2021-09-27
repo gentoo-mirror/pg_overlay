@@ -133,7 +133,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-text/mythes
 	>=dev-cpp/clucene-2.3.3.4-r2
 	dev-db/unixODBC
-	>=games-engines/box2d-2.4.1:0
 	dev-lang/perl
 	>=dev-libs/boost-1.72.0:=[nls]
 	dev-libs/expat
@@ -149,7 +148,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/nss
 	>=dev-libs/redland-1.0.16
 	>=dev-libs/xmlsec-1.2.28[nss]
-	media-libs/zxing-cpp
+	>=games-engines/box2d-2.4.1:0
 	media-gfx/fontforge
 	media-gfx/graphite2
 	media-libs/fontconfig
@@ -163,6 +162,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/libpng-1.4:0=
 	>=media-libs/libvisio-0.1.0
 	media-libs/libzmf
+	media-libs/zxing-cpp
 	>=net-libs/neon-0.31.1:=
 	net-misc/curl
 	sci-mathematics/lpsolve
@@ -345,6 +345,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	cp "${FILESDIR}/skia-freetype2.11.patch" external/skia
 	default
 
 	# sandbox violations on many systems, we don't need it. Bug #646406
@@ -460,7 +461,6 @@ src_configure() {
 	# --without-system-sane: just sane.h header that is used for scan in writer,
 	#   not linked or anything else, worthless to depend on
 	# --disable-pdfium: not yet packaged
-	# --without-system-qrcodegen: has no real build system and LO is the only user
 	local myeconfargs=(
 		--with-system-dicts
 		--with-system-epoxy

@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{9,10} )
 DISTUTILS_SINGLE_IMPL=1
 PLOCALES="ar ast be bg bn bs ca cs cy da de el en_AU en_CA en_GB eo es et eu fa fi fr fy gl he hi hr hu id is it iu ja ka kk kn ko ku la lt lv mk ms nb nds nl pl pms pt pt_BR ro ru si sk sl sr sv ta th tl tlh tr uk vi zh_CN zh_HK zh_TW"
-inherit distutils-r1 plocale
+inherit distutils-r1 plocale xdg
 
 DESCRIPTION="BitTorrent client with a client/server model"
 HOMEPAGE="https://deluge-torrent.org/"
@@ -30,9 +30,12 @@ REQUIRED_USE="
 	sound? ( gtk )
 "
 
+# Note: if/when Deluge supports newer libtorrent-rasterbar >= 2, please
+# move the dependency *outside* of gen_cond_dep and use PYTHON_SINGLE_USEDEP
+# instead. It doesn't seem like Deluge supports >= 2 right now.
 DEPEND="
 	$(python_gen_cond_dep '
-		net-libs/libtorrent-rasterbar[python]
+		<net-libs/libtorrent-rasterbar-2.0.0[python,${PYTHON_USEDEP}]
 		dev-python/wheel[${PYTHON_USEDEP}]
 	')
 	dev-util/intltool
@@ -50,6 +53,7 @@ RDEPEND="
 		dev-python/six[${PYTHON_USEDEP}]
 		>=dev-python/twisted-17.1.0[crypt,${PYTHON_USEDEP}]
 		>=dev-python/zope-interface-4.4.2[${PYTHON_USEDEP}]
+		<net-libs/libtorrent-rasterbar-2.0.0[python,${PYTHON_USEDEP}]
 		geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 		gtk? (
 			sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
@@ -57,7 +61,6 @@ RDEPEND="
 			gnome-base/librsvg
 			libnotify? ( x11-libs/libnotify )
 		)
-		net-libs/libtorrent-rasterbar[python]
 		webinterface? ( dev-python/mako[${PYTHON_USEDEP}] )
 	')"
 
@@ -129,6 +132,8 @@ python_install_all() {
 }
 
 pkg_postinst() {
+	xdg_pkg_postinst
+
 	elog
 	elog "If, after upgrading, deluge doesn't work, please remove the"
 	elog "'~/.config/deluge' directory and try again, but make a backup"
