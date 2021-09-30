@@ -97,7 +97,7 @@ src_prepare() {
 
 	local ts_dir_main="SQLiteStudio3/sqlitestudio/translations"
 	plocale_find_changes ${ts_dir_main} "sqlitestudio_" '.ts'
-	l10n_for_each_locale_do prepare_locale
+	plocale_for_each_locale prepare_locale
 	plocale_for_each_disabled_locale rm_locale
 
 	# prevent "multilib-strict check failed" with USE test
