@@ -4,7 +4,7 @@
 EAPI=7
 
 CMAKE_ECLASS=cmake
-PYTHON_COMPAT=( python3_{6..9} )
+PYTHON_COMPAT=( python3_{9,10} )
 inherit cmake linux-info llvm llvm.org python-any-r1
 
 DESCRIPTION="Polyhedral optimizations for LLVM"
@@ -12,7 +12,7 @@ HOMEPAGE="https://llvm.org/"
 
 LICENSE="Apache-2.0-with-LLVM-exceptions UoI-NCSA"
 SLOT="$(ver_cut 1)"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
