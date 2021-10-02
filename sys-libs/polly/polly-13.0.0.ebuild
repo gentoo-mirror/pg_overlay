@@ -42,10 +42,10 @@ src_configure() {
 		-DBUILD_SHARED_LIBS=OFF
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
 		-DLLVM_INCLUDE_TESTS=$(usex test)
-		-DLLVM_SOURCE_ROOT="${WORKDIR}/llvm"
+		#-DLLVM_SOURCE_ROOT="${WORKDIR}/llvm"
 		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 		-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
-		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
+		#-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_BUILD_TESTS=ON
