@@ -28,7 +28,8 @@ REQUIRED_USE="
 DEPEND="
 	x11-libs/gtk+:3
 	net-misc/curl:0=
-	dev-libs/jansson
+	dev-libs/jansson:=
+	dev-libs/libdispatch
 	aac? ( media-libs/faad2 )
 	alsa? ( media-libs/alsa-lib )
 	cdda? (
@@ -62,6 +63,8 @@ RDEPEND="${DEPEND}"
 BDEPEND="
 	dev-util/intltool
 	sys-devel/gettext
+	sys-devel/clang
+	sys-devel/llvm
 	virtual/pkgconfig
 "
 
@@ -122,7 +125,6 @@ src_configure () {
 		"--disable-coreaudio"
 		"--disable-dumb"
 		"--disable-alac"
-		"$(use_enable mac ffap)"
 		"--disable-gme"
 		"--disable-lfm"
 		"--disable-mms"
@@ -136,9 +138,7 @@ src_configure () {
 		"--disable-soundtouch"
 		"--disable-src"
 		"--disable-tta"
-		"$(use_enable zip vfs-zip)"
 		"--disable-vtx"
-		"$(use_enable wavpack)"
 		"--disable-wildmidi"
 		"--disable-wma"
 
@@ -161,13 +161,15 @@ src_configure () {
 		"$(use_enable dts dca)"
 		"$(use_enable ffmpeg)"
 		"$(use_enable converter)"
+		"$(use_enable mac ffap)"
 		"$(use_enable musepack)"
 		"$(use_enable notify)"
 		"$(use_enable nullout)"
 		"$(use_enable opus)"
-		"$(use_enable pulseaudio pulse)"
 		"$(use_enable shellexec)"
 		"$(use_enable shellexec shellexecui)"
+		"$(use_enable wavpack)"
+		"$(use_enable zip vfs-zip)"
 
 		"--enable-gtk3"
 		"--enable-vfs-curl"
