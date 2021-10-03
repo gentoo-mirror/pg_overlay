@@ -40,7 +40,7 @@ dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeSc
 dev-libs/re2 0.2021.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-ml/camlp4 4.12_p1: System for writing extensible parsers for programming languages
+dev-ml/camlp4 4.12_p1 4.13_p1: System for writing extensible parsers for programming languages
 dev-ml/lablgtk 2.18.11: Objective CAML interface for Gtk+2
 dev-ml/num 1.4: Library for arbitrary-precision integer and rational arithmetic
 dev-perl/JSON 4.20.0: JSON (JavaScript Object Notation) encoder/decoder
