@@ -106,7 +106,7 @@ media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (med
 media-libs/libplacebo 4.157.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/vulkan-layers 1.2.194: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.194: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-loader 1.2.194 1.2.195: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
