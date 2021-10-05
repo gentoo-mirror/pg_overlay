@@ -36,13 +36,12 @@ DOCS=( README.html )
 
 PATCHES=(
 	"${FILESDIR}/${PN}-5.22.1-no-docs.patch"
-	"${FILESDIR}/${P}-no-git-clone-kthxbye.patch"
 )
 
 src_prepare() {
 	cmake_src_prepare
 	python_fix_shebang board_gen
-	rm -r rinutils || die
+	#rm -r rinutils || die
 }
 
 src_configure() {
