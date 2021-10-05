@@ -36,7 +36,6 @@ DOCS=( README.html )
 
 PATCHES=(
 	"${FILESDIR}/${PN}-5.22.1-no-docs.patch"
-	"${FILESDIR}/${P}-no-git-clone-kthxbye.patch"
 )
 
 src_prepare() {
