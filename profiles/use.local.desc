@@ -30,6 +30,7 @@ app-portage/eix:strong-security - Add many checks to prevent exploits if eix cod
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
+app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 dev-db/sqlite:secure-delete - Enable overwriting of deleted content with zeros by default (http://sqlite.org/pragma.html#pragma_secure_delete), causing some performance penalty
 dev-db/sqlite:tools - Install additional tools
 dev-db/sqlitestudio:cli - Build CLI interface
@@ -320,6 +321,15 @@ sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
 sys-fs/udisks:systemd - Support sys-apps/systemd's logind
 sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
 sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
+sys-libs/libblockdev:bcache - Enable block device cache support.
+sys-libs/libblockdev:cryptsetup - Enable sys-fs/cryptsetup support
+sys-libs/libblockdev:device-mapper - Enable support for device-mapper from sys-fs/lvm2
+sys-libs/libblockdev:dmraid - Support for dmraid devices, also known as ATA-RAID, or Fake RAID.
+sys-libs/libblockdev:escrow - Support for building crypto plugin with escrow device support
+sys-libs/libblockdev:kbd - Enable kernel block device support.
+sys-libs/libblockdev:lvm - Enable support for Logical Volume Management via sys-fs/lvm2.
+sys-libs/libblockdev:tools - Build tools
+sys-libs/libblockdev:vdo - Enable Virtual Data Optimizer support.
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
 sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
