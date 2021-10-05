@@ -41,7 +41,7 @@ PATCHES=(
 src_prepare() {
 	cmake_src_prepare
 	python_fix_shebang board_gen
-	rm -r rinutils || die
+	#rm -r rinutils || die
 }
 
 src_configure() {
