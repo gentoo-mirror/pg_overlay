@@ -5,14 +5,14 @@ EAPI=7
 
 MY_PN=SPIRV-Tools
 CMAKE_ECLASS="cmake"
-PYTHON_COMPAT=( python3_{7,8,9} )
+PYTHON_COMPAT=( python3_{9,10} )
 inherit cmake-multilib python-any-r1
 
 if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/${MY_PN}.git"
 	inherit git-r3
 else
-	EGIT_COMMIT="1454c95d1b834a47403ef3806ffe77c9ebbfa40b"
+	EGIT_COMMIT="2d12367ced2dd34444822340070b4545ae7c02f1"
 	SRC_URI="https://github.com/KhronosGroup/${MY_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
 	S="${WORKDIR}"/${MY_PN}-${EGIT_COMMIT}
