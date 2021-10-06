@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-92-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-93-patches-01.tar.xz"
 
 LLVM_MAX_SLOT=13
 
@@ -99,7 +99,7 @@ BDEPEND="${PYTHON_DEPS}
 	x86? ( >=dev-lang/nasm-2.13 )"
 
 CDEPEND="
-	>=dev-libs/nss-3.69
+	>=dev-libs/nss-3.70
 	>=dev-libs/nspr-4.32
 	dev-libs/atk
 	dev-libs/expat

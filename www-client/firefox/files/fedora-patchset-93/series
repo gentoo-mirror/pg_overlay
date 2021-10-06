@@ -1,6 +1,5 @@
 build-disable-elfhack.patch
 
-mozilla-1669639.patch
 firefox-testing.patch
 
 firefox-tests-xpcshell.patch
