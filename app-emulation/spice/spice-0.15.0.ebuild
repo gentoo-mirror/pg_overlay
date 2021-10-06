@@ -9,6 +9,7 @@ inherit meson python-any-r1 readme.gentoo-r1 xdg-utils
 DESCRIPTION="SPICE server"
 HOMEPAGE="https://www.spice-space.org/"
 SRC_URI="https://www.spice-space.org/download/releases/spice-server/${P}.tar.bz2"
+SRC_URI+=" https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${P}-pthread-c5fe3df1.patch.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -48,6 +49,10 @@ DOCS=(
 	AUTHORS
 	CHANGELOG.md
 	README
+)
+
+PATCHES=(
+	"${WORKDIR}"/${P}-pthread-c5fe3df1.patch
 )
 
 python_check_deps() {
