@@ -16,5 +16,7 @@ mozilla-bmo1626236.patch
 mozilla-libavcodec58_91.patch
 mozilla-bmo1708709.patch
 mozilla-silence-no-return-type.patch
+mozilla-bmo1725828.patch
+mozilla-bmo531915.patch
 
 firefox-branded-icons.patch
