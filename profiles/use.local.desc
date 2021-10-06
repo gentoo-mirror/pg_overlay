@@ -38,6 +38,7 @@ app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, makin
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
+dev-cpp/abseil-cpp:cxx17 - Build with -DCMAKE_CXX_STANDARD=17 (required by some revdeps)
 dev-db/sqlite:secure-delete - Enable overwriting of deleted content with zeros by default (http://sqlite.org/pragma.html#pragma_secure_delete), causing some performance penalty
 dev-db/sqlite:tools - Install additional tools
 dev-db/sqlitestudio:cli - Build CLI interface
@@ -88,6 +89,21 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
 gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
 gui-wm/kwinft:tools - Build internal tools for performance analysis at runtime.
+mail-client/claws-mail:archive - Enable archiving plugin
+mail-client/claws-mail:bogofilter - Build mail-filter/bogofilter plugin
+mail-client/claws-mail:dillo - Enable dillo html viewer plugin
+mail-client/claws-mail:gdata - Enable plugin for access to Google data providers
+mail-client/claws-mail:gtk2 - Build support for GTK+-2 instead of GTK+-3 (live ebuild only)
+mail-client/claws-mail:libcanberra - Enable sound notification in connection with USE=notification
+mail-client/claws-mail:libnotify - Enable notification on the desktop in connection with USE=notification
+mail-client/claws-mail:litehtml - Enable dev-libs/gumbo html viewer plugin
+mail-client/claws-mail:notification - Notification for new mail in different way, see also USE flags libcanberra, libindicate and libnotify
+mail-client/claws-mail:pgp - Enable PGP support
+mail-client/claws-mail:sieve - Build plugin for sieve filter support
+mail-client/claws-mail:smime - Build plugin for S/MIME support
+mail-client/claws-mail:spam-report - Enable plugin for spam reporting to various services
+mail-client/claws-mail:spamassassin - Build mail-filter/spamassassin plugin
+mail-client/claws-mail:valgrind - Add support for memory debugging using valgrind
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) cabability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
@@ -355,6 +371,10 @@ sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
 sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
 sys-libs/pam:berkdb - Build the pam_userdb module, that allows to authenticate users against a Berkeley DB file. Please note that enabling this USE flag will create a PAM module that links to the Berkeley DB (as provided by sys-libs/db) installed in /usr/lib and will thus not work for boot-critical services authentication.
+sys-process/htop:delayacct - Enable Linux delay accounting support via dev-libs/libnl
+sys-process/htop:hwloc - Use sys-apps/hwloc for CPU affinity support
+sys-process/htop:openvz - Enable openvz support
+sys-process/htop:vserver - Enable vserver support
 www-client/firefox:clang - Use Clang compiler instead of GCC
 www-client/firefox:eme-free - Disable EME (DRM plugin) cabability at build time
 www-client/firefox:geckodriver - Enable WebDriver support
