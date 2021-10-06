@@ -12,8 +12,9 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 else
 	SNAPSHOT_COMMIT="${PV}"
-	SRC_URI="https://github.com/KhronosGroup/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="https://github.com/KhronosGroup/${PN}/archive/${SNAPSHOT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
+	S="${WORKDIR}/${PN}-${SNAPSHOT_COMMIT}"
 fi
 
 DESCRIPTION="Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator"
