@@ -52,7 +52,7 @@ src_configure() {
 		-Di2p=OFF
 	)
 
-	use python && mycmakeargs+=( -Dboost-python-module-name="${EPYTHON/./}" )
+	use python && mycmakeargs+=( -Dboost-python-module-name="python" )
 
 	cmake_src_configure
 }
