@@ -68,6 +68,15 @@ PATCHES=(
 	"${FILESDIR}/${PN}-2.0.3-UI-status.patch"
 )
 
+src_prepare() {
+	local loc_dir="${S}/deluge/i18n"
+	plocale_find_changes "${S}/deluge/i18n" "" ".po"
+	rm_locale() {
+		rm -vf "${S}/deluge/i18n/${1}.po" || die
+	}
+	plocale_for_each_disabled_locale rm_locale
+}
+
 python_prepare_all() {
 	local args=(
 		-e "/Compiling po file/a \\\tuptoDate = False"
@@ -79,13 +88,6 @@ python_prepare_all() {
 		-e 's|"show_new_releases": True|"show_new_releases": False|'
 	)
 	sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
-
-	local loc_dir="${S}/deluge/i18n"
-	plocale_find_changes "${S}/deluge/i18n" "" ".po"
-	rm_locale() {
-		rm -vf "${S}/deluge/i18n/${1}.po" || die
-	}
-	plocale_for_each_disabled_locale rm_locale
 
 	# Version
 	#sed -i "s/=_version/='1.3.15'/g" setup.py || die
