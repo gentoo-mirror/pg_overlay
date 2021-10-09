@@ -81,9 +81,9 @@ python_prepare_all() {
 	sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
 
 	local loc_dir="${S}/deluge/i18n"
-	plocale_find_changes "${loc_dir}" "" ".po"
+	plocale_find_changes "${S}/deluge/i18n" "" ".po"
 	rm_locale() {
-		rm -vf "${loc_dir}/${1}.po" || die
+		rm -vf "${S}/deluge/i18n/${1}.po" || die
 	}
 	plocale_for_each_disabled_locale rm_locale
 
