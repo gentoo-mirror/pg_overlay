@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{7..10} pypy3 )
 PYTHON_REQ_USE="threads(+)"
 
-inherit distutils-r1 multiprocessing
+inherit distutils-r1 multiprocessing flag-o-matic
 
 VEC_P=cryptography_vectors-${PV}
 DESCRIPTION="Library providing cryptographic recipes and primitives"
@@ -47,6 +47,7 @@ RDEPEND+=${DEPEND}
 
 src_prepare() {
 	default
+	append-cflags -fno-strict-aliasing
 
 	# avoid automagic dependency on dev-libs/openssl[sslv3]
 	# https://bugs.gentoo.org/789450
