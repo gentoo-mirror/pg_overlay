@@ -302,6 +302,14 @@ net-im/telegram-desktop:enchant - Enable the app-text/aspell spell-checking back
 net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking backend
 net-im/telegram-desktop:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
+net-libs/nodejs:inspector - Enable V8 inspector
+net-libs/nodejs:lto - Build with link-time optimisation
+net-libs/nodejs:npm - Enable NPM package manager
+net-libs/nodejs:pax-kernel - Enable building under a PaX enabled kernel
+net-libs/nodejs:snapshot - Enable snapshot creation for faster startup
+net-libs/nodejs:system-icu - Use system dev-libs/icu instead of the bundled version
+net-libs/nodejs:system-ssl - Use system OpenSSL instead of the bundled one
+net-libs/nodejs:systemtap - Enable SystemTAP/DTrace tracing
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
