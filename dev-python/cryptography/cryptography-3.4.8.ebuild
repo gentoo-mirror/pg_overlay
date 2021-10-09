@@ -41,6 +41,10 @@ DEPEND="
 	"
 RDEPEND+=${DEPEND}
 
+PATCHES=(
+	"${FILESDIR}/${P}-py310.patch"
+)
+
 src_prepare() {
 	default
 
