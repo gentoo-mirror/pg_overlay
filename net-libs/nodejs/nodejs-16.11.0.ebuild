@@ -47,7 +47,6 @@ BDEPEND="${PYTHON_DEPS}
 DEPEND="${RDEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-12.22.1-jinja_collections_abc.patch
 	"${FILESDIR}"/${PN}-12.22.5-shared_c-ares_nameser_h.patch
 	"${FILESDIR}"/${PN}-15.2.0-global-npm-config.patch
 )
