@@ -665,7 +665,6 @@ src_configure() {
 
 	# Initialize MOZCONFIG
 	mozconfig_add_options_ac '' --enable-application=comm/mail
-	mozconfig_add_options_ac '' --enable-calendar
 
 	# Set Gentoo defaults
 	export MOZILLA_OFFICIAL=1
