@@ -103,6 +103,7 @@ gui-apps/ydotool 0.1.9 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
+kde-frameworks/knotifications 5.87.0: Framework for notifying the user of an event
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/claws-mail 4.0.0: An email client (and news reader) based on GTK+
 mail-client/thunderbird 78.14.0 91.2.0: Thunderbird Mail Client
@@ -199,7 +200,6 @@ virtual/perl-libnet 3.130.0: Virtual for libnet
 virtual/perl-version 0.992.900: Virtual for version
 www-client/firefox 93.0: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
-www-client/ungoogled-chromium 94.0.4606.71-r1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xcb-proto 1.14.1: X C-language Bindings protocol headers
 x11-base/xorg-server 1.20.13-r1: X.Org X servers
 x11-base/xwayland 21.1.2-r2: Standalone X server running under Wayland
