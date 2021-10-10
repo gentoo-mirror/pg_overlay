@@ -3,7 +3,7 @@
 ##
 ## Usage:
 ##
-## $ firefox
+## $ thunderbird
 ##
 ## This script is meant to run Mozilla Firefox in Gentoo.
 
@@ -24,19 +24,19 @@ case ${MOZ_ARCH} in
 		;;
 esac
 
-MOZ_FIREFOX_FILE="firefox"
+MOZ_FIREFOX_FILE="thunderbird"
 
-if [[ ! -r ${MOZ_LIB_DIR}/firefox/${MOZ_FIREFOX_FILE} ]]; then
-	if [[ ! -r ${SECONDARY_LIB_DIR}/firefox/${MOZ_FIREFOX_FILE} ]]; then
-		echo "Error: ${MOZ_LIB_DIR}/firefox/${MOZ_FIREFOX_FILE} not found" >&2
+if [[ ! -r ${MOZ_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} ]]; then
+	if [[ ! -r ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} ]]; then
+		echo "Error: ${MOZ_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} not found" >&2
 		if [[ -d ${SECONDARY_LIB_DIR} ]]; then
-			echo "       ${SECONDARY_LIB_DIR}/firefox/${MOZ_FIREFOX_FILE} not found" >&2
+			echo "       ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} not found" >&2
 		fi
 		exit 1
 	fi
 	MOZ_LIB_DIR="${SECONDARY_LIB_DIR}"
 fi
-MOZILLA_FIVE_HOME="${MOZ_LIB_DIR}/firefox"
+MOZILLA_FIVE_HOME="${MOZ_LIB_DIR}/thunderbird"
 MOZ_EXTENSIONS_PROFILE_DIR="${HOME}/.mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
 MOZ_PROGRAM="${MOZILLA_FIVE_HOME}/${MOZ_FIREFOX_FILE}"
 
