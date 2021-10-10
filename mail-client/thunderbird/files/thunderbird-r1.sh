@@ -5,7 +5,7 @@
 ##
 ## $ thunderbird
 ##
-## This script is meant to run Mozilla Firefox in Gentoo.
+## This script is meant to run Mozilla Thunderbird in Gentoo.
 
 cmdname=$(basename "$0")
 
@@ -24,21 +24,22 @@ case ${MOZ_ARCH} in
 		;;
 esac
 
-MOZ_FIREFOX_FILE="thunderbird"
+MOZ_THUNDERBIRD_FILE="thunderbird"
 
-if [[ ! -r ${MOZ_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} ]]; then
-	if [[ ! -r ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} ]]; then
-		echo "Error: ${MOZ_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} not found" >&2
-		if [[ -d ${SECONDARY_LIB_DIR} ]]; then
-			echo "       ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_FIREFOX_FILE} not found" >&2
+if [[ ! -r ${MOZ_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} ]]; then
+	if [[ ! -r ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} ]]; then
+		echo "Error: ${MOZ_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} not found" >&2
+		if [[ -d $SECONDARY_LIB_DIR ]]; then
+			echo "       ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} not found" >&2
 		fi
 		exit 1
 	fi
 	MOZ_LIB_DIR="${SECONDARY_LIB_DIR}"
 fi
 MOZILLA_FIVE_HOME="${MOZ_LIB_DIR}/thunderbird"
-MOZ_EXTENSIONS_PROFILE_DIR="${HOME}/.mozilla/extensions/{ec8030f7-c20a-464f-9b0e-13a3a9e97384}"
-MOZ_PROGRAM="${MOZILLA_FIVE_HOME}/${MOZ_FIREFOX_FILE}"
+MOZ_EXTENSIONS_PROFILE_DIR="${HOME}/.mozilla/extensions/{3550f703-e582-4d05-9a08-453d09bdfdc6}"
+MOZ_PROGRAM="${MOZILLA_FIVE_HOME}/${MOZ_THUNDERBIRD_FILE}"
+DESKTOP_FILE="thunderbird"
 
 ##
 ## Enable Wayland backend?
