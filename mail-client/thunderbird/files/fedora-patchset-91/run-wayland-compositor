@@ -1,0 +1,43 @@
+#!/bin/bash
+# Run wayland compositor and set WAYLAND_DISPLAY env variable
+
+set -x
+
+echo export DESKTOP_SESSION=kde > $HOME/.xsessionrc
+echo export XDG_CURRENT_DESKTOP=KDE > $HOME/.xsessionrc
+echo export XDG_SESSION_TYPE=wayland >> $HOME/.xsessionrc
+
+# This starts the gnome-keyring-daemon with an unlocked login keyring. libsecret uses this to
+# store secrets. Firefox uses libsecret to store a key that protects sensitive information like
+# credit card numbers.
+if test -z "$DBUS_SESSION_BUS_ADDRESS" ; then
+    # if not found, launch a new one
+    eval `dbus-launch --sh-syntax`
+fi
+
+if [ -z "$XDG_RUNTIME_DIR" ]; then
+  export XDG_RUNTIME_DIR=$HOME
+fi
+
+. xvfb-run -s "-screen 0 1600x1200x24" -n 80 kwin_wayland --wayland-display=:80 &
+export DISPLAY=:80
+
+if [ -z "$WAYLAND_DISPLAY" ] ; then
+  export WAYLAND_DISPLAY=wayland-0
+else
+  export WAYLAND_DISPLAY=wayland-1
+fi
+sleep 10
+retry_count=0
+max_retries=5
+until [ $retry_count -gt $max_retries ]; do
+  if [ -S "$XDG_RUNTIME_DIR/$WAYLAND_DISPLAY" ]; then
+    retry_count=$(($max_retries + 1))
+  else
+    retry_count=$(($retry_count + 1))
+    echo "Waiting for kwin_wayland, retry: $retry_count"
+    sleep 2
+  fi
+done
+
+env | grep "DISPLAY"
