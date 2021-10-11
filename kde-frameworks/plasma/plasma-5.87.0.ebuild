@@ -20,7 +20,7 @@ RESTRICT="test"
 RDEPEND="
 	>=dev-qt/qtdbus-${QTMIN}:5
 	>=dev-qt/qtdeclarative-${QTMIN}:5
-	>=dev-qt/qtgui-${QTMIN}:5[gles2-only=]
+	>=dev-qt/qtgui-${QTMIN}:5[gles2-only=,X?]
 	>=dev-qt/qtquickcontrols-${QTMIN}:5
 	>=dev-qt/qtsql-${QTMIN}:5
 	>=dev-qt/qtsvg-${QTMIN}:5
