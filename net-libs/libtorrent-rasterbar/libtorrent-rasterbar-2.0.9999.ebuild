@@ -41,7 +41,7 @@ pkg_setup() {
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
-		-DCMAKE_CXX_STANDARD=14
+		-DCMAKE_CXX_STANDARD=17
 		-DBUILD_SHARED_LIBS=ON
 		-Dbuild_examples=OFF
 		-Ddht=$(usex dht ON OFF)
