@@ -34,10 +34,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-2.0.4-boost-1.77.patch
-)
-
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
