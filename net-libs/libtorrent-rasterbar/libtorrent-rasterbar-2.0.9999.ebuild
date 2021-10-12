@@ -10,7 +10,7 @@ DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalabilit
 HOMEPAGE="https://libtorrent.org/ https://github.com/arvidn/libtorrent"
 EGIT_REPO_URI="https://github.com/arvidn/libtorrent.git"
 EGIT_BRANCH="RC_2_0"
-#EGIT_SUBMODULES=()
+EGIT_SUBMODULES=()
 
 LICENSE="BSD"
 SLOT="0/2.0"
@@ -35,7 +35,7 @@ DEPEND="
 RDEPEND="${DEPEND}"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-boost-1.77.patch
+	"${FILESDIR}"/${PN}-2.0.4-boost-1.77.patch
 )
 
 pkg_setup() {
