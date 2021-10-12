@@ -127,6 +127,7 @@ python_install_all() {
 		rm "${ED}/usr/bin/deluge-web" || die
 		rm "${ED}/usr/share/man/man1/deluge-web.1" || die
 	fi
+	mv "${ED}/usr/share/appdata/" "${ED}/usr/share/metainfo/"
 	newinitd "${FILESDIR}"/deluged.init-2 deluged
 	newconfd "${FILESDIR}"/deluged.conf-2 deluged
 
