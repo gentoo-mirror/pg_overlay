@@ -35,7 +35,7 @@ REQUIRED_USE="
 # instead. It doesn't seem like Deluge supports >= 2 right now.
 DEPEND="
 	$(python_gen_cond_dep '
-		<net-libs/libtorrent-rasterbar-2.0.0[python]
+		net-libs/libtorrent-rasterbar[python]
 		dev-python/wheel[${PYTHON_USEDEP}]
 	')
 	dev-util/intltool
@@ -53,7 +53,7 @@ RDEPEND="
 		dev-python/six[${PYTHON_USEDEP}]
 		>=dev-python/twisted-17.1.0[crypt,${PYTHON_USEDEP}]
 		>=dev-python/zope-interface-4.4.2[${PYTHON_USEDEP}]
-		<net-libs/libtorrent-rasterbar-2.0.0[python]
+		net-libs/libtorrent-rasterbar[python]
 		geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 		gtk? (
 			sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
