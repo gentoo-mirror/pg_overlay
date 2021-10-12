@@ -4,7 +4,7 @@
 EAPI=7
 
 PYTHON_COMPAT=( python3_{9,10} )
-inherit cmake python-single-r1
+inherit cmake git-r3 python-single-r1
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"
 HOMEPAGE="https://libtorrent.org/ https://github.com/arvidn/libtorrent"
@@ -34,10 +34,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/${P}-boost-1.77.patch
-)
-
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
@@ -54,11 +50,13 @@ src_configure() {
 		-Dlogging=$(usex debug ON OFF)
 		-Dpython-bindings=$(usex python ON OFF)
 		-Dbuild_tests=$(usex test ON OFF)
+		-Di2p=OFF
+		-Dstreaming=OFF
 	)
 
 	# We need to drop the . from the Python version to satisfy Boost's
 	# FindBoost.cmake module, bug #793038.
-	use python && mycmakeargs+=( -Dboost-python-module-name="${EPYTHON/./}" )
+	use python && mycmakeargs+=( -Dboost-python-module-name="python" )
 
 	cmake_src_configure
 }
