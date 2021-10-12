@@ -50,6 +50,8 @@ src_configure() {
 		-Dlogging=$(usex debug ON OFF)
 		-Dpython-bindings=$(usex python ON OFF)
 		-Dbuild_tests=$(usex test ON OFF)
+		-Di2p=OFF
+		-Dstreaming=OFF
 	)
 
 	# We need to drop the . from the Python version to satisfy Boost's
