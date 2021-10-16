@@ -141,8 +141,7 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.38: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
-media-video/wireplumber 0.4.4: Replacement for pipewire-media-session
-net-im/pidgin 2.14.7 2.9999 9999: GTK Instant Messenger client
+net-im/pidgin 2.14.8 2.9999 9999: GTK Instant Messenger client
 net-im/telegram-desktop 3.1.9: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
