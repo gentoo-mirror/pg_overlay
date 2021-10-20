@@ -33,7 +33,6 @@ src_prepare() {
 		-DUSE_FFVIDEO=0
 		-DUSE_GOOM=0
 		-DUSE_SRC=0
-		-DUSE_XMP=0
 		-DUSE_YTB=0
 	)
 
