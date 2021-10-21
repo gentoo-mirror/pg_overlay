@@ -1,5 +1,5 @@
 BDEPEND=sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.2-r1:1.16 ) >=sys-devel/autoconf-2.69 >=sys-devel/libtool-2.4
-DEFINED_PHASES=compile install prepare unpack
+DEFINED_PHASES=compile install unpack
 DESCRIPTION=Monkey's Audio Codecs
 EAPI=7
 HOMEPAGE=https://www.monkeysaudio.com
@@ -9,4 +9,4 @@ LICENSE=mac
 SLOT=0
 SRC_URI=http://monkeysaudio.com/files/MAC_SDK_713.zip -> mac-7.13.zip
 _eclasses_=gnuconfig	262062cef0ba4f22b397193da514a350	toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	4b66d835ec72e021e359bb81eacfe988	libtool	241a8f577b9781a42a7421e53448a44e	autotools	c9df06c186913b43eb211100ef5fe2cf
-_md5_=8e2fdd20b40de23a6b113a8ec71c4b4b
+_md5_=2275e9a8fb7017432d25e037981aad39
