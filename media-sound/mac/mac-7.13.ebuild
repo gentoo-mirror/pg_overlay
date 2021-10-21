@@ -24,13 +24,15 @@ src_unpack() {
 
 src_prepare() {
 	default
-	cp Source/Projects/NonWindows/Makefile .
+	#cp Source/Projects/NonWindows/Makefile .
 }
 
 src_compile() {
+    pushd Source/Projects/NonWindows
 	emake prefix=${EPREFIX}/usr libdir=${EPREFIX}/usr/$(get_libdir)
 }
 
 src_install() {
+    pushd Source/Projects/NonWindows
     emake DESTDIR=${ED} prefix=${EPREFIX}/usr libdir=${EPREFIX}/usr/$(get_libdir) install
 }
