@@ -22,11 +22,6 @@ src_unpack() {
 	unpack ${A}
 }
 
-src_prepare() {
-	default
-	#cp Source/Projects/NonWindows/Makefile .
-}
-
 src_compile() {
     pushd Source/Projects/NonWindows
 	emake prefix=${EPREFIX}/usr libdir=${EPREFIX}/usr/$(get_libdir)
