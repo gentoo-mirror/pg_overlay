@@ -33,7 +33,6 @@ REQUIRED_USE="jack-sdk? ( !jack-client )"
 RESTRICT="!test? ( test )"
 
 BDEPEND="
-	app-doc/xmltoman
 	>=dev-util/meson-0.59
 	virtual/pkgconfig
 	${PYTHON_DEPS}
@@ -83,6 +82,10 @@ RDEPEND="
 
 DEPEND="${RDEPEND}"
 
+# TODO: Consider use cases where pipewire is not used for driving audio
+# Doing so with WirePlumber currently involves editing Lua scripts
+PDEPEND="media-video/wireplumber"
+
 # Present RDEPEND that are currently always disabled due to the PW
 # code using them being required to be disabled by Gentoo guidelines
 # (i.e. developer binaries not meant for users) and unready code
@@ -111,12 +114,6 @@ python_check_deps() {
 src_prepare() {
 	default
 
-	if ! use systemd; then
-		# This can be applied non-conditionally but would make for a
-		# significantly worse user experience on systemd then.
-		eapply "${FILESDIR}"/${PN}-0.3.36-non-systemd-integration.patch
-	fi
-
 	einfo "Generating ${limitsdfile}"
 	cat > ${limitsdfile} <<- EOF || die
 		# Start of ${limitsdfile} from ${P}
@@ -131,10 +128,7 @@ multilib_src_configure() {
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_native_use_feature doc docs)
-		-Dexamples=disabled # Disabling this implicitly disables -Dmedia-session
-		# Replaced upstream by -Dsession-managers=..., needs more work, bug #812809
-		# but default is same as before and right now, this is fatal with unreleased Meson.
-		-Dsession-managers=[]
+		$(meson_native_enabled examples) # TODO: Figure out if this is still important now that media-session gone
 		$(meson_native_enabled man)
 		$(meson_feature test tests)
 		-Dinstalled_tests=disabled # Matches upstream; Gentoo never installs tests
@@ -145,7 +139,7 @@ multilib_src_configure() {
 		$(meson_native_use_feature systemd systemd-user-service)
 		$(meson_feature pipewire-alsa) # Allows integrating ALSA apps into PW graph
 		-Dspa-plugins=enabled
-		-Dalsa=enabled # Allows using kernel ALSA for sound I/O (-Dmedia-session depends on this)
+		-Dalsa=enabled # Allows using kernel ALSA for sound I/O (NOTE: media-session is gone so IUSE=alsa/spa_alsa/alsa-backend might be possible)
 		-Daudiomixer=enabled # Matches upstream
 		-Daudioconvert=enabled # Matches upstream
 		$(meson_native_use_feature bluetooth bluez5)
@@ -178,13 +172,14 @@ multilib_src_configure() {
 		-Dudevrulesdir="${EPREFIX}$(get_udevdir)/rules.d"
 		-Dsdl2=disabled # Controls SDL2 dependent code (currently only examples when -Dinstalled_tests=enabled which we never install)
 		$(meson_native_use_feature extra sndfile) # Enables libsndfile dependent code (currently only pw-cat)
+		-Dsession-managers="[]" # All available session managers are now their own projects, so there's nothing to build
 	)
 
 	meson_src_configure
 }
 
 multilib_src_install() {
-	# Our customs DOCS do not exist in multilib source directory
+	# Our custom DOCS do not exist in multilib source directory
 	DOCS= meson_src_install
 }
 
@@ -196,7 +191,7 @@ multilib_src_install_all() {
 
 	if use pipewire-alsa; then
 		dodir /etc/alsa/conf.d
-		# These will break if someone has /etc that is a symbol link to a subfolder! See #724222
+		# These will break if someone has /etc that is a symbolic link to a subfolder! See #724222
 		# And the current dosym8 -r implementation is likely affected by the same issue, too.
 		dosym ../../../usr/share/alsa/alsa.conf.d/50-pipewire.conf /etc/alsa/conf.d/50-pipewire.conf
 		dosym ../../../usr/share/alsa/alsa.conf.d/99-pipewire-default.conf /etc/alsa/conf.d/99-pipewire-default.conf
@@ -208,6 +203,7 @@ multilib_src_install_all() {
 
 		exeinto /usr/libexec
 		newexe "${FILESDIR}"/pipewire-launcher.sh pipewire-launcher
+		eprefixify "${ED}"/usr/libexec/pipewire-launcher
 	fi
 }
 
@@ -241,26 +237,32 @@ pkg_postinst() {
 		elog "A reboot is recommended to avoid interferences from still running"
 		elog "PulseAudio daemon."
 		elog
-		elog "Both, new users and those upgrading, need to enable pipewire-media-session"
+		elog "Both, new users and those upgrading, need to enable WirePlumber"
 		elog "for relevant users:"
 		elog
-		elog "  systemctl --user enable --now pipewire-media-session.service"
+		elog "  systemctl --user enable --now wireplumber.service"
 		elog
 	else
-		elog "This ebuild auto-enables PulseAudio replacement. Because of that, users"
-		elog "are recommended to edit: ${EROOT}/etc/pulse/client.conf and disable"
-		elog "autospawning of the original daemon by setting:"
-		elog
-		elog "  autospawn = no"
-		elog
-		elog "Please note that the semicolon (;) must _NOT_ be at the beginning of the line!"
-		elog
-		elog "Alternatively, if replacing PulseAudio daemon is not desired, edit"
-		elog "${EROOT}/etc/pipewire/pipewire.conf by commenting out the relevant"
-		elog "command near the end of the file:"
-		elog
-		elog "#\"/usr/bin/pipewire\" = { args = \"-c pipewire-pulse.conf\" }"
-		elog
+		ewarn "Those manually starting /usr/bin/pipewire via startx or similar _must_ from"
+		ewarn "now on start ${EROOT}/usr/libexec/pipewire-launcher instead! It is highly"
+		ewarn "advised that a D-Bus user session is set up before starting the script."
+		ewarn
+		if has_version 'media-sound/pulseaudio[daemon]' || has_version 'media-sound/pulseaudio-daemon'; then
+			elog "This ebuild auto-enables PulseAudio replacement. Because of that, users"
+			elog "are recommended to edit: ${EROOT}/etc/pulse/client.conf and disable"
+			elog "autospawning of the original daemon by setting:"
+			elog
+			elog "  autospawn = no"
+			elog
+			elog "Please note that the semicolon (;) must _NOT_ be at the beginning of the line!"
+			elog
+			elog "Alternatively, if replacing PulseAudio daemon is not desired, edit"
+			elog "${EROOT}/usr/libexec/pipewire-launcher.sh  by commenting out the relevant"
+			elog "command:"
+			elog
+			elog "#/usr/bin/pipewire -c pipewire-pulse.conf &"
+			elog
+		fi
 		elog "NOTE:"
 		elog "Starting with PipeWire-0.3.30, this package is no longer installing its config"
 		elog "into ${EROOT}/etc/pipewire by default. In case you need to change"
