@@ -130,7 +130,7 @@ multilib_src_configure() {
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_native_use_feature doc docs)
-		-Dexamples=disabled # Disabling this implicitly disables -Dmedia-session
+		-Dexamples=enabled # Disabling this implicitly disables -Dmedia-session
 		# Replaced upstream by -Dsession-managers=..., needs more work, bug #812809
 		# but default is same as before and right now, this is fatal with unreleased Meson.
 		-Dsession-managers=[]
@@ -171,7 +171,7 @@ multilib_src_configure() {
 		-Dvideoconvert=enabled # Matches upstream
 		-Dvideotestsrc=enabled # Matches upstream
 		-Dvolume=enabled # Matches upstream
-		-Dvulkan=enabled # Uses pre-compiled Vulkan compute shader to provide a CGI video source (dev thing; disabled by upstream)
+		-Dvulkan=disabled # Uses pre-compiled Vulkan compute shader to provide a CGI video source (dev thing; disabled by upstream)
 		$(meson_native_use_feature extra pw-cat)
 		-Dudev=enabled
 		-Dudevrulesdir="${EPREFIX}$(get_udevdir)/rules.d"
