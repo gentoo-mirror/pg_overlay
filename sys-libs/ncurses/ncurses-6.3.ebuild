@@ -9,7 +9,8 @@ MY_PV="${PV:0:3}"
 MY_P="${PN}-${MY_PV}"
 DESCRIPTION="console display library"
 HOMEPAGE="https://www.gnu.org/software/ncurses/ https://invisible-island.net/ncurses/"
-SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz"
+SRC_URI="mirror://gnu/ncurses/${MY_P}.tar.gz
+        https://invisible-mirror.net/archives/ncurses/${P}.tar.gz"
 
 if [[ "${PV}" == *_p* ]] ; then
 	SRC_URI+=" ftp://ftp.invisible-island.net/${PN}/current/${P/_p/-}.tgz
