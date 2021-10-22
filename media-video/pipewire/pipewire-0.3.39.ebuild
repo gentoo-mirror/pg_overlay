@@ -133,7 +133,7 @@ multilib_src_configure() {
 		-Dexamples=disabled # Disabling this implicitly disables -Dmedia-session
 		# Replaced upstream by -Dsession-managers=..., needs more work, bug #812809
 		# but default is same as before and right now, this is fatal with unreleased Meson.
-		-Dsession-managers=
+		-Dsession-managers=[]
 		$(meson_native_enabled man)
 		$(meson_feature test tests)
 		-Dinstalled_tests=disabled # Matches upstream; Gentoo never installs tests
