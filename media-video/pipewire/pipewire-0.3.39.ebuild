@@ -98,7 +98,6 @@ DOCS=( {README,INSTALL}.md NEWS )
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
 	# Upstream
-	"${FILESDIR}"/${PN}-0.3.38-fix-arm-build.patch
 	"${FILESDIR}"/${PN}-0.3.38-libcamera-null-deref.patch # (we don't have it in ::gentoo but let's be nice)
 	"${FILESDIR}"/${PN}-0.3.38-find-readline.patch # just in case
 )
