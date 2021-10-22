@@ -126,6 +126,7 @@ media-sound/cantata 9999: Featureful and configurable Qt client for the music pl
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mac 7.13: Monkey's Audio Codecs
+media-sound/mpd 0.23.1: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
@@ -136,7 +137,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-media-video/pipewire 0.3.38: Multimedia processing graphs
+media-video/pipewire 0.3.38 0.3.39: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 21.1.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.8 2.9999 9999: GTK Instant Messenger client
