@@ -17,13 +17,13 @@ IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc +dbus
 	+ipv6 jack lame libmpdclient libsamplerate libsoxr +mad mikmod mms
 	modplug mpg123 musepack +network nfs openal opus oss pipe pulseaudio qobuz
 	recorder samba selinux sid signalfd sndfile sndio soundcloud sqlite systemd
-	test tidal twolame udisks vorbis wavpack webdav wildmidi upnp
+	test twolame udisks vorbis wavpack webdav wildmidi upnp
 	zeroconf zip zlib"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio sndio recorder"
 DECODER_PLUGINS="audiofile faad ffmpeg flac fluidsynth mad mikmod
 	modplug mpg123 musepack flac sid vorbis wavpack wildmidi"
-ENCODER_PLUGINS="audiofile flac lame twolame vorbis"
+ENCODER_PLUGINS="audiofile flac lame twolame vorbis pipewire"
 
 REQUIRED_USE="
 	|| ( ${OUTPUT_PLUGINS} )
@@ -38,6 +38,7 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="
 	acct-user/mpd
+	dev-libs/libfmt
 	sys-libs/liburing:=
 	alsa? (
 		media-libs/alsa-lib
@@ -80,6 +81,7 @@ RDEPEND="
 	openal? ( media-libs/openal )
 	opus? ( media-libs/opus )
 	pulseaudio? ( media-sound/pulseaudio )
+	pipewire? ( media-video/pipewire )
 	qobuz? ( dev-libs/libgcrypt:0 )
 	samba? ( net-fs/samba )
 	selinux? ( sec-policy/selinux-mpd )
@@ -92,8 +94,6 @@ RDEPEND="
 	soundcloud? ( >=dev-libs/yajl-2:= )
 	sqlite? ( dev-db/sqlite:3 )
 	systemd? ( sys-apps/systemd )
-	tidal? ( dev-libs/yajl
-		net-misc/curl )
 	twolame? ( media-sound/twolame )
 	udisks? ( sys-fs/udisks:2 )
 	upnp? ( net-libs/libupnp:0 )
@@ -182,6 +182,7 @@ src_configure() {
 		-Dzeroconf=$(usex zeroconf avahi disabled)
 		-Dzlib=$(usex zlib enabled disabled)
 		-Dzzip=$(usex zip enabled disabled)
+		-Dpipewire=$(usex pipewire enabled disabled)
 		)
 
 	emesonargs+=(
@@ -243,7 +244,6 @@ src_configure() {
 	emesonargs+=(
 		-Dqobuz=$(usex qobuz enabled disabled)
 		-Dsoundcloud=$(usex soundcloud enabled disabled)
-		-Dtidal=$(usex tidal enabled disabled)
 	)
 
 	emesonargs+=(
