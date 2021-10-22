@@ -185,7 +185,7 @@ sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in
 sys-libs/ncurses 6.2_p20210718 6.3: console display library
 sys-libs/pam 1.5.1_p20210722: Linux-PAM (Pluggable Authentication Modules)
 sys-libs/polly 11.1.0 12.0.0 12.0.1 13.0.0: Polyhedral optimizations for LLVM
-sys-libs/slang 2.3.3_pre58: Multi-platform library designed to allow a developer to create robust software
+sys-libs/slang 2.3.3_pre59: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/perl-Digest-SHA 6.20.0-r2: Virtual for Digest-SHA
