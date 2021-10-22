@@ -183,7 +183,7 @@ src_configure() {
 		-Dzlib=$(usex zlib enabled disabled)
 		-Dzzip=$(usex zip enabled disabled)
 		-Dpipewire=$(usex pipewire enabled disabled)
-		-Dsnapcast=disabled
+		-Dsnapcast=false
 		)
 
 	emesonargs+=(
