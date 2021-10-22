@@ -97,9 +97,6 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
-	# Upstream
-	"${FILESDIR}"/${PN}-0.3.38-libcamera-null-deref.patch # (we don't have it in ::gentoo but let's be nice)
-	"${FILESDIR}"/${PN}-0.3.38-find-readline.patch # just in case
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
@@ -133,10 +130,10 @@ multilib_src_configure() {
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 		$(meson_native_use_feature doc docs)
-		$(meson_native_enabled examples) # Disabling this implicitly disables -Dmedia-session
+		-Dexamples=disabled # Disabling this implicitly disables -Dmedia-session
 		# Replaced upstream by -Dsession-managers=..., needs more work, bug #812809
 		# but default is same as before and right now, this is fatal with unreleased Meson.
-		#$(meson_native_enabled media-session)
+		-Dsession-managers=
 		$(meson_native_enabled man)
 		$(meson_feature test tests)
 		-Dinstalled_tests=disabled # Matches upstream; Gentoo never installs tests
@@ -161,8 +158,8 @@ multilib_src_configure() {
 		$(meson_native_use_feature echo-cancel echo-cancel-webrtc) #807889
 		-Dcontrol=enabled # Matches upstream
 		-Daudiotestsrc=enabled # Matches upstream
-		-Dffmpeg=disabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
-		-Dpipewire-jack=enabled # Allows integrating JACK apps into PW graph
+		-Dffmpeg=enabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
+		-Dpipewire-jack=disabled # Allows integrating JACK apps into PW graph
 		$(meson_native_use_feature jack-client jack) # Allows PW to act as a JACK client
 		$(meson_use jack-sdk jack-devel)
 		$(usex jack-sdk "-Dlibjack-path=${EPREFIX}/usr/$(get_libdir)" '')
@@ -174,7 +171,7 @@ multilib_src_configure() {
 		-Dvideoconvert=enabled # Matches upstream
 		-Dvideotestsrc=enabled # Matches upstream
 		-Dvolume=enabled # Matches upstream
-		-Dvulkan=disabled # Uses pre-compiled Vulkan compute shader to provide a CGI video source (dev thing; disabled by upstream)
+		-Dvulkan=enabled # Uses pre-compiled Vulkan compute shader to provide a CGI video source (dev thing; disabled by upstream)
 		$(meson_native_use_feature extra pw-cat)
 		-Dudev=enabled
 		-Dudevrulesdir="${EPREFIX}$(get_udevdir)/rules.d"
