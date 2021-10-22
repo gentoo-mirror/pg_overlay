@@ -18,12 +18,12 @@ IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc +dbus
 	modplug mpg123 musepack +network nfs openal opus oss pipe pulseaudio qobuz
 	recorder samba selinux sid signalfd sndfile sndio soundcloud sqlite systemd
 	test twolame udisks vorbis wavpack webdav wildmidi upnp
-	zeroconf zip zlib"
+	zeroconf zip zlib pipewire"
 
 OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio sndio recorder"
 DECODER_PLUGINS="audiofile faad ffmpeg flac fluidsynth mad mikmod
 	modplug mpg123 musepack flac sid vorbis wavpack wildmidi"
-ENCODER_PLUGINS="audiofile flac lame twolame vorbis pipewire"
+ENCODER_PLUGINS="audiofile flac lame twolame vorbis"
 
 REQUIRED_USE="
 	|| ( ${OUTPUT_PLUGINS} )
