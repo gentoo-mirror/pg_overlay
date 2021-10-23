@@ -5,7 +5,7 @@ EAPI="7"
 
 PYTHON_COMPAT=( python3_{8..10} )
 
-inherit meson-multilib optfeature python-any-r1 udev
+inherit meson-multilib optfeature prefix python-any-r1 udev
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
