@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-93-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-93-patches-02.tar.xz"
 
 LLVM_MAX_SLOT=13
 
@@ -654,6 +654,9 @@ src_configure() {
 
 	# python/mach/mach/mixin/process.py fails to detect SHELL
 	export SHELL="${EPREFIX}/bin/bash"
+
+	# Set state path
+	export MOZBUILD_STATE_PATH="${BUILD_DIR}"
 
 	# Set MOZCONFIG
 	export MOZCONFIG="${S}/.mozconfig"
