@@ -12,7 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://gitlab.freedesktop.org/${PN}/${PN}/-/archive/${PV}/${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~riscv ~x86"
 fi
 
 DESCRIPTION="Multimedia processing graphs"
@@ -201,9 +201,9 @@ multilib_src_install_all() {
 		insinto /etc/xdg/autostart
 		newins "${FILESDIR}"/pipewire.desktop pipewire.desktop
 
-		exeinto /usr/libexec
-		newexe "${FILESDIR}"/pipewire-launcher.sh pipewire-launcher
-		eprefixify "${ED}"/usr/libexec/pipewire-launcher
+		exeinto /usr/bin
+		newexe "${FILESDIR}"/gentoo-pipewire-launcher.in gentoo-pipewire-launcher
+		eprefixify "${ED}"/usr/bin/gentoo-pipewire-launcher
 	fi
 }
 
@@ -243,8 +243,13 @@ pkg_postinst() {
 		elog "  systemctl --user enable --now wireplumber.service"
 		elog
 	else
-		ewarn "Those manually starting /usr/bin/pipewire via startx or similar _must_ from"
-		ewarn "now on start ${EROOT}/usr/libexec/pipewire-launcher instead! It is highly"
+		ewarn "PipeWire daemon startup has been moved to a launcher script!"
+		ewarn "Make sure that ${EROOT}/etc/pipewire/pipewire.conf either does not exist or no"
+		ewarn "longer is set to start a session manager or PulseAudio compatibility daemon (all"
+		ewarn "lines similar to `{ path = \"/usr/bin/pipewire*` should be commented out)"
+		ewarn
+		ewarn "Those manually starting /usr/bin/pipewire via .xinitrc or similar _must_ from"
+		ewarn "now on start ${EROOT}/usr/bin/gentoo-pipewire-launcher instead! It is highly"
 		ewarn "advised that a D-Bus user session is set up before starting the script."
 		ewarn
 		if has_version 'media-sound/pulseaudio[daemon]' || has_version 'media-sound/pulseaudio-daemon'; then
@@ -257,10 +262,10 @@ pkg_postinst() {
 			elog "Please note that the semicolon (;) must _NOT_ be at the beginning of the line!"
 			elog
 			elog "Alternatively, if replacing PulseAudio daemon is not desired, edit"
-			elog "${EROOT}/usr/libexec/pipewire-launcher.sh  by commenting out the relevant"
+			elog "${EROOT}/usr/bin/gentoo-pipewire-launcher by commenting out the relevant"
 			elog "command:"
 			elog
-			elog "#/usr/bin/pipewire -c pipewire-pulse.conf &"
+			elog "#${EROOT}/usr/bin/pipewire -c pipewire-pulse.conf &"
 			elog
 		fi
 		elog "NOTE:"
