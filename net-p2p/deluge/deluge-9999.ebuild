@@ -66,6 +66,7 @@ RDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.0.3-UI-status.patch"
+	"${FILESDIR}/${PN}-web_ui_columns.patch"
 )
 
 src_prepare() {
