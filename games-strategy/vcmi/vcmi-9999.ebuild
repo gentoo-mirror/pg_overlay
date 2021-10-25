@@ -17,7 +17,7 @@ SLOT="0"
 RESTRICT=test
 
 RDEPEND="
-    dev-cpp/tbb
+    dev-cpp/onetbb
 	>=dev-libs/boost-1.48:=
 	dev-qt/qtcore:=
 	dev-qt/qtgui:=
