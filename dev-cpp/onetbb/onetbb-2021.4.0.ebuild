@@ -23,8 +23,6 @@ S="${WORKDIR}/oneTBB-${MY_PV}"
 
 DOCS=( CHANGES README README.md doc/Release_Notes.txt )
 
-PATCHES=( "${FILESDIR}"/tbb-2020.1-makefile-debug.patch )
-
 src_prepare() {
 	default
 
