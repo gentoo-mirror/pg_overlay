@@ -5,12 +5,8 @@ EAPI=7
 
 inherit flag-o-matic multilib-minimal multilib toolchain-funcs
 
-PV1="$(ver_cut 1)"
-PV2="$(ver_cut 2)"
-MY_PV="${PV1}_U${PV2}"
-
 DESCRIPTION="High level abstract threading library"
-HOMEPAGE="https://www.threadingbuildingblocks.org"
+HOMEPAGE="https://www.intel.com/content/www/us/en/developer/tools/oneapi/onetbb.html"
 SRC_URI="https://github.com/oneapi-src/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 LICENSE="Apache-2.0"
 SLOT="0"
@@ -19,7 +15,6 @@ IUSE="debug examples"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
-S="${WORKDIR}/oneTBB-${MY_PV}"
 
 DOCS=( CHANGES README README.md doc/Release_Notes.txt )
 
