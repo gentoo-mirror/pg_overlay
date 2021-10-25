@@ -18,7 +18,8 @@ RESTRICT=test
 
 RDEPEND="
     dev-cpp/onetbb
-	>=dev-libs/boost-1.48:=
+    dev-lang/luajit
+	>=dev-libs/boost-1.70:=
 	dev-qt/qtcore:=
 	dev-qt/qtgui:=
 	dev-qt/qtnetwork:=
