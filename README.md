@@ -8,6 +8,4 @@ That what you can find here:
 
 3 - Rust with various optimizations
 
-4 - Kwin-Lowlatency
-
-5 - Modified ebuilds for various packages rewritten with intention to be live & minimal
+4 - Modified ebuilds for various packages rewritten with intention to be live & minimal
