@@ -15,6 +15,7 @@ IUSE="debug examples"
 
 DEPEND=""
 RDEPEND="${DEPEND}"
+S="${WORKDIR}/oneTBB-${PV}"
 
 DOCS=( CHANGES README README.md doc/Release_Notes.txt )
 
