@@ -39,7 +39,7 @@ RDEPEND="app-arch/bzip2:=
 	>=sys-libs/zlib-1.1.3:=
 	virtual/libcrypt:=
 	virtual/libintl
-	gdbm? ( sys-libs/gdbm:=[berkdb] )
+	gdbm? ( sys-libs/gdbm:= )
 	ncurses? ( >=sys-libs/ncurses-5.2:= )
 	readline? ( >=sys-libs/readline-4.1:= )
 	sqlite? ( >=dev-db/sqlite-3.3.8:3= )
