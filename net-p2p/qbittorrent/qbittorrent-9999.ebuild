@@ -49,7 +49,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DDBUS=$(usex dbus ON OFF)
 		-DGUI=$(usex gui ON OFF)
-		-DQBT_VER_STATUS=""
 		-DSTACKTRACE=$(usex debug ON OFF)
 		-DWEBUI=$(usex webui ON OFF)
 		-DSYSTEMD=OFF
