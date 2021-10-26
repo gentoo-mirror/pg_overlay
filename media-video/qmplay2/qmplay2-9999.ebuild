@@ -3,7 +3,8 @@
 
 EAPI=7
 
-inherit cmake xdg
+inherit cmake xdg plocale
+PLOCALES="de es fr hu ja nl pl pt_BR ru uk zh_CN zh_TW"
 
 DESCRIPTION="A Qt-based video player, which can play most formats and codecs"
 HOMEPAGE="https://github.com/zaps166/QMPlay2"
@@ -77,6 +78,12 @@ src_prepare() {
 		-e 's/if\(GZIP\)/if\(TRUE\)/' \
 		-e 's/(install.+QMPlay2\.1)\.gz/\1/' \
 		-i src/gui/CMakeLists.txt || die
+
+	rm_locale() {
+		rm -vf "lang/${1}.ts" || die
+	}
+	plocale_find_changes lang "" ".ts"
+	plocale_for_each_disabled_locale rm_locale
 
 	cmake_src_prepare
 }
