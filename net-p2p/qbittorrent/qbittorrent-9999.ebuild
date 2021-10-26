@@ -27,6 +27,7 @@ RDEPEND="
 	>=dev-libs/boost-1.62.0-r1:=
 	dev-qt/qtcore:5
 	dev-qt/qtnetwork:5[ssl]
+	dev-qt/qtsql:5
 	dev-qt/qtxml:5
 	>=net-libs/libtorrent-rasterbar-1.2.12:0=
 	sys-libs/zlib
@@ -51,7 +52,7 @@ src_configure() {
 		-DQBT_VER_STATUS=""
 		-DSTACKTRACE=$(usex debug ON OFF)
 		-DWEBUI=$(usex webui ON OFF)
-		-DWITH_SYSTEMD=OFF
+		-DSYSTEMD=OFF
 	)
 
 	cmake_src_configure
