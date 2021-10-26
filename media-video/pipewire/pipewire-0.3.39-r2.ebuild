@@ -100,7 +100,9 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
-	"${FILESDIR}"/0001-cpu-fix-compilation-on-some-architectures.patch
+	# Upstream
+	"${FILESDIR}"/${P}-fix-build-some-arches.patch
+	"${FILESDIR}"/${P}-endian-test-fix.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
