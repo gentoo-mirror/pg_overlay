@@ -84,7 +84,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		# core
-		-DUSE_LINK_TIME_OPTIMIZATION=ON
+		-DUSE_LINK_TIME_OPTIMIZATION=OFF
 		-DUSE_ALSA=$(usex alsa)
 		-DUSE_AUDIOCD=$(usex cdio)
 		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex dbus) # https://github.com/zaps166/QMPlay2/issues/134
@@ -127,7 +127,8 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DUSE_RADIO=OFF
 		-DUSE_UPDATES=OFF
-	)
+		-DUSE_PCH=ON
+    )
 
 	if [[ ${PV} == *9999 ]]; then
 		mycmakeargs+=( -DUSE_GIT_VERSION=true )
