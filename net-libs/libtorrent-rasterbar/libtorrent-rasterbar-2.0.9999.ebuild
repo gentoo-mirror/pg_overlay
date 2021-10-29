@@ -33,6 +33,11 @@ DEPEND="
 	)
 "
 RDEPEND="${DEPEND}"
+BDEPEND="python? (
+		$(python_gen_cond_dep '
+			dev-python/setuptools[${PYTHON_USEDEP}]
+		')
+	)"
 
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
