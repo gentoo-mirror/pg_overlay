@@ -121,32 +121,6 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  
  #if defined(_WIN32) || defined(WIN32)
  # if SQLITE_OS_WINRT
-@@ -1018,25 +1023,7 @@
- INCLUDE test_windirent.c
- #define dirent DIRENT
- #endif
--INCLUDE ../ext/misc/shathree.c
--INCLUDE ../ext/misc/fileio.c
--INCLUDE ../ext/misc/completion.c
--INCLUDE ../ext/misc/appendvfs.c
- INCLUDE ../ext/misc/memtrace.c
--INCLUDE ../ext/misc/uint.c
--INCLUDE ../ext/misc/decimal.c
--INCLUDE ../ext/misc/ieee754.c
--INCLUDE ../ext/misc/series.c
--#ifdef SQLITE_HAVE_ZLIB
--INCLUDE ../ext/misc/zipfile.c
--INCLUDE ../ext/misc/sqlar.c
--#endif
--INCLUDE ../ext/expert/sqlite3expert.h
--INCLUDE ../ext/expert/sqlite3expert.c
--
--#if !defined(SQLITE_OMIT_VIRTUALTABLE) && defined(SQLITE_ENABLE_DBPAGE_VTAB)
--INCLUDE ../ext/misc/dbdata.c
--#endif
- 
- #if defined(SQLITE_ENABLE_SESSION)
- /*
 @@ -4608,20 +4595,6 @@
  #ifndef SQLITE_OMIT_LOAD_EXTENSION
      sqlite3_enable_load_extension(p->db, 1);
