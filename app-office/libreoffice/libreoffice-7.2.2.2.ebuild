@@ -167,7 +167,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	net-misc/curl
 	sci-mathematics/lpsolve
 	sys-libs/zlib
-	virtual/glu
 	virtual/jpeg:0
 	virtual/opengl
 	x11-libs/cairo
@@ -289,6 +288,7 @@ PATCHES=(
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
+	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
@@ -345,7 +345,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	cp "${FILESDIR}/skia-freetype2.11.patch" external/skia
 	default
 
 	# sandbox violations on many systems, we don't need it. Bug #646406
