@@ -1,14 +1,9 @@
 build-disable-elfhack.patch
-
+mozilla-1669639.patch
 firefox-testing.patch
-
-firefox-tests-xpcshell.patch
-firefox-tests-reftest.patch
-firefox-tests-xpcshell-freeze.patch
 
 firefox-enable-addons.patch
 mozilla-1170092.patch
-
 rhbz-1354671.patch
 disable-openh264-download.patch
 
