@@ -14,13 +14,13 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://gitlab.com/orcus/orcus.git"
 	inherit git-r3 autotools
 else
-	MDDS_SLOT="1/1.5"
+	MDDS_SLOT="1/2.0"
 	SRC_URI="https://kohei.us/files/orcus/src/${P}.tar.xz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~x86"
 fi
 
 LICENSE="MIT"
-SLOT="0/0.16" # based on SONAME of liborcus.so
+SLOT="0/0.17" # based on SONAME of liborcus.so
 IUSE="python +spreadsheet-model tools"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
