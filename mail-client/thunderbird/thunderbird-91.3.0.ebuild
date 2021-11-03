@@ -600,9 +600,8 @@ src_prepare() {
 		fi
 	done
 	#######
-	cp "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/run-wayland-compositor "${S}"
 
-	xdg_src_prepare
+    xdg_src_prepare
 }
 
 src_configure() {
