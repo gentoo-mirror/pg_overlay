@@ -3,6 +3,8 @@
 
 EAPI=7
 
+inherit toolchain-funcs
+
 DESCRIPTION="ninja-compatible build tool written in C"
 HOMEPAGE="https://github.com/michaelforney/samurai"
 SRC_URI="https://github.com/michaelforney/samurai/releases/download/${PV}/${P}.tar.gz"
@@ -15,6 +17,10 @@ RDEPEND="!dev-util/ninja"
 PATCHES=(
 	"${FILESDIR}/${P}-null_pointer_fix.patch" #786957
 )
+
+src_compile() {
+	emake CC="$(tc-getCC)"
+}
 
 src_install() {
 	emake DESTDIR="${D}" PREFIX="${EPREFIX}"/usr install
