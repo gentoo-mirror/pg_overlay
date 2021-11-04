@@ -17,7 +17,7 @@ SLOT="0"
 RESTRICT=test
 
 RDEPEND="
-    dev-cpp/onetbb
+    dev-cpp/tbb
     dev-lang/luajit
 	>=dev-libs/boost-1.70:=
 	dev-qt/qtcore:=
