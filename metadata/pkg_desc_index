@@ -86,6 +86,7 @@ dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles
 dev-util/mdds 2.0.0: Collection of multi-dimensional data structure and indexing algorithm
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
+dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
 dev-util/scons 4.2.0-r1: Extensible Python-based build utility
 dev-util/spirv-headers 20210922: Machine-readable files for the SPIR-V Registry
