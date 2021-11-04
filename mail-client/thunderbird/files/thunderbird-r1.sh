@@ -29,7 +29,7 @@ MOZ_THUNDERBIRD_FILE="thunderbird"
 if [[ ! -r ${MOZ_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} ]]; then
 	if [[ ! -r ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} ]]; then
 		echo "Error: ${MOZ_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} not found" >&2
-		if [[ -d $SECONDARY_LIB_DIR ]]; then
+		if [[ -d ${SECONDARY_LIB_DIR} ]]; then
 			echo "       ${SECONDARY_LIB_DIR}/thunderbird/${MOZ_THUNDERBIRD_FILE} not found" >&2
 		fi
 		exit 1
@@ -39,7 +39,6 @@ fi
 MOZILLA_FIVE_HOME="${MOZ_LIB_DIR}/thunderbird"
 MOZ_EXTENSIONS_PROFILE_DIR="${HOME}/.mozilla/extensions/{3550f703-e582-4d05-9a08-453d09bdfdc6}"
 MOZ_PROGRAM="${MOZILLA_FIVE_HOME}/${MOZ_THUNDERBIRD_FILE}"
-DESKTOP_FILE="thunderbird"
 
 ##
 ## Enable Wayland backend?
@@ -113,5 +112,5 @@ fi
 # Don't throw "old profile" dialog box.
 export MOZ_ALLOW_DOWNGRADE=1
 
-# Run the browser
+# Run the mail client
 exec ${MOZ_PROGRAM} "${@}"
