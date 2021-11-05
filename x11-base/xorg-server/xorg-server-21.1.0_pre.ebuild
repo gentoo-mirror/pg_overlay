@@ -29,6 +29,7 @@ CDEPEND="
 	>=x11-libs/libXau-1.0.4
 	>=x11-libs/libXdmcp-1.0.2
 	>=x11-libs/libXfont2-2.0.1
+	x11-libs/libxcvt
 	>=x11-libs/libxkbfile-1.0.4
 	>=x11-libs/libxshmfence-1.1
 	>=x11-libs/pixman-0.27.2
@@ -133,7 +134,6 @@ src_configure() {
 		--disable-linux-acpi
 		--without-dtrace
 		--without-fop
-		--with-os-vendor=Gentoo
 		--with-sha1=libcrypto
 		CPP="$(tc-getPROG CPP cpp)"
 	)
