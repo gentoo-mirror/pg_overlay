@@ -134,7 +134,6 @@ src_configure() {
 		--disable-linux-acpi
 		--without-dtrace
 		--without-fop
-		--with-os-vendor=Gentoo
 		--with-sha1=libcrypto
 		CPP="$(tc-getPROG CPP cpp)"
 	)
