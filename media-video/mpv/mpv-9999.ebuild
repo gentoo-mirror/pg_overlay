@@ -3,8 +3,8 @@
 
 EAPI=7
 
-LUA_COMPAT=( lua5-{1,3,4} luajit )
-PYTHON_COMPAT=( python3_{9,10} )
+LUA_COMPAT=( lua5-{1..2} luajit )
+PYTHON_COMPAT=( python3_{8..10} )
 PYTHON_REQ_USE='threads(+)'
 
 WAF_PV=2.0.22
@@ -71,7 +71,7 @@ COMMON_DEPEND="
 		>=media-libs/libdvdnav-4.2.0:=
 		>=media-libs/libdvdread-4.1.0:=
 	)
-	egl? ( media-libs/mesa[egl,gbm(-)?,wayland(-)?] )
+	egl? ( media-libs/mesa[egl(+),gbm(+)?,wayland(-)?] )
 	gamepad? ( media-libs/libsdl2 )
 	iconv? (
 		virtual/libiconv
@@ -93,7 +93,7 @@ COMMON_DEPEND="
 	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
-		media-libs/libplacebo:=[vulkan]
+		>=media-libs/libplacebo-3.104.0:=[vulkan]
 		media-libs/shaderc
 	)
 	wayland? (
@@ -343,7 +343,7 @@ pkg_postinst() {
 		elog "X11 or Mac OS Aqua. Consider enabling the 'opengl' USE flag."
 	fi
 
-	optfeature "URL support" net-misc/youtube-dl
+	optfeature "URL support" net-misc/yt-dlp
 
 	xdg_icon_cache_update
 	xdg_desktop_database_update
