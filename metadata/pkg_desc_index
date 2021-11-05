@@ -119,7 +119,6 @@ media-libs/libglvnd 1.3.4: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A library for interfacing Music Player Daemon (media-sound/mpd)
 media-libs/libplacebo 4.157.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.16-r1: Simple Direct Media Layer
-media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2021.2: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.2.196: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.196: Vulkan Installable Client Driver (ICD) Loader
@@ -207,7 +206,7 @@ virtual/perl-version 0.992.900: Virtual for version
 www-client/firefox 94.0.1: Firefox Web Browser
 www-client/otter 9999: Project aiming to recreate classic Opera (12.x) UI using Qt5
 x11-base/xcb-proto 1.14.1: X C-language Bindings protocol headers
-x11-base/xorg-server 1.20.13-r1: X.Org X servers
+x11-base/xorg-server 1.20.13-r1 21.1.0_pre: X.Org X servers
 x11-base/xwayland 21.1.2-r2 21.1.2.901: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.4 9999: A vector graphics library with cross-device output support
