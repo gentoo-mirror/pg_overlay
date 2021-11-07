@@ -49,7 +49,6 @@ REQUIRED_USE="
 	tools? ( cli )
 	uchardet? ( iconv )
 	vaapi? ( || ( gbm X wayland ) )
-	vdpau? ( X )
 	vulkan? ( || ( X wayland ) )
 	wayland? ( egl )
 	X? ( egl? ( opengl ) )
