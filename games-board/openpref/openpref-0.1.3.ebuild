@@ -19,7 +19,7 @@ RDEPEND="
 	dev-qt/qtcore:5
 "
 DEPEND="${RDEPEND}
-	dev-qt/linguist:5"
+	dev-qt/linguist-tools:5"
 
 DOCS=(README)
 
