@@ -18,7 +18,8 @@ IUSE=""
 RDEPEND="
 	dev-qt/qtcore:5
 "
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	dev-qt/linguist:5"
 
 DOCS=(README)
 
