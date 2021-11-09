@@ -9,7 +9,7 @@ DESCRIPTION="Standalone X server running under Wayland"
 HOMEPAGE="https://wayland.freedesktop.org/xserver.html"
 SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
 
-IUSE="rpc unwind ipv6 xcsecurity selinux"
+IUSE="rpc unwind ipv6 xcsecurity selinux video_cards_nvidia"
 
 LICENSE="MIT"
 SLOT="0"
@@ -33,6 +33,7 @@ DEPEND="
 	>=x11-libs/libxshmfence-1.1
 	>=x11-libs/pixman-0.27.2
 	>=x11-libs/xtrans-1.3.5
+	video_cards_nvidia? ( gui-libs/egl-wayland )
 "
 
 RDEPEND="
@@ -56,6 +57,7 @@ src_configure() {
 		$(meson_use ipv6)
 		$(meson_use xcsecurity)
 		$(meson_use selinux xselinux)
+		$(meson_use video_cards_nvidia xwayland_eglstream)
 		-Ddri3=true
 		-Dglamor=true
 		-Dglx=true
