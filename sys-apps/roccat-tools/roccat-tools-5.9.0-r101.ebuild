@@ -3,7 +3,7 @@
 
 EAPI=7
 
-LUA_COMPAT=( lua5-{1..3} luajit )
+LUA_COMPAT=( lua5-{1,3} luajit )
 
 inherit readme.gentoo-r1 cmake flag-o-matic lua-single toolchain-funcs udev user xdg
 
