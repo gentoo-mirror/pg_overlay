@@ -589,7 +589,6 @@ src_prepare() {
 	### FreeBSD patches
 	einfo "Applying FreeBSD's patches"
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
-
 	### Fedora patches
 	einfo "Applying Fedora's patches"
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/series);do
@@ -620,9 +619,11 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
+	### PGO fix patch
+	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
 	#######
 
-    xdg_src_prepare
+	xdg_src_prepare
 }
 
 src_configure() {
