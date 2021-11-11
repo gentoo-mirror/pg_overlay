@@ -1,7 +1,7 @@
-diff --git a/src/3rdpartychromium/components/resources/protobufs/binary_proto_generator.py b/src/3rdpartychromium/components/resources/protobufs/binary_proto_generator.py
+diff --git a/src/3rdparty/chromium/components/resources/protobufs/binary_proto_generator.py b/src/3rdparty/chromium/components/resources/protobufs/binary_proto_generator.py
 index 7422ead9697..16365515f26 100755
---- a/src/3rdpartychromium/components/resources/protobufs/binary_proto_generator.py
-+++ b/src/3rdpartychromium/components/resources/protobufs/binary_proto_generator.py
+--- a/src/3rdparty/chromium/components/resources/protobufs/binary_proto_generator.py
++++ b/src/3rdparty/chromium/components/resources/protobufs/binary_proto_generator.py
 @@ -7,7 +7,7 @@
   Converts a given ASCII proto into a binary resource.
  
@@ -27,10 +27,10 @@ index 7422ead9697..16365515f26 100755
 +      print("ERROR: Failed to render binary version of %s:\n  %s\n%s" %
 +            (opts.infile, str(e), traceback.format_exc()))
        return 1
-diff --git a/src/3rdpartychromium/content/browser/tracing/generate_trace_viewer_grd.py b/src/3rdpartychromium/content/browser/tracing/generate_trace_viewer_grd.py
+diff --git a/src/3rdparty/chromium/content/browser/tracing/generate_trace_viewer_grd.py b/src/3rdparty/chromium/content/browser/tracing/generate_trace_viewer_grd.py
 index 037f9497dc2..be393d21f90 100755
---- a/src/3rdpartychromium/content/browser/tracing/generate_trace_viewer_grd.py
-+++ b/src/3rdpartychromium/content/browser/tracing/generate_trace_viewer_grd.py
+--- a/src/3rdparty/chromium/content/browser/tracing/generate_trace_viewer_grd.py
++++ b/src/3rdparty/chromium/content/browser/tracing/generate_trace_viewer_grd.py
 @@ -74,7 +74,7 @@ def main(argv):
    for filename in parsed_args.source_files:
      add_file_to_grd(doc, os.path.basename(filename))
@@ -40,10 +40,10 @@ index 037f9497dc2..be393d21f90 100755
      output_file.write(doc.toxml(encoding='UTF-8'))
  
  
-diff --git a/src/3rdpartychromium/mojo/public/tools/bindings/BUILD.gn b/src/3rdpartychromium/mojo/public/tools/bindings/BUILD.gn
+diff --git a/src/3rdparty/chromium/mojo/public/tools/bindings/BUILD.gn b/src/3rdparty/chromium/mojo/public/tools/bindings/BUILD.gn
 index fc04b5dd0b1..708958e438b 100644
---- a/src/3rdpartychromium/mojo/public/tools/bindings/BUILD.gn
-+++ b/src/3rdpartychromium/mojo/public/tools/bindings/BUILD.gn
+--- a/src/3rdparty/chromium/mojo/public/tools/bindings/BUILD.gn
++++ b/src/3rdparty/chromium/mojo/public/tools/bindings/BUILD.gn
 @@ -2,9 +2,11 @@
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
@@ -56,10 +56,10 @@ index fc04b5dd0b1..708958e438b 100644
  action("precompile_templates") {
    sources = mojom_generator_sources
    sources += [
-diff --git a/src/3rdpartychromium/mojo/public/tools/bindings/gen_data_files_list.py b/src/3rdpartychromium/mojo/public/tools/bindings/gen_data_files_list.py
+diff --git a/src/3rdparty/chromium/mojo/public/tools/bindings/gen_data_files_list.py b/src/3rdparty/chromium/mojo/public/tools/bindings/gen_data_files_list.py
 index 79c9e50efce..8b78d092418 100644
---- a/src/3rdpartychromium/mojo/public/tools/bindings/gen_data_files_list.py
-+++ b/src/3rdpartychromium/mojo/public/tools/bindings/gen_data_files_list.py
+--- a/src/3rdparty/chromium/mojo/public/tools/bindings/gen_data_files_list.py
++++ b/src/3rdparty/chromium/mojo/public/tools/bindings/gen_data_files_list.py
 @@ -18,7 +18,6 @@ import os
  import re
  import sys
@@ -83,10 +83,10 @@ index 79c9e50efce..8b78d092418 100644
  
  if __name__ == '__main__':
    sys.exit(main())
-diff --git a/src/3rdpartychromium/mojo/public/tools/bindings/generators/mojom_java_generator.py b/src/3rdpartychromium/mojo/public/tools/bindings/generators/mojom_java_generator.py
+diff --git a/src/3rdparty/chromium/mojo/public/tools/bindings/generators/mojom_java_generator.py b/src/3rdparty/chromium/mojo/public/tools/bindings/generators/mojom_java_generator.py
 index 96b2fdfae0c..00b9dccd00c 100644
---- a/src/3rdpartychromium/mojo/public/tools/bindings/generators/mojom_java_generator.py
-+++ b/src/3rdpartychromium/mojo/public/tools/bindings/generators/mojom_java_generator.py
+--- a/src/3rdparty/chromium/mojo/public/tools/bindings/generators/mojom_java_generator.py
++++ b/src/3rdparty/chromium/mojo/public/tools/bindings/generators/mojom_java_generator.py
 @@ -25,6 +25,10 @@ sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir,
                               'build', 'android', 'gyp'))
  from util import build_utils
@@ -98,10 +98,10 @@ index 96b2fdfae0c..00b9dccd00c 100644
  
  GENERATOR_PREFIX = 'java'
  
-diff --git a/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/generator.py b/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/generator.py
+diff --git a/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/generator.py b/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/generator.py
 index de62260a5c9..4a1c73fcf82 100644
---- a/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/generator.py
-+++ b/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/generator.py
+--- a/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/generator.py
++++ b/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/generator.py
 @@ -136,9 +136,14 @@ class Stylizer(object):
  
  def WriteFile(contents, full_path):
@@ -132,10 +132,10 @@ index de62260a5c9..4a1c73fcf82 100644
  
  
  def AddComputedData(module):
-diff --git a/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/module.py b/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/module.py
+diff --git a/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/module.py b/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/module.py
 index ebbc9b322ea..3d026429bbc 100644
---- a/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/module.py
-+++ b/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/module.py
+--- a/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/module.py
++++ b/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/module.py
 @@ -398,7 +398,8 @@ class Field(object):
  
  
@@ -146,10 +146,10 @@ index ebbc9b322ea..3d026429bbc 100644
  
  
  class UnionField(Field):
-diff --git a/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/template_expander.py b/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/template_expander.py
+diff --git a/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/template_expander.py b/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/template_expander.py
 index 7a300560246..8d9e26fb7f6 100644
---- a/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/template_expander.py
-+++ b/src/3rdpartychromium/mojo/public/tools/mojom/mojom/generate/template_expander.py
+--- a/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/template_expander.py
++++ b/src/3rdparty/chromium/mojo/public/tools/mojom/mojom/generate/template_expander.py
 @@ -75,9 +75,9 @@ def PrecompileTemplates(generator_modules, output_dir):
                  os.path.dirname(module.__file__), generator.GetTemplatePrefix())
          ]))
@@ -166,10 +166,10 @@ index 7a300560246..8d9e26fb7f6 100644
 +                                zip="stored",
 +                                py_compile=sys.version_info.major < 3,
 +                                ignore_errors=False)
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py
 index 3225ecca6e4..fc078d31b55 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/blink_v8_bridge.py
 @@ -344,7 +344,7 @@ def make_default_value_expr(idl_type, default_value):
      """
      assert default_value.is_type_compatible_with(idl_type)
@@ -197,10 +197,10 @@ index 3225ecca6e4..fc078d31b55 100644
      assert isinstance(idl_type, web_idl.IdlType)
  
      pattern = ("auto&& ${{{_1}}} = "
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py
 index 4a6df513068..8b51f23a409 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/callback_interface.py
 @@ -177,7 +177,7 @@ def generate_callback_interface(callback_interface_identifier):
           prop_install_mode=PropInstallMode.UNCONDITIONAL,
           trampoline_var_name=None,
@@ -210,10 +210,10 @@ index 4a6df513068..8b51f23a409 100644
           exposed_construct_entries=[],
           operation_entries=[])
      (install_interface_template_decl, install_interface_template_def,
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py
 index 52972fefe20..e5ae9d9629e 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/code_node.py
 @@ -503,13 +503,13 @@ class CompositeNode(CodeNode):
          gensym_kwargs = {}
          template_vars = {}
@@ -249,10 +249,10 @@ index 52972fefe20..e5ae9d9629e 100644
              scope_chains = map(
                  lambda scope_chain: scope_chain[self_index + 1:], scope_chains)
              scope_to_likeliness = {}
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py
 index a229a6c71c9..5fa288dabf2 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_expr.py
 @@ -109,7 +109,7 @@ def expr_and(terms):
  
      if any(term.is_always_false for term in terms):
@@ -296,10 +296,10 @@ index a229a6c71c9..5fa288dabf2 100644
          context_enabled_terms.append(
              expr_and([_Expr("${context_feature_settings}"),
                        expr_or(terms)]))
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py
 index 87d26eec3ca..f3e9d38247e 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_format.py
 @@ -23,7 +23,7 @@ class _TemplateFormatter(string.Formatter):
          self._template_formatter_indexing_count_ = 0
  
@@ -309,20 +309,20 @@ index 87d26eec3ca..f3e9d38247e 100644
              return args[key]
          assert isinstance(key, str)
          if not key:
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py
 index 2bcc4fed49a..e72282aa696 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/codegen_utils.py
 @@ -116,4 +116,4 @@ def write_code_node_to_file(code_node, filepath):
  #                               stderr=format_result.error_message))
  #
  #    web_idl.file_io.write_to_file_if_changed(filepath, format_result.contents)
 -    web_idl.file_io.write_to_file_if_changed(filepath, rendered_text)
 +    web_idl.file_io.write_to_file_if_changed(filepath, rendered_text.encode('utf-8'))
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py
 index b39f0100410..4d68202296b 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/dictionary.py
 @@ -993,7 +993,7 @@ def make_dict_trace_func(cg_context):
          _2 = _blink_member_name(member).value_var
          return TextNode(_format(pattern, _1=_1, _2=_2))
@@ -332,10 +332,10 @@ index b39f0100410..4d68202296b 100644
      body.append(TextNode("BaseClass::Trace(visitor);"))
  
      return func_decl, func_def
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py
 index 10ff30656ad..bfdf7128aac 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/interface.py
 @@ -582,7 +582,7 @@ def _make_blink_api_call(code_node,
                           overriding_args=None):
      assert isinstance(code_node, SymbolScopeNode)
@@ -509,10 +509,10 @@ index 10ff30656ad..bfdf7128aac 100644
      (install_interface_template_decl, install_interface_template_def,
       install_interface_template_trampoline) = make_install_interface_template(
           cg_context,
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py
 index b4c70553863..f3a2fcd772d 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/mako_renderer.py
 @@ -105,7 +105,7 @@ class MakoRenderer(object):
              on_error = self._caller_stack_on_error
              if (len(current) <= len(on_error)
@@ -522,10 +522,10 @@ index b4c70553863..f3a2fcd772d 100644
                  pass  # Error happened in a deeper caller.
              else:
                  self._caller_stack_on_error = list(self._caller_stack)
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
 index dc3493cc394..017d3d47bb3 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/style_format.py
 @@ -70,8 +70,13 @@ def gn_format(contents, filename=None):
  
  
@@ -542,10 +542,10 @@ index dc3493cc394..017d3d47bb3 100644
      stdout_output, stderr_output = proc.communicate(input=contents)
      exit_code = proc.wait()
  
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py
 index 0d8f4c0f303..e666a9b668e 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/bind_gen/task_queue.py
 @@ -2,6 +2,7 @@
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
@@ -569,10 +569,10 @@ index 0d8f4c0f303..e666a9b668e 100644
          func, args, kwargs = task
 -        apply(func, args, kwargs)
 +        func(*args, **kwargs)
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/code_generator.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/code_generator.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/code_generator.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/code_generator.py
 index e8280be7213..e49e6eb965e 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/code_generator.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/code_generator.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/code_generator.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/code_generator.py
 @@ -13,6 +13,7 @@ import re
  import sys
  
@@ -611,10 +611,10 @@ index e8280be7213..e49e6eb965e 100644
      return jinja_env
  
  
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py
 index 130004eae83..04c0fabcef2 100755
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/generate_origin_trial_features.py
 @@ -80,7 +80,7 @@ def read_idl_file(reader, idl_filename):
      assert len(interfaces) == 1, (
          "Expected one interface in file %r, found %d" %
@@ -633,10 +633,10 @@ index 130004eae83..04c0fabcef2 100755
  
      generate_origin_trial_features(info_provider, options, idl_filenames)
      return 0
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py
 index 14e6e9d3f87..b027818aef2 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_definitions.py
 @@ -394,7 +394,8 @@ class IdlInterface(object):
              else:
                  raise ValueError('Unrecognized node class: %s' % child_class)
@@ -666,10 +666,10 @@ index 14e6e9d3f87..b027818aef2 100644
      """An Exposure holds one Exposed or RuntimeEnabled condition.
      Each exposure has two properties: exposed and runtime_enabled.
      Exposure(e, r) corresponds to [Exposed(e r)]. Exposure(e) corresponds to
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_reader.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_reader.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_reader.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_reader.py
 index 8d72865a6ca..b80eebdcd61 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_reader.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_reader.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_reader.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_reader.py
 @@ -55,8 +55,8 @@ def validate_blink_idl_definitions(idl_filename, idl_file_basename,
           definitions. There is no filename convention in this case.
         - Otherwise, an IDL file is invalid.
@@ -681,10 +681,10 @@ index 8d72865a6ca..b80eebdcd61 100644
      number_of_targets = len(targets)
      if number_of_targets > 1:
          raise Exception(
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_types.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_types.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_types.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_types.py
 index cd4f0c3513b..ab95e9c0b08 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_types.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/idl_types.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_types.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/idl_types.py
 @@ -349,7 +349,7 @@ class IdlUnionType(IdlTypeBase):
          return True
  
@@ -694,10 +694,10 @@ index cd4f0c3513b..ab95e9c0b08 100644
          if len(matching_types) > 1:
              raise ValueError('%s is ambiguous.' % self.name)
          return matching_types[0] if matching_types else None
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/utilities.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/utilities.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/utilities.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/utilities.py
 index e1677ee7bd6..3c5006f064f 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/utilities.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/utilities.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/utilities.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/utilities.py
 @@ -196,8 +196,9 @@ class ComponentInfoProviderModules(ComponentInfoProvider):
  
      @property
@@ -761,10 +761,10 @@ index e1677ee7bd6..3c5006f064f 100644
              try:
                  if pickle.load(pickle_file) == data:
                      return
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_interface.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_interface.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_interface.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_interface.py
 index a43260414db..a85b03abe75 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_interface.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_interface.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_interface.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_interface.py
 @@ -189,7 +189,7 @@ def context_enabled_features(attributes):
          return sorted([
              member for member in members
@@ -796,10 +796,10 @@ index a43260414db..a85b03abe75 100644
  
      # We can’t do a single loop through all methods or simply sort them, because
      # a method may be listed in multiple steps of the resolution algorithm, and
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_methods.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_methods.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_methods.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_methods.py
 index 5f1f89a3def..6ee8a407798 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_methods.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_methods.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_methods.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_methods.py
 @@ -46,6 +46,10 @@ import v8_types
  import v8_utilities
  from v8_utilities import (has_extended_attribute_value, is_unforgeable)
@@ -811,10 +811,10 @@ index 5f1f89a3def..6ee8a407798 100644
  
  def method_is_visible(method, interface_is_partial):
      if 'overloads' in method:
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py
 index 2ecd6923320..fcfc48371b1 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/v8_utilities.py
 @@ -271,7 +271,7 @@ EXPOSED_WORKERS = set([
  ])
  
@@ -824,10 +824,10 @@ index 2ecd6923320..fcfc48371b1 100644
      """An ExposureSet is a collection of Exposure instructions."""
  
      def __init__(self, exposures=None):
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py
 index 13fb7c7068d..b73b7710687 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/callback_interface.py
 @@ -91,11 +91,13 @@ class CallbackInterface(UserDefinedType, WithExtendedAttributes,
              for operation_ir in ir.operations
          ])
@@ -847,20 +847,20 @@ index 13fb7c7068d..b73b7710687 100644
          ])
  
      @property
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py
 index c92cf48eb2a..f5d59129449 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/database.py
 @@ -156,4 +156,4 @@ class Database(object):
          return self._view_by_kind(Database._Kind.UNION)
  
      def _view_by_kind(self, kind):
 -        return self._impl.find_by_kind(kind).values()
 +        return list(self._impl.find_by_kind(kind).values())
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py
 index abaeef39c30..e36cf7439ae 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/exposure.py
 @@ -8,8 +8,11 @@ from .runtime_enabled_features import RuntimeEnabledFeatures
  class _Feature(str):
      """Represents a runtime-enabled feature."""
@@ -874,10 +874,10 @@ index abaeef39c30..e36cf7439ae 100644
          self._is_context_dependent = (
              RuntimeEnabledFeatures.is_context_dependent(self))
  
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py
 index 648c70d803d..1712f19c672 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/function_like.py
 @@ -71,8 +71,9 @@ class FunctionLike(WithIdentifier):
      def num_of_required_arguments(self):
          """Returns the number of required arguments."""
@@ -940,10 +940,10 @@ index 648c70d803d..1712f19c672 100644
              # Assume that the given items are valid, and we only need to test
              # the two types.
              if OverloadGroup.are_distinguishable_types(
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py
 index c5ee2bd8a3d..58315072480 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/idl_compiler.py
 @@ -149,8 +149,8 @@ class IdlCompiler(object):
          for old_ir in old_irs:
              new_ir = make_copy(old_ir)
@@ -1007,10 +1007,10 @@ index c5ee2bd8a3d..58315072480 100644
  
              assert not new_ir.legacy_window_aliases
              if new_ir.identifier != 'Window':
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py
 index 65d24e529d1..067ef2eb0b2 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/interface.py
 @@ -180,8 +180,9 @@ class Interface(UserDefinedType, WithExtendedAttributes, WithCodeGeneratorInfo,
          self._constructor_groups = tuple([
              ConstructorGroup(
@@ -1114,10 +1114,10 @@ index 65d24e529d1..067ef2eb0b2 100644
                  owner=owner) for group_ir in ir.operation_groups
          ])
  
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py
 index e9aeff4ab82..d80554d603e 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/ir_builder.py
 @@ -2,6 +2,8 @@
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
@@ -1224,10 +1224,10 @@ index e9aeff4ab82..d80554d603e 100644
                  is_optional=is_optional,
                  extended_attributes=extended_attributes,
                  debug_info=self._build_debug_info(node))
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py
 index a7a2b11f3f0..2f6b61300ff 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/make_copy.py
 @@ -3,6 +3,13 @@
  # found in the LICENSE file.
  
@@ -1242,10 +1242,10 @@ index a7a2b11f3f0..2f6b61300ff 100644
  def make_copy(obj, memo=None):
      """
      Creates a copy of the given object, which should be an IR or part of IR.
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py
 index eeabef97cbe..bd7e98907f3 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/scripts/web_idl/namespace.py
 @@ -107,11 +107,13 @@ class Namespace(UserDefinedType, WithExtendedAttributes, WithCodeGeneratorInfo,
              for operation_ir in ir.operations
          ])
@@ -1265,10 +1265,10 @@ index eeabef97cbe..bd7e98907f3 100644
          ])
  
      @property
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl b/src/3rdpartychromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl b/src/3rdparty/chromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl
 index 0add9c45a38..dc910f6d227 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl
-+++ b/src/3rdpartychromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl
+--- a/src/3rdparty/chromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl
++++ b/src/3rdparty/chromium/third_party/blink/renderer/bindings/templates/dictionary_v8.cc.tmpl
 @@ -59,9 +59,9 @@ void {{v8_class}}::ToImpl(v8::Isolate* isolate, v8::Local<v8::Value> v8_value, {
    DCHECK(executionContext);
    {% endif %}{# has_origin_trial_members #}
@@ -1293,10 +1293,10 @@ index 0add9c45a38..dc910f6d227 100644
    {% filter runtime_enabled(feature_name) %}
    {% for member in member_list %}
    v8::Local<v8::Value> {{member.v8_value}};
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py
 index 1799cd5a153..5f43ffabc26 100755
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/make_style_shorthands.py
 @@ -71,7 +71,7 @@ class Expansion(object):
      def enabled_longhands(self):
          include = lambda longhand: not longhand[
@@ -1341,10 +1341,10 @@ index 1799cd5a153..5f43ffabc26 100755
              property_['expansions'] = create_expansions(longhands)
              for longhand_enum_key in property_['longhand_enum_keys']:
                  self._longhand_dictionary[longhand_enum_key].append(property_)
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py
 index 75030ac577e..f72aadee17d 100755
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/core/css/properties/make_css_property_instances.py
 @@ -42,8 +42,8 @@ class CSSPropertyInstancesWriter(json5_generator.Writer):
          aliases = self._css_properties.aliases
  
@@ -1356,10 +1356,10 @@ index 75030ac577e..f72aadee17d 100755
  
          # Sort by enum value.
          self._property_classes_by_id.sort(key=lambda t: t.enum_value)
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/gperf.py b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/gperf.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/gperf.py b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/gperf.py
 index 5ee49056be4..db72660d471 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/gperf.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/gperf.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/gperf.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/gperf.py
 @@ -95,7 +95,7 @@ def main():
  
      open(args.output_file, 'wb').write(
@@ -1369,10 +1369,10 @@ index 5ee49056be4..db72660d471 100644
  
  
  if __name__ == '__main__':
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_file.py b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_file.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_file.py b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_file.py
 index 28adc050f1e..58113483e57 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_file.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_file.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_file.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_file.py
 @@ -66,7 +66,7 @@ class InFile(object):
          self._defaults = defaults
          self._valid_values = copy.deepcopy(
@@ -1382,10 +1382,10 @@ index 28adc050f1e..58113483e57 100644
  
      @classmethod
      def load_from_files(self, file_paths, defaults, valid_values,
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_generator.py b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_generator.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_generator.py b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_generator.py
 index e46740a2e85..ab1981ad1e3 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_generator.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/in_generator.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_generator.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/in_generator.py
 @@ -32,10 +32,15 @@ import os
  import os.path
  import shlex
@@ -1402,10 +1402,10 @@ index e46740a2e85..ab1981ad1e3 100644
  
  #########################################################
  # This is now deprecated - use json5_generator.py instead
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/make_runtime_features.py b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/make_runtime_features.py
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/make_runtime_features.py b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/make_runtime_features.py
 index cafe8d94a8e..6925a4fa580 100755
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/make_runtime_features.py
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/make_runtime_features.py
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/make_runtime_features.py
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/make_runtime_features.py
 @@ -138,7 +138,7 @@ class RuntimeFeatureWriter(BaseRuntimeFeatureWriter):
                  except Exception:
                      # If trouble unpickling, overwrite
@@ -1415,10 +1415,10 @@ index cafe8d94a8e..6925a4fa580 100755
              pickle.dump(features_map, pickle_file)
  
      def _template_inputs(self):
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl
 index dc3f44c5b10..3eefcf9f0ee 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_factory.cc.tmpl
 @@ -26,7 +26,7 @@ using {{namespace}}FunctionMap = HashMap<AtomicString, {{namespace}}ConstructorF
  
  static {{namespace}}FunctionMap* g_{{namespace|lower}}_constructors = nullptr;
@@ -1437,10 +1437,10 @@ index dc3f44c5b10..3eefcf9f0ee 100644
      { {{cpp_namespace}}::{{tag|symbol}}Tag, {{namespace}}{{tag.name.to_upper_camel_case()}}Constructor },
    {% endfor %}
    };
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl
 index 9bfc489e048..5f86184e879 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.cc.tmpl
 @@ -22,7 +22,7 @@ HTMLTypeMap CreateHTMLTypeMap() {
      const char* name;
      HTMLElementType type;
@@ -1459,10 +1459,10 @@ index 9bfc489e048..5f86184e879 100644
    {% if tag.runtimeEnabled %}
    if (tagName == "{{tag.name}}") {
      if (!RuntimeEnabledFeatures::{{tag.runtimeEnabled}}Enabled(document->GetExecutionContext())) {
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl
 index 1b5297d52dc..edecc81d9d4 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/element_type_helpers.h.tmpl
 @@ -15,7 +15,7 @@ namespace blink {
  class Document;
  
@@ -1472,10 +1472,10 @@ index 1b5297d52dc..edecc81d9d4 100644
  class {{tag.interface}};
  template <>
  inline bool IsElementOfType<const {{tag.interface}}>(const Node& node) {
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl
 index 0244433af2e..dcdbb02a56c 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/macros.tmpl
 @@ -25,7 +25,7 @@
  
  
@@ -1494,10 +1494,10 @@ index 0244433af2e..dcdbb02a56c 100644
  {{ trie_leaf(index, trie, return_macro, lowercase_data) -}}
  {% else %}
      {% if lowercase_data %}
-diff --git a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl
+diff --git a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl
 index cb05c6c4315..bd5566b03e7 100644
---- a/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl
-+++ b/src/3rdpartychromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl
+--- a/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl
++++ b/src/3rdparty/chromium/third_party/blink/renderer/build/scripts/templates/make_qualified_names.h.tmpl
 @@ -24,12 +24,12 @@ namespace {{cpp_namespace}} {
  {{symbol_export}}extern const WTF::AtomicString& {{namespace_prefix}}NamespaceURI;
  
@@ -1513,10 +1513,10 @@ index cb05c6c4315..bd5566b03e7 100644
  {{symbol_export}}extern const blink::QualifiedName& {{attr|symbol}}Attr;
  {% endfor %}
  
-diff --git a/src/3rdpartychromium/third_party/dawn/generator/generator_lib.py b/src/3rdpartychromium/third_party/dawn/generator/generator_lib.py
+diff --git a/src/3rdparty/chromium/third_party/dawn/generator/generator_lib.py b/src/3rdparty/chromium/third_party/dawn/generator/generator_lib.py
 index 5e3734d7833..e3d46bd194f 100644
---- a/src/3rdpartychromium/third_party/dawn/generator/generator_lib.py
-+++ b/src/3rdpartychromium/third_party/dawn/generator/generator_lib.py
+--- a/src/3rdparty/chromium/third_party/dawn/generator/generator_lib.py
++++ b/src/3rdparty/chromium/third_party/dawn/generator/generator_lib.py
 @@ -201,6 +201,10 @@ def _compute_python_dependencies(root_dir=None):
  
      paths = set()
@@ -1528,10 +1528,10 @@ index 5e3734d7833..e3d46bd194f 100644
          path = os.path.abspath(path)
  
          if not path.startswith(root_dir):
-diff --git a/src/3rdpartychromium/third_party/devtools-frontend/src/BUILD.gn b/src/3rdpartychromium/third_party/devtools-frontend/src/BUILD.gn
+diff --git a/src/3rdparty/chromium/third_party/devtools-frontend/src/BUILD.gn b/src/3rdparty/chromium/third_party/devtools-frontend/src/BUILD.gn
 index cd488e88b60..ea1dc3d9a79 100644
---- a/src/3rdpartychromium/third_party/devtools-frontend/src/BUILD.gn
-+++ b/src/3rdpartychromium/third_party/devtools-frontend/src/BUILD.gn
+--- a/src/3rdparty/chromium/third_party/devtools-frontend/src/BUILD.gn
++++ b/src/3rdparty/chromium/third_party/devtools-frontend/src/BUILD.gn
 @@ -2,6 +2,8 @@
  # Use of this source code is governed by a BSD-style license that can be
  # found in the LICENSE file.
@@ -1541,10 +1541,10 @@ index cd488e88b60..ea1dc3d9a79 100644
  import("//third_party/blink/public/public_features.gni")
  import("./all_devtools_files.gni")
  import("./all_devtools_modules.gni")
-diff --git a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py
+diff --git a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py
 index d6666e8b74f..0f7a661e632 100644
---- a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py
-+++ b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py
+--- a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py
++++ b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_inspector_overlay.py
 @@ -45,7 +45,8 @@ def rollup(input_path, output_path, filename, max_size, rollup_plugin):
          ['--format', 'iife', '-n', 'InspectorOverlay'] + ['--input', target] +
          ['--plugin', rollup_plugin],
@@ -1555,10 +1555,10 @@ index d6666e8b74f..0f7a661e632 100644
      out, error = rollup_process.communicate()
      if not out:
          raise Exception("rollup failed: " + error)
-diff --git a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py
+diff --git a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py
 index fa8e73d34af..7d0b84b2171 100644
---- a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py
-+++ b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py
+--- a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py
++++ b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/build_release_applications.py
 @@ -10,7 +10,7 @@ Builds applications in release mode:
  and the application loader into a single script.
  """
@@ -1589,10 +1589,10 @@ index fa8e73d34af..7d0b84b2171 100644
          else:
              output.write('Root.applicationDescriptor = %s;' % self.descriptors.application_json())
  
-diff --git a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py
+diff --git a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py
 index be510c48d76..c6a59c90298 100644
---- a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py
-+++ b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py
+--- a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py
++++ b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/generate_devtools_grd.py
 @@ -123,7 +123,7 @@ def main(argv):
  
      try:
@@ -1611,10 +1611,10 @@ index be510c48d76..c6a59c90298 100644
          output_file.write(doc.toxml(encoding='UTF-8'))
  
  
-diff --git a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/modular_build.py b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/modular_build.py
+diff --git a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/modular_build.py b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/modular_build.py
 index 0ba695d3810..bb1da2f9f8d 100644
---- a/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/modular_build.py
-+++ b/src/3rdpartychromium/third_party/devtools-frontend/src/scripts/build/modular_build.py
+--- a/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/modular_build.py
++++ b/src/3rdparty/chromium/third_party/devtools-frontend/src/scripts/build/modular_build.py
 @@ -7,6 +7,8 @@
  Utilities for the modular DevTools build.
  """
@@ -1642,10 +1642,10 @@ index 0ba695d3810..bb1da2f9f8d 100644
          return json.dumps(result)
  
      def all_compiled_files(self):
-diff --git a/src/3rdpartychromium/tools/metrics/ukm/gen_builders.py b/src/3rdpartychromium/tools/metrics/ukm/gen_builders.py
+diff --git a/src/3rdparty/chromium/tools/metrics/ukm/gen_builders.py b/src/3rdparty/chromium/tools/metrics/ukm/gen_builders.py
 index f9f61d90a56..44e46fae8cc 100755
---- a/src/3rdpartychromium/tools/metrics/ukm/gen_builders.py
-+++ b/src/3rdpartychromium/tools/metrics/ukm/gen_builders.py
+--- a/src/3rdparty/chromium/tools/metrics/ukm/gen_builders.py
++++ b/src/3rdparty/chromium/tools/metrics/ukm/gen_builders.py
 @@ -48,9 +48,10 @@ def ReadFilteredData(path):
      data = ukm_model.UKM_XML_TYPE.Parse(ukm_file.read())
      event_tag = ukm_model._EVENT_TYPE.tag
@@ -1659,10 +1659,10 @@ index f9f61d90a56..44e46fae8cc 100755
      return data
  
  
-diff --git a/src/3rdpartychromium/ui/ozone/generate_constructor_list.py b/src/3rdpartychromium/ui/ozone/generate_constructor_list.py
+diff --git a/src/3rdparty/chromium/ui/ozone/generate_constructor_list.py b/src/3rdparty/chromium/ui/ozone/generate_constructor_list.py
 index 8d800636c97..04fa18e93df 100755
---- a/src/3rdpartychromium/ui/ozone/generate_constructor_list.py
-+++ b/src/3rdpartychromium/ui/ozone/generate_constructor_list.py
+--- a/src/3rdparty/chromium/ui/ozone/generate_constructor_list.py
++++ b/src/3rdparty/chromium/ui/ozone/generate_constructor_list.py
 @@ -45,12 +45,15 @@ Example Output: ./ui/ozone/generate_constructor_list.py \
    }  // namespace ui
  """
@@ -1706,10 +1706,10 @@ index 8d800636c97..04fa18e93df 100755
  
    if options.output_cc:
      out_cc.close()
-diff --git a/src/3rdpartychromium/ui/ozone/generate_ozone_platform_list.py b/src/3rdpartychromium/ui/ozone/generate_ozone_platform_list.py
+diff --git a/src/3rdparty/chromium/ui/ozone/generate_ozone_platform_list.py b/src/3rdparty/chromium/ui/ozone/generate_ozone_platform_list.py
 index d47c398259b..2702b68b9bd 100755
---- a/src/3rdpartychromium/ui/ozone/generate_ozone_platform_list.py
-+++ b/src/3rdpartychromium/ui/ozone/generate_ozone_platform_list.py
+--- a/src/3rdparty/chromium/ui/ozone/generate_ozone_platform_list.py
++++ b/src/3rdparty/chromium/ui/ozone/generate_ozone_platform_list.py
 @@ -49,12 +49,15 @@ Example Output: ./generate_ozone_platform_list.py --default wayland dri wayland
  
  """
