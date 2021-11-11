@@ -112,6 +112,7 @@ src_configure() {
 	append-flags $(test-flags -fno-strict-aliasing)
 
 	local mycmakeargs=(
+		-DCMAKE_BUILD_TYPE=Release
 		-DPORT=Qt
 		-DENABLE_API_TESTS=OFF
 		-DENABLE_TOOLS=OFF
