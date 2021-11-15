@@ -59,6 +59,7 @@ DEPEND="${RDEPEND}
 # autoconf-archive needed to eautoreconf
 BDEPEND="
 	sys-devel/autoconf-archive
+	virtual/awk
 	virtual/pkgconfig
 	verify-sig? ( app-crypt/openpgp-keys-python )
 	!sys-devel/gcc[libffi(-)]"
@@ -181,6 +182,9 @@ src_compile() {
 	# Ensure sed works as expected
 	# https://bugs.gentoo.org/594768
 	local -x LC_ALL=C
+	# Prevent using distutils bundled by setuptools.
+	# https://bugs.gentoo.org/823728
+	export SETUPTOOLS_USE_DISTUTILS=stdlib
 
 	#The following code borrowed from https://github.com/stefantalpalaru/gentoo-overlay
 	# extract the number of parallel jobs in MAKEOPTS
