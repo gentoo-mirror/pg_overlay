@@ -29,8 +29,7 @@ PATCH_DEV=dilfridge
 if [[ ${PV} == 9999* ]]; then
 	inherit git-r3
 else
-	#KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
-	KEYWORDS=""
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 	SRC_URI="mirror://gnu/glibc/${P}.tar.xz"
 	SRC_URI+=" https://dev.gentoo.org/~${PATCH_DEV}/distfiles/${P}-patches-${PATCH_VER}.tar.xz"
 fi
@@ -1538,6 +1537,12 @@ pkg_postinst() {
 
 	if ! is_crosscompile && [[ -z ${ROOT} ]] ; then
 		use compile-locales || run_locale_gen "${EROOT}/"
+	fi
+
+	if systemd_is_booted && [[ -z ${ROOT} ]] ; then
+		# We need to restart systemd when upgrading from < 2.34
+		# bug #823756
+		systemctl daemon-reexec
 	fi
 
 	# Check for sanity of /etc/nsswitch.conf, take 2
