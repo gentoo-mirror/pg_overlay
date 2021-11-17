@@ -199,13 +199,18 @@ src_compile() {
 	fi
 	export par_arg
 
-	# bug 660358
-	local -x COLUMNS=80
-	local -x PYTHONDONTWRITEBYTECODE=
-	addpredict /usr/lib/python3.10/site-packages
+	if use pgo; then
+		# bug 660358
+		local -x COLUMNS=80
+		local -x PYTHONDONTWRITEBYTECODE=
+		addpredict /usr/lib/python3.10/site-packages
 
-	emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_ctypes test_distutils test_doctest test_support test_bdb test_ensurepip test_import test_importlib test_runpy test_pickle
-test_socket test_ftplib test_logging test_smtplib -j $(nproc) --pgo-extended"
+		emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_ctypes test_distutils -j $(nproc) --pgo-extended"
+		#emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_ctypes test_distutils test_doctest test_support test_bdb test_ensurepip test_import test_importlib
+# test_runptest_pickletest_socket test_ftplib test_logging test_smtplib -j $(nproc) --pgo-extended"
+	else
+		emake CPPFLAGS= CFLAGS= LDFLAGS=
+	fi
 
 	# Work around bug 329499. See also bug 413751 and 457194.
 	if has_version dev-libs/libffi[pax-kernel]; then
