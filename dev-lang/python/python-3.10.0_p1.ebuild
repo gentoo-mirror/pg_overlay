@@ -149,6 +149,11 @@ src_configure() {
 		dbmliborder+="${dbmliborder:+:}gdbm"
 	fi
 
+	if use pgo; then
+		local jobs=$(makeopts_jobs "${MAKEOPTS}" "$(get_nproc)")
+		export PROFILE_TASK="-m test -j${jobs} --pgo-extended -x test_gdb"
+	fi
+
 	local myeconfargs=(
 		# glibc-2.30 removes it; since we can't cleanly force-rebuild
 		# Python on glibc upgrade, remove it proactively to give
@@ -206,8 +211,7 @@ src_compile() {
 		addpredict /usr/lib/python3.10/site-packages
 
 		emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_ctypes test_distutils -j $(nproc) --pgo-extended"
-		#emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_ctypes test_distutils test_doctest test_support test_bdb test_ensurepip test_import test_importlib
-# test_runptest_pickletest_socket test_ftplib test_logging test_smtplib -j $(nproc) --pgo-extended"
+		#emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_ctypes test_distutils test_doctest test_support test_bdb test_ftplib test_import test_importlib test_runpy test_pickle test_socket -j $(nproc) --pgo-extended"
 	else
 		emake CPPFLAGS= CFLAGS= LDFLAGS=
 	fi
