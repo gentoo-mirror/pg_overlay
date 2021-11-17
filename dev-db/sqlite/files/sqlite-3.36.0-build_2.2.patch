@@ -1,11 +1,5 @@
-Move some code to libsqlite3.so to avoid duplication.
-Initialize some extensions in libsqlite3.so.
-Update test suite.
-
-SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500b
-
---- /ext/repair/sqlite3_checker.c.in
-+++ /ext/repair/sqlite3_checker.c.in
+--- sqlite-src-3360000/ext/repair/sqlite3_checker.c.in
++++ sqlite-src-3360000/ext/repair/sqlite3_checker.c.in
 @@ -2,6 +2,7 @@
  ** Read an SQLite database file and analyze its space utilization.  Generate
  ** text on standard output.
@@ -23,8 +17,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  INCLUDE $ROOT/src/tclsqlite.c
  INCLUDE $ROOT/ext/misc/btreeinfo.c
  INCLUDE $ROOT/ext/repair/checkindex.c
---- /src/main.c
-+++ /src/main.c
+--- sqlite-src-3360000/src/main.c
++++ sqlite-src-3360000/src/main.c
 @@ -50,12 +50,36 @@
  #ifdef SQLITE_ENABLE_FTS5
  int sqlite3Fts5Init(sqlite3*);
@@ -100,8 +94,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  };
  
  #ifndef SQLITE_AMALGAMATION
---- /src/shell.c.in
-+++ /src/shell.c.in
+--- sqlite-src-3360000/src/shell.c.in
++++ sqlite-src-3360000/src/shell.c.in
 @@ -69,6 +69,7 @@
  #include <stdio.h>
  #include <assert.h>
@@ -121,7 +115,65 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  
  #if defined(_WIN32) || defined(WIN32)
  # if SQLITE_OS_WINRT
-@@ -11108,6 +11079,7 @@
+@@ -1019,26 +1024,7 @@
+ INCLUDE test_windirent.c
+ #define dirent DIRENT
+ #endif
+-INCLUDE ../ext/misc/shathree.c
+-INCLUDE ../ext/misc/fileio.c
+-INCLUDE ../ext/misc/completion.c
+-INCLUDE ../ext/misc/appendvfs.c
+ INCLUDE ../ext/misc/memtrace.c
+-INCLUDE ../ext/misc/uint.c
+-INCLUDE ../ext/misc/decimal.c
+-INCLUDE ../ext/misc/ieee754.c
+-INCLUDE ../ext/misc/series.c
+-INCLUDE ../ext/misc/regexp.c
+-#ifdef SQLITE_HAVE_ZLIB
+-INCLUDE ../ext/misc/zipfile.c
+-INCLUDE ../ext/misc/sqlar.c
+-#endif
+-INCLUDE ../ext/expert/sqlite3expert.h
+-INCLUDE ../ext/expert/sqlite3expert.c
+-
+-#if !defined(SQLITE_OMIT_VIRTUALTABLE) && defined(SQLITE_ENABLE_DBPAGE_VTAB)
+-INCLUDE ../ext/misc/dbdata.c
+-#endif
+ 
+ #if defined(SQLITE_ENABLE_SESSION)
+ /*
+@@ -4612,21 +4598,6 @@
+ #ifndef SQLITE_OMIT_LOAD_EXTENSION
+     sqlite3_enable_load_extension(p->db, 1);
+ #endif
+-    sqlite3_fileio_init(p->db, 0, 0);
+-    sqlite3_shathree_init(p->db, 0, 0);
+-    sqlite3_completion_init(p->db, 0, 0);
+-    sqlite3_uint_init(p->db, 0, 0);
+-    sqlite3_decimal_init(p->db, 0, 0);
+-    sqlite3_regexp_init(p->db, 0, 0);
+-    sqlite3_ieee_init(p->db, 0, 0);
+-    sqlite3_series_init(p->db, 0, 0);
+-#if !defined(SQLITE_OMIT_VIRTUALTABLE) && defined(SQLITE_ENABLE_DBPAGE_VTAB)
+-    sqlite3_dbdata_init(p->db, 0, 0);
+-#endif
+-#ifdef SQLITE_HAVE_ZLIB
+-    sqlite3_zipfile_init(p->db, 0, 0);
+-    sqlite3_sqlar_init(p->db, 0, 0);
+-#endif
+     sqlite3_create_function(p->db, "shell_add_schema", 3, SQLITE_UTF8, 0,
+                             shellAddSchemaName, 0, 0);
+     sqlite3_create_function(p->db, "shell_module_schema", 1, SQLITE_UTF8, 0,
+@@ -6649,8 +6620,6 @@
+         );
+         goto end_ar_command;
+       }
+-      sqlite3_fileio_init(cmd.db, 0, 0);
+-      sqlite3_sqlar_init(cmd.db, 0, 0);
+       sqlite3_create_function(cmd.db, "shell_putsnl", 1, SQLITE_UTF8, cmd.p,
+                               shellPutsFunc, 0, 0);
+ 
+@@ -11158,6 +11127,7 @@
  #endif
    }
    data.out = stdout;
@@ -129,9 +181,9 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
    sqlite3_appendvfs_init(0,0,0);
  
    /* Go ahead and open the database file if it already exists.  If the
---- /src/test_config.c
-+++ /src/test_config.c
-@@ -359,6 +359,8 @@
+--- sqlite-src-3360000/src/test_config.c
++++ sqlite-src-3360000/src/test_config.c
+@@ -372,6 +372,8 @@
    Tcl_SetVar2(interp, "sqlite_options", "datetime", "1", TCL_GLOBAL_ONLY);
  #endif
  
@@ -140,7 +192,7 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  #ifdef SQLITE_OMIT_DECLTYPE
    Tcl_SetVar2(interp, "sqlite_options", "decltype", "0", TCL_GLOBAL_ONLY);
  #else
-@@ -546,6 +548,8 @@
+@@ -559,6 +561,8 @@
    Tcl_SetVar2(interp, "sqlite_options", "progress", "1", TCL_GLOBAL_ONLY);
  #endif
  
@@ -149,7 +201,7 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  #ifdef SQLITE_OMIT_REINDEX
    Tcl_SetVar2(interp, "sqlite_options", "reindex", "0", TCL_GLOBAL_ONLY);
  #else
-@@ -668,6 +672,8 @@
+@@ -681,6 +685,8 @@
    Tcl_SetVar2(interp, "sqlite_options", "truncate_opt", "1", TCL_GLOBAL_ONLY);
  #endif
  
@@ -158,8 +210,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  #ifdef SQLITE_OMIT_UTF16
    Tcl_SetVar2(interp, "sqlite_options", "utf16", "0", TCL_GLOBAL_ONLY);
  #else
---- /test/e_expr.test
-+++ /test/e_expr.test
+--- sqlite-src-3360000/test/e_expr.test
++++ sqlite-src-3360000/test/e_expr.test
 @@ -1079,7 +1079,7 @@
  #
  #   There is a regexp function if ICU is enabled though.
@@ -169,8 +221,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
    do_catchsql_test e_expr-18.1.1 { 
      SELECT regexp('abc', 'def') 
    } {1 {no such function: regexp}}
---- /test/icu.test
-+++ /test/icu.test
+--- sqlite-src-3360000/test/icu.test
++++ sqlite-src-3360000/test/icu.test
 @@ -41,7 +41,7 @@
    #
    test_expr icu-1.1 {i1='hello'} {i1 REGEXP 'hello'}  1
@@ -180,8 +232,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
    test_expr icu-1.4 {i1='hello'} {i1 REGEXP '.ell.*'} 1
    test_expr icu-1.5 {i1=NULL}    {i1 REGEXP '.ell.*'} {}
  
---- /test/pragma.test
-+++ /test/pragma.test
+--- sqlite-src-3360000/test/pragma.test
++++ sqlite-src-3360000/test/pragma.test
 @@ -1370,17 +1370,62 @@
  } ;# ifcapable trigger
  
@@ -254,8 +306,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  }
  
  ifcapable schema_pragmas&&tempdb {
---- /test/sessionfuzz.c
-+++ /test/sessionfuzz.c
+--- sqlite-src-3360000/test/sessionfuzz.c
++++ sqlite-src-3360000/test/sessionfuzz.c
 @@ -698,49 +698,6 @@
  #include <stdio.h>
  #include <string.h>
@@ -306,8 +358,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  
  /* Run a chunk of SQL.  If any errors happen, print an error message
  ** and exit.
---- /tool/mksqlite3c.tcl
-+++ /tool/mksqlite3c.tcl
+--- sqlite-src-3360000/tool/mksqlite3c.tcl
++++ sqlite-src-3360000/tool/mksqlite3c.tcl
 @@ -129,6 +129,7 @@
     rtree.h
     sqlite3session.h
@@ -345,8 +397,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  } {
    copy_file tsrc/$file
  }
---- /tool/sqlite3_analyzer.c.in
-+++ /tool/sqlite3_analyzer.c.in
+--- sqlite-src-3360000/tool/sqlite3_analyzer.c.in
++++ sqlite-src-3360000/tool/sqlite3_analyzer.c.in
 @@ -14,9 +14,6 @@
  #define SQLITE_DEFAULT_MEMSTATUS 0
  #define SQLITE_MAX_EXPR_DEPTH 0
@@ -357,8 +409,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  INCLUDE $ROOT/src/tclsqlite.c
  
  const char *sqlite3_analyzer_init_proc(Tcl_Interp *interp){
---- /tool/sqltclsh.c.in
-+++ /tool/sqltclsh.c.in
+--- sqlite-src-3360000/tool/sqltclsh.c.in
++++ sqlite-src-3360000/tool/sqltclsh.c.in
 @@ -27,21 +27,13 @@
  #define SQLITE_OMIT_SHARED_CACHE 1
  #define SQLITE_DEFAULT_MEMSTATUS 0
