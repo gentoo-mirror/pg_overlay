@@ -386,8 +386,6 @@ sys-devel/llvm:gold - Build the gold linker plugin
 sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
 sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
 sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
-sys-fs/ntfs3g:ntfsdecrypt - Build and install the ntfsdecrypt application.
-sys-fs/ntfs3g:ntfsprogs - Include internal version of ntfsprogs.
 sys-fs/udisks:daemon - Build the system daemon, not just the client tool
 sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
 sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
