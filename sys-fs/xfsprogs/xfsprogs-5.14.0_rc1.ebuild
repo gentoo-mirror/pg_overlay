@@ -17,6 +17,7 @@ IUSE="icu libedit nls"
 
 RDEPEND=">=sys-apps/util-linux-2.17.2
 	dev-libs/inih
+	dev-libs/userspace-rcu
 	icu? ( dev-libs/icu:= )
 	libedit? ( dev-libs/libedit )
 "
