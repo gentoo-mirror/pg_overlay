@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit flag-o-matic meson multilib-minimal
+inherit flag-o-matic meson multilib
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
