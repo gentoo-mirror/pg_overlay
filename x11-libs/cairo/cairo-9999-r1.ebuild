@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit flag-o-matic meson multilib
+inherit flag-o-matic meson multilib-minimal
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -96,4 +96,8 @@ multilib_src_configure() {
 
 multilib_src_compile() {
 	meson_src_compile
+}
+
+src_install() {
+	meson_src_install
 }
