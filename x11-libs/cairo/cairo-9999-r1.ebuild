@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit flag-o-matic meson multilib-minimal
+inherit flag-o-matic meson
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -76,7 +76,7 @@ src_prepare() {
 	fi
 }
 
-multilib_src_configure() {
+src_configure() {
 	local emesonargs=(
 		-Dfontconfig=enabled
 		-Dfreetype=enabled
@@ -84,7 +84,7 @@ multilib_src_configure() {
 		$(meson_feature X xlib)
 		$(meson_feature xcb)
 		$(meson_feature aqua quartz)
-		-Dgl-backend=$(multilib_native_usex opengl gl auto)
+		-Dgl-backend=$(native_usex opengl gl auto)
 		-Dpng=enabled
 		-Dzlib=enabled
 		-Dtests=disabled
@@ -94,7 +94,7 @@ multilib_src_configure() {
 	meson_src_configure
 }
 
-multilib_src_compile() {
+src_compile() {
 	meson_src_compile
 }
 
