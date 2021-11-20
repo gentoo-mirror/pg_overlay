@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit flag-o-matic meson multilib
+inherit flag-o-matic meson
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -29,23 +29,23 @@ BDEPEND="
 	virtual/pkgconfig
 	>=sys-devel/libtool-2"
 RDEPEND="
-	>=dev-libs/lzo-2.06-r1[${MULTILIB_USEDEP}]
-	>=media-libs/fontconfig-2.10.92[${MULTILIB_USEDEP}]
-	>=media-libs/freetype-2.5.0.1:2[png,${MULTILIB_USEDEP}]
-	>=media-libs/libpng-1.6.10:0=[${MULTILIB_USEDEP}]
-	sys-libs/binutils-libs:0=[${MULTILIB_USEDEP}]
-	>=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}]
-	>=x11-libs/pixman-0.36.0[${MULTILIB_USEDEP}]
-	gles2-only? ( >=media-libs/mesa-9.1.6[gles2,${MULTILIB_USEDEP}] )
-	glib? ( >=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}] )
-	opengl? ( >=media-libs/mesa-9.1.6[egl,X?,${MULTILIB_USEDEP}] )
+	>=dev-libs/lzo-2.06-r1
+	>=media-libs/fontconfig-2.10.92
+	>=media-libs/freetype-2.5.0.1:2[png]
+	>=media-libs/libpng-1.6.10:0=
+	sys-libs/binutils-libs:0=
+	>=sys-libs/zlib-1.2.8-r1
+	>=x11-libs/pixman-0.36.0
+	gles2-only? ( >=media-libs/mesa-9.1.6[gles2] )
+	glib? ( >=dev-libs/glib-2.34.3:2 )
+	opengl? ( >=media-libs/mesa-9.1.6[egl,X?] )
 	X? (
-		>=x11-libs/libXrender-0.9.8[${MULTILIB_USEDEP}]
-		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
-		>=x11-libs/libX11-1.6.2[${MULTILIB_USEDEP}]
+		>=x11-libs/libXrender-0.9.8
+		>=x11-libs/libXext-1.3.2
+		>=x11-libs/libX11-1.6.2
 	)
 	xcb? (
-		>=x11-libs/libxcb-1.9.1[${MULTILIB_USEDEP}]
+		>=x11-libs/libxcb-1.9.1
 	)"
 DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )"
@@ -76,7 +76,7 @@ src_prepare() {
 	fi
 }
 
-multilib_src_configure() {
+src_configure() {
 	local emesonargs=(
 		-Dfontconfig=enabled
 		-Dfreetype=enabled
@@ -84,7 +84,7 @@ multilib_src_configure() {
 		$(meson_feature X xlib)
 		$(meson_feature xcb)
 		$(meson_feature aqua quartz)
-		-Dgl-backend=$(multilib_native_usex opengl gl auto)
+		-Dgl-backend=$(usex opengl gl auto)
 		-Dpng=enabled
 		-Dzlib=enabled
 		-Dtests=disabled
@@ -94,6 +94,10 @@ multilib_src_configure() {
 	meson_src_configure
 }
 
-multilib_src_compile() {
+src_compile() {
 	meson_src_compile
+}
+
+src_install() {
+	meson_src_install
 }
