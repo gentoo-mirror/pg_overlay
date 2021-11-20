@@ -84,7 +84,7 @@ src_configure() {
 		$(meson_feature X xlib)
 		$(meson_feature xcb)
 		$(meson_feature aqua quartz)
-		-Dgl-backend=$(meson_feature opengl gl auto)
+		-Dgl-backend=$(usex opengl gl auto)
 		-Dpng=enabled
 		-Dzlib=enabled
 		-Dtests=disabled
