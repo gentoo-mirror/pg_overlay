@@ -92,7 +92,6 @@ src_configure() {
 		-Dspectre=disabled
 		-Dtee=enabled
 		-Ddrm=enabled
-		-Dqt=enabled
 	)
 	meson_src_configure
 }
