@@ -90,6 +90,8 @@ src_configure() {
 		-Dtests=disabled
 		$(meson_feature glib)
 		-Dspectre=disabled
+		-Dtee=enabled
+		-Ddrm=enabled
 	)
 	meson_src_configure
 }
