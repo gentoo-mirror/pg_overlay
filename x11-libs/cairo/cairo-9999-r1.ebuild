@@ -1,9 +1,9 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit flag-o-matic meson multilib-minimal
+inherit flag-o-matic meson multilib
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -38,7 +38,7 @@ RDEPEND="
 	>=x11-libs/pixman-0.36.0[${MULTILIB_USEDEP}]
 	gles2-only? ( >=media-libs/mesa-9.1.6[gles2,${MULTILIB_USEDEP}] )
 	glib? ( >=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}] )
-	opengl? ( >=media-libs/mesa-9.1.6[egl,X(+),${MULTILIB_USEDEP}] )
+	opengl? ( >=media-libs/mesa-9.1.6[egl,X?,${MULTILIB_USEDEP}] )
 	X? (
 		>=x11-libs/libXrender-0.9.8[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
@@ -62,11 +62,9 @@ REQUIRED_USE="
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
 	"${FILESDIR}"/${PN}-respect-fontconfig.patch
-	"${FILESDIR}"/${PN}-1.16.0-binutils-2.34.patch
 	"${FILESDIR}"/${PN}-make-lcdfilter-default.patch
 	"${FILESDIR}"/${PN}-server-side-gradients.patch  
 	"${FILESDIR}"/${PN}-webkit-html5-fix.patch
-	"${FILESDIR}"/xlib-xcb.diff
 )
 
 src_prepare() {
@@ -80,7 +78,7 @@ src_prepare() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		-Dfonconfig=enabled
+		-Dfontconfig=enabled
 		-Dfreetype=enabled
 		$(meson_feature X tee)
 		$(meson_feature X xlib)
@@ -98,9 +96,4 @@ multilib_src_configure() {
 
 multilib_src_compile() {
 	meson_src_compile
-}
-
-multilib_src_install_all() {
-	find "${D}" -name '*.la' -delete || die
-	einstalldocs
 }

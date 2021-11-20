@@ -21,7 +21,7 @@ DEPEND="
 	>=dev-libs/wayland-protocols-1.18
 	>=media-libs/libepoxy-1.5.4[X,egl(+)]
 	media-libs/libglvnd[X]
-	>=media-libs/mesa-18[X(+),egl,gbm]
+	>=media-libs/mesa-21.1[X(+),egl(+),gbm(+)]
 	media-fonts/font-util
 	rpc? ( net-libs/libtirpc )
 	unwind? ( sys-libs/libunwind )
