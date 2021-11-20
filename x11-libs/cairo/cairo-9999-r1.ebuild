@@ -99,7 +99,7 @@ multilib_src_compile() {
 }
 
 multilib_src_install_all() {
-	default
+	meson_src_install
 	find "${D}" -name '*.la' -delete || die
 	einstalldocs
 }
