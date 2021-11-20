@@ -78,7 +78,7 @@ src_prepare() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		-Dfonconfig=enabled
+		-Dfontconfig=enabled
 		-Dfreetype=enabled
 		$(meson_feature X tee)
 		$(meson_feature X xlib)
