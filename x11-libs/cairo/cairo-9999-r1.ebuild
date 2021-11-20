@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit flag-o-matic meson multilib-minimal
+inherit flag-o-matic meson multilib
 
 if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
@@ -99,7 +99,7 @@ multilib_src_compile() {
 }
 
 multilib_src_install_all() {
-	meson_src_install
+	default
 	find "${D}" -name '*.la' -delete || die
 	einstalldocs
 }
