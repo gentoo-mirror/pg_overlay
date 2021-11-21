@@ -91,7 +91,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		# core
-		-DUSE_LINK_TIME_OPTIMIZATION=OFF
+		-DUSE_LINK_TIME_OPTIMIZATION=ON
 		-DUSE_ALSA=$(usex alsa)
 		-DUSE_AUDIOCD=$(usex cdio)
 		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex dbus) # https://github.com/zaps166/QMPlay2/issues/134
