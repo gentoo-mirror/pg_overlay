@@ -4,7 +4,7 @@
 EAPI=7
 
 inherit cmake xdg plocale
-PLOCALES="de es fr hu ja nl pl pt_BR ru uk zh_CN zh_TW"
+PLOCALES="de es fr hu ja nl pl pt_BR ru sk uk zh_CN zh_TW"
 
 DESCRIPTION="A Qt-based video player, which can play most formats and codecs"
 HOMEPAGE="https://github.com/zaps166/QMPlay2"
@@ -91,7 +91,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		# core
-		-DUSE_LINK_TIME_OPTIMIZATION=OFF
+		-DUSE_LINK_TIME_OPTIMIZATION=ON
 		-DUSE_ALSA=$(usex alsa)
 		-DUSE_AUDIOCD=$(usex cdio)
 		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex dbus) # https://github.com/zaps166/QMPlay2/issues/134
