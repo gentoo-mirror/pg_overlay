@@ -1,6 +1,6 @@
 BDEPEND=virtual/pkgconfig >=sys-devel/libtool-2 >=dev-util/meson-0.58.2-r1 >=dev-util/ninja-1.8.2 dev-util/meson-format-array >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install prepare test unpack
-DEPEND=>=dev-libs/lzo-2.06-r1 >=media-libs/fontconfig-2.10.92 >=media-libs/freetype-2.5.0.1:2[png] >=media-libs/libpng-1.6.10:0= sys-libs/binutils-libs:0= >=sys-libs/zlib-1.2.8-r1 >=x11-libs/pixman-0.36.0 gles2-only? ( >=media-libs/mesa-9.1.6[gles2] ) glib? ( >=dev-libs/glib-2.34.3:2 ) opengl? ( >=media-libs/mesa-9.1.6[egl,X?] ) X? ( >=x11-libs/libXrender-0.9.8 >=x11-libs/libXext-1.3.2 >=x11-libs/libX11-1.6.2 ) xcb? ( >=x11-libs/libxcb-1.9.1 ) X? ( x11-base/xorg-proto )
+DEPEND=>=dev-libs/lzo-2.06-r1 >=media-libs/fontconfig-2.10.92 >=media-libs/freetype-2.5.0.1:2[png] >=media-libs/libpng-1.6.10:0= sys-libs/binutils-libs:0= >=sys-libs/zlib-1.2.8-r1 >=x11-libs/pixman-0.36.0 gles2-only? ( >=media-libs/mesa-9.1.6[gles2] ) glib? ( >=dev-libs/glib-2.34.3:2 ) opengl? ( >=media-libs/mesa-9.1.6[X?] ) X? ( >=x11-libs/libXrender-0.9.8 >=x11-libs/libXext-1.3.2 >=x11-libs/libX11-1.6.2 ) xcb? ( >=x11-libs/libxcb-1.9.1 ) X? ( x11-base/xorg-proto )
 DESCRIPTION=A vector graphics library with cross-device output support
 EAPI=8
 HOMEPAGE=https://www.cairographics.org/ https://gitlab.freedesktop.org/cairo/cairo
@@ -8,9 +8,9 @@ INHERIT=flag-o-matic meson git-r3
 IUSE=X aqua debug gles2-only +glib opengl static-libs utils valgrind xcb svg
 LICENSE=|| ( LGPL-2.1 MPL-1.1 )
 PROPERTIES=live
-RDEPEND=>=dev-libs/lzo-2.06-r1 >=media-libs/fontconfig-2.10.92 >=media-libs/freetype-2.5.0.1:2[png] >=media-libs/libpng-1.6.10:0= sys-libs/binutils-libs:0= >=sys-libs/zlib-1.2.8-r1 >=x11-libs/pixman-0.36.0 gles2-only? ( >=media-libs/mesa-9.1.6[gles2] ) glib? ( >=dev-libs/glib-2.34.3:2 ) opengl? ( >=media-libs/mesa-9.1.6[egl,X?] ) X? ( >=x11-libs/libXrender-0.9.8 >=x11-libs/libXext-1.3.2 >=x11-libs/libX11-1.6.2 ) xcb? ( >=x11-libs/libxcb-1.9.1 )
+RDEPEND=>=dev-libs/lzo-2.06-r1 >=media-libs/fontconfig-2.10.92 >=media-libs/freetype-2.5.0.1:2[png] >=media-libs/libpng-1.6.10:0= sys-libs/binutils-libs:0= >=sys-libs/zlib-1.2.8-r1 >=x11-libs/pixman-0.36.0 gles2-only? ( >=media-libs/mesa-9.1.6[gles2] ) glib? ( >=dev-libs/glib-2.34.3:2 ) opengl? ( >=media-libs/mesa-9.1.6[X?] ) X? ( >=x11-libs/libXrender-0.9.8 >=x11-libs/libXext-1.3.2 >=x11-libs/libX11-1.6.2 ) xcb? ( >=x11-libs/libxcb-1.9.1 )
 REQUIRED_USE=gles2-only? ( !opengl )
 RESTRICT=test
 SLOT=0
 _eclasses_=toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	4b66d835ec72e021e359bb81eacfe988	flag-o-matic	4134b5c0fb719b9161d10bdaba9e09e5	multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	a4dab848a4490e8e48cf0baab3e61bc2	python-utils-r1	a8b7938ade305f087865de7e52d079b5	meson	9f3e84959ae1d60e19bc91f212774dcc	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da
-_md5_=435daac66d3259c3e357bea6c373f3f5
+_md5_=07380ddcc9ae50f37c9f7d4a69b3fff6
