@@ -38,7 +38,7 @@ RDEPEND="
 	>=x11-libs/pixman-0.36.0
 	gles2-only? ( >=media-libs/mesa-9.1.6[gles2] )
 	glib? ( >=dev-libs/glib-2.34.3:2 )
-	opengl? ( >=media-libs/mesa-9.1.6[egl,X?] )
+	opengl? ( >=media-libs/mesa-9.1.6[X?] )
 	X? (
 		>=x11-libs/libXrender-0.9.8
 		>=x11-libs/libXext-1.3.2
