@@ -124,8 +124,8 @@ src_configure() {
 		$(meson_use udev)
 		$(meson_use udev udev_kms)
 		$(meson_use doc docs)
+		-Dglamor=true
 		-Ddrm=true
-		-Dxwayland=false
 		-Dxkb_output_dir="${EPREFIX}/var/lib/xkb"
 		-Dhal=false
 		-Dlinux_acpi=false
