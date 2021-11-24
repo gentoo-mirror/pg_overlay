@@ -59,6 +59,12 @@ DEPEND="${RDEPEND}
 "
 BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
 
+PATCHES=(
+	"${FILESDIR}"/${P}-make-OSD-an-actual-wayland-OSD.patch
+	"${FILESDIR}"/${P}-fix-misrenderings-with-transparency.patch # KDE-bug 305247
+	"${FILESDIR}"/${P}-fix-centered-text.patch # KDE-bug 442830
+)
+
 src_configure() {
 	local mycmakeargs=(
 		$(cmake_use_find_package !gles2-only OpenGL)
