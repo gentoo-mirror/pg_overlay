@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PLOCALES="af ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa fi fr gl he hi hr hu ia id ie it ja ko ku ky lt lv ms my nb nds nl nn pl pt pt_BR ro ru se sk sl sq sr sv ta te th tr ug uk uz vi yi zh_CN zh_TW"
 PYTHON_COMPAT=( python3_{9,10} )
@@ -23,6 +23,7 @@ RDEPEND="
 		dev-python/chardet[${PYTHON_USEDEP}]
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
 	')
+	x11-libs/gtk+:3
 "
 BDEPEND="
 	sys-devel/gettext
