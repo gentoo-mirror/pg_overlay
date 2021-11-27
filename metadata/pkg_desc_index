@@ -37,7 +37,6 @@ dev-lang/python 2.7.18_p13 3.10.0_p1: An interpreted, interactive, object-orient
 dev-lang/rust 1.54.0 1.55.0 1.56.0-r1 1.56.1: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
-dev-libs/icu 69.1-r1 70.1_pre: International Components for Unicode
 dev-libs/jsoncpp 1.9.4: C++ JSON reader and writer
 dev-libs/libbsd 0.11.3: An library to provide useful functions commonly found on BSD systems
 dev-libs/libdispatch 5.5: A library for concurrent code execution on multicore hardware
@@ -212,6 +211,7 @@ x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.4 9999 9999-r1: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33 3.24.29: Gimp ToolKit +
 x11-libs/libXi 1.7.99.2: X.Org Xi library
+x11-libs/libdrm 2.4.109: X.Org libdrm library
 x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300 3.1.5-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
