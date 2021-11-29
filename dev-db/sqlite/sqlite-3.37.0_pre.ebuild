@@ -136,7 +136,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	eapply "${FILESDIR}/"${PN}-3.35.0-build_1.1.patch
 	eapply "${FILESDIR}/"${PN}-3.36.0-build_{1.2,2.1,2.2}.patch
 
 	eapply_user
