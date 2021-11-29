@@ -397,6 +397,18 @@
  } {
    copy_file tsrc/$file
  }
+--- sqlite-src-3360000/tool/sqlite3_analyzer.c.in
++++ sqlite-src-3360000/tool/sqlite3_analyzer.c.in
+@@ -14,9 +14,6 @@
+ #define SQLITE_DEFAULT_MEMSTATUS 0
+ #define SQLITE_MAX_EXPR_DEPTH 0
+ #define SQLITE_OMIT_LOAD_EXTENSION 1
+-#ifndef USE_EXTERNAL_SQLITE
+-INCLUDE sqlite3.c
+-#endif
+ INCLUDE $ROOT/src/tclsqlite.c
+ 
+ const char *sqlite3_analyzer_init_proc(Tcl_Interp *interp){
 --- sqlite-src-3360000/tool/sqltclsh.c.in
 +++ sqlite-src-3360000/tool/sqltclsh.c.in
 @@ -27,21 +27,13 @@
