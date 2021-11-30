@@ -5,13 +5,13 @@ EAPI=7
 
 XORG_DOC=doc
 XORG_TARBALL_SUFFIX="xz"
-inherit xorg-3 meson poly-c_x
-EGIT_REPO_URI="https://gitlab.freedesktop.org/xorg/xserver.git"
 XORG_EAUTORECONF="no"
+inherit xorg-3 meson
+EGIT_REPO_URI="https://gitlab.freedesktop.org/xorg/xserver.git"
 
 DESCRIPTION="X.Org X servers"
-SLOT="0/${MY_PV}"
-if [[ ${MY_PV} != 9999* ]]; then
+SLOT="0/${PV}"
+if [[ ${PV} != 9999* ]]; then
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
 fi
 
@@ -30,7 +30,7 @@ CDEPEND="
 	>=x11-libs/libXau-1.0.4
 	>=x11-libs/libXdmcp-1.0.2
 	>=x11-libs/libXfont2-2.0.1
-	x11-libs/libxcvt
+	>=x11-libs/libxcvt-0.1.0
 	>=x11-libs/libxkbfile-1.0.4
 	>=x11-libs/libxshmfence-1.1
 	>=x11-libs/pixman-0.27.2
@@ -108,29 +108,31 @@ src_configure() {
 	local emesonargs=(
 		--localstatedir "${EPREFIX}/var"
 		--sysconfdir "${EPREFIX}/etc/X11"
+		--buildtype $(usex debug debug plain)
+		-Db_ndebug=$(usex debug false true)
+		$(meson_use doc docs)
 		$(meson_use ipv6)
-		$(meson_use debug)
-		$(meson_use unwind libunwind)
 		$(meson_use !minimal dri1)
 		$(meson_use !minimal dri2)
+		$(meson_use udev)
+		$(meson_use udev udev_kms)
+		$(meson_use unwind libunwind)
 		$(meson_use xcsecurity)
 		$(meson_use xephyr)
 		$(meson_use xnest)
 		$(meson_use xorg)
 		$(meson_use xvfb)
-		$(meson_use udev)
-		$(meson_use udev udev_kms)
-		$(meson_use doc docs)
 		-Ddri3=true
 		-Dglx=true
 		-Dglamor=true
+		-Ddefault_font_path="${EPREFIX}"/usr/share/fonts
 		-Ddrm=true
-		-Dxkb_output_dir="${EPREFIX}/var/lib/xkb"
+		-Ddtrace=false
 		-Dhal=false
 		-Dlinux_acpi=false
-		-Ddtrace=false
+		-Dlinux_apm=false
 		-Dsha1=libcrypto
-		-Ddefault_font_path="${EPREFIX}"/usr/share/fonts
+		-Dxkb_output_dir="${EPREFIX}/var/lib/xkb"
 	)
 
 	if use systemd || use elogind; then
