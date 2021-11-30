@@ -98,3 +98,15 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
  if (TG_OWT_USE_PIPEWIRE)
      target_compile_definitions(libwebrtcbuild
      INTERFACE
+@@ -64,11 +64,6 @@
+         INTERFACE
+             WEBRTC_MAC
+         )
+-    else()
+-        target_compile_definitions(libwebrtcbuild
+-        INTERFACE
+-            WEBRTC_USE_X11
+-        )
+     endif()
+
+     if (CMAKE_SYSTEM_NAME STREQUAL "Linux")
