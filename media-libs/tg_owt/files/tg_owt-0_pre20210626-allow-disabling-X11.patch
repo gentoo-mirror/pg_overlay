@@ -103,4 +103,3 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
 -        WEBRTC_USE_X11
      )
  endif()
- 
