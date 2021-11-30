@@ -170,6 +170,8 @@ media-libs/libsdl2:sndio - Enable support for the media-sound/sndio backend
 media-libs/libsdl2:sound - Control audio support (disable at your own risk)
 media-libs/libsdl2:video - Control video support (disable at your own risk)
 media-libs/libsdl2:vulkan - Enable Vulkan support
+media-libs/libtgvoip:dsp - Enable signal processing (echo cancellation, noise suppression, and automatic gain control)
+media-libs/tg_owt:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
 media-libs/vulkan-loader:layers - Include the vulkan layers
 media-plugins/audacious-plugins:ampache - Support controlling audacious via ampache
 media-plugins/audacious-plugins:bs2b - Enable Bauer Bauer stereophonic-to-binaural headphone filter
