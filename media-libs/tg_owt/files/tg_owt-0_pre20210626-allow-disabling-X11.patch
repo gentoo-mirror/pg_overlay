@@ -98,9 +98,3 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
  if (TG_OWT_USE_PIPEWIRE)
      target_compile_definitions(libwebrtcbuild
      INTERFACE
-@@ -63,7 +70,4 @@
-     INTERFACE
--        WEBRTC_USE_X11
-     )
- endif()
-
