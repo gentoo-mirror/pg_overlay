@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/desktop-app/tg_owt"
 TG_OWT_COMMIT="b02478677baac6d563589f216800ff9cea0fd65c"
 LIBYUV_COMMIT="63ce1d058533f2b783eb82a96084443e2cd0a081"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz"
+	https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz -> libyuv-${LIBYUV_COMMIT}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 # Fetch libyuv archive from: https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz
 
