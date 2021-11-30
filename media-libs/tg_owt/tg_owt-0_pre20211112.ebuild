@@ -104,10 +104,10 @@ src_install() {
 	cmake_src_install
 
 	# Save about 15MB of useless headers
-	rm -r "${ED}/usr/include/tg_owt/base/third_party" || die
+	#rm -r "${ED}/usr/include/tg_owt/base/third_party" || die
 	rm -r "${ED}/usr/include/tg_owt/common_audio/third_party" || die
 	rm -r "${ED}/usr/include/tg_owt/modules/third_party" || die
-	#rm -r "${ED}/usr/include/tg_owt/third_party" || die
+	rm -r "${ED}/usr/include/tg_owt/third_party" || die
 
 	# Install third_party/libyuv anyway...
 	dodir /usr/include/tg_owt/third_party/libyuv/include
