@@ -182,8 +182,8 @@ sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat d
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/pambase 20210201.1: PAM base configuration files
 sys-auth/polkit 0.119-r2 0.120-r1: Policy framework for controlling privileges for system-wide services
-sys-devel/clang 13.0.0_rc1: C language family frontend for LLVM
-sys-devel/llvm 13.0.0_rc1: Low Level Virtual Machine
+sys-devel/clang 13.0.1_rc1: C language family frontend for LLVM
+sys-devel/llvm 13.0.1_rc1: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.4: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.14.0_rc1: xfs filesystem utilities
@@ -192,7 +192,7 @@ sys-libs/libblockdev 2.26: A library for manipulating block devices
 sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in the zlib distribution.
 sys-libs/ncurses 6.2_p20210718 6.3_p20211030: console display library
 sys-libs/pam 1.5.1_p20210722: Linux-PAM (Pluggable Authentication Modules)
-sys-libs/polly 11.1.0 12.0.0 12.0.1 13.0.0: Polyhedral optimizations for LLVM
+sys-libs/polly 11.1.0 12.0.0 12.0.1 13.0.0_rc1 13.0.0: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre59: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
@@ -206,7 +206,6 @@ virtual/perl-Time-Local 1.300.0: Virtual for Time-Local
 virtual/perl-libnet 3.130.0: Virtual for libnet
 virtual/perl-version 0.992.900: Virtual for version
 www-client/firefox 94.0.2: Firefox Web Browser
-x11-base/xcb-proto 1.14.1: X C-language Bindings protocol headers
 x11-base/xorg-server 21.1.1: X.Org X servers
 x11-base/xwayland 21.1.3: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
