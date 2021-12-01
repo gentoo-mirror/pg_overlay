@@ -12,7 +12,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://github.com/KhronosGroup/${MY_PN}.git"
 	inherit git-r3
 else
-	EGIT_COMMIT="2d12367ced2dd34444822340070b4545ae7c02f1"
+	EGIT_COMMIT="v${PV}"
 	SRC_URI="https://github.com/KhronosGroup/${MY_PN}/archive/${EGIT_COMMIT}.tar.gz -> ${P}.tar.gz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
 	S="${WORKDIR}"/${MY_PN}-${EGIT_COMMIT}
@@ -26,7 +26,7 @@ SLOT="0"
 # Tests fail upon finding symbols that do not match a regular expression
 # in the generated library. Easily hit with non-standard compiler flags
 RESTRICT="test"
-COMMON_DEPEND=">=dev-util/spirv-headers-20210817"
+COMMON_DEPEND=">=dev-util/spirv-headers-1.2.198"
 DEPEND="${COMMON_DEPEND}"
 RDEPEND=""
 BDEPEND="${PYTHON_DEPS}
