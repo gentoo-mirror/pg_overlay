@@ -91,8 +91,8 @@ dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
 dev-util/scons 4.2.0-r1: Extensible Python-based build utility
 dev-util/spirv-tools 2021.4: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.2.201: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.2.200: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
+dev-util/vulkan-headers 1.2.200 1.2.201: Vulkan Header files and API registry
+dev-util/vulkan-tools 1.2.199 1.2.200: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
 games-board/aisleriot 3.22.9: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
@@ -122,8 +122,8 @@ media-libs/libsdl2 2.0.16-r1: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20211129: VoIP library for Telegram clients
 media-libs/shaderc 2021.2 2021.3: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20211112: WebRTC build for Telegram
-media-libs/vulkan-layers 1.2.198 1.2.200: Vulkan Validation Layers
-media-libs/vulkan-loader 1.2.200: Vulkan Installable Client Driver (ICD) Loader
+media-libs/vulkan-layers 1.2.198 1.2.199 1.2.200: Vulkan Validation Layers
+media-libs/vulkan-loader 1.2.199 1.2.200: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
