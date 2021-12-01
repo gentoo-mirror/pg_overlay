@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	inherit git-r3
 else
 	SRC_URI="https://github.com/KhronosGroup/${MY_PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	#KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
 	S="${WORKDIR}"/${MY_PN}-${PV}
 fi
 
@@ -41,6 +41,8 @@ DEPEND="${RDEPEND}
 
 multilib_src_configure() {
 	local mycmakeargs=(
+		-DCMAKE_C_FLAGS="${CFLAGS} -DNDEBUG"
+		-DCMAKE_CXX_FLAGS="${CXXFLAGS} -DNDEBUG"
 		-DCMAKE_SKIP_RPATH=ON
 		-DBUILD_LAYER_SUPPORT_FILES=ON
 		-DBUILD_WSI_WAYLAND_SUPPORT=$(usex wayland)
