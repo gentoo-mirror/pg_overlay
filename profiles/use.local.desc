@@ -407,6 +407,7 @@ sys-fs/udisks:systemd - Support sys-apps/systemd's logind
 sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
 sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
 sys-libs/glibc:cet - Enable Intel Control-flow Enforcement Technology (needs binutils 2.29 and gcc 8)
+sys-libs/glibc:clone3 - Enable the new clone3 syscall within glibc. Can be disabled to allow compatibility with older Electron applications.
 sys-libs/glibc:compile-locales - build *all* locales in src_install; this is generally meant for stage building only as it ignores /etc/locale.gen file and can be pretty slow
 sys-libs/glibc:crypt - build and install libcrypt and crypt.h
 sys-libs/glibc:debug - When USE=hardened, allow fortify/stack violations to dump core (SIGABRT) and not kill self (SIGKILL)
