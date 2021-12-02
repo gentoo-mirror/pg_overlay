@@ -56,6 +56,8 @@ CDEPEND="
 	)
 	udev? ( virtual/libudev:= )
 	unwind? ( sys-libs/libunwind )
+	>=x11-apps/xinit-1.3.3-r1
+	selinux? ( sys-libs/libselinux )
 	systemd? (
 		sys-apps/dbus
 		sys-apps/systemd
@@ -64,6 +66,9 @@ CDEPEND="
 		sys-apps/dbus
 		sys-auth/elogind[pam]
 		sys-auth/pambase[elogind]
+	)
+	doc? (
+		x11-base/xorg-sgml-doctools
 	)
 	!!x11-drivers/nvidia-drivers[-libglvnd(+)]
 "
@@ -89,6 +94,7 @@ REQUIRED_USE="!minimal? (
 	xephyr? ( kdrive )"
 
 UPSTREAMED_PATCHES=(
+	"${FILESDIR}"/${P}-DPI-revert.patch
 )
 
 PATCHES=(
