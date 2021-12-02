@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit flag-o-matic linux-info meson systemd xdg-utils
 
@@ -15,14 +15,14 @@ KEYWORDS="~alpha ~amd64 ~arm ~ppc ~ppc64 ~riscv ~x86"
 IUSE="+alsa ao +audiofile bzip2 cdio chromaprint +cue +curl doc +dbus
 	+eventfd expat faad +ffmpeg +fifo flac fluidsynth gme +icu +id3tag +inotify
 	+ipv6 jack lame libmpdclient libsamplerate libsoxr +mad mikmod mms
-	modplug mpg123 musepack +network nfs openal opus oss pipe pulseaudio qobuz
-	recorder samba selinux sid signalfd sndfile sndio soundcloud sqlite systemd
-	test twolame udisks vorbis wavpack webdav wildmidi upnp
-	zeroconf zip zlib pipewire"
+	modplug mpg123 musepack +network nfs openal openmpt opus oss pipe pipewire pulseaudio qobuz
+	recorder samba selinux sid signalfd snapcast sndfile sndio soundcloud sqlite systemd
+	test twolame udisks unicode vorbis wavpack webdav wildmidi upnp
+	zeroconf zip zlib"
 
-OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pulseaudio sndio recorder"
+OUTPUT_PLUGINS="alsa ao fifo jack network openal oss pipe pipewire pulseaudio snapcast sndio recorder"
 DECODER_PLUGINS="audiofile faad ffmpeg flac fluidsynth mad mikmod
-	modplug mpg123 musepack flac sid vorbis wavpack wildmidi"
+	modplug mpg123 musepack opus openmpt flac sid vorbis wavpack wildmidi"
 ENCODER_PLUGINS="audiofile flac lame twolame vorbis"
 
 REQUIRED_USE="
@@ -38,7 +38,6 @@ RESTRICT="!test? ( test )"
 
 RDEPEND="
 	acct-user/mpd
-	dev-libs/libfmt
 	sys-libs/liburing:=
 	alsa? (
 		media-libs/alsa-lib
@@ -79,9 +78,10 @@ RDEPEND="
 	network? ( media-libs/libshout )
 	nfs? ( net-fs/libnfs )
 	openal? ( media-libs/openal )
+	openmpt? ( media-libs/libopenmpt )
 	opus? ( media-libs/opus )
 	pulseaudio? ( media-sound/pulseaudio )
-	pipewire? ( media-video/pipewire )
+	pipewire? ( media-video/pipewire:= )
 	qobuz? ( dev-libs/libgcrypt:0 )
 	samba? ( net-fs/samba )
 	selinux? ( sec-policy/selinux-mpd )
@@ -89,6 +89,7 @@ RDEPEND="
 		media-libs/libsidplay:2
 		media-libs/libsidplayfp
 	) )
+	snapcast? ( media-sound/snapcast )
 	sndfile? ( media-libs/libsndfile )
 	sndio? ( media-sound/sndio )
 	soundcloud? ( >=dev-libs/yajl-2:= )
@@ -106,6 +107,7 @@ RDEPEND="
 
 DEPEND="${RDEPEND}
 	>=dev-libs/boost-1.58:=
+	dev-libs/libfmt:=
 	test? ( dev-cpp/gtest )"
 
 BDEPEND=">=dev-util/meson-0.49.2
@@ -136,18 +138,18 @@ pkg_setup() {
 }
 
 src_prepare() {
-	sed -i \
-		-e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
-		-e 's:^#user.*$:user "mpd":' \
-		-e 's:^#bind_to_address.*any.*$:bind_to_address "localhost":' \
-		-e 's:^#bind_to_address.*$:bind_to_address "/var/lib/mpd/socket":' \
-		-e 's:^#music_directory.*$:music_directory "/var/lib/mpd/music":' \
-		-e 's:^#playlist_directory.*$:playlist_directory "/var/lib/mpd/playlists":' \
-		-e 's:^#db_file.*$:db_file "/var/lib/mpd/database":' \
-		-e 's:^#log_file.*$:log_file "/var/lib/mpd/log":' \
-		-e 's:^#pid_file.*$:pid_file "/var/lib/mpd/pid":' \
-		-e 's:^#state_file.*$:state_file "/var/lib/mpd/state":' \
-		doc/mpdconf.example || die
+	 sed -i \
+                -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
+                -e 's:^#user.*$:user "mpd":' \
+                -e 's:^#bind_to_address.*any.*$:bind_to_address "localhost":' \
+                -e 's:^#bind_to_address.*$:bind_to_address "/var/lib/mpd/socket":' \
+                -e 's:^#music_directory.*$:music_directory "/var/lib/mpd/music":' \
+                -e 's:^#playlist_directory.*$:playlist_directory "/var/lib/mpd/playlists":' \
+                -e 's:^#db_file.*$:db_file "/var/lib/mpd/database":' \
+                -e 's:^#log_file.*$:log_file "/var/lib/mpd/log":' \
+                -e 's:^#pid_file.*$:pid_file "/var/lib/mpd/pid":' \
+                -e 's:^#state_file.*$:state_file "/var/lib/mpd/state":' \
+                doc/mpdconf.example || die
 	default
 }
 
@@ -182,8 +184,6 @@ src_configure() {
 		-Dzeroconf=$(usex zeroconf avahi disabled)
 		-Dzlib=$(usex zlib enabled disabled)
 		-Dzzip=$(usex zip enabled disabled)
-		-Dpipewire=$(usex pipewire enabled disabled)
-		-Dsnapcast=false
 		)
 
 	emesonargs+=(
@@ -194,8 +194,10 @@ src_configure() {
 		-Dopenal=$(usex openal enabled disabled)
 		-Doss=$(usex oss enabled disabled)
 		-Dpipe=$(usex pipe true false)
+		-Dpipewire=$(usex pipewire enabled disabled)
 		-Dpulse=$(usex pulseaudio enabled disabled)
 		-Drecorder=$(usex recorder true false)
+		-Dsnapcast=$(usex snapcast true false)
 		-Dsndio=$(usex sndio enabled disabled)
 	)
 
@@ -233,6 +235,7 @@ src_configure() {
 		-Dmodplug=$(usex modplug enabled disabled)
 		-Dmpcdec=$(usex musepack enabled disabled)
 		-Dmpg123=$(usex mpg123 enabled disabled)
+		-Dopenmpt=$(usex openmpt enabled disabled)
 		-Dopus=$(usex opus enabled disabled)
 		-Dsidplay=$(usex sid enabled disabled)
 		-Dsndfile=$(usex sndfile enabled disabled)
@@ -281,13 +284,18 @@ src_install() {
 
 	newinitd "${FILESDIR}"/${PN}-0.21.4.init ${PN}
 
+	if use unicode; then
+		sed -i -e 's:^#filesystem_charset.*$:filesystem_charset "UTF-8":' \
+			"${ED}"/etc/mpd.conf || die "sed failed"
+	fi
+
 	keepdir /var/lib/mpd
 	keepdir /var/lib/mpd/music
 	keepdir /var/lib/mpd/playlists
 
-	fowners mpd:audio -R /var/lib/mpd
-
 	rm -r "${ED}"/usr/share/doc/mpd || die
+
+	fowners mpd:audio -R /var/lib/mpd
 
 }
 
