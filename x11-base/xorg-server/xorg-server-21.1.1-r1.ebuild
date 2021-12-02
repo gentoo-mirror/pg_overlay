@@ -56,7 +56,6 @@ CDEPEND="
 	)
 	udev? ( virtual/libudev:= )
 	unwind? ( sys-libs/libunwind )
-	>=x11-apps/xinit-1.3.3-r1
 	selinux? ( sys-libs/libselinux )
 	systemd? (
 		sys-apps/dbus
