@@ -149,7 +149,7 @@ QA_SONAME="
 # An rmeta file is custom binary format that contains the metadata for the crate.
 # rmeta files do not support linking, since they do not contain compiled object files.
 # so we can safely silence the warning for this QA check.
-QA_WX_LOAD="usr/lib/${PN}/${PV}/lib/rustlib/.*/lib/.*:lib.rmeta"
+QA_WX_LOAD="usr/lib/${PN}/${PV}/lib/rustlib/.*/lib/.*rmeta"
 QA_EXECSTACK="${QA_WX_LOAD}"
 
 # causes double bootstrap
@@ -159,9 +159,9 @@ VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
 	"${FILESDIR}"/1.55.0-ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/1.54.0-parallel-miri.patch # https://github.com/rust-lang/miri/pull/1863
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
+	"${FILESDIR}"/rust-pr91070.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -238,8 +238,8 @@ pkg_setup() {
 
 	# required to link agains system libs, otherwise
 	# crates use bundled sources and compile own static version
-	export LIBGIT2_SYS_USE_PKG_CONFIG=0
-	export LIBGIT2_NO_PKG_CONFIG=1 #749381
+	export LIBGIT2_SYS_USE_PKG_CONFIG=1
+	export LIBGIT2_NO_PKG_CONFIG=0 #749381
 	export LIBSSH2_SYS_USE_PKG_CONFIG=1
 	export PKG_CONFIG_ALLOW_CROSS=1
 
@@ -378,7 +378,7 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		#
-		submodules = false
+		submodules = true
 		#
 		python = "${EPYTHON}"
 		locked-deps = false
