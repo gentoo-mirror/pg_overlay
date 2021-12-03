@@ -57,7 +57,7 @@ DEPEND="
 PATCHES=(
 	"${FILESDIR}/${PN}-1.1-configure-lua-version.patch"
 	#"${FILESDIR}/${PN}-1.1-ifp.patch"
-	"${FILESDIR}/${PM}-1.1-var-collision.patch"
+	"${FILESDIR}/${PN}-1.1-var-collision.patch"
 )
 
 pkg_setup() {
