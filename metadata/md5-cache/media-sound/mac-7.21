@@ -7,6 +7,6 @@ INHERIT=autotools
 KEYWORDS=~amd64
 LICENSE=mac
 SLOT=0
-SRC_URI=http://monkeysaudio.com/files/MAC_SDK_713.zip -> mac-7.13.zip
+SRC_URI=http://monkeysaudio.com/files/MAC_SDK_721.zip -> mac-7.21.zip
 _eclasses_=gnuconfig	262062cef0ba4f22b397193da514a350	toolchain-funcs	9ea1c67b6f8315fdc2568abb674519aa	multilib	4b66d835ec72e021e359bb81eacfe988	libtool	241a8f577b9781a42a7421e53448a44e	autotools	c9df06c186913b43eb211100ef5fe2cf
 _md5_=2275e9a8fb7017432d25e037981aad39
