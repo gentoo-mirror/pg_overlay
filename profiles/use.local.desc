@@ -184,6 +184,11 @@ media-plugins/audacious-plugins:sid - Build with SID (Commodore 64 Audio) suppor
 media-plugins/audacious-plugins:soxr - Build with SoX Resampler support
 media-plugins/audacious-plugins:speedpitch - Enable speed/pitch effects
 media-plugins/audacious-plugins:streamtuner - Build the streamtuner plugin
+media-sound/aqualung:ifp - Enable support for iRiver iFP portable audio players
+media-sound/aqualung:lua - Enable support for programmable title formatting with dev-lang/lua
+media-sound/aqualung:mac - Enable support for decoding Monkey's Audio files
+media-sound/aqualung:podcast - Enable podcast support
+media-sound/aqualung:systray - Enable system tray support
 media-sound/cantata:cdio - Use dev-libs/libcdio-paranoia for CD support (instead of cdparanoia)
 media-sound/cantata:http-server - Enable internal HTTP server to play non-MPD files
 media-sound/cantata:replaygain - Enable ReplayGain support, for relative volume adjustments
