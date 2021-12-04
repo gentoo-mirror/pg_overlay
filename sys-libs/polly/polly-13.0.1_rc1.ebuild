@@ -41,7 +41,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
 		-DLLVM_LINK_LLVM_DYLIB=ON
-		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
+		-DLLVM_POLLY_LINK_INTO_TOOLS=OFF
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${SLOT}"
 		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
