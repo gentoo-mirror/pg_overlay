@@ -511,8 +511,6 @@ multilib_src_configure() {
 		$(meson_use osmesa)
 		$(meson_use selinux)
 		$(meson_feature zstd)
-		$(meson_use video_cards_crocus crocus)
-		$(meson_use video_cards_iris iris)
 		$(meson_use cpu_flags_x86_sse2 sse2)
 		-Dvalgrind=$(usex valgrind auto disabled)
 		-Ddri-drivers=$(driver_list "${DRI_DRIVERS[*]}")
