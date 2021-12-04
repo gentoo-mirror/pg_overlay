@@ -40,7 +40,7 @@ src_install() {
 	if use gtk ; then
 		cargo_src_install --path ./czkawka_gui
 		insinto /usr/share/applications
-		doins snap/gui/${PN}.desktop
+		doins data/com.github.qarmin.${PN}.desktop
 	else
 		cargo_src_install --path ./czkawka_cli
 	fi
