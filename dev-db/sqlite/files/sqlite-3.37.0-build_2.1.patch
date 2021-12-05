@@ -62,7 +62,7 @@
  
  # Generated source code files
  #
-@@ -437,37 +461,22 @@
+@@ -438,36 +438,21 @@
  # Statically linked extensions
  #
  TESTSRC += \
@@ -96,10 +96,9 @@
    $(TOP)/ext/misc/unionvtab.c \
    $(TOP)/ext/misc/wholenumber.c \
 -  $(TOP)/ext/misc/zipfile.c \
-   $(TOP)/ext/userauth/userauth.c
+   $(TOP)/ext/userauth/userauth.c \
    $(TOP)/ext/rtree/test_rtreedoc.c
 
- # Source code to the library files needed by the test fixture
 @@ -647,25 +656,25 @@
  
  libtclsqlite3.la:	tclsqlite.lo libsqlite3.la

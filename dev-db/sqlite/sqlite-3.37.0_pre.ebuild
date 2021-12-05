@@ -328,7 +328,7 @@ multilib_src_configure() {
 			append-cflags -ffloat-store
 		fi
 	fi
-
+	options+=(--disable-amalgamation)
 	econf "${options[@]}"
 }
 
