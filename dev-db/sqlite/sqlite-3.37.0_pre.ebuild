@@ -329,8 +329,6 @@ multilib_src_configure() {
 		fi
 	fi
 
-	options+=(--disable-amalgamation)
-
 	econf "${options[@]}"
 }
 
