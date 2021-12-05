@@ -37,8 +37,8 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
 +  return sqlite3AmatchInit(db);
  }
 +#endif /* !defined(SQLITE_CORE) || defined(SQLITE_TEST) */
---- /ext/misc/carray.c
-+++ /ext/misc/carray.c
+--- a/ext/misc/carray.c
++++ b/ext/misc/carray.c
 @@ -498,16 +498,8 @@
  
  #endif /* SQLITE_OMIT_VIRTUALTABLE */

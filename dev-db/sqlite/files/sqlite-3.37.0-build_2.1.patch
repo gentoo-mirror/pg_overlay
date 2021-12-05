@@ -62,7 +62,7 @@
  
  # Generated source code files
  #
-@@ -437,36 +461,21 @@
+@@ -437,37 +461,22 @@
  # Statically linked extensions
  #
  TESTSRC += \
@@ -97,7 +97,8 @@
    $(TOP)/ext/misc/wholenumber.c \
 -  $(TOP)/ext/misc/zipfile.c \
    $(TOP)/ext/userauth/userauth.c
- 
+   $(TOP)/ext/rtree/test_rtreedoc.c
+
  # Source code to the library files needed by the test fixture
 @@ -647,25 +656,25 @@
  
