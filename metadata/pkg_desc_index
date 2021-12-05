@@ -28,7 +28,7 @@ dev-cpp/abseil-cpp 20210324.2: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.66.1 2.68.1: C++ interface for glib2
 dev-cpp/onetbb 2021.4.0: High level abstract threading library
-dev-db/sqlite 3.36.0_pre 3.37.0_pre: SQL database engine
+dev-db/sqlite 3.36.0_pre: SQL database engine
 dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-games/freecell-solver 6.4.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
