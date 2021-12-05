@@ -99,6 +99,7 @@
 -  $(TOP)/ext/misc/zipfile.c \
    $(TOP)/ext/userauth/userauth.c \
    $(TOP)/ext/rtree/test_rtreedoc.c
+
 @@ -647,25 +656,25 @@
  
  libtclsqlite3.la:	tclsqlite.lo libsqlite3.la
