@@ -39,10 +39,13 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
 +#endif /* !defined(SQLITE_CORE) || defined(SQLITE_TEST) */
 --- /ext/misc/carray.c
 +++ /ext/misc/carray.c
-@@ -505,13 +505,8 @@
-
+@@ -502,16 +502,9 @@
+   sqlite3_result_pointer(context, p, "carray", 0);
+ }
+ #endif /* SQLITE_TEST */
+-
  #endif /* SQLITE_OMIT_VIRTUALTABLE */
-
+-
 -SQLITE_API int sqlite3_carray_init(
 -  sqlite3 *db,
 -  char **pzErrMsg,
@@ -54,25 +57,25 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
  #ifndef SQLITE_OMIT_VIRTUALTABLE
    rc = sqlite3_create_module(db, "carray", &carrayModule, 0);
  #ifdef SQLITE_TEST
-@@ -523,3 +518,18 @@
+@@ -523,3 +516,18 @@
  #endif /* SQLITE_OMIT_VIRTUALTABLE */
    return rc;
  }
 +
-++#if !defined(SQLITE_CORE) || defined(SQLITE_TEST)
-++#ifdef _WIN32
-++__declspec(dllexport)
-++#endif
-++int sqlite3_carray_init(
-++  sqlite3 *db,
-++  char **pzErrMsg,
-++  const sqlite3_api_routines *pApi
-++){
-++  SQLITE_EXTENSION_INIT2(pApi);
-++  (void)pzErrMsg;  /* Unused parameter */
-++  return sqlite3CarrayInit(db);
-++}
-++#endif /* !defined(SQLITE_CORE) || defined(SQLITE_TEST) */
++#if !defined(SQLITE_CORE) || defined(SQLITE_TEST)
++#ifdef _WIN32
++__declspec(dllexport)
++#endif
++int sqlite3_carray_init(
++  sqlite3 *db,
++  char **pzErrMsg,
++  const sqlite3_api_routines *pApi
++){
++  SQLITE_EXTENSION_INIT2(pApi);
++  (void)pzErrMsg;  /* Unused parameter */
++  return sqlite3CarrayInit(db);
++}
++#endif /* !defined(SQLITE_CORE) || defined(SQLITE_TEST) */
 --- /ext/misc/completion.c
 +++ /ext/misc/completion.c
 @@ -483,12 +483,13 @@
