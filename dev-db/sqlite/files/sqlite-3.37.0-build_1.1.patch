@@ -39,13 +39,10 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
 +#endif /* !defined(SQLITE_CORE) || defined(SQLITE_TEST) */
 --- /ext/misc/carray.c
 +++ /ext/misc/carray.c
-@@ -498,16 +498,8 @@
+@@ -505,13 +505,8 @@
  
  #endif /* SQLITE_OMIT_VIRTUALTABLE */
  
--#ifdef _WIN32
--__declspec(dllexport)
--#endif
 -int sqlite3_carray_init(
 -  sqlite3 *db, 
 -  char **pzErrMsg, 
@@ -306,8 +303,7 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
                                 SQLITE_UTF8|SQLITE_DIRECTONLY, 0,
                                 readfileFunc, 0, 0);
    if( rc==SQLITE_OK ){
-@@ -998,3 +989,18 @@
-   }
+@@ -998,2 +988,17 @@
    return rc;
  }
 +
