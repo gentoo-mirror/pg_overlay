@@ -40,12 +40,12 @@ SQLite revision: acd63062eb06748bfe9e4886639e4f2b54ea6a496a83f10716abbaba4115500
 --- /ext/misc/carray.c
 +++ /ext/misc/carray.c
 @@ -505,13 +505,8 @@
- 
+
  #endif /* SQLITE_OMIT_VIRTUALTABLE */
- 
--int sqlite3_carray_init(
--  sqlite3 *db, 
--  char **pzErrMsg, 
+
+-SQLITE_API int sqlite3_carray_init(
+-  sqlite3 *db,
+-  char **pzErrMsg,
 -  const sqlite3_api_routines *pApi
 -){
 +int sqlite3CarrayInit(sqlite3 *db){
