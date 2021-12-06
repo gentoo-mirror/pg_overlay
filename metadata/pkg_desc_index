@@ -111,6 +111,7 @@ kde-frameworks/plasma 5.88.0-r1: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/claws-mail 4.0.0: An email client (and news reader) based on GTK+
 mail-client/thunderbird 91.3.2: Thunderbird Mail Client
+media-gfx/sane-backends 1.0.32: Scanner Access Now Easy - Backends
 media-libs/gst-plugins-base 1.19.1: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.19.1: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.19.1: Open source multimedia framework
