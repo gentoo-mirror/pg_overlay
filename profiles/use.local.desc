@@ -38,6 +38,8 @@ dev-db/sqlite:tools - Install additional tools
 dev-db/sqlitestudio:cli - Build CLI interface
 dev-lang/luajit:lua52compat - Enable some upwards-compatible features from Lua 5.2 that are unlikely to break existing code.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
+dev-lang/python:lto - Optimize the build using Link Time Optimization (LTO)
+dev-lang/python:pgo - Optimize the build using Profile Guided Optimization (PGO)
 dev-lang/python:wininst - Install Windows executables required to create an executable installer for MS Windows.
 dev-lang/rust:clippy - Install clippy, Rust code linter
 dev-lang/rust:miri - Install miri, an interpreter for Rust's mid-level intermediate representation (requires USE=nightly)
