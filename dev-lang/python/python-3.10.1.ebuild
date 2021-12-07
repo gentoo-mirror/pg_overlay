@@ -15,7 +15,7 @@ PATCHSET="python-gentoo-patches-${MY_PV}"
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="https://www.python.org/"
 SRC_URI="https://www.python.org/ftp/python/${PV%%_*}/${MY_P}.tar.xz
-	https://dev.gentoo.org/~floppym/python/${PATCHSET}.tar.xz
+	https://dev.gentoo.org/~mgorny/dist/python/${PATCHSET}.tar.xz
 	verify-sig? (
 		https://www.python.org/ftp/python/${PV%%_*}/${MY_P}.tar.xz.asc
 	)"
@@ -152,6 +152,11 @@ src_configure() {
 	if use pgo; then
 		local jobs=$(makeopts_jobs "${MAKEOPTS}" "$(get_nproc)")
 		export PROFILE_TASK="-m test -j${jobs} --pgo-extended -x test_gdb"
+
+		if has_version "app-arch/rpm" ; then
+			# Avoid sandbox failure (attempts to write to /var/lib/rpm)
+			PROFILE_TASK+=" -x test_distutils"
+		fi
 	fi
 
 	local myeconfargs=(
@@ -208,6 +213,7 @@ src_compile() {
 		# bug 660358
 		local -x COLUMNS=80
 		local -x PYTHONDONTWRITEBYTECODE=
+
 		addpredict /usr/lib/python3.10/site-packages
 
 		emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_ctypes test_distutils test_doctest test_support test_ftplib test_import test_importlib test_runpy test_pickle test_socket -j $(nproc) --pgo-extended"
