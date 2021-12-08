@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-94-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-91esr-patches-02.tar.xz"
 
 LLVM_MAX_SLOT=13
 
@@ -37,7 +37,7 @@ MOZ_P="${MOZ_PN}-${MOZ_PV}"
 MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
 MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
-inherit autotools check-reqs desktop flag-o-matic gnome2-utils linux-info \
+inherit autotools check-reqs desktop flag-o-matic gnome2-utils \
 	llvm multiprocessing pax-utils python-any-r1 toolchain-funcs \
 	virtualx xdg
 
@@ -54,8 +54,8 @@ PATCH_URIS=(
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
 	${PATCH_URIS[@]}"
 
-DESCRIPTION="Firefox Web Browser"
-HOMEPAGE="https://www.mozilla.com/firefox"
+DESCRIPTION="Thunderbird Mail Client"
+HOMEPAGE="https://www.thunderbird.net/"
 
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
@@ -66,18 +66,11 @@ IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
 IUSE+=" jack lto +openh264 pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx +system-webp"
 IUSE+=" wayland wifi"
-IUSE+=" +kde +privacy"
-
-# Firefox-only IUSE
-IUSE+=" geckodriver"
-IUSE+=" +gmp-autoupdate"
-IUSE+=" screencast"
+IUSE+=" +kde +privacy +screencast"
 
 REQUIRED_USE="debug? ( !system-av1 )
+	screencast? ( wayland )
 	wifi? ( dbus )"
-
-# Firefox-only REQUIRED_USE flags
-REQUIRED_USE+=" screencast? ( wayland )"
 
 BDEPEND="${PYTHON_DEPS}
 	app-arch/unzip
@@ -108,7 +101,7 @@ BDEPEND="${PYTHON_DEPS}
 	x86? ( >=dev-lang/nasm-2.13 )"
 
 CDEPEND="
-	>=dev-libs/nss-3.71
+	>=dev-libs/nss-3.68
 	>=dev-libs/nspr-4.32
 	dev-libs/atk
 	dev-libs/expat
@@ -133,6 +126,7 @@ CDEPEND="
 	x11-libs/libXext
 	x11-libs/libXfixes
 	x11-libs/libXrender
+	x11-libs/libXt
 	dbus? (
 		sys-apps/dbus
 		dev-libs/dbus-glib
@@ -175,7 +169,8 @@ RDEPEND="${CDEPEND}
 	kde? (
 		kde-apps/kdialog
 		kde-misc/kmozillahelper
-	)"
+	)
+	!<x11-plugins/enigmail-2.2"
 
 DEPEND="${CDEPEND}
 	pulseaudio? (
@@ -189,12 +184,6 @@ DEPEND="${CDEPEND}
 	x86? ( virtual/opengl )"
 
 S="${WORKDIR}/${PN}-${PV%_*}"
-
-# Allow MOZ_GMP_PLUGIN_LIST to be set in an eclass or
-# overridden in the enviromnent (advanced hackers only)
-if [[ -z "${MOZ_GMP_PLUGIN_LIST+set}" ]] ; then
-	MOZ_GMP_PLUGIN_LIST=( gmp-gmpopenh264 gmp-widevinecdm )
-fi
 
 llvm_check_deps() {
 	if ! has_version -b "sys-devel/clang:${LLVM_SLOT}" ; then
@@ -501,10 +490,6 @@ pkg_setup() {
 		# Ensure we use C locale when building, bug #746215
 		export LC_ALL=C
 	fi
-
-	CONFIG_CHECK="~SECCOMP"
-	WARNING_SECCOMP="CONFIG_SECCOMP not set! This system will be unable to play DRM-protected content."
-	linux-info_pkg_setup
 }
 
 src_unpack() {
@@ -585,7 +570,7 @@ src_prepare() {
 	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
-	rm -rv browser/extensions/{doh-rollout,screenshots,webcompat,report-site-issue}
+	rm -rv browser/extensions/{doh-rollout,webcompat,report-site-issue}
 	### Debian patches
 	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
@@ -604,7 +589,6 @@ src_prepare() {
 	### FreeBSD patches
 	einfo "Applying FreeBSD's patches"
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
-
 	### Fedora patches
 	einfo "Applying Fedora's patches"
 	for p in $(cat "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/series);do
@@ -635,8 +619,9 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
+	### PGO fix patch
+	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
 	#######
-	eapply "${FILESDIR}/fix-wayland.patch"
 
 	xdg_src_prepare
 }
@@ -699,7 +684,7 @@ src_configure() {
 	export MOZCONFIG="${S}/.mozconfig"
 
 	# Initialize MOZCONFIG
-	mozconfig_add_options_ac '' --enable-application=browser
+	mozconfig_add_options_ac '' --enable-application=comm/mail
 
 	# Set Gentoo defaults
 	export MOZILLA_OFFICIAL=1
@@ -789,8 +774,6 @@ src_configure() {
 
 	use eme-free && mozconfig_add_options_ac '+eme-free' --disable-eme
 
-	mozconfig_use_enable geckodriver
-
 	if use hardened ; then
 		mozconfig_add_options_ac "+hardened" --enable-hardening
 		append-ldflags "-Wl,-z,relro -Wl,-z,now"
@@ -823,8 +806,12 @@ src_configure() {
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=cross
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO_RUST=1
 		else
+			# ld.gold is known to fail:
+			# /usr/lib/gcc/x86_64-pc-linux-gnu/11.2.1/../../../../x86_64-pc-linux-gnu/bin/ld.gold: internal error in set_xindex, at /var/tmp/portage/sys-devel/binutils-2.37_p1-r1/work/binutils-2.37/gold/object.h:1050
+
 			# ThinLTO is currently broken, see bmo#1644409
 			mozconfig_add_options_ac '+lto' --enable-lto=full
+			mozconfig_add_options_ac "linker is set to bfd" --enable-linker=bfd
 		fi
 
 		if use pgo ; then
@@ -1058,13 +1045,13 @@ src_configure() {
 	mozconfig_add_options_ac '' --without-mozilla-api-keyfile
 	mozconfig_add_options_ac '' --without-pocket-api-keyfile
 
-	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=0
-	mozconfig_add_options_ac '' MOZ_DEVICES=0
-	mozconfig_add_options_ac '' MOZ_LOGGING=0
-	mozconfig_add_options_ac '' MOZ_PAY=0
-	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
-	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
-	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=0
+	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=
+	mozconfig_add_options_ac '' MOZ_DEVICES=
+	mozconfig_add_options_ac '' MOZ_LOGGING=
+	mozconfig_add_options_ac '' MOZ_PAY=
+	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=
+	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=
+	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
 	mozconfig_add_options_ac '' MOZ_X11=0
 	mozconfig_add_options_ac '' USE_X11=0
 
@@ -1075,12 +1062,12 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-strip
 	mozconfig_add_options_ac '' --enable-webrtc
 
-	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
-	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
-	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
-	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
+	echo "export MOZ_DATA_REPORTING=" >> "${S}"/.mozconfig
+	echo "export MOZ_DEVICES=" >> "${S}"/.mozconfig
+	echo "export MOZ_LOGGING=" >> "${S}"/.mozconfig
+	echo "export MOZ_PAY=" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_HEALTHREPORTER=" >> "${S}"/.mozconfig
+	echo "export MOZ_SERVICES_METRICS=" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export MOZ_X11=0" >> "${S}"/.mozconfig
 	echo "export USE_X11=0" >> "${S}"/.mozconfig
@@ -1148,7 +1135,7 @@ src_install() {
 	#######
 
 	# Install system-wide preferences
-	local PREFS_DIR="${MOZILLA_FIVE_HOME}/browser/defaults/preferences"
+	local PREFS_DIR="${MOZILLA_FIVE_HOME}/defaults/pref"
 	insinto "${PREFS_DIR}"
 	newins "${FILESDIR}"/gentoo-default-prefs.js gentoo-prefs.js
 
@@ -1166,16 +1153,6 @@ src_install() {
 		|| die "failed to add prefs to force hardware-accelerated rendering to all-gentoo.js"
 	fi
 
-	if ! use gmp-autoupdate ; then
-		local plugin
-		for plugin in "${MOZ_GMP_PLUGIN_LIST[@]}" ; do
-			einfo "Disabling auto-update for ${plugin} plugin ..."
-			cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to disable autoupdate for ${plugin} media plugin"
-			pref("media.${plugin}.autoupdate",   false);
-			EOF
-		done
-	fi
-
 	# Force the graphite pref if USE=system-harfbuzz is enabled, since the pref cannot disable it
 	if use system-harfbuzz ; then
 		cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to set gfx.font_rendering.graphite.enabled pref"
@@ -1191,11 +1168,6 @@ src_install() {
 	cat "${FILESDIR}"/privacy-patchset/privacy.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
-
-	rm -rv "${BUILD_DIR}"/browser/extensions/* || die
-	rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
-	rm -rv "${BUILD_DIR}"/instrumented/browser/extensions/* || die
-	use pgo && rm -rv "${BUILD_DIR}"/instrumented/dist/bin/browser/features/* || die
 	#######
 
 	# Install language packs
@@ -1204,19 +1176,9 @@ src_install() {
 		moz_install_xpi "${MOZILLA_FIVE_HOME}/distribution/extensions" "${langpacks[@]}"
 	fi
 
-	# Install geckodriver
-	if use geckodriver ; then
-		einfo "Installing geckodriver into ${ED}${MOZILLA_FIVE_HOME} ..."
-		pax-mark m "${BUILD_DIR}"/dist/bin/geckodriver
-		exeinto "${MOZILLA_FIVE_HOME}"
-		doexe "${BUILD_DIR}"/dist/bin/geckodriver
-
-		dosym ${MOZILLA_FIVE_HOME}/geckodriver /usr/bin/geckodriver
-	fi
-
 	# Install icons
-	local icon_srcdir="${S}/browser/branding/official"
-	local icon_symbolic_file="${FILESDIR}/icon/firefox-symbolic.svg"
+	local icon_srcdir="${S}/comm/mail/branding/thunderbird"
+	local icon_symbolic_file="${icon_srcdir}/TB-symbolic.svg"
 
 	insinto /usr/share/icons/hicolor/symbolic/apps
 	newins "${icon_symbolic_file}" ${PN}-symbolic.svg
@@ -1235,7 +1197,7 @@ src_install() {
 
 	# Install menu
 	local app_name="Mozilla ${MOZ_PN^}"
-	local desktop_file="${FILESDIR}/icon/${PN}-r3.desktop"
+	local desktop_file="${FILESDIR}/icon/${PN}-r2.desktop"
 	local desktop_filename="${PN}.desktop"
 	local exec_command="${PN}"
 	local icon="${PN}"
@@ -1295,16 +1257,6 @@ pkg_preinst() {
 pkg_postinst() {
 	xdg_pkg_postinst
 
-	if ! use gmp-autoupdate ; then
-		elog "USE='-gmp-autoupdate' has disabled the following plugins from updating or"
-		elog "installing into new profiles:"
-		local plugin
-		for plugin in "${MOZ_GMP_PLUGIN_LIST[@]}" ; do
-			elog "\t ${plugin}"
-		done
-		elog
-	fi
-
 	if use pulseaudio && has_version ">=media-sound/apulse-0.1.12-r4" ; then
 		elog "Apulse was detected at merge time on this system and so it will always be"
 		elog "used for sound.  If you wish to use pulseaudio instead please unmerge"
@@ -1313,13 +1265,11 @@ pkg_postinst() {
 	fi
 
 	local show_doh_information
-	local show_normandy_information
 	local show_shortcut_information
 
 	if [[ -z "${REPLACING_VERSIONS}" ]] ; then
 		# New install; Tell user that DoH is disabled by default
 		show_doh_information=yes
-		show_normandy_information=yes
 		show_shortcut_information=no
 	else
 		local replacing_version
@@ -1340,23 +1290,6 @@ pkg_postinst() {
 		elog "should respect OS configured settings), \"network.trr.mode\" was set to 5"
 		elog "(\"Off by choice\") by default."
 		elog "You can enable DNS-over-HTTPS in ${PN^}'s preferences."
-	fi
-
-	# bug 713782
-	if [[ -n "${show_normandy_information}" ]] ; then
-		elog
-		elog "Upstream operates a service named Normandy which allows Mozilla to"
-		elog "push changes for default settings or even install new add-ons remotely."
-		elog "While this can be useful to address problems like 'Armagadd-on 2.0' or"
-		elog "revert previous decisions to disable TLS 1.0/1.1, privacy and security"
-		elog "concerns prevail, which is why we have switched off the use of this"
-		elog "service by default."
-		elog
-		elog "To re-enable this service set"
-		elog
-		elog "    app.normandy.enabled=true"
-		elog
-		elog "in about:config."
 	fi
 
 	if [[ -n "${show_shortcut_information}" ]] ; then
