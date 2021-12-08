@@ -42,7 +42,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/(-)?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc miri nightly parallel-compiler rls rustfmt system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug doc miri nightly parallel-compiler rls rustfmt rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -125,6 +125,7 @@ RDEPEND="${DEPEND}
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	miri? ( nightly )
 	parallel-compiler? ( nightly )
+	rls? ( rust-src )
 	test? ( ${ALL_LLVM_TARGETS[*]} )
 	wasm? ( llvm_targets_WebAssembly )
 	x86? ( cpu_flags_x86_sse2 )
@@ -149,8 +150,7 @@ QA_SONAME="
 # An rmeta file is custom binary format that contains the metadata for the crate.
 # rmeta files do not support linking, since they do not contain compiled object files.
 # so we can safely silence the warning for this QA check.
-QA_WX_LOAD="usr/lib/${PN}/${PV}/lib/rustlib/.*/lib/.*rmeta"
-QA_EXECSTACK="${QA_WX_LOAD}"
+QA_EXECSTACK="usr/lib/${PN}/${PV}/lib/rustlib/*/lib*.rlib:lib.rmeta"
 
 # causes double bootstrap
 RESTRICT="test"
@@ -159,6 +159,7 @@ VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
 	"${FILESDIR}"/1.55.0-ignore-broken-and-non-applicable-tests.patch
+	"${FILESDIR}"/1.57.0-selfbootstrap.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/rust-pr91070.patch
@@ -330,10 +331,13 @@ src_configure() {
 		tools="\"miri\",$tools"
 	fi
 	if use rls; then
-		tools="\"rls\",\"analysis\",\"src\",$tools"
+		tools="\"rls\",\"analysis\",$tools"
 	fi
 	if use rustfmt; then
 		tools="\"rustfmt\",$tools"
+	fi
+	if use rust-src; then
+		tools="\"src\",$tools"
 	fi
 
 	local rust_stage0_root
