@@ -1,5 +1,5 @@
 mozilla-nongnome-proxies.patch
-
+mozilla-kde.patch
 mozilla-sandbox-fips.patch
 mozilla-reduce-rust-debuginfo.patch
 mozilla-bmo1005535.patch
@@ -16,5 +16,5 @@ mozilla-libavcodec58_91.patch
 mozilla-silence-no-return-type.patch
 mozilla-bmo531915.patch
 
-
+firefox-kde.patch
 firefox-branded-icons.patch
