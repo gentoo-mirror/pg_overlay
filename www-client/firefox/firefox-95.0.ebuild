@@ -556,7 +556,7 @@ src_prepare() {
 		|| die "sed failed to disable ccache stats call"
 
 	einfo "Removing pre-built binaries ..."
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+	#find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
 
 	# Clearing checksums where we have applied patches
 	moz_clear_vendor_checksums target-lexicon-0.9.0
@@ -637,7 +637,7 @@ src_prepare() {
 		fi
 	done
 	#######
-	eapply "${FILESDIR}/fix-wayland.patch"
+	#eapply "${FILESDIR}/fix-wayland.patch"
 
 	xdg_src_prepare
 }
