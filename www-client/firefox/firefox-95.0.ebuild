@@ -586,7 +586,7 @@ src_prepare() {
 	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
-	#rm -rv browser/extensions/{doh-rollout,screenshots,webcompat,report-site-issue}
+	rm -rv browser/extensions/{doh-rollout,screenshots,webcompat,report-site-issue}
 	### Debian patches
 	einfo "Applying Debian's patches"
 	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
@@ -999,88 +999,88 @@ src_configure() {
 
 	#######
 	### Disable features
-#	mozconfig_add_options_ac '' --disable-accessibility
-#	mozconfig_add_options_ac '' --disable-address-sanitizer
-#	mozconfig_add_options_ac '' --disable-address-sanitizer-reporter
-#
-#	mozconfig_add_options_ac '' --disable-callgrind
-#	mozconfig_add_options_ac '' --disable-crashreporter
-#
-#	mozconfig_add_options_ac '' --disable-debug
-#	mozconfig_add_options_ac '' --disable-debug-js-modules
-#	mozconfig_add_options_ac '' --disable-debug-symbols
-#	mozconfig_add_options_ac '' --disable-dmd
-#	mozconfig_add_options_ac '' --disable-dtrace
-#	mozconfig_add_options_ac '' --disable-dump-painting
-#
-#	mozconfig_add_options_ac '' --disable-frame-pointers
-#
-#	mozconfig_add_options_ac '' --disable-gold
-#	mozconfig_add_options_ac '' --disable-gpsd
-#	mozconfig_add_options_ac '' --disable-gtest-in-build
-#
-#	#mozconfig_add_options_ac '' --disable-instruments
-#	#mozconfig_add_options_ac '' --disable-ipdl-tests
-#
-#	mozconfig_add_options_ac '' --disable-jprof
-#
-#	mozconfig_add_options_ac '' --disable-libproxy
-#	mozconfig_add_options_ac '' --disable-logrefcnt
-#
-#	mozconfig_add_options_ac '' --disable-memory-sanitizer
-#	mozconfig_add_options_ac '' --disable-mobile-optimize
-#
-#	mozconfig_add_options_ac '' --disable-necko-wifi
-#
-#	mozconfig_add_options_ac '' --disable-parental-controls
-#	mozconfig_add_options_ac '' --disable-perf
-#	mozconfig_add_options_ac '' --disable-profiling
-#
-#	mozconfig_add_options_ac '' --disable-reflow-perf
-#	mozconfig_add_options_ac '' --disable-rust-debug
-#	mozconfig_add_options_ac '' --disable-rust-tests
-#
-#	mozconfig_add_options_ac '' --disable-signed-overflow-sanitizer
-#	mozconfig_add_options_ac '' --disable-spidermonkey-telemetry
-#	mozconfig_add_options_ac '' --disable-system-extension-dirs
-#
-#	mozconfig_add_options_ac '' --disable-thread-sanitizer
-#	mozconfig_add_options_ac '' --disable-trace-logging
-#
-#	mozconfig_add_options_ac '' --disable-undefined-sanitizer
-#	mozconfig_add_options_ac '' --disable-unsigned-overflow-sanitizer
-#	mozconfig_add_options_ac '' --disable-updater
-#
-#	mozconfig_add_options_ac '' --disable-valgrind
-#	mozconfig_add_options_ac '' --disable-verify-mar
-#	mozconfig_add_options_ac '' --disable-vtune
-#
-#	mozconfig_add_options_ac '' --disable-warnings-as-errors
-#	mozconfig_add_options_ac '' --disable-wasm-codegen-debug
-#	mozconfig_add_options_ac '' --disable-webrender-debugger
-#
-#	mozconfig_add_options_ac '' --without-debug-label
-#	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
-#	mozconfig_add_options_ac '' --without-google-safebrowsing-api-keyfile
-#	mozconfig_add_options_ac '' --without-mozilla-api-keyfile
-#	mozconfig_add_options_ac '' --without-pocket-api-keyfile
-#
-#	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=0
-#	mozconfig_add_options_ac '' MOZ_DEVICES=0
-#	mozconfig_add_options_ac '' MOZ_LOGGING=0
-#	mozconfig_add_options_ac '' MOZ_PAY=0
-#	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
-#	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
-#	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=0
-#	mozconfig_add_options_ac '' MOZ_X11=0
-#	mozconfig_add_options_ac '' USE_X11=0
-#
-#	### Enable good features
-#	mozconfig_add_options_ac '' --enable-icf
-#	mozconfig_add_options_ac '' --enable-install-strip
-#	mozconfig_add_options_ac '' --enable-rust-simd
-#	mozconfig_add_options_ac '' --enable-strip
-#	mozconfig_add_options_ac '' --enable-webrtc
+	mozconfig_add_options_ac '' --disable-accessibility
+	mozconfig_add_options_ac '' --disable-address-sanitizer
+	mozconfig_add_options_ac '' --disable-address-sanitizer-reporter
+
+	mozconfig_add_options_ac '' --disable-callgrind
+	mozconfig_add_options_ac '' --disable-crashreporter
+
+	mozconfig_add_options_ac '' --disable-debug
+	mozconfig_add_options_ac '' --disable-debug-js-modules
+	mozconfig_add_options_ac '' --disable-debug-symbols
+	mozconfig_add_options_ac '' --disable-dmd
+	mozconfig_add_options_ac '' --disable-dtrace
+	mozconfig_add_options_ac '' --disable-dump-painting
+
+	mozconfig_add_options_ac '' --disable-frame-pointers
+
+	mozconfig_add_options_ac '' --disable-gold
+	mozconfig_add_options_ac '' --disable-gpsd
+	mozconfig_add_options_ac '' --disable-gtest-in-build
+
+	mozconfig_add_options_ac '' --disable-instruments
+	mozconfig_add_options_ac '' --disable-ipdl-tests
+
+	mozconfig_add_options_ac '' --disable-jprof
+
+	mozconfig_add_options_ac '' --disable-libproxy
+	mozconfig_add_options_ac '' --disable-logrefcnt
+
+	mozconfig_add_options_ac '' --disable-memory-sanitizer
+	mozconfig_add_options_ac '' --disable-mobile-optimize
+
+	mozconfig_add_options_ac '' --disable-necko-wifi
+
+	mozconfig_add_options_ac '' --disable-parental-controls
+	mozconfig_add_options_ac '' --disable-perf
+	mozconfig_add_options_ac '' --disable-profiling
+
+	mozconfig_add_options_ac '' --disable-reflow-perf
+	mozconfig_add_options_ac '' --disable-rust-debug
+	mozconfig_add_options_ac '' --disable-rust-tests
+
+	mozconfig_add_options_ac '' --disable-signed-overflow-sanitizer
+	mozconfig_add_options_ac '' --disable-spidermonkey-telemetry
+	mozconfig_add_options_ac '' --disable-system-extension-dirs
+
+	mozconfig_add_options_ac '' --disable-thread-sanitizer
+	mozconfig_add_options_ac '' --disable-trace-logging
+
+	mozconfig_add_options_ac '' --disable-undefined-sanitizer
+	mozconfig_add_options_ac '' --disable-unsigned-overflow-sanitizer
+	mozconfig_add_options_ac '' --disable-updater
+
+	mozconfig_add_options_ac '' --disable-valgrind
+	mozconfig_add_options_ac '' --disable-verify-mar
+	mozconfig_add_options_ac '' --disable-vtune
+
+	mozconfig_add_options_ac '' --disable-warnings-as-errors
+	mozconfig_add_options_ac '' --disable-wasm-codegen-debug
+	mozconfig_add_options_ac '' --disable-webrender-debugger
+
+	mozconfig_add_options_ac '' --without-debug-label
+	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
+	mozconfig_add_options_ac '' --without-google-safebrowsing-api-keyfile
+	mozconfig_add_options_ac '' --without-mozilla-api-keyfile
+	mozconfig_add_options_ac '' --without-pocket-api-keyfile
+
+	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=0
+	mozconfig_add_options_ac '' MOZ_DEVICES=0
+	mozconfig_add_options_ac '' MOZ_LOGGING=0
+	mozconfig_add_options_ac '' MOZ_PAY=0
+	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
+	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
+	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=0
+	mozconfig_add_options_ac '' MOZ_X11=0
+	mozconfig_add_options_ac '' USE_X11=0
+
+	### Enable good features
+	mozconfig_add_options_ac '' --enable-icf
+	mozconfig_add_options_ac '' --enable-install-strip
+	mozconfig_add_options_ac '' --enable-rust-simd
+	mozconfig_add_options_ac '' --enable-strip
+	mozconfig_add_options_ac '' --enable-webrtc
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
@@ -1201,7 +1201,7 @@ src_install() {
 
 	rm -rv "${BUILD_DIR}"/browser/extensions/* || die
 	rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
-	rm -rv "${BUILD_DIR}"/instrumented/browser/extensions/* || die
+	use pgo && rm -rv "${BUILD_DIR}"/instrumented/browser/extensions/* || die
 	use pgo && rm -rv "${BUILD_DIR}"/instrumented/dist/bin/browser/features/* || die
 	#######
 
