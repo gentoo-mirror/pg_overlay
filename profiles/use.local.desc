@@ -61,6 +61,17 @@ dev-ml/lablgtk:gnomecanvas - Enable libgnomecanvas bindings compilation.
 dev-ml/lablgtk:sourceview - Enable GtkSourceView support
 dev-perl/JSON:xs - Install C-based dev-perl/JSON-XS for faster performance
 dev-perl/Sub-Name:suggested - Install extra dependencies needed for extended regression tests
+dev-qt/qtgui:X - Build the XCB platform plugin and enable X11 integration
+dev-qt/qtgui:egl - Enable EGL integration
+dev-qt/qtgui:eglfs - Build the EGL Full Screen/Single Surface platform plugin
+dev-qt/qtgui:evdev - Enable support for input devices via evdev
+dev-qt/qtgui:ibus - Build the IBus input method plugin
+dev-qt/qtgui:libinput - Enable support for input devices via dev-libs/libinput
+dev-qt/qtgui:linuxfb - Enable Linux framebuffer support for embedded devices
+dev-qt/qtgui:tslib - Enable support for touchscreen devices via x11-libs/tslib
+dev-qt/qtgui:tuio - Build plugin to receive touch events over the TUIO protocol
+dev-qt/qtgui:vulkan - Enable support for Vulkan
+dev-qt/qtgui:wayland - Provide dev-qt/qtwayland to ensure Qt applications can be run as Wayland clients
 dev-qt/qtwebengine:designer - Install the QWebEngineView plugin used to add widgets in dev-qt/designer forms that display web pages.
 dev-qt/qtwebengine:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebengine:jumbo-build - Combine source files to speed up build process.

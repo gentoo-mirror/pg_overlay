@@ -75,6 +75,7 @@ dev-python/sip 5.5.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
+dev-qt/qtgui 5.15.2.9999: The GUI module and platform plugins for the Qt5 framework
 dev-qt/qtwebengine 5.15.2.9999: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -104,9 +105,9 @@ gui-apps/ydotool 0.1.9 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
-kde-frameworks/kdelibs4support 5.88.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/knotifications 5.88.0: Framework for notifying the user of an event
-kde-frameworks/plasma 5.88.0-r1: Plasma framework
+kde-frameworks/kdelibs4support 5.88.0 5.89.0: Framework easing the development transition from KDELibs 4 to KF 5
+kde-frameworks/knotifications 5.88.0 5.89.0: Framework for notifying the user of an event
+kde-frameworks/plasma 5.88.0-r2 5.89.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/claws-mail 4.0.0: An email client (and news reader) based on GTK+
 mail-client/thunderbird 91.4.0: Thunderbird Mail Client
