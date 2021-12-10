@@ -1200,10 +1200,10 @@ src_install() {
 	"${GENTOO_PREFS}" \
 	|| die
 
-	rm -rv "${BUILD_DIR}"/browser/extensions/* || die
-	rm -rv "${BUILD_DIR}"/dist/bin/browser/features/* || die
-	use pgo && rm -rv "${BUILD_DIR}"/instrumented/browser/extensions/* || die
-	use pgo && rm -rv "${BUILD_DIR}"/instrumented/dist/bin/browser/features/* || die
+	rm -frv "${BUILD_DIR}"/browser/extensions/* || die
+	rm -frv "${BUILD_DIR}"/dist/bin/browser/features/* || die
+	use pgo && rm -frv "${BUILD_DIR}"/instrumented/browser/extensions/*
+	use pgo && rm -frv "${BUILD_DIR}"/instrumented/dist/bin/browser/features/*
 	#######
 
 	# Install language packs
