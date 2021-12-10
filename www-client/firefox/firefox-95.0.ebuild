@@ -583,8 +583,9 @@ src_prepare() {
 			einfo Patch $p is NOT applied and IGNORED;
 			einfo -------------------------
 		fi
-		! use pgo && eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/firefox-kde.patch
 	done
+	! use pgo && eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/firefox-kde.patch
+	#######
 	### Privacy-esr patches
 	einfo Applying privacy patches
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
