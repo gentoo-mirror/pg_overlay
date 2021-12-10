@@ -1,0 +1,25 @@
+
+diff --git a/dom/quota/PQuotaRequest.ipdl b/dom/quota/PQuotaRequest.ipdl
+--- a/dom/quota/PQuotaRequest.ipdl
++++ b/dom/quota/PQuotaRequest.ipdl
+@@ -1,14 +1,16 @@
+ /* This Source Code Form is subject to the terms of the Mozilla Public
+  * License, v. 2.0. If a copy of the MPL was not distributed with this file,
+  * You can obtain one at http://mozilla.org/MPL/2.0/. */
+ 
+ include protocol PQuota;
+ 
++include "mozilla/dom/quota/SerializationHelpers.h";
++
+ using mozilla::dom::quota::FullOriginMetadata
+   from "mozilla/dom/quota/CommonMetadata.h";
+ 
+ namespace mozilla {
+ namespace dom {
+ namespace quota {
+ 
+ struct StorageNameResponse
+
+
+
+
