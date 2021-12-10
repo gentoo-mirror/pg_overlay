@@ -69,6 +69,7 @@ IUSE+=" wayland wifi"
 IUSE+=" +kde +privacy +screencast"
 
 REQUIRED_USE="debug? ( !system-av1 )
+	pgo? ( lto )
 	screencast? ( wayland )
 	wifi? ( dbus )"
 
