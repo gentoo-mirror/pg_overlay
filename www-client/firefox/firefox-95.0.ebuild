@@ -584,7 +584,7 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-	! use pgo && eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/firefox-kde.patch
+	use pgo && eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/firefox-kde.patch
 	#######
 	### Privacy-esr patches
 	einfo Applying privacy patches
@@ -641,6 +641,7 @@ src_prepare() {
 	done
 	#######
 	eapply "${FILESDIR}/fix-wayland.patch"
+	eapply "${FILESDIR}/PQuotaRequest.ipdl.patch"
 
 	xdg_src_prepare
 }
