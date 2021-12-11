@@ -652,7 +652,6 @@ src_prepare() {
 	done
 	#######
 	eapply "${FILESDIR}/fix-wayland.patch"
-	eapply "${FILESDIR}/PQuotaRequest.ipdl.patch"
 	#######
 
 	xdg_src_prepare

@@ -1,3 +1,4 @@
 fix-clang-as.patch
+fix-disable-accessibility.patch
 no-fribidi.patch
 99-disable-x11-in-webrtc.patch
