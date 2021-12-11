@@ -8,6 +8,7 @@ inherit gnome2
 
 DESCRIPTION="A collection of solitaire card games for GNOME"
 HOMEPAGE="https://wiki.gnome.org/action/show/Apps/Aisleriot"
+SRC_URI="https://gitlab.gnome.org/GNOME/${PN}/-/archive/${PV}/${P}.tar.gz"
 
 LICENSE="GPL-3 LGPL-3 FDL-1.3"
 SLOT="0"
