@@ -45,6 +45,7 @@ src_prepare() {
 src_configure() {
 	local emesonargs=(
 		-Ddocs=false
+		-Dtheme_kde=false
 		-Dtheme_svg_qtsvg=true
 	)
 	meson_src_configure
