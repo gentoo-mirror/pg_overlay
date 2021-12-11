@@ -4,7 +4,7 @@
 EAPI=7
 GNOME2_EAUTORECONF="yes"
 
-inherit gnome2
+inherit gnome.org gnome2-utils meson readme.gentoo-r1  xdg
 
 DESCRIPTION="A collection of solitaire card games for GNOME"
 HOMEPAGE="https://wiki.gnome.org/action/show/Apps/Aisleriot"
@@ -38,49 +38,25 @@ DEPEND="${COMMON_DEPEND}
 	gnome? ( app-text/docbook-xml-dtd:4.3 )
 "
 
-PATCHES=(
-	# Fix SVG detection and usage
-	"${FILESDIR}"/${PN}-3.22.0-detect-svg.patch
-	# Fix build with Qt5, bug #617256
-	"${FILESDIR}"/${PN}-3.22.2-qt5-requires-cxx11.patch
-)
+src_prepare() {
+	xdg_src_prepare
+}
 
 src_configure() {
-	local myconf=()
-
-	if use gnome; then
-		myconf+=(
-			--with-platform=gnome
-			--with-help-method=ghelp
-		)
-	else
-		myconf+=(
-			--with-platform=gtk-only
-			--with-help-method=library
-		)
-	fi
-
-	if use qt5 ; then
-		myconf+=(
-			--with-card-theme-formats=all
-			--with-kde-card-theme-path="${EPREFIX}"/usr/share/apps/carddecks
-		)
-	else
-		myconf+=( --with-card-theme-formats=svg,fixed,pysol )
-	fi
-
-	gnome2_src_configure \
-		--with-gtk=3.0 \
-		--with-guile=2.2 \
-		$(usex debug --enable-debug-ui --disable-debug-ui) \
-		--enable-sound \
-		--with-pysol-card-theme-path="${EPREFIX}${GAMES_DATADIR}"/pysolfc \
-		${myconf[@]}
+	local emesonargs=(
+		-Ddefault_theme_format=svg-qtsvg
+		-Ddocs=false
+		-Dtheme_svg_qtsvg=true
+	)
+	meson_src_configure
 }
 
 pkg_postinst() {
-	gnome2_pkg_postinst
+	xdg_pkg_postinst
+	gnome2_schemas_update
+}
 
-	elog "Aisleriot can use additional card themes from games-board/pysolfc"
-	elog "and kde-base/libkdegames."
+pkg_postrm() {
+	xdg_pkg_postrm
+	gnome2_schemas_update
 }
