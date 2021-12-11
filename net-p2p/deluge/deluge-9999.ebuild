@@ -30,11 +30,8 @@ REQUIRED_USE="
 	sound? ( gtk )
 "
 
-# Note: if/when Deluge supports newer libtorrent-rasterbar >= 2, please
-# move the dependency *outside* of gen_cond_dep and use PYTHON_SINGLE_USEDEP
-# instead. It doesn't seem like Deluge supports >= 2 right now.
 DEPEND="
-	<net-libs/libtorrent-rasterbar-2.0.0:=[python,${PYTHON_SINGLE_USEDEP}]
+	>=net-libs/libtorrent-rasterbar-2.0.0:=[python,${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
 		dev-python/wheel[${PYTHON_USEDEP}]
 	')
@@ -42,7 +39,7 @@ DEPEND="
 	acct-group/deluge
 	acct-user/deluge"
 RDEPEND="
-	<net-libs/libtorrent-rasterbar-2.0.0:=[python,${PYTHON_SINGLE_USEDEP}]
+	>=net-libs/libtorrent-rasterbar-2.0.0:=[python,${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
 		dev-python/chardet[${PYTHON_USEDEP}]
 		dev-python/distro[${PYTHON_USEDEP}]
