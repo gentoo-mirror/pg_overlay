@@ -44,7 +44,6 @@ src_prepare() {
 
 src_configure() {
 	local emesonargs=(
-		-Ddefault_theme_format=svg-qtsvg
 		-Ddocs=false
 		-Dtheme_svg_qtsvg=true
 	)
