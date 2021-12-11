@@ -105,6 +105,7 @@ gui-apps/ydotool 0.1.9 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
+kde-apps/libkipi 21.12.0: A library for image plugins accross KDE applications
 kde-frameworks/kdelibs4support 5.88.0 5.89.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-frameworks/knotifications 5.88.0 5.89.0: Framework for notifying the user of an event
 kde-frameworks/plasma 5.88.0-r2 5.89.0: Plasma framework
