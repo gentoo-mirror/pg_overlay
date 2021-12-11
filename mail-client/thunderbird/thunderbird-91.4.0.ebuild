@@ -554,7 +554,9 @@ src_prepare() {
 
 	####### My stuff
 	### OpenSUSE-KDE patchset
+	einfo +++++++++++++++++++++++++++++
 	einfo Applying OpenSUSE-KDE patches
+	einfo +++++++++++++++++++++++++++++
 	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
@@ -568,10 +570,11 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-	use pgo && eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/firefox-kde.patch
 	#######
 	### Privacy-esr patches
+	einfo ++++++++++++++++++++++++
 	einfo Applying privacy patches
+	einfo ++++++++++++++++++++++++
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
 	rm -rv browser/extensions/{doh-rollout,webcompat,report-site-issue}
 	### Debian patches
@@ -589,8 +592,11 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
+	#######
 	### FreeBSD patches
+	einfo ++++++++++++++++++++++++++
 	einfo "Applying FreeBSD's patches"
+	einfo ++++++++++++++++++++++++++
 	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
 	### Fedora patches
 	einfo "Applying Fedora's patches"
@@ -607,8 +613,11 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
+	#######
 	### KissLinux patches
+	einfo +++++++++++++++++++++++++++++
 	einfo "Applying KissLinux's patches"
+	einfo +++++++++++++++++++++++++++++
 	for p in $(cat "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
