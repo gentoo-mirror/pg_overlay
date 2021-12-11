@@ -65,11 +65,7 @@ RDEPEND="
 	')"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-2.0.3-setup.py.patch"
 	"${FILESDIR}/${PN}-2.0.3-UI-status.patch"
-	"${FILESDIR}/${PN}-2.0.3-gettext.patch"
-	"${FILESDIR}/${PN}-2.0.3-fix-pickle.patch"
-	"${FILESDIR}/${PM}-2.0.3-log.patch"
 	"${FILESDIR}/${PN}-web_ui_columns.patch"
 )
 
