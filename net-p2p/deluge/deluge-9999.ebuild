@@ -34,14 +34,15 @@ REQUIRED_USE="
 # move the dependency *outside* of gen_cond_dep and use PYTHON_SINGLE_USEDEP
 # instead. It doesn't seem like Deluge supports >= 2 right now.
 DEPEND="
+	<net-libs/libtorrent-rasterbar-2.0.0:=[python,${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
-		net-libs/libtorrent-rasterbar[python]
 		dev-python/wheel[${PYTHON_USEDEP}]
 	')
 	dev-util/intltool
 	acct-group/deluge
 	acct-user/deluge"
 RDEPEND="
+	<net-libs/libtorrent-rasterbar-2.0.0:=[python,${PYTHON_SINGLE_USEDEP}]
 	$(python_gen_cond_dep '
 		dev-python/chardet[${PYTHON_USEDEP}]
 		dev-python/distro[${PYTHON_USEDEP}]
@@ -53,7 +54,6 @@ RDEPEND="
 		dev-python/six[${PYTHON_USEDEP}]
 		>=dev-python/twisted-17.1.0[crypt,${PYTHON_USEDEP}]
 		>=dev-python/zope-interface-4.4.2[${PYTHON_USEDEP}]
-		net-libs/libtorrent-rasterbar[python]
 		geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 		gtk? (
 			sound? ( dev-python/pygame[${PYTHON_USEDEP}] )
@@ -65,7 +65,11 @@ RDEPEND="
 	')"
 
 PATCHES=(
+	"${FILESDIR}/${PN}-2.0.3-setup.py.patch"
 	"${FILESDIR}/${PN}-2.0.3-UI-status.patch"
+	"${FILESDIR}/${PN}-2.0.3-gettext.patch"
+	"${FILESDIR}/${PN}-2.0.3-fix-pickle.patch"
+	"${FILESDIR}/${PM}-2.0.3-log.patch"
 	"${FILESDIR}/${PN}-web_ui_columns.patch"
 )
 
@@ -90,9 +94,6 @@ python_prepare_all() {
 		-e 's|"show_new_releases": True|"show_new_releases": False|'
 	)
 	sed -i "${args[@]}" -- 'deluge/core/preferencesmanager.py' || die
-
-	# Version
-	#sed -i "s/=_version/='1.3.15'/g" setup.py || die
 
 	distutils-r1_python_prepare_all
 }
