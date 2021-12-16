@@ -21,6 +21,7 @@ RESTRICT="!test? ( test )"
 
 CDEPEND="
 	media-libs/libglvnd[X]
+	dev-libs/libbsd
 	dev-libs/openssl:0=
 	>=x11-apps/iceauth-1.0.2
 	>=x11-apps/rgb-1.0.3
@@ -93,7 +94,6 @@ REQUIRED_USE="!minimal? (
 	xephyr? ( kdrive )"
 
 UPSTREAMED_PATCHES=(
-	"${FILESDIR}"/${P}-DPI-revert.patch
 )
 
 PATCHES=(
@@ -130,12 +130,12 @@ src_configure() {
 		-Ddri3=true
 		-Dglx=true
 		-Dglamor=true
-		-Ddefault_font_path="${EPREFIX}"/usr/share/fonts
 		-Ddrm=true
 		-Ddtrace=false
 		-Dhal=false
 		-Dlinux_acpi=false
 		-Dlinux_apm=false
+		-Dsecure-rpc=true
 		-Dsha1=libcrypto
 		-Dxkb_output_dir="${EPREFIX}/var/lib/xkb"
 	)
@@ -148,7 +148,7 @@ src_configure() {
 	else
 		emesonargs+=(
 			-Dsystemd_logind=false
-			$(meson_use suid suid_wrapper)
+			-Dsuid_wrapper=false
 		)
 	fi
 
@@ -158,8 +158,12 @@ src_configure() {
 src_install() {
 	meson_src_install
 
-	#The new meson build system do not leave X symlink
-	ln -s Xorg "${ED}"/usr/bin/X
+	# The meson build system does not support install-setuid
+	if ! use systemd || ! use elogind; then
+		if use suid; then
+			chmod u+s "${ED}"/usr/bin/Xorg
+		fi
+	fi
 
 	if ! use xorg; then
 		rm -f "${ED}"/usr/share/man/man1/Xserver.1x \
