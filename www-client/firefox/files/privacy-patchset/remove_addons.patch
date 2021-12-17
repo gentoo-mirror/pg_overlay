@@ -2,13 +2,13 @@ diff --git a/browser/extensions/moz.build b/browser/extensions/moz.build
 index 269dcb2..ed7c31d 100644
 --- a/browser/extensions/moz.build
 +++ b/browser/extensions/moz.build
-@@ -5,14 +5,10 @@
+@@ -5,14 +5,9 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
  DIRS += [
 -    "doh-rollout",
      "formautofill",
-     "screenshots",
+-    "screenshots",
 -    "webcompat",
 -    "report-site-issue",
      "pictureinpicture",
