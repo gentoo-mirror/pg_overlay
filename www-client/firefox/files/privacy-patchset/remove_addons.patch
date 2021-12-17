@@ -75,6 +75,7 @@ index b9b18fe..af7c583 100644
 -[[paths]]
      reference = "services/sync/locales/en-US/**"
      l10n = "{l}services/sync/**"
+
 --- a/browser/installer/package-manifest.in    2020-11-10 12:49:54.575993696 +0700
 +++ b/browser/installer/package-manifest.in    2020-11-10 12:50:36.920538743 +0700
 @@ -265,7 +265,6 @@
