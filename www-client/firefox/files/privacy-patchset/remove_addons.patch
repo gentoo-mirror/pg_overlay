@@ -2,18 +2,18 @@ diff --git a/browser/extensions/moz.build b/browser/extensions/moz.build
 index 269dcb2..ed7c31d 100644
 --- a/browser/extensions/moz.build
 +++ b/browser/extensions/moz.build
-@@ -5,11 +5,7 @@
+@@ -5,11 +5,6 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
  
  DIRS += [
 -    "doh-rollout",
      "formautofill",
--    "screenshots",
+-     "screenshots",
 -    "webcompat",
 -    "report-site-issue",
      "pictureinpicture",
      "proxy-failover",
- ]
+-     "search-detection",
 diff --git a/browser/locales/Makefile.in b/browser/locales/Makefile.in
 index 496379c..dd6f359 100644
 --- a/browser/locales/Makefile.in
@@ -72,15 +72,13 @@ index b9b18fe..af7c583 100644
 -[[paths]]
      reference = "services/sync/locales/en-US/**"
      l10n = "{l}services/sync/**"
-
-diff -Nuar a/browser/locales/Makefile.in b/browser/locales/Makefile.in
---- a/browser/installer/package-manifest.in     2020-11-10 12:49:54.575993696 +0700
-+++ b//browser/installer/package-manifest.in2020-11-10 12:50:36.920538743 +0700
+--- a/browser/installer/package-manifest.in    2020-11-10 12:49:54.575993696 +0700
++++ b/browser/installer/package-manifest.in    2020-11-10 12:50:36.920538743 +0700
 @@ -265,7 +265,6 @@
  @RESPATH@/browser/chrome/icons/default/default128.png
  @RESPATH@/browser/chrome/icons/default/default256.png
  #endif
 -@RESPATH@/browser/features/*
- 
+
  ; [DevTools Startup Files]
  @RESPATH@/browser/chrome/devtools-startup@JAREXT@
