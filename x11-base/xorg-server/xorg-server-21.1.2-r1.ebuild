@@ -3,7 +3,6 @@
 
 EAPI=7
 
-XORG_DOC=doc
 XORG_TARBALL_SUFFIX="xz"
 XORG_EAUTORECONF="no"
 inherit xorg-3 meson
@@ -72,13 +71,11 @@ CDEPEND="
 DEPEND="${CDEPEND}
 	>=x11-base/xorg-proto-2021.4.99.2
 	>=x11-libs/xtrans-1.3.5
-	doc? (
-		x11-base/xorg-sgml-doctools
-	)
 "
 RDEPEND="${CDEPEND}
 	!systemd? ( gui-libs/display-manager-init )
 	selinux? ( sec-policy/selinux-xserver )
+	xorg? ( >=x11-apps/xinit-1.3.3-r1 )
 "
 BDEPEND="
 	sys-devel/flex
@@ -107,15 +104,12 @@ src_configure() {
 	# localstatedir is used for the log location; we need to override the default
 	#	from ebuild.sh
 	# sysconfdir is used for the xorg.conf location; same applies
-	# NOTE: fop is used for doc generating; and I have no idea if Gentoo
-	#	package it somewhere
 
 	local emesonargs=(
 		--localstatedir "${EPREFIX}/var"
 		--sysconfdir "${EPREFIX}/etc/X11"
 		--buildtype $(usex debug debug plain)
 		-Db_ndebug=$(usex debug false true)
-		$(meson_use doc docs)
 		$(meson_use ipv6)
 		$(meson_use !minimal dri1)
 		$(meson_use !minimal dri2)
@@ -127,6 +121,7 @@ src_configure() {
 		$(meson_use xnest)
 		$(meson_use xorg)
 		$(meson_use xvfb)
+ 		-Ddocs=false
 		-Ddri3=true
 		-Dglx=true
 		-Dglamor=true
@@ -139,6 +134,11 @@ src_configure() {
 		-Dsha1=libcrypto
 		-Dxkb_output_dir="${EPREFIX}/var/lib/xkb"
 	)
+
+	if [[ ${PV} == 9999 ]] ; then
+		# Gone in 21.1.x, but not in master.
+		emesonargs+=( -Dxwayland=false )
+	fi
 
 	if use systemd || use elogind; then
 		emesonargs+=(

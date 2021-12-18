@@ -27,7 +27,7 @@ checkconfig() {
 			eerror "Your group has to exist too!"
 			return 1
 		fi
-	fi	
+	fi
 	return 0
 }
 
