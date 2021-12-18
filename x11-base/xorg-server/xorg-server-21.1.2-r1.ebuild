@@ -110,7 +110,7 @@ src_configure() {
 		--sysconfdir "${EPREFIX}/etc/X11"
 		--buildtype $(usex debug debug plain)
 		-Db_ndebug=$(usex debug false true)
-		$(meson_use doc docs) $(meson_use ipv6)
+		$(meson_use ipv6)
 		$(meson_use !minimal dri1)
 		$(meson_use !minimal dri2)
 		$(meson_use udev)
@@ -121,7 +121,7 @@ src_configure() {
 		$(meson_use xnest)
 		$(meson_use xorg)
 		$(meson_use xvfb)
-		-Ddoca=false
+ 		-Ddocs=false
 		-Ddri3=true
 		-Dglx=true
 		-Dglamor=true
