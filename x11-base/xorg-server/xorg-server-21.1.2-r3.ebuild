@@ -91,6 +91,7 @@ REQUIRED_USE="!minimal? (
 	xephyr? ( kdrive )"
 
 UPSTREAMED_PATCHES=(
+	"${FILESDIR}"/${P}-fix-resume-logind.patch
 )
 
 PATCHES=(
