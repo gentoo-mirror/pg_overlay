@@ -13,5 +13,5 @@ RDEPEND=dev-libs/glib:2 =dev-qt/qtcore-5.15.2*:5= dev-util/gtk-update-icon-cache
 REQUIRED_USE=|| ( eglfs linuxfb vnc X ) accessibility? ( dbus X ) eglfs? ( egl ) ibus? ( dbus ) libinput? ( udev ) X? ( gles2-only? ( egl ) )
 RESTRICT=!test? ( test )
 SLOT=5/5.15.2
-_eclasses_=estack	055c42df72f76a4f45ec92b35e83cd56	toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	4b66d835ec72e021e359bb81eacfe988	flag-o-matic	d5e1306543bc457213f68bb18f830d14	virtualx	fa024aa649b6bd544144bf94893d402c	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da	kde.org	10ca734e4845124395fc126944c8d053	qt5-build	3c3b1b1d8fd048a2b83063932306b210
+_eclasses_=estack	055c42df72f76a4f45ec92b35e83cd56	toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	8a0248f83ae77f945d376ff4a7953257	flag-o-matic	d5e1306543bc457213f68bb18f830d14	virtualx	fa024aa649b6bd544144bf94893d402c	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da	kde.org	10ca734e4845124395fc126944c8d053	qt5-build	3c3b1b1d8fd048a2b83063932306b210
 _md5_=2e74c680ab874d89b726362db92127b6
