@@ -1,10 +1,11 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-PYTHON_COMPAT=( python3_{8..10} )
-inherit python-single-r1
+PYTHON_COMPAT=( python3_{9,10} )
+
+inherit autotools python-single-r1
 
 DESCRIPTION="Standalone file import filter library for spreadsheet documents"
 HOMEPAGE="https://gitlab.com/orcus/orcus/blob/master/README.md"
@@ -12,7 +13,7 @@ HOMEPAGE="https://gitlab.com/orcus/orcus/blob/master/README.md"
 if [[ ${PV} == *9999* ]]; then
 	MDDS_SLOT="1/9999"
 	EGIT_REPO_URI="https://gitlab.com/orcus/orcus.git"
-	inherit git-r3 autotools
+	inherit git-r3
 else
 	MDDS_SLOT="1/2.0"
 	SRC_URI="https://kohei.us/files/orcus/src/${P}.tar.xz"
@@ -24,6 +25,7 @@ SLOT="0/0.17" # based on SONAME of liborcus.so
 IUSE="python +spreadsheet-model tools"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+RESTRICT="!test? ( test )"
 
 RDEPEND="
 	dev-libs/boost:=[zlib(+)]
