@@ -83,7 +83,6 @@ dev-util/gn 0.1807: GN is a meta-build system that generates build files for Nin
 dev-util/google-perftools 2.9.1-r2: Fast, multi-threaded malloc() and nifty performance analysis tools
 dev-util/itstool 2.0.7: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
-dev-util/mdds 2.0.0: Collection of multi-dimensional data structure and indexing algorithm
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/scanmem 9999: Locate and modify variables in executing processes

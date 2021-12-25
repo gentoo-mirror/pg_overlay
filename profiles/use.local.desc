@@ -83,7 +83,6 @@ dev-util/google-perftools:largepages - Use (experimental) larger pages for tcmal
 dev-util/google-perftools:largepages64k - Use (experimental) 64K pages for tcmalloc, this increases memory usage, but should speed up the allocation/free operations.
 dev-util/google-perftools:minimal - Only build the tcmalloc_minimal library, ignoring the heap checker and the profilers.
 dev-util/google-perftools:optimisememory - To build libtcmalloc with smaller internal caches.
-dev-util/mdds:valgrind - Add support for memory debugging using dev-util/valgrind
 dev-util/scanmem:gui - Enable the GameConqueror GUI
 dev-util/sccache:azure - Enable Azure Blob Storage support
 dev-util/sccache:dist-client - Enables distributed support in the sccache client
