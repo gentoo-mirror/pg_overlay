@@ -383,6 +383,7 @@ src_prepare() {
 			-e ":Keywords: s:pdf;::" \
 			sysui/desktop/menus/draw.desktop || die
 	fi
+	sed -i 's/"=thin"//g' solenv/gbuild/platform/com_GCC_defs.mk
 }
 
 src_configure() {
