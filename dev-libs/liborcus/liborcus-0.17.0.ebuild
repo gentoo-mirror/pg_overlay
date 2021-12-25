@@ -22,7 +22,7 @@ fi
 
 LICENSE="MIT"
 SLOT="0/0.17" # based on SONAME of liborcus.so
-IUSE="python +spreadsheet-model tools"
+IUSE="python +spreadsheet-model test tools"
 
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 RESTRICT="!test? ( test )"
