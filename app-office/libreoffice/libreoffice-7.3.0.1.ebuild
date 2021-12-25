@@ -132,7 +132,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/icu:=
 	dev-libs/libassuan
 	dev-libs/libgpg-error
-	dev-libs/liborcus:0/0.16
+	dev-libs/liborcus:0/0.17
 	dev-libs/librevenge
 	dev-libs/libxml2
 	dev-libs/libxslt
