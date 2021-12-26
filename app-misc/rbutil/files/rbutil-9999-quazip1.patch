@@ -13,10 +13,10 @@ Signed-off-by: Andreas Sturmlechner <asturm@gentoo.org>
  rbutil/rbutilqt/rbutilqt.pro     | 9 +++------
  3 files changed, 9 insertions(+), 12 deletions(-)
 
-diff --git a/rbutil/rbutilqt/base/ziputil.cpp b/rbutil/rbutilqt/base/ziputil.cpp
+diff --git a/utils/rbutilqt/base/ziputil.cpp b/utils/rbutilqt/base/ziputil.cpp
 index b6cfddd..9fa6632 100644
---- a/rbutil/rbutilqt/base/ziputil.cpp
-+++ b/rbutil/rbutilqt/base/ziputil.cpp
+--- a/utils/rbutilqt/base/ziputil.cpp
++++ b/utils/rbutilqt/base/ziputil.cpp
 @@ -22,9 +22,9 @@
  #include "progressloggerinterface.h"
  #include "Logger.h"
@@ -30,10 +30,10 @@ index b6cfddd..9fa6632 100644
  
  
  ZipUtil::ZipUtil(QObject* parent) : ArchiveUtil(parent)
-diff --git a/rbutil/rbutilqt/base/ziputil.h b/rbutil/rbutilqt/base/ziputil.h
+diff --git a/utils/rbutilqt/base/ziputil.h b/utils/rbutilqt/base/ziputil.h
 index 25c3dce..7a6e08a 100644
---- a/rbutil/rbutilqt/base/ziputil.h
-+++ b/rbutil/rbutilqt/base/ziputil.h
+--- a/utils/rbutilqt/base/ziputil.h
++++ b/utils/rbutilqt/base/ziputil.h
 @@ -21,9 +21,9 @@
  
  #include <QtCore>
@@ -47,9 +47,9 @@ index 25c3dce..7a6e08a 100644
  
  class ZipUtil : public ArchiveUtil
  {
-diff --git a/rbutil/rbutilqt/rbutilqt.pro b/rbutil/rbutilqt/rbutilqt.pro
---- a/rbutil/rbutilqt/rbutilqt.pro	2019-11-10 06:45:50.000000000 +0000
-+++ b/rbutil/rbutilqt/rbutilqt.pro	2019-12-04 22:43:30.144259710 +0000
+diff --git a/utils/rbutilqt/rbutilqt.pro b/utils/rbutilqt/rbutilqt.pro
+--- a/utils/rbutilqt/rbutilqt.pro	2019-11-10 06:45:50.000000000 +0000
++++ b/utils/rbutilqt/rbutilqt.pro	2019-12-04 22:43:30.144259710 +0000
 @@ -131,7 +131,7 @@
  
  DEPENDPATH = $$INCLUDEPATH
