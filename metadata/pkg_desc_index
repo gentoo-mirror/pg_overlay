@@ -88,7 +88,6 @@ dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applicat
 dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 0.2.15: ccache/distcc like tool with support for rust and cloud storage
-dev-util/scons 4.2.0-r1: Extensible Python-based build utility
 dev-util/spirv-tools 2021.4: Provides an API and commands for processing SPIR-V modules
 dev-util/vulkan-headers 1.2.200 1.2.201: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.2.200: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
