@@ -30,7 +30,7 @@ BDEPEND="
 "
 
 S="${WORKDIR}/${P}"
-QTDIR="${PN}/${PN}qt"
+QTDIR="utils/${PN}qt"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-quazip1.patch
