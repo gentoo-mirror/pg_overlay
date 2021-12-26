@@ -4,8 +4,8 @@ index f0877ba..044c7c7 100644
 +++ b/utils/rbutilqt/version.h
 @@ -40,5 +40,5 @@
  // PUREVERSION should identify the build uniquely. Use version string for now.
- #define PUREVERSION "v1.4.1"
+ #define PUREVERSION GITHASH
  
--#define FULLVERSION VERSION " (" PUREVERSION "), built " __DATE__ " " __TIME__
+-#define FULLVERSION VERSION " (" GITHASH "), built " __DATE__ " " __TIME__
 +#define FULLVERSION VERSION
  
