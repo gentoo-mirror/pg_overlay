@@ -37,7 +37,6 @@ DEPEND="
 		media-libs/libcddb
 		dev-libs/libcdio-paranoia:0=
 	)
-	cover? ( media-libs/imlib2[jpeg,png] )
 	dts? ( media-libs/libdca )
 	ffmpeg? ( media-video/ffmpeg )
 	flac? (
@@ -156,7 +155,6 @@ src_configure () {
 		"$(use_enable cdda cdda-paranoia)"
 		"$(use_enable aac)"
 		"$(use_enable cover artwork)"
-		"$(use_enable cover artwork-imlib2)"
 		"$(use_enable cover artwork-network)"
 		"$(use_enable dts dca)"
 		"$(use_enable ffmpeg)"
