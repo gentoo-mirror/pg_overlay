@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=8
+EAPI=7
 PLOCALES="cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW"
 
 inherit cmake desktop git-r3 plocale xdg
@@ -29,7 +29,7 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/${P}/utils/${PN}qt"
 QTDIR="utils/${PN}qt"
 
 PATCHES=(
@@ -38,38 +38,34 @@ PATCHES=(
 )
 
 src_prepare() {
-	rem_locale() {
-		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
-		sed -i "s/lang\/${PN}_${1}.ts//" CMakeLists.txt || die "removing of ${1}.ts failed"
-		sed -i "s/lang\/${PN}_${1}.qm//" rbutilqt-lang.qrc || die "removing of ${1}.ts failed"
+	plocale_find_changes "${S}/lang" "${PN}_" ".ts"
+	rm_locale() {
+		rm -v "${S}/lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
+		sed -i "s/lang\/${PN}_${1}.ts//" "${S}/CMakeLists.txt" || die "removing of ${1}.ts failed"
+		sed -i "s/lang\/${PN}_${1}.qm//" "${S}/lang/rbutilqt-lang.qrc" || die "removing of ${1}.ts failed"
 	}
+	plocale_for_each_disabled_locale rm_locale
 
 	if has_version "<dev-libs/quazip-1.0"; then
 		sed -e "/^PKGCONFIG/s/quazip1-qt5/quazip/" -i ${QTDIR}/${PN}qt.pro # || die
 	fi
 
-	rm -rv "${QTDIR}"/{quazip,zlib}/ || die
+	rm -rv {quazip,zlib}/ || die
 
-	cd "${QTDIR}" || die
 	cmake_src_prepare
 }
 
 src_configure() {
-	cd "${QTDIR}" || die
-
 	cmake_src_configure
 }
 
 src_compile() {
-	cd "${QTDIR}" || die
 	cmake_src_compile
 
 	#emake -C "${QTDIR}"
 }
 
 src_install() {
-	cd "${QTDIR}" || die
-
 	dobin RockboxUtility
 	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox Utility
 	dodoc changelog.txt
