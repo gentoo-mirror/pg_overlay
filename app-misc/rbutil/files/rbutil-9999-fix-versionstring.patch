@@ -1,7 +1,7 @@
 diff --git a/rbutil/rbutilqt/version.h b/rbutil/rbutilqt/version.h
 index f0877ba..044c7c7 100644
---- a/utils/rbutilqt/version.h
-+++ b/utils/rbutilqt/version.h
+--- a/version.h
++++ b/version.h
 @@ -18,8 +18,6 @@
   *
   ****************************************************************************/
