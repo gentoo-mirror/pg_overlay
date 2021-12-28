@@ -39,7 +39,7 @@ PATCHES=(
 
 src_prepare() {
 	rem_locale() {
-		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
+		rm -v "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.ts//" CMakeLists.txt || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.qm//" lang/rbutilqt-lang.qrc || die "removing of ${1}.ts failed"
 	}
