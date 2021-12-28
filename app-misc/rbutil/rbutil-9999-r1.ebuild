@@ -38,11 +38,13 @@ PATCHES=(
 )
 
 src_prepare() {
-	rem_locale() {
+
+	rm_locale() {
 		rm -v "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.ts//" CMakeLists.txt || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.qm//" lang/rbutilqt-lang.qrc || die "removing of ${1}.ts failed"
 	}
+	plocale_for_each_disabled_locale rm_locale
 
 	if has_version "<dev-libs/quazip-1.0"; then
 		sed -e "/^PKGCONFIG/s/quazip1-qt5/quazip/" -i ${QTDIR}/${PN}qt.pro # || die
