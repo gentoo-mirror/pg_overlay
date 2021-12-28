@@ -38,7 +38,6 @@ PATCHES=(
 )
 
 src_prepare() {
-	default
 	xdg_src_prepare
 
 	rem_locale() {
