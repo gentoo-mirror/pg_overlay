@@ -54,6 +54,7 @@ src_prepare() {
 }
 
 src_configure() {
+	default
 	cd "${QTDIR}" || die
 
 	cmake_src_configure
