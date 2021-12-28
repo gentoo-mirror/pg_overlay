@@ -41,8 +41,8 @@ src_prepare() {
 	plocale_find_changes "${S}/lang" "${PN}_" ".ts"
 	rm_locale() {
 		rm -v "${S}/lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
-		sed -i "s/lang\/${PN}_${1}.ts//" "${S}/CMakeLists.txt" || die "removing of ${1}.ts failed"
-		sed -i "s/lang\/${PN}_${1}.qm//" "${S}/lang/rbutilqt-lang.qrc" || die "removing of ${1}.ts failed"
+		sed -i "/lang\/${PN}_${1}.ts/d" "${S}/CMakeLists.txt" || die "removing of ${1}.ts failed"
+		sed -i "/lang\/${PN}_${1}.qm/d" "${S}/lang/rbutilqt-lang.qrc" || die "removing of ${1}.ts failed"
 	}
 	plocale_for_each_disabled_locale rm_locale
 
@@ -56,6 +56,7 @@ src_prepare() {
 }
 
 src_configure() {
+	export QT_VERSION_MAJOR=5
 	cmake_src_configure
 }
 
