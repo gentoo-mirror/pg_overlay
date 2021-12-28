@@ -29,7 +29,7 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/${P}/utils/${PN}qt"
 QTDIR="utils/${PN}qt"
 
 PATCHES=(
@@ -38,7 +38,6 @@ PATCHES=(
 )
 
 src_prepare() {
-	cd "${QTDIR}" || die
 	rem_locale() {
 		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 		sed -i "s/lang\/${PN}_${1}.ts//" CMakeLists.txt || die "removing of ${1}.ts failed"
@@ -55,21 +54,16 @@ src_prepare() {
 }
 
 src_configure() {
-	cd "${QTDIR}" || die
-
 	cmake_src_configure
 }
 
 src_compile() {
-	cd "${QTDIR}" || die
 	cmake_src_compile
 
 	#emake -C "${QTDIR}"
 }
 
 src_install() {
-	cd "${QTDIR}" || die
-
 	dobin RockboxUtility
 	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox Utility
 	dodoc changelog.txt
