@@ -56,7 +56,9 @@ src_prepare() {
 }
 
 src_configure() {
-	export QT_VERSION_MAJOR=5
+	local mycmakeargs=(
+		-DQT_VERSION_MAJOR=5
+	)
 	cmake_src_configure
 }
 
