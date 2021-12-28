@@ -38,6 +38,7 @@ PATCHES=(
 )
 
 src_prepare() {
+	default
 	xdg_src_prepare
 
 	rem_locale() {
@@ -54,7 +55,6 @@ src_prepare() {
 }
 
 src_configure() {
-	default
 	cd "${QTDIR}" || die
 
 	cmake_src_configure
