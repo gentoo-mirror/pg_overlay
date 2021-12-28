@@ -13,10 +13,10 @@ Signed-off-by: Andreas Sturmlechner <asturm@gentoo.org>
  rbutil/rbutilqt/rbutilqt.pro     | 9 +++------
  3 files changed, 9 insertions(+), 12 deletions(-)
 
-diff --git a/utils/rbutilqt/base/ziputil.cpp b/utils/rbutilqt/base/ziputil.cpp
+diff --git a/base/ziputil.cpp b/base/ziputil.cpp
 index b6cfddd..9fa6632 100644
---- a/utils/rbutilqt/base/ziputil.cpp
-+++ b/utils/rbutilqt/base/ziputil.cpp
+--- a/base/ziputil.cpp
++++ b/base/ziputil.cpp
 @@ -22,9 +22,9 @@
  #include "progressloggerinterface.h"
  #include "Logger.h"
@@ -30,10 +30,10 @@ index b6cfddd..9fa6632 100644
  
  
  ZipUtil::ZipUtil(QObject* parent) : ArchiveUtil(parent)
-diff --git a/utils/rbutilqt/base/ziputil.h b/utils/rbutilqt/base/ziputil.h
+diff --git a/base/ziputil.h b/base/ziputil.h
 index 25c3dce..7a6e08a 100644
---- a/utils/rbutilqt/base/ziputil.h
-+++ b/utils/rbutilqt/base/ziputil.h
+--- a/base/ziputil.h
++++ b/base/ziputil.h
 @@ -21,9 +21,9 @@
  
  #include <QtCore>
