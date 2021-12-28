@@ -51,6 +51,8 @@ src_prepare() {
 	fi
 
 	rm -rv "${QTDIR}"/{quazip,zlib}/ || die
+
+	cd "${QTDIR}" || die
 	cmake_src_prepare
 }
 
