@@ -11,7 +11,7 @@ HOMEPAGE="https://www.rockbox.org/wiki/RockboxUtility"
 EGIT_REPO_URI="git://git.rockbox.org/rockbox.git"
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64"
+#KEYWORDS="~amd64"
 IUSE="debug"
 
 RDEPEND="
