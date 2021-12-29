@@ -12,7 +12,7 @@ app-emulation/spice 0.15.0: SPICE server
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/fdupes 9999: Identify/delete duplicate files residing within specified directories
 app-misc/media-player-info 24: A repository of data files describing media player capabilities
-app-misc/rbutil 9999 9999-r1: Rockbox open source firmware manager for music players
+app-misc/rbutil 1.4.1_p20211227 9999-r1: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.21.5.25: Python scripts to manipulate trash cans via the command line
 app-misc/worker 4.10.0: Worker Filemanager: Amiga Directory Opus 4 clone
