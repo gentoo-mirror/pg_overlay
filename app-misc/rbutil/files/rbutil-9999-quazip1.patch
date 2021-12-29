@@ -15,8 +15,8 @@ Signed-off-by: Andreas Sturmlechner <asturm@gentoo.org>
 
 diff --git a/base/ziputil.cpp b/base/ziputil.cpp
 index b6cfddd..9fa6632 100644
---- a/base/ziputil.cpp
-+++ b/base/ziputil.cpp
+--- a/utils/rbutilqt/base/ziputil.cpp
++++ b/utils/rbutilqt/base/ziputil.cpp
 @@ -22,9 +22,9 @@
  #include "progressloggerinterface.h"
  #include "Logger.h"
@@ -32,8 +32,8 @@ index b6cfddd..9fa6632 100644
  ZipUtil::ZipUtil(QObject* parent) : ArchiveUtil(parent)
 diff --git a/base/ziputil.h b/base/ziputil.h
 index 25c3dce..7a6e08a 100644
---- a/base/ziputil.h
-+++ b/base/ziputil.h
+--- a/utils/rbutilqt/base/ziputil.h
++++ b/utils/rbutilqt/base/ziputil.h
 @@ -21,9 +21,9 @@
  
  #include <QtCore>
