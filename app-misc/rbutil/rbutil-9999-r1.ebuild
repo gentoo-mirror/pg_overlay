@@ -38,7 +38,7 @@ PATCHES=(
 )
 
 src_prepare() {
-	plocale_find_changes "${S}/lang" "${PN}_" ".ts"
+	plocale_find_changes "lang" "${PN}_" ".ts"
 	rm_locale() {
 		rm -v "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
 		sed -i "/lang\/${PN}_${1}.ts/d" CMakeLists.txt || die "removing of ${1}.ts failed"
