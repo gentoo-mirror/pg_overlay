@@ -4,7 +4,7 @@
 EAPI=8
 PLOCALES="cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW"
 
-inherit desktop plocale qmake-utils xdg
+inherit desktop plocale qmake-utils
 
 DESCRIPTION="Rockbox open source firmware manager for music players"
 HOMEPAGE="https://www.rockbox.org/wiki/RockboxUtility"
@@ -41,7 +41,6 @@ PATCHES=(
 
 src_prepare() {
 	default
-	xdg_src_prepare
 
 	rem_locale() {
 		rm "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
