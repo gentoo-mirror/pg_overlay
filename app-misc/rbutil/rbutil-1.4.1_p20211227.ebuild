@@ -1,14 +1,16 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 PLOCALES="cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW"
 
-inherit desktop git-r3 plocale qmake-utils xdg
+inherit desktop plocale qmake-utils xdg
 
 DESCRIPTION="Rockbox open source firmware manager for music players"
 HOMEPAGE="https://www.rockbox.org/wiki/RockboxUtility"
-EGIT_REPO_URI="git://git.rockbox.org/rockbox.git"
+COMMIT="1ddc5a202d6986f5e981ce16c0fce6c49b767765"
+SRC_URI="https://git.rockbox.org/cgit/rockbox.git/snapshot/rockbox-${COMMIT}.tar.bz2"
+
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
@@ -29,15 +31,16 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/${P}"
+S="${WORKDIR}/rockbox-${COMMIT}"
 QTDIR="utils/${PN}qt"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-quazip1.patch
-	"${FILESDIR}"/${P}-fix-versionstring.patch # bug 734178
+	"${FILESDIR}"/${PN}-9999-quazip1.patch
+	"${FILESDIR}"/${PN}-9999-fix-versionstring.patch # bug 734178
 )
 
 src_prepare() {
+	default
 	xdg_src_prepare
 
 	rem_locale() {
