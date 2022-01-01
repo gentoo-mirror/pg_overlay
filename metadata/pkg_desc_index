@@ -205,7 +205,6 @@ x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 1.17.4 9999 9999-r1: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33 3.24.30: Gimp ToolKit +
 x11-libs/libXi 1.7.99.2: X.Org Xi library
-x11-libs/libdrm 2.4.109: X.Org libdrm library
 x11-libs/libxcb 1.14: X C-language Bindings library
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.4-r300 3.1.5-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
