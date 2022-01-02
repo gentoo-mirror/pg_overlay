@@ -70,7 +70,6 @@ S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-3.1.0-jemalloc-only-telegram.patch"
-	"${FILESDIR}/tdesktop-3.1.0-fix-openssl3.patch"
 )
 
 pkg_pretend() {
