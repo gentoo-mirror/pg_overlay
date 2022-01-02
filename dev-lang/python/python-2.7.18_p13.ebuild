@@ -224,7 +224,9 @@ src_compile() {
 	# disable distcc and ccache
 	export DISTCC_HOSTS=""
 	export CCACHE_DISABLE=1
-	
+
+	addpredict /usr/lib64/python2.7/site-packages/
+
 	# Avoid invoking pgen for cross-compiles.
 	touch Include/graminit.h Python/graminit.c
 
