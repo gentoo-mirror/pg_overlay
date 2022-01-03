@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit cmake xdg-utils
 
@@ -46,9 +46,11 @@ BDEPEND="virtual/pkgconfig"
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
 src_prepare() {
+	default
 	sed -i "s/QBT_VERSION_MINOR 4/QBT_VERSION_MINOR 3/g" src/base/version.h.in
 	sed -i "s/QBT_VERSION_BUGFIX 0/QBT_VERSION_BUGFIX 9/g" src/base/version.h.in
 	sed -i "s/rc1//g" src/base/version.h.in
+	cmake_src_prepare
 }
 
 src_configure() {
