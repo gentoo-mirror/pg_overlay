@@ -45,6 +45,12 @@ BDEPEND="virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
+src_prepare() {
+	sed -i "s/QBT_VERSION_MINOR 4/QBT_VERSION_MINOR 3/g" src/base/version.h.in
+	sed -i "s/QBT_VERSION_BUGFIX 0/QBT_VERSION_BUGFIX 9/g" src/base/version.h.in
+	sed -i "s/rc1//g" src/base/version.h.in
+}
+
 src_configure() {
 	local mycmakeargs=(
 		-DDBUS=$(usex dbus ON OFF)
