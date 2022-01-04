@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -9,7 +9,7 @@ EAPI=7
 # We avoid Python 3.10 here _for now_ (it does work!) to avoid circular dependencies
 # on upgrades as people migrate to libxcrypt.
 # https://wiki.gentoo.org/wiki/User:Sam/Portage_help/Circular_dependencies#Python_and_libcrypt
-PYTHON_COMPAT=( python3_{9,10} )
+PYTHON_COMPAT=( python3_{9..10} )
 TMPFILES_OPTIONAL=1
 
 inherit python-any-r1 prefix preserve-libs toolchain-funcs flag-o-matic gnuconfig \
@@ -23,7 +23,7 @@ SLOT="2.2"
 EMULTILIB_PKG="true"
 
 # Gentoo patchset (ignored for live ebuilds)
-PATCH_VER=8
+PATCH_VER=9
 PATCH_DEV=dilfridge
 
 if [[ ${PV} == 9999* ]]; then
@@ -422,6 +422,9 @@ setup_flags() {
 
 	# #492892
 	filter-flags -frecord-gcc-switches
+
+	# #829583
+	filter-lfs-flags
 
 	unset CBUILD_OPT CTARGET_OPT
 	if use multilib ; then
@@ -1544,7 +1547,7 @@ glibc_sanity_check() {
 
 	# first let's find the actual dynamic linker here
 	# symlinks may point to the wrong abi
-	local newldso=$(find . -name 'ld*so.?' -type f -print -quit)
+	local newldso=$(find . -maxdepth 1 -name 'ld*so.?' -type f -print -quit)
 
 	einfo Last-minute run tests with ${newldso} in /$(get_libdir) ...
 

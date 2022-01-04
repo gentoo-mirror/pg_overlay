@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -12,7 +12,7 @@ EGIT_REPO_URI="https://git.code.sf.net/p/${PN}/git"
 LICENSE="BSD GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE="elibc_musl netgear readynas zeroconf tivo"
+IUSE="netgear readynas zeroconf tivo"
 
 RDEPEND="
 	acct-group/minidlna
@@ -25,7 +25,6 @@ RDEPEND="
 	media-libs/libvorbis
 	media-video/ffmpeg:0=
 	virtual/jpeg:0=
-	elibc_musl? ( sys-libs/queue-standalone )
 	zeroconf? ( net-dns/avahi )"
 DEPEND=${RDEPEND}
 BDEPEND="
