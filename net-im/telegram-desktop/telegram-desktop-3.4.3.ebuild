@@ -29,6 +29,7 @@ RDEPEND="
 	dev-cpp/abseil-cpp:=
 	dev-libs/jemalloc:=[-lazy-lock]
 	dev-libs/openssl:=
+	dev-libs/libdispatch
 	dev-libs/xxhash
 	>=dev-qt/qtcore-5.15:5
 	>=dev-qt/qtgui-5.15:5[dbus?,jpeg,png,wayland?,X?]
