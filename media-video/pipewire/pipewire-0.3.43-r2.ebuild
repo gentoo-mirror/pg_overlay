@@ -126,7 +126,7 @@ src_prepare() {
 
 		# End of ${limitsdfile} from ${P}
 	EOF
-	sed -i s/volume = merge/volume = ignore/g spa/plugins/alsa/mixer/paths/analog-output.conf.common
+	sed -i "s/volume = merge/volume = ignore/g" spa/plugins/alsa/mixer/paths/analog-output.conf.common
 }
 
 multilib_src_configure() {
