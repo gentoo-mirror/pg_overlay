@@ -43,7 +43,7 @@ DEPEND="${RDEPEND}
 
 BDEPEND="virtual/pkgconfig"
 
-DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
+DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
 
 src_prepare() {
 	default
