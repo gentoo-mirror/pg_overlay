@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -58,15 +58,6 @@ DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )
 "
 BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
-
-PATCHES=(
-	"${FILESDIR}"/${P}-make-OSD-an-actual-wayland-OSD.patch
-	"${FILESDIR}"/${P}-fix-misrenderings-with-transparency.patch # KDE-bug 305247
-	"${FILESDIR}"/${P}-fix-centered-text.patch # KDE-bug 442830
-	"${FILESDIR}"/${P}-reload-shared-renderers-if-changed-on-disk.patch # KDE-bug 445516
-	"${FILESDIR}"/${P}-no-double-delete.patch # KDE-bug 446195
-	"${FILESDIR}"/${P}-update-after-clearing-actions.patch # KDE-bug 446195
-)
 
 src_configure() {
 	local mycmakeargs=(
