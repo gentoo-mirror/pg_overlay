@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
@@ -24,7 +24,7 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="PSF-2"
 SLOT="${PYVER}"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
-IUSE="bluetooth build examples gdbm hardened libedit lto +ncurses pgo +readline +sqlite +ssl test tk wininst +xml ipv6"
+IUSE="bluetooth build examples gdbm hardened libedit lto +ncurses pgo +readline +sqlite +ssl test tk wininst +xml"
 RESTRICT="!test? ( test )"
 
 # Do not add a dependency on dev-lang/python to this ebuild.
@@ -64,7 +64,7 @@ BDEPEND="
 	sys-devel/autoconf-archive
 	virtual/awk
 	virtual/pkgconfig
-	verify-sig? ( app-crypt/openpgp-keys-python )
+	verify-sig? ( sec-keys/openpgp-keys-python )
 	!sys-devel/gcc[libffi(-)]"
 RDEPEND+=" !build? ( app-misc/mime-types )"
 
@@ -154,7 +154,12 @@ src_configure() {
 
 	if use pgo; then
 		local jobs=$(makeopts_jobs "${MAKEOPTS}" "$(get_nproc)")
-		export PROFILE_TASK="-m test -j${jobs} --pgo-extended -x test_gdb"
+		export PROFILE_TASK="-m test -j${jobs} --pgo-extended -x test_gdb -u-network"
+
+		# All of these seem to occasionally hang for PGO inconsistently
+		# They'll even hang here but be fine in src_test sometimes.
+		# bug #828535 (and related: bug #788022)
+		PROFILE_TASK+=" -x test_socket -x test_asyncio -x test_httpservers -x test_logging -x test_multiprocessing_fork -x test_xmlrpc"
 
 		if has_version "app-arch/rpm" ; then
 			# Avoid sandbox failure (attempts to write to /var/lib/rpm)
@@ -203,24 +208,14 @@ src_compile() {
 	# https://bugs.gentoo.org/823728
 	export SETUPTOOLS_USE_DISTUTILS=stdlib
 
-	#The following code borrowed from https://github.com/stefantalpalaru/gentoo-overlay
-	# extract the number of parallel jobs in MAKEOPTS
-	echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' > /dev/null
-	if [ $? -eq 0 ]; then
-		par_arg="-j$(echo ${MAKEOPTS} | egrep -o '(\-j|\-\-jobs)(=?|[[:space:]]*)[[:digit:]]+' | tail -n1 | egrep -o '[[:digit:]]+')"
-	else
-		par_arg=""
-	fi
-	export par_arg
-
-	if use pgo; then
+	if use pgo ; then
 		# bug 660358
 		local -x COLUMNS=80
 		local -x PYTHONDONTWRITEBYTECODE=
 
 		addpredict /usr/lib/python3.10/site-packages
 
-		emake profile-opt PROFILE_TASK="-m test -x test_gdb test_compileall test_distutils test_doctest test_support test_bdb test_ftplib test_import test_importlib test_runpy test_pickle test_socket -j $(nproc) --pgo-extended"
+		emake profile-opt PROFILE_TASK="-j $(nproc) --pgo-extended"
 	else
 		emake CPPFLAGS= CFLAGS= LDFLAGS=
 	fi
