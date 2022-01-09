@@ -215,7 +215,7 @@ src_compile() {
 
 		addpredict /usr/lib/python3.10/site-packages
 
-		emake profile-opt PROFILE_TASK="-m test -j $(nproc) --pgo-extended"
+		emake profile-opt PROFILE_TASK="-m test -x test_doctest test_bdb test_support test_compileall test_ftplib test_import test_importlib test_runpy test_pickle test_ssl test_socket -j $(nproc) --pgo-extended"
 	else
 		emake CPPFLAGS= CFLAGS= LDFLAGS=
 	fi
