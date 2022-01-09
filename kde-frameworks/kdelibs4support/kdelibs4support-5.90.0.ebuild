@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -69,6 +69,7 @@ DEPEND="${COMMON_DEPEND}
 "
 RDEPEND="${COMMON_DEPEND}
 	>=dev-qt/qtxml-${QTMIN}:5
+	>=kde-frameworks/countryflags-${PVCUT}:5
 	=kde-frameworks/kinit-${PVCUT}*:5
 	=kde-frameworks/kitemmodels-${PVCUT}*:5
 "
@@ -84,9 +85,12 @@ PATCHES=(
 
 src_prepare() {
 	ecm_src_prepare
+
 	if ! use handbook; then
 		sed -e "/kdoctools_install/ s/^/#DONT/" -i CMakeLists.txt || die
 	fi
+
+	cmake_run_in src cmake_comment_add_subdirectory l10n
 }
 
 src_configure() {
