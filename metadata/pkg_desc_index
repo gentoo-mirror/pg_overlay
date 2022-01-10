@@ -50,7 +50,7 @@ dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeSc
 dev-libs/re2 0.2021.09.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-ml/camlp4 4.12_p1 4.13_p1: System for writing extensible parsers for programming languages
+dev-ml/camlp4 4.13_p1: System for writing extensible parsers for programming languages
 dev-ml/lablgtk 2.18.11: Objective CAML interface for Gtk+2
 dev-perl/JSON 4.20.0: JSON (JavaScript Object Notation) encoder/decoder
 dev-perl/JSON-XS 4.20.0: JSON::XS - JSON serialising/deserialising, done correctly and fast
@@ -133,7 +133,6 @@ media-sound/cantata 9999: Featureful and configurable Qt client for the music pl
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mac 7.21: Monkey's Audio Codecs
-media-sound/mpd 0.23.5: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
