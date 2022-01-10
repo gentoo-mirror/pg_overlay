@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -28,14 +28,14 @@ RDEPEND="
 	>=x11-libs/pixman-0.17.7[static-libs(+)?]
 	dev-libs/openssl:0=[static-libs(+)?]
 	lz4? ( app-arch/lz4:0=[static-libs(+)?] )
-	smartcard? ( >=app-emulation/libcacard-0.1.2 )
+	smartcard? ( >=app-emulation/libcacard-2.5.1 )
 	sasl? ( dev-libs/cyrus-sasl[static-libs(+)?] )
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
 	)"
 DEPEND="${RDEPEND}
-	>=app-emulation/spice-protocol-0.14.0
+	>=app-emulation/spice-protocol-0.14.3
 	smartcard? ( app-emulation/qemu[smartcard] )
 	test? ( net-libs/glib-networking )"
 BDEPEND="${PYTHON_DEPS}
