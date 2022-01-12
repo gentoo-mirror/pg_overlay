@@ -653,6 +653,24 @@ src_prepare() {
 		fi
 	done
 	#######
+	### Firefox-wayland patches https://github.com/ATiltedTree/firefox-wayland
+	einfo +++++++++++++++++++++++++++++
+	einfo "Applying Firefox-wayland's patches"
+	einfo +++++++++++++++++++++++++++++
+	for p in $(cat "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
+		else
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
+		fi
+	done
+	#######
 	eapply "${FILESDIR}/fix-wayland.patch"
 	#######
 
@@ -828,7 +846,7 @@ src_configure() {
 	mozconfig_use_enable wifi necko-wifi
 
 	if use wayland ; then
-		mozconfig_add_options_ac '+wayland' --enable-default-toolkit=cairo-gtk3-wayland
+		mozconfig_add_options_ac '+wayland' --enable-default-toolkit=cairo-gtk3 #-wayland
 	else
 		mozconfig_add_options_ac '' --enable-default-toolkit=cairo-gtk3
 	fi
@@ -984,6 +1002,7 @@ src_configure() {
 
 	# Use system's Python environment
 	export MACH_USE_SYSTEM_PYTHON=1
+	export MACH_SYSTEM_ASSERTED_COMPATIBLE_WITH_MACH_SITE=1
 	export PIP_NO_CACHE_DIR=off
 
 	# Disable notification when build system has finished
@@ -1098,6 +1117,7 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-rust-simd
 	mozconfig_add_options_ac '' --enable-strip
 	mozconfig_add_options_ac '' --enable-webrtc
+	mozconfig_add_options_ac '' --with-wayland
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
