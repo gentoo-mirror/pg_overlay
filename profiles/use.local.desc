@@ -421,6 +421,7 @@ www-client/firefox:system-icu - Use the system-wide dev-libs/icu instead of bund
 www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled.
 www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
+www-client/firefox:system-png - Use the system-wide media-libs/libpng instead of bundled (requires APNG patches).
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
 x11-base/xorg-server:dmx - Build the Distributed Multiheaded X server
 x11-base/xorg-server:elogind - Use elogind to get control over framebuffer when running as regular user
