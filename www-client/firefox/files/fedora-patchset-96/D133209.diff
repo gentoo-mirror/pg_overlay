@@ -1,0 +1,197 @@
+diff --git a/widget/gtk/nsGtkKeyUtils.h b/widget/gtk/nsGtkKeyUtils.h
+--- a/widget/gtk/nsGtkKeyUtils.h
++++ b/widget/gtk/nsGtkKeyUtils.h
+@@ -202,6 +202,22 @@
+    * from xkb_keymap. We call that from Wayland backend routines.
+    */
+   static void SetModifierMasks(xkb_keymap* aKeymap);
++
++  /**
++   * Wayland global focus handlers
++   */
++  static void SetFocusIn(wl_surface* aFocusSurface, uint32_t aFocusSerial);
++  static void SetFocusOut(wl_surface* aFocusSurface);
++  static void GetFocusInfo(wl_surface** aFocusSurface, uint32_t* aFocusSerial);
++
++  static void SetSeat(wl_seat* aSeat);
++  static wl_seat* GetSeat();
++
++  /**
++   * EnsureInstance() is provided on Wayland to register Wayland callbacks
++   * early.
++   */
++  static void EnsureInstance();
+ #endif
+ 
+   /**
+@@ -467,6 +483,12 @@
+   void SetModifierMask(xkb_keymap* aKeymap, ModifierIndex aModifierIndex,
+                        const char* aModifierName);
+ #endif
++
++#ifdef MOZ_WAYLAND
++  wl_seat* mSeat = nullptr;
++  wl_surface* mFocusSurface = nullptr;
++  uint32_t mFocusSerial = 0;
++#endif
+ };
+ 
+ }  // namespace widget
+diff --git a/widget/gtk/nsGtkKeyUtils.cpp b/widget/gtk/nsGtkKeyUtils.cpp
+--- a/widget/gtk/nsGtkKeyUtils.cpp
++++ b/widget/gtk/nsGtkKeyUtils.cpp
+@@ -331,6 +331,10 @@
+   return sInstance;
+ }
+ 
++#ifdef MOZ_WAYLAND
++void KeymapWrapper::EnsureInstance() { (void)GetInstance(); }
++#endif
++
+ /* static */
+ void KeymapWrapper::Shutdown() {
+   if (sInstance) {
+@@ -720,10 +724,15 @@
+ 
+ static void keyboard_handle_enter(void* data, struct wl_keyboard* keyboard,
+                                   uint32_t serial, struct wl_surface* surface,
+-                                  struct wl_array* keys) {}
++                                  struct wl_array* keys) {
++  KeymapWrapper::SetFocusIn(surface, serial);
++}
++
+ static void keyboard_handle_leave(void* data, struct wl_keyboard* keyboard,
+                                   uint32_t serial, struct wl_surface* surface) {
++  KeymapWrapper::SetFocusOut(surface);
+ }
++
+ static void keyboard_handle_key(void* data, struct wl_keyboard* keyboard,
+                                 uint32_t serial, uint32_t time, uint32_t key,
+                                 uint32_t state) {}
+@@ -760,6 +769,7 @@
+   if (strcmp(interface, "wl_seat") == 0) {
+     auto* seat =
+         WaylandRegistryBind<wl_seat>(registry, id, &wl_seat_interface, 1);
++    KeymapWrapper::SetSeat(seat);
+     wl_seat_add_listener(seat, &seat_listener, data);
+   }
+ }
+@@ -2411,5 +2421,40 @@
+            altLatinCharCodes.mShiftedCharCode));
+ }
+ 
++#ifdef MOZ_WAYLAND
++void KeymapWrapper::SetFocusIn(wl_surface* aFocusSurface,
++                               uint32_t aFocusSerial) {
++  KeymapWrapper* keymapWrapper = KeymapWrapper::GetInstance();
++  keymapWrapper->mFocusSurface = aFocusSurface;
++  keymapWrapper->mFocusSerial = aFocusSerial;
++}
++
++void KeymapWrapper::SetFocusOut(wl_surface* aFocusSurface) {
++  KeymapWrapper* keymapWrapper = KeymapWrapper::GetInstance();
++  if (aFocusSurface == keymapWrapper->mFocusSurface) {
++    keymapWrapper->mFocusSurface = nullptr;
++    keymapWrapper->mFocusSerial = 0;
++  }
++}
++
++void KeymapWrapper::GetFocusInfo(wl_surface** aFocusSurface,
++                                 uint32_t* aFocusSerial) {
++  KeymapWrapper* keymapWrapper = KeymapWrapper::GetInstance();
++  *aFocusSurface = keymapWrapper->mFocusSurface;
++  *aFocusSerial = keymapWrapper->mFocusSerial;
++}
++
++void KeymapWrapper::SetSeat(wl_seat* aSeat) {
++  KeymapWrapper* keymapWrapper = KeymapWrapper::GetInstance();
++  keymapWrapper->mSeat = aSeat;
++}
++
++wl_seat* KeymapWrapper::GetSeat() {
++  KeymapWrapper* keymapWrapper = KeymapWrapper::GetInstance();
++  return keymapWrapper->mSeat;
++}
++
++#endif
++
+ }  // namespace widget
+ }  // namespace mozilla
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -2862,8 +2862,7 @@
+ };
+ 
+ void nsWindow::RequestFocusWaylandWindow(RefPtr<nsWindow> aWindow) {
+-  LOG("nsWindow::RequestWindowFocusWayland(%p) gFocusWindow [%p]",
+-      (void*)aWindow, gFocusWindow);
++  LOG("nsWindow::RequestWindowFocusWayland(%p)", (void*)aWindow);
+ 
+   RefPtr<nsWaylandDisplay> display = WaylandDisplayGet();
+   xdg_activation_v1* xdg_activation = display->GetXdgActivation();
+@@ -2872,17 +2871,11 @@
+     return;
+   }
+ 
+-  // We use xdg-activation protocol to transfer focus from gFocusWindow to
+-  // aWindow. Quit if no window is focused.
+-  if (gFocusWindow != this) {
+-    LOG("  there isn't any focused window to transfer focus from, quit.");
+-    return;
+-  }
+-
+-  wl_surface* surface =
+-      mGdkWindow ? gdk_wayland_window_get_wl_surface(mGdkWindow) : nullptr;
+-  if (!surface) {
+-    LOG("  requesting window is hidden/unmapped, quit.");
++  wl_surface* focusSurface;
++  uint32_t focusSerial;
++  KeymapWrapper::GetFocusInfo(&focusSurface, &focusSerial);
++  if (!focusSurface) {
++    LOG("  We're missing focused window, quit.");
+     return;
+   }
+ 
+@@ -2894,9 +2887,9 @@
+   // callback.
+   xdg_activation_token_v1_add_listener(aWindow->mXdgToken, &token_listener,
+                                        do_AddRef(aWindow).take());
+-  xdg_activation_token_v1_set_serial(aWindow->mXdgToken, GetLastUserInputTime(),
+-                                     display->GetSeat());
+-  xdg_activation_token_v1_set_surface(aWindow->mXdgToken, surface);
++  xdg_activation_token_v1_set_serial(aWindow->mXdgToken, focusSerial,
++                                     KeymapWrapper::GetSeat());
++  xdg_activation_token_v1_set_surface(aWindow->mXdgToken, focusSurface);
+   xdg_activation_token_v1_commit(aWindow->mXdgToken);
+ }
+ #endif
+@@ -2959,11 +2952,7 @@
+ 
+ #ifdef MOZ_WAYLAND
+       if (GdkIsWaylandDisplay()) {
+-        if (gFocusWindow) {
+-          gFocusWindow->RequestFocusWaylandWindow(toplevelWindow);
+-        } else {
+-          LOG("  RequestFocusWaylandWindow(): we're missing focused window!");
+-        }
++        RequestFocusWaylandWindow(toplevelWindow);
+       }
+ #endif
+       if (GTKToolkit) GTKToolkit->SetFocusTimestamp(0);
+@@ -5359,6 +5348,14 @@
+   a11y::PreInit();
+ #endif
+ 
++#ifdef MOZ_WAYLAND
++  // Ensure that KeymapWrapper is created on Wayland as we need it for
++  // keyboard focus tracking.
++  if (GdkIsWaylandDisplay()) {
++    KeymapWrapper::EnsureInstance();
++  }
++#endif
++
+   // Ensure that the toolkit is created.
+   nsGTKToolkit::GetToolkit();
+ 
+
