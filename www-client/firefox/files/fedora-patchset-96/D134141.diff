@@ -1,0 +1,12 @@
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -2870,6 +2870,7 @@
+ 
+   if (!gFocusWindow || gFocusWindow->IsDestroyed()) {
+     LOGW("  missing gFocusWindow, quit.");
++    return;
+   }
+ 
+   RefPtr<nsWaylandDisplay> display = WaylandDisplayGet();
+
