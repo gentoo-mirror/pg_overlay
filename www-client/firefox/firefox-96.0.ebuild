@@ -653,6 +653,24 @@ src_prepare() {
 		fi
 	done
 	#######
+	### Firefox-wayland patches https://github.com/ATiltedTree/firefox-wayland
+	einfo +++++++++++++++++++++++++++++
+	einfo "Applying Firefox-wayland's patches"
+	einfo +++++++++++++++++++++++++++++
+	for p in $(cat "${FILESDIR}/Firefox-wayland-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/Firefox-wayland-$(ver_cut 1)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/Firefox-wayland-$(ver_cut 1)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
+		else
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
+		fi
+	done
+	#######
 	eapply "${FILESDIR}/fix-wayland.patch"
 	#######
 
@@ -984,6 +1002,7 @@ src_configure() {
 
 	# Use system's Python environment
 	export MACH_USE_SYSTEM_PYTHON=1
+	export MACH_SYSTEM_ASSERTED_COMPATIBLE_WITH_MACH_SITE=1
 	export PIP_NO_CACHE_DIR=off
 
 	# Disable notification when build system has finished
