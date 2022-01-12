@@ -111,7 +111,7 @@ kde-frameworks/knotifications 5.90.0: Framework for notifying the user of an eve
 kde-frameworks/plasma 5.90.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/claws-mail 4.0.0: An email client (and news reader) based on GTK+
-mail-client/thunderbird 91.4.1: Thunderbird Mail Client
+mail-client/thunderbird 91.5.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.0.32: Scanner Access Now Easy - Backends
 media-libs/gst-plugins-base 1.19.1: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.19.1: Basepack of plugins for GStreamer
