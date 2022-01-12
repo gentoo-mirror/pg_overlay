@@ -657,10 +657,10 @@ src_prepare() {
 	einfo +++++++++++++++++++++++++++++
 	einfo "Applying Firefox-wayland's patches"
 	einfo +++++++++++++++++++++++++++++
-	for p in $(cat "${FILESDIR}/Firefox-wayland-$(ver_cut 1)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/Firefox-wayland-$(ver_cut 1)"/$p 2>/dev/null
+	for p in $(cat "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/Firefox-wayland-$(ver_cut 1)"/$p;
+			eapply "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p;
 			einfo +++++++++++++++++++++++++;
 			einfo Patch $p is APPLIED;
 			einfo +++++++++++++++++++++++++
