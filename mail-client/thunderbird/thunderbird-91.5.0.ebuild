@@ -634,6 +634,7 @@ src_prepare() {
 	### PGO fix patch
 	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
 	#######
+	eapply "${FILESDIR}/mozwayland-add-missing-stub.patch"
 
 	xdg_src_prepare
 }
