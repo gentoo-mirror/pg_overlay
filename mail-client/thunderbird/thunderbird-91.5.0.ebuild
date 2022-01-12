@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-91esr-patches-03.tar.xz"
+FIREFOX_PATCHSET="firefox-91esr-patches-04.tar.xz"
 
 LLVM_MAX_SLOT=13
 
@@ -634,7 +634,6 @@ src_prepare() {
 	### PGO fix patch
 	use pgo && eapply "${FILESDIR}/thunderbird-pgo_freeze_fix.patch"
 	#######
-	eapply "${FILESDIR}/mozwayland-add-missing-stub.patch"
 
 	xdg_src_prepare
 }
