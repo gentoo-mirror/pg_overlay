@@ -196,6 +196,7 @@ virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/perl-version 0.992.900: Virtual for version
 virtual/rust 1.57.0: Virtual for Rust language compiler
 www-client/firefox 96.0: Firefox Web Browser
+www-client/ungoogled-chromium 97.0.4692.71-r1: Modifications to Chromium for removing Google integration and enhancing privacy
 x11-base/xorg-server 21.1.3: X.Org X servers
 x11-base/xwayland 21.1.4: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
