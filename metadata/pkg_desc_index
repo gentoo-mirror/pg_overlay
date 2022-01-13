@@ -179,8 +179,8 @@ sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 0.119-r2 0.120-r1: Policy framework for controlling privileges for system-wide services
-sys-devel/clang 13.0.1_rc1: C language family frontend for LLVM
-sys-devel/llvm 13.0.1_rc1: Low Level Virtual Machine
+sys-devel/clang 13.0.1_rc2: C language family frontend for LLVM
+sys-devel/llvm 13.0.1_rc2: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.4: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.14.0_rc1: xfs filesystem utilities
@@ -189,7 +189,7 @@ sys-libs/libblockdev 2.26: A library for manipulating block devices
 sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in the zlib distribution.
 sys-libs/ncurses 6.2_p20210718 6.3_p20211030: console display library
 sys-libs/pam 1.5.1_p20210722: Linux-PAM (Pluggable Authentication Modules)
-sys-libs/polly 11.1.0 12.0.0 12.0.1 13.0.0 13.0.1_rc1: Polyhedral optimizations for LLVM
+sys-libs/polly 11.1.0 12.0.1 13.0.0 13.0.1_rc2: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre59: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
