@@ -1156,9 +1156,9 @@ src_compile() {
 		addpredict /root
 	fi
 
-	local -x GDK_BACKEND=x11
+	#local -x GDK_BACKEND=x11
 
-	${virtx_cmd} ./mach build --verbose \
+	MOZ_ENABLE_WAYLAND=1 ${virtx_cmd} ./mach build --verbose \
 		|| die
 }
 
