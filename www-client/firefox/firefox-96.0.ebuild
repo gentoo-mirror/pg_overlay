@@ -1119,6 +1119,8 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-webrtc
 	mozconfig_add_options_ac '' --with-wayland
 
+	mozconfig_add_options_ac '' MOZ_ENABLE_WAYLAND=1
+
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
 	echo "export MOZ_DEVICES=0" >> "${S}"/.mozconfig
 	echo "export MOZ_LOGGING=0" >> "${S}"/.mozconfig
@@ -1128,6 +1130,7 @@ src_configure() {
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export MOZ_X11=0" >> "${S}"/.mozconfig
 	echo "export USE_X11=0" >> "${S}"/.mozconfig
+	echo "export MOZ_ENABLE_WAYLAND=1" >> "${S}"/.mozconfig
 	#######
 
 	echo
@@ -1156,9 +1159,11 @@ src_compile() {
 		addpredict /root
 	fi
 
-	#local -x GDK_BACKEND=x11
+	local -x GDK_BACKEND=wayland
+	local -x MOZ_ENABLE_WAYLAND=1
 
-	MOZ_ENABLE_WAYLAND=1 ${virtx_cmd} ./mach build --verbose \
+	#MOZ_ENABLE_WAYLAND=1 ${virtx_cmd}./mach build --verbose \
+	MOZ_ENABLE_WAYLAND=1 ./mach build --verbose \
 		|| die
 }
 

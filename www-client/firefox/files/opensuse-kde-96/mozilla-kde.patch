@@ -1281,23 +1281,6 @@ diff --git a/widget/gtk/moz.build b/widget/gtk/moz.build
 diff --git a/widget/gtk/nsFilePicker.cpp b/widget/gtk/nsFilePicker.cpp
 --- a/widget/gtk/nsFilePicker.cpp
 +++ b/widget/gtk/nsFilePicker.cpp
-@@ -1,15 +1,16 @@
- /* -*- Mode: C++; tab-width: 2; indent-tabs-mode: nil; c-basic-offset: 2 -*- */
- /* This Source Code Form is subject to the terms of the Mozilla Public
-  * License, v. 2.0. If a copy of the MPL was not distributed with this
-  * file, You can obtain one at http://mozilla.org/MPL/2.0/. */
- 
- #include <dlfcn.h>
- #include <gtk/gtk.h>
-+#include <gdk/gdkx.h>
- #include <sys/types.h>
- #include <sys/stat.h>
- #include <unistd.h>
- 
- #include "mozilla/Types.h"
- #include "nsGtkUtils.h"
- #include "nsIFileURL.h"
- #include "nsIGIOService.h"
 @@ -22,16 +23,18 @@
  #include "nsMemory.h"
  #include "nsEnumeratorUtils.h"
