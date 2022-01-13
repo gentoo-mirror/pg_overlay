@@ -66,7 +66,7 @@ IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
 IUSE+=" jack lto +openh264 pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx system-png +system-webp"
 IUSE+=" wayland wifi"
-IUSE+=" +kde +privacy"
+IUSE+=" kde +privacy +nox11"
 
 # Firefox-only IUSE
 IUSE+=" geckodriver"
@@ -76,7 +76,8 @@ IUSE+=" screencast"
 REQUIRED_USE="debug? ( !system-av1 )
 	pgo? ( lto )
 	wayland? ( dbus )
-	wifi? ( dbus )"
+	wifi? ( dbus )
+	nox11? ( !kde )"
 
 # Firefox-only REQUIRED_USE flags
 REQUIRED_USE+=" screencast? ( wayland )"
@@ -657,7 +658,7 @@ src_prepare() {
 	einfo +++++++++++++++++++++++++++++
 	einfo "Applying Firefox-wayland's patches"
 	einfo +++++++++++++++++++++++++++++
-	for p in $(cat "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/series);do
+	use nox11 && for p in $(cat "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/series);do
 		patch --dry-run --silent -p1 -i "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
 			eapply "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p;
@@ -669,7 +670,7 @@ src_prepare() {
 			einfo Patch $p is NOT applied and IGNORED;
 			einfo -------------------------
 		fi
-	done
+	done && eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/mozilla-nongnome-proxies.patch
 	#######
 	eapply "${FILESDIR}/fix-wayland.patch"
 	#######
