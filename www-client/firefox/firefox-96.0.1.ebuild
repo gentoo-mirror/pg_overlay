@@ -1160,7 +1160,7 @@ src_compile() {
 		addpredict /root
 	fi
 
-	local -x GDK_BACKEND=wayland
+	#local -x GDK_BACKEND=wayland
 	#local -x MOZ_ENABLE_WAYLAND=1
 
 	#MOZ_ENABLE_WAYLAND=1 ${virtx_cmd} ./mach build --verbose \
