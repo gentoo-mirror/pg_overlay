@@ -90,8 +90,8 @@ src_prepare() {
 
 	# fix linking with missing libdl (introduced in 3.2.0->3.2.4 upgrade,
 	#  not sure if thanks to removing the -pie flag in the cmakelists...)
-	sed -i 's/${JEMALLOC_LINK_LIBRARIES}/& dl/' \
-		cmake/external/jemalloc/CMakeLists.txt || die
+	#sed -i 's/${JEMALLOC_LINK_LIBRARIES}/& dl/' \
+	#	cmake/external/jemalloc/CMakeLists.txt || die
 
 	cmake_src_prepare
 }
