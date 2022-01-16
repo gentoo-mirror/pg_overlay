@@ -72,7 +72,7 @@ src_prepare() {
 	}
 	plocale_for_each_disabled_locale rm_loc
 
-	rm -r qtsingleapplication/
+	rm qtsingleapplication/common.pri
 }
 
 src_configure() {
