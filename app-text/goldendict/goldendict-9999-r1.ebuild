@@ -71,6 +71,8 @@ src_prepare() {
 		sed -i "/${1}.ts/d" ${PN}.pro || die
 	}
 	plocale_for_each_disabled_locale rm_loc
+
+	rm qtsingleapplication/common.pri
 }
 
 src_configure() {
