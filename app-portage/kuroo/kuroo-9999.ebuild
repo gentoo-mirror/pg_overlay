@@ -3,7 +3,7 @@
 
 EAPI=7
 
-KFMIN=5.85.0
+KFMIN=5.89.0
 ESVN_REPO_URI="svn://svn.code.sf.net/p/kuroo/code/kuroo4/trunk"
 inherit ecm subversion
 
