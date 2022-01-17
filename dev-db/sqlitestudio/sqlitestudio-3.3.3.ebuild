@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PLOCALES="de es fr it pl pt_BR ro_RO ru sk zh_CN"
 inherit desktop plocale qmake-utils xdg
