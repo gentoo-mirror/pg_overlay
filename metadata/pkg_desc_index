@@ -31,7 +31,6 @@ dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.66.1 2.68.1: C++ interface for glib2
 dev-cpp/onetbb 2021.4.0: High level abstract threading library
 dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
-dev-games/freecell-solver 6.4.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 2.7.18_p13 3.10.2: An interpreted, interactive, object-oriented programming language
