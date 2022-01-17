@@ -14,7 +14,7 @@ HOMEPAGE="https://invent.kde.org/plasma/plasma-workspace/-/blob/master/xembed-sn
 
 LICENSE="GPL-2"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 
 DEPEND="
 	>=dev-qt/qtcore-${QTMIN}:5

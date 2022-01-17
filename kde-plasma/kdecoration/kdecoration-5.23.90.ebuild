@@ -14,7 +14,7 @@ DESCRIPTION="Plugin based library to create window decorations"
 
 LICENSE="|| ( LGPL-2.1 LGPL-3 )"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="

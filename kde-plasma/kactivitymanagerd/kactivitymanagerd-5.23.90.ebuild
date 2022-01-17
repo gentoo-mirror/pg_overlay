@@ -12,7 +12,7 @@ DESCRIPTION="System service to manage user's activities, track the usage pattern
 
 LICENSE="|| ( GPL-2 GPL-3 )"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND="

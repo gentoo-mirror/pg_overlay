@@ -13,7 +13,7 @@ DESCRIPTION="Control Center to configure KDE Plasma desktop"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="

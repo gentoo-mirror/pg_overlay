@@ -14,7 +14,7 @@ DESCRIPTION="Extra Plasma applets and engines"
 
 LICENSE="GPL-2 LGPL-2"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE="share webengine"
 
 RESTRICT="test" # bug 727846

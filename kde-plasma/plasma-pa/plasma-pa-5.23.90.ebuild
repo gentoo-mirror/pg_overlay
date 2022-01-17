@@ -12,7 +12,7 @@ DESCRIPTION="Plasma applet for audio volume management using PulseAudio"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="

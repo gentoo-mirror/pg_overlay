@@ -11,7 +11,7 @@ DESCRIPTION="PAM module to not enter KWallet password again after login"
 
 LICENSE="LGPL-2.1"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="
