@@ -52,6 +52,7 @@ multilib_src_configure() {
 		-DGLSLANG_INSTALL_DIR="${ESYSROOT}/usr"
 		-DCMAKE_INSTALL_INCLUDEDIR="${EPREFIX}/usr/include/"
 		-DSPIRV_HEADERS_INSTALL_DIR="${ESYSROOT}/usr/include/spirv"
+		-Drobin_hood_DIR="${EPREFIX}/usr/include/"
 	)
 	cmake_src_configure
 }
