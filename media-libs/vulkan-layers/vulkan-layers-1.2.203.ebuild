@@ -40,6 +40,7 @@ DEPEND="${RDEPEND}
 "
 src_prepare() {
 	sed -i s/SPIRV-Tools-static/SPIRV-Tools-shared/g layers/CMakeLists.txt
+	cmake_src_prepare
 }
 
 multilib_src_configure() {
