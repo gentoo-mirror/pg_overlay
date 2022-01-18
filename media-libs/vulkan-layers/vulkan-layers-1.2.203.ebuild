@@ -38,8 +38,8 @@ DEPEND="${RDEPEND}
 		x11-libs/libXrandr:=[${MULTILIB_USEDEP}]
 	)
 "
-src_preapre() {
-	sed -i "s/SPIRV-Tools-static/SPIRV-Tools-shared/g" layers/CMakeLists.txt
+src_prepare() {
+	sed -i s/SPIRV-Tools-static/SPIRV-Tools-shared/g layers/CMakeLists.txt
 }
 
 multilib_src_configure() {
