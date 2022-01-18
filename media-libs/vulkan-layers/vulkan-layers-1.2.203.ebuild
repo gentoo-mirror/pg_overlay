@@ -38,6 +38,10 @@ DEPEND="${RDEPEND}
 		x11-libs/libXrandr:=[${MULTILIB_USEDEP}]
 	)
 "
+src_prepare() {
+	sed -i s/SPIRV-Tools-static/SPIRV-Tools-shared/g layers/CMakeLists.txt
+	cmake_src_prepare
+}
 
 multilib_src_configure() {
 	local mycmakeargs=(
@@ -52,6 +56,7 @@ multilib_src_configure() {
 		-DGLSLANG_INSTALL_DIR="${ESYSROOT}/usr"
 		-DCMAKE_INSTALL_INCLUDEDIR="${EPREFIX}/usr/include/"
 		-DSPIRV_HEADERS_INSTALL_DIR="${ESYSROOT}/usr/include/spirv"
+ 		-DBUILD_WERROR=OFF
 	)
 	cmake_src_configure
 }
