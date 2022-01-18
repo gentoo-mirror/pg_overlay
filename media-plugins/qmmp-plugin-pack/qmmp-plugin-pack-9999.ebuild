@@ -21,7 +21,6 @@ RDEPEND="
 	dev-qt/qtwidgets:5
 	media-libs/taglib
 	=media-sound/qmmp-$(ver_cut 1-2)*
-	
 "
 DEPEND="${RDEPEND}
 	dev-lang/yasm
