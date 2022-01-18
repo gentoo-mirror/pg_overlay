@@ -15,7 +15,9 @@ LICENSE="MIT"
 SLOT="0"
 
 src_install() {
-	cmake_src_install
-	#insinto /usr/include
-	#doins src/include/robin_hood.h
+	insinto /usr/include
+	doins src/include/robin_hood.h
+
+	insinto /usr/lib64/cmake/robin-hood-hashing
+	doins cmake/config.cmake.in robin_hood-config.cmake
 }
