@@ -14,6 +14,14 @@ HOMEPAGE="https://github.com/martinus/robin-hood-hashing"
 LICENSE="MIT"
 SLOT="0"
 
+src_configure() {
+	local mycmakeargs=(
+		-DRH_STANDALONE_PROJECT=ON
+		-DCMAKE_CXX_EXTENSIONS=ON
+	)
+	cmake_src_configure
+}
+
 src_install() {
 	cmake_src_install
 	insinto /usr/include
