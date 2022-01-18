@@ -17,7 +17,7 @@ IUSE=""
 
 RDEPEND="
 	dev-qt/qtcore:5
-	dev-qt/qtgui:5
+	dev-qt/qtnetwork:5
 	dev-qt/qtwidgets:5
 	media-libs/taglib
 	=media-sound/qmmp-$(ver_cut 1-2)*
@@ -29,6 +29,7 @@ DEPEND="${RDEPEND}
 
 src_prepare() {
 	mycmakeargs=(
+		-DUSE_FFAP=1
 		-DUSE_FFVIDEO=0
 		-DUSE_GOOM=0
 		-DUSE_SRC=0
@@ -36,4 +37,4 @@ src_prepare() {
 	)
 
 	cmake_src_prepare
-	}
+}
