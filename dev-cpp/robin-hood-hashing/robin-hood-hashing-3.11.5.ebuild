@@ -17,13 +17,10 @@ SLOT="0"
 src_configure() {
 	local mycmakeargs=(
 		-DRH_STANDALONE_PROJECT=OFF
-		-DCMAKE_CXX_EXTENSIONS=ON
 	)
 	cmake_src_configure
 }
 
 src_install() {
 	cmake_src_install
-	insinto /usr/include
-	doins src/include/robin_hood.h
 }
