@@ -16,7 +16,7 @@ SLOT="0"
 
 src_configure() {
 	local mycmakeargs=(
-		-DRH_STANDALONE_PROJECT=ON
+		-DRH_STANDALONE_PROJECT=OFF
 		-DCMAKE_CXX_EXTENSIONS=ON
 	)
 	cmake_src_configure
