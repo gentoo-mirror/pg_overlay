@@ -15,6 +15,7 @@ LICENSE="MIT"
 SLOT="0"
 
 src_install() {
+	cmake_src_install
 	insinto /usr/include
 	doins src/include/robin_hood.h
 }
