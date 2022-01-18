@@ -1,11 +1,11 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit meson git-r3
 
-DESCRIPTION="A library for interfacing Music Player Daemon (media-sound/mpd)"
+DESCRIPTION="A C library which implements the Music Player Daemon protocol"
 HOMEPAGE="https://www.musicpd.org"
 EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
