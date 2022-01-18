@@ -1118,7 +1118,7 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-rust-simd
 	mozconfig_add_options_ac '' --enable-strip
 	mozconfig_add_options_ac '' --enable-webrtc
-	mozconfig_add_options_ac '' --with-wayland
+	use nox11 && mozconfig_add_options_ac '' --with-wayland
 
 	mozconfig_add_options_ac '' MOZ_ENABLE_WAYLAND=1
 
