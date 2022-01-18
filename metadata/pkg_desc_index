@@ -29,6 +29,7 @@ app-text/yelp-tools 41.0: Collection of tools for building and converting docume
 dev-cpp/abseil-cpp 20210324.2: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/onetbb 2021.4.0: High level abstract threading library
+dev-cpp/robin-hood-hashing 3.11.5: Fast & memory efficient hashtable based on robin hood hashing for C++11/14/17/20
 dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
