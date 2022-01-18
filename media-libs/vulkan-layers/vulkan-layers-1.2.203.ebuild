@@ -39,8 +39,8 @@ DEPEND="${RDEPEND}
 	)
 "
 src_preapre() {
-	sed -i s/SPIRV-Tools-static/SPIRV-Tools-shared/g layers/CMakeList.txt
-
+	sed -i "s/SPIRV-Tools-static/SPIRV-Tools-shared/g" layers/CMakeList.txt
+}
 
 multilib_src_configure() {
 	local mycmakeargs=(
