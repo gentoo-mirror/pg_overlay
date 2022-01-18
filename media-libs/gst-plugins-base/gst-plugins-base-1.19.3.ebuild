@@ -10,7 +10,7 @@ DESCRIPTION="Basepack of plugins for gstreamer"
 HOMEPAGE="https://gstreamer.freedesktop.org/"
 
 LICENSE="GPL-2+ LGPL-2+"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~mips ppc ppc64 ~riscv ~sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~sparc-solaris ~x64-solaris ~x86-solaris"
 
 # For OpenGL we have three separate concepts, with a list of possibilities in each:
 #  * opengl APIs - opengl and/or gles2; USE=opengl and USE=gles2 enable these accordingly; if neither is enabled, OpenGL helper library and elements are not built at all and all the other options aren't relevant
@@ -43,7 +43,7 @@ REQUIRED_USE="
 # Dependencies needed by opengl library and plugin (enabled via USE gles2 and/or opengl)
 # dmabuf automagic from libdrm headers (drm_fourcc.h) and EGL, so ensure it with USE=egl (platform independent header used only, thus no MULTILIB_USEDEP); provides dmabuf based upload/download/eglimage options
 GL_DEPS="
-	>=media-libs/mesa-9.0[egl?,gbm?,gles2?,wayland?,${MULTILIB_USEDEP}]
+	>=media-libs/mesa-9.0[gles2?,wayland?,${MULTILIB_USEDEP}]
 	egl? (
 		x11-libs/libdrm
 	)
@@ -53,6 +53,7 @@ GL_DEPS="
 	)
 	wayland? (
 		dev-libs/wayland[${MULTILIB_USEDEP}]
+		>=dev-libs/wayland-protocols-1.15
 	)
 
 	>=media-libs/graphene-1.4.0[${MULTILIB_USEDEP}]
