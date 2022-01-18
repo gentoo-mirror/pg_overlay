@@ -3,8 +3,6 @@
 
 EAPI=8
 
-inherit cmake
-
 KEYWORDS="amd64 arm arm64 ppc ppc64 ~riscv x86"
 SRC_URI="https://github.com/martinus/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
@@ -19,5 +17,5 @@ src_install() {
 	doins src/include/robin_hood.h
 
 	insinto /usr/lib64/cmake/robin-hood-hashing
-	doins cmake/config.cmake.in robin_hood-config.cmake
+	doins cmake/config.cmake.in /usr/lib64/cmake/robin-hood-hashing/robin_hood-config.cmake
 }
