@@ -48,12 +48,15 @@ src_prepare() {
 }
 
 src_configure() {
+	export ac_cv_lib_id3tag__lz___id3_file_open=yes
+
 	local myconf=(
 		--with-db-path=/var/lib/minidlna
 		--with-log-path=/var/log/minidlna
 		$(use_enable netgear)
 		$(use_enable readynas)
 		$(use_enable tivo)
+		ac_cv_lib_id3tag__lz___id3_file_open=yes
 	)
 	use zeroconf || myconf+=(
 		ac_cv_lib_avahi_client_avahi_threaded_poll_new=no
