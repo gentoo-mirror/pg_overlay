@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 PLOCALES="cs da de en eo es fa fi fr gl he hu ie it ja ko lt nb nl pl pt pt_BR ru sk sv uk zh_CN"
 
 inherit meson git-r3 plocale
@@ -23,11 +23,9 @@ RDEPEND="
 	>=media-libs/libmpdclient-2.9
 	sys-libs/ncurses:=[unicode(+)]
 	lirc? ( app-misc/lirc )
-	pcre? ( dev-libs/libpcre )
+	pcre? ( dev-libs/libpcre2 )
 "
-DEPEND="${RDEPEND}
-	>=dev-libs/boost-1.62
-"
+DEPEND="${RDEPEND}"
 
 src_prepare() {
 	default
