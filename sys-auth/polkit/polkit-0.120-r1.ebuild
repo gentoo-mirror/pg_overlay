@@ -62,7 +62,8 @@ QA_MULTILIB_PATHS="
 
 PATCHES=(
 	#https://bugs.gentoo.org/698910
-	"${FILESDIR}"/polkit-0.120-duktape.patch
+	"${FILESDIR}/polkit-0.120-duktape.patch"
+	"${FILESDIR}/polkit-0.120-meson.patch"
 )
 
 src_prepare() {
