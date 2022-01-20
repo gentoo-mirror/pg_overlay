@@ -102,7 +102,7 @@ gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-frameworks/kdelibs4support 5.90.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-frameworks/knotifications 5.90.0: Framework for notifying the user of an event
-kde-frameworks/plasma 5.90.0: Plasma framework
+kde-frameworks/plasma 5.90.0-r1: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 mail-client/claws-mail 4.0.0: An email client (and news reader) based on GTK+
 mail-client/thunderbird 91.5.0: Thunderbird Mail Client
