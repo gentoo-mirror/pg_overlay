@@ -48,8 +48,6 @@ src_prepare() {
 }
 
 src_configure() {
-	export ac_cv_lib_id3tag__lz___id3_file_open=yes
-
 	local myconf=(
 		--with-db-path=/var/lib/minidlna
 		--with-log-path=/var/log/minidlna
@@ -57,6 +55,8 @@ src_configure() {
 		$(use_enable readynas)
 		$(use_enable tivo)
 		ac_cv_lib_id3tag__lz___id3_file_open=yes
+		ac_cv_lib_avformat__lavcodec__lavutil__lz___av_open_input_file=yes
+		ac_cv_lib_avformat__lavcodec__lavutil__lz___avformat_open_input=yes
 	)
 	use zeroconf || myconf+=(
 		ac_cv_lib_avahi_client_avahi_threaded_poll_new=no
