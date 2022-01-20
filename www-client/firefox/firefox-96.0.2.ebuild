@@ -3,7 +3,7 @@
 
 EAPI="7"
 
-FIREFOX_PATCHSET="firefox-96-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-96-patches-02j.tar.xz"
 
 LLVM_MAX_SLOT=13
 
@@ -66,7 +66,7 @@ IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
 IUSE+=" jack lto +openh264 pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx system-png +system-webp"
 IUSE+=" wayland wifi"
-IUSE+=" kde +privacy +nox11"
+IUSE+=" +kde +privacy nox11"
 
 # Firefox-only IUSE
 IUSE+=" geckodriver"
@@ -371,7 +371,7 @@ pkg_pretend() {
 		if use pgo || use lto || use debug ; then
 			CHECKREQS_DISK_BUILD="13500M"
 		else
-			CHECKREQS_DISK_BUILD="6400M"
+			CHECKREQS_DISK_BUILD="6500M"
 		fi
 
 		check-reqs_pkg_pretend
@@ -846,8 +846,10 @@ src_configure() {
 
 	mozconfig_use_enable wifi necko-wifi
 
-	if use wayland ; then
-		mozconfig_add_options_ac '+wayland' --enable-default-toolkit=cairo-gtk3 #-wayland
+	if use wayland && use nox11; then
+		mozconfig_add_options_ac '+wayland +nox11' --enable-default-toolkit=cairo-gtk3
+	elif wayland && ! use nox11; then
+		mozconfig_add_options_ac '+wayland -nox11' --enable-default-toolkit=cairo-gtk3-wayland
 	else
 		mozconfig_add_options_ac '' --enable-default-toolkit=cairo-gtk3
 	fi
