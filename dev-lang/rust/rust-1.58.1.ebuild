@@ -42,7 +42,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/(-)?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug doc miri nightly parallel-compiler rls rustfmt rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug dist doc miri nightly parallel-compiler rls rustfmt rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -439,7 +439,7 @@ src_configure() {
 
 		[dist]
 		src-tarball = false
-		compression-formats = ["gz"]
+		compression-formats = ["xz"]
 	_EOF_
 
 	for v in $(multilib_get_enabled_abi_pairs); do
@@ -730,6 +730,11 @@ src_install() {
 
 	insinto /etc/env.d/rust
 	doins "${T}/provider-${P}"
+
+	if use dist; then
+		insinto "/usr/lib/${PN}/${PV}/dist"
+		doins -r "${S}/build/dist/."
+	fi
 }
 
 pkg_postinst() {
