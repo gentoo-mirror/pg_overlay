@@ -17,5 +17,5 @@ mozilla-libavcodec58_91.patch
 mozilla-silence-no-return-type.patch
 mozilla-bmo1724679.patch
 
-#firefox-kde.patch
-#firefox-branded-icons.patch
+firefox-kde.patch
+firefox-branded-icons.patch
