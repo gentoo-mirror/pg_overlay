@@ -1,7 +1,7 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 2021-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9,10} )
 inherit cmake git-r3 python-single-r1
@@ -14,11 +14,11 @@ EGIT_BRANCH="RC_2_0"
 
 LICENSE="BSD"
 SLOT="0/2.0"
-KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~sparc ~x86"
+KEYWORDS=""
 IUSE="+dht debug gnutls python ssl test"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
+RESTRICT="!test? ( test )"
 
-RESTRICT="!test? ( test ) test" # not yet fixed
 DEPEND="
 	dev-libs/boost:=[threads(+)]
 	python? (
@@ -64,4 +64,15 @@ src_configure() {
 	use python && mycmakeargs+=( -Dboost-python-module-name="python" )
 
 	cmake_src_configure
+}
+
+src_test() {
+	local myctestargs=(
+		# Needs running UPnP server
+		-E "test_upnp"
+	)
+
+	# Checked out Fedora's test workarounds for inspiration
+	# https://src.fedoraproject.org/rpms/rb_libtorrent/blob/rawhide/f/rb_libtorrent.spec#_120
+	LD_LIBRARY_PATH="${BUILD_DIR}:${LD_LIBRARY_PATH}" cmake_src_test
 }

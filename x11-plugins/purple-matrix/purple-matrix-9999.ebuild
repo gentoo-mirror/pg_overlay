@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id: 77337142ec368ef43c179461f5ca0beb09d5cd21 $
 
-EAPI=7
+EAPI=8
 
 inherit toolchain-funcs
 
