@@ -1,9 +1,10 @@
 BDEPEND=dev-util/intltool sys-devel/gettext sys-devel/clang sys-devel/llvm virtual/pkgconfig sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.4:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=configure install postinst postrm preinst prepare unpack
-DEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson:= dev-libs/libdispatch aac? ( media-libs/faad2 ) alsa? ( media-libs/alsa-lib ) cdda? ( dev-libs/libcdio:0= media-libs/libcddb dev-libs/libcdio-paranoia:0= ) dts? ( media-libs/libdca ) ffmpeg? ( media-video/ffmpeg ) flac? ( media-libs/flac media-libs/libogg ) mp3? ( media-sound/mpg123 ) musepack? ( media-sound/musepack-tools ) nls? ( virtual/libintl ) notify? ( sys-apps/dbus dev-libs/libdispatch ) opus? ( media-libs/opusfile ) pulseaudio? ( media-sound/pulseaudio ) vorbis? ( media-libs/libvorbis ) mac? ( dev-lang/yasm ) wavpack? ( media-sound/wavpack ) zip? ( dev-libs/libzip ) dev-util/desktop-file-utils x11-misc/shared-mime-info
+DEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson:= dev-libs/libdispatch aac? ( media-libs/faad2 ) alsa? ( media-libs/alsa-lib ) cdda? ( dev-libs/libcdio:0= media-libs/libcddb dev-libs/libcdio-paranoia:0= ) dts? ( media-libs/libdca ) ffmpeg? ( media-video/ffmpeg ) flac? ( media-libs/flac media-libs/libogg ) mp3? ( media-sound/mpg123 ) musepack? ( media-sound/musepack-tools ) nls? ( virtual/libintl ) notify? ( sys-apps/dbus dev-libs/libdispatch ) opus? ( media-libs/opusfile ) pulseaudio? ( media-sound/pulseaudio ) vorbis? ( media-libs/libvorbis ) mac? ( dev-lang/yasm ) wavpack? ( media-sound/wavpack ) zip? ( dev-libs/libzip )
 DESCRIPTION=DeaDBeeF is a modular audio player similar to foobar2000
-EAPI=7
+EAPI=8
 HOMEPAGE=https://deadbeef.sourceforge.io/
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
 INHERIT=autotools plocale xdg git-r3
 IUSE=aac alsa cdda converter cover dts ffmpeg flac +hotkeys mp3 musepack nls notify nullout opus oss pulseaudio shellexec +supereq threads vorbis +mac +wavpack +zip
 KEYWORDS=~amd64 ~x86
@@ -13,4 +14,4 @@ RDEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson:= dev-libs/libdispatch
 REQUIRED_USE=|| ( alsa oss pulseaudio nullout )
 SLOT=0
 _eclasses_=gnuconfig	262062cef0ba4f22b397193da514a350	toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	de4beb52bfa93c4c5d96792a6b5e1784	libtool	241a8f577b9781a42a7421e53448a44e	autotools	6cc26735fa9dd59e8c62880beda05b6e	plocale	89c6aac5da68423465e6fd79fb4ad5fb	xdg-utils	4f29a8b760a594a212abe9c2ba957c31	xdg	6024fbc93167fad782e2032933654857	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da
-_md5_=2961c695a5fd6ef61f2ec9b4d150e897
+_md5_=a2e268beb212cba781673a620e451cd1

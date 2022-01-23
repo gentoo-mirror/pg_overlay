@@ -2,11 +2,11 @@ BDEPEND=virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile prepare unpack
 DEPEND=dev-db/sqlite:3 dev-libs/glib:2 dev-libs/json-glib dev-libs/libgcrypt:= dev-libs/olm:= net-im/pidgin net-libs/http-parser:=
 DESCRIPTION=Libpurple protocol plugin for matrix
-EAPI=7
+EAPI=8
 HOMEPAGE=https://github.com/matrix-org/purple-matrix
 INHERIT=toolchain-funcs git-r3
 PROPERTIES=live
 RDEPEND=dev-db/sqlite:3 dev-libs/glib:2 dev-libs/json-glib dev-libs/libgcrypt:= dev-libs/olm:= net-im/pidgin net-libs/http-parser:=
 SLOT=0
 _eclasses_=toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	de4beb52bfa93c4c5d96792a6b5e1784	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da
-_md5_=33f121117767b4c5ed0b72aa2cffc5d1
+_md5_=a8097f076ad56f4ed3adfb93b43e28e9

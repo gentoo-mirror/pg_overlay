@@ -2,7 +2,7 @@ BDEPEND=sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/
 DEFINED_PHASES=configure install postinst prepare unpack
 DEPEND=>=media-libs/libmpdclient-2.1 dev-libs/boost:=[icu,nls,threads(+)] dev-libs/icu:= net-misc/curl sys-libs/ncurses:=[unicode(+)] sys-libs/readline:= taglib? ( media-libs/taglib ) visualizer? ( sci-libs/fftw:3.0= ) virtual/pkgconfig
 DESCRIPTION=featureful ncurses based MPD client inspired by ncmpc
-EAPI=7
+EAPI=8
 HOMEPAGE=https://ncmpcpp.rybczak.net/ https://github.com/ncmpcpp/ncmpcpp
 INHERIT=autotools git-r3
 IUSE=clock lto outputs taglib visualizer
@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=>=media-libs/libmpdclient-2.1 dev-libs/boost:=[icu,nls,threads(+)] dev-libs/icu:= net-misc/curl sys-libs/ncurses:=[unicode(+)] sys-libs/readline:= taglib? ( media-libs/taglib ) visualizer? ( sci-libs/fftw:3.0= )
 SLOT=0
 _eclasses_=gnuconfig	262062cef0ba4f22b397193da514a350	toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	de4beb52bfa93c4c5d96792a6b5e1784	libtool	241a8f577b9781a42a7421e53448a44e	autotools	6cc26735fa9dd59e8c62880beda05b6e	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da
-_md5_=6519095d2b3cdef4e16b470137a07657
+_md5_=ce4dc2e955089e33f1ab8d5414aa4d5f
