@@ -13,10 +13,6 @@ LICENSE="BSD"
 SLOT="0/1"
 KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~x86-solaris"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-20200413-makefile.patch"
-)
-
 src_prepare() {
 	default
 	eautoreconf
