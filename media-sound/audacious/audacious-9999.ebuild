@@ -1,7 +1,7 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 PLOCALES="ar be bg ca cmn cs da de el en_GB es es_AR es_MX et fi fr gl hu id_ID it ja ko lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sl sq sr sr_RS sv ta tr uk zh_CN zh_TW"
 
 MY_P="${P/_/-}"
