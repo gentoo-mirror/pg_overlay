@@ -36,6 +36,8 @@ REQUIRED_USE="
 
 RESTRICT="mirror strip"
 
+S=${WORKDIR}/uld
+
 pkg_pretend() {
 	if use scanner && ! has_version ${CATEGORY}/${PN}[scanner]; then
 		if ! linux_config_exists || linux_chkconfig_present USB_PRINTER; then
