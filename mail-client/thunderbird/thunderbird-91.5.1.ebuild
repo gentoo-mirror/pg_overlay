@@ -1113,7 +1113,7 @@ src_compile() {
 
 	#local -x GDK_BACKEND=x11
 
-	WOZ_WAYLAND=1 MOZ_WEBRENDER=1 ${virtx_cmd} ./mach build --verbose \
+	MOZ_ENABLE_WAYLAND=1 ${virtx_cmd} ./mach build --verbose \
 		|| die
 }
 
