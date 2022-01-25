@@ -23,7 +23,7 @@ SLOT="2.2"
 EMULTILIB_PKG="true"
 
 # Gentoo patchset (ignored for live ebuilds)
-PATCH_VER=11
+PATCH_VER=12
 PATCH_DEV=dilfridge
 
 if [[ ${PV} == 9999* ]]; then
