@@ -176,7 +176,7 @@ sys-devel/llvm 13.0.1_rc3: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.4: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.14.0_rc1: xfs filesystem utilities
-sys-libs/glibc 2.34-r6: GNU libc C library
+sys-libs/glibc 2.34-r7: GNU libc C library
 sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in the zlib distribution.
 sys-libs/ncurses 6.3_p20220122: console display library
 sys-libs/polly 13.0.1_rc3: Polyhedral optimizations for LLVM
