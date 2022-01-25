@@ -1111,9 +1111,9 @@ src_compile() {
 		addpredict /root
 	fi
 
-	local -x GDK_BACKEND=x11
+	#local -x GDK_BACKEND=x11
 
-	${virtx_cmd} ./mach build --verbose \
+	WOZ_WAYLAND=1 MOZ_WEBRENDER=1 ${virtx_cmd} ./mach build --verbose \
 		|| die
 }
 
