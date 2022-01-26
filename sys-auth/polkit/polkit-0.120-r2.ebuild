@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -113,6 +113,7 @@ src_install() {
 	# meson does not install required files with SUID bit. See
 	#  https://bugs.gentoo.org/816393
 	# Remove the following lines once this has been fixed by upstream
+	# (should be fixed in next release: https://gitlab.freedesktop.org/polkit/polkit/-/commit/4ff1abe4a4c1f8c8378b9eaddb0346ac6448abd8)
 	fperms u+s /usr/bin/pkexec
 	fperms u+s /usr/lib/polkit-1/polkit-agent-helper-1
 }
