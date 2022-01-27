@@ -61,7 +61,7 @@ src_configure() {
 
 	# We need to drop the . from the Python version to satisfy Boost's
 	# FindBoost.cmake module, bug #793038.
-	use python && mycmakeargs+=( -Dboost-python-module-name="python" )
+	use python && mycmakeargs+=( -Dboost-python-module-name="${EPYTHON/./}" )
 
 	cmake_src_configure
 }
