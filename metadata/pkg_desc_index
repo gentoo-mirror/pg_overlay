@@ -113,7 +113,7 @@ media-libs/libmpdclient 9999: A C library which implements the Music Player Daem
 media-libs/libplacebo 4.157.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.20: Simple Direct Media Layer
 media-libs/libuninameslist 20211114: Library of unicode annotation data
-media-libs/mesa 9999: OpenGL-like graphic library for Linux
+media-libs/mesa 9999 9999-r1: OpenGL-like graphic library for Linux
 media-libs/shaderc 2021.3: Collection of tools, libraries and tests for shader compilation
 media-libs/vulkan-layers 1.2.203: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.203: Vulkan Installable Client Driver (ICD) Loader
