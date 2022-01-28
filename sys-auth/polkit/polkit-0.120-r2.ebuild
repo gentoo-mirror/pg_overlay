@@ -64,6 +64,7 @@ PATCHES=(
 	#https://bugs.gentoo.org/698910
 	"${FILESDIR}/polkit-0.120-duktape.patch"
 	"${FILESDIR}/polkit-0.120-meson.patch"
+	"${FILESDIR}/polkit-0.120-CVE-2021-4034.patch"
 )
 
 src_prepare() {
