@@ -1,4 +1,4 @@
-BDEPEND=dev-qt/linguist-tools:5 virtual/pkgconfig || ( dev-util/ninja dev-util/samurai ) >=dev-util/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
+BDEPEND=dev-qt/linguist-tools:5 || ( dev-util/ninja dev-util/samurai ) >=dev-util/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
 DEPEND=dev-qt/qtcore:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 dev-qt/qtx11extras:5 media-video/ffmpeg || ( dev-qt/qtgui:5[X(-)] dev-qt/qtgui:5[xcb(-)] ) alsa? ( media-libs/alsa-lib ) cdio? ( dev-libs/libcdio[cddb] ) dbus? ( dev-qt/qtdbus:5 ) extensions? ( dev-qt/qtdeclarative:5 media-libs/taglib ) gme? ( media-libs/game-music-emu ) libass? ( media-libs/libass ) opengl? ( virtual/opengl ) pipewire? ( media-video/pipewire ) portaudio? ( media-libs/portaudio ) pulseaudio? ( media-sound/pulseaudio ) sid? ( media-libs/libsidplayfp ) shaders? ( >=media-libs/shaderc-2020.1 ) vaapi? ( >=media-video/ffmpeg-4.1.3[vaapi] x11-libs/libva[drm,opengl] ) vdpau? ( media-video/ffmpeg[vdpau] ) videofilters? ( dev-qt/qtconcurrent:5 ) vulkan? ( >=dev-qt/qtgui-5.14.1:5[vulkan] >=media-libs/vulkan-loader-1.2.133 ) xv? ( x11-libs/libXv )
 DESCRIPTION=A Qt-based video player, which can play most formats and codecs
@@ -13,4 +13,4 @@ RDEPEND=dev-qt/qtcore:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 dev-qt/qtx11extras:5 m
 REQUIRED_USE=audiofilters? ( || ( alsa pipewire portaudio pulseaudio ) ) extensions? ( dbus ) shaders? ( vulkan )
 SLOT=0
 _eclasses_=toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	de4beb52bfa93c4c5d96792a6b5e1784	flag-o-matic	a500d7cc40da3de38c361e889153bdf7	multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	a4dab848a4490e8e48cf0baab3e61bc2	xdg-utils	4f29a8b760a594a212abe9c2ba957c31	cmake	acb4b9ecf57675c9859e08a20bf15eca	xdg	6024fbc93167fad782e2032933654857	plocale	89c6aac5da68423465e6fd79fb4ad5fb	git-r3	cc875b0c1e9b3bdac1af0f82f3ba29da
-_md5_=d7ae0a010d010306b045c2c29caafae9
+_md5_=aa6bf01034b93aed0d3bb379b5be1abf
