@@ -65,12 +65,10 @@ RDEPEND="
 		>=dev-qt/qtgui-5.14.1:5[vulkan]
 		>=media-libs/vulkan-loader-1.2.133
 	)
-	xv? ( x11-libs/libXv )"
-
+	xv? ( x11-libs/libXv )
+"
 DEPEND="${RDEPEND}"
-BDEPEND="
-	dev-qt/linguist-tools:5
-	virtual/pkgconfig"
+BDEPEND="dev-qt/linguist-tools:5"
 
 src_prepare() {
 	# disable compress man pages
@@ -92,9 +90,11 @@ src_configure() {
 	local mycmakeargs=(
 		# core
 		-DUSE_LINK_TIME_OPTIMIZATION=ON
+		-DUSE_UPDATES=OFF
 		-DUSE_ALSA=$(usex alsa)
 		-DUSE_AUDIOCD=$(usex cdio)
-		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex dbus) # https://github.com/zaps166/QMPlay2/issues/134
+		-DUSE_DBUS_SUSPEND=$(usex dbus)
+		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex dbus)
 		-DUSE_LIBASS=$(usex libass)
 		-DUSE_NOTIFY=$(usex notifications)
 		-DUSE_OPENGL=$(usex opengl)
@@ -133,7 +133,6 @@ src_configure() {
 		#
 		-DCMAKE_BUILD_TYPE=Release
 		-DUSE_RADIO=OFF
-		-DUSE_UPDATES=OFF
 		-DUSE_PCH=ON
     )
 
