@@ -54,7 +54,8 @@ src_compile() {
 	# TODO: Change to LCL_PLATFORM=qt5?
 	# bug #732758
 	LCL_PLATFORM=qt5 emake \
-		$(usex minimal "" "bigide")
+		$(usex minimal "" "bigide") \
+		-j3
 }
 
 src_install() {
