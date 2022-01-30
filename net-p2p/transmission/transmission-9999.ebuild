@@ -7,9 +7,9 @@ inherit cmake xdg-utils
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/transmission/transmission"
+	EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 else
-	SRC_URI="https://github.com/transmission/transmission-releases/raw/master/${P}.tar.xz"
+	SRC_URI="https://github.com/${PN}/${PN}-releases/raw/master/${P}.tar.xz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~ppc64 ~x86 ~amd64-linux"
 fi
 
@@ -77,6 +77,11 @@ RDEPEND="${COMMON_DEPEND}
 	${ACCT_DEPEND}
 "
 
+src_prepare() {
+	sed -i 's/3.00+/3.00/g' CMakeLists.txt
+	sed -i 's/TR300Z/TR3000/g' CMakeLists.txt
+}
+
 src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_INSTALL_DOCDIR=share/doc/${PF}
@@ -103,6 +108,7 @@ src_configure() {
 		-DWITH_INOTIFY=ON
 		-DWITH_LIBAPPINDICATOR=$(usex appindicator ON OFF)
 		-DWITH_SYSTEMD=OFF
+		-DENABLE_UTP=ON
 	)
 
 	cmake_src_configure
