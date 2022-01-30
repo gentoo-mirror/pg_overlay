@@ -47,9 +47,9 @@ DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
 
 src_prepare() {
 	default
-	sed -i "s/QBT_VERSION_MINOR 4/QBT_VERSION_MINOR 3/g" src/base/version.h.in
+	sed -i "s/QBT_VERSION_MINOR 5/QBT_VERSION_MINOR 3/g" src/base/version.h.in
 	sed -i "s/QBT_VERSION_BUGFIX 0/QBT_VERSION_BUGFIX 9/g" src/base/version.h.in
-	sed -i "s/rc1//g" src/base/version.h.in
+	sed -i "s/alpha1//g" src/base/version.h.in
 	cmake_src_prepare
 }
 
