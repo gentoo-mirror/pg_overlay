@@ -31,7 +31,7 @@ PATCHES=( "${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
 
 src_unpack() {
 	unpack ${A}
-	mv * ${S}
+	mv * ${PN}
 }
 
 src_prepare() {
