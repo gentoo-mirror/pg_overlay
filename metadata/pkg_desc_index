@@ -31,6 +31,7 @@ dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/onetbb 2021.4.0: High level abstract threading library
 dev-cpp/robin-hood-hashing 3.11.5: Fast & memory efficient hashtable based on robin hood hashing for C++11/14/17/20
 dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
+dev-lang/lazarus 2.2.0: Lazarus IDE is a feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 2.7.18_p13 3.10.2-r1: An interpreted, interactive, object-oriented programming language
@@ -44,6 +45,7 @@ dev-libs/libixion 0.17.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.17.2: Standalone file import filter library for spreadsheet documents
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
+dev-libs/qt5pas 2.6.2.2: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/xmlrpc-c 1.54.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/camlp4 4.13_p1: System for writing extensible parsers for programming languages

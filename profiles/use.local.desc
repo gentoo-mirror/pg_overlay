@@ -37,6 +37,7 @@ app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead 
 app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 dev-cpp/abseil-cpp:cxx17 - Build with -DCMAKE_CXX_STANDARD=17 (required by some revdeps)
 dev-db/sqlitestudio:cli - Build CLI interface
+dev-lang/lazarus:minimal - Don't build extra packages from the bigide component
 dev-lang/luajit:lua52compat - Enable some upwards-compatible features from Lua 5.2 that are unlikely to break existing code.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:libedit - Link readline extension against dev-libs/libedit instead of sys-libs/readline.
