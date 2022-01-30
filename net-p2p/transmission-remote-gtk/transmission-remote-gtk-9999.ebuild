@@ -47,4 +47,6 @@ src_configure() {
 		$(meson_native_use_feature ayatana libappindicator)
 		$(meson_native_use_feature rss libmrss)
 	)
+
+	meson_src_configure
 }
