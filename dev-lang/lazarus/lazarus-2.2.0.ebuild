@@ -30,8 +30,8 @@ S="${WORKDIR}/${PN}"
 PATCHES=( "${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
 
 src_unpack() {
-	unpack ${A} ${P}
-	#mv * ${S}
+	unpack ${A}
+	mv * ${PN}
 }
 
 src_prepare() {
