@@ -25,9 +25,14 @@ RDEPEND="${DEPEND}"
 
 RESTRICT="strip" #269221
 
-S="${WORKDIR}/${PN}-${PN}_2_2_0"
+S="${WORKDIR}/${PN}"
 
 PATCHES=( "${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
+
+src_unpack() {
+	unpack ${A}
+	mv * ${S}
+}
 
 src_prepare() {
 	default
