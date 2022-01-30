@@ -25,7 +25,7 @@ RDEPEND="${DEPEND}"
 
 RESTRICT="strip" #269221
 
-S="${WORKDIR}/${PN}"
+S="${WORKDIR}/${PN}-${PN}_2_2_0"
 
 PATCHES=( "${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
 
