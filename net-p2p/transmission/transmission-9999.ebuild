@@ -81,6 +81,7 @@ src_prepare() {
 	default
 	sed -i 's/3.00+/3.00/g' CMakeLists.txt
 	sed -i 's/TR300Z/TR3000/g' CMakeLists.txt
+	cmake_src_prepare
 }
 
 src_configure() {
