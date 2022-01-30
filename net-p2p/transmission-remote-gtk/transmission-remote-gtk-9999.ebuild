@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools gnome2 git-r3
+inherit meson git-r3
 
 DESCRIPTION="GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC"
 HOMEPAGE="https://github.com/transmission-remote-gtk/transmission-remote-gtk"
@@ -33,21 +33,20 @@ DEPEND="${RDEPEND}
 	dev-libs/appstream-glib
 	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
-" # eautoreconf needs sys-devel/autoconf-archive
+"
 
 src_prepare() {
 	default
-	eautoreconf
 }
 
 src_configure() {
 	# Disable overly strict appdata validation
-	gnome2_src_configure \
-		$(use_enable debug) \
-		$(use_with geoip libgeoip) \
-		$(use_with libnotify) \
-		$(use_with libproxy) \
-		$(use_with ayatana libappindicator) \
-		$(use_with rss libmrss) \
-		APPSTREAM_UTIL="$(type -P true)"
+	local emesonargs=(
+		$(meson_native_use_feature geoip)
+		$(meson_native_use_feature libproxy)
+		$(meson_native_use_feature ayatana libappindicator)
+		$(meson_native_use_feature rss libmrss)
+	)
+
+	meson_src_configure
 }
