@@ -30,7 +30,6 @@ RDEPEND="
 	rss? ( >=net-libs/libmrss-0.18 )
 "
 DEPEND="${RDEPEND}
-	dev-libs/appstream-glib
 	>=sys-devel/gettext-0.19.6
 	virtual/pkgconfig
 "
