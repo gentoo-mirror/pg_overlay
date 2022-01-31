@@ -98,7 +98,7 @@ src_configure() {
 		-DTG_OWT_BUILD_AUDIO_BACKENDS=OFF
 		#-DTG_OWT_BUILD_AUDIO_BACKENDS=$(usex alsa)
 		#-DTG_OWT_BUILD_PULSE_BACKEND=$(usex pulseaudio)
-		-DBUILD_SHARED_LIBS-ON
+		-DBUILD_SHARED_LIBS=ON
 	)
 	cmake_src_configure
 }
