@@ -114,9 +114,11 @@ media-libs/imlib2 1.7.4: Version 2 of an advanced replacement library for librar
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 4.157.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libsdl2 2.0.20: Simple Direct Media Layer
+media-libs/libtgvoip 2.4.4_p20220114: VoIP library for Telegram clients
 media-libs/libuninameslist 20211114: Library of unicode annotation data
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2021.3: Collection of tools, libraries and tests for shader compilation
+media-libs/tg_owt 0_pre20220123: WebRTC build for Telegram
 media-libs/vulkan-layers 1.2.203: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.203: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
@@ -145,7 +147,6 @@ net-im/telegram-desktop 3.4.8: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libpsl 0.21.1: C library for the Public Suffix List
-net-libs/libtgvoip 2.4.4_p20220114: VoIP library for Telegram clients
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 1.2.9999-r2 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 17.4.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
@@ -155,7 +156,6 @@ net-libs/tdlib 1.7.0 1.8.0 9999: Cross-platform library for building Telegram cl
 net-libs/telegram-qt 9999: Telegram binding for Qt
 net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protocol
 net-libs/telepathy-qt 0.9.8 9999: Qt bindings for the Telepathy D-Bus protocol
-net-libs/tg_owt 0_pre20220123: WebRTC build for Telegram
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
 net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client
