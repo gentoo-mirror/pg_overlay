@@ -13,12 +13,12 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
 +++ tg_owt-d5c3d43b959c7e9e7d8004b9b7fdadd12ce7d589/CMakeLists.txt
 @@ -21,11 +21,13 @@
  
- option(BUILD_SHARED_LIBS "Builds shared libraries instead of static." ${TG_OWT_PACKAGED_BUILD})
+ option(BUILD_SHARED_LIBS "Builds shared libraries instead of static." OFF)
  option(TG_OWT_USE_PROTOBUF "Use protobuf to generate additional headers. Useful for packaged build." ${BUILD_SHARED_LIBS})
 +option(TG_OWT_USE_X11 "Use X11 for desktop capture on non-Apple Unix." ON)
  option(TG_OWT_USE_PIPEWIRE "Use pipewire for desktop capture on non-Apple Unix." ON)
  option(TG_OWT_DLOPEN_PIPEWIRE "dlopen pipewire 0.3 for desktop capture on non-Apple Unix." ${not_packaged_build})
- option(TG_OWT_BUILD_AUDIO_BACKENDS "Build webrtc audio backends." ON)
+ option(TG_OWT_BUILD_AUDIO_BACKENDS "Build webrtc audio backends." OFF)
  
  if (NOT UNIX OR APPLE)
 +    set(TG_OWT_USE_X11 OFF)
