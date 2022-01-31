@@ -1,0 +1,76 @@
+diff -up tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_capture.cpp.omv~ tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_capture.cpp
+--- tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_capture.cpp.omv~	2022-01-17 03:15:14.735425631 +0100
++++ tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_capture.cpp	2022-01-17 03:15:26.039485672 +0100
+@@ -147,7 +147,7 @@ struct Instance::Inner::Private {
+ 	AVIOContext *ioContext = nullptr;
+ 	AVFormatContext *fmtContext = nullptr;
+ 	AVStream *stream = nullptr;
+-	AVCodec *codec = nullptr;
++	const AVCodec *codec = nullptr;
+ 	AVCodecContext *codecContext = nullptr;
+ 	bool opened = false;
+ 	bool processing = false;
+diff -up tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.cpp.omv~ tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.cpp
+diff -up tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h.omv~ tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h
+--- tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h.omv~	2022-01-17 03:13:37.480907282 +0100
++++ tdesktop-3.4.5-full/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h	2022-01-17 03:13:43.653940285 +0100
+@@ -60,7 +60,7 @@ protected:
+ 	uchar *ioBuffer = nullptr;
+ 	AVIOContext *ioContext = nullptr;
+ 	AVFormatContext *fmtContext = nullptr;
+-	AVCodec *codec = nullptr;
++	const AVCodec *codec = nullptr;
+ 	int32 streamId = 0;
+ 
+ 	bool _opened = false;
+diff -up tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/AudioStreamingPart.cpp.omv~ tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/AudioStreamingPart.cpp
+--- tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/AudioStreamingPart.cpp.omv~	2022-01-17 03:00:36.622758149 +0100
++++ tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/AudioStreamingPart.cpp	2022-01-17 03:01:15.158955495 +0100
+@@ -170,7 +170,7 @@ public:
+ 
+         _frame = av_frame_alloc();
+ 
+-        AVInputFormat *inputFormat = av_find_input_format("ogg");
++        const AVInputFormat *inputFormat = av_find_input_format("ogg");
+         if (!inputFormat) {
+             _didReadToEnd = true;
+             return;
+@@ -209,7 +209,7 @@ public:
+             audioCodecParameters = inCodecpar;
+             audioStream = inStream;
+ 
+-            _durationInMilliseconds = (int)((inStream->duration + inStream->first_dts) * 1000 / 48000);
++            _durationInMilliseconds = (int)((inStream->duration + av_stream_get_first_dts(inStream)) * 1000 / 48000);
+ 
+             if (inStream->metadata) {
+                 AVDictionaryEntry *entry = av_dict_get(inStream->metadata, "TG_META", nullptr, 0);
+@@ -255,7 +255,7 @@ public:
+         }
+ 
+         if (audioCodecParameters && audioStream) {
+-            AVCodec *codec = avcodec_find_decoder(audioCodecParameters->codec_id);
++            const AVCodec *codec = avcodec_find_decoder(audioCodecParameters->codec_id);
+             if (codec) {
+                 _codecContext = avcodec_alloc_context3(codec);
+                 ret = avcodec_parameters_to_context(_codecContext, audioCodecParameters);
+diff -up tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/VideoStreamingPart.cpp.omv~ tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/VideoStreamingPart.cpp
+--- tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/VideoStreamingPart.cpp.omv~	2022-01-17 02:52:50.631362110 +0100
++++ tdesktop-3.4.5-full/Telegram/ThirdParty/tgcalls/tgcalls/group/VideoStreamingPart.cpp	2022-01-17 02:53:00.541413321 +0100
+@@ -337,7 +337,7 @@ public:
+ 
+         int ret = 0;
+ 
+-        AVInputFormat *inputFormat = av_find_input_format(container.c_str());
++        const AVInputFormat *inputFormat = av_find_input_format(container.c_str());
+         if (!inputFormat) {
+             _didReadToEnd = true;
+             return;
+@@ -380,7 +380,7 @@ public:
+         }
+ 
+         if (videoCodecParameters && videoStream) {
+-            AVCodec *codec = avcodec_find_decoder(videoCodecParameters->codec_id);
++            const AVCodec *codec = avcodec_find_decoder(videoCodecParameters->codec_id);
+             if (codec) {
+                 _codecContext = avcodec_alloc_context3(codec);
+                 ret = avcodec_parameters_to_context(_codecContext, videoCodecParameters);

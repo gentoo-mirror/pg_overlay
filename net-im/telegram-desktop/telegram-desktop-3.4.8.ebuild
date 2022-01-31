@@ -71,6 +71,7 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-3.1.0-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
+	"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
 )
 
 pkg_pretend() {
