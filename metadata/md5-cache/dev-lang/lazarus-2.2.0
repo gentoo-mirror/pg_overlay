@@ -12,4 +12,4 @@ RESTRICT=strip
 SLOT=0
 SRC_URI=https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_2_2_0/lazarus-lazarus_2_2_0.tar.bz2 -> lazarus-2.2.0.tar.bz2
 _eclasses_=desktop	c0d27bf73aa08ca05b663dbd31fbef28
-_md5_=3e234efc3c018b9da77700bd5e16ef62
+_md5_=ace46629041e9381572643b61c6b0d1d

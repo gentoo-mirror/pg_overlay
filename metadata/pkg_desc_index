@@ -145,6 +145,7 @@ net-im/telegram-desktop 3.4.8: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-libs/libpsl 0.21.1: C library for the Public Suffix List
+net-libs/libtgvoip 2.4.4_p20220114: VoIP library for Telegram clients
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 1.2.9999-r2 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 17.4.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
@@ -154,6 +155,7 @@ net-libs/tdlib 1.7.0 1.8.0 9999: Cross-platform library for building Telegram cl
 net-libs/telegram-qt 9999: Telegram binding for Qt
 net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protocol
 net-libs/telepathy-qt 0.9.8 9999: Qt bindings for the Telepathy D-Bus protocol
+net-libs/tg_owt 0_pre20220123: WebRTC build for Telegram
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
 net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client

@@ -332,6 +332,7 @@ net-im/pidgin:zephyr - Enable Zephyr protocol support
 net-im/telegram-desktop:enchant - Enable the app-text/aspell spell-checking backend
 net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking backend
 net-im/telegram-desktop:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
+net-libs/libtgvoip:dsp - Enable signal processing (echo cancellation, noise suppression, and automatic gain control)
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:lto - Build with link-time optimisation
@@ -342,6 +343,7 @@ net-libs/nodejs:system-icu - Use system dev-libs/icu instead of the bundled vers
 net-libs/nodejs:system-ssl - Use system OpenSSL instead of the bundled one
 net-libs/nodejs:systemtap - Enable SystemTAP/DTrace tracing
 net-libs/telepathy-qt:farstream - Enable support for audio/video calls via farstream
+net-libs/tg_owt:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
 net-nntp/nzbget:parcheck - Enable support for checking PAR archives
