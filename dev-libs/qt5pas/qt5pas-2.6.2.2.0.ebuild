@@ -28,6 +28,8 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
+PATCHES=( "${FILESDIR}/01_inlines-hidden.patch" )
+
 src_unpack() {
 	default
 
