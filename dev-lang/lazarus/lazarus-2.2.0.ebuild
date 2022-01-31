@@ -8,6 +8,7 @@ inherit desktop
 # See https://wiki.freepascal.org/Lazarus_2.0_fixes_branch for notes and
 # changes in FPCVER. It *does* change between minor versions of lazarus.
 FPCVER="3.2.2"
+LAZ_UNPACKED_DIR="${PN}-${PN}_2_2_0"
 
 DESCRIPTION="Lazarus IDE is a feature rich visual programming environment emulating Delphi"
 HOMEPAGE="https://www.lazarus-ide.org/"
@@ -30,8 +31,8 @@ S="${WORKDIR}/${PN}"
 PATCHES=( "${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
 
 src_unpack() {
-	unpack ${A}
-	mv * ${PN}
+	default
+	mv "${WORKDIR}/${LAZ_UNPACKED_DIR}" "${WORKDIR}/${PN}"
 }
 
 src_prepare() {
