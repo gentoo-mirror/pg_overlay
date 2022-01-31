@@ -82,7 +82,7 @@ src_configure() {
 		myconf+=( CONFIG+=no_ffmpeg_player )
 	fi
 
-	#myconf+=( CONFIG+=no_qtmultimedia_player )
+	myconf+=( CONFIG+=no_qtmultimedia_player )
 	eqmake5 "${myconf[@]}" ${PN}.pro
 }
 
