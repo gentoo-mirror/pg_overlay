@@ -139,7 +139,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-media-video/pipewire 0.3.44-r1: Multimedia processing graphs
+media-video/pipewire 0.3.45: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/pidgin 2.14.8 2.9999 9999: GTK Instant Messenger client
 net-im/telegram-desktop 3.4.8: Official desktop client for Telegram
@@ -179,7 +179,7 @@ sys-devel/llvm 13.0.1_rc3: Low Level Virtual Machine
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.4: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.14.0_rc1: xfs filesystem utilities
-sys-libs/glibc 2.34-r7: GNU libc C library
+sys-libs/glibc 2.34-r7 2.35: GNU libc C library
 sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in the zlib distribution.
 sys-libs/ncurses 6.3_p20220122: console display library
 sys-libs/polly 13.0.1: Polyhedral optimizations for LLVM
