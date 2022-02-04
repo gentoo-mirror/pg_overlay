@@ -290,6 +290,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
+	"${FILESDIR}/0001_drop_the_SolarMutex_before_QApplication.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
