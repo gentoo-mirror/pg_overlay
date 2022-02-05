@@ -71,7 +71,7 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-3.4.8-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
-	#"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
+	"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
