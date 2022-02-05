@@ -11,7 +11,7 @@ diff --git a/cmake/external.cmake b/cmake/external.cmake
 index c11df5b6..1f14b359 100644
 --- a/cmake/external.cmake
 +++ b/cmake/external.cmake
-@@ -155,9 +155,14 @@ function(link_libusrsctp target_name)
+@@ -161,7 +161,12 @@ function(link_libusrsctp target_name)
  endfunction()
  
  # libvpx
@@ -25,5 +25,3 @@ index c11df5b6..1f14b359 100644
 +            set(CMAKE_PREFIX_PATH "${TG_OWT_LIBVPX_INSTALL_PATH}/lib/pkgconfig")
 +        endif()
          pkg_check_modules(LIBVPX vpx>=1.10.0)
-         set(LIBVPX_FOUND ${LIBVPX_FOUND} PARENT_SCOPE)
-         if (LIBVPX_FOUND)
