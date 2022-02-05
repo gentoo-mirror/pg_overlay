@@ -63,6 +63,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-0_pre20211207-allow-disabling-X11.patch"
 	"${FILESDIR}/${PN}-0_pre20210626-allow-disabling-pulseaudio.patch"
 	"${FILESDIR}/${PN}-0_pre20211207-fix-dcsctp-references.patch"
+	"${FILESDIR}/${PN}-system-libvpx.patch"
 )
 
 src_unpack() {
