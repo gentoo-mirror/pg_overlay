@@ -9,9 +9,10 @@ DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
 TG_OWT_COMMIT="d618d0b5ff3e59bea0143e6070481f8f4316a428"
-LIBYUV_COMMIT="ad890067f661dc747a975bc55ba3767fe30d4452"
+LIBYUV_COMMIT="b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://archive.org/download/libyuv-${LIBYUV_COMMIT}.tar/libyuv-${LIBYUV_COMMIT}.tar.gz"
+	https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz -> libyuv-${LIBYUV_COMMIT}.tar.gz"
+	#https://archive.org/download/libyuv-${LIBYUV_COMMIT}.tar/libyuv-${LIBYUV_COMMIT}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 # Fetch libyuv archive from: https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz
 
@@ -63,7 +64,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-0_pre20211207-allow-disabling-X11.patch"
 	"${FILESDIR}/${PN}-0_pre20210626-allow-disabling-pulseaudio.patch"
 	"${FILESDIR}/${PN}-0_pre20211207-fix-dcsctp-references.patch"
-	"${FILESDIR}/${PN}-system-libvpx.patch"
+	#"${FILESDIR}/${PN}-system-libvpx.patch"
 )
 
 src_unpack() {
