@@ -117,7 +117,7 @@ media-libs/libtgvoip 2.4.4_p20220114: VoIP library for Telegram clients
 media-libs/libuninameslist 20211114: Library of unicode annotation data
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/shaderc 2021.3: Collection of tools, libraries and tests for shader compilation
-media-libs/tg_owt 0_pre20220123: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20220123 0_pre20220202: WebRTC build for Telegram
 media-libs/vulkan-layers 1.2.203: Vulkan Validation Layers
 media-libs/vulkan-loader 1.2.203: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
