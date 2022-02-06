@@ -60,6 +60,7 @@ src_configure() {
 		-DSTACKTRACE=$(usex debug ON OFF)
 		-DWEBUI=$(usex webui ON OFF)
 		-DSYSTEMD=OFF
+		-DCMAKE_BUILD_TYPE=Release
 	)
 
 	cmake_src_configure
