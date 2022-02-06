@@ -11,7 +11,14 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
 	inherit git-r3
 else
-	SRC_URI="https://gitlab.freedesktop.org/${PN}/${PN}/-/archive/${PV}/${P}.tar.gz"
+	if [[ ${PV} == *_p* ]] ; then
+		MY_COMMIT="d1784cfd861bb3179903b07ab87a16e929c0909f"
+		SRC_URI="https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/${MY_COMMIT}/pipewire-${MY_COMMIT}.tar.bz2 -> ${P}.tar.bz2"
+		S="${WORKDIR}"/${PN}-${MY_COMMIT}
+	else
+		SRC_URI="https://gitlab.freedesktop.org/${PN}/${PN}/-/archive/${PV}/${P}.tar.gz"
+	fi
+
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
@@ -21,7 +28,7 @@ HOMEPAGE="https://pipewire.org/"
 LICENSE="MIT LGPL-2.1+ GPL-2"
 # ABI was broken in 0.3.42 for https://gitlab.freedesktop.org/pipewire/wireplumber/-/issues/49
 SLOT="0/0.4"
-IUSE="bluetooth doc echo-cancel extra gstreamer jack-client jack-sdk lv2 pipewire-alsa ssl systemd test v4l X zeroconf vulkan"
+IUSE="bluetooth doc echo-cancel extra gstreamer jack-client jack-sdk lv2 pipewire-alsa ssl system-service systemd test v4l X zeroconf vulkan"
 
 # Once replacing system JACK libraries is possible, it's likely that
 # jack-client IUSE will need blocking to avoid users accidentally
@@ -29,7 +36,10 @@ IUSE="bluetooth doc echo-cancel extra gstreamer jack-client jack-sdk lv2 pipewir
 # JACK's sink - doing so is likely to yield no audio, cause a CPU
 # cycles consuming loop (and may even cause GUI crashes)!
 
-REQUIRED_USE="jack-sdk? ( !jack-client )"
+REQUIRED_USE="
+	jack-sdk? ( !jack-client )
+	system-service? ( systemd )
+"
 
 RESTRICT="!test? ( test )"
 
@@ -81,6 +91,10 @@ RDEPEND="
 	!pipewire-alsa? ( media-plugins/alsa-plugins[${MULTILIB_USEDEP},pulseaudio] )
 	ssl? ( dev-libs/openssl:= )
 	systemd? ( sys-apps/systemd )
+	system-service? (
+		acct-user/pipewire
+		acct-group/pipewire
+	)
 	v4l? ( media-libs/libv4l )
 	X? (
 		media-libs/libcanberra
@@ -128,6 +142,12 @@ src_prepare() {
 
 		@audio	-	memlock 256
 
+		$(use system-service && {
+			echo @pipewire - rtprio 95
+			echo @pipewire - priority -19
+			echo @pipewire - memlock 4194304
+		})
+
 		# End of ${limitsdfile} from ${P}
 	EOF
 	sed -i "s/volume = merge/volume = ignore/g" spa/plugins/alsa/mixer/paths/analog-output.conf.common
@@ -147,7 +167,10 @@ multilib_src_configure() {
 		$(meson_native_use_feature gstreamer gstreamer-device-provider)
 		$(meson_native_use_feature systemd)
 
-		-Dsystemd-system-service=disabled # Matches upstream
+		$(meson_native_use_feature system-service systemd-system-service)
+		-Dsystemd-system-unit-dir="$(systemd_get_systemunitdir)"
+		-Dsystemd-user-unit-dir="$(systemd_get_userunitdir)"
+
 		$(meson_native_use_feature systemd systemd-user-service)
 		$(meson_feature pipewire-alsa) # Allows integrating ALSA apps into PW graph
 		-Dspa-plugins=enabled
@@ -312,6 +335,17 @@ pkg_postinst() {
 		else
 			ewarn "rc-update delete ofono"
 		fi
+		ewarn
+	fi
+
+	if use system-service; then
+		ewarn
+		ewarn "WARNING: you have enabled the system-service USE flag, which installs"
+		ewarn "the system-wide systemd units that enable PipeWire to run as a system"
+		ewarn "service. This is more than likely NOT what you want. You are strongly"
+		ewarn "advised not to enable this mode and instead stick with systemd user"
+		ewarn "units. The default configuration files will likely not work out of"
+		ewarn "box, and you are on your own with configuration."
 		ewarn
 	fi
 }
