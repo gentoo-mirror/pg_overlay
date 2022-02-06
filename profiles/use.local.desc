@@ -301,6 +301,7 @@ media-video/pipewire:jack-sdk - Use PipeWire as JACK replacement
 media-video/pipewire:lv2 - Allow loading LV2 plugins via media-libs/lv2
 media-video/pipewire:pipewire-alsa - Replace PulseAudio's ALSA plugin with PipeWire's plugin
 media-video/pipewire:ssl - Enable raop-sink support (needs dev-libs/openssl)
+media-video/pipewire:system-service - Install systemd unit files for running as a system service. Not recommended.
 media-video/qmplay2:audiofilters - Build with AudioFilters module
 media-video/qmplay2:avdevice - Build FFmpeg module with libavdevice suport
 media-video/qmplay2:avresample - Use libavresample instead of libswresample

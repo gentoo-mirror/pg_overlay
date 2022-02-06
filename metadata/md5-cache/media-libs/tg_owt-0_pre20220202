@@ -6,10 +6,9 @@ EAPI=8
 HOMEPAGE=https://github.com/desktop-app/tg_owt
 INHERIT=cmake flag-o-matic
 IUSE=screencast +X
-KEYWORDS=amd64 ~ppc64 ~riscv
 LICENSE=BSD
 RDEPEND=dev-cpp/abseil-cpp:=[cxx17(+)] dev-libs/libevent:= dev-libs/openssl:= dev-libs/protobuf:= media-libs/libjpeg-turbo:= >=media-libs/libvpx-1.10.0:= media-libs/openh264:= media-libs/opus media-video/ffmpeg:= net-libs/usrsctp screencast? ( dev-libs/glib:2 media-video/pipewire:= ) X? ( x11-libs/libX11 x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXrender x11-libs/libXrandr x11-libs/libXtst )
 SLOT=0/20220202
 SRC_URI=https://github.com/desktop-app/tg_owt/archive/d618d0b5ff3e59bea0143e6070481f8f4316a428.tar.gz -> tg_owt-0_pre20220202.tar.gz https://chromium.googlesource.com/libyuv/libyuv/+archive/b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a.tar.gz -> libyuv-b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a.tar.gz
 _eclasses_=toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	de4beb52bfa93c4c5d96792a6b5e1784	flag-o-matic	a500d7cc40da3de38c361e889153bdf7	multiprocessing	61c959fc55c15c00bbb1079d6a71370b	ninja-utils	a4dab848a4490e8e48cf0baab3e61bc2	xdg-utils	4f29a8b760a594a212abe9c2ba957c31	cmake	acb4b9ecf57675c9859e08a20bf15eca
-_md5_=19484d846a00fc0a148f01417dfd1d9f
+_md5_=6175f88c338b6e6a71768bc26649eb1e
