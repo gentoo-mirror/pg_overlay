@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
 WX_GTK_VER="3.1-gtk3"
 WANT_AUTOCONF="2.5"
@@ -23,7 +23,7 @@ RDEPEND="
 	sys-libs/binutils-libs:0=
 	sys-libs/readline:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[X?]
+	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[gui?]
 	daemon? ( acct-user/amule )
 	geoip? ( dev-libs/geoip )
 	nls? ( virtual/libintl )
@@ -86,7 +86,7 @@ src_configure() {
 
 	if use X; then
 		myconf+=(
-			$(use_enable remote amule-gui)
+			$(use_enable gui amule-gui)
 			$(use_enable stats alc)
 			$(use_enable stats wxcas)
 		)
@@ -114,13 +114,7 @@ src_install() {
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
 
-	#if use daemon || use webserver; then
-	#	keepdir /var/lib/${PN}
-	#	fowners amule:amule /var/lib/${PN}
-	#	fperms 0750 /var/lib/${PN}
-	#fi
-
-	if use X && use remote; then
+	if use X && use gui; then
 		rm ${D}/usr/bin/amule
 	fi
 }

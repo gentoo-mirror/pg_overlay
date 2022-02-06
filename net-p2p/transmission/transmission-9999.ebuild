@@ -111,6 +111,7 @@ src_configure() {
 		-DWITH_LIBAPPINDICATOR=$(usex appindicator ON OFF)
 		-DWITH_SYSTEMD=OFF
 		-DENABLE_UTP=ON
+		-DCMAKE_BUILD_TYPE=Release
 	)
 
 	cmake_src_configure
