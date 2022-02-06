@@ -62,12 +62,15 @@ src_prepare() {
 	#./makeflags.sh
 	#popd
 
+	append-flags -DASIO_SOCKETS=1
+	append-cppflags -DASIO_SOCKETS=1
 	#eautoreconf
 	./autogen.sh || die
 }
 
 src_configure() {
 	append-flags -DASIO_SOCKETS=1
+	append-cppflags -DASIO_SOCKETS=1
 	local myconf=(
 		--with-denoise-level=0
 		--with-wx-config="${WX_CONFIG}"
