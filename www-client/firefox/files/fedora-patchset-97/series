@@ -6,11 +6,4 @@ mozilla-1170092.patch
 rhbz-1354671.patch
 disable-openh264-download.patch
 
-D132929.diff
-D133209.diff
-D133485.diff
-D133634.diff
-D133885.diff
-D134141.diff
-
 firefox-testing.patch
