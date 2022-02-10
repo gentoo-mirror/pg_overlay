@@ -184,8 +184,6 @@ RDEPEND="${COMMON_DEPEND}
 	)"
 
 DEPEND="${COMMON_DEPEND}
-	x11-libs/libICE
-	x11-libs/libSM
 	pulseaudio? (
 		|| (
 			media-sound/pulseaudio
