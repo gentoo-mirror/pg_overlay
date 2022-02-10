@@ -533,6 +533,9 @@ src_unpack() {
 }
 
 src_prepare() {
+	# Don't run pip check on the host that builds firefox.
+	eapply "${FILESDIR}"/firefox-skip-pip-check.patch
+
 	use lto && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
 	eapply "${WORKDIR}/firefox-patches"
 
