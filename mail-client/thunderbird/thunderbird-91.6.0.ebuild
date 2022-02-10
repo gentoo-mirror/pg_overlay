@@ -38,7 +38,7 @@ MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
 MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
 inherit autotools check-reqs desktop flag-o-matic gnome2-utils \
-	llvm multiprocessing pax-utils python-any-r1 toolchain-funcs \
+	llvm multiprocessing optfeature pax-utils python-any-r1 toolchain-funcs \
 	virtualx xdg
 
 MOZ_SRC_BASE_URI="https://archive.mozilla.org/pub/${MOZ_PN}/releases/${MOZ_PV}"
@@ -59,7 +59,7 @@ HOMEPAGE="https://www.thunderbird.net/"
 
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 
-SLOT="0/$(ver_cut 1)"
+SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 
 IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
@@ -101,7 +101,7 @@ BDEPEND="${PYTHON_DEPS}
 	amd64? ( >=dev-lang/nasm-2.13 )
 	x86? ( >=dev-lang/nasm-2.13 )"
 
-CDEPEND="
+COMMON_DEPEND="
 	>=dev-libs/nss-3.68
 	>=dev-libs/nspr-4.32
 	dev-libs/atk
@@ -157,7 +157,7 @@ CDEPEND="
 	selinux? ( sec-policy/selinux-mozilla )
 	sndio? ( media-sound/sndio )"
 
-RDEPEND="${CDEPEND}
+RDEPEND="${COMMON_DEPEND}
 	jack? ( virtual/jack )
 	openh264? ( media-libs/openh264:*[plugin] )
 	pulseaudio? (
@@ -173,7 +173,7 @@ RDEPEND="${CDEPEND}
 	)
 	!<x11-plugins/enigmail-2.2"
 
-DEPEND="${CDEPEND}
+DEPEND="${COMMON_DEPEND}
 	pulseaudio? (
 		|| (
 			media-sound/pulseaudio
@@ -516,6 +516,9 @@ src_prepare() {
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
+
+	# Make cargo respect MAKEOPTS
+	export CARGO_BUILD_JOBS="$(makeopts_jobs)"
 
 	# Make LTO respect MAKEOPTS
 	sed -i \
@@ -1313,4 +1316,7 @@ pkg_postinst() {
 		elog "If you still want to be able to select between running Mozilla ${PN^}"
 		elog "on X11 or Wayland, you have to re-create these shortcuts on your own."
 	fi
+
+	optfeature_header "Optional runtime features:"
+	optfeature "encrypted chat support" net-libs/libotr
 }
