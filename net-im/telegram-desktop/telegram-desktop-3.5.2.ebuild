@@ -40,11 +40,11 @@ RDEPEND="
 	>=dev-qt/qtwidgets-5.15:5[png,X?]
 	media-fonts/open-sans
 	media-libs/fontconfig:=
-	>=media-libs/libtgvoip-2.4.4_p20211129
+	>=media-libs/libtgvoip-2.4.4_p20220117
 	media-libs/openal
 	media-libs/opus:=
 	media-libs/rnnoise
-	>=media-libs/tg_owt-0_pre20211207[screencast=,X=]
+	>=media-libs/tg_owt-0_pre20220209[screencast=,X=]
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	dbus? (
