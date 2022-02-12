@@ -39,37 +39,6 @@ index 401d65dc6b45..6f502dcaa88b 100644
  [[nodiscard]] crl::time PtsToTime(int64_t pts, AVRational timeBase);
  // Used for full duration conversion.
  [[nodiscard]] crl::time PtsToTimeCeil(int64_t pts, AVRational timeBase);
-diff --git a/Telegram/SourceFiles/media/audio/media_audio_capture.cpp b/Telegram/SourceFiles/media/audio/media_audio_capture.cpp
-index 6ce2456681b3..04c361a37d9e 100644
---- a/Telegram/SourceFiles/media/audio/media_audio_capture.cpp
-+++ b/Telegram/SourceFiles/media/audio/media_audio_capture.cpp
-@@ -147,7 +147,7 @@ struct Instance::Inner::Private {
- 	AVIOContext *ioContext = nullptr;
- 	AVFormatContext *fmtContext = nullptr;
- 	AVStream *stream = nullptr;
--	AVCodec *codec = nullptr;
-+	const AVCodec *codec = nullptr;
- 	AVCodecContext *codecContext = nullptr;
- 	bool opened = false;
- 	bool processing = false;
-diff --git a/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h b/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h
-index 83de13bad267..3d0c670e7be3 100644
---- a/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h
-+++ b/Telegram/SourceFiles/media/audio/media_audio_ffmpeg_loader.h
-@@ -60,9 +60,12 @@ class AbstractFFMpegLoader : public AudioPlayerLoader {
- 	uchar *ioBuffer = nullptr;
- 	AVIOContext *ioContext = nullptr;
- 	AVFormatContext *fmtContext = nullptr;
-+#if LIBAVFORMAT_VERSION_MAJOR >= 59
-+	const
-+#endif
- 	AVCodec *codec = nullptr;
--	int32 streamId = 0;
- 
-+	int32 streamId = 0;
- 	bool _opened = false;
- 
- private:
 diff --git a/Telegram/SourceFiles/media/streaming/media_streaming_file.cpp b/Telegram/SourceFiles/media/streaming/media_streaming_file.cpp
 index 874cf5cd2417..3d2658c880d9 100644
 --- a/Telegram/SourceFiles/media/streaming/media_streaming_file.cpp
