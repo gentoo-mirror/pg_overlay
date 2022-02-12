@@ -16,7 +16,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-#KEYWORDS="~amd64 ~ppc64 ~riscv"
+KEYWORDS="~amd64 ~ppc64 ~riscv"
 IUSE="+dbus enchant +hunspell screencast +spell wayland +X"
 REQUIRED_USE="
 	spell? (
@@ -40,11 +40,11 @@ RDEPEND="
 	>=dev-qt/qtwidgets-5.15:5[png,X?]
 	media-fonts/open-sans
 	media-libs/fontconfig:=
-	>=media-libs/libtgvoip-2.4.4_p20211129
+	>=media-libs/libtgvoip-2.4.4_p20220117
 	media-libs/openal
 	media-libs/opus:=
 	media-libs/rnnoise
-	>=media-libs/tg_owt-0_pre20211207[screencast=,X=]
+	>=media-libs/tg_owt-0_pre20220209[screencast=,X=]
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	dbus? (
@@ -72,6 +72,7 @@ PATCHES=(
 	#"${FILESDIR}/tdesktop-3.4.8-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
 	"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
+	"${FILESDIR}/24044.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
