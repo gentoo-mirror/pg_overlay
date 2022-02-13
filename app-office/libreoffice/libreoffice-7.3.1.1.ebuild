@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -47,7 +47,8 @@ ADDONS_SRC=(
 	# not packaged in Gentoo, https://www.netlib.org/fp/dtoa.c
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
-	"${ADDONS_URI}/skia-m90-45c57e116ee0ce214bdf78405a4762722e4507d9.tar.xz"
+	"${ADDONS_URI}/skia-m97-a7230803d64ae9d44f4e1282444801119a3ae967.tar.xz"
+	"${ADDONS_URI}/libcuckoo-93217f8d391718380c508a722ab9acd5e9081233.tar.gz"
 	"base? (
 		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
 		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
@@ -102,14 +103,6 @@ SLOT="0"
 [[ ${MY_PV} == *9999* ]] || \
 KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86 ~amd64-linux"
 
-BDEPEND="
-	dev-util/intltool
-	sys-devel/bison
-	sys-devel/flex
-	sys-devel/gettext
-	virtual/pkgconfig
-	odk? ( >=app-doc/doxygen-1.8.4 )
-"
 COMMON_DEPEND="${PYTHON_DEPS}
 	app-arch/unzip
 	app-arch/zip
@@ -131,6 +124,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-text/libwpg:0.3
 	>=app-text/libwps-0.4
 	app-text/mythes
+	dev-cpp/abseil-cpp:=
 	>=dev-cpp/clucene-2.3.3.4-r2
 	dev-db/unixODBC
 	dev-lang/perl
@@ -140,7 +134,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/icu:=
 	dev-libs/libassuan
 	dev-libs/libgpg-error
-	dev-libs/liborcus:0/0.16
+	>=dev-libs/liborcus-0.17.2:0/0.17
 	dev-libs/librevenge
 	dev-libs/libxml2
 	dev-libs/libxslt
@@ -152,7 +146,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-gfx/fontforge
 	media-gfx/graphite2
 	media-libs/fontconfig
-	media-libs/freetype:2
+	>=media-libs/freetype-2.11.0-r1:2
 	>=media-libs/harfbuzz-0.9.42:=[graphite,icu]
 	media-libs/lcms:2
 	>=media-libs/libcdr-0.1.0
@@ -162,12 +156,12 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/libpng-1.4:0=
 	>=media-libs/libvisio-0.1.0
 	media-libs/libzmf
+	media-libs/openjpeg:=
 	media-libs/zxing-cpp
 	>=net-libs/neon-0.31.1:=
 	net-misc/curl
 	sci-mathematics/lpsolve
 	sys-libs/zlib
-	virtual/glu
 	virtual/jpeg:0
 	virtual/opengl
 	x11-libs/cairo
@@ -180,19 +174,6 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	bluetooth? (
 		dev-libs/glib:2
 		net-wireless/bluez
-	)
-	clang? (
-		|| (
-			(	sys-devel/clang:12
-				sys-devel/llvm:12
-				=sys-devel/lld-12*	)
-			(	sys-devel/clang:11
-				sys-devel/llvm:11
-				=sys-devel/lld-11*	)
-			(	sys-devel/clang:10
-				sys-devel/llvm:10
-				=sys-devel/lld-10*	)
-		)
 	)
 	coinmp? ( sci-libs/coinor-mp )
 	cups? ( net-print/cups )
@@ -243,7 +224,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-perl/Archive-Zip
 	>=dev-util/cppunit-1.14.0
 	>=dev-util/gperf-3.1
-	dev-util/mdds:1/1.5
+	dev-util/mdds:1/2.0
 	media-libs/glm
 	sys-devel/ucpp
 	x11-base/xorg-proto
@@ -275,6 +256,27 @@ RDEPEND="${COMMON_DEPEND}
 	) )
 	kde? ( kde-frameworks/breeze-icons:* )
 "
+BDEPEND="
+	dev-util/intltool
+	sys-devel/bison
+	sys-devel/flex
+	sys-devel/gettext
+	virtual/pkgconfig
+	clang? (
+		|| (
+			(	sys-devel/clang:13
+				sys-devel/llvm:13
+				=sys-devel/lld-13*	)
+			(	sys-devel/clang:12
+				sys-devel/llvm:12
+				=sys-devel/lld-12*	)
+			(	sys-devel/clang:11
+				sys-devel/llvm:11
+				=sys-devel/lld-11*	)
+		)
+	)
+	odk? ( >=app-doc/doxygen-1.8.4 )
+"
 if [[ ${MY_PV} != *9999* ]] && [[ ${PV} != *_* ]]; then
 	PDEPEND="=app-office/libreoffice-l10n-$(ver_cut 1-2)*"
 else
@@ -289,8 +291,7 @@ PATCHES=(
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
-	"${FILESDIR}/pld-skia-patches.patch"
-	"${FILESDIR}/libreoffice-7.1.5.2-bison-3.8.patch"
+	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
@@ -347,7 +348,6 @@ src_unpack() {
 }
 
 src_prepare() {
-	cp "${FILESDIR}/skia-freetype2.11.patch" external/skia
 	default
 
 	# sandbox violations on many systems, we don't need it. Bug #646406
@@ -385,6 +385,7 @@ src_prepare() {
 			-e ":Keywords: s:pdf;::" \
 			sysui/desktop/menus/draw.desktop || die
 	fi
+	sed -i 's/=thin//g' solenv/gbuild/platform/com_GCC_defs.mk
 }
 
 src_configure() {
@@ -486,6 +487,7 @@ src_configure() {
 		--disable-online-update
 		--disable-openssl
 		--disable-pdfium
+		--disable-qt6
 		--with-extra-buildid="${gentoo_buildid}"
 		--enable-extension-integration
 		--with-external-dict-dir="${EPREFIX}/usr/share/myspell"
@@ -494,6 +496,8 @@ src_configure() {
 		--with-external-tar="${DISTDIR}"
 		--with-lang=""
 		--with-parallelism=$(makeopts_jobs)
+		--with-system-abseil
+		--with-system-openjpeg
 		--with-system-ucpp
 		--with-tls=nss
 		--with-vendor="Gentoo Foundation"
@@ -502,7 +506,9 @@ src_configure() {
 		--with-help="html"
 		--without-helppack-integration
 		--with-system-gpgmepp
+		--without-system-cuckoo
 		--without-system-jfreereport
+		--without-system-libcmis
 		--without-system-sane
 		$(use_enable base report-builder)
 		$(use_enable bluetooth sdremote-bluetooth)
@@ -579,11 +585,7 @@ src_compile() {
 	addpredict /dev/ati
 	addpredict /dev/nvidiactl
 
-	local target
-	use test && target="build" || target="build-nocheck"
-
-	# this is not a proper make script
-	make ${target} || die
+	default
 }
 
 src_test() {
