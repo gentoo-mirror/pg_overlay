@@ -3,52 +3,55 @@
 
 EAPI=8
 
-ECM_TEST="false"
 PVCUT=$(ver_cut 1-2)
 QTMIN=5.15.2
+VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
-DESCRIPTION="Framework for downloading and sharing additional application data"
+DESCRIPTION="Framework providing a full text editor component"
 
 LICENSE="LGPL-2+"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
-IUSE="opds"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
+IUSE="+editorconfig"
+
+RESTRICT="test"
 
 DEPEND="
 	>=dev-qt/qtdeclarative-${QTMIN}:5
 	>=dev-qt/qtgui-${QTMIN}:5
-	>=dev-qt/qtnetwork-${QTMIN}:5
+	>=dev-qt/qtprintsupport-${QTMIN}:5
 	>=dev-qt/qtwidgets-${QTMIN}:5
 	>=dev-qt/qtxml-${QTMIN}:5
-	=kde-frameworks/attica-${PVCUT}*:5
 	=kde-frameworks/karchive-${PVCUT}*:5
+	=kde-frameworks/kauth-${PVCUT}*:5
+	=kde-frameworks/kcodecs-${PVCUT}*:5
 	=kde-frameworks/kcompletion-${PVCUT}*:5
 	=kde-frameworks/kconfig-${PVCUT}*:5
+	=kde-frameworks/kconfigwidgets-${PVCUT}*:5
 	=kde-frameworks/kcoreaddons-${PVCUT}*:5
+	=kde-frameworks/kguiaddons-${PVCUT}*:5
 	=kde-frameworks/ki18n-${PVCUT}*:5
 	=kde-frameworks/kiconthemes-${PVCUT}*:5
 	=kde-frameworks/kio-${PVCUT}*:5
 	=kde-frameworks/kitemviews-${PVCUT}*:5
-	=kde-frameworks/kpackage-${PVCUT}*:5
-	=kde-frameworks/kservice-${PVCUT}*:5
+	=kde-frameworks/kjobwidgets-${PVCUT}*:5
+	=kde-frameworks/kparts-${PVCUT}*:5
 	=kde-frameworks/ktextwidgets-${PVCUT}*:5
 	=kde-frameworks/kwidgetsaddons-${PVCUT}*:5
 	=kde-frameworks/kxmlgui-${PVCUT}*:5
-	opds? ( =kde-frameworks/syndication-${PVCUT}*:5 )
+	=kde-frameworks/sonnet-${PVCUT}*:5
+	=kde-frameworks/syntax-highlighting-${PVCUT}*:5
+	editorconfig? ( app-text/editorconfig-core-c )
 "
-RDEPEND="${DEPEND}
-	>=kde-frameworks/kirigami-${PVCUT}:5
-"
+RDEPEND="${DEPEND}"
+BDEPEND="test? ( >=kde-frameworks/kservice-${PVCUT}:5 )"
 
-# https://mail.kde.org/pipermail/distributions/2022-February/001140.html
 PATCHES=(
-	"${FILESDIR}/${P}-ensure-correct-ProvidersUrl.patch"
-	"${FILESDIR}/${P}-add-conditional-cache-preference.patch"
 )
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake_use_find_package opds KF5Syndication)
+		$(cmake_use_find_package editorconfig EditorConfig)
 	)
 
 	ecm_src_configure
