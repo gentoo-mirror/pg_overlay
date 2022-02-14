@@ -39,13 +39,6 @@ DEPEND="
 RDEPEND="${DEPEND}
 	>=kde-frameworks/kirigami-${PVCUT}:5
 "
-
-# https://mail.kde.org/pipermail/distributions/2022-February/001140.html
-PATCHES=(
-	"${FILESDIR}/${P}-ensure-correct-ProvidersUrl.patch"
-	"${FILESDIR}/${P}-add-conditional-cache-preference.patch"
-)
-
 src_configure() {
 	local mycmakeargs=(
 		$(cmake_use_find_package opds KF5Syndication)
