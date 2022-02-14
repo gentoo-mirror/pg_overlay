@@ -11,7 +11,7 @@ inherit ecm kde.org
 DESCRIPTION="Framework for downloading and sharing additional application data"
 
 LICENSE="LGPL-2+"
-KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="opds"
 
 DEPEND="
@@ -39,6 +39,12 @@ DEPEND="
 RDEPEND="${DEPEND}
 	>=kde-frameworks/kirigami-${PVCUT}:5
 "
+
+# https://mail.kde.org/pipermail/distributions/2022-February/001140.html
+PATCHES=(
+	"${FILESDIR}/${P}-ensure-correct-ProvidersUrl.patch"
+	"${FILESDIR}/${P}-add-conditional-cache-preference.patch"
+)
 
 src_configure() {
 	local mycmakeargs=(
