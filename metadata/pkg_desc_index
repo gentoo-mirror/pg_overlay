@@ -106,7 +106,7 @@ kde-frameworks/breeze-icons 5.91.0: Breeze SVG icon theme
 kde-frameworks/breeze-icons-rcc 5.91.0: Breeze SVG icon theme binary resource
 kde-frameworks/countryflags 5.91.0: Icons of flags for various countries
 kde-frameworks/extra-cmake-modules 5.91.0: Extra modules and scripts for CMake
-kde-frameworks/frameworkintegration 5.91.0-r1: Framework for integrating Qt applications with KDE Plasma workspaces
+kde-frameworks/frameworkintegration 5.91.0: Framework for integrating Qt applications with KDE Plasma workspaces
 kde-frameworks/kactivities 5.91.0: Framework for working with KDE activities
 kde-frameworks/kactivities-stats 5.91.0: Framework for getting the usage statistics collected by the activities service
 kde-frameworks/kapidox 5.91.0: Framework for building KDE API documentation in a standard format and style
@@ -135,8 +135,8 @@ kde-frameworks/kf-env 5: Environment setting required for all KDE Frameworks app
 kde-frameworks/kfilemetadata 5.91.0: Library for extracting file metadata
 kde-frameworks/kglobalaccel 5.91.0: Framework to handle global shortcuts
 kde-frameworks/kguiaddons 5.91.0: Framework providing assorted high-level user interface components
-kde-frameworks/kholidays 5.91.0-r1: Library to determine holidays and other special events for a geographical region
-kde-frameworks/khtml 5.91.0-r1: KHTML web rendering engine
+kde-frameworks/kholidays 5.91.0: Library to determine holidays and other special events for a geographical region
+kde-frameworks/khtml 5.91.0: KHTML web rendering engine
 kde-frameworks/ki18n 5.91.0: Framework based on Gettext for internationalizing user interface text
 kde-frameworks/kiconthemes 5.91.0: Framework for icon theming and configuration
 kde-frameworks/kidletime 5.91.0: Framework for detection and notification of device idle time
@@ -148,7 +148,7 @@ kde-frameworks/kitemmodels 5.91.0: Framework providing data models to help with 
 kde-frameworks/kitemviews 5.91.0: Framework providing additional widgets for item models
 kde-frameworks/kjobwidgets 5.91.0: Framework providing assorted widgets for showing the progress of jobs
 kde-frameworks/kjs 5.91.0: ECMAScipt compatible parser and engine
-kde-frameworks/knewstuff 5.91.0 5.91.0-r1: Framework for downloading and sharing additional application data
+kde-frameworks/knewstuff 5.91.0: Framework for downloading and sharing additional application data
 kde-frameworks/knotifications 5.91.0: Framework for notifying the user of an event
 kde-frameworks/knotifyconfig 5.91.0: Framework for configuring desktop notifications
 kde-frameworks/kpackage 5.91.0: Framework to install and load packages of non binary content
@@ -160,13 +160,13 @@ kde-frameworks/kquickcharts 5.91.0: QtQuick plugin providing high-performance ch
 kde-frameworks/kross 5.91.0: Framework for embedding scripting into applications
 kde-frameworks/krunner 5.91.0: Framework for providing different actions given a string query
 kde-frameworks/kservice 5.91.0: Advanced plugin and service introspection
-kde-frameworks/ktexteditor 5.91.0-r2: Framework providing a full text editor component
+kde-frameworks/ktexteditor 5.91.0: Framework providing a full text editor component
 kde-frameworks/ktextwidgets 5.91.0: Framework providing an assortment of widgets for displaying and editing text
 kde-frameworks/kunitconversion 5.91.0: Framework for converting units
 kde-frameworks/kwallet 5.91.0: Framework providing desktop-wide storage for passwords
 kde-frameworks/kwayland 5.91.0: Qt-style client and server library wrapper for Wayland libraries
 kde-frameworks/kwidgetsaddons 5.91.0: An assortment of high-level widgets for common tasks
-kde-frameworks/kwindowsystem 5.91.0-r1: Framework providing access to properties and features of the window manager
+kde-frameworks/kwindowsystem 5.91.0: Framework providing access to properties and features of the window manager
 kde-frameworks/kxmlgui 5.91.0: Framework for managing menu and toolbar actions in an abstract way
 kde-frameworks/modemmanager-qt 5.91.0: ModemManager bindings for Qt
 kde-frameworks/networkmanager-qt 5.91.0: NetworkManager bindings for Qt
@@ -174,8 +174,8 @@ kde-frameworks/oxygen-icons 5.91.0: Oxygen SVG icon theme
 kde-frameworks/plasma 5.91.0: Plasma framework
 kde-frameworks/prison 5.91.0: QRCode and data matrix barcode library
 kde-frameworks/purpose 5.91.0: Library for providing abstractions to get the developer's purposes fulfilled
-kde-frameworks/qqc2-desktop-style 5.91.0-r1: Style for QtQuickControls 2 that uses QWidget's QStyle for painting
-kde-frameworks/solid 5.91.0-r1: Provider for platform independent hardware discovery, abstraction and management
+kde-frameworks/qqc2-desktop-style 5.91.0: Style for QtQuickControls 2 that uses QWidget's QStyle for painting
+kde-frameworks/solid 5.91.0: Provider for platform independent hardware discovery, abstraction and management
 kde-frameworks/sonnet 5.91.0: Framework for providing spell-checking through abstraction of popular backends
 kde-frameworks/syndication 5.91.0: Library for parsing RSS and Atom feeds
 kde-frameworks/syntax-highlighting 5.91.0: Framework for syntax highlighting
