@@ -15,7 +15,7 @@ LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
 
-DEPEND="
+COMMON_DEPEND="
 	dev-libs/libbsd
 	dev-libs/wayland
 	>=dev-libs/wayland-protocols-1.18
@@ -36,8 +36,12 @@ DEPEND="
 	video_cards_nvidia? ( gui-libs/egl-wayland )
 "
 
+DEPEND="
+	${COMMON_DEPEND}
+"
+
 RDEPEND="
-	${DEPEND}
+	${COMMON_DEPEND}
 	!<=x11-base/xorg-server-1.20.11
 	selinux? ( sec-policy/selinux-xserver )
 "
@@ -66,6 +70,9 @@ src_configure() {
 		-Dxv=true
 		-Dxvfb=true
 		-Ddtrace=false
+		-Ddocs=false
+		-Ddevel-docs=false
+		-Ddocs-pdf=false
 	)
 
 	meson_src_configure
