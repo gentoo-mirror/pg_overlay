@@ -16,8 +16,8 @@
 0016-always-use-EGL-when-building-for-wayland.patch
 0017-If-only-wayland-is-enabled-always-use-it-regardless-.patch
 0018-stub-out-x11-specific-stuff.patch
-0019-allow-turning-on-off-of-X11-and-wayland.patch
-0020-disable-FFVPX.patch
-0021-remove-mozgtk-and-mozwayland.patch
+0019-mozgtk-make-sure-we-link-with-xul.patch
+0020-allow-turning-on-off-of-X11-and-wayland.patch
+0021-disable-FFVPX.patch
 0022-enable-webrender-compositor-by-default.patch
 0023-use-xdg.patch
