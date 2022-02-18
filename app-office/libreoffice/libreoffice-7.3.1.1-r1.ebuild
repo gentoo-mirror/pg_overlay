@@ -293,7 +293,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
 	"${FILESDIR}/kf-5.91.0-detect.patch"
-	"${FILESDIR}/0001_drop_the_SolarMutex_before_QApplication.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
