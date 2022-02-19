@@ -80,6 +80,7 @@ dev-util/google-perftools 2.9.1-r2: Fast, multi-threaded malloc() and nifty perf
 dev-util/itstool 2.0.7: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/mdds 2.0.1: Collection of multi-dimensional data structure and indexing algorithm
+dev-util/qbs 1.21.0: Modern build tool for software projects
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/scanmem 9999: Locate and modify variables in executing processes
@@ -167,7 +168,6 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/cups 2.4.1_pre: The Common Unix Printing System
-net-print/cups-filters 1.28.11: Cups filters
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
 sci-calculators/qalculate-qt 3.22.0: Multi-purpose cross-platform desktop calculator
