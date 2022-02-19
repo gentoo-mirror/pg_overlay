@@ -55,6 +55,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DCMAKE_BUILD_TYPE=Release
 		-DTD_ENABLE_DOTNET=OFF
 		-DTD_ENABLE_JNI=$(usex java)
 		-DTD_ENABLE_LTO=ON
