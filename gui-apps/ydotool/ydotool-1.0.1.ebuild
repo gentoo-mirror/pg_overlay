@@ -20,3 +20,7 @@ DEPEND="${RDEPEND}"
 src_compile() {
 	cmake_src_compile ydotool ydotoold
 }
+
+src_install() {
+	cmake_src_install ydotool ydotoold
+}
