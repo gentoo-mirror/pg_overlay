@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{9,10} )
+PYTHON_COMPAT=( python3_{8..10} )
 
 CMAKE_ECLASS=cmake
 
@@ -21,12 +21,12 @@ KEYWORDS="~amd64 ~ppc64 ~x86"
 IUSE="doc test"
 
 RDEPEND="
-	~dev-util/glslang-11.7.1[${MULTILIB_USEDEP}]
-	~dev-util/spirv-tools-2021.4[${MULTILIB_USEDEP}]
+	~dev-util/glslang-1.3.204[${MULTILIB_USEDEP}]
+	~dev-util/spirv-tools-1.3.204[${MULTILIB_USEDEP}]
 "
 DEPEND="${RDEPEND}
 	${PYTHON_DEPS}
-	~dev-util/spirv-headers-1.2.198
+	~dev-util/spirv-headers-1.3.206
 	doc? ( dev-ruby/asciidoctor )
 	test? (
 		dev-cpp/gtest

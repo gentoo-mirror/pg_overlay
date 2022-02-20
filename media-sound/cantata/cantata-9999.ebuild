@@ -98,6 +98,7 @@ src_configure() {
 		-DENABLE_AVAHI=$(usex zeroconf)
 		-DENABLE_REMOTE_DEVICES=OFF
 		-DENABLE_UDISKS2=$(usex udisks)
+		-DCMAKE_BUILD_TYPE=Release
 	)
 
 	cmake_src_configure
