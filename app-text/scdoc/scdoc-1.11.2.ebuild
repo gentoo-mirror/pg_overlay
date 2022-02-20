@@ -35,10 +35,10 @@ src_compile() {
 			CFLAGS="${BUILD_CFLAGS} -DVERSION='\"${PV}\"'" LDFLAGS="${BUILD_LDFLAGS}"
 		mv scdoc hostscdoc || die 'Failed to rename host scdoc'
 	fi
-	emake CC="$(tc-getCC)" LDFLAGS="${LDFLAGS}" PREFIX="${EPREFIX}/usr" HOST_SCDOC="${MY_HS}"
+	emake LDFLAGS="${LDFLAGS}" PREFIX="${EPREFIX}/usr" HOST_SCDOC="${MY_HS}"
 }
 
 src_install() {
 	emake DESTDIR="${D}" PREFIX="${EPREFIX}/usr" HOST_SCDOC="${MY_HS}" \
-	PCDIR="${ED}/usr/$(get_libdir)/pkgconfig" install
+	PCDIR="${EPREFIX}/usr/$(get_libdir)/pkgconfig" install
 }
