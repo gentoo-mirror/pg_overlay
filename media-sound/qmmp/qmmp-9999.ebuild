@@ -170,6 +170,7 @@ src_configure() {
 		-DUSE_NULL=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
+		-DCMAKE_BUILD_TYPE=Release
 	)
 
 	cmake_src_configure
