@@ -15,7 +15,8 @@ KEYWORDS="~amd64"
 IUSE=""
 
 RDEPEND=""
-DEPEND="${RDEPEND}"
+DEPEND="${RDEPEND}
+	app-text/scdoc"
 
 src_compile() {
 	cmake_src_compile ydotool ydotoold
