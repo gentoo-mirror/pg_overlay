@@ -146,7 +146,7 @@ src_configure() {
 		-DUSE_MAD="$(usex mad)"
 		-DUSE_MIDI="$(usex midi)"
 		-DUSE_MMS="$(usex mms)"
-		-DUSE_MODPLUG="$(usex modplug)"
+		-DUSE_XMP="$(usex modplug)"
 		-DUSE_MPLAYER="$(usex mplayer)"
 		-DUSE_MPC="$(usex musepack)"
 		-DUSE_NOTIFIER="$(usex notifier)"
