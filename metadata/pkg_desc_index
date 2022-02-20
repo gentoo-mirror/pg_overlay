@@ -24,6 +24,7 @@ app-shells/push 3.4: A POSIX shell function to treat a variable like an array, q
 app-shells/quoter 4.2: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/goldendict 9999 9999-r1: Feature-rich dictionary lookup program
 app-text/pastebinit 1.5.1: A software that lets you send anything you want directly to a pastebin
+app-text/scdoc 1.11.2: Standalone tool for generating man pages with a simple syntax
 app-text/yelp-tools 41.0: Collection of tools for building and converting documentation
 dev-cpp/abseil-cpp 20210324.2: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
@@ -96,7 +97,7 @@ gnome-extra/yelp 41.2: Help browser for GNOME
 gui-apps/kdisplay 5.20.0: A small display management app. KScreen replacement
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.2.2: Launcher/menu program for wlroots based wayland compositors such as sway
-gui-apps/ydotool 0.1.9 9999: Generic command-line automation tool (no X!)
+gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
