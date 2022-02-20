@@ -21,11 +21,6 @@ fi
 DESCRIPTION="Vulkan Validation Layers"
 HOMEPAGE="https://github.com/KhronosGroup/Vulkan-ValidationLayers"
 
-PATCHES=(
-	"${FILESDIR}"/${P}-Fix-dependency-detection.patch
-	"${FILESDIR}"/${P}-Dont-use-static-spirv-tools.patch
-)
-
 LICENSE="Apache-2.0"
 SLOT="0"
 IUSE="wayland X"
