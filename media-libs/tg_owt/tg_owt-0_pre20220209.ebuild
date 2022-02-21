@@ -8,7 +8,7 @@ inherit cmake flag-o-matic
 DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
-TG_OWT_COMMIT="d618d0b5ff3e59bea0143e6070481f8f4316a428"
+TG_OWT_COMMIT="4cba1acdd718b700bb33945c0258283689d4eac7"
 LIBYUV_COMMIT="b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
 	https://github.com/perfect7gentleman/sources/raw/main/libyuv-${LIBYUV_COMMIT}.tar.gz"
@@ -19,7 +19,7 @@ S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 
 LICENSE="BSD"
 SLOT="0/${PV##*pre}"
-KEYWORDS="~amd64 ~ppc64 ~riscv"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
 IUSE="screencast +X"
 
 # This package's USE flags may change the ABI and require a rebuild of
@@ -30,9 +30,8 @@ IUSE="screencast +X"
 # - libyuv (no stable versioning, www-client/chromium and media-libs/libvpx bundle it)
 # - libsrtp (project uses private APIs)
 # - pffft (no stable versioning, patched)
-# media-libs/libjpeg-turbo is required for libyuv
 DEPEND="
-	dev-cpp/abseil-cpp:=[cxx17(+)]
+	>=dev-cpp/abseil-cpp-20211102.0:=[cxx17(+)]
 	dev-libs/libevent:=
 	dev-libs/openssl:=
 	dev-libs/protobuf:=
@@ -61,11 +60,9 @@ RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
-	#"${FILESDIR}/${PN}-0_pre20210626-allow-disabling-pipewire.patch"
-	"${FILESDIR}/${PN}-0_pre20211207-allow-disabling-X11.patch"
-	"${FILESDIR}/${PN}-0_pre20210626-allow-disabling-pulseaudio.patch"
-	"${FILESDIR}/${PN}-0_pre20211207-fix-dcsctp-references.patch"
-	"${FILESDIR}/1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
+	"${FILESDIR}/tg_owt-0_pre20220209-allow-disabling-X11.patch"
+	"${FILESDIR}/tg_owt-0_pre20211207-fix-dcsctp-references.patch"
+	"${FILESDIR}//1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
 )
 
 src_unpack() {
@@ -75,13 +72,13 @@ src_unpack() {
 }
 
 src_prepare() {
-	# libvpx source files aren't included in the repository
-	sed -i '/include(cmake\/libvpx.cmake)/d' CMakeLists.txt || die
-
 	# libopenh264 has GENERATED files with yasm that aren't excluded by
 	# EXCLUDE_FROM_ALL, and I have no clue how to avoid this.
 	# These source files aren't used with system-openh264, anyway.
 	sed -i '/include(cmake\/libopenh264.cmake)/d' CMakeLists.txt || die
+
+	# "lol" said the scorpion, "lmao"
+	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
 
 	cmake_src_prepare
 }
@@ -95,13 +92,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DTG_OWT_USE_X11=$(usex X)
 		-DTG_OWT_USE_PIPEWIRE=$(usex screencast)
-
-		# Not required by net-im/telegram-desktop right now, I'd rather avoid
-		#  the (ABI compatibility) headache.
-		-DTG_OWT_BUILD_AUDIO_BACKENDS=OFF
-		#-DTG_OWT_BUILD_AUDIO_BACKENDS=$(usex alsa)
-		#-DTG_OWT_BUILD_PULSE_BACKEND=$(usex pulseaudio)
-		-DBUILD_SHARED_LIBS=ON
 	)
 	cmake_src_configure
 }
