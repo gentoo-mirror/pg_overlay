@@ -9,8 +9,8 @@ This setup is untested, but supported by the GNI build system, see:
 Toggling the WEBRTC_USE_X11 define also affects some files under
 src/modules/audio_device, but that falls under "X11 support", regardless...
 
---- tg_owt-d5c3d43b959c7e9e7d8004b9b7fdadd12ce7d589.orig/CMakeLists.txt
-+++ tg_owt-d5c3d43b959c7e9e7d8004b9b7fdadd12ce7d589/CMakeLists.txt
+--- tg_owt-4cba1acdd718b700bb33945c0258283689d4eac7.orig/CMakeLists.txt
++++ tg_owt-4cba1acdd718b700bb33945c0258283689d4eac7/CMakeLists.txt
 @@ -21,11 +21,13 @@
  
  option(BUILD_SHARED_LIBS "Builds shared libraries instead of static." OFF)
@@ -25,7 +25,7 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
      set(TG_OWT_USE_PIPEWIRE OFF)
  endif()
  
-@@ -84,6 +86,10 @@
+@@ -97,6 +99,10 @@
  add_library(tg_owt)
  init_target(tg_owt)
  
@@ -34,9 +34,9 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
 +endif()
 +
  if (TG_OWT_USE_PIPEWIRE)
-     link_glib(tg_owt)
      if (TG_OWT_DLOPEN_PIPEWIRE)
-@@ -161,10 +167,6 @@
+         include(cmake/generate_stubs.cmake)
+@@ -188,10 +194,6 @@
  include(cmake/libwebrtcbuild.cmake)
  target_link_libraries(tg_owt PUBLIC tg_owt::libwebrtcbuild)
  
@@ -47,12 +47,13 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
  function(add_sublibrary postfix)
      add_library(tg_owt_${postfix} OBJECT)
      init_feature_target(tg_owt_${postfix} ${postfix})
-@@ -2204,6 +2206,37 @@
+@@ -2258,6 +2260,39 @@
      )
  endif()
  
 +if (NOT TG_OWT_USE_X11)
 +    remove_target_sources(tg_owt ${webrtc_loc}
++        # src/modules/desktop_capture/BUILD.gn (rtc_use_x11_extensions)
 +        modules/desktop_capture/linux/mouse_cursor_monitor_x11.cc
 +        modules/desktop_capture/linux/mouse_cursor_monitor_x11.h
 +        modules/desktop_capture/linux/screen_capturer_x11.cc
@@ -74,6 +75,7 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
 +        modules/desktop_capture/linux/x_window_property.cc
 +        modules/desktop_capture/linux/x_window_property.h
 +
++        # screen_drawer_linux.cc depends on x11, rest are revdeps
 +        modules/desktop_capture/screen_drawer.cc
 +        modules/desktop_capture/screen_drawer.h
 +        modules/desktop_capture/screen_drawer_linux.cc
@@ -85,8 +87,8 @@ src/modules/audio_device, but that falls under "X11 support", regardless...
  if (NOT TG_OWT_USE_PIPEWIRE)
      remove_target_sources(tg_owt ${webrtc_loc}
          modules/desktop_capture/linux/base_capturer_pipewire.cc
---- tg_owt-d5c3d43b959c7e9e7d8004b9b7fdadd12ce7d589.orig/cmake/libwebrtcbuild.cmake
-+++ tg_owt-d5c3d43b959c7e9e7d8004b9b7fdadd12ce7d589/cmake/libwebrtcbuild.cmake
+--- tg_owt-4cba1acdd718b700bb33945c0258283689d4eac7.orig/cmake/libwebrtcbuild.cmake
++++ tg_owt-4cba1acdd718b700bb33945c0258283689d4eac7/cmake/libwebrtcbuild.cmake
 @@ -28,6 +28,13 @@
      BWE_TEST_LOGGING_COMPILE_TIME_ENABLE=0
  )

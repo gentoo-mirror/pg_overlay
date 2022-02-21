@@ -14,7 +14,7 @@ S="${WORKDIR}/${PN}-${LIBTGVOIP_COMMIT}"
 
 LICENSE="Unlicense"
 SLOT="0"
-KEYWORDS="amd64 ~ppc64 ~riscv"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
 IUSE="+dsp +alsa pulseaudio"
 
 DEPEND="
@@ -40,6 +40,8 @@ src_prepare() {
 }
 
 src_configure() {
+	# Not using the CMake build despite being the preferred one, because
+	# it's lacking relevant configure options.
 	local myconf=(
 		--disable-dsp  # WebRTC is linked from tg_owt
 		$(use_with alsa)
