@@ -16,7 +16,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~ppc64 ~riscv"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
 IUSE="+dbus enchant +hunspell screencast +spell wayland +X"
 REQUIRED_USE="
 	spell? (
@@ -69,7 +69,7 @@ BDEPEND="
 # dev-libs/jemalloc:=[-lazy-lock] -> https://bugs.gentoo.org/803233
 
 PATCHES=(
-	#"${FILESDIR}/tdesktop-3.4.8-jemalloc-only-telegram.patch"
+	"${FILESDIR}/tdesktop-3.5.2-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
 	"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
 	"${FILESDIR}/24044.patch"
