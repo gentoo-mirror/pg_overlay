@@ -17,7 +17,7 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
-IUSE="+dbus enchant +hunspell screencast +spell wayland +X"
+IUSE="+dbus enchant +hunspell +jemalloc screencast +spell wayland +X"
 REQUIRED_USE="
 	spell? (
 		^^ ( enchant hunspell )
@@ -28,7 +28,6 @@ RDEPEND="
 	!net-im/telegram-desktop-bin
 	app-arch/lz4:=
 	dev-cpp/abseil-cpp:=
-	dev-libs/jemalloc:=[-lazy-lock]
 	dev-libs/libdispatch
 	dev-libs/openssl:=
 	dev-libs/xxhash
@@ -54,6 +53,7 @@ RDEPEND="
 	)
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
+	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
 	wayland? ( kde-frameworks/kwayland:= )
 	X? ( x11-libs/libxcb:= )
 "
@@ -71,6 +71,7 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-3.5.2-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
+	"${FILESDIR}/tdesktop-3.5.2-jemalloc-optional.patch"
 	"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
 	"${FILESDIR}/24044.patch"
 )
