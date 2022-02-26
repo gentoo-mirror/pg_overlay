@@ -49,7 +49,7 @@ DEPEND="
 	)
 "
 RDEPEND="${DEPEND}
-	kdesu? ( sys-apps/dbus[X] )
+	kdesu? ( sys-apps/dbus )
 "
 
 PATCHES=( "${FILESDIR}/${PN}-5.12.80-tests-optional.patch" )
