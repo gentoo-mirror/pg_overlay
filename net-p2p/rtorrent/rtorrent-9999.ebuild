@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 inherit autotools git-r3 linux-info
 
@@ -13,15 +13,14 @@ EGIT_BRANCH="master"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="daemon debug selinux test xmlrpc ipv6"
+IUSE="debug selinux test xmlrpc ipv6"
 RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="=net-libs/libtorrent-9999
 	>=net-misc/curl-7.19.1
 	sys-libs/ncurses:0=
-	xmlrpc? ( dev-libs/xmlrpc-c )"
+	xmlrpc? ( dev-libs/xmlrpc-c:= )"
 RDEPEND="${COMMON_DEPEND}
-	daemon? ( app-misc/screen )
 	selinux? ( sec-policy/selinux-rtorrent )
 "
 DEPEND="${COMMON_DEPEND}
@@ -45,6 +44,11 @@ src_prepare() {
 	# https://github.com/rakshasa/rtorrent/issues/332
 	cp "${FILESDIR}"/rtorrent.1 "${S}"/doc/ || die
 
+	if [[ ${CHOST} != *-darwin* ]]; then
+		# syslibroot is only for macos, change to sysroot for others
+		sed -i 's/Wl,-syslibroot,/Wl,--sysroot,/' "${S}/scripts/common.m4" || die
+	fi
+
 	eautoreconf
 }
 
@@ -63,8 +67,6 @@ src_install() {
 	default
 	doman doc/rtorrent.1
 
-	if use daemon; then
-		newinitd "${FILESDIR}/rtorrentd.init" rtorrentd
-		newconfd "${FILESDIR}/rtorrentd.conf" rtorrentd
-	fi
+	newinitd "${FILESDIR}/rtorrent-r1.init" rtorrent
+	newconfd "${FILESDIR}/rtorrentd.conf" rtorrent
 }
