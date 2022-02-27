@@ -3,9 +3,7 @@
 
 EAPI=7
 
-# generated with cargo-ebuild 0.2.0
-# needs itoa-0.3.4 for tests
-# added bincode-1.2.0 manually
+# don't forget to add itoa-0.3.4 for tests https://bugs.gentoo.org/803512
 CRATES="
 addr2line-0.14.1
 adler-0.2.3
