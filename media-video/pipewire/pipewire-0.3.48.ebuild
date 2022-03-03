@@ -99,6 +99,7 @@ RDEPEND="
 	X? (
 		media-libs/libcanberra
 		x11-libs/libX11
+		x11-libs/libXfixes
 	)
 	zeroconf? ( net-dns/avahi )
 "
@@ -123,9 +124,6 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
-
-	"${FILESDIR}"/${P}-revert-loop-remove-destroy-list-mpd.patch
-	"${FILESDIR}"/${P}-pulse-server-pending-sample-reply-crash.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
@@ -217,6 +215,7 @@ multilib_src_configure() {
 
 		# Just for bell sounds in X11 right now.
 		$(meson_native_use_feature X x11)
+		$(meson_native_use_feature X x11-xfixes)
 		$(meson_native_use_feature X libcanberra)
 	)
 
