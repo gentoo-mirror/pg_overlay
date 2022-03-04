@@ -6,7 +6,7 @@ EAPI=7
 PYTHON_COMPAT=( python3_{9,10} )
 
 inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing \
-	multilib-build python-any-r1 rust-toolchain toolchain-funcs verify-sig
+	multilib multilib-build python-any-r1 rust-toolchain toolchain-funcs verify-sig
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
@@ -148,8 +148,9 @@ QA_SONAME="
 "
 
 QA_PRESTRIPPED="
-	usr/lib/rust/${PV}/lib/rustlib/.*/bin/rust-llvm-dwp
+	usr/lib/${PN}/${PV}/lib/rustlib/.*/bin/rust-llvm-dwp
 "
+
 # An rmeta file is custom binary format that contains the metadata for the crate.
 # rmeta files do not support linking, since they do not contain compiled object files.
 # so we can safely silence the warning for this QA check.
