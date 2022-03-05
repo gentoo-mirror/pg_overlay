@@ -174,6 +174,7 @@ net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and mu
 sci-calculators/qalculate-qt 3.22.0: Multi-purpose cross-platform desktop calculator
 sci-mathematics/mathematica 12.3.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
+sys-apps/dbus 1.14.0_pre: A message bus system, a simple way for applications to talk to each other
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
@@ -191,7 +192,7 @@ virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/perl-version 0.992.900: Virtual for version
 virtual/rust 1.59.0: Virtual for Rust language compiler
-www-client/firefox 97.0.1: Firefox Web Browser
+www-client/firefox 97.0.2: Firefox Web Browser
 x11-base/xorg-server 21.1.3: X.Org X servers
 x11-base/xwayland 22.1.0: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
