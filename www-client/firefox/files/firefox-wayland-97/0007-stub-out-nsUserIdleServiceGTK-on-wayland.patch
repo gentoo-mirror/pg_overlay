@@ -35,7 +35,7 @@ index 884d52a6cab9b..4b2b04f09a49b 100644
 +static bool sInitialized = false;
 +
  static void Initialize() {
-   if (!mozilla::widget::GdkIsX11Display()) {
+   if (!mozilla::widget::IsX11Display()) {
      return;
    }
  
