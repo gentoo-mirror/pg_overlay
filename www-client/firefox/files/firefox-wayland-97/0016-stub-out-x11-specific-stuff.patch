@@ -27,14 +27,6 @@ index 1b46a2aab890f..18f504426e41c 100644
  #include "mozilla/Monitor.h"
  #include "mozilla/Preferences.h"
  #include "mozilla/StaticPrefs_gfx.h"
-@@ -52,6 +51,7 @@
- #  include "GLXLibrary.h"
- #  include "mozilla/X11Util.h"
- #  include "SoftwareVsyncSource.h"
-+#  include "mozilla/gfx/XlibDisplay.h"
- 
- /* Undefine the Status from Xlib since it will conflict with system headers on
-  * OSX */
 diff --git a/widget/gtk/GtkCompositorWidget.cpp b/widget/gtk/GtkCompositorWidget.cpp
 index 89a8248bc0b90..2454006d0dd7b 100644
 --- a/widget/gtk/GtkCompositorWidget.cpp
