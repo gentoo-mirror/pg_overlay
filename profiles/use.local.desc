@@ -149,6 +149,9 @@ media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
 media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
 media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
 media-libs/libplacebo:vulkan - Add support for the vulkan graphics API
+media-libs/libpulse:asyncns - Use libasyncns for asynchronous name resolution.
+media-libs/libpulse:doc - Build the doxygen-described API documentation.
+media-libs/libpulse:glib - Add support to dev-libs/glib-based mainloop for the libpulse client library, to allow using libpulse on glib-based programs.
 media-libs/libsdl2:fcitx4 - Enable support for app-i18n/fcitx 4
 media-libs/libsdl2:gles1 - include OpenGL ES 1.0 support
 media-libs/libsdl2:gles2 - include OpenGL ES 2.0 support
