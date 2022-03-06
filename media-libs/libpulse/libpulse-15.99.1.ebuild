@@ -133,7 +133,7 @@ multilib_src_configure() {
 
 		# Echo cancellation
 		-Dadrian-aec=false
-		-Dwebrtc-aec=enabled
+		-Dwebrtc-aec=disabled
 	)
 
 	if multilib_is_native_abi; then
