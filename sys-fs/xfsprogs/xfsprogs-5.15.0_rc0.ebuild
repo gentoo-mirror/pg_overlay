@@ -1,9 +1,9 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit autotools flag-o-matic toolchain-funcs usr-ldscript
+inherit autotools usr-ldscript
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
@@ -12,8 +12,8 @@ SRC_URI="https://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git/snapshot/${PN}-dev-
 
 LICENSE="LGPL-2.1"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
-IUSE="icu libedit nls"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~mips ppc ppc64 ~riscv ~s390 sparc x86"
+IUSE="icu libedit nls selinux"
 
 RDEPEND=">=sys-apps/util-linux-2.17.2
 	dev-libs/inih
@@ -25,6 +25,7 @@ DEPEND="${RDEPEND}"
 BDEPEND="
 	nls? ( sys-devel/gettext )
 "
+RDEPEND+=" selinux? ( sec-policy/selinux-xfs )"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-4.15.0-docdir.patch
