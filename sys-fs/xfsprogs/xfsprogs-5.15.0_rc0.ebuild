@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools usr-ldscript
+inherit autotools flag-o-matic usr-ldscript
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
@@ -94,7 +94,7 @@ src_compile() {
 
 src_install() {
 	emake DIST_ROOT="${ED}" HAVE_ZIPPED_MANPAGES=false install
-	#emake DIST_ROOT="${ED}" HAVE_ZIPPED_MANPAGES=false install-dev
+	emake DIST_ROOT="${ED}" HAVE_ZIPPED_MANPAGES=false install-dev
 
-	#gen_usr_ldscript -a handle
+	gen_usr_ldscript -a handle
 }
