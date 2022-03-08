@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools usr-ldscript
+inherit autotools flag-o-matic usr-ldscript
 
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
