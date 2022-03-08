@@ -96,5 +96,5 @@ src_install() {
 	emake DIST_ROOT="${ED}" HAVE_ZIPPED_MANPAGES=false install
 	#emake DIST_ROOT="${ED}" HAVE_ZIPPED_MANPAGES=false install-dev
 
-	#gen_usr_ldscript -a handle
+	gen_usr_ldscript -a handle
 }
