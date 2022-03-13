@@ -100,9 +100,9 @@ gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
-kde-frameworks/kdelibs4support 5.91.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/knotifications 5.91.0: Framework for notifying the user of an event
-kde-frameworks/plasma 5.91.0: Plasma framework
+kde-frameworks/kdelibs4support 5.92.0: Framework easing the development transition from KDELibs 4 to KF 5
+kde-frameworks/knotifications 5.92.0: Framework for notifying the user of an event
+kde-frameworks/plasma 5.92.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 5.24.3: Tools based on KDE Frameworks 5 to better interact with the system
 mail-client/claws-mail 4.0.0-r1: An email client (and news reader) based on GTK+
