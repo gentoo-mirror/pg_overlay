@@ -71,8 +71,8 @@ BDEPEND="
 PATCHES=(
 	#"${FILESDIR}/tdesktop-3.5.2-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
-	"${FILESDIR}/tdesktop-3.5.2-jemalloc-optional.patch"
-	#"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
+	#"${FILESDIR}/tdesktop-3.5.2-jemalloc-optional.patch"
+	"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
 	"${FILESDIR}/24044.patch"
 )
 
