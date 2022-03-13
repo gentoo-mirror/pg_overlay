@@ -69,11 +69,11 @@ BDEPEND="
 # dev-libs/jemalloc:=[-lazy-lock] -> https://bugs.gentoo.org/803233
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-3.5.2-jemalloc-only-telegram.patch"
+	#"${FILESDIR}/tdesktop-3.5.2-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
-	"${FILESDIR}/tdesktop-3.5.2-jemalloc-optional.patch"
-	"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
-	"${FILESDIR}/24044.patch"
+	#"${FILESDIR}/tdesktop-3.5.2-jemalloc-optional.patch"
+	#"${FILESDIR}/tdesktop-3.4.5-ffmpeg-5.0.patch"
+	"${FILESDIR}/14.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
