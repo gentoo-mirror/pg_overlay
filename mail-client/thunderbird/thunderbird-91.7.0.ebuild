@@ -106,8 +106,8 @@ COMMON_DEPEND="
 	>=dev-libs/nspr-4.32
 	dev-libs/atk
 	dev-libs/expat
-	>=x11-libs/cairo-1.10[X]
-	>=x11-libs/gtk+-3.4.0:3[X]
+	>=x11-libs/cairo-1.10
+	>=x11-libs/gtk+-3.4.0:3
 	x11-libs/gdk-pixbuf
 	>=x11-libs/pango-1.22.0
 	>=media-libs/mesa-10.2:*
@@ -122,11 +122,7 @@ COMMON_DEPEND="
 	media-video/ffmpeg
 	x11-libs/libX11
 	x11-libs/libXcomposite
-	x11-libs/libXdamage
-	x11-libs/libXext
-	x11-libs/libXfixes
 	x11-libs/libXrender
-	x11-libs/libXt
 	dbus? (
 		sys-apps/dbus
 		dev-libs/dbus-glib

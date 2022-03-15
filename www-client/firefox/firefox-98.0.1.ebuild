@@ -115,26 +115,24 @@ COMMON_DEPEND="
 	>=dev-libs/nspr-4.32
 	dev-libs/atk
 	dev-libs/expat
-	>=x11-libs/cairo-1.10[X]
-	>=x11-libs/gtk+-3.4.0:3[X]
-	x11-libs/gdk-pixbuf
-	>=x11-libs/pango-1.22.0
+	media-libs/alsa-lib
 	>=media-libs/mesa-10.2:*
 	media-libs/fontconfig
 	>=media-libs/freetype-2.9
-	kernel_linux? ( !pulseaudio? ( media-libs/alsa-lib ) )
 	virtual/freedesktop-icon-theme
 	>=x11-libs/pixman-0.19.2
 	>=dev-libs/glib-2.42:2
 	>=sys-libs/zlib-1.2.3
 	>=dev-libs/libffi-3.0.10:=
 	media-video/ffmpeg
+	>=x11-libs/cairo-1.10
+	>=x11-libs/gtk+-3.4.0:3
+	x11-libs/gdk-pixbuf
 	x11-libs/libX11
 	x11-libs/libXcomposite
-	x11-libs/libXdamage
-	x11-libs/libXext
-	x11-libs/libXfixes
 	x11-libs/libXrender
+	x11-libs/libXtst
+	>=x11-libs/pango-1.22.0
 	dbus? (
 		sys-apps/dbus
 		dev-libs/dbus-glib
