@@ -18,7 +18,8 @@ SRC_URI="https://www.python.org/ftp/python/${PV%%_*}/${MY_P}.tar.xz
 	https://dev.gentoo.org/~mgorny/dist/python/${PATCHSET}.tar.xz
 	verify-sig? (
 		https://www.python.org/ftp/python/${PV%%_*}/${MY_P}.tar.xz.asc
-	)"
+	)
+"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="PSF-2"
@@ -32,7 +33,8 @@ RESTRICT="!test? ( test )"
 # run the bootstrap code on your dev box and include the results in the
 # patchset. See bug 447752.
 
-RDEPEND="app-arch/bzip2:=
+RDEPEND="
+	app-arch/bzip2:=
 	app-arch/xz-utils:=
 	dev-lang/python-exec[python_targets_python3_10(-)]
 	dev-libs/libffi:=
@@ -55,19 +57,25 @@ RDEPEND="app-arch/bzip2:=
 		dev-tcltk/tix
 	)
 	xml? ( >=dev-libs/expat-2.1:= )
-	!!<sys-apps/sandbox-2.21"
+	!!<sys-apps/sandbox-2.21
+"
 # bluetooth requires headers from bluez
-DEPEND="${RDEPEND}
+DEPEND="
+	${RDEPEND}
 	bluetooth? ( net-wireless/bluez )
-	test? ( app-arch/xz-utils[extra-filters(+)] )"
+	test? ( app-arch/xz-utils[extra-filters(+)] )
+"
 # autoconf-archive needed to eautoreconf
 BDEPEND="
 	sys-devel/autoconf-archive
 	virtual/awk
 	virtual/pkgconfig
 	verify-sig? ( sec-keys/openpgp-keys-python )
-	!sys-devel/gcc[libffi(-)]"
-RDEPEND+=" !build? ( app-misc/mime-types )"
+	!sys-devel/gcc[libffi(-)]
+"
+RDEPEND+="
+	build? ( app-misc/mime-types )
+"
 
 VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/python.org.asc
 
