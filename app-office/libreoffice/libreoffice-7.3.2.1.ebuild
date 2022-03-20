@@ -569,7 +569,7 @@ src_configure() {
 			myeconfargs+=( --with-beanshell-jar=$(java-pkg_getjar bsh bsh.jar) )
 
 		use libreoffice_extensions_scripting-javascript && \
-			myeconfargs+=( --with-rhino-jar=$(java-pkg_getjar rhino-1.6 js.jar) )
+			myeconfargs+=( --with-rhino-jar=$(java-pkg_getjar rhino-1.6 rhino.jar) )
 	fi
 
 	is-flagq "-flto*" && myeconfargs+=( --enable-lto )
