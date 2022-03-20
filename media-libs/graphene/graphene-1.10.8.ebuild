@@ -31,9 +31,6 @@ BDEPEND="
 	)
 	virtual/pkgconfig
 "
-
-PATCHES=( "${FILESDIR}/1.10.6-fix-vector-check.patch" )
-
 multilib_src_configure() {
 	# TODO: Do we want G_DISABLE_ASSERT as buildtype=release would do upstream?
 	local emesonargs=(
