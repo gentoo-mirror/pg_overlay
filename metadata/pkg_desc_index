@@ -107,6 +107,7 @@ kde-plasma/kde-cli-tools 5.24.3: Tools based on KDE Frameworks 5 to better inter
 mail-client/claws-mail 4.0.0-r1: An email client (and news reader) based on GTK+
 mail-client/thunderbird 91.7.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.0.32: Scanner Access Now Easy - Backends
+media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-base 1.19.3: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.19.3: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.19.3: Open source multimedia framework
