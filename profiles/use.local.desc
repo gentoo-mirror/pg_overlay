@@ -328,6 +328,7 @@ net-im/pidgin:zephyr - Enable Zephyr protocol support
 net-im/telegram-desktop:enchant - Enable the app-text/aspell spell-checking backend
 net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking backend
 net-im/telegram-desktop:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
+net-im/viber:apulse - Use PulseAudio emulation for ALSA
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:lto - Build with link-time optimisation
