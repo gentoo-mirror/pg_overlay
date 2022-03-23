@@ -56,7 +56,7 @@ COMMONDEPEND="
 	dillo? ( www-client/dillo )
 	gnutls? ( >=net-libs/gnutls-3.0 )
 	imap? ( >=net-libs/libetpan-0.57 )
-	ldap? ( >=net-nds/openldap-2.0.7 )
+	ldap? ( >=net-nds/openldap-2.0.7:= )
 	litehtml? (
 		>=dev-libs/glib-2.36:2
 		>=dev-libs/gumbo-0.10

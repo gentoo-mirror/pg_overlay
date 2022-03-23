@@ -106,7 +106,7 @@ KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86 ~amd64-linux"
 COMMON_DEPEND="${PYTHON_DEPS}
 	app-arch/unzip
 	app-arch/zip
-	app-crypt/gpgme:=[cxx]
+	app-crypt/gpgme[cxx]
 	app-text/hunspell:=
 	>=app-text/libabw-0.1.0
 	>=app-text/libebook-0.1
@@ -207,11 +207,11 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		kde-frameworks/kio:5
 		kde-frameworks/kwindowsystem:5
 	)
-	ldap? ( net-nds/openldap )
+	ldap? ( net-nds/openldap:= )
 	libreoffice_extensions_scripting-beanshell? ( dev-java/bsh )
-	libreoffice_extensions_scripting-javascript? ( dev-java/rhino:1.6 )
-	mariadb? ( dev-db/mariadb-connector-c )
-	!mariadb? ( dev-db/mysql-connector-c )
+	libreoffice_extensions_scripting-javascript? ( >=dev-java/rhino-1.7.14:1.6 )
+	mariadb? ( dev-db/mariadb-connector-c:= )
+	!mariadb? ( dev-db/mysql-connector-c:= )
 	pdfimport? ( app-text/poppler:=[cxx] )
 	postgres? ( >=dev-db/postgresql-9.0:*[kerberos] )
 "
