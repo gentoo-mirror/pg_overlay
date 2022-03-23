@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake xdg-utils
+inherit cmake xdg
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org
@@ -20,16 +20,17 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="dbus debug webui gui"
+IUSE="+dbus +gui webui"
 REQUIRED_USE="dbus? ( gui )"
 
 RDEPEND="
-	>=dev-libs/boost-1.62.0-r1:=
+	>=dev-libs/boost-1.65.0-r1:=
+	dev-libs/openssl:=
 	dev-qt/qtcore:5
 	dev-qt/qtnetwork:5[ssl]
 	dev-qt/qtsql:5
 	dev-qt/qtxml:5
-	>=net-libs/libtorrent-rasterbar-1.2.12:0=
+	>=net-libs/libtorrent-rasterbar-1.2.14:=
 	sys-libs/zlib
 	dbus? ( dev-qt/qtdbus:5 )
 	gui? (
@@ -38,12 +39,11 @@ RDEPEND="
 		dev-qt/qtsvg:5
 		dev-qt/qtwidgets:5
 	)"
-DEPEND="${RDEPEND}
-	dev-qt/linguist-tools:5"
+DEPEND="${RDEPEND}"
+BDEPEND="dev-qt/linguist-tools:5
+	virtual/pkgconfig"
 
-BDEPEND="virtual/pkgconfig"
-
-DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
+DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md TODO )
 
 src_prepare() {
 	default
@@ -55,23 +55,27 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DDBUS=$(usex dbus ON OFF)
-		-DGUI=$(usex gui ON OFF)
-		-DSTACKTRACE=$(usex debug ON OFF)
-		-DWEBUI=$(usex webui ON OFF)
+		-DDBUS=$(usex dbus)
+		-DGUI=$(usex gui)
+		-DWEBUI=$(usex webui)
+
+		# musl lacks execinfo.h
+		-DSTACKTRACE=$(usex !elibc_musl)
+
 		-DSYSTEMD=OFF
+
+		# More verbose build logs are preferable for bug reports
+		-DVERBOSE_CONFIGURE=OFF
+
+		# Not yet in ::gentoo
+		-DQT6=OFF
 		-DCMAKE_BUILD_TYPE=Release
 	)
 
 	cmake_src_configure
 }
 
-pkg_postinst() {
-	xdg_icon_cache_update
-	xdg_desktop_database_update
-}
-
-pkg_postrm() {
-	xdg_icon_cache_update
-	xdg_desktop_database_update
+src_install() {
+	cmake_src_install
+	einstalldocs
 }
