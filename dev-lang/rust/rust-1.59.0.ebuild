@@ -50,7 +50,7 @@ IUSE="clippy cpu_flags_x86_sse2 debug dist doc miri nightly parallel-compiler rl
 
 # How to use it:
 # List all the working slots in LLVM_VALID_SLOTS, newest first.
-LLVM_VALID_SLOTS=( 13 )
+LLVM_VALID_SLOTS=( 14 )
 LLVM_MAX_SLOT="${LLVM_VALID_SLOTS[0]}"
 
 # splitting usedeps needed to avoid CI/pkgcheck's UncheckableDep limitation
@@ -111,7 +111,7 @@ DEPEND="
 	elibc_musl? ( sys-libs/libunwind:= )
 	system-llvm? (
 		${LLVM_DEPEND}
-		>=sys-devel/clang-runtime-8.0[libcxx]
+		>=sys-devel/clang-runtime-14.0[libcxx]
 	)
 "
 
