@@ -19,7 +19,7 @@ SLOT="0/2" # libpurple version
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~ia64 ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux"
 IUSE="aqua dbus debug doc eds gadu gnutls groupwise +gstreamer +gtk idn
 meanwhile ncurses networkmanager nls perl pie prediction python sasl spell tcl
-tk +xscreensaver zephyr zeroconf"
+tk v4l +xscreensaver zephyr zeroconf"
 
 # dbus requires python to generate C code for dbus bindings (thus DEPEND only).
 # finch uses libgnt that links with libpython - {R,}DEPEND. But still there is
@@ -30,11 +30,23 @@ tk +xscreensaver zephyr zeroconf"
 RDEPEND="
 	>=dev-libs/glib-2.16
 	>=dev-libs/libxml2-2.6.18
-	ncurses? (
-		>=dev-libs/libgnt-$(ver_cut 1-2)
-		sys-libs/ncurses:=[unicode(+)]
-		dbus? ( ${PYTHON_DEPS} )
-		python? ( ${PYTHON_DEPS} )
+	dbus? (
+		>=dev-libs/dbus-glib-0.71
+		>=sys-apps/dbus-0.90
+		$(python_gen_cond_dep '
+			dev-python/dbus-python[${PYTHON_USEDEP}]
+		')
+	)
+	gadu? ( >=net-libs/libgadu-1.11.0 )
+	gnutls? ( net-libs/gnutls:= )
+	!gnutls? (
+		dev-libs/nspr
+		dev-libs/nss
+	)
+	gstreamer? (
+		media-libs/gstreamer:1.0
+		media-libs/gst-plugins-base:1.0
+		>=net-libs/farstream-0.2.7:0.2
 	)
 	gtk? (
 		>=x11-libs/gtk+-2.10:2[aqua=]
@@ -45,32 +57,21 @@ RDEPEND="
 		eds? ( >=gnome-extra/evolution-data-server-3.6:= )
 		prediction? ( >=dev-db/sqlite-3.3:3 )
 	)
-	gstreamer? (
-		media-libs/gstreamer:1.0
-		media-libs/gst-plugins-base:1.0
-		>=net-libs/farstream-0.2.7:0.2
-	)
-	zeroconf? ( net-dns/avahi[dbus] )
-	dbus? (
-		>=dev-libs/dbus-glib-0.71
-		>=sys-apps/dbus-0.90
-		$(python_gen_cond_dep '
-			dev-python/dbus-python[${PYTHON_USEDEP}]
-		')
-	)
-	perl? ( >=dev-lang/perl-5.16:= )
-	gadu? ( >=net-libs/libgadu-1.11.0 )
-	gnutls? ( net-libs/gnutls:= )
-	!gnutls? (
-		dev-libs/nspr
-		dev-libs/nss
-	)
+	idn? ( net-dns/libidn:= )
 	meanwhile? ( net-libs/meanwhile )
+	ncurses? (
+		>=dev-libs/libgnt-$(ver_cut 1-2)
+		sys-libs/ncurses:=[unicode(+)]
+		dbus? ( ${PYTHON_DEPS} )
+		python? ( ${PYTHON_DEPS} )
+	)
+	networkmanager? ( net-misc/networkmanager )
+	perl? ( >=dev-lang/perl-5.16:= )
+	sasl? ( dev-libs/cyrus-sasl:2 )
 	tcl? ( dev-lang/tcl:0= )
 	tk? ( dev-lang/tk:0= )
-	sasl? ( dev-libs/cyrus-sasl:2 )
-	networkmanager? ( net-misc/networkmanager )
-	idn? ( net-dns/libidn:= )
+	v4l? ( media-plugins/gst-plugins-v4l2 )
+	zeroconf? ( net-dns/avahi[dbus] )
 "
 
 # We want nls in case gtk is enabled, bug #
@@ -97,6 +98,7 @@ REQUIRED_USE="
 	dbus? ( ${PYTHON_REQUIRED_USE} )
 	networkmanager? ( dbus )
 	python? ( ${PYTHON_REQUIRED_USE} )
+	v4l? ( gstreamer )
 "
 
 # Enable Default protocols
@@ -182,36 +184,37 @@ src_configure() {
 		--with-dynamic-prpls="${DYNAMIC_PRPLS}"
 		--with-system-ssl-certs="${EPREFIX}/etc/ssl/certs/"
 		--x-includes="${EPREFIX}"/usr/include/X11
-		$(use_enable ncurses consoleui)
+		$(use_enable dbus)
+		$(use_enable debug)
+		$(use_enable doc doxygen)
+		$(use_enable gstreamer)
 		$(use_enable gtk gtkui)
 		$(use_enable gtk sm)
-		$(usex gtk '--enable-nls' "$(use_enable nls)")
-		$(use gtk && use_enable xscreensaver screensaver)
-		$(use gtk && use_enable prediction cap)
-		$(use gtk && use_enable eds gevolution)
-		$(use gtk && use_enable spell gtkspell)
+		$(use_enable idn)
+		$(use_enable meanwhile)
+		$(use_enable networkmanager nm)
+		$(use_enable ncurses consoleui)
 		$(use_enable perl)
+		$(use_enable sasl cyrus-sasl )
 		$(use_enable tk)
 		$(use_enable tcl)
-		$(use_enable debug)
-		$(use_enable dbus)
-		$(use_enable meanwhile)
-		$(use_enable gstreamer)
-		$(use_with gstreamer gstreamer 1.0)
-		$(use_enable gstreamer farstream)
-		$(use_enable gstreamer vv)
-		$(use_enable sasl cyrus-sasl )
-		$(use_enable doc doxygen)
-		$(use_enable networkmanager nm)
+		$(use_enable v4l farstream)
+		$(use_enable v4l gstreamer-video)
+		$(use_enable v4l vv)
 		$(use_enable zeroconf avahi)
-		$(use_enable idn)
+		$(use_with gstreamer gstreamer 1.0)
+		$(usex gtk '--enable-nls' "$(use_enable nls)")
+		$(use gtk && use_enable eds gevolution)
+		$(use gtk && use_enable prediction cap)
+		$(use gtk && use_enable spell gtkspell)
+		$(use gtk && use_enable xscreensaver screensaver)
 	)
 
-	if use gnutls; then
+	if use gnutls ; then
 		einfo "Disabling NSS, using GnuTLS"
 		myconf+=(
-			--enable-nss=no
 			--enable-gnutls=yes
+			--enable-nss=no
 			--with-gnutls-includes="${EPREFIX}/usr/include/gnutls"
 			--with-gnutls-libs="${EPREFIX}/usr/$(get_libdir)"
 		)
@@ -233,7 +236,7 @@ src_configure() {
 }
 
 src_install() {
-	# setting this here because gnome2.eclass is not EAPI-7 ready
+	# setting this here because we no longer use gnome2.eclass
 	export GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL="1"
 	default
 
