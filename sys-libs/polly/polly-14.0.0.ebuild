@@ -45,7 +45,7 @@ src_configure() {
 		-DLLVM_INCLUDE_TESTS=$(usex test)
 		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 		-DLLVM_CMAKE_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
-		-DLLVM_EXTERNAL_LIT=""
+		-DLLVM_EXTERNAL_LIT=
 	)
 	use test && mycmakeargs+=(
 		-DLLVM_BUILD_TESTS=ON
