@@ -12,3 +12,14 @@ disable-openh264-download.patch
 firefox-nss-addon-hack.patch
 
 mochitest-wayland-workaround.patch
+
+gcc12-D139078.patch
+gcc12-D139088.patch
+0001-GLIBCXX-fix-for-GCC-12.patch
+
+mozilla-526293.patch
+mozilla-1170092.patch
+
+expat-CVE-2022-25235.patch
+expat-CVE-2022-25236.patch
+expat-CVE-2022-25315.patch
