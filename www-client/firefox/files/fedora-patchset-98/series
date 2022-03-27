@@ -1,7 +1,7 @@
 build-disable-elfhack.patch
 mozilla-1669639.patch
 
-0001-GLIBCXX-fix-for-GCC-12.patch
+
 
 firefox-enable-addons.patch
 mozilla-1170092.patch
