@@ -18,7 +18,6 @@ gcc12-D139088.patch
 0001-GLIBCXX-fix-for-GCC-12.patch
 
 mozilla-526293.patch
-mozilla-1170092.patch
 
 expat-CVE-2022-25235.patch
 expat-CVE-2022-25236.patch
