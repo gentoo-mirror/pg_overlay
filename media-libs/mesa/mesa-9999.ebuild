@@ -1,9 +1,9 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
 
-PYTHON_COMPAT=( python3_{7..10} )
+PYTHON_COMPAT=( python3_{8..10} )
 
 inherit llvm meson-multilib python-any-r1 linux-info
 
@@ -111,12 +111,12 @@ RDEPEND="${RDEPEND}
 # 1. List all the working slots (with min versions) in ||, newest first.
 # 2. Update the := to specify *max* version, e.g. < 10.
 # 3. Specify LLVM_MAX_SLOT, e.g. 9.
-LLVM_MAX_SLOT="13"
+LLVM_MAX_SLOT="14"
 LLVM_DEPSTR="
 	|| (
+		sys-devel/llvm:14[${MULTILIB_USEDEP}]
 		sys-devel/llvm:13[${MULTILIB_USEDEP}]
 		sys-devel/llvm:12[${MULTILIB_USEDEP}]
-		sys-devel/llvm:11[${MULTILIB_USEDEP}]
 	)
 	<sys-devel/llvm-$((LLVM_MAX_SLOT + 1)):=[${MULTILIB_USEDEP}]
 "
@@ -421,8 +421,8 @@ multilib_src_configure() {
 		-Dglx=$(usex X dri disabled)
 		-Dshared-glapi=enabled
 		-Ddri3=enabled
-		-Degl=true
-		-Dgbm=true
+		-Degl=enabled
+		-Dgbm=enabled
 		-Dglvnd=true
 		$(meson_feature gles1)
 		$(meson_feature gles2)
