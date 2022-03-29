@@ -90,10 +90,10 @@ COMMON_DEPEND="
 	raspberry-pi? ( >=media-libs/raspberrypi-userland-0_pre20160305-r1 )
 	rubberband? ( >=media-libs/rubberband-1.8.0 )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
-	vaapi? ( x11-libs/libva:=[drm?,X?,wayland?] )
+	vaapi? ( x11-libs/libva:=[drm(+)?,X?,wayland?] )
 	vdpau? ( x11-libs/libvdpau )
 	vulkan? (
-		>=media-libs/libplacebo-3.104.0:=[vulkan]
+		>=media-libs/libplacebo-4.192.1:=[vulkan]
 		media-libs/shaderc
 	)
 	wayland? (
