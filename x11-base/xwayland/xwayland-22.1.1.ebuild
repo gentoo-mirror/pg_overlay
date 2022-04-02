@@ -25,19 +25,19 @@ COMMON_DEPEND="
 	media-fonts/font-util
 	rpc? ( net-libs/libtirpc )
 	unwind? ( sys-libs/libunwind )
-	x11-base/xorg-proto
 	>=x11-libs/libXau-1.0.4
 	>=x11-libs/libXfont2-2.0.1
 	>=x11-libs/libdrm-2.4.89
 	x11-libs/libxkbfile
 	>=x11-libs/libxshmfence-1.1
 	>=x11-libs/pixman-0.27.2
-	>=x11-libs/xtrans-1.3.5
 	video_cards_nvidia? ( gui-libs/egl-wayland )
 "
 
 DEPEND="
 	${COMMON_DEPEND}
+	x11-base/xorg-proto
+	>=x11-libs/xtrans-1.3.5
 "
 
 RDEPEND="
