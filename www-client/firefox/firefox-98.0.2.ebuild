@@ -613,7 +613,7 @@ src_prepare() {
 	einfo +++++++++++++++++++++++++++
 	einfo "Applying FreeBSD's patches"
 	einfo +++++++++++++++++++++++++++
-	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
+	#for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
 
 	### Fedora patches
 	einfo ++++++++++++++++++++++++++
