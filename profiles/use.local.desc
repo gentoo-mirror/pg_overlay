@@ -96,21 +96,6 @@ kde-frameworks/knotifications:phonon - Play notification sounds via media-libs/p
 kde-frameworks/knotifications:qml - Enable QML support via dev-qt/qtdeclarative
 kde-frameworks/knotifications:speech - Enable text-to-speech notification support
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
-mail-client/claws-mail:archive - Enable archiving plugin
-mail-client/claws-mail:bogofilter - Build mail-filter/bogofilter plugin
-mail-client/claws-mail:dillo - Enable dillo html viewer plugin
-mail-client/claws-mail:gdata - Enable plugin for access to Google data providers
-mail-client/claws-mail:gtk2 - Build support for GTK+-2 instead of GTK+-3 (live ebuild only)
-mail-client/claws-mail:libcanberra - Enable sound notification in connection with USE=notification
-mail-client/claws-mail:libnotify - Enable notification on the desktop in connection with USE=notification
-mail-client/claws-mail:litehtml - Enable dev-libs/gumbo html viewer plugin
-mail-client/claws-mail:notification - Notification for new mail in different way, see also USE flags libcanberra, libindicate and libnotify
-mail-client/claws-mail:pgp - Enable PGP support
-mail-client/claws-mail:sieve - Build plugin for sieve filter support
-mail-client/claws-mail:smime - Build plugin for S/MIME support
-mail-client/claws-mail:spam-report - Enable plugin for spam reporting to various services
-mail-client/claws-mail:spamassassin - Build mail-filter/spamassassin plugin
-mail-client/claws-mail:valgrind - Add support for memory debugging using valgrind
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) cabability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
