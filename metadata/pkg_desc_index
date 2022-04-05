@@ -171,7 +171,7 @@ net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmis
 net-print/cups 2.4.1_pre: The Common Unix Printing System
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
-sci-calculators/qalculate-qt 3.22.0: Multi-purpose cross-platform desktop calculator
+sci-calculators/qalculate-qt 4.1.1: Multi-purpose cross-platform desktop calculator
 sci-mathematics/mathematica 12.3.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/dbus 1.14.0_pre: A message bus system, a simple way for applications to talk to each other
