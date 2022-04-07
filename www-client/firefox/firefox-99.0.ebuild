@@ -1067,7 +1067,6 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-gtest-in-build
 
 	mozconfig_add_options_ac '' --disable-instruments
-	mozconfig_add_options_ac '' --disable-ipdl-tests
 
 	mozconfig_add_options_ac '' --disable-jprof
 
