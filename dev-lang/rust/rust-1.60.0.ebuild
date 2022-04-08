@@ -164,7 +164,6 @@ PATCHES=(
 	"${FILESDIR}"/1.55.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
-	"${FILESDIR}"/wasi-libc-clang-14-compat.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
