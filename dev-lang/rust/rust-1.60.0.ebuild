@@ -163,7 +163,7 @@ VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 PATCHES=(
 	"${FILESDIR}"/1.55.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
-	#"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
+	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
