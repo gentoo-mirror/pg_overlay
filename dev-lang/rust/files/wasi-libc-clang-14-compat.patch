@@ -1,0 +1,15 @@
+diff --git a/Makefile b/Makefile
+index a93b10a6757a..518bab0aaf78 100644
+--- a/Makefile
++++ b/Makefile
+@@ -538,6 +538,10 @@ check-symbols: startup_files libc
+ 	    -U__GNUC_PATCHLEVEL__ \
+ 	    -U__VERSION__ \
+ 	    -U__FLOAT128__ \
++	    -U__NO_MATH_ERRNO__ \
++	    -U__BITINT_MAXWIDTH__ \
++	    | grep -vE '^#define __(BOOL|INT|LLONG|LONG|SHRT)_WIDTH__' \
++	    | grep -vE '^#define __INT_(FAST|LEAST)(8|16|32|64)_WIDTH__' \
+ 	    | sed -e 's/__[[:upper:][:digit:]]*_ATOMIC_\([[:upper:][:digit:]_]*\)_LOCK_FREE/__compiler_ATOMIC_\1_LOCK_FREE/' \
+ 	    | grep -v '^#define __FLT16_' \
+ 	    > "$(SYSROOT_SHARE)/predefined-macros.txt"
