@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9,10} )
 
@@ -118,8 +118,7 @@ DEPEND="
 # we need to block older versions due to layout changes.
 RDEPEND="${DEPEND}
 	app-eselect/eselect-rust
-	!<dev-lang/rust-1.47.0-r1
-	!<dev-lang/rust-bin-1.47.0-r1
+	sys-apps/lsb-release
 "
 
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
