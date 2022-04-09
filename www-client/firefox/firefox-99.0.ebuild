@@ -1118,7 +1118,7 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
 	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=0
-	mozconfig_add_options_ac '' MOZ_X11=0
+	mozconfig_add_options_ac '' MOZ_X11=
 	mozconfig_add_options_ac '' USE_X11=0
 
 	### Enable good features
@@ -1139,7 +1139,7 @@ src_configure() {
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export MOZ_X11=0" >> "${S}"/.mozconfig
+	echo "export MOZ_X11=" >> "${S}"/.mozconfig
 	echo "export USE_X11=0" >> "${S}"/.mozconfig
 	echo "export MOZ_ENABLE_WAYLAND=1" >> "${S}"/.mozconfig
 	#######
