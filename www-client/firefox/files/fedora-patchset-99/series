@@ -11,3 +11,5 @@ firefox-nss-addon-hack.patch
 
 D141827.diff
 D141828.diff
+
+libwebrtc-screen-cast-sync.patch
