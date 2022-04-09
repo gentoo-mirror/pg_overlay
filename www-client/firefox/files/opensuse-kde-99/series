@@ -10,6 +10,7 @@ mozilla-bmo1504834-part4.patch
 mozilla-bmo849632.patch
 mozilla-bmo998749.patch
 mozilla-bmo1626236.patch
+mozilla-libavcodec58_91.patch
 
 firefox-kde.patch
 firefox-branded-icons.patch
