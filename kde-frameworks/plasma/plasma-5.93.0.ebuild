@@ -59,10 +59,7 @@ DEPEND="${RDEPEND}
 "
 BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
 
-PATCHES=(
-	"${FILESDIR}/${P}-breeze-light-dark-visual-fix.patch"
-	"${FILESDIR}/${P}-fix-blurry-buttons.patch" # KDE-bug 447977
-)
+PATCHES=( "${FILESDIR}/${PN}-5.92.0-fix-blurry-buttons.patch" ) # KDE-bug 447977
 
 src_configure() {
 	local mycmakeargs=(
