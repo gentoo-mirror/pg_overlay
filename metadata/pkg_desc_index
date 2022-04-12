@@ -72,7 +72,6 @@ dev-python/sip 5.5.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-python/zope-component 4.6: Zope Component Architecture
-dev-qt/qtwebengine 5.15.3.9999: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glslang 11.8.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
@@ -161,7 +160,6 @@ net-libs/telegram-qt 9999: Telegram binding for Qt
 net-libs/telepathy-glib 0.24.1-r1: GLib bindings for the Telepathy D-Bus protocol
 net-libs/telepathy-qt 0.9.8 9999: Qt bindings for the Telepathy D-Bus protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
-net-misc/openssh 9.0_p1_pre: Port of OpenBSD's free SSH release
 net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
 net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
