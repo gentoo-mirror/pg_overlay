@@ -23,8 +23,8 @@ IUSE+=" +meson nls optimization +protobuf +required-use security +src-uri strong
 DEPEND="nls? ( virtual/libintl )
 	sqlite? ( >=dev-db/sqlite-3:= )"
 RDEPEND="${DEPEND}
-	>=app-shells/push-3.1
-	>=app-shells/quoter-4.1"
+	app-shells/push:0/1
+	app-shells/quoter:0/1"
 BDEPEND="meson? (
 		>=dev-util/meson-0.41.0
 		>=dev-util/ninja-1.7.2
@@ -36,7 +36,7 @@ BDEPEND="meson? (
 
 pkg_setup() {
 	# remove stale cache file to prevent collisions
-	local old_cache="${EROOT}var/cache/${PN}"
+	local old_cache="${EROOT}/var/cache/${PN}"
 	test -f "${old_cache}" && rm -f -- "${old_cache}"
 }
 
@@ -146,7 +146,7 @@ src_install() {
 }
 
 pkg_postinst() {
-	local obs="${EROOT}var/cache/eix.previous"
+	local obs="${EROOT}/var/cache/eix.previous"
 	if test -f "${obs}"; then
 		ewarn "Found obsolete ${obs}, please remove it"
 	fi
@@ -155,6 +155,6 @@ pkg_postinst() {
 
 pkg_postrm() {
 	if [ -z "${REPLACED_BY_VERSION}" ]; then
-		rm -rf -- "${EROOT}var/cache/${PN}"
+		rm -rf -- "${EROOT}/var/cache/${PN}"
 	fi
 }
