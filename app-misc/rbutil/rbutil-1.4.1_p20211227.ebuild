@@ -9,7 +9,7 @@ inherit desktop plocale qmake-utils
 DESCRIPTION="Rockbox open source firmware manager for music players"
 HOMEPAGE="https://www.rockbox.org/wiki/RockboxUtility"
 COMMIT="1ddc5a202d6986f5e981ce16c0fce6c49b767765"
-SRC_URI="https://git.rockbox.org/cgit/rockbox.git/snapshot/rockbox-${COMMIT}.tar.bz2"
+SRC_URI="https://git.rockbox.org/cgit/rockbox.git/snapshot/rockbox-${COMMIT}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
