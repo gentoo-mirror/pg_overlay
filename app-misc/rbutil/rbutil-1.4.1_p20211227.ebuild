@@ -35,8 +35,8 @@ S="${WORKDIR}/rockbox-${COMMIT}"
 QTDIR="utils/${PN}qt"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-9999-quazip1.patch
-	"${FILESDIR}"/${PN}-9999-fix-versionstring.patch # bug 734178
+	"${FILESDIR}"/${PN}-1.4.1-quazip1.patch
+	"${FILESDIR}"/${PN}-1.4.1-fix-versionstring.patch # bug 734178
 )
 
 src_prepare() {

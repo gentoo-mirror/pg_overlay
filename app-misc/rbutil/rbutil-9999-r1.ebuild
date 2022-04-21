@@ -33,8 +33,8 @@ S="${WORKDIR}/${P}/utils/${PN}qt"
 QTDIR="utils/${PN}qt"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-fix-versionstring.patch # bug 734178
-	"${FILESDIR}"/${P}-quazip1.patch
+	#"${FILESDIR}"/${P}-fix-versionstring.patch # bug 734178
+	#"${FILESDIR}"/${P}-quazip1.patch
 )
 
 src_prepare() {
