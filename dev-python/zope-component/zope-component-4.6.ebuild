@@ -1,41 +1,55 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-PYTHON_COMPAT=(python3_{9,10})
+EAPI=8
+
+DISTUTILS_USE_PEP517=setuptools
+PYTHON_COMPAT=( python3_{8..10} )
 
 inherit distutils-r1
+
 MY_PN=zope.component
 MY_P=${MY_PN}-${PV}
-
 DESCRIPTION="Zope Component Architecture"
-HOMEPAGE="https://github.com/zopefoundation/zope.component
-	https://docs.zope.org/zope.component/"
+HOMEPAGE="
+	https://pypi.org/project/zope.component/
+	https://github.com/zopefoundation/zope.component/
+"
 SRC_URI="mirror://pypi/${MY_PN:0:1}/${MY_PN}/${MY_P}.tar.gz"
+S=${WORKDIR}/${MY_P}
 
 LICENSE="ZPL"
 SLOT="0"
-KEYWORDS="amd64 ~arm ~arm64 ~ppc64 x86"
-IUSE="test"
+KEYWORDS="amd64 ~arm arm64 ~ppc64 ~riscv x86"
 
-RDEPEND="dev-python/namespace-zope[${PYTHON_USEDEP}]
+RDEPEND="
 	dev-python/zope-event[${PYTHON_USEDEP}]
-	>=dev-python/zope-interface-4.1.0[${PYTHON_USEDEP}]"
-DEPEND="test? ( ${RDEPEND}
-	dev-python/nose[${PYTHON_USEDEP}] )
-	dev-python/setuptools[${PYTHON_USEDEP}]"
+	>=dev-python/zope-interface-4.1.0[${PYTHON_USEDEP}]
+	!dev-python/namespace-zope
+"
+BDEPEND="
+	test? (
+		dev-python/zope-configuration[${PYTHON_USEDEP}]
+		dev-python/zope-i18nmessageid[${PYTHON_USEDEP}]
+		dev-python/zope-testing[${PYTHON_USEDEP}]
+	)
+"
 
-S=${WORKDIR}/${MY_P}
+distutils_enable_tests unittest
 
-RESTRICT="test"
-
-python_test() {
-	nosetests || die
+src_prepare() {
+	# strip rdep specific to namespaces
+	sed -i -e "/'setuptools'/d" setup.py || die
+	distutils-r1_src_prepare
 }
 
-python_install_all() {
-	distutils-r1_python_install_all
+python_compile() {
+	distutils-r1_python_compile
+	find "${BUILD_DIR}" -name '*.pth' -delete || die
+}
 
-	# remove .pth files since dev-python/namespace-zope handles the ns
-	find "${D}" -name '*.pth' -delete || die
+python_test() {
+	cd "${BUILD_DIR}/install$(python_get_sitedir)" || die
+	distutils_write_namespace zope
+	eunittest
 }
