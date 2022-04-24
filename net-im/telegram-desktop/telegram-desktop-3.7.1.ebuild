@@ -43,7 +43,7 @@ RDEPEND="
 	media-libs/openal
 	media-libs/opus:=
 	media-libs/rnnoise
-	~media-libs/tg_owt-0_pre20220209[screencast=,X=]
+	~media-libs/tg_owt-0_pre20220413[screencast=,X=]
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	dbus? (
@@ -74,7 +74,6 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-3.6.0-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
-	"${FILESDIR}/tdesktop-3.5.2-musl.patch"
 	"${FILESDIR}/tdesktop-3.6.1-fix-kwayland-5.93.patch"
 )
 
