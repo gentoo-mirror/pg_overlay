@@ -16,7 +16,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-#KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
+KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
 IUSE="+dbus enchant +hunspell +jemalloc screencast +spell wayland +X"
 REQUIRED_USE="
 	spell? (
@@ -33,6 +33,7 @@ RDEPEND="
 	dev-libs/xxhash
 	>=dev-qt/qtbase-6.2.0:6
 	>=dev-qt/qtsvg-6.2.0:6
+	>=dev-qt/qtwayland-6.2.0:6
 	media-fonts/open-sans
 	media-libs/fontconfig:=
 	~media-libs/libtgvoip-2.4.4_p20220117
@@ -63,7 +64,6 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-3.6.0-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
-	#"${FILESDIR}/tdesktop-3.6.1-fix-kwayland-5.93.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
@@ -92,8 +92,6 @@ src_configure() {
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON  # header only lib, some git version. prevents warnings.
 		-DDESKTOP_APP_QT6=ON
-		-DCMAKE_DISABLE_FIND_PACKAGE_Qt6=OFF
-		-DCMAKE_DISABLE_FIND_PACKAGE_Qt6_FOUND=OFF
 
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION=$(usex !dbus)
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
@@ -106,9 +104,6 @@ src_configure() {
 		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
 		-DCMAKE_BUILD_TYPE=Release
 		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
-		-DDESKTOP_APP_USE_PACKAGED=ON
-		-DDESKTOP_APP_QTWAYLANDCLIENT_PRIVATE_HEADERS=OFF
-		-DDESKTOP_APP_SPECIAL_TARGET=""
 	)
 
 	if [[ -n ${MY_TDESKTOP_API_ID} && -n ${MY_TDESKTOP_API_HASH} ]]; then
