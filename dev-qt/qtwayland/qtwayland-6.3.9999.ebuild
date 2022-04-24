@@ -12,7 +12,7 @@ if [[ ${QT6_BUILD_TYPE} == release ]]; then
 fi
 
 DEPEND="
-	=dev-qt/declataive-${PV}*
+	=dev-qt/declarative-${PV}*
 "
 RDEPEND="${DEPEND}"
 
