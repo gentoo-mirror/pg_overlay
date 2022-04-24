@@ -32,6 +32,7 @@ RDEPEND="
 	dev-libs/openssl:=
 	dev-libs/xxhash
 	>=dev-qt/qtbase-6.2.0:6
+	>=dev-qt/qt5compat-6.2.0:6
 	>=dev-qt/qtsvg-6.2.0:6
 	>=dev-qt/qtwayland-6.2.0:6
 	media-fonts/open-sans
