@@ -16,7 +16,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
+#KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
 IUSE="+dbus enchant +hunspell +jemalloc screencast +spell wayland +X"
 REQUIRED_USE="
 	spell? (
@@ -31,12 +31,9 @@ RDEPEND="
 	dev-libs/libdispatch
 	dev-libs/openssl:=
 	dev-libs/xxhash
-	>=dev-qt/qtcore-5.15:5
-	>=dev-qt/qtgui-5.15:5[dbus?,jpeg,png,wayland?,X?]
-	>=dev-qt/qtimageformats-5.15:5
-	>=dev-qt/qtnetwork-5.15:5[ssl]
-	>=dev-qt/qtsvg-5.15:5
-	>=dev-qt/qtwidgets-5.15:5[png,X?]
+	>=dev-qt/qtbase-6.2.0:6
+	>=dev-qt/qtimageformats-6.2.0:6
+	>=dev-qt/qtsvg-6.2.0:6
 	media-fonts/open-sans
 	media-libs/fontconfig:=
 	~media-libs/libtgvoip-2.4.4_p20220117
@@ -46,18 +43,11 @@ RDEPEND="
 	~media-libs/tg_owt-0_pre20220413[screencast=,X=]
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
-	dbus? (
-		dev-cpp/glibmm:2
-		dev-qt/qtdbus:5
-		dev-libs/libdbusmenu-qt[qt5(+)]
-	)
+	dbus? ( dev-cpp/glibmm:2 )
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
-	wayland? (
-		dev-qt/qtwayland:=
-		kde-frameworks/kwayland:=
-	)
+	wayland? ( kde-frameworks/kwayland:= )
 	X? ( x11-libs/libxcb:= )
 "
 DEPEND="${RDEPEND}
