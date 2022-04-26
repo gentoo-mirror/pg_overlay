@@ -104,7 +104,6 @@ src_configure() {
 		# See files/tdesktop-*-jemalloc-optional.patch
 		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
 		-DCMAKE_BUILD_TYPE=Release
-		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 	)
 
 	if [[ -n ${MY_TDESKTOP_API_ID} && -n ${MY_TDESKTOP_API_HASH} ]]; then
