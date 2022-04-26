@@ -93,7 +93,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON  # header only lib, some git version. prevents warnings.
-		-DDESKTOP_APP_QT6=ON
 
 		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION=$(usex !dbus)
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
@@ -105,7 +104,6 @@ src_configure() {
 		# See files/tdesktop-*-jemalloc-optional.patch
 		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
 		-DCMAKE_BUILD_TYPE=Release
-		-DDESKTOP_APP_USE_GLIBC_WRAPS=OFF
 	)
 
 	if [[ -n ${MY_TDESKTOP_API_ID} && -n ${MY_TDESKTOP_API_HASH} ]]; then
