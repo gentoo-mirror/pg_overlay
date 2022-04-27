@@ -22,11 +22,10 @@ SRC_URI="
 	)
 "
 
-# MIT and BSD-3-Clause come from rust dependencies, some dependencies are also Apache 2.0 exclusively,
-# and some are Apache 2.0 or MIT
-LICENSE="Apache-2.0 MIT BSD"
+# extra licenses come from Rust deps
+LICENSE="Apache-2.0 BSD BSD-2 MIT"
 SLOT="0"
-KEYWORDS="~amd64"
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~x86"
 
 RDEPEND="
 	>=dev-libs/openssl-1.0.2o-r6:0=
@@ -50,15 +49,13 @@ BDEPEND="
 "
 
 # Files built without CFLAGS/LDFLAGS, acceptable for rust
-QA_FLAGS_IGNORED="usr/lib.*/py.*/site-packages/cryptography/hazmat/bindings/_rust.abi3.so"
-
-PATCHES=(
-	"${FILESDIR}"/${P}-pyo3-bump.patch
-)
+QA_FLAGS_IGNORED="usr/lib.*/py.*/site-packages/cryptography/hazmat/bindings/_rust.*.so"
 
 distutils_enable_tests pytest
 
 src_prepare() {
+	sed -i -e 's:--benchmark-disable::' pyproject.toml || die
+
 	default
 
 	# work around availability macros not supported in GCC (yet)
@@ -74,5 +71,8 @@ src_prepare() {
 
 python_test() {
 	local -x PYTHONPATH="${PYTHONPATH}:${WORKDIR}/cryptography_vectors-${PV}"
+	local EPYTEST_IGNORE=(
+		tests/bench
+	)
 	epytest -n "$(makeopts_jobs "${MAKEOPTS}" "$(get_nproc)")"
 }
