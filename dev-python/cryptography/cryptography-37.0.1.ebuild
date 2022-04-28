@@ -47,6 +47,9 @@ BDEPEND="
 		dev-python/pytz[${PYTHON_USEDEP}]
 	)
 "
+PATCHES=(
+	"${FILESDIR}/cg-no-rust.patch"
+)
 
 # Files built without CFLAGS/LDFLAGS, acceptable for rust
 QA_FLAGS_IGNORED="usr/lib.*/py.*/site-packages/cryptography/hazmat/bindings/_rust.*.so"
