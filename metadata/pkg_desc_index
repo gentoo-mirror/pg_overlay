@@ -113,7 +113,7 @@ media-libs/gstreamer 1.19.3: Open source multimedia framework
 media-libs/imlib2 1.7.4: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 4.192.1: Reusable library for GPU-accelerated image processing primitives
-media-libs/libpulse 15.99.1: Libraries for PulseAudio clients
+media-libs/libpulse 15.99.1-r1: Libraries for PulseAudio clients
 media-libs/libsdl2 2.0.20-r1: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20220117: VoIP library for Telegram clients
 media-libs/libuninameslist 20211114: Library of unicode annotation data
@@ -141,7 +141,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
-media-video/pipewire 0.3.50-r3: Multimedia processing graphs
+media-video/pipewire 0.3.51: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/pidgin 2.14.8-r1 2.9999 9999: GTK Instant Messenger client
 net-im/telegram-desktop 3.7.3: Official desktop client for Telegram
