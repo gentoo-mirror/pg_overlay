@@ -395,6 +395,8 @@ pkg_setup() {
 				eerror "  - Manually switch rust version using 'eselect rust' to match used LLVM version"
 				eerror "  - Switch to dev-lang/rust[system-llvm] which will guarantee matching version"
 				eerror "  - Build ${CATEGORY}/${PN} without USE=lto"
+				eerror "  - Rebuild lld with llvm that was used to build rust (may need to rebuild the whole "
+				eerror "    llvm/clang/lld/rust chain depending on your @world updates)"
 				die "LLVM version used by Rust (${version_llvm_rust}) does not match with ld.lld version (${version_lld})!"
 			fi
 		fi
@@ -551,6 +553,9 @@ src_prepare() {
 	mkdir -p "${BUILD_DIR}" || die
 
 	# Write API keys to disk
+	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
+	echo -n "${MOZ_API_KEY_LOCATION//gGaPi/}" > "${S}"/api-location.key || die
+	echo -n "${MOZ_API_KEY_MOZILLA//m0ap1/}" > "${S}"/api-mozilla.key || die
 
 	####### My stuff
 	### OpenSUSE-KDE patchset
