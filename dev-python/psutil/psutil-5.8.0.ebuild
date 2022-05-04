@@ -19,7 +19,7 @@ IUSE="test"
 RESTRICT="!test? ( test )"
 
 PATCHES=(
-	"${FILESDIR}"/psutil-5.9.0-tests.patch
+	"${FILESDIR}"/psutil-5.8.0-tests.patch
 )
 
 python_test() {
