@@ -1,188 +1,112 @@
-diff --git a/psutil/tests/__init__.py b/psutil/tests/__init__.py
-index 21bb3e61..6c45c9e0 100644
---- a/psutil/tests/__init__.py
-+++ b/psutil/tests/__init__.py
-@@ -88,6 +88,7 @@ __all__ = [
-     "HAS_IONICE", "HAS_MEMORY_MAPS", "HAS_PROC_CPU_NUM", "HAS_RLIMIT",
-     "HAS_SENSORS_BATTERY", "HAS_BATTERY", "HAS_SENSORS_FANS",
-     "HAS_SENSORS_TEMPERATURES", "HAS_MEMORY_FULL_INFO",
-+    "GENTOO_TESTING",
-     # subprocesses
-     'pyrun', 'terminate', 'reap_children', 'spawn_testproc', 'spawn_zombie',
-     'spawn_children_pair',
-@@ -128,6 +129,7 @@ PYPY = '__pypy__' in sys.builtin_module_names
- APPVEYOR = 'APPVEYOR' in os.environ
- GITHUB_ACTIONS = 'GITHUB_ACTIONS' in os.environ or 'CIBUILDWHEEL' in os.environ
- CI_TESTING = APPVEYOR or GITHUB_ACTIONS
-+GENTOO_TESTING = "GENTOO_TESTING" in os.environ
- # are we a 64 bit process?
- IS_64BIT = sys.maxsize > 2 ** 32
- 
+From e910d08976e00bc12b5a516daa9e6a6d42d48354 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Micha=C5=82=20G=C3=B3rny?= <mgorny@gentoo.org>
+Date: Wed, 19 Feb 2020 07:27:32 +0100
+Subject: [PATCH] Skip broken tests on Gentoo
+
+---
+ psutil/tests/test_linux.py   | 8 ++++++++
+ psutil/tests/test_posix.py   | 1 +
+ psutil/tests/test_process.py | 2 ++
+ psutil/tests/test_system.py  | 1 +
+ 4 files changed, 12 insertions(+)
+
 diff --git a/psutil/tests/test_linux.py b/psutil/tests/test_linux.py
-index 20e28d29..ce5d10a0 100755
+index e51f8bd5..48527ccb 100755
 --- a/psutil/tests/test_linux.py
 +++ b/psutil/tests/test_linux.py
-@@ -28,6 +28,7 @@ from psutil._compat import PY3
- from psutil._compat import FileNotFoundError
- from psutil._compat import basestring
- from psutil._compat import u
-+from psutil.tests import GENTOO_TESTING
- from psutil.tests import GITHUB_ACTIONS
- from psutil.tests import GLOBAL_TIMEOUT
- from psutil.tests import HAS_BATTERY
-@@ -929,6 +930,7 @@ class TestLoadAvg(PsutilTestCase):
+@@ -17,5 +17,6 @@ import re
+ import shutil
+ import socket
+ import struct
++import sys
+ import textwrap
+ import time
+@@ -381,6 +382,8 @@ class TestSystemVirtualMemory(unittest.TestCase):
+                 ret = psutil.virtual_memory()
+             assert m.called
+             self.assertEqual(ret.available, 2057400 * 1024 + 4818144 * 1024)
++            if sys.version_info < (3,):
++                return
+             w = ws[0]
+             self.assertIn(
+                 "inactive memory stats couldn't be determined", str(w.message))
+@@ -411,6 +414,8 @@ class TestSystemVirtualMemory(unittest.TestCase):
+                     ret = psutil.virtual_memory()
+                     self.assertEqual(
+                         ret.available, 2057400 * 1024 + 4818144 * 1024)
++                    if sys.version_info < (3,):
++                        return
+                     w = ws[0]
+                     self.assertIn(
+                         "inactive memory stats couldn't be determined",
+@@ -882,6 +887,7 @@ class TestLoadAvg(unittest.TestCase):
  @unittest.skipIf(not LINUX, "LINUX only")
- class TestSystemNetIfAddrs(PsutilTestCase):
+ class TestSystemNetIfAddrs(unittest.TestCase):
  
-+    @unittest.skipIf(GENTOO_TESTING, "broken in Gentoo test env")
++    @unittest.skip("broken on Gentoo")
      def test_ips(self):
          for name, addrs in psutil.net_if_addrs().items():
              for addr in addrs:
-@@ -1491,6 +1493,7 @@ class TestMisc(PsutilTestCase):
+@@ -1364,7 +1370,8 @@ class TestMisc(unittest.TestCase):
              psutil.PROCFS_PATH = "/proc"
+             os.rmdir(tdir)
  
      @retry_on_failure()
-+    @unittest.skipIf(GENTOO_TESTING, "broken in Gentoo test env")
++    @unittest.skip("broken on Gentoo")
      def test_issue_687(self):
          # In case of thread ID:
          # - pid_exists() is supposed to return False
-@@ -1596,6 +1599,8 @@ class TestSensorsBattery(PsutilTestCase):
-             self.assertEqual(psutil.sensors_battery().power_plugged, False)
-             assert m.called
- 
-+    @unittest.skipIf(GENTOO_TESTING,
-+                     "mocking doesn't work with non-BAT0 battery")
-     def test_emulate_power_undetermined(self):
-         # Pretend we can't know whether the AC power cable not
-         # connected (assert fallback to False).
-@@ -1614,6 +1619,8 @@ class TestSensorsBattery(PsutilTestCase):
-             self.assertIsNone(psutil.sensors_battery().power_plugged)
-             assert m.called
- 
-+    @unittest.skipIf(GENTOO_TESTING,
-+                     "mocking doesn't work with non-BAT0 battery")
-     def test_emulate_energy_full_0(self):
-         # Emulate a case where energy_full files returns 0.
-         with mock_open_content(
-@@ -1621,6 +1628,8 @@ class TestSensorsBattery(PsutilTestCase):
-             self.assertEqual(psutil.sensors_battery().percent, 0)
-             assert m.called
- 
-+    @unittest.skipIf(GENTOO_TESTING,
-+                     "mocking doesn't work with non-BAT0 battery")
-     def test_emulate_energy_full_not_avail(self):
-         # Emulate a case where energy_full file does not exist.
-         # Expected fallback on /capacity.
-@@ -1634,6 +1643,8 @@ class TestSensorsBattery(PsutilTestCase):
-                         "/sys/class/power_supply/BAT0/capacity", b"88"):
-                     self.assertEqual(psutil.sensors_battery().percent, 88)
- 
-+    @unittest.skipIf(GENTOO_TESTING,
-+                     "mocking doesn't work with non-BAT0 battery")
-     def test_emulate_no_power(self):
-         # Emulate a case where /AC0/online file nor /BAT0/status exist.
-         with mock_open_exception(
-@@ -2220,6 +2231,7 @@ class TestProcessAgainstStatus(PsutilTestCase):
+@@ -2073,6 +2080,7 @@ class TestProcessAgainstStatus(unittest.TestCase):
          value = self.read_status_file("nonvoluntary_ctxt_switches:")
          self.assertEqual(self.proc.num_ctx_switches().involuntary, value)
  
-+    @unittest.skipIf(GENTOO_TESTING, "broken in Gentoo test env")
++    @unittest.skip("broken on Gentoo")
      def test_cpu_affinity(self):
          value = self.read_status_file("Cpus_allowed_list:")
          if '-' in str(value):
-diff --git a/psutil/tests/test_misc.py b/psutil/tests/test_misc.py
-index d946eb62..a53de565 100755
---- a/psutil/tests/test_misc.py
-+++ b/psutil/tests/test_misc.py
-@@ -32,6 +32,7 @@ from psutil._compat import PY3
- from psutil._compat import redirect_stderr
- from psutil.tests import APPVEYOR
- from psutil.tests import CI_TESTING
-+from psutil.tests import GENTOO_TESTING
- from psutil.tests import HAS_BATTERY
- from psutil.tests import HAS_MEMORY_MAPS
- from psutil.tests import HAS_NET_IO_COUNTERS
-@@ -401,6 +402,7 @@ class TestMisc(PsutilTestCase):
-                 reload_module(psutil)
-             self.assertIn("version conflict", str(cm.exception).lower())
- 
-+    @unittest.skipIf(GENTOO_TESTING, "broken in Gentoo test env")
-     def test_debug(self):
-         if PY3:
-             from io import StringIO
 diff --git a/psutil/tests/test_posix.py b/psutil/tests/test_posix.py
-index 31b81926..7eb9bac5 100755
+index a96b310f..70199203 100755
 --- a/psutil/tests/test_posix.py
 +++ b/psutil/tests/test_posix.py
-@@ -23,6 +23,7 @@ from psutil import OPENBSD
- from psutil import POSIX
- from psutil import SUNOS
- from psutil.tests import CI_TESTING
-+from psutil.tests import GENTOO_TESTING
- from psutil.tests import HAS_NET_IO_COUNTERS
- from psutil.tests import PYTHON_EXE
- from psutil.tests import PsutilTestCase
-@@ -326,6 +327,7 @@ class TestSystemAPIs(PsutilTestCase):
+@@ -364,6 +364,7 @@ class TestSystemAPIs(unittest.TestCase):
                      "couldn't find %s nic in 'ifconfig -a' output\n%s" % (
                          nic, output))
  
-+    @unittest.skipIf(GENTOO_TESTING, "broken in Gentoo test env")
++    @unittest.skip("broken on Gentoo")
      @unittest.skipIf(CI_TESTING and not psutil.users(), "unreliable on CI")
      @retry_on_failure()
      def test_users(self):
 diff --git a/psutil/tests/test_process.py b/psutil/tests/test_process.py
-index c9059e33..0050c42a 100755
+index 987bdf38..cb04f3ef 100755
 --- a/psutil/tests/test_process.py
 +++ b/psutil/tests/test_process.py
-@@ -38,6 +38,7 @@ from psutil._compat import long
- from psutil._compat import super
- from psutil.tests import APPVEYOR
- from psutil.tests import CI_TESTING
-+from psutil.tests import GENTOO_TESTING
- from psutil.tests import GITHUB_ACTIONS
- from psutil.tests import GLOBAL_TIMEOUT
- from psutil.tests import HAS_CPU_AFFINITY
-@@ -292,6 +293,7 @@ class TestProcess(PsutilTestCase):
-         time.strftime("%Y %m %d %H:%M:%S", time.localtime(p.create_time()))
- 
-     @unittest.skipIf(not POSIX, 'POSIX only')
-+    @unittest.skipIf(GENTOO_TESTING, "broken in Gentoo test env")
-     def test_terminal(self):
-         terminal = psutil.Process().terminal()
-         if terminal is not None:
-@@ -341,6 +343,7 @@ class TestProcess(PsutilTestCase):
+@@ -350,6 +350,7 @@ class TestProcess(unittest.TestCase):
              self.assertGreaterEqual(io2[i], 0)
              self.assertGreaterEqual(io2[i], 0)
  
-+    @unittest.skipIf(GENTOO_TESTING, "fails if builder is ioniced already")
++    @unittest.skip("fails if builder is ioniced already")
      @unittest.skipIf(not HAS_IONICE, "not supported")
      @unittest.skipIf(not LINUX, "linux only")
      def test_ionice_linux(self):
-@@ -1406,6 +1409,7 @@ class TestProcess(PsutilTestCase):
-         if not OSX and GITHUB_ACTIONS:
-             self.assertEqual(d1, d2)
+@@ -1495,6 +1496,7 @@ class TestProcess(unittest.TestCase):
+         d2 = clean_dict(os.environ.copy())
+         self.assertEqual(d1, d2)
  
-+    @unittest.skipIf(GENTOO_TESTING, "broken by Gentoo sandbox")
++    @unittest.skip("broken by sandbox")
      @unittest.skipIf(not HAS_ENVIRON, "not supported")
      @unittest.skipIf(not POSIX, "POSIX only")
      def test_weird_environ(self):
 diff --git a/psutil/tests/test_system.py b/psutil/tests/test_system.py
-index db2cb348..b1faa154 100755
+index 3834209f..b07b5883 100755
 --- a/psutil/tests/test_system.py
 +++ b/psutil/tests/test_system.py
-@@ -33,6 +33,7 @@ from psutil._compat import long
- from psutil.tests import ASCII_FS
- from psutil.tests import CI_TESTING
- from psutil.tests import DEVNULL
-+from psutil.tests import GENTOO_TESTING
- from psutil.tests import GITHUB_ACTIONS
- from psutil.tests import GLOBAL_TIMEOUT
- from psutil.tests import HAS_BATTERY
-@@ -199,6 +200,7 @@ class TestMiscAPIs(PsutilTestCase):
+@@ -215,6 +215,7 @@ class TestMiscAPIs(unittest.TestCase):
          self.assertGreater(bt, 0)
          self.assertLess(bt, time.time())
  
-+    @unittest.skipIf(GENTOO_TESTING, "broken in Gentoo test env")
++    @unittest.skip("broken on Gentoo")
      @unittest.skipIf(CI_TESTING and not psutil.users(), "unreliable on CI")
      def test_users(self):
          users = psutil.users()
+-- 
+2.25.1
