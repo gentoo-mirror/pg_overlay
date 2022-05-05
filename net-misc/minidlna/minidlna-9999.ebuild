@@ -21,14 +21,21 @@ RDEPEND="
 	media-libs/flac
 	media-libs/libexif
 	media-libs/libid3tag:=
+	media-libs/libjpeg-turbo:0=
 	media-libs/libogg
 	media-libs/libvorbis
 	media-video/ffmpeg:0=
-	virtual/jpeg:0=
-	zeroconf? ( net-dns/avahi )"
-DEPEND=${RDEPEND}
+	elibc_musl? ( sys-libs/queue-standalone )
+	zeroconf? ( net-dns/avahi )
+"
+RDEPEND="
+	${DEPEND}
+	acct-group/minidlna
+	acct-user/minidlna
+"
 BDEPEND="
-	virtual/pkgconfig"
+	virtual/pkgconfig
+"
 
 CONFIG_CHECK="~INOTIFY_USER"
 
