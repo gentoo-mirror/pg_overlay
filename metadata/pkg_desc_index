@@ -138,6 +138,7 @@ media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
 media-sound/pulseaudio 15.99.1-r1: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
+media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD project
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
