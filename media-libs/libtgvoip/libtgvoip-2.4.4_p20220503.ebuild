@@ -8,7 +8,7 @@ inherit flag-o-matic autotools
 DESCRIPTION="VoIP library for Telegram clients"
 HOMEPAGE="https://github.com/telegramdesktop/libtgvoip"
 
-LIBTGVOIP_COMMIT="a090c6a8f7bfb365b301d85bb8c9664d71321c5c"
+LIBTGVOIP_COMMIT="78a8e22bedb0d06004da8bafeba88b7474cb89a4"
 SRC_URI="https://github.com/telegramdesktop/libtgvoip/archive/${LIBTGVOIP_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${LIBTGVOIP_COMMIT}"
 
