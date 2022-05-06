@@ -64,7 +64,7 @@ BDEPEND="virtual/pkgconfig"
 PATCHES=(
 	"${FILESDIR}/tg_owt-0_pre20220209-allow-disabling-X11.patch"
 	"${FILESDIR}/tg_owt-0_pre20211207-fix-dcsctp-references.patch"
-	"${FILESDIR}//1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
+	"${FILESDIR}/1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
 )
 
 src_unpack() {
@@ -73,6 +73,7 @@ src_unpack() {
 	unpack "libyuv-${LIBYUV_COMMIT}.tar.gz"
 	cd "${S}/src/third_party/crc32c" || die
 	unpack "crc32c-${CRC32C_COMMIT}.tar.gz"
+	mv crc32c-${CRC32C_COMMIT}/* src/
 }
 
 src_prepare() {
