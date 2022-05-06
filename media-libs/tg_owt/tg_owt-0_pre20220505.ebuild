@@ -8,10 +8,12 @@ inherit cmake flag-o-matic
 DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
-TG_OWT_COMMIT="63a934db1ed212ebf8aaaa20f0010dd7b0d7b396"
+TG_OWT_COMMIT="60e7bdcd68e2c524d10572e4abc414130c62683e"
 LIBYUV_COMMIT="b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a"
+CRC32C_COMMIT="21fc8ef30415a635e7351ffa0e5d5367943d4a94"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://github.com/perfect7gentleman/sources/raw/main/libyuv-${LIBYUV_COMMIT}.tar.gz"
+	https://github.com/perfect7gentleman/sources/raw/main/libyuv-${LIBYUV_COMMIT}.tar.gz
+	https://github.com/google/crc32c/archive/${CRC32C_COMMIT}.tar.gz -> crc32c-${CRC32C_COMMIT}.tar.gz"
 	#https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz -> libyuv-${LIBYUV_COMMIT}.tar.gz"
 	#https://archive.org/download/libyuv-${LIBYUV_COMMIT}.tar/libyuv-${LIBYUV_COMMIT}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
