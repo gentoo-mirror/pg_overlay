@@ -71,6 +71,8 @@ src_unpack() {
 	unpack "${P}.tar.gz"
 	cd "${S}/src/third_party/libyuv" || die
 	unpack "libyuv-${LIBYUV_COMMIT}.tar.gz"
+	cd "${S}/src/third_party/crc32c" || die
+	unpack "crc32c-${CRC32C_COMMIT}.tar.gz"
 }
 
 src_prepare() {
