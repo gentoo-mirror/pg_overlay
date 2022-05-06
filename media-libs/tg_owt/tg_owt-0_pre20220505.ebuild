@@ -64,13 +64,16 @@ BDEPEND="virtual/pkgconfig"
 PATCHES=(
 	"${FILESDIR}/tg_owt-0_pre20220209-allow-disabling-X11.patch"
 	"${FILESDIR}/tg_owt-0_pre20211207-fix-dcsctp-references.patch"
-	"${FILESDIR}//1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
+	"${FILESDIR}/1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
 )
 
 src_unpack() {
 	unpack "${P}.tar.gz"
 	cd "${S}/src/third_party/libyuv" || die
 	unpack "libyuv-${LIBYUV_COMMIT}.tar.gz"
+	cd "${S}/src/third_party/crc32c" || die
+	unpack "crc32c-${CRC32C_COMMIT}.tar.gz"
+	mv crc32c-${CRC32C_COMMIT}/* src/
 }
 
 src_prepare() {
@@ -94,6 +97,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DTG_OWT_USE_X11=$(usex X)
 		-DTG_OWT_USE_PIPEWIRE=$(usex screencast)
+		-DTG_OWT_ARCH_ARMV7_USE_NEON=OFF
 	)
 	cmake_src_configure
 }
