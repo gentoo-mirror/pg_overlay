@@ -97,6 +97,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DTG_OWT_USE_X11=$(usex X)
 		-DTG_OWT_USE_PIPEWIRE=$(usex screencast)
+		-DTG_OWT_ARCH_ARMV7_USE_NEON=OFF
 	)
 	cmake_src_configure
 }
