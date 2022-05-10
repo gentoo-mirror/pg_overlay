@@ -10,6 +10,6 @@ KEYWORDS=~amd64 ~arm64 ~ppc64 ~riscv
 LICENSE=BSD
 RDEPEND=>=dev-cpp/abseil-cpp-20211102.0:=[cxx17(+)] dev-libs/libevent:= dev-libs/openssl:= dev-libs/protobuf:= media-libs/libjpeg-turbo:= >=media-libs/libvpx-1.10.0:= media-libs/openh264:= media-libs/opus media-video/ffmpeg:= net-libs/usrsctp screencast? ( dev-libs/glib:2 media-video/pipewire:= ) X? ( x11-libs/libX11 x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXrender x11-libs/libXrandr x11-libs/libXtst )
 SLOT=0/20220413
-SRC_URI=https://github.com/desktop-app/tg_owt/archive/60e7bdcd68e2c524d10572e4abc414130c62683e.tar.gz -> tg_owt-0_pre20220413.tar.gz https://github.com/perfect7gentleman/sources/raw/main/libyuv-b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a.tar.gz
+SRC_URI=https://github.com/desktop-app/tg_owt/archive/63a934db1ed212ebf8aaaa20f0010dd7b0d7b396.tar.gz -> tg_owt-0_pre20220413.tar.gz https://github.com/perfect7gentleman/sources/raw/main/libyuv-b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a.tar.gz
 _eclasses_=toolchain-funcs	badd6e329e1f3e6bee99b35bf8763ce8	multilib	4a33c9008e5ee30cb8840a3fdc24df2b	flag-o-matic	a500d7cc40da3de38c361e889153bdf7	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	891c4d3862cbc1ce8808ea427facbcd1	xdg-utils	fffb53a53cf17c9c0c998a3c0a590c7e	cmake	55dc32e8b79450236426a7c0d0283c50
-_md5_=ec2ad802eaa9988abb64d9ee87503926
+_md5_=0a84fb0d15c16732bbf517e33b230bed

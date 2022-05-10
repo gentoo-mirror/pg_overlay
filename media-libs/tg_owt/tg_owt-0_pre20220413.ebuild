@@ -8,12 +8,10 @@ inherit cmake flag-o-matic
 DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
-TG_OWT_COMMIT="60e7bdcd68e2c524d10572e4abc414130c62683e"
+TG_OWT_COMMIT="63a934db1ed212ebf8aaaa20f0010dd7b0d7b396"
 LIBYUV_COMMIT="b4ddbaf549a1bf5572bf703fd2862d1eb7380c6a"
-#CRC32C_COMMIT="21fc8ef30415a635e7351ffa0e5d5367943d4a94"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
 	https://github.com/perfect7gentleman/sources/raw/main/libyuv-${LIBYUV_COMMIT}.tar.gz"
-	#https://github.com/google/crc32c/archive/${CRC32C_COMMIT}.tar.gz -> crc32c-${CRC32C_COMMIT}.tar.gz"
 	#https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz -> libyuv-${LIBYUV_COMMIT}.tar.gz"
 	#https://archive.org/download/libyuv-${LIBYUV_COMMIT}.tar/libyuv-${LIBYUV_COMMIT}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
@@ -64,16 +62,13 @@ BDEPEND="virtual/pkgconfig"
 PATCHES=(
 	"${FILESDIR}/tg_owt-0_pre20220209-allow-disabling-X11.patch"
 	"${FILESDIR}/tg_owt-0_pre20211207-fix-dcsctp-references.patch"
-	"${FILESDIR}/1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
+	"${FILESDIR}//1d1f6a5fa57bdbe1889c0f2a17533fbf0c512531.patch"
 )
 
 src_unpack() {
 	unpack "${P}.tar.gz"
 	cd "${S}/src/third_party/libyuv" || die
 	unpack "libyuv-${LIBYUV_COMMIT}.tar.gz"
-	#cd "${S}/src/third_party/crc32c" || die
-	#unpack "crc32c-${CRC32C_COMMIT}.tar.gz"
-	#mv crc32c-${CRC32C_COMMIT}/* src/
 }
 
 src_prepare() {
@@ -97,7 +92,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DTG_OWT_USE_X11=$(usex X)
 		-DTG_OWT_USE_PIPEWIRE=$(usex screencast)
-		-DTG_OWT_ARCH_ARMV7_USE_NEON=OFF
 	)
 	cmake_src_configure
 }
