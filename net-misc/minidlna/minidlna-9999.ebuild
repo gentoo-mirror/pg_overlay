@@ -14,9 +14,7 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 IUSE="netgear readynas zeroconf tivo"
 
-RDEPEND="
-	acct-group/minidlna
-	acct-user/minidlna
+DEPEND="
 	dev-db/sqlite:3
 	media-libs/flac
 	media-libs/libexif
