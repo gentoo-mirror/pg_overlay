@@ -122,12 +122,6 @@ src_configure () {
 		strip-unsupported-flags
 	fi
 
-	AR=llvm-ar
-	CC=${CHOST}-clang
-	CXX=${CHOST}-clang++
-	NM=llvm-nm
-	RANLIB=llvm-ranlib
-
 	export HOST_CC="$(tc-getBUILD_CC)"
 	export HOST_CXX="$(tc-getBUILD_CXX)"
 	tc-export CC CXX LD AR NM OBJDUMP RANLIB PKG_CONFIG

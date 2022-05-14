@@ -5,7 +5,7 @@ EAPI=8
 
 KDE_ORG_NAME="${PN}-framework"
 PVCUT=$(ver_cut 1-2)
-QTMIN=5.15.2
+QTMIN=5.15.3
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -58,13 +58,6 @@ DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )
 "
 BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
-
-PATCHES=(
-	"${FILESDIR}/${PN}-5.92.0-fix-blurry-buttons.patch" # KDE-bug 447977
-	"${FILESDIR}/${P}-fix-widget-popups.patch" # bug 838661, KDE-bug 452512
-	"${FILESDIR}/${P}-fix-osd-dialog-position.patch" # KDE-bug 452648
-	"${FILESDIR}/${P}-keep-legacy-highlight-behaviour.patch" # KDE-bug 452555
-)
 
 src_configure() {
 	local mycmakeargs=(
