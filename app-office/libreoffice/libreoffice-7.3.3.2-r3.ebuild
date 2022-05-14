@@ -245,6 +245,8 @@ DEPEND="${COMMON_DEPEND}
 	)
 "
 RDEPEND="${COMMON_DEPEND}
+	acct-group/libreoffice
+	acct-user/libreoffice
 	!app-office/libreoffice-bin
 	!app-office/libreoffice-bin-debug
 	media-fonts/liberation-fonts
@@ -565,10 +567,10 @@ src_configure() {
 			#--with-jdk-home=$(java-config --jdk-home 2>/dev/null)
 			--with-jvm-path="${EPREFIX}/usr/lib/"
 		)
-		if has_version "dev-java/openjdk:15"; then
-			myeconfargs+=( -with-jdk-home="${EPREFIX}/usr/$(get_libdir)/openjdk-15" )
-		elif has_version "dev-java/openjdk-bin:15"; then
-			myeconfargs+=( --with-jdk-home="/opt/openjdk-bin-15" )
+		if has_version "dev-java/openjdk:11"; then
+			myeconfargs+=( --with-jdk-home="${EPREFIX}/usr/$(get_libdir)/openjdk-11" )
+		elif has_version "dev-java/openjdk-bin:11"; then
+			myeconfargs+=( --with-jdk-home="${EPREFIX}/opt/openjdk-bin-11" )
 		fi
 
 		use libreoffice_extensions_scripting-beanshell && \
@@ -651,6 +653,9 @@ EOF
 			dosym -r ${loprogdir}/__pycache__/${pyc} $(python_get_sitedir)/__pycache__/${pyc}
 		done < <(find "${D}"${lodir}/program -type f -name ${py/.py/*.pyc} -print0)
 	done
+
+	newinitd "${FILESDIR}/libreoffice.initd" libreoffice
+	newconfd "${FILESDIR}/libreoffice.confd" libreoffice
 }
 
 pkg_postinst() {
