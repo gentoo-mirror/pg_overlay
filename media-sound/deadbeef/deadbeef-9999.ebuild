@@ -1,4 +1,4 @@
-# Copyright 2021 Gentoo Authors
+# Copyright 2021-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -112,6 +112,20 @@ src_prepare() {
 }
 
 src_configure () {
+	if ! tc-is-clang; then
+		AR=llvm-ar
+		CC=${CHOST}-clang
+		CXX=${CHOST}-clang++
+		NM=llvm-nm
+		RANLIB=llvm-ranlib
+
+		strip-unsupported-flags
+	fi
+
+	export HOST_CC="$(tc-getBUILD_CC)"
+	export HOST_CXX="$(tc-getBUILD_CXX)"
+	tc-export CC CXX LD AR NM OBJDUMP RANLIB PKG_CONFIG
+
 	local myconf=(
 		"--disable-static"
 		"--disable-staticlink"
