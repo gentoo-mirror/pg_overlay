@@ -60,9 +60,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DDEFAULT_BUILD_TYPE=Release
 		-DCMAKE_BUILD_TYPE=Release
-		-DCMAKE_CONFIGURATION_TYPES=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
 		-DASIO_SOCKETS=ON
 		-DBUILD_ALCC=OFF
