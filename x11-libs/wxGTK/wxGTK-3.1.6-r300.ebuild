@@ -50,10 +50,6 @@ BDEPEND="
 	>=app-eselect/eselect-wxwidgets-20131230
 	virtual/pkgconfig"
 
-PATCHES=(
-	"${FILESDIR}"/wxGTK-ignore-c++-abi.patch #676878
-)
-
 src_prepare() {
 	default
 
