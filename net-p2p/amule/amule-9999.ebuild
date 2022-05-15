@@ -67,6 +67,7 @@ src_configure() {
 		-DBUILD_AMULECMD=OFF
 		-DBUILD_CAS=OFF
 		-DENABLE_BOOST=ON
+		-DENABLE_MMAP=ON
 		-DBUILD_DAEMON=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
 		-DBUILD_WEBSERVER=$(usex webserver)
@@ -77,7 +78,8 @@ src_configure() {
 
 	if use gui; then
 		mycmakeargs+=(
-			-DBUILD_REMOTEGUI=$(usex gui)
+			-DBUILD_MONOLITHIC=OFF
+			-DBUILD_REMOTEGUI=ON
 			-DBUILD_ALC=$(usex stats)
 			-DBUILD_WXCAS=$(usex stats)
 		)
