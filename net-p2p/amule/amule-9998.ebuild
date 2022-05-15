@@ -4,17 +4,18 @@
 EAPI=8
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
 WX_GTK_VER="3.1-gtk3"
+WANT_AUTOCONF="2.5"
 
-inherit cmake git-r3 plocale wxwidgets xdg
+inherit autotools git-r3 plocale wxwidgets xdg-utils flag-o-matic
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
-HOMEPAGE="https://www.amule.org/"
+HOMEPAGE="http://www.amule.org/"
 EGIT_REPO_URI="https://github.com/${PN}-project/${PN}.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
 KEYWORDS=""
-IUSE="daemon debug geoip gui +nls stats upnp X webserver"
+IUSE="daemon debug geoip gui +nls stats upnp X +mmap webserver"
 
 RDEPEND="
 	dev-libs/boost:=
@@ -50,47 +51,58 @@ pkg_setup() {
 }
 
 src_prepare() {
+	default
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
 	}
 	plocale_find_changes po "" ".po"
 	plocale_for_each_disabled_locale rem_locale
-	cmake_src_prepare
+
+	#pushd src/pixmaps/flags_xpm
+	#./makeflags.sh
+	#popd
+
+	append-flags -DASIO_SOCKETS=1
+	append-cppflags -DASIO_SOCKETS=1
+	#eautoreconf
+	./autogen.sh || die
 }
 
 src_configure() {
-	local mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=Release
-		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
-		-DASIO_SOCKETS=ON
-		-DBUILD_ALCC=OFF
-		-DBUILD_AMULECMD=OFF
-		-DBUILD_CAS=OFF
-		-DENABLE_BOOST=ON
-		-DBUILD_DAEMON=$(usex daemon)
-		-DBUILD_TESTING=$(usex debug)
-		-DBUILD_WEBSERVER=$(usex webserver)
-		-DENABLE_NLS=$(usex nls)
-		-DENABLE_UPNP=$(usex upnp)
-
+	append-flags -DASIO_SOCKETS=1
+	append-cppflags -DASIO_SOCKETS=1
+	local myconf=(
+		--with-denoise-level=0
+		--with-wx-config="${WX_CONFIG}"
+		--enable-amulecmd
+		--with-boost
+		$(use_enable debug)
+		$(use_enable daemon amule-daemon)
+		$(use_enable geoip)
+		$(use_enable nls)
+		$(use_enable webserver)
+		$(use_enable stats cas)
+		$(use_enable stats alcc)
+		$(use_enable upnp)
+		$(use_enable mmap)
 	)
 
-	if use gui; then
-		mycmakeargs+=(
-			-DBUILD_REMOTEGUI=$(usex gui)
-			-DBUILD_ALC=$(usex stats)
-			-DBUILD_WXCAS=$(usex stats)
+	if use X; then
+		myconf+=(
+			$(use_enable gui amule-gui)
+			$(use_enable stats alc)
+			$(use_enable stats wxcas)
 		)
 	else
-		mycmakeargs+=(
-			-DBUILD_MONOLITHIC=OFF
-			-DBUILD_REMOTEGUI=OFF
-			-DBUILD_ALC=OFF
-			-DBUILD_WXCAS=OFF
+		myconf+=(
+			--disable-monolithic
+			--disable-amule-gui
+			--disable-alc
+			--disable-wxcas
 		)
 	fi
 
-	cmake_src_configure
+	econf "${myconf[@]}"
 }
 
 src_install() {
@@ -108,8 +120,6 @@ src_install() {
 	if use X && use gui; then
 		rm ${D}/usr/bin/amule
 	fi
-
-	cmake_src_install
 }
 
 pkg_postinst() {
@@ -132,9 +142,9 @@ pkg_postinst() {
 		done
 	fi
 
-	use gui && xdg_desktop_database_update
+	use X && xdg_desktop_database_update
 }
 
 pkg_postrm() {
-	use gui && xdg_desktop_database_update
+	use X && xdg_desktop_database_update
 }
