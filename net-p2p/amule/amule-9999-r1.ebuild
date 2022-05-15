@@ -78,8 +78,8 @@ src_configure() {
 	if use gui; then
 		mycmakeargs+=(
 			-DBUILD_REMOTEGUI=$(usex gui)
-			-DBUILD_ALC=$(usex alc)
-			-DBUILD_WXCAS=$(usex wxcas)
+			-DBUILD_ALC=$(usex stats)
+			-DBUILD_WXCAS=$(usex stats)
 		)
 	else
 		mycmakeargs+=(
