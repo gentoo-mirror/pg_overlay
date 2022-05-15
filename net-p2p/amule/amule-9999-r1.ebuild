@@ -50,7 +50,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	default
 	rem_locale() {
 		rm "po/${1}.po" || die "removing of ${1}.po failed"
 	}
