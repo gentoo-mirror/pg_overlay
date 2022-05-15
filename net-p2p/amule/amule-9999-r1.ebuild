@@ -60,6 +60,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DDEFAULT_BUILD_TYPE=Release
 		-DCMAKE_BUILD_TYPE=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
 		-DASIO_SOCKETS=ON
@@ -95,6 +96,7 @@ src_configure() {
 
 src_install() {
 	default
+	cmake_src_install
 
 	if use daemon; then
 		newconfd "${FILESDIR}"/amuled.confd-r1 amuled
@@ -105,11 +107,9 @@ src_install() {
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
 
-	if use X && use gui; then
+	if use gui; then
 		rm ${D}/usr/bin/amule
 	fi
-
-	cmake_src_install
 }
 
 pkg_postinst() {
