@@ -84,7 +84,7 @@ multilib_src_configure() {
 	local myeconfargs=(
 		--with-zlib=sys
 		--with-expat=sys
-		--enable-compat28
+		--disable-compat28
 		$(use_with sdl)
 
 		# Don't hard-code libdir's prefix for wx-config
