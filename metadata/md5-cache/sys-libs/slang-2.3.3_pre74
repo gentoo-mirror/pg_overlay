@@ -10,4 +10,4 @@ RDEPEND=sys-libs/ncurses:0= cjk? ( >=dev-libs/oniguruma-5.9.5:=[abi_x86_32(-)?,a
 SLOT=0
 SRC_URI=https://www.jedsoft.org/snapshots/slang-pre2.3.3-74.tar.gz https://www.gentoofan.org/files/slang-pre2.3.3-74.tar.gz
 _eclasses_=multibuild	d26d81f242cb193d899a72bca423d0bd	multilib	4fbbbc98f236f1b43acd99476bc3cd85	toolchain-funcs	fd9cde67030b26e479eeadaced488253	multilib-build	05f207909a804c9174bc39a00547d598	multilib-minimal	4b0f1857965db8869a729948d5277e0b
-_md5_=a586c80304b6c9aed7bd399881babd3e
+_md5_=809ed99f2fa7f830c042bd8e08875eb8

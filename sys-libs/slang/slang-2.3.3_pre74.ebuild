@@ -35,7 +35,7 @@ DEPEND="${RDEPEND}"
 MAKEOPTS+=" -j1"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.3.1-slsh-libs.patch
+	#"${FILESDIR}"/${PN}-2.3.1-slsh-libs.patch
 )
 
 src_prepare() {
