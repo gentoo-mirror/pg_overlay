@@ -1077,6 +1077,7 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
 	mozconfig_add_options_ac '' MOZ_X11=0
 	mozconfig_add_options_ac '' USE_X11=0
+	mozconfig_add_options_ac '' MOZ_WEBRENDER=1
 
 	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
@@ -1094,6 +1095,7 @@ src_configure() {
 	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
 	echo "export MOZ_X11=0" >> "${S}"/.mozconfig
 	echo "export USE_X11=0" >> "${S}"/.mozconfig
+	echo "export MOZ_WEBRENDER=1" >> "${S}"/.mozconfi
 	#######
 
 	echo
