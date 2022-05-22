@@ -97,7 +97,7 @@ kde-frameworks/knotifications:qml - Enable QML support via dev-qt/qtdeclarative
 kde-frameworks/knotifications:speech - Enable text-to-speech notification support
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
-mail-client/thunderbird:eme-free - Disable EME (DRM plugin) cabability at build time
+mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
 mail-client/thunderbird:lto - Enable Link Time Optimization (LTO). Requires Gold linker when using GCC or LDD linker when using Clang
 mail-client/thunderbird:openh264 - Use media-libs/openh264 for H.264 support instead of downloading binary blob from Mozilla at runtime
@@ -367,7 +367,7 @@ sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-leve
 sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
 virtual/rust:rustfmt - Install rustfmt, Rust code formatter
 www-client/firefox:clang - Use Clang compiler instead of GCC
-www-client/firefox:eme-free - Disable EME (DRM plugin) cabability at build time
+www-client/firefox:eme-free - Disable EME (DRM plugin) capability at build time
 www-client/firefox:geckodriver - Enable WebDriver support
 www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
 www-client/firefox:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
@@ -384,7 +384,7 @@ www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo in
 www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled
 www-client/firefox:system-png - Use the system-wide media-libs/libpng instead of bundled (requires APNG patches)
-www-client/firefox:system-python - Use system's python site instead of bundled python libraries
+www-client/firefox:system-python-libs - Use system's python site instead of bundled python libraries
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled
 x11-base/xorg-server:dmx - Build the Distributed Multiheaded X server
 x11-base/xorg-server:elogind - Use elogind to get control over framebuffer when running as regular user
