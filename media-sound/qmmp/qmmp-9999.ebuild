@@ -67,7 +67,6 @@ RDEPEND="
 	)
 	midi? ( media-sound/wildmidi )
 	mms? ( media-libs/libmms )
-	modplug? ( >=media-libs/libmodplug-0.8.4 )
 	mplayer? ( media-video/mplayer )
 	musepack? ( >=media-sound/musepack-tools-444 )
 	opus? ( media-libs/opusfile )
@@ -90,12 +89,17 @@ RDEPEND="
 		media-libs/libvorbis
 	)
 	wavpack? ( media-sound/wavpack )
+	xmp? ( media-libs/libxmp )
 "
 DEPEND="${RDEPEND}
 	dev-qt/linguist-tools:5
 "
 
 DOCS=( AUTHORS ChangeLog README )
+
+PATCHES=(
+	"${FILESDIR}/${PN}-1.6.0-udisks_plugin.patch"
+)
 
 src_prepare() {
 	if has_version dev-libs/libcdio-paranoia ; then
@@ -148,7 +152,6 @@ src_configure() {
 		-DUSE_MAD="$(usex mad)"
 		-DUSE_MIDI="$(usex midi)"
 		-DUSE_MMS="$(usex mms)"
-		-DUSE_XMP="$(usex modplug)"
 		-DUSE_MPLAYER="$(usex mplayer)"
 		-DUSE_MPC="$(usex musepack)"
 		-DUSE_NOTIFIER="$(usex notifier)"
@@ -169,6 +172,7 @@ src_configure() {
 		-DUSE_UDISKS2="$(usex udisks)"
 		-DUSE_VORBIS="$(usex vorbis)"
 		-DUSE_WAVPACK="$(usex wavpack)"
+		-DUSE_XMP="$(usex xmp)"
 		-DUSE_NULL=OFF
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
