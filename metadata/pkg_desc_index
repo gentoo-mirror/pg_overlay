@@ -194,9 +194,13 @@ sys-libs/slang 2.3.3_pre74: Multi-platform library designed to allow a developer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/perl-File-Spec 3.800.0: Virtual for File-Spec
+virtual/perl-Getopt-Long 2.520.0: Virtual for Getopt-Long
 virtual/perl-IO-Compress 2.103.0-r1: Virtual for IO-Compress
+virtual/perl-JSON-PP 4.60.0: Virtual for JSON-PP
 virtual/perl-Parse-CPAN-Meta 2.150.10-r5: Virtual for Parse-CPAN-Meta
 virtual/perl-Perl-OSType 1.10.0-r5: Virtual for Perl-OSType
+virtual/perl-Time-Local 1.300.0: Virtual for Time-Local
+virtual/perl-XSLoader 0.300.0-r4: Virtual for XSLoader
 virtual/perl-version 0.992.900: Virtual for version
 virtual/rust 1.61.0: Virtual for Rust language compiler
 www-client/firefox 100.0.2: Firefox Web Browser
