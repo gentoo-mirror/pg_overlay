@@ -9,8 +9,8 @@ Subject: [PATCH] xembed-sni-proxy: Allow standalone build
 
 diff --git a/xembed-sni-proxy/CMakeLists.txt b/xembed-sni-proxy/CMakeLists.txt
 index bcc583bfa..41d50d112 100644
---- a/xembed-sni-proxy/CMakeLists.txt
-+++ b/xembed-sni-proxy/CMakeLists.txt
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
 @@ -1,3 +1,35 @@
 +project(xembed-sni-proxy)
 +
