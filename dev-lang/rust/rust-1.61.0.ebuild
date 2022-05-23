@@ -383,7 +383,7 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		#
-		submodules = flase
+		submodules = false
 		#
 		python = "${EPYTHON}"
 		locked-deps = true
