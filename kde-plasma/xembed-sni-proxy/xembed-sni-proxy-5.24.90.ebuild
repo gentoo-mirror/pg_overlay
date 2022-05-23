@@ -33,7 +33,7 @@ RDEPEND="${DEPEND}
 
 S="${S}/${PN}"
 
-PATCHES=( "${FILESDIR}/${PN}-5.24.80-standalone.patch" )
+#PATCHES=( "${FILESDIR}/${PN}-5.24.80-standalone.patch" )
 
 src_prepare() {
 	cmake_src_prepare
