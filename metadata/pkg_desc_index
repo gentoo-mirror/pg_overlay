@@ -193,8 +193,12 @@ sys-libs/polly 13.0.1 14.0.1 14.0.3: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre74: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
+virtual/perl-File-Spec 3.800.0: Virtual for File-Spec
+virtual/perl-IO-Compress 2.103.0-r1: Virtual for IO-Compress
+virtual/perl-Parse-CPAN-Meta 2.150.10-r5: Virtual for Parse-CPAN-Meta
+virtual/perl-Perl-OSType 1.10.0-r5: Virtual for Perl-OSType
 virtual/perl-version 0.992.900: Virtual for version
-virtual/rust 1.60.0: Virtual for Rust language compiler
+virtual/rust 1.61.0: Virtual for Rust language compiler
 www-client/firefox 100.0.2: Firefox Web Browser
 x11-base/xorg-server 21.1.3-r2: X.Org X servers
 x11-base/xwayland 22.1.1: Standalone X server running under Wayland
