@@ -115,7 +115,6 @@ DEPEND="
 	)
 "
 
-# we need to block older versions due to layout changes.
 RDEPEND="${DEPEND}
 	app-eselect/eselect-rust
 	sys-apps/lsb-release
@@ -384,7 +383,7 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		#
-		submodules = false
+		submodules = true
 		#
 		python = "${EPYTHON}"
 		locked-deps = false
