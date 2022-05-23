@@ -367,6 +367,8 @@ src_configure() {
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared =  $(toml_usex system-llvm)
+		skip-rebuild = true
+		static-libstdcpp = false
 		use-libcxx =  $(toml_usex system-llvm)
 		use-linker = "lld"
 
