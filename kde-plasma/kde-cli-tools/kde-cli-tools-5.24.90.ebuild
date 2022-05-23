@@ -19,7 +19,7 @@ SLOT="5"
 KEYWORDS=""
 IUSE="kdesu X"
 
-REQUIRED_USE="kdesu? ( X )"
+#REQUIRED_USE="kdesu? ( X )"
 # requires running kde environment
 RESTRICT="test"
 
@@ -49,7 +49,7 @@ DEPEND="
 	)
 "
 RDEPEND="${DEPEND}
-	kdesu? ( sys-apps/dbus[X] )
+	kdesu? ( sys-apps/dbus )
 "
 
 PATCHES=( "${FILESDIR}/${PN}-5.12.80-tests-optional.patch" )
