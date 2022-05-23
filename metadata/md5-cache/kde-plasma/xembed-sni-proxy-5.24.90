@@ -11,4 +11,4 @@ RESTRICT=mirror
 SLOT=5
 SRC_URI=mirror://kde/unstable/plasma/5.24.90/plasma-workspace-5.24.90.tar.xz
 _eclasses_=toolchain-funcs	fd9cde67030b26e479eeadaced488253	multilib	4fbbbc98f236f1b43acd99476bc3cd85	flag-o-matic	a500d7cc40da3de38c361e889153bdf7	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	58ec4e54962bf45d065fb95030701514	xdg-utils	fffb53a53cf17c9c0c998a3c0a590c7e	cmake	55dc32e8b79450236426a7c0d0283c50	kde.org	916c61efa7151f09c7701328b88cafc1
-_md5_=b5bd6e06a2387b28b20d3b6f95761bc1
+_md5_=89cc11acfcd8c48d7f7c64262b49108d
