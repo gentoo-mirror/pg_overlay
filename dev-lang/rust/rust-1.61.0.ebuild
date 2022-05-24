@@ -388,7 +388,7 @@ src_configure() {
 		submodules = false
 		#
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = true
 		tools = [${tools}]
