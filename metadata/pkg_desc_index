@@ -35,7 +35,7 @@ dev-lang/lazarus 2.2.0: Lazarus IDE is a feature rich visual programming environ
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 2.7.18_p15 3.10.4_p1: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.61.0: Systems programming language from Mozilla
+dev-lang/rust 1.61.0-r1: Systems programming language from Mozilla
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 0.27.0-r1 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 5.5.2: A library for concurrent code execution on multicore hardware
@@ -246,16 +246,9 @@ virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/perl-Encode 3.170.0: Virtual for Encode
 virtual/perl-IO 1.500.0: Virtual for IO
 virtual/perl-Memoize 1.30.100_rc-r11: Virtual for Memoize
-virtual/perl-Module-Metadata 1.0.37-r1: Virtual for Module-Metadata
-virtual/perl-Parse-CPAN-Meta 2.150.10-r5: Virtual for Parse-CPAN-Meta
-virtual/perl-Perl-OSType 1.10.0-r5: Virtual for Perl-OSType
 virtual/perl-Term-ANSIColor 5.10.0-r1: Virtual for Term-ANSIColor
 virtual/perl-Test-Harness 3.440.0: Virtual for Test-Harness
 virtual/perl-Text-ParseWords 3.310.0: Virtual for Text-ParseWords
-virtual/perl-Time-Local 1.300.0: Virtual for Time-Local
-virtual/perl-XSLoader 0.300.0-r4: Virtual for XSLoader
-virtual/perl-parent 0.238.0-r1: Virtual for parent
-virtual/perl-podlators 4.140.0-r2: Virtual for podlators
 virtual/perl-version 0.992.900: Virtual for version
 virtual/rust 1.61.0: Virtual for Rust language compiler
 www-client/firefox 100.0.2: Firefox Web Browser
