@@ -239,17 +239,10 @@ sys-fs/xfsprogs 5.15.0_rc1: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in the zlib distribution.
 sys-libs/ncurses 6.3_p20220122: console display library
-sys-libs/polly 13.0.1 14.0.1 14.0.3: Polyhedral optimizations for LLVM
+sys-libs/polly 13.0.1 14.0.4: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre74: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
-virtual/perl-Encode 3.170.0: Virtual for Encode
-virtual/perl-IO 1.500.0: Virtual for IO
-virtual/perl-Memoize 1.30.100_rc-r11: Virtual for Memoize
-virtual/perl-Term-ANSIColor 5.10.0-r1: Virtual for Term-ANSIColor
-virtual/perl-Test-Harness 3.440.0: Virtual for Test-Harness
-virtual/perl-Text-ParseWords 3.310.0: Virtual for Text-ParseWords
-virtual/perl-version 0.992.900: Virtual for version
 virtual/rust 1.61.0: Virtual for Rust language compiler
 www-client/firefox 100.0.2: Firefox Web Browser
 x11-base/xorg-server 21.1.3-r2: X.Org X servers
