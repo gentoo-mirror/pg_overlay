@@ -156,7 +156,7 @@ kde-plasma/sddm-kcm 5.24.90: KDE Plasma control module for SDDM
 kde-plasma/systemsettings 5.24.90: Control Center to configure KDE Plasma desktop
 kde-plasma/xdg-desktop-portal-kde 5.24.90: Backend implementation for xdg-desktop-portal that is using Qt/KDE Frameworks
 kde-plasma/xembed-sni-proxy 5.24.90: Legacy xembed tray icons support for SNI-only system trays
-mail-client/thunderbird 91.9.1: Thunderbird Mail Client
+mail-client/thunderbird 91.10.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.0.32: Scanner Access Now Easy - Backends
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-base 1.19.3: Basepack of plugins for gstreamer
