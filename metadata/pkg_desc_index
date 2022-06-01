@@ -244,7 +244,7 @@ sys-libs/slang 2.3.3_pre74: Multi-platform library designed to allow a developer
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.61.0: Virtual for Rust language compiler
-www-client/firefox 100.0.2: Firefox Web Browser
+www-client/firefox 101.0: Firefox Web Browser
 x11-base/xorg-server 21.1.3-r2: X.Org X servers
 x11-base/xwayland 22.1.2: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
