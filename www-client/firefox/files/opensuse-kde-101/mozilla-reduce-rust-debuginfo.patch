@@ -1,0 +1,11 @@
+--- firefox-96.0.3.orig/build/moz.configure/rust.configure
++++ firefox-96.0.3/build/moz.configure/rust.configure
+@@ -641,7 +643,7 @@ def rust_compile_flags(
+         debug_assertions = False
+ 
+     if debug_symbols:
+-        debug_info = "2"
++        debug_info = '1'
+ 
+     opts = []
+ 
