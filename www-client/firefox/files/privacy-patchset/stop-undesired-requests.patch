@@ -7,18 +7,10 @@ index d5a3f10..b5efa81 100644
            className: "providerUrl",
            target: "_blank",
 -          href: "https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/nimbus-desktop-experiments/records",
-+          href: "https://f.s.s.%.c.invalid/v1/buckets/main/collections/nimbus-desktop-experiments/records",
++          href: "https://%.invalid",
            rel: "noopener noreferrer"
          }, "nimbus-desktop-experiments"), ")");
        }
-@@ -14758,5 +14758,4 @@ function renderCache(initialState) {
-   }), document.getElementById("root"));
- }
- NewtabRenderUtils = __webpack_exports__;
--/******/ })()
--;
-\ No newline at end of file
-+/******/ });
 diff --git a/modules/libpref/init/all.js b/modules/libpref/init/all.js
 index 261e46f..22f8214 100644
 --- a/modules/libpref/init/all.js
@@ -28,7 +20,7 @@ index 261e46f..22f8214 100644
  // Remote settings preferences
  pref("services.settings.poll_interval", 86400); // 24H
 -pref("services.settings.server", "https://firefox.settings.services.mozilla.com/v1");
-+pref("services.settings.server", "https://https://f.s.s.%.c.invalid/v1");
++pref("services.settings.server", "https://%.invalid");
  pref("services.settings.default_bucket", "main");
  
  // The percentage of clients who will report uptake telemetry as
@@ -41,7 +33,7 @@ index 2ce9e87..cd132a3 100644
      return allowServerURLOverride
        ? gServerURL
 -      : "https://firefox.settings.services.mozilla.com/v1";
-+      : "https://f.s.s.%.c.invalid/v1";
++      : "https://%.invalid";
    },
  
    CHANGES_PATH: "/buckets/monitor/collections/changes/changeset",
@@ -54,10 +46,10 @@ index 983d567..5fb6ae7 100644
    ENGINES_URLS: {
      "prod-main":
 -      "https://firefox.settings.services.mozilla.com/v1/buckets/main/collections/search-config/records",
-+      "https://f.s.s.%.c.invalid/v1/buckets/main/collections/search-config/records",
++      "https://%.invalid",
      "prod-preview":
 -      "https://firefox.settings.services.mozilla.com/v1/buckets/main-preview/collections/search-config/records",
-+      "https://f.s.s.%.c.invalid/v1/buckets/main-preview/collections/search-config/records",
++      "https://%.invalid",
      "stage-main":
        "https://settings.stage.mozaws.net/v1/buckets/main/collections/search-config/records",
      "stage-preview":
