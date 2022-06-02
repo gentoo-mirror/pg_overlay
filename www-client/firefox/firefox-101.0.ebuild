@@ -66,7 +66,7 @@ IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
 IUSE+=" jack libproxy lto +openh264 pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx system-png system-python-libs +system-webp"
 IUSE+=" wayland wifi"
-IUSE+=" +kde +privacy nox11"
+IUSE+=" +kde +privacy"
 
 # Firefox-only IUSE
 IUSE+=" geckodriver +gmp-autoupdate screencast"
@@ -74,8 +74,7 @@ IUSE+=" geckodriver +gmp-autoupdate screencast"
 REQUIRED_USE="debug? ( !system-av1 )
 	pgo? ( lto )
 	wayland? ( dbus )
-	wifi? ( dbus )
-	nox11? ( !kde )"
+	wifi? ( dbus )"
 
 # Firefox-only REQUIRED_USE flags
 REQUIRED_USE+=" screencast? ( wayland )"
@@ -656,24 +655,6 @@ src_prepare() {
 		fi
 	done
 	#######
-	### Firefox-wayland patches https://github.com/ATiltedTree/firefox-wayland
-	einfo +++++++++++++++++++++++++++++
-	einfo "Applying Firefox-wayland's patches"
-	einfo +++++++++++++++++++++++++++++
-	use nox11 && for p in $(cat "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p 2>/dev/null
-		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/firefox-wayland-$(ver_cut 1)"/$p;
-			einfo +++++++++++++++++++++++++;
-			einfo Patch $p is APPLIED;
-			einfo +++++++++++++++++++++++++
-		else
-			einfo -------------------------;
-			einfo Patch $p is NOT applied and IGNORED;
-			einfo -------------------------
-		fi
-	done && eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/mozilla-nongnome-proxies.patch
-	#######
 
 	xdg_src_prepare
 }
@@ -860,10 +841,8 @@ src_configure() {
 
 	mozconfig_use_enable wifi necko-wifi
 
-	if use wayland && use nox11; then
-		mozconfig_add_options_ac '+wayland +nox11' --enable-default-toolkit=cairo-gtk3
-	elif wayland && ! use nox11; then
-		mozconfig_add_options_ac '+wayland -nox11' --enable-default-toolkit=cairo-gtk3-wayland
+	if use wayland ; then
+		mozconfig_add_options_ac '+wayland' --enable-default-toolkit=cairo-gtk3-wayland-only
 	else
 		mozconfig_add_options_ac '' --enable-default-toolkit=cairo-gtk3
 	fi
