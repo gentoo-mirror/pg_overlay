@@ -121,17 +121,9 @@ COMMON_DEPEND="
 	media-video/ffmpeg
 	sys-libs/zlib
 	virtual/freedesktop-icon-theme
-	x11-libs/cairo[X]
+	x11-libs/cairo
 	x11-libs/gdk-pixbuf
-	x11-libs/gtk+:3[X]
-	x11-libs/libX11
-	x11-libs/libXcomposite
-	x11-libs/libXdamage
-	x11-libs/libXext
-	x11-libs/libXfixes
-	x11-libs/libXrandr
-	x11-libs/libXrender
-	x11-libs/libXtst
+	x11-libs/gtk+:3
 	x11-libs/libxcb:=
 	x11-libs/pango
 	x11-libs/pixman
@@ -655,7 +647,7 @@ src_prepare() {
 		fi
 	done
 	#######
-	use system-python-libs && rm -rf ${S}/third_party/python/packaging
+	use system-python-libs && rm -rf "${S}/third_party/python/packaging"
 
 	xdg_src_prepare
 }
