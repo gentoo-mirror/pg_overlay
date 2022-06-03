@@ -1112,8 +1112,6 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-rust-simd
 	mozconfig_add_options_ac '' --enable-strip
 	mozconfig_add_options_ac '' --enable-webrtc
-	mozconfig_add_options_ac '' --without-x
-
 	mozconfig_add_options_ac '' MOZ_ENABLE_WAYLAND=1
 
 	echo "export MOZ_DATA_REPORTING=0" >> "${S}"/.mozconfig
