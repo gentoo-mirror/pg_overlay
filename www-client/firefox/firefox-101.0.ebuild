@@ -655,7 +655,7 @@ src_prepare() {
 		fi
 	done
 	#######
-	use system-python-libs && rm -rf third_party/python/packaging
+	use system-python-libs && rm -rf ${S}/third_party/python/packaging
 
 	xdg_src_prepare
 }
