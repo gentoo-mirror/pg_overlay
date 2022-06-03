@@ -94,6 +94,8 @@ REQUIRED_USE="!minimal? (
 	xephyr? ( kdrive )"
 
 UPSTREAMED_PATCHES=(
+	"${FILESDIR}"/${P}-gcc12.patch
+	"${FILESDIR}"/${P}-present-null-check.patch
 )
 
 PATCHES=(
