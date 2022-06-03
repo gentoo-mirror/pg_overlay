@@ -655,6 +655,7 @@ src_prepare() {
 		fi
 	done
 	#######
+	rm -rf third_party/python/packaging
 
 	xdg_src_prepare
 }
