@@ -35,5 +35,5 @@ src_compile() {
 }
 
 src_install() {
-	cargo_src_install --path ./czkawka_cli
+	cargo_src_install
 }
