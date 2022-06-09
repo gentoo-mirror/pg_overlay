@@ -669,7 +669,7 @@ src_prepare() {
 	#######
 	use system-python-libs && rm -rf "${S}/third_party/python/packaging"
 
-	xdg_src_prepare
+	xdg_environment_reset
 }
 
 src_configure() {
