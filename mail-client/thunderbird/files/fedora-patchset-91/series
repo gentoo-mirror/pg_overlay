@@ -13,8 +13,6 @@ firefox-nss-addon-hack.patch
 
 mochitest-wayland-workaround.patch
 
-gcc12-D139078.patch
-gcc12-D139088.patch
 0001-GLIBCXX-fix-for-GCC-12.patch
 
 expat-CVE-2022-25235.patch
