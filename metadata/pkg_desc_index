@@ -102,9 +102,9 @@ gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/disman 5.20.0: A display management service and library. LibKScreen replacement
 gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
-kde-frameworks/kdelibs4support 5.94.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/knotifications 5.94.0: Framework for notifying the user of an event
-kde-frameworks/plasma 5.94.0: Plasma framework
+kde-frameworks/kdelibs4support 5.95.0: Framework easing the development transition from KDELibs 4 to KF 5
+kde-frameworks/knotifications 5.95.0: Framework for notifying the user of an event
+kde-frameworks/plasma 5.95.0-r2: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/bluedevil 5.24.90: Bluetooth stack for KDE Plasma
 kde-plasma/breeze 5.24.90: Breeze visual style for the Plasma desktop
@@ -241,7 +241,7 @@ sys-fs/xfsprogs 5.15.0_rc1: xfs filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in the zlib distribution.
 sys-libs/ncurses 6.3_p20220122: console display library
-sys-libs/polly 13.0.1 14.0.4: Polyhedral optimizations for LLVM
+sys-libs/polly 13.0.1 14.0.5: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre74: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
