@@ -13,19 +13,21 @@ IUSE="rpc unwind ipv6 xcsecurity selinux video_cards_nvidia"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
 
 COMMON_DEPEND="
 	dev-libs/libbsd
-	dev-libs/wayland
-	>=dev-libs/wayland-protocols-1.18
+	dev-libs/openssl:=
+	>=dev-libs/wayland-1.20
+	>=dev-libs/wayland-protocols-1.22
+	media-fonts/font-util
 	>=media-libs/libepoxy-1.5.4[X,egl(+)]
 	media-libs/libglvnd[X]
 	>=media-libs/mesa-21.1[X(+)]
-	media-fonts/font-util
 	rpc? ( net-libs/libtirpc )
 	unwind? ( sys-libs/libunwind )
 	>=x11-libs/libXau-1.0.4
+	x11-libs/libxcvt
 	>=x11-libs/libXfont2-2.0.1
 	>=x11-libs/libdrm-2.4.89
 	x11-libs/libxkbfile
@@ -33,13 +35,11 @@ COMMON_DEPEND="
 	>=x11-libs/pixman-0.27.2
 	video_cards_nvidia? ( gui-libs/egl-wayland )
 "
-
 DEPEND="
 	${COMMON_DEPEND}
 	x11-base/xorg-proto
 	>=x11-libs/xtrans-1.3.5
 "
-
 RDEPEND="
 	${COMMON_DEPEND}
 	!<=x11-base/xorg-server-1.20.11
