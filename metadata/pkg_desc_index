@@ -114,7 +114,7 @@ kde-plasma/breeze-plymouth 5.24.90: Breeze theme for Plymouth
 kde-plasma/discover 5.24.90: KDE Plasma resources management GUI
 kde-plasma/drkonqi 5.24.90: Plasma crash handler, gives the user feedback if a program crashed
 kde-plasma/kactivitymanagerd 5.24.90: System service to manage user's activities, track the usage patterns etc.
-kde-plasma/kde-cli-tools 5.24.5 5.24.90: Tools based on KDE Frameworks 5 to better interact with the system
+kde-plasma/kde-cli-tools 5.24.90: Tools based on KDE Frameworks 5 to better interact with the system
 kde-plasma/kde-gtk-config 5.24.90: Syncs KDE Plasma theme settings to GTK applications
 kde-plasma/kdecoration 5.24.90: Plugin based library to create window decorations
 kde-plasma/kdeplasma-addons 5.24.90: Extra Plasma applets and engines
@@ -136,6 +136,7 @@ kde-plasma/libksysguard 5.24.90: Task management and system monitoring library
 kde-plasma/libkworkspace 5.24.90: Workspace library to interact with the Plasma session manager
 kde-plasma/milou 5.24.90: Dedicated search application built on top of Baloo
 kde-plasma/oxygen 5.24.90: Oxygen visual style for the Plasma desktop
+kde-plasma/oxygen-sounds 5.24.90: Oxygen sound theme for the Plasma desktop
 kde-plasma/plasma-browser-integration 5.24.90: Integrate Chrome/Firefox better into Plasma through browser extensions
 kde-plasma/plasma-desktop 5.24.90: KDE Plasma desktop
 kde-plasma/plasma-disks 5.24.90: Monitors S.M.A.R.T. capable devices for imminent failure
