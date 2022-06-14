@@ -4,9 +4,9 @@
 EAPI=8
 
 ECM_HANDBOOK="forceoptional"
-KFMIN=5.90.0
+KFMIN=5.94.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.2
+QTMIN=5.15.3
 inherit ecm kde.org optfeature
 
 DESCRIPTION="Utility providing information about the computer hardware"
@@ -15,7 +15,7 @@ SRC_URI+=" https://www.gentoo.org/assets/img/logo/gentoo-3d-small.png -> glogo-s
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="gles2-only usb"
 
 DEPEND="

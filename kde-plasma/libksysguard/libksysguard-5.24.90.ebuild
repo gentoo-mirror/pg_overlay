@@ -5,8 +5,8 @@ EAPI=8
 
 ECM_DESIGNERPLUGIN="true"
 ECM_TEST="true"
-KFMIN=5.90.0
-QTMIN=5.15.2
+KFMIN=5.94.0
+QTMIN=5.15.3
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -14,7 +14,7 @@ DESCRIPTION="Task management and system monitoring library"
 
 LICENSE="LGPL-2+"
 SLOT="5/9"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="webengine X"
 
 COMMON_DEPEND="
@@ -29,7 +29,6 @@ COMMON_DEPEND="
 	>=kde-frameworks/kconfig-${KFMIN}:5[qml]
 	>=kde-frameworks/kconfigwidgets-${KFMIN}:5
 	>=kde-frameworks/kcoreaddons-${KFMIN}:5
-	>=kde-frameworks/kdeclarative-${KFMIN}:5
 	>=kde-frameworks/ki18n-${KFMIN}:5
 	>=kde-frameworks/kjobwidgets-${KFMIN}:5
 	>=kde-frameworks/knewstuff-${KFMIN}:5

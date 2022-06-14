@@ -4,8 +4,8 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{8..10} )
-KFMIN=5.90.0
-QTMIN=5.15.2
+KFMIN=5.94.0
+QTMIN=5.15.3
 inherit ecm kde.org python-single-r1
 
 DESCRIPTION="Plasma frontend for Firewalld or UFW"
@@ -13,7 +13,7 @@ HOMEPAGE="https://invent.kde.org/network/plasma-firewall"
 
 LICENSE="GPL-2+"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="firewalld +ufw"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE} || ( firewalld ufw )"
@@ -31,7 +31,6 @@ DEPEND="
 	>=kde-frameworks/kcoreaddons-${KFMIN}:5
 	>=kde-frameworks/kdeclarative-${KFMIN}:5
 	>=kde-frameworks/ki18n-${KFMIN}:5
-	>=kde-frameworks/plasma-${KFMIN}:5
 "
 RDEPEND="${DEPEND}
 	${PYTHON_DEPS}

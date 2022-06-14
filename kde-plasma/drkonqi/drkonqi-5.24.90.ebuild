@@ -3,20 +3,21 @@
 
 EAPI=8
 
-KFMIN=5.90.0
+KFMIN=5.94.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.2
+QTMIN=5.15.3
 inherit ecm kde.org
 
 DESCRIPTION="Plasma crash handler, gives the user feedback if a program crashed"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE=""
 
 COMMON_DEPEND="
 	>=dev-qt/qtdbus-${QTMIN}:5
+	>=dev-qt/qtdeclarative-${QTMIN}:5
 	>=dev-qt/qtgui-${QTMIN}:5
 	>=dev-qt/qtwidgets-${QTMIN}:5
 	>=dev-qt/qtxml-${QTMIN}:5
@@ -25,6 +26,7 @@ COMMON_DEPEND="
 	>=kde-frameworks/kconfigwidgets-${KFMIN}:5
 	>=kde-frameworks/kcoreaddons-${KFMIN}:5
 	>=kde-frameworks/kcrash-${KFMIN}:5
+	>=kde-frameworks/kdeclarative-${KFMIN}:5
 	>=kde-frameworks/ki18n-${KFMIN}:5
 	>=kde-frameworks/kidletime-${KFMIN}:5
 	>=kde-frameworks/kio-${KFMIN}:5
@@ -40,6 +42,8 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-qt/qtconcurrent-${QTMIN}:5
 "
 RDEPEND="${COMMON_DEPEND}
+	>=kde-frameworks/kirigami-${KFMIN}:5
+	>=kde-frameworks/kitemmodels-${KFMIN}:5[qml]
 	|| (
 		sys-devel/gdb
 		dev-util/lldb

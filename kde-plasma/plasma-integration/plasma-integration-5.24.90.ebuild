@@ -3,9 +3,9 @@
 
 EAPI=8
 
-KFMIN=5.90.0
+KFMIN=5.94.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.2
+QTMIN=5.15.3
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -13,16 +13,18 @@ DESCRIPTION="Qt Platform Theme integration plugins for the Plasma workspaces"
 
 LICENSE="LGPL-2+"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE=""
 
 # requires running kde environment
 RESTRICT="test"
 
-DEPEND="
+COMMON_DEPEND="
+	dev-libs/wayland
 	>=dev-qt/qtdbus-${QTMIN}:5
 	>=dev-qt/qtgui-${QTMIN}:5=[dbus]
 	>=dev-qt/qtquickcontrols2-${QTMIN}:5
+	>=dev-qt/qtwayland-${QTMIN}:5
 	>=dev-qt/qtwidgets-${QTMIN}:5
 	>=dev-qt/qtx11extras-${QTMIN}:5
 	>=kde-frameworks/kcompletion-${KFMIN}:5
@@ -34,7 +36,6 @@ DEPEND="
 	>=kde-frameworks/kio-${KFMIN}:5
 	>=kde-frameworks/kjobwidgets-${KFMIN}:5
 	>=kde-frameworks/knotifications-${KFMIN}:5
-	>=kde-frameworks/kwayland-${KFMIN}:5
 	>=kde-frameworks/kwidgetsaddons-${KFMIN}:5
 	>=kde-frameworks/kwindowsystem-${KFMIN}:5
 	>=kde-frameworks/kxmlgui-${KFMIN}:5
@@ -42,7 +43,13 @@ DEPEND="
 	x11-libs/libXcursor
 	x11-libs/libxcb
 "
-RDEPEND="${DEPEND}
+DEPEND="${COMMON_DEPEND}
+	>=dev-libs/plasma-wayland-protocols-1.6.0
+"
+RDEPEND="${COMMON_DEPEND}
 	media-fonts/hack
 	media-fonts/noto
+"
+BDEPEND="
+	>=dev-qt/qtwaylandscanner-${QTMIN}:5
 "

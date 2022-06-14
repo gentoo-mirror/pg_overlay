@@ -4,8 +4,8 @@
 EAPI=8
 
 PVCUT=$(ver_cut 1-3)
-KFMIN=5.90.0
-QTMIN=5.15.2
+KFMIN=5.94.0
+QTMIN=5.15.3
 inherit ecm kde.org
 
 DESCRIPTION="Monitor system sensors, process information and other system resources"
@@ -13,7 +13,7 @@ HOMEPAGE="https://apps.kde.org/plasma-systemmonitor/"
 
 LICENSE="|| ( GPL-3 GPL-2 )"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE=""
 
 DEPEND="

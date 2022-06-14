@@ -1,14 +1,14 @@
-From a381c7441140e77208c0ed3a8dd45cb61197afd9 Mon Sep 17 00:00:00 2001
+From da1c5074e390b2ceca3f632f14adfba55def45ab Mon Sep 17 00:00:00 2001
 From: Andreas Sturmlechner <asturm@gentoo.org>
 Date: Thu, 24 Sep 2020 22:34:28 +0200
 Subject: [PATCH] xembed-sni-proxy: Allow standalone build
 
 ---
- xembed-sni-proxy/CMakeLists.txt | 36 +++++++++++++++++++++++++++++++++
+ CMakeLists.txt | 36 +++++++++++++++++++++++++++++++++
  1 file changed, 36 insertions(+)
 
-diff --git a/xembed-sni-proxy/CMakeLists.txt b/xembed-sni-proxy/CMakeLists.txt
-index bcc583bfa..41d50d112 100644
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 443ff07c1..ba15b9ea5 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -1,3 +1,35 @@
@@ -18,10 +18,10 @@ index bcc583bfa..41d50d112 100644
 +    set(PROJECT_VERSION "GENTOO_PV")
 +    set(PROJECT_VERSION_MAJOR 5)
 +
-+    cmake_minimum_required(VERSION 3.16)
++    cmake_minimum_required(VERSION 3.0)
 +
 +    set(QT_MIN_VERSION "5.15.0")
-+    set(KF5_MIN_VERSION "5.89")
++    set(KF5_MIN_VERSION "5.74")
 +    find_package(Qt5 ${QT_MIN_VERSION} CONFIG REQUIRED COMPONENTS Core DBus X11Extras)
 +    find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
 +    set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH} ${ECM_KDE_MODULE_DIR})
@@ -40,21 +40,21 @@ index bcc583bfa..41d50d112 100644
 +
 +    configure_file(../config-X11.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-X11.h)
 +else()
-+    set(PROJECT_VERSION "5.24.80")
++    set(PROJECT_VERSION "5.20.80")
 +    set(PROJECT_VERSION_MAJOR 5)
 +endif()
 +
  add_definitions(-DQT_NO_CAST_TO_ASCII
  -DQT_NO_CAST_FROM_ASCII
- -DQT_NO_CAST_FROM_BYTEARRAY)
-@@ -64,3 +96,7 @@ install(TARGETS xembedsniproxy ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+ -DQT_NO_URL_CAST_FROM_STRING
+@@ -65,3 +97,7 @@ install(TARGETS xembedsniproxy ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
  install(FILES xembedsniproxy.desktop DESTINATION ${KDE_INSTALL_AUTOSTARTDIR})
  
- ecm_install_configured_files(INPUT plasma-xembedsniproxy.service.in @ONLY DESTINATION  ${KDE_INSTALL_SYSTEMDUSERUNITDIR})
+ ecm_install_configured_files(INPUT plasma-xembedsniproxy.service.in @ONLY DESTINATION  ${SYSTEMD_USER_UNIT_INSTALL_DIR})
 +
 +if ("${CMAKE_BINARY_DIR}" STREQUAL "${CMAKE_CURRENT_BINARY_DIR}")
 +    feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 +endif()
 -- 
-2.34.1
+2.28.0
 

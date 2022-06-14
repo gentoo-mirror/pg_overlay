@@ -4,8 +4,8 @@
 EAPI=8
 
 ECM_HANDBOOK="true"
-KFMIN=5.90.0
-QTMIN=5.15.2
+KFMIN=5.94.0
+QTMIN=5.15.3
 inherit ecm kde.org
 
 DESCRIPTION="Monitors S.M.A.R.T. capable devices for imminent failure"
@@ -13,7 +13,7 @@ HOMEPAGE="https://invent.kde.org/plasma/plasma-disks"
 
 LICENSE="|| ( GPL-3 GPL-2 )"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE=""
 
 DEPEND="
