@@ -4,17 +4,18 @@
 EAPI=8
 
 KDE_ORG_NAME="plasma-workspace"
-KFMIN=5.90.0
+KFMIN=5.94.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.2
+QTMIN=5.15.3
 inherit cmake kde.org
 
 DESCRIPTION="Legacy xembed tray icons support for SNI-only system trays"
 HOMEPAGE="https://invent.kde.org/plasma/plasma-workspace/-/blob/master/xembed-sni-proxy/Readme.md"
+CMAKE_USE_DIR="${S}/${PN}"
 
 LICENSE="GPL-2"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 
 DEPEND="
 	>=dev-qt/qtcore-${QTMIN}:5
@@ -31,13 +32,11 @@ RDEPEND="${DEPEND}
 	!kde-plasma/xembed-sni-proxy:0
 "
 
-S="${S}/${PN}"
-
 PATCHES=( "${FILESDIR}/${PN}-5.24.80-standalone.patch" )
 
 src_prepare() {
 	cmake_src_prepare
 
 	sed -e "/set/s/GENTOO_PV/$(ver_cut 1-3)/" \
-		-i CMakeLists.txt || die "Failed to prepare CMakeLists.txt"
+		-i ${PN}/CMakeLists.txt || die "Failed to prepare CMakeLists.txt"
 }

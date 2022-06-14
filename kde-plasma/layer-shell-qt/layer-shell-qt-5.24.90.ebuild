@@ -3,15 +3,15 @@
 
 EAPI=8
 
-KFMIN=5.90.0
-QTMIN=5.15.2
+KFMIN=5.94.0
+QTMIN=5.15.3
 inherit ecm kde.org
 
 DESCRIPTION="Qt component to allow applications make use of Wayland wl-layer-shell protocol"
 
 LICENSE="LGPL-3+"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE=""
 
 # dev-qt/qtgui: QtXkbCommonSupport is provided by either IUSE libinput or X

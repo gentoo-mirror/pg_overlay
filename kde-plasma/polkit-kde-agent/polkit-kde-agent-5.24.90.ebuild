@@ -4,9 +4,9 @@
 EAPI=8
 
 KDE_ORG_NAME="${PN}-1"
-KFMIN=5.90.0
+KFMIN=5.94.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.2
+QTMIN=5.15.3
 inherit ecm kde.org
 
 DESCRIPTION="PolKit agent module for KDE Plasma"
@@ -14,7 +14,7 @@ HOMEPAGE="https://kde.org/"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE=""
 
 DEPEND="

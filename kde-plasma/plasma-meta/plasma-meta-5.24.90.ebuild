@@ -8,7 +8,7 @@ HOMEPAGE="https://kde.org/plasma-desktop/"
 
 LICENSE="metapackage"
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="accessibility bluetooth +browser-integration colord +crash-handler crypt
 +desktop-portal discover +display-manager +elogind +firewall grub gtk +handbook
 +kwallet +legacy-systray +networkmanager plymouth pulseaudio +sddm sdk +smart
@@ -31,14 +31,14 @@ RDEPEND="
 	>=kde-plasma/ksshaskpass-${PV}:${SLOT}
 	>=kde-plasma/ksystemstats-${PV}:${SLOT}
 	>=kde-plasma/kwayland-integration-${PV}:${SLOT}
-	>=kde-plasma/kwayland-server-${PV}:${SLOT}
-	>=kde-plasma/kwin-${PV}:${SLOT}
+	>=kde-plasma/kwin-${PV}:${SLOT}[lock]
 	>=kde-plasma/kwrited-${PV}:${SLOT}
 	>=kde-plasma/layer-shell-qt-${PV}:${SLOT}
 	>=kde-plasma/libkscreen-${PV}:${SLOT}
 	>=kde-plasma/libksysguard-${PV}:${SLOT}
 	>=kde-plasma/milou-${PV}:${SLOT}
 	>=kde-plasma/oxygen-${PV}:${SLOT}
+	>=kde-plasma/oxygen-sounds-${PV}:${SLOT}
 	>=kde-plasma/plasma-desktop-${PV}:${SLOT}
 	>=kde-plasma/plasma-integration-${PV}:${SLOT}
 	>=kde-plasma/plasma-systemmonitor-${PV}:${SLOT}

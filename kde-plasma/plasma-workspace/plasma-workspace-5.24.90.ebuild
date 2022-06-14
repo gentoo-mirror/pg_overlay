@@ -3,11 +3,11 @@
 
 EAPI=8
 
-ECM_HANDBOOK="forceoptional"
+ECM_HANDBOOK="optional"
 ECM_TEST="forceoptional"
-KFMIN=5.90.0
+KFMIN=5.94.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.2
+QTMIN=5.15.3
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -15,7 +15,7 @@ DESCRIPTION="KDE Plasma workspace"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="5"
-KEYWORDS=""
+KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 IUSE="appstream +calendar +fontconfig geolocation gps +policykit
 screencast +semantic-desktop telemetry"
 
@@ -123,6 +123,7 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-util/wayland-scanner-1.19.0
 	x11-base/xorg-proto
 	fontconfig? ( x11-libs/libXrender )
+	test? ( >=dev-libs/wayland-protocols-1.24 )
 "
 RDEPEND="${COMMON_DEPEND}
 	app-text/iso-codes
@@ -179,8 +180,6 @@ src_prepare() {
 	if ! use policykit; then
 		cmake_run_in kcms cmake_comment_add_subdirectory users
 	fi
-
-	ecm_punt_kf_module Su
 }
 
 src_configure() {
