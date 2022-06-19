@@ -48,20 +48,19 @@ DEPEND="
 	app-arch/zstd:=
 	app-crypt/libb2
 	dev-libs/double-conversion:=
-	dev-libs/glib:2
+	gui? ( dev-libs/glib:2 )
 	dev-libs/libpcre2:=[pcre16,unicode]
-	dev-util/gtk-update-icon-cache
-	media-libs/fontconfig
-	>=media-libs/freetype-2.6.1:2
-	>=media-libs/harfbuzz-1.6.0:=
-	media-libs/tiff:0
-	>=sys-apps/dbus-1.4.20
+	gui? ( dev-util/gtk-update-icon-cache
+			media-libs/fontconfig
+			>=media-libs/freetype-2.6.1:2
+			>=media-libs/harfbuzz-1.6.0:=
+			media-libs/tiff:0 )
+	dbus? ( >=sys-apps/dbus-1.4.20 )
 	sys-libs/zlib:=
 	virtual/opengl
 	evdev? ( sys-libs/mtdev )
 	freetds? ( dev-db/freetds )
 	gles2-only? ( media-libs/libglvnd )
-	!gles2-only? ( media-libs/libglvnd[X] )
 	gssapi? ( virtual/krb5 )
 	gtk? (
 		x11-libs/gtk+:3
