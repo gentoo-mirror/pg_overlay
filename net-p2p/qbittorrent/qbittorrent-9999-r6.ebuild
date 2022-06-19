@@ -68,7 +68,6 @@ src_configure() {
 			# More verbose build logs are preferable for bug reports
 			-DVERBOSE_CONFIGURE=OFF
 
-			-DQT5=OFF
 			-DQT6=ON
 
 			# We do these in multibuild, see bug #839531 for why.
