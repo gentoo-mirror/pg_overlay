@@ -38,7 +38,8 @@ RDEPEND="
 		dev-qt/qtbase:6[widgets]
 	)"
 DEPEND="${RDEPEND}"
-BDEPEND="virtual/pkgconfig"
+BDEPEND="dev-qt/qttools:6
+	virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
 
