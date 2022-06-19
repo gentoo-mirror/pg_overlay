@@ -27,7 +27,7 @@ REQUIRED_USE="dbus? ( gui )
 RDEPEND="
 	>=dev-libs/boost-1.65.0-r1:=
 	dev-libs/openssl:=
-	dev-qt/qtbase:6[network,sql,xml]
+	dev-qt/qtbase:6[network,sql]
 	>=net-libs/libtorrent-rasterbar-1.2.14:=
 	sys-libs/zlib
 	dbus? ( dev-qt/qtbase:6[dbus] )
