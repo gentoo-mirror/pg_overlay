@@ -27,7 +27,7 @@ REQUIRED_USE="dbus? ( gui )
 RDEPEND="
 	>=dev-libs/boost-1.65.0-r1:=
 	dev-libs/openssl:=
-	dev-qt/qtbase:6[network,sql]
+	dev-qt/qtbase:6[network,sql,xml]
 	>=net-libs/libtorrent-rasterbar-1.2.14:=
 	sys-libs/zlib
 	dbus? ( dev-qt/qtbase:6[dbus] )
@@ -38,7 +38,7 @@ RDEPEND="
 		dev-qt/qtbase:6[widgets]
 	)"
 DEPEND="${RDEPEND}"
-BDEPEND="dev-qt/qttools:6
+BDEPEND="dev-qt/qttools:6[linguist]
 	virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
