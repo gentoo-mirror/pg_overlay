@@ -18,7 +18,7 @@ REQUIRED_USE="
 	X? ( || ( evdev libinput ) )
 "
 
-QTGUI_IUSE="accessibility egl eglfs evdev +gif gles2-only +ico +jpeg +libinput tslib tuio vulkan +X"
+QTGUI_IUSE="accessibility egl eglfs evdev +gif gles2-only +jpeg +libinput tslib tuio vulkan +X"
 QTNETWORK_IUSE="gssapi libproxy sctp +ssl vnc"
 QTSQL_IUSE="freetds mysql oci8 odbc postgres +sqlite"
 IUSE+=" ${QTGUI_IUSE} ${QTNETWORK_IUSE} ${QTSQL_IUSE} cups gtk icu systemd +udev"
@@ -43,9 +43,6 @@ REQUIRED_USE+="
 # qtimageformats: mng not done yet, qtimageformats.git upstream commit 9443239c
 # qtnetwork: connman, networkmanager
 DEPEND="
-	app-arch/brotli:=
-	app-arch/libarchive[zstd]
-	app-arch/zstd:=
 	app-crypt/libb2
 	dev-libs/double-conversion:=
 	gui? ( dev-libs/glib:2 )
@@ -57,7 +54,7 @@ DEPEND="
 			media-libs/tiff:0 )
 	dbus? ( >=sys-apps/dbus-1.4.20 )
 	sys-libs/zlib:=
-	virtual/opengl
+	brotli? ( app-arch/brotli:= )
 	evdev? ( sys-libs/mtdev )
 	freetds? ( dev-db/freetds )
 	gles2-only? ( media-libs/libglvnd )
@@ -82,7 +79,7 @@ DEPEND="
 	postgres? ( dev-db/postgresql:* )
 	sctp? ( kernel_linux? ( net-misc/lksctp-tools ) )
 	sqlite? ( dev-db/sqlite:3 )
-	ssl? ( dev-libs/openssl:0= )
+	ssl? ( dev-libs/openssl:= )
 	systemd? ( sys-apps/systemd:= )
 	tslib? ( >=x11-libs/tslib-1.21 )
 	udev? ( virtual/libudev:= )
@@ -99,6 +96,7 @@ DEPEND="
 		x11-libs/xcb-util-renderutil
 		x11-libs/xcb-util-wm
 	)
+	zstd? ( app-arch/zstd:= )
 "
 RDEPEND="${DEPEND}"
 
@@ -118,16 +116,16 @@ src_configure() {
 		-DINSTALL_MKSPECSDIR=${QT6_ARCHDATADIR}/mkspecs
 		-DINSTALL_EXAMPLESDIR=${QT6_EXAMPLESDIR}
 		-DQT_FEATURE_androiddeployqt=OFF
-		-DQT_FEATURE_zstd=ON
 		$(qt_feature concurrent)
 		$(qt_feature dbus)
 		$(qt_feature gui)
+		$(qt_feature gui testlib)
 		$(qt_feature icu)
 		$(qt_feature network)
 		$(qt_feature sql)
 		$(qt_feature systemd journald)
-		-DQT_FEATURE_testlib=ON # TODO: install QtTest by default?
 		$(qt_feature udev libudev)
+		$(qt_feature zstd)
 		$(qt_feature xml)
 	)
 	use gui && mycmakeargs+=(
@@ -157,6 +155,7 @@ src_configure() {
 		mycmakeargs+=( -DQT_FEATURE_xkbcommon=ON )
 	fi
 	use network && mycmakeargs+=(
+		$(qt_feature brotli)
 		$(qt_feature gssapi)
 		$(qt_feature libproxy)
 		$(qt_feature sctp)
@@ -172,5 +171,6 @@ src_configure() {
 		$(qt_feature sqlite sql_sqlite)
 		$(qt_feature sqlite system_sqlite)
 	)
+
 	qt6-build_src_configure
 }
