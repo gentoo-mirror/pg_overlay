@@ -12,7 +12,7 @@ inherit multilib-minimal subversion
 
 DESCRIPTION="A lightweigt RPC library based on XML and HTTP"
 HOMEPAGE="https://xmlrpc-c.sourceforge.net/"
-ESVN_REPO_URI="svn://svn.code.sf.net/p/xmlrpc-c/code/stable"
+ESVN_REPO_URI="svn://svn.code.sf.net/p/xmlrpc-c/code/advanced"
 
 LICENSE="BSD"
 SLOT="0/4.54"
