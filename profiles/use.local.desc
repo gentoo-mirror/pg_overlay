@@ -67,6 +67,7 @@ dev-ml/lablgtk:sourceview - Enable GtkSourceView support
 dev-perl/JSON:xs - Install C-based dev-perl/JSON-XS for faster performance
 dev-perl/Sub-Name:suggested - Install extra dependencies needed for extended regression tests
 dev-qt/qtbase:X - Build the XCB platform plugin and enable X11 integration
+dev-qt/qtbase:brotli - Enable support for Brotli decompression
 dev-qt/qtbase:concurrent - Build Qt6Concurrent module
 dev-qt/qtbase:dbus - Build Qt6DBus module
 dev-qt/qtbase:egl - Enable EGL integration
@@ -75,7 +76,6 @@ dev-qt/qtbase:evdev - Enable support for input devices via evdev
 dev-qt/qtbase:gssapi - Enable support for GSSAPI (virtual/krb5)
 dev-qt/qtbase:gtk - Build the GTK platform theme plugin
 dev-qt/qtbase:gui - Build Qt6Gui module
-dev-qt/qtbase:ico - Enable ico image support
 dev-qt/qtbase:libinput - Enable support for input devices via dev-libs/libinput
 dev-qt/qtbase:libproxy - Use net-libs/libproxy for automatic HTTP/SOCKS proxy configuration
 dev-qt/qtbase:network - Build Qt6Network module
