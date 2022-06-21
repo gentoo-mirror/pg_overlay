@@ -12,19 +12,18 @@ if [[ ${QT6_BUILD_TYPE} == release ]]; then
 fi
 
 # Qt Modules
-IUSE="+concurrent +dbus +gui +network +sql opengl +widgets +xml"
+IUSE="+concurrent +dbus +gui +network +sql opengl +widgets +xml +zstd"
 REQUIRED_USE="
 	opengl? ( gui ) widgets? ( gui )
 	X? ( || ( evdev libinput ) )
 "
 
 QTGUI_IUSE="accessibility egl eglfs evdev +gif gles2-only +jpeg +libinput tslib tuio vulkan +X"
-QTNETWORK_IUSE="gssapi libproxy sctp +ssl vnc"
+QTNETWORK_IUSE="brotli gssapi libproxy sctp +ssl vnc"
 QTSQL_IUSE="freetds mysql oci8 odbc postgres +sqlite"
 IUSE+=" ${QTGUI_IUSE} ${QTNETWORK_IUSE} ${QTSQL_IUSE} cups gtk icu systemd +udev"
 # QtPrintSupport = QtGui + QtWidgets enabled.
 # ibus = xkbcommon + dbus, and xkbcommon needs either libinput or X
-# moved vnc logically to QtNetwork as that is upstream condition for it
 REQUIRED_USE+="
 	$(printf '%s? ( gui ) ' ${QTGUI_IUSE//+/})
 	$(printf '%s? ( network ) ' ${QTNETWORK_IUSE//+/})
@@ -36,6 +35,7 @@ REQUIRED_USE+="
 	gui? ( || ( eglfs X ) || ( libinput X ) )
 	libinput? ( udev )
 	sql? ( || ( freetds mysql oci8 odbc postgres sqlite ) )
+	vnc? ( gui )
 	X? ( gles2-only? ( egl ) )
 "
 
@@ -125,8 +125,8 @@ src_configure() {
 		$(qt_feature sql)
 		$(qt_feature systemd journald)
 		$(qt_feature udev libudev)
-		$(qt_feature zstd)
 		$(qt_feature xml)
+		$(qt_feature zstd)
 	)
 	use gui && mycmakeargs+=(
 		$(qt_feature accessibility accessibility_atspi_bridge)
