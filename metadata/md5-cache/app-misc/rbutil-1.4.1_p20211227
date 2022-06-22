@@ -11,5 +11,5 @@ LICENSE=GPL-2
 RDEPEND=dev-libs/crypto++:= dev-libs/quazip dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtwidgets:5 virtual/libusb:1
 SLOT=0
 SRC_URI=https://git.rockbox.org/cgit/rockbox.git/snapshot/rockbox-1ddc5a202d6986f5e981ce16c0fce6c49b767765.tar.gz
-_eclasses_=desktop	c0d27bf73aa08ca05b663dbd31fbef28	plocale	7ce00136a77130df46fbbd5966f98a61	toolchain-funcs	fd9cde67030b26e479eeadaced488253	multilib	4fbbbc98f236f1b43acd99476bc3cd85	qmake-utils	59420c906278d16deaaa629f9d115707
+_eclasses_=desktop	22952d8f27cac191d75529d4c38e6bfa	plocale	7ce00136a77130df46fbbd5966f98a61	toolchain-funcs	fd9cde67030b26e479eeadaced488253	multilib	4fbbbc98f236f1b43acd99476bc3cd85	qmake-utils	59420c906278d16deaaa629f9d115707
 _md5_=28da46fc94d828fa550a2b1654d20bf6
