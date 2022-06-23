@@ -60,7 +60,7 @@ src_configure() {
 			-DDBUS=$(usex dbus)
 
 			# musl lacks execinfo.h
-			-DSTACKTRACE=$(usex !elibc_musl)
+			-DSTACKTRACE=OFF
 
 			# We always want to install unit files
 			-DSYSTEMD=OFF
@@ -73,13 +73,13 @@ src_configure() {
 			# We do these in multibuild, see bug #839531 for why.
 			# Fedora has to do the same thing.
 			-DGUI=$(usex gui)
+			-DCMAKE_BUILD_TYPE=Release
 		)
 
 		if [[ ${MULTIBUILD_VARIANT} == webui ]] ; then
 			mycmakeargs+=(
 				-DGUI=OFF
 				-DWEBUI=ON
-				-DCMAKE_BUILD_TYPE=Release
 			)
 		else
 			mycmakeargs+=( -DWEBUI=OFF )
