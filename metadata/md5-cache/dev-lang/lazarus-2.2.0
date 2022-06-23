@@ -11,5 +11,5 @@ RDEPEND=>=dev-lang/fpc-3.2.2[source] net-misc/rsync >=sys-devel/binutils-2.19.1-
 RESTRICT=strip
 SLOT=0
 SRC_URI=https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/lazarus_2_2_0/lazarus-lazarus_2_2_0.tar.bz2 -> lazarus-2.2.0.tar.bz2
-_eclasses_=desktop	c0d27bf73aa08ca05b663dbd31fbef28
+_eclasses_=desktop	22952d8f27cac191d75529d4c38e6bfa
 _md5_=433fcfc1160697981a994adc947030cd
