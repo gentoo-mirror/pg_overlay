@@ -357,6 +357,14 @@ src_configure() {
 
 	rust_target="$(rust_abi)"
 
+	# https://bugs.gentoo.org/732632
+	if tc-is-clang; then
+		local clang_slot="$(clang-major-version)"
+		if { has_version "sys-devel/clang:${clang_slot}[default-libcxx]" || is-flagq -stdlib=libc++; }; then
+			use_libcxx="true"
+		fi
+	fi
+
 	cat <<- _EOF_ > "${S}"/config.toml
 		changelog-seen = 2
 		[llvm]
@@ -410,9 +418,10 @@ src_configure() {
 		mandir = "share/man"
 
 		[rust]
+		# https://github.com/rust-lang/rust/issues/54872
+		codegen-units-std = 1
 		optimize = true
 		debug = $(toml_usex debug)
-		codegen-units-std = 1
 		debug-assertions = $(toml_usex debug)
 		debug-assertions-std = $(toml_usex debug)
 		debuginfo-level = $(usex debug 2 0)
@@ -479,6 +488,8 @@ src_configure() {
 		cat <<- _EOF_ >> "${S}"/config.toml
 			[target.wasm32-unknown-unknown]
 			linker = "$(usex system-llvm lld rust-lld)"
+			# wasm target does not have profiler_builtins https://bugs.gentoo.org/848483
+			profiler = false
 		_EOF_
 	fi
 
