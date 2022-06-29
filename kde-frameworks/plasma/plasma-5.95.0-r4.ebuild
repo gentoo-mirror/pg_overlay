@@ -12,7 +12,7 @@ inherit ecm kde.org
 DESCRIPTION="Plasma framework"
 
 LICENSE="LGPL-2+"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 IUSE="gles2-only man wayland X"
 
 RESTRICT="test"
@@ -58,6 +58,11 @@ DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )
 "
 BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
+
+PATCHES=(
+	"${FILESDIR}/${P}-revert-QT_FEATURE_foo.patch"
+	"${FILESDIR}/${P}-fix-sizeForLabels-double-scaling.patch"
+)
 
 src_configure() {
 	local mycmakeargs=(
