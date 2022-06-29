@@ -57,6 +57,16 @@ dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
 dev-lang/zig:stage2 - Install stage2 compiler (written in Zig) alongside stage1 compiler (written in C++ and Zig)
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
+dev-libs/openssl:asm - Support assembly hand optimized crypto functions (i.e. faster run time)
+dev-libs/openssl:bindist - Disable/Restrict EC algorithms (as they seem to be patented) -- note: changes the ABI
+dev-libs/openssl:fips - Enable FIPS provider
+dev-libs/openssl:ktls - Enable support for Kernel implementation of TLS (kTLS)
+dev-libs/openssl:rfc3779 - Enable support for RFC 3779 (X.509 Extensions for IP Addresses and AS Identifiers)
+dev-libs/openssl:sslv2 - Support for the old/insecure SSLv2 protocol -- note: not required for TLS/https
+dev-libs/openssl:sslv3 - Support for the old/insecure SSLv3 protocol -- note: not required for TLS/https
+dev-libs/openssl:tls-compression - Enable support for discouraged TLS compression
+dev-libs/openssl:tls-heartbeat - Enable the Heartbeat Extension in TLS and DTLS
+dev-libs/openssl:weak-ssl-ciphers - Build support for SSL/TLS ciphers that are considered "weak"
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
