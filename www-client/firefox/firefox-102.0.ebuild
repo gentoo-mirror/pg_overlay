@@ -190,7 +190,7 @@ RDEPEND="${COMMON_DEPEND}
 		)
 	)
 	selinux? ( sec-policy/selinux-mozilla )
-)
+"
 
 DEPEND="${COMMON_DEPEND}
 	pulseaudio? (
