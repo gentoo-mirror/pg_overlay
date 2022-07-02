@@ -64,8 +64,6 @@ dev-perl/Template-Toolkit 2.290.0: The Template Toolkit
 dev-perl/TermReadKey 2.380.0: Change terminal modes, and perform non-blocking reads
 dev-perl/Text-Autoformat 1.750.0: Automatic text wrapping and reformatting
 dev-perl/URI 1.760.0: Uniform Resource Identifiers (absolute and relative)
-dev-perl/Unicode-EastAsianWidth 12.0: East Asian Width properties
-dev-perl/XML-Parser 2.460.0: A Perl extension interface to James Clark's XML parser, expat
 dev-perl/XML-SAX 1.2.0: Perl module for using and building Perl SAX2 XML parsers, filters, and drivers
 dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-python/PyQt5-sip 5.5.0: Private sip module for PyQt5
