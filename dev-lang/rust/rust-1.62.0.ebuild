@@ -380,7 +380,7 @@ src_configure() {
 		link-jobs = $(makeopts_jobs)
 		link-shared =  $(toml_usex system-llvm)
 		skip-rebuild = true
-		static-libstdcpp = $(toml_usex system-llvm false true)
+		static-libstdcpp = $(usex system-llvm false true)
 		use-libcxx =  $(toml_usex system-llvm)
 		use-linker = "lld"
 
