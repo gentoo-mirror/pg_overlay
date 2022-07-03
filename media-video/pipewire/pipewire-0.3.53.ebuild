@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{8..10} )
+PYTHON_COMPAT=( python3_{8..11} )
 
 inherit meson-multilib optfeature prefix python-any-r1 udev
 
@@ -123,7 +123,6 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
-	"${FILESDIR}"/${P}-pulse-path.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
