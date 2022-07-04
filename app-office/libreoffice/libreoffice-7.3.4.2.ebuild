@@ -3,8 +3,8 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{9,10} )
-PYTHON_REQ_USE="threads(+),xml"
+PYTHON_COMPAT=( python3_{8..10} )
+PYTHON_REQ_USE="threads(+),xml(+)"
 
 MY_PV="${PV/_alpha/.alpha}"
 MY_PV="${MY_PV/_beta/.beta}"
@@ -388,7 +388,6 @@ src_prepare() {
 			-e ":Keywords: s:pdf;::" \
 			sysui/desktop/menus/draw.desktop || die
 	fi
-	sed -i 's/=thin//g' solenv/gbuild/platform/com_GCC_defs.mk
 }
 
 src_configure() {
@@ -419,6 +418,10 @@ src_configure() {
 		CXX=${CHOST}-g++
 		NM=gcc-nm
 		RANLIB=gcc-ranlib
+
+		# Apparently the Clang flags get used even for GCC builds sometimes.
+		# bug #838115
+		sed -i -e "s/-flto=thin/-flto/" solenv/gbuild/platform/com_GCC_defs.mk || die
 	fi
 
 	if use custom-cflags ; then
