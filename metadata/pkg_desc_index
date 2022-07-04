@@ -117,7 +117,7 @@ media-libs/gstreamer 1.19.3: Open source multimedia framework
 media-libs/imlib2 1.7.4: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 4.192.1: Reusable library for GPU-accelerated image processing primitives
-media-libs/libpulse 15.99.1-r1: Libraries for PulseAudio clients
+media-libs/libpulse 16.1: Libraries for PulseAudio clients
 media-libs/libsdl2 2.0.20-r1: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20220503: VoIP library for Telegram clients
 media-libs/libuninameslist 20211114: Library of unicode annotation data
@@ -138,7 +138,6 @@ media-sound/mac 7.60: Monkey's Audio Codecs
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
-media-sound/pulseaudio 15.99.1-r1: A networked sound server with an advanced plugin system
 media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD project
