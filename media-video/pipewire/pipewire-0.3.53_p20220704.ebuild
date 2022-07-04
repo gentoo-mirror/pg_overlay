@@ -5,7 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{8..11} )
 
-inherit flag-o-matic meson-multilib optfeature prefix python-any-r1 systemd udev
+inherit meson-multilib optfeature prefix python-any-r1 udev
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
@@ -29,7 +29,7 @@ LICENSE="MIT LGPL-2.1+ GPL-2"
 # ABI was broken in 0.3.42 for https://gitlab.freedesktop.org/pipewire/wireplumber/-/issues/49
 SLOT="0/0.4"
 IUSE="bluetooth doc echo-cancel extra gstreamer jack-client jack-sdk lv2 pipewire-alsa
-sound-server ssl system-service systemd test udev v4l X zeroconf"
+sound-server ssl system-service systemd test udev v4l X zeroconf vulkan"
 
 # Once replacing system JACK libraries is possible, it's likely that
 # jack-client IUSE will need blocking to avoid users accidentally
@@ -161,12 +161,10 @@ src_prepare() {
 
 		# End of ${limitsdfile} from ${P}
 	EOF
+	sed -i "s/volume = merge/volume = ignore/g" spa/plugins/alsa/mixer/paths/analog-output.conf.common
 }
 
 multilib_src_configure() {
-	# https://bugs.gentoo.org/838301
-	filter-flags -fno-semantic-interposition
-
 	local emesonargs=(
 		-Ddocdir="${EPREFIX}"/usr/share/doc/${PF}
 
@@ -203,9 +201,9 @@ multilib_src_configure() {
 		# Not yet packaged.
 		-Dbluez5-codec-lc3plus=disabled
 		-Dcontrol=enabled # Matches upstream
-		-Daudiotestsrc=enabled # Matches upstream
-		-Dffmpeg=disabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
-		-Dpipewire-jack=enabled # Allows integrating JACK apps into PW graph
+		-Daudiotestsrc=disabled # Matches upstream
+		-Dffmpeg=enabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
+		-Dpipewire-jack=disabled # Allows integrating JACK apps into PW graph
 		$(meson_native_use_feature jack-client jack) # Allows PW to act as a JACK client
 		$(meson_use jack-sdk jack-devel)
 		$(usex jack-sdk "-Dlibjack-path=${EPREFIX}/usr/$(get_libdir)" '')
@@ -217,9 +215,9 @@ multilib_src_configure() {
 		-Dlibcamera=disabled # libcamera is not in Portage tree
 		$(meson_native_use_feature ssl raop)
 		-Dvideoconvert=enabled # Matches upstream
-		-Dvideotestsrc=enabled # Matches upstream
+		-Dvideotestsrc=disabled # Matches upstream
 		-Dvolume=enabled # Matches upstream
-		-Dvulkan=disabled # Uses pre-compiled Vulkan compute shader to provide a CGI video source (dev thing; disabled by upstream)
+		$(meson_native_use_feature vulkan) # Uses pre-compiled Vulkan compute shader to provide a CGI video source (dev thing; disabled by upstream)
 		$(meson_native_use_feature extra pw-cat)
 		$(meson_feature udev)
 		-Dudevrulesdir="${EPREFIX}$(get_udevdir)/rules.d"
