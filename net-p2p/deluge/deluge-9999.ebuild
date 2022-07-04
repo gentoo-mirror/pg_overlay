@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,7 +18,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_BRANCH="develop"
 else
 	SRC_URI="http://download.deluge-torrent.org/source/2.0/${P}.tar.xz"
-	KEYWORDS="~amd64 ~arm ~ppc ~sparc ~x86"
+	KEYWORDS="~amd64 ~arm ~ppc ~x86"
 fi
 
 LICENSE="GPL-2"
@@ -49,7 +49,10 @@ RDEPEND="
 		dev-python/rencode[${PYTHON_USEDEP}]
 		dev-python/setproctitle[${PYTHON_USEDEP}]
 		dev-python/six[${PYTHON_USEDEP}]
-		>=dev-python/twisted-17.1.0[crypt,${PYTHON_USEDEP}]
+		|| (
+			>=dev-python/twisted-17.1.0[ssl(-),${PYTHON_USEDEP}]
+			>=dev-python/twisted-17.1.0[crypt(-),${PYTHON_USEDEP}]
+		)
 		>=dev-python/zope-interface-4.4.2[${PYTHON_USEDEP}]
 		geoip? ( dev-python/geoip-python[${PYTHON_USEDEP}] )
 		gtk? (
