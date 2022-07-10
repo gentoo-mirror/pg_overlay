@@ -5,12 +5,12 @@ EAPI=8
 
 ECM_TEST="false"
 PVCUT=$(ver_cut 1-2)
-QTMIN=5.15.3
+QTMIN=5.15.4
 inherit ecm kde.org
 
 DESCRIPTION="Framework for notifying the user of an event"
 LICENSE="LGPL-2.1+"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 IUSE="dbus nls phonon qml speech X"
 
 RDEPEND="

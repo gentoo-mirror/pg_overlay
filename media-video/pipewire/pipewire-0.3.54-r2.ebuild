@@ -3,6 +3,13 @@
 
 EAPI=8
 
+# 1. Please regularly check (even at the point of bumping) Fedora's packaging
+# for needed backports at https://src.fedoraproject.org/rpms/pipewire/tree/rawhide.
+#
+# 2. Keep an eye on git master (for both PipeWire and WirePlumber) as things
+# continue to move quickly. It's not uncommon for fixes to be made shortly
+# after releases.
+
 PYTHON_COMPAT=( python3_{8..11} )
 
 inherit meson-multilib optfeature prefix python-any-r1 udev
@@ -12,7 +19,7 @@ if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
 else
 	if [[ ${PV} == *_p* ]] ; then
-		MY_COMMIT="76350cebefe9bdabe24e9d043b83737547c225d8"
+		MY_COMMIT=""
 		SRC_URI="https://gitlab.freedesktop.org/pipewire/pipewire/-/archive/${MY_COMMIT}/pipewire-${MY_COMMIT}.tar.bz2 -> ${P}.tar.bz2"
 		S="${WORKDIR}"/${PN}-${MY_COMMIT}
 	else
@@ -134,6 +141,8 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
+	"${FILESDIR}"/${P}-audioconvert-samples.patch
+	"${FILESDIR}"/${P}-fortify-source.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
