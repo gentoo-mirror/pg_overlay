@@ -5,7 +5,7 @@ EAPI=8
 
 KDE_ORG_NAME="${PN}-framework"
 PVCUT=$(ver_cut 1-2)
-QTMIN=5.15.3
+QTMIN=5.15.4
 VIRTUALX_REQUIRED="test"
 inherit ecm kde.org
 
@@ -58,11 +58,6 @@ DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )
 "
 BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
-
-PATCHES=(
-	"${FILESDIR}/${P}-revert-QT_FEATURE_foo.patch"
-	"${FILESDIR}/${P}-fix-sizeForLabels-double-scaling.patch"
-)
 
 src_configure() {
 	local mycmakeargs=(
