@@ -141,16 +141,7 @@ PATCHES=(
 
 pkg_setup() {
 	use lua && lua-single_pkg_setup
-}
-
-src_prepare() {
-	cp "${DISTDIR}/waf-${WAF_PV}" "${S}"/waf || die
-	chmod +x "${S}"/waf || die
-
-	sed -i 's/2.0.22/2.0.23/g' bootstrap.py || die
-	sed -i '/Wdisabled-optimization/d' waftools/detections/compiler.py || die
-
-	default
+	use tools && python-single-r1_pkg_setup
 }
 
 src_configure() {
