@@ -517,6 +517,7 @@ src_configure() {
 		--without-system-dragonbox
 		--without-system-jfreereport
 		--without-system-libcmis
+		--without-system-libfixmath
 		--without-system-sane
 		$(use_enable base report-builder)
 		$(use_enable bluetooth sdremote-bluetooth)
