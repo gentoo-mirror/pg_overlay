@@ -24,7 +24,7 @@ else
 	DOCS=( RELEASE_NOTES )
 fi
 
-DOCS+=( README.md DOCS/{client-api,interface}-changes.rst )
+DOCS+=( README.md etc/{mpv,input}.conf DOCS/{client-api,interface}-changes.rst)
 
 # See Copyright in sources and Gentoo bug #506946. libmpv is ISC.
 # See https://github.com/mpv-player/mpv/blob/6265724f3331e3dee8d9ec2b6639def5004a5fa2/Copyright which
