@@ -49,6 +49,7 @@ ADDONS_SRC=(
 	# not packaged in Gentoo, https://skia.org/
 	"${ADDONS_URI}/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz"
 	"${ADDONS_URI}/libcuckoo-93217f8d391718380c508a722ab9acd5e9081233.tar.gz"
+	"${ADDONS_URI}dragonbox-1.1.0.tar.gz"
 	"base? (
 		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
 		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
@@ -513,6 +514,7 @@ src_configure() {
 		--without-helppack-integration
 		--with-system-gpgmepp
 		--without-system-cuckoo
+		--without-system-dragonbox
 		--without-system-jfreereport
 		--without-system-libcmis
 		--without-system-sane
