@@ -107,7 +107,6 @@ kde-frameworks/knotifications 5.96.0: Framework for notifying the user of an eve
 kde-frameworks/plasma 5.96.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
-kde-plasma/kde-cli-tools 5.25.2: Tools based on KDE Frameworks 5 to better interact with the system
 mail-client/thunderbird 91.11.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.0.32: Scanner Access Now Easy - Backends
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
