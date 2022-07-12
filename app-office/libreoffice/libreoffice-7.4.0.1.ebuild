@@ -48,6 +48,7 @@ ADDONS_SRC=(
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
 	"${ADDONS_URI}/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz"
+	"${ADDONS_URI}/libcmis-0.5.2.tar.xz"
 	"${ADDONS_URI}/libcuckoo-93217f8d391718380c508a722ab9acd5e9081233.tar.gz"
 	"${ADDONS_URI}dragonbox-1.1.0.tar.gz"
 	"base? (
@@ -516,7 +517,7 @@ src_configure() {
 		--without-system-cuckoo
 		--without-system-dragonbox
 		--without-system-jfreereport
-		--without-system-libcmis
+		#--without-system-libcmis
 		--without-system-libfixmath
 		--without-system-sane
 		$(use_enable base report-builder)
