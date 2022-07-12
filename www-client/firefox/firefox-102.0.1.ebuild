@@ -851,6 +851,8 @@ src_configure() {
 			mozconfig_add_options_ac '+lto' --enable-lto=cross
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=cross
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO_RUST=1
+			mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
+
 		else
 			# ThinLTO is currently broken, see bmo#1644409
 			mozconfig_add_options_ac '+lto' --enable-lto=full
