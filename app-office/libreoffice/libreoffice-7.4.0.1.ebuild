@@ -488,7 +488,7 @@ src_configure() {
 		--enable-release-build
 		--disable-breakpad
 		--disable-bundle-mariadb
-		--disable-cmis
+		--disable-libcmis
 		--disable-epm
 		--disable-fetch-external
 		--disable-gtk3-kde5
