@@ -8,6 +8,7 @@ inherit autotools flag-o-matic usr-ldscript
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
 MY_PV="${PV/_/-}"
+MY_PV="${MY_PV/01/0.1}"
 SRC_URI="https://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git/snapshot/${PN}-dev-${MY_PV}.tar.gz"
 
 LICENSE="LGPL-2.1"
@@ -28,8 +29,8 @@ BDEPEND="
 RDEPEND+=" selinux? ( sec-policy/selinux-xfs )"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-4.15.0-docdir.patch
 	"${FILESDIR}"/${PN}-5.3.0-libdir.patch
+	"${FILESDIR}"/${PN}-5.18.0-docdir.patch
 )
 
 S=${WORKDIR}/${PN}-dev-${MY_PV}
@@ -51,6 +52,9 @@ src_configure() {
 	# unnecessarily clutter CFLAGS (and fortran isn't used)
 	unset FCFLAGS
 
+	# If set in user env, this breaks configure
+	unset PLATFORM
+
 	export DEBUG=-DNDEBUG
 
 	# Package is honoring CFLAGS; No need to use OPTIMIZER anymore.
@@ -58,9 +62,7 @@ src_configure() {
 	# flags.
 	export OPTIMIZER=" "
 
-	unset PLATFORM # if set in user env, this breaks configure
-
-	# Avoid automagic on libdevmapper, #709694
+	# Avoid automagic on libdevmapper (bug #709694)
 	export ac_cv_search_dm_task_create=no
 
 	# Build fails with -O3 (bug #712698)
