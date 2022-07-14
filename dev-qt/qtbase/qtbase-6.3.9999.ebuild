@@ -14,7 +14,8 @@ fi
 # Qt Modules
 IUSE="+concurrent +dbus +gui +network +sql opengl +widgets +xml +zstd"
 REQUIRED_USE="
-	opengl? ( gui ) widgets? ( gui )
+	opengl? ( gui )
+	widgets? ( gui )
 	X? ( || ( evdev libinput ) )
 "
 
