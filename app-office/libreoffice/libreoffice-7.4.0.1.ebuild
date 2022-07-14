@@ -234,10 +234,7 @@ DEPEND="${COMMON_DEPEND}
 	x11-libs/libXtst
 	java? (
 		dev-java/ant-core
-		|| (
-			dev-java/openjdk:15
-			dev-java/openjdk-bin:15
-		)
+		>=virtual/jdk-11
 	)
 	test? (
 		app-crypt/gnupg
@@ -253,11 +250,7 @@ RDEPEND="${COMMON_DEPEND}
 	!app-office/libreoffice-bin-debug
 	media-fonts/liberation-fonts
 	|| ( x11-misc/xdg-utils kde-plasma/kde-cli-tools )
-	java? ( || (
-		dev-java/openjdk:15
-		dev-java/openjdk-jre-bin:15
-		>=virtual/jre-1.8
-	) )
+	java? ( >=virtual/jre-11 )
 	kde? ( kde-frameworks/breeze-icons:* )
 "
 BDEPEND="
@@ -312,16 +305,10 @@ _check_reqs() {
 }
 
 pkg_pretend() {
-	if use x86; then
-		elog "Unfortunately for packaging reasons on x86, various Java-based wizards,"
-		elog "most notably Report Builder in LibreOffice Base, will not be available."
-		elog "See also: https://bugs.gentoo.org/785640"
-	else
-		use base ||
-			ewarn "If you plan to use Base application you must enable USE base."
-		use java ||
-			ewarn "Without USE java, several wizards are not going to be available."
-	fi
+	use base ||
+		ewarn "If you plan to use Base application you must enable USE base."
+	use java ||
+		ewarn "Without USE java, several wizards are not going to be available."
 
 	[[ ${MERGE_TYPE} != binary ]] && _check_reqs pkg_pretend
 }
@@ -566,14 +553,8 @@ src_configure() {
 			--without-junit
 			--without-system-hsqldb
 			--with-ant-home="${ANT_HOME}"
-			#--with-jdk-home=$(java-config --jdk-home 2>/dev/null)
-			--with-jvm-path="${EPREFIX}/usr/lib/"
+			--with-jdk-home="${JAVA_HOME}"
 		)
-		if has_version "dev-java/openjdk:11"; then
-			myeconfargs+=( --with-jdk-home="${EPREFIX}/usr/$(get_libdir)/openjdk-11" )
-		elif has_version "dev-java/openjdk-bin:11"; then
-			myeconfargs+=( --with-jdk-home="${EPREFIX}/opt/openjdk-bin-11" )
-		fi
 
 		use libreoffice_extensions_scripting-beanshell && \
 			myeconfargs+=( --with-beanshell-jar=$(java-pkg_getjar bsh bsh.jar) )

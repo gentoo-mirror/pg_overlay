@@ -189,8 +189,7 @@ RDEPEND="${COMMON_DEPEND}
 			>=media-sound/apulse-0.1.12-r4
 		)
 	)
-	selinux? ( sec-policy/selinux-mozilla )
-"
+	selinux? ( sec-policy/selinux-mozilla )"
 
 DEPEND="${COMMON_DEPEND}
 	pulseaudio? (
