@@ -49,7 +49,7 @@ dev-libs/openssl 3.0.4: Robust, full-featured Open Source Toolkit for the Transp
 dev-libs/protobuf 3.19.4: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
-dev-libs/xmlrpc-c 1.54.9999 1.58.9999: A lightweigt RPC library based on XML and HTTP
+dev-libs/xmlrpc-c 1.54.9999 1.59.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/camlp4 4.13_p1: System for writing extensible parsers for programming languages
 dev-ml/lablgtk 2.18.11: Objective CAML interface for Gtk+2
