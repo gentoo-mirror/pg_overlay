@@ -1077,7 +1077,6 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-updater
 
 	mozconfig_add_options_ac '' --disable-valgrind
-	mozconfig_add_options_ac '' --disable-verify-mar
 	mozconfig_add_options_ac '' --disable-vtune
 
 	mozconfig_add_options_ac '' --disable-warnings-as-errors
