@@ -391,7 +391,6 @@ www-client/firefox:libproxy - Enable libproxy support
 www-client/firefox:lto - Enable Link Time Optimization (LTO) - Uses BFD linker with GCC and LLD linker with Clang
 www-client/firefox:openh264 - Use media-libs/openh264 for H264 support instead of downloading binary blob from Mozilla at runtime
 www-client/firefox:pgo - Add support for profile-guided optimization for faster binaries - this option will double the compile time
-www-client/firefox:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
 www-client/firefox:sndio - Enable support for the media-sound/sndio backend
 www-client/firefox:system-av1 - Use the system-wide media-libs/dav1d and media-libs/libaom library instead of bundled
 www-client/firefox:system-harfbuzz - Use the system-wide media-libs/harfbuzz and media-gfx/graphite2 instead of bundled
