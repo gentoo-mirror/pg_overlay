@@ -11,5 +11,4 @@ mozilla-1170092.patch
 rhbz-1354671.patch
 disable-openh264-download.patch
 
-mozilla-1774271.patch
 firefox-102.0-pref-print.patch
