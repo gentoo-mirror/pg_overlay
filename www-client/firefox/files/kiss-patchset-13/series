@@ -1,3 +1,4 @@
+fix-wayland-only.patch
 fix-clang-as.patch
 fix-disable-accessibility.patch
 no-fribidi.patch
