@@ -3,10 +3,11 @@
 
 EAPI=8
 
+CONFIG_CHECK="~ADVISE_SYSCALLS"
 PYTHON_COMPAT=( python3_{8..10} )
 PYTHON_REQ_USE="threads(+)"
 
-inherit bash-completion-r1 flag-o-matic pax-utils python-any-r1 toolchain-funcs xdg-utils
+inherit bash-completion-r1 flag-o-matic linux-info pax-utils python-any-r1 toolchain-funcs xdg-utils
 
 DESCRIPTION="A JavaScript runtime built on Chrome's V8 JavaScript engine"
 HOMEPAGE="https://nodejs.org/"
@@ -54,17 +55,11 @@ PATCHES=(
 pkg_pretend() {
 	(use x86 && ! use cpu_flags_x86_sse2) && \
 		die "Your CPU doesn't support the required SSE2 instruction."
+}
 
-	if [[ ${MERGE_TYPE} != "binary" ]]; then
-		if use lto; then
-			if tc-is-gcc; then
-				if [[ $(gcc-major-version) -ge 11 ]]; then
-					# Bug #787158
-					die "LTO builds of ${PN} using gcc-11+ currently fail tests and produce runtime errors. Either switch to gcc-10 or unset USE=lto for this ebuild"
-				fi
-			fi
-		fi
-	fi
+pkg_setup() {
+	python-any-r1_pkg_setup
+	linux-info_pkg_setup
 }
 
 src_prepare() {
@@ -96,7 +91,7 @@ src_prepare() {
 	fi
 
 	# We need to disable mprotect on two files when it builds Bug 694100.
-	use pax-kernel && PATCHES+=( "${FILESDIR}"/${PN}-13.8.0-paxmarking.patch )
+	use pax-kernel && PATCHES+=( "${FILESDIR}"/${PN}-18.3.0-paxmarking.patch )
 
 	# All this test does is check if the npm CLI produces warnings of any sort,
 	# failing if it does. Overkill, much? Especially given one possible warning
