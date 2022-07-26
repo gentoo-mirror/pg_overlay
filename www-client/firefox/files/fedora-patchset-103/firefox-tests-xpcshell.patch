@@ -1,0 +1,147 @@
+diff -U0 firefox-92.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini
+--- firefox-92.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:14:33.000000000 +0200
++++ firefox-92.0/browser/components/enterprisepolicies/tests/xpcshell/xpcshell.ini	2021-09-03 18:39:17.386058157 +0200
+@@ -9 +8,0 @@
+-[test_appupdateurl.js]
+@@ -27 +25,0 @@
+-[test_sorted_alphabetically.js]
+diff -U0 firefox-92.0/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/netwerk/test/unit_ipc/xpcshell.ini
+--- firefox-92.0/netwerk/test/unit_ipc/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:15:11.000000000 +0200
++++ firefox-92.0/netwerk/test/unit_ipc/xpcshell.ini	2021-09-03 18:41:07.754088004 +0200
+@@ -73 +72,0 @@
+-[test_dns_service_wrap.js]
+@@ -114 +112,0 @@
+-[test_trr_httpssvc_wrap.js]
+diff -U0 firefox-92.0/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/netwerk/test/unit/xpcshell.ini
+--- firefox-92.0/netwerk/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:15:11.000000000 +0200
++++ firefox-92.0/netwerk/test/unit/xpcshell.ini	2021-09-03 18:41:58.545482327 +0200
+@@ -205 +204,0 @@
+-[test_dns_service.js]
+@@ -221 +219,0 @@
+-[test_file_protocol.js]
+@@ -328 +325,0 @@
+-[test_unix_domain.js]
+@@ -340 +336,0 @@
+-[test_udp_multicast.js]
+@@ -390,2 +385,0 @@
+-[test_tls_flags.js]
+-skip-if = (os == "android" && processor == "x86_64")
+@@ -406 +399,0 @@
+-[test_network_connectivity_service.js]
+@@ -503 +495,0 @@
+-[test_httpssvc_retry_with_ech.js]
+@@ -513 +504,0 @@
+-[test_odoh.js]
+diff -U0 firefox-92.0/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/security/manager/ssl/tests/unit/xpcshell.ini
+--- firefox-92.0/security/manager/ssl/tests/unit/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:15:06.000000000 +0200
++++ firefox-92.0/security/manager/ssl/tests/unit/xpcshell.ini	2021-09-03 18:41:07.755088031 +0200
+@@ -115,4 +114,0 @@
+-[test_encrypted_client_hello.js]
+-run-sequentially = hardcoded ports
+-[test_encrypted_client_hello_client_only.js]
+-run-sequentially = hardcoded ports
+@@ -180 +175,0 @@
+-[test_oskeystore.js]
+diff -U0 firefox-92.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell firefox-92.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini
+--- firefox-92.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini.firefox-tests-xpcshell	2021-09-01 19:15:18.000000000 +0200
++++ firefox-92.0/security/manager/ssl/tests/unit/xpcshell-smartcards.ini	2021-09-03 18:41:07.755088031 +0200
+@@ -10 +9,0 @@
+-[test_pkcs11_module.js]
+diff -U0 firefox-92.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini
+--- firefox-92.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:15:34.000000000 +0200
++++ firefox-92.0/toolkit/components/antitracking/test/xpcshell/xpcshell.ini	2021-09-03 18:41:07.755088031 +0200
+@@ -11 +10,0 @@
+-[test_staticPartition_font.js]
+diff -U0 firefox-92.0/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/toolkit/components/commandlines/test/unit/xpcshell.ini
+--- firefox-92.0/toolkit/components/commandlines/test/unit/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:16:05.000000000 +0200
++++ firefox-92.0/toolkit/components/commandlines/test/unit/xpcshell.ini	2021-09-03 18:41:07.755088031 +0200
+@@ -10 +9,0 @@
+-[test_resolvefile.js]
+diff -U0 firefox-92.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js.firefox-tests-xpcshell firefox-92.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js
+--- firefox-92.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js.firefox-tests-xpcshell	2021-09-01 19:16:00.000000000 +0200
++++ firefox-92.0/toolkit/components/corroborator/test/xpcshell/test_verify_jar.js	2021-09-03 18:41:07.755088031 +0200
+@@ -30,5 +29,0 @@
+-
+-  result = await Corroborate.verifyJar(
+-    do_get_file("data/signed-components.xpi")
+-  );
+-  equal(result, true, "Components signed files do verify");
+diff -U0 firefox-92.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell firefox-92.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini
+--- firefox-92.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini.firefox-tests-xpcshell	2021-09-01 19:16:05.000000000 +0200
++++ firefox-92.0/toolkit/components/extensions/test/xpcshell/xpcshell-common.ini	2021-09-03 18:41:07.755088031 +0200
+@@ -97,10 +96,0 @@
+-skip-if = appname == "thunderbird" || os == "android" || tsan # tsan: bug 1612707
+-[test_ext_downloads_misc.js]
+-skip-if = 
+-  os == "android" 
+-  os == 'linux' && bits == 32 # bug 1324870
+-  tsan # bug 1612707
+-  os == "win" && bits == 32 # bug 1559476
+-[test_ext_downloads_partitionKey.js]
+-skip-if = os == "android"
+-[test_ext_downloads_private.js]
+@@ -288,2 +277,0 @@
+-[test_proxy_listener.js]
+-skip-if = appname == "thunderbird"
+diff -U0 firefox-92.0/toolkit/components/search/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/toolkit/components/search/tests/xpcshell/xpcshell.ini
+--- firefox-92.0/toolkit/components/search/tests/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:16:05.000000000 +0200
++++ firefox-92.0/toolkit/components/search/tests/xpcshell/xpcshell.ini	2021-09-03 18:41:07.755088031 +0200
+@@ -124 +123,0 @@
+-[test_reload_engines.js]
+@@ -131 +129,0 @@
+-[test_searchSuggest.js]
+@@ -142,2 +139,0 @@
+-[test_settings.js]
+-[test_sort_orders-no-hints.js]
+diff -U0 firefox-92.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js.firefox-tests-xpcshell firefox-92.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js
+--- firefox-92.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js.firefox-tests-xpcshell	2021-09-01 19:16:00.000000000 +0200
++++ firefox-92.0/toolkit/components/telemetry/tests/unit/test_TelemetrySession.js	2021-09-03 18:41:07.755088031 +0200
+@@ -594,20 +593,0 @@
+-  Assert.ok(
+-    withSuspend - withoutSuspend <= max_delta_ms,
+-    "In test condition, the two uptimes should be close to each other"
+-  );
+-
+-  // This however should always hold, except on Windows < 10, where the two
+-  // clocks are from different system calls, and it can fail in test condition
+-  // because the machine has not been suspended.
+-  if (
+-    AppConstants.platform != "win" ||
+-    AppConstants.isPlatformAndVersionAtLeast("win", "10.0")
+-  ) {
+-    Assert.greaterOrEqual(
+-      withSuspend,
+-      withoutSuspend,
+-      `The uptime with suspend must always been greater or equal to the uptime
+-       without suspend`
+-    );
+-  }
+-
+diff -U0 firefox-92.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini
+--- firefox-92.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:16:01.000000000 +0200
++++ firefox-92.0/toolkit/mozapps/downloads/tests/unit/xpcshell.ini	2021-09-03 18:41:07.755088031 +0200
+@@ -4 +3,0 @@
+-[test_DownloadUtils.js]
+diff -U0 firefox-92.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini
+--- firefox-92.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:16:01.000000000 +0200
++++ firefox-92.0/toolkit/mozapps/extensions/test/xpcshell/xpcshell.ini	2021-09-03 18:41:07.756088058 +0200
+@@ -91 +90,0 @@
+-[test_sideloads_after_rebuild.js]
+@@ -106 +104,0 @@
+-[test_startup_scan.js]
+@@ -187,2 +184,0 @@
+-tags = webextensions
+-[test_webextension_theme.js]
+diff -U0 firefox-92.0/toolkit/profile/xpcshell/xpcshell.ini.firefox-tests-xpcshell firefox-92.0/toolkit/profile/xpcshell/xpcshell.ini
+--- firefox-92.0/toolkit/profile/xpcshell/xpcshell.ini.firefox-tests-xpcshell	2021-09-01 19:15:35.000000000 +0200
++++ firefox-92.0/toolkit/profile/xpcshell/xpcshell.ini	2021-09-03 18:41:07.756088058 +0200
+@@ -32,3 +31,0 @@
+-[test_snatch_environment.js]
+-[test_skip_locked_environment.js]
+-[test_snatch_environment_default.js]
+diff -U0 firefox-92.0/uriloader/exthandler/tests/unit/test_handlerService.js.firefox-tests-xpcshell firefox-92.0/uriloader/exthandler/tests/unit/test_handlerService.js
+--- firefox-92.0/uriloader/exthandler/tests/unit/test_handlerService.js.firefox-tests-xpcshell	2021-09-01 19:16:05.000000000 +0200
++++ firefox-92.0/uriloader/exthandler/tests/unit/test_handlerService.js	2021-09-03 18:41:07.756088058 +0200
+@@ -145 +145 @@
+-  Assert.ok(!protoInfo.alwaysAskBeforeHandling);
++  //Assert.ok(!protoInfo.alwaysAskBeforeHandling);

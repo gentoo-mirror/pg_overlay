@@ -3,11 +3,11 @@
 
 EAPI="8"
 
-FIREFOX_PATCHSET="firefox-102-patches-02j.tar.xz"
+FIREFOX_PATCHSET="firefox-103-patches-01j.tar.xz"
 
 LLVM_MAX_SLOT=14
 
-PYTHON_COMPAT=( python3_{9,10} )
+PYTHON_COMPAT=( python3_{8..11} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
 
 WANT_AUTOCONF="2.1"
@@ -48,7 +48,7 @@ if [[ ${PV} == *_rc* ]] ; then
 fi
 
 PATCH_URIS=(
-	https://dev.gentoo.org/~{juippis,polynomial-c,whissi,slashbeast}/mozilla/patchsets/${FIREFOX_PATCHSET}
+	https://dev.gentoo.org/~{juippis,whissi,slashbeast}/mozilla/patchsets/${FIREFOX_PATCHSET}
 )
 
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
@@ -84,10 +84,10 @@ REQUIRED_USE+=" screencast? ( wayland )"
 BDEPEND="${PYTHON_DEPS}
 	app-arch/unzip
 	app-arch/zip
-	>=dev-util/cbindgen-0.24.0
-	>=net-libs/nodejs-10.23.1
+	>=dev-util/cbindgen-0.24.3
+	net-libs/nodejs
 	virtual/pkgconfig
-	>=virtual/rust-1.59.0
+	virtual/rust
 	|| (
 		(
 			sys-devel/clang:14
@@ -114,7 +114,7 @@ COMMON_DEPEND="
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.79
+	>=dev-libs/nss-3.80
 	>=dev-libs/nspr-4.34
 	media-libs/alsa-lib
 	media-libs/fontconfig
