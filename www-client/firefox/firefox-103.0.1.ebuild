@@ -3,7 +3,7 @@
 
 EAPI="8"
 
-FIREFOX_PATCHSET="firefox-103-patches-01j.tar.xz"
+FIREFOX_PATCHSET="firefox-103-patches-03j.tar.xz"
 
 LLVM_MAX_SLOT=14
 
@@ -73,7 +73,6 @@ IUSE+=" geckodriver +gmp-autoupdate screencast +X"
 
 REQUIRED_USE="debug? ( !system-av1 )
 	pgo? ( lto )
-	wayland? ( dbus )
 	wifi? ( dbus )"
 
 # Firefox-only REQUIRED_USE flags
@@ -566,6 +565,11 @@ src_prepare() {
 
 	einfo "Removing pre-built binaries ..."
 	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+
+	# Clearing checksums where we have applied patches
+	moz_clear_vendor_checksums audioipc
+	moz_clear_vendor_checksums audioipc-client
+	moz_clear_vendor_checksums audioipc-server
 
 	# Create build dir
 	BUILD_DIR="${WORKDIR}/${PN}_build"
