@@ -73,6 +73,8 @@ dev-python/psutil 5.8.0: Retrieve information on running processes and system ut
 dev-python/sip 5.5.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
+dev-qt/qtbase 6.3.9999: Cross-platform application development framework
+dev-qt/qttools 6.3.9999: Qt Tools Collection
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/glslang 11.8.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/google-perftools 2.10: Fast, multi-threaded malloc() and nifty performance analysis tools
