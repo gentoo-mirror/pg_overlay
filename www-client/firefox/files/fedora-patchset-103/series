@@ -10,5 +10,3 @@ mozilla-1170092.patch
 
 rhbz-1354671.patch
 disable-openh264-download.patch
-
-libwebrtc-screen-cast-sync-1.patch
