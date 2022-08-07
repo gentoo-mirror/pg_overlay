@@ -8,7 +8,7 @@ inherit autotools flag-o-matic usr-ldscript
 DESCRIPTION="xfs filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
 MY_PV="${PV/_/-}"
-MY_PV="${MY_PV/01/0.1}"
+#MY_PV="${MY_PV/01/0.1}"
 SRC_URI="https://git.kernel.org/pub/scm/fs/xfs/${PN}-dev.git/snapshot/${PN}-dev-${MY_PV}.tar.gz"
 
 LICENSE="LGPL-2.1"
