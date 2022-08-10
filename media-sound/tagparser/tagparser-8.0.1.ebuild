@@ -1,9 +1,9 @@
 # Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags"
 HOMEPAGE="https://github.com/Martchus/tagparser"
@@ -25,5 +25,5 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
