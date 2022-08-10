@@ -7,7 +7,6 @@ app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of A
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/aqemu 9999: Graphical interface for QEMU and KVM emulators, using Qt5
-app-emulation/qemu 7.0.0-r3: QEMU + Kernel-based Virtual Machine userland tools
 app-emulation/qt-virt-manager 0.72.98: A GUI application for managing virtual machines
 app-emulation/spice 0.15.0: SPICE server
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
@@ -16,7 +15,6 @@ app-misc/fdupes 9999: Identify/delete duplicate files residing within specified 
 app-misc/media-player-info 24: A repository of data files describing media player capabilities
 app-misc/rbutil 1.4.1_p20211227 9999-r1: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-misc/trash-cli 0.22.4.16: Python scripts to manipulate trash cans via the command line
 app-misc/worker 4.10.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.4.0.2: A full office productivity suite
 app-office/libreoffice-l10n 7.4.0.2: Translations for the Libreoffice suite
@@ -38,7 +36,6 @@ dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array
 dev-lang/rust 1.62.1: Systems programming language from Mozilla
 dev-lang/zig 0.9.1: A robust, optimal, and maintainable programming language
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
-dev-libs/gobject-introspection 1.72.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 5.5.2: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
@@ -77,12 +74,14 @@ dev-python/torrt 0.8.0: Automates torrent updates for you
 dev-qt/qtbase 6.3.9999: Cross-platform application development framework
 dev-qt/qttools 6.3.9999: Qt Tools Collection
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
+dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glslang 11.8.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/google-perftools 2.10: Fast, multi-threaded malloc() and nifty performance analysis tools
 dev-util/itstool 2.0.7: Translation tool for XML documents that uses gettext files and ITS rules
 dev-util/kbuild 0.1.9998.3407: A makefile framework for writing simple makefiles for complex tasks
 dev-util/mdds 2.0.2: Collection of multi-dimensional data structure and indexing algorithm
 dev-util/qbs 1.21.0: Modern build tool for software projects
+dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/re2c 3.0_pre: tool for generating C-based recognizers from regular expressions
 dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/scanmem 9999: Locate and modify variables in executing processes
@@ -143,6 +142,8 @@ media-sound/qmmp 9999: Qt5-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD project
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
+media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
+media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.56: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs

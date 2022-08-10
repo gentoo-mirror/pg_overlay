@@ -4,47 +4,6 @@
 
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-editors/qhexedit2:gui - Install Qt5 hex editor
-app-emulation/qemu:accessibility - Adds support for braille displays using brltty
-app-emulation/qemu:aio - Enables support for Linux's Async IO
-app-emulation/qemu:alsa - Enable alsa output for sound emulation
-app-emulation/qemu:bpf - Enable eBPF support for RSS implementation.
-app-emulation/qemu:capstone - Enable disassembly support with dev-libs/capstone
-app-emulation/qemu:curl - Support ISOs / -cdrom directives via HTTP or HTTPS.
-app-emulation/qemu:fdt - Enables firmware device tree support
-app-emulation/qemu:fuse - Enables FUSE block device export
-app-emulation/qemu:glusterfs - Enables GlusterFS cluster fileystem via sys-cluster/glusterfs
-app-emulation/qemu:gnutls - Enable TLS support for the VNC console server. For 1.4 and newer this also enables WebSocket support. For 2.0 through 2.3 also enables disk quorum support.
-app-emulation/qemu:io-uring - Enable efficient I/O via sys-libs/liburing.
-app-emulation/qemu:iscsi - Enable direct iSCSI support via net-libs/libiscsi instead of indirectly via the Linux block layer that sys-block/open-iscsi does.
-app-emulation/qemu:jemalloc - Enable jemalloc allocator support
-app-emulation/qemu:jpeg - Enable jpeg image support for the VNC console server
-app-emulation/qemu:multipath - Enable multipath persistent reservation passthrough via sys-fs/multipath-tools.
-app-emulation/qemu:ncurses - Enable the ncurses-based console
-app-emulation/qemu:nfs - Enable NFS support
-app-emulation/qemu:numa - Enable NUMA support
-app-emulation/qemu:pin-upstream-blobs - Pin the versions of BIOS firmware to the version included in the upstream release. This is needed to sanely support migration/suspend/resume/snapshotting/etc... of instances. When the blobs are different, random corruption/bugs/crashes/etc... may be observed.
-app-emulation/qemu:plugins - Enable qemu plugin API via shared library loading.
-app-emulation/qemu:png - Enable png image support for the VNC console server
-app-emulation/qemu:pulseaudio - Enable pulseaudio output for sound emulation
-app-emulation/qemu:rbd - Enable rados block device backend support, see https://docs.ceph.com/en/mimic/rbd/qemu-rbd/
-app-emulation/qemu:sdl - Enable the SDL-based console
-app-emulation/qemu:sdl-image - SDL Image support for icons
-app-emulation/qemu:slirp - Enable TCP/IP in hypervisor via net-libs/libslirp
-app-emulation/qemu:spice - Enable Spice protocol support via app-emulation/spice
-app-emulation/qemu:ssh - Enable SSH based block device support via net-libs/libssh2
-app-emulation/qemu:static - Build the User and Software MMU (system) targets as well as tools as static binaries
-app-emulation/qemu:static-user - Build the User targets as static binaries
-app-emulation/qemu:systemtap - Enable SystemTAP/DTrace tracing
-app-emulation/qemu:usb - Enable USB passthrough via dev-libs/libusb
-app-emulation/qemu:usbredir - Use sys-apps/usbredir to redirect USB devices to another machine over TCP
-app-emulation/qemu:vde - Enable VDE-based networking
-app-emulation/qemu:vhost-net - Enable accelerated networking using vhost-net, see https://www.linux-kvm.org/page/VhostNet
-app-emulation/qemu:vhost-user-fs - Enable shared file system access using the FUSE protocol carried over virtio.
-app-emulation/qemu:virgl - Enable experimental Virgil 3d (virtual software GPU)
-app-emulation/qemu:virtfs - Enable VirtFS via virtio-9p-pci / fsdev. See https://wiki.qemu.org/Documentation/9psetup
-app-emulation/qemu:vte - Enable terminal support (x11-libs/vte) in the GTK+ interface
-app-emulation/qemu:xattr - Add support for getting and setting POSIX extended attributes, through sys-apps/attr. Requisite for the virtfs backend.
-app-emulation/qemu:xen - Enables support for Xen backends
 app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
 app-misc/ddcutil:drm - Use x11-libs/libdrm for more verbose diagnostics.
 app-misc/ddcutil:usb-monitor - Adds support for monitors attached via USB.
@@ -79,7 +38,6 @@ dev-lang/rust:system-bootstrap - Bootstrap using installed rust compiler
 dev-lang/rust:system-llvm - Use the system LLVM installation
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
 dev-lang/zig:stage2 - Install stage2 compiler (written in Zig) alongside stage1 compiler (written in C++ and Zig)
-dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/openssl:asm - Support assembly hand optimized crypto functions (i.e. faster run time)
