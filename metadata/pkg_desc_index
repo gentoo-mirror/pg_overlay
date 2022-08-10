@@ -38,6 +38,7 @@ dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array
 dev-lang/rust 1.62.1: Systems programming language from Mozilla
 dev-lang/zig 0.9.1: A robust, optimal, and maintainable programming language
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
+dev-libs/gobject-introspection 1.72.0: Introspection system for GObject-based libraries
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 5.5.2: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
