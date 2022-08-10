@@ -3,7 +3,7 @@
 
 EAPI=6
 
-PYTHON_COMPAT=( python3_{9,10} )
+PYTHON_COMPAT=( python3_{9..11} )
 VALA_MIN_API_VERSION="0.18"
 VALA_USE_DEPEND="vapigen"
 

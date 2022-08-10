@@ -4,7 +4,7 @@
 EAPI=6
 GNOME2_LA_PUNT="yes"
 # Needed for tests and build #489466
-PYTHON_COMPAT=( python3_{9,10} )
+PYTHON_COMPAT=( python3_{9..11} )
 
 inherit gnome2 python-any-r1
 
