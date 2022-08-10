@@ -1,9 +1,9 @@
 # Copyright 1999-2018 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit cmake-utils
+inherit cmake
 
 DESCRIPTION="Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities"
 HOMEPAGE="https://github.com/Martchus/cpp-utilities"
@@ -22,5 +22,5 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 	)
 
-	cmake-utils_src_configure
+	cmake_src_configure
 }
