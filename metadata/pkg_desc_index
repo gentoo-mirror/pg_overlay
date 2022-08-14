@@ -103,7 +103,7 @@ gui-libs/wrapland 5.20.0: Qt/C++ library wrapping libwayland
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
 kde-apps/konsole 22.04.2: KDE's terminal emulator
 kde-frameworks/kdelibs4support 5.96.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/knotifications 5.96.0: Framework for notifying the user of an event
+kde-frameworks/knotifications 5.97.0: Framework for notifying the user of an event
 kde-frameworks/plasma 5.96.0-r1: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
