@@ -5,7 +5,7 @@ EAPI=8
 
 KDE_ORG_NAME="${PN}-framework"
 PVCUT=$(ver_cut 1-2)
-QTMIN=5.15.4
+QTMIN=5.15.5
 VIRTUALX_REQUIRED="test"
 inherit ecm frameworks.kde.org
 
@@ -58,8 +58,6 @@ DEPEND="${RDEPEND}
 	X? ( x11-base/xorg-proto )
 "
 BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
-
-PATCHES=( "${FILESDIR}/${P}-fix-crash-in-WindowShadowTile.patch" ) # KDE-bug 443706
 
 src_configure() {
 	local mycmakeargs=(
