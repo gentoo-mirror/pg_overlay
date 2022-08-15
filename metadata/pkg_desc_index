@@ -16,8 +16,8 @@ app-misc/media-player-info 24: A repository of data files describing media playe
 app-misc/rbutil 1.4.1_p20211227 9999-r1: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 4.10.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.4.0.2: A full office productivity suite
-app-office/libreoffice-l10n 7.4.0.2: Translations for the Libreoffice suite
+app-office/libreoffice 7.4.0.3: A full office productivity suite
+app-office/libreoffice-l10n 7.4.0.3: Translations for the Libreoffice suite
 app-portage/eix 0.36.4: Search and query ebuilds
 app-portage/kuroo 9999: Graphical Portage frontend based on KDE Frameworks
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
@@ -33,7 +33,7 @@ dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-lang/lazarus 2.2.0: Lazarus IDE is a feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
-dev-lang/rust 1.62.1: Systems programming language from Mozilla
+dev-lang/rust 1.63.0: Systems programming language from Mozilla
 dev-lang/zig 0.9.1: A robust, optimal, and maintainable programming language
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
@@ -178,7 +178,6 @@ net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and mu
 sci-calculators/qalculate-qt 4.1.1: Multi-purpose cross-platform desktop calculator
 sci-mathematics/mathematica 12.3.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/dbus 1.14.0_pre: A message bus system, a simple way for applications to talk to each other
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
