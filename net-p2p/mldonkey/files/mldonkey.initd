@@ -3,7 +3,7 @@
 extra_started_commands="reload slow fast info"
 
 MLDONKEY_BINARY=${MLDONKEY_BINARY:-/usr/bin/mlnet}
-MLDONKEY_TIMEOUT=${TIMEOUT:-10}
+MLDONKEY_TIMEOUT=${TIMEOUT:-11}
 
 depend() {
 	need localmount net
