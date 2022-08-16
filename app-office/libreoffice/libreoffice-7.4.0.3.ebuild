@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{9..11} )
+PYTHON_COMPAT=( python3_{8..11} )
 PYTHON_REQ_USE="threads(+),xml(+)"
 
 MY_PV="${PV/_alpha/.alpha}"
@@ -562,6 +562,9 @@ src_configure() {
 		use libreoffice_extensions_scripting-javascript && \
 			myeconfargs+=( --with-rhino-jar=$(java-pkg_getjar rhino-1.6 rhino.jar) )
 	fi
+
+	# Workaround to fix build w/ gpgme 1.18.0, bug #865321
+	export ac_cv_lib_gpgmepp_progress_callback=yes
 
 	is-flagq "-flto*" && myeconfargs+=( --enable-lto )
 
