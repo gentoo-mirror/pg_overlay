@@ -14,7 +14,7 @@ LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
 
-IUSE="alsa aqua cpu_flags_ppc_altivec cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 custom-cflags dbus doc fcitx4 gles1 gles2 haptic ibus jack +joystick kms libsamplerate nas opengl oss pipewire pulseaudio sndio +sound static-libs +threads udev +video video_cards_vc4 vulkan wayland X xinerama xscreensaver"
+IUSE="alsa aqua cpu_flags_ppc_altivec cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_flags_x86_sse cpu_flags_x86_sse2 custom-cflags dbus doc fcitx4 gles1 gles2 haptic ibus jack +joystick kms libsamplerate nas opengl oss pipewire pulseaudio sndio +sound static-libs +threads udev +video video_cards_vc4 vulkan wayland X xscreensaver"
 REQUIRED_USE="
 	alsa? ( sound )
 	fcitx4? ( dbus )
@@ -28,7 +28,6 @@ REQUIRED_USE="
 	pulseaudio? ( sound )
 	sndio? ( sound )
 	vulkan? ( video )
-	xinerama? ( X )
 	xscreensaver? ( X )"
 
 CDEPEND="
@@ -57,8 +56,8 @@ CDEPEND="
 	sndio? ( media-sound/sndio:=[${MULTILIB_USEDEP}] )
 	udev? ( >=virtual/libudev-208:=[${MULTILIB_USEDEP}] )
 	wayland? (
-		>=dev-libs/wayland-1.0.6[${MULTILIB_USEDEP}]
-		>=media-libs/mesa-9.1.6[${MULTILIB_USEDEP},wayland]
+		>=dev-libs/wayland-1.20[${MULTILIB_USEDEP}]
+		>=media-libs/mesa-9.1.6[${MULTILIB_USEDEP},egl(+),gles2,wayland]
 		>=x11-libs/libxkbcommon-0.2.0[${MULTILIB_USEDEP}]
 	)
 	X? (
@@ -134,7 +133,7 @@ multilib_src_configure() {
 		$(use_enable haptic)
 		--enable-power
 		--enable-filesystem
-		$(use_enable threads)
+		$(use_enable threads pthreads)
 		--enable-timers
 		--enable-file
 		--enable-loadso
@@ -171,12 +170,11 @@ multilib_src_configure() {
 		--disable-x11-shared
 		$(use_enable X video-x11-xcursor)
 		$(use_enable X video-x11-xdbe)
-		$(use_enable xinerama video-x11-xinerama)
+		$(use_enable X video-x11-xfixes)
 		$(use_enable X video-x11-xinput)
 		$(use_enable X video-x11-xrandr)
 		$(use_enable xscreensaver video-x11-scrnsaver)
 		$(use_enable X video-x11-xshape)
-		$(use_enable X video-x11-vm)
 		$(use_enable aqua video-cocoa)
 		--disable-video-directfb
 		--disable-fusionsound
