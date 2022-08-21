@@ -29,7 +29,7 @@ esac
 if [[ -z ${_WXWIDGETS_ECLASS} ]]; then
 _WXWIDGETS_ECLASS=1
 
-# @ECLASS-VARIABLE: WX_GTK_VER
+# @ECLASS_VARIABLE: WX_GTK_VER
 # @PRE_INHERIT
 # @REQUIRED
 # @DESCRIPTION:
@@ -67,10 +67,10 @@ setup-wxwidgets() {
 	local w wxtoolkit wxconf
 
 	case ${WX_GTK_VER} in
-		3.0-gtk3|3.1-gtk3|3.2-gtk3) wxtoolkit=gtk3 ;;
-		3.0|3.1|3.2) wxtoolkit=gtk2
-		          eqawarn "This package relies on the deprecated GTK 2 slot, which will go away soon (https://bugs.gentoo.org/618642)"
-		          ;;
+		3.0-gtk3|3.1-gtk3|3.2-gtk3)	wxtoolkit=gtk3 ;;
+		3.0|3.1|3.2)				wxtoolkit=gtk2
+					eqawarn "This package relies on the deprecated GTK 2 slot, which will go away soon (https://bugs.gentoo.org/618642)"
+					;;
 	esac
 
 	if [[ -z ${WX_DISABLE_NDEBUG} ]]; then
