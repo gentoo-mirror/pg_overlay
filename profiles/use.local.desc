@@ -123,6 +123,7 @@ kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kde
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
+mail-client/thunderbird:libproxy - Enable libproxy support
 mail-client/thunderbird:lto - Enable Link Time Optimization (LTO). Requires Gold linker when using GCC or LDD linker when using Clang
 mail-client/thunderbird:openh264 - Use media-libs/openh264 for H.264 support instead of downloading binary blob from Mozilla at runtime
 mail-client/thunderbird:pgo - Add support for profile-guided optimization using gcc-4.5, for faster binaries. This option will double the compile time.
@@ -132,8 +133,10 @@ mail-client/thunderbird:system-harfbuzz - Use the system-wide media-libs/harfbuz
 mail-client/thunderbird:system-icu - Use the system-wide dev-libs/icu instead of bundled.
 mail-client/thunderbird:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled.
 mail-client/thunderbird:system-libevent - Use the system-wide dev-libs/libevent instead of bundled.
+mail-client/thunderbird:system-librnp - Use system-wide dev-util/librnp instead of bundled one.
 mail-client/thunderbird:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled.
 mail-client/thunderbird:system-png - Use the system-wide media-libs/libpng instead of bundled (requires APNG patches)
+mail-client/thunderbird:system-python-libs - Use system's python site instead of bundled python libraries
 mail-client/thunderbird:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
 media-libs/gst-plugins-base:X - Enable ximagesink and xvimagesink plugins; build GLX platform support if USE=opengl is enabled; build x11 windowing system support if USE=egl is enabled
 media-libs/gst-plugins-base:egl - Enable EGL platform support
