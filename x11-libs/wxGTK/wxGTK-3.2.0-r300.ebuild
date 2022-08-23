@@ -130,7 +130,7 @@ multilib_src_install_all() {
 	einstalldocs
 
 	# Stray windows locale file, bug #650118
-	rm -f "${ED}"/usr/share/locale/it/LC_MESSAGES/wxmsw31-gtk3.mo || die
+	rm -f "${ED}"/usr/share/locale/it/LC_MESSAGES/wxmsw32-gtk3.mo || die
 
 	# Unversioned links
 	rm "${ED}"/usr/bin/wx-config || die
