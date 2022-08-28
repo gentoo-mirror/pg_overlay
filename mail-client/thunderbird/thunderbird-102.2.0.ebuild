@@ -72,7 +72,6 @@ IUSE+=" +system-librnp"
 
 REQUIRED_USE="debug? ( !system-av1 )
 	pgo? ( lto )
-	screencast? ( wayland )
 	wifi? ( dbus )"
 
 # Thunderbird-only dependencies.
@@ -836,6 +835,7 @@ src_configure() {
 		if use clang ; then
 			# Upstream only supports lld when using clang
 			mozconfig_add_options_ac "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
+
 			mozconfig_add_options_ac '+lto' --enable-lto=cross
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=cross
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO_RUST=1
