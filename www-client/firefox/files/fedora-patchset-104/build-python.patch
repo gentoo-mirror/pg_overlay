@@ -1,0 +1,12 @@
+diff -up firefox-95.0/build/mach_virtualenv_packages.txt.pytpatch firefox-95.0/build/mach_virtualenv_packages.txt
+--- firefox-95.0/build/mach_virtualenv_packages.txt.pytpatch	2021-12-06 07:52:44.829038010 +0100
++++ firefox-95.0/build/mach_virtualenv_packages.txt	2021-12-06 07:53:56.676269562 +0100
+@@ -1,7 +1,7 @@
+ packages.txt:build/common_virtualenv_packages.txt
+ # glean-sdk may not be installable if a wheel isn't available
+ # and it has to be built from source.
+-pypi-optional:glean-sdk==40.0.0:telemetry will not be collected
++pypi-optional:glean-sdk>=40.0.0,<=42.2.0:telemetry will not be collected
+ # Mach gracefully handles the case where `psutil` is unavailable.
+ # We aren't (yet) able to pin packages in automation, so we have to
+ # support down to the oldest locally-installed version (5.4.2).
