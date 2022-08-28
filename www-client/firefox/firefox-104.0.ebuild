@@ -642,7 +642,6 @@ src_prepare() {
 		fi
 	done
 	#######
-	eapply "${FILESDIR}/mozilla-glibc236.patch"
 
 	xdg_environment_reset
 }
