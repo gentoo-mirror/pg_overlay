@@ -1118,11 +1118,7 @@ src_compile() {
 		addpredict /root
 	fi
 
-	if ! use X && use wayland; then
-		local -x GDK_BACKEND=wayland
-	else
-		local -x GDK_BACKEND=x11
-	fi
+	local -x GDK_BACKEND=wayland
 
 	${virtx_cmd} ./mach build --verbose \
 		|| die
