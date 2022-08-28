@@ -642,9 +642,6 @@ src_prepare() {
 		fi
 	done
 	#######
-	eapply "${FILESDIR}/mozilla-glibc236.patch"
-	######
-	use system-python-libs && rm -rf "${S}/third_party/python/packaging"
 
 	xdg_environment_reset
 }
