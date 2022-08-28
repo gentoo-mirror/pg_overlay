@@ -555,24 +555,6 @@ src_prepare() {
 	echo -n "${MOZ_API_KEY_MOZILLA//m0ap1/}" > "${S}"/api-mozilla.key || die
 
 	####### My stuff
-	### OpenSUSE-KDE patchset
-	einfo +++++++++++++++++++++++++++++
-	einfo Applying OpenSUSE-KDE patches
-	einfo +++++++++++++++++++++++++++++
-	use kde && for p in $(cat "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/$p 2>/dev/null
-		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/opensuse-kde-$(ver_cut 1)"/$p;
-			einfo +++++++++++++++++++++++++;
-			einfo Patch $p is APPLIED;
-			einfo +++++++++++++++++++++++++
-		else
-			einfo -------------------------;
-			einfo Patch $p is NOT applied and IGNORED;
-			einfo -------------------------
-		fi
-	done
-	#######
 	### Privacy-esr patches
 	einfo ++++++++++++++++++++++++
 	einfo Applying privacy patches
