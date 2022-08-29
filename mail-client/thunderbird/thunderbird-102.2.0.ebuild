@@ -618,6 +618,7 @@ src_prepare() {
 	#######
 	eapply "${FILESDIR}/mozilla-glibc236.patch"
 	eapply "${FILESDIR}/patch-memory_mozalloc_throw__gcc.h.patch"
+	eapply "${FILESDIR}/patch-rust-1.63.patch"
 
 	xdg_environment_reset
 }
