@@ -3,6 +3,8 @@
 
 EAPI=8
 
+# Check for bumps & cleanup with app-misc/ddcui
+
 inherit autotools linux-info udev
 
 DESCRIPTION="Program for querying and changing monitor settings"
@@ -19,7 +21,6 @@ RDEPEND="
 	sys-apps/i2c-tools
 	virtual/udev
 	drm? ( x11-libs/libdrm )
-	introspection? ( >=dev-libs/gobject-introspection-1.54.0:= )
 	usb-monitor? (
 		dev-libs/hidapi
 		virtual/libusb:1
@@ -36,6 +37,11 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
+# doc? ( app-doc/doxygen[dot] )
+
+PATCHES=(
+	"${FILESDIR}"/${P}-no-werror.patch
+)
 
 pkg_pretend() {
 	# This program needs /dev/ic2-* devices to communicate with the monitor.
@@ -58,11 +64,13 @@ src_prepare() {
 
 src_configure() {
 	local myeconfargs=(
+		# FAILS: doxyfile: No such file or directory
+		# $(use_enable doc doxygen)
 		$(use_enable drm)
+		--enable-udev
 		$(use_enable usb-monitor usb)
-		$(use_enable X x11)
 		--enable-lib
-		$(use_enable introspection)
+		$(use_enable X x11)
 	)
 
 	econf "${myeconfargs[@]}"
@@ -100,5 +108,11 @@ pkg_postinst() {
 	if use video_cards_nvidia; then
 		ewarn "Please read the following webpage on proper usage with the nVidia "
 		ewarn "binary drivers, or it may not work: http://www.ddcutil.com/nvidia/"
+	fi
+}
+
+pkg_postrm() {
+	if use user-permissions; then
+		udev_reload
 	fi
 }
