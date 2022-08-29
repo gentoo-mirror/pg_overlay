@@ -1,0 +1,251 @@
+commit 5b0ed00227bb9ddfccfa974a2a97f604931ed846
+Author: Dimitry Andric <dim@FreeBSD.org>
+Date:   Wed Mar 16 10:48:03 2022 +0100
+
+    www/firefox www/firefox-esr mail/thunderbird: fix build with libc++ 14
+    
+    Mozilla attempts to redefine several internal libc++ functions, such as
+    __throw_out_of_range(). With libc++ 14 and higher, this now leads to
+    compile errors:
+    
+    In file included from /wrkdirs/usr/ports/www/firefox/work/.build/dist/system_wrappers/deque:3:
+    /usr/include/c++/v1/deque:1865:9: error: call to '__throw_out_of_range' is ambiguous
+            _VSTD::__throw_out_of_range("deque");
+            ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+    /usr/include/c++/v1/__config:824:15: note: expanded from macro '_VSTD'
+                  ^
+    /wrkdirs/usr/ports/www/firefox/work/.build/dist/include/mozilla/throw_gcc.h:97:59: note: candidate function
+    MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_out_of_range(
+                                                              ^
+    /usr/include/c++/v1/stdexcept:264:6: note: candidate function
+    void __throw_out_of_range(const char*__msg)
+         ^
+    
+    To work around this issue, avoid redefining those internal libc++
+    functions, if _LIBCPP_VERSION is set.
+
+diff --git a/mail/thunderbird/files/patch-memory_mozalloc_throw__gcc.h b/mail/thunderbird/files/patch-memory_mozalloc_throw__gcc.h
+new file mode 100644
+index 000000000000..788b9cbf837a
+--- /dev/null
++++ b/mail/thunderbird/files/patch-memory_mozalloc_throw__gcc.h
+@@ -0,0 +1,69 @@
++--- memory/mozalloc/throw_gcc.h.orig	2022-03-07 19:34:37 UTC
+++++ memory/mozalloc/throw_gcc.h
++@@ -74,50 +74,66 @@ __throw_bad_function_call(void) {
++   mozalloc_abort("fatal: STL threw bad_function_call");
++ }
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_logic_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_domain_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_invalid_argument(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_length_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_out_of_range(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_runtime_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_range_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_overflow_error(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_underflow_error(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_ios_failure(
++     const char* msg) {
+diff --git a/www/firefox-esr/files/patch-memory_mozalloc_throw__gcc.h b/www/firefox-esr/files/patch-memory_mozalloc_throw__gcc.h
+new file mode 100644
+index 000000000000..53db05bc0803
+--- /dev/null
++++ b/www/firefox-esr/files/patch-memory_mozalloc_throw__gcc.h
+@@ -0,0 +1,69 @@
++--- memory/mozalloc/throw_gcc.h.orig	2022-03-05 00:14:41 UTC
+++++ memory/mozalloc/throw_gcc.h
++@@ -74,50 +74,66 @@ __throw_bad_function_call(void) {
++   mozalloc_abort("fatal: STL threw bad_function_call");
++ }
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_logic_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_domain_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_invalid_argument(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_length_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_out_of_range(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_runtime_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_range_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_overflow_error(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_underflow_error(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_ios_failure(
++     const char* msg) {
+diff --git a/www/firefox/files/patch-memory_mozalloc_throw__gcc.h b/www/firefox/files/patch-memory_mozalloc_throw__gcc.h
+new file mode 100644
+index 000000000000..81a511179852
+--- /dev/null
++++ b/www/firefox/files/patch-memory_mozalloc_throw__gcc.h
+@@ -0,0 +1,69 @@
++--- memory/mozalloc/throw_gcc.h.orig	2022-02-02 17:33:38 UTC
+++++ memory/mozalloc/throw_gcc.h
++@@ -74,50 +74,66 @@ __throw_bad_function_call(void) {
++   mozalloc_abort("fatal: STL threw bad_function_call");
++ }
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_logic_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_domain_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_invalid_argument(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_length_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_out_of_range(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_runtime_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_range_error(
++     const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_overflow_error(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
+++#if !defined(_LIBCPP_VERSION)
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void
++ __throw_underflow_error(const char* msg) {
++   mozalloc_abort(msg);
++ }
+++#endif  // _LIBCPP_VERSION
++ 
++ MOZ_THROW_NORETURN MOZ_THROW_EXPORT MOZ_THROW_INLINE void __throw_ios_failure(
++     const char* msg) {
