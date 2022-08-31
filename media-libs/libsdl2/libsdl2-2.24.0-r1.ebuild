@@ -94,6 +94,7 @@ MULTILIB_WRAPPED_HEADERS=(
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.0.16-static-libs.patch
+	"${FILESDIR}"/${P}-cmake-target-fixes.patch
 )
 
 S="${WORKDIR}/${MY_P}"
