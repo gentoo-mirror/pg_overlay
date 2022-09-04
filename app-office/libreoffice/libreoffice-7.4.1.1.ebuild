@@ -160,7 +160,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/libvisio-0.1.0
 	media-libs/libzmf
 	media-libs/openjpeg:=
-	media-libs/zxing-cpp
+	media-libs/zxing-cpp:=
 	>=net-libs/neon-0.31.1:=
 	net-misc/curl
 	sci-mathematics/lpsolve
@@ -214,7 +214,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	libreoffice_extensions_scripting-javascript? ( >=dev-java/rhino-1.7.14:1.6 )
 	mariadb? ( dev-db/mariadb-connector-c:= )
 	!mariadb? ( dev-db/mysql-connector-c:= )
-	pdfimport? ( app-text/poppler:=[cxx] )
+	pdfimport? ( >=app-text/poppler-22.06:=[cxx] )
 	postgres? ( >=dev-db/postgresql-9.0:*[kerberos] )
 "
 # FIXME: cppunit should be moved to test conditional
@@ -255,22 +255,22 @@ RDEPEND="${COMMON_DEPEND}
 "
 BDEPEND="
 	dev-util/intltool
+	sys-apps/which
 	sys-devel/bison
 	sys-devel/flex
 	sys-devel/gettext
 	virtual/pkgconfig
 	clang? (
 		|| (
-			(
-				sys-devel/clang:14
+			(	sys-devel/clang:15
+				sys-devel/llvm:15
+				=sys-devel/lld-15*	)
+			(	sys-devel/clang:14
 				sys-devel/llvm:14
 				=sys-devel/lld-14*	)
 			(	sys-devel/clang:13
 				sys-devel/llvm:13
 				=sys-devel/lld-13*	)
-			(	sys-devel/clang:12
-				sys-devel/llvm:12
-				=sys-devel/lld-12*	)
 		)
 	)
 	odk? ( >=app-doc/doxygen-1.8.4 )
@@ -563,9 +563,6 @@ src_configure() {
 			myeconfargs+=( --with-rhino-jar=$(java-pkg_getjar rhino-1.6 rhino.jar) )
 	fi
 
-	# Workaround to fix build w/ gpgme 1.18.0, bug #865321
-	export ac_cv_lib_gpgmepp_progress_callback=yes
-
 	is-flagq "-flto*" && myeconfargs+=( --enable-lto )
 
 	MARIADBCONFIG="$(type -p $(usex mariadb mariadb mysql)_config)" \
@@ -583,12 +580,11 @@ src_compile() {
 }
 
 src_test() {
-	make unitcheck || die
-	make slowcheck || die
+	emake unitcheck
+	emake slowcheck
 }
 
 src_install() {
-	# This is not Makefile so no buildserver
 	emake DESTDIR="${D}" distro-pack-install -o build -o check
 
 	# bug 593514
