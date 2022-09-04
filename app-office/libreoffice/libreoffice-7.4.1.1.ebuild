@@ -377,6 +377,8 @@ src_prepare() {
 			-e ":Keywords: s:pdf;::" \
 			sysui/desktop/menus/draw.desktop || die
 	fi
+
+	export ac_cv_lib_gpgmepp_progress_callback=yes
 }
 
 src_configure() {
