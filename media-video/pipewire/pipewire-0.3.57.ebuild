@@ -38,7 +38,7 @@ HOMEPAGE="https://pipewire.org/"
 LICENSE="MIT LGPL-2.1+ GPL-2"
 # ABI was broken in 0.3.42 for https://gitlab.freedesktop.org/pipewire/wireplumber/-/issues/49
 SLOT="0/0.4"
-IUSE="bluetooth dbus doc echo-cancel extra gstreamer jack-client jack-sdk lv2
+IUSE="bluetooth dbus doc echo-cancel extra flatpak gstreamer jack-client jack-sdk lv2
 pipewire-alsa sound-server ssl system-service systemd test udev v4l X zeroconf vulkan"
 
 # Once replacing system JACK libraries is possible, it's likely that
@@ -81,6 +81,7 @@ RDEPEND="
 		media-libs/fdk-aac
 		media-libs/libldac
 		media-libs/libfreeaptx
+		media-libs/opus
 		media-libs/sbc
 		>=net-wireless/bluez-4.101:=
 		virtual/libusb:1
@@ -89,6 +90,9 @@ RDEPEND="
 	echo-cancel? ( media-libs/webrtc-audio-processing:0 )
 	extra? (
 		>=media-libs/libsndfile-1.0.20
+	)
+	flatpak? (
+		dev-libs/glib
 	)
 	gstreamer? (
 		>=dev-libs/glib-2.32.0:2
@@ -144,7 +148,6 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
-	"${FILESDIR}"/${P}-big-endian.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
@@ -152,7 +155,7 @@ PATCHES=(
 limitsdfile=40-${PN}.conf
 
 python_check_deps() {
-	has_version -b "dev-python/docutils[${PYTHON_USEDEP}]"
+	python_has_version "dev-python/docutils[${PYTHON_USEDEP}]"
 }
 
 src_prepare() {
@@ -208,14 +211,16 @@ multilib_src_configure() {
 		$(meson_native_use_feature bluetooth bluez5-codec-aac)
 		$(meson_native_use_feature bluetooth bluez5-codec-aptx)
 		$(meson_native_use_feature bluetooth bluez5-codec-ldac)
+		$(meson_native_use_feature bluetooth bluez5-codec-opus)
 		$(meson_native_use_feature bluetooth libusb) # At least for now only used by bluez5 native (quirk detection of adapters)
 		$(meson_native_use_feature echo-cancel echo-cancel-webrtc) #807889
 		# Not yet packaged.
 		-Dbluez5-codec-lc3plus=disabled
 		-Dcontrol=enabled # Matches upstream
-		-Daudiotestsrc=disabled # Matches upstream
-		-Dffmpeg=enabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
-		-Dpipewire-jack=disabled # Allows integrating JACK apps into PW graph
+		-Daudiotestsrc=enabled # Matches upstream
+		-Dffmpeg=disabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
+		$(meson_native_use_feature flatpak)
+		-Dpipewire-jack=enabled # Allows integrating JACK apps into PW graph
 		$(meson_native_use_feature jack-client jack) # Allows PW to act as a JACK client
 		$(meson_use jack-sdk jack-devel)
 		$(usex jack-sdk "-Dlibjack-path=${EPREFIX}/usr/$(get_libdir)" '')
