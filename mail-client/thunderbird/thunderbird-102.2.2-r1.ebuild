@@ -79,7 +79,7 @@ REQUIRED_USE="debug? ( !system-av1 )
 TB_ONLY_DEPEND="!<x11-plugins/enigmail-2.2
 	selinux? ( sec-policy/selinux-thunderbird )
 	!system-librnp? ( dev-libs/jsoncpp )
-	system-librnp? ( dev-util/librnp )"
+	system-librnp? ( dev-util/librnp:= )"
 BDEPEND="${PYTHON_DEPS}
 	app-arch/unzip
 	app-arch/zip
@@ -89,19 +89,19 @@ BDEPEND="${PYTHON_DEPS}
 	virtual/rust
 	|| (
 		(
+			sys-devel/clang:15
+			sys-devel/llvm:15
+			clang? (
+				=sys-devel/lld-15*
+				pgo? ( =sys-libs/compiler-rt-sanitizers-15*[profile] )
+			)
+		)
+		(
 			sys-devel/clang:14
 			sys-devel/llvm:14
 			clang? (
 				=sys-devel/lld-14*
 				pgo? ( =sys-libs/compiler-rt-sanitizers-14*[profile] )
-			)
-		)
-		(
-			sys-devel/clang:13
-			sys-devel/llvm:13
-			clang? (
-				=sys-devel/lld-13*
-				pgo? ( =sys-libs/compiler-rt-sanitizers-13*[profile] )
 			)
 		)
 	)
