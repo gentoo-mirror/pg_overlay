@@ -118,7 +118,7 @@ media-libs/imlib2 1.7.4: Version 2 of an advanced replacement library for librar
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 4.208.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libpulse 16.1: Libraries for PulseAudio clients
-media-libs/libsdl2 2.24.0-r1: Simple Direct Media Layer
+media-libs/libsdl2 2.24.0-r2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20220503: VoIP library for Telegram clients
 media-libs/libuninameslist 20211114: Library of unicode annotation data
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
