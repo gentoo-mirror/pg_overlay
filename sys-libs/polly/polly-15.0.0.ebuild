@@ -28,7 +28,7 @@ LLVM_COMPONENTS=( polly llvm )
 LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
 llvm.org_set_globals
 
-PATCHES=( "${FILEESIR}/polly.patch" )
+PATCHES=( "${FILESDIR}/polly.patch" )
 
 python_check_deps() {
 	has_version -b "dev-python/lit[${PYTHON_USEDEP}]"
