@@ -1,5 +1,5 @@
---- a/cmake/CMakeLists.txt	2022-09-14 17:43:15.838596458 +0700
-+++ b/cmake/CMakeLists.txt	2022-09-14 17:44:59.008837644 +0700
+--- a/polly/cmake/CMakeLists.txt	2022-09-14 17:43:15.838596458 +0700
++++ b/polly/cmake/CMakeLists.txt	2022-09-14 17:44:59.008837644 +0700
 @@ -1,9 +1,5 @@
  # Keep this in sync with llvm/cmake/CMakeLists.txt!
  
