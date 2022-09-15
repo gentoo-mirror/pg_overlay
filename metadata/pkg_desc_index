@@ -33,7 +33,7 @@ dev-db/sqlitestudio 3.3.3: Powerful cross-platform SQLite database manager
 dev-lang/lazarus 2.2.0: Lazarus IDE is a feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.32: The Oil Runtime Compiler, a just-in-time compiler for array operations
-dev-lang/rust 1.63.0: Systems programming language from Mozilla
+dev-lang/rust 1.63.0-r1: Systems programming language from Mozilla
 dev-lang/zig 0.9.1: A robust, optimal, and maintainable programming language
 dev-libs/crc32c 1.1.1: CRC32C implementation with support for CPU-specific acceleration instructions
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
