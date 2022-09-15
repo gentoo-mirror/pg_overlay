@@ -170,7 +170,7 @@ PATCHES=(
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/1.63.0-CVE-2022-36113.patch
-	"${FILESDIR}"/1.63.0-CVE-2022-36114.patc
+	"${FILESDIR}"/1.63.0-CVE-2022-36114.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
