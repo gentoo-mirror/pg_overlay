@@ -489,7 +489,7 @@ src_configure() {
 			cxx = "$(tc-getCXX)"
 			linker = "$(tc-getCC)"
 			ranlib = "$(tc-getRANLIB)"
-			llvm-libunwind = "$(usex llvm-libunwind $(usex system-llvm system in-tree) no)"
+			#llvm-libunwind = "$(usex llvm-libunwind $(usex system-llvm system in-tree) no)"
 		_EOF_
 		# by default librustc_target/spec/linux_musl_base.rs sets base.crt_static_default = true;
 		# but we patch it and set to false here as well
