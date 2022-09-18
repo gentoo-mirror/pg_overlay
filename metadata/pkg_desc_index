@@ -71,8 +71,8 @@ dev-python/psutil 5.8.0: Retrieve information on running processes and system ut
 dev-python/sip 5.5.0: Python extension module generator for C and C++ libraries
 dev-python/torrentool 0.4.0: The tool to work with torrent files.
 dev-python/torrt 0.8.0: Automates torrent updates for you
-dev-qt/qtbase 6.3.9999: Cross-platform application development framework
-dev-qt/qttools 6.3.9999: Qt Tools Collection
+dev-qt/qtbase 6.4.9999: Cross-platform application development framework
+dev-qt/qttools 6.4.9999: Qt Tools Collection
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glslang 11.8.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
@@ -182,8 +182,6 @@ sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
-sys-devel/clang 13.0.1_rc3: C language family frontend for LLVM
-sys-devel/llvm 13.0.1_rc3: Low Level Virtual Machine
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.4-r1: Daemon providing interfaces to work with storage devices
