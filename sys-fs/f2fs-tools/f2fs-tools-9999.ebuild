@@ -19,9 +19,7 @@ RDEPEND="
 	elibc_musl? ( sys-libs/queue-standalone )"
 DEPEND="${RDEPEND}"
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-1.15.0-lz4-1.9.4.patch
-)
+PATCHES=()
 
 src_prepare() {
 	default
