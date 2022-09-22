@@ -153,6 +153,7 @@ net-im/telegram-desktop 4.2.0: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-im/viber 16.1.0.37: Free text and calls
+net-im/whatsapp-for-linux 1.4.6: An unofficial WhatsApp desktop application for Linux
 net-libs/libpsl 0.21.1: C library for the Public Suffix List
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 1.2.9999-r2 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
