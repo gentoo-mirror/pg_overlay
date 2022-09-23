@@ -45,7 +45,6 @@ src_install() {
 	doins "${S}/src/app-indicator-enum-types.h"
 	insinto /usr/$(get_libdir)/pkgconfig/
 	doins "${S}/src/ayatana-appindicator3-0.1.pc"
-	doins "${S}/bindings/mono/ayatana-appindicator3-sharp-0.1.pc"
 	insinto /usr/$(get_libdir)/
 	doins "${S}/src/libayatana-appindicator3.so.1.0.0"
 	dosym libayatana-appindicator3.so.1.0.0 /usr/$(get_libdir)/libayatana-appindicator3.so.1
@@ -53,28 +52,8 @@ src_install() {
 	insinto /usr/$(get_libdir)/girepository-1.0/
 	doins "${S}/src/AyatanaAppIndicator3-0.1.typelib"
 	doins "${S}/src/AyatanaAppIndicator3-0.1.typelib"
-	insinto /usr/$(get_libdir)/ayatana-appindicator3-sharp-0.1
-	doins "${S}/bindings/mono/ayatana-appindicator3-sharp.dll.config"
-	doins "${S}/bindings/mono/ayatana-appindicator3-sharp.dll"
-	doins "${S}/bindings/mono/policy.0.0.ayatana-appindicator3-sharp.config"
-	doins "${S}/bindings/mono/policy.0.0.ayatana-appindicator3-sharp.dll"
-	doins "${S}/bindings/mono/policy.0.1.ayatana-appindicator3-sharp.config"
-	doins "${S}/bindings/mono/policy.0.1.ayatana-appindicator3-sharp.dll"
-	dodir /usr/$(get_libdir)/mono/gac/ayatana-appindicator3-sharp/
-	dodir /usr/$(get_libdir)/mono/gac/ayatana-appindicator3-sharp/0.5.91.0__bcae265d1c7ab4c2/
-	insinto /usr/$(get_libdir)/mono/gac/ayatana-appindicator3-sharp/0.5.91.0__bcae265d1c7ab4c2/
-	doins "${S}/bindings/mono/ayatana-appindicator3-sharp.dll.config"
-	doins "${S}/bindings/mono/ayatana-appindicator3-sharp.dll"
-	dodir /usr/$(get_libdir)/mono/gac/policy.0.0.ayatana-appindicator3-sharp
-	dodir /usr/$(get_libdir)/mono/gac/policy.0.0.ayatana-appindicator3-sharp/0.0.0.0__bcae265d1c7ab4c2/
-	insinto /usr/$(get_libdir)/mono/gac/policy.0.0.ayatana-appindicator3-sharp/0.0.0.0__bcae265d1c7ab4c2/
-	doins "${S}/bindings/mono/policy.0.0.ayatana-appindicator3-sharp.config"
-	doins "${S}/bindings/mono/policy.0.0.ayatana-appindicator3-sharp.dll"
-	dodir /usr/$(get_libdir)/mono/ayatana-appindicator3-sharp
 	# dosym /usr/$(get_libdir)/mono/gac/ayatana-appindicator3-sharp/0.5.91.0__bcae265d1c7ab4c2/ayatana-appindicator3-sharp.dll /usr/$(get_libdir)/mono/ayatana-appindicator3-sharp/ayatana-appindicator3-sharp.dll
 	# dosym /usr/$(get_libdir)/mono/gac/policy.0.0.ayatana-appindicator3-sharp/0.0.0.0__bcae265d1c7ab4c2/policy.0.0.ayatana-appindicator3-sharp.dll /$(get_libdir)/mono/ayatana-appindicator3-sharp/policy.0.0.ayatana-appindicator3-sharp.dll
-	dosym ayatana-appindicator3-sharp.dll /usr/$(get_libdir)/mono/ayatana-appindicator3-sharp/ayatana-appindicator3-sharp.dll
-	dosym policy.0.0.ayatana-appindicator3-sharp.dll /usr/$(get_libdir)/mono/ayatana-appindicator3-sharp/policy.0.0.ayatana-appindicator3-sharp.dll
 	insinto /usr/share/gir-1.0
 	doins "${S}/src/AyatanaAppIndicator3-0.1.gir"
 	insinto /usr/share/vala/vapi
