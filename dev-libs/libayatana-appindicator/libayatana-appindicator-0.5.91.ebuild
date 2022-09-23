@@ -59,7 +59,7 @@ src_install() {
 	insinto /usr/share/vala/vapi
 	doins "${S}/bindings/vala/ayatana-appindicator3-0.1.deps"
 	doins "${S}/bindings/vala/ayatana-appindicator3-0.1.vapi"
-	insinto /usr/include
+	insinto /usr/include/libayatana-appindicator
 	doins "${S}/src/app-indicator.h"
 	doins "${S}/src/app-indicator-enum-types.h"
 
