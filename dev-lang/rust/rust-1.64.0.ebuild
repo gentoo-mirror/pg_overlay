@@ -22,8 +22,8 @@ else
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~sparc ~x86"
 fi
 
-#RUST_STAGE0_VERSION=${PV}
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
+RUST_STAGE0_VERSION=${PV}
+#RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -42,7 +42,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/(-)?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind miri nightly parallel-compiler profiler rls rustfmt rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind miri nightly parallel-compiler profiler rls rustfmt rust-analyzer rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -169,8 +169,6 @@ PATCHES=(
 	"${FILESDIR}"/1.55.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
-	"${FILESDIR}"/1.63.0-CVE-2022-36113.patch
-	"${FILESDIR}"/1.63.0-CVE-2022-36114.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -320,10 +318,10 @@ src_configure() {
 
 	# Collect rust target names to compile standard libs for all ABIs.
 	for v in $(multilib_get_enabled_abi_pairs); do
-		rust_targets="${rust_targets},\"$(rust_abi $(get_abi_CHOST ${v##*.}))\""
+		rust_targets+=",\"$(rust_abi ${chost_target})\""
 	done
 	if use wasm; then
-		rust_targets="${rust_targets},\"wasm32-unknown-unknown\""
+		rust_targets+=",\"wasm32-unknown-unknown\""
 		if use system-llvm; then
 			# un-hardcode rust-lld linker for this target
 			# https://bugs.gentoo.org/715348
@@ -332,25 +330,14 @@ src_configure() {
 	fi
 	rust_targets="${rust_targets#,}"
 
-	local tools="\"cargo\","
-	if use clippy; then
-		tools="\"clippy\",$tools"
-	fi
-	if use miri; then
-		tools="\"miri\",$tools"
-	fi
-	if use profiler; then
-		tools="\"rust-demangler\",$tools"
-	fi
-	if use rls; then
-		tools="\"rls\",\"analysis\",$tools"
-	fi
-	if use rustfmt; then
-		tools="\"rustfmt\",$tools"
-	fi
-	if use rust-src; then
-		tools="\"src\",$tools"
-	fi
+	local tools='"cargo"'
+	use clippy && tools+=',"clippy"'
+	use miri && tools+=',"miri"'
+	use profiler && tools+=',"rust-demangler"'
+	use rls && tools+=',"rls","analysis"'
+	use rustfmt && tools+=',"rustfmt"'
+	use rust-analyzer && tools+=',"rust-analyzer"'
+	use rust-src && tools+=',"src"'
 
 	local rust_stage0_root
 	if use system-bootstrap; then
@@ -491,16 +478,16 @@ src_configure() {
 			ranlib = "$(tc-getRANLIB)"
 			#llvm-libunwind = "$(usex llvm-libunwind $(usex system-llvm system in-tree) no)"
 		_EOF_
+		if use system-llvm; then
+			cat <<- _EOF_ >> "${S}"/config.toml
+				llvm-config = "$(get_llvm_prefix "${LLVM_MAX_SLOT}")/bin/llvm-config"
+			_EOF_
+		fi
 		# by default librustc_target/spec/linux_musl_base.rs sets base.crt_static_default = true;
 		# but we patch it and set to false here as well
 		if use elibc_musl; then
 			cat <<- _EOF_ >> "${S}"/config.toml
 				crt-static = false
-			_EOF_
-		fi
-		if use system-llvm; then
-			cat <<- _EOF_ >> "${S}"/config.toml
-				llvm-config = "$(get_llvm_prefix "${LLVM_MAX_SLOT}")/bin/llvm-config"
 			_EOF_
 		fi
 	done
@@ -598,11 +585,12 @@ src_configure() {
 
 	einfo "Rust configured with the following flags:"
 	echo
-	echo RUSTFLAGS="${RUSTFLAGS:-}"
-	echo RUSTFLAGS_BOOTSTRAP="${RUSTFLAGS_BOOTSTRAP:-}"
-	echo RUSTFLAGS_NOT_BOOTSTRAP="${RUSTFLAGS_NOT_BOOTSTRAP:-}"
+	echo RUSTFLAGS="\"${RUSTFLAGS}\""
+	echo RUSTFLAGS_BOOTSTRAP="\"${RUSTFLAGS_BOOTSTRAP}\""
+	echo RUSTFLAGS_NOT_BOOTSTRAP="\"${RUSTFLAGS_NOT_BOOTSTRAP}\""
+	echo MAGIC_EXTRA_RUSTFLAGS="\"${MAGIC_EXTRA_RUSTFLAGS}\""
 	env | grep "CARGO_TARGET_.*_RUSTFLAGS="
-	cat "${S}"/config.env || die
+	env | grep "CFLAGS_.*"
 	echo
 	einfo "config.toml contents:"
 	cat "${S}"/config.toml || die
@@ -610,12 +598,7 @@ src_configure() {
 }
 
 src_compile() {
-	# we need \n IFS to have config.env with spaces loaded properly. #734018
-	(
-	IFS=$'\n'
-	env $(cat "${S}"/config.env) RUST_BACKTRACE=1\
-		"${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
-	)
+	RUST_BACKTRACE=1 "${EPYTHON}" ./x.py build -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 }
 
 src_test() {
@@ -700,6 +683,7 @@ src_install() {
 	use profiler && symlinks+=( rust-demangler )
 	use rls && symlinks+=( rls )
 	use rustfmt && symlinks+=( rustfmt cargo-fmt )
+	use rust-analyzer && symlinks+=( rust-analyzer )
 
 	einfo "installing eselect-rust symlinks and paths: ${symlinks[@]}"
 	local i
@@ -728,8 +712,6 @@ src_install() {
 	newenvd - "50${P}" <<-_EOF_
 		LDPATH="${EPREFIX}/usr/lib/rust/lib"
 		MANPATH="${EPREFIX}/usr/lib/rust/man"
-		$(use amd64 && usex elibc_musl 'CARGO_TARGET_X86_64_UNKNOWN_LINUX_MUSL_RUSTFLAGS="-C target-feature=-crt-static"' '')
-		$(use arm64 && usex elibc_musl 'CARGO_TARGET_AARCH64_UNKNOWN_LINUX_MUSL_RUSTFLAGS="-C target-feature=-crt-static"' '')
 	_EOF_
 
 	rm -rf "${ED}/usr/lib/${PN}/${PV}"/*.old || die
@@ -766,6 +748,9 @@ src_install() {
 	if use rustfmt; then
 		echo /usr/bin/rustfmt >> "${T}/provider-${P}"
 		echo /usr/bin/cargo-fmt >> "${T}/provider-${P}"
+	fi
+	if use rust-analyzer; then
+		echo /usr/bin/rust-analyzer >> "${T}/provider-${P}"
 	fi
 
 	insinto /etc/env.d/rust
