@@ -2,7 +2,6 @@ build-disable-elfhack.patch
 mozilla-1669639.patch
 firefox-testing.patch
 0001-GLIBCXX-fix-for-GCC-12.patch
-D154024.diff
 
 firefox-tests-xpcshell-freeze.patch
 
