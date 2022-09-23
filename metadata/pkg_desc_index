@@ -197,8 +197,8 @@ sys-libs/polly 14.0.6 15.0.1: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre74: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
-virtual/rust 1.63.0: Virtual for Rust language compiler
-www-client/firefox 105.0: Firefox Web Browser
+virtual/rust 1.64.0: Virtual for Rust language compiler
+www-client/firefox 105.0.1: Firefox Web Browser
 x11-base/xorg-server 21.1.3-r3 21.1.4: X.Org X servers
 x11-base/xwayland 22.1.3: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
