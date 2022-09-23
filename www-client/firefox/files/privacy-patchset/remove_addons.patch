@@ -5,7 +5,7 @@ index 3c6e7eb88689..d923333aa100 100644
 @@ -8,7 +8,5 @@ DIRS += [
      "formautofill",
 -    "screenshots",
-     "webcompat",
+-    "webcompat",
 -    "report-site-issue",
      "pictureinpicture",
      "search-detection",
