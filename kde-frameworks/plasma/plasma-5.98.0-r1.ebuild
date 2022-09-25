@@ -62,8 +62,6 @@ BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
 PATCHES=( "${FILESDIR}/${P}-without_x11.patch" )
 
 src_configure() {
-	#sed -i '/fixx11h/d' src/declarativeimports/core/windowthumbnail.h
-
 	local mycmakeargs=(
 		$(cmake_use_find_package !gles2-only OpenGL)
 		$(cmake_use_find_package man KF5DocTools)
