@@ -74,7 +74,7 @@ LLVM_DEPEND+=" )
 # most of the time previous versions fail to bootstrap with newer
 # for example 1.47.x, requires at least 1.46.x, 1.47.x is ok,
 # but it fails to bootstrap with 1.48.x
-# https://github.com/rust-lang/rust/blob/${PV}/src/stage0.txt
+# https://github.com/rust-lang/rust/blob/${PV}/src/stage0.json
 RUST_DEP_PREV="$(ver_cut 1).$(($(ver_cut 2) - 1))*"
 RUST_DEP_CURR="$(ver_cut 1).$(ver_cut 2)*"
 BOOTSTRAP_DEPEND="||
@@ -153,6 +153,7 @@ QA_SONAME="
 
 QA_PRESTRIPPED="
 	usr/lib/${PN}/${PV}/lib/rustlib/.*/bin/rust-llvm-dwp
+	usr/lib/${PN}/${PV}/lib/rustlib/.*/lib/self-contained/crtn.o
 "
 
 # An rmeta file is custom binary format that contains the metadata for the crate.
@@ -318,7 +319,7 @@ src_configure() {
 
 	# Collect rust target names to compile standard libs for all ABIs.
 	for v in $(multilib_get_enabled_abi_pairs); do
-		rust_targets+=",\"$(rust_abi ${chost_target})\""
+		rust_targets+=",\"$(rust_abi $(get_abi_CHOST ${v##*.}))\""
 	done
 	if use wasm; then
 		rust_targets+=",\"wasm32-unknown-unknown\""
@@ -465,9 +466,7 @@ src_configure() {
 		rust_target=$(rust_abi $(get_abi_CHOST ${v##*.}))
 		arch_cflags="$(get_abi_CFLAGS ${v##*.})"
 
-		cat <<- _EOF_ >> "${S}"/config.env
-			CFLAGS_${rust_target}=${arch_cflags}
-		_EOF_
+		export CFLAGS_${rust_target//-/_}="${arch_cflags}"
 
 		cat <<- _EOF_ >> "${S}"/config.toml
 			[target.${rust_target}]
