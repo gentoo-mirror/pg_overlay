@@ -130,7 +130,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=dev-cpp/clucene-2.3.3.4-r2
 	dev-db/unixODBC
 	dev-lang/perl
-	>=dev-libs/boost-1.72.0:=[nls]
+	dev-libs/boost:=[nls]
 	dev-libs/expat
 	dev-libs/hyphen
 	dev-libs/icu:=
