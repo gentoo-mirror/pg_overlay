@@ -76,7 +76,7 @@ BDEPEND="
 # dev-libs/jemalloc:=[-lazy-lock] -> https://bugs.gentoo.org/803233
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-3.6.0-jemalloc-only-telegram.patch"
+	#"${FILESDIR}/tdesktop-3.6.0-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
 )
 
