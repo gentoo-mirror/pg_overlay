@@ -88,11 +88,9 @@ src_configure() {
 
 src_compile() {
 	export OCAMLRUNPARAM="l=256M"
-	emake -j1 # Upstream bug #48
+	emake -j3 # Upstream bug #48
 
-	if ! use guionly; then
-		emake utils
-	fi
+	emake utils
 }
 
 src_install() {
