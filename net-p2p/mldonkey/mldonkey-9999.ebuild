@@ -96,15 +96,13 @@ src_compile() {
 src_install() {
 	local myext i
 	use ocamlopt || myext=".byte"
-	if ! use guionly; then
-		for i in mlnet mld_hash get_range copysources subconv; do
-			newbin "${i}${myext}" "${i}"
-		done
-		use bittorrent && newbin "make_torrent${myext}" make_torrent
+	for i in mlnet mld_hash get_range copysources subconv; do
+		newbin "${i}${myext}" "${i}"
+	done
+	use bittorrent && newbin "make_torrent${myext}" make_torrent
 
-		newconfd "${FILESDIR}/mldonkey.confd" mldonkey
-		newinitd "${FILESDIR}/mldonkey.initd" mldonkey
-	fi
+	newconfd "${FILESDIR}/mldonkey.confd" mldonkey
+	newinitd "${FILESDIR}/mldonkey.initd" mldonkey
 
 	if use doc ; then
 		docompress -x "/usr/share/doc/${PF}/scripts" "/usr/share/doc/${PF}/html"
