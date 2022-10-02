@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=8
+EAPI=7
 
 inherit autotools desktop flag-o-matic toolchain-funcs git-r3
 
@@ -23,7 +23,7 @@ RDEPEND="dev-lang/perl
 		net-libs/libnatpmp
 		net-libs/miniupnpc:=
 	)
-	!guionly? ( acct-user/p2p )
+	acct-user/p2p
 	app-arch/bzip2
 	sys-libs/zlib
 "
@@ -37,7 +37,7 @@ DEPEND="${RDEPEND}
 
 RESTRICT="!ocamlopt? ( strip )"
 
-PATCHES=( "${FILESDIR}/cpp17-byte-namespace.patch" )
+#PATCHES=( "${FILESDIR}/cpp17-byte-namespace.patch" )
 
 pkg_setup() {
 	# dev-lang/ocaml creates its own objects but calls gcc for linking, which will
@@ -90,23 +90,19 @@ src_compile() {
 	export OCAMLRUNPARAM="l=256M"
 	emake -j1 # Upstream bug #48
 
-	if ! use guionly; then
-		emake utils
-	fi
+	emake utils
 }
 
 src_install() {
 	local myext i
 	use ocamlopt || myext=".byte"
-	if ! use guionly; then
-		for i in mlnet mld_hash get_range copysources subconv; do
-			newbin "${i}${myext}" "${i}"
-		done
-		use bittorrent && newbin "make_torrent${myext}" make_torrent
+	for i in mlnet mld_hash get_range copysources subconv; do
+		newbin "${i}${myext}" "${i}"
+	done
+	use bittorrent && newbin "make_torrent${myext}" make_torrent
 
-		newconfd "${FILESDIR}/mldonkey.confd" mldonkey
-		newinitd "${FILESDIR}/mldonkey.initd" mldonkey
-	fi
+	newconfd "${FILESDIR}/mldonkey.confd" mldonkey
+	newinitd "${FILESDIR}/mldonkey.initd" mldonkey
 
 	if use doc ; then
 		docompress -x "/usr/share/doc/${PF}/scripts" "/usr/share/doc/${PF}/html"
