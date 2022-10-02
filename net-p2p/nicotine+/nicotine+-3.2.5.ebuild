@@ -35,7 +35,7 @@ distutils_enable_tests pytest
 
 src_install() {
 	distutils-r1_src_install
-	mv "${ED}/usr/share/doc/${P}" "${ED}/usr/share/doc/${PF}" || die
+	#mv "${ED}/usr/share/doc/${P}" "${ED}/usr/share/doc/${PF}" || die
 }
 
 pkg_postinst() {
