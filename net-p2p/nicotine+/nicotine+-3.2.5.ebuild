@@ -4,7 +4,6 @@
 EAPI=8
 
 PYTHON_COMPAT=( python3_{9..11} )
-PYTHON_REQ_USE="gdbm"
 
 inherit distutils-r1 xdg-utils
 
@@ -27,6 +26,12 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 
 S="${WORKDIR}/nicotine-plus-${PV}"
+
+EPYTEST_IGNORE=(
+	"test/integration/test_startup.py"
+)
+
+distutils_enable_tests pytest
 
 src_install() {
 	distutils-r1_src_install
