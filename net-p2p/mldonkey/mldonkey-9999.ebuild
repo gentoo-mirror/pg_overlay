@@ -1,7 +1,7 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit autotools desktop flag-o-matic toolchain-funcs git-r3
 
@@ -13,27 +13,19 @@ LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
 
-IUSE="bittorrent doc fasttrack gd gnutella gtk guionly magic +ocamlopt upnp"
-
-REQUIRED_USE="guionly? ( gtk )"
+IUSE="bittorrent doc fasttrack gd gnutella magic +ocamlopt upnp"
 
 RDEPEND="dev-lang/perl
 	dev-ml/camlp4:=
 	gd? ( media-libs/gd[truetype] )
-	gtk? (
-		gnome-base/librsvg
-		dev-ml/lablgtk:2=[svg]
-	)
-	guionly? (
-		gnome-base/librsvg
-		dev-ml/lablgtk:2=[svg]
-	)
 	magic? ( sys-apps/file )
 	upnp? (
 		net-libs/libnatpmp
 		net-libs/miniupnpc:=
 	)
 	!guionly? ( acct-user/p2p )
+	app-arch/bzip2
+	sys-libs/zlib
 "
 # Can't yet use newer OCaml
 # -unsafe-string usage:
@@ -48,17 +40,6 @@ RESTRICT="!ocamlopt? ( strip )"
 PATCHES=( "${FILESDIR}/cpp17-byte-namespace.patch" )
 
 pkg_setup() {
-	if use gtk; then
-		echo ""
-		einfo "If the compile with gui fails, and you have updated Ocaml"
-		einfo "recently, you may have forgotten that you need to run"
-		einfo "/usr/portage/dev-lang/ocaml/files/ocaml-rebuild.sh"
-		einfo "to learn which ebuilds you need to recompile"
-		einfo "each time you update Ocaml to a different version"
-		einfo "see the Ocaml ebuild for details"
-		echo ""
-	fi
-
 	# dev-lang/ocaml creates its own objects but calls gcc for linking, which will
 	# results in relocations if gcc wants to create a PIE executable
 	if gcc-specs-pie ; then
@@ -82,16 +63,6 @@ src_prepare() {
 
 src_configure() {
 	local myconf=()
-
-	if use gtk; then
-		myconf+=( --enable-gui=newgui2 )
-	else
-		myconf+=( --disable-gui )
-	fi
-
-	if use guionly; then
-		myconf+=( --disable-multinet --disable-donkey )
-	fi
 
 	local my_extra_libs
 	if use gd; then
@@ -135,14 +106,6 @@ src_install() {
 
 		newconfd "${FILESDIR}/mldonkey.confd" mldonkey
 		newinitd "${FILESDIR}/mldonkey.initd" mldonkey
-	fi
-
-	if use gtk; then
-		for i in mlgui mlguistarter; do
-			newbin "${i}${myext}" "${i}"
-		done
-		make_desktop_entry mlgui "MLDonkey GUI" mldonkey "Network;P2P"
-		newicon "${S}"/packages/rpm/mldonkey-icon-48.png "${PN}.png"
 	fi
 
 	if use doc ; then
