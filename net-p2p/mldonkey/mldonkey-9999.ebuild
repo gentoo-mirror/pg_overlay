@@ -88,7 +88,7 @@ src_configure() {
 
 src_compile() {
 	export OCAMLRUNPARAM="l=256M"
-	emake -j3 # Upstream bug #48
+	emake -j1 # Upstream bug #48
 
 	emake utils
 }
