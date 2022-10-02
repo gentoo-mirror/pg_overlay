@@ -45,7 +45,7 @@ DEPEND="${RDEPEND}
 
 RESTRICT="!ocamlopt? ( strip )"
 
-PATCHES=( "${FILESDIR}/6952c2165a498080d2f52ee0a3644730a281fce5.patch" )
+PATCHES=( "${FILESDIR}/cpp17-byte-namespace.patch" )
 
 pkg_setup() {
 	if use gtk; then
