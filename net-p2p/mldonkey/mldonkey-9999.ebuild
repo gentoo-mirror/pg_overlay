@@ -23,7 +23,7 @@ RDEPEND="dev-lang/perl
 		net-libs/libnatpmp
 		net-libs/miniupnpc:=
 	)
-	!guionly? ( acct-user/p2p )
+	acct-user/p2p
 	app-arch/bzip2
 	sys-libs/zlib
 "
