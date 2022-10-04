@@ -191,7 +191,7 @@ sys-fs/xfsprogs 5.19.0_rc1 5.19.0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/minizip-ng 3.0.2: Fork of the popular zip manipulation library found in the zlib distribution.
 sys-libs/ncurses 6.3_p20220122: console display library
-sys-libs/polly 14.0.6 15.0.1: Polyhedral optimizations for LLVM
+sys-libs/polly 14.0.6 15.0.2: Polyhedral optimizations for LLVM
 sys-libs/slang 2.3.3_pre74: Multi-platform library designed to allow a developer to create robust software
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
