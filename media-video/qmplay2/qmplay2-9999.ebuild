@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -21,17 +21,17 @@ fi
 LICENSE="LGPL-3"
 SLOT="0"
 
-IUSE="avdevice +audiofilters +alsa cdio cuvid dbus extensions
-	gme inputs libass modplug notifications opengl pipewire portaudio
-	pulseaudio sid shaders vaapi vdpau +videofilters visualizations vulkan xv"
+IUSE="avdevice +audiofilters +alsa cdio cuvid extensions gme inputs libass
+	modplug notifications opengl pipewire portaudio pulseaudio sid shaders
+	+taglib vaapi vdpau videofilters visualizations vulkan xv"
 
 REQUIRED_USE="
 	audiofilters? ( || ( alsa pipewire portaudio pulseaudio ) )
-	extensions? ( dbus )
 	shaders? ( vulkan )"
 
 RDEPEND="
 	dev-qt/qtcore:5
+	dev-qt/qtdbus:5
 	dev-qt/qtsvg:5
 	dev-qt/qtwidgets:5
 	dev-qt/qtx11extras:5
@@ -42,11 +42,7 @@ RDEPEND="
 	)
 	alsa? ( media-libs/alsa-lib )
 	cdio? ( dev-libs/libcdio[cddb] )
-	dbus? ( dev-qt/qtdbus:5 )
-	extensions? (
-		dev-qt/qtdeclarative:5
-		media-libs/taglib
-	)
+	extensions? ( dev-qt/qtdeclarative:5 )
 	gme? ( media-libs/game-music-emu )
 	libass? ( media-libs/libass )
 	opengl? ( virtual/opengl )
@@ -55,9 +51,10 @@ RDEPEND="
 	pulseaudio? ( media-sound/pulseaudio )
 	sid? ( media-libs/libsidplayfp )
 	shaders? ( >=media-libs/shaderc-2020.1 )
+	taglib? ( media-libs/taglib	)
 	vaapi? (
 		>=media-video/ffmpeg-4.1.3[vaapi]
-		x11-libs/libva[drm,opengl]
+		x11-libs/libva
 	)
 	vdpau? ( media-video/ffmpeg[vdpau] )
 	videofilters? ( dev-qt/qtconcurrent:5 )
@@ -93,8 +90,8 @@ src_configure() {
 		-DUSE_UPDATES=OFF
 		-DUSE_ALSA=$(usex alsa)
 		-DUSE_AUDIOCD=$(usex cdio)
-		-DUSE_DBUS_SUSPEND=$(usex dbus)
-		-DUSE_FREEDESKTOP_NOTIFICATIONS=$(usex dbus)
+		-DUSE_DBUS_SUSPEND=ON
+		-DUSE_FREEDESKTOP_NOTIFICATIONS=ON
 		-DUSE_LIBASS=$(usex libass)
 		-DUSE_NOTIFY=$(usex notifications)
 		-DUSE_OPENGL=$(usex opengl)
@@ -119,6 +116,7 @@ src_configure() {
 		-DUSE_PIPEWIRE=$(usex pipewire)
 		-DUSE_PORTAUDIO=$(usex portaudio)
 		-DUSE_PULSEAUDIO=$(usex pulseaudio)
+		-DUSE_TAGLIB=$(usex taglib)
 		-DUSE_VIDEOFILTERS=$(usex videofilters)
 		-DUSE_VISUALIZATIONS=$(usex visualizations)
 
