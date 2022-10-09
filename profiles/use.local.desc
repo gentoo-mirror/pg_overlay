@@ -114,7 +114,6 @@ dev-util/sccache:s3 - Enable Amazon S3 support
 dev-util/vulkan-tools:cube - Build the cube/cubepp demos
 games-board/pysolfc:extra-cardsets - Install extra cardsets
 games-board/pysolfc:sound - Enable sound support using dev-python/pygame
-gui-libs/disman:kwinft - Enable support for gui-wm/kwinft via gui-libs/wrapland
 gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
 gui-wm/kwinft:tools - Build internal tools for performance analysis at runtime.
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
