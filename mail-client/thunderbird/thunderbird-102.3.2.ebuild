@@ -617,7 +617,6 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-	eapply "${FILESDIR}/patch-memory_mozalloc_throw__gcc.h.patch"
 	eapply "${FILESDIR}/rustc_version-0.4.0.patch"
 	#######
 
