@@ -62,17 +62,18 @@ DEPEND="${COMMON_DEPEND}
 # in sync.
 RDEPEND="${COMMON_DEPEND}
 	>=dev-util/gtk-update-icon-cache-2
-	!<gnome-base/gail-1000
-	!<dev-util/gtk-builder-convert-${PV}
-	!<x11-libs/vte-0.28.2-r201:0
 	adwaita-icon-theme? (
 		>=x11-themes/adwaita-icon-theme-3.14
 		x11-themes/gnome-themes-standard
 	)
+	!<dev-util/gtk-builder-convert-${PV}
 "
 # librsvg for svg icons (PDEPEND to avoid circular dep), bug #547710
 PDEPEND="
-	adwaita-icon-theme? ( x11-themes/gtk-engines-adwaita )
+	adwaita-icon-theme? (
+		gnome-base/librsvg[${MULTILIB_USEDEP}]
+		x11-themes/gtk-engines-adwaita
+	)
 	vim-syntax? ( app-vim/gtk-syntax )
 "
 # docbook-4.1.2 and xsl required for man pages
@@ -82,9 +83,9 @@ BDEPEND="
 		app-text/docbook-xml-dtd:4.1.2
 		app-text/docbook-xml-dtd:4.3
 		app-text/docbook-xsl-stylesheets
+		dev-libs/libxslt
 	)
 	dev-libs/gobject-introspection-common
-	dev-libs/libxslt
 	dev-util/glib-utils
 	>=dev-util/gtk-doc-am-1.20
 	>=sys-devel/gettext-0.18.3
@@ -183,8 +184,8 @@ multilib_src_configure() {
 	[[ ${ABI} == ppc64 ]] && append-flags -mminimal-toc
 
 	if use doc
-		then set -- --enable-man --with-xml-catalog="${EPREFIX}"/etc/xml/catalog
-		else set --
+	then	set -- --enable-man --with-xml-catalog="${EPREFIX}"/etc/xml/catalog
+	else	set --
 	fi
 	ECONF_SOURCE=${S} \
 	gnome2_src_configure \
@@ -233,8 +234,10 @@ multilib_src_install_all() {
 	rm "${ED}"/usr/share/doc/${P}/ChangeLog # empty file
 
 	# dev-util/gtk-builder-convert split off into a separate package, #402905
-	rm -f "${ED}"usr/bin/gtk-builder-convert || die
-	rm -f "${ED}"usr/share/man/man1/gtk-builder-convert.* || die
+	rm "${ED}"/usr/bin/gtk-builder-convert || die
+	if use doc ; then
+		rm "${ED}"/usr/share/man/man1/gtk-builder-convert.* || die
+	fi
 
 	readme.gentoo_create_doc
 }
