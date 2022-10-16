@@ -14,8 +14,8 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/zaps166/QMPlay2"
 else
 	SRC_URI="https://github.com/zaps166/QMPlay2/releases/download/${PV}/QMPlay2-src-${PV}.tar.xz"
-	KEYWORDS="~amd64 ~x86"
 	S="${WORKDIR}/QMPlay2-src-${PV}"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="LGPL-3"
@@ -54,7 +54,7 @@ RDEPEND="
 	taglib? ( media-libs/taglib	)
 	vaapi? (
 		>=media-video/ffmpeg-4.1.3[vaapi]
-		x11-libs/libva
+		media-libs/libva
 	)
 	vdpau? ( media-video/ffmpeg[vdpau] )
 	videofilters? ( dev-qt/qtconcurrent:5 )
