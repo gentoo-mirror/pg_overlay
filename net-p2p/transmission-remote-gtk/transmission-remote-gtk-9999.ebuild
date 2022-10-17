@@ -21,7 +21,7 @@ IUSE="ayatana debug geoip libnotify libproxy rss"
 RDEPEND="
 	>=dev-libs/glib-2.44:2
 	>=dev-libs/json-glib-0.12.6
-	net-misc/curl
+	net-libs/libsoup
 	>=x11-libs/gtk+-3.16:3
 	ayatana? ( dev-libs/libappindicator:3 )
 	geoip? ( dev-libs/geoip )
