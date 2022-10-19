@@ -24,7 +24,7 @@ else
 	S="${WORKDIR}/node-v${PV}"
 fi
 
-IUSE="cpu_flags_x86_sse2 debug doc +icu inspector lto +npm pax-kernel +snapshot +ssl +system-icu +system-ssl systemtap test"
+IUSE="cpu_flags_x86_sse2 debug doc +icu inspector lto +npm pax-kernel +snapshot +ssl +system-icu +system-ssl test"
 REQUIRED_USE="inspector? ( icu ssl )
 	npm? ( ssl )
 	system-icu? ( icu )
@@ -43,7 +43,6 @@ RDEPEND=">=app-arch/brotli-1.0.9:=
 BDEPEND="${PYTHON_DEPS}
 	sys-apps/coreutils
 	virtual/pkgconfig
-	systemtap? ( dev-util/systemtap )
 	test? ( net-misc/curl )
 	pax-kernel? ( sys-apps/elfix )"
 DEPEND="${RDEPEND}"
@@ -125,7 +124,7 @@ src_configure() {
 	xdg_environment_reset
 
 	# LTO compiler flags are handled by configure.py itself
-	filter-flags '-flto*'
+	#filter-flags '-flto*'
 
 	local myconf=(
 		--shared-brotli
@@ -152,6 +151,8 @@ src_configure() {
 		myconf+=( --without-ssl )
 	fi
 
+	myconf+=( --without-corepack )
+
 	local myarch=""
 	case "${ARCH}:${ABI}" in
 		*:amd64) myarch="x64";;
@@ -171,7 +172,6 @@ src_configure() {
 	"${EPYTHON}" configure.py \
 		--prefix="${EPREFIX}"/usr \
 		--dest-cpu=${myarch} \
-		$(use_with systemtap dtrace) \
 		"${myconf[@]}" || die
 }
 
