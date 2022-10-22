@@ -47,7 +47,7 @@ dev-libs/libixion 0.17.0: General purpose formula parser & interpreter
 dev-libs/liborcus 0.17.2: Standalone file import filter library for spreadsheet documents
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/openssl 3.0.4: Robust, full-featured Open Source Toolkit for the Transport Layer Security (TLS)
-dev-libs/protobuf 3.19.4: Google's Protocol Buffers - Extensible mechanism for serializing structured data
+dev-libs/protobuf 3.21.7_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999: A lightweigt RPC library based on XML and HTTP
@@ -115,11 +115,12 @@ media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-base 1.19.3: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.19.3: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.19.3: Open source multimedia framework
+media-libs/harfbuzz 5.3.1_pre: An OpenType text shaping engine
 media-libs/imlib2 1.7.4: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 4.208.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libpulse 16.1-r1: Libraries for PulseAudio clients
-media-libs/libsdl2 2.24.0-r2: Simple Direct Media Layer
+media-libs/libsdl2 2.24.1_pre: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20220503: VoIP library for Telegram clients
 media-libs/libuninameslist 20211114: Library of unicode annotation data
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
