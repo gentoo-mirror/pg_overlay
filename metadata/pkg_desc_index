@@ -103,7 +103,6 @@ gui-apps/wofi 1.2.2: Launcher/menu program for wlroots based wayland compositors
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/wlroots 9999: Pluggable, composable, unopinionated modules for building a Wayland compositor
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
-kde-apps/konsole 22.04.2: KDE's terminal emulator
 kde-frameworks/kdelibs4support 5.99.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-frameworks/plasma 5.99.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
