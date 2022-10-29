@@ -340,7 +340,8 @@ src_compile() {
 
 	# also need to clear the flags explicitly here or they end up
 	# in _sysconfigdata*
-	emake CPPFLAGS= CFLAGS= LDFLAGS=
+	#emake CPPFLAGS= CFLAGS= LDFLAGS=
+	emake EXTRA_CFLAGS="$CFLAGS"
 
 	# Restore saved value from above.
 	local -x PYTHONDONTWRITEBYTECODE=${_PYTHONDONTWRITEBYTECODE}
