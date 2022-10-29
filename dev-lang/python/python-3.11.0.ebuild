@@ -189,6 +189,7 @@ src_configure() {
 			-x test_runpy
 			-x test_pickle
 			-x test_tools
+			-x test_distutils
 		)
 
 		if has_version "app-arch/rpm" ; then
