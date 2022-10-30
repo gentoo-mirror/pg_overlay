@@ -75,6 +75,7 @@ dev-python/pysol_cards 0.14.2: Deal PySol FreeCell cards
 dev-python/python-mpd 3.0.5: Python MPD client library
 dev-qt/qtbase 6.4.9999: Cross-platform application development framework
 dev-qt/qttools 6.4.9999: Qt Tools Collection
+dev-qt/qtwebengine 5.15.6.9999: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glslang 11.8.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
@@ -181,6 +182,7 @@ sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 243.9999 246.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/pambase 20220214: PAM base configuration files
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/udisks 2.9.4-r1: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.19.0 6.0.0_rc0: XFS filesystem utilities
