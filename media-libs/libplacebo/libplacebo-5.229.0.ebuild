@@ -30,6 +30,7 @@ RDEPEND="glslang? ( dev-util/glslang[${MULTILIB_USEDEP}] )
 	lcms? ( media-libs/lcms:2[${MULTILIB_USEDEP}] )
 	opengl? ( media-libs/libepoxy[${MULTILIB_USEDEP}] )
 	shaderc? ( >=media-libs/shaderc-2017.2[${MULTILIB_USEDEP}] )
+	unwind? ( sys-libs/libunwind:= )
 	vulkan? (
 		dev-util/vulkan-headers
 		media-libs/vulkan-loader[${MULTILIB_USEDEP}]
@@ -56,6 +57,7 @@ multilib_src_configure() {
 		$(meson_feature lcms)
 		$(meson_feature opengl)
 		$(meson_feature shaderc)
+		$(meson_feature unwind)
 		$(meson_feature vulkan)
 		$(meson_use test tests)
 		# hard-code path from dev-util/vulkan-headers
