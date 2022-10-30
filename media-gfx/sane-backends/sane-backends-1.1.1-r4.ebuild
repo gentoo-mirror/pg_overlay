@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PYTHON_COMPAT=( python3_{9..11} )
 
@@ -37,6 +37,7 @@ IUSE_SANE_BACKENDS=(
 	epjitsu
 	epson
 	epson2
+	epsonds
 	escl
 	fujitsu
 	genesys
@@ -124,7 +125,7 @@ REQUIRED_USE="
 
 DESCRIPTION="Scanner Access Now Easy - Backends"
 HOMEPAGE="http://www.sane-project.org/"
-SRC_URI="https://gitlab.com/sane-project/backends/uploads/104f09c07d35519cc8e72e604f11643f/${P}.tar.gz"
+SRC_URI="https://gitlab.com/sane-project/backends/uploads/7d30fab4e115029d91027b6a58d64b43/${P}.tar.gz"
 
 LICENSE="GPL-2 public-domain"
 SLOT="0"
@@ -132,18 +133,17 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~
 
 # For pixma: see https://gitlab.com/sane-project/backends/-/releases/1.0.28#build
 RDEPEND="
-	acct-group/scanner
 	acct-user/saned
 	gphoto2? (
 		>=media-libs/libgphoto2-2.5.3.1:=[${MULTILIB_USEDEP}]
-		>=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}]
+		media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}]
 	)
 	sane_backends_canon_pp? ( >=sys-libs/libieee1284-0.2.11-r3[${MULTILIB_USEDEP}] )
-	sane_backends_dc210? ( >=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}] )
-	sane_backends_dc240? ( >=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}] )
+	sane_backends_dc210? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
+	sane_backends_dc240? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
 	sane_backends_dell1600n_net? (
 		>=media-libs/tiff-3.9.7-r1:0=[${MULTILIB_USEDEP}]
-		>=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}]
+		media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}]
 	)
 	sane_backends_escl? (
 		app-text/poppler[cairo]
@@ -156,7 +156,7 @@ RDEPEND="
 	)
 	sane_backends_hpsj5s? ( >=sys-libs/libieee1284-0.2.11-r3[${MULTILIB_USEDEP}] )
 	sane_backends_mustek_pp? ( >=sys-libs/libieee1284-0.2.11-r3[${MULTILIB_USEDEP}] )
-	sane_backends_pixma? ( >=virtual/jpeg-0-r2:0=[${MULTILIB_USEDEP}] )
+	sane_backends_pixma? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
 	snmp? ( net-analyzer/net-snmp:0= )
 	systemd? ( sys-apps/systemd:0= )
 	usb? ( >=virtual/libusb-1-r1:1=[${MULTILIB_USEDEP}] )
@@ -180,6 +180,8 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.0.24-saned_pidfile_location.patch
 	"${FILESDIR}"/${PN}-1.0.27-disable-usb-tests.patch
 	"${FILESDIR}"/${PN}-1.0.30-add_hpaio_epkowa_dll.conf.patch
+	# https://gitlab.com/sane-project/backends/-/merge_requests/688
+	"${FILESDIR}"/${PN}-1.1.1-genesys-gl845-crash.patch
 )
 
 MULTILIB_CHOST_TOOLS=(
@@ -204,6 +206,9 @@ src_prepare() {
 
 	# don't bleed user LDFLAGS into pkgconfig files
 	sed 's|@LDFLAGS@ ||' -i tools/*.pc.in || die
+
+	# Needed for udev rules generation/installation
+	multilib_copy_sources
 }
 
 src_configure() {
@@ -301,16 +306,29 @@ multilib_src_install() {
 			doins tools/hotplug/libsane.usermap
 		fi
 
-		udev_newrules tools/udev/libsane.rules 41-libsane.rules
 		insinto "/usr/share/pkgconfig"
 		doins tools/sane-backends.pc
+
+		# From Fedora and Arch, prevent permission conflicts
+		# https://github.com/OpenPrinting/cups/issues/314
+		# https://gitlab.com/sane-project/backends/-/issues/546
+		#
+		# Generate udev udev+hwdb, not needing scanner group
+		install -vdm 755 "${ED}/$(get_udevdir)/rules.d/" || die
+		tools/sane-desc -m udev+hwdb -s doc/descriptions/ > "${ED}/$(get_udevdir)/rules.d/65-${PN}.rules" || die
+		tools/sane-desc -m udev+hwdb -s doc/descriptions-external/ >> "${ED}/$(get_udevdir)/rules.d/65-${PN}.rules" || die
+		# generate udev hwdb
+		install -vdm 755 "${ED}/$(get_udevdir)/hwdb.d/" || die
+		tools/sane-desc -m hwdb -s doc/descriptions/ > "${ED}/$(get_udevdir)/hwdb.d/20-${PN}.hwdb"
+		# NOTE: an empty new line is required between the two .desc collections
+		printf "\n" >> "${ED}/$(get_udevdir)/hwdb.d/20-${PN}.hwdb" || die
+		tools/sane-desc -m hwdb -s doc/descriptions-external/ >> "${ED}/$(get_udevdir)/hwdb.d/20-${PN}.hwdb" || die
+		# udev rule for saned (SANE scanning daemon) to be able to write on usb port
+		udev_dorules "${FILESDIR}/66-saned.rules"
 	fi
 }
 
 multilib_src_install_all() {
-	keepdir /var/lib/lock/sane
-	fowners root:scanner /var/lib/lock/sane
-	fperms g+w /var/lib/lock/sane
 	dodir /etc/env.d
 
 	if use systemd ; then
@@ -344,10 +362,5 @@ pkg_postinst() {
 	if use xinetd ; then
 		elog "If you want remote clients to connect, edit"
 		elog "/etc/sane.d/saned.conf and /etc/hosts.allow"
-	fi
-
-	if ! use systemd ; then
-		elog "If you are using a USB scanner, add all users who want"
-		elog "to access your scanner to the \"scanner\" group."
 	fi
 }
