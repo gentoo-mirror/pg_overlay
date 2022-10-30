@@ -157,16 +157,6 @@ media-libs/gst-plugins-base:pango - Enable pango GStreamer plugin
 media-libs/gst-plugins-base:wayland - Enable Wayland EGL windowing system support (requires egl and at least one of gles2 or opengl)
 media-libs/gstreamer:orc - Disable some PaX memory protections to allow plugins that use dev-lang/orc for runtime optimization to be used on hardened PaX systems
 media-libs/gstreamer:unwind - Enable sys-libs/libunwind usage for better backtrace support in leaks tracer module
-media-libs/imlib2:X - Use the X window system
-media-libs/imlib2:bzip2 - Bzip2 loader support
-media-libs/imlib2:gif - Gif image loader support
-media-libs/imlib2:jpeg - Jpeg image loader support
-media-libs/imlib2:mp3 - ID3 loader support
-media-libs/imlib2:png - PNG image loader support
-media-libs/imlib2:shm - Use MIT shared memory support for X image transfer
-media-libs/imlib2:tiff - TIFF image loader support
-media-libs/imlib2:webp - WEBP image loader support
-media-libs/imlib2:zlib - Zlib loader support
 media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
 media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
 media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
