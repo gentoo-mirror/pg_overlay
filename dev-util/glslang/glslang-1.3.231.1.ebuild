@@ -26,5 +26,3 @@ BDEPEND="${PYTHON_DEPS}"
 
 # Bug 698850
 RESTRICT="test"
-
-PATCHES=( "${FILESDIR}/${PN}-1.3.224-Fix-cmake-file-install-dir.patch" )
