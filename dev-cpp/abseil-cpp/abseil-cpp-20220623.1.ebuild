@@ -1,15 +1,16 @@
-# Copyright 2020-2021 Gentoo Authors
+# Copyright 2020-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 PYTHON_COMPAT=( python3_{9..11} )
 
-inherit cmake flag-o-matic python-any-r1 toolchain-funcs
+inherit cmake python-any-r1
 
 # yes, it needs SOURCE, not just installed one
-GTEST_COMMIT="aee0f9d9b5b87796ee8a0ab26b7587ec30e8858e"
-GTEST_FILE="gtest-1.10.0_p20200702.tar.gz"
+# and no, 1.11.0 is not enough
+GTEST_COMMIT="1b18723e874b256c1e39378c6774a90701d70f7a"
+GTEST_FILE="gtest-${GTEST_COMMIT}.tar.gz"
 
 DESCRIPTION="Abseil Common Libraries (C++), LTS Branch"
 HOMEPAGE="https://abseil.io"
@@ -21,7 +22,7 @@ LICENSE="
 	test? ( BSD )
 "
 SLOT="0/${PV%%.*}"
-KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 IUSE="test"
 
 DEPEND=""
@@ -35,7 +36,7 @@ BDEPEND="
 RESTRICT="!test? ( test )"
 
 PATCHES=(
-	"${FILESDIR}/${PN}-20200923-arm_no_crypto.patch"
+	"${FILESDIR}/${PN}-20211102.0-r2-gcc-13.patch"
 )
 
 src_prepare() {
@@ -60,17 +61,11 @@ src_prepare() {
 }
 
 src_configure() {
-	if use arm || use arm64; then
-		# bug #778926
-		if [[ $($(tc-getCXX) ${CXXFLAGS} -E -P - <<<$'#if defined(__ARM_FEATURE_CRYPTO)\nHAVE_ARM_FEATURE_CRYPTO\n#endif') != *HAVE_ARM_FEATURE_CRYPTO* ]]; then
-			append-cxxflags -DABSL_ARCH_ARM_NO_CRYPTO
-		fi
-	fi
-
 	local mycmakeargs=(
 		-DABSL_ENABLE_INSTALL=TRUE
 		-DABSL_LOCAL_GOOGLETEST_DIR="${WORKDIR}/googletest-${GTEST_COMMIT}"
 		-DCMAKE_CXX_STANDARD=17
+		-DABSL_PROPAGATE_CXX_STD=TRUE
 		$(usex test -DBUILD_TESTING=ON '') #intentional usex
 	)
 	cmake_src_configure
