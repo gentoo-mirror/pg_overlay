@@ -9,7 +9,7 @@ inherit meson python-any-r1 readme.gentoo-r1 xdg-utils
 DESCRIPTION="SPICE server"
 HOMEPAGE="https://www.spice-space.org/"
 SRC_URI="https://www.spice-space.org/download/releases/spice-server/${P}.tar.bz2"
-SRC_URI+=" https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${P}-pthread-c5fe3df1.patch.bz2"
+SRC_URI+=" https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${PN}-0.15.0-pthread-c5fe3df1.patch.bz2"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -20,16 +20,16 @@ RESTRICT="!test? ( test )"
 
 # the libspice-server only uses the headers of libcacard
 RDEPEND="
-	dev-lang/orc[static-libs(+)?]
-	>=dev-libs/glib-2.22:2[static-libs(+)?]
-	opus? ( media-libs/opus[static-libs(+)?] )
-	sys-libs/zlib[static-libs(+)?]
-	virtual/jpeg:0=[static-libs(+)?]
-	>=x11-libs/pixman-0.17.7[static-libs(+)?]
-	dev-libs/openssl:0=[static-libs(+)?]
-	lz4? ( app-arch/lz4:0=[static-libs(+)?] )
+	dev-lang/orc
+	>=dev-libs/glib-2.38:2
+	sys-libs/zlib
+	virtual/jpeg:0=
+	>=x11-libs/pixman-0.17.7
+	dev-libs/openssl:0=
+	lz4? ( app-arch/lz4:0= )
+	opus? ( media-libs/opus )
 	smartcard? ( >=app-emulation/libcacard-2.5.1 )
-	sasl? ( dev-libs/cyrus-sasl[static-libs(+)?] )
+	sasl? ( dev-libs/cyrus-sasl )
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
