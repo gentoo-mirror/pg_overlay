@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{8..10} )
+PYTHON_COMPAT=( python3_{9..11} )
 inherit cmake-multilib python-any-r1
 
 DESCRIPTION="Collection of tools, libraries and tests for shader compilation"

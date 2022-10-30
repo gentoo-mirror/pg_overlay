@@ -22,7 +22,7 @@ HOMEPAGE="https://code.videolan.org/videolan/libplacebo"
 
 LICENSE="LGPL-2.1+"
 SLOT="0/$(ver_cut 2)" # libplacebo.so version
-IUSE="glslang lcms +opengl +shaderc test +vulkan"
+IUSE="glslang lcms +opengl +shaderc test unwind +vulkan"
 REQUIRED_USE="vulkan? ( || ( glslang shaderc ) )"
 RESTRICT="!test? ( test )"
 
@@ -42,6 +42,8 @@ BDEPEND="virtual/pkgconfig
 		${PYTHON_DEPS}
 		$(python_gen_any_dep 'dev-python/mako[${PYTHON_USEDEP}]')
 	)"
+
+PATCHES=( "${FILESDIR}"/libplacebo-2.72.2-fix-vulkan-undeclared.patch )
 
 python_check_deps() {
 	has_version -b "dev-python/mako[${PYTHON_USEDEP}]"
