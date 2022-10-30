@@ -6,6 +6,8 @@ app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-a
 app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-editors/qhexedit2:gui - Install Qt5 hex editor
 app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
+app-emulation/virt-manager:policykit - Enables sys-auth/polkit authentication support, required when using app-emulation/libvirt with PolicyKit authentication
+app-emulation/virt-manager:sasl - Depend on the proper libraries needed to connect to SASL-enabled libvirtd instances (e.g. Kerberos-protected instances).
 app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
 app-emulation/virtualbox:headless - Build without any graphic frontend
 app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
