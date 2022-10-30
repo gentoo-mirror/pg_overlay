@@ -108,7 +108,7 @@ kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.26.2: Tools based on KDE Frameworks 5 to better interact with the system
 mail-client/thunderbird 102.4.0: Thunderbird Mail Client
-media-gfx/sane-backends 1.0.32: Scanner Access Now Easy - Backends
+media-gfx/sane-backends 1.1.1-r4: Scanner Access Now Easy - Backends
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 4.208.0: Reusable library for GPU-accelerated image processing primitives
