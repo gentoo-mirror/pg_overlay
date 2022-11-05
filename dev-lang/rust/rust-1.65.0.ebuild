@@ -60,14 +60,14 @@ for _s in ${LLVM_VALID_SLOTS[@]}; do
 	LLVM_DEPEND+=" ( "
 	for _x in ${ALL_LLVM_TARGETS[@]}; do
 		LLVM_DEPEND+="
-			${_x}? ( sys-devel/llvm:${_s}[${_x}(-)] )"
+			${_x}? ( sys-devel/llvm:${_s}[${_x}(-)] )
+			wasm? ( sys-devel/lld:${_s} )"
 	done
 	LLVM_DEPEND+=" )"
 done
 unset _s _x
 LLVM_DEPEND+=" )
 	<sys-devel/llvm-$(( LLVM_MAX_SLOT + 1 )):=
-	wasm? ( sys-devel/lld )
 "
 
 # to bootstrap we need at least exactly previous version, or same.
@@ -166,6 +166,7 @@ RESTRICT="test"
 VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
+	"${FILESDIR}"/1.65.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system-for-wasm.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 )
@@ -639,12 +640,8 @@ src_test() {
 	for i in "${tests[@]}"; do
 		local t="src/test/${i}"
 		einfo "rust_src_test: running ${t}"
-		if ! (
-				IFS=$'\n'
-				env $(cat "${S}"/config.env) RUST_BACKTRACE=1 \
-				"${EPYTHON}" ./x.py test -vv --config="${S}"/config.toml \
+		if ! RUST_BACKTRACE=1 "${EPYTHON}" ./x.py test -vv --config="${S}"/config.toml \
 				-j$(makeopts_jobs) --no-doc --no-fail-fast "${t}"
-			)
 		then
 				failed+=( "${t}" )
 				eerror "rust_src_test: ${t} failed"
@@ -658,11 +655,7 @@ src_test() {
 }
 
 src_install() {
-	(
-	IFS=$'\n'
-	env $(cat "${S}"/config.env) DESTDIR="${D}" \
-		"${EPYTHON}" ./x.py install	-vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
-	)
+	DESTDIR="${D}" "${EPYTHON}" ./x.py install -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 
 	# bug #689562, #689160
 	rm -v "${ED}/usr/lib/${PN}/${PV}/etc/bash_completion.d/cargo" || die
