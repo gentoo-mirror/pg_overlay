@@ -184,12 +184,12 @@ src_configure() {
 			-x test_doctest
 			-x test_bdb
 			-x test_support
+			-x test_distutils
 			-x test_import
 			-x test_importlib
 			-x test_runpy
 			-x test_pickle
 			-x test_tools
-			-x test_distutils
 		)
 
 		if has_version "app-arch/rpm" ; then
@@ -336,13 +336,12 @@ src_compile() {
 		local -x COLUMNS=80
 		local -x PYTHONDONTWRITEBYTECODE=
 
-		addpredict /usr/lib/python3.11/site-packages
+		addpredict "/usr/lib/python${PYVER}/site-packages"
 	fi
 
 	# also need to clear the flags explicitly here or they end up
 	# in _sysconfigdata*
-	#emake CPPFLAGS= CFLAGS= LDFLAGS=
-	emake EXTRA_CFLAGS="$CFLAGS"
+	emake CPPFLAGS= CFLAGS= LDFLAGS=
 
 	# Restore saved value from above.
 	local -x PYTHONDONTWRITEBYTECODE=${_PYTHONDONTWRITEBYTECODE}
@@ -392,7 +391,7 @@ src_test() {
 	local -x COLUMNS=80
 	local -x PYTHONDONTWRITEBYTECODE=
 	# workaround https://bugs.gentoo.org/775416
-	addwrite /usr/lib/python3.11/site-packages
+	addwrite "/usr/lib/python${PYVER}/site-packages"
 
 	nonfatal emake test EXTRATESTOPTS="${test_opts[*]}" \
 		CPPFLAGS= CFLAGS= LDFLAGS= < /dev/tty
