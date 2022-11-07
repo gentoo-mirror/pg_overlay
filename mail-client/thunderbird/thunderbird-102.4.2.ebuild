@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-102esr-patches-04j.tar.xz"
+FIREFOX_PATCHSET="firefox-102esr-patches-05j.tar.xz"
 
 LLVM_MAX_SLOT=15
 
@@ -201,8 +201,8 @@ llvm_check_deps() {
 	fi
 
 	if use clang ; then
-		if ! has_version -b "=sys-devel/lld-${LLVM_SLOT}*" ; then
-			einfo "=sys-devel/lld-${LLVM_SLOT}* is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
+		if ! has_version -b "sys-devel/lld:${LLVM_SLOT}" ; then
+			einfo "sys-devel/lld:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 			return 1
 		fi
 
@@ -627,10 +627,12 @@ src_configure() {
 	einfo "Current RUSTFLAGS:\t\t${RUSTFLAGS:-no value set}"
 
 	local have_switched_compiler=
-	if use clang && ! tc-is-clang ; then
+	if use clang; then
 		# Force clang
 		einfo "Enforcing the use of clang due to USE=clang ..."
-		have_switched_compiler=yes
+		if tc-is-gcc; then
+			have_switched_compiler=yes
+		fi
 		AR=llvm-ar
 		AS=llvm-as
 		CC=${CHOST}-clang
