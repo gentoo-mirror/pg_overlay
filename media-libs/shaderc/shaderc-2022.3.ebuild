@@ -60,7 +60,7 @@ multilib_src_configure() {
 	local mycmakeargs=(
 		-DSHADERC_SKIP_TESTS="true"
 		-DSHADERC_ENABLE_WERROR_COMPILE="false"
-		-DLIBS=shaderc_combined
+		-DLIBS=-lshaderc_combined
 	)
 	cmake_src_configure
 }
