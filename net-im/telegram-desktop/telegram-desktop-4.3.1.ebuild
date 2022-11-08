@@ -36,7 +36,7 @@ RDEPEND="
 	dev-cpp/abseil-cpp:=
 	dev-libs/glibmm:2.68
 	dev-libs/libdispatch
-	dev-libs/libsigc++:2
+	dev-libs/libsigc++:3
 	dev-libs/openssl:=
 	dev-libs/xxhash
 	media-libs/fontconfig:=
