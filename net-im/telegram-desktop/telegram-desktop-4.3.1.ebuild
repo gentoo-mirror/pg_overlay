@@ -34,7 +34,7 @@ RDEPEND="
 	!net-im/telegram-desktop-bin
 	app-arch/lz4:=
 	dev-cpp/abseil-cpp:=
-	dev-libs/glibmm:2.68
+	dev-libs/glib:2
 	dev-libs/libdispatch
 	dev-libs/libsigc++:3
 	dev-libs/openssl:=
@@ -49,7 +49,7 @@ RDEPEND="
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	x11-libs/xcb-util-keysyms
-	dbus? ( dev-cpp/glibmm:2 )
+	dbus? ( dev-cpp/glibmm:2.68 )
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
