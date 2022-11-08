@@ -111,7 +111,6 @@ mail-client/thunderbird 102.4.2: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r5: Scanner Access Now Easy - Backends
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
-media-libs/libplacebo 4.208.0: Reusable library for GPU-accelerated image processing primitives
 media-libs/libpulse 16.1-r1: Libraries for PulseAudio clients
 media-libs/libsdl2 2.24.2_pre: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20220503: VoIP library for Telegram clients
@@ -143,6 +142,7 @@ media-video/mpv 9999: Media player based on MPlayer and mplayer2
 media-video/pipewire 0.3.59-r2: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/pidgin 2.14.10 9999: GTK Instant Messenger client
+net-im/telegram-desktop 4.3.1: Official desktop client for Telegram
 net-im/telepathy-mission-control 5.16.5: An account manager and channel dispatcher for the Telepathy framework
 net-im/telepathy-morse 9999: Telegram connection manager for Telepathy.
 net-im/viber 16.1.0.37: Free text and calls
