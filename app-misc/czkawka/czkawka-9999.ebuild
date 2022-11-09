@@ -18,7 +18,7 @@ SLOT="0"
 IUSE="+gtk"
 
 DEPEND="
-	gtk? ( gui-libs/gtk+:4 )
+	gtk? ( gui-libs/gtk:4 )
 "
 
 RDEPEND="${DEPEND}"
