@@ -164,14 +164,13 @@ virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.65.0: Virtual for Rust language compiler
 www-client/firefox 106.0.5: Firefox Web Browser
 x11-base/xorg-server 21.1.4: X.Org X servers
-x11-base/xwayland 22.1.4: Standalone X server running under Wayland
+x11-base/xwayland 22.1.5: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r2 3.24.34-r1: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.1.6-r300 3.2.1-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
-x11-misc/xvfb-run 1.20.14.1: Run a command in a virtual X server environment
 x11-plugins/pidgin-skypeweb 9999: SkypeWeb Plugin for Pidgin
 x11-plugins/pidgin-telegram 1.4.7 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-plugins/purple-matrix 9999: Libpurple protocol plugin for matrix
