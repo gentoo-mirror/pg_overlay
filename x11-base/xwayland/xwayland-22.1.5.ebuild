@@ -73,6 +73,9 @@ src_configure() {
 		-Ddocs=false
 		-Ddevel-docs=false
 		-Ddocs-pdf=false
+		-Dxorg=false
+		-Dxnest=false
+		-Dxwayland=true
 	)
 
 	meson_src_configure
