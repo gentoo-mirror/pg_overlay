@@ -87,6 +87,7 @@ src_configure() {
 		-Dhtml=$(usex doc auto false)
 		-Dpam=$(usex pam true false)
 		-Dselinux=$(usex selinux true false)
+		-Dtests=$(usex test true false)
 		-Dutmp=$(usex elibc_musl false true)
 		-Defi=$(usex efi true false)
 	)
