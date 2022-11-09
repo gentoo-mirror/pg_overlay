@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -11,7 +11,7 @@ DESCRIPTION="Standalone file import filter library for spreadsheet documents"
 HOMEPAGE="https://gitlab.com/orcus/orcus/blob/master/README.md"
 
 if [[ ${PV} == *9999* ]]; then
-	MDDS_SLOT="1/9999"
+	MDDS_SLOT="1/2.0"
 	EGIT_REPO_URI="https://gitlab.com/orcus/orcus.git"
 	inherit git-r3
 else
@@ -37,13 +37,21 @@ DEPEND="${RDEPEND}
 	dev-util/mdds:${MDDS_SLOT}
 "
 
+PATCHES=(
+	"${FILESDIR}"/${P}-clang.patch
+	"${FILESDIR}"/${P}-gcc-13.patch
+)
+
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
 
 src_prepare() {
+	# bug 713586
+	use test && eapply "${FILESDIR}/${PN}-0.17.0-test-fix.patch"
+
 	default
-	[[ ${PV} == *9999 ]] && eautoreconf
+	eautoreconf
 }
 
 src_configure() {
