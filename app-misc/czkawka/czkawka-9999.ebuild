@@ -1,4 +1,4 @@
-# Copyright 2017-2020 Gentoo Authors
+# Copyright 2017-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,7 +18,7 @@ SLOT="0"
 IUSE="+gtk"
 
 DEPEND="
-	gtk? ( x11-libs/gtk+:3 )
+	gtk? ( gui-libs/gtk+:4 )
 "
 
 RDEPEND="${DEPEND}"
