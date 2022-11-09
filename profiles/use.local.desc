@@ -23,10 +23,8 @@ app-office/libreoffice-l10n:offlinehelp - Install help files locally instead of 
 app-portage/eix:debug - Build with upstream's CXXFLAGS/LDFLAGS for debugging support; not recommended for normal use.
 app-portage/eix:doc - Create description of the eix cache file additionally in html format
 app-portage/eix:sqlite - Compile in support for portage's sqlite backend; to actually use it you need additional configuration of portage and eix
-app-text/pastebinit:crypt - Install pbputs for gpg-encrypted pastes
 dev-cpp/abseil-cpp:cxx17 - Build with -DCMAKE_CXX_STANDARD=17 (required by some revdeps)
 dev-db/sqlitestudio:cli - Build CLI interface
-dev-lang/lazarus:minimal - Don't build extra packages from the bigide component
 dev-lang/luajit:lua52compat - Enable some upwards-compatible features from Lua 5.2 that are unlikely to break existing code.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:ensurepip - Install the ensurepip module that uses bundled wheels to bootstrap pip and setuptools (if disabled, it will be only possible to use venv `--without-pip`)
@@ -47,7 +45,6 @@ dev-lang/rust:rustfmt - Install rustfmt, Rust code formatter
 dev-lang/rust:system-bootstrap - Bootstrap using installed rust compiler
 dev-lang/rust:system-llvm - Use the system LLVM installation
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
-dev-lang/zig:stage2 - Install stage2 compiler (written in Zig) alongside stage1 compiler (written in C++ and Zig)
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
@@ -108,8 +105,6 @@ dev-util/sccache:dist-server - Enables the sccache-dist binary
 dev-util/sccache:gcs - Enable Google Cloud Storage support
 dev-util/sccache:redis - Enable Redis support
 dev-util/sccache:s3 - Enable Amazon S3 support
-games-board/pysolfc:extra-cardsets - Install extra cardsets
-games-board/pysolfc:sound - Enable sound support using dev-python/pygame
 gui-libs/wlroots:X - Enable support for X11 applications (XWayland)
 gui-libs/wlroots:tinywl - Install the minimal wayland client, tinywl
 gui-libs/wlroots:vulkan - Enable support for the vulkan backend renderer
@@ -151,7 +146,6 @@ media-libs/libsdl2:sndio - Enable support for the media-sound/sndio backend
 media-libs/libsdl2:sound - Control audio support (disable at your own risk)
 media-libs/libsdl2:video - Control video support (disable at your own risk)
 media-libs/libsdl2:vulkan - Enable Vulkan support
-media-libs/libtgvoip:dsp - Enable signal processing (echo cancellation, noise suppression, and automatic gain control)
 media-libs/mesa:classic - Build drivers based on the classic architecture.
 media-libs/mesa:d3d9 - Enable Direct 3D9 API through Nine state tracker. Can be used together with patched wine.
 media-libs/mesa:egl - Enable EGL support.
@@ -172,7 +166,6 @@ media-libs/mesa:wayland - Enable support for dev-libs/wayland
 media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
 media-libs/mesa:xvmc - Enable the XvMC acceleration interface for the Gallium3D Video Layer.
 media-libs/mesa:zink - Enable the Zink OpenGL-over-Vulkan Gallium driver
-media-libs/tg_owt:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
 media-plugins/audacious-plugins:ampache - Support controlling audacious via ampache
 media-plugins/audacious-plugins:bs2b - Enable Bauer Bauer stereophonic-to-binaural headphone filter
 media-plugins/audacious-plugins:cue - Support CUE sheets using the libcue library
