@@ -21,6 +21,8 @@ DEPEND="${RDEPEND}"
 
 DOCS=( ChangeLog README TODO )
 
+S=${WORKDIR}/${PN}-pre-${P/-}
+
 src_prepare() {
 	default
 
