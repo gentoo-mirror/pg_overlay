@@ -24,7 +24,7 @@ else
 	S="${WORKDIR}/node-v${PV}"
 fi
 
-IUSE="cpu_flags_x86_sse2 debug doc +icu inspector lto +npm pax-kernel +snapshot +ssl +system-icu +system-ssl systemtap test"
+IUSE="cpu_flags_x86_sse2 debug doc +icu inspector lto +npm pax-kernel +snapshot +ssl +system-icu +system-ssl test"
 REQUIRED_USE="inspector? ( icu ssl )
 	npm? ( ssl )
 	system-icu? ( icu )
@@ -43,7 +43,6 @@ RDEPEND=">=app-arch/brotli-1.0.9:=
 BDEPEND="${PYTHON_DEPS}
 	sys-apps/coreutils
 	virtual/pkgconfig
-	systemtap? ( dev-util/systemtap )
 	test? ( net-misc/curl )
 	pax-kernel? ( sys-apps/elfix )"
 DEPEND="${RDEPEND}"
@@ -51,7 +50,6 @@ DEPEND="${RDEPEND}"
 PATCHES=(
 	"${FILESDIR}"/${PN}-12.22.5-shared_c-ares_nameser_h.patch
 	"${FILESDIR}"/${PN}-15.2.0-global-npm-config.patch
-	"${FILESDIR}"/${PN}-gcc-13.patch
 )
 
 # These are measured on a loong machine with -ggdb on, and only checked
@@ -174,7 +172,6 @@ src_configure() {
 	"${EPYTHON}" configure.py \
 		--prefix="${EPREFIX}"/usr \
 		--dest-cpu=${myarch} \
-		$(use_with systemtap dtrace) \
 		"${myconf[@]}" || die
 }
 
