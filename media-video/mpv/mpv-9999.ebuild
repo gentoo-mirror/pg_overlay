@@ -83,7 +83,7 @@ COMMON_DEPEND="
 	lcms? ( media-libs/lcms:2 )
 	libcaca? ( media-libs/libcaca )
 	libplacebo? (
-		>=media-libs/libplacebo-4.202:=[opengl?,vulkan?]
+		media-libs/libplacebo:=[opengl?,vulkan?]
 		egl? ( media-libs/libplacebo[opengl] )
 	)
 	lua? ( ${LUA_DEPS} )
