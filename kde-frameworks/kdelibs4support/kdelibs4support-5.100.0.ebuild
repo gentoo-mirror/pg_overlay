@@ -11,6 +11,7 @@ VIRTUALX_REQUIRED="test"
 inherit ecm frameworks.kde.org
 
 DESCRIPTION="Framework easing the development transition from KDELibs 4 to KF 5"
+
 LICENSE="LGPL-2+"
 KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 IUSE="X"
@@ -79,6 +80,7 @@ BDEPEND="
 "
 
 PATCHES=(
+	# downstream patches
 	"${FILESDIR}/${PN}-5.80.0-no-kdesignerplugin.patch" # bug 755956
 	"${FILESDIR}/${PN}-5.86.0-unused-dep.patch" # bug 755956
 )
@@ -95,7 +97,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		$(cmake_use_find_package X X11)
+		-DWITH_X11=$(usex X)
 	)
 
 	ecm_src_configure
