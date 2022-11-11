@@ -699,7 +699,6 @@ src_configure() {
 			have_switched_compiler=yes
 		fi
 		AR=llvm-ar
-		AS="clang -c"
 		CC=${CHOST}-clang
 		CXX=${CHOST}-clang++
 		NM=llvm-nm
@@ -721,9 +720,11 @@ src_configure() {
 		strip-unsupported-flags
 	fi
 
-	# Ensure we use correct toolchain
+	# Ensure we use correct toolchain,
+	# AS is used in a non-standard way by upstream, #bmo1654031
 	export HOST_CC="$(tc-getBUILD_CC)"
 	export HOST_CXX="$(tc-getBUILD_CXX)"
+	export AS="$(tc-getCC) -c"
 	tc-export CC CXX LD AR AS NM OBJDUMP RANLIB PKG_CONFIG
 
 	# Pass the correct toolchain paths through cbindgen
