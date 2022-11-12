@@ -83,6 +83,232 @@ gui-apps/wev 9999: Wayland event viewer
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/wlroots 9999: Pluggable, composable, unopinionated modules for building a Wayland compositor
 gui-wm/kwinft 5.20.0: Wayland compositor and X11 window manager forked from KWin
+kde-apps/akonadi 22.11.80: Storage service for PIM data and libraries for PIM apps
+kde-apps/akonadi-calendar 22.11.80: Library for akonadi calendar integration
+kde-apps/akonadi-contacts 22.11.80: Library for akonadi contact integration
+kde-apps/akonadi-import-wizard 22.11.80: Assistant to import PIM data from other applications into Akonadi
+kde-apps/akonadi-mime 22.11.80: Library for akonadi mime types
+kde-apps/akonadi-notes 22.11.80: Library for akonadi notes integration
+kde-apps/akonadi-search 22.11.80: Libraries and daemons to implement searching in Akonadi
+kde-apps/akonadiconsole 22.11.80: Application for debugging Akonadi Resources
+kde-apps/akregator 22.11.80: News feed aggregator
+kde-apps/amor 22.11.80: Amusing Misuse Of Resources - desktop-dwelling creature
+kde-apps/analitza 22.11.80: KDE library for mathematical features
+kde-apps/ark 22.11.80: File archiver by KDE
+kde-apps/artikulate 22.11.80: Language learning application that helps improving pronunciation skills
+kde-apps/audiocd-kio 22.11.80: KIO worker for accessing audio CDs
+kde-apps/baloo-widgets 22.11.80: Widget library for baloo
+kde-apps/blinken 22.11.80: Memory enhancement game based on KDE Frameworks
+kde-apps/bomber 22.11.80: Single player arcade bombing game
+kde-apps/bovo 22.11.80: Five-in-a-row Board Game
+kde-apps/calendarjanitor 22.11.80: Tool to scan calendar data for buggy instances
+kde-apps/calendarsupport 22.11.80: Calendar support library
+kde-apps/cantor 22.11.80: Interface for doing mathematics and scientific computing
+kde-apps/cervisia 22.11.80: CVS frontend by KDE
+kde-apps/dolphin 22.11.80: Plasma filemanager focusing on usability
+kde-apps/dolphin-plugins-dropbox 22.11.80: Dolphin plugin for Dropbox service integration
+kde-apps/dolphin-plugins-git 22.11.80: Dolphin plugin for Git integration
+kde-apps/dolphin-plugins-mercurial 22.11.80: Dolphin plugin for Mercurial integration
+kde-apps/dolphin-plugins-subversion 22.11.80: Dolphin plugin for Subversion integration
+kde-apps/dragon 22.11.80: Simple video player
+kde-apps/eventviews 22.11.80: Calendar viewer for KDE PIM
+kde-apps/ffmpegthumbs 22.11.80: FFmpeg based thumbnail generator for video files
+kde-apps/filelight 22.11.80: Visualise disk usage with interactive map of concentric, segmented rings
+kde-apps/granatier 22.11.80: KDE Bomberman game
+kde-apps/grantlee-editor 22.11.80: Utilities and tools to manage themes in KDE PIM applications
+kde-apps/grantleetheme 22.11.80: Library for Grantlee plugins
+kde-apps/gwenview 22.11.80: Image viewer by KDE
+kde-apps/incidenceeditor 22.11.80: Incidence editor for korganizer
+kde-apps/juk 22.11.80: Jukebox and music manager by KDE
+kde-apps/k3b 22.11.80: Full-featured burning and ripping application based on KDE Frameworks
+kde-apps/kaccounts-integration 22.11.80: Administer web accounts for the sites and services across the Plasma desktop
+kde-apps/kaccounts-providers 22.11.80: KDE accounts providers
+kde-apps/kaddressbook 22.11.80: Address book application based on KDE Frameworks
+kde-apps/kajongg 22.11.80: Classical Mah Jongg for four players
+kde-apps/kalarm 22.11.80: Application to manage alarms and other timer based alerts for the desktop
+kde-apps/kalgebra 22.11.80: MathML-based 2D and 3D graph calculator by KDE
+kde-apps/kalzium 22.11.80: Periodic table of the elements
+kde-apps/kamera 22.11.80: Plasma integration for gphoto2 cameras
+kde-apps/kamoso 22.11.80: Application to take pictures and videos from your webcam by KDE
+kde-apps/kanagram 22.11.80: Game based on anagrams of words
+kde-apps/kapman 22.11.80: Pac-Man clone by KDE
+kde-apps/kapptemplate 22.11.80: Shell script to create the necessary framework to develop KDE applications
+kde-apps/kate 22.11.80: Multi-document editor with network transparency, Plasma integration and more
+kde-apps/kate-addons 22.11.80: Addons used by Kate
+kde-apps/kate-lib 22.11.80: Shared library used by Kate/Kwrite and Kate-Addons
+kde-apps/katomic 22.11.80: KDE Atomic Entertainment Game
+kde-apps/kbackup 22.11.80: Program that lets you back up any directories or files
+kde-apps/kblackbox 22.11.80: Game of hide and seek played on a grid of boxes
+kde-apps/kblocks 22.11.80: Single-player Tetris-like KDE game
+kde-apps/kbounce 22.11.80: KDE Bounce Ball Game
+kde-apps/kbreakout 22.11.80: Breakout-like game by KDE
+kde-apps/kbruch 22.11.80: Educational application to learn calculating with fractions
+kde-apps/kcachegrind 22.11.80: Frontend for Cachegrind by KDE
+kde-apps/kcalc 22.11.80: KDE calculator
+kde-apps/kcalutils 22.11.80: Library providing utility functions for the handling of calendar data
+kde-apps/kcharselect 22.11.80: KDE character selection utility
+kde-apps/kcolorchooser 22.11.80: KDE color selector/editor
+kde-apps/kcron 22.11.80: KDE Task Scheduler
+kde-apps/kde-apps-meta 22.11.80: Meta package for the KDE Release Service collection
+kde-apps/kde-dev-scripts 22.11.80: KDE Development Scripts
+kde-apps/kde-dev-utils 22.11.80: KDE Development Utilities
+kde-apps/kdeaccessibility-meta 22.11.80: kdeaccessibility - merge this to pull in all kdeaccessiblity-derived packages
+kde-apps/kdeadmin-meta 22.11.80: KDE administration tools - merge this to pull in all kdeadmin-derived packages
+kde-apps/kdebugsettings 22.11.80: Application to enable/disable qCDebug
+kde-apps/kdecore-meta 22.11.80: kdecore - merge this to pull in the most basic applications
+kde-apps/kdeedu-data 22.11.80: Shared icons, artwork and data files for educational applications
+kde-apps/kdeedu-meta 22.11.80: KDE educational apps - merge this to pull in all kdeedu-derived packages
+kde-apps/kdegames-meta 22.11.80: kdegames - merge this to pull in all kdegames-derived packages
+kde-apps/kdegraphics-meta 22.11.80: kdegraphics - merge this to pull in all kdegraphics-derived packages
+kde-apps/kdegraphics-mobipocket 22.11.80: Library to support mobipocket ebooks
+kde-apps/kdemultimedia-meta 22.11.80: kdemultimedia - merge this to pull in all kdemultimedia-derived packages
+kde-apps/kdenetwork-filesharing 22.11.80: Samba filesharing plugin for file properties
+kde-apps/kdenetwork-meta 22.11.80: kdenetwork - merge this to pull in all kdenetwork-derived packages
+kde-apps/kdenlive 22.11.80: Non-linear video editing suite by KDE
+kde-apps/kdepim-addons 22.11.80: Plugins for KDE Personal Information Management Suite
+kde-apps/kdepim-meta 22.11.80: KDE PIM - merge this to pull in all kdepim-derived packages
+kde-apps/kdepim-runtime 22.11.80: Runtime plugin collection to extend the functionality of KDE PIM
+kde-apps/kdesdk-meta 22.11.80: KDE SDK - merge this to pull in all kdesdk-derived packages
+kde-apps/kdesdk-thumbnailers 22.11.80: Thumbnail generator for PO files
+kde-apps/kdeutils-meta 22.11.80: kdeutils - merge this to pull in all kdeutils-derived packages
+kde-apps/kdf 22.11.80: KDE free disk space utility
+kde-apps/kdialog 22.11.80: Can be used to show nice dialog boxes from shell scripts
+kde-apps/kdiamond 22.11.80: Single player three-in-a-row game
+kde-apps/keditbookmarks 22.11.80: Bookmarks editor based on KDE Frameworks
+kde-apps/kfind 22.11.80: File finder utility based on KDE Frameworks
+kde-apps/kfloppy 22.11.80: Straightforward graphical means to format 3.5" and 5.25" floppy disks
+kde-apps/kfourinline 22.11.80: KDE four-in-a-row game
+kde-apps/kgeography 22.11.80: Geography learning tool
+kde-apps/kget 22.11.80: Advanced download manager by KDE
+kde-apps/kgoldrunner 22.11.80: Game of action and puzzle solving by KDE
+kde-apps/kgpg 22.11.80: Frontend for GnuPG, a powerful encryption utility by KDE
+kde-apps/khangman 22.11.80: Classical hangman game by KDE
+kde-apps/khelpcenter 22.11.80: Application to read documentation for KDE Plasma, Applications, Utilities
+kde-apps/kidentitymanagement 22.11.80: Library for managing identitites
+kde-apps/kig 22.11.80: KDE Interactive Geometry tool
+kde-apps/kigo 22.11.80: Go game by KDE
+kde-apps/killbots 22.11.80: Kill the bots or they kill you!
+kde-apps/kimagemapeditor 22.11.80: Generator of HTML image maps
+kde-apps/kimap 22.11.80: Library for interacting with IMAP servers
+kde-apps/kio-extras 22.11.80: KIO plugins present a filesystem-like view of arbitrary data
+kde-apps/kiriki 22.11.80: An addictive and fun dice game
+kde-apps/kiten 22.11.80: KDE Japanese dictionary and reference
+kde-apps/kitinerary 22.11.80: Data Model and Extraction System for Travel Reservation information
+kde-apps/kjumpingcube 22.11.80: Tactical one or two player game
+kde-apps/kldap 22.11.80: Library for interacting with LDAP servers
+kde-apps/kleopatra 22.11.80: Certificate manager and GUI for OpenPGP and CMS cryptography
+kde-apps/klettres 22.11.80: Alphabet learning application
+kde-apps/klickety 22.11.80: An adaptation of the Clickomania game
+kde-apps/klines 22.11.80: A little KDE game about balls and how to get rid of them
+kde-apps/kmag 22.11.80: KDE screen magnifier
+kde-apps/kmahjongg 22.11.80: A tile matching game for one or two players
+kde-apps/kmail 22.11.80: Email client, supporting POP3 and IMAP mailboxes
+kde-apps/kmail-account-wizard 22.11.80: Assistant for KMail accounts configuration
+kde-apps/kmailtransport 22.11.80: Mail transport service
+kde-apps/kmbox 22.11.80: Library for accessing MBox format mail storages
+kde-apps/kmime 22.11.80: Libary for handling mail messages and newsgroup articles
+kde-apps/kmines 22.11.80: Classic mine sweeper game
+kde-apps/kmix 22.11.80: Volume control gui based on KDE Frameworks
+kde-apps/kmousetool 22.11.80: KDE program that clicks the mouse for you
+kde-apps/kmouth 22.11.80: Text-to-speech synthesizer front end
+kde-apps/kmplot 22.11.80: Mathematical function plotter
+kde-apps/knavalbattle 22.11.80: Battleship clone by KDE
+kde-apps/knetwalk 22.11.80: KDE version of the popular NetWalk game for system administrators
+kde-apps/knights 22.11.80: Simple chess board based on KDE Frameworks
+kde-apps/knotes 22.11.80: Note taking application
+kde-apps/kolf 22.11.80: Minigolf game by KDE
+kde-apps/kollision 22.11.80: Simple ball dodging game
+kde-apps/kolourpaint 22.11.80: Paint Program by KDE
+kde-apps/kompare 22.11.80: A program to view the differences between files
+kde-apps/konqueror 22.11.80: Web browser and file manager based on KDE Frameworks
+kde-apps/konquest 22.11.80: Galactic Strategy KDE Game
+kde-apps/konsole 22.11.80: KDE's terminal emulator
+kde-apps/konsolekalendar 22.11.80: Command line interface to KDE calendars
+kde-apps/kontact 22.11.80: Container application to unify several major PIM applications within one
+kde-apps/kontactinterface 22.11.80: Library for embedding KParts in a Kontact component
+kde-apps/kopete 22.11.80: Multi-protocol IM client based on KDE Frameworks
+kde-apps/korganizer 22.11.80: Organizational assistant, providing calendars and other similar functionality
+kde-apps/kpat 22.11.80: KDE patience game
+kde-apps/kpimtextedit 22.11.80: Extended text editor for PIM applications
+kde-apps/kpkpass 22.11.80: Library to deal with Apple Wallet pass files
+kde-apps/kqtquickcharts 22.11.80: Qt Quick plugin for beautiful and interactive charts
+kde-apps/krdc 22.11.80: Remote desktop connection (RDP and VNC) client
+kde-apps/kreversi 22.11.80: Board game by KDE
+kde-apps/krfb 22.11.80: VNC-compatible server to share Plasma desktops
+kde-apps/kross-interpreters 22.11.80: Kross interpreter plugins for programming languages
+kde-apps/kruler 22.11.80: Screen ruler for Plasma
+kde-apps/kscd 22.11.80: CDDB enabled audio CD player based on KDE Frameworks
+kde-apps/kshisen 22.11.80: Solitaire-like game played using the standard set of Mahjong tiles
+kde-apps/ksirk 22.11.80: Port of the board game risk
+kde-apps/ksmtp 22.11.80: Job-based library to send email through an SMTP server
+kde-apps/ksnakeduel 22.11.80: KDE Tron game
+kde-apps/kspaceduel 22.11.80: Space Game by KDE
+kde-apps/ksquares 22.11.80: KDE clone of the game squares
+kde-apps/ksudoku 22.11.80: Logic-based symbol placement puzzle by KDE
+kde-apps/ksystemlog 22.11.80: System log viewer by KDE
+kde-apps/kteatime 22.11.80: KDE timer for making a fine cup of tea
+kde-apps/ktimer 22.11.80: Little tool to execute programs after some time
+kde-apps/ktouch 22.11.80: Program that helps to learn and practice touch typing
+kde-apps/ktp-accounts-kcm 22.11.80: KDE Telepathy account management kcm
+kde-apps/ktp-approver 22.11.80: KDE Telepathy notification handler
+kde-apps/ktp-auth-handler 22.11.80: KDE Telepathy authentication handler
+kde-apps/ktp-common-internals 22.11.80: KDE Telepathy common library
+kde-apps/ktp-contact-list 22.11.80: KDE Telepathy contact list
+kde-apps/ktp-contact-runner 22.11.80: KDE Telepathy krunner plugin
+kde-apps/ktp-desktop-applets 22.11.80: KDE Telepathy contact, presence and chat Plasma applets
+kde-apps/ktp-filetransfer-handler 22.11.80: KDE Telepathy file transfer handler
+kde-apps/ktp-kded-module 22.11.80: KDE Telepathy workspace integration
+kde-apps/ktp-send-file 22.11.80: KDE Telepathy file manager plugin to send files to contacts
+kde-apps/ktp-text-ui 22.11.80: KDE Telepathy text chat window
+kde-apps/ktuberling 22.11.80: Potato game for kids by KDE
+kde-apps/kturtle 22.11.80: Educational programming environment using the Logo programming language
+kde-apps/kubrick 22.11.80: Game based on the "Rubik's Cube" puzzle by KDE
+kde-apps/kwalletmanager 22.11.80: Tool to manage the passwords on your system using KDE Wallet
+kde-apps/kwave 22.11.80: Sound editor built on KDE Frameworks 5 that can edit many types of audio files
+kde-apps/kwordquiz 22.11.80: Powerful flashcard and vocabulary learning program
+kde-apps/kwrite 22.11.80: Simple text editor based on KDE Frameworks
+kde-apps/libgravatar 22.11.80: Library for gravatar integration
+kde-apps/libkcddb 22.11.80: KDE library for CDDB
+kde-apps/libkcompactdisc 22.11.80: Library for playing & ripping CDs
+kde-apps/libkdcraw 22.11.80: Digital camera raw image library wrapper
+kde-apps/libkdegames 22.11.80: Base library common to many KDE games
+kde-apps/libkdepim 22.11.80: Common PIM libraries
+kde-apps/libkeduvocdocument 22.11.80: Library for reading/writing KVTML
+kde-apps/libkexiv2 22.11.80: Wrapper around exiv2 library
+kde-apps/libkgapi 22.11.80: Library for accessing Google calendar and contact resources
+kde-apps/libkleo 22.11.80: Library for encryption handling
+kde-apps/libkmahjongg 22.11.80: Mahjongg library based on Qt/KDE Frameworks
+kde-apps/libkomparediff2 22.11.80: KDE library to compare files and strings
+kde-apps/libksane 22.11.80: SANE Library interface based on KDE Frameworks
+kde-apps/libksieve 22.11.80: Common PIM libraries
+kde-apps/libktnef 22.11.80: Library for handling TNEF data
+kde-apps/lokalize 22.11.80: Localization tool for KDE software and other free and open source software
+kde-apps/lskat 22.11.80: Skat game by KDE
+kde-apps/mailcommon 22.11.80: Common mail library
+kde-apps/mailimporter 22.11.80: Library to import mail from various sources
+kde-apps/marble 22.11.80: Virtual Globe and World Atlas to learn more about Earth
+kde-apps/mbox-importer 22.11.80: Import mbox email archives from various sources into Akonadi
+kde-apps/messagelib 22.11.80: Libraries for messaging functions
+kde-apps/minuet 22.11.80: Music Education software by KDE
+kde-apps/okular 22.11.80: Universal document viewer based on KDE Frameworks
+kde-apps/palapeli 22.11.80: Jigsaw puzzle game by KDE
+kde-apps/parley 22.11.80: A vocabulary trainer to help you memorize things
+kde-apps/picmi 22.11.80: Nonogram logic game by KDE
+kde-apps/pim-data-exporter 22.11.80: Assistant to backup and archive PIM data and configuration
+kde-apps/pim-sieve-editor 22.11.80: Assistant for editing IMAP Sieve filters
+kde-apps/pimcommon 22.11.80: Common PIM libraries
+kde-apps/plasma-telepathy-meta 22.11.80: Plasma Telepathy client
+kde-apps/poxml 22.11.80: KDE utility to translate DocBook XML files using gettext po files
+kde-apps/print-manager 22.11.80: Manage print jobs and printers in Plasma
+kde-apps/rocs 22.11.80: Interface to work with Graph Theory
+kde-apps/signon-kwallet-extension 22.11.80: KWallet extension for signond
+kde-apps/spectacle 22.11.80: Screenshot capture utility
+kde-apps/step 22.11.80: Interactive physics simulator
+kde-apps/svgpart 22.11.80: Kpart for viewing SVGs
+kde-apps/sweeper 22.11.80: Privacy settings widget to clean unwanted traces on the system
+kde-apps/thumbnailers 22.11.80: Thumbnail generators for Mobipocket, PDF/PS and RAW files
+kde-apps/umbrello 22.11.80: KDE UML Modeller
+kde-apps/yakuake 22.11.80: Quake-style terminal emulator based on konsole
 kde-frameworks/kdelibs4support 5.99.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-frameworks/plasma 5.99.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
@@ -90,6 +316,7 @@ kde-misc/kweather 9999: Library for retrieval of weather information including f
 kde-plasma/kde-cli-tools 5.26.3: Tools based on KDE Frameworks 5 to better interact with the system
 mail-client/thunderbird 102.4.2: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r5: Scanner Access Now Easy - Backends
+media-libs/ksanecore 22.11.80: Qt-based interface for SANE library to control scanner hardware
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r1: Libraries for PulseAudio clients
 media-libs/libsdl2 2.24.2_pre: Simple Direct Media Layer
