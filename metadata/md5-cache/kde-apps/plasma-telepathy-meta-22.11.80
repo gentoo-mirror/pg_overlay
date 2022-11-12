@@ -1,0 +1,8 @@
+DEFINED_PHASES=postinst
+DESCRIPTION=Plasma Telepathy client
+EAPI=8
+HOMEPAGE=https://community.kde.org/KTp
+LICENSE=metapackage
+RDEPEND=>=kde-apps/ktp-accounts-kcm-22.11.80:5 >=kde-apps/ktp-approver-22.11.80:5 >=kde-apps/ktp-auth-handler-22.11.80:5 >=kde-apps/ktp-common-internals-22.11.80:5 >=kde-apps/ktp-contact-list-22.11.80:5 >=kde-apps/ktp-contact-runner-22.11.80:5 >=kde-apps/ktp-desktop-applets-22.11.80:5 >=kde-apps/ktp-filetransfer-handler-22.11.80:5 >=kde-apps/ktp-kded-module-22.11.80:5 >=kde-apps/ktp-send-file-22.11.80:5 >=kde-apps/ktp-text-ui-22.11.80:5
+SLOT=5
+_md5_=e8c61658be9db8fe9c293c185df238a0
