@@ -309,8 +309,8 @@ kde-apps/sweeper 22.11.80: Privacy settings widget to clean unwanted traces on t
 kde-apps/thumbnailers 22.11.80: Thumbnail generators for Mobipocket, PDF/PS and RAW files
 kde-apps/umbrello 22.11.80: KDE UML Modeller
 kde-apps/yakuake 22.11.80: Quake-style terminal emulator based on konsole
-kde-frameworks/kdelibs4support 5.99.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/plasma 5.99.0: Plasma framework
+kde-frameworks/kdelibs4support 5.100.0: Framework easing the development transition from KDELibs 4 to KF 5
+kde-frameworks/plasma 5.100.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.26.3: Tools based on KDE Frameworks 5 to better interact with the system
