@@ -89,7 +89,7 @@ kde-frameworks/plasma 5.100.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.26.3: Tools based on KDE Frameworks 5 to better interact with the system
-mail-client/thunderbird 102.4.2: Thunderbird Mail Client
+mail-client/thunderbird 102.5.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r5: Scanner Access Now Easy - Backends
 media-libs/ksanecore 22.11.80: Qt-based interface for SANE library to control scanner hardware
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
@@ -155,7 +155,7 @@ sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.65.0: Virtual for Rust language compiler
-www-client/firefox 106.0.5: Firefox Web Browser
+www-client/firefox 107.0: Firefox Web Browser
 x11-base/xorg-server 21.1.4: X.Org X servers
 x11-base/xwayland 22.1.5: Standalone X server running under Wayland
 x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
