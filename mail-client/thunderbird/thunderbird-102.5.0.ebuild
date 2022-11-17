@@ -630,7 +630,6 @@ src_prepare() {
 		fi
 	done
 
-	eapply "${FILESDIR}/cbindgen-0.24.patch"
 	eapply "${FILESDIR}/rustc_version-0.4.0.patch"
 	#######
 
