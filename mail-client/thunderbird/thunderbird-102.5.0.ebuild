@@ -629,7 +629,8 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-	#eapply "${FILESDIR}/rustc_version-0.4.0.patch"
+	eapply "${FILESDIR}/rustc_version-0.4.0.patch"
+	eapply "${FILESDIR}/cbindgen-0.24.patch"
 	#######
 
 	xdg_environment_reset
