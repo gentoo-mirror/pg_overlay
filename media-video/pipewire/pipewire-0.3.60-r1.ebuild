@@ -151,6 +151,8 @@ DOCS=( {README,INSTALL}.md NEWS )
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
 	"${FILESDIR}"/${P}-pulse-server-also-advance-read-pointer-in-underrun.patch
+	"${FILESDIR}"/${P}-profile-switch-crash.patch
+	"${FILESDIR}"/${P}-qemu.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
@@ -223,10 +225,10 @@ multilib_src_configure() {
 		-Dbluez5-codec-lc3=disabled
 		-Dbluez5-codec-lc3plus=disabled
 		-Dcontrol=enabled # Matches upstream
-		-Daudiotestsrc=enabled # Matches upstream
-		-Dffmpeg=disabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
+		-Daudiotestsrc=disabled # Matches upstream
+		-Dffmpeg=enabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
 		$(meson_native_use_feature flatpak)
-		-Dpipewire-jack=enabled # Allows integrating JACK apps into PW graph
+		-Dpipewire-jack=disabled # Allows integrating JACK apps into PW graph
 		$(meson_native_use_feature jack-client jack) # Allows PW to act as a JACK client
 		$(meson_use jack-sdk jack-devel)
 		$(usex jack-sdk "-Dlibjack-path=${EPREFIX}/usr/$(get_libdir)" '')
