@@ -3,12 +3,12 @@
 
 EAPI=8
 
-inherit autotools flag-o-matic multilib-minimal poly-c_ebuilds
+inherit autotools flag-o-matic multilib-minimal
 
-REAL_P="SDL2-${MY_PV}"
+MY_P="SDL2-${PV}"
 DESCRIPTION="Simple Direct Media Layer"
 HOMEPAGE="https://www.libsdl.org/"
-SRC_URI="https://www.libsdl.org/release/${REAL_P}.tar.gz"
+SRC_URI="https://www.libsdl.org/release/${MY_P}.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
@@ -94,10 +94,9 @@ MULTILIB_WRAPPED_HEADERS=(
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.0.16-static-libs.patch
-	"${FILESDIR}"/${PN}-2.24.0-fix-build-without-joystick.patch
 )
 
-S="${WORKDIR}/${REAL_P}"
+S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	default
@@ -110,7 +109,7 @@ src_prepare() {
 	# PACKAGE_NAME. Add AT_NOEAUTOHEADER="yes" to prevent those macros from
 	# being reintroduced.
 	# https://bugs.gentoo.org/764959
-	AT_NOEAUTOHEADER="yes" AT_M4DIR="/usr/share/aclocal acinclude" \
+	AT_NOEAUTOHEADER="yes" AT_M4DIR="${BROOT}/usr/share/aclocal acinclude" \
 		eautoreconf
 }
 
