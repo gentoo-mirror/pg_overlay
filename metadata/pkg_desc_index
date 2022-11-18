@@ -94,7 +94,7 @@ media-gfx/sane-backends 1.1.1-r5: Scanner Access Now Easy - Backends
 media-libs/ksanecore 22.11.80: Qt-based interface for SANE library to control scanner hardware
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r1: Libraries for PulseAudio clients
-media-libs/libsdl2 2.24.2_pre: Simple Direct Media Layer
+media-libs/libsdl2 2.24.2: Simple Direct Media Layer
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
