@@ -325,7 +325,6 @@ src_configure() {
 		$(usex doc '' --disable-docs)
 		$(usex java '' --disable-java)
 		$(usex lvm '' --disable-devmapper)
-		$(usex opus '' --disable-libopus)
 		$(usex pulseaudio '' --disable-pulse)
 		$(usex python '' --disable-python)
 		$(usex vboxwebsrv --enable-webservice '')
