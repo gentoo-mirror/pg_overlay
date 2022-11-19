@@ -1,7 +1,7 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit autotools toolchain-funcs
 
@@ -21,6 +21,7 @@ DEPEND="
 	sys-apps/texinfo
 	sys-devel/flex
 	sys-devel/gettext
+	virtual/pkgconfig
 	|| (
 		dev-util/byacc
 		dev-util/yacc
@@ -28,14 +29,17 @@ DEPEND="
 	)
 "
 RDEPEND=""
+BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.1.9998.3407-unknown_configure_opt.patch"
 	"${FILESDIR}/${PN}-0.1.5-gentoo-docdir.patch"
 	"${FILESDIR}/${PN}-0.1.9998_pre20120806-qa.patch"
 	"${FILESDIR}/${PN}-0.1.9998_pre20110817-kash-link-pthread.patch"
-	"${FILESDIR}/${PN}-0.1.9998.3407-gold.patch"
-	"${FILESDIR}/${PN}-0.1.9998.3407-glibc-2.32+.patch"
+	"${FILESDIR}/${PN}-0.1.9998.3499-gold.patch"
+
+	# Please check on version bumps if this can be removed
+	"${FILESDIR}/${PN}-0.1.9998.3499-kash-no_separate_parser_allocator.patch"
 )
 
 pkg_setup() {
@@ -45,8 +49,6 @@ pkg_setup() {
 
 src_prepare() {
 	default
-
-	sed -i 's|gcc|${CC}|g' ${S}/kBuild/tools/*.kmk
 
 	# Add a file with the svn revision this package was pulled from
 	printf '%s\n' "KBUILD_SVN_REV := $(ver_cut 4)" \
@@ -63,7 +65,26 @@ src_prepare() {
 }
 
 src_compile() {
-	kBuild/env.sh --full emake -f bootstrap.gmk AUTORECONF=true AR="$(tc-getAR)" \
+	if [[ -z ${YACC} ]] ; then
+		# If the user hasn't picked one, let's prefer byacc > yacc > old bison for now.
+		# See bug #734354 - bison doesn't work here.
+		# We can remove this once Bison works again!
+		if has_version -b "dev-util/byacc" ; then
+			export YACC=byacc
+		elif has_version -b "dev-util/yacc" ; then
+			export YACC=yacc
+		elif has_version -b "<sys-devel/bison-3.7" ; then
+			export YACC=bison
+		else
+			die "This case shouldn't be possible; no suitable YACC impl installed."
+		fi
+
+		einfo "Chosen YACC=${YACC} for build..."
+	else
+		einfo "Chosen user-provided YACC=${YACC} for build..."
+	fi
+
+	kBuild/env.sh --full emake -f bootstrap.gmk AUTORECONF=true AR="$(tc-getAR)" YACC="${YACC}" \
 		|| die "bootstrap failed"
 }
 
