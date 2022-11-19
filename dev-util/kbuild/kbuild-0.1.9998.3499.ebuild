@@ -50,6 +50,8 @@ pkg_setup() {
 src_prepare() {
 	default
 
+	sed -i 's|gcc|${CC}|g' ${S}/kBuild/tools/*.kmk
+
 	# Add a file with the svn revision this package was pulled from
 	printf '%s\n' "KBUILD_SVN_REV := $(ver_cut 4)" \
 		> SvnInfo.kmk || die
