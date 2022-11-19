@@ -621,6 +621,7 @@ src_prepare() {
 	done
 
 	eapply "${FILESDIR}/rustc_version-0.4.0.patch"
+	eapply "${FILESDIR}/mozilla-silence-no-return-type.patch"
 	#######
 
 	xdg_environment_reset
