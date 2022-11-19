@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools toolchain-funcs
+inherit autotools toolchain-funcs flag-o-matic
 
 MY_P="${P}-src"
 DESCRIPTION="A makefile framework for writing simple makefiles for complex tasks"
@@ -51,6 +51,7 @@ src_prepare() {
 	default
 
 	sed -i 's|gcc|${CC}|g' ${S}/kBuild/tools/*.kmk
+	append-flags -Wno-int-conversion
 
 	# Add a file with the svn revision this package was pulled from
 	printf '%s\n' "KBUILD_SVN_REV := $(ver_cut 4)" \
