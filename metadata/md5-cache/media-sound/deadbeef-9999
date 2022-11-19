@@ -1,0 +1,17 @@
+BDEPEND=dev-util/intltool sys-devel/gettext sys-devel/clang sys-devel/llvm virtual/pkgconfig sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71 >=sys-devel/libtool-2.4 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure install postinst postrm preinst prepare unpack
+DEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson:= dev-libs/libdispatch aac? ( media-libs/faad2 ) alsa? ( media-libs/alsa-lib ) cdda? ( dev-libs/libcdio:0= media-libs/libcddb dev-libs/libcdio-paranoia:0= ) dts? ( media-libs/libdca ) ffmpeg? ( media-video/ffmpeg ) flac? ( media-libs/flac media-libs/libogg ) mp3? ( media-sound/mpg123 ) musepack? ( media-sound/musepack-tools ) nls? ( virtual/libintl ) notify? ( sys-apps/dbus dev-libs/libdispatch ) opus? ( media-libs/opusfile ) pulseaudio? ( media-sound/pulseaudio ) vorbis? ( media-libs/libvorbis ) mac? ( dev-lang/yasm ) wavpack? ( media-sound/wavpack ) zip? ( dev-libs/libzip )
+DESCRIPTION=DeaDBeeF is a modular audio player similar to foobar2000
+EAPI=8
+HOMEPAGE=https://deadbeef.sourceforge.io/
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=autotools plocale toolchain-funcs xdg git-r3
+IUSE=aac alsa cdda converter cover dts ffmpeg flac +hotkeys mp3 musepack nls notify nullout opus oss pulseaudio shellexec +supereq threads vorbis +mac +wavpack +zip
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2 LGPL-2.1 wavpack? ( BSD )
+PROPERTIES=live
+RDEPEND=x11-libs/gtk+:3 net-misc/curl:0= dev-libs/jansson:= dev-libs/libdispatch aac? ( media-libs/faad2 ) alsa? ( media-libs/alsa-lib ) cdda? ( dev-libs/libcdio:0= media-libs/libcddb dev-libs/libcdio-paranoia:0= ) dts? ( media-libs/libdca ) ffmpeg? ( media-video/ffmpeg ) flac? ( media-libs/flac media-libs/libogg ) mp3? ( media-sound/mpg123 ) musepack? ( media-sound/musepack-tools ) nls? ( virtual/libintl ) notify? ( sys-apps/dbus dev-libs/libdispatch ) opus? ( media-libs/opusfile ) pulseaudio? ( media-sound/pulseaudio ) vorbis? ( media-libs/libvorbis ) mac? ( dev-lang/yasm ) wavpack? ( media-sound/wavpack ) zip? ( dev-libs/libzip )
+REQUIRED_USE=|| ( alsa oss pulseaudio nullout )
+SLOT=0
+_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	441f754fd75cd4fd1fa06fbc17da6144	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	241a8f577b9781a42a7421e53448a44e	autotools	9e6965bfaa00f52cc61e0d4bc44c87b3	git-r3	2347f8fe2d392b2a091191f94be37e6f	plocale	7ce00136a77130df46fbbd5966f98a61	xdg-utils	ac0e315a3688929e34ac75b139e7349a	xdg	6024fbc93167fad782e2032933654857
+_md5_=94f581888007f87fe19566687e9e60e9
