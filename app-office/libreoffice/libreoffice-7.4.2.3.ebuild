@@ -44,13 +44,13 @@ unset DEV_URI
 # These are bundles that can't be removed for now due to huge patchsets.
 # If you want them gone, patches are welcome.
 ADDONS_SRC=(
+	# broken against latest upstream release, too many patches on top:
+	# https://github.com/tdf/libcmis/pull/43
+	"${ADDONS_URI}/libcmis-0.5.2.tar.xz"
 	# not packaged in Gentoo, https://www.netlib.org/fp/dtoa.c
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
 	"${ADDONS_URI}/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz"
-	"${ADDONS_URI}/libcmis-0.5.2.tar.xz"
-	"${ADDONS_URI}/libcuckoo-93217f8d391718380c508a722ab9acd5e9081233.tar.gz"
-	"${ADDONS_URI}dragonbox-1.1.0.tar.gz"
 	"base? (
 		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
 		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
@@ -74,6 +74,8 @@ ADDONS_SRC=(
 	"libreoffice_extensions_scripting-javascript? ( ${ADDONS_URI}/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip )"
 	# not packageable
 	"odk? ( http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll )"
+	# not packaged in Gentoo, https://github.com/jk-jeon/dragonbox
+	"${ADDONS_URI}/dragonbox-1.1.3.tar.gz"
 )
 SRC_URI+=" ${ADDONS_SRC[*]}"
 
@@ -378,7 +380,7 @@ src_prepare() {
 			sysui/desktop/menus/draw.desktop || die
 	fi
 
-	export ac_cv_lib_gpgmepp_progress_callback=yes
+	sed -i '/dragonbox/s@1\.1\.0@1.1.3@' download.lst || die
 }
 
 src_configure() {
@@ -506,7 +508,7 @@ src_configure() {
 		--without-system-cuckoo
 		--without-system-dragonbox
 		--without-system-jfreereport
-		#--without-system-libcmis
+		--without-system-libcmis
 		--without-system-libfixmath
 		--without-system-sane
 		$(use_enable base report-builder)
