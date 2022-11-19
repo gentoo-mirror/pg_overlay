@@ -354,11 +354,11 @@ src_configure() {
 
 	# Force usage of chosen Python implementation
 	# bug #856121, bug #785835
-	sed -i \
-		-e '/VBOX_WITH_PYTHON.*=/d' \
-		-e '/VBOX_PATH_PYTHON_INC.*=/d' \
-		-e '/VBOX_LIB_PYTHON.*=/d' \
-		AutoConfig.kmk || die
+	#sed -i \
+	#	-e '/VBOX_WITH_PYTHON.*=/d' \
+	#	-e '/VBOX_PATH_PYTHON_INC.*=/d' \
+	#	-e '/VBOX_LIB_PYTHON.*=/d' \
+	#	AutoConfig.kmk || die
 
 	cat >> AutoConfig.kmk <<-EOF || die
 		VBOX_WITH_PYTHON=$(usev python 1)
