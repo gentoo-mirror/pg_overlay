@@ -548,6 +548,8 @@ src_prepare() {
 
 	einfo "Removing pre-built binaries ..."
 	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+	#
+	moz_clear_vendor_checksums bindgen
 
 	# Create build dir
 	BUILD_DIR="${WORKDIR}/${PN}_build"
