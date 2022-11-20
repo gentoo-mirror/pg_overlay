@@ -548,8 +548,6 @@ src_prepare() {
 
 	einfo "Removing pre-built binaries ..."
 	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
-	#
-	moz_clear_vendor_checksums bindgen
 
 	# Create build dir
 	BUILD_DIR="${WORKDIR}/${PN}_build"
@@ -562,6 +560,9 @@ src_prepare() {
 
 	####### My stuff
 	### Privacy-esr patches
+	#
+	moz_clear_vendor_checksums bindgen
+	#
 	einfo ++++++++++++++++++++++++
 	einfo Applying privacy patches
 	einfo ++++++++++++++++++++++++
@@ -624,6 +625,7 @@ src_prepare() {
 
 	eapply "${FILESDIR}/rustc_version-0.4.0.patch"
 	eapply "${FILESDIR}/mozilla-silence-no-return-type.patch"
+	eapply "${FILESDIR}/0037-bgo-877267-rust-opaque-binding-type.patch"
 	#######
 
 	xdg_environment_reset
