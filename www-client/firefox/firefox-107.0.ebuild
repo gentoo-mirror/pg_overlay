@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-107-patches-01j.tar.xz"
+FIREFOX_PATCHSET="firefox-107-patches-02j.tar.xz"
 
 LLVM_MAX_SLOT=15
 
@@ -604,6 +604,9 @@ src_prepare() {
 
 	einfo "Removing pre-built binaries ..."
 	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.la' -o -name '*.a' \) -print -delete || die
+
+	# Clearing crate checksums where we have applied patches
+	moz_clear_vendor_checksums bindgen
 
 	# Create build dir
 	BUILD_DIR="${WORKDIR}/${PN}_build"
