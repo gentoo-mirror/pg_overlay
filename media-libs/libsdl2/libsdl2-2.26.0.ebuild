@@ -31,6 +31,7 @@ REQUIRED_USE="
 	xscreensaver? ( X )"
 
 CDEPEND="
+	virtual/libiconv[${MULTILIB_USEDEP}]
 	alsa? ( >=media-libs/alsa-lib-1.0.27.2[${MULTILIB_USEDEP}] )
 	dbus? ( >=sys-apps/dbus-1.6.18-r1[${MULTILIB_USEDEP}] )
 	fcitx4? ( app-i18n/fcitx:4 )
@@ -123,6 +124,7 @@ multilib_src_configure() {
 	# sorted by `./configure --help`
 	local myeconfargs=(
 		$(use_enable static-libs static)
+		--enable-system-iconv
 		--enable-atomic
 		$(use_enable sound audio)
 		$(use_enable video)
@@ -156,6 +158,7 @@ multilib_src_configure() {
 		--disable-pulseaudio-shared
 		--disable-arts
 		$(use_enable libsamplerate)
+		--disable-werror
 		$(use_enable nas)
 		--disable-nas-shared
 		$(use_enable sndio)
