@@ -22,6 +22,7 @@ RDEPEND="
 	dev-qt/qtnetwork:5
 	dev-qt/qtsvg:5
 	dev-qt/qtwidgets:5
+	media-libs/speex[utils]
 	virtual/libusb:1
 "
 DEPEND="${RDEPEND}"
@@ -53,7 +54,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=ON
-		-DCCACHE_PROGRAM=TRUE
+		-DCMAKE_BUILD_TYPE=Release
 	)
 	cmake_src_configure
 }
