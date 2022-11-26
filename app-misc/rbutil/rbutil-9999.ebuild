@@ -53,8 +53,8 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=ON
-		-DCCACHE_PROGRAM=ON
+		-DBUILD_SHARED_LIBS=OFF
+		-DCCACHE_PROGRAM=OFF
 		-DUSE_SYSTEM_QUAZIP=ON
 	)
 	cmake_src_configure

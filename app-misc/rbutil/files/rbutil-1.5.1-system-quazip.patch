@@ -9,24 +9,11 @@ policies strongly oppose bundling of libraries.
 
 Change-Id: I8d454784dc4b244f4dd8aa18deb3350a29aaab77
 ---
- docs/CREDITS                    |  1 +
  utils/rbutilqt/CMakeLists.txt   | 65 ++++++++++++++++++---------------
  utils/rbutilqt/base/ziputil.cpp |  6 +--
  utils/rbutilqt/base/ziputil.h   |  6 +--
  4 files changed, 43 insertions(+), 35 deletions(-)
 
-diff --git a/docs/CREDITS b/docs/CREDITS
-index 6f7c23fc7e..3a6fcb83b9 100644
---- a/docs/CREDITS
-+++ b/docs/CREDITS
-@@ -710,6 +710,7 @@ Marc Aarts
- Fabrice Bellard
- Selami Dinçer
- Matej Golian
-+James Le Cuirot
- 
- The libmad team
- The wavpack team
 diff --git a/utils/rbutilqt/CMakeLists.txt b/utils/rbutilqt/CMakeLists.txt
 index 41954cb9ee..350790109b 100644
 --- a/utils/rbutilqt/CMakeLists.txt
