@@ -30,8 +30,8 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/${P}/utils/${PN}qt"
-QTDIR="utils/${PN}qt"
+S="${WORKDIR}/${P}"
+CMAKE_USE_DIR="${S}/utils"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.5.1-system-quazip.patch
