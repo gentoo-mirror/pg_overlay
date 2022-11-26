@@ -30,21 +30,20 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-S="${WORKDIR}/${P}/utils/${PN}qt"
-QTDIR="utils/${PN}qt"
+S="${WORKDIR}/${P}"
+CMAKE_USE_DIR="${S}/utils"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.5.1-system-quazip.patch
+	#"${FILESDIR}"/${PN}-1.5.1-system-quazip.patch
 	"${FILESDIR}"/${PN}-1.5.1-cmake.patch
 	"${FILESDIR}"/${PN}-1.5.1-headers.patch
 )
 
 src_prepare() {
-	plocale_find_changes "lang" "${PN}_" ".ts"
 	rm_locale() {
-		rm -v "lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
-		sed -i "/lang\/${PN}_${1}.ts/d" CMakeLists.txt || die "removing of ${1}.ts failed"
-		sed -i "/${PN}_${1}.qm/d" lang/${PN}qt-lang.qrc || die "removing of ${1}.ts failed"
+		rm -v "${CMAKE_USE_DIR}/${PN}qt/lang/${PN}_${1}.ts" || die "removing of ${1}.ts failed"
+		sed -i "/lang\/${PN}_${1}.ts/d" ${CMAKE_USE_DIR}/${PN}qt/CMakeLists.txt || die "removing of ${1}.ts failed"
+		sed -i "/${PN}_${1}.qm/d" ${CMAKE_USE_DIR}/${PN}qt/lang/${PN}qt-lang.qrc || die "removing of ${1}.ts failed"
 	}
 	plocale_for_each_disabled_locale rm_locale
 
