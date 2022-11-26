@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 PLOCALES="cs de fi fr gr he it ja nl pl pt pt_BR ru tr zh_CN zh_TW"
 
 inherit cmake desktop git-r3 plocale xdg
@@ -15,11 +15,12 @@ SLOT="0"
 IUSE="debug"
 
 RDEPEND="
-	dev-libs/crypto++:=
-	dev-libs/quazip
+	app-arch/bzip2:=
+	>=dev-libs/quazip-1.2:=[qt5(+)]
 	dev-qt/qtcore:5
 	dev-qt/qtgui:5
 	dev-qt/qtnetwork:5
+	dev-qt/qtsvg:5
 	dev-qt/qtwidgets:5
 	virtual/libusb:1
 "
@@ -33,8 +34,9 @@ S="${WORKDIR}/${P}/utils/${PN}qt"
 QTDIR="utils/${PN}qt"
 
 PATCHES=(
-	#"${FILESDIR}"/${P}-fix-versionstring.patch # bug 734178
-	#"${FILESDIR}"/${P}-quazip1.patch
+	"${FILESDIR}"/${PN}-1.5.1-system-quazip.patch
+	"${FILESDIR}"/${PN}-1.5.1-cmake.patch
+	"${FILESDIR}"/${PN}-1.5.1-headers.patch
 )
 
 src_prepare() {
@@ -46,30 +48,22 @@ src_prepare() {
 	}
 	plocale_for_each_disabled_locale rm_locale
 
-	if has_version "<dev-libs/quazip-1.0"; then
-		sed -e "/^PKGCONFIG/s/quazip1-qt5/quazip/" -i ${QTDIR}/${PN}qt.pro # || die
-	fi
-
-	rm -rv {quazip,zlib}/ || die
-
 	cmake_src_prepare
+	rm -rv utils/rbutilqt/{quazip,zlib}/ || die
 }
 
 src_configure() {
 	local mycmakeargs=(
-		-DQT_VERSION_MAJOR=5
+		-DBUILD_SHARED_LIBS=ON
+		-DCCACHE_PROGRAM=ON
+		-DUSE_SYSTEM_QUAZIP=ON
 	)
 	cmake_src_configure
 }
 
-src_compile() {
-	cmake_src_compile
-
-	#emake -C "${QTDIR}"
-}
-
 src_install() {
-	dobin RockboxUtility
-	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox Utility
-	dodoc changelog.txt
+	dobin "${BUILD_DIR}"/{ipodpatcher,sansapatcher,rbutilqt/RockboxUtility}
+	newicon -s scalable docs/logo/rockbox-clef.svg rockbox.svg
+	make_desktop_entry RockboxUtility "Rockbox Utility" rockbox
+	dodoc utils/rbutilqt/changelog.txt
 }
