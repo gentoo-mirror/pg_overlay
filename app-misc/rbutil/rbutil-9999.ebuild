@@ -53,7 +53,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_SHARED_LIBS=OFF
 		-DCMAKE_BUILD_TYPE=Release
 	)
 	cmake_src_configure
