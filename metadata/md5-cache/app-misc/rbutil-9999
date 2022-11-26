@@ -1,6 +1,6 @@
 BDEPEND=dev-qt/linguist-tools:5 virtual/pkgconfig >=dev-util/ninja-1.8.2 >=dev-util/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
-DEPEND=app-arch/bzip2:= >=dev-libs/quazip-1.2:=[qt5(+)] dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 virtual/libusb:1
+DEPEND=app-arch/bzip2:= >=dev-libs/quazip-1.2:=[qt5(+)] dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 media-libs/speex[utils] virtual/libusb:1
 DESCRIPTION=Rockbox open source firmware manager for music players
 EAPI=8
 HOMEPAGE=https://www.rockbox.org/wiki/RockboxUtility
@@ -9,7 +9,7 @@ INHERIT=cmake desktop git-r3 plocale xdg
 IUSE=debug
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=app-arch/bzip2:= >=dev-libs/quazip-1.2:=[qt5(+)] dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 virtual/libusb:1
+RDEPEND=app-arch/bzip2:= >=dev-libs/quazip-1.2:=[qt5(+)] dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 media-libs/speex[utils] virtual/libusb:1
 SLOT=0
 _eclasses_=toolchain-funcs	441f754fd75cd4fd1fa06fbc17da6144	multilib	5ca4e49abed8e3a2f7b56920eadee157	flag-o-matic	29a755b1291d64133634d80b0328f153	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	58ec4e54962bf45d065fb95030701514	xdg-utils	ac0e315a3688929e34ac75b139e7349a	cmake	44afbf15c35884f7c840470f1cf05d0d	desktop	7eb20ad915a0a318176d51bc2508ff5c	git-r3	2347f8fe2d392b2a091191f94be37e6f	plocale	7ce00136a77130df46fbbd5966f98a61	xdg	6024fbc93167fad782e2032933654857
-_md5_=55bdf43b4dc43f1c0616d4e8de850fda
+_md5_=532aa4c76399b4c18469e11196fa68f9

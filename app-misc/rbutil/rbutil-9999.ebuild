@@ -22,6 +22,7 @@ RDEPEND="
 	dev-qt/qtnetwork:5
 	dev-qt/qtsvg:5
 	dev-qt/qtwidgets:5
+	media-libs/speex[utils]
 	virtual/libusb:1
 "
 DEPEND="${RDEPEND}"
