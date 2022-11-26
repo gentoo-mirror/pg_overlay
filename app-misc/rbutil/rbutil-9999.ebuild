@@ -34,7 +34,6 @@ S="${WORKDIR}/${P}"
 CMAKE_USE_DIR="${S}/utils"
 
 PATCHES=(
-	#"${FILESDIR}"/${PN}-1.5.1-system-quazip.patch
 	"${FILESDIR}"/${PN}-1.5.1-cmake.patch
 	"${FILESDIR}"/${PN}-1.5.1-headers.patch
 )
@@ -53,9 +52,8 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=OFF
-		-DCCACHE_PROGRAM=OFF
-		-DUSE_SYSTEM_QUAZIP=ON
+		-DBUILD_SHARED_LIBS=ON
+		-DCCACHE_PROGRAM=TRUE
 	)
 	cmake_src_configure
 }
