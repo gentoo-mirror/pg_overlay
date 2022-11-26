@@ -52,7 +52,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_SHARED_LIBS=OFF
 		-DCCACHE_PROGRAM=TRUE
 	)
 	cmake_src_configure
