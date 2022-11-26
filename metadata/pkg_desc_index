@@ -45,19 +45,6 @@ dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeSc
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-perl/JSON 4.20.0: JSON (JavaScript Object Notation) encoder/decoder
-dev-perl/JSON-XS 4.20.0: JSON::XS - JSON serialising/deserialising, done correctly and fast
-dev-perl/Module-Build 0.422.900: Build and install Perl modules
-dev-perl/Path-Tiny 0.108.0: File path utility
-dev-perl/Role-Tiny 2.1.4: Roles. Like a nouvelle cuisine portion size slice of Moose
-dev-perl/Sub-Name 0.260.0: (Re)name a sub
-dev-perl/Sub-Quote 2.6.6: Efficient generation of subroutines via string eval
-dev-perl/Template-Toolkit 2.290.0: The Template Toolkit
-dev-perl/TermReadKey 2.380.0: Change terminal modes, and perform non-blocking reads
-dev-perl/Text-Autoformat 1.750.0: Automatic text wrapping and reformatting
-dev-perl/URI 1.760.0: Uniform Resource Identifiers (absolute and relative)
-dev-perl/XML-SAX 1.2.0: Perl module for using and building Perl SAX2 XML parsers, filters, and drivers
-dev-perl/YAML 1.290.0: YAML Ain't Markup Language (tm)
 dev-python/cloudscraper 1.2.62: A Python module to bypass Cloudflare's anti-bot page
 dev-python/pymountboot 0.2.3-r1: Python extension module to (re)mount /boot
 dev-python/pysol_cards 0.14.2: Deal PySol FreeCell cards
@@ -79,7 +66,6 @@ dev-util/scons 4.4.0: Extensible Python-based build utility
 games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
-gnome-extra/yelp 41.2: Help browser for GNOME
 gui-apps/kdisplay 5.20.0: A small display management app. KScreen replacement
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
@@ -334,13 +320,12 @@ media-video/qmplay2 9999: A Qt-based video player, which can play most formats a
 net-im/pidgin 2.14.10 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.3.1: Official desktop client for Telegram
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
-net-libs/libtorrent-rasterbar 1.2.9999 1.2.9999-r1 1.2.9999-r2 2.0.9999 9999: C++ BitTorrent implementation focusing on efficiency and scalability
+net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 19.0.1: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r3: HTTP client library
 net-libs/tdlib 1.7.0 1.8.0 9999: Cross-platform library for building Telegram clients
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
-net-nntp/nzbget 21.1_pre2311: A command-line based binary newsgrabber supporting .nzb files
 net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
@@ -372,7 +357,6 @@ virtual/rust 1.65.0: Virtual for Rust language compiler
 www-client/firefox 107.0: Firefox Web Browser
 x11-base/xorg-server 21.1.4: X.Org X servers
 x11-base/xwayland 22.1.5: Standalone X server running under Wayland
-x11-drivers/xf86-input-libinput 9999: X.org input driver based on libinput
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r2 3.24.35: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
