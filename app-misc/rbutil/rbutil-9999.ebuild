@@ -34,7 +34,7 @@ S="${WORKDIR}/${P}"
 CMAKE_USE_DIR="${S}/utils"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.5.1-system-quazip.patch
+	#"${FILESDIR}"/${PN}-1.5.1-system-quazip.patch
 	"${FILESDIR}"/${PN}-1.5.1-cmake.patch
 	"${FILESDIR}"/${PN}-1.5.1-headers.patch
 )
