@@ -34,9 +34,9 @@ RDEPEND="
 	!net-im/telegram-desktop-bin
 	app-arch/lz4:=
 	dev-cpp/abseil-cpp:=
-	dev-libs/glib:2
+	>=dev-libs/glib-2.74.0
 	dev-libs/libdispatch
-	dev-libs/libsigc++:2
+	>=dev-libs/libsigc++-3.2.0
 	dev-libs/openssl:=
 	dev-libs/xxhash
 	media-libs/fontconfig:=
