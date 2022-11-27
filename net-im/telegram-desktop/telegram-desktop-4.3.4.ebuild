@@ -36,7 +36,7 @@ RDEPEND="
 	dev-cpp/abseil-cpp:=
 	dev-libs/glib:2
 	dev-libs/libdispatch
-	>=dev-libs/libsigc++-3.2.0
+	dev-libs/libsigc++:2
 	dev-libs/openssl:=
 	dev-libs/xxhash
 	media-libs/fontconfig:=
@@ -49,7 +49,8 @@ RDEPEND="
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	x11-libs/xcb-util-keysyms
-	dbus? ( >=dev-cpp/glibmm-2.74.0 )
+	virtual/opengl
+	dbus? ( dev-cpp/glibmm:2.68 )
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
@@ -105,12 +106,12 @@ src_prepare() {
 	#   build in gentoo right now.
 	if use qt6-imageformats; then
 		sed -e 's/DESKTOP_APP_USE_PACKAGED_LAZY/TRUE/' -i \
-			cmake/external/kimageformats/CMakeLists.txt
+			cmake/external/kimageformats/CMakeLists.txt || die
 		printf "%s\n" \
 			'Q_IMPORT_PLUGIN(QAVIFPlugin)' \
 			'Q_IMPORT_PLUGIN(HEIFPlugin)' \
 			'Q_IMPORT_PLUGIN(QJpegXLPlugin)' \
-			>> cmake/external/qt/qt_static_plugins/qt_static_plugins.cpp
+			>> cmake/external/qt/qt_static_plugins/qt_static_plugins.cpp || die
 	fi
 
 	# kde-frameworks/kcoreaddons is bundled when using qt6, see:
@@ -121,7 +122,6 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DTDESKTOP_LAUNCHER_BASENAME="${PN}"
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON  # header only lib, some git version. prevents warnings.
 		-DQT_VERSION_MAJOR=$(usex qt6 6 5)
 
