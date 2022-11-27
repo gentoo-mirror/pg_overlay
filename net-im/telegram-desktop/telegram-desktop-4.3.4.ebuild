@@ -50,7 +50,7 @@ RDEPEND="
 	sys-libs/zlib:=[minizip]
 	x11-libs/xcb-util-keysyms
 	virtual/opengl
-	dbus? ( >=dev-cpp/glibmm=2.74.0 )
+	dbus? ( >=dev-cpp/glibmm-2.74.0 )
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
