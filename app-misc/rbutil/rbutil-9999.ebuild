@@ -12,7 +12,7 @@ EGIT_REPO_URI="git://git.rockbox.org/rockbox.git"
 LICENSE="GPL-2"
 SLOT="0"
 #KEYWORDS="~amd64"
-IUSE="debug"
+IUSE=""
 
 RDEPEND="
 	app-arch/bzip2:=
@@ -25,7 +25,10 @@ RDEPEND="
 	media-libs/speex[utils]
 	virtual/libusb:1
 "
-DEPEND="${RDEPEND}"
+DEPEND="
+	${RDEPEND}
+	dev-qt/qttest:5
+"
 BDEPEND="
 	dev-qt/linguist-tools:5
 	virtual/pkgconfig
