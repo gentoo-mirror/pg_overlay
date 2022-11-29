@@ -75,7 +75,7 @@ kde-frameworks/kdelibs4support 5.100.0: Framework easing the development transit
 kde-frameworks/plasma 5.100.0-r1: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
-kde-plasma/kde-cli-tools 5.26.3: Tools based on KDE Frameworks 5 to better interact with the system
+kde-plasma/kde-cli-tools 5.26.4: Tools based on KDE Frameworks 5 to better interact with the system
 mail-client/thunderbird 102.5.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r5: Scanner Access Now Easy - Backends
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
@@ -137,7 +137,7 @@ sys-fs/udisks 2.9.4-r1: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 5.19.0 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/ncurses 6.3_p20220122: console display library
-sys-libs/polly 15.0.5: Polyhedral optimizations for LLVM
+sys-libs/polly 15.0.6: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
