@@ -79,7 +79,7 @@ kde-plasma/kde-cli-tools 5.26.4: Tools based on KDE Frameworks 5 to better inter
 mail-client/thunderbird 102.5.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r5: Scanner Access Now Easy - Backends
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
-media-libs/libpulse 16.1-r1: Libraries for PulseAudio clients
+media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
 media-libs/libsdl2 2.26.0: Simple Direct Media Layer
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/tg_owt 0_pre20220914: WebRTC build for Telegram
