@@ -142,7 +142,7 @@ sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.65.0: Virtual for Rust language compiler
-www-client/firefox 107.0: Firefox Web Browser
+www-client/firefox 107.0.1: Firefox Web Browser
 x11-base/xorg-server 21.1.4: X.Org X servers
 x11-base/xwayland 22.1.5: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
