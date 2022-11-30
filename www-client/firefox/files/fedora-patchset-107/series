@@ -6,3 +6,5 @@ firefox-tests-xpcshell-freeze.patch
 
 disable-openh264-download.patch
 firefox-enable-vaapi.patch
+
+D161724.diff

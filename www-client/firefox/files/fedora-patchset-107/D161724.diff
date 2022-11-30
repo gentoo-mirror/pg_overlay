@@ -1,0 +1,79 @@
+diff --git a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h
+--- a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h
++++ b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.h
+@@ -173,10 +173,11 @@
+ 
+   PtsCorrectionContext mPtsContext;
+ 
+   DurationMap mDurationMap;
+   const bool mLowLatency;
++  AVDiscard mFrameDrop = AVDISCARD_DEFAULT;
+ 
+   // True if we're allocating shmem for ffmpeg decode buffer.
+   Maybe<Atomic<bool>> mIsUsingShmemBufferForDecode;
+ 
+ #if LIBAVCODEC_VERSION_MAJOR >= 57 && LIBAVUTIL_VERSION_MAJOR >= 56
+diff --git a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
+--- a/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
++++ b/dom/media/platforms/ffmpeg/FFmpegVideoDecoder.cpp
+@@ -829,10 +829,17 @@
+   packet.dts = aSample->mTimecode.ToMicroseconds();
+   packet.pts = aSample->mTime.ToMicroseconds();
+   packet.flags = aSample->mKeyframe ? AV_PKT_FLAG_KEY : 0;
+   packet.pos = aSample->mOffset;
+ 
++  mCodecContext->skip_frame = mFrameDrop;
++#if MOZ_LOGGING
++  if (mFrameDrop == AVDISCARD_NONREF) {
++    FFMPEG_LOG("Frame skip AVDISCARD_NONREF");
++  }
++#endif
++
+ #if LIBAVCODEC_VERSION_MAJOR >= 58
+   packet.duration = aSample->mDuration.ToMicroseconds();
+   int res = mLib->avcodec_send_packet(mCodecContext, &packet);
+   if (res < 0) {
+     // In theory, avcodec_send_packet could sent -EAGAIN should its internal
+@@ -881,10 +888,22 @@
+       return MediaResult(
+           NS_ERROR_DOM_MEDIA_DECODE_ERR,
+           RESULT_DETAIL("avcodec_receive_frame error: %s", errStr));
+     }
+ 
++    if (mFrameDrop == AVDISCARD_NONREF) {
++      FFMPEG_LOG("Requested pts %" PRId64 " decoded frame pts %" PRId64,
++                 packet.pts, GetFramePts(mFrame) + mFrame->pkt_duration);
++      // Switch back to default frame skip policy if we hit correct
++      // decode times. 5 ms treshold is taken from mpv project which
++      // use similar approach after seek (feed_packet() at f_decoder_wrapper.c).
++      if (packet.pts - 5000 <= GetFramePts(mFrame) + mFrame->pkt_duration) {
++        FFMPEG_LOG("Set frame drop to AVDISCARD_DEFAULT.");
++        mFrameDrop = AVDISCARD_DEFAULT;
++      }
++    }
++
+     UpdateDecodeTimes(decodeStart);
+     decodeStart = TimeStamp::Now();
+ 
+     MediaResult rv;
+ #  ifdef MOZ_WAYLAND_USE_VAAPI
+@@ -1211,13 +1230,18 @@
+ }
+ #endif
+ 
+ RefPtr<MediaDataDecoder::FlushPromise>
+ FFmpegVideoDecoder<LIBAV_VER>::ProcessFlush() {
++  FFMPEG_LOG("ProcessFlush()");
+   MOZ_ASSERT(mTaskQueue->IsOnCurrentThread());
+   mPtsContext.Reset();
+   mDurationMap.Clear();
++  // Discard non-ref frames on HW accelerated backend to avoid decode artifacts.
++  if (IsHardwareAccelerated()) {
++    mFrameDrop = AVDISCARD_NONREF;
++  }
+   return FFmpegDataDecoder::ProcessFlush();
+ }
+ 
+ AVCodecID FFmpegVideoDecoder<LIBAV_VER>::GetCodecId(
+     const nsACString& aMimeType) {
+
