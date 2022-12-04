@@ -5,7 +5,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{8..11} )
 
-inherit xdg cmake python-any-r1 optfeature
+inherit xdg cmake python-any-r1 optfeature flag-o-matic
 
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
@@ -87,6 +87,9 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
+	"${FILESDIR}/tdesktop-4.3.4-fix-disabling-spellcheck.patch"
+	"${FILESDIR}/tdesktop-4.3.4-qt5-incompatibility-1.patch"
+	"${FILESDIR}/tdesktop-4.3.4-qt5-incompatibility-2.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
@@ -121,6 +124,11 @@ src_prepare() {
 }
 
 src_configure() {
+	# The ABI of media-libs/tg_owt breaks if the -DNDEBUG flag doesn't keep
+	# the same state across both projects.
+	# See https://bugs.gentoo.org/866055
+	append-cppflags '-DNDEBUG'
+
 	local mycmakeargs=(
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON  # header only lib, some git version. prevents warnings.
 		-DQT_VERSION_MAJOR=$(usex qt6 6 5)
@@ -198,6 +206,6 @@ pkg_postinst() {
 	optfeature_header
 	optfeature "shop payment support (requires USE=dbus enabled)" net-libs/webkit-gtk:4
 	if ! use qt6; then
-		optfeature "AVIF, HEIF and JpegXL image support" kde-frameworks/kimageformats
+		optfeature "AVIF, HEIF and JpegXL image support" kde-frameworks/kimageformats[avif,heif,jpegxl]
 	fi
 }
