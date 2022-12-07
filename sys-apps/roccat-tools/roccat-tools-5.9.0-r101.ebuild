@@ -5,7 +5,7 @@ EAPI=7
 
 LUA_COMPAT=( lua5-{1,3} luajit )
 
-inherit readme.gentoo-r1 cmake flag-o-matic lua-single toolchain-funcs udev user xdg
+inherit readme.gentoo-r1 cmake flag-o-matic lua-single toolchain-funcs udev xdg
 
 DESCRIPTION="Utility for advanced configuration of Roccat devices"
 
