@@ -42,6 +42,7 @@ DEPEND="
 "
 RDEPEND="
 	${COMMON_DEPEND}
+	x11-apps/xkbcomp
 	!<=x11-base/xorg-server-1.20.11
 	selinux? ( sec-policy/selinux-xserver )
 "
