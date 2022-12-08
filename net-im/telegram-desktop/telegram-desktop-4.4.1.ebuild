@@ -48,7 +48,6 @@ RDEPEND="
 	~media-libs/tg_owt-0_pre20220914:=[screencast=,X=]
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
-	x11-libs/xcb-util-keysyms
 	virtual/opengl
 	dbus? ( >=dev-cpp/glibmm-2.74.0 )
 	enchant? ( app-text/enchant:= )
@@ -71,11 +70,14 @@ RDEPEND="
 		wayland? ( dev-qt/qtwayland:6 )
 		qt6-imageformats? ( ${KIMAGEFORMATS_RDEPEND} )
 	)
-	X? ( x11-libs/libxcb:= )
+	X? (
+		x11-libs/libxcb:=
+		x11-libs/xcb-util-keysyms
+	)
 "
 DEPEND="${RDEPEND}
 	dev-cpp/range-v3
-	=dev-cpp/ms-gsl-3*
+	dev-cpp/ms-gsl
 "
 BDEPEND="
 	${PYTHON_DEPS}
@@ -86,9 +88,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram.patch"
-	"${FILESDIR}/tdesktop-3.3.0-fix-enchant.patch"
-	"${FILESDIR}/tdesktop-4.3.4-fix-disabling-spellcheck.patch"
-	"${FILESDIR}/tdesktop-4.3.4-qt5-incompatibility-1.patch"
 	"${FILESDIR}/tdesktop-4.3.4-qt5-incompatibility-2.patch"
 )
 
