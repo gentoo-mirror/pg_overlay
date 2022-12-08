@@ -155,4 +155,4 @@ x11-plugins/pidgin-skypeweb 9999: SkypeWeb Plugin for Pidgin
 x11-plugins/pidgin-telegram 1.4.7 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-plugins/purple-matrix 9999: Libpurple protocol plugin for matrix
 x11-plugins/tdlib-purple 9999: New libpurple plugin for Telegram
-x11-themes/kvantum 1.0.6: SVG-based theme engine for Qt5, KDE Plasma and LXQt
+x11-themes/kvantum 1.0.7: SVG-based theme engine for Qt5, KDE Plasma and LXQt
