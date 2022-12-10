@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-	<maintainer type="project">
-		<email>gnome@gentoo.org</email>
-		<name>Gentoo GNOME Desktop</name>
-	</maintainer>
 	<maintainer type="person">
 		<email>sam@gentoo.org</email>
 		<name>Sam James</name>
+	</maintainer>
+	<maintainer type="person">
+		<email>leio@gentoo.org</email>
+		<name>Mart Raudsepp</name>
 	</maintainer>
 	<upstream>
 		<bugs-to>https://gitlab.freedesktop.org/pipewire/pipewire/-/issues</bugs-to>
@@ -19,6 +19,7 @@
 		<flag name="echo-cancel">Enable WebRTC-based echo canceller via <pkg>media-libs/webrtc-audio-processing</pkg></flag>
 		<flag name="extra">Build pw-cat/pw-play/pw-record</flag>
 		<flag name="flatpak">Enable Flatpak support</flag>
+		<flag name="gsettings">Use gsettings (<pkg>dev-libs/glib</pkg>) to read/save used modules (useful for e.g. <pkg>media-sound/paprefs</pkg></flag>
 		<flag name="jack-client">Install a plugin for running PipeWire as a JACK client</flag>
 		<flag name="jack-sdk">Use PipeWire as JACK replacement</flag>
 		<flag name="lv2">Allow loading LV2 plugins via <pkg>media-libs/lv2</pkg></flag>
