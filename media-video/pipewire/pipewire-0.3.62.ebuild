@@ -38,7 +38,7 @@ HOMEPAGE="https://pipewire.org/"
 LICENSE="MIT LGPL-2.1+ GPL-2"
 # ABI was broken in 0.3.42 for https://gitlab.freedesktop.org/pipewire/wireplumber/-/issues/49
 SLOT="0/0.4"
-IUSE="bluetooth dbus doc echo-cancel extra flatpak gstreamer jack-client jack-sdk lv2
+IUSE="bluetooth dbus doc echo-cancel extra flatpak gstreamer gsettings jack-client jack-sdk lv2
 modemmanager pipewire-alsa readline sound-server ssl system-service systemd test udev v4l X zeroconf vulkan"
 
 # Once replacing system JACK libraries is possible, it's likely that
@@ -98,6 +98,9 @@ RDEPEND="
 		>=dev-libs/glib-2.32.0:2
 		>=media-libs/gstreamer-1.10.0:1.0
 		media-libs/gst-plugins-base:1.0
+	)
+	gsettings? (
+		>=dev-libs/glib-2.26.0:2
 	)
 	jack-client? ( >=media-sound/jack2-1.9.10:2[dbus] )
 	jack-sdk? (
@@ -193,6 +196,7 @@ multilib_src_configure() {
 		-Dinstalled_tests=disabled # Matches upstream; Gentoo never installs tests
 		$(meson_native_use_feature gstreamer)
 		$(meson_native_use_feature gstreamer gstreamer-device-provider)
+		$(meson_native_use_feature gsettings)
 		$(meson_native_use_feature systemd)
 
 		$(meson_native_use_feature system-service systemd-system-service)
