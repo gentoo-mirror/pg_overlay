@@ -153,6 +153,9 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
+
+	"${FILESDIR}"/${P}-use-after-free.patch
+	"${FILESDIR}"/${P}-distorted-avx2.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
