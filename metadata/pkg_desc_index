@@ -104,7 +104,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 0.3.62: Multimedia processing graphs
+media-video/pipewire 0.3.62-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/pidgin 2.14.10 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.4.1: Official desktop client for Telegram
@@ -124,7 +124,6 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
-net-voip/telepathy-gabble 9999: A XMPP connection manager, handles single and multi user chats and voice calls
 sci-calculators/qalculate-qt 4.4.0: Multi-purpose cross-platform desktop calculator
 sci-libs/libqalculate 4.4.0: A modern multi-purpose calculator library
 sci-mathematics/mathematica 12.3.1: Wolfram Mathematica
