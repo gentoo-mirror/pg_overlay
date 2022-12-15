@@ -145,7 +145,7 @@ virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.65.0: Virtual for Rust language compiler
 www-client/firefox 108.0: Firefox Web Browser
 x11-base/xorg-server 21.1.4: X.Org X servers
-x11-base/xwayland 22.1.5: Standalone X server running under Wayland
+x11-base/xwayland 22.1.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r2 3.24.35: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
