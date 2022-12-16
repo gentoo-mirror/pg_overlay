@@ -134,7 +134,6 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~
 # For pixma: see https://gitlab.com/sane-project/backends/-/releases/1.0.28#build
 RDEPEND="
 	acct-user/saned
-	acct-group/scanner
 	gphoto2? (
 		>=media-libs/libgphoto2-2.5.3.1:=[${MULTILIB_USEDEP}]
 		media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}]
@@ -143,7 +142,7 @@ RDEPEND="
 	sane_backends_dc210? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
 	sane_backends_dc240? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
 	sane_backends_dell1600n_net? (
-		>=media-libs/tiff-3.9.7-r1:0=[${MULTILIB_USEDEP}]
+		>=media-libs/tiff-3.9.7-r1:=[${MULTILIB_USEDEP}]
 		media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}]
 	)
 	sane_backends_escl? (
@@ -184,8 +183,6 @@ PATCHES=(
 	# https://gitlab.com/sane-project/backends/-/merge_requests/688
 	"${FILESDIR}"/${PN}-1.1.1-genesys-gl845-crash.patch
 	"${FILESDIR}"/${P}-gcc12-tests.patch
-	"${FILESDIR}"/${PN}-1.1.1-configure-clang16.patch
-	"${FILESDIR}"/${P}-musl.patch
 )
 
 MULTILIB_CHOST_TOOLS=(
@@ -262,7 +259,6 @@ multilib_src_configure() {
 		$(use_enable threads pthread)
 		$(use_with zeroconf avahi)
 	)
-
 	ECONF_SOURCE="${S}" \
 	SANEI_JPEG="sanei_jpeg.o" SANEI_JPEG_LO="sanei_jpeg.lo" \
 	BACKENDS="${lbackends}" \
@@ -329,7 +325,7 @@ multilib_src_install() {
 		printf "\n" >> "${ED}/$(get_udevdir)/hwdb.d/20-${PN}.hwdb" || die
 		tools/sane-desc -m hwdb -s doc/descriptions-external/ >> "${ED}/$(get_udevdir)/hwdb.d/20-${PN}.hwdb" || die
 		# udev rule for saned (SANE scanning daemon) to be able to write on usb port
-		udev_newrules "${FILESDIR}/66-saned.rules-r1" 66-saned.rules
+		udev_dorules "${FILESDIR}/66-saned.rules"
 	fi
 }
 
@@ -337,7 +333,7 @@ multilib_src_install_all() {
 	dodir /etc/env.d
 
 	if use systemd ; then
-		systemd_newunit "${FILESDIR}"/saned_at.service-r1 "saned@.service"
+		systemd_newunit "${FILESDIR}"/saned_at.service "saned@.service"
 		systemd_newunit "${FILESDIR}"/saned.socket saned.socket
 	fi
 
@@ -359,13 +355,7 @@ multilib_src_install_all() {
 	newconfd "${FILESDIR}"/saned.confd saned
 }
 
-pkg_postrm() {
-	udev_reload
-}
-
 pkg_postinst() {
-	udev_reload
-
 	optfeature "Network scanner backend" media-gfx/sane-airscan
 	optfeature "Epson-specific backend" media-gfx/iscan
 	optfeature "HP-specific backend" net-print/hplip
