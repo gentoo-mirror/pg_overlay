@@ -62,7 +62,7 @@ pkg_setup() {
 src_prepare() {
 	default
 	sed -i '/doxygen/d' meson.build
-	sed -i 'meson-dist/d' meson.build
+	sed -i '/meson-dist/d' meson.build
 }
 
 src_configure() {
