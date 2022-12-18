@@ -293,9 +293,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
 
-	# 7.4 branch
-	"${FILESDIR}/${PN}-7.3.5.2-gpgme-1.18.0.patch"
-
 	# backport
 	"${FILESDIR}/${PN}-7.3.7.2-boost-1.81-locale.patch"
 )
