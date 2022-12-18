@@ -37,7 +37,6 @@ IUSE_SANE_BACKENDS=(
 	epjitsu
 	epson
 	epson2
-	epsonds
 	escl
 	fujitsu
 	genesys
@@ -129,21 +128,21 @@ SRC_URI="https://gitlab.com/sane-project/backends/uploads/7d30fab4e115029d91027b
 
 LICENSE="GPL-2 public-domain"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
+KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux"
 
 # For pixma: see https://gitlab.com/sane-project/backends/-/releases/1.0.28#build
 RDEPEND="
 	acct-user/saned
 	gphoto2? (
-		>=media-libs/libgphoto2-2.5.3.1:=[${MULTILIB_USEDEP}]
 		media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}]
+		>=media-libs/libgphoto2-2.5.3.1:=[${MULTILIB_USEDEP}]
 	)
 	sane_backends_canon_pp? ( >=sys-libs/libieee1284-0.2.11-r3[${MULTILIB_USEDEP}] )
 	sane_backends_dc210? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
 	sane_backends_dc240? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
 	sane_backends_dell1600n_net? (
-		>=media-libs/tiff-3.9.7-r1:=[${MULTILIB_USEDEP}]
 		media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}]
+		>=media-libs/tiff-3.9.7-r1:=[${MULTILIB_USEDEP}]
 	)
 	sane_backends_escl? (
 		app-text/poppler[cairo]
@@ -157,8 +156,8 @@ RDEPEND="
 	sane_backends_hpsj5s? ( >=sys-libs/libieee1284-0.2.11-r3[${MULTILIB_USEDEP}] )
 	sane_backends_mustek_pp? ( >=sys-libs/libieee1284-0.2.11-r3[${MULTILIB_USEDEP}] )
 	sane_backends_pixma? ( media-libs/libjpeg-turbo:=[${MULTILIB_USEDEP}] )
-	snmp? ( net-analyzer/net-snmp:0= )
-	systemd? ( sys-apps/systemd:0= )
+	snmp? ( net-analyzer/net-snmp:= )
+	systemd? ( sys-apps/systemd:= )
 	usb? ( >=virtual/libusb-1-r1:1=[${MULTILIB_USEDEP}] )
 	v4l? ( >=media-libs/libv4l-0.9.5[${MULTILIB_USEDEP}] )
 	xinetd? ( sys-apps/xinetd )
@@ -182,7 +181,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.0.30-add_hpaio_epkowa_dll.conf.patch
 	# https://gitlab.com/sane-project/backends/-/merge_requests/688
 	"${FILESDIR}"/${PN}-1.1.1-genesys-gl845-crash.patch
-	"${FILESDIR}"/${P}-gcc12-tests.patch
 )
 
 MULTILIB_CHOST_TOOLS=(
@@ -364,4 +362,10 @@ pkg_postinst() {
 		elog "If you want remote clients to connect, edit"
 		elog "/etc/sane.d/saned.conf and /etc/hosts.allow"
 	fi
+
+	udev_reload
+}
+
+pkg_postrm() {
+	udev_reload
 }
