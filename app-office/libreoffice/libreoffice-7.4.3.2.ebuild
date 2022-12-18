@@ -286,7 +286,7 @@ else
 fi
 
 PATCHES=(
-	"${WORKDIR}"/${PATCHSET/.tar.xz/}
+	#"${WORKDIR}"/${PATCHSET/.tar.xz/}
 
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
