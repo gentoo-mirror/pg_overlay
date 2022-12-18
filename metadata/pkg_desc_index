@@ -119,6 +119,7 @@ net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
+net-p2p/nicotine+ 3.2.7: A fork of nicotine, a Soulseek client in Python
 net-p2p/qbittorrent 9999 9999-r6: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
