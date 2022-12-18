@@ -18,7 +18,7 @@ DEV_URI="
 ADDONS_URI="https://dev-www.libreoffice.org/src/"
 
 BRANDING="${PN}-branding-gentoo-0.8.tar.xz"
-# PATCHSET="${P}-patchset-01.tar.xz"
+PATCHSET="${PN}-7.3.5.2-patchset-01.tar.xz"
 
 [[ ${MY_PV} == *9999* ]] && inherit git-r3
 inherit autotools bash-completion-r1 check-reqs flag-o-matic java-pkg-opt-2 multiprocessing python-single-r1 qmake-utils toolchain-funcs xdg-utils
@@ -26,7 +26,7 @@ inherit autotools bash-completion-r1 check-reqs flag-o-matic java-pkg-opt-2 mult
 DESCRIPTION="A full office productivity suite"
 HOMEPAGE="https://www.libreoffice.org"
 SRC_URI="branding? ( https://dev.gentoo.org/~dilfridge/distfiles/${BRANDING} )"
-[[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PATCHSET}"
+[[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~xen0n/distfiles/app-office/libreoffice/${PATCHSET}"
 
 # Split modules following git/tarballs; Core MUST be first!
 # Help is used for the image generator
@@ -286,12 +286,18 @@ else
 fi
 
 PATCHES=(
-	# "${WORKDIR}"/${PATCHSET/.tar.xz/}
+	"${WORKDIR}"/${PATCHSET/.tar.xz/}
 
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
+
+	# 7.4 branch
+	"${FILESDIR}/${PN}-7.3.5.2-gpgme-1.18.0.patch"
+
+	# backport
+	"${FILESDIR}/${PN}-7.3.7.2-boost-1.81-locale.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
