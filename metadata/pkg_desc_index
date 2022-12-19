@@ -50,8 +50,7 @@ dev-python/cloudscraper 1.2.65: A Python module to bypass Cloudflare's anti-bot 
 dev-python/pymountboot 0.2.3-r1: Python extension module to (re)mount /boot
 dev-python/pysol_cards 0.14.2: Deal PySol FreeCell cards
 dev-python/python-mpd 3.0.5: Python MPD client library
-dev-qt/qtbase 6.4.9999: Cross-platform application development framework
-dev-qt/qttools 6.4.9999: Qt Tools Collection
+dev-qt/qtbase 6.5.9999: Cross-platform application development framework
 dev-qt/qtwebengine 5.15.7.9999: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -146,7 +145,7 @@ virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.66.0: Virtual for Rust language compiler
 www-client/firefox 108.0: Firefox Web Browser
 x11-base/xorg-server 21.1.4: X.Org X servers
-x11-base/xwayland 22.1.6: Standalone X server running under Wayland
+x11-base/xwayland 22.1.7: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r2 3.24.35: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
