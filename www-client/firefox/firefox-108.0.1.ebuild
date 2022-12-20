@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-108-patches-01j.tar.xz"
+FIREFOX_PATCHSET="firefox-108-patches-03j.tar.xz"
 
 LLVM_MAX_SLOT=15
 
@@ -195,14 +195,14 @@ RDEPEND="${COMMON_DEPEND}
 	openh264? ( media-libs/openh264:*[plugin] )
 	pulseaudio? (
 		|| (
-			media-sound/pulseaudio
+			media-libs/libpulse
 			>=media-sound/apulse-0.1.12-r4
 		)
 	)"
 DEPEND="${COMMON_DEPEND}
 	pulseaudio? (
 		|| (
-			media-sound/pulseaudio
+			media-libs/libpulse
 			>=media-sound/apulse-0.1.12-r4[sdk]
 		)
 	)
