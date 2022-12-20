@@ -1,0 +1,14 @@
+BDEPEND=dev-util/intltool sys-devel/gettext virtual/pkgconfig sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure prepare unpack
+DEPEND=media-video/ffmpeg:0= x11-libs/wxGTK:3.1-gtk3
+DESCRIPTION=Analyse your audio files by showing their spectrogram
+EAPI=8
+HOMEPAGE=http://spek.cc
+INHERIT=autotools git-r3 wxwidgets
+KEYWORDS=~amd64
+LICENSE=GPL-3
+PROPERTIES=live
+RDEPEND=media-video/ffmpeg:0= x11-libs/wxGTK:3.1-gtk3
+SLOT=0
+_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	37a4612ce5522df5a100359a8dbc8491	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	241a8f577b9781a42a7421e53448a44e	autotools	6dcd6b6a486e79928e1243ff9ba41fcc	git-r3	2347f8fe2d392b2a091191f94be37e6f	flag-o-matic	69394e25812406faa1f90edaf4969395	wxwidgets	146456225a30c4c2ec106117390fb7ff
+_md5_=e5292db8330238abe0122e71d0929b70
