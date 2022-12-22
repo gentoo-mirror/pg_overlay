@@ -1,0 +1,17 @@
+BDEPEND=virtual/pkgconfig nls? ( dev-util/intltool ) sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure install postinst postrm preinst prepare unpack
+DEPEND=>=dev-libs/dbus-glib-0.60 >=dev-libs/glib-2.28 dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 >=x11-libs/cairo-1.2.6 >=x11-libs/pango-1.8.0 virtual/freedesktop-icon-theme
+DESCRIPTION=Lightweight and versatile audio player
+EAPI=8
+HOMEPAGE=https://audacious-media-player.org/
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=autotools git-r3 plocale xdg
+IUSE=nls
+LICENSE=BSD-2
+PDEPEND=~media-plugins/audacious-plugins-9999
+PROPERTIES=live
+RDEPEND=>=dev-libs/dbus-glib-0.60 >=dev-libs/glib-2.28 dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 >=x11-libs/cairo-1.2.6 >=x11-libs/pango-1.8.0 virtual/freedesktop-icon-theme
+SLOT=0
+SRC_URI=mirror://gentoo/gentoo_ice-xmms-0.2.tar.bz2
+_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	37a4612ce5522df5a100359a8dbc8491	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	241a8f577b9781a42a7421e53448a44e	autotools	6dcd6b6a486e79928e1243ff9ba41fcc	git-r3	2347f8fe2d392b2a091191f94be37e6f	plocale	7ce00136a77130df46fbbd5966f98a61	xdg-utils	ac0e315a3688929e34ac75b139e7349a	xdg	6024fbc93167fad782e2032933654857
+_md5_=12b50fb12740293e9d8c7a4a0cd720dd
