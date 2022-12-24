@@ -18,8 +18,8 @@ LICENSE="
 	wavpack? ( BSD )
 "
 SLOT="0"
-KEYWORDS="~amd64 ~x86"
-IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys mp3 musepack nls notify nullout opus oss pulseaudio shellexec +supereq threads vorbis +mac +wavpack +zip"
+KEYWORDS="~amd64 ~riscv ~x86"
+IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys lastfm libsamplerate mp3 musepack nls notify +nullout opus oss pulseaudio sc68 shellexec +supereq threads vorbis wavpack mac zip"
 
 REQUIRED_USE="
 	|| ( alsa oss pulseaudio nullout )
@@ -27,35 +27,38 @@ REQUIRED_USE="
 
 DEPEND="
 	x11-libs/gtk+:3
-	net-misc/curl:0=
+	net-misc/curl:=
 	dev-libs/jansson:=
-	dev-libs/libdispatch
 	aac? ( media-libs/faad2 )
 	alsa? ( media-libs/alsa-lib )
 	cdda? (
-		dev-libs/libcdio:0=
+		dev-libs/libcdio:=
 		media-libs/libcddb
-		dev-libs/libcdio-paranoia:0=
+		dev-libs/libcdio-paranoia:=
+	)
+	cover? (
+		media-libs/imlib2[jpeg,png]
 	)
 	dts? ( media-libs/libdca )
 	ffmpeg? ( media-video/ffmpeg )
 	flac? (
-		media-libs/flac
+		media-libs/flac:=
 		media-libs/libogg
 	)
+	libsamplerate? ( media-libs/libsamplerate )
 	mp3? ( media-sound/mpg123 )
 	musepack? ( media-sound/musepack-tools )
 	nls? ( virtual/libintl )
 	notify? (
 		sys-apps/dbus
-		dev-libs/libdispatch
 	)
-	opus? ( media-libs/opusfile	)
+	opus? ( media-libs/opusfile )
 	pulseaudio? ( media-sound/pulseaudio )
 	vorbis? ( media-libs/libvorbis )
 	mac? ( dev-lang/yasm )
 	wavpack? ( media-sound/wavpack )
 	zip? ( dev-libs/libzip )
+	dev-libs/libdispatch:=
 "
 
 RDEPEND="${DEPEND}"
@@ -139,17 +142,14 @@ src_configure () {
 		"--disable-dumb"
 		"--disable-alac"
 		"--disable-gme"
-		"--disable-lfm"
 		"--disable-mms"
 		"--disable-mono2stereo"
 		"--disable-psf"
 		"--disable-rgscanner"
-		"--disable-sc68"
 		"--disable-shn"
 		"--disable-sid"
 		"--disable-sndfile"
 		"--disable-soundtouch"
-		"--disable-src"
 		"--disable-tta"
 		"--disable-vtx"
 		"--disable-wildmidi"
@@ -178,8 +178,12 @@ src_configure () {
 		"$(use_enable notify)"
 		"$(use_enable nullout)"
 		"$(use_enable opus)"
+		"$(use_enable pulseaudio pulse)"
+		"$(use_enable sc68)"
 		"$(use_enable shellexec)"
 		"$(use_enable shellexec shellexecui)"
+		"$(use_enable lastfm lfm)"
+		"$(use_enable libsamplerate src)"
 		"$(use_enable wavpack)"
 		"$(use_enable zip vfs-zip)"
 
