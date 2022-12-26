@@ -44,8 +44,9 @@ BDEPEND="dev-qt/qttools:6[linguist]
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
 
 src_prepare() {
-	sed -i "s/QBT_VERSION_MINOR 5/QBT_VERSION_MINOR 4/g" src/base/version.h.in
-	sed -i "s/QBT_VERSION_BUGFIX 0/QBT_VERSION_BUGFIX 5/g" src/base/version.h.in
+	sed -i "s/QBT_VERSION_MINOR 6/QBT_VERSION_MINOR 5/g" src/base/version.h.in
+#	sed -i "s/QBT_VERSION_BUGFIX 0/QBT_VERSION_BUGFIX 5/g" src/base/version.h.in
+	sed -i "s/alpha1//g" src/base/version.h.in
 	sed -i "s/beta1//g" src/base/version.h.in
 
 	MULTIBUILD_VARIANTS=( base )
