@@ -1,13 +1,13 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit flag-o-matic systemd usr-ldscript
+inherit flag-o-matic systemd usr-ldscript poly-c_ebuilds
 
 DESCRIPTION="XFS filesystem utilities"
 HOMEPAGE="https://xfs.wiki.kernel.org/"
-SRC_URI="https://www.kernel.org/pub/linux/utils/fs/xfs/${PN}/${P}.tar.xz"
+SRC_URI="https://www.kernel.org/pub/linux/utils/fs/xfs/${PN}/${MY_P}.tag.xz -> ${MY_P}.tar.xz"
 
 LICENSE="LGPL-2.1"
 SLOT="0"
@@ -26,6 +26,7 @@ RDEPEND+=" selinux? ( sec-policy/selinux-xfs )"
 PATCHES=(
 	"${FILESDIR}"/${PN}-5.3.0-libdir.patch
 	"${FILESDIR}"/${PN}-5.18.0-docdir.patch
+	"${FILESDIR}"/${PN}-5.18.0-include.patch
 )
 
 src_prepare() {
