@@ -6,27 +6,27 @@ EAPI=8
 PYTHON_COMPAT=( python3_{9..11} )
 DISTUTILS_USE_PEP517=setuptools
 
-inherit distutils-r1 xdg-utils git-r3
+inherit distutils-r1 xdg-utils
 
 DESCRIPTION="A fork of nicotine, a Soulseek client in Python"
 HOMEPAGE="https://github.com/Nicotine-Plus/nicotine-plus"
-EGIT_REPO_URI="https://github.com/nicotine-plus/nicotine-plus.git"
+SRC_URI="https://github.com/Nicotine-Plus/nicotine-plus/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-3 LGPL-3"
 SLOT="0"
-KEYWORDS=""
+KEYWORDS="amd64 ~ppc x86"
 IUSE=""
 
 DEPEND="${PYTHON_DEPS}"
 RDEPEND="
 	dev-python/pygobject:3[${PYTHON_USEDEP}]
-	gui-libs/gtk:4[introspection]
+	x11-libs/gtk+:3[introspection]
 	${DEPEND}
 "
 
 DEPEND="${RDEPEND}"
 
-#S="${WORKDIR}/nicotine-plus-${PV}"
+S="${WORKDIR}/nicotine-plus-${PV}"
 
 EPYTEST_IGNORE=(
 	"test/integration/test_startup.py"
