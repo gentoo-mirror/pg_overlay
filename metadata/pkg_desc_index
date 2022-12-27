@@ -134,11 +134,12 @@ sys-auth/pambase 20220214: PAM base configuration files
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/lvm2 2.03.16-r1 2.03.17_pre: User-land utilities for LVM2 (device-mapper) software
 sys-fs/udisks 2.9.4-r1: Daemon providing interfaces to work with storage devices
-sys-fs/xfsprogs 5.19.0 6.0.0_rc0: XFS filesystem utilities
+sys-fs/xfsprogs 6.0.0_rc0 6.1.0_pre: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/ncurses 6.3_p20220122: console display library
 sys-libs/polly 15.0.6: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
+sys-process/procps 4.0.2_pre: Standard informational utilities and process-handling tools
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.66.0: Virtual for Rust language compiler
