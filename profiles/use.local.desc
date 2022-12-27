@@ -105,8 +105,6 @@ gui-libs/wlroots:X - Enable support for X11 applications (XWayland)
 gui-libs/wlroots:tinywl - Install the minimal wayland client, tinywl
 gui-libs/wlroots:vulkan - Enable support for the vulkan backend renderer
 gui-libs/wlroots:x11-backend - Enable support for handling input/output devices through x11-libs/libxcb
-gui-wm/kwinft:multimedia - Enable effect video button in desktop effects KCM
-gui-wm/kwinft:tools - Build internal tools for performance analysis at runtime.
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
