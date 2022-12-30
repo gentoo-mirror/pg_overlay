@@ -22,7 +22,7 @@ RDEPEND="
 	>=app-text/hunspell-1.2:=
 	dev-libs/eb
 	dev-libs/lzo
-	dev-qt/qtbase:6 [gui,network,sql,widgets,xml]
+	dev-qt/qtbase:6[gui,network,sql,widgets,xml]
 	dev-qt/qtsvg:6
 	dev-qt/qtwebengine:6
 	media-libs/libvorbis
