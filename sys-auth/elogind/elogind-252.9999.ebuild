@@ -14,9 +14,10 @@ EGIT_SUBMODULES=()
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
 KEYWORDS=""
-IUSE="+acl debug doc efi +pam +policykit selinux"
+IUSE="+acl audit cgroup-hybrid debug doc efi +pam +policykit selinux"
 
 COMMON_DEPEND="
+	audit? ( sys-process/audit )
 	sys-apps/util-linux
 	sys-libs/libcap
 	virtual/libudev:=
@@ -48,9 +49,7 @@ PATCHES=(
 pkg_setup() {
 	local CONFIG_CHECK="~CGROUPS ~EPOLL ~INOTIFY_USER ~SIGNALFD ~TIMERFD"
 
-	if use kernel_linux; then
-		linux-info_pkg_setup
-	fi
+	use kernel_linux && linux-info_pkg_setup
 }
 
 src_prepare() {
@@ -59,33 +58,22 @@ src_prepare() {
 }
 
 src_configure() {
-	local rccgroupmode="$(grep rc_cgroup_mode /etc/rc.conf | cut -d '"' -f 2)"
-	local cgroupmode="legacy"
-	local debugmode=""
-
-	if [[ "xhybrid" = "x${rccgroupmode}" ]]; then
+	if use cgroup-hybrid; then
 		cgroupmode="hybrid"
-	elif [[ "xunified" = "x${rccgroupmode}" ]]; then
+	else
 		cgroupmode="unified"
 	fi
-
-	if use debug; then
-		debugmode="-Ddebug-extra=elogind"
-	fi
-
-	# Duplicating C[XX]FLAGS in LDFLAGS is deprecated and will become
-	# a hard error in future meson versions:
-	filter-ldflags $CFLAGS $CXXFLAGS
 
 	local emesonargs=(
 		$debugmode
 		--buildtype $(usex debug debug release)
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
 		-Dacl=$(usex acl true false)
+		-Daudit=$(usex audit true false)
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
 		-Dcgroup-controller=openrc
 		-Ddefault-hierarchy=${cgroupmode}
-		-Ddefault-kill-user-processes=false
+		-Ddefault-kill-user-processes=true
 		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
 		-Defi=$(usex efi true false)
 		-Dhtml=$(usex doc auto false)
