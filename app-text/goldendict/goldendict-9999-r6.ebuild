@@ -73,7 +73,7 @@ src_configure() {
 	fi
 
 	myconf+=( CONFIG+=no_qtmultimedia_player )
-	eqmake6 "${myconf[@]}" ${PN}.pro
+	qmake6 "${myconf[@]}" ${PN}.pro
 }
 
 install_locale() {
