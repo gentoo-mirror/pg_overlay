@@ -319,6 +319,7 @@ net-p2p/transmission:mbedtls - Use mbed TLS instead of OpenSSL
 net-p2p/transmission-remote-gtk:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration.
 net-print/samsung-unified-driver:network - Enable network printing support
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-auth/pambase:debug - Enable debug information logging on syslog(3) for all the modules supporting this in the system authentication and system login stacks.
 sys-auth/pambase:elogind - Use pam_elogind module to register user sessions with elogind.
 sys-auth/pambase:homed - Use pam_systemd_home module to manage home directories with the systemd-homed service
