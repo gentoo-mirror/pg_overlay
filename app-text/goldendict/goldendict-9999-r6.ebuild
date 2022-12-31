@@ -37,6 +37,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="
 	dev-qt/qttools:6[assistant,linguist]
+	dev-qt/qtsingleapplication[X]
 	virtual/pkgconfig
 "
 

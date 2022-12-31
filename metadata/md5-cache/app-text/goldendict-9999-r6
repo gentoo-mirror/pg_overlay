@@ -1,4 +1,4 @@
-BDEPEND=dev-qt/qttools:6[assistant,linguist] virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
+BDEPEND=dev-qt/qttools:6[assistant,linguist] dev-qt/qtsingleapplication[X] virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=configure install prepare unpack
 DEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-libs/libao media-video/ffmpeg:0= )
 DESCRIPTION=Feature-rich dictionary lookup program
@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-libs/libao media-video/ffmpeg:0= )
 SLOT=0
 _eclasses_=desktop	7eb20ad915a0a318176d51bc2508ff5c	git-r3	2347f8fe2d392b2a091191f94be37e6f	toolchain-funcs	37a4612ce5522df5a100359a8dbc8491	multilib	5ca4e49abed8e3a2f7b56920eadee157	qmake-utils	59420c906278d16deaaa629f9d115707	plocale	950fbaec7deeba41b5bcc0572cca99b9
-_md5_=780d9ce3bde1f6bf0efdadf15163e402
+_md5_=cef118734921113ab7e49de789890dcd
