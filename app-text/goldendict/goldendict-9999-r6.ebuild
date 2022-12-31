@@ -23,6 +23,7 @@ RDEPEND="
 	dev-libs/eb
 	dev-libs/lzo
 	dev-qt/qtbase:6[gui,network,sql,widgets,xml]
+	dev-qt/qtmultimedia:6
 	dev-qt/qtsvg:6
 	dev-qt/qtwebengine:6
 	media-libs/libvorbis
@@ -35,7 +36,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
-	dev-qt/qttools:6[linguist]
+	dev-qt/qttools:6[assistant,linguist]
 	virtual/pkgconfig
 "
 
