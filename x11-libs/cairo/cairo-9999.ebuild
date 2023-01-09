@@ -47,7 +47,6 @@ DEPEND="${RDEPEND}
 BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.12.18-disable-test-suite.patch
 	"${FILESDIR}"/${PN}-respect-fontconfig.patch
 	"${FILESDIR}"/${PN}-server-side-gradients.patch  
 	"${FILESDIR}"/${PN}-webkit-html5-fix.patch
