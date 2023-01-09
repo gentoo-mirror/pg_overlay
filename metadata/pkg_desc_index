@@ -25,6 +25,7 @@ app-text/asciidoc 10.2.0: A plain text human readable/writable document format
 app-text/goldendict 9999 9999-r1 9999-r6: Feature-rich dictionary lookup program
 dev-cpp/abseil-cpp 20220623.1: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
+dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
