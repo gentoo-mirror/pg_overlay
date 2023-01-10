@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PLOCALES="de es fr it pl pt_BR ro_RO ru sk zh_CN"
+PLOCALES="af_ZA ar_SA ca_ES cs_CZ da_DK de_DE el_GR en_US es_ES fa_IR fi_FI fr_FR he_IL hu_HU it_IT ja_JP ko_KR nl_NL no_NO pl_PL pt_BR pt_PT ro_RO ru_RU sk_SK sr_SP sv_SE tr_TR uk_UA vi_VN zh_CN zh_TW"
 inherit desktop plocale toolchain-funcs qmake-utils xdg
 
 DESCRIPTION="Powerful cross-platform SQLite database manager"
