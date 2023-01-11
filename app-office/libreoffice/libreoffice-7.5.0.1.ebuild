@@ -162,7 +162,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/libvisio-0.1.0
 	media-libs/libzmf
 	media-libs/openjpeg:=
-	media-libs/zxing-cpp:0/1.4
+	=media-libs/zxing-cpp:0/1.4=
 	>=net-libs/neon-0.31.1:=
 	net-misc/curl
 	sci-mathematics/lpsolve
