@@ -20,7 +20,8 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+dbus +gui webui"
+IUSE="+dbus +gui test webui"
+RESTRICT="!test? ( test )"
 REQUIRED_USE="dbus? ( gui )
 	|| ( gui webui )"
 
@@ -49,8 +50,9 @@ src_prepare() {
 	sed -i "s/alpha1//g" src/base/version.h.in
 	sed -i "s/beta1//g" src/base/version.h.in
 
-	MULTIBUILD_VARIANTS=( base )
-	use webui && MULTIBUILD_VARIANTS+=( webui )
+	MULTIBUILD_VARIANTS=()
+	use gui && MULTIBUILD_VARIANTS+=( gui )
+	use webui && MULTIBUILD_VARIANTS+=( nogui )
 
 	cmake_src_prepare
 }
@@ -58,8 +60,6 @@ src_prepare() {
 src_configure() {
 	multibuild_src_configure() {
 		local mycmakeargs=(
-			-DDBUS=$(usex dbus)
-
 			# musl lacks execinfo.h
 			-DSTACKTRACE=OFF
 
@@ -73,17 +73,29 @@ src_configure() {
 
 			# We do these in multibuild, see bug #839531 for why.
 			# Fedora has to do the same thing.
-			-DGUI=$(usex gui)
+			-DWEBUI=$(usex webui)
+
 			-DCMAKE_BUILD_TYPE=Release
+
+			-DTESTING=$(usex test)
 		)
 
-		if [[ ${MULTIBUILD_VARIANT} == webui ]] ; then
+		if [[ ${MULTIBUILD_VARIANT} == gui ]] ; then
+			# We do this in multibuild, see bug #839531 for why.
+			# Fedora has to do the same thing.
 			mycmakeargs+=(
-				-DGUI=OFF
-				-DWEBUI=ON
+				-DGUI=ON
+				-DDBUS=$(usex dbus)
+				-DSYSTEMD=OFF
 			)
 		else
-			mycmakeargs+=( -DWEBUI=OFF )
+			mycmakeargs+=(
+				-DGUI=OFF
+				-DDBUS=OFF
+				# The systemd service calls qbittorrent-nox, which is only
+				# installed when GUI=OFF.
+				-DSYSTEMD=OFF
+			)
 		fi
 
 		cmake_src_configure
@@ -98,11 +110,5 @@ src_compile() {
 
 src_install() {
 	multibuild_foreach_variant cmake_src_install
-
-	if ! use webui ; then
-		# No || die deliberately as it doesn't always exist
-		rm "${D}/$(systemd_get_systemunitdir)"/qbittorrent-nox*.service
-	fi
-
 	einstalldocs
 }
