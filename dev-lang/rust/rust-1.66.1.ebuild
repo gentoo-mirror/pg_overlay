@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,7 +19,7 @@ else
 	SLOT="stable/${ABI_VER}"
 	MY_P="rustc-${PV}"
 	SRC="${MY_P}-src.tar.xz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc64 ~riscv ~sparc ~x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ppc64 ~riscv ~sparc ~x86"
 fi
 
 RUST_STAGE0_VERSION=${PV}
@@ -40,7 +40,7 @@ ALL_LLVM_TARGETS=( AArch64 AMDGPU ARM AVR BPF Hexagon Lanai Mips MSP430
 ALL_LLVM_TARGETS=( "${ALL_LLVM_TARGETS[@]/#/llvm_targets_}" )
 LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/(-)?}
 
-LICENSE="|| ( MIT Apache-2.0 ) BSD-1 BSD-2 BSD-4 UoI-NCSA"
+LICENSE="|| ( MIT Apache-2.0 ) BSD BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
 IUSE="clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind miri nightly parallel-compiler profiler rls rustfmt rust-analyzer rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
@@ -125,6 +125,8 @@ RDEPEND="${DEPEND}
 	sys-apps/lsb-release
 "
 
+# FIXME: https://bugs.gentoo.org/874885
+# rust-analyzer should work with wasm, but currently does not
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	miri? ( nightly )
 	parallel-compiler? ( nightly )
@@ -210,7 +212,6 @@ pre_build_checks() {
 	fi
 	M=$(( $(usex clippy 128 0) + ${M} ))
 	M=$(( $(usex miri 128 0) + ${M} ))
-	M=$(( $(usex rls 512 0) + ${M} ))
 	M=$(( $(usex rustfmt 256 0) + ${M} ))
 	# add 2G if we compile llvm and 256M per llvm_target
 	if ! use system-llvm; then
@@ -274,6 +275,16 @@ pkg_setup() {
 }
 
 src_prepare() {
+	# this supidity is needed because patch is too large to be in filesdir
+	# and if we move it to devspace - it lacks checksum for sig verification
+	if [[ "${PV}" == 1.66.1 ]]; then
+			sed -i \
+			-e 's/516ba32a547b46a8e80ad20d4a17bf24a00bff0b69b74f56df119f770f3dfff6/fc7eb88c2f5104865379128b76767d36ce5b5fdb9f3483e683d150e514ebc3a3/' \
+			-e 's/fba10dc8ca9eaf4d481cb82bd1540cf5c05620533c44f917c09a22ea55ef408c/9cc4d1b4511a1f0d91231eb0f11c67ae5e8e38e4becd0bf5eb9e26d043796056/' \
+			vendor/rustix/.cargo-checksum.json || die
+	else
+		die "remove sed mr forgetful maintainer"
+	fi
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
@@ -348,7 +359,7 @@ src_configure() {
 	use profiler && tools+=',"rust-demangler"'
 	use rls && tools+=',"rls","analysis"'
 	use rustfmt && tools+=',"rustfmt"'
-	use rust-analyzer && tools+=',"rust-analyzer"'
+	use rust-analyzer && tools+=',"rust-analyzer","analysis"'
 	use rust-src && tools+=',"src"'
 
 	local rust_stage0_root
