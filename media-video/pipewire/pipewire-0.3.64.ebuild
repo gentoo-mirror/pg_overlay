@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -153,10 +153,6 @@ DOCS=( {README,INSTALL}.md NEWS )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
-	"${FILESDIR}"/${P}-alsa-node-target.patch
-	"${FILESDIR}"/${P}-bluez-ldac_abr.patch
-	"${FILESDIR}"/${P}-bluetooth-typo.patch
-	"${FILESDIR}"/${P}-rate-update.patch
 )
 
 # limitsdfile related code taken from =sys-auth/realtime-base-0.1
