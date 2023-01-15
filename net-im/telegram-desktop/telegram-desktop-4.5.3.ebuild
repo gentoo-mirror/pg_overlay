@@ -41,7 +41,7 @@ RDEPEND="
 	dev-libs/xxhash
 	media-libs/fontconfig:=
 	media-libs/libjpeg-turbo:=
-	~media-libs/libtgvoip-2.4.4_p20220503
+	~media-libs/libtgvoip-2.4.4_p20221229
 	media-libs/openal
 	media-libs/opus:=
 	media-libs/rnnoise
