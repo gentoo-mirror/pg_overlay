@@ -1,0 +1,37 @@
+diff -up firefox-109.0/dom/media/gmp/GMPSharedMemManager.h.1663844 firefox-109.0/dom/media/gmp/GMPSharedMemManager.h
+--- firefox-109.0/dom/media/gmp/GMPSharedMemManager.h.1663844	2023-01-09 20:34:10.000000000 +0100
++++ firefox-109.0/dom/media/gmp/GMPSharedMemManager.h	2023-01-12 09:28:56.035741438 +0100
+@@ -26,7 +26,7 @@ class GMPSharedMem {
+   // returned to the parent pool (which is not included).  If more than
+   // this are needed, we presume the client has either crashed or hung
+   // (perhaps temporarily).
+-  static const uint32_t kGMPBufLimit = 20;
++  static const uint32_t kGMPBufLimit = 40;
+ 
+   GMPSharedMem() {
+     for (size_t i = 0; i < sizeof(mGmpAllocated) / sizeof(mGmpAllocated[0]);
+diff -up firefox-109.0/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp.1663844 firefox-109.0/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp
+--- firefox-109.0/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp.1663844	2023-01-09 20:34:10.000000000 +0100
++++ firefox-109.0/dom/media/platforms/agnostic/gmp/GMPDecoderModule.cpp	2023-01-12 09:28:56.036741473 +0100
+@@ -84,6 +84,9 @@ media::DecodeSupportSet GMPDecoderModule
+ 
+ media::DecodeSupportSet GMPDecoderModule::SupportsMimeType(
+     const nsACString& aMimeType, DecoderDoctorDiagnostics* aDiagnostics) const {
++  if (MP4Decoder::IsH264(aMimeType)) {
++    return media::DecodeSupport::SoftwareDecode;
++  }
+   return media::DecodeSupport::Unsupported;
+ }
+ 
+diff -up firefox-109.0/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp.1663844 firefox-109.0/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp
+--- firefox-109.0/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp.1663844	2023-01-12 09:28:56.036741473 +0100
++++ firefox-109.0/dom/media/platforms/agnostic/gmp/GMPVideoDecoder.cpp	2023-01-12 14:18:12.354866405 +0100
+@@ -81,6 +81,8 @@ void GMPVideoDecoder::Decoded(GMPVideoi4
+                                 });
+ 
+     mDecodedData.AppendElement(std::move(v));
++    mDecodePromise.ResolveIfExists(std::move(mDecodedData), __func__);
++    mDecodedData = DecodedData();
+   } else {
+     mDecodedData.Clear();
+     mDecodePromise.RejectIfExists(
