@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-108-patches-03j.tar.xz"
+FIREFOX_PATCHSET="firefox-109-patches-02j.tar.xz"
 
 LLVM_MAX_SLOT=15
 
@@ -103,6 +103,7 @@ BDEPEND="${PYTHON_DEPS}
 			)
 		)
 	)
+	app-alternatives/awk
 	app-arch/unzip
 	app-arch/zip
 	>=dev-util/cbindgen-0.24.3
@@ -127,7 +128,7 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.85
+	>=dev-libs/nss-3.86
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
@@ -751,6 +752,7 @@ src_configure() {
 
 	# Initialize MOZCONFIG
 	mozconfig_add_options_ac '' --enable-application=browser
+	mozconfig_add_options_ac '' --enable-project=browser
 
 	# Set Gentoo defaults
 	export MOZILLA_OFFICIAL=1
@@ -924,7 +926,10 @@ src_configure() {
 	mozconfig_use_enable debug
 	if use debug ; then
 		mozconfig_add_options_ac '+debug' --disable-optimize
+		mozconfig_add_options_ac '+debug' --enable-real-time-tracing
 	else
+		mozconfig_add_options_ac 'Gentoo defaults' --disable-real-time-tracing
+
 		if is-flag '-g*' ; then
 			if use clang ; then
 				mozconfig_add_options_ac 'from CFLAGS' --enable-debug-symbols=$(get-flag '-g*')

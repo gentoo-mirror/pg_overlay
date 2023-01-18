@@ -1,0 +1,18 @@
+diff --git a/widget/gtk/MozContainerWayland.cpp b/widget/gtk/MozContainerWayland.cpp
+--- a/widget/gtk/MozContainerWayland.cpp
++++ b/widget/gtk/MozContainerWayland.cpp
+@@ -702,10 +702,13 @@
+ 
+ bool moz_container_wayland_egl_window_needs_size_update(MozContainer* container,
+                                                         nsIntSize aSize,
+                                                         int aScale) {
+   MozContainerWayland* wl_container = &container->wl_container;
++  if (!wl_container->eglwindow) {
++    return false;
++  }
+   if (wl_container->buffer_scale != aScale) {
+     return true;
+   }
+   nsIntSize recentSize;
+   wl_egl_window_get_attached_size(wl_container->eglwindow, &recentSize.width,
+

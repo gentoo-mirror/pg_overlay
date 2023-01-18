@@ -1,0 +1,507 @@
+diff -up firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.cpp.1809162 firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.cpp
+--- firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.cpp.1809162	2023-01-12 21:02:00.000000000 +0100
++++ firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.cpp	2023-01-17 21:12:16.926871788 +0100
+@@ -9,6 +9,7 @@
+ #include "FFmpegLog.h"
+ #include "mozilla/widget/DMABufLibWrapper.h"
+ #include "libavutil/pixfmt.h"
++#include "mozilla/gfx/gfxVars.h"
+ 
+ #ifdef MOZ_LOGGING
+ #  undef DMABUF_LOG
+@@ -87,7 +88,10 @@ VideoFrameSurface<LIBAV_VER>::~VideoFram
+ }
+ 
+ VideoFramePool<LIBAV_VER>::VideoFramePool()
+-    : mSurfaceLock("VideoFramePoolSurfaceLock") {}
++    : mSurfaceLock("VideoFramePoolSurfaceLock"),
++      mSurfaceCopy(!gfx::gfxVars::HwDecodedVideoZeroCopy()) {
++  DMABUF_LOG("VideoFramePool::VideoFramePool() surface copy %d", mSurfaceCopy);
++}
+ 
+ VideoFramePool<LIBAV_VER>::~VideoFramePool() {
+   MutexAutoLock lock(mSurfaceLock);
+@@ -127,34 +131,34 @@ VideoFramePool<LIBAV_VER>::GetVideoFrame
+   }
+ 
+   MutexAutoLock lock(mSurfaceLock);
++  RefPtr<DMABufSurfaceYUV> surface;
+   RefPtr<VideoFrameSurface<LIBAV_VER>> videoSurface =
+       GetFreeVideoFrameSurface();
+   if (!videoSurface) {
+-    RefPtr<DMABufSurfaceYUV> surface =
+-        DMABufSurfaceYUV::CreateYUVSurface(aVaDesc, aWidth, aHeight);
+-    if (!surface) {
+-      return nullptr;
+-    }
+     DMABUF_LOG("Created new VA-API DMABufSurface UID %d", surface->GetUID());
+-    RefPtr<VideoFrameSurface<LIBAV_VER>> surf =
+-        new VideoFrameSurface<LIBAV_VER>(surface);
+-    if (!mTextureCreationWorks) {
+-      mTextureCreationWorks = Some(surface->VerifyTextureCreation());
+-    }
+-    if (!*mTextureCreationWorks) {
+-      DMABUF_LOG("  failed to create texture over DMABuf memory!");
+-      return nullptr;
+-    }
+-    videoSurface = surf;
+-    mDMABufSurfaces.AppendElement(std::move(surf));
++    surface = new DMABufSurfaceYUV();
++    videoSurface = new VideoFrameSurface<LIBAV_VER>(surface);
++    mDMABufSurfaces.AppendElement(videoSurface);
+   } else {
+-    RefPtr<DMABufSurfaceYUV> surface = videoSurface->GetDMABufSurface();
++    surface = videoSurface->GetDMABufSurface();
+     DMABUF_LOG("Reusing VA-API DMABufSurface UID %d", surface->GetUID());
+-    if (!surface->UpdateYUVData(aVaDesc, aWidth, aHeight)) {
++  }
++
++  if (!surface->UpdateYUVData(aVaDesc, aWidth, aHeight, mSurfaceCopy)) {
++    return nullptr;
++  }
++
++  if (MOZ_UNLIKELY(!mTextureCreationWorks)) {
++    mTextureCreationWorks = Some(surface->VerifyTextureCreation());
++    if (!*mTextureCreationWorks) {
++      DMABUF_LOG("  failed to create texture over DMABuf memory!");
+       return nullptr;
+     }
+   }
+-  videoSurface->LockVAAPIData(aAVCodecContext, aAVFrame, aLib);
++
++  if (!mSurfaceCopy) {
++    videoSurface->LockVAAPIData(aAVCodecContext, aAVFrame, aLib);
++  }
+   videoSurface->MarkAsUsed();
+   return videoSurface;
+ }
+diff -up firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.h.1809162 firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.h
+--- firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.h.1809162	2023-01-12 21:02:00.000000000 +0100
++++ firefox-109.0/dom/media/platforms/ffmpeg/FFmpegVideoFramePool.h	2023-01-17 14:34:01.738414382 +0100
+@@ -129,6 +129,8 @@ class VideoFramePool<LIBAV_VER> {
+   // We may fail to create texture over DMABuf memory due to driver bugs so
+   // check that before we export first DMABuf video frame.
+   Maybe<bool> mTextureCreationWorks;
++  // Copy decoded dmabuf surfaces so we can return them to ffmpeg immediately.
++  const bool mSurfaceCopy;
+ };
+ 
+ }  // namespace mozilla
+diff -up firefox-109.0/gfx/thebes/gfxPlatformGtk.cpp.1809162 firefox-109.0/gfx/thebes/gfxPlatformGtk.cpp
+--- firefox-109.0/gfx/thebes/gfxPlatformGtk.cpp.1809162	2023-01-12 21:02:01.000000000 +0100
++++ firefox-109.0/gfx/thebes/gfxPlatformGtk.cpp	2023-01-17 14:34:01.738414382 +0100
+@@ -253,6 +253,34 @@ bool gfxPlatformGtk::InitVAAPIConfig(boo
+     feature.ForceDisable(FeatureStatus::Unavailable, "Requires EGL",
+                          "FEATURE_FAILURE_REQUIRES_EGL"_ns);
+   }
++
++  if (feature.IsEnabled()) {
++    FeatureState& featureZeroCopyDecode =
++        gfxConfig::GetFeature(Feature::HW_DECODED_VIDEO_ZERO_COPY);
++    featureZeroCopyDecode.EnableByDefault();
++
++    if (!StaticPrefs::media_ffmpeg_vaapi_zero_copy_enabled_AtStartup()) {
++      featureZeroCopyDecode.UserDisable("Disabled by pref",
++                                        "FEATURE_FAILURE_USER_DISABLED"_ns);
++    } else {
++      if (NS_FAILED(gfxInfo->GetFeatureStatus(
++              nsIGfxInfo::FEATURE_HW_DECODED_VIDEO_ZERO_COPY, failureId,
++              &status))) {
++        featureZeroCopyDecode.DisableByDefault(
++            FeatureStatus::BlockedNoGfxInfo, "gfxInfo is broken",
++            "FEATURE_FAILURE_WR_NO_GFX_INFO"_ns);
++      } else if (status != nsIGfxInfo::FEATURE_ALLOW_ALWAYS) {
++        featureZeroCopyDecode.DisableByDefault(
++            FeatureStatus::Blocked, "Blocklisted by gfxInfo", failureId);
++      }
++      if (StaticPrefs::media_ffmpeg_vaapi_zero_copy_force_enabled_AtStartup()) {
++        featureZeroCopyDecode.UserForceEnable("Force enabled by pref");
++      }
++      if (featureZeroCopyDecode.IsEnabled()) {
++        gfxVars::SetHwDecodedVideoZeroCopy(true);
++      }
++    }
++  }
+ #else
+   feature.DisableByDefault(FeatureStatus::Unavailable,
+                            "Wayland support missing",
+diff -up firefox-109.0/modules/libpref/init/StaticPrefList.yaml.1809162 firefox-109.0/modules/libpref/init/StaticPrefList.yaml
+--- firefox-109.0/modules/libpref/init/StaticPrefList.yaml.1809162	2023-01-12 21:02:07.000000000 +0100
++++ firefox-109.0/modules/libpref/init/StaticPrefList.yaml	2023-01-17 14:34:01.739414416 +0100
+@@ -9836,6 +9836,14 @@
+   type: RelaxedAtomicBool
+   value: false
+   mirror: always
++- name: media.ffmpeg.vaapi.zero-copy.enabled
++  type: bool
++  value: true
++  mirror: once
++- name: media.ffmpeg.vaapi.zero-copy.force-enabled
++  type: bool
++  value: false
++  mirror: once
+ #endif # MOZ_WIDGET_GTK
+ #endif  # MOZ_FFMPEG
+ 
+diff -up firefox-109.0/widget/gtk/DMABufLibWrapper.cpp.1809162 firefox-109.0/widget/gtk/DMABufLibWrapper.cpp
+--- firefox-109.0/widget/gtk/DMABufLibWrapper.cpp.1809162	2023-01-12 21:02:18.000000000 +0100
++++ firefox-109.0/widget/gtk/DMABufLibWrapper.cpp	2023-01-17 14:34:01.739414416 +0100
+@@ -12,12 +12,17 @@
+ #include "mozilla/StaticPrefs_media.h"
+ #include "mozilla/gfx/gfxVars.h"
+ #include "WidgetUtilsGtk.h"
++#include "gfxConfig.h"
++#include "nsIGfxInfo.h"
++#include "mozilla/Components.h"
+ 
+ #include <sys/types.h>
+ #include <sys/stat.h>
+ #include <fcntl.h>
+ #include <dlfcn.h>
+ 
++using namespace mozilla::gfx;
++
+ namespace mozilla {
+ namespace widget {
+ 
+@@ -224,24 +229,13 @@ nsDMABufDevice::~nsDMABufDevice() {
+ int nsDMABufDevice::GetDRMFd() { return mDRMFd; }
+ 
+ bool nsDMABufDevice::Configure(nsACString& aFailureId) {
+-  LOGDMABUF(("nsDMABufDevice::Configure()"));
++  if (mInitialized) {
++    return true;
++  }
+ 
+-  MOZ_ASSERT(!mInitialized);
++  LOGDMABUF(("nsDMABufDevice::Configure()"));
+   mInitialized = true;
+ 
+-  bool isDMABufUsed = (
+-#ifdef NIGHTLY_BUILD
+-      StaticPrefs::widget_dmabuf_textures_enabled() ||
+-#endif
+-      StaticPrefs::widget_dmabuf_webgl_enabled());
+-
+-  if (!isDMABufUsed) {
+-    // Disabled by user, just quit.
+-    LOGDMABUF(("IsDMABufEnabled(): Disabled by preferences."));
+-    aFailureId = "FEATURE_FAILURE_NO_PREFS_ENABLED";
+-    return false;
+-  }
+-
+   if (!nsGbmLib::IsAvailable()) {
+     LOGDMABUF(("nsGbmLib is not available!"));
+     aFailureId = "FEATURE_FAILURE_NO_LIBGBM";
+@@ -327,5 +321,13 @@ nsDMABufDevice* GetDMABufDevice() {
+   return &dmaBufDevice;
+ }
+ 
++nsDMABufDevice* GetAndConfigureDMABufDevice() {
++  nsCString failureId;
++  if (GetDMABufDevice()->Configure(failureId)) {
++    return GetDMABufDevice();
++  }
++  return nullptr;
++}
++
+ }  // namespace widget
+ }  // namespace mozilla
+diff -up firefox-109.0/widget/gtk/DMABufLibWrapper.h.1809162 firefox-109.0/widget/gtk/DMABufLibWrapper.h
+--- firefox-109.0/widget/gtk/DMABufLibWrapper.h.1809162	2023-01-12 21:02:18.000000000 +0100
++++ firefox-109.0/widget/gtk/DMABufLibWrapper.h	2023-01-17 14:34:01.739414416 +0100
+@@ -215,6 +215,7 @@ class nsDMABufDevice {
+ };
+ 
+ nsDMABufDevice* GetDMABufDevice();
++nsDMABufDevice* GetAndConfigureDMABufDevice();
+ 
+ }  // namespace widget
+ }  // namespace mozilla
+diff -up firefox-109.0/widget/gtk/DMABufSurface.cpp.1809162 firefox-109.0/widget/gtk/DMABufSurface.cpp
+--- firefox-109.0/widget/gtk/DMABufSurface.cpp.1809162	2023-01-12 21:02:18.000000000 +0100
++++ firefox-109.0/widget/gtk/DMABufSurface.cpp	2023-01-17 14:34:01.740414450 +0100
+@@ -67,13 +67,14 @@ RefPtr<GLContext> ClaimSnapshotGLContext
+     nsCString discardFailureId;
+     sSnapshotContext = GLContextProvider::CreateHeadless({}, &discardFailureId);
+     if (!sSnapshotContext) {
+-      LOGDMABUF(("GetAsSourceSurface: Failed to create snapshot GLContext."));
++      LOGDMABUF(
++          ("ClaimSnapshotGLContext: Failed to create snapshot GLContext."));
+       return nullptr;
+     }
+     sSnapshotContext->mOwningThreadId = Nothing();  // No singular owner.
+   }
+   if (!sSnapshotContext->MakeCurrent()) {
+-    LOGDMABUF(("GetAsSourceSurface: Failed to make GLContext current."));
++    LOGDMABUF(("ClaimSnapshotGLContext: Failed to make GLContext current."));
+     return nullptr;
+   }
+   return sSnapshotContext;
+@@ -84,6 +85,7 @@ void ReturnSnapshotGLContext(RefPtr<GLCo
+   // it's not used.
+   MOZ_ASSERT(!aGLContext->mUseTLSIsCurrent);
+   if (!aGLContext->IsCurrent()) {
++    LOGDMABUF(("ReturnSnapshotGLContext() failed, is not current!"));
+     return;
+   }
+   const auto& gle = gl::GLContextEGL::Cast(aGLContext);
+@@ -911,7 +913,7 @@ already_AddRefed<DMABufSurfaceYUV> DMABu
+   RefPtr<DMABufSurfaceYUV> surf = new DMABufSurfaceYUV();
+   LOGDMABUF(("DMABufSurfaceYUV::CreateYUVSurface() UID %d from desc\n",
+              surf->GetUID()));
+-  if (!surf->UpdateYUVData(aDesc, aWidth, aHeight)) {
++  if (!surf->UpdateYUVData(aDesc, aWidth, aHeight, false)) {
+     return nullptr;
+   }
+   return surf.forget();
+@@ -975,16 +977,16 @@ void DMABufSurfaceYUV::CloseFileDescript
+   }
+ }
+ 
+-bool DMABufSurfaceYUV::UpdateYUVData(const VADRMPRIMESurfaceDescriptor& aDesc,
+-                                     int aWidth, int aHeight) {
++bool DMABufSurfaceYUV::ImportPRIMESurfaceDescriptor(
++    const VADRMPRIMESurfaceDescriptor& aDesc, int aWidth, int aHeight) {
++  LOGDMABUF(("DMABufSurfaceYUV::ImportPRIMESurfaceDescriptor() UID %d", mUID));
++  // Already exists?
++  MOZ_DIAGNOSTIC_ASSERT(mDmabufFds[0] < 0);
++
+   if (aDesc.num_layers > DMABUF_BUFFER_PLANES ||
+       aDesc.num_objects > DMABUF_BUFFER_PLANES) {
+-    return false;
+-  }
+-
+-  LOGDMABUF(("DMABufSurfaceYUV::UpdateYUVData() UID %d", mUID));
+-  if (mDmabufFds[0] >= 0) {
+-    LOGDMABUF(("    Already created!"));
++    LOGDMABUF(("  Can't import, wrong layers/objects number (%d, %d)",
++               aDesc.num_layers, aDesc.num_objects));
+     return false;
+   }
+   if (aDesc.fourcc == VA_FOURCC_NV12) {
+@@ -994,8 +996,7 @@ bool DMABufSurfaceYUV::UpdateYUVData(con
+   } else if (aDesc.fourcc == VA_FOURCC_YV12) {
+     mSurfaceType = SURFACE_YUV420;
+   } else {
+-    LOGDMABUF(("UpdateYUVData(): Can't import surface data of 0x%x format",
+-               aDesc.fourcc));
++    LOGDMABUF(("  Can't import surface data of 0x%x format", aDesc.fourcc));
+     return false;
+   }
+ 
+@@ -1003,12 +1004,6 @@ bool DMABufSurfaceYUV::UpdateYUVData(con
+ 
+   for (unsigned int i = 0; i < aDesc.num_layers; i++) {
+     unsigned int object = aDesc.layers[i].object_index[0];
+-    // Intel exports VA-API surfaces in one object,planes have the same FD.
+-    // AMD exports surfaces in two objects with different FDs.
+-    int fd = aDesc.objects[object].fd;
+-    bool dupFD = (object != i);
+-    mDmabufFds[i] = dupFD ? dup(fd) : fd;
+-
+     mBufferModifiers[i] = aDesc.objects[object].drm_format_modifier;
+     mDrmFormats[i] = aDesc.layers[i].drm_format;
+     mOffsets[i] = aDesc.layers[i].offset[0];
+@@ -1017,18 +1012,104 @@ bool DMABufSurfaceYUV::UpdateYUVData(con
+     mHeightAligned[i] = aDesc.height >> i;
+     mWidth[i] = aWidth >> i;
+     mHeight[i] = aHeight >> i;
+-
+     LOGDMABUF(("    plane %d size %d x %d format %x", i, mWidth[i], mHeight[i],
+                mDrmFormats[i]));
+   }
++  return true;
++}
+ 
++bool DMABufSurfaceYUV::MoveYUVDataImpl(const VADRMPRIMESurfaceDescriptor& aDesc,
++                                       int aWidth, int aHeight) {
++  if (!ImportPRIMESurfaceDescriptor(aDesc, aWidth, aHeight)) {
++    return false;
++  }
++  for (unsigned int i = 0; i < aDesc.num_layers; i++) {
++    unsigned int object = aDesc.layers[i].object_index[0];
++    // Intel exports VA-API surfaces in one object,planes have the same FD.
++    // AMD exports surfaces in two objects with different FDs.
++    int fd = aDesc.objects[object].fd;
++    bool dupFD = (object != i);
++    mDmabufFds[i] = dupFD ? dup(fd) : fd;
++  }
+   return true;
+ }
+ 
+-bool DMABufSurfaceYUV::CreateYUVPlane(int aPlane, int aWidth, int aHeight,
+-                                      int aDrmFormat) {
++bool DMABufSurfaceYUV::CreateYUVPlane(int aPlane) {
+   LOGDMABUF(("DMABufSurfaceYUV::CreateYUVPlane() UID %d size %d x %d", mUID,
+-             aWidth, aHeight));
++             mWidth[aPlane], mHeight[aPlane]));
++
++  if (!GetAndConfigureDMABufDevice()->GetGbmDevice()) {
++    LOGDMABUF(("    Missing GbmDevice!"));
++    return false;
++  }
++
++  bool useModifiers = (mBufferModifiers[aPlane] != DRM_FORMAT_MOD_INVALID);
++  if (useModifiers) {
++    mGbmBufferObject[aPlane] = nsGbmLib::CreateWithModifiers(
++        GetDMABufDevice()->GetGbmDevice(), mWidth[aPlane], mHeight[aPlane],
++        mDrmFormats[aPlane], mBufferModifiers + aPlane, 1);
++  } else {
++    mGbmBufferObject[aPlane] = nsGbmLib::Create(
++        GetDMABufDevice()->GetGbmDevice(), mWidth[aPlane], mHeight[aPlane],
++        mDrmFormats[aPlane], GBM_BO_USE_RENDERING);
++  }
++  if (!mGbmBufferObject[aPlane]) {
++    LOGDMABUF(("    Failed to create GbmBufferObject: %s", strerror(errno)));
++    return false;
++  }
++
++  mStrides[aPlane] = nsGbmLib::GetStride(mGbmBufferObject[aPlane]);
++  mOffsets[aPlane] = nsGbmLib::GetOffset(mGbmBufferObject[aPlane], 0);
++  mWidthAligned[aPlane] = mWidth[aPlane];
++  mHeightAligned[aPlane] = mHeight[aPlane];
++  return true;
++}
++
++bool DMABufSurfaceYUV::CopyYUVDataImpl(const VADRMPRIMESurfaceDescriptor& aDesc,
++                                       int aWidth, int aHeight) {
++  RefPtr<DMABufSurfaceYUV> tmpSurf = CreateYUVSurface(aDesc, aWidth, aHeight);
++  if (!tmpSurf) {
++    return false;
++  }
++
++  if (!ImportPRIMESurfaceDescriptor(aDesc, aWidth, aHeight)) {
++    return false;
++  }
++
++  StaticMutexAutoLock lock(sSnapshotContextMutex);
++  RefPtr<GLContext> context = ClaimSnapshotGLContext();
++  auto releaseTextures = MakeScopeExit([&] {
++    tmpSurf->ReleaseTextures();
++    ReleaseTextures();
++    ReturnSnapshotGLContext(context);
++  });
++
++  for (int i = 0; i < mBufferPlaneCount; i++) {
++    if (!tmpSurf->CreateTexture(context, i)) {
++      return false;
++    }
++    if (!CreateYUVPlane(i) || !CreateTexture(context, i)) {
++      return false;
++    }
++    gfx::IntSize size(GetWidth(i), GetHeight(i));
++    context->BlitHelper()->BlitTextureToTexture(
++        tmpSurf->GetTexture(i), GetTexture(i), size, size, LOCAL_GL_TEXTURE_2D,
++        LOCAL_GL_TEXTURE_2D);
++  }
++  return true;
++}
++
++bool DMABufSurfaceYUV::UpdateYUVData(const VADRMPRIMESurfaceDescriptor& aDesc,
++                                     int aWidth, int aHeight, bool aCopy) {
++  LOGDMABUF(("DMABufSurfaceYUV::UpdateYUVData() UID %d copy %d", mUID, aCopy));
++  return aCopy ? CopyYUVDataImpl(aDesc, aWidth, aHeight)
++               : MoveYUVDataImpl(aDesc, aWidth, aHeight);
++}
++
++bool DMABufSurfaceYUV::CreateLinearYUVPlane(int aPlane, int aWidth, int aHeight,
++                                            int aDrmFormat) {
++  LOGDMABUF(("DMABufSurfaceYUV::CreateLinearYUVPlane() UID %d size %d x %d",
++             mUID, aWidth, aHeight));
+ 
+   if (!GetDMABufDevice()->GetGbmDevice()) {
+     LOGDMABUF(("    Missing GbmDevice!"));
+@@ -1118,13 +1199,13 @@ bool DMABufSurfaceYUV::Create(int aWidth
+   mSurfaceType = SURFACE_YUV420;
+   mBufferPlaneCount = 3;
+ 
+-  if (!CreateYUVPlane(0, aWidth, aHeight, GBM_FORMAT_R8)) {
++  if (!CreateLinearYUVPlane(0, aWidth, aHeight, GBM_FORMAT_R8)) {
+     return false;
+   }
+-  if (!CreateYUVPlane(1, aWidth >> 1, aHeight >> 1, GBM_FORMAT_R8)) {
++  if (!CreateLinearYUVPlane(1, aWidth >> 1, aHeight >> 1, GBM_FORMAT_R8)) {
+     return false;
+   }
+-  if (!CreateYUVPlane(2, aWidth >> 1, aHeight >> 1, GBM_FORMAT_R8)) {
++  if (!CreateLinearYUVPlane(2, aWidth >> 1, aHeight >> 1, GBM_FORMAT_R8)) {
+     return false;
+   }
+   if (!aPixelData || !aLineSizes) {
+diff -up firefox-109.0/widget/gtk/DMABufSurface.h.1809162 firefox-109.0/widget/gtk/DMABufSurface.h
+--- firefox-109.0/widget/gtk/DMABufSurface.h.1809162	2023-01-12 21:02:18.000000000 +0100
++++ firefox-109.0/widget/gtk/DMABufSurface.h	2023-01-17 14:34:01.740414450 +0100
+@@ -323,7 +323,7 @@ class DMABufSurfaceYUV : public DMABufSu
+ 
+   bool UpdateYUVData(void** aPixelData, int* aLineSizes);
+   bool UpdateYUVData(const VADRMPRIMESurfaceDescriptor& aDesc, int aWidth,
+-                     int aHeight);
++                     int aHeight, bool aCopy);
+ 
+   bool VerifyTextureCreation();
+ 
+@@ -332,9 +332,18 @@ class DMABufSurfaceYUV : public DMABufSu
+ 
+   bool Create(const mozilla::layers::SurfaceDescriptor& aDesc);
+   bool Create(int aWidth, int aHeight, void** aPixelData, int* aLineSizes);
+-  bool CreateYUVPlane(int aPlane, int aWidth, int aHeight, int aDrmFormat);
++  bool CreateYUVPlane(int aPlane);
++  bool CreateLinearYUVPlane(int aPlane, int aWidth, int aHeight,
++                            int aDrmFormat);
+   void UpdateYUVPlane(int aPlane, void* aPixelData, int aLineSize);
+ 
++  bool MoveYUVDataImpl(const VADRMPRIMESurfaceDescriptor& aDesc, int aWidth,
++                       int aHeight);
++  bool CopyYUVDataImpl(const VADRMPRIMESurfaceDescriptor& aDesc, int aWidth,
++                       int aHeight);
++
++  bool ImportPRIMESurfaceDescriptor(const VADRMPRIMESurfaceDescriptor& aDesc,
++                                    int aWidth, int aHeight);
+   bool ImportSurfaceDescriptor(
+       const mozilla::layers::SurfaceDescriptorDMABuf& aDesc);
+ 
+diff -up firefox-109.0/widget/gtk/GfxInfo.cpp.1809162 firefox-109.0/widget/gtk/GfxInfo.cpp
+--- firefox-109.0/widget/gtk/GfxInfo.cpp.1809162	2023-01-17 14:34:01.724413908 +0100
++++ firefox-109.0/widget/gtk/GfxInfo.cpp	2023-01-17 14:34:01.740414450 +0100
+@@ -887,6 +887,40 @@ const nsTArray<GfxDriverInfo>& GfxInfo::
+         V(0, 0, 0, 0), "FEATURE_HARDWARE_VIDEO_DECODING_NO_LINUX_AMD", "");
+ 
+     ////////////////////////////////////
++    // FEATURE_HW_DECODED_VIDEO_ZERO_COPY
++    APPEND_TO_DRIVER_BLOCKLIST_EXT(
++        OperatingSystem::Linux, ScreenSizeStatus::All, BatteryStatus::All,
++        DesktopEnvironment::All, WindowProtocol::All, DriverVendor::MesaAll,
++        DeviceFamily::All, nsIGfxInfo::FEATURE_HW_DECODED_VIDEO_ZERO_COPY,
++        nsIGfxInfo::FEATURE_BLOCKED_DRIVER_VERSION, DRIVER_LESS_THAN,
++        V(21, 0, 0, 0), "FEATURE_HW_DECODED_VIDEO_ZERO_COPY", "Mesa 21.0.0.0");
++
++    // Disable on all NVIDIA hardware
++    APPEND_TO_DRIVER_BLOCKLIST_EXT(
++        OperatingSystem::Linux, ScreenSizeStatus::All, BatteryStatus::All,
++        DesktopEnvironment::All, WindowProtocol::All, DriverVendor::All,
++        DeviceFamily::NvidiaAll, nsIGfxInfo::FEATURE_HW_DECODED_VIDEO_ZERO_COPY,
++        nsIGfxInfo::FEATURE_BLOCKED_DEVICE, DRIVER_COMPARISON_IGNORED,
++        V(0, 0, 0, 0), "FEATURE_HW_DECODED_VIDEO_ZERO_COPY_NO_LINUX_NVIDIA",
++        "");
++
++    // Disable on all AMD devices (Bug 1802844)
++    APPEND_TO_DRIVER_BLOCKLIST_EXT(
++        OperatingSystem::Linux, ScreenSizeStatus::All, BatteryStatus::All,
++        DesktopEnvironment::All, WindowProtocol::All, DriverVendor::All,
++        DeviceFamily::AtiAll, nsIGfxInfo::FEATURE_HW_DECODED_VIDEO_ZERO_COPY,
++        nsIGfxInfo::FEATURE_BLOCKED_DEVICE, DRIVER_COMPARISON_IGNORED,
++        V(0, 0, 0, 0), "FEATURE_HW_DECODED_VIDEO_ZERO_COPY_NO_LINUX_AMD", "");
++
++    // As FEATURE_HW_DECODED_VIDEO_ZERO_COPY is allow listed feature
++    // we need to explicitly enable it on all Intel hardware.
++    APPEND_TO_DRIVER_BLOCKLIST2(OperatingSystem::Linux, DeviceFamily::IntelAll,
++                                nsIGfxInfo::FEATURE_HW_DECODED_VIDEO_ZERO_COPY,
++                                nsIGfxInfo::FEATURE_ALLOW_ALWAYS,
++                                DRIVER_COMPARISON_IGNORED, V(0, 0, 0, 0),
++                                "FEATURE_ROLLOUT_ALL");
++
++    ////////////////////////////////////
+     // FEATURE_WEBRENDER_PARTIAL_PRESENT
+     APPEND_TO_DRIVER_BLOCKLIST_EXT(
+         OperatingSystem::Linux, ScreenSizeStatus::All, BatteryStatus::All,

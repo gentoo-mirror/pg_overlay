@@ -1,0 +1,14 @@
+mozilla-1669639.patch
+
+firefox-tests-xpcshell-freeze.patch
+
+rhbz-1173156.patch
+mozilla-1170092.patch
+rhbz-1354671.patch
+disable-openh264-download.patch
+
+D164651.diff
+D166324.diff
+mozilla-1809162.patch
+
+libwebrtc-screen-cast-sync.patch
