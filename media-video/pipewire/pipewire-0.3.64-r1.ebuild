@@ -166,6 +166,9 @@ python_check_deps() {
 src_prepare() {
 	default
 
+	# Used for upstream backports
+	[[ -d "${FILESDIR}"/${PV} ]] && eapply "${FILESDIR}"/${PV}
+
 	einfo "Generating ${limitsdfile}"
 	cat > ${limitsdfile} <<- EOF || die
 		# Start of ${limitsdfile} from ${P}
