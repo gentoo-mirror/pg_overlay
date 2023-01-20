@@ -85,7 +85,7 @@ media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/tg_owt 0_pre20220914: WebRTC build for Telegram
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
-media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
+media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
 media-sound/audacious 9999: Lightweight and versatile audio player
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
