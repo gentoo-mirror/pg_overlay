@@ -87,7 +87,7 @@ RDEPEND="
 	xmp? ( media-libs/libxmp )
 "
 DEPEND="${RDEPEND}
-	dev-qt/qttools:[linguist]
+	dev-qt/qttools:6[linguist]
 "
 
 DOCS=( AUTHORS ChangeLog README )
