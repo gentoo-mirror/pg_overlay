@@ -36,9 +36,3 @@ src_prepare() {
 
 	cmake_src_prepare
 }
-
-src_install() {
-	mv appdata/qmmp-plugin-pack.appdata.xml appdata/qmmp-plugin-pack-1.appdata.xml
-
-	cmake_src_install
-}
