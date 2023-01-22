@@ -57,8 +57,7 @@ RDEPEND="
 		webkit? ( net-libs/webkit-gtk:4= )
 	)"
 DEPEND="${RDEPEND}
-	opengl? ( virtual/glu[${MULTILIB_USEDEP}] )
-	X? ( x11-base/xorg-proto )"
+	opengl? ( virtual/glu[${MULTILIB_USEDEP}] )"
 BDEPEND="
 	test? ( >=dev-util/cppunit-1.8.0 )
 	>=app-eselect/eselect-wxwidgets-20131230
