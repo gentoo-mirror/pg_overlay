@@ -153,7 +153,7 @@ x11-base/xwayland 22.1.7: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r2 3.24.35: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
-x11-libs/wxGTK 3.1.6-r300 3.2.1-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
+x11-libs/wxGTK 3.1.6-r300 3.2.1 3.2.1-r300: GTK+ version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-plugins/pidgin-skypeweb 9999: SkypeWeb Plugin for Pidgin
 x11-plugins/pidgin-telegram 1.4.7 9999: A libpurple protocol plugin that adds support for the Telegram messenger
