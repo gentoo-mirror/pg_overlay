@@ -81,8 +81,9 @@ media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
 media-libs/libsdl2 2.26.2: Simple Direct Media Layer
+media-libs/libtgvoip 2.4.4_p20221229: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
-media-libs/tg_owt 0_pre20220914: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20220914 0_pre20230105: WebRTC build for Telegram
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
