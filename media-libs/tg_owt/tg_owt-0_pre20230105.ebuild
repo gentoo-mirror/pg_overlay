@@ -1,4 +1,4 @@
-# Copyright 2020-2022 Gentoo Authors
+# Copyright 2020-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,7 @@ DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
 TG_OWT_COMMIT="5098730b9eb6173f0b52068fe2555b7c1015123a"
-LIBYUV_COMMIT="00950840d1c9bcbb3eb6ebc5aac5793e71166c8b"
+LIBYUV_COMMIT="6e4b0acb4b3d5858c77a044aad46132998ac4a76"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
 	https://github.com/perfect7gentleman/sources/raw/main/libyuv-${LIBYUV_COMMIT}.tar.gz"
 
