@@ -11,6 +11,7 @@ SRC_URI="https://github.com/libjxl/libjxl/archive/refs/tags/v${PV}.tar.gz -> ${P
 
 LICENSE="BSD"
 SLOT="0"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
 IUSE="gdk-pixbuf openexr"
 
 DEPEND="app-arch/brotli:=[${MULTILIB_USEDEP}]
@@ -43,7 +44,6 @@ multilib_src_configure() {
 		-DJPEGXL_ENABLE_VIEWERS=OFF
 		-DJPEGXL_FORCE_SYSTEM_BROTLI=ON
 		-DJPEGXL_FORCE_SYSTEM_HWY=ON
-		-DJPEGXL_FORCE_SYSTEM_LCMS2=ON
 		-DJPEGXL_ENABLE_DOXYGEN=OFF
 		-DJPEGXL_ENABLE_MANPAGES=OFF
 		-DJPEGXL_ENABLE_JNI=OFF
