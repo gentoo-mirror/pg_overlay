@@ -124,7 +124,6 @@ mail-client/thunderbird:system-libvpx - Use the system-wide media-libs/libvpx in
 mail-client/thunderbird:system-png - Use the system-wide media-libs/libpng instead of bundled (requires APNG patches)
 mail-client/thunderbird:system-python-libs - Use system's python site instead of bundled python libraries
 mail-client/thunderbird:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
-media-libs/libjxl:gdk-pixbuf - Build a gdk-pixbuf loader
 media-libs/libpulse:asyncns - Use libasyncns for asynchronous name resolution.
 media-libs/libpulse:doc - Build the doxygen-described API documentation.
 media-libs/libpulse:glib - Add support to dev-libs/glib-based mainloop for the libpulse client library, to allow using libpulse on glib-based programs.

@@ -78,7 +78,6 @@ kde-misc/kweather 9999: Library for retrieval of weather information including f
 kde-plasma/kde-cli-tools 5.26.90: Tools based on KDE Frameworks 5 to better interact with the system
 mail-client/thunderbird 102.7.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
-media-libs/libjxl 0.8.0: JPEG XL image format reference implementation
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
 media-libs/libsdl2 2.26.2: Simple Direct Media Layer
