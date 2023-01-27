@@ -38,7 +38,7 @@ HOMEPAGE="https://pipewire.org/"
 LICENSE="MIT LGPL-2.1+ GPL-2"
 # ABI was broken in 0.3.42 for https://gitlab.freedesktop.org/pipewire/wireplumber/-/issues/49
 SLOT="0/0.4"
-IUSE="bluetooth dbus doc echo-cancel extra flatpak gstreamer gsettings jack-client jack-sdk lv2
+IUSE="bluetooth dbus doc echo-cancel extra ffmpeg flatpak gstreamer gsettings jack-client jack-sdk lv2
 modemmanager pipewire-alsa readline sound-server ssl system-service systemd test v4l X zeroconf vulkan"
 
 # Once replacing system JACK libraries is possible, it's likely that
@@ -47,12 +47,14 @@ modemmanager pipewire-alsa readline sound-server ssl system-service systemd test
 # JACK's sink - doing so is likely to yield no audio, cause a CPU
 # cycles consuming loop (and may even cause GUI crashes)!
 
-# TODO: There should be "sound-server? ( || ( alsa bluetooth ) )" here, but ALSA is always enabled
-# TODO: Pulseaudio alsa plugin performs runtime check that pulseaudio server connection will work
-# which provides adequate guarantee that alsa-lib will be able to provide audio services.
-# If that works, pulseaudio defaults are loaded into alsa-lib runtime replacing default PCM and CTL.
-# When pipewire-alsa will be able to perform similar check, pipewire-alsa can be enabled unconditionally.
+# - TODO: There should be "sound-server? ( || ( alsa bluetooth ) )" here, but ALSA is always enabled
+# - TODO: Pulseaudio alsa plugin performs runtime check that pulseaudio server connection will work
+#   which provides adequate guarantee that alsa-lib will be able to provide audio services.
+#   If that works, pulseaudio defaults are loaded into alsa-lib runtime replacing default PCM and CTL.
+#   When pipewire-alsa will be able to perform similar check, pipewire-alsa can be enabled unconditionally.
+# - ffmpeg is only used for pw-cat. We don't build the spa plugin which receives barely any activity.
 REQUIRED_USE="
+	ffmpeg? ( extra )
 	bluetooth? ( dbus )
 	jack-sdk? ( !jack-client )
 	modemmanager? ( bluetooth )
@@ -82,6 +84,7 @@ RDEPEND="
 	virtual/libintl[${MULTILIB_USEDEP}]
 	virtual/libudev[${MULTILIB_USEDEP}]
 	bluetooth? (
+		dev-libs/glib
 		media-libs/fdk-aac
 		media-libs/libldac
 		media-libs/libfreeaptx
@@ -95,6 +98,7 @@ RDEPEND="
 	extra? (
 		>=media-libs/libsndfile-1.0.20
 	)
+	ffmpeg? ( media-video/ffmpeg:= )
 	flatpak? (
 		dev-libs/glib
 	)
@@ -145,7 +149,6 @@ PDEPEND=">=media-video/wireplumber-0.4.8-r3"
 # Present RDEPEND that are currently always disabled due to the PW
 # code using them being required to be disabled by Gentoo guidelines
 # (i.e. developer binaries not meant for users) and unready code
-#	media-video/ffmpeg:=
 #	media-libs/libsdl2
 #	>=media-libs/vulkan-loader-1.1.69
 #
@@ -213,6 +216,7 @@ multilib_src_configure() {
 		$(meson_feature pipewire-alsa) # Allows integrating ALSA apps into PW graph
 		-Dspa-plugins=enabled
 		-Dalsa=enabled # Allows using kernel ALSA for sound I/O (NOTE: media-session is gone so IUSE=alsa/spa_alsa/alsa-backend might be possible)
+		-Dcompress-offload=disabled # Matches upstream, tinycompress unpackaged too
 		-Daudiomixer=enabled # Matches upstream
 		-Daudioconvert=enabled # Matches upstream
 		$(meson_native_use_feature bluetooth bluez5)
@@ -229,11 +233,13 @@ multilib_src_configure() {
 		$(meson_native_use_feature bluetooth libusb) # At least for now only used by bluez5 native (quirk detection of adapters)
 		$(meson_native_use_feature echo-cancel echo-cancel-webrtc) #807889
 		# Not yet packaged.
+		# http://www.bluez.org/le-audio-support-in-pipewire/
 		-Dbluez5-codec-lc3=disabled
 		-Dbluez5-codec-lc3plus=disabled
 		-Dcontrol=enabled # Matches upstream
-		-Daudiotestsrc=disabled # Matches upstream
-		-Dffmpeg=enabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
+		-Daudiotestsrc=enabled # Matches upstream
+		-Dffmpeg=disabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
+		$(meson_native_use_feature ffmpeg pw-cat-ffmpeg)
 		$(meson_native_use_feature flatpak)
 		-Dpipewire-jack=disabled # Allows integrating JACK apps into PW graph
 		$(meson_native_use_feature jack-client jack) # Allows PW to act as a JACK client
