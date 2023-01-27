@@ -78,6 +78,7 @@ kde-misc/kweather 9999: Library for retrieval of weather information including f
 kde-plasma/kde-cli-tools 5.26.90: Tools based on KDE Frameworks 5 to better interact with the system
 mail-client/thunderbird 102.7.0: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
+media-libs/libjxl 0.8.0: JPEG XL image format reference implementation
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
 media-libs/libsdl2 2.26.2: Simple Direct Media Layer
@@ -104,7 +105,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 0.3.64-r2: Multimedia processing graphs
+media-video/pipewire 0.3.65-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 22.7.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
