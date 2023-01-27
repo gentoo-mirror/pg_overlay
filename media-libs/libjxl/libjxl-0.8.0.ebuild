@@ -3,13 +3,11 @@
 
 EAPI=8
 
-inherit cmake-multilib flag-o-matic git-r3
+inherit cmake-multilib flag-o-matic
 
 DESCRIPTION="JPEG XL image format reference implementation"
 HOMEPAGE="https://github.com/libjxl/libjxl"
-
-EGIT_REPO_URI="https://github.com/libjxl/libjxl.git"
-EGIT_SUBMODULES=(third_party/skcms)
+SRC_URI="https://github.com/libjxl/libjxl/archive/refs/tags/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="BSD"
 SLOT="0"
@@ -45,6 +43,7 @@ multilib_src_configure() {
 		-DJPEGXL_ENABLE_VIEWERS=OFF
 		-DJPEGXL_FORCE_SYSTEM_BROTLI=ON
 		-DJPEGXL_FORCE_SYSTEM_HWY=ON
+		-DJPEGXL_FORCE_SYSTEM_LCMS2=ON
 		-DJPEGXL_ENABLE_DOXYGEN=OFF
 		-DJPEGXL_ENABLE_MANPAGES=OFF
 		-DJPEGXL_ENABLE_JNI=OFF
@@ -70,4 +69,10 @@ multilib_src_configure() {
 	fi
 
 	cmake_src_configure
+}
+
+multilib_src_install() {
+	cmake_src_install
+
+	find "${D}" -name '*.a' -delete || die
 }
