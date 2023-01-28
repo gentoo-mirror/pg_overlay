@@ -15,7 +15,7 @@ EAPI=8
 
 PYTHON_COMPAT=( python3_{9..11} )
 
-inherit meson-multilib optfeature prefix python-any-r1 udev
+inherit meson-multilib optfeature prefix python-any-r1 tmpfiles udev
 
 if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
@@ -237,7 +237,7 @@ multilib_src_configure() {
 		-Dbluez5-codec-lc3=disabled
 		-Dbluez5-codec-lc3plus=disabled
 		-Dcontrol=enabled # Matches upstream
-		-Daudiotestsrc=enabled # Matches upstream
+		-Daudiotestsrc=disabled # Matches upstream
 		-Dffmpeg=disabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
 		$(meson_native_use_feature ffmpeg pw-cat-ffmpeg)
 		$(meson_native_use_feature flatpak)
@@ -307,6 +307,12 @@ multilib_src_install_all() {
 		echo "bluez_monitor.enabled = true" > "${ED}"/etc/wireplumber/bluetooth.lua.d/89-gentoo-sound-server-enable-bluez-monitor.lua || die
 	fi
 
+	if use system-service; then
+		newtmpfiles - pipewire.conf <<-EOF || die
+			d /run/pipewire 0755 pipewire pipewire - -
+		EOF
+	fi
+
 	if ! use systemd; then
 		insinto /etc/xdg/autostart
 		newins "${FILESDIR}"/pipewire.desktop-r1 pipewire.desktop
@@ -329,6 +335,7 @@ pkg_postrm() {
 
 pkg_postinst() {
 	udev_reload
+	use system-service && tmpfiles_process pipewire.conf
 
 	elog "It is recommended to raise RLIMIT_MEMLOCK to 256 for users"
 	elog "using PipeWire. Do it either manually or add yourself"
