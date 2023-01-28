@@ -16,8 +16,8 @@ app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.22.10.20: Python scripts to manipulate trash cans via the command line
 app-misc/worker 4.11.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.5.0.1: A full office productivity suite
-app-office/libreoffice-l10n 7.5.0.1: Translations for the Libreoffice suite
+app-office/libreoffice 7.5.0.2: A full office productivity suite
+app-office/libreoffice-l10n 7.5.0.2: Translations for the Libreoffice suite
 app-portage/eix 0.36.5: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
@@ -104,7 +104,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 0.3.65-r1: Multimedia processing graphs
+media-video/pipewire 0.3.65-r3: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 22.7.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
