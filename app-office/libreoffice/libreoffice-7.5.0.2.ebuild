@@ -119,7 +119,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-text/libexttextcat
 	app-text/liblangtag
 	>=app-text/libmspub-0.1.0
-	>=app-text/libmwaw-0.3.1
+	>=app-text/libmwaw-0.3.21
 	>=app-text/libnumbertext-1.0.6
 	>=app-text/libodfgen-0.1.0
 	app-text/libqxp
