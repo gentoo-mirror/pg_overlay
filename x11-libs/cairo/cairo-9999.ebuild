@@ -53,7 +53,7 @@ multilib_src_configure() {
 		-Dfreetype=enabled
 		-Dpng=enabled
 		$(meson_feature aqua quartz)
-		$(meson_feature X tee)
+		#$(meson_feature X tee)
 		$(meson_feature X xcb)
 		$(meson_feature X xlib)
 		-Dxlib-xcb=disabled
