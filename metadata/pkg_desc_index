@@ -18,7 +18,7 @@ app-misc/trash-cli 0.22.10.20: Python scripts to manipulate trash cans via the c
 app-misc/worker 4.11.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.5.0.2: A full office productivity suite
 app-office/libreoffice-l10n 7.5.0.2: Translations for the Libreoffice suite
-app-portage/eix 0.36.5: Search and query ebuilds
+app-portage/eix 0.36.6: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/asciidoc 10.2.0: A plain text human readable/writable document format
