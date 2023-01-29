@@ -1,11 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
 WANT_LIBTOOL="none"
 
 inherit autotools check-reqs flag-o-matic multiprocessing pax-utils
-inherit python-utils-r1 toolchain-funcs verify-sig
+inherit prefix python-utils-r1 toolchain-funcs verify-sig
 
 MY_PV=${PV/_rc/rc}
 MY_P="Python-${MY_PV%_p*}"
@@ -46,6 +46,7 @@ RDEPEND="
 	app-crypt/libb2
 	>=dev-libs/expat-2.1:=
 	dev-libs/libffi:=
+	dev-python/gentoo-common
 	sys-apps/util-linux:=
 	>=sys-libs/zlib-1.1.3:=
 	virtual/libcrypt:=
@@ -245,6 +246,9 @@ src_configure() {
 
 			--libdir="${cbuild_libdir:2}"
 
+			# Avoid needing to load the right libpython.so.
+			--disable-shared
+
 			# As minimal as possible for the mini CBUILD Python
 			# we build just for cross to satisfy --with-build-python.
 			--without-lto
@@ -301,6 +305,7 @@ src_configure() {
 		append-cppflags -I"${ESYSROOT}"/usr/include/ncursesw
 	fi
 
+	hprefixify setup.py
 	econf "${myeconfargs[@]}"
 
 	if grep -q "#define POSIX_SEMAPHORES_NOT_ENABLED 1" pyconfig.h; then
@@ -452,6 +457,8 @@ src_install() {
 		rm -r "${ED}/usr/bin/idle${PYVER}" || die
 		rm -r "${libdir}/"{idlelib,tkinter,test/test_tk*} || die
 	fi
+
+	ln -s ../python/EXTERNALLY-MANAGED "${libdir}/EXTERNALLY-MANAGED" || die
 
 	dodoc Misc/{ACKS,HISTORY,NEWS}
 
