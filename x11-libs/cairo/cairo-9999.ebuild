@@ -18,11 +18,8 @@ DESCRIPTION="A vector graphics library with cross-device output support"
 HOMEPAGE="https://www.cairographics.org/ https://gitlab.freedesktop.org/cairo/cairo"
 LICENSE="|| ( LGPL-2.1 MPL-1.1 )"
 SLOT="0"
-IUSE="X aqua debug gles2-only gles3 +glib gtk-doc opengl test"
-REQUIRED_USE="
-	gles2-only? ( !opengl )
-	gles3? ( gles2-only )
-"
+IUSE="X aqua debug +glib gtk-doc  test"
+REQUIRED_USE=""
 RESTRICT="!test? ( test ) test" # Requires poppler-glib, which isn't available in multilib
 
 RDEPEND="
@@ -33,9 +30,7 @@ RDEPEND="
 	>=sys-libs/zlib-1.2.8-r1[${MULTILIB_USEDEP}]
 	>=x11-libs/pixman-0.36[${MULTILIB_USEDEP}]
 	debug? ( sys-libs/binutils-libs:0=[${MULTILIB_USEDEP}] )
-	gles2-only? ( >=media-libs/mesa-9.1.6[gles2,${MULTILIB_USEDEP}] )
 	glib? ( >=dev-libs/glib-2.34.3:2[${MULTILIB_USEDEP}] )
-	opengl? ( >=media-libs/mesa-9.1.6[egl(+),X(+),${MULTILIB_USEDEP}] )
 	X? (
 		>=x11-libs/libXrender-0.9.8[${MULTILIB_USEDEP}]
 		>=x11-libs/libXext-1.3.2[${MULTILIB_USEDEP}]
@@ -76,17 +71,6 @@ multilib_src_configure() {
 		$(meson_use gtk-doc gtk_doc)
 	)
 
-	if use opengl; then
-		emesonargs+=(-Dgl-backend=gl)
-	elif use gles2-only; then
-		if use gles3; then
-			emesonargs+=(-Dgl-backend=glesv3)
-		else
-			emesonargs+=(-Dgl-backend=glesv2)
-		fi
-	else
-		emesonargs+=(-Dgl-backend=disabled)
-	fi
 
 	meson_src_configure
 }
