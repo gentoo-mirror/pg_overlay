@@ -79,7 +79,7 @@ src_configure() {
 		-Dhtml=$(usex doc auto false)
 		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 		-Dinstall-sysconfdir=true
-		-Dman=auto
+		-Dman=off
 		-Dmode=release
 		-Dpam=$(usex pam true false)
 		-Dpamlibdir=$(getpam_mod_dir)
