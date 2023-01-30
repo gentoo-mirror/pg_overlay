@@ -65,7 +65,7 @@ src_configure() {
 	fi
 
 	local emesonargs=(
-		$debugmode
+		$(usex debug "-Ddebug-extra=elogind" "")
 		--buildtype $(usex debug debug release)
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
 		-Dacl=$(usex acl true false)
@@ -79,7 +79,7 @@ src_configure() {
 		-Dhtml=$(usex doc auto false)
 		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 		-Dinstall-sysconfdir=true
-		-Dman=auto
+		-Dman=false
 		-Dmode=release
 		-Dpam=$(usex pam true false)
 		-Dpamlibdir=$(getpam_mod_dir)
