@@ -65,7 +65,7 @@ src_configure() {
 	fi
 
 	local emesonargs=(
-		$debugmode
+		$(usex debug "-Ddebug-extra=elogind" "")
 		--buildtype $(usex debug debug release)
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
 		-Dacl=$(usex acl true false)
