@@ -14,7 +14,7 @@ EGIT_SUBMODULES=()
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
 KEYWORDS=""
-IUSE="+acl audit cgroup-hybrid debug doc efi +pam +policykit selinux"
+IUSE="+acl audit debug doc efi +pam +policykit selinux"
 
 COMMON_DEPEND="
 	audit? ( sys-process/audit )
@@ -58,12 +58,6 @@ src_prepare() {
 }
 
 src_configure() {
-	if use cgroup-hybrid; then
-		cgroupmode="hybrid"
-	else
-		cgroupmode="unified"
-	fi
-
 	local emesonargs=(
 		$(usex debug "-Ddebug-extra=elogind" "")
 		--buildtype $(usex debug debug release)
@@ -72,7 +66,6 @@ src_configure() {
 		-Daudit=$(usex audit true false)
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
 		-Dcgroup-controller=openrc
-		-Ddefault-hierarchy=${cgroupmode}
 		-Ddefault-kill-user-processes=true
 		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
 		-Defi=$(usex efi true false)
