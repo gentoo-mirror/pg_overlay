@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit flag-o-matic git-r3 linux-info meson pam udev xdg-utils
+inherit git-r3 linux-info meson pam udev xdg-utils
 
 DESCRIPTION="The systemd project's logind, extracted to a standalone package"
 HOMEPAGE="https://github.com/elogind/elogind"
@@ -58,6 +58,8 @@ src_prepare() {
 }
 
 src_configure() {
+	# Removed -Ddefault-hierarchy=${cgroupmode}
+	# -> It is completely irrelevant with -Dcgroup-controller=openrc anyway.
 	local emesonargs=(
 		$(usex debug "-Ddebug-extra=elogind" "")
 		--buildtype $(usex debug debug release)
@@ -72,7 +74,7 @@ src_configure() {
 		-Dhtml=$(usex doc auto false)
 		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 		-Dinstall-sysconfdir=true
-		-Dman=false
+		-Dman=auto
 		-Dmode=release
 		-Dpam=$(usex pam true false)
 		-Dpamlibdir=$(getpam_mod_dir)
