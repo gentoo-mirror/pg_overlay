@@ -54,6 +54,7 @@ src_prepare() {
 	cd config || die
 	eautoconf
 	cd .. || die
+	sed -i "s|#include <caml/config.h>||" src/utils/lib/CryptoPP.h
 	if ! use ocamlopt; then
 		sed -i -e "s/ocamlopt/idontwantocamlopt/g" "${S}/config/configure" || die "failed to disable ocamlopt"
 	fi
