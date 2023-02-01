@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-109-patches-02j.tar.xz"
+FIREFOX_PATCHSET="firefox-109-patches-03j.tar.xz"
 
 LLVM_MAX_SLOT=15
 
@@ -146,6 +146,12 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 		sys-apps/dbus
 	)
 	jack? ( virtual/jack )
+	pulseaudio? (
+		|| (
+			media-libs/libpulse
+			>=media-sound/apulse-0.1.12-r4[sdk]
+		)
+	)
 	libproxy? ( net-libs/libproxy )
 	selinux? ( sec-policy/selinux-mozilla )
 	sndio? ( >=media-sound/sndio-1.8.0-r1 )
@@ -193,20 +199,8 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 	)"
 RDEPEND="${COMMON_DEPEND}
 	jack? ( virtual/jack )
-	openh264? ( media-libs/openh264:*[plugin] )
-	pulseaudio? (
-		|| (
-			media-libs/libpulse
-			>=media-sound/apulse-0.1.12-r4
-		)
-	)"
+	openh264? ( media-libs/openh264:*[plugin] )"
 DEPEND="${COMMON_DEPEND}
-	pulseaudio? (
-		|| (
-			media-libs/libpulse
-			>=media-sound/apulse-0.1.12-r4[sdk]
-		)
-	)
 	X? (
 		x11-base/xorg-proto
 		x11-libs/libICE
@@ -227,7 +221,7 @@ llvm_check_deps() {
 		return 1
 	fi
 
-	if use clang ; then
+	if use clang && tc-ld-is-lld ; then
 		if ! has_version -b "sys-devel/lld:${LLVM_SLOT}" ; then
 			einfo "sys-devel/lld:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 			return 1
@@ -445,7 +439,7 @@ pkg_setup() {
 
 		llvm_pkg_setup
 
-		if use clang && use lto ; then
+		if use clang && use lto && tc-ld-is-lld ; then
 			local version_lld=$(ld.lld --version 2>/dev/null | awk '{ print $2 }')
 			[[ -n ${version_lld} ]] && version_lld=$(ver_cut 1 "${version_lld}")
 			[[ -z ${version_lld} ]] && die "Failed to read ld.lld version!"
@@ -571,6 +565,7 @@ src_unpack() {
 src_prepare() {
 	use lto && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
 	! use ppc64 && rm -v "${WORKDIR}"/firefox-patches/*bmo-1775202-ppc64*.patch
+
 	eapply "${WORKDIR}/firefox-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
