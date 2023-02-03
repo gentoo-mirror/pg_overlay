@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{8..11} )
+PYTHON_COMPAT=( python3_{9..11} )
 PYTHON_REQ_USE="threads(+),xml(+)"
 
 MY_PV="${PV/_alpha/.alpha}"
@@ -18,7 +18,7 @@ DEV_URI="
 ADDONS_URI="https://dev-www.libreoffice.org/src/"
 
 BRANDING="${PN}-branding-gentoo-0.8.tar.xz"
-#PATCHSET="${PN}-7.3.5.2-patchset-01.tar.xz"
+# PATCHSET="${P}-patchset-01.tar.xz"
 
 [[ ${MY_PV} == *9999* ]] && inherit git-r3
 inherit autotools bash-completion-r1 check-reqs flag-o-matic java-pkg-opt-2 multiprocessing python-single-r1 qmake-utils toolchain-funcs xdg-utils
@@ -44,9 +44,8 @@ unset DEV_URI
 # These are bundles that can't be removed for now due to huge patchsets.
 # If you want them gone, patches are welcome.
 ADDONS_SRC=(
-	# broken against latest upstream release, too many patches on top:
-	# https://github.com/tdf/libcmis/pull/43
-	"${ADDONS_URI}/libcmis-0.5.2.tar.xz"
+	# not packaged in Gentoo
+	"${ADDONS_URI}/dragonbox-1.1.3.tar.gz"
 	# not packaged in Gentoo, https://www.netlib.org/fp/dtoa.c
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
@@ -74,8 +73,6 @@ ADDONS_SRC=(
 	"libreoffice_extensions_scripting-javascript? ( ${ADDONS_URI}/35c94d2df8893241173de1d16b6034c0-swingExSrc.zip )"
 	# not packageable
 	"odk? ( http://download.go-oo.org/extern/185d60944ea767075d27247c3162b3bc-unowinreg.dll )"
-	# not packaged in Gentoo, https://github.com/jk-jeon/dragonbox
-	"${ADDONS_URI}/dragonbox-1.1.3.tar.gz"
 )
 SRC_URI+=" ${ADDONS_SRC[*]}"
 
@@ -130,6 +127,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	app-text/mythes
 	dev-cpp/abseil-cpp:=
 	>=dev-cpp/clucene-2.3.3.4-r2
+	>=dev-cpp/libcmis-0.5.2-r2
 	dev-db/unixODBC
 	dev-lang/perl
 	dev-libs/boost:=[nls]
@@ -160,9 +158,11 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/libpagemaker
 	>=media-libs/libpng-1.4:0=
 	>=media-libs/libvisio-0.1.0
+	media-libs/libwebp:=
 	media-libs/libzmf
 	media-libs/openjpeg:=
-	=media-libs/zxing-cpp-1.4.0:0/1.4
+	media-libs/tiff:=
+	media-libs/zxing-cpp:=
 	>=net-libs/neon-0.31.1:=
 	net-misc/curl
 	sci-mathematics/lpsolve
@@ -282,11 +282,11 @@ if [[ ${MY_PV} != *9999* ]] && [[ ${PV} != *_* ]]; then
 else
 	# Translations are not reliable on live ebuilds
 	# rather force people to use english only.
-	PDEPEND="!app-office/libreoffice-l10n"
+	RDEPEND+=" !app-office/libreoffice-l10n"
 fi
 
 PATCHES=(
-	#"${WORKDIR}"/${PATCHSET/.tar.xz/}
+	# "${WORKDIR}"/${PATCHSET/.tar.xz/}
 
 	# not upstreamable stuff
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
@@ -505,10 +505,8 @@ src_configure() {
 		--with-help="html"
 		--without-helppack-integration
 		--with-system-gpgmepp
-		--without-system-cuckoo
 		--without-system-dragonbox
 		--without-system-jfreereport
-		--without-system-libcmis
 		--without-system-libfixmath
 		--without-system-sane
 		$(use_enable base report-builder)
