@@ -170,6 +170,7 @@ VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
 	"${FILESDIR}"/1.65.0-ignore-broken-and-non-applicable-tests.patch
+	"${FILESDIR}"/1.67.0-bootstrap.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/0003-compiler-Use-wasm-ld-for-wasm-targets.patch
 	"${FILESDIR}"/0004-Revert-back-to-LlvmArchiveBuilder-on-all-platforms.patch
@@ -291,7 +292,7 @@ src_prepare() {
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
-			--without=rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
+			--without=rust-docs-json-preview,rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
 	fi
 
 	if use system-llvm; then
