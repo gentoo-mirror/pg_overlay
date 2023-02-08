@@ -27,7 +27,6 @@ dev-cpp/abseil-cpp 20220623.1 20230125.0: Abseil Common Libraries (C++), LTS Bra
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
-dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.33: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 3.11.1-r1: An interpreted, interactive, object-oriented programming language
@@ -49,11 +48,8 @@ dev-libs/wayland-protocols 1.31: Wayland protocol files
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-python/cloudscraper 1.2.68: A Python module to bypass Cloudflare's anti-bot page
-dev-python/pymountboot 0.2.3-r1: Python extension module to (re)mount /boot
-dev-python/pysol_cards 0.14.2: Deal PySol FreeCell cards
 dev-python/python-mpd 3.0.5: Python MPD client library
 dev-qt/qtbase 6.4.9999 6.5.9999: Cross-platform application development framework
-dev-qt/qtwebengine 5.15.7.9999: Library for rendering dynamic web content in Qt5 C++ and QML applications
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gn 0.2049: GN is a meta-build system that generates build files for Ninja
