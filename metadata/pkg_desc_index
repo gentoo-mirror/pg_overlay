@@ -80,7 +80,7 @@ mail-client/thunderbird 102.7.1: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
-media-libs/libsdl2 2.26.2: Simple Direct Media Layer
+media-libs/libsdl2 2.26.3: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20221229: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/tg_owt 0_pre20220914 0_pre20230105: WebRTC build for Telegram
@@ -135,6 +135,7 @@ sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat d
 sys-auth/elogind 246.9999 252.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/pambase 20220214: PAM base configuration files
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
+sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/lvm2 2.03.16-r1 2.03.17_pre: User-land utilities for LVM2 (device-mapper) software
 sys-fs/udisks 2.9.4-r1: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0 6.1.0_pre: XFS filesystem utilities
