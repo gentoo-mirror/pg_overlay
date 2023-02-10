@@ -125,8 +125,6 @@ RDEPEND="${DEPEND}
 	sys-apps/lsb-release
 "
 
-# FIXME: https://bugs.gentoo.org/874885
-# rust-analyzer should work with wasm, but currently does not
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	miri? ( nightly )
 	parallel-compiler? ( nightly )
@@ -170,7 +168,7 @@ VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
 	"${FILESDIR}"/1.65.0-ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/1.67.0-bootstrap.patch
+	"${FILESDIR}"/1.67.0-doc-wasm.patch
 	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/0003-compiler-Use-wasm-ld-for-wasm-targets.patch
 	"${FILESDIR}"/0004-Revert-back-to-LlvmArchiveBuilder-on-all-platforms.patch
@@ -277,16 +275,6 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# this supidity is needed because patch is too large to be in filesdir
-	# and if we move it to devspace - it lacks checksum for sig verification
-	#if [[ "${PV}" == 1.66.1 ]]; then
-	#		sed -i \
-	#		-e 's/516ba32a547b46a8e80ad20d4a17bf24a00bff0b69b74f56df119f770f3dfff6/fc7eb88c2f5104865379128b76767d36ce5b5fdb9f3483e683d150e514ebc3a3/' \
-	#		-e 's/fba10dc8ca9eaf4d481cb82bd1540cf5c05620533c44f917c09a22ea55ef408c/9cc4d1b4511a1f0d91231eb0f11c67ae5e8e38e4becd0bf5eb9e26d043796056/' \
-	#		vendor/rustix/.cargo-checksum.json || die
-	#else
-	#	die "remove sed mr forgetful maintainer"
-	#fi
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
