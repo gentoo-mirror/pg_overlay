@@ -28,7 +28,7 @@ ACCT_DEPEND="
 	acct-group/transmission
 	acct-user/transmission
 "
-BDEPEND="${ACCT_DEPEND}
+BDEPEND="
 	virtual/pkgconfig
 	nls? (
 		gtk? ( sys-devel/gettext )
@@ -81,7 +81,7 @@ src_configure() {
 		-DENABLE_QT=$(usex qt5 ON OFF)
 		-DENABLE_TESTS=$(usex test ON OFF)
 		-DENABLE_UTP=ON
-		-DENABLE_WEB=OFF
+		-DREBUILD_WEB=OFF
 
 		-DINSTALL_LIB=OFF
 		-DRUN_CLANG_TIDY=OFF
@@ -124,4 +124,5 @@ pkg_postinst() {
 		xdg_desktop_database_update
 		xdg_icon_cache_update
 	fi
+	tmpfiles_process transmission-daemon.conf
 }
