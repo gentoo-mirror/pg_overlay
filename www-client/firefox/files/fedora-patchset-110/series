@@ -7,8 +7,9 @@ mozilla-1170092.patch
 rhbz-1354671.patch
 disable-openh264-download.patch
 
-D164651.diff
-D166324.diff
-mozilla-1809162.patch
+mozilla-1813500.patch
 
 libwebrtc-screen-cast-sync.patch
+
+D167194.diff
+D169197.diff
