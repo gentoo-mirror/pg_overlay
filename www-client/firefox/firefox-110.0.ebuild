@@ -566,7 +566,7 @@ src_prepare() {
 	use lto && rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch
 	! use ppc64 && rm -v "${WORKDIR}"/firefox-patches/*bmo-1775202-ppc64*.patch
 
-	rm -v "${WORKDIR}"/firefox-patches/0001*patch
+	rm -v "${WORKDIR}"/firefox-patches/0001*.patch
 
 	eapply "${WORKDIR}/firefox-patches"
 
