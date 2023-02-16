@@ -845,7 +845,7 @@ src_configure() {
 	fi
 
 	mozconfig_use_with system-av1
-	mozconfig_use_with system-harfbuzz
+	#mozconfig_use_with system-harfbuzz
 	mozconfig_use_with system-harfbuzz system-graphite2
 	mozconfig_use_with system-icu
 	mozconfig_use_with system-jpeg
