@@ -568,6 +568,7 @@ src_prepare() {
 
 	rm -v "${WORKDIR}"/firefox-patches/0001*.patch
 	rm -v "${WORKDIR}"/firefox-patches/0003*.patch
+	rm -v "${WORKDIR}"/firefox-patches/0004*.patch
 
 	eapply "${WORKDIR}/firefox-patches"
 
@@ -844,8 +845,8 @@ src_configure() {
 	fi
 
 	mozconfig_use_with system-av1
-	mozconfig_use_with system-harfbuzz
-	mozconfig_use_with system-harfbuzz system-graphite2
+	#mozconfig_use_with system-harfbuzz
+	#mozconfig_use_with system-harfbuzz system-graphite2
 	mozconfig_use_with system-icu
 	mozconfig_use_with system-jpeg
 	mozconfig_use_with system-libevent
