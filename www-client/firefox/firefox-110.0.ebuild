@@ -567,6 +567,7 @@ src_prepare() {
 	! use ppc64 && rm -v "${WORKDIR}"/firefox-patches/*bmo-1775202-ppc64*.patch
 
 	rm -v "${WORKDIR}"/firefox-patches/0001*.patch
+	rm -v "${WORKDIR}"/firefox-patches/0003*.patch
 
 	eapply "${WORKDIR}/firefox-patches"
 
