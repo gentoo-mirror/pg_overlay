@@ -87,7 +87,6 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram.patch"
 	"${FILESDIR}/tdesktop-4.4.1-fix-dupe-main-decl.patch"
-	"${FILESDIR}/tdesktop-4.6.2-fix-gcc12-optional.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5

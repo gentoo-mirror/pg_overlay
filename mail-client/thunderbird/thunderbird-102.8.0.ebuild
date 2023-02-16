@@ -511,6 +511,7 @@ src_prepare() {
 	fi
 
 	rm -v "${WORKDIR}"/firefox-patches/0031*.patch
+	rm -v "${WORKDIR}"/firefox-patches/0032*.patch
 
 	eapply "${WORKDIR}/firefox-patches"
 
