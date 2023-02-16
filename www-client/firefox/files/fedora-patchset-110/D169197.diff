@@ -1,0 +1,23 @@
+diff --git a/widget/gtk/nsWindow.cpp b/widget/gtk/nsWindow.cpp
+--- a/widget/gtk/nsWindow.cpp
++++ b/widget/gtk/nsWindow.cpp
+@@ -654,10 +654,18 @@
+     if (window == this) {
+       sStoredLeaveNotifyEvent = nullptr;
+     }
+   }
+ 
++  // We need to detach accessible object here because mContainer is a custom
++  // widget and doesn't call gtk_widget_real_destroy() from destroy handler
++  // as regular widgets.
++  AtkObject* ac = gtk_widget_get_accessible(GTK_WIDGET(mContainer));
++  if (ac) {
++    gtk_accessible_set_widget(GTK_ACCESSIBLE(ac), nullptr);
++  }
++
+   gtk_widget_destroy(mShell);
+   mShell = nullptr;
+   mContainer = nullptr;
+ 
+   MOZ_ASSERT(!mGdkWindow,
+
