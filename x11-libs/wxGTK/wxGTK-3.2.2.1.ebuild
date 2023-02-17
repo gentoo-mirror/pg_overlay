@@ -7,7 +7,8 @@ inherit multilib-minimal
 
 WXSUBVERSION=${PV}-gtk3				# 3.2.1-gtk3
 WXVERSION=${PV}							# 3.2.1
-WXRELEASE=${WXVERSION%.*}-gtk3			# 3.2-gtk3
+# Make sure that this matches the number of components in ${PV}
+WXRELEASE=${WXVERSION%.*.*}-gtk3		# 3.2-gtk3
 WXRELEASE_NODOT=${WXRELEASE//./}		# 32-gtk3
 
 DESCRIPTION="GTK version of wxWidgets, a cross-platform C++ GUI toolkit"
@@ -72,11 +73,11 @@ BDEPEND="
 
 PATCHES=(
 	#"${WORKDIR}"/wxGTK-3.0.5_p20210214/
-	"${FILESDIR}"/${P}-gtk3-translation-domain.patch
+	"${FILESDIR}/${PN}-3.2.1-gtk3-translation-domain.patch"
 	#"${FILESDIR}"/wxGTK-ignore-c++-abi.patch #676878
-	"${FILESDIR}/${P}-configure-tests.patch"
-	"${FILESDIR}/${P}"-wayland-control.patch
-	"${FILESDIR}/${P}"-prefer-lib64-in-tests.patch
+	"${FILESDIR}/${PN}-3.2.1-configure-tests.patch"
+	"${FILESDIR}/${PN}-3.2.1-wayland-control.patch"
+	"${FILESDIR}/${PN}-3.2.1-prefer-lib64-in-tests.patch"
 )
 
 src_prepare() {
@@ -123,7 +124,7 @@ multilib_src_configure() {
 	local myeconfargs=(
 		--with-zlib=sys
 		--with-expat=sys
-		#--enable-compat30
+		--disable-compat30
 		$(use_with sdl)
 		$(use_with lzma liblzma)
 		# Currently defaults to curl, could change.  Watch the VDB!
