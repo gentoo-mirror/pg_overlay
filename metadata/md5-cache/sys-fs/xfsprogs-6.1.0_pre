@@ -12,5 +12,5 @@ RDEPEND=dev-libs/inih dev-libs/userspace-rcu:= >=sys-apps/util-linux-2.17.2 icu?
 RESTRICT=mirror
 SLOT=0
 SRC_URI=https://www.kernel.org/pub/linux/utils/fs/xfs/xfsprogs/xfsprogs-6.1.0.tag.xz -> xfsprogs-6.1.0.tar.xz
-_eclasses_=toolchain-funcs	cf009a3ed4e5bef503e7a9f215791a78	multilib	5ca4e49abed8e3a2f7b56920eadee157	flag-o-matic	69394e25812406faa1f90edaf4969395	systemd	5f4bb0758df2e483babf68cd517078ca	usr-ldscript	cd36f6d91e8173d95e25b0e0cf036960	poly-c_ebuilds	94632ea3c879766ab5e30bb33d1a3bba
+_eclasses_=toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	flag-o-matic	69394e25812406faa1f90edaf4969395	systemd	5f4bb0758df2e483babf68cd517078ca	usr-ldscript	cd36f6d91e8173d95e25b0e0cf036960	poly-c_ebuilds	94632ea3c879766ab5e30bb33d1a3bba
 _md5_=6427797304511339f67617846884d9ff
