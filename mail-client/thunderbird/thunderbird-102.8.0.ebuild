@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-102esr-patches-08j.tar.xz"
+FIREFOX_PATCHSET="firefox-102esr-patches-09jtb.tar.xz"
 
 LLVM_MAX_SLOT=15
 
@@ -510,9 +510,6 @@ src_prepare() {
 		rm -v "${WORKDIR}"/firefox-patches/*-LTO-Only-enable-LTO-*.patch || die
 	fi
 
-	rm -v "${WORKDIR}"/firefox-patches/0031*.patch
-	rm -v "${WORKDIR}"/firefox-patches/0032*.patch
-
 	eapply "${WORKDIR}/firefox-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
@@ -793,6 +790,10 @@ src_configure() {
 	if use system-librnp; then
 		mozconfig_add_options_ac "+system-librnp" --enable-compile-environment
 		mozconfig_use_with system-librnp
+	else
+		# This controls the backend of the bundled librnp. Choices are "botan" and "openssl".
+		# RNP Upstream recommends to use botan. In Gentoo it's preferred to use system-librnp.
+		mozconfig_add_options_ac "+bundled librnp backend = botan" --with-librnp-backend="botan"
 	fi
 
 	mozconfig_use_enable dbus
