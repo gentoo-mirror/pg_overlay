@@ -79,6 +79,7 @@ BDEPEND="
 # and not really worth it, bug #877769.
 RDEPEND="
 	acct-group/audio
+	acct-group/pipewire
 	media-libs/alsa-lib
 	sys-libs/ncurses:=[unicode(+)]
 	virtual/libintl[${MULTILIB_USEDEP}]
@@ -129,7 +130,6 @@ RDEPEND="
 	systemd? ( sys-apps/systemd )
 	system-service? (
 		acct-user/pipewire
-		acct-group/pipewire
 	)
 	v4l? ( media-libs/libv4l )
 	X? (
@@ -337,12 +337,14 @@ pkg_postinst() {
 	udev_reload
 	use system-service && tmpfiles_process pipewire.conf
 
-	elog "It is recommended to raise RLIMIT_MEMLOCK to 256 for users"
-	elog "using PipeWire. Do it either manually or add yourself"
-	elog "to the 'audio' group:"
-	elog
-	elog "  usermod -aG audio <youruser>"
-	elog
+	elog ">=pipewire-0.3.66 uses the 'pipewire' group to manage permissions"
+	elog "and limits needed to function smoothly."
+	elog "1. Please make sure your user is in the 'pipewire' group for correct"
+	elog "PAM limits behavior! You can add your account with:"
+	elog " usermod -aG pipewire <youruser>"
+	elog "2. It is recommended that you remove your user from the 'audio' group"
+	elog "as it can interfere with fast user switching:"
+	elog " usermod -rG audio <youruser>"
 
 	local ver
 	for ver in ${REPLACING_VERSIONS} ; do
