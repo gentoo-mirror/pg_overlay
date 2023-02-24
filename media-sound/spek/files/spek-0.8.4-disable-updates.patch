@@ -1,7 +1,7 @@
---- spek-0.8.1/src/spek-preferences.cc
-+++ spek-0.8.1/src/spek-preferences.cc
-@@ -44,7 +44,7 @@
-
+--- a/src/spek-preferences.cc
++++ b/src/spek-preferences.cc
+@@ -44,7 +44,7 @@ SpekPreferences::SpekPreferences() : locale(NULL)
+ 
  bool SpekPreferences::get_check_update()
  {
 -    bool result = true;
