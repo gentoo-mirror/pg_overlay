@@ -1,10 +1,11 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-WX_GTK_VER="3.1-gtk3"
 
-inherit autotools git-r3 wxwidgets
+WX_GTK_VER="3.2-gtk3"
+
+inherit autotools wxwidgets xdg git-r3
 
 DESCRIPTION="Analyse your audio files by showing their spectrogram"
 HOMEPAGE="http://spek.cc"
@@ -15,18 +16,17 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	media-video/ffmpeg:0=
-	x11-libs/wxGTK:${WX_GTK_VER}"
+	>=media-video/ffmpeg-5:=
+	x11-libs/wxGTK:${WX_GTK_VER}[X]
+"
 DEPEND="${RDEPEND}"
 BDEPEND="
-	dev-util/intltool
 	sys-devel/gettext
-	virtual/pkgconfig"
+	virtual/pkgconfig
+"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-disable-updates.patch
-	"${FILESDIR}"/${PN}-replace-gnu+11-with-c++11.patch
-	"${FILESDIR}"/${PN}-stdlib.patch
+	"${FILESDIR}"/${PN}-0.8.4-disable-updates.patch
 )
 
 src_prepare() {
