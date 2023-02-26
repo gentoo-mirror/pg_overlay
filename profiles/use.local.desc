@@ -66,8 +66,6 @@ dev-lang/rust:rustfmt - Install rustfmt, Rust code formatter
 dev-lang/rust:system-bootstrap - Bootstrap using installed rust compiler
 dev-lang/rust:system-llvm - Use the system LLVM installation
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
-dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
-dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
