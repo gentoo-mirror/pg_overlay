@@ -379,6 +379,39 @@ www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead
 www-client/firefox:system-png - Use the system-wide media-libs/libpng instead of bundled (requires APNG patches)
 www-client/firefox:system-python-libs - Use system's python site instead of bundled python libraries
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled
+www-client/ungoogled-chromium:cfi - Build with CFI (Control Flow Integrity) enabled. It requires "-stdlib=libc++", see #40 for more details.
+www-client/ungoogled-chromium:clang - Use Clang compiler instead of GCC
+www-client/ungoogled-chromium:convert-dict - Patch and build the convert_dict utility. The script will be installed into /usr/lib64/chromium-browser/update-dicts.sh. More info here: https://github.com/Eloston/ungoogled-chromium/issues/188#issuecomment-444752907
+www-client/ungoogled-chromium:debug - Enable DCHECK feature with severity configurable at runtime. Mostly intended for debugging and development, NOT RECOMMENDED for general use.
+www-client/ungoogled-chromium:enable-driver - Build chromedriver
+www-client/ungoogled-chromium:gtk4 - Build with GTK4 headers.
+www-client/ungoogled-chromium:hangouts - Enable support for Google Hangouts features such as screen sharing
+www-client/ungoogled-chromium:headless - Build Ozone only with headless backend, NOT RECOMMENDED for general uses
+www-client/ungoogled-chromium:hevc - Enable HEVC decoding support. Should work with system-ffmpeg, but might require additional patching for the built-in one.
+www-client/ungoogled-chromium:js-type-check - Enable JavaScript type-checking for Chrome's web technology-based UI. Requires Java.
+www-client/ungoogled-chromium:official - Enable Official build instead of Developer build.
+www-client/ungoogled-chromium:optimize-thinlto - Whether to enable ThinLTO optimizations. Turning ThinLTO optimizations on can substantially increase link time and binary size, but they generally also make binaries a fair bit faster.
+www-client/ungoogled-chromium:optimize-webui - Optimize parts of Chromium's UI written with web technologies (HTML/CSS/JS) for runtime performance purposes. This does more work at compile time for speed benefits at runtime.
+www-client/ungoogled-chromium:pgo - Enable PGO. Requires clang and bundled binary profile data in sources tree.
+www-client/ungoogled-chromium:pic - Disable optimized assembly code that is not PIC friendly
+www-client/ungoogled-chromium:proprietary-codecs - Enable proprietary codecs like H.264, MP3
+www-client/ungoogled-chromium:screencast - Enable support for remote desktop and screen cast using media-video/pipewire
+www-client/ungoogled-chromium:suid - Build the SUID sandbox, which is only needed on CONFIG_USER_NS=n kernels
+www-client/ungoogled-chromium:system-av1 - Use the system media-libs/libaom and media-libs/dav1d instead of the bundled ones
+www-client/ungoogled-chromium:system-ffmpeg - Use the system media-video/ffmpeg instead of the bundled one
+www-client/ungoogled-chromium:system-harfbuzz - Use the system media-libs/harfbuzz instead of the bundled one
+www-client/ungoogled-chromium:system-icu - Use the system dev-libs/icu instead of the bundled one
+www-client/ungoogled-chromium:system-jsoncpp - Use the system dev-libs/jsoncpp instead of the bundled one
+www-client/ungoogled-chromium:system-libevent - Use the system dev-libs/libevent instead of the bundled one
+www-client/ungoogled-chromium:system-libusb - Use the system dev-libs/libusb instead of the bundled one
+www-client/ungoogled-chromium:system-libvpx - Use the system media-libs/libvpx instead of the bundled one
+www-client/ungoogled-chromium:system-openh264 - Use the system media-libs/openh264 instead of the bundled one. If disabled, it will restrict USE=bindist.
+www-client/ungoogled-chromium:system-openjpeg - Use the system-wide media-libs/openjpeg instead of the bundled one. OpenJPEG use are exclusively for Chromium's PDF viewer.
+www-client/ungoogled-chromium:system-png - Use system libpng instead of the bundled one
+www-client/ungoogled-chromium:system-re2 - Use the system-wide dev-libs/re2 instead of the bundled one
+www-client/ungoogled-chromium:system-snappy - Use the system-wide app-arch/snappy instead of the bundled one
+www-client/ungoogled-chromium:thinlto - Build with ThinLTO support. LTO (Link Time Optimization) achieves better runtime performance through whole-program analysis and cross-module optimization (highly recommended).
+www-client/ungoogled-chromium:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
 www-client/vivaldi-snapshot:proprietary-codecs - Use system media-video/ffmpeg to support patent-encumbered media codecs
 www-client/vivaldi-snapshot:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
 x11-base/xorg-server:dmx - Build the Distributed Multiheaded X server
