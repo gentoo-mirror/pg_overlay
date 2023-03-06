@@ -324,6 +324,9 @@ net-p2p/transmission:lightweight - Optimize transmission for low-resource system
 net-p2p/transmission:mbedtls - Use mbed TLS instead of OpenSSL
 net-p2p/transmission-remote-gtk:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration.
 net-print/samsung-unified-driver:network - Enable network printing support
+sci-mathematics/mathematica:R - Enable dev-lang/R backend support
+sci-mathematics/mathematica:cuda - Install with cuda support
+sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
 sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-auth/pambase:debug - Enable debug information logging on syslog(3) for all the modules supporting this in the system authentication and system login stacks.
