@@ -45,6 +45,7 @@ BDEPEND="
 PATCHES=( "${FILESDIR}/ru_RU.patch" )
 
 src_prepare() {
+	default
 	# disable git
 	sed -i -e '/git describe/s/^/#/' ${PN}.pro || die
 
@@ -64,8 +65,6 @@ src_prepare() {
 		sed -i "/${1}.ts/d" ${PN}.pro || die
 	}
 	plocale_for_each_disabled_locale rm_loc
-
-	default
 }
 
 src_configure() {
