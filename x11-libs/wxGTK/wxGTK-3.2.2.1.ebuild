@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit multilib-minimal eapi7-ver
+inherit multilib-minimal versionator
 
 WXSUBVERSION=${ver_cut 1-3}-gtk3				# 3.2.1-gtk3
 WXVERSION=${ver_cut 1-3}							# 3.2.1
