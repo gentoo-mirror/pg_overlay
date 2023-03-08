@@ -9,7 +9,7 @@ WXSUBVERSION=$(ver_cut 1-3)-gtk3				# 3.2.1-gtk3
 WXVERSION=$(ver_cut 1-3)						# 3.2.1
 # Make sure that this matches the number of components in ${PV}
 WXRELEASE=$(ver_cut 1-2)-gtk3					# 3.2-gtk3
-WXRELEASE_NODOT=$(ver_cut 1-2/./)-gtk3			# 32-gtk3
+WXRELEASE_NODOT=${$(ver_cut 1-2)/./}-gtk3			# 32-gtk3
 
 DESCRIPTION="GTK version of wxWidgets, a cross-platform C++ GUI toolkit"
 HOMEPAGE="https://wxwidgets.org/"
