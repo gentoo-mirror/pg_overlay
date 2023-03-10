@@ -198,7 +198,7 @@ multilib_src_configure() {
 		$(meson_feature pipewire-alsa) # Allows integrating ALSA apps into PW graph
 		-Dspa-plugins=enabled
 		-Dalsa=enabled # Allows using kernel ALSA for sound I/O (NOTE: media-session is gone so IUSE=alsa/spa_alsa/alsa-backend might be possible)
-		-Dcompress-offload=disabled # Matches upstream, tinycompress unpackaged too
+		-Dcompress-offload=disabled # TODO: tinycompress unpackaged
 		-Daudiomixer=enabled # Matches upstream
 		-Daudioconvert=enabled # Matches upstream
 		$(meson_native_use_feature bluetooth bluez5)
@@ -254,6 +254,10 @@ multilib_src_configure() {
 	)
 
 	meson_src_configure
+}
+
+multilib_src_test() {
+	meson_src_test --timeout-multiplier 10
 }
 
 multilib_src_install() {
