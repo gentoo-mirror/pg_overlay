@@ -21,7 +21,7 @@ SRC_URI="https://github.com/webmproject/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.
 	test? ( https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${PN}-testdata-${LIBVPX_TESTDATA_VER}.tar.xz )"
 
 LICENSE="BSD"
-SLOT="0/7"
+SLOT="0/8"
 KEYWORDS="amd64 arm arm64 ~ia64 ~loong ppc ppc64 ~riscv ~s390 ~sparc x86 ~amd64-linux ~x86-linux"
 IUSE="cpu_flags_ppc_vsx3 doc +highbitdepth postproc static-libs test +threads"
 
