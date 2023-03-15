@@ -140,7 +140,7 @@ virtual/rust 1.68.0: Virtual for Rust language compiler
 www-apps/nextcloud 25.0.4: Personal cloud that runs on your own server
 www-client/firefox 110.0.1: Firefox Web Browser
 www-client/ungoogled-chromium 111.0.5563.50_p1: Modifications to Chromium for removing Google integration and enhancing privacy
-www-client/vivaldi-snapshot 5.8.2950.3: A browser for our friends
+www-client/vivaldi-snapshot 5.8.2955.3: A browser for our friends
 x11-base/xorg-server 21.1.4: X.Org X servers
 x11-base/xwayland 22.1.8: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
