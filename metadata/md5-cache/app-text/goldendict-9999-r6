@@ -10,5 +10,5 @@ LICENSE=GPL-3
 PROPERTIES=live
 RDEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[X,gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-libs/libao media-video/ffmpeg:0= )
 SLOT=0
-_eclasses_=desktop	021728fdc1b03b36357dbc89489e0f0d	git-r3	2347f8fe2d392b2a091191f94be37e6f	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	qmake-utils	59420c906278d16deaaa629f9d115707	plocale	950fbaec7deeba41b5bcc0572cca99b9
+_eclasses_=desktop	021728fdc1b03b36357dbc89489e0f0d	git-r3	c57c50c922e121043788de0b40ada60a	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	qmake-utils	59420c906278d16deaaa629f9d115707	plocale	950fbaec7deeba41b5bcc0572cca99b9
 _md5_=03955b772a71afdb8bab587345149659
