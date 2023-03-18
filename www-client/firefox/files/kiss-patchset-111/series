@@ -1,3 +1,4 @@
 fix-clang-as.patch
 fix-disable-accessibility.patch
+no-atk.patch
 no-fribidi.patch
