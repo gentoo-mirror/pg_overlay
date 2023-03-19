@@ -131,7 +131,7 @@ sys-fs/udisks 2.9.4-r1: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/ncurses 6.3_p20220122: console display library
-sys-libs/polly 15.0.7: Polyhedral optimizations for LLVM
+sys-libs/polly 15.0.7 16.0.0: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.2_pre: Standard informational utilities and process-handling tools
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
