@@ -1,0 +1,12 @@
+BDEPEND=>=virtual/rust-1.53 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install test unpack
+DESCRIPTION=dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
+EAPI=8
+HOMEPAGE=https://github.com/Byron/dua-cli
+INHERIT=cargo git-r3 optfeature
+IUSE=debug
+LICENSE=MIT
+PROPERTIES=live
+SLOT=0
+_eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	cargo	2076d5b84dfa54f78d70aea5e10dde87	git-r3	c57c50c922e121043788de0b40ada60a	optfeature	222cb475c5a4f7ae7cfb0bf510a6fe54
+_md5_=00247ccd80ad1193de3320b0b5d5b0ca

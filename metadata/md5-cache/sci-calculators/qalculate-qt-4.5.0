@@ -1,0 +1,14 @@
+DEFINED_PHASES=configure install postinst postrm preinst
+DEPEND=dev-qt/qtnetwork:5 dev-qt/qtwidgets:5 >=sci-libs/libqalculate-4.5.0:=
+DESCRIPTION=Multi-purpose cross-platform desktop calculator
+EAPI=8
+HOMEPAGE=https://qalculate.github.io/
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=qmake-utils xdg
+KEYWORDS=~amd64 ~x86
+LICENSE=GPL-2+
+RDEPEND=dev-qt/qtnetwork:5 dev-qt/qtwidgets:5 >=sci-libs/libqalculate-4.5.0:=
+SLOT=0
+SRC_URI=https://github.com/Qalculate/qalculate-qt/releases/download/v4.5.0/qalculate-qt-4.5.0.tar.gz
+_eclasses_=toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	qmake-utils	59420c906278d16deaaa629f9d115707	xdg-utils	ac0e315a3688929e34ac75b139e7349a	xdg	4a14c5c24f121e7da66e5aab4a168c6e
+_md5_=56d8fc73c1523915e8089b9a738d2116

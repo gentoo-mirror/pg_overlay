@@ -1,0 +1,14 @@
+BDEPEND=dev-util/intltool sys-devel/gettext virtual/pkgconfig sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure prepare unpack
+DEPEND=media-video/ffmpeg:0= x11-libs/wxGTK:3.2-gtk3=
+DESCRIPTION=Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
+EAPI=8
+HOMEPAGE=http://spek.cc
+INHERIT=autotools git-r3 wxwidgets
+KEYWORDS=~amd64
+LICENSE=GPL-3
+PROPERTIES=live
+RDEPEND=media-video/ffmpeg:0= x11-libs/wxGTK:3.2-gtk3=
+SLOT=0
+_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	b5529dc611971a61a30153916014f616	git-r3	c57c50c922e121043788de0b40ada60a	flag-o-matic	69394e25812406faa1f90edaf4969395	wxwidgets	146456225a30c4c2ec106117390fb7ff
+_md5_=3bbc172e13ebcc15c3584f2364e1df9d
