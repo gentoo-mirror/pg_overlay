@@ -87,7 +87,7 @@ BDEPEND="${PYTHON_DEPS}
 			sys-devel/lld:16
 		)
 		virtual/rust:0/llvm-16
-		pgo? ( =sys-libs/compiler-rt-sanitizers-15*[profile] )
+		pgo? ( =sys-libs/compiler-rt-sanitizers-16*[profile] )
 	)
 	app-alternatives/awk
 	app-arch/unzip

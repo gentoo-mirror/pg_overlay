@@ -10,10 +10,10 @@ inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing \
 
 if [[ ${PV} = *beta* ]]; then
 	betaver=${PV//*beta}
-	BETA_SNAPSHOT="${betaver:0:4}-${betaver:4:2}-${betaver:6:2}"
+	BETA_SNAPSHOT=""
 	MY_P="rustc-beta"
 	SLOT="beta/${PV}"
-	SRC="${BETA_SNAPSHOT}/rustc-beta-src.tar.xz -> rustc-${PV}-src.tar.xz"
+	SRC="rustc-beta-src.tar.xz"
 else
 	ABI_VER="$(ver_cut 1-2)"
 	SLOT="stable/${ABI_VER}"
@@ -22,7 +22,8 @@ else
 	KEYWORDS="~amd64 ~arm ~arm64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
-RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).1"
+RUST_STAGE0_VERSION=${PV}
+#RUST_STAGE0_VERSION="1.$(($(ver_cut 2) - 1)).0"
 
 DESCRIPTION="Systems programming language from Mozilla"
 HOMEPAGE="https://www.rust-lang.org/"
@@ -102,12 +103,15 @@ BDEPEND="${PYTHON_DEPS}
 
 DEPEND="
 	>=app-arch/xz-utils-5.2
+	net-libs/libssh2:=
+	net-libs/http-parser:=
 	net-misc/curl:=[http2,ssl]
 	sys-libs/zlib:=
 	dev-libs/openssl:0=
 	system-llvm? (
 		${LLVM_DEPEND}
 		llvm-libunwind? ( sys-libs/llvm-libunwind:= )
+		>=sys-devel/clang-runtime-14.0[libcxx]
 	)
 	!system-llvm? (
 		!llvm-libunwind? (
@@ -162,8 +166,9 @@ VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
 	"${FILESDIR}"/1.68.0-ignore-broken-and-non-applicable-tests.patch
-	"${FILESDIR}"/1.62.1-musl-dynamic-linking.patch
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
+	"${FILESDIR}"/0002-compiler-Change-LLVM-targets.patch
+	"${FILESDIR}"/0003-compiler-Use-wasm-ld-for-wasm-targets.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -248,7 +253,12 @@ pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
 
-	export LIBGIT2_NO_PKG_CONFIG=1 #749381
+	# required to link agains system libs, otherwise
+	# crates use bundled sources and compile own static version
+	export LIBGIT2_SYS_USE_PKG_CONFIG=1
+	export LIBGIT2_NO_PKG_CONFIG=0 #749381
+	export LIBSSH2_SYS_USE_PKG_CONFIG=1
+	export PKG_CONFIG_ALLOW_CROSS=1
 
 	use system-bootstrap && bootstrap_rust_version_check
 
@@ -290,12 +300,28 @@ src_prepare() {
 			--without=rust-docs-json-preview,rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
 	fi
 
+	if use system-llvm; then
+		rm -rf src/llvm-project/
+		mkdir -p src/llvm-project/libunwind/
+		# We never enable emscripten.
+		rm -rf src/llvm-emscripten/
+		# We never enable other LLVM tools.
+		rm -rf src/tools/clang
+		rm -rf src/tools/lld
+		rm -rf src/tools/lldb
+		# CI tooling won't be used
+		rm -rf src/ci
+	fi
+
+	# Remove other unused vendored libraries 
+	rm -rf vendor/*jemalloc-sys*/jemalloc/
+	rm -rf vendor/libmimalloc-sys/c_src/mimalloc/
+	rm -rf vendor/openssl-src/openssl/
+
 	default
 }
 
 src_configure() {
-	filter-flags '-flto*' # https://bugs.gentoo.org/862109 https://bugs.gentoo.org/866231
-
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -339,27 +365,19 @@ src_configure() {
 		[llvm]
 		download-ci-llvm = false
 		optimize = $(toml_usex !debug)
+		thin-lto =  $(toml_usex system-llvm)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
-		link-shared = $(toml_usex system-llvm)
-		$(if is_libcxx_linked; then
-			# https://bugs.gentoo.org/732632
-			echo "use-libcxx = true"
-			echo "static-libstdcpp = false"
-		fi)
-		$(case "${rust_target}" in
-			i586-*-linux-*)
-				# https://github.com/rust-lang/rust/issues/93059
-				echo 'cflags = "-fcf-protection=none"'
-				echo 'cxxflags = "-fcf-protection=none"'
-				echo 'ldflags = "-fcf-protection=none"'
-				;;
-			*)
-				;;
-		esac)
+		link-jobs = $(makeopts_jobs)
+		link-shared =  $(toml_usex system-llvm)
+		skip-rebuild = true
+		static-libstdcpp = $(usex system-llvm false true)
+		use-libcxx =  $(toml_usex system-llvm)
+		use-linker = "lld"
+
 		[llvm.build-config]
 		CMAKE_VERBOSE_MAKEFILE = "ON"
 		CMAKE_C_FLAGS_${cm_btype} = "${CFLAGS}"
@@ -368,9 +386,11 @@ src_configure() {
 		CMAKE_MODULE_LINKER_FLAGS_${cm_btype} = "${LDFLAGS}"
 		CMAKE_SHARED_LINKER_FLAGS_${cm_btype} = "${LDFLAGS}"
 		CMAKE_STATIC_LINKER_FLAGS_${cm_btype} = "${ARFLAGS}"
+
 		[build]
 		build-stage = 2
 		test-stage = 2
+		doc-stage = 2
 		build = "${rust_target}"
 		host = ["${rust_target}"]
 		target = [${rust_targets}]
@@ -378,10 +398,12 @@ src_configure() {
 		rustc = "${rust_stage0_root}/bin/rustc"
 		rustfmt = "${rust_stage0_root}/bin/rustfmt"
 		docs = $(toml_usex doc)
-		compiler-docs = false
+		compiler-docs = $(toml_usex doc)
+		#
 		submodules = false
+		#
 		python = "${EPYTHON}"
-		locked-deps = true
+		locked-deps = false
 		vendor = true
 		extended = true
 		tools = [${tools}]
@@ -389,6 +411,8 @@ src_configure() {
 		sanitizers = false
 		profiler = $(toml_usex profiler)
 		cargo-native-static = false
+		local-rebuild = false
+
 		[install]
 		prefix = "${EPREFIX}/usr/lib/${PN}/${PV}"
 		sysconfdir = "etc"
@@ -396,6 +420,7 @@ src_configure() {
 		bindir = "bin"
 		libdir = "lib"
 		mandir = "share/man"
+
 		[rust]
 		# https://github.com/rust-lang/rust/issues/54872
 		codegen-units-std = 1
@@ -408,25 +433,28 @@ src_configure() {
 		debuginfo-level-std = $(usex debug 2 0)
 		debuginfo-level-tools = $(usex debug 2 0)
 		debuginfo-level-tests = 0
-		backtrace = true
+		backtrace = $(toml_usex debug)
 		incremental = false
 		default-linker = "$(tc-getCC)"
 		parallel-compiler = $(toml_usex parallel-compiler)
 		channel = "$(usex nightly nightly stable)"
 		description = "gentoo"
 		rpath = false
-		verbose-tests = true
+		verbose-tests = false
 		optimize-tests = $(toml_usex !debug)
-		codegen-tests = true
-		dist-src = false
-		remap-debuginfo = true
+		codegen-tests = $(toml_usex debug)
+		dist-src = $(toml_usex debug)
+		remap-debuginfo = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		use-lld = true
 		# only deny warnings if doc+wasm are NOT requested, documenting stage0 wasm std fails without it
 		# https://github.com/rust-lang/rust/issues/74976
 		# https://github.com/rust-lang/rust/issues/76526
 		deny-warnings = $(usex wasm $(usex doc false true) true)
 		backtrace-on-ice = true
 		jemalloc = false
+		llvm-libunwind = "$(usex system-llvm system)"
+
 		[dist]
 		src-tarball = false
 		compression-formats = ["xz"]
@@ -445,7 +473,7 @@ src_configure() {
 			cxx = "$(tc-getCXX)"
 			linker = "$(tc-getCC)"
 			ranlib = "$(tc-getRANLIB)"
-			llvm-libunwind = "$(usex llvm-libunwind $(usex system-llvm system in-tree) no)"
+			#llvm-libunwind = "$(usex llvm-libunwind $(usex system-llvm system in-tree) no)"
 		_EOF_
 		if use system-llvm; then
 			cat <<- _EOF_ >> "${S}"/config.toml
