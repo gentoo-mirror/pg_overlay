@@ -42,7 +42,7 @@ LLVM_TARGET_USEDEPS=${ALL_LLVM_TARGETS[@]/%/(-)?}
 
 LICENSE="|| ( MIT Apache-2.0 ) BSD BSD-1 BSD-2 BSD-4 UoI-NCSA"
 
-IUSE="clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind miri nightly parallel-compiler profiler rls rustfmt rust-analyzer rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
+IUSE="clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind miri nightly parallel-compiler profiler rustfmt rust-analyzer rust-src system-bootstrap system-llvm test wasm ${ALL_LLVM_TARGETS[*]}"
 
 # Please keep the LLVM dependency block separate. Since LLVM is slotted,
 # we need to *really* make sure we're not pulling more than one slot
@@ -128,8 +128,6 @@ RDEPEND="${DEPEND}
 REQUIRED_USE="|| ( ${ALL_LLVM_TARGETS[*]} )
 	miri? ( nightly )
 	parallel-compiler? ( nightly )
-	rls? ( rust-src )
-	rust-analyzer? ( !wasm )
 	test? ( ${ALL_LLVM_TARGETS[*]} )
 	wasm? ( llvm_targets_WebAssembly )
 	x86? ( cpu_flags_x86_sse2 )
@@ -283,8 +281,8 @@ src_prepare() {
 	fi
 
 	if use system-llvm; then
-		rm -rf src/llvm-project/{clang,clang-tools-extra,compiler-rt,lld,lldb,llvm}
-		rm -rf src/llvm-project/libunwind/*
+		rm -rf src/llvm-project/
+		mkdir -p src/llvm-project/libunwind/
 		# We never enable emscripten.
 		rm -rf src/llvm-emscripten/
 		# We never enable other LLVM tools.
@@ -299,28 +297,6 @@ src_prepare() {
 	rm -rf vendor/*jemalloc-sys*/jemalloc/
 	rm -rf vendor/libmimalloc-sys/c_src/mimalloc/
 	rm -rf vendor/openssl-src/openssl/
-
-	# Remove hidden files from source
-	find src/ -type f -name '.appveyor.yml' -exec rm -v '{}' '+'
-	find src/ -type f -name '.travis.yml' -exec rm -v '{}' '+'
-	find src/ -type f -name '.cirrus.yml' -exec rm -v '{}' '+'
-
-	# This only affects the transient rust-installer, but let it use our dynamic xz-libs
-	sed -i.lzma -e '/LZMA_API_STATIC/d' src/bootstrap/tool.rs
-
-	# The configure macro will modify some autoconf-related files, which upsets
-	# cargo when it tries to verify checksums in those files.  If we just truncate
-	# that file list, cargo won't have anything to complain about.
-	#find vendor -name .cargo-checksum.json \
-	#	-exec sed -i.uncheck -e 's/"files":{[^}]*}/"files":{ }/' '{}' '+'
-
-	# Sometimes Rust sources start with #![...] attributes, and "smart" editors think
-	# it's a shebang and make them executable. Then brp-mangle-shebangs gets upset...
-	find -name '*.rs' -type f -perm /111 -exec chmod -v -x '{}' '+'
-
-	# LLVM LibUwind hack
-	#sed -i /std=c99/d library/unwind/build.rs
-	#sed -i /std=c++11/d library/unwind/build.rs
 
 	default
 }
@@ -346,7 +322,6 @@ src_configure() {
 	use clippy && tools+=',"clippy"'
 	use miri && tools+=',"miri"'
 	use profiler && tools+=',"rust-demangler"'
-	use rls && tools+=',"rls","analysis"'
 	use rustfmt && tools+=',"rustfmt"'
 	use rust-analyzer && tools+=',"rust-analyzer","analysis"'
 	use rust-src && tools+=',"src"'
@@ -675,7 +650,6 @@ src_install() {
 	use clippy && symlinks+=( clippy-driver cargo-clippy )
 	use miri && symlinks+=( miri cargo-miri )
 	use profiler && symlinks+=( rust-demangler )
-	use rls && symlinks+=( rls )
 	use rustfmt && symlinks+=( rustfmt cargo-fmt )
 	use rust-analyzer && symlinks+=( rust-analyzer )
 
@@ -735,9 +709,6 @@ src_install() {
 	fi
 	if use profiler; then
 		echo /usr/bin/rust-demangler >> "${T}/provider-${P}"
-	fi
-	if use rls; then
-		echo /usr/bin/rls >> "${T}/provider-${P}"
 	fi
 	if use rustfmt; then
 		echo /usr/bin/rustfmt >> "${T}/provider-${P}"
