@@ -31,7 +31,7 @@ HOMEPAGE="https://www.rust-lang.org/"
 SRC_URI="
 	https://static.rust-lang.org/dist/${SRC}
 	verify-sig? ( https://static.rust-lang.org/dist/${SRC}.asc )
-	!system-bootstrap? ( $(rust_all_arch_uris rust-${RUST_STAGE0_VERSION}) )
+	!system-bootstrap? ( $(rust_all_arch_uris rust-beta ) )
 "
 
 # keep in sync with llvm ebuild of the same version as bundled one.
@@ -275,7 +275,7 @@ pkg_setup() {
 src_prepare() {
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
-		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
+		local rust_stage0="rust-beta-$(rust_abi)"
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
 			--without=rust-docs-json-preview,rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
