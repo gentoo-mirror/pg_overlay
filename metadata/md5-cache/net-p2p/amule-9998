@@ -10,5 +10,5 @@ LICENSE=GPL-2+
 PROPERTIES=live
 RDEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:0= sys-libs/readline:0= sys-libs/zlib >=x11-libs/wxGTK-3.0.4:3.1-gtk3[gui?] daemon? ( acct-user/amule ) geoip? ( dev-libs/geoip ) nls? ( virtual/libintl ) webserver? ( acct-user/amule media-libs/libpng:0= ) stats? ( media-libs/gd:=[jpeg,png] ) upnp? ( net-libs/libupnp:0 )
 SLOT=0
-_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	b5529dc611971a61a30153916014f616	git-r3	c57c50c922e121043788de0b40ada60a	plocale	950fbaec7deeba41b5bcc0572cca99b9	flag-o-matic	69394e25812406faa1f90edaf4969395	wxwidgets	146456225a30c4c2ec106117390fb7ff	xdg-utils	ac0e315a3688929e34ac75b139e7349a
+_eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	6001248ef162a5fa2a21ce132a212f6b	multilib	5ca4e49abed8e3a2f7b56920eadee157	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	b5529dc611971a61a30153916014f616	git-r3	c57c50c922e121043788de0b40ada60a	plocale	950fbaec7deeba41b5bcc0572cca99b9	flag-o-matic	514815b1cc0dd4aeac177c2e812b3b1a	wxwidgets	146456225a30c4c2ec106117390fb7ff	xdg-utils	ac0e315a3688929e34ac75b139e7349a
 _md5_=02dd8f9a561281ea40723b560e0b98ff
