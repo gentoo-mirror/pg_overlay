@@ -64,6 +64,7 @@ src_configure() {
 		$(meson_use selinux xselinux)
 		$(meson_use video_cards_nvidia xwayland_eglstream)
 		-Ddri3=true
+		-Ddrm=true
 		-Dglamor=true
 		-Dglx=true
 		-Dxdmcp=false
@@ -74,6 +75,7 @@ src_configure() {
 		-Ddocs=false
 		-Ddevel-docs=false
 		-Ddocs-pdf=false
+		-Dlibdecor=false
 	)
 
 	meson_src_configure
