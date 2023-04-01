@@ -10,7 +10,6 @@ DESCRIPTION="Text-to-speech library for the Qt6 framework"
 IUSE=""
 
 RDEPEND="
-	>=app-accessibility/speech-dispatcher-0.8.7
 	=dev-qt/qtbase-${PV}*
 "
 DEPEND="${RDEPEND}"
