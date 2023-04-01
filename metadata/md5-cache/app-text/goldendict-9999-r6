@@ -1,6 +1,6 @@
 BDEPEND=dev-qt/qt5compat:6 dev-qt/qttools:6[assistant,linguist] dev-qt/qtsingleapplication[X] virtual/pkgconfig >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=configure install prepare unpack
-DEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[X,gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-libs/libao media-video/ffmpeg:0= )
+DEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[X,gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtspeech:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-libs/libao media-video/ffmpeg:0= )
 DESCRIPTION=Feature-rich dictionary lookup program
 EAPI=8
 HOMEPAGE=http://goldendict.org/
@@ -8,7 +8,7 @@ INHERIT=desktop git-r3 qmake-utils plocale
 IUSE=debug ffmpeg
 LICENSE=GPL-3
 PROPERTIES=live
-RDEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[X,gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-libs/libao media-video/ffmpeg:0= )
+RDEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[X,gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtspeech:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-libs/libao media-video/ffmpeg:0= )
 SLOT=0
 _eclasses_=desktop	021728fdc1b03b36357dbc89489e0f0d	git-r3	27e13c09a4c7e4c78ac812f74727e676	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	d1408425c7c4a7669b9b17735404b693	qmake-utils	59420c906278d16deaaa629f9d115707	plocale	950fbaec7deeba41b5bcc0572cca99b9
-_md5_=03955b772a71afdb8bab587345149659
+_md5_=83fe46c84e1075b4c1e7899d25e50982

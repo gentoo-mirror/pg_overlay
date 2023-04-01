@@ -24,6 +24,7 @@ RDEPEND="
 	dev-libs/lzo
 	dev-qt/qtbase:6[X,gui,network,sql,widgets,xml]
 	dev-qt/qtmultimedia:6
+	dev-qt/qtspeech:6
 	dev-qt/qtsvg:6
 	dev-qt/qtwebengine:6
 	media-libs/libvorbis
