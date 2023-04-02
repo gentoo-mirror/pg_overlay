@@ -26,7 +26,7 @@ inherit autotools bash-completion-r1 check-reqs flag-o-matic java-pkg-opt-2 mult
 DESCRIPTION="A full office productivity suite"
 HOMEPAGE="https://www.libreoffice.org"
 SRC_URI="branding? ( https://dev.gentoo.org/~dilfridge/distfiles/${BRANDING} )"
-[[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~xen0n/distfiles/app-office/libreoffice/${PATCHSET}"
+[[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PATCHSET}"
 
 # Split modules following git/tarballs; Core MUST be first!
 # Help is used for the image generator
@@ -49,7 +49,8 @@ ADDONS_SRC=(
 	# not packaged in Gentoo, https://www.netlib.org/fp/dtoa.c
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
-	"${ADDONS_URI}/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz"
+	"${ADDONS_URI}/skia-m111-a31e897fb3dcbc96b2b40999751611d029bf5404.tar.xz"
+	#"${ADDONS_URI}/skia-m103-b301ff025004c9cd82816c86c547588e6c24b466.tar.xz"
 	"base? (
 		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
 		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
@@ -149,7 +150,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-gfx/graphite2
 	media-libs/fontconfig
 	>=media-libs/freetype-2.11.0-r1:2
-	>=media-libs/harfbuzz-0.9.42:=[graphite,icu]
+	>=media-libs/harfbuzz-5.1.0:=[graphite,icu]
 	media-libs/lcms:2
 	>=media-libs/libcdr-0.1.0
 	>=media-libs/libepoxy-1.3.1
@@ -165,7 +166,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	media-libs/zxing-cpp:=
 	>=net-libs/neon-0.31.1:=
 	net-misc/curl
-	sci-mathematics/lpsolve
+	sci-mathematics/lpsolve:=
 	sys-libs/zlib
 	virtual/opengl
 	x11-libs/cairo
@@ -230,7 +231,6 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-util/gperf-3.1
 	dev-util/mdds:1/2.0
 	media-libs/glm
-	sys-devel/ucpp
 	x11-base/xorg-proto
 	x11-libs/libXt
 	x11-libs/libXtst
@@ -264,15 +264,15 @@ BDEPEND="
 	virtual/pkgconfig
 	clang? (
 		|| (
+			(	sys-devel/clang:16
+				sys-devel/llvm:16
+				=sys-devel/lld-16*	)
 			(	sys-devel/clang:15
 				sys-devel/llvm:15
 				=sys-devel/lld-15*	)
 			(	sys-devel/clang:14
 				sys-devel/llvm:14
 				=sys-devel/lld-14*	)
-			(	sys-devel/clang:13
-				sys-devel/llvm:13
-				=sys-devel/lld-13*	)
 		)
 	)
 	odk? ( >=app-doc/doxygen-1.8.4 )
@@ -497,7 +497,6 @@ src_configure() {
 		--with-parallelism=$(makeopts_jobs)
 		--with-system-abseil
 		--with-system-openjpeg
-		--with-system-ucpp
 		--with-tls=nss
 		--with-vendor="Gentoo Foundation"
 		--without-fonts
