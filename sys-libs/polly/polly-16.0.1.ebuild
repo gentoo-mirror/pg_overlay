@@ -42,6 +42,7 @@ pkg_setup() {
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
+		-DLLVM_LIBDIR_SUFFIX=${libdir#lib}
 		-DLLVM_LINK_LLVM_DYLIB=ON
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
 		-DLLVM_INCLUDE_TESTS=$(usex test)
@@ -57,6 +58,10 @@ src_configure() {
 	)
 
 	cmake_src_configure
+}
+
+src_install() {
+	DESTDIR=${D} cmake_build install-polly
 }
 
 src_test() {
