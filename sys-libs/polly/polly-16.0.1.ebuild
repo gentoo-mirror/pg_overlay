@@ -61,7 +61,7 @@ src_configure() {
 }
 
 src_install() {
-	DESTDIR=${D} cmake_build install-polly
+	DESTDIR=${D} cmake_build install-Polly
 }
 
 src_test() {
