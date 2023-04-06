@@ -61,7 +61,7 @@ src_configure() {
 
 src_install() {
 	default
-	mv "${D}/polly" "${EPREFIX}/usr/lib/llvm/${LLVM_MAJOR}"
+	mv "${D}/polly" "${D}/usr/lib/llvm/${LLVM_MAJOR}/$(get_libdir)/cmake"
 }
 
 src_test() {
