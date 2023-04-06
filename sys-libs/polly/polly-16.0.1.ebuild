@@ -61,6 +61,7 @@ src_configure() {
 
 src_install() {
 	default
+	cmake_src_install
 	mv "${D}/polly" "${D}/usr/lib/llvm/${LLVM_MAJOR}/$(get_libdir)/cmake"
 }
 
