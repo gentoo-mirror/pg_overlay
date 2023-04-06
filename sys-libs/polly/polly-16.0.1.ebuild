@@ -42,7 +42,7 @@ pkg_setup() {
 src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
-		-DLLVM_LIBDIR_SUFFIX=${libdir#lib}
+		#-DLLVM_LIBDIR_SUFFIX=${libdir#lib}
 		-DLLVM_LINK_LLVM_DYLIB=ON
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
 		-DLLVM_INCLUDE_TESTS=$(usex test)
@@ -61,7 +61,7 @@ src_configure() {
 
 src_install() {
 	default
-	mv -r "${D}/polly" "${EPREFIX}/usr/lib/llvm/${LLVM_MAJOR}"
+	mv "${D}/polly" "${EPREFIX}/usr/lib/llvm/${LLVM_MAJOR}"
 }
 
 src_test() {
