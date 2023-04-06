@@ -64,7 +64,7 @@ src_install() {
 	default
 	mv "${EPREFIX}/polly" "${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 	#DESTDIR=${D} cmake_build install
-#}
+}
 
 src_test() {
 	local -x LIT_PRESERVES_TMP=1
