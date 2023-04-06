@@ -61,7 +61,9 @@ src_configure() {
 }
 
 src_install() {
-	DESTDIR=${D} cmake_build install
+	default
+	mv polly "${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+	#DESTDIR=${D} cmake_build install
 }
 
 src_test() {
