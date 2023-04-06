@@ -24,7 +24,7 @@ BDEPEND="
 		$(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]")
 	)"
 
-LLVM_COMPONENTS=( polly llvm )
+LLVM_COMPONENTS=( polly llvm cmake )
 LLVM_TEST_COMPONENTS=( llvm/utils/{lit,unittest} )
 llvm.org_set_globals
 
@@ -60,8 +60,8 @@ src_configure() {
 }
 
 src_install() {
-	#default
-	DESTDIR=${D} cmake_build install
+	default
+	mv -r "${D}/polly" "${EPREFIX}/usr/lib/llvm/${LLVM_MAJOR}"
 }
 
 src_test() {
