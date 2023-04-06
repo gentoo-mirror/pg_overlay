@@ -62,7 +62,7 @@ src_configure() {
 
 src_install() {
 	default
-	mv ""${EPREFIX}/polly"" "${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+	mv "${EPREFIX}/polly" "${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 	#DESTDIR=${D} cmake_build install
 #}
 
