@@ -59,10 +59,10 @@ src_configure() {
 	cmake_src_configure
 }
 
-#src_install() {
-#	default
-	#DESTDIR=${D} cmake_build install
-#}
+src_install() {
+	#default
+	DESTDIR=${D} cmake_build install
+}
 
 src_test() {
 	local -x LIT_PRESERVES_TMP=1
