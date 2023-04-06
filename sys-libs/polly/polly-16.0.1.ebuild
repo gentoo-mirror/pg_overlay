@@ -46,7 +46,7 @@ src_configure() {
 		-DLLVM_LINK_LLVM_DYLIB=ON
 		-DLLVM_POLLY_LINK_INTO_TOOLS=ON
 		-DLLVM_INCLUDE_TESTS=$(usex test)
-		#-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+		-DCMAKE_PREFIX_PATH="${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 		-DCMAKE_INSTALL_PREFIX="${EPREFIX}/usr/lib/llvm/${LLVM_MAJOR}"
 	)
 	use test && mycmakeargs+=(
@@ -60,9 +60,9 @@ src_configure() {
 	cmake_src_configure
 }
 
-#src_install() {
-#	default
-#	mv ${D}/polly "${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
+src_install() {
+	default
+	mv ""${EPREFIX}/polly"" "${EPREFIX}/usr/lib/llvm/${SLOT}/$(get_libdir)/cmake/llvm"
 	#DESTDIR=${D} cmake_build install
 #}
 
