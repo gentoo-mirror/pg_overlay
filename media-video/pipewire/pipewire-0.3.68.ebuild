@@ -70,6 +70,7 @@ BDEPEND="
 	virtual/pkgconfig
 	${PYTHON_DEPS}
 	$(python_gen_any_dep 'dev-python/docutils[${PYTHON_USEDEP}]')
+	dbus? ( dev-util/gdbus-codegen )
 	doc? (
 		app-doc/doxygen
 		media-gfx/graphviz
@@ -211,6 +212,7 @@ multilib_src_configure() {
 		$(meson_native_use_feature bluetooth bluez5-codec-aac)
 		$(meson_native_use_feature bluetooth bluez5-codec-aptx)
 		$(meson_native_use_feature bluetooth bluez5-codec-ldac)
+		$(meson_native_use_feature bluetooth opus)
 		$(meson_native_use_feature bluetooth bluez5-codec-opus)
 		$(meson_native_use_feature bluetooth libusb) # At least for now only used by bluez5 native (quirk detection of adapters)
 		$(meson_native_use_feature echo-cancel echo-cancel-webrtc) #807889
@@ -322,7 +324,7 @@ pkg_preinst() {
 	HAD_SYSTEM_SERVICE=0
 
 	if has_version "media-video/pipewire[sound-server(-)]" ; then
-		HAD_SOUND_SERVER=0
+		HAD_SOUND_SERVER=1
 	fi
 
 	if has_version "media-video/pipewire[system-service(-)]" ; then
@@ -339,13 +341,16 @@ pkg_postinst() {
 	for ver in ${REPLACING_VERSIONS} ; do
 		if ver_test ${ver} -le 0.3.66-r1 ; then
 			elog ">=pipewire-0.3.66 uses the 'pipewire' group to manage permissions"
-			elog "and limits needed to function smoothly."
-			elog "1. Please make sure your user is in the 'pipewire' group for correct"
-			elog "PAM limits behavior! You can add your account with:"
+			elog "and limits needed to function smoothly:"
+			elog
+			elog "1. Please make sure your user is in the 'pipewire' group for"
+			elog "the best experience with realtime scheduling (PAM limits behavior)!"
+			elog "You can add your account with:"
 			elog " usermod -aG pipewire <youruser>"
 			elog
-			elog "2. It is recommended that you remove your user from the 'audio' group"
-			elog "as it can interfere with fast user switching:"
+			elog "2. For the best experience with fast user switching, it is recommended"
+			elog "that you remove your user from the 'audio' group unless you rely on the"
+			elog "audio group for device access control or ACLs.:"
 			elog " usermod -rG audio <youruser>"
 			elog
 
