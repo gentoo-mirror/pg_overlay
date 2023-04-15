@@ -21,12 +21,14 @@ app-misc/far2l:webdav - WebDav support in NetRocks
 app-misc/far2l:wxwidgets - GUI backend support
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-misc/worker:magic - Add magic file support from sys-apps/file to automatically detect file types
+app-office/libreoffice:base - Enable full support for LibreOffice Base databases (involves additional bundled libs)
+app-office/libreoffice:clang - Use Clang compiler instead of GCC
 app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
 app-office/libreoffice:googledrive - Enable support for remote files on Google Drive
-app-office/libreoffice:gtk2 - Enable legacy gtk2 frontend
 app-office/libreoffice:mariadb - Prefer mariadb connector over mysql connector
 app-office/libreoffice:odk - Build the Office Development Kit
 app-office/libreoffice:pdfimport - Enable PDF import via the Poppler library
+app-office/libreoffice:vulkan - Enable Vulkan usage via the skia library (clang recommended)
 app-office/libreoffice-l10n:offlinehelp - Install help files locally instead of using the LibreOffice Wiki
 app-portage/eix:debug - Build with upstream's CXXFLAGS/LDFLAGS for debugging support; not recommended for normal use.
 app-portage/eix:dep - Make DEP=true the default which enables support for {,R,P,B}DEPEND but requires roughly double disk and memory.
