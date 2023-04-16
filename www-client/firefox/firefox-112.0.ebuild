@@ -607,10 +607,10 @@ src_prepare() {
 	#######
 	### Debian patches
 	einfo "Applying Debian's patches"
-	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p 2>/dev/null
+	for p in $(cat "${FILESDIR}/debian-patchset"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p;
+			eapply "${FILESDIR}/debian-patchset"/$p;
 			einfo +++++++++++++++++++++++++;
 			einfo Patch $p is APPLIED;
 			einfo +++++++++++++++++++++++++
@@ -625,16 +625,16 @@ src_prepare() {
 	einfo +++++++++++++++++++++++++++
 	einfo "Applying FreeBSD's patches"
 	einfo +++++++++++++++++++++++++++
-	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
+	for i in $(cat "${FILESDIR}/freebsd-patchset/series"); do eapply "${FILESDIR}/freebsd-patchset/$i";	done
 
 	### Fedora patches
 	einfo ++++++++++++++++++++++++++
 	einfo "Applying Fedora's patches"
 	einfo ++++++++++++++++++++++++++
-	for p in $(cat "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p 2>/dev/null
+	for p in $(cat "${FILESDIR}/fedora-patchset"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p;
+			eapply "${FILESDIR}/fedora-patchset"/$p;
 			einfo +++++++++++++++++++++++++;
 			einfo Patch $p is APPLIED;
 			einfo +++++++++++++++++++++++++
@@ -649,10 +649,10 @@ src_prepare() {
 	einfo +++++++++++++++++++++++++++++
 	einfo "Applying KissLinux's patches"
 	einfo +++++++++++++++++++++++++++++
-	for p in $(cat "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/series);do
-		patch --dry-run --silent -p1 -i "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p 2>/dev/null
+	for p in $(cat "${FILESDIR}/kiss-patchset"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/kiss-patchset"/$p 2>/dev/null
 		if [ $? -eq 0 ]; then
-			eapply "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p;
+			eapply "${FILESDIR}/kiss-patchset"/$p;
 			einfo +++++++++++++++++++++++++;
 			einfo Patch $p is APPLIED;
 			einfo +++++++++++++++++++++++++
@@ -1271,7 +1271,7 @@ src_install() {
 	fi
 
 	#######
-	cat "${FILESDIR}"/opensuse-kde-$(ver_cut 1)/kde.js >> \
+	cat "${FILESDIR}"/opensuse-kde/kde.js >> \
 	"${GENTOO_PREFS}" \
 	|| die
 
