@@ -1,0 +1,14 @@
+diff -up firefox-112.0/widget/gtk/nsWaylandDisplay.cpp.old firefox-112.0/widget/gtk/nsWaylandDisplay.cpp
+--- firefox-112.0/widget/gtk/nsWaylandDisplay.cpp.old	2023-04-06 19:35:44.744731593 +0200
++++ firefox-112.0/widget/gtk/nsWaylandDisplay.cpp	2023-04-06 19:35:23.650016723 +0200
+@@ -271,8 +271,8 @@ bool nsWaylandDisplay::Matches(wl_displa
+   return mThreadId == PR_GetCurrentThread() && aDisplay == mDisplay;
+ }
+ 
+-static void WlCrashHandler(const char* format, va_list args) {
+-  MOZ_CRASH_UNSAFE(g_strdup_vprintf(format, args));
++static void WlCrashHandler(const char* format, va_list args) {  
++  vfprintf(stderr, format, args);
+ }
+ 
+ nsWaylandDisplay::nsWaylandDisplay(wl_display* aDisplay)
