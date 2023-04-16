@@ -5,83 +5,9 @@ EAPI=8
 
 CHROMIUM_VERSION="106"
 CHROMIUM_LANGS="
-	af
-	am
-	ar
-	az
-	be
-	bg
-	bn
-	ca
-	cs
-	da
-	de
-	de-CH
-	el
 	en-GB
 	en-US
-	eo
-	es
-	es-419
-	es-PE
-	et
-	eu
-	fa
-	fi
-	fil
-	fr
-	fy
-	gd
-	gl
-	gu
-	he
-	hi
-	hr
-	hu
-	hy
-	id
-	io
-	is
-	it
-	ja
-	jbo
-	ka
-	kab
-	kn
-	ko
-	ku
-	lt
-	lv
-	mk
-	ml
-	mr
-	ms
-	nb
-	nl
-	nn
-	pa
-	pl
-	pt-BR
-	pt-PT
-	ro
 	ru
-	sc
-	sk
-	sl
-	sq
-	sr
-	sr-Latn
-	sv
-	sw
-	ta
-	te
-	th
-	tr
-	uk
-	ur
-	vi
-	zh-CN
-	zh-TW
 "
 
 inherit chromium-2 desktop linux-info unpacker xdg
