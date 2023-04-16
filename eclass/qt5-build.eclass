@@ -11,14 +11,16 @@
 # @DESCRIPTION:
 # This eclass contains various functions that are used when building Qt5.
 
-if [[ ${CATEGORY} != dev-qt ]]; then
-	die "${ECLASS} is only to be used for building Qt 5"
-fi
-
 case ${EAPI} in
 	8) ;;
 	*) die "${ECLASS}: EAPI ${EAPI:-0} not supported" ;;
 esac
+
+if [[ -z ${_QT5_BUILD_ECLASS} ]]; then
+_QT5_BUILD_ECLASS=1
+
+[[ ${CATEGORY} != dev-qt ]] &&
+	die "${ECLASS} is only to be used for building Qt 5"
 
 # @ECLASS_VARIABLE: QT5_BUILD_TYPE
 # @DESCRIPTION:
@@ -49,7 +51,7 @@ readonly QT5_BUILD_TYPE
 # @DESCRIPTION:
 # The upstream name of the module this package belongs to. Used for
 # SRC_URI and EGIT_REPO_URI. Must be set before inheriting the eclass.
-: ${QT5_MODULE:=${PN}}
+: "${QT5_MODULE:=${PN}}"
 
 # @ECLASS_VARIABLE: QT5_PV
 # @DESCRIPTION:
@@ -98,7 +100,7 @@ readonly QT5_PV
 # For proper description see virtualx.eclass man page.
 # Here we redefine default value to be manual, if your package needs virtualx
 # for tests you should proceed with setting VIRTUALX_REQUIRED=test.
-: ${VIRTUALX_REQUIRED:=manual}
+: "${VIRTUALX_REQUIRED:=manual}"
 
 inherit estack flag-o-matic toolchain-funcs virtualx
 
@@ -124,11 +126,11 @@ fi
 
 if [[ ${QT5_MODULE} == qtbase ]]; then
 	case ${PV} in
-		5.15.7)
-			_QT5_GENTOOPATCHSET_REV=2
+		5.15.8)
+			_QT5_GENTOOPATCHSET_REV=3
 			;;
 		*)
-			_QT5_GENTOOPATCHSET_REV=3
+			_QT5_GENTOOPATCHSET_REV=4
 			;;
 	esac
 	SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/qtbase-5.15-gentoo-patchset-${_QT5_GENTOOPATCHSET_REV}.tar.xz"
@@ -138,7 +140,7 @@ fi
 # @OUTPUT_VARIABLE
 # @DESCRIPTION:
 # Build directory for out-of-source builds.
-: ${QT5_BUILD_DIR:=${S}_build}
+: "${QT5_BUILD_DIR:=${S}_build}"
 
 LICENSE="|| ( GPL-2 GPL-3 LGPL-3 ) FDL-1.3"
 
@@ -170,8 +172,6 @@ if [[ ${PN} != qttest ]]; then
 fi
 
 ######  Phase functions  ######
-
-EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install src_test pkg_postinst pkg_postrm
 
 # @FUNCTION: qt5-build_src_prepare
 # @DESCRIPTION:
@@ -971,3 +971,7 @@ qt5_regenerate_global_configs() {
 		ewarn "${qmodule_pri} or ${qmodule_pri_orig} does not exist or is not a regular file"
 	fi
 }
+
+fi
+
+EXPORT_FUNCTIONS src_prepare src_configure src_compile src_install src_test pkg_postinst pkg_postrm
