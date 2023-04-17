@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,8 +14,8 @@ SRC_URI="https://github.com/Qalculate/${PN}/releases/download/v${PV}/${P}.tar.gz
 LICENSE="GPL-2"
 # SONAME changes pretty often on bumps. Check!
 SLOT="0/22"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux"
-IUSE="curl icu gnuplot readline test"
+KEYWORDS="~alpha amd64 ~arm arm64 ~hppa ~ia64 ~loong ~ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux"
+IUSE="curl icu gnuplot +hardened readline test"
 RESTRICT="!test? ( test )"
 
 DEPEND="dev-libs/gmp:=
@@ -30,6 +30,10 @@ RDEPEND="${DEPEND}
 BDEPEND="dev-util/intltool
 	sys-devel/gettext
 	virtual/pkgconfig"
+
+PATCHES=(
+	"${FILESDIR}"/${P}-tests.patch
+)
 
 src_prepare() {
 	default
@@ -61,6 +65,7 @@ src_configure() {
 		$(use_enable test unittests) \
 		$(use_with curl libcurl) \
 		$(use_with gnuplot gnuplot-call) \
+		$(use_enable !hardened insecure) \
 		$(use_with icu) \
 		$(use_with readline)
 }
