@@ -31,7 +31,6 @@ RDEPEND="
 	media-libs/tiff:0
 	sys-libs/zlib
 	ffmpeg? (
-		media-libs/libao
 		media-video/ffmpeg:0=
 	)
 "
