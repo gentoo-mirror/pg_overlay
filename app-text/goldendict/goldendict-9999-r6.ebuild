@@ -42,8 +42,6 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-PATCHES=( "${FILESDIR}/ru_RU.patch" )
-
 src_prepare() {
 	default
 	# disable git
