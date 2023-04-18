@@ -97,7 +97,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 0.3.69: Multimedia processing graphs
+media-video/pipewire 0.3.69-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 22.7.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
@@ -141,7 +141,7 @@ virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.68.2: Virtual for Rust language compiler
 www-apps/nextcloud 26.0.0: Personal cloud that runs on your own server
-www-client/firefox 112.0: Firefox Web Browser
+www-client/firefox 112.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.0.2979.9: A browser for our friends
 x11-base/xorg-server 21.1.4: X.Org X servers
 x11-base/xwayland 23.1.1: Standalone X server running under Wayland
