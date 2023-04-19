@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PLOCALES="ar_SA ay_WI be_BY be_BY@latin bg_BG cs_CZ de_CH de_DE el_GR eo_EO es_AR es_BO es_ES fa_IR fi_FI fr_FR hi_IN ie_001 it_IT ja_JP jb_JB ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR qt_es qt_it qt_lt qu_WI ru_RU sk_SK sq_AL sr_SR sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
+PLOCALES="ar_SA ay_BO ay_WI be_BY be_BY@latin bg_BG bs_BA cs_CZ de_CH de_DE el_GR eo_EO eo_UY es_AR es_BO es_ES fa_IR fi_FI fr_FR fy_NL hi_IN ie_001 it_CH it_IT ja_JP jb_JB ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR pt_PT qt_es qt_it qt_lt qu_PE qu_WI ru_RU sk_SK sq_AL sr_CS sr_SP sr_SR sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
 
 inherit desktop git-r3 qmake-utils plocale
 
@@ -86,7 +86,4 @@ src_install() {
 	dobin ${PN}
 	domenu redist/org.${PN}.GoldenDict.desktop
 	doicon redist/icons/${PN}.png
-
-	insinto /usr/share/${PN}/help
-	doins help/gdhelp_en.qch
 }
