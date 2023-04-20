@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=app-arch/bzip2 >=app-text/hunspell-1.2:= dev-libs/eb dev-libs/lzo dev-qt/qtbase:6[X,gui,network,sql,widgets,xml] dev-qt/qtmultimedia:6 dev-qt/qtspeech:6 dev-qt/qtsvg:6 dev-qt/qtwebengine:6 media-libs/libvorbis media-libs/tiff:0 sys-libs/zlib ffmpeg? ( media-video/ffmpeg:0= )
 SLOT=0
 _eclasses_=desktop	021728fdc1b03b36357dbc89489e0f0d	git-r3	27e13c09a4c7e4c78ac812f74727e676	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	d1408425c7c4a7669b9b17735404b693	qmake-utils	59420c906278d16deaaa629f9d115707	plocale	950fbaec7deeba41b5bcc0572cca99b9
-_md5_=857eb4f530f797bc342c7340682e5f89
+_md5_=cc1742794e07092c5fbcfb8197a547c4
