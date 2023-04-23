@@ -1,0 +1,82 @@
+diff --git a/widget/gtk/MozContainerWayland.h b/widget/gtk/MozContainerWayland.h
+--- a/widget/gtk/MozContainerWayland.h
++++ b/widget/gtk/MozContainerWayland.h
+@@ -83,10 +83,13 @@
+                                                         nsIntSize aSize,
+                                                         int scale);
+ void moz_container_wayland_set_scale_factor(MozContainer* container);
+ void moz_container_wayland_set_scale_factor_locked(
+     const mozilla::MutexAutoLock& aProofOfLock, MozContainer* container);
++bool moz_container_wayland_size_matches_scale_factor_locked(
++    const mozilla::MutexAutoLock& aProofOfLock, MozContainer* container,
++    int aWidth, int aHeight);
+ 
+ void moz_container_wayland_add_initial_draw_callback_locked(
+     MozContainer* container, const std::function<void(void)>& initial_draw_cb);
+ void moz_container_wayland_add_or_fire_initial_draw_callback(
+     MozContainer* container, const std::function<void(void)>& initial_draw_cb);
+diff --git a/widget/gtk/MozContainerWayland.cpp b/widget/gtk/MozContainerWayland.cpp
+--- a/widget/gtk/MozContainerWayland.cpp
++++ b/widget/gtk/MozContainerWayland.cpp
+@@ -595,10 +595,17 @@
+   if (container->wl_container.surface) {
+     moz_container_wayland_set_scale_factor_locked(lock, container);
+   }
+ }
+ 
++bool moz_container_wayland_size_matches_scale_factor_locked(
++    const MutexAutoLock& aProofOfLock, MozContainer* container, int aWidth,
++    int aHeight) {
++  return aWidth % container->wl_container.buffer_scale == 0 &&
++         aHeight % container->wl_container.buffer_scale == 0;
++}
++
+ static bool moz_container_wayland_surface_create_locked(
+     const MutexAutoLock& aProofOfLock, MozContainer* container) {
+   MozContainerWayland* wl_container = &container->wl_container;
+ 
+   LOGWAYLAND("%s [%p]\n", __FUNCTION__,
+diff --git a/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp b/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp
+--- a/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp
++++ b/widget/gtk/WindowSurfaceWaylandMultiBuffer.cpp
+@@ -283,12 +283,12 @@
+     return;
+   }
+   mFrameInProcess = false;
+ 
+   MozContainer* container = mWindow->GetMozContainer();
+-  MozContainerSurfaceLock lock(container);
+-  struct wl_surface* waylandSurface = lock.GetSurface();
++  MozContainerSurfaceLock MozContainerLock(container);
++  struct wl_surface* waylandSurface = MozContainerLock.GetSurface();
+   if (!waylandSurface) {
+     LOGWAYLAND(
+         "WindowSurfaceWaylandMB::Commit [%p] frame queued: can't lock "
+         "wl_surface\n",
+         (void*)mWindow.get());
+@@ -317,12 +317,23 @@
+       LayoutDeviceIntRect r = iter.Get();
+       wl_surface_damage_buffer(waylandSurface, r.x, r.y, r.width, r.height);
+     }
+   }
+ 
++  // aProofOfLock is a kind of substitution of MozContainerSurfaceLock.
++  // MozContainer is locked but MozContainerSurfaceLock doen't convert to
++  // MutexAutoLock& so we use aProofOfLock here.
+   moz_container_wayland_set_scale_factor_locked(aProofOfLock, container);
+-  mInProgressBuffer->AttachAndCommit(waylandSurface);
++
++  // It's possible that scale factor changed between Lock() and Commit()
++  // but window size is the same.
++  // Don't attach such buffer as it may have incorrect size,
++  // we'll paint new content soon.
++  if (moz_container_wayland_size_matches_scale_factor_locked(
++          aProofOfLock, container, mWindowSize.width, mWindowSize.height)) {
++    mInProgressBuffer->AttachAndCommit(waylandSurface);
++  }
+ 
+   mInProgressBuffer->ResetBufferAge();
+   mFrontBuffer = mInProgressBuffer;
+   mFrontBufferInvalidRegion = aInvalidRegion;
+   mInProgressBuffer = nullptr;
+
