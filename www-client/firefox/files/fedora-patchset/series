@@ -2,7 +2,6 @@ mozilla-1669639.patch
 
 firefox-tests-xpcshell-freeze.patch
 
-firefox-enable-addons.patch
 rhbz-1354671.patch
 disable-openh264-download.patch
 firefox-enable-vaapi.patch
