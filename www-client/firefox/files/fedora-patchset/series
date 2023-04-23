@@ -1,7 +1,5 @@
 mozilla-1669639.patch
 
-D173814.diff
-
 firefox-tests-xpcshell-freeze.patch
 
 rhbz-1354671.patch
