@@ -29,7 +29,7 @@ dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.33: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 3.11.3: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.69.0: Systems programming language from Mozilla
+dev-lang/rust 1.69.0-r1: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
@@ -68,7 +68,7 @@ kde-frameworks/plasma 5.105.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.27.4: Tools based on KDE Frameworks 5 to better interact with the system
-mail-client/thunderbird 102.10.0: Thunderbird Mail Client
+mail-client/thunderbird 102.10.1: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
@@ -141,7 +141,7 @@ virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.69.0: Virtual for Rust language compiler
 www-apps/nextcloud 26.0.0: Personal cloud that runs on your own server
-www-client/firefox 112.0.1: Firefox Web Browser
+www-client/firefox 112.0.2: Firefox Web Browser
 www-client/vivaldi-snapshot 6.0.2979.9: A browser for our friends
 x11-base/xorg-server 21.1.4: X.Org X servers
 x11-base/xwayland 23.1.1: Standalone X server running under Wayland
