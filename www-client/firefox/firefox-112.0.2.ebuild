@@ -1143,7 +1143,7 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_PAY=0
 	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
-	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=0
+	#mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
 	mozconfig_add_options_ac '' MOZ_X11=0
 	mozconfig_add_options_ac '' USE_X11=0
 
