@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-112-patches-04j.tar.xz"
+FIREFOX_PATCHSET="firefox-112-patches-06.tar.xz"
 
 LLVM_MAX_SLOT=16
 
@@ -48,7 +48,7 @@ if [[ ${PV} == *_rc* ]] ; then
 fi
 
 PATCH_URIS=(
-	https://dev.gentoo.org/~{juippis,whissi,slashbeast}/mozilla/patchsets/${FIREFOX_PATCHSET}
+	https://dev.gentoo.org/~juippis/mozilla/patchsets/${FIREFOX_PATCHSET}
 )
 
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
@@ -65,7 +65,7 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
 IUSE+=" jack libproxy lto +openh264 pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx system-png system-python-libs +system-webp"
-IUSE+=" wayland wifi +X"
+IUSE+=" +telemetry wayland wifi +X"
 
 # Firefox-only IUSE
 IUSE+=" geckodriver +gmp-autoupdate screencast +privacy"
@@ -382,9 +382,11 @@ virtwl() {
 
 	debug-print "${FUNCNAME}: $@"
 	"$@"
+	local r=$?
 
 	[[ -n $VIRTWL_PID ]] || die "tinywl exited unexpectedly"
 	exec {VIRTWL[0]}<&- {VIRTWL[1]}>&-
+	return $r
 }
 
 pkg_pretend() {
@@ -733,7 +735,9 @@ src_configure() {
 	mozconfig_add_options_ac '' --enable-project=browser
 
 	# Set Gentoo defaults
-	export MOZILLA_OFFICIAL=1
+	if use telemetry; then
+		export MOZILLA_OFFICIAL=1
+	fi
 
 	mozconfig_add_options_ac 'Gentoo default' \
 		--allow-addon-sideload \
@@ -992,9 +996,9 @@ src_configure() {
 		fi
 	fi
 
-        if use elibc_musl && use arm64 ; then
-               	mozconfig_add_options_ac 'elf-hack is broken when using musl/arm64' --disable-elf-hack
-        fi
+	if use elibc_musl && use arm64 ; then
+		mozconfig_add_options_ac 'elf-hack is broken when using musl/arm64' --disable-elf-hack
+	fi
 
 	# Additional ARCH support
 	case "${ARCH}" in
@@ -1032,6 +1036,13 @@ src_configure() {
 		export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE="system"
 	else
 		export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE="none"
+	fi
+
+	if ! use telemetry; then
+		mozconfig_add_options_mk '-telemetry setting' "MOZ_CRASHREPORTER=0"
+		mozconfig_add_options_mk '-telemetry setting' "MOZ_DATA_REPORTING=0"
+		mozconfig_add_options_mk '-telemetry setting' "MOZ_SERVICES_HEALTHREPORT=0"
+		mozconfig_add_options_mk '-telemetry setting' "MOZ_TELEMETRY_REPORTING=0"
 	fi
 
 	# Disable notification when build system has finished
@@ -1133,7 +1144,7 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
 	mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=0
-	mozconfig_add_options_ac '' MOZ_X11=
+	mozconfig_add_options_ac '' MOZ_X11=0
 	mozconfig_add_options_ac '' USE_X11=0
 
 	### Enable good features
@@ -1150,8 +1161,6 @@ src_configure() {
 	echo "export MOZ_PAY=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_HEALTHREPORTER=0" >> "${S}"/.mozconfig
 	echo "export MOZ_SERVICES_METRICS=0" >> "${S}"/.mozconfig
-	echo "export MOZ_TELEMETRY_REPORTING=" >> "${S}"/.mozconfig
-	echo "export MOZ_X11=" >> "${S}"/.mozconfig
 	echo "export USE_X11=0" >> "${S}"/.mozconfig
 	echo "export MOZ_ENABLE_WAYLAND=1" >> "${S}"/.mozconfig
 	#######
