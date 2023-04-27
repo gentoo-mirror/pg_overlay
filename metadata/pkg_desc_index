@@ -142,7 +142,7 @@ virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.69.0: Virtual for Rust language compiler
 www-apps/nextcloud 26.0.0: Personal cloud that runs on your own server
 www-client/firefox 112.0.2: Firefox Web Browser
-www-client/vivaldi-snapshot 6.1.3101.3: A browser for our friends
+www-client/vivaldi-snapshot 6.1.3001.3: A browser for our friends
 x11-base/xorg-server 21.1.4: X.Org X servers
 x11-base/xwayland 23.1.1: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
