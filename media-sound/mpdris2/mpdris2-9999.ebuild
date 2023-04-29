@@ -21,7 +21,7 @@ IUSE=""
 DEPEND="
 	>=dev-python/dbus-python-0.80[$PYTHON_USEDEP]
 	>=dev-python/pygobject-3.28.3[$PYTHON_USEDEP]
-	>=dev-python/python-mpd-0.3.0[$PYTHON_USEDEP]"
+	>=dev-python/python-mpd2-0.3.0[$PYTHON_USEDEP]"
 
 DOCS="AUTHORS COPYING INSTALL NEWS README README.md"
 
