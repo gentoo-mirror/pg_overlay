@@ -42,7 +42,6 @@ dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeSc
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-python/python-mpd 3.0.5: Python MPD client library
 dev-qt/qtbase 6.5.9999: Cross-platform application development framework
 dev-qt/qtmultimedia 5.15.9.9999: Multimedia (audio, video, radio, camera) library for the Qt5 framework
 dev-qt/qtspeech 6.5.9999: Text-to-speech library for the Qt6 framework
