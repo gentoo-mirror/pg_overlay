@@ -1,20 +1,21 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 # Check for bumps & cleanup with app-misc/ddcui
 
-inherit autotools linux-info udev
+inherit autotools linux-info udev poly-c_ebuilds
 
 DESCRIPTION="Program for querying and changing monitor settings"
 HOMEPAGE="https://www.ddcutil.com/"
-SRC_URI="https://github.com/rockowitz/ddcutil/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/rockowitz/ddcutil/archive/v${MY_PV}.tar.gz -> ${MY_P}.tar.gz"
 
 SLOT="0/4"
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
-IUSE="drm introspection usb-monitor user-permissions video_cards_nvidia X"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
+IUSE="drm usb-monitor user-permissions video_cards_nvidia X"
+REQUIRED_USE="drm? ( X )"
 
 RDEPEND="
 	dev-libs/glib:2
@@ -38,10 +39,6 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 # doc? ( app-doc/doxygen[dot] )
-
-PATCHES=(
-	"${FILESDIR}"/${P}-no-werror.patch
-)
 
 pkg_pretend() {
 	# This program needs /dev/ic2-* devices to communicate with the monitor.
