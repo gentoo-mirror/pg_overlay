@@ -15,7 +15,6 @@ SLOT="0/4"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 IUSE="drm usb-monitor user-permissions video_cards_nvidia X"
-REQUIRED_USE="drm? ( X )"
 
 RDEPEND="
 	dev-libs/glib:2
