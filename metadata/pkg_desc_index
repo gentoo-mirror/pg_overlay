@@ -9,7 +9,7 @@ app-emulation/qt-virt-manager 0.72.98: A GUI application for managing virtual ma
 app-emulation/spice 0.15.1-r1: SPICE server
 app-emulation/virt-manager 4.1.0: A graphical tool for administering virtual machines
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
-app-misc/ddcutil 1.3.0: Program for querying and changing monitor settings
+app-misc/ddcutil 1.4.1_pre: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
@@ -119,7 +119,6 @@ net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 sci-calculators/qalculate-qt 4.6.1: Multi-purpose cross-platform desktop calculator
-sci-libs/libqalculate 4.6.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 13.2.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
