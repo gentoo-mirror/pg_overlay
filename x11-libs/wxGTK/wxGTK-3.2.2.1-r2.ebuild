@@ -5,11 +5,11 @@ EAPI=8
 
 inherit multilib-minimal
 
-WXSUBVERSION=$(ver_cut 1-3)-gtk3				# 3.2.1-gtk3
-WXVERSION=$(ver_cut 1-3)						# 3.2.1
+WXSUBVERSION="${PV}-gtk3"				# 3.2.1-gtk3
+WXVERSION="$(ver_cut 1-3)"				# 3.2.1
 # Make sure that this matches the number of components in ${PV}
-WXRELEASE=$(ver_cut 1-2)-gtk3					# 3.2-gtk3
-WXRELEASE_NODOT=${WXRELEASE/./}		# 32-gtk3
+WXRELEASE="$(ver_cut 1-2)-gtk3"			# 3.2-gtk3
+WXRELEASE_NODOT=${WXRELEASE//./}		# 32-gtk3
 
 DESCRIPTION="GTK version of wxWidgets, a cross-platform C++ GUI toolkit"
 HOMEPAGE="https://wxwidgets.org/"
@@ -78,6 +78,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-3.2.1-configure-tests.patch"
 	"${FILESDIR}/${PN}-3.2.1-wayland-control.patch"
 	"${FILESDIR}/${PN}-3.2.1-prefer-lib64-in-tests.patch"
+	"${FILESDIR}/${PN}-3.2.2.1-dont-break-flags.patch"
 )
 
 src_prepare() {
@@ -125,6 +126,7 @@ multilib_src_configure() {
 		--with-zlib=sys
 		--with-expat=sys
 		--disable-compat30
+		--enable-xrc
 		$(use_with sdl)
 		$(use_with lzma liblzma)
 		# Currently defaults to curl, could change.  Watch the VDB!
@@ -191,7 +193,7 @@ multilib_src_install_all() {
 	newdoc base/readme.txt base_readme.txt
 	newdoc gtk/readme.txt gtk_readme.txt
 
-	use doc && HTML_DOCS=( "${WORKDIR}"/wxWidgets-${WXVERSION}-docs-html/. )
+	use doc && HTML_DOCS=( "${WORKDIR}"/wxWidgets-${PV}-docs-html/. )
 	einstalldocs
 
 	# Unversioned links
