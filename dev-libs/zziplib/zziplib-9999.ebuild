@@ -6,7 +6,7 @@ EAPI=8
 PYTHON_COMPAT=( python3_{9..11} )
 # Needed for docs, bug #835755
 PYTHON_REQ_USE="xml(+)"
-inherit cmake flag-o-matic python-any-r1
+inherit cmake flag-o-matic python-any-r1 git-r3
 
 DESCRIPTION="Lightweight library for extracting data from files archived in a single zip file"
 HOMEPAGE="https://github.com/gdraheim/zziplib http://zziplib.sourceforge.net/"
