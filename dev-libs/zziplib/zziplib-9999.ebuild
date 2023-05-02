@@ -46,6 +46,7 @@ src_configure() {
 		-DZZIPTEST=OFF
 		-DZZIPDOCS=OFF
 		-DZZIPWRAP=OFF
+		-Gninja
 	)
 
 	cmake_src_configure
