@@ -51,6 +51,3 @@ src_configure() {
 
 	cmake_src_configure
 }
-src_compile() {
-	eninja -C .
-}
