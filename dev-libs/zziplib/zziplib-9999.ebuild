@@ -41,13 +41,15 @@ src_configure() {
 
 	local mycmakeargs=(
 		-DZZIPSDL="$(usex sdl)"
-		-DBUILD_STATIC_LIBS="$(usex static-libs)"
+		-DBUILD_SHARED_LIBS="$(usex !static-libs)"
 		-DBUILD_TESTS=OFF
 		-DZZIPTEST=OFF
 		-DZZIPDOCS=OFF
 		-DZZIPWRAP=OFF
-		-GNinja
 	)
 
 	cmake_src_configure
+}
+src_compile() {
+	eninja -C .
 }
