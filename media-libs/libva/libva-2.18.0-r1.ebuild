@@ -50,7 +50,7 @@ multilib_src_configure() {
 		-Ddriverdir="${EPREFIX}/usr/$(get_libdir)/va/drivers"
 		-Ddisable_drm=false
 		-Dwith_x11=$(usex X)
-		-Dwith_glx=yes
+		-Dwith_glx=$(usex X)
 		-Dwith_wayland=$(usex wayland)
 		-Denable_docs=false
 	)
