@@ -45,7 +45,6 @@ dev-libs/zziplib 9999: Lightweight library for extracting data from files archiv
 dev-qt/qtbase 6.5.9999: Cross-platform application development framework
 dev-qt/qtmultimedia 5.15.9.9999: Multimedia (audio, video, radio, camera) library for the Qt5 framework
 dev-qt/qtspeech 6.5.9999: Text-to-speech library for the Qt6 framework
-dev-qt/qtwebengine 6.5.9999: Library for rendering dynamic web content in Qt6 C++ and QML applications
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gn 0.2049: GN is a meta-build system that generates build files for Ninja
