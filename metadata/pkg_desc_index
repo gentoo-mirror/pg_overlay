@@ -126,7 +126,7 @@ sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/pambase 20220214: PAM base configuration files
-sys-devel/clang 16.0.2: C language family frontend for LLVM
+sys-devel/clang 16.0.2 16.0.3: C language family frontend for LLVM
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.9.4-r1: Daemon providing interfaces to work with storage devices
