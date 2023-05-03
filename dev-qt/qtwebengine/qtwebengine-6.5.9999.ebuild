@@ -193,12 +193,12 @@ src_configure() {
 		#-DFEATURE_force_asserts=off
 		#-DFEATURE_opengl=off
 		#-DFEATURE_printer=off
-		-DFEATURE_qtpdf_build=off
-		-DFEATURE_qtpdf_quick_build=off
-		-DFEATURE_qtpdf_widgets_build=off
-		-DFEATURE_qtwebengine_build=on
-		-DFEATURE_qtwebengine_quick_build=on
-		-DFEATURE_qtwebengine_widgets_build=on
+		-DQT_FEATURE_qtpdf_build=off
+		-DQT_FEATURE_qtpdf_quick_build=off
+		-DQT_FEATURE_qtpdf_widgets_build=off
+		-DQT_FEATURE_qtwebengine_build=on
+		-DQT_FEATURE_qtwebengine_quick_build=on
+		-DQT_FEATURE_qtwebengine_widgets_build=on
 		#-DFEATURE_ssl=off
 		#-DFEATURE_static=off
 		#-DFEATURE_system_zlib=off
@@ -212,7 +212,7 @@ src_configure() {
 		-DFEATURE_webengine_extensions=on
 		#-DFEATURE_webengine_full_debug_info=$(usex debug)
 		-DFEATURE_webengine_geolocation=$(usex geolocation on off)
-		-DFEATURE_webengine_jumbo_build=$(usex jumbo-build)
+		-DQT_FEATURE_webengine_jumbo_build=$(usex jumbo-build)
 		#-DFEATURE_webengine_jumbo_file_merge_limit
 		-DFEATURE_webengine_kerberos=$(usex kerberos on off)
 		-DFEATURE_webengine_native_spellchecker=off
