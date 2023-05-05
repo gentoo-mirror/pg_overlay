@@ -9,8 +9,31 @@
 # which means D-Bus session instance is expected to be correctly set up
 # prior to this script starting. If that is not true, things may break!
 
-# Best to reap any existing daemons and only then try to start a new set.
-pkill -u "${USER}" -x pipewire\|wireplumber 1>/dev/null 2>&1
+restart () {
+    echo "Terminating PipeWire processes ..."
+    pkill -u "${USER}" -x pipewire\|wireplumber 1>/dev/null 2>&1
+    pwait -u "${USER}" -x pipewire\|wireplumber
+    echo "PipeWire terminated."
+}
+
+if [ "${#}" -gt 0 ]
+then
+    if [ "${1}" = 'restart' ]
+    then
+	restart
+    else
+        echo "Unrecognised argument."
+	echo "Usage: gentoo-pipewire-launcher [restart]"
+	exit 1
+    fi
+fi
+
+if pgrep -u "${USER}" -x pipewire\|wireplumber 1>/dev/null 2>&1
+then
+    echo "PipeWire already running, exiting."
+    echo "(Use 'gentoo-pipewire-launcher restart' to restart PipeWire and WirePlumber.)"
+    exit 1
+fi
 
 # The core daemon which by itself does probably nothing.
 @GENTOO_PORTAGE_EPREFIX@/usr/bin/pipewire &
