@@ -89,9 +89,6 @@ dev-qt/qtbase:tuio - Build plugin to receive touch events over the TUIO protocol
 dev-qt/qtbase:vulkan - Enable support for Vulkan
 dev-qt/qtbase:widgets - Build Qt6Widgets module
 dev-qt/qtbase:xml - Build Qt6Xml module
-dev-qt/qtmultimedia:gstreamer - Enable audio support via media-libs/gstreamer
-dev-qt/qtmultimedia:qml - Build QML/QtQuick bindings and imports
-dev-qt/qtmultimedia:widgets - Build the QtMultimediaWidgets module
 dev-qt/qtspeech:flite - Enable text-to-speech synthesizer plugin using app-accessibility/flite engine
 dev-qt/qtwebkit:geolocation - Enable physical position determination via dev-qt/qtpositioning
 dev-qt/qtwebkit:gles2 - Use GLES 2.0 or later instead of full OpenGL
