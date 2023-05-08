@@ -52,7 +52,7 @@ DEPEND="
 			media-libs/fontconfig
 			>=media-libs/freetype-2.6.1:2
 			>=media-libs/harfbuzz-1.6.0:=
-			media-libs/tiff:0 )
+			media-libs/tiff:= )
 	dbus? ( >=sys-apps/dbus-1.4.20 )
 	sys-libs/zlib:=
 	brotli? ( app-arch/brotli:= )
@@ -65,7 +65,7 @@ DEPEND="
 		x11-libs/libX11
 		x11-libs/pango
 	)
-	gui? ( media-libs/libpng:0= )
+	gui? ( media-libs/libpng:= )
 	icu? ( dev-libs/icu:= )
 	!icu? ( virtual/libiconv )
 	jpeg? ( media-libs/libjpeg-turbo:= )
@@ -181,5 +181,5 @@ src_install() {
 	qt6-build_src_install
 
 	# https://bugs.gentoo.org/863395
-	dosym ../$(get_libdir)/qt6/bin/qmake /usr/bin/qmake6
+	qt6_symlink_binary_to_path qmake 6
 }
