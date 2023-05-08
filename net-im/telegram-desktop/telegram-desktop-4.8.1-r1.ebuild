@@ -75,7 +75,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	dev-cpp/range-v3
-	dev-cpp/ms-gsl
+	>=dev-cpp/ms-gsl-4
 "
 BDEPEND="
 	${PYTHON_DEPS}
@@ -107,7 +107,7 @@ src_prepare() {
 	if use qt6-imageformats; then
 		sed -e 's/DESKTOP_APP_USE_PACKAGED_LAZY/TRUE/' -i \
 			cmake/external/kimageformats/CMakeLists.txt || die
-		printf "%s\n" \
+		printf '%s\n' \
 			'Q_IMPORT_PLUGIN(QAVIFPlugin)' \
 			'Q_IMPORT_PLUGIN(HEIFPlugin)' \
 			'Q_IMPORT_PLUGIN(QJpegXLPlugin)' \
