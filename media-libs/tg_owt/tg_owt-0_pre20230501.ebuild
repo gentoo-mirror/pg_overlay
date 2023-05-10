@@ -1,4 +1,4 @@
-# Copyright 2020-2022 Gentoo Authors
+# Copyright 2020-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,13 +8,14 @@ inherit cmake flag-o-matic
 DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
-TG_OWT_COMMIT="621f3da55331733bf0d1b223786b96b68c03dca1"
-LIBYUV_COMMIT="cf7c3a1ba7fb6f1cc8a792faf57f0dc02563a442"
+TG_OWT_COMMIT="dcb5069ff76bd293e86928804208737e6cee2ccc"
+LIBYUV_COMMIT="964d963afb164e768919f5bd2284202d87a3d37c"
+LIBSRTP_COMMIT="00a7f9bfa23a3ba54e45404f9aab193b953b3ffc"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://github.com/perfect7gentleman/sources/raw/main/libyuv-${LIBYUV_COMMIT}.tar.gz"
-
+	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2
+	https://github.com/cisco/libsrtp/archive/${LIBSRTP_COMMIT}.tar.gz -> libsrtp-${LIBSRTP_COMMIT}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
-# Fetch libyuv archive from: https://chromium.googlesource.com/libyuv/libyuv/+archive/${LIBYUV_COMMIT}.tar.gz
+# Upstream libyuv: https://chromium.googlesource.com/libyuv/libyuv
 
 LICENSE="BSD"
 SLOT="0/${PV##*pre}"
@@ -24,13 +25,15 @@ IUSE="screencast +X"
 # This package's USE flags may change the ABI and require a rebuild of
 #  dependent pacakges. As such, one should make sure to depend on
 #  media-libs/tg_owt[x=,y=,z=] for any package that uses this.
+# Furthermore, the -DNDEBUG preprocessor flag should be defined by any
+#  dependent package, failure to do so will change the ABI in the header files.
 
 # Bundled libs:
 # - libyuv (no stable versioning, www-client/chromium and media-libs/libvpx bundle it)
 # - libsrtp (project uses private APIs)
 # - pffft (no stable versioning, patched)
-DEPEND="
-	>=dev-cpp/abseil-cpp-20211102.0:=[cxx17(+)]
+RDEPEND="
+	>=dev-cpp/abseil-cpp-20220623.1:=
 	dev-libs/openssl:=
 	dev-libs/protobuf:=
 	media-libs/libjpeg-turbo:=
@@ -54,18 +57,25 @@ DEPEND="
 		x11-libs/libXtst
 	)
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}
+	screencast? (
+		media-libs/libglvnd
+		media-libs/mesa
+		x11-libs/libdrm
+	)
+"
 BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}/tg_owt-0_pre20220507-unbundle-crc32c.patch"
-	"${FILESDIR}/tg_owt-0_pre20220209-gcc-12-cstdint.patch"
+	"${FILESDIR}/tg_owt-0_pre20230105-gcc-13-cstdint.patch"
 )
 
 src_unpack() {
 	unpack "${P}.tar.gz"
-	cd "${S}/src/third_party/libyuv" || die
-	unpack "libyuv-${LIBYUV_COMMIT}.tar.gz"
+	unpack "libyuv-${LIBYUV_COMMIT}.tar.bz2"
+	mv -T "libyuv-${LIBYUV_COMMIT}" "${S}/src/third_party/libyuv" || die
+	unpack "libsrtp-${LIBSRTP_COMMIT}.tar.gz"
+	mv -T "libsrtp-${LIBSRTP_COMMIT}" "${S}/src/third_party/libsrtp" || die
 }
 
 src_prepare() {
@@ -74,8 +84,9 @@ src_prepare() {
 	# These source files aren't used with system-openh264, anyway.
 	sed -i '/include(cmake\/libopenh264.cmake)/d' CMakeLists.txt || die
 
-	# The sources for libcrc32c aren't available, avoid needing them
-	sed -i '/include(cmake\/libcrc32c.cmake)/d' CMakeLists.txt || die
+	# The sources for these aren't available, avoid needing them
+	sed -e '/include(cmake\/libcrc32c.cmake)/d' \
+		-e '/include(cmake\/libabsl.cmake)/d' -i CMakeLists.txt || die
 
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
@@ -85,7 +96,7 @@ src_prepare() {
 
 src_configure() {
 	# Defined by -DCMAKE_BUILD_TYPE=Release, avoids crashes
-	# see https://bugs.gentoo.org/754012
+	# See https://bugs.gentoo.org/754012
 	# EAPI 8 still wipes this flag.
 	append-cppflags '-DNDEBUG'
 
