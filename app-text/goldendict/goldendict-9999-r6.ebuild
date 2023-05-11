@@ -66,7 +66,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=()
+	local myconf=(CONFIG+=release)
 
 	if ! use ffmpeg ; then
 		myconf+=( CONFIG+=no_ffmpeg_player )
