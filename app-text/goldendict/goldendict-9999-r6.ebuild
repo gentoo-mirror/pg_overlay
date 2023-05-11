@@ -8,7 +8,7 @@ inherit desktop git-r3 qmake-utils plocale
 
 DESCRIPTION="Feature-rich dictionary lookup program"
 HOMEPAGE="http://goldendict.org/"
-EGIT_REPO_URI="https://github.com/xiaoyifang/${PN}.git"
+EGIT_REPO_URI="https://github.com/xiaoyifang/${PN}-ng.git"
 EGIT_BRANCH="staged"
 EGIT_SUBMODULES=()
 
