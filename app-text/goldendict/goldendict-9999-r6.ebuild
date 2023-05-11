@@ -53,8 +53,8 @@ src_prepare() {
 	# add trailing semicolon
 	sed -i -e '/^Categories/s/$/;/' redist/org.${PN}.GoldenDict.desktop || die
 
-	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> ${PN}.pro
-	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
+	#echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> ${PN}.pro
+	#echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
 
 	local loc_dir="${S}/locale"
 	plocale_find_changes "${loc_dir}" "" ".ts"
@@ -66,7 +66,7 @@ src_prepare() {
 }
 
 src_configure() {
-	local myconf=()
+	local myconf=(CONFIG+=release)
 
 	if ! use ffmpeg ; then
 		myconf+=( CONFIG+=no_ffmpeg_player )
