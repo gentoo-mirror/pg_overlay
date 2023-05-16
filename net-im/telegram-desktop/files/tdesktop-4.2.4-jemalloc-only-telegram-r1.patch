@@ -16,7 +16,7 @@ https://bugs.gentoo.org/802624
 +
 +    if (NOT DESKTOP_APP_DISABLE_JEMALLOC)
 +        target_link_libraries(Telegram
-+        INTERFACE
++        PRIVATE
 +            $<TARGET_OBJECTS:desktop-app::linux_jemalloc_helper>
 +            $<LINK_ONLY:desktop-app::external_jemalloc>
 +        )
