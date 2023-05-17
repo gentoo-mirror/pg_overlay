@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake xdg-utils
+inherit cmake flag-o-matic tmpfiles xdg-utils
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
@@ -21,7 +21,8 @@ HOMEPAGE="https://transmissionbt.com/"
 # MIT is in several libtransmission/ headers
 LICENSE="|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT"
 SLOT="0"
-IUSE="appindicator cli gtk nls mbedtls qt5 test"
+IUSE="appindicator cli debug gtk nls mbedtls qt5 qt6 test"
+REQUIRED_USE="?? ( qt5 qt6 )"
 RESTRICT="!test? ( test )"
 
 ACCT_DEPEND="
@@ -32,11 +33,12 @@ BDEPEND="
 	virtual/pkgconfig
 	nls? (
 		gtk? ( sys-devel/gettext )
-		qt5? ( dev-qt/linguist-tools:5 )
 	)
+	qt5? ( dev-qt/linguist-tools:5 )
+	qt6? ( dev-qt/qttools:6[linguist] )
 "
 COMMON_DEPEND="
-	>=dev-libs/libevent-2.1.0:=
+	>=dev-libs/libevent-2.1.0:=[threads(+)]
 	!mbedtls? ( dev-libs/openssl:0= )
 	mbedtls? ( net-libs/mbedtls:0= )
 	>=net-libs/libpsl-0.21.1
@@ -44,16 +46,21 @@ COMMON_DEPEND="
 	sys-libs/zlib:=
 	nls? ( virtual/libintl )
 	gtk? (
-		>=dev-cpp/gtkmm-3.24.0:3.0
-		>=dev-cpp/glibmm-2.60.0:2
+		>=dev-cpp/gtkmm-3.24.0:4.0
+		>=dev-cpp/glibmm-2.60.0:2.68
 		appindicator? ( dev-libs/libayatana-appindicator )
 	)
 	qt5? (
 		dev-qt/qtcore:5
-		dev-qt/qtgui:5
-		dev-qt/qtwidgets:5
-		dev-qt/qtnetwork:5
 		dev-qt/qtdbus:5
+		dev-qt/qtgui:5
+		dev-qt/qtnetwork:5
+		dev-qt/qtsvg:5
+		dev-qt/qtwidgets:5
+	)
+	qt6? (
+		dev-qt/qtbase:6[dbus,gui,network,widgets]
+		dev-qt/qtsvg:6
 	)
 "
 DEPEND="${COMMON_DEPEND}
@@ -78,7 +85,6 @@ src_configure() {
 		-DENABLE_GTK=$(usex gtk ON OFF)
 		-DENABLE_MAC=OFF
 		-DENABLE_NLS=$(usex nls ON OFF)
-		-DENABLE_QT=$(usex qt5 ON OFF)
 		-DENABLE_TESTS=$(usex test ON OFF)
 		-DENABLE_UTP=ON
 		-DREBUILD_WEB=OFF
@@ -102,6 +108,17 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 	)
 
+	if use qt6; then
+		mycmakeargs+=( -DENABLE_QT=ON -DUSE_QT_VERSION=6 )
+	elif use qt5; then
+		mycmakeargs+=( -DENABLE_QT=ON -DUSE_QT_VERSION=5 )
+	else
+		mycmakeargs+=( -DENABLE_QT=OFF )
+	fi
+
+	# Disable assertions by default, bug 893870.
+	use debug || append-cppflags -DNDEBUG
+
 	cmake_src_configure
 }
 
@@ -110,17 +127,19 @@ src_install() {
 
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
+
+	newtmpfiles "${FILESDIR}"/transmission-daemon.tmpfiles transmission-daemon.conf
 }
 
 pkg_postrm() {
-	if use gtk || use qt5; then
+	if use gtk || use qt5 || use qt6; then
 		xdg_desktop_database_update
 		xdg_icon_cache_update
 	fi
 }
 
 pkg_postinst() {
-	if use gtk || use qt5; then
+	if use gtk || use qt5 || use qt6; then
 		xdg_desktop_database_update
 		xdg_icon_cache_update
 	fi
