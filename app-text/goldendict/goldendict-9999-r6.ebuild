@@ -22,6 +22,7 @@ RDEPEND="
 	>=app-text/hunspell-1.2:=
 	dev-libs/eb
 	dev-libs/lzo
+	dev-libs/xapian
 	dev-qt/qtbase:6[X,gui,network,sql,widgets,xml]
 	dev-qt/qtmultimedia:6
 	dev-qt/qtspeech:6
@@ -51,7 +52,7 @@ src_prepare() {
 	sed -i -e '/PREFIX = /s:/usr/local:/usr:' ${PN}.pro || die
 
 	# add trailing semicolon
-	sed -i -e '/^Categories/s/$/;/' redist/org.${PN}.GoldenDict.desktop || die
+	sed -i -e '/^Categories/s/$/;/' redist/org.${PN}.GoldenDict_NG.desktop || die
 
 	echo "QMAKE_CXXFLAGS_RELEASE = $CXXFLAGS" >> ${PN}.pro
 	echo "QMAKE_CFLAGS_RELEASE = $CFLAGS" >> ${PN}.pro
