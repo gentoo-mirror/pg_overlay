@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit gnome2 meson-multilib multilib
+inherit gnome2 meson-multilib multilib virtualx
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="https://www.gtk.org/"
@@ -36,7 +36,7 @@ COMMON_DEPEND="
 	>=x11-libs/pango-1.44.0[introspection?,${MULTILIB_USEDEP}]
 	x11-misc/shared-mime-info
 
-	cloudproviders? ( net-libs/libcloudproviders )
+	cloudproviders? ( net-libs/libcloudproviders[${MULTILIB_USEDEP}] )
 	colord? ( >=x11-misc/colord-0.1.9:0=[${MULTILIB_USEDEP}] )
 	cups? ( >=net-print/cups-2.0[${MULTILIB_USEDEP}] )
 	introspection? ( >=dev-libs/gobject-introspection-1.39:= )
@@ -136,6 +136,10 @@ multilib_src_configure() {
 
 multilib_src_compile() {
 	meson_src_compile
+}
+
+multilib_src_test() {
+	virtx meson_src_test
 }
 
 multilib_src_install() {
