@@ -85,6 +85,6 @@ install_locale() {
 
 src_install() {
 	dobin ${PN}
-	domenu redist/org.${PN}.GoldenDict.desktop
+	domenu redist/org.xiaoyifang.GoldenDict_NG.desktop
 	doicon redist/icons/${PN}.png
 }
