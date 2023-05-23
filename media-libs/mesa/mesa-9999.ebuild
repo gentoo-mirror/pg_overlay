@@ -130,7 +130,6 @@ PER_SLOT_DEPSTR="
 	(
 		!opencl? ( sys-devel/llvm:@SLOT@[${LLVM_USE_DEPS}] )
 		opencl? ( sys-devel/clang:@SLOT@[${LLVM_USE_DEPS}] )
-		opencl? ( dev-util/spirv-llvm-translator:@SLOT@ )
 	)
 "
 LLVM_DEPSTR="
