@@ -128,7 +128,6 @@ src_configure() {
 		$(qt_feature udev libudev)
 		$(qt_feature xml)
 		$(qt_feature zstd)
-		-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
 	)
 	use gui && mycmakeargs+=(
 		$(qt_feature accessibility accessibility_atspi_bridge)
