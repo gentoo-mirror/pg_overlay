@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,7 +16,14 @@ SLOT="0"
 KEYWORDS=""
 IUSE="+acl audit debug doc efi +pam +policykit selinux"
 
-COMMON_DEPEND="
+BDEPEND="
+	app-text/docbook-xml-dtd:4.2
+	app-text/docbook-xml-dtd:4.5
+	app-text/docbook-xsl-stylesheets
+	dev-util/gperf
+	virtual/pkgconfig
+"
+DEPEND="
 	audit? ( sys-process/audit )
 	sys-apps/util-linux
 	sys-libs/libcap
@@ -25,22 +32,15 @@ COMMON_DEPEND="
 	pam? ( sys-libs/pam )
 	selinux? ( sys-libs/libselinux )
 "
-DEPEND="${COMMON_DEPEND}
-	app-text/docbook-xml-dtd:4.2
-	app-text/docbook-xml-dtd:4.5
-	app-text/docbook-xsl-stylesheets
-	dev-util/gperf
-	dev-util/intltool
-	sys-devel/libtool
-	virtual/pkgconfig
-"
-RDEPEND="${COMMON_DEPEND}
+RDEPEND="${DEPEND}
 	!sys-apps/systemd
 "
 PDEPEND="
 	sys-apps/dbus
 	policykit? ( sys-auth/polkit )
 "
+
+DOCS=( README.md )
 
 PATCHES=(
 	"${FILESDIR}/${PN}-252-docs.patch"
@@ -83,6 +83,7 @@ src_configure() {
 		-Drootprefix="${EPREFIX}/"
 		-Dselinux=$(usex selinux true false)
 		-Dsmack=true
+		-Dtests=false
 		-Dudevrulesdir="$(get_udevdir)"/rules.d
 		-Dzshcompletiondir=""
 	)
@@ -93,14 +94,23 @@ src_configure() {
 src_install() {
 	meson_src_install
 
-	newinitd "${FILESDIR}"/${PN}.init-r1 ${PN}
+	newinitd "${FILESDIR}"/${PN}.init ${PN}
 
-	sed -e "s/@libdir@/$(get_libdir)/" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
+	sed -e "s|@libdir@|$(get_libdir)|" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
 	newconfd ${PN}.conf ${PN}
 }
 
 pkg_postinst() {
-	udev_reload
+	if ! use pam; then
+		ewarn "${PN} will not be managing user logins/seats without USE=\"pam\"!"
+		ewarn "In other words, it will be useless for most applications."
+		ewarn
+	fi
+	if ! use policykit; then
+		ewarn "loginctl will not be able to perform privileged operations without"
+		ewarn "USE=\"policykit\"! That means e.g. no suspend or hibernate."
+		ewarn
+	fi
 	if [[ "$(rc-config list boot | grep elogind)" != "" ]]; then
 		elog "elogind is currently started from boot runlevel."
 	elif [[ "$(rc-config list default | grep elogind)" != "" ]]; then
@@ -110,12 +120,17 @@ pkg_postinst() {
 		ewarn "# rc-update del elogind default"
 		ewarn "# rc-update add elogind boot"
 	else
-		ewarn "elogind is currently not started from any runlevel."
-		ewarn "You may add it to the boot runlevel by:"
-		ewarn "# rc-update add elogind boot"
+		elog "elogind is currently not started from any runlevel."
+		elog "You may add it to the boot runlevel by:"
+		elog "# rc-update add elogind boot"
+		elog
+		elog "Alternatively, you can leave elogind out of any"
+		elog "runlevel. It will then be started automatically"
+		if use pam; then
+			elog "when the first service calls it via dbus, or"
+			elog "the first user logs into the system."
+		else
+			elog "when the first service calls it via dbus."
+		fi
 	fi
-}
-
-pkg_postrm() {
-	udev_reload
 }
