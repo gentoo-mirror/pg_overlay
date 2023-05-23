@@ -33,7 +33,6 @@ REQUIRED_USE="
 	libplacebo? ( || ( egl opengl vulkan ) )
 	lua? ( ${LUA_REQUIRED_USE} )
 	nvenc? ( || ( egl opengl vulkan ) )
-	opengl? ( || ( X aqua ) )
 	test? ( cli )
 	tools? ( cli )
 	uchardet? ( iconv )
