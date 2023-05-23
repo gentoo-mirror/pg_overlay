@@ -192,9 +192,6 @@ llvm_check_deps() {
 	if use opencl; then
 		has_version "sys-devel/clang:${LLVM_SLOT}[${LLVM_USE_DEPS}]" || return 1
 	fi
-	if use opencl || { use vulkan && use video_cards_intel; }; then
-		has_version "dev-util/spirv-llvm-translator:${LLVM_SLOT}" || return 1
-	fi
 	has_version "sys-devel/llvm:${LLVM_SLOT}[${LLVM_USE_DEPS}]"
 }
 
