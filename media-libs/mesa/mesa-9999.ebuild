@@ -125,7 +125,7 @@ RDEPEND="${RDEPEND}
 # 2. Specify LLVM_MIN_SLOT (inclusive), e.g. 15.
 LLVM_MAX_SLOT="16"
 LLVM_MIN_SLOT="15"
-LLVM_USE_DEPS="llvm_targets_AMDGPU(+),${MULTILIB_USEDEP}"
+LLVM_USE_DEPS="${MULTILIB_USEDEP}"
 PER_SLOT_DEPSTR="
 	(
 		!opencl? ( sys-devel/llvm:@SLOT@[${LLVM_USE_DEPS}] )
