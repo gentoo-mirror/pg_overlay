@@ -88,7 +88,6 @@ RDEPEND="
 	vulkan? (
 		video_cards_intel? (
 			amd64? (
-				dev-libs/libclc[spirv(-)]
 				>=dev-util/spirv-tools-1.3.231.0
 			)
 		)
