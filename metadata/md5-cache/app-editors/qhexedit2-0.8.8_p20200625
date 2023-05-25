@@ -1,15 +1,15 @@
 DEFINED_PHASES=compile configure install prepare test
-DEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 python? ( dev-python/PyQt5[gui,widgets,python_targets_python3_10(-)?,python_targets_python3_11(-)?] dev-python/sip[python_targets_python3_10(-)?,python_targets_python3_11(-)?] python_targets_python3_10? ( >=dev-lang/python-3.10.9-r1:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.1-r1:3.11 ) )
+DEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 python? ( dev-python/PyQt5[gui,widgets,python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] dev-python/sip[python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] python_targets_python3_10? ( >=dev-lang/python-3.10.9-r1:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.1-r1:3.11 ) python_targets_python3_12? ( >=dev-lang/python-3.12.0_beta1:3.12 ) )
 DESCRIPTION=Hex editor library, Qt application written in C++ with Python bindings
 EAPI=7
 HOMEPAGE=https://github.com/lancos/qhexedit2/
 INHERIT=distutils-r1 qmake-utils
-IUSE=doc +gui python python_targets_python3_10 python_targets_python3_11
+IUSE=doc +gui python python_targets_python3_10 python_targets_python3_11 python_targets_python3_12
 KEYWORDS=~amd64 ~x86
 LICENSE=GPL-2
-RDEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 python? ( dev-python/PyQt5[gui,widgets,python_targets_python3_10(-)?,python_targets_python3_11(-)?] dev-python/sip[python_targets_python3_10(-)?,python_targets_python3_11(-)?] python_targets_python3_10? ( >=dev-lang/python-3.10.9-r1:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.1-r1:3.11 ) )
-REQUIRED_USE=python? ( || ( python_targets_python3_10 python_targets_python3_11 ) )
+RDEPEND=dev-qt/qtcore:5 dev-qt/qtgui:5 dev-qt/qtwidgets:5 python? ( dev-python/PyQt5[gui,widgets,python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] dev-python/sip[python_targets_python3_10(-)?,python_targets_python3_11(-)?,python_targets_python3_12(-)?] python_targets_python3_10? ( >=dev-lang/python-3.10.9-r1:3.10 ) python_targets_python3_11? ( >=dev-lang/python-3.11.1-r1:3.11 ) python_targets_python3_12? ( >=dev-lang/python-3.12.0_beta1:3.12 ) )
+REQUIRED_USE=python? ( || ( python_targets_python3_10 python_targets_python3_11 python_targets_python3_12 ) )
 SLOT=0
 SRC_URI=https://github.com/lancos/qhexedit2/archive/3477064039454ee4da10683bfd32e04d3c5a0de2.tar.gz -> qhexedit2-0.8.8_p20200625.tar.gz
 _eclasses_=out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	multilib	104e1332efb829e2f7cbf89307a474f1	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	eapi8-dosym	741bfa77afb2a9321261501aca58c208	python-utils-r1	d676fb844e9408f4290d20bc7312f8bb	python-r1	3c6cd0f418ba702c186a9865b85e704d	distutils-r1	dc5ca9013da6279b2e24b0ae156f030e	qmake-utils	59420c906278d16deaaa629f9d115707
-_md5_=4d80466395a5074caef08a926ae0829c
+_md5_=2a1bfe23f44b03502b840c92ec7e7e6a
