@@ -1,4 +1,4 @@
-BDEPEND=|| ( >=dev-lang/python-3.11.1-r1:3.11 >=dev-lang/python-3.10.9-r1:3.10 ) dev-util/ninja
+BDEPEND=|| ( >=dev-lang/python-3.12.0_beta1:3.12 >=dev-lang/python-3.11.1-r1:3.11 >=dev-lang/python-3.10.9-r1:3.10 ) dev-util/ninja
 DEFINED_PHASES=compile configure install setup test
 DESCRIPTION=GN is a meta-build system that generates build files for Ninja
 EAPI=8
@@ -10,4 +10,4 @@ LICENSE=BSD
 SLOT=0
 SRC_URI=https://dev.gentoo.org/~xen0n/distfiles/dev-util/gn/gn-0.2049.tar.xz
 _eclasses_=multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	104e1332efb829e2f7cbf89307a474f1	python-utils-r1	d676fb844e9408f4290d20bc7312f8bb	python-any-r1	d2955aaac8daaaa69fcc6dc93ed19f29
-_md5_=161dcdabbbdf3124da0f8885ebecb339
+_md5_=eae05e0ed3fe7a5a33e7a3fb353fbdd6
