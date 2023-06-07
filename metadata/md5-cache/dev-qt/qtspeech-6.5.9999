@@ -1,0 +1,15 @@
+BDEPEND=>=dev-util/ninja-1.8.2 >=dev-util/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl] dev-lang/perl virtual/pkgconfig
+DEFINED_PHASES=compile configure install prepare test unpack
+DEPEND==dev-qt/qtbase-6.5.9999*
+DESCRIPTION=Text-to-speech library for the Qt6 framework
+EAPI=8
+HOMEPAGE=https://www.qt.io/
+INHERIT=qt6-build
+IUSE=debug test
+LICENSE=|| ( GPL-2 GPL-3 LGPL-3 ) FDL-1.3
+PROPERTIES=live
+RDEPEND==dev-qt/qtbase-6.5.9999*
+RESTRICT=!test? ( test )
+SLOT=6/6.5
+_eclasses_=toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	16483e58fadb0d47b4528f0aa7e171f6	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	7fb5980de96325cbab639f5b2187357c	virtualx	817571665ee28575da44ee08135089e5	git-r3	27e13c09a4c7e4c78ac812f74727e676	qt6-build	d25735138e197debc35a0dbf34a24048
+_md5_=3e44bbb6fe93f70487ffce51e39f9025
