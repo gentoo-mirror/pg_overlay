@@ -1,0 +1,14 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl] sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7
+DEFINED_PHASES=configure install prepare unpack
+DEPEND=selinux? ( sys-libs/libselinux ) elibc_musl? ( sys-libs/queue-standalone )
+DESCRIPTION=Tools for Flash-Friendly File System (F2FS)
+EAPI=8
+HOMEPAGE=https://git.kernel.org/cgit/linux/kernel/git/jaegeuk/f2fs-tools.git/about/
+INHERIT=git-r3 autotools
+IUSE=selinux
+LICENSE=GPL-2
+PROPERTIES=live
+RDEPEND=selinux? ( sys-libs/libselinux ) elibc_musl? ( sys-libs/queue-standalone )
+SLOT=0/9
+_eclasses_=git-r3	27e13c09a4c7e4c78ac812f74727e676	gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	c19072c3cd7ac5cb21de013f7e9832e0	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	6ae9a4347149b19a112caa1182d03bde
+_md5_=1f5a9e15e927a0ed060378aa81b259fd
