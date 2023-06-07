@@ -30,7 +30,7 @@ LICENSE="PSF-2"
 SLOT="${PYVER}"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 IUSE="
-	bluetooth build +ensurepip examples gdbm hardened libedit lto
+	bluetooth build debug +ensurepip examples gdbm hardened libedit lto
 	+ncurses pgo +readline +sqlite +ssl test tk valgrind
 "
 RESTRICT="!test? ( test )"
@@ -47,12 +47,12 @@ RDEPEND="
 	>=dev-libs/expat-2.1:=
 	dev-libs/libffi:=
 	dev-python/gentoo-common
-	sys-apps/util-linux:=
 	>=sys-libs/zlib-1.1.3:=
 	virtual/libcrypt:=
 	virtual/libintl
 	ensurepip? ( dev-python/ensurepip-wheels )
 	gdbm? ( sys-libs/gdbm:=[berkdb] )
+	kernel_linux? ( sys-apps/util-linux:= )
 	ncurses? ( >=sys-libs/ncurses-5.2:= )
 	readline? (
 		!libedit? ( >=sys-libs/readline-4.1:= )
@@ -167,8 +167,13 @@ src_configure() {
 			-m test
 			"-j$(makeopts_jobs)"
 			--pgo-extended
-			-x test_gdb
 			-u-network
+
+			# We use a timeout because of how often we've had hang issues
+			# here. It also matches the default upstream PROFILE_TASK.
+			--timeout 1200
+
+			-x test_gdb
 
 			# All of these seem to occasionally hang for PGO inconsistently
 			# They'll even hang here but be fine in src_test sometimes.
@@ -179,6 +184,10 @@ src_configure() {
 			-x test_multiprocessing_fork
 			-x test_socket
 			-x test_xmlrpc
+
+			# Hangs (actually runs indefinitely executing itself w/ many cpython builds)
+			# bug #900429
+			-x test_tools
 			# failed on my systems
 			-x test_doctest
 			-x test_bdb
@@ -222,6 +231,7 @@ src_configure() {
 		--with-pkg-config=yes
 		--with-wheel-pkg-dir="${EPREFIX}"/usr/lib/python/ensurepip
 
+		$(use_with debug assertions)
 		$(use_with lto)
 		$(use_enable pgo optimizations)
 		$(use_with readline readline "$(usex libedit editline readline)")
