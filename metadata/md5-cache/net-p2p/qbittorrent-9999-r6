@@ -5,13 +5,13 @@ DESCRIPTION=BitTorrent client in C++ and Qt
 EAPI=8
 HOMEPAGE=https://www.qbittorrent.org https://github.com/qbittorrent
 IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
-INHERIT=cmake multibuild xdg git-r3
+INHERIT=cmake edo multibuild xdg git-r3
 IUSE=+dbus +gui test webui
 LICENSE=GPL-2
 PROPERTIES=live
 RDEPEND=>=dev-libs/boost-1.65.0-r1:= dev-libs/openssl:= dev-qt/qtbase:6[network,sql,xml] >=net-libs/libtorrent-rasterbar-1.2.14:= sys-libs/zlib dbus? ( dev-qt/qtbase:6[dbus] ) gui? ( dev-libs/geoip dev-qt/qtbase:6[gui] dev-qt/qtsvg:6 dev-qt/qtbase:6[widgets] )
-REQUIRED_USE=dbus? ( gui ) || ( gui webui )
+REQUIRED_USE=|| ( gui webui )
 RESTRICT=!test? ( test )
 SLOT=0
-_eclasses_=toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	16483e58fadb0d47b4528f0aa7e171f6	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	7fb5980de96325cbab639f5b2187357c	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	xdg	4a14c5c24f121e7da66e5aab4a168c6e	git-r3	27e13c09a4c7e4c78ac812f74727e676
-_md5_=c1a5c40c9b1d38fcab8f5f8d76da63dc
+_eclasses_=toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	16483e58fadb0d47b4528f0aa7e171f6	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	76050953ad5b70d7e09a6ca55558db92	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	7fb5980de96325cbab639f5b2187357c	edo	c0eb9cbe6b0bd01fcb4918f12598a4d3	out-of-source-utils	1a9007554652a6e627edbccb3c25a439	multibuild	bddcb51b74f4a76724ff7cf8e7388869	xdg	4a14c5c24f121e7da66e5aab4a168c6e	git-r3	27e13c09a4c7e4c78ac812f74727e676
+_md5_=351ef124d9940de9ddad024a40d523f5

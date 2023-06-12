@@ -1,9 +1,9 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit cmake multibuild xdg
+inherit cmake edo multibuild xdg
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org
@@ -14,16 +14,15 @@ if [[ ${PV} == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/${PN}/qBittorrent.git"
 else
 	SRC_URI="https://github.com/qbittorrent/qBittorrent/archive/release-${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
-	S="${WORKDIR}/qBittorrent-release-${PV}"
+	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
+	S="${WORKDIR}"/qBittorrent-release-${PV}
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="+dbus +gui test webui"
 RESTRICT="!test? ( test )"
-REQUIRED_USE="dbus? ( gui )
-	|| ( gui webui )"
+REQUIRED_USE="|| ( gui webui )"
 
 RDEPEND="
 	>=dev-libs/boost-1.65.0-r1:=
@@ -58,7 +57,7 @@ src_prepare() {
 }
 
 src_configure() {
-	multibuild_src_configure() {
+	my_src_configure() {
 		local mycmakeargs=(
 			# musl lacks execinfo.h
 			-DSTACKTRACE=OFF
@@ -71,8 +70,6 @@ src_configure() {
 
 			-DQT6=ON
 
-			# We do these in multibuild, see bug #839531 for why.
-			# Fedora has to do the same thing.
 			-DWEBUI=$(usex webui)
 
 			-DCMAKE_BUILD_TYPE=Release
@@ -81,7 +78,7 @@ src_configure() {
 			-DTORRENT_USE_I2P=1
 		)
 
-		if [[ ${MULTIBUILD_VARIANT} == gui ]] ; then
+		if [[ ${MULTIBUILD_VARIANT} == "gui" ]]; then
 			# We do this in multibuild, see bug #839531 for why.
 			# Fedora has to do the same thing.
 			mycmakeargs+=(
@@ -102,11 +99,20 @@ src_configure() {
 		cmake_src_configure
 	}
 
-	multibuild_foreach_variant multibuild_src_configure
+	multibuild_foreach_variant my_src_configure
 }
 
 src_compile() {
 	multibuild_foreach_variant cmake_src_compile
+}
+
+src_test() {
+	my_src_test() {
+		cd "${BUILD_DIR}"/test || die
+		edo ctest .
+	}
+
+	multibuild_foreach_variant my_src_test
 }
 
 src_install() {
