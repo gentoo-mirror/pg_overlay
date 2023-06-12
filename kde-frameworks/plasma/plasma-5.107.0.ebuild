@@ -5,8 +5,7 @@ EAPI=8
 
 KDE_ORG_NAME="${PN}-framework"
 PVCUT=$(ver_cut 1-2)
-QTMIN=5.15.5
-VIRTUALX_REQUIRED="test"
+QTMIN=5.15.9
 inherit ecm frameworks.kde.org
 
 DESCRIPTION="Plasma framework"

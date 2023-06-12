@@ -6,8 +6,7 @@ EAPI=8
 ECM_HANDBOOK="true"
 ECM_QTHELP="false"
 PVCUT=$(ver_cut 1-2)
-QTMIN=5.15.5
-VIRTUALX_REQUIRED="test"
+QTMIN=5.15.9
 inherit ecm frameworks.kde.org
 
 DESCRIPTION="Framework easing the development transition from KDELibs 4 to KF 5"
