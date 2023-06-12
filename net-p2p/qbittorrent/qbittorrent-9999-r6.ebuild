@@ -78,6 +78,7 @@ src_configure() {
 			-DCMAKE_BUILD_TYPE=Release
 
 			-DTESTING=$(usex test)
+			-DTORRENT_USE_I2P=1
 		)
 
 		if [[ ${MULTIBUILD_VARIANT} == gui ]] ; then
