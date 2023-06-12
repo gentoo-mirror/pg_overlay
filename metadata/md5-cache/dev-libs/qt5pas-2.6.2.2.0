@@ -9,5 +9,5 @@ LICENSE=LGPL-3
 RDEPEND=dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtprintsupport:5 dev-qt/qtx11extras:5
 SLOT=0
 SRC_URI=https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/41006a9e7fb5e14aeff55494b6437d21d5cfc894/lazarus-main.tar.gz?path=lcl/interfaces/qt5/cbindings -> qt5pas-2.6.2.2.0.tar.gz
-_eclasses_=toolchain-funcs	14a8ae365191b518fad51caad7a08f3e	multilib	c19072c3cd7ac5cb21de013f7e9832e0	qmake-utils	59420c906278d16deaaa629f9d115707
+_eclasses_=toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	qmake-utils	a9633c59de46f2f1e040e40d06658a60
 _md5_=84787f27800ef0504f062ad5e9254ddf
