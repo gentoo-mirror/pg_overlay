@@ -61,7 +61,6 @@ RDEPEND="
 		kde-frameworks/kcoreaddons:=
 	)
 	qt6? (
-		dev-qt/qt5compat:6
 		dev-qt/qtbase:6[dbus?,gui,network,opengl,widgets,X?]
 		dev-qt/qtimageformats:6
 		dev-qt/qtsvg:6
@@ -74,12 +73,15 @@ RDEPEND="
 	)
 "
 DEPEND="${RDEPEND}
-	dev-cpp/range-v3
+	dev-cpp/cppgir
 	>=dev-cpp/ms-gsl-4
+	dev-cpp/range-v3
 "
 BDEPEND="
 	${PYTHON_DEPS}
+	dev-cpp/cppgir
 	>=dev-util/cmake-3.16
+	dev-util/gdbus-codegen
 	virtual/pkgconfig
 "
 # dev-libs/jemalloc:=[-lazy-lock] -> https://bugs.gentoo.org/803233
@@ -87,6 +89,8 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
 	"${FILESDIR}/tdesktop-4.4.1-fix-dupe-main-decl.patch"
+	"${FILESDIR}/tdesktop-4.8.3-system-cppgir.patch"
+	"${FILESDIR}/tdesktop-4.8.3-fix-clang.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
