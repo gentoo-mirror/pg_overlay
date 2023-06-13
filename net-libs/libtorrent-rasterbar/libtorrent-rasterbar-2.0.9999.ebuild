@@ -1,4 +1,4 @@
-# Copyright 2021-2022 Gentoo Authors
+# Copyright 2021-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -55,7 +55,8 @@ src_configure() {
 		-Dlogging=$(usex debug ON OFF)
 		-Dpython-bindings=$(usex python ON OFF)
 		-Dbuild_tests=$(usex test ON OFF)
-		-Di2p=OFF
+		-Ddeprecated-functions=OFF
+		-Di2p=ON
 		-Dstreaming=OFF
 	)
 
