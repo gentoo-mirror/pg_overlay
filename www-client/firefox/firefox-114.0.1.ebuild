@@ -1179,7 +1179,6 @@ src_configure() {
 	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
 	mozconfig_add_options_ac '' --without-google-safebrowsing-api-keyfile
 	mozconfig_add_options_ac '' --without-mozilla-api-keyfile
-	mozconfig_add_options_ac '' --without-pocket-api-keyfile
 
 	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=0
 	mozconfig_add_options_ac '' MOZ_DEVICES=0
