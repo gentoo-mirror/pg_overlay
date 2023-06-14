@@ -617,7 +617,7 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
-
+	eapply "${FILESDIR}/rustc_version-0.4.0.patch"
 	eapply "${FILESDIR}/rust-1.70.patch"
 	#######
 
