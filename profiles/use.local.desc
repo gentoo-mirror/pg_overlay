@@ -55,6 +55,7 @@ dev-lang/python:valgrind - Disable pymalloc when running under dev-util/valgrind
 dev-lang/python:wininst - Install Windows executables required to create an executable installer for MS Windows
 dev-lang/rust:clippy - Install clippy, Rust code linter
 dev-lang/rust:dist - Install dist tarballs (used for bootstrapping)
+dev-lang/rust:lto - Optimize the build using Link Time Optimization (LTO)
 dev-lang/rust:miri - Install miri, an interpreter for Rust's mid-level intermediate representation (requires USE=nightly, sometimes is broken)
 dev-lang/rust:nightly - Enable nightly (UNSTABLE) features (NOTE: it does not install nightly version, just enables features marked as nightly at time of release)
 dev-lang/rust:parallel-compiler - Build a multi-threaded rustc (experimental, not tested by upstream)
