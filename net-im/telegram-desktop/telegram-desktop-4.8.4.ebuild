@@ -88,7 +88,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	"${FILESDIR}/tdesktop-4.4.1-fix-dupe-main-decl.patch"
 	"${FILESDIR}/tdesktop-4.8.3-system-cppgir.patch"
 	"${FILESDIR}/tdesktop-4.8.3-fix-clang.patch"
 )
