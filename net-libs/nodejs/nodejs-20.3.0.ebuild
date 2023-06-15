@@ -28,19 +28,21 @@ IUSE="cpu_flags_x86_sse2 debug doc +icu inspector lto +npm pax-kernel +snapshot 
 REQUIRED_USE="inspector? ( icu ssl )
 	npm? ( ssl )
 	system-icu? ( icu )
-	system-ssl? ( ssl )"
+	system-ssl? ( ssl )
+	x86? ( cpu_flags_x86_sse2 )"
 
 RESTRICT="!test? ( test )"
 
 RDEPEND=">=app-arch/brotli-1.0.9:=
 	>=dev-libs/libuv-1.44.0:=
-	>=net-dns/c-ares-1.17.2:=
+	>=net-dns/c-ares-1.18.1:=
 	>=net-libs/nghttp2-1.41.0:=
 	sys-libs/zlib
 	system-icu? ( >=dev-libs/icu-67:= )
 	system-ssl? ( >=dev-libs/openssl-1.1.1:0= )
 	sys-devel/gcc:*"
 BDEPEND="${PYTHON_DEPS}
+	dev-util/ninja
 	sys-apps/coreutils
 	virtual/pkgconfig
 	test? ( net-misc/curl )
@@ -58,13 +60,11 @@ CHECKREQS_MEMORY="8G"
 CHECKREQS_DISK_BUILD="22G"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-fix-incomplete-type.patch
-)
+	"${FILESDIR}"/"${P}"-gcc14.patch
+"${FILESDIR}"/"${P}"-simdutf-2.3.14.patch
+	)
 
 pkg_pretend() {
-	(use x86 && ! use cpu_flags_x86_sse2) && \
-		die "Your CPU doesn't support the required SSE2 instruction."
-
 	if [[ ${MERGE_TYPE} != "binary" ]]; then
 		if is-flagq "-g*" && ! is-flagq "-g*0" ; then
 			einfo "Checking for sufficient disk space and memory to build ${PN} with debugging CFLAGS"
@@ -119,6 +119,7 @@ src_configure() {
 	#filter-flags '-flto*'
 
 	local myconf=(
+	--ninja
 		--shared-brotli
 		--shared-cares
 		--shared-libuv
@@ -143,8 +144,6 @@ src_configure() {
 		myconf+=( --without-ssl )
 	fi
 
-	#myconf+=( --without-corepack )
-
 	local myarch=""
 	case "${ARCH}:${ABI}" in
 		*:amd64) myarch="x64";;
@@ -168,7 +167,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake -C out
+	emake
 }
 
 src_install() {
