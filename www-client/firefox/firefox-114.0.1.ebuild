@@ -1179,6 +1179,7 @@ src_configure() {
 	mozconfig_add_options_ac '' --without-google-location-service-api-keyfile
 	mozconfig_add_options_ac '' --without-google-safebrowsing-api-keyfile
 	mozconfig_add_options_ac '' --without-mozilla-api-keyfile
+	mozconfig_add_options_ac '' --without-pocket-api-keyfile
 
 	mozconfig_add_options_ac '' MOZ_DATA_REPORTING=0
 	mozconfig_add_options_ac '' MOZ_DEVICES=0
@@ -1186,7 +1187,6 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_PAY=0
 	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORTER=0
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
-	#mozconfig_add_options_ac '' MOZ_TELEMETRY_REPORTING=
 	mozconfig_add_options_ac '' MOZ_X11=0
 	mozconfig_add_options_ac '' USE_X11=0
 
