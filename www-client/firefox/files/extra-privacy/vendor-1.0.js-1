@@ -28,7 +28,7 @@ pref("browser.newtabpage.activity-stream.asrouter.providers.snippets", "");
 pref("browser.newtabpage.activity-stream.feeds.section.topstories", false);
 pref("browser.newtabpage.activity-stream.section.highlights.includePocket", false);
 pref("browser.newtabpage.activity-stream.showSponsored", false);
-pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false);
+//pref("browser.newtabpage.activity-stream.feeds.discoverystreamfeed", false);
 
 //
 // GEO
