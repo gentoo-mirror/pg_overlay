@@ -3,12 +3,12 @@
 
 EAPI=8
 
-inherit autotools flag-o-matic multilib-minimal
+inherit autotools flag-o-matic multilib-minimal poly-c_ebuilds
 
-MY_P="SDL2-${PV}"
+REAL_P="SDL2-${MY_PV}"
 DESCRIPTION="Simple Direct Media Layer"
 HOMEPAGE="https://www.libsdl.org/"
-SRC_URI="https://www.libsdl.org/release/${MY_P}.tar.gz"
+SRC_URI="https://www.libsdl.org/release/${REAL_P}.tar.gz"
 
 LICENSE="ZLIB"
 SLOT="0"
@@ -97,7 +97,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-2.0.16-static-libs.patch
 )
 
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}/${REAL_P}"
 
 src_prepare() {
 	default
