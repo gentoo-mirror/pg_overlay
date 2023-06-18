@@ -293,6 +293,8 @@ multilib_src_install_all() {
 		exeinto /usr/bin
 		newexe "${FILESDIR}"/gentoo-pipewire-launcher.in-r2 gentoo-pipewire-launcher
 
+		doman "${FILESDIR}"/gentoo-pipewire-launcher.1
+
 		# Disable pipewire-pulse if sound-server is disabled.
 		if ! use sound-server ; then
 			sed -i -s '/pipewire -c pipewire-pulse.conf/s/^/#/' "${ED}"/usr/bin/gentoo-pipewire-launcher || die
@@ -396,6 +398,8 @@ pkg_postinst() {
 
 	if [[ ${HAD_SOUND_SERVER} -eq 0 || -z ${REPLACING_VERSIONS} ]] ; then
 		# TODO: We could drop most of this if we set up systemd presets?
+		# They're worth looking into because right now, the out-of-the-box experience
+		# is automatic on OpenRC, while it needs manual intervention on systemd.
 		if use sound-server && use systemd ; then
 			elog
 			elog "When switching from PulseAudio, you may need to disable PulseAudio:"
