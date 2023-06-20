@@ -5,10 +5,9 @@ EAPI=8
 
 ECM_HANDBOOK="forceoptional"
 ECM_TEST="optional"
-KFMIN=5.102.0
+KFMIN=5.106.0
 PVCUT=$(ver_cut 1-3)
-QTMIN=5.15.7
-VIRTUALX_REQUIRED="test"
+QTMIN=5.15.9
 inherit ecm plasma.kde.org
 
 DESCRIPTION="Tools based on KDE Frameworks 5 to better interact with the system"
@@ -53,10 +52,7 @@ RDEPEND="${DEPEND}
 "
 BDEPEND=">=kde-frameworks/kcmutils-${KFMIN}:5"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-5.12.80-tests-optional.patch"
-	"${FILESDIR}/${P}-kcmshell5.patch" # bug 906198
-)
+PATCHES=( "${FILESDIR}/${PN}-5.12.80-tests-optional.patch" )
 
 src_configure() {
 	local mycmakeargs=(
