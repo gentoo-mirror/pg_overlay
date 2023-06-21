@@ -619,6 +619,7 @@ src_prepare() {
 	done
 	eapply "${FILESDIR}/rustc_version-0.4.0.patch"
 	eapply "${FILESDIR}/rust-1.70.patch"
+	eapply "${FILESDIR}/mozilla-llvm16.patch"
 	#######
 
 	xdg_environment_reset
