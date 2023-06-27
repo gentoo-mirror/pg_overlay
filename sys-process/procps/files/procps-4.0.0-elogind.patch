@@ -1,0 +1,80 @@
+From ac7a59a7c045574d214c31cd47f70b52d45677a0 Mon Sep 17 00:00:00 2001
+From: Sven Eden <yamakuzure@gmx.net>
+Date: Tue, 30 May 2017 16:33:28 +0200
+Subject: [PATCH] Add support for elogind
+
+A session manager similar to logind from systemd.
+See https://github.com/elogind/elogind
+
+Signed-off-by: Lars Wendler <polynomial-c@gentoo.org>
+---
+ Makefile.am     |  4 ++++
+ configure.ac    | 13 +++++++++++++
+ proc/readproc.c |  5 ++++-
+ 3 files changed, 21 insertions(+), 1 deletion(-)
+
+diff --git a/Makefile.am b/Makefile.am
+index eedc7dc5..4059e130 100644
+--- a/Makefile.am
++++ b/Makefile.am
+@@ -246,6 +246,10 @@ if WITH_SYSTEMD
+ proc_libproc_2_la_LIBADD += @SYSTEMD_LIBS@
+ endif
+ 
++if WITH_ELOGIND
++proc_libproc_2_la_LIBADD += @ELOGIND_LIBS@
++endif
++
+ proc_libproc_2_la_LDFLAGS = \
+ 	-version-info $(LIBproc_2_CURRENT):$(LIBproc_2_REVISION):$(LIBproc_2_AGE) \
+ 	-no-undefined \
+diff --git a/configure.ac b/configure.ac
+index 1d303b95..951d77bf 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -249,6 +249,19 @@ AS_IF([test "x$with_systemd" != "xno"], [
+ ])
+ AM_CONDITIONAL([WITH_SYSTEMD], [test x$with_systemd != xno])
+ 
++AC_ARG_WITH([elogind],
++  [AS_HELP_STRING([--with-elogind], [enable elogind support])],
++  [], [with_elogind=no]
++)
++# Do not allow elogind if systemd is wanted and found
++AS_IF([test "x$with_systemd" != "xno"], [with_elogind=no])
++
++AS_IF([test "x$with_elogind" != "xno"], [
++  PKG_CHECK_MODULES([ELOGIND], [libelogind])
++  AC_DEFINE(WITH_ELOGIND, 1, [enable elogind support])
++])
++AM_CONDITIONAL([WITH_ELOGIND], [test x$with_elogind != xno])
++
+ # AC_ARG_ENABLEs
+ AC_ARG_ENABLE([pidof],
+   AS_HELP_STRING([--disable-pidof], [do not build pidof]),
+diff --git a/proc/readproc.c b/proc/readproc.c
+index a956f438..41888cca 100644
+--- a/proc/readproc.c
++++ b/proc/readproc.c
+@@ -35,6 +35,9 @@
+ #ifdef WITH_SYSTEMD
+ #include <systemd/sd-login.h>
+ #endif
++#ifdef WITH_ELOGIND
++#include <elogind/sd-login.h>
++#endif
+ 
+ #include "devname.h"
+ #include "escape.h"
+@@ -495,7 +498,7 @@ static inline void oomadj2proc(const char *S, proc_t *restrict P)
+ ///////////////////////////////////////////////////////////////////////
+ 
+ static int sd2proc (proc_t *restrict p) {
+-#ifdef WITH_SYSTEMD
++#if defined(WITH_SYSTEMD) || defined(WITH_ELOGIND)
+     char buf[64];
+     uid_t uid;
+ 
+-- 
+2.35.1
+
