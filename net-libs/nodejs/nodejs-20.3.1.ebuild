@@ -60,8 +60,8 @@ CHECKREQS_MEMORY="8G"
 CHECKREQS_DISK_BUILD="22G"
 
 PATCHES=(
-	"${FILESDIR}"/"${P}"-gcc14.patch
-"${FILESDIR}"/"${P}"-simdutf-2.3.14.patch
+	"${FILESDIR}"/"${PN}"-20.3.0-gcc14.patch
+"${FILESDIR}"/"${PN}"-20.3.0-simdutf-2.3.14.patch
 	)
 
 pkg_pretend() {
