@@ -62,7 +62,7 @@ BDEPEND="
 DOCS=( AUTHORS HACKING NEWS README.md )
 
 PATCHES=(
-	"${FILESDIR}/${P}-undefined.patch" # 782061
+	#"${FILESDIR}/${PN}-2.9.4-undefined.patch" # 782061
 )
 
 pkg_setup() {
