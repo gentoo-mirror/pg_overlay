@@ -1,12 +1,12 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-inherit autotools bash-completion-r1 linux-info systemd tmpfiles udev xdg-utils
+inherit autotools bash-completion-r1 linux-info systemd tmpfiles udev xdg-utils poly-c_ebuilds
 
 DESCRIPTION="Daemon providing interfaces to work with storage devices"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/udisks"
-SRC_URI="https://github.com/storaged-project/udisks/releases/download/${P}/${P}.tar.bz2"
+SRC_URI="https://github.com/storaged-project/udisks/releases/download/${MY_P}/${MY_P}.tar.bz2"
 
 LICENSE="LGPL-2+ GPL-2+"
 SLOT="2"
@@ -17,19 +17,18 @@ REQUIRED_USE="
 	?? ( elogind systemd )
 	elogind? ( daemon )
 	systemd? ( daemon )
-	zram? ( elogind )
 "
 
 # See configure.ac file for the required min version
-BLOCKDEV_MIN_VER="2.25"
+BLOCKDEV_MIN_VER="3.0_pre"
 
 COMMON_DEPEND="
 	>=sys-auth/polkit-0.114
-	>=sys-libs/libblockdev-${BLOCKDEV_MIN_VER}[cryptsetup,lvm?,vdo(-)?]
+	>=sys-libs/libblockdev-${BLOCKDEV_MIN_VER}[cryptsetup,lvm?]
 	virtual/udev
 	acl? ( virtual/acl )
 	daemon? (
-		>=dev-libs/glib-2.50:2
+		>=dev-libs/glib-2.68:2
 		>=dev-libs/libatasmart-0.19
 		>=dev-libs/libgudev-165:=
 	)
@@ -42,7 +41,7 @@ COMMON_DEPEND="
 # util-linux -> mount, umount, swapon, swapoff (see also #403073)
 RDEPEND="${COMMON_DEPEND}
 	>=sys-block/parted-3
-	>=sys-apps/util-linux-2.30
+	>=sys-apps/util-linux-2.39
 	selinux? ( sec-policy/selinux-devicekit )
 "
 DEPEND="${COMMON_DEPEND}
@@ -60,10 +59,6 @@ BDEPEND="
 # sys-devel/autoconf-archive
 
 DOCS=( AUTHORS HACKING NEWS README.md )
-
-PATCHES=(
-	#"${FILESDIR}/${PN}-2.9.4-undefined.patch" # 782061
-)
 
 pkg_setup() {
 	# Listing only major arch's here to avoid tracking kernel's defconfig
@@ -97,8 +92,8 @@ src_configure() {
 		--with-html-dir="${EPREFIX}"/usr/share/gtk-doc/html
 		--with-modprobedir="${EPREFIX}"/lib/modprobe.d
 		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)"
-		--with-tmpfilesdir="/usr/lib/tmpfiles.d"
-		--with-udevdir="$(get_udevdir)"
+		--with-tmpfilesdir="${EPREFIX}"/usr/lib/tmpfiles.d
+		--with-udevdir="${EPREFIX}$(get_udevdir)"
 		$(use_enable acl)
 		$(use_enable daemon)
 		$(use_enable debug)
