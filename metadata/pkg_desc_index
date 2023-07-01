@@ -129,9 +129,10 @@ sys-auth/pambase 20220214: PAM base configuration files
 sys-devel/clang 16.0.6: C language family frontend for LLVM
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
-sys-fs/udisks 2.10.0: Daemon providing interfaces to work with storage devices
+sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
+sys-libs/libblockdev 3.0_pre: A library for manipulating block devices
 sys-libs/ncurses 6.3_p20220122: console display library
 sys-libs/polly 15.0.7 16.0.6: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
