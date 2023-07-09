@@ -21,7 +21,7 @@ else
 fi
 LICENSE="LGPL-2+"
 SLOT="0/3"
-IUSE="bcache +cryptsetup device-mapper escrow gtk-doc introspection lvm +nvme test +tools"
+IUSE="+cryptsetup device-mapper escrow gtk-doc introspection lvm +nvme test +tools"
 # Tests require root. In a future release, we may be able to run a smaller
 # subset with new run_tests.py arguments.
 RESTRICT="!test? ( test ) test"
@@ -87,7 +87,6 @@ src_configure() {
 		--without-nvdimm
 		$(use_enable introspection)
 		$(use_enable test tests)
-		$(use_with bcache)
 		$(use_with cryptsetup crypto)
 		$(use_with device-mapper dm)
 		$(use_with escrow)
