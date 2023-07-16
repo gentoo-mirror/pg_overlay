@@ -41,7 +41,7 @@ RDEPEND="
 	media-libs/libjpeg-turbo:=
 	~media-libs/libtgvoip-2.4.4_p20221229
 	media-libs/openal
-	media-libs/opus:=
+	media-libs/opus
 	media-libs/rnnoise
 	~media-libs/tg_owt-0_pre20230501:=[screencast=,X=]
 	media-video/ffmpeg:=[opus]
@@ -65,7 +65,10 @@ RDEPEND="
 		dev-qt/qtimageformats:6
 		dev-qt/qtsvg:6
 		wayland? ( dev-qt/qtwayland:6 )
-		qt6-imageformats? ( ${KIMAGEFORMATS_RDEPEND} )
+		qt6-imageformats? (
+			dev-qt/qtimageformats:6=
+			${KIMAGEFORMATS_RDEPEND}
+		)
 	)
 	X? (
 		x11-libs/libxcb:=
@@ -88,7 +91,9 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
+	"${FILESDIR}/tdesktop-4.8.4-system-cppgir.patch"
 	"${FILESDIR}/tdesktop-4.8.3-fix-clang.patch"
+	"${FILESDIR}/tdesktop-4.8.4-remove-private-qt.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
@@ -101,6 +106,13 @@ pkg_pretend() {
 		ewarn "check bug https://bugs.gentoo.org/715114 for more info"
 		ewarn
 	fi
+}
+
+pkg_setup() {
+	# Having inaccessible paths sneak into the build environment through the
+	# XDG_DATA_DIRS variable breaks cppgir.
+	# bug 909038
+	unset XDG_DATA_DIRS
 }
 
 src_prepare() {
@@ -118,6 +130,13 @@ src_prepare() {
 
 	# kde-frameworks/kcoreaddons is bundled when using qt6, see:
 	#   cmake/external/kcoreaddons/CMakeLists.txt
+
+	# Happily fail if libraries aren't found...
+	find -type f -name 'CMakeLists.txt' \
+		\! -path "./cmake/external/expected/CMakeLists.txt" \
+		-print0 | xargs -0 sed -i \
+		-e '/pkg_check_modules(/s/[^ ]*)/REQUIRED &/' \
+		-e '/find_package(/s/)/ REQUIRED)/' || die
 
 	cmake_src_prepare
 }
