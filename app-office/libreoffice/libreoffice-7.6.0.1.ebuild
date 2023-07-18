@@ -50,6 +50,7 @@ ADDONS_SRC=(
 	"${ADDONS_URI}/dtoa-20180411.tgz"
 	# not packaged in Gentoo, https://skia.org/
 	"${ADDONS_URI}/skia-m111-a31e897fb3dcbc96b2b40999751611d029bf5404.tar.xz"
+	"${ADDONS_URI}/frozen-1.1.1.tar.gz"
 	"base? (
 		${ADDONS_URI}/commons-logging-1.2-src.tar.gz
 		${ADDONS_URI}/ba2930200c9f019c2d93a8c88c651a0f-flow-engine-0.9.4.zip
@@ -63,7 +64,6 @@ ADDONS_SRC=(
 		${ADDONS_URI}/f94d9870737518e3b597f9265f4e9803-libserializer-1.1.6.zip
 		${ADDONS_URI}/ace6ab49184e329db254e454a010f56d-libxml-1.1.7.zip
 		${ADDONS_URI}/39bb3fcea1514f1369fcfc87542390fd-sacjava-1.3.zip
-		${ADDONS_URI}/frozen-1.1.1.tar.gz
 	)"
 	"java? ( ${ADDONS_URI}/17410483b5b5f267aa18b7e00b65e6e0-hsqldb_1_8_0.zip )"
 	# no release for 8 years, should we package it?
