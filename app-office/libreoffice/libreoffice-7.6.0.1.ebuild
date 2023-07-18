@@ -528,6 +528,7 @@ src_configure() {
 		$(use_with java)
 		$(use_with odk doxygen)
 		$(use_with valgrind)
+		--without-system-frozen
 	)
 
 	if use eds || use gtk; then
