@@ -1,4 +1,4 @@
-# Copyright 2021-2022 Gentoo Authors
+# Copyright 2021-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -18,8 +18,8 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~mips ~ppc ~ppc64 ~riscv 
 COMMON_DEPEND="
 	dev-libs/libbsd
 	dev-libs/openssl:=
-	>=dev-libs/wayland-1.20
-	>=dev-libs/wayland-protocols-1.22
+	>=dev-libs/wayland-1.21.0
+	>=dev-libs/wayland-protocols-1.28
 	media-fonts/font-util
 	>=media-libs/libepoxy-1.5.4[X,egl(+)]
 	media-libs/libglvnd[X]
@@ -37,7 +37,7 @@ COMMON_DEPEND="
 "
 DEPEND="
 	${COMMON_DEPEND}
-	x11-base/xorg-proto
+	>=x11-base/xorg-proto-2022.2
 	>=x11-libs/xtrans-1.3.5
 "
 RDEPEND="
