@@ -26,7 +26,6 @@ inherit autotools bash-completion-r1 check-reqs flag-o-matic java-pkg-opt-2 mult
 DESCRIPTION="A full office productivity suite"
 HOMEPAGE="https://www.libreoffice.org"
 SRC_URI="branding? ( https://dev.gentoo.org/~dilfridge/distfiles/${BRANDING} )"
-SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PN}-7.5.2.2-loong-buildsys-fix.patch.xz"
 [[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PATCHSET}"
 
 # Split modules following git/tarballs; Core MUST be first!
@@ -136,7 +135,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	dev-libs/icu:=
 	dev-libs/libassuan
 	dev-libs/libgpg-error
-	>=dev-libs/liborcus-0.17.2:0/0.17
+	>=dev-libs/liborcus-0.18.0:0/0.18
 	dev-libs/librevenge
 	dev-libs/libxml2
 	dev-libs/libxslt
@@ -227,7 +226,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-perl/Archive-Zip
 	>=dev-util/cppunit-1.14.0
 	>=dev-util/gperf-3.1
-	dev-util/mdds:1/2.0
+	dev-util/mdds:1/2.1
 	media-libs/glm
 	x11-base/xorg-proto
 	x11-libs/libXt
@@ -291,9 +290,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
-
-	# git master
-	"${WORKDIR}"/${PN}-7.5.2.2-loong-buildsys-fix.patch
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
