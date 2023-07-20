@@ -1,0 +1,13 @@
+BDEPEND=sys-libs/glibc >=dev-libs/glib-2.58 >=x11-libs/gtk+-3.24 || ( dev-lang/vala:0.56[vapigen(+)] ) >=dev-util/cmake-3.13 dev-libs/gobject-introspection >=dev-libs/ayatana-ido-0.8.2 sys-devel/make >=dev-util/cmake-3.20.5
+DEFINED_PHASES=compile configure install prepare test
+DESCRIPTION=Ayatana Application Indicators (Shared Library)
+EAPI=8
+HOMEPAGE=https://github.com/AyatanaIndicators/libayatana-indicator
+INHERIT=cmake vala
+KEYWORDS=~amd64 ~x86
+LICENSE=LGPL-3
+RDEPEND=sys-libs/glibc >=dev-libs/glib-2.58 >=x11-libs/gtk+-3.24
+SLOT=0
+SRC_URI=https://github.com/AyatanaIndicators/libayatana-indicator/archive/0.9.2.tar.gz -> libayatana-indicator-0.9.2.tar.gz
+_eclasses_=toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	ad475baa777c9978fa035216c8264a10	multiprocessing	b4e253ab22cef7b1085e9b67c7a3b730	ninja-utils	f3010c780f65d1bb5aea15a9af1adc9c	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	aa1d1fa7be37663d48162ac963b22692	vala	db97951caa799e73a831a5f48e717da8
+_md5_=321397f0005005cec8f7181040b0ff34
