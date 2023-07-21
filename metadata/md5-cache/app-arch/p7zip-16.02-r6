@@ -11,5 +11,5 @@ RDEPEND=wxwidgets? ( x11-libs/wxGTK:3.2-gtk3 )
 REQUIRED_USE=kde? ( wxwidgets )
 SLOT=0
 SRC_URI=mirror://sourceforge/p7zip/p7zip_16.02_src_all.tar.bz2
-_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	toolchain-funcs	513c31b3346458ed1f3878b57da6d61c	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	ad475baa777c9978fa035216c8264a10	wxwidgets	ae03a7df37693cffdec04389f1c141f5
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	strip-linguas	ac3ee41ee2d31d8c41a77c0838320cc7	wrapper	4a1902f969e5718126434fc35f3a0d9c	eutils	8f942ebdcf04334697649d4a0bf65a32	toolchain-funcs	67b3e3d8916d690003f645486ed86aac	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	ad475baa777c9978fa035216c8264a10	wxwidgets	ae03a7df37693cffdec04389f1c141f5
 _md5_=28d2972b09d877503e72ad6b683c6d1a
