@@ -66,7 +66,7 @@ src_configure() {
 		-DWITH_XAPIAN=OFF
 		-DWITH_ZIM=OFF
 		-DUSE_SYSTEM_FMT=ON
-		-DUSE_SYSTEM_TOML=ON
+		-DUSE_SYSTEM_TOML=OFF
 	)
 	cmake_src_configure
 }
