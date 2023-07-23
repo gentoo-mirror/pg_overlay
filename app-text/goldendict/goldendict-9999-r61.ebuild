@@ -63,10 +63,10 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DWITH_FFMPEG_PLAYER=ON
 		-DWITH_EPWING_SUPPORT=OFF
-		-DWITH_XAPIAN=OFF
+		-DWITH_XAPIAN=ON
 		-DWITH_ZIM=OFF
 		-DUSE_SYSTEM_FMT=ON
-		-DUSE_SYSTEM_TOML=ON
+		-DUSE_SYSTEM_TOML=OFF
 	)
 	cmake_src_configure
 }
@@ -78,7 +78,7 @@ install_locale() {
 }
 
 src_install() {
-	dobin ${PN}
+	cmake_src_configure
 	domenu redist/org.xiaoyifang.GoldenDict_NG.desktop
 	doicon redist/icons/${PN}.png
 }
