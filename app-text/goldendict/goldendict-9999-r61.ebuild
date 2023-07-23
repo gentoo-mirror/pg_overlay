@@ -45,7 +45,7 @@ BDEPEND="
 
 src_prepare() {
 	# add trailing semicolon
-	sed -i -e '/^Categories/s/$/;/' redist/org.xiaoyifang.GoldenDict_NG.desktop || die
+	#sed -i -e '/^Categories/s/$/;/' redist/org.xiaoyifang.GoldenDict_NG.desktop || die
 
 	local loc_dir="${S}/locale"
 	plocale_find_changes "${loc_dir}" "" ".ts"
@@ -62,7 +62,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
 		-DWITH_FFMPEG_PLAYER=ON
-		-DWITH_EPWING_SUPPORT=OFF
+		-DWITH_EPWING_SUPPORT=ON
 		-DWITH_XAPIAN=ON
 		-DWITH_ZIM=OFF
 		-DUSE_SYSTEM_FMT=ON
@@ -78,7 +78,8 @@ install_locale() {
 }
 
 src_install() {
-	cmake_src_configure
-	domenu redist/org.xiaoyifang.GoldenDict_NG.desktop
-	doicon redist/icons/${PN}.png
+	cmake_src_install
+	#dobin ${PN}
+	#domenu redist/org.xiaoyifang.GoldenDict_NG.desktop
+	#doicon redist/icons/${PN}.png
 }
