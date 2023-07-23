@@ -78,6 +78,7 @@ install_locale() {
 }
 
 src_install() {
+	cmake_src_install
 	dobin ${PN}
 	domenu redist/org.xiaoyifang.GoldenDict_NG.desktop
 	doicon redist/icons/${PN}.png
