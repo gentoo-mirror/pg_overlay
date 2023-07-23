@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,11 +15,12 @@ EGIT_SUBMODULES=()
 LICENSE="GPL-3"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug ffmpeg "
+IUSE="ffmpeg "
 
 RDEPEND="
 	app-arch/bzip2
-	>=app-text/hunspell-1.2:=
+	app-i18n/opencc
+	app-text/hunspell
 	dev-libs/eb
 	dev-libs/lzo
 	dev-libs/xapian
@@ -75,11 +76,4 @@ install_locale() {
 	insinto /usr/share/apps/${PN}/locale
 	doins "${S}"/.qm/${1}.qm
 	eend $? || die "failed to install $1 locale"
-}
-
-src_install() {
-	cmake_src_install
-	#dobin ${PN}
-	#domenu redist/org.xiaoyifang.GoldenDict_NG.desktop
-	#doicon redist/icons/${PN}.png
 }
