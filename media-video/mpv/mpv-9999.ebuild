@@ -231,7 +231,8 @@ src_configure() {
 
 		$(meson_feature vaapi)
 		$(mpv_feature_multi vaapi X vaapi-x11)
-		$(mpv_feature_multi 'vaapi egl' drm vaapi-drm vaapi-egl)
+		$(mpv_feature_multi 'vaapi egl' egl vaapi-egl)
+		$(mpv_feature_multi 'vaapi egl' drm vaapi-drm)
 		$(mpv_feature_multi 'vaapi egl' wayland vaapi-wayland)
 
 		$(meson_feature vdpau)
