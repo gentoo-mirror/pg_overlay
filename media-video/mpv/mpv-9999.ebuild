@@ -12,7 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 else
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
+	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
 fi
 
 DESCRIPTION="Media player for the command line"
@@ -231,7 +231,7 @@ src_configure() {
 
 		$(meson_feature vaapi)
 		$(mpv_feature_multi vaapi X vaapi-x11)
-		$(mpv_feature_multi 'vaapi X' egl vaapi-x-egl)
+		$(mpv_feature_multi 'vaapi egl' egl vaapi-egl)
 		$(mpv_feature_multi 'vaapi egl' drm vaapi-drm)
 		$(mpv_feature_multi 'vaapi egl' wayland vaapi-wayland)
 
