@@ -298,6 +298,7 @@ net-im/telegram-desktop:hunspell - Enable the app-text/hunspell spell-checking b
 net-im/telegram-desktop:qt6 - Build with Qt6 support
 net-im/telegram-desktop:qt6-imageformats - Add support for HEIF, AVIF and JpegXL by bundling kde-frameworks/kimageformats
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
+net-libs/nodejs:corepack - Enable the experimental corepack package management tool
 net-libs/nodejs:inspector - Enable V8 inspector
 net-libs/nodejs:lto - Build with link-time optimisation
 net-libs/nodejs:npm - Enable NPM package manager
