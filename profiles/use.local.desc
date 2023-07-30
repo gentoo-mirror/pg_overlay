@@ -46,7 +46,6 @@ app-portage/eix:strong-security - Add many checks to prevent exploits if eix cod
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
-dev-cpp/abseil-cpp:cxx17 - Build with -DCMAKE_CXX_STANDARD=17 (required by some revdeps)
 dev-db/sqlitestudio:cli - Build CLI interface
 dev-lang/luajit:lua52compat - Enable some upwards-compatible features from Lua 5.2 that are unlikely to break existing code.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
@@ -69,6 +68,12 @@ dev-lang/rust:rustfmt - Install rustfmt, Rust code formatter
 dev-lang/rust:system-bootstrap - Bootstrap using installed rust compiler
 dev-lang/rust:system-llvm - Use the system LLVM installation
 dev-lang/rust:wasm - Build support for the wasm32-unknown-unknown target
+dev-libs/glib:dbus - Enable dependencies required by glib libraries using dbus service to manage settings saving
+dev-libs/glib:elf - Enable support for listing and extracting from ELF resource files with gresource tool
+dev-libs/glib:mime - Pull in shared MIME database that many glib-based applications require at runtime to detect or open files. Warning: do not disable this flag unless installing on a headless server.
+dev-libs/glib:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
+dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap
+dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
