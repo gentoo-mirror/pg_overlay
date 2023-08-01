@@ -1,6 +1,7 @@
 app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/p7zip 16.02-r6 17.03 17.04: Port of 7-Zip archiver for Unix
+app-cdr/dolphin-plugins-mountiso 23.07.80: Dolphin plugin for ISO loopback device mounting
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
@@ -65,6 +66,36 @@ games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/wlroots 9999: Pluggable, composable, unopinionated modules for building a Wayland compositor
+kde-apps/ark 23.07.80: File archiver by KDE
+kde-apps/dolphin 23.07.80: Plasma filemanager focusing on usability
+kde-apps/dolphin-plugins-git 23.07.80: Dolphin plugin for Git integration
+kde-apps/gwenview 23.07.80: Image viewer by KDE
+kde-apps/kate 23.07.80: Multi-document editor with network transparency, Plasma integration and more
+kde-apps/kate-addons 23.07.80: Addons used by Kate
+kde-apps/kate-lib 23.07.80: Shared library used by Kate/Kwrite and Kate-Addons
+kde-apps/kcalc 23.07.80: KDE calculator
+kde-apps/kcron 23.07.80: KDE Task Scheduler
+kde-apps/kdegraphics-mobipocket 23.07.80: Library to support mobipocket ebooks
+kde-apps/kdialog 23.07.80: Can be used to show nice dialog boxes from shell scripts
+kde-apps/kfind 23.07.80: File finder utility based on KDE Frameworks
+kde-apps/kget 23.07.80: Advanced download manager by KDE
+kde-apps/kio-extras 23.07.80: KIO plugins present a filesystem-like view of arbitrary data
+kde-apps/kmahjongg 23.07.80: A tile matching game for one or two players
+kde-apps/kolourpaint 23.07.80: Paint Program by KDE
+kde-apps/kompare 23.07.80: A program to view the differences between files
+kde-apps/konsole 23.07.80: KDE's terminal emulator
+kde-apps/kpat 23.07.80: KDE patience game
+kde-apps/kshisen 23.07.80: Solitaire-like game played using the standard set of Mahjong tiles
+kde-apps/libkdegames 23.07.80: Base library common to many KDE games
+kde-apps/libkexiv2 23.07.80: Wrapper around exiv2 library
+kde-apps/libkmahjongg 23.07.80: Mahjongg library based on Qt/KDE Frameworks
+kde-apps/libkomparediff2 23.07.80: KDE library to compare files and strings
+kde-apps/okular 23.07.80: Universal document viewer based on KDE Frameworks
+kde-apps/picmi 23.07.80: Nonogram logic game by KDE
+kde-apps/print-manager 23.07.80: Manage print jobs and printers in Plasma
+kde-apps/spectacle 23.07.80: Screenshot capture utility
+kde-apps/sweeper 23.07.80: Privacy settings widget to clean unwanted traces on the system
+kde-apps/yakuake 23.07.80: Quake-style terminal emulator based on konsole
 kde-frameworks/kdelibs4support 5.108.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-frameworks/plasma 5.108.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration

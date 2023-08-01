@@ -120,6 +120,40 @@ gui-libs/wlroots:X - Enable support for X11 applications (XWayland)
 gui-libs/wlroots:tinywl - Install the minimal wayland client, tinywl
 gui-libs/wlroots:vulkan - Enable support for the vulkan backend renderer
 gui-libs/wlroots:x11-backend - Enable support for handling input/output devices through x11-libs/libxcb
+kde-apps/ark:zip - Enable ZIP archive support via dev-libs/libzip
+kde-apps/dolphin:activities - Track which folders are frequently accessed on a Plasma desktop
+kde-apps/gwenview:activities - Enable kactivities support
+kde-apps/gwenview:fits - Enable support for NASA's sci-libs/cfitsio library
+kde-apps/gwenview:mpris - Enable support for MPRIS2 interface, requiring dev-qt/qtdbus as dependency.
+kde-apps/gwenview:share - Enable support for a share menu using kde-frameworks/purpose
+kde-apps/kate-addons:filebrowser - Enable File System browser tool view
+kde-apps/kate-addons:lspclient - Enable LSP (Language Server Protocol) client plugin
+kde-apps/kate-addons:projects - Enable Project plugin for executing queries on SQL DBs
+kde-apps/kate-addons:snippets - Enable Snippets Tool View plugin to manage or download code snippets
+kde-apps/kate-addons:sql - Enable SQL plugin for executing queries on SQL DBs
+kde-apps/kate-lib:activities - Enable Plasma Activities support via kde-frameworks/kactivities
+kde-apps/kget:bittorrent - Enable bittorrent transfer plugin through net-libs/libktorrent
+kde-apps/kget:gpg - Enable signature verification by GpgME++ via app-crypt/gpgme
+kde-apps/kget:mms - Enable MMS (Microsoft Media Server) plugin through media-libs/libmms
+kde-apps/kio-extras:X - Enable support for XCursor thumbnails via x11-libs/libX11
+kde-apps/kio-extras:activities - Enable activities KIO worker and fileitem plugin
+kde-apps/kio-extras:ios - Enable AFC (Apple File Conduit) KIO worker for iOS devices support
+kde-apps/kio-extras:man - Enable manpages KIO worker
+kde-apps/kio-extras:nfs - Enable NFS support using net-libs/libtirpc
+kde-apps/kio-extras:phonon - Enable file audio preview plugin using media-libs/phonon
+kde-apps/kio-extras:sftp - Enable SFTP protocol support using net-libs/libssh
+kde-apps/kio-extras:taglib - Enable audio thumbnails via media-libs/taglib
+kde-apps/okular:crypt - Enable support for password-encrypted documents via kde-frameworks/kwallet
+kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
+kde-apps/okular:image-backend - Enable image viewing support
+kde-apps/okular:markdown - Enable Markdown support via app-text/discount
+kde-apps/okular:mobi - Enable mobipocket support via kde-apps/kdegraphics-mobipocket
+kde-apps/okular:plucker - Enable Plucker E-Book for Palm OS devices support
+kde-apps/okular:qml - Install Okular Qml components
+kde-apps/okular:share - Enable support for a share menu using kde-frameworks/purpose
+kde-apps/okular:speech - Enable text-to-speech support
+kde-apps/spectacle:share - Enable support for a share menu using kde-frameworks/purpose
+kde-apps/yakuake:absolute-position - Use kde-frameworks/kwayland for absolute window positioning in KWin
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
