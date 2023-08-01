@@ -2,12 +2,14 @@ From: Mike Hommey <glandium@debian.org>
 Date: Sat, 21 Jun 2008 02:48:46 +0200
 Subject: Allow .js preference files to set locked prefs with lockPref()
 
+Upstream now supports locked prefs, but with a different syntax from
+the syntax we had supported for a while.
 ---
  modules/libpref/parser/src/lib.rs | 20 +++++++++++++-------
  1 file changed, 13 insertions(+), 7 deletions(-)
 
 diff --git a/modules/libpref/parser/src/lib.rs b/modules/libpref/parser/src/lib.rs
-index bce98c0..da33195 100644
+index 3a0ad2c..c6e34be 100644
 --- a/modules/libpref/parser/src/lib.rs
 +++ b/modules/libpref/parser/src/lib.rs
 @@ -11,8 +11,9 @@
@@ -21,7 +23,7 @@ index bce98c0..da33195 100644
  //! <pref-name>   = <string-literal>
  //! <pref-value>  = <string-literal> | "true" | "false" | <int-value>
  //! <int-value>   = <sign>? <int-literal>
-@@ -171,6 +172,7 @@ enum Token {
+@@ -169,6 +170,7 @@ enum Token {
      // Keywords
      Pref,       // pref
      StickyPref, // sticky_pref
@@ -29,7 +31,7 @@ index bce98c0..da33195 100644
      UserPref,   // user_pref
      True,       // true
      False,      // false
-@@ -293,7 +295,7 @@ struct KeywordInfo {
+@@ -291,7 +293,7 @@ struct KeywordInfo {
      token: Token,
  }
  
@@ -38,7 +40,7 @@ index bce98c0..da33195 100644
      // These are ordered by frequency.
      KeywordInfo {
          string: b"pref",
-@@ -323,6 +325,10 @@ const KEYWORD_INFOS: [KeywordInfo; 7] = [
+@@ -321,6 +323,10 @@ const KEYWORD_INFOS: [KeywordInfo; 7] = [
          string: b"sticky_pref",
          token: Token::StickyPref,
      },
@@ -49,7 +51,7 @@ index bce98c0..da33195 100644
  ];
  
  struct Parser<'t> {
-@@ -375,14 +381,15 @@ impl<'t> Parser<'t> {
+@@ -373,14 +379,15 @@ impl<'t> Parser<'t> {
          // this will be either the first token of a new pref, or EOF.
          loop {
              // <pref-spec>
@@ -69,7 +71,7 @@ index bce98c0..da33195 100644
                  Token::SingleChar(EOF) => return !self.has_errors,
                  _ => {
                      token = self.error_and_recover(
-@@ -492,7 +499,6 @@ impl<'t> Parser<'t> {
+@@ -490,7 +497,6 @@ impl<'t> Parser<'t> {
              };
  
              // ("," <pref-attr>)*   // default pref files only

@@ -1,2 +1,4 @@
-fixes/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
 debian-hacks/Don-t-build-image-gtests.patch
+debian-hacks/Remove-workaround-for-old-libstdc-problem-which-now-.patch
+debian-hacks/Allow-.js-preference-files-to-set-locked-prefs-with-.patch
+debian-hacks/Set-DPI-to-system-settings.patch
