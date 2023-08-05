@@ -171,7 +171,6 @@ PATCHES=(
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
 	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/0004-compiler-Use-wasm-ld-for-wasm-targets.patch
-	"${FILESDIR}"/0005-bootstrap-Unbreak-building-Rust-1.71.1-with-1.71.0.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
