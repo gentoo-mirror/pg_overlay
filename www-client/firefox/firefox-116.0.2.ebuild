@@ -97,10 +97,7 @@ BDEPEND="${PYTHON_DEPS}
 			sys-devel/clang:15
 			sys-devel/llvm:15
 			clang? (
-				|| (
-					sys-devel/lld:15
-					sys-devel/mold
-				)
+				sys-devel/lld:15
 				virtual/rust:0/llvm-15
 				pgo? ( =sys-libs/compiler-rt-sanitizers-15*[profile] )
 			)
@@ -643,6 +640,7 @@ src_prepare() {
 	einfo Applying privacy patches
 	einfo ++++++++++++++++++++++++
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
+	rm -rv browser/extensions/{formautofill,pictureinpicture,screenshots,webcompat}
 	cp -v "${FILESDIR}/privacy-patchset/search-config.json" "${S}/services/settings/dumps/main/search-config.json"
 	#######
 	### Debian patches
@@ -1237,16 +1235,6 @@ src_configure() {
 
 src_compile() {
 	local virtx_cmd=
-
-	if tc-ld-is-mold && use lto; then
-		# increase ulimit with mold+lto, bugs #892641, #907485
-		if ! ulimit -n 16384 1>/dev/null 2>&1 ; then
-			ewarn "Unable to modify ulimits - building with mold+lto might fail due to low ulimit -n resources."
-			ewarn "Please see bugs #892641 & #907485."
-		else
-			ulimit -n 16384
-		fi
-	fi
 
 	if use pgo; then
 		# Reset and cleanup environment variables used by GNOME/XDG
