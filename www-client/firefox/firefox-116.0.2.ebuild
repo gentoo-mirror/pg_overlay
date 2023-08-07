@@ -643,7 +643,7 @@ src_prepare() {
 	einfo Applying privacy patches
 	einfo ++++++++++++++++++++++++
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
-	rm -rv browser/extensions/{doh-rollout,screenshots,webcompat,report-site-issue}
+	rm -rv browser/extensions/{doh-rollout,webcompat,report-site-issue}
 	cp -v "${FILESDIR}/privacy-patchset/search-config.json" "${S}/services/settings/dumps/main/search-config.json"
 	#######
 	### Debian patches
