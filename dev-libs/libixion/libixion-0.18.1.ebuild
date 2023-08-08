@@ -14,7 +14,7 @@ if [[ ${PV} == *9999* ]]; then
 	EGIT_REPO_URI="https://gitlab.com/ixion/ixion.git"
 	inherit git-r3 autotools
 else
-	MDDS_SLOT="1/2.0"
+	MDDS_SLOT="1/2.1"
 	SRC_URI="https://kohei.us/files/ixion/src/${P}.tar.xz"
 	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~x86"
 fi
