@@ -195,7 +195,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 		dev-libs/glib:2
 		dev-libs/gobject-introspection
 		gnome-base/dconf
-		media-libs/mesa[egl]
+		media-libs/mesa
 		x11-libs/gtk+:3
 		x11-libs/pango
 	)
