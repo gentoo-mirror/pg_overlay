@@ -43,6 +43,7 @@ dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus I
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
+dev-libs/re2 0.2023.08.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-qt/qtbase 6.5.9999: Cross-platform application development framework
