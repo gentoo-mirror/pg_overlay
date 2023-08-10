@@ -117,7 +117,7 @@ src_configure() {
 	xdg_environment_reset
 
 	# LTO compiler flags are handled by configure.py itself
-	filter-flags '-flto*'
+	filter-lto
 
 	local myconf=(
 		--ninja
@@ -223,7 +223,7 @@ src_install() {
 				"${find_name[@]}" \
 			\) \) -exec rm -rf "{}" \;
 	fi
- 
+
 	use corepack &&
 		"${D}"/usr/bin/corepack enable --install-directory "${D}"/usr/bin
 
@@ -240,7 +240,7 @@ src_test() {
 		test/parallel/test-strace-openat-openssl.js
 		test/sequential/test-util-debug.js
 	)
-	rm "${drop_tests[@]}" || die "disabling tests failed"
+	rm -f "${drop_tests[@]}" || die "disabling tests failed"
 
 	out/${BUILDTYPE}/cctest || die
 	"${EPYTHON}" tools/test.py --mode=${BUILDTYPE,,} --flaky-tests=dontcare -J message parallel sequential || die
