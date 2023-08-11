@@ -46,6 +46,7 @@ app-portage/eix:strong-security - Add many checks to prevent exploits if eix cod
 app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, making the data from gpo.zugaina.org the first choice.
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
+dev-cpp/abseil-cpp:cxx17 - Build with -DCMAKE_CXX_STANDARD=17 (required by some revdeps)
 dev-db/sqlitestudio:cli - Build CLI interface
 dev-lang/luajit:lua52compat - Enable some upwards-compatible features from Lua 5.2 that are unlikely to break existing code.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
