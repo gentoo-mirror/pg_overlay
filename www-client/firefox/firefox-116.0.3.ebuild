@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-116-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-116-patches-04.tar.xz"
 
 LLVM_MAX_SLOT=16
 
@@ -63,7 +63,7 @@ SLOT="rapid"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 
 IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
-IUSE+=" jack +jumbo-build libproxy lto +openh264 pgo pulseaudio sndio selinux"
+IUSE+=" jack +jumbo-build libproxy lto openh264 pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx system-png system-python-libs +system-webp"
 IUSE+=" +telemetry valgrind wayland wifi +X"
 
@@ -72,6 +72,7 @@ IUSE+=" geckodriver +gmp-autoupdate screencast +privacy"
 
 REQUIRED_USE="|| ( X wayland )
 	debug? ( !system-av1 )
+	!jumbo-build? ( clang )
 	pgo? ( lto )
 	wifi? ( dbus )"
 
@@ -118,7 +119,7 @@ BDEPEND="${PYTHON_DEPS}
 			x11-base/xorg-server[xvfb]
 			x11-apps/xhost
 		)
-		wayland? (
+		!X? (
 			>=gui-libs/wlroots-0.15.1-r1[tinywl]
 			x11-misc/xkeyboard-config
 		)
@@ -1314,6 +1315,10 @@ src_install() {
 			pref("gfx.x11-egl.force-enabled",          true);
 			EOF
 		fi
+
+		# Install vaapitest binary
+		exeinto "${MOZILLA_FIVE_HOME}"
+		doexe "${BUILD_DIR}"/dist/bin/vaapitest
 	fi
 
 	if ! use gmp-autoupdate ; then
