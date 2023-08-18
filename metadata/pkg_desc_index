@@ -99,8 +99,8 @@ kde-apps/print-manager 23.07.90: Manage print jobs and printers in Plasma
 kde-apps/spectacle 23.07.90: Screenshot capture utility
 kde-apps/sweeper 23.07.90: Privacy settings widget to clean unwanted traces on the system
 kde-apps/yakuake 23.07.90: Quake-style terminal emulator based on konsole
-kde-frameworks/kdelibs4support 5.108.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/plasma 5.108.0: Plasma framework
+kde-frameworks/kdelibs4support 5.109.0: Framework easing the development transition from KDELibs 4 to KF 5
+kde-frameworks/plasma 5.109.0: Plasma framework
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.27.7: Tools based on KDE Frameworks 5 to better interact with the system
