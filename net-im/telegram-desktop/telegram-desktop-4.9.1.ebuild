@@ -17,7 +17,7 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
-IUSE="+dbus enchant +fonts +hunspell +jemalloc screencast qt6 qt6-imageformats wayland +X"
+IUSE="enchant +fonts +hunspell +jemalloc screencast qt6 qt6-imageformats wayland +X"
 REQUIRED_USE="
 	^^ ( enchant hunspell )
 	qt6-imageformats? ( qt6 )
@@ -47,13 +47,13 @@ RDEPEND="
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	virtual/opengl
-	dbus? ( >=dev-cpp/glibmm-2.74.0 )
+	=dev-cpp/glibmm-2.74.0
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
 	!qt6? (
 		>=dev-qt/qtcore-5.15:5
-		>=dev-qt/qtgui-5.15:5[dbus?,jpeg,png,wayland?,X?]
+		>=dev-qt/qtgui-5.15:5[dbus,jpeg,png,wayland?,X?]
 		>=dev-qt/qtimageformats-5.15:5
 		>=dev-qt/qtnetwork-5.15:5[ssl]
 		>=dev-qt/qtsvg-5.15:5
@@ -61,7 +61,7 @@ RDEPEND="
 		kde-frameworks/kcoreaddons:=
 	)
 	qt6? (
-		dev-qt/qtbase:6[dbus?,gui,network,opengl,widgets,X?]
+		dev-qt/qtbase:6[dbus,gui,network,opengl,widgets,X?]
 		dev-qt/qtimageformats:6
 		dev-qt/qtsvg:6
 		wayland? ( dev-qt/qtwayland:6 )
@@ -91,8 +91,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	"${FILESDIR}/tdesktop-4.8.4-system-cppgir.patch"
-	"${FILESDIR}/tdesktop-4.8.3-fix-clang.patch"
 	"${FILESDIR}/tdesktop-4.8.4-remove-private-qt.patch"
 )
 
@@ -151,7 +149,6 @@ src_configure() {
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON  # header only lib, some git version. prevents warnings.
 		-DQT_VERSION_MAJOR=$(usex qt6 6 5)
 
-		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION=$(usex !dbus)
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
 		-DDESKTOP_APP_DISABLE_WAYLAND_INTEGRATION=$(usex !wayland)
 		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
@@ -221,7 +218,7 @@ pkg_postinst() {
 		elog
 	fi
 	optfeature_header
-	optfeature "shop payment support (requires USE=dbus enabled)" net-libs/webkit-gtk:4
+	optfeature "shop payment support" net-libs/webkit-gtk:4
 	if ! use qt6; then
 		optfeature "AVIF, HEIF and JpegXL image support" kde-frameworks/kimageformats[avif,heif,jpegxl]
 	fi
