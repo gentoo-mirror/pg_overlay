@@ -53,7 +53,7 @@ RDEPEND="
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
 	!qt6? (
 		>=dev-qt/qtcore-5.15:5
-		>=dev-qt/qtgui-5.15:5[dbus?,jpeg,png,wayland?,X?]
+		>=dev-qt/qtgui-5.15:5[dbus,jpeg,png,wayland?,X?]
 		>=dev-qt/qtimageformats-5.15:5
 		>=dev-qt/qtnetwork-5.15:5[ssl]
 		>=dev-qt/qtsvg-5.15:5
@@ -61,7 +61,7 @@ RDEPEND="
 		kde-frameworks/kcoreaddons:=
 	)
 	qt6? (
-		dev-qt/qtbase:6[dbus?,gui,network,opengl,widgets,X?]
+		dev-qt/qtbase:6[dbus,gui,network,opengl,widgets,X?]
 		dev-qt/qtimageformats:6
 		dev-qt/qtsvg:6
 		wayland? ( dev-qt/qtwayland:6 )
@@ -218,7 +218,7 @@ pkg_postinst() {
 		elog
 	fi
 	optfeature_header
-	optfeature "shop payment support (requires USE=dbus enabled)" net-libs/webkit-gtk:4
+	optfeature "shop payment support" net-libs/webkit-gtk:4
 	if ! use qt6; then
 		optfeature "AVIF, HEIF and JpegXL image support" kde-frameworks/kimageformats[avif,heif,jpegxl]
 	fi
