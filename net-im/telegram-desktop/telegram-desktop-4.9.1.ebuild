@@ -17,7 +17,7 @@ S="${WORKDIR}/${MY_P}"
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
-IUSE="+dbus enchant +fonts +hunspell +jemalloc screencast qt6 qt6-imageformats wayland +X"
+IUSE="enchant +fonts +hunspell +jemalloc screencast qt6 qt6-imageformats wayland +X"
 REQUIRED_USE="
 	^^ ( enchant hunspell )
 	qt6-imageformats? ( qt6 )
@@ -47,7 +47,7 @@ RDEPEND="
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	virtual/opengl
-	dbus? ( >=dev-cpp/glibmm-2.74.0 )
+	=dev-cpp/glibmm-2.74.0
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
@@ -149,7 +149,6 @@ src_configure() {
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON  # header only lib, some git version. prevents warnings.
 		-DQT_VERSION_MAJOR=$(usex qt6 6 5)
 
-		-DDESKTOP_APP_DISABLE_DBUS_INTEGRATION=$(usex !dbus)
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
 		-DDESKTOP_APP_DISABLE_WAYLAND_INTEGRATION=$(usex !wayland)
 		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
