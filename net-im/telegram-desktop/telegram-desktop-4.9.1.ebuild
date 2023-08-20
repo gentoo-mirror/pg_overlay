@@ -47,7 +47,7 @@ RDEPEND="
 	media-video/ffmpeg:=[opus]
 	sys-libs/zlib:=[minizip]
 	virtual/opengl
-	=dev-cpp/glibmm-2.74.0
+	>=dev-cpp/glibmm-2.74.0
 	enchant? ( app-text/enchant:= )
 	hunspell? ( >=app-text/hunspell-1.7:= )
 	jemalloc? ( dev-libs/jemalloc:=[-lazy-lock] )
