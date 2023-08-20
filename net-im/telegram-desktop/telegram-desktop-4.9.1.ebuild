@@ -91,7 +91,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	"${FILESDIR}/tdesktop-4.8.3-fix-clang.patch"
 	"${FILESDIR}/tdesktop-4.8.4-remove-private-qt.patch"
 )
 
