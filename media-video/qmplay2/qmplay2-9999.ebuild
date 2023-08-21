@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,57 +15,60 @@ if [[ ${PV} == *9999 ]]; then
 else
 	SRC_URI="https://github.com/zaps166/QMPlay2/releases/download/${PV}/QMPlay2-src-${PV}.tar.xz"
 	S="${WORKDIR}/QMPlay2-src-${PV}"
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64"
 fi
 
 LICENSE="LGPL-3"
 SLOT="0"
 
 IUSE="avdevice +audiofilters +alsa cdio cuvid extensions gme inputs libass
-	modplug notifications opengl pipewire portaudio pulseaudio sid shaders
-	+taglib vaapi vdpau videofilters visualizations vulkan xv"
+	modplug notifications opengl pipewire portaudio pulseaudio +qt5 qt6 sid
+	shaders +taglib vaapi vdpau videofilters visualizations vulkan xv"
 
 REQUIRED_USE="
 	audiofilters? ( || ( alsa pipewire portaudio pulseaudio ) )
-	shaders? ( vulkan )"
+	shaders? ( vulkan )
+	^^ ( qt5 qt6 )
+"
 
 RDEPEND="
-	dev-qt/qtcore:5
-	dev-qt/qtdbus:5
-	dev-qt/qtsvg:5
-	dev-qt/qtwidgets:5
-	dev-qt/qtx11extras:5
-	media-video/ffmpeg
-	|| (
-		dev-qt/qtgui:5[X(-)]
-		dev-qt/qtgui:5[xcb(-)]
+	qt5? (
+		dev-qt/qtcore:5
+		dev-qt/qtdbus:5
+		dev-qt/qtgui:5[X(-),vulkan?]
+		dev-qt/qtsvg:5
+		dev-qt/qtwidgets:5
+		dev-qt/qtx11extras:5
+		extensions? ( dev-qt/qtdeclarative:5 )
+		videofilters? ( dev-qt/qtconcurrent:5 )
 	)
+	qt6? (
+		dev-qt/qtbase:6[concurrent,dbus,gui,network,opengl?,ssl,vulkan?,widgets]
+		dev-qt/qt5compat:6
+		dev-qt/qtsvg:6
+		extensions? ( dev-qt/qtdeclarative:6 )
+	)
+	media-video/ffmpeg:=[vaapi?,vdpau?]
 	alsa? ( media-libs/alsa-lib )
 	cdio? ( dev-libs/libcdio[cddb] )
-	extensions? ( dev-qt/qtdeclarative:5 )
 	gme? ( media-libs/game-music-emu )
 	libass? ( media-libs/libass )
 	opengl? ( virtual/opengl )
 	pipewire? ( media-video/pipewire )
 	portaudio? ( media-libs/portaudio )
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? ( media-libs/libpulse )
 	sid? ( media-libs/libsidplayfp )
 	shaders? ( >=media-libs/shaderc-2020.1 )
 	taglib? ( media-libs/taglib	)
-	vaapi? (
-		>=media-video/ffmpeg-4.1.3[vaapi]
-		media-libs/libva
-	)
-	vdpau? ( media-video/ffmpeg[vdpau] )
-	videofilters? ( dev-qt/qtconcurrent:5 )
-	vulkan? (
-		>=dev-qt/qtgui-5.14.1:5[vulkan]
-		>=media-libs/vulkan-loader-1.2.133
-	)
+	vaapi? ( media-libs/libva[X] )
+	vulkan? ( >=media-libs/vulkan-loader-1.2.133 )
 	xv? ( x11-libs/libXv )
 "
 DEPEND="${RDEPEND}"
-BDEPEND="dev-qt/linguist-tools:5"
+BDEPEND="
+	qt5? ( dev-qt/linguist-tools:5 )
+	qt6? ( dev-qt/qttools:6[linguist] )
+"
 
 src_prepare() {
 	# disable compress man pages
@@ -85,6 +88,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
+		-DBUILD_WITH_QT6=$(usex qt6)
 		# core
 		-DUSE_LINK_TIME_OPTIMIZATION=ON
 		-DUSE_UPDATES=OFF
