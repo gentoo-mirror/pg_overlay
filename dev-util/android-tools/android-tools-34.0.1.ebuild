@@ -44,6 +44,8 @@ BDEPEND="
 
 DOCS=()
 
+PATCHES=( "${FILESDIR}"/protobuf-23.patch )
+
 src_prepare() {
 	eapply "${DISTDIR}/${PN}-31.0.3-no-gtest.patch"
 
