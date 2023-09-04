@@ -3,7 +3,6 @@
 # * generated automatically using pmaint *
 
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
-app-arch/p7zip:rar - Enable support for non-free rar decoder
 app-editors/qhexedit2:gui - Install Qt5 hex editor
 app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
 app-emulation/virt-manager:policykit - Enables sys-auth/polkit authentication support, required when using app-emulation/libvirt with PolicyKit authentication
