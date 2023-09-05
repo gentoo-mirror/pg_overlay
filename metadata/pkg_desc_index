@@ -50,7 +50,6 @@ dev-libs/zziplib 9999: Lightweight library for extracting data from files archiv
 dev-qt/qtbase 6.5.9999: Cross-platform application development framework
 dev-qt/qtspeech 6.5.9999: Text-to-speech library for the Qt6 framework
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
-dev-util/android-tools 34.0.1: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/glib-utils 2.77.0: Build utilities for GLib using projects
 dev-util/gn 0.2049: GN is a meta-build system that generates build files for Ninja
