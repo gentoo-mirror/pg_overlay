@@ -36,7 +36,6 @@ RDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-23.3-disable-32-bit-tests.patch"
 	"${FILESDIR}/${PN}-23.3-static_assert-failure.patch"
 )
 
