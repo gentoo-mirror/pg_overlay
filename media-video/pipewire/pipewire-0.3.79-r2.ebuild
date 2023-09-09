@@ -117,6 +117,7 @@ RDEPEND="
 	modemmanager? ( >=net-misc/modemmanager-1.10.0 )
 	pipewire-alsa? ( >=media-libs/alsa-lib-1.1.7[${MULTILIB_USEDEP}] )
 	sound-server? ( !media-sound/pulseaudio-daemon )
+	roc? ( media-libs/roc-toolkit )
 	readline? ( sys-libs/readline:= )
 	ssl? ( dev-libs/openssl:= )
 	systemd? ( sys-apps/systemd )
@@ -223,6 +224,7 @@ multilib_src_configure() {
 		$(meson_native_use_feature lv2)
 		$(meson_native_use_feature v4l v4l2)
 		-Dlibcamera=disabled # libcamera is not in Portage tree
+		$(meson_native_use_feature roc)
 		$(meson_native_use_feature readline)
 		$(meson_native_use_feature ssl raop)
 		-Dvideoconvert=enabled # Matches upstream
