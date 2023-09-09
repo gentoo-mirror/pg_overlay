@@ -30,7 +30,7 @@ LICENSE="PSF-2"
 SLOT="${PYVER}"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 IUSE="
-	bluetooth build debug +ensurepip examples gdbm hardened libedit lto
+	bluetooth build debug +ensurepip examples gdbm libedit lto
 	+ncurses pgo +readline +sqlite +ssl test tk valgrind
 "
 RESTRICT="!test? ( test )"
@@ -66,7 +66,6 @@ RDEPEND="
 		dev-tcltk/blt:=
 		dev-tcltk/tix
 	)
-	!!<sys-apps/sandbox-2.21
 "
 # bluetooth requires headers from bluez
 DEPEND="
@@ -174,6 +173,7 @@ src_configure() {
 			--timeout 1200
 
 			-x test_gdb
+			-x test_dtrace
 
 			# All of these seem to occasionally hang for PGO inconsistently
 			# They'll even hang here but be fine in src_test sometimes.
@@ -247,9 +247,13 @@ src_configure() {
 
 		# pass system CFLAGS & LDFLAGS as _NODIST, otherwise they'll get
 		# propagated to sysconfig for built extensions
-		local -x CFLAGS_NODIST=${CFLAGS_FOR_BUILD}
-		local -x LDFLAGS_NODIST=${LDFLAGS_FOR_BUILD}
+		#
+		# -fno-lto to avoid bug #700012 (not like it matters for mini-CBUILD Python anyway)
+		local -x CFLAGS_NODIST="${BUILD_CFLAGS} -fno-lto"
+		local -x LDFLAGS_NODIST=${BUILD_LDFLAGS}
 		local -x CFLAGS= LDFLAGS=
+		local -x BUILD_CFLAGS="${CFLAGS_NODIST}"
+		local -x BUILD_LDFLAGS=${LDFLAGS_NODIST}
 
 		# We need to build our own Python on CBUILD first, and feed it in.
 		# bug #847910
