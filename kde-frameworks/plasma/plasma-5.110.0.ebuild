@@ -8,10 +8,10 @@ PVCUT=$(ver_cut 1-2)
 QTMIN=5.15.9
 inherit ecm frameworks.kde.org
 
-DESCRIPTION="Plasma framework"
+DESCRIPTION="Plasma library and runtime components based upon KF5 and Qt5"
 
 LICENSE="LGPL-2+"
-KEYWORDS="~amd64 ~arm ~arm64 ~loong ~riscv"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 IUSE="gles2-only man wayland"
 
 RESTRICT="test"
@@ -55,6 +55,7 @@ BDEPEND="man? ( >=kde-frameworks/kdoctools-${PVCUT}:5 )"
 
 src_configure() {
 	local mycmakeargs=(
+		-DBUILD_DESKTOPTHEMES=ON # TODO: switch for KF6 compat
 		$(cmake_use_find_package !gles2-only OpenGL)
 		$(cmake_use_find_package man KF5DocTools)
 		$(cmake_use_find_package wayland EGL)
