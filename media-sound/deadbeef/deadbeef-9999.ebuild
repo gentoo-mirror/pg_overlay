@@ -86,11 +86,11 @@ src_prepare() {
 		rm -v "${S}/translation/help.ru.txt" || die
 	fi
 
-	#remove_locale() {
-	#	sed -e "/${1}/d" \
-	#		-i "${S}/po/LINGUAS" || die
-	#}
-	#plocale_for_each_disabled_locale remove_locale
+	remove_locale() {
+		sed -e "/${1}/d" \
+			-i "${S}/po/LINGUAS" || die
+	}
+	plocale_for_each_disabled_locale remove_locale
 
 	drop_from_linguas() {
 		sed "/${1}/d" -i "${S}/po/LINGUAS" || die
@@ -108,8 +108,6 @@ src_prepare() {
 	}
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
-
-	drop_and_stub "${S}/intl"
 
 	eautopoint --force
 	eautoreconf
