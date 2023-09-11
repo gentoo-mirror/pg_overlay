@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
+#PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
 
 inherit autotools plocale toolchain-funcs xdg git-r3
 
@@ -76,22 +76,21 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.9.6-update-gettext.patch
-	"${FILESDIR}"/${PN}-1.9.6-fix-desktop-launcher.patch
 )
 
 src_prepare() {
+	default
+
 	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
 	fi
 
-	remove_locale() {
-		sed -e "/${1}/d" \
-			-i "${S}/po/LINGUAS" || die
-	}
-	plocale_for_each_disabled_locale remove_locale
-
-	default
+	#remove_locale() {
+	#	sed -e "/${1}/d" \
+	#		-i "${S}/po/LINGUAS" || die
+	#}
+	#plocale_for_each_disabled_locale remove_locale
 
 	drop_from_linguas() {
 		sed "/${1}/d" -i "${S}/po/LINGUAS" || die
