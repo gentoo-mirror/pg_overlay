@@ -1,4 +1,4 @@
-# Copyright 2021-2022 Gentoo Authors
+# Copyright 2021-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -19,28 +19,33 @@ LICENSE="
 "
 SLOT="0"
 KEYWORDS="~amd64 ~riscv ~x86"
-IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys lastfm libsamplerate mp3 musepack nls notify +nullout opus oss pulseaudio sc68 shellexec +supereq threads vorbis wavpack mac zip"
+IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys lastfm libretro libsamplerate mp3 musepack nls notify +nullout opus oss pulseaudio sc68 shellexec +supereq threads vorbis wavpack mac zip"
 
 REQUIRED_USE="
-	|| ( alsa oss pulseaudio nullout )
+	|| ( alsa oss pulseaudio pipewire nullout )
 "
 
 DEPEND="
-	x11-libs/gtk+:3
-	net-misc/curl:=
+	>=app-accessibility/at-spi2-core-2.46.0
+	dev-libs/glib:2
 	dev-libs/jansson:=
+	dev-libs/libdispatch
+	net-misc/curl
+	x11-libs/cairo
+	x11-libs/gdk-pixbuf:2
+	x11-libs/gtk+:3
+	x11-libs/libX11
+	x11-libs/pango
 	aac? ( media-libs/faad2 )
 	alsa? ( media-libs/alsa-lib )
 	cdda? (
 		dev-libs/libcdio:=
 		media-libs/libcddb
-		dev-libs/libcdio-paranoia:=
+		media-sound/cdparanoia
 	)
-	cover? (
-		media-libs/imlib2[jpeg,png]
-	)
+	cover? ( media-libs/imlib2[jpeg,png] )
 	dts? ( media-libs/libdca )
-	ffmpeg? ( media-video/ffmpeg )
+	ffmpeg? ( media-video/ffmpeg:= )
 	flac? (
 		media-libs/flac:=
 		media-libs/libogg
@@ -49,11 +54,10 @@ DEPEND="
 	mp3? ( media-sound/mpg123 )
 	musepack? ( media-sound/musepack-tools )
 	nls? ( virtual/libintl )
-	notify? (
-		sys-apps/dbus
-	)
+	notify? ( sys-apps/dbus )
 	opus? ( media-libs/opusfile )
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? ( media-libs/libpulse )
+	pipewire? ( media-video/pipewire:= )
 	vorbis? ( media-libs/libvorbis )
 	mac? ( dev-lang/yasm )
 	wavpack? ( media-sound/wavpack )
@@ -64,11 +68,17 @@ DEPEND="
 RDEPEND="${DEPEND}"
 BDEPEND="
 	dev-util/intltool
-	sys-devel/gettext
 	sys-devel/clang
+	>=sys-devel/gettext-0.21
 	sys-devel/llvm
 	virtual/pkgconfig
 "
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.9.6-drop-Werror.patch
+	"${FILESDIR}"/${PN}-1.9.6-update-gettext.patch
+	"${FILESDIR}"/${PN}-1.9.6-fix-desktop-launcher.patch
+)
 
 src_prepare() {
 	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
@@ -89,9 +99,10 @@ src_prepare() {
 	}
 
 	drop_and_stub() {
-		rm -rf "${1}"
-		mkdir "${1}"
-		cat > "${1}/Makefile.in" <<-EOF
+		einfo drop_and_stub "${1}"
+		rm -r "${1}" || die
+		mkdir "${1}" || die
+		cat > "${1}/Makefile.in" <<-EOF || die
 			all: nothing
 			install: nothing
 			nothing:
@@ -103,7 +114,7 @@ src_prepare() {
 	eautopoint --force
 	eautoreconf
 
-	# Get rid of bundled gettext.
+	# Get rid of bundled gettext. (Avoid build failures with musl)
 	drop_and_stub "${S}/intl"
 
 	# Plugins that are undesired for whatever reason, candidates for unbundling and such.
@@ -179,10 +190,12 @@ src_configure () {
 		"$(use_enable nullout)"
 		"$(use_enable opus)"
 		"$(use_enable pulseaudio pulse)"
+		"$(use_enable pipewire)"
 		"$(use_enable sc68)"
 		"$(use_enable shellexec)"
 		"$(use_enable shellexec shellexecui)"
 		"$(use_enable lastfm lfm)"
+		"$(use_enable libretro)"
 		"$(use_enable libsamplerate src)"
 		"$(use_enable wavpack)"
 		"$(use_enable zip vfs-zip)"
