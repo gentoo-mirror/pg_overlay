@@ -19,7 +19,7 @@ LICENSE="
 "
 SLOT="0"
 KEYWORDS="~amd64 ~riscv ~x86"
-IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys lastfm libretro libsamplerate mp3 musepack nls notify +nullout opus oss pulseaudio sc68 shellexec +supereq threads vorbis wavpack mac zip"
+IUSE="aac alsa cdda converter cover dts ffmpeg flac +hotkeys lastfm libretro libsamplerate mp3 musepack nls notify +nullout opus oss pipewire pulseaudio sc68 shellexec +supereq threads vorbis wavpack mac zip"
 
 REQUIRED_USE="
 	|| ( alsa oss pulseaudio pipewire nullout )
