@@ -113,7 +113,7 @@ src_prepare() {
 	eautoreconf
 
 	# Get rid of bundled gettext. (Avoid build failures with musl)
-	drop_and_stub "${S}/intl"
+	#drop_and_stub "${S}/intl"
 
 	# Plugins that are undesired for whatever reason, candidates for unbundling and such.
 	for i in adplug alac dumb ffap mms gme lfs mono2stereo psf sc60 shn sid soundtouch wma; do
