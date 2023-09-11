@@ -76,7 +76,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.9.6-update-gettext.patch
-	"${FILESDIR}"/${PN}-1.9.6-fix-desktop-launcher.patch
 )
 
 src_prepare() {
