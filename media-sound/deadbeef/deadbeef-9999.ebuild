@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
+#PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
 
 inherit autotools plocale toolchain-funcs xdg git-r3
 
@@ -86,13 +86,13 @@ src_prepare() {
 		rm -v "${S}/translation/help.ru.txt" || die
 	fi
 
-	remove_locale() {
-		sed -e "/${1}/d" \
-			-i "${S}/po/LINGUAS" || die
-	}
-	plocale_for_each_disabled_locale remove_locale
+	#remove_locale() {
+	#	sed -e "/${1}/d" \
+	#		-i "${S}/po/LINGUAS" || die
+	#}
+	#plocale_for_each_disabled_locale remove_locale
 
-		drop_from_linguas() {
+	drop_from_linguas() {
 		sed "/${1}/d" -i "${S}/po/LINGUAS" || die
 	}
 
@@ -109,7 +109,6 @@ src_prepare() {
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
 
-	mkdir intl
 	eautopoint --force
 	eautoreconf
 
