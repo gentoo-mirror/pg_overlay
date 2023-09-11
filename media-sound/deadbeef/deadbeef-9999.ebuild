@@ -98,7 +98,7 @@ src_prepare() {
 
 	drop_and_stub() {
 		einfo drop_and_stub "${1}"
-		rm -r "${1}" || die
+		rm -rf "${1}" || die
 		mkdir "${1}" || die
 		cat > "${1}/Makefile.in" <<-EOF || die
 			all: nothing
