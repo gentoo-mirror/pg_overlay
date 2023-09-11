@@ -79,6 +79,8 @@ PATCHES=(
 )
 
 src_prepare() {
+	default
+
 	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
@@ -90,9 +92,7 @@ src_prepare() {
 	}
 	plocale_for_each_disabled_locale remove_locale
 
-	default
-
-	drop_from_linguas() {
+		drop_from_linguas() {
 		sed "/${1}/d" -i "${S}/po/LINGUAS" || die
 	}
 
@@ -109,11 +109,12 @@ src_prepare() {
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
 
+	mkdir intl
 	eautopoint --force
 	eautoreconf
 
 	# Get rid of bundled gettext. (Avoid build failures with musl)
-	#drop_and_stub "${S}/intl"
+	drop_and_stub "${S}/intl"
 
 	# Plugins that are undesired for whatever reason, candidates for unbundling and such.
 	for i in adplug alac dumb ffap mms gme lfs mono2stereo psf sc60 shn sid soundtouch wma; do
