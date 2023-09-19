@@ -91,7 +91,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	"${FILESDIR}/tdesktop-4.8.4-remove-private-qt.patch"
 )
 
 # Current desktop-file-utils-0.26 does not understand Version=1.5
