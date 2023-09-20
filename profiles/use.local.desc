@@ -356,6 +356,13 @@ sys-devel/clang:default-lld - Use lld as the default linker for clang
 sys-devel/clang:extra - Build extra tools (clangd, clang-tidy and a few more)
 sys-devel/clang:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
 sys-devel/clang:static-analyzer - Install the Clang static analyzer
+sys-devel/llvm:binutils-plugin - Build the binutils plugin
+sys-devel/llvm:debuginfod - Install llvm-debuginfod (requires net-misc/curl and dev-cpp/cpp-httplib)
+sys-devel/llvm:doc - Build and install the HTML documentation and regenerate the man pages
+sys-devel/llvm:exegesis - Enable performance counter support for llvm-exegesis tool that can be used to measure host machine instruction characteristics
+sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
+sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
+sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
 sys-fs/udisks:daemon - Build the system daemon, not just the client tool
 sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
 sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
