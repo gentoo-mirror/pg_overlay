@@ -162,7 +162,7 @@ sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999: The systemd project's logind, extracted to a standalone package
-sys-devel/clang 16.0.6: C language family frontend for LLVM
+sys-devel/clang 16.0.6 17.0.1: C language family frontend for LLVM
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
@@ -170,7 +170,7 @@ sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/libblockdev 3.0.1_pre: A library for manipulating block devices
 sys-libs/ncurses 6.3_p20220122: console display library
-sys-libs/polly 15.0.7 16.0.6: Polyhedral optimizations for LLVM
+sys-libs/polly 15.0.7 16.0.6 17.0.1: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
