@@ -133,7 +133,7 @@ check_distribution_components() {
 						;;
 					# testing libraries
 					#LLVMTestingAnnotations|LLVMTestingSupport)
-						;;
+					#	;;
 					# static libs
 					LLVM*)
 						continue
