@@ -249,8 +249,8 @@ get_distribution_components() {
 			llvm-cxxdump
 			llvm-cxxfilt
 			llvm-cxxmap
-			llvm-debuginfo-analyzer
-			llvm-debuginfod-find
+			#llvm-debuginfo-analyzer
+			#llvm-debuginfod-find
 			llvm-diff
 			llvm-dis
 			llvm-dlltool
