@@ -36,7 +36,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-16.0.0-llvm-link-llvm-dylib.patch"
 	"${FILESDIR}/${PN}-16.0.0-ld_library_path.patch"
 )
 
