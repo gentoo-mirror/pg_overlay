@@ -73,6 +73,7 @@ dev-libs/glib:mime - Pull in shared MIME database that many glib-based applicati
 dev-libs/glib:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-util/systemtap
 dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
+dev-libs/libclc:spirv - Build SPIRV targets
 dev-libs/liborcus:spreadsheet-model - Enable the spreadsheet model implementation
 dev-libs/liborcus:tools - Build various low-level parsers
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
@@ -94,6 +95,7 @@ dev-util/sccache:dist-server - Enables the sccache-dist binary
 dev-util/sccache:gcs - Enable Google Cloud Storage support
 dev-util/sccache:redis - Enable Redis support
 dev-util/sccache:s3 - Enable Amazon S3 support
+dev-util/spirv-llvm-translator:tools - Install the command-line translator llvm-spirv
 gui-libs/wlroots:X - Enable support for X11 applications (XWayland)
 gui-libs/wlroots:tinywl - Install the minimal wayland client, tinywl
 gui-libs/wlroots:vulkan - Enable support for the vulkan backend renderer
