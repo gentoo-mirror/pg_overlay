@@ -9,7 +9,7 @@ DESCRIPTION="Standalone X server running under Wayland"
 HOMEPAGE="https://wayland.freedesktop.org/xserver.html"
 SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
 
-IUSE="rpc unwind ipv6 xcsecurity selinux video_cards_nvidia"
+IUSE="libei rpc unwind ipv6 xcsecurity selinux video_cards_nvidia"
 
 LICENSE="MIT"
 SLOT="0"
@@ -19,20 +19,22 @@ COMMON_DEPEND="
 	dev-libs/libbsd
 	dev-libs/openssl:=
 	>=dev-libs/wayland-1.21.0
-	>=dev-libs/wayland-protocols-1.28
+	>=dev-libs/wayland-protocols-1.30
 	media-fonts/font-util
 	>=media-libs/libepoxy-1.5.4[X,egl(+)]
 	media-libs/libglvnd[X]
-	>=media-libs/mesa-21.1[X(+)]
-	rpc? ( net-libs/libtirpc )
-	unwind? ( sys-libs/libunwind )
+	>=media-libs/mesa-21.1[X(+),egl(+),gbm(+)]
+	>=x11-libs/libdrm-2.4.109
 	>=x11-libs/libXau-1.0.4
 	x11-libs/libxcvt
 	>=x11-libs/libXfont2-2.0.1
-	>=x11-libs/libdrm-2.4.89
 	x11-libs/libxkbfile
 	>=x11-libs/libxshmfence-1.1
 	>=x11-libs/pixman-0.27.2
+	>=x11-misc/xkeyboard-config-2.4.1-r3
+
+	libei? ( dev-libs/libei )
+	unwind? ( sys-libs/libunwind )
 	video_cards_nvidia? ( gui-libs/egl-wayland )
 "
 DEPEND="
@@ -44,6 +46,8 @@ RDEPEND="
 	${COMMON_DEPEND}
 	x11-apps/xkbcomp
 	!<=x11-base/xorg-server-1.20.11
+
+	libei? ( >=sys-apps/xdg-desktop-portal-1.18.0 )
 	selinux? ( sec-policy/selinux-xserver )
 "
 BDEPEND="
@@ -77,6 +81,12 @@ src_configure() {
 		-Ddocs-pdf=false
 		-Dlibdecor=false
 	)
+
+	if use libei; then
+		emesonargs+=( -Dxwayland_ei=portal )
+	else
+		emesonargs+=( -Dxwayland_ei=false )
+	fi
 
 	meson_src_configure
 }
