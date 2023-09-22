@@ -405,15 +405,7 @@ www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead 
 www-client/firefox:wifi - Enable necko-wifi for NetworkManager integration, and access point MAC address scanning for better precision with opt-in geolocation services
 www-client/vivaldi-snapshot:proprietary-codecs - Use system media-video/ffmpeg to support patent-encumbered media codecs
 www-client/vivaldi-snapshot:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
-x11-base/xorg-server:dmx - Build the Distributed Multiheaded X server
-x11-base/xorg-server:elogind - Use elogind to get control over framebuffer when running as regular user
-x11-base/xorg-server:kdrive - Build the kdrive X servers
-x11-base/xorg-server:unwind - Enable libunwind usage for backtraces
-x11-base/xorg-server:xcsecurity - Build Security extension
-x11-base/xorg-server:xephyr - Build the Xephyr server
-x11-base/xorg-server:xnest - Build the Xnest server
-x11-base/xorg-server:xorg - Build the Xorg X server (HIGHLY RECOMMENDED)
-x11-base/xorg-server:xvfb - Build the Xvfb server
+x11-base/xwayland:libei - Enable emulated input using dev-libs/libei
 x11-base/xwayland:unwind - Enable libunwind usage for backtraces
 x11-base/xwayland:xcsecurity - Build Security extension
 x11-libs/cairo:gles2-only - Build the OpenGL ES 2 backend
