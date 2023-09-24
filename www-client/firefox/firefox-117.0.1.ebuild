@@ -641,7 +641,11 @@ src_prepare() {
 
 	einfo "Removing pre-built binaries ..."
 
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.a' -o -name '*.la' \) -print -delete || die
+	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.a' -o -name '*.la' \) -print -delete ||
+
+	# Clear checksums from cargo crates we've manually patched.
+	# moz_clear_vendor_checksums xyz
+	moz_clear_vendor_checksums proc-macro2
 
 	# Respect choice for "jumbo-build"
 	# Changing the value for FILES_PER_UNIFIED_FILE may not work, see #905431
