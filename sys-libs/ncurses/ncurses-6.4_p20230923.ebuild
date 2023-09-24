@@ -81,7 +81,7 @@ if [[ ${PV} == *_p* ]] ; then
 		20230909
 		20230917
 		20230918
-		20230923
+
 		# Latest patch is just _pN = $(ver_cut 4)
 		$(ver_cut 4)
 	)
