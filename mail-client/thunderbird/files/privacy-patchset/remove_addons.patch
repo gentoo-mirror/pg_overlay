@@ -2,13 +2,12 @@ diff --git a/browser/extensions/moz.build b/browser/extensions/moz.build
 index 269dcb2..ed7c31d 100644
 --- a/browser/extensions/moz.build
 +++ b/browser/extensions/moz.build
-@@ -5,13 +5,8 @@
+@@ -5,12 +5,7 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
  DIRS += [
 -    "doh-rollout",
      "formautofill",
--    "screenshots",
 -    "webcompat",
 -    "report-site-issue",
      "pictureinpicture",
@@ -64,16 +63,14 @@ diff --git a/browser/locales/l10n.toml b/browser/locales/l10n.toml
 index b9b18fe..af7c583 100644
 --- a/browser/locales/l10n.toml
 +++ b/browser/locales/l10n.toml
-@@ -132,10 +132,6 @@
+@@ -136,8 +136,4 @@
      l10n = "{l}browser/extensions/formautofill/**"
  
- [[paths]]
+- [[paths]]
 -    reference = "browser/extensions/report-site-issue/locales/en-US/**"
 -    l10n = "{l}browser/extensions/report-site-issue/**"
 -
--[[paths]]
-     reference = "services/sync/locales/en-US/**"
-     l10n = "{l}services/sync/**"
+
 
 --- a/browser/installer/package-manifest.in    2020-11-10 12:49:54.575993696 +0700
 +++ b/browser/installer/package-manifest.in    2020-11-10 12:50:36.920538743 +0700
