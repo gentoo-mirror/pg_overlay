@@ -1167,7 +1167,6 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-system-extension-dirs
 
 	mozconfig_add_options_ac '' --disable-thread-sanitizer
-	mozconfig_add_options_ac '' --disable-trace-logging
 
 	mozconfig_add_options_ac '' --disable-undefined-sanitizer
 	mozconfig_add_options_ac '' --disable-unsigned-overflow-sanitizer
