@@ -166,6 +166,8 @@ src_unpack() {
 		done
 	fi
 
+	rm ${WORKDIR}/${GENTOO_PATCH_NAME}/0005-Fix-include-paths-for-cross-compilation.patch
+
 	default
 }
 
