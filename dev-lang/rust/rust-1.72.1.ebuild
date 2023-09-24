@@ -173,30 +173,6 @@ toml_usex() {
 	usex "${1}" true false
 }
 
-bootstrap_rust_version_check() {
-	# never call from pkg_pretend. eselect-rust may be not installed yet.
-	[[ ${MERGE_TYPE} == binary ]] && return
-	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 1))"
-	local rustc_toonew="$(ver_cut 1).$(($(ver_cut 2) + 1))"
-	local rustc_version=( $(eselect --brief rust show 2>/dev/null) )
-	rustc_version=${rustc_version[0]#rust-bin-}
-	rustc_version=${rustc_version#rust-}
-
-	[[ -z "${rustc_version}" ]] && die "Failed to determine rust version, check 'eselect rust' output"
-
-	if ver_test "${rustc_version}" -lt "${rustc_wanted}" ; then
-		eerror "Rust >=${rustc_wanted} is required"
-		eerror "please run 'eselect rust' and set correct rust version"
-		die "selected rust version is too old"
-	elif ver_test "${rustc_version}" -ge "${rustc_toonew}" ; then
-		eerror "Rust <${rustc_toonew} is required"
-		eerror "please run 'eselect rust' and set correct rust version"
-		die "selected rust version is too new"
-	else
-		einfo "Using rust ${rustc_version} to build"
-	fi
-}
-
 pre_build_checks() {
 	local M=8192
 	# multiply requirements by 1.3 if we are doing x86-multilib
