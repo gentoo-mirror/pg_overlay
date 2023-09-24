@@ -644,7 +644,6 @@ src_prepare() {
 	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.a' -o -name '*.la' \) -print -delete ||
 
 	# Clear checksums from cargo crates we've manually patched.
-	# moz_clear_vendor_checksums xyz
 	moz_clear_vendor_checksums proc-macro2
 
 	# Respect choice for "jumbo-build"
