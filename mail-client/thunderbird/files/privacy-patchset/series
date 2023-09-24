@@ -1,6 +1,5 @@
 firefox-60-disable-telemetry.patch
 firefox-60-disable-data-sharing-infobar.patch
 remove_addons.patch
-disable-pocket.patch
 
 stop-undesired-requests.patch
