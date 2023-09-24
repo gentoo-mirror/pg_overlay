@@ -50,18 +50,13 @@ dev-libs/zziplib 9999: Lightweight library for extracting data from files archiv
 dev-python/numpy 1.26.0: Fast array and numerical python library
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/glib-utils 2.77.0: Build utilities for GLib using projects
-dev-util/gn 0.2049: GN is a meta-build system that generates build files for Ninja
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
 dev-util/mdds 2.1.1: Collection of multi-dimensional data structure and indexing algorithm
 dev-util/qbs 1.21.0: Modern build tool for software projects
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/re2c 3.0_pre: tool for generating C-based recognizers from regular expressions
-dev-util/samurai 1.2-r1: ninja-compatible build tool written in C
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
-dev-util/scons 4.4.0: Extensible Python-based build utility
-dev-util/spirv-llvm-translator 17.0.0: Bi-directional translator between SPIR-V and LLVM IR
 games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
@@ -171,9 +166,8 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
-sys-libs/libblockdev 3.0.1_pre: A library for manipulating block devices
-sys-libs/ncurses 6.3_p20220122: console display library
-sys-libs/polly 15.0.7 16.0.6 17.0.1: Polyhedral optimizations for LLVM
+sys-libs/ncurses 6.4_p20230923: Console display library
+sys-libs/polly 17.0.1: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/jdk 15: Virtual for Java Development Kit (JDK)
