@@ -739,7 +739,7 @@ src_prepare() {
 		fi
 	done
 	#######
-
+	moz_clear_vendor_checksums proc-macro2
 	xdg_environment_reset
 }
 
