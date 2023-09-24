@@ -3,9 +3,9 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-116-patches-04.tar.xz"
+FIREFOX_PATCHSET="firefox-117-patches-04.tar.xz"
 
-LLVM_MAX_SLOT=16
+LLVM_MAX_SLOT=17
 
 PYTHON_COMPAT=( python3_{10..12} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
@@ -72,7 +72,6 @@ IUSE+=" geckodriver +gmp-autoupdate screencast +privacy"
 
 REQUIRED_USE="|| ( X wayland )
 	debug? ( !system-av1 )
-	!jumbo-build? ( clang )
 	pgo? ( lto )
 	wifi? ( dbus )"
 
@@ -83,24 +82,21 @@ FF_ONLY_DEPEND="!www-client/firefox:0
 BDEPEND="${PYTHON_DEPS}
 	|| (
 		(
-			sys-devel/clang:16
-			sys-devel/llvm:16
+			sys-devel/clang:17
+			sys-devel/llvm:17
 			clang? (
-				|| (
-					sys-devel/lld:16
-					sys-devel/mold
-				)
-				virtual/rust:0/llvm-16
-				pgo? ( =sys-libs/compiler-rt-sanitizers-16*[profile] )
+				sys-devel/lld:17
+				virtual/rust:0/llvm-17
+				pgo? ( =sys-libs/compiler-rt-sanitizers-17*[profile] )
 			)
 		)
 		(
-			sys-devel/clang:15
-			sys-devel/llvm:15
+			sys-devel/clang:16
+			sys-devel/llvm:16
 			clang? (
-				sys-devel/lld:15
-				virtual/rust:0/llvm-15
-				pgo? ( =sys-libs/compiler-rt-sanitizers-15*[profile] )
+				sys-devel/lld:16
+				virtual/rust:0/llvm-16
+				pgo? ( =sys-libs/compiler-rt-sanitizers-16*[profile] )
 			)
 		)
 	)
@@ -129,7 +125,7 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.91
+	>=dev-libs/nss-3.92
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
@@ -199,6 +195,10 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 		x11-libs/libxcb:=
 	)"
 RDEPEND="${COMMON_DEPEND}
+	hwaccel? (
+		media-video/libva-utils
+		sys-apps/pciutils
+	)
 	jack? ( virtual/jack )
 	openh264? ( media-libs/openh264:*[plugin] )"
 DEPEND="${COMMON_DEPEND}
@@ -222,7 +222,7 @@ llvm_check_deps() {
 		return 1
 	fi
 
-	if use clang && tc-ld-is-lld ; then
+	if use clang && ! tc-ld-is-mold ; then
 		if ! has_version -b "sys-devel/lld:${LLVM_SLOT}" ; then
 			einfo "sys-devel/lld:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 			return 1
@@ -379,6 +379,40 @@ mozconfig_use_with() {
 
 	local flag=$(use_with "${@}")
 	mozconfig_add_options_ac "$(use ${1} && echo +${1} || echo -${1})" "${flag}"
+}
+
+# This is a straight copypaste from toolchain-funcs.eclass's 'tc-ld-is-lld', and is temporarily
+# placed here until toolchain-funcs.eclass gets an official support for mold linker.
+# Please see:
+# https://github.com/gentoo/gentoo/pull/28366 ||
+# https://github.com/gentoo/gentoo/pull/28355
+tc-ld-is-mold() {
+	local out
+
+	# Ensure ld output is in English.
+	local -x LC_ALL=C
+
+	# First check the linker directly.
+	out=$($(tc-getLD "$@") --version 2>&1)
+	if [[ ${out} == *"mold"* ]] ; then
+		return 0
+	fi
+
+	# Then see if they're selecting mold via compiler flags.
+	# Note: We're assuming they're using LDFLAGS to hold the
+	# options and not CFLAGS/CXXFLAGS.
+	local base="${T}/test-tc-linker"
+	cat <<-EOF > "${base}.c"
+	int main() { return 0; }
+	EOF
+	out=$($(tc-getCC "$@") ${CFLAGS} ${CPPFLAGS} ${LDFLAGS} -Wl,--version "${base}.c" -o "${base}" 2>&1)
+	rm -f "${base}"*
+	if [[ ${out} == *"mold"* ]] ; then
+		return 0
+	fi
+
+	# No mold here!
+	return 1
 }
 
 virtwl() {
@@ -754,7 +788,11 @@ src_configure() {
 	export HOST_CC="$(tc-getBUILD_CC)"
 	export HOST_CXX="$(tc-getBUILD_CXX)"
 	export AS="$(tc-getCC) -c"
-	tc-export CC CXX LD AR AS NM OBJDUMP RANLIB PKG_CONFIG
+
+	# Configuration tests expect llvm-readelf output, bug 913130
+	READELF="llvm-readelf"
+
+	tc-export CC CXX LD AR AS NM OBJDUMP RANLIB READELF PKG_CONFIG
 
 	# Pass the correct toolchain paths through cbindgen
 	if tc-is-cross-compiler ; then
@@ -793,6 +831,8 @@ src_configure() {
 		--disable-strip \
 		--disable-tests \
 		--disable-updater \
+		--disable-wasm-function-references \
+		--disable-wasm-gc \
 		--disable-wmf \
 		--enable-negotiateauth \
 		--enable-new-pass-manager \
@@ -923,8 +963,12 @@ src_configure() {
 
 	if use lto ; then
 		if use clang ; then
-			# Upstream only supports lld when using clang
-			mozconfig_add_options_ac "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
+			# Upstream only supports lld or mold when using clang.
+			if tc-ld-is-mold ; then
+				mozconfig_add_options_ac "using ld=mold due to system selection" --enable-linker=mold
+			else
+				mozconfig_add_options_ac "forcing ld=lld due to USE=clang and USE=lto" --enable-linker=lld
+			fi
 
 			mozconfig_add_options_ac '+lto' --enable-lto=cross
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=cross
@@ -950,10 +994,19 @@ src_configure() {
 	else
 		# Avoid auto-magic on linker
 		if use clang ; then
-			# This is upstream's default
-			mozconfig_add_options_ac "forcing ld=lld due to USE=clang" --enable-linker=lld
+			# lld is upstream's default
+			if tc-ld-is-mold ; then
+				mozconfig_add_options_ac "using ld=mold due to system selection" --enable-linker=mold
+			else
+				mozconfig_add_options_ac "forcing ld=lld due to USE=clang" --enable-linker=lld
+			fi
+
 		else
-			mozconfig_add_options_ac "linker is set to bfd" --enable-linker=bfd
+			if tc-ld-is-mold ; then
+				mozconfig_add_options_ac "using ld=mold due to system selection" --enable-linker=mold
+			else
+				mozconfig_add_options_ac "linker is set to bfd due to USE=-clang" --enable-linker=bfd
+			fi
 		fi
 	fi
 
@@ -1237,6 +1290,16 @@ src_configure() {
 src_compile() {
 	local virtx_cmd=
 
+	if tc-ld-is-mold && use lto; then
+		# increase ulimit with mold+lto, bugs #892641, #907485
+		if ! ulimit -n 16384 1>/dev/null 2>&1 ; then
+			ewarn "Unable to modify ulimits - building with mold+lto might fail due to low ulimit -n resources."
+			ewarn "Please see bugs #892641 & #907485."
+		else
+			ulimit -n 16384
+		fi
+	fi
+
 	if use pgo; then
 		# Reset and cleanup environment variables used by GNOME/XDG
 		gnome2_environment_reset
@@ -1316,9 +1379,17 @@ src_install() {
 			EOF
 		fi
 
-		# Install vaapitest binary
-		exeinto "${MOZILLA_FIVE_HOME}"
-		doexe "${BUILD_DIR}"/dist/bin/vaapitest
+		# Install the vaapitest binary on supported arches (+arm when keyworded)
+		if use amd64 || use arm64 || use x86 ; then
+			exeinto "${MOZILLA_FIVE_HOME}"
+			doexe "${BUILD_DIR}"/dist/bin/vaapitest
+		fi
+
+		# Install the v4l2test on supported arches (+ arm, + riscv64 when keyworded)
+		if use arm64 ; then
+			exeinto "${MOZILLA_FIVE_HOME}"
+			doexe "${BUILD_DIR}"/dist/bin/v4l2test
+		fi
 	fi
 
 	if ! use gmp-autoupdate ; then
@@ -1542,6 +1613,9 @@ pkg_postinst() {
 	optfeature_header "Optional programs for extra features:"
 	optfeature "desktop notifications" x11-libs/libnotify
 	optfeature "fallback mouse cursor theme e.g. on WMs" gnome-base/gsettings-desktop-schemas
+	if use hwaccel && has_version "x11-drivers/nvidia-drivers"; then
+		optfeature "hardware acceleration with NVIDIA cards" media-libs/nvidia-vaapi-driver
+	fi
 
 	if ! has_version "sys-libs/glibc"; then
 		elog

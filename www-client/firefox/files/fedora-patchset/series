@@ -1,6 +1,19 @@
+firefox-gcc-build.patch
 mozilla-1669639.patch
+0001-GLIBCXX-fix-for-GCC-12.patch
+firefox-i686-build.patch
+firefox-gcc-13-build.patch
 
-firefox-tests-xpcshell-freeze.patch
-
-rhbz-1354671.patch
 disable-openh264-download.patch
+firefox-enable-vaapi.patch
+
+mozilla-1196777.patch
+mozilla-1667096.patch
+D167159.diff
+rhbz-2235654.patch
+
+pgo.patch
+mozilla-1516803.patch
+firefox-gcc-always-inline.patch
+
+firefox-112.0-commasplit.patch
