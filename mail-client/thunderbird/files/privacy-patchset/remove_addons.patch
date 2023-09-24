@@ -1,19 +1,16 @@
 diff --git a/browser/extensions/moz.build b/browser/extensions/moz.build
 index 269dcb2..ed7c31d 100644
 --- a/browser/extensions/moz.build
-+++ b/browser/extensions/moz.build
-@@ -5,12 +5,7 @@
- # file, You can obtain one at http://mozilla.org/MPL/2.0/.
+@@ -6,9 +6,5 @@
 
  DIRS += [
--    "doh-rollout",
      "formautofill",
+-    "screenshots",
 -    "webcompat",
 -    "report-site-issue",
      "pictureinpicture",
 -    "search-detection",
  ]
-
 diff --git a/browser/locales/Makefile.in b/browser/locales/Makefile.in
 index 496379c..dd6f359 100644
 --- a/browser/locales/Makefile.in
