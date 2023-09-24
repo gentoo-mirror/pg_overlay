@@ -1,4 +1,4 @@
-# Copyright 2017-2022 Gentoo Authors
+# Copyright 2017-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,30 +10,40 @@ inherit cargo optfeature
 DESCRIPTION="ccache/distcc like tool with support for rust and cloud storage"
 HOMEPAGE="https://github.com/mozilla/sccache/"
 
-if [ ${PV} == "9999" ] ; then
+if [[ ${PV} == "9999" ]] ; then
 	inherit git-r3
 	EGIT_REPO_URI="https://github.com/mozilla/sccache.git"
 else
-	SRC_URI="https://github.com/mozilla/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
-	$(cargo_crate_uris ${CRATES})"
+	SRC_URI="
+		https://github.com/mozilla/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
+		${CARGO_CRATE_URIS}
+	"
 	KEYWORDS="~amd64 ~ppc64"
 fi
 
-LICENSE="Apache-2.0 Apache-2.0-with-LLVM-exceptions BSD BSD-2 Boost-1.0 ISC MIT Unlicense ZLIB"
+LICENSE="Apache-2.0"
+# Dependent crate licenses
+LICENSE+="
+	Apache-2.0 BSD-2 BSD CC0-1.0 ISC MIT MPL-2.0 Unicode-DFS-2016 ZLIB
+"
 SLOT="0"
 IUSE="azure dist-client dist-server gcs memcached redis s3 simple-s3"
+# See https://github.com/mozilla/sccache/issues/1820, hopefully temporary.
+RESTRICT="test"
 REQUIRED_USE="s3? ( simple-s3 )"
 
-BDEPEND="virtual/pkgconfig"
-
-DEPEND="
-	sys-libs/zlib:=
-	app-arch/zstd
-	dist-server? ( dev-libs/openssl:0= )
-	gcs? ( dev-libs/openssl:0= )
+BDEPEND="
+	virtual/pkgconfig
+	>=virtual/rust-1.65
 "
-
-RDEPEND="${DEPEND}
+DEPEND="
+	app-arch/zstd
+	sys-libs/zlib:=
+	dist-server? ( dev-libs/openssl:= )
+	gcs? ( dev-libs/openssl:= )
+"
+RDEPEND="
+	${DEPEND}
 	dist-server? ( sys-apps/bubblewrap )
 "
 
@@ -63,6 +73,14 @@ src_configure() {
 	cargo_src_configure --no-default-features
 }
 
+src_test() {
+	if [[ "${PV}" == *9999* ]]; then
+		ewarn "tests are always broken for ${PV} (require network), skipping"
+	else
+		cargo_src_test
+	fi
+}
+
 src_install() {
 	cargo_src_install
 
@@ -77,14 +95,6 @@ src_install() {
 
 		newinitd "${FILESDIR}"/scheduler.initd sccache-scheduler
 		newconfd "${FILESDIR}"/scheduler.confd sccache-scheduler
-	fi
-}
-
-src_test() {
-	if [[ "${PV}" == *9999* ]]; then
-		ewarn "tests are always broken for ${PV} (require network), skipping"
-	else
-		cargo_src_test
 	fi
 }
 
