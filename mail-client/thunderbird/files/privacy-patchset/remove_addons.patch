@@ -14,7 +14,6 @@ index 269dcb2..ed7c31d 100644
 -    "search-detection",
  ]
 
- if CONFIG["NIGHTLY_BUILD"]:
 diff --git a/browser/locales/Makefile.in b/browser/locales/Makefile.in
 index 496379c..dd6f359 100644
 --- a/browser/locales/Makefile.in
