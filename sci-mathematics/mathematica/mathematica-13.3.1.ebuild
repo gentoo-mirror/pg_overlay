@@ -52,6 +52,8 @@ src_unpack() {
 }
 
 src_install() {
+	addpredict /usr/share/thisisatest
+
 	local ARCH='-x86-64'
 
 	pushd "${S}/unpack_app" > /dev/null || die
@@ -82,7 +84,7 @@ src_install() {
 
 	if ! use cuda; then
 		einfo 'Removing cuda support'
-		rm -r "${S}/${M_TARGET}/SystemFiles/Components/CUDACompileTools/LibraryResources/Linux-x86-64/CUDAExtensions.so" || die
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Components/CUDACompileTools/LibraryResources/Linux-x86-64/CUDAExtensions.so" || die
 	fi
 
 	# Linux-x86-64/AllVersions is the supported version, other versions remove
