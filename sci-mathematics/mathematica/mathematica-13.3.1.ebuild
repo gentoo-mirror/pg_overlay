@@ -85,6 +85,10 @@ src_install() {
 	if ! use cuda; then
 		einfo 'Removing cuda support'
 		rm -fr "${S}/${M_TARGET}/SystemFiles/Components/CUDACompileTools/LibraryResources/Linux-x86-64/CUDAExtensions.so" || die
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/GPUTools/LibraryResources/Linux-x86-64/libCUDALink_11.so"
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/GPUTools/LibraryResources/Linux-x86-64/libCUDALink_12.so"
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Components/CUDACompileTools"
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/CUDALink"
 	fi
 
 	# Linux-x86-64/AllVersions is the supported version, other versions remove
