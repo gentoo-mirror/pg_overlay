@@ -30,6 +30,7 @@ dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.11.5: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.71.1 1.72.0 1.72.1 1.73.0_beta: Systems programming language from Mozilla
+dev-lang/rust-bin 1.72.1: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.77.0: The GLib library of C routines
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
