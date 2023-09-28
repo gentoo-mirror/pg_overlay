@@ -108,7 +108,6 @@ media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
 media-libs/libsdl2 2.28.3: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20221229: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
-media-libs/libvpx 1.13.0: WebM VP8 and VP9 Codec SDK
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/tg_owt 0_pre20230501: WebRTC build for Telegram
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
@@ -175,7 +174,7 @@ virtual/jdk 15: Virtual for Java Development Kit (JDK)
 virtual/jre 15: Virtual for Java Runtime Environment (JRE)
 virtual/rust 1.72.0 1.72.1 1.73.0_beta: Virtual for Rust language compiler
 www-apps/nextcloud 27.0.1: Personal cloud that runs on your own server
-www-client/firefox 118.0: Firefox Web Browser
+www-client/firefox 118.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.3.3134.3: A browser for our friends
 x11-base/xwayland 23.2.1: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
