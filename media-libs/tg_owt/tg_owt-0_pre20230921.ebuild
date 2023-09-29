@@ -67,7 +67,7 @@ DEPEND="${RDEPEND}
 BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}/tg_owt-0_pre20230105-gcc-13-cstdint.patch"
+	#"${FILESDIR}/tg_owt-0_pre20230105-gcc-13-cstdint.patch"
 )
 
 src_unpack() {
