@@ -106,10 +106,10 @@ media-libs/libmpdclient 9999: A C library which implements the Music Player Daem
 media-libs/libplacebo 6.291.0_rc2: Reusable library for GPU-accelerated image processing primitives
 media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
 media-libs/libsdl2 2.28.3: Simple Direct Media Layer
-media-libs/libtgvoip 2.4.4_p20221229: VoIP library for Telegram clients
+media-libs/libtgvoip 2.4.4_p20230929: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
-media-libs/tg_owt 0_pre20230501: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20230921: WebRTC build for Telegram
 media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
