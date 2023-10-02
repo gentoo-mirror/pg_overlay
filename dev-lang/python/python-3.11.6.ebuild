@@ -253,15 +253,14 @@ src_configure() {
 			# bug #900429
 			-x test_tools
 			# failed on my systems
-			-x test_doctest
-			-x test___all__
 			-x test_bdb
-			-x test_support
+			-x test_doctest
 			-x test_distutils
 			-x test_import
 			-x test_importlib
 			-x test_runpy
 			-x test_pickle
+			-x test_support
 		)
 
 		if has_version "app-arch/rpm" ; then
