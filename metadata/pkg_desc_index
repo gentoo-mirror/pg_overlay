@@ -102,6 +102,7 @@ kde-plasma/kde-cli-tools 5.27.8: Tools based on KDE Frameworks 5 to better inter
 mail-client/thunderbird 115.3.1: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
+media-libs/libavif 1.0.1: Library for encoding and decoding .avif files
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 6.291.0_rc2: Reusable library for GPU-accelerated image processing primitives
 media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
