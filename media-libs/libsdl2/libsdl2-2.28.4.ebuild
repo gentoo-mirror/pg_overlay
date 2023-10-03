@@ -9,6 +9,7 @@ MY_P="SDL2-${PV}"
 DESCRIPTION="Simple Direct Media Layer"
 HOMEPAGE="https://www.libsdl.org/"
 SRC_URI="https://www.libsdl.org/release/${MY_P}.tar.gz"
+S="${WORKDIR}/${MY_P}"
 
 LICENSE="ZLIB"
 SLOT="0"
@@ -30,7 +31,7 @@ REQUIRED_USE="
 	vulkan? ( video )
 	xscreensaver? ( X )"
 
-CDEPEND="
+COMMON_DEPEND="
 	virtual/libiconv[${MULTILIB_USEDEP}]
 	alsa? ( >=media-libs/alsa-lib-1.0.27.2[${MULTILIB_USEDEP}] )
 	dbus? ( >=sys-apps/dbus-1.6.18-r1[${MULTILIB_USEDEP}] )
@@ -69,10 +70,14 @@ CDEPEND="
 		>=x11-libs/libXi-1.7.2[${MULTILIB_USEDEP}]
 		>=x11-libs/libXrandr-1.4.2[${MULTILIB_USEDEP}]
 		xscreensaver? ( >=x11-libs/libXScrnSaver-1.2.2-r1[${MULTILIB_USEDEP}] )
-	)"
-RDEPEND="${CDEPEND}
-	vulkan? ( media-libs/vulkan-loader )"
-DEPEND="${CDEPEND}
+	)
+"
+RDEPEND="
+	${COMMON_DEPEND}
+	vulkan? ( media-libs/vulkan-loader )
+"
+DEPEND="
+	${COMMON_DEPEND}
 	ibus? ( dev-libs/glib:2[${MULTILIB_USEDEP}] )
 	vulkan? ( dev-util/vulkan-headers )
 	X? ( x11-base/xorg-proto )
@@ -96,8 +101,6 @@ MULTILIB_WRAPPED_HEADERS=(
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.0.16-static-libs.patch
 )
-
-S="${WORKDIR}/${MY_P}"
 
 src_prepare() {
 	default
@@ -198,8 +201,7 @@ multilib_src_configure() {
 		$(use_with X x)
 	)
 
-	ECONF_SOURCE="${S}" \
-	econf "${myeconfargs[@]}"
+	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
 }
 
 multilib_src_compile() {
