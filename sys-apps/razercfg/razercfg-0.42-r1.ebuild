@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -35,6 +35,9 @@ PATCHES=( "${FILESDIR}/${PN}-0.41-unit-variables.patch" )
 
 src_prepare() {
 	cmake_src_prepare
+
+	# Don't clobber toolchain defaults
+	sed -i -e '/-D_FORTIFY_SOURCE=2/d' scripts/cmake.global || die
 
 	sed -i librazer/CMakeLists.txt \
 		-e '/ldconfig/{N;d}' \
