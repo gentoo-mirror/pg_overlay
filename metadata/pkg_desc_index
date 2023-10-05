@@ -157,7 +157,7 @@ sci-calculators/qalculate-qt 4.7.0: Multi-purpose cross-platform desktop calcula
 sci-libs/libqalculate 4.7.0: A modern multi-purpose calculator library
 sci-mathematics/mathematica 13.3.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/razercfg 0.42: Utility for advanced configuration of Razer mice
+sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999: The systemd project's logind, extracted to a standalone package
 sys-devel/clang 17.0.2: C language family frontend for LLVM
