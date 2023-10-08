@@ -105,7 +105,7 @@ media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for l
 media-libs/libavif 1.0.1: Library for encoding and decoding .avif files
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libplacebo 6.291.0_rc2: Reusable library for GPU-accelerated image processing primitives
-media-libs/libpulse 16.1-r2: Libraries for PulseAudio clients
+media-libs/libpulse 16.1-r3: Libraries for PulseAudio clients
 media-libs/libsdl2 2.28.4: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20230929: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
