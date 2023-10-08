@@ -1,11 +1,11 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI="7"
 
 MY_PV="${PV/_pre*}"
 MY_P="pulseaudio-${MY_PV}"
-inherit bash-completion-r1 gnome2-utils meson-multilib optfeature systemd udev
+inherit bash-completion-r1 flag-o-matic gnome2-utils meson-multilib optfeature systemd toolchain-funcs udev
 
 DESCRIPTION="Libraries for PulseAudio clients"
 HOMEPAGE="https://www.freedesktop.org/wiki/Software/PulseAudio/"
@@ -32,7 +32,6 @@ RESTRICT="!test? ( test )"
 RDEPEND="
 	dev-libs/libatomic_ops
 	>=media-libs/libsndfile-1.0.20[${MULTILIB_USEDEP}]
-	virtual/libc
 	asyncns? ( >=net-libs/libasyncns-0.1[${MULTILIB_USEDEP}] )
 	dbus? ( >=sys-apps/dbus-1.4.12[${MULTILIB_USEDEP}] )
 	elibc_mingw? ( dev-libs/libpcre:3 )
@@ -70,6 +69,11 @@ DOCS=( NEWS README )
 # patches merged upstream, to be removed with 16.2 or later bump
 PATCHES=(
 	"${FILESDIR}"/pulseaudio-16.1-memfd-cleanup.patch
+	"${FILESDIR}"/pulseaudio-16.1-proplist-util-without-gdkx.patch
+	"${FILESDIR}"/pulseaudio-16.1-smoother-start-paused.patch
+	"${FILESDIR}"/pulseaudio-16.1-smoother-time-calculation.patch
+	"${FILESDIR}"/pulseaudio-16.1-fix-memblock-alignment.patch
+	"${FILESDIR}"/pulseaudio-16.1-add-more-standard-samplerates.patch
 )
 
 src_prepare() {
@@ -82,6 +86,13 @@ src_prepare() {
 }
 
 multilib_src_configure() {
+	# ideally we want !tc-ld-is-bfd for best future-proofing, but it needs
+	# https://github.com/gentoo/gentoo/pull/28355
+	# mold needs this too but right now tc-ld-is-mold is also not available
+	if tc-ld-is-lld; then
+		append-ldflags -Wl,--undefined-version
+	fi
+
 	local emesonargs=(
 		--localstatedir="${EPREFIX}"/var
 
