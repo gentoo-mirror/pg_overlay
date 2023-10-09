@@ -737,6 +737,8 @@ src_prepare() {
 			einfo -------------------------
 		fi
 	done
+
+	sed -i /features/d ""${S}/browser/installer/package-manifest.in"
 	#######
 	moz_clear_vendor_checksums proc-macro2
 	xdg_environment_reset
@@ -1552,8 +1554,6 @@ pkg_postinst() {
 	fi
 
 	readme.gentoo_print_elog
-
-	elog
 
 	optfeature_header "Optional programs for extra features:"
 	optfeature "desktop notifications" x11-libs/libnotify
