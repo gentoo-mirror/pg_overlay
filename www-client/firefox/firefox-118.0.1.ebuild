@@ -738,7 +738,7 @@ src_prepare() {
 		fi
 	done
 
-	sed -i /features/d ""${S}/browser/installer/package-manifest.in"
+	sed -i /features/d "${S}/browser/installer/package-manifest.in"
 	#######
 	moz_clear_vendor_checksums proc-macro2
 	xdg_environment_reset
