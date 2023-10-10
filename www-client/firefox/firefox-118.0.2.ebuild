@@ -738,6 +738,7 @@ src_prepare() {
 		fi
 	done
 
+	eapply "${FILESDIR}/0001-Bug-1849874-Update-from-packed_simd_2-to-packed_simd.patch"
 	sed -i /features/d "${S}/browser/installer/package-manifest.in"
 	#######
 	moz_clear_vendor_checksums proc-macro2
