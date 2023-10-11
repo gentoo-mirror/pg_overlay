@@ -103,12 +103,15 @@ BDEPEND="${PYTHON_DEPS}
 
 DEPEND="
 	>=app-arch/xz-utils-5.2
+	net-libs/libssh2:=
+	net-libs/http-parser:=
 	net-misc/curl:=[http2,ssl]
 	sys-libs/zlib:=
 	dev-libs/openssl:0=
 	system-llvm? (
 		${LLVM_DEPEND}
 		llvm-libunwind? ( sys-libs/llvm-libunwind:= )
+		>=sys-devel/clang-runtime-14.0[libcxx]
 	)
 	!system-llvm? (
 		!llvm-libunwind? (
@@ -254,7 +257,12 @@ pkg_setup() {
 	pre_build_checks
 	python-any-r1_pkg_setup
 
-	export LIBGIT2_NO_PKG_CONFIG=1 #749381
+	# required to link agains system libs, otherwise
+	# crates use bundled sources and compile own static version
+	export LIBGIT2_SYS_USE_PKG_CONFIG=1
+	export LIBGIT2_NO_PKG_CONFIG=0 #749381
+	export LIBSSH2_SYS_USE_PKG_CONFIG=1
+	export PKG_CONFIG_ALLOW_CROSS=1
 
 	use system-bootstrap && bootstrap_rust_version_check
 
@@ -267,25 +275,6 @@ pkg_setup() {
 	fi
 }
 
-esetup_unwind_hack() {
-	# https://bugs.gentoo.org/870280
-	# this is a hack needed to bootstrap with libgcc_s linked tarball on llvm-libunwind system.
-	# it should trigger for internal bootstrap or system-bootstrap with rust-bin.
-	# the whole idea is for stage0 to bootstrap with fake libgcc_s.
-	# final stage will receive -L${T}/lib but not -lgcc_s args, producing clean compiler.
-	local fakelib="${T}/fakelib"
-	mkdir -p "${fakelib}" || die
-	# we need both symlinks, one for cargo runtime, other for linker.
-	ln -s "${ESYSROOT}/usr/lib/libunwind.so" "${fakelib}/libgcc_s.so.1" || die
-	ln -s "${ESYSROOT}/usr/lib/libunwind.so" "${fakelib}/libgcc_s.so" || die
-	export LD_LIBRARY_PATH="${fakelib}"
-	export RUSTFLAGS+=" -L${fakelib}"
-	# this is a literally magic variable that gets through cargo cache, without it some
-	# crates ignore RUSTFLAGS.
-	# this variable can not contain leading space.
-	export MAGIC_EXTRA_RUSTFLAGS+="${MAGIC_EXTRA_RUSTFLAGS:+ }-L${fakelib}"
-}
-
 src_prepare() {
 	# Clear vendor checksums for crates that we patched to bump libc.
 	for i in addr2line-0.20.0 bstr cranelift-jit crossbeam-channel elasticlunr-rs handlebars icu_locid libffi \
@@ -294,7 +283,6 @@ src_prepare() {
 	done
 
 	if ! use system-bootstrap; then
-		has_version sys-devel/gcc || esetup_unwind_hack
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
 		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
 
@@ -324,8 +312,6 @@ src_prepare() {
 }
 
 src_configure() {
-	filter-lto # https://bugs.gentoo.org/862109 https://bugs.gentoo.org/866231
-
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -370,28 +356,18 @@ src_configure() {
 		[llvm]
 		download-ci-llvm = false
 		optimize = $(toml_usex !debug)
+		thin-lto =  $(toml_usex system-llvm)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
 		targets = "${LLVM_TARGETS// /;}"
 		experimental-targets = ""
-		link-shared = $(toml_usex system-llvm)
-		$(if is_libcxx_linked; then
-			# https://bugs.gentoo.org/732632
-			echo "use-libcxx = true"
-			echo "static-libstdcpp = false"
-		fi)
-		$(case "${rust_target}" in
-			i586-*-linux-*)
-				# https://github.com/rust-lang/rust/issues/93059
-				echo 'cflags = "-fcf-protection=none"'
-				echo 'cxxflags = "-fcf-protection=none"'
-				echo 'ldflags = "-fcf-protection=none"'
-				;;
-			*)
-				;;
-		esac)
-		enable-warnings = false
+		link-jobs = $(makeopts_jobs)
+		link-shared =  $(toml_usex system-llvm)
+		static-libstdcpp = $(usex system-llvm false true)
+		use-libcxx =  $(toml_usex system-llvm)
+		use-linker = "lld"
+
 		[llvm.build-config]
 		CMAKE_VERBOSE_MAKEFILE = "ON"
 		CMAKE_C_FLAGS_${cm_btype} = "${CFLAGS}"
@@ -410,8 +386,10 @@ src_configure() {
 		rustc = "${rust_stage0_root}/bin/rustc"
 		rustfmt = "${rust_stage0_root}/bin/rustfmt"
 		docs = $(toml_usex doc)
-		compiler-docs = false
+		compiler-docs = $(toml_usex doc)
+		#
 		submodules = false
+		#
 		python = "${EPYTHON}"
 		locked-deps = false
 		vendor = true
@@ -421,6 +399,8 @@ src_configure() {
 		sanitizers = false
 		profiler = $(toml_usex profiler)
 		cargo-native-static = false
+		local-rebuild = false
+
 		[install]
 		prefix = "${EPREFIX}/usr/lib/${PN}/${PV}"
 		sysconfdir = "etc"
@@ -428,6 +408,7 @@ src_configure() {
 		bindir = "bin"
 		libdir = "lib"
 		mandir = "share/man"
+
 		[rust]
 		# https://github.com/rust-lang/rust/issues/54872
 		codegen-units-std = 1
@@ -440,26 +421,28 @@ src_configure() {
 		debuginfo-level-std = $(usex debug 2 0)
 		debuginfo-level-tools = $(usex debug 2 0)
 		debuginfo-level-tests = 0
-		backtrace = true
+		backtrace = $(toml_usex debug)
 		incremental = false
 		default-linker = "$(tc-getCC)"
 		parallel-compiler = $(toml_usex parallel-compiler)
 		channel = "$(usex nightly nightly stable)"
 		description = "gentoo"
 		rpath = false
-		verbose-tests = true
+		verbose-tests = false
 		optimize-tests = $(toml_usex !debug)
-		codegen-tests = true
-		dist-src = false
-		remap-debuginfo = true
+		codegen-tests = $(toml_usex debug)
+		dist-src = $(toml_usex debug)
+		remap-debuginfo = $(toml_usex debug)
 		lld = $(usex system-llvm false $(toml_usex wasm))
+		use-lld = true
 		# only deny warnings if doc+wasm are NOT requested, documenting stage0 wasm std fails without it
 		# https://github.com/rust-lang/rust/issues/74976
 		# https://github.com/rust-lang/rust/issues/76526
 		deny-warnings = $(usex wasm $(usex doc false true) true)
 		backtrace-on-ice = true
 		jemalloc = false
-		lto = "$(usex lto fat off)"
+		llvm-libunwind = "$(usex system-llvm system)"
+
 		[dist]
 		src-tarball = false
 		compression-formats = ["xz"]
@@ -479,7 +462,7 @@ src_configure() {
 			cxx = "$(tc-getCXX)"
 			linker = "$(tc-getCC)"
 			ranlib = "$(tc-getRANLIB)"
-			llvm-libunwind = "$(usex llvm-libunwind $(usex system-llvm system in-tree) no)"
+			#llvm-libunwind = "$(usex llvm-libunwind $(usex system-llvm system in-tree) no)"
 		_EOF_
 		if use system-llvm; then
 			cat <<- _EOF_ >> "${S}"/config.toml
