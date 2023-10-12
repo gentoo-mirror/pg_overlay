@@ -312,6 +312,8 @@ src_prepare() {
 }
 
 src_configure() {
+	filter-lto # https://bugs.gentoo.org/862109 https://bugs.gentoo.org/866231
+
 	local rust_target="" rust_targets="" arch_cflags
 
 	# Collect rust target names to compile standard libs for all ABIs.
@@ -356,7 +358,7 @@ src_configure() {
 		[llvm]
 		download-ci-llvm = false
 		optimize = $(toml_usex !debug)
-		thin-lto =  $(toml_usex system-llvm)
+		# thin-lto =  $(toml_usex system-llvm)
 		release-debuginfo = $(toml_usex debug)
 		assertions = $(toml_usex debug)
 		ninja = true
@@ -441,6 +443,7 @@ src_configure() {
 		deny-warnings = $(usex wasm $(usex doc false true) true)
 		backtrace-on-ice = true
 		jemalloc = false
+		lto = "$(usex lto fat off)"
 		llvm-libunwind = "$(usex system-llvm system)"
 
 		[dist]
