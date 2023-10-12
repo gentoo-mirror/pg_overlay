@@ -16,9 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 RDEPEND="
-	>=media-video/ffmpeg-5:=
-	x11-libs/wxGTK:${WX_GTK_VER}[X]
-"
+	media-video/ffmpeg:0=
+	x11-libs/wxGTK:${WX_GTK_VER}="
 DEPEND="${RDEPEND}"
 BDEPEND="
 	sys-devel/gettext
