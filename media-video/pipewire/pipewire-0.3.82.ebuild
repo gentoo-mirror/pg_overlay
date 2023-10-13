@@ -39,7 +39,7 @@ LICENSE="MIT LGPL-2.1+ GPL-2"
 # ABI was broken in 0.3.42 for https://gitlab.freedesktop.org/pipewire/wireplumber/-/issues/49
 SLOT="0/0.4"
 IUSE="bluetooth dbus doc echo-cancel extra ffmpeg flatpak gstreamer gsettings ieee1394 jack-client jack-sdk liblc3 lv2"
-IUSE+=" modemmanager pipewire-alsa readline roc sound-server ssl system-service systemd test v4l X zeroconf vulkan"
+IUSE+=" modemmanager pipewire-alsa readline roc selinux sound-server ssl system-service systemd test v4l X zeroconf"
 
 # Once replacing system JACK libraries is possible, it's likely that
 # jack-client IUSE will need blocking to avoid users accidentally
@@ -119,6 +119,7 @@ RDEPEND="
 	sound-server? ( !media-sound/pulseaudio-daemon )
 	roc? ( media-libs/roc-toolkit )
 	readline? ( sys-libs/readline:= )
+	selinux? ( sys-libs/libselinux )
 	ssl? ( dev-libs/openssl:= )
 	systemd? ( sys-apps/systemd )
 	system-service? ( acct-user/pipewire )
@@ -188,6 +189,7 @@ multilib_src_configure() {
 
 		$(meson_native_use_feature systemd systemd-user-service)
 		$(meson_feature pipewire-alsa) # Allows integrating ALSA apps into PW graph
+		$(meson_feature selinux)
 		-Dspa-plugins=enabled
 		-Dalsa=enabled # Allows using kernel ALSA for sound I/O (NOTE: media-session is gone so IUSE=alsa/spa_alsa/alsa-backend might be possible)
 		-Dcompress-offload=disabled # TODO: tinycompress unpackaged
