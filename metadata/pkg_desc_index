@@ -94,8 +94,8 @@ kde-apps/print-manager 23.07.90: Manage print jobs and printers in Plasma
 kde-apps/spectacle 23.07.90: Screenshot capture utility
 kde-apps/sweeper 23.07.90: Privacy settings widget to clean unwanted traces on the system
 kde-apps/yakuake 23.07.90: Quake-style terminal emulator based on konsole
-kde-frameworks/kdelibs4support 5.110.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/plasma 5.110.0: Plasma library and runtime components based upon KF5 and Qt5
+kde-frameworks/kdelibs4support 5.111.0: Framework easing the development transition from KDELibs 4 to KF 5
+kde-frameworks/plasma 5.111.0: Plasma library and runtime components based upon KF5 and Qt5
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.27.8: Tools based on KDE Frameworks 5 to better interact with the system
@@ -131,11 +131,11 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/tageditor 3.1.2: A tag editor with Qt GUI and command-line interface. Supports MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska
 media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), ID3, Vorbis, Opus, FLAC and Matroska tags
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 0.3.82-r1: Multimedia processing graphs
+media-video/pipewire 0.3.83: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 22.7.0 23.6.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
-net-im/telegram-desktop 4.10.3: Official desktop client for Telegram
+net-im/telegram-desktop 4.10.3-r1: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
