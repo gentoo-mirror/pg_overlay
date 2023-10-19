@@ -16,7 +16,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~riscv"
+KEYWORDS="~amd64 ~arm64 ~riscv"
 IUSE="dbus enchant +fonts +jemalloc screencast qt6 qt6-imageformats wayland webkit +X"
 REQUIRED_USE="
 	qt6-imageformats? ( qt6 )
@@ -66,7 +66,6 @@ CDEPEND="
 		>=dev-qt/qtbase-6.5:6=[dbus?,gui,network,opengl,wayland?,widgets,X?]
 		>=dev-qt/qtimageformats-6.5:6
 		>=dev-qt/qtsvg-6.5:6
-		wayland? ( >=dev-qt/qtwayland-6.5:6[compositor] )
 		webkit? (
 			>=dev-qt/qtdeclarative-6.5:6
 			>=dev-qt/qtwayland-6.5:6[compositor]
