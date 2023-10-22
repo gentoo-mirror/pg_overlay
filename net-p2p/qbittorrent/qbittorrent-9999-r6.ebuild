@@ -117,4 +117,7 @@ src_test() {
 src_install() {
 	multibuild_foreach_variant cmake_src_install
 	einstalldocs
+
+	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
+	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
 }
