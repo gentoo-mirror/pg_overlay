@@ -383,7 +383,6 @@ sys-libs/polly:default-lld - Use lld as the default linker for clang
 sys-libs/polly:extra - Build extra tools (clangd, clang-tidy and a few more)
 sys-libs/polly:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
 sys-libs/polly:static-analyzer - Install the Clang static analyzer
-virtual/rust:rustfmt - Install rustfmt, Rust code formatter
 www-client/firefox:clang - Use Clang compiler instead of GCC
 www-client/firefox:eme-free - Disable EME (DRM plugin) capability at build time
 www-client/firefox:geckodriver - Enable WebDriver support

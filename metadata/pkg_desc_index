@@ -148,7 +148,7 @@ net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: A fork of nicotine, a Soulseek client in Python
-net-p2p/qbittorrent 9999 9999-r6: BitTorrent client in C++ and Qt
+net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
@@ -171,9 +171,6 @@ sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 17.0.3: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
-virtual/jdk 15: Virtual for Java Development Kit (JDK)
-virtual/jre 15: Virtual for Java Runtime Environment (JRE)
-virtual/rust 1.72.0 1.72.1 1.73.0_beta: Virtual for Rust language compiler
 www-apps/nextcloud 27.0.1: Personal cloud that runs on your own server
 www-client/firefox 118.0.2: Firefox Web Browser
 www-client/vivaldi-snapshot 6.4.3160.29: A browser for our friends
