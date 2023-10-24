@@ -23,37 +23,35 @@ SLOT="0/2" # soname
 IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
-	+libplacebo +lua mmal nvenc openal opengl pipewire pulseaudio
-	raspberry-pi rubberband sdl selinux sixel sndio test tools +uchardet
-	vaapi vdpau vulkan wayland +xv zimg zlib"
+	+lua mmal nvenc openal opengl pipewire pulseaudio raspberry-pi
+	rubberband sdl selinux sixel sndio test tools +uchardet vaapi
+	vdpau vulkan wayland xv zimg zlib
+"
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
 	|| ( cli libmpv )
 	egl? ( || ( X drm wayland ) )
-	libplacebo? ( || ( egl opengl vulkan ) )
 	lua? ( ${LUA_REQUIRED_USE} )
 	nvenc? ( || ( egl opengl vulkan ) )
 	test? ( cli )
 	tools? ( cli )
 	uchardet? ( iconv )
-	vaapi? (
-		|| ( X egl libplacebo wayland )
-		wayland? ( drm )
-	)
+	vaapi? ( || ( X drm wayland ) )
 	vdpau? ( X )
-	vulkan? ( || ( X wayland ) libplacebo )
-	xv? ( X )"
+	vulkan? ( || ( X wayland ) )
+	xv? ( X )
+"
 RESTRICT="!test? ( test )"
 
 # raspberry-pi: default to -bin given non-bin is known broken (bug #893422)
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	media-video/ffmpeg:=[threads,vaapi?,vdpau?]
+	>=media-libs/libplacebo-6.338:=[opengl?,vulkan?]
+	>=media-video/ffmpeg-4.4:=threads,vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
 		x11-libs/libXScrnSaver
 		x11-libs/libXext
-		x11-libs/libXinerama
 		x11-libs/libXpresent
 		x11-libs/libXrandr
 		xv? ( x11-libs/libXv )
@@ -66,14 +64,17 @@ COMMON_DEPEND="
 		dev-libs/libcdio:=
 	)
 	drm? (
-		media-libs/mesa[gbm(+)]
 		x11-libs/libdrm
+		egl? ( media-libs/mesa[gbm(+)] )
 	)
 	dvd? (
 		media-libs/libdvdnav
 		media-libs/libdvdread:=
 	)
-	egl? ( media-libs/libglvnd )
+	egl? (
+		media-libs/libglvnd
+		media-libs/libplacebo[opengl]
+	)
 	gamepad? ( media-libs/libsdl2[joystick] )
 	iconv? (
 		virtual/libiconv
@@ -84,10 +85,6 @@ COMMON_DEPEND="
 	jpeg? ( media-libs/libjpeg-turbo:= )
 	lcms? ( media-libs/lcms:2 )
 	libcaca? ( media-libs/libcaca )
-	libplacebo? (
-		>=media-libs/libplacebo-5.264:=[opengl?,vulkan?]
-		egl? ( media-libs/libplacebo[opengl] )
-	)
 	lua? ( ${LUA_DEPS} )
 	openal? ( media-libs/openal )
 	opengl? ( media-libs/libglvnd[X?] )
@@ -115,22 +112,26 @@ COMMON_DEPEND="
 		x11-libs/libxkbcommon
 	)
 	zimg? ( media-libs/zimg )
-	zlib? ( sys-libs/zlib:= )"
+	zlib? ( sys-libs/zlib:= )
+"
 RDEPEND="
 	${COMMON_DEPEND}
 	selinux? ( sec-policy/selinux-mplayer )
-	tools? ( ${PYTHON_DEPS} )"
+	tools? ( ${PYTHON_DEPS} )
+"
 DEPEND="
 	${COMMON_DEPEND}
 	X? ( x11-base/xorg-proto )
 	dvb? ( virtual/linuxtv-dvb-headers )
 	nvenc? ( media-libs/nv-codec-headers )
-	wayland? ( dev-libs/wayland-protocols )"
+	wayland? ( dev-libs/wayland-protocols )
+"
 BDEPEND="
 	${PYTHON_DEPS}
 	virtual/pkgconfig
 	cli? ( dev-python/docutils )
-	wayland? ( dev-util/wayland-scanner )"
+	wayland? ( dev-util/wayland-scanner )
+"
 
 pkg_setup() {
 	use lua && lua-single_pkg_setup
@@ -200,10 +201,8 @@ src_configure() {
 		$(meson_feature X x11)
 		$(meson_feature aqua cocoa)
 		$(meson_feature drm)
-		$(meson_feature drm gbm)
 		$(meson_feature jpeg)
 		$(meson_feature libcaca caca)
-		$(meson_feature libplacebo)
 		$(meson_feature mmal rpi-mmal)
 		$(meson_feature sdl sdl2-video)
 		$(meson_feature sixel)
@@ -214,6 +213,7 @@ src_configure() {
 			echo enabled || echo disabled)
 		$(meson_feature egl)
 		$(mpv_feature_multi egl X egl-x11)
+		$(mpv_feature_multi egl drm gbm) # gbm is only used by egl-drm
 		$(mpv_feature_multi egl drm egl-drm)
 		$(mpv_feature_multi egl wayland egl-wayland)
 		$(meson_feature libmpv plain-gl)
@@ -230,13 +230,18 @@ src_configure() {
 
 		$(meson_feature vaapi)
 		$(mpv_feature_multi vaapi X vaapi-x11)
-		$(mpv_feature_multi 'vaapi egl' drm vaapi-drm)
-		$(mpv_feature_multi 'vaapi egl' wayland vaapi-wayland)
+		$(mpv_feature_multi vaapi drm vaapi-drm)
+		$(mpv_feature_multi vaapi wayland vaapi-wayland)
 
 		$(meson_feature vdpau)
 		$(mpv_feature_multi vdpau opengl vdpau-gl-x11)
 
 		$(mpv_feature_multi aqua opengl videotoolbox-gl)
+
+		# notable options left to automagic
+		#dmabuf-wayland: USE="drm wayland" + plus memfd_create support
+		#vulkan-interop: USE="vulkan" + ffmpeg-9999 currently
+		# TODO?: perhaps few more similar compound options should be left auto
 	)
 
 	meson_src_configure
