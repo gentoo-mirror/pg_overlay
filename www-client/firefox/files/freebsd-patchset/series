@@ -1,6 +1,5 @@
 mozilla-1669639.patch
 
-firefox-tests-reftest.patch
 firefox-tests-xpcshell-freeze.patch
 
 firefox-enable-addons.patch
