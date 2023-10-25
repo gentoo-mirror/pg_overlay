@@ -172,7 +172,7 @@ sys-libs/polly 17.0.3: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 www-apps/nextcloud 27.0.1: Personal cloud that runs on your own server
-www-client/firefox 118.0.2: Firefox Web Browser
+www-client/firefox 119.0: Firefox Web Browser
 www-client/vivaldi-snapshot 6.4.3160.29: A browser for our friends
 x11-base/xwayland 23.2.1: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
