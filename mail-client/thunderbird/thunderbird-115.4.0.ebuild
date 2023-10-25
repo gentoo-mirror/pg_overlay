@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-115esr-patches-06.tar.xz"
+FIREFOX_PATCHSET="firefox-115esr-patches-07.tar.xz"
 
 LLVM_MAX_SLOT=17
 
@@ -698,6 +698,10 @@ src_prepare() {
 	done
 	#######
 
+	# Clear cargo checksums from crates we have patched
+	# moz_clear_vendor_checksums crate
+	moz_clear_vendor_checksums audio_thread_priority
+
 	xdg_environment_reset
 }
 
@@ -1041,11 +1045,6 @@ src_configure() {
 
 		if [[ -n ${disable_elf_hack} ]] ; then
 			mozconfig_add_options_ac 'elf-hack is broken when using Clang' --disable-elf-hack
-		fi
-	elif tc-is-gcc ; then
-		if ver_test $(gcc-fullversion) -ge 10 ; then
-			einfo "Forcing -fno-tree-loop-vectorize to workaround GCC bug, see bug 758446 ..."
-			append-cxxflags -fno-tree-loop-vectorize
 		fi
 	fi
 
