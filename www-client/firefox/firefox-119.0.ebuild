@@ -1086,7 +1086,7 @@ src_configure() {
 	# elf-hack
 	if use amd64 || use x86 ; then
 		if use clang ; then
-			mozconfig_add_options_ac 'relr elf-hack with clang' --enable-elf-hack=relr
+			mozconfig_add_options_ac 'relr elf-hack with clang' --disable-elf-hack
 		else
 			mozconfig_add_options_ac 'legacy elf-hack with gcc' --enable-elf-hack=legacy
 		fi
