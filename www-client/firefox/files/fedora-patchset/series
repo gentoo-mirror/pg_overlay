@@ -1,11 +1,8 @@
-firefox-gcc-build.patch
 mozilla-1669639.patch
-0001-GLIBCXX-fix-for-GCC-12.patch
-firefox-i686-build.patch
-firefox-gcc-13-build.patch
 
 disable-openh264-download.patch
 
 D167159.diff
 
-firefox-gcc-always-inline.patch
+bmo-1559213-Support-system-av1.patch
+bmo-1559213-fix-system-av1-libs.patch
