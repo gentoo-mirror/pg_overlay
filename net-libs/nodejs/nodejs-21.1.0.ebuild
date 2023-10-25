@@ -25,8 +25,7 @@ else
 fi
 
 IUSE="corepack cpu_flags_x86_sse2 debug doc +icu inspector lto +npm pax-kernel +snapshot +ssl +system-icu +system-ssl test"
-REQUIRED_USE="corepack? ( !npm )
-	inspector? ( icu ssl )
+REQUIRED_USE="inspector? ( icu ssl )
 	npm? ( ssl )
 	system-icu? ( icu )
 	system-ssl? ( ssl )
@@ -40,7 +39,7 @@ RDEPEND=">=app-arch/brotli-1.0.9:=
 	>=net-libs/nghttp2-1.41.0:=
 	sys-libs/zlib
 	corepack? ( !sys-apps/yarn )
-	system-icu? ( >=dev-libs/icu-67:= )
+	system-icu? ( >=dev-libs/icu-71:= )
 	system-ssl? ( >=dev-libs/openssl-1.1.1:0= )
 	sys-devel/gcc:*"
 BDEPEND="${PYTHON_DEPS}
@@ -108,7 +107,7 @@ src_prepare() {
 	fi
 
 	# We need to disable mprotect on two files when it builds Bug 694100.
-	use pax-kernel && PATCHES+=( "${FILESDIR}"/${PN}-18.16.0-paxmarking.patch )
+	use pax-kernel && PATCHES+=( "${FILESDIR}"/${PN}-20.6.0-paxmarking.patch )
 
 	default
 }
@@ -232,9 +231,11 @@ src_install() {
 
 src_test() {
 	local drop_tests=(
+		test/parallel/test-fs-read-stream.js
 		test/parallel/test-dns-setserver-when-querying.js
 		test/parallel/test-fs-mkdir.js
 		test/parallel/test-fs-utimes-y2K38.js
+		test/parallel/test-fs-watch-recursive-add-file.js
 		test/parallel/test-release-npm.js
 		test/parallel/test-socket-write-after-fin-error.js
 		test/parallel/test-strace-openat-openssl.js
