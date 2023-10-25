@@ -3,6 +3,3 @@ mozilla-1669639.patch
 disable-openh264-download.patch
 
 D167159.diff
-
-bmo-1559213-Support-system-av1.patch
-bmo-1559213-fix-system-av1-libs.patch
