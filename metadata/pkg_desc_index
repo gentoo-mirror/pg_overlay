@@ -173,7 +173,7 @@ sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 www-apps/nextcloud 27.0.1: Personal cloud that runs on your own server
 www-client/firefox 119.0: Firefox Web Browser
-www-client/vivaldi-snapshot 6.4.3160.29: A browser for our friends
+www-client/vivaldi-snapshot 6.4.3160.33: A browser for our friends
 x11-base/xwayland 23.2.2: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.38: Gimp ToolKit +
