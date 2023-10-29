@@ -100,7 +100,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
 	"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
 )
 
