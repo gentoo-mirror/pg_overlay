@@ -1,4 +1,4 @@
-# Copyright 2020-2022 Gentoo Authors
+# Copyright 2020-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -22,7 +22,7 @@ DEPEND="
 	media-libs/opus
 	alsa? ( media-libs/alsa-lib )
 	dsp? ( media-libs/tg_owt:= )
-	pulseaudio? ( media-sound/pulseaudio )
+	pulseaudio? ( media-libs/libpulse )
 "
 RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
