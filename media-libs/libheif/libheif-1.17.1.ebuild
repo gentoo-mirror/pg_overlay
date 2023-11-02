@@ -58,6 +58,7 @@ src_configure() {
 	export GO111MODULE=auto
 	local mycmakeargs=(
 		--preset=release
+		-DENABLE_PLUGIN_LOADING=OFF
 		-DWITH_LIBDE265=ON
 		-DWITH_AOM_DECODER=$(usex aom)
 		-DWITH_GDK_PIXBUF=$(usex gdk-pixbuf)
