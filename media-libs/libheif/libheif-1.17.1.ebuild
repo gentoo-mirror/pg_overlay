@@ -52,9 +52,6 @@ src_prepare() {
 	fi
 
 	cmake_src_prepare
-
-	# prevent "stat heif-test.go: no such file or directory"
-	multilib_copy_sources
 }
 
 src_configure() {
