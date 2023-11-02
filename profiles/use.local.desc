@@ -160,6 +160,15 @@ media-libs/libavif:extras - Build extra apps (avifenc, avifdec) and test files
 media-libs/libavif:gdk-pixbuf - Build a gdk-pixbuf loader
 media-libs/libavif:rav1e - Enable support for the rav1e codec encoding
 media-libs/libavif:svt-av1 - Enable support for the SVT-AV1 encoder
+media-libs/libde265:dec265 - Enable build of dec265 example program
+media-libs/libde265:enc265 - Enable build of enc265 tool
+media-libs/libde265:sdl - Enable video output of dec265 example program with media-libs/libsdl
+media-libs/libde265:tools - Enable installation of varous binary tools
+media-libs/libheif:aom - Use media-libs/libaom for AVIF encoding/decoding
+media-libs/libheif:gdk-pixbuf - Enable x11-libs/gdk-pixbuf plugin
+media-libs/libheif:go - Enable building dev-lang/go code/examples
+media-libs/libheif:rav1e - Use media-video/rav1e for AVIF encoding
+media-libs/libheif:x265 - Use media-libs/x265 for HEIF encoding
 media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
 media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
 media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
