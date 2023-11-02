@@ -61,8 +61,8 @@ multilib_src_configure() {
 	export GO111MODULE=auto
 	local mycmakeargs=(
 		--preset=release
-		-DWITH_LIBIE265=ON
-		-DWITH_AOM_DECODDER=$(usex aom)
+		-DWITH_LIBDE265=ON
+		-DWITH_AOM_DECODER=$(usex aom)
 		-DWITH_GDK_PIXBUF=$(usex gdk-pixbuf)
 		-DWITH_RAV1E=$(usex rav1e)
 		-DENABLE_MULTITHREADING_SUPPORT=$(usex threads)
