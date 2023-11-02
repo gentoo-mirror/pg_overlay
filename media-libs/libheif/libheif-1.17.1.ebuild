@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools xdg multilib-minimal
+inherit cmake xdg multilib-minimal
 
 if [[ ${PV} == *9999 ]] ; then
 	EGIT_REPO_URI="https://github.com/strukturag/libheif.git"
@@ -45,15 +45,13 @@ RDEPEND="${DEPEND}"
 src_prepare() {
 	default
 
-	sed -i -e 's:-Werror::' configure.ac || die
-
 	if use test ; then
 		# bug 865351
 		rm tests/catch.hpp || die
 		ln -s "${ESYSROOT}"/usr/include/catch2/catch.hpp tests/catch.hpp || die
 	fi
 
-	eautoreconf
+	cmake_src_prepare
 
 	# prevent "stat heif-test.go: no such file or directory"
 	multilib_copy_sources
@@ -61,26 +59,17 @@ src_prepare() {
 
 multilib_src_configure() {
 	export GO111MODULE=auto
-	local econf_args=(
-		--enable-libde265
-		--disable-static
-		$(multilib_is_native_abi && use go || echo --disable-go)
-		$(use_enable aom)
-		$(use_enable gdk-pixbuf)
-		$(use_enable rav1e)
-		$(use_enable threads multithreading)
-		$(use_enable test tests)
-		$(use_enable x265)
+	local mycmakeargs=(
+		--preset=release
+		-DWITH_LIBIE265=ON
+		-DWITH_AOM_DECODDER=$(usex aom)
+		-DWITH_GDK_PIXBUF=$(usex gdk-pixbuf)
+		-DWITH_RAV1E=$(usex rav1e)
+		-DENABLE_MULTITHREADING_SUPPORT=$(usex threads)
+		-DENABLE_PARALLEL_TILE_DECODING=$(usex threads)
+		-DWITH_REDUCED_VISIBILITY=$(usex threads)
+		-DBUILD_TESTING=$(usex test)
+		-DWITH_X265=$(usex x265)
 	)
-	ECONF_SOURCE="${S}" econf "${econf_args[@]}"
-}
-
-multilib_src_test() {
-	default
-	emake -C go test
-}
-
-multilib_src_install_all() {
-	einstalldocs
-	find "${ED}" -name '*.la' -delete || die
+	cmake_src_configure
 }
