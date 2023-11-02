@@ -30,16 +30,16 @@ BDEPEND="
 	)
 "
 DEPEND="
-	media-libs/dav1d:=[${MULTILIB_USEDEP}]
-	media-libs/libde265:=[${MULTILIB_USEDEP}]
-	media-libs/libpng:0=[${MULTILIB_USEDEP}]
-	sys-libs/zlib:=[${MULTILIB_USEDEP}]
-	media-libs/libjpeg-turbo:0=[${MULTILIB_USEDEP}]
-	aom? ( >=media-libs/libaom-2.0.0:=[${MULTILIB_USEDEP}] )
-	gdk-pixbuf? ( x11-libs/gdk-pixbuf[${MULTILIB_USEDEP}] )
+	media-libs/dav1d:=
+	media-libs/libde265:=
+	media-libs/libpng:0=
+	sys-libs/zlib:=
+	media-libs/libjpeg-turbo:0=
+	aom? ( >=media-libs/libaom-2.0.0:= )
+	gdk-pixbuf? ( x11-libs/gdk-pixbuf )
 	go? ( dev-lang/go )
 	rav1e? ( media-video/rav1e:= )
-	x265? ( media-libs/x265:=[${MULTILIB_USEDEP}] )"
+	x265? ( media-libs/x265:= )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
