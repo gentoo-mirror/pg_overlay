@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools xdg multilib-minimal
+inherit cmake xdg
 
 if [[ ${PV} == *9999 ]] ; then
 	EGIT_REPO_URI="https://github.com/strukturag/libheif.git"
@@ -30,22 +30,20 @@ BDEPEND="
 	)
 "
 DEPEND="
-	media-libs/dav1d:=[${MULTILIB_USEDEP}]
-	media-libs/libde265:=[${MULTILIB_USEDEP}]
-	media-libs/libpng:0=[${MULTILIB_USEDEP}]
-	sys-libs/zlib:=[${MULTILIB_USEDEP}]
-	media-libs/libjpeg-turbo:0=[${MULTILIB_USEDEP}]
-	aom? ( >=media-libs/libaom-2.0.0:=[${MULTILIB_USEDEP}] )
-	gdk-pixbuf? ( x11-libs/gdk-pixbuf[${MULTILIB_USEDEP}] )
+	media-libs/dav1d:=
+	media-libs/libde265:=
+	media-libs/libpng:0=
+	sys-libs/zlib:=
+	media-libs/libjpeg-turbo:0=
+	aom? ( >=media-libs/libaom-2.0.0:= )
+	gdk-pixbuf? ( x11-libs/gdk-pixbuf )
 	go? ( dev-lang/go )
 	rav1e? ( media-video/rav1e:= )
-	x265? ( media-libs/x265:=[${MULTILIB_USEDEP}] )"
+	x265? ( media-libs/x265:= )"
 RDEPEND="${DEPEND}"
 
 src_prepare() {
 	default
-
-	sed -i -e 's:-Werror::' configure.ac || die
 
 	if use test ; then
 		# bug 865351
@@ -53,34 +51,23 @@ src_prepare() {
 		ln -s "${ESYSROOT}"/usr/include/catch2/catch.hpp tests/catch.hpp || die
 	fi
 
-	eautoreconf
-
-	# prevent "stat heif-test.go: no such file or directory"
-	multilib_copy_sources
+	cmake_src_prepare
 }
 
-multilib_src_configure() {
+src_configure() {
 	export GO111MODULE=auto
-	local econf_args=(
-		--enable-libde265
-		--disable-static
-		$(multilib_is_native_abi && use go || echo --disable-go)
-		$(use_enable aom)
-		$(use_enable gdk-pixbuf)
-		$(use_enable rav1e)
-		$(use_enable threads multithreading)
-		$(use_enable test tests)
-		$(use_enable x265)
+	local mycmakeargs=(
+		--preset=release
+		-DENABLE_PLUGIN_LOADING=OFF
+		-DWITH_LIBDE265=ON
+		-DWITH_AOM_DECODER=$(usex aom)
+		-DWITH_GDK_PIXBUF=$(usex gdk-pixbuf)
+		-DWITH_RAV1E=$(usex rav1e)
+		-DENABLE_MULTITHREADING_SUPPORT=$(usex threads)
+		-DENABLE_PARALLEL_TILE_DECODING=$(usex threads)
+		-DWITH_REDUCED_VISIBILITY=$(usex threads)
+		-DBUILD_TESTING=$(usex test)
+		-DWITH_X265=$(usex x265)
 	)
-	ECONF_SOURCE="${S}" econf "${econf_args[@]}"
-}
-
-multilib_src_test() {
-	default
-	emake -C go test
-}
-
-multilib_src_install_all() {
-	einstalldocs
-	find "${ED}" -name '*.la' -delete || die
+	cmake_src_configure
 }
