@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake xdg multilib-minimal
+inherit cmake xdg
 
 if [[ ${PV} == *9999 ]] ; then
 	EGIT_REPO_URI="https://github.com/strukturag/libheif.git"
@@ -57,7 +57,7 @@ src_prepare() {
 	multilib_copy_sources
 }
 
-multilib_src_configure() {
+src_configure() {
 	export GO111MODULE=auto
 	local mycmakeargs=(
 		--preset=release
