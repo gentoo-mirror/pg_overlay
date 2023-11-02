@@ -84,13 +84,11 @@ RDEPEND="${CDEPEND}
 	webkit? ( net-libs/webkit-gtk:4 )
 "
 DEPEND="${CDEPEND}
-	>=dev-cpp/cppgir-0_p20230926
 	>=dev-cpp/ms-gsl-4
 	dev-cpp/range-v3
 "
 BDEPEND="
 	${PYTHON_DEPS}
-	>=dev-cpp/cppgir-0_p20230926
 	>=dev-util/cmake-3.16
 	dev-util/gdbus-codegen
 	virtual/pkgconfig
@@ -100,7 +98,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
+	#"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
 	"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
 )
 
