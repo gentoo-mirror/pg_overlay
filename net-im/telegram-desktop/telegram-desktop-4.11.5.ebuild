@@ -123,9 +123,7 @@ src_prepare() {
 			'Q_IMPORT_PLUGIN(QJpegXLPlugin)' \
 			>> cmake/external/qt/qt_static_plugins/qt_static_plugins.cpp || die
 	fi
-
-	# kde-frameworks/kcoreaddons is bundled when using qt6,
-	#   see src_configure.
+	# kde-frameworks/kcoreaddons is bundled when using qt6.
 
 	# Happily fail if libraries aren't found...
 	find -type f \( -name 'CMakeLists.txt' -o -name '*.cmake' \) \
