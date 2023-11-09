@@ -1090,6 +1090,9 @@ src_configure() {
 		else
 			mozconfig_add_options_ac 'legacy elf-hack with gcc' --enable-elf-hack=legacy
 		fi
+	elif use ppc64 ; then
+		# '--disable-elf-hack' is not recognized on ppc64, bgo#917049
+		:;
 	else
 		mozconfig_add_options_ac 'disable elf-hack on non-supported arches' --disable-elf-hack
 	fi
