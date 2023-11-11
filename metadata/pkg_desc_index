@@ -22,7 +22,7 @@ app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/asciidoc 10.2.0: A plain text human readable/writable document format
 app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary lookup program
-dev-cpp/cppgir 0_p20231022: GObject-Introspection C++ binding wrapper generator
+dev-cpp/cppgir 0_p20231022 0_p20231105: GObject-Introspection C++ binding wrapper generator
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.77.0: C++ interface for glib2
 dev-cpp/highway 1.0.7: Performance-portable, length-agnostic SIMD with runtime dispatch
