@@ -10,5 +10,5 @@ LICENSE=GPL-2+
 PROPERTIES=live
 RDEPEND=net-im/pidgin sys-libs/zlib:= gcrypt? ( dev-libs/libgcrypt:0= ) !gcrypt? ( dev-libs/openssl:0= ) png? ( media-libs/libpng:0= ) webp? ( media-libs/libwebp:= )
 SLOT=0
-_eclasses_=git-r3	2358a7b20091609e24bd3a83b3ac5991
+_eclasses_=git-r3	5133e393e8717a3a093660f990801dc1
 _md5_=f4fef809e7240e0a824cb7fc0fa59297
