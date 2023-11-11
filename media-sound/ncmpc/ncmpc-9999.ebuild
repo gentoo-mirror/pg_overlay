@@ -1,4 +1,4 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,15 +12,16 @@ EGIT_REPO_URI="https://github.com/MusicPlayerDaemon/${PN}.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS=""
-IUSE="async-connect chat-screen doc +help-screen key-screen +library-screen lirc lyrics-screen +mouse nls outputs-screen pcre search-screen +song-screen"
+KEYWORDS="amd64 ppc ppc64 ~sparc x86"
+IUSE="async-connect chat-screen doc +help-screen key-screen +library-screen lirc lyrics-screen +mouse nls outputs-screen pcre search-screen +song-screen test"
+RESTRICT="!test? ( test )"
 
 BDEPEND="
 	virtual/pkgconfig
 	doc? ( dev-python/sphinx )
 "
 RDEPEND="
-	>=media-libs/libmpdclient-2.9
+	media-libs/libmpdclient
 	sys-libs/ncurses:=[unicode(+)]
 	lirc? ( app-misc/lirc )
 	pcre? ( dev-libs/libpcre2 )
@@ -69,6 +70,7 @@ src_configure() {
 		-Dregex=$(usex pcre enabled disabled)
 		-Dsearch_screen=$(usex search-screen true false)
 		-Dsong_screen=$(usex song-screen true false)
+		$(meson_use test)
 	)
 
 	meson_src_configure
