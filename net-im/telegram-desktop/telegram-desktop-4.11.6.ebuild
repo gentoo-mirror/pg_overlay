@@ -25,7 +25,7 @@ REQUIRED_USE="
 KIMAGEFORMATS_RDEPEND="
 	media-libs/libavif:=
 	media-libs/libheif:=
-	media-libs/libjxl
+	>=media-libs/libjxl-0.8.0
 "
 CDEPEND="
 	!net-im/telegram-desktop-bin
