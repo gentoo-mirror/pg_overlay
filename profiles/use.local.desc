@@ -134,6 +134,8 @@ kde-apps/okular:speech - Enable text-to-speech support
 kde-apps/spectacle:share - Enable support for a share menu using kde-frameworks/purpose
 kde-apps/yakuake:absolute-position - Use kde-frameworks/kwayland for absolute window positioning in KWin
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
+kde-plasma/kwin:lock - Enable screen locking via kde-plasma/kscreenlocker
+kde-plasma/kwin:multimedia - Enable effect video button in desktop effects KCM
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
