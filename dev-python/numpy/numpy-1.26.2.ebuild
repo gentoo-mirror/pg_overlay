@@ -7,9 +7,8 @@ DISTUTILS_EXT=1
 DISTUTILS_USE_PEP517=meson-python
 PYTHON_COMPAT=( python3_{10..12} pypy3 )
 PYTHON_REQ_USE="threads(+)"
-FORTRAN_NEEDED=lapack
 
-inherit distutils-r1 flag-o-matic fortran-2 multiprocessing pypi toolchain-funcs
+inherit distutils-r1 flag-o-matic pypi toolchain-funcs
 
 DESCRIPTION="Fast array and numerical python library"
 HOMEPAGE="
@@ -24,7 +23,7 @@ SLOT="0"
 # is barely supported anyway, see bug #914358.
 IUSE="lapack"
 if [[ ${PV} != *_[rab]* ]] ; then
-	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 fi
 
 RDEPEND="
@@ -51,6 +50,7 @@ BDEPEND="
 	)
 "
 
+EPYTEST_XDIST=1
 distutils_enable_tests pytest
 
 python_prepare_all() {
@@ -87,6 +87,14 @@ python_test() {
 
 		# TODO: crashes
 		lib/tests/test_histograms.py::TestHistogram::test_big_arrays
+
+		# likely a test problem
+		# https://github.com/numpy/numpy/issues/25135
+		core/tests/test_cython.py::test_conv_intp
+
+		# flaky
+		f2py/tests/test_crackfortran.py
+		f2py/tests/test_data.py::TestDataF77::test_crackedlines
 	)
 
 	if use arm && [[ $(uname -m || echo "unknown") == "armv8l" ]] ; then
@@ -142,8 +150,16 @@ python_test() {
 			;;
 	esac
 
+	if ! has_version -b "~${CATEGORY}/${P}[${PYTHON_USEDEP}]" ; then
+		# depends on importing numpy.random from system namespace
+		EPYTEST_DESELECT+=(
+			'random/tests/test_extending.py::test_cython'
+		)
+	fi
+
 	rm -rf numpy || die
-	epytest -n "$(makeopts_jobs)" --pyargs numpy
+	local -x PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
+	epytest --pyargs numpy
 }
 
 python_install_all() {
