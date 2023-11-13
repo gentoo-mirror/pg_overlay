@@ -48,7 +48,7 @@ dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus I
 dev-libs/re2 0.2023.11.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-python/numpy 1.26.1: Fast array and numerical python library
+dev-python/numpy 1.26.2: Fast array and numerical python library
 dev-qt/qtscript 5.15.11.9999: Application scripting library for the Qt5 framework (deprecated)
 dev-qt/qtwebkit 5.212.0_pre20200924 5.212.9999: WebKit rendering library for the Qt5 framework (deprecated)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -137,7 +137,7 @@ media-sound/tagparser 8.0.1: C++ library for reading and writing MP4 (iTunes), I
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 0.3.84: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-media-video/smplayer 22.7.0 23.6.0: Great Qt GUI front-end for mplayer/mpv
+media-video/smplayer 23.6.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.11.6: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
