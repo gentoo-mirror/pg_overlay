@@ -1,6 +1,5 @@
 # Copyright 2007-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id: 75684168f00f620975d6095c0b48d4675ed862f0 $
 
 EAPI=8
 
@@ -12,28 +11,23 @@ PLOCALE_BACKUP="en_US"
 inherit plocale qmake-utils toolchain-funcs xdg
 
 DESCRIPTION="Great Qt GUI front-end for mplayer/mpv"
-HOMEPAGE="https://www.smplayer.eu/"
+HOMEPAGE="https://www.smplayer.info/"
 SRC_URI="https://github.com/smplayer-dev/${PN}/releases/download/v${PV}/${P}.tar.bz2"
-#SRC_URI="https://www.gentoofan.org/files/${P}.tar.bz2"
 
 LICENSE="GPL-2+ BSD-2"
 SLOT="0"
 KEYWORDS="amd64 ~arm ~hppa ~ppc ~ppc64 x86 ~amd64-linux"
-IUSE="autoshutdown bidi debug mpris"
+IUSE="bidi debug"
 
-BDEPEND="dev-qt/linguist-tools:5"
 DEPEND="
 	dev-qt/qtcore:5
 	dev-qt/qtdbus:5
 	dev-qt/qtgui:5=
 	dev-qt/qtnetwork:5[ssl]
-	dev-qt/qtscript:5
 	dev-qt/qtsingleapplication[qt5(+)]
 	dev-qt/qtwidgets:5
 	dev-qt/qtxml:5
 	sys-libs/zlib
-	autoshutdown? ( dev-qt/qtdbus:5 )
-	mpris? ( dev-qt/qtdbus:5 )
 "
 RDEPEND="${DEPEND}
 	|| (
@@ -41,6 +35,7 @@ RDEPEND="${DEPEND}
 		media-video/mplayer[bidi?,libass,png]
 	)
 "
+BDEPEND="dev-qt/linguist-tools:5"
 
 PATCHES=(
 	"${FILESDIR}/${PN}-14.9.0.6966-unbundle-qtsingleapplication.patch" # bug 487544
@@ -68,24 +63,11 @@ src_prepare() {
 
 	# Turn off intrusive share widget
 	sed -e 's:DEFINES += SHARE_WIDGET:#&:' \
-		-e 's:DEFINES += SHARE_ACTIONS:#&:' \
 		-i src/smplayer.pro || die
-
-	# Toggle autoshutdown option which pulls in dbus, bug #524392
-	if ! use autoshutdown ; then
-		sed -e 's:DEFINES += AUTO_SHUTDOWN_PC:#&:' \
-			-i src/smplayer.pro || die
-	fi
 
 	# Turn debug message flooding off
 	if ! use debug ; then
 		sed -e 's:#\(DEFINES += NO_DEBUG_ON_CONSOLE\):\1:' \
-			-i src/smplayer.pro || die
-	fi
-
-	# MPRIS2 pulls in dbus, bug #553710
-	if ! use mpris ; then
-		sed -e 's:DEFINES += MPRIS2:#&:' \
 			-i src/smplayer.pro || die
 	fi
 
@@ -99,7 +81,7 @@ src_prepare() {
 
 src_configure() {
 	cd src || die
-	eqmake5
+	eqmake5 QT_MAJOR_VERSION=5
 }
 
 gen_translation() {
