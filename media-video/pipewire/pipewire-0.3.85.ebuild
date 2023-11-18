@@ -84,7 +84,7 @@ BDEPEND="
 RDEPEND="
 	acct-group/audio
 	acct-group/pipewire
-	media-libs/alsa-lib
+	media-libs/alsa-lib[${MULTILIB_USEDEP}]
 	sys-libs/ncurses:=[unicode(+)]
 	virtual/libintl[${MULTILIB_USEDEP}]
 	virtual/libudev[${MULTILIB_USEDEP}]
@@ -166,7 +166,7 @@ src_prepare() {
 	# Used for upstream backports
 	[[ -d "${FILESDIR}"/${PV} ]] && eapply "${FILESDIR}"/${PV}
 
-	sed -i "s/volume = merge/volume = ignore/g" spa/plugins/alsa/mixer/paths/analog-output.conf.common
+	#sed -i "s/volume = merge/volume = ignore/g" spa/plugins/alsa/mixer/paths/analog-output.conf.common
 }
 
 multilib_src_configure() {
