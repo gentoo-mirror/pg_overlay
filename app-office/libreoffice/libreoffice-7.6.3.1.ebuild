@@ -291,9 +291,6 @@ PATCHES=(
 
 	# maybe upstreamable
 	"${FILESDIR}/libreoffice-7.5.8.2-icu-74-compatibility.patch"
-
-	# git master
-	"${FILESDIR}/${PN}-7.5.6.2-gcc-14.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
