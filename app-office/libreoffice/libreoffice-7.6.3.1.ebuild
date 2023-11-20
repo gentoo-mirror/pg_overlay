@@ -88,7 +88,7 @@ googledrive gstreamer +gtk kde ldap +mariadb odk pdfimport postgres test valgrin
 $(printf 'libreoffice_extensions_%s ' ${LO_EXTS})"
 
 REQUIRED_USE="${PYTHON_REQUIRED_USE}
-	base? ( firebird java )
+	base? ( java )
 	bluetooth? ( dbus )
 	libreoffice_extensions_nlpsolver? ( java )
 	libreoffice_extensions_scripting-beanshell? ( java )
@@ -263,15 +263,12 @@ BDEPEND="
 	virtual/pkgconfig
 	clang? (
 		|| (
+			(	sys-devel/clang:17
+				sys-devel/llvm:17
+				=sys-devel/lld-17*	)
 			(	sys-devel/clang:16
 				sys-devel/llvm:16
 				=sys-devel/lld-16*	)
-			(	sys-devel/clang:15
-				sys-devel/llvm:15
-				=sys-devel/lld-15*	)
-			(	sys-devel/clang:14
-				sys-devel/llvm:14
-				=sys-devel/lld-14*	)
 		)
 	)
 	odk? ( >=app-doc/doxygen-1.8.4 )
@@ -291,6 +288,12 @@ PATCHES=(
 	"${FILESDIR}/${PN}-5.3.4.2-kioclient5.patch"
 	"${FILESDIR}/${PN}-6.1-nomancompress.patch"
 	"${FILESDIR}/${PN}-7.2.0.4-qt5detect.patch"
+
+	# maybe upstreamable
+	"${FILESDIR}/libreoffice-7.5.8.2-icu-74-compatibility.patch"
+
+	# git master
+	"${FILESDIR}/${PN}-7.5.6.2-gcc-14.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
@@ -400,6 +403,9 @@ src_configure() {
 		NM=llvm-nm
 		RANLIB=llvm-ranlib
 		LDFLAGS+=" -fuse-ld=lld"
+
+		# Workaround for bug #915067
+		append-ldflags -Wl,--undefined-version
 
 		# Not implemented by Clang, bug #903889
 		filter-flags -Wlto-type-mismatch -Werror=lto-type-mismatch
