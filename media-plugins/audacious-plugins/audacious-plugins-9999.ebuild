@@ -109,7 +109,6 @@ src_configure() {
 		-Dadplug=false # not packaged
 		-Dgtk=false
 		-Dopenmpt=false # not packaged
-		-Doss4=false
 		-Dcoreaudio=false
 		-Dsndio=false
 		$(meson_use aac)
@@ -124,15 +123,12 @@ src_configure() {
 		$(meson_use gme console)
 		$(meson_use http neon)
 		$(meson_use jack)
-		$(meson_use lame filewriter_mp3)
 		$(meson_use libnotify notify)
 		$(meson_use libsamplerate resample)
 		$(meson_use lirc)
 		$(meson_use mms)
 		$(meson_use modplug)
 		$(meson_use mp3 mpg123)
-		$(meson_use nls)
-		$(meson_use opengl qtglspectrum)
 		$(meson_use pulseaudio pulse)
 		$(meson_use scrobbler scrobbler2)
 		$(meson_use sdl sdlout)
