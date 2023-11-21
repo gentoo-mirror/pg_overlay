@@ -36,7 +36,7 @@ src_prepare() {
 	}
 	plocale_find_changes po "" ".po"
 	plocale_for_each_disabled_locale rm_locale
-
+	default
 }
 
 src_configure() {
