@@ -1,18 +1,15 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-PLOCALES="ar be bg ca cmn cs da de el en_GB es es_AR es_MX et fi fr gl hu id_ID it ja ko lt lv ml_IN ms nl pl pt_BR pt_PT ru si sk sl sq sr sr_RS sv ta tr uk zh_CN zh_TW"
+EAPI=8
+PLOCALES="af ar be bg ca cmn cs da de el en_GB es es_AR es_MX et eu fa_IR fi fr gl hu id_ID it ja ko lt lv ml_IN ms nl pl pt_BR pt_PT ro ru si sk sl sq sr sr_RS sv ta tr uk uz zh_CN zh_TW"
+
 
 MY_P="${P/_/-}"
 
-if [[ ${PV} == *9999 ]]; then
-	inherit autotools git-r3 plocale
-	EGIT_REPO_URI="https://github.com/audacious-media-player/audacious-plugins.git"
-else
-	SRC_URI="https://distfiles.audacious-media-player.org/${MY_P}.tar.bz2"
-	KEYWORDS="~amd64 ~x86"
-fi
+inherit meson git-r3 plocale
+EGIT_REPO_URI="https://github.com/audacious-media-player/audacious-plugins.git"
+
 DESCRIPTION="Lightweight and versatile audio player"
 HOMEPAGE="https://audacious-media-player.org/"
 
@@ -23,23 +20,6 @@ IUSE="aac +alsa ampache bs2b cdda cue ffmpeg flac fluidsynth gme http jack
 	scrobbler sdl sid sndfile soxr speedpitch streamtuner vorbis wavpack"
 REQUIRED_USE="ampache? ( http ) streamtuner? ( http )"
 
-# The following plugins REQUIRE a GUI build of audacious, because non-GUI
-# builds do NOT install the libaudgui library & headers.
-# Plugins without a configure option:
-#   alarm
-#   albumart
-#   delete-files
-#   ladspa
-#   playlist-manager
-#   search-tool
-#   skins
-#   vtx
-# Plugins with a configure option:
-#   glspectrum
-#   gtkui
-#   hotkey
-#   notify
-#   statusicon
 BDEPEND="
 	dev-util/gdbus-codegen
 	virtual/pkgconfig
@@ -108,85 +88,64 @@ pkg_setup() {
 
 src_prepare() {
 	default
-	if ! use nls; then
-		sed -e "/SUBDIRS/s/ po//" -i Makefile || die # bug #512698
-	fi
+	#if ! use nls; then
+	#	sed -e "/SUBDIRS/s/ po//" -i Makefile || die # bug #512698
+	#fi
 
 	rm_loc() {
 		rm -vf "po/${1}.po" || die
 		sed -i s/${1}.po// po/Makefile || die
 	}
-	plocale_find_changes po "" ".po"
-	plocale_for_each_disabled_locale rm_loc
+	#plocale_find_changes po "" ".po"
+	#plocale_for_each_disabled_locale rm_loc
 
-	[[ ${PV} == *9999 ]] && eautoreconf
 }
 
 src_configure() {
-	local myeconfargs=(
-		--enable-mpris2
-		--enable-qt
-		--enable-qtaudio
-		--enable-songchange
-		--disable-adplug # not packaged
-		--disable-gtk
-		--disable-openmpt # not packaged
-		--disable-oss4
-		--disable-coreaudio
-		--disable-sndio
-		$(use_enable aac)
-		$(use_enable alsa)
-		$(use_enable ampache)
-		$(use_enable bs2b)
-		$(use_enable cdda cdaudio)
-		$(use_enable cue)
-		$(use_enable flac)
-		$(use_enable flac filewriter)
-		$(use_enable fluidsynth amidiplug)
-		$(use_enable gme console)
-		$(use_enable http neon)
-		$(use_enable jack)
-		$(use_enable lame filewriter_mp3)
-		$(use_enable libnotify notify)
-		$(use_enable libsamplerate resample)
-		$(use_enable lirc)
-		$(use_enable mms)
-		$(use_enable modplug)
-		$(use_enable mp3 mpg123)
-		$(use_enable nls)
-		$(use_enable opengl qtglspectrum)
-		$(use_enable pulseaudio pulse)
-		$(use_enable scrobbler scrobbler2)
-		$(use_enable sdl sdlout)
-		$(use_enable sid)
-		$(use_enable sndfile)
-		$(use_enable soxr)
-		$(use_enable speedpitch)
-		$(use_enable streamtuner)
-		$(use_enable vorbis)
-		$(use_enable wavpack)
-		$(use_with ffmpeg ffmpeg ffmpeg)
+	local emesonargs=(
+		-Dmpris2=true
+		-Dqt6=true
+		-Dqtaudio=true
+		-Dsongchange=true
+		-Dadplug=false # not packaged
+		-Dgtk=false
+		-Dopenmpt=false # not packaged
+		-Dcoreaudio=false
+		-Dsndio=false
+		$(meson_use aac)
+		$(meson_use alsa)
+		$(meson_use ampache)
+		$(meson_use bs2b)
+		$(meson_use cdda cdaudio)
+		$(meson_use cue)
+		$(meson_use flac)
+		$(meson_use flac filewriter)
+		$(meson_use fluidsynth amidiplug)
+		$(meson_use gme console)
+		$(meson_use http neon)
+		$(meson_use jack)
+		$(meson_use libnotify notify)
+		$(meson_use libsamplerate resample)
+		$(meson_use lirc)
+		$(meson_use mms)
+		$(meson_use modplug)
+		$(meson_use mp3 mpg123)
+		$(meson_use pulseaudio pulse)
+		$(meson_use scrobbler scrobbler2)
+		$(meson_use sdl sdlout)
+		$(meson_use sid)
+		$(meson_use sndfile)
+		$(meson_use soxr)
+		$(meson_use speedpitch)
+		$(meson_use streamtuner)
+		$(meson_use vorbis)
+		$(meson_use wavpack)
+		$(meson_use ffmpeg ffaudio)
 	)
 
-	econf "${myeconfargs[@]}"
+	meson_src_configure
+}
 
-	sed -i 's/asx //' extra.mk || die
-	sed -i 's/asx3 //' extra.mk || die
-	sed -i 's/pls //' extra.mk || die
-	sed -i 's/xspf //' extra.mk || die
-	sed -i '/EFFECT_PLUGIN/d' extra.mk || die
-	#sed -i 's/playlist-manager-qt //' extra.mk || die
-	#sed -i 's/search-tool-qt //' extra.mk || die
-	sed -i 's/skins-qt //' extra.mk || die
-	sed -i 's/delete-files //' extra.mk || die
-	sed -i 's/skins-data //' extra.mk || die
-	sed -i 's/adplug //' extra.mk || die
-	sed -i 's/metronom //' extra.mk || die
-	sed -i 's/psf //' extra.mk || die
-	sed -i 's/tonegen //' extra.mk || die
-	sed -i 's/vtx //' extra.mk || die
-	sed -i 's/xsf //' extra.mk || die
-	sed -i 's/ filewriter//' extra.mk || die
-	sed -i 's/ gio//' extra.mk || die
-	sed -i '/VISUALIZATION_PLUGIN/d' extra.mk || die
+src_install() {
+	meson_src_install
 }
