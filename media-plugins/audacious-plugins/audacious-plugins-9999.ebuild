@@ -104,8 +104,9 @@ src_prepare() {
 src_configure() {
 	local emesonargs=(
 		-Dmpris2=true
+		-Dqt=false
 		-Dqt6=true
-		-Dqtaudio=true
+		-Dqtaudio=false
 		-Dsongchange=true
 		-Dadplug=false # not packaged
 		-Dgtk=false
