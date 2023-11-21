@@ -35,8 +35,8 @@ src_prepare() {
 		rm -vf "po/${1}.po" || die
 		sed -i s/${1}.po// po/Makefile || die
 	}
-	plocale_find_changes po "" ".po"
-	plocale_for_each_disabled_locale rm_locale
+	#plocale_find_changes po "" ".po"
+	#plocale_for_each_disabled_locale rm_locale
 	default
 }
 
