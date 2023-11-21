@@ -105,7 +105,7 @@ src_configure() {
 		-Dmpris2=true
 		-Dqt6=true
 		-Dqtaudio=true
-		-Dsongchange=treu
+		-Dsongchange=true
 		-Dadplug=false # not packaged
 		-Dgtk=false
 		-Dopenmpt=false # not packaged
