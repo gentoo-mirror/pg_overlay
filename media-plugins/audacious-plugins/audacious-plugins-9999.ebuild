@@ -105,7 +105,7 @@ src_configure() {
 	local emesonargs=(
 		-Dmpris2=true
 		-Dqt6=true
-		-Dqtaudio=true
+		-Dqtaudio=false
 		-Dsongchange=true
 		-Dadplug=false # not packaged
 		-Dgtk=false
