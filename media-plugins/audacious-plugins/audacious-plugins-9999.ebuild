@@ -88,16 +88,16 @@ pkg_setup() {
 
 src_prepare() {
 	default
-	if ! use nls; then
-		sed -e "/SUBDIRS/s/ po//" -i Makefile || die # bug #512698
-	fi
+	#if ! use nls; then
+	#	sed -e "/SUBDIRS/s/ po//" -i Makefile || die # bug #512698
+	#fi
 
 	rm_loc() {
 		rm -vf "po/${1}.po" || die
 		sed -i s/${1}.po// po/Makefile || die
 	}
-	plocale_find_changes po "" ".po"
-	plocale_for_each_disabled_locale rm_loc
+	#plocale_find_changes po "" ".po"
+	#plocale_for_each_disabled_locale rm_loc
 
 }
 
