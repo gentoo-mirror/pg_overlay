@@ -1,13 +1,13 @@
 # Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk ko lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
 
 inherit cmake xdg plocale
 [[ ${PV} = 9999 ]] && inherit subversion
 
-DESCRIPTION="Q65-based audio player with winamp/xmms skins support"
+DESCRIPTION="Q6-based audio player with winamp/xmms skins support"
 HOMEPAGE="http://qmmp.ylsoftware.com"
 if [[ ${PV} != 9999 ]]; then
 	SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2
@@ -46,7 +46,7 @@ RDEPEND="
 		dev-libs/libcdio-paranoia
 	)
 	curl? ( net-misc/curl )
-	dbus? ( dev-qt/qtdbus:5 )
+	dbus? ( dev-qt/qtbase:6[dbus] )
 	enca? ( app-i18n/enca )
 	ffmpeg? ( media-video/ffmpeg:= )
 	flac? ( media-libs/flac )
@@ -67,12 +67,11 @@ RDEPEND="
 	opus? ( media-libs/opusfile )
 	pipewire? ( media-video/pipewire )
 	projectm? (
-		dev-qt/qtgui:5[-gles2-only]
-		dev-qt/qtopengl:5
+		dev-qt/qtbast:6[gui,opengl]
 		media-libs/libprojectm:=
 	)
 	pulseaudio? ( >=media-sound/pulseaudio-0.9.9 )
-	qtmedia? ( dev-qt/qtmultimedia:5 )
+	qtmedia? ( dev-qt/qtmultimedia:6 )
 	scrobbler? ( net-misc/curl )
 	shout? ( media-libs/libshout )
 	sid? ( >=media-libs/libsidplayfp-1.1.0 )
@@ -160,7 +159,7 @@ src_configure() {
 		-DUSE_SOXR="$(usex soxr)"
 		-DUSE_STEREO="$(usex stereo)"
 		-DUSE_STATICON="$(usex tray)"
-		-DUSE_UDISKS2="$(usex udisks)"
+		-DUSE_UDISKS="$(usex udisks)"
 		-DUSE_VORBIS="$(usex vorbis)"
 		-DUSE_WAVPACK="$(usex wavpack)"
 		-DUSE_XMP="$(usex xmp)"
