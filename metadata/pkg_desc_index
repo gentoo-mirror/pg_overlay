@@ -114,11 +114,9 @@ media-libs/libtgvoip 2.4.4_p20230929: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/tg_owt 0_pre20230921: WebRTC build for Telegram
-media-plugins/audacious-plugins 9999: Lightweight and versatile audio player
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/SkyMPC 9999: a simple MPD (Music Player Daemon) client, powerd by Qt
-media-sound/audacious 9999: Lightweight and versatile audio player
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
@@ -127,7 +125,7 @@ media-sound/mpd 0.23.14: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
-media-sound/qmmp 9999 9999-r6: Q65-based audio player with winamp/xmms skins support
+media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD project
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
