@@ -279,10 +279,10 @@ pkg_setup() {
 
 src_prepare() {
 	# Clear vendor checksums for crates that we patched to bump libc.
-	for i in addr2line-0.20.0 bstr cranelift-jit crossbeam-channel elasticlunr-rs handlebars icu_locid libffi \
-		terminal_size tracing-tree; do
-		clear_vendor_checksums "${i}"
-	done
+	#for i in addr2line-0.20.0 bstr cranelift-jit crossbeam-channel elasticlunr-rs handlebars icu_locid libffi \
+	#	terminal_size tracing-tree; do
+	#	clear_vendor_checksums "${i}"
+	#done
 
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
