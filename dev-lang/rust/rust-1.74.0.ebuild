@@ -166,11 +166,10 @@ RESTRICT="test"
 VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
-	"${FILESDIR}"/1.72.0-bump-libc-deps-to-0.2.146.patch
 	"${FILESDIR}"/1.70.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system.patch
-	"${FILESDIR}"0003-compiler-Change-LLVM-targets.patch
+	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
