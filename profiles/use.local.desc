@@ -169,9 +169,6 @@ media-libs/libheif:gdk-pixbuf - Enable x11-libs/gdk-pixbuf plugin
 media-libs/libheif:go - Enable building dev-lang/go code/examples
 media-libs/libheif:rav1e - Use media-video/rav1e for AVIF encoding
 media-libs/libheif:x265 - Use media-libs/x265 for HEIF encoding
-media-libs/libplacebo:glslang - Use dev-util/glslang to compile GLSL
-media-libs/libplacebo:lcms - Add support for color management via media-libs/lcms
-media-libs/libplacebo:shaderc - Use media-libs/shaderc to compile GLSL
 media-libs/libpulse:asyncns - Use libasyncns for asynchronous name resolution.
 media-libs/libpulse:doc - Build the doxygen-described API documentation.
 media-libs/libpulse:glib - Add support to dev-libs/glib-based mainloop for the libpulse client library, to allow using libpulse on glib-based programs.
