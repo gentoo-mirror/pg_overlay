@@ -11,7 +11,7 @@ DESCRIPTION="Program for querying and changing monitor settings"
 HOMEPAGE="https://www.ddcutil.com/"
 SRC_URI="https://github.com/rockowitz/ddcutil/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
-SLOT="0/4"
+SLOT="0/5"
 LICENSE="GPL-2"
 KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 IUSE="drm usb-monitor user-permissions video_cards_nvidia X"
@@ -40,7 +40,7 @@ BDEPEND="virtual/pkgconfig"
 # doc? ( app-doc/doxygen[dot] )
 
 PATCHES=(
-	"${FILESDIR}"/${P}-no-werror.patch
+	"${FILESDIR}"/${PN}-1.4.1-no-werror.patch
 )
 
 pkg_pretend() {
@@ -79,9 +79,9 @@ src_configure() {
 src_install() {
 	default
 	if use user-permissions; then
-		udev_dorules data/etc/udev/rules.d/45-ddcutil-i2c.rules
+		udev_dorules data/etc/udev/rules.d/60-ddcutil-i2c.rules
 		if use usb-monitor; then
-			udev_dorules data/etc/udev/rules.d/45-ddcutil-usb.rules
+			udev_dorules data/etc/udev/rules.d/60-ddcutil-usb.rules
 		fi
 	fi
 }
