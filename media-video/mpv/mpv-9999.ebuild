@@ -222,7 +222,6 @@ src_configure() {
 		$(meson_feature raspberry-pi rpi)
 
 		$(meson_feature vulkan)
-		$(meson_feature vulkan shaderc)
 
 		# hardware decoding
 		$(meson_feature nvenc cuda-hwaccel)
