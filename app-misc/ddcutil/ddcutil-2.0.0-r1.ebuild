@@ -18,6 +18,7 @@ IUSE="drm usb-monitor user-permissions video_cards_nvidia X"
 
 RDEPEND="
 	dev-libs/glib:2
+	>=dev-libs/jansson-2
 	sys-apps/i2c-tools
 	virtual/udev
 	drm? ( x11-libs/libdrm )
@@ -41,6 +42,7 @@ BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.4.1-no-werror.patch
+	"${FILESDIR}"/${PN}-2.0.0-fix-build-with-usb-monitor-disabled.patch
 )
 
 pkg_pretend() {
