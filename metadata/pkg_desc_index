@@ -9,7 +9,7 @@ app-emulation/qt-virt-manager 0.72.98: A GUI application for managing virtual ma
 app-emulation/spice 0.15.1-r1: SPICE server
 app-emulation/virt-manager 4.1.0: A graphical tool for administering virtual machines
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
-app-misc/ddcutil 2.0.0: Program for querying and changing monitor settings
+app-misc/ddcutil 2.0.0-r1: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
