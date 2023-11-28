@@ -100,7 +100,7 @@ kde-frameworks/plasma 5.112.0: Plasma library and runtime components based upon 
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.27.9: Tools based on KDE Frameworks 5 to better interact with the system
-mail-client/thunderbird 115.5.0: Thunderbird Mail Client
+mail-client/thunderbird 115.5.1: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
