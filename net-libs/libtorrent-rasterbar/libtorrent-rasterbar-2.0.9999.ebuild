@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 inherit cmake git-r3 python-single-r1
 
 DESCRIPTION="C++ BitTorrent implementation focusing on efficiency and scalability"

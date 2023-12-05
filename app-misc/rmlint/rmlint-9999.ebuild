@@ -4,7 +4,7 @@
 EAPI=7
 
 PLOCALES="de es fr"
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..13} )
 
 inherit git-r3 gnome2-utils plocale python-single-r1 scons-utils
 
