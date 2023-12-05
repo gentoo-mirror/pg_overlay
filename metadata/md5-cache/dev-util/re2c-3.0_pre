@@ -1,4 +1,4 @@
-BDEPEND=test? ( || ( dev-lang/python:3.12 dev-lang/python:3.11 dev-lang/python:3.10 ) ) sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7
+BDEPEND=test? ( || ( dev-lang/python:3.12 dev-lang/python:3.11 ) ) sys-devel/gnuconfig >=app-portage/elt-patches-20170815 || ( >=sys-devel/automake-1.16.5:1.16 ) >=sys-devel/autoconf-2.71-r5 >=sys-devel/libtool-2.4.7
 DEFINED_PHASES=configure install setup
 DESCRIPTION=tool for generating C-based recognizers from regular expressions
 EAPI=8
@@ -11,4 +11,4 @@ RESTRICT=!test? ( test ) mirror
 SLOT=0
 SRC_URI=https://github.com/skvadrik/re2c/releases/download/3.0/re2c-3.0.tar.xz
 _eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	eed10cf5e5a06916e654d31f5a1925cc	multilib	c19072c3cd7ac5cb21de013f7e9832e0	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	6ae9a4347149b19a112caa1182d03bde	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	python-utils-r1	e989dbdcbb647bd8655857c1f95be244	python-any-r1	f5169813d1619761b459800587005fd2	poly-c_ebuilds	94632ea3c879766ab5e30bb33d1a3bba
-_md5_=69c469c1d23384331d34bc816681f756
+_md5_=ca69c48155762c27501bd26baa0ee03f
