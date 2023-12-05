@@ -90,7 +90,7 @@ if [[ ${PV} != *_alpha* ]]; then
 	"
 fi
 
-VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/python.org.asc
+VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/python.org.asc
 
 # large file tests involve a 2.5G file being copied (duplicated)
 CHECKREQS_DISK_BUILD=5500M
@@ -255,11 +255,11 @@ src_configure() {
 			# failed on my systems
 			-x test_bdb
 			-x test_doctest
-			-x test_distutils
+			#-x test_distutils
 			-x test_import
 			-x test_importlib
-			-x test_runpy
 			-x test_pickle
+			-x test_runpy
 			-x test_support
 		)
 
