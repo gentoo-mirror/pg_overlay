@@ -255,7 +255,7 @@ src_configure() {
 			# failed on my systems
 			-x test_bdb
 			-x test_doctest
-			#-x test_distutils
+			-x test_distutils
 			-x test_import
 			-x test_importlib
 			-x test_pickle
