@@ -15,8 +15,8 @@ app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.22.10.20: Python scripts to manipulate trash cans via the command line
 app-misc/worker 4.11.0: Worker Filemanager: Amiga Directory Opus 4 clone
-app-office/libreoffice 7.6.3.2: A full office productivity suite
-app-office/libreoffice-l10n 7.6.3.2: Translations for the Libreoffice suite
+app-office/libreoffice 7.6.4.1: A full office productivity suite
+app-office/libreoffice-l10n 7.6.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.36.7: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
@@ -51,6 +51,7 @@ dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus I
 dev-libs/re2 0.2023.11.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
+dev-python/cloudscraper 1.2.69: A Python module to bypass Cloudflare's anti-bot page
 dev-python/numpy 1.26.2: Fast array and numerical python library
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
