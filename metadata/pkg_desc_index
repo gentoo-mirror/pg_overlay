@@ -29,6 +29,7 @@ dev-cpp/glibmm 2.77.0: C++ interface for glib2
 dev-cpp/highway 1.0.7: Performance-portable, length-agnostic SIMD with runtime dispatch
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
+dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.11.7 3.12.0_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.74.0: Systems programming language from Mozilla
