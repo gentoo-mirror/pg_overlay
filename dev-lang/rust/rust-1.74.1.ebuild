@@ -163,7 +163,7 @@ QA_EXECSTACK="usr/lib/${PN}/${PV}/lib/rustlib/*/lib*.rlib:lib.rmeta"
 # causes double bootstrap
 RESTRICT="test"
 
-VERIFY_SIG_OPENPGP_KEY_PATH=${BROOT}/usr/share/openpgp-keys/rust.asc
+VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
 	"${FILESDIR}"/1.70.0-ignore-broken-and-non-applicable-tests.patch
@@ -278,6 +278,7 @@ pkg_setup() {
 
 src_prepare() {
 	# Clear vendor checksums for crates that we patched to bump libc.
+	# NOTE: refresh this on each bump.
 	#for i in addr2line-0.20.0 bstr cranelift-jit crossbeam-channel elasticlunr-rs handlebars icu_locid libffi \
 	#	terminal_size tracing-tree; do
 	#	clear_vendor_checksums "${i}"
