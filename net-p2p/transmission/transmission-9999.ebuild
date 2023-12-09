@@ -46,7 +46,7 @@ COMMON_DEPEND="
 	sys-libs/zlib:=
 	nls? ( virtual/libintl )
 	gtk? (
-		>=dev-cpp/gtkmm-3.24.0:4.0
+		>=dev-cpp/gtkmm-4.11.1:4.0
 		>=dev-cpp/glibmm-2.60.0:2.68
 		appindicator? ( dev-libs/libayatana-appindicator )
 	)
@@ -69,13 +69,6 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	${ACCT_DEPEND}
 "
-
-src_prepare() {
-	default
-	sed -i 's/3.00+/3.00/g' CMakeLists.txt
-	sed -i 's/TR300Z/TR3000/g' CMakeLists.txt
-	cmake_src_prepare
-}
 
 src_configure() {
 	local mycmakeargs=(
