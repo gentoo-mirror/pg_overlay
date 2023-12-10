@@ -430,7 +430,8 @@ www-client/firefox:system-png - Use the system-wide media-libs/libpng instead of
 www-client/firefox:system-python-libs - Use system's python site instead of bundled python libraries
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled
 www-client/firefox:wifi - Enable necko-wifi for NetworkManager integration, and access point MAC address scanning for better precision with opt-in geolocation services
-www-client/vivaldi-snapshot:proprietary-codecs - Use system media-video/ffmpeg to support patent-encumbered media codecs
+www-client/vivaldi-snapshot:ffmpeg-chromium - Use Chromium FFmpeg fork (media-video/ffmpeg-chromium) rather than mainline FFmpeg (media-video/ffmpeg)
+www-client/vivaldi-snapshot:proprietary-codecs - Use system FFmpeg library to support patent-encumbered media codecs
 www-client/vivaldi-snapshot:widevine - Unsupported closed-source DRM capability (required by Netflix VOD)
 x11-base/xwayland:libei - Enable emulated input using dev-libs/libei
 x11-base/xwayland:unwind - Enable libunwind usage for backtraces
