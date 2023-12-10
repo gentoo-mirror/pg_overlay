@@ -30,6 +30,7 @@ PYTHON_COMPAT=( python3_{11..12} )
 inherit flag-o-matic meson-multilib optfeature prefix python-any-r1 tmpfiles udev
 
 if [[ ${PV} == 9999 ]]; then
+	PIPEWIRE_DOCS_PREBUILT=0
 	EGIT_REPO_URI="https://gitlab.freedesktop.org/${PN}/${PN}.git"
 	inherit git-r3
 else
@@ -46,7 +47,7 @@ else
 		PIPEWIRE_DOCS_USEFLAG="man"
 	fi
 
-	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~riscv ~x86"
+	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
 DESCRIPTION="Multimedia processing graphs"
@@ -189,8 +190,6 @@ src_prepare() {
 
 	# Used for upstream backports
 	[[ -d "${FILESDIR}"/${PV} ]] && eapply "${FILESDIR}"/${PV}
-
-	#sed -i "s/volume = merge/volume = ignore/g" spa/plugins/alsa/mixer/paths/analog-output.conf.common
 }
 
 multilib_src_configure() {
