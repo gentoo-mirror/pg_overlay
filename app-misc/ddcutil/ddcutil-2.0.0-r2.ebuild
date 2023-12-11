@@ -13,7 +13,7 @@ SRC_URI="https://github.com/rockowitz/ddcutil/archive/v${PV}.tar.gz -> ${P}.tar.
 
 SLOT="0/5"
 LICENSE="GPL-2"
-KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~x86"
 IUSE="drm usb-monitor user-permissions video_cards_nvidia X"
 
 RDEPEND="
@@ -81,9 +81,9 @@ src_configure() {
 src_install() {
 	default
 	if use user-permissions; then
-		udev_dorules data/etc/udev/rules.d/60-ddcutil-i2c.rules
+		udev_dorules data/usr/lib/udev/rules.d/60-ddcutil-i2c.rules
 		if use usb-monitor; then
-			udev_dorules data/etc/udev/rules.d/60-ddcutil-usb.rules
+			udev_dorules data/usr/lib/udev/rules.d/60-ddcutil-usb.rules
 		fi
 	fi
 }
