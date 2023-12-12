@@ -104,7 +104,7 @@ kde-frameworks/plasma 5.112.0: Plasma library and runtime components based upon 
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.27.10: Tools based on KDE Frameworks 5 to better interact with the system
-mail-client/thunderbird 115.5.1: Thunderbird Mail Client
+mail-client/thunderbird 115.5.2: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
@@ -179,7 +179,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.74.0: Virtual for Rust language compiler
 www-client/firefox 120.0.1: Firefox Web Browser
-www-client/vivaldi-snapshot 6.5.3206.29: A browser for our friends
+www-client/vivaldi-snapshot 6.5.3206.33: A browser for our friends
 x11-base/xwayland 23.2.2: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.38: Gimp ToolKit +
