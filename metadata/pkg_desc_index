@@ -99,8 +99,7 @@ kde-apps/print-manager 23.07.90: Manage print jobs and printers in Plasma
 kde-apps/spectacle 23.07.90: Screenshot capture utility
 kde-apps/sweeper 23.07.90: Privacy settings widget to clean unwanted traces on the system
 kde-apps/yakuake 23.07.90: Quake-style terminal emulator based on konsole
-kde-frameworks/kdelibs4support 5.112.0: Framework easing the development transition from KDELibs 4 to KF 5
-kde-frameworks/plasma 5.112.0: Plasma library and runtime components based upon KF5 and Qt5
+kde-frameworks/kdelibs4support 5.113.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.27.10: Tools based on KDE Frameworks 5 to better interact with the system
@@ -180,7 +179,7 @@ virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.74.0: Virtual for Rust language compiler
 www-client/firefox 120.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.5.3206.33: A browser for our friends
-x11-base/xwayland 23.2.2: Standalone X server running under Wayland
+x11-base/xwayland 23.2.3: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.38: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
