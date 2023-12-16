@@ -3,16 +3,16 @@
 
 EAPI=8
 
-inherit cmake-multilib elisp-common toolchain-funcs
+inherit cmake-multilib elisp-common toolchain-funcs poly-c_ebuilds
 
-if [[ "${PV}" == *9999 ]]; then
+if [[ "${MY_PV}" == *9999 ]]; then
 	inherit git-r3
 
 	EGIT_REPO_URI="https://github.com/protocolbuffers/protobuf.git"
 	EGIT_SUBMODULES=()
 else
-	SRC_URI="https://github.com/protocolbuffers/protobuf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~mips ~ppc64 ~riscv ~x86 ~amd64-linux ~x86-linux ~x64-macos"
+	SRC_URI="https://github.com/protocolbuffers/protobuf/archive/v${MY_PV}.tar.gz -> ${MY_P}.tar.gz"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~mips ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-macos"
 fi
 
 DESCRIPTION="Google's Protocol Buffers - Extensible mechanism for serializing structured data"
@@ -25,12 +25,12 @@ RESTRICT="!test? ( test )"
 
 BDEPEND="emacs? ( app-editors/emacs:* )"
 DEPEND="
-	dev-cpp/abseil-cpp:=[${MULTILIB_USEDEP}]
+	>=dev-cpp/abseil-cpp-20230125.3:=[${MULTILIB_USEDEP}]
 	zlib? ( sys-libs/zlib[${MULTILIB_USEDEP}] )
 	test? ( >=dev-cpp/gtest-1.9[${MULTILIB_USEDEP}] )
 "
 RDEPEND="
-	dev-cpp/abseil-cpp:=[${MULTILIB_USEDEP}]
+	>=dev-cpp/abseil-cpp-20230125.3:=[${MULTILIB_USEDEP}]
 	emacs? ( app-editors/emacs:* )
 	zlib? ( sys-libs/zlib[${MULTILIB_USEDEP}] )
 "
