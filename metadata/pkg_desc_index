@@ -72,6 +72,7 @@ gui-apps/wev 9999: Wayland event viewer
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/wlroots 9999: Pluggable, composable, unopinionated modules for building a Wayland compositor
 kde-frameworks/kdelibs4support 5.113.0: Framework easing the development transition from KDELibs 4 to KF 5
+kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-misc/kweather 9999: Library for retrieval of weather information including forecasts and alerts
 kde-plasma/kde-cli-tools 5.27.10: Tools based on KDE Frameworks 5 to better interact with the system
