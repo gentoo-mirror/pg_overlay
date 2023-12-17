@@ -6,7 +6,7 @@ EAPI=8
 ECM_HANDBOOK="optional"
 KFMIN=5.240.0
 QTMIN=6.6.1
-inherit ecm kde.org
+inherit ecm gear.kde.org
 
 DESCRIPTION="Frontend to diff3 based on KDE Frameworks"
 HOMEPAGE="https://apps.kde.org/kdiff3/ https://userbase.kde.org/KDiff3"
