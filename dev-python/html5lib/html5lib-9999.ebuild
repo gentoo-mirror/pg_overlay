@@ -15,6 +15,7 @@ HOMEPAGE="
 	https://html5lib.readthedocs.io/
 	https://pypi.org/project/html5lib/
 "
+EGIT_REPO_URI="https://github.com/${PN}/${PN}-python.git"
 
 LICENSE="MIT"
 SLOT="0"
