@@ -93,10 +93,6 @@ dev-util/sccache:dist-server - Enables the sccache-dist binary
 dev-util/sccache:gcs - Enable Google Cloud Storage support
 dev-util/sccache:redis - Enable Redis support
 dev-util/sccache:s3 - Enable Amazon S3 support
-gui-libs/wlroots:X - Enable support for X11 applications (XWayland)
-gui-libs/wlroots:tinywl - Install the minimal wayland client, tinywl
-gui-libs/wlroots:vulkan - Enable support for the vulkan backend renderer
-gui-libs/wlroots:x11-backend - Enable support for handling input/output devices through x11-libs/libxcb
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
