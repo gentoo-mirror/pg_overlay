@@ -7,7 +7,7 @@ DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{10..12} pypy3 )
 PYTHON_REQ_USE="xml(+)"
 
-inherit git-r3 distutils-r1 pypi
+inherit git-r3 distutils-r1
 
 DESCRIPTION="HTML parser based on the HTML5 specification"
 HOMEPAGE="
