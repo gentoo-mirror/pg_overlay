@@ -50,7 +50,6 @@ COMMON_DEPEND="
 	media-libs/tiff:=
 	activities? ( >=kde-plasma/plasma-activities-${KFMIN}:6 )
 	fits? ( sci-libs/cfitsio )
-	raw? ( >=kde-apps/libkdcraw-${PVCUT}:6 )
 	semantic-desktop? (
 		>=kde-frameworks/baloo-${KFMIN}:6
 		>=kde-frameworks/kfilemetadata-${KFMIN}:6
