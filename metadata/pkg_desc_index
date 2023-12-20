@@ -77,7 +77,7 @@ kde-apps/libkomparediff2 9999: KDE library to compare files and strings
 kde-frameworks/kdelibs4support 5.113.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
-kde-plasma/kde-cli-tools 5.27.10: Tools based on KDE Frameworks 5 to better interact with the system
+kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 mail-client/thunderbird 115.5.2: Thunderbird Mail Client
 media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
