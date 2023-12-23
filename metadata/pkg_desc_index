@@ -74,6 +74,7 @@ gui-apps/wev 9999: Wayland event viewer
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 kde-apps/gwenview 9999: Image viewer by KDE
 kde-apps/kompare 9999: A program to view the differences between files
+kde-apps/libkdcraw 9999: Digital camera raw image library wrapper
 kde-apps/libkomparediff2 9999: KDE library to compare files and strings
 kde-frameworks/kdelibs4support 5.113.0: Framework easing the development transition from KDELibs 4 to KF 5
 kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
@@ -138,6 +139,7 @@ sci-calculators/qalculate-qt 4.7.0: Multi-purpose cross-platform desktop calcula
 sci-libs/libqalculate 4.7.0: A modern multi-purpose calculator library
 sci-mathematics/mathematica 13.3.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
+sys-apps/openrazer 3.7.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999: The systemd project's logind, extracted to a standalone package

@@ -347,6 +347,8 @@ sci-libs/libqalculate:hardened - Disable unsafe functions like 'command' and var
 sci-mathematics/mathematica:R - Enable dev-lang/R backend support
 sci-mathematics/mathematica:cuda - Install with cuda support
 sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support
+sys-apps/openrazer:client - Build the OpenRazer daemon client
+sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
 sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
