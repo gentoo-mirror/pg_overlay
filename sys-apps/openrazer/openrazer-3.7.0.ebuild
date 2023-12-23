@@ -110,7 +110,7 @@ src_compile() {
 		emake -C "${S}/daemon" PREFIX=/usr service
 	fi
 
-	readme.gentoo_create_doc
+	#readme.gentoo_create_doc
 }
 
 src_test() {
