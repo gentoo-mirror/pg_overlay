@@ -80,6 +80,7 @@ dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
 dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
+dev-python/pyudev:qt5 - Install PyQt5 bindings
 dev-qt/qtwebengine:designer - Install the QWebEngineView plugin used to add widgets in dev-qt/designer forms that display web pages.
 dev-qt/qtwebengine:jumbo-build - Combine source files to speed up build process.
 dev-qt/qtwebengine:pdfium - Build the QtPdf module based on chromium's PDFium library
