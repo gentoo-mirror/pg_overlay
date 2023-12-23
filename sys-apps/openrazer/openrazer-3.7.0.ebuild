@@ -160,7 +160,7 @@ pkg_postinst() {
 		xdg_desktop_database_update
 	fi
 
-	readme.gentoo_print_elog
+	#readme.gentoo_print_elog
 }
 
 pkg_postrm() {
