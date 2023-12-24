@@ -67,7 +67,7 @@ RDEPEND="${COMMON_DEPEND}
 PDEPEND="
 	adwaita-icon-theme? ( gnome-base/librsvg[${MULTILIB_USEDEP}]
 	  >=x11-themes/adwaita-icon-theme-3.14 )
-	!adwaita-icon-theme? ( x11-themes/hicolor-icon-theme virtual/freedesktop-icon-theme )
+	!adwaita-icon-theme? ( virtual/freedesktop-icon-theme )
 	vim-syntax? ( app-vim/gtk-syntax )
 "
 BDEPEND="
