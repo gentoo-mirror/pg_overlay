@@ -3,25 +3,22 @@
 
 EAPI=8
 
-inherit gnome2 meson-multilib multilib virtualx
+inherit gnome2 meson-multilib multilib toolchain-funcs virtualx
 
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="https://www.gtk.org/"
-SRC_URI="${SRC_URI-}"
 
 LICENSE="LGPL-2+"
 SLOT="3"
 IUSE="adwaita-icon-theme aqua atk-bridge broadway cloudproviders colord cups examples gtk-doc +introspection sysprof test vim-syntax wayland +X xinerama"
 REQUIRED_USE="
 	|| ( aqua wayland X )
+	test? ( X )
 	xinerama? ( X )
 "
+RESTRICT="!test? ( test )"
 
-KEYWORDS="~alpha amd64 arm arm64 hppa ~ia64 ~loong ~mips ppc ppc64 ~riscv ~s390 sparc x86 ~amd64-linux ~x86-linux ~ppc-macos ~sparc-solaris ~sparc64-solaris ~x64-solaris ~x86-solaris"
-
-# Upstream wants us to do their job:
-# https://bugzilla.gnome.org/show_bug.cgi?id=768662#c1
-RESTRICT="test"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-solaris"
 
 COMMON_DEPEND="
 	atk-bridge? ( >=app-accessibility/at-spi2-core-2.46.0[introspection?,${MULTILIB_USEDEP}] )
@@ -29,7 +26,7 @@ COMMON_DEPEND="
 	>=dev-libs/glib-2.57.2:2[${MULTILIB_USEDEP}]
 	media-libs/fontconfig[${MULTILIB_USEDEP}]
 	>=media-libs/harfbuzz-2.2.0:=
-	>=media-libs/libepoxy-1.4[X(+)?,${MULTILIB_USEDEP}]
+	>=media-libs/libepoxy-1.4[X(+)?,egl(+),${MULTILIB_USEDEP}]
 	virtual/libintl[${MULTILIB_USEDEP}]
 	>=x11-libs/cairo-1.14[aqua?,glib,svg(+),X?,${MULTILIB_USEDEP}]
 	>=x11-libs/gdk-pixbuf-2.30:2[introspection?,${MULTILIB_USEDEP}]
@@ -61,10 +58,6 @@ COMMON_DEPEND="
 	)
 "
 DEPEND="${COMMON_DEPEND}
-	test? (
-		media-fonts/font-cursor-misc
-		media-fonts/font-misc-misc
-	)
 	X? ( x11-base/xorg-proto )
 "
 RDEPEND="${COMMON_DEPEND}
@@ -93,6 +86,7 @@ BDEPEND="
 		app-text/docbook-xml-dtd:4.3
 		>=dev-util/gtk-doc-1.20
 	)
+	test? ( sys-apps/dbus )
 "
 
 MULTILIB_CHOST_TOOLS=(
@@ -128,7 +122,7 @@ multilib_src_configure() {
 		# user overridden GTK_IM_MODULE envvar
 		-Dbuiltin_immodules=backend
 		-Dman=true
-		-Dtests=false
+		$(meson_use test tests)
 		-Dtracker3=false
 	)
 	meson_src_configure
@@ -139,7 +133,7 @@ multilib_src_compile() {
 }
 
 multilib_src_test() {
-	virtx meson_src_test
+	virtx dbus-run-session meson test -C "${BUILD_DIR}" --timeout-multiplier 4 || die
 }
 
 multilib_src_install() {
