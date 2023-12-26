@@ -31,7 +31,7 @@ dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
-dev-lang/python 3.11.7 3.12.1: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.74.1: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/boost 1.84.0_pre: Boost Libraries for C++
@@ -136,7 +136,7 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
-sci-calculators/qalculate-qt 4.7.0: Multi-purpose cross-platform desktop calculator
+sci-calculators/qalculate-qt 4.9.0: Qt-based UI for libqalculate
 sci-libs/libqalculate 4.9.0: A modern multi-purpose calculator library
 sci-mathematics/mathematica 13.3.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
