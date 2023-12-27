@@ -8,10 +8,7 @@ app-emulation/qt-virt-manager 0.72.98: A GUI application for managing virtual ma
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.0.0-r2: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
-app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-misc/trash-cli 0.22.10.20: Python scripts to manipulate trash cans via the command line
-app-misc/worker 4.11.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.6.4.1: A full office productivity suite
 app-office/libreoffice-l10n 7.6.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.36.7: Search and query ebuilds
@@ -27,13 +24,11 @@ dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.78.0: C++ interface for glib2
 dev-cpp/highway 1.0.7: Performance-portable, length-agnostic SIMD with runtime dispatch
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
-dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.74.1: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
-dev-libs/boost 1.84.0_pre: Boost Libraries for C++
 dev-libs/glib 2.78.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.78.1: Introspection system for GObject-based libraries
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
@@ -48,7 +43,6 @@ dev-libs/liborcus 0.18.1: Standalone file import filter library for spreadsheet 
 dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 25.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
-dev-libs/qrcodegen 1.7.0: High-quality QR Code generator library in Java, TypeScript/JavaScript, Python, C++, C, Rust.
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/re2 0.2023.11.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
@@ -85,7 +79,6 @@ kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 mail-client/thunderbird 115.5.2: Thunderbird Mail Client
-media-gfx/exiv2 0.28.1-r1: EXIF, IPTC and XMP metadata C++ library and command line utility
 media-libs/fontconfig 2.15.0: A library for configuring and customizing font access
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
