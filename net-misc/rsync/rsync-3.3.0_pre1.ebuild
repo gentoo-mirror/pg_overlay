@@ -77,7 +77,7 @@ else
 fi
 
 PATCHES=(
-	"${FILESDIR}"/${P}-flist-memcmp-ub.patch
+	"${FILESDIR}"/${PN}-3.2.7-flist-memcmp-ub.patch
 )
 
 pkg_setup() {
