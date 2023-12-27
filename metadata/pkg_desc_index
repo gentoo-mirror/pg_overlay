@@ -9,7 +9,6 @@ app-emulation/qt-virt-manager 0.72.98: A GUI application for managing virtual ma
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.0.0-r2: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
-app-misc/pax-utils 1.3.7: ELF utils that can check files for security relevant properties
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.22.10.20: Python scripts to manipulate trash cans via the command line
@@ -33,7 +32,6 @@ dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
-dev-lang/python-exec 2.4.10: Python script wrapper
 dev-lang/rust 1.74.1: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/boost 1.84.0_pre: Boost Libraries for C++
@@ -90,7 +88,6 @@ kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 mail-client/thunderbird 115.5.2: Thunderbird Mail Client
 media-gfx/exiv2 0.28.1-r1: EXIF, IPTC and XMP metadata C++ library and command line utility
-media-libs/alsa-lib 1.2.10-r3: Advanced Linux Sound Architecture Library
 media-libs/fontconfig 2.15.0: A library for configuring and customizing font access
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
@@ -134,14 +131,17 @@ media-video/smplayer 23.6.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.11.8 4.12.2: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
+net-libs/libpsl 0.21.2: C library for the Public Suffix List
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 21.5.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
-net-libs/serf 1.3.9-r3: HTTP client library
+net-libs/serf 1.3.9-r4: HTTP client library
 net-libs/tdlib 1.7.0 1.8.0 9999: Cross-platform library for building Telegram clients
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
+net-misc/rsync 3.3.0_pre1: File transfer program to keep remote files into sync
 net-misc/spice-gtk 0.42-r3: Set of GObject and Gtk objects for connecting to Spice servers and a client GUI
+net-misc/wget 1.21.4: Network utility to retrieve files from the WWW
 net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/deluge 9999: BitTorrent client with a client/server model
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
@@ -154,7 +154,9 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 sci-calculators/qalculate-qt 4.9.0: Qt-based UI for libqalculate
 sci-libs/libqalculate 4.9.0: A modern multi-purpose calculator library
 sci-mathematics/mathematica 13.3.1: Wolfram Mathematica
+sys-apps/accountsservice 23.13.9: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
+sys-apps/coreutils 9.4: Standard GNU utilities (chmod, cp, dd, ls, sort, tr, head, wc, who,...)
 sys-apps/openrazer 3.7.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.0: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
@@ -168,7 +170,6 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
-sys-libs/libseccomp 2.5.5: high level interface to Linux seccomp filter
 sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 17.0.6: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
