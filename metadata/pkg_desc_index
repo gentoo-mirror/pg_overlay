@@ -1,6 +1,5 @@
 app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
-app-cdr/dolphin-plugins-mountiso 23.07.90: Dolphin plugin for ISO loopback device mounting
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.9_p20221023: Hex editor library, Qt application written in C++ with Python bindings
@@ -153,9 +152,7 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 sci-calculators/qalculate-qt 4.9.0: Qt-based UI for libqalculate
 sci-libs/libqalculate 4.9.0: A modern multi-purpose calculator library
 sci-mathematics/mathematica 13.3.1: Wolfram Mathematica
-sys-apps/accountsservice 23.13.9: D-Bus interfaces for querying and manipulating user account information
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/coreutils 9.4: Standard GNU utilities (chmod, cp, dd, ls, sort, tr, head, wc, who,...)
 sys-apps/openrazer 3.7.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.0: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice

@@ -359,14 +359,6 @@ sci-libs/libqalculate:hardened - Disable unsafe functions like 'command' and var
 sci-mathematics/mathematica:R - Enable dev-lang/R backend support
 sci-mathematics/mathematica:cuda - Install with cuda support
 sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support
-sys-apps/accountsservice:elogind - Use sys-auth/elogind for session tracking
-sys-apps/accountsservice:systemd - Use sys-apps/systemd for session tracking
-sys-apps/coreutils:caps - Add Linux capabilities support in output of file utilities (ls, dir, ...) via sys-libs/libcap
-sys-apps/coreutils:hostname - Build the hostname program
-sys-apps/coreutils:kill - Build the kill program
-sys-apps/coreutils:multicall - Build all tools into a single `coreutils` program akin to busybox to save space
-sys-apps/coreutils:openssl - Use openssl libcrypto hash routines for hash functions
-sys-apps/coreutils:split-usr - Enable this if /bin and /usr/bin are separate directories
 sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
