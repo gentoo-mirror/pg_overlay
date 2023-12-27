@@ -45,7 +45,6 @@ dev-libs/libevdev 1.13.1: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libinput 1.24.0: Library to handle input devices in Wayland
 dev-libs/libixion 0.18.1: General purpose formula parser & interpreter
-dev-libs/libnl 3.9.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
 dev-libs/liborcus 0.18.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
