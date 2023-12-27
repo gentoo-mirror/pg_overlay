@@ -3,14 +3,13 @@ app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-cdr/dolphin-plugins-mountiso 23.07.90: Dolphin plugin for ISO loopback device mounting
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
-app-editors/qhexedit2 0.8.8_p20200625: Hex editor library, Qt application written in C++ with Python bindings
+app-editors/qhexedit2 0.8.9_p20221023: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/aqemu 9999: Graphical interface for QEMU and KVM emulators, using Qt5
 app-emulation/qt-virt-manager 0.72.98: A GUI application for managing virtual machines
-app-emulation/spice 0.15.1-r1 0.15.2: SPICE server
-app-emulation/virt-manager 4.1.0-r1: A graphical tool for administering virtual machines
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.0.0-r2: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
+app-misc/pax-utils 1.3.7: ELF utils that can check files for security relevant properties
 app-misc/rbutil 9999: Rockbox open source firmware manager for music players
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.22.10.20: Python scripts to manipulate trash cans via the command line
@@ -18,31 +17,37 @@ app-misc/worker 4.11.0: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 7.6.4.1: A full office productivity suite
 app-office/libreoffice-l10n 7.6.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.36.7: Search and query ebuilds
+app-shells/bash-completion 2.11: Programmable Completion for bash
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/asciidoc 10.2.0: A plain text human readable/writable document format
 app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary lookup program
+app-text/iso-codes 4.15.0: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want directly to a pastebin
 dev-cpp/cppgir 0_p20231022 0_p20231105: GObject-Introspection C++ binding wrapper generator
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
-dev-cpp/glibmm 2.77.0: C++ interface for glib2
+dev-cpp/glibmm 2.78.0: C++ interface for glib2
 dev-cpp/highway 1.0.7: Performance-portable, length-agnostic SIMD with runtime dispatch
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-db/unixODBC 2.3.11_pre: complete ODBC driver manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
+dev-lang/python-exec 2.4.10: Python script wrapper
 dev-lang/rust 1.74.1: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/boost 1.84.0_pre: Boost Libraries for C++
-dev-libs/glib 2.77.0: The GLib library of C routines
+dev-libs/glib 2.78.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.78.1: Introspection system for GObject-based libraries
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
 dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/libdispatch 5.8: A library for concurrent code execution on multicore hardware
+dev-libs/libevdev 1.13.1: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
+dev-libs/libinput 1.24.0: Library to handle input devices in Wayland
 dev-libs/libixion 0.18.1: General purpose formula parser & interpreter
+dev-libs/libnl 3.9.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
 dev-libs/liborcus 0.18.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
@@ -57,6 +62,7 @@ dev-python/html5lib 9999: HTML parser based on the HTML5 specification
 dev-python/numpy 1.26.2: Fast array and numerical python library
 dev-python/pyudev 0.24.1: Python binding to libudev
 dev-qt/qtwebengine 6.7.9999: Library for rendering dynamic web content in Qt6 C++ and QML applications
+dev-util/android-tools 34.0.4: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
@@ -68,6 +74,7 @@ dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
 dev-util/scons 4.6.0: Extensible Python-based build utility
 dev-vcs/mercurial 6.6.1_pre: Scalable distributed SCM
+dev-vcs/subversion 1.14.2-r1: Advanced version control system
 games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
@@ -82,10 +89,17 @@ kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 mail-client/thunderbird 115.5.2: Thunderbird Mail Client
-media-gfx/sane-backends 1.1.1-r13: Scanner Access Now Easy - Backends
+media-gfx/exiv2 0.28.1-r1: EXIF, IPTC and XMP metadata C++ library and command line utility
+media-libs/alsa-lib 1.2.10-r3: Advanced Linux Sound Architecture Library
+media-libs/fontconfig 2.15.0: A library for configuring and customizing font access
+media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
+media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
 media-libs/libde265 1.0.14: Open h.265 video codec implementation
+media-libs/libdisplay-info 0.1.1: Simple framework for writing Vulkan layers
+media-libs/libepoxy 1.5.10-r2: Library for handling OpenGL function pointer management
+media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libheif 1.17.5: ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r4: Libraries for PulseAudio clients
@@ -93,6 +107,7 @@ media-libs/libsdl2 2.28.5: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20230929: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
+media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
 media-libs/tg_owt 0_pre20230921: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
@@ -121,7 +136,7 @@ net-im/telegram-desktop 4.11.8 4.12.2: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
-net-libs/nodejs 21.4.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
+net-libs/nodejs 21.5.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r3: HTTP client library
 net-libs/tdlib 1.7.0 1.8.0 9999: Cross-platform library for building Telegram clients
@@ -153,6 +168,7 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
+sys-libs/libseccomp 2.5.5: high level interface to Linux seccomp filter
 sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 17.0.6: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
