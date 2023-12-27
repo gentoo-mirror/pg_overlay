@@ -76,10 +76,6 @@ else
 	BDEPEND+=" verify-sig? ( sec-keys/openpgp-keys-waynedavison )"
 fi
 
-PATCHES=(
-	"${FILESDIR}"/${PN}-3.2.7-flist-memcmp-ub.patch
-)
-
 pkg_setup() {
 	# - USE=examples needs Python itself at runtime, but nothing else
 	# - 9999 needs commonmark at build time
