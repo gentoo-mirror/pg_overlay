@@ -63,9 +63,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-2.14.0-latin-update.patch
 	# Avoid test failure (bubblewrap doesn't work within sandbox)
 	"${FILESDIR}"/${PN}-2.14.0-skip-bubblewrap-tests.patch
-
-	# Patches from upstream (can usually be removed with next version bump)
-	"${FILESDIR}"/${PN}-2.14.2-fix-sysroot-fc-cache.patch
 )
 
 DOC_CONTENTS="Please make fontconfig configuration changes using
