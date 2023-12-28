@@ -119,7 +119,7 @@ media-video/pipewire 1.0.0-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/smplayer 23.6.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
-net-im/telegram-desktop 4.11.8 4.12.2: Official desktop client for Telegram
+net-im/telegram-desktop 4.13.1: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
 net-libs/libpsl 0.21.2: C library for the Public Suffix List
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
