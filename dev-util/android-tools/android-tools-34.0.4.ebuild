@@ -45,18 +45,16 @@ BDEPEND="
 DOCS=()
 
 src_prepare() {
-	#eapply "${DISTDIR}/${PN}-31.0.3-no-gtest.patch"
-	#eapply "${FILESDIR}/${PN}-34.0.0-protobuf.patch"
-	#eapply "${FILESDIR}/${PN}-34.0.1-include-algorithm.patch"
+	eapply "${DISTDIR}/${PN}-31.0.3-no-gtest.patch"
 
-	#cd "${S}/vendor/core" || die
-	#eapply "${S}/patches/core/0011-Remove-the-useless-dependency-on-gtest.patch"
+	cd "${S}/vendor/core" || die
+	eapply "${S}/patches/core/0011-Remove-the-useless-dependency-on-gtest.patch"
 
-	#cd "${S}/vendor/libziparchive" || die
-	#eapply "${S}/patches/libziparchive/0004-Remove-the-useless-dependency-on-gtest.patch"
+	cd "${S}/vendor/libziparchive" || die
+	eapply "${S}/patches/libziparchive/0004-Remove-the-useless-dependency-on-gtest.patch"
 
-	#cd "${S}" || die
-	#rm -r patches || die
+	cd "${S}" || die
+	rm -r patches || die
 	cmake_src_prepare
 }
 
@@ -74,8 +72,7 @@ src_configure() {
 }
 
 src_compile() {
-	#export GOCACHE="${T}/go-build"
-	#export GOFLAGS="-mod=vendor"
+	export GOCACHE="${T}/go-build"
 	cmake_src_compile
 }
 
