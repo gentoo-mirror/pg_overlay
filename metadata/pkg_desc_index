@@ -52,6 +52,7 @@ dev-python/html5lib 9999: HTML parser based on the HTML5 specification
 dev-python/numpy 1.26.2: Fast array and numerical python library
 dev-python/pyudev 0.24.1: Python binding to libudev
 dev-qt/qtwebengine 6.7.9999: Library for rendering dynamic web content in Qt6 C++ and QML applications
+dev-util/android-tools 34.0.4: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
@@ -113,7 +114,6 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.0-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-media-video/smplayer 23.6.0: Great Qt GUI front-end for mplayer/mpv
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.13.1: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
