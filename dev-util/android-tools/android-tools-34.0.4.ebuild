@@ -46,8 +46,6 @@ DOCS=()
 
 src_prepare() {
 	eapply "${DISTDIR}/${PN}-31.0.3-no-gtest.patch"
-	#eapply "${FILESDIR}/${PN}-34.0.0-protobuf.patch"
-	#eapply "${FILESDIR}/${PN}-34.0.1-include-algorithm.patch"
 
 	cd "${S}/vendor/core" || die
 	eapply "${S}/patches/core/0011-Remove-the-useless-dependency-on-gtest.patch"
@@ -75,7 +73,6 @@ src_configure() {
 
 src_compile() {
 	export GOCACHE="${T}/go-build"
-	export GOFLAGS="-mod=vendor"
 	cmake_src_compile
 }
 
