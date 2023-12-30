@@ -49,14 +49,14 @@ src_prepare() {
 	#eapply "${FILESDIR}/${PN}-34.0.0-protobuf.patch"
 	#eapply "${FILESDIR}/${PN}-34.0.1-include-algorithm.patch"
 
-	cd "${S}/vendor/core" || die
+	#cd "${S}/vendor/core" || die
 	#eapply "${S}/patches/core/0011-Remove-the-useless-dependency-on-gtest.patch"
 
-	cd "${S}/vendor/libziparchive" || die
+	#cd "${S}/vendor/libziparchive" || die
 	#eapply "${S}/patches/libziparchive/0004-Remove-the-useless-dependency-on-gtest.patch"
 
-	cd "${S}" || die
-	rm -r patches || die
+	#cd "${S}" || die
+	#rm -r patches || die
 	cmake_src_prepare
 }
 
