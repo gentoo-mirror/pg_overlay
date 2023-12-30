@@ -68,7 +68,7 @@ src_configure() {
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON \
 		-Dprotobuf_MODULE_COMPATIBLE=ON
-		-DBUILD_SHARED_LIBS=OFF
+		-DBUILD_SHARED_LIBS=ON
 	)
 	cmake_src_configure
 }
