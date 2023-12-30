@@ -68,14 +68,14 @@ src_configure() {
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON \
 		-Dprotobuf_MODULE_COMPATIBLE=ON
-		-DBUILD_SHARED_LIBS=ON
+		-DBUILD_SHARED_LIBS=OFF
 	)
 	cmake_src_configure
 }
 
 src_compile() {
 	export GOCACHE="${T}/go-build"
-	#export GOFLAGS="-mod=vendor"
+	export GOFLAGS="-mod=vendor"
 	cmake_src_compile
 }
 
