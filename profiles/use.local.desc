@@ -4,6 +4,14 @@
 
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
 app-editors/qhexedit2:gui - Install Qt5 hex editor
+app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
+app-emulation/virtualbox:headless - Build without any graphic frontend
+app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
+app-emulation/virtualbox:pax-kernel - Apply patch needed for pax enabled kernels.
+app-emulation/virtualbox:sdk - Enable building of SDK
+app-emulation/virtualbox:udev - Controls installation of special USB udev rules.
+app-emulation/virtualbox:vboxwebsrv - Build and install the VirtualBox webservice
+app-emulation/virtualbox:vde - Support for VDE networking via net-misc/vde
 app-misc/ddcutil:drm - Use x11-libs/libdrm for more verbose diagnostics.
 app-misc/ddcutil:usb-monitor - Adds support for monitors attached via USB.
 app-misc/ddcutil:user-permissions - Adds a udev rules to allow non-root users in the i2c group to access the /dev/i2c-* devices. If usb-monitor is selected, users will need to be added to the video group to access the USB monitor. Otherwise, only root will be able to use ddcutil.
@@ -336,8 +344,6 @@ net-misc/wget:uuid - Generate UUIDs for the WARC (Web ARChive file format) using
 net-p2p/amule:daemon - Enable amule daemon
 net-p2p/amule:remote - Enable remote controlling of the client
 net-p2p/amule:stats - Enable statistic reporting
-net-p2p/deluge:console - Enable default console UI
-net-p2p/deluge:webinterface - Install dependencies needed for the web interface
 net-p2p/mldonkey:bittorrent - enable bittorrent support
 net-p2p/mldonkey:fasttrack - enable fasttrack support
 net-p2p/mldonkey:gnutella - enable gnutella and gnutella2 support
