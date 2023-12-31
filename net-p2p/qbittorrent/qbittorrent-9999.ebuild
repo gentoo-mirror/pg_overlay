@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -6,8 +6,7 @@ EAPI=8
 inherit cmake edo multibuild xdg
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
-HOMEPAGE="https://www.qbittorrent.org
-	  https://github.com/qbittorrent"
+HOMEPAGE="https://www.qbittorrent.org"
 
 if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
@@ -26,15 +25,13 @@ REQUIRED_USE="|| ( gui webui )"
 
 RDEPEND="
 	dev-libs/openssl:=
-	dev-qt/qtbase:6[network,sql,xml]
-	>=net-libs/libtorrent-rasterbar-1.2.14:=
+	dev-qt/qtbase:6[network,ssl,sql,sqlite,xml(+)]
+	>=net-libs/libtorrent-rasterbar-2.0.0:=
 	sys-libs/zlib
-	dbus? ( dev-qt/qtbase:6[dbus] )
 	gui? (
 		dev-libs/geoip
-		dev-qt/qtbase:6[gui]
+		dev-qt/qtbase:6[dbus?,gui,widgets]]
 		dev-qt/qtsvg:6
-		dev-qt/qtbase:6[widgets]
 	)"
 DEPEND="
 	${RDEPEND}
