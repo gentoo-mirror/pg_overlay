@@ -12,4 +12,4 @@ RDEPEND==net-libs/libtorrent-9999 >=net-misc/curl-7.19.1 sys-libs/ncurses:0= xml
 RESTRICT=!test? ( test )
 SLOT=0
 _eclasses_=gnuconfig	b6b3e92f8b8c996400074b5f61a59256	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	libtool	9d3a9a889a6fa62ae794f817c156491b	autotools	5f729b9cb10d5eda573cd604c93c6dc5	git-r3	86fa1f157b70b9d2ff340c4633b1cf4b	linux-info	c4f1201b96a8a2c1f3b86cc8b2c71c91
-_md5_=e3e1400154105335163ea96bb14c2932
+_md5_=d54021c8bfd5dede0089bcd08ba28cc1
