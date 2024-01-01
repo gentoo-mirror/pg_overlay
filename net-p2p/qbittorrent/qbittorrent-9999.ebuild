@@ -30,7 +30,7 @@ RDEPEND="
 	sys-libs/zlib
 	gui? (
 		dev-libs/geoip
-		dev-qt/qtbase:6[dbus?,gui,widgets]]
+		dev-qt/qtbase:6[dbus?,gui,widgets]
 		dev-qt/qtsvg:6
 	)"
 DEPEND="
