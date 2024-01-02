@@ -161,7 +161,7 @@ virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.74.0: Virtual for Rust language compiler
 www-client/firefox 120.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.5.3222.3: A browser for our friends
-x11-base/xwayland 23.2.3: Standalone X server running under Wayland
+x11-base/xwayland 23.2.3-r1: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.39: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
