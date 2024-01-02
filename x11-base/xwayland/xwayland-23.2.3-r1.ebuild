@@ -1,4 +1,4 @@
-# Copyright 2021-2023 Gentoo Authors
+# Copyright 2021-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,7 @@ DESCRIPTION="Standalone X server running under Wayland"
 HOMEPAGE="https://wayland.freedesktop.org/xserver.html"
 SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
 
-IUSE="libei rpc unwind ipv6 xcsecurity selinux video_cards_nvidia"
+IUSE="libei rpc unwind xcsecurity selinux systemd video_cards_nvidia"
 
 LICENSE="MIT"
 SLOT="0"
@@ -34,6 +34,7 @@ COMMON_DEPEND="
 	>=x11-misc/xkeyboard-config-2.4.1-r3
 
 	libei? ( dev-libs/libei )
+	systemd? ( sys-apps/systemd )
 	unwind? ( sys-libs/libunwind )
 	video_cards_nvidia? ( gui-libs/egl-wayland )
 "
@@ -56,20 +57,22 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/xwayland-drop-redundantly-installed-files.patch
+	"${FILESDIR}"/xwayland-23.2.3-systemd-automagic.patch
 )
 
 src_configure() {
 	local emesonargs=(
 		$(meson_use rpc secure-rpc)
 		$(meson_use unwind libunwind)
-		$(meson_use ipv6)
 		$(meson_use xcsecurity)
 		$(meson_use selinux xselinux)
+		$(meson_use systemd)
 		$(meson_use video_cards_nvidia xwayland_eglstream)
 		-Ddri3=true
 		-Ddrm=true
 		-Dglamor=true
 		-Dglx=true
+		-Dlibdecor=false
 		-Dxdmcp=false
 		-Dxinerama=false
 		-Dxv=true
@@ -78,7 +81,6 @@ src_configure() {
 		-Ddocs=false
 		-Ddevel-docs=false
 		-Ddocs-pdf=false
-		-Dlibdecor=false
 	)
 
 	if use libei; then
@@ -91,5 +93,7 @@ src_configure() {
 }
 
 src_install() {
+	dosym ../bin/Xwayland /usr/libexec/Xwayland
+
 	meson_src_install
 }
