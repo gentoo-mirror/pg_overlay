@@ -48,7 +48,7 @@ dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based 
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-python/cloudscraper 1.2.69: A Python module to bypass Cloudflare's anti-bot page
 dev-python/html5lib 9999: HTML parser based on the HTML5 specification
-dev-python/numpy 1.26.2: Fast array and numerical python library
+dev-python/numpy 1.26.3: Fast array and numerical python library
 dev-python/pyudev 0.24.1: Python binding to libudev
 dev-qt/qtwebengine 6.7.9999: Library for rendering dynamic web content in Qt6 C++ and QML applications
 dev-util/android-tools 34.0.4: Android platform tools (adb, fastboot, and mkbootimg)
