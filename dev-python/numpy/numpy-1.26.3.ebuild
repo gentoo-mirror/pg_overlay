@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -23,7 +23,7 @@ SLOT="0"
 # is barely supported anyway, see bug #914358.
 IUSE="lapack"
 if [[ ${PV} != *_[rab]* ]] ; then
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 fi
 
 RDEPEND="
@@ -45,7 +45,6 @@ BDEPEND="
 		' 'python*')
 		dev-python/charset-normalizer[${PYTHON_USEDEP}]
 		>=dev-python/hypothesis-5.8.0[${PYTHON_USEDEP}]
-		dev-python/pytest-xdist[${PYTHON_USEDEP}]
 		>=dev-python/pytz-2019.3[${PYTHON_USEDEP}]
 	)
 "
@@ -84,6 +83,7 @@ python_test() {
 		typing/tests/test_typing.py
 		# Uses huge amount of memory
 		core/tests/test_mem_overlap.py
+		'core/tests/test_multiarray.py::TestDot::test_huge_vectordot[complex128]'
 
 		# TODO: crashes
 		lib/tests/test_histograms.py::TestHistogram::test_big_arrays
@@ -94,7 +94,7 @@ python_test() {
 
 		# flaky
 		f2py/tests/test_crackfortran.py
-		f2py/tests/test_data.py::TestDataF77::test_crackedlines
+		f2py/tests/test_data.py::TestData{,F77}::test_crackedlines
 	)
 
 	if use arm && [[ $(uname -m || echo "unknown") == "armv8l" ]] ; then
