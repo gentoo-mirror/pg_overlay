@@ -15,7 +15,7 @@ HOMEPAGE="https://apps.kde.org/gwenview/ https://userbase.kde.org/Gwenview"
 LICENSE="GPL-2+ handbook? ( FDL-1.2 )"
 SLOT="6"
 KEYWORDS=""
-IUSE="activities fits +mpris raw semantic-desktop share X"
+IUSE="activities fits +mpris semantic-desktop share X"
 
 # requires running environment
 RESTRICT="test"
@@ -81,11 +81,9 @@ src_configure() {
 	local mycmakeargs=(
 		$(cmake_use_find_package activities KF6Activities)
 		$(cmake_use_find_package fits CFitsio)
-		$(cmake_use_find_package raw KF6KDcraw)
 		-DGWENVIEW_SEMANTICINFO_BACKEND=$(usex semantic-desktop Baloo None)
 		$(cmake_use_find_package share KF6Purpose)
 		-DWITHOUT_X11=$(usex !X)
-		-DBUILD_WITH_QT6=ON
 	)
 	ecm_src_configure
 }
