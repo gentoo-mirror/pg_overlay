@@ -41,8 +41,6 @@ COMMON_DEPEND="
 	>=kde-frameworks/kxmlgui-${KFMIN}:6
 	>=kde-frameworks/solid-${KFMIN}:6
 	media-gfx/exiv2:=
-	media-libs/kcolorpicker
-	>=media-libs/kimageannotator-0.5.0
 	media-libs/lcms:2
 	media-libs/libjpeg-turbo:=
 	media-libs/libpng:0=
