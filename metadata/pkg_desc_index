@@ -61,7 +61,6 @@ dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applicat
 dev-util/re2c 3.0_pre: tool for generating C-based recognizers from regular expressions
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
-dev-util/scons 4.6.0: Extensible Python-based build utility
 dev-vcs/mercurial 6.6.1_pre: Scalable distributed SCM
 dev-vcs/subversion 1.14.2-r1: Advanced version control system
 games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
@@ -156,7 +155,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.74.0: Virtual for Rust language compiler
 www-client/firefox 120.0.1: Firefox Web Browser
-www-client/vivaldi-snapshot 6.5.3222.3: A browser for our friends
+www-client/vivaldi-snapshot 6.6.3238.3: A browser for our friends
 x11-base/xwayland 23.2.3-r1: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.39: Gimp ToolKit +
