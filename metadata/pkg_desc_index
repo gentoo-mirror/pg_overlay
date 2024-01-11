@@ -18,6 +18,7 @@ app-text/asciidoc 10.2.0: A plain text human readable/writable document format
 app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary lookup program
 app-text/iso-codes 4.15.0: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want directly to a pastebin
+dev-cpp/abseil-cpp 20230802.1: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/cppgir 0_p20231022 0_p20231105: GObject-Introspection C++ binding wrapper generator
 dev-cpp/cpptoml 0.1.1: Header-only library for parsing TOML
 dev-cpp/glibmm 2.78.0: C++ interface for glib2
