@@ -34,7 +34,7 @@ dev-libs/gobject-introspection 1.78.1: Introspection system for GObject-based li
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
 dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Library)
-dev-libs/libdispatch 5.8: A library for concurrent code execution on multicore hardware
+dev-libs/libdispatch 5.9.2: A library for concurrent code execution on multicore hardware
 dev-libs/libevdev 1.13.1: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libinput 1.24.0: Library to handle input devices in Wayland
@@ -107,7 +107,7 @@ media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD proj
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.0.0-r1: Multimedia processing graphs
+media-video/pipewire 1.0.1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.4: Official desktop client for Telegram
