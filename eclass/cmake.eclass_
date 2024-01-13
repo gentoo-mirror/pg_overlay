@@ -141,7 +141,7 @@ case ${CMAKE_MAKEFILE_GENERATOR} in
 		BDEPEND="sys-devel/make"
 		;;
 	ninja)
-		BDEPEND="|| ( dev-util/ninja dev-util/samurai )"
+		BDEPEND="|| ( dev-build/ninja dev-util/samurai )"
 		;;
 	*)
 		eerror "Unknown value for \${CMAKE_MAKEFILE_GENERATOR}"
@@ -370,9 +370,9 @@ cmake_src_prepare() {
 
 	# if ninja is enabled but not installed, the build could fail
 	# this could happen if ninja is manually enabled (eg. make.conf) but not installed
-	if [[ ${CMAKE_MAKEFILE_GENERATOR} == ninja ]] && ! has_version -b dev-util/ninja && ! has_version -b dev-util/samurai ; then
+	if [[ ${CMAKE_MAKEFILE_GENERATOR} == ninja ]] && ! has_version -b dev-build/ninja && ! has_version -b dev-util/samurai ; then
 		eerror "CMAKE_MAKEFILE_GENERATOR is set to ninja, but ninja is not installed."
-		die "Please install dev-util/ninja or dev-util/samurai or unset CMAKE_MAKEFILE_GENERATOR."
+		die "Please install dev-build/ninja or dev-util/samurai or unset CMAKE_MAKEFILE_GENERATOR."
 	fi
 
 	local modules_list
