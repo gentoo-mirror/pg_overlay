@@ -28,7 +28,7 @@ dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.74.1: Systems programming language from Mozilla
+dev-lang/rust 1.75.0: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.78.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.78.1: Introspection system for GObject-based libraries
@@ -52,7 +52,6 @@ dev-python/cloudscraper 1.2.69: A Python module to bypass Cloudflare's anti-bot 
 dev-python/html5lib 9999: HTML parser based on the HTML5 specification
 dev-python/numpy 1.26.3: Fast array and numerical python library
 dev-python/pyudev 0.24.1: Python binding to libudev
-dev-qt/qtwebengine 6.7.9999: Library for rendering dynamic web content in Qt6 C++ and QML applications
 dev-util/android-tools 34.0.4: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
