@@ -42,10 +42,10 @@ else
 		SRC_URI="https://gitlab.freedesktop.org/${PN}/${PN}/-/archive/${PV}/${P}.tar.bz2"
 	fi
 
-	#if [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
+	if [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
 	#	SRC_URI+=" !man? ( https://dev.gentoo.org/~${PIPEWIRE_DOCS_PREBUILT_DEV}/distfiles/${CATEGORY}/${PN}/${PN}-${PIPEWIRE_DOCS_VERSION}-docs.tar.xz )"
-	#	PIPEWIRE_DOCS_USEFLAG="man"
-	#fi
+		PIPEWIRE_DOCS_USEFLAG="man"
+	fi
 
 	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
