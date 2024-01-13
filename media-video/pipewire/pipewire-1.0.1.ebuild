@@ -210,8 +210,8 @@ multilib_src_configure() {
 		$(meson_native_use_feature systemd)
 
 		$(meson_native_use_feature system-service systemd-system-service)
-		-Dsystemd-system-unit-dir="$(systemd_get_systemunitdir)"
-		-Dsystemd-user-unit-dir="$(systemd_get_userunitdir)"
+		-Dsystemd-system-unit-dir=""
+		-Dsystemd-user-unit-dir=""
 
 		$(meson_native_use_feature systemd systemd-user-service)
 		$(meson_feature pipewire-alsa) # Allows integrating ALSA apps into PW graph
