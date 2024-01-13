@@ -288,9 +288,9 @@ multilib_src_install() {
 multilib_src_install_all() {
 	einstalldocs
 
-	if ! use man && [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
-		doman "${WORKDIR}"/${PN}-${PIPEWIRE_DOCS_VERSION}-docs/man/*/*.[0-8]
-	fi
+	#if ! use man && [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
+	#	doman "${WORKDIR}"/${PN}-${PIPEWIRE_DOCS_VERSION}-docs/man/*/*.[0-8]
+	#fi
 
 	if use pipewire-alsa; then
 		dodir /etc/alsa/conf.d
