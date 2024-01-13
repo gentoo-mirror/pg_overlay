@@ -8,6 +8,7 @@ app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to 
 app-misc/ddcutil 2.0.0-r2: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
+app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
 app-office/libreoffice 7.6.4.1: A full office productivity suite
 app-office/libreoffice-l10n 7.6.4.1: Translations for the Libreoffice suite
 app-portage/eix 0.36.7: Search and query ebuilds
