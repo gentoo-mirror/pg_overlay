@@ -25,7 +25,7 @@ RDEPEND="
 
 BDEPEND="
 	$(vala_depend)
-	dev-util/cmake \
+	dev-build/cmake \
 	>=dev-libs/glib-2.37 \
 	>=x11-libs/gtk+-3.24 \
 	dev-libs/gobject-introspection

@@ -20,7 +20,7 @@ RDEPEND="~sys-devel/llvm-${PV}"
 DEPEND="${RDEPEND}"
 BDEPEND="
 	test? (
-		>=dev-util/cmake-3.16
+		>=dev-build/cmake-3.16
 		$(python_gen_any_dep "~dev-python/lit-${PV}[\${PYTHON_USEDEP}]")
 	)"
 

@@ -88,7 +88,7 @@ DEPEND="${CDEPEND}
 "
 BDEPEND="
 	${PYTHON_DEPS}
-	>=dev-util/cmake-3.16
+	>=dev-build/cmake-3.16
 	dev-util/gdbus-codegen
 	virtual/pkgconfig
 	wayland? ( dev-util/wayland-scanner )
