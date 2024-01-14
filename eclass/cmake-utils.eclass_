@@ -153,7 +153,7 @@ case ${CMAKE_MAKEFILE_GENERATOR} in
 esac
 
 if [[ ${PN} != cmake ]]; then
-	BDEPEND+=" >=dev-util/cmake-${CMAKE_MIN_VERSION}"
+	BDEPEND+=" >=dev-build/cmake-${CMAKE_MIN_VERSION}"
 fi
 
 case ${EAPI} in
