@@ -1,19 +1,19 @@
-From b6ca6a363a7c91136c723a21fda4816d3009e479 Mon Sep 17 00:00:00 2001
+From 61b5cc96337da2121221dd1bcdb63fd36551d065 Mon Sep 17 00:00:00 2001
 From: Josh Stone <jistone@redhat.com>
 Date: Wed, 1 Nov 2023 15:21:15 -0700
 Subject: [PATCH] Use lld provided by system
 
 ---
- compiler/rustc_target/src/spec/wasm_base.rs           | 3 +--
- compiler/rustc_target/src/spec/x86_64_unknown_none.rs | 2 +-
- compiler/rustc_target/src/spec/x86_64_unknown_uefi.rs | 1 +
+ compiler/rustc_target/src/spec/base/wasm.rs                   | 3 +--
+ compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs | 2 +-
+ compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs | 1 +
  3 files changed, 3 insertions(+), 3 deletions(-)
 
-diff --git a/compiler/rustc_target/src/spec/wasm_base.rs b/compiler/rustc_target/src/spec/wasm_base.rs
-index 341763aadbaf..ee6358e72955 100644
---- a/compiler/rustc_target/src/spec/wasm_base.rs
-+++ b/compiler/rustc_target/src/spec/wasm_base.rs
-@@ -89,8 +89,7 @@ macro_rules! args {
+diff --git a/compiler/rustc_target/src/spec/base/wasm.rs b/compiler/rustc_target/src/spec/base/wasm.rs
+index 87ade9e58cf4..2ddff95febab 100644
+--- a/compiler/rustc_target/src/spec/base/wasm.rs
++++ b/compiler/rustc_target/src/spec/base/wasm.rs
+@@ -91,8 +91,7 @@ macro_rules! args {
          // arguments just yet
          limit_rdylib_exports: false,
  
@@ -23,10 +23,10 @@ index 341763aadbaf..ee6358e72955 100644
          linker_flavor: LinkerFlavor::WasmLld(Cc::No),
  
          pre_link_args,
-diff --git a/compiler/rustc_target/src/spec/x86_64_unknown_none.rs b/compiler/rustc_target/src/spec/x86_64_unknown_none.rs
-index fe3b24f2d4af..1f1731d202ca 100644
---- a/compiler/rustc_target/src/spec/x86_64_unknown_none.rs
-+++ b/compiler/rustc_target/src/spec/x86_64_unknown_none.rs
+diff --git a/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs b/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs
+index 9aa95a35f8e5..a9172f9441b7 100644
+--- a/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs
++++ b/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs
 @@ -17,7 +17,7 @@ pub fn target() -> Target {
          static_position_independent_executables: true,
          relro_level: RelroLevel::Full,
@@ -36,11 +36,11 @@ index fe3b24f2d4af..1f1731d202ca 100644
          features:
              "-mmx,-sse,-sse2,-sse3,-ssse3,-sse4.1,-sse4.2,-3dnow,-3dnowa,-avx,-avx2,+soft-float"
                  .into(),
-diff --git a/compiler/rustc_target/src/spec/x86_64_unknown_uefi.rs b/compiler/rustc_target/src/spec/x86_64_unknown_uefi.rs
-index 41ba768068a3..2eea4c76f1ca 100644
---- a/compiler/rustc_target/src/spec/x86_64_unknown_uefi.rs
-+++ b/compiler/rustc_target/src/spec/x86_64_unknown_uefi.rs
-@@ -13,6 +13,7 @@ pub fn target() -> Target {
+diff --git a/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs b/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs
+index 5abfb8162f70..13cb43bda1a4 100644
+--- a/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs
++++ b/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs
+@@ -16,6 +16,7 @@ pub fn target() -> Target {
      base.plt_by_default = false;
      base.max_atomic_width = Some(64);
      base.entry_abi = Conv::X86_64Win64;
