@@ -55,7 +55,7 @@ BDEPEND="
 "
 # If adding a eautoreconf, then these might be needed at buildtime:
 # dev-libs/gobject-introspection-common
-# sys-devel/autoconf-archive
+# dev-build/autoconf-archive
 
 DOCS=( AUTHORS HACKING NEWS README.md )
 
