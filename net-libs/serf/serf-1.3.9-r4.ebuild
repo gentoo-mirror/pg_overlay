@@ -24,7 +24,7 @@ RDEPEND="dev-libs/apr:1=
 	sys-libs/zlib:0=
 	kerberos? ( virtual/krb5 )"
 DEPEND="${RDEPEND}"
-BDEPEND=">=dev-util/scons-2.3.0"
+BDEPEND=">=dev-build/scons-2.3.0"
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-1.3.8-static-lib.patch
