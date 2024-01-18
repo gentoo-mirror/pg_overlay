@@ -28,7 +28,7 @@ RESTRICT="strip mirror bindist fetch"
 # FFmpegTools (FFmpegToolsSystem-4.4.so) requires media-video/ffmpeg-4.4
 RDEPEND="
 	dev-qt/qt5compat:6
-	dev-qt/qtbase:6[eglfs,wayland]
+	dev-qt/qtbase:6[wayland]
 	dev-qt/qtsvg:6
 	dev-qt/qtwayland:6[compositor]
 	media-libs/freetype
