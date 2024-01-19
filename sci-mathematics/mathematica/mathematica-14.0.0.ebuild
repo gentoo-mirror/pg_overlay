@@ -103,6 +103,7 @@ src_install() {
 		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/GPUTools/LibraryResources/Linux-x86-64/libCUDALink_11.so"
 		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/GPUTools/LibraryResources/Linux-x86-64/libCUDALink_12.so"
 		rm -fr "${S}/${M_TARGET}/SystemFiles/Components/CUDACompileTools"
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Components/CUDACTools"
 		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/CUDALink"
 	fi
 
