@@ -108,18 +108,18 @@ src_install() {
 
 	# Linux-x86-64/AllVersions is the supported version, other versions remove
 	einfo 'Removing unsupported RLink versions'
-	rm -r "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.5.0" || die
-	rm -r "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.6.0" || die
-	rm -r "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux/AllVersions" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.5.0" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.6.0" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux/AllVersions" || die
 	# RLink can't use if R not used
 	if ! use R; then
 		einfo 'Removing RLink support'
-		rm -r "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/AllVersions/libjri.so" || die
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/AllVersions/libjri.so" || die
 	fi
 	# FFmpegTools can't use if ffmpeg not used
 	if ! use ffmpeg; then
 		einfo 'Removing FFmpegTools support'
-		rm -r "${S}/${M_TARGET}/SystemFiles/Links/FFmpegTools/LibraryResources/Linux-x86-64/FFmpegToolsSystem"*.so || die
+		rm -fr "${S}/${M_TARGET}/SystemFiles/Links/FFmpegTools/LibraryResources/Linux-x86-64/FFmpegToolsSystem"*.so || die
 	fi
 
 	# fix RPATH
