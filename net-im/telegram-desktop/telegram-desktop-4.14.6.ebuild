@@ -16,7 +16,7 @@ S="${WORKDIR}/${MY_P}"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~loong ~riscv"
+KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv"
 IUSE="dbus enchant +fonts screencast qt6 qt6-imageformats wayland webkit +X"
 REQUIRED_USE="
 	qt6-imageformats? ( qt6 )
@@ -38,11 +38,11 @@ CDEPEND="
 	dev-libs/protobuf
 	dev-libs/xxhash
 	media-libs/libjpeg-turbo:=
-	~media-libs/libtgvoip-2.4.4_p20230929
+	>=media-libs/libtgvoip-2.4.4_p20230929
 	media-libs/openal
 	media-libs/opus
 	media-libs/rnnoise
-	~media-libs/tg_owt-0_pre20230921:=[screencast=,X=]
+	>=media-libs/tg_owt-0_pre20230921:=[screencast=,X=]
 	media-video/ffmpeg:=[opus,vpx]
 	sys-libs/zlib:=[minizip]
 	virtual/opengl
@@ -83,19 +83,21 @@ RDEPEND="${CDEPEND}
 	webkit? ( net-libs/webkit-gtk:4.1 net-libs/webkit-gtk:6 )
 "
 DEPEND="${CDEPEND}
+	>=dev-cpp/cppgir-0_p20240110
 	>=dev-cpp/ms-gsl-4
 	dev-cpp/range-v3
 "
 BDEPEND="
 	${PYTHON_DEPS}
 	>=dev-build/cmake-3.16
+	>=dev-cpp/cppgir-0_p20230926
 	dev-util/gdbus-codegen
 	virtual/pkgconfig
 	wayland? ( dev-util/wayland-scanner )
 "
 
 PATCHES=(
-	#"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
+	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
 	"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
 )
 
@@ -161,6 +163,10 @@ src_configure() {
 	local qt=$(usex qt6 6 5)
 	local mycmakeargs=(
 		-DQT_VERSION_MAJOR=${qt}
+
+		# Override new cmake.eclass defaults (https://bugs.gentoo.org/921939)
+		# Upstream never tests this any other way
+		-DCMAKE_DISABLE_PRECOMPILE_HEADERS=OFF
 
 		# Control automagic dependencies on certain packages
 		## Header-only lib, some git version.
