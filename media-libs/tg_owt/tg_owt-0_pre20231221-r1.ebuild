@@ -10,10 +10,8 @@ HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
 TG_OWT_COMMIT="afd9d5d31798d3eacf9ed6c30601e91d0f1e4d60"
 LIBYUV_COMMIT="914624f0b8b92986ef385e9650ee7b5fb07099e9"
-LIBSRTP_COMMIT="b8e668b202cfba7ea8287569ec1167cd9b588a23"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2
-	https://github.com/cisco/libsrtp/archive/${LIBSRTP_COMMIT}.tar.gz -> libsrtp-${LIBSRTP_COMMIT}.tar.gz"
+	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 # Upstream libyuv: https://chromium.googlesource.com/libyuv/libyuv
 
@@ -73,8 +71,6 @@ src_unpack() {
 	unpack "${P}.tar.gz"
 	unpack "libyuv-${LIBYUV_COMMIT}.tar.bz2"
 	mv -T "libyuv-${LIBYUV_COMMIT}" "${S}/src/third_party/libyuv" || die
-	unpack "libsrtp-${LIBSRTP_COMMIT}.tar.gz"
-	mv -T "libsrtp-${LIBSRTP_COMMIT}" "${S}/src/third_party/libsrtp" || die
 }
 
 src_prepare() {
