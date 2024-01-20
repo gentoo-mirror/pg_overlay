@@ -105,7 +105,7 @@ media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
-net-im/telegram-desktop 4.14.6: Official desktop client for Telegram
+net-im/telegram-desktop 4.14.8: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
