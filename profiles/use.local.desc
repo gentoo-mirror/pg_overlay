@@ -299,6 +299,11 @@ net-im/telegram-desktop:enchant - Use the app-text/enchant spell-checking backen
 net-im/telegram-desktop:fonts - Use builtin patched copy of open-sans fonts (overrides fontconfig)
 net-im/telegram-desktop:qt6 - Build with Qt6 support
 net-im/telegram-desktop:qt6-imageformats - Add support for HEIF, AVIF and JpegXL by bundling kde-frameworks/kimageformats
+net-libs/libsrtp:aesicm - Use AES ICM cryptographic algorithm
+net-libs/libsrtp:console - Use /dev/console instead of stdout for error messages
+net-libs/libsrtp:nss - Use NSS crypto primitives
+net-libs/libsrtp:openssl - Use OpenSSL crypto primitives
+net-libs/libsrtp:syslog - Use syslog for error messages
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:corepack - Enable the experimental corepack package management tool
 net-libs/nodejs:inspector - Enable V8 inspector

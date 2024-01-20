@@ -86,7 +86,7 @@ media-libs/libtgvoip 2.4.4_p20231013: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
-media-libs/tg_owt 0_pre20231221: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20231221 0_pre20231221-r1: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
@@ -107,6 +107,7 @@ media-video/qmplay2 9999: A Qt-based video player, which can play most formats a
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.8: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
+net-libs/libsrtp 2.5.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 21.5.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
