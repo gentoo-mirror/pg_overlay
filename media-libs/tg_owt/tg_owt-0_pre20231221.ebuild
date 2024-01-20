@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
 TG_OWT_COMMIT="afd9d5d31798d3eacf9ed6c30601e91d0f1e4d60"
 LIBYUV_COMMIT="914624f0b8b92986ef385e9650ee7b5fb07099e9"
-LIBSRTP_COMMIT="b8e668b202cfba7ea8287569ec1167cd9b588a23"
+LIBSRTP_COMMIT="f53df50059906e5c364eca65bd3c847cac9ef192"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
 	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2
 	https://github.com/cisco/libsrtp/archive/${LIBSRTP_COMMIT}.tar.gz -> libsrtp-${LIBSRTP_COMMIT}.tar.gz"
