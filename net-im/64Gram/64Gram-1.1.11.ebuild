@@ -96,8 +96,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
-	"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
 )
 
 pkg_pretend() {

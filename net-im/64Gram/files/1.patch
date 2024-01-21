@@ -1,0 +1,17 @@
+--- a/cmake/external/glib/CMakeLists.txt	2024-01-21 10:25:18.445073339 +0700
++++ b/cmake/external/glib/CMakeLists.txt    2024-01-21 10:28:13.682158305 +0700
+@@ -7,14 +7,6 @@
+ add_library(external_glib INTERFACE IMPORTED GLOBAL)
+ add_library(desktop-app::external_glib ALIAS external_glib)
+ 
+-function(add_cppgir) # isolate scope
+-    set(BUILD_TESTING OFF)
+-    set(BUILD_DOC OFF)
+-    set(BUILD_EXAMPLES OFF)
+-    add_subdirectory(cppgir EXCLUDE_FROM_ALL)
+-endfunction()
+-add_cppgir()
+-
+ include(generate_cppgir.cmake)
+ generate_cppgir(external_glib Gio-2.0)
+ 

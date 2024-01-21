@@ -18,6 +18,7 @@ https://github.com/desktop-app/cmake_helpers/pull/305
 -
  include(generate_cppgir.cmake)
  generate_cppgir(external_glib Gio-2.0)
+
 --- a/cmake/external/glib/generate_cppgir.cmake
 +++ b/cmake/external/glib/generate_cppgir.cmake
 @@ -4,6 +4,8 @@
@@ -28,3 +29,4 @@ https://github.com/desktop-app/cmake_helpers/pull/305
 +
  function(generate_cppgir target_name gir)
      set(cppgir_loc ${cmake_helpers_loc}/external/glib/cppgir)
+
