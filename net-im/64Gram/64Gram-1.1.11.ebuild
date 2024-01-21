@@ -96,7 +96,8 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
+	"${FILESDIR}/1.patch"
+	"${FILESDIR}/2.patch"
 	"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
 )
 

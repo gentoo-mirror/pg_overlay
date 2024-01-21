@@ -1,5 +1,5 @@
---- CMakeLists.txt	2024-01-21 10:25:18.445073339 +0700
-+++ CMakeLists.txt_new	2024-01-21 10:28:13.682158305 +0700
+--- a/cmake/external/glib/CMakeLists	2024-01-21 10:25:18.445073339 +0700
++++ b/cmake/external/glib/CMakeLists    2024-01-21 10:28:13.682158305 +0700
 @@ -7,14 +7,6 @@
  add_library(external_glib INTERFACE IMPORTED GLOBAL)
  add_library(desktop-app::external_glib ALIAS external_glib)
