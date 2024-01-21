@@ -11,7 +11,7 @@ DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
 
 SRC_URI="https://github.com/TDesktop-x64/tdesktop/releases/download/v${PV}/${P}-full.tar.gz"
-S="${WORKDIR}/${MY_P}"
+S="${WORKDIR}/${P}-full"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
