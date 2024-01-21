@@ -54,7 +54,6 @@ dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles
 dev-util/mdds 2.1.1: Collection of multi-dimensional data structure and indexing algorithm
 dev-util/qbs 1.21.0: Modern build tool for software projects
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/re2c 3.0_pre: tool for generating C-based recognizers from regular expressions
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
 dev-vcs/mercurial 6.6.1_pre: Scalable distributed SCM
@@ -104,6 +103,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
+net-im/64Gram 1.1.11: Official desktop client for Telegram
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.8: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux

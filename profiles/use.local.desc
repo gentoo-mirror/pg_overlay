@@ -285,6 +285,10 @@ media-video/qmplay2:sid - Build Chiptune with SIDPLAY support
 media-video/qmplay2:videofilters - Build with VideoFilters module
 media-video/qmplay2:visualizations - Build with Visualizations module
 media-video/qmplay2:vulkan - Build with Vulkan support
+net-im/64Gram:enchant - Use the app-text/enchant spell-checking backend instead of app-text/hunspell
+net-im/64Gram:fonts - Use builtin patched copy of open-sans fonts (overrides fontconfig)
+net-im/64Gram:qt6 - Build with Qt6 support
+net-im/64Gram:qt6-imageformats - Add support for HEIF, AVIF and JpegXL by bundling kde-frameworks/kimageformats
 net-im/pidgin:gadu - Enable Gadu Gadu protocol support
 net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
 net-im/pidgin:gstreamer - Enables voice and video sessions
