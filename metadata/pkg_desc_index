@@ -11,7 +11,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
 app-office/libreoffice 7.6.4.1: A full office productivity suite
 app-office/libreoffice-l10n 7.6.4.1: Translations for the Libreoffice suite
-app-portage/eix 0.36.7: Search and query ebuilds
+app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
@@ -153,9 +153,9 @@ virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.75.0: Virtual for Rust language compiler
 www-client/firefox 120.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.6.3238.3: A browser for our friends
-x11-base/xwayland 23.2.3-r1: Standalone X server running under Wayland
+x11-base/xwayland 23.2.4: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
-x11-libs/gtk+ 2.24.33-r3 3.24.39: Gimp ToolKit +
+x11-libs/gtk+ 2.24.33-r3 3.24.40: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.2.2.1-r3: GTK version of wxWidgets, a cross-platform C++ GUI toolkit
 x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
