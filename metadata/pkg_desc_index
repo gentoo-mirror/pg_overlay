@@ -5,7 +5,7 @@ app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.9_p20221023: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/spice 0.15.2: SPICE server
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
-app-misc/ddcutil 2.1.0: Program for querying and changing monitor settings
+app-misc/ddcutil 2.1.0-r1: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
