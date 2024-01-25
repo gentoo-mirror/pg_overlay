@@ -1,32 +1,30 @@
-diff -up firefox-81.0/toolkit/modules/GMPInstallManager.sys.mjs.old firefox-81.0/toolkit/modules/GMPInstallManager.sys.mjs
---- firefox-81.0/toolkit/modules/GMPInstallManager.sys.mjs.old	2020-09-25 10:39:04.769458703 +0200
-+++ firefox-81.0/toolkit/modules/GMPInstallManager.sys.mjs	2020-09-25 10:39:22.038504747 +0200
-@@ -54,10 +54,6 @@ function getScopedLogger(prefix) {
-
- const LOCAL_GMP_SOURCES = [
-   {
--    id: "gmp-gmpopenh264",
--    src: "chrome://global/content/gmp-sources/openh264.json",
--  },
--  {
-     id: "gmp-widevinecdm",
-     src: "chrome://global/content/gmp-sources/widevinecdm.json",
-   },
-diff --git a/toolkit/content/jar.mn b/toolkit/content/jar.mn
---- a/toolkit/content/jar.mn
-+++ b/toolkit/content/jar.mn
-@@ -108,7 +108,6 @@ toolkit.jar:
+diff -up firefox-121.0/toolkit/content/jar.mn.disable-openh264-download firefox-121.0/toolkit/content/jar.mn
+--- firefox-121.0/toolkit/content/jar.mn.disable-openh264-download	2023-12-18 20:15:04.352014249 +0100
++++ firefox-121.0/toolkit/content/jar.mn	2023-12-18 20:19:26.857929200 +0100
+@@ -130,7 +130,6 @@ toolkit.jar:
  #ifdef XP_MACOSX
     content/global/macWindowMenu.js
  #endif
 -   content/global/gmp-sources/openh264.json    (gmp-sources/openh264.json)
     content/global/gmp-sources/widevinecdm.json (gmp-sources/widevinecdm.json)
-
- # Third party files
-diff --git a/toolkit/modules/GMPInstallManager.sys.mjs b/toolkit/modules/GMPInstallManager.sys.mjs
---- a/toolkit/modules/GMPInstallManager.sys.mjs
-+++ b/toolkit/modules/GMPInstallManager.sys.mjs
-@@ -238,6 +234,9 @@ GMPInstallManager.prototype = {
+    content/global/gmp-sources/widevinecdm_l1.json (gmp-sources/widevinecdm_l1.json)
+ 
+diff -up firefox-121.0/toolkit/modules/GMPInstallManager.sys.mjs.disable-openh264-download firefox-121.0/toolkit/modules/GMPInstallManager.sys.mjs
+--- firefox-121.0/toolkit/modules/GMPInstallManager.sys.mjs.disable-openh264-download	2023-12-11 21:42:21.000000000 +0100
++++ firefox-121.0/toolkit/modules/GMPInstallManager.sys.mjs	2023-12-18 20:18:52.665768579 +0100
+@@ -35,11 +35,6 @@ function getScopedLogger(prefix) {
+ 
+ const LOCAL_GMP_SOURCES = [
+   {
+-    id: "gmp-gmpopenh264",
+-    src: "chrome://global/content/gmp-sources/openh264.json",
+-    installByDefault: true,
+-  },
+-  {
+     id: "gmp-widevinecdm",
+     src: "chrome://global/content/gmp-sources/widevinecdm.json",
+     installByDefault: true,
+@@ -421,6 +416,9 @@ GMPInstallManager.prototype = {
     *                 downloaderr, verifyerr or previouserrorencountered
     */
    installAddon(gmpAddon) {
