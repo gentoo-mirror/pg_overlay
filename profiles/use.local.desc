@@ -407,7 +407,6 @@ www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to 
 www-client/firefox:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
 www-client/firefox:jumbo-build - Enable unified build - combines source files to speed up build process, but requires more memory
 www-client/firefox:libproxy - Enable libproxy support
-www-client/firefox:lto - Enable Link Time Optimization (LTO)
 www-client/firefox:openh264 - Use media-libs/openh264 for H264 support instead of downloading binary blob from Mozilla at runtime
 www-client/firefox:pgo - Add support for profile-guided optimization for faster binaries - this option will double the compile time
 www-client/firefox:pulseaudio - Add sound server support via media-libs/libpulse (may be PulseAudio or Pipewire, or apulse if installed)
