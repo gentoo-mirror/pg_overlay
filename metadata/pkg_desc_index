@@ -4,7 +4,7 @@ app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of A
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.9_p20221023: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/spice 0.15.2: SPICE server
-app-emulation/virtualbox 7.0.14-r1: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.0-r1: Program for querying and changing monitor settings
 app-misc/far2l 9999: Linux port of FAR Manager v2
