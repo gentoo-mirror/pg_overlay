@@ -208,6 +208,8 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-7.0.6-fix-libxml2.patch
 	# 913109
 	"${FILESDIR}"/${PN}-7.0.10-fix-binutils-hardened.patch
+	# 922445
+	"${FILESDIR}"/${PN}-7.0.14-libxml2-2.12.patch
 
 	# Downloaded patchset
 	"${WORKDIR}"/virtualbox-patches-7.0.8/patches
