@@ -7,6 +7,7 @@ app-emulation/spice 0.15.2: SPICE server
 app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.2: Program for querying and changing monitor settings
+app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
 app-office/libreoffice 24.2.0.3: A full office productivity suite
@@ -19,44 +20,64 @@ app-text/asciidoc 10.2.0: A plain text human readable/writable document format
 app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary lookup program
 app-text/iso-codes 4.15.0: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want directly to a pastebin
+dev-cpp/abseil-cpp 20230802.1: Abseil Common Libraries (C++), LTS Branch
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
+dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.75.0: Systems programming language from Mozilla
+dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.78.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.78.1: Introspection system for GObject-based libraries
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
+dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Library)
+dev-libs/libdispatch 5.9.2: A library for concurrent code execution on multicore hardware
 dev-libs/libevdev 1.13.1: Handler library for evdev events
+dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libixion 0.18.1: General purpose formula parser & interpreter
 dev-libs/liborcus 0.18.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
+dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
+dev-libs/protobuf 25.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/re2 0.2023.11.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
+dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-python/cloudscraper 1.2.69: A Python module to bypass Cloudflare's anti-bot page
 dev-python/html5lib 9999: HTML parser based on the HTML5 specification
 dev-python/numpy 1.26.3: Fast array and numerical python library
 dev-python/pyudev 0.24.1: Python binding to libudev
+dev-util/android-tools 34.0.4: Android platform tools (adb, fastboot, and mkbootimg)
+dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
 dev-util/mdds 2.1.1: Collection of multi-dimensional data structure and indexing algorithm
 dev-util/qbs 1.21.0: Modern build tool for software projects
+dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
 dev-vcs/mercurial 6.6.1_pre: Scalable distributed SCM
 dev-vcs/subversion 1.14.2-r1: Advanced version control system
 games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
+games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
+games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gui-apps/wev 9999: Wayland event viewer
+gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
+kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
+kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
+kde-plasma/kde-cli-tools 6.0.49.9999 9999: Tools based on KDE Frameworks 6 to better interact with the system
 mail-client/thunderbird 115.5.2: Thunderbird Mail Client
 media-libs/fontconfig 2.15.0: A library for configuring and customizing font access
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
+media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
 media-libs/libde265 1.0.14: Open h.265 video codec implementation
 media-libs/libdisplay-info 0.1.1: Simple framework for writing Vulkan layers
 media-libs/libepoxy 1.5.10-r2: Library for handling OpenGL function pointer management
 media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
+media-libs/libheif 1.17.5: ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r4: Libraries for PulseAudio clients
 media-libs/libsdl2 2.28.5: Simple Direct Media Layer
@@ -64,7 +85,9 @@ media-libs/libtgvoip 2.4.4_p20231013: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
+media-libs/tg_owt 0_pre20231221: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
+media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/mac 9.04: Monkey's Audio Codecs
@@ -72,18 +95,25 @@ media-sound/mpd 0.23.15: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
+media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins support
 media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
 media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD project
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.1: Multimedia processing graphs
+media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
+net-im/64Gram 1.1.11: Official desktop client for Telegram
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
+net-im/telegram-desktop 4.14.9: Official desktop client for Telegram
+net-im/whatsapp-for-linux 1.5.0: An unofficial WhatsApp desktop application for Linux
 net-libs/libsrtp 2.5.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
+net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 21.6.1: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/ortp 0.27.0_pre: Open Real-time Transport Protocol (RTP, RFC3550) stack
 net-libs/serf 1.3.9-r4: HTTP client library
+net-libs/tdlib 1.7.0 1.8.0 9999: Cross-platform library for building Telegram clients
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/rsync 3.3.0_pre1: File transfer program to keep remote files into sync
 net-misc/spice-gtk 0.42-r3: Set of GObject and Gtk objects for connecting to Spice servers and a client GUI
@@ -91,7 +121,9 @@ net-misc/wget 1.21.4: Network utility to retrieve files from the WWW
 net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: A fork of nicotine, a Soulseek client in Python
+net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
+net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 sci-calculators/qalculate-qt 4.9.0: Qt-based UI for libqalculate
@@ -102,14 +134,19 @@ sys-apps/openrazer 3.7.0: Drivers and user-space daemon to control Razer devices
 sys-apps/plocate 1.1.22: Posting locate is a much faster locate
 sys-apps/polychromatic 0.8.3-r1 9999: RGB lighting management software for GNU/Linux powered by OpenRazer
 sys-apps/razer-cli 2.2.0: Command line interface for controlling Razer devices on Linux
+sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
+sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/pambase 20220214: PAM base configuration files
+sys-devel/clang 17.0.6: C language family frontend for LLVM
+sys-devel/llvm 17.0.6: Low Level Virtual Machine
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-kernel/kergen 0.1.5: Kernel config generator
 sys-libs/ncurses 6.4_p20230923: Console display library
+sys-libs/polly 17.0.6: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
@@ -125,3 +162,5 @@ x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-plugins/pidgin-skypeweb 9999: SkypeWeb Plugin for Pidgin
 x11-plugins/pidgin-telegram 1.4.7 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-plugins/purple-matrix 9999: Libpurple protocol plugin for matrix
+x11-plugins/tdlib-purple 9999: New libpurple plugin for Telegram
+x11-themes/kvantum 1.0.10: SVG-based theme engine for Qt5, KDE Plasma and LXQt
