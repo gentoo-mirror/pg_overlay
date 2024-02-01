@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -23,7 +23,7 @@ EAPI=8
 : ${PIPEWIRE_DOCS_PREBUILT:=1}
 
 PIPEWIRE_DOCS_PREBUILT_DEV=sam
-PIPEWIRE_DOCS_VERSION="${PV}"
+PIPEWIRE_DOCS_VERSION=$(ver_cut 1-2).0
 # Default to generating docs (inc. man pages) if no prebuilt; overridden later
 PIPEWIRE_DOCS_USEFLAG="+man"
 PYTHON_COMPAT=( python3_{11..12} )
@@ -43,7 +43,7 @@ else
 	fi
 
 	if [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
-	#	SRC_URI+=" !man? ( https://dev.gentoo.org/~${PIPEWIRE_DOCS_PREBUILT_DEV}/distfiles/${CATEGORY}/${PN}/${PN}-${PIPEWIRE_DOCS_VERSION}-docs.tar.xz )"
+		SRC_URI+=" !man? ( https://dev.gentoo.org/~${PIPEWIRE_DOCS_PREBUILT_DEV}/distfiles/${CATEGORY}/${PN}/${PN}-${PIPEWIRE_DOCS_VERSION}-docs.tar.xz )"
 		PIPEWIRE_DOCS_USEFLAG="man"
 	fi
 
@@ -89,12 +89,12 @@ BDEPEND="
 	dbus? ( dev-util/gdbus-codegen )
 	doc? (
 		${PYTHON_DEPS}
-		>=app-doc/doxygen-1.9.8
+		>=app-text/doxygen-1.9.8
 		media-gfx/graphviz
 	)
 	man? (
 		${PYTHON_DEPS}
-		>=app-doc/doxygen-1.9.8
+		>=app-text/doxygen-1.9.8
 	)
 "
 # * While udev could technically be optional, it's needed for a number of options,
@@ -288,9 +288,9 @@ multilib_src_install() {
 multilib_src_install_all() {
 	einstalldocs
 
-	#if ! use man && [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
-	#	doman "${WORKDIR}"/${PN}-${PIPEWIRE_DOCS_VERSION}-docs/man/*/*.[0-8]
-	#fi
+	if ! use man && [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
+		doman "${WORKDIR}"/${PN}-${PIPEWIRE_DOCS_VERSION}-docs/man/*/*.[0-8]
+	fi
 
 	if use pipewire-alsa; then
 		dodir /etc/alsa/conf.d
