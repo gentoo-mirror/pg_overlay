@@ -315,6 +315,12 @@ PATCHES=(
 
 	# maybe upstreamable
 	"${FILESDIR}/${PN}-7.5.8.2-icu-74-compatibility.patch"
+
+	"${FILESDIR}/${PN}-7.3.0-find-qt6.patch"
+	"${FILESDIR}/${PN}-7.6-dont-prefer-gtk-over-qt.patch"
+	"${FILESDIR}/${PN}-7.6-qt6-wayland-egl.patch"
+
+
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
