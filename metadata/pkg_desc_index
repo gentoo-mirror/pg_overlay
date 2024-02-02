@@ -152,7 +152,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.75.0: Virtual for Rust language compiler
 www-client/firefox 122.0: Firefox Web Browser
-www-client/vivaldi-snapshot 6.6.3249.4: A browser for our friends
+www-client/vivaldi-snapshot 6.6.3256.4: A browser for our friends
 x11-base/xwayland 23.2.4: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.41: Gimp ToolKit +
