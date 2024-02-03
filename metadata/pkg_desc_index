@@ -101,7 +101,7 @@ media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD proj
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.0.2-r1: Multimedia processing graphs
+media-video/pipewire 1.0.3: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/64Gram 1.1.11: Official desktop client for Telegram
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
