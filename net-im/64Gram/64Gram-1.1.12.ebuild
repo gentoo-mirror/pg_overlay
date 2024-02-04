@@ -10,9 +10,8 @@ inherit xdg cmake python-any-r1 optfeature flag-o-matic
 DESCRIPTION="Official desktop client for Telegram"
 HOMEPAGE="https://desktop.telegram.org"
 
-MY_P="tdesktop-${PV}-full"
-SRC_URI="https://github.com/telegramdesktop/tdesktop/releases/download/v${PV}/${MY_P}.tar.gz"
-S="${WORKDIR}/${MY_P}"
+SRC_URI="https://github.com/TDesktop-x64/tdesktop/releases/download/v${PV}/${P}-full.tar.gz"
+S="${WORKDIR}/${P}-full"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
@@ -25,7 +24,7 @@ REQUIRED_USE="
 KIMAGEFORMATS_RDEPEND="
 	media-libs/libavif:=
 	media-libs/libheif:=
-	>=media-libs/libjxl-0.8.0
+	>=media-libs/libjxl-0.8.0:=
 "
 CDEPEND="
 	!net-im/telegram-desktop-bin
@@ -85,6 +84,7 @@ RDEPEND="${CDEPEND}
 DEPEND="${CDEPEND}
 	>=dev-cpp/cppgir-0_p20240110
 	>=dev-cpp/ms-gsl-4
+	dev-cpp/expected-lite
 	dev-cpp/range-v3
 "
 BDEPEND="
