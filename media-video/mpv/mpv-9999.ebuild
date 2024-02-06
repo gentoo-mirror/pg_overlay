@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,7 +12,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/mpv-player/mpv.git"
 else
 	SRC_URI="https://github.com/mpv-player/mpv/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
+	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~x86 ~amd64-linux"
 fi
 
 DESCRIPTION="Media player for the command line"
@@ -23,7 +23,7 @@ SLOT="0/2" # soname
 IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
-	+lua mmal nvenc openal opengl pipewire pulseaudio raspberry-pi
+	+lua nvenc openal opengl pipewire pulseaudio
 	rubberband sdl selinux sixel sndio test tools +uchardet vaapi
 	vdpau vulkan wayland xv zimg zlib
 "
@@ -90,22 +90,13 @@ COMMON_DEPEND="
 	opengl? ( media-libs/libglvnd[X?] )
 	pipewire? ( media-video/pipewire:= )
 	pulseaudio? ( media-libs/libpulse )
-	raspberry-pi? (
-		|| (
-			media-libs/raspberrypi-userland-bin
-			media-libs/raspberrypi-userland
-		)
-	)
 	rubberband? ( media-libs/rubberband )
 	sdl? ( media-libs/libsdl2[sound,threads,video] )
 	sixel? ( media-libs/libsixel )
 	sndio? ( media-sound/sndio:= )
 	vaapi? ( media-libs/libva:=[X?,drm(+)?,wayland?] )
 	vdpau? ( x11-libs/libvdpau )
-	vulkan? (
-		media-libs/shaderc
-		media-libs/vulkan-loader[X?,wayland?]
-	)
+	vulkan? ( media-libs/vulkan-loader[X?,wayland?] )
 	wayland? (
 		dev-libs/wayland
 		dev-libs/wayland-protocols
@@ -203,13 +194,12 @@ src_configure() {
 		$(meson_feature drm)
 		$(meson_feature jpeg)
 		$(meson_feature libcaca caca)
-		$(meson_feature mmal rpi-mmal)
 		$(meson_feature sdl sdl2-video)
 		$(meson_feature sixel)
 		$(meson_feature wayland)
 		$(meson_feature xv)
 
-		-Dgl=$(use egl || use libmpv || use opengl || use raspberry-pi &&
+		-Dgl=$(use egl || use libmpv || use opengl &&
 			echo enabled || echo disabled)
 		$(meson_feature egl)
 		$(mpv_feature_multi egl X egl-x11)
@@ -219,7 +209,6 @@ src_configure() {
 		$(meson_feature libmpv plain-gl)
 		$(mpv_feature_multi opengl X gl-x11)
 		$(mpv_feature_multi opengl aqua gl-cocoa)
-		$(meson_feature raspberry-pi rpi)
 
 		$(meson_feature vulkan)
 
@@ -239,7 +228,7 @@ src_configure() {
 
 		# notable options left to automagic
 		#dmabuf-wayland: USE="drm wayland" + plus memfd_create support
-		#vulkan-interop: USE="vulkan" + ffmpeg-9999 currently
+		#vulkan-interop: USE="vulkan" + >=ffmpeg-6.1
 		# TODO?: perhaps few more similar compound options should be left auto
 	)
 
