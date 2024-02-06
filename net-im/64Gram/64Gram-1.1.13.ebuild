@@ -97,8 +97,8 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
-	"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
+	#"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
+	#"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
 )
 
 pkg_pretend() {
@@ -141,6 +141,11 @@ src_prepare() {
 		sed -e '/find_package(Qt[^ ]* OPTIONAL_COMPONENTS/s/DBus *//' \
 			-i cmake/external/qt/package.cmake || die
 	fi
+
+	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
+	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
+	cp -f "${FILESDIR}"/qt_compare.h Telegram/lib_base/base/qt/
+
 
 	cmake_src_prepare
 }
