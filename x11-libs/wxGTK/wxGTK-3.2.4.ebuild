@@ -1,9 +1,9 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit multilib-minimal
+inherit multilib-minimal flag-o-matic
 
 WXSUBVERSION="${PV}-gtk3"				# 3.2.1-gtk3
 WXVERSION="$(ver_cut 1-3)"				# 3.2.1
@@ -21,8 +21,8 @@ S="${WORKDIR}/wxWidgets-${PV}"
 LICENSE="wxWinLL-3 GPL-2 doc? ( wxWinFDL-3 )"
 SLOT="${WXRELEASE}"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux"
-IUSE="+gui curl doc debug gnome-keyring gstreamer libnotify +lzma opengl pch sdl +spell test tiff wayland webkit"
-REQUIRED_USE="test? ( tiff ) tiff? ( gui ) spell? ( gui ) gnome-keyring? ( gui )"
+IUSE="+gui curl doc debug keyring gstreamer libnotify +lzma opengl pch sdl +spell test tiff wayland webkit"
+REQUIRED_USE="test? ( tiff ) tiff? ( gui ) spell? ( gui ) keyring? ( gui )"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
@@ -42,7 +42,7 @@ RDEPEND="
 		x11-libs/gdk-pixbuf:2[${MULTILIB_USEDEP}]
 		media-libs/fontconfig
 		x11-libs/pango[${MULTILIB_USEDEP}]
-		gnome-keyring? ( app-crypt/libsecret )
+		keyring? ( app-crypt/libsecret )
 		gstreamer? (
 			media-libs/gstreamer:1.0[${MULTILIB_USEDEP}]
 			media-libs/gst-plugins-base:1.0[${MULTILIB_USEDEP}]
@@ -121,6 +121,9 @@ src_prepare() {
 }
 
 multilib_src_configure() {
+	# Workaround for bug #915154
+	append-ldflags $(test-flags-CCLD -Wl,--undefined-version)
+
 	# X independent options
 	local myeconfargs=(
 		--with-zlib=sys
@@ -141,7 +144,22 @@ multilib_src_configure() {
 		--libdir='${prefix}'/$(get_libdir)
 	)
 
-	# Switch to wxGLCanvas GLX instead of EGL, resolves many OpenGL issues.
+	# By default, we now build with the GLX GLCanvas because some software like
+	# PrusaSlicer does not yet support EGL:
+	#
+	# https://github.com/prusa3d/PrusaSlicer/issues/9774 .
+	#
+	# A solution for this is being developed upstream:
+	#
+	# https://github.com/wxWidgets/wxWidgets/issues/22325 .
+	#
+	# Any software that needs to use OpenGL under Wayland can be patched like
+	# this to run under xwayland:
+	#
+	# https://github.com/visualboyadvance-m/visualboyadvance-m/commit/aca206a721265366728222d025fec30ee500de82 .
+	#
+	# Check that the macro wxUSE_GLCANVAS_EGL is set to 1.
+	#
 	myeconfargs+=( "--disable-glcanvasegl" )
 
 	# debug in >=2.9
@@ -173,7 +191,7 @@ multilib_src_configure() {
 		$(use_with libnotify)
 		$(use_with opengl)
 		$(use_with tiff libtiff sys)
-		$(use_enable gnome-keyring secretstore)
+		$(use_enable keyring secretstore)
 		$(use_enable spell spellcheck)
 		$(use_enable test tests)
 		$(use_enable wayland)
