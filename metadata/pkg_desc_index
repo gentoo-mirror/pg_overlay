@@ -25,7 +25,7 @@ dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.75.0: Systems programming language from Mozilla
+dev-lang/rust 1.76.0: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.78.3: The GLib library of C routines
 dev-libs/gobject-introspection 1.78.1: Introspection system for GObject-based libraries
