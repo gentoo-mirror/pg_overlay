@@ -150,7 +150,7 @@ sys-libs/polly 17.0.6: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
-virtual/rust 1.75.0: Virtual for Rust language compiler
+virtual/rust 1.76.0: Virtual for Rust language compiler
 www-client/firefox 122.0: Firefox Web Browser
 www-client/vivaldi-snapshot 6.6.3256.4: A browser for our friends
 x11-base/xwayland 23.2.4: Standalone X server running under Wayland
