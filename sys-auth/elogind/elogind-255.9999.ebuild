@@ -70,12 +70,18 @@ src_configure() {
 		$(usex debug "-Ddebug-extra=elogind" "")
 		--buildtype $(usex debug debug release)
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
+		--libexecdir="${EPREFIX}"/$(get_libdir)/elogind
+		--localstatedir="${EPREFIX}"/var
+		--prefix="${EPREFIX}/usr"
+		--sysconfdir="${EPREFIX}"/etc
 		-Dacl=$(usex acl true false)
 		-Daudit=$(usex audit true false)
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
 		-Dcgroup-controller=openrc
 		-Ddefault-kill-user-processes=true
 		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
+		-Ddbuspolicydir="${EPREFIX}"/usr/share/dbus-1/system.d
+		-Ddbussystemservicedir="${EPREFIX}"/usr/share/dbus-1/system-services
 		-Defi=$(usex efi true false)
 		-Dhtml=$(usex doc auto false)
 		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
@@ -84,9 +90,6 @@ src_configure() {
 		-Dmode=release
 		-Dpam=$(usex pam true false)
 		-Dpamlibdir=$(getpam_mod_dir)
-		-Drootlibdir="${EPREFIX}"/$(get_libdir)
-		-Drootlibexecdir="${EPREFIX}"/$(get_libdir)/elogind
-		-Drootprefix="${EPREFIX}/"
 		-Dselinux=$(usex selinux true false)
 		-Dsmack=true
 		-Dtests=false
