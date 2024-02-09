@@ -136,7 +136,7 @@ sys-apps/polychromatic 0.8.3-r1 9999: RGB lighting management software for GNU/L
 sys-apps/razer-cli 2.2.0: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
-sys-auth/elogind 246.9999 252.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/pambase 20220214: PAM base configuration files
 sys-devel/clang 17.0.6: C language family frontend for LLVM
 sys-devel/llvm 17.0.6: Low Level Virtual Machine
