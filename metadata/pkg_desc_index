@@ -80,7 +80,7 @@ media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libheif 1.17.5: ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r4: Libraries for PulseAudio clients
-media-libs/libsdl2 2.28.5: Simple Direct Media Layer
+media-libs/libsdl2 2.28.5-r1: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20231013: VoIP library for Telegram clients
 media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
@@ -152,7 +152,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.76.0: Virtual for Rust language compiler
 www-client/firefox 122.0.1: Firefox Web Browser
-www-client/vivaldi-snapshot 6.6.3256.4: A browser for our friends
+www-client/vivaldi-snapshot 6.6.3265.3: A browser for our friends
 x11-base/xwayland 23.2.4: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.41: Gimp ToolKit +
