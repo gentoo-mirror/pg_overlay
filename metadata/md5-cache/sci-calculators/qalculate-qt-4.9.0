@@ -1,14 +1,14 @@
-BDEPEND=dev-qt/qttools[linguist]:6
+BDEPEND=dev-qt/qttools:6[linguist]
 DEFINED_PHASES=install prepare
-DEPEND=dev-qt/qtbase[gui,network,widgets]:6 >=sci-libs/libqalculate-4.9.0
+DEPEND=dev-qt/qtbase:6[gui,network,widgets] >=sci-libs/libqalculate-4.9.0
 DESCRIPTION=Qt-based UI for libqalculate
 EAPI=8
 HOMEPAGE=https://github.com/Qalculate/qalculate-qt
 INHERIT=qmake-utils
 KEYWORDS=~amd64
 LICENSE=GPL-2+
-RDEPEND=dev-qt/qtbase[gui,network,widgets]:6 >=sci-libs/libqalculate-4.9.0
+RDEPEND=dev-qt/qtbase:6[gui,network,widgets] >=sci-libs/libqalculate-4.9.0
 SLOT=0
 SRC_URI=https://github.com/Qalculate/qalculate-qt/releases/download/v4.9.0/qalculate-qt-4.9.0.tar.gz
 _eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	qmake-utils	a8dd17b1d94586164f5e3fc12b1c6b81
-_md5_=3452ebaf412cc95d0c647fbe5b6e92db
+_md5_=a00065550b870b508736d639c4ad8b65

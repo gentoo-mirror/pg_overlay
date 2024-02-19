@@ -16,11 +16,11 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="
-	dev-qt/qtbase[gui,network,widgets]:6
+	dev-qt/qtbase:6[gui,network,widgets]
 	>=sci-libs/libqalculate-${PV}
 "
 RDEPEND="${DEPEND}"
-BDEPEND="dev-qt/qttools[linguist]:6"
+BDEPEND="dev-qt/qttools:6[linguist]"
 
 src_prepare() {
 	default
