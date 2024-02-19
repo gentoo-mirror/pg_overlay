@@ -16,18 +16,15 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="
-	dev-qt/qtcore:5
-	dev-qt/qtgui:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtwidgets:5
+	dev-qt/qtbase:6[gui,network,widgets]
 	>=sci-libs/libqalculate-${PV}
 "
 RDEPEND="${DEPEND}"
-BDEPEND="dev-qt/linguist-tools:5"
+BDEPEND="dev-qt/qttools:6[linguist]"
 
 src_prepare() {
 	default
-	eqmake5 PREFIX="${EPREFIX}/usr"
+	eqmake6 PREFIX="${EPREFIX}/usr"
 }
 
 src_install() {
