@@ -74,8 +74,8 @@ src_configure() {
 		--localstatedir="${EPREFIX}"/var
 		--prefix="${EPREFIX}/usr"
 		--sysconfdir="${EPREFIX}"/etc
-		-Dacl=$(usex acl true false)
-		-Daudit=$(usex audit true false)
+		-Dacl=$(usex acl enabled disabled)
+		-Daudit=$(usex audit enabled disabled)
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
 		-Dcgroup-controller=openrc
 		-Ddefault-kill-user-processes=true
@@ -83,18 +83,19 @@ src_configure() {
 		-Ddbuspolicydir="${EPREFIX}"/usr/share/dbus-1/system.d
 		-Ddbussystemservicedir="${EPREFIX}"/usr/share/dbus-1/system-services
 		-Defi=$(usex efi true false)
-		-Dhtml=$(usex doc auto false)
+		-Dhtml=$(usex doc auto disabled)
 		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 		-Dinstall-sysconfdir=true
 		-Dman=auto
 		-Dmode=release
-		-Dpam=$(usex pam true false)
+		-Dpam=$(usex pam enabled disabled)
 		-Dpamlibdir=$(getpam_mod_dir)
-		-Dselinux=$(usex selinux true false)
+		-Dselinux=$(usex selinux enabled disabled)
 		-Dsmack=true
 		-Dtests=false
 		-Dudevrulesdir="$(get_udevdir)"/rules.d
 		-Dzshcompletiondir=""
+		-Db_lto=true
 	)
 
 	meson_src_configure
