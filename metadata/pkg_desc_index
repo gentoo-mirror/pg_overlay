@@ -72,6 +72,8 @@ media-libs/fontconfig 2.15.0: A library for configuring and customizing font acc
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
+media-libs/kcolorpicker 0.3.0: Qt based color picker with popup menu
+media-libs/kimageannotator 0.7.0: Tool for annotating images
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
 media-libs/libde265 1.0.14: Open h.265 video codec implementation
 media-libs/libdisplay-info 0.1.1: Simple framework for writing Vulkan layers
