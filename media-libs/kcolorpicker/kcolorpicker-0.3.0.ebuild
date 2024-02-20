@@ -6,33 +6,26 @@ EAPI=8
 VIRTUALX_REQUIRED="test"
 inherit cmake virtualx
 
-MY_PN=kImageAnnotator
+MY_PN=kColorPicker
 MY_P="${MY_PN}-${PV}"
 
-DESCRIPTION="Tool for annotating images"
-HOMEPAGE="https://github.com/ksnip/kImageAnnotator"
+DESCRIPTION="Qt based color picker with popup menu"
+HOMEPAGE="https://github.com/ksnip/kColorPicker"
 SRC_URI="https://github.com/ksnip/${MY_PN}/archive/v${PV}.tar.gz -> ${MY_P}.tar.gz"
-S="${WORKDIR}/${MY_P}"
 
 LICENSE="LGPL-3+"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv ~x86"
+KEYWORDS="amd64 arm64 ~loong ~ppc64 ~riscv x86"
 IUSE="test"
 
 RDEPEND="
 	dev-qt/qtbase:6[gui,widgets]
-	dev-qt/qtsvg:6
-	>=media-libs/kcolorpicker-0.2.0
 "
 DEPEND="${RDEPEND}
-	test? (
-			dev-qt/qtbase:6[test]
-			dev-cpp/gtest
-	)
+	test? ( dev-qt/qtbase:6[test] )
 "
-BDEPEND="
-	dev-qt/qttools:6[linguist]
-"
+
+S="${WORKDIR}/${MY_P}"
 
 src_configure() {
 	local mycmakeargs=(
@@ -43,5 +36,5 @@ src_configure() {
 }
 
 src_test() {
-	BUILD_DIR="${BUILD_DIR}/tests" virtx cmake_src_test
+	virtx cmake_src_test
 }
