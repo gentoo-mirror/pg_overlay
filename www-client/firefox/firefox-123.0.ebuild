@@ -3,9 +3,9 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-122-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-123-patches-01.tar.xz"
 
-LLVM_MAX_SLOT=17
+LLVM_COMPAT=( 16 17 )
 
 PYTHON_COMPAT=( python3_{11..12} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
@@ -37,7 +37,7 @@ MOZ_P="${MOZ_PN}-${MOZ_PV}"
 MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
 MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
-inherit autotools check-reqs desktop flag-o-matic gnome2-utils linux-info llvm multiprocessing \
+inherit autotools check-reqs desktop flag-o-matic gnome2-utils linux-info llvm-r1 multiprocessing \
 	optfeature pax-utils python-any-r1 readme.gentoo-r1 toolchain-funcs virtualx xdg
 
 MOZ_SRC_BASE_URI="https://archive.mozilla.org/pub/${MOZ_PN}/releases/${MOZ_PV}"
@@ -81,26 +81,15 @@ FF_ONLY_DEPEND="!www-client/firefox:0
 	!www-client/firefox:esr
 	selinux? ( sec-policy/selinux-mozilla )"
 BDEPEND="${PYTHON_DEPS}
-	|| (
-		(
-			sys-devel/clang:17
-			sys-devel/llvm:17
-			clang? (
-				sys-devel/lld:17
-				virtual/rust:0/llvm-17
-				pgo? ( =sys-libs/compiler-rt-sanitizers-17*[profile] )
-			)
+	$(llvm_gen_dep '
+		sys-devel/clang:${LLVM_SLOT}
+		sys-devel/llvm:${LLVM_SLOT}
+		clang? (
+			sys-devel/lld:${LLVM_SLOT}
+			virtual/rust:0/llvm-${LLVM_SLOT}
 		)
-		(
-			sys-devel/clang:16
-			sys-devel/llvm:16
-			clang? (
-				sys-devel/lld:16
-				virtual/rust:0/llvm-16
-				pgo? ( =sys-libs/compiler-rt-sanitizers-16*[profile] )
-			)
-		)
-	)
+		pgo? ( sys-libs/compiler-rt-sanitizers:${LLVM_SLOT}[profile] )
+	')
 	app-alternatives/awk
 	app-arch/unzip
 	app-arch/zip
@@ -132,7 +121,7 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.95
+	>=dev-libs/nss-3.97
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
@@ -478,7 +467,7 @@ pkg_setup() {
 
 		check-reqs_pkg_setup
 
-		llvm_pkg_setup
+		llvm-r1_pkg_setup
 
 		if use clang && use lto && tc-ld-is-lld ; then
 			local version_lld=$(ld.lld --version 2>/dev/null | awk '{ print $2 }')
@@ -717,7 +706,7 @@ src_prepare() {
 	einfo Applying privacy patches
 	einfo ++++++++++++++++++++++++
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
-	rm -rv browser/extensions/{formautofill,pictureinpicture,report-site-issue,screenshots,search-detection,webcompat}
+	rm -rfv browser/extensions/{formautofill,pictureinpicture,report-site-issue,screenshots,search-detection,webcompat}
 	cp -v "${FILESDIR}/privacy-patchset/search-config.json" "${S}/services/settings/dumps/main/search-config.json"
 	#######
 	### Debian patches
