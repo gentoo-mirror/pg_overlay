@@ -83,7 +83,7 @@ src_configure() {
 		-Ddbuspolicydir="${EPREFIX}"/usr/share/dbus-1/system.d
 		-Ddbussystemservicedir="${EPREFIX}"/usr/share/dbus-1/system-services
 		-Defi=$(usex efi true false)
-		-Dhtml=$(usex doc auto disables)
+		-Dhtml=$(usex doc auto disabled)
 		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 		-Dinstall-sysconfdir=true
 		-Dman=auto
