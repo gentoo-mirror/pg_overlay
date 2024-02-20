@@ -1,0 +1,99 @@
+From d45295faf41b204e0d684fc54b8a5bbe2cee2086 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Miro=20Hron=C4=8Dok?= <miro@hroncok.cz>
+Date: Tue, 24 Oct 2023 14:36:04 +0200
+Subject: [PATCH] Make the tests pass with Python 3.13.0a1
+
+---
+ test_zombie_imp/badsyntax_pep3120.py | 1 +
+ test_zombie_imp/test_imp.py          | 8 +++-----
+ test_zombie_imp/test_zombie_imp.py   | 8 +++-----
+ 3 files changed, 7 insertions(+), 10 deletions(-)
+ create mode 100644 test_zombie_imp/badsyntax_pep3120.py
+
+diff --git a/test_zombie_imp/badsyntax_pep3120.py b/test_zombie_imp/badsyntax_pep3120.py
+new file mode 100644
+index 0000000..d14b4c9
+--- /dev/null
++++ b/test_zombie_imp/badsyntax_pep3120.py
+@@ -0,0 +1 @@
++print("böse")
+diff --git a/test_zombie_imp/test_imp.py b/test_zombie_imp/test_imp.py
+index a9f2e29..60c1f0c 100644
+--- a/test_zombie_imp/test_imp.py
++++ b/test_zombie_imp/test_imp.py
+@@ -25,8 +25,6 @@
+ import imp  #!! this should be the only difference between test_imp and test_zombie_imp!
+ import _imp
+ 
+-orig__file__ = os.path.join(test.__path__[0], os.path.split(__file__)[-1])
+-
+ 
+ OS_PATH_NAME = os.path.__name__
+ 
+@@ -86,7 +84,7 @@ def test_find_module_encoding(self):
+             with imp.find_module('module_' + mod, self.test_path)[0] as fd:
+                 self.assertEqual(fd.encoding, encoding)
+ 
+-        path = [os.path.dirname(orig__file__)]
++        path = [os.path.dirname(__file__)]
+         with self.assertRaises(SyntaxError):
+             imp.find_module('badsyntax_pep3120', path)
+ 
+@@ -211,7 +209,7 @@ def test_issue5604(self):
+             os_helper.rmtree('__pycache__')
+ 
+     def test_issue9319(self):
+-        path = os.path.dirname(orig__file__)
++        path = os.path.dirname(__file__)
+         self.assertRaises(SyntaxError,
+                           imp.find_module, "badsyntax_pep3120", [path])
+ 
+@@ -333,7 +331,7 @@ def test_load_source(self):
+         mod = type(sys.modules[__name__])(modname)
+         with support.swap_item(sys.modules, modname, mod):
+             with self.assertRaisesRegex(ValueError, 'embedded null'):
+-                imp.load_source(modname, orig__file__ + "\0")
++                imp.load_source(modname, __file__ + "\0")
+ 
+     @support.cpython_only
+     def test_issue31315(self):
+diff --git a/test_zombie_imp/test_zombie_imp.py b/test_zombie_imp/test_zombie_imp.py
+index cb21869..3ce25b8 100644
+--- a/test_zombie_imp/test_zombie_imp.py
++++ b/test_zombie_imp/test_zombie_imp.py
+@@ -25,8 +25,6 @@
+ import zombie_imp as imp  #!! this should be the only difference between test_imp and test_zombie_imp
+ import _imp
+ 
+-orig__file__ = os.path.join(test.__path__[0], os.path.split(__file__)[-1])
+-
+ 
+ OS_PATH_NAME = os.path.__name__
+ 
+@@ -86,7 +84,7 @@ def test_find_module_encoding(self):
+             with imp.find_module('module_' + mod, self.test_path)[0] as fd:
+                 self.assertEqual(fd.encoding, encoding)
+ 
+-        path = [os.path.dirname(orig__file__)]
++        path = [os.path.dirname(__file__)]
+         with self.assertRaises(SyntaxError):
+             imp.find_module('badsyntax_pep3120', path)
+ 
+@@ -211,7 +209,7 @@ def test_issue5604(self):
+             os_helper.rmtree('__pycache__')
+ 
+     def test_issue9319(self):
+-        path = os.path.dirname(orig__file__)
++        path = os.path.dirname(__file__)
+         self.assertRaises(SyntaxError,
+                           imp.find_module, "badsyntax_pep3120", [path])
+ 
+@@ -333,7 +331,7 @@ def test_load_source(self):
+         mod = type(sys.modules[__name__])(modname)
+         with support.swap_item(sys.modules, modname, mod):
+             with self.assertRaisesRegex(ValueError, 'embedded null'):
+-                imp.load_source(modname, orig__file__ + "\0")
++                imp.load_source(modname, __file__ + "\0")
+ 
+     @support.cpython_only
+     def test_issue31315(self):
