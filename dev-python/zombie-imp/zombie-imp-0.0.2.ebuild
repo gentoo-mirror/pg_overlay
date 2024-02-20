@@ -18,3 +18,5 @@ KEYWORDS="~alpha ~amd64 ~arm arm64 hppa ~ia64 ~loong ~m68k ~mips ppc ppc64 ~risc
 
 RDEPEND=""
 BDEPEND=""
+
+PATCHES=( "$(FILESDIR)/d45295faf4.patch" )
