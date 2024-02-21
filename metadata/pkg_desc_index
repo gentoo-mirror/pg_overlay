@@ -22,6 +22,9 @@ app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary looku
 app-text/iso-codes 4.15.0: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want directly to a pastebin
 dev-cpp/abseil-cpp 20230802.1: Abseil Common Libraries (C++), LTS Branch
+dev-db/mariadb 10.11.7: An enhanced, drop-in replacement for MySQL
+dev-db/mariadb-connector-c 3.3.8: C client library for MariaDB/MySQL
+dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
@@ -71,7 +74,7 @@ kde-apps/gwenview 9999: Image viewer by KDE
 kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 6.0.49.9999 9999: Tools based on KDE Frameworks 6 to better interact with the system
-mail-client/thunderbird 115.7.0: Thunderbird Mail Client
+mail-client/thunderbird 115.8.0: Thunderbird Mail Client
 media-libs/fontconfig 2.15.0: A library for configuring and customizing font access
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
