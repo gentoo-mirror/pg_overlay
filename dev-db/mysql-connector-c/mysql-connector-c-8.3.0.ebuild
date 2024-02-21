@@ -82,8 +82,8 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	# Code is now requiring C++17 due to https://github.com/mysql/mysql-server/commit/236ab55bedd8c9eacd80766d85edde2a8afacd08
-	append-cxxflags -std=c++17
+	# Code is now requiring C++20 due to https://github.com/mysql/mysql-server/commit/236ab55bedd8c9eacd80766d85edde2a8afacd08
+	append-cxxflags -std=c++20
 
 	local mycmakeargs=(
 		-DCMAKE_C_FLAGS_RELWITHDEBINFO=-DNDEBUG
