@@ -48,7 +48,6 @@ DOCS=( README )
 MULTILIB_CHOST_TOOLS=( /usr/bin/mysql_config )
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-8.0.22-always-build-decompress-utilities.patch
 	"${FILESDIR}"/${PN}-8.0.19-do-not-install-comp_err.patch
 	"${FILESDIR}"/${PN}-8.0.27-res_n.patch
 	"${FILESDIR}"/${PN}-8.0.32-musl.patch
