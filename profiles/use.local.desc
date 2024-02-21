@@ -79,6 +79,7 @@ dev-db/mariadb:sst-rsync - Add tools needed to support the rsync SST method
 dev-db/mariadb:systemtap - Build support for profiling and tracing using dev-debug/systemtap
 dev-db/mariadb:test - Install upstream testsuites for end use.
 dev-db/mariadb:yassl - Enable SSL connections and crypto functions using the bundled yaSSL
+dev-db/mysql-connector-c++:legacy - Build the legacy 1.x API as well as the DevX API
 dev-db/sqlitestudio:cli - Build CLI interface
 dev-lang/luajit:lua52compat - Enable some upwards-compatible features from Lua 5.2 that are unlikely to break existing code.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
