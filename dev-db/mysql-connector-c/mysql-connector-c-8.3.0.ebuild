@@ -47,10 +47,10 @@ DOCS=( README )
 # Wrap the config script
 MULTILIB_CHOST_TOOLS=( /usr/bin/mysql_config )
 
-#PATCHES=(
-#	"${FILESDIR}"/${PN}-8.0.19-do-not-install-comp_err.patch
-#	"${FILESDIR}"/${PN}-8.0.27-res_n.patch
-#)
+PATCHES=(
+	"${FILESDIR}"/${PN}-8.0.19-do-not-install-comp_err.patch
+	"${FILESDIR}"/${PN}-8.0.27-res_n.patch
+)
 
 src_prepare() {
 	sed -i -e 's/CLIENT_LIBS/CONFIG_CLIENT_LIBS/' "scripts/CMakeLists.txt" || die
@@ -82,8 +82,8 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	# Code is now requiring C++17 due to https://github.com/mysql/mysql-server/commit/236ab55bedd8c9eacd80766d85edde2a8afacd08
-	append-cxxflags -std=c++17
+	# Code is now requiring C++20 due to https://github.com/mysql/mysql-server/commit/236ab55bedd8c9eacd80766d85edde2a8afacd08
+	append-cxxflags -std=c++20
 
 	local mycmakeargs=(
 		-DCMAKE_C_FLAGS_RELWITHDEBINFO=-DNDEBUG
