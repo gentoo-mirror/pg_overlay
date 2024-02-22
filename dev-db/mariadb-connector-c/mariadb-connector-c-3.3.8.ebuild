@@ -82,8 +82,8 @@ multilib_src_configure() {
 		-DINSTALL_PLUGINDIR="$(get_libdir)/mariadb/plugin"
 		-DINSTALL_BINDIR=bin
 		-DWITH_UNIT_TESTS=$(usex test)
-		-DWITH_MYSQLCOMPAT=ON
-		-DPLUGIN_CLIENT_ED25519=DYNAMIC
+		#-DWITH_MYSQLCOMPAT=ON
+		#-DPLUGIN_CLIENT_ED25519=DYNAMIC
 	)
 
 	cmake_src_configure
