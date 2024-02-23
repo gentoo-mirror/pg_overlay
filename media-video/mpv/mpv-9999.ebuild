@@ -23,9 +23,9 @@ SLOT="0/2" # soname
 IUSE="
 	+X +alsa aqua archive bluray cdda +cli coreaudio debug +drm dvb
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
-	+lua nvenc openal opengl pipewire pulseaudio
-	rubberband sdl selinux sixel sndio test tools +uchardet vaapi
-	vdpau vulkan wayland xv zimg zlib
+	+lua nvenc openal opengl pipewire pulseaudio rubberband sdl selinux
+	sixel sndio soc test tools +uchardet vaapi vdpau vulkan wayland xv
+	zimg zlib
 "
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
@@ -43,7 +43,6 @@ REQUIRED_USE="
 "
 RESTRICT="!test? ( test )"
 
-# raspberry-pi: default to -bin given non-bin is known broken (bug #893422)
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
 	>=media-libs/libplacebo-6.338:=[opengl?,vulkan?]
@@ -233,6 +232,12 @@ src_configure() {
 	)
 
 	meson_src_configure
+}
+
+src_test() {
+	# ffmpeg tests are picky and easily break without necessarily
+	# meaning that there are runtime issues (bug #921091,#924276)
+	meson_src_test --no-suite ffmpeg
 }
 
 src_install() {
