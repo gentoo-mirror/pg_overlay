@@ -201,6 +201,8 @@ media-sound/deadbeef:notify - Desktop notifications support
 media-sound/deadbeef:nullout - Dummy output driver
 media-sound/deadbeef:shellexec - Define custom shell commands that can be called on tracks
 media-sound/deadbeef:supereq - Enable equalizer
+media-sound/kid3:acoustid - Build acoustic fingerprinting plugin using media-libs/chromaprint
+media-sound/kid3:mpris - Enable support for MPRIS2 interface using dev-qt/qtdbus
 media-sound/mpd:cdio - Use libcdio for ISO9660 parsing support
 media-sound/mpd:chromaprint - Enable ChromaPrint / AcoustID support
 media-sound/mpd:cue - Enable CUE sheet support
