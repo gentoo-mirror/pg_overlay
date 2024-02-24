@@ -28,6 +28,7 @@ dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
+dev-lang/lazarus 3.0: feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.76.0: Systems programming language from Mozilla
@@ -46,6 +47,7 @@ dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus I
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 25.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
+dev-libs/qt6pas 6.2.7: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/re2 0.2023.11.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
