@@ -46,7 +46,7 @@ RESTRICT="strip" #269221
 
 S="${WORKDIR}/${PN}"
 
-PATCHES=(
+#PATCHES=(
 	#"${WORKDIR}/${PN}"-2.2.4-makefile.patch
 	#"${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
 
