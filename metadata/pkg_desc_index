@@ -8,6 +8,7 @@ app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization produc
 app-emulation/virtualbox-kvm 7.0.14_pre20240208: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.3: Program for querying and changing monitor settings
+app-misc/doublecmd 1.1.10: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
