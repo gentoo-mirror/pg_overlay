@@ -14,4 +14,4 @@ RESTRICT=strip
 SLOT=0/2.2
 SRC_URI=mirror://sourceforge/lazarus/lazarus-3.0-0.tar.gz https://dev.gentoo.org/~amynka/snap/lazarus-2.2.4-makefile.patch.bz2
 _eclasses_=desktop	021728fdc1b03b36357dbc89489e0f0d
-_md5_=cbf3ff716dd07e2abb215719ef59a42e
+_md5_=dc82c19c2d01c23b47c2c9203bda8e2b

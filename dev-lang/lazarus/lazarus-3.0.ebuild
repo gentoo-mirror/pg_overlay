@@ -47,7 +47,7 @@ RESTRICT="strip" #269221
 S="${WORKDIR}/${PN}"
 
 PATCHES=(
-	"${WORKDIR}/${P}"-makefile.patch
+	"${WORKDIR}/${PN}"-2.2.4-makefile.patch
 	"${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
 
 src_prepare() {
