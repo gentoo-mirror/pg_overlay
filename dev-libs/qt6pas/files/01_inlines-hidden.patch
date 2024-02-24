@@ -3,8 +3,8 @@ the amount of exported symbols that we need to take
 care of in the .symbols file.
 Index: libqtpas/Qt5Pas.pro
 ===================================================================
---- libqtpas.orig/Qt5Pas.pro
-+++ libqtpas/Qt5Pas.pro
+--- libqtpas.orig/Qt6Pas.pro
++++ libqtpas/Qt6Pas.pro
 @@ -21,7 +21,7 @@ TEMPLATE = lib
  VPATH = src
  MOC_DIR = tmp
