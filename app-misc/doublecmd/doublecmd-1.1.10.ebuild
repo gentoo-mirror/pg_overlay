@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit xdg-utils
+inherit xdg
 
 DESCRIPTION="Cross Platform file manager."
 HOMEPAGE="https://doublecmd.sourceforge.io/"
