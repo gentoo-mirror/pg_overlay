@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -14,10 +14,10 @@ HOMEPAGE="https://www.lazarus-ide.org/"
 SRC_URI="mirror://sourceforge/lazarus/${P}-0.tar.gz https://dev.gentoo.org/~amynka/snap/${PN}-2.2.4-makefile.patch.bz2"
 
 LICENSE="GPL-2 LGPL-2.1-with-linking-exception"
-SLOT="0/2.2" # Note: Slotting Lazarus needs slotting fpc, see DEPEND.
+SLOT="0/3.0" # Note: Slotting Lazarus needs slotting fpc, see DEPEND.
 KEYWORDS="~amd64 ~x86"
-IUSE="gtk2 qt6 +gui extras"
-REQUIRED_USE="gtk2? ( gui ) extras? ( gui )"
+IUSE="qt6 +gui extras"
+REQUIRED_USE="qt6? ( gui ) extras? ( gui )"
 
 # Pascal ignores CFLAGS and does its own stripping. Nothing else can be done about it.
 QA_FLAGS_IGNORED="
@@ -37,7 +37,7 @@ DEPEND="
 	>=sys-devel/binutils-2.19.1-r1:=
 	gui? (
 	    qt6? ( dev-libs/qt6pas:0 )
-	    gtk2? ( x11-libs/gtk+:2 )
+	    !qt6? ( x11-libs/gtk+:2 )
 )"
 BDEPEND="net-misc/rsync"
 RDEPEND="${DEPEND}"
@@ -45,10 +45,6 @@ RDEPEND="${DEPEND}"
 RESTRICT="strip" #269221
 
 S="${WORKDIR}/${PN}"
-
-#PATCHES=(
-	#"${WORKDIR}/${PN}"-2.2.4-makefile.patch
-	#"${FILESDIR}"/${PN}-0.9.26-fpcsrc.patch )
 
 src_prepare() {
 	default
@@ -67,7 +63,7 @@ src_compile() {
 	if ( use gui ) && ( use qt6 ) ; then
 		export LCL_PLATFORM=qt6
 	fi
-	use gtk2 && export LCL_PLATFORM=gtk2
+	use !qt6 && export LCL_PLATFORM=gtk2
 	if ( use gui ) ; then
 		emake all $(usex extras "bigide lhelp" "") -j1 || die "make failed!"
 	else
