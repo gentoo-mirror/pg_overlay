@@ -7,7 +7,7 @@ inherit xdg-utils
 
 DESCRIPTION="Cross Platform file manager."
 HOMEPAGE="https://doublecmd.sourceforge.io/"
-SRC_URI="mirror://sourceforge/${PN/$P}-src.tar.gz"
+SRC_URI="mirror://sourceforge/${PN}/${P}-src.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -26,7 +26,7 @@ RDEPEND="
 "
 
 
-PATCHES=( "${FILESDIR}"/${ABBREV}-build.patch )
+PATCHES=( "${FILESDIR}"/${PN}-build.patch )
 
 HOME="${PORTAGE_BUILDDIR}/homedir"
 export HOME
