@@ -120,7 +120,7 @@ net-ftp/filezilla 3.66.5: FTP client with lots of useful features and an intuiti
 net-im/64Gram 1.1.14: Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.13: Official desktop client for Telegram
-net-im/whatsapp-for-linux 1.6.4: An unofficial WhatsApp desktop application for Linux
+net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
 net-libs/libsrtp 2.5.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
 net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
