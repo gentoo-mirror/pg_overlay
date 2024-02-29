@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig nls? ( gtk? ( sys-devel/gettext ) ) qt5? ( dev-qt/linguist-tools:5 ) qt6? ( dev-qt/qttools:6[linguist] ) app-alternatives/ninja >=dev-build/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install postinst postrm prepare test unpack
+DEPEND=>=dev-libs/libevent-2.1.0:=[threads(+)] !mbedtls? ( dev-libs/openssl:0= ) mbedtls? ( net-libs/mbedtls:0= ) >=net-libs/libpsl-0.21.1 >=net-misc/curl-7.28.0[ssl] sys-libs/zlib:= nls? ( virtual/libintl ) gtk? ( >=dev-cpp/gtkmm-4.11.1:4.0 >=dev-cpp/glibmm-2.60.0:2.68 appindicator? ( dev-libs/libayatana-appindicator ) ) qt5? ( dev-qt/qtcore:5 dev-qt/qtdbus:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 ) qt6? ( dev-qt/qtbase:6[dbus,gui,network,widgets] dev-qt/qtsvg:6 ) nls? ( virtual/libintl )
+DESCRIPTION=A fast, easy, and free BitTorrent client
+EAPI=8
+HOMEPAGE=https://transmissionbt.com/
+INHERIT=cmake flag-o-matic tmpfiles xdg-utils git-r3
+IUSE=appindicator cli debug gtk nls mbedtls qt5 qt6 test
+LICENSE=|| ( GPL-2 GPL-3 Transmission-OpenSSL-exception ) GPL-2 MIT
+PROPERTIES=live
+RDEPEND=>=dev-libs/libevent-2.1.0:=[threads(+)] !mbedtls? ( dev-libs/openssl:0= ) mbedtls? ( net-libs/mbedtls:0= ) >=net-libs/libpsl-0.21.1 >=net-misc/curl-7.28.0[ssl] sys-libs/zlib:= nls? ( virtual/libintl ) gtk? ( >=dev-cpp/gtkmm-4.11.1:4.0 >=dev-cpp/glibmm-2.60.0:2.68 appindicator? ( dev-libs/libayatana-appindicator ) ) qt5? ( dev-qt/qtcore:5 dev-qt/qtdbus:5 dev-qt/qtgui:5 dev-qt/qtnetwork:5 dev-qt/qtsvg:5 dev-qt/qtwidgets:5 ) qt6? ( dev-qt/qtbase:6[dbus,gui,network,widgets] dev-qt/qtsvg:6 ) acct-group/transmission acct-user/transmission virtual/tmpfiles
+REQUIRED_USE=?? ( qt5 qt6 )
+RESTRICT=!test? ( test )
+SLOT=0
+_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	24c947ff5f858625cf0b33c15eed4425	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	b9f614a0d80b37b44ffdafc1a2c25fc4	tmpfiles	216aa76c3a6fcb5d893c23a0de86048f	git-r3	86fa1f157b70b9d2ff340c4633b1cf4b
+_md5_=a9e060ee140fdc87ae0fa4ed84792ae3
