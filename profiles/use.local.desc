@@ -205,39 +205,6 @@ media-sound/deadbeef:notify - Desktop notifications support
 media-sound/deadbeef:nullout - Dummy output driver
 media-sound/deadbeef:shellexec - Define custom shell commands that can be called on tracks
 media-sound/deadbeef:supereq - Enable equalizer
-media-sound/kid3:acoustid - Build acoustic fingerprinting plugin using media-libs/chromaprint
-media-sound/kid3:mpris - Enable support for MPRIS2 interface using dev-qt/qtdbus
-media-sound/mpd:cdio - Use libcdio for ISO9660 parsing support
-media-sound/mpd:chromaprint - Enable ChromaPrint / AcoustID support
-media-sound/mpd:cue - Enable CUE sheet support
-media-sound/mpd:curl - Support for web stream listening
-media-sound/mpd:eventfd - Use the eventfd function in MPD's event loop
-media-sound/mpd:faad - Use external faad library for AAC decoding
-media-sound/mpd:fifo - Support writing audio to a FIFO
-media-sound/mpd:fluidsynth - Enables Fluidsynth MIDI software synthesis (discouraged)
-media-sound/mpd:gme - Enables support for media-libs/game-music-emu for playing various video game music formats.
-media-sound/mpd:id3tag - Support for ID3 tags
-media-sound/mpd:inotify - Use the Linux kernel inotify subsystem to notice changes to mpd music library
-media-sound/mpd:lame - Support for MP3 streaming via Icecast2
-media-sound/mpd:libmpdclient - Enable support for remote mpd databases
-media-sound/mpd:libsoxr - Enable the libsoxr resampler
-media-sound/mpd:mpg123 - Enable support for mp3 decoding over media-sound/mpg123
-media-sound/mpd:network - Enables network streaming support
-media-sound/mpd:nfs - Enable support for the Network File System
-media-sound/mpd:openmpt - OpenMPT decoder plugin
-media-sound/mpd:pipe - Support writing audio to a pipe
-media-sound/mpd:pipewire - PipeWire support
-media-sound/mpd:qobuz - Build plugin to access qobuz
-media-sound/mpd:recorder - Enables output plugin for recording radio streams
-media-sound/mpd:sid - Build with SID (Commodore 64 Audio) support
-media-sound/mpd:signalfd - Use the signalfd function in MPD's event loop
-media-sound/mpd:snapcast - Snapcast audio plugin
-media-sound/mpd:sndio - Enable support for the media-sound/sndio backend
-media-sound/mpd:soundcloud - Build plugin to access soundcloud
-media-sound/mpd:systemd - Enable support for systemd socket activation
-media-sound/mpd:twolame - Support twolame MPEG-2 encoding
-media-sound/mpd:webdav - Enable using music from a WebDAV share
-media-sound/mpd:wildmidi - Enable MIDI support via wildmidi
 media-sound/ncmpc:async-connect - Enable asynchronous connect
 media-sound/ncmpc:chat-screen - Enable the chat screen
 media-sound/ncmpc:help-screen - Enable the help screen
@@ -275,8 +242,6 @@ media-sound/qmmp:sndfile - Enable wav playback support via media-libs/libsndfile
 media-sound/qmmp:soxr - Use the SoX resampling library
 media-sound/qmmp:stereo - Enable stereo effect
 media-sound/qmmp:tray - Build tray icon
-media-sound/shntool:alac - Add support for Apple Lossless Audio Codec files
-media-sound/shntool:mac - Add support for Monkey's Audio files
 media-video/mpv:archive - Enable support for various archive formats via app-arch/libarchive
 media-video/mpv:bluray - Enable playback of Blu-ray filesystems
 media-video/mpv:cli - Enable the command-line player

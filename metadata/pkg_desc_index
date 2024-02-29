@@ -12,8 +12,8 @@ app-misc/doublecmd 1.1.10: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
-app-office/libreoffice 24.2.1.1: A full office productivity suite
-app-office/libreoffice-l10n 24.2.1.1: Translations for the Libreoffice suite
+app-office/libreoffice 24.2.1.2: A full office productivity suite
+app-office/libreoffice-l10n 24.2.1.2: Translations for the Libreoffice suite
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
@@ -49,7 +49,7 @@ dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 25.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/qt6pas 6.2.7: Free Pascal Qt6 bindings library updated by lazarus IDE.
-dev-libs/re2 0.2023.11.01: An efficient, principled regular expression library
+dev-libs/re2 0.2023.11.01 0.2024.02.01: An efficient, principled regular expression library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-python/cloudscraper 1.2.69: A Python module to bypass Cloudflare's anti-bot page
@@ -78,12 +78,9 @@ kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 6.0.49.9999 9999: Tools based on KDE Frameworks 6 to better interact with the system
 mail-client/thunderbird 115.8.0: Thunderbird Mail Client
-media-libs/fontconfig 2.15.0: A library for configuring and customizing font access
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
-media-libs/kcolorpicker 0.3.0: Qt based color picker with popup menu
-media-libs/kimageannotator 0.7.0: Tool for annotating images
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
 media-libs/libde265 1.0.14: Open h.265 video codec implementation
 media-libs/libdisplay-info 0.1.1: Simple framework for writing Vulkan layers
@@ -102,15 +99,10 @@ media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
-media-sound/kid3 9999: Simple tag editor based on Qt
-media-sound/mac 9.04: Monkey's Audio Codecs
-media-sound/mpd 0.23.15: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
 media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins support
-media-sound/shntool 3.0.10-r1: A multi-purpose WAVE data processing and reporting utility
-media-sound/sndio 1.8.1: small audio and MIDI framework part of the OpenBSD project
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-video/mpv 9999: Media player for the command line
