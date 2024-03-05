@@ -50,7 +50,7 @@ dev-libs/libixion 0.18.1: General purpose formula parser & interpreter
 dev-libs/liborcus 0.18.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
-dev-libs/protobuf 25.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
+dev-libs/protobuf 25.3_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/qt6pas 6.2.7: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/re2 0.2023.11.01 0.2024.02.01: An efficient, principled regular expression library
