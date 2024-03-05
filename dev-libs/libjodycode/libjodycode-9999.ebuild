@@ -18,7 +18,7 @@ KEYWORDS="amd64"
 RESTRICT="test"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-3.0.1-static-lib.patch
+#	"${FILESDIR}"/${PN}-3.0.1-static-lib.patch
 )
 
 src_compile() {
