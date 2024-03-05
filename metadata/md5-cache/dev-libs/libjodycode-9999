@@ -1,0 +1,13 @@
+BDEPEND=>=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile install unpack
+DESCRIPTION=Shared code used by several utilities written by Jody Bruchon
+EAPI=8
+HOMEPAGE=https://codeberg.org/jbruchon/libjodycode
+INHERIT=git-r3
+KEYWORDS=amd64
+LICENSE=MIT
+PROPERTIES=live
+RESTRICT=test
+SLOT=0
+_eclasses_=git-r3	86fa1f157b70b9d2ff340c4633b1cf4b
+_md5_=9dea8d6342182b749503a1cd1dd70e0e
