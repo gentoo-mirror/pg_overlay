@@ -3,7 +3,7 @@
 
 EAPI=8
 
-LLVM_MAX_SLOT="17"
+LLVM_MAX_SLOT="18"
 MY_PN="SPIRV-LLVM-Translator"
 MY_P="${MY_PN}-${PV}"
 
