@@ -135,7 +135,7 @@ check_distribution_components() {
 						;;
 					# used by lldb
 					#LLVMDebuginfod)
-						;;
+					#	;;
 					# testing libraries
 					#LLVMTestingAnnotations|LLVMTestingSupport)
 					#	;;
