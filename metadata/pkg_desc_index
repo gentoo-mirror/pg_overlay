@@ -71,6 +71,7 @@ dev-util/qbs 1.21.0: Modern build tool for software projects
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
+dev-util/spirv-llvm-translator 18.1.0: Bi-directional translator between SPIR-V and LLVM IR
 dev-vcs/mercurial 6.6.1_pre: Scalable distributed SCM
 dev-vcs/subversion 1.14.2-r1: Advanced version control system
 games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
