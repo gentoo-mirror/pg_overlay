@@ -365,9 +365,6 @@ sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/plocate:io-uring - Enable efficient I/O via sys-libs/liburing.
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
 sys-auth/elogind:efi - Support rebooting into EFI firmware
-sys-devel/clang:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
-sys-devel/clang:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
-sys-devel/clang:default-lld - Use lld as the default linker for clang
 sys-devel/clang:extra - Build extra tools (clangd, clang-tidy and a few more)
 sys-devel/clang:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
 sys-devel/clang:static-analyzer - Install the Clang static analyzer
@@ -388,12 +385,6 @@ sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:stack-realign - Realign the stack in the 32-bit build for compatibility with older binaries at some performance cost. Avoids crashes in older 32-bit binaries. Only affects x86/32-bit multilib builds on amd64.
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
 sys-libs/ncurses:trace - Enable test trace() support in ncurses calls
-sys-libs/polly:default-compiler-rt - Use compiler-rt instead of libgcc as the default rtlib for clang
-sys-libs/polly:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
-sys-libs/polly:default-lld - Use lld as the default linker for clang
-sys-libs/polly:extra - Build extra tools (clangd, clang-tidy and a few more)
-sys-libs/polly:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
-sys-libs/polly:static-analyzer - Install the Clang static analyzer
 virtual/rust:rustfmt - Install rustfmt, Rust code formatter
 www-client/firefox:clang - Use Clang compiler instead of GCC
 www-client/firefox:eme-free - Disable EME (DRM plugin) capability at build time
