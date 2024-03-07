@@ -12,7 +12,7 @@ LICENSE=""
 # adjust when rust upstream bumps internal llvm
 # we do not allow multiple llvm versions in dev-lang/rust for
 # neither system nor bundled, so we just hardcode it here.
-SLOT="0/llvm-17"
+SLOT="0/llvm-18"
 KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 IUSE="rustfmt"
 
