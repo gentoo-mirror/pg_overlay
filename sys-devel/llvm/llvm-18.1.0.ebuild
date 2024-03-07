@@ -19,10 +19,10 @@ HOMEPAGE="https://llvm.org/"
 
 LICENSE="Apache-2.0-with-LLVM-exceptions UoI-NCSA BSD public-domain rc"
 SLOT="${LLVM_MAJOR}/${LLVM_SOABI}"
-KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~ppc-macos ~x64-macos"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~arm64-macos ~ppc-macos ~x64-macos"
 IUSE="
 	+binutils-plugin debug debuginfod doc exegesis libedit +libffi
-	ncurses test xar xml z3 zstd
+	ncurses test xml z3 zstd
 "
 RESTRICT="!test? ( test )"
 
@@ -36,7 +36,6 @@ RDEPEND="
 	libedit? ( dev-libs/libedit:0=[${MULTILIB_USEDEP}] )
 	libffi? ( >=dev-libs/libffi-3.0.13-r1:0=[${MULTILIB_USEDEP}] )
 	ncurses? ( >=sys-libs/ncurses-5.9-r3:0=[${MULTILIB_USEDEP}] )
-	xar? ( app-arch/xar )
 	xml? ( dev-libs/libxml2:2=[${MULTILIB_USEDEP}] )
 	z3? ( >=sci-mathematics/z3-4.7.1:0=[${MULTILIB_USEDEP}] )
 	zstd? ( app-arch/zstd:=[${MULTILIB_USEDEP}] )
@@ -51,12 +50,7 @@ BDEPEND="
 	sys-devel/gnuconfig
 	kernel_Darwin? (
 		<sys-libs/libcxx-${LLVM_VERSION}.9999
-		>=sys-devel/binutils-apple-5.1
 	)
-	doc? ( $(python_gen_any_dep '
-		dev-python/recommonmark[${PYTHON_USEDEP}]
-		dev-python/sphinx[${PYTHON_USEDEP}]
-	') )
 	libffi? ( virtual/pkgconfig )
 "
 # There are no file collisions between these versions but having :0
@@ -73,14 +67,22 @@ PDEPEND="
 
 LLVM_COMPONENTS=( llvm cmake third-party )
 LLVM_MANPAGES=1
-LLVM_PATCHSET=${PV}
 LLVM_USE_TARGETS=provide
 llvm.org_set_globals
 
-python_check_deps() {
-	use doc || return 0
+[[ -n ${LLVM_MANPAGE_DIST} ]] && BDEPEND+=" doc? ( "
+BDEPEND+="
+	$(python_gen_any_dep '
+		dev-python/myst-parser[${PYTHON_USEDEP}]
+		dev-python/sphinx[${PYTHON_USEDEP}]
+	')
+"
+[[ -n ${LLVM_MANPAGE_DIST} ]] && BDEPEND+=" ) "
 
-	python_has_version -b "dev-python/recommonmark[${PYTHON_USEDEP}]" &&
+python_check_deps() {
+	llvm_are_manpages_built || return 0
+
+	python_has_version -b "dev-python/myst-parser[${PYTHON_USEDEP}]" &&
 	python_has_version -b "dev-python/sphinx[${PYTHON_USEDEP}]"
 }
 
@@ -130,6 +132,9 @@ check_distribution_components() {
 						;;
 					# TableGen lib + deps
 					LLVMDemangle|LLVMSupport|LLVMTableGen)
+						;;
+					# used by lldb
+					LLVMDebuginfod)
 						;;
 					# testing libraries
 					#LLVMTestingAnnotations|LLVMTestingSupport)
@@ -220,6 +225,9 @@ get_distribution_components() {
 
 	if multilib_is_native_abi; then
 		out+=(
+			# library used by lldb
+			LLVMDebuginfod
+
 			# utilities
 			llvm-tblgen
 			FileCheck
@@ -287,8 +295,8 @@ get_distribution_components() {
 			llvm-rc
 			llvm-readelf
 			llvm-readobj
+			llvm-readtapi
 			llvm-reduce
-			llvm-remark-size-diff
 			llvm-remarkutil
 			llvm-rtdyld
 			llvm-sim
@@ -298,7 +306,6 @@ get_distribution_components() {
 			llvm-strings
 			llvm-strip
 			llvm-symbolizer
-			llvm-tapi-diff
 			llvm-tli-checker
 			llvm-undname
 			llvm-windres
@@ -385,8 +392,6 @@ multilib_src_configure() {
 
 		-DFFI_INCLUDE_DIR="${ffi_cflags#-I}"
 		-DFFI_LIBRARY_DIR="${ffi_ldflags#-L}"
-		# used only for llvm-objdump tool
-		-DLLVM_HAVE_LIBXAR=$(multilib_native_usex xar 1 0)
 
 		-DPython3_EXECUTABLE="${PYTHON}"
 
@@ -440,22 +445,14 @@ multilib_src_configure() {
 		)
 	fi
 
-	# On Macos prefix, Gentoo doesn't split sys-libs/ncurses to libtinfo and
-	# libncurses, but llvm tries to use libtinfo before libncurses, and ends up
-	# using libtinfo (actually, libncurses.dylib) from system instead of prefix
 	use kernel_Darwin && mycmakeargs+=(
+		# On Macos prefix, Gentoo doesn't split sys-libs/ncurses to libtinfo and
+		# libncurses, but llvm tries to use libtinfo before libncurses, and ends up
+		# using libtinfo (actually, libncurses.dylib) from system instead of prefix
 		-DTerminfo_LIBRARIES=-lncurses
+		# Use our libtool instead of looking it up with xcrun
+		-DCMAKE_LIBTOOL="${EPREFIX}/usr/bin/${CHOST}-libtool"
 	)
-
-	# workaround BMI bug in gcc-7 (fixed in 7.4)
-	# https://bugs.gentoo.org/649880
-	# apply only to x86, https://bugs.gentoo.org/650506
-	if tc-is-gcc && [[ ${MULTILIB_ABI_FLAG} == abi_x86* ]] &&
-			[[ $(gcc-major-version) -eq 7 && $(gcc-minor-version) -lt 4 ]]
-	then
-		local CFLAGS="${CFLAGS} -mno-bmi"
-		local CXXFLAGS="${CXXFLAGS} -mno-bmi"
-	fi
 
 	# LLVM can have very high memory consumption while linking,
 	# exhausting the limit on 32-bit linker executable
