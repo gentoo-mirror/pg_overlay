@@ -134,7 +134,7 @@ check_distribution_components() {
 					LLVMDemangle|LLVMSupport|LLVMTableGen)
 						;;
 					# used by lldb
-					LLVMDebuginfod)
+					#LLVMDebuginfod)
 						;;
 					# testing libraries
 					#LLVMTestingAnnotations|LLVMTestingSupport)
@@ -226,7 +226,7 @@ get_distribution_components() {
 	if multilib_is_native_abi; then
 		out+=(
 			# library used by lldb
-			LLVMDebuginfod
+			#LLVMDebuginfod
 
 			# utilities
 			llvm-tblgen
@@ -370,9 +370,9 @@ multilib_src_configure() {
 		-DLLVM_TARGETS_TO_BUILD=""
 		-DLLVM_EXPERIMENTAL_TARGETS_TO_BUILD="${LLVM_TARGETS// /;}"
 		-DLLVM_INCLUDE_BENCHMARKS=OFF
-		-DLLVM_INCLUDE_TESTS=OFF
+		-DLLVM_INCLUDE_TESTS=$(usex test)
 		-DLLVM_BUILD_TESTS=$(usex test)
-		-DLLVM_INSTALL_GTEST=OFF
+		-DLLVM_INSTALL_GTEST=$(usex test)
 
 		-DLLVM_ENABLE_FFI=$(usex libffi)
 		-DLLVM_ENABLE_LIBEDIT=$(usex libedit)
