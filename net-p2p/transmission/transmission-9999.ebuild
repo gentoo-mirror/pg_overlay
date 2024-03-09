@@ -120,6 +120,8 @@ src_install() {
 
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
+
+	newtmpfiles "${FILESDIR}"/transmission-daemon.tmpfiles transmission-daemon.conf
 }
 
 pkg_postrm() {
@@ -134,4 +136,5 @@ pkg_postinst() {
 		xdg_desktop_database_update
 		xdg_icon_cache_update
 	fi
+	tmpfiles_process transmission-daemon.conf
 }

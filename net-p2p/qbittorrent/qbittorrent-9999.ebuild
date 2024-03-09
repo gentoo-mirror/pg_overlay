@@ -1,48 +1,78 @@
-# Copyright 2023 Gentoo Authors
+# Copyright 2023-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit cmake edo multibuild xdg
+inherit cmake edo multibuild verify-sig xdg
 
 DESCRIPTION="BitTorrent client in C++ and Qt"
 HOMEPAGE="https://www.qbittorrent.org"
 
 if [[ ${PV} == *9999 ]]; then
+	EGIT_REPO_URI="https://github.com/qbittorrent/qBittorrent.git"
 	inherit git-r3
-	EGIT_REPO_URI="https://github.com/${PN}/qBittorrent.git"
 else
-	SRC_URI="https://github.com/qbittorrent/qBittorrent/archive/release-${PV}.tar.gz -> ${P}.tar.gz"
+	SRC_URI="
+		mirror://sourceforge/qbittorrent/${P}.tar.xz
+		verify-sig? ( mirror://sourceforge/qbittorrent/${P}.tar.xz.asc )
+	"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
-	S="${WORKDIR}"/qBittorrent-release-${PV}
+
+	BDEPEND="verify-sig? ( sec-keys/openpgp-keys-qbittorrent )"
+	VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/qBittorrent.asc
 fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+dbus +gui test webui"
+IUSE="+dbus +gui qt6 test webui"
 RESTRICT="!test? ( test )"
-REQUIRED_USE="|| ( gui webui )"
+REQUIRED_USE="|| ( gui webui )
+	dbus? ( gui )
+"
 
 RDEPEND="
-	dev-libs/openssl:=
-	dev-qt/qtbase:6[network,ssl,sql,sqlite,xml(+)]
-	>=net-libs/libtorrent-rasterbar-2.0.0:=
-	sys-libs/zlib
+	>=dev-libs/openssl-1.1.1:=
+	>=net-libs/libtorrent-rasterbar-1.2.19:=
+	>=sys-libs/zlib-1.2.11
+	qt6? ( >=dev-qt/qtbase-6.2:6[network,ssl,sql,sqlite,xml] )
+	!qt6? (
+		dev-qt/qtcore:5
+		dev-qt/qtnetwork:5[ssl]
+		dev-qt/qtsql:5[sqlite]
+		dev-qt/qtxml:5
+	)
 	gui? (
-		dev-libs/geoip
-		dev-qt/qtbase:6[dbus?,gui,widgets]
-		dev-qt/qtsvg:6
-	)"
+		!qt6? (
+			dev-qt/qtgui:5
+			dev-qt/qtsvg:5
+			dev-qt/qtwidgets:5
+			dbus? ( dev-qt/qtdbus:5 )
+		)
+		qt6? (
+			>=dev-qt/qtbase-6.2:6[dbus?,gui,widgets]
+			>=dev-qt/qtsvg-6.2:6
+		)
+	)
+	webui? (
+		acct-group/qbittorrent
+		acct-user/qbittorrent
+	)
+"
 DEPEND="
 	${RDEPEND}
-	dev-libs/boost"
-BDEPEND="dev-qt/qttools:6[linguist]
+	>=dev-libs/boost-1.71
+	test? (
+		!qt6? ( dev-qt/qttest:5 )
+	)"
+BDEPEND+="
+	!qt6? ( dev-qt/linguist-tools:5 )
+	qt6? ( >=dev-qt/qttools-6.2:6[linguist] )
 	virtual/pkgconfig"
 
 DOCS=( AUTHORS Changelog CONTRIBUTING.md README.md )
 
 src_prepare() {
-	sed -i "s/QBT_VERSION_MINOR 6/QBT_VERSION_MINOR 5/g" src/base/version.h.in
+#	sed -i "s/QBT_VERSION_MINOR 6/QBT_VERSION_MINOR 5/g" src/base/version.h.in
 #	sed -i "s/QBT_VERSION_BUGFIX 0/QBT_VERSION_BUGFIX 5/g" src/base/version.h.in
 	sed -i "s/alpha1//g" src/base/version.h.in
 	sed -i "s/beta1//g" src/base/version.h.in
@@ -101,6 +131,8 @@ src_compile() {
 
 src_test() {
 	my_src_test() {
+		# cmake does not detect tests by default, if you use enable_testing
+		# in a subdirectory instead of the root CMakeLists.txt
 		cd "${BUILD_DIR}"/test || die
 		edo ctest .
 	}
@@ -112,6 +144,8 @@ src_install() {
 	multibuild_foreach_variant cmake_src_install
 	einstalldocs
 
-	newconfd "${FILESDIR}/${PN}.confd" "${PN}"
-	newinitd "${FILESDIR}/${PN}.initd" "${PN}"
+	if use webui; then
+		newconfd "${FILESDIR}/${PN}.confd" "${PN}"
+		newinitd "${FILESDIR}/${PN}.initd" "${PN}"
+	fi
 }
