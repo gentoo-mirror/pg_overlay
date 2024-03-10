@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake flag-o-matic tmpfiles xdg-utils
+inherit cmake flag-o-matic xdg-utils
 
 if [[ ${PV} == 9999 ]]; then
 	inherit git-r3
@@ -120,8 +120,6 @@ src_install() {
 
 	newinitd "${FILESDIR}"/transmission-daemon.initd.10 transmission-daemon
 	newconfd "${FILESDIR}"/transmission-daemon.confd.4 transmission-daemon
-
-	newtmpfiles "${FILESDIR}"/transmission-daemon.tmpfiles transmission-daemon.conf
 }
 
 pkg_postrm() {
