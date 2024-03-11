@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -95,9 +95,9 @@ BDEPEND="${PYTHON_DEPS}
 	system-bootstrap? ( ${BOOTSTRAP_DEPEND} )
 	!system-llvm? (
 		>=dev-build/cmake-3.13.4
-		dev-build/ninja
+		app-alternatives/ninja
 	)
-	test? ( sys-devel/gdb )
+	test? ( dev-debug/gdb )
 	verify-sig? ( sec-keys/openpgp-keys-rust )
 "
 
@@ -166,8 +166,10 @@ RESTRICT="test"
 VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
+	"${FILESDIR}"/1.74.1-cross-compile-libz.patch
 	"${FILESDIR}"/1.70.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
+	"${FILESDIR}"/1.75.0-handle-vendored-sources.patch  # remove for >=1.77.0
 	"${FILESDIR}"/0001-Use-lld-provided-by-system.patch
 	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
 )
@@ -187,7 +189,7 @@ bootstrap_rust_version_check() {
 	[[ ${MERGE_TYPE} == binary ]] && return
 	local rustc_wanted="$(ver_cut 1).$(($(ver_cut 2) - 1))"
 	local rustc_toonew="$(ver_cut 1).$(($(ver_cut 2) + 1))"
-	local rustc_version=( $(eselect --brief rust show 2>/dev/null) )
+	local rustc_version=( $(eselect --brief --root="${BROOT}" rust show 2>/dev/null) )
 	rustc_version=${rustc_version[0]#rust-bin-}
 	rustc_version=${rustc_version#rust-}
 
@@ -286,7 +288,7 @@ src_prepare() {
 
 	if ! use system-bootstrap; then
 		local rust_stage0_root="${WORKDIR}"/rust-stage0
-		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi)"
+		local rust_stage0="rust-${RUST_STAGE0_VERSION}-$(rust_abi "${CBUILD}")"
 
 		"${WORKDIR}/${rust_stage0}"/install.sh --disable-ldconfig \
 			--without=rust-docs-json-preview,rust-docs --destdir="${rust_stage0_root}" --prefix=/ || die
@@ -327,7 +329,7 @@ src_configure() {
 		if use system-llvm; then
 			# un-hardcode rust-lld linker for this target
 			# https://bugs.gentoo.org/715348
-			sed -i '/linker:/ s/rust-lld/wasm-ld/' compiler/rustc_target/src/spec/wasm_base.rs || die
+			sed -i '/linker:/ s/rust-lld/wasm-ld/' compiler/rustc_target/src/spec/base/wasm.rs || die
 		fi
 	fi
 	rust_targets="${rust_targets#,}"
@@ -353,6 +355,8 @@ src_configure() {
 	[[ -d ${rust_stage0_root} ]] || die "${rust_stage0_root} is not a directory"
 
 	rust_target="$(rust_abi)"
+	rust_build="$(rust_abi "${CBUILD}")"
+	rust_host="$(rust_abi "${CHOST}")"
 
 	local cm_btype="$(usex debug DEBUG RELEASE)"
 	cat <<- _EOF_ > "${S}"/config.toml
@@ -383,8 +387,8 @@ src_configure() {
 		[build]
 		build-stage = 2
 		test-stage = 2
-		build = "${rust_target}"
-		host = ["${rust_target}"]
+		build = "${rust_build}"
+		host = ["${rust_host}"]
 		target = [${rust_targets}]
 		cargo = "${rust_stage0_root}/bin/cargo"
 		rustc = "${rust_stage0_root}/bin/rustc"
@@ -745,7 +749,7 @@ src_install() {
 pkg_postinst() {
 	eselect rust update
 
-	if has_version sys-devel/gdb || has_version dev-util/lldb; then
+	if has_version dev-debug/gdb || has_version dev-debug/lldb; then
 		elog "Rust installs a helper script for calling GDB and LLDB,"
 		elog "for your convenience it is installed under /usr/bin/rust-{gdb,lldb}-${PV}."
 	fi
