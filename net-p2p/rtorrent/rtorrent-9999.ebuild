@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,7 +13,7 @@ EGIT_BRANCH="master"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS=""
-IUSE="debug selinux test xmlrpc ipv6"
+IUSE="debug selinux test xmlrpc"
 RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="=net-libs/libtorrent-9999
@@ -57,9 +57,7 @@ src_configure() {
 
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
-		--disable-dependency-tracking \
 		$(use_enable debug) \
-		$(use_enable ipv6) \
 		$(use_with xmlrpc xmlrpc-c)
 }
 
