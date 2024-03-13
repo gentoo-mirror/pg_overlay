@@ -1,7 +1,7 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 inherit autotools git-r3 toolchain-funcs
 
@@ -11,25 +11,26 @@ EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
 EGIT_BRANCH="master"
 
 LICENSE="GPL-2"
-
 # The README says that the library ABI is not yet stable and dependencies on
 # the library should be an explicit, syncronized version until the library
 # has had more time to mature. Until it matures we should not include a soname
 # subslot.
 SLOT="0"
-
 KEYWORDS=""
-IUSE="debug ssl test"
-RESTRICT="!test? ( test )"
+IUSE="debug ssl"
 
+# cppunit dependency - https://github.com/rakshasa/libtorrent/issues/182
 RDEPEND="
+	dev-util/cppunit:=
 	sys-libs/zlib
-	ssl? (
-		dev-libs/openssl:0=
-	)"
-DEPEND="${RDEPEND}
-	virtual/pkgconfig
-	test? ( dev-util/cppunit )"
+	ssl? ( dev-libs/openssl:= )"
+DEPEND="${RDEPEND}"
+BDEPEND="virtual/pkgconfig"
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-0.13.8-sysroot.patch
+	"${FILESDIR}"/${PN}-0.13.8-configure-clang-16.patch
+)
 
 src_prepare() {
 	default
@@ -42,6 +43,7 @@ src_configure() {
 	echo -e "#include <inttypes.h>\nint main(){ int64_t var = 7; __sync_add_and_fetch(&var, 1); return 0;}" > "${T}/sync_add_and_fetch.c" || die
 	$(tc-getCC) ${CFLAGS} -o /dev/null -x c "${T}/sync_add_and_fetch.c" >/dev/null 2>&1
 	if [[ $? -ne 0 ]]; then
+		einfo "Disabling instrumentation"
 		disable_instrumentation="--disable-instrumentation"
 	fi
 
@@ -51,12 +53,11 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
 		${disable_instrumentation} \
-		--with-posix-fallocate \
-		--with-zlib="${EROOT%/}/usr/"
+		--with-posix-fallocate
 }
 
 src_install() {
 	default
 
-	find "${D}" -name '*.la' -delete
+	find "${ED}" -type f -name '*.la' -delete || die
 }
