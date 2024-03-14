@@ -117,7 +117,7 @@ media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins supp
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.0.3: Multimedia processing graphs
+media-video/pipewire 1.0.4: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-ftp/filezilla 3.66.5: FTP client with lots of useful features and an intuitive interface
 net-im/64Gram 1.1.15: Provide 64bit build with some enhancements
@@ -168,7 +168,7 @@ virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.76.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4: Lightweight CalDAV+CardDAV server
 www-client/firefox 123.0.1: Firefox Web Browser
-www-client/vivaldi-snapshot 6.6.3271.44: A browser for our friends
+www-client/vivaldi-snapshot 6.6.3291.3: A browser for our friends
 x11-base/xwayland 23.2.4: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.41: Gimp ToolKit +
