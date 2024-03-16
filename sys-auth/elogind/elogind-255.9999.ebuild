@@ -68,7 +68,7 @@ src_configure() {
 	# -> It is completely irrelevant with -Dcgroup-controller=openrc anyway.
 	local emesonargs=(
 		$(usex debug "-Ddebug-extra=elogind" "")
-		-Dbuildtype $(usex debug debug release)
+		-Dbuildtype=$(usex debug debug release)
 		--libdir="${EPREFIX}"/usr/$(get_libdir)
 		--libexecdir="${EPREFIX}"/$(get_libdir)/elogind
 		--localstatedir="${EPREFIX}"/var
