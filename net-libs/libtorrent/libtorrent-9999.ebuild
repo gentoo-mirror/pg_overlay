@@ -29,7 +29,6 @@ BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-sysroot.patch
-	"${FILESDIR}"/${PN}-0.13.8-configure-clang-16.patch
 )
 
 src_prepare() {
