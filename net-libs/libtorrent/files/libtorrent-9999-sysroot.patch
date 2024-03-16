@@ -17,6 +17,7 @@
 
  CFLAGS="$PTHREAD_CFLAGS $CPPUNIT_CFLAGS $CFLAGS"
  CXXFLAGS="$PTHREAD_CFLAGS $CPPUNIT_CFLAGS $CXXFLAGS"
+
 --- a/src/torrent/Makefile.am
 +++ b/src/torrent/Makefile.am
 @@ -136,8 +136,9 @@
