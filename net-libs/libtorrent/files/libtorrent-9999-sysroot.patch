@@ -23,8 +23,8 @@
         tracker_controller.h \
         tracker_list.cc \
         tracker_list.h
-+libsub_torrentutils_la_LIBADD = $(ZLIB_LIBS)
 
++libsub_torrentutils_la_LIBADD = $(ZLIB_LIBS)
 -AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
 +AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir) $(ZLIB_CFLAGS)
 
