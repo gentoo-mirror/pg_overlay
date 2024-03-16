@@ -28,7 +28,7 @@ DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.13.8-sysroot.patch
+	"${FILESDIR}"/${P}-sysroot.patch
 	"${FILESDIR}"/${PN}-0.13.8-configure-clang-16.patch
 )
 
