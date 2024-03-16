@@ -19,14 +19,14 @@
  CXXFLAGS="$PTHREAD_CFLAGS $CPPUNIT_CFLAGS $CXXFLAGS"
 --- a/src/torrent/Makefile.am
 +++ b/src/torrent/Makefile.am
-@@ -136,8 +136,9 @@
-        tracker_controller.h \
+@@ -137,8 +137,8 @@
         tracker_list.cc \
         tracker_list.h
 
-+libsub_torrentutils_la_LIBADD = $(ZLIB_LIBS)
 -AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir)
+-
++libsub_torrentutils_la_LIBADD = $(ZLIB_LIBS)
 +AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir) $(ZLIB_CFLAGS)
-
  libtorrent_torrent_data_includedir = $(includedir)/torrent/data
  libtorrent_torrent_data_include_HEADERS = \
+        data/block.h \
