@@ -159,7 +159,7 @@ sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently lear
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
-sys-kernel/kergen 0.1.5: Kernel config generator
+sys-kernel/installkernel 29: Gentoo fork of installkernel script from debianutils
 sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 18.1.0: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
