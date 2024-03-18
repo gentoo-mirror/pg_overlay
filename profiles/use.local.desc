@@ -378,14 +378,6 @@ sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
 sys-fs/udisks:systemd - Support sys-apps/systemd's logind
 sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
 sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
-sys-kernel/installkernel:dracut - Generate an initrd or UKI on each kernel installation
-sys-kernel/installkernel:efistub - EXPERIMENTAL: Update UEFI configuration on each kernel installation
-sys-kernel/installkernel:grub - Re-generate grub.cfg on each kernel installation, used grub.cfg is overridable with GRUB_CFG env var
-sys-kernel/installkernel:refind - Install a Gentoo icon for rEFInd alongside the (unified) kernel image, used icon is overridable with REFIND_ICON env var
-sys-kernel/installkernel:systemd - Use systemd's kernel-install to install kernels, overridable with SYSTEMD_KERNEL_INSTALL env var
-sys-kernel/installkernel:systemd-boot - Use systemd-boot's native layout by default
-sys-kernel/installkernel:uki - Install UKIs to ESP/EFI/Linux for EFI stub booting and/or bootloaders with support for auto-discovering UKIs
-sys-kernel/installkernel:ukify - Build an UKI with systemd's ukify on each kernel installation
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:stack-realign - Realign the stack in the 32-bit build for compatibility with older binaries at some performance cost. Avoids crashes in older 32-bit binaries. Only affects x86/32-bit multilib builds on amd64.
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
