@@ -154,21 +154,11 @@ sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
 sys-devel/clang 18.1.2: C language family frontend for LLVM
-sys-devel/clang-common 18.1.2: Common files shared between multiple slots of clang
-sys-devel/clang-runtime 18.1.2: Meta-ebuild for clang runtime libraries
-sys-devel/lld 18.1.2: The LLVM linker (link editor)
 sys-devel/llvm 18.1.2: Low Level Virtual Machine
-sys-devel/llvm-common 18.1.2: Common files shared between multiple slots of LLVM
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
-sys-libs/compiler-rt 18.1.2: Compiler runtime library for clang (built-in part)
-sys-libs/compiler-rt-sanitizers 18.1.2: Compiler runtime libraries for clang (sanitizers & xray)
-sys-libs/libcxx 18.1.2: New implementation of the C++ standard library, targeting C++11
-sys-libs/libcxxabi 18.1.2: Low level support for a standard C++ library
-sys-libs/libomp 18.1.2: OpenMP runtime library for LLVM/clang compiler
-sys-libs/llvm-libunwind 18.1.2: C++ runtime stack unwinder from LLVM
 sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 18.1.2: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor

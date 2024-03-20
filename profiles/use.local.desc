@@ -365,15 +365,6 @@ sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-devel/clang:extra - Build extra tools (clangd, clang-tidy and a few more)
 sys-devel/clang:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
 sys-devel/clang:static-analyzer - Install the Clang static analyzer
-sys-devel/clang-common:bootstrap-prefix - !!internal use only!! DO NOT SET THIS FLAG YOURSELF!, used for bootstrapping Gentoo Prefix
-sys-devel/clang-common:default-compiler-rt - Use compiler-rt + libunwind instead of libgcc as the default rtlib for clang
-sys-devel/clang-common:default-libcxx - Use libc++ instead of libstdc++ as the default stdlib for clang
-sys-devel/clang-common:default-lld - Use lld as the default linker for clang
-sys-devel/clang-common:stricter - Default to stricter behavior known from newer clang versions, turning more warnings into errors
-sys-devel/clang-runtime:compiler-rt - Install sys-libs/compiler-rt for -rtlib=compiler-rt
-sys-devel/clang-runtime:libcxx - Install sys-libs/libcxx for -stdlib=libc++
-sys-devel/clang-runtime:openmp - Install sys-libs/libomp for -fopenmp support
-sys-devel/clang-runtime:sanitize - Enable compiler-rt sanitizer (-fsanitize*) support
 sys-devel/llvm:binutils-plugin - Build the binutils plugin
 sys-devel/llvm:debuginfod - Install llvm-debuginfod (requires net-misc/curl and dev-cpp/cpp-httplib)
 sys-devel/llvm:doc - Build and install the HTML documentation and regenerate the man pages
@@ -387,33 +378,6 @@ sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
 sys-fs/udisks:systemd - Support sys-apps/systemd's logind
 sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
 sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
-sys-libs/compiler-rt:clang - Force building using installed clang (rather than the default CC/CXX).
-sys-libs/compiler-rt-sanitizers:asan - Build Address Sanitizer runtime.
-sys-libs/compiler-rt-sanitizers:cfi - Build Control Flow Integrity runtime.
-sys-libs/compiler-rt-sanitizers:clang - Force building using installed clang (rather than the default CC/CXX).
-sys-libs/compiler-rt-sanitizers:dfsan - Build Data Flow Sanitizer runtime.
-sys-libs/compiler-rt-sanitizers:gwp-asan - Build GWP-ASAN runtime.
-sys-libs/compiler-rt-sanitizers:hwasan - Build Hardware ASAN runtime.
-sys-libs/compiler-rt-sanitizers:libfuzzer - Build fuzzing runtime.
-sys-libs/compiler-rt-sanitizers:lsan - Build Leak Sanitizer runtime.
-sys-libs/compiler-rt-sanitizers:memprof - Build memory profiler runtime.
-sys-libs/compiler-rt-sanitizers:msan - Build Memory Sanitizer runtime.
-sys-libs/compiler-rt-sanitizers:orc - Build ORC runtime.
-sys-libs/compiler-rt-sanitizers:profile - Build profiling runtime.
-sys-libs/compiler-rt-sanitizers:safestack - Build SafeStack runtime.
-sys-libs/compiler-rt-sanitizers:scudo - Build Scudo Hardened Allocator.
-sys-libs/compiler-rt-sanitizers:shadowcallstack - Build ShadowCallStack.
-sys-libs/compiler-rt-sanitizers:tsan - Build Thread Sanitizer runtime.
-sys-libs/compiler-rt-sanitizers:ubsan - Build Undefined Behavior Sanitizer runtime.
-sys-libs/compiler-rt-sanitizers:xray - Build XRay runtime.
-sys-libs/libcxx:clang - Force building using installed clang (rather than the default CC/CXX; required for testing).
-sys-libs/libcxx:libcxxabi - Build on top of sys-libs/libcxxabi instead of gcc's libsupc++ (avoids depending on gcc).
-sys-libs/libcxxabi:clang - Force building using installed clang (rather than the default CC/CXX; required for testing).
-sys-libs/libomp:gdb-plugin - Build OMPD GDB plugin
-sys-libs/libomp:hwloc - Enable CPU affinity support via hwloc
-sys-libs/libomp:offload - Support offloading OpenMP using libomptarget
-sys-libs/libomp:ompt - Enable OpenMP Tools Interface support
-sys-libs/llvm-libunwind:clang - Force building using installed clang (rather than the default CC/CXX; required for testing).
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:stack-realign - Realign the stack in the 32-bit build for compatibility with older binaries at some performance cost. Avoids crashes in older 32-bit binaries. Only affects x86/32-bit multilib builds on amd64.
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
