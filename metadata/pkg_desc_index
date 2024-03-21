@@ -26,6 +26,7 @@ app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary looku
 app-text/iso-codes 4.15.0: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want directly to a pastebin
 dev-cpp/abseil-cpp 20230802.1: Abseil Common Libraries (C++), LTS Branch
+dev-cpp/atkmm 2.36.3: C++ interface for the ATK library
 dev-db/mariadb 10.11.7: An enhanced, drop-in replacement for MySQL
 dev-db/mariadb-connector-c 3.3.8: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
@@ -165,7 +166,7 @@ sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.76.0: Virtual for Rust language compiler
-www-apps/baikal 0.9.4: Lightweight CalDAV+CardDAV server
+www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 123.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.6.3291.3: A browser for our friends
 x11-base/xwayland 23.2.4: Standalone X server running under Wayland
