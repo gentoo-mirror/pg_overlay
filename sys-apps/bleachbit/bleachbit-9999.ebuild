@@ -4,6 +4,7 @@
 EAPI=8
 
 PLOCALES="af ar ast be bg bn bs ca cs da de el en_AU en_CA en_GB eo es et eu fa fi fr gl he hi hr hu ia id ie it ja ka ko ku ky lt lv ms my nb nds nl nn pl pt pt_BR ro ru se sk sl sq sr sv ta te th tr ug uk uz vi yi zh_CN zh_TW"
+DISTUTILS_USE_PEP517=setuptools
 PYTHON_COMPAT=( python3_{11..12} )
 PYTHON_REQ_USE="sqlite(+)"
 DISTUTILS_SINGLE_IMPL=1
