@@ -171,6 +171,7 @@ PATCHES=(
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system.patch
 	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
+	"${FILESDIR}"/rustc-1.77.0-unbundle-sqlite.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -310,6 +311,7 @@ src_prepare() {
 	rm -rf vendor/*jemalloc-sys*/jemalloc/
 	rm -rf vendor/libmimalloc-sys/c_src/mimalloc/
 	rm -rf vendor/openssl-src/openssl/
+	rm -rf vendor/libsqlite3-sys*/{sqlite3,sqlcipher}/
 
 	default
 }
