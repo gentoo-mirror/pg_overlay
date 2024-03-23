@@ -374,6 +374,7 @@ src_configure() {
 		static-libstdcpp = $(usex system-llvm false true)
 		use-libcxx =  $(toml_usex system-llvm)
 		use-linker = "lld"
+		polly = true
 
 		[llvm.build-config]
 		CMAKE_VERBOSE_MAKEFILE = "ON"
@@ -396,7 +397,7 @@ src_configure() {
 		compiler-docs = $(toml_usex doc)
 		#
 		submodules = true
-		optimized-compiler-builtins = false
+		optimized-compiler-builtins = true
 		#
 		python = "${EPYTHON}"
 		locked-deps = false
@@ -420,7 +421,7 @@ src_configure() {
 		[rust]
 		# https://github.com/rust-lang/rust/issues/54872
 		codegen-units-std = 1
-		optimize = true
+		optimize = 3
 		debug = $(toml_usex debug)
 		debug-assertions = $(toml_usex debug)
 		debug-assertions-std = $(toml_usex debug)
