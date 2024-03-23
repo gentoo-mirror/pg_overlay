@@ -395,8 +395,8 @@ src_configure() {
 		docs = $(toml_usex doc)
 		compiler-docs = $(toml_usex doc)
 		#
-		submodules = false
-		optimized-compiler-builtins = false
+		submodules = true
+		#optimized-compiler-builtins = false
 		#
 		python = "${EPYTHON}"
 		locked-deps = false
