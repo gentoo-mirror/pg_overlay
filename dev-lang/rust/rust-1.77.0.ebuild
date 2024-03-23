@@ -376,7 +376,7 @@ src_configure() {
 		static-libstdcpp = $(usex system-llvm false true)
 		use-libcxx =  $(toml_usex system-llvm)
 		use-linker = "lld"
-		polly = true
+		#polly = true
 
 		[llvm.build-config]
 		CMAKE_VERBOSE_MAKEFILE = "ON"
