@@ -266,6 +266,7 @@ pkg_setup() {
 	export LIBGIT2_NO_PKG_CONFIG=0 #749381
 	export LIBSSH2_SYS_USE_PKG_CONFIG=1
 	export PKG_CONFIG_ALLOW_CROSS=1
+	export LIBSQLITE3_SYS_USE_PKG_CONFIG=1
 
 	use system-bootstrap && bootstrap_rust_version_check
 
@@ -311,7 +312,7 @@ src_prepare() {
 	rm -rf vendor/*jemalloc-sys*/jemalloc/
 	rm -rf vendor/libmimalloc-sys/c_src/mimalloc/
 	rm -rf vendor/openssl-src/openssl/
-	rm -rf vendor/libsqlite3-sys*/sqlite3/
+	rm -rf vendor/libsqlite3-sys*/{sqlite3,sqlcipher}/
 
 	default
 }
