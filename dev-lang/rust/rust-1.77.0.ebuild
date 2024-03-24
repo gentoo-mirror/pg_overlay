@@ -312,7 +312,6 @@ src_prepare() {
 	rm -rf vendor/*jemalloc-sys*/jemalloc/
 	rm -rf vendor/libmimalloc-sys/c_src/mimalloc/
 	rm -rf vendor/openssl-src/openssl/
-	rm -rf vendor/libsqlite3-sys*/{sqlite3,sqlcipher}/
 
 	default
 }
