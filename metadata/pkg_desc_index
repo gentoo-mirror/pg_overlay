@@ -7,7 +7,7 @@ app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-editors/qhexedit2 0.8.9_p20221023: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/spice 0.15.2: SPICE server
 app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization products for enterprise and home use
-app-emulation/virtualbox-kvm 7.0.14_pre20240307: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox-kvm 7.0.14_pre20240325: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.11: Cross Platform file manager.
@@ -152,7 +152,7 @@ sci-mathematics/mathematica 14.0.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/openrazer 3.7.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/polychromatic 0.8.3-r1 9999: RGB lighting management software for GNU/Linux powered by OpenRazer
-sys-apps/razer-cli 2.2.0: Command line interface for controlling Razer devices on Linux
+sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
