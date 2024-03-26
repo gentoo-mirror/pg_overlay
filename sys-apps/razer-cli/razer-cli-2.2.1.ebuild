@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,10 +13,13 @@ HOMEPAGE="https://github.com/LoLei/razer-cli/"
 
 if [[ ${PV} == *9999* ]] ; then
 	inherit git-r3
+
 	EGIT_REPO_URI="https://github.com/LoLei/${PN}.git"
 else
-	SRC_URI="https://github.com/LoLei/${PN}/archive/v${PV}.tar.gz -> ${P}.gh.tar.gz"
-	KEYWORDS="amd64 ~x86"
+	SRC_URI="https://github.com/LoLei/${PN}/archive/v${PV}.tar.gz
+		-> ${P}.gh.tar.gz"
+
+	KEYWORDS="~amd64 ~x86"
 fi
 
 LICENSE="GPL-3+"
@@ -26,9 +29,11 @@ RDEPEND="
 	sys-apps/openrazer[client,daemon,${PYTHON_USEDEP}]
 	x11-apps/xrdb
 "
-BDEPEND="${RDEPEND}"
+BDEPEND="
+	${RDEPEND}
+"
 
-PATCHES=( "${FILESDIR}"/${PN}-setup.patch )
+PATCHES=( "${FILESDIR}/${PN}-setup.patch" )
 
 distutils_enable_tests unittest
 
