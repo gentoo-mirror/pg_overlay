@@ -82,12 +82,12 @@ TB_ONLY_DEPEND="!<x11-plugins/enigmail-2.2
 BDEPEND="${PYTHON_DEPS}
 	|| (
 		(
-			sys-devel/clang:17
-			sys-devel/llvm:17
+			sys-devel/clang:18
+			sys-devel/llvm:18
 			clang? (
-				sys-devel/lld:17
-				virtual/rust:0/llvm-17
-				pgo? ( =sys-libs/compiler-rt-sanitizers-17*[profile] )
+				sys-devel/lld:18
+				virtual/rust:0/llvm-18
+				pgo? ( =sys-libs/compiler-rt-sanitizers-18*[profile] )
 			)
 		)
 		(
