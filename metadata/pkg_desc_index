@@ -33,7 +33,7 @@ dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
-dev-lang/lazarus 3.0: feature rich visual programming environment emulating Delphi
+dev-lang/lazarus 3.2: feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.38: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
