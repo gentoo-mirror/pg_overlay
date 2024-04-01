@@ -15,8 +15,8 @@ app-misc/doublecmd-bin 1.1.11_beta: Free cross platform open source file manager
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
-app-office/libreoffice 24.2.2.1: A full office productivity suite
-app-office/libreoffice-l10n 24.2.2.1: Translations for the Libreoffice suite
+app-office/libreoffice 24.2.2.2: A full office productivity suite
+app-office/libreoffice-l10n 24.2.2.2: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.0.1: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
@@ -26,7 +26,7 @@ app-text/asciidoc 10.2.0: A plain text human readable/writable document format
 app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary lookup program
 app-text/iso-codes 4.15.0: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want directly to a pastebin
-dev-cpp/abseil-cpp 20230802.1: Abseil Common Libraries (C++), LTS Branch
+dev-cpp/abseil-cpp 20240116.1: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/atkmm 2.28.4 2.36.3: C++ interface for the ATK library
 dev-db/mariadb 10.11.7: An enhanced, drop-in replacement for MySQL
 dev-db/mariadb-connector-c 3.3.8: C client library for MariaDB/MySQL
@@ -103,8 +103,7 @@ media-libs/libheif 1.17.5: ISO/IEC 23008-12:2017 HEIF file format decoder and en
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r4: Libraries for PulseAudio clients
 media-libs/libsdl2 2.30.1: Simple Direct Media Layer
-media-libs/libtgvoip 2.4.4_p20231013: VoIP library for Telegram clients
-media-libs/libva 2.18.0-r1: Video Acceleration (VA) API for Linux
+media-libs/libtgvoip 2.4.4_p20240122: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
 media-libs/resvg 0.40.0: An SVG rendering library
@@ -122,7 +121,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.4: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-media-video/wireplumber 0.5.0: Replacement for pipewire-media-session
+media-video/wireplumber 0.5.1: Replacement for pipewire-media-session
 net-ftp/filezilla 3.66.5: FTP client with lots of useful features and an intuitive interface
 net-im/64Gram 1.1.15: Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
