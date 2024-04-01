@@ -54,7 +54,7 @@ dev-libs/libixion 0.18.1: General purpose formula parser & interpreter
 dev-libs/liborcus 0.18.1: Standalone file import filter library for spreadsheet documents
 dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
-dev-libs/protobuf 25.3_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
+dev-libs/protobuf 26.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/qt6pas 6.2.7: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/re2 0.2023.11.01 0.2024.02.01: An efficient, principled regular expression library
@@ -90,8 +90,8 @@ kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 mail-client/thunderbird 115.9.0 115.9.0-r1: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
-media-libs/gst-plugins-base 1.22.10_pre: Basepack of plugins for gstreamer
-media-libs/gstreamer 1.22.10_pre: Open source multimedia framework
+media-libs/gst-plugins-base 1.24.1_pre: Basepack of plugins for gstreamer
+media-libs/gstreamer 1.24.1_pre: Open source multimedia framework
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
