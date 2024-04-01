@@ -254,7 +254,7 @@ DEPEND="${COMMON_DEPEND}
 	x11-libs/libXt
 	x11-libs/libXtst
 	java? (
-		dev-java/ant-core
+		dev-java/ant:0
 		>=virtual/jdk-17
 	)
 	test? (
@@ -315,6 +315,10 @@ PATCHES=(
 
 	# maybe upstreamable
 	"${FILESDIR}/${PN}-7.5.8.2-icu-74-compatibility.patch"
+
+	# TODO: upstream
+	"${FILESDIR}/${PN}-7.6-unused-qt5network.patch"
+	"${FILESDIR}/${PN}-24.2-unused-qt6network.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
