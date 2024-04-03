@@ -7,7 +7,7 @@ PYTHON_COMPAT=( python3_{11..12} )
 
 inherit xdg cmake python-any-r1 optfeature flag-o-matic
 
-DESCRIPTION="Provide 64bit build with some enhancements"
+DESCRIPTION="64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements"
 HOMEPAGE="https://github.com/TDesktop-x64/tdesktop"
 
 SRC_URI="https://github.com/TDesktop-x64/tdesktop/releases/download/v${PV}/${P}-full.tar.gz"
