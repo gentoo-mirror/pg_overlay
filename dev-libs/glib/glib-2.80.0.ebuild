@@ -132,7 +132,7 @@ src_prepare() {
 
 	# gdbus-codegen is a separate package
 	sed -i -e '/install_dir/d' gio/gdbus-2.0/codegen/meson.build || die
-	sed -i "s/true/false/d" gio/gdbus-2.0/codegen/meson.build || die
+	sed -i "s/true/false/g" gio/gdbus-2.0/codegen/meson.build || die
 
 	# Same kind of meson-0.50 issue with some installed-tests files; will likely be fixed upstream soon
 	sed -i -e '/install_dir/d' gio/tests/meson.build || die
