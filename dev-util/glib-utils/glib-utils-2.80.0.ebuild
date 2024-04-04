@@ -18,10 +18,7 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~m68k ~mips ~ppc ~ppc64 ~
 
 RDEPEND="${PYTHON_DEPS}"
 DEPEND="${RDEPEND}"
-BDEPEND="
-	dev-libs/libxslt
-	app-text/docbook-xsl-stylesheets
-"
+BDEPEND=""
 
 src_configure() { :; }
 
