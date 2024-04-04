@@ -53,7 +53,7 @@ BDEPEND="
 	)
 "
 
-PATCHES=( "${FILESDIR}/${P}-tests-py312.patch" )
+PATCHES=( "${FILESDIR}/${PN}-1.78.1-tests-py312.patch" )
 
 pkg_setup() {
 	python-single-r1_pkg_setup
