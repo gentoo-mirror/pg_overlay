@@ -204,6 +204,7 @@ multilib_src_configure() {
 		-Doss_fuzz=disabled
 		$(meson_native_use_feature elf libelf)
 		-Dmultiarch=false
+		-Dintrospection=enabled
 	)
 	meson_src_configure
 }
