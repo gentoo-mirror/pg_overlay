@@ -141,8 +141,8 @@ src_prepare() {
 			-i cmake/external/qt/package.cmake || die
 	fi
 
-	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
-	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
+#	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
+#	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
 	cp -f "${FILESDIR}"/qt_compare.h Telegram/lib_base/base/qt/
 
 

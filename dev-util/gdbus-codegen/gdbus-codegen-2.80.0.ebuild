@@ -24,10 +24,7 @@ RDEPEND="
 	')
 "
 DEPEND="${RDEPEND}"
-BDEPEND="
-	dev-libs/libxslt
-	app-text/docbook-xsl-stylesheets
-"
+BDEPEND=""
 
 S="${WORKDIR}/glib-${PV}/gio/gdbus-2.0/codegen"
 
@@ -47,25 +44,8 @@ python_prepare_all() {
 	sed -e "s/@PV@/${PV}/" -i setup.py || die "sed setup.py failed"
 }
 
-do_xsltproc_command() {
-	# Taken from meson.build for manual manpage building - keep in sync (also copied to dev-util/glib-utils)
-	xsltproc \
-		--nonet \
-		--stringparam man.output.quietly 1 \
-		--stringparam funcsynopsis.style ansi \
-		--stringparam man.th.extra1.suppress 1 \
-		--stringparam man.authors.section.enabled 0 \
-		--stringparam man.copyright.section.enabled 0 \
-		-o "${2}" \
-		http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl \
-		"${1}" || die "manpage generation failed"
-}
-
 src_compile() {
 	distutils-r1_src_compile
-#	do_xsltproc_command \
-#		"${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.xml" \
-#		"${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.1"
 }
 
 src_test() {
@@ -75,5 +55,4 @@ src_test() {
 
 python_install_all() {
 	distutils-r1_python_install_all # no-op, but prevents QA warning
-	#doman "${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.1"
 }

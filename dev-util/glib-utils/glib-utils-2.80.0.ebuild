@@ -22,20 +22,6 @@ BDEPEND=""
 
 src_configure() { :; }
 
-do_xsltproc_command() {
-	# Taken from meson.build for manual manpage building - keep in sync (also copied to dev-util/gdbus-codegen)
-	xsltproc \
-		--nonet \
-		--stringparam man.output.quietly 1 \
-		--stringparam funcsynopsis.style ansi \
-		--stringparam man.th.extra1.suppress 1 \
-		--stringparam man.authors.section.enabled 0 \
-		--stringparam man.copyright.section.enabled 0 \
-		-o "${2}" \
-		http://docbook.sourceforge.net/release/xsl/current/manpages/docbook.xsl \
-		"${1}" || die "manpage generation failed"
-}
-
 src_compile() {
 	sed -e "s:@VERSION@:${PV}:g;s:@PYTHON@:python:g" gobject/glib-genmarshal.in > gobject/glib-genmarshal || die
 	sed -e "s:@VERSION@:${PV}:g;s:@PYTHON@:python:g" gobject/glib-mkenums.in > gobject/glib-mkenums || die
