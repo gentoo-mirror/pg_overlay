@@ -66,6 +66,7 @@ dev-python/pyudev 0.24.1: Python binding to libudev
 dev-python/zombie-imp 0.0.2: A copy of the imp module that was removed in Python 3.12.
 dev-util/android-tools 34.0.5: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/gdbus-codegen 2.80.0: GDBus code and documentation generator
 dev-util/glib-utils 2.80.0: Build utilities for GLib using projects
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
