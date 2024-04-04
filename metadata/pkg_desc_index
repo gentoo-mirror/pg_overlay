@@ -1,3 +1,4 @@
+app-accessibility/at-spi2-core 2.52.0: D-Bus accessibility specifications and registration daemon
 app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-arch/rar 7.00: RAR compressor/uncompressor
@@ -43,7 +44,8 @@ dev-lang/rust 1.77.0: Systems programming language from Mozilla
 dev-lang/rust-bin 1.77.0: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.80.0: The GLib library of C routines
-dev-libs/gobject-introspection 1.78.1: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection 1.80.0: Introspection system for GObject-based libraries
+dev-libs/gobject-introspection-common 1.80.0: Build infrastructure for GObject Introspection
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
 dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Library)
