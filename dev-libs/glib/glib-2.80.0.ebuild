@@ -1,9 +1,9 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 PYTHON_REQ_USE="xml(+)"
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{10..12} )
 
 inherit gnome.org gnome2-utils linux-info meson-multilib multilib python-any-r1 toolchain-funcs xdg
 
@@ -49,8 +49,11 @@ BDEPEND="
 	gtk-doc? ( >=dev-util/gtk-doc-1.33
 		app-text/docbook-xml-dtd:4.2
 		app-text/docbook-xml-dtd:4.5 )
-	systemtap? ( >=dev-util/systemtap-1.3 )
+	systemtap? ( >=dev-debug/systemtap-1.3 )
 	${PYTHON_DEPS}
+	$(python_gen_any_dep '
+		dev-python/packaging[${PYTHON_USEDEP}]
+	')
 	test? ( >=sys-apps/dbus-1.2.14 )
 	virtual/pkgconfig
 "
@@ -69,7 +72,13 @@ MULTILIB_CHOST_TOOLS=(
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.64.1-mark-gdbus-server-auth-test-flaky.patch
+	"${FILESDIR}"/${PN}-2.78.4-distutils.patch
+	"${FILESDIR}"/${PN}-2.78.4-libpcre2-10.43.patch
 )
+
+python_check_deps() {
+	python_has_version "dev-python/packaging[${PYTHON_USEDEP}]"
+}
 
 pkg_setup() {
 	if use kernel_linux ; then
@@ -179,7 +188,7 @@ multilib_src_configure() {
 	#fi
 
 	local emesonargs=(
-		--buildtype $(usex debug debug plain)
+		-Dbuildtype=$(usex debug debug plain)
 		-Ddefault_library=$(usex static-libs both shared)
 		-Druntime_dir="${EPREFIX}"/run
 		$(meson_feature selinux)
