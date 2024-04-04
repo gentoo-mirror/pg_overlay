@@ -63,9 +63,9 @@ do_xsltproc_command() {
 
 src_compile() {
 	distutils-r1_src_compile
-	do_xsltproc_command \
-		"${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.xml" \
-		"${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.1"
+#	do_xsltproc_command \
+#		"${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.xml" \
+#		"${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.1"
 }
 
 src_test() {
@@ -75,5 +75,5 @@ src_test() {
 
 python_install_all() {
 	distutils-r1_python_install_all # no-op, but prevents QA warning
-	doman "${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.1"
+	#doman "${WORKDIR}/glib-${PV}/docs/reference/gio/gdbus-codegen.1"
 }
