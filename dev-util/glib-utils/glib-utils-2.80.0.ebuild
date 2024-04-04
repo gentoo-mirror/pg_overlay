@@ -43,9 +43,9 @@ src_compile() {
 	sed -e "s:@VERSION@:${PV}:g;s:@PYTHON@:python:g" gobject/glib-genmarshal.in > gobject/glib-genmarshal || die
 	sed -e "s:@VERSION@:${PV}:g;s:@PYTHON@:python:g" gobject/glib-mkenums.in > gobject/glib-mkenums || die
 	sed -e "s:@GLIB_VERSION@:${PV}:g;s:@PYTHON@:python:g" glib/gtester-report.in > glib/gtester-report || die
-	do_xsltproc_command docs/reference/gobject/glib-genmarshal.xml docs/reference/gobject/glib-genmarshal.1
-	do_xsltproc_command docs/reference/gobject/glib-mkenums.xml docs/reference/gobject/glib-mkenums.1
-	do_xsltproc_command docs/reference/glib/gtester-report.xml docs/reference/glib/gtester-report.1
+	do_xsltproc_command docs/reference/gobject/glib-genmarshal.rst docs/reference/gobject/glib-genmarshal.1
+	do_xsltproc_command docs/reference/gobject/glib-mkenums.rst docs/reference/gobject/glib-mkenums.1
+	do_xsltproc_command docs/reference/glib/gtester-report.rst docs/reference/glib/gtester-report.1
 }
 
 src_install() {
