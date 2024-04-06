@@ -374,8 +374,12 @@ src_configure() {
 		experimental-targets = ""
 		link-jobs = $(makeopts_jobs)
 		link-shared =  $(toml_usex system-llvm)
-		static-libstdcpp = $(usex system-llvm false true)
-		use-libcxx =  $(toml_usex system-llvm)
+		$(if is_libcxx_linked; then
+			# https://bugs.gentoo.org/732632
+			echo "use-libcxx = true"
+			echo "static-libstdcpp = false"
+		fi)
+		enable-warnings = false
 		use-linker = "lld"
 		polly = true
 
@@ -394,6 +398,7 @@ src_configure() {
 			echo "CMAKE_SHARED_LINKER_FLAGS_${cm_btype} = \"${LDFLAGS}\""
 			echo "CMAKE_STATIC_LINKER_FLAGS_${cm_btype} = \"${ARFLAGS}\""
 		fi)
+
 		[build]
 		build-stage = 2
 		test-stage = 2
@@ -407,7 +412,7 @@ src_configure() {
 		compiler-docs = $(toml_usex doc)
 		#
 		submodules = true
-		optimized-compiler-builtins = true
+		optimized-compiler-builtins = false
 		#
 		python = "${EPYTHON}"
 		locked-deps = false
