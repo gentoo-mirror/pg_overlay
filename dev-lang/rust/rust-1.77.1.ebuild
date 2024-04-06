@@ -362,7 +362,7 @@ src_configure() {
 
 	local cm_btype="$(usex debug DEBUG RELEASE)"
 	cat <<- _EOF_ > "${S}"/config.toml
-		changelog-seen = 2
+		change-id = 102579
 		[llvm]
 		download-ci-llvm = false
 		optimize = $(toml_usex !debug)
