@@ -40,7 +40,7 @@ dev-lang/lazarus 3.2: feature rich visual programming environment emulating Delp
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/orc 0.4.38: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.77.0: Systems programming language from Mozilla
+dev-lang/rust 1.77.1: Systems programming language from Mozilla
 dev-lang/rust-bin 1.77.0: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.80.0: The GLib library of C routines
