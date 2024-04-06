@@ -9,7 +9,7 @@ DESCRIPTION="Standalone X server running under Wayland"
 HOMEPAGE="https://wayland.freedesktop.org/xserver.html"
 SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
 
-IUSE="libei rpc unwind xcsecurity selinux systemd video_cards_nvidia"
+IUSE="libei unwind xcsecurity selinux systemd video_cards_nvidia"
 
 LICENSE="MIT"
 SLOT="0"
@@ -40,7 +40,7 @@ COMMON_DEPEND="
 "
 DEPEND="
 	${COMMON_DEPEND}
-	>=x11-base/xorg-proto-2022.2
+	>=x11-base/xorg-proto-2023.2
 	>=x11-libs/xtrans-1.3.5
 "
 RDEPEND="
@@ -58,21 +58,22 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}"/xwayland-drop-redundantly-installed-files.patch
 	"${FILESDIR}"/xwayland-23.2.3-systemd-automagic.patch
+	"${FILESDIR}"/xwayland-23.2.4-c99.patch
 )
 
 src_configure() {
 	local emesonargs=(
-		$(meson_use rpc secure-rpc)
-		$(meson_use unwind libunwind)
-		$(meson_use xcsecurity)
 		$(meson_use selinux xselinux)
 		$(meson_use systemd)
 		$(meson_use video_cards_nvidia xwayland_eglstream)
+		$(meson_use unwind libunwind)
+		$(meson_use xcsecurity)
 		-Ddri3=true
 		-Ddrm=true
 		-Dglamor=true
 		-Dglx=true
 		-Dlibdecor=false
+		-Dsecure-rpc=false
 		-Dxdmcp=false
 		-Dxinerama=false
 		-Dxv=true
