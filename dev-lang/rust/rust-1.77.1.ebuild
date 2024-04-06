@@ -172,6 +172,7 @@ PATCHES=(
 	"${FILESDIR}"/0001-Use-lld-provided-by-system.patch
 	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/rustc-1.77.0-unbundle-sqlite.patch
+	"${FILESDIR}"/0001-bootstrap-move-all-of-rustc-s-flags-to-rustc_cargo.patch
 )
 
 S="${WORKDIR}/${MY_P}-src"
@@ -341,7 +342,7 @@ src_configure() {
 	use miri && tools+=',"miri"'
 	use profiler && tools+=',"rust-demangler"'
 	use rustfmt && tools+=',"rustfmt"'
-	use rust-analyzer && tools+=',"rust-analyzer"'
+	use rust-analyzer && tools+=',"rust-analyzer","rust-analyzer-proc-macro-srv"'
 	use rust-src && tools+=',"src"'
 
 	local rust_stage0_root
@@ -380,12 +381,19 @@ src_configure() {
 
 		[llvm.build-config]
 		CMAKE_VERBOSE_MAKEFILE = "ON"
-		CMAKE_C_FLAGS_${cm_btype} = "${CFLAGS}"
-		CMAKE_CXX_FLAGS_${cm_btype} = "${CXXFLAGS}"
-		CMAKE_EXE_LINKER_FLAGS_${cm_btype} = "${LDFLAGS}"
-		CMAKE_MODULE_LINKER_FLAGS_${cm_btype} = "${LDFLAGS}"
-		CMAKE_SHARED_LINKER_FLAGS_${cm_btype} = "${LDFLAGS}"
-		CMAKE_STATIC_LINKER_FLAGS_${cm_btype} = "${ARFLAGS}"
+		$(if ! tc-is-cross-compiler; then
+			# When cross-compiling, LLVM is compiled twice, once for host and
+			# once for target.  Unfortunately, this build configuration applies
+			# to both, which means any flags applicable to one target but not
+			# the other will break.  Conditionally disable respecting user
+			# flags when cross-compiling.
+			echo "CMAKE_C_FLAGS_${cm_btype} = \"${CFLAGS}\""
+			echo "CMAKE_CXX_FLAGS_${cm_btype} = \"${CXXFLAGS}\""
+			echo "CMAKE_EXE_LINKER_FLAGS_${cm_btype} = \"${LDFLAGS}\""
+			echo "CMAKE_MODULE_LINKER_FLAGS_${cm_btype} = \"${LDFLAGS}\""
+			echo "CMAKE_SHARED_LINKER_FLAGS_${cm_btype} = \"${LDFLAGS}\""
+			echo "CMAKE_STATIC_LINKER_FLAGS_${cm_btype} = \"${ARFLAGS}\""
+		fi)
 		[build]
 		build-stage = 2
 		test-stage = 2
@@ -452,6 +460,7 @@ src_configure() {
 		deny-warnings = $(usex wasm $(usex doc false true) true)
 		backtrace-on-ice = true
 		jemalloc = false
+		# See https://github.com/rust-lang/rust/issues/121124
 		lto = "$(usex lto thin off)"
 		llvm-libunwind = "$(usex system-llvm system)"
 

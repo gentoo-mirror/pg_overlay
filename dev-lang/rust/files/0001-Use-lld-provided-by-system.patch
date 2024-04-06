@@ -48,6 +48,18 @@ index 5abfb8162f70..13cb43bda1a4 100644
  
      // We disable MMX and SSE for now, even though UEFI allows using them. Problem is, you have to
      // enable these CPU features explicitly before their first use, otherwise their instructions
+diff -Naur a/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs b/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs
+--- a/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs	2024-03-17 12:03:00.000000000 -0700
++++ b/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs	2024-03-22 10:02:17.742806274 -0700
+@@ -14,7 +14,7 @@
+     let opts = TargetOptions {
+         abi: "softfloat".into(),
+         linker_flavor: LinkerFlavor::Gnu(Cc::No, Lld::Yes),
+-        linker: Some("rust-lld".into()),
++        linker: Some("lld".into()),
+         features: "+v8a,+strict-align,-neon,-fp-armv8".into(),
+         relocation_model: RelocModel::Static,
+         disable_redzone: true,
 -- 
 2.41.0
 
