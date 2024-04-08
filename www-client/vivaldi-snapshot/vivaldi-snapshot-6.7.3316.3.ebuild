@@ -109,7 +109,7 @@ SRC_URI="
 
 LICENSE="Vivaldi"
 SLOT="0"
-IUSE="ffmpeg-chromium gtk proprietary-codecs qt5 widevine"
+IUSE="ffmpeg-chromium gtk proprietary-codecs qt5 qt6 widevine"
 RESTRICT="bindist mirror"
 REQUIRED_USE="ffmpeg-chromium? ( proprietary-codecs )"
 
@@ -133,7 +133,7 @@ RDEPEND="
 	x11-libs/libXfixes
 	x11-libs/libxkbcommon
 	x11-libs/libXrandr
-	x11-libs/pango
+	x11-libs/pango[X]
 	gtk? ( gui-libs/gtk:4 x11-libs/gtk+:3 )
 	proprietary-codecs? (
 		!ffmpeg-chromium? ( >=media-video/ffmpeg-6.1-r1:0/58.60.60[chromium] )
@@ -144,6 +144,7 @@ RDEPEND="
 		dev-qt/qtgui:5
 		dev-qt/qtwidgets:5
 	)
+	qt6? ( dev-qt/qtbase:6[gui,widgets] )
 	widevine? ( www-plugins/chrome-binary-plugins )
 "
 
@@ -178,12 +179,22 @@ src_prepare() {
 	popd > /dev/null || die
 
 	if use proprietary-codecs; then
+		einfo Bundled $($(tc-getSTRINGS) ${VIVALDI_HOME}/lib/libffmpeg.so | grep -m1 "^FFmpeg version ")
 		rm ${VIVALDI_HOME}/lib/libffmpeg.so || die
 		rmdir ${VIVALDI_HOME}/lib || die
 	fi
 
 	if ! use qt5; then
 		rm ${VIVALDI_HOME}/libqt5_shim.so || die
+	fi
+
+	if ! use qt6; then
+		rm ${VIVALDI_HOME}/libqt6_shim.so || die
+	fi
+
+	# Bug #928519, #928520.
+	if ! use amd64; then
+		rm ${VIVALDI_HOME}/relayproxy-linux || die
 	fi
 
 	eapply_user
