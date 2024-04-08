@@ -48,6 +48,7 @@ COMMON_DEPEND="
 	x11-libs/xcb-util-cursor
 	x11-libs/xcb-util-image
 	share? ( >=kde-frameworks/purpose-${KFMIN}:6 )
+	media-libs/opencv
 "
 DEPEND="${COMMON_DEPEND}
 	>=dev-libs/plasma-wayland-protocols-1.11.1
@@ -62,7 +63,6 @@ BDEPEND="
 
 src_configure() {
 	local mycmakeargs=(
-		-DCMAKE_DISABLE_FIND_PACKAGE_OpenCV=ON
 		$(cmake_use_find_package share KF6Purpose)
 	)
 	ecm_src_configure
