@@ -92,6 +92,7 @@ kde-apps/spectacle 9999: Screenshot capture utility
 kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
+kde-plasma/plasma-pa 9999: Plasma applet for audio volume management using PulseAudio
 mail-client/thunderbird 115.9.0 115.9.0-r1: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-base 1.24.1_pre: Basepack of plugins for gstreamer
