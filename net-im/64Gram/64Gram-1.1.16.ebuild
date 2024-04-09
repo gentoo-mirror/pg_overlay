@@ -96,7 +96,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
+# 	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
 )
 
 pkg_pretend() {
