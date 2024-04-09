@@ -78,10 +78,10 @@ CDEPEND="
 	)
 "
 RDEPEND="${CDEPEND}
-	webkit? ( net-libs/webkit-gtk:4.1 net-libs/webkit-gtk:6 )
+	webkit? ( || ( net-libs/webkit-gtk:4.1 net-libs/webkit-gtk:6 ) )
 "
 DEPEND="${CDEPEND}
-	>=dev-cpp/cppgir-0_p20240110
+	>=dev-cpp/cppgir-2.0_p20240315
 	>=dev-cpp/ms-gsl-4
 	dev-cpp/expected-lite
 	dev-cpp/range-v3
@@ -89,15 +89,14 @@ DEPEND="${CDEPEND}
 BDEPEND="
 	${PYTHON_DEPS}
 	>=dev-build/cmake-3.16
-	>=dev-cpp/cppgir-0_p20230926
+	>=dev-cpp/cppgir-2.0_p20240315
 	dev-util/gdbus-codegen
 	virtual/pkgconfig
 	wayland? ( dev-util/wayland-scanner )
 "
 
 PATCHES=(
-	#"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
-	#"${FILESDIR}/tdesktop-4.10.5-qt_compare.patch"
+	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
 )
 
 pkg_pretend() {
@@ -141,8 +140,8 @@ src_prepare() {
 			-i cmake/external/qt/package.cmake || die
 	fi
 
-#	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
-#	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
+	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
+	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
 #	cp -f "${FILESDIR}"/qt_compare.h Telegram/lib_base/base/qt/
 
 
