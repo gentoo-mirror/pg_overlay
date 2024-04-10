@@ -1,4 +1,4 @@
-# Copyright 2012-2023 Gentoo Authors
+# Copyright 2012-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -27,7 +27,7 @@ RDEPEND="${DEPEND}"
 
 S="${WORKDIR}/re2-${RE2_VER}"
 
-DOCS=( AUTHORS CONTRIBUTORS README doc/syntax.txt )
+DOCS=( README doc/syntax.txt )
 HTML_DOCS=( doc/syntax.html )
 
 src_prepare() {
