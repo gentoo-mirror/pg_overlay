@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
-  <maintainer type="project">
-    <email>sci@gentoo.org</email>
-    <name>Gentoo Science Project</name>
-  </maintainer>
-  <longdescription lang="en">
-  Qalculate! is a multi-purpose desktop calculator for GNU/Linux. It is
-  small and simple to use but with much power and versatility
-  underneath.
-  </longdescription>
-  <upstream>
-    <remote-id type="sourceforge">qalculate</remote-id>
-    <remote-id type="github">Qalculate/qalculate-gtk</remote-id>
-  </upstream>
+	<maintainer type="person" proxied="yes">
+		<email>audvare@gmail.com</email>
+		<name>Andrew Udvare</name>
+	</maintainer>
+	<maintainer type="project" proxied="proxy">
+		<email>proxy-maint@gentoo.org</email>
+		<name>Proxy Maintainers</name>
+	</maintainer>
+	<maintainer type="project">
+		<email>sci@gentoo.org</email>
+		<name>Gentoo Science Project</name>
+	</maintainer>
+	<upstream>
+		<remote-id type="github">Qalculate/qalculate-qt</remote-id>
+	</upstream>
 </pkgmetadata>

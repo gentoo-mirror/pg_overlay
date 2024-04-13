@@ -1,4 +1,4 @@
-# Copyright 2022-2023 Gentoo Authors
+# Copyright 2022-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -16,11 +16,11 @@ SLOT="0"
 KEYWORDS="~amd64"
 
 DEPEND="
-	dev-qt/qtbase:6[gui,network,widgets]
+	dev-qt/qtbase:6 [qui,network,widgets]
 	>=sci-libs/libqalculate-${PV}
 "
 RDEPEND="${DEPEND}"
-BDEPEND="dev-qt/qttools:6[linguist]"
+BDEPEND="dev-qt/qttools:6 [linguist]"
 
 src_prepare() {
 	default
