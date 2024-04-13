@@ -416,12 +416,7 @@ www-client/vivaldi-snapshot:widevine - Unsupported closed-source DRM capability 
 x11-base/xwayland:libei - Enable emulated input using dev-libs/libei
 x11-base/xwayland:unwind - Enable libunwind usage for backtraces
 x11-base/xwayland:xcsecurity - Build Security extension
-x11-libs/cairo:gles2-only - Build the OpenGL ES 2 backend
-x11-libs/cairo:gles3 - Use OpenGL ES 3.0 features (instead of ES 2.0; requires USE=gles2-only)
 x11-libs/cairo:glib - Compile with GLib Object System support
-x11-libs/cairo:opengl - Build the OpenGL backend
-x11-libs/cairo:utils - Build support for Cairo script and trace utilities
-x11-libs/cairo:valgrind - Built-in support to mark memory regions
 x11-libs/gtk+:broadway - Enable the GDK Broadway backend
 x11-libs/gtk+:cloudproviders - Enable GtkPlacesSidebar to access cloud services
 x11-libs/gtk+:colord - Use x11-misc/colord for color management in printing
