@@ -5,15 +5,21 @@ EAPI=8
 
 inherit meson
 
+if [[ ${PV} == "9999" ]] ; then
+	EGIT_REPO_URI="https://gitlab.freedesktop.org/xorg/xserver.git"
+	inherit git-r3
+else
+	SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
+fi
+
 DESCRIPTION="Standalone X server running under Wayland"
 HOMEPAGE="https://wayland.freedesktop.org/xserver.html"
-SRC_URI="https://xorg.freedesktop.org/archive/individual/xserver/${P}.tar.xz"
-
-IUSE="libei unwind xcsecurity selinux systemd video_cards_nvidia"
 
 LICENSE="MIT"
 SLOT="0"
-KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux"
+
+IUSE="libei selinux systemd video_cards_nvidia unwind xcsecurity"
 
 COMMON_DEPEND="
 	dev-libs/libbsd
@@ -58,7 +64,6 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}"/xwayland-drop-redundantly-installed-files.patch
 	"${FILESDIR}"/xwayland-23.2.3-systemd-automagic.patch
-	"${FILESDIR}"/xwayland-23.2.4-c99.patch
 )
 
 src_configure() {
