@@ -4,7 +4,6 @@
 
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
 app-arch/rar:all-sfx - Install all SFX (Self-Extracting) files rather than just the native format (allows creation of Windows EXEs on Linux ELF systems)
-app-editors/qhexedit2:gui - Install Qt5 hex editor
 app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
 app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
 app-emulation/virtualbox:headless - Build without any graphic frontend
@@ -360,7 +359,6 @@ net-p2p/transmission:lightweight - Optimize transmission for low-resource system
 net-p2p/transmission:mbedtls - Use mbed TLS instead of OpenSSL
 net-p2p/transmission-remote-gtk:libproxy - Use net-libs/libproxy for getting the HTTP/HTTPS/SOCKS proxy configuration.
 net-print/samsung-unified-driver:network - Enable network printing support
-sci-libs/libqalculate:hardened - Disable unsafe functions like 'command' and variables like 'uptime'.
 sci-mathematics/mathematica:R - Enable dev-lang/R backend support
 sci-mathematics/mathematica:cuda - Install with cuda support
 sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support

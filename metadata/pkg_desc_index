@@ -5,7 +5,6 @@ app-arch/rar 7.00: RAR compressor/uncompressor
 app-arch/unrar 7.0.7: Uncompress rar files
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
-app-editors/qhexedit2 0.8.9_p20221023: Hex editor library, Qt application written in C++ with Python bindings
 app-emulation/spice 0.15.2: SPICE server
 app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization products for enterprise and home use
 app-emulation/virtualbox-kvm 7.0.14_pre20240325: Family of powerful x86 virtualization products for enterprise and home use
@@ -152,8 +151,7 @@ net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
-sci-calculators/qalculate-qt 4.9.0: Qt-based UI for libqalculate
-sci-libs/libqalculate 4.9.0: A modern multi-purpose calculator library
+sci-calculators/qalculate-qt 5.0.0: Qt-based UI for libqalculate
 sci-mathematics/mathematica 14.0.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/openrazer 3.7.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
