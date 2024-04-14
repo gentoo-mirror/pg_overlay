@@ -1,0 +1,83 @@
+From 20cc19f12f0244d6ecb3ae366229143bbb1f48ca Mon Sep 17 00:00:00 2001
+From: Lars Wendler <polynomial-c@gmx.de>
+Date: Thu, 18 Jan 2024 09:42:37 +0100
+Subject: [PATCH] Support elogind as logind alternative
+
+Can be enabled with --enable-logind=elogind
+
+logind from systemd is still the default
+---
+ configure.ac                      | 16 +++++++++-------
+ modules/pam_issue/Makefile.am     |  2 +-
+ modules/pam_timestamp/Makefile.am |  4 ++--
+ 3 files changed, 12 insertions(+), 10 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index fc5cc085..d80b245d 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -556,17 +556,19 @@ elif test "$WITH_SELINUX" = "yes" ; then
+ fi
+ 
+ LOGIND_CFLAGS=
+-SYSTEMD_LIBS=
++LOGIND_LIBS=
+ AC_ARG_ENABLE([logind],
+   AS_HELP_STRING([--disable-logind], [Disable logind support]),
+   [WITH_LOGIND=$enableval], [WITH_LOGIND=check])
+-if test "$WITH_LOGIND" = "check"; then
+-  PKG_CHECK_MODULES([SYSTEMD], [libsystemd >= 254], [LOGIND_CFLAGS="-DUSE_LOGIND=1 $SYSTEMD_CFLAGS"], [:])
+-elif test "$WITH_LOGIND" = "yes"; then
+-  PKG_CHECK_MODULES([SYSTEMD], [libsystemd >= 254], [LOGIND_CFLAGS="-DUSE_LOGIND=1 $SYSTEMD_CFLAGS"], [])
+-fi
++AS_IF([test "$WITH_LOGIND" != "no"], [
++  AS_CASE(["$enableval"], [elogind], [
++    PKG_CHECK_MODULES([LOGIND], [libelogind >= 255], [LOGIND_CFLAGS="-DUSE_LOGIND=1 $LOGIND_CFLAGS"])
++  ], [
++    PKG_CHECK_MODULES([LOGIND], [libsystemd >= 254], [LOGIND_CFLAGS="-DUSE_LOGIND=1 $LOGIND_CFLAGS"], [AS_IF([test "$WITH_LOGIND" != "check"], [AC_MSG_ERROR([Cannot find libsystemd])])])
++  ])
++])
+ AC_SUBST([LOGIND_CFLAGS])
+-AC_SUBST([SYSTEMD_LIBS])
++AC_SUBST([LOGIND_LIBS])
+ 
+ ECONF_CFLAGS=
+ ECONF_LIBS=
+diff --git a/modules/pam_issue/Makefile.am b/modules/pam_issue/Makefile.am
+index 649444db..c840724f 100644
+--- a/modules/pam_issue/Makefile.am
++++ b/modules/pam_issue/Makefile.am
+@@ -29,7 +29,7 @@ endif
+ 
+ securelib_LTLIBRARIES = pam_issue.la
+ pam_issue_la_LIBADD = $(top_builddir)/libpam_internal/libpam_internal.la \
+-		      $(top_builddir)/libpam/libpam.la $(SYSTEMD_LIBS)
++		      $(top_builddir)/libpam/libpam.la $(LOGIND_LIBS)
+ 
+ if ENABLE_REGENERATE_MAN
+ dist_noinst_DATA = README
+diff --git a/modules/pam_timestamp/Makefile.am b/modules/pam_timestamp/Makefile.am
+index 55afdba5..992c7bae 100644
+--- a/modules/pam_timestamp/Makefile.am
++++ b/modules/pam_timestamp/Makefile.am
+@@ -27,7 +27,7 @@ noinst_HEADERS = hmacsha1.h sha1.h hmac_openssl_wrapper.h
+ AM_CFLAGS = -I$(top_srcdir)/libpam/include $(LOGIND_CFLAGS) $(WARN_CFLAGS)
+ 
+ pam_timestamp_la_LDFLAGS = -no-undefined -avoid-version -module $(AM_LDFLAGS) $(CRYPTO_LIBS)
+-pam_timestamp_la_LIBADD = $(top_builddir)/libpam/libpam.la $(SYSTEMD_LIBS)
++pam_timestamp_la_LIBADD = $(top_builddir)/libpam/libpam.la $(LOGIND_LIBS)
+ if HAVE_VERSIONING
+   pam_timestamp_la_LDFLAGS += -Wl,--version-script=$(srcdir)/../modules.map
+ endif
+@@ -45,7 +45,7 @@ pam_timestamp_la_CFLAGS = $(AM_CFLAGS)
+ 
+ pam_timestamp_check_SOURCES = pam_timestamp_check.c
+ pam_timestamp_check_CFLAGS = $(AM_CFLAGS) @EXE_CFLAGS@
+-pam_timestamp_check_LDADD = $(top_builddir)/libpam/libpam.la $(SYSTEMD_LIBS)
++pam_timestamp_check_LDADD = $(top_builddir)/libpam/libpam.la $(LOGIND_LIBS)
+ pam_timestamp_check_LDFLAGS = @EXE_LDFLAGS@
+ 
+ if !COND_USE_OPENSSL
+-- 
+2.44.0
+
