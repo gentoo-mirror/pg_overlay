@@ -106,7 +106,7 @@ media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libheif 1.17.5: ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libpulse 16.1-r4: Libraries for PulseAudio clients
-media-libs/libsdl2 2.30.1: Simple Direct Media Layer
+media-libs/libsdl2 2.30.2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
