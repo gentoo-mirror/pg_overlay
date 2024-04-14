@@ -15,7 +15,8 @@ EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
-IUSE="+acl audit debug doc efi +pam +policykit selinux"
+IUSE="+acl audit debug doc +pam +policykit selinux test"
+RESTRICT="!test? ( test )"
 
 BDEPEND="
 	app-text/docbook-xml-dtd:4.2
@@ -64,8 +65,10 @@ src_prepare() {
 }
 
 src_configure() {
+	python_setup
+
 	# Removed -Ddefault-hierarchy=${cgroupmode}
-	# -> It is completely irrelevant with -Dcgroup-controller=openrc anyway.
+	# -> It is completely irrelevant with "-Dcgroup-controller=openrc".
 	local emesonargs=(
 		$(usex debug "-Ddebug-extra=elogind" "")
 		-Dbuildtype=$(usex debug debug release)
@@ -92,8 +95,9 @@ src_configure() {
 		-Dpamlibdir=$(getpam_mod_dir)
 		-Dselinux=$(usex selinux enabled disabled)
 		-Dsmack=true
-		-Dtests=false
+		-Dtests=$(usex test true false)
 		-Dudevrulesdir="$(get_udevdir)"/rules.d
+		-Dutmp=$(usex elibc_musl false true)
 		-Dzshcompletiondir=""
 		-Db_lto=true
 	)
