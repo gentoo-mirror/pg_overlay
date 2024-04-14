@@ -94,8 +94,8 @@ kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interac
 kde-plasma/plasma-pa 9999: Plasma applet for audio volume management using PulseAudio
 mail-client/thunderbird 115.9.0: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
-media-libs/gst-plugins-base 1.24.1_pre: Basepack of plugins for gstreamer
-media-libs/gstreamer 1.24.1_pre: Open source multimedia framework
+media-libs/gst-plugins-base 1.24.2_pre: Basepack of plugins for gstreamer
+media-libs/gstreamer 1.24.2_pre: Open source multimedia framework
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
@@ -167,6 +167,7 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-libs/ncurses 6.4_p20230923: Console display library
+sys-libs/pam 1.6.1_pre: Linux-PAM (Pluggable Authentication Modules)
 sys-libs/polly 18.1.3: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
