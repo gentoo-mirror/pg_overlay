@@ -135,6 +135,11 @@ dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaint
 gnome-base/librsvg:tools - Build svg viewer tool
 kde-apps/spectacle:share - Enable support for a share menu using kde-frameworks/purpose
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
+kde-plasma/plasma-desktop:ibus - Use ibus input method via app-i18n/ibus
+kde-plasma/plasma-desktop:kaccounts - Build the OpenDesktop integration plugin
+kde-plasma/plasma-desktop:scim - Enable applets that use app-i18n/scim
+kde-plasma/plasma-desktop:screencast - Enable screencast portal thumbnails using kde-plasma/kpipewire
+kde-plasma/plasma-desktop:sdl - Enable gamepad support using media-libs/libsdl2
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
