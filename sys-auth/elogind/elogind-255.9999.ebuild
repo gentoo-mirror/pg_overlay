@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..12} )
+PYTHON_COMPAT=( python3_{11..12} )
 
 inherit git-r3 linux-info meson pam python-any-r1 udev xdg-utils
 
@@ -15,7 +15,7 @@ EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
-IUSE="+acl audit debug doc +pam +policykit selinux test"
+IUSE="+acl audit debug doc efi +pam +policykit selinux test"
 RESTRICT="!test? ( test )"
 
 BDEPEND="
