@@ -39,7 +39,7 @@ dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming langua
 dev-lang/orc 0.4.38: The Oil Runtime Compiler, a just-in-time compiler for array operations
 dev-lang/python 3.12.1_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.77.2: Systems programming language from Mozilla
-dev-lang/rust-bin 1.77.0: Systems programming language from Mozilla
+dev-lang/rust-bin 1.77.2: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.80.0: The GLib library of C routines
 dev-libs/gobject-introspection 1.80.0: Introspection system for GObject-based libraries
@@ -127,7 +127,7 @@ media-video/pipewire 1.0.5: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/wireplumber 0.5.1: Replacement for pipewire-media-session
 net-ftp/filezilla 3.66.5: FTP client with lots of useful features and an intuitive interface
-net-im/64Gram 1.1.17: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
+net-im/64Gram 1.1.18: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.13: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
