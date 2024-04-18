@@ -80,8 +80,7 @@ src_configure() {
 		-DWITH_AVAHI=$(usex zeroconf)
 		-DWITH_CUPS=$(usex cups)
 		-DWITH_EXAMPLES=$(usex examples)
-		-DWITH_FREERDP=$(usex rdp)
-		-DWITH_FREERDP3=ON
+		-DWITH_FREERDP3=$(usex rdp)
 		-DWITH_GCRYPT=$(usex crypt)
 		-DWITH_GETTEXT=$(usex nls)
 		-DWITH_ICON_CACHE=OFF
