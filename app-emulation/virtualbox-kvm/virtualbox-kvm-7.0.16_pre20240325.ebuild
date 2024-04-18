@@ -20,7 +20,7 @@ PYTHON_COMPAT=( python3_{11..12} )
 inherit desktop edo flag-o-matic java-pkg-opt-2 linux-info multilib optfeature pax-utils \
 	python-single-r1 tmpfiles toolchain-funcs udev xdg
 
-PATCHES_PV="7.0.14"
+PATCHES_PV="7.0.16"
 ORIGIN_PN="VirtualBox"
 ORIGIN_PV=${PATCHES_PV}
 
