@@ -7,7 +7,7 @@ app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of A
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-emulation/spice 0.15.2: SPICE server
 app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization products for enterprise and home use
-app-emulation/virtualbox-kvm 7.0.14_pre20240325: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox-kvm 7.0.16_pre20240325: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.12: Cross Platform file manager.
@@ -92,7 +92,7 @@ kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 kde-plasma/plasma-pa 9999: Plasma applet for audio volume management using PulseAudio
-mail-client/thunderbird 115.9.0: Thunderbird Mail Client
+mail-client/thunderbird 115.10.0: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-base 1.24.2_pre: Basepack of plugins for gstreamer
 media-libs/gstreamer 1.24.2_pre: Open source multimedia framework
@@ -176,7 +176,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.77.2: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
-www-client/firefox 124.0.2: Firefox Web Browser
+www-client/firefox 125.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.7.3316.3: A browser for our friends
 x11-base/xwayland 23.2.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
