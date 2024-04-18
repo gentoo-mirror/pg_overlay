@@ -1086,7 +1086,7 @@ src_configure() {
 			# relr-elf-hack is currently broken with mold, bgo#916259
 			mozconfig_add_options_ac 'disable elf-hack with mold linker' --disable-elf-hack
 		else
-			mozconfig_add_options_ac 'relr elf-hack' --enable-elf-hack=relr
+			mozconfig_add_options_ac 'relr elf-hack' --disable-elf-hack
 		fi
 	elif use ppc64 || use riscv ; then
 		# '--disable-elf-hack' is not recognized on ppc64/riscv,
