@@ -128,7 +128,7 @@ src_configure() {
 		export ZIG_BOOTSTRAP_STAGE3_FLAGS=(
 			-Dtarget="$(get_zig_target)"
 			-Dcpu="$(get_zig_mcpu)"
-			-Doptimize=Debug
+			-Doptimize=ReleaseFast
 			-Dno-autodocs
 			-Dno-langref
 			-Denable-llvm=false
