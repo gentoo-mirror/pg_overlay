@@ -56,29 +56,6 @@ app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, makin
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
 app-shells/bash-completion:eselect - Support blacklisting of completions via 'eselect bashcomp'. This enables custom Gentoo patching of upstream completion loader.
-dev-db/mariadb:backup - Build mariadb-backup which supports SST and hot backup of InnoDB, Aria and MyISAM including compression and encryption
-dev-db/mariadb:columnstore - Build the ColumnStore storage engine
-dev-db/mariadb:extraengine - Add support for alternative storage engines (Archive, CSV, Blackhole, Federated(X), Partition)
-dev-db/mariadb:galera - Enables galera replication
-dev-db/mariadb:innodb-lz4 - Enables lz4 compression methods for InnoDB/XtraDB
-dev-db/mariadb:innodb-lzo - Enables lzo compression methods for InnoDB/XtraDB
-dev-db/mariadb:innodb-snappy - Enables snappy compression methods for InnoDB/XtraDB using app-arch/snappy
-dev-db/mariadb:jdbc - Enable the CONNECT engine to access foreign databases via JDBC
-dev-db/mariadb:latin1 - Use LATIN1 encoding instead of UTF8
-dev-db/mariadb:mroonga - Add support for the Mroonga engine for interfacing with the Groonga text search
-dev-db/mariadb:numa - Enable NUMA support using sys-process/numactl (NUMA kernel support is also required)
-dev-db/mariadb:oqgraph - Add support for the Open Query GRAPH engine
-dev-db/mariadb:pam - Enable the optional PAM authentication plugin for the server
-dev-db/mariadb:profiling - Add support for statement profiling (requires USE=community).
-dev-db/mariadb:rocksdb - Add support for RocksDB; a key/value, LSM database optimized for flash storage
-dev-db/mariadb:s3 - Build the S3 storage engine
-dev-db/mariadb:server - Build the server program
-dev-db/mariadb:sphinx - Add suport for the sphinx full-text search engine
-dev-db/mariadb:sst-mariabackup - Add tools needed to support the mariabackup SST method
-dev-db/mariadb:sst-rsync - Add tools needed to support the rsync SST method
-dev-db/mariadb:systemtap - Build support for profiling and tracing using dev-debug/systemtap
-dev-db/mariadb:test - Install upstream testsuites for end use.
-dev-db/mariadb:yassl - Enable SSL connections and crypto functions using the bundled yaSSL
 dev-db/mysql-connector-c++:legacy - Build the legacy 1.x API as well as the DevX API
 dev-db/sqlitestudio:cli - Build CLI interface
 dev-lang/lazarus:extras - Build a lot of extra packages, including lhelp chm viewer program.

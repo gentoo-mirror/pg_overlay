@@ -28,8 +28,6 @@ app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want di
 dev-cpp/abseil-cpp 20240116.1: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/atkmm 2.28.4 2.36.3: C++ interface for the ATK library
 dev-cpp/glibmm 2.80.0: C++ interface for glib2
-dev-db/mariadb 10.11.7: An enhanced, drop-in replacement for MySQL
-dev-db/mariadb-connector-c 3.3.8: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
 dev-db/sqlitestudio 3.4.1: Powerful cross-platform SQLite database manager
