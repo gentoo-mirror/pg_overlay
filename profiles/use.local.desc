@@ -86,6 +86,7 @@ dev-lang/rust-bin:profiler - Build the profiler runtime and rust-demangler tool 
 dev-lang/rust-bin:rust-analyzer - Install rust-analyzer, A Rust compiler front-end for IDEs (language server)
 dev-lang/rust-bin:rust-src - Install rust-src, needed by developer tools and for build-std (cross)
 dev-lang/rust-bin:rustfmt - Install rustfmt, Rust code formatter
+dev-lang/zig:llvm - Build with LLVM backend and extensions enabled.
 dev-libs/glib:dbus - Enable dependencies required by glib libraries using dbus service to manage settings saving
 dev-libs/glib:elf - Enable support for listing and extracting from ELF resource files with gresource tool
 dev-libs/glib:mime - Pull in shared MIME database that many glib-based applications require at runtime to detect or open files. Warning: do not disable this flag unless installing on a headless server.
