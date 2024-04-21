@@ -7,7 +7,7 @@ WX_GTK_VER="3.2-gtk3"
 inherit autotools git-r3 wxwidgets
 
 DESCRIPTION="Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek."
-HOMEPAGE="http://spek.cc"
+HOMEPAGE="https://github.com/MikeWang000000/spek-X"
 EGIT_REPO_URI="https://github.com/MikeWang000000/${PN}.git"
 
 LICENSE="GPL-3"

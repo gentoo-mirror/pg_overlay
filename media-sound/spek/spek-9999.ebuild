@@ -1,8 +1,7 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-
 WX_GTK_VER="3.2-gtk3"
 
 inherit autotools wxwidgets xdg git-r3
@@ -29,11 +28,7 @@ PATCHES=(
 )
 
 src_prepare() {
-	default
-	eautoreconf
-}
-
-src_configure() {
 	setup-wxwidgets unicode
 	default
+	eautoreconf
 }
