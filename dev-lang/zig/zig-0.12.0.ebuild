@@ -131,20 +131,19 @@ src_configure() {
 			-Doptimize=ReleaseFast
 			-Dno-langref
 			-Denable-llvm=false
-			-Dforce-link-libc
+			#-Dforce-link-libc
 		)
 		return
 	fi
 
 	local mycmakeargs=(
 		-DZIG_USE_CCACHE=OFF
-		-DZIG_SHARED_LLVM=OFF
+		-DZIG_SHARED_LLVM=ON
 		-DZIG_TARGET_TRIPLE="$(get_zig_target)"
 		-DZIG_TARGET_MCPU="$(get_zig_mcpu)"
-		-DZIG_USE_LLVM_CONFIG=OFF
+		-DZIG_USE_LLVM_CONFIG=ON
 		-DCMAKE_PREFIX_PATH="$(get_llvm_prefix)"
 		-DCMAKE_INSTALL_PREFIX="${ZIG_SYS_INSTALL_DEST}"
-		-DZIG_SYSTEM_LIBCXX=stdc++
 	)
 
 	cmake_src_configure
