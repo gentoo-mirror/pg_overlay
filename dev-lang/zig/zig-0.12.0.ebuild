@@ -129,7 +129,6 @@ src_configure() {
 			-Dtarget="$(get_zig_target)"
 			-Dcpu="$(get_zig_mcpu)"
 			-Doptimize=ReleaseFast
-			-Dno-autodocs
 			-Dno-langref
 			-Denable-llvm=false
 			-Dforce-link-libc
