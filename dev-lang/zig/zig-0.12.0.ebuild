@@ -131,7 +131,7 @@ src_configure() {
 			-Doptimize=ReleaseFast
 			-Dno-langref
 			-Denable-llvm=false
-			#-Dforce-link-libc
+			-Dforce-link-libc
 		)
 		return
 	fi
