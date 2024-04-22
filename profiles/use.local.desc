@@ -111,6 +111,13 @@ dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
 gnome-base/librsvg:tools - Build svg viewer tool
+kde-apps/okular:crypt - Enable support for password-encrypted documents via kde-frameworks/kwallet
+kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
+kde-apps/okular:markdown - Enable Markdown support via app-text/discount
+kde-apps/okular:mobi - Enable mobipocket support via kde-apps/kdegraphics-mobipocket
+kde-apps/okular:phonon - Enable sound support via media-libs/phonon
+kde-apps/okular:qml - Install Okular Qml components
+kde-apps/okular:share - Enable support for a share menu using kde-frameworks/purpose
 kde-apps/spectacle:share - Enable support for a share menu using kde-frameworks/purpose
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
 kde-plasma/plasma-desktop:ibus - Use ibus input method via app-i18n/ibus
