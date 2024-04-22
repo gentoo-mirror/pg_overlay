@@ -3,7 +3,7 @@
 
 EAPI=8
 
-CHROMIUM_VERSION="121"
+CHROMIUM_VERSION="124"
 CHROMIUM_LANGS="
 	af
 	am
@@ -50,7 +50,6 @@ CHROMIUM_LANGS="
 	kab
 	kn
 	ko
-	ku
 	lt
 	lv
 	mk
@@ -85,7 +84,7 @@ CHROMIUM_LANGS="
 	zh-TW
 "
 
-inherit chromium-2 desktop linux-info unpacker xdg
+inherit chromium-2 desktop linux-info toolchain-funcs unpacker xdg
 
 VIVALDI_PN="${PN/%vivaldi/vivaldi-stable}"
 VIVALDI_HOME="opt/${PN}"
@@ -175,6 +174,7 @@ src_prepare() {
 
 	pushd ${VIVALDI_HOME}/locales > /dev/null || die
 	rm ja-KS.pak || die # No flag for Kansai as not in IETF list.
+	rm kmr.pak || die # No flag for Kurmanji.
 	chromium_remove_language_paks
 	popd > /dev/null || die
 
