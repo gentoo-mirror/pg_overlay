@@ -38,9 +38,9 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
+	dev-qt/kdsingleapplication[qt6]
 	dev-qt/qt5compat:6
 	dev-qt/qttools:6[assistant,linguist]
-	dev-qt/qtsingleapplication[X]
 	virtual/pkgconfig
 "
 
@@ -64,7 +64,6 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DWITH_FFMPEG_PLAYER=ON
 		-DWITH_EPWING_SUPPORT=OFF
-		-DWITH_XAPIAN=ON
 		-DWITH_ZIM=OFF
 		-DUSE_SYSTEM_FMT=ON
 		-DUSE_SYSTEM_TOML=OFF
