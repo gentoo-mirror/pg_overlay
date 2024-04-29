@@ -60,7 +60,7 @@ COMMON_DEPEND="
 	moodbar? ( sci-libs/fftw:3.0 )
 	mtp? ( media-libs/libmtp )
 	pulseaudio? ( media-libs/libpulse
-				media-plugins/gst-plugins-pulse:1.0)
+				media-plugins/gst-plugins-pulse:1.0 )
 	vlc? ( media-video/vlc )
 "
 # Note: sqlite driver of dev-qt/qtsql is bundled, so no sqlite use is required; check if this can be overcome someway;
