@@ -115,7 +115,7 @@ src_configure() {
 		-DQT_VERSION_MAJOR="$(usex qt6 6 5)"
 	)
 
-	use !streaming && mycmakeargs+="( -DSUBSONIC=OFF -DTIDAL=OFF -DQOBUZ=OFF )"
+	use !streaming && mycmakeargs+=( -DSUBSONIC=OFF -DTIDAL=OFF -DQOBUZ=OFF )
 	use !debug && append-cppflags -DQT_NO_DEBUG_OUTPUT
 
 	cmake_src_configure
