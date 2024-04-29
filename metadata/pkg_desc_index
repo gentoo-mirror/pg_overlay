@@ -114,6 +114,7 @@ media-libs/libtgvoip 2.4.4_p20240122: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
 media-libs/resvg 0.40.0: An SVG rendering library
+media-libs/taglib 2.0.1_pre: Library for reading and editing audio meta data
 media-libs/tg_owt 0_pre20231221: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/gst-plugins-flac 1.24.2_pre: FLAC encoder/decoder/tagger plugin for GStreamer
