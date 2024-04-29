@@ -21,6 +21,7 @@ DEPEND="${RDEPEND}
 	test? ( >=dev-util/cppunit-1.13.2[${MULTILIB_USEDEP}] )
 "
 BDEPEND="
+	dev-libs/utfcpp
 	virtual/pkgconfig
 	doc? ( app-text/doxygen[dot] )
 "
