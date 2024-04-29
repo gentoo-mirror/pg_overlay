@@ -52,12 +52,15 @@ COMMON_DEPEND="
 		media-libs/chromaprint:=
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
+		media-plugins/gst-plugins-flac:1.0
+		media-plugins/gst-plugins-wavpack:1.0
 	)
 	icu? ( dev-libs/icu:= )
 	ipod? ( media-libs/libgpod )
 	moodbar? ( sci-libs/fftw:3.0 )
 	mtp? ( media-libs/libmtp )
-	pulseaudio? ( media-libs/libpulse )
+	pulseaudio? ( media-libs/libpulse
+				media-plugins/gst-plugins-pulse:1.0 )
 	vlc? ( media-video/vlc )
 "
 # Note: sqlite driver of dev-qt/qtsql is bundled, so no sqlite use is required; check if this can be overcome someway;
