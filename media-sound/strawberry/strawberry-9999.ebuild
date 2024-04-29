@@ -5,7 +5,7 @@ EAPI=8
 
 inherit cmake flag-o-matic plocale xdg
 
-PLOCALES="ca cs de es es_AR es_ES es_MX fi fr hu id it ja ko nb nl pl pt_BR ru sv uk zh_CN"
+PLOCALES="ca cs de es es_AR es_ES es_MX et fi fr hu id it ja ko nb nl pl pt_BR ru sv uk zh_CN"
 
 DESCRIPTION="Modern music player and library organizer based on Clementine and Qt"
 HOMEPAGE="https://www.strawberrymusicplayer.org/"
@@ -19,7 +19,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="cdda debug +gstreamer icu ipod moodbar mtp pulseaudio qt6 soup +udisks vlc"
+IUSE="cdda debug +gstreamer icu ipod moodbar mtp pulseaudio qt6 soup +udisks vlc streaming"
 
 BDEPEND="
 	!qt6? ( dev-qt/linguist-tools:5 )
@@ -112,6 +112,7 @@ src_configure() {
 		-DQT_VERSION_MAJOR="$(usex qt6 6 5)"
 	)
 
+	use !streaming && mycmakeargs+=( -DSUBSONIC=OFF -DTIDAL=OFF -DQOBUZ=OFF )"
 	use !debug && append-cppflags -DQT_NO_DEBUG_OUTPUT
 
 	cmake_src_configure
