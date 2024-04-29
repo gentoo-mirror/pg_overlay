@@ -64,7 +64,7 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	GST_PLUGINS_NOAUTO="shm ipcpipeline librfb msdk hls dvbsuben"
+	GST_PLUGINS_NOAUTO="shm ipcpipeline librfb msdk hls dvbsubenc"
 
 	local emesonargs=(
 		-Dshm=enabled
