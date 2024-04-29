@@ -10,7 +10,7 @@ app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization produc
 app-emulation/virtualbox-kvm 7.0.16_pre20240325: Family of powerful x86 virtualization products for enterprise and home use
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
-app-misc/doublecmd 1.1.12: Cross Platform file manager.
+app-misc/doublecmd 1.1.13: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.23.11.10: Python scripts to manipulate trash cans via the command line
@@ -127,7 +127,6 @@ media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.5: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/wireplumber 0.5.1: Replacement for pipewire-media-session
-net-ftp/filezilla 3.66.5: FTP client with lots of useful features and an intuitive interface
 net-im/64Gram 1.1.19: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.13: Official desktop client for Telegram
