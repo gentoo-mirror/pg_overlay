@@ -64,7 +64,7 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	GST_PLUGINS_NOAUTO="shm ipcpipeline librfb msdk hls"
+	GST_PLUGINS_NOAUTO="shm ipcpipeline librfb msdk hls dvbsubenc"
 
 	local emesonargs=(
 		-Dshm=enabled
@@ -72,6 +72,7 @@ multilib_src_configure() {
 		-Dhls=disabled
 		$(meson_feature vnc librfb)
 		$(meson_feature wayland)
+		-Ddvbsubenc=disabled
 	)
 
 	if use qsv; then
