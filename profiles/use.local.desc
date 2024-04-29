@@ -232,6 +232,9 @@ media-sound/qmmp:sndfile - Enable wav playback support via media-libs/libsndfile
 media-sound/qmmp:soxr - Use the SoX resampling library
 media-sound/qmmp:stereo - Enable stereo effect
 media-sound/qmmp:tray - Build tray icon
+media-sound/strawberry:moodbar - Enable moodbar support
+media-sound/strawberry:soup - Enable soup support
+media-sound/strawberry:vlc - Enable media-video/vlc backend
 media-video/mpv:archive - Enable support for various archive formats via app-arch/libarchive
 media-video/mpv:bluray - Enable playback of Blu-ray filesystems
 media-video/mpv:cli - Enable the command-line player
