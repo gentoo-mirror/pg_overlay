@@ -119,6 +119,7 @@ media-libs/taglib 2.0.1_pre: Library for reading and editing audio meta data
 media-libs/tg_owt 0_pre20231221: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/gst-plugins-flac 1.24.2_pre: FLAC encoder/decoder/tagger plugin for GStreamer
+media-plugins/gst-plugins-libav 1.24.2_pre: FFmpeg based gstreamer plugin
 media-plugins/gst-plugins-pulse 1.24.2_pre: PulseAudio sound server plugin for GStreamer
 media-plugins/gst-plugins-taglib 1.24.2_pre: ID3v2/APEv2 tagger plugin for GStreamer
 media-plugins/gst-plugins-wavpack 1.24.2_pre: Wavpack audio encoder/decoder plugin for GStreamer
