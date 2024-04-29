@@ -5,7 +5,7 @@
  
  # path to lazbuild
 -export lazbuild=$(which lazbuild)
-+export lazbuild="$(which lazbuild) --pcp=~/.lazarus  --lazarusdir=/usr/share/lazarus"
++export lazbuild="$(which lazbuild) --lazarusdir=/usr/share/lazarus"
  
  # Set up widgetset: gtk or gtk2 or qt
  # Set up processor architecture: i386 or x86_64
