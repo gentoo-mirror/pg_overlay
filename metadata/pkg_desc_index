@@ -96,6 +96,7 @@ kde-plasma/plasma-pa 9999: Plasma applet for audio volume management using Pulse
 mail-client/thunderbird 115.10.1: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-base 1.24.2_pre: Basepack of plugins for gstreamer
+media-libs/gst-plugins-good 1.24.2_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.24.2_pre: Open source multimedia framework
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
@@ -114,6 +115,7 @@ media-libs/opus 1.4: Open codec for interactive speech and music transmission ov
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/tg_owt 0_pre20231221: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
+media-plugins/gst-plugins-taglib 1.24.2_pre: ID3v2/APEv2 tagger plugin for GStreamer
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
