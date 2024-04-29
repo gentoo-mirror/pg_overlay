@@ -10,9 +10,6 @@ if [[ "${PV}" == "9999" ]]; then
 
 	EGIT_REPO_URI="https://github.com/nemtrif/utfcpp"
 	EGIT_SUBMODULES=()
-else
-	FTEST_GIT_REVISION="ae470119f0842b9d65b8bd2e5f0b6115259ffac0"
-	FTEST_DATE="20240324"
 fi
 
 DESCRIPTION="UTF-8 C++ library"
@@ -20,8 +17,7 @@ HOMEPAGE="https://github.com/nemtrif/utfcpp"
 if [[ "${PV}" == "9999" ]]; then
 	SRC_URI=""
 else
-	SRC_URI="https://github.com/nemtrif/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz
-		test? ( https://github.com/nemtrif/ftest/archive/${FTEST_GIT_REVISION}.tar.gz -> ftest-${FTEST_DATE}.tar.gz )"
+	SRC_URI="https://github.com/nemtrif/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 fi
 
 LICENSE="Boost-1.0"
