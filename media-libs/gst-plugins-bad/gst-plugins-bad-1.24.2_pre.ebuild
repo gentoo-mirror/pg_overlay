@@ -72,7 +72,7 @@ multilib_src_configure() {
 		-Dhls=disabled
 		$(meson_feature vnc librfb)
 		$(meson_feature wayland)
-		-Dgst-plugins-bad:dvbsubenc=disabled
+		-Ddvbsubenc=disabled
 	)
 
 	if use qsv; then
