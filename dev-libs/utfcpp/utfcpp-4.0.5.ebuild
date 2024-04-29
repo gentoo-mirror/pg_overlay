@@ -36,6 +36,7 @@ RDEPEND=""
 src_unpack() {
 	if [[ "${PV}" == "9999" ]]; then
 		git-r3_src_unpack
+	fi
 
 	rmdir "${S}/extern/ftest" || die
 	ln -s ../../ftest "${S}/extern/ftest" || die
