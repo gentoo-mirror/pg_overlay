@@ -62,7 +62,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/xwayland-drop-redundantly-installed-files.patch
 	"${FILESDIR}"/xwayland-23.2.3-systemd-automagic.patch
 )
 
