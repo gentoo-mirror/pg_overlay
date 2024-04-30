@@ -62,7 +62,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/xwayland-23.2.3-systemd-automagic.patch
 )
 
 src_configure() {
