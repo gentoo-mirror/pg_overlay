@@ -188,7 +188,7 @@ virtual/rust 1.77.2: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 125.0.3: Firefox Web Browser
 www-client/vivaldi-snapshot 6.7.3329.19: A browser for our friends
-x11-base/xwayland 23.2.6: Standalone X server running under Wayland
+x11-base/xwayland 24.0.99.901: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.41: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
