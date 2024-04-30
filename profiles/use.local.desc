@@ -111,6 +111,19 @@ dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
 gnome-base/librsvg:tools - Build svg viewer tool
+gui-apps/waybar:evdev - Enable libevdev support for evdev related features
+gui-apps/waybar:experimental - Enable experimental features, such as Bluetooth battery reporting
+gui-apps/waybar:libinput - Enable libinput support for libinput related features
+gui-apps/waybar:logind - Enable support for logind (bluetooth and idle inhibit)
+gui-apps/waybar:mpd - Enable support for the Music Player Daemon
+gui-apps/waybar:mpris - Enable support for mpris
+gui-apps/waybar:network - Enable libnl support for network related features
+gui-apps/waybar:pipewire - Enable support for pipewire
+gui-apps/waybar:popups - Enable popup support with gtk-layer-shell
+gui-apps/waybar:pulseaudio - Enable support for volume control via PulseAudio
+gui-apps/waybar:sndio - Enable support for volume control via sndio
+gui-apps/waybar:tray - Enable support for tray
+gui-apps/waybar:wifi - Enable support for wifi/rfkill
 gui-wm/sway:X - Enable support for X11 applications (XWayland)
 gui-wm/sway:swaybar - Install 'swaybar': sway's status bar component
 gui-wm/sway:swaynag - Install 'swaynag': shows a message with buttons
