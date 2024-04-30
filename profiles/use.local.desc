@@ -111,6 +111,11 @@ dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
 gnome-base/librsvg:tools - Build svg viewer tool
+gui-wm/sway:X - Enable support for X11 applications (XWayland)
+gui-wm/sway:swaybar - Install 'swaybar': sway's status bar component
+gui-wm/sway:swaynag - Install 'swaynag': shows a message with buttons
+gui-wm/sway:tray - Enable support for StatusNotifierItem tray specification
+gui-wm/sway:wallpapers - Install sway's default wallpaper image
 kde-apps/okular:crypt - Enable support for password-encrypted documents via kde-frameworks/kwallet
 kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
 kde-apps/okular:markdown - Enable Markdown support via app-text/discount

@@ -83,6 +83,7 @@ games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-base/librsvg 2.57.92: Scalable Vector Graphics (SVG) rendering library
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
+gui-wm/sway 9999: i3-compatible Wayland window manager
 kde-apps/kompare 9999: A program to view the differences between files
 kde-apps/libkomparediff2 9999: KDE library to compare files and strings
 kde-apps/okular 9999: Universal document viewer based on KDE Frameworks
