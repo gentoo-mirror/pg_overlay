@@ -111,6 +111,8 @@ dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
 gnome-base/librsvg:tools - Build svg viewer tool
+gui-apps/rofi-wayland:drun - Desktop file mode
+gui-apps/rofi-wayland:windowmode - Window switcher mode
 gui-apps/waybar:evdev - Enable libevdev support for evdev related features
 gui-apps/waybar:experimental - Enable experimental features, such as Bluetooth battery reporting
 gui-apps/waybar:libinput - Enable libinput support for libinput related features
@@ -124,6 +126,28 @@ gui-apps/waybar:pulseaudio - Enable support for volume control via PulseAudio
 gui-apps/waybar:sndio - Enable support for volume control via sndio
 gui-apps/waybar:tray - Enable support for tray
 gui-apps/waybar:wifi - Enable support for wifi/rfkill
+gui-apps/yambar:alsa - ALSA support
+gui-apps/yambar:backlight - Backlight support
+gui-apps/yambar:battery - Battery support
+gui-apps/yambar:clock - Clock support
+gui-apps/yambar:core - Compiles modules, particles and decorations as shared libraries, which are loaded on-demand
+gui-apps/yambar:cpu - CPU monitoring support
+gui-apps/yambar:disk-io - Disk I/O support
+gui-apps/yambar:dwl - DWL (dwm for wayland) support
+gui-apps/yambar:foreign-toplevel - Foreign toplevel (window tracking for Wayland) support
+gui-apps/yambar:i3 - i3+Sway support
+gui-apps/yambar:label - Label support
+gui-apps/yambar:memory - Memory monitoring support
+gui-apps/yambar:mpd - Music Player Daemon (MPD) support
+gui-apps/yambar:network - Network monitoring support
+gui-apps/yambar:pipewire - Pipewire support
+gui-apps/yambar:pulseaudio - PulseAudio support
+gui-apps/yambar:removables - Removables (USB sticks, CD-ROM etc) monitoring support
+gui-apps/yambar:river - River support
+gui-apps/yambar:script - Script support
+gui-apps/yambar:sway-xkb - keyboard support for Sway
+gui-apps/yambar:xkb - keyboard support for X11
+gui-apps/yambar:xwindow - XWindow (window tracking for X11) support
 gui-wm/sway:X - Enable support for X11 applications (XWayland)
 gui-wm/sway:swaybar - Install 'swaybar': sway's status bar component
 gui-wm/sway:swaynag - Install 'swaynag': shows a message with buttons
