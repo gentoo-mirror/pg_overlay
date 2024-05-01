@@ -83,6 +83,7 @@ games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-base/librsvg 2.57.92: Scalable Vector Graphics (SVG) rendering library
 gui-apps/labwc 0.7.1: Openbox alternative for wayland
 gui-apps/rofi-wayland 1.7.5-r1: A window switcher, run dialog and dmenu replacement
+gui-apps/sfwbar 1.0_beta14: S* Floating Window Bar
 gui-apps/waybar 0.10.2 9999: Highly customizable Wayland bar for Sway and Wlroots based compositors
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/wofi 1.4.1: Wofi is a launcher/menu program for wlroots based wayland compositors like sway

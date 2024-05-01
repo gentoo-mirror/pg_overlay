@@ -113,6 +113,10 @@ dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaint
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/rofi-wayland:drun - Desktop file mode
 gui-apps/rofi-wayland:windowmode - Window switcher mode
+gui-apps/sfwbar:X - Add support for xkb maps
+gui-apps/sfwbar:alsa - Add support for ALSA sound server
+gui-apps/sfwbar:mpd - Add support for Music Player Daemon
+gui-apps/sfwbar:pulse - Add support for Pulse Audio
 gui-apps/waybar:evdev - Enable libevdev support for evdev related features
 gui-apps/waybar:experimental - Enable experimental features, such as Bluetooth battery reporting
 gui-apps/waybar:libinput - Enable libinput support for libinput related features
