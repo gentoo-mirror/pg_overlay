@@ -300,7 +300,7 @@ multilib_src_configure() {
 
 	gallium_enable -- swrast
 	gallium_enable video_cards_freedreno freedreno
-	gallium_enable video_cards_intel crocus i915 iris
+	gallium_enable video_cards_intel crocus
 	gallium_enable video_cards_lima lima
 	gallium_enable video_cards_d3d12 d3d12
 	gallium_enable video_cards_nouveau nouveau
@@ -332,7 +332,7 @@ multilib_src_configure() {
 	if use vulkan; then
 		vulkan_enable video_cards_lavapipe swrast
 		vulkan_enable video_cards_freedreno freedreno
-		vulkan_enable video_cards_intel intel intel_hasvk
+		vulkan_enable video_cards_intel intel_hasvk
 		vulkan_enable video_cards_d3d12 microsoft-experimental
 		vulkan_enable video_cards_radeonsi amd
 		vulkan_enable video_cards_v3d broadcom
@@ -363,7 +363,6 @@ multilib_src_configure() {
 		-Dexpat=enabled
 		$(meson_use opengl)
 		$(meson_feature opengl gbm)
-		$(meson_feature opengl gles1)
 		$(meson_feature opengl gles2)
 		$(meson_feature opengl glvnd)
 		$(meson_feature opengl egl)
