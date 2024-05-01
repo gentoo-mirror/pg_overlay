@@ -363,6 +363,7 @@ multilib_src_configure() {
 		-Dexpat=enabled
 		$(meson_use opengl)
 		$(meson_feature opengl gbm)
+		$(meson_feature opengl gles1)
 		$(meson_feature opengl gles2)
 		$(meson_feature opengl glvnd)
 		$(meson_feature opengl egl)
