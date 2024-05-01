@@ -60,7 +60,7 @@ COMMON_DEPEND="
 	wayland? (
 		>=dev-libs/wayland-1.20[${MULTILIB_USEDEP}]
 		gui-libs/libdecor[${MULTILIB_USEDEP}]
-		>=media-libs/mesa-9.1.6[${MULTILIB_USEDEP},egl(+),gles2(+),wayland]
+		>=media-libs/mesa-9.1.6[${MULTILIB_USEDEP},wayland]
 		>=x11-libs/libxkbcommon-0.2.0[${MULTILIB_USEDEP}]
 	)
 	X? (
