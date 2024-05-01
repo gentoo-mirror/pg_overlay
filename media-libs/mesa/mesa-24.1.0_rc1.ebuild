@@ -381,6 +381,7 @@ multilib_src_configure() {
 		-Dvulkan-drivers=$(driver_list "${VULKAN_DRIVERS[*]}")
 		-Db_ndebug=$(usex debug false true)
 		-Dgles1=disabled
+		-Dintel-rt=disabled
 	)
 	meson_src_configure
 }
