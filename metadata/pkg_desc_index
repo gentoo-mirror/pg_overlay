@@ -93,13 +93,10 @@ gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-wm/sway 9999: i3-compatible Wayland window manager
 kde-apps/kompare 9999: A program to view the differences between files
 kde-apps/libkomparediff2 9999: KDE library to compare files and strings
-kde-apps/okular 9999: Universal document viewer based on KDE Frameworks
-kde-apps/spectacle 9999: Screenshot capture utility
 kde-misc/kdiff3 1.10.7: Frontend to diff3 based on KDE Frameworks
 kde-misc/kmozillahelper 9999: Mozilla KDE Desktop Integration
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
-kde-plasma/plasma-pa 9999: Plasma applet for audio volume management using PulseAudio
 mail-client/thunderbird 115.10.1: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-bad 1.24.2_pre 1.24.3_pre: Less plugins for GStreamer

@@ -159,14 +159,6 @@ gui-wm/sway:swaybar - Install 'swaybar': sway's status bar component
 gui-wm/sway:swaynag - Install 'swaynag': shows a message with buttons
 gui-wm/sway:tray - Enable support for StatusNotifierItem tray specification
 gui-wm/sway:wallpapers - Install sway's default wallpaper image
-kde-apps/okular:crypt - Enable support for password-encrypted documents via kde-frameworks/kwallet
-kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
-kde-apps/okular:markdown - Enable Markdown support via app-text/discount
-kde-apps/okular:mobi - Enable mobipocket support via kde-apps/kdegraphics-mobipocket
-kde-apps/okular:phonon - Enable sound support via media-libs/phonon
-kde-apps/okular:qml - Install Okular Qml components
-kde-apps/okular:share - Enable support for a share menu using kde-frameworks/purpose
-kde-apps/spectacle:share - Enable support for a share menu using kde-frameworks/purpose
 kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
 kde-plasma/plasma-desktop:ibus - Use ibus input method via app-i18n/ibus
 kde-plasma/plasma-desktop:kaccounts - Build the OpenDesktop integration plugin
