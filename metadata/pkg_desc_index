@@ -141,7 +141,7 @@ media-sound/strawberry 9999: Modern music player and library organizer based on 
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.5: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-media-video/wireplumber 0.5.1: Replacement for pipewire-media-session
+media-video/wireplumber 0.5.2: Replacement for pipewire-media-session
 net-im/64Gram 1.1.19: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.13: Official desktop client for Telegram
