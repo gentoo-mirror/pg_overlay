@@ -1,7 +1,7 @@
 # Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 PLOCALES="cs de en es fr it nl pt ru uk"
 PLOCALE_BACKUP="en"
@@ -91,9 +91,8 @@ src_configure() {
 		-DWITH_LUAJIT="$(usex lua_single_target_luajit)"
 		-DWITH_ICONV="$(usex iconv)"
 		-DWITH_SDL2="$(usex sdl2)"
+		-DWITH_HARFBUZZ=ON
 	)
-#		-DWITH_HARFBUZZ="$(usex harfbuzz)"
-
 	cmake_src_configure
 }
 
