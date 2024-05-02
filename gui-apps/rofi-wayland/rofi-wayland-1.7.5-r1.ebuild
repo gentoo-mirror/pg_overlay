@@ -8,7 +8,7 @@ inherit meson xdg
 DESCRIPTION="A window switcher, run dialog and dmenu replacement"
 HOMEPAGE="https://github.com/lbonn/rofi"
 SRC_URI="https://github.com/lbonn/rofi/releases/download/${PV}%2Bwayland3/rofi-${PV}+wayland3.tar.xz"
-S="${WORKDIR}"/rofi-${PV}+wayland2
+S="${WORKDIR}"/rofi-${PV}+wayland3
 
 LICENSE="MIT"
 SLOT="0"
