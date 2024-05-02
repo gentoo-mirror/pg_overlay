@@ -44,6 +44,7 @@ src_configure() {
 		-Didleinhibit=enabled
 		-Diwd=disabled
 		-Dnetwork=enabled
+		-Dnm=enabled
 	)
 
 	meson_src_configure
