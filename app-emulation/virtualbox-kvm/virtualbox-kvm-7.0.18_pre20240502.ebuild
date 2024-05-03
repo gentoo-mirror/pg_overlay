@@ -552,7 +552,6 @@ src_install() {
 		vbox_inst ${each}
 	done
 
-	# These binaries need to be suid root.
 	for each in VBox{Headless,Net{AdpCtl,DHCP,NAT}} ; do
 		vbox_inst ${each} 0750
 	done
@@ -723,6 +722,7 @@ src_install() {
 		find vboxapi -name \*.py -exec sed -e "1 i\#! ${PYTHON}" -i {} \+ || die
 		python_domodule vboxapi
 		popd &> /dev/null || die
+		sed -e "1 i\#! ${PYTHON}" -i vboxshell.py || die
 		python_doscript vboxshell.py
 
 		# do not install the installer
