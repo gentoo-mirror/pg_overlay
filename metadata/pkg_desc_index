@@ -7,7 +7,7 @@ app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of A
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-emulation/spice 0.15.2: SPICE server
 app-emulation/virtualbox 7.0.14-r2: Family of powerful x86 virtualization products for enterprise and home use
-app-emulation/virtualbox-kvm 7.0.16_pre20240325: Family of powerful x86 virtualization products for enterprise and home use
+app-emulation/virtualbox-kvm 7.0.18_pre20240502: Family of powerful x86 virtualization products for enterprise and home use
 app-i18n/opencc 1.1.7: Library for conversion between Traditional and Simplified Chinese characters
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
@@ -74,7 +74,6 @@ dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles
 dev-util/mdds 2.1.1: Collection of multi-dimensional data structure and indexing algorithm
 dev-util/qbs 1.21.0: Modern build tool for software projects
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/re2c 3.1: Tool for generating C-based recognizers from regular expressions
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
 dev-util/spirv-llvm-translator 18.1.0: Bi-directional translator between SPIR-V and LLVM IR
@@ -144,7 +143,7 @@ media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.5: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 media-video/wireplumber 0.5.2: Replacement for pipewire-media-session
-net-im/64Gram 1.1.19: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
+net-im/64Gram 1.1.20: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.13: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
@@ -175,7 +174,6 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 sci-calculators/qalculate-qt 5.0.0: Qt-based UI for libqalculate
 sci-mathematics/mathematica 14.0.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/findutils 4.9.0-r2: GNU utilities for finding files
 sys-apps/openrazer 3.8.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/polychromatic 0.8.3-r1 9999: RGB lighting management software for GNU/Linux powered by OpenRazer
 sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices on Linux
