@@ -1,27 +1,27 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 WANT_AUTOMAKE="none"
 GENTOO_DEPEND_ON_PERL="no"
+# no py3.12 yet as many tests have invalid escape sequence warnings
 PYTHON_COMPAT=( python3_{11..12} )
-# ruby32 needs https://github.com/apache/subversion/commit/36e916ddaec4a5b1e64adee34337582f152805c5
-USE_RUBY="ruby27 ruby30 ruby31"
+USE_RUBY="ruby31 ruby32"
 
-inherit autotools bash-completion-r1 db-use depend.apache flag-o-matic java-pkg-opt-2 libtool multilib perl-module prefix python-any-r1 ruby-single xdg-utils
+inherit autotools bash-completion-r1 db-use depend.apache flag-o-matic java-pkg-opt-2
+inherit libtool multilib multiprocessing perl-module prefix python-any-r1 ruby-single xdg-utils
 
 MY_P="${P/_/-}"
 DESCRIPTION="Advanced version control system"
 HOMEPAGE="https://subversion.apache.org/"
-SRC_URI="mirror://apache/${PN}/${MY_P}.tar.bz2
-	https://dev.gentoo.org/~polynomial-c/${PN}-1.10.0_rc1-patches-1.tar.xz"
+SRC_URI="mirror://apache/${PN}/${MY_P}.tar.bz2"
 S="${WORKDIR}/${MY_P}"
 
 LICENSE="Apache-2.0 BSD MIT BSD-2 FSFAP unicode"
 SLOT="0"
 if [[ ${PV} != *_rc* ]] ; then
-	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux"
 fi
 IUSE="apache2 berkdb debug doc extras keyring java kwallet nls perl plaintext-password-storage ruby sasl test"
 RESTRICT="!test? ( test )"
@@ -33,7 +33,7 @@ COMMON_DEPEND="
 	>=dev-libs/apr-1.5:1
 	>=dev-libs/apr-util-1.5:1
 	dev-libs/expat
-	dev-libs/libutf8proc:=
+	>=dev-libs/libutf8proc-2.5.0:=
 	>=net-libs/serf-1.3.4
 	sys-apps/file
 	sys-libs/zlib
@@ -56,7 +56,8 @@ COMMON_DEPEND="
 	ruby? ( ${RUBY_DEPS} )
 	sasl? ( dev-libs/cyrus-sasl )
 "
-RDEPEND="${COMMON_DEPEND}
+RDEPEND="
+	${COMMON_DEPEND}
 	apache2? (
 		acct-group/apache
 		acct-user/apache
@@ -71,17 +72,25 @@ RDEPEND="${COMMON_DEPEND}
 	perl? ( dev-perl/URI )
 "
 # Note: ctypesgen doesn't need PYTHON_USEDEP, it's used once
-DEPEND="${COMMON_DEPEND}
+DEPEND="
+	${COMMON_DEPEND}
 	java? ( >=virtual/jdk-1.8:* )
 "
 BDEPEND="
 	virtual/pkgconfig
-	doc? ( app-doc/doxygen )
+	doc? ( app-text/doxygen )
 	nls? ( sys-devel/gettext )
 	perl? ( dev-lang/swig )
 	ruby? ( dev-lang/swig )
 	test? ( ${PYTHON_DEPS} )
 "
+
+PATCHES=(
+	"${FILESDIR}"/${PN}-1.5.6-aix-dso.patch
+	"${FILESDIR}"/${PN}-1.8.1-revert_bdb6check.patch
+	"${FILESDIR}"/${PN}-1.8.16-javadoc-nolint.patch
+	"${FILESDIR}"/${PN}-1.14.3-ruby-c99.patch
+)
 
 want_apache
 
@@ -143,13 +152,7 @@ pkg_setup() {
 }
 
 src_prepare() {
-	# https://bugs.gentoo.org/721300
-	rm "${WORKDIR}"/patches/subversion-1.10.0_rc1-utf8proc_include.patch || die
-
-	eapply "${WORKDIR}/patches"
-
-	eapply "${FILESDIR}"/subversion-1.14.2-python3.11.patch
-	eapply_user
+	default
 
 	chmod +x build/transform_libtool_scripts.sh || die
 
@@ -194,6 +197,7 @@ src_configure() {
 		--disable-mod-activation
 		--disable-static
 		--enable-svnxx
+		--without-swig-python
 	)
 
 	if use kwallet ; then
@@ -202,10 +206,16 @@ src_configure() {
 		myconf+=( --without-kwallet )
 	fi
 
-	if use perl || use ruby; then
-		myconf+=( --with-swig )
+	if use perl; then
+		myconf+=( --with-swig-perl )
 	else
-		myconf+=( --without-swig )
+		myconf+=( --without-swig-perl )
+	fi
+
+	if use ruby; then
+		myconf+=( --with-swig-ruby="${EPREFIX}/usr/bin/ruby${RB_VER}" )
+	else
+		myconf+=( --without-swig-ruby )
 	fi
 
 	if use java ; then
@@ -225,9 +235,9 @@ src_configure() {
 		;;
 	esac
 
-	#version 1.7.7 again tries to link against the older installed version and fails, when trying to
-	#compile for x86 on amd64, so workaround this issue again
-	#check newer versions, if this is still/again needed
+	# version 1.7.7 again tries to link against the older installed version and fails, when trying to
+	# compile for x86 on amd64, so workaround this issue again
+	# check newer versions, if this is still/again needed
 	#myconf+=( --disable-disallowing-of-undefined-references )
 
 	# for build-time scripts
@@ -235,11 +245,6 @@ src_configure() {
 		python_setup
 	fi
 
-	# Remove when >=dev-libs/libutf8proc-2.5.0 is stable
-	# https://bugs.gentoo.org/721300
-	append-cppflags -I"${EPREFIX}"/usr/include/libutf8proc
-
-	# allow overriding Python include directory
 	ac_cv_path_RUBY=$(usex ruby "${EPREFIX}/usr/bin/ruby${RB_VER}" "none") \
 	ac_cv_path_RDOC=$(usex ruby "${EPREFIX}/usr/bin/rdoc${RB_VER}" "none") \
 	econf "${myconf[@]}"
@@ -274,17 +279,19 @@ src_compile() {
 }
 
 src_test() {
+	# TODO: Maybe run swig tests for each language?
 	#if has_version ~${CATEGORY}/${P} ; then
-		default
+		emake -Onone PARALLEL="$(makeopts_jobs)" check
 	#else
 	#	ewarn "The test suite shows errors when there is an older version of"
 	#	ewarn "${CATEGORY}/${PN} installed. Please install =${CATEGORY}/${P}*"
 	#	ewarn "before running the test suite."
 	#	ewarn "Test suite skipped."
 	#fi
+
 	if [[ -f "${S}/fails.log" ]] ; then
 		echo "====== contents of fails.log follow ======"
-		cat "${S}/fails.log"
+		cat "${S}/fails.log" || die
 		echo "====== contents of fails.log end    ======"
 	fi
 }
@@ -316,22 +323,22 @@ src_install() {
 		doins "${FILESDIR}/47_mod_dav_svn.conf"
 	fi
 
-	# Install Bash Completion, bug 43179.
+	# Install bash completion, bug #43179.
 	newbashcomp tools/client-side/bash_completion svn
 	bashcomp_alias svn svn{admin,dumpfilter,look,sync,version}
-	rm -f tools/client-side/bash_completion
+	rm -f tools/client-side/bash_completion || die
 
-	# Install hot backup script, bug 54304.
+	# Install hot backup script, bug #54304.
 	newbin tools/backup/hot-backup.py svn-hot-backup
-	rm -fr tools/backup
+	rm -fr tools/backup || die
 
-	# Install svnserve init-script and xinet.d snippet, bug 43245.
+	# Install svnserve init-script and xinet.d snippet, bug #43245.
 	newinitd "${FILESDIR}"/svnserve.initd3 svnserve
 	newconfd "${FILESDIR}"/svnserve.confd svnserve
 	insinto /etc/xinetd.d
 	newins "${FILESDIR}"/svnserve.xinetd svnserve
 
-	#adjust default user and group with disabled apache2 USE flag, bug 381385
+	# Adjust default user and group with disabled apache2 USE flag, bug #381385
 	if ! use apache2 ; then
 		sed -e "s\USER:-apache\USER:-svn\g" \
 			-e "s\GROUP:-apache\GROUP:-svnusers\g" \
@@ -382,7 +389,7 @@ src_install() {
 }
 
 pkg_preinst() {
-	# Compare versions of Berkeley DB, bug 122877.
+	# Compare versions of Berkeley DB, bug #122877.
 	if use berkdb && [[ -f "${EROOT}/usr/bin/svn" ]] ; then
 		OLD_BDB_VERSION="$(scanelf -nq "${EROOT}/usr/$(get_libdir)/libsvn_subr-1$(get_libname 0)" | grep -Eo "libdb-[[:digit:]]+\.[[:digit:]]+" | sed -e "s/libdb-\(.*\)/\1/")"
 		NEW_BDB_VERSION="$(scanelf -nq "${ED}/usr/$(get_libdir)/libsvn_subr-1$(get_libname 0)" | grep -Eo "libdb-[[:digit:]]+\.[[:digit:]]+" | sed -e "s/libdb-\(.*\)/\1/")"

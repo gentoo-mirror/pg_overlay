@@ -6,20 +6,21 @@ EAPI=8
 PYTHON_COMPAT=( python3_{11..12} )
 inherit gnome.org meson-multilib python-any-r1
 
-DESCRIPTION="C++ interface for the ATK library"
-HOMEPAGE="https://www.gtkmm.org https://gitlab.gnome.org/GNOME/atkmm"
+DESCRIPTION="C++ interface for pango"
+HOMEPAGE="https://www.gtkmm.org https://gitlab.gnome.org/GNOME/pangomm"
 
 LICENSE="LGPL-2.1+"
-SLOT="0"
+SLOT="2.48"
 KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ppc ppc64 ~riscv sparc x86 ~amd64-linux ~x86-linux"
 IUSE="gtk-doc"
 
-DEPEND="
-	>=dev-cpp/glibmm-2.46.2:2[gtk-doc?,${MULTILIB_USEDEP}]
-	>=dev-libs/atk-2.18.0[${MULTILIB_USEDEP}]
-	>=dev-libs/libsigc++-2.3.2:2[gtk-doc?,${MULTILIB_USEDEP}]
+RDEPEND="
+	>=dev-cpp/cairomm-1.16.0:1.16[gtk-doc?,${MULTILIB_USEDEP}]
+	>=dev-cpp/glibmm-2.68.0:2.68[gtk-doc?,${MULTILIB_USEDEP}]
+	>=dev-libs/libsigc++-3:3[gtk-doc?,${MULTILIB_USEDEP}]
+	>=x11-libs/pango-1.49.4[${MULTILIB_USEDEP}]
 "
-RDEPEND="${DEPEND}"
+DEPEND="${RDEPEND}"
 BDEPEND="
 	virtual/pkgconfig
 	gtk-doc? (
@@ -32,6 +33,7 @@ BDEPEND="
 
 multilib_src_configure() {
 	local emesonargs=(
+		-Dmaintainer-mode=false
 		$(meson_native_use_bool gtk-doc build-documentation)
 	)
 	meson_src_configure

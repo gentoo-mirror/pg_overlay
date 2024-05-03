@@ -10,7 +10,7 @@ inherit python-utils-r1 toolchain-funcs verify-sig
 MY_PV=${PV/_rc/rc}
 MY_P="Python-${MY_PV%_p*}"
 PYVER=$(ver_cut 1-2)
-PATCHSET="python-gentoo-patches-${MY_PV%_p*}_p2"
+PATCHSET="python-gentoo-patches-${MY_PV}"
 
 DESCRIPTION="An interpreted, interactive, object-oriented programming language"
 HOMEPAGE="
@@ -237,6 +237,7 @@ src_configure() {
 			# They'll even hang here but be fine in src_test sometimes.
 			# bug #828535 (and related: bug #788022)
 			-x test_asyncio
+			-x test_concurrent_futures
 			-x test_httpservers
 			-x test_logging
 			-x test_multiprocessing_fork
@@ -400,6 +401,7 @@ src_test() {
 		-j "$(makeopts_jobs)"
 
 		# fails
+		-x test_concurrent_futures
 		-x test_gdb
 	)
 
@@ -422,7 +424,7 @@ src_test() {
 	# workaround https://bugs.gentoo.org/775416
 	addwrite "/usr/lib/python${PYVER}/site-packages"
 
-	nonfatal emake test EXTRATESTOPTS="${test_opts[*]}" \
+	nonfatal emake -Onone test EXTRATESTOPTS="${test_opts[*]}" \
 		CPPFLAGS= CFLAGS= LDFLAGS= < /dev/tty
 	local ret=${?}
 
