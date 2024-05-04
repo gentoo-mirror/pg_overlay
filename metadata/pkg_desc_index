@@ -192,7 +192,7 @@ sys-power/upower 1.90.2: D-Bus abstraction for enumerating power devices, queryi
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
-virtual/rust 1.77.2: Virtual for Rust language compiler
+virtual/rust 1.77.2 1.78.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 125.0.3: Firefox Web Browser
 www-client/vivaldi-snapshot 6.7.3329.19: A browser for our friends
