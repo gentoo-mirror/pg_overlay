@@ -321,7 +321,6 @@ RDEPEND="
 	>=media-libs/harfbuzz-2.0.0:=[${MULTILIB_USEDEP}]
 	>=dev-libs/libxml2-2.9.1-r4:2[${MULTILIB_USEDEP}]
 	>=x11-libs/pango-1.50.0[${MULTILIB_USEDEP}]
-
 	introspection? ( >=dev-libs/gobject-introspection-0.10.8:= )
 "
 DEPEND="${RDEPEND}"
@@ -350,11 +349,11 @@ src_prepare() {
 
 multilib_src_configure() {
 	local emesonargs=(
-		$(meson_native_use_feature gtk-doc)
 		$(meson_native_use_feature introspection)
 		$(meson_native_use_feature vala)
 		-Dpixbuf=enabled
 		-Dpixbuf-loader=enabled
+		-Ddocs=disabled
 	)
 	meson_src_configure
 }
