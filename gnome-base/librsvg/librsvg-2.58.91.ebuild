@@ -295,7 +295,7 @@ zerocopy@0.7.32
 zerocopy-derive@0.7.32
 "
 
-inherit cargo gnome2 multilib-minimal python-any-r1 rust-toolchain vala
+inherit cargo gnome2 meson=multilib python-any-r1 rust-toolchain vala
 
 DESCRIPTION="Scalable Vector Graphics (SVG) rendering library"
 HOMEPAGE="https://wiki.gnome.org/Projects/LibRsvg https://gitlab.gnome.org/GNOME/librsvg"
@@ -337,7 +337,6 @@ BDEPEND="
 	gtk-doc? ( dev-util/gi-docgen )
 	virtual/pkgconfig
 	vala? ( $(vala_depend) )
-
 	dev-libs/gobject-introspection-common
 	dev-libs/vala-common
 "
@@ -350,43 +349,18 @@ QA_FLAGS_IGNORED="
 
 src_prepare() {
 	use vala && vala_setup
-	gnome2_src_prepare
+	meson_src_prepare
 }
 
 multilib_src_configure() {
-	local myconf=(
-		--disable-static
-		--disable-debug
-		$(multilib_native_use_enable gtk-doc)
-		$(multilib_native_use_enable introspection)
-		$(multilib_native_use_enable vala)
-		--enable-pixbuf-loader
+	local emesonargs=(
+		$(meson_native_use_feature gtk-doc)
+		$(meson_native_use_feature introspection)
+		$(meson_native_use_feature vala)
+		-Dpixbuf=enabled
+		-Dpixbuf-loader=enabled
 	)
-
-	if ! multilib_is_native_abi; then
-		myconf+=(
-			# Set the rust target, which can differ from CHOST
-			RUST_TARGET="$(rust_abi)"
-			# RUST_TARGET is only honored if cross_compiling, but non-native ABIs aren't cross as
-			# far as C parts and configure auto-detection are concerned as CHOST equals CBUILD
-			cross_compiling=yes
-		)
-	fi
-
-	ECONF_SOURCE=${S} \
-	gnome2_src_configure "${myconf[@]}"
-
-	if multilib_is_native_abi; then
-		ln -s "${S}"/doc/html doc/html || die
-	fi
-}
-
-multilib_src_compile() {
-	gnome2_src_compile
-}
-
-multilib_src_install() {
-	gnome2_src_install
+	meson_src_configure
 }
 
 multilib_src_install_all() {
