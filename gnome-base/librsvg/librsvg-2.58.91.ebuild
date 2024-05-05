@@ -125,7 +125,6 @@ libc@0.2.153
 libloading@0.8.3
 libm@0.2.8
 librsvg@2.59.0-beta.1
-librsvg-c@2.58.91
 linked-hash-map@0.5.6
 linux-raw-sys@0.4.13
 locale_config@0.3.0
@@ -177,7 +176,6 @@ phf_shared@0.10.0
 phf_shared@0.11.2
 pin-project-lite@0.2.14
 pin-utils@0.1.0
-pixbufloader-svg@0.0.1
 pkg-config@0.3.30
 plotters@0.3.5
 plotters-backend@0.3.5
@@ -208,8 +206,6 @@ regex@1.10.4
 regex-automata@0.4.6
 regex-syntax@0.8.3
 rgb@0.8.37
-rsvg-bench@2.58.91
-rsvg_convert@2.58.91
 rustix@0.38.34
 rusty-fork@0.3.0
 ryu@1.0.17
@@ -295,7 +291,7 @@ zerocopy@0.7.32
 zerocopy-derive@0.7.32
 "
 
-inherit cargo gnome2 meson=multilib python-any-r1 rust-toolchain vala
+inherit cargo gnome2 meson-multilib python-any-r1 rust-toolchain vala
 
 DESCRIPTION="Scalable Vector Graphics (SVG) rendering library"
 HOMEPAGE="https://wiki.gnome.org/Projects/LibRsvg https://gitlab.gnome.org/GNOME/librsvg"
@@ -325,7 +321,6 @@ RDEPEND="
 	>=media-libs/harfbuzz-2.0.0:=[${MULTILIB_USEDEP}]
 	>=dev-libs/libxml2-2.9.1-r4:2[${MULTILIB_USEDEP}]
 	>=x11-libs/pango-1.50.0[${MULTILIB_USEDEP}]
-
 	introspection? ( >=dev-libs/gobject-introspection-0.10.8:= )
 "
 DEPEND="${RDEPEND}"
@@ -349,16 +344,16 @@ QA_FLAGS_IGNORED="
 
 src_prepare() {
 	use vala && vala_setup
-	meson_src_prepare
+	gnome2_src_prepare
 }
 
 multilib_src_configure() {
 	local emesonargs=(
-		$(meson_native_use_feature gtk-doc)
 		$(meson_native_use_feature introspection)
 		$(meson_native_use_feature vala)
 		-Dpixbuf=enabled
 		-Dpixbuf-loader=enabled
+		-Ddocs=disabled
 	)
 	meson_src_configure
 }
