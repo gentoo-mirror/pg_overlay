@@ -334,6 +334,7 @@ BDEPEND="
 	vala? ( $(vala_depend) )
 	dev-libs/gobject-introspection-common
 	dev-libs/vala-common
+	dev-util/cargo-c
 "
 # dev-libs/gobject-introspection-common, dev-libs/vala-common needed by eautoreconf
 
