@@ -345,7 +345,7 @@ QA_FLAGS_IGNORED="
 
 src_prepare() {
 	use vala && vala_setup
-	meson_src_prepare
+	gnome2_src_prepare
 }
 
 multilib_src_configure() {
