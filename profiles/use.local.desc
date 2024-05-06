@@ -321,7 +321,6 @@ media-video/qmplay2:sid - Build Chiptune with SIDPLAY support
 media-video/qmplay2:videofilters - Build with VideoFilters module
 media-video/qmplay2:visualizations - Build with Visualizations module
 media-video/qmplay2:vulkan - Build with Vulkan support
-media-video/wireplumber:system-service - Install systemd unit files for running as a system service. Not recommended.
 net-im/64Gram:enchant - Use the app-text/enchant spell-checking backend instead of app-text/hunspell
 net-im/64Gram:fonts - Use builtin patched copy of open-sans fonts (overrides fontconfig)
 net-im/64Gram:qt6 - Build with Qt6 support
