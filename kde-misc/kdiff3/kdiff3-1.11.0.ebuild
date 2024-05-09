@@ -13,7 +13,7 @@ HOMEPAGE="https://apps.kde.org/kdiff3/ https://userbase.kde.org/KDiff3"
 SRC_URI="mirror://kde/stable/${PN}/${P}.tar.xz"
 
 LICENSE="GPL-2"
-SLOT="5"
+SLOT="6"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 IUSE=""
 
@@ -41,7 +41,7 @@ RDEPEND="${COMMON_DEPEND}
 
 src_configure() {
 	local mycmakeargs=(
-		-DBUILD_WITH_QT6=On
+		-DBUILD_WITH_QT6=ON
 	)
 	ecm_src_configure
 }
