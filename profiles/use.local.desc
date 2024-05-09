@@ -3,7 +3,6 @@
 # * generated automatically using pmaint *
 
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
-app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
 app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
 app-emulation/virtualbox:headless - Build without any graphic frontend
 app-emulation/virtualbox:lvm - Build VBoxVolInfo that needs devicemapper from sys-fs/lvm2.
@@ -56,7 +55,6 @@ app-portage/eix:tools - Create separate binary for script helper tools; useful i
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
 app-shells/bash-completion:eselect - Support blacklisting of completions via 'eselect bashcomp'. This enables custom Gentoo patching of upstream completion loader.
 dev-db/mysql-connector-c++:legacy - Build the legacy 1.x API as well as the DevX API
-dev-db/sqlitestudio:cli - Build CLI interface
 dev-lang/lazarus:extras - Build a lot of extra packages, including lhelp chm viewer program.
 dev-lang/lazarus:gtk2 - Use gtk:2 for widgets.
 dev-lang/lazarus:gui - Build GUI IDE.
