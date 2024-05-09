@@ -3,7 +3,6 @@
 # * generated automatically using pmaint *
 
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
-app-arch/rar:all-sfx - Install all SFX (Self-Extracting) files rather than just the native format (allows creation of Windows EXEs on Linux ELF systems)
 app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
 app-emulation/virtualbox:dtrace - Install dtrace Extension Pack
 app-emulation/virtualbox:headless - Build without any graphic frontend
