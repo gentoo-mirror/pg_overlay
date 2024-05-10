@@ -12,7 +12,7 @@ HOMEPAGE="https://www.gtk.org/"
 
 LICENSE="LGPL-2.1+"
 SLOT="2"
-IUSE="dbus debug +elf gtk-doc +mime selinux static-libs sysprof systemtap test utils xattr"
+IUSE="dbus debug +elf gtk-doc +mime selinux static-libs sysprof systemtap test utils xattr introspection"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="gtk-doc? ( test )" # Bug #777636
 
@@ -197,14 +197,14 @@ multilib_src_configure() {
 		$(meson_use systemtap dtrace)
 		$(meson_use systemtap)
 		$(meson_feature sysprof)
-		$(meson_native_use_bool gtk-doc gtk_doc)
+		$(meson_native_use_bool gtk-doc man-pages)
 		$(meson_use test tests)
 		-Dinstalled_tests=false
 		-Dnls=enabled
 		-Doss_fuzz=disabled
 		$(meson_native_use_feature elf libelf)
 		-Dmultiarch=false
-		-Dintrospection=enabled
+		$(meson_feature introspection)
 	)
 	meson_src_configure
 }
