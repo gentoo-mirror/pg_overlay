@@ -239,14 +239,14 @@ multilib_src_install_all() {
 	# TODO: With patching we might be able to get rid of the python-any deps
 	# and removals, and test depend on glib-utils instead; revisit now with
 	# meson
-	rm "${ED}/usr/bin/glib-genmarshal" || die
-	rm "${ED}/usr/share/man/man1/glib-genmarshal.1" || die
-	rm "${ED}/usr/bin/glib-mkenums" || die
-	rm "${ED}/usr/share/man/man1/glib-mkenums.1" || die
-	rm "${ED}/usr/bin/gtester-report" || die
-	rm "${ED}/usr/share/man/man1/gtester-report.1" || die
+	rm "${ED}/usr/bin/glib-genmarshal"
+	rm "${ED}/usr/share/man/man1/glib-genmarshal.1"
+	rm "${ED}/usr/bin/glib-mkenums"
+	rm "${ED}/usr/share/man/man1/glib-mkenums.1"
+	rm "${ED}/usr/bin/gtester-report"
+	rm "${ED}/usr/share/man/man1/gtester-report.1"
 	# gdbus-codegen manpage installed by dev-util/gdbus-codegen
-	rm "${ED}/usr/share/man/man1/gdbus-codegen.1" || die
+	rm "${ED}/usr/share/man/man1/gdbus-codegen.1"
 }
 
 pkg_preinst() {
