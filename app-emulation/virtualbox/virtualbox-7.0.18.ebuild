@@ -27,7 +27,7 @@ DESCRIPTION="Family of powerful x86 virtualization products for enterprise and h
 HOMEPAGE="https://www.virtualbox.org/"
 SRC_URI="
 	https://download.virtualbox.org/virtualbox/${PV}/${MY_P}.tar.bz2
-	https://gitweb.gentoo.org/proj/virtualbox-patches.git/snapshot/virtualbox-patches-7.0.14.tar.bz2
+	https://gitweb.gentoo.org/proj/virtualbox-patches.git/snapshot/virtualbox-patches-7.0.16.tar.bz2
 	gui? ( !doc? ( https://dev.gentoo.org/~ceamac/${CATEGORY}/${PN}/${PN}-help-${PV}.tar.xz ) )
 "
 S="${WORKDIR}/${MY_PN}-${PV}"
@@ -191,7 +191,7 @@ REQUIRED_USE="
 
 PATCHES=(
 	# Downloaded patchset
-	"${WORKDIR}"/virtualbox-patches-7.0.14/patches
+	"${WORKDIR}"/virtualbox-patches-7.0.16/patches
 )
 
 pkg_pretend() {
@@ -695,6 +695,7 @@ src_install() {
 		find vboxapi -name \*.py -exec sed -e "1 i\#! ${PYTHON}" -i {} \+ || die
 		python_domodule vboxapi
 		popd &> /dev/null || die
+		sed -e "1 i\#! ${PYTHON}" -i vboxshell.py || die
 		python_doscript vboxshell.py
 
 		# do not install the installer
