@@ -49,7 +49,6 @@ BDEPEND="dev-util/gdbus-codegen
 S="${WORKDIR}/${MY_P}"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.20.8-ppp-2.5.0-2.patch
 	"${FILESDIR}"/${PN}-1.20.8-bashism-configure.patch
 )
 
