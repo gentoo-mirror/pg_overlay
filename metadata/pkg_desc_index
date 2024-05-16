@@ -91,7 +91,7 @@ kde-apps/libkomparediff2 9999: KDE library to compare files and strings
 kde-misc/kdiff3 1.11.0: Frontend to diff3 based on KDE Frameworks
 kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
-mail-client/thunderbird 115.10.2: Thunderbird Mail Client
+mail-client/thunderbird 115.11.0: Thunderbird Mail Client
 mail-client/thunderbird-bin 115.10.2: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-bad 1.24.2_pre 1.24.3_pre: Less plugins for GStreamer
@@ -188,7 +188,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.77.2 1.78.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
-www-client/firefox 125.0.3: Firefox Web Browser
+www-client/firefox 126.0: Firefox Web Browser
 www-client/vivaldi-snapshot 6.7.3329.19: A browser for our friends
 x11-base/xwayland 23.2.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
