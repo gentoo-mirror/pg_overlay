@@ -174,7 +174,7 @@ sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
 sys-devel/clang 18.1.5: C language family frontend for LLVM
-sys-devel/llvm 18.1.5: Low Level Virtual Machine
+sys-devel/llvm 18.1.5-r1: Low Level Virtual Machine
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/ncdu 2.4: NCurses Disk Usage
@@ -186,7 +186,7 @@ sys-power/upower 1.90.2: D-Bus abstraction for enumerating power devices, queryi
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
-virtual/rust 1.77.2 1.78.0: Virtual for Rust language compiler
+virtual/rust 1.78.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 126.0: Firefox Web Browser
 www-client/vivaldi-snapshot 6.7.3329.19: A browser for our friends
