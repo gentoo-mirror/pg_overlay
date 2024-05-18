@@ -52,7 +52,7 @@ dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 26.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/qt6pas 6.2.8: Free Pascal Qt6 bindings library updated by lazarus IDE.
-dev-libs/re2 0.2024.04.01: An efficient, principled regular expression library
+dev-libs/re2 0.2024.05.01: An efficient, principled regular expression library
 dev-libs/utfcpp 4.0.5: UTF-8 C++ library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
@@ -190,7 +190,7 @@ virtual/rust 1.78.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 126.0: Firefox Web Browser
 www-client/vivaldi-snapshot 6.7.3329.19: A browser for our friends
-x11-base/xwayland 23.2.6: Standalone X server running under Wayland
+x11-base/xwayland 23.2.6 24.1.0: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.41: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
