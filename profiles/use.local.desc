@@ -87,7 +87,6 @@ dev-libs/glib:sysprof - Enable profiling data capture support using dev-util/sys
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-debug/systemtap
 dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
 dev-libs/gobject-introspection:doctool - Install g-ir-doc-tool for generating documentation from introspected data
-dev-libs/libclc:spirv - Build SPIRV targets
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
