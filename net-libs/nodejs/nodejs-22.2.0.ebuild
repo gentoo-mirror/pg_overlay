@@ -62,10 +62,6 @@ DEPEND="${RDEPEND}"
 CHECKREQS_MEMORY="8G"
 CHECKREQS_DISK_BUILD="22G"
 
-PATCHES=(
-	"${WORKDIR}"/nodejs-22.1.0-deps-import-simdjson-3.9.1-for-GCC-14.patch
-)
-
 pkg_pretend() {
 	if [[ ${MERGE_TYPE} != "binary" ]]; then
 		if is-flagq "-g*" && ! is-flagq "-g*0" ; then
