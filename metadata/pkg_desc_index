@@ -32,7 +32,7 @@ dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 3.2: feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
-dev-lang/python 3.12.3: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.12.3-r1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.78.0: Systems programming language from Mozilla
 dev-lang/zig 0.12.0: A robust, optimal, and maintainable programming language
 dev-lang/zig-bin 0.12.0: A robust, optimal, and maintainable programming language
