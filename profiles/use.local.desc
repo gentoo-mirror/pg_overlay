@@ -148,7 +148,6 @@ gui-wm/sway:swaybar - Install 'swaybar': sway's status bar component
 gui-wm/sway:swaynag - Install 'swaynag': shows a message with buttons
 gui-wm/sway:tray - Enable support for StatusNotifierItem tray specification
 gui-wm/sway:wallpapers - Install sway's default wallpaper image
-kde-plasma/kde-cli-tools:kdesu - Build graphical frontend for kde-frameworks/kdesu
 kde-plasma/plasma-desktop:ibus - Use ibus input method via app-i18n/ibus
 kde-plasma/plasma-desktop:kaccounts - Build the OpenDesktop integration plugin
 kde-plasma/plasma-desktop:scim - Enable applets that use app-i18n/scim

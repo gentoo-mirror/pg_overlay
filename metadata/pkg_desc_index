@@ -65,7 +65,7 @@ dev-util/cargo-c 0.9.32: Helper program to build and install c-like libraries
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.80.2: GDBus code and documentation generator
 dev-util/glib-utils 2.80.2: Build utilities for GLib using projects
-dev-util/intel_clc 24.0.7 24.1.0_rc3 9999: intel_clc tool used for building OpenCL C to SPIR-V
+dev-util/intel_clc 24.0.8 24.1.0 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/scanmem 9999: Locate and modify variables in executing processes
@@ -88,7 +88,6 @@ gui-wm/sway 9999: i3-compatible Wayland window manager
 kde-apps/kompare 9999: A program to view the differences between files
 kde-apps/libkomparediff2 9999: KDE library to compare files and strings
 kde-misc/kdiff3 1.11.0: Frontend to diff3 based on KDE Frameworks
-kde-plasma/kde-cli-tools 9999: Tools based on KDE Frameworks 6 to better interact with the system
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 mail-client/thunderbird 115.11.0: Thunderbird Mail Client
 mail-client/thunderbird-bin 115.10.2: Thunderbird Mail Client
@@ -109,7 +108,7 @@ media-libs/libmpdclient 9999: A C library which implements the Music Player Daem
 media-libs/libpulse 16.1-r4: Libraries for PulseAudio clients
 media-libs/libsdl2 2.30.2-r2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122: VoIP library for Telegram clients
-media-libs/mesa 24.0.7 24.1.0_rc3 9999: OpenGL-like graphic library for Linux
+media-libs/mesa 24.0.8 24.1.0 9999: OpenGL-like graphic library for Linux
 media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/taglib 2.0.1_pre: Library for reading and editing audio meta data
