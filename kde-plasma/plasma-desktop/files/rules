@@ -1,0 +1,209 @@
+#!/usr/bin/make -f
+# -*- makefile -*-
+
+# Uncomment this to turn on verbose mode.
+# export DH_VERBOSE=1
+
+# checking the release type, if $(RELEASE)=UNRELEASED we won't build
+# the thunderbird-dbgsym package
+include /usr/share/dpkg/pkg-info.mk
+RELEASE := $(DEB_DISTRIBUTION)
+
+ifneq (,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+	NUMJOBS = $(patsubst parallel=%,%,$(filter parallel=%,$(DEB_BUILD_OPTIONS)))
+endif
+
+THUNDERBIRD_VERSION=$(shell tail -1 comm/mail/config/version.txt)
+
+# build directory used for building the thunderbird-l10n files
+THUNDERBIRD_L10N_BUILDDIR=debian/thunderbird-l10n-build
+
+# ID of the l10n language packs from upstream, need to match the application.id
+# in thunderbird-l10n/$LANG/manifest.json
+export MOZ_LANGPACK_ID = $(shell grep MOZ_LANGPACK_EID comm/mail/locales/Makefile.in | cut -f2 -d @)
+
+DPKG_EXPORT_BUILDFLAGS = 1
+include /usr/share/dpkg/buildflags.mk
+include /usr/share/dpkg/architecture.mk
+
+# Use dpkg-buildflags to get build flags, but exclude -g, that is dealt with
+# via configure options. Picked partially from FF.
+
+dpkg_buildflags = $(and $(1),$(shell DEB_CFLAGS_MAINT_STRIP="-g" DEB_CXXFLAGS_MAINT_STRIP="-g" dpkg-buildflags --get $(1)))
+lazy = $(eval $(1) = $$(if $$(___$(1)),,$$(eval ___$(1) := $(2)))$$(___$(1)))
+$(call lazy,CFLAGS,$$(call dpkg_buildflags,CFLAGS))
+$(call lazy,CXXFLAGS,$$(call dpkg_buildflags,CXXFLAGS))
+$(call lazy,CPPFLAGS,$$(call dpkg_buildflags,CPPFLAGS))
+$(call lazy,LDFLAGS,$$(call dpkg_buildflags,LDFLAGS))
+
+# special CFLAGS for various platforms
+ifeq ($(DEB_BUILD_ARCH),armel)
+	CFLAGS += -D__ARM_PCS
+	LDFLAGS += -Wl,-z,muldefs
+endif
+ifeq ($(DEB_BUILD_ARCH),ppc64el)
+	# Work around upstream bug 1757271
+	CFLAGS += -DSQLITE_BYTEORDER=1234
+endif
+
+# Reduce memory usage of the linker at the expense of processing time
+# This should help on lower-end architectures like arm and mips, which
+# spend an immense amount of time swapping.
+LDFLAGS += -Wl,--reduce-memory-overheads
+LDFLAGS += -Wl,--no-keep-memory
+LDFLAGS += -Wl,--as-needed
+
+# Make the linker generate compressed debug sections. dh_strip would do
+# the same anyways, but it allows elfhack to work in combination with
+# unstripped binaries when they would normally be larger than 2GiB.
+# Doing this only on 64bit architectures.
+ifeq (64,$(DEB_BUILD_ARCH_BITS))
+	LDFLAGS += -Wl,--compress-debug-sections=zlib
+endif
+
+# Add execution time and memory usage stats in the logs
+LDFLAGS += -Wl,--stats
+
+# Using the timestamp for MOZ_BUILD_DATE from the file './sourcestamp.txt'
+# which is set by Mozilla while creating the release.
+# This ensures we have a one-to-one date across the various package builds
+# within Debian for one upstream version. This is important for user which
+# are performing a dist-upgrade to a new release.
+export MOZ_BUILD_DATE := ${shell head -n1 $(CURDIR)/sourcestamp.txt}
+export MOZCONFIG=$(shell pwd)/mozconfig.thunderbird
+export MOZILLA_OFFICIAL=1
+export DEB_BUILD_GNU_TYPE
+export DEB_HOST_GNU_TYPE
+export DEB_BUILD_OPTIONS
+# Some Debian build tools clear out some variables
+export SHELL=/bin/bash
+# Work around https://github.com/rust-lang/cargo/issues/7147
+export CARGO_HOME=$(CURDIR)/debian/.cargo
+export MOZBUILD_STATE_PATH = $(CURDIR)/debian/.mozbuild
+export MACH_BUILD_PYTHON_NATIVE_PACKAGE_SOURCE=system
+
+%:
+	dh $@
+
+build:
+	dh $@
+
+override_dh_auto_clean:
+	dh_auto_clean --builddirectory=obj-thunderbird
+	find -type f -name "*.pyc" -exec rm {} \;
+	rm -rf third_party/python/psutil/tmp
+	rm -f old-configure js/src/configure js/src/old-configure mozconfig.*
+	# needed for thunderbird-l10n
+	rm -rf $(THUNDERBIRD_L10N_BUILDDIR)
+	rm -rf $(CARGO_HOME)
+	rm -rf $(MOZBUILD_STATE_PATH)
+
+override_dh_auto_configure:
+	# copy the mozconfig files in place
+	cp debian/mozconfig.* .
+	# Disable debug symbols when building on 32-bits machines, because
+	# a) the rust compiler can't deal with it in the available address
+	# space, and b) the linker can't deal with it in the available address
+	# space either.
+ifeq (32,$(DEB_BUILD_ARCH_BITS))
+	echo 'ac_add_options --disable-debug-symbols' >> mozconfig.default
+endif
+	echo 'mk_add_options MOZ_OBJDIR=$(CURDIR)/obj-thunderbird' >> mozconfig.thunderbird
+	echo 'ac_add_options --prefix=$(CURDIR)/debian/tmp/usr' >> mozconfig.default
+	# configure the various build settings for thunderbird
+	DIST= python3 ./mach -v configure
+
+# Ignore autoreconf, there is nothing that could be reconfigured. It's all
+# newly generated right before debhelper would call that target.
+override_dh_autoreconf:
+
+override_dh_auto_build:
+	# building the stuff
+	dh_auto_build --builddirectory=obj-thunderbird
+	# build thunderbird-l10n
+	mkdir -p $(THUNDERBIRD_L10N_BUILDDIR)
+	cd $(CURDIR)/thunderbird-l10n ;\
+	for XPI in *; do \
+		locale=`basename $${XPI}` ;\
+		USED_LANGPACK_ID=`grep langpack- $${XPI}/manifest.json | tr '"' ' ' | awk '{print $$3}' | cut -f2-3 -d @` ;\
+		if [ "$${USED_LANGPACK_ID}" != "$${MOZ_LANGPACK_ID}" ]; then \
+			echo "MOZ_LANGPACK_ID mismatch! '$${USED_LANGPACK_ID}' != '$${MOZ_LANGPACK_ID}'" ;\
+			echo "thunderbird-l10n l10n source '$${XPI}' uses a different MOZ_LANGPACK_ID than defined in $(CURDIR)/comm/mail/locales/Makefile.in!";\
+			exit 1 ;\
+		else \
+			$(CURDIR)/debian/xpi-pack.sh $${XPI} ../$(THUNDERBIRD_L10N_BUILDDIR)/langpack-$${locale}@$${MOZ_LANGPACK_ID}.xpi ;\
+		fi \
+	done
+
+override_dh_auto_install:
+ifneq (,$(filter mips,$(DEB_BUILD_ARCH)))
+	sed -i '/"javascript.options.\(baselinejit\|ion\)"/s/true/false/' obj-thunderbird/dist/bin/greprefs.js
+endif
+	# install thunderbird into temp install folder
+	python3 ./mach -v install
+	# install, symlinking thunderbird-l10n packages
+	cd $(CURDIR)/thunderbird-l10n ;\
+	for LANG in *; do \
+		locale=`basename $${LANG}` ;\
+		lowercase_locale=`echo $${locale} | tr 'A-Z' 'a-z'` ;\
+		echo "preparing and working on 'thunderbird-l10n-$${lowercase_locale}  (langpack-$${locale}@$${MOZ_LANGPACK_ID}.xpi)" ;\
+		mkdir -p $(CURDIR)/debian/thunderbird-l10n-$${lowercase_locale}/usr/lib/thunderbird/extensions/ ;\
+		install -D -m 644 ../$(THUNDERBIRD_L10N_BUILDDIR)/langpack-$${locale}@$${MOZ_LANGPACK_ID}.xpi $(CURDIR)/debian/thunderbird-l10n-$${lowercase_locale}/usr/lib/thunderbird/extensions/langpack-$${locale}@$${MOZ_LANGPACK_ID}.xpi ;\
+	done
+	dh_bash-completion
+
+override_dh_install-arch:
+	dh_install
+	# apparmor profile installed by dh_install
+	dh_apparmor --profile-name=usr.bin.thunderbird -pthunderbird
+
+override_dh_install-indep:
+	dh_install
+	# remove executable rights on *.js, *.png, *.xul files
+	find debian/thunderbird-l10n*/ -type f \( -name "*.dtd" -o -name "*.js" -o -name "*.png" -o -name "*.properties" -o -name "*.xul" \) -exec chmod 644 {} \;
+
+override_dh_strip:
+	if [ "$(RELEASE)" != "UNRELEASED" ]; then \
+		dh_strip --automatic-dbgsym ;\
+	else \
+		dh_strip --no-automatic-dbgsym ;\
+	fi
+
+override_dh_shlibdeps:
+	dh_shlibdeps -a -l $(CURDIR)/debian/tmp/usr/lib/thunderbird -- -xlibgtk2.0-0
+
+override_dh_builddeb:
+	# just build all packages if there is no 'UNRELEASED' within the changelog
+	# found, otherwise skip the thunderbird-dbgsym package, it isn't there
+	if [ "$(RELEASE)" != "UNRELEASED" ]; then \
+		dh_builddeb ;\
+	else \
+		dh_builddeb -pthunderbird ;\
+		dh_builddeb -plightning ;\
+		for package in `grep -e \
+			'Package: thunderbird-l10n\|Package: lightning-l10n' debian/control | awk '{print $$2;}'`; do \
+			dh_builddeb -p$$package ;\
+		done ;\
+		sed -i '/thunderbird-dbgsym/d' debian/files ;\
+	fi
+
+override_dh_missing:
+	dh_missing \
+	-X usr/bin/thunderbird \
+	-X usr/lib/thunderbird/crashreporter \
+	-X usr/lib/thunderbird/glxtest \
+	-X usr/lib/thunderbird/minidump-analyzer \
+	-X usr/lib/thunderbird/pingsender \
+	-X usr/lib/thunderbird/Throbber-small.gif \
+	-X usr/lib/thunderbird/vaapitest \
+	$(NULL)
+
+override_dh_dwz:
+	# Don't use dwz for now, it fails with:
+	# dwz: debian/thunderbird/usr/lib/thunderbird/libldap60.so: Found compressed .debug_info section, not attempting dwz compression
+	# dwz: debian/thunderbird/usr/lib/thunderbird/libldif60.so: Found compressed .debug_info section, not attempting dwz compression
+	# ...
+	# dwz: debian/thunderbird/usr/lib/thunderbird/thunderbird-bin: Found compressed .debug_info section, not attempting dwz compression
+	# dwz: Too few files for multifile optimization
+
+.PHONY: build
