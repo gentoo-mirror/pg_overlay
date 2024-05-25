@@ -34,7 +34,6 @@ COMMON_DEPEND="
 	>=x11-libs/libdrm-2.4.116
 	>=x11-libs/libXau-1.0.4
 	x11-libs/libxcvt
-	>=x11-libs/libXdmcp-1.0.2
 	>=x11-libs/libXfont2-2.0.1
 	x11-libs/libxkbfile
 	>=x11-libs/libxshmfence-1.1
@@ -80,23 +79,19 @@ src_configure() {
 		$(meson_use systemd systemd_notify)
 		$(meson_use unwind libunwind)
 		$(meson_use xcsecurity)
-		-Ddpms=true
 		-Ddri3=true
 		-Ddrm=true
 		-Ddtrace=false
 		-Dglamor=true
 		-Dglx=true
 		-Dipv6=true
-		-Dsecure-rpc=false
-		-Dscreensaver=true
-		-Dsha1=libcrypto
-		-Dxace=true
-		-Dxdmcp=true
-		-Dxinerama=true
-		-Dxvfb=true
-		-Dxv=true
-		-Dxwayland-path="${EPREFIX}"/usr/bin
 		-Dlibdecor=false
+		-Dsecure-rpc=false
+		-Dxdmcp=false
+		-Dxinerama=false
+		-Dxv=true
+		-Dxvfb=true
+		-Dxwayland-path="${EPREFIX}"/usr/bin
 		-Ddocs=false
 		-Ddevel-docs=false
 		-Ddocs-pdf=false
