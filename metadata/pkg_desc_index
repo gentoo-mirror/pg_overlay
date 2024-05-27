@@ -29,6 +29,7 @@ dev-cpp/glibmm 2.66.7 2.80.0: C++ interface for glib2
 dev-cpp/pangomm 2.46.4 2.52.0: C++ interface for pango
 dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
+dev-db/sqlite 3.46.0_pre: SQL database engine
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 3.2: feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
@@ -96,6 +97,7 @@ media-libs/gst-plugins-bad 1.24.2_pre 1.24.3_pre: Less plugins for GStreamer
 media-libs/gst-plugins-base 1.24.2_pre 1.24.3_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.24.2_pre 1.24.3_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.24.2_pre 1.24.3_pre: Open source multimedia framework
+media-libs/harfbuzz 8.5.0_pre: An OpenType text shaping engine
 media-libs/imlib2 1.11.1_pre: Version 2 of an advanced replacement library for libraries like libXpm
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libavif 1.0.2: Library for encoding and decoding .avif files
@@ -132,7 +134,7 @@ media-sound/strawberry 9999: Modern music player and library organizer based on 
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.0.7: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-net-im/64Gram 1.1.22: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
+net-im/64Gram 1.1.23: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/telegram-desktop 4.14.13: Official desktop client for Telegram
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
