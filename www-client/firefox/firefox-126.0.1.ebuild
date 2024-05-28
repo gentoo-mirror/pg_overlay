@@ -1076,7 +1076,7 @@ src_configure() {
 	fi
 
 	# elf-hack
-	# Filter "-z,pack-relative-relocs" and let the build system handle it instead. 
+	# Filter "-z,pack-relative-relocs" and let the build system handle it instead.
 	if use amd64 || use x86 ; then
 		filter-flags "-z,pack-relative-relocs"
 
