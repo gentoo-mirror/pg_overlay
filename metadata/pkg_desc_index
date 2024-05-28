@@ -22,7 +22,6 @@ app-text/asciidoc 10.2.0: A plain text human readable/writable document format
 app-text/goldendict 9999 9999-r1 9999-r6 9999-r61: Feature-rich dictionary lookup program
 app-text/iso-codes 4.15.0: ISO language, territory, currency, script codes and their translations
 app-text/pastebinit 1.5.1-r1: A software that lets you send anything you want directly to a pastebin
-dev-cpp/abseil-cpp 20240116.2: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/atkmm 2.28.4 2.36.3: C++ interface for the ATK library
 dev-cpp/cairomm 1.14.5: C++ bindings for the Cairo vector graphics library
 dev-cpp/glibmm 2.66.7 2.80.0: C++ interface for glib2
@@ -49,7 +48,7 @@ dev-libs/libevdev 1.13.1: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
-dev-libs/protobuf 26.1_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
+dev-libs/protobuf 27.0_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
 dev-libs/qt6pas 6.2.8: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/re2 0.2024.05.01: An efficient, principled regular expression library
