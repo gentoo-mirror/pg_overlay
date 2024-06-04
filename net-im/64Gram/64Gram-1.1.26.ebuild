@@ -16,7 +16,7 @@ S="${WORKDIR}/${P}-full"
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv"
-IUSE="dbus enchant +fonts screencast qt6 qt6-imageformats wayland webkit +X"
+IUSE="dbus enchant +fonts +jemalloc screencast qt6 qt6-imageformats wayland webkit +X"
 REQUIRED_USE="
 	qt6-imageformats? ( qt6 )
 "
@@ -46,6 +46,7 @@ CDEPEND="
 	sys-libs/zlib:=[minizip]
 	!enchant? ( >=app-text/hunspell-1.7:= )
 	enchant? ( app-text/enchant:= )
+	jemalloc? ( dev-libs/jemalloc:= )
 	!qt6? (
 		>=dev-qt/qtcore-5.15:5=
 		>=dev-qt/qtgui-5.15:5=[dbus?,jpeg,png,wayland?,X?]
@@ -56,7 +57,7 @@ CDEPEND="
 		kde-frameworks/kcoreaddons:5
 		webkit? (
 			>=dev-qt/qtdeclarative-5.15:5
-			>=dev-qt/qtwayland-5.15:5
+			>=dev-qt/qtwayland-5.15:5[compositor(+)]
 		)
 	)
 	qt6? (
@@ -65,7 +66,7 @@ CDEPEND="
 		>=dev-qt/qtsvg-6.5:6
 		webkit? (
 			>=dev-qt/qtdeclarative-6.5:6
-			>=dev-qt/qtwayland-6.5:6[compositor]
+			>=dev-qt/qtwayland-6.5:6[compositor,qml]
 		)
 		qt6-imageformats? (
 			>=dev-qt/qtimageformats-6.5:6=
@@ -135,15 +136,19 @@ src_prepare() {
 	# CMAKE_DISABLE_FIND_PACKAGE entries.
 
 	# Control QtDBus dependency from here, to avoid messing with QtGui.
+	# QtGui will use find_package to find QtDbus as well, which
+	# conflicts with the -DCMAKE_DISABLE_FIND_PACKAGE method.
 	if ! use dbus; then
 		sed -e '/find_package(Qt[^ ]* OPTIONAL_COMPONENTS/s/DBus *//' \
 			-i cmake/external/qt/package.cmake || die
 	fi
 
-	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
-	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
+#	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
+#	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
 #	cp -f "${FILESDIR}"/qt_compare.h Telegram/lib_base/base/qt/
-
+	eapply --binary "${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
+	eapply --binary "${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
+	eapply --binary "${FILESDIR}sponsored_messages.cpp.patch"
 
 	cmake_src_prepare
 }
@@ -184,6 +189,7 @@ src_configure() {
 
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
 		-DDESKTOP_APP_DISABLE_WAYLAND_INTEGRATION=$(usex !wayland)
+		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
 		## Enables enchant and disables hunspell
 		-DDESKTOP_APP_USE_ENCHANT=$(usex enchant)
 		## Use system fonts instead of bundled ones
@@ -220,6 +226,13 @@ pkg_postinst() {
 	xdg_pkg_postinst
 	if ! use X && ! use screencast; then
 		ewarn "both the 'X' and 'screencast' USE flags are disabled, screen sharing won't work!"
+		ewarn
+	fi
+	if ! use jemalloc && use elibc_glibc; then
+		# https://github.com/telegramdesktop/tdesktop/issues/16084
+		# https://github.com/desktop-app/cmake_helpers/pull/91#issuecomment-881788003
+		ewarn "Disabling USE=jemalloc on glibc systems may cause very high RAM usage!"
+		ewarn "Do NOT report issues about RAM usage without enabling this flag first."
 		ewarn
 	fi
 	if use wayland && ! use qt6; then
