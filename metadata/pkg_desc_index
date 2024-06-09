@@ -12,7 +12,7 @@ app-misc/doublecmd 1.1.14: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
-app-office/libreoffice 24.2.3.2-r10: A full office productivity suite
+app-office/libreoffice 24.2.4.2-r10: A full office productivity suite
 app-office/libreoffice-l10n 24.2.3.2: Translations for the Libreoffice suite
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
