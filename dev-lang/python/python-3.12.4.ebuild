@@ -46,6 +46,7 @@ RDEPEND="
 	app-crypt/libb2
 	>=dev-libs/expat-2.1:=
 	dev-libs/libffi:=
+	dev-libs/mpdecimal:=
 	dev-python/gentoo-common
 	>=sys-libs/zlib-1.1.3:=
 	virtual/libcrypt:=
@@ -285,6 +286,7 @@ src_configure() {
 		--enable-loadable-sqlite-extensions
 		--without-ensurepip
 		--with-system-expat
+		--with-system-libmpdec
 		--with-platlibdir=lib
 		--with-pkg-config=yes
 		--with-wheel-pkg-dir="${EPREFIX}"/usr/lib/python/ensurepip
