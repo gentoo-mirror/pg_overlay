@@ -26,7 +26,7 @@ inherit autotools bash-completion-r1 check-reqs flag-o-matic java-pkg-opt-2 mult
 DESCRIPTION="A full office productivity suite"
 HOMEPAGE="https://www.libreoffice.org"
 SRC_URI="branding? ( https://dev.gentoo.org/~dilfridge/distfiles/${BRANDING} )"
-SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${P}-icu-74.tar.xz"
+SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PN}-24.2.3.2-icu-74.tar.xz"
 [[ -n ${PATCHSET} ]] && SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${PATCHSET}"
 
 # Split modules following git/tarballs; Core MUST be first!
@@ -319,11 +319,11 @@ PATCHES=(
 	"${FILESDIR}/${PN}-24.2-unused-qt6network.patch"
 
 	# git master
-	"${FILESDIR}/${P}-fix-bashism.patch" # bug #928733
+	"${FILESDIR}/${PN}-24.2.3.2-fix-bashism.patch" # bug #928733
 	# bug #917618, thx to Debian:
-	"${WORKDIR}/${P}-icu-74/${P}-icu-74.2-reviewed-breakIterator-customizations.patch"
-	"${WORKDIR}/${P}-icu-74/${P}-icu-74.2-breakiterator-updates.patch"
-	"${WORKDIR}/${P}-icu-74/${P}-icu-74-unicode.patch"
+	"${WORKDIR}/${PN}-24.2.3.2-icu-74/${PN}-24.2.3.2-icu-74.2-reviewed-breakIterator-customizations.patch"
+	"${WORKDIR}/${PN}-24.2.3.2-icu-74/${PN}-24.2.3.2-icu-74.2-breakiterator-updates.patch"
+	"${WORKDIR}/${PN}-24.2.3.2-icu-74/${PN}-24.2.3.2-icu-74-unicode.patch"
 )
 
 S="${WORKDIR}/${PN}-${MY_PV}"
