@@ -27,11 +27,12 @@ RDEPEND="
 "
 S="${WORKDIR}/${P}.src"
 
-PATCHES=( "${FILESDIR}"/${PN}-build.patch )
+#PATCHES=( "${FILESDIR}"/${PN}-build.patch )
 
 HOME="${PORTAGE_BUILDDIR}/homedir"
 export HOME
 src_prepare() {
+	default
 	sed -E -e 's&IFDEF LCLQT5&IF DEFINED(LCLQT5) OR DEFINED(LCLQT6)&' -i "dev/peach.pas"
 
 	# modify compiler options
