@@ -12,4 +12,4 @@ RESTRICT=mirror
 SLOT=0
 SRC_URI=https://github.com/peazip/PeaZip/releases/download/9.8.0/peazip-9.8.0.src.zip
 _eclasses_=xdg-utils	baea6080dd821f5562d715887954c9d3	xdg	4a14c5c24f121e7da66e5aab4a168c6e
-_md5_=4d0793be34c9a460bb12c362d2980c19
+_md5_=7275a41d712d8069e227031c512fd124

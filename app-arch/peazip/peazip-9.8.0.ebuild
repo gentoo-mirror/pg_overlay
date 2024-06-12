@@ -24,7 +24,7 @@ RDEPEND="
 	dev-qt/qtbase:6
 	dev-libs/qt6pas
 "
-
+S="${WORKDDIR}/${P}.src"
 
 PATCHES=( "${FILESDIR}"/${PN}-build.patch )
 
