@@ -1,6 +1,7 @@
 app-accessibility/at-spi2-core 2.52.0: D-Bus accessibility specifications and registration daemon
 app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
+app-arch/peazip 9.8.0: PeaZip is a free file archiver utility and rar extractor
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-emulation/virtualbox 7.0.18: Family of powerful x86 virtualization products for enterprise and home use
@@ -27,7 +28,7 @@ dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
 dev-db/sqlite 3.46.0_pre: SQL database engine
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
-dev-lang/lazarus 3.2: feature rich visual programming environment emulating Delphi
+dev-lang/lazarus 3.4: feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.4: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.78.0: Systems programming language from Mozilla
