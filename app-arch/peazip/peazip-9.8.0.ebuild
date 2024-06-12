@@ -31,6 +31,7 @@ S="${WORKDIR}/${P}.src"
 
 HOME="${PORTAGE_BUILDDIR}/homedir"
 export HOME
+
 src_prepare() {
 	default
 	sed -E -e 's&IFDEF LCLQT5&IF DEFINED(LCLQT5) OR DEFINED(LCLQT6)&' -i "dev/peach.pas"
@@ -48,11 +49,11 @@ src_prepare() {
 
 src_compile() {
 	# Set temporary HOME for lazarus primary config directory
-	export lazbuild="$(which lazbuild) --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os-linux --primary-config-path=build --widgetser=qt6"
+	export lazbuild="$(which lazbuild) --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os=linux --primary-config-path=build --widgetset=qt6"
 
-	lazbuild dev/metadarkstyle/metadarkstyle.lpk
-	lazbuild dev/project_pea.lpi
-	lazbuild dev/project_peach.lpi
+	$lazbuild dev/metadarkstyle/metadarkstyle.lpk
+	$lazbuild dev/project_pea.lpi
+	$lazbuild dev/project_peach.lpi
 }
 
 src_install() {
