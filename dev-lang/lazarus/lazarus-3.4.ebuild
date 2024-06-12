@@ -11,7 +11,8 @@ FPCVER="3.2.2"
 
 DESCRIPTION="feature rich visual programming environment emulating Delphi"
 HOMEPAGE="https://www.lazarus-ide.org/"
-SRC_URI="mirror://sourceforge/lazarus/${P}-0.tar.gz https://dev.gentoo.org/~amynka/snap/${PN}-2.2.4-makefile.patch.bz2"
+SRC_URI="https://downloads.sourceforge.net/lazarus/${P}-0.tar.gz"
+SRC_URI+=" https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${PN}-3.0-makefile.patch.xz"
 
 LICENSE="GPL-2 LGPL-2.1-with-linking-exception"
 SLOT="0/3.0" # Note: Slotting Lazarus needs slotting fpc, see DEPEND.
@@ -37,7 +38,7 @@ DEPEND="
 	>=sys-devel/binutils-2.19.1-r1:=
 	gui? (
 	    qt6? ( dev-libs/qt6pas:0 )
-	    !qt6? ( x11-libs/gtk+:2 )
+	    !qt6? ( x11-libs/gtk+:3 )
 )"
 BDEPEND="net-misc/rsync"
 RDEPEND="${DEPEND}"
@@ -45,6 +46,10 @@ RDEPEND="${DEPEND}"
 RESTRICT="strip" #269221
 
 S="${WORKDIR}/${PN}"
+
+PATCHES=(
+	"${WORKDIR}"/${PN}-3.0-makefile.patch
+)
 
 src_prepare() {
 	default
@@ -63,7 +68,7 @@ src_compile() {
 	if ( use gui ) && ( use qt6 ) ; then
 		export LCL_PLATFORM=qt6
 	fi
-	use !qt6 && export LCL_PLATFORM=gtk2
+	use !qt6 && export LCL_PLATFORM=gtk
 	if ( use gui ) ; then
 		emake all $(usex extras "bigide lhelp" "") -j1 || die "make failed!"
 	else
