@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit meson
+inherit meson xdg-utils
 
 DESCRIPTION="Openbox alternative for wayland"
 HOMEPAGE="https://github.com/labwc/labwc"
