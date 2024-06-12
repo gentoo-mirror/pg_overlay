@@ -24,33 +24,33 @@ RDEPEND="
 	dev-qt/qtbase:6
 	dev-libs/qt6pas
 "
-S="${WORKDDIR}/${P}.src"
+S="${WORKDIR}/${P}.src"
 
 PATCHES=( "${FILESDIR}"/${PN}-build.patch )
 
 HOME="${PORTAGE_BUILDDIR}/homedir"
 export HOME
 src_prepare() {
-	sed -E -e 's&IFDEF LCLQT5&IF DEFINED(LCLQT5) OR DEFINED(LCLQT6)&' -i "peazip-sources/dev/peach.pas"
+	sed -E -e 's&IFDEF LCLQT5&IF DEFINED(LCLQT5) OR DEFINED(LCLQT6)&' -i "dev/peach.pas"
 
 	# modify compiler options
-	xmlstarlet edit --inplace --delete '//Other' "peazip-sources/dev/metadarkstyle/metadarkstyle.lpk"
-	sed -E 's&(</CompilerOptions>)&<Other><CustomOptions Value='\''-O3 -Sa -CX -XX -k"--sort-common --as-needed -z relro -z now"'\''/></Other>\n\1&' -i "peazip-sources/dev/metadarkstyle/metadarkstyle.lpk"
+	xmlstarlet edit --inplace --delete '//Other' "dev/metadarkstyle/metadarkstyle.lpk"
+	sed -E 's&(</CompilerOptions>)&<Other><CustomOptions Value='\''-O3 -Sa -CX -XX -k"--sort-common --as-needed -z relro -z now"'\''/></Other>\n\1&' -i "dev/metadarkstyle/metadarkstyle.lpk"
 
-	xmlstarlet edit --inplace --delete '//Other' "peazip-sources/dev/project_pea.lpi"
-	sed -E 's&(</CompilerOptions>)&<Other><CustomOptions Value='\''-O3 -Sa -CX -XX -k"--sort-common --as-needed -z relro -z now"'\''/></Other>\n\1&' -i "peazip-sources/dev/project_pea.lpi"
+	xmlstarlet edit --inplace --delete '//Other' "dev/project_pea.lpi"
+	sed -E 's&(</CompilerOptions>)&<Other><CustomOptions Value='\''-O3 -Sa -CX -XX -k"--sort-common --as-needed -z relro -z now"'\''/></Other>\n\1&' -i "dev/project_pea.lpi"
 
-	xmlstarlet edit --inplace --delete '//Other' "peazip-sources/dev/project_peach.lpi"
-	sed -E 's&(</CompilerOptions>)&<Other><CustomOptions Value='\''-O3 -Sa -CX -XX -k"--sort-common --as-needed -z relro -z now"'\''/></Other>\n\1&' -i "peazip-sources/dev/project_peach.lpi"
+	xmlstarlet edit --inplace --delete '//Other' "dev/project_peach.lpi"
+	sed -E 's&(</CompilerOptions>)&<Other><CustomOptions Value='\''-O3 -Sa -CX -XX -k"--sort-common --as-needed -z relro -z now"'\''/></Other>\n\1&' -i "dev/project_peach.lpi"
 }
 
 src_compile() {
 	# Set temporary HOME for lazarus primary config directory
 	export lazbuild="$(which lazbuild) --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os-linux --primary-config-path=build --widgetser=qt6"
 
-	lazbuild peazip-sources/dev/metadarkstyle/metadarkstyle.lpk
-	lazbuild peazip-sources/dev/project_pea.lpi
-	lazbuild peazip-sources/dev/project_peach.lpi
+	lazbuild dev/metadarkstyle/metadarkstyle.lpk
+	lazbuild dev/project_pea.lpi
+	lazbuild dev/project_peach.lpi
 }
 
 src_install() {
