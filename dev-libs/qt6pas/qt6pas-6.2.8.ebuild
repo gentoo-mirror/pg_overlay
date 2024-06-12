@@ -5,7 +5,7 @@ EAPI=8
 
 inherit qmake-utils
 
-LAZ_COMMIT="b71e3074a333b1573c6d662930b4689d92f5962e"
+LAZ_COMMIT="2fc4aa79cb7741b77edbbc6be0d5f91932728dde"
 LAZ_DIRECTORY="lcl/interfaces/qt6/cbindings"
 LAZ_UNPACKED_DIR="lazarus-${LAZ_COMMIT}-${LAZ_DIRECTORY//\//-}"
 
