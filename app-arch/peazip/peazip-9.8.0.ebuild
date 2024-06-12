@@ -48,11 +48,11 @@ src_prepare() {
 
 src_compile() {
 	# Set temporary HOME for lazarus primary config directory
-	export lazbuild="$(which lazbuild) --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os-linux --primary-config-path=build --widgetset=qt6"
+	#export lazbuild="$(which lazbuild) --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os-linux --primary-config-path=build --widgetset=qt6"
 
-	lazbuild dev/metadarkstyle/metadarkstyle.lpk
-	lazbuild dev/project_pea.lpi
-	lazbuild dev/project_peach.lpi
+	lazbuild --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os-linux --primary-config-path=build --widgetset=qt6 dev/metadarkstyle/metadarkstyle.lpk
+	lazbuild --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os-linux --primary-config-path=build --widgetset=qt6 dev/project_pea.lpi
+	lazbuild --lazarusdir=/usr/share/lazarus --build-all --cpu=native --os-linux --primary-config-path=build --widgetset=qt6 dev/project_peach.lpi
 }
 
 src_install() {
