@@ -71,14 +71,13 @@ games-board/openpref 0.1.3: OpenPref is open source implementation of European t
 games-engines/instead 3.5.1: INSTEAD text-based quest game engine
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-base/librsvg 2.58.91: Scalable Vector Graphics (SVG) rendering library
-gui-apps/labwc 0.7.1: Openbox alternative for wayland
+gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/rofi-wayland 1.7.5-r1: A window switcher, run dialog and dmenu replacement
 gui-apps/sfwbar 1.0_beta14: S* Floating Window Bar
-gui-apps/waybar 0.10.2 9999: Highly customizable Wayland bar for Sway and Wlroots based compositors
 gui-apps/wev 9999: Wayland event viewer
-gui-apps/wofi 1.4.1: Wofi is a launcher/menu program for wlroots based wayland compositors like sway
 gui-apps/yambar 1.11.0: Simplistic and highly configurable status panel for X and Wayland
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
+gui-wm/labwc 0.7.2: Openbox alternative for wayland
 gui-wm/sway 9999: i3-compatible Wayland window manager
 kde-apps/kompare 9999: A program to view the differences between files
 kde-apps/libkomparediff2 9999: KDE library to compare files and strings

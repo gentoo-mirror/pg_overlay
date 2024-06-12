@@ -109,19 +109,6 @@ gui-apps/sfwbar:X - Add support for xkb maps
 gui-apps/sfwbar:alsa - Add support for ALSA sound server
 gui-apps/sfwbar:mpd - Add support for Music Player Daemon
 gui-apps/sfwbar:pulse - Add support for Pulse Audio
-gui-apps/waybar:evdev - Enable libevdev support for evdev related features
-gui-apps/waybar:experimental - Enable experimental features, such as Bluetooth battery reporting
-gui-apps/waybar:libinput - Enable libinput support for libinput related features
-gui-apps/waybar:logind - Enable support for logind (bluetooth and idle inhibit)
-gui-apps/waybar:mpd - Enable support for the Music Player Daemon
-gui-apps/waybar:mpris - Enable support for mpris
-gui-apps/waybar:network - Enable libnl support for network related features
-gui-apps/waybar:pipewire - Enable support for pipewire
-gui-apps/waybar:popups - Enable popup support with gtk-layer-shell
-gui-apps/waybar:pulseaudio - Enable support for volume control via PulseAudio
-gui-apps/waybar:sndio - Enable support for volume control via sndio
-gui-apps/waybar:tray - Enable support for tray
-gui-apps/waybar:wifi - Enable support for wifi/rfkill
 gui-apps/yambar:alsa - ALSA support
 gui-apps/yambar:backlight - Backlight support
 gui-apps/yambar:battery - Battery support
