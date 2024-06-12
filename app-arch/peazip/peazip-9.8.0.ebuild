@@ -15,7 +15,8 @@ KEYWORDS="~amd64 ~x86"
 
 RESTRICT="mirror"
 
-DEPEND=">=dev-lang/lazarus-3.0"
+DEPEND=">=dev-lang/lazarus-3.0
+		app-text/xmlstarlet"
 RDEPEND="
 	${DEPEND}
 	sys-apps/dbus
