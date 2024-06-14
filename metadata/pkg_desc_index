@@ -8,7 +8,7 @@ app-emulation/virtualbox-kvm 7.0.18_pre20240502: Family of powerful x86 virtuali
 app-i18n/opencc 1.1.7: Library for conversion between Traditional and Simplified Chinese characters
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
-app-misc/doublecmd 1.1.14: Cross Platform file manager.
+app-misc/doublecmd 1.1.15: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
@@ -27,7 +27,6 @@ dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
 dev-db/sqlite 3.46.0_pre: SQL database engine
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
-dev-lang/lazarus 3.4: feature rich visual programming environment emulating Delphi
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.4_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.78.0: Systems programming language from Mozilla
@@ -43,11 +42,9 @@ dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Libr
 dev-libs/libdispatch 5.9.2: A library for concurrent code execution on multicore hardware
 dev-libs/libevdev 1.13.1: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
-dev-libs/libqt5pas 1.2.11: Free Pascal Qt5 bindings library updated by lazarus IDE.
+dev-libs/libqt6pas 6.2.8: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 27.0_pre: Google's Protocol Buffers - Extensible mechanism for serializing structured data
-dev-libs/qt5pas 2.6.2.2.0: Free Pascal Qt5 bindings library updated by lazarus IDE.
-dev-libs/qt6pas 6.2.8: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/re2 0.2024.06.01: An efficient, principled regular expression library
 dev-libs/utfcpp 4.0.5: UTF-8 C++ library
 dev-libs/xmlrpc-c 1.54.9999 1.59.9999 1.60.9999: A lightweigt RPC library based on XML and HTTP

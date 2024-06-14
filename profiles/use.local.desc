@@ -55,10 +55,6 @@ app-portage/eix:tools - Create separate binary for script helper tools; useful i
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
 app-shells/bash-completion:eselect - Support blacklisting of completions via 'eselect bashcomp'. This enables custom Gentoo patching of upstream completion loader.
 dev-db/mysql-connector-c++:legacy - Build the legacy 1.x API as well as the DevX API
-dev-lang/lazarus:extras - Build a lot of extra packages, including lhelp chm viewer program.
-dev-lang/lazarus:gtk2 - Use gtk:2 for widgets.
-dev-lang/lazarus:gui - Build GUI IDE.
-dev-lang/lazarus:minimal - Don't build extra packages from the bigide component
 dev-lang/luajit:lua52compat - Enable some upwards-compatible features from Lua 5.2 that are unlikely to break existing code.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:ensurepip - Install the ensurepip module that uses bundled wheels to bootstrap pip and setuptools (if disabled, it will be only possible to use venv `--without-pip`)
