@@ -14,7 +14,7 @@ HOMEPAGE="https://gitlab.com/freepascal.org/lazarus/lazarus/-/tree/main/lcl/inte
 SRC_URI="https://gitlab.com/freepascal.org/lazarus/lazarus/-/archive/${LAZ_COMMIT}/lazarus-main.tar.gz?path=${LAZ_DIRECTORY} -> ${P}.tar.gz"
 
 LICENSE="LGPL-3"
-SLOT="0"
+SLOT="3.0"
 KEYWORDS="~amd64 ~x86"
 
 DEPEND="
