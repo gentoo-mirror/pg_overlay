@@ -1,0 +1,13 @@
+BDEPEND=dev-lang/perl dev-qt/qttools:6 virtual/pkgconfig x11-libs/libxkbcommon app-alternatives/ninja >=dev-build/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install postinst postrm prepare test unpack
+DEPEND=dev-libs/libxml2 dev-libs/glib:2 dev-qt/qtbase:6
+DESCRIPTION=A GUI 'Settings' application for labwc
+EAPI=8
+HOMEPAGE=https://github.com/labwc/labwc-tweaks
+INHERIT=cmake xdg-utils git-r3
+LICENSE=GPL-2 BSD
+PROPERTIES=live
+RDEPEND=dev-libs/libxml2 dev-libs/glib:2 dev-qt/qtbase:6
+SLOT=0
+_eclasses_=toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	d309b9713dfc18e754cba88d3ba69653	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	9f0ab047ff1b07971f2411cd1a580bb8	git-r3	fbb2889c81f3a05910c1524db69425c1
+_md5_=ac24a11eb4294ea2c2e4ec9952db2bea
