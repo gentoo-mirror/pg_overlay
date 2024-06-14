@@ -22,7 +22,7 @@ RDEPEND="
 	dev-libs/glib
 	sys-libs/ncurses
 	dev-qt/qtbase:6
-	dev-libs/qt6pas
+	dev-libs/libqt6pas
 "
 
 
