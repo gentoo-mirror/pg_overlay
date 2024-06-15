@@ -1,6 +1,2 @@
 firefox-enable-addons.patch
-rhbz-1173156.patch
-rhbz-1354671.patch
 disable-openh264-download.patch
-0025-Add-KDE-integration-to-Firefox-toolkit-parts.patch
-0026-Add-KDE-integration-to-Firefox.patch
