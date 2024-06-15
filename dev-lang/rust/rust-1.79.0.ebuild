@@ -171,7 +171,7 @@ PATCHES=(
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system.patch
 	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
-	"${FILESDIR}"/rustc-1.78.0-unbundle-sqlite.patch
+	"${FILESDIR}"/rustc-${PV}-unbundle-sqlite.patch
 	"${FILESDIR}"/0001-bootstrap-move-all-of-rustc-s-flags-to-rustc_cargo.patch
 )
 
