@@ -1,0 +1,102 @@
+From 2b99134e2884fa56bcab6d360885ec5421048e66 Mon Sep 17 00:00:00 2001
+From: Josh Stone <jistone@redhat.com>
+Date: Thu, 28 Sep 2023 18:14:28 -0700
+Subject: [PATCH 1/2] bootstrap: allow disabling target self-contained
+
+---
+ config.example.toml                           | 5 +++++
+ src/bootstrap/src/core/build_steps/compile.rs | 4 ++++
+ src/bootstrap/src/core/config/config.rs       | 8 ++++++++
+ src/bootstrap/src/lib.rs                      | 5 +++++
+ 4 files changed, 22 insertions(+)
+
+diff --git a/config.example.toml b/config.example.toml
+index f94553dd63f7..5ec969c80a37 100644
+--- a/config.example.toml
++++ b/config.example.toml
+@@ -869,6 +869,11 @@
+ # argument as the test binary.
+ #runner = <none> (string)
+ 
++# Copy libc and CRT objects into the target lib/self-contained/ directory.
++# Enabled by default on `musl`, `wasi`, and `windows-gnu` targets. Other
++# targets may ignore this setting if they have nothing to be contained.
++#self-contained = <platform-specific> (bool)
++
+ # =============================================================================
+ # Distribution options
+ #
+diff --git a/src/bootstrap/src/core/build_steps/compile.rs b/src/bootstrap/src/core/build_steps/compile.rs
+index e927b491c71e..69a80d01d6b9 100644
+--- a/src/bootstrap/src/core/build_steps/compile.rs
++++ b/src/bootstrap/src/core/build_steps/compile.rs
+@@ -356,6 +356,10 @@ fn copy_self_contained_objects(
+     compiler: &Compiler,
+     target: TargetSelection,
+ ) -> Vec<(PathBuf, DependencyType)> {
++    if builder.self_contained(target) != Some(true) {
++        return vec![];
++    }
++
+     let libdir_self_contained = builder.sysroot_libdir(*compiler, target).join("self-contained");
+     t!(fs::create_dir_all(&libdir_self_contained));
+     let mut target_deps = vec![];
+diff --git a/src/bootstrap/src/core/config/config.rs b/src/bootstrap/src/core/config/config.rs
+index 3e1bc9a9acdd..5e24a9cc4f60 100644
+--- a/src/bootstrap/src/core/config/config.rs
++++ b/src/bootstrap/src/core/config/config.rs
+@@ -586,6 +586,7 @@ pub struct Target {
+     pub runner: Option<String>,
+     pub no_std: bool,
+     pub codegen_backends: Option<Vec<String>>,
++    pub self_contained: bool,
+ }
+ 
+ impl Target {
+@@ -594,6 +595,9 @@ pub fn from_triple(triple: &str) -> Self {
+         if triple.contains("-none") || triple.contains("nvptx") || triple.contains("switch") {
+             target.no_std = true;
+         }
++        if triple.contains("-musl") || triple.contains("-wasi") || triple.contains("-windows-gnu") {
++            target.self_contained = true;
++        }
+         target
+     }
+ }
+@@ -1150,6 +1154,7 @@ struct TomlTarget {
+         no_std: Option<bool> = "no-std",
+         codegen_backends: Option<Vec<String>> = "codegen-backends",
+         runner: Option<String> = "runner",
++        self_contained: Option<bool> = "self-contained",
+     }
+ }
+ 
+@@ -1870,6 +1875,9 @@ fn get_table(option: &str) -> Result<TomlConfig, toml::de::Error> {
+                 if let Some(s) = cfg.no_std {
+                     target.no_std = s;
+                 }
++                if let Some(s) = cfg.self_contained {
++                    target.self_contained = s;
++                }
+                 target.cc = cfg.cc.map(PathBuf::from);
+                 target.cxx = cfg.cxx.map(PathBuf::from);
+                 target.ar = cfg.ar.map(PathBuf::from);
+diff --git a/src/bootstrap/src/lib.rs b/src/bootstrap/src/lib.rs
+index 5ed6b357e20a..c23b21d65713 100644
+--- a/src/bootstrap/src/lib.rs
++++ b/src/bootstrap/src/lib.rs
+@@ -1348,6 +1348,11 @@ fn no_std(&self, target: TargetSelection) -> Option<bool> {
+         self.config.target_config.get(&target).map(|t| t.no_std)
+     }
+ 
++    /// Returns `true` if this is a self-contained `target`, if defined
++    fn self_contained(&self, target: TargetSelection) -> Option<bool> {
++        self.config.target_config.get(&target).map(|t| t.self_contained)
++    }
++
+     /// Returns `true` if the target will be tested using the `remote-test-client`
+     /// and `remote-test-server` binaries.
+     fn remote_tested(&self, target: TargetSelection) -> bool {
+-- 
+2.44.0
+
