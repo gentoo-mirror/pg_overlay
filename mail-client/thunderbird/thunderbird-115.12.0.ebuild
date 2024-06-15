@@ -849,7 +849,7 @@ src_configure() {
 	mozconfig_add_options_ac '' --update-channel=${update_channel}
 
 	if ! use x86 && [[ ${CHOST} != armv*h* ]] ; then
-		mozconfig_add_options_ac '' --enable-rust-simd
+		mozconfig_add_options_ac '' --disable-rust-simd
 	fi
 
 	# For future keywording: This is currently (97.0) only supported on:
@@ -1215,7 +1215,7 @@ src_configure() {
 	### Enable good features
 	mozconfig_add_options_ac '' --enable-icf
 	mozconfig_add_options_ac '' --enable-install-strip
-	mozconfig_add_options_ac '' --enable-rust-simd
+	mozconfig_add_options_ac '' --disable-rust-simd
 	mozconfig_add_options_ac '' --enable-strip
 	mozconfig_add_options_ac '' --enable-webrtc
 	mozconfig_add_options_ac '' MOZ_ENABLE_WAYLAND=1
