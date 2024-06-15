@@ -80,8 +80,8 @@ kde-apps/kompare 9999: A program to view the differences between files
 kde-apps/libkomparediff2 9999: KDE library to compare files and strings
 kde-misc/kdiff3 1.11.0: Frontend to diff3 based on KDE Frameworks
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
-mail-client/thunderbird 115.11.0: Thunderbird Mail Client
-mail-client/thunderbird-bin 115.10.2: Thunderbird Mail Client
+mail-client/thunderbird 115.12.0: Thunderbird Mail Client
+mail-client/thunderbird-bin 115.12.0: Thunderbird Mail Client
 media-libs/graphene 1.10.8: A thin layer of types for graphic libraries
 media-libs/gst-plugins-bad 1.24.2_pre 1.24.3_pre: Less plugins for GStreamer
 media-libs/gst-plugins-base 1.24.2_pre 1.24.3_pre: Basepack of plugins for gstreamer
