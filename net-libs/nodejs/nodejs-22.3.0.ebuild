@@ -4,7 +4,7 @@
 EAPI=8
 
 CONFIG_CHECK="~ADVISE_SYSCALLS"
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{9..12} )
 PYTHON_REQ_USE="threads(+)"
 
 inherit bash-completion-r1 check-reqs flag-o-matic linux-info pax-utils python-any-r1 toolchain-funcs xdg-utils
@@ -115,10 +115,18 @@ src_configure() {
 
 	local myconf=(
 		--ninja
+		# ada is not packaged yet
+		# https://github.com/ada-url/ada
+		# --shared-ada
 		--shared-brotli
 		--shared-cares
 		--shared-libuv
 		--shared-nghttp2
+		--shared-ngtcp2
+		--shared-simdjson
+		# sindutf is not packaged yet
+		# https://github.com/simdutf/simdutf
+		# --shared-simdutf
 		--shared-zlib
 	)
 	use debug && myconf+=( --debug )
