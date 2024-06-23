@@ -55,7 +55,6 @@ dev-python/numpy 2.0.0: Fast array and numerical python library
 dev-python/pyudev 0.24.1: Python binding to libudev
 dev-python/zombie-imp 0.0.2: A copy of the imp module that was removed in Python 3.12.
 dev-util/android-tools 35.0.1: Android platform tools (adb, fastboot, and mkbootimg)
-dev-util/cargo-c 0.9.32: Helper program to build and install c-like libraries
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.80.3: GDBus code and documentation generator
 dev-util/glib-utils 2.80.3: Build utilities for GLib using projects
@@ -79,6 +78,7 @@ gui-wm/sway 9999: i3-compatible Wayland window manager
 kde-apps/kompare 9999: A program to view the differences between files
 kde-apps/libkomparediff2 9999: KDE library to compare files and strings
 kde-misc/kdiff3 1.11.0: Frontend to diff3 based on KDE Frameworks
+kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 mail-client/thunderbird 115.12.0: Thunderbird Mail Client
 mail-client/thunderbird-bin 115.12.0: Thunderbird Mail Client
