@@ -1,0 +1,317 @@
+From ff619e429307ffc9e9b392ad0d5ddfedea99e47b Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 12:06:17 +0200
+Subject: [PATCH 1/4] Fix percent signal of various jobs not connected
+
+---
+ app/JobMan/jobman.cpp     | 5 ++---
+ app/Panel/listpanel.cpp   | 2 +-
+ app/Splitter/combiner.cpp | 2 +-
+ app/Splitter/splitter.cpp | 2 +-
+ 4 files changed, 5 insertions(+), 6 deletions(-)
+
+diff --git a/app/JobMan/jobman.cpp b/app/JobMan/jobman.cpp
+index 775d9b559..f7b741930 100644
+--- a/app/JobMan/jobman.cpp
++++ b/app/JobMan/jobman.cpp
+@@ -141,7 +141,7 @@ private slots:
+     void slotStarted(KJob *job)
+     {
+         connect(job, &KJob::description, this, &JobMenuAction::slotDescription);
+-        connect(job, SIGNAL(percent(KJob *, ulong)), this, SLOT(slotPercent(KJob *, ulong)));
++        connect(job, &KJob::percentChanged, this, &JobMenuAction::slotPercent);
+         connect(job, &KJob::suspended, this, &JobMenuAction::updatePauseResumeButton);
+         connect(job, &KJob::resumed, this, &JobMenuAction::updatePauseResumeButton);
+         connect(job, &KJob::result, this, &JobMenuAction::slotResult);
+@@ -277,8 +277,7 @@ void JobMan::manageStartedJob(KrJob *krJob, KJob *kJob)
+ 
+ void JobMan::slotKJobStarted(KJob *job)
+ {
+-    // KJob has two percent() functions
+-    connect(job, SIGNAL(percent(KJob *, ulong)), this, SLOT(slotPercent(KJob *, ulong)));
++    connect(job, &KJob::percentChanged, this, &JobMan::slotPercent);
+     connect(job, &KJob::description, this, &JobMan::slotDescription);
+     connect(job, &KJob::suspended, this, &JobMan::updateUI);
+     connect(job, &KJob::resumed, this, &JobMan::updateUI);
+diff --git a/app/Panel/listpanel.cpp b/app/Panel/listpanel.cpp
+index ecc76f294..01216668e 100644
+--- a/app/Panel/listpanel.cpp
++++ b/app/Panel/listpanel.cpp
+@@ -1042,7 +1042,7 @@ void ListPanel::panelHidden()
+ void ListPanel::slotPreviewJobStarted(KJob *job)
+ {
+     previewJob = job;
+-    connect(job, SIGNAL(percent(KJob *, ulong)), SLOT(slotPreviewJobPercent(KJob *, ulong)));
++    connect(job, &KJob::percentChanged, this, &ListPanel::slotPreviewJobPercent);
+     connect(job, &KJob::result, this, &ListPanel::slotPreviewJobResult);
+     cancelProgressButton->setMaximumHeight(sidebarButton->height());
+     cancelProgressButton->show();
+diff --git a/app/Splitter/combiner.cpp b/app/Splitter/combiner.cpp
+index 605f91514..9ffb5c1d7 100644
+--- a/app/Splitter/combiner.cpp
++++ b/app/Splitter/combiner.cpp
+@@ -234,7 +234,7 @@ void Combiner::openNextFile()
+     connect(combineReadJob, &KIO::TransferJob::data, this, &Combiner::combineDataReceived);
+     connect(combineReadJob, &KIO::TransferJob::result, this, &Combiner::combineReceiveFinished);
+     if (hasValidSplitFile)
+-        connect(combineReadJob, SIGNAL(percent(KJob *, ulong)), this, SLOT(combineWritePercent(KJob *, ulong)));
++        connect(combineReadJob, &KJob::percentChanged, this, &Combiner::combineWritePercent);
+ }
+ 
+ void Combiner::combineDataReceived(KIO::Job *, const QByteArray &byteArray)
+diff --git a/app/Splitter/splitter.cpp b/app/Splitter/splitter.cpp
+index f2aff9593..db7fefdfe 100644
+--- a/app/Splitter/splitter.cpp
++++ b/app/Splitter/splitter.cpp
+@@ -82,7 +82,7 @@ void Splitter::split(KIO::filesize_t splitSizeIn)
+ 
+     connect(splitReadJob, &KIO::TransferJob::data, this, &Splitter::splitDataReceived);
+     connect(splitReadJob, &KIO::TransferJob::result, this, &Splitter::splitReceiveFinished);
+-    connect(splitReadJob, SIGNAL(percent(KJob *, ulong)), this, SLOT(splitReceivePercent(KJob *, ulong)));
++    connect(splitReadJob, &KJob::percentChanged, this, &Splitter::splitReceivePercent);
+ 
+     exec();
+ }
+-- 
+GitLab
+
+
+From 627a3b6482aaaca8e06b7f7a23cb30a4bd211ba7 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 12:17:28 +0200
+Subject: [PATCH 2/4] Fix wrong position of file drop menu in Wayland
+
+---
+ app/FileSystem/defaultfilesystem.cpp  | 5 +++--
+ app/FileSystem/defaultfilesystem.h    | 2 +-
+ app/FileSystem/filesystem.h           | 2 +-
+ app/FileSystem/filesystemprovider.cpp | 4 ++--
+ app/FileSystem/filesystemprovider.h   | 2 +-
+ app/FileSystem/virtualfilesystem.cpp  | 2 +-
+ app/FileSystem/virtualfilesystem.h    | 2 +-
+ app/Panel/krfiletreeview.cpp          | 2 +-
+ app/Panel/krpanel.h                   | 2 +-
+ app/Panel/listpanel.cpp               | 4 ++--
+ 10 files changed, 14 insertions(+), 13 deletions(-)
+
+diff --git a/app/FileSystem/defaultfilesystem.cpp b/app/FileSystem/defaultfilesystem.cpp
+index 2a8584392..ee2f18cd1 100644
+--- a/app/FileSystem/defaultfilesystem.cpp
++++ b/app/FileSystem/defaultfilesystem.cpp
+@@ -20,7 +20,7 @@
+ #include <KIO/ListJob>
+ #include <KIO/MkdirJob>
+ #include <KIO/MkpathJob>
+-#include <KIO/FileSystemFreeSpaceJob>
++#include <KJobWidgets>
+ #include <KLocalizedString>
+ #include <KMountPoint>
+ #include <KProtocolManager>
+@@ -65,7 +65,7 @@ void DefaultFileSystem::copyFiles(const QList<QUrl> &urls,
+     krJobMan->manageJob(krJob, startMode);
+ }
+ 
+-void DefaultFileSystem::dropFiles(const QUrl &destination, QDropEvent *event)
++void DefaultFileSystem::dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget)
+ {
+     qDebug() << "destination=" << destination;
+ 
+@@ -73,6 +73,7 @@ void DefaultFileSystem::dropFiles(const QUrl &destination, QDropEvent *event)
+     const QUrl dest = resolveRelativePath(destination);
+ 
+     KIO::DropJob *job = KIO::drop(event, dest);
++    KJobWidgets::setWindow(job, targetWidget);
+ 
+     // NOTE: a DropJob "starts" with showing a menu. If the operation is chosen (copy/move/link)
+     // the actual CopyJob starts automatically - we cannot manage the start of the CopyJob (see
+diff --git a/app/FileSystem/defaultfilesystem.h b/app/FileSystem/defaultfilesystem.h
+index 3e8a868ea..5af104af1 100644
+--- a/app/FileSystem/defaultfilesystem.h
++++ b/app/FileSystem/defaultfilesystem.h
+@@ -39,7 +39,7 @@ public:
+                    KIO::CopyJob::CopyMode mode = KIO::CopyJob::Copy,
+                    bool showProgressInfo = true,
+                    JobMan::StartMode startMode = JobMan::Default) override;
+-    void dropFiles(const QUrl &destination, QDropEvent *event) override;
++    void dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget) override;
+ 
+     void addFiles(const QList<QUrl> &fileUrls, KIO::CopyJob::CopyMode mode, const QString &dir = "") override;
+     void mkDir(const QString &name) override;
+diff --git a/app/FileSystem/filesystem.h b/app/FileSystem/filesystem.h
+index d310ac1ad..636b3855d 100644
+--- a/app/FileSystem/filesystem.h
++++ b/app/FileSystem/filesystem.h
+@@ -75,7 +75,7 @@ public:
+                            bool showProgressInfo = true,
+                            JobMan::StartMode startMode = JobMan::Default) = 0;
+     /// Handle file dropping in this filesystem. Destination is absolute URL. May implemented async.
+-    virtual void dropFiles(const QUrl &destination, QDropEvent *event) = 0;
++    virtual void dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget) = 0;
+ 
+     /// Copy (copy, move or link) files to the current filesystem directory or to "dir", the
+     /// directory name relative to the current dir. May implemented async.
+diff --git a/app/FileSystem/filesystemprovider.cpp b/app/FileSystem/filesystemprovider.cpp
+index 0d0f47282..03fa7a677 100644
+--- a/app/FileSystem/filesystemprovider.cpp
++++ b/app/FileSystem/filesystemprovider.cpp
+@@ -49,10 +49,10 @@ void FileSystemProvider::startCopyFiles(const QList<QUrl> &urls,
+     fs->copyFiles(urls, destination, mode, showProgressInfo, startMode);
+ }
+ 
+-void FileSystemProvider::startDropFiles(QDropEvent *event, const QUrl &destination)
++void FileSystemProvider::startDropFiles(QDropEvent *event, const QUrl &destination, QWidget *targetWidget)
+ {
+     FileSystem *fs = getFilesystemInstance(destination);
+-    fs->dropFiles(destination, event);
++    fs->dropFiles(destination, event, targetWidget);
+ }
+ 
+ void FileSystemProvider::startDeleteFiles(const QList<QUrl> &urls, bool moveToTrash)
+diff --git a/app/FileSystem/filesystemprovider.h b/app/FileSystem/filesystemprovider.h
+index 0f278555a..972c03849 100644
+--- a/app/FileSystem/filesystemprovider.h
++++ b/app/FileSystem/filesystemprovider.h
+@@ -52,7 +52,7 @@ public:
+      *
+      * Operation may implemented async depending on destination filesystem.
+      */
+-    void startDropFiles(QDropEvent *event, const QUrl &destination);
++    void startDropFiles(QDropEvent *event, const QUrl &destination, QWidget *targetWidget);
+ 
+     /**
+      * Start a delete job for trashing or deleting files.
+diff --git a/app/FileSystem/virtualfilesystem.cpp b/app/FileSystem/virtualfilesystem.cpp
+index 8df32e871..731080ca1 100644
+--- a/app/FileSystem/virtualfilesystem.cpp
++++ b/app/FileSystem/virtualfilesystem.cpp
+@@ -72,7 +72,7 @@ void VirtualFileSystem::copyFiles(const QList<QUrl> &urls,
+     emit fileSystemChanged(QUrl("virt:///" + dir), false); // may call refresh()
+ }
+ 
+-void VirtualFileSystem::dropFiles(const QUrl &destination, QDropEvent *event)
++void VirtualFileSystem::dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget)
+ {
+     const QList<QUrl> &urls = KUrlMimeData::urlsFromMimeData(event->mimeData());
+     // dropping on virtual filesystem is always copy operation
+diff --git a/app/FileSystem/virtualfilesystem.h b/app/FileSystem/virtualfilesystem.h
+index 2ff0c838f..56d92bdbb 100644
+--- a/app/FileSystem/virtualfilesystem.h
++++ b/app/FileSystem/virtualfilesystem.h
+@@ -42,7 +42,7 @@ public:
+                    bool showProgressInfo = false,
+                    JobMan::StartMode startMode = JobMan::Start) override;
+     /// Handle file dropping in this filesystem: Always creates virtual files.
+-    void dropFiles(const QUrl &destination, QDropEvent *event) override;
++    void dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget) override;
+ 
+     /// Add virtual files to the current directory.
+     void addFiles(const QList<QUrl> &fileUrls, KIO::CopyJob::CopyMode mode = KIO::CopyJob::Copy, const QString &dir = "") override;
+diff --git a/app/Panel/krfiletreeview.cpp b/app/Panel/krfiletreeview.cpp
+index 181fd6bba..faa9244f3 100644
+--- a/app/Panel/krfiletreeview.cpp
++++ b/app/Panel/krfiletreeview.cpp
+@@ -160,7 +160,7 @@ void KrFileTreeView::dropEvent(QDropEvent *event)
+         return;
+     }
+ 
+-    FileSystemProvider::instance().startDropFiles(event, destination);
++    FileSystemProvider::instance().startDropFiles(event, destination, this);
+ }
+ 
+ void KrFileTreeView::slotExpanded(const QModelIndex &baseIndex)
+diff --git a/app/Panel/krpanel.h b/app/Panel/krpanel.h
+index a6250e6f9..b0455e509 100644
+--- a/app/Panel/krpanel.h
++++ b/app/Panel/krpanel.h
+@@ -40,7 +40,7 @@ public:
+ 
+     ListPanel *const gui;
+     ListPanelFunc *const func;
+-    KrView *view;
++    KrView *view; // the view of file items in this panel
+ 
+ protected:
+     AbstractPanelManager *_manager;
+diff --git a/app/Panel/listpanel.cpp b/app/Panel/listpanel.cpp
+index 01216668e..6f20bf33a 100644
+--- a/app/Panel/listpanel.cpp
++++ b/app/Panel/listpanel.cpp
+@@ -867,7 +867,7 @@ void ListPanel::handleDrop(QDropEvent *event, bool onView)
+     QUrl destination = QUrl(virtualPath());
+     destination.setPath(destination.path() + '/' + destinationDir);
+ 
+-    func->files()->dropFiles(destination, event);
++    func->files()->dropFiles(destination, event, view->widget());
+ 
+     if (KConfigGroup(krConfig, "Look&Feel").readEntry("UnselectBeforeOperation", _UnselectBeforeOperation)) {
+         KrPanel *p = dragFromThisPanel ? this : otherPanel();
+@@ -878,7 +878,7 @@ void ListPanel::handleDrop(QDropEvent *event, bool onView)
+ 
+ void ListPanel::handleDrop(const QUrl &destination, QDropEvent *event)
+ {
+-    func->files()->dropFiles(destination, event);
++    func->files()->dropFiles(destination, event, view->widget());
+ }
+ 
+ void ListPanel::startDragging(const QStringList &names, const QPixmap &px)
+-- 
+GitLab
+
+
+From 71f1c967c222200dc38d5a040d22491c885dd271 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 14:48:19 +0200
+Subject: [PATCH 3/4] Fix click on system tray icon does not toggle window
+ state
+
+Same bugfix in KTorrent with more detailed description: network/ktorrent!114
+---
+ app/krusader.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/app/krusader.cpp b/app/krusader.cpp
+index 825efbfa6..3f67988c2 100644
+--- a/app/krusader.cpp
++++ b/app/krusader.cpp
+@@ -245,6 +245,11 @@ Krusader::Krusader(const QCommandLineParser &parser)
+         show();
+     }
+ 
++    if (sysTray) {
++        // (re)set main window for system tray, Qt looses the window handle after showing the window
++        sysTray->setAssociatedWindow(this->windowHandle());
++    }
++
+     KrTrashHandler::startWatcher();
+     isStarting = false;
+ 
+-- 
+GitLab
+
+
+From 254a45d75c46e6012ce0297633b692f8283ae393 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 16:32:18 +0200
+Subject: [PATCH 4/4] Fix file filter of import and export dialog for user
+ actions
+
+---
+ app/ActionMan/useractionpage.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/app/ActionMan/useractionpage.cpp b/app/ActionMan/useractionpage.cpp
+index d859ffc52..f1268384b 100644
+--- a/app/ActionMan/useractionpage.cpp
++++ b/app/ActionMan/useractionpage.cpp
+@@ -35,7 +35,7 @@
+ #include "useractionlistview.h"
+ 
+ // This is the filter in the QFileDialog of Import/Export:
+-static const KLazyLocalizedString FILE_FILTER = kli18n("*.xml|XML files\n*|All files");
++static constexpr KLazyLocalizedString FILE_FILTER = kli18n("XML files (*.xml);;All files (*)");
+ 
+ UserActionPage::UserActionPage(QWidget *parent)
+     : QWidget(parent)
+-- 
+GitLab
+
