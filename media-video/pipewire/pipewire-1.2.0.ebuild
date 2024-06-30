@@ -23,7 +23,7 @@ EAPI=8
 : ${PIPEWIRE_DOCS_PREBUILT:=1}
 
 PIPEWIRE_DOCS_PREBUILT_DEV=sam
-PIPEWIRE_DOCS_VERSION=$(ver_cut 1-2).0
+PIPEWIRE_DOCS_VERSION="${PV}"
 # Default to generating docs (inc. man pages) if no prebuilt; overridden later
 PIPEWIRE_DOCS_USEFLAG="+man"
 PYTHON_COMPAT=( python3_{11..12} )
@@ -124,7 +124,7 @@ RDEPEND="
 		virtual/libusb:1
 	)
 	dbus? ( sys-apps/dbus[${MULTILIB_USEDEP}] )
-	echo-cancel? ( media-libs/webrtc-audio-processing:1 )
+	echo-cancel? ( >=media-libs/webrtc-audio-processing-1.2:1 )
 	extra? ( >=media-libs/libsndfile-1.0.20 )
 	ffmpeg? ( media-video/ffmpeg:= )
 	flatpak? ( dev-libs/glib )
@@ -205,6 +205,7 @@ multilib_src_configure() {
 		$(meson_native_use_feature gstreamer)
 		$(meson_native_use_feature gstreamer gstreamer-device-provider)
 		$(meson_native_use_feature gsettings)
+		$(meson_native_use_feature gsettings gsettings-pulse-schema)
 		$(meson_native_use_feature systemd)
 
 		$(meson_native_use_feature system-service systemd-system-service)
@@ -269,6 +270,9 @@ multilib_src_configure() {
 		$(meson_native_use_feature X x11)
 		$(meson_native_use_feature X x11-xfixes)
 		$(meson_native_use_feature X libcanberra)
+
+		# TODO
+		-Dsnap=disabled
 	)
 
 	meson_src_configure
