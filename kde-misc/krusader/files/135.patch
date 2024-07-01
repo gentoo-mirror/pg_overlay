@@ -3413,7 +3413,7 @@ index 4b9740fb8..b40f0e22f 100644
 GitLab
 
 
-From 66a1c7b012ece55c1a9ee18552b4e65670e3f07e Mon Sep 17 00:00:00 2001
+From d510ebac92519c34fce0af33f5cb48084d78b843 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:28:31 +0300
 Subject: [PATCH 13/48] Fix QString consistency problem
@@ -3473,7 +3473,7 @@ index be587c59a..947f8ecee 100644
          QSize size = lastItem->sizeHint(0);
          size.setWidth(16);
 diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index 889dbf067..6a31aaf89 100644
+index 889dbf067..3488fd42e 100644
 --- a/app/KViewer/lister.cpp
 +++ b/app/KViewer/lister.cpp
 @@ -498,7 +498,7 @@ QStringList ListerTextArea::readLines(qint64 filePos, qint64 &endPos, const int
@@ -3481,7 +3481,7 @@ index 889dbf067..6a31aaf89 100644
          }
  
 -        if ((chr[0] < 32) && (chr[0] != '\n') && (chr[0] != '\t')) {
-+        if ((chr[0].toLatin1() < 32) && (chr[0] != '\n') && (chr[0] != '\t')) {
++        if ((chr[0] < QChar(32)) && (chr[0] != '\n') && (chr[0] != '\t')) {
              chr = QChar(CONTROL_CHAR);
          }
  
@@ -3628,7 +3628,7 @@ index 143925df6..54ba04eb7 100644
 GitLab
 
 
-From a452a7520bffdf1201df32b19b38b8b807ecfe8e Mon Sep 17 00:00:00 2001
+From 02148839250fe756f88cb099ae44904d7387a93c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:36:27 +0300
 Subject: [PATCH 14/48] QDateTime::fromTime_t -> QDateTime::fromSecsSinceEpoch
@@ -3810,7 +3810,7 @@ index 50c7aeeb8..4d2355564 100644
 GitLab
 
 
-From c5dd39e9d83fde1b15a8dc34bff44b2337ad7786 Mon Sep 17 00:00:00 2001
+From f5d0affe93504a9cc2e464966de86392a81db52b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 23:02:40 +0300
 Subject: [PATCH 15/48] QStandardPaths::DataLocation has been deprecated
@@ -3865,7 +3865,7 @@ index b40f0e22f..83fc3fb02 100644
 GitLab
 
 
-From ba8dea51d77ff544cb763b1762b0a05d72147148 Mon Sep 17 00:00:00 2001
+From 19fba3237ec87b7bb0bd69fc46462281536ebd5e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:39:42 +0300
 Subject: [PATCH 16/48] Switch from KWindowSystem to KxxxExtras
@@ -3958,7 +3958,7 @@ index c6ec9d8ae..825efbfa6 100644
 GitLab
 
 
-From af31f988725ac4373b0e456f047f644502250197 Mon Sep 17 00:00:00 2001
+From c1922d8970ddc8542ac4fc97899c709f7fd2093d Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:43:43 +0300
 Subject: [PATCH 17/48] Switch to new QRegularExpressionValidator API
@@ -3984,7 +3984,7 @@ index c6e6acefa..10a8c283b 100644
 GitLab
 
 
-From 0e4ee34f9a82d7a94a45076a020c7aee4939c1c4 Mon Sep 17 00:00:00 2001
+From 7aa80da79c148f67e18991506a85e7874826af17 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:49:18 +0300
 Subject: [PATCH 18/48] BrowserExtension has been renamed to
@@ -3993,11 +3993,11 @@ Subject: [PATCH 18/48] BrowserExtension has been renamed to
 BrowserExtension has been renamed to NavigationExtension
 ---
  app/KViewer/krviewer.cpp    |  6 ++++--
- app/KViewer/krviewer.h      |  3 ++-
+ app/KViewer/krviewer.h      |  2 +-
  app/KViewer/lister.cpp      |  2 +-
  app/KViewer/lister.h        |  8 ++++----
  app/KViewer/panelviewer.cpp | 14 +++++++-------
- 5 files changed, 18 insertions(+), 15 deletions(-)
+ 5 files changed, 17 insertions(+), 15 deletions(-)
 
 diff --git a/app/KViewer/krviewer.cpp b/app/KViewer/krviewer.cpp
 index a581f71d5..4f41e8e23 100644
@@ -4038,21 +4038,20 @@ index a581f71d5..4f41e8e23 100644
          Invoker(ext, SLOT(copy())).invoke();
  }
 diff --git a/app/KViewer/krviewer.h b/app/KViewer/krviewer.h
-index 939005e88..e6fa93041 100644
+index 939005e88..1f1ebf523 100644
 --- a/app/KViewer/krviewer.h
 +++ b/app/KViewer/krviewer.h
-@@ -22,7 +22,8 @@
+@@ -22,7 +22,7 @@
  #include <QMenu>
  #include <QTabWidget>
  
 -#include <KParts/BrowserExtension>
 +#include <KParts/ReadOnlyPart>
-+//#include <KParts/BrowserExtension>
  #include <KParts/MainWindow>
  #include <KParts/PartManager>
  
 diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index 6a31aaf89..5e1c8b46f 100644
+index 3488fd42e..78d4d6dcc 100644
 --- a/app/KViewer/lister.cpp
 +++ b/app/KViewer/lister.cpp
 @@ -1144,7 +1144,7 @@ bool ListerPane::handleCloseEvent(QEvent *e)
@@ -4142,7 +4141,7 @@ index c1d438384..e86637694 100644
 GitLab
 
 
-From f55b52bb14535725f868756008742d7b039e24e2 Mon Sep 17 00:00:00 2001
+From 98d2127366f6efc4e330d4eb06765564da639b84 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:06 +0300
 Subject: [PATCH 19/48] Update to the new KIO interface
@@ -4341,7 +4340,7 @@ index fb223dfe1..775d9b559 100644
          });
  
 diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index 5e1c8b46f..49d516184 100644
+index 78d4d6dcc..8e06b092e 100644
 --- a/app/KViewer/lister.cpp
 +++ b/app/KViewer/lister.cpp
 @@ -42,6 +42,7 @@
@@ -4866,7 +4865,7 @@ index 872e86e93..c89b3ccfd 100644
 GitLab
 
 
-From 88d1e8556c0b277519970cad6550c84ade8553f3 Mon Sep 17 00:00:00 2001
+From fc83983596840dd4ae6cf173dcce5a09c3a01ade Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:39 +0300
 Subject: [PATCH 20/48] Adapt to the new KBookmarkManager interface
@@ -4924,7 +4923,7 @@ index 2dedde81b..0591803db 100644
 GitLab
 
 
-From e4eaa0dde2af7ee442e43258421ddbbeaf000dd8 Mon Sep 17 00:00:00 2001
+From 3a428a39b59f87c31ed42fa384ee30e8c9e670d0 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:48:11 +0300
 Subject: [PATCH 21/48] QByteArray does not implicitly convert to char * for
@@ -5332,7 +5331,7 @@ index 4d2355564..8c56c4051 100644
 GitLab
 
 
-From 803eeee91a25acdd028010e62dd4812e5d486615 Mon Sep 17 00:00:00 2001
+From e20707df859341755c920df5d7bcf7f77430c1d2 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:01:27 +0300
 Subject: [PATCH 22/48] QString/QChar inconsitencies
@@ -5346,7 +5345,7 @@ char also doesn't cast to QChar implicitly
  4 files changed, 5 insertions(+), 5 deletions(-)
 
 diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index 49d516184..1e239ee33 100644
+index 8e06b092e..f15dfa3a4 100644
 --- a/app/KViewer/lister.cpp
 +++ b/app/KViewer/lister.cpp
 @@ -2096,7 +2096,7 @@ QStringList Lister::readLines(qint64 &filePos, const qint64 endPos, const int co
@@ -5354,12 +5353,12 @@ index 49d516184..1e239ee33 100644
  
          // replace unreadable characters
 -        if ((chr[0] < 32) && (chr[0] != '\n') && (chr[0] != '\t')) {
-+        if ((chr[0].toLatin1() < 32) && (chr[0] != '\n') && (chr[0] != '\t')) {
++        if ((chr[0] < QChar(32)) && (chr[0] != '\n') && (chr[0] != '\t')) {
              chr = QChar(' ');
          }
  
 diff --git a/app/Panel/PanelView/krsort.cpp b/app/Panel/PanelView/krsort.cpp
-index 862b2a014..7a6ffc346 100644
+index 862b2a014..bdd18d4c5 100644
 --- a/app/Panel/PanelView/krsort.cpp
 +++ b/app/Panel/PanelView/krsort.cpp
 @@ -119,8 +119,8 @@ bool compareTextsAlphabetical(QString &aS1, QString &aS2, const KrViewProperties
@@ -5368,8 +5367,8 @@ index 862b2a014..7a6ffc346 100644
          } else if (lUseLocaleAware
 -                   && ((lchar1 >= 128 && ((lchar2 >= 'A' && lchar2 <= 'Z') || (lchar2 >= 'a' && lchar2 <= 'z') || lchar2 >= 128))
 -                       || (lchar2 >= 128 && ((lchar1 >= 'A' && lchar1 <= 'Z') || (lchar1 >= 'a' && lchar1 <= 'z') || lchar1 >= 128)))) {
-+                   && ((lchar1.toLatin1() >= 128 && ((lchar2 >= 'A' && lchar2 <= 'Z') || (lchar2 >= 'a' && lchar2 <= 'z') || lchar2.toLatin1() >= 128))
-+                       || (lchar2.toLatin1() >= 128 && ((lchar1 >= 'A' && lchar1 <= 'Z') || (lchar1 >= 'a' && lchar1 <= 'z') || lchar1.toLatin1() >= 128)))) {
++                   && ((lchar1 >= QChar(128) && ((lchar2 >= 'A' && lchar2 <= 'Z') || (lchar2 >= 'a' && lchar2 <= 'z') || lchar2 >= QChar(128)))
++                       || (lchar2 >= QChar(128) && ((lchar1 >= 'A' && lchar1 <= 'Z') || (lchar1 >= 'a' && lchar1 <= 'z') || lchar1 >= QChar(128))))) {
              // use localeAwareCompare when a unicode character is encountered
              j = QString::localeAwareCompare(lchar1, lchar2);
              if (j != 0)
@@ -5403,7 +5402,7 @@ index 7407d78c8..3f7025f67 100644
 GitLab
 
 
-From de73ecbfe98729290e95a76f40a5a4d92923e1ce Mon Sep 17 00:00:00 2001
+From 3b75543955026b94dd15a84d66a13ec2840c394e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:03:53 +0300
 Subject: [PATCH 23/48] Implement the = operator for PredefinedDevice
@@ -5432,7 +5431,7 @@ index 962a2e0b4..705468682 100644
 GitLab
 
 
-From b8f6de313e4e2014b5509c2feeb9b51b2f71d0c4 Mon Sep 17 00:00:00 2001
+From f399e725a089daad75eb01bf48482c9d992c65a4 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:07:30 +0300
 Subject: [PATCH 24/48] Updaters for QAbstractItemView
@@ -5480,7 +5479,7 @@ index f2e690dc6..1759d5078 100644
 GitLab
 
 
-From bcdb403f1f72cd46f9808cf7294f5f49910a6d9e Mon Sep 17 00:00:00 2001
+From cfb0aef9275964580f68e5b5b184e1e77e298b4f Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:23 +0300
 Subject: [PATCH 25/48] Change to new QLocale
@@ -5490,7 +5489,7 @@ Subject: [PATCH 25/48] Change to new QLocale
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index 1e239ee33..46abbde1c 100644
+index f15dfa3a4..bba78a2da 100644
 --- a/app/KViewer/lister.cpp
 +++ b/app/KViewer/lister.cpp
 @@ -1998,7 +1998,7 @@ void Lister::print()
@@ -5506,30 +5505,31 @@ index 1e239ee33..46abbde1c 100644
 GitLab
 
 
-From b99d50b5709bc8a57094f76e98ed4cb87777aca2 Mon Sep 17 00:00:00 2001
+From 4b562d43bbd03f491d75e0381574ed5f81299020 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:55 +0300
 Subject: [PATCH 26/48] Update KViewer to the new KPart creation code
 
+The new code should use KParts/PartLoader rather than KService
 ---
- app/KViewer/panelviewer.cpp | 49 ++-----------------------------------
+ app/KViewer/panelviewer.cpp | 57 +------------------------------------
  app/KViewer/panelviewer.h   |  2 +-
- 2 files changed, 3 insertions(+), 48 deletions(-)
+ 2 files changed, 2 insertions(+), 57 deletions(-)
 
 diff --git a/app/KViewer/panelviewer.cpp b/app/KViewer/panelviewer.cpp
-index 98e762f37..b8f02638b 100644
+index 98e762f37..ec2f3407e 100644
 --- a/app/KViewer/panelviewer.cpp
 +++ b/app/KViewer/panelviewer.cpp
-@@ -16,27 +16,18 @@
+@@ -16,27 +16,16 @@
  
  #include <kservice_version.h>
  
 -#if KSERVICE_VERSION >= QT_VERSION_CHECK(5, 82, 0)
- #define CREATE_KPART_5_82 1
+-#define CREATE_KPART_5_82 1
 -#else
 -#define CREATE_KPART_5_82 0
 -#endif
- 
+-
  #include <KLocalizedString>
  #include <KParts/NavigationExtension>
  #include <KParts/ReadWritePart>
@@ -5548,25 +5548,17 @@ index 98e762f37..b8f02638b 100644
  
  #include "../defaults.h"
  #include "lister.h"
-@@ -155,15 +146,8 @@ KParts::ReadOnlyPart *PanelViewer::getHexPart()
-     if (KConfigGroup(krConfig, "General").readEntry("UseOktetaViewer", _UseOktetaViewer)) {
-         if (mimes->find("oktetapart") == mimes->end()) {
-             KPluginFactory *factory = nullptr;
--            // Okteta >= 0.26 provides a desktop file, prefer that as the binary changes name
--            KService::Ptr service = KService::serviceByDesktopName("oktetapart");
--            if (service) {
+@@ -158,8 +147,7 @@ KParts::ReadOnlyPart *PanelViewer::getHexPart()
+             // Okteta >= 0.26 provides a desktop file, prefer that as the binary changes name
+             KService::Ptr service = KService::serviceByDesktopName("oktetapart");
+             if (service) {
 -                KPluginName name = *service.data();
 -                factory = KPluginFactory::loadFactory(name.name()).plugin;
--            } else {
--                // fallback to search for desktopfile-less old variant
--                factory = KPluginFactory::loadFactory(QStringLiteral("oktetapart")).plugin;
--            }
-+            // fallback to search for desktopfile-less old variant
-+            factory = KPluginFactory::loadFactory(QStringLiteral("oktetapart")).plugin;
-             if (factory) {
-                 if ((part = factory->create<KParts::ReadOnlyPart>(this, this)))
-                     mimes->insert("oktetapart", part);
-@@ -281,11 +265,7 @@ void PanelViewer::openFile(KFileItem fi)
++                factory = KPluginFactory::loadFactory(service.data()->name()).plugin;
+             } else {
+                 // fallback to search for desktopfile-less old variant
+                 factory = KPluginFactory::loadFactory(QStringLiteral("oktetapart")).plugin;
+@@ -281,11 +269,7 @@ void PanelViewer::openFile(KFileItem fi)
              qDebug() << "openFile completed: '" << curl << "'";
          };
          connect(cpart.data(), QOverload<>::of(&KParts::ReadOnlyPart::completed), this, cPartCompleted);
@@ -5578,7 +5570,7 @@ index 98e762f37..b8f02638b 100644
  
          // Note: Don't rely on return value of openUrl as the call is async in general
          cpart->openUrl(curl);
-@@ -307,8 +287,6 @@ bool PanelViewer::closeUrl()
+@@ -307,8 +291,6 @@ bool PanelViewer::closeUrl()
      return false;
  }
  
@@ -5587,7 +5579,7 @@ index 98e762f37..b8f02638b 100644
  template<typename T>
  static T *createKPartForMimeType(QString mimetype, QWidget *parentWidget)
  {
-@@ -324,27 +302,11 @@ static T *createKPartForMimeType(QString mimetype, QWidget *parentWidget)
+@@ -324,27 +306,11 @@ static T *createKPartForMimeType(QString mimetype, QWidget *parentWidget)
      return pluginFactory->create<T>(parentWidget, parentWidget);
  }
  
@@ -5615,7 +5607,7 @@ index 98e762f37..b8f02638b 100644
      if (part) {
          KParts::NavigationExtension *ext = KParts::NavigationExtension::childObject(part);
          if (ext) {
-@@ -368,14 +330,7 @@ void PanelEditor::configureDeps()
+@@ -368,14 +334,7 @@ void PanelEditor::configureDeps()
  {
      bool foundPlugin = false;
  
@@ -5630,6 +5622,28 @@ index 98e762f37..b8f02638b 100644
  
      if (!foundPlugin)
          KMessageBox::error(nullptr, missingKPartMsg(), i18n("Missing Plugin"), KMessageBox::AllowLink);
+@@ -458,21 +417,7 @@ KParts::ReadOnlyPart *PanelEditor::createPart(QString mimetype)
+ {
+     KParts::ReadWritePart *part = nullptr;
+ 
+-#if CREATE_KPART_5_82
+     part = createKPartForMimeType<KParts::ReadWritePart>(mimetype, this);
+-#else
+-    KService::Ptr ptr = KMimeTypeTrader::self()->preferredService(mimetype, "KParts/ReadWritePart");
+-    if (ptr) {
+-        QVariantList args;
+-        QVariant argsProp = ptr->property("X-KDE-BrowserView-Args");
+-        if (argsProp.isValid())
+-            args << argsProp;
+-        QVariant prop = ptr->property("X-KDE-BrowserView-AllowAsDefault");
+-        if (!prop.isValid() || prop.toBool()) // defaults to true
+-            part = ptr->createInstance<KParts::ReadWritePart>(this, this, args);
+-    }
+-#endif
+-
+     if (part) {
+         KParts::NavigationExtension *ext = KParts::NavigationExtension::childObject(part);
+         if (ext) {
 diff --git a/app/KViewer/panelviewer.h b/app/KViewer/panelviewer.h
 index 659b314bb..dde146b10 100644
 --- a/app/KViewer/panelviewer.h
@@ -5647,7 +5661,7 @@ index 659b314bb..dde146b10 100644
 GitLab
 
 
-From 64452e7f0971f3f7324d573e75ce0d3a25441366 Mon Sep 17 00:00:00 2001
+From afffe74a6d3fed091b5cbcd3a4495bcae3e95c61 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:12:17 +0300
 Subject: [PATCH 27/48] Use the new QRegExp API
@@ -5673,7 +5687,7 @@ index 1235cb17e..f73045840 100644
 GitLab
 
 
-From 832d8247a0f5041b34aba5047b8828ea924200a4 Mon Sep 17 00:00:00 2001
+From c3c73e55b4ba03b3f2c67cc177e24e74955d02f9 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:13:05 +0300
 Subject: [PATCH 28/48] QPalette enums have changed
@@ -5714,7 +5728,7 @@ index 7604a73c7..cbffff727 100644
 GitLab
 
 
-From 5c3550c6d946f59b699cddb08538a6a9a0d8074e Mon Sep 17 00:00:00 2001
+From c55ace051d6cbc9b6e56c31393d6b7adff17fd5b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:29:34 +0300
 Subject: [PATCH 29/48] Fix message box again to twoactions
@@ -5753,7 +5767,7 @@ index d13da9de6..880780c0a 100644
 GitLab
 
 
-From e46072f22fefac38d73a6fcd708ca58f3ac4fb38 Mon Sep 17 00:00:00 2001
+From f1b93b1b4401d7c20e78bf3e3b93721a56c2210e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:30:03 +0300
 Subject: [PATCH 30/48] Add missing headers
@@ -5874,7 +5888,7 @@ index 4391f6dd2..a119ef3b3 100644
 GitLab
 
 
-From 1ca94ec0e16762cd0709fa318575c15a2b00b26a Mon Sep 17 00:00:00 2001
+From a1abfc76acc83a8b9e06f5f2aa2c1db96986dfea Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
 Subject: [PATCH 31/48] Fix the crash at startup - KToolBarPopupAction needs
@@ -5905,7 +5919,7 @@ index 3f6521f01..6f7bfb0de 100644
 GitLab
 
 
-From 32f6fd2e3cf56751c5fc192b8c2a05c214c78d5c Mon Sep 17 00:00:00 2001
+From fe8d85c82ea7095c2cf26a2d54032f5d8f6bda0f Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
 Subject: [PATCH 32/48] Use the kf6 part for the dock
@@ -5940,7 +5954,7 @@ index d94661e22..7045e89c0 100644
 GitLab
 
 
-From c0384762071c9633a84216dc12a7818225ba079a Mon Sep 17 00:00:00 2001
+From 6c9a0049e2967daf63b2b82a6b607809a7c868fe Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:55:35 +0300
 Subject: [PATCH 33/48] Adapt printDialog to qt6
@@ -5950,7 +5964,7 @@ Subject: [PATCH 33/48] Adapt printDialog to qt6
  1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index 46abbde1c..6edee5dec 100644
+index bba78a2da..4fc2987c2 100644
 --- a/app/KViewer/lister.cpp
 +++ b/app/KViewer/lister.cpp
 @@ -1980,7 +1980,7 @@ void Lister::print()
@@ -5966,7 +5980,7 @@ index 46abbde1c..6edee5dec 100644
 GitLab
 
 
-From e38465ecb923719f12d6d7b0bf7c8852128db3b7 Mon Sep 17 00:00:00 2001
+From 9276ad0953eccb57068e92210c4e3e49415fe571 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:58:37 +0300
 Subject: [PATCH 34/48] Codec fixes - especially KrViewer
@@ -5992,7 +6006,7 @@ index a41dcdac0..cebc7a154 100644
          file.close();
      } else {
 diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index 6edee5dec..5c2bc47a5 100644
+index 4fc2987c2..0e635318c 100644
 --- a/app/KViewer/lister.cpp
 +++ b/app/KViewer/lister.cpp
 @@ -13,6 +13,7 @@
@@ -6091,7 +6105,7 @@ index 2e0469e92..c48bf6801 100644
 GitLab
 
 
-From e9acf4d1a3b4fadf0bac907a094b724ecd68ba36 Mon Sep 17 00:00:00 2001
+From c24a406d2c8b2a05235e079efd1c61880b00ad19 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 18:58:41 +0300
 Subject: [PATCH 35/48] Fix the loading of the layout from resource
@@ -6166,58 +6180,34 @@ index b3d0ec27f..c910d438b 100644
 GitLab
 
 
-From 4cda21068a7988ec93810ea5aaf14220fb3bebe0 Mon Sep 17 00:00:00 2001
+From bcaed1383c478879fdd5ce183d388a077cc85a75 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:04:40 +0300
 Subject: [PATCH 36/48] ListJob doesn't have a percent signal anymore
 
+The name of the signal is percentChanged() now
 ---
- app/Panel/listpanel.cpp | 7 -------
- app/Panel/listpanel.h   | 1 -
- 2 files changed, 8 deletions(-)
+ app/Panel/listpanel.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 
 diff --git a/app/Panel/listpanel.cpp b/app/Panel/listpanel.cpp
-index 57d53c806..ecc76f294 100644
+index 57d53c806..e81a87212 100644
 --- a/app/Panel/listpanel.cpp
 +++ b/app/Panel/listpanel.cpp
-@@ -1083,7 +1083,6 @@ void ListPanel::slotRefreshJobStarted(KIO::Job *job)
+@@ -1083,7 +1083,7 @@ void ListPanel::slotRefreshJobStarted(KIO::Job *job)
  
      // connect to the job interface to provide in-panel refresh notification
      connect(job, &KIO::Job::infoMessage, this, &ListPanel::inlineRefreshInfoMessage);
 -    connect(job, SIGNAL(percent(KJob *, ulong)), SLOT(inlineRefreshPercent(KJob *, ulong)));
++    connect(job, SIGNAL(percentChanged(KJob *, ulong)), SLOT(inlineRefreshPercent(KJob *, ulong)));
      connect(job, &KIO::Job::result, this, &ListPanel::inlineRefreshListResult);
  
      inlineRefreshJob = job;
-@@ -1112,12 +1111,6 @@ void ListPanel::setNavigatorUrl(const QUrl &url)
-     urlNavigator->setLocationUrl(url);
- }
- 
--void ListPanel::inlineRefreshPercent(KJob *, unsigned long perc)
--{
--    QString msg = i18n(">> Reading: %1 % complete...", perc);
--    totals->setText(msg);
--}
--
- void ListPanel::inlineRefreshInfoMessage(KJob *, const QString &msg)
- {
-     totals->setText(i18n(">> Reading: %1", msg));
-diff --git a/app/Panel/listpanel.h b/app/Panel/listpanel.h
-index 961107066..2920afb26 100644
---- a/app/Panel/listpanel.h
-+++ b/app/Panel/listpanel.h
-@@ -188,7 +188,6 @@ protected slots:
-     void slotRefreshJobStarted(KIO::Job *job);
-     void inlineRefreshInfoMessage(KJob *job, const QString &msg);
-     void inlineRefreshListResult(KJob *job);
--    void inlineRefreshPercent(KJob *, unsigned long);
-     void slotFilesystemError(const QString &msg);
-     void duplicateTab(KrViewItem *item);
-     void duplicateTab(const QUrl &url, bool nextToThis = false);
 -- 
 GitLab
 
 
-From 8bbfe8a4b14760b4d41cb5a9ad23038aececc056 Mon Sep 17 00:00:00 2001
+From 579b1a83da532c542a527019295ce2785b93af37 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:05:13 +0300
 Subject: [PATCH 37/48] Action in MountMan should use popupmenu not menu
@@ -6280,7 +6270,7 @@ index 6f7bfb0de..852fc45dc 100644
 GitLab
 
 
-From 4c2c284fa20ed7af36dc344182b0a57725162745 Mon Sep 17 00:00:00 2001
+From 969dea817ed59f257600d51649d2bd46697b7934 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:19:36 +0300
 Subject: [PATCH 38/48] Working version of the freespace info
@@ -6293,11 +6283,11 @@ wastes a lot of space because the icons are updated all the time, which
 takes a lot of time. Perhaps freeSpaceResult() could call a less
 demanding version?
 ---
- app/MountMan/kmountmangui.cpp | 32 ++++++++++++++++----------------
- 1 file changed, 16 insertions(+), 16 deletions(-)
+ app/MountMan/kmountmangui.cpp | 31 +++++++++++++++----------------
+ 1 file changed, 15 insertions(+), 16 deletions(-)
 
 diff --git a/app/MountMan/kmountmangui.cpp b/app/MountMan/kmountmangui.cpp
-index b9b13ea86..f96352e58 100644
+index b9b13ea86..576254d45 100644
 --- a/app/MountMan/kmountmangui.cpp
 +++ b/app/MountMan/kmountmangui.cpp
 @@ -209,14 +209,12 @@ void KMountManGUI::getSpaceData()
@@ -6363,19 +6353,11 @@ index b9b13ea86..f96352e58 100644
          // Set the missing information, with the assumption the caller already set the rest
          data.setTotalBlks(freeSpaceJob->size() / 1024);
          data.setFreeBlks(freeSpaceJob->availableSize() / 1024);
-@@ -261,6 +260,7 @@ void KMountManGUI::freeSpaceResult(KJob *job, fsData data)
-         data.setFreeBlks(0);
-         fileSystems.append(data);
-     }
-+    job->deleteLater();
- }
- 
- void KMountManGUI::addNonMounted()
 -- 
 GitLab
 
 
-From 65edd532a4d29ffd3b86bcd6d9bf529c0b5164bb Mon Sep 17 00:00:00 2001
+From e84267ee5d17aa312b3ac93071857ca77d849061 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:04:53 +0300
 Subject: [PATCH 39/48] Bookmark manager doesn't provide a slot for editing
@@ -6384,10 +6366,10 @@ Subject: [PATCH 39/48] Bookmark manager doesn't provide a slot for editing
 Instead it provides an action through KBookmarkMenu that can be used
 directly
 ---
- app/BookMan/CMakeLists.txt        |  1 +
- app/BookMan/krbookmarkhandler.cpp | 11 ++++++++++-
- app/BookMan/krbookmarkhandler.h   |  2 ++
- 3 files changed, 13 insertions(+), 1 deletion(-)
+ app/BookMan/CMakeLists.txt        | 1 +
+ app/BookMan/krbookmarkhandler.cpp | 9 ++++++++-
+ app/BookMan/krbookmarkhandler.h   | 2 ++
+ 3 files changed, 11 insertions(+), 1 deletion(-)
 
 diff --git a/app/BookMan/CMakeLists.txt b/app/BookMan/CMakeLists.txt
 index be54cc859..e948e3a8c 100644
@@ -6402,7 +6384,7 @@ index be54cc859..e948e3a8c 100644
      KF6::ConfigCore
      KF6::ConfigWidgets
 diff --git a/app/BookMan/krbookmarkhandler.cpp b/app/BookMan/krbookmarkhandler.cpp
-index cebc7a154..43e1298cf 100644
+index cebc7a154..ccb39f033 100644
 --- a/app/BookMan/krbookmarkhandler.cpp
 +++ b/app/BookMan/krbookmarkhandler.cpp
 @@ -32,6 +32,7 @@
@@ -6413,21 +6395,19 @@ index cebc7a154..43e1298cf 100644
  #include <KLocalizedString>
  #include <KMessageBox>
  #include <KSharedConfig>
-@@ -70,6 +71,8 @@ KrBookmarkHandler::KrBookmarkHandler(KrMainWindow *mainWindow)
+@@ -70,6 +71,7 @@ KrBookmarkHandler::KrBookmarkHandler(KrMainWindow *mainWindow)
      // create bookmark manager
      QString filename = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + BOOKMARKS_FILE;
      manager = new KBookmarkManager(filename);
-+    Q_ASSERT(manager != nullptr);
 +
      connect(manager, &KBookmarkManager::changed, this, &KrBookmarkHandler::bookmarksChanged);
  
      // create the quick search bar and action
-@@ -82,8 +85,12 @@ KrBookmarkHandler::KrBookmarkHandler(KrMainWindow *mainWindow)
+@@ -82,8 +84,11 @@ KrBookmarkHandler::KrBookmarkHandler(KrMainWindow *mainWindow)
  
      // fill a dummy menu to properly init actions (allows toolbar bookmark buttons to work properly)
      auto menu = new QMenu(mainWindow->widget());
 +    bookmarksMenu = new KBookmarkMenu(manager, nullptr, menu);
-+    Q_ASSERT(bookmarksMenu != nullptr);
 +
      populate(menu);
      menu->deleteLater();
@@ -6435,7 +6415,7 @@ index cebc7a154..43e1298cf 100644
  }
  
  KrBookmarkHandler::~KrBookmarkHandler()
-@@ -527,7 +534,9 @@ void KrBookmarkHandler::buildMenu(KrBookmark *parent, QMenu *menu, int depth)
+@@ -527,7 +532,9 @@ void KrBookmarkHandler::buildMenu(KrBookmark *parent, QMenu *menu, int depth)
              menu->addAction(KrActions::actAddBookmark);
              _specialBookmarks.append(KrActions::actAddBookmark);
          }
@@ -6470,7 +6450,7 @@ index 0591803db..4de85fd2a 100644
 GitLab
 
 
-From bd126a8d49d9eb4792d6be2285ae183f38ba3112 Mon Sep 17 00:00:00 2001
+From 342900a106700e6efe3dca5e21563feededfde74 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:13:57 +0300
 Subject: [PATCH 40/48] Fix the configure shortcuts dialog, switch to
@@ -6501,7 +6481,7 @@ index eeba0c74f..8bfd2521f 100644
 GitLab
 
 
-From b25743f4eef20e88deb0428b9d50e0da1db5e9b5 Mon Sep 17 00:00:00 2001
+From 8c87b961f2ed50899e6a63e7eaec4d490e5aa709 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:17:47 +0300
 Subject: [PATCH 41/48] KRArk switch to QRegularExpression
@@ -6537,7 +6517,7 @@ index 8c56c4051..e170a946c 100644
 GitLab
 
 
-From 294addbb6c6672e05163835e47a8a0a894748d39 Mon Sep 17 00:00:00 2001
+From d0a348daad250d897827b7f242c16ea398946579 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:18:41 +0300
 Subject: [PATCH 42/48] KrArc Fix the default value for getPath
@@ -6564,7 +6544,7 @@ index fcd55f8fb..90b8d1a9c 100644
 GitLab
 
 
-From 90ad35dffeab5c1f6986a181590b9857225c2663 Mon Sep 17 00:00:00 2001
+From 6c84bee422830f5091324e0d8c773acbfd80ef86 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:12 +0300
 Subject: [PATCH 43/48] KrArc remove deprecate Qt5 support code
@@ -6868,7 +6848,7 @@ index e170a946c..577bb21d7 100644
 GitLab
 
 
-From 4aa810fd4bbd6a98dbb20cb018a6cc371ccc05ff Mon Sep 17 00:00:00 2001
+From 746fdcf9cbfd9411eda7510b4915bc71c1b5d105 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:59 +0300
 Subject: [PATCH 44/48] KrArc add the AuthInfo header from KIO
@@ -6894,7 +6874,7 @@ index 577bb21d7..fd26ff49e 100644
 GitLab
 
 
-From ef7cc843d7cc1f91bf8de521ef416c04301e4352 Mon Sep 17 00:00:00 2001
+From 7fa7ead08c059211bc2d944cc6ad5180cccaf162 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:22:36 +0300
 Subject: [PATCH 45/48] Replace KIO::ERR_SLAVE_DEFINED
@@ -6922,7 +6902,7 @@ index fd26ff49e..450cadc54 100644
 GitLab
 
 
-From cf7e128b17a6869218ff94a7e3cd4ae116c8e442 Mon Sep 17 00:00:00 2001
+From 80ec519ec4ab6fdc89c79d2dfa9b3e817169e243 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:29:24 +0300
 Subject: [PATCH 46/48] Fix FreeBSD C++ build
@@ -6967,7 +6947,7 @@ index ca73dd6a0..cee1f875c 100644
 GitLab
 
 
-From 957216a6182f2453e80314de0709df49ef3cbb02 Mon Sep 17 00:00:00 2001
+From b42d68df351af411b744d044feac7f0b919e2cf4 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:12:56 +0300
 Subject: [PATCH 47/48] Fix CI build with kf6
@@ -7053,7 +7033,7 @@ index 383bf3ed4..2ca4f9052 100644
 GitLab
 
 
-From a13b287cbee5e12233c8cde6b060800c09ab5705 Mon Sep 17 00:00:00 2001
+From 8b186f50b9199153c99be3c92658b6c42e1adcb4 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:53:06 +0300
 Subject: [PATCH 48/48] docbook DCOP is not a general entity anymore in Kf6
