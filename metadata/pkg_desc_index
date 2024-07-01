@@ -167,7 +167,6 @@ sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devic
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 18.1.8: Polyhedral optimizations for LLVM
-sys-power/upower 1.90.2: D-Bus abstraction for enumerating power devices, querying history and statistics
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
