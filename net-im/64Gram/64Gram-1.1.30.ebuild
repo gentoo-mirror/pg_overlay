@@ -96,10 +96,6 @@ BDEPEND="
 	wayland? ( dev-util/wayland-scanner )
 "
 
-PATCHES=(
-# 	"${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
-)
-
 pkg_pretend() {
 	if has ccache ${FEATURES}; then
 		ewarn "ccache does not work with ${PN} out of the box"
@@ -143,9 +139,6 @@ src_prepare() {
 			-i cmake/external/qt/package.cmake || die
 	fi
 
-#	cp -f "${FILESDIR}"/CMakeLists.txt cmake/external/glib/
-#	cp -f "${FILESDIR}"/generate_cppgir.cmake cmake/external/glib/
-#	cp -f "${FILESDIR}"/qt_compare.h Telegram/lib_base/base/qt/
 	eapply --binary "${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
 	eapply --binary "${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
 	eapply --binary "${FILESDIR}/sponsored_messages.cpp.patch"
