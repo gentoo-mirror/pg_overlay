@@ -14,6 +14,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
 app-office/libreoffice 24.2.4.2-r10: A full office productivity suite
 app-office/libreoffice-l10n 24.2.3.2: Translations for the Libreoffice suite
+app-office/onlyoffice-bin 8.1.0: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
@@ -28,7 +29,7 @@ dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 
 dev-db/sqlite 3.46.0_pre: SQL database engine
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
-dev-lang/python 3.12.4_p1: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.12.4_p2: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.79.0: Systems programming language from Mozilla
 dev-lang/zig 0.12.0: A robust, optimal, and maintainable programming language
 dev-lang/zig-bin 0.12.0: A robust, optimal, and maintainable programming language
@@ -122,7 +123,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.2.0: Multimedia processing graphs
+media-video/pipewire 1.2.0-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/64Gram 1.1.29: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
