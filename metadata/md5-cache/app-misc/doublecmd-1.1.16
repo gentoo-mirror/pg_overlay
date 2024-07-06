@@ -10,6 +10,6 @@ LICENSE=GPL-2
 RDEPEND=>=dev-lang/lazarus-3.0 sys-apps/dbus dev-libs/glib sys-libs/ncurses dev-qt/qtbase:6 dev-libs/libqt6pas
 RESTRICT=mirror
 SLOT=0
-SRC_URI=https://downloads.sourceforge.net/doublecmd/doublecmd-1.1.15-src.tar.gz
+SRC_URI=https://downloads.sourceforge.net/doublecmd/doublecmd-1.1.16-src.tar.gz
 _eclasses_=xdg-utils	baea6080dd821f5562d715887954c9d3	xdg	4a14c5c24f121e7da66e5aab4a168c6e
 _md5_=1f7cbba3933c36fc797b84532954e16c
