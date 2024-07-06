@@ -1,7 +1,7 @@
-From b3669822f259a18cf9d51b245c73811c01dc4cc1 Mon Sep 17 00:00:00 2001
+From fb46fd04c96029fae7e2e0c8f37f9fe674f1e6d8 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 01/48] Change foreach constructs in C++ for ranged loops
+Subject: [PATCH 01/63] Change foreach constructs in C++ for ranged loops
 
 Qt6 will forego the foreach macro so for switching to KF6+Qt6 the
 foreach constructs need to be fixed
@@ -652,26 +652,27 @@ index c4a74e59e..70b78c164 100644
 GitLab
 
 
-From 2362cd4df2183da1ebf343203868fc27b77e4b46 Mon Sep 17 00:00:00 2001
+From 73cf9ebf9b9606fb28f7e37d7dc35839bab83d4e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Wed, 8 May 2024 21:10:06 +0300
-Subject: [PATCH 02/48] KMessageBox::xxxYesNo has been deprecated
+Subject: [PATCH 02/63] KMessageBox::xxxYesNo has been deprecated
 
 Update the code to use the new construct KMessageBox::xxxTwoActions,
 deprecated by this commit
 https://invent.kde.org/frameworks/kwidgetsaddons/-/commit/dd58fa176cafb40e775b26d724e9fb44c036e392
 It was completely removed in kf6
 ---
- app/ActionMan/useractionpage.cpp     | 27 ++++++++++++++-------------
+ app/ActionMan/useractionpage.cpp     | 24 ++++++++++++------------
  app/DiskUsage/diskusage.cpp          |  5 ++---
  app/Konfigurator/konfigurator.cpp    |  6 +++---
+ app/Panel/panelfunc.cpp              | 10 +++++-----
  app/Splitter/combiner.cpp            |  8 ++++----
  app/Synchronizer/synchronizergui.cpp |  8 ++++----
- app/UserAction/kraction.cpp          | 11 +++++------
- 6 files changed, 32 insertions(+), 33 deletions(-)
+ app/UserAction/kraction.cpp          | 10 +++++-----
+ 7 files changed, 35 insertions(+), 36 deletions(-)
 
 diff --git a/app/ActionMan/useractionpage.cpp b/app/ActionMan/useractionpage.cpp
-index 6b1f30d25..4b1b097fb 100644
+index 6b1f30d25..874b71a22 100644
 --- a/app/ActionMan/useractionpage.cpp
 +++ b/app/ActionMan/useractionpage.cpp
 @@ -129,14 +129,14 @@ bool UserActionPage::continueInSpiteOfChanges()
@@ -691,30 +692,17 @@ index 6b1f30d25..4b1b097fb 100644
          if (!actionProperties->validProperties()) {
              disconnect(actionTree, &UserActionListView::currentItemChanged, this, &UserActionPage::slotChangeCurrent);
              actionTree->setCurrentAction(actionProperties->action());
-@@ -251,31 +251,32 @@ void UserActionPage::slotExport()
- 
-     QDomDocument doc = QDomDocument(ACTION_DOCTYPE);
-     QFile file(filename);
--    int answer = 0;
-+    KMessageBox::ButtonCode answer = KMessageBox::PrimaryAction;
+@@ -254,7 +254,7 @@ void UserActionPage::slotExport()
+     int answer = 0;
      if (file.open(QIODevice::ReadOnly)) { // getting here, means the file already exists an can be read
--        if (doc.setContent(&file)) // getting here means the file exists and already contains an UserAction-XML-tree
+         if (doc.setContent(&file)) // getting here means the file exists and already contains an UserAction-XML-tree
 -            answer = KMessageBox::warningYesNoCancel(
-+        if (doc.setContent(&file)) { // getting here means the file exists and already contains an UserAction-XML-tree
 +            answer = KMessageBox::warningTwoActionsCancel(
                  this, // parent
                  i18n("This file already contains some useractions.\nDo you want to overwrite it or should it be merged with the selected actions?"), // text
                  i18n("Overwrite or Merge?"), // caption
-                 KStandardGuiItem::overwrite(), // label for Yes-Button
-                 KGuiItem(i18n("Merge")) // label for No-Button
+@@ -263,19 +263,19 @@ void UserActionPage::slotExport()
              );
-+        } else { // file exists but it doesn't contain a valid XML(no merge option)
-+            answer = KMessageBox::warningContinueCancel(this, // parent
-+                i18n("This file already exists. Do you want to overwrite it?"), // text
-+                i18n("Overwrite Existing File?"), // caption
-+                KStandardGuiItem::overwrite() // label for Continue-Button
-+            );
-+        }
          file.close();
      }
 -    if (answer == 0 && file.exists())
@@ -723,7 +711,14 @@ index 6b1f30d25..4b1b097fb 100644
 -                                                    i18n("Overwrite Existing File?"), // caption
 -                                                    KStandardGuiItem::overwrite() // label for Continue-Button
 -        );
- 
+-
++    if (answer == 0 && file.exists()) {
++            answer = KMessageBox::warningContinueCancel(this, // parent
++                i18n("This file already exists. Do you want to overwrite it?"), // text
++                i18n("Overwrite Existing File?"), // caption
++                KStandardGuiItem::overwrite() // label for Continue-Button
++            );
++    }
      if (answer == KMessageBox::Cancel)
          return;
  
@@ -784,6 +779,38 @@ index 2e66d4a0d..08372072f 100644
              emit configChanged(currentPg->apply());
              break;
          default:
+diff --git a/app/Panel/panelfunc.cpp b/app/Panel/panelfunc.cpp
+index 31d1ae1d3..9bd1893f7 100644
+--- a/app/Panel/panelfunc.cpp
++++ b/app/Panel/panelfunc.cpp
+@@ -875,11 +875,11 @@ QList<QUrl> ListPanelFunc::confirmDeletion(const QList<QUrl> &urls, bool moveToT
+                 const QDir dir(filePath);
+                 if (!dir.entryList(QDir::AllEntries | QDir::System | QDir::Hidden | QDir::NoDotAndDotDot).isEmpty()) {
+                     // if the dir is not empty, show a confirmation dialog with buttons:
+-                    // * Skip (-> KMessageBox::Yes)
+-                    // * Delete All (-> KMessageBox::No)
++                    // * Skip (-> KMessageBox::PrimaryAction)
++                    // * Delete All (-> KMessageBox::SecondaryAction)
+                     // * Cancel (-> KMessageBox::Cancel)
+                     const QString fileString = showPath ? filePath : url.fileName();
+-                    const KMessageBox::ButtonCode result = KMessageBox::warningYesNoCancel(
++                    const KMessageBox::ButtonCode result = KMessageBox::warningTwoActionsCancel(
+                         krMainWindow,
+                         i18n("<qt><p>Folder <b>%1</b> is not empty.</p>", fileString)
+                             + (moveToTrash ? i18n("<p>Skip this one or trash all?</p></qt>") : i18n("<p>Skip this one or delete all?</p></qt>")),
+@@ -888,10 +888,10 @@ QList<QUrl> ListPanelFunc::confirmDeletion(const QList<QUrl> &urls, bool moveToT
+                         KGuiItem(moveToTrash ? i18n("&Trash All") : i18n("&Delete All")));
+ 
+                     // process user response
+-                    if (result == KMessageBox::Yes) {
++                    if (result == KMessageBox::PrimaryAction) {
+                         // skip this dir
+                         markForDeletion = false;
+-                    } else if (result == KMessageBox::No) {
++                    } else if (result == KMessageBox::SecondaryAction) {
+                         // delete all
+                         deleteAllIsChosen = true;
+                     } else {
 diff --git a/app/Splitter/combiner.cpp b/app/Splitter/combiner.cpp
 index a3c469623..8eac9f812 100644
 --- a/app/Splitter/combiner.cpp
@@ -845,10 +872,10 @@ index 9951b20cb..3c429f66b 100644
              }
              QDialog::reject();
 diff --git a/app/UserAction/kraction.cpp b/app/UserAction/kraction.cpp
-index c54d4c733..1f0ed37a8 100644
+index c54d4c733..2f568f72a 100644
 --- a/app/UserAction/kraction.cpp
 +++ b/app/UserAction/kraction.cpp
-@@ -165,22 +165,21 @@ void KrActionProcDlg::slotSaveAs()
+@@ -165,18 +165,18 @@ void KrActionProcDlg::slotSaveAs()
      if (filename.isEmpty())
          return;
      QFile file(filename);
@@ -872,18 +899,14 @@ index c54d4c733..1f0ed37a8 100644
          open = file.open(QIODevice::WriteOnly | QIODevice::Append);
      else
          open = file.open(QIODevice::WriteOnly);
--
-     if (!open) {
-         KMessageBox::error(this, i18n("Cannot open %1 for writing.\nNothing exported.", filename), i18n("Export failed"));
-         return;
 -- 
 GitLab
 
 
-From a06fa571387668e47a2a879b26b23171fd42508a Mon Sep 17 00:00:00 2001
+From 6e68248b3e0c857137d8e3f7f89d4c8579ae1b5b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:26:34 +0300
-Subject: [PATCH 03/48] Adapt CMakeFiles to kf6 and qt6 builds
+Subject: [PATCH 03/63] Adapt CMakeFiles to kf6 and qt6 builds
 
 Changes include:
 * Changing the KF5 namespace to KF6
@@ -1590,10 +1613,10 @@ index 2a0518fd9..3cb85bd5f 100644
 GitLab
 
 
-From 2b1de068520c4f90e2b85573692b3e7f9020bf94 Mon Sep 17 00:00:00 2001
+From 5fc764f68e82fce565ce4bf2c34dceeb06f10c2e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:52:30 +0300
-Subject: [PATCH 04/48] Fix UI file
+Subject: [PATCH 04/63] Fix UI file
 
 Should use the Kf6 headers
 ---
@@ -1631,10 +1654,10 @@ index 549294aaf..66e1db982 100644
 GitLab
 
 
-From 02fd4466dcc0a71c0ef90c229d26f28499185fde Mon Sep 17 00:00:00 2001
+From 8719c1f565c0706c8e33c5c2a150351265072c4c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:54:32 +0300
-Subject: [PATCH 05/48] Fix the ISO plugin
+Subject: [PATCH 05/63] Fix the ISO plugin
 
 Adapt to the new qt6 APIs -> toSecsSinceEpoch instead of toTime_t and a
 .data() call on QStrings since QT_NO_CAST_FROM_BYTEARRAY will be
@@ -1756,10 +1779,10 @@ index ec98a11d8..ccdc678bb 100644
 GitLab
 
 
-From 6d3737c4bf758f5c28850df276590438dd970930 Mon Sep 17 00:00:00 2001
+From edde1036c4dfb35499363d5d553ba2181588e954 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:55:33 +0300
-Subject: [PATCH 06/48] Update the krarc plugin
+Subject: [PATCH 06/63] Update the krarc plugin
 
 Mostly remove the pre 5.96 QT code check, no point in carrying it
 arround
@@ -2606,10 +2629,10 @@ index aa423cabb..fcd55f8fb 100644
 GitLab
 
 
-From d686d14990d6bf4c738642ee0dfedae6db350a24 Mon Sep 17 00:00:00 2001
+From 5612e3fb82cf78cc145f4abdb54c2b20d87baab7 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:01:52 +0300
-Subject: [PATCH 07/48] Fix the kr7z encryption code
+Subject: [PATCH 07/63] Fix the kr7z encryption code
 
 setupChildProcess() is not available anymore for KProcess, should use
 setChildProcessModifier() instead
@@ -2664,10 +2687,10 @@ index 43bb7d20c..4baf6ef49 100644
 GitLab
 
 
-From 355628a59ba4e569ba4e268e84d477c8120f6b80 Mon Sep 17 00:00:00 2001
+From b7ee52f7739c04170f48d2fa4f5a4433d7689991 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:03:46 +0300
-Subject: [PATCH 08/48] Change the screen geometry code to QScreen
+Subject: [PATCH 08/63] Change the screen geometry code to QScreen
 
 TODO: Is primaryScreen OK here?
 
@@ -2716,10 +2739,10 @@ index e92c74678..592080124 100644
 GitLab
 
 
-From ad2f2e29f63e6ddfbd55afe8bf5aa622313fa09a Mon Sep 17 00:00:00 2001
+From 3d1815deab6745641427d2bd45da13677981c7c2 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:05:26 +0300
-Subject: [PATCH 09/48] Update the wallet calling code
+Subject: [PATCH 09/63] Update the wallet calling code
 
 QApplication::desktop() is not available anymore, use effectiveWinId
 ---
@@ -2749,10 +2772,10 @@ index 0612aff46..297b2717a 100644
 GitLab
 
 
-From cbafb50abb923fc9bf79196348b4d8f54efa75bb Mon Sep 17 00:00:00 2001
+From 7e9b1bdefb569521c56d6399e00f6a66f69ad696 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:11:29 +0300
-Subject: [PATCH 10/48] Change MidButton to MiddleButton
+Subject: [PATCH 10/63] Change MidButton to MiddleButton
 
 Item renamed in Qt6
 ---
@@ -2818,10 +2841,10 @@ index 017becf69..143925df6 100644
 GitLab
 
 
-From a7faf289cf3b946764e67903843cfa44a653cafc Mon Sep 17 00:00:00 2001
+From ed3f7a6cbd24008d3275ec2669afc28488e4c51e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:18:48 +0300
-Subject: [PATCH 11/48] The addition operator has been deprecate for key
+Subject: [PATCH 11/63] The addition operator has been deprecate for key
  sequences
 
 Switch to the or operator
@@ -3210,10 +3233,10 @@ index fb62a6b19..b7630a301 100644
 GitLab
 
 
-From 87f92b483b77aef834f04e18400117d98035af4d Mon Sep 17 00:00:00 2001
+From d2073ff9ae76c7f005820e9df9f0be66f381f15a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:21:21 +0300
-Subject: [PATCH 12/48] Change from I18N_NOOP to KLazyLocalizedString
+Subject: [PATCH 12/63] Change from I18N_NOOP to KLazyLocalizedString
 
 I18N_NOOP has been already removed, switch to KLazyLocalizedString
 ---
@@ -3224,7 +3247,7 @@ I18N_NOOP has been already removed, switch to KLazyLocalizedString
  4 files changed, 33 insertions(+), 29 deletions(-)
 
 diff --git a/app/ActionMan/useractionpage.cpp b/app/ActionMan/useractionpage.cpp
-index 4b1b097fb..d859ffc52 100644
+index 874b71a22..353c5f298 100644
 --- a/app/ActionMan/useractionpage.cpp
 +++ b/app/ActionMan/useractionpage.cpp
 @@ -22,6 +22,7 @@
@@ -3413,10 +3436,10 @@ index 4b9740fb8..b40f0e22f 100644
 GitLab
 
 
-From d510ebac92519c34fce0af33f5cb48084d78b843 Mon Sep 17 00:00:00 2001
+From d5fd0a302aae316b4e221dd1dcc207e17f544286 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:28:31 +0300
-Subject: [PATCH 13/48] Fix QString consistency problem
+Subject: [PATCH 13/63] Fix QString consistency problem
 
 Won't compile because char * is not implicitly cast to QString anymore,
 should be at least UTF-8 strings
@@ -3628,10 +3651,10 @@ index 143925df6..54ba04eb7 100644
 GitLab
 
 
-From 02148839250fe756f88cb099ae44904d7387a93c Mon Sep 17 00:00:00 2001
+From 8a7289c7ddc5ec329d67ce7d9542b04c08ce8c6e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:36:27 +0300
-Subject: [PATCH 14/48] QDateTime::fromTime_t -> QDateTime::fromSecsSinceEpoch
+Subject: [PATCH 14/63] QDateTime::fromTime_t -> QDateTime::fromSecsSinceEpoch
  And viceversa.
 
 The API has been completely removed in Qt6
@@ -3810,10 +3833,10 @@ index 50c7aeeb8..4d2355564 100644
 GitLab
 
 
-From f5d0affe93504a9cc2e464966de86392a81db52b Mon Sep 17 00:00:00 2001
+From 05b80c1236eb24581db448cac7300ed92eb6fb3b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 23:02:40 +0300
-Subject: [PATCH 15/48] QStandardPaths::DataLocation has been deprecated
+Subject: [PATCH 15/63] QStandardPaths::DataLocation has been deprecated
 
 use QStandardPaths::AppDataLocation instead
 ---
@@ -3865,10 +3888,10 @@ index b40f0e22f..83fc3fb02 100644
 GitLab
 
 
-From 19fba3237ec87b7bb0bd69fc46462281536ebd5e Mon Sep 17 00:00:00 2001
+From 3d26db5c010d07e47a6281d3e85a1ef59aa11822 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:39:42 +0300
-Subject: [PATCH 16/48] Switch from KWindowSystem to KxxxExtras
+Subject: [PATCH 16/63] Switch from KWindowSystem to KxxxExtras
 
 For windowing API calls
 ---
@@ -3958,10 +3981,10 @@ index c6ec9d8ae..825efbfa6 100644
 GitLab
 
 
-From c1922d8970ddc8542ac4fc97899c709f7fd2093d Mon Sep 17 00:00:00 2001
+From f4d8c9988cbb0577809bddfa5ef88cab2a158cc9 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:43:43 +0300
-Subject: [PATCH 17/48] Switch to new QRegularExpressionValidator API
+Subject: [PATCH 17/63] Switch to new QRegularExpressionValidator API
 
 ---
  app/Konfigurator/kgpanel.cpp | 2 +-
@@ -3984,10 +4007,10 @@ index c6e6acefa..10a8c283b 100644
 GitLab
 
 
-From 7aa80da79c148f67e18991506a85e7874826af17 Mon Sep 17 00:00:00 2001
+From 410898354c5bd1f0d02a97520dafb9757877408f Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:49:18 +0300
-Subject: [PATCH 18/48] BrowserExtension has been renamed to
+Subject: [PATCH 18/63] BrowserExtension has been renamed to
  NavigationExtension
 
 BrowserExtension has been renamed to NavigationExtension
@@ -4141,10 +4164,10 @@ index c1d438384..e86637694 100644
 GitLab
 
 
-From 98d2127366f6efc4e330d4eb06765564da639b84 Mon Sep 17 00:00:00 2001
+From a724f21b0cce69e428fe11bfea0411861514146c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:06 +0300
-Subject: [PATCH 19/48] Update to the new KIO interface
+Subject: [PATCH 19/63] Update to the new KIO interface
 
 Includes new header files and adapting to the new API
 
@@ -4477,7 +4500,7 @@ index 760165920..2bb7f1b27 100644
  
      KMountMan *mountMan;
 diff --git a/app/Panel/panelfunc.cpp b/app/Panel/panelfunc.cpp
-index 31d1ae1d3..eeca18db1 100644
+index 9bd1893f7..3837070d5 100644
 --- a/app/Panel/panelfunc.cpp
 +++ b/app/Panel/panelfunc.cpp
 @@ -6,8 +6,6 @@
@@ -4865,10 +4888,10 @@ index 872e86e93..c89b3ccfd 100644
 GitLab
 
 
-From fc83983596840dd4ae6cf173dcce5a09c3a01ade Mon Sep 17 00:00:00 2001
+From 849a8be5592013c8fd478a0509be3fced2015147 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:39 +0300
-Subject: [PATCH 20/48] Adapt to the new KBookmarkManager interface
+Subject: [PATCH 20/63] Adapt to the new KBookmarkManager interface
 
 ---
  app/BookMan/krbookmarkhandler.cpp | 6 +++---
@@ -4923,10 +4946,10 @@ index 2dedde81b..0591803db 100644
 GitLab
 
 
-From 3a428a39b59f87c31ed42fa384ee30e8c9e670d0 Mon Sep 17 00:00:00 2001
+From f95631fed878799b0881afb89f20dc790ac7a20b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:48:11 +0300
-Subject: [PATCH 21/48] QByteArray does not implicitly convert to char * for
+Subject: [PATCH 21/63] QByteArray does not implicitly convert to char * for
  libc calls
 
 data() needs to be explicity called or constData() in some cases
@@ -5102,7 +5125,7 @@ index 1ca72af04..0d0f47282 100644
  
  #ifdef HAVE_NON_POSIX_ACL_EXTENSIONS
 diff --git a/app/Panel/panelfunc.cpp b/app/Panel/panelfunc.cpp
-index eeca18db1..d13da9de6 100644
+index 3837070d5..718257b81 100644
 --- a/app/Panel/panelfunc.cpp
 +++ b/app/Panel/panelfunc.cpp
 @@ -386,12 +386,12 @@ void ListPanelFunc::redirectLink()
@@ -5331,10 +5354,10 @@ index 4d2355564..8c56c4051 100644
 GitLab
 
 
-From e20707df859341755c920df5d7bcf7f77430c1d2 Mon Sep 17 00:00:00 2001
+From 9a251678f59884761551b95c81af0ca2c3078482 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:01:27 +0300
-Subject: [PATCH 22/48] QString/QChar inconsitencies
+Subject: [PATCH 22/63] QString/QChar inconsitencies
 
 char also doesn't cast to QChar implicitly
 ---
@@ -5402,10 +5425,10 @@ index 7407d78c8..3f7025f67 100644
 GitLab
 
 
-From 3b75543955026b94dd15a84d66a13ec2840c394e Mon Sep 17 00:00:00 2001
+From 83b7afa5ff00b449708b2728e83bdc3efd2e16ee Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:03:53 +0300
-Subject: [PATCH 23/48] Implement the = operator for PredefinedDevice
+Subject: [PATCH 23/63] Implement the = operator for PredefinedDevice
 
 ---
  app/Splitter/splittergui.cpp | 5 ++++-
@@ -5431,10 +5454,10 @@ index 962a2e0b4..705468682 100644
 GitLab
 
 
-From f399e725a089daad75eb01bf48482c9d992c65a4 Mon Sep 17 00:00:00 2001
+From c5007c266b3546c1b10918456e0ea91dcb7f6f08 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:07:30 +0300
-Subject: [PATCH 24/48] Updaters for QAbstractItemView
+Subject: [PATCH 24/63] Updaters for QAbstractItemView
 
 The virtual viewOptions() method that previously returned a
 QStyleOptionViewItem object has been renamed to initViewItemOption, and
@@ -5479,10 +5502,10 @@ index f2e690dc6..1759d5078 100644
 GitLab
 
 
-From cfb0aef9275964580f68e5b5b184e1e77e298b4f Mon Sep 17 00:00:00 2001
+From 1b5fbcdf49180ddc793a3bb0ad2047048efe0a2a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:23 +0300
-Subject: [PATCH 25/48] Change to new QLocale
+Subject: [PATCH 25/63] Change to new QLocale
 
 ---
  app/KViewer/lister.cpp | 2 +-
@@ -5505,10 +5528,10 @@ index f15dfa3a4..bba78a2da 100644
 GitLab
 
 
-From 4b562d43bbd03f491d75e0381574ed5f81299020 Mon Sep 17 00:00:00 2001
+From 5bc335479a381f77b12c2abbf7d3b849627c9bca Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:55 +0300
-Subject: [PATCH 26/48] Update KViewer to the new KPart creation code
+Subject: [PATCH 26/63] Update KViewer to the new KPart creation code
 
 The new code should use KParts/PartLoader rather than KService
 ---
@@ -5661,10 +5684,10 @@ index 659b314bb..dde146b10 100644
 GitLab
 
 
-From afffe74a6d3fed091b5cbcd3a4495bcae3e95c61 Mon Sep 17 00:00:00 2001
+From 3221c04928ca2427880ea4cc3f2247e5c95ffa36 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:12:17 +0300
-Subject: [PATCH 27/48] Use the new QRegExp API
+Subject: [PATCH 27/63] Use the new QRegExp API
 
 ---
  app/Locate/locate.cpp | 2 +-
@@ -5687,10 +5710,10 @@ index 1235cb17e..f73045840 100644
 GitLab
 
 
-From c3c73e55b4ba03b3f2c67cc177e24e74955d02f9 Mon Sep 17 00:00:00 2001
+From af723164100f32afe96ee5a346cd92545e5efb07 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:13:05 +0300
-Subject: [PATCH 28/48] QPalette enums have changed
+Subject: [PATCH 28/63] QPalette enums have changed
 
 Use Background instead of Window
 ---
@@ -5728,49 +5751,10 @@ index 7604a73c7..cbffff727 100644
 GitLab
 
 
-From c55ace051d6cbc9b6e56c31393d6b7adff17fd5b Mon Sep 17 00:00:00 2001
-From: Valentin Manea <email_kde@mors.eu.org>
-Date: Sat, 1 Jun 2024 11:29:34 +0300
-Subject: [PATCH 29/48] Fix message box again to twoactions
-
----
- app/Panel/panelfunc.cpp | 6 +++---
- 1 file changed, 3 insertions(+), 3 deletions(-)
-
-diff --git a/app/Panel/panelfunc.cpp b/app/Panel/panelfunc.cpp
-index d13da9de6..880780c0a 100644
---- a/app/Panel/panelfunc.cpp
-+++ b/app/Panel/panelfunc.cpp
-@@ -873,7 +873,7 @@ QList<QUrl> ListPanelFunc::confirmDeletion(const QList<QUrl> &urls, bool moveToT
-                     // * Delete All (-> KMessageBox::No)
-                     // * Cancel (-> KMessageBox::Cancel)
-                     const QString fileString = showPath ? filePath : url.fileName();
--                    const KMessageBox::ButtonCode result = KMessageBox::warningYesNoCancel(
-+                    const KMessageBox::ButtonCode result = KMessageBox::warningTwoActionsCancel(
-                         krMainWindow,
-                         i18n("<qt><p>Folder <b>%1</b> is not empty.</p>", fileString)
-                             + (moveToTrash ? i18n("<p>Skip this one or trash all?</p></qt>") : i18n("<p>Skip this one or delete all?</p></qt>")),
-@@ -882,10 +882,10 @@ QList<QUrl> ListPanelFunc::confirmDeletion(const QList<QUrl> &urls, bool moveToT
-                         KGuiItem(moveToTrash ? i18n("&Trash All") : i18n("&Delete All")));
- 
-                     // process user response
--                    if (result == KMessageBox::Yes) {
-+                    if (result == KMessageBox::PrimaryAction) {
-                         // skip this dir
-                         markForDeletion = false;
--                    } else if (result == KMessageBox::No) {
-+                    } else if (result == KMessageBox::SecondaryAction) {
-                         // delete all
-                         deleteAllIsChosen = true;
-                     } else {
--- 
-GitLab
-
-
-From f1b93b1b4401d7c20e78bf3e3b93721a56c2210e Mon Sep 17 00:00:00 2001
+From f7815080e696d5fee533b5fe199042e2d2427c01 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:30:03 +0300
-Subject: [PATCH 30/48] Add missing headers
+Subject: [PATCH 29/63] Add missing headers
 
 Remove some too
 ---
@@ -5888,10 +5872,10 @@ index 4391f6dd2..a119ef3b3 100644
 GitLab
 
 
-From a1abfc76acc83a8b9e06f5f2aa2c1db96986dfea Mon Sep 17 00:00:00 2001
+From 0bd84d780e2878a1ef62b8da974f1986dd95ca7c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 31/48] Fix the crash at startup - KToolBarPopupAction needs
+Subject: [PATCH 30/63] Fix the crash at startup - KToolBarPopupAction needs
  popupMenu()
 
 Don't use menu() in Qt6
@@ -5919,10 +5903,10 @@ index 3f6521f01..6f7bfb0de 100644
 GitLab
 
 
-From fe8d85c82ea7095c2cf26a2d54032f5d8f6bda0f Mon Sep 17 00:00:00 2001
+From 0b68c044372bb122c80e2a56242e5e90d4b8e919 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 32/48] Use the kf6 part for the dock
+Subject: [PATCH 31/63] Use the kf6 part for the dock
 
 Fix terminal to kf6 part
 ---
@@ -5954,10 +5938,10 @@ index d94661e22..7045e89c0 100644
 GitLab
 
 
-From 6c9a0049e2967daf63b2b82a6b607809a7c868fe Mon Sep 17 00:00:00 2001
+From 8f8c2d3f3f424db9f57443eb49a0b96d553949b1 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:55:35 +0300
-Subject: [PATCH 33/48] Adapt printDialog to qt6
+Subject: [PATCH 32/63] Adapt printDialog to qt6
 
 ---
  app/KViewer/lister.cpp | 2 +-
@@ -5980,10 +5964,10 @@ index bba78a2da..4fc2987c2 100644
 GitLab
 
 
-From 9276ad0953eccb57068e92210c4e3e49415fe571 Mon Sep 17 00:00:00 2001
+From 529ecf2fcc00ecc8a0113be1fa3c13e07c5b2a22 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:58:37 +0300
-Subject: [PATCH 34/48] Codec fixes - especially KrViewer
+Subject: [PATCH 33/63] Codec fixes - especially KrViewer
 
 Can't apply a codec(decode to unicode) to a QTextStream anymore
 ---
@@ -6105,10 +6089,10 @@ index 2e0469e92..c48bf6801 100644
 GitLab
 
 
-From c24a406d2c8b2a05235e079efd1c61880b00ad19 Mon Sep 17 00:00:00 2001
+From acf7383bc9096074b4e171a3c0aca5c3736d1885 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 18:58:41 +0300
-Subject: [PATCH 35/48] Fix the loading of the layout from resource
+Subject: [PATCH 34/63] Fix the loading of the layout from resource
 
 QResource seems to return empty file, it's easier to stream it
 ---
@@ -6180,10 +6164,10 @@ index b3d0ec27f..c910d438b 100644
 GitLab
 
 
-From bcaed1383c478879fdd5ce183d388a077cc85a75 Mon Sep 17 00:00:00 2001
+From feebdc6f379a27b80d3f41c41f8c168348592dc6 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:04:40 +0300
-Subject: [PATCH 36/48] ListJob doesn't have a percent signal anymore
+Subject: [PATCH 35/63] ListJob doesn't have a percent signal anymore
 
 The name of the signal is percentChanged() now
 ---
@@ -6207,10 +6191,10 @@ index 57d53c806..e81a87212 100644
 GitLab
 
 
-From 579b1a83da532c542a527019295ce2785b93af37 Mon Sep 17 00:00:00 2001
+From 0858ffd6eeee710a53a36c0fe38f3db93f6e9a9e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:05:13 +0300
-Subject: [PATCH 37/48] Action in MountMan should use popupmenu not menu
+Subject: [PATCH 36/63] Action in MountMan should use popupmenu not menu
 
 ---
  app/MountMan/kmountman.cpp | 12 ++++++------
@@ -6270,10 +6254,10 @@ index 6f7bfb0de..852fc45dc 100644
 GitLab
 
 
-From 969dea817ed59f257600d51649d2bd46697b7934 Mon Sep 17 00:00:00 2001
+From 69c75e55207fe3ede786e53b10eef63de79d7768 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:19:36 +0300
-Subject: [PATCH 38/48] Working version of the freespace info
+Subject: [PATCH 37/63] Working version of the freespace info
 
 This code will just wait for all the KIO:Job to finish getting the free
 space info and then it will continue.
@@ -6357,10 +6341,10 @@ index b9b13ea86..576254d45 100644
 GitLab
 
 
-From e84267ee5d17aa312b3ac93071857ca77d849061 Mon Sep 17 00:00:00 2001
+From 84a6552df433ab1c97e74b6bad3bd3ebdaa72deb Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:04:53 +0300
-Subject: [PATCH 39/48] Bookmark manager doesn't provide a slot for editing
+Subject: [PATCH 38/63] Bookmark manager doesn't provide a slot for editing
  bookmarks
 
 Instead it provides an action through KBookmarkMenu that can be used
@@ -6450,10 +6434,10 @@ index 0591803db..4de85fd2a 100644
 GitLab
 
 
-From 342900a106700e6efe3dca5e21563feededfde74 Mon Sep 17 00:00:00 2001
+From 962d95ef0c2e075a7fb12bc29222a5b6cc60cedc Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:13:57 +0300
-Subject: [PATCH 40/48] Fix the configure shortcuts dialog, switch to
+Subject: [PATCH 39/63] Fix the configure shortcuts dialog, switch to
  showConfigureShortcutsDialog
 
 KXMLGui had a refactoring where configureHsortcuts was removed and a new
@@ -6481,10 +6465,10 @@ index eeba0c74f..8bfd2521f 100644
 GitLab
 
 
-From 8c87b961f2ed50899e6a63e7eaec4d490e5aa709 Mon Sep 17 00:00:00 2001
+From d2e83c5af2a2981814dfdb18119a393f527911b8 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:17:47 +0300
-Subject: [PATCH 41/48] KRArk switch to QRegularExpression
+Subject: [PATCH 40/63] KRArk switch to QRegularExpression
 
 QRegExp has been deprecated in Qt6
 ---
@@ -6517,10 +6501,10 @@ index 8c56c4051..e170a946c 100644
 GitLab
 
 
-From d0a348daad250d897827b7f242c16ea398946579 Mon Sep 17 00:00:00 2001
+From 51d8e741e9aade8cb011dd39b8a5d77f75ae49ff Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:18:41 +0300
-Subject: [PATCH 42/48] KrArc Fix the default value for getPath
+Subject: [PATCH 41/63] KrArc Fix the default value for getPath
 
 nullptr can't convert to QUrl::FormattingOptions so use  QUrl::None
 ---
@@ -6544,10 +6528,10 @@ index fcd55f8fb..90b8d1a9c 100644
 GitLab
 
 
-From 6c84bee422830f5091324e0d8c773acbfd80ef86 Mon Sep 17 00:00:00 2001
+From 2a9b6c63962963930226c4157c37e0458d5a71bd Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:12 +0300
-Subject: [PATCH 43/48] KrArc remove deprecate Qt5 support code
+Subject: [PATCH 42/63] KrArc remove deprecate Qt5 support code
 
 Remove the ifdef code that supported old versions, can't work in Kf6
 anymore
@@ -6848,10 +6832,10 @@ index e170a946c..577bb21d7 100644
 GitLab
 
 
-From 746fdcf9cbfd9411eda7510b4915bc71c1b5d105 Mon Sep 17 00:00:00 2001
+From 3e41a71b6299530a38f0f90ee12ee0fe148ffff2 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:59 +0300
-Subject: [PATCH 44/48] KrArc add the AuthInfo header from KIO
+Subject: [PATCH 43/63] KrArc add the AuthInfo header from KIO
 
 Required in Kf6
 ---
@@ -6874,10 +6858,10 @@ index 577bb21d7..fd26ff49e 100644
 GitLab
 
 
-From 7fa7ead08c059211bc2d944cc6ad5180cccaf162 Mon Sep 17 00:00:00 2001
+From 5dab27c415a347a8da67fa99eb3bfa8de5c66cfb Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:22:36 +0300
-Subject: [PATCH 45/48] Replace KIO::ERR_SLAVE_DEFINED
+Subject: [PATCH 44/63] Replace KIO::ERR_SLAVE_DEFINED
  withKIO::ERR_WORKER_DEFINED
 
 KIO::ERR_SLAVE_DEFINED has already been deprecated in Kf5
@@ -6902,10 +6886,10 @@ index fd26ff49e..450cadc54 100644
 GitLab
 
 
-From 80ec519ec4ab6fdc89c79d2dfa9b3e817169e243 Mon Sep 17 00:00:00 2001
+From 0ea7dedbc8fb5503274b79caca686b050f81c534 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:29:24 +0300
-Subject: [PATCH 46/48] Fix FreeBSD C++ build
+Subject: [PATCH 45/63] Fix FreeBSD C++ build
 
 std::mem_fun_ref has been deprecated - replace with mem_fn, also
 std::not1 cannot be used with std::mem_fn
@@ -6947,10 +6931,10 @@ index ca73dd6a0..cee1f875c 100644
 GitLab
 
 
-From b42d68df351af411b744d044feac7f0b919e2cf4 Mon Sep 17 00:00:00 2001
+From 661ab81148dcfa20c5c0294e279a4b187e3a675a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:12:56 +0300
-Subject: [PATCH 47/48] Fix CI build with kf6
+Subject: [PATCH 46/63] Fix CI build with kf6
 
 Move all the frameworks version to kf6, same with qt to qt6.
 Add required kstatusnotifier
@@ -7033,10 +7017,10 @@ index 383bf3ed4..2ca4f9052 100644
 GitLab
 
 
-From 8b186f50b9199153c99be3c92658b6c42e1adcb4 Mon Sep 17 00:00:00 2001
+From c981c972d55ad77113dc36b09bc8bceecd0b4622 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:53:06 +0300
-Subject: [PATCH 48/48] docbook DCOP is not a general entity anymore in Kf6
+Subject: [PATCH 47/63] docbook DCOP is not a general entity anymore in Kf6
 
 Temporarily don't use DCOP as entity, just expand it
 ---
@@ -7075,6 +7059,1392 @@ index f38bf2914..ef06d6c6c 100644
      </glossterm>
      <glossdef>
        <para>
+-- 
+GitLab
+
+
+From bd99d40b35eea3b2f1964df1dad80bdf78b6a869 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 12:06:17 +0200
+Subject: [PATCH 48/63] Fix percent signal of various jobs not connected
+
+---
+ app/JobMan/jobman.cpp     | 5 ++---
+ app/Panel/listpanel.cpp   | 4 ++--
+ app/Splitter/combiner.cpp | 2 +-
+ app/Splitter/splitter.cpp | 2 +-
+ 4 files changed, 6 insertions(+), 7 deletions(-)
+
+diff --git a/app/JobMan/jobman.cpp b/app/JobMan/jobman.cpp
+index 775d9b559..f7b741930 100644
+--- a/app/JobMan/jobman.cpp
++++ b/app/JobMan/jobman.cpp
+@@ -141,7 +141,7 @@ private slots:
+     void slotStarted(KJob *job)
+     {
+         connect(job, &KJob::description, this, &JobMenuAction::slotDescription);
+-        connect(job, SIGNAL(percent(KJob *, ulong)), this, SLOT(slotPercent(KJob *, ulong)));
++        connect(job, &KJob::percentChanged, this, &JobMenuAction::slotPercent);
+         connect(job, &KJob::suspended, this, &JobMenuAction::updatePauseResumeButton);
+         connect(job, &KJob::resumed, this, &JobMenuAction::updatePauseResumeButton);
+         connect(job, &KJob::result, this, &JobMenuAction::slotResult);
+@@ -277,8 +277,7 @@ void JobMan::manageStartedJob(KrJob *krJob, KJob *kJob)
+ 
+ void JobMan::slotKJobStarted(KJob *job)
+ {
+-    // KJob has two percent() functions
+-    connect(job, SIGNAL(percent(KJob *, ulong)), this, SLOT(slotPercent(KJob *, ulong)));
++    connect(job, &KJob::percentChanged, this, &JobMan::slotPercent);
+     connect(job, &KJob::description, this, &JobMan::slotDescription);
+     connect(job, &KJob::suspended, this, &JobMan::updateUI);
+     connect(job, &KJob::resumed, this, &JobMan::updateUI);
+diff --git a/app/Panel/listpanel.cpp b/app/Panel/listpanel.cpp
+index e81a87212..fa6c5dd73 100644
+--- a/app/Panel/listpanel.cpp
++++ b/app/Panel/listpanel.cpp
+@@ -1042,7 +1042,7 @@ void ListPanel::panelHidden()
+ void ListPanel::slotPreviewJobStarted(KJob *job)
+ {
+     previewJob = job;
+-    connect(job, SIGNAL(percent(KJob *, ulong)), SLOT(slotPreviewJobPercent(KJob *, ulong)));
++    connect(job, &KJob::percentChanged, this, &ListPanel::slotPreviewJobPercent);
+     connect(job, &KJob::result, this, &ListPanel::slotPreviewJobResult);
+     cancelProgressButton->setMaximumHeight(sidebarButton->height());
+     cancelProgressButton->show();
+@@ -1083,7 +1083,7 @@ void ListPanel::slotRefreshJobStarted(KIO::Job *job)
+ 
+     // connect to the job interface to provide in-panel refresh notification
+     connect(job, &KIO::Job::infoMessage, this, &ListPanel::inlineRefreshInfoMessage);
+-    connect(job, SIGNAL(percentChanged(KJob *, ulong)), SLOT(inlineRefreshPercent(KJob *, ulong)));
++    connect(job, &KIO::Job::percentChanged, this, &ListPanel::inlineRefreshPercent);
+     connect(job, &KIO::Job::result, this, &ListPanel::inlineRefreshListResult);
+ 
+     inlineRefreshJob = job;
+diff --git a/app/Splitter/combiner.cpp b/app/Splitter/combiner.cpp
+index 605f91514..9ffb5c1d7 100644
+--- a/app/Splitter/combiner.cpp
++++ b/app/Splitter/combiner.cpp
+@@ -234,7 +234,7 @@ void Combiner::openNextFile()
+     connect(combineReadJob, &KIO::TransferJob::data, this, &Combiner::combineDataReceived);
+     connect(combineReadJob, &KIO::TransferJob::result, this, &Combiner::combineReceiveFinished);
+     if (hasValidSplitFile)
+-        connect(combineReadJob, SIGNAL(percent(KJob *, ulong)), this, SLOT(combineWritePercent(KJob *, ulong)));
++        connect(combineReadJob, &KJob::percentChanged, this, &Combiner::combineWritePercent);
+ }
+ 
+ void Combiner::combineDataReceived(KIO::Job *, const QByteArray &byteArray)
+diff --git a/app/Splitter/splitter.cpp b/app/Splitter/splitter.cpp
+index f2aff9593..db7fefdfe 100644
+--- a/app/Splitter/splitter.cpp
++++ b/app/Splitter/splitter.cpp
+@@ -82,7 +82,7 @@ void Splitter::split(KIO::filesize_t splitSizeIn)
+ 
+     connect(splitReadJob, &KIO::TransferJob::data, this, &Splitter::splitDataReceived);
+     connect(splitReadJob, &KIO::TransferJob::result, this, &Splitter::splitReceiveFinished);
+-    connect(splitReadJob, SIGNAL(percent(KJob *, ulong)), this, SLOT(splitReceivePercent(KJob *, ulong)));
++    connect(splitReadJob, &KJob::percentChanged, this, &Splitter::splitReceivePercent);
+ 
+     exec();
+ }
+-- 
+GitLab
+
+
+From c96bc51d305d5aa60329620fefd73db3025728e3 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 12:17:28 +0200
+Subject: [PATCH 49/63] Fix wrong position of file drop menu in Wayland
+
+---
+ app/FileSystem/defaultfilesystem.cpp  | 5 +++--
+ app/FileSystem/defaultfilesystem.h    | 2 +-
+ app/FileSystem/filesystem.h           | 2 +-
+ app/FileSystem/filesystemprovider.cpp | 4 ++--
+ app/FileSystem/filesystemprovider.h   | 2 +-
+ app/FileSystem/virtualfilesystem.cpp  | 2 +-
+ app/FileSystem/virtualfilesystem.h    | 2 +-
+ app/Panel/krfiletreeview.cpp          | 2 +-
+ app/Panel/krpanel.h                   | 2 +-
+ app/Panel/listpanel.cpp               | 4 ++--
+ 10 files changed, 14 insertions(+), 13 deletions(-)
+
+diff --git a/app/FileSystem/defaultfilesystem.cpp b/app/FileSystem/defaultfilesystem.cpp
+index 2a8584392..ee2f18cd1 100644
+--- a/app/FileSystem/defaultfilesystem.cpp
++++ b/app/FileSystem/defaultfilesystem.cpp
+@@ -20,7 +20,7 @@
+ #include <KIO/ListJob>
+ #include <KIO/MkdirJob>
+ #include <KIO/MkpathJob>
+-#include <KIO/FileSystemFreeSpaceJob>
++#include <KJobWidgets>
+ #include <KLocalizedString>
+ #include <KMountPoint>
+ #include <KProtocolManager>
+@@ -65,7 +65,7 @@ void DefaultFileSystem::copyFiles(const QList<QUrl> &urls,
+     krJobMan->manageJob(krJob, startMode);
+ }
+ 
+-void DefaultFileSystem::dropFiles(const QUrl &destination, QDropEvent *event)
++void DefaultFileSystem::dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget)
+ {
+     qDebug() << "destination=" << destination;
+ 
+@@ -73,6 +73,7 @@ void DefaultFileSystem::dropFiles(const QUrl &destination, QDropEvent *event)
+     const QUrl dest = resolveRelativePath(destination);
+ 
+     KIO::DropJob *job = KIO::drop(event, dest);
++    KJobWidgets::setWindow(job, targetWidget);
+ 
+     // NOTE: a DropJob "starts" with showing a menu. If the operation is chosen (copy/move/link)
+     // the actual CopyJob starts automatically - we cannot manage the start of the CopyJob (see
+diff --git a/app/FileSystem/defaultfilesystem.h b/app/FileSystem/defaultfilesystem.h
+index 3e8a868ea..5af104af1 100644
+--- a/app/FileSystem/defaultfilesystem.h
++++ b/app/FileSystem/defaultfilesystem.h
+@@ -39,7 +39,7 @@ public:
+                    KIO::CopyJob::CopyMode mode = KIO::CopyJob::Copy,
+                    bool showProgressInfo = true,
+                    JobMan::StartMode startMode = JobMan::Default) override;
+-    void dropFiles(const QUrl &destination, QDropEvent *event) override;
++    void dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget) override;
+ 
+     void addFiles(const QList<QUrl> &fileUrls, KIO::CopyJob::CopyMode mode, const QString &dir = "") override;
+     void mkDir(const QString &name) override;
+diff --git a/app/FileSystem/filesystem.h b/app/FileSystem/filesystem.h
+index d310ac1ad..636b3855d 100644
+--- a/app/FileSystem/filesystem.h
++++ b/app/FileSystem/filesystem.h
+@@ -75,7 +75,7 @@ public:
+                            bool showProgressInfo = true,
+                            JobMan::StartMode startMode = JobMan::Default) = 0;
+     /// Handle file dropping in this filesystem. Destination is absolute URL. May implemented async.
+-    virtual void dropFiles(const QUrl &destination, QDropEvent *event) = 0;
++    virtual void dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget) = 0;
+ 
+     /// Copy (copy, move or link) files to the current filesystem directory or to "dir", the
+     /// directory name relative to the current dir. May implemented async.
+diff --git a/app/FileSystem/filesystemprovider.cpp b/app/FileSystem/filesystemprovider.cpp
+index 0d0f47282..03fa7a677 100644
+--- a/app/FileSystem/filesystemprovider.cpp
++++ b/app/FileSystem/filesystemprovider.cpp
+@@ -49,10 +49,10 @@ void FileSystemProvider::startCopyFiles(const QList<QUrl> &urls,
+     fs->copyFiles(urls, destination, mode, showProgressInfo, startMode);
+ }
+ 
+-void FileSystemProvider::startDropFiles(QDropEvent *event, const QUrl &destination)
++void FileSystemProvider::startDropFiles(QDropEvent *event, const QUrl &destination, QWidget *targetWidget)
+ {
+     FileSystem *fs = getFilesystemInstance(destination);
+-    fs->dropFiles(destination, event);
++    fs->dropFiles(destination, event, targetWidget);
+ }
+ 
+ void FileSystemProvider::startDeleteFiles(const QList<QUrl> &urls, bool moveToTrash)
+diff --git a/app/FileSystem/filesystemprovider.h b/app/FileSystem/filesystemprovider.h
+index 0f278555a..972c03849 100644
+--- a/app/FileSystem/filesystemprovider.h
++++ b/app/FileSystem/filesystemprovider.h
+@@ -52,7 +52,7 @@ public:
+      *
+      * Operation may implemented async depending on destination filesystem.
+      */
+-    void startDropFiles(QDropEvent *event, const QUrl &destination);
++    void startDropFiles(QDropEvent *event, const QUrl &destination, QWidget *targetWidget);
+ 
+     /**
+      * Start a delete job for trashing or deleting files.
+diff --git a/app/FileSystem/virtualfilesystem.cpp b/app/FileSystem/virtualfilesystem.cpp
+index 8df32e871..731080ca1 100644
+--- a/app/FileSystem/virtualfilesystem.cpp
++++ b/app/FileSystem/virtualfilesystem.cpp
+@@ -72,7 +72,7 @@ void VirtualFileSystem::copyFiles(const QList<QUrl> &urls,
+     emit fileSystemChanged(QUrl("virt:///" + dir), false); // may call refresh()
+ }
+ 
+-void VirtualFileSystem::dropFiles(const QUrl &destination, QDropEvent *event)
++void VirtualFileSystem::dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget)
+ {
+     const QList<QUrl> &urls = KUrlMimeData::urlsFromMimeData(event->mimeData());
+     // dropping on virtual filesystem is always copy operation
+diff --git a/app/FileSystem/virtualfilesystem.h b/app/FileSystem/virtualfilesystem.h
+index 2ff0c838f..56d92bdbb 100644
+--- a/app/FileSystem/virtualfilesystem.h
++++ b/app/FileSystem/virtualfilesystem.h
+@@ -42,7 +42,7 @@ public:
+                    bool showProgressInfo = false,
+                    JobMan::StartMode startMode = JobMan::Start) override;
+     /// Handle file dropping in this filesystem: Always creates virtual files.
+-    void dropFiles(const QUrl &destination, QDropEvent *event) override;
++    void dropFiles(const QUrl &destination, QDropEvent *event, QWidget *targetWidget) override;
+ 
+     /// Add virtual files to the current directory.
+     void addFiles(const QList<QUrl> &fileUrls, KIO::CopyJob::CopyMode mode = KIO::CopyJob::Copy, const QString &dir = "") override;
+diff --git a/app/Panel/krfiletreeview.cpp b/app/Panel/krfiletreeview.cpp
+index 181fd6bba..faa9244f3 100644
+--- a/app/Panel/krfiletreeview.cpp
++++ b/app/Panel/krfiletreeview.cpp
+@@ -160,7 +160,7 @@ void KrFileTreeView::dropEvent(QDropEvent *event)
+         return;
+     }
+ 
+-    FileSystemProvider::instance().startDropFiles(event, destination);
++    FileSystemProvider::instance().startDropFiles(event, destination, this);
+ }
+ 
+ void KrFileTreeView::slotExpanded(const QModelIndex &baseIndex)
+diff --git a/app/Panel/krpanel.h b/app/Panel/krpanel.h
+index a6250e6f9..b0455e509 100644
+--- a/app/Panel/krpanel.h
++++ b/app/Panel/krpanel.h
+@@ -40,7 +40,7 @@ public:
+ 
+     ListPanel *const gui;
+     ListPanelFunc *const func;
+-    KrView *view;
++    KrView *view; // the view of file items in this panel
+ 
+ protected:
+     AbstractPanelManager *_manager;
+diff --git a/app/Panel/listpanel.cpp b/app/Panel/listpanel.cpp
+index fa6c5dd73..f72d07093 100644
+--- a/app/Panel/listpanel.cpp
++++ b/app/Panel/listpanel.cpp
+@@ -867,7 +867,7 @@ void ListPanel::handleDrop(QDropEvent *event, bool onView)
+     QUrl destination = QUrl(virtualPath());
+     destination.setPath(destination.path() + '/' + destinationDir);
+ 
+-    func->files()->dropFiles(destination, event);
++    func->files()->dropFiles(destination, event, view->widget());
+ 
+     if (KConfigGroup(krConfig, "Look&Feel").readEntry("UnselectBeforeOperation", _UnselectBeforeOperation)) {
+         KrPanel *p = dragFromThisPanel ? this : otherPanel();
+@@ -878,7 +878,7 @@ void ListPanel::handleDrop(QDropEvent *event, bool onView)
+ 
+ void ListPanel::handleDrop(const QUrl &destination, QDropEvent *event)
+ {
+-    func->files()->dropFiles(destination, event);
++    func->files()->dropFiles(destination, event, view->widget());
+ }
+ 
+ void ListPanel::startDragging(const QStringList &names, const QPixmap &px)
+-- 
+GitLab
+
+
+From 7b2322ace2b443d15f66445c022c64730669817f Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 14:48:19 +0200
+Subject: [PATCH 50/63] Fix click on system tray icon does not toggle window
+ state
+
+Same bugfix in KTorrent with more detailed description: network/ktorrent!114
+---
+ app/krusader.cpp | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/app/krusader.cpp b/app/krusader.cpp
+index 825efbfa6..3f67988c2 100644
+--- a/app/krusader.cpp
++++ b/app/krusader.cpp
+@@ -245,6 +245,11 @@ Krusader::Krusader(const QCommandLineParser &parser)
+         show();
+     }
+ 
++    if (sysTray) {
++        // (re)set main window for system tray, Qt looses the window handle after showing the window
++        sysTray->setAssociatedWindow(this->windowHandle());
++    }
++
+     KrTrashHandler::startWatcher();
+     isStarting = false;
+ 
+-- 
+GitLab
+
+
+From a6db846f06fb2eeb3910aa18f524486e2d02b03a Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 20 Jun 2024 16:32:18 +0200
+Subject: [PATCH 51/63] Fix file filter of import and export dialog for user
+ actions
+
+---
+ app/ActionMan/useractionpage.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/app/ActionMan/useractionpage.cpp b/app/ActionMan/useractionpage.cpp
+index 353c5f298..6e40817c2 100644
+--- a/app/ActionMan/useractionpage.cpp
++++ b/app/ActionMan/useractionpage.cpp
+@@ -35,7 +35,7 @@
+ #include "useractionlistview.h"
+ 
+ // This is the filter in the QFileDialog of Import/Export:
+-static const KLazyLocalizedString FILE_FILTER = kli18n("*.xml|XML files\n*|All files");
++static constexpr KLazyLocalizedString FILE_FILTER = kli18n("XML files (*.xml);;All files (*)");
+ 
+ UserActionPage::UserActionPage(QWidget *parent)
+     : QWidget(parent)
+-- 
+GitLab
+
+
+From a36cf199694e3891c7cbefa3b2f1cd1cee6afc4c Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Wed, 26 Jun 2024 12:38:10 +0200
+Subject: [PATCH 52/63] Fix unmounted filesystems not shown in MountMan
+
+---
+ app/MountMan/kmountmangui.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/app/MountMan/kmountmangui.cpp b/app/MountMan/kmountmangui.cpp
+index 576254d45..7bb3e57a0 100644
+--- a/app/MountMan/kmountmangui.cpp
++++ b/app/MountMan/kmountmangui.cpp
+@@ -238,10 +238,10 @@ void KMountManGUI::getSpaceData()
+         timer.start(100); // 100ms Maybe this should be configurable
+         loop.exec();
+     }
+-    updateList();
+ 
+     this->setCursor(Qt::ArrowCursor);
+     addNonMounted();
++    updateList();
+ }
+ 
+ void KMountManGUI::freeSpaceResult(KJob *job, fsData data)
+-- 
+GitLab
+
+
+From 89698d4af5b7fde4f7d84d0781d67011f0a77c1c Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Wed, 26 Jun 2024 16:01:30 +0200
+Subject: [PATCH 53/63] Synchronizer: Fix showing rename dialog for existing
+ desting file
+
+---
+ app/Synchronizer/synchronizer.cpp | 113 ++++++++++++++----------------
+ 1 file changed, 54 insertions(+), 59 deletions(-)
+
+diff --git a/app/Synchronizer/synchronizer.cpp b/app/Synchronizer/synchronizer.cpp
+index cd70a12e9..3d3d4443b 100644
+--- a/app/Synchronizer/synchronizer.cpp
++++ b/app/Synchronizer/synchronizer.cpp
+@@ -1319,69 +1319,64 @@ void Synchronizer::slotTaskFinished(KJob *job)
+             }
+         } else {
+             if (job->error() == KIO::ERR_FILE_ALREADY_EXIST && item->task() != TT_DELETE) {
+-
+-                if (autoSkip)
++                if (autoSkip) {
+                     break;
++                }
+ 
+-                if (auto *askUserActionInterface = dynamic_cast<KIO::AskUserActionInterface *>(job->uiDelegate())) {
+-                    auto renameSignal = &KIO::AskUserActionInterface::askUserRenameResult;
+-                    QEventLoop loop;
+-                    QObject::connect(askUserActionInterface, renameSignal, job, [=, this]( KIO::RenameDialog_Result result, const QUrl & newUrl, KJob *parentJob) {
+-                        Q_ASSERT(parentJob == job);
++                QUrl srcUrl, destUrl;
++                KIO::filesize_t srcSize, destSize;
++                time_t srcTime, destTime;
++                if (item->task() == TT_COPY_TO_LEFT) {
++                    srcUrl = rightURL;
++                    destUrl = leftURL;
++                    srcSize = item->rightSize();
++                    destSize = item->leftSize();
++                    srcTime = item->rightDate();
++                    destTime = item->leftDate();
++                } else {
++                    srcUrl = leftURL;
++                    destUrl = rightURL;
++                    srcSize = item->leftSize();
++                    destSize = item->rightSize();
++                    srcTime = item->leftDate();
++                    destTime = item->rightDate();
++                }
+ 
+-                        switch (result) {
+-                        case KIO::Result_Rename:
+-                            item->setDestination(newUrl.toString());
+-                            executeTask(item);
+-                            inTaskFinished--;
+-                            return;
+-                        case KIO::Result_Overwrite:
+-                            item->setOverWrite();
+-                            executeTask(item);
+-                            inTaskFinished--;
+-                            return;
+-                        case KIO::Result_OverwriteAll:
+-                            overWrite = true;
+-                            executeTask(item);
+-                            inTaskFinished--;
+-                            return;
+-                        case KIO::Result_AutoSkip:
+-                            autoSkip = true;
+-                        case KIO::Result_Skip:
+-                        default:
+-                            break;
+-                        }
+-                    });
+-                    connect(askUserActionInterface, renameSignal, &loop, &QEventLoop::quit );
+-                    //TODO: What is the correct call here?
+-                    if (item->task() == TT_COPY_TO_LEFT) {
+-                        askUserActionInterface->askUserRename(job,
+-                                                i18n("File Already Exists"),
+-                                                rightURL,
+-                                                leftURL,
+-                                                KIO::RenameDialog_Overwrite | KIO::RenameDialog_Skip | KIO::RenameDialog_MultipleItems,
+-                                                item->rightSize(),
+-                                                item->leftSize(),
+-                                                QDateTime(),
+-                                                QDateTime(),
+-                                                QDateTime::fromSecsSinceEpoch(static_cast<uint>(item->rightDate())),
+-                                                QDateTime::fromSecsSinceEpoch(static_cast<uint>(item->leftDate())));
+-                    } else {
+-                        askUserActionInterface->askUserRename(job,
+-                                                i18n("File Already Exists"),
+-                                                leftURL,
+-                                                rightURL,
+-                                                KIO::RenameDialog_Overwrite | KIO::RenameDialog_Skip | KIO::RenameDialog_MultipleItems,
+-                                                item->leftSize(),
+-                                                item->rightSize(),
+-                                                QDateTime(),
+-                                                QDateTime(),
+-                                                QDateTime::fromSecsSinceEpoch(static_cast<uint>(item->leftDate())),
+-                                                QDateTime::fromSecsSinceEpoch(static_cast<uint>(item->rightDate())));
+-                    }
+-                    // Wait till the quit the quit signal is emmited above, is this enough??
+-                    loop.exec();
++                KIO::RenameDialog dialog(syncDlgWidget,
++                                         i18n("File Already Exists"),
++                                         srcUrl,
++                                         destUrl,
++                                         KIO::RenameDialog_Overwrite | KIO::RenameDialog_Skip | KIO::RenameDialog_MultipleItems,
++                                         srcSize,
++                                         destSize,
++                                         QDateTime(),
++                                         QDateTime(),
++                                         QDateTime::fromSecsSinceEpoch(static_cast<uint>(srcTime)),
++                                         QDateTime::fromSecsSinceEpoch(static_cast<uint>(destTime)));
++
++                switch (dialog.exec()) {
++                case KIO::Result_Rename:
++                    item->setDestination(dialog.newDestUrl().toString());
++                    executeTask(item);
++                    inTaskFinished--;
++                    return;
++                case KIO::Result_Overwrite:
++                    item->setOverWrite();
++                    executeTask(item);
++                    inTaskFinished--;
++                    return;
++                case KIO::Result_OverwriteAll:
++                    overWrite = true;
++                    executeTask(item);
++                    inTaskFinished--;
++                    return;
++                case KIO::Result_AutoSkip:
++                    autoSkip = true;
++                case KIO::Result_Skip:
++                default:
++                    break;
+                 }
++
+                 break;
+             }
+ 
+-- 
+GitLab
+
+
+From a622b7587070be315dee17021ae2a181c5b3a9c9 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Wed, 26 Jun 2024 16:51:50 +0200
+Subject: [PATCH 54/63] Synchronizer: Fix showing skip dialog for non-existing
+ source file
+
+---
+ app/Synchronizer/synchronizer.cpp | 32 +++++++++++--------------------
+ 1 file changed, 11 insertions(+), 21 deletions(-)
+
+diff --git a/app/Synchronizer/synchronizer.cpp b/app/Synchronizer/synchronizer.cpp
+index 3d3d4443b..56446c5bd 100644
+--- a/app/Synchronizer/synchronizer.cpp
++++ b/app/Synchronizer/synchronizer.cpp
+@@ -1404,27 +1404,17 @@ void Synchronizer::slotTaskFinished(KJob *job)
+                     break;
+                 }
+ 
+-                if (auto *askUserActionInterface = dynamic_cast<KIO::AskUserActionInterface *>(job->uiDelegate())) {
+-                    auto skipSignal = &KIO::AskUserActionInterface::askUserSkipResult;
+-                    QEventLoop loop;
+-                    QObject::connect(askUserActionInterface, skipSignal, job, [=, this](KIO::SkipDialog_Result result, KJob *parentJob) {
+-                        Q_ASSERT(parentJob == job);
+-
+-                        switch (result) {
+-                        case KIO::Result_Cancel:
+-                            executeTask(item); /* simply retry */
+-                            inTaskFinished--;
+-                            return;
+-                        case KIO::Result_AutoSkip:
+-                            autoSkip = true;
+-                        default:
+-                            break;
+-                        }
+-                    });
+-                    connect(askUserActionInterface, skipSignal, &loop, &QEventLoop::quit );
+-                    askUserActionInterface->askUserSkip(job, KIO::SkipDialog_MultipleItems, error);
+-                    // Wait till the quit the quit signal is emmited above, is this enough??
+-                    loop.exec();
++                KIO::SkipDialog dialog(syncDlgWidget, KIO::SkipDialog_MultipleItems, error);
++
++                switch (dialog.exec()) {
++                case KIO::Result_Cancel:
++                    executeTask(item); /* simply retry */
++                    inTaskFinished--;
++                    return;
++                case KIO::Result_AutoSkip:
++                    autoSkip = true;
++                default:
++                    break;
+                 }
+             }
+         }
+-- 
+GitLab
+
+
+From e22211c21ea3b83cca57ad40bc9dd86f1e11dc62 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Tue, 2 Jul 2024 16:03:42 +0200
+Subject: [PATCH 55/63] Move usage of FileSystem/sizecalculator.h closer to
+ usage
+
+---
+ app/GUI/krremoteencodingmenu.cpp | 1 -
+ app/Panel/panelfunc.h            | 3 ++-
+ 2 files changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/app/GUI/krremoteencodingmenu.cpp b/app/GUI/krremoteencodingmenu.cpp
+index 4f36f8ab5..0a4a8841e 100644
+--- a/app/GUI/krremoteencodingmenu.cpp
++++ b/app/GUI/krremoteencodingmenu.cpp
+@@ -21,7 +21,6 @@
+ #include <KLocalizedString>
+ #include <KProtocolManager>
+ 
+-#include "../FileSystem/sizecalculator.h"
+ #include "../Panel/krpanel.h"
+ #include "../Panel/panelfunc.h"
+ #include "../compat.h"
+diff --git a/app/Panel/panelfunc.h b/app/Panel/panelfunc.h
+index 5a94eb805..4e435172a 100644
+--- a/app/Panel/panelfunc.h
++++ b/app/Panel/panelfunc.h
+@@ -20,12 +20,13 @@
+ #include <KJob>
+ #include <KService>
+ 
++#include "../FileSystem/sizecalculator.h"
++
+ class DirHistoryQueue;
+ class FileItem;
+ class FileSystem;
+ class KrViewItem;
+ class ListPanel;
+-class SizeCalculator;
+ 
+ class ListPanelFunc : public QObject
+ {
+-- 
+GitLab
+
+
+From 4f80d0290771f73f7f54b0be2412eec3b91f0098 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Tue, 2 Jul 2024 16:57:21 +0200
+Subject: [PATCH 56/63] Set C++17 as explicit C++ standard for compiler
+
+---
+ CMakeLists.txt | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index a9307923f..9b60b5628 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -5,6 +5,8 @@ project(krusader)
+ set(VERSION "2.9.0-dev")
+ set(RELEASE_NAME "Bleeding Edge")
+ 
++set(CMAKE_CXX_STANDARD 17)
++
+ set(MIN_QT_VERSION "6.4.0")
+ set(KF6_MIN_VERSION "5.240.0")
+ 
+-- 
+GitLab
+
+
+From ec10b7d141c74bb22cf3d4c5eb4050e91ec917e8 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Tue, 2 Jul 2024 16:31:57 +0200
+Subject: [PATCH 57/63] Replace qAsConst() by std::as_const() globally
+
+---
+ app/Archive/abstractthreadedjob.cpp      |  2 +-
+ app/GUI/kfnkeys.cpp                      |  2 +-
+ app/JobMan/jobman.cpp                    | 10 +++++-----
+ app/KViewer/lister.cpp                   |  4 ++--
+ app/Konfigurator/kgprotocols.cpp         |  2 +-
+ app/Konfigurator/konfiguratoritems.cpp   |  2 +-
+ app/Panel/PanelView/krinterbriefview.cpp |  2 +-
+ app/Panel/PanelView/krinterview.cpp      |  4 ++--
+ app/Panel/PanelView/krviewfactory.cpp    |  4 ++--
+ app/Panel/PanelView/listmodel.cpp        |  4 ++--
+ app/Panel/dirhistoryqueue.cpp            |  2 +-
+ app/Panel/krlayoutfactory.cpp            |  4 ++--
+ app/Panel/listpanelactions.cpp           |  2 +-
+ app/Panel/panelcontextmenu.cpp           |  2 +-
+ app/Search/krsearchdialog.cpp            |  2 +-
+ app/UserAction/useraction.cpp            |  6 +++---
+ app/krservices.cpp                       |  2 +-
+ 17 files changed, 28 insertions(+), 28 deletions(-)
+
+diff --git a/app/Archive/abstractthreadedjob.cpp b/app/Archive/abstractthreadedjob.cpp
+index 2b73c4daa..1a789f7ff 100644
+--- a/app/Archive/abstractthreadedjob.cpp
++++ b/app/Archive/abstractthreadedjob.cpp
+@@ -546,7 +546,7 @@ bool AbstractJobThread::uploadTempFiles()
+             QList<QUrl> urlList;
+             QDir tempDir(_tempDirName);
+             QStringList list = tempDir.entryList();
+-            for (const QString &name : qAsConst(list)) {
++            for (const QString &name : std::as_const(list)) {
+                 if (name == "." || name == "..")
+                     continue;
+                 QUrl url = QUrl::fromLocalFile(_tempDirName).adjusted(QUrl::StripTrailingSlash);
+diff --git a/app/GUI/kfnkeys.cpp b/app/GUI/kfnkeys.cpp
+index 6fcfd77d2..852a4e3d8 100644
+--- a/app/GUI/kfnkeys.cpp
++++ b/app/GUI/kfnkeys.cpp
+@@ -35,7 +35,7 @@ KFnKeys::KFnKeys(QWidget *parent, KrMainWindow *mainWindow)
+     layout->setSpacing(0);
+ 
+     int pos = 0;
+-    for (QPair<QPushButton *, QPair<QAction *, const QString &>> entry : qAsConst(buttonList)) {
++    for (QPair<QPushButton *, QPair<QAction *, const QString &>> entry : std::as_const(buttonList)) {
+         layout->addWidget(entry.first, 0, pos++);
+     }
+     layout->activate();
+diff --git a/app/JobMan/jobman.cpp b/app/JobMan/jobman.cpp
+index f7b741930..57417cb5a 100644
+--- a/app/JobMan/jobman.cpp
++++ b/app/JobMan/jobman.cpp
+@@ -232,7 +232,7 @@ bool JobMan::waitForJobs(bool waitForUserInput)
+     m_messageBox->addButton(QMessageBox::Abort);
+     m_messageBox->addButton(QMessageBox::Cancel);
+     m_messageBox->setDefaultButton(QMessageBox::Cancel);
+-    for (KrJob *job : qAsConst(m_jobs))
++    for (KrJob *job : std::as_const(m_jobs))
+         connect(job, &KrJob::terminated, this, &JobMan::slotUpdateMessageBox);
+     slotUpdateMessageBox();
+ 
+@@ -242,7 +242,7 @@ bool JobMan::waitForJobs(bool waitForUserInput)
+ 
+     // accepted -> cancel all jobs
+     if (result == QMessageBox::Abort) {
+-        for (KrJob *job : qAsConst(m_jobs)) {
++        for (KrJob *job : std::as_const(m_jobs)) {
+             job->cancel();
+         }
+         return true;
+@@ -295,7 +295,7 @@ void JobMan::slotControlActionTriggered()
+     if (!anyRunning && m_queueMode) {
+         m_jobs.first()->start();
+     } else {
+-        for (KrJob *job : qAsConst(m_jobs)) {
++        for (KrJob *job : std::as_const(m_jobs)) {
+             if (anyRunning)
+                 job->pause();
+             else
+@@ -327,7 +327,7 @@ void JobMan::slotTerminated(KrJob *krJob)
+     // NOTE: ignoring queue mode here. We assume that if queue mode is turned off, the user created
+     // jobs which were not already started with a "queue" option and still wants queue behaviour.
+     if (!m_jobs.isEmpty() && !jobsAreRunning()) {
+-        for (KrJob *job : qAsConst(m_jobs)) {
++        for (KrJob *job : std::as_const(m_jobs)) {
+             if (!job->isPaused()) {
+                 // start next job
+                 job->start();
+@@ -409,7 +409,7 @@ void JobMan::cleanupMenu()
+ void JobMan::updateUI()
+ {
+     int totalPercent = 0;
+-    for (KrJob *job : qAsConst(m_jobs)) {
++    for (KrJob *job : std::as_const(m_jobs)) {
+         totalPercent += job->percent();
+     }
+     const bool hasJobs = !m_jobs.isEmpty();
+diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
+index 0e635318c..86170af2d 100644
+--- a/app/KViewer/lister.cpp
++++ b/app/KViewer/lister.cpp
+@@ -266,7 +266,7 @@ void ListerTextArea::getScreenPosition(const int position, int &x, int &y)
+ {
+     x = position;
+     y = 0;
+-    for (const QString &row : qAsConst(_rowContent)) {
++    for (const QString &row : std::as_const(_rowContent)) {
+         const int rowLen = row.length() + 1;
+         if (x < rowLen) {
+             return;
+@@ -2064,7 +2064,7 @@ void Lister::print()
+ 
+         painter.setFont(fixedFont);
+         int yOffset = normalFontHeight + 1;
+-        for (const QString &row : qAsConst(rows)) {
++        for (const QString &row : std::as_const(rows)) {
+             painter.drawText(0, yOffset + fixedFontHeight, row);
+             yOffset += fixedFontHeight;
+         }
+diff --git a/app/Konfigurator/kgprotocols.cpp b/app/Konfigurator/kgprotocols.cpp
+index 60aa3db92..34eb09357 100644
+--- a/app/Konfigurator/kgprotocols.cpp
++++ b/app/Konfigurator/kgprotocols.cpp
+@@ -127,7 +127,7 @@ void KgProtocols::loadProtocols()
+     QStringList protocols = KProtocolInfo::protocols();
+     protocols.sort();
+ 
+-    for (const QString &protocol : qAsConst(protocols)) {
++    for (const QString &protocol : std::as_const(protocols)) {
+         QUrl u;
+         u.setScheme(protocol);
+         if (KProtocolManager::inputType(u) == KProtocolInfo::T_FILESYSTEM) {
+diff --git a/app/Konfigurator/konfiguratoritems.cpp b/app/Konfigurator/konfiguratoritems.cpp
+index 1f0d98fc0..52130e4e3 100644
+--- a/app/Konfigurator/konfiguratoritems.cpp
++++ b/app/Konfigurator/konfiguratoritems.cpp
+@@ -128,7 +128,7 @@ void KonfiguratorCheckBox::addDep(KonfiguratorCheckBox *dep)
+ 
+ void KonfiguratorCheckBox::updateDeps()
+ {
+-    for (KonfiguratorCheckBox *dep : qAsConst(deps))
++    for (KonfiguratorCheckBox *dep : std::as_const(deps))
+         dep->setEnabled(isChecked());
+ }
+ 
+diff --git a/app/Panel/PanelView/krinterbriefview.cpp b/app/Panel/PanelView/krinterbriefview.cpp
+index 3c1a9d3b7..0691bf241 100644
+--- a/app/Panel/PanelView/krinterbriefview.cpp
++++ b/app/Panel/PanelView/krinterbriefview.cpp
+@@ -404,7 +404,7 @@ void KrInterBriefView::paintEvent(QPaintEvent *e)
+     area.adjust(horizontalOffset(), verticalOffset(), horizontalOffset(), verticalOffset());
+     intersectionSet(area, intersectVector);
+ 
+-    for (const QModelIndex &mndx : qAsConst(intersectVector)) {
++    for (const QModelIndex &mndx : std::as_const(intersectVector)) {
+         option.rect = visualRect(mndx);
+         painter.save();
+ 
+diff --git a/app/Panel/PanelView/krinterview.cpp b/app/Panel/PanelView/krinterview.cpp
+index 5f0ed8b65..61d7e3384 100644
+--- a/app/Panel/PanelView/krinterview.cpp
++++ b/app/Panel/PanelView/krinterview.cpp
+@@ -358,7 +358,7 @@ KIO::filesize_t KrInterView::calcSize()
+ KIO::filesize_t KrInterView::calcSelectedSize()
+ {
+     KIO::filesize_t size = 0;
+-    for (const FileItem *fileitem : qAsConst(_selection)) {
++    for (const FileItem *fileitem : std::as_const(_selection)) {
+         size += fileitem->getSize();
+     }
+     return size;
+@@ -367,7 +367,7 @@ KIO::filesize_t KrInterView::calcSelectedSize()
+ QList<QUrl> KrInterView::selectedUrls()
+ {
+     QList<QUrl> list;
+-    for (const FileItem *fileitem : qAsConst(_selection)) {
++    for (const FileItem *fileitem : std::as_const(_selection)) {
+         list << fileitem->getUrl();
+     }
+     return list;
+diff --git a/app/Panel/PanelView/krviewfactory.cpp b/app/Panel/PanelView/krviewfactory.cpp
+index 5af2eec98..fc2e8949a 100644
+--- a/app/Panel/PanelView/krviewfactory.cpp
++++ b/app/Panel/PanelView/krviewfactory.cpp
+@@ -86,12 +86,12 @@ void KrViewFactory::registerView(KrViewInstance *inst)
+ 
+ KrViewInstance *KrViewFactory::viewInstance(int id)
+ {
+-    for (KrViewInstance *inst : qAsConst(m_registeredViews)) {
++    for (KrViewInstance *inst : std::as_const(m_registeredViews)) {
+         if (inst->id() == id)
+             return inst;
+     }
+ 
+-    for (KrViewInstance *inst_dflt : qAsConst(m_registeredViews)) {
++    for (KrViewInstance *inst_dflt : std::as_const(m_registeredViews)) {
+         if (inst_dflt->id() == m_defaultViewId)
+             return inst_dflt;
+     }
+diff --git a/app/Panel/PanelView/listmodel.cpp b/app/Panel/PanelView/listmodel.cpp
+index ec2d44069..ac93f4420 100644
+--- a/app/Panel/PanelView/listmodel.cpp
++++ b/app/Panel/PanelView/listmodel.cpp
+@@ -291,7 +291,7 @@ void ListModel::sort(int column, Qt::SortOrder order)
+     }
+ 
+     QModelIndexList newPersistentList;
+-    for (const QModelIndex &mndx : qAsConst(oldPersistentList))
++    for (const QModelIndex &mndx : std::as_const(oldPersistentList))
+         newPersistentList << index(changeMap[mndx.row()], mndx.column());
+ 
+     changePersistentIndexList(oldPersistentList, newPersistentList);
+@@ -329,7 +329,7 @@ QModelIndex ListModel::addItem(FileItem *fileitem)
+     }
+ 
+     QModelIndexList newPersistentList;
+-    for (const QModelIndex &mndx : qAsConst(oldPersistentList)) {
++    for (const QModelIndex &mndx : std::as_const(oldPersistentList)) {
+         int newRow = mndx.row();
+         if (newRow >= insertIndex)
+             newRow++;
+diff --git a/app/Panel/dirhistoryqueue.cpp b/app/Panel/dirhistoryqueue.cpp
+index b333a688d..cb93fd5bd 100644
+--- a/app/Panel/dirhistoryqueue.cpp
++++ b/app/Panel/dirhistoryqueue.cpp
+@@ -121,7 +121,7 @@ void DirHistoryQueue::save(KConfigGroup cfg)
+     saveCurrentItem();
+ 
+     QList<QUrl> urls;
+-    for (const QUrl &url : qAsConst(_urlQueue)) {
++    for (const QUrl &url : std::as_const(_urlQueue)) {
+         // make sure no passwords are permanently stored
+         QUrl safeUrl(url);
+         safeUrl.setPassword(QString());
+diff --git a/app/Panel/krlayoutfactory.cpp b/app/Panel/krlayoutfactory.cpp
+index a28ca2544..b7eeced9c 100644
+--- a/app/Panel/krlayoutfactory.cpp
++++ b/app/Panel/krlayoutfactory.cpp
+@@ -142,7 +142,7 @@ QStringList KrLayoutFactory::layoutNames()
+     if (parseFiles()) {
+         getLayoutNames(_mainDoc, names);
+ 
+-        for (const QDomDocument &doc : qAsConst(_extraDocs))
++        for (const QDomDocument &doc : std::as_const(_extraDocs))
+             getLayoutNames(doc, names);
+     }
+ 
+@@ -174,7 +174,7 @@ QLayout *KrLayoutFactory::createLayout(QString layoutName)
+ 
+         layoutRoot = findLayout(_mainDoc, layoutName);
+         if (layoutRoot.isNull()) {
+-            for (const QDomDocument &doc : qAsConst(_extraDocs)) {
++            for (const QDomDocument &doc : std::as_const(_extraDocs)) {
+                 layoutRoot = findLayout(doc, layoutName);
+                 if (!layoutRoot.isNull())
+                     break;
+diff --git a/app/Panel/listpanelactions.cpp b/app/Panel/listpanelactions.cpp
+index 4c953b633..e0cd5e258 100644
+--- a/app/Panel/listpanelactions.cpp
++++ b/app/Panel/listpanelactions.cpp
+@@ -145,7 +145,7 @@ void ListPanelActions::activePanelChanged()
+ void ListPanelActions::guiUpdated()
+ {
+     QList<QAction *> actions;
+-    for (QAction *action : qAsConst(setViewActions))
++    for (QAction *action : std::as_const(setViewActions))
+         actions << action;
+     static_cast<KrMainWindow *>(_mainWindow)->plugActionList("view_actionlist", actions);
+ }
+diff --git a/app/Panel/panelcontextmenu.cpp b/app/Panel/panelcontextmenu.cpp
+index e0f92d30f..506fb8be4 100644
+--- a/app/Panel/panelcontextmenu.cpp
++++ b/app/Panel/panelcontextmenu.cpp
+@@ -64,7 +64,7 @@ void PanelContextMenu::addCompressAndExtractPluginActions()
+         return metaData.pluginId() == "compressfileitemaction" || metaData.pluginId() == "extractfileitemaction";
+     });
+ 
+-    for (const KPluginMetaData &jsonMetadata : qAsConst(jsonPlugins)) {
++    for (const KPluginMetaData &jsonMetadata : std::as_const(jsonPlugins)) {
+         KPluginFactory *pluginFactory = KPluginFactory::loadFactory(jsonMetadata.fileName()).plugin;
+ 
+         auto *abstractPlugin = pluginFactory->create<KAbstractFileItemActionPlugin>();
+diff --git a/app/Search/krsearchdialog.cpp b/app/Search/krsearchdialog.cpp
+index 90146ae56..bd8d76b8e 100644
+--- a/app/Search/krsearchdialog.cpp
++++ b/app/Search/krsearchdialog.cpp
+@@ -85,7 +85,7 @@ public:
+     void clear()
+     {
+         emit cleared();
+-        for (FileItem *fileitem : qAsConst(_fileItems))
++        for (FileItem *fileitem : std::as_const(_fileItems))
+             delete fileitem;
+         _fileItems.clear();
+         _foundText.clear();
+diff --git a/app/UserAction/useraction.cpp b/app/UserAction/useraction.cpp
+index c48bf6801..6c043667b 100644
+--- a/app/UserAction/useraction.cpp
++++ b/app/UserAction/useraction.cpp
+@@ -73,7 +73,7 @@ void UserAction::populateMenu(KActionMenu *menu, const QUrl *currentURL)
+     QMap<QString, KActionMenu *> categoryMap;
+     QList<KrAction *> uncategorised;
+ 
+-    for (KrAction *action : qAsConst(_actions)) {
++    for (KrAction *action : std::as_const(_actions)) {
+         const QString category = action->category();
+         if (!action->isEnabled())
+             continue;
+@@ -98,7 +98,7 @@ void UserAction::populateMenu(KActionMenu *menu, const QUrl *currentURL)
+         menu->addAction(mapIter.value());
+     }
+ 
+-    for (KrAction *action : qAsConst(uncategorised)) {
++    for (KrAction *action : std::as_const(uncategorised)) {
+         menu->addAction(action);
+     };
+ }
+@@ -249,7 +249,7 @@ bool UserAction::writeActionFile()
+     QDomDocument doc = createEmptyDoc();
+     QDomElement root = doc.documentElement();
+ 
+-    for (const QString &name : qAsConst(_deletedActions)) {
++    for (const QString &name : std::as_const(_deletedActions)) {
+         QDomElement element = doc.createElement("deletedAction");
+         element.setAttribute("name", name);
+         root.appendChild(element);
+diff --git a/app/krservices.cpp b/app/krservices.cpp
+index 4028d8b24..6865f336d 100644
+--- a/app/krservices.cpp
++++ b/app/krservices.cpp
+@@ -70,7 +70,7 @@ QString KrServices::fullPathName(const QString &name, QString confName)
+ 
+ QString KrServices::chooseFullPathName(QStringList names, const QString &confName)
+ {
+-    for (const QString &name : qAsConst(names)) {
++    for (const QString &name : std::as_const(names)) {
+         QString foundTool = KrServices::fullPathName(name, confName);
+         if (!foundTool.isEmpty()) {
+             return foundTool;
+-- 
+GitLab
+
+
+From b4dd5f31ebe6ecfdb597f7aea8d7fa35537ddb60 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Wed, 3 Jul 2024 18:00:30 +0200
+Subject: [PATCH 58/63] Add KrBookmarkHandler as parent of KBookmarkManager
+
+---
+ app/BookMan/krbookmarkhandler.cpp | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/app/BookMan/krbookmarkhandler.cpp b/app/BookMan/krbookmarkhandler.cpp
+index ccb39f033..b69ec7c7e 100644
+--- a/app/BookMan/krbookmarkhandler.cpp
++++ b/app/BookMan/krbookmarkhandler.cpp
+@@ -70,7 +70,7 @@ KrBookmarkHandler::KrBookmarkHandler(KrMainWindow *mainWindow)
+ 
+     // create bookmark manager
+     QString filename = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1Char('/') + BOOKMARKS_FILE;
+-    manager = new KBookmarkManager(filename);
++    manager = new KBookmarkManager(filename, this);
+ 
+     connect(manager, &KBookmarkManager::changed, this, &KrBookmarkHandler::bookmarksChanged);
+ 
+-- 
+GitLab
+
+
+From d489d08e6e5c554ebd51ab44f29369aacd6a9ce0 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Wed, 3 Jul 2024 18:04:31 +0200
+Subject: [PATCH 59/63] Register "Bring Main Window to Top" action as global
+ shortcut with default 'Meta+k'
+
+---
+ CMakeLists.txt     | 1 +
+ app/CMakeLists.txt | 1 +
+ app/krusader.cpp   | 5 ++++-
+ 3 files changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 9b60b5628..3b62bc957 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -49,6 +49,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
+   CoreAddons
+   Config
+   DocTools
++  GlobalAccel
+   I18n
+   IconThemes
+   ItemViews
+diff --git a/app/CMakeLists.txt b/app/CMakeLists.txt
+index 0ae8f84c3..766aa3fa5 100644
+--- a/app/CMakeLists.txt
++++ b/app/CMakeLists.txt
+@@ -69,6 +69,7 @@ target_link_libraries(krusader
+                       GUI
+                       Archive
+                       JobMan
++                      KF6::GlobalAccel
+                       KF6::Notifications
+                       KF6::Parts
+                       KF6::WindowSystem
+diff --git a/app/krusader.cpp b/app/krusader.cpp
+index 3f67988c2..24681763a 100644
+--- a/app/krusader.cpp
++++ b/app/krusader.cpp
+@@ -25,6 +25,7 @@
+ #include <KAcceleratorManager>
+ #include <KActionCollection>
+ #include <KCursor>
++#include <KGlobalAccel>
+ #include <KLocalizedString>
+ #include <KMessageBox>
+ #include <KSharedConfig>
+@@ -35,8 +36,8 @@
+ #include <KWindowConfig>
+ #include <KWindowSystem>
+ #include <KXMLGUIFactory>
+-#include <utility>
+ #include <kx11extras.h>
++#include <utility>
+ 
+ #include "defaults.h"
+ #include "kractions.h"
+@@ -342,6 +343,8 @@ void Krusader::setupActions()
+     actionCollection()->addAction("bring_main_window_to_top", bringToTopAct);
+     connect(bringToTopAct, &QAction::triggered, this, &Krusader::moveToTop);
+ 
++    KGlobalAccel::setGlobalShortcut(bringToTopAct, QKeySequence(Qt::META | Qt::Key_K));
++
+     KrActions::setupActions(this);
+     _krActions = new KrActions(this);
+     _viewActions = new ViewActions(this, this);
+-- 
+GitLab
+
+
+From 0a4919ae51a2ab81d50c3aea8e462df251f60471 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Wed, 3 Jul 2024 18:06:52 +0200
+Subject: [PATCH 60/63] Fix window focus of "Bring Main Window to Top" in
+ Wayland
+
+In tests it still did not work: Only the taskbar entry is activated but the
+window is not focused and not moved to top.
+---
+ app/krusader.cpp | 5 ++++-
+ 1 file changed, 4 insertions(+), 1 deletion(-)
+
+diff --git a/app/krusader.cpp b/app/krusader.cpp
+index 24681763a..4a141400c 100644
+--- a/app/krusader.cpp
++++ b/app/krusader.cpp
+@@ -565,7 +565,10 @@ void Krusader::moveToTop()
+     if (isHidden())
+         show();
+ 
+-    KX11Extras::forceActiveWindow(winId());
++    KWindowSystem::activateWindow(windowHandle());
++    if (KWindowSystem::isPlatformX11()) {
++        KX11Extras::forceActiveWindow(winId());
++    }
+ }
+ 
+ bool Krusader::isRunning()
+-- 
+GitLab
+
+
+From 523e80aae23cdc871b41f40273369f0995afbeee Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Thu, 4 Jul 2024 18:57:19 +0200
+Subject: [PATCH 61/63] Add workaround to show main window with "Bring Main
+ Window to Top" action in Wayland
+
+---
+ app/krusader.cpp | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/app/krusader.cpp b/app/krusader.cpp
+index 4a141400c..8462fe9f3 100644
+--- a/app/krusader.cpp
++++ b/app/krusader.cpp
+@@ -565,7 +565,12 @@ void Krusader::moveToTop()
+     if (isHidden())
+         show();
+ 
+-    KWindowSystem::activateWindow(windowHandle());
++    QWindow *window = windowHandle();
++    KWindowSystem::activateWindow(window);
++    if (!window->isActive() && KrGlobal::isWaylandPlatform) {
++        window->hide();
++        window->show();
++    }
+     if (KWindowSystem::isPlatformX11()) {
+         KX11Extras::forceActiveWindow(winId());
+     }
+-- 
+GitLab
+
+
+From 3e306e7dcbec2de2c4a997e73d372e12c8c871cd Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Fri, 5 Jul 2024 13:25:39 +0200
+Subject: [PATCH 62/63] MountMan: Implement calculating free space of
+ filesystems without explicit waiting
+
+---
+ app/MountMan/kmountmangui.cpp | 29 +++++++++++++++++------------
+ 1 file changed, 17 insertions(+), 12 deletions(-)
+
+diff --git a/app/MountMan/kmountmangui.cpp b/app/MountMan/kmountmangui.cpp
+index 7bb3e57a0..69d489143 100644
+--- a/app/MountMan/kmountmangui.cpp
++++ b/app/MountMan/kmountmangui.cpp
+@@ -45,6 +45,8 @@
+ #define MTAB "/etc/mtab"
+ #endif
+ 
++constexpr int fileSystemsFreeSpaceTimeout = 5'000; // msec
++
+ KMountManGUI::KMountManGUI(KMountMan *mntMan)
+     : QDialog(mntMan->parentWindow)
+     , mountMan(mntMan)
+@@ -209,7 +211,8 @@ void KMountManGUI::getSpaceData()
+ 
+     // Potentially long running
+     this->setCursor(Qt::WaitCursor);
+-    int started = 0;
++    auto *signalsToWaitFor = new QAtomicInteger(0);
++    auto *eventLoop = new QEventLoop(this);
+     for (auto &it : mounted) {
+         // don't bother with invalid file systems
+         if (mountMan->invalidFilesystem(it->mountType())) {
+@@ -224,20 +227,22 @@ void KMountManGUI::getSpaceData()
+         KIO::FileSystemFreeSpaceJob *job = KIO::fileSystemFreeSpace(QUrl::fromLocalFile(it->mountPoint()));
+         Q_ASSERT(job != nullptr);
+ 
+-        connect(job, &KIO::FileSystemFreeSpaceJob::finished, this,
+-                [this, data](KJob *job){ this->freeSpaceResult(job, data); });
+-        started++;
++        signalsToWaitFor->operator++();
++        connect(job, &KIO::FileSystemFreeSpaceJob::finished, this, [this, data, eventLoop, signalsToWaitFor](KJob *job) {
++            this->freeSpaceResult(job, data);
++
++            if (!signalsToWaitFor->deref()) {
++                eventLoop->quit(); // all done
++            }
++        });
+     }
++
+     QTimer timer;
+     timer.setSingleShot(true);
+-    QEventLoop loop;
+-    connect(&timer, &QTimer::timeout, &loop, &QEventLoop::quit);
++    connect(&timer, &QTimer::timeout, eventLoop, &QEventLoop::quit);
++    timer.start(fileSystemsFreeSpaceTimeout);
+ 
+-    //TODO: How better to wait for all to finish?
+-    while (started != fileSystems.size()) {
+-        timer.start(100); // 100ms Maybe this should be configurable
+-        loop.exec();
+-    }
++    eventLoop->exec(); // wait for signals until quit()
+ 
+     this->setCursor(Qt::ArrowCursor);
+     addNonMounted();
+@@ -248,7 +253,7 @@ void KMountManGUI::freeSpaceResult(KJob *job, fsData data)
+ {
+     if (!job->error()) {
+         KIO::FileSystemFreeSpaceJob *freeSpaceJob = qobject_cast<KIO::FileSystemFreeSpaceJob *>(job);
+-        Q_ASSERT(job != nullptr);
++        Q_ASSERT(freeSpaceJob != nullptr);
+         // Set the missing information, with the assumption the caller already set the rest
+         data.setTotalBlks(freeSpaceJob->size() / 1024);
+         data.setFreeBlks(freeSpaceJob->availableSize() / 1024);
+-- 
+GitLab
+
+
+From d972a77d9f16053c3eaf20195427ded2e3bbf09f Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Fri, 5 Jul 2024 15:36:05 +0200
+Subject: [PATCH 63/63] MountMan: Speed up updating mount points by caching
+ Solid devices
+
+---
+ app/MountMan/kmountman.cpp    | 37 +++++++++++++++++++++++------------
+ app/MountMan/kmountman.h      |  5 +++--
+ app/MountMan/kmountmangui.cpp | 28 +++++++++++++++-----------
+ app/MountMan/kmountmangui.h   |  2 +-
+ 4 files changed, 46 insertions(+), 26 deletions(-)
+
+diff --git a/app/MountMan/kmountman.cpp b/app/MountMan/kmountman.cpp
+index 852fc45dc..3f596e8e5 100644
+--- a/app/MountMan/kmountman.cpp
++++ b/app/MountMan/kmountman.cpp
+@@ -419,33 +419,46 @@ void KMountMan::delayedPerformAction(const QAction *action)
+ }
+ 
+ QString KMountMan::findUdiForPath(const QString &path, const Solid::DeviceInterface::Type &expType)
++{
++    const std::function deviceGetter = []() {
++        return Solid::Device::listFromType(Solid::DeviceInterface::Block);
++    };
++    return findUdiForPath(path, expType, deviceGetter);
++}
++
++QString KMountMan::findUdiForPath(const QString &path, const Solid::DeviceInterface::Type &expType, const std::function<QList<Solid::Device>()> &devicesGetter)
+ {
+     KMountPoint::List current = KMountPoint::currentMountPoints();
+-    KMountPoint::List possible = KMountPoint::possibleMountPoints();
+-    QExplicitlySharedDataPointer<KMountPoint> mp = findInListByMntPoint(current, path);
+-    if (!(bool)mp) {
+-        mp = findInListByMntPoint(possible, path);
+-        if (!(bool)mp)
+-            return QString();
++    QExplicitlySharedDataPointer<KMountPoint> mountPoint = findInListByMntPoint(current, path);
++
++    if (!static_cast<bool>(mountPoint)) {
++        KMountPoint::List possible = KMountPoint::possibleMountPoints();
++        mountPoint = findInListByMntPoint(possible, path);
++        if (!static_cast<bool>(mountPoint))
++            return {}; // cannot not find mount point for path
++    }
++    const QString mountPath = QDir(mountPoint->mountedFrom()).canonicalPath();
++    if (mountPath.isEmpty()) {
++        return {}; // mount point does not have a device (e.g. for virtual kernel filesystems)
+     }
+-    QString dev = QDir(mp->mountedFrom()).canonicalPath();
+-    QList<Solid::Device> storageDevices = Solid::Device::listFromType(Solid::DeviceInterface::Block);
+ 
+-    for (int p = storageDevices.count() - 1; p >= 0; p--) {
++    QList<Solid::Device> storageDevices = devicesGetter();
++
++    for (qsizetype p = storageDevices.count() - 1; p >= 0; p--) {
+         Solid::Device device = storageDevices[p];
+         QString udi = device.udi();
+ 
+         auto *sb = device.as<Solid::Block>();
+         if (sb) {
+-            QString devb = QDir(sb->device()).canonicalPath();
++            QString devicePath = QDir(sb->device()).canonicalPath();
+             if (expType != Solid::DeviceInterface::Unknown && !device.isDeviceInterface(expType))
+                 continue;
+-            if (devb == dev)
++            if (devicePath == mountPath)
+                 return udi;
+         }
+     }
+ 
+-    return QString();
++    return {}; // device not found
+ }
+ 
+ QString KMountMan::pathForUdi(const QString &udi)
+diff --git a/app/MountMan/kmountman.h b/app/MountMan/kmountman.h
+index e7c8376c2..2dc0290fb 100644
+--- a/app/MountMan/kmountman.h
++++ b/app/MountMan/kmountman.h
+@@ -59,8 +59,9 @@ public:
+     explicit KMountMan(QWidget *parent);
+     ~KMountMan();
+ 
+-    // NOTE: this function needs some time (~50msec)
+-    QString findUdiForPath(const QString &path, const Solid::DeviceInterface::Type &expType = Solid::DeviceInterface::Unknown);
++    // NOTE: this function may needs some time (~200msec)
++    static QString findUdiForPath(const QString &path, const Solid::DeviceInterface::Type &expType = Solid::DeviceInterface::Unknown);
++    static QString findUdiForPath(const QString &path, const Solid::DeviceInterface::Type &expType, const std::function<QList<Solid::Device>()> &devicesGetter);
+     QString pathForUdi(const QString &udi);
+ 
+ public slots:
+diff --git a/app/MountMan/kmountmangui.cpp b/app/MountMan/kmountmangui.cpp
+index 69d489143..8ba314006 100644
+--- a/app/MountMan/kmountmangui.cpp
++++ b/app/MountMan/kmountmangui.cpp
+@@ -289,18 +289,21 @@ void KMountManGUI::addNonMounted()
+     }
+ }
+ 
+-void KMountManGUI::addItemToMountList(KrTreeWidget *lst, fsData &fs)
++void KMountManGUI::addItemToMountList(KrTreeWidget *lst, fsData &fs, const QList<Solid::Device> &blockDevices) const
+ {
+-    Solid::Device device(mountMan->findUdiForPath(fs.mntPoint(), Solid::DeviceInterface::StorageAccess));
++    const std::function deviceGetter = [blockDevices]() {
++        return blockDevices;
++    };
++    const auto udi = KMountMan::findUdiForPath(fs.mntPoint(), Solid::DeviceInterface::StorageAccess, deviceGetter);
++    Solid::Device device(udi);
+ 
+     if (cbShowOnlyRemovable->isChecked() && !mountMan->removable(device))
+         return;
++    const bool mtd = fs.mounted();
+ 
+-    bool mtd = fs.mounted();
+-
+-    QString tSize = QString("%1").arg(KIO::convertSizeFromKiB(fs.totalBlks()));
+-    QString fSize = QString("%1").arg(KIO::convertSizeFromKiB(fs.freeBlks()));
+-    QString sPrct = QString("%1%").arg(100 - (fs.usedPerct()));
++    const QString tSize = QString("%1").arg(KIO::convertSizeFromKiB(fs.totalBlks()));
++    const QString fSize = QString("%1").arg(KIO::convertSizeFromKiB(fs.freeBlks()));
++    const QString sPrct = QString("%1%").arg(100 - (fs.usedPerct()));
+     auto *item = new QTreeWidgetItem(lst);
+     item->setText(0, fs.name());
+     item->setText(1, fs.type());
+@@ -308,14 +311,14 @@ void KMountManGUI::addItemToMountList(KrTreeWidget *lst, fsData &fs)
+     item->setText(3, (mtd ? tSize : QString("N/A")));
+     item->setText(4, (mtd ? fSize : QString("N/A")));
+     item->setText(5, (mtd ? sPrct : QString("N/A")));
++    const auto *vol = device.as<Solid::StorageVolume>();
+ 
+-    auto *vol = device.as<Solid::StorageVolume>();
+     QString iconName;
+-
+     if (device.isValid())
+         iconName = device.icon();
+     else if (mountMan->networkFilesystem(fs.type()))
+         iconName = "folder-remote";
++
+     QStringList overlays;
+     if (mtd) {
+         overlays << "emblem-mounted";
+@@ -341,8 +344,11 @@ void KMountManGUI::updateList()
+     mountList->clearSelection();
+     mountList->clear();
+ 
+-    for (auto &fileSystem : fileSystems)
+-        addItemToMountList(mountList, fileSystem);
++    // getting the list of devices is slow: do it one time for all items
++    const QList<Solid::Device> blockDevices = Solid::Device::listFromType(Solid::DeviceInterface::Block);
++    for (auto &fileSystem : fileSystems) {
++        addItemToMountList(mountList, fileSystem, blockDevices);
++    }
+ 
+     currentItem = mountList->topLevelItem(currentIdx);
+     for (int i = 0; i < mountList->topLevelItemCount(); i++) {
+diff --git a/app/MountMan/kmountmangui.h b/app/MountMan/kmountmangui.h
+index 2bb7f1b27..fa065eee2 100644
+--- a/app/MountMan/kmountmangui.h
++++ b/app/MountMan/kmountmangui.h
+@@ -60,7 +60,7 @@ protected slots:
+ 
+ protected:
+     QLayout *createMainPage(); // creator of the main page - filesystems
+-    void addItemToMountList(KrTreeWidget *lst, fsData &fs);
++    void addItemToMountList(KrTreeWidget *lst, fsData &fs, const QList<Solid::Device> &blockDevices) const;
+     fsData *getFsData(QTreeWidgetItem *item);
+     QString getMntPoint(QTreeWidgetItem *item);
+     void addNonMounted();
 -- 
 GitLab
 
