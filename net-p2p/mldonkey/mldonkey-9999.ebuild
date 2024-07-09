@@ -1,9 +1,9 @@
 # Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit autotools desktop flag-o-matic toolchain-funcs git-r3
+inherit autotools flag-o-matic toolchain-funcs
 
 DESCRIPTION="Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface"
 HOMEPAGE="http://mldonkey.sourceforge.net/ https://github.com/ygrek/mldonkey"
@@ -17,7 +17,7 @@ IUSE="bittorrent doc fasttrack gd gnutella magic +ocamlopt upnp"
 
 RDEPEND="dev-lang/perl
 	dev-ml/camlp4:=
-	gd? ( media-libs/gd[truetype] )
+	gd? ( media-libs/gd:2=[truetype] )
 	magic? ( sys-apps/file )
 	upnp? (
 		net-libs/libnatpmp
@@ -85,13 +85,13 @@ src_configure() {
 		$(use_enable magic) \
 		$(use_enable upnp upnp-natpmp) \
 		--disable-force-upnp-natpmp \
+		--disable-gui
 		${myconf[@]}
 }
 
 src_compile() {
 	export OCAMLRUNPARAM="l=256M"
 	emake -j1 # Upstream bug #48
-
 	emake utils
 }
 
