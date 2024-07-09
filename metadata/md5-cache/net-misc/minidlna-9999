@@ -12,4 +12,4 @@ PROPERTIES=live
 RDEPEND=dev-db/sqlite:3 media-libs/flac:= media-libs/libexif media-libs/libid3tag:= media-libs/libjpeg-turbo:= media-libs/libogg media-libs/libvorbis media-video/ffmpeg:= elibc_musl? ( sys-libs/queue-standalone ) zeroconf? ( net-dns/avahi ) acct-group/minidlna acct-user/minidlna virtual/tmpfiles
 SLOT=0
 _eclasses_=gnuconfig	a397adda6984a4c423e28ac274c1ba98	toolchain-funcs	e56c7649b804f051623c8bc1a1c44084	multilib	c19072c3cd7ac5cb21de013f7e9832e0	libtool	5f49a16f67f81bdf873e3d1f10b10001	autotools	dc70c1dc473b68317fc4a86f5fbfc57d	git-r3	fbb2889c81f3a05910c1524db69425c1	tmpfiles	216aa76c3a6fcb5d893c23a0de86048f
-_md5_=a231fec159ad7a563e91894011d77f67
+_md5_=e2721329fd8fdcdbfb53d3129b3d8fee

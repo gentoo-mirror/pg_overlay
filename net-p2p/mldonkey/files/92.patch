@@ -1,0 +1,23 @@
+From 50fc63fb125e848ca238bd23e55e9d596b3339a8 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Chuso=20P=C3=A9rez?= <github@chuso.net>
+Date: Wed, 10 Jan 2024 15:51:15 +0100
+Subject: [PATCH] Fix incompatible pointer type in charsetstubs.c
+
+The ml_iconv function in charsetstubs.c was passing a const char ** input buffer to iconv, but iconv expects it to be a char **.
+---
+ src/utils/lib/charsetstubs.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/utils/lib/charsetstubs.c b/src/utils/lib/charsetstubs.c
+index 73bba69ca..a3a5d8634 100644
+--- a/src/utils/lib/charsetstubs.c
++++ b/src/utils/lib/charsetstubs.c
+@@ -1204,7 +1204,7 @@ ml_iconv (iconv_t cd,
+           char    **outbuf,
+           size_t  *outbytes_left)
+ {
+-    return iconv (cd, inbuf, inbytes_left, outbuf, outbytes_left);
++    return iconv (cd, (char **)inbuf, inbytes_left, outbuf, outbytes_left);
+ }
+ 
+ #ifndef EILSEQ
