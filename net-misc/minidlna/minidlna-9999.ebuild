@@ -41,7 +41,7 @@ PATCHES=(
 	"${FILESDIR}"/minidlna-gentoo-artwork.patch
 	# fix https://sourceforge.net/p/minidlna/bugs/297/
 	"${FILESDIR}"/minidlna_listen_interface.patch
-	"${FILESDIR}"ffmpeg7.patch
+	"${FILESDIR}"/ffmpeg7.patch
 )
 
 src_prepare() {
