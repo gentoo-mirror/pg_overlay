@@ -1,7 +1,7 @@
 From fb46fd04c96029fae7e2e0c8f37f9fe674f1e6d8 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 01/63] Change foreach constructs in C++ for ranged loops
+Subject: [PATCH 01/64] Change foreach constructs in C++ for ranged loops
 
 Qt6 will forego the foreach macro so for switching to KF6+Qt6 the
 foreach constructs need to be fixed
@@ -655,7 +655,7 @@ GitLab
 From 73cf9ebf9b9606fb28f7e37d7dc35839bab83d4e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Wed, 8 May 2024 21:10:06 +0300
-Subject: [PATCH 02/63] KMessageBox::xxxYesNo has been deprecated
+Subject: [PATCH 02/64] KMessageBox::xxxYesNo has been deprecated
 
 Update the code to use the new construct KMessageBox::xxxTwoActions,
 deprecated by this commit
@@ -906,7 +906,7 @@ GitLab
 From 6e68248b3e0c857137d8e3f7f89d4c8579ae1b5b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:26:34 +0300
-Subject: [PATCH 03/63] Adapt CMakeFiles to kf6 and qt6 builds
+Subject: [PATCH 03/64] Adapt CMakeFiles to kf6 and qt6 builds
 
 Changes include:
 * Changing the KF5 namespace to KF6
@@ -1616,7 +1616,7 @@ GitLab
 From 5fc764f68e82fce565ce4bf2c34dceeb06f10c2e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:52:30 +0300
-Subject: [PATCH 04/63] Fix UI file
+Subject: [PATCH 04/64] Fix UI file
 
 Should use the Kf6 headers
 ---
@@ -1657,7 +1657,7 @@ GitLab
 From 8719c1f565c0706c8e33c5c2a150351265072c4c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:54:32 +0300
-Subject: [PATCH 05/63] Fix the ISO plugin
+Subject: [PATCH 05/64] Fix the ISO plugin
 
 Adapt to the new qt6 APIs -> toSecsSinceEpoch instead of toTime_t and a
 .data() call on QStrings since QT_NO_CAST_FROM_BYTEARRAY will be
@@ -1782,7 +1782,7 @@ GitLab
 From edde1036c4dfb35499363d5d553ba2181588e954 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:55:33 +0300
-Subject: [PATCH 06/63] Update the krarc plugin
+Subject: [PATCH 06/64] Update the krarc plugin
 
 Mostly remove the pre 5.96 QT code check, no point in carrying it
 arround
@@ -2632,7 +2632,7 @@ GitLab
 From 5612e3fb82cf78cc145f4abdb54c2b20d87baab7 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:01:52 +0300
-Subject: [PATCH 07/63] Fix the kr7z encryption code
+Subject: [PATCH 07/64] Fix the kr7z encryption code
 
 setupChildProcess() is not available anymore for KProcess, should use
 setChildProcessModifier() instead
@@ -2690,7 +2690,7 @@ GitLab
 From b7ee52f7739c04170f48d2fa4f5a4433d7689991 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:03:46 +0300
-Subject: [PATCH 08/63] Change the screen geometry code to QScreen
+Subject: [PATCH 08/64] Change the screen geometry code to QScreen
 
 TODO: Is primaryScreen OK here?
 
@@ -2742,7 +2742,7 @@ GitLab
 From 3d1815deab6745641427d2bd45da13677981c7c2 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:05:26 +0300
-Subject: [PATCH 09/63] Update the wallet calling code
+Subject: [PATCH 09/64] Update the wallet calling code
 
 QApplication::desktop() is not available anymore, use effectiveWinId
 ---
@@ -2775,7 +2775,7 @@ GitLab
 From 7e9b1bdefb569521c56d6399e00f6a66f69ad696 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:11:29 +0300
-Subject: [PATCH 10/63] Change MidButton to MiddleButton
+Subject: [PATCH 10/64] Change MidButton to MiddleButton
 
 Item renamed in Qt6
 ---
@@ -2844,7 +2844,7 @@ GitLab
 From ed3f7a6cbd24008d3275ec2669afc28488e4c51e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:18:48 +0300
-Subject: [PATCH 11/63] The addition operator has been deprecate for key
+Subject: [PATCH 11/64] The addition operator has been deprecate for key
  sequences
 
 Switch to the or operator
@@ -3236,7 +3236,7 @@ GitLab
 From d2073ff9ae76c7f005820e9df9f0be66f381f15a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:21:21 +0300
-Subject: [PATCH 12/63] Change from I18N_NOOP to KLazyLocalizedString
+Subject: [PATCH 12/64] Change from I18N_NOOP to KLazyLocalizedString
 
 I18N_NOOP has been already removed, switch to KLazyLocalizedString
 ---
@@ -3439,7 +3439,7 @@ GitLab
 From d5fd0a302aae316b4e221dd1dcc207e17f544286 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:28:31 +0300
-Subject: [PATCH 13/63] Fix QString consistency problem
+Subject: [PATCH 13/64] Fix QString consistency problem
 
 Won't compile because char * is not implicitly cast to QString anymore,
 should be at least UTF-8 strings
@@ -3654,7 +3654,7 @@ GitLab
 From 8a7289c7ddc5ec329d67ce7d9542b04c08ce8c6e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:36:27 +0300
-Subject: [PATCH 14/63] QDateTime::fromTime_t -> QDateTime::fromSecsSinceEpoch
+Subject: [PATCH 14/64] QDateTime::fromTime_t -> QDateTime::fromSecsSinceEpoch
  And viceversa.
 
 The API has been completely removed in Qt6
@@ -3836,7 +3836,7 @@ GitLab
 From 05b80c1236eb24581db448cac7300ed92eb6fb3b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 23:02:40 +0300
-Subject: [PATCH 15/63] QStandardPaths::DataLocation has been deprecated
+Subject: [PATCH 15/64] QStandardPaths::DataLocation has been deprecated
 
 use QStandardPaths::AppDataLocation instead
 ---
@@ -3891,7 +3891,7 @@ GitLab
 From 3d26db5c010d07e47a6281d3e85a1ef59aa11822 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:39:42 +0300
-Subject: [PATCH 16/63] Switch from KWindowSystem to KxxxExtras
+Subject: [PATCH 16/64] Switch from KWindowSystem to KxxxExtras
 
 For windowing API calls
 ---
@@ -3984,7 +3984,7 @@ GitLab
 From f4d8c9988cbb0577809bddfa5ef88cab2a158cc9 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:43:43 +0300
-Subject: [PATCH 17/63] Switch to new QRegularExpressionValidator API
+Subject: [PATCH 17/64] Switch to new QRegularExpressionValidator API
 
 ---
  app/Konfigurator/kgpanel.cpp | 2 +-
@@ -4010,7 +4010,7 @@ GitLab
 From 410898354c5bd1f0d02a97520dafb9757877408f Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:49:18 +0300
-Subject: [PATCH 18/63] BrowserExtension has been renamed to
+Subject: [PATCH 18/64] BrowserExtension has been renamed to
  NavigationExtension
 
 BrowserExtension has been renamed to NavigationExtension
@@ -4167,7 +4167,7 @@ GitLab
 From a724f21b0cce69e428fe11bfea0411861514146c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:06 +0300
-Subject: [PATCH 19/63] Update to the new KIO interface
+Subject: [PATCH 19/64] Update to the new KIO interface
 
 Includes new header files and adapting to the new API
 
@@ -4891,7 +4891,7 @@ GitLab
 From 849a8be5592013c8fd478a0509be3fced2015147 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:39 +0300
-Subject: [PATCH 20/63] Adapt to the new KBookmarkManager interface
+Subject: [PATCH 20/64] Adapt to the new KBookmarkManager interface
 
 ---
  app/BookMan/krbookmarkhandler.cpp | 6 +++---
@@ -4949,7 +4949,7 @@ GitLab
 From f95631fed878799b0881afb89f20dc790ac7a20b Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:48:11 +0300
-Subject: [PATCH 21/63] QByteArray does not implicitly convert to char * for
+Subject: [PATCH 21/64] QByteArray does not implicitly convert to char * for
  libc calls
 
 data() needs to be explicity called or constData() in some cases
@@ -5357,7 +5357,7 @@ GitLab
 From 9a251678f59884761551b95c81af0ca2c3078482 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:01:27 +0300
-Subject: [PATCH 22/63] QString/QChar inconsitencies
+Subject: [PATCH 22/64] QString/QChar inconsitencies
 
 char also doesn't cast to QChar implicitly
 ---
@@ -5428,7 +5428,7 @@ GitLab
 From 83b7afa5ff00b449708b2728e83bdc3efd2e16ee Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:03:53 +0300
-Subject: [PATCH 23/63] Implement the = operator for PredefinedDevice
+Subject: [PATCH 23/64] Implement the = operator for PredefinedDevice
 
 ---
  app/Splitter/splittergui.cpp | 5 ++++-
@@ -5457,7 +5457,7 @@ GitLab
 From c5007c266b3546c1b10918456e0ea91dcb7f6f08 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:07:30 +0300
-Subject: [PATCH 24/63] Updaters for QAbstractItemView
+Subject: [PATCH 24/64] Updaters for QAbstractItemView
 
 The virtual viewOptions() method that previously returned a
 QStyleOptionViewItem object has been renamed to initViewItemOption, and
@@ -5505,7 +5505,7 @@ GitLab
 From 1b5fbcdf49180ddc793a3bb0ad2047048efe0a2a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:23 +0300
-Subject: [PATCH 25/63] Change to new QLocale
+Subject: [PATCH 25/64] Change to new QLocale
 
 ---
  app/KViewer/lister.cpp | 2 +-
@@ -5531,7 +5531,7 @@ GitLab
 From 5bc335479a381f77b12c2abbf7d3b849627c9bca Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:55 +0300
-Subject: [PATCH 26/63] Update KViewer to the new KPart creation code
+Subject: [PATCH 26/64] Update KViewer to the new KPart creation code
 
 The new code should use KParts/PartLoader rather than KService
 ---
@@ -5687,7 +5687,7 @@ GitLab
 From 3221c04928ca2427880ea4cc3f2247e5c95ffa36 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:12:17 +0300
-Subject: [PATCH 27/63] Use the new QRegExp API
+Subject: [PATCH 27/64] Use the new QRegExp API
 
 ---
  app/Locate/locate.cpp | 2 +-
@@ -5713,7 +5713,7 @@ GitLab
 From af723164100f32afe96ee5a346cd92545e5efb07 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:13:05 +0300
-Subject: [PATCH 28/63] QPalette enums have changed
+Subject: [PATCH 28/64] QPalette enums have changed
 
 Use Background instead of Window
 ---
@@ -5754,7 +5754,7 @@ GitLab
 From f7815080e696d5fee533b5fe199042e2d2427c01 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:30:03 +0300
-Subject: [PATCH 29/63] Add missing headers
+Subject: [PATCH 29/64] Add missing headers
 
 Remove some too
 ---
@@ -5875,7 +5875,7 @@ GitLab
 From 0bd84d780e2878a1ef62b8da974f1986dd95ca7c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 30/63] Fix the crash at startup - KToolBarPopupAction needs
+Subject: [PATCH 30/64] Fix the crash at startup - KToolBarPopupAction needs
  popupMenu()
 
 Don't use menu() in Qt6
@@ -5906,7 +5906,7 @@ GitLab
 From 0b68c044372bb122c80e2a56242e5e90d4b8e919 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 31/63] Use the kf6 part for the dock
+Subject: [PATCH 31/64] Use the kf6 part for the dock
 
 Fix terminal to kf6 part
 ---
@@ -5941,7 +5941,7 @@ GitLab
 From 8f8c2d3f3f424db9f57443eb49a0b96d553949b1 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:55:35 +0300
-Subject: [PATCH 32/63] Adapt printDialog to qt6
+Subject: [PATCH 32/64] Adapt printDialog to qt6
 
 ---
  app/KViewer/lister.cpp | 2 +-
@@ -5967,7 +5967,7 @@ GitLab
 From 529ecf2fcc00ecc8a0113be1fa3c13e07c5b2a22 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:58:37 +0300
-Subject: [PATCH 33/63] Codec fixes - especially KrViewer
+Subject: [PATCH 33/64] Codec fixes - especially KrViewer
 
 Can't apply a codec(decode to unicode) to a QTextStream anymore
 ---
@@ -6092,7 +6092,7 @@ GitLab
 From acf7383bc9096074b4e171a3c0aca5c3736d1885 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 18:58:41 +0300
-Subject: [PATCH 34/63] Fix the loading of the layout from resource
+Subject: [PATCH 34/64] Fix the loading of the layout from resource
 
 QResource seems to return empty file, it's easier to stream it
 ---
@@ -6167,7 +6167,7 @@ GitLab
 From feebdc6f379a27b80d3f41c41f8c168348592dc6 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:04:40 +0300
-Subject: [PATCH 35/63] ListJob doesn't have a percent signal anymore
+Subject: [PATCH 35/64] ListJob doesn't have a percent signal anymore
 
 The name of the signal is percentChanged() now
 ---
@@ -6194,7 +6194,7 @@ GitLab
 From 0858ffd6eeee710a53a36c0fe38f3db93f6e9a9e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:05:13 +0300
-Subject: [PATCH 36/63] Action in MountMan should use popupmenu not menu
+Subject: [PATCH 36/64] Action in MountMan should use popupmenu not menu
 
 ---
  app/MountMan/kmountman.cpp | 12 ++++++------
@@ -6257,7 +6257,7 @@ GitLab
 From 69c75e55207fe3ede786e53b10eef63de79d7768 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:19:36 +0300
-Subject: [PATCH 37/63] Working version of the freespace info
+Subject: [PATCH 37/64] Working version of the freespace info
 
 This code will just wait for all the KIO:Job to finish getting the free
 space info and then it will continue.
@@ -6344,7 +6344,7 @@ GitLab
 From 84a6552df433ab1c97e74b6bad3bd3ebdaa72deb Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:04:53 +0300
-Subject: [PATCH 38/63] Bookmark manager doesn't provide a slot for editing
+Subject: [PATCH 38/64] Bookmark manager doesn't provide a slot for editing
  bookmarks
 
 Instead it provides an action through KBookmarkMenu that can be used
@@ -6437,7 +6437,7 @@ GitLab
 From 962d95ef0c2e075a7fb12bc29222a5b6cc60cedc Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:13:57 +0300
-Subject: [PATCH 39/63] Fix the configure shortcuts dialog, switch to
+Subject: [PATCH 39/64] Fix the configure shortcuts dialog, switch to
  showConfigureShortcutsDialog
 
 KXMLGui had a refactoring where configureHsortcuts was removed and a new
@@ -6468,7 +6468,7 @@ GitLab
 From d2e83c5af2a2981814dfdb18119a393f527911b8 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:17:47 +0300
-Subject: [PATCH 40/63] KRArk switch to QRegularExpression
+Subject: [PATCH 40/64] KRArk switch to QRegularExpression
 
 QRegExp has been deprecated in Qt6
 ---
@@ -6504,7 +6504,7 @@ GitLab
 From 51d8e741e9aade8cb011dd39b8a5d77f75ae49ff Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:18:41 +0300
-Subject: [PATCH 41/63] KrArc Fix the default value for getPath
+Subject: [PATCH 41/64] KrArc Fix the default value for getPath
 
 nullptr can't convert to QUrl::FormattingOptions so use  QUrl::None
 ---
@@ -6531,7 +6531,7 @@ GitLab
 From 2a9b6c63962963930226c4157c37e0458d5a71bd Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:12 +0300
-Subject: [PATCH 42/63] KrArc remove deprecate Qt5 support code
+Subject: [PATCH 42/64] KrArc remove deprecate Qt5 support code
 
 Remove the ifdef code that supported old versions, can't work in Kf6
 anymore
@@ -6835,7 +6835,7 @@ GitLab
 From 3e41a71b6299530a38f0f90ee12ee0fe148ffff2 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:59 +0300
-Subject: [PATCH 43/63] KrArc add the AuthInfo header from KIO
+Subject: [PATCH 43/64] KrArc add the AuthInfo header from KIO
 
 Required in Kf6
 ---
@@ -6861,7 +6861,7 @@ GitLab
 From 5dab27c415a347a8da67fa99eb3bfa8de5c66cfb Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:22:36 +0300
-Subject: [PATCH 44/63] Replace KIO::ERR_SLAVE_DEFINED
+Subject: [PATCH 44/64] Replace KIO::ERR_SLAVE_DEFINED
  withKIO::ERR_WORKER_DEFINED
 
 KIO::ERR_SLAVE_DEFINED has already been deprecated in Kf5
@@ -6889,7 +6889,7 @@ GitLab
 From 0ea7dedbc8fb5503274b79caca686b050f81c534 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:29:24 +0300
-Subject: [PATCH 45/63] Fix FreeBSD C++ build
+Subject: [PATCH 45/64] Fix FreeBSD C++ build
 
 std::mem_fun_ref has been deprecated - replace with mem_fn, also
 std::not1 cannot be used with std::mem_fn
@@ -6934,7 +6934,7 @@ GitLab
 From 661ab81148dcfa20c5c0294e279a4b187e3a675a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:12:56 +0300
-Subject: [PATCH 46/63] Fix CI build with kf6
+Subject: [PATCH 46/64] Fix CI build with kf6
 
 Move all the frameworks version to kf6, same with qt to qt6.
 Add required kstatusnotifier
@@ -7020,7 +7020,7 @@ GitLab
 From c981c972d55ad77113dc36b09bc8bceecd0b4622 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:53:06 +0300
-Subject: [PATCH 47/63] docbook DCOP is not a general entity anymore in Kf6
+Subject: [PATCH 47/64] docbook DCOP is not a general entity anymore in Kf6
 
 Temporarily don't use DCOP as entity, just expand it
 ---
@@ -7066,7 +7066,7 @@ GitLab
 From bd99d40b35eea3b2f1964df1dad80bdf78b6a869 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 12:06:17 +0200
-Subject: [PATCH 48/63] Fix percent signal of various jobs not connected
+Subject: [PATCH 48/64] Fix percent signal of various jobs not connected
 
 ---
  app/JobMan/jobman.cpp     | 5 ++---
@@ -7153,7 +7153,7 @@ GitLab
 From c96bc51d305d5aa60329620fefd73db3025728e3 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 12:17:28 +0200
-Subject: [PATCH 49/63] Fix wrong position of file drop menu in Wayland
+Subject: [PATCH 49/64] Fix wrong position of file drop menu in Wayland
 
 ---
  app/FileSystem/defaultfilesystem.cpp  | 5 +++--
@@ -7335,7 +7335,7 @@ GitLab
 From 7b2322ace2b443d15f66445c022c64730669817f Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 14:48:19 +0200
-Subject: [PATCH 50/63] Fix click on system tray icon does not toggle window
+Subject: [PATCH 50/64] Fix click on system tray icon does not toggle window
  state
 
 Same bugfix in KTorrent with more detailed description: network/ktorrent!114
@@ -7366,7 +7366,7 @@ GitLab
 From a6db846f06fb2eeb3910aa18f524486e2d02b03a Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 16:32:18 +0200
-Subject: [PATCH 51/63] Fix file filter of import and export dialog for user
+Subject: [PATCH 51/64] Fix file filter of import and export dialog for user
  actions
 
 ---
@@ -7393,7 +7393,7 @@ GitLab
 From a36cf199694e3891c7cbefa3b2f1cd1cee6afc4c Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 12:38:10 +0200
-Subject: [PATCH 52/63] Fix unmounted filesystems not shown in MountMan
+Subject: [PATCH 52/64] Fix unmounted filesystems not shown in MountMan
 
 ---
  app/MountMan/kmountmangui.cpp | 2 +-
@@ -7422,7 +7422,7 @@ GitLab
 From 89698d4af5b7fde4f7d84d0781d67011f0a77c1c Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 16:01:30 +0200
-Subject: [PATCH 53/63] Synchronizer: Fix showing rename dialog for existing
+Subject: [PATCH 53/64] Synchronizer: Fix showing rename dialog for existing
  desting file
 
 ---
@@ -7564,7 +7564,7 @@ GitLab
 From a622b7587070be315dee17021ae2a181c5b3a9c9 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 16:51:50 +0200
-Subject: [PATCH 54/63] Synchronizer: Fix showing skip dialog for non-existing
+Subject: [PATCH 54/64] Synchronizer: Fix showing skip dialog for non-existing
  source file
 
 ---
@@ -7621,7 +7621,7 @@ GitLab
 From e22211c21ea3b83cca57ad40bc9dd86f1e11dc62 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:03:42 +0200
-Subject: [PATCH 55/63] Move usage of FileSystem/sizecalculator.h closer to
+Subject: [PATCH 55/64] Move usage of FileSystem/sizecalculator.h closer to
  usage
 
 ---
@@ -7667,7 +7667,7 @@ GitLab
 From 4f80d0290771f73f7f54b0be2412eec3b91f0098 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:57:21 +0200
-Subject: [PATCH 56/63] Set C++17 as explicit C++ standard for compiler
+Subject: [PATCH 56/64] Set C++17 as explicit C++ standard for compiler
 
 ---
  CMakeLists.txt | 2 ++
@@ -7693,7 +7693,7 @@ GitLab
 From ec10b7d141c74bb22cf3d4c5eb4050e91ec917e8 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:31:57 +0200
-Subject: [PATCH 57/63] Replace qAsConst() by std::as_const() globally
+Subject: [PATCH 57/64] Replace qAsConst() by std::as_const() globally
 
 ---
  app/Archive/abstractthreadedjob.cpp      |  2 +-
@@ -8039,7 +8039,7 @@ GitLab
 From b4dd5f31ebe6ecfdb597f7aea8d7fa35537ddb60 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:00:30 +0200
-Subject: [PATCH 58/63] Add KrBookmarkHandler as parent of KBookmarkManager
+Subject: [PATCH 58/64] Add KrBookmarkHandler as parent of KBookmarkManager
 
 ---
  app/BookMan/krbookmarkhandler.cpp | 2 +-
@@ -8065,7 +8065,7 @@ GitLab
 From d489d08e6e5c554ebd51ab44f29369aacd6a9ce0 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:04:31 +0200
-Subject: [PATCH 59/63] Register "Bring Main Window to Top" action as global
+Subject: [PATCH 59/64] Register "Bring Main Window to Top" action as global
  shortcut with default 'Meta+k'
 
 ---
@@ -8136,7 +8136,7 @@ GitLab
 From 0a4919ae51a2ab81d50c3aea8e462df251f60471 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:06:52 +0200
-Subject: [PATCH 60/63] Fix window focus of "Bring Main Window to Top" in
+Subject: [PATCH 60/64] Fix window focus of "Bring Main Window to Top" in
  Wayland
 
 In tests it still did not work: Only the taskbar entry is activated but the
@@ -8168,7 +8168,7 @@ GitLab
 From 523e80aae23cdc871b41f40273369f0995afbeee Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 4 Jul 2024 18:57:19 +0200
-Subject: [PATCH 61/63] Add workaround to show main window with "Bring Main
+Subject: [PATCH 61/64] Add workaround to show main window with "Bring Main
  Window to Top" action in Wayland
 
 ---
@@ -8200,7 +8200,7 @@ GitLab
 From 3e306e7dcbec2de2c4a997e73d372e12c8c871cd Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Fri, 5 Jul 2024 13:25:39 +0200
-Subject: [PATCH 62/63] MountMan: Implement calculating free space of
+Subject: [PATCH 62/64] MountMan: Implement calculating free space of
  filesystems without explicit waiting
 
 ---
@@ -8279,7 +8279,7 @@ GitLab
 From d972a77d9f16053c3eaf20195427ded2e3bbf09f Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Fri, 5 Jul 2024 15:36:05 +0200
-Subject: [PATCH 63/63] MountMan: Speed up updating mount points by caching
+Subject: [PATCH 63/64] MountMan: Speed up updating mount points by caching
  Solid devices
 
 ---
@@ -8445,6 +8445,49 @@ index 2bb7f1b27..fa065eee2 100644
      fsData *getFsData(QTreeWidgetItem *item);
      QString getMntPoint(QTreeWidgetItem *item);
      void addNonMounted();
+-- 
+GitLab
+
+
+From 5a7d3c077b3a4fd1fd081eeae738fa2201e9e292 Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Mon, 8 Jul 2024 15:51:27 +0200
+Subject: [PATCH 64/64] KIO Iso: Create KCompressionDevice only for filename if
+ mimetype is empty
+
+---
+ plugins/iso/kiso.cpp | 8 ++++++--
+ 1 file changed, 6 insertions(+), 2 deletions(-)
+
+diff --git a/plugins/iso/kiso.cpp b/plugins/iso/kiso.cpp
+index cd1eb58aa..f28fe0083 100644
+--- a/plugins/iso/kiso.cpp
++++ b/plugins/iso/kiso.cpp
+@@ -19,10 +19,10 @@
+ #include <QMimeType>
+ #include <qplatformdefs.h>
+ 
++#include <KCompressionDevice>
+ #include <KConfig>
+ #include <KConfigGroup>
+ #include <KFilterBase>
+-#include <KCompressionDevice>
+ 
+ #include "libisofs/isofs.h"
+ #include "qfilehack.h"
+@@ -161,7 +161,11 @@ void KIso::prepareDevice(const QString &filename, const QString &mimetype, bool
+             forced = true;
+ 
+         KCompressionDevice *device;
+-        device = new KCompressionDevice(filename, COMPRESSIONTYPEFORMIMETYPE(mimetype));
++        if (mimetype.isEmpty()) {
++            device = new KCompressionDevice(filename);
++        } else {
++            device = new KCompressionDevice(filename, COMPRESSIONTYPEFORMIMETYPE(mimetype));
++        }
+         if (device->compressionType() == KCompressionDevice::None && forced) {
+             delete device;
+         } else {
 -- 
 GitLab
 
