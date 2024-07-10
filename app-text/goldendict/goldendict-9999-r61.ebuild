@@ -51,8 +51,7 @@ src_prepare() {
 	local loc_dir="${S}/locale"
 	plocale_find_changes "${loc_dir}" "" ".ts"
 	rm_loc() {
-		rm -vf "locale/${1}.ts" || die
-		sed -i "/${1}.ts/d" ${PN}.pro || die
+		rm -vf "locale/${1}.ts"
 	}
 	plocale_for_each_disabled_locale rm_loc
 

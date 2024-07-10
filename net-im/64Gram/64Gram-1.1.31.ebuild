@@ -16,7 +16,7 @@ S="${WORKDIR}/${P}-full"
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv"
-IUSE="dbus enchant +fonts +jemalloc screencast qt6 qt6-imageformats wayland webkit +X"
+IUSE="dbus enchant +fonts +jemalloc +libdispatch screencast qt6 qt6-imageformats wayland webkit +X"
 REQUIRED_USE="
 	qt6-imageformats? ( qt6 )
 "
@@ -32,7 +32,7 @@ CDEPEND="
 	dev-cpp/abseil-cpp:=
 	>=dev-cpp/glibmm-2.77:2.68
 	dev-libs/glib:2
-	dev-libs/libdispatch
+	libdispatch? ( dev-libs/libdispatch )
 	dev-libs/openssl:=
 	dev-libs/protobuf
 	dev-libs/xxhash
@@ -161,6 +161,9 @@ src_configure() {
 	# See https://bugs.gentoo.org/866055
 	append-cppflags '-DNDEBUG'
 
+	# https://github.com/telegramdesktop/tdesktop/issues/17437#issuecomment-1001160398
+	use !libdispatch && append-cppflags -DCRL_FORCE_QT
+
 	local qt=$(usex qt6 6 5)
 	local mycmakeargs=(
 		-DQT_VERSION_MAJOR=${qt}
@@ -180,6 +183,7 @@ src_configure() {
 		## KF6CoreAddons is currently unavailable in ::gentoo
 		-DCMAKE_DISABLE_FIND_PACKAGE_KF${qt}CoreAddons=$(usex qt6)
 
+		-DDESKTOP_APP_USE_LIBDISPATCH=$(usex libdispatch)
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
 		#-DDESKTOP_APP_DISABLE_WAYLAND_INTEGRATION=$(usex !wayland)
 		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
@@ -226,6 +230,12 @@ pkg_postinst() {
 		# https://github.com/desktop-app/cmake_helpers/pull/91#issuecomment-881788003
 		ewarn "Disabling USE=jemalloc on glibc systems may cause very high RAM usage!"
 		ewarn "Do NOT report issues about RAM usage without enabling this flag first."
+		ewarn
+	fi
+	if ! use libdispatch; then
+		ewarn "Disabling USE=libdispatch may cause performance degradation"
+		ewarn "due to fallback to poor QThreadPool! Please see"
+		ewarn "https://github.com/telegramdesktop/tdesktop/wiki/The-Packaged-Building-Mode"
 		ewarn
 	fi
 	if use wayland && ! use qt6; then
