@@ -1,2 +1,3 @@
 firefox-enable-addons.patch
 disable-openh264-download.patch
+mozilla-1898476-sync.patch
