@@ -1,912 +1,7 @@
-From fb46fd04c96029fae7e2e0c8f37f9fe674f1e6d8 Mon Sep 17 00:00:00 2001
-From: Valentin Manea <valentin.manea@gmail.com>
-Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 01/64] Change foreach constructs in C++ for ranged loops
-
-Qt6 will forego the foreach macro so for switching to KF6+Qt6 the
-foreach constructs need to be fixed
----
- app/Archive/abstractthreadedjob.cpp      |  4 ++--
- app/BookMan/krbookmarkhandler.cpp        |  7 +++++--
- app/Filter/generalfilter.cpp             |  4 ++--
- app/GUI/krremoteencodingmenu.cpp         |  8 ++++----
- app/GUI/mediabutton.cpp                  | 14 +++++++-------
- app/JobMan/jobman.cpp                    |  2 +-
- app/KViewer/krviewer.cpp                 | 12 ++++++------
- app/KViewer/lister.cpp                   |  4 ++--
- app/Konfigurator/kgprotocols.cpp         |  2 +-
- app/Konfigurator/konfiguratoritems.cpp   |  2 +-
- app/Panel/PanelView/krinterbriefview.cpp |  2 +-
- app/Panel/PanelView/krinterview.cpp      |  9 +++++----
- app/Panel/PanelView/krview.cpp           |  3 ++-
- app/Panel/PanelView/krviewfactory.cpp    |  4 ++--
- app/Panel/PanelView/listmodel.cpp        |  4 ++--
- app/Panel/dirhistoryqueue.cpp            |  2 +-
- app/Panel/krlayoutfactory.cpp            |  8 ++++----
- app/Panel/krpreviewpopup.cpp             |  2 +-
- app/Panel/panelcontextmenu.cpp           |  2 +-
- app/Search/krsearchdialog.cpp            |  5 +++--
- app/Synchronizer/synchronizergui.cpp     |  6 ++++--
- app/UserAction/expander.cpp              |  4 ++--
- app/UserAction/kraction.cpp              |  3 ++-
- app/UserAction/useraction.cpp            |  6 +++---
- app/actionsbase.cpp                      |  3 ++-
- app/krservices.cpp                       |  2 +-
- app/krslots.cpp                          |  8 ++++----
- app/panelmanager.cpp                     |  3 ++-
- 28 files changed, 73 insertions(+), 62 deletions(-)
-
-diff --git a/app/Archive/abstractthreadedjob.cpp b/app/Archive/abstractthreadedjob.cpp
-index 6416f5f0b..2b73c4daa 100644
---- a/app/Archive/abstractthreadedjob.cpp
-+++ b/app/Archive/abstractthreadedjob.cpp
-@@ -327,7 +327,7 @@ void AbstractJobThread::abort()
- QList<QUrl> AbstractJobThread::remoteUrls(const QUrl &baseUrl, const QStringList &files)
- {
-     QList<QUrl> urlList;
--    foreach (const QString &name, files) {
-+    for (const QString &name : files) {
-         QUrl url = baseUrl;
-         url = url.adjusted(QUrl::StripTrailingSlash);
-         url.setPath(url.path() + '/' + (name));
-@@ -546,7 +546,7 @@ bool AbstractJobThread::uploadTempFiles()
-             QList<QUrl> urlList;
-             QDir tempDir(_tempDirName);
-             QStringList list = tempDir.entryList();
--            foreach (const QString &name, list) {
-+            for (const QString &name : qAsConst(list)) {
-                 if (name == "." || name == "..")
-                     continue;
-                 QUrl url = QUrl::fromLocalFile(_tempDirName).adjusted(QUrl::StripTrailingSlash);
-diff --git a/app/BookMan/krbookmarkhandler.cpp b/app/BookMan/krbookmarkhandler.cpp
-index 65a651b35..76f6f4e0e 100644
---- a/app/BookMan/krbookmarkhandler.cpp
-+++ b/app/BookMan/krbookmarkhandler.cpp
-@@ -118,7 +118,9 @@ void KrBookmarkHandler::deleteBookmark(KrBookmark *bm)
-     if (bm->isFolder())
-         clearBookmarks(bm); // remove the child bookmarks
-     removeReferences(_root, bm);
--    foreach (QWidget *w, bm->associatedWidgets())
-+
-+    const auto widgets = bm->associatedWidgets(); 
-+    for (QWidget *w : widgets)
-         w->removeAction(bm);
-     delete bm;
- 
-@@ -546,7 +548,8 @@ void KrBookmarkHandler::clearBookmarks(KrBookmark *root, bool removeBookmarks)
-         } else if (bm->isSeparator()) {
-             delete bm;
-         } else if (removeBookmarks) {
--            foreach (QWidget *w, bm->associatedWidgets()) {
-+	    const auto widgets = bm->associatedWidgets(); 
-+            for (QWidget *w : widgets) {
-                 w->removeAction(bm);
-             }
-             delete bm;
-diff --git a/app/Filter/generalfilter.cpp b/app/Filter/generalfilter.cpp
-index 0280b9d03..2f553ef19 100644
---- a/app/Filter/generalfilter.cpp
-+++ b/app/Filter/generalfilter.cpp
-@@ -538,9 +538,9 @@ void GeneralFilter::slotDisable()
-     bool global = ofType->currentText() != i18n("Folders");
-     bool remoteOnly = false;
-     if (properties & FilterTabs::HasSearchIn) {
--        QList<QUrl> urlList = searchIn->urlList();
-+        const QList<QUrl> urlList = searchIn->urlList();
-         remoteOnly = urlList.count() != 0;
--        foreach (const QUrl &url, urlList)
-+        for (const QUrl &url : urlList)
-             if (url.scheme() == "file")
-                 remoteOnly = false;
-     }
-diff --git a/app/GUI/krremoteencodingmenu.cpp b/app/GUI/krremoteencodingmenu.cpp
-index f22287a16..c15578034 100644
---- a/app/GUI/krremoteencodingmenu.cpp
-+++ b/app/GUI/krremoteencodingmenu.cpp
-@@ -45,8 +45,8 @@ void KrRemoteEncodingMenu::slotAboutToShow()
-         loadSettings();
- 
-     // uncheck everything
--    QList<QAction *> acts = menu()->actions();
--    foreach (QAction *act, acts)
-+    const QList<QAction *> acts = menu()->actions();
-+    for (QAction *act : acts)
-         act->setChecked(false);
- 
-     QString charset = currentCharacterSet();
-@@ -59,7 +59,7 @@ void KrRemoteEncodingMenu::slotAboutToShow()
- 
-         bool found = false;
- 
--        foreach (QAction *act, acts) {
-+        for (QAction *act : acts) {
-             if (act->data().canConvert<int>()) {
-                 int idr = act->data().toInt();
- 
-@@ -73,7 +73,7 @@ void KrRemoteEncodingMenu::slotAboutToShow()
-         if (!found)
-             qWarning() << Q_FUNC_INFO << "could not find entry for charset=" << charset;
-     } else {
--        foreach (QAction *act, acts) {
-+        for (QAction *act : acts) {
-             if (act->data().canConvert<int>()) {
-                 int idr = act->data().toInt();
- 
-diff --git a/app/GUI/mediabutton.cpp b/app/GUI/mediabutton.cpp
-index 7f3dfde49..765e6d444 100644
---- a/app/GUI/mediabutton.cpp
-+++ b/app/GUI/mediabutton.cpp
-@@ -493,8 +493,8 @@ void MediaButton::eject(QString udi)
- 
- void MediaButton::slotAccessibilityChanged(bool /*accessible*/, const QString &udi)
- {
--    QList<QAction *> actionList = popupMenu->actions();
--    foreach (QAction *act, actionList) {
-+    const QList<QAction *> actionList = popupMenu->actions();
-+    for (QAction *act : actionList) {
-         if (act && act->data().canConvert<QString>() && act->data().toString() == udi) {
-             Solid::Device device(udi);
- 
-@@ -536,8 +536,8 @@ void MediaButton::slotDeviceRemoved(const QString &udi)
-     if (popupMenu->isHidden())
-         return;
- 
--    QList<QAction *> actionList = popupMenu->actions();
--    foreach (QAction *act, actionList) {
-+    const QList<QAction *> actionList = popupMenu->actions();
-+    for (QAction *act : actionList) {
-         if (act && act->data().canConvert<QString>() && act->data().toString() == udi) {
-             popupMenu->removeAction(act);
-             delete act;
-@@ -553,9 +553,9 @@ void MediaButton::slotCheckMounts()
- 
-     KMountPoint::List possibleMountList = KMountPoint::possibleMountPoints();
-     KMountPoint::List currentMountList = KMountPoint::currentMountPoints();
--    QList<QAction *> actionList = popupMenu->actions();
-+    const QList<QAction *> actionList = popupMenu->actions();
- 
--    foreach (QAction *act, actionList) {
-+    for (QAction *act : actionList) {
-         if (act && act->data().canConvert<QString>() && act->data().toString().startsWith(remotePrefix)) {
-             QString mountPoint = act->data().toString().mid(remotePrefix.length());
-             bool available = false;
-@@ -581,7 +581,7 @@ void MediaButton::slotCheckMounts()
-             QString udi = remotePrefix + path;
- 
-             QAction *correspondingAct = nullptr;
--            foreach (QAction *act, actionList) {
-+            for (QAction *act : actionList) {
-                 if (act && act->data().canConvert<QString>() && act->data().toString() == udi) {
-                     correspondingAct = act;
-                     break;
-diff --git a/app/JobMan/jobman.cpp b/app/JobMan/jobman.cpp
-index 8e9deefea..fb223dfe1 100644
---- a/app/JobMan/jobman.cpp
-+++ b/app/JobMan/jobman.cpp
-@@ -328,7 +328,7 @@ void JobMan::slotTerminated(KrJob *krJob)
-     // NOTE: ignoring queue mode here. We assume that if queue mode is turned off, the user created
-     // jobs which were not already started with a "queue" option and still wants queue behaviour.
-     if (!m_jobs.isEmpty() && !jobsAreRunning()) {
--        foreach (KrJob *job, m_jobs) {
-+        for (KrJob *job : qAsConst(m_jobs)) {
-             if (!job->isPaused()) {
-                 // start next job
-                 job->start();
-diff --git a/app/KViewer/krviewer.cpp b/app/KViewer/krviewer.cpp
-index 5ac1ca64c..ae212b86a 100644
---- a/app/KViewer/krviewer.cpp
-+++ b/app/KViewer/krviewer.cpp
-@@ -101,9 +101,9 @@ KrViewer::KrViewer(QWidget *parent)
-     addCustomMenuAction("textEditor", i18n("Text &Editor"), SLOT(editText()), Qt::CTRL + Qt::SHIFT + Qt::Key_E);
-     viewerMenu->addSeparator();
- 
--    QList<QAction *> actList = menuBar()->actions();
-+    const QList<QAction *> actList = menuBar()->actions();
-     bool hasPrint = false, hasCopy = false;
--    foreach (QAction *a, actList) {
-+    for (QAction *a : actList) {
-         if (a->shortcut().matches(printAction->shortcut()) != QKeySequence::NoMatch)
-             hasPrint = true;
-         if (a->shortcut().matches(copyAction->shortcut()) != QKeySequence::NoMatch)
-@@ -212,8 +212,8 @@ void KrViewer::createGUI(KParts::Part *part)
-     // getting the key sequences of the viewer menu
-     for (int w = 0; w != list.count(); w++) {
-         QAction *act = list[w];
--        QList<QKeySequence> sequences = act->shortcuts();
--        foreach (QKeySequence keySeq, sequences) {
-+        const QList<QKeySequence> sequences = act->shortcuts();
-+        for (QKeySequence keySeq : sequences) {
-             for (int i = 0; i < keySeq.count(); ++i) {
-                 reservedKeys.push_back(keySeq[i]);
-                 reservedKeyActions.push_back(act); // the same action many times in case of multiple shortcuts
-@@ -638,9 +638,9 @@ void KrViewer::copy()
- 
- void KrViewer::updateActions()
- {
--    QList<QAction *> actList = toolBar()->actions();
-+    const QList<QAction *> actList = toolBar()->actions();
-     bool hasPrint = false, hasCopy = false;
--    foreach (QAction *a, actList) {
-+    for (QAction *a : actList) {
-         if (a->text() == printAction->text())
-             hasPrint = true;
-         if (a->text() == copyAction->text())
-diff --git a/app/KViewer/lister.cpp b/app/KViewer/lister.cpp
-index f7cd475ba..889dbf067 100644
---- a/app/KViewer/lister.cpp
-+++ b/app/KViewer/lister.cpp
-@@ -262,7 +262,7 @@ void ListerTextArea::getScreenPosition(const int position, int &x, int &y)
- {
-     x = position;
-     y = 0;
--    foreach (const QString &row, _rowContent) {
-+    for (const QString &row : qAsConst(_rowContent)) {
-         const int rowLen = row.length() + 1;
-         if (x < rowLen) {
-             return;
-@@ -2061,7 +2061,7 @@ void Lister::print()
- 
-         painter.setFont(fixedFont);
-         int yOffset = normalFontHeight + 1;
--        foreach (const QString &row, rows) {
-+        for (const QString &row : qAsConst(rows)) {
-             painter.drawText(0, yOffset + fixedFontHeight, row);
-             yOffset += fixedFontHeight;
-         }
-diff --git a/app/Konfigurator/kgprotocols.cpp b/app/Konfigurator/kgprotocols.cpp
-index 56de83090..60aa3db92 100644
---- a/app/Konfigurator/kgprotocols.cpp
-+++ b/app/Konfigurator/kgprotocols.cpp
-@@ -127,7 +127,7 @@ void KgProtocols::loadProtocols()
-     QStringList protocols = KProtocolInfo::protocols();
-     protocols.sort();
- 
--    foreach (const QString &protocol, protocols) {
-+    for (const QString &protocol : qAsConst(protocols)) {
-         QUrl u;
-         u.setScheme(protocol);
-         if (KProtocolManager::inputType(u) == KProtocolInfo::T_FILESYSTEM) {
-diff --git a/app/Konfigurator/konfiguratoritems.cpp b/app/Konfigurator/konfiguratoritems.cpp
-index 330d9e77e..1f0d98fc0 100644
---- a/app/Konfigurator/konfiguratoritems.cpp
-+++ b/app/Konfigurator/konfiguratoritems.cpp
-@@ -128,7 +128,7 @@ void KonfiguratorCheckBox::addDep(KonfiguratorCheckBox *dep)
- 
- void KonfiguratorCheckBox::updateDeps()
- {
--    foreach (KonfiguratorCheckBox *dep, deps)
-+    for (KonfiguratorCheckBox *dep : qAsConst(deps))
-         dep->setEnabled(isChecked());
- }
- 
-diff --git a/app/Panel/PanelView/krinterbriefview.cpp b/app/Panel/PanelView/krinterbriefview.cpp
-index 3d862c970..f2e690dc6 100644
---- a/app/Panel/PanelView/krinterbriefview.cpp
-+++ b/app/Panel/PanelView/krinterbriefview.cpp
-@@ -403,7 +403,7 @@ void KrInterBriefView::paintEvent(QPaintEvent *e)
-     area.adjust(horizontalOffset(), verticalOffset(), horizontalOffset(), verticalOffset());
-     intersectionSet(area, intersectVector);
- 
--    foreach (const QModelIndex &mndx, intersectVector) {
-+    for (const QModelIndex &mndx : qAsConst(intersectVector)) {
-         option.rect = visualRect(mndx);
-         painter.save();
- 
-diff --git a/app/Panel/PanelView/krinterview.cpp b/app/Panel/PanelView/krinterview.cpp
-index f89cb523c..5f0ed8b65 100644
---- a/app/Panel/PanelView/krinterview.cpp
-+++ b/app/Panel/PanelView/krinterview.cpp
-@@ -348,7 +348,8 @@ void KrInterView::sortModeUpdated(int column, Qt::SortOrder order)
- KIO::filesize_t KrInterView::calcSize()
- {
-     KIO::filesize_t size = 0;
--    foreach (FileItem *fileitem, _model->fileItems()) {
-+    const auto fileItems = _model->fileItems();
-+    for (FileItem *fileitem : fileItems) {
-         size += fileitem->getSize();
-     }
-     return size;
-@@ -357,7 +358,7 @@ KIO::filesize_t KrInterView::calcSize()
- KIO::filesize_t KrInterView::calcSelectedSize()
- {
-     KIO::filesize_t size = 0;
--    foreach (const FileItem *fileitem, _selection) {
-+    for (const FileItem *fileitem : qAsConst(_selection)) {
-         size += fileitem->getSize();
-     }
-     return size;
-@@ -366,7 +367,7 @@ KIO::filesize_t KrInterView::calcSelectedSize()
- QList<QUrl> KrInterView::selectedUrls()
- {
-     QList<QUrl> list;
--    foreach (const FileItem *fileitem, _selection) {
-+    for (const FileItem *fileitem : qAsConst(_selection)) {
-         list << fileitem->getUrl();
-     }
-     return list;
-@@ -378,7 +379,7 @@ void KrInterView::setSelectionUrls(const QList<QUrl> urls)
- 
-     _selection.clear();
- 
--    foreach (const QUrl &url, urls) {
-+    for (const QUrl &url : urls) {
-         const QModelIndex idx = _model->indexFromUrl(url);
-         if (idx.isValid())
-             setSelected(_model->fileItemAt(idx), true);
-diff --git a/app/Panel/PanelView/krview.cpp b/app/Panel/PanelView/krview.cpp
-index fa7727867..45aa872a3 100644
---- a/app/Panel/PanelView/krview.cpp
-+++ b/app/Panel/PanelView/krview.cpp
-@@ -1163,7 +1163,8 @@ void KrView::refresh()
-         fileItems << _dummyFileItem;
-     }
- 
--    foreach (FileItem *fileitem, _files->fileItems()) {
-+    const auto items = _files->fileItems();
-+    for (FileItem *fileitem : items) {
-         if (!fileitem || isFiltered(fileitem))
-             continue;
-         if (fileitem->isDir())
-diff --git a/app/Panel/PanelView/krviewfactory.cpp b/app/Panel/PanelView/krviewfactory.cpp
-index 9200d7a40..1380e7fac 100644
---- a/app/Panel/PanelView/krviewfactory.cpp
-+++ b/app/Panel/PanelView/krviewfactory.cpp
-@@ -86,12 +86,12 @@ void KrViewFactory::registerView(KrViewInstance *inst)
- 
- KrViewInstance *KrViewFactory::viewInstance(int id)
- {
--    foreach (KrViewInstance *inst, m_registeredViews) {
-+    for (KrViewInstance *inst : qAsConst(m_registeredViews)) {
-         if (inst->id() == id)
-             return inst;
-     }
- 
--    foreach (KrViewInstance *inst_dflt, m_registeredViews) {
-+    for (KrViewInstance *inst_dflt : qAsConst(m_registeredViews)) {
-         if (inst_dflt->id() == m_defaultViewId)
-             return inst_dflt;
-     }
-diff --git a/app/Panel/PanelView/listmodel.cpp b/app/Panel/PanelView/listmodel.cpp
-index 1b7b124c0..ec2d44069 100644
---- a/app/Panel/PanelView/listmodel.cpp
-+++ b/app/Panel/PanelView/listmodel.cpp
-@@ -291,7 +291,7 @@ void ListModel::sort(int column, Qt::SortOrder order)
-     }
- 
-     QModelIndexList newPersistentList;
--    foreach (const QModelIndex &mndx, oldPersistentList)
-+    for (const QModelIndex &mndx : qAsConst(oldPersistentList))
-         newPersistentList << index(changeMap[mndx.row()], mndx.column());
- 
-     changePersistentIndexList(oldPersistentList, newPersistentList);
-@@ -329,7 +329,7 @@ QModelIndex ListModel::addItem(FileItem *fileitem)
-     }
- 
-     QModelIndexList newPersistentList;
--    foreach (const QModelIndex &mndx, oldPersistentList) {
-+    for (const QModelIndex &mndx : qAsConst(oldPersistentList)) {
-         int newRow = mndx.row();
-         if (newRow >= insertIndex)
-             newRow++;
-diff --git a/app/Panel/dirhistoryqueue.cpp b/app/Panel/dirhistoryqueue.cpp
-index ffe726d91..b333a688d 100644
---- a/app/Panel/dirhistoryqueue.cpp
-+++ b/app/Panel/dirhistoryqueue.cpp
-@@ -121,7 +121,7 @@ void DirHistoryQueue::save(KConfigGroup cfg)
-     saveCurrentItem();
- 
-     QList<QUrl> urls;
--    foreach (const QUrl &url, _urlQueue) {
-+    for (const QUrl &url : qAsConst(_urlQueue)) {
-         // make sure no passwords are permanently stored
-         QUrl safeUrl(url);
-         safeUrl.setPassword(QString());
-diff --git a/app/Panel/krlayoutfactory.cpp b/app/Panel/krlayoutfactory.cpp
-index 583c2051f..7678a6d4f 100644
---- a/app/Panel/krlayoutfactory.cpp
-+++ b/app/Panel/krlayoutfactory.cpp
-@@ -59,9 +59,9 @@ bool KrLayoutFactory::parseFiles()
-         return false;
-     }
- 
--    QStringList extraFilePaths = QStandardPaths::locateAll(QStandardPaths::DataLocation, EXTRA_FILE_MASK);
-+    const QStringList extraFilePaths = QStandardPaths::locateAll(QStandardPaths::DataLocation, EXTRA_FILE_MASK);
- 
--    foreach (const QString &path, extraFilePaths) {
-+    for (const QString &path : extraFilePaths) {
-         qWarning() << "extra file: " << path;
-         QDomDocument doc;
-         if (parseFile(path, doc))
-@@ -143,7 +143,7 @@ QStringList KrLayoutFactory::layoutNames()
-     if (parseFiles()) {
-         getLayoutNames(_mainDoc, names);
- 
--        foreach (const QDomDocument &doc, _extraDocs)
-+        for (const QDomDocument &doc : qAsConst(_extraDocs))
-             getLayoutNames(doc, names);
-     }
- 
-@@ -175,7 +175,7 @@ QLayout *KrLayoutFactory::createLayout(QString layoutName)
- 
-         layoutRoot = findLayout(_mainDoc, layoutName);
-         if (layoutRoot.isNull()) {
--            foreach (const QDomDocument &doc, _extraDocs) {
-+            for (const QDomDocument &doc : qAsConst(_extraDocs)) {
-                 layoutRoot = findLayout(doc, layoutName);
-                 if (!layoutRoot.isNull())
-                     break;
-diff --git a/app/Panel/krpreviewpopup.cpp b/app/Panel/krpreviewpopup.cpp
-index 6d2d49ab2..13b7e8e2b 100644
---- a/app/Panel/krpreviewpopup.cpp
-+++ b/app/Panel/krpreviewpopup.cpp
-@@ -105,7 +105,7 @@ void KrPreviewPopup::showEvent(QShowEvent *event)
- 
- void KrPreviewPopup::setUrls(const QList<QUrl> &urls)
- {
--    foreach (const QUrl &url, urls) {
-+    for (const QUrl &url : urls) {
-         files.push_back(KFileItem(url));
-     }
- }
-diff --git a/app/Panel/panelcontextmenu.cpp b/app/Panel/panelcontextmenu.cpp
-index 2e8d8f2d8..f7c652297 100644
---- a/app/Panel/panelcontextmenu.cpp
-+++ b/app/Panel/panelcontextmenu.cpp
-@@ -64,7 +64,7 @@ void PanelContextMenu::addCompressAndExtractPluginActions()
-         return metaData.pluginId() == "compressfileitemaction" || metaData.pluginId() == "extractfileitemaction";
-     });
- 
--    foreach (const KPluginMetaData &jsonMetadata, jsonPlugins) {
-+    for (const KPluginMetaData &jsonMetadata : qAsConst(jsonPlugins)) {
-         KPluginFactory *pluginFactory = KPluginFactory::loadFactory(jsonMetadata.fileName()).plugin;
- 
-         auto *abstractPlugin = pluginFactory->create<KAbstractFileItemActionPlugin>();
-diff --git a/app/Search/krsearchdialog.cpp b/app/Search/krsearchdialog.cpp
-index 908a56904..90146ae56 100644
---- a/app/Search/krsearchdialog.cpp
-+++ b/app/Search/krsearchdialog.cpp
-@@ -85,7 +85,7 @@ public:
-     void clear()
-     {
-         emit cleared();
--        foreach (FileItem *fileitem, _fileItems)
-+        for (FileItem *fileitem : qAsConst(_fileItems))
-             delete fileitem;
-         _fileItems.clear();
-         _foundText.clear();
-@@ -628,7 +628,8 @@ void KrSearchDialog::feedToListBox()
-     }
- 
-     QList<QUrl> urlList;
--    foreach (FileItem *fileitem, result->fileItems())
-+    const auto fileItems = result->fileItems();
-+    for (FileItem *fileitem : fileItems)
-         urlList.push_back(fileitem->getUrl());
- 
-     mainSearchBtn->setEnabled(false);
-diff --git a/app/Synchronizer/synchronizergui.cpp b/app/Synchronizer/synchronizergui.cpp
-index d9c99c385..9951b20cb 100644
---- a/app/Synchronizer/synchronizergui.cpp
-+++ b/app/Synchronizer/synchronizergui.cpp
-@@ -896,7 +896,8 @@ void SynchronizerGUI::closeDialog()
- 
-     QStringList list;
- 
--    foreach (const QString &item, leftLocation->historyItems()) {
-+    const auto leftHistoryItems = leftLocation->historyItems(); 
-+    for (const QString &item : leftHistoryItems) {
-         QUrl url(item);
-         // make sure no passwords are saved in config
-         url.setPassword(QString());
-@@ -904,7 +905,8 @@ void SynchronizerGUI::closeDialog()
-     }
-     group.writeEntry("Left Folder History", list);
-     list.clear();
--    foreach (const QString &item, rightLocation->historyItems()) {
-+    const auto rightHistoryItems = rightLocation->historyItems(); 
-+    for (const QString &item : rightHistoryItems) {
-         QUrl url(item);
-         // make sure no passwords are saved in config
-         url.setPassword(QString());
-diff --git a/app/UserAction/expander.cpp b/app/UserAction/expander.cpp
-index 335a34dd9..ca73dd6a0 100644
---- a/app/UserAction/expander.cpp
-+++ b/app/UserAction/expander.cpp
-@@ -87,10 +87,10 @@ QStringList exp_placeholder::fileList(const KrPanel *const panel,
-     }
-     if (!omitPath) { // add the current path
-         // translate to urls using filesystem
--        QList<QUrl> list = panel->func->files()->getUrls(items);
-+        const QList<QUrl> list = panel->func->files()->getUrls(items);
-         items.clear();
-         // parse everything to a single qstring
--        foreach (const QUrl &url, list) {
-+        for (const QUrl &url : list) {
-             items.push_back(useUrl ? url.url() : url.path());
-         }
-     }
-diff --git a/app/UserAction/kraction.cpp b/app/UserAction/kraction.cpp
-index b635cfc52..c54d4c733 100644
---- a/app/UserAction/kraction.cpp
-+++ b/app/UserAction/kraction.cpp
-@@ -356,7 +356,8 @@ KrAction::KrAction(KActionCollection *parent, const QString &name)
- 
- KrAction::~KrAction()
- {
--    foreach (QWidget *w, associatedWidgets())
-+    const auto widgets = associatedWidgets();
-+    for (QWidget *w : widgets)
-         w->removeAction(this);
-     krUserAction->removeKrAction(this); // Importent! Else Krusader will crash when writing the actions to file
- }
-diff --git a/app/UserAction/useraction.cpp b/app/UserAction/useraction.cpp
-index 080492bbd..2e0469e92 100644
---- a/app/UserAction/useraction.cpp
-+++ b/app/UserAction/useraction.cpp
-@@ -73,7 +73,7 @@ void UserAction::populateMenu(KActionMenu *menu, const QUrl *currentURL)
-     QMap<QString, KActionMenu *> categoryMap;
-     QList<KrAction *> uncategorised;
- 
--    foreach (KrAction *action, _actions) {
-+    for (KrAction *action : qAsConst(_actions)) {
-         const QString category = action->category();
-         if (!action->isEnabled())
-             continue;
-@@ -98,7 +98,7 @@ void UserAction::populateMenu(KActionMenu *menu, const QUrl *currentURL)
-         menu->addAction(mapIter.value());
-     }
- 
--    foreach (KrAction *action, uncategorised) {
-+    for (KrAction *action : qAsConst(uncategorised)) {
-         menu->addAction(action);
-     };
- }
-@@ -249,7 +249,7 @@ bool UserAction::writeActionFile()
-     QDomDocument doc = createEmptyDoc();
-     QDomElement root = doc.documentElement();
- 
--    foreach (const QString &name, _deletedActions) {
-+    for (const QString &name : qAsConst(_deletedActions)) {
-         QDomElement element = doc.createElement("deletedAction");
-         element.setAttribute("name", name);
-         root.appendChild(element);
-diff --git a/app/actionsbase.cpp b/app/actionsbase.cpp
-index 6988a7d44..ed2bd7fa5 100644
---- a/app/actionsbase.cpp
-+++ b/app/actionsbase.cpp
-@@ -19,7 +19,8 @@
- 
- void ActionsBase::ActionGroup::reconnect(QObject *recv)
- {
--    foreach (QAction *action, _slots.keys()) {
-+    const auto actions = _slots.keys();
-+    for (QAction *action : actions) {
-         disconnect(action, nullptr, nullptr, nullptr);
-         connect(action, SIGNAL(triggered(bool)), recv, _slots[action]);
-     }
-diff --git a/app/krservices.cpp b/app/krservices.cpp
-index 3048db880..4028d8b24 100644
---- a/app/krservices.cpp
-+++ b/app/krservices.cpp
-@@ -70,7 +70,7 @@ QString KrServices::fullPathName(const QString &name, QString confName)
- 
- QString KrServices::chooseFullPathName(QStringList names, const QString &confName)
- {
--    foreach (const QString &name, names) {
-+    for (const QString &name : qAsConst(names)) {
-         QString foundTool = KrServices::fullPathName(name, confName);
-         if (!foundTool.isEmpty()) {
-             return foundTool;
-diff --git a/app/krslots.cpp b/app/krslots.cpp
-index 0b5c34b1e..872e86e93 100644
---- a/app/krslots.cpp
-+++ b/app/krslots.cpp
-@@ -101,7 +101,7 @@ void KrSlots::sendFileByEmail(const QList<QUrl> &urls)
-     }
- 
-     QString subject, separator;
--    foreach (const QUrl &url, urls) {
-+    for (const QUrl &url : urls) {
-         subject += separator + url.fileName();
-         separator = ',';
-     }
-@@ -112,12 +112,12 @@ void KrSlots::sendFileByEmail(const QList<QUrl> &urls)
-     QString executable = QUrl::fromLocalFile(mailProg).fileName();
-     if (executable == QStringLiteral("kmail")) {
-         proc << mailProg << "--subject" << subject;
--        foreach (const QUrl &url2, urls)
-+        for (const QUrl &url2 : urls)
-             proc << "--attach" << url2.toDisplayString();
-     } else if (executable == QStringLiteral("thunderbird")) {
-         QString param = "attachment=\'";
-         separator = "";
--        foreach (const QUrl &url2, urls) {
-+        for (const QUrl &url2 : urls) {
-             param += separator + url2.toDisplayString();
-             separator = ',';
-         }
-@@ -126,7 +126,7 @@ void KrSlots::sendFileByEmail(const QList<QUrl> &urls)
-     } else if (executable == QStringLiteral("evolution")) {
-         QString param = "mailto:?cc=&subject=" + subject + "&attach=";
-         separator = "";
--        foreach (const QUrl &url2, urls) {
-+        for (const QUrl &url2 : urls) {
-             param += separator + url2.toDisplayString();
-             separator = "&attach=";
-         }
-diff --git a/app/panelmanager.cpp b/app/panelmanager.cpp
-index c4a74e59e..70b78c164 100644
---- a/app/panelmanager.cpp
-+++ b/app/panelmanager.cpp
-@@ -198,7 +198,8 @@ void PanelManager::saveSettings(KConfigGroup config, bool saveHistory)
-     config.writeEntry("ActiveTab", activeTab());
- 
-     KConfigGroup grpTabs(&config, "Tabs");
--    foreach (const QString &grpTab, grpTabs.groupList())
-+    const auto tabGroups = grpTabs.groupList();
-+    for (const QString &grpTab : tabGroups)
-         grpTabs.deleteGroup(grpTab);
- 
-     for (int i = 0; i < _tabbar->count(); i++) {
--- 
-GitLab
-
-
-From 73cf9ebf9b9606fb28f7e37d7dc35839bab83d4e Mon Sep 17 00:00:00 2001
-From: Valentin Manea <email_kde@mors.eu.org>
-Date: Wed, 8 May 2024 21:10:06 +0300
-Subject: [PATCH 02/64] KMessageBox::xxxYesNo has been deprecated
-
-Update the code to use the new construct KMessageBox::xxxTwoActions,
-deprecated by this commit
-https://invent.kde.org/frameworks/kwidgetsaddons/-/commit/dd58fa176cafb40e775b26d724e9fb44c036e392
-It was completely removed in kf6
----
- app/ActionMan/useractionpage.cpp     | 24 ++++++++++++------------
- app/DiskUsage/diskusage.cpp          |  5 ++---
- app/Konfigurator/konfigurator.cpp    |  6 +++---
- app/Panel/panelfunc.cpp              | 10 +++++-----
- app/Splitter/combiner.cpp            |  8 ++++----
- app/Synchronizer/synchronizergui.cpp |  8 ++++----
- app/UserAction/kraction.cpp          | 10 +++++-----
- 7 files changed, 35 insertions(+), 36 deletions(-)
-
-diff --git a/app/ActionMan/useractionpage.cpp b/app/ActionMan/useractionpage.cpp
-index 6b1f30d25..874b71a22 100644
---- a/app/ActionMan/useractionpage.cpp
-+++ b/app/ActionMan/useractionpage.cpp
-@@ -129,14 +129,14 @@ bool UserActionPage::continueInSpiteOfChanges()
-     if (!actionProperties->isModified())
-         return true;
- 
--    int answer = KMessageBox::questionYesNoCancel(this, i18n("The current action has been modified. Do you want to apply these changes?"));
-+    int answer = KMessageBox::questionTwoActionsCancel(this, i18n("The current action has been modified. Do you want to apply these changes?"), "", KStandardGuiItem::apply(), KStandardGuiItem::discard());
-     if (answer == KMessageBox::Cancel) {
-         disconnect(actionTree, &UserActionListView::currentItemChanged, this, &UserActionPage::slotChangeCurrent);
-         actionTree->setCurrentAction(actionProperties->action());
-         connect(actionTree, &UserActionListView::currentItemChanged, this, &UserActionPage::slotChangeCurrent);
-         return false;
-     }
--    if (answer == KMessageBox::Yes) {
-+    if (answer == KMessageBox::PrimaryAction) {
-         if (!actionProperties->validProperties()) {
-             disconnect(actionTree, &UserActionListView::currentItemChanged, this, &UserActionPage::slotChangeCurrent);
-             actionTree->setCurrentAction(actionProperties->action());
-@@ -254,7 +254,7 @@ void UserActionPage::slotExport()
-     int answer = 0;
-     if (file.open(QIODevice::ReadOnly)) { // getting here, means the file already exists an can be read
-         if (doc.setContent(&file)) // getting here means the file exists and already contains an UserAction-XML-tree
--            answer = KMessageBox::warningYesNoCancel(
-+            answer = KMessageBox::warningTwoActionsCancel(
-                 this, // parent
-                 i18n("This file already contains some useractions.\nDo you want to overwrite it or should it be merged with the selected actions?"), // text
-                 i18n("Overwrite or Merge?"), // caption
-@@ -263,19 +263,19 @@ void UserActionPage::slotExport()
-             );
-         file.close();
-     }
--    if (answer == 0 && file.exists())
--        answer = KMessageBox::warningContinueCancel(this, // parent
--                                                    i18n("This file already exists. Do you want to overwrite it?"), // text
--                                                    i18n("Overwrite Existing File?"), // caption
--                                                    KStandardGuiItem::overwrite() // label for Continue-Button
--        );
--
-+    if (answer == 0 && file.exists()) {
-+            answer = KMessageBox::warningContinueCancel(this, // parent
-+                i18n("This file already exists. Do you want to overwrite it?"), // text
-+                i18n("Overwrite Existing File?"), // caption
-+                KStandardGuiItem::overwrite() // label for Continue-Button
-+            );
-+    }
-     if (answer == KMessageBox::Cancel)
-         return;
- 
--    if (answer == KMessageBox::No) // that means the merge-button
-+    if (answer == KMessageBox::SecondaryAction) // that means the merge-button
-         doc = actionTree->dumpSelectedActions(&doc); // merge
--    else // Yes or Continue means overwrite
-+    else // Yes or Continue(both Primary action) means overwrite
-         doc = actionTree->dumpSelectedActions();
- 
-     bool success = UserAction::writeToFile(doc, filename);
-diff --git a/app/DiskUsage/diskusage.cpp b/app/DiskUsage/diskusage.cpp
-index c2423c4f3..1dde0a999 100644
---- a/app/DiskUsage/diskusage.cpp
-+++ b/app/DiskUsage/diskusage.cpp
-@@ -400,8 +400,7 @@ void DiskUsage::dirUp()
-             changeDirectory(const_cast<Directory *>(currentDirectory->parent()));
-         else {
-             QUrl up = KIO::upUrl(baseURL);
--
--            if (KMessageBox::questionYesNo(this,
-+            if (KMessageBox::questionTwoActions(this,
-                                            i18n("Stepping into the parent folder requires "
-                                                 "loading the content of the \"%1\" URL. Do you wish "
-                                                 "to continue?",
-@@ -410,7 +409,7 @@ void DiskUsage::dirUp()
-                                            KStandardGuiItem::cont(),
-                                            KStandardGuiItem::cancel(),
-                                            "DiskUsageLoadParentDir")
--                == KMessageBox::Yes)
-+                == KMessageBox::PrimaryAction)
-                 load(up);
-         }
-     }
-diff --git a/app/Konfigurator/konfigurator.cpp b/app/Konfigurator/konfigurator.cpp
-index 2e66d4a0d..08372072f 100644
---- a/app/Konfigurator/konfigurator.cpp
-+++ b/app/Konfigurator/konfigurator.cpp
-@@ -166,18 +166,18 @@ bool Konfigurator::slotPageSwitch(KPageWidgetItem *current, KPageWidgetItem *bef
-     }
- 
-     if (currentPg->isChanged()) {
--        int result = KMessageBox::questionYesNoCancel(nullptr,
-+        int result = KMessageBox::questionTwoActionsCancel(nullptr,
-                                                       i18n("The current page has been changed. Do you want to apply changes?"),
-                                                       {},
-                                                       KStandardGuiItem::apply(),
-                                                       KStandardGuiItem::discard());
- 
-         switch (result) {
--        case KMessageBox::No:
-+        case KMessageBox::SecondaryAction:
-             currentPg->loadInitialValues();
-             currentPg->apply();
-             break;
--        case KMessageBox::Yes:
-+        case KMessageBox::PrimaryAction:
-             emit configChanged(currentPg->apply());
-             break;
-         default:
-diff --git a/app/Panel/panelfunc.cpp b/app/Panel/panelfunc.cpp
-index 31d1ae1d3..9bd1893f7 100644
---- a/app/Panel/panelfunc.cpp
-+++ b/app/Panel/panelfunc.cpp
-@@ -875,11 +875,11 @@ QList<QUrl> ListPanelFunc::confirmDeletion(const QList<QUrl> &urls, bool moveToT
-                 const QDir dir(filePath);
-                 if (!dir.entryList(QDir::AllEntries | QDir::System | QDir::Hidden | QDir::NoDotAndDotDot).isEmpty()) {
-                     // if the dir is not empty, show a confirmation dialog with buttons:
--                    // * Skip (-> KMessageBox::Yes)
--                    // * Delete All (-> KMessageBox::No)
-+                    // * Skip (-> KMessageBox::PrimaryAction)
-+                    // * Delete All (-> KMessageBox::SecondaryAction)
-                     // * Cancel (-> KMessageBox::Cancel)
-                     const QString fileString = showPath ? filePath : url.fileName();
--                    const KMessageBox::ButtonCode result = KMessageBox::warningYesNoCancel(
-+                    const KMessageBox::ButtonCode result = KMessageBox::warningTwoActionsCancel(
-                         krMainWindow,
-                         i18n("<qt><p>Folder <b>%1</b> is not empty.</p>", fileString)
-                             + (moveToTrash ? i18n("<p>Skip this one or trash all?</p></qt>") : i18n("<p>Skip this one or delete all?</p></qt>")),
-@@ -888,10 +888,10 @@ QList<QUrl> ListPanelFunc::confirmDeletion(const QList<QUrl> &urls, bool moveToT
-                         KGuiItem(moveToTrash ? i18n("&Trash All") : i18n("&Delete All")));
- 
-                     // process user response
--                    if (result == KMessageBox::Yes) {
-+                    if (result == KMessageBox::PrimaryAction) {
-                         // skip this dir
-                         markForDeletion = false;
--                    } else if (result == KMessageBox::No) {
-+                    } else if (result == KMessageBox::SecondaryAction) {
-                         // delete all
-                         deleteAllIsChosen = true;
-                     } else {
-diff --git a/app/Splitter/combiner.cpp b/app/Splitter/combiner.cpp
-index a3c469623..8eac9f812 100644
---- a/app/Splitter/combiner.cpp
-+++ b/app/Splitter/combiner.cpp
-@@ -67,7 +67,7 @@ void Combiner::combine()
-     file.refresh();
- 
-     if (!file.isReadable()) {
--        int ret = KMessageBox::questionYesNo(nullptr,
-+        int ret = KMessageBox::questionTwoActions(nullptr,
-                                              i18n("The CRC information file (%1) is missing.\n"
-                                                   "Validity checking is impossible without it. Continue combining?",
-                                                   splURL.toDisplayString(QUrl::PreferLocalFile)),
-@@ -75,7 +75,7 @@ void Combiner::combine()
-                                              KStandardGuiItem::cont(),
-                                              KStandardGuiItem::cancel());
- 
--        if (ret == KMessageBox::No) {
-+        if (ret == KMessageBox::SecondaryAction) {
-             reject();
-             return;
-         }
-@@ -139,12 +139,12 @@ void Combiner::combineSplitFileFinished(KJob *job)
-     }
- 
-     if (!error.isEmpty()) {
--        int ret = KMessageBox::questionYesNo(nullptr,
-+        int ret = KMessageBox::questionTwoActions(nullptr,
-                                              error + i18n("\nValidity checking is impossible without a good CRC file. Continue combining?"),
-                                              {},
-                                              KStandardGuiItem::cont(),
-                                              KStandardGuiItem::cancel());
--        if (ret == KMessageBox::No) {
-+        if (ret == KMessageBox::SecondaryAction) {
-             reject();
-             return;
-         }
-diff --git a/app/Synchronizer/synchronizergui.cpp b/app/Synchronizer/synchronizergui.cpp
-index 9951b20cb..3c429f66b 100644
---- a/app/Synchronizer/synchronizergui.cpp
-+++ b/app/Synchronizer/synchronizergui.cpp
-@@ -1330,14 +1330,14 @@ void SynchronizerGUI::keyPressEvent(QKeyEvent *e)
-         } else {
-             e->accept();
-             if (syncList->topLevelItemCount() != 0) {
--                int result = KMessageBox::warningYesNo(
-+                int result = KMessageBox::warningTwoActions(
-                     this,
-                     i18n("The synchronizer window contains data from a previous compare. If you exit, this data will be lost. Do you really want to exit?"),
-                     i18n("Krusader::Synchronize Folders"),
--                    KStandardGuiItem::yes(),
--                    KStandardGuiItem::no(),
-+                    KGuiItem(QApplication::translate("KStandardGuiItem", "&Yes"), QStringLiteral("dialog-ok")),
-+                    KGuiItem(QApplication::translate("KStandardGuiItem", "&No"), QStringLiteral("dialog-cancel")),
-                     "syncGUIexit");
--                if (result != KMessageBox::Yes)
-+                if (result != KMessageBox::PrimaryAction)
-                     return;
-             }
-             QDialog::reject();
-diff --git a/app/UserAction/kraction.cpp b/app/UserAction/kraction.cpp
-index c54d4c733..2f568f72a 100644
---- a/app/UserAction/kraction.cpp
-+++ b/app/UserAction/kraction.cpp
-@@ -165,18 +165,18 @@ void KrActionProcDlg::slotSaveAs()
-     if (filename.isEmpty())
-         return;
-     QFile file(filename);
--    int answer = KMessageBox::Yes;
-+    int answer = KMessageBox::PrimaryAction;
-     if (file.exists())
--        answer = KMessageBox::warningYesNoCancel(this, // parent
-+        answer = KMessageBox::questionTwoActionsCancel(this, // parent
-                                                  i18n("This file already exists.\nDo you want to overwrite it or append the output?"), // text
-                                                  i18n("Overwrite or append?"), // caption
--                                                 KStandardGuiItem::overwrite(), // label for Yes-Button
--                                                 KGuiItem(i18n("Append")) // label for No-Button
-+                                                 KStandardGuiItem::overwrite(), // label for primaryAction-Button
-+                                                 KGuiItem(i18n("Append")) // label for secondaryAction-Button
-         );
-     if (answer == KMessageBox::Cancel)
-         return;
-     bool open;
--    if (answer == KMessageBox::No) // this means to append
-+    if (answer == KMessageBox::SecondaryAction) // this means to append
-         open = file.open(QIODevice::WriteOnly | QIODevice::Append);
-     else
-         open = file.open(QIODevice::WriteOnly);
--- 
-GitLab
-
-
-From 6e68248b3e0c857137d8e3f7f89d4c8579ae1b5b Mon Sep 17 00:00:00 2001
+From 4988620e78c5e4196a9c436503b9a1eb109d8a7e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:26:34 +0300
-Subject: [PATCH 03/64] Adapt CMakeFiles to kf6 and qt6 builds
+Subject: [PATCH 01/64] Adapt CMakeFiles to kf6 and qt6 builds
 
 Changes include:
 * Changing the KF5 namespace to KF6
@@ -1613,10 +708,10 @@ index 2a0518fd9..3cb85bd5f 100644
 GitLab
 
 
-From 5fc764f68e82fce565ce4bf2c34dceeb06f10c2e Mon Sep 17 00:00:00 2001
+From 996934f9ee87e27b90e84784ff54d027773dac06 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:52:30 +0300
-Subject: [PATCH 04/64] Fix UI file
+Subject: [PATCH 02/64] Fix UI file
 
 Should use the Kf6 headers
 ---
@@ -1654,10 +749,10 @@ index 549294aaf..66e1db982 100644
 GitLab
 
 
-From 8719c1f565c0706c8e33c5c2a150351265072c4c Mon Sep 17 00:00:00 2001
+From ef7c3af9b68927f2f50f0e896f436710b0083a81 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:54:32 +0300
-Subject: [PATCH 05/64] Fix the ISO plugin
+Subject: [PATCH 03/64] Fix the ISO plugin
 
 Adapt to the new qt6 APIs -> toSecsSinceEpoch instead of toTime_t and a
 .data() call on QStrings since QT_NO_CAST_FROM_BYTEARRAY will be
@@ -1779,10 +874,10 @@ index ec98a11d8..ccdc678bb 100644
 GitLab
 
 
-From edde1036c4dfb35499363d5d553ba2181588e954 Mon Sep 17 00:00:00 2001
+From 52fdfe34cd11d79ee67772a633a1a784461fadcb Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 21:55:33 +0300
-Subject: [PATCH 06/64] Update the krarc plugin
+Subject: [PATCH 04/64] Update the krarc plugin
 
 Mostly remove the pre 5.96 QT code check, no point in carrying it
 arround
@@ -2629,10 +1724,10 @@ index aa423cabb..fcd55f8fb 100644
 GitLab
 
 
-From 5612e3fb82cf78cc145f4abdb54c2b20d87baab7 Mon Sep 17 00:00:00 2001
+From 85a92cfc13f170fc68df13ec7692046814f4d556 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:01:52 +0300
-Subject: [PATCH 07/64] Fix the kr7z encryption code
+Subject: [PATCH 05/64] Fix the kr7z encryption code
 
 setupChildProcess() is not available anymore for KProcess, should use
 setChildProcessModifier() instead
@@ -2687,10 +1782,10 @@ index 43bb7d20c..4baf6ef49 100644
 GitLab
 
 
-From b7ee52f7739c04170f48d2fa4f5a4433d7689991 Mon Sep 17 00:00:00 2001
+From 480025f25ae123931ae9375e74ce73fd7b96d9c7 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:03:46 +0300
-Subject: [PATCH 08/64] Change the screen geometry code to QScreen
+Subject: [PATCH 06/64] Change the screen geometry code to QScreen
 
 TODO: Is primaryScreen OK here?
 
@@ -2739,10 +1834,10 @@ index e92c74678..592080124 100644
 GitLab
 
 
-From 3d1815deab6745641427d2bd45da13677981c7c2 Mon Sep 17 00:00:00 2001
+From 051fb90190bb2932c87d7510f29c3c6708e1c0a8 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:05:26 +0300
-Subject: [PATCH 09/64] Update the wallet calling code
+Subject: [PATCH 07/64] Update the wallet calling code
 
 QApplication::desktop() is not available anymore, use effectiveWinId
 ---
@@ -2772,10 +1867,10 @@ index 0612aff46..297b2717a 100644
 GitLab
 
 
-From 7e9b1bdefb569521c56d6399e00f6a66f69ad696 Mon Sep 17 00:00:00 2001
+From 5dd4cf77e913b635ae88ef210c09ef374afa28d4 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:11:29 +0300
-Subject: [PATCH 10/64] Change MidButton to MiddleButton
+Subject: [PATCH 08/64] Change MidButton to MiddleButton
 
 Item renamed in Qt6
 ---
@@ -2841,10 +1936,10 @@ index 017becf69..143925df6 100644
 GitLab
 
 
-From ed3f7a6cbd24008d3275ec2669afc28488e4c51e Mon Sep 17 00:00:00 2001
+From 94d9f7af6efaf03b69332ee3433344b77a445faf Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:18:48 +0300
-Subject: [PATCH 11/64] The addition operator has been deprecate for key
+Subject: [PATCH 09/64] The addition operator has been deprecate for key
  sequences
 
 Switch to the or operator
@@ -3233,10 +2328,10 @@ index fb62a6b19..b7630a301 100644
 GitLab
 
 
-From d2073ff9ae76c7f005820e9df9f0be66f381f15a Mon Sep 17 00:00:00 2001
+From 30b018c14ed2bbb2b581b801d22ef758f96c9b4a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:21:21 +0300
-Subject: [PATCH 12/64] Change from I18N_NOOP to KLazyLocalizedString
+Subject: [PATCH 10/64] Change from I18N_NOOP to KLazyLocalizedString
 
 I18N_NOOP has been already removed, switch to KLazyLocalizedString
 ---
@@ -3436,10 +2531,10 @@ index 4b9740fb8..b40f0e22f 100644
 GitLab
 
 
-From d5fd0a302aae316b4e221dd1dcc207e17f544286 Mon Sep 17 00:00:00 2001
+From 81328ae0d410a216fd6e539e3e39cdb5ae46a2e8 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:28:31 +0300
-Subject: [PATCH 13/64] Fix QString consistency problem
+Subject: [PATCH 11/64] Fix QString consistency problem
 
 Won't compile because char * is not implicitly cast to QString anymore,
 should be at least UTF-8 strings
@@ -3651,10 +2746,10 @@ index 143925df6..54ba04eb7 100644
 GitLab
 
 
-From 8a7289c7ddc5ec329d67ce7d9542b04c08ce8c6e Mon Sep 17 00:00:00 2001
+From fd8df75e0bab4e737af173e875be94d0d41572a6 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:36:27 +0300
-Subject: [PATCH 14/64] QDateTime::fromTime_t -> QDateTime::fromSecsSinceEpoch
+Subject: [PATCH 12/64] QDateTime::fromTime_t -> QDateTime::fromSecsSinceEpoch
  And viceversa.
 
 The API has been completely removed in Qt6
@@ -3833,10 +2928,10 @@ index 50c7aeeb8..4d2355564 100644
 GitLab
 
 
-From 05b80c1236eb24581db448cac7300ed92eb6fb3b Mon Sep 17 00:00:00 2001
+From 402df6f98778256323b28220d9ee8b178cb28919 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 23:02:40 +0300
-Subject: [PATCH 15/64] QStandardPaths::DataLocation has been deprecated
+Subject: [PATCH 13/64] QStandardPaths::DataLocation has been deprecated
 
 use QStandardPaths::AppDataLocation instead
 ---
@@ -3888,10 +2983,10 @@ index b40f0e22f..83fc3fb02 100644
 GitLab
 
 
-From 3d26db5c010d07e47a6281d3e85a1ef59aa11822 Mon Sep 17 00:00:00 2001
+From bcd38368fc1d98f6a3a8c2e2bcba1f823c640258 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:39:42 +0300
-Subject: [PATCH 16/64] Switch from KWindowSystem to KxxxExtras
+Subject: [PATCH 14/64] Switch from KWindowSystem to KxxxExtras
 
 For windowing API calls
 ---
@@ -3981,10 +3076,10 @@ index c6ec9d8ae..825efbfa6 100644
 GitLab
 
 
-From f4d8c9988cbb0577809bddfa5ef88cab2a158cc9 Mon Sep 17 00:00:00 2001
+From 9f5ae2112b48e5d5a88f47cdc3cee2aa426ac7a2 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:43:43 +0300
-Subject: [PATCH 17/64] Switch to new QRegularExpressionValidator API
+Subject: [PATCH 15/64] Switch to new QRegularExpressionValidator API
 
 ---
  app/Konfigurator/kgpanel.cpp | 2 +-
@@ -4007,10 +3102,10 @@ index c6e6acefa..10a8c283b 100644
 GitLab
 
 
-From 410898354c5bd1f0d02a97520dafb9757877408f Mon Sep 17 00:00:00 2001
+From e3342600b410e236e38a217d90aa50847620d9aa Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:49:18 +0300
-Subject: [PATCH 18/64] BrowserExtension has been renamed to
+Subject: [PATCH 16/64] BrowserExtension has been renamed to
  NavigationExtension
 
 BrowserExtension has been renamed to NavigationExtension
@@ -4164,10 +3259,10 @@ index c1d438384..e86637694 100644
 GitLab
 
 
-From a724f21b0cce69e428fe11bfea0411861514146c Mon Sep 17 00:00:00 2001
+From 732b0f7b6a8e99af19049a872a84b5134f22555a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:06 +0300
-Subject: [PATCH 19/64] Update to the new KIO interface
+Subject: [PATCH 17/64] Update to the new KIO interface
 
 Includes new header files and adapting to the new API
 
@@ -4888,10 +3983,10 @@ index 872e86e93..c89b3ccfd 100644
 GitLab
 
 
-From 849a8be5592013c8fd478a0509be3fced2015147 Mon Sep 17 00:00:00 2001
+From 3c369cb7f4329934121fe5a7135e615f00b83852 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:55:39 +0300
-Subject: [PATCH 20/64] Adapt to the new KBookmarkManager interface
+Subject: [PATCH 18/64] Adapt to the new KBookmarkManager interface
 
 ---
  app/BookMan/krbookmarkhandler.cpp | 6 +++---
@@ -4946,10 +4041,10 @@ index 2dedde81b..0591803db 100644
 GitLab
 
 
-From f95631fed878799b0881afb89f20dc790ac7a20b Mon Sep 17 00:00:00 2001
+From 67c0dd53d25c3a8b05e89f4318146f5d972b1a1c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Fri, 31 May 2024 22:48:11 +0300
-Subject: [PATCH 21/64] QByteArray does not implicitly convert to char * for
+Subject: [PATCH 19/64] QByteArray does not implicitly convert to char * for
  libc calls
 
 data() needs to be explicity called or constData() in some cases
@@ -5354,10 +4449,10 @@ index 4d2355564..8c56c4051 100644
 GitLab
 
 
-From 9a251678f59884761551b95c81af0ca2c3078482 Mon Sep 17 00:00:00 2001
+From 0cc6a86fd97e7a5fc6d00f46008bce00b8e3369d Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:01:27 +0300
-Subject: [PATCH 22/64] QString/QChar inconsitencies
+Subject: [PATCH 20/64] QString/QChar inconsitencies
 
 char also doesn't cast to QChar implicitly
 ---
@@ -5425,10 +4520,10 @@ index 7407d78c8..3f7025f67 100644
 GitLab
 
 
-From 83b7afa5ff00b449708b2728e83bdc3efd2e16ee Mon Sep 17 00:00:00 2001
+From 54443575977d4aa024982ce6e398fa4d013de625 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:03:53 +0300
-Subject: [PATCH 23/64] Implement the = operator for PredefinedDevice
+Subject: [PATCH 21/64] Implement the = operator for PredefinedDevice
 
 ---
  app/Splitter/splittergui.cpp | 5 ++++-
@@ -5454,10 +4549,10 @@ index 962a2e0b4..705468682 100644
 GitLab
 
 
-From c5007c266b3546c1b10918456e0ea91dcb7f6f08 Mon Sep 17 00:00:00 2001
+From f5834234773cb6fb1962d3b06e09635b14e25b84 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:07:30 +0300
-Subject: [PATCH 24/64] Updaters for QAbstractItemView
+Subject: [PATCH 22/64] Updaters for QAbstractItemView
 
 The virtual viewOptions() method that previously returned a
 QStyleOptionViewItem object has been renamed to initViewItemOption, and
@@ -5502,10 +4597,10 @@ index f2e690dc6..1759d5078 100644
 GitLab
 
 
-From 1b5fbcdf49180ddc793a3bb0ad2047048efe0a2a Mon Sep 17 00:00:00 2001
+From 1a7804ba2e70a08c0a739f82bceeb678061a6b44 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:23 +0300
-Subject: [PATCH 25/64] Change to new QLocale
+Subject: [PATCH 23/64] Change to new QLocale
 
 ---
  app/KViewer/lister.cpp | 2 +-
@@ -5528,10 +4623,10 @@ index f15dfa3a4..bba78a2da 100644
 GitLab
 
 
-From 5bc335479a381f77b12c2abbf7d3b849627c9bca Mon Sep 17 00:00:00 2001
+From b92b3ba1411067d0c491df4a43f2f10aee3395bf Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:11:55 +0300
-Subject: [PATCH 26/64] Update KViewer to the new KPart creation code
+Subject: [PATCH 24/64] Update KViewer to the new KPart creation code
 
 The new code should use KParts/PartLoader rather than KService
 ---
@@ -5684,10 +4779,10 @@ index 659b314bb..dde146b10 100644
 GitLab
 
 
-From 3221c04928ca2427880ea4cc3f2247e5c95ffa36 Mon Sep 17 00:00:00 2001
+From 2ef1b87fe283ebb6ccb5fd4adfb249af7c497d9d Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:12:17 +0300
-Subject: [PATCH 27/64] Use the new QRegExp API
+Subject: [PATCH 25/64] Use the new QRegExp API
 
 ---
  app/Locate/locate.cpp | 2 +-
@@ -5710,10 +4805,10 @@ index 1235cb17e..f73045840 100644
 GitLab
 
 
-From af723164100f32afe96ee5a346cd92545e5efb07 Mon Sep 17 00:00:00 2001
+From fe2257b07cfea76c46942c15b93e8752e80e6d06 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:13:05 +0300
-Subject: [PATCH 28/64] QPalette enums have changed
+Subject: [PATCH 26/64] QPalette enums have changed
 
 Use Background instead of Window
 ---
@@ -5751,10 +4846,10 @@ index 7604a73c7..cbffff727 100644
 GitLab
 
 
-From f7815080e696d5fee533b5fe199042e2d2427c01 Mon Sep 17 00:00:00 2001
+From 2128ff3249371f918b0e2533850882771dcdd03e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:30:03 +0300
-Subject: [PATCH 29/64] Add missing headers
+Subject: [PATCH 27/64] Add missing headers
 
 Remove some too
 ---
@@ -5872,10 +4967,10 @@ index 4391f6dd2..a119ef3b3 100644
 GitLab
 
 
-From 0bd84d780e2878a1ef62b8da974f1986dd95ca7c Mon Sep 17 00:00:00 2001
+From e222c5886fb05973c56ff0927e24c1f9fe1a2341 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 30/64] Fix the crash at startup - KToolBarPopupAction needs
+Subject: [PATCH 28/64] Fix the crash at startup - KToolBarPopupAction needs
  popupMenu()
 
 Don't use menu() in Qt6
@@ -5903,10 +4998,10 @@ index 3f6521f01..6f7bfb0de 100644
 GitLab
 
 
-From 0b68c044372bb122c80e2a56242e5e90d4b8e919 Mon Sep 17 00:00:00 2001
+From 9d341205725147103fcae6be4f169eeac296873e Mon Sep 17 00:00:00 2001
 From: Valentin Manea <valentin.manea@gmail.com>
 Date: Thu, 11 Apr 2024 10:25:26 +0300
-Subject: [PATCH 31/64] Use the kf6 part for the dock
+Subject: [PATCH 29/64] Use the kf6 part for the dock
 
 Fix terminal to kf6 part
 ---
@@ -5938,10 +5033,10 @@ index d94661e22..7045e89c0 100644
 GitLab
 
 
-From 8f8c2d3f3f424db9f57443eb49a0b96d553949b1 Mon Sep 17 00:00:00 2001
+From aae878bd1b7f5111ed8ee8f3cfb485ba0f4f2203 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 11:55:35 +0300
-Subject: [PATCH 32/64] Adapt printDialog to qt6
+Subject: [PATCH 30/64] Adapt printDialog to qt6
 
 ---
  app/KViewer/lister.cpp | 2 +-
@@ -5964,10 +5059,10 @@ index bba78a2da..4fc2987c2 100644
 GitLab
 
 
-From 529ecf2fcc00ecc8a0113be1fa3c13e07c5b2a22 Mon Sep 17 00:00:00 2001
+From 3cb54fd517f800bc1b2ffbdb5eded5c4fb3dce43 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 1 Jun 2024 10:58:37 +0300
-Subject: [PATCH 33/64] Codec fixes - especially KrViewer
+Subject: [PATCH 31/64] Codec fixes - especially KrViewer
 
 Can't apply a codec(decode to unicode) to a QTextStream anymore
 ---
@@ -6089,10 +5184,10 @@ index 2e0469e92..c48bf6801 100644
 GitLab
 
 
-From acf7383bc9096074b4e171a3c0aca5c3736d1885 Mon Sep 17 00:00:00 2001
+From b02708970b537cc7fb303ed5b881c40cbbe0c5e6 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 18:58:41 +0300
-Subject: [PATCH 34/64] Fix the loading of the layout from resource
+Subject: [PATCH 32/64] Fix the loading of the layout from resource
 
 QResource seems to return empty file, it's easier to stream it
 ---
@@ -6164,10 +5259,10 @@ index b3d0ec27f..c910d438b 100644
 GitLab
 
 
-From feebdc6f379a27b80d3f41c41f8c168348592dc6 Mon Sep 17 00:00:00 2001
+From 9cb9bdf27b3e186cfa2ce2b91225a88ca56ccbe3 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:04:40 +0300
-Subject: [PATCH 35/64] ListJob doesn't have a percent signal anymore
+Subject: [PATCH 33/64] ListJob doesn't have a percent signal anymore
 
 The name of the signal is percentChanged() now
 ---
@@ -6191,10 +5286,10 @@ index 57d53c806..e81a87212 100644
 GitLab
 
 
-From 0858ffd6eeee710a53a36c0fe38f3db93f6e9a9e Mon Sep 17 00:00:00 2001
+From 4352ef6234a6629f6e688293d08a151c506f30a6 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:05:13 +0300
-Subject: [PATCH 36/64] Action in MountMan should use popupmenu not menu
+Subject: [PATCH 34/64] Action in MountMan should use popupmenu not menu
 
 ---
  app/MountMan/kmountman.cpp | 12 ++++++------
@@ -6254,10 +5349,10 @@ index 6f7bfb0de..852fc45dc 100644
 GitLab
 
 
-From 69c75e55207fe3ede786e53b10eef63de79d7768 Mon Sep 17 00:00:00 2001
+From 2c69149c364716802c69f9825d3bff2fdf9d738f Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 20:19:36 +0300
-Subject: [PATCH 37/64] Working version of the freespace info
+Subject: [PATCH 35/64] Working version of the freespace info
 
 This code will just wait for all the KIO:Job to finish getting the free
 space info and then it will continue.
@@ -6341,10 +5436,10 @@ index b9b13ea86..576254d45 100644
 GitLab
 
 
-From 84a6552df433ab1c97e74b6bad3bd3ebdaa72deb Mon Sep 17 00:00:00 2001
+From 0bd4430d38c34a40ad4f7ed631bd26af72966a32 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:04:53 +0300
-Subject: [PATCH 38/64] Bookmark manager doesn't provide a slot for editing
+Subject: [PATCH 36/64] Bookmark manager doesn't provide a slot for editing
  bookmarks
 
 Instead it provides an action through KBookmarkMenu that can be used
@@ -6434,10 +5529,10 @@ index 0591803db..4de85fd2a 100644
 GitLab
 
 
-From 962d95ef0c2e075a7fb12bc29222a5b6cc60cedc Mon Sep 17 00:00:00 2001
+From fcb59f355d066eecf07a3a7c16b02b54fdb71b4a Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sun, 2 Jun 2024 21:13:57 +0300
-Subject: [PATCH 39/64] Fix the configure shortcuts dialog, switch to
+Subject: [PATCH 37/64] Fix the configure shortcuts dialog, switch to
  showConfigureShortcutsDialog
 
 KXMLGui had a refactoring where configureHsortcuts was removed and a new
@@ -6465,10 +5560,10 @@ index eeba0c74f..8bfd2521f 100644
 GitLab
 
 
-From d2e83c5af2a2981814dfdb18119a393f527911b8 Mon Sep 17 00:00:00 2001
+From 83103f138f2e6ac55ab578ec4fab287ad719b810 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:17:47 +0300
-Subject: [PATCH 40/64] KRArk switch to QRegularExpression
+Subject: [PATCH 38/64] KRArk switch to QRegularExpression
 
 QRegExp has been deprecated in Qt6
 ---
@@ -6501,10 +5596,10 @@ index 8c56c4051..e170a946c 100644
 GitLab
 
 
-From 51d8e741e9aade8cb011dd39b8a5d77f75ae49ff Mon Sep 17 00:00:00 2001
+From 81d10e7d9a6cb66d370ac0fcf8efe0a05371ed76 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:18:41 +0300
-Subject: [PATCH 41/64] KrArc Fix the default value for getPath
+Subject: [PATCH 39/64] KrArc Fix the default value for getPath
 
 nullptr can't convert to QUrl::FormattingOptions so use  QUrl::None
 ---
@@ -6528,10 +5623,10 @@ index fcd55f8fb..90b8d1a9c 100644
 GitLab
 
 
-From 2a9b6c63962963930226c4157c37e0458d5a71bd Mon Sep 17 00:00:00 2001
+From cf7a6629dd85bdbf4f985dc5729b462b7d023e47 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:12 +0300
-Subject: [PATCH 42/64] KrArc remove deprecate Qt5 support code
+Subject: [PATCH 40/64] KrArc remove deprecate Qt5 support code
 
 Remove the ifdef code that supported old versions, can't work in Kf6
 anymore
@@ -6832,10 +5927,10 @@ index e170a946c..577bb21d7 100644
 GitLab
 
 
-From 3e41a71b6299530a38f0f90ee12ee0fe148ffff2 Mon Sep 17 00:00:00 2001
+From bfc4539180597aee492f418e16ba4f9f0920d7f5 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:21:59 +0300
-Subject: [PATCH 43/64] KrArc add the AuthInfo header from KIO
+Subject: [PATCH 41/64] KrArc add the AuthInfo header from KIO
 
 Required in Kf6
 ---
@@ -6858,10 +5953,10 @@ index 577bb21d7..fd26ff49e 100644
 GitLab
 
 
-From 5dab27c415a347a8da67fa99eb3bfa8de5c66cfb Mon Sep 17 00:00:00 2001
+From 18e512b11276be8dfd334ca2c677760bb86ef524 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:22:36 +0300
-Subject: [PATCH 44/64] Replace KIO::ERR_SLAVE_DEFINED
+Subject: [PATCH 42/64] Replace KIO::ERR_SLAVE_DEFINED
  withKIO::ERR_WORKER_DEFINED
 
 KIO::ERR_SLAVE_DEFINED has already been deprecated in Kf5
@@ -6886,10 +5981,10 @@ index fd26ff49e..450cadc54 100644
 GitLab
 
 
-From 0ea7dedbc8fb5503274b79caca686b050f81c534 Mon Sep 17 00:00:00 2001
+From ef8d12b03bba2b06a504e2d290534ae4e3082a05 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:29:24 +0300
-Subject: [PATCH 45/64] Fix FreeBSD C++ build
+Subject: [PATCH 43/64] Fix FreeBSD C++ build
 
 std::mem_fun_ref has been deprecated - replace with mem_fn, also
 std::not1 cannot be used with std::mem_fn
@@ -6931,10 +6026,10 @@ index ca73dd6a0..cee1f875c 100644
 GitLab
 
 
-From 661ab81148dcfa20c5c0294e279a4b187e3a675a Mon Sep 17 00:00:00 2001
+From 7b2c37b40b57a6b82dee38eb69327aba4bea9a59 Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Sat, 8 Jun 2024 10:12:56 +0300
-Subject: [PATCH 46/64] Fix CI build with kf6
+Subject: [PATCH 44/64] Fix CI build with kf6
 
 Move all the frameworks version to kf6, same with qt to qt6.
 Add required kstatusnotifier
@@ -7017,10 +6112,10 @@ index 383bf3ed4..2ca4f9052 100644
 GitLab
 
 
-From c981c972d55ad77113dc36b09bc8bceecd0b4622 Mon Sep 17 00:00:00 2001
+From 54715ff712fd0e3315a8b8caf3fea44194d2493c Mon Sep 17 00:00:00 2001
 From: Valentin Manea <email_kde@mors.eu.org>
 Date: Tue, 11 Jun 2024 22:53:06 +0300
-Subject: [PATCH 47/64] docbook DCOP is not a general entity anymore in Kf6
+Subject: [PATCH 45/64] docbook DCOP is not a general entity anymore in Kf6
 
 Temporarily don't use DCOP as entity, just expand it
 ---
@@ -7063,10 +6158,10 @@ index f38bf2914..ef06d6c6c 100644
 GitLab
 
 
-From bd99d40b35eea3b2f1964df1dad80bdf78b6a869 Mon Sep 17 00:00:00 2001
+From 9e775bad9e367baf0d36b9db653c0f48ea0994d0 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 12:06:17 +0200
-Subject: [PATCH 48/64] Fix percent signal of various jobs not connected
+Subject: [PATCH 46/64] Fix percent signal of various jobs not connected
 
 ---
  app/JobMan/jobman.cpp     | 5 ++---
@@ -7150,10 +6245,10 @@ index f2aff9593..db7fefdfe 100644
 GitLab
 
 
-From c96bc51d305d5aa60329620fefd73db3025728e3 Mon Sep 17 00:00:00 2001
+From b5df3c544321e5fa07eef5b3dd738124e83a74ef Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 12:17:28 +0200
-Subject: [PATCH 49/64] Fix wrong position of file drop menu in Wayland
+Subject: [PATCH 47/64] Fix wrong position of file drop menu in Wayland
 
 ---
  app/FileSystem/defaultfilesystem.cpp  | 5 +++--
@@ -7332,10 +6427,10 @@ index fa6c5dd73..f72d07093 100644
 GitLab
 
 
-From 7b2322ace2b443d15f66445c022c64730669817f Mon Sep 17 00:00:00 2001
+From c6bb008f2cddb28187fd782e38d49b182df064dd Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 14:48:19 +0200
-Subject: [PATCH 50/64] Fix click on system tray icon does not toggle window
+Subject: [PATCH 48/64] Fix click on system tray icon does not toggle window
  state
 
 Same bugfix in KTorrent with more detailed description: network/ktorrent!114
@@ -7363,10 +6458,10 @@ index 825efbfa6..3f67988c2 100644
 GitLab
 
 
-From a6db846f06fb2eeb3910aa18f524486e2d02b03a Mon Sep 17 00:00:00 2001
+From a809fa64295d77ccf07eced7440facad02be4e2d Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 16:32:18 +0200
-Subject: [PATCH 51/64] Fix file filter of import and export dialog for user
+Subject: [PATCH 49/64] Fix file filter of import and export dialog for user
  actions
 
 ---
@@ -7390,10 +6485,10 @@ index 353c5f298..6e40817c2 100644
 GitLab
 
 
-From a36cf199694e3891c7cbefa3b2f1cd1cee6afc4c Mon Sep 17 00:00:00 2001
+From a72d87914a2bee91a39f3702fbac249fbf700074 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 12:38:10 +0200
-Subject: [PATCH 52/64] Fix unmounted filesystems not shown in MountMan
+Subject: [PATCH 50/64] Fix unmounted filesystems not shown in MountMan
 
 ---
  app/MountMan/kmountmangui.cpp | 2 +-
@@ -7419,10 +6514,10 @@ index 576254d45..7bb3e57a0 100644
 GitLab
 
 
-From 89698d4af5b7fde4f7d84d0781d67011f0a77c1c Mon Sep 17 00:00:00 2001
+From 3566fc54a232b870ce6c71b9ef55174e30caf1b0 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 16:01:30 +0200
-Subject: [PATCH 53/64] Synchronizer: Fix showing rename dialog for existing
+Subject: [PATCH 51/64] Synchronizer: Fix showing rename dialog for existing
  desting file
 
 ---
@@ -7561,10 +6656,10 @@ index cd70a12e9..3d3d4443b 100644
 GitLab
 
 
-From a622b7587070be315dee17021ae2a181c5b3a9c9 Mon Sep 17 00:00:00 2001
+From 045c3bdafc55012f66e746e1d5546d15520f2cef Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 16:51:50 +0200
-Subject: [PATCH 54/64] Synchronizer: Fix showing skip dialog for non-existing
+Subject: [PATCH 52/64] Synchronizer: Fix showing skip dialog for non-existing
  source file
 
 ---
@@ -7618,10 +6713,10 @@ index 3d3d4443b..56446c5bd 100644
 GitLab
 
 
-From e22211c21ea3b83cca57ad40bc9dd86f1e11dc62 Mon Sep 17 00:00:00 2001
+From 5ab8e7f5a829a91a127f3003e775a987642a3d6a Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:03:42 +0200
-Subject: [PATCH 55/64] Move usage of FileSystem/sizecalculator.h closer to
+Subject: [PATCH 53/64] Move usage of FileSystem/sizecalculator.h closer to
  usage
 
 ---
@@ -7664,10 +6759,10 @@ index 5a94eb805..4e435172a 100644
 GitLab
 
 
-From 4f80d0290771f73f7f54b0be2412eec3b91f0098 Mon Sep 17 00:00:00 2001
+From 48656a1c3ce661dc29da64117b1aa6752d7aaadd Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:57:21 +0200
-Subject: [PATCH 56/64] Set C++17 as explicit C++ standard for compiler
+Subject: [PATCH 54/64] Set C++17 as explicit C++ standard for compiler
 
 ---
  CMakeLists.txt | 2 ++
@@ -7690,10 +6785,10 @@ index a9307923f..9b60b5628 100644
 GitLab
 
 
-From ec10b7d141c74bb22cf3d4c5eb4050e91ec917e8 Mon Sep 17 00:00:00 2001
+From 296a0264f5d38457e84b58fba10598f9ff8dc56a Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:31:57 +0200
-Subject: [PATCH 57/64] Replace qAsConst() by std::as_const() globally
+Subject: [PATCH 55/64] Replace qAsConst() by std::as_const() globally
 
 ---
  app/Archive/abstractthreadedjob.cpp      |  2 +-
@@ -8036,10 +7131,10 @@ index 4028d8b24..6865f336d 100644
 GitLab
 
 
-From b4dd5f31ebe6ecfdb597f7aea8d7fa35537ddb60 Mon Sep 17 00:00:00 2001
+From a423c736f4ca9c06dda4087dd49b781427b6c231 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:00:30 +0200
-Subject: [PATCH 58/64] Add KrBookmarkHandler as parent of KBookmarkManager
+Subject: [PATCH 56/64] Add KrBookmarkHandler as parent of KBookmarkManager
 
 ---
  app/BookMan/krbookmarkhandler.cpp | 2 +-
@@ -8062,10 +7157,10 @@ index ccb39f033..b69ec7c7e 100644
 GitLab
 
 
-From d489d08e6e5c554ebd51ab44f29369aacd6a9ce0 Mon Sep 17 00:00:00 2001
+From 03bb46d7d01078600af9417e2ebc4405f09e7f3d Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:04:31 +0200
-Subject: [PATCH 59/64] Register "Bring Main Window to Top" action as global
+Subject: [PATCH 57/64] Register "Bring Main Window to Top" action as global
  shortcut with default 'Meta+k'
 
 ---
@@ -8133,10 +7228,10 @@ index 3f67988c2..24681763a 100644
 GitLab
 
 
-From 0a4919ae51a2ab81d50c3aea8e462df251f60471 Mon Sep 17 00:00:00 2001
+From 418a1979148eecbf713b80b74578eacd9d61ae73 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:06:52 +0200
-Subject: [PATCH 60/64] Fix window focus of "Bring Main Window to Top" in
+Subject: [PATCH 58/64] Fix window focus of "Bring Main Window to Top" in
  Wayland
 
 In tests it still did not work: Only the taskbar entry is activated but the
@@ -8165,10 +7260,10 @@ index 24681763a..4a141400c 100644
 GitLab
 
 
-From 523e80aae23cdc871b41f40273369f0995afbeee Mon Sep 17 00:00:00 2001
+From e41afe0838fd37e90ba719939d47b18cdd20f4fe Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 4 Jul 2024 18:57:19 +0200
-Subject: [PATCH 61/64] Add workaround to show main window with "Bring Main
+Subject: [PATCH 59/64] Add workaround to show main window with "Bring Main
  Window to Top" action in Wayland
 
 ---
@@ -8197,10 +7292,10 @@ index 4a141400c..8462fe9f3 100644
 GitLab
 
 
-From 3e306e7dcbec2de2c4a997e73d372e12c8c871cd Mon Sep 17 00:00:00 2001
+From 1a7480dcad0097d933fd436eac59c0fb03b5aee6 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Fri, 5 Jul 2024 13:25:39 +0200
-Subject: [PATCH 62/64] MountMan: Implement calculating free space of
+Subject: [PATCH 60/64] MountMan: Implement calculating free space of
  filesystems without explicit waiting
 
 ---
@@ -8276,10 +7371,10 @@ index 7bb3e57a0..69d489143 100644
 GitLab
 
 
-From d972a77d9f16053c3eaf20195427ded2e3bbf09f Mon Sep 17 00:00:00 2001
+From 512daabc92d0f366cf2530c3d427497d6478553a Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Fri, 5 Jul 2024 15:36:05 +0200
-Subject: [PATCH 63/64] MountMan: Speed up updating mount points by caching
+Subject: [PATCH 61/64] MountMan: Speed up updating mount points by caching
  Solid devices
 
 ---
@@ -8449,10 +7544,10 @@ index 2bb7f1b27..fa065eee2 100644
 GitLab
 
 
-From 5a7d3c077b3a4fd1fd081eeae738fa2201e9e292 Mon Sep 17 00:00:00 2001
+From 4f3949f4c41c2143fc9a418b6b379889ba7995d3 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Mon, 8 Jul 2024 15:51:27 +0200
-Subject: [PATCH 64/64] KIO Iso: Create KCompressionDevice only for filename if
+Subject: [PATCH 62/64] KIO Iso: Create KCompressionDevice only for filename if
  mimetype is empty
 
 ---
@@ -8488,6 +7583,190 @@ index cd1eb58aa..f28fe0083 100644
          if (device->compressionType() == KCompressionDevice::None && forced) {
              delete device;
          } else {
+-- 
+GitLab
+
+
+From b942aace1a6242ab90b4974a5e81b48276a137ab Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Fri, 12 Jul 2024 19:27:07 +0200
+Subject: [PATCH 63/64] Fix crash on (any) action in toolbar context menu
+
+And use standard GUI initialization of KXmlGui for
+* toolbars visibility-
+* statusbar visibility-
+* configure shortcuts-
+* configure toolbars-
+actions in settings menu - instead of manual setup of these actions.
+---
+ app/kractions.cpp | 10 ----------
+ app/krusader.cpp  | 25 +------------------------
+ app/krusaderui.rc | 10 ++--------
+ 3 files changed, 3 insertions(+), 42 deletions(-)
+
+diff --git a/app/kractions.cpp b/app/kractions.cpp
+index 8bfd2521f..ac3378759 100644
+--- a/app/kractions.cpp
++++ b/app/kractions.cpp
+@@ -174,19 +174,9 @@ void KrActions::setupActions(Krusader *krusaderApp)
+ 
+     NEW_KACTION(tmp, i18n("Tab-Switch panel"), nullptr, Qt::Key_Tab, MAIN_VIEW, SLOT(panelSwitch()), "tab");
+ 
+-    KToggleToolBarAction *actShowToolBar = new KToggleToolBarAction(krusaderApp->toolBar(), i18n("Show Main Toolbar"), krusaderApp);
+-    krusaderApp->actionCollection()->addAction(KStandardAction::name(KStandardAction::ShowToolbar), actShowToolBar);
+-
+-    KToggleToolBarAction *actShowJobToolBar = new KToggleToolBarAction(krusaderApp->toolBar("jobToolBar"), i18n("Show Job Toolbar"), krusaderApp);
+-    krusaderApp->actionCollection()->addAction("toggle show jobbar", actShowJobToolBar);
+-
+-    KToggleToolBarAction *actShowActionsToolBar = new KToggleToolBarAction(krusaderApp->toolBar("actionsToolBar"), i18n("Show Actions Toolbar"), krusaderApp);
+-    krusaderApp->actionCollection()->addAction("toggle actions toolbar", actShowActionsToolBar);
+-
+     actShowStatusBar = KStandardAction::showStatusbar(SLOTS, SLOT(updateStatusbarVisibility()), krusaderApp->actionCollection());
+     KStandardAction::quit(krusaderApp, SLOT(quit()), krusaderApp->actionCollection());
+     KStandardAction::configureToolbars(krusaderApp, SLOT(configureToolbars()), krusaderApp->actionCollection());
+-    KStandardAction::keyBindings(krusaderApp->guiFactory(), SLOT(showConfigureShortcutsDialog()), krusaderApp->actionCollection());
+ 
+     // the toggle actions
+     NEW_KTOGGLEACTION(actToggleFnkeys, i18n("Show &FN Keys Bar"), nullptr, 0, SLOTS, SLOT(toggleFnkeys()), "toggle fn bar");
+diff --git a/app/krusader.cpp b/app/krusader.cpp
+index 8462fe9f3..d2685436b 100644
+--- a/app/krusader.cpp
++++ b/app/krusader.cpp
+@@ -94,7 +94,6 @@ Krusader::Krusader(const QCommandLineParser &parser)
+     App = this;
+     krMainWindow = this;
+     SLOTS = new KrSlots(this);
+-    setXMLFile("krusaderui.rc"); // kpart-related xml file
+ 
+     plzWait = new KrPleaseWaitHandler(this);
+ 
+@@ -195,31 +194,18 @@ Krusader::Krusader(const QCommandLineParser &parser)
+ 
+     // restore gui settings
+     {
+-        // now, check if we need to create a konsole_part
+         // call the XML GUI function to draw the UI
+-        createGUI(MAIN_VIEW->terminalDock()->part());
++        setupGUI(Default, "krusaderui.rc"); // kpart-related xml file
+ 
+-        // this needs to be called AFTER createGUI() !!!
+         updateUserActions();
+         _listPanelActions->guiUpdated();
+ 
+         // not using this. See savePosition()
+         // applyMainWindowSettings();
+ 
+-        const KConfigGroup cfgToolbar(krConfig, "Main Toolbar");
+-        toolBar()->applySettings(cfgToolbar);
+-
+-        const KConfigGroup cfgJobBar(krConfig, "Job Toolbar");
+-        toolBar("jobToolBar")->applySettings(cfgJobBar);
+-
+-        const KConfigGroup cfgActionsBar(krConfig, "Actions Toolbar");
+-        toolBar("actionsToolBar")->applySettings(cfgActionsBar);
+-
+         // restore toolbars position and visibility
+         restoreState(startupGroup.readEntry("State", QByteArray()));
+ 
+-        statusBar()->setVisible(startupGroup.readEntry("Show status bar", _ShowStatusBar));
+-
+         MAIN_VIEW->updateGUI(startupGroup);
+ 
+         // popular urls
+@@ -391,20 +377,11 @@ void Krusader::saveSettings()
+     KConfigGroup noGroup(krConfig, QString());
+     noGroup.writeEntry("Config Version", KrGlobal::sConfigVersion);
+ 
+-    // save toolbar settings
+     KConfigGroup cfg(krConfig, "Main Toolbar");
+-    toolBar()->saveSettings(cfg);
+-
+-    cfg = krConfig->group("Job Toolbar");
+-    toolBar("jobToolBar")->saveSettings(cfg);
+-
+-    cfg = krConfig->group("Actions Toolbar");
+-    toolBar("actionsToolBar")->saveSettings(cfg);
+ 
+     cfg = krConfig->group("Startup");
+     // save toolbar visibility and position
+     cfg.writeEntry("State", saveState());
+-    cfg.writeEntry("Show status bar", statusBar()->isVisible());
+ 
+     // save panel and window settings
+     if (cfg.readEntry("Remember Position", _RememberPos))
+diff --git a/app/krusaderui.rc b/app/krusaderui.rc
+index 3a631dc69..dafd53a24 100644
+--- a/app/krusaderui.rc
++++ b/app/krusaderui.rc
+@@ -2,7 +2,7 @@
+ <!-- NOTE: Always update the version in the gui tag below if you make changes to the menu bar and its actions!
+            This will trigger an update of the ~/.local/share/kxmlgui5/krusader/krusaderui.rc file next time
+            user opens the application: the menu bar will be replaced with the new version, toolbars updated.  -->
+-<gui version="28" name="krusader" >
++<gui version="29" name="krusader" >
+  <MenuBar>
+   <Menu name="file" >
+    <text>&amp;File</text>
+@@ -116,13 +116,7 @@
+   </Menu>
+   <Menu name="settings" noMerge="1">
+    <text>&amp;Settings</text>
+-   <Action name="options_show_menubar" />
+-   <Menu name="show_toolbars" >
+-     <text>&amp;Toolbars</text>
+-     <Action name="options_show_toolbar" />
+-     <Action name="toggle show jobbar" />
+-     <Action name="toggle actions toolbar"/>
+-   </Menu>
++   <Merge/>
+    <Action name="options_show_statusbar" />
+    <Action name="toggle fn bar" />
+    <Action name="toggle terminal emulator" />
+-- 
+GitLab
+
+
+From 9094ef2ee41732745d72c54c82e96386e25c0f3c Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Sat, 13 Jul 2024 18:35:17 +0200
+Subject: [PATCH 64/64] KrViwer: Fix crash on (any) action in toolbar context
+ menu
+
+---
+ app/KViewer/krviewer.cpp | 6 ++----
+ 1 file changed, 2 insertions(+), 4 deletions(-)
+
+diff --git a/app/KViewer/krviewer.cpp b/app/KViewer/krviewer.cpp
+index 4f41e8e23..bd21a5867 100644
+--- a/app/KViewer/krviewer.cpp
++++ b/app/KViewer/krviewer.cpp
+@@ -66,7 +66,6 @@ KrViewer::KrViewer(QWidget *parent)
+     , sizeY(-1)
+ {
+     // setWFlags(Qt::WType_TopLevel | WDestructiveClose);
+-    setXMLFile("krviewer.rc"); // kpart-related xml file
+     setHelpMenuEnabled(false);
+ 
+     connect(&manager, &KParts::PartManager::activePartChanged, this, &KrViewer::createGUI);
+@@ -174,6 +173,8 @@ KrViewer::KrViewer(QWidget *parent)
+ 
+     // filtering out the key events
+     menuBar()->installEventFilter(this);
++
++    setupGUI(ToolBar | StatusBar | Save | Create, "krviewer.rc");
+ }
+ 
+ KrViewer::~KrViewer()
+@@ -202,9 +203,6 @@ void KrViewer::createGUI(KParts::Part *part)
+ 
+     updateActions();
+ 
+-    toolBar()->show();
+-    statusBar()->show();
+-
+     // the KParts part may override the viewer shortcuts. We prevent it
+     // by installing an event filter on the menuBar() and the part
+     reservedKeys.clear();
 -- 
 GitLab
 
