@@ -16,7 +16,7 @@ KEYWORDS=""
 IUSE="debug selinux test xmlrpc"
 RESTRICT="!test? ( test )"
 
-COMMON_DEPEND="=net-libs/libtorrent-9999
+COMMON_DEPEND="=net-libs/libtorrent-9999-r1
 	>=net-misc/curl-7.19.1
 	sys-libs/ncurses:0=
 	xmlrpc? ( dev-libs/xmlrpc-c:= )"
