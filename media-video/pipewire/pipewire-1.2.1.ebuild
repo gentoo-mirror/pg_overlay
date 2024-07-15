@@ -23,7 +23,7 @@ EAPI=8
 : ${PIPEWIRE_DOCS_PREBUILT:=1}
 
 PIPEWIRE_DOCS_PREBUILT_DEV=sam
-PIPEWIRE_DOCS_VERSION="${PV}"
+PIPEWIRE_DOCS_VERSION="$(ver_cut 1-2).0"
 # Default to generating docs (inc. man pages) if no prebuilt; overridden later
 PIPEWIRE_DOCS_USEFLAG="+man"
 PYTHON_COMPAT=( python3_{11..12} )
@@ -176,7 +176,7 @@ PDEPEND=">=media-video/wireplumber-0.5.2"
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
 	# https://gitlab.freedesktop.org/pipewire/pipewire/-/merge_requests/2061
-	"${FILESDIR}"/${P}-automagic-gsettings.patch
+	"${FILESDIR}"/${PN}-1.2.0-automagic-gsettings.patch
 )
 
 pkg_setup() {
