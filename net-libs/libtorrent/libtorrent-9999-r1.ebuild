@@ -27,7 +27,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
-S="${WORKDIR}/${PN}/${PN}"
+S="${WORKDIR}/${PN}-${PV}/${PN}"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-sysroot.patch
