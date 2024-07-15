@@ -1,6 +1,6 @@
 --- a/configure.ac
 +++ b/configure.ac
-@@ -42,7 +42,6 @@
+@@ -43,7 +43,6 @@
  TORRENT_ENABLE_INTERRUPT_SOCKET
 
  TORRENT_ENABLE_ARCH

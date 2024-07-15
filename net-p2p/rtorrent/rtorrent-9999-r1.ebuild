@@ -27,7 +27,7 @@ DEPEND="${COMMON_DEPEND}
 	dev-util/cppunit
 	virtual/pkgconfig"
 
-S=${WORKDIR}/${PN}/${PN}
+S=${WORKDIR}/${PN}-${PV}/${PN}
 
 DOCS=( doc/rtorrent.rc )
 
