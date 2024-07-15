@@ -27,7 +27,7 @@ RDEPEND="
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
-S="${WORKDIR}/rtorrent/${PN}"
+S="${WORKDIR}/${PN}/${PN}"
 
 PATCHES=(
 	"${FILESDIR}"/${P}-sysroot.patch
