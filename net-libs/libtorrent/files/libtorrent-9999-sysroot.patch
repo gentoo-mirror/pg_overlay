@@ -1,6 +1,6 @@
 --- a/configure.ac
 +++ b/configure.ac
-@@ -42,7 +42,6 @@
+@@ -43,7 +43,6 @@
  TORRENT_ENABLE_INTERRUPT_SOCKET
 
  TORRENT_ENABLE_ARCH
@@ -8,18 +8,17 @@
 
  dnl TORRENT_WITH_XFS
  TORRENT_WITHOUT_KQUEUE
-@@ -78,7 +77,7 @@
- AX_CHECK_ZLIB
+@@ -60,7 +60,6 @@
  AX_PTHREAD
 
+ PKG_CHECK_MODULES([ZLIB], [zlib])
 -PKG_CHECK_MODULES([CPPUNIT], [cppunit],, [no_cppunit="yes"])
-+PKG_CHECK_MODULES([ZLIB], [zlib])
 
  CFLAGS="$PTHREAD_CFLAGS $CPPUNIT_CFLAGS $CFLAGS"
  CXXFLAGS="$PTHREAD_CFLAGS $CPPUNIT_CFLAGS $CXXFLAGS"
 --- a/src/torrent/Makefile.am
 +++ b/src/torrent/Makefile.am
-@@ -137,8 +137,8 @@
+@@ -58,8 +58,8 @@
         tracker_list.cc \
         tracker_list.h
 
@@ -27,6 +26,6 @@
 -
 +libsub_torrentutils_la_LIBADD = $(ZLIB_LIBS)
 +AM_CPPFLAGS = -I$(srcdir) -I$(srcdir)/.. -I$(top_srcdir) $(ZLIB_CFLAGS)
- libtorrent_torrent_data_includedir = $(includedir)/torrent/data
- libtorrent_torrent_data_include_HEADERS = \
-        data/block.h \
+ libtorrentincludedir = $(includedir)/torrent
+ libtorrentinclude_HEADERS = \
+ 	bitfield.h \

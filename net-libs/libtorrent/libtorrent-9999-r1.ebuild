@@ -29,9 +29,9 @@ BDEPEND="virtual/pkgconfig"
 
 S="${WORKDIR}/${PN}-${PV}/${PN}"
 
-#PATCHES=(
-#	"${FILESDIR}"/${P}-sysroot.patch
-#)
+PATCHES=(
+	"${FILESDIR}"/${P}-sysroot.patch
+)
 
 src_prepare() {
 	default
