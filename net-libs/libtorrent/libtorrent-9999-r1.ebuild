@@ -53,8 +53,7 @@ src_configure() {
 		--enable-aligned \
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
-		${disable_instrumentation} \
-		--with-posix-fallocate
+		${disable_instrumentation}
 }
 
 src_install() {
