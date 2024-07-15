@@ -5,7 +5,7 @@ EAPI=8
 
 inherit autotools git-r3 linux-info
 
-DESCRIPTION="BitTorrent Client using libtorrent"
+DESCRIPTION="Stable high performance BitTorrent client"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
 EGIT_REPO_URI="https://github.com/stickz/${PN}.git"
 EGIT_BRANCH="master"
