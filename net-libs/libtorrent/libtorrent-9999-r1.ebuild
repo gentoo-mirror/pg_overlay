@@ -54,6 +54,7 @@ src_configure() {
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
 		${disable_instrumentation}
+		--without-udns
 }
 
 src_install() {
