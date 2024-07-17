@@ -53,7 +53,7 @@ src_configure() {
 		--enable-aligned \
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
-		${disable_instrumentation}
+		${disable_instrumentation} \
 		--without-udns
 }
 
