@@ -1,4 +1,4 @@
-# Copyright 2021-2023 Gentoo Authors
+# Copyright 2021-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -13,34 +13,46 @@ EGIT_BRANCH="RC_2_0"
 #EGIT_SUBMODULES=()
 
 LICENSE="BSD"
-SLOT="0/2.0"
-KEYWORDS=""
-IUSE="+dht debug gnutls python ssl test"
+SLOT="0/$(ver_cut 1-2)"
+KEYWORDS="amd64 ~arm ~arm64 ~ppc ~ppc64 ~riscv ~sparc x86"
+IUSE="+dht debug examples gnutls python ssl test"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 RESTRICT="!test? ( test )"
 
 DEPEND="
 	dev-libs/boost:=
+	ssl? (
+		gnutls? ( net-libs/gnutls:= )
+		!gnutls? ( dev-libs/openssl:= )
+	)
+"
+RDEPEND="
+	${DEPEND}
 	python? (
 		${PYTHON_DEPS}
 		$(python_gen_cond_dep '
 			dev-libs/boost[python,${PYTHON_USEDEP}]
 		')
 	)
-	ssl? (
-		gnutls? ( net-libs/gnutls:= )
-		!gnutls? ( dev-libs/openssl:= )
-	)
 "
-RDEPEND="${DEPEND}"
-BDEPEND="python? (
+BDEPEND="
+	dev-util/patchelf
+	python? (
+		${PYTHON_DEPS}
 		$(python_gen_cond_dep '
 			dev-python/setuptools[${PYTHON_USEDEP}]
 		')
-	)"
+	)
+	test? (
+		${PYTHON_DEPS}
+	)
+"
 
 pkg_setup() {
-	use python && python-single-r1_pkg_setup
+	# python required for tests due to webserver.py
+	if use python || use test; then
+		python-single-r1_pkg_setup
+	fi
 }
 
 src_configure() {
@@ -48,7 +60,7 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DCMAKE_CXX_STANDARD=17
 		-DBUILD_SHARED_LIBS=ON
-		-Dbuild_examples=OFF
+		-Dbuild_examples=$(usex examples)
 		-Ddht=$(usex dht ON OFF)
 		-Dencryption=$(usex ssl ON OFF)
 		-Dgnutls=$(usex gnutls ON OFF)
@@ -68,13 +80,29 @@ src_configure() {
 }
 
 src_test() {
-	local myctestargs=(
+	CMAKE_SKIP_TESTS=(
 		# Needs running UPnP server
-		-E "test_upnp"
+		"test_upnp"
+		# Fragile to parallelization
+		# https://bugs.gentoo.org/854603#c1
+		"test_utp"
+		# Flaky test, fails randomly
+		"test_remove_torrent"
 	)
 
-	# Checked out Fedora's test workarounds for inspiration
-	# https://src.fedoraproject.org/rpms/rb_libtorrent/blob/rawhide/f/rb_libtorrent.spec#_120
-	# -j1 for https://bugs.gentoo.org/854603#c1
-	LD_LIBRARY_PATH="${BUILD_DIR}:${LD_LIBRARY_PATH}" cmake_src_test -j1
+	LD_LIBRARY_PATH="${BUILD_DIR}:${LD_LIBRARY_PATH}" cmake_src_test
+}
+
+src_install() {
+	cmake_src_install
+	einstalldocs
+
+	if use examples; then
+		pushd "${BUILD_DIR}"/examples >/dev/null || die
+		for binary in {client_test,connection_tester,custom_storage,dump_bdecode,dump_torrent,make_torrent,simple_client,stats_counters,upnp_test}; do
+			patchelf --remove-rpath ${binary} || die
+			dobin ${binary}
+		done
+		popd >/dev/null || die
+	fi
 }

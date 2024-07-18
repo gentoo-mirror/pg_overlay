@@ -13,8 +13,8 @@ if [[ ${PV} == *9999 ]]; then
 	inherit git-r3
 else
 	SRC_URI="
-		mirror://sourceforge/qbittorrent/${P}.tar.xz
-		verify-sig? ( mirror://sourceforge/qbittorrent/${P}.tar.xz.asc )
+		https://downloads.sourceforge.net/qbittorrent/${P}.tar.xz
+		verify-sig? ( https://downloads.sourceforge.net/qbittorrent/${P}.tar.xz.asc )
 	"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86"
 
@@ -24,7 +24,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+dbus +gui qt6 test webui"
+IUSE="+dbus +gui qt6 systemd test webui"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="|| ( gui webui )
 	dbus? ( gui )
@@ -96,7 +96,6 @@ src_configure() {
 			-DQT6=ON
 
 			-DWEBUI=$(usex webui)
-
 			-DTESTING=$(usex test)
 			-DCMAKE_BUILD_TYPE=Release
 		)

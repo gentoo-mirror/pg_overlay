@@ -2,14 +2,15 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="person">
-		<email>zlogene@gentoo.org</email>
-		<name>Mikle Kolyada</name>
+		<email>eschwartz@gentoo.org</email>
+		<name>Eli Schwartz</name>
 	</maintainer>
 	<use>
-		<flag name="webui">Enable the Web UI</flag>
+		<flag name="webui">
+			Install qBittorrent Web UI (qbittorrent-nox) and systemd/OpenRC service
+		</flag>
 	</use>
 	<upstream>
 		<remote-id type="github">qbittorrent/qBittorrent</remote-id>
-		<remote-id type="sourceforge">qbittorrent</remote-id>
 	</upstream>
 </pkgmetadata>
