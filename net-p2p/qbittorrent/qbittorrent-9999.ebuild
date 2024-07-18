@@ -24,7 +24,7 @@ fi
 
 LICENSE="GPL-2"
 SLOT="0"
-IUSE="+dbus +gui qt6 systemd test webui"
+IUSE="+dbus +gui qt6 test webui"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="|| ( gui webui )
 	dbus? ( gui )
