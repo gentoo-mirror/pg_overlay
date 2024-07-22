@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_HANDBOOK="forceoptional"
 PVCUT=$(ver_cut 1-3)
-KFMIN=6.0.0
+KFMIN=6.3.0
 QTMIN=6.6.2
 inherit ecm gear.kde.org
 
@@ -36,5 +36,3 @@ DEPEND="
 	>=kde-frameworks/kxmlgui-${KFMIN}:6
 "
 RDEPEND="${DEPEND}"
-
-EGIT_BRANCH="kf6"
