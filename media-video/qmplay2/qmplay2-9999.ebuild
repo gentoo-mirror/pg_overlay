@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -23,7 +23,7 @@ SLOT="0"
 
 IUSE="avdevice +audiofilters +alsa cdio cuvid extensions gme inputs libass
 	modplug notifications opengl pipewire portaudio pulseaudio qt6 sid
-	shaders +taglib vaapi vdpau videofilters visualizations vulkan xv"
+	shaders +taglib vaapi videofilters visualizations vulkan xv"
 
 REQUIRED_USE="
 	audiofilters? ( || ( alsa pipewire portaudio pulseaudio ) )
@@ -31,7 +31,7 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	media-video/ffmpeg:=[vaapi?,vdpau?]
+	media-video/ffmpeg:=[vaapi?]
 	!qt6? (
 		dev-qt/qtcore:5
 		dev-qt/qtdbus:5
@@ -89,11 +89,10 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_WITH_QT6=$(usex qt6)
 		# core
-		-DUSE_LINK_TIME_OPTIMIZATION=ON
 		-DUSE_UPDATES=OFF
 		-DUSE_ALSA=$(usex alsa)
 		-DUSE_AUDIOCD=$(usex cdio)
-		-DUSE_DBUS_SUSPEND=ON
+		-DUSE_DBUS_PM=ON
 		-DUSE_FREEDESKTOP_NOTIFICATIONS=ON
 		-DUSE_LIBASS=$(usex libass)
 		-DUSE_NOTIFY=$(usex notifications)
@@ -105,7 +104,6 @@ src_configure() {
 		# ffmpeg
 		-DUSE_FFMPEG_AVDEVICE=$(usex avdevice)
 		-DUSE_FFMPEG_VAAPI=$(usex vaapi)
-		-DUSE_FFMPEG_VDPAU=$(usex vdpau)
 
 		# chiptune
 		-DUSE_CHIPTUNE_GME=$(usex gme)
@@ -133,6 +131,7 @@ src_configure() {
 
 		#
 		-DCMAKE_BUILD_TYPE=Release
+		-DCMAKE_INTERPROCEDURAL_OPTIMIZATION=ON
 		-DUSE_RADIO=OFF
 		-DUSE_PCH=ON
     )
