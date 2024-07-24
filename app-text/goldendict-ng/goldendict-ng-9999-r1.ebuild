@@ -6,9 +6,9 @@ PLOCALES="ar_SA ay_BO be_BY bg_BG crowdin cs_CZ de_CH de_DE el_GR eo_UY es_AR es
 
 inherit cmake desktop git-r3 plocale
 
-DESCRIPTION="Feature-rich dictionary lookup program"
-HOMEPAGE="http://goldendict.org/"
-EGIT_REPO_URI="https://github.com/xiaoyifang/${PN}-ng.git"
+DESCRIPTION="The Next Generation GoldenDict. Feature-rich dictionary lookup program"
+HOMEPAGE="https://xiaoyifang.github.io/goldendict-ng"
+EGIT_REPO_URI="https://github.com/xiaoyifang/${PN}.git"
 EGIT_BRANCH="staged"
 EGIT_SUBMODULES=()
 
