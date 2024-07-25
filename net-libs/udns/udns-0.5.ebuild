@@ -24,7 +24,7 @@ src_configure() {
 }
 
 src_compile() {
-	emake $(usex tools shared sharedlib)
+	emake $(usex rblcheck_s dnsget_s shared sharedlib)
 }
 
 src_install() {
@@ -33,7 +33,7 @@ src_install() {
 
 	if use tools; then
 		newbin dnsget_s dnsget
-		newbin ex-rdns_s ex-rdns
+		#newbin ex-rdns_s ex-rdns
 		newbin rblcheck_s rblcheck
 	fi
 
