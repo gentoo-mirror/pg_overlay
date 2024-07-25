@@ -21,6 +21,7 @@ IUSE="debug ssl"
 
 # cppunit dependency - https://github.com/rakshasa/libtorrent/issues/182
 RDEPEND="
+	net-libs/udns
 	dev-util/cppunit:=
 	sys-libs/zlib
 	ssl? ( dev-libs/openssl:= )"
@@ -51,10 +52,10 @@ src_configure() {
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		--enable-aligned \
+		--enable-udns \
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
-		${disable_instrumentation} \
-		--disable-udns
+		${disable_instrumentation}
 }
 
 src_install() {

@@ -12,10 +12,9 @@ SRC_URI="http://www.corpit.ru/mjt/udns/${P}.tar.gz"
 LICENSE="LGPL-2.1"
 SLOT="0"
 KEYWORDS="~amd64 ~hppa ~ppc ~ppc64 ~sparc ~x86"
-IUSE="ipv6 static +tools"
+IUSE="ipv6 static tools"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.4-configure-pton-ntop-clang16.patch
 )
 
 src_configure() {
