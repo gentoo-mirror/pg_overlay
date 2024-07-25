@@ -15,6 +15,7 @@ KEYWORDS="~amd64 ~hppa ~ppc ~ppc64 ~sparc ~x86"
 IUSE="ipv6 static tools"
 
 PATCHES=(
+	"${FILESDIR}/${PN}-configure-c99.patch"
 )
 
 src_configure() {
