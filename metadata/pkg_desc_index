@@ -133,6 +133,7 @@ net-libs/libsrtp 2.5.0: Open-source implementation of the Secure Real-time Trans
 net-libs/libtorrent 9999 9999-r1: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 22.5.1: A JavaScript runtime built on Chrome's V8 JavaScript engine
+net-libs/udns 0.5: Async-capable DNS stub resolver library
 net-misc/freerdp 3.6.3: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/remmina 1.4.35-r1: A GTK+ RDP, SPICE, VNC and SSH client
