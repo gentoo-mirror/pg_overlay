@@ -38,7 +38,7 @@ COMMON_DEPEND="
 	>=kde-frameworks/kcrash-${KFMIN}:6
 	>=kde-frameworks/kdbusaddons-${KFMIN}:6
 	>=kde-frameworks/kdeclarative-${KFMIN}:6
-	>=kde-frameworks/kglobalaccel-${KFMIN}:6=[]
+	>=kde-frameworks/kglobalaccel-${KFMIN}:6=
 	>=kde-frameworks/kguiaddons-${KFMIN}:6[wayland]
 	>=kde-frameworks/ki18n-${KFMIN}:6
 	>=kde-frameworks/kidletime-${KFMIN}:6=[wayland]
