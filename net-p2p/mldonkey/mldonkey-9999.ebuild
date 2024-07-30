@@ -37,8 +37,7 @@ DEPEND="${RDEPEND}
 
 RESTRICT="!ocamlopt? ( strip )"
 
-PATCHES=( "${FILESDIR}/cpp17-byte-namespace.patch"
-			"${FILESDIR}/92.patch")
+PATCHES=("${FILESDIR}/92.patch")
 
 pkg_setup() {
 	# dev-lang/ocaml creates its own objects but calls gcc for linking, which will
