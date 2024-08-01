@@ -98,7 +98,7 @@ media-libs/libmpdclient 9999: A C library which implements the Music Player Daem
 media-libs/libpulse 16.1-r4: Libraries for PulseAudio clients
 media-libs/libsdl2 2.30.2-r2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122: VoIP library for Telegram clients
-media-libs/mesa 24.1.4 9999: OpenGL-like graphic library for Linux
+media-libs/mesa 24.1.5 9999: OpenGL-like graphic library for Linux
 media-libs/opus 1.4: Open codec for interactive speech and music transmission over the Internet
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/taglib 2.0.1_pre: Library for reading and editing audio meta data
