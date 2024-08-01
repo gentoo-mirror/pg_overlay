@@ -123,11 +123,10 @@ net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application
 net-libs/glib-networking 2.80.0: Network-related giomodules for glib
 net-libs/libmbim 1.28.4: Mobile Broadband Interface Model (MBIM) modem protocol helper library
 net-libs/libsrtp 2.5.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
-net-libs/libtorrent 9999: BitTorrent library written in C++ for *nix
+net-libs/libtorrent 9999 9999-r1: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 22.5.1: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/udns 0.5: Async-capable DNS stub resolver library
-net-misc/curl 8.9.1: A Client that groks URLs
 net-misc/freerdp 3.6.3: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/remmina 1.4.35-r1: A GTK+ RDP, SPICE, VNC and SSH client
@@ -138,7 +137,7 @@ net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: A fork of nicotine, a Soulseek client in Python
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
-net-p2p/rtorrent 9999: BitTorrent Client using libtorrent
+net-p2p/rtorrent 9999 9999-r1: Stable high performance BitTorrent client
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
