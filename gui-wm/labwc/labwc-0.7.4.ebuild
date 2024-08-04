@@ -1,4 +1,4 @@
-# Copyright 2024 Aisha Tammy
+# Copyright 2021 Aisha Tammy, B. Gazotti and Daniella Kicsak
 # Distributed under the terms of the ISC License
 
 EAPI=8
@@ -30,6 +30,7 @@ RDEPEND="
 	x11-libs/libdrm:=
 	x11-libs/libxkbcommon:=[X?]
 	x11-libs/pango[X?]
+	x11-libs/pixman
 	nls? ( sys-devel/gettext )
 	svg? ( gnome-base/librsvg:= )
 	X? ( x11-libs/libxcb:0= )
@@ -41,6 +42,9 @@ BDEPEND="
 	sys-devel/gettext
 	virtual/pkgconfig
 "
+PATCHES=(
+	"${FILESDIR}"/${PN}-meson_doc_path.patch
+)
 
 src_configure() {
 	local emesonargs=(
@@ -50,4 +54,12 @@ src_configure() {
 		-Dman-pages=enabled
 	)
 	meson_src_configure
+}
+
+pkg_postinst() {
+	xdg_icon_cache_update
+}
+
+pkg_postrm() {
+	xdg_icon_cache_update
 }
