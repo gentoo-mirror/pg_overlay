@@ -10,6 +10,7 @@ SRC_URI="https://github.com/ada-url/ada/archive/refs/tags/v2.9.0.tar.gz -> ${P}.
 
 LICENSE="Apache-2.0 MIT"
 SLOT="0"
+KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv"
 
 # src_prepare() {
 # 	sed -r \
