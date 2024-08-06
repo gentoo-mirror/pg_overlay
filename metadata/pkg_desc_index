@@ -12,8 +12,8 @@ app-misc/doublecmd 1.1.16: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
-app-office/libreoffice 24.8.0.1: A full office productivity suite
-app-office/libreoffice-l10n 24.8.0.1: Translations for the Libreoffice suite
+app-office/libreoffice 24.8.0.2: A full office productivity suite
+app-office/libreoffice-l10n 24.8.0.2: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.1.0: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
@@ -95,7 +95,7 @@ media-libs/mesa 24.1.5 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/shaderc 2024.1: Collection of tools, libraries and tests for shader compilation
 media-libs/taglib 2.0.1_pre: Library for reading and editing audio meta data
-media-libs/tg_owt 0_pre20231221 0_pre20240804: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20231221 0_pre20240730: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
