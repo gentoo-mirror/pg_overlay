@@ -184,7 +184,7 @@ src_configure() {
 		## KF6CoreAddons is currently unavailable in ::gentoo
 		-DCMAKE_DISABLE_FIND_PACKAGE_KF${qt}CoreAddons=$(usex qt6)
 
-		-DDESKTOP_APP_USE_LIBDISPATCH=$(usex libdispatch)
+		#-DDESKTOP_APP_USE_LIBDISPATCH=$(usex libdispatch)
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
 		#-DDESKTOP_APP_DISABLE_WAYLAND_INTEGRATION=$(usex !wayland)
 		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
