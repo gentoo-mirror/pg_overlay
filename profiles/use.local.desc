@@ -160,25 +160,6 @@ mail-client/thunderbird:system-png - Use the system-wide media-libs/libpng inste
 mail-client/thunderbird:system-python-libs - Use system's python site instead of bundled python libraries
 mail-client/thunderbird:system-webp - Use the system-wide media-libs/libwebp instead of bundled.
 mail-client/thunderbird:wifi - Enable necko-wifi for NetworkManager integration, and access point MAC address scanning for better precision with opt-in geolocation services
-media-libs/libavif:aom - Enable support for the AOM codec encoding and decoding
-media-libs/libavif:dav1d - Enable support for the dav1d codec decoding
-media-libs/libavif:extras - Build extra apps (avifenc, avifdec) and test files
-media-libs/libavif:gdk-pixbuf - Build a gdk-pixbuf loader
-media-libs/libavif:rav1e - Enable support for the rav1e codec encoding
-media-libs/libavif:svt-av1 - Enable support for the SVT-AV1 encoder
-media-libs/libde265:dec265 - Enable build of dec265 example program
-media-libs/libde265:enc265 - Enable build of enc265 tool
-media-libs/libde265:sdl - Enable video output of dec265 example program with media-libs/libsdl
-media-libs/libde265:tools - Enable installation of varous binary tools
-media-libs/libheif:aom - Use media-libs/libaom for AVIF encoding/decoding
-media-libs/libheif:gdk-pixbuf - Enable x11-libs/gdk-pixbuf plugin
-media-libs/libheif:go - Enable building dev-lang/go code/examples
-media-libs/libheif:rav1e - Use media-video/rav1e for AVIF encoding
-media-libs/libheif:x265 - Use media-libs/x265 for HEIF encoding
-media-libs/libpulse:asyncns - Use libasyncns for asynchronous name resolution.
-media-libs/libpulse:doc - Build the doxygen-described API documentation.
-media-libs/libpulse:glib - Add support to dev-libs/glib-based mainloop for the libpulse client library, to allow using libpulse on glib-based programs.
-media-libs/libpulse:valgrind - Compile in valgrind memory hints
 media-libs/libsdl2:fcitx4 - Enable support for app-i18n/fcitx 4
 media-libs/libsdl2:gles1 - include OpenGL ES 1.0 support
 media-libs/libsdl2:haptic - Enable the haptic (force feedback) subsystem
@@ -202,7 +183,6 @@ media-libs/mesa:vulkan-overlay - Build vulkan-overlay-layer which displays Frame
 media-libs/mesa:wayland - Enable support for dev-libs/wayland
 media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
 media-libs/mesa:zink - Enable the Zink OpenGL-over-Vulkan Gallium driver
-media-libs/opus:custom-modes - Enable non-Opus modes, e.g. 44.1 kHz and 2^n frames
 media-sound/deadbeef:converter - File format converter
 media-sound/deadbeef:cover - Support for cover art
 media-sound/deadbeef:hotkeys - Keyboard shortcuts support
