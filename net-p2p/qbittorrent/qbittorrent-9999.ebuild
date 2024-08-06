@@ -93,8 +93,6 @@ src_configure() {
 			# More verbose build logs are preferable for bug reports
 			-DVERBOSE_CONFIGURE=OFF
 
-			-DQT6=ON
-
 			-DWEBUI=$(usex webui)
 			-DTESTING=$(usex test)
 			-DCMAKE_BUILD_TYPE=Release
