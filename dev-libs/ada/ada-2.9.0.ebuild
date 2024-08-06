@@ -6,7 +6,7 @@ EAPI=8
 inherit cmake
 DESCRIPTION="WHATWG-compliant and fast URL parser written in modern C++"
 HOMEPAGE="https://github.com/ada-url/ada"
-SRC_URI="https://codeload.github.com/${PN}-url/${PN}/tar.gz/refs/tags/v${PV} -> ${P}.tar.gz"
+SRC_URI="https://github.com/ada-url/ada/archive/refs/tags/v2.9.0.tar.gz -> ${P}.tar.gz"
 
 LICENSE="Apache-2.0 MIT"
 SLOT="0"
