@@ -171,7 +171,7 @@ PATCHES=(
 	"${FILESDIR}"/1.74.1-cross-compile-libz.patch
 	#"${FILESDIR}"/1.70.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
-	"${FILESDIR}"/0001-bootstrap-allow-disabling-target-self-contained.patch
+	#"${FILESDIR}"/0001-bootstrap-allow-disabling-target-self-contained.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system.patch
 	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/rustc-${PV}-unbundle-sqlite.patch
