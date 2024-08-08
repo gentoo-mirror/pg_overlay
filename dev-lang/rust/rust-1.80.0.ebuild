@@ -306,7 +306,7 @@ src_prepare() {
 		rm -rf src/tools/lld
 		rm -rf src/tools/lldb
 		# CI tooling won't be used
-		rm -rf src/ci
+		#rm -rf src/ci
 	fi
 
 	# Remove other unused vendored libraries 
