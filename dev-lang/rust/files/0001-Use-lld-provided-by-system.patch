@@ -63,3 +63,13 @@ diff -Naur a/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softflo
 -- 
 2.41.0
 
+--- a/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs	2024-04-09 19:20:09.000000000 +0200
++++ b/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs	2024-04-26 11:22:31.988601550 +0200
+@@ -9,6 +9,7 @@ pub fn target() -> Target {
+     base.max_atomic_width = Some(128);
+     base.add_pre_link_args(LinkerFlavor::Msvc(Lld::No), &["/machine:arm64"]);
+     base.features = "+v8a".into();
++    base.linker = Some("lld".into());
+ 
+     Target {
+         llvm_target: "aarch64-unknown-windows".into(),

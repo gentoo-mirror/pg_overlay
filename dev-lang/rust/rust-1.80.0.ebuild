@@ -160,6 +160,8 @@ QA_PRESTRIPPED="
 # so we can safely silence the warning for this QA check.
 QA_EXECSTACK="usr/lib/${PN}/${PV}/lib/rustlib/*/lib*.rlib:lib.rmeta"
 
+S="${WORKDIR}/${MY_P}-src"
+
 # causes double bootstrap
 RESTRICT="test"
 
@@ -169,12 +171,11 @@ PATCHES=(
 	"${FILESDIR}"/1.74.1-cross-compile-libz.patch
 	#"${FILESDIR}"/1.70.0-ignore-broken-and-non-applicable-tests.patch
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
+	"${FILESDIR}"/0001-bootstrap-allow-disabling-target-self-contained.patch
 	"${FILESDIR}"/0001-Use-lld-provided-by-system.patch
 	"${FILESDIR}"/0003-compiler-Change-LLVM-targets.patch
 	"${FILESDIR}"/rustc-${PV}-unbundle-sqlite.patch
 )
-
-S="${WORKDIR}/${MY_P}-src"
 
 clear_vendor_checksums() {
 	sed -i 's/\("files":{\)[^}]*/\1/' "vendor/${1}/.cargo-checksum.json" || die
@@ -361,7 +362,6 @@ src_configure() {
 
 	local cm_btype="$(usex debug DEBUG RELEASE)"
 	cat <<- _EOF_ > "${S}"/config.toml
-		change-id = 102579
 		[llvm]
 		download-ci-llvm = false
 		optimize = $(toml_usex !debug)
@@ -503,6 +503,8 @@ src_configure() {
 		fi
 	done
 	if use wasm; then
+		wasm_target="wasm32-unknown-unknown"
+		export CFLAGS_${wasm_target//-/_}="$(filter-flags '-mcpu*' '-march*' '-mtune*'; echo "$CFLAGS")"
 		cat <<- _EOF_ >> "${S}"/config.toml
 			[target.wasm32-unknown-unknown]
 			linker = "$(usex system-llvm lld rust-lld)"
@@ -757,6 +759,7 @@ src_install() {
 	doins "${T}/provider-${P}"
 
 	if use dist; then
+		"${EPYTHON}" ./x.py dist -vv --config="${S}"/config.toml -j$(makeopts_jobs) || die
 		insinto "/usr/lib/${PN}/${PV}/dist"
 		doins -r "${S}/build/dist/."
 	fi
