@@ -14,10 +14,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~hppa ~ppc ~ppc64 ~sparc ~x86"
 IUSE="ipv6 static tools"
 
-PATCHES=(
-	"${FILESDIR}/${PN}-configure-c99.patch"
-)
-
 src_configure() {
 	# Uses non-standard configure script, econf doesn't work
 	CC="$(tc-getCC)" edo ./configure $(use_enable ipv6)
