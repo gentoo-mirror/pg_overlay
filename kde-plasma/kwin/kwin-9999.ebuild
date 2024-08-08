@@ -135,7 +135,7 @@ src_configure() {
 		-DKWIN_BUILD_SCREENLOCKER=$(usex lock)
 		-DKWIN_BUILD_GLOBALSHORTCUTS=$(usex shortcuts)
 		-DKWIN_BUILD_X11=ON
-		-DKWIN_BUILD_X11_BACKEND=ON
+		-DKWIN_BUILD_X11_BACKEND=OFF
 	)
 
 	ecm_src_configure
