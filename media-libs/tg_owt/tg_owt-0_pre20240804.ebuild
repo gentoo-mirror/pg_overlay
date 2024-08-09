@@ -71,11 +71,11 @@ BDEPEND="
 #	dev-lang/yasm
 
 PATCHES=(
-	"${FILESDIR}/0000_pkgconfig.patch"
-	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pipewire.patch"
-	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pulseaudio.patch"
-	"${FILESDIR}/${PN}-0_pre20221215-expose-set_allow_pipewire.patch"
-	"${FILESDIR}/fix-clang-emplace.patch"
+	#"${FILESDIR}/0000_pkgconfig.patch"
+	#"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pipewire.patch"
+	#"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pulseaudio.patch"
+	#"${FILESDIR}/${PN}-0_pre20221215-expose-set_allow_pipewire.patch"
+	#"${FILESDIR}/fix-clang-emplace.patch"
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 )
@@ -89,7 +89,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	cp "${FILESDIR}"/"${PN}".pc.in "${S}" || die "failed to copy pkgconfig template"
+	#cp "${FILESDIR}"/"${PN}".pc.in "${S}" || die "failed to copy pkgconfig template"
 	# libopenh264 has GENERATED files with yasm that aren't excluded by
 	# EXCLUDE_FROM_ALL, and I have no clue how to avoid this.
 	# These source files aren't used with system-openh264, anyway.
@@ -101,6 +101,16 @@ src_prepare() {
 
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
+
+	sed -r \
+		-e "/[ ]*(group_name = )(kDefaultProbingScreenshareBweSettings)/s@@\1(std::string)\2@" \
+		-i "${S}/src/rtc_base/experiments/alr_experiment.cc" || die
+	sed -r \
+		-e "/[ \t]*transaction_id.insert/s@(magic_cookie)@(std::string)\1@" \
+		-i "${S}/src/api/transport/stun.cc" || die
+	sed -r \
+		-e "/(candidate_stats->candidate_type = )(candidate.type_name)/s@@\1(std::string)\2@" \
+		-i "${S}/src/pc/rtc_stats_collector.cc" || die
 
 	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp}
 
