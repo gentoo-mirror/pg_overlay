@@ -71,11 +71,11 @@ BDEPEND="
 #	dev-lang/yasm
 
 PATCHES=(
-	#"${FILESDIR}/0000_pkgconfig.patch"
+	"${FILESDIR}/0000_pkgconfig.patch"
 	#"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pipewire.patch"
 	#"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pulseaudio.patch"
 	#"${FILESDIR}/${PN}-0_pre20221215-expose-set_allow_pipewire.patch"
-	#"${FILESDIR}/fix-clang-emplace.patch"
+	"${FILESDIR}/fix-clang-emplace.patch"
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 )
@@ -89,7 +89,7 @@ src_unpack() {
 }
 
 src_prepare() {
-	#cp "${FILESDIR}"/"${PN}".pc.in "${S}" || die "failed to copy pkgconfig template"
+	cp "${FILESDIR}"/"${PN}".pc.in "${S}" || die "failed to copy pkgconfig template"
 	# libopenh264 has GENERATED files with yasm that aren't excluded by
 	# EXCLUDE_FROM_ALL, and I have no clue how to avoid this.
 	# These source files aren't used with system-openh264, anyway.
@@ -98,6 +98,9 @@ src_prepare() {
 	# The sources for these aren't available, avoid needing them
 	sed -e '/include(cmake\/libcrc32c.cmake)/d' \
 		-e '/include(cmake\/libabsl.cmake)/d' -i CMakeLists.txt || die
+
+	sed -i -e '/desktop_capture\/screen_capturer_integration_test/d' CMakeLists.txt || die
+	sed -i -e '/desktop_capture\/window_finder_unittest/d' CMakeLists.txt || die
 
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
@@ -126,6 +129,8 @@ src_configure() {
 	local mycmakeargs=(
 		-DTG_OWT_USE_X11=$(usex X)
 		-DTG_OWT_USE_PIPEWIRE=$(usex screencast)
+		-DTG_OWT_PACKAGED_BUILD=ON
+		-DBUILD_SHARED_LIBS=ON
 	)
 	cmake_src_configure
 }
