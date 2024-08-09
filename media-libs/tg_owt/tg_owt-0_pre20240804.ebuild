@@ -8,9 +8,9 @@ inherit cmake flag-o-matic
 DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
-TG_OWT_COMMIT="e9d103e2480e0983bf464debc371b049cdd83648"
-LIBYUV_COMMIT="914624f0b8b92986ef385e9650ee7b5fb07099e9"
-LIBSRTP_COMMIT="f53df50059906e5c364eca65bd3c847cac9ef192"
+TG_OWT_COMMIT="592b14d13bf9103226e90a83571e24c49f6bfdcd"
+LIBYUV_COMMIT="04821d1e7d60845525e8db55c7bcd41ef5be9406"
+LIBSRTP_COMMIT="a566a9cfcd619e8327784aa7cff4a1276dc1e895"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
 	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2
 	https://github.com/cisco/libsrtp/archive/${LIBSRTP_COMMIT}.tar.gz -> libsrtp-${LIBSRTP_COMMIT}.tar.gz"
@@ -19,7 +19,7 @@ S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 
 LICENSE="BSD"
 SLOT="0/${PV##*pre}"
-KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv"
+KEYWORDS="amd64 ~arm64 ~loong ~ppc64 ~riscv"
 IUSE="screencast +X"
 
 # This package's USE flags may change the ABI and require a rebuild of
