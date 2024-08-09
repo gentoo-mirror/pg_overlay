@@ -1,0 +1,15 @@
+--- a/CMakeLists.txt	2022-07-16 03:16:24.787968321 +0700
++++ b/CMakeLists.txt	2022-07-16 03:18:49.018072001 +0700
+@@ -2676,6 +2674,12 @@ if (NOT LIBYUV_FOUND)
+     list(APPEND export_targets libcrc32c)
+ endif()
+ 
++include(CheckLibraryExists)
++check_library_exists(crc32c crc32c_value "" HAVE_CRC32C)
++if(HAVE_CRC32C)
++    target_link_libraries(tg_owt PUBLIC crc32c)
++endif(HAVE_CRC32C)
++
+ export(
+     TARGETS ${export_targets}
+     NAMESPACE tg_owt::

@@ -1,0 +1,12 @@
+--- a/src/modules/desktop_capture/BUILD.gn
++++ b/src/modules/desktop_capture/BUILD.gn
+@@ -11,6 +11,8 @@
+ import("//tools/generate_stubs/rules.gni")
+ import("../../webrtc.gni")
+ 
++rtc_use_pipewire = false
++
+ use_desktop_capture_differ_sse2 = current_cpu == "x86" || current_cpu == "x64"
+ 
+ config("x11_config") {
+
