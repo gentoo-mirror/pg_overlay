@@ -94,7 +94,7 @@ media-libs/mesa 24.1.5 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/shaderc 2024.1: Collection of tools, libraries and tests for shader compilation
 media-libs/taglib 2.0.1_pre: Library for reading and editing audio meta data
-media-libs/tg_owt 0_pre20231221 0_pre20240730: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20231221 0_pre20240730 0_pre20240730-r1: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
@@ -160,7 +160,7 @@ virtual/rust 1.80.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 128.0.3: Firefox Web Browser
 www-client/vivaldi-snapshot 6.9.3425.3: A browser for our friends
-x11-base/xwayland 23.2.6 24.1.0: Standalone X server running under Wayland
+x11-base/xwayland 23.2.6 24.1.2: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.42: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
