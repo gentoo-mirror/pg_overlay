@@ -94,7 +94,7 @@ media-libs/mesa 24.1.5 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/shaderc 2024.1: Collection of tools, libraries and tests for shader compilation
 media-libs/taglib 2.0.1_pre: Library for reading and editing audio meta data
-media-libs/tg_owt 0_pre20231221 0_pre20240730 0_pre20240730-r1: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20231221: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
@@ -109,7 +109,7 @@ media-sound/strawberry 9999: Modern music player and library organizer based on 
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.2.2: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-net-im/64Gram 1.1.31 1.1.32: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
+net-im/64Gram 1.1.31: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
 net-libs/glib-networking 2.80.0: Network-related giomodules for glib
