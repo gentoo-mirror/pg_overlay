@@ -114,7 +114,7 @@ net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
 net-libs/glib-networking 2.80.0: Network-related giomodules for glib
 net-libs/libmbim 1.28.4: Mobile Broadband Interface Model (MBIM) modem protocol helper library
-net-libs/libsrtp 2.5.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
+net-libs/libsrtp 2.6.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
 net-libs/libtorrent 9999 9999-r1: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 22.6.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
