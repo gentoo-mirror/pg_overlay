@@ -88,6 +88,7 @@ src_unpack() {
 }
 
 src_prepare() {
+	cp "${FILESDIR}"/"${PN}".pc.in "${S}" || die "failed to copy pkgconfig template"
 	# libopenh264 has GENERATED files with yasm that aren't excluded by
 	# EXCLUDE_FROM_ALL, and I have no clue how to avoid this.
 	# These source files aren't used with system-openh264, anyway.
