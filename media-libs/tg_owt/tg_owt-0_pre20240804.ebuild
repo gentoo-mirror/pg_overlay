@@ -75,6 +75,7 @@ PATCHES=(
 	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pipewire.patch"
 	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pulseaudio.patch"
 	"${FILESDIR}/${PN}-0_pre20221215-expose-set_allow_pipewire.patch"
+	"${FILESDIR}/fix-clang-emplace.patch"
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 )
@@ -100,6 +101,8 @@ src_prepare() {
 
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
+
+	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp}
 
 	cmake_src_prepare
 }
