@@ -102,6 +102,7 @@ src_configure() {
 	local mycmakeargs=(
 		-DTG_OWT_USE_X11=$(usex X)
 		-DTG_OWT_USE_PIPEWIRE=$(usex screencast)
+		-DBUILD_SHARED_LIBS=OFF
 	)
 	cmake_src_configure
 }
