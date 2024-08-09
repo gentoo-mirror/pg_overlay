@@ -99,6 +99,9 @@ src_prepare() {
 	sed -e '/include(cmake\/libcrc32c.cmake)/d' \
 		-e '/include(cmake\/libabsl.cmake)/d' -i CMakeLists.txt || die
 
+	sed -i -e '/desktop_capture\/screen_capturer_integration_test/d' CMakeLists.txt || die
+	sed -i -e '/desktop_capture\/window_finder_unittest/d' CMakeLists.txt || die
+
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
 
