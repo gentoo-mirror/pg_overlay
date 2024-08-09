@@ -72,9 +72,9 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/0000_pkgconfig.patch"
-	#"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pipewire.patch"
-	#"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pulseaudio.patch"
-	#"${FILESDIR}/${PN}-0_pre20221215-expose-set_allow_pipewire.patch"
+	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pipewire.patch"
+	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pulseaudio.patch"
+	"${FILESDIR}/${PN}-0_pre20221215-expose-set_allow_pipewire.patch"
 	"${FILESDIR}/fix-clang-emplace.patch"
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
@@ -84,8 +84,8 @@ src_unpack() {
 	unpack "${P}.tar.gz"
 	unpack "libyuv-${LIBYUV_COMMIT}.tar.bz2"
 	mv -T "libyuv-${LIBYUV_COMMIT}" "${S}/src/third_party/libyuv" || die
-	unpack "libsrtp-${LIBSRTP_COMMIT}.tar.gz"
-	mv -T "libsrtp-${LIBSRTP_COMMIT}" "${S}/src/third_party/libsrtp" || die
+	#unpack "libsrtp-${LIBSRTP_COMMIT}.tar.gz"
+	#mv -T "libsrtp-${LIBSRTP_COMMIT}" "${S}/src/third_party/libsrtp" || die
 }
 
 src_prepare() {
@@ -115,7 +115,7 @@ src_prepare() {
 		-e "/(candidate_stats->candidate_type = )(candidate.type_name)/s@@\1(std::string)\2@" \
 		-i "${S}/src/pc/rtc_stats_collector.cc" || die
 
-	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp}
+	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp,libsrtp}
 
 	cmake_src_prepare
 }
