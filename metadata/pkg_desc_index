@@ -34,9 +34,6 @@ dev-lang/python 3.12.5: An interpreted, interactive, object-oriented programming
 dev-lang/rust 1.80.0: Systems programming language from Mozilla
 dev-libs/ada 2.9.0: WHATWG-compliant and fast URL parser written in modern C++
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
-dev-libs/glib 2.80.4: The GLib library of C routines
-dev-libs/gobject-introspection 1.80.1: Introspection system for GObject-based libraries
-dev-libs/gobject-introspection-common 1.80.1: Build infrastructure for GObject Introspection
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
 dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Library)
@@ -58,8 +55,6 @@ dev-python/zombie-imp 0.0.2: A copy of the imp module that was removed in Python
 dev-util/android-tools 35.0.1: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cargo-ebuild 0.5.4-r1: Generates an ebuild for a package using the in-tree eclasses.
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/gdbus-codegen 2.80.4: GDBus code and documentation generator
-dev-util/glib-utils 2.80.4: Build utilities for GLib using projects
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/scanmem 9999: Locate and modify variables in executing processes
@@ -112,7 +107,6 @@ media-video/qmplay2 9999: A Qt-based video player, which can play most formats a
 net-im/64Gram 1.1.31 1.1.32: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
-net-libs/glib-networking 2.80.0: Network-related giomodules for glib
 net-libs/libmbim 1.28.4: Mobile Broadband Interface Model (MBIM) modem protocol helper library
 net-libs/libsrtp 2.6.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
 net-libs/libtorrent 9999 9999-r1: BitTorrent library written in C++ for *nix
