@@ -97,7 +97,11 @@ src_prepare() {
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
 
-	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp}
+	sed -r \
+		-e "/[ ]*(group_name = )(kDefaultProbingScreenshareBweSettings)/s@@\1(std::string)\2@" \
+		-i "${S}/src/rtc_base/experiments/alr_experiment.cc" || die
+
+	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp,librstp}
 
 	cmake_src_prepare
 }

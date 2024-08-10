@@ -12,4 +12,4 @@ RDEPEND=>=dev-cpp/abseil-cpp-20220623.1:= dev-libs/openssl:= dev-libs/protobuf:=
 SLOT=0/20240804
 SRC_URI=https://github.com/desktop-app/tg_owt/archive/dc17143230b5519f3c1a8da0079e00566bd4c5a8.tar.gz -> tg_owt-0_pre20240804.tar.gz https://gitlab.com/chromiumsrc/libyuv/-/archive/32ccd53bb36421bb1e47b1cfa362b9fa6825e82a/libyuv-32ccd53bb36421bb1e47b1cfa362b9fa6825e82a.tar.bz2
 _eclasses_=toolchain-funcs	e7e7331166166e7a516d19e264b098c2	multilib	c19072c3cd7ac5cb21de013f7e9832e0	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d	multiprocessing	30ead54fa2e2b5f9cd4e612ffc34d0fe	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	baea6080dd821f5562d715887954c9d3	cmake	748c6dc67d688d2893493fdb28ce3fa8
-_md5_=766ee81d8f9436bc1e548c6eff500a8c
+_md5_=5949ae5d54c451664583805ef64b4a3b
