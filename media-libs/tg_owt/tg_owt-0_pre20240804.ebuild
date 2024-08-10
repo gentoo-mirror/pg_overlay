@@ -10,10 +10,8 @@ HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
 TG_OWT_COMMIT="dc17143230b5519f3c1a8da0079e00566bd4c5a8"
 LIBYUV_COMMIT="32ccd53bb36421bb1e47b1cfa362b9fa6825e82a"
-LIBSRTP_COMMIT="5f8dfbf7eedbc2fa737cf0a2931b464f10396379"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2
-	https://github.com/cisco/libsrtp/archive/${LIBSRTP_COMMIT}.tar.gz -> libsrtp-${LIBSRTP_COMMIT}.tar.gz"
+	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 # Upstream libyuv: https://chromium.googlesource.com/libyuv/libyuv
 
@@ -42,7 +40,7 @@ RDEPEND="
 	media-libs/opus
 	media-video/ffmpeg:=
 	dev-libs/crc32c
-	net-libs/librstp
+	net-libs/libsrtp
 	screencast? (
 		dev-libs/glib:2
 		media-video/pipewire:=
@@ -72,25 +70,19 @@ BDEPEND="
 #	dev-lang/yasm
 
 PATCHES=(
-	"${FILESDIR}/0000_pkgconfig.patch"
-	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pipewire.patch"
-	"${FILESDIR}/${PN}-0_pre20221215-allow-disabling-pulseaudio.patch"
-	"${FILESDIR}/${PN}-0_pre20221215-expose-set_allow_pipewire.patch"
-	"${FILESDIR}/fix-clang-emplace.patch"
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
+	"${FILESDIR}/ffmpeg-7.0.patch"
+	"${FILESDIR}/unbundle-libsrtp.patch"
 )
 
 src_unpack() {
 	unpack "${P}.tar.gz"
 	unpack "libyuv-${LIBYUV_COMMIT}.tar.bz2"
 	mv -T "libyuv-${LIBYUV_COMMIT}" "${S}/src/third_party/libyuv" || die
-	#unpack "libsrtp-${LIBSRTP_COMMIT}.tar.gz"
-	#mv -T "libsrtp-${LIBSRTP_COMMIT}" "${S}/src/third_party/libsrtp" || die
 }
 
 src_prepare() {
-	cp "${FILESDIR}"/"${PN}".pc.in "${S}" || die "failed to copy pkgconfig template"
 	# libopenh264 has GENERATED files with yasm that aren't excluded by
 	# EXCLUDE_FROM_ALL, and I have no clue how to avoid this.
 	# These source files aren't used with system-openh264, anyway.
@@ -99,9 +91,6 @@ src_prepare() {
 	# The sources for these aren't available, avoid needing them
 	sed -e '/include(cmake\/libcrc32c.cmake)/d' \
 		-e '/include(cmake\/libabsl.cmake)/d' -i CMakeLists.txt || die
-
-	sed -i -e '/desktop_capture\/screen_capturer_integration_test/d' CMakeLists.txt || die
-	sed -i -e '/desktop_capture\/window_finder_unittest/d' CMakeLists.txt || die
 
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
@@ -116,7 +105,7 @@ src_prepare() {
 		-e "/(candidate_stats->candidate_type = )(candidate.type_name)/s@@\1(std::string)\2@" \
 		-i "${S}/src/pc/rtc_stats_collector.cc" || die
 
-	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp,libsrtp}
+	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp,librstp}
 
 	cmake_src_prepare
 }
@@ -130,8 +119,6 @@ src_configure() {
 	local mycmakeargs=(
 		-DTG_OWT_USE_X11=$(usex X)
 		-DTG_OWT_USE_PIPEWIRE=$(usex screencast)
-		-DTG_OWT_PACKAGED_BUILD=ON
-		-DBUILD_SHARED_LIBS=ON
 	)
 	cmake_src_configure
 }
