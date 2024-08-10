@@ -40,7 +40,7 @@ RDEPEND="
 	media-libs/opus
 	media-video/ffmpeg:=
 	dev-libs/crc32c
-	net-libs/librstp
+	net-libs/libsrtp
 	screencast? (
 		dev-libs/glib:2
 		media-video/pipewire:=
@@ -73,7 +73,7 @@ PATCHES=(
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 	"${FILESDIR}/ffmpeg-7.0.patch"
-	"${FILESDIR}/unbundle-librstp.patch"
+	"${FILESDIR}/unbundle-libsrtp.patch"
 )
 
 src_unpack() {
