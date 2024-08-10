@@ -100,6 +100,12 @@ src_prepare() {
 	sed -r \
 		-e "/[ ]*(group_name = )(kDefaultProbingScreenshareBweSettings)/s@@\1(std::string)\2@" \
 		-i "${S}/src/rtc_base/experiments/alr_experiment.cc" || die
+	sed -r \
+		-e "/[ \t]*transaction_id.insert/s@(magic_cookie)@(std::string)\1@" \
+		-i "${S}/src/api/transport/stun.cc" || die
+	sed -r \
+		-e "/(candidate_stats->candidate_type = )(candidate.type_name)/s@@\1(std::string)\2@" \
+		-i "${S}/src/pc/rtc_stats_collector.cc" || die
 
 	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp,librstp}
 
