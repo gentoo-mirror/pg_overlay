@@ -97,6 +97,8 @@ src_prepare() {
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
 
+	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp}
+
 	cmake_src_prepare
 }
 
