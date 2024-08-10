@@ -115,7 +115,7 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.101
+	>=dev-libs/nss-3.102
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
@@ -586,6 +586,8 @@ src_prepare() {
 			export RUST_TARGET="i686-unknown-linux-musl"
 		elif use arm64 ; then
 			export RUST_TARGET="aarch64-unknown-linux-musl"
+		elif use ppc64 ; then
+			export RUST_TARGET="powerpc64le-unknown-linux-musl"
 		else
 			die "Unknown musl chost, please post your rustc -vV along with emerge --info on Gentoo's bug #915651"
 		fi
@@ -633,7 +635,6 @@ src_prepare() {
 
 	# Clear checksums from cargo crates we've manually patched.
 	# moz_clear_vendor_checksums xyz
-	moz_clear_vendor_checksums proc-macro2
 
 	# Respect choice for "jumbo-build"
 	# Changing the value for FILES_PER_UNIFIED_FILE may not work, see #905431
@@ -1351,7 +1352,7 @@ src_install() {
 
 	# Set dictionary path to use system hunspell
 	cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to set spellchecker.dictionary_path pref"
-	pref("spellchecker.dictionary_path",       "${EPREFIX}/usr/share/myspell");
+	pref("spellchecker.dictionary_path", "${EPREFIX}/usr/share/myspell");
 	EOF
 
 	# Force hwaccel prefs if USE=hwaccel is enabled
@@ -1362,11 +1363,11 @@ src_install() {
 
 		if use wayland; then
 			cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to set hwaccel wayland prefs"
-			pref("gfx.x11-egl.force-enabled",          false);
+			pref("gfx.x11-egl.force-enabled", false);
 			EOF
 		else
 			cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to set hwaccel x11 prefs"
-			pref("gfx.x11-egl.force-enabled",          true);
+			pref("gfx.x11-egl.force-enabled", true);
 			EOF
 		fi
 
@@ -1386,7 +1387,7 @@ src_install() {
 		for plugin in "${MOZ_GMP_PLUGIN_LIST[@]}" ; do
 			einfo "Disabling auto-update for ${plugin} plugin ..."
 			cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to disable autoupdate for ${plugin} media plugin"
-			pref("media.${plugin}.autoupdate",   false);
+			pref("media.${plugin}.autoupdate", false);
 			EOF
 		done
 	fi
@@ -1412,6 +1413,16 @@ src_install() {
 	use pgo && rm -frv "${BUILD_DIR}"/instrumented/browser/extensions/*
 	use pgo && rm -frv "${BUILD_DIR}"/instrumented/dist/bin/browser/features/*
 	#######
+
+	# Add telemetry config prefs, just in case something happens in future and telemetry build
+	# options stop working.
+	if ! use telemetry ; then
+		cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to set telemetry prefs"
+		sticky_pref("toolkit.telemetry.dap_enabled", false);
+		pref("toolkit.telemetry.dap_helper", "");
+		pref("toolkit.telemetry.dap_leader", "");
+		EOF
+	fi
 
 	# Install language packs
 	local langpacks=( $(find "${WORKDIR}/language_packs" -type f -name '*.xpi') )
