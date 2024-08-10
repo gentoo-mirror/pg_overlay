@@ -73,7 +73,7 @@ PATCHES=(
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 	"${FILESDIR}/ffmpeg-7.0.patch"
-	"${FILESDIR}/unbundle-librstp.patch""
+	"${FILESDIR}/unbundle-librstp.patch"
 )
 
 src_unpack() {
