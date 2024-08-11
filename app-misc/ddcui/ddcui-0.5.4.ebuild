@@ -18,7 +18,7 @@ SLOT="0"
 DEPEND="
 	dev-libs/glib
 	>=app-misc/ddcutil-2.1.3:0/5
-	dev-qt/qtbase:6 [gui,widgets]
+	dev-qt/qtbase:6[gui,widgets]
 "
 RDEPEND="${DEPEND}"
 BDEPEND="virtual/pkgconfig"
