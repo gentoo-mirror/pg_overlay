@@ -157,7 +157,8 @@ DESCRIPTION="Generates an ebuild for a package using the in-tree eclasses."
 # Double check the homepage as the cargo_metadata crate
 # does not provide this value so instead repository is used
 HOMEPAGE="https://github.com/gentoo/cargo-ebuild"
-SRC_URI="${CARGO_CRATE_URIS}"
+SRC_URI="https://gitweb.gentoo.org/proj/${PN}.git/snapshot/${PN}-0.5.4.tar.bz2
+	${CARGO_CRATE_URIS}"
 
 # License set may be more restrictive as OR is not respected
 # use cargo-license for a more accurate license picture
