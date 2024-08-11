@@ -178,6 +178,8 @@ PATCHES=(
 	"${FILESDIR}/36.patch"
 )
 
+S=${WORKDIR}/${PN}-0.5.4
+
 src_configure() {
 	export LIBGIT2_SYS_USE_PKG_CONFIG=1 LIBSSH2_SYS_USE_PKG_CONFIG=1 PKG_CONFIG_ALLOW_CROSS=1
 	cargo_src_configure
