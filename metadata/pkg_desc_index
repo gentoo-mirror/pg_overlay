@@ -7,6 +7,7 @@ app-emulation/virtualbox 7.0.20: Family of powerful x86 virtualization products 
 app-emulation/virtualbox-kvm 7.0.18_pre20240502: Family of powerful x86 virtualization products for enterprise and home use
 app-i18n/opencc 1.1.7: Library for conversion between Traditional and Simplified Chinese characters
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
+app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.16: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
