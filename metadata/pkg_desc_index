@@ -52,7 +52,7 @@ dev-python/numpy 2.0.1: Fast array and numerical python library
 dev-python/pyudev 0.24.1: Python binding to libudev
 dev-python/zombie-imp 0.0.2: A copy of the imp module that was removed in Python 3.12.
 dev-util/android-tools 35.0.1: Android platform tools (adb, fastboot, and mkbootimg)
-dev-util/cargo-ebuild 0.5.4-r1: Generates an ebuild for a package using the in-tree eclasses.
+dev-util/cargo-ebuild 0.6.0: Generates an ebuild for a package using the in-tree eclasses.
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -137,6 +137,7 @@ sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices o
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
+sys-block/dust 1.1.1: A more intuitive version of du
 sys-devel/clang 18.1.8: C language family frontend for LLVM
 sys-devel/llvm 18.1.8-r4: Low Level Virtual Machine
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
