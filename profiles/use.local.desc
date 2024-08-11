@@ -183,6 +183,8 @@ media-sound/deadbeef:notify - Desktop notifications support
 media-sound/deadbeef:nullout - Dummy output driver
 media-sound/deadbeef:shellexec - Define custom shell commands that can be called on tracks
 media-sound/deadbeef:supereq - Enable equalizer
+media-sound/kid3:acoustid - Build acoustic fingerprinting plugin using media-libs/chromaprint
+media-sound/kid3:mpris - Enable support for MPRIS2 interface using dev-qt/qtdbus
 media-sound/ncmpc:async-connect - Enable asynchronous connect
 media-sound/ncmpc:chat-screen - Enable the chat screen
 media-sound/ncmpc:help-screen - Enable the help screen
