@@ -6427,7 +6427,7 @@ index fa6c5dd73..f72d07093 100644
 GitLab
 
 
-From c6bb008f2cddb28187fd782e38d49b182df064dd Mon Sep 17 00:00:00 2001
+From ee6a425044a8430eaed990dd137aac5cf66e638e Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 14:48:19 +0200
 Subject: [PATCH 48/65] Fix click on system tray icon does not toggle window
@@ -6439,7 +6439,7 @@ Same bugfix in KTorrent with more detailed description: network/ktorrent!114
  1 file changed, 5 insertions(+)
 
 diff --git a/app/krusader.cpp b/app/krusader.cpp
-index 825efbfa6..3f67988c2 100644
+index 825efbfa6..033aba6f3 100644
 --- a/app/krusader.cpp
 +++ b/app/krusader.cpp
 @@ -245,6 +245,11 @@ Krusader::Krusader(const QCommandLineParser &parser)
@@ -6447,7 +6447,7 @@ index 825efbfa6..3f67988c2 100644
      }
  
 +    if (sysTray) {
-+        // (re)set main window for system tray, Qt looses the window handle after showing the window
++        // (re)set main window for system tray, Qt loses the window handle after showing the window
 +        sysTray->setAssociatedWindow(this->windowHandle());
 +    }
 +
@@ -6458,7 +6458,7 @@ index 825efbfa6..3f67988c2 100644
 GitLab
 
 
-From a809fa64295d77ccf07eced7440facad02be4e2d Mon Sep 17 00:00:00 2001
+From ee9eb33cbb57a7c369b942ad485ebb1ecb3e6058 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 16:32:18 +0200
 Subject: [PATCH 49/65] Fix file filter of import and export dialog for user
@@ -6485,7 +6485,7 @@ index 353c5f298..6e40817c2 100644
 GitLab
 
 
-From a72d87914a2bee91a39f3702fbac249fbf700074 Mon Sep 17 00:00:00 2001
+From ad2261e20cf705204332e47bde6f00a97526a371 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 12:38:10 +0200
 Subject: [PATCH 50/65] Fix unmounted filesystems not shown in MountMan
@@ -6514,7 +6514,7 @@ index 576254d45..7bb3e57a0 100644
 GitLab
 
 
-From 3566fc54a232b870ce6c71b9ef55174e30caf1b0 Mon Sep 17 00:00:00 2001
+From af94d8e6499eb11bd45df7833071e32ac15a2509 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 16:01:30 +0200
 Subject: [PATCH 51/65] Synchronizer: Fix showing rename dialog for existing
@@ -6656,7 +6656,7 @@ index cd70a12e9..3d3d4443b 100644
 GitLab
 
 
-From 045c3bdafc55012f66e746e1d5546d15520f2cef Mon Sep 17 00:00:00 2001
+From 0b2f5240dbcf85d05b7c2c7e7921b0af8c5df2c6 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 26 Jun 2024 16:51:50 +0200
 Subject: [PATCH 52/65] Synchronizer: Fix showing skip dialog for non-existing
@@ -6713,7 +6713,7 @@ index 3d3d4443b..56446c5bd 100644
 GitLab
 
 
-From 5ab8e7f5a829a91a127f3003e775a987642a3d6a Mon Sep 17 00:00:00 2001
+From 09c7c7c5794de71664af9a0e7e81dd81c0c6bef8 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:03:42 +0200
 Subject: [PATCH 53/65] Move usage of FileSystem/sizecalculator.h closer to
@@ -6759,7 +6759,7 @@ index 5a94eb805..4e435172a 100644
 GitLab
 
 
-From 48656a1c3ce661dc29da64117b1aa6752d7aaadd Mon Sep 17 00:00:00 2001
+From 934541dceef8d36dff519014733fec21b5fa6b38 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:57:21 +0200
 Subject: [PATCH 54/65] Set C++17 as explicit C++ standard for compiler
@@ -6785,7 +6785,7 @@ index a9307923f..9b60b5628 100644
 GitLab
 
 
-From 296a0264f5d38457e84b58fba10598f9ff8dc56a Mon Sep 17 00:00:00 2001
+From 7ea0bc4e6bac5871286d66e1249e9ceee62cb051 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Tue, 2 Jul 2024 16:31:57 +0200
 Subject: [PATCH 55/65] Replace qAsConst() by std::as_const() globally
@@ -7131,7 +7131,7 @@ index 4028d8b24..6865f336d 100644
 GitLab
 
 
-From a423c736f4ca9c06dda4087dd49b781427b6c231 Mon Sep 17 00:00:00 2001
+From 1b2095d51078ea3169c5e5e550fc3c78649bd8bc Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:00:30 +0200
 Subject: [PATCH 56/65] Add KrBookmarkHandler as parent of KBookmarkManager
@@ -7157,7 +7157,7 @@ index ccb39f033..b69ec7c7e 100644
 GitLab
 
 
-From 03bb46d7d01078600af9417e2ebc4405f09e7f3d Mon Sep 17 00:00:00 2001
+From 63cbf45986e2821033ebc336383b59a2310144fb Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:04:31 +0200
 Subject: [PATCH 57/65] Register "Bring Main Window to Top" action as global
@@ -7194,7 +7194,7 @@ index 0ae8f84c3..766aa3fa5 100644
                        KF6::Parts
                        KF6::WindowSystem
 diff --git a/app/krusader.cpp b/app/krusader.cpp
-index 3f67988c2..24681763a 100644
+index 033aba6f3..6bf423969 100644
 --- a/app/krusader.cpp
 +++ b/app/krusader.cpp
 @@ -25,6 +25,7 @@
@@ -7228,7 +7228,7 @@ index 3f67988c2..24681763a 100644
 GitLab
 
 
-From 418a1979148eecbf713b80b74578eacd9d61ae73 Mon Sep 17 00:00:00 2001
+From 5a42013c65c77836b29731f46816643c0ea67af5 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Wed, 3 Jul 2024 18:06:52 +0200
 Subject: [PATCH 58/65] Fix window focus of "Bring Main Window to Top" in
@@ -7241,7 +7241,7 @@ window is not focused and not moved to top.
  1 file changed, 4 insertions(+), 1 deletion(-)
 
 diff --git a/app/krusader.cpp b/app/krusader.cpp
-index 24681763a..4a141400c 100644
+index 6bf423969..7a333f0f4 100644
 --- a/app/krusader.cpp
 +++ b/app/krusader.cpp
 @@ -565,7 +565,10 @@ void Krusader::moveToTop()
@@ -7260,7 +7260,7 @@ index 24681763a..4a141400c 100644
 GitLab
 
 
-From e41afe0838fd37e90ba719939d47b18cdd20f4fe Mon Sep 17 00:00:00 2001
+From f6bb9406909711050b126607e4386bc2b83e51eb Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 4 Jul 2024 18:57:19 +0200
 Subject: [PATCH 59/65] Add workaround to show main window with "Bring Main
@@ -7271,7 +7271,7 @@ Subject: [PATCH 59/65] Add workaround to show main window with "Bring Main
  1 file changed, 6 insertions(+), 1 deletion(-)
 
 diff --git a/app/krusader.cpp b/app/krusader.cpp
-index 4a141400c..8462fe9f3 100644
+index 7a333f0f4..a57a4efdd 100644
 --- a/app/krusader.cpp
 +++ b/app/krusader.cpp
 @@ -565,7 +565,12 @@ void Krusader::moveToTop()
@@ -7292,7 +7292,7 @@ index 4a141400c..8462fe9f3 100644
 GitLab
 
 
-From 1a7480dcad0097d933fd436eac59c0fb03b5aee6 Mon Sep 17 00:00:00 2001
+From 951b0125efe1954fdef9b6cea2538f069ec41dbf Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Fri, 5 Jul 2024 13:25:39 +0200
 Subject: [PATCH 60/65] MountMan: Implement calculating free space of
@@ -7371,7 +7371,7 @@ index 7bb3e57a0..69d489143 100644
 GitLab
 
 
-From 512daabc92d0f366cf2530c3d427497d6478553a Mon Sep 17 00:00:00 2001
+From d465de1bc4529f987cdf76523a7e23155cda2d57 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Fri, 5 Jul 2024 15:36:05 +0200
 Subject: [PATCH 61/65] MountMan: Speed up updating mount points by caching
@@ -7544,7 +7544,7 @@ index 2bb7f1b27..fa065eee2 100644
 GitLab
 
 
-From 4f3949f4c41c2143fc9a418b6b379889ba7995d3 Mon Sep 17 00:00:00 2001
+From fca19e08750549a4924bb017c1323f10af308752 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Mon, 8 Jul 2024 15:51:27 +0200
 Subject: [PATCH 62/65] KIO Iso: Create KCompressionDevice only for filename if
@@ -7587,7 +7587,7 @@ index cd1eb58aa..f28fe0083 100644
 GitLab
 
 
-From b942aace1a6242ab90b4974a5e81b48276a137ab Mon Sep 17 00:00:00 2001
+From e7ffeea7288fd375b49d0de9611e011964bd2ee6 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Fri, 12 Jul 2024 19:27:07 +0200
 Subject: [PATCH 63/65] Fix crash on (any) action in toolbar context menu
@@ -7629,7 +7629,7 @@ index 8bfd2521f..ac3378759 100644
      // the toggle actions
      NEW_KTOGGLEACTION(actToggleFnkeys, i18n("Show &FN Keys Bar"), nullptr, 0, SLOTS, SLOT(toggleFnkeys()), "toggle fn bar");
 diff --git a/app/krusader.cpp b/app/krusader.cpp
-index 8462fe9f3..d2685436b 100644
+index a57a4efdd..69a82a172 100644
 --- a/app/krusader.cpp
 +++ b/app/krusader.cpp
 @@ -94,7 +94,6 @@ Krusader::Krusader(const QCommandLineParser &parser)
@@ -7726,10 +7726,10 @@ index 3a631dc69..dafd53a24 100644
 GitLab
 
 
-From 9094ef2ee41732745d72c54c82e96386e25c0f3c Mon Sep 17 00:00:00 2001
+From c7d469238953f74db5d697b668394675a6b1beff Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Sat, 13 Jul 2024 18:35:17 +0200
-Subject: [PATCH 64/65] KrViwer: Fix crash on (any) action in toolbar context
+Subject: [PATCH 64/65] KrViewer: Fix crash on (any) action in toolbar context
  menu
 
 ---
@@ -7771,7 +7771,7 @@ index 4f41e8e23..bd21a5867 100644
 GitLab
 
 
-From 07b49505bf6900002decc57ebab5934da901490b Mon Sep 17 00:00:00 2001
+From 4af1097c3bd2e0d28b6fe86c172c79696b04296e Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Mon, 15 Jul 2024 15:42:15 +0200
 Subject: [PATCH 65/65] Fix destroyed() signal of konsole_part connected too
