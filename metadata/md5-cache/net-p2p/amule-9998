@@ -1,0 +1,14 @@
+BDEPEND=virtual/pkgconfig nls? ( sys-devel/gettext ) >=app-portage/elt-patches-20240116 sys-devel/gnuconfig || ( >=dev-build/automake-1.17-r1:1.17 >=dev-build/automake-1.16.5:1.16 ) >=dev-build/autoconf-2.71-r6:2.71 >=dev-build/libtool-2.4.7-r3 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=configure install postinst postrm prepare setup unpack
+DEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:0= sys-libs/readline:0= sys-libs/zlib >=x11-libs/wxGTK-3.0.4:3.1-gtk3[gui?] daemon? ( acct-user/amule ) geoip? ( dev-libs/geoip ) nls? ( virtual/libintl ) webserver? ( acct-user/amule media-libs/libpng:0= ) stats? ( media-libs/gd:=[jpeg,png] ) upnp? ( net-libs/libupnp:0 ) X? ( dev-util/desktop-file-utils )
+DESCRIPTION=aMule, the all-platform eMule p2p client
+EAPI=8
+HOMEPAGE=http://www.amule.org/
+INHERIT=autotools git-r3 plocale wxwidgets xdg-utils flag-o-matic
+IUSE=daemon debug geoip gui +nls stats upnp X +mmap webserver
+LICENSE=GPL-2+
+PROPERTIES=live
+RDEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:0= sys-libs/readline:0= sys-libs/zlib >=x11-libs/wxGTK-3.0.4:3.1-gtk3[gui?] daemon? ( acct-user/amule ) geoip? ( dev-libs/geoip ) nls? ( virtual/libintl ) webserver? ( acct-user/amule media-libs/libpng:0= ) stats? ( media-libs/gd:=[jpeg,png] ) upnp? ( net-libs/libupnp:0 )
+SLOT=0
+_eclasses_=gnuconfig	a397adda6984a4c423e28ac274c1ba98	toolchain-funcs	0c713337f7872f1a002cecaaea9bef73	multilib	c19072c3cd7ac5cb21de013f7e9832e0	libtool	5f49a16f67f81bdf873e3d1f10b10001	autotools	d12ccbad07b44642a75ac97a3334d8e0	git-r3	875eb471682d3e1f18da124be97dcc81	plocale	950fbaec7deeba41b5bcc0572cca99b9	flag-o-matic	e503ea5acc20410237ba33ec3f7c857d	wxwidgets	ae03a7df37693cffdec04389f1c141f5	xdg-utils	baea6080dd821f5562d715887954c9d3
+_md5_=02dd8f9a561281ea40723b560e0b98ff
