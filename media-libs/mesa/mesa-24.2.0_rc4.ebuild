@@ -85,7 +85,7 @@ REQUIRED_USE="
 	xa? ( X )
 "
 
-LIBDRM_DEPSTRING=">=x11-libs/libdrm-2.4.119"
+LIBDRM_DEPSTRING=">=x11-libs/libdrm-2.4.121"
 RDEPEND="
 	>=dev-libs/expat-2.1.0-r3[${MULTILIB_USEDEP}]
 	>=media-libs/libglvnd-1.3.2[X?,${MULTILIB_USEDEP}]
@@ -164,6 +164,7 @@ BDEPEND="
 	$(python_gen_any_dep "
 		>=dev-python/mako-0.8.0[\${PYTHON_USEDEP}]
 		dev-python/packaging[\${PYTHON_USEDEP}]
+		dev-python/pyyaml[\${PYTHON_USEDEP}]
 	")
 	video_cards_intel? (
 		~dev-util/intel_clc-${PV}
@@ -262,7 +263,8 @@ pkg_pretend() {
 
 python_check_deps() {
 	python_has_version -b ">=dev-python/mako-0.8.0[${PYTHON_USEDEP}]" &&
-	python_has_version -b "dev-python/packaging[${PYTHON_USEDEP}]" || return 1
+	python_has_version -b "dev-python/packaging[${PYTHON_USEDEP}]" &&
+	python_has_version -b "dev-python/pyyaml[${PYTHON_USEDEP}]" || return 1
 	if use llvm && use vulkan && use video_cards_intel && use amd64; then
 		python_has_version -b "dev-python/ply[${PYTHON_USEDEP}]" || return 1
 	fi
@@ -317,7 +319,7 @@ multilib_src_configure() {
 	   use video_cards_r300 ||
 	   use video_cards_r600 ||
 	   use video_cards_radeonsi ||
-	   use video_cards_vmware || # swrast
+	   use video_cards_vmware || # svga
 	   use video_cards_zink; then
 		emesonargs+=($(meson_use d3d9 gallium-nine))
 	else
@@ -367,7 +369,8 @@ multilib_src_configure() {
 		gallium_enable -- kmsro
 	fi
 
-	gallium_enable -- swrast
+	gallium_enable !llvm softpipe
+	gallium_enable llvm llvmpipe
 	gallium_enable video_cards_d3d12 d3d12
 	gallium_enable video_cards_freedreno freedreno
 	gallium_enable video_cards_intel crocus
