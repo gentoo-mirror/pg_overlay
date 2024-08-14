@@ -231,6 +231,7 @@ EGO_SUM=(
 "gopkg.in/yaml.v3 v3.0.1/go.mod"
 "honnef.co/go/tools v0.0.0-20190102054323-c2f93a96b099/go.mod"
 )
+go-module_set_globals
 
 DESCRIPTION="Disk usage analyzer with console interface written in Go"
 HOMEPAGE="https://github.com/dundee/gdu"
