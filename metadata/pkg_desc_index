@@ -140,11 +140,13 @@ sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
 sys-block/dust 1.1.1: A more intuitive version of du
+sys-block/ncdu 2.5: NCurses Disk Usage
 sys-devel/clang 18.1.8: C language family frontend for LLVM
 sys-devel/llvm 18.1.8-r4: Low Level Virtual Machine
-sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
+sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/gdu 5.29.0: Disk usage analyzer with console interface written in Go
+sys-fs/ncdu 2.5: NCurses Disk Usage
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-libs/ncurses 6.4_p20230923: Console display library
