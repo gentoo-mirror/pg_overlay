@@ -14,6 +14,11 @@ LICENSE="Apache-2.0 BSD MIT"
 SLOT="0"
 KEYWORDS="~amd64"
 
+src_unpack() {
+	default
+	mv ${PN}-5.25.0/vendor ${P}/
+}
+
 src_compile() {
 	ego build -ldflags "-s -w -X 'github.com/dundee/gdu/build.Version=${PV}'" -v -x -work -o "${PN}" "./cmd/${PN}"
 }
