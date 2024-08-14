@@ -373,7 +373,7 @@ multilib_src_configure() {
 	gallium_enable llvm llvmpipe
 	gallium_enable video_cards_d3d12 d3d12
 	gallium_enable video_cards_freedreno freedreno
-	gallium_enable video_cards_intel crocus
+	gallium_enable video_cards_intel crocus i915 iris
 	gallium_enable video_cards_lima lima
 	gallium_enable video_cards_nouveau nouveau
 	gallium_enable video_cards_panfrost panfrost
