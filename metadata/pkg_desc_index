@@ -144,7 +144,7 @@ sys-devel/clang 18.1.8: C language family frontend for LLVM
 sys-devel/llvm 18.1.8-r4: Low Level Virtual Machine
 sys-fs/dua-cli 9999: dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
-sys-fs/ncdu 2.4: NCurses Disk Usage
+sys-fs/gdu 5.29.0: Disk usage analyzer with console interface written in Go
 sys-fs/udisks 2.10.0_pre: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.0.0_rc0: XFS filesystem utilities
 sys-libs/ncurses 6.4_p20230923: Console display library
