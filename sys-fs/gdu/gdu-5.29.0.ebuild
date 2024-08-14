@@ -8,7 +8,7 @@ inherit go-module
 DESCRIPTION="Disk usage analyzer with console interface written in Go"
 HOMEPAGE="https://github.com/dundee/gdu"
 SRC_URI="https://github.com/dundee/gdu/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-#SRC_URI+=" https://gentoo.kropotkin.rocks/go-pkgs/${P}-vendor.tar.xz"
+SRC_URI+=" https://gentoo.kropotkin.rocks/go-pkgs/${PN}-5.25.0-vendor.tar.xz"
 
 LICENSE="Apache-2.0 BSD MIT"
 SLOT="0"
