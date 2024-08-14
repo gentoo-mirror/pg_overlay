@@ -1,4 +1,4 @@
-# Copyright 2017-2020 Gentoo Authors
+# Copyright 2023-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,7 +7,7 @@ CRATES=""
 
 inherit cargo git-r3 optfeature
 
-DESCRIPTION="dua (-> Disk Usage Analyzer) is a tool to conveniently learn about the usage of disk space of a given directory"
+DESCRIPTION="A tool to conveniently learn about the disk usage of directories, fast!"
 HOMEPAGE="https://github.com/Byron/dua-cli"
 
 EGIT_REPO_URI="https://github.com/Byron/${PN}.git"
@@ -17,23 +17,14 @@ LICENSE="MIT"
 SLOT="0"
 IUSE=""
 
-DEPEND=""
+QA_FLAGS_IGNORED="usr/bin/dua"
 
-RDEPEND="${DEPEND}"
-
-src_unpack() {
-	git-r3_src_unpack
-	cargo_live_src_unpack
-}
-
-src_configure() {
-	cargo_src_configure
-}
-
-src_compile() {
-	cargo_src_compile
-}
+DOCS=(
+	README.md
+	CHANGELOG.md
+)
 
 src_install() {
 	cargo_src_install
+	dodoc -r "${DOCS[@]}"
 }
