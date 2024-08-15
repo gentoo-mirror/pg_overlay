@@ -13,8 +13,8 @@ inherit flag-o-matic llvm-r1 meson-multilib python-any-r1 linux-info rust-toolch
 MY_P="${P/_/-}"
 
 CRATES="
-	syn@2.0.39
-	proc-macro2@1.0.70
+	syn@2.0.68
+	proc-macro2@1.0.86
 	quote@1.0.33
 	unicode-ident@1.0.12
 	paste@1.0.14
@@ -358,15 +358,6 @@ multilib_src_configure() {
 		emesonargs+=($(meson_feature xa gallium-xa))
 	else
 		emesonargs+=(-Dgallium-xa=disabled)
-	fi
-
-	if use video_cards_freedreno ||
-	   use video_cards_lima ||
-	   use video_cards_panfrost ||
-	   use video_cards_v3d ||
-	   use video_cards_vc4 ||
-	   use video_cards_vivante; then
-		gallium_enable -- kmsro
 	fi
 
 	gallium_enable !llvm softpipe
