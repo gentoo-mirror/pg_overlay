@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-128-patches-05.tar.xz"
+FIREFOX_PATCHSET="firefox-129-patches-01.tar.xz"
 
 LLVM_COMPAT=( 17 18 )
 
@@ -30,6 +30,11 @@ fi
 if [[ -n ${MOZ_ESR} ]] ; then
 	# ESR releases have slightly different version numbers
 	MOZ_PV="${MOZ_PV}esr"
+	HOMEPAGE="https://www.mozilla.com/firefox https://www.mozilla.org/firefox/enterprise/"
+	SLOT="esr"
+else
+	HOMEPAGE="https://www.mozilla.com/firefox"
+	SLOT="rapid"
 fi
 
 MOZ_PN="${PN%-bin}"
@@ -59,10 +64,10 @@ LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 SLOT="rapid"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
 
-IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel"
-IUSE+=" jack +jumbo-build libproxy lto openh264 pgo pulseaudio sndio selinux"
-IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx system-png +system-webp"
-IUSE+=" +telemetry valgrind wayland wifi +X"
+IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel jack +jumbo-build libproxy lto"
+IUSE+=" openh264 pgo pulseaudio sndio selinux +system-av1 +system-harfbuzz +system-icu"
+IUSE+=" +system-jpeg +system-libevent +system-libvpx system-png +system-webp +telemetry valgrind"
+IUSE+=" wayland wifi +X"
 
 # Firefox-only IUSE
 IUSE+=" +gmp-autoupdate +privacy"
@@ -74,7 +79,6 @@ REQUIRED_USE="|| ( X wayland )
 	wifi? ( dbus )"
 
 FF_ONLY_DEPEND="!www-client/firefox:0
-	!www-client/firefox:esr
 	selinux? ( sec-policy/selinux-mozilla )"
 BDEPEND="${PYTHON_DEPS}
 	$(llvm_gen_dep '
@@ -191,6 +195,13 @@ DEPEND="${COMMON_DEPEND}
 		x11-libs/libICE
 		x11-libs/libSM
 	)"
+
+# ESR and rapid dependencies.
+if [[ -n ${MOZ_ESR} ]] ; then
+	RDEPEND+=" !www-client/firefox:rapid"
+else
+	RDEPEND+=" !www-client/firefox:esr"
+fi
 
 # Allow MOZ_GMP_PLUGIN_LIST to be set in an eclass or
 # overridden in the enviromnent (advanced hackers only)
@@ -859,7 +870,7 @@ src_configure() {
 	[[ -n ${MOZ_ESR} ]] && update_channel=esr
 	mozconfig_add_options_ac '' --update-channel=${update_channel}
 
-	if ! use x86 && [[ ${CHOST} != armv*h* ]] ; then
+	if ! use x86 ; then
 		mozconfig_add_options_ac '' --enable-rust-simd
 	fi
 
@@ -1052,29 +1063,6 @@ src_configure() {
 	# Optimization flag was handled via configure
 	filter-flags '-O*'
 
-	# Modifications to better support ARM, bug #553364
-	if use cpu_flags_arm_neon ; then
-		mozconfig_add_options_ac '+cpu_flags_arm_neon' --with-fpu=neon
-
-		if ! tc-is-clang ; then
-			# thumb options aren't supported when using clang, bug 666966
-			mozconfig_add_options_ac '+cpu_flags_arm_neon' \
-				--with-thumb=yes \
-				--with-thumb-interwork=no
-		fi
-	fi
-
-	if [[ ${CHOST} == armv*h* ]] ; then
-		mozconfig_add_options_ac 'CHOST=armv*h*' --with-float-abi=hard
-
-		if ! use system-libvpx ; then
-			sed -i \
-				-e "s|softfp|hard|" \
-				"${S}"/media/libvpx/moz.build \
-				|| die
-		fi
-	fi
-
 	# elf-hack
 	# Filter "-z,pack-relative-relocs" and let the build system handle it instead.
 	if use amd64 || use x86 ; then
@@ -1093,21 +1081,6 @@ src_configure() {
 	else
 		mozconfig_add_options_ac 'disable elf-hack on non-supported arches' --disable-elf-hack
 	fi
-
-	# Additional ARCH support
-	case "${ARCH}" in
-		arm)
-			# Reduce the memory requirements for linking
-			if use clang ; then
-				# Nothing to do
-				:;
-			elif use lto ; then
-				append-ldflags -Wl,--no-keep-memory
-			else
-				append-ldflags -Wl,--no-keep-memory -Wl,--reduce-memory-overheads
-			fi
-			;;
-	esac
 
 	if ! use elibc_glibc; then
 		mozconfig_add_options_ac '!elibc_glibc' --disable-jemalloc
@@ -1452,10 +1425,15 @@ src_install() {
 	# Install menu
 	local app_name="Mozilla ${MOZ_PN^}"
 	local desktop_file="${FILESDIR}/icon/${PN}-r3.desktop"
-	local desktop_filename="${PN}.desktop"
 	local exec_command="${PN}"
 	local icon="${PN}"
 	local use_wayland="false"
+
+	if [[ -n ${MOZ_ESR} ]] ; then
+		local desktop_filename="${PN}-esr.desktop"
+	else
+		local desktop_filename="${PN}.desktop"
+	fi
 
 	if use wayland ; then
 		use_wayland="true"
@@ -1473,6 +1451,17 @@ src_install() {
 	newmenu "${WORKDIR}/${PN}.desktop-template" "${desktop_filename}"
 
 	rm "${WORKDIR}/${PN}.desktop-template" || die
+
+	# Install search provider for Gnome
+	insinto /usr/share/gnome-shell/search-providers/
+	doins browser/components/shell/search-provider-files/org.mozilla.firefox.search-provider.ini
+
+	insinto /usr/share/dbus-1/services/
+	doins browser/components/shell/search-provider-files/org.mozilla.firefox.SearchProvider.service
+
+	sed -e "s/firefox.desktop/${desktop_filename}/g" \
+		-i "${ED}/usr/share/gnome-shell/search-providers/org.mozilla.firefox.search-provider.ini" \
+			die "Failed to sed search-provider file."
 
 	# Install wrapper script
 	[[ -f "${ED}/usr/bin/${PN}" ]] && rm "${ED}/usr/bin/${PN}"
