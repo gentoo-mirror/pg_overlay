@@ -68,7 +68,7 @@ gui-apps/sfwbar 1.0_beta14: S* Floating Window Bar
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/yambar 1.11.0: Simplistic and highly configurable status panel for X and Wayland
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
-gui-wm/labwc 0.7.4: Openbox alternative for wayland
+gui-wm/labwc 0.8.0: Openbox alternative for wayland
 gui-wm/sway 9999: i3-compatible Wayland window manager
 kde-misc/kdiff3 1.11.0: Frontend to diff3 based on KDE Frameworks
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
