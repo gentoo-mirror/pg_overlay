@@ -130,6 +130,13 @@ fi
 # @DESCRIPTION:
 # Array of tests that should be skipped when running CTest.
 
+[[ ${CMAKE_MIN_VERSION} ]] && die "CMAKE_MIN_VERSION is banned; if necessary, set BDEPEND=\">=dev-build/cmake-${CMAKE_MIN_VERSION}\" directly"
+[[ ${CMAKE_BUILD_DIR} ]] && die "The ebuild must be migrated to BUILD_DIR"
+[[ ${CMAKE_REMOVE_MODULES} ]] && die "CMAKE_REMOVE_MODULES is banned, set CMAKE_REMOVE_MODULES_LIST array instead"
+[[ ${CMAKE_UTILS_QA_SRC_DIR_READONLY} ]] && die "Use CMAKE_QA_SRC_DIR_READONLY instead"
+[[ ${WANT_CMAKE} ]] && die "WANT_CMAKE has been removed and is a no-op"
+[[ ${PREFIX} ]] && die "PREFIX has been removed and is a no-op"
+
 case ${CMAKE_MAKEFILE_GENERATOR} in
 	emake)
 		BDEPEND="dev-build/make"
@@ -182,6 +189,14 @@ cmake_comment_add_subdirectory() {
 	done
 }
 
+# @FUNCTION: comment_add_subdirectory
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use cmake_comment_add_subdirectory instead.
+comment_add_subdirectory() {
+	die "comment_add_subdirectory is banned. Use cmake_comment_add_subdirectory instead"
+}
+
 # @FUNCTION: cmake_use_find_package
 # @USAGE: <USE flag> <package name>
 # @DESCRIPTION:
@@ -199,6 +214,74 @@ cmake_use_find_package() {
 
 	echo "-DCMAKE_DISABLE_FIND_PACKAGE_$2=$(use $1 && echo OFF || echo ON)"
 }
+
+# @FUNCTION: _cmake_banned_func
+# @INTERNAL
+# @DESCRIPTION:
+# Banned functions are banned.
+_cmake_banned_func() {
+	die "${FUNCNAME[1]} is banned. use -D$1<related_CMake_variable>=\"\$(usex $2)\" instead"
+}
+
+# @FUNCTION: cmake-utils_use_with
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DWITH_FOO=$(usex foo) instead.
+cmake-utils_use_with() { _cmake_banned_func WITH_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use_enable
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DENABLE_FOO=$(usex foo) instead.
+cmake-utils_use_enable() { _cmake_banned_func ENABLE_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use_disable
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DDISABLE_FOO=$(usex !foo) instead.
+cmake-utils_use_disable() { _cmake_banned_func DISABLE_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use_no
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DNO_FOO=$(usex !foo) instead.
+cmake-utils_use_no() { _cmake_banned_func NO_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use_want
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DWANT_FOO=$(usex foo) instead.
+cmake-utils_use_want() { _cmake_banned_func WANT_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use_build
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DBUILD_FOO=$(usex foo) instead.
+cmake-utils_use_build() { _cmake_banned_func BUILD_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use_has
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DHAVE_FOO=$(usex foo) instead.
+cmake-utils_use_has() { _cmake_banned_func HAVE_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use_use
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DUSE_FOO=$(usex foo) instead.
+cmake-utils_use_use() { _cmake_banned_func USE_ "$@" ; }
+
+# @FUNCTION: cmake-utils_use
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DFOO=$(usex foo) instead.
+cmake-utils_use() { _cmake_banned_func "" "$@" ; }
+
+# @FUNCTION: cmake-utils_useno
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use -DNOFOO=$(usex !foo) instead.
+cmake-utils_useno() { _cmake_banned_func "" "$@" ; }
 
 # @FUNCTION: _cmake_check_build_dir
 # @INTERNAL
@@ -458,14 +541,17 @@ cmake_src_configure() {
 		set(CMAKE_INSTALL_DOCDIR "${EPREFIX}/usr/share/doc/${PF}" CACHE PATH "")
 		set(BUILD_SHARED_LIBS ON CACHE BOOL "")
 		set(Python3_FIND_UNVERSIONED_NAMES FIRST CACHE STRING "")
-		set(FETCHCONTENT_FULLY_DISCONNECTED ON CACHE BOOL "")
 		set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON CACHE BOOL "")
 		set(CMAKE_TLS_VERIFY ON CACHE BOOL "")
 		set(CMAKE_COMPILE_WARNING_AS_ERROR OFF CACHE BOOL "")
 	_EOF_
 
 	if [[ -n ${_ECM_ECLASS} ]]; then
-		echo 'set(ECM_DISABLE_QMLPLUGINDUMP ON CACHE BOOL "")' >> "${common_config}" || die
+		cat >> ${common_config} <<- _EOF_ || die
+			set(ECM_DISABLE_QMLPLUGINDUMP ON CACHE BOOL "")
+			set(ECM_DISABLE_APPSTREAMTEST ON CACHE BOOL "")
+			set(ECM_DISABLE_GIT ON CACHE BOOL "")
+		_EOF_
 	fi
 
 	# See bug 689410
@@ -585,6 +671,14 @@ cmake_build() {
 	esac
 
 	popd > /dev/null || die
+}
+
+# @FUNCTION: cmake-utils_src_make
+# @INTERNAL
+# @DESCRIPTION:
+# Banned. Use cmake_build instead.
+cmake-utils_src_make() {
+	die "cmake-utils_src_make is banned. Use cmake_build instead"
 }
 
 # @FUNCTION: cmake_src_test
