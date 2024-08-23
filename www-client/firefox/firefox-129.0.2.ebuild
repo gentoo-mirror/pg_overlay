@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-129-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-129-patches-02.tar.xz"
 
 LLVM_COMPAT=( 17 18 )
 
@@ -56,12 +56,10 @@ PATCH_URIS=(
 )
 
 DESCRIPTION="Firefox Web Browser"
-HOMEPAGE="https://www.mozilla.com/firefox"
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
 	${PATCH_URIS[@]}"
 S="${WORKDIR}/${PN}-${PV%_*}"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-SLOT="rapid"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
 
 IUSE="+clang cpu_flags_arm_neon dbus debug eme-free hardened hwaccel jack +jumbo-build libproxy lto"
@@ -166,7 +164,10 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 	)
 	wifi? (
 		kernel_linux? (
-			net-misc/networkmanager
+			|| (
+				net-misc/networkmanager
+				net-misc/connman[networkmanager]
+			)
 			sys-apps/dbus
 		)
 	)
