@@ -19,7 +19,7 @@ IUSE="daemon debug geoip gui +nls stats upnp X webserver"
 RDEPEND="
 	dev-libs/boost:=
 	dev-libs/crypto++:=
-	sys-libs/binutils-libs:0=
+	sys-libs/binutils-libs:=
 	sys-libs/readline:0=
 	sys-libs/zlib
 	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[gui?]
