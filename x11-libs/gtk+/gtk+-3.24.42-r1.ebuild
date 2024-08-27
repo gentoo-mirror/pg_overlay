@@ -40,7 +40,7 @@ COMMON_DEPEND="
 	sysprof? ( >=dev-util/sysprof-capture-3.33.2:3[${MULTILIB_USEDEP}] )
 	wayland? (
 		>=dev-libs/wayland-1.14.91[${MULTILIB_USEDEP}]
-		>=dev-libs/wayland-protocols-1.21
+		>=dev-libs/wayland-protocols-1.32
 		media-libs/mesa[wayland,${MULTILIB_USEDEP}]
 		>=x11-libs/libxkbcommon-0.2[${MULTILIB_USEDEP}]
 	)
