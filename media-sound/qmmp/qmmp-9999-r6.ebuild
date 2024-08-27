@@ -1,4 +1,4 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -34,8 +34,8 @@ REQUIRED_USE="
 "
 
 RDEPEND="
-	dev-qt/qtbase:6[gui,network,sql,widgets]
-	media-libs/taglib
+	dev-qt/qtbase:6[dbus?,gui,network,sql,widgets]
+	media-libs/taglib:=
 	x11-libs/libX11
 	aac? ( media-libs/faad2 )
 	alsa? ( media-libs/alsa-lib )
@@ -46,10 +46,9 @@ RDEPEND="
 		dev-libs/libcdio-paranoia
 	)
 	curl? ( net-misc/curl )
-	dbus? ( dev-qt/qtbase:6[dbus] )
 	enca? ( app-i18n/enca )
 	ffmpeg? ( media-video/ffmpeg:= )
-	flac? ( media-libs/flac )
+	flac? ( media-libs/flac:= )
 	game? ( media-libs/game-music-emu )
 	jack? (
 		media-libs/libsamplerate
@@ -67,10 +66,11 @@ RDEPEND="
 	opus? ( media-libs/opusfile )
 	pipewire? ( media-video/pipewire )
 	projectm? (
-		dev-qt/qtbast:6[gui,opengl]
+		dev-qt/qtbase:6[opengl]
+		media-libs/libglvnd
 		media-libs/libprojectm:=
 	)
-	pulseaudio? ( >=media-sound/pulseaudio-0.9.9 )
+	pulseaudio? ( media-libs/libpulse )
 	qtmedia? ( dev-qt/qtmultimedia:6 )
 	scrobbler? ( net-misc/curl )
 	shout? ( media-libs/libshout )
