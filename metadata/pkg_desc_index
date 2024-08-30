@@ -153,7 +153,7 @@ virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.80.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 129.0.2: Firefox Web Browser
-www-client/vivaldi-snapshot 6.9.3447.13: A browser for our friends
+www-client/vivaldi-snapshot 6.9.3447.34: A browser for our friends
 x11-base/xwayland 23.2.6 24.1.2: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.42-r1: Gimp ToolKit +
