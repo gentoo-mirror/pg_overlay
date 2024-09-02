@@ -74,6 +74,7 @@ kde-misc/kdiff3 1.11.0: Frontend to diff3 based on KDE Frameworks
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-plasma/kwin 9999: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
+kde-plasma/plasma-workspace 9999: KDE Plasma workspace
 mail-client/thunderbird 115.12.0: Thunderbird Mail Client
 mail-client/thunderbird-bin 115.12.0: Thunderbird Mail Client
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
