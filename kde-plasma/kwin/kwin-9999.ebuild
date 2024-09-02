@@ -96,7 +96,7 @@ RDEPEND="${COMMON_DEPEND}
 	x11-base/xwayland[libei]
 "
 DEPEND="${COMMON_DEPEND}
-	>=dev-libs/plasma-wayland-protocols-1.13.0
+	>=dev-libs/plasma-wayland-protocols-1.14.0
 	>=dev-libs/wayland-protocols-1.34
 	>=dev-qt/qttools-${QTMIN}:6[widgets]
 	>=dev-qt/qtbase-${QTMIN}:6[concurrent]
@@ -110,7 +110,6 @@ BDEPEND="
 	dev-util/wayland-scanner
 	>=kde-frameworks/kcmutils-${KFMIN}:6
 "
-PDEPEND=">=kde-plasma/kde-cli-tools-${PVCUT}:*"
 
 src_prepare() {
 	ecm_src_prepare
@@ -135,7 +134,7 @@ src_configure() {
 		-DKWIN_BUILD_SCREENLOCKER=$(usex lock)
 		-DKWIN_BUILD_GLOBALSHORTCUTS=$(usex shortcuts)
 		-DKWIN_BUILD_X11=ON
-		-DKWIN_BUILD_X11_BACKEND=ON
+		-DKWIN_BUILD_X11_BACKEND=OFF
 	)
 
 	ecm_src_configure
