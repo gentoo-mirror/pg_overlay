@@ -462,7 +462,7 @@ src_install() {
 	mkdir -p "${libdir}"/lib-dynload || die
 
 	# -j1 hack for now for bug #843458
-	emake -j1 DESTDIR="${D}" altinstall
+	emake -j1 DESTDIR="${D}" TEST_MODULES=no altinstall
 
 	# Fix collisions between different slots of Python.
 	rm "${ED}/usr/$(get_libdir)/libpython3.so" || die
@@ -496,7 +496,7 @@ src_install() {
 	fi
 	if ! use tk; then
 		rm -r "${ED}/usr/bin/idle${PYVER}" || die
-		rm -r "${libdir}/"{idlelib,tkinter,test/test_tk*} || die
+		rm -r "${libdir}/"{idlelib,tkinter} || die
 	fi
 
 	ln -s ../python/EXTERNALLY-MANAGED "${libdir}/EXTERNALLY-MANAGED" || die
