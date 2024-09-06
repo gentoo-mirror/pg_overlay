@@ -68,44 +68,44 @@ python_configure_all() {
 python_test() {
 	local EPYTEST_DESELECT=(
 		# Very disk-and-memory-hungry
-		lib/tests/test_io.py::TestSaveTxt::test_large_zip
-		lib/tests/test_io.py::TestSavezLoad::test_closing_fid
-		lib/tests/test_io.py::TestSavezLoad::test_closing_zipfile_after_load
+		numpy/lib/tests/test_io.py::TestSaveTxt::test_large_zip
+		numpy/lib/tests/test_io.py::TestSavezLoad::test_closing_fid
+		numpy/lib/tests/test_io.py::TestSavezLoad::test_closing_zipfile_after_load
 
 		# Precision problems
-		_core/tests/test_umath_accuracy.py::TestAccuracy::test_validate_transcendentals
+		numpy/_core/tests/test_umath_accuracy.py::TestAccuracy::test_validate_transcendentals
 
 		# Runs the whole test suite recursively, that's just crazy
-		core/tests/test_mem_policy.py::test_new_policy
+		numpy/core/tests/test_mem_policy.py::test_new_policy
 
-		typing/tests/test_typing.py
+		numpy/typing/tests/test_typing.py
 		# Uses huge amount of memory
-		core/tests/test_mem_overlap.py
-		'core/tests/test_multiarray.py::TestDot::test_huge_vectordot[complex128]'
+		numpy/core/tests/test_mem_overlap.py
+		'numpy/core/tests/test_multiarray.py::TestDot::test_huge_vectordot[complex128]'
 	)
 
 	if [[ $(uname -m) == armv8l ]]; then
 		# Degenerate case of arm32 chroot on arm64, bug #774108
 		EPYTEST_DESELECT+=(
-			core/tests/test_cpu_features.py::Test_ARM_Features::test_features
+			numpy/core/tests/test_cpu_features.py::Test_ARM_Features::test_features
 		)
 	fi
 
 	case ${EPYTHON} in
 		python3.13)
 			EPYTEST_DESELECT+=(
-				_core/tests/test_nditer.py::test_iter_refcount
-				_core/tests/test_limited_api.py::test_limited_api
-				f2py/tests/test_f2py2e.py::test_gh22819_cli
+				numpy/_core/tests/test_nditer.py::test_iter_refcount
+				numpy/_core/tests/test_limited_api.py::test_limited_api
+				numpy/f2py/tests/test_f2py2e.py::test_gh22819_cli
 			)
 			;&
 		python3.12)
 			EPYTEST_DESELECT+=(
 				# flaky
-				f2py/tests/test_crackfortran.py
-				f2py/tests/test_data.py::TestData::test_crackedlines
-				f2py/tests/test_data.py::TestDataF77::test_crackedlines
-				f2py/tests/test_f2py2e.py::test_gen_pyf
+				numpy/f2py/tests/test_crackfortran.py
+				numpy/f2py/tests/test_data.py::TestData::test_crackedlines
+				numpy/f2py/tests/test_data.py::TestDataF77::test_crackedlines
+				numpy/f2py/tests/test_f2py2e.py::test_gen_pyf
 			)
 			;;
 	esac
@@ -113,13 +113,25 @@ python_test() {
 	if ! has_version -b "~${CATEGORY}/${P}[${PYTHON_USEDEP}]" ; then
 		# depends on importing numpy.random from system namespace
 		EPYTEST_DESELECT+=(
-			'random/tests/test_extending.py::test_cython'
+			'numpy/random/tests/test_extending.py::test_cython'
 		)
 	fi
 
-	rm -rf numpy || die
+	if has_version ">=dev-python/setuptools-74[${PYTHON_USEDEP}]"; then
+		# msvccompiler removal
+		EPYTEST_DESELECT+=(
+			numpy/tests/test_public_api.py::test_all_modules_are_expected_2
+			numpy/tests/test_public_api.py::test_api_importable
+		)
+		EPYTEST_IGNORE+=(
+			numpy/distutils/tests/test_mingw32ccompiler.py
+			numpy/distutils/tests/test_system_info.py
+		)
+	fi
+
 	local -x PYTEST_DISABLE_PLUGIN_AUTOLOAD=1
-	epytest --pyargs numpy
+	cd "${BUILD_DIR}/install$(python_get_sitedir)" || die
+	epytest
 }
 
 python_install_all() {
