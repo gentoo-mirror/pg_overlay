@@ -7,7 +7,7 @@ ECM_HANDBOOK="optional"
 ECM_TEST="true"
 KFMIN=9999
 PVCUT=$(ver_cut 1-3)
-QTMIN=6.7.1
+QTMIN=6.7.2
 inherit ecm plasma.kde.org
 
 DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
@@ -133,8 +133,6 @@ src_configure() {
 		$(cmake_use_find_package caps Libcap)
 		-DKWIN_BUILD_SCREENLOCKER=$(usex lock)
 		-DKWIN_BUILD_GLOBALSHORTCUTS=$(usex shortcuts)
-		-DKWIN_BUILD_X11=ON
-		-DKWIN_BUILD_X11_BACKEND=ON
 	)
 
 	ecm_src_configure
