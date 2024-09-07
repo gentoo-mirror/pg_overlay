@@ -1,19 +1,21 @@
-From 61b5cc96337da2121221dd1bcdb63fd36551d065 Mon Sep 17 00:00:00 2001
+From 3d8c6d095581e8d7585f3772cfd16f6367f3c008 Mon Sep 17 00:00:00 2001
 From: Josh Stone <jistone@redhat.com>
-Date: Wed, 1 Nov 2023 15:21:15 -0700
+Date: Fri, 16 Aug 2024 10:12:58 -0700
 Subject: [PATCH] Use lld provided by system
 
 ---
- compiler/rustc_target/src/spec/base/wasm.rs                   | 3 +--
- compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs | 2 +-
- compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs | 1 +
- 3 files changed, 3 insertions(+), 3 deletions(-)
+ compiler/rustc_target/src/spec/base/wasm.rs                    | 3 +--
+ .../src/spec/targets/aarch64_unknown_none_softfloat.rs         | 2 +-
+ compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs | 1 +
+ compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs  | 2 +-
+ compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs  | 1 +
+ 5 files changed, 5 insertions(+), 4 deletions(-)
 
 diff --git a/compiler/rustc_target/src/spec/base/wasm.rs b/compiler/rustc_target/src/spec/base/wasm.rs
-index 87ade9e58cf4..2ddff95febab 100644
+index f237391016e7..08bcd9699b4a 100644
 --- a/compiler/rustc_target/src/spec/base/wasm.rs
 +++ b/compiler/rustc_target/src/spec/base/wasm.rs
-@@ -91,8 +91,7 @@ macro_rules! args {
+@@ -85,8 +85,7 @@ macro_rules! args {
          // arguments just yet
          limit_rdylib_exports: false,
  
@@ -23,8 +25,33 @@ index 87ade9e58cf4..2ddff95febab 100644
          linker_flavor: LinkerFlavor::WasmLld(Cc::No),
  
          pre_link_args,
+diff --git a/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs b/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs
+index 222d5651b521..4b780bc8a8e7 100644
+--- a/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs
++++ b/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs
+@@ -14,7 +14,7 @@ pub fn target() -> Target {
+     let opts = TargetOptions {
+         abi: "softfloat".into(),
+         linker_flavor: LinkerFlavor::Gnu(Cc::No, Lld::Yes),
+-        linker: Some("rust-lld".into()),
++        linker: Some("lld".into()),
+         features: "+v8a,+strict-align,-neon,-fp-armv8".into(),
+         relocation_model: RelocModel::Static,
+         disable_redzone: true,
+diff --git a/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs b/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs
+index 429303170b6b..19d4ec53f6d8 100644
+--- a/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs
++++ b/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs
+@@ -9,6 +9,7 @@ pub fn target() -> Target {
+     base.max_atomic_width = Some(128);
+     base.add_pre_link_args(LinkerFlavor::Msvc(Lld::No), &["/machine:arm64"]);
+     base.features = "+v8a".into();
++    base.linker = Some("lld".into());
+ 
+     Target {
+         llvm_target: "aarch64-unknown-windows".into(),
 diff --git a/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs b/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs
-index 9aa95a35f8e5..a9172f9441b7 100644
+index 549706998d46..b7e9158ddef5 100644
 --- a/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs
 +++ b/compiler/rustc_target/src/spec/targets/x86_64_unknown_none.rs
 @@ -17,7 +17,7 @@ pub fn target() -> Target {
@@ -33,11 +60,11 @@ index 9aa95a35f8e5..a9172f9441b7 100644
          linker_flavor: LinkerFlavor::Gnu(Cc::No, Lld::Yes),
 -        linker: Some("rust-lld".into()),
 +        linker: Some("lld".into()),
-         features:
-             "-mmx,-sse,-sse2,-sse3,-ssse3,-sse4.1,-sse4.2,-3dnow,-3dnowa,-avx,-avx2,+soft-float"
-                 .into(),
+         features: "-mmx,-sse,-sse2,-sse3,-ssse3,-sse4.1,-sse4.2,-avx,-avx2,+soft-float".into(),
+         supported_sanitizers: SanitizerSet::KCFI | SanitizerSet::KERNELADDRESS,
+         disable_redzone: true,
 diff --git a/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs b/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs
-index 5abfb8162f70..13cb43bda1a4 100644
+index 6da1fcca58c8..c84ae44576d4 100644
 --- a/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs
 +++ b/compiler/rustc_target/src/spec/targets/x86_64_unknown_uefi.rs
 @@ -16,6 +16,7 @@ pub fn target() -> Target {
@@ -48,28 +75,6 @@ index 5abfb8162f70..13cb43bda1a4 100644
  
      // We disable MMX and SSE for now, even though UEFI allows using them. Problem is, you have to
      // enable these CPU features explicitly before their first use, otherwise their instructions
-diff -Naur a/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs b/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs
---- a/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs	2024-03-17 12:03:00.000000000 -0700
-+++ b/compiler/rustc_target/src/spec/targets/aarch64_unknown_none_softfloat.rs	2024-03-22 10:02:17.742806274 -0700
-@@ -14,7 +14,7 @@
-     let opts = TargetOptions {
-         abi: "softfloat".into(),
-         linker_flavor: LinkerFlavor::Gnu(Cc::No, Lld::Yes),
--        linker: Some("rust-lld".into()),
-+        linker: Some("lld".into()),
-         features: "+v8a,+strict-align,-neon,-fp-armv8".into(),
-         relocation_model: RelocModel::Static,
-         disable_redzone: true,
 -- 
-2.41.0
+2.46.0
 
---- a/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs	2024-04-09 19:20:09.000000000 +0200
-+++ b/compiler/rustc_target/src/spec/targets/aarch64_unknown_uefi.rs	2024-04-26 11:22:31.988601550 +0200
-@@ -9,6 +9,7 @@ pub fn target() -> Target {
-     base.max_atomic_width = Some(128);
-     base.add_pre_link_args(LinkerFlavor::Msvc(Lld::No), &["/machine:arm64"]);
-     base.features = "+v8a".into();
-+    base.linker = Some("lld".into());
- 
-     Target {
-         llvm_target: "aarch64-unknown-windows".into(),
