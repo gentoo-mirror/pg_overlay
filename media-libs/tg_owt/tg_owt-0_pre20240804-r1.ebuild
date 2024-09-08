@@ -31,7 +31,7 @@ IUSE="screencast +X"
 # - libsrtp (project uses private APIs)
 # - pffft (no stable versioning, patched)
 RDEPEND="
-	>=dev-cpp/abseil-cpp-20220623.1:=
+	>=dev-cpp/abseil-cpp-20240722.0:=
 	dev-libs/openssl:=
 	dev-libs/protobuf:=
 	media-libs/libjpeg-turbo:=
