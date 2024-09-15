@@ -56,7 +56,6 @@ RDEPEND="${COMMON_DEPEND}
 "
 
 PATCHES=("${FILESDIR}/137.patch"
-		"${FILESDIR}/139.patch"
 		"${FILESDIR}/141.patch")
 
 src_prepare() {
