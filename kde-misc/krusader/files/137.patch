@@ -6112,52 +6112,6 @@ index 383bf3ed4..2ca4f9052 100644
 GitLab
 
 
-From 54715ff712fd0e3315a8b8caf3fea44194d2493c Mon Sep 17 00:00:00 2001
-From: Valentin Manea <email_kde@mors.eu.org>
-Date: Tue, 11 Jun 2024 22:53:06 +0300
-Subject: [PATCH 45/68] docbook DCOP is not a general entity anymore in Kf6
-
-Temporarily don't use DCOP as entity, just expand it
----
- doc/handbook/glossary.docbook | 8 ++++----
- 1 file changed, 4 insertions(+), 4 deletions(-)
-
-diff --git a/doc/handbook/glossary.docbook b/doc/handbook/glossary.docbook
-index f38bf2914..ef06d6c6c 100644
---- a/doc/handbook/glossary.docbook
-+++ b/doc/handbook/glossary.docbook
-@@ -71,7 +71,7 @@
-       system.</para>
-     </glossdef>
-   </glossentry>
--    <glossentry id="glos-dbus">
-+  <glossentry id="glos-dbus">
-     <glossterm>
-       &DBus;
-     </glossterm>
-@@ -79,15 +79,15 @@
-       <para>
-       <ulink url="https://freedesktop.org/wiki/Software/dbus">&DBus;</ulink> is an inter-service messaging system.
-       Developed by &RedHat;, it was heavily influenced by &kde; 3
--      <link linkend="glos-dcop">&DCOP;</link>, which it supersedes.
-+      <link linkend="glos-dcop">DCOP</link>, which it supersedes.
-       &krusader; can use &DBus; to communicate with other applications.
-       On the other hand, you can use &DBus; to control &krusader; from
--	other applications. Just use <application>qdbusviewer</application> to examine the possibilities.</para>
-+      other applications. Just use <application>qdbusviewer</application> to examine the possibilities.</para>
-     </glossdef>
-   </glossentry>
-   <glossentry id="glos-dcop">
-     <glossterm>
--      &DCOP;
-+      DCOP
-     </glossterm>
-     <glossdef>
-       <para>
--- 
-GitLab
-
-
 From 9e775bad9e367baf0d36b9db653c0f48ea0994d0 Mon Sep 17 00:00:00 2001
 From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
 Date: Thu, 20 Jun 2024 12:06:17 +0200
