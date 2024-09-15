@@ -1,0 +1,35 @@
+From a1caa28888ffb64a5032ee2643d5c8a4f08359d7 Mon Sep 17 00:00:00 2001
+From: Jan Klos <jan@klos.xyz>
+Date: Tue, 27 Aug 2024 17:11:52 +0200
+Subject: [PATCH] Fix loading oktetapart plugin
+
+Signed-off-by: Jan Klos <jan@klos.xyz>
+---
+ app/KViewer/panelviewer.cpp | 11 ++---------
+ 1 file changed, 2 insertions(+), 9 deletions(-)
+
+diff --git a/app/KViewer/panelviewer.cpp b/app/KViewer/panelviewer.cpp
+index ec2f3407e..4eee43599 100644
+--- a/app/KViewer/panelviewer.cpp
++++ b/app/KViewer/panelviewer.cpp
+@@ -143,15 +143,8 @@ KParts::ReadOnlyPart *PanelViewer::getHexPart()
+ 
+     if (KConfigGroup(krConfig, "General").readEntry("UseOktetaViewer", _UseOktetaViewer)) {
+         if (mimes->find("oktetapart") == mimes->end()) {
+-            KPluginFactory *factory = nullptr;
+-            // Okteta >= 0.26 provides a desktop file, prefer that as the binary changes name
+-            KService::Ptr service = KService::serviceByDesktopName("oktetapart");
+-            if (service) {
+-                factory = KPluginFactory::loadFactory(service.data()->name()).plugin;
+-            } else {
+-                // fallback to search for desktopfile-less old variant
+-                factory = KPluginFactory::loadFactory(QStringLiteral("oktetapart")).plugin;
+-            }
++            const KPluginMetaData metaData(QStringLiteral("kf6/parts/oktetapart"));
++            KPluginFactory *factory = KPluginFactory::loadFactory(metaData).plugin;
+             if (factory) {
+                 if ((part = factory->create<KParts::ReadOnlyPart>(this, this)))
+                     mimes->insert("oktetapart", part);
+-- 
+GitLab
+
