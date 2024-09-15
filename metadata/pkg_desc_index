@@ -103,7 +103,7 @@ media-sound/strawberry 9999: Modern music player and library organizer based on 
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.2.3: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-net-im/64Gram 1.1.37: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
+net-im/64Gram 1.1.39: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
 net-libs/libmbim 1.28.4: Mobile Broadband Interface Model (MBIM) modem protocol helper library
@@ -154,7 +154,7 @@ virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.81.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 130.0: Firefox Web Browser
-www-client/vivaldi-snapshot 6.10.3458.19: A browser for our friends
+www-client/vivaldi-snapshot 6.10.3466.4: A browser for our friends
 x11-base/xwayland 23.2.6 24.1.2: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.42-r1: Gimp ToolKit +
