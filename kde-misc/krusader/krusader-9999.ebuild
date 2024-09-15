@@ -55,7 +55,7 @@ RDEPEND="${COMMON_DEPEND}
 	>=kde-frameworks/ktexteditor-${KFMIN}:6
 "
 
-PATCHES=("${FILESDIR}/{137,139,141{}.patch")
+PATCHES=("${FILESDIR}/{137,139,141.patch")
 
 src_prepare() {
 	ecm_src_prepare
