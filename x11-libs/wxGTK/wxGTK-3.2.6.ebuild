@@ -5,8 +5,8 @@ EAPI=8
 
 inherit multilib-minimal flag-o-matic
 
-WXSUBVERSION="${PV}-gtk3"				# 3.2.1-gtk3
-WXVERSION="$(ver_cut 1-3)"				# 3.2.1
+WXSUBVERSION="${PV}-gtk3"				# 3.2.5-gtk3
+WXVERSION="$(ver_cut 1-3)"				# 3.2.5
 # Make sure that this matches the number of components in ${PV}
 WXRELEASE="$(ver_cut 1-2)-gtk3"			# 3.2-gtk3
 WXRELEASE_NODOT=${WXRELEASE//./}		# 32-gtk3
@@ -55,7 +55,7 @@ RDEPEND="
 		)
 		spell? ( app-text/gspell:= )
 		tiff? ( media-libs/tiff:=[${MULTILIB_USEDEP}] )
-		webkit? ( net-libs/webkit-gtk:4= )
+		webkit? ( net-libs/webkit-gtk:4.1= )
 	)"
 DEPEND="${RDEPEND}
 	opengl? ( virtual/glu[${MULTILIB_USEDEP}] )"
@@ -72,12 +72,11 @@ BDEPEND="
 # I'm missing something.  This is an automagic header dep, though.
 
 PATCHES=(
-	#"${WORKDIR}"/wxGTK-3.0.5_p20210214/
 	"${FILESDIR}/${PN}-3.2.1-gtk3-translation-domain.patch"
-	#"${FILESDIR}"/wxGTK-ignore-c++-abi.patch #676878
 	"${FILESDIR}/${PN}-3.2.1-configure-tests.patch"
 	"${FILESDIR}/${PN}-3.2.1-wayland-control.patch"
 	"${FILESDIR}/${PN}-3.2.1-prefer-lib64-in-tests.patch"
+	"${FILESDIR}/${PN}-3.2.5-dont-break-flags.patch"
 )
 
 src_prepare() {
@@ -198,6 +197,17 @@ multilib_src_configure() {
 
 	# wxBase options
 	! use gui && myeconfargs+=( --disable-gui )
+
+	# wxWidgets installs a configuration file with a reference to EGREP.
+	# Autoconf discovers these programs via full paths, which is
+	# unnecessary and fails if a build happened on a merged-usr system
+	# but is being used on a split-usr system.  Bug #927920.
+	export ac_cv_path_SED="sed"
+	export ac_cv_path_EGREP="grep -E"
+	export ac_cv_path_EGREP_TRADITIONAL="grep -E"
+	export ac_cv_path_FGREP="grep -F"
+	export ac_cv_path_GREP="grep"
+	export ac_cv_path_lt_DD="dd"
 
 	ECONF_SOURCE="${S}" econf "${myeconfargs[@]}"
 }
