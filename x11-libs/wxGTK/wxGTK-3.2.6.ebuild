@@ -72,7 +72,6 @@ BDEPEND="
 # I'm missing something.  This is an automagic header dep, though.
 
 PATCHES=(
-	"${FILESDIR}/${PN}-3.2.1-gtk3-translation-domain.patch"
 	"${FILESDIR}/${PN}-3.2.1-configure-tests.patch"
 	"${FILESDIR}/${PN}-3.2.1-wayland-control.patch"
 	"${FILESDIR}/${PN}-3.2.1-prefer-lib64-in-tests.patch"
