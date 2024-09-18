@@ -92,6 +92,7 @@ media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
+media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
@@ -153,7 +154,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.81.0: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
-www-client/firefox 130.0: Firefox Web Browser
+www-client/firefox 130.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 6.10.3466.4: A browser for our friends
 x11-base/xwayland 23.2.6 24.1.2: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support

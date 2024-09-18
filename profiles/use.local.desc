@@ -174,6 +174,7 @@ media-sound/deadbeef:notify - Desktop notifications support
 media-sound/deadbeef:nullout - Dummy output driver
 media-sound/deadbeef:shellexec - Define custom shell commands that can be called on tracks
 media-sound/deadbeef:supereq - Enable equalizer
+media-sound/fooyin:pipewire - Enable sound support via native PipeWire backend
 media-sound/kid3:acoustid - Build acoustic fingerprinting plugin using media-libs/chromaprint
 media-sound/kid3:mpris - Enable support for MPRIS2 interface using dev-qt/qtdbus
 media-sound/ncmpc:async-connect - Enable asynchronous connect
@@ -369,6 +370,7 @@ www-client/firefox:clang - Use Clang compiler instead of GCC
 www-client/firefox:eme-free - Disable EME (DRM plugin) capability at build time
 www-client/firefox:geckodriver - Enable WebDriver support
 www-client/firefox:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
+www-client/firefox:gnome-shell - Integrate with gnome-base/gnome-shell search
 www-client/firefox:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
 www-client/firefox:jumbo-build - Enable unified build - combines source files to speed up build process, but requires more memory
 www-client/firefox:libproxy - Enable libproxy support
