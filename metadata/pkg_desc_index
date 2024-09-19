@@ -83,7 +83,7 @@ media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libsdl2 2.30.6: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
-media-libs/mesa 24.2.2 9999: OpenGL-like graphic library for Linux
+media-libs/mesa 24.2.3 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/shaderc 2024.1: Collection of tools, libraries and tests for shader compilation
 media-libs/taglib 2.0.1_pre 2.0.2_pre: Library for reading and editing audio meta data
