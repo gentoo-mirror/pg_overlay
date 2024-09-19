@@ -35,6 +35,7 @@ dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
 dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Library)
+dev-libs/libclc 19.1.0: OpenCL C library
 dev-libs/libdispatch 5.9.2: A library for concurrent code execution on multicore hardware
 dev-libs/libevdev 1.13.1: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
@@ -77,8 +78,7 @@ kde-plasma/kdesu-gui 9999: Graphical frontend for KDE Frameworks' kdesu
 kde-plasma/kwin 9999: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 kde-plasma/plasma-workspace 9999: KDE Plasma workspace
-mail-client/thunderbird 115.12.0: Thunderbird Mail Client
-mail-client/thunderbird-bin 115.12.0: Thunderbird Mail Client
+mail-client/thunderbird 128.2.2: Thunderbird Mail Client
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
