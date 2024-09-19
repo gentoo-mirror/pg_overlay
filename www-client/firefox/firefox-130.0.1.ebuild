@@ -68,7 +68,7 @@ IUSE+=" +system-jpeg +system-libevent +system-libvpx system-png +system-webp +te
 IUSE+=" wayland wifi +X"
 
 # Firefox-only IUSE
-IUSE+=" +gmp-autoupdate +privacy"
+IUSE+=" +gmp-autoupdate gnome-shell +privacy"
 
 # jumbo-build? ( clang ) -> bmo#1914774, bgo#939004 - causes seemingly random compile crashes with gcc.
 REQUIRED_USE="|| ( X wayland )
