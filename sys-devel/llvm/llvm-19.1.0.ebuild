@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=( python3_{11..12} )
 
 inherit cmake flag-o-matic llvm.org multilib-minimal pax-utils python-any-r1
 inherit toolchain-funcs
@@ -330,9 +330,9 @@ get_distribution_components() {
 		if llvm_are_manpages_built; then
 			out+=(
 				# manpages
-				docs-dsymutil-man
-				docs-llvm-dwarfdump-man
-				docs-llvm-man
+				#docs-dsymutil-man
+				#docs-llvm-dwarfdump-man
+				#docs-llvm-man
 			)
 		fi
 		use doc && out+=(
