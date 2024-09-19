@@ -2,7 +2,12 @@
 <!DOCTYPE pkgmetadata SYSTEM "https://www.gentoo.org/dtd/metadata.dtd">
 <pkgmetadata>
 	<maintainer type="project">
-		<email>mozilla@gentoo.org</email>
-		<name>Gentoo Mozilla Team</name>
+		<email>llvm@gentoo.org</email>
 	</maintainer>
+	<upstream>
+		<remote-id type="github">llvm/llvm-project</remote-id>
+	</upstream>
+	<use>
+		<flag name="spirv">Build SPIRV targets</flag>
+	</use>
 </pkgmetadata>
