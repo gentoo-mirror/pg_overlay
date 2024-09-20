@@ -45,7 +45,7 @@ PDEPEND="
 LLVM_COMPONENTS=(
 	clang clang-tools-extra cmake
 )
-LLVM_MANPAGES=1
+LLVM_MANPAGES=0
 LLVM_TEST_COMPONENTS=(
 	llvm/utils
 )
