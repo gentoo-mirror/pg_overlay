@@ -9,8 +9,8 @@ MY_PV="$(ver_cut 1-3)+wayland$(ver_cut 5)"
 
 DESCRIPTION="A window switcher, run dialog and dmenu replacement"
 HOMEPAGE="https://github.com/lbonn/rofi"
-SRC_URI="https://github.com/lbonn/rofi/releases/download/${PV}%2Bwayland3/rofi-${PV}+wayland3.tar.xz"
-S="${WORKDIR}"/rofi-${PV}+wayland3
+SRC_URI="https://github.com/lbonn/rofi/releases/download/${MY_PV}/rofi-${MY_PV}.tar.xz"
+S="${WORKDIR}"/rofi-${MY_PV}
 
 LICENSE="MIT"
 SLOT="0"
