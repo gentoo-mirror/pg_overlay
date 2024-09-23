@@ -1,0 +1,16 @@
+BDEPEND=dev-util/intltool app-alternatives/ninja >=dev-build/cmake-3.20.5
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test
+DEPEND=dev-cpp/atkmm dev-cpp/glibmm:2 dev-cpp/gtkmm:3.0 dev-libs/glib dev-libs/libayatana-appindicator dev-libs/libsigc++:2 media-libs/libcanberra || ( net-libs/webkit-gtk:4 net-libs/webkit-gtk:4.1 ) x11-libs/gtk+:3
+DESCRIPTION=An unofficial WhatsApp desktop application for Linux
+EAPI=8
+HOMEPAGE=https://github.com/eneshecan/whatsapp-for-linux
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=cmake xdg
+IUSE=+l10n_en +l10n_es +l10n_it +l10n_ka +l10n_nl +l10n_pt-BR +l10n_ru +l10n_tr
+KEYWORDS=~amd64
+LICENSE=GPL-3
+RDEPEND=dev-cpp/atkmm dev-cpp/glibmm:2 dev-cpp/gtkmm:3.0 dev-libs/glib dev-libs/libayatana-appindicator dev-libs/libsigc++:2 media-libs/libcanberra || ( net-libs/webkit-gtk:4 net-libs/webkit-gtk:4.1 ) x11-libs/gtk+:3
+SLOT=0
+SRC_URI=https://github.com/eneshecan/whatsapp-for-linux/archive/refs/tags/v1.6.4.tar.gz -> whatsapp-for-linux-1.6.4.tar.gz
+_eclasses_=toolchain-funcs	948855ec7ad9f11351edf9066708dfa9	multilib	7e1347c006a76bb812f3a9f663b79991	flag-o-matic	fa33e3696fe4689dda7e9affe92e2c94	multiprocessing	e644caa6eb7ce7e5ab0864383ac13ad9	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	5465aed08f1dfc2a75f14cbea4272961	cmake	1de691ead1f26da980bbfbb6146793cc	xdg	8d7d90c01b1b1c2602dab6fc6b177097
+_md5_=1e53a626a354eb69445da7753d2ae605

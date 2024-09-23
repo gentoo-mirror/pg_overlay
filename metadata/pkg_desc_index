@@ -66,7 +66,7 @@ games-engines/instead 3.5.1: INSTEAD text-based quest game engine
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-base/librsvg 2.58.93: Scalable Vector Graphics (SVG) rendering library
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
-gui-apps/rofi-wayland 1.7.5-r1: A window switcher, run dialog and dmenu replacement
+gui-apps/rofi-wayland 1.7.5_p3: A window switcher, run dialog and dmenu replacement
 gui-apps/sfwbar 1.0_beta14: S* Floating Window Bar
 gui-apps/wev 9999: Wayland event viewer
 gui-apps/yambar 1.11.0: Simplistic and highly configurable status panel for X and Wayland
