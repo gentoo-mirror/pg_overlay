@@ -113,6 +113,10 @@ gui-apps/yambar:script - Script support
 gui-apps/yambar:sway-xkb - keyboard support for Sway
 gui-apps/yambar:xkb - keyboard support for X11
 gui-apps/yambar:xwindow - XWindow (window tracking for X11) support
+gui-libs/gtk:broadway - Enable the GDK Broadway backend.
+gui-libs/gtk:cloudproviders - Enable GtkPlacesSidebar to access cloud services
+gui-libs/gtk:colord - Use x11-misc/colord for color management in printing
+gui-libs/gtk:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 gui-wm/sway:X - Enable support for X11 applications (XWayland)
 gui-wm/sway:swaybar - Install 'swaybar': sway's status bar component
 gui-wm/sway:swaynag - Install 'swaynag': shows a message with buttons
