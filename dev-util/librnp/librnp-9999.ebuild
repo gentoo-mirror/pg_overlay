@@ -8,7 +8,7 @@ inherit cmake multiprocessing git-r3
 DESCRIPTION="High performance C++ OpenPGP library"
 HOMEPAGE="https://www.rnpgp.org/ https://github.com/rnpgp/rnp"
 EGIT_REPO_URI="https://github.com/rnpgp/rnp.git"
-S="${WORKDIR}/${P/*lib/}"
+#S="${WORKDIR}/${P/*lib/}"
 
 LICENSE="Apache-2.0 BSD BSD-2"
 SLOT="0/0.16.1"
