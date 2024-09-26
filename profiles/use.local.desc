@@ -75,6 +75,7 @@ dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the int
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
 dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
 dev-python/pyudev:qt5 - Install PyQt5 bindings
+dev-util/librnp:botan - Use Botan crypto backend instead of OpenSSL
 dev-util/scanmem:gui - Enable the GameConqueror GUI
 dev-util/sccache:azure - Enable Azure Blob Storage support
 dev-util/sccache:dist-client - Enables distributed support in the sccache client

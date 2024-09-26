@@ -60,6 +60,7 @@ dev-util/gdbus-codegen 2.82.1: GDBus code and documentation generator
 dev-util/glib-utils 2.82.1: Build utilities for GLib using projects
 dev-util/intel_clc 24.2.3 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
+dev-util/librnp 9999: High performance C++ OpenPGP library
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
