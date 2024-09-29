@@ -110,7 +110,7 @@ media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.2.4: Multimedia processing graphs
+media-video/pipewire 1.2.5: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/64Gram 1.1.39: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
@@ -163,7 +163,7 @@ virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.81.0 1.81.0-r1: Virtual for Rust language compiler
 www-apps/baikal 0.9.4 0.9.5: Lightweight CalDAV+CardDAV server
 www-client/firefox 130.0.1: Firefox Web Browser
-www-client/vivaldi-snapshot 6.10.3466.4: A browser for our friends
+www-client/vivaldi-snapshot 6.10.3468.4: A browser for our friends
 x11-base/xwayland 23.2.6 24.1.2: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.42-r1: Gimp ToolKit +
