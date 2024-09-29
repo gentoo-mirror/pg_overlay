@@ -85,8 +85,9 @@ COMMON_DEPEND="
 	>=kde-plasma/plasma-activities-stats-${PVCUT}:6
 	>=kde-plasma/plasma5support-${PVCUT}:6
 	media-libs/libcanberra
-	>=media-libs/phonon-4.12.0[qt6]
+	>=media-libs/phonon-4.12.0[qt6(+)]
 	sci-libs/libqalculate:=
+	sys-apps/dbus
 	sys-libs/zlib
 	virtual/libudev:=
 	x11-libs/libICE
@@ -109,7 +110,7 @@ COMMON_DEPEND="
 	geolocation? ( >=kde-frameworks/networkmanager-qt-${KFMIN}:6 )
 	gps? ( sci-geosciences/gpsd )
 	policykit? (
-		>=sys-auth/polkit-qt-0.175[qt6]
+		>=sys-auth/polkit-qt-0.175[qt6(+)]
 		virtual/libcrypt:=
 	)
 	screencast? (
@@ -134,6 +135,7 @@ DEPEND="${COMMON_DEPEND}
 RDEPEND="${COMMON_DEPEND}
 	!kde-plasma/libkworkspace:5
 	!<kde-plasma/plasma-desktop-5.27.0:5
+	!<kde-plasma/xdg-desktop-portal-kde-6.1.90
 	!kde-plasma/xembed-sni-proxy:*
 	app-text/iso-codes
 	dev-libs/kirigami-addons:6
@@ -197,6 +199,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DWITH_X11=ON # TODO: broken upstream, fix it if you can
+		-DCMAKE_DISABLE_FIND_PACKAGE_PackageKitQt6=ON # not packaged
 		-DGLIBC_LOCALE_GEN=$(usex policykit)
 		$(cmake_use_find_package appstream AppStreamQt)
 		$(cmake_use_find_package calendar KF6Holidays)
