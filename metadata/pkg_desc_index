@@ -9,6 +9,7 @@ app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor set
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.18: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
+app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
 app-office/libreoffice 24.8.2.1: A full office productivity suite

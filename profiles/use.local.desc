@@ -14,6 +14,7 @@ app-misc/far2l:sftp - SFTP support in NetRocks
 app-misc/far2l:ssl - FTPS support in NetRocks
 app-misc/far2l:webdav - WebDav support in NetRocks
 app-misc/far2l:wxwidgets - GUI backend support
+app-misc/jdupes:dedupe - Enable deduplication support
 app-office/libreoffice:base - Enable full support for LibreOffice Base databases (involves additional bundled libs)
 app-office/libreoffice:clang - Use Clang compiler instead of GCC
 app-office/libreoffice:coinmp - Use sci-libs/coinor-mp as alternative solver
