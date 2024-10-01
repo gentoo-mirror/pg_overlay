@@ -330,9 +330,9 @@ get_distribution_components() {
 		if llvm_are_manpages_built; then
 			out+=(
 				# manpages
-				#docs-dsymutil-man
-				#docs-llvm-dwarfdump-man
-				#docs-llvm-man
+				docs-dsymutil-man
+				docs-llvm-dwarfdump-man
+				docs-llvm-man
 			)
 		fi
 		use doc && out+=(
