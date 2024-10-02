@@ -389,6 +389,7 @@ src_configure() {
 		--with-libc=
 		--enable-loadable-sqlite-extensions
 		--without-ensurepip
+		--with-lto
 		--with-system-expat
 		--with-system-libmpdec
 		--with-platlibdir=lib
