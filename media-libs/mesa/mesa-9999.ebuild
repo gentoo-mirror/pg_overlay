@@ -8,13 +8,13 @@ LLVM_OPTIONAL=1
 CARGO_OPTIONAL=1
 PYTHON_COMPAT=( python3_{10..12} )
 
-inherit flag-o-matic llvm-r1 meson-multilib python-any-r1 linux-info rust-toolchain toolchain-funcs
+inherit flag-o-matic llvm-r1 meson-multilib python-any-r1 linux-info rust-toolchain
 
 MY_P="${P/_/-}"
 
 CRATES="
-	syn@2.0.39
-	proc-macro2@1.0.70
+	syn@2.0.68
+	proc-macro2@1.0.86
 	quote@1.0.33
 	unicode-ident@1.0.12
 	paste@1.0.14
@@ -32,7 +32,7 @@ else
 	SRC_URI="
 		https://archive.mesa3d.org/${MY_P}.tar.xz
 	"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-solaris"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-solaris"
 fi
 
 # This should be {CARGO_CRATE_URIS//.crate/.tar.gz} to correspond to the wrap files,
@@ -58,7 +58,7 @@ IUSE="${IUSE_VIDEO_CARDS}
 	cpu_flags_x86_sse2 d3d9 debug +llvm
 	lm-sensors opencl +opengl osmesa +proprietary-codecs selinux
 	test unwind vaapi valgrind vdpau vulkan
-	vulkan-overlay wayland +X xa +zstd"
+	wayland +X xa +zstd"
 RESTRICT="!test? ( test )"
 REQUIRED_USE="
 	d3d9? (
@@ -75,7 +75,6 @@ REQUIRED_USE="
 		)
 	)
 	llvm? ( ${LLVM_REQUIRED_USE} )
-	vulkan-overlay? ( vulkan )
 	video_cards_lavapipe? ( llvm vulkan )
 	video_cards_radeon? ( x86? ( llvm ) amd64? ( llvm ) )
 	video_cards_r300?   ( x86? ( llvm ) amd64? ( llvm ) )
@@ -305,7 +304,7 @@ multilib_src_configure() {
 	local emesonargs=()
 
 	# bug #932591 and https://gitlab.freedesktop.org/mesa/mesa/-/issues/11140
-	tc-is-gcc && [[ $(gcc-major-version) -ge 14 ]] && filter-lto
+	filter-lto
 
 	local platforms
 	use X && platforms+="x11"
@@ -360,15 +359,6 @@ multilib_src_configure() {
 		emesonargs+=(-Dgallium-xa=disabled)
 	fi
 
-	if use video_cards_freedreno ||
-	   use video_cards_lima ||
-	   use video_cards_panfrost ||
-	   use video_cards_v3d ||
-	   use video_cards_vc4 ||
-	   use video_cards_vivante; then
-		gallium_enable -- kmsro
-	fi
-
 	gallium_enable !llvm softpipe
 	gallium_enable llvm llvmpipe
 	gallium_enable video_cards_d3d12 d3d12
@@ -420,17 +410,14 @@ multilib_src_configure() {
 				)
 			fi
 		fi
+
+		emesonargs+=(-Dvulkan-layers=device-select,overlay)
 	fi
 
 	driver_list() {
 		local drivers="$(sort -u <<< "${1// /$'\n'}")"
 		echo "${drivers//$'\n'/,}"
 	}
-
-	local vulkan_layers
-	use vulkan && vulkan_layers+="device-select"
-	use vulkan-overlay && vulkan_layers+=",overlay"
-	emesonargs+=(-Dvulkan-layers=${vulkan_layers#,})
 
 	if use opengl && use X; then
 		emesonargs+=(-Dglx=dri)
