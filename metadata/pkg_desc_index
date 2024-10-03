@@ -36,6 +36,7 @@ dev-libs/ada 2.9.0: WHATWG-compliant and fast URL parser written in modern C++
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.82.1: The GLib library of C routines
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
+dev-libs/kweathercore 9999: Library for retrieval of weather information including forecasts and alerts
 dev-libs/libayatana-appindicator 0.5.91: Ayatana Application Indicators (Shared Library)
 dev-libs/libayatana-indicator 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/libclc 19.1.1: OpenCL C library
@@ -82,6 +83,7 @@ gui-wm/labwc 0.8.0: Openbox alternative for wayland
 gui-wm/sway 9999: i3-compatible Wayland window manager
 kde-misc/kdiff3 1.11.0: Frontend to diff3 based on KDE Frameworks
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
+kde-misc/kweather 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/kdesu-gui 9999: Graphical frontend for KDE Frameworks' kdesu
 kde-plasma/kwin 9999: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
