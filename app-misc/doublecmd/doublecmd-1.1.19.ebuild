@@ -7,7 +7,7 @@ inherit xdg
 
 DESCRIPTION="Cross Platform file manager."
 HOMEPAGE="https://doublecmd.sourceforge.io/"
-SRC_URI="https://downloads.sourceforge.net/${PN}/${P}-src.tar.gz"
+SRC_URI="https://github.com/${PN}/${PN}/releases/download/v${PV}/${P}-src.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
