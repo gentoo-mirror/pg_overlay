@@ -112,6 +112,7 @@ media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins supp
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
+media-video/ffmpeg 7.1: Complete solution to record/convert/stream audio and video. Includes libavcodec
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.2.5: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
@@ -143,7 +144,7 @@ sci-calculators/qalculate-qt 5.1.0: Qt-based UI for libqalculate
 sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 14.0.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
-sys-apps/openrazer 3.8.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
+sys-apps/openrazer 3.9.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/polychromatic 0.8.3-r1 9999: RGB lighting management software for GNU/Linux powered by OpenRazer
 sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
