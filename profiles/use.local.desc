@@ -357,6 +357,13 @@ sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support
 sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+sys-apps/systemd-utils:boot - Enable systemd-boot (UEFI boot manager)
+sys-apps/systemd-utils:kernel-install - Enable kernel-install
+sys-apps/systemd-utils:kmod - Enable kernel module loading via sys-apps/kmod
+sys-apps/systemd-utils:sysusers - Enable systemd-sysusers
+sys-apps/systemd-utils:tmpfiles - Enable systemd-tmpfiles
+sys-apps/systemd-utils:udev - Enable systemd-udev (userspace device manager)
+sys-apps/systemd-utils:ukify - Enable systemd-ukify
 sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-devel/clang:extra - Build extra tools (clangd, clang-tidy and a few more)
 sys-devel/clang:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
