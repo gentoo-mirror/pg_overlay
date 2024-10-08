@@ -9,8 +9,8 @@ inherit check-reqs desktop unpacker xdg
 DESCRIPTION="Wolfram Mathematica"
 HOMEPAGE="https://www.wolfram.com/mathematica/"
 SRC_URI="
-	bundle?  ( Mathematica_${PV}_BNDL_LINUX.sh )
-	!bundle? ( Mathematica_${PV}_LINUX.sh )
+	bundle?  ( Wofram_${PV}_LIN_Bndl.sh )
+	!bundle? ( Wofram_${PV}_LIN.sh )
 "
 S="${WORKDIR}"
 
@@ -38,8 +38,7 @@ RDEPEND="
 		<dev-util/nvidia-cuda-toolkit-13
 		)
 	ffmpeg? ( || (
-		media-video/ffmpeg:0/56.58.58
-		media-video/ffmpeg:0/58.60.60
+		media-video/ffmpeg
 		) )
 	R? ( dev-lang/R )
 "
@@ -112,6 +111,8 @@ src_install() {
 	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.5.0" || die
 	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.6.0" || die
 	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux/AllVersions" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/MacOSX-ARM64" || die
+
 	# RLink can't use if R not used
 	if ! use R; then
 		einfo 'Removing RLink support'
