@@ -69,16 +69,16 @@ src_install() {
 
 	pushd "${S}/unpack_app" > /dev/null || die
 	# fix ACCESS DENIED issue when installer generate desktop files
-	sed -e "s|xdg-desktop-icon|xdg-dummy-command|g" -i "Unix/Installer/MathInstaller" || die
-	sed -e "s|xdg-desktop-menu|xdg-dummy-command|g" -i "Unix/Installer/MathInstaller" || die
-	sed -e "s|xdg-icon-resource|xdg-dummy-command|g" -i "Unix/Installer/MathInstaller" || die
-	sed -e "s|xdg-mime|xdg-dummy-command|g" -i "Unix/Installer/MathInstaller" || die
+	sed -e "s|xdg-desktop-icon|xdg-dummy-command|g" -i "Unix/Installer/WolframInstaller" || die
+	sed -e "s|xdg-desktop-menu|xdg-dummy-command|g" -i "Unix/Installer/WolframInstaller" || die
+	sed -e "s|xdg-icon-resource|xdg-dummy-command|g" -i "Unix/Installer/WolframInstaller" || die
+	sed -e "s|xdg-mime|xdg-dummy-command|g" -i "Unix/Installer/WolframInstaller" || die
 	# fix ACCESS DENIED issue when installer check the avahi-daemon
-	sed -e "s|avahi-daemon -c|true|g" -i "Unix/Installer/MathInstaller" || die
+	sed -e "s|avahi-daemon -c|true|g" -i "Unix/Installer/WolframInstaller" || die
 	# fix ACCESS DENIED issue when installing documentation
-	sed -e "s|\(exec ./MathInstaller\) -noprompt|\1 -auto -targetdir=${S}/${M_TARGET}/Documentation -noexec|" -i "Unix/Installer/MathInstaller" || die
+	sed -e "s|\(exec ./WolframInstaller\) -noprompt|\1 -auto -targetdir=${S}/${M_TARGET}/Documentation -noexec|" -i "Unix/Installer/WolframInstaller" || die
 
-	/bin/sh "Unix/Installer/MathInstaller" -auto "-targetdir=${S}/${M_TARGET}" "-execdir=${S}/opt/bin" || die
+	/bin/sh "Unix/Installer/WolframInstaller" -auto "-targetdir=${S}/${M_TARGET}" "-execdir=${S}/opt/bin" || die
 	popd > /dev/null || die
 
 	if ! use doc; then
