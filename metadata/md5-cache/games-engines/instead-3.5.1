@@ -1,0 +1,16 @@
+BDEPEND=virtual/pkgconfig lua_single_target_luajit? ( dev-lang/luajit:= ) lua_single_target_lua5-1? ( dev-lang/lua:5.1 ) app-alternatives/ninja >=dev-build/cmake-3.20.5
+DEFINED_PHASES=compile configure install postinst prepare setup test
+DEPEND=lua_single_target_luajit? ( dev-lang/luajit:= ) lua_single_target_lua5-1? ( dev-lang/lua:5.1 ) sys-libs/zlib x11-libs/gtk+:3 sdl2? ( media-libs/libsdl2[sound,video] media-libs/sdl2-mixer media-libs/sdl2-image media-libs/sdl2-ttf ) !sdl2? ( media-libs/libsdl[sound,video] media-libs/sdl-mixer media-libs/sdl-image media-libs/sdl-ttf ) iconv? ( >=virtual/libiconv-0-r1 )
+DESCRIPTION=INSTEAD text-based quest game engine
+EAPI=8
+HOMEPAGE=https://instead.hugeping.ru/
+INHERIT=cmake lua-single plocale
+IUSE=doc +iconv +sdl2 lua_single_target_luajit lua_single_target_lua5-1
+KEYWORDS=~amd64 ~x86
+LICENSE=MIT
+RDEPEND=lua_single_target_luajit? ( dev-lang/luajit:= ) lua_single_target_lua5-1? ( dev-lang/lua:5.1 ) sys-libs/zlib x11-libs/gtk+:3 sdl2? ( media-libs/libsdl2[sound,video] media-libs/sdl2-mixer media-libs/sdl2-image media-libs/sdl2-ttf ) !sdl2? ( media-libs/libsdl[sound,video] media-libs/sdl-mixer media-libs/sdl-image media-libs/sdl-ttf ) iconv? ( >=virtual/libiconv-0-r1 )
+REQUIRED_USE=^^ ( lua_single_target_luajit lua_single_target_lua5-1 )
+SLOT=0
+SRC_URI=https://github.com/instead-hub/instead/archive/3.5.1.tar.gz -> instead-3.5.1.tar.gz
+_eclasses_=toolchain-funcs	948855ec7ad9f11351edf9066708dfa9	multilib	7e1347c006a76bb812f3a9f663b79991	flag-o-matic	fa33e3696fe4689dda7e9affe92e2c94	multiprocessing	e644caa6eb7ce7e5ab0864383ac13ad9	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	5465aed08f1dfc2a75f14cbea4272961	cmake	1de691ead1f26da980bbfbb6146793cc	lua-utils	1f91de68f9a26642216e45d7765fd4fb	lua-single	3ae43cac1bf8275a847245b9a475a54e	plocale	950fbaec7deeba41b5bcc0572cca99b9
+_md5_=c5fd483174e036f50f79df330a8ce27e
