@@ -30,7 +30,7 @@ dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 
 dev-db/sqlite 3.46.0_pre: SQL database engine
 dev-games/freecell-solver 6.8.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
-dev-lang/python 3.12.7_p1: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.12.7_p1 3.13.0: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.81.0: Systems programming language from Mozilla
 dev-libs/ada 2.9.0: WHATWG-compliant and fast URL parser written in modern C++
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
@@ -142,7 +142,7 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 net-vpn/networkmanager-l2tp 1.20.16: NetworkManager L2TP plugin
 sci-calculators/qalculate-qt 5.1.0: Qt-based UI for libqalculate
 sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
-sci-mathematics/mathematica 14.0.0: Wolfram Mathematica
+sci-mathematics/mathematica 14.1.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/openrazer 3.9.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/polychromatic 0.8.3-r1 9999: RGB lighting management software for GNU/Linux powered by OpenRazer

@@ -1,0 +1,15 @@
+BDEPEND=virtual/pkgconfig nls? ( sys-devel/gettext ) app-alternatives/ninja >=dev-build/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare setup test unpack
+DEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:= sys-libs/readline:0= sys-libs/zlib >=x11-libs/wxGTK-3.0.4:3.2-gtk3[gui?] daemon? ( acct-user/amule ) geoip? ( dev-libs/geoip ) nls? ( virtual/libintl ) webserver? ( acct-user/amule media-libs/libpng:0= ) stats? ( media-libs/gd:=[jpeg,png] ) upnp? ( net-libs/libupnp:0 ) X? ( dev-util/desktop-file-utils )
+DESCRIPTION=aMule, the all-platform eMule p2p client
+EAPI=8
+HOMEPAGE=https://www.amule.org/
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=cmake git-r3 plocale wxwidgets xdg
+IUSE=daemon debug geoip gui +nls stats upnp X webserver
+LICENSE=GPL-2+
+PROPERTIES=live
+RDEPEND=dev-libs/boost:= dev-libs/crypto++:= sys-libs/binutils-libs:= sys-libs/readline:0= sys-libs/zlib >=x11-libs/wxGTK-3.0.4:3.2-gtk3[gui?] daemon? ( acct-user/amule ) geoip? ( dev-libs/geoip ) nls? ( virtual/libintl ) webserver? ( acct-user/amule media-libs/libpng:0= ) stats? ( media-libs/gd:=[jpeg,png] ) upnp? ( net-libs/libupnp:0 )
+SLOT=0
+_eclasses_=toolchain-funcs	948855ec7ad9f11351edf9066708dfa9	multilib	7e1347c006a76bb812f3a9f663b79991	flag-o-matic	fa33e3696fe4689dda7e9affe92e2c94	multiprocessing	e644caa6eb7ce7e5ab0864383ac13ad9	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	5465aed08f1dfc2a75f14cbea4272961	cmake	1de691ead1f26da980bbfbb6146793cc	git-r3	875eb471682d3e1f18da124be97dcc81	plocale	950fbaec7deeba41b5bcc0572cca99b9	wxwidgets	ae03a7df37693cffdec04389f1c141f5	xdg	854eae304447322625df5991e20ed18f
+_md5_=3728263262b2812e676b6a05560ca6b6
