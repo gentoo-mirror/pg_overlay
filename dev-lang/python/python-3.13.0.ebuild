@@ -184,7 +184,7 @@ build_cbuild_python() {
 	# propagated to sysconfig for built extensions
 	#
 	# -fno-lto to avoid bug #700012 (not like it matters for mini-CBUILD Python anyway)
-	local -x CFLAGS_NODIST="${BUILD_CFLAGS} -fno-lto"
+	local -x CFLAGS_NODIST="${BUILD_CFLAGS}"
 	local -x LDFLAGS_NODIST=${BUILD_LDFLAGS}
 	local -x CFLAGS= LDFLAGS=
 	local -x BUILD_CFLAGS="${CFLAGS_NODIST}"
@@ -203,9 +203,9 @@ build_cbuild_python() {
 
 		# As minimal as possible for the mini CBUILD Python
 		# we build just for cross to satisfy --with-build-python.
-		--without-lto
+		--with-lto
 		--without-readline
-		--disable-optimizations
+		--enable-optimizations
 	)
 
 	mkdir "${WORKDIR}"/${P}-${CBUILD} || die
@@ -425,7 +425,7 @@ src_configure() {
 		--with-libc=
 		--enable-loadable-sqlite-extensions
 		--without-ensurepip
-		--without-lto
+		--with-lto
 		--with-system-expat
 		--with-system-libmpdec
 		--with-platlibdir=lib
@@ -442,7 +442,6 @@ src_configure() {
 
 	# https://bugs.gentoo.org/700012
 	if tc-is-lto; then
-		append-cflags $(test-flags-CC -ffat-lto-objects)
 		myeconfargs+=(
 			--with-lto
 		)
