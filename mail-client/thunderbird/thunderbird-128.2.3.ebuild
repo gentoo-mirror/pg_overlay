@@ -7,7 +7,7 @@ FIREFOX_PATCHSET="firefox-128esr-patches-03.tar.xz"
 
 LLVM_COMPAT=( 18 19 )
 
-PYTHON_COMPAT=( python3_{11..12} )
+PYTHON_COMPAT=( python3_{12..13} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
 
 WANT_AUTOCONF="2.1"
