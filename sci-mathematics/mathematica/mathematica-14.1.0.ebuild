@@ -9,8 +9,8 @@ inherit check-reqs desktop unpacker xdg
 DESCRIPTION="Wolfram Mathematica"
 HOMEPAGE="https://www.wolfram.com/mathematica/"
 SRC_URI="
-	bundle?  ( Wofram_${PV}_LIN_Bndl.sh )
-	!bundle? ( Wofram_${PV}_LIN.sh )
+	bundle?  ( Wolfram_${PV}_LIN_Bndl.sh )
+	!bundle? ( Wolfram_${PV}_LIN.sh )
 "
 S="${WORKDIR}"
 
