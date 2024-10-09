@@ -187,6 +187,8 @@ media-sound/deadbeef:notify - Desktop notifications support
 media-sound/deadbeef:nullout - Dummy output driver
 media-sound/deadbeef:shellexec - Define custom shell commands that can be called on tracks
 media-sound/deadbeef:supereq - Enable equalizer
+media-sound/fooyin:archive - Build the libarchive input plugin using app-arch/libarchive
+media-sound/fooyin:openmpt - Build the OpenMPT input plugin using media-libs/libopenmpt
 media-sound/fooyin:pipewire - Enable sound support via native PipeWire backend
 media-sound/kid3:acoustid - Build acoustic fingerprinting plugin using media-libs/chromaprint
 media-sound/kid3:mpris - Enable support for MPRIS2 interface using dev-qt/qtdbus
