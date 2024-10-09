@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-PYTHON_COMPAT=( python3_{10..12} )
-inherit gnome.org gnome2-utils meson optfeature python-any-r1 toolchain-funcs virtualx xdg
+PYTHON_COMPAT=( python3_{10..13} )
+inherit gnome.org gnome2-utils meson optfeature python-any-r1 toolchain-funcs virtualx xdg poly-c_gtk
 
 DESCRIPTION="GTK is a multi-platform toolkit for creating graphical user interfaces"
 HOMEPAGE="https://www.gtk.org/ https://gitlab.gnome.org/GNOME/gtk/"
@@ -16,7 +16,7 @@ REQUIRED_USE="
 	test? ( introspection )
 "
 
-KEYWORDS="~alpha amd64 arm arm64 ~loong ppc ppc64 ~riscv sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
 
 # TODO: Optional gst build dep on >=gst-plugins-base-1.23.1, so depend on it once we can
 COMMON_DEPEND="
