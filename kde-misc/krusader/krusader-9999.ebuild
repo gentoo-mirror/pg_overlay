@@ -5,7 +5,7 @@ EAPI=8
 
 ECM_HANDBOOK="forceoptional"
 KFMIN=6.1.0
-QTMIN=6.7.0
+QTMIN=6.7.3
 inherit ecm kde.org optfeature
 
 if [[ ${KDE_BUILD_TYPE} = release ]]; then
@@ -21,7 +21,7 @@ SLOT="6"
 IUSE=""
 
 COMMON_DEPEND="
-	>=dev-qt/qtbase-${QTMIN}:6[dbus,gui,widgets]
+	>=dev-qt/qtbase-${QTMIN}:6[dbus,gui,widgets,xml]
 	>=kde-frameworks/karchive-${KFMIN}:6
 	>=kde-frameworks/kbookmarks-${KFMIN}:6
 	>=kde-frameworks/kcodecs-${KFMIN}:6
@@ -29,6 +29,7 @@ COMMON_DEPEND="
 	>=kde-frameworks/kconfig-${KFMIN}:6
 	>=kde-frameworks/kconfigwidgets-${KFMIN}:6
 	>=kde-frameworks/kcoreaddons-${KFMIN}:6
+	>=kde-frameworks/kglobalaccel-${KFMIN}:6
 	>=kde-frameworks/kguiaddons-${KFMIN}:6
 	>=kde-frameworks/ki18n-${KFMIN}:6
 	>=kde-frameworks/kiconthemes-${KFMIN}:6
@@ -38,6 +39,7 @@ COMMON_DEPEND="
 	>=kde-frameworks/knotifications-${KFMIN}:6
 	>=kde-frameworks/kparts-${KFMIN}:6
 	>=kde-frameworks/kservice-${KFMIN}:6
+	>=kde-frameworks/kstatusnotifieritem-${KFMIN}:6
 	>=kde-frameworks/ktextwidgets-${KFMIN}:6
 	>=kde-frameworks/kwallet-${KFMIN}:6
 	>=kde-frameworks/kwidgetsaddons-${KFMIN}:6
@@ -45,6 +47,7 @@ COMMON_DEPEND="
 	>=kde-frameworks/kxmlgui-${KFMIN}:6
 	>=kde-frameworks/solid-${KFMIN}:6
 	sys-apps/acl
+	sys-apps/attr
 	sys-libs/zlib
 "
 DEPEND="${COMMON_DEPEND}
@@ -52,23 +55,27 @@ DEPEND="${COMMON_DEPEND}
 "
 RDEPEND="${COMMON_DEPEND}
 	kde-apps/kio-extras:6
+	kde-apps/thumbnailers:6
 	>=kde-frameworks/ktexteditor-${KFMIN}:6
+	kde-plasma/kdesu-gui:*
 "
-
-PATCHES=("${FILESDIR}/141.patch")
 
 src_prepare() {
 	ecm_src_prepare
 	use handbook || cmake_comment_add_subdirectory doc/handbook
 }
 
+src_configure() {
+	local mycmakeargs=( -DKDESU_PATH=/usr/bin/kdesu )
+	ecm_src_configure
+}
+
 pkg_postinst() {
 	if [[ -z "${REPLACING_VERSIONS}" ]]; then
-		optfeature "konsole view" "kde-apps/konsolepart:6" "kde-apps/konsole:6"
-		optfeature "Markdown text previews" "kde-misc/markdownpart:${SLOT}"
-		optfeature "PDF/PS and RAW image thumbnails" "kde-apps/thumbnailers:${SLOT}"
-		optfeature "video thumbnails" "kde-apps/ffmpegthumbs:${SLOT}"
-		optfeature "bookmarks support" "kde-apps/keditbookmarks:${SLOT}"
+		optfeature "konsole view" "kde-apps/konsole:6"
+		optfeature "Markdown text previews" "kde-misc/markdownpart:6"
+		optfeature "Google Drive service" "kde-misc/kio-gdrive:6"
+		optfeature "bookmarks support" "kde-apps/keditbookmarks:6"
 	fi
 	ecm_pkg_postinst
 }
