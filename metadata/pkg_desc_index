@@ -155,6 +155,7 @@ sys-apps/systemd-utils 255.12: Utilities split out from systemd for OpenRC users
 sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
 sys-block/dust 1.1.1: A more intuitive version of du
 sys-block/ncdu 2.5: NCurses Disk Usage
+sys-boot/grub 2.12-r5: GNU GRUB boot loader
 sys-devel/clang 19.1.1: C language family frontend for LLVM
 sys-devel/llvm 19.1.1: Low Level Virtual Machine
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
