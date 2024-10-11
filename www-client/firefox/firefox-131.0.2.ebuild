@@ -1115,7 +1115,6 @@ src_configure() {
 
 	mozconfig_add_options_ac '' --disable-frame-pointers
 
-	mozconfig_add_options_ac '' --disable-gpsd
 	mozconfig_add_options_ac '' --disable-gtest-in-build
 
 	mozconfig_add_options_ac '' --disable-instruments

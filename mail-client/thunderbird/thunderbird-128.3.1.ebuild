@@ -67,7 +67,7 @@ IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +
 IUSE+=" system-png +system-webp wayland wifi +X"
 
 # Thunderbird-only USE flags.
-IUSE+=" +rust-extensions +system-librnp"
+IUSE+=" +rust-extensions +system-librnp +privacy"
 
 REQUIRED_USE="|| ( X wayland )
 	debug? ( !system-av1 )
@@ -593,6 +593,73 @@ src_prepare() {
 	echo -n "${MOZ_API_KEY_GOOGLE//gGaPi/}" > "${S}"/api-google.key || die
 	echo -n "${MOZ_API_KEY_LOCATION//gGaPi/}" > "${S}"/api-location.key || die
 	echo -n "${MOZ_API_KEY_MOZILLA//m0ap1/}" > "${S}"/api-mozilla.key || die
+
+	####### My stuff
+	### Privacy-esr patches
+	einfo ++++++++++++++++++++++++
+	einfo Applying privacy patches
+	einfo ++++++++++++++++++++++++
+	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
+	rm -rv browser/extensions/{doh-rollout,webcompat,report-site-issue}
+	### Debian patches
+	einfo "Applying Debian's patches"
+	for p in $(cat "${FILESDIR}/debian-patchset-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/debian-patchset-$(ver_cut 1)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
+		else
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
+		fi
+	done
+	#######
+	### FreeBSD patches
+	einfo ++++++++++++++++++++++++++
+	einfo "Applying FreeBSD's patches"
+	einfo ++++++++++++++++++++++++++
+	for i in $(cat "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/series"); do eapply "${FILESDIR}/freebsd-patchset-$(ver_cut 1)/$i";	done
+	### Fedora patches
+	einfo "Applying Fedora's patches"
+	for p in $(cat "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/fedora-patchset-$(ver_cut 1)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
+		else
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
+		fi
+	done
+	#######
+	### KissLinux patches
+	einfo +++++++++++++++++++++++++++++
+	einfo "Applying KissLinux's patches"
+	einfo +++++++++++++++++++++++++++++
+	for p in $(cat "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/series);do
+		patch --dry-run --silent -p1 -i "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p 2>/dev/null
+		if [ $? -eq 0 ]; then
+			eapply "${FILESDIR}/kiss-patchset-$(ver_cut 1)"/$p;
+			einfo +++++++++++++++++++++++++;
+			einfo Patch $p is APPLIED;
+			einfo +++++++++++++++++++++++++
+		else
+			einfo -------------------------;
+			einfo Patch $p is NOT applied and IGNORED;
+			einfo -------------------------
+		fi
+	done
+	#######
+
+	# Clear cargo checksums from crates we have patched
+	# moz_clear_vendor_checksums crate
+	moz_clear_vendor_checksums audio_thread_priority
 
 	xdg_environment_reset
 }
