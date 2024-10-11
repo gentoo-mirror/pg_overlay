@@ -636,7 +636,7 @@ src_prepare() {
 	einfo Applying privacy patches
 	einfo ++++++++++++++++++++++++
 	for i in $(cat "${FILESDIR}/privacy-patchset/series"); do eapply "${FILESDIR}/privacy-patchset/$i"; done
-	rm -rfv browser/extensions/{formautofill,pictureinpicture,report-site-issue,screenshots,search-detection,webcompat}
+	rm -rfv browser/extensions/{formautofill,pictureinpicture,report-site-issue,screenshots,webcompat}
 	cp -v "${FILESDIR}/privacy-patchset/search-config.json" "${S}/services/settings/dumps/main/search-config.json"
 	#######
 	### Debian patches
