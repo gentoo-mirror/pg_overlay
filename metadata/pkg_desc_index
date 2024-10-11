@@ -3,6 +3,7 @@ app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
+app-emulation/nemu 3.3.1: Ncurses interface for QEMU
 app-i18n/opencc 1.1.7: Library for conversion between Traditional and Simplified Chinese characters
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
