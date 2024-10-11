@@ -73,7 +73,7 @@ games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
 games-engines/instead 3.5.1: INSTEAD text-based quest game engine
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
-gnome-base/librsvg 2.59.0: Scalable Vector Graphics (SVG) rendering library
+gnome-base/librsvg 2.59.1: Scalable Vector Graphics (SVG) rendering library
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/rofi-wayland 1.7.5_p3: A window switcher, run dialog and dmenu replacement
 gui-apps/sfwbar 1.0_beta14: S* Floating Window Bar
