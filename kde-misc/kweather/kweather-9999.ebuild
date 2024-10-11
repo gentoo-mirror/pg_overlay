@@ -33,6 +33,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}
 	>=dev-qt/qt5compat-${QTMIN}:6[qml]
+	>=dev-qt/qtpositioning-${QTMIN}:6
 "
 
 src_prepare() {
