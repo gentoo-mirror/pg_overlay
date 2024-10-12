@@ -128,6 +128,7 @@ net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing o
 net-libs/nodejs 22.9.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-libs/serf 1.3.10: HTTP client library
 net-libs/udns 0.6: Async-capable DNS stub resolver library
+net-misc/anydesk 6.3.3: Feature rich multi-platform remote desktop application
 net-misc/freerdp 3.8.0: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/remmina 1.4.35-r1: A GTK+ RDP, SPICE, VNC and SSH client
