@@ -182,7 +182,7 @@ build_cbuild_python() {
 	# propagated to sysconfig for built extensions
 	#
 	# -fno-lto to avoid bug #700012 (not like it matters for mini-CBUILD Python anyway)
-	local -x CFLAGS_NODIST="${BUILD_CFLAGS} -fno-lto"
+	local -x CFLAGS_NODIST="${BUILD_CFLAGS} -flto"
 	local -x LDFLAGS_NODIST=${BUILD_LDFLAGS}
 	local -x CFLAGS= LDFLAGS=
 	local -x BUILD_CFLAGS="${CFLAGS_NODIST}"
