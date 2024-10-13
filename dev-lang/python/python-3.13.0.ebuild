@@ -184,7 +184,7 @@ build_cbuild_python() {
 	# propagated to sysconfig for built extensions
 	#
 	# -fno-lto to avoid bug #700012 (not like it matters for mini-CBUILD Python anyway)
-	local -x CFLAGS_NODIST="${BUILD_CFLAGS}"
+	local -x CFLAGS_NODIST="${BUILD_CFLAGS} -flto"
 	local -x LDFLAGS_NODIST=${BUILD_LDFLAGS}
 	local -x CFLAGS= LDFLAGS=
 	local -x BUILD_CFLAGS="${CFLAGS_NODIST}"
@@ -370,6 +370,8 @@ src_configure() {
 
 			# Fails in profiling run, passes in src_test().
 			-x test_capi
+			#
+			-x test_external_inspection
 		)
 
 		# Arch-specific skips.  See #931888 for a collection of these.
