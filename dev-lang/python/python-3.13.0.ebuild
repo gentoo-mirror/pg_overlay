@@ -370,8 +370,6 @@ src_configure() {
 
 			# Fails in profiling run, passes in src_test().
 			-x test_capi
-			#
-			-x test_external_inspection
 		)
 
 		# Arch-specific skips.  See #931888 for a collection of these.
@@ -591,13 +589,13 @@ src_install() {
 		pax-mark m "${ED}/usr/bin/${abiver}"
 	fi
 
-	rm -r "${libdir}"/ensurepip/_bundled || die
+	rm -rf "${libdir}"/ensurepip/_bundled || die
 	if ! use sqlite; then
 		rm -r "${libdir}/"sqlite3 || die
 	fi
 	if ! use tk; then
 		rm -r "${ED}/usr/bin/idle${PYVER}" || die
-		rm -r "${libdir}/"{idlelib,tkinter} || die
+		rm -rf "${libdir}/"{idlelib,tkinter} || die
 	fi
 
 	ln -s ../python/EXTERNALLY-MANAGED "${libdir}/EXTERNALLY-MANAGED" || die
