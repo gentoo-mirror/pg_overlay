@@ -4,6 +4,7 @@ app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-emulation/nemu 3.3.1: Ncurses interface for QEMU
+app-emulation/spice 0.15.2: SPICE server
 app-i18n/opencc 1.1.7: Library for conversion between Traditional and Simplified Chinese characters
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
@@ -133,7 +134,7 @@ net-misc/freerdp 3.8.0: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/remmina 1.4.35-r1: A GTK+ RDP, SPICE, VNC and SSH client
 net-misc/rsync 3.3.0_pre1: File transfer program to keep remote files into sync
-net-misc/spice-gtk 0.42-r3: Set of GObject and Gtk objects for connecting to Spice servers and a client GUI
+net-misc/spice-gtk 0.42-r4: Set of GObject and Gtk objects for connecting to Spice servers and a client GUI
 net-misc/wget 1.21.4: Network utility to retrieve files from the WWW
 net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
