@@ -15,10 +15,9 @@ DESCRIPTION="KDE Plasma workspace"
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
 KEYWORDS=""
-IUSE="appstream +calendar +fontconfig geolocation gps +policykit
-screencast +semantic-desktop systemd telemetry +wallpaper-metadata"
+IUSE="appstream +calendar +fontconfig gps +policykit screencast
++semantic-desktop systemd telemetry +wallpaper-metadata"
 
-REQUIRED_USE="gps? ( geolocation )"
 RESTRICT="test"
 
 # kde-frameworks/kwindowsystem[X]: Uses KX11Extras
@@ -107,7 +106,6 @@ COMMON_DEPEND="
 		x11-libs/libXft
 		x11-libs/xcb-util-image
 	)
-	geolocation? ( >=kde-frameworks/networkmanager-qt-${KFMIN}:6 )
 	gps? ( sci-geosciences/gpsd )
 	policykit? (
 		>=sys-auth/polkit-qt-0.175[qt6(+)]
@@ -115,7 +113,6 @@ COMMON_DEPEND="
 	)
 	screencast? (
 		>=dev-qt/qtbase-${QTMIN}:6=[opengl]
-		>=kde-plasma/kpipewire-${PVCUT}:6
 		media-libs/libglvnd
 		>=media-video/pipewire-0.3:=
 		x11-libs/libdrm
@@ -127,7 +124,7 @@ COMMON_DEPEND="
 "
 DEPEND="${COMMON_DEPEND}
 	>=dev-libs/plasma-wayland-protocols-1.14.0
-	dev-libs/qcoro[dbus]
+	dev-libs/qcoro
 	>=dev-qt/qtbase-${QTMIN}:6[concurrent]
 	x11-base/xorg-proto
 	fontconfig? ( x11-libs/libXrender )
@@ -147,6 +144,7 @@ RDEPEND="${COMMON_DEPEND}
 	>=kde-plasma/kdesu-gui-${PVCUT}:*
 	>=kde-plasma/milou-${PVCUT}:6
 	>=kde-plasma/plasma-integration-${PVCUT}:6
+	>=kde-plasma/plasma-login-sessions-${PVCUT}:6
 	sys-apps/dbus
 	x11-apps/xmessage
 	x11-apps/xprop
@@ -169,16 +167,11 @@ PATCHES=(
 src_prepare() {
 	ecm_src_prepare
 
-	# TODO: try to get a build switch upstreamed
-	if ! use screencast; then
-		ecm_punt_bogus_dep KPipeWire
-		sed -e "s/^pkg_check_modules.*PipeWire/#&/" -i CMakeLists.txt || die
-	fi
+	cmake_comment_add_subdirectory login-sessions
 
 	# TODO: try to get a build switch upstreamed
-	if use geolocation; then
-		use gps || sed -e "s/^pkg_check_modules.*LIBGPS/#&/" \
-			-i dataengines/geolocation/CMakeLists.txt || die
+	if ! use screencast; then
+		sed -e "s/^pkg_check_modules.*PipeWire/#&/" -i CMakeLists.txt || die
 	fi
 
 	if ! use policykit; then
@@ -204,7 +197,6 @@ src_configure() {
 		$(cmake_use_find_package appstream AppStreamQt)
 		$(cmake_use_find_package calendar KF6Holidays)
 		$(cmake_use_find_package fontconfig Fontconfig)
-		$(cmake_use_find_package geolocation KF6NetworkManagerQt)
 		$(cmake_use_find_package semantic-desktop KF6Baloo)
 		$(cmake_use_find_package telemetry KF6UserFeedback)
 		$(cmake_use_find_package wallpaper-metadata KExiv2Qt6)
