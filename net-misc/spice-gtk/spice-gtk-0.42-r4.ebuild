@@ -1,4 +1,4 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -9,7 +9,7 @@ PYTHON_COMPAT=( python3_{12..13} )
 inherit desktop meson optfeature python-any-r1 readme.gentoo-r1 vala xdg
 
 DESCRIPTION="Set of GObject and Gtk objects for connecting to Spice servers and a client GUI"
-HOMEPAGE="https://www.spice-space.org https://cgit.freedesktop.org/spice/spice-gtk/"
+HOMEPAGE="https://www.spice-space.org https://gitlab.freedesktop.org/spice/spice-gtk"
 if [[ ${PV} == *9999* ]] ; then
 	EGIT_REPO_URI="https://anongit.freedesktop.org/git/spice/spice-gtk.git"
 	inherit git-r3
@@ -17,7 +17,7 @@ if [[ ${PV} == *9999* ]] ; then
 	SPICE_PROTOCOL_VER=9999
 else
 	SRC_URI="https://www.spice-space.org/download/gtk/${P}.tar.xz"
-	KEYWORDS="~alpha amd64 ~arm arm64 ~ia64 ~ppc ~ppc64 ~riscv ~sparc x86"
+	KEYWORDS="~alpha amd64 ~arm arm64 ~ppc ppc64 ~riscv ~sparc x86"
 
 	SPICE_PROTOCOL_VER=0.14.3
 fi
@@ -74,7 +74,7 @@ RDEPEND="
 DEPEND="
 	${RDEPEND}
 	>=app-emulation/spice-protocol-${SPICE_PROTOCOL_VER}
-	valgrind? ( dev-util/valgrind )
+	valgrind? ( dev-debug/valgrind )
 "
 BDEPEND="
 	$(python_gen_any_dep '
@@ -91,6 +91,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-0.42-libtool-export-symbols-fix.patch"
+	"${FILESDIR}/${PN}-0.42-lld17-fix.patch"
 )
 
 python_check_deps() {
