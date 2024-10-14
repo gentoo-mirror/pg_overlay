@@ -50,6 +50,7 @@ dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 27.3: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/re2 0.2024.06.01: An efficient, principled regular expression library
 dev-libs/utfcpp 4.0.5: UTF-8 C++ library
+dev-libs/wayland-protocols 1.38: Wayland protocol files
 dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-python/cloudscraper 1.2.69: A Python module to bypass Cloudflare's anti-bot page
