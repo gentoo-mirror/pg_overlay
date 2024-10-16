@@ -1,7 +1,7 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 inherit autotools git-r3 flag-o-matic toolchain-funcs
 
@@ -31,13 +31,13 @@ RDEPEND="dev-lang/perl
 # -unsafe-string usage:
 # https://github.com/ygrek/mldonkey/issues/46
 DEPEND="${RDEPEND}
-	dev-lang/ocaml:=[ocamlopt?]
+	<dev-lang/ocaml-5:=[ocamlopt?]
 	bittorrent? ( dev-ml/num )
 "
 
 RESTRICT="!ocamlopt? ( strip )"
 
-PATCHES=("${FILESDIR}/92.patch")
+#PATCHES=("${FILESDIR}/92.patch")
 
 pkg_setup() {
 	# dev-lang/ocaml creates its own objects but calls gcc for linking, which will
@@ -54,7 +54,7 @@ src_prepare() {
 	cd config || die
 	eautoconf
 	cd .. || die
-	sed -i "s|#include <caml/config.h>||" src/utils/lib/CryptoPP.h
+#	sed -i "s|#include <caml/config.h>||" src/utils/lib/CryptoPP.h
 	if ! use ocamlopt; then
 		sed -i -e "s/ocamlopt/idontwantocamlopt/g" "${S}/config/configure" || die "failed to disable ocamlopt"
 	fi
