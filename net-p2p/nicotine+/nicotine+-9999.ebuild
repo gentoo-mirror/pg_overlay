@@ -43,7 +43,7 @@ src_prepare() {
 }
 pkg_postinst() {
 	xdg_pkg_postinst
-	xdg)icon_cache_update
+	xdg_icon_cache_update
 
 	elog "Nicotine can work with both gtk3+ and gtk4."
 	elog "The newer version is preferred but it has worse screen reader support"
