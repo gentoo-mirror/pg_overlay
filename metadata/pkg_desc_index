@@ -27,9 +27,9 @@ dev-cpp/atkmm 2.28.4 2.36.3: C++ interface for the ATK library
 dev-cpp/cairomm 1.14.5: C++ bindings for the Cairo vector graphics library
 dev-cpp/glibmm 2.66.7 2.80.0: C++ interface for glib2
 dev-cpp/pangomm 2.46.4 2.52.0: C++ interface for pango
+dev-db/mariadb-connector-c 3.4.1: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
-dev-db/sqlite 3.46.0_pre: SQL database engine
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/luajit 2.1.0.9999: Just-In-Time Compiler for the Lua programming language
 dev-lang/python 3.12.7_p1 3.13.0 3.13.0-r100: Freethreading (no-GIL) version of Python programming language
