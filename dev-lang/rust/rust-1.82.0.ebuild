@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=( python3_{12..13} )
 
 inherit bash-completion-r1 check-reqs estack flag-o-matic llvm multiprocessing optfeature \
 	multilib multilib-build python-any-r1 rust-toolchain toolchain-funcs verify-sig
