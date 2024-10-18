@@ -33,7 +33,7 @@ CDEPEND="
 	>=dev-cpp/glibmm-2.77:2.68
 	dev-libs/glib:2
 	libdispatch? ( dev-libs/libdispatch )
-	dev-libs/ada
+	dev-cpp/ada
 	dev-libs/openssl:=
 	dev-libs/protobuf
 	dev-libs/xxhash
