@@ -396,12 +396,6 @@ sys-devel/llvm:exegesis - Enable performance counter support for llvm-exegesis t
 sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
 sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
 sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
-sys-fs/udisks:daemon - Build the system daemon, not just the client tool
-sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
-sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
-sys-fs/udisks:systemd - Support sys-apps/systemd's logind
-sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
-sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:stack-realign - Realign the stack in the 32-bit build for compatibility with older binaries at some performance cost. Avoids crashes in older 32-bit binaries. Only affects x86/32-bit multilib builds on amd64.
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
