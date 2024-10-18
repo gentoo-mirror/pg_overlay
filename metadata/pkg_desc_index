@@ -62,7 +62,7 @@ dev-util/cargo-ebuild 0.6.0: Generates an ebuild for a package using the in-tree
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.82.1: GDBus code and documentation generator
 dev-util/glib-utils 2.82.1: Build utilities for GLib using projects
-dev-util/intel_clc 24.2.4 9999: intel_clc tool used for building OpenCL C to SPIR-V
+dev-util/intel_clc 24.2.5 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
 dev-util/librnp 9999: High performance C++ OpenPGP library
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
@@ -97,7 +97,7 @@ media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libsdl2 2.30.6: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
-media-libs/mesa 24.2.4 9999: OpenGL-like graphic library for Linux
+media-libs/mesa 24.2.5 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/shaderc 2024.1: Collection of tools, libraries and tests for shader compilation
 media-libs/taglib 2.0.1_pre 2.0.2_pre: Library for reading and editing audio meta data
