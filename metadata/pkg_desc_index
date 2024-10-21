@@ -16,7 +16,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
 app-office/libreoffice 24.8.2.1: A full office productivity suite
 app-office/libreoffice-l10n 24.8.2.1: Translations for the Libreoffice suite
-app-office/onlyoffice-bin 8.1.1: Onlyoffice is an office productivity suite (binary version)
+app-office/onlyoffice-bin 8.2.0: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
@@ -145,7 +145,7 @@ net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-vpn/networkmanager-l2tp 1.20.16: NetworkManager L2TP plugin
-sci-calculators/qalculate-qt 5.1.0: Qt-based UI for libqalculate
+sci-calculators/qalculate-qt 5.3.0: Qt-based UI for libqalculate
 sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 14.1.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
