@@ -23,7 +23,7 @@ preplace() {
 	if [[ -n "${1}" ]] ; then
 		pdest="${1}"
 	else
-		pdest="patches"
+		pdest='patches'
 	fi
 	if [[ "$(declare -p replace_patches 2>&-)" == "declare -a"* ]] ; then
 		for rpatch in ${replace_patches[@]} ; do
@@ -31,5 +31,21 @@ preplace() {
 		done
 	else
 		die "replace_patches is not an array"
+	fi
+}
+
+pdelete() {
+	local dpatch pdest
+	if [[ -n "${1}" ]] ; then
+		pdest="${1}"
+	else
+		pdest='patches'
+	fi
+	if [[ "$(declare -p delete_patches 2>&-)" == "declare -a"* ]] ; then
+		for dpatch in ${delete_patches[@]} ; do
+			rm "${WORKDIR}/${pdest}/${dpatch}" || die
+		done
+	else
+		die "delete_patches is not an array"
 	fi
 }
