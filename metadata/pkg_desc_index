@@ -117,7 +117,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/ffmpeg 7.1: Complete solution to record/convert/stream audio and video. Includes libavcodec
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.2.5: Multimedia processing graphs
+media-video/pipewire 1.2.6: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-im/64Gram 1.1.43: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
