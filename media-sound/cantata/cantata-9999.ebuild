@@ -27,7 +27,7 @@ REQUIRED_USE="
 RESTRICT="test"
 
 COMMON_DEPEND="
-	dev-qt/qtbase[dbus,gui,network,sqlite,widgets,xml]:6
+	dev-qt/qtbase:6[dbus,gui,network,sqlite,widgets,xml]
 	sys-libs/zlib
 	virtual/libudev:=
 	cdda? ( media-sound/cdparanoia )
@@ -52,9 +52,9 @@ RDEPEND="${COMMON_DEPEND}
 	|| ( kde-frameworks/breeze-icons:* kde-frameworks/oxygen-icons:* )
 "
 DEPEND="${COMMON_DEPEND}
-	dev-qt/qtbase[concurrent[]:6"
+	dev-qt/qtbase:6[concurrent]"
 
-BDEPEND="dev-qt/qttools[linguist]:6"
+BDEPEND="dev-qt/qttools:6[linguist]"
 
 src_prepare() {
 	remove_locale() {

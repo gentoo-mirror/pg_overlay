@@ -1,6 +1,6 @@
-BDEPEND=dev-qt/qttools[linguist]:6 app-alternatives/ninja >=dev-build/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
+BDEPEND=dev-qt/qttools:6[linguist] app-alternatives/ninja >=dev-build/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
 DEFINED_PHASES=compile configure install postinst postrm preinst prepare test unpack
-DEPEND=dev-qt/qtbase[dbus,gui,network,sqlite,widgets,xml]:6 sys-libs/zlib virtual/libudev:= cdda? ( media-sound/cdparanoia ) cddb? ( media-libs/libcddb ) cdio? ( dev-libs/libcdio-paranoia:= ) mtp? ( media-libs/libmtp:= ) musicbrainz? ( media-libs/musicbrainz:5= ) replaygain? ( media-libs/libebur128:= media-sound/mpg123 media-video/ffmpeg:0= ) streaming? ( dev-qt/qtmultimedia:5 ) taglib? ( media-libs/taglib udisks? ( sys-fs/udisks:2 ) ) zeroconf? ( net-dns/avahi ) dev-qt/qtbase[concurrent[]:6
+DEPEND=dev-qt/qtbase:6[dbus,gui,network,sqlite,widgets,xml] sys-libs/zlib virtual/libudev:= cdda? ( media-sound/cdparanoia ) cddb? ( media-libs/libcddb ) cdio? ( dev-libs/libcdio-paranoia:= ) mtp? ( media-libs/libmtp:= ) musicbrainz? ( media-libs/musicbrainz:5= ) replaygain? ( media-libs/libebur128:= media-sound/mpg123 media-video/ffmpeg:0= ) streaming? ( dev-qt/qtmultimedia:5 ) taglib? ( media-libs/taglib udisks? ( sys-fs/udisks:2 ) ) zeroconf? ( net-dns/avahi ) dev-qt/qtbase:6[concurrent]
 DESCRIPTION=Featureful and configurable Qt client for the music player daemon (MPD)
 EAPI=8
 HOMEPAGE=https://github.com/nullobsi/cantata
@@ -9,9 +9,9 @@ INHERIT=cmake plocale xdg git-r3
 IUSE=cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks zeroconf
 LICENSE=GPL-2
 PROPERTIES=live
-RDEPEND=dev-qt/qtbase[dbus,gui,network,sqlite,widgets,xml]:6 sys-libs/zlib virtual/libudev:= cdda? ( media-sound/cdparanoia ) cddb? ( media-libs/libcddb ) cdio? ( dev-libs/libcdio-paranoia:= ) mtp? ( media-libs/libmtp:= ) musicbrainz? ( media-libs/musicbrainz:5= ) replaygain? ( media-libs/libebur128:= media-sound/mpg123 media-video/ffmpeg:0= ) streaming? ( dev-qt/qtmultimedia:5 ) taglib? ( media-libs/taglib udisks? ( sys-fs/udisks:2 ) ) zeroconf? ( net-dns/avahi ) || ( >=dev-lang/perl-5.38.2-r3[perl_features_ithreads] <dev-lang/perl-5.38.2-r3[ithreads] ) || ( kde-frameworks/breeze-icons:* kde-frameworks/oxygen-icons:* )
+RDEPEND=dev-qt/qtbase:6[dbus,gui,network,sqlite,widgets,xml] sys-libs/zlib virtual/libudev:= cdda? ( media-sound/cdparanoia ) cddb? ( media-libs/libcddb ) cdio? ( dev-libs/libcdio-paranoia:= ) mtp? ( media-libs/libmtp:= ) musicbrainz? ( media-libs/musicbrainz:5= ) replaygain? ( media-libs/libebur128:= media-sound/mpg123 media-video/ffmpeg:0= ) streaming? ( dev-qt/qtmultimedia:5 ) taglib? ( media-libs/taglib udisks? ( sys-fs/udisks:2 ) ) zeroconf? ( net-dns/avahi ) || ( >=dev-lang/perl-5.38.2-r3[perl_features_ithreads] <dev-lang/perl-5.38.2-r3[ithreads] ) || ( kde-frameworks/breeze-icons:* kde-frameworks/oxygen-icons:* )
 REQUIRED_USE=?? ( cdda cdio ) cdda? ( udisks || ( cddb musicbrainz ) ) cddb? ( || ( cdio cdda ) taglib ) cdio? ( udisks || ( cddb musicbrainz ) ) mtp? ( taglib udisks ) musicbrainz? ( || ( cdio cdda ) taglib ) replaygain? ( taglib )
 RESTRICT=test
 SLOT=0
 _eclasses_=toolchain-funcs	d3d42b22a610ce81c267b644bcec9b87	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	f14aba975c94ccaa9f357a27e3b17ffe	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	1de691ead1f26da980bbfbb6146793cc	plocale	950fbaec7deeba41b5bcc0572cca99b9	xdg	3ef49a87c52c8b77c476351195dfe575	git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=705b8b180816d331136429a4ccee7872
+_md5_=e1caaa5b93710a03dad8b6b7e3d67336
