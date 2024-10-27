@@ -191,6 +191,10 @@ media-libs/mesa:vdpau - Enable the VDPAU acceleration interface for the Gallium3
 media-libs/mesa:vulkan-overlay - Build vulkan-overlay-layer which displays Frames Per Second and other statistics
 media-libs/mesa:wayland - Enable support for dev-libs/wayland
 media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
+media-sound/cantata:cdio - Use dev-libs/libcdio-paranoia for CD support (instead of cdparanoia)
+media-sound/cantata:http-server - Enable internal HTTP server to play non-MPD files
+media-sound/cantata:replaygain - Enable ReplayGain support, for relative volume adjustments
+media-sound/cantata:streaming - Enable playback of MPD HTTP streams using LibVLC (media-video/vlc)
 media-sound/deadbeef:converter - File format converter
 media-sound/deadbeef:cover - Support for cover art
 media-sound/deadbeef:hotkeys - Keyboard shortcuts support

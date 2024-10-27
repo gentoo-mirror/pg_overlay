@@ -104,6 +104,7 @@ media-libs/taglib 2.0.1_pre 2.0.2_pre: Library for reading and editing audio met
 media-libs/tg_owt 0_pre20231221 0_pre20240804-r1: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
+media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
