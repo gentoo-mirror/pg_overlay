@@ -8,7 +8,7 @@ ECM_TEST="true"
 KFMIN=9999
 PVCUT=$(ver_cut 1-3)
 QTMIN=6.7.2
-inherit ecm plasma.kde.org
+inherit ecm fcaps plasma.kde.org
 
 DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
 
@@ -111,6 +111,10 @@ BDEPEND="
 	>=kde-frameworks/kcmutils-${KFMIN}:6
 "
 
+# https://bugs.gentoo.org/941628
+# -m 0755 to avoid suid with USE="-filecaps"
+FILECAPS=( -m 0755 cap_sys_nice=ep usr/bin/kwin_wayland )
+
 src_prepare() {
 	ecm_src_prepare
 
@@ -136,4 +140,9 @@ src_configure() {
 	)
 
 	ecm_src_configure
+}
+
+pkg_postinst() {
+	ecm_pkg_postinst
+	fcaps_pkg_postinst
 }
