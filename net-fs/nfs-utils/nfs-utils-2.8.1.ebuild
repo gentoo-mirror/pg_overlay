@@ -29,6 +29,7 @@ RESTRICT="test"
 # so don't depend on virtual/krb.
 # (04 Feb 2005 agriffis)
 COMMON_DEPEND="
+	dev-libs/libnl
 	dev-libs/libxml2
 	net-libs/libtirpc:=
 	sys-fs/e2fsprogs
