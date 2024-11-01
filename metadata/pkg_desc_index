@@ -44,6 +44,7 @@ dev-libs/libclc 19.1.3: OpenCL C library
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdev 1.13.1: Handler library for evdev events
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
+dev-libs/libnl 3.11.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
 dev-libs/libqt6pas 6.2.8: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 27.3: Google's Protocol Buffers - Extensible mechanism for serializing structured data
@@ -121,11 +122,13 @@ media-video/ffmpeg 7.1: Complete solution to record/convert/stream audio and vid
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.2.6: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
+net-fs/nfs-utils 2.8.1: NFS client and server daemons
 net-im/64Gram 1.1.43: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
 net-libs/libmbim 1.28.4: Mobile Broadband Interface Model (MBIM) modem protocol helper library
 net-libs/libsrtp 2.6.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
+net-libs/libtirpc 1.3.6: Transport Independent RPC library (SunRPC replacement)
 net-libs/libtorrent 9999 9999-r1: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 23.1.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
@@ -138,6 +141,7 @@ net-misc/remmina 1.4.35-r1: A GTK+ RDP, SPICE, VNC and SSH client
 net-misc/rsync 3.3.0_pre1: File transfer program to keep remote files into sync
 net-misc/spice-gtk 0.42-r4: Set of GObject and Gtk objects for connecting to Spice servers and a client GUI
 net-misc/wget 1.21.4: Network utility to retrieve files from the WWW
+net-nds/rpcbind 1.2.7: portmap replacement which supports RPC over various protocols
 net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: Graphical client for the Soulseek peer to peer network written in Python

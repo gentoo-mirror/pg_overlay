@@ -76,6 +76,8 @@ dev-libs/glib:sysprof - Enable profiling data capture support using dev-util/sys
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-debug/systemtap
 dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
 dev-libs/libclc:spirv - Build SPIRV targets
+dev-libs/libnl:python - Install experimental dev-lang/python bindings
+dev-libs/libnl:utils - Install command line interface utils
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
@@ -299,6 +301,12 @@ media-video/qmplay2:sid - Build Chiptune with SIDPLAY support
 media-video/qmplay2:videofilters - Build with VideoFilters module
 media-video/qmplay2:visualizations - Build with Visualizations module
 media-video/qmplay2:vulkan - Build with Vulkan support
+net-fs/nfs-utils:junction - Enable NFS junction support in nfsref
+net-fs/nfs-utils:ldap - Add ldap support
+net-fs/nfs-utils:libmount - Link mount.nfs with libmount
+net-fs/nfs-utils:nfsv3 - Enable support for NFSv2 and NFSv3
+net-fs/nfs-utils:nfsv4 - Enable support for NFSv4 (includes NFSv4.1 and NFSv4.2)
+net-fs/nfs-utils:uuid - Support UUID lookups in rpc.mountd
 net-im/64Gram:enchant - Use the app-text/enchant spell-checking backend instead of app-text/hunspell
 net-im/64Gram:fonts - Use builtin patched copy of open-sans fonts (overrides fontconfig)
 net-im/64Gram:qt6 - Build with Qt6 support
@@ -352,6 +360,8 @@ net-misc/wget:cookie-check - Enable cookie checks via net-libs/libpsl
 net-misc/wget:metalink - Enable support for media-libs/libmetalink
 net-misc/wget:ntlm - Enable support for NTLM (Windows-based) authorization
 net-misc/wget:uuid - Generate UUIDs for the WARC (Web ARChive file format) using libuuid; otherwise use a simple RNG (random number generator)
+net-nds/rpcbind:remotecalls - Enable remote calls
+net-nds/rpcbind:warmstarts - Enables rpcbind to cache configuration for warm restarts
 net-p2p/amule:daemon - Enable amule daemon
 net-p2p/amule:remote - Enable remote controlling of the client
 net-p2p/amule:stats - Enable statistic reporting
