@@ -175,8 +175,8 @@ src_install() {
 		use kerberos && list+=( rpc.gssd rpc.svcgssd )
 	fi
 
-	local sedexp=( -e '#placehoder' )
-	use nfsv3 || sedexp+=( -e '/need portmap/d' )
+	#local sedexp=( -e '#placehoder' )
+	#use nfsv3 || sedexp+=( -e '/need portmap/d' )
 
 	mkdir -p "${T}/init.d" || die
 	for f in nfs nfsclient rpc.statd "${list[@]}" ; do
