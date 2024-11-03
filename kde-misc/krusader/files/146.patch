@@ -313,19 +313,6 @@ index faa9244f3..711b242b2 100644
      if (destination.isEmpty()) {
          return;
      }
-diff --git a/app/Panel/listpanel.cpp b/app/Panel/listpanel.cpp
-index f72d07093..a3151431f 100644
---- a/app/Panel/listpanel.cpp
-+++ b/app/Panel/listpanel.cpp
-@@ -850,7 +850,7 @@ void ListPanel::handleDrop(QDropEvent *event, bool onView)
-     // find dropping destination
-     QString destinationDir = "";
-     const bool dragFromThisPanel = event->source() == this;
--    const KrViewItem *item = onView ? view->getKrViewItemAt(event->pos()) : nullptr;
-+    const KrViewItem *item = onView ? view->getKrViewItemAt(event->position().toPoint()) : nullptr;
-     if (item) {
-         const FileItem *file = item->getFileItem();
-         if (file && !file->isDir() && dragFromThisPanel) {
 diff --git a/app/krusaderview.cpp b/app/krusaderview.cpp
 index 6f0893144..559d8c811 100644
 --- a/app/krusaderview.cpp
