@@ -142,7 +142,7 @@ src_prepare() {
 		sed -e "s/^pkg_check_modules.*SCIM/#&/" -i CMakeLists.txt || die
 	fi
 	sed -e "s/^pkg_check_modules.*LIBWACOM/#&/" -i CMakeLists.txt || die
-	sed -e "s/^tablet/#&/" -i kcms/CMakeLists.txt || die
+	sed -e "s/^add_subdirectory.*tablet/#&/" -i kcms/CMakeLists.txt || die
 }
 
 src_configure() {
