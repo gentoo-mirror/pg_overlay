@@ -153,7 +153,7 @@ src_configure() {
 		$(cmake_use_find_package webengine KAccounts6)
 		-DBUILD_KCM_MOUSE_X11=$(usex X)
 		-DBUILD_KCM_TOUCHPAD_X11=$(usex X)
-		-DBUILD_KCM_TOUCHPAD_WAYLAND=OFF
+		-DBUILD_KCM_TOUCHPAD_KWIN_WAYLAND=OFF
 		-DCMAKE_DISABLE_FIND_PACKAGE_libwacom=ON
 	)
 
