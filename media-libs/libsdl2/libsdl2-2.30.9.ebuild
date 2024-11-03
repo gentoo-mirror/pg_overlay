@@ -19,7 +19,7 @@ IUSE="alsa aqua cpu_flags_ppc_altivec cpu_flags_x86_3dnow cpu_flags_x86_mmx cpu_
 RESTRICT="!test? ( test )"
 REQUIRED_USE="
 	alsa? ( sound )
-	fcitx4? ( dbus )
+	fcitx? ( dbus )
 	gles1? ( video )
 	gles2? ( video )
 	haptic? ( joystick )
@@ -75,7 +75,7 @@ COMMON_DEPEND="
 "
 RDEPEND="
 	${COMMON_DEPEND}
-	fcitx4? ( app-i18n/fcitx:4 )
+	fcitx? ( app-i18n/fcitx:* )
 	gles1? ( media-libs/mesa[${MULTILIB_USEDEP},gles1(+)] )
 	gles2? ( media-libs/mesa[${MULTILIB_USEDEP},gles2(+)] )
 	vulkan? ( media-libs/vulkan-loader )
