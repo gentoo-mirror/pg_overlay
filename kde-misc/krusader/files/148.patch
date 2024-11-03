@@ -1,0 +1,39 @@
+From bbdfab135f71625278b88b1e73df622c985a4e7b Mon Sep 17 00:00:00 2001
+From: Alexander Bikadorov <alex.bikadorov@kdemail.net>
+Date: Fri, 11 Oct 2024 17:15:44 +0200
+Subject: [PATCH] KrArc: Fail correctly when copying from krarc to krarc
+
+CCBUG: 281917
+---
+ plugins/krarc/krarc.cpp | 10 +++++++---
+ 1 file changed, 7 insertions(+), 3 deletions(-)
+
+diff --git a/plugins/krarc/krarc.cpp b/plugins/krarc/krarc.cpp
+index 151dcaa08..ee8b7d189 100644
+--- a/plugins/krarc/krarc.cpp
++++ b/plugins/krarc/krarc.cpp
+@@ -771,14 +771,18 @@ KIO::WorkerResult kio_krarcProtocol::copy(const QUrl &url, const QUrl &dest, int
+             processedSize(KFileItem(*entry, url).size());
+             QDir::setCurrent(QDir::rootPath()); /* for being able to umount devices after copying*/
+             return WorkerResult::pass();
+-        } while (0);
++        } while (false);
+ 
+     if (encrypted)
+         KRDEBUG("ERROR: " << url.path() << " is encrypted.");
+     if (!dest.isLocalFile())
+-        KRDEBUG("ERROR: " << url.path() << " is not a local file.");
++        KRDEBUG("ERROR: " << dest.path() << " is not a local file.");
+ 
+-        // CMD_COPY is no more in KF5 - replaced with 74 value (as stated in https://invent.kde.org/frameworks/kio/-/blob/master/src/core/commands_p.h)
++    // if the destination is an archive, avoid that get/put is tried instead - which will fail
++    if (dest.scheme() == "krarc") {
++        return WorkerResult::fail(ERR_UNKNOWN, i18n("Copying from archive to archive is not supported"));
++    }
++    // CMD_COPY is no more in KF5 - replaced with 74 value (as stated in https://invent.kde.org/frameworks/kio/-/blob/master/src/core/commands_p.h)
+     return WorkerResult::fail(ERR_UNSUPPORTED_ACTION, unsupportedActionErrorString("kio_krarc", 74));
+ }
+ 
+-- 
+GitLab
+
