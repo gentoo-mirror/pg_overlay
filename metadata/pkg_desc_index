@@ -97,7 +97,7 @@ mail-client/thunderbird 128.4.0: Thunderbird Mail Client
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
-media-libs/libsdl2 2.30.6: Simple Direct Media Layer
+media-libs/libsdl2 2.30.9: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
 media-libs/mesa 24.2.6 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
