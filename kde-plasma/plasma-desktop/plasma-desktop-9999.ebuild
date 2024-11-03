@@ -141,6 +141,8 @@ src_prepare() {
 	if ! use scim; then
 		sed -e "s/^pkg_check_modules.*SCIM/#&/" -i CMakeLists.txt || die
 	fi
+	sed -e "s/^pkg_check_modules.*LIBWACOM/#&/" -i CMakeLists.txt || die
+	sed -e "s/^tablet/#&/" -i kcims/CMakeLists.txt || die
 }
 
 src_configure() {
@@ -154,7 +156,6 @@ src_configure() {
 		-DBUILD_KCM_MOUSE_X11=$(usex X)
 		-DBUILD_KCM_TOUCHPAD_X11=$(usex X)
 		-DBUILD_KCM_TOUCHPAD_KWIN_WAYLAND=OFF
-		-DCMAKE_DISABLE_FIND_PACKAGE_wacom=ON
 	)
 
 	if use X; then
