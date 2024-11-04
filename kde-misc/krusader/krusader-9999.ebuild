@@ -60,7 +60,7 @@ RDEPEND="${COMMON_DEPEND}
 	kde-plasma/kdesu-gui:*
 "
 
-PATCHES=( "${FILESDIR}"/{146,148,149}.patch )
+PATCHES=( "${FILESDIR}"/{148,149}.patch )
 
 src_prepare() {
 	ecm_src_prepare
