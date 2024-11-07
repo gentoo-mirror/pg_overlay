@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-132-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-132-patches-02.tar.xz"
 
 LLVM_COMPAT=( 18 19 )
 
@@ -70,10 +70,8 @@ IUSE+=" wayland wifi +X"
 # Firefox-only IUSE
 IUSE+=" +gmp-autoupdate gnome-shell +privacy"
 
-# !jumbo-build? ( clang ) -> bmo#1914774, bgo#939004 - causes seemingly random compile crashes with gcc.
 REQUIRED_USE="|| ( X wayland )
 	debug? ( !system-av1 )
-	jumbo-build? ( clang )
 	pgo? ( lto )
 	wayland? ( dbus )
 	wifi? ( dbus )"
