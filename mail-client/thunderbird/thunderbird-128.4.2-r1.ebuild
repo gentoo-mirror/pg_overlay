@@ -10,6 +10,9 @@ LLVM_COMPAT=( 18 19 )
 PYTHON_COMPAT=( python3_{12..13} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
 
+RUST_MIN_VER="1.77.1"
+RUST_NEEDS_LLVM=1
+
 WANT_AUTOCONF="2.1"
 
 VIRTUALX_REQUIRED="manual"
@@ -39,7 +42,10 @@ MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
 MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
 inherit autotools check-reqs desktop flag-o-matic gnome2-utils linux-info llvm-r1 multiprocessing \
-	optfeature pax-utils python-any-r1 toolchain-funcs virtualx xdg
+	optfeature pax-utils python-any-r1 rust toolchain-funcs virtualx xdg
+
+DESCRIPTION="Thunderbird Mail Client"
+HOMEPAGE="https://www.thunderbird.net/"
 
 MOZ_SRC_BASE_URI="https://archive.mozilla.org/pub/${MOZ_PN}/releases/${MOZ_PV}"
 
@@ -53,14 +59,11 @@ PATCH_URIS=(
 
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
 	${PATCH_URIS[@]}"
+S="${WORKDIR}/${PN}-${PV%_*}"
 
-DESCRIPTION="Thunderbird Mail Client"
-HOMEPAGE="https://www.thunderbird.net/"
-
-KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
-
-SLOT="0"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
+SLOT="0"
+KEYWORDS="amd64 ~arm64 ~ppc64 ~x86"
 
 IUSE="+clang +dbus debug eme-free hardened hwaccel jack libproxy lto pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx"
@@ -85,7 +88,6 @@ BDEPEND="${PYTHON_DEPS}
 		sys-devel/llvm:${LLVM_SLOT}
 		clang? (
 			sys-devel/lld:${LLVM_SLOT}
-			virtual/rust:0/llvm-${LLVM_SLOT}
 			pgo? ( sys-libs/compiler-rt-sanitizers:${LLVM_SLOT}[profile] )
 		)
 	')
@@ -95,8 +97,6 @@ BDEPEND="${PYTHON_DEPS}
 	>=dev-util/cbindgen-0.26.0
 	net-libs/nodejs
 	virtual/pkgconfig
-	!clang? ( >=virtual/rust-1.76 )
-	!elibc_glibc? ( dev-lang/rust )
 	amd64? ( >=dev-lang/nasm-2.14 )
 	x86? ( >=dev-lang/nasm-2.14 )
 	pgo? (
@@ -190,8 +190,6 @@ DEPEND="${COMMON_DEPEND}
 		x11-libs/libSM
 	)"
 
-S="${WORKDIR}/${PN}-${PV%_*}"
-
 llvm_check_deps() {
 	if ! has_version -b "sys-devel/clang:${LLVM_SLOT}" ; then
 		einfo "sys-devel/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
@@ -201,11 +199,6 @@ llvm_check_deps() {
 	if use clang && ! tc-ld-is-mold ; then
 		if ! has_version -b "sys-devel/lld:${LLVM_SLOT}" ; then
 			einfo "sys-devel/lld:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
-			return 1
-		fi
-
-		if ! has_version -b "virtual/rust:0/llvm-${LLVM_SLOT}" ; then
-			einfo "virtual/rust:0/llvm-${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 			return 1
 		fi
 
@@ -415,6 +408,7 @@ pkg_setup() {
 		check-reqs_pkg_setup
 
 		llvm-r1_pkg_setup
+		rust_pkg_setup
 
 		if use clang && use lto && tc-ld-is-lld ; then
 			local version_lld=$(ld.lld --version 2>/dev/null | awk '{ print $2 }')
