@@ -206,6 +206,7 @@ media-sound/deadbeef:supereq - Enable equalizer
 media-sound/fooyin:archive - Build the libarchive input plugin using app-arch/libarchive
 media-sound/fooyin:openmpt - Build the OpenMPT input plugin using media-libs/libopenmpt
 media-sound/fooyin:pipewire - Enable sound support via native PipeWire backend
+media-sound/fooyin:replaygain - Enable support for Replay Gain scanning using media-libs/libebur128 instead of using ffmpeg
 media-sound/kid3:acoustid - Build acoustic fingerprinting plugin using media-libs/chromaprint
 media-sound/kid3:mpris - Enable support for MPRIS2 interface using dev-qt/qtdbus
 media-sound/ncmpc:async-connect - Enable asynchronous connect
@@ -383,13 +384,6 @@ sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support
 sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
-sys-apps/systemd-utils:boot - Enable systemd-boot (UEFI boot manager)
-sys-apps/systemd-utils:kernel-install - Enable kernel-install
-sys-apps/systemd-utils:kmod - Enable kernel module loading via sys-apps/kmod
-sys-apps/systemd-utils:sysusers - Enable systemd-sysusers
-sys-apps/systemd-utils:tmpfiles - Enable systemd-tmpfiles
-sys-apps/systemd-utils:udev - Enable systemd-udev (userspace device manager)
-sys-apps/systemd-utils:ukify - Enable systemd-ukify
 sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-boot/grub:device-mapper - Enable support for devmapper. Required for LUKS or LVM volume detection.
 sys-boot/grub:efiemu - Build and install the efiemu runtimes
@@ -408,6 +402,12 @@ sys-devel/llvm:exegesis - Enable performance counter support for llvm-exegesis t
 sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
 sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
 sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
+sys-fs/udisks:daemon - Build the system daemon, not just the client tool
+sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
+sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
+sys-fs/udisks:systemd - Support sys-apps/systemd's logind
+sys-fs/udisks:vdo - Enable Virtual Data Optimizer support.
+sys-fs/udisks:zram - Enable ZRAM support (requires sys-apps/systemd).
 sys-libs/ncurses:ada - Add bindings for the ADA programming language
 sys-libs/ncurses:stack-realign - Realign the stack in the 32-bit build for compatibility with older binaries at some performance cost. Avoids crashes in older 32-bit binaries. Only affects x86/32-bit multilib builds on amd64.
 sys-libs/ncurses:tinfo - Build curses library (libncurses) sep from the low-level terminfo library (libtinfo) -- usually needed only for binary packages -- but it is binary compatible in either mode
