@@ -12,7 +12,7 @@ DISTUTILS_SINGLE_IMPL=1
 inherit desktop distutils-r1 plocale git-r3 virtualx
 
 DESCRIPTION="Clean junk to free disk space and to maintain privacy"
-HOMEPAGE="https://bleachbit.org/"
+HOMEPAGE="https://www.bleachbit.org/"
 EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 
 LICENSE="GPL-3"
@@ -35,9 +35,6 @@ BDEPEND="
 
 distutils_enable_tests unittest
 
-# tests fail under FEATURES=usersandbox
-RESTRICT="test"
-
 python_prepare_all() {
 	if use test; then
 		# avoid tests requiring internet access
@@ -45,6 +42,10 @@ python_prepare_all() {
 
 		# fails due to non-existent $HOME/.profile
 		rm tests/TestInit.py || die
+
+		# fails due to permission error on /proc
+		sed -e "s/test_make_self_oom_target_linux(self)/_&/" \
+			-i tests/TestMemory.py || die
 
 		# only applicable to Windows installer
 		rm tests/TestNsisUtilities.py || die
