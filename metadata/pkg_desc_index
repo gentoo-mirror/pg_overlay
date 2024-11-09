@@ -14,7 +14,7 @@ app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
-app-office/libreoffice 24.8.3.1: A full office productivity suite
+app-office/libreoffice 24.8.3.2: A full office productivity suite
 app-office/libreoffice-l10n 24.8.3.1: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.2.0: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.8: Search and query ebuilds
