@@ -66,6 +66,7 @@ src_prepare() {
 	sed -i '/fileops/d' src/plugins/CMakeLists.txt
 	sed -i '/filters/d' src/plugins/CMakeLists.txt
 	sed -i '/gme/d' src/plugins/CMakeLists.txt
+	sed -i '/rgscanner/d' src/plugins/CMakeLists.txt
 	sed -i '/scrobbler/d' src/plugins/CMakeLists.txt
 	sed -i '/tageditor/d' src/plugins/CMakeLists.txt
 	sed -i '/vumeter/d' src/plugins/CMakeLists.txt
