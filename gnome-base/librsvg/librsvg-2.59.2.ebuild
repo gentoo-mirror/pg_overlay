@@ -299,7 +299,10 @@ CRATES="
 	zune-jpeg@0.4.13
 "
 
-inherit cargo gnome2 meson-multilib python-any-r1 rust-toolchain vala
+RUST_MIN_VER="1.71.1"
+RUST_USEDEP='${MULTILIB_USEDEP}'
+
+inherit multilib-minimal cargo gnome2 python-any-r1 rust-toolchain vala meson
 
 DESCRIPTION="Scalable Vector Graphics (SVG) rendering library"
 HOMEPAGE="https://wiki.gnome.org/Projects/LibRsvg https://gitlab.gnome.org/GNOME/librsvg"
@@ -313,7 +316,7 @@ LICENSE+="
 "
 
 SLOT="2"
-KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
+KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
 
 IUSE="gtk-doc +introspection +vala"
 REQUIRED_USE="
@@ -333,7 +336,6 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
-	>=virtual/rust-1.70.0[${MULTILIB_USEDEP}]
 	x11-libs/gdk-pixbuf
 	${PYTHON_DEPS}
 	$(python_gen_any_dep 'dev-python/docutils[${PYTHON_USEDEP}]')
@@ -350,6 +352,11 @@ QA_FLAGS_IGNORED="
 	usr/bin/rsvg-convert
 	usr/lib.*/librsvg.*
 "
+
+pkg_setup() {
+	rust_pkg_setup
+	python-any-r1_pkg_setup
+}
 
 src_prepare() {
 	use vala && vala_setup
