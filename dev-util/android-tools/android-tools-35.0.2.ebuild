@@ -67,6 +67,8 @@ src_configure() {
 		-DCMAKE_FIND_PACKAGE_PREFER_CONFIG=ON \
 		-Dprotobuf_MODULE_COMPATIBLE=ON
 		-DBUILD_SHARED_LIBS=OFF
+		#
+		-DANDROID_TOOLS_USE_BUNDLED_LIBUSB=ON
 	)
 	cmake_src_configure
 }
