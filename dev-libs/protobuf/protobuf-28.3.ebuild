@@ -3,9 +3,10 @@
 
 EAPI=8
 
-inherit cmake-multilib elisp-common toolchain-funcs
+inherit cmake-multilib elisp-common multilib
 
-ABSEIL_BRANCH="lts_2023_08_02" # NOTE from https://github.com/protocolbuffers/protobuf/blob/main/.gitmodules
+# NOTE from https://github.com/protocolbuffers/protobuf/blob/main/.gitmodules
+ABSEIL_BRANCH="lts_2023_08_02"
 
 ABSEIL_MIN_VER="${ABSEIL_BRANCH//lts_}"
 ABSEIL_MIN_VER="${ABSEIL_MIN_VER//_/}"
@@ -13,12 +14,12 @@ ABSEIL_MIN_VER="${ABSEIL_MIN_VER//_/}"
 if [[ "${PV}" == *9999 ]]; then
 	EGIT_REPO_URI="https://github.com/protocolbuffers/protobuf.git"
 	EGIT_SUBMODULES=( '-*' )
-	MY_SLOT="27.2"
+	MY_SLOT="28.0"
 
 	inherit git-r3
 else
-	SRC_URI="https://github.com/protocolbuffers/protobuf/archive/v${PV}.tar.gz -> ${P}.tar.gz"
-	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~mips ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~x64-macos"
+	SRC_URI="https://github.com/protocolbuffers/protobuf/releases/download/v${PV}/${P}.tar.gz"
+	KEYWORDS="~alpha amd64 arm arm64 ~loong ~mips ppc64 ~riscv ~s390 ~sparc x86 ~amd64-linux ~x86-linux ~arm64-macos ~x64-macos"
 	MY_SLOT=$(ver_cut 1-2)
 fi
 
@@ -27,7 +28,7 @@ HOMEPAGE="https://protobuf.dev/"
 
 LICENSE="BSD"
 SLOT="0/${MY_SLOT}.0"
-IUSE="conformance emacs examples +libprotoc libupb +protobuf +protoc test zlib"
+IUSE="conformance debug emacs examples +libprotoc libupb +protobuf +protoc test zlib"
 
 REQUIRED_USE="
 	|| (
@@ -48,14 +49,14 @@ BDEPEND="
 "
 
 COMMON_DEPEND="
-	dev-libs/jsoncpp
+	dev-libs/jsoncpp[${MULTILIB_USEDEP}]
 	>=dev-cpp/abseil-cpp-${ABSEIL_MIN_VER}:=[${MULTILIB_USEDEP}]
 	zlib? ( sys-libs/zlib[${MULTILIB_USEDEP}] )
 "
 
 DEPEND="
 	${COMMON_DEPEND}
-	test? ( >=dev-cpp/gtest-1.9[${MULTILIB_USEDEP}] )
+	test? ( >=dev-cpp/gtest-1.11[${MULTILIB_USEDEP}] )
 "
 RDEPEND="
 	${COMMON_DEPEND}
@@ -65,22 +66,16 @@ RDEPEND="
 PATCHES=(
 	"${FILESDIR}/${PN}-26.1-disable-32-bit-tests.patch"
 	"${FILESDIR}/${PN}-23.3-static_assert-failure.patch"
+	"${FILESDIR}/${PN}-27.4-findJsonCpp.patch"
+	"${FILESDIR}/${PN}-28.0-disable-test_upb-lto.patch"
 )
 
 DOCS=( CONTRIBUTORS.txt README.md )
 
-# src_prepare() {
-# 	rm "${S}/third_party/utf8_range/" -rf || die
-# 	cmake_src_prepare
-# }
+src_prepare() {
+	cmake_src_prepare
 
-src_configure() {
-	if tc-ld-is-gold; then
-		# https://sourceware.org/bugzilla/show_bug.cgi?id=24527
-		tc-ld-disable-gold
-	fi
-
-	cmake-multilib_src_configure
+	cp "${FILESDIR}/FindJsonCpp.cmake" "${S}/cmake" || die
 }
 
 multilib_src_configure() {
@@ -104,7 +99,8 @@ multilib_src_configure() {
 		-Dprotobuf_TEST_XML_OUTDIR="$(usex test)"
 
 		-Dprotobuf_WITH_ZLIB="$(usex zlib)"
-		-Dprotobuf_VERBOSE="yes"
+		-Dprotobuf_VERBOSE="$(usex debug)"
+		-DCMAKE_MODULE_PATH="${S}/cmake"
 	)
 	use test && mycmakeargs+=( -Dprotobuf_USE_EXTERNAL_GTEST="yes" )
 
@@ -120,16 +116,26 @@ src_compile() {
 }
 
 src_test() {
-	local -x srcdir="${S}"/src
+	local -x srcdir="${S}/src"
+
+	local -x TEST_TMPDIR="${T%/}/TEST_TMPDIR_${ABI}"
+	mkdir -m 777 "${TEST_TMPDIR}" || die
+
+	setup_test_env() {
+		ln -sr "${S}/src" "${BUILD_DIR}/include" || die
+	}
+
+	multilib_foreach_abi setup_test_env
+
 	cmake-multilib_src_test
 }
 
 multilib_src_install_all() {
 	find "${ED}" -name "*.la" -delete || die
 
-	if [[ ! -f "${ED}/usr/$(get_libdir)/libprotobuf.so.${SLOT#*/}" ]]; then
+	if [[ ! -f "${ED}/usr/$(get_libdir)/libprotobuf$(get_libname ${SLOT#*/})" ]]; then
 		eerror "No matching library found with SLOT variable, currently set: ${SLOT}\n" \
-			"Expected value: ${ED}/usr/$(get_libdir)/libprotobuf.so.${SLOT#*/}"
+			"Expected value: ${ED}/usr/$(get_libdir)/libprotobuf$(get_libname ${SLOT#*/})"
 		die "Please update SLOT variable"
 	fi
 
