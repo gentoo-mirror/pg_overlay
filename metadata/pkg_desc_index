@@ -15,7 +15,7 @@ app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
 app-office/libreoffice 24.8.3.2: A full office productivity suite
-app-office/libreoffice-l10n 24.8.3.1: Translations for the Libreoffice suite
+app-office/libreoffice-l10n 24.8.3.2: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.2.0: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
@@ -99,7 +99,7 @@ media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libsdl2 2.30.9: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
-media-libs/mesa 24.2.6-r1 9999: OpenGL-like graphic library for Linux
+media-libs/mesa 24.2.6-r2 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/shaderc 2024.1: Collection of tools, libraries and tests for shader compilation
 media-libs/taglib 2.0.1_pre 2.0.2_pre: Library for reading and editing audio meta data
