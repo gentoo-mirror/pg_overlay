@@ -1,4 +1,4 @@
-# Copyright 2017-2023 Gentoo Authors
+# Copyright 2017-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -34,7 +34,6 @@ REQUIRED_USE="s3? ( simple-s3 )"
 
 BDEPEND="
 	virtual/pkgconfig
-	>=virtual/rust-1.65
 "
 DEPEND="
 	app-arch/zstd
@@ -59,6 +58,7 @@ src_unpack() {
 }
 
 src_configure() {
+	export ZSTD_SYS_USE_PKG_CONFIG=1
 	myfeatures=(
 		native-zlib
 		$(usev azure)
