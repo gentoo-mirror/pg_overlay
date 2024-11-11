@@ -95,7 +95,7 @@ src_install() {
 		python_foreach_impl python_newexe vendor/avb/avbtool.py avbtool
 	fi
 	docinto adb
-	dodoc vendor/adb/*.{txt,TXT}
+	#dodoc vendor/adb/*.{txt,TXT}
 	docinto fastboot
 	dodoc vendor/core/fastboot/README.md
 }
