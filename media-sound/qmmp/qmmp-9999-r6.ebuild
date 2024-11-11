@@ -98,7 +98,7 @@ src_prepare() {
 			src/plugins/Input/cdaudio/decoder_cdaudio.cpp || die
 	fi
 
-		sed -i \
+	sed -i \
 		-e '/^Exec=qmmp %F/s@=@=env QT_QPA_PLATFORM=xcb @' \
 		src/app/qmmp.desktop || die
 
