@@ -24,7 +24,7 @@ BDEPEND="
 	app-text/docbook-xsl-stylesheets
 	dev-util/gperf
 	virtual/pkgconfig
-	$(python_gen_any_dep 'dev-python/jinja[${PYTHON_USEDEP}]')
+	$(python_gen_any_dep 'dev-python/jinja2[${PYTHON_USEDEP}]')
 	$(python_gen_any_dep 'dev-python/lxml[${PYTHON_USEDEP}]')
 "
 DEPEND="
@@ -49,7 +49,7 @@ PATCHES=(
 )
 
 python_check_deps() {
-	python_has_version "dev-python/jinja[${PYTHON_USEDEP}]" &&
+	python_has_version "dev-python/jinja2[${PYTHON_USEDEP}]" &&
 	python_has_version "dev-python/lxml[${PYTHON_USEDEP}]"
 }
 
