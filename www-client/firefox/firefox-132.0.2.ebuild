@@ -68,10 +68,10 @@ S="${WORKDIR}/${PN}-${PV%_*}"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
 
-IUSE="clang dbus debug eme-free hardened hwaccel jack +jumbo-build libproxy openh264 pgo"
+IUSE="+clang dbus debug eme-free hardened hwaccel jack +jumbo-build libproxy openh264 pgo"
 IUSE+=" pulseaudio sndio selinux +system-av1 +system-harfbuzz +system-icu +system-jpeg"
 IUSE+=" +system-jpeg +system-libevent +system-libvpx system-png +system-webp valgrind wayland"
-IUSE+=" wifi +X"
+IUSE+=" wifi +X +privacy"
 
 # Firefox-only IUSE
 IUSE+=" +gmp-autoupdate gnome-shell +telemetry"
