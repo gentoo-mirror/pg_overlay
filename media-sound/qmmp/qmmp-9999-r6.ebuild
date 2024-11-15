@@ -171,6 +171,7 @@ src_configure() {
 		-DUSE_RGSCAN=OFF
 		-DUSE_SB=OFF
 		-DCMAKE_BUILD_TYPE=Release
+		-DQMMP_DEFAULT_OUTPUT=pipewire
 	)
 
 	cmake_src_configure
