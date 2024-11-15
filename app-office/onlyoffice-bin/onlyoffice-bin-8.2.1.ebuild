@@ -19,7 +19,7 @@ S="${WORKDIR}"
 
 LICENSE="AGPL-3"
 SLOT="0"
-KEYWORDS="amd64"
+KEYWORDS="~amd64"
 RESTRICT="mirror strip test"
 
 RDEPEND="
@@ -71,7 +71,7 @@ src_prepare() {
 src_install() {
 	domenu usr/share/applications/onlyoffice-desktopeditors.desktop
 	for size in {16,24,32,48,64,128,256}; do
-		newicon -s "${size}" opt/onlyoffice/desktopeditors/asc-de-"${size}".png onlyoffice-desktopeditors.png
+		doicon -s ${size} usr/share/icons/hicolor/${size}x${size}/apps/onlyoffice-desktopeditors.png
 	done
 
 	dobin usr/bin/desktopeditors usr/bin/onlyoffice-desktopeditors
