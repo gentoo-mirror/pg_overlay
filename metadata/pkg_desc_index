@@ -149,7 +149,6 @@ net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-vpn/networkmanager-l2tp 1.20.16: NetworkManager L2TP plugin
-sci-calculators/qalculate-qt 5.3.0: Qt-based UI for libqalculate
 sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 14.1.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
