@@ -17,7 +17,7 @@ SRC_URI+=" https://dev.gentoo.org/~asturm/distfiles/${XORGHDRS}.tar.xz"
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
 KEYWORDS=""
-IUSE="ibus input_devices_wacom scim screencast sdl +semantic-desktop webengine"
+IUSE="ibus input_devices_wacom scim screencast sdl +semantic-desktop webengine X"
 
 RESTRICT="test" # missing selenium-webdriver-at-spi
 
