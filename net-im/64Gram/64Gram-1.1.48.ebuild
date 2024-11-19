@@ -142,7 +142,6 @@ src_prepare() {
 
 	eapply --binary "${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
 	eapply --binary "${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
-	eapply --binary "${FILESDIR}/28611.patch"
 
 	cmake_src_prepare
 }
