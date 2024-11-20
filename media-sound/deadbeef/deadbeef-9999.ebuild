@@ -118,7 +118,7 @@ src_prepare() {
 	drop_and_stub "${S}/intl"
 
 	# Plugins that are undesired for whatever reason, candidates for unbundling and such.
-	for i in adplug alac dumb ffap mms gme lfs mono2stereo psf sc60 shn sid soundtouch wma; do
+	for i in adplug alac dumb mms gme lfs mono2stereo psf sc60 shn sid soundtouch wma; do
 		drop_and_stub "${S}/plugins/${i}"
 	done
 
