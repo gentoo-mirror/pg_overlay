@@ -1,4 +1,4 @@
-# Copyright 2021-2023 Gentoo Authors
+# Copyright 2021-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -51,7 +51,7 @@ DEPEND="
 		media-libs/libogg
 	)
 	libsamplerate? ( media-libs/libsamplerate )
-	mp3? ( media-sound/mpg123 )
+	mp3? ( media-sound/mpg123-base )
 	musepack? ( media-sound/musepack-tools )
 	nls? ( virtual/libintl )
 	notify? ( sys-apps/dbus )
@@ -213,4 +213,7 @@ src_install() {
 	default
 
 	find "${ED}" -name '*.la' -delete || die
+
+	# if compressed, help doesn't work
+	docompress -x /usr/share/doc/${PF}
 }
