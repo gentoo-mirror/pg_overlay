@@ -47,6 +47,10 @@ app-portage/eix:swap-remote - Swap role of remote addresses in eix-remote, makin
 app-portage/eix:tools - Create separate binary for script helper tools; useful if they are called extremely often
 app-portage/eix:usr-portage - Set last PORTDIR fallback to /usr/portage instead of /var/db/repos/gentoo
 app-shells/bash-completion:eselect - Support blacklisting of completions via 'eselect bashcomp'. This enables custom Gentoo patching of upstream completion loader.
+app-text/enchant:aspell - Adds support for app-text/aspell spell checker
+app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
+app-text/enchant:nuspell - Adds support for app-text/nuspell spell checker
+app-text/enchant:voikko - Adds support for dev-libs/libvoikko spell checker
 dev-db/mysql-connector-c++:legacy - Build the legacy 1.x API as well as the DevX API
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:ensurepip - Install the ensurepip module that uses bundled wheels to bootstrap pip and setuptools (if disabled, it will be only possible to use venv `--without-pip`)
