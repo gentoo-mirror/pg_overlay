@@ -83,7 +83,7 @@ IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-jpeg +syst
 IUSE+=" +system-libvpx system-png +system-webp valgrind wayland wifi +X"
 
 # Firefox-only IUSE
-IUSE+=" +gmp-autoupdate gnome-shell +jumbo-build openh264 +telemetry wasm"
+IUSE+=" +gmp-autoupdate gnome-shell +jumbo-build openh264 +telemetry wasm +privacy"
 
 REQUIRED_USE="|| ( X wayland )
 	debug? ( !system-av1 )
@@ -1147,8 +1147,6 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-gtest-in-build
 
 	mozconfig_add_options_ac '' --disable-instruments
-
-	mozconfig_add_options_ac '' --disable-jprof
 
 	mozconfig_add_options_ac '' --disable-libproxy
 	mozconfig_add_options_ac '' --disable-logrefcnt
