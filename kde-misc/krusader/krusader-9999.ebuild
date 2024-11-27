@@ -60,8 +60,6 @@ RDEPEND="${COMMON_DEPEND}
 	kde-plasma/kdesu-gui:*
 "
 
-PATCHES=( "${FILESDIR}"/{148,149}.patch )
-
 src_prepare() {
 	ecm_src_prepare
 	use handbook || cmake_comment_add_subdirectory doc/handbook
