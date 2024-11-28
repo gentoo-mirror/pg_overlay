@@ -122,7 +122,7 @@ media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.2.7: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-fs/nfs-utils 2.8.1: NFS client and server daemons
-net-im/64Gram 1.1.50: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
+net-im/64Gram 1.1.51: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
 net-libs/libmbim 1.28.4: Mobile Broadband Interface Model (MBIM) modem protocol helper library
