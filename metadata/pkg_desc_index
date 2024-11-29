@@ -14,9 +14,9 @@ app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
-app-office/libreoffice 24.8.3.2: A full office productivity suite
+app-office/libreoffice 24.8.4.1: A full office productivity suite
 app-office/libreoffice-l10n 24.8.3.2: Translations for the Libreoffice suite
-app-office/onlyoffice-bin 8.2.1: Onlyoffice is an office productivity suite (binary version)
+app-office/onlyoffice-bin 8.2.2: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.8: Search and query ebuilds
 app-shells/bash-completion 2.11: Programmable Completion for bash
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
@@ -33,7 +33,7 @@ dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 4.0 API)
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/python 3.12.7_p1 3.13.0 3.13.0-r100: Freethreading (no-GIL) version of Python programming language
-dev-lang/rust 1.82.0 1.82.0-r100: Systems programming language from Mozilla
+dev-lang/rust 1.82.0 1.82.0-r100 1.83.0: Systems programming language from Mozilla
 dev-libs/ayatana-ido 0.9.2: Ayatana Application Indicators (Shared Library)
 dev-libs/glib 2.82.2: The GLib library of C routines
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
@@ -113,6 +113,7 @@ media-sound/kid3 9999: Simple tag editor based on Qt
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
+media-sound/pavucontrol 5.0-r4: Pulseaudio Volume Control, GTK based mixer for Pulseaudio
 media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins support
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
