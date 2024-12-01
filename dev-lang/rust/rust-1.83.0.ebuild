@@ -334,7 +334,7 @@ src_configure() {
 		compiler-docs = $(toml_usex doc)
 		#
 		submodules = true
-		optimized-compiler-builtins = false
+		#optimized-compiler-builtins = false
 		#
 		python = "${EPYTHON}"
 		locked-deps = false
@@ -343,7 +343,9 @@ src_configure() {
 		tools = [${tools}]
 		verbose = 2
 		sanitizers = false
-		profiler = $(toml_usex profiler)
+		#
+		profiler = false
+		#
 		cargo-native-static = false
 		local-rebuild = false
 
