@@ -343,7 +343,9 @@ src_configure() {
 		tools = [${tools}]
 		verbose = 2
 		sanitizers = false
-		profiler = $(toml_usex profiler)
+		#
+		profiler = false
+		#
 		cargo-native-static = false
 		local-rebuild = false
 
