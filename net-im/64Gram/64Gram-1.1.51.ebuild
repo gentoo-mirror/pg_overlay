@@ -16,7 +16,7 @@ S="${WORKDIR}/${P}-full"
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~riscv"
-IUSE="dbus enchant +fonts +jemalloc +libdispatch screencast qt6 wayland webkit +X"
+IUSE="dbus enchant +fonts +jemalloc screencast qt6 wayland webkit +X"
 
 CDEPEND="
 	!net-im/telegram-desktop-bin
@@ -26,7 +26,6 @@ CDEPEND="
 	>=dev-cpp/glibmm-2.77:2.68
 	dev-libs/glib:2
 	dev-libs/libdispatch
-	dev-cpp/ada
 	dev-libs/openssl:=
 	dev-libs/protobuf
 	dev-libs/xxhash
