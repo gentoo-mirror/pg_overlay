@@ -9,7 +9,7 @@ app-i18n/opencc 1.1.7: Library for conversion between Traditional and Simplified
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
-app-misc/doublecmd 1.1.19: Cross Platform file manager.
+app-misc/doublecmd 1.1.21: Cross Platform file manager.
 app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
