@@ -67,7 +67,7 @@ dev-util/intel_clc 24.2.7 9999: intel_clc tool used for building OpenCL C to SPI
 dev-util/kbuild 0.1.9998.3499: A makefile framework for writing simple makefiles for complex tasks
 dev-util/librnp 9999: High performance C++ OpenPGP library
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/re2c 3.0_pre 4.0_pre: Tool for generating C-based recognizers from regular expressions
+dev-util/re2c 4.0.1_pre: Tool for generating C-based recognizers from regular expressions
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
 dev-util/spirv-llvm-translator 19.1.0: Bi-directional translator between SPIR-V and LLVM IR
@@ -169,7 +169,7 @@ sys-devel/llvm 19.1.5: Low Level Virtual Machine
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
-sys-fs/xfsprogs 6.10.1: XFS filesystem utilities
+sys-fs/xfsprogs 6.12.0: XFS filesystem utilities
 sys-libs/libblockdev 3.2.1_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 19.1.5: Polyhedral optimizations for LLVM
