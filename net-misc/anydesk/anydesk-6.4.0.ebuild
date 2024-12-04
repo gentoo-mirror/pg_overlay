@@ -7,8 +7,7 @@ inherit desktop optfeature systemd xdg-utils
 
 DESCRIPTION="Feature rich multi-platform remote desktop application"
 HOMEPAGE="https://anydesk.com"
-SRC_URI="https://download.anydesk.com/linux/${P}-amd64.tar.gz
-	https://download.anydesk.com/linux/generic-linux/${P}-amd64.tar.gz"
+SRC_URI="https://download.anydesk.com/linux/${P}-amd64.tar.gz"
 
 # OpeSSL/SSLeay, libvpx, zlib, Xiph, xxHash
 LICENSE="AnyDesk-TOS BSD BSD-2 openssl ZLIB"
