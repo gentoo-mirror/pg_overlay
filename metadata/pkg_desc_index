@@ -17,8 +17,7 @@ app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the co
 app-office/libreoffice 24.8.4.1: A full office productivity suite
 app-office/libreoffice-l10n 24.8.4.1: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.2.2: Onlyoffice is an office productivity suite (binary version)
-app-portage/eix 0.36.8: Search and query ebuilds
-app-shells/bash-completion 2.11: Programmable Completion for bash
+app-portage/eix 0.36.9: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/enchant 2.8.2: Spellchecker wrapping library
@@ -169,7 +168,6 @@ sys-devel/llvm 19.1.5: Low Level Virtual Machine
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
-sys-fs/xfsprogs 6.12.0: XFS filesystem utilities
 sys-libs/libblockdev 3.2.1_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
 sys-libs/polly 19.1.5: Polyhedral optimizations for LLVM
