@@ -92,6 +92,9 @@ kde-misc/kweather 9999: Weather forecast application for Plasma with flat and dy
 kde-plasma/kdesu-gui 9999: Graphical frontend for KDE Frameworks' kdesu
 kde-plasma/kwin 9999: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
+llvm-core/clang 19.1.5: C language family frontend for LLVM
+llvm-core/llvm 19.1.5: Low Level Virtual Machine
+llvm-runtimes/polly 19.1.5: Polyhedral optimizations for LLVM
 mail-client/thunderbird 128.5.1: Thunderbird Mail Client
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
@@ -170,7 +173,6 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-libs/libblockdev 3.2.1_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
-sys-libs/polly 19.1.5: Polyhedral optimizations for LLVM
 sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
 sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers

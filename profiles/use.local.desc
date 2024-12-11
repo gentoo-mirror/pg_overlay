@@ -148,6 +148,16 @@ kde-plasma/plasma-desktop:scim - Enable applets that use app-i18n/scim
 kde-plasma/plasma-desktop:screencast - Enable screencast portal thumbnails using kde-plasma/kpipewire
 kde-plasma/plasma-desktop:sdl - Enable gamepad support using media-libs/libsdl2
 kde-plasma/plasma-desktop:webengine - Build the OpenDesktop integration plugin
+llvm-core/clang:extra - Build extra tools (clangd, clang-tidy and a few more)
+llvm-core/clang:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
+llvm-core/clang:static-analyzer - Install the Clang static analyzer
+llvm-core/llvm:binutils-plugin - Build the binutils plugin
+llvm-core/llvm:debuginfod - Install llvm-debuginfod (requires net-misc/curl and dev-cpp/cpp-httplib)
+llvm-core/llvm:doc - Build and install the HTML documentation and regenerate the man pages
+llvm-core/llvm:exegesis - Enable performance counter support for llvm-exegesis tool that can be used to measure host machine instruction characteristics
+llvm-core/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
+llvm-core/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
+llvm-core/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
