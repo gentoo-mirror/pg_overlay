@@ -77,7 +77,6 @@ dev-libs/glib:mime - Pull in shared MIME database that many glib-based applicati
 dev-libs/glib:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-debug/systemtap
 dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
-dev-libs/libclc:spirv - Build SPIRV targets
 dev-libs/libnl:python - Install experimental dev-lang/python bindings
 dev-libs/libnl:utils - Install command line interface utils
 dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
