@@ -15,7 +15,7 @@ KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~riscv ~x86 ~amd64-linux ~ppc-macos ~x64-mac
 IUSE="test"
 RESTRICT="!test? ( test )"
 
-RDEPEND="~sys-devel/llvm-${PV}"
+RDEPEND="~llvm-core/llvm-${PV}"
 DEPEND="${RDEPEND}"
 BDEPEND="
 	test? (

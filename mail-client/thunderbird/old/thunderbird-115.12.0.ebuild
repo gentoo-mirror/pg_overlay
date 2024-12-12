@@ -82,8 +82,8 @@ TB_ONLY_DEPEND="!<x11-plugins/enigmail-2.2
 BDEPEND="${PYTHON_DEPS}
 	|| (
 		(
-			sys-devel/clang:18
-			sys-devel/llvm:18
+			llvm-core/clang:18
+			llvm-core/llvm:18
 			clang? (
 				sys-devel/lld:18
 				virtual/rust:0/llvm-18
@@ -91,8 +91,8 @@ BDEPEND="${PYTHON_DEPS}
 			)
 		)
 		(
-			sys-devel/clang:17
-			sys-devel/llvm:17
+			llvm-core/clang:17
+			llvm-core/llvm:17
 			clang? (
 				sys-devel/lld:17
 				virtual/rust:0/llvm-17
@@ -211,8 +211,8 @@ DEPEND="${COMMON_DEPEND}
 S="${WORKDIR}/${PN}-${PV%_*}"
 
 llvm_check_deps() {
-	if ! has_version -b "sys-devel/clang:${LLVM_SLOT}" ; then
-		einfo "sys-devel/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
+	if ! has_version -b "llvm-core/clang:${LLVM_SLOT}" ; then
+		einfo "llvm-core/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 		return 1
 	fi
 
@@ -1294,7 +1294,7 @@ src_install() {
 	rm "${ED}${MOZILLA_FIVE_HOME}/${PN}-bin" || die
 	dosym ${PN} ${MOZILLA_FIVE_HOME}/${PN}-bin
 
-	# Don't install llvm-symbolizer from sys-devel/llvm package
+	# Don't install llvm-symbolizer from llvm-core/llvm package
 	if [[ -f "${ED}${MOZILLA_FIVE_HOME}/llvm-symbolizer" ]] ; then
 		rm -v "${ED}${MOZILLA_FIVE_HOME}/llvm-symbolizer" || die
 	fi

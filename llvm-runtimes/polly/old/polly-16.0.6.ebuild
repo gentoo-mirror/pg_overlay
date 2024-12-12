@@ -16,7 +16,7 @@ KEYWORDS="~amd64"
 IUSE="test"
 RESTRICT="!test? ( test )"
 
-RDEPEND="~sys-devel/llvm-${PV}"
+RDEPEND="~llvm-core/llvm-${PV}"
 DEPEND="${RDEPEND}"
 BDEPEND="
 	test? (
