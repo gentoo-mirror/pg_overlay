@@ -60,14 +60,14 @@ for _s in ${LLVM_VALID_SLOTS[@]}; do
 	LLVM_DEPEND+=" ( "
 	for _x in ${ALL_LLVM_TARGETS[@]}; do
 		LLVM_DEPEND+="
-			${_x}? ( sys-devel/llvm:${_s}[${_x}(-)] )
+			${_x}? ( llvm-core/llvm:${_s}[${_x}(-)] )
 			wasm? ( sys-devel/lld:${_s} )"
 	done
 	LLVM_DEPEND+=" )"
 done
 unset _s _x
 LLVM_DEPEND+=" )
-	<sys-devel/llvm-$(( LLVM_MAX_SLOT + 1 )):=
+	<llvm-core/llvm-$(( LLVM_MAX_SLOT + 1 )):=
 "
 
 # to bootstrap we need at least exactly previous version, or same.
@@ -90,7 +90,7 @@ BDEPEND="${PYTHON_DEPS}
 	app-eselect/eselect-rust
 	|| (
 		>=sys-devel/gcc-4.7
-		>=sys-devel/clang-3.5
+		>=llvm-core/clang-3.5
 	)
 	system-bootstrap? ( ${BOOTSTRAP_DEPEND} )
 	!system-llvm? (
@@ -111,7 +111,7 @@ DEPEND="
 	system-llvm? (
 		${LLVM_DEPEND}
 		llvm-libunwind? ( sys-libs/llvm-libunwind:= )
-		>=sys-devel/clang-runtime-14.0[libcxx]
+		>=llvm-core/clang-runtime-14.0[libcxx]
 	)
 	!system-llvm? (
 		!llvm-libunwind? (
@@ -233,7 +233,7 @@ pre_build_checks() {
 }
 
 llvm_check_deps() {
-	has_version -r "sys-devel/llvm:${LLVM_SLOT}[${LLVM_TARGET_USEDEPS// /,}]"
+	has_version -r "llvm-core/llvm:${LLVM_SLOT}[${LLVM_TARGET_USEDEPS// /,}]"
 }
 
 # Is LLVM being linked against libc++?

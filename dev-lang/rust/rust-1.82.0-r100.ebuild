@@ -47,10 +47,10 @@ IUSE="big-endian clippy cpu_flags_x86_sse2 debug dist doc llvm-libunwind lto mir
 LLVM_DEPEND=()
 # splitting usedeps needed to avoid CI/pkgcheck's UncheckableDep limitation
 for _x in "${ALL_LLVM_TARGETS[@]}"; do
-	LLVM_DEPEND+=( "	${_x}? ( $(llvm_gen_dep "sys-devel/llvm:\${LLVM_SLOT}[${_x}]") )" )
+	LLVM_DEPEND+=( "	${_x}? ( $(llvm_gen_dep "llvm-core/llvm:\${LLVM_SLOT}[${_x}]") )" )
 done
 LLVM_DEPEND+=( "	wasm? ( $(llvm_gen_dep 'sys-devel/lld:${LLVM_SLOT}') )" )
-LLVM_DEPEND+=( "	$(llvm_gen_dep 'sys-devel/llvm:${LLVM_SLOT}')" )
+LLVM_DEPEND+=( "	$(llvm_gen_dep 'llvm-core/llvm:${LLVM_SLOT}')" )
 
 # to bootstrap we need at least exactly previous version, or same.
 # most of the time previous versions fail to bootstrap with newer
@@ -72,7 +72,7 @@ BDEPEND="${PYTHON_DEPS}
 	app-eselect/eselect-rust
 	|| (
 		>=sys-devel/gcc-4.7
-		>=sys-devel/clang-3.5
+		>=llvm-core/clang-3.5
 	)
 	system-bootstrap? ( ${BOOTSTRAP_DEPEND} )
 	!system-llvm? (
@@ -93,7 +93,7 @@ DEPEND="
 	system-llvm? (
 		${LLVM_DEPEND}
 		llvm-libunwind? ( sys-libs/llvm-libunwind:= )
-		>=sys-devel/clang-runtime-14.0[libcxx]
+		>=llvm-core/clang-runtime-14.0[libcxx]
 	)
 	!system-llvm? (
 		!llvm-libunwind? (
@@ -220,7 +220,7 @@ pre_build_checks() {
 }
 
 llvm_check_deps() {
-	has_version -r "sys-devel/llvm:${LLVM_SLOT}[${LLVM_TARGET_USEDEPS// /,}]"
+	has_version -r "llvm-core/llvm:${LLVM_SLOT}[${LLVM_TARGET_USEDEPS// /,}]"
 }
 
 # Is LLVM being linked against libc++?

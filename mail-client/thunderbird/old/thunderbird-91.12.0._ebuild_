@@ -82,16 +82,16 @@ BDEPEND="${PYTHON_DEPS}
 	>=virtual/rust-1.51.0
 	|| (
 		(
-			sys-devel/clang:14
-			sys-devel/llvm:14
+			llvm-core/clang:14
+			llvm-core/llvm:14
 			clang? (
 				=sys-devel/lld-14*
 				pgo? ( =sys-libs/compiler-rt-sanitizers-14*[profile] )
 			)
 		)
 		(
-			sys-devel/clang:13
-			sys-devel/llvm:13
+			llvm-core/clang:13
+			llvm-core/llvm:13
 			clang? (
 				=sys-devel/lld-13*
 				pgo? ( =sys-libs/compiler-rt-sanitizers-13*[profile] )
@@ -183,8 +183,8 @@ DEPEND="${COMMON_DEPEND}
 S="${WORKDIR}/${PN}-${PV%_*}"
 
 llvm_check_deps() {
-	if ! has_version -b "sys-devel/clang:${LLVM_SLOT}" ; then
-		einfo "sys-devel/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
+	if ! has_version -b "llvm-core/clang:${LLVM_SLOT}" ; then
+		einfo "llvm-core/clang:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 		return 1
 	fi
 
@@ -1143,7 +1143,7 @@ src_install() {
 	rm "${ED}${MOZILLA_FIVE_HOME}/${PN}-bin" || die
 	dosym ${PN} ${MOZILLA_FIVE_HOME}/${PN}-bin
 
-	# Don't install llvm-symbolizer from sys-devel/llvm package
+	# Don't install llvm-symbolizer from llvm-core/llvm package
 	if [[ -f "${ED}${MOZILLA_FIVE_HOME}/llvm-symbolizer" ]] ; then
 		rm -v "${ED}${MOZILLA_FIVE_HOME}/llvm-symbolizer" || die
 	fi
