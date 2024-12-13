@@ -10,7 +10,6 @@ app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to 
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.21: Cross Platform file manager.
-app-misc/far2l 9999: Linux port of FAR Manager v2
 app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/trash-cli 0.24.4.17: Python scripts to manipulate trash cans via the command line
@@ -112,6 +111,7 @@ media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
+media-sound/mpd 0.23.16: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
@@ -124,7 +124,7 @@ media-video/ffmpeg 7.1: Complete solution to record/convert/stream audio and vid
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.2.7: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
-net-fs/nfs-utils 2.8.1: NFS client and server daemons
+net-fs/nfs-utils 2.8.2: NFS client and server daemons
 net-im/64Gram 1.1.52: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-im/whatsapp-for-linux 1.6.4 9999: An unofficial WhatsApp desktop application for Linux
