@@ -683,7 +683,7 @@ src_configure() {
 		if tc-is-gcc; then
 			have_switched_compiler=yes
 		fi
-		
+
 		AR=llvm-ar
 		CC=${CHOST}-clang-${version_clang}
 		CXX=${CHOST}-clang++-${version_clang}
@@ -913,15 +913,6 @@ src_configure() {
 			mozconfig_add_options_ac "linker is set to bfd" --enable-linker=bfd
 		fi
 
-		if use pgo ; then
-			mozconfig_add_options_ac '+pgo' MOZ_PGO=1
-
-			if use clang ; then
-				# Used in build/pgo/profileserver.py
-				export LLVM_PROFDATA="llvm-profdata"
-				mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
-			fi
-		fi
 	else
 		# Avoid auto-magic on linker
 		if use clang ; then
