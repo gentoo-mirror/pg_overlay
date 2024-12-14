@@ -93,7 +93,7 @@ kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 llvm-core/clang 19.1.5: C language family frontend for LLVM
 llvm-core/llvm 19.1.5: Low Level Virtual Machine
 llvm-runtimes/polly 19.1.5: Polyhedral optimizations for LLVM
-mail-client/thunderbird 128.5.1: Thunderbird Mail Client
+mail-client/thunderbird 128.5.2: Thunderbird Mail Client
 media-libs/jbig2dec 0.20: A decoder implementation of the JBIG2 image compression format
 media-libs/libglvnd 1.7.0: The GL Vendor-Neutral Dispatch library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
@@ -177,7 +177,7 @@ sys-process/procps 4.0.3_pre: Standard informational utilities and process-handl
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.82.0: Virtual for Rust language compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 133.0: Firefox Web Browser
+www-client/firefox 133.0.3: Firefox Web Browser
 www-client/vivaldi-snapshot 7.1.3527.3: A browser for our friends
 x11-base/xwayland 24.1.4: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
