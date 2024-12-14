@@ -16,6 +16,7 @@ KEYWORDS=""
 IUSE="bittorrent doc fasttrack gd gnutella magic +ocamlopt upnp"
 
 RDEPEND="dev-lang/perl
+	dev-libs/crypto++
 	dev-ml/camlp4:=
 	gd? ( media-libs/gd:2=[truetype] )
 	magic? ( sys-apps/file )
@@ -37,8 +38,6 @@ DEPEND="${RDEPEND}
 
 RESTRICT="!ocamlopt? ( strip )"
 
-#PATCHES=("${FILESDIR}/92.patch")
-
 pkg_setup() {
 	# dev-lang/ocaml creates its own objects but calls gcc for linking, which will
 	# results in relocations if gcc wants to create a PIE executable
@@ -54,7 +53,6 @@ src_prepare() {
 	cd config || die
 	eautoconf
 	cd .. || die
-#	sed -i "s|#include <caml/config.h>||" src/utils/lib/CryptoPP.h
 	if ! use ocamlopt; then
 		sed -i -e "s/ocamlopt/idontwantocamlopt/g" "${S}/config/configure" || die "failed to disable ocamlopt"
 	fi
