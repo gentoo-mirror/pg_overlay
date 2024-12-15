@@ -50,7 +50,6 @@ dev-util/cargo-ebuild 0.6.0: Generates an ebuild for a package using the in-tree
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.82.4: GDBus code and documentation generator
 dev-util/glib-utils 2.82.4: Build utilities for GLib using projects
-dev-util/glslang 1.4.303.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/librnp 9999: High performance C++ OpenPGP library
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
