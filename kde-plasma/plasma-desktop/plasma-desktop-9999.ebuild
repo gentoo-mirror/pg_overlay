@@ -63,13 +63,13 @@ COMMON_DEPEND="
 	>=kde-frameworks/kxmlgui-${KFMIN}:6
 	>=kde-frameworks/solid-${KFMIN}:6
 	>=kde-frameworks/sonnet-${KFMIN}:6
-	>=kde-plasma/kwin-${PVCUT}:6
-	>=kde-plasma/libksysguard-${PVCUT}:6
-	>=kde-plasma/libplasma-${PVCUT}:6
-	>=kde-plasma/plasma-activities-${PVCUT}:6
-	>=kde-plasma/plasma-activities-stats-${PVCUT}:6
-	>=kde-plasma/plasma-workspace-${PVCUT}:6[screencast?]
-	>=kde-plasma/plasma5support-${PVCUT}:6
+	>=kde-plasma/kwin-${KDE_CATV}:6
+	>=kde-plasma/libksysguard-${KDE_CATV}:6
+	>=kde-plasma/libplasma-${KDE_CATV}:6
+	>=kde-plasma/plasma-activities-${KDE_CATV}:6
+	>=kde-plasma/plasma-activities-stats-${KDE_CATV}:6
+	>=kde-plasma/plasma-workspace-${KDE_CATV}:6[screencast?]
+	>=kde-plasma/plasma5support-${KDE_CATV}:6
 	media-libs/libcanberra
 	x11-libs/libX11
 	x11-libs/libXi
@@ -103,29 +103,30 @@ DEPEND="${COMMON_DEPEND}
 	x11-base/xorg-proto
 	test? (
 		>=kde-frameworks/qqc2-desktop-style-${KFMIN}:6
-		>=kde-plasma/kactivitymanagerd-${PVCUT}:6
+		>=kde-plasma/kactivitymanagerd-${KDE_CATV}:6
 	)
 "
 RDEPEND="${COMMON_DEPEND}
 	!<kde-plasma/kdeplasma-addons-5.25.50
+	!<kde-plasma/plasma-workspace-6.0.80
 	dev-libs/kirigami-addons:6
 	>=dev-qt/qtwayland-${QTMIN}:6
 	>=kde-frameworks/kirigami-${KFMIN}:6
 	>=kde-frameworks/qqc2-desktop-style-${KFMIN}:6
-	>=kde-plasma/oxygen-${PVCUT}:6
+	>=kde-plasma/oxygen-${KDE_CATV}:6
 	kde-plasma/plasma-mimeapps-list
 	media-fonts/noto-emoji
 	sys-apps/util-linux
 	x11-apps/setxkbmap
 	x11-misc/xdg-user-dirs
-	screencast? ( >=kde-plasma/kpipewire-${PVCUT}:6 )
+	screencast? ( >=kde-plasma/kpipewire-${KDE_CATV}:6 )
 	webengine? ( >=net-libs/signon-oauth2-0.25_p20210102[qt6(+)] )
 "
 BDEPEND="
 	dev-util/intltool
-	dev-util/wayland-scanner
 	>=kde-frameworks/kcmutils-${KFMIN}:6
 	virtual/pkgconfig
+	input_devices_wacom? ( dev-util/wayland-scanner )
 "
 
 PATCHES=(
@@ -145,10 +146,6 @@ src_prepare() {
 	if ! use scim; then
 		sed -e "s/^pkg_check_modules.*SCIM/#&/" -i CMakeLists.txt || die
 	fi
-	#sed -e "s/^pkg_check_modules.*LIBWACOM/#&/" -i CMakeLists.txt || die
-	#sed -e "s/^add_subdirectory.*tablet/#&/" -i kcms/CMakeLists.txt || die
-	#sed -i '/LIBWACOM/d' CMakeLists.txt || die
-	#sed -i '/tablet/d' kcms/CMakeLists.txt || die
 }
 
 src_configure() {

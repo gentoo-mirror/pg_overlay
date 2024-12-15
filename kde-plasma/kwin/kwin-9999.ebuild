@@ -6,7 +6,6 @@ EAPI=8
 ECM_HANDBOOK="optional"
 ECM_TEST="true"
 KFMIN=9999
-PVCUT=$(ver_cut 1-3)
 QTMIN=6.7.2
 inherit ecm fcaps plasma.kde.org
 
@@ -15,7 +14,7 @@ DESCRIPTION="Flexible, composited Window Manager for windowing systems on Linux"
 LICENSE="GPL-2+"
 SLOT="6"
 KEYWORDS=""
-IUSE="accessibility +caps gles2-only lock screencast +shortcuts systemd"
+IUSE="accessibility gles2-only lock screencast +shortcuts systemd"
 
 RESTRICT="test"
 
@@ -51,10 +50,10 @@ COMMON_DEPEND="
 	>=kde-frameworks/kwidgetsaddons-${KFMIN}:6
 	>=kde-frameworks/kwindowsystem-${KFMIN}:6=[wayland]
 	>=kde-frameworks/kxmlgui-${KFMIN}:6
-	>=kde-plasma/breeze-${PVCUT}:6
-	>=kde-plasma/kdecoration-${PVCUT}:6
-	>=kde-plasma/kwayland-${PVCUT}:6
-	>=kde-plasma/plasma-activities-${PVCUT}:6
+	>=kde-plasma/breeze-${KDE_CATV}:6
+	>=kde-plasma/kdecoration-${KDE_CATV}:6
+	>=kde-plasma/kwayland-${KDE_CATV}:6
+	>=kde-plasma/plasma-activities-${KDE_CATV}:6
 	media-libs/fontconfig
 	media-libs/freetype
 	media-libs/lcms:2
@@ -71,13 +70,10 @@ COMMON_DEPEND="
 	x11-libs/xcb-util-keysyms
 	x11-libs/xcb-util-wm
 	accessibility? ( media-libs/libqaccessibilityclient:6 )
-	gles2-only? ( || (
-		>=media-libs/mesa-24.1.0_rc1[opengl]
-		<media-libs/mesa-24.1.0_rc1[gles2]
-	) )
-	lock? ( >=kde-plasma/kscreenlocker-${PVCUT}:6 )
-	screencast? ( >=media-video/pipewire-0.3.65:= )
-	shortcuts? ( >=kde-plasma/kglobalacceld-${PVCUT}:6 )
+	gles2-only? ( >=media-libs/mesa-24.1.0_rc1[opengl] )
+	lock? ( >=kde-plasma/kscreenlocker-${KDE_CATV}:6 )
+	screencast? ( >=media-video/pipewire-1.2.0:= )
+	shortcuts? ( >=kde-plasma/kglobalacceld-${KDE_CATV}:6 )
 "
 RDEPEND="${COMMON_DEPEND}
 	!kde-plasma/kdeplasma-addons:5
@@ -91,19 +87,18 @@ RDEPEND="${COMMON_DEPEND}
 	)
 	>=kde-frameworks/kirigami-${KFMIN}:6
 	>=kde-frameworks/kitemmodels-${KFMIN}:6
-	>=kde-plasma/libplasma-${PVCUT}:6[wayland(+)]
+	>=kde-plasma/libplasma-${KDE_CATV}:6[wayland(+)]
 	sys-apps/hwdata
-	x11-base/xwayland[libei]
+	>=x11-base/xwayland-23.1.0[libei]
 "
 DEPEND="${COMMON_DEPEND}
 	>=dev-libs/plasma-wayland-protocols-1.14.0
-	>=dev-libs/wayland-protocols-1.36
+	>=dev-libs/wayland-protocols-1.38
 	>=dev-qt/qttools-${QTMIN}:6[widgets]
 	>=dev-qt/qtbase-${QTMIN}:6[concurrent]
 	>=dev-qt/qtwayland-${QTMIN}:6
 	x11-libs/xcb-util-image
-	caps? ( sys-libs/libcap )
-	test? ( screencast? ( >=kde-plasma/kpipewire-${PVCUT}:6 ) )
+	test? ( screencast? ( >=kde-plasma/kpipewire-${KDE_CATV}:6 ) )
 "
 BDEPEND="
 	>=dev-qt/qtwayland-${QTMIN}:6
@@ -134,7 +129,7 @@ src_configure() {
 		# TODO: KWIN_BUILD_X11=$(usex xwayland) KWIN_BUILD_X11_BACKEND=$(usex X)
 		# KWIN_BUILD_NOTIFICATIONS exists, but kdeclarative still hard-depends on it
 		$(cmake_use_find_package accessibility QAccessibilityClient6)
-		$(cmake_use_find_package caps Libcap)
+		-DCMAKE_DISABLE_FIND_PACKAGE_Libcap=ON
 		-DKWIN_BUILD_SCREENLOCKER=$(usex lock)
 		-DKWIN_BUILD_GLOBALSHORTCUTS=$(usex shortcuts)
 	)
