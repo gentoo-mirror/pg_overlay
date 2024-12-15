@@ -89,7 +89,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-1.5.6-aix-dso.patch
 	"${FILESDIR}"/${PN}-1.8.1-revert_bdb6check.patch
 	"${FILESDIR}"/${PN}-1.8.16-javadoc-nolint.patch
-	"${FILESDIR}"/${PN}-1.14.3-ruby-c99.patch
 )
 
 want_apache
