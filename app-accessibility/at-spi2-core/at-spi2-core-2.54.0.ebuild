@@ -55,7 +55,6 @@ multilib_src_configure() {
 		$(meson_native_use_bool gtk-doc docs)
 		$(meson_native_use_feature introspection)
 		$(meson_feature X x11)
-		-Ddisable_p2p=false
 		-Datk_only=false
 	)
 	meson_src_configure
