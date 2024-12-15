@@ -2,13 +2,13 @@
 # Please add your descriptions to your package's metadata.xml ONLY.
 # * generated automatically using pmaint *
 
+app-accessibility/at-spi2-core:dbus-broker - Use DBus broker implementation instead of default DBus daemon
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
 app-emulation/nemu:network-map - Adds possibility of exporting network map to SVG
 app-emulation/nemu:ovf - Adds support for OVA/OVF import
 app-emulation/nemu:remote-api - Adds API for remote control
 app-emulation/nemu:spice - Adds Spice protocol support
 app-emulation/nemu:vnc-client - Adds support for external VNC client
-app-emulation/spice:smartcard - Enable smartcard remoting using app-emulation/libcacard
 app-misc/ddcutil:drm - Use x11-libs/libdrm for more verbose diagnostics.
 app-misc/ddcutil:usb-monitor - Adds support for monitors attached via USB.
 app-misc/ddcutil:user-permissions - Adds a udev rules to allow non-root users in the i2c group to access the /dev/i2c-* devices. If usb-monitor is selected, users will need to be added to the video group to access the USB monitor. Otherwise, only root will be able to use ddcutil.
@@ -75,7 +75,6 @@ dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
 dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
-dev-python/pyudev:qt5 - Install PyQt5 bindings
 dev-util/librnp:botan - Use Botan crypto backend instead of OpenSSL
 dev-util/scanmem:gui - Enable the GameConqueror GUI
 dev-util/sccache:azure - Enable Azure Blob Storage support
@@ -84,10 +83,6 @@ dev-util/sccache:dist-server - Enables the sccache-dist binary
 dev-util/sccache:gcs - Enable Google Cloud Storage support
 dev-util/sccache:redis - Enable Redis support
 dev-util/sccache:s3 - Enable Amazon S3 support
-dev-vcs/mercurial:chg - Support Mercurial command server client
-dev-vcs/mercurial:gpg - Support signing with GnuPG.
-dev-vcs/mercurial:rust - Use Rust extensions.
-dev-vcs/mercurial:tk - Install dev-lang/tk for hgk script.
 dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
@@ -96,32 +91,6 @@ games-engines/instead:sdl2 - Use libsdl2 instead of libsdl
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/rofi-wayland:drun - Desktop file mode
 gui-apps/rofi-wayland:windowmode - Window switcher mode
-gui-apps/sfwbar:X - Add support for xkb maps
-gui-apps/sfwbar:alsa - Add support for ALSA sound server
-gui-apps/sfwbar:mpd - Add support for Music Player Daemon
-gui-apps/sfwbar:pulse - Add support for Pulse Audio
-gui-apps/yambar:alsa - ALSA support
-gui-apps/yambar:backlight - Backlight support
-gui-apps/yambar:battery - Battery support
-gui-apps/yambar:clock - Clock support
-gui-apps/yambar:core - Compiles modules, particles and decorations as shared libraries, which are loaded on-demand
-gui-apps/yambar:cpu - CPU monitoring support
-gui-apps/yambar:disk-io - Disk I/O support
-gui-apps/yambar:dwl - DWL (dwm for wayland) support
-gui-apps/yambar:foreign-toplevel - Foreign toplevel (window tracking for Wayland) support
-gui-apps/yambar:i3 - i3+Sway support
-gui-apps/yambar:label - Label support
-gui-apps/yambar:memory - Memory monitoring support
-gui-apps/yambar:mpd - Music Player Daemon (MPD) support
-gui-apps/yambar:network - Network monitoring support
-gui-apps/yambar:pipewire - Pipewire support
-gui-apps/yambar:pulseaudio - PulseAudio support
-gui-apps/yambar:removables - Removables (USB sticks, CD-ROM etc) monitoring support
-gui-apps/yambar:river - River support
-gui-apps/yambar:script - Script support
-gui-apps/yambar:sway-xkb - keyboard support for Sway
-gui-apps/yambar:xkb - keyboard support for X11
-gui-apps/yambar:xwindow - XWindow (window tracking for X11) support
 gui-libs/gtk:broadway - Enable the GDK Broadway backend.
 gui-libs/gtk:cloudproviders - Enable GtkPlacesSidebar to access cloud services
 gui-libs/gtk:colord - Use x11-misc/colord for color management in printing
@@ -351,11 +320,6 @@ net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
 net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/pidgin:zephyr - Enable Zephyr protocol support
-net-libs/libsrtp:aesicm - Use AES ICM cryptographic algorithm
-net-libs/libsrtp:console - Use /dev/console instead of stdout for error messages
-net-libs/libsrtp:nss - Use NSS crypto primitives
-net-libs/libsrtp:openssl - Use OpenSSL crypto primitives
-net-libs/libsrtp:syslog - Use syslog for error messages
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:corepack - Enable the experimental corepack package management tool
 net-libs/nodejs:inspector - Enable V8 inspector
@@ -373,23 +337,6 @@ net-misc/freerdp:openh264 - Enable H.264 support using media-libs/openh264
 net-misc/freerdp:server - Build server binaries
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
-net-misc/remmina:gvnc - Enable GVNC plugin using gtk-vnc, suitable for KVM and Vino servers
-net-misc/remmina:kwallet - Enable KDE Wallet plugin
-net-misc/remmina:spice - Support connecting to SPICE-enabled virtual machines
-net-misc/remmina:ssh - Enable support for SSH/SFTP protocol
-net-misc/rsync:rrsync - Install rrsync script to setup restricted rsync users via ssh logins
-net-misc/rsync:stunnel - Provide helper scripts for using rsync via >=net-misc/stunnel-4
-net-misc/rsync:system-zlib - Use system zlib instead of bundled one. This is incompatible with older rsync releases!
-net-misc/rsync:xxhash - Enable dev-libs/xxhash support for hashing
-net-misc/spice-gtk:gtk3 - Build the spice client (spicy), requires x11-libs/gtk+:3
-net-misc/spice-gtk:mjpeg - Enable builtin mjpeg video decoder
-net-misc/spice-gtk:policykit - Enable sys-auth/polkit support for the usbredir acl helper
-net-misc/spice-gtk:usbredir - Use sys-apps/usbredir to redirect USB devices to another machine over TCP
-net-misc/spice-gtk:webdav - Support for folder-sharing between guest and client using net-libs/phodav
-net-misc/wget:cookie-check - Enable cookie checks via net-libs/libpsl
-net-misc/wget:metalink - Enable support for media-libs/libmetalink
-net-misc/wget:ntlm - Enable support for NTLM (Windows-based) authorization
-net-misc/wget:uuid - Generate UUIDs for the WARC (Web ARChive file format) using libuuid; otherwise use a simple RNG (random number generator)
 net-nds/rpcbind:remotecalls - Enable remote calls
 net-nds/rpcbind:warmstarts - Enables rpcbind to cache configuration for warm restarts
 net-p2p/amule:daemon - Enable amule daemon
