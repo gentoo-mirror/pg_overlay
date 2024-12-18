@@ -56,7 +56,6 @@ dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud s
 dev-vcs/subversion 1.14.5: Advanced version control system
 games-board/aisleriot 3.22.26: A collection of solitaire card games for GNOME
 games-board/openpref 0.1.3: OpenPref is open source implementation of European trick-taking game Preferans against two virtual players.
-games-engines/instead 3.5.2: INSTEAD text-based quest game engine
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-base/librsvg 2.59.2: Scalable Vector Graphics (SVG) rendering library
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
@@ -134,18 +133,12 @@ sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices o
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
-sys-block/dust 1.1.1: A more intuitive version of du
-sys-block/ncdu 2.5: NCurses Disk Usage
 sys-boot/grub 2.12-r5: GNU GRUB boot loader
-sys-devel/clang 19.1.5: C language family frontend for LLVM
-sys-devel/llvm 19.1.5: Low Level Virtual Machine
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-libs/libblockdev 3.2.1_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
-sys-process/bpytop 1.0.68-r1: Linux/OSX/FreeBSD resource monitor
-sys-process/procps 4.0.3_pre: Standard informational utilities and process-handling tools
 virtual/httpd-php 8.3: Virtual to provide PHP-enabled webservers
 virtual/rust 1.82.0: Virtual for Rust language compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
@@ -156,7 +149,6 @@ x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.42-r1: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.2.6: GTK version of wxWidgets, a cross-platform C++ GUI toolkit
-x11-misc/clipit 9999: Lightweight GTK+ clipboard manager. Fork of Parcellite.
 x11-plugins/pidgin-skypeweb 9999: SkypeWeb Plugin for Pidgin
 x11-plugins/pidgin-telegram 1.4.7 9999: A libpurple protocol plugin that adds support for the Telegram messenger
 x11-plugins/purple-matrix 9999: Libpurple protocol plugin for matrix

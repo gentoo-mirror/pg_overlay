@@ -79,8 +79,6 @@ dev-util/sccache:s3 - Enable Amazon S3 support
 dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
-games-engines/instead:doc - Include some additional documentation on how to create games for the instead engine
-games-engines/instead:sdl2 - Use libsdl2 instead of libsdl
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/rofi-wayland:drun - Desktop file mode
 gui-apps/rofi-wayland:windowmode - Window switcher mode
@@ -361,16 +359,6 @@ sys-boot/grub:libzfs - Enable support for sys-fs/zfs
 sys-boot/grub:mount - Build and install the grub-mount utility
 sys-boot/grub:themes - Build and install GRUB themes (starfield)
 sys-boot/grub:truetype - Build and install grub-mkfont conversion utility
-sys-devel/clang:extra - Build extra tools (clangd, clang-tidy and a few more)
-sys-devel/clang:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
-sys-devel/clang:static-analyzer - Install the Clang static analyzer
-sys-devel/llvm:binutils-plugin - Build the binutils plugin
-sys-devel/llvm:debuginfod - Install llvm-debuginfod (requires net-misc/curl and dev-cpp/cpp-httplib)
-sys-devel/llvm:doc - Build and install the HTML documentation and regenerate the man pages
-sys-devel/llvm:exegesis - Enable performance counter support for llvm-exegesis tool that can be used to measure host machine instruction characteristics
-sys-devel/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
-sys-devel/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
-sys-devel/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
 sys-fs/udisks:daemon - Build the system daemon, not just the client tool
 sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
 sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
