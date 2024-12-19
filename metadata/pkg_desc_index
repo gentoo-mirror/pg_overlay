@@ -11,8 +11,8 @@ app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.21: Cross Platform file manager.
 app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-office/libreoffice 24.8.4.1: A full office productivity suite
-app-office/libreoffice-l10n 24.8.4.1: Translations for the Libreoffice suite
+app-office/libreoffice 24.8.4.2: A full office productivity suite
+app-office/libreoffice-l10n 24.8.4.2: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.2.2: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.9: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
