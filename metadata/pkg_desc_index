@@ -11,8 +11,8 @@ app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.21: Cross Platform file manager.
 app-misc/jdupes 1.28.0: Identify duplicate files on the filesystem
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
-app-office/libreoffice 24.8.4.2: A full office productivity suite
-app-office/libreoffice-l10n 24.8.4.2: Translations for the Libreoffice suite
+app-office/libreoffice 24.8.4.2 25.2.0.1: A full office productivity suite
+app-office/libreoffice-l10n 24.8.4.2 25.2.0.1: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.2.2: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.9: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
@@ -79,7 +79,6 @@ media-libs/libsdl2 2.30.10: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
-media-libs/taglib 2.0.2_pre: Library for reading and editing audio meta data
 media-libs/tg_owt 0_pre20231221 0_pre20240804-r2: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
