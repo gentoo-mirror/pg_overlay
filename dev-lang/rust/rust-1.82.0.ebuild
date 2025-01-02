@@ -62,7 +62,7 @@ for _s in ${LLVM_VALID_SLOTS[@]}; do
 	for _x in ${ALL_LLVM_TARGETS[@]}; do
 		LLVM_DEPEND+="
 			${_x}? ( llvm-core/llvm:${_s}[${_x}(-)] )
-			wasm? ( sys-devel/lld:${_s} )"
+			wasm? ( llvm-core/lld:${_s} )"
 	done
 	LLVM_DEPEND+=" )"
 done

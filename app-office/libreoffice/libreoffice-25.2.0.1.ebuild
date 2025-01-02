@@ -265,15 +265,12 @@ BDEPEND="
 	virtual/pkgconfig
 	clang? (
 		|| (
+			(	llvm-core/clang:19
+				llvm-core/llvm:19
+				=llvm-core/lld-19*	)
 			(	llvm-core/clang:18
 				llvm-core/llvm:18
-				=sys-devel/lld-18*	)
-			(	llvm-core/clang:17
-				llvm-core/llvm:17
-				=sys-devel/lld-17*	)
-			(	llvm-core/clang:16
-				llvm-core/llvm:16
-				=sys-devel/lld-16*	)
+				=llvm-core/lld-18*	)
 		)
 	)
 	odk? ( >=app-text/doxygen-1.8.4 )

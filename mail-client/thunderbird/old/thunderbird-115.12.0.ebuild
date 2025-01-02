@@ -85,7 +85,7 @@ BDEPEND="${PYTHON_DEPS}
 			llvm-core/clang:18
 			llvm-core/llvm:18
 			clang? (
-				sys-devel/lld:18
+				llvm-core/lld:18
 				virtual/rust:0/llvm-18
 				pgo? ( =sys-libs/compiler-rt-sanitizers-18*[profile] )
 			)
@@ -94,7 +94,7 @@ BDEPEND="${PYTHON_DEPS}
 			llvm-core/clang:17
 			llvm-core/llvm:17
 			clang? (
-				sys-devel/lld:17
+				llvm-core/lld:17
 				virtual/rust:0/llvm-17
 				pgo? ( =sys-libs/compiler-rt-sanitizers-17*[profile] )
 			)
@@ -217,8 +217,8 @@ llvm_check_deps() {
 	fi
 
 	if use clang && ! tc-ld-is-mold ; then
-		if ! has_version -b "sys-devel/lld:${LLVM_SLOT}" ; then
-			einfo "sys-devel/lld:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
+		if ! has_version -b "llvm-core/lld:${LLVM_SLOT}" ; then
+			einfo "llvm-core/lld:${LLVM_SLOT} is missing! Cannot use LLVM slot ${LLVM_SLOT} ..." >&2
 			return 1
 		fi
 
