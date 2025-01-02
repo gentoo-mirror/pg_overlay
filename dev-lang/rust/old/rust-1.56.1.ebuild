@@ -67,7 +67,7 @@ done
 unset _s _x
 LLVM_DEPEND+=" )
 	<llvm-core/llvm-$(( LLVM_MAX_SLOT + 1 )):=
-	wasm? ( sys-devel/lld )
+	wasm? ( llvm-core/lld )
 "
 
 # to bootstrap we need at least exactly previous version, or same.
