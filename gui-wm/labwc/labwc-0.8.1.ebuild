@@ -1,4 +1,4 @@
-# Copyright 2025 Vincent Ahluwalia
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -17,7 +17,7 @@ IUSE="+svg +icons X nls man test static_analyzer"
 RESTRICT="network-sandbox"
 RDEPEND="
 	>=dev-libs/wayland-1.19.0
-	>=gui-libs/wlroots-0.18.1[X?]
+	>=gui-libs/wlroots-0.18.0[X?]
 	dev-libs/libxml2
 	dev-libs/glib
 	x11-libs/cairo[X?]
