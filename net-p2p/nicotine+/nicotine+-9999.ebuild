@@ -12,7 +12,7 @@ DESCRIPTION="Graphical client for the Soulseek peer to peer network written in P
 HOMEPAGE="https://nicotine-plus.org/"
 EGIT_REPO_URI="https://github.com/nicotine-plus/nicotine-plus"
 
-LICENSE="GPL-3+"
+LICENSE="GPL-3+ MIT CC-BY-SA-4.0"
 SLOT="0"
 KEYWORDS=""
 IUSE="test"
@@ -41,6 +41,7 @@ src_prepare() {
 	sed -i -e 's:test_update_check:_&:' \
 		"${S}"/pynicotine/tests/unit/test_version.py || die
 }
+
 pkg_postinst() {
 	xdg_pkg_postinst
 	xdg_icon_cache_update

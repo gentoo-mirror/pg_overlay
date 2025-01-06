@@ -45,8 +45,8 @@ RESTRICT="!test? ( test )"
 
 COMMON_DEPEND="
 	media-libs/libass:=[fontconfig]
-	>=media-libs/libplacebo-6.338.2:=[opengl?,vulkan?]
-	>=media-video/ffmpeg-6.1:=[encode,soc(-)?,threads,vaapi?,vdpau?]
+	>=media-libs/libplacebo-7.349.0:=[opengl?,vulkan?]
+	>=media-video/ffmpeg-6.1:=[soc(-)?,threads,vaapi?,vdpau?]
 	X? (
 		x11-libs/libX11
 		x11-libs/libXScrnSaver
@@ -63,6 +63,7 @@ COMMON_DEPEND="
 		dev-libs/libcdio:=
 	)
 	drm? (
+		media-libs/libdisplay-info:=
 		x11-libs/libdrm
 		egl? ( media-libs/mesa[gbm(+)] )
 	)
