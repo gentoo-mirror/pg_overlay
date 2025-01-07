@@ -30,7 +30,6 @@ dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell a
 dev-lang/python 3.13.1_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.82.0 1.82.0-r100 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
-dev-libs/kweathercore 9999: Library for retrieval of weather information including forecasts and alerts
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libnl 3.11.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
@@ -111,6 +110,7 @@ net-libs/udns 0.6: Async-capable DNS stub resolver library
 net-misc/anydesk 6.4.0: Feature rich multi-platform remote desktop application
 net-misc/freerdp 3.10.2: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
+net-misc/remmina 1.4.39: A GTK+ RDP, SPICE, VNC and SSH client
 net-nds/rpcbind 1.2.7: portmap replacement which supports RPC over various protocols
 net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
