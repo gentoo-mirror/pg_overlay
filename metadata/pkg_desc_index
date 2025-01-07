@@ -71,7 +71,7 @@ kde-plasma/kwin 9999: Flexible, composited Window Manager for windowing systems 
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
-llvm-runtimes/polly 19.1.6: Polyhedral optimizations for LLVM
+llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 128.5.2: Thunderbird Mail Client
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libsdl2 2.30.11: Simple Direct Media Layer
