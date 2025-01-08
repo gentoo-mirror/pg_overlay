@@ -1158,7 +1158,6 @@ src_configure() {
 	mozconfig_add_options_ac '' --disable-necko-wifi
 
 	mozconfig_add_options_ac '' --disable-parental-controls
-	mozconfig_add_options_ac '' --disable-perf
 	mozconfig_add_options_ac '' --disable-profiling
 
 	mozconfig_add_options_ac '' --disable-reflow-perf
