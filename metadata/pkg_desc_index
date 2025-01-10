@@ -97,6 +97,7 @@ media-video/ffmpeg 7.1: Complete solution to record/convert/stream audio and vid
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.2.7: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
+net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
 net-fs/nfs-utils 2.8.2: NFS client and server daemons
 net-im/64Gram 1.1.56: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
