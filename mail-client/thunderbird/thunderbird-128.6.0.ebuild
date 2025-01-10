@@ -1,9 +1,9 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-128esr-patches-07.tar.xz"
+FIREFOX_PATCHSET="firefox-128esr-patches-08.tar.xz"
 
 LLVM_COMPAT=( 18 19 )
 
@@ -903,7 +903,7 @@ src_configure() {
 
 			mozconfig_add_options_ac '+lto' --enable-lto=cross
 			mozconfig_add_options_ac '+lto-cross' MOZ_LTO=cross
-			mozconfig_add_options_ac '+lto-cross' MOZ_LTO_RUST=1
+			mozconfig_add_options_ac '+lto-rust' MOZ_LTO_RUST=1
 			mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
 
 		else
@@ -911,6 +911,8 @@ src_configure() {
 			# mold does not support gcc+lto combination.
 			mozconfig_add_options_ac '+lto' --enable-lto=full
 			mozconfig_add_options_ac "linker is set to bfd" --enable-linker=bfd
+			mozconfig_add_options_ac '+lto-rust' MOZ_LTO_RUST=1
+			mozconfig_add_options_ac '+pgo-rust' MOZ_PGO_RUST=1
 		fi
 
 	else
