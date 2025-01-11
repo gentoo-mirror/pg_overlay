@@ -36,6 +36,7 @@ src_prepare() {
 src_configure() {
 	local myeconfargs=(
 		--disable-werror
+		--without-libkrb5
 		$(use_enable static-libs static)
 		$(use_enable utils)
 	)
