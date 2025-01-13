@@ -81,10 +81,6 @@ dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaint
 gnome-base/librsvg:tools - Build svg viewer tool
 gui-apps/rofi-wayland:drun - Desktop file mode
 gui-apps/rofi-wayland:windowmode - Window switcher mode
-gui-libs/gtk:broadway - Enable the GDK Broadway backend.
-gui-libs/gtk:cloudproviders - Enable GtkPlacesSidebar to access cloud services
-gui-libs/gtk:colord - Use x11-misc/colord for color management in printing
-gui-libs/gtk:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 kde-plasma/kwin:lock - Enable screen locking via kde-plasma/kscreenlocker
 kde-plasma/kwin:screencast - Enable screencast portal using media-video/pipewire
 kde-plasma/kwin:shortcuts - Enable global shortcuts support via kde-plasma/kglobalacceld
