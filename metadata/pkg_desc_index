@@ -128,7 +128,8 @@ sys-apps/polychromatic 9999: RGB lighting management software for GNU/Linux powe
 sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
-sys-auth/elogind 246.9999 252.9999 255.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/elogind 255.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/polkit 126_pre: Policy framework for controlling privileges for system-wide services
 sys-boot/grub 2.12-r5: GNU GRUB boot loader
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
