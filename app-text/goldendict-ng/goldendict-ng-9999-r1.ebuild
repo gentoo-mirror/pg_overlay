@@ -76,3 +76,12 @@ install_locale() {
 	doins "${S}"/.qm/${1}.qm
 	eend $? || die "failed to install $1 locale"
 }
+
+
+pkg_postinst() {
+	xdg_desktop_database_update
+}
+
+pkg_postrm() {
+	xdg_desktop_database_update
+}
