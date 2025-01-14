@@ -90,6 +90,7 @@ src_configure() {
 		-Dtests=$(usex test true false)
 		-Dutmp=$(usex elibc_musl false true)
 		-Dmode=release
+		-Defi=true
 		-Dzshcompletiondir=""
 		-Db_lto=true
 	)
