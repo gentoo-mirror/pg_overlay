@@ -123,6 +123,7 @@ net-vpn/networkmanager-l2tp 1.20.16: NetworkManager L2TP plugin
 sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 14.1.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
+sys-apps/hwinfo 23.3: Hardware detection tool used in SuSE Linux
 sys-apps/openrazer 3.9.0-r1: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/polychromatic 9999: RGB lighting management software for GNU/Linux powered by OpenRazer
 sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices on Linux
