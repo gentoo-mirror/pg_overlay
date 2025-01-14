@@ -1,5 +1,5 @@
 #!/sbin/openrc-run
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2017 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 
 depend() {
@@ -21,18 +21,7 @@ start() {
 }
 
 stop() {
-	local stop_timeout="SIGTERM/10/SIGKILL/3"
-
-	if [ ${RC_CMD} = "restart" ] ; then
-		ebegin "Interrupting elogind"
-		stop_timeout="SIGINT/10/SIGINT/5/${stop_timeout}"
-	else
-		ebegin "Stopping elogind"
-	fi
-
-	start-stop-daemon --stop --quiet \
-		--retry ${stop_timeout} \
-		--pidfile "${ELOGIND_PIDFILE}"
-
+	ebegin "Stopping elogind"
+	start-stop-daemon --stop --quiet --pidfile "${ELOGIND_PIDFILE}"
 	eend $?
 }

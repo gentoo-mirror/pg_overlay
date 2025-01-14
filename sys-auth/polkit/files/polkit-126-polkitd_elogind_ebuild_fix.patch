@@ -1,0 +1,35 @@
+From 416fb747652f59c75637ff4520c5e58e71bf1cfe Mon Sep 17 00:00:00 2001
+From: Lars Wendler <polynomial-c@gmx.de>
+Date: Tue, 14 Jan 2025 09:09:35 +0100
+Subject: [PATCH] Fix build with elogind as session tracker
+
+Issue: https://github.com/polkit-org/polkit/issues/539
+---
+ src/polkitbackend/meson.build | 7 ++++++-
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+diff --git a/src/polkitbackend/meson.build b/src/polkitbackend/meson.build
+index fc35e19..c4cf2db 100644
+--- a/src/polkitbackend/meson.build
++++ b/src/polkitbackend/meson.build
+@@ -69,11 +69,16 @@ c_flags = [
+   '-DPOLKIT_BACKEND_I_KNOW_API_IS_SUBJECT_TO_CHANGE',
+ ]
+ 
++polkitd_dep = [ libpolkit_gobject_dep ]
++if enable_logind and session_tracking == 'elogind'
++  polkitd_dep += logind_dep
++endif
++
+ executable(
+   program,
+   program + '.c',
+   include_directories: top_inc,
+-  dependencies: libpolkit_gobject_dep,
++  dependencies: polkitd_dep,
+   c_args: c_flags,
+   link_with: libpolkit_backend,
+   install: true,
+-- 
+2.48.0
+

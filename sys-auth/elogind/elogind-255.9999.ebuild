@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,7 +15,7 @@ EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
-IUSE="+acl audit debug doc efi +pam +policykit selinux test"
+IUSE="+acl audit debug doc +pam +policykit selinux test"
 RESTRICT="!test? ( test )"
 
 BDEPEND="
@@ -45,7 +45,8 @@ PDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/${PN}-252-docs.patch"
+	# all downstream patches:
+	"${FILESDIR}/${PN}-252.9-nodocs.patch"
 )
 
 python_check_deps() {
@@ -65,39 +66,30 @@ src_prepare() {
 }
 
 src_configure() {
-	python_setup
-
 	# Removed -Ddefault-hierarchy=${cgroupmode}
-	# -> It is completely irrelevant with "-Dcgroup-controller=openrc".
+	# -> It is completely irrelevant with -Dcgroup-controller=openrc anyway.
 	local emesonargs=(
 		$(usex debug "-Ddebug-extra=elogind" "")
 		-Dbuildtype=$(usex debug debug release)
-		--libdir="${EPREFIX}"/usr/$(get_libdir)
-		--libexecdir="${EPREFIX}"/$(get_libdir)/elogind
+		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
+		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
+		-Dudevrulesdir="${EPREFIX}$(get_udevdir)"/rules.d
+		--libexecdir="lib/elogind"
 		--localstatedir="${EPREFIX}"/var
-		--prefix="${EPREFIX}/usr"
-		--sysconfdir="${EPREFIX}"/etc
-		-Dacl=$(usex acl enabled disabled)
-		-Daudit=$(usex audit enabled disabled)
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
+		-Dman=auto
+		-Dsmack=false
 		-Dcgroup-controller=openrc
 		-Ddefault-kill-user-processes=true
-		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
-		-Ddbuspolicydir="${EPREFIX}"/usr/share/dbus-1/system.d
-		-Ddbussystemservicedir="${EPREFIX}"/usr/share/dbus-1/system-services
-		-Defi=$(usex efi true false)
+		-Dacl=$(usex acl enabled disabled)
+		-Daudit=$(usex audit enabled disabled)
 		-Dhtml=$(usex doc auto disabled)
-		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
-		-Dinstall-sysconfdir=true
-		-Dman=auto
-		-Dmode=release
 		-Dpam=$(usex pam enabled disabled)
-		-Dpamlibdir=$(getpam_mod_dir)
+		-Dpamlibdir="$(getpam_mod_dir)"
 		-Dselinux=$(usex selinux enabled disabled)
-		-Dsmack=true
 		-Dtests=$(usex test true false)
-		-Dudevrulesdir="$(get_udevdir)"/rules.d
 		-Dutmp=$(usex elibc_musl false true)
+		-Dmode=release
 		-Dzshcompletiondir=""
 		-Db_lto=true
 	)
@@ -108,11 +100,9 @@ src_configure() {
 src_install() {
 	meson_src_install
 
-	keepdir /var/lib/elogind
-	newinitd "${FILESDIR}"/${PN}.init ${PN}
+	newinitd "${FILESDIR}"/${PN}.init-r1 ${PN}
 
-	sed -e "s/@libdir@/$(get_libdir)/" "${FILESDIR}"/${PN}.conf.in > ${PN}.conf || die
-	newconfd ${PN}.conf ${PN}
+	newconfd "${FILESDIR}"/${PN}.conf ${PN}
 }
 
 pkg_postinst() {
@@ -139,15 +129,15 @@ pkg_postinst() {
 		elog "elogind is currently not started from any runlevel."
 		elog "You may add it to the boot runlevel by:"
 		elog "# rc-update add elogind boot"
-	fi
-	elog
-	elog "Alternatively, you can leave elogind out of any"
-	elog "runlevel. It will then be started automatically"
-	if use pam; then
-		elog "when the first service calls it via dbus, or"
-		elog "the first user logs into the system."
-	else
-		elog "when the first service calls it via dbus."
+		elog
+		elog "Alternatively, you can leave elogind out of any"
+		elog "runlevel. It will then be started automatically"
+		if use pam; then
+			elog "when the first service calls it via dbus, or"
+			elog "the first user logs into the system."
+		else
+			elog "when the first service calls it via dbus."
+		fi
 	fi
 
 	for version in ${REPLACING_VERSIONS}; do
@@ -159,6 +149,22 @@ pkg_postinst() {
 			elog "those to a new configuration file in /etc/elogind/sleep.conf.d/."
 		fi
 	done
+
+	local file files
+	# find custom hooks excluding known (nvidia-drivers, sys-power/tlp)
+	if [[ -d "${EROOT}"/$(get_libdir)/elogind/system-sleep ]]; then
+		readarray -t files < <(find "${EROOT}"/$(get_libdir)/elogind/system-sleep/ \
+		          -type f \( -not -iname ".keep_dir" -a \
+		          -not -iname "nvidia" -a \
+		          -not -iname "49-tlp-sleep" \) || die)
+	fi
+	if [[ ${#files[@]} -gt 0 ]]; then
+		ewarn "*** Custom hooks in obsolete path detected ***"
+		for file in "${files[@]}"; do
+			ewarn "    ${file}"
+		done
+		ewarn "Move these custom hooks to ${EROOT}/etc/elogind/system-sleep/ instead."
+	fi
 }
 
 pkg_postrm() {
