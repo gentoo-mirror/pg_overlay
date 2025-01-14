@@ -1,10 +1,10 @@
-We don't want the build system to install to docdir for us.
-
---- a/meson.build	2020-03-12 20:33:40.000000000 +0100
-+++ b/meson.build	2020-03-12 22:46:08.020716935 +0100
-@@ -3352,15 +3352,11 @@
- # install_data('modprobe.d/systemd.conf',
- #              install_dir : modprobedir)
+diff --git a/meson.build b/meson.build
+index 694a2fd97..9b97cafef 100644
+--- a/meson.build
++++ b/meson.build
+@@ -4528,15 +4528,11 @@ subdir('shell-completion/zsh')
+ #                      install_dir : xinitrcdir)
+ # endif
  #endif // 0
 -install_data('LICENSE.GPL2',
 -             'LICENSE.LGPL2.1',
@@ -18,12 +18,11 @@ We don't want the build system to install to docdir for us.
  #if 0 /// irrelevant for elogind
  #              'docs/DISTRO_PORTING.md',
  #              'docs/ENVIRONMENT.md',
-@@ -3369,8 +3365,6 @@
+@@ -4545,7 +4541,6 @@ install_data('LICENSE.GPL2',
  #              'docs/TRANSLATORS.md',
  #              'docs/UIDS-GIDS.md',
  #endif // 0
--             'src/libelogind/sd-bus/GVARIANT-SERIALIZATION',
 -             install_dir : docdir)
  
- #if 0 /// UNNEEDED by elogind
- # meson.add_install_script('sh', '-c', mkdir_p.format(systemdstatedir))
+ #if 0 /// irrelevant for elogind
+ # install_subdir('LICENSES',
