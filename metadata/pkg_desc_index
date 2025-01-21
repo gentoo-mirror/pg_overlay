@@ -93,7 +93,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/ffmpeg 7.1: Complete solution to record/convert/stream audio and video. Includes libavcodec
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.2.7: Multimedia processing graphs
+media-video/pipewire 1.2.7-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
 net-fs/nfs-utils 2.8.2: NFS client and server daemons
