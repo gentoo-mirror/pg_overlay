@@ -319,10 +319,6 @@ net-misc/freerdp:openh264 - Enable H.264 support using media-libs/openh264
 net-misc/freerdp:server - Build server binaries
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
-net-misc/remmina:gvnc - Enable GVNC plugin using gtk-vnc, suitable for KVM and Vino servers
-net-misc/remmina:kwallet - Enable KDE Wallet plugin
-net-misc/remmina:spice - Support connecting to SPICE-enabled virtual machines
-net-misc/remmina:ssh - Enable support for SSH/SFTP protocol
 net-nds/rpcbind:remotecalls - Enable remote calls
 net-nds/rpcbind:warmstarts - Enables rpcbind to cache configuration for warm restarts
 net-p2p/amule:daemon - Enable amule daemon
