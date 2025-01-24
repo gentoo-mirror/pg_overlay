@@ -384,6 +384,18 @@ sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
 sys-auth/elogind:efi - Support rebooting into EFI firmware
+sys-block/fio:aio - Enable AIO ioengine
+sys-block/fio:curl - Enable HTTP engine for S3 and WebDav support support via net-misc/curl
+sys-block/fio:glusterfs - Enable GlusterFS gfapi support via sys-cluster/glusterfs
+sys-block/fio:gnuplot - Install tools for generating gnuplots
+sys-block/fio:io-uring - Enable efficient I/O via sys-libs/liburing.
+sys-block/fio:nfs - Enable NFS support
+sys-block/fio:numa - Enable numa support
+sys-block/fio:pandas - Install dependencies for complex python scripts
+sys-block/fio:rbd - Enable Rados block device support via sys-cluster/ceph
+sys-block/fio:rdma - Enable infiniband support via sys-cluster/rdma-core
+sys-block/fio:tcmalloc - Link against dev-util/google-perftools by default which will speed up USE=rbd up to 20%
+sys-block/fio:zbc - Enable ZBC & ZAC disks via sys-block/libzbc.
 sys-boot/grub:device-mapper - Enable support for devmapper. Required for LUKS or LVM volume detection.
 sys-boot/grub:efiemu - Build and install the efiemu runtimes
 sys-boot/grub:fonts - Build and install fonts for the gfxterm module
