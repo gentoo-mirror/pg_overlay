@@ -127,7 +127,7 @@ sys-apps/dbus 1.16.0_pre: A message bus system, a simple way for applications to
 sys-apps/hwinfo 23.3: Hardware detection tool used in SuSE Linux
 sys-apps/openrazer 3.9.0-r1: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/polychromatic 0.9.3 9999: RGB lighting management software for GNU/Linux powered by OpenRazer
-sys-apps/razer-cli 2.2.1: Command line interface for controlling Razer devices on Linux
+sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 255.9999: The systemd project's logind, extracted to a standalone package
