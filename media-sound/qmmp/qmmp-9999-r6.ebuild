@@ -23,9 +23,9 @@ LICENSE="GPL-2"
 SLOT="0"
 # KEYWORDS further up
 IUSE="aac +alsa analyzer archive bs2b cdda cover crossfade cue curl +dbus enca
-ffmpeg flac game gnome jack ladspa lyrics +mad midi mms mplayer musepack
+ffmpeg flac game gnome jack ladspa libxmp lyrics +mad midi mms mplayer musepack
 notifier opus oss pipewire projectm pulseaudio qsui qtmedia scrobbler shout sid
-sndfile soxr stereo tray udisks +vorbis wavpack xmp"
+sndfile soxr stereo tray udisks +vorbis wavpack"
 
 REQUIRED_USE="
 	gnome? ( dbus )
@@ -55,6 +55,7 @@ RDEPEND="
 		virtual/jack
 	)
 	ladspa? ( media-plugins/cmt-plugins )
+	libxmp? ( media-libs/libxmp )
 	mad? (
 		media-libs/libmad:=
 		media-sound/mpg123:=
@@ -66,8 +67,7 @@ RDEPEND="
 	opus? ( media-libs/opusfile )
 	pipewire? ( media-video/pipewire )
 	projectm? (
-		dev-qt/qtbase:6[opengl]
-		media-libs/libglvnd
+		dev-qt/qtbase:6[-gles2-only,opengl]
 		media-libs/libprojectm:=
 	)
 	pulseaudio? ( media-libs/libpulse )
@@ -83,11 +83,9 @@ RDEPEND="
 		media-libs/libvorbis
 	)
 	wavpack? ( media-sound/wavpack )
-	xmp? ( media-libs/libxmp )
 "
-DEPEND="${RDEPEND}
-	dev-qt/qttools:6[linguist]
-"
+DEPEND="${RDEPEND}"
+BDEPEND="dev-qt/qttools:6[linguist]"
 
 DOCS=( AUTHORS ChangeLog README )
 

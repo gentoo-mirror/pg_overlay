@@ -141,18 +141,18 @@ src_configure () {
 	tc-export CC CXX LD AR NM OBJDUMP RANLIB PKG_CONFIG
 
 	local myconf=(
-		"--disable-static"
-		"--disable-staticlink"
 		"--disable-portable"
 		"--disable-rpath"
+		"--disable-static"
+		"--disable-staticlink"
 
-		"--disable-libmad"
-		"--disable-gtk2"
 		"--disable-adplug"
+		"--disable-alac"
 		"--disable-coreaudio"
 		"--disable-dumb"
-		"--disable-alac"
 		"--disable-gme"
+		"--disable-gtk2"
+		"--disable-libmad"
 		"--disable-mms"
 		"--disable-mono2stereo"
 		"--disable-psf"
@@ -200,10 +200,11 @@ src_configure () {
 		"$(use_enable zip vfs-zip)"
 
 		"--enable-gtk3"
-		"--enable-vfs-curl"
-		"--enable-shared"
 		"--enable-m3u"
+		"--enable-medialib"
 		"--enable-pltbrowser"
+		"--enable-shared"
+		"--enable-vfs-curl"
 	)
 
 	econf "${myconf[@]}"
