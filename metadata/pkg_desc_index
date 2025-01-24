@@ -22,7 +22,7 @@ app-text/goldendict-ng 9999 9999-r1: The Next Generation GoldenDict. Feature-ric
 dev-cpp/atkmm 2.28.4 2.36.3: C++ interface for the ATK library
 dev-cpp/cairomm 1.14.5: C++ bindings for the Cairo vector graphics library
 dev-cpp/glibmm 2.66.7 2.82.0: C++ interface for glib2
-dev-cpp/gtkmm 2.24.5-r2 3.24.9 4.12.0 4.14.0: C++ interface for GTK+
+dev-cpp/gtkmm 3.24.9: C++ interface for GTK+
 dev-cpp/pangomm 2.46.4 2.54.0: C++ interface for pango
 dev-db/mariadb-connector-c 3.4.1: C client library for MariaDB/MySQL
 dev-db/mysql-connector-c 8.3.0: C client library for MariaDB/MySQL
