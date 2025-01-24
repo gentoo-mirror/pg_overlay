@@ -43,7 +43,7 @@ else
 	fi
 
 	if [[ ${PIPEWIRE_DOCS_PREBUILT} == 1 ]] ; then
-		#SRC_URI+=" !man? ( https://dev.gentoo.org/~${PIPEWIRE_DOCS_PREBUILT_DEV}/distfiles/${CATEGORY}/${PN}/${PN}-${PIPEWIRE_DOCS_VERSION}-docs.tar.xz )"
+		SRC_URI+=" !man? ( https://dev.gentoo.org/~${PIPEWIRE_DOCS_PREBUILT_DEV}/distfiles/${CATEGORY}/${PN}/${PN}-${PIPEWIRE_DOCS_VERSION}-docs.tar.xz )"
 		PIPEWIRE_DOCS_USEFLAG="man"
 	fi
 
