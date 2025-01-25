@@ -4,6 +4,7 @@
 
 app-accessibility/at-spi2-core:dbus-broker - Use DBus broker implementation instead of default DBus daemon
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
+app-crypt/swtpm:fuse - Support sys-fs/fuse based /dev/tpm interface
 app-emulation/libvirt:dtrace - Enable dtrace support via dev-debug/systemtap
 app-emulation/libvirt:firewalld - DBus interface to iptables/ebtables allowing for better runtime management of your firewall.
 app-emulation/libvirt:fuse - Allow LXC to use sys-fs/fuse for mountpoints
