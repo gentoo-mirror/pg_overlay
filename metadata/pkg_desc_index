@@ -3,6 +3,7 @@ app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
+app-emulation/libvirt 11.0.0: C toolkit to manipulate virtual machines
 app-emulation/nemu 3.3.1: Ncurses interface for QEMU
 app-emulation/virtualbox 7.1.6a: Family of powerful x86 virtualization products for enterprise and home use
 app-i18n/opencc 1.1.9: Library for conversion between Traditional and Simplified Chinese characters
