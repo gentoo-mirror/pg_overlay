@@ -68,6 +68,9 @@ app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/enchant:nuspell - Adds support for app-text/nuspell spell checker
 app-text/enchant:voikko - Adds support for dev-libs/libvoikko spell checker
 dev-db/mysql-connector-c++:legacy - Build the legacy 1.x API as well as the DevX API
+dev-lang/lazarus:extras - Build a lot of extra packages, including lhelp chm viewer program.
+dev-lang/lazarus:gtk2 - Use gtk:2 for widgets.
+dev-lang/lazarus:gui - Build GUI IDE.
 dev-lang/python:bluetooth - Build Bluetooth protocol support in socket module
 dev-lang/python:ensurepip - Install the ensurepip module that uses bundled wheels to bootstrap pip and setuptools (if disabled, it will be only possible to use venv `--without-pip`)
 dev-lang/python:jit - Enable experimental Just-In-Time compilation support.
