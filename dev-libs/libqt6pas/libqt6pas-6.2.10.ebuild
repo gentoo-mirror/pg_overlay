@@ -1,4 +1,4 @@
-# Copyright 2020-2024 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,7 +8,7 @@ inherit qmake-utils
 
 LAZARUS_PV=3.0
 
-LAZ_COMMIT="84bc039c0f205bb3379017997f2d5451e527d5e6"
+LAZ_COMMIT="3851c98976d474f53eec8b70a4a231b535fdb8b7"
 
 DESCRIPTION="Free Pascal Qt6 bindings library updated by lazarus IDE."
 HOMEPAGE="https://gitlab.com/freepascal.org/lazarus/lazarus/-/tree/main/lcl/interfaces/qt6/cbindings"
