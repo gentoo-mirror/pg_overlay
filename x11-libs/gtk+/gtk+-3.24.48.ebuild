@@ -8,6 +8,8 @@ inherit gnome2 meson-multilib multilib toolchain-funcs virtualx
 DESCRIPTION="Gimp ToolKit +"
 HOMEPAGE="https://www.gtk.org/"
 
+SRC_URI="https://download.gnome.org/sources/${PN/+/}/3.24/${P/+/}.tar.xz"
+
 LICENSE="LGPL-2+"
 SLOT="3"
 IUSE="adwaita-icon-theme aqua atk-bridge broadway cloudproviders colord cups examples gtk-doc +introspection sysprof test vim-syntax wayland +X xinerama"
