@@ -98,7 +98,8 @@ MULTILIB_CHOST_TOOLS=(
 
 PATCHES=(
 	# gtk-update-icon-cache is installed by dev-util/gtk-update-icon-cache
-	"${FILESDIR}"/${P}-update-icon-cache.patch
+	"${FILESDIR}"/${PN}-3.24.36-update-icon-cache.patch
+	"${FILESDIR}"/0001-gdk-add-a-poison-macro-to-hide-GDK_WINDOWING_.patch
 	"${FILESDIR}"/${PN}-atk-bridge-meson.build.patch
 	"${FILESDIR}"/${PN}-atk-bridge-meson_options.txt.patch
 	"${FILESDIR}"/${PN}-atk-bridge-gtkaccessibility.patch
