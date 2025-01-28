@@ -90,6 +90,7 @@ BDEPEND="
 	)
 	test? ( sys-apps/dbus )
 "
+S=${WORKDIR}/${P/*/}
 
 MULTILIB_CHOST_TOOLS=(
 	/usr/bin/gtk-query-immodules-3.0$(get_exeext)
