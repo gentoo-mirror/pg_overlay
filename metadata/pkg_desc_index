@@ -13,6 +13,7 @@ app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor set
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.22: Cross Platform file manager.
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
+app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.0.3: A full office productivity suite
 app-office/libreoffice-l10n 25.2.0.3: Translations for the Libreoffice suite
 app-office/onlyoffice-bin 8.2.2: Onlyoffice is an office productivity suite (binary version)
@@ -121,7 +122,7 @@ net-misc/anydesk 6.4.0: Feature rich multi-platform remote desktop application
 net-misc/freerdp 3.10.3: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-nds/rpcbind 1.2.7: portmap replacement which supports RPC over various protocols
-net-p2p/amule 9998 9999: aMule, the all-platform eMule p2p client
+net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: Graphical client for the Soulseek peer to peer network written in Python
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
