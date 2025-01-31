@@ -47,6 +47,12 @@ PDEPEND="
 PATCHES=(
 	# all downstream patches:
 	"${FILESDIR}/${PN}-252.9-nodocs.patch"
+	"${FILESDIR}/${P}-part-revert-header-cleanup.patch" # bug 939673
+	# See also:
+	# https://github.com/elogind/elogind/issues/285
+	"${FILESDIR}/${P}-revert-s2idle.patch" # bug 939042
+	# See also: https://github.com/systemd/systemd/issues/10103
+	"${FILESDIR}/${P}-no-fchmod_and_chown-tty.patch" # thx to Devuan
 )
 
 python_check_deps() {
@@ -100,6 +106,7 @@ src_configure() {
 
 src_install() {
 	meson_src_install
+	keepdir /var/lib/elogind
 
 	newinitd "${FILESDIR}"/${PN}.init-r1 ${PN}
 
@@ -155,9 +162,9 @@ pkg_postinst() {
 	# find custom hooks excluding known (nvidia-drivers, sys-power/tlp)
 	if [[ -d "${EROOT}"/$(get_libdir)/elogind/system-sleep ]]; then
 		readarray -t files < <(find "${EROOT}"/$(get_libdir)/elogind/system-sleep/ \
-		          -type f \( -not -iname ".keep_dir" -a \
-		          -not -iname "nvidia" -a \
-		          -not -iname "49-tlp-sleep" \) || die)
+			-type f \( -not -iname ".keep_dir" -a \
+				-not -iname "nvidia" -a \
+				-not -iname "49-tlp-sleep" \) || die)
 	fi
 	if [[ ${#files[@]} -gt 0 ]]; then
 		ewarn "*** Custom hooks in obsolete path detected ***"
