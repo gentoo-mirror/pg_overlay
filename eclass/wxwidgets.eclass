@@ -36,8 +36,8 @@ _WXWIDGETS_ECLASS=1
 # The SLOT of the x11-libs/wxGTK you're targeting.  Needs to be defined before
 # inheriting the eclass.  Can be either "3.0" or "3.0-gtk3".
 case ${WX_GTK_VER} in
-	3.0-gtk3|3.1-gtk3|3.2-gtk3) ;;
-	3.0|3.1|3.2)
+	3.0-gtk3 | 3.2-gtk3) ;;
+	3.0)
 		if [[ ${EAPI} != 7 ]]; then
 			die "${ECLASS}: GTK 2 no longer supported in EAPI ${EAPI}"
 		fi
@@ -67,10 +67,10 @@ setup-wxwidgets() {
 	local w wxtoolkit wxconf
 
 	case ${WX_GTK_VER} in
-		3.0-gtk3|3.1-gtk3|3.2-gtk3)	wxtoolkit=gtk3 ;;
-		3.0|3.1|3.2)				wxtoolkit=gtk2
-					eqawarn "This package relies on the deprecated GTK 2 slot, which will go away soon (https://bugs.gentoo.org/618642)"
-					;;
+		3.0-gtk3 | 3.2-gtk3) wxtoolkit=gtk3 ;;
+		3.0)      wxtoolkit=gtk2
+		          eqawarn "This package relies on the deprecated GTK 2 slot, which will go away soon (https://bugs.gentoo.org/618642)"
+		          ;;
 	esac
 
 	if [[ -z ${WX_DISABLE_NDEBUG} ]]; then
