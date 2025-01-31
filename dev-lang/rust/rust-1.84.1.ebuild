@@ -134,7 +134,7 @@ PATCHES=(
 	"${FILESDIR}"/1.83.0-cross-compile-libz.patch
 	#"${FILESDIR}"/1.72.0-bump-libc-deps-to-0.2.146.patch  # pending refresh
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
-	"${FILESDIR}"rustc-1.84.0-unbundle-sqlite.patch
+	"${FILESDIR}"/rustc-1.84.0-unbundle-sqlite.patch
 )
 
 clear_vendor_checksums() {
