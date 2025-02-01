@@ -5,9 +5,9 @@ EAPI=8
 
 inherit autotools git-r3 linux-info
 
-DESCRIPTION="BitTorrent Client using libtorrent"
+DESCRIPTION="Stable high performance BitTorrent client"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
+EGIT_REPO_URI="https://github.com/stickz/${PN}.git"
 EGIT_BRANCH="master"
 
 LICENSE="GPL-2"
@@ -16,7 +16,7 @@ KEYWORDS=""
 IUSE="debug selinux test xmlrpc"
 RESTRICT="!test? ( test )"
 
-COMMON_DEPEND="=net-libs/libtorrent-9999
+COMMON_DEPEND="=net-libs/libtorrent-9999-r1
 	>=net-misc/curl-7.19.1
 	sys-libs/ncurses:0=
 	xmlrpc? ( dev-libs/xmlrpc-c:= )"
@@ -26,6 +26,8 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	dev-util/cppunit
 	virtual/pkgconfig"
+
+S=${WORKDIR}/${PN}-${PV}/${PN}
 
 DOCS=( doc/rtorrent.rc )
 

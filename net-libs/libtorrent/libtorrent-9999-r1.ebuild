@@ -7,7 +7,7 @@ inherit autotools git-r3 toolchain-funcs
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="https://github.com/stickz/rtorrent.git"
+EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
 EGIT_BRANCH="master"
 
 LICENSE="GPL-2"
@@ -21,17 +21,15 @@ IUSE="debug ssl"
 
 # cppunit dependency - https://github.com/rakshasa/libtorrent/issues/182
 RDEPEND="
-	net-libs/udns
 	dev-util/cppunit:=
 	sys-libs/zlib
 	ssl? ( dev-libs/openssl:= )"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
-S="${WORKDIR}/${PN}-${PV}/${PN}"
-
 PATCHES=(
-	"${FILESDIR}"/${P}-sysroot.patch
+	"${FILESDIR}"/${PN}-0.14.0-sysroot.patch
+	"${FILESDIR}"/${PN}-0.14.0-tests-address.patch
 )
 
 src_prepare() {
@@ -42,7 +40,8 @@ src_prepare() {
 src_configure() {
 	# bug 518582
 	local disable_instrumentation
-	echo -e "#include <inttypes.h>\nint main(){ int64_t var = 7; __sync_add_and_fetch(&var, 1); return 0;}" > "${T}/sync_add_and_fetch.c" || die
+	echo -e "#include <inttypes.h>\nint main(){ int64_t var = 7; __sync_add_and_fetch(&var, 1); return 0;}" \
+		> "${T}/sync_add_and_fetch.c" || die
 	$(tc-getCC) ${CFLAGS} -o /dev/null -x c "${T}/sync_add_and_fetch.c" >/dev/null 2>&1
 	if [[ $? -ne 0 ]]; then
 		einfo "Disabling instrumentation"
@@ -52,10 +51,10 @@ src_configure() {
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		--enable-aligned \
-		--enable-udns \
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
-		${disable_instrumentation}
+		${disable_instrumentation} \
+		--with-posix-fallocate
 }
 
 src_install() {
