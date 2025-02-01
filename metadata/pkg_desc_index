@@ -33,8 +33,7 @@ dev-db/mysql-connector-c++ 8.3.0: MySQL database connector for C++ (mimics JDBC 
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 3.8: feature rich visual programming environment emulating Delphi
 dev-lang/python 3.13.1_p1: An interpreted, interactive, object-oriented programming language
-dev-lang/rust 1.83.0-r1 1.84.1: Systems programming language from Mozilla
-dev-lang/rust-common 1.84.1: Common files shared between multiple slots of Rust
+dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
@@ -127,7 +126,7 @@ net-p2p/amule 9999: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: Graphical client for the Soulseek peer to peer network written in Python
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
-net-p2p/rtorrent 9999 9999-r1: Stable high performance BitTorrent client
+net-p2p/rtorrent 9999 9999-r1: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
