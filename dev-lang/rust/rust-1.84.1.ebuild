@@ -134,7 +134,6 @@ PATCHES=(
 	"${FILESDIR}"/1.83.0-cross-compile-libz.patch
 	#"${FILESDIR}"/1.72.0-bump-libc-deps-to-0.2.146.patch  # pending refresh
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
-	"${FILESDIR}"/rustc-1.84.0-unbundle-sqlite.patch
 )
 
 clear_vendor_checksums() {
@@ -234,7 +233,6 @@ src_configure() {
 		export OPENSSL_INCLUDE_DIR="${ESYSROOT}/usr/include"
 		export OPENSSL_LIB_DIR="${ESYSROOT}/usr/$(get_libdir)"
 	fi
-	export LIBSQLITE3_SYS_USE_PKG_CONFIG=1
 
 	filter-lto # https://bugs.gentoo.org/862109 https://bugs.gentoo.org/866231
 
