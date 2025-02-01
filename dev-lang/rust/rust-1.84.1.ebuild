@@ -375,7 +375,7 @@ src_configure() {
 		backtrace-on-ice = true
 		jemalloc = false
 		# See https://github.com/rust-lang/rust/issues/121124
-		lto = "$(usex lto thin off)"
+		lto = "$(usex lto fat off)"
 		[dist]
 		src-tarball = false
 		compression-formats = ["xz"]
