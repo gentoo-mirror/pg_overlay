@@ -12,5 +12,5 @@ pidfile="/run/rtorrent.pid"
 depend()
 {
    use net ypbind nis
-   after slapd mysqld postgresql
+   after slapd mysqld postgresql nfs netmount
 }

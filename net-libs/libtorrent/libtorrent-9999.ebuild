@@ -7,7 +7,7 @@ inherit autotools git-r3 toolchain-funcs
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
+EGIT_REPO_URI="https://github.com/stickz/rtorrent.git"
 EGIT_BRANCH="master"
 
 LICENSE="GPL-2"
@@ -21,14 +21,17 @@ IUSE="debug ssl"
 
 # cppunit dependency - https://github.com/rakshasa/libtorrent/issues/182
 RDEPEND="
+	net-libs/udns
 	dev-util/cppunit:=
 	sys-libs/zlib
 	ssl? ( dev-libs/openssl:= )"
 DEPEND="${RDEPEND}"
 BDEPEND="virtual/pkgconfig"
 
+S="${WORKDIR}/${PN}-${PV}/${PN}"
+
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.13.8-sysroot.patch
+	"${FILESDIR}"/${P}-sysroot.patch
 )
 
 src_prepare() {
@@ -49,10 +52,10 @@ src_configure() {
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		--enable-aligned \
+		--enable-udns \
 		$(use_enable debug) \
 		$(use_enable ssl openssl) \
-		${disable_instrumentation} \
-		--with-posix-fallocate
+		${disable_instrumentation}
 }
 
 src_install() {
