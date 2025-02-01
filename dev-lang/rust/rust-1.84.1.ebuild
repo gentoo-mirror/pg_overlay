@@ -234,6 +234,7 @@ src_configure() {
 		export OPENSSL_INCLUDE_DIR="${ESYSROOT}/usr/include"
 		export OPENSSL_LIB_DIR="${ESYSROOT}/usr/$(get_libdir)"
 	fi
+	export LIBSQLITE3_SYS_USE_PKG_CONFIG=1
 
 	filter-lto # https://bugs.gentoo.org/862109 https://bugs.gentoo.org/866231
 
