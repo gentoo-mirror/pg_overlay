@@ -7,7 +7,7 @@ LLVM_COMPAT=( 19 )
 PYTHON_COMPAT=( python3_{10..13} )
 
 RUST_MAX_VER=${PV}
-RUST_MIN_VER="$(ver_cut 1).$(($(ver_cut 2) - 1)).0"
+RUST_MIN_VER="$(ver_cut 1).$(($(ver_cut 2))).0"
 
 inherit check-reqs estack flag-o-matic llvm-r1 multiprocessing optfeature \
 	multilib multilib-build python-any-r1 rust rust-toolchain toolchain-funcs verify-sig
@@ -131,10 +131,10 @@ RESTRICT="test"
 VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/rust.asc
 
 PATCHES=(
-	"${FILESDIR}"/1.78.0-musl-dynamic-linking.patch
 	"${FILESDIR}"/1.83.0-cross-compile-libz.patch
 	#"${FILESDIR}"/1.72.0-bump-libc-deps-to-0.2.146.patch  # pending refresh
 	"${FILESDIR}"/1.67.0-doc-wasm.patch
+	"${FILESDIR}"/rustc-1.84.0-unbundle-sqlite.patch
 )
 
 clear_vendor_checksums() {
