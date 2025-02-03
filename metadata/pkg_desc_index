@@ -81,8 +81,8 @@ media-libs/gst-plugins-base 1.24.12: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.24.12: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.24.12: Open source multimedia framework
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
-media-libs/libsdl2 2.30.11 2.30.50: Simple Direct Media Layer
-media-libs/libsdl3 3.2.0: Simple Direct Media Layer
+media-libs/libsdl2 2.30.11 2.30.52: Simple Direct Media Layer
+media-libs/libsdl3 3.2.2: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
