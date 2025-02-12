@@ -156,16 +156,6 @@ media-libs/gst-plugins-base:pango - Enable pango GStreamer plugin
 media-libs/gst-plugins-base:wayland - Enable Wayland EGL windowing system support (requires egl and at least one of gles2 or opengl)
 media-libs/gstreamer:ptp - Controls Precision Time Protocol (PTP) helper. Written in Rust.
 media-libs/gstreamer:unwind - Enable sys-libs/libunwind usage for better backtrace support in leaks tracer module
-media-libs/libsdl2:fcitx - Enable support for app-i18n/fcitx
-media-libs/libsdl2:gles1 - include OpenGL ES 1.0 support
-media-libs/libsdl2:haptic - Enable the haptic (force feedback) subsystem
-media-libs/libsdl2:ibus - Enable support for app-i18n/ibus
-media-libs/libsdl2:joystick - Control joystick support (disable at your own risk)
-media-libs/libsdl2:kms - Build the KMSDRM video driver
-media-libs/libsdl2:pipewire - Enable support for the media-video/pipewire audio backend
-media-libs/libsdl2:sndio - Enable support for the media-sound/sndio backend
-media-libs/libsdl2:sound - Control audio support (disable at your own risk)
-media-libs/libsdl2:video - Control video support (disable at your own risk)
 media-libs/libtgvoip:dsp - Enable signal processing (echo cancellation, noise suppression, and automatic gain control)
 media-libs/mesa:d3d9 - Enable Direct 3D9 API through Nine state tracker. Can be used together with patched wine.
 media-libs/mesa:llvm - Enable LLVM backend for Gallium3D.

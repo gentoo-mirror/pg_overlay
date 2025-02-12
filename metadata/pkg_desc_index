@@ -81,12 +81,14 @@ media-libs/gst-plugins-base 1.24.12: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.24.12: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.24.12: Open source multimedia framework
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
-media-libs/libsdl2 2.30.11 2.30.52: Simple Direct Media Layer
-media-libs/libsdl3 3.2.2: Simple Direct Media Layer
+media-libs/libsdl2 2.32.50: Simple Direct Media Layer
+media-libs/libsdl3 3.2.4: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/sdl2-ttf 2.24.0_pre: Library that allows you to use TrueType fonts in SDL applications
+media-libs/sdl3-image 3.2.0_pre: Image file loading library
+media-libs/sdl3-ttf 3.1.0_pre: Library that allows you to use TrueType fonts in SDL applications
 media-libs/tg_owt 0_pre20231221 0_pre20240804-r2: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
