@@ -81,7 +81,7 @@ QA_MULTILIB_PATHS="
 PATCHES=(
 	"${FILESDIR}"/${PN}-125-disable_PIDFD_without_systemd.patch
 
-	"${FILESDIR}"/${PN}-126-polkitd_elogind_ebuild_fix.patch
+	"${FILESDIR}"/${PN}-126-polkitd_elogind_build_fix.patch
 )
 
 python_check_deps() {

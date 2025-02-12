@@ -71,8 +71,8 @@ COMMON_DEPEND="
 	openh264? ( media-libs/openh264:0= )
 	pulseaudio? ( media-libs/libpulse )
 	sdl? (
-		media-libs/libsdl2[sound(+),video(+)]
-		media-libs/sdl2-ttf
+		media-libs/libsdl3[sound(+),video(+)]
+		media-libs/sdl3-ttf
 	)
 	server? (
 		X? (
@@ -147,6 +147,8 @@ freerdp_configure() {
 		-DWITH_CCACHE=OFF
 		-DWITH_CLIENT=$(option client)
 		-DWITH_CLIENT_SDL=$(option sdl)
+		-DWITH_CLIENT_SDL2=OFF
+		-DWITH_CLIENT_SDL3=$(option sdl)
 		-DWITH_SAMPLE=OFF
 		-DWITH_CUPS=$(option cups)
 		-DWITH_DEBUG_ALL=$(option debug)
