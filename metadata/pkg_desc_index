@@ -77,6 +77,7 @@ llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 128.7.0: Thunderbird Mail Client
+media-libs/flac 1.5.0_pre: Free lossless audio encoder and decoder
 media-libs/gst-plugins-base 1.24.12: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.24.12: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.24.12: Open source multimedia framework
