@@ -47,9 +47,6 @@ PDEPEND="
 PATCHES=(
 	# all downstream patches:
 	"${FILESDIR}/${PN}-252.9-nodocs.patch"
-	# See also:
-	# See also: https://github.com/systemd/systemd/issues/10103
-	"${FILESDIR}/${P}-no-fchmod_and_chown-tty.patch" # thx to Devuan
 )
 
 python_check_deps() {
