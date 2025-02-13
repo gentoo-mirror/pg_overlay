@@ -48,8 +48,6 @@ PATCHES=(
 	# all downstream patches:
 	"${FILESDIR}/${PN}-252.9-nodocs.patch"
 	# See also:
-	# https://github.com/elogind/elogind/issues/285
-	"${FILESDIR}/${P}-revert-s2idle.patch" # bug 939042
 	# See also: https://github.com/systemd/systemd/issues/10103
 	"${FILESDIR}/${P}-no-fchmod_and_chown-tty.patch" # thx to Devuan
 )
