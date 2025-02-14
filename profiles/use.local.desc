@@ -363,6 +363,10 @@ net-im/64Gram:enchant - Use the app-text/enchant spell-checking backend instead 
 net-im/64Gram:fonts - Use builtin patched copy of open-sans fonts (overrides fontconfig)
 net-im/64Gram:qt6 - Build with Qt6 support
 net-im/64Gram:qt6-imageformats - Add support for HEIF, AVIF and JpegXL by bundling kde-frameworks/kimageformats
+net-im/forkgram:enchant - Use the app-text/enchant spell-checking backend instead of app-text/hunspell
+net-im/forkgram:fonts - Use builtin patched copy of open-sans fonts (overrides fontconfig)
+net-im/forkgram:qt6 - Build with Qt6 support
+net-im/forkgram:qt6-imageformats - Add support for HEIF, AVIF and JpegXL by bundling kde-frameworks/kimageformats
 net-im/pidgin:gadu - Enable Gadu Gadu protocol support
 net-im/pidgin:groupwise - Enable Novell Groupwise protocol support
 net-im/pidgin:gstreamer - Enables voice and video sessions
