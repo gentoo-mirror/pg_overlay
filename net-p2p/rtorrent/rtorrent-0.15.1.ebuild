@@ -19,7 +19,7 @@ KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-l
 IUSE="debug selinux test xmlrpc"
 RESTRICT="!test? ( test )"
 
-COMMON_DEPEND="~net-libs/libtorrent-0.14.${PV##*.}
+COMMON_DEPEND="~net-libs/libtorrent-0.15.${PV##*.}
 	net-misc/curl
 	sys-libs/ncurses:0=
 	xmlrpc? ( dev-libs/tinyxml2:= )"
