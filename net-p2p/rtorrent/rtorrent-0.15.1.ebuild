@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools linux-info systemd
+inherit autotools linux-info
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
