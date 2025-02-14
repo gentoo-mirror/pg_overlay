@@ -85,6 +85,8 @@ BDEPEND="
 	wayland? ( dev-util/wayland-scanner )
 "
 
+S=${WORKDIR}/frk-v${PV}-full
+
 pkg_pretend() {
 	if has ccache ${FEATURES}; then
 		ewarn "ccache does not work with ${PN} out of the box"
