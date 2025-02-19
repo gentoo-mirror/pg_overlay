@@ -1,5 +1,6 @@
 app-accessibility/at-spi2-core 2.54.0: D-Bus accessibility specifications and registration daemon
 app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
+app-admin/sysklogd 2.7.0: Standard log daemons
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
 app-crypt/swtpm 0.10.0: Libtpms-based TPM emulator
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell

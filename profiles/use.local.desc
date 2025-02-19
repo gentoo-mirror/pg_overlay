@@ -3,6 +3,8 @@
 # * generated automatically using pmaint *
 
 app-accessibility/at-spi2-core:dbus-broker - Use DBus broker implementation instead of default DBus daemon
+app-admin/sysklogd:logger - Build the logger program
+app-admin/sysklogd:logrotate - use app-admin/logrotate for rotating logs rather than custom cron scripts
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
 app-crypt/swtpm:fuse - Support sys-fs/fuse based /dev/tpm interface
 app-emulation/libvirt:dtrace - Enable dtrace support via dev-debug/systemtap
