@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -110,7 +110,7 @@ src_compile() {
 		emake -C "${S}/daemon" PREFIX=/usr service
 	fi
 
-	#readme.gentoo_create_doc
+	readme.gentoo_create_doc
 }
 
 src_test() {
@@ -160,7 +160,7 @@ pkg_postinst() {
 		xdg_desktop_database_update
 	fi
 
-	#readme.gentoo_print_elog
+	readme.gentoo_print_elog
 }
 
 pkg_postrm() {
