@@ -19,7 +19,7 @@ RDEPEND="
 	sys-apps/kmod[tools]"
 DEPEND="${RDEPEND}"
 
-S="${WORKDIR}/${PN}"
+#="${WORKDIR}/${PN}"
 
 src_prepare() {
 	default
