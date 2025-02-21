@@ -77,7 +77,6 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DCANTATA_HELPERS_LIB_DIR="$(get_libdir)"
 		-DENABLE_CDPARANOIA=$(usex cdda)
 		-DENABLE_CDDB=$(usex cddb)
 		-DENABLE_CDIOPARANOIA=$(usex cdda)
