@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -12,49 +12,54 @@ EGIT_REPO_URI="https://github.com/nullobsi/${PN}.git"
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS=""
-IUSE="cdda cddb cdio http-server mtp musicbrainz replaygain streaming taglib udisks zeroconf"
+KEYWORDS="~amd64 ~ppc64 ~x86"
+IUSE="cdda cddb http-server mtp musicbrainz replaygain streaming +taglib udisks zeroconf"
 REQUIRED_USE="
-	?? ( cdda cdio )
-	cdda? ( udisks || ( cddb musicbrainz ) )
-	cddb? ( || ( cdio cdda ) taglib )
-	cdio? ( udisks || ( cddb musicbrainz ) )
+	cdda? ( taglib udisks || ( cddb musicbrainz ) )
+	cddb? ( cdda taglib )
 	mtp? ( taglib udisks )
-	musicbrainz? ( || ( cdio cdda ) taglib )
+	musicbrainz? ( cdda taglib )
 	replaygain? ( taglib )
+	udisks? ( taglib )
 "
-# cantata has no tests
-RESTRICT="test"
 
 COMMON_DEPEND="
-	dev-qt/qtbase:6[dbus,gui,network,sqlite,widgets,xml]
+	dev-qt/qtbase:6[dbus,gui,network,sql,sqlite,widgets,xml]
+	dev-qt/qtsvg:6
 	sys-libs/zlib
-	virtual/libudev:=
-	cdda? ( media-sound/cdparanoia )
+	cdda? ( || (
+		dev-libs/libcdio-paranoia
+		media-sound/cdparanoia
+	) )
 	cddb? ( media-libs/libcddb )
-	cdio? ( dev-libs/libcdio-paranoia:= )
 	mtp? ( media-libs/libmtp:= )
 	musicbrainz? ( media-libs/musicbrainz:5= )
 	replaygain? (
 		media-libs/libebur128:=
-		media-sound/mpg123
+		media-sound/mpg123-base
 		media-video/ffmpeg:0=
 	)
-	streaming? ( dev-qt/qtmultimedia:5 )
-	taglib? (
-		media-libs/taglib
-		udisks? ( sys-fs/udisks:2 )
-	)
+	streaming? ( dev-qt/qtmultimedia:6 )
+	taglib? ( >=media-libs/taglib-2:= )
+	udisks? ( kde-frameworks/solid:6 )
 	zeroconf? ( net-dns/avahi )
 "
 RDEPEND="${COMMON_DEPEND}
-	|| ( >=dev-lang/perl-5.38.2-r3[perl_features_ithreads] <dev-lang/perl-5.38.2-r3[ithreads] )
-	|| ( kde-frameworks/breeze-icons:* kde-frameworks/oxygen-icons:* )
+	dev-lang/perl[perl_features_ithreads]
 "
 DEPEND="${COMMON_DEPEND}
-	dev-qt/qtbase:6[concurrent]"
+	dev-qt/qtbase:6[concurrent]
+"
+BDEPEND="
+	dev-qt/qttools:6[linguist]
+	virtual/pkgconfig
+"
 
-BDEPEND="dev-qt/qttools:6[linguist]"
+PATCHES=(
+	"${FILESDIR}"/${PN}-3.3.0-rm-vendor.patch
+	# https://github.com/nullobsi/cantata/pull/51.patch
+	"${FILESDIR}"/${PN}-3.3.0-cdparanoia.patch
+)
 
 src_prepare() {
 	remove_locale() {
@@ -64,7 +69,7 @@ src_prepare() {
 	cmake_src_prepare
 
 	# Unbundle 3rd party libs
-	rm -r 3rdparty/{ebur128,qtsingleapplication} || die
+	rm -r 3rdparty/{ebur128,kcategorizedview,qtsingleapplication,qxt,solid-lite} || die
 
 	plocale_find_changes "translations" "${PN}_" ".ts"
 	plocale_for_each_disabled_locale remove_locale
@@ -75,7 +80,7 @@ src_configure() {
 		-DCANTATA_HELPERS_LIB_DIR="$(get_libdir)"
 		-DENABLE_CDPARANOIA=$(usex cdda)
 		-DENABLE_CDDB=$(usex cddb)
-		-DENABLE_CDIOPARANOIA=$(usex cdio)
+		-DENABLE_CDIOPARANOIA=$(usex cdda)
 		-DENABLE_HTTP_SERVER=$(usex http-server)
 		-DENABLE_MTP=$(usex mtp)
 		-DENABLE_MUSICBRAINZ=$(usex musicbrainz)
