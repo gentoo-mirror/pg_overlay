@@ -246,7 +246,7 @@ multilib_src_configure() {
 		$(meson_native_use_feature bluetooth libusb) # At least for now only used by bluez5 native (quirk detection of adapters)
 		$(meson_native_use_feature echo-cancel echo-cancel-webrtc) #807889
 		-Dcontrol=enabled # Matches upstream
-		-Daudiotestsrc=disabled # Matches upstream
+		-Daudiotestsrc=enabled # Matches upstream
 		-Dffmpeg=disabled # Disabled by upstream and no major developments to spa/plugins/ffmpeg/ since May 2020
 		$(meson_native_use_feature ffmpeg pw-cat-ffmpeg)
 		$(meson_native_use_feature flatpak)
@@ -266,7 +266,7 @@ multilib_src_configure() {
 		$(meson_native_use_feature readline)
 		$(meson_native_use_feature ssl raop)
 		-Dvideoconvert=enabled # Matches upstream
-		-Dvideotestsrc=disabled # Matches upstream
+		-Dvideotestsrc=enabled # Matches upstream
 		-Dvolume=enabled # Matches upstream
 		$(meson_native_use_feature vulkan) # Uses pre-compiled Vulkan compute shader to provide a CGI video source (dev thing; disabled by upstream)
 		$(meson_native_use_feature extra pw-cat)
