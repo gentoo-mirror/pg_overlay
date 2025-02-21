@@ -1,0 +1,13 @@
+DEFINED_PHASES=compile install prepare
+DEPEND=app-alternatives/awk sys-apps/grep sys-apps/kmod[tools]
+DESCRIPTION=Script to test whether computer is running on AC power
+EAPI=8
+HOMEPAGE=http://packages.debian.org/testing/utils/powermgmt-base
+INHERIT=toolchain-funcs
+KEYWORDS=amd64 arm ppc ppc64 x86
+LICENSE=GPL-2
+RDEPEND=app-alternatives/awk sys-apps/grep sys-apps/kmod[tools]
+SLOT=0
+SRC_URI=mirror://debian/pool/main/p/powermgmt-base/powermgmt-base_1.38.tar.xz
+_eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96
+_md5_=fec42fa4b81e98a46f3918bff14a87cf
