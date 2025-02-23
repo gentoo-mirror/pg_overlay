@@ -3,7 +3,7 @@
 
 EAPI=8
 
-CMAKE_MAKEFILE_GENERATOR=emake
+CMAKE_MAKEFILE_GENERATOR=ninja
 inherit cmake xdg git-r3
 
 DESCRIPTION="Terminal-based Telegram / WhatsApp client for Linux and macOS"
@@ -41,5 +41,5 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS='-buildvcs=false'
-	GOFLAGS='-buildvcs=false' emake
+	GOFLAGS='-buildvcs=false' cmake_src_compile
 }
