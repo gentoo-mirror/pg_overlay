@@ -40,5 +40,5 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS='-buildvcs=false'
-	cGOFLAGS='-buildvcs=false' make_src_compile
+	GOFLAGS='-buildvcs=false' cmake_src_compile
 }
