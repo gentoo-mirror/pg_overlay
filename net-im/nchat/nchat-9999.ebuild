@@ -46,14 +46,14 @@ src_compile() {
 	GOFLAGS="-buildvcs=false" emake GOFLAGS="-buildvcs=false"
 }
 
-src_compile() {
+src_compile2() {
 	export GOFLAGS="-buildvcs=false"
 	cd "${WORKDIR}"/${P}_build
 	echo $(pwd)
 	GOFLAGS="-buildvcs=false" emake GOFLAGS="-buildvcs=false"
 }
 
-src_compile() {
+src_compile3() {
 	export GOFLAGS="-buildvcs=false"
 	cd "${WORKDIR}"/${P}_build
 	echo $(pwd)
