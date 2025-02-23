@@ -4,7 +4,7 @@
 EAPI=8
 
 CMAKE_MAKEFILE_GENERATOR=emake
-inherit cmake xdg git-r3
+inherit cmake git-r3
 
 DESCRIPTION="Terminal-based Telegram / WhatsApp client for Linux and macOS"
 HOMEPAGE="https://github.com/d99kris/nchat"
@@ -35,11 +35,11 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
-		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev
+		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev GOFLAGS="-buildvcs=false"
 	)
 	GOFLAGS='-buildvcs=false' cmake_src_configure
 }
-src_compile() {
-	export GOFLAGS="-buildvcs=false"
-	GOFLAGS="-buildvcs=false" cmake_src_compile
-}
+#src_compile() {
+#	export GOFLAGS="-buildvcs=false"
+#	GOFLAGS="-buildvcs=false" cmake_src_compile
+#}
