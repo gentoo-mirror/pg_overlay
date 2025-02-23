@@ -41,7 +41,7 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
-	SANDBOX_PREDICT=${BUILD_DIR}
+	SANDBOX_WRITE="${BUILD_DIR}"
 	cd ${BUILD_DIR} || die
 	echo $(pwd)
 	GOFLAGS="-buildvcs=false" cmake --build .
