@@ -41,6 +41,6 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
-	pushd ${BUILD_DIR}
+	cd ${BUILD_DIR} || die
 	GOFLAGS="-buildvcs=false" cmake --build .
 }
