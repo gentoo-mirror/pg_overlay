@@ -29,6 +29,7 @@ BDEPEND="dev-build/cmake
 		dev-lang/go"
 
 src_configure() {
+	export GOFLAGS='-buildvcs=false'
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
@@ -36,4 +37,8 @@ src_configure() {
 		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF
 	)
 	cmake_src_configure
+}
+src_compile() {
+	export GOFLAGS='-buildvcs=false'
+	cmake_src_compile
 }
