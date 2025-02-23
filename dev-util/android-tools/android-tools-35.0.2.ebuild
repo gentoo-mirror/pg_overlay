@@ -75,7 +75,7 @@ src_configure() {
 
 src_compile() {
 	export GOCACHE="${T}/go-build"
-	export GOFLAGS="-mod=vendor"
+	export GOFLAGS="-mod=readonly"
 	cmake_src_compile
 }
 
