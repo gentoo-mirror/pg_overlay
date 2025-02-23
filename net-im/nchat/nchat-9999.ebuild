@@ -34,11 +34,17 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
-		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -DTD_ENABLE_LTO=ON
+		-DHAS_COREDUMP=OFF \
+		-DHAS_STATICGOLIB=OFF
+		-DHAS_TELEGRAM=ON \
+		-DHAS_WHATSAPP=ON \
+		-DTD_ENABLE_LTO=ON \
+		-Wno-dev
 	)
 	cmake_src_configure GOFLAGS="-buildvcs=false"
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
-	cmake_src_compile
+	GF="GOFLAGS=-buildvcs=false"
+	cmake_src_compile $GF
 }
