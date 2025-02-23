@@ -37,12 +37,11 @@ src_configure() {
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -DTD_ENABLE_LTO=ON -G Ninja
 	)
-	cmake_src_configure GOFLAGS="-buildvcs=false"
+	GOFLAGS="-buildvcs=false" cmake "@mycmakeargs"
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
-	SANDBOX_PREDICT="${BUILD_DIR}"
-	cd ${BUILD_DIR} || die
+	cd BUILD_DIR="${WORKDIR}"/${P}_build
 	echo $(pwd)
 	GOFLAGS="-buildvcs=false" cmake --build .
 }
