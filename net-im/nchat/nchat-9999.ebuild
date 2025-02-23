@@ -40,5 +40,5 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS='-buildvcs=false'
-	cmake_src_compile
+	emake
 }
