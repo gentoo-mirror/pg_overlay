@@ -76,6 +76,7 @@ src_configure() {
 src_compile() {
 	export GOCACHE="${T}/go-build"
 	export GOFLAGS="-mod=vendor"
+	go mod vendor
 	cmake_src_compile
 }
 
