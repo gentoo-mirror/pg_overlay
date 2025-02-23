@@ -34,11 +34,11 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
-		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -G"Unix Makefiles"
+		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev
 	)
-	cmake_src_configure
+	cmaGOFLAGS='-buildvcs=false' ke_src_configure
 }
 src_compile() {
 	export GOFLAGS='-buildvcs=false'
-	emake -buildvcs=false
+	cGOFLAGS='-buildvcs=false' make_src_compile
 }
