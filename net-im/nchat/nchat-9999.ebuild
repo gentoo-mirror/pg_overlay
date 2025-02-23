@@ -28,8 +28,6 @@ DEPEND="${RDEPEND}
 BDEPEND="dev-build/cmake
 		dev-lang/go"
 
-GOFLAGS="-buildvcs=false"
-
 src_configure() {
 	export GOFLAGS="-buildvcs=false"
 	local mycmakeargs=(
@@ -44,5 +42,5 @@ src_compile() {
 	export GOCACHE="${T}/go-build"
 	export GOFLAGS="-mod=vendor"
 	export GOFLAGS="-buildvcs=false"
-	GOFLAGS="-buildvcs=false" cmake_src_compile
+	cmake_src_compile "GOFLAGS=-buildvcs=false"
 }
