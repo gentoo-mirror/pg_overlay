@@ -36,7 +36,7 @@ src_configure() {
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev
 	)
-	cmaGOFLAGS='-buildvcs=false' ke_src_configure
+	GOFLAGS='-buildvcs=false' cmake_src_configure
 }
 src_compile() {
 	export GOFLAGS='-buildvcs=false'
