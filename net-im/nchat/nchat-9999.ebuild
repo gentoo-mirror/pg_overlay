@@ -29,22 +29,21 @@ BDEPEND="dev-build/cmake
 		dev-lang/go"
 
 src_configure() {
-	export GOFLAGS="-buildvcs=false"
-	local mycmakeargs=(
+	export GOFLAGS+=' -buildvcs=false'
+		local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DHAS_COREDUMP=OFF \
-		-DHAS_STATICGOLIB=OFF
+		-DHAS_STATICGOLIB=ON
 		-DHAS_TELEGRAM=ON \
 		-DHAS_WHATSAPP=ON \
-		-DTD_ENABLE_LTO=ON \
+		#-DTD_ENABLE_LTO=ON \
 		-Wno-dev
 	)
 	cmake_src_configure GOFLAGS="-buildvcs=false"
 }
 src_compile() {
-	export GOFLAGS="-buildvcs=false"
-	GF="GOFLAGS=-buildvcs=false"
-	cmake_src_compile $GF
+	export GOFLAGS+=' -buildvcs=false'
+	cmake_src_compile
 }
