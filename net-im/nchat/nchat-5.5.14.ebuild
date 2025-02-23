@@ -34,7 +34,6 @@ BDEPEND="dev-build/cmake
 		dev-lang/go"
 
 src_compile() {
-	export GOCACHE="${T}/go-build"
-	export GOFLAGS="-mod=modr -buildvcs=false"
+	export GOFLAGS="-buildvcs=false"
 	cmake_src_compile
 }
