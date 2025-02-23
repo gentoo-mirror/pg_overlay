@@ -36,11 +36,9 @@ src_configure() {
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -DTD_ENABLE_LTO=ON
 	)
-	GOFLAGS="-buildvcs=false" cmake_src_configure
+	cmake_src_configure GOFLAGS="-buildvcs=false"
 }
 src_compile() {
-	export GOCACHE="${T}/go-build"
-	export GOFLAGS="-mod=vendor"
-	export GOFLAGS='-buildvcs=false'
+	export GOFLAGS="-buildvcs=false"
 	cmake_src_compile
 }
