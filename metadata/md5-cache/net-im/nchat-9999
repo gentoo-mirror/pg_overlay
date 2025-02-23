@@ -1,14 +1,14 @@
-BDEPEND=dev-build/cmake dev-lang/go app-alternatives/ninja >=dev-build/cmake-3.20.5 >=dev-vcs/git-1.8.2.1[curl]
-DEFINED_PHASES=compile configure install prepare test unpack
+BDEPEND=dev-build/cmake dev-lang/go >=dev-vcs/git-1.8.2.1[curl]
+DEFINED_PHASES=compile configure unpack
 DEPEND=dev-libs/openssl dev-db/sqlite sys-libs/ncurses sys-libs/readline dev-util/gperf sys-apps/file sys-apps/help2man sys-libs/zlib
 DESCRIPTION=Terminal-based Telegram / WhatsApp client for Linux and macOS
 EAPI=8
 HOMEPAGE=https://github.com/d99kris/nchat
-INHERIT=cmake git-r3
+INHERIT=git-r3
 KEYWORDS=~amd64
 LICENSE=GPL-3
 PROPERTIES=live
 RDEPEND=dev-libs/openssl dev-db/sqlite sys-libs/ncurses sys-libs/readline
 SLOT=0
-_eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	357f1a896fbedcd06e5ce55419c49eb9	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	1de691ead1f26da980bbfbb6146793cc	git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=7b25429dfa3701df91b4ee22cc5be483
+_eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
+_md5_=c1f1884e378ca4d50be73c9784a457b9
