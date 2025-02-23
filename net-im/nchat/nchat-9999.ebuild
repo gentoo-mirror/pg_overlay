@@ -41,7 +41,7 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
-	cd BUILD_DIR="${WORKDIR}"/${P}_build
+	cd "${WORKDIR}"/${P}_build
 	echo $(pwd)
 	GOFLAGS="-buildvcs=false" cmake --build .
 }
