@@ -4,7 +4,7 @@
 EAPI=8
 
 #CMAKE_MAKEFILE_GENERATOR=emake
-inherit git-r3
+inherit cmake git-r3
 
 DESCRIPTION="Terminal-based Telegram / WhatsApp client for Linux and macOS"
 HOMEPAGE="https://github.com/d99kris/nchat"
@@ -43,5 +43,5 @@ src_compile() {
 	export GOFLAGS="-buildvcs=false"
 	cd "${WORKDIR}"/${P}_build
 	echo $(pwd)
-	GOFLAGS="-buildvcs=false" make -j25
+	GOFLAGS="-buildvcs=false" emake -j25 GOFLAGS="-buildvcs=false"
 }
