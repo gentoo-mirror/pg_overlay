@@ -31,14 +31,15 @@ BDEPEND="dev-build/cmake
 src_configure() {
 	export GOFLAGS+=' -buildvcs=false'
 		local mycmakeargs=(
+		-DBUILD_SHARED_LIBS=OFF
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DHAS_COREDUMP=OFF \
-		-DHAS_STATICGOLIB=ON
+		-DHAS_STATICGOLIB=OFF
 		-DHAS_TELEGRAM=ON \
 		-DHAS_WHATSAPP=ON \
-		#-DTD_ENABLE_LTO=ON \
+		-DTD_ENABLE_LTO=ON \
 		-Wno-dev
 	)
 	cmake_src_configure GOFLAGS="-buildvcs=false"
