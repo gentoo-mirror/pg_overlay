@@ -42,5 +42,5 @@ src_configure() {
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
 	#GOFLAGS="-buildvcs=false" cmake_src_compile
-	GOFLAGS="-buildvcs=false" cmake --build ${CMAKE_BUILD_DIR}
+	GOFLAGS="-buildvcs=false" cmake --build ${BUILD_DIR}
 }
