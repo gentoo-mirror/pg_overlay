@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake xdg go-module
+inherit cmake xdg
 EGO_SUM=(
 	filippo.io/edwards25519 v1.1.0
 	filippo.io/edwards25519 v1.1.0/go.mod
@@ -84,3 +84,9 @@ DEPEND="${RDEPEND}
 
 BDEPEND="dev-build/cmake
 		dev-lang/go"
+
+src_compile() {
+	export GOCACHE="${T}/go-build"
+	export GOFLAGS="-mod=vendor"
+	cmake_src_compile
+}
