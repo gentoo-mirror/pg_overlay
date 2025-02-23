@@ -87,6 +87,6 @@ BDEPEND="dev-build/cmake
 
 src_compile() {
 	export GOCACHE="${T}/go-build"
-	export GOFLAGS="-mod=vendor"
+	export GOFLAGS="-mod=mod"
 	cmake_src_compile
 }
