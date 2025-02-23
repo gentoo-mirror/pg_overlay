@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake go-module xdg
+inherit cmake xdg
 
 DESCRIPTION="Terminal-based Telegram / WhatsApp client for Linux and macOS"
 HOMEPAGE="https://github.com/d99kris/nchat"
