@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=dev-libs/openssl dev-db/sqlite sys-libs/ncurses sys-libs/readline
 SLOT=0
 _eclasses_=git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=c1f1884e378ca4d50be73c9784a457b9
+_md5_=e1ad33c2606b32930b20bfa10a80befd

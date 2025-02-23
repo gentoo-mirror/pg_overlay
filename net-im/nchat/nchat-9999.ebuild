@@ -35,7 +35,7 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
-		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -DTD_ENABLE_LTO=ON -G Ninja -B "${WORKDIR}"/${P}_build
+		-S "${WORKDIR}"/${P} -DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -DTD_ENABLE_LTO=ON -G "Unix Makefiles" -B "${WORKDIR}"/${P}_build
 	)
 	GOFLAGS="-buildvcs=false" cmake "${mycmakeargs[@]}"
 }
@@ -43,5 +43,5 @@ src_compile() {
 	export GOFLAGS="-buildvcs=false"
 	cd "${WORKDIR}"/${P}_build
 	echo $(pwd)
-	GOFLAGS="-buildvcs=false" cmake --build .
+	GOFLAGS="-buildvcs=false" emake
 }
