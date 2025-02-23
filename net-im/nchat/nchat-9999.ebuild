@@ -35,13 +35,13 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
-		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -DTD_ENABLE_LTO=ON -G Ninja
+		-DHAS_WHATSAPP=ON -DHAS_TELEGRAM=ON -DHAS_COREDUMP=OFF -DCMAKE_BUILD_TYPE=Release -DHAS_STATICGOLIB=OFF -Wno-dev -DTD_ENABLE_LTO=ON -G Ninja -C "${WORKDIR}"/${P}_build"
 	)
-	GOFLAGS="-buildvcs=false" cmake "@mycmakeargs"
+	GOFLAGS="-buildvcs=false" cmake "${mycmakeargs[@]}"
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
-	cd BUILD_DIR="${WORKDIR}"/${P}_build
+	cd BUILD_DIR="${WORKDIR}"/${P}_build"
 	echo $(pwd)
 	GOFLAGS="-buildvcs=false" cmake --build .
 }
