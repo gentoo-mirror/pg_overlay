@@ -46,5 +46,5 @@ src_configure() {
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
 	GF="GOFLAGS=-buildvcs=false"
-	cmake_src_compile $GF
+	"$GF" cmake_src_compile
 }

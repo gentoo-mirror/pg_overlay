@@ -11,4 +11,4 @@ PROPERTIES=live
 RDEPEND=dev-libs/openssl dev-db/sqlite sys-libs/ncurses sys-libs/readline
 SLOT=0
 _eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	357f1a896fbedcd06e5ce55419c49eb9	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	1de691ead1f26da980bbfbb6146793cc	git-r3	875eb471682d3e1f18da124be97dcc81
-_md5_=2689d7f47359e951c1a5446287f0b2a9
+_md5_=11c5b1d56587260893c7558ebca6cfad
