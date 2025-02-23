@@ -42,6 +42,6 @@ src_configure() {
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
 	cd ${BUILD_DIR} || die
-	echo pwd
+	echo $(pwd)
 	GOFLAGS="-buildvcs=false" cmake --build .
 }
