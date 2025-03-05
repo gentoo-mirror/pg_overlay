@@ -82,7 +82,8 @@ PATCHES=(
 )
 
 src_prepare() {
-	#default
+	mkdir "${S}/intl"
+	default
 
 	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
@@ -111,10 +112,6 @@ src_prepare() {
 	}
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
-
-	# Get rid of bundled gettext. (Avoid build failures with musl)
-	drop_and_stub "${S}/intl"
-	default
 
 	eautopoint --force
 	eautoreconf
