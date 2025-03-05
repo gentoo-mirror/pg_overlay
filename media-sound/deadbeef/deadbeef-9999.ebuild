@@ -1,4 +1,4 @@
-# Copyright 2021-2024 Gentoo Authors
+# Copyright 2021-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -30,6 +30,7 @@ DEPEND="
 	dev-libs/glib:2
 	dev-libs/jansson:=
 	dev-libs/libdispatch
+	media-libs/harfbuzz:=
 	net-misc/curl
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
@@ -71,10 +72,12 @@ BDEPEND="
 	llvm-core/clang
 	>=sys-devel/gettext-0.21
 	llvm-core/llvm
+	llvm-core/lld
 	virtual/pkgconfig
 "
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-1.10.0_beta1-drop-Werror.patch
 	"${FILESDIR}"/${PN}-1.9.6-update-gettext.patch
 )
 
@@ -98,7 +101,7 @@ src_prepare() {
 
 	drop_and_stub() {
 		einfo drop_and_stub "${1}"
-		rm -rf "${1}" || die
+		rm -r "${1}" || die
 		mkdir "${1}" || die
 		cat > "${1}/Makefile.in" <<-EOF || die
 			all: nothing
