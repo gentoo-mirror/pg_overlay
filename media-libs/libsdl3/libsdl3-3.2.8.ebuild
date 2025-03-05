@@ -85,10 +85,6 @@ BDEPEND=""
 
 S="${WORKDIR}/SDL3-${PV}"
 
-PATCHES=(
-	"${FILESDIR}/${P}-pipewire-1.3.patch"
-)
-
 multilib_src_configure() {
 	local mycmakeargs=(
 		-DSDL_AUDIO=$(usex sound)
