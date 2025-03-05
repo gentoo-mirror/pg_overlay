@@ -112,8 +112,6 @@ src_prepare() {
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
 
-	drop_and_stub "${S}/intl"
-
 	eautopoint --force
 	eautoreconf
 
