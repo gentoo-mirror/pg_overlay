@@ -3,7 +3,7 @@
 
 EAPI=8
 
-#PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
+PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
 
 inherit autotools plocale toolchain-funcs xdg git-r3
 
@@ -82,6 +82,8 @@ PATCHES=(
 )
 
 src_prepare() {
+	default
+
 	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
@@ -109,7 +111,7 @@ src_prepare() {
 	}
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
-	default
+
 	eautopoint --force
 	eautoreconf
 
