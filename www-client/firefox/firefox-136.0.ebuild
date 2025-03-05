@@ -3,7 +3,8 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-135-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-136-patches-01.tar.xz"
+FIREFOX_LOONG_PATCHSET="firefox-136-loong-patches-01.tar.xz"
 
 LLVM_COMPAT=( 18 19 )
 
@@ -15,8 +16,6 @@ RUST_MIN_VER=1.77.1
 
 PYTHON_COMPAT=( python3_{12..13} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
-
-WANT_AUTOCONF="2.71"
 
 VIRTUALX_REQUIRED="manual"
 
@@ -53,7 +52,7 @@ MOZ_P="${MOZ_PN}-${MOZ_PV}"
 MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
 MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
-inherit autotools check-reqs desktop flag-o-matic gnome2-utils linux-info llvm-r1 multiprocessing \
+inherit check-reqs desktop flag-o-matic gnome2-utils linux-info llvm-r1 multiprocessing \
 	optfeature pax-utils python-any-r1 readme.gentoo-r1 rust toolchain-funcs virtualx xdg
 
 MOZ_SRC_BASE_URI="https://archive.mozilla.org/pub/${MOZ_PN}/releases/${MOZ_PV}"
@@ -69,6 +68,9 @@ PATCH_URIS=(
 DESCRIPTION="Firefox Web Browser"
 SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}.source.tar.xz
 	${PATCH_URIS[@]}
+	loong? (
+		https://dev.gentoo.org/~xen0n/distfiles/www-client/${MOZ_PN}/${FIREFOX_LOONG_PATCHSET}
+	)
 	wasm-sandbox? (
 		amd64? ( https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_SDK_VER/.*/}/wasi-sdk-${WASI_SDK_VER}-x86_64-linux.tar.gz )
 		arm64? ( https://github.com/WebAssembly/wasi-sdk/releases/download/wasi-sdk-${WASI_SDK_VER/.*/}/wasi-sdk-${WASI_SDK_VER}-arm64-linux.tar.gz )
@@ -76,7 +78,7 @@ SRC_URI="${MOZ_SRC_BASE_URI}/source/${MOZ_P}.source.tar.xz -> ${MOZ_P_DISTFILES}
 
 S="${WORKDIR}/${PN}-${PV%_*}"
 LICENSE="MPL-2.0 GPL-2 LGPL-2.1"
-KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv ~x86"
+KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv ~x86"
 
 IUSE="+clang dbus debug eme-free hardened hwaccel jack libproxy pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-jpeg +system-libevent"
@@ -136,7 +138,7 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.107
+	>=dev-libs/nss-3.108
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
@@ -170,11 +172,11 @@ COMMON_DEPEND="${FF_ONLY_DEPEND}
 		>=media-libs/harfbuzz-2.8.1:0=
 		!wasm-sandbox? ( >=media-gfx/graphite2-1.3.13 )
 	)
-	system-icu? ( >=dev-libs/icu-73.1:= )
+	system-icu? ( >=dev-libs/icu-76.1:= )
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1:= )
 	system-libevent? ( >=dev-libs/libevent-2.1.12:0=[threads(+)] )
 	system-libvpx? ( >=media-libs/libvpx-1.8.2:0=[postproc] )
-	system-png? ( >=media-libs/libpng-1.6.35:0=[apng] )
+	system-png? ( >=media-libs/libpng-1.6.45:0=[apng] )
 	system-webp? ( >=media-libs/libwebp-1.1.0:0= )
 	valgrind? ( dev-debug/valgrind )
 	wayland? (
@@ -557,6 +559,7 @@ src_prepare() {
 	fi
 
 	eapply "${WORKDIR}/firefox-patches"
+	use loong && eapply "${WORKDIR}/firefox-loong-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
@@ -572,6 +575,10 @@ src_prepare() {
 			export RUST_TARGET="i686-unknown-linux-musl"
 		elif use arm64 ; then
 			export RUST_TARGET="aarch64-unknown-linux-musl"
+		elif use loong; then
+			# Only the LP64D ABI of LoongArch64 is actively supported among
+			# the wider Linux ecosystem, so the assumption is safe.
+			export RUST_TARGET="loongarch64-unknown-linux-musl"
 		elif use ppc64 ; then
 			export RUST_TARGET="powerpc64le-unknown-linux-musl"
 		elif use riscv ; then
@@ -850,7 +857,8 @@ src_configure() {
 	[[ -n ${MOZ_ESR} ]] && update_channel=esr
 	mozconfig_add_options_ac '' --enable-update-channel=${update_channel}
 
-	if ! use x86 ; then
+	# Whitelist to allow unkeyworded arches to build with "--disable-rust-simd" by default.
+	if use amd64 || use arm64 || use ppc64 || use loong || use riscv ; then
 		mozconfig_add_options_ac '' --enable-rust-simd
 	fi
 
@@ -858,7 +866,7 @@ src_configure() {
 	# amd64, arm, arm64 & x86.
 	# Might want to flip the logic around if Firefox is to support more arches.
 	# bug 833001, bug 903411#c8
-	if use ppc64 || use riscv; then
+	if use loong || use ppc64 || use riscv; then
 		mozconfig_add_options_ac '' --disable-sandbox
 	elif use valgrind; then
 		mozconfig_add_options_ac 'valgrind requirement' --disable-sandbox
@@ -907,6 +915,7 @@ src_configure() {
 	fi
 
 	mozconfig_use_with system-av1
+	use system-av1 && append-ldflags "-laom"
 	mozconfig_use_with system-harfbuzz
 	mozconfig_use_with system-icu
 	mozconfig_use_with system-jpeg
@@ -1062,8 +1071,8 @@ src_configure() {
 		else
 			mozconfig_add_options_ac 'relr elf-hack' --disable-elf-hack
 		fi
-	elif use ppc64 || use riscv ; then
-		# '--disable-elf-hack' is not recognized on ppc64/riscv,
+	elif use loong || use ppc64 || use riscv ; then
+		# '--disable-elf-hack' is not recognized on loong/ppc64/riscv,
 		# see bgo #917049, #930046
 		:;
 	else
@@ -1370,11 +1379,7 @@ src_install() {
 	# Add telemetry config prefs, just in case something happens in future and telemetry build
 	# options stop working.
 	if ! use telemetry ; then
-		cat >>"${GENTOO_PREFS}" <<-EOF || die "failed to set telemetry prefs"
-		sticky_pref("toolkit.telemetry.dap_enabled", false);
-		pref("toolkit.telemetry.dap_helper", "");
-		pref("toolkit.telemetry.dap_leader", "");
-		EOF
+		cat "${FILESDIR}"/gentoo-telemetry-prefs.js >>"${GENTOO_PREFS}" || die "failed to set telemetry prefs"
 	fi
 
 	# Install language packs
