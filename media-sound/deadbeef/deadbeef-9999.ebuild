@@ -82,8 +82,6 @@ PATCHES=(
 )
 
 src_prepare() {
-	default
-
 	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
 		rm -v "${S}/translation/help.ru.txt" || die
@@ -101,7 +99,7 @@ src_prepare() {
 
 	drop_and_stub() {
 		einfo drop_and_stub "${1}"
-		rm -rf "${1}" || die
+		rm -r "${1}" || die
 		mkdir "${1}" || die
 		cat > "${1}/Makefile.in" <<-EOF || die
 			all: nothing
@@ -111,7 +109,7 @@ src_prepare() {
 	}
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
-
+	default
 	eautopoint --force
 	eautoreconf
 
