@@ -3,7 +3,7 @@
 
 EAPI=8
 
-#PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
+PLOCALES="be bg bn ca cs da de el en_GB es et eu fa fi fr gl he hr hu id it ja kk km lg lt nl pl pt pt_BR ro ru si_LK sk sl sr sr@latin sv te tr ug uk vi zh_CN zh_TW"
 
 inherit autotools plocale toolchain-funcs xdg git-r3
 
@@ -82,7 +82,7 @@ PATCHES=(
 )
 
 src_prepare() {
-	default
+	#default
 
 	if [[ $(plocale_get_locales disabled) =~ "ru" ]] ; then
 		eapply "${FILESDIR}/${P}-remove-ru-help-translation.patch"
@@ -101,7 +101,7 @@ src_prepare() {
 
 	drop_and_stub() {
 		einfo drop_and_stub "${1}"
-		rm -r "${1}" || die
+		rm -rf "${1}" || die
 		mkdir "${1}" || die
 		cat > "${1}/Makefile.in" <<-EOF || die
 			all: nothing
@@ -112,11 +112,15 @@ src_prepare() {
 
 	plocale_for_each_disabled_locale drop_from_linguas || die
 
+	# Get rid of bundled gettext. (Avoid build failures with musl)
+	drop_and_stub "${S}/intl"
+	default
+
 	eautopoint --force
 	eautoreconf
 
 	# Get rid of bundled gettext. (Avoid build failures with musl)
-	#drop_and_stub "${S}/intl"
+	drop_and_stub "${S}/intl"
 
 	# Plugins that are undesired for whatever reason, candidates for unbundling and such.
 	for i in adplug alac dumb mms gme lfs mono2stereo psf sc60 shn sid soundtouch wma; do
