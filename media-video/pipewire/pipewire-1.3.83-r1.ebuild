@@ -329,8 +329,12 @@ multilib_src_install_all() {
 		dosym ../../../usr/share/alsa/alsa.conf.d/99-pipewire-default-hook.conf /etc/alsa/conf.d/99-pipewire-default-hook.conf
 	fi
 
+	exeinto /etc/user/init.d
+	newexe "${FILESDIR}"/pipewire.initd pipewire
 	# Enable required wireplumber alsa and bluez monitors
 	if use sound-server; then
+		newexe "${FILESDIR}"/pipewire-pulse.initd pipewire-pulse
+
 		# Install sound-server enabler for wireplumber 0.5.0+ conf syntax
 		insinto /etc/wireplumber/wireplumber.conf.d
 		doins "${FILESDIR}"/gentoo-sound-server-enable-audio-bluetooth.conf
