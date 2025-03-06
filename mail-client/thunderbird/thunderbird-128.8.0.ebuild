@@ -3,9 +3,9 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-128esr-patches-08.tar.xz"
+FIREFOX_PATCHSET="firefox-128esr-patches-09.tar.xz"
 
-LLVM_COMPAT=( 18 19 )
+LLVM_COMPAT=( 19 20 )
 
 PYTHON_COMPAT=( python3_{12..13} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
@@ -759,7 +759,6 @@ src_configure() {
 		--enable-new-pass-manager \
 		--enable-official-branding \
 		--enable-release \
-		--enable-system-ffi \
 		--enable-system-pixman \
 		--enable-system-policies \
 		--host="${CBUILD:-${CHOST}}" \
@@ -770,6 +769,7 @@ src_configure() {
 		--without-wasm-sandboxed-libraries \
 		--with-intl-api \
 		--with-libclang-path="$(llvm-config --libdir)" \
+		--with-system-ffi \
 		--with-system-nspr \
 		--with-system-nss \
 		--with-system-zlib \
@@ -781,7 +781,7 @@ src_configure() {
 	# Set update channel
 	local update_channel=release
 	[[ -n ${MOZ_ESR} ]] && update_channel=esr
-	mozconfig_add_options_ac '' --update-channel=${update_channel}
+	mozconfig_add_options_ac '' --enable-update-channel=${update_channel}
 
 	if ! use x86 ; then
 		mozconfig_add_options_ac '' --enable-rust-simd
