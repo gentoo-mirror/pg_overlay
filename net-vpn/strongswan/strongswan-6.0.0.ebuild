@@ -157,6 +157,8 @@ src_configure() {
 		--enable-swanctl \
 		--enable-socket-dynamic \
 		--enable-cmd \
+		--enable-ml \
+		--enable-stroke \
 		$(use_enable curl) \
 		$(use_enable constraints) \
 		$(use_enable ldap) \
@@ -192,7 +194,6 @@ src_configure() {
 		--with-piddir=/run \
 		--with-systemdsystemunitdir="$(systemd_get_systemunitdir)" \
 		${myconf}
-		--enable-ml
 }
 
 src_install() {
