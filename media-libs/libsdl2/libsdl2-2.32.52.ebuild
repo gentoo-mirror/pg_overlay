@@ -15,11 +15,11 @@ LICENSE="ZLIB"
 SLOT="0"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 
-IUSE="alsa gles2 haptic +joystick opengl +sound test +video vulkan X"
-REQUIRED_USE="test? ( joystick opengl sound video )"
+IUSE="alsa opengl test vulkan X"
+REQUIRED_USE="test? ( opengl  )"
 
 RDEPEND="
-	>=media-libs/libsdl3-3.2.0[${MULTILIB_USEDEP},alsa=,gles2=,haptic=,joystick=,opengl=,sound=,video=,vulkan=,X=]
+	>=media-libs/libsdl3-3.2.0[${MULTILIB_USEDEP},alsa=,opengl=,vulkan=,X=]
 "
 DEPEND="
 	${RDEPEND}
