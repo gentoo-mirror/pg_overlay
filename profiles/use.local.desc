@@ -398,6 +398,8 @@ sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support
 sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+sys-apps/xdg-desktop-portal:flatpak - Enable sys-apps/flatpak integration
+sys-apps/xdg-desktop-portal:seccomp - Use sys-apps/bubblewrap (which requires seccomp) to sandbox some functionality like icon handling
 sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-block/fio:aio - Enable AIO ioengine
 sys-block/fio:curl - Enable HTTP engine for S3 and WebDav support support via net-misc/curl
