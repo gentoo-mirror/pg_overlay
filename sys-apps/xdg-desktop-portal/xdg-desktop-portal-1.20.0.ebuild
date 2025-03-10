@@ -69,17 +69,17 @@ src_configure() {
 		-Dsystemd-user-unit-dir="$(systemd_get_userunitdir)"
 		$(meson_feature flatpak flatpak-interfaces)
 		# Only used for tests
-		$(meson_feature test libportal)
 		$(meson_feature geolocation geoclue)
 		$(meson_feature seccomp sandboxed-image-validation)
+		$(meson_feature seccomp sandboxed-sound-validation)
 		$(meson_feature systemd)
 		# Requires flatpak
-		-Ddocbook-docs=disabled
+		-Ddocumentation=disabled
 		# -Dxmlto-flags=
 		-Ddatarootdir="${EPREFIX}/usr/share"
 		-Dman-pages=enabled
 		-Dinstalled-tests=false
-		$(meson_feature test pytest)
+		$(meson_feature test tests)
 	)
 
 	meson_src_configure
