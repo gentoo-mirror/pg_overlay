@@ -107,7 +107,7 @@ media-video/qmplay2 9999: A Qt-based video player, which can play most formats a
 net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
 net-fs/nfs-utils 2.8.2: NFS client and server daemons
 net-im/64Gram 1.1.58: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
-net-im/forkgram 5.11.0: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
+net-im/forkgram 5.12.1: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
 net-im/nchat 5.5.14 9999: Terminal-based Telegram / WhatsApp client for Linux and macOS
 net-im/pidgin 2.14.10-r1 9999: GTK Instant Messenger client
 net-libs/gtk-vnc 1.4.0: VNC viewer widget for GTK
@@ -155,7 +155,7 @@ www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
 www-client/firefox 136.0: Firefox Web Browser
 www-client/vivaldi-snapshot 7.1.3550.4: A browser for our friends
 x11-base/xwayland 24.1.6: Standalone X server running under Wayland
-x11-libs/cairo 9999: A vector graphics library with cross-device output support
+x11-libs/cairo 1.18.4_pre 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.49: Gimp ToolKit +
 x11-libs/pango 1.56.1_pre: Internationalized text layout and rendering library
 x11-libs/talkatu 9999: GTK widgets for chat applications
