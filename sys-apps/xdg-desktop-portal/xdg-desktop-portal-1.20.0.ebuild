@@ -71,7 +71,7 @@ src_configure() {
 		# Only used for tests
 		$(meson_feature test libportal)
 		$(meson_feature geolocation geoclue)
-		$(meson_use seccomp sandboxed-image-validation)
+		$(meson_feature seccomp sandboxed-image-validation)
 		$(meson_feature systemd)
 		# Requires flatpak
 		-Ddocbook-docs=disabled
