@@ -51,8 +51,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	# These tests require connections to pipewire, internet, /dev/fuse
-	"${FILESDIR}/${PN}-1.18.0-sandbox-disable-failing-tests.patch"
 )
 
 pkg_setup() {
