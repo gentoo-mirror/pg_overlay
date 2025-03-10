@@ -69,7 +69,6 @@ src_configure() {
 		-Dsystemd-user-unit-dir="$(systemd_get_userunitdir)"
 		$(meson_feature flatpak flatpak-interfaces)
 		# Only used for tests
-		$(meson_feature test libportal)
 		$(meson_feature geolocation geoclue)
 		$(meson_feature seccomp sandboxed-image-validation)
 		$(meson_feature seccomp sandboxed-sound-validation)
