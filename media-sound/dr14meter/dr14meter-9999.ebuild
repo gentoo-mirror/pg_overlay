@@ -9,9 +9,9 @@ DISTUTILS_USE_SETUPTOOLS=no
 
 inherit distutils-r1 git-r3
 
-DESCRIPTION="Compute the DR14 value of the given audio files"
-HOMEPAGE="http://dr14tmeter.sourceforge.net/"
-EGIT_REPO_URI="https://github.com/simon-r/dr14_t.meter.git"
+DESCRIPTION="dr14meter is a free and open-source command line tool for computing the Dynamic Range of your music."
+HOMEPAGE="https://github.com/pe7ro/dr14meter/"
+EGIT_REPO_URI="https://github.com/pe7ro/${PN}.git"
 
 LICENSE="GPL-3+"
 SLOT="0"
@@ -27,12 +27,15 @@ RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
 src_prepare() {
 	default
 
-	sed -i '/cmdclass/d' setup.py
+	#sed -i '/cmdclass/d' setup.py
 }
 
+python_prepare_all() {
+	distutils-r1_python_prepare_all
+}
 
 python_install_all() {
 	distutils-r1_python_install_all
 
-	doman man/dr14_tmeter.1
+	#doman man/dr14_tmeter.1
 }
