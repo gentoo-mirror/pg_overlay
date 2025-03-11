@@ -22,7 +22,7 @@ DEPEND="dev-python/setuptools[${PYTHON_USEDEP}]"
 RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
 		media-libs/flac
 		media-libs/mutagen
-		media-video/ffmpeg[encode]"
+		media-video/ffmpeg"
 
 src_prepare() {
 	default
