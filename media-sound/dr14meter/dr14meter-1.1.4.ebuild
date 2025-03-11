@@ -7,11 +7,11 @@ PYTHON_COMPAT=( python3_{12..13} )
 
 DISTUTILS_USE_SETUPTOOLS=no
 
-inherit distutils-r1 git-r3
+inherit distutils-r1
 
 DESCRIPTION="dr14meter is a free and open-source command line tool for computing the Dynamic Range of your music."
 HOMEPAGE="https://github.com/pe7ro/dr14meter/"
-EGIT_REPO_URI="https://github.com/pe7ro/${PN}.git"
+SRC_URI="https://github.com/pe7ro/${PN}/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="GPL-3+"
 SLOT="0"
