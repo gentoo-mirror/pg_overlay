@@ -152,7 +152,7 @@ sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 136.0: Firefox Web Browser
+www-client/firefox 136.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 7.1.3550.4: A browser for our friends
 x11-base/xwayland 24.1.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
