@@ -152,6 +152,7 @@ freerdp_configure() {
 		-DWITH_SAMPLE=OFF
 		-DWITH_CUPS=$(option cups)
 		-DWITH_DEBUG_ALL=$(option debug)
+		-DWITH_VERBOSE_WINPR_ASSERT=$(option debug)
 		-DWITH_MANPAGES=ON
 		-DWITH_FFMPEG=$(option ffmpeg)
 		-DWITH_FREERDP_DEPRECATED_COMMANDLINE=ON
