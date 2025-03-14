@@ -5,15 +5,15 @@ EAPI=8
 
 RUST_OPTIONAL=1
 RUST_MIN_VER=1.48
-inherit gstreamer-meson rust
+inherit gstreamer-meson rust poly-c_ebuilds
 
 DESCRIPTION="Open source multimedia framework"
 HOMEPAGE="https://gstreamer.freedesktop.org/"
-SRC_URI="https://${PN}.freedesktop.org/src/${PN}/${P}.tar.xz"
+SRC_URI="https://${PN}.freedesktop.org/src/${PN}/${MY_P}.tar.xz"
 
 LICENSE="LGPL-2+"
 SLOT="1.0"
-KEYWORDS="~alpha amd64 ~arm ~arm64 ~hppa ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris"
 IUSE="+caps +introspection ptp unwind"
 
 # gstreamer-1.22.x requires 2.62, but 2.64 is strongly recommended
