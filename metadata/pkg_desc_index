@@ -35,6 +35,7 @@ dev-lang/lazarus 3.8: feature rich visual programming environment emulating Delp
 dev-lang/python 3.13.2: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
+dev-libs/icu 77.1_pre: International Components for Unicode
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libnl 3.11.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
@@ -96,13 +97,13 @@ media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
-media-sound/ncmpcpp 9999: featureful ncurses based MPD client inspired by ncmpc
+media-sound/ncmpcpp 9999: Featureful ncurses based MPD client inspired by ncmpc
 media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins support
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.4.0: Multimedia processing graphs
+media-video/pipewire 1.4.1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
 net-fs/nfs-utils 2.8.2: NFS client and server daemons
