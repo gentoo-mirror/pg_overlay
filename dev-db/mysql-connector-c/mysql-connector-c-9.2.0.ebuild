@@ -41,7 +41,7 @@ RDEPEND+="
 	!<dev-db/percona-server-5.7.26.29-r1
 "
 
-DOCS=( README )
+DOCS=( README.md )
 
 # Wrap the config script
 MULTILIB_CHOST_TOOLS=( /usr/bin/mysql_config )
