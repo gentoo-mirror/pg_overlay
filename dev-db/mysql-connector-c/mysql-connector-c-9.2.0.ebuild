@@ -41,42 +41,12 @@ RDEPEND+="
 	!<dev-db/percona-server-5.7.26.29-r1
 "
 
-DOCS=( README )
+DOCS=( README.md )
 
 # Wrap the config script
-MULTILIB_CHOST_TOOLS=( /usr/bin/mysql_config )
-
-PATCHES=(
-	"${FILESDIR}"/${PN}-8.0.19-do-not-install-comp_err.patch
-	"${FILESDIR}"/${PN}-8.0.27-res_n.patch
-)
+#MULTILIB_CHOST_TOOLS=( /usr/bin/mysql_config )
 
 src_prepare() {
-	sed -i -e 's/CLIENT_LIBS/CONFIG_CLIENT_LIBS/' "scripts/CMakeLists.txt" || die
-
-	# All these are for the server only.
-	# Disable rpm call which would trigger sandbox, #692368
-	sed -i \
-		-e '/MYSQL_CHECK_LIBEVENT/d' \
-		-e '/MYSQL_CHECK_RAPIDJSON/d' \
-		-e '/MYSQL_CHECK_ICU/d' \
-		-e '/MYSQL_CHECK_EDITLINE/d' \
-		-e '/MYSQL_CHECK_CURL/d' \
-		-e '/ADD_SUBDIRECTORY(man)/d' \
-		-e '/ADD_SUBDIRECTORY(share)/d' \
-		-e '/INCLUDE(cmake\/boost/d' \
-		-e 's/MY_RPM rpm/MY_RPM rpmNOTEXISTENT/' \
-		CMakeLists.txt || die
-
-	# Skip building clients
-	echo > client/CMakeLists.txt || die
-
-	# Forcefully disable auth plugin
-	if ! use ldap ; then
-		sed -i -e '/MYSQL_CHECK_SASL/d' CMakeLists.txt || die
-		echo > libmysql/authentication_ldap/CMakeLists.txt || die
-	fi
-
 	cmake_src_prepare
 }
 
@@ -112,11 +82,6 @@ multilib_src_configure() {
 multilib_src_install_all() {
 	# Not a GNU info file, more like a tiny README.
 	#rm "${ED}"/usr/share/info/mysql.info || die
-
-	doman \
-		man/my_print_defaults.1 \
-		man/perror.1 \
-		man/zlib_decompress.1
 
 	if ! use static-libs ; then
 		find "${ED}" -name "*.a" -delete || die
