@@ -15,7 +15,7 @@ if [[ ${PV} == "9999" ]]; then
 else
 	SRC_URI="https://dev.mysql.com/get/Downloads/Connector-C++/${PN}++-${PV}-src.tar.gz"
 	KEYWORDS="~alpha amd64 arm arm64 ~hppa ~ia64 ~loong ~mips ppc ppc64 ~riscv ~s390 sparc x86"
-	S="${WORKDIR}/${PN}++-${PV}"
+	S="${WORKDIR}/${PN}++-${PV}-src"
 fi
 
 LICENSE="GPL-2"
