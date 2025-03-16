@@ -52,29 +52,6 @@ PATCHES=(
 )
 
 src_prepare() {
-	# All these are for the server only.
-	# Disable rpm call which would trigger sandbox, #692368
-	sed -i \
-		-e '/MYSQL_CHECK_LIBEVENT/d' \
-		-e '/MYSQL_CHECK_RAPIDJSON/d' \
-		-e '/MYSQL_CHECK_ICU/d' \
-		-e '/MYSQL_CHECK_EDITLINE/d' \
-		-e '/MYSQL_CHECK_CURL/d' \
-		-e '/ADD_SUBDIRECTORY(man)/d' \
-		-e '/ADD_SUBDIRECTORY(share)/d' \
-		-e '/INCLUDE(cmake\/boost/d' \
-		-e 's/MY_RPM rpm/MY_RPM rpmNOTEXISTENT/' \
-		CMakeLists.txt || die
-
-	# Skip building clients
-	echo > client/CMakeLists.txt || die
-
-	# Forcefully disable auth plugin
-	if ! use ldap ; then
-		sed -i -e '/MYSQL_CHECK_SASL/d' CMakeLists.txt || die
-		echo > libmysql/authentication_ldap/CMakeLists.txt || die
-	fi
-
 	cmake_src_prepare
 }
 
