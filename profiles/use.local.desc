@@ -45,7 +45,6 @@ app-text/enchant:aspell - Adds support for app-text/aspell spell checker
 app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/enchant:nuspell - Adds support for app-text/nuspell spell checker
 app-text/enchant:voikko - Adds support for dev-libs/libvoikko spell checker
-dev-db/mysql-connector-c++:legacy - Build the legacy 1.x API as well as the DevX API
 dev-lang/lazarus:extras - Build a lot of extra packages, including lhelp chm viewer program.
 dev-lang/lazarus:gtk2 - Use gtk:2 for widgets.
 dev-lang/lazarus:gui - Build GUI IDE.
