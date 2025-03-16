@@ -52,8 +52,6 @@ PATCHES=(
 )
 
 src_prepare() {
-	sed -i -e 's/CLIENT_LIBS/CONFIG_CLIENT_LIBS/' "scripts/CMakeLists.txt" || die
-
 	# All these are for the server only.
 	# Disable rpm call which would trigger sandbox, #692368
 	sed -i \
