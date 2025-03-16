@@ -82,7 +82,7 @@ multilib_src_configure() {
 multilib_src_install_all() {
 	# Not a GNU info file, more like a tiny README.
 	#rm "${ED}"/usr/share/info/mysql.info || die
-	cmake_src_install
+
 	doman \
 		man/my_print_defaults.1 \
 		man/perror.1 \
