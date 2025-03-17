@@ -70,6 +70,7 @@ kde-misc/kweather 24.12.3 9999: Weather forecast application for Plasma with fla
 kde-plasma/kdesu-gui 9999: Graphical frontend for KDE Frameworks' kdesu
 kde-plasma/kwin 6.3.3 9999: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
+kde-plasma/spectacle 6.3.3: Screenshot capture utility
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
