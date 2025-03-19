@@ -1,4 +1,4 @@
-# Copyright 2020-2024 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,16 +8,16 @@ inherit cmake flag-o-matic
 DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
-TG_OWT_COMMIT="dc17143230b5519f3c1a8da0079e00566bd4c5a8"
-LIBYUV_COMMIT="32ccd53bb36421bb1e47b1cfa362b9fa6825e82a"
-SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2"
+TG_OWT_COMMIT="be39b8c8d0db1f377118f813f0c4bd331d341d5e"
+LIBYUV_COMMIT="04821d1e7d60845525e8db55c7bcd41ef5be9406"
+LIBSRTP_COMMIT="a566a9cfcd619e8327784aa7cff4a1276dc1e895"
+SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 # Upstream libyuv: https://chromium.googlesource.com/libyuv/libyuv
 
 LICENSE="BSD"
 SLOT="0/${PV##*pre}"
-KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv"
+KEYWORDS="amd64 ~arm64 ~loong ~ppc64 ~riscv"
 IUSE="screencast +X"
 
 # This package's USE flags may change the ABI and require a rebuild of
@@ -36,6 +36,7 @@ RDEPEND="
 	dev-libs/protobuf:=
 	media-libs/libjpeg-turbo:=
 	>=media-libs/libvpx-1.10.0:=
+	media-libs/libyuv
 	media-libs/openh264:=
 	media-libs/opus
 	media-video/ffmpeg:=
@@ -58,7 +59,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}
 	screencast? (
-		media-libs/libglvnd
+		media-libs/libglvnd[X]
 		media-libs/mesa
 		x11-libs/libdrm
 	)
@@ -67,45 +68,14 @@ BDEPEND="
 	virtual/pkgconfig
 	X? ( x11-base/xorg-proto )
 "
-#	dev-lang/yasm
-
-PATCHES=(
-	"${FILESDIR}/patch-cmake-absl-external.patch"
-	"${FILESDIR}/patch-cmake-crc32c-external.patch"
-	"${FILESDIR}/ffmpeg-7.0.patch"
-	"${FILESDIR}/unbundle-libsrtp.patch"
-)
-
-src_unpack() {
-	unpack "${P}.tar.gz"
-	unpack "libyuv-${LIBYUV_COMMIT}.tar.bz2"
-	mv -T "libyuv-${LIBYUV_COMMIT}" "${S}/src/third_party/libyuv" || die
-}
 
 src_prepare() {
-	# libopenh264 has GENERATED files with yasm that aren't excluded by
-	# EXCLUDE_FROM_ALL, and I have no clue how to avoid this.
-	# These source files aren't used with system-openh264, anyway.
-	sed -i '/include(cmake\/libopenh264.cmake)/d' CMakeLists.txt || die
-
 	# The sources for these aren't available, avoid needing them
 	sed -e '/include(cmake\/libcrc32c.cmake)/d' \
 		-e '/include(cmake\/libabsl.cmake)/d' -i CMakeLists.txt || die
 
 	# "lol" said the scorpion, "lmao"
 	sed -i '/if (BUILD_SHARED_LIBS)/{n;n;s/WARNING/DEBUG/}' CMakeLists.txt || die
-
-	sed -r \
-		-e "/[ ]*(group_name = )(kDefaultProbingScreenshareBweSettings)/s@@\1(std::string)\2@" \
-		-i "${S}/src/rtc_base/experiments/alr_experiment.cc" || die
-	sed -r \
-		-e "/[ \t]*transaction_id.insert/s@(magic_cookie)@(std::string)\1@" \
-		-i "${S}/src/api/transport/stun.cc" || die
-	sed -r \
-		-e "/(candidate_stats->candidate_type = )(candidate.type_name)/s@@\1(std::string)\2@" \
-		-i "${S}/src/pc/rtc_stats_collector.cc" || die
-
-	rm -r "${S}"/src/third_party/{crc32c,abseil-cpp,librstp}
 
 	cmake_src_prepare
 }
