@@ -30,12 +30,12 @@ CDEPEND="
 	dev-libs/protobuf
 	dev-libs/xxhash
 	media-libs/libjpeg-turbo:=
-	>=media-libs/libtgvoip-2.4.4_p20230929
+	~media-libs/libtgvoip-2.4.4_p20240706
 	media-libs/openal
 	media-libs/opus
 	media-libs/rnnoise
-	>=media-libs/tg_owt-0_pre20230921:=[screencast=,X=]
-	media-video/ffmpeg:=[opus,vpx]
+	~media-libs/tg_owt-0_pre20241202:=[screencast=,X=]
+	>=media-video/ffmpeg-6:=[opus,vpx]
 	sys-libs/zlib:=[minizip]
 	!enchant? ( >=app-text/hunspell-1.7:= )
 	enchant? ( app-text/enchant:= )
@@ -86,6 +86,12 @@ BDEPEND="
 "
 
 S=${WORKDIR}/frk-v${PV}-full
+
+PATCHES=(
+	"${FILESDIR}"/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch
+	"${FILESDIR}"/tdesktop-4.10.0-system-cppgir.patch
+	"${FILESDIR}"/tdesktop-4.11.3-system-libyuv.patch
+)
 
 pkg_pretend() {
 	if has ccache ${FEATURES}; then

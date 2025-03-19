@@ -72,7 +72,6 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
-	"${FILESDIR}/unbundle-libsrtp.patch"
 	"${FILESDIR}/tg_owt-system-yuv.patch"
 )
 
@@ -111,7 +110,7 @@ src_install() {
 
 	# Install a few headers anyway, as required by net-im/telegram-desktop...
 	local headers=(
-		third_party/libyuv/include
+		#third_party/libyuv/include
 		rtc_base/third_party/sigslot
 		rtc_base/third_party/base64
 	)
