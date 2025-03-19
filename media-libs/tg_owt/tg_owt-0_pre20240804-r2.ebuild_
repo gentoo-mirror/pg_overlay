@@ -10,8 +10,7 @@ HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
 TG_OWT_COMMIT="dc17143230b5519f3c1a8da0079e00566bd4c5a8"
 LIBYUV_COMMIT="32ccd53bb36421bb1e47b1cfa362b9fa6825e82a"
-SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz
-	https://gitlab.com/chromiumsrc/libyuv/-/archive/${LIBYUV_COMMIT}/libyuv-${LIBYUV_COMMIT}.tar.bz2"
+SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 # Upstream libyuv: https://chromium.googlesource.com/libyuv/libyuv
 
@@ -36,6 +35,7 @@ RDEPEND="
 	dev-libs/protobuf:=
 	media-libs/libjpeg-turbo:=
 	>=media-libs/libvpx-1.10.0:=
+	media-libs/libyuv
 	media-libs/openh264:=
 	media-libs/opus
 	media-video/ffmpeg:=
@@ -75,12 +75,6 @@ PATCHES=(
 	"${FILESDIR}/ffmpeg-7.0.patch"
 	"${FILESDIR}/unbundle-libsrtp.patch"
 )
-
-src_unpack() {
-	unpack "${P}.tar.gz"
-	unpack "libyuv-${LIBYUV_COMMIT}.tar.bz2"
-	mv -T "libyuv-${LIBYUV_COMMIT}" "${S}/src/third_party/libyuv" || die
-}
 
 src_prepare() {
 	# libopenh264 has GENERATED files with yasm that aren't excluded by
