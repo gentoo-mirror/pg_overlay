@@ -110,7 +110,7 @@ src_install() {
 
 	# Install a few headers anyway, as required by net-im/telegram-desktop...
 	local headers=(
-		third_party/libyuv/include
+		#third_party/libyuv/include
 		rtc_base/third_party/sigslot
 		rtc_base/third_party/base64
 	)
