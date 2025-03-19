@@ -72,7 +72,6 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
-	"${FILESDIR}/ffmpeg-7.0.patch"
 	"${FILESDIR}/unbundle-libsrtp.patch"
 	"${FILESDIR}/tg_owt-system-yuv.patch"
 )
