@@ -1,0 +1,12 @@
+diff -up tg_owt-48c9c31d591509799a8385542ff3fb04f4d58327/CMakeLists.txt.2~ tg_owt-48c9c31d591509799a8385542ff3fb04f4d58327/CMakeLists.txt
+--- tg_owt-48c9c31d591509799a8385542ff3fb04f4d58327/CMakeLists.txt.2~	2024-07-29 20:40:04.658375160 +0200
++++ tg_owt-48c9c31d591509799a8385542ff3fb04f4d58327/CMakeLists.txt	2024-07-29 20:40:38.698923884 +0200
+@@ -75,7 +75,7 @@ include(cmake/generate_target.cmake)
+ include(cmake/generate_field_trials.cmake)
+ include(cmake/external.cmake)
+ #include(cmake/libabsl.cmake)
+-include(cmake/libcrc32c.cmake)
++#include(cmake/libcrc32c.cmake)
+ include(cmake/libpffft.cmake)
+ include(cmake/librnnoise.cmake)
+ include(cmake/libsrtp.cmake)

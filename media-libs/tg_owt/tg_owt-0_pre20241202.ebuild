@@ -69,6 +69,14 @@ BDEPEND="
 	X? ( x11-base/xorg-proto )
 "
 
+PATCHES=(
+	"${FILESDIR}/patch-cmake-absl-external.patch"
+	"${FILESDIR}/patch-cmake-crc32c-external.patch"
+	"${FILESDIR}/ffmpeg-7.0.patch"
+	"${FILESDIR}/unbundle-libsrtp.patch"
+	"${FILESDIR}/tg_owt-system-yuv.patch"
+)
+
 src_prepare() {
 	# The sources for these aren't available, avoid needing them
 	sed -e '/include(cmake\/libcrc32c.cmake)/d' \

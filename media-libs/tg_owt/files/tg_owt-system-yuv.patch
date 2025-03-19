@@ -1,0 +1,281 @@
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt	2025-02-26 14:06:49.749683449 +0100
+@@ -50,6 +50,8 @@ project(tg_owt
+ )
+ set_property(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR} PROPERTY VS_STARTUP_PROJECT tg_owt)
+ 
++include_directories(${CMAKE_CURRENT_BINARY_DIR})
++
+ get_filename_component(webrtc_loc "src" REALPATH)
+ set(third_party_loc ${webrtc_loc}/third_party)
+ set(tools_loc ${webrtc_loc}/tools)
+@@ -75,7 +77,7 @@ include(cmake/generate_field_trials.cmak
+ include(cmake/external.cmake)
+ include(cmake/libpffft.cmake)
+ include(cmake/librnnoise.cmake)
+-include(cmake/libyuv.cmake)
++#include(cmake/libyuv.cmake)
+ if (APPLE)
+     include(cmake/libsdkmacos.cmake)
+ endif()
+@@ -131,7 +133,7 @@ target_link_libraries(tg_owt
+ PRIVATE
+     tg_owt::libpffft
+     tg_owt::librnnoise
+-    tg_owt::libyuv
++    yuv
+ )
+ 
+ if (is_x86 OR is_x64)
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/cmake/libwebrtcbuild.cmake.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/cmake/libwebrtcbuild.cmake
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/cmake/libwebrtcbuild.cmake.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/cmake/libwebrtcbuild.cmake	2025-02-26 14:06:13.451641619 +0100
+@@ -3,7 +3,7 @@ add_library(tg_owt::libwebrtcbuild ALIAS
+ 
+ target_link_libraries(libwebrtcbuild
+ INTERFACE
+-    tg_owt::libyuv
++    yuv
+ )
+ if (NOT absl_FOUND)
+     target_link_libraries(libwebrtcbuild INTERFACE tg_owt::libabsl)
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i010_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i010_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i010_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i010_buffer.cc	2025-02-26 14:06:13.451700610 +0100
+@@ -14,8 +14,8 @@
+ #include "api/make_ref_counted.h"
+ #include "api/video/i420_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/scale.h>
+ 
+ // Aligning pointer to 64 bytes for improved performance, e.g. use SIMD.
+ static const int kBufferAlignment = 64;
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i210_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i210_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i210_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i210_buffer.cc	2025-02-26 14:06:13.451754812 +0100
+@@ -15,8 +15,8 @@
+ #include "api/video/i420_buffer.h"
+ #include "api/video/i422_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/scale.h>
+ 
+ // Aligning pointer to 64 bytes for improved performance, e.g. use SIMD.
+ static const int kBufferAlignment = 64;
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i410_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i410_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i410_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i410_buffer.cc	2025-02-26 14:06:13.451808443 +0100
+@@ -17,9 +17,9 @@
+ #include "api/make_ref_counted.h"
+ #include "api/video/i420_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/planar_functions.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/planar_functions.h>
++#include <libyuv/scale.h>
+ 
+ // Aligning pointer to 64 bytes for improved performance, e.g. use SIMD.
+ static const int kBufferAlignment = 64;
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i420_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i420_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i420_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i420_buffer.cc	2025-02-26 14:06:13.451859109 +0100
+@@ -16,9 +16,9 @@
+ 
+ #include "api/make_ref_counted.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/planar_functions.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/planar_functions.h>
++#include <libyuv/scale.h>
+ 
+ // Aligning pointer to 64 bytes for improved performance, e.g. use SIMD.
+ static const int kBufferAlignment = 64;
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i422_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i422_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i422_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i422_buffer.cc	2025-02-26 14:06:13.451909844 +0100
+@@ -17,9 +17,9 @@
+ #include "api/make_ref_counted.h"
+ #include "api/video/i420_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/planar_functions.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/planar_functions.h>
++#include <libyuv/scale.h>
+ 
+ // Aligning pointer to 64 bytes for improved performance, e.g. use SIMD.
+ static const int kBufferAlignment = 64;
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i444_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i444_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i444_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/i444_buffer.cc	2025-02-26 14:06:13.451964117 +0100
+@@ -17,9 +17,9 @@
+ #include "api/make_ref_counted.h"
+ #include "api/video/i420_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/planar_functions.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/planar_functions.h>
++#include <libyuv/scale.h>
+ 
+ // Aligning pointer to 64 bytes for improved performance, e.g. use SIMD.
+ static const int kBufferAlignment = 64;
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/nv12_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/nv12_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/nv12_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/api/video/nv12_buffer.cc	2025-02-26 14:06:13.452003822 +0100
+@@ -13,8 +13,8 @@
+ #include "api/make_ref_counted.h"
+ #include "api/video/i420_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/scale.h>
+ 
+ namespace webrtc {
+ 
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/libyuv/webrtc_libyuv.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/libyuv/webrtc_libyuv.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/libyuv/webrtc_libyuv.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/libyuv/webrtc_libyuv.cc	2025-02-26 14:06:13.452055319 +0100
+@@ -15,7 +15,7 @@
+ #include "api/video/i420_buffer.h"
+ #include "common_video/include/video_frame_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv.h"
++#include <libyuv.h>
+ 
+ namespace webrtc {
+ 
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/video_frame_buffer.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/video_frame_buffer.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/video_frame_buffer.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/common_video/video_frame_buffer.cc	2025-02-26 14:06:13.452108439 +0100
+@@ -12,7 +12,7 @@
+ #include "api/make_ref_counted.h"
+ #include "api/video/i420_buffer.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
++#include <libyuv/convert.h>
+ 
+ namespace webrtc {
+ 
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame.cc	2025-02-26 14:06:13.452159866 +0100
+@@ -19,7 +19,7 @@
+ #include "modules/desktop_capture/desktop_capture_types.h"
+ #include "modules/desktop_capture/desktop_geometry.h"
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/planar_functions.h"
++#include <libyuv/planar_functions.h>
+ 
+ namespace webrtc {
+ 
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame_rotation.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame_rotation.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame_rotation.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/desktop_capture/desktop_frame_rotation.cc	2025-02-26 14:06:13.452203508 +0100
+@@ -11,7 +11,7 @@
+ #include "modules/desktop_capture/desktop_frame_rotation.h"
+ 
+ #include "rtc_base/checks.h"
+-#include "third_party/libyuv/include/libyuv/rotate_argb.h"
++#include <libyuv/rotate_argb.h>
+ 
+ namespace webrtc {
+ 
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_capture/video_capture_impl.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_capture/video_capture_impl.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_capture/video_capture_impl.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_capture/video_capture_impl.cc	2025-02-26 14:06:13.452248473 +0100
+@@ -20,7 +20,7 @@
+ #include "rtc_base/logging.h"
+ #include "rtc_base/time_utils.h"
+ #include "rtc_base/trace_event.h"
+-#include "third_party/libyuv/include/libyuv.h"
++#include <libyuv.h>
+ 
+ namespace webrtc {
+ namespace videocapturemodule {
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/h264/h264_encoder_impl.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/h264/h264_encoder_impl.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/h264/h264_encoder_impl.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/h264/h264_encoder_impl.cc	2025-02-26 14:06:13.452310490 +0100
+@@ -32,8 +32,8 @@
+ #include "rtc_base/logging.h"
+ #include "rtc_base/time_utils.h"
+ #include "system_wrappers/include/metrics.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/convert.h>
++#include <libyuv/scale.h>
+ #include <wels/codec_api.h>
+ #include <wels/codec_app_def.h>
+ #include <wels/codec_def.h>
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_decoder.cc	2025-02-26 14:06:13.452374611 +0100
+@@ -32,7 +32,7 @@
+ #include "rtc_base/numerics/exp_filter.h"
+ #include "rtc_base/time_utils.h"
+ #include "system_wrappers/include/metrics.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
++#include <libyuv/convert.h>
+ #include "vpx/vp8.h"
+ #include "vpx/vp8dx.h"
+ #include "vpx/vpx_decoder.h"
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp8/libvpx_vp8_encoder.cc	2025-02-26 14:06:13.452448921 +0100
+@@ -41,7 +41,7 @@
+ #include "rtc_base/logging.h"
+ #include "rtc_base/trace_event.h"
+ #include "system_wrappers/include/field_trial.h"
+-#include "third_party/libyuv/include/libyuv/scale.h"
++#include <libyuv/scale.h>
+ #include "vpx/vp8cx.h"
+ 
+ #if (defined(WEBRTC_ARCH_ARM) || defined(WEBRTC_ARCH_ARM64)) && \
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_decoder.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_decoder.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_decoder.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_decoder.cc	2025-02-26 14:06:13.452536135 +0100
+@@ -23,7 +23,7 @@
+ #include "modules/video_coding/utility/vp9_uncompressed_header_parser.h"
+ #include "rtc_base/checks.h"
+ #include "rtc_base/logging.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
++#include <libyuv/convert.h>
+ #include "vpx/vp8dx.h"
+ #include "vpx/vpx_decoder.h"
+ 
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc.1~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc.1~	2024-12-03 14:23:36.000000000 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/src/modules/video_coding/codecs/vp9/libvpx_vp9_encoder.cc	2025-02-26 14:06:13.452627648 +0100
+@@ -43,7 +43,7 @@
+ #include "rtc_base/strings/string_builder.h"
+ #include "rtc_base/time_utils.h"
+ #include "rtc_base/trace_event.h"
+-#include "third_party/libyuv/include/libyuv/convert.h"
++#include <libyuv/convert.h>
+ #include "vpx/vp8cx.h"
+ #include "vpx/vpx_encoder.h"
+ 
+diff -up tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt.omv~ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt
+--- tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt.omv~	2025-02-26 14:08:11.072361307 +0100
++++ tg_owt-be39b8c8d0db1f377118f813f0c4bd331d341d5e/CMakeLists.txt	2025-02-26 14:08:45.616965408 +0100
+@@ -2632,7 +2632,6 @@ list(APPEND export_targets
+     libwebrtcbuild
+     libpffft
+     librnnoise
+-    libyuv
+ )
+ if (NOT absl_FOUND)
+     include(cmake/libabsl.cmake)

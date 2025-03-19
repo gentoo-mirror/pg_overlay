@@ -1,0 +1,30 @@
+diff -up tg_owt-a45d8b8f0a99bd0e5118dda1dc4a8b7b3ad5dcfd/CMakeLists.txt.omv~ tg_owt-a45d8b8f0a99bd0e5118dda1dc4a8b7b3ad5dcfd/CMakeLists.txt
+--- tg_owt-a45d8b8f0a99bd0e5118dda1dc4a8b7b3ad5dcfd/CMakeLists.txt.omv~	2023-07-14 01:11:53.696880797 +0200
++++ tg_owt-a45d8b8f0a99bd0e5118dda1dc4a8b7b3ad5dcfd/CMakeLists.txt	2023-07-14 01:12:50.501530322 +0200
+@@ -78,7 +78,7 @@ include(cmake/external.cmake)
+ #include(cmake/libcrc32c.cmake)
+ include(cmake/libpffft.cmake)
+ include(cmake/librnnoise.cmake)
+-include(cmake/libsrtp.cmake)
++#include(cmake/libsrtp.cmake)
+ if (APPLE)
+     include(cmake/libsdkmacos.cmake)
+ endif()
+@@ -138,7 +138,7 @@ target_link_libraries(tg_owt
+ PRIVATE
+     tg_owt::libpffft
+     tg_owt::librnnoise
+-    tg_owt::libsrtp
++    -lsrtp2
+     -lyuv
+ )
+ 
+@@ -2636,7 +2636,7 @@ set(export_targets
+     ${tg_owt_export}
+     libpffft
+     librnnoise
+-    libsrtp
++    #    libsrtp
+     libwebrtcbuild
+     ${platform_export}
+ )
