@@ -68,7 +68,7 @@ src_configure() {
 		-Dprotobuf_MODULE_COMPATIBLE=ON
 		-DBUILD_SHARED_LIBS=OFF
 		#
-		-DANDROID_TOOLS_USE_BUNDLED_LIBUSB=ON
+		-DANDROID_TOOLS_USE_BUNDLED_LIBUSB=OFF
 	)
 	cmake_src_configure
 }
