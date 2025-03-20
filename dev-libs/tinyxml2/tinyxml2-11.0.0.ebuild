@@ -11,7 +11,7 @@ HOMEPAGE="https://github.com/leethomason/tinyxml2/"
 SRC_URI="https://github.com/leethomason/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="ZLIB"
-SLOT="0/10"
+SLOT="0/11"
 KEYWORDS="amd64 arm arm64 ~hppa ~loong ppc ppc64 ~riscv sparc x86"
 IUSE="test"
 RESTRICT="!test? ( test )"
