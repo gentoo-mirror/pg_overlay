@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -28,10 +28,11 @@ DEPEND="
 	app-arch/brotli:=
 	app-arch/lz4:=
 	app-arch/zstd:=
+	dev-cpp/abseil-cpp:=
 	dev-libs/libpcre2:=
 	>=dev-libs/protobuf-3.0.0:=
 	sys-libs/zlib:=
-	virtual/libusb:1=
+	>=dev-libs/libusb-1.0.28
 "
 RDEPEND="${DEPEND}
 	udev? ( dev-util/android-udev-rules )
@@ -40,6 +41,7 @@ RDEPEND="${DEPEND}
 BDEPEND="
 	dev-lang/go
 	dev-lang/perl
+	dev-libs/protobuf[protoc(+)]
 "
 
 DOCS=()
@@ -54,6 +56,11 @@ src_prepare() {
 	eapply "${S}/patches/libziparchive/0004-Remove-the-useless-dependency-on-gtest.patch"
 
 	cd "${S}" || die
+
+	# why do we depend on libandroidfw? It is never linked to or used.
+	# https://github.com/nmeum/android-tools/issues/148
+	sed -i '/libandroidfw/d' vendor/CMakeLists.txt || die
+
 	rm -r patches || die
 	cmake_src_prepare
 }
@@ -95,7 +102,7 @@ src_install() {
 		python_foreach_impl python_newexe vendor/avb/avbtool.py avbtool
 	fi
 	docinto adb
-	#dodoc vendor/adb/*.{txt,TXT}
+	doman vendor/adb/docs/user/adb.1
 	docinto fastboot
 	dodoc vendor/core/fastboot/README.md
 }

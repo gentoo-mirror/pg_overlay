@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -7,32 +7,35 @@ inherit autotools linux-info
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-# rtorrent-archive is an exact match to the tarballs also uploaded to
-# https://github.com/rakshasa/rtorrent/releases, but the problem with that more
-# common path is the libtorrent/rtorrent versions are not in sync, so updating
-# libtorrent wouldnt be more annoying.
-SRC_URI="https://github.com/rakshasa/${PN}/releases/download/v${PV}/${P}.tar.gz"
+SRC_URI="https://github.com/rakshasa/rtorrent/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris"
-IUSE="debug selinux test xmlrpc"
+IUSE="debug selinux test tinyxml2 xmlrpc"
 RESTRICT="!test? ( test )"
+REQUIRED_USE="tinyxml2? ( !xmlrpc )"
 
-COMMON_DEPEND="~net-libs/libtorrent-0.15.${PV##*.}
+DEPEND="
+	~net-libs/libtorrent-${PV}
 	net-misc/curl
 	sys-libs/ncurses:0=
-	xmlrpc? ( dev-libs/tinyxml2:= )"
-RDEPEND="${COMMON_DEPEND}
+	tinyxml2? ( dev-libs/tinyxml2:= )
+	xmlrpc? ( dev-libs/xmlrpc-c:= )
+"
+RDEPEND="
+	${DEPEND}
 	selinux? ( sec-policy/selinux-rtorrent )
 "
-DEPEND="${COMMON_DEPEND}
-	dev-util/cppunit
-	virtual/pkgconfig"
+BDEPEND="
+	virtual/pkgconfig
+	test? ( dev-util/cppunit )
+"
 
 DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-0.15.1-tests-fix-arrays.patch
 )
 
 pkg_setup() {
@@ -59,12 +62,11 @@ src_prepare() {
 }
 
 src_configure() {
-	default
-
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		$(use_enable debug) \
-		$(use_with xmlrpc xmlrpc-tinyxml2)
+		$(usev xmlrpc --with-xmlrpc-c) \
+		$(usev tinyxml2 --with-xmlrpc-tinyxml2)
 }
 
 src_install() {
