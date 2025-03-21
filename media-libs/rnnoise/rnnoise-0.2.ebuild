@@ -43,6 +43,9 @@ src_configure() {
 	econf "${myeconfargs[@]}"
 }
 
+src_compile() {
+	emake
+}
 src_install() {
 	default
 	rm "${ED}/usr/share/doc/${PF}/COPYING" || die
