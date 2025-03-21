@@ -10,7 +10,7 @@ HOMEPAGE="https://jmvalin.ca/demo/rnnoise/ https://gitlab.xiph.org/xiph/rnnoise"
 
 #COMMIT="1cbdbcf1283499bbb2230a6b0f126eb9b236defd"
 SRC_URI="https://gitlab.xiph.org/xiph/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2"
-SRC_URI+=" https://media.xiph.org/${PN}/models/${PN}_data-f56003f.tar.gz"
+SRC_URI+=" https://media.xiph.org/${PN}/models/${PN}_data-0a8755f8e2d834eff6a54714ecc7d75f9932e845df35f8b59bc52a7cfe6e8b37.tar.gz"
 S="${WORKDIR}/${PN}-v${PV}"
 
 LICENSE="BSD"
