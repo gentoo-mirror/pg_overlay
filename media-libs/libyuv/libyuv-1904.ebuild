@@ -16,7 +16,7 @@ else
 	# https://chromium.googlesource.com/libyuv/libyuv.git/+archive/${commit}.tar.gz
 	MYTAG="0.0.1904.20250204-1"
 	SRC_URI="https://salsa.debian.org/debian/${PN}/-/archive/debian/${MYTAG}/${PN}-debian-${MYTAG}.tar.bz2 -> ${P}.tar.bz2"
-	S="${WORKDIR}/libyuv-upstream-${MYTAG}"
+	S="${WORKDIR}/libyuv-debian-${MYTAG}"
 	KEYWORDS="~amd64"
 fi
 
