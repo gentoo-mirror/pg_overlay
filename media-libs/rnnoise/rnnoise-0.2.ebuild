@@ -8,9 +8,9 @@ inherit autotools
 DESCRIPTION="Recurrent neural network for audio noise reduction"
 HOMEPAGE="https://jmvalin.ca/demo/rnnoise/ https://gitlab.xiph.org/xiph/rnnoise"
 
-COMMIT="1cbdbcf1283499bbb2230a6b0f126eb9b236defd"
+#COMMIT="1cbdbcf1283499bbb2230a6b0f126eb9b236defd"
 SRC_URI="https://gitlab.xiph.org/xiph/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.bz2"
-S="${WORKDIR}/${PN}-${COMMIT}"
+#S="${WORKDIR}/${PN}-${COMMIT}"
 
 LICENSE="BSD"
 SLOT="0"
