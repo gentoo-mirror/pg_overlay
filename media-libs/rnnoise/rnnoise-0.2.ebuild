@@ -32,7 +32,8 @@ PATCHES=(
 
 src_unpack() {
 	default
-	unpack ${PN}_data-f56003f.tar.gz
+	#unpack ${PN}_data-f56003f.tar.gz
+ 	mv -v "${WORKDIR}/src/*" "${S}/src"
 }
 
 src_prepare() {
