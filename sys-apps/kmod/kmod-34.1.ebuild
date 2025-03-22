@@ -55,7 +55,7 @@ fi
 src_configure() {
 	local emesonargs=(
 		-Dbuild-tests=false \
-		-Dmanpages=false \
+		-Dmanpages=true \
 		$(meson_use debug debug-messages)
 		$(meson_feature lzma xz)
 		$(meson_feature pkcs7 openssl)
