@@ -18,7 +18,7 @@ fi
 
 LICENSE="LGPL-2"
 SLOT="0"
-IUSE="debug doc +lzma pkcs7 static-libs +tools +zlib +zstd"
+IUSE="debug doc +lzma pkcs7 +tools +zlib +zstd"
 
 # Upstream does not support running the test suite with custom configure flags.
 # I was also told that the test suite is intended for kmod developers.
@@ -59,7 +59,6 @@ src_configure() {
 		$(meson_use debug debug-messages)
 		$(meson_feature lzma xz)
 		$(meson_feature pkcs7 openssl)
-		$(meson_feature static-libs static)
 		$(meson_use tools)
 		$(meson_feature zlib)
 		$(meson_feature zstd)
@@ -72,14 +71,6 @@ src_install() {
 	meson_src_install
 
 	find "${ED}" -type f -name "*.la" -delete || die
-
-	if use tools; then
-		local cmd
-		for cmd in depmod insmod modprobe rmmod; do
-			rm "${ED}"/bin/${cmd} || die
-			dosym ../bin/kmod /sbin/${cmd}
-		done
-	fi
 
 	cat <<-EOF > "${T}"/usb-load-ehci-first.conf
 	softdep uhci_hcd pre: ehci_hcd
