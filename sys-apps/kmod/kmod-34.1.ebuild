@@ -18,7 +18,7 @@ fi
 
 LICENSE="LGPL-2"
 SLOT="0"
-IUSE="debug doc +lzma pkcs7 static-libs +tools +zlib +zstd"
+IUSE="debug doc +lzma pkcs7 +tools +zlib +zstd"
 
 # Upstream does not support running the test suite with custom configure flags.
 # I was also told that the test suite is intended for kmod developers.
@@ -59,7 +59,6 @@ src_configure() {
 		$(meson_use debug debug-messages)
 		$(meson_feature lzma xz)
 		$(meson_feature pkcs7 openssl)
-		$(meson_feature static-libs static)
 		$(meson_use tools)
 		$(meson_feature zlib)
 		$(meson_feature zstd)
