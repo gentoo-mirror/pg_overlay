@@ -60,7 +60,7 @@ src_configure() {
 		$(meson_feature lzma xz)
 		$(meson_feature pkcs7 openssl)
 		$(meson_feature static-libs static)
-		$(meson_feature tools)
+		$(meson_use tools)
 		$(meson_feature zlib)
 		$(meson_feature zstd)
 	)
