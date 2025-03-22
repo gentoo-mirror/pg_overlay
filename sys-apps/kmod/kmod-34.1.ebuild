@@ -51,7 +51,7 @@ BDEPEND="
 "
 src_configure() {
 	local emesonargs=(
-		--buildtype release
+		-Dbuildtype=release
 		-Dbuild-tests=false \
 		-Dfishcompletiondir=no \
 		-Dmanpages=true \
