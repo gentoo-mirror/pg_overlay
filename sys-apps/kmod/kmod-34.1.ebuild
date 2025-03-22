@@ -72,14 +72,6 @@ src_install() {
 
 	find "${ED}" -type f -name "*.la" -delete || die
 
-	if use tools; then
-		local cmd
-		for cmd in depmod insmod modprobe rmmod; do
-			rm "${ED}"/usr/bin/${cmd} || die
-			dosym ../bin/kmod /sbin/${cmd}
-		done
-	fi
-
 	cat <<-EOF > "${T}"/usb-load-ehci-first.conf
 	softdep uhci_hcd pre: ehci_hcd
 	softdep ohci_hcd pre: ehci_hcd
