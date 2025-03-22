@@ -41,6 +41,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
+	app-text/scdoc
 	doc? (
 		dev-util/gtk-doc
 		dev-build/gtk-doc-am
@@ -48,15 +49,14 @@ BDEPEND="
 	lzma? ( virtual/pkgconfig )
 	zlib? ( virtual/pkgconfig )
 "
-if [[ ${PV} == 9999* ]]; then
-	BDEPEND+=" app-text/scdoc"
-fi
-
 src_configure() {
 	local emesonargs=(
 		-Dbuild-tests=false \
-		-Dmanpages=false \
+		-Dfishcompletiondir=no \
+		-Dmanpages=true \
+		-Dzshcompletiondir=no \
 		$(meson_use debug debug-messages)
+		$(meson_use doc docs)
 		$(meson_feature lzma xz)
 		$(meson_feature pkcs7 openssl)
 		$(meson_use tools)
