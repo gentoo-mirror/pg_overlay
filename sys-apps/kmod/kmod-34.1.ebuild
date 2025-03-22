@@ -57,12 +57,12 @@ src_configure() {
 		-Dbuild-tests=false \
 		-Dmanpages=false \
 		$(meson_use debug debug-messages)
-		$(meson_use lzma xz)
-		$(meson_use pkcs7 openssl)
-		$(meson_use static-libs static)
-		$(meson_use tools)
-		$(meson_use zlib)
-		$(meson_use zstd)
+		$(meson_feature lzma xz)
+		$(meson_feature pkcs7 openssl)
+		$(meson_feature static-libs static)
+		$(meson_feature tools)
+		$(meson_feature zlib)
+		$(meson_feature zstd)
 	)
 
 	meson_src_configure
