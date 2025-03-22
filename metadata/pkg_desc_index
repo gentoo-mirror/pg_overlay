@@ -16,7 +16,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
 app-office/libreoffice-l10n 25.2.1.2: Translations for the Libreoffice suite
-app-office/onlyoffice-bin 8.3.1: Onlyoffice is an office productivity suite (binary version)
+app-office/onlyoffice-bin 8.3.2: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.9: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
