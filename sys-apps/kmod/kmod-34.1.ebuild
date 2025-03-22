@@ -75,7 +75,7 @@ src_install() {
 	if use tools; then
 		local cmd
 		for cmd in depmod insmod modprobe rmmod; do
-			rm "${ED}"/bin/${cmd} || die
+			rm "${ED}"/usr/bin/${cmd} || die
 			dosym ../bin/kmod /sbin/${cmd}
 		done
 	fi
