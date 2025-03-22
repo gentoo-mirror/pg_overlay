@@ -41,6 +41,7 @@ RDEPEND="
 "
 DEPEND="${RDEPEND}"
 BDEPEND="
+	app-text/scdoc
 	doc? (
 		dev-util/gtk-doc
 		dev-build/gtk-doc-am

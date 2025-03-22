@@ -1,4 +1,4 @@
-BDEPEND=doc? ( dev-util/gtk-doc dev-build/gtk-doc-am ) lzma? ( virtual/pkgconfig ) zlib? ( virtual/pkgconfig ) >=dev-build/meson-1.2.3 app-alternatives/ninja dev-build/meson-format-array
+BDEPEND=app-text/scdoc doc? ( dev-util/gtk-doc dev-build/gtk-doc-am ) lzma? ( virtual/pkgconfig ) zlib? ( virtual/pkgconfig ) >=dev-build/meson-1.2.3 app-alternatives/ninja dev-build/meson-format-array
 DEFINED_PHASES=compile configure install postinst test
 DEPEND=!sys-apps/module-init-tools !sys-apps/modutils !<sys-apps/openrc-0.13.8 !<sys-apps/systemd-216-r3 lzma? ( >=app-arch/xz-utils-5.0.4-r1 ) pkcs7? ( >=dev-libs/openssl-1.1.0:= ) zlib? ( >=sys-libs/zlib-1.2.6 ) zstd? ( >=app-arch/zstd-1.5.2-r1:= )
 DESCRIPTION=Library and tools for managing linux kernel modules
@@ -12,4 +12,4 @@ RDEPEND=!sys-apps/module-init-tools !sys-apps/modutils !<sys-apps/openrc-0.13.8 
 SLOT=0
 SRC_URI=https://mirrors.edge.kernel.org/pub/linux/utils/kernel/kmod/kmod-34.1.tar.xz
 _eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	flag-o-matic	357f1a896fbedcd06e5ce55419c49eb9	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	python-utils-r1	b7726144f5af59e186d66746d0f513e5	meson	99466844dd8d4fcfb07578a76f5a9922	bash-completion-r1	767861f3744f589ee5291c1698b1c082
-_md5_=bae626328ce9110725786c8875dc8d3a
+_md5_=2db8ed25b6e68580a012d9f4523598f9
