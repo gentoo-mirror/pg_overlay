@@ -11,7 +11,7 @@ app-i18n/opencc 1.1.9: Library for conversion between Traditional and Simplified
 app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
-app-misc/doublecmd 1.1.22: Cross Platform file manager.
+app-misc/doublecmd 1.1.23: Cross Platform file manager.
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
