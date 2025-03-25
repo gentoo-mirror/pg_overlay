@@ -59,7 +59,7 @@ COMMON_DEPEND="
 	!ffmpeg? (
 		x11-libs/cairo:0=
 	)
-	fuse? ( sys-fs/fuse:3 )
+	fuse? ( sys-fs/fuse:3= )
 	gstreamer? (
 		media-libs/gstreamer:1.0
 		media-libs/gst-plugins-base:1.0
@@ -128,8 +128,7 @@ run_for_testing() {
 }
 
 src_configure() {
-	# bug #881695
-	filter-lto
+	use debug || append-cppflags -DNDEBUG
 	freerdp_configure -DBUILD_TESTING=OFF
 	run_for_testing freerdp_configure -DBUILD_TESTING=ON
 }
