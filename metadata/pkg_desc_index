@@ -153,7 +153,7 @@ sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer device
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-auth/elogind 255.9999: The systemd project's logind, extracted to a standalone package
-sys-auth/polkit 126_pre: Policy framework for controlling privileges for system-wide services
+sys-auth/polkit 126: Policy framework for controlling privileges for system-wide services
 sys-block/fio 3.38: Jens Axboe's Flexible IO tester
 sys-block/zram-init 12.1: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-boot/grub 2.12-r5: GNU GRUB boot loader

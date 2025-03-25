@@ -439,6 +439,9 @@ sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
 sys-auth/elogind:efi - Support rebooting into EFI firmware
+sys-auth/polkit:daemon - Build polkitd in addition to libpolkit.
+sys-auth/polkit:duktape - Use dev-lang/duktape instead of dev-lang/spidermonkey as JavaScript engine
+sys-auth/polkit:systemd - Use sys-apps/systemd for session tracking
 sys-block/fio:aio - Enable AIO ioengine
 sys-block/fio:curl - Enable HTTP engine for S3 and WebDav support support via net-misc/curl
 sys-block/fio:glusterfs - Enable GlusterFS gfapi support via sys-cluster/glusterfs
