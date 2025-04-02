@@ -35,7 +35,6 @@ BDEPEND="
 DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.15.1-tests-fix-arrays.patch
 )
 
 pkg_setup() {
