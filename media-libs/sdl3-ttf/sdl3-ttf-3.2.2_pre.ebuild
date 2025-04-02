@@ -8,7 +8,7 @@ inherit cmake-multilib poly-c_ebuilds
 REAL_P="SDL3_ttf-${MY_PV}"
 DESCRIPTION="Library that allows you to use TrueType fonts in SDL applications"
 HOMEPAGE="https://github.com/libsdl-org/SDL_ttf"
-SRC_URI="https://github.com/libsdl-org/SDL_ttf/releases/download/prerelease-${MY_PV}/${REAL_P}.tar.gz"
+SRC_URI="https://github.com/libsdl-org/SDL_ttf/releases/download/release-${MY_PV}/${REAL_P}.tar.gz"
 S="${WORKDIR}/${REAL_P}"
 
 LICENSE="ZLIB"
