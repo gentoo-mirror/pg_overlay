@@ -76,7 +76,7 @@ KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~x86"
 
 IUSE="+clang debug eme-free hardened hwaccel jack libproxy pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx"
-IUSE+=" system-png +system-webp wayland wifi +X"
+IUSE+=" system-png +system-webp wayland wifi +X +privacy"
 
 # Thunderbird-only USE flags.
 IUSE+=" +system-librnp"
