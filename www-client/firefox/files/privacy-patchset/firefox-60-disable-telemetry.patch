@@ -1,15 +1,13 @@
 --- firefox-60.0.bak/browser/confvars.sh
 +++ firefox-60.0/browser/confvars.sh
-@@ -11,3 +11,12 @@
+@@ -11,3 +11,10 @@
  # For the mozilla-aurora repository, use "aurora".
  MOZ_BRANDING_DIRECTORY=browser/branding/unofficial
  MOZ_OFFICIAL_BRANDING_DIRECTORY=browser/branding/official
 +
 +# Reduce data sharing with Mozilla
 +MOZ_DATA_REPORTING=0
-+MOZ_TELEMETRY_REPORTING=0
 +MOZ_CRASHREPORTER=0
-+MOZ_SERVICES_HEALTHREPORT=0
 +MOZ_PAY=0
 +MOZ_SERVICES_METRICS=0
 +MOZ_LOGGING=0
