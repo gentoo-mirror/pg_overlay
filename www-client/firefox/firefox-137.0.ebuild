@@ -1195,7 +1195,7 @@ src_configure() {
 	mozconfig_add_options_ac '' MOZ_DEVICES=0
 	mozconfig_add_options_ac '' MOZ_LOGGING=0
 	mozconfig_add_options_ac '' MOZ_PAY=0
-	mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORT=0
+	#mozconfig_add_options_ac '' MOZ_SERVICES_HEALTHREPORT=0
 	mozconfig_add_options_ac '' MOZ_SERVICES_METRICS=0
 	mozconfig_add_options_ac '' MOZ_X11=0
 	mozconfig_add_options_ac '' USE_X11=0
