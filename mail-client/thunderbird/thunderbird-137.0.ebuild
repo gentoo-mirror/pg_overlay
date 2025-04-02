@@ -565,7 +565,7 @@ src_prepare() {
 
 	einfo "Removing pre-built binaries ..."
 
-	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.a' -o -name '*.la' \) -print -delete ||
+	find "${S}"/third_party -type f \( -name '*.so' -o -name '*.o' -o -name '*.a' -o -name '*.la' \) -print -delete
 
 	# Clear checksums from cargo crates we've manually patched.
 	# moz_clear_vendor_checksums xyz
