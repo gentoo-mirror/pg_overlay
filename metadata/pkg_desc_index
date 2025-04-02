@@ -80,7 +80,7 @@ kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
-mail-client/thunderbird 128.8.0: Thunderbird Mail Client
+mail-client/thunderbird 137.0: Thunderbird Mail Client
 media-libs/gst-plugins-base 1.26.0_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.0_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.0_pre: Open source multimedia framework
