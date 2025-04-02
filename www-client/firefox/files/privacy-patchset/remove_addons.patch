@@ -2,7 +2,7 @@ diff --git a/browser/extensions/moz.build b/browser/extensions/moz.build
 index 3c6e7eb88689..d923333aa100 100644
 --- a/browser/extensions/moz.build
 +++ b/browser/extensions/moz.build
-@@ -5,10 +5,4 @@
+@@ -5,11 +5,4 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
  DIRS += [
@@ -12,6 +12,7 @@ index 3c6e7eb88689..d923333aa100 100644
 -    "report-site-issue",
 -    "pictureinpicture",
 -    "search-detection",
+-    "newtab",
  ]
 
 diff --git a/browser/locales/Makefile.in b/browser/locales/Makefile.in
