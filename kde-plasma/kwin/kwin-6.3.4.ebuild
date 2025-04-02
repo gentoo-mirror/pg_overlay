@@ -19,6 +19,7 @@ IUSE="accessibility gles2-only lock screencast +shortcuts systemd"
 RESTRICT="test"
 
 # qtbase slot op: GuiPrivate use in tabbox
+# qtbase[X]: private/qtx11extras_p.h in src/helpers/killer
 COMMON_DEPEND="
 	dev-libs/libei
 	>=dev-libs/libinput-1.27:=
@@ -29,6 +30,7 @@ COMMON_DEPEND="
 	>=dev-qt/qtsensors-${QTMIN}:6
 	>=dev-qt/qtshadertools-${QTMIN}:6
 	>=dev-qt/qtsvg-${QTMIN}:6
+	>=dev-qt/qtwayland-${QTMIN}:6
 	>=kde-frameworks/kauth-${KFMIN}:6
 	>=kde-frameworks/kcmutils-${KFMIN}:6
 	>=kde-frameworks/kcolorscheme-${KFMIN}:6
@@ -61,7 +63,7 @@ COMMON_DEPEND="
 	>=media-libs/libdisplay-info-0.2.0:=
 	media-libs/libepoxy
 	media-libs/libglvnd
-	>=media-libs/mesa-21.3[egl(+),gbm(+),wayland,X]
+	>=media-libs/mesa-24.1.0_rc1[opengl,wayland,X]
 	virtual/libudev:=
 	x11-libs/libX11
 	x11-libs/libXi
@@ -73,7 +75,6 @@ COMMON_DEPEND="
 	x11-libs/xcb-util-keysyms
 	x11-libs/xcb-util-wm
 	accessibility? ( media-libs/libqaccessibilityclient:6 )
-	gles2-only? ( >=media-libs/mesa-24.1.0_rc1 )
 	lock? ( >=kde-plasma/kscreenlocker-${KDE_CATV}:6 )
 	screencast? ( >=media-video/pipewire-1.2.0:= )
 	shortcuts? ( >=kde-plasma/kglobalacceld-${KDE_CATV}:6 )
@@ -100,7 +101,6 @@ DEPEND="${COMMON_DEPEND}
 	>=dev-libs/wayland-protocols-1.38
 	>=dev-qt/qttools-${QTMIN}:6[widgets]
 	>=dev-qt/qtbase-${QTMIN}:6[concurrent]
-	>=dev-qt/qtwayland-${QTMIN}:6
 	x11-base/xorg-proto
 	x11-libs/xcb-util-image
 	test? ( screencast? ( >=kde-plasma/kpipewire-${KDE_CATV}:6 ) )
@@ -114,11 +114,6 @@ BDEPEND="
 # https://bugs.gentoo.org/941628
 # -m 0755 to avoid suid with USE="-filecaps"
 FILECAPS=( -m 0755 cap_sys_nice=ep usr/bin/kwin_wayland )
-
-PATCHES=(
-	"${FILESDIR}/${P}-version.patch" # temp. downstream fix
-	"${FILESDIR}/${P}-remove-pragma.patch" # MR 7317, KDE-Bug: 501357
-)
 
 src_prepare() {
 	ecm_src_prepare
