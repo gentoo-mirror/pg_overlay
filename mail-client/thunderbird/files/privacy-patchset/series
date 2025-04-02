@@ -1,2 +1,6 @@
 firefox-60-disable-telemetry.patch
+disable-data-reporting-at-compile-time.patch
 remove_addons.patch
+disable-pocket.patch
+
+stop-undesired-requests.patch
