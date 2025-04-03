@@ -3,12 +3,11 @@
 
 EAPI=8
 
-inherit autotools git-r3 linux-info
+inherit autotools linux-info
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
-EGIT_BRANCH="master"
+SRC_URI="https://github.com/rakshasa/rtorrent/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -36,6 +35,7 @@ BDEPEND="
 DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-0.15.1-tests-fix-arrays.patch
 )
 
 pkg_setup() {
@@ -62,8 +62,6 @@ src_prepare() {
 }
 
 src_configure() {
-	default
-
 	# configure needs bash or script bombs out on some null shift, bug #291229
 	CONFIG_SHELL=${BASH} econf \
 		$(use_enable debug) \

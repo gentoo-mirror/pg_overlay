@@ -3,12 +3,11 @@
 
 EAPI=8
 
-inherit autotools git-r3 toolchain-funcs
+inherit autotools toolchain-funcs
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
-EGIT_BRANCH="master"
+SRC_URI="https://github.com/rakshasa/rtorrent/releases/download/v${PV}/${P}.tar.gz"
 
 LICENSE="GPL-2"
 # The README says that the library ABI is not yet stable and dependencies on
