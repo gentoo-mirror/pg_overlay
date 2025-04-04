@@ -4,7 +4,7 @@
 EAPI=8
 
 # taken from Kvantum/style/CMakeLists.txt
-QTMIN="6.2.0"
+QTMIN="6.6.0"
 KFMIN="6.0.0"
 inherit cmake multibuild xdg
 
