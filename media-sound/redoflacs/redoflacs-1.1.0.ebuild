@@ -18,6 +18,10 @@ RDEPEND="
 	media-libs/flac
 	sys-apps/coreutils"
 
+src_prepare() {
+	rm Makefile
+}
+
 src_install() {
 	dobin redoflacs
 	readme.gentoo_create_doc
