@@ -25,5 +25,6 @@ src_prepare() {
 
 src_install() {
 	dobin redoflacs
+	doman redoflacs.1
 	readme.gentoo_create_doc
 }
