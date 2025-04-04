@@ -20,6 +20,7 @@ RDEPEND="
 
 src_prepare() {
 	rm Makefile
+	default
 }
 
 src_install() {
