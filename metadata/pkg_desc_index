@@ -8,7 +8,6 @@ app-editors/jed 0.99.20_pre148: Console S-Lang-based editor
 app-emulation/nemu 3.3.1: Ncurses interface for QEMU
 app-emulation/virtualbox 7.1.6a: Family of powerful x86 virtualization products for enterprise and home use
 app-i18n/opencc 1.1.9: Library for conversion between Traditional and Simplified Chinese characters
-app-misc/czkawka 9999: Czkawka is a simple, fast and easy to use alternative to FSlint, written in Rust
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.23: Cross Platform file manager.
@@ -90,6 +89,7 @@ media-libs/libsdl2 2.32.52: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
 media-libs/libyuv 1904: Open source project that includes YUV scaling and conversion functionality.
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
+media-libs/opencv 4.11.0: A collection of algorithms and sample code for various computer vision problems
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
 media-libs/sdl3-image 3.2.4_pre: Image file loading library
