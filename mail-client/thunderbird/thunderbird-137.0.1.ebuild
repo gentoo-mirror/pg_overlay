@@ -11,7 +11,7 @@ LLVM_COMPAT=( 19 )
 PYTHON_COMPAT=( python3_{10..13} )
 PYTHON_REQ_USE="ncurses,sqlite,ssl"
 
-RUST_MIN_VER="1.77.1"
+RUST_MIN_VER="1.82.0"
 RUST_NEEDS_LLVM=1
 
 WANT_AUTOCONF="2.1"
@@ -123,7 +123,7 @@ COMMON_DEPEND="${TB_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.108
+	>=dev-libs/nss-3.109
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
