@@ -16,6 +16,8 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~x86"
 IUSE="+kernel"
 
+S=${S/_/}
+
 DEPEND="
 	net-libs/libpcap
 	>=sys-kernel/linux-headers-2.6"
