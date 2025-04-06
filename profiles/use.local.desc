@@ -85,6 +85,9 @@ dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
 gnome-base/librsvg:tools - Build svg viewer tool
+gnome-extra/gnome-commander:gsf - Add metadata support for OLE, OLE2 and ODF
+gnome-extra/gnome-commander:pdf - Add metadata support for PDF
+gnome-extra/gnome-commander:taglib - Add metadata support for ID3, Vorbis, FLAC and APE
 gui-apps/rofi-wayland:drun - Desktop file mode
 gui-apps/rofi-wayland:windowmode - Window switcher mode
 gui-libs/gtk:broadway - Enable the GDK Broadway backend.
@@ -268,9 +271,10 @@ media-sound/qmmp:soxr - Use the SoX resampling library
 media-sound/qmmp:stereo - Enable stereo effect
 media-sound/qmmp:tray - Build tray icon
 media-sound/qmmp:xmp - Enable module files renderer (modplug replacement)
+media-sound/strawberry:chromaprint - Enables audio fingerprinting support with media-libs/chromaprint
+media-sound/strawberry:loudness - Enable loudness normalisation according to the EBU R128 standard using media-libs/libebur128
 media-sound/strawberry:moodbar - Enable moodbar support
-media-sound/strawberry:soup - Enable soup support
-media-sound/strawberry:vlc - Enable media-video/vlc backend
+media-sound/strawberry:streaming - Enable Online Streaming Support
 media-video/mpv:archive - Enable support for various archive formats via app-arch/libarchive
 media-video/mpv:bluray - Enable playback of Blu-ray filesystems
 media-video/mpv:cli - Enable the command-line player
