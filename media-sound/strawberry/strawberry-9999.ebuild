@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -10,79 +10,60 @@ PLOCALES="ca cs de es es_AR es_ES es_MX et fi fr hu id it ja ko nb nl pl pt_BR r
 DESCRIPTION="Modern music player and library organizer based on Clementine and Qt"
 HOMEPAGE="https://www.strawberrymusicplayer.org/"
 if [[ ${PV} == *9999* ]]; then
-	EGIT_REPO_URI="https://github.com/${PN}musicplayer/${PN}.git"
+	EGIT_REPO_URI="https://github.com/strawberrymusicplayer/strawberry"
 	inherit git-r3
 else
 	SRC_URI="https://github.com/strawberrymusicplayer/strawberry/releases/download/${PV}/${P}.tar.xz"
-	KEYWORDS="~amd64 ~arm64 ~x86"
+	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="cdda debug +gstreamer icu ipod moodbar mtp pulseaudio qt6 soup +udisks vlc streaming"
+IUSE="alsa cdda chromaprint dbus debug kde +loudness ipod moodbar mtp +pulseaudio streaming +udisks X"
 
 BDEPEND="
-	!qt6? ( dev-qt/linguist-tools:5 )
 	sys-devel/gettext
 	virtual/pkgconfig
 "
+
+#INFO: alsa-lib is always required in linux even if its not built
 COMMON_DEPEND="
 	dev-db/sqlite:=
 	dev-libs/glib:2
-	dev-libs/protobuf:=
+	dev-libs/icu:=
+	dev-libs/kdsingleapplication[qt6(+)]
+	dev-qt/qtbase:6[concurrent,dbus?,gui,network,ssl,sql,sqlite,widgets,X?]
 	media-libs/alsa-lib
-	media-libs/taglib
-	!qt6? (
-		dev-qt/qtconcurrent:5
-		dev-qt/qtcore:5
-		dev-qt/qtdbus:5
-		dev-qt/qtgui:5
-		dev-qt/qtnetwork:5[ssl]
-		dev-qt/qtsql:5[sqlite]
-		dev-qt/qtwidgets:5
-		dev-qt/qtx11extras:5
-		x11-libs/libX11
-	)
-	qt6? (
-		dev-qt/qtbase[concurrent,dbus,gui,network,ssl,sql,sqlite,widgets]
-		dev-qt/kdsingleapplication[qt6]
-	)
+	media-libs/taglib:=
+	media-libs/gstreamer:1.0
+	media-libs/gst-plugins-base:1.0
 	cdda? ( dev-libs/libcdio:= )
-	gstreamer? (
-		media-libs/chromaprint:=
-		media-libs/gstreamer:1.0
-		media-libs/gst-plugins-base:1.0
-		media-plugins/gst-plugins-flac:1.0
-		media-plugins/gst-plugins-wavpack:1.0
+	chromaprint? ( media-libs/chromaprint:= )
+	ipod? (
+		media-libs/libgpod
+		x11-libs/gdk-pixbuf
 	)
-	icu? ( dev-libs/icu:= )
-	ipod? ( media-libs/libgpod )
 	moodbar? ( sci-libs/fftw:3.0 )
 	mtp? ( media-libs/libmtp )
-	pulseaudio? ( media-libs/libpulse
-				media-plugins/gst-plugins-pulse:1.0 )
-	vlc? ( media-video/vlc )
+	loudness? ( media-libs/libebur128 )
+	pulseaudio? ( media-libs/libpulse )
 "
 # Note: sqlite driver of dev-qt/qtsql is bundled, so no sqlite use is required; check if this can be overcome someway;
 RDEPEND="${COMMON_DEPEND}
-	gstreamer? (
-		soup? ( media-plugins/gst-plugins-soup:1.0 )
-		media-plugins/gst-plugins-taglib:1.0
-	)
-	mtp? ( media-libs/libmtp )
+	media-plugins/gst-plugins-meta:1.0
+	media-plugins/gst-plugins-taglib
 	udisks? ( sys-fs/udisks:2 )
+	kde? ( kde-frameworks/kglobalaccel )
 "
 DEPEND="${COMMON_DEPEND}
 	dev-cpp/gtest
 	dev-libs/boost
-	!qt6? ( dev-qt/qttest:5 )
 "
 
 DOCS=( Changelog README.md )
 
 REQUIRED_USE="
-	cdda? ( gstreamer )
-	|| ( gstreamer vlc )
+	|| ( alsa pulseaudio )
 "
 
 src_prepare() {
@@ -94,28 +75,32 @@ src_prepare() {
 src_configure() {
 	# spotify is not in portage
 	local mycmakeargs=(
+		$(cmake_use_find_package X X11 )
 		-DBUILD_WERROR=OFF
 		# avoid automagically enabling of ccache (bug #611010)
 		-DCCACHE_EXECUTABLE=OFF
 		-DENABLE_GIO=ON
-		-DLINGUAS="$(plocale_get_locales)"
+		-DENABLE_GIO_UNIX=ON
+		-DENABLE_ALSA="$(usex alsa)"
+		-DENABLE_PULSE="$(usex pulseaudio)"
+		-DENABLE_DBUS="$(usex dbus)"
+		-DENABLE_MPRIS2="$(usex dbus)"
+		-DENABLE_KGLOBALACCEL_GLOBALSHORTCUTS=$(usex kde)
+		-DENABLE_SONGFINGERPRINTING="$(usex chromaprint)"
+		-DENABLE_MUSICBRAINZ="$(usex chromaprint)"
+		-DENABLE_X11_GLOBALSHORTCUTS="$(usex X)"
 		-DENABLE_AUDIOCD="$(usex cdda)"
-		-DENABLE_GSTREAMER="$(usex gstreamer)"
-		-DUSE_ICU="$(usex icu)"
-		-DENABLE_LIBGPOD="$(usex ipod)"
-		-DENABLE_LIBMTP="$(usex mtp)"
-		-DENABLE_LIBPULSE="$(usex pulseaudio)"
+		-DENABLE_MTP="$(usex mtp)"
+		-DENABLE_GPOD="$(usex ipod)"
 		-DENABLE_MOODBAR="$(usex moodbar)"
-		-DENABLE_MUSICBRAINZ="$(usex gstreamer)"
-		-DENABLE_SONGFINGERPRINTING="$(usex gstreamer)"
 		-DENABLE_UDISKS2="$(usex udisks)"
-		-DENABLE_VLC="$(usex vlc)"
-		-DBUILD_WITH_QT6="$(usex qt6)"
-		-DBUILD_WITH_QT5="$(usex !qt6)"
-		-DQT_VERSION_MAJOR="$(usex qt6 6 5)"
+		-DENABLE_EBUR128="$(usex loudness)"
+		-DENABLE_SUBSONIC="$(usex streaming)"
+		-DENABLE_TIDAL="$(usex streaming)"
+		-DENABLE_QOBUZ="$(usex streaming)"
+		-DENABLE_SPOTIFY="$(usex streaming)"
 	)
 
-	use !streaming && mycmakeargs+=( -DENABLE_SUBSONIC=OFF -DENABLE_TIDAL=OFF -DENABLE_QOBUZ=OFF )
 	use !debug && append-cppflags -DQT_NO_DEBUG_OUTPUT
 
 	cmake_src_configure
@@ -124,9 +109,7 @@ src_configure() {
 pkg_postinst() {
 	xdg_pkg_postinst
 
-	if use gstreamer ; then
-		elog "Note that list of supported formats is controlled by media-plugins/gst-plugins-meta "
-		elog "USE flags. You may be interested in setting aac, flac, mp3, ogg or wavpack USE flags "
-		elog "depending on your preferences"
-	fi
+	elog "Note that list of supported formats is controlled by media-plugins/gst-plugins-meta "
+	elog "USE flags. You may be interested in setting aac, flac, mp3, ogg or wavpack USE flags "
+	elog "depending on your preferences"
 }
