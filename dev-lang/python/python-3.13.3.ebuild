@@ -166,6 +166,7 @@ src_prepare() {
 
 	local PATCHES=(
 		"${WORKDIR}/${PATCHSET}"
+		"${FILESDIR}"/llvm_19_jit.patch
 	)
 
 	default
