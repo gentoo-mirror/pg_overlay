@@ -99,10 +99,6 @@ BDEPEND="
 RDEPEND+="
 	!build? ( app-misc/mime-types )
 "
-PATCHES=(
-		"${FILESDIR}"/llvm_19_jit.patch
-)
-
 if [[ ${PV} != *_alpha* ]]; then
 	RDEPEND+="
 		dev-lang/python-exec[python_targets_python${PYVER/./_}(-)]
