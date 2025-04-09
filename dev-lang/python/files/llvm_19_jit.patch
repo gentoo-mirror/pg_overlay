@@ -1,0 +1,11 @@
+--- a/Tools/jit/_llvm.py	2025-04-09 09:06:26.989472956 +0700
++++ b/Tools/jit/_llvm.py	2025-04-09 09:06:41.490569826 +0700
+@@ -8,7 +8,7 @@
+ import subprocess
+ import typing
+ 
+-_LLVM_VERSION = 18
++_LLVM_VERSION = 19
+ _LLVM_VERSION_PATTERN = re.compile(rf"version\s+{_LLVM_VERSION}\.\d+\.\d+\S*\s+")
+ 
+ _P = typing.ParamSpec("_P")
