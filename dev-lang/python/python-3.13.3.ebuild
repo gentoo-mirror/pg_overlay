@@ -99,7 +99,9 @@ BDEPEND="
 RDEPEND+="
 	!build? ( app-misc/mime-types )
 "
-PATCHES=("${FILESDIR}/llvm_19_jit.patch")
+PATCHES=(
+		"${FILESDIR}"/llvm_19_jit.patch
+)
 
 if [[ ${PV} != *_alpha* ]]; then
 	RDEPEND+="
