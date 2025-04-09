@@ -35,7 +35,7 @@ dev-cpp/pangomm 2.46.4 2.56.1: C++ interface for pango
 dev-db/mariadb-connector-c 3.4.4: C client library for MariaDB/MySQL
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 3.8: feature rich visual programming environment emulating Delphi
-dev-lang/python 3.13.2: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.13.3: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 77.1_pre: International Components for Unicode
@@ -168,7 +168,7 @@ sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 137.0: Firefox Web Browser
+www-client/firefox 137.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 7.1.3550.4: A browser for our friends
 x11-base/xwayland 24.1.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
