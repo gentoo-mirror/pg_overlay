@@ -3,15 +3,11 @@
 
 EAPI=7
 
-inherit systemd
+inherit autotools systemd
 
-if [[ ${PV} == "*rc*" ]] ; then
-	EGIT_REPO_URI="git://linux-nfs.org/~steved/rpcbind.git"
-	inherit autotools git-r3
-else
-	SRC_URI="https://git.linux-nfs.org/?p=steved/rpcbind.git;a=snapshot;h=74da58dde5b1a1a7e54df1fb16315845195a69c0;sf=tgz -> ${P}.tar.gz"
-	KEYWORDS="~alpha amd64 arm arm64 hppa ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86"
-fi
+SRC_URI="https://git.linux-nfs.org/?p=steved/rpcbind.git;a=snapshot;h=74da58dde5b1a1a7e54df1fb16315845195a69c0;sf=tgz -> ${P}.tar.gz"
+KEYWORDS="~alpha amd64 arm arm64 hppa ~loong ~m68k ~mips ppc ppc64 ~riscv ~s390 sparc x86"
+
 
 DESCRIPTION="portmap replacement which supports RPC over various protocols"
 HOMEPAGE="https://sourceforge.net/projects/rpcbind/"
@@ -33,7 +29,7 @@ S=${WORKDIR}/${PN}-74da58d
 
 src_prepare() {
 	default
-	[[ ${PV} == "*rc*" ]] && eautoreconf
+	eautoreconf
 }
 
 src_configure() {
