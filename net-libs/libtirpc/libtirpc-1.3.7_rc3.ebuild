@@ -33,6 +33,7 @@ src_prepare() {
 	cp -ra "${WORKDIR}"/tirpc "${S}"/ || die
 
 	default
+	eautoreconf
 	elibtoolize
 }
 
