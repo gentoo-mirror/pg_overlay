@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit flag-o-matic libtool multilib-minimal
+inherit autotools flag-o-matic libtool multilib-minimal
 
 DESCRIPTION="Transport Independent RPC library (SunRPC replacement)"
 HOMEPAGE="https://sourceforge.net/projects/libtirpc/ https://git.linux-nfs.org/?p=steved/libtirpc.git"
