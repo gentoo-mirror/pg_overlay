@@ -8,7 +8,7 @@ inherit flag-o-matic libtool multilib-minimal
 DESCRIPTION="Transport Independent RPC library (SunRPC replacement)"
 HOMEPAGE="https://sourceforge.net/projects/libtirpc/ https://git.linux-nfs.org/?p=steved/libtirpc.git"
 SRC_URI="
-	https://git.linux-nfs.org/?p=steved/libtirpc.git;a=snapshot;h=240ee6c774729c9c24812aa8912f1fcf8996b162;sf=tgz -> ${P}.tar.gz
+	https://git.linux-nfs.org/?p=steved/libtirpc.git;a=snapshot;h=240ee6c774729c9c24812aa8912f1fcf8996b162;sf=tgz  -> ${P}.tar.gz
 	https://dev.gentoo.org/~sam/distfiles/${PN}-glibc-nfs.tar.xz
 "
 
@@ -26,6 +26,8 @@ BDEPEND="
 	app-arch/xz-utils
 	virtual/pkgconfig
 "
+
+S=${WORKDIR}/${PN}-240ee6c
 
 src_prepare() {
 	cp -ra "${WORKDIR}"/tirpc "${S}"/ || die
