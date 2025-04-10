@@ -13,4 +13,4 @@ REQUIRED_USE=systemd? ( warmstarts )
 SLOT=0
 SRC_URI=https://git.linux-nfs.org/?p=steved/rpcbind.git;a=snapshot;h=74da58dde5b1a1a7e54df1fb16315845195a69c0;sf=tgz -> rpcbind-1.2.8_rc2.tar.gz
 _eclasses_=toolchain-funcs	6afdb6107430c1832ca7e16aacbf8fa1	multilib	b2a329026f2e404e9e371097dda47f96	systemd	54bd206bb5c4efac6ae28b6b006713b0
-_md5_=b7216dfb27f141823b468bfb81a0fa17
+_md5_=3260c8757de87de75914d2dac2890441

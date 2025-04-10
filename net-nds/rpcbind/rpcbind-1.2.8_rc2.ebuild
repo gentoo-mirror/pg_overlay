@@ -5,7 +5,7 @@ EAPI=7
 
 inherit systemd
 
-if [[ ${PV} == "9999" ]] ; then
+if [[ ${PV} == "*rc*" ]] ; then
 	EGIT_REPO_URI="git://linux-nfs.org/~steved/rpcbind.git"
 	inherit autotools git-r3
 else
@@ -33,7 +33,7 @@ S=${WORKDIR}/${PN}-74da58d
 
 src_prepare() {
 	default
-	[[ ${PV} == "9999" ]] && eautoreconf
+	[[ ${PV} == "*rc*" ]] && eautoreconf
 }
 
 src_configure() {
