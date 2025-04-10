@@ -44,7 +44,6 @@ dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libnl 3.11.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
-dev-libs/protobuf 29.1: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/re2 0.2024.06.01: An efficient, principled regular expression library
 dev-libs/tinyxml2 11.0.0: A simple, small, efficient, C++ XML parser
 dev-libs/utfcpp 4.0.6: UTF-8 C++ library
@@ -152,7 +151,7 @@ sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 14.1.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/hwinfo 23.3: Hardware detection tool used in SuSE Linux
-sys-apps/kmod 34.1: Library and tools for managing linux kernel modules
+sys-apps/kmod 34.2: Library and tools for managing linux kernel modules
 sys-apps/openrazer 3.10.1: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
