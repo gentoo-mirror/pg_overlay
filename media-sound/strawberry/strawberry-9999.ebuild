@@ -99,6 +99,7 @@ src_configure() {
 		-DENABLE_TIDAL="$(usex streaming)"
 		-DENABLE_QOBUZ="$(usex streaming)"
 		-DENABLE_SPOTIFY="$(usex streaming)"
+		-DENABLE_STREAMTAGREADER=OFF
 	)
 
 	use !debug && append-cppflags -DQT_NO_DEBUG_OUTPUT
