@@ -95,10 +95,12 @@ media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
 media-libs/tg_owt 0_pre20241202: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
+media-plugins/gst-plugins-flac 1.26.0_pre: FLAC encoder/decoder/tagger plugin for GStreamer
 media-plugins/gst-plugins-libav 1.26.0_pre: FFmpeg based gstreamer plugin
 media-plugins/gst-plugins-meta 1.26.0_pre: Meta ebuild to pull in gst plugins for apps
 media-plugins/gst-plugins-pulse 1.26.0_pre: PulseAudio sound server plugin for GStreamer
 media-plugins/gst-plugins-taglib 1.26.0_pre: ID3v2/APEv2 tagger plugin for GStreamer
+media-plugins/gst-plugins-wavpack 1.26.0_pre: Wavpack audio encoder/decoder plugin for GStreamer
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/alsa-scarlett-gui 0.5.1: A UI for Focusrite Scarlett and Clarett audio interfaces
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
