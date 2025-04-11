@@ -81,22 +81,24 @@ llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 137.0.1: Thunderbird Mail Client
+media-libs/gst-plugins-bad 1.26.0_pre: Less plugins for GStreamer
 media-libs/gst-plugins-base 1.26.0_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.0_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.0_pre: Open source multimedia framework
 media-libs/libjpeg-turbo 3.1.0: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
-media-libs/libsdl2 2.32.52: Simple Direct Media Layer
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
 media-libs/libyuv 1904: Open source project that includes YUV scaling and conversion functionality.
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/opencv 4.11.0: A collection of algorithms and sample code for various computer vision problems
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
-media-libs/sdl3-image 3.2.4_pre: Image file loading library
-media-libs/sdl3-ttf 3.2.2_pre: Library that allows you to use TrueType fonts in SDL applications
 media-libs/tg_owt 0_pre20241202: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
+media-plugins/gst-plugins-libav 1.26.0_pre: FFmpeg based gstreamer plugin
+media-plugins/gst-plugins-meta 1.26.0_pre: Meta ebuild to pull in gst plugins for apps
+media-plugins/gst-plugins-pulse 1.26.0_pre: PulseAudio sound server plugin for GStreamer
+media-plugins/gst-plugins-taglib 1.26.0_pre: ID3v2/APEv2 tagger plugin for GStreamer
 media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
 media-sound/alsa-scarlett-gui 0.5.1: A UI for Focusrite Scarlett and Clarett audio interfaces
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
@@ -105,7 +107,6 @@ media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/dr14meter 1.1.4: dr14meter is a free and open-source command line tool for computing the Dynamic Range of your music.
 media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
-media-sound/mpd 0.24: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: Featureful ncurses based MPD client inspired by ncmpc
