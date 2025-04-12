@@ -1,12 +1,12 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
 inherit multilib-minimal flag-o-matic
 
-WXSUBVERSION="${PV}-gtk3"				# 3.2.5-gtk3
-WXVERSION="$(ver_cut 1-3)"				# 3.2.5
+WXSUBVERSION="${PV}-gtk3"				# 3.2.6-gtk3
+WXVERSION="$(ver_cut 1-3)"				# 3.2.6
 # Make sure that this matches the number of components in ${PV}
 WXRELEASE="$(ver_cut 1-2)-gtk3"			# 3.2-gtk3
 WXRELEASE_NODOT=${WXRELEASE//./}		# 32-gtk3
