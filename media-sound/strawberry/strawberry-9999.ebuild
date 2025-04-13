@@ -19,7 +19,7 @@ fi
 
 LICENSE="GPL-3"
 SLOT="0"
-IUSE="alsa cdda chromaprint dbus debug kde +loudness ipod moodbar mtp +pulseaudio streaming +udisks X"
+IUSE="alsa cdda chromaprint +dbus debug kde +loudness ipod moodbar mtp +pulseaudio streaming +udisks X"
 
 BDEPEND="
 	sys-devel/gettext
@@ -64,6 +64,7 @@ DOCS=( Changelog README.md )
 
 REQUIRED_USE="
 	|| ( alsa pulseaudio )
+	udisks? ( dbus )
 "
 
 src_prepare() {
