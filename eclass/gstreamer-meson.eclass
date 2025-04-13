@@ -1,5 +1,6 @@
 # Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
+# $Id: 15b0a6390a42b93d0e9a1967600adc6ac25ef414 $
 
 # @ECLASS: gstreamer-meson.eclass
 # @MAINTAINER:
@@ -35,7 +36,7 @@ case "${EAPI:-0}" in
 		;;
 esac
 
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_{10..12} )
 [[ ${EAPI} == 8 ]] && inherit python-any-r1
 
 # multilib-minimal goes last
@@ -236,7 +237,7 @@ if [[ "${PN}" != "${GST_ORG_MODULE}" ]]; then
 	# Do not run test phase for individual plugin ebuilds.
 	RESTRICT="test"
 	RDEPEND="${RDEPEND}
-		>=media-libs/${GST_ORG_MODULE}-${PV}:${SLOT}[${MULTILIB_USEDEP}]"
+		>=media-libs/${GST_ORG_MODULE}-${PV}_pre:${SLOT}[${MULTILIB_USEDEP}]"
 
 	# Export multilib phases used for split builds.
 	multilib_src_install_all() { gstreamer_multilib_src_install_all; }
