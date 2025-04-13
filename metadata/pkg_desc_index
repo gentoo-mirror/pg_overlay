@@ -88,6 +88,7 @@ media-libs/gstreamer 1.26.0_pre: Open source multimedia framework
 media-libs/libjpeg-turbo 3.1.0: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram clients
+media-libs/libwebp 1.5.0_pre: A lossy image compression format
 media-libs/libyuv 1904: Open source project that includes YUV scaling and conversion functionality.
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/opencv 4.11.0: A collection of algorithms and sample code for various computer vision problems
@@ -164,6 +165,7 @@ sys-auth/polkit 126: Policy framework for controlling privileges for system-wide
 sys-block/fio 3.38: Jens Axboe's Flexible IO tester
 sys-block/zram-init 12.1: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-boot/grub 2.12-r5: GNU GRUB boot loader
+sys-devel/gettext 0.24_pre: GNU locale utilities
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
