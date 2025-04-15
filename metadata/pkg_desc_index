@@ -80,7 +80,7 @@ kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
-mail-client/thunderbird 137.0.1: Thunderbird Mail Client
+mail-client/thunderbird 137.0.2: Thunderbird Mail Client
 media-libs/gst-plugins-bad 1.26.0_pre: Less plugins for GStreamer
 media-libs/gst-plugins-base 1.26.0_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.0_pre: Basepack of plugins for GStreamer
@@ -171,7 +171,7 @@ sys-fs/xfsprogs 6.14.0: XFS filesystem utilities
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 137.0.1: Firefox Web Browser
+www-client/firefox 137.0.2: Firefox Web Browser
 www-client/vivaldi-snapshot 7.1.3550.4: A browser for our friends
 x11-base/xwayland 24.1.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
