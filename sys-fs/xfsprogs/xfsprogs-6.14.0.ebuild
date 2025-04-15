@@ -66,7 +66,7 @@ src_configure() {
 	# https://www.spinics.net/lists/linux-xfs/msg30185.html
 	# https://www.spinics.net/lists/linux-xfs/msg30272.html
 	local myconf=(
-		--disable-static
+		--emable-static
 		# Doesn't do anything beyond adding -flto (bug #930947).
 		--enable-lto
 		# The default value causes double 'lib'
