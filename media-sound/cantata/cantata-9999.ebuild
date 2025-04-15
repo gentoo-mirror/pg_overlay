@@ -57,8 +57,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-3.3.0-rm-vendor.patch
-	# https://github.com/nullobsi/cantata/pull/51.patch
-	"${FILESDIR}"/${PN}-3.3.0-cdparanoia.patch
 )
 
 src_prepare() {
