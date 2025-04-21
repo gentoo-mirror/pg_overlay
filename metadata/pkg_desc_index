@@ -16,7 +16,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
 app-office/libreoffice-l10n 25.2.1.2: Translations for the Libreoffice suite
-app-office/onlyoffice-bin 8.3.2: Onlyoffice is an office productivity suite (binary version)
+app-office/onlyoffice-bin 8.3.3: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.9: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
@@ -73,7 +73,7 @@ gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/gtk 4.18.4: GTK is a multi-platform toolkit for creating graphical user interfaces
 gui-wm/labwc 0.8.2: Openbox alternative for wayland
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
-kde-misc/kweather 24.12.3 9999: Weather forecast application for Plasma with flat and dynamic/animated views
+kde-misc/kweather 25.04.0 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/kdesu-gui 9999: Graphical frontend for KDE Frameworks' kdesu
 kde-plasma/kwin 6.3.4-r1 9999: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
@@ -162,7 +162,6 @@ sys-auth/elogind 255.9999: The systemd project's logind, extracted to a standalo
 sys-auth/polkit 126: Policy framework for controlling privileges for system-wide services
 sys-block/fio 3.38: Jens Axboe's Flexible IO tester
 sys-block/zram-init 12.1: Scripts to support compressed swap devices or ramdisks with zRAM
-sys-boot/grub 2.12-r5: GNU GRUB boot loader
 sys-devel/gettext 0.24_pre: GNU locale utilities
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
