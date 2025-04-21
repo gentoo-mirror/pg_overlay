@@ -121,6 +121,7 @@ PATCHES=(
 	"${FILESDIR}"/${P}-0003-renderloop-crash.patch
 	"${FILESDIR}"/${P}-0004-xwayland.patch
 	"${FILESDIR}"/${P}-0005-x11-crash.patch
+	"${FILESDIR}"/${P}-0006-gpu-reset-crash.patch
 )
 
 src_prepare() {
