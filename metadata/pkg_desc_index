@@ -76,7 +76,7 @@ gui-wm/labwc 0.8.2: Openbox alternative for wayland
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-misc/kweather 25.04.0 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/kdesu-gui 9999: Graphical frontend for KDE Frameworks' kdesu
-kde-plasma/kwin 6.3.4-r1 9999: Flexible, composited Window Manager for windowing systems on Linux
+kde-plasma/kwin 6.3.4-r2 9999: Flexible, composited Window Manager for windowing systems on Linux
 kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
