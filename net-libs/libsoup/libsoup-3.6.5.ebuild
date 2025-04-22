@@ -79,7 +79,7 @@ multilib_src_configure() {
 		-Dauto_features=enabled
 
 		$(meson_feature gssapi)
-		-Dgssapi="${CHOST}-krb5-config"
+		-Dgssapi=disabled
 		$(meson_feature samba ntlm)
 		$(meson_feature brotli)
 		-Dntlm_auth="${EPREFIX}/usr/bin/ntlm_auth"
