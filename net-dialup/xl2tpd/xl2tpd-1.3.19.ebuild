@@ -5,11 +5,9 @@ EAPI=8
 
 inherit systemd toolchain-funcs tmpfiles
 
-MY_PV=${PV/_/}
-
 DESCRIPTION="A modern version of the Layer 2 Tunneling Protocol (L2TP) daemon"
 HOMEPAGE="https://github.com/xelerance/xl2tpd"
-SRC_URI="https://github.com/xelerance/${PN}/archive/v${MY_PV}.tar.gz -> ${P}.tar.gz"
+SRC_URI="https://github.com/xelerance/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2+"
 SLOT="0"
