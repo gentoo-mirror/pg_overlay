@@ -324,6 +324,9 @@ net-im/pidgin:prediction - Enable Contact Availability Prediction plugin
 net-im/pidgin:python - Build libgnt (GLib Ncurses Toolkit used by finch) with python scripting support
 net-im/pidgin:xscreensaver - Use X screensaver protocol extension to monitor idle/active status based on mouse/keyboard events
 net-im/pidgin:zephyr - Enable Zephyr protocol support
+net-libs/libsoup:gssapi - Enable GSSAPI support
+net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
+net-libs/libsoup:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:corepack - Enable the experimental corepack package management tool
 net-libs/nodejs:inspector - Enable V8 inspector
