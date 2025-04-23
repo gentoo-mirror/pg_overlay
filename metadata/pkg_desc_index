@@ -163,7 +163,7 @@ sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat d
 sys-auth/elogind 255.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 126: Policy framework for controlling privileges for system-wide services
 sys-block/fio 3.38: Jens Axboe's Flexible IO tester
-sys-block/zram-init 12.1: Scripts to support compressed swap devices or ramdisks with zRAM
+sys-block/zram-init 12.2.2 12.2.2-r1: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-devel/gettext 0.24_pre: GNU locale utilities
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
