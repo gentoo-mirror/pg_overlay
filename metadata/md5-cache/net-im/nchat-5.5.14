@@ -1,0 +1,16 @@
+BDEPEND=dev-build/cmake dev-lang/go app-alternatives/ninja >=dev-build/cmake-3.20.5
+DEFINED_PHASES=compile configure install postinst postrm preinst prepare test
+DEPEND=dev-libs/openssl dev-db/sqlite sys-libs/ncurses sys-libs/readline dev-util/gperf sys-apps/file sys-apps/help2man sys-libs/zlib
+DESCRIPTION=Terminal-based Telegram / WhatsApp client for Linux and macOS
+EAPI=8
+HOMEPAGE=https://github.com/d99kris/nchat
+IDEPEND=dev-util/desktop-file-utils x11-misc/shared-mime-info
+INHERIT=cmake xdg
+IUSE=+l10n_bn +l10n_cs +l10n_de +l10n_es +l10n_fr +l10n_hu +l10n_it +l10n_ka +l10n_nl +l10n_pl +l10n_pt-BR +l10n_ru +l10n_si +l10n_tr +l10n_uk
+KEYWORDS=~amd64
+LICENSE=GPL-3
+RDEPEND=dev-libs/openssl dev-db/sqlite sys-libs/ncurses sys-libs/readline
+SLOT=0
+SRC_URI=https://github.com/d99kris/nchat/archive/refs/tags/v5.5.14.tar.gz -> nchat-5.5.14.tar.gz
+_eclasses_=toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	flag-o-matic	e8de74bac929ba17427e740e95707d00	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	1de691ead1f26da980bbfbb6146793cc	xdg	3ef49a87c52c8b77c476351195dfe575
+_md5_=f808e1ed298d40b989ba72fc045d6628
