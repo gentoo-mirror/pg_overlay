@@ -1,6 +1,5 @@
 # Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
-# $Id: 15b0a6390a42b93d0e9a1967600adc6ac25ef414 $
 
 # @ECLASS: gstreamer-meson.eclass
 # @MAINTAINER:

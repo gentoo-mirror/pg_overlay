@@ -12,5 +12,5 @@ LICENSE=GPL-3
 RDEPEND=dev-libs/openssl dev-db/sqlite sys-libs/ncurses sys-libs/readline
 SLOT=0
 SRC_URI=https://github.com/d99kris/nchat/archive/refs/tags/v5.5.14.tar.gz -> nchat-5.5.14.tar.gz
-_eclasses_=toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	flag-o-matic	e8de74bac929ba17427e740e95707d00	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	1de691ead1f26da980bbfbb6146793cc	xdg	3ef49a87c52c8b77c476351195dfe575
+_eclasses_=toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	flag-o-matic	e8de74bac929ba17427e740e95707d00	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	7690d321b2026f7f684d8aabbd29de9f	xdg	3ef49a87c52c8b77c476351195dfe575
 _md5_=f808e1ed298d40b989ba72fc045d6628
