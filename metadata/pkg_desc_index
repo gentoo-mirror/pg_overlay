@@ -93,6 +93,7 @@ media-libs/libtgvoip 2.4.4_p20240122 2.4.4_p20240606: VoIP library for Telegram 
 media-libs/libwebp 1.5.0_pre: A lossy image compression format
 media-libs/libyuv 1904: Open source project that includes YUV scaling and conversion functionality.
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
+media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/opencv 4.11.0: A collection of algorithms and sample code for various computer vision problems
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
@@ -120,6 +121,7 @@ media-sound/redoflacs 1.1.0: Bash commandline flac compressor, verifier, organiz
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
+media-video/haruna 1.4.0: Video player built with Qt/QML and libmpv
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.4.2: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
