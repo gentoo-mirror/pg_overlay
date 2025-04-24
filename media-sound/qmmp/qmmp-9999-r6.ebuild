@@ -23,7 +23,7 @@ LICENSE="GPL-2"
 SLOT="0"
 # KEYWORDS further up
 IUSE="aac +alsa analyzer archive bs2b cdda cover crossfade cue curl +dbus enca
-ffmpeg flac game gnome jack ladspa libxmp lyrics +mad midi mms mplayer musepack
+ffmpeg flac game gnome jack ladspa libxmp lyrics +mad midi mplayer musepack
 notifier opus oss pipewire projectm pulseaudio qsui qtmedia scrobbler shout sid
 sndfile soxr stereo tray udisks +vorbis wavpack"
 
@@ -61,7 +61,6 @@ RDEPEND="
 		media-sound/mpg123:=
 	)
 	midi? ( media-sound/wildmidi )
-	mms? ( media-libs/libmms )
 	mplayer? ( media-video/mplayer )
 	musepack? ( >=media-sound/musepack-tools-444 )
 	opus? ( media-libs/opusfile )
@@ -137,13 +136,11 @@ src_configure() {
 		-DUSE_FLAC="$(usex flac)"
 		-DUSE_GME="$(usex game)"
 		-DUSE_GNOMEHOTKEY="$(usex gnome)"
-		-DUSE_HAL=OFF
 		-DUSE_JACK="$(usex jack)"
 		-DUSE_LADSPA="$(usex ladspa)"
 		-DUSE_LYRICS="$(usex lyrics)"
 		-DUSE_MAD="$(usex mad)"
 		-DUSE_MIDI="$(usex midi)"
-		-DUSE_MMS="$(usex mms)"
 		-DUSE_MPLAYER="$(usex mplayer)"
 		-DUSE_MPC="$(usex musepack)"
 		-DUSE_NOTIFIER="$(usex notifier)"
