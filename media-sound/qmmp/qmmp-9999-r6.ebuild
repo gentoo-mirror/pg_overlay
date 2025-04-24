@@ -95,9 +95,9 @@ src_prepare() {
 			src/plugins/Input/cdaudio/decoder_cdaudio.cpp || die
 	fi
 
-	sed -i \
-		-e '/^Exec=qmmp %F/s@=@=env QT_QPA_PLATFORM=xcb @' \
-		src/app/qmmp.desktop || die
+	#sed -i \
+	#	-e '/^Exec=qmmp %F/s@=@=env QT_QPA_PLATFORM=xcb @' \
+	#	src/app/qmmp.desktop || die
 
 	rm_locale() {
 		rm -fv src/app/desktop-translations/*${1}.desktop.in || die "removing of qmmp_${1}.desktop.in failed"
