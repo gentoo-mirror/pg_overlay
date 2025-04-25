@@ -127,6 +127,7 @@ multilib_src_configure() {
 		--with-expat=sys
 		--disable-compat30
 		--enable-xrc
+		--disable-symver
 		$(use_with sdl)
 		$(use_with lzma liblzma)
 		# Currently defaults to curl, could change.  Watch the VDB!
