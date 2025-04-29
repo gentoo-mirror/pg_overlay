@@ -88,8 +88,6 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gnome-extra/gnome-commander:gsf - Add metadata support for OLE, OLE2 and ODF
 gnome-extra/gnome-commander:pdf - Add metadata support for PDF
 gnome-extra/gnome-commander:taglib - Add metadata support for ID3, Vorbis, FLAC and APE
-gui-apps/rofi-wayland:drun - Desktop file mode
-gui-apps/rofi-wayland:windowmode - Window switcher mode
 gui-libs/gtk:broadway - Enable the GDK Broadway backend.
 gui-libs/gtk:cloudproviders - Enable GtkPlacesSidebar to access cloud services
 gui-libs/gtk:colord - Use x11-misc/colord for color management in printing
