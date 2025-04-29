@@ -14,14 +14,32 @@ diff --git a/browser/components/BrowserGlue.jsm b/browser/components/BrowserGlue
 index b2479db..7670f08 100644
 --- a/browser/components/BrowserGlue.sys.mjs
 +++ b/browser/components/BrowserGlue.sys.mjs
-@@ -1274,7 +1274,6 @@ BrowserGlue.prototype = {
-       lazy.Normandy.init();
-     }
+@@ -258,24 +258,8 @@
+     matches: ["about:messagepreview", "about:messagepreview?*"],
+   },
  
--    lazy.SaveToPocket.init();
+-  AboutPocket: {
+-    parent: {
+-      esModuleURI: "resource:///actors/AboutPocketParent.sys.mjs",
+-    },
+-    child: {
+-      esModuleURI: "resource:///actors/AboutPocketChild.sys.mjs",
+-
+-      events: {
+-        DOMDocElementInserted: { capture: true },
+-      },
+-    },
+-
+     remoteTypes: ["privilegedabout"],
+     matches: [
+-      "about:pocket-saved*",
+-      "about:pocket-signup*",
+-      "about:pocket-home*",
+-      "about:pocket-style-guide*",
+     ],
+   },
  
-     AboutHomeStartupCache.init();
- 
+
 diff --git a/browser/components/moz.build b/browser/components/moz.build
 index 3b2126e..32b7831 100644
 --- a/browser/components/moz.build
