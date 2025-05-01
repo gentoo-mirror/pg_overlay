@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-137-patches-02.tar.xz"
+FIREFOX_PATCHSET="firefox-138-patches-01.tar.xz"
 FIREFOX_LOONG_PATCHSET="firefox-137-loong-patches-01.tar.xz"
 
 LLVM_COMPAT=( 19 )
@@ -99,7 +99,7 @@ BDEPEND="${PYTHON_DEPS}
 	app-alternatives/awk
 	app-arch/unzip
 	app-arch/zip
-	>=dev-util/cbindgen-0.26.0
+	>=dev-util/cbindgen-0.28.0
 	net-libs/nodejs
 	virtual/pkgconfig
 	amd64? ( >=dev-lang/nasm-2.14 )
@@ -123,7 +123,7 @@ COMMON_DEPEND="${TB_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.109
+	>=dev-libs/nss-3.110
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
@@ -749,7 +749,6 @@ src_configure() {
 		--enable-new-pass-manager \
 		--enable-official-branding \
 		--enable-release \
-		--enable-thunderbird-rust \
 		--enable-system-pixman \
 		--enable-system-policies \
 		--host="${CBUILD:-${CHOST}}" \
@@ -763,6 +762,7 @@ src_configure() {
 		--with-system-ffi \
 		--with-system-nspr \
 		--with-system-nss \
+		--with-system-pixman \
 		--with-system-zlib \
 		--with-toolchain-prefix="${CHOST}-" \
 		--with-unsigned-addon-scopes=app,system \
