@@ -62,7 +62,6 @@ else
 		test? (
 			https://github.com/${PN}/${PN}_extra/archive/refs/tags/${PV}.tar.gz -> ${PN}_extra-${PV}.tar.gz
 		)
-		https://github.com/opencv/opencv/commit/1db93911aeb65599f22db47d5d39f75bc94a821d.patch -> ${PN}-4.10.0-protobuf-30.patch
 	"
 	KEYWORDS="amd64 ~arm arm64 ~loong ~ppc ~ppc64 ~riscv x86"
 fi
@@ -233,7 +232,8 @@ COMMON_DEPEND="
 				virtual/lapacke
 			)
 		)
-	)
+	)		https://github.com/opencv/opencv/commit/1db93911aeb65599f22db47d5d39f75bc94a821d.patch -> ${PN}-4.10.0-protobuf-30.patch
+
 	opencl? (
 		virtual/opencl[${MULTILIB_USEDEP}]
 		dev-util/opencl-headers
@@ -253,7 +253,8 @@ COMMON_DEPEND="
 	)
 	qt6? (
 		dev-qt/qtbase:6[gui,widgets,concurrent,opengl?]
-	)
+	)		https://github.com/opencv/opencv/commit/1db93911aeb65599f22db47d5d39f75bc94a821d.patch -> ${PN}-4.10.0-protobuf-30.patch
+
 	quirc? ( media-libs/quirc )
 	tesseract? ( app-text/tesseract[${MULTILIB_USEDEP}] )
 	tbb? ( dev-cpp/tbb:=[${MULTILIB_USEDEP}] )
@@ -333,7 +334,6 @@ PATCHES=(
 	"${FILESDIR}/${PN}-4.10.0-dnn-explicitly-include-abseil-cpp.patch"
 	"${FILESDIR}/${PN}-4.10.0-tbb-detection.patch"
 
-	"${DISTDIR}/${P}-protobuf-30.patch" # drop in 4.11
 	"${FILESDIR}/${P}-cmake4.patch" # PR pending
 
 	# TODO applied in src_prepare
