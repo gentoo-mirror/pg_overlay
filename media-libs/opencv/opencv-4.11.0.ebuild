@@ -232,8 +232,7 @@ COMMON_DEPEND="
 				virtual/lapacke
 			)
 		)
-	)		https://github.com/opencv/opencv/commit/1db93911aeb65599f22db47d5d39f75bc94a821d.patch -> ${PN}-4.10.0-protobuf-30.patch
-
+	)
 	opencl? (
 		virtual/opencl[${MULTILIB_USEDEP}]
 		dev-util/opencl-headers
@@ -253,8 +252,7 @@ COMMON_DEPEND="
 	)
 	qt6? (
 		dev-qt/qtbase:6[gui,widgets,concurrent,opengl?]
-	)		https://github.com/opencv/opencv/commit/1db93911aeb65599f22db47d5d39f75bc94a821d.patch -> ${PN}-4.10.0-protobuf-30.patch
-
+	)
 	quirc? ( media-libs/quirc )
 	tesseract? ( app-text/tesseract[${MULTILIB_USEDEP}] )
 	tbb? ( dev-cpp/tbb:=[${MULTILIB_USEDEP}] )
