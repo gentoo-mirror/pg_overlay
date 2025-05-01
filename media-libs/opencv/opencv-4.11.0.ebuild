@@ -327,12 +327,14 @@ PATCHES=(
 	"${FILESDIR}/${PN}-4.8.1-use-system-opencl.patch"
 
 	"${FILESDIR}/${PN}-4.9.0-drop-python2-detection.patch"
+	"${FILESDIR}/${PN}-4.9.0-ade-0.1.2d.tar.gz.patch"
 	"${FILESDIR}/${PN}-4.9.0-cmake-cleanup.patch"
 
 	"${FILESDIR}/${PN}-4.10.0-dnn-explicitly-include-abseil-cpp.patch"
 	"${FILESDIR}/${PN}-4.10.0-tbb-detection.patch"
 
 	"${FILESDIR}/${P}-cmake4.patch" # PR pending
+	"${FILESDIR}/${P}-QTBUG-137447.patch"
 
 	# TODO applied in src_prepare
 	# "${FILESDIR}/${PN}_contrib-4.8.1-rgbd.patch"

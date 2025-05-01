@@ -1,0 +1,23 @@
+diff -up opencv-4.11.0/modules/highgui/CMakeLists.txt.5~ opencv-4.11.0/modules/highgui/CMakeLists.txt
+--- opencv-4.11.0/modules/highgui/CMakeLists.txt.5~	2025-03-17 19:11:31.102434709 +0100
++++ opencv-4.11.0/modules/highgui/CMakeLists.txt	2025-03-17 19:42:58.694566273 +0100
+@@ -111,7 +111,7 @@ elseif(HAVE_QT)
+          ${_MOC_OUTFILES}
+          ${_RCC_OUTFILES})
+ 
+-    set(qt_deps Core Gui Widgets Test Concurrent)
++    set(qt_deps Core Gui Widgets Concurrent)
+     if(HAVE_QT_OPENGL)
+       add_definitions(-DHAVE_QT_OPENGL)
+       # QOpenGLWidget requires Qt6 package component OpenGLWidgets
+@@ -129,6 +129,10 @@ elseif(HAVE_QT)
+       include_directories(${Qt${QT_VERSION_MAJOR}${dt_dep}_INCLUDE_DIRS})
+       list(APPEND HIGHGUI_LIBRARIES ${Qt${QT_VERSION_MAJOR}${dt_dep}_LIBRARIES})
+     endforeach()
++
++    # Workaround for QTBUG-134774
++    include_directories(${Qt${QT_VERSION_MAJOR}Test_INCLUDE_DIRS})
++    list(APPEND HIGHGUI_LIBRARIES ${Qt${QT_VERSION_MAJOR}Test_LIBRARIES})
+   else()
+     ocv_assert(QT_VERSION_MAJOR EQUAL 4)
+     if(HAVE_QT_OPENGL)
