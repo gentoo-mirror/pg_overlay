@@ -79,7 +79,7 @@ kde-plasma/plasma-desktop 9999: KDE Plasma desktop
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
-mail-client/thunderbird 137.0.2: Thunderbird Mail Client
+mail-client/thunderbird 138.0: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-libs/gst-plugins-base 1.26.1_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.1_pre: Basepack of plugins for GStreamer
