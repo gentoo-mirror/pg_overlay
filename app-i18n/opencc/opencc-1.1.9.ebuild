@@ -47,6 +47,8 @@ BDEPEND="${PYTHON_DEPS}
 
 DOCS=( AUTHORS NEWS.md README.md )
 
+PATCHES=( "${FILESDIR}/894.patch" )
+
 pkg_setup() {
 	use python && python-single-r1_pkg_setup
 }
