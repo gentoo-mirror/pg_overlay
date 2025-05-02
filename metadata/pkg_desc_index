@@ -37,13 +37,11 @@ dev-lang/python 3.13.3: An interpreted, interactive, object-oriented programming
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/icu 77.1_pre: International Components for Unicode
-dev-libs/inih 60_pre: inih (INI not invented here) simple .INI file parser
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libnl 3.11.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
-dev-libs/libuv 1.51.0_pre: Cross-platform asychronous I/O
 dev-libs/re2 0.2024.06.01: An efficient, principled regular expression library
 dev-libs/tinyxml2 11.0.0: A simple, small, efficient, C++ XML parser
 dev-libs/utfcpp 4.0.6: UTF-8 C++ library
@@ -169,7 +167,7 @@ sys-fs/xfsprogs 6.14.0: XFS filesystem utilities
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 138.0: Firefox Web Browser
+www-client/firefox 138.0.1: Firefox Web Browser
 www-client/vivaldi-snapshot 7.1.3550.4: A browser for our friends
 x11-base/xwayland 24.1.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
