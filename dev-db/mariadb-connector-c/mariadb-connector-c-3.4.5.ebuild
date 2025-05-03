@@ -47,6 +47,7 @@ MULTILIB_WRAPPED_HEADERS+=( /usr/include/mariadb/mariadb_version.h )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-3.1.3-fix-pkconfig-file.patch
+	"${FILESDIR}"/${PN}-3.4.5-fix-gcc15.patch
 )
 
 src_prepare() {
