@@ -19,7 +19,7 @@ IUSE="cli doc debug java lto low-ram test"
 
 BDEPEND="
 	dev-util/gperf
-	#dev-lang/php[cli]
+	low-ram( dev-lang/php[cli] )
 	doc? ( app-text/doxygen )
 	java? ( virtual/jdk:= )
 "
@@ -68,6 +68,7 @@ src_configure() {
 		-DTDACTOR_ENABLE_INSTALL=OFF
 		-DTDE2E_ENABLE_INSTALL=ON
 		-DTDNET_ENABLE_INSTALL=OFF
+		-DTD_INSTALL_STATIC_LIBRARIES=OFF
 	)
 	cmake_src_configure
 
