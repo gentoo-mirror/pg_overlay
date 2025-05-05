@@ -306,6 +306,11 @@ net-im/forkgram:qt6-imageformats - Add support for HEIF, AVIF and JpegXL by bund
 net-libs/libsoup:gssapi - Enable GSSAPI support
 net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
 net-libs/libsoup:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
+net-libs/libsrtp:aesicm - Use AES ICM cryptographic algorithm
+net-libs/libsrtp:console - Use /dev/console instead of stdout for error messages
+net-libs/libsrtp:nss - Use NSS crypto primitives
+net-libs/libsrtp:openssl - Use OpenSSL crypto primitives
+net-libs/libsrtp:syslog - Use syslog for error messages
 net-libs/libtorrent-rasterbar:dht - Enable DHT (distributed hash table) support
 net-libs/nodejs:corepack - Enable the experimental corepack package management tool
 net-libs/nodejs:inspector - Enable V8 inspector
