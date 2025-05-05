@@ -71,7 +71,6 @@ PATCHES=(
 	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 	"${FILESDIR}/tg_owt-system-yuv.patch"
-	"${FILESDIR}/149.patch"
 )
 
 src_prepare() {
