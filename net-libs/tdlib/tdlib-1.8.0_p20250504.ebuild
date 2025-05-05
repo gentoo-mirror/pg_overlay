@@ -10,7 +10,7 @@ HOMEPAGE="https://github.com/tdlib/td"
 
 TDLIB_COMMIT="34c390f9afe074071e01c623e42adfbd17e350ab"
 SRC_URI="https://github.com/tdlib/td/archive/${TDLIB_COMMIT}.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/${PN}-${TDLIB_COMMIT}"
+S="${WORKDIR}/td-${TDLIB_COMMIT}"
 
 LICENSE="Boost-1.0"
 SLOT="0"
