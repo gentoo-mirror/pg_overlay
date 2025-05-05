@@ -15,11 +15,11 @@ S="${WORKDIR}/td-${TDLIB_COMMIT}"
 LICENSE="Boost-1.0"
 SLOT="0"
 KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
-IUSE="+cli doc debug java lto low-ram test"
+IUSE="cli doc debug java lto low-ram test"
 
 BDEPEND="
 	dev-util/gperf
-	dev-lang/php[cli]
+	#dev-lang/php[cli]
 	doc? ( app-text/doxygen )
 	java? ( virtual/jdk:= )
 "
@@ -65,6 +65,9 @@ src_configure() {
 
 		# -DTD_EXPERIMENTAL_WATCH_OS=$(usex watch-os ON OFF) # Requires "Foundation" library. TBD.
 		# -DEMSCRIPTEN=$(usex javascript ON OFF) # Somehow makes GCC to stop seeing pthreads.h
+		-DTDACTOR_ENABLE_INSTALL=OFF
+		-DTDE2E_ENABLE_INSTALL=ON
+		-DTDNET_ENABLE_INSTALL=OFF
 	)
 	cmake_src_configure
 
