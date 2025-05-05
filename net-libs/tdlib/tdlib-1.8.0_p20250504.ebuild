@@ -19,7 +19,7 @@ IUSE="cli doc debug java lto low-ram test"
 
 BDEPEND="
 	dev-util/gperf
-	#dev-lang/php[cli]
+	low-ram? ( dev-lang/php[cli] )
 	doc? ( app-text/doxygen )
 	java? ( virtual/jdk:= )
 "
