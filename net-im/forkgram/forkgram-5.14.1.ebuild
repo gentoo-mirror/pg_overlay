@@ -95,7 +95,6 @@ PATCHES=(
 	"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
-	"${FILESDIR}"/qt-6.9.patch
 )
 
 pkg_pretend() {
