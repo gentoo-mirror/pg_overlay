@@ -33,7 +33,7 @@ REQUIRED_USE="?? ( lto java )"
 
 DOCS=( README.md )
 
-PATCHES=( "${FILESDIR}/${PN}-fix-runpath.patch" )
+#PATCHES=( "${FILESDIR}/${PN}-fix-runpath.patch" )
 
 RESTRICT="!test? ( test )"
 
