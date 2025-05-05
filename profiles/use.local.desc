@@ -315,6 +315,9 @@ net-libs/nodejs:snapshot - Enable snapshot creation for faster startup
 net-libs/nodejs:system-icu - Use system dev-libs/icu instead of the bundled version
 net-libs/nodejs:system-ssl - Use system OpenSSL instead of the bundled one
 net-libs/nodejs:systemtap - Enable SystemTap/DTrace tracing
+net-libs/tdlib:cli - Build CLI tools
+net-libs/tdlib:low-ram - Split build to many files, which adds possibility to build on machines with low RAM values by price of longer compilation time
+net-libs/tdlib:lto - Enable Link Time Optimizations
 net-libs/udns:tools - Build and install dnsget, ex-rdns and rblcheck tools
 net-libs/webkit-gtk:examples - Install the MiniBrowser example application
 net-libs/webkit-gtk:gamepad - Enable gamepad input support via dev-libs/libmanette
