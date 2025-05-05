@@ -1,4 +1,4 @@
-# Copyright 2020-2023 Gentoo Authors
+# Copyright 2020-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,13 +8,13 @@ inherit flag-o-matic autotools
 DESCRIPTION="VoIP library for Telegram clients"
 HOMEPAGE="https://github.com/telegramdesktop/libtgvoip"
 
-LIBTGVOIP_COMMIT="25facad342c3280315f9ef553906f46c3eeba1e4"
+LIBTGVOIP_COMMIT="2d2592860478e60d972b96e67ee034b8a71bb57a"
 SRC_URI="https://github.com/telegramdesktop/libtgvoip/archive/${LIBTGVOIP_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${LIBTGVOIP_COMMIT}"
 
 LICENSE="Unlicense"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~ppc64 ~riscv"
+KEYWORDS="amd64 ~arm64 ~loong ~ppc64 ~riscv"
 IUSE="+dsp +alsa pulseaudio"
 
 DEPEND="
@@ -29,6 +29,8 @@ BDEPEND="virtual/pkgconfig"
 REQUIRED_USE="
 	|| ( alsa pulseaudio )
 "
+
+PATCHES=( "${FILESDIR}"/38.patch )
 
 src_prepare() {
 	# Will be controlled by us
