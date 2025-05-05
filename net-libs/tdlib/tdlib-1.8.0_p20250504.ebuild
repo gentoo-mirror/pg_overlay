@@ -19,9 +19,9 @@ IUSE="cli doc debug java lto low-ram test"
 
 BDEPEND="
 	dev-util/gperf
-	low-ram? ( dev-lang/php[cli] )
 	doc? ( app-text/doxygen )
 	java? ( virtual/jdk:= )
+	low-ram? ( dev-lang/php[cli] )
 "
 RDEPEND="
 	dev-libs/openssl:0=
@@ -32,8 +32,6 @@ RDEPEND="
 REQUIRED_USE="?? ( lto java )"
 
 DOCS=( README.md )
-
-#PATCHES=( "${FILESDIR}/${PN}-fix-runpath.patch" )
 
 RESTRICT="!test? ( test )"
 
@@ -101,4 +99,8 @@ src_install() {
 
 	use doc && local HTML_DOCS=( docs/html/. )
 	einstalldocs
+
+	# kludge for telegram-desktop
+	insinto /usr/include/td/e2e
+	doins tde2e/td/e2e/*.h
 }

@@ -36,6 +36,7 @@ CDEPEND="
 	media-libs/rnnoise
 	~media-libs/tg_owt-0_pre20241202:=[screencast=,X=]
 	>=media-video/ffmpeg-6:=[opus,vpx]
+	net-libs/tdlib
 	sys-libs/zlib:=[minizip]
 	!enchant? ( >=app-text/hunspell-1.7:= )
 	enchant? ( app-text/enchant:= )
@@ -95,6 +96,8 @@ PATCHES=(
 	"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
+	"${FILESDIR}"/5.14.1-fix-tde2e-path.patch
+	"${FILESDIR}"/5.14.1-fix_cmake_libs.patch
 )
 
 pkg_pretend() {
