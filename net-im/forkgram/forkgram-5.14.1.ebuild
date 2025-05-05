@@ -36,6 +36,7 @@ CDEPEND="
 	media-libs/rnnoise
 	~media-libs/tg_owt-0_pre20241202:=[screencast=,X=]
 	>=media-video/ffmpeg-6:=[opus,vpx]
+	net-libs/tdlib
 	sys-libs/zlib:=[minizip]
 	!enchant? ( >=app-text/hunspell-1.7:= )
 	enchant? ( app-text/enchant:= )
