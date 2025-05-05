@@ -34,7 +34,7 @@ CDEPEND="
 	media-libs/openal
 	media-libs/opus
 	media-libs/rnnoise
-	~media-libs/tg_owt-0_pre20241202:=[screencast=,X=]
+	~media-libs/tg_owt-0_pre20250501:=[screencast=,X=]
 	>=media-video/ffmpeg-6:=[opus,vpx]
 	net-libs/tdlib
 	sys-libs/zlib:=[minizip]
