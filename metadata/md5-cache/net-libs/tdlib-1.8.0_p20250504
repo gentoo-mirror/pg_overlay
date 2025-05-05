@@ -1,0 +1,15 @@
+BDEPEND=dev-util/gperf dev-lang/php[cli] doc? ( app-text/doxygen ) java? ( virtual/jdk:= ) app-alternatives/ninja >=dev-build/cmake-3.20.5
+DEFINED_PHASES=compile configure install prepare test
+DESCRIPTION=Cross-platform library for building Telegram clients
+EAPI=8
+HOMEPAGE=https://github.com/tdlib/td
+INHERIT=cmake
+IUSE=+cli doc debug java lto low-ram test
+LICENSE=Boost-1.0
+RDEPEND=dev-libs/openssl:0= sys-libs/zlib
+REQUIRED_USE=?? ( lto java )
+RESTRICT=!test? ( test )
+SLOT=0
+SRC_URI=https://github.com/tdlib/td/archive/34c390f9afe074071e01c623e42adfbd17e350ab.tar.gz -> tdlib-1.8.0_p20250504.tar.gz
+_eclasses_=toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	flag-o-matic	e8de74bac929ba17427e740e95707d00	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	7690d321b2026f7f684d8aabbd29de9f
+_md5_=09f676a81e8a0eb75afa485959478aa6
