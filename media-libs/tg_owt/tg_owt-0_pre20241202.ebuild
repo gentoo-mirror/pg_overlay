@@ -9,8 +9,6 @@ DESCRIPTION="WebRTC build for Telegram"
 HOMEPAGE="https://github.com/desktop-app/tg_owt"
 
 TG_OWT_COMMIT="be39b8c8d0db1f377118f813f0c4bd331d341d5e"
-LIBYUV_COMMIT="04821d1e7d60845525e8db55c7bcd41ef5be9406"
-LIBSRTP_COMMIT="a566a9cfcd619e8327784aa7cff4a1276dc1e895"
 SRC_URI="https://github.com/desktop-app/tg_owt/archive/${TG_OWT_COMMIT}.tar.gz -> ${P}.tar.gz"
 S="${WORKDIR}/${PN}-${TG_OWT_COMMIT}"
 # Upstream libyuv: https://chromium.googlesource.com/libyuv/libyuv
