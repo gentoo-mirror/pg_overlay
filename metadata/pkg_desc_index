@@ -91,7 +91,7 @@ media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/opencv 4.11.0: A collection of algorithms and sample code for various computer vision problems
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
-media-libs/tg_owt 0_pre20241202: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20241202 0_pre20250501: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/gst-plugins-flac 1.26.0_pre: FLAC encoder/decoder/tagger plugin for GStreamer
 media-plugins/gst-plugins-libav 1.26.0_pre: FFmpeg based gstreamer plugin
