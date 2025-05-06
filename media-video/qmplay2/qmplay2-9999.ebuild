@@ -22,7 +22,7 @@ LICENSE="LGPL-3"
 SLOT="0"
 
 IUSE="avdevice +audiofilters +alsa cdio cuvid extensions gme inputs libass
-	modplug notifications opengl pipewire portaudio pulseaudio qt6 sid
+	modplug notifications opengl pipewire portaudio pulseaudio sid
 	shaders +taglib vaapi videofilters visualizations vulkan xv"
 
 REQUIRED_USE="
