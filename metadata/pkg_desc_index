@@ -88,7 +88,6 @@ media-libs/libwebp 1.5.0_pre: A lossy image compression format
 media-libs/libyuv 1904: Open source project that includes YUV scaling and conversion functionality.
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
-media-libs/opencv 4.11.0: A collection of algorithms and sample code for various computer vision problems
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
 media-libs/tg_owt 0_pre20241202 0_pre20250501: WebRTC build for Telegram
