@@ -97,7 +97,7 @@ PATCHES=(
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
 	#"${FILESDIR}"/5.14.1-fix-tde2e-path.patch
-	"${FILESDIR}"/5.14.1-fix_cmake_libs.patch
+	#"${FILESDIR}"/5.14.1-fix_cmake_libs.patch
 )
 
 pkg_pretend() {
