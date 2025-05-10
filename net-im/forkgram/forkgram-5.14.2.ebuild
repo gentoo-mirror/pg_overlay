@@ -96,7 +96,7 @@ PATCHES=(
 	"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
-	"${FILESDIR}"/5.14.1-fix-tde2e-path.patch
+	#"${FILESDIR}"/5.14.1-fix-tde2e-path.patch
 	"${FILESDIR}"/5.14.1-fix_cmake_libs.patch
 )
 
