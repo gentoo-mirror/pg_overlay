@@ -74,6 +74,7 @@ dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the int
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
 dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
 dev-util/librnp:botan - Use Botan crypto backend instead of OpenSSL
+dev-util/mingw64-toolchain:bin-symlinks - Symlink executables to usr/bin to be in default PATH (conflicts with crossdev mingw, and crossdev is preferable for a fully featured toolchain)
 dev-util/scanmem:gui - Enable the GameConqueror GUI
 dev-util/sccache:azure - Enable Azure Blob Storage support
 dev-util/sccache:dist-client - Enables distributed support in the sccache client
