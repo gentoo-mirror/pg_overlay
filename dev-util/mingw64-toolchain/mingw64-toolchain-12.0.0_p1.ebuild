@@ -1,4 +1,4 @@
-# Copyright 2022-2025 Gentoo Authors
+# # Copyright 2022-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -99,7 +99,7 @@ src_compile() {
 	use custom-cflags || strip-flags # fancy flags are not realistic here
 
 	local multilib=false
-	use abi_x86_32 && use abi_x86_64 && multilib=true
+	use abi_x86_32 && use abi_x86_64 && multilib=false
 
 	# global configure flags
 	local conf=(
