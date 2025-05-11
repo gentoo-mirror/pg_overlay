@@ -59,6 +59,8 @@ dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applicat
 dev-util/re2c 4.1_pre: Tool for generating C-based recognizers from regular expressions
 dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
+dev-util/spirv-headers 1.4.313.0: Machine-readable files for the SPIR-V Registry
+dev-util/spirv-tools 1.4.313.0: Provides an API and commands for processing SPIR-V modules
 dev-util/volk 1.4.313.0: Meta loader for Vulkan API
 dev-util/vulkan-headers 1.4.313.0: Vulkan Header files and API registry
 dev-util/vulkan-tools 1.4.313.0: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
@@ -94,6 +96,7 @@ media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
+media-libs/shaderc 2025.2: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20241202 0_pre20250501: WebRTC build for Telegram
 media-libs/vulkan-layers 1.4.313.0: Vulkan Validation Layers
 media-libs/vulkan-loader 1.4.313.0: Vulkan Installable Client Driver (ICD) Loader
