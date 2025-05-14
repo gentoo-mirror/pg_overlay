@@ -461,8 +461,5 @@ x11-libs/gtk+:broadway - Enable the GDK Broadway backend
 x11-libs/gtk+:cloudproviders - Enable GtkPlacesSidebar to access cloud services
 x11-libs/gtk+:colord - Use x11-misc/colord for color management in printing
 x11-libs/gtk+:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
-x11-libs/libfm:automount - Use gnome-base/gvfs for automounting
-x11-libs/libfm:udisks - Use libfm's udisks-based volume monitor implementation instead of using the one from gvfs
-x11-libs/libfm:vala - Support custom actions in menus
 x11-libs/wxGTK:gstreamer - Enable the wxMediaCtrl class for playing audio and video through gstreamer.
 x11-libs/wxGTK:sdl - Use Simple Directmedia Layer (media-libs/libsdl) for audio.
