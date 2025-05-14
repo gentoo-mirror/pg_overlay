@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-138-patches-01.tar.xz"
+FIREFOX_PATCHSET="firefox-138-patches-02.tar.xz"
 FIREFOX_LOONG_PATCHSET="firefox-138-loong-patches-01.tar.xz"
 
 LLVM_COMPAT=( 19 )
@@ -964,6 +964,8 @@ src_configure() {
 		mozconfig_add_options_ac 'no wasm-sandbox' --without-wasm-sandboxed-libraries
 		mozconfig_use_with system-harfbuzz system-graphite2
 	fi
+
+	! use jpegxl && mozconfig_add_options_ac '-jpegxl' --disable-jxl
 
 	if [[ ${use_lto} == "yes" ]] ; then
 		if use clang ; then
