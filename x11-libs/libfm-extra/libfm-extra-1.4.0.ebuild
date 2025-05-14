@@ -54,8 +54,8 @@ EOF
 		die "sub-slot sanity check failed"
 	fi
 
-#	eautoreconf
-	#rm -r autom4te.cache || die
+	eautoreconf
+	rm -r autom4te.cache || die
 }
 
 src_configure() {
