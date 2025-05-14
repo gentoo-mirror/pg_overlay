@@ -84,11 +84,12 @@ llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 lxde-base/menu-cache 1.1.1: Library to create and utilize caches to speed up freedesktop application menus
-mail-client/thunderbird 138.0: Thunderbird Mail Client
+mail-client/thunderbird 138.0.1: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-libs/gst-plugins-base 1.26.1_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.1_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.1_pre: Open source multimedia framework
+media-libs/harfbuzz 11.2.1_pre: An OpenType text shaping engine
 media-libs/libjpeg-turbo 3.1.0: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
@@ -174,7 +175,7 @@ sys-fs/xfsprogs 6.14.0: XFS filesystem utilities
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
 sys-libs/ncurses 6.4_p20230923: Console display library
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 138.0.1: Firefox Web Browser
+www-client/firefox 138.0.3: Firefox Web Browser
 x11-base/xwayland 24.1.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.49: Gimp ToolKit +
