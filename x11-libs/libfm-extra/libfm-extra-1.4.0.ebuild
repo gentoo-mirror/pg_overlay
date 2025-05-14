@@ -54,7 +54,7 @@ EOF
 		die "sub-slot sanity check failed"
 	fi
 
-	eautoreconf
+#	eautoreconf
 	rm -r autom4te.cache || die
 }
 
