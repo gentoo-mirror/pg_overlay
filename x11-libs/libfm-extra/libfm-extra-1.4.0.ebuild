@@ -55,7 +55,7 @@ EOF
 	fi
 
 #	eautoreconf
-	rm -r autom4te.cache || die
+	#rm -r autom4te.cache || die
 }
 
 src_configure() {
