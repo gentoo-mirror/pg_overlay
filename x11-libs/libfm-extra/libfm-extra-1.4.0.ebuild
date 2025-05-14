@@ -27,7 +27,7 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
-PATCHES=( "${FILESDIR}/${P}-buildsystem.patch" )
+#PATCHES=( "${FILESDIR}/${P}-buildsystem.patch" )
 
 src_prepare() {
 	xdg_src_prepare
