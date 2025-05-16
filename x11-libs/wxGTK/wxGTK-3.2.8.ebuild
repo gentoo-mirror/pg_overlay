@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit multilib-minimal flag-o-matic
+inherit multilib-minimal flag-o-matic toolchain-funcs
 
 WXSUBVERSION="${PV}-gtk3"				# 3.2.6-gtk3
 WXVERSION="$(ver_cut 1-3)"				# 3.2.6
@@ -81,34 +81,35 @@ PATCHES=(
 src_prepare() {
 	default
 
+	# Versionating
+	#
 	# find . -iname Makefile.in -not -path ./samples'/*' \
 	#        | xargs grep -l WX_RELEASE
 	local versioned_makefiles=(
-		./tests/benchmarks/Makefile.in
-		./tests/Makefile.in
-		./utils/emulator/src/Makefile.in
-		./utils/execmon/Makefile.in
+		./Makefile.in
 		./utils/wxrc/Makefile.in
 		./utils/helpview/src/Makefile.in
+		./utils/execmon/Makefile.in
 		./utils/hhp2cached/Makefile.in
+		./utils/emulator/src/Makefile.in
 		./utils/screenshotgen/src/Makefile.in
 		./utils/ifacecheck/src/Makefile.in
-		./Makefile.in
+		./demos/poem/Makefile.in
 		./demos/life/Makefile.in
 		./demos/bombs/Makefile.in
 		./demos/fractal/Makefile.in
 		./demos/forty/Makefile.in
-		./demos/poem/Makefile.in
+		./tests/benchmarks/Makefile.in
+		./tests/Makefile.in
 	)
-
-	# Versionating
 	sed -i \
 		-e "s:\(WX_RELEASE = \).*:\1${WXRELEASE}:"\
 		-e "s:\(WX_RELEASE_NODOT = \).*:\1${WXRELEASE_NODOT}:"\
 		-e "s:\(WX_VERSION = \).*:\1${WXVERSION}:"\
 		-e "s:aclocal):aclocal/wxwin${WXRELEASE_NODOT}.m4):" \
 		"${versioned_makefiles[@]}" || die
-
+	# XXX: The WX_VERSION_TAG especially here is *radioactive*
+	# and must be removed in a new revision after 3.2.8. See bug #955902.
 	sed -i \
 		-e "s:\(WX_VERSION=\).*:\1${WXVERSION}:" \
 		-e "s:\(WX_RELEASE=\).*:\1${WXRELEASE}:" \
@@ -118,6 +119,10 @@ src_prepare() {
 }
 
 multilib_src_configure() {
+	# defang automagic dependencies, bug #927952
+	use wayland || append-cflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
+	use gui || aappend-cflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
+
 	# Workaround for bug #915154
 	append-ldflags $(test-flags-CCLD -Wl,--undefined-version)
 
