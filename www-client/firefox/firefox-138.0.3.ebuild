@@ -22,7 +22,7 @@ VIRTUALX_REQUIRED="manual"
 # Information about the bundled wasi toolchain from
 # https://github.com/WebAssembly/wasi-sdk/
 WASI_SDK_VER=25.0
-WASI_SDK_LLVM_VER=19
+WASI_SDK_LLVM_VER=20
 
 MOZ_ESR=
 
