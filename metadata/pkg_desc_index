@@ -35,7 +35,6 @@ dev-lang/lazarus 3.8 4.0: feature rich visual programming environment emulating 
 dev-lang/python 3.13.3: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
-dev-libs/icu 77.1_pre: International Components for Unicode
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libnl 3.11.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
