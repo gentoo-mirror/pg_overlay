@@ -82,7 +82,6 @@ dev-util/sccache:dist-server - Enables the sccache-dist binary
 dev-util/sccache:gcs - Enable Google Cloud Storage support
 dev-util/sccache:redis - Enable Redis support
 dev-util/sccache:s3 - Enable Amazon S3 support
-dev-util/vulkan-tools:cube - Build the cube/cubepp demos
 dev-vcs/subversion:extras - Install extra scripts (examples, tools, hooks)
 dev-vcs/subversion:kwallet - Enable encrypted storage of passwords with kde-frameworks/kwallet
 dev-vcs/subversion:plaintext-password-storage - Enable on-disk caching of plaintext passwords and passphrases. (Enabling this functionality will not force Subversion to store passwords in plaintext, but does permit users to explicitly allow that behavior via runtime configuration.)
@@ -151,7 +150,6 @@ media-libs/mesa:vdpau - Enable the VDPAU acceleration interface for the Gallium3
 media-libs/mesa:vulkan-overlay - Build vulkan-overlay-layer which displays Frames Per Second and other statistics
 media-libs/mesa:wayland - Enable support for dev-libs/wayland
 media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
-media-libs/vulkan-loader:layers - Include the vulkan layers
 media-sound/cantata:cdio - Use dev-libs/libcdio-paranoia for CD support (instead of cdparanoia)
 media-sound/cantata:http-server - Enable internal HTTP server to play non-MPD files
 media-sound/cantata:replaygain - Enable ReplayGain support, for relative volume adjustments
