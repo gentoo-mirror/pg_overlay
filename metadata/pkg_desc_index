@@ -68,7 +68,6 @@ gnome-extra/gnome-commander 1.18.2: A graphical, full featured, twin-panel file 
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/gtk 4.18.5: GTK is a multi-platform toolkit for creating graphical user interfaces
-kde-frameworks/extra-cmake-modules 6.14.0: Extra modules and scripts for CMake
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-misc/kweather 25.04.1 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/kdesu-gui 9999: Graphical frontend for KDE Frameworks' kdesu
