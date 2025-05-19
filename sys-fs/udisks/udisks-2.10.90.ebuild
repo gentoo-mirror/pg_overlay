@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -62,7 +62,9 @@ BDEPEND="
 DOCS=( AUTHORS HACKING NEWS README.md )
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.10.1-udiskslinuxblock_survive_missing_fstab.patch
+	"${FILESDIR}"/${P}-udiskslinuxblock_survive_missing_fstab.patch
+
+	"${FILESDIR}"/${PN}-2.10.1-slibtool-export-dynamic.patch
 )
 
 pkg_setup() {
