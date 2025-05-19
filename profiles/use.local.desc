@@ -303,7 +303,6 @@ net-libs/nodejs:systemtap - Enable SystemTap/DTrace tracing
 net-libs/tdlib:cli - Build CLI tools
 net-libs/tdlib:low-ram - Split build to many files, which adds possibility to build on machines with low RAM values by price of longer compilation time
 net-libs/tdlib:lto - Enable Link Time Optimizations
-net-libs/udns:tools - Build and install dnsget, ex-rdns and rblcheck tools
 net-libs/webkit-gtk:examples - Install the MiniBrowser example application
 net-libs/webkit-gtk:gamepad - Enable gamepad input support via dev-libs/libmanette
 net-libs/webkit-gtk:jumbo-build - Combine source files to speed up build process
@@ -416,18 +415,6 @@ sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-auth/polkit:daemon - Build polkitd in addition to libpolkit.
 sys-auth/polkit:duktape - Use dev-lang/duktape instead of dev-lang/spidermonkey as JavaScript engine
 sys-auth/polkit:systemd - Use sys-apps/systemd for session tracking
-sys-block/fio:aio - Enable AIO ioengine
-sys-block/fio:curl - Enable HTTP engine for S3 and WebDav support support via net-misc/curl
-sys-block/fio:glusterfs - Enable GlusterFS gfapi support via sys-cluster/glusterfs
-sys-block/fio:gnuplot - Install tools for generating gnuplots
-sys-block/fio:io-uring - Enable efficient I/O via sys-libs/liburing.
-sys-block/fio:nfs - Enable NFS support
-sys-block/fio:numa - Enable numa support
-sys-block/fio:pandas - Install dependencies for complex python scripts
-sys-block/fio:rbd - Enable Rados block device support via sys-cluster/ceph
-sys-block/fio:rdma - Enable infiniband support via sys-cluster/rdma-core
-sys-block/fio:tcmalloc - Link against dev-util/google-perftools by default which will speed up USE=rbd up to 20%
-sys-block/fio:zbc - Enable ZBC & ZAC disks via sys-block/libzbc.
 sys-fs/udisks:daemon - Build the system daemon, not just the client tool
 sys-fs/udisks:elogind - Use sys-auth/elogind for session tracking
 sys-fs/udisks:lvm - Add support for Logical Volume Management via sys-fs/lvm2.
