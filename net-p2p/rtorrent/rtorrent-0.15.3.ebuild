@@ -3,7 +3,10 @@
 
 EAPI=8
 
-inherit autotools linux-info
+# require 64-bit integer
+LUA_COMPAT=( lua5-{3,4} )
+
+inherit autotools linux-info lua-single
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -11,20 +14,26 @@ SRC_URI="https://github.com/rakshasa/rtorrent/releases/download/v${PV}/${P}.tar.
 
 LICENSE="GPL-2"
 SLOT="0"
-KEYWORDS="~amd64 ~arm ~arm64 ~hppa ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris"
-IUSE="debug selinux test tinyxml2 xmlrpc"
+KEYWORDS="~amd64 ~ppc ~ppc64 ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris"
+IUSE="debug lua selinux test tinyxml2 xmlrpc"
 RESTRICT="!test? ( test )"
-REQUIRED_USE="tinyxml2? ( !xmlrpc )"
+REQUIRED_USE="
+	lua? ( ${LUA_REQUIRED_USE} )
+	tinyxml2? ( !xmlrpc )
+"
 
-DEPEND="
+COMMON_DEPEND="
 	~net-libs/libtorrent-${PV}
 	net-misc/curl
 	sys-libs/ncurses:0=
+	lua? ( ${LUA_DEPS} )
 	tinyxml2? ( dev-libs/tinyxml2:= )
 	xmlrpc? ( dev-libs/xmlrpc-c:= )
 "
-RDEPEND="
-	${DEPEND}
+DEPEND="${COMMON_DEPEND}
+	dev-cpp/nlohmann_json
+"
+RDEPEND="${COMMON_DEPEND}
 	selinux? ( sec-policy/selinux-rtorrent )
 "
 BDEPEND="
@@ -35,6 +44,11 @@ BDEPEND="
 DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
+	"${FILESDIR}"/${PN}-0.15.3-unbundle_json.patch
+	# from upstream. To be removed in next release
+	"${FILESDIR}"/${PN}-0.15.3-struct_xmlrpc.patch
+	# missing rtorrent.lua in tarball
+	"${FILESDIR}"/${PN}-0.15.3-rtorrentlua.patch
 )
 
 pkg_setup() {
@@ -44,10 +58,14 @@ pkg_setup() {
 		ewarn "similar in your rtorrent.rc"
 		ewarn "Upstream bug: https://github.com/rakshasa/rtorrent/issues/732"
 	fi
+	use lua && lua-single_pkg_setup
 }
 
 src_prepare() {
 	default
+
+	# use system-json
+	rm -r src/rpc/nlohmann || die
 
 	# https://github.com/rakshasa/rtorrent/issues/332
 	cp "${FILESDIR}"/rtorrent.1 "${S}"/doc/ || die
@@ -62,15 +80,30 @@ src_prepare() {
 
 src_configure() {
 	# configure needs bash or script bombs out on some null shift, bug #291229
-	CONFIG_SHELL=${BASH} econf \
-		$(use_enable debug) \
-		$(usev xmlrpc --with-xmlrpc-c) \
+	export CONFIG_SHELL=${BASH}
+
+	local myeconfargs=(
+		$(use_enable debug)
+		$(use_with lua)
+		$(usev xmlrpc --with-xmlrpc-c)
 		$(usev tinyxml2 --with-xmlrpc-tinyxml2)
+	)
+
+	use lua && myeconfargs+=(
+		LUA_INCLUDE="-I$(lua_get_include_dir)"
+	)
+
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
 	default
 	doman doc/rtorrent.1
+
+	if use lua; then
+		insinto $(lua_get_lmod_dir)
+		doins ${PN}.lua
+	fi
 
 	newinitd "${FILESDIR}/rtorrent-r1.init" rtorrent
 	newconfd "${FILESDIR}/rtorrentd.conf" rtorrent
