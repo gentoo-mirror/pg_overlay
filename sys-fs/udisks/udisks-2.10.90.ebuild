@@ -62,7 +62,6 @@ BDEPEND="
 DOCS=( AUTHORS HACKING NEWS README.md )
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.10.1-BLKRRPART_harder.patch
 	"${FILESDIR}"/${PN}-2.10.1-targetcli_config.json_netif_timeout.patch
 	"${FILESDIR}"/${PN}-2.10.1-udiskslinuxmanager_use_after_free.patch
 	"${FILESDIR}"/${PN}-2.10.1-udiskslinuxblock_survive_missing_fstab.patch
