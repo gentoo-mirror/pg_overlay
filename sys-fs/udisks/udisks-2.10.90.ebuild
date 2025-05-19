@@ -62,8 +62,6 @@ BDEPEND="
 DOCS=( AUTHORS HACKING NEWS README.md )
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.10.1-udiskslinuxblock_survive_missing_fstab.patch
-
 	"${FILESDIR}"/${PN}-2.10.1-slibtool-export-dynamic.patch
 )
 
