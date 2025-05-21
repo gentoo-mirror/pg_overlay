@@ -68,7 +68,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	#"${FILESDIR}/patch-cmake-absl-external.patch"
+	"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 	"${FILESDIR}/tg_owt-system-yuv.patch"
 )
