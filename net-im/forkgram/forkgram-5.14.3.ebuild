@@ -1,4 +1,4 @@
-# Copyright 2020-2025 Gentoo Authors
+# # Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -34,7 +34,7 @@ CDEPEND="
 	media-libs/openal
 	media-libs/opus
 	media-libs/rnnoise
-	~media-libs/tg_owt-0_pre20250501:=[screencast=,X=]
+	~media-libs/tg_owt-0_pre20250515:=[screencast=,X=]
 	>=media-video/ffmpeg-6:=[opus,vpx]
 	net-libs/tdlib
 	sys-libs/zlib:=[minizip]
@@ -90,13 +90,12 @@ S=${WORKDIR}/frk-v${PV}-full
 
 PATCHES=(
 	"${FILESDIR}"/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch
-	"${FILESDIR}"/tdesktop-4.10.0-system-cppgir.patch
+	"${FILESDIR}"/tdesktop-5.14.3-system-cppgir.patch
 	"${FILESDIR}"/tdesktop-4.11.3-system-libyuv.patch
 	"${FILESDIR}"/option-to-disable-stories.patch
 	"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
-	"${FILESDIR}"/5.14.1-fix_cmake_libs.patch
 )
 
 pkg_pretend() {
@@ -115,6 +114,9 @@ src_prepare() {
 		\! -path './cmake/external/expected/CMakeLists.txt' \
 		\! -path './cmake/external/kcoreaddons/CMakeLists.txt' \
 		\! -path './cmake/external/qt/package.cmake' \
+		\! -path './cmake/external/lz4/CMakeLists.txt' \
+		\! -path './cmake/external/opus/CMakeLists.txt' \
+		\! -path './cmake/external/xxhash/CMakeLists.txt' \
 		-print0 | xargs -0 sed -i \
 		-e '/pkg_check_modules(/s/[^ ]*)/REQUIRED &/' \
 		-e '/find_package(/s/)/ REQUIRED)/' || die
