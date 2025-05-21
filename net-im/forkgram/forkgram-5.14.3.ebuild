@@ -1,4 +1,4 @@
-# Copyright 2020-2025 Gentoo Authors
+# # Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -114,6 +114,9 @@ src_prepare() {
 		\! -path './cmake/external/expected/CMakeLists.txt' \
 		\! -path './cmake/external/kcoreaddons/CMakeLists.txt' \
 		\! -path './cmake/external/qt/package.cmake' \
+		\! -path './cmake/external/lz4/CMakeLists.txt' \
+		\! -path './cmake/external/opus/CMakeLists.txt' \
+		\! -path './cmake/external/xxhash/CMakeLists.txt' \
 		-print0 | xargs -0 sed -i \
 		-e '/pkg_check_modules(/s/[^ ]*)/REQUIRED &/' \
 		-e '/find_package(/s/)/ REQUIRED)/' || die
