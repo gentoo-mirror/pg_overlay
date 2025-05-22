@@ -17,8 +17,8 @@ STRONGSWAN_PLUGINS_STD="aes cmac curve25519 des dnskey drbg eap-radius fips-prf 
 pkcs1 pkcs7 pkcs8 pkcs12 pubkey random rc2 revocation sha1 sha2 sshkey systime-fix unity vici x509 xcbc"
 STRONGSWAN_PLUGINS_OPT_DISABLE="kdf"
 STRONGSWAN_PLUGINS_OPT="acert af-alg agent addrblock aesni botan blowfish bypass-lan
-ccm chapoly ctr error-notify forecast files gcm ha ipseckey md4 mgf1 ntru newhope
-openxpki padlock rdrand save-keys sha3 soup test-vectors unbound whitelist xauth-noauth"
+ccm chapoly ctr error-notify forecast files gcm ha ipseckey md4 mgf1 ml
+openxpki padlock rdrand save-keys sha3 soup stroke test-vectors unbound whitelist xauth-noauth"
 
 for mod in $STRONGSWAN_PLUGINS_STD; do
 	IUSE="${IUSE} +strongswan_plugins_${mod}"
@@ -157,8 +157,6 @@ src_configure() {
 		--enable-swanctl \
 		--enable-socket-dynamic \
 		--enable-cmd \
-		--enable-ml \
-		--enable-stroke \
 		$(use_enable curl) \
 		$(use_enable constraints) \
 		$(use_enable ldap) \
@@ -207,11 +205,15 @@ src_install() {
 
 	local dir_ugid
 	if use non-root; then
-		fowners ${UGID}:${UGID} \
-			/etc/ipsec.conf \
-			/etc/strongswan.conf
+	    if [ -f /etc/ipsec.conf ]; then
+			fowners ${UGID}:${UGID} \
+				/etc/ipsec.conf
+		fi
 
-		dir_ugid="${UGID}"
+		fowners ${UGID}:${UGID} \
+				/etc/strongswan.conf
+
+	    dir_ugid="${UGID}"
 	else
 		dir_ugid="root"
 	fi
