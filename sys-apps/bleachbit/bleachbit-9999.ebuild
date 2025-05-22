@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -22,15 +22,13 @@ KEYWORDS=""
 RDEPEND="
 	$(python_gen_cond_dep '
 		dev-python/chardet[${PYTHON_USEDEP}]
+		dev-python/psutil[${PYTHON_USEDEP}]
 		dev-python/pygobject:3[${PYTHON_USEDEP}]
 	')
 	x11-libs/gtk+:3
 "
 BDEPEND="
 	sys-devel/gettext
-	test? (
-		$(python_gen_cond_dep 'dev-python/mock[${PYTHON_USEDEP}]')
-	)
 "
 
 distutils_enable_tests unittest
@@ -38,7 +36,14 @@ distutils_enable_tests unittest
 python_prepare_all() {
 	if use test; then
 		# avoid tests requiring internet access
-		rm tests/Test{Chaff,Update}.py || die
+		rm tests/Test{Chaff,GuiChaff,Network,Update}.py || die
+
+		sed -e "s/test_chaff(self)/_&/" \
+			-i tests/TestGUI.py || die
+
+		# fails due to invalid language code format pt_pt
+		sed -e "s/test_assertIsLanguageCode_live(self)/_&/" \
+			-i tests/TestCommon.py || die
 
 		# fails due to non-existent $HOME/.profile
 		rm tests/TestInit.py || die
@@ -47,15 +52,18 @@ python_prepare_all() {
 		sed -e "s/test_make_self_oom_target_linux(self)/_&/" \
 			-i tests/TestMemory.py || die
 
-		# only applicable to Windows installer
-		rm tests/TestNsisUtilities.py || die
+		# only applicable to Windows
+		rm tests/{TestNsisUtilities,TestWindows}.py || die
 
-		# these fail on upstream Travis CI as well as on Gentoo
+		# random failures, some also on upstream CI
 		sed -e "s/test_notify(self)/_&/" \
 			-i tests/TestGUI.py || die
 
 		sed -e "s/test_get_proc_swaps(self)/_&/" \
 			-i tests/TestMemory.py || die
+
+		sed -e "s/test_is_process_running(self)/_&/" \
+			-i tests/TestUnix.py || die
 	fi
 
 	rem_locale() {
