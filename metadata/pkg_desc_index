@@ -95,7 +95,7 @@ media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
 media-libs/tg_owt 0_pre20250515: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
-media-plugins/qmmp-plugin-pack 9999 9999-r6: A set of extra plugins for Qmmp
+media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/alsa-scarlett-gui 0.5.1: A UI for Focusrite Scarlett and Clarett audio interfaces
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
@@ -107,7 +107,7 @@ media-sound/mpd 0.24.4: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: Featureful ncurses based MPD client inspired by ncmpc
-media-sound/qmmp 9999 9999-r6: Q6-based audio player with winamp/xmms skins support
+media-sound/qmmp 9999: Q6-based audio player with winamp/xmms skins support
 media-sound/redoflacs 1.1.0: Bash commandline flac compressor, verifier, organizer, analyzer, retagger
 media-sound/spek 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
@@ -173,4 +173,3 @@ x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.49: Gimp ToolKit +
 x11-libs/talkatu 9999: GTK widgets for chat applications
 x11-libs/wxGTK 3.2.8: GTK version of wxWidgets, a cross-platform C++ GUI toolkit
-x11-themes/kvantum 1.1.4: SVG-based theme engine for Qt, KDE Plasma and LXQt
