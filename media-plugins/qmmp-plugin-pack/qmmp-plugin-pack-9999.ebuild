@@ -20,7 +20,6 @@ RDEPEND="
 	=media-sound/qmmp-$(ver_cut 1-2)*
 "
 DEPEND="${RDEPEND}
-	dev-lang/yasm
 	dev-qt/qttools:6[linguist]
 	virtual/pkgconfig
 "
