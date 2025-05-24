@@ -1,15 +1,13 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
-inherit cmake subversion
+inherit cmake subversion optfeature
 
 DESCRIPTION="A set of extra plugins for Qmmp"
 HOMEPAGE="http://qmmp.ylsoftware.com/"
-
-QMMP_DEV_BRANCH="1.6"
-ESVN_REPO_URI="svn://svn.code.sf.net/p/qmmp-dev/code/branches/${PN}-${QMMP_DEV_BRANCH}"
+ESVN_REPO_URI="svn://svn.code.sf.net/p/qmmp-dev/code/trunk/${PN}"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -17,31 +15,26 @@ KEYWORDS=""
 IUSE=""
 
 RDEPEND="
-	dev-qt/qtcore:5
-	dev-qt/qtnetwork:5
-	dev-qt/qtwidgets:5
-	media-libs/taglib
+	dev-qt/qtbase:6[gui,network,widgets]
+	media-libs/taglib:=
 	=media-sound/qmmp-$(ver_cut 1-2)*
 "
 DEPEND="${RDEPEND}
-	dev-lang/yasm
-	dev-qt/linguist-tools:5
+	dev-qt/qttools:6[linguist]
+	virtual/pkgconfig
 "
 
-src_prepare() {
+src_configure() {
 	mycmakeargs=(
-		-DUSE_FFAP=1
-		-DUSE_FFVIDEO=0
-		-DUSE_GOOM=0
-		-DUSE_SRC=0
-		-DUSE_YTB=0
+		-DUSE_FFAP=ON
+		-DUSE_FFVIDEO=OFF
+		-DUSE_GOOM=OFF
+		-DUSE_SRC=OFF
+		-DUSE_YTB=OFF
 	)
-
-	cmake_src_prepare
+	cmake_src_configure
 }
 
-src_install() {
-	mv appdata/qmmp-plugin-pack.appdata.xml appdata/qmmp-plugin-pack-1.appdata.xml
-
-	cmake_src_install
+pkg_postinst() {
+	optfeature "audio playback from YouTube" net-misc/yt-dlp
 }
