@@ -170,7 +170,7 @@ src_configure() {
 		-DUSE_SCROBBLER="$(usex scrobbler)"
 		-DUSE_SHOUT="$(usex shout)"
 		-DUSE_SID="$(usex sid)"
-		-DUSE_SKINNED="$(usex gui)"
+		-DUSE_SKINNED=OFF
 		-DUSE_SNDFILE="$(usex sndfile)"
 		-DUSE_SOXR="$(usex soxr)"
 		-DUSE_STEREO="$(usex stereo)"
