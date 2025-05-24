@@ -23,7 +23,7 @@ LICENSE="CC-BY-SA-4.0 GPL-2+" # default skin & source code
 SLOT="0"
 # KEYWORDS further up
 IUSE="aac +alsa analyzer archive bs2b cdda cover cddb crossfade cue curl +dbus enca
-ffmpeg flac game gnome jack ladspa libxmp lyrics +mad midi mplayer musepack
+ffmpeg flac game gnome jack ladspa libxmp lyrics +mad midi mpg123 mplayer musepack
 notifier opus oss pipewire projectm pulseaudio qsui qtmedia scrobbler shout sid
 sndfile soxr stereo tray udisks +vorbis wavpack"
 
