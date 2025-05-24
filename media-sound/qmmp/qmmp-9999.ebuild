@@ -80,7 +80,6 @@ RDEPEND="
 "
 DEPEND="
 	${RDEPEND}
-	X? ( x11-base/xorg-proto )
 "
 BDEPEND="
 	dev-qt/qttools:6[linguist]
