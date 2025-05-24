@@ -25,7 +25,7 @@ DEPEND="${RDEPEND}
 	virtual/pkgconfig
 "
 
-src_prepare() {
+src_configure() {
 	mycmakeargs=(
 		-DUSE_FFAP=ON
 		-DUSE_FFVIDEO=OFF
