@@ -55,7 +55,7 @@ HTML_DOCS=( "doc/langref.html" )
 # Don't remove this comment so that other contributors won't be misleaded by "-bin" suffix.
 #PATCHES=()
 
-QA_PREBUILT="opt/zig-bin-linux-${PV}/zig"
+QA_PREBUILT="opt/zig-bin-${PV}/zig"
 
 src_unpack() {
 	verify-sig_src_unpack
@@ -71,8 +71,8 @@ src_install() {
 	rm -r ./doc/ || die
 
 	doins -r "${S}"
-	fperms 0755 /opt/zig-bin-linux-${PV}/zig
-	dosym -r /opt/zig-bin-linux-${PV}/zig /usr/bin/zig-bin-linux-${PV}
+	fperms 0755 /opt/zig-bin-${PV}/zig
+	dosym -r /opt/zig-bin-${PV}/zig /usr/bin/zig-bin-${PV}
 }
 
 pkg_postinst() {
