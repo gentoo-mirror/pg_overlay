@@ -117,6 +117,12 @@ fi
 # for econf and is needed to pass TRY_RUN results when cross-compiling.
 # Should be set by user in a per-package basis in /etc/portage/package.env.
 
+# @ECLASS_VARIABLE: CMAKE_QA_COMPAT_SKIP
+# @DEFAULT_UNSET
+# @DESCRIPTION:
+# If set, skip detection of CMakeLists.txt unsupported in CMake 4 in case of
+# false positives (e.g. unused outdated bundled libs).
+
 # @ECLASS_VARIABLE: CMAKE_QA_SRC_DIR_READONLY
 # @USER_VARIABLE
 # @DEFAULT_UNSET
@@ -129,13 +135,6 @@ fi
 # @DEFAULT_UNSET
 # @DESCRIPTION:
 # Array of tests that should be skipped when running CTest.
-
-[[ ${CMAKE_MIN_VERSION} ]] && die "CMAKE_MIN_VERSION is banned; if necessary, set BDEPEND=\">=dev-build/cmake-${CMAKE_MIN_VERSION}\" directly"
-[[ ${CMAKE_BUILD_DIR} ]] && die "The ebuild must be migrated to BUILD_DIR"
-[[ ${CMAKE_REMOVE_MODULES} ]] && die "CMAKE_REMOVE_MODULES is banned, set CMAKE_REMOVE_MODULES_LIST array instead"
-[[ ${CMAKE_UTILS_QA_SRC_DIR_READONLY} ]] && die "Use CMAKE_QA_SRC_DIR_READONLY instead"
-[[ ${WANT_CMAKE} ]] && die "WANT_CMAKE has been removed and is a no-op"
-[[ ${PREFIX} ]] && die "PREFIX has been removed and is a no-op"
 
 case ${CMAKE_MAKEFILE_GENERATOR} in
 	emake)
@@ -189,14 +188,6 @@ cmake_comment_add_subdirectory() {
 	done
 }
 
-# @FUNCTION: comment_add_subdirectory
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use cmake_comment_add_subdirectory instead.
-comment_add_subdirectory() {
-	die "comment_add_subdirectory is banned. Use cmake_comment_add_subdirectory instead"
-}
-
 # @FUNCTION: cmake_use_find_package
 # @USAGE: <USE flag> <package name>
 # @DESCRIPTION:
@@ -214,74 +205,6 @@ cmake_use_find_package() {
 
 	echo "-DCMAKE_DISABLE_FIND_PACKAGE_$2=$(use $1 && echo OFF || echo ON)"
 }
-
-# @FUNCTION: _cmake_banned_func
-# @INTERNAL
-# @DESCRIPTION:
-# Banned functions are banned.
-_cmake_banned_func() {
-	die "${FUNCNAME[1]} is banned. use -D$1<related_CMake_variable>=\"\$(usex $2)\" instead"
-}
-
-# @FUNCTION: cmake-utils_use_with
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DWITH_FOO=$(usex foo) instead.
-cmake-utils_use_with() { _cmake_banned_func WITH_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use_enable
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DENABLE_FOO=$(usex foo) instead.
-cmake-utils_use_enable() { _cmake_banned_func ENABLE_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use_disable
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DDISABLE_FOO=$(usex !foo) instead.
-cmake-utils_use_disable() { _cmake_banned_func DISABLE_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use_no
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DNO_FOO=$(usex !foo) instead.
-cmake-utils_use_no() { _cmake_banned_func NO_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use_want
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DWANT_FOO=$(usex foo) instead.
-cmake-utils_use_want() { _cmake_banned_func WANT_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use_build
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DBUILD_FOO=$(usex foo) instead.
-cmake-utils_use_build() { _cmake_banned_func BUILD_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use_has
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DHAVE_FOO=$(usex foo) instead.
-cmake-utils_use_has() { _cmake_banned_func HAVE_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use_use
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DUSE_FOO=$(usex foo) instead.
-cmake-utils_use_use() { _cmake_banned_func USE_ "$@" ; }
-
-# @FUNCTION: cmake-utils_use
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DFOO=$(usex foo) instead.
-cmake-utils_use() { _cmake_banned_func "" "$@" ; }
-
-# @FUNCTION: cmake-utils_useno
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use -DNOFOO=$(usex !foo) instead.
-cmake-utils_useno() { _cmake_banned_func "" "$@" ; }
 
 # @FUNCTION: _cmake_check_build_dir
 # @INTERNAL
@@ -364,7 +287,7 @@ cmake_src_prepare() {
 	if [[ ${EAPI} == 7 ]]; then
 		pushd "${S}" > /dev/null || die # workaround from cmake-utils
 		# in EAPI-8, we use current working directory instead, bug #704524
-		# esp. test with 'special' pkgs like: app-arch/brotli, net-libs/quiche
+		# esp. test with 'special' pkgs like: app-arch/brotli, media-gfx/gmic, net-libs/quiche
 	fi
 	_cmake_check_build_dir
 
@@ -444,6 +367,19 @@ cmake_src_configure() {
 
 	# Fix xdg collision with sandbox
 	xdg_environment_reset
+
+	local file ver cmreq_isold
+	if ! [[ ${CMAKE_QA_COMPAT_SKIP} ]]; then
+		while read -d '' -r file ; do
+			ver=$(sed -ne "/cmake_minimum_required/{s/.*\(\.\.\.*\|\s\)\([0-9.]*\)\([)]\|\s\).*$/\2/p;q}" \
+				"${file}" 2>/dev/null \
+			)
+
+			if [[ -n $ver ]] && ver_test $ver -lt "3.5"; then
+				cmreq_isold=true
+			fi
+		done < <(find "${CMAKE_USE_DIR}" -type f -iname "CMakeLists.txt" -print0)
+	fi
 
 	# Prepare Gentoo override rules (set valid compiler, append CPPFLAGS etc.)
 	local build_rules=${BUILD_DIR}/gentoo_rules.cmake
@@ -541,6 +477,7 @@ cmake_src_configure() {
 		set(CMAKE_INSTALL_DOCDIR "${EPREFIX}/usr/share/doc/${PF}" CACHE PATH "")
 		set(BUILD_SHARED_LIBS ON CACHE BOOL "")
 		set(Python3_FIND_UNVERSIONED_NAMES FIRST CACHE STRING "")
+		set(FETCHCONTENT_FULLY_DISCONNECTED ON CACHE BOOL "")
 		set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON CACHE BOOL "")
 		set(CMAKE_TLS_VERIFY ON CACHE BOOL "")
 		set(CMAKE_COMPILE_WARNING_AS_ERROR OFF CACHE BOOL "")
@@ -625,6 +562,21 @@ cmake_src_configure() {
 		cmakeargs+=( -C "${CMAKE_EXTRA_CACHE_FILE}" )
 	fi
 
+	if [[ ${cmreq_isold} ]]; then
+		eqawarn "QA Notice: Compatibility with CMake < 3.5 has been removed from CMake 4,"
+		eqawarn "${CATEGORY}/${PN} will fail to build w/o a fix."
+		eqawarn "See also tracker bug #951350; check existing bug or file a new one for"
+		eqawarn "this package, and take it upstream."
+		if has_version -b ">=dev-build/cmake-4"; then
+			eqawarn "QA Notice: CMake 4 detected; building with -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+			eqawarn "This is merely a workaround and *not* a permanent fix."
+			cmakeargs+=( -DCMAKE_POLICY_VERSION_MINIMUM=3.5 )
+		fi
+		if [[ ${EAPI} == 7 ]]; then
+			eqawarn "QA Notice: EAPI=7 detected; this package is now a prime last-rites target."
+		fi
+	fi
+
 	pushd "${BUILD_DIR}" > /dev/null || die
 	debug-print "${LINENO} ${ECLASS} ${FUNCNAME}: mycmakeargs is ${mycmakeargs_local[*]}"
 	echo "${CMAKE_BINARY}" "${cmakeargs[@]}" "${CMAKE_USE_DIR}"
@@ -673,27 +625,6 @@ cmake_build() {
 	popd > /dev/null || die
 }
 
-# @FUNCTION: cmake-utils_src_make
-# @INTERNAL
-# @DESCRIPTION:
-# Banned. Use cmake_build instead.
-cmake-utils_src_make() {
-	die "cmake-utils_src_make is banned. Use cmake_build instead"
-}
-
-# @ECLASS_VARIABLE: CTEST_JOBS
-# @USER_VARIABLE
-# @DESCRIPTION:
-# Maximum number of CTest jobs to run in parallel.  If unset, the value
-# will be determined from make options.
-
-# @ECLASS_VARIABLE: CTEST_LOADAVG
-# @USER_VARIABLE
-# @DESCRIPTION:
-# Maximum load, over which no new jobs will be started by CTest.  Note
-# that unlike make, CTest will not start *any* jobs if the load
-# is exceeded.  If unset, the value will be determined from make options.
-
 # @FUNCTION: cmake_src_test
 # @DESCRIPTION:
 # Function for testing the package. Automatically detects the build type.
@@ -707,9 +638,8 @@ cmake_src_test() {
 	[[ -n ${TEST_VERBOSE} ]] && myctestargs+=( --extra-verbose --output-on-failure )
 	[[ -n ${CMAKE_SKIP_TESTS} ]] && myctestargs+=( -E '('$( IFS='|'; echo "${CMAKE_SKIP_TESTS[*]}")')'  )
 
-	set -- ctest -j "${CTEST_JOBS:-$(get_makeopts_jobs 999)}" \
-		--test-load "${CTEST_LOADAVG:-$(get_makeopts_loadavg)}" \
-		"${myctestargs[@]}" "$@"
+	set -- ctest -j "$(makeopts_jobs "${MAKEOPTS}" 999)" \
+		--test-load "$(makeopts_loadavg)" "${myctestargs[@]}" "$@"
 	echo "$@" >&2
 	if "$@" ; then
 		einfo "Tests succeeded."
