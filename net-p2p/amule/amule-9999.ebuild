@@ -73,8 +73,6 @@ src_configure() {
 		-DBUILD_WEBSERVER=$(usex webserver)
 		-DENABLE_NLS=$(usex nls)
 		-DENABLE_UPNP=$(usex upnp)
-		-DCMAKE_POLICY_VERSION_MINIMUM=3.5
-
 	)
 
 	if use gui; then
