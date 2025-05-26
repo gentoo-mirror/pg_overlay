@@ -55,6 +55,7 @@ src_prepare() {
 	}
 	plocale_find_changes po "" ".po"
 	plocale_for_each_disabled_locale rem_locale
+	sed -i 's|unset (\${CMAKE_REQUIRED_LIBRARIES})|#unset (\${CMAKE_REQUIRED_LIBRARIES})|' cmake/bfd.cmake
 	cmake_src_prepare
 }
 
@@ -73,8 +74,6 @@ src_configure() {
 		-DBUILD_WEBSERVER=$(usex webserver)
 		-DENABLE_NLS=$(usex nls)
 		-DENABLE_UPNP=$(usex upnp)
-		-DCMAKE_POLICY_VERSION_MINIMUM=4.0
-
 	)
 
 	if use gui; then
