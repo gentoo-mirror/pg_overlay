@@ -16,7 +16,7 @@ SRC_URI="
 S="${WORKDIR}/wxWidgets-${PV}"
 
 LICENSE="wxWinLL-3 GPL-2 doc? ( wxWinFDL-3 )"
-SLOT="${WXRELEASE}"
+SLOT="${WXRELEASE}/3.2"
 KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~ia64 ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86 ~amd64-linux ~x86-linux"
 IUSE="+gui curl doc debug keyring gstreamer libnotify +lzma opengl pch sdl +spell test tiff wayland webkit"
 REQUIRED_USE="test? ( tiff ) tiff? ( gui ) spell? ( gui ) keyring? ( gui )"
