@@ -34,6 +34,7 @@ dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell a
 dev-lang/lazarus 3.8 4.0: feature rich visual programming environment emulating Delphi
 dev-lang/python 3.13.3: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
+dev-lang/zig-bin 0.14.1: A robust, optimal, and maintainable programming language
 dev-libs/dbus-glib 0.114: D-Bus bindings for glib
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
