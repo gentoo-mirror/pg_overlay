@@ -54,6 +54,7 @@ dev-lang/python:ensurepip - Install the ensurepip module that uses bundled wheel
 dev-lang/python:jit - Enable experimental Just-In-Time compilation support.
 dev-lang/python:libedit - Link readline extension against dev-libs/libedit instead of sys-libs/readline
 dev-lang/python:pgo - Optimize the build using Profile Guided Optimization (PGO) by running Python's test suite and collecting statistics based on its performance. This will take longer to build.
+dev-lang/python:tail-call-interp - Enable the tail call interpreter. May lead to better performance but is still new and dependent on latest toolchain versions (Clang 19, GCC 15).
 dev-lang/python:valgrind - Disable pymalloc when running under dev-debug/valgrind is detected (may incur minor performance penalty even when valgrind is not used)
 dev-lang/python:wininst - Install Windows executables required to create an executable installer for MS Windows
 dev-lang/rust:clippy - Install clippy, Rust code linter
@@ -452,6 +453,7 @@ sys-apps/kmod:zlib - Enable support for gzipped modules
 sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
+sys-auth/elogind:cgroup-hybrid - Use hybrid cgroup hierarchy (OpenRC's default) instead of unified.
 sys-auth/elogind:efi - Support rebooting into EFI firmware
 sys-auth/polkit:daemon - Build polkitd in addition to libpolkit.
 sys-auth/polkit:duktape - Use dev-lang/duktape instead of dev-lang/spidermonkey as JavaScript engine
@@ -481,6 +483,7 @@ www-client/firefox:system-icu - Use the system-wide dev-libs/icu instead of bund
 www-client/firefox:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled
 www-client/firefox:system-libevent - Use the system-wide dev-libs/libevent instead of bundled
 www-client/firefox:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled
+www-client/firefox:system-pipewire - Use system media-video/pipewire for WebRTC and screencast instead of bundled one
 www-client/firefox:system-png - Use the system-wide media-libs/libpng instead of bundled (requires APNG patches)
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled
 www-client/firefox:wasm-sandbox - Sandbox certain third-party libraries through WebAssembly using RLBox
