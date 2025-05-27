@@ -9,7 +9,7 @@ inherit git-r3 linux-info meson pam python-any-r1 udev xdg-utils
 
 DESCRIPTION="The systemd project's logind, extracted to a standalone package"
 HOMEPAGE="https://github.com/elogind/elogind"
-EGIT_REPO_URI="https://github.com/elogind/elogind.git"
+EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
 EGIT_BRANCH="v255-stable"
 EGIT_SUBMODULES=()
 
@@ -100,7 +100,6 @@ src_configure() {
 
 src_install() {
 	meson_src_install
-	keepdir /var/lib/elogind
 
 	newinitd "${FILESDIR}"/${PN}.init-r1 ${PN}
 
@@ -156,9 +155,9 @@ pkg_postinst() {
 	# find custom hooks excluding known (nvidia-drivers, sys-power/tlp)
 	if [[ -d "${EROOT}"/$(get_libdir)/elogind/system-sleep ]]; then
 		readarray -t files < <(find "${EROOT}"/$(get_libdir)/elogind/system-sleep/ \
-			-type f \( -not -iname ".keep_dir" -a \
-				-not -iname "nvidia" -a \
-				-not -iname "49-tlp-sleep" \) || die)
+		          -type f \( -not -iname ".keep_dir" -a \
+		          -not -iname "nvidia" -a \
+		          -not -iname "49-tlp-sleep" \) || die)
 	fi
 	if [[ ${#files[@]} -gt 0 ]]; then
 		ewarn "*** Custom hooks in obsolete path detected ***"
