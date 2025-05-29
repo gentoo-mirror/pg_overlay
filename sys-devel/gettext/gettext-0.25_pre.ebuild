@@ -107,6 +107,12 @@ src_prepare() {
 	# Makefile.am adds a dependency on gettext-tools/configure.ac
 	touch -c configure || die
 
+
+sed -e 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' \
+    -e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' \
+    -e 's|CC=.g..|& -Wl,--as-needed|' \
+    -i $(find . -name libtool)
+
 	elibtoolize
 
 	if use elibc_musl || use elibc_Darwin; then
