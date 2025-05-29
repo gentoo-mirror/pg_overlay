@@ -113,8 +113,7 @@ src_prepare() {
 		eapply "${FILESDIR}"/${PN}-0.21-musl-omit_setlocale_lock.patch
 	fi
 
-	sed -e 's/\(gl_cv_libxml_force_included=\)yes/\1no/' \
-		-i libtextstyle/configure
+	sed -e 's/\(gl_cv_libxml_force_included=\)yes/\1no/' -i libtextstyle/configure
 }
 
 multilib_src_configure() {
@@ -163,11 +162,6 @@ multilib_src_configure() {
 	fi
 
 	econf "${myconf[@]}"
-
-	sed -e 's|^hardcode_libdir_flag_spec=.*|hardcode_libdir_flag_spec=""|g' \
-		-e 's|^runpath_var=LD_RUN_PATH|runpath_var=DIE_RPATH_DIE|g' \
-		-e 's|CC=.g..|& -Wl,--as-needed|' \
-		-i $(find . -name libtool)
 }
 
 multilib_src_install() {
