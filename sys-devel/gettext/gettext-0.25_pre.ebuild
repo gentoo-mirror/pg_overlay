@@ -112,6 +112,9 @@ src_prepare() {
 	if use elibc_musl || use elibc_Darwin; then
 		eapply "${FILESDIR}"/${PN}-0.21-musl-omit_setlocale_lock.patch
 	fi
+
+	sed -e 's/\(gl_cv_libxml_force_included=\)yes/\1no/' \
+		-i libtextstyle/configure
 }
 
 multilib_src_configure() {
