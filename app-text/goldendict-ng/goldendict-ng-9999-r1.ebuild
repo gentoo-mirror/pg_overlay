@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PLOCALES="ar_SA ay_BO be_BY bg_BG crowdin cs_CZ de_CH de_DE el_GR eo_UY es_AR es_BO es_ES fa_IR fi_FI fr_FR hi_IN hu_HU ie_001 it_IT ja_JP jbo_EN kab_KAB ko_KR lt_LT mk_MK nl_NL pl_PL pt_BR pt_PT qu_PE ru_RU sk_SK sq_AL sr_SP sv_SE tg_TJ tk_TM tr_TR uk_UA vi_VN zh_CN zh_TW"
+PLOCALES="ar ay be bg crowdin cs de de_CH el eo es es_AR es_BO fa fi fr hi hu ie it ja jbo kab ko lt mk nl pl pt pt_BR qu ru sk sq sr sv tg tk tr uk vi zh_CN zh_TW"
 
 inherit cmake desktop git-r3 plocale
 
