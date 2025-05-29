@@ -6,7 +6,7 @@ app-crypt/pinentry 1.3.1-r1: Simple passphrase entry dialogs which utilize the A
 app-crypt/swtpm 0.10.0: Libtpms-based TPM emulator
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/nemu 3.3.1: Ncurses interface for QEMU
-app-i18n/opencc 1.1.9: Library for conversion between Traditional and Simplified Chinese characters
+app-i18n/enca 1.19-r3: Detect and convert encoding of text files
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
 app-misc/doublecmd 1.1.24: Cross Platform file manager.
