@@ -285,7 +285,7 @@ multilib_src_configure() {
 		-Dsdl2=disabled # Controls SDL2 dependent code (currently only examples when -Dinstalled_tests=enabled which we never install)
 		-Dlibmysofa=disabled # libmysofa is unpackaged
 		$(meson_native_use_feature extra sndfile) # Enables libsndfile dependent code (currently only pw-cat)
-		-Dsession-managers="wireplumber" # All available session managers are now their own projects, so there's nothing to build
+		-Dsession-managers="[wireplumber]" # All available session managers are now their own projects, so there's nothing to build
 
 		# Just for bell sounds in X11 right now.
 		$(meson_native_use_feature X x11)
