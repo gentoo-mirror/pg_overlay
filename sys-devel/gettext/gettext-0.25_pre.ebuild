@@ -6,7 +6,7 @@
 EAPI=8
 
 VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/gettext.asc
-inherit java-pkg-opt-2 libtool multilib-minimal verify-sig toolchain-funcs poly-c_ebuilds
+inherit java-pkg-opt-2 libtool multilib-minimal verify-sig toolchain-funcs flag-o-matic poly-c_ebuilds
 
 DESCRIPTION="GNU locale utilities"
 HOMEPAGE="https://www.gnu.org/software/gettext/"
@@ -107,8 +107,10 @@ src_prepare() {
 	# Makefile.am adds a dependency on gettext-tools/configure.ac
 	touch -c configure || die
 
-	elibtoolize
+	sed -e 's/\(gl_cv_libxml_force_included=\)yes/\1no/' -i libtextstyle/configure
 
+	elibtoolize
+/usr/include/libxml2
 	if use elibc_musl || use elibc_Darwin; then
 		eapply "${FILESDIR}"/${PN}-0.21-musl-omit_setlocale_lock.patch
 	fi
@@ -117,6 +119,8 @@ src_prepare() {
 }
 
 multilib_src_configure() {
+	append-flags -lxml2 -I/usr/include/libxml2
+
 	local myconf=(
 		# switches common to runtime and top-level
 		--cache-file="${BUILD_DIR}"/config.cache
