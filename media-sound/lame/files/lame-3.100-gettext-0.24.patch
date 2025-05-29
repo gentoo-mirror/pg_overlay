@@ -1,0 +1,91 @@
+--- lame-3.100/configure.ac
++++ lame-3.100/configure.ac
+@@ -17,7 +17,7 @@
+ dnl FRONTEND_CFLAGS
+ dnl FRONTEND_LDADD
+ 
+-AC_PREREQ(2.69)
++AC_PREREQ([2.69])
+ AC_INIT([lame],[3.100],[lame-dev@lists.sf.net])
+ AC_CONFIG_SRCDIR([libmp3lame/lame.c])
+ AC_LANG([C])
+@@ -25,6 +25,8 @@
+ dnl check system
+ AC_CANONICAL_HOST
+ 
++AC_CONFIG_MACRO_DIR([m4])
++
+ dnl automake
+ AM_INIT_AUTOMAKE
+ AC_CONFIG_HEADERS([config.h])
+@@ -35,11 +37,13 @@
+ AH_BOTTOM([#endif /* LAME_CONFIG_H */])
+ AM_MAINTAINER_MODE
+ AM_MAKE_INCLUDE
++AM_GNU_GETTEXT(external)
++AM_GNU_GETTEXT_VERSION(0.22)
+ 
+ dnl check environment
+-AC_AIX
+-AC_ISC_POSIX
+-AC_MINIX
++AC_USE_SYSTEM_EXTENSIONS
++AC_SEARCH_LIBS([strerror],[cposix])
++AC_USE_SYSTEM_EXTENSIONS
+ case $host_os in
+   *cygwin* ) CYGWIN=yes;;
+          * ) CYGWIN=no;;
+@@ -47,7 +51,7 @@
+ 
+ dnl libtool
+ # AC_DISABLE_SHARED
+-AC_PROG_LIBTOOL
++LT_INIT
+ AC_SUBST(LIBTOOL_DEPS)
+ CFLAGS="${ac_save_CFLAGS}"
+ 
+@@ -121,8 +125,6 @@
+ 	AM_WITH_DMALLOC
+ fi
+ 
+-dnl Checks for header files.
+-AC_HEADER_STDC
+ AC_CHECK_HEADERS( \
+ 		 errno.h \
+ 		 fcntl.h \
+@@ -182,7 +184,12 @@
+ 	exit 1
+ fi
+ 
+-AC_C_LONG_DOUBLE
++AC_TYPE_LONG_DOUBLE_WIDER
++ac_cv_c_long_double=$ac_cv_type_long_double_wider
++if test $ac_cv_c_long_double = yes; then
++  AC_DEFINE([HAVE_LONG_DOUBLE],[1],[Define to 1 if the type 'long double' works and has more range or precision than 'double'.])
++fi
++  
+ if test "${ac_cv_c_have_long_double}" = "yes" ; then
+ 	AC_CHECK_SIZEOF(long double)
+ fi
+@@ -371,7 +378,20 @@
+ fi
+ 
+ AC_TYPE_SIZE_T
+-AC_HEADER_TIME
++m4_warn([obsolete],
++[Update your code to rely only on HAVE_SYS_TIME_H,
++then remove this warning and the obsolete code below it.
++All current systems provide time.h; it need not be checked for.
++Not all systems provide sys/time.h, but those that do, all allow
++you to include it and time.h simultaneously.])dnl
++AC_CHECK_HEADERS_ONCE([sys/time.h])
++# Obsolete code to be removed.
++if test $ac_cv_header_sys_time_h = yes; then
++  AC_DEFINE([TIME_WITH_SYS_TIME],[1],[Define to 1 if you can safely include both <sys/time.h>
++	     and <time.h>.  This macro is obsolete.])
++fi
++# End of obsolete code.
++
+ 
+ dnl Checks for library functions.
+ AC_FUNC_ALLOCA
