@@ -103,7 +103,7 @@ src_prepare() {
 
 	# gettext-0.23-no-nls.patch changes gettext-tools/configure.ac and the
 	# corresponding configure scripts. Avoid regenerating other autotools output.
-	touch -c gettext-tools/{aclocal.m4,Makefile.in,config.h.in,configure} || die
+	#touch -c gettext-tools/{aclocal.m4,Makefile.in,config.h.in,configure} || die
 	# Makefile.am adds a dependency on gettext-tools/configure.ac
 	touch -c configure || die
 
@@ -148,6 +148,9 @@ multilib_src_configure() {
 		$(use_enable openmp)
 		$(use_enable static-libs static)
 		$(use_enable xattr attr)
+
+		--enable-shared
+		--with-xz
 	)
 
 	local ECONF_SOURCE="${S}"
