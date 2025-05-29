@@ -35,7 +35,7 @@ src_prepare() {
 
 	# Disable unconditional documentation build.
 	sed -i -e '/SUBDIRS/s/ devel-docs//g' Makefile.am || die
-	sed -i -e 's/devel-docs/Makefile//g' Makefile.am || die
+	sed -i -e 's/"devel-docs/Makefile"//g' Makefile.am || die
 	#eautoreconf
 }
 
