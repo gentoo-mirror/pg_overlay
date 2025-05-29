@@ -12,4 +12,4 @@ RDEPEND=iconv? ( virtual/libiconv ) recode? ( app-text/recode:= )
 SLOT=0
 SRC_URI=https://dl.cihar.com/enca/enca-1.19.tar.xz
 _eclasses_=gnuconfig	ddeb9f8caff1b5f71a09c75b7534df79	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	libtool	c81bd096be5f4c82f4e8f156ef112402	autotools	216128ca9bbff45fbea22427005310c7
-_md5_=db352f08de330ce5a9d41f5a99d4b910
+_md5_=88d54399ef7e951535b16b03341ee912
