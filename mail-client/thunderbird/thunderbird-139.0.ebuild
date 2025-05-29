@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-138-patches-03.tar.xz"
+FIREFOX_PATCHSET="firefox-139-patches-03.tar.xz"
 FIREFOX_LOONG_PATCHSET="firefox-138-loong-patches-01.tar.xz"
 
 LLVM_COMPAT=( 20 )
@@ -42,7 +42,7 @@ MOZ_P="${MOZ_PN}-${MOZ_PV}"
 MOZ_PV_DISTFILES="${MOZ_PV}${MOZ_PV_SUFFIX}"
 MOZ_P_DISTFILES="${MOZ_PN}-${MOZ_PV_DISTFILES}"
 
-inherit autotools check-reqs desktop eapi9-ver flag-o-matic gnome2-utils linux-info llvm-r1 \
+inherit check-reqs desktop eapi9-ver flag-o-matic gnome2-utils linux-info llvm-r1 \
 	multiprocessing optfeature pax-utils python-any-r1 rust toolchain-funcs virtualx xdg
 
 DESCRIPTION="Thunderbird Mail Client"
@@ -76,7 +76,7 @@ KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~x86"
 
 IUSE="+clang debug eme-free hardened hwaccel jack libproxy pgo pulseaudio sndio selinux"
 IUSE+=" +system-av1 +system-harfbuzz +system-icu +system-jpeg +system-libevent +system-libvpx"
-IUSE+=" system-png +system-webp wayland wifi +X +privacy"
+IUSE+=" system-pipewire system-png +system-webp wayland wifi X +privacy"
 
 # Thunderbird-only USE flags.
 IUSE+=" +system-librnp"
@@ -135,6 +135,7 @@ COMMON_DEPEND="${TB_ONLY_DEPEND}
 	virtual/freedesktop-icon-theme
 	x11-libs/cairo
 	x11-libs/gdk-pixbuf:2
+	x11-libs/libdrm
 	x11-libs/pango
 	x11-libs/pixman
 	jack? ( virtual/jack )
@@ -159,6 +160,7 @@ COMMON_DEPEND="${TB_ONLY_DEPEND}
 	system-jpeg? ( >=media-libs/libjpeg-turbo-1.2.1:= )
 	system-libevent? ( >=dev-libs/libevent-2.1.12:0=[threads(+)] )
 	system-libvpx? ( >=media-libs/libvpx-1.8.2:0=[postproc] )
+	system-pipewire? ( media-video/pipewire:= )
 	system-png? ( >=media-libs/libpng-1.6.45:0=[apng] )
 	system-webp? ( >=media-libs/libwebp-1.1.0:0= )
 	wayland? (
@@ -751,6 +753,7 @@ src_configure() {
 		--enable-negotiateauth \
 		--enable-new-pass-manager \
 		--enable-official-branding \
+		--enable-packed-relative-relocs \
 		--enable-release \
 		--enable-system-pixman \
 		--enable-system-policies \
@@ -763,14 +766,14 @@ src_configure() {
 		--with-intl-api \
 		--with-libclang-path="$(llvm-config --libdir)" \
 		--with-system-ffi \
+		--with-system-gbm \
+		--with-system-libdrm \
 		--with-system-nspr \
 		--with-system-nss \
 		--with-system-pixman \
 		--with-system-zlib \
 		--with-toolchain-prefix="${CHOST}-" \
-		--with-unsigned-addon-scopes=app,system \
-		--x-includes="${ESYSROOT}/usr/include" \
-		--x-libraries="${ESYSROOT}/usr/$(get_libdir)"
+		--with-unsigned-addon-scopes=app,system
 
 	# Set update channel
 	local update_channel=release
@@ -835,13 +838,13 @@ src_configure() {
 	fi
 
 	mozconfig_use_with system-av1
-	use system-av1 && append-ldflags "-laom"
 	mozconfig_use_with system-harfbuzz
 	mozconfig_use_with system-harfbuzz system-graphite2
 	mozconfig_use_with system-icu
 	mozconfig_use_with system-jpeg
 	mozconfig_use_with system-libevent
 	mozconfig_use_with system-libvpx
+	mozconfig_use_with system-pipewire
 	mozconfig_use_with system-png
 	mozconfig_use_with system-webp
 
