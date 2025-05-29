@@ -107,8 +107,10 @@ src_prepare() {
 	# Makefile.am adds a dependency on gettext-tools/configure.ac
 	touch -c configure || die
 
-	elibtoolize
+	sed -e 's/\(gl_cv_libxml_force_included=\)yes/\1no/' -i libtextstyle/configure
 
+	elibtoolize
+/usr/include/libxml2
 	if use elibc_musl || use elibc_Darwin; then
 		eapply "${FILESDIR}"/${PN}-0.21-musl-omit_setlocale_lock.patch
 	fi
@@ -117,7 +119,7 @@ src_prepare() {
 }
 
 multilib_src_configure() {
-	append-flags -lxml2
+	append-flags -lxml2 -I/usr/include/libxml2
 
 	local myconf=(
 		# switches common to runtime and top-level
