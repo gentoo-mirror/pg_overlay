@@ -6,7 +6,7 @@
 EAPI=8
 
 VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/gettext.asc
-inherit java-pkg-opt-2 libtool multilib-minimal verify-sig toolchain-funcs poly-c_ebuilds
+inherit java-pkg-opt-2 libtool multilib-minimal verify-sig toolchain-funcs flag-o-matic poly-c_ebuilds
 
 DESCRIPTION="GNU locale utilities"
 HOMEPAGE="https://www.gnu.org/software/gettext/"
@@ -117,6 +117,8 @@ src_prepare() {
 }
 
 multilib_src_configure() {
+	append-flags -lxml2
+
 	local myconf=(
 		# switches common to runtime and top-level
 		--cache-file="${BUILD_DIR}"/config.cache
