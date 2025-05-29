@@ -61,6 +61,8 @@ src_prepare() {
 }
 
 src_configure() {
+	append-cflags -std=gnu17
+
 	local myconf=()
 
 	local my_extra_libs
