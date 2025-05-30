@@ -4,7 +4,7 @@
 EAPI=8
 
 FIREFOX_PATCHSET="firefox-139-patches-03.tar.xz"
-FIREFOX_LOONG_PATCHSET="firefox-138-loong-patches-01.tar.xz"
+FIREFOX_LOONG_PATCHSET="firefox-139-loong-patches-01.tar.xz"
 
 LLVM_COMPAT=( 20 )
 
@@ -1416,7 +1416,7 @@ src_install() {
 	# Prefer the upstream svg file they use when packaging flatpak so it's always up-to-date.
 	insinto /usr/share/icons/hicolor/symbolic/apps
 	newins "${S}"/browser/installer/linux/app/flatpak/files/share/icons/hicolor/symbolic/apps/org.mozilla.firefox-symbolic.svg firefox-symbolic.svg
-	newins "${S}"/browser/installer/linux/app/flatpak/files/share/icons/hicolor/symbolic/apps/org.mozilla.firefox-symbolic.svg org.mozilla.firefox-symbolic.svg
+	dosym -r /usr/share/icons/hicolor/symbolic/apps/firefox-symbolic.svg /usr/share/icons/hicolor/symbolic/apps/org.mozilla.firefox-symbolic.svg
 
 	local icon size
 	for icon in "${icon_srcdir}"/default*.png ; do
