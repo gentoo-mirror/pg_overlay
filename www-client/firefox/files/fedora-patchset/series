@@ -1,8 +1,5 @@
 firefox-enable-addons.patch
 disable-openh264-download.patch
 
-0025-Add-KDE-integration-to-Firefox-toolkit-parts.patch
-0026-Add-KDE-integration-to-Firefox.patch
-
 mozilla-1516803.patch
 firefox-gcc-always-inline.patch
