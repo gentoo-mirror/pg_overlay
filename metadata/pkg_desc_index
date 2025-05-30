@@ -83,9 +83,9 @@ llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 139.0: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
-media-libs/gst-plugins-base 1.26.1_pre: Basepack of plugins for gstreamer
-media-libs/gst-plugins-good 1.26.1_pre: Basepack of plugins for GStreamer
-media-libs/gstreamer 1.26.1_pre: Open source multimedia framework
+media-libs/gst-plugins-base 1.26.2_pre: Basepack of plugins for gstreamer
+media-libs/gst-plugins-good 1.26.2_pre: Basepack of plugins for GStreamer
+media-libs/gstreamer 1.26.2_pre: Open source multimedia framework
 media-libs/libjpeg-turbo 3.1.0: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
@@ -154,6 +154,7 @@ sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 14.1.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/hwinfo 23.3: Hardware detection tool used in SuSE Linux
+sys-apps/kbd 2.8.0_pre: Keyboard and console utilities
 sys-apps/kmod 34.2: Library and tools for managing linux kernel modules
 sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
@@ -169,6 +170,7 @@ sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.14.0: XFS filesystem utilities
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
+sys-libs/liburing 2.10_pre: Efficient I/O with io_uring
 sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
 www-client/firefox 139.0.1: Firefox Web Browser
