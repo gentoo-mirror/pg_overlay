@@ -1,4 +1,2 @@
 firefox-enable-addons.patch
 disable-openh264-download.patch
-
-firefox-gcc-always-inline.patch
