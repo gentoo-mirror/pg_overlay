@@ -33,7 +33,8 @@ dev-cpp/ms-gsl 4.2.0: Guideline Support Library implementation by Microsoft
 dev-cpp/pangomm 2.46.4 2.56.1: C++ interface for pango
 dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
-dev-lang/lazarus 3.8 4.0: feature rich visual programming environment emulating Delphi
+dev-lang/lazarus 4.0: feature rich visual programming environment emulating Delphi
+dev-lang/lua 5.4.7_pre: A powerful light-weight programming language designed for extending applications
 dev-lang/python 3.13.3_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-lang/zig-bin 0.14.1: A robust, optimal, and maintainable programming language
@@ -170,7 +171,6 @@ sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.14.0: XFS filesystem utilities
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
-sys-libs/liburing 2.10_pre: Efficient I/O with io_uring
 sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
 www-client/firefox 139.0.1: Firefox Web Browser
