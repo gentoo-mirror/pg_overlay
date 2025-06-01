@@ -37,7 +37,6 @@ dev-lang/lazarus 4.0: feature rich visual programming environment emulating Delp
 dev-lang/lua 5.4.7_pre: A powerful light-weight programming language designed for extending applications
 dev-lang/python 3.13.3_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
-dev-lang/zig-bin 0.14.1: A robust, optimal, and maintainable programming language
 dev-libs/dbus-glib 0.114: D-Bus bindings for glib
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
@@ -155,7 +154,6 @@ sci-libs/libqalculate 5.1.1: A modern multi-purpose calculator library
 sci-mathematics/mathematica 14.1.0: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/hwinfo 23.3: Hardware detection tool used in SuSE Linux
-sys-apps/kbd 2.8.0_pre: Keyboard and console utilities
 sys-apps/kmod 34.2: Library and tools for managing linux kernel modules
 sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
