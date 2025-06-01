@@ -95,6 +95,7 @@ media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
+media-libs/taglib 2.1: Library for reading and editing audio meta data
 media-libs/tg_owt 0_pre20250515: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
