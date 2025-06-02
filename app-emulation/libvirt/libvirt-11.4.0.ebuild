@@ -161,7 +161,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-11.3.0-fix-paths-for-apparmor.patch
 )
 
-S="${WORKDIR}/${PN}-v${PV}
+S="${WORKDIR}/${PN}-v${PV}"
 
 python_check_deps() {
 	if use test; then
