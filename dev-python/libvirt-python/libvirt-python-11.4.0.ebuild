@@ -30,7 +30,7 @@ fi
 DESCRIPTION="libvirt Python bindings"
 HOMEPAGE="https://www.libvirt.org"
 
-S="${WORKDIR}/${P%_rc*}"
+S="${WORKDIR}/${PN}-v${PV}"
 
 LICENSE="LGPL-2"
 SLOT="0"
