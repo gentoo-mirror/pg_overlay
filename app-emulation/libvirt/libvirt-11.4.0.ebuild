@@ -19,8 +19,8 @@ if [[ ${PV} = *9999* ]]; then
 	EGIT_REPO_URI="https://gitlab.com/libvirt/libvirt.git"
 	EGIT_BRANCH="master"
 else
-	SRC_URI="https://gitlab.com/${PN}/${PN}/-/archive/v${PV}/${PN}-v${PV}.tar.gz"
-		# verify-sig? ( https://download.libvirt.org/${P}.tar.xz.asc )"
+	SRC_URI="https://download.libvirt.org/${P}.tar.xz
+		verify-sig? ( https://download.libvirt.org/${P}.tar.xz.asc )"
 	KEYWORDS="~amd64 ~arm ~arm64 ~ppc64 ~x86"
 fi
 
@@ -160,8 +160,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-11.3.0-do-not-use-sysconfig.patch
 	"${FILESDIR}"/${PN}-11.3.0-fix-paths-for-apparmor.patch
 )
-
-S="${WORKDIR}/${PN}-v${PV}"
 
 python_check_deps() {
 	if use test; then
