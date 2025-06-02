@@ -24,8 +24,6 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-#PATCHES=( "${FILESDIR}/01_inlines-hidden.patch" )
-
 src_configure() {
 	eqmake6 Qt6Pas.pro
 }
