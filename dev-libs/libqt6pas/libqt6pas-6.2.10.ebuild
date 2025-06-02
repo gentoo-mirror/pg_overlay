@@ -8,7 +8,7 @@ inherit qmake-utils
 
 LAZARUS_PV=3.0
 
-LAZ_COMMIT="3851c98976d474f53eec8b70a4a231b535fdb8b7"
+LAZ_COMMIT="c728c309c2ed7c0ecd441045a6d02c1a4f181714"
 
 DESCRIPTION="Free Pascal Qt6 bindings library updated by lazarus IDE."
 HOMEPAGE="https://gitlab.com/freepascal.org/lazarus/lazarus/-/tree/main/lcl/interfaces/qt6/cbindings"
@@ -24,7 +24,7 @@ DEPEND="
 "
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/01_inlines-hidden.patch" )
+#PATCHES=( "${FILESDIR}/01_inlines-hidden.patch" )
 
 src_configure() {
 	eqmake6 Qt6Pas.pro
