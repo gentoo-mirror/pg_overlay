@@ -45,8 +45,6 @@ DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.15.3-unbundle_json.patch
-	# missing rtorrent.lua in tarball
-	"${FILESDIR}"/${PN}-0.15.3-rtorrentlua.patch
 )
 
 pkg_setup() {
