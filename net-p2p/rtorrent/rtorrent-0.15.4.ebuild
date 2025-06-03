@@ -45,8 +45,6 @@ DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.15.3-unbundle_json.patch
-	# from upstream. To be removed in next release
-	"${FILESDIR}"/${PN}-0.15.3-struct_xmlrpc.patch
 	# missing rtorrent.lua in tarball
 	"${FILESDIR}"/${PN}-0.15.3-rtorrentlua.patch
 )
