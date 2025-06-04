@@ -121,7 +121,7 @@ media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, w
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/haruna 1.4.0: Video player built with Qt/QML and libmpv
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.4.4-r1: Multimedia processing graphs
+media-video/pipewire 1.4.5: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-analyzer/nmap 7.96_pre: Network exploration tool and security / port scanner
 net-analyzer/traceroute 2.1.6_pre: Utility to trace the route of IP packets
