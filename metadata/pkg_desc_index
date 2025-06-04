@@ -36,7 +36,7 @@ dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.0: feature rich visual programming environment emulating Delphi
 dev-lang/lua 5.4.7_pre: A powerful light-weight programming language designed for extending applications
-dev-lang/python 3.13.3_p2: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.13.4: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/dbus-glib 0.114: D-Bus bindings for glib
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
@@ -105,7 +105,6 @@ media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/alsa-scarlett-gui 0.5.1: A UI for Focusrite Scarlett and Clarett audio interfaces
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
-media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
 media-sound/dr14meter 1.1.4: dr14meter is a free and open-source command line tool for computing the Dynamic Range of your music.
 media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
