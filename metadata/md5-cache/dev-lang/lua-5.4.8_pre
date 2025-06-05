@@ -11,6 +11,6 @@ LICENSE=MIT
 RDEPEND=>=app-eselect/eselect-lua-3 readline? ( sys-libs/readline:= ) !dev-lang/lua:0
 RESTRICT=mirror
 SLOT=5.4
-SRC_URI=https://www.gentoofan.org/gentoo/dist/lua-5.4.7.tar.xz
+SRC_URI=https://www.gentoofan.org/gentoo/dist/lua-5.4.8.tar.xz
 _eclasses_=gnuconfig	ddeb9f8caff1b5f71a09c75b7534df79	toolchain-funcs	f9d71a6efe9d083aec750dd13968e169	libtool	c81bd096be5f4c82f4e8f156ef112402	autotools	955b29ccd82c1df4755e5f37748d2fa6	flag-o-matic	b892042b2667b8ac69ec8a2571dc290a	optfeature	538bce96e5589935b57e178e8635f301	poly-c_ebuilds	c64dd525109db6a07afb3241c012daad
 _md5_=8c8dea5187bf12decd67b4b413866371
