@@ -30,8 +30,8 @@ BDEPEND="dev-build/cmake
 
 src_configure() {
 	go-env_set_compile_environment
-	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
 	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
 		-DCMAKE_BUILD_TYPE=None \
@@ -48,7 +48,7 @@ src_configure() {
 }
 src_compile() {
 	go-env_set_compile_environment
-	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
 	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	cmake_src_compile GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	cmake_src_compile
 }
