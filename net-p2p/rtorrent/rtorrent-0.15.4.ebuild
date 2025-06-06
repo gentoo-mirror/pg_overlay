@@ -6,7 +6,7 @@ EAPI=8
 # require 64-bit integer
 LUA_COMPAT=( lua5-{3,4} )
 
-inherit autotools linux-info lua-single
+inherit autotools flag-o-matic linux-info lua-single
 
 DESCRIPTION="BitTorrent Client using libtorrent"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -69,6 +69,7 @@ src_prepare() {
 	rm -r src/rpc/tinyxml2 || die
 	sed -i "/rpc\\/tinyxml2/d" src/Makefile.am
 	sed -i "/rpc\\/tinyxml2/d" src/Makefile.in
+	append-ldflags -ltinyxml2
 
 	# https://github.com/rakshasa/rtorrent/issues/332
 	cp "${FILESDIR}"/rtorrent.1 "${S}"/doc/ || die
