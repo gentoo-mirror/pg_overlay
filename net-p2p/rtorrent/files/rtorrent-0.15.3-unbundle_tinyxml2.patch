@@ -1,0 +1,11 @@
+--- a/src/rpc/xmlrpc_tinyxml2.cc	2025-06-01 20:40:43.000000000 +0700
++++ b/src/rpc/xmlrpc_tinyxml2.cc	2025-06-06 22:39:16.581978147 +0700
+@@ -16,7 +16,7 @@
+ #include <torrent/object.h>
+ 
+ #include "parse_commands.h"
+-#include "rpc/tinyxml2/tinyxml2.h"
++#include "tinyxml2.h"
+ #include "rpc/rpc_manager.h"
+ #include "utils/base64.h"
+ #include "xmlrpc.h"
