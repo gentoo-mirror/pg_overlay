@@ -43,6 +43,7 @@ src_configure() {
 		-DHAS_WHATSAPP=ON \
 		-DTD_ENABLE_LTO=ON \
 		-Wno-dev
+		-Dbuildvcs=false
 	)
 	cmake_src_configure
 }
