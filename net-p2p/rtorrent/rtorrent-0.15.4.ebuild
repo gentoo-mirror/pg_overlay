@@ -65,6 +65,7 @@ src_prepare() {
 
 	# use system-json
 	rm -r src/rpc/nlohmann || die
+
 	# use system-tinyxml2
 	rm -r src/rpc/tinyxml2 || die
 	sed -i "/rpc\\/tinyxml2/d" src/Makefile.am
