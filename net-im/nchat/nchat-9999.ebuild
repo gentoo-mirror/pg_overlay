@@ -49,6 +49,6 @@ src_configure() {
 src_compile() {
 	go-env_set_compile_environment
 	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	cmake_src_compile
+	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false" eninja
+
 }
