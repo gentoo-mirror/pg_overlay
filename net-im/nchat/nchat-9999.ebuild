@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake go-env multiprocessing git-r3
+inherit cmake git-r3
 
 DESCRIPTION="Terminal-based Telegram / WhatsApp client for Linux and macOS"
 HOMEPAGE="https://github.com/d99kris/nchat"
@@ -29,9 +29,7 @@ BDEPEND="dev-build/cmake
 		dev-lang/go"
 
 src_configure() {
-	go-env_set_compile_environment
-	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	export GOFLAGS="-buildvcs=false"
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
 		-DCMAKE_BUILD_TYPE=None \
@@ -47,8 +45,6 @@ src_configure() {
 	cmake_src_configure
 }
 src_compile() {
-	go-env_set_compile_environment
-	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false" ninja -j$(makeopts_jobs) -v -C "${BUILD_DIR}"
-
+	export GOFLAGS="-buildvcs=false"
+	cmake_src_compile
 }
