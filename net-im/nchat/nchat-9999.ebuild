@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit cmake edo go-env multiprocessing git-r3
+inherit cmake go-env multiprocessing git-r3
 
 DESCRIPTION="Terminal-based Telegram / WhatsApp client for Linux and macOS"
 HOMEPAGE="https://github.com/d99kris/nchat"
@@ -50,5 +50,5 @@ src_compile() {
 	go-env_set_compile_environment
 	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
 	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	cmake_src_compile
+	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false" cmake_src_compile
 }
