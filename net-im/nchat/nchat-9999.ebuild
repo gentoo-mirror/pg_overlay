@@ -29,10 +29,10 @@ BDEPEND="dev-build/cmake
 		dev-lang/go"
 
 src_configure() {
-	export GOFLAGS+=' -buildvcs=false'
+	export GOFLAGS='-buildvcs=false'
 		local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
-		-DCMAKE_BUILD_TYPE=Release \
+		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
 		-DCMAKE_C_FLAGS="$CFLAGS" \
 		-DHAS_COREDUMP=OFF \
@@ -45,6 +45,6 @@ src_configure() {
 	cmake_src_configure GOFLAGS="-buildvcs=false"
 }
 src_compile() {
-	export GOFLAGS+=' -buildvcs=false'
-	cmake_src_compile
+	export GOFLAGS='-buildvcs=false'
+	cmake_src_compile GOFLAGS="-buildvcs=false
 }
