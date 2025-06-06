@@ -250,17 +250,21 @@ _cmake_modify-cmakelists() {
 	grep -qs "<<< Gentoo configuration >>>" "${CMAKE_USE_DIR}"/CMakeLists.txt && return 0
 
 	# Comment out all set (<some_should_be_user_defined_variable> value)
-	find "${CMAKE_USE_DIR}" -name CMakeLists.txt -exec sed \
-		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_BUILD_TYPE\([[:space:]].*)\|)\)/I{s/^/#_cmake_modify_IGNORE /g}' \
-		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_COLOR_MAKEFILE[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
-		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_INSTALL_PREFIX[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
-		-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_VERBOSE_MAKEFILE[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
-		-i {} + || die "${LINENO}: failed to disable hardcoded settings"
-	local x
-	for x in $(find "${CMAKE_USE_DIR}" -name CMakeLists.txt -exec grep -l "^#_cmake_modify_IGNORE" {} +;); do
-		einfo "Hardcoded definition(s) removed in $(echo "${x}" | cut -c $((${#CMAKE_USE_DIR}+2))-):"
-		einfo "$(grep -se '^#_cmake_modify_IGNORE' ${x} | cut -c 22-99)"
-	done
+	local file
+	while read -d '' -r file ; do
+		sed \
+			-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_BUILD_TYPE\([[:space:]].*)\|)\)/I{s/^/#_cmake_modify_IGNORE /g}' \
+			-e '/^[[:space:]]*set[[:space:]]*([[:space:]]*CMAKE_\(COLOR_MAKEFILE\|INSTALL_PREFIX\|VERBOSE_MAKEFILE\)[[:space:]].*)/I{s/^/#_cmake_modify_IGNORE /g}' \
+			-i "${file}" || die "failed to disable hardcoded settings"
+		readarray -t mod_lines < <(grep -se "^#_cmake_modify_IGNORE" "${file}")
+		if [[ ${#mod_lines[*]} -gt 0 ]]; then
+			einfo "Hardcoded definition(s) removed in ${file/${CMAKE_USE_DIR%\/}\//}:"
+			local mod_line
+			for mod_line in "${mod_lines[@]}"; do
+				einfo "${mod_line:22:99}"
+			done
+		fi
+	done < <(find "${CMAKE_USE_DIR}" -type f -iname "CMakeLists.txt" -print0)
 
 	# NOTE Append some useful summary here
 	cat >> "${CMAKE_USE_DIR}"/CMakeLists.txt <<- _EOF_ || die
@@ -371,7 +375,7 @@ cmake_src_configure() {
 	local file ver cmreq_isold
 	if ! [[ ${CMAKE_QA_COMPAT_SKIP} ]]; then
 		while read -d '' -r file ; do
-			ver=$(sed -ne "/cmake_minimum_required/{s/.*\(\.\.\.*\|\s\)\([0-9.]*\)\([)]\|\s\).*$/\2/p;q}" \
+			ver=$(sed -ne "/cmake_minimum_required/I{s/.*\(\.\.\.*\|\s\)\([0-9.]*\)\([)]\|\s\).*$/\2/p;q}" \
 				"${file}" 2>/dev/null \
 			)
 
@@ -625,6 +629,19 @@ cmake_build() {
 	popd > /dev/null || die
 }
 
+# @ECLASS_VARIABLE: CTEST_JOBS
+# @USER_VARIABLE
+# @DESCRIPTION:
+# Maximum number of CTest jobs to run in parallel.  If unset, the value
+# will be determined from make options.
+
+# @ECLASS_VARIABLE: CTEST_LOADAVG
+# @USER_VARIABLE
+# @DESCRIPTION:
+# Maximum load, over which no new jobs will be started by CTest.  Note
+# that unlike make, CTest will not start *any* jobs if the load
+# is exceeded.  If unset, the value will be determined from make options.
+
 # @FUNCTION: cmake_src_test
 # @DESCRIPTION:
 # Function for testing the package. Automatically detects the build type.
@@ -638,8 +655,9 @@ cmake_src_test() {
 	[[ -n ${TEST_VERBOSE} ]] && myctestargs+=( --extra-verbose --output-on-failure )
 	[[ -n ${CMAKE_SKIP_TESTS} ]] && myctestargs+=( -E '('$( IFS='|'; echo "${CMAKE_SKIP_TESTS[*]}")')'  )
 
-	set -- ctest -j "$(makeopts_jobs "${MAKEOPTS}" 999)" \
-		--test-load "$(makeopts_loadavg)" "${myctestargs[@]}" "$@"
+	set -- ctest -j "${CTEST_JOBS:-$(get_makeopts_jobs 999)}" \
+		--test-load "${CTEST_LOADAVG:-$(get_makeopts_loadavg)}" \
+		"${myctestargs[@]}" "$@"
 	echo "$@" >&2
 	if "$@" ; then
 		einfo "Tests succeeded."
