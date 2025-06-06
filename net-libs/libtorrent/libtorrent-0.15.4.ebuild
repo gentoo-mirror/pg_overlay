@@ -15,7 +15,7 @@ LICENSE="GPL-2"
 # has had more time to mature. Until it matures we should not include a soname
 # subslot.
 SLOT="0"
-KEYWORDS="~amd64 ~hppa ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris"
+KEYWORDS="~amd64 ~arm64 ~hppa ~ppc ~ppc64 ~sparc ~x86 ~amd64-linux ~x86-linux ~ppc-macos ~x64-macos ~x64-solaris"
 IUSE="debug test"
 RESTRICT="!test? ( test )"
 
@@ -34,6 +34,8 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-0.14.0-sysroot.patch
 	"${FILESDIR}"/${PN}-0.14.0-tests-address.patch
 	"${FILESDIR}"/${PN}-0.15.3-unbundle_udns.patch
+	# from upstream. To be removed in next release
+	"${FILESDIR}"/${PN}-0.15.4-fix_inv_chunks.patch
 )
 
 src_prepare() {
