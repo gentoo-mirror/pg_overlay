@@ -49,6 +49,6 @@ src_configure() {
 src_compile() {
 	go-env_set_compile_environment
 	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	GOFLAGS="-buildvcs=false" ninja -j$(makeopts_jobs) -v -C "${BUILD_DIR}"
+	GOFLAGS="-buildvcs=false" cmake -j25  -v --build "${BUILD_DIR}"
 
 }
