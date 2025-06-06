@@ -35,8 +35,8 @@ src_configure() {
 	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
 		-DCMAKE_BUILD_TYPE=None \
-		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
-		-DCMAKE_C_FLAGS="$CFLAGS" \
+		-DCMAKE_CXX_FLAGS="$CXXFLAGS" -buildvcs=false \
+		-DCMAKE_C_FLAGS="$CFLAGS" -buildvcs=false \
 		-DHAS_COREDUMP=OFF \
 		-DHAS_STATICGOLIB=OFF
 		-DHAS_TELEGRAM=ON \
