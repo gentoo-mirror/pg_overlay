@@ -28,6 +28,12 @@ DEPEND="${RDEPEND}
 BDEPEND="dev-build/cmake
 		dev-lang/go"
 
+src_unpack() {
+	git-r3_src_unpack
+	cd "${S}" || die
+	edo go mod vendor
+}
+
 src_configure() {
 	go-env_set_compile_environment
 	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
