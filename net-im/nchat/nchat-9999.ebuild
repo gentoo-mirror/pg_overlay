@@ -43,7 +43,6 @@ src_configure() {
 		-DHAS_WHATSAPP=ON \
 		-DTD_ENABLE_LTO=ON \
 		-Wno-dev
-		-buildvcs=false
 	)
 	cmake_src_configure
 }
@@ -51,5 +50,5 @@ src_compile() {
 	go-env_set_compile_environment
 	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
 	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
-	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false" cmake_src_compile
+	GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false" cmake_src_compile -buildvcs=false
 }
