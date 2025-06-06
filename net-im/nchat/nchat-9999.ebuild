@@ -46,6 +46,8 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
+	GOFLAGS+=' -buildvcs=false'
+	go-env_set_compile_environment
 	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
 	cmake_src_compile
 }
