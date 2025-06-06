@@ -29,8 +29,10 @@ BDEPEND="dev-build/cmake
 		dev-lang/go"
 
 src_configure() {
-	export GOFLAGS="-buildvcs=false"
-		local mycmakeargs=(
+	go-env_set_compile_environment
+	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	local mycmakeargs=(
 		-DBUILD_SHARED_LIBS=OFF
 		-DCMAKE_BUILD_TYPE=None \
 		-DCMAKE_CXX_FLAGS="$CXXFLAGS" \
@@ -42,12 +44,11 @@ src_configure() {
 		-DTD_ENABLE_LTO=ON \
 		-Wno-dev
 	)
-	cmake_src_configure GOFLAGS="-buildvcs=false"
+	cmake_src_configure
 }
 src_compile() {
-	export GOFLAGS="-buildvcs=false"
-	GOFLAGS+=' -buildvcs=false'
 	go-env_set_compile_environment
 	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	export GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
 	cmake_src_compile
 }
