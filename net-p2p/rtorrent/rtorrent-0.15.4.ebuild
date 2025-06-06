@@ -45,6 +45,7 @@ DOCS=( doc/rtorrent.rc )
 
 PATCHES=(
 	"${FILESDIR}"/${PN}-0.15.3-unbundle_json.patch
+	"${FILESDIR}"/${PN}-0.15.3-unbundle_tinyxml2.patch
 	# from upstream. To be removed in next release
 	"${FILESDIR}"/${PN}-0.15.4-fix_waitpid.patch
 )
@@ -64,6 +65,10 @@ src_prepare() {
 
 	# use system-json
 	rm -r src/rpc/nlohmann || die
+	# use system-tinyxml2
+	rm -r src/rpc/tinyxml2 || die
+	sed -i "/rpc\\/tinyxml2/d" Makefile.am
+	sed -i "/rpc\\/tinyxml2/d" Makefile.in
 
 	# https://github.com/rakshasa/rtorrent/issues/332
 	cp "${FILESDIR}"/rtorrent.1 "${S}"/doc/ || die
