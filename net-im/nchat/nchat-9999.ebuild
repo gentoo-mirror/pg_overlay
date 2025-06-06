@@ -46,5 +46,6 @@ src_configure() {
 }
 src_compile() {
 	export GOFLAGS="-buildvcs=false"
-	cmake_src_compile GOFLAGS="-buildvcs=false"
+	local -x GOFLAGS="-p=$(makeopts_jobs) -v -x -buildvcs=false"
+	cmake_src_compile
 }
