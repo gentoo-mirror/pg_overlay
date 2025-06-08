@@ -70,7 +70,6 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-3.2.1-configure-tests.patch"
-	"${FILESDIR}/${PN}-3.2.1-wayland-control.patch"
 	"${FILESDIR}/${PN}-3.2.1-prefer-lib64-in-tests.patch"
 	"${FILESDIR}/${PN}-3.2.5-dont-break-flags.patch"
 )
