@@ -36,14 +36,14 @@ _WXWIDGETS_ECLASS=1
 # The SLOT of the x11-libs/wxGTK you're targeting.  Needs to be defined before
 # inheriting the eclass.  Can be either "3.0" or "3.0-gtk3".
 case ${WX_GTK_VER} in
-	3.0-gtk3 | 3.2-gtk3) ;;
+	3.2-gtk3 | 3.3-gtk3) ;;
 	3.0)
 		if [[ ${EAPI} != 7 ]]; then
 			die "${ECLASS}: GTK 2 no longer supported in EAPI ${EAPI}"
 		fi
 		;;
 	"") die "WX_GTK_VER not declared" ;;
-	*)  die "Invalid WX_GTK_VER: must be set to a valid wxGTK SLOT ('3.0', '3.0-gtk3', or '3.2-gtk3')" ;;
+	*)  die "Invalid WX_GTK_VER: must be set to a valid wxGTK SLOT ('3.0', '3.2-gtk3', or '3.3-gtk3')" ;;
 esac
 readonly WX_GTK_VER
 
@@ -67,7 +67,7 @@ setup-wxwidgets() {
 	local w wxtoolkit wxconf
 
 	case ${WX_GTK_VER} in
-		3.0-gtk3 | 3.2-gtk3) wxtoolkit=gtk3 ;;
+		3.2-gtk3 | 3.3-gtk3) wxtoolkit=gtk3 ;;
 		3.0)      wxtoolkit=gtk2
 		          eqawarn "QA Notice: This package relies on the deprecated GTK 2 slot, which will go away soon (https://bugs.gentoo.org/618642)"
 		          ;;
@@ -87,7 +87,7 @@ setup-wxwidgets() {
 	# Older versions used e.g. 'gtk3-unicode-3.2-gtk3', while we've
 	# migrated to the upstream layout of 'gtk3-unicode-3.2' for newer
 	# versions when fixing bug #955936.
-	if has_version -d "<x11-libs/wxGTK-3.2.8.1:3.2-gtk3"; then
+	if has_version -d "<x11-libs/wxGTK-3.3.0:3.3-gtk3"; then
 		wxconf="${wxtoolkit}-unicode-${WX_GTK_VER}"
 	else
 		wxconf="${wxtoolkit}-unicode-${WX_GTK_VER%%-*}"
