@@ -9,7 +9,7 @@ app-emulation/nemu 3.3.1: Ncurses interface for QEMU
 app-i18n/enca 1.19-r3 9999: Detect and convert encoding of text files
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
-app-misc/doublecmd 1.1.25: Cross Platform file manager.
+app-misc/doublecmd 1.1.26: Cross Platform file manager.
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
@@ -41,11 +41,8 @@ dev-libs/dbus-glib 0.114: D-Bus bindings for glib
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 5.10.1 6.0.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
-dev-libs/libnl 3.11.0: Libraries providing APIs to netlink protocol based Linux kernel interfaces
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
-dev-libs/protobuf 31.0 9999: Google's Protocol Buffers - Extensible mechanism for serializing structured data
-dev-libs/re2 0.2024.06.01: An efficient, principled regular expression library
 dev-libs/spdlog 1.15.3: Fast C++ logging library
 dev-libs/tinyxml2 11.0.0: A simple, small, efficient, C++ XML parser
 dev-libs/utfcpp 4.0.6: UTF-8 C++ library
@@ -90,12 +87,9 @@ media-libs/libjpeg-turbo 3.1.0: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
 media-libs/libwebp 1.5.0_pre: A lossy image compression format
-media-libs/libyuv 1904: Open source project that includes YUV scaling and conversion functionality.
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
-media-libs/resvg 0.40.0: An SVG rendering library
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
-media-libs/taglib 2.1: Library for reading and editing audio meta data
 media-libs/tg_owt 0_pre20250515: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
