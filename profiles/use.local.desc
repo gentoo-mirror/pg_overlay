@@ -317,9 +317,6 @@ net-im/forkgram:enchant - Use the app-text/enchant spell-checking backend instea
 net-im/forkgram:fonts - Use builtin patched copy of open-sans fonts (overrides fontconfig)
 net-im/forkgram:qt6 - Build with Qt6 support
 net-im/forkgram:qt6-imageformats - Add support for HEIF, AVIF and JpegXL by bundling kde-frameworks/kimageformats
-net-libs/libsoup:gssapi - Enable GSSAPI support
-net-libs/libsoup:samba - Use net-fs/samba for NTLM Single Sign-On
-net-libs/libsoup:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 net-libs/libsrtp:aesicm - Use AES ICM cryptographic algorithm
 net-libs/libsrtp:console - Use /dev/console instead of stdout for error messages
 net-libs/libsrtp:nss - Use NSS crypto primitives
