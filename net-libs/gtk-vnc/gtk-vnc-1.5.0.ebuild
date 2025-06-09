@@ -1,4 +1,4 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -8,11 +8,11 @@ PYTHON_COMPAT=( python3_{12..13} )
 inherit flag-o-matic gnome.org vala meson python-any-r1 xdg
 
 DESCRIPTION="VNC viewer widget for GTK"
-HOMEPAGE="https://wiki.gnome.org/Projects/gtk-vnc https://gitlab.gnome.org/GNOME/gtk-vnc"
+HOMEPAGE="https://gitlab.gnome.org/GNOME/gtk-vnc"
 
 LICENSE="LGPL-2.1+"
 SLOT="0"
-KEYWORDS="~alpha amd64 ~arm arm64 ~loong ~ppc ppc64 ~riscv ~sparc x86"
+KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~loong ~ppc ~ppc64 ~riscv ~sparc ~x86"
 IUSE="+introspection pulseaudio sasl +vala wayland X"
 REQUIRED_USE="vala? ( introspection )"
 
