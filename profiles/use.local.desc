@@ -144,6 +144,10 @@ media-libs/libavif:gdk-pixbuf - Build a gdk-pixbuf loader
 media-libs/libavif:libyuv - Enable fast YUV conversion via libyuv
 media-libs/libavif:rav1e - Enable support for the rav1e codec encoding
 media-libs/libavif:svt-av1 - Enable support for the SVT-AV1 encoder
+media-libs/libde265:dec265 - Enable build of dec265 example program
+media-libs/libde265:enc265 - Enable build of enc265 tool
+media-libs/libde265:sdl - Enable video output of dec265 example program with media-libs/libsdl
+media-libs/libde265:tools - Enable installation of varous binary tools
 media-libs/libtgvoip:dsp - Enable signal processing (echo cancellation, noise suppression, and automatic gain control)
 media-libs/mesa:d3d9 - Enable Direct 3D9 API through Nine state tracker. Can be used together with patched wine.
 media-libs/mesa:llvm - Enable LLVM backend for Gallium3D.
