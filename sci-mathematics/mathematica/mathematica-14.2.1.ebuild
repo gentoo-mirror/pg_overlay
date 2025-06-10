@@ -112,9 +112,12 @@ src_install() {
 
 	# Linux-x86-64/AllVersions is the supported version, other versions remove
 	einfo 'Removing unsupported RLink versions'
-	rm -r "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.5.0" || die
-	rm -r "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.6.0" || die
-	rm -r "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/MacOSX-ARM64" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.5.0" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Linux-x86-64/3.6.0" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/MacOSX-ARM64" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/MacOSX-x86-64" || die
+	rm -fr "${S}/${M_TARGET}/SystemFiles/Links/RLink/SystemFiles/Libraries/Windows-x86-64" || die
+
 	# RLink can't use if R not used
 	if ! use R; then
 		einfo 'Removing RLink support'
