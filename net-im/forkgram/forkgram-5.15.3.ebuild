@@ -29,6 +29,9 @@ CDEPEND="
 	dev-libs/openssl:=
 	dev-libs/protobuf
 	dev-libs/xxhash
+	media-libs/libavif
+	media-libs/libheif
+	media-libs/libjxl
 	media-libs/libjpeg-turbo:=
 	~media-libs/libtgvoip-2.4.4_p20240706
 	media-libs/openal
