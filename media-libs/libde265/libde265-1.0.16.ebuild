@@ -81,7 +81,6 @@ multilib_src_install() {
 		rm "${ED}"/usr/bin/{tests,gen-enc-table,yuv-distortion} || die
 		if ! use tools; then
 			rm "${ED}"/usr/bin/{bjoentegaard,block-rate-estim,rd-curves} || die
-			rm "${ED}"/usr/bin/acceleration_speed || die
 		fi
 	else
 		# Remove all non-native binary tools
