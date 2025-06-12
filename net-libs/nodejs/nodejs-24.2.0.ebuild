@@ -107,7 +107,7 @@ src_prepare() {
 	fi
 
 	# We need to disable mprotect on two files when it builds Bug 694100.
-	use pax-kernel && PATCHES+=( "${FILESDIR}"/${PN}-22.12.0-paxmarking.patch )
+	use pax-kernel && PATCHES+=( "${FILESDIR}"/${PN}-24.1.0-paxmarking.patch )
 
 	default
 }
@@ -245,6 +245,7 @@ src_test() {
 		test/parallel/test-dns.js
 		test/parallel/test-dns-resolveany-bad-ancount.js
 		test/parallel/test-dns-setserver-when-querying.js
+		test/parallel/test-dotenv.js
 		test/parallel/test-fs-mkdir.js
 		test/parallel/test-fs-read-stream.js
 		test/parallel/test-fs-utimes-y2K38.js

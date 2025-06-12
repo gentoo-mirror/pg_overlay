@@ -1,29 +1,28 @@
-From baddb306d6bdafae1de8cdb2435bc57a0b881542 Mon Sep 17 00:00:00 2001
+From d6a829fbeefdc289bcdac566dc234bf55380d4a6 Mon Sep 17 00:00:00 2001
 From: William Hubbs <w.d.hubbs@gmail.com>
-Date: Wed, 25 Dec 2024 21:14:26 -0600
+Date: Sat, 24 May 2025 14:21:24 -0500
 Subject: [PATCH] pax marking
 
-Signed-off-by: Guillaume Ceccarelli <guillaume@coentropic.com>
 ---
  node.gyp                 | 17 ++++++++++++++++-
  tools/v8_gypfiles/v8.gyp | 24 +++++++++++++++++++++++-
  2 files changed, 39 insertions(+), 2 deletions(-)
 
 diff --git a/node.gyp b/node.gyp
-index 195fe541bc..b806de81c9 100644
+index 59303d9ab7c..7db72a0ebdf 100644
 --- a/node.gyp
 +++ b/node.gyp
-@@ -435,6 +435,7 @@
-       'test/cctest/test_inspector_socket_server.cc',
+@@ -422,6 +422,7 @@
+       'src/node_webstorage.h',
      ],
      'node_mksnapshot_exec': '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)node_mksnapshot<(EXECUTABLE_SUFFIX)',
 +    'node_mksnapshot_u_exec': '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)node_mksnapshot_u<(EXECUTABLE_SUFFIX)',
      'node_js2c_exec': '<(PRODUCT_DIR)/<(EXECUTABLE_PREFIX)node_js2c<(EXECUTABLE_SUFFIX)',
      'conditions': [
        ['GENERATOR == "ninja"', {
-@@ -729,11 +730,25 @@
-               ],
-             }, {
+@@ -688,11 +689,25 @@
+           'conditions': [
+             ['node_snapshot_main!=""', {
                'actions': [
 +                {
 +                  'action_name': 'run_pax_mksnapshot',
@@ -45,11 +44,11 @@ index 195fe541bc..b806de81c9 100644
                    'inputs': [
 -                    '<(node_mksnapshot_exec)',
 +                    '<(node_mksnapshot_u_exec)',
+                     '<(node_snapshot_main)',
                    ],
                    'outputs': [
-                     '<(SHARED_INTERMEDIATE_DIR)/node_snapshot.cc',
 diff --git a/tools/v8_gypfiles/v8.gyp b/tools/v8_gypfiles/v8.gyp
-index 0914746541..e5fb7d3aae 100644
+index 8e3f015dff1..575bba798ae 100644
 --- a/tools/v8_gypfiles/v8.gyp
 +++ b/tools/v8_gypfiles/v8.gyp
 @@ -9,6 +9,7 @@
@@ -60,7 +59,7 @@ index 0914746541..e5fb7d3aae 100644
      'v8_os_page_size%': 0,
      'generate_bytecode_output_root': '<(SHARED_INTERMEDIATE_DIR)/generate-bytecode-output-root',
      'generate_bytecode_builtins_list_output': '<(generate_bytecode_output_root)/builtins-generated/bytecodes-builtins-list.h',
-@@ -1693,7 +1694,7 @@
+@@ -1723,7 +1724,7 @@
        ],
      },  # bytecode_builtins_list_generator
      {
@@ -69,7 +68,7 @@ index 0914746541..e5fb7d3aae 100644
        'type': 'executable',
        'dependencies': [
          'v8_base_without_compiler',
-@@ -1719,6 +1720,27 @@
+@@ -1767,6 +1768,27 @@
            'ldflags': [ '-fno-lto' ],
          }],
        ],
@@ -98,5 +97,5 @@ index 0914746541..e5fb7d3aae 100644
      {
        'target_name': 'torque',
 -- 
-2.45.2
+2.49.0
 
