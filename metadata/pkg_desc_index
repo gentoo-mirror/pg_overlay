@@ -74,7 +74,7 @@ kde-plasma/plasma-workspace 6.3.91: KDE Plasma workspace
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
-mail-client/thunderbird 139.0.1: Thunderbird Mail Client
+mail-client/thunderbird 139.0.2: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/imagemagick 7.1.1.47: A collection of tools and libraries for many image formats
 media-libs/gst-plugins-base 1.26.2_pre: Basepack of plugins for gstreamer
@@ -158,7 +158,7 @@ sys-fs/xfsprogs 6.14.0: XFS filesystem utilities
 sys-libs/libblockdev 3.3.0_pre: A library for manipulating block devices
 sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 139.0.1: Firefox Web Browser
+www-client/firefox 139.0.4: Firefox Web Browser
 x11-base/xwayland 24.1.6: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.49-r1: Gimp ToolKit +
