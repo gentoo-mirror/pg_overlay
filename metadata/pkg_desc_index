@@ -82,7 +82,7 @@ media-libs/gst-plugins-good 1.26.2_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.2_pre: Open source multimedia framework
 media-libs/libavif 1.3.0: Library for encoding and decoding .avif files
 media-libs/libde265 1.0.16: Open h.265 video codec implementation
-media-libs/libjpeg-turbo 3.1.0: MMX, SSE, and SSE2 SIMD accelerated JPEG library
+media-libs/libjpeg-turbo 3.1.1: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
 media-libs/libwebp 1.5.0_pre: A lossy image compression format
@@ -119,7 +119,7 @@ net-dialup/xl2tpd 1.3.19: A modern version of the Layer 2 Tunneling Protocol (L2
 net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
 net-fs/nfs-utils 2.8.3: NFS client and server daemons
 net-im/64Gram 1.1.58: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
-net-im/forkgram 5.14.3 5.15.3: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
+net-im/forkgram 5.14.3 5.15.3 5.15.4: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
 net-im/nchat 9999: Terminal-based Telegram / WhatsApp client for Linux and macOS
 net-libs/gtk-vnc 1.5.0: VNC viewer widget for GTK
 net-libs/libsrtp 2.7.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
@@ -147,7 +147,7 @@ sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer device
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
-sys-auth/elogind 255.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 126: Policy framework for controlling privileges for system-wide services
 sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
