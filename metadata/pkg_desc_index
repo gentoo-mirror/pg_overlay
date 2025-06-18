@@ -69,8 +69,7 @@ gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-misc/kweather 25.04.2 9999: Weather forecast application for Plasma with flat and dynamic/animated views
-kde-plasma/kwin 6.3.91: Flexible, composited Window Manager for windowing systems on Linux
-kde-plasma/plasma-workspace 6.3.91: KDE Plasma workspace
+kde-plasma/plasma-workspace 6.4.0: KDE Plasma workspace
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
 llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
