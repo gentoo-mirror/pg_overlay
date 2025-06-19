@@ -67,6 +67,7 @@ gnome-base/librsvg 2.60.0: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/gnome-commander 1.18.2: A graphical, full featured, twin-panel file manager
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
+kde-frameworks/breeze-icons 6.15.0: Breeze SVG icon theme
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-misc/kweather 25.04.2 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.4.0: KDE Plasma workspace
@@ -105,7 +106,6 @@ media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: Featureful ncurses based MPD client inspired by ncmpc
 media-sound/qmmp 9999: Q6-based audio player with winamp/xmms skins support
 media-sound/redoflacs 1.1.0: Bash commandline flac compressor, verifier, organizer, analyzer, retagger
-media-sound/spek 0.8.5-r2 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 0.9.4 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/haruna 1.4.0: Video player built with Qt/QML and libmpv
