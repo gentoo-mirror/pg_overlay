@@ -25,5 +25,5 @@ BDEPEND="
 src_prepare() {
 	setup-wxwidgets unicode
 	default
-	eautoreconf
+	autoreconf -fiv -I /usr/share/gettext/m4
 }
