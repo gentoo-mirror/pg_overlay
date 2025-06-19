@@ -30,5 +30,5 @@ PATCHES=(
 src_prepare() {
 	setup-wxwidgets unicode
 	default
-	eautoreconf -I /usr/share/gettext/m4
+	eautoreconf -fiv -I /usr/share/gettext/m4
 }
