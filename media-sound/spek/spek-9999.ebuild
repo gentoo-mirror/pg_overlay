@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
-WX_GTK_VER="3.2-gtk3"
+WX_GTK_VER="3.3-gtk3"
 
 inherit autotools wxwidgets xdg git-r3
 
