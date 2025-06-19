@@ -22,7 +22,7 @@ HOMEPAGE="https://www.amule.org/"
 
 LICENSE="GPL-2+"
 SLOT="0"
-IUSE="daemon debug geoip +gui nls remote stats upnp"
+IUSE="daemon debug geoip +gui nls webserver stats upnp"
 
 RDEPEND="
 	dev-libs/boost:=
