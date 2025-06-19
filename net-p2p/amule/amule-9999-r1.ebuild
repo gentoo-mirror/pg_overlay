@@ -53,8 +53,8 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
-	"${FILESDIR}/${PN}-2.3.3-fix-exception.patch"
-	"${FILESDIR}/${PN}-2.3.3-use-xdg-open-as-preview-default.patch"
+	#"${FILESDIR}/${PN}-2.3.3-fix-exception.patch"
+	#"${FILESDIR}/${PN}-2.3.3-use-xdg-open-as-preview-default.patch"
 )
 
 src_prepare() {
