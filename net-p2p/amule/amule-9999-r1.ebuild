@@ -53,9 +53,7 @@ BDEPEND="
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
-	#"${FILESDIR}/${PN}-2.3.3-fix-exception.patch"
-	#"${FILESDIR}/${PN}-2.3.3-backport-pr368.patch"
-	#"${FILESDIR}/${PN}-2.3.3-use-xdg-open-as-preview-default.patch"
+	"${FILESDIR}/${PN}-2.3.3-fix-exception.patch"
 )
 
 src_prepare() {
@@ -79,7 +77,7 @@ src_configure() {
 	setup-wxwidgets
 
 	use debug || append-cppflags -DwxDEBUG_LEVEL=0
-	#append-cxxflags -std=gnu++14
+	append-cxxflags -std=gnu++14
 
 	local myconf=(
 		--with-denoise-level=0
