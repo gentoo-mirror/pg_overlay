@@ -25,12 +25,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.8.4-disable-updates.patch
-	# Debian patches
-	"${FILESDIR}"/00_dfsg.patch
-	"${FILESDIR}"/01_arm64-mips64el.patch
-	"${FILESDIR}"/02_ftbfs-gcc13.patch
-	"${FILESDIR}"/03_metainfo.patch
 )
 
 src_prepare() {
