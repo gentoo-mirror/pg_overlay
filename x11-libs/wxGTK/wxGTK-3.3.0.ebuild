@@ -153,7 +153,7 @@ multilib_src_configure() {
 		$(use_enable keyring secretstore)
 		$(use_enable spell spellcheck)
 		$(use_enable test tests)
-		$(use_enable wayland)
+		#$(use_enable wayland)
 	)
 
 	# wxBase options
