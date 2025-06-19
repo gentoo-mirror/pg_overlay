@@ -105,7 +105,7 @@ media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: Featureful ncurses based MPD client inspired by ncmpc
 media-sound/qmmp 9999: Q6-based audio player with winamp/xmms skins support
 media-sound/redoflacs 1.1.0: Bash commandline flac compressor, verifier, organizer, analyzer, retagger
-media-sound/spek 9999: Analyse your audio files by showing their spectrogram
+media-sound/spek 0.8.5-r2 9999: Analyse your audio files by showing their spectrogram
 media-sound/spek-X 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/haruna 1.4.0: Video player built with Qt/QML and libmpv
