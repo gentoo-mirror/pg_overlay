@@ -79,7 +79,7 @@ src_configure() {
 	setup-wxwidgets
 
 	use debug || append-cppflags -DwxDEBUG_LEVEL=0
-	#append-cxxflags -std=gnu++14
+	append-cxxflags -std=gnu++17
 
 	local myconf=(
 		--with-denoise-level=0
