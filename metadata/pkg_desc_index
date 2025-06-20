@@ -146,7 +146,7 @@ sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer device
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
-sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
+sys-auth/elogind 255.9999 257.9999 257.9999-r1: The systemd project's logind, extracted to a standalone package
 sys-auth/polkit 126: Policy framework for controlling privileges for system-wide services
 sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
