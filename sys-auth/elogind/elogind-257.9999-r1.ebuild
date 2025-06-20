@@ -3,15 +3,21 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_{10..14} )
 
-inherit git-r3 linux-info meson pam python-any-r1 udev xdg-utils
+if [[ ${PV} = *9999* ]]; then
+	EGIT_BRANCH="v257-stable"
+	EGIT_REPO_URI="https://github.com/elogind/elogind.git"
+	inherit git-r3
+else
+	SRC_URI="https://github.com/${PN}/${PN}/archive/v${PV}.tar.gz -> ${P}.tar.gz"
+	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86"
+fi
+
+inherit linux-info meson pam python-any-r1 udev xdg-utils
 
 DESCRIPTION="The systemd project's logind, extracted to a standalone package"
 HOMEPAGE="https://github.com/elogind/elogind"
-EGIT_REPO_URI="https://github.com/${PN}/${PN}.git"
-EGIT_BRANCH="v257-stable"
-EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
@@ -78,9 +84,9 @@ src_configure() {
 		--localstatedir="${EPREFIX}"/var
 		-Dbashcompletiondir="${EPREFIX}/usr/share/bash-completion/completions"
 		-Dman=auto
-		-Dsmack=false
+		-Dsmack=true
 		-Dcgroup-controller=openrc
-		-Ddefault-kill-user-processes=true
+		-Ddefault-kill-user-processes=false
 		-Dacl=$(usex acl enabled disabled)
 		-Daudit=$(usex audit enabled disabled)
 		-Dhtml=$(usex doc auto disabled)
@@ -90,10 +96,7 @@ src_configure() {
 		-Dtests=$(usex test true false)
 		-Dutmp=$(usex elibc_musl false true)
 		-Dmode=release
-		-Defi=true
-		-Dzshcompletiondir=""
-		-Db_lto=true
-	)
+)
 
 	meson_src_configure
 }
@@ -120,9 +123,9 @@ pkg_postinst() {
 		ewarn "USE=\"policykit\"! That means e.g. no suspend or hibernate."
 		ewarn
 	fi
-	if [[ "$(rc-config list boot | grep elogind)" != "" ]]; then
+	if [[ "$(rc-status boot | grep elogind)" != "" ]]; then
 		elog "elogind is currently started from boot runlevel."
-	elif [[ "$(rc-config list default | grep elogind)" != "" ]]; then
+	elif [[ "$(rc-status default | grep elogind)" != "" ]]; then
 		ewarn "elogind is currently started from default runlevel."
 		ewarn "Please remove elogind from the default runlevel and"
 		ewarn "add it to the boot runlevel by:"
