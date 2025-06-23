@@ -34,8 +34,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-0.14.0-sysroot.patch
 	"${FILESDIR}"/${PN}-0.14.0-tests-address.patch
 	"${FILESDIR}"/${PN}-0.15.3-unbundle_udns.patch
-	# from upstream. To be removed in next release
-	"${FILESDIR}"/${PN}-0.15.4-fix_inv_chunks.patch
 )
 
 src_prepare() {
