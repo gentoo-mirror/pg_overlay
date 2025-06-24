@@ -154,7 +154,7 @@ sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.14.0: XFS filesystem utilities
 sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
-www-client/firefox 139.0.4: Firefox Web Browser
+www-client/firefox 140.0: Firefox Web Browser
 x11-base/xwayland 24.1.8: Standalone X server running under Wayland
 x11-libs/cairo 9999: A vector graphics library with cross-device output support
 x11-libs/gtk+ 2.24.33-r3 3.24.49-r1: Gimp ToolKit +
