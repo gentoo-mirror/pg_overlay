@@ -1,4 +1,4 @@
-# Copyright 2024 Gentoo Authors
+# Copyright 2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -34,7 +34,7 @@ RDEPEND="
 	dev-qt/qtbase:6[concurrent,dbus,gui,network,sql,widgets]
 	dev-qt/qtimageformats:6
 	dev-qt/qtsvg:6
-	media-libs/taglib
+	media-libs/taglib:=
 	media-video/ffmpeg:=
 	alsa? ( media-libs/alsa-lib )
 	archive? ( app-arch/libarchive:= )
@@ -97,6 +97,7 @@ src_configure() {
 }
 
 src_test() {
+	mkdir -p "${BUILD_DIR}/tests/data" || die
 	ln -sr "${CMAKE_USE_DIR}/tests/data/audio" "${BUILD_DIR}/tests/data/audio" || die
 
 	cmake_src_test
