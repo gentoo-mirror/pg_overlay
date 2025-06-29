@@ -94,7 +94,7 @@ media-sound/alsa-scarlett-gui 0.5.1: A UI for Focusrite Scarlett and Clarett aud
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
-media-sound/dr14meter 1.1.4: dr14meter is a free and open-source command line tool for computing the Dynamic Range of your music.
+media-sound/dr14meter 1.1.4 9999: dr14meter is a free and open-source command line tool for computing the Dynamic Range of your music.
 media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
 media-sound/lame 3.100-r3: LAME Ain't an MP3 Encoder
