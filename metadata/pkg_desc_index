@@ -88,7 +88,6 @@ media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
-media-libs/taglib 2.1.1_pre: Library for reading and editing audio meta data
 media-libs/tg_owt 0_pre20250515: WebRTC build for Telegram
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
@@ -142,12 +141,15 @@ sci-mathematics/mathematica 14.2.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/hwinfo 23.3: Hardware detection tool used in SuSE Linux
 sys-apps/kmod 34.2: Library and tools for managing linux kernel modules
+sys-apps/man-pages 6.13_pre: A somewhat comprehensive collection of Linux man pages
 sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
 sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
+sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
 sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
+sys-devel/gettext 0.25.1_pre: GNU locale utilities
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
