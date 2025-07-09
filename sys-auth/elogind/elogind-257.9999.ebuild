@@ -15,7 +15,7 @@ EGIT_SUBMODULES=()
 
 LICENSE="CC0-1.0 LGPL-2.1+ public-domain"
 SLOT="0"
-IUSE="+acl audit debug doc +pam +policykit selinux test"
+IUSE="+acl audit debug doc efi +pam +policykit selinux test +userdb"
 RESTRICT="!test? ( test )"
 
 BDEPEND="
@@ -44,6 +44,8 @@ PDEPEND="
 	policykit? ( sys-auth/polkit )
 "
 
+DOCS=( README.md )
+
 PATCHES=(
 	# all downstream patches:
 	"${FILESDIR}/${PN}-252.9-nodocs.patch"
@@ -66,11 +68,15 @@ src_prepare() {
 }
 
 src_configure() {
+
+	python_setup
+
+	EMESON_BUILDTYPE="$(usex debug debug release)"
+
 	# Removed -Ddefault-hierarchy=${cgroupmode}
-	# -> It is completely irrelevant with -Dcgroup-controller=openrc anyway.
+	# -> It is deprecated and will be ignored by the build system
 	local emesonargs=(
 		$(usex debug "-Ddebug-extra=elogind" "")
-		-Dbuildtype=$(usex debug debug release)
 		-Ddocdir="${EPREFIX}/usr/share/doc/${PF}"
 		-Dhtmldir="${EPREFIX}/usr/share/doc/${PF}/html"
 		-Dudevrulesdir="${EPREFIX}$(get_udevdir)"/rules.d
@@ -83,11 +89,13 @@ src_configure() {
 		-Ddefault-kill-user-processes=true
 		-Dacl=$(usex acl enabled disabled)
 		-Daudit=$(usex audit enabled disabled)
+		-Defi=$(usex efi true false)
 		-Dhtml=$(usex doc auto disabled)
 		-Dpam=$(usex pam enabled disabled)
 		-Dpamlibdir="$(getpam_mod_dir)"
 		-Dselinux=$(usex selinux enabled disabled)
 		-Dtests=$(usex test true false)
+		-Duserdb=$(usex userdb true false)
 		-Dutmp=$(usex elibc_musl false true)
 		-Dmode=release
 		-Defi=true
@@ -101,11 +109,15 @@ src_configure() {
 src_install() {
 	meson_src_install
 
-	keepdir "${EPREFIX}"/var/lib/elogind
+	keepdir /var/lib/elogind
 
-	newinitd "${FILESDIR}"/${PN}.init-r1 ${PN}
-
+	newinitd "${FILESDIR}"/${PN}.init ${PN}
 	newconfd "${FILESDIR}"/${PN}.conf ${PN}
+
+	if use userdb; then
+		newinitd "${FILESDIR}"/${PN}-userdbd.init ${PN}-userdbd
+		newconfd "${FILESDIR}"/${PN}-userdbd.conf ${PN}-userdbd
+	fi
 }
 
 pkg_postinst() {
