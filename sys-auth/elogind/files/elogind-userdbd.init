@@ -1,0 +1,25 @@
+#!/sbin/openrc-run
+# Copyright 1999-2025 Gentoo Authors
+# Distributed under the terms of the GNU General Public License v2
+
+depend() {
+	# Make sure elogind-userdbd is up before elogind is started
+	before elogind
+
+	use logger
+}
+
+start() {
+	ebegin "Starting elogind-userdbd"
+
+	start-stop-daemon --start --quiet \
+		-b -m --pidfile "${EUSERDBD_PIDFILE}" \
+		--exec "${EUSERDBD_EXEC}"
+	eend $?
+}
+
+stop() {
+	ebegin "Stopping elogind-userdbd"
+	start-stop-daemon --stop --quiet --pidfile "${EUSERDBD_PIDFILE}"
+	eend $?
+}

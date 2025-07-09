@@ -9,6 +9,9 @@
     <flag name="efi" restrict="&gt;sys-auth/elogind-243.0">
       Support rebooting into EFI firmware
     </flag>
+    <flag name="userdb" restrict="&gt;sys-auth/elogind-256.0">
+      Build and install elogind-userdbd, a drop-in replacement for systemd-userdbd, plus userdbctl.
+    </flag>
   </use>
   <upstream>
     <remote-id type="github">elogind/elogind</remote-id>
