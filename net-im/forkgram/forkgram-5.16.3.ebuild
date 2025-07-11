@@ -157,12 +157,12 @@ src_configure() {
 		# Control automagic dependencies on certain packages
 		## Header-only lib, some git version.
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6Quick=${use_webkit_wayland}
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6QuickWidgets=${use_webkit_wayland}
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandClient=$(usex !wayland)
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandCompositor=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6Quick=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6QuickWidgets=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandClient=$(usex !wayland)
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandCompositor=${use_webkit_wayland}
 		## KF6CoreAddons is currently unavailable in ::gentoo
-		-DCMAKE_DISABLE_FIND_PACKAGE_KFQt6CoreAddons=ON
+		#-DCMAKE_DISABLE_FIND_PACKAGE_KFQt6CoreAddons=ON
 
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
 		## Enables enchant and disables hunspell
