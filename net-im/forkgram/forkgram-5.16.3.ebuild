@@ -23,11 +23,13 @@ CDEPEND="
 	app-arch/lz4:=
 	dev-cpp/abseil-cpp:=
 	dev-cpp/ada:=
+	dev-cpp/cld3:=
 	>=dev-cpp/glibmm-2.77:2.68
 	dev-libs/glib:2
 	dev-libs/libdispatch
 	dev-libs/openssl:=
 	dev-libs/protobuf
+	dev-libs/qr-code-generator:=
 	dev-libs/xxhash
 	>=dev-qt/qtbase-6.5:6=[dbus?,gui,network,opengl,ssl,wayland?,widgets,X?]
 	>=dev-qt/qtimageformats-6.5:6
