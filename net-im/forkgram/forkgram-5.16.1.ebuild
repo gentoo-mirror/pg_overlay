@@ -16,7 +16,7 @@ S="${WORKDIR}/${P}-full"
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="dbus enchant +fontsscreencast wayland webkit +X"
+IUSE="dbus enchant +fonts screencast wayland webkit +X"
 
 CDEPEND="
 	!net-im/telegram-desktop-bin
