@@ -23,11 +23,13 @@ CDEPEND="
 	app-arch/lz4:=
 	dev-cpp/abseil-cpp:=
 	dev-cpp/ada:=
+	dev-cpp/cld3:=
 	>=dev-cpp/glibmm-2.77:2.68
 	dev-libs/glib:2
 	dev-libs/libdispatch
 	dev-libs/openssl:=
 	dev-libs/protobuf
+	dev-libs/qr-code-generator:=
 	dev-libs/xxhash
 	>=dev-qt/qtbase-6.5:6=[dbus?,gui,network,opengl,ssl,wayland?,widgets,X?]
 	>=dev-qt/qtimageformats-6.5:6
@@ -155,12 +157,12 @@ src_configure() {
 		# Control automagic dependencies on certain packages
 		## Header-only lib, some git version.
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6Quick=${use_webkit_wayland}
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6QuickWidgets=${use_webkit_wayland}
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandClient=$(usex !wayland)
-		-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandCompositor=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6Quick=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6QuickWidgets=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandClient=$(usex !wayland)
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandCompositor=${use_webkit_wayland}
 		## KF6CoreAddons is currently unavailable in ::gentoo
-		-DCMAKE_DISABLE_FIND_PACKAGE_KFQt6CoreAddons=ON
+		#-DCMAKE_DISABLE_FIND_PACKAGE_KFQt6CoreAddons=ON
 
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
 		## Enables enchant and disables hunspell
