@@ -14,7 +14,7 @@ app-misc/rmlint 9999: rmlint finds space waste and other broken things on your f
 app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
 app-office/libreoffice-l10n 25.2.1.2: Translations for the Libreoffice suite
-app-office/onlyoffice-bin 9.0.0: Onlyoffice is an office productivity suite (binary version)
+app-office/onlyoffice-bin 9.0.3: Onlyoffice is an office productivity suite (binary version)
 app-portage/eix 0.36.9: Search and query ebuilds
 app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array, quoting args
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
@@ -88,6 +88,7 @@ media-libs/libheif 1.20.1: ISO/IEC 23008-12:2017 HEIF file format decoder and en
 media-libs/libjpeg-turbo 3.1.1: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
+media-libs/libwebp 1.6.0_pre: A lossy image compression format
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
