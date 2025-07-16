@@ -88,6 +88,38 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gnome-extra/gnome-commander:gsf - Add metadata support for OLE, OLE2 and ODF
 gnome-extra/gnome-commander:pdf - Add metadata support for PDF
 gnome-extra/gnome-commander:taglib - Add metadata support for ID3, Vorbis, FLAC and APE
+kde-apps/ark:zip - Enable ZIP archive support via dev-libs/libzip
+kde-apps/gwenview:activities - Enable kactivities support
+kde-apps/gwenview:fits - Enable support for NASA's sci-libs/cfitsio library
+kde-apps/gwenview:mpris - Enable support for MPRIS2 interface, requiring dev-qt/qtdbus as dependency.
+kde-apps/gwenview:share - Enable support for a share menu using kde-frameworks/purpose
+kde-apps/kate-addons:filebrowser - Enable File System browser tool view
+kde-apps/kate-addons:lspclient - Enable LSP (Language Server Protocol) client plugin
+kde-apps/kate-addons:projects - Enable Project plugin for executing queries on SQL DBs
+kde-apps/kate-addons:snippets - Enable Snippets Tool View plugin to manage or download code snippets
+kde-apps/kate-addons:sql - Enable SQL plugin for executing queries on SQL DBs
+kde-apps/kio-extras:X - Enable support for XCursor thumbnails via x11-libs/libX11
+kde-apps/kio-extras:activities - Enable activities KIO worker and fileitem plugin
+kde-apps/kio-extras:ios - Enable AFC (Apple File Conduit) KIO worker for iOS devices support
+kde-apps/kio-extras:libproxy - Enable support for WPAD problem detection via net-libs/libproxy
+kde-apps/kio-extras:man - Enable manpages KIO worker
+kde-apps/kio-extras:nfs - Enable NFS support using net-libs/libtirpc
+kde-apps/kio-extras:phonon - Enable file audio preview plugin using media-libs/phonon
+kde-apps/kio-extras:sftp - Enable SFTP protocol support using net-libs/libssh
+kde-apps/kio-extras:taglib - Enable audio thumbnails via media-libs/taglib
+kde-apps/ksystemlog:kdesu - Run as root using kdesu from kde-plasma/kde-cli-tools
+kde-apps/okular:crypt - Enable support for password-encrypted documents via kde-frameworks/kwallet
+kde-apps/okular:epub - Enable E-Book support via app-text/ebook-tools
+kde-apps/okular:markdown - Enable Markdown support via app-text/discount
+kde-apps/okular:mobi - Enable mobipocket support via kde-apps/kdegraphics-mobipocket
+kde-apps/okular:phonon - Enable sound support via media-libs/phonon
+kde-apps/okular:qml - Install Okular Qml components
+kde-apps/okular:share - Enable support for a share menu using kde-frameworks/purpose
+kde-apps/thumbnailers:blender - Enable blender thumbnail generation using kde-frameworks/karchive
+kde-apps/thumbnailers:gettext - Enable PO file thumbnail generation using kde-apps/kdesdk-thumbnailers
+kde-apps/thumbnailers:mobi - Enable mobipocket thumbnail generation using kde-apps/kdegraphics-mobipocket
+kde-apps/thumbnailers:video - Enable video thumbnail generation using kde-apps/ffmpegthumbs
+kde-apps/yakuake:absolute-position - Use kde-plasma/kwayland for absolute window positioning in KWin
 kde-plasma/plasma-workspace:appstream - Enable AppStream software metadata support
 kde-plasma/plasma-workspace:ksysguard - Enable device notifier and system monitor applets as well as terminate applications runner
 kde-plasma/plasma-workspace:networkmanager - Enable support for location-based time zone changes
