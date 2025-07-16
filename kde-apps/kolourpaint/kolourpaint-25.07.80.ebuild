@@ -14,7 +14,8 @@ HOMEPAGE="https://apps.kde.org/kolourpaint/"
 
 LICENSE="BSD-2 LGPL-2 LGPL-2+ || ( LGPL-2.1 LGPL-3 ) GPL-2 handbook? ( FDL-1.2 )"
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
+
 IUSE="scanner"
 
 DEPEND="

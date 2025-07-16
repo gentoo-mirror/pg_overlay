@@ -11,7 +11,8 @@ DESCRIPTION="Wrapper around exiv2 library"
 
 LICENSE="GPL-2+"
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
+
 IUSE="+xmp"
 
 DEPEND="

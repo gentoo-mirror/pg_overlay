@@ -14,7 +14,8 @@ HOMEPAGE="https://apps.kde.org/ksystemlog/"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
+
 IUSE="audit kdesu systemd"
 
 DEPEND="

@@ -15,7 +15,8 @@ HOMEPAGE="https://kate-editor.org/ https://apps.kde.org/kate/"
 
 LICENSE="LGPL-2 LGPL-2+ MIT"
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
+
 IUSE="telemetry"
 
 DEPEND="
