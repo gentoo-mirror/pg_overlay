@@ -103,6 +103,7 @@ kde-apps/sweeper 25.07.80: Privacy settings widget to clean unwanted traces on t
 kde-apps/thumbnailers 25.07.80: Metapackage for KIO thumbnail generators
 kde-apps/yakuake 25.07.80: Quake-style terminal emulator based on konsole
 kde-frameworks/breeze-icons 6.15.0: Breeze SVG icon theme
+kde-misc/kdeconnect 25.07.80: Adds communication between KDE Plasma and your smartphone
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-misc/kweather 25.04.2 25.04.3 25.07.80 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.4.2: KDE Plasma workspace
