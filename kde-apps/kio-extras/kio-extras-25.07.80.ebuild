@@ -14,7 +14,8 @@ HOMEPAGE="https://invent.kde.org/network/kio-extras"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
+
 IUSE="activities ios +man mtp nfs +libproxy openexr phonon samba +sftp taglib X"
 
 # requires running Plasma environment

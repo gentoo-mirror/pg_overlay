@@ -14,7 +14,7 @@ HOMEPAGE="https://apps.kde.org/partitionmanager/"
 
 LICENSE="GPL-3"
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="

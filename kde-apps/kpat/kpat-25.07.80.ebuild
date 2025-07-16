@@ -16,7 +16,8 @@ HOMEPAGE="https://apps.kde.org/kpat/"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
+
 IUSE=""
 
 DEPEND="

@@ -14,7 +14,8 @@ HOMEPAGE="https://apps.kde.org/konsole/ https://konsole.kde.org"
 
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
+
 IUSE="X"
 
 DEPEND="

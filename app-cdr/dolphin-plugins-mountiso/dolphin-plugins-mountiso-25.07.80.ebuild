@@ -16,7 +16,7 @@ HOMEPAGE="https://apps.kde.org/dolphin_plugins/"
 
 LICENSE="GPL-2+"
 SLOT="6"
-KEYWORDS=""
+KEYWORDS="~amd64"
 IUSE=""
 
 DEPEND="
