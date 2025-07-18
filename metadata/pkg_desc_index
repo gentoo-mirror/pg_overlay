@@ -113,9 +113,9 @@ llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 140.0.1: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/imagemagick 7.1.1.47: A collection of tools and libraries for many image formats
-media-libs/gst-plugins-base 1.26.3_pre: Basepack of plugins for gstreamer
-media-libs/gst-plugins-good 1.26.3_pre: Basepack of plugins for GStreamer
-media-libs/gstreamer 1.26.3_pre: Open source multimedia framework
+media-libs/gst-plugins-base 1.26.4_pre: Basepack of plugins for gstreamer
+media-libs/gst-plugins-good 1.26.4_pre: Basepack of plugins for GStreamer
+media-libs/gstreamer 1.26.4_pre: Open source multimedia framework
 media-libs/libde265 1.0.16: Open h.265 video codec implementation
 media-libs/libheif 1.20.1: ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 media-libs/libjpeg-turbo 3.1.1: MMX, SSE, and SSE2 SIMD accelerated JPEG library
@@ -146,7 +146,7 @@ media-sound/spek-X 0.9.4 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternat
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/haruna 1.4.0: Video player built with Qt/QML and libmpv
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.4.6: Multimedia processing graphs
+media-video/pipewire 1.4.6-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-analyzer/nmap 7.96_pre: Network exploration tool and security / port scanner
 net-analyzer/traceroute 2.1.6_pre: Utility to trace the route of IP packets
@@ -177,7 +177,6 @@ net-vpn/networkmanager-l2tp 1.20.20: NetworkManager L2TP plugin
 sci-mathematics/mathematica 14.2.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/hwinfo 23.3: Hardware detection tool used in SuSE Linux
-sys-apps/kmod 34.2: Library and tools for managing linux kernel modules
 sys-apps/man-pages 6.13_pre: A somewhat comprehensive collection of Linux man pages
 sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux

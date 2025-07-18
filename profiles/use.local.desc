@@ -398,10 +398,6 @@ net-print/samsung-unified-driver:network - Enable network printing support
 sci-mathematics/mathematica:R - Enable dev-lang/R backend support
 sci-mathematics/mathematica:cuda - Install with cuda support
 sci-mathematics/mathematica:ffmpeg - Enable media-video/ffmpeg backend support
-sys-apps/kmod:lzma - Enable support for XZ compressed modules
-sys-apps/kmod:pkcs7 - Enable PKCS#7 signature parsing for modinfo.
-sys-apps/kmod:tools - Install module loading/unloading tools.
-sys-apps/kmod:zlib - Enable support for gzipped modules
 sys-apps/openrazer:client - Build the OpenRazer daemon client
 sys-apps/openrazer:daemon - Build the OpenRazer daemon service
 sys-apps/razercfg:pm-utils - Installs the pm-utils hooks for suspend/resume and requires sys-power/pm-utils
