@@ -69,7 +69,7 @@ BDEPEND="
 # I'm missing something.  This is an automagic header dep, though.
 
 PATCHES=(
-	"${FILESDIR}/${PN}-3.2.1-configure-tests.patch"
+	#"${FILESDIR}/${PN}-3.2.1-configure-tests.patch"
 	"${FILESDIR}/${PN}-3.2.1-prefer-lib64-in-tests.patch"
 	"${FILESDIR}/${PN}-3.2.5-dont-break-flags.patch"
 )
