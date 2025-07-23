@@ -86,7 +86,9 @@ multilib_src_configure() {
 	local myeconfargs=(
 		--with-zlib=sys
 		--with-expat=sys
-		--disable-compat30
+		#--disable-compat30
+		--enable-compat30
+		--enable-compat32
 		--enable-xrc
 		--disable-symver
 		$(use_with sdl)
