@@ -55,6 +55,8 @@ else
 	KEYWORDS="~amd64 ~arm ~arm64 ~loong ~mips ~ppc ~ppc64 ~riscv ~sparc ~x86"
 fi
 
+SRC_URI+=" https://dev.gentoo.org/~sam/distfiles/${CATEGORY}/${PN}/${PN}-1.4.7-0001-don-t-include-standard-C-headers-inside-of-extern-C.patch.xz"
+
 DESCRIPTION="Multimedia processing graphs"
 HOMEPAGE="https://pipewire.org/"
 
@@ -185,6 +187,7 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-0.3.25-enable-failed-mlock-warning.patch
 	"${FILESDIR}"/${PN}-1.4.6-no-automagic-ebur128.patch
 	"${FILESDIR}"/${PN}-1.4.6-no-automagic-fftw.patch
+	"${WORKDIR}"/${PN}-1.4.7-0001-don-t-include-standard-C-headers-inside-of-extern-C.patch
 )
 
 pkg_setup() {
