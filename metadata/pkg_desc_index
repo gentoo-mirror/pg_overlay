@@ -2,7 +2,6 @@ app-accessibility/at-spi2-core 2.54.0: D-Bus accessibility specifications and re
 app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/sysklogd 2.7.0: Standard log daemons
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
-app-cdr/dolphin-plugins-mountiso 25.07.80: Dolphin plugin for ISO loopback device mounting
 app-crypt/pinentry 1.3.1-r1: Simple passphrase entry dialogs which utilize the Assuan protocol
 app-crypt/swtpm 0.10.0: Libtpms-based TPM emulator
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
@@ -32,7 +31,6 @@ dev-cpp/highway 1.2.0: Performance-portable, length-agnostic SIMD with runtime d
 dev-cpp/ms-gsl 4.2.0: Guideline Support Library implementation by Microsoft
 dev-cpp/pangomm 2.56.1: C++ interface for pango
 dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
-dev-db/sqlite 3.50.3_pre: SQL database engine
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.0: feature rich visual programming environment emulating Delphi
 dev-lang/lua 5.4.8_pre: A powerful light-weight programming language designed for extending applications
@@ -40,7 +38,6 @@ dev-lang/python 3.13.5: An interpreted, interactive, object-oriented programming
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/dbus-glib 0.114: D-Bus bindings for glib
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
-dev-libs/kweathercore 25.07.80: Library for retrieval of weather information including forecasts and alerts
 dev-libs/libdispatch 6.1.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
@@ -72,40 +69,9 @@ gnome-base/librsvg 2.60.0: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/gnome-commander 1.18.2: A graphical, full featured, twin-panel file manager
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
-kde-apps/ark 25.07.80: File archiver by KDE
-kde-apps/dolphin 25.07.80: Plasma filemanager focusing on usability
-kde-apps/dolphin-plugins-common 25.07.80: Common files for dolphin-plugins
-kde-apps/dolphin-plugins-git 25.07.80: Dolphin plugin for Git integration
-kde-apps/filelight 25.07.80: Visualise disk usage with interactive map of concentric, segmented rings
-kde-apps/gwenview 25.07.80: Image viewer by KDE
-kde-apps/kate 25.07.80: Multi-document editor with network transparency, Plasma integration and more
-kde-apps/kate-addons 25.07.80: Addons used by Kate
-kde-apps/kate-common 25.07.80: Common files for kate
-kde-apps/kate-lib 25.07.80: Shared library used by Kate/Kwrite and Kate-Addons
-kde-apps/kcalc 25.07.80: KDE calculator
-kde-apps/kcharselect 25.07.80: KDE character selection utility
-kde-apps/kcron 25.07.80: KDE Task Scheduler
-kde-apps/kdf 25.07.80: KDE free disk space utility
-kde-apps/kdialog 25.07.80: Can be used to show nice dialog boxes from shell scripts
-kde-apps/keditbookmarks 25.07.80: Bookmarks editor based on KDE Frameworks
-kde-apps/kfind 25.07.80: File finder utility based on KDE Frameworks
-kde-apps/kio-extras 25.07.80: KIO plugins present a filesystem-like view of arbitrary data
-kde-apps/kolourpaint 25.07.80: Paint Program by KDE
-kde-apps/kompare 25.07.80: Graphical File Differences Tool
-kde-apps/konsole 25.07.80: KDE's terminal emulator
-kde-apps/kpat 25.07.80: KDE patience game
-kde-apps/ksystemlog 25.07.80: System log viewer by KDE
-kde-apps/libkdegames 25.07.80: Base library common to many KDE games
-kde-apps/libkexiv2 25.07.80: Wrapper around exiv2 library
-kde-apps/libkomparediff2 25.07.80: Library to compare files and strings
-kde-apps/okular 25.07.80: Universal document viewer based on KDE Frameworks
-kde-apps/sweeper 25.07.80: Privacy settings widget to clean unwanted traces on the system
-kde-apps/thumbnailers 25.07.80: Metapackage for KIO thumbnail generators
-kde-apps/yakuake 25.07.80: Quake-style terminal emulator based on konsole
 kde-frameworks/breeze-icons 6.15.0: Breeze SVG icon theme
-kde-misc/kdeconnect 25.07.80: Adds communication between KDE Plasma and your smartphone
 kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
-kde-misc/kweather 25.04.2 25.04.3 25.07.80 9999: Weather forecast application for Plasma with flat and dynamic/animated views
+kde-misc/kweather 25.07.90 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.4.2: KDE Plasma workspace
 llvm-core/clang 19.1.6: C language family frontend for LLVM
 llvm-core/llvm 19.1.6: Low Level Virtual Machine
@@ -146,7 +112,7 @@ media-sound/spek-X 0.9.4 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternat
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
 media-video/haruna 1.4.0: Video player built with Qt/QML and libmpv
 media-video/mpv 9999: Media player for the command line
-media-video/pipewire 1.4.7-r1: Multimedia processing graphs
+media-video/pipewire 1.4.7-r2: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
 net-analyzer/nmap 7.96_pre: Network exploration tool and security / port scanner
 net-analyzer/traceroute 2.1.6_pre: Utility to trace the route of IP packets
@@ -184,7 +150,6 @@ sys-apps/razercfg 0.42-r1: Utility for advanced configuration of Razer mice
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
-sys-block/partitionmanager 25.07.80: Utility for management of disks, partitions and file systems
 sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-devel/gettext 0.26_pre: GNU locale utilities
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
@@ -192,7 +157,6 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.15.0: XFS filesystem utilities
-sys-libs/kpmcore 25.07.80: Library for managing partitions
 sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
 www-client/firefox 141.0: Firefox Web Browser
