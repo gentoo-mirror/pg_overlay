@@ -134,11 +134,11 @@ src_install() {
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
 
-	if use daemon || use webserver; then
-		keepdir /var/lib/${PN}
-		fowners amule:amule /var/lib/${PN}
-		fperms 0750 /var/lib/${PN}
-	fi
+	#if use daemon || use webserver; then
+	#	keepdir /var/lib/${PN}
+	#	fowners amule:amule /var/lib/${PN}
+	#	fperms 0750 /var/lib/${PN}
+	#fi
 
 	if use gui && !use daemon; then
 		rm ${D}/usr/bin/amule
