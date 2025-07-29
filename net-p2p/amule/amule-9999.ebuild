@@ -60,19 +60,33 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=Release
-		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
-		-DASIO_SOCKETS=ON
-		-DBUILD_ALCC=OFF
-		-DBUILD_AMULECMD=OFF
-		-DBUILD_CAS=OFF
+		#-DCMAKE_BUILD_TYPE=Release
+		#-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
+		#-DASIO_SOCKETS=ON
+		#-DBUILD_ALCC=OFF
+		#-DBUILD_AMULECMD=OFF
+		#-DBUILD_CAS=OFF
 		#-DENABLE_BOOST=ON
-		-DENABLE_MMAP=ON
-		-DBUILD_DAEMON=$(usex daemon)
-		-DBUILD_TESTING=$(usex debug)
-		-DBUILD_WEBSERVER=$(usex webserver)
-		-DENABLE_NLS=$(usex nls)
-		-DENABLE_UPNP=$(usex upnp)
+		#-DENABLE_MMAP=ON
+		#-DBUILD_DAEMON=$(usex daemon)
+		#-DBUILD_TESTING=$(usex debug)
+		#-DBUILD_WEBSERVER=$(usex webserver)
+		#-DENABLE_NLS=$(usex nls)
+		#-DENABLE_UPNP=$(usex upnp)
+
+		-DBUILD_ALC=ON \
+		-DBUILD_ALCC=ON \
+		-DBUILD_AMULECMD=ON \
+		-DBUILD_CAS=ON \
+		-DBUILD_DAEMON=ON \
+		-DBUILD_REMOTEGUI=ON \
+		-DBUILD_WEBSERVER=ON \
+		-DBUILD_WXCAS=ON \
+		-DBUILD_FILEVIEW=ON \
+		-DENABLE_IP2COUNTRY=ON \
+		-DENABLE_NLS=ON
+		-DCMAKE_POLICY_VERSION_MINIMUM=3.5
+
 	)
 
 	if use gui; then
