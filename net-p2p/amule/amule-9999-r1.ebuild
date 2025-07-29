@@ -66,11 +66,11 @@ src_prepare() {
 	plocale_find_changes po "" ".po"
 	plocale_for_each_disabled_locale rem_locale
 
-	#if [[ ${PV} == 9999 ]]; then
-	#	./autogen.sh || die
-	#else
+	if [[ ${PV} == 9999 ]]; then
+		./autogen.sh || die
+	else
 		eautoreconf
-	#fi
+	fi
 }
 
 src_configure() {
