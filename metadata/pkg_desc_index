@@ -31,6 +31,7 @@ dev-cpp/gtkmm 4.18.0: C++ interface for GTK+
 dev-cpp/highway 1.2.0: Performance-portable, length-agnostic SIMD with runtime dispatch
 dev-cpp/ms-gsl 4.2.0: Guideline Support Library implementation by Microsoft
 dev-cpp/pangomm 2.56.1: C++ interface for pango
+dev-cpp/tbb 2022.2.0: High level abstract threading library
 dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.2: feature rich visual programming environment emulating Delphi
@@ -144,6 +145,7 @@ net-vpn/networkmanager-l2tp 1.20.20: NetworkManager L2TP plugin
 sci-mathematics/mathematica 14.2.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
 sys-apps/hwinfo 25.0: Hardware detection tool used in SuSE Linux
+sys-apps/hwloc 2.12.1: Displays the hardware topology in convenient formats
 sys-apps/man-pages 6.13_pre: A somewhat comprehensive collection of Linux man pages
 sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/razer-cli 2.2.1-r1: Command line interface for controlling Razer devices on Linux
@@ -153,6 +155,7 @@ sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
 sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-devel/gettext 0.26_pre: GNU locale utilities
+sys-devel/mold 2.40.2: A Modern Linker
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
