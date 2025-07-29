@@ -131,7 +131,7 @@ net-libs/nodejs 24.4.1: A JavaScript runtime built on Chrome's V8 JavaScript eng
 net-misc/freerdp 3.15.0: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-nds/rpcbind 1.2.8_rc2 1.2.8: portmap replacement which supports RPC over various protocols
-net-p2p/amule 9999 9999-r1: aMule, the all-platform eMule p2p client
+net-p2p/amule 2.3.3-r7 9999 9999-r1: aMule, the all-platform eMule p2p client
 net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: Graphical client for the Soulseek peer to peer network written in Python
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
