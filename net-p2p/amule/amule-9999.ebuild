@@ -60,19 +60,19 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DCMAKE_BUILD_TYPE=Release
-		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
-		-DASIO_SOCKETS=ON
-		-DBUILD_ALCC=OFF
-		-DBUILD_AMULECMD=OFF
-		-DBUILD_CAS=OFF
-		-DENABLE_BOOST=ON
-		-DENABLE_MMAP=ON
-		-DBUILD_DAEMON=$(usex daemon)
-		-DBUILD_TESTING=$(usex debug)
-		-DBUILD_WEBSERVER=$(usex webserver)
-		-DENABLE_NLS=$(usex nls)
-		-DENABLE_UPNP=$(usex upnp)
+		#-DCMAKE_BUILD_TYPE=Release
+		#-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
+		#-DASIO_SOCKETS=ON
+		#-DBUILD_ALCC=OFF
+		#-DBUILD_AMULECMD=OFF
+		#-DBUILD_CAS=OFF
+		#-DENABLE_BOOST=ON
+		#-DENABLE_MMAP=ON
+		#-DBUILD_DAEMON=$(usex daemon)
+		#-DBUILD_TESTING=$(usex debug)
+		#-DBUILD_WEBSERVER=$(usex webserver)
+		#-DENABLE_NLS=$(usex nls)
+		#-DENABLE_UPNP=$(usex upnp)
 
 		-DBUILD_ALC=ON \
 		-DBUILD_ALCC=ON \
