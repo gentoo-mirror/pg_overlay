@@ -71,6 +71,8 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
+S=${WORKDIR}/${PN}-9f97404
+
 PATCHES=(
 	"${FILESDIR}"/${PN}-2.5.2-no-werror.patch
 	"${FILESDIR}"/${PN}-udev-sysctl.patch
