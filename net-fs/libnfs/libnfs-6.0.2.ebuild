@@ -27,6 +27,10 @@ BDEPEND="
 	virtual/pkgconfig
 "
 
+PATCHES=( ${FILESDIR}/0d4b18109630751a0e646376c3565f0befeed0fa.patch
+			${FILESDIR}/d205297a10bf8d7f8846bf42f0ed618543a561a9.patch
+		)
+
 src_prepare() {
 	default
 
