@@ -66,7 +66,7 @@ src_configure() {
 		-DBUILD_ALCC=OFF
 		-DBUILD_AMULECMD=OFF
 		-DBUILD_CAS=OFF
-		-DENABLE_BOOST=ON
+		#-DENABLE_BOOST=ON
 		-DENABLE_MMAP=ON
 		-DBUILD_DAEMON=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
