@@ -11,7 +11,7 @@ EGIT_REPO_URI="https://github.com/rnpgp/rnp.git"
 #S="${WORKDIR}/${P/*lib/}"
 
 LICENSE="Apache-2.0 BSD BSD-2"
-SLOT="0/0.17.1"
+SLOT="0/0.18.0"
 KEYWORDS=""
 
 IUSE="+botan man test"
