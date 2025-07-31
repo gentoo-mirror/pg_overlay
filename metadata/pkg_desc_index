@@ -10,7 +10,7 @@ app-emulation/vmware-modules 17.6.3-r2: VMware kernel modules
 app-i18n/enca 1.19-r3 9999: Detect and convert encoding of text files
 app-misc/ddcui 0.5.4: Graphical user interface for ddcutil - control monitor settings
 app-misc/ddcutil 2.1.4: Program for querying and changing monitor settings
-app-misc/doublecmd 1.1.26: Cross Platform file manager.
+app-misc/doublecmd 1.1.27: Cross Platform file manager.
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
