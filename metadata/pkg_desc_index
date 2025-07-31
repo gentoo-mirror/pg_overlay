@@ -53,7 +53,6 @@ dev-python/wheel 0.46.1: A built-package format for Python
 dev-util/android-tools 35.0.2: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cargo-ebuild 0.6.0: Generates an ebuild for a package using the in-tree eclasses.
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
-dev-util/glslang 1.4.321.0: Khronos reference front-end for GLSL and ESSL, and sample SPIR-V generator
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/librnp 9999: High performance C++ OpenPGP library
 dev-util/mingw64-toolchain 12.0.0_p1: All-in-one mingw64 toolchain intended for building Wine without crossdev
@@ -63,9 +62,6 @@ dev-util/scanmem 9999: Locate and modify variables in executing processes
 dev-util/sccache 9999: ccache/distcc like tool with support for rust and cloud storage
 dev-util/spirv-headers 1.4.321.0: Machine-readable files for the SPIR-V Registry
 dev-util/spirv-tools 1.4.321.0: Provides an API and commands for processing SPIR-V modules
-dev-util/vulkan-headers 1.4.321.0: Vulkan Header files and API registry
-dev-util/vulkan-tools 1.4.321.0: Official Vulkan Tools and Utilities for Windows, Linux, Android, and MacOS
-dev-util/vulkan-utility-libraries 1.4.321.0: Share code across various Vulkan repositories
 dev-vcs/subversion 1.14.5: Advanced version control system
 games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-base/librsvg 2.60.0: Scalable Vector Graphics (SVG) rendering library
@@ -85,8 +81,6 @@ media-gfx/imagemagick 7.1.1.47: A collection of tools and libraries for many ima
 media-libs/gst-plugins-base 1.26.4_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.4_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.4_pre: Open source multimedia framework
-media-libs/libde265 1.0.16: Open h.265 video codec implementation
-media-libs/libheif 1.20.1: ISO/IEC 23008-12:2017 HEIF file format decoder and encoder
 media-libs/libjpeg-turbo 3.1.1: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
@@ -96,8 +90,6 @@ media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
 media-libs/shaderc 2025.3: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20250515 0_pre20250703: WebRTC build for Telegram
-media-libs/vulkan-layers 1.4.321.0: Vulkan Validation Layers
-media-libs/vulkan-loader 1.4.321.0: Vulkan Installable Client Driver (ICD) Loader
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
 media-sound/alsa-scarlett-gui 0.5.1: A UI for Focusrite Scarlett and Clarett audio interfaces
