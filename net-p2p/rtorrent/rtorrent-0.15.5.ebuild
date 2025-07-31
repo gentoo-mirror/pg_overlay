@@ -86,6 +86,7 @@ src_configure() {
 	export CONFIG_SHELL=${BASH}
 
 	local myeconfargs=(
+		LIBS="-ltinyxml2"
 		$(use_enable debug)
 		$(use_with lua)
 		$(usev xmlrpc --with-xmlrpc-c)
