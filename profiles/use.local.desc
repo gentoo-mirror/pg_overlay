@@ -42,7 +42,6 @@ app-text/enchant:aspell - Adds support for app-text/aspell spell checker
 app-text/enchant:hunspell - Adds support for app-text/hunspell spell checker
 app-text/enchant:nuspell - Adds support for app-text/nuspell spell checker
 app-text/enchant:voikko - Adds support for dev-libs/libvoikko spell checker
-dev-cpp/abseil-cpp:test-helpers - Build libraries that you can use to write tests against Abseil code.
 dev-lang/lazarus:extras - Build a lot of extra packages, including lhelp chm viewer program.
 dev-lang/lazarus:gtk2 - Use gtk:2 for widgets.
 dev-lang/lazarus:gui - Build GUI IDE.
