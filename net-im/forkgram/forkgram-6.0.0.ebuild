@@ -59,8 +59,9 @@ RDEPEND="${CDEPEND}
 "
 DEPEND="${CDEPEND}
 	>=dev-cpp/cppgir-2.0_p20240315
-	>=dev-cpp/ms-gsl-4.1.0
+	dev-cpp/expected
 	dev-cpp/expected-lite
+	>=dev-cpp/ms-gsl-4.1.0
 	dev-cpp/range-v3
 "
 BDEPEND="
@@ -81,6 +82,7 @@ PATCHES=(
 	#"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
+	"${FILESDIR}"/0001-kde-theme-injection-fix.patch
 )
 
 pkg_pretend() {
