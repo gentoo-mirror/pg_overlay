@@ -7,7 +7,7 @@ app-crypt/swtpm 0.10.0: Libtpms-based TPM emulator
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
 app-emulation/nemu 3.3.1: Ncurses interface for QEMU
 app-emulation/vmware-modules 17.6.3-r2: VMware kernel modules
-app-i18n/enca 1.19-r3 9999: Detect and convert encoding of text files
+app-i18n/enca 1.20 9999: Detect and convert encoding of text files
 app-misc/doublecmd 1.1.27: Cross Platform file manager.
 app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 5.2.1: Worker Filemanager: Amiga Directory Opus 4 clone
@@ -31,6 +31,7 @@ dev-cpp/ms-gsl 4.2.0: Guideline Support Library implementation by Microsoft
 dev-cpp/pangomm 2.56.1: C++ interface for pango
 dev-cpp/tbb 2022.2.0: High level abstract threading library
 dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
+dev-db/sqlite 3.50.4_pre: SQL database engine
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.2: feature rich visual programming environment emulating Delphi
 dev-lang/lua 5.4.8_pre: A powerful light-weight programming language designed for extending applications
