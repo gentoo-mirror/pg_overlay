@@ -140,7 +140,7 @@ src_install() {
 	#	fperms 0750 /var/lib/${PN}
 	#fi
 
-	if use gui && !use daemon; then
+	if use gui && use !daemon; then
 		rm ${D}/usr/bin/amule
 	fi
 }
