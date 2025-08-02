@@ -121,7 +121,7 @@ src_install() {
 		newinitd "${FILESDIR}"/amuleweb.initd amuleweb
 	fi
 
-	if use gui && !use daemon; then
+	if use gui && use !daemon; then
 		rm ${D}/usr/bin/amule
 	fi
 }
