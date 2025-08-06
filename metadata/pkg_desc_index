@@ -37,6 +37,7 @@ dev-lang/lazarus 4.2: feature rich visual programming environment emulating Delp
 dev-lang/lua 5.4.8_pre: A powerful light-weight programming language designed for extending applications
 dev-lang/python 3.13.5_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
+dev-libs/blake3 1.8.2: a fast cryptographic hash function
 dev-libs/dbus-glib 0.114: D-Bus bindings for glib
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 6.1.1: A library for concurrent code execution on multicore hardware
@@ -149,7 +150,7 @@ sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
 sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-devel/gettext 0.26_pre: GNU locale utilities
-sys-devel/mold 2.40.2: A Modern Linker
+sys-devel/mold 2.40.3: A Modern Linker
 sys-fs/avfs 1.2.0: Virtual filesystem that allows browsing of compressed files
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
