@@ -23,8 +23,8 @@ RDEPEND="gui? (
 		${PYTHON_DEPS}
 		x11-libs/gtksourceview:3.0
 		$(python_gen_cond_dep '
-		doc? ( dev-python/sphinx[${PYTHON_MULTI_USEDEP}] )
-		dev-python/pygobject:3[${PYTHON_MULTI_USEDEP}]
+		doc? ( dev-python/sphinx )
+		dev-python/pygobject:
 		')
 		dev-libs/json-glib
 		gnome-base/librsvg:2
