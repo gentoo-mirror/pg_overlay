@@ -105,8 +105,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-atk-bridge-meson.build.patch
 	"${FILESDIR}"/${PN}-atk-bridge-meson_options.txt.patch
 	"${FILESDIR}"/${PN}-atk-bridge-gtkaccessibility.patch
-		# bug #952006
-	"${FILESDIR}"/${PN}-3.24.49-java-crash.patch
 )
 
 src_prepare() {
