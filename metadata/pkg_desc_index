@@ -19,6 +19,7 @@ app-shells/push 3.4-r1: A POSIX shell function to treat a variable like an array
 app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX shell by eval
 app-text/enchant 2.8.6: Spellchecker wrapping library
 app-text/goldendict-ng 9999 9999-r1: The Next Generation GoldenDict. Feature-rich dictionary lookup program
+app-text/podofo 1.0.1: PoDoFo is a C++ library to work with the PDF file format
 dev-build/autoconf-wrapper 20250528: Wrapper for autoconf to manage multiple autoconf versions
 dev-cpp/ada 3.2.5: WHATWG-compliant and fast URL parser written in modern C++
 dev-cpp/atkmm 2.36.3: C++ interface for the ATK library
@@ -70,7 +71,6 @@ gnome-extra/gnome-commander 1.18.2: A graphical, full featured, twin-panel file 
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 kde-frameworks/kirigami 6.17.0: Lightweight user interface framework for mobile and convergent applications
-kde-misc/krusader 9999: Advanced twin-panel (commander-style) file-manager with many extras
 kde-misc/kweather 25.07.90 25.08.0 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.4.2: KDE Plasma workspace
 llvm-core/clang 19.1.6: C language family frontend for LLVM
