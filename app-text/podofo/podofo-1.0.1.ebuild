@@ -51,7 +51,7 @@ src_prepare() {
 src_configure() {
 	local mycmakeargs=(
 		-DPODOFO_BUILD_TEST=$(usex test ON OFF)
-		-DPODOFO_BUILD_TOOLS=$(usex tools ON OFF)
+		-DPODOFO_BUILD_UNSUPPORTED_TOOLS=$(usex tools ON OFF)
 		$(cmake_use_find_package idn Libidn)
 		$(cmake_use_find_package jpeg JPEG)
 		$(cmake_use_find_package tiff TIFF)
