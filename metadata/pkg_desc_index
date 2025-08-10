@@ -70,7 +70,6 @@ games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-extra/gnome-commander 1.18.2: A graphical, full featured, twin-panel file manager
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
-kde-frameworks/kirigami 6.17.0: Lightweight user interface framework for mobile and convergent applications
 kde-misc/kweather 25.07.90 25.08.0 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.4.2: KDE Plasma workspace
 llvm-core/clang 19.1.6: C language family frontend for LLVM
