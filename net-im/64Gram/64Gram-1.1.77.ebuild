@@ -168,6 +168,8 @@ src_configure() {
 		-DDESKTOP_APP_USE_ENCHANT=$(usex enchant)
 		## Use system fonts instead of bundled ones
 		-DDESKTOP_APP_USE_PACKAGED_FONTS=$(usex !fonts)
+
+ 		-DENABLE_QT5=OFF
 	)
 
 	if [[ -n ${MY_TDESKTOP_API_ID} && -n ${MY_TDESKTOP_API_HASH} ]]; then
