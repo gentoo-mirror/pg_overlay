@@ -128,8 +128,8 @@ src_prepare() {
 			-i Telegram/lib_webview/webview/platform/linux/webview_linux_compositor.h || die
 	fi
 
-	eapply --binary "${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	eapply --binary "${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
+	#eapply --binary "${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
+	#eapply --binary "${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
 	#eapply --binary "${FILESDIR}/c28f1f056f3170bce43ed6584696a9fba0e1d4d7.patch"
 	#eapply --binary "${FILESDIR}/tdesktop-5.8.3-webkit-no-wayland.patch"
 
