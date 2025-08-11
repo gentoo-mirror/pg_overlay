@@ -73,16 +73,7 @@ BDEPEND="
 	wayland? ( dev-util/wayland-scanner )
 "
 
-S=${WORKDIR}/frk-v${PV}-full
-
 PATCHES=(
-	"${FILESDIR}"/tdesktop-5.14.3-system-cppgir.patch
-	"${FILESDIR}"/tdesktop-4.11.3-system-libyuv.patch
-	"${FILESDIR}"/option-to-disable-stories.patch
-	#"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
-	"${FILESDIR}"/invite-peeking-restrictions.patch
-	"${FILESDIR}"/saving-restrictions.patch
-	"${FILESDIR}"/0001-kde-theme-injection-fix.patch
 )
 
 pkg_pretend() {
@@ -130,10 +121,11 @@ src_prepare() {
 			-i Telegram/lib_webview/webview/platform/linux/webview_linux_compositor.h || die
 	fi
 
-	eapply --binary "${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
-	eapply --binary "${FILESDIR}/tdesktop-4.10.0-system-cppgir.patch"
-	#eapply --binary "${FILESDIR}/c28f1f056f3170bce43ed6584696a9fba0e1d4d7.patch"
-	#eapply --binary "${FILESDIR}/tdesktop-5.8.3-webkit-no-wayland.patch"
+	eapply --binary "${FILESDIR}"/tdesktop-5.14.3-system-cppgir.patch
+	eapply --binary "${FILESDIR}"/tdesktop-4.11.3-system-libyuv.patch
+	eapply --binary "${FILESDIR}"/invite-peeking-restrictions.patch
+	eapply --binary "${FILESDIR}"/saving-restrictions.patch
+	eapply --binary "${FILESDIR}"/0001-kde-theme-injection-fix.patch
 
 	cmake_src_prepare
 }
