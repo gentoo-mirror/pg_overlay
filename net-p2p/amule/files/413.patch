@@ -1,0 +1,36 @@
+From 2a7d3c87eb67bc3b85c2a336368a9b2af862f208 Mon Sep 17 00:00:00 2001
+From: Alexander Tsoy <alexander@tsoy.me>
+Date: Tue, 5 Aug 2025 00:17:30 +0300
+Subject: [PATCH] build: move AM_GNU_GETTEXT invocation to configure.ac
+
+Fixes compatibility with gettext 0.23. autopoint doesn't populate intl
+directory if there is no AM_GNU_GETTEXT invocation in configure.ac.
+---
+ configure.ac | 1 +
+ m4/nls.m4    | 1 -
+ 2 files changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/configure.ac b/configure.ac
+index bb5a9db09c..71dac70574 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -318,6 +318,7 @@ AC_LANG_POP([C++])
+ dnl Sets gettext version.
+ dnl AM_GNU_GETTEXT_VERSION *must not* be moved away from configure.ac!
+ AM_GNU_GETTEXT_VERSION(0.11.5)
++AM_GNU_GETTEXT([no-libtool], [need-ngettext])
+ MULE_CHECK_NLS
+ AS_IF([test x$USE_INCLUDED_LIBINTL = xyes], [AC_CONFIG_COMMANDS([intl], [[
+ 	test -d intl || mkdir intl
+diff --git a/m4/nls.m4 b/m4/nls.m4
+index dbf0c50c70..c2e03faa6a 100644
+--- a/m4/nls.m4
++++ b/m4/nls.m4
+@@ -82,7 +82,6 @@ AC_DEFUN([MULE_CHECK_NLS],
+ 			[Specify a comma-separated list of languages you want to have installed. See po/LINGUAS for available languages])],
+ 		[AS_IF([test "$withval" != "all"], [LINGUAS="`echo $withval | sed -e 's/,/ /g'`"])])
+ 
+-	AM_GNU_GETTEXT([no-libtool], [need-ngettext])
+ 	AS_IF([test $USE_INCLUDED_LIBINTL = yes], [INCINTL=-I\${top_builddir}/intl])
+ 
+ 	AS_IF([test x$USE_NLS = xyes], [MULE_CHECK_AUTOPOINT(, [USE_NLS=no])])
