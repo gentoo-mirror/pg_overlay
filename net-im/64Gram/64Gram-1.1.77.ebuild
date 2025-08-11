@@ -1,4 +1,4 @@
-# Copyright 2020-2024 Gentoo Authors
+# Copyright 2020-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
@@ -15,53 +15,40 @@ S="${WORKDIR}/${P}-full"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
-KEYWORDS="~amd64 ~arm64 ~riscv"
-IUSE="dbus enchant +fonts +jemalloc screencast qt6 wayland webkit +X"
+KEYWORDS="~amd64"
+IUSE="dbus enchant +fonts screencast wayland webkit +X"
 
 CDEPEND="
 	!net-im/telegram-desktop-bin
 	app-arch/lz4:=
 	dev-cpp/abseil-cpp:=
 	dev-cpp/ada:=
+	dev-cpp/cld3:=
 	>=dev-cpp/glibmm-2.77:2.68
 	dev-libs/glib:2
 	dev-libs/libdispatch
 	dev-libs/openssl:=
 	dev-libs/protobuf
+	dev-libs/qr-code-generator:=
 	dev-libs/xxhash
+	>=dev-qt/qtbase-6.5:6=[dbus?,gui,network,opengl,ssl,wayland?,widgets,X?]
+	>=dev-qt/qtimageformats-6.5:6
+	>=dev-qt/qtsvg-6.5:6
 	media-libs/libjpeg-turbo:=
-	>=media-libs/libtgvoip-2.4.4_p20230929
 	media-libs/openal
 	media-libs/opus
 	media-libs/rnnoise
-	>=media-libs/tg_owt-0_pre20230921:=[screencast=,X=]
-	media-video/ffmpeg:=[opus,vpx]
+	>=media-libs/tg_owt-0_pre20241202:=[screencast=,X=]
+	>=media-video/ffmpeg-4:=[opus,vpx]
+	net-libs/tdlib:=[tde2e]
 	sys-libs/zlib:=[minizip]
+	kde-frameworks/kcoreaddons:6
 	!enchant? ( >=app-text/hunspell-1.7:= )
 	enchant? ( app-text/enchant:= )
-	jemalloc? ( dev-libs/jemalloc:= )
-	!qt6? (
-		>=dev-qt/qtcore-5.15:5=
-		>=dev-qt/qtgui-5.15:5=[dbus?,jpeg,png,wayland?,X?]
-		>=dev-qt/qtimageformats-5.15:5
-		>=dev-qt/qtnetwork-5.15:5[ssl]
-		>=dev-qt/qtsvg-5.15:5
-		>=dev-qt/qtwidgets-5.15:5[png,X?]
-		kde-frameworks/kcoreaddons:5
-		webkit? ( wayland? (
-			>=dev-qt/qtdeclarative-5.15:5
-			>=dev-qt/qtwayland-5.15:5[compositor(+)]
-		) )
-	)
-	qt6? (
-		>=dev-qt/qtbase-6.5:6=[dbus?,gui,network,opengl,wayland?,widgets,X?]
-		>=dev-qt/qtimageformats-6.5:6
-		>=dev-qt/qtsvg-6.5:6
-		webkit? ( wayland? (
-			>=dev-qt/qtdeclarative-6.5:6
-			>=dev-qt/qtwayland-6.5:6[compositor,qml]
-		) )
-	)
+	webkit? ( wayland? (
+		>=dev-qt/qtdeclarative-6.5:6
+		>=dev-qt/qtwayland-6.5:6[compositor(+),qml]
+	) )
 	X? (
 		x11-libs/libxcb:=
 		x11-libs/xcb-util-keysyms
@@ -72,8 +59,9 @@ RDEPEND="${CDEPEND}
 "
 DEPEND="${CDEPEND}
 	>=dev-cpp/cppgir-2.0_p20240315
-	>=dev-cpp/ms-gsl-4.1.0
+	dev-cpp/expected
 	dev-cpp/expected-lite
+	>=dev-cpp/ms-gsl-4.1.0
 	dev-cpp/range-v3
 "
 BDEPEND="
@@ -84,6 +72,18 @@ BDEPEND="
 	virtual/pkgconfig
 	wayland? ( dev-util/wayland-scanner )
 "
+
+S=${WORKDIR}/frk-v${PV}-full
+
+PATCHES=(
+	"${FILESDIR}"/tdesktop-5.14.3-system-cppgir.patch
+	"${FILESDIR}"/tdesktop-4.11.3-system-libyuv.patch
+	"${FILESDIR}"/option-to-disable-stories.patch
+	#"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
+	"${FILESDIR}"/invite-peeking-restrictions.patch
+	"${FILESDIR}"/saving-restrictions.patch
+	"${FILESDIR}"/0001-kde-theme-injection-fix.patch
+)
 
 pkg_pretend() {
 	if has ccache ${FEATURES}; then
@@ -101,11 +101,20 @@ src_prepare() {
 		\! -path './cmake/external/expected/CMakeLists.txt' \
 		\! -path './cmake/external/kcoreaddons/CMakeLists.txt' \
 		\! -path './cmake/external/qt/package.cmake' \
+		\! -path './cmake/external/lz4/CMakeLists.txt' \
+		\! -path './cmake/external/opus/CMakeLists.txt' \
+		\! -path './cmake/external/xxhash/CMakeLists.txt' \
 		-print0 | xargs -0 sed -i \
 		-e '/pkg_check_modules(/s/[^ ]*)/REQUIRED &/' \
-		-e '/find_package(/s/)/ REQUIRED)/' || die
+		-e '/find_package(/s/)/ REQUIRED)/' \
+		-e '/find_library(/s/)/ REQUIRED)/' || die
 	# Make sure to check the excluded files for new
 	# CMAKE_DISABLE_FIND_PACKAGE entries.
+
+	# Some packages are found through pkg_check_modules, rather than find_package
+	sed -e '/find_package(lz4 /d' -i cmake/external/lz4/CMakeLists.txt || die
+	sed -e '/find_package(Opus /d' -i cmake/external/opus/CMakeLists.txt || die
+	sed -e '/find_package(xxHash /d' -i cmake/external/xxhash/CMakeLists.txt || die
 
 	# Control QtDBus dependency from here, to avoid messing with QtGui.
 	# QtGui will use find_package to find QtDbus as well, which
@@ -118,7 +127,7 @@ src_prepare() {
 	# Control automagic dep only needed when USE="webkit wayland"
 	if ! use webkit || ! use wayland; then
 		sed -e 's/QT_CONFIG(wayland_compositor_quick)/0/' \
-			-i Telegram/Telegram/lib_webview/webview/platform/linux/webview_linux_compositor.h
+			-i Telegram/lib_webview/webview/platform/linux/webview_linux_compositor.h || die
 	fi
 
 	eapply --binary "${FILESDIR}/tdesktop-4.2.4-jemalloc-only-telegram-r1.patch"
@@ -145,9 +154,8 @@ src_configure() {
 	append-cppflags '-DNDEBUG'
 
 	local use_webkit_wayland=$(use webkit && use wayland && echo yes || echo no)
-	local qt=$(usex qt6 6 5)
 	local mycmakeargs=(
-		-DQT_VERSION_MAJOR=${qt}
+		-DQT_VERSION_MAJOR=6
 
 		# Override new cmake.eclass defaults (https://bugs.gentoo.org/921939)
 		# Upstream never tests this any other way
@@ -156,16 +164,14 @@ src_configure() {
 		# Control automagic dependencies on certain packages
 		## Header-only lib, some git version.
 		-DCMAKE_DISABLE_FIND_PACKAGE_tl-expected=ON
-		-DCMAKE_DISABLE_FIND_PACKAGE_Qt${qt}Quick=${use_webkit_wayland}
-		-DCMAKE_DISABLE_FIND_PACKAGE_Qt${qt}QuickWidgets=${use_webkit_wayland}
-		-DCMAKE_DISABLE_FIND_PACKAGE_Qt${qt}WaylandClient=$(usex !wayland)
-		-DCMAKE_DISABLE_FIND_PACKAGE_Qt${qt}WaylandCompositor=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6Quick=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6QuickWidgets=${use_webkit_wayland}
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandClient=$(usex !wayland)
+		#-DCMAKE_DISABLE_FIND_PACKAGE_QtQt6WaylandCompositor=${use_webkit_wayland}
 		## KF6CoreAddons is currently unavailable in ::gentoo
-		-DCMAKE_DISABLE_FIND_PACKAGE_KF${qt}CoreAddons=$(usex qt6)
+		#-DCMAKE_DISABLE_FIND_PACKAGE_KFQt6CoreAddons=ON
 
 		-DDESKTOP_APP_DISABLE_X11_INTEGRATION=$(usex !X)
-		#-DDESKTOP_APP_DISABLE_WAYLAND_INTEGRATION=$(usex !wayland)
-		-DDESKTOP_APP_DISABLE_JEMALLOC=$(usex !jemalloc)
 		## Enables enchant and disables hunspell
 		-DDESKTOP_APP_USE_ENCHANT=$(usex enchant)
 		## Use system fonts instead of bundled ones
@@ -204,24 +210,6 @@ pkg_postinst() {
 		ewarn "both the 'X' and 'screencast' USE flags are disabled, screen sharing won't work!"
 		ewarn
 	fi
-	if ! use jemalloc && use elibc_glibc; then
-		# https://github.com/telegramdesktop/tdesktop/issues/16084
-		# https://github.com/desktop-app/cmake_helpers/pull/91#issuecomment-881788003
-		ewarn "Disabling USE=jemalloc on glibc systems may cause very high RAM usage!"
-		ewarn "Do NOT report issues about RAM usage without enabling this flag first."
-		ewarn
-	fi
-	if use wayland && ! use qt6; then
-		ewarn "Wayland-specific integrations have been deprecated with Qt5."
-		ewarn "The app will continue to function under wayland, but some"
-		ewarn "functionality may be reduced."
-		ewarn "These integrations are only supported when built with Qt6."
-		ewarn
-	fi
 	optfeature_header
-	if ! use qt6; then
-		optfeature "AVIF, HEIF and JpegXL image support" kde-frameworks/kimageformats:5[avif,heif,jpegxl]
-	else
-		optfeature "AVIF, HEIF and JpegXL image support" kde-frameworks/kimageformats:6[avif,heif,jpegxl]
-	fi
+	optfeature "AVIF, HEIF and JpegXL image support" kde-frameworks/kimageformats:6[avif,heif,jpegxl]
 }
