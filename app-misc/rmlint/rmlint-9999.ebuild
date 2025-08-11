@@ -24,7 +24,7 @@ RDEPEND="gui? (
 		x11-libs/gtksourceview:3.0
 		$(python_gen_cond_dep '
 		doc? ( dev-python/sphinx )
-		dev-python/pygobject:
+		dev-python/pygobject:3
 		')
 		dev-libs/json-glib
 		gnome-base/librsvg:2
