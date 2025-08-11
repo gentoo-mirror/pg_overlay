@@ -73,8 +73,6 @@ BDEPEND="
 	wayland? ( dev-util/wayland-scanner )
 "
 
-S=${WORKDIR}/frk-v${PV}-full
-
 PATCHES=(
 	"${FILESDIR}"/tdesktop-5.14.3-system-cppgir.patch
 	"${FILESDIR}"/tdesktop-4.11.3-system-libyuv.patch
