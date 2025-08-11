@@ -32,7 +32,6 @@ dev-cpp/ms-gsl 4.2.0: Guideline Support Library implementation by Microsoft
 dev-cpp/pangomm 2.56.1: C++ interface for pango
 dev-cpp/tbb 2022.2.0: High level abstract threading library
 dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
-dev-db/sqlite 3.50.4_pre: SQL database engine
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.2: feature rich visual programming environment emulating Delphi
 dev-lang/lua 5.4.8_pre: A powerful light-weight programming language designed for extending applications
@@ -150,7 +149,6 @@ sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
 sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-devel/gettext 0.26_pre: GNU locale utilities
-sys-devel/mold 2.40.3: A Modern Linker
 sys-fs/avfs 1.2.0: Virtual filesystem that allows browsing of compressed files
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
