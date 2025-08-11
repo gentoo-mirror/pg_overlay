@@ -77,7 +77,6 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.10.0_beta1-drop-Werror.patch
 	"${FILESDIR}"/${PN}-1.9.6-update-gettext.patch
 )
 

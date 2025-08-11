@@ -54,7 +54,7 @@ BDEPEND="
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
 	"${FILESDIR}/${PN}-2.3.3-fix-exception.patch"
-	""${FILESDIR}/413.patch"
+	"${FILESDIR}/413.patch"
 )
 
 src_prepare() {
