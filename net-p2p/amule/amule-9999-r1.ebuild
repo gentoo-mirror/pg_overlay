@@ -132,7 +132,7 @@ src_install() {
 
 	if use daemon || use webserver; then
 		keepdir /var/lib/${PN}
-		fowners amule:amule /var/lib/${PN}
+		#fowners amule:amule /var/lib/${PN}
 		fperms 0750 /var/lib/${PN}
 	fi
 
