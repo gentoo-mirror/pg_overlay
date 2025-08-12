@@ -90,7 +90,7 @@ src_configure() {
 
 	if use gui; then
 		mycmakeargs+=(
-			-DBUILD_MONOLITHIC=OFF
+			-DBUILD_MONOLITHIC=ON
 			-DBUILD_REMOTEGUI=ON
 			-DBUILD_ALC=$(usex stats)
 			-DBUILD_ALCC=$(usex stats)
