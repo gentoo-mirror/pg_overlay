@@ -5,7 +5,7 @@ EAPI=8
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
 WX_GTK_VER="3.3-gtk3"
 
-inherit cmake git-r3 plocale wxwidgets xdg eapi9-ver
+inherit cmake git-r3 flag-o-matic plocale wxwidgets xdg eapi9-ver
 
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="https://www.amule.org/"
@@ -59,15 +59,20 @@ src_prepare() {
 }
 
 src_configure() {
+	setup-wxwidgets
+
+	use debug || append-cppflags -DwxDEBUG_LEVEL=0
+	append-cxxflags -std=gnu++14
+
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
-		-DASIO_SOCKETS=OFF
+		-DASIO_SOCKETS=ON
 		-DBUILD_ALCC=OFF
 		-DBUILD_AMULECMD=OFF
 		-DBUILD_CAS=OFF
-		-DENABLE_BOOST=OFF
-		-DENABLE_MMAP=OFF
+		-DENABLE_BOOST=ON
+		-DENABLE_MMAP=ON
 		-DBUILD_DAEMON=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
 		-DBUILD_WEBSERVER=$(usex webserver)
