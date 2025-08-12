@@ -13,18 +13,18 @@ EGIT_REPO_URI="https://github.com/${PN}-project/${PN}.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS=""
-IUSE="daemon debug geoip gui +nls stats upnp webserver"
+IUSE="daemon debug geoip +gui nls webserver stats upnp"
 
 RDEPEND="
 	dev-libs/boost:=
 	dev-libs/crypto++:=
-	sys-libs/binutils-libs:=
+	sys-libs/binutils-libs:0=
 	sys-libs/readline:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[gui?]
+	x11-libs/wxGTK:${WX_GTK_VER}=
 	daemon? ( acct-user/amule )
 	geoip? ( dev-libs/geoip )
+	gui? ( x11-libs/wxGTK:${WX_GTK_VER}=[gui] )
 	nls? ( virtual/libintl )
 	webserver? (
 		acct-user/amule
@@ -58,6 +58,9 @@ src_prepare() {
 	}
 	plocale_find_changes po "" ".po"
 	plocale_for_each_disabled_locale rem_locale
+
+	sed -i s/2.8/3.5/g src/libs/ec/abstracts/CMakeLists.txt
+
 	cmake_src_prepare
 }
 
@@ -70,15 +73,15 @@ src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
-		-DASIO_SOCKETS=OFF
+		-DASIO_SOCKETS=ON
 		-DBUILD_ALC=OFF
 		-DBUILD_ALCC=OFF
 		-DBUILD_AMULECMD=OFF
 		-DBUILD_CAS=OFF
 		-DBUILD_WXCAS=OFF
 		-DBUILD_FILEVIEW=OFF
-		-DENABLE_BOOST=OFF
-		-DENABLE_MMAP=OFF
+		-DENABLE_BOOST=ON
+		-DENABLE_MMAP=ON
 		-DBUILD_DAEMON=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
 		-DBUILD_WEBSERVER=$(usex webserver)
