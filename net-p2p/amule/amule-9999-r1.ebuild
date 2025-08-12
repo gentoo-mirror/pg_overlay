@@ -105,7 +105,7 @@ src_configure() {
 		)
 	else
 		myconf+=(
-			$(use_enable daemon monolithic)
+			--disable-monolithic
 			--disable-amule-gui
 			--disable-alc
 			--disable-wxcas
