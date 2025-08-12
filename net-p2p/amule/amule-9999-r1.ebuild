@@ -87,20 +87,24 @@ src_configure() {
 		--with-boost
 		$(use_enable debug)
 		$(use_enable daemon amule-daemon)
-		$(use_enable daemon monolithic)
 		$(use_enable geoip)
 		$(use_enable nls)
 		$(use_enable webserver webserver)
-		$(use_enable stats cas)
+		$(use_enable stats alc)
 		$(use_enable stats alcc)
+		$(use_enable stats cas)
+		$(use_enable stats wxcas)
 		$(use_enable upnp)
 		--enable-mmap
 	)
 
 	if use gui; then
 		myconf+=(
+			--enable-monolithic
 			$(use_enable gui amule-gui)
 			$(use_enable stats alc)
+			$(use_enable stats alcc)
+			$(use_enable stats cas)
 			$(use_enable stats wxcas)
 		)
 	else
@@ -108,6 +112,8 @@ src_configure() {
 			--disable-monolithic
 			--disable-amule-gui
 			--disable-alc
+			--disable-alcc
+			--disable-cas
 			--disable-wxcas
 		)
 	fi
