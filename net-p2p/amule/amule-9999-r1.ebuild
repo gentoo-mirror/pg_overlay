@@ -87,6 +87,7 @@ src_configure() {
 		--with-boost
 		$(use_enable debug)
 		$(use_enable daemon amule-daemon)
+		$(use_enable daemon monolithic)
 		$(use_enable geoip)
 		$(use_enable nls)
 		$(use_enable webserver webserver)

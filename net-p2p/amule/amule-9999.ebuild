@@ -74,15 +74,12 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
 		-DASIO_SOCKETS=ON
-		-DBUILD_ALC=OFF
-		-DBUILD_ALCC=OFF
 		-DBUILD_AMULECMD=OFF
-		-DBUILD_CAS=OFF
-		-DBUILD_WXCAS=OFF
 		-DBUILD_FILEVIEW=OFF
 		-DENABLE_BOOST=ON
 		-DENABLE_MMAP=ON
 		-DBUILD_DAEMON=$(usex daemon)
+		-BUILD_MONOLITHIC=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
 		-DBUILD_WEBSERVER=$(usex webserver)
 		-DENABLE_NLS=$(usex nls)
@@ -97,13 +94,17 @@ src_configure() {
 			-DBUILD_MONOLITHIC=OFF
 			-DBUILD_REMOTEGUI=ON
 			-DBUILD_ALC=$(usex stats)
+			-DBUILD_ALCC=$(usex stats)
+			-DBUILD_CAS=$(usex stats)
 			-DBUILD_WXCAS=$(usex stats)
 		)
 	else
 		mycmakeargs+=(
-			-DBUILD_MONOLITHIC=OFF
+			-DBUILD_MONOLITHIC=ON
 			-DBUILD_REMOTEGUI=OFF
 			-DBUILD_ALC=OFF
+			-DBUILD_ALCC=OFF
+			-DBUILD_CAS=OFF
 			-DBUILD_WXCAS=OFF
 		)
 	fi
