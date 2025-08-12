@@ -100,7 +100,7 @@ src_configure() {
 		)
 	else
 		mycmakeargs+=(
-			-DBUILD_MONOLITHIC=ON
+			-DBUILD_MONOLITHIC=OFF
 			-DBUILD_REMOTEGUI=OFF
 			-DBUILD_ALC=OFF
 			-DBUILD_ALCC=OFF
