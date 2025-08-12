@@ -9,7 +9,6 @@ app-emulation/nemu 3.3.1: Ncurses interface for QEMU
 app-emulation/vmware-modules 17.6.3-r2: VMware kernel modules
 app-i18n/enca 1.20 9999: Detect and convert encoding of text files
 app-misc/doublecmd 1.1.28: Cross Platform file manager.
-app-misc/rmlint 9999: rmlint finds space waste and other broken things on your filesystem and offers to remove it
 app-misc/worker 5.2.2: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
 app-office/libreoffice-l10n 25.2.1.2: Translations for the Libreoffice suite
