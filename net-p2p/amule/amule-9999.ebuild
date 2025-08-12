@@ -67,12 +67,12 @@ src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
-		-DASIO_SOCKETS=ON
+		-DASIO_SOCKETS=OFF
 		-DBUILD_ALCC=OFF
 		-DBUILD_AMULECMD=OFF
 		-DBUILD_CAS=OFF
 		-DENABLE_BOOST=OFF
-		-DENABLE_MMAP=ON
+		-DENABLE_MMAP=OFF
 		-DBUILD_DAEMON=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
 		-DBUILD_WEBSERVER=$(usex webserver)
