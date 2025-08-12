@@ -79,7 +79,6 @@ src_configure() {
 		-DENABLE_BOOST=ON
 		-DENABLE_MMAP=ON
 		-DBUILD_DAEMON=$(usex daemon)
-		-BUILD_MONOLITHIC=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
 		-DBUILD_WEBSERVER=$(usex webserver)
 		-DENABLE_NLS=$(usex nls)
