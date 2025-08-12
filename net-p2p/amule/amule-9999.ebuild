@@ -2,8 +2,8 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+WX_GTK_VER="3.2-gtk3"
 PLOCALES="ar ast bg ca cs da de el en_GB es et_EE eu fi fr gl he hr hu it it_CH ja ko_KR lt nl nn pl pt_BR pt_PT ro ru sl sq sv tr uk zh_CN zh_TW"
-WX_GTK_VER="3.3-gtk3"
 
 inherit cmake git-r3 flag-o-matic plocale wxwidgets xdg eapi9-ver
 
@@ -13,18 +13,18 @@ EGIT_REPO_URI="https://github.com/${PN}-project/${PN}.git"
 
 LICENSE="GPL-2+"
 SLOT="0"
-KEYWORDS=""
-IUSE="daemon debug geoip gui +nls stats upnp X webserver"
+IUSE="daemon debug geoip +gui nls webserver stats upnp"
 
 RDEPEND="
 	dev-libs/boost:=
 	dev-libs/crypto++:=
-	sys-libs/binutils-libs:=
+	sys-libs/binutils-libs:0=
 	sys-libs/readline:0=
 	sys-libs/zlib
-	>=x11-libs/wxGTK-3.0.4:${WX_GTK_VER}[gui?]
+	x11-libs/wxGTK:${WX_GTK_VER}=
 	daemon? ( acct-user/amule )
 	geoip? ( dev-libs/geoip )
+	gui? ( x11-libs/wxGTK:${WX_GTK_VER}=[gui] )
 	nls? ( virtual/libintl )
 	webserver? (
 		acct-user/amule
@@ -34,15 +34,18 @@ RDEPEND="
 	upnp? ( net-libs/libupnp:0 )
 "
 DEPEND="${RDEPEND}
-	X? ( dev-util/desktop-file-utils )
+	gui? ( dev-util/desktop-file-utils )
 "
 BDEPEND="
 	virtual/pkgconfig
+	>=dev-build/boost-m4-0.4_p20221019
 	nls? ( sys-devel/gettext )
 "
 
 PATCHES=(
 	"${FILESDIR}/${PN}-2.3.2-disable-version-check.patch"
+	"${FILESDIR}/${PN}-2.3.3-fix-exception.patch"
+	"${FILESDIR}/413.patch"
 )
 
 pkg_setup() {
@@ -55,6 +58,9 @@ src_prepare() {
 	}
 	plocale_find_changes po "" ".po"
 	plocale_for_each_disabled_locale rem_locale
+
+	sed -i s/2.8/3.5/g src/libs/ec/abstracts/CMakeLists.txt
+
 	cmake_src_prepare
 }
 
@@ -67,15 +73,15 @@ src_configure() {
 	local mycmakeargs=(
 		-DCMAKE_BUILD_TYPE=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
-		-DASIO_SOCKETS=OFF
-		-DBUILD_ALC=ON
-		-DBUILD_ALCC=ON
+		-DASIO_SOCKETS=ON
+		-DBUILD_ALC=OFF
+		-DBUILD_ALCC=OFF
 		-DBUILD_AMULECMD=OFF
-		-DBUILD_CAS=ON
-		-DBUILD_WXCAS=ON
-		-DBUILD_FILEVIEW=ON
-		-DENABLE_BOOST=OFF
-		-DENABLE_MMAP=OFF
+		-DBUILD_CAS=OFF
+		-DBUILD_WXCAS=OFF
+		-DBUILD_FILEVIEW=OFF
+		-DENABLE_BOOST=ON
+		-DENABLE_MMAP=ON
 		-DBUILD_DAEMON=$(usex daemon)
 		-DBUILD_TESTING=$(usex debug)
 		-DBUILD_WEBSERVER=$(usex webserver)
