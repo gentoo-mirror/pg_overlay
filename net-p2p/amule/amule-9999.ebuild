@@ -74,11 +74,7 @@ src_configure() {
 		-DCMAKE_BUILD_TYPE=Release
 		-DwxWidgets_CONFIG_EXECUTABLE="${WX_CONFIG}"
 		-DASIO_SOCKETS=ON
-		-DBUILD_ALC=OFF
-		-DBUILD_ALCC=OFF
 		-DBUILD_AMULECMD=OFF
-		-DBUILD_CAS=OFF
-		-DBUILD_WXCAS=OFF
 		-DBUILD_FILEVIEW=OFF
 		-DENABLE_BOOST=ON
 		-DENABLE_MMAP=ON
@@ -94,9 +90,11 @@ src_configure() {
 
 	if use gui; then
 		mycmakeargs+=(
-			-DBUILD_MONOLITHIC=OFF
+			-DBUILD_MONOLITHIC=ON
 			-DBUILD_REMOTEGUI=ON
 			-DBUILD_ALC=$(usex stats)
+			-DBUILD_ALCC=$(usex stats)
+			-DBUILD_CAS=$(usex stats)
 			-DBUILD_WXCAS=$(usex stats)
 		)
 	else
@@ -104,6 +102,8 @@ src_configure() {
 			-DBUILD_MONOLITHIC=OFF
 			-DBUILD_REMOTEGUI=OFF
 			-DBUILD_ALC=OFF
+			-DBUILD_ALCC=OFF
+			-DBUILD_CAS=OFF
 			-DBUILD_WXCAS=OFF
 		)
 	fi
