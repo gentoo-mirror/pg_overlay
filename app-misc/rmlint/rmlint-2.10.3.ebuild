@@ -64,6 +64,8 @@ DOCS=(CHANGELOG.md README.rst)
 PATCHES=(
 	# The build system tries to override several CFLAGS
 	"${FILESDIR}/${PN}-2.10.1-cflags.patch"
+	# https://github.com/sahib/rmlint/pull/520
+	"${FILESDIR}/${PN}-2.10.1-scons.patch"
 )
 
 src_prepare() {
