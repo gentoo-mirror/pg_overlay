@@ -96,6 +96,7 @@ src_test() {
 }
 
 src_install() {
+	touch docs/_build/man/rmlint.1
 	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr" install
 
 	# https://github.com/sahib/rmlint/pull/525
