@@ -81,11 +81,11 @@ src_configure() {
 		$(use_with gui)
 		$(use_with nls gettext)
 	)
-	escons "${scons_opts[@]}" config
+	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr" config
 }
 
 src_compile() {
-	escons "${scons_opts[@]}"
+	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr"
 }
 
 src_test() {
