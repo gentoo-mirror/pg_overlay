@@ -78,7 +78,6 @@ src_configure() {
 	tc-export AR CC
 	scons_opts=(
 		VERBOSE=1
-		$(use_with doc docs)
 		$(use_with gui)
 		$(use_with nls gettext)
 	)
