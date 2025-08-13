@@ -106,6 +106,7 @@ src_install() {
 		python_optimize
 	fi
 	#einstalldocs
+	find . -type f -name gschemas.compiled -delete
 }
 
 pkg_preinst() {
