@@ -97,9 +97,9 @@ src_install() {
 	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr" install
 
 	# https://github.com/sahib/rmlint/pull/525
-	if use doc; then
-		gzip -d "${ED}/usr/share/man/man1/rmlint.1.gz" || die
-	fi
+	#if use doc; then
+	#	gzip -d "${ED}/usr/share/man/man1/rmlint.1.gz" || die
+	#fi
 	if use gui; then
 		python_optimize
 	fi
