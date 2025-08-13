@@ -30,7 +30,7 @@ RDEPEND="
 		gnome-base/librsvg:2[introspection]
 		x11-libs/gdk-pixbuf[introspection]
 		x11-libs/gtk+:3[introspection]
-		x11-libs/gtksourceview:3.0[introspection]
+		x11-libs/gtksourceview:4[introspection]
 		x11-libs/pango[introspection]
 		$(python_gen_cond_dep '
 			dev-python/colorlog[${PYTHON_USEDEP}]
@@ -64,8 +64,6 @@ DOCS=(CHANGELOG.md README.rst)
 PATCHES=(
 	# The build system tries to override several CFLAGS
 	"${FILESDIR}/${PN}-2.10.1-cflags.patch"
-	# Skip problematic tests
-	"${FILESDIR}/${PN}-2.10.1-skip-tests.patch"
 )
 
 src_prepare() {
