@@ -1,10 +1,10 @@
 --- a/SConstruct
 +++ b/SConstruct
-@@ -509,7 +509,7 @@ AddOption(
+@@ -506,7 +506,7 @@ AddOption(
      action='store', metavar='DIR', help='libdir name (lib or lib64)'
  )
  
--for suffix in ['libelf', 'gettext', 'fiemap', 'blkid', 'json-glib', 'gui'. 'compile-glib-schemas']:
+-for suffix in ['libelf', 'gettext', 'fiemap', 'blkid', 'json-glib', 'gui', 'compile-glib-schemas']:
 +for suffix in ['libelf', 'gettext', 'fiemap', 'blkid', 'json-glib', 'gui', 'compile-glib-schemas', 'docs']:
      AddOption(
          '--without-' + suffix, action='store_const', default=False, const=False,
