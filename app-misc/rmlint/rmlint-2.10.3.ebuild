@@ -96,16 +96,18 @@ src_test() {
 }
 
 src_install() {
+	touch docs/_build/man/rmlint.1
 	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr" install
 
 	# https://github.com/sahib/rmlint/pull/525
-	#if use doc; then
-	#	gzip -d "${ED}/usr/share/man/man1/rmlint.1.gz" || die
-	#fi
+	if use doc; then
+		gzip -d "${ED}/usr/share/man/man1/rmlint.1.gz" || die
+	fi
 	if use gui; then
 		python_optimize
 	fi
-	#einstalldocs
+	einstalldocs
+	find ${ED} -type f -name gschemas.compiled -delete
 }
 
 pkg_preinst() {
