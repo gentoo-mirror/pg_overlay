@@ -96,7 +96,7 @@ src_test() {
 }
 
 src_install() {
-	touch docs/_build/man/rmlint.1
+	use !doc && touch docs/_build/man/rmlint.1
 	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr" install
 
 	# https://github.com/sahib/rmlint/pull/525
@@ -108,6 +108,7 @@ src_install() {
 	fi
 	einstalldocs
 	find ${ED} -type f -name gschemas.compiled -delete
+	use !doc && rm -r "${ED}/usr/share/man"
 }
 
 pkg_preinst() {
