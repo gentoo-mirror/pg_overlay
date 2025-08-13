@@ -64,6 +64,8 @@ DOCS=(CHANGELOG.md README.rst)
 PATCHES=(
 	# The build system tries to override several CFLAGS
 	"${FILESDIR}/${PN}-2.10.1-cflags.patch"
+	# https://github.com/sahib/rmlint/pull/520
+	"${FILESDIR}/${PN}-2.10.1-scons.patch"
 )
 
 src_prepare() {
@@ -78,15 +80,14 @@ src_configure() {
 	tc-export AR CC
 	scons_opts=(
 		VERBOSE=1
-		$(use_with doc docs)
 		$(use_with gui)
 		$(use_with nls gettext)
 	)
-	escons "${scons_opts[@]}" config
+	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr" config
 }
 
 src_compile() {
-	escons "${scons_opts[@]}"
+	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr"
 }
 
 src_test() {
@@ -98,13 +99,13 @@ src_install() {
 	escons "${scons_opts[@]}" --prefix="${ED}/usr" --actual-prefix="${EPREFIX}/usr" install
 
 	# https://github.com/sahib/rmlint/pull/525
-	if use doc; then
-		gzip -d "${ED}/usr/share/man/man1/rmlint.1.gz" || die
-	fi
+	#if use doc; then
+	#	gzip -d "${ED}/usr/share/man/man1/rmlint.1.gz" || die
+	#fi
 	if use gui; then
 		python_optimize
 	fi
-	einstalldocs
+	#einstalldocs
 }
 
 pkg_preinst() {
