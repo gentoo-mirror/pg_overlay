@@ -103,7 +103,7 @@ src_install() {
 	if use gui; then
 		python_optimize
 	fi
-	einstalldocs
+	#einstalldocs
 }
 
 pkg_preinst() {
