@@ -75,7 +75,7 @@ src_prepare() {
 
 src_configure() {
 	local mycmakeargs=(
-		-DENABLE_CATEGORIZED_VIEW=OFF
+		-DENABLE_CATEGORIZED_VIEW=ON
 		-DENABLE_CDPARANOIA=$(usex cdda)
 		-DENABLE_CDDB=$(usex cddb)
 		-DENABLE_CDIOPARANOIA=$(usex cdda)
