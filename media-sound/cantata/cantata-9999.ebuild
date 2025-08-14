@@ -56,7 +56,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	#"${FILESDIR}"/${PN}-3.3.0-rm-vendor.patch
+	"${FILESDIR}"/${PN}-3.3.0-rm-vendor.patch
 )
 
 src_prepare() {
