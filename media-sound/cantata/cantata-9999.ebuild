@@ -67,7 +67,7 @@ src_prepare() {
 	cmake_src_prepare
 
 	# Unbundle 3rd party libs
-	rm -r 3rdparty/{ebur128,kcategorizedview,qtsingleapplication,qxt,solid-lite} || die
+	rm -r 3rdparty/{kcategorizedview,qtsingleapplication,solid-lite} || die
 
 	plocale_find_changes "translations" "${PN}_" ".ts"
 	plocale_for_each_disabled_locale remove_locale
