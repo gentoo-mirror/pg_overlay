@@ -77,9 +77,9 @@ llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 141.0: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/imagemagick 7.1.1.47: A collection of tools and libraries for many image formats
-media-libs/gst-plugins-base 1.26.4_pre: Basepack of plugins for gstreamer
-media-libs/gst-plugins-good 1.26.4_pre: Basepack of plugins for GStreamer
-media-libs/gstreamer 1.26.4_pre: Open source multimedia framework
+media-libs/gst-plugins-base 1.26.5_pre: Basepack of plugins for gstreamer
+media-libs/gst-plugins-good 1.26.5_pre: Basepack of plugins for GStreamer
+media-libs/gstreamer 1.26.5_pre: Open source multimedia framework
 media-libs/kvazaar 2.3.1: Open-source HEVC encoder
 media-libs/libjpeg-turbo 3.1.1: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
