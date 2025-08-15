@@ -35,7 +35,7 @@ dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.2: feature rich visual programming environment emulating Delphi
 dev-lang/lua 5.4.8_pre: A powerful light-weight programming language designed for extending applications
-dev-lang/python 3.13.6: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.13.6_p1: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/blake3 1.8.2: a fast cryptographic hash function
 dev-libs/dbus-glib 0.114: D-Bus bindings for glib
