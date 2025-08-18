@@ -67,7 +67,7 @@ src_configure() {
 		$(usev heif)
 		$(usev raw libraw)
 	)
-	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --release
+	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui")
 }
 
 src_test() {
