@@ -8,7 +8,7 @@ CRATES="
 
 RUST_MIN_VER="1.85.0"
 
-inherit cargo desktop git xdg virtualx
+inherit cargo desktop git-r3 xdg virtualx
 
 DESCRIPTION="App to find duplicates, empty folders and similar images"
 HOMEPAGE="https://github.com/qarmin/czkawka"
