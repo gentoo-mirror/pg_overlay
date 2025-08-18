@@ -66,9 +66,8 @@ src_configure() {
 	local myfeatures=(
 		$(usev heif)
 		$(usev raw libraw)
-		winit_skia_opengl
 	)
-	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin krokiet")
+	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --release
 }
 
 src_test() {
@@ -78,7 +77,7 @@ src_test() {
 src_install() {
 	dobin $(cargo_target_dir)/czkawka_cli
 
-	use gtk && dobin $(cargo_target_dir)/krokiet
+	use gtk && dobin $(cargo_target_dir)czkawka_gui
 
 	if use gui; then
 		doicon data/icons/com.github.qarmin.czkawka.svg
