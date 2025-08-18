@@ -66,7 +66,6 @@ src_configure() {
 	local myfeatures=(
 		$(usev heif)
 		$(usev raw libraw)
-		skia_vulkan
 	)
 	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin krokiet")
 }
