@@ -81,7 +81,7 @@ multilib_src_configure() {
 	use wayland || append-cflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
 	use gui || aappend-cflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
 	use wayland || append-cppflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
-	use X || append-cppflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
+	use gui || append-cppflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
 
 	# Workaround for bug #915154
 	append-ldflags $(test-flags-CCLD -Wl,--undefined-version)
