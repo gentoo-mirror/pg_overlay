@@ -80,6 +80,8 @@ multilib_src_configure() {
 	# defang automagic dependencies, bug #927952
 	use wayland || append-cflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
 	use gui || aappend-cflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
+	use wayland || append-cppflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
+	use X || append-cppflags -DGENTOO_GTK_HIDE_WAYLAND -DGENTOO_GTK_HIDE_X11
 
 	# Workaround for bug #915154
 	append-ldflags $(test-flags-CCLD -Wl,--undefined-version)
@@ -90,7 +92,7 @@ multilib_src_configure() {
 		--with-expat=sys
 		--disable-compat30
 		--enable-xrc
-		--disable-symver
+		#--disable-symver
 		$(use_with sdl)
 		$(use_with lzma liblzma)
 		# Currently defaults to curl, could change.  Watch the VDB!
