@@ -24,7 +24,6 @@ DEPEND="test? ( dev-cpp/gtest )"
 
 PATCHES=(
 	"${FILESDIR}/system-gtest.patch"
-	"${FILESDIR}/backport-e29571f-issue-175.patch"
 )
 
 src_prepare() {
