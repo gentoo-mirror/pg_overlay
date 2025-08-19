@@ -142,6 +142,21 @@ media-libs/mesa:vdpau - Enable the VDPAU acceleration interface for the Gallium3
 media-libs/mesa:vulkan-overlay - Build vulkan-overlay-layer which displays Frames Per Second and other statistics
 media-libs/mesa:wayland - Enable support for dev-libs/wayland
 media-libs/mesa:xa - Enable the XA (X Acceleration) API for Gallium3D.
+media-libs/vapoursynth:debug - Enable compilation options required for debugging
+media-libs/vapoursynth:doc - Install project documentation
+media-libs/vapoursynth:guard - Adds 32 bytes on the left and the right sides of each frame, fills them with a certain value, and checks their integrity after each filter. It can be used to detect buggy filters that write a little outside the frame
+media-libs/vapoursynth:shared - Build shared libraries
+media-libs/vapoursynth:static - Build static libraries
+media-libs/vapoursynth:vapoursynth_plugins_eedi3 - Enable slow edge directed interpolation filterplugin
+media-libs/vapoursynth:vapoursynth_plugins_imagemagick - Enable Image Reader/Writer plugin using media-gfx/imagemagick
+media-libs/vapoursynth:vapoursynth_plugins_miscfilters - Enable miscfilters plugin
+media-libs/vapoursynth:vapoursynth_plugins_morpho - Enable simple morphological filters plugin
+media-libs/vapoursynth:vapoursynth_plugins_ocr - Enable video frames Optical Character Recognition plugin using app-text/tesseract
+media-libs/vapoursynth:vapoursynth_plugins_removegrain - Enable Remove Grain plugin
+media-libs/vapoursynth:vapoursynth_plugins_subtext - Enable SSA/ASS subtitles plugin using media-libs/libass
+media-libs/vapoursynth:vapoursynth_plugins_vinverse - Enable residual combing removal plugin
+media-libs/vapoursynth:vapoursynth_plugins_vivtc - Enable Inverse Telecine and Decimation plugin
+media-libs/vapoursynth:vspipe - Enable support for piping output
 media-sound/cantata:cdio - Use dev-libs/libcdio-paranoia for CD support (instead of cdparanoia)
 media-sound/cantata:http-server - Enable internal HTTP server to play non-MPD files
 media-sound/cantata:replaygain - Enable ReplayGain support, for relative volume adjustments
