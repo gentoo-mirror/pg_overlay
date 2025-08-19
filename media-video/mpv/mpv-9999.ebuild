@@ -102,6 +102,7 @@ COMMON_DEPEND="
 	)
 	zimg? ( media-libs/zimg )
 	zlib? ( sys-libs/zlib:= )
+	vapoursynth ( media-libs/vapoursynth )
 "
 RDEPEND="
 	${COMMON_DEPEND}
@@ -215,6 +216,8 @@ src_configure() {
 		$(meson_feature nvenc cuda-hwaccel)
 		$(meson_feature vaapi)
 		$(meson_feature vdpau)
+
+		$(meson_feature vapoursynth)
 	)
 
 	meson_src_configure
