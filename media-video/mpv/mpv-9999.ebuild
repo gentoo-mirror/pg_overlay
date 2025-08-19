@@ -25,7 +25,7 @@ IUSE="
 	dvd +egl gamepad +iconv jack javascript jpeg lcms libcaca +libmpv
 	+lua nvenc openal pipewire pulseaudio rubberband sdl selinux sixel
 	sndio soc test tools +uchardet vaapi vdpau +vulkan wayland xv zimg
-	zlib
+	zlib vapoursynth
 "
 REQUIRED_USE="
 	${PYTHON_REQUIRED_USE}
