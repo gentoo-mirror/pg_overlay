@@ -13,6 +13,7 @@ app-emulation/nemu:ovf - Adds support for OVA/OVF import
 app-emulation/nemu:remote-api - Adds API for remote control
 app-emulation/nemu:spice - Adds Spice protocol support
 app-emulation/nemu:vnc-client - Adds support for external VNC client
+app-misc/jdupes:dedupe - Enable deduplication support
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-office/libreoffice:base - Enable full support for LibreOffice Base databases (involves additional bundled libs)
 app-office/libreoffice:clang - Use Clang compiler instead of GCC
