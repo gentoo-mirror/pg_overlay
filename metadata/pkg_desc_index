@@ -144,7 +144,7 @@ net-misc/freerdp 3.15.0: Free implementation of the Remote Desktop Protocol
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-nds/rpcbind 1.2.8_rc2: portmap replacement which supports RPC over various protocols
 net-p2p/amule 2.3.3-r7 9999 9999-r1: aMule, the all-platform eMule p2p client
-net-p2p/mldonkey 9999 9999-r1: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
+net-p2p/mldonkey 9999: Multi-network P2P application written in Ocaml, with Gtk, web & telnet interface
 net-p2p/nicotine+ 9999: Graphical client for the Soulseek peer to peer network written in Python
 net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 0.15.5 9999 9999-r1: BitTorrent Client using libtorrent
