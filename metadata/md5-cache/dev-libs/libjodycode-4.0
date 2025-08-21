@@ -1,0 +1,9 @@
+DEFINED_PHASES=compile install
+DESCRIPTION=Shared code used by several utilities written by Jody Bruchon
+EAPI=8
+HOMEPAGE=https://codeberg.org/jbruchon/libjodycode
+KEYWORDS=~amd64 ~arm64 ~riscv
+LICENSE=MIT
+SLOT=0
+SRC_URI=https://codeberg.org/jbruchon/libjodycode/archive/v4.0.tar.gz -> libjodycode-4.0.tar.gz
+_md5_=c48f16a631eff5ec90cb6ac420d4e5ff
