@@ -72,6 +72,7 @@ dev-libs/xmlrpc-c:abyss - Build the Abyss mini web-server.
 dev-libs/xmlrpc-c:libxml2 - Use dev-libs/libxml2 to parse XML instead of the internal expat library.
 dev-libs/xmlrpc-c:threads - Controls whether to build the Abyss web-server with pthreads or fork 'threading'.
 dev-libs/xmlrpc-c:tools - Build the xmlrpc* tools.
+dev-ml/uutf:utftrip - Builds and install the utftrip executable: Among other things, reads unicode on stdin and rewrites it on stdout.
 dev-util/librnp:botan - Use Botan crypto backend instead of OpenSSL
 dev-util/mingw64-toolchain:bin-symlinks - Symlink executables to usr/bin to be in default PATH (conflicts with crossdev mingw, and crossdev is preferable for a fully featured toolchain)
 dev-util/scanmem:gui - Enable the GameConqueror GUI

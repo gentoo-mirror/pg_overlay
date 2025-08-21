@@ -51,6 +51,12 @@ dev-libs/tinyxml2 11.0.0: A simple, small, efficient, C++ XML parser
 dev-libs/utfcpp 4.0.6: UTF-8 C++ library
 dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
+dev-ml/dune 3.20.0: A composable build system for OCaml
+dev-ml/dune-configurator 3.20.0: Helper library for gathering system configuration
+dev-ml/ocaml_intrinsics_kernel 0.17.1: Functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
+dev-ml/opam-file-format 2.2.0: Parser and printer for the opam file syntax
+dev-ml/topkg 1.1.0: The transitory OCaml software packager
+dev-ml/uutf 1.0.4: Non-blocking streaming Unicode codec for OCaml
 dev-python/cloudscraper 1.2.69-r1: A Python module to bypass Cloudflare's anti-bot page
 dev-python/html5lib 9999: HTML parser based on the HTML5 specification
 dev-python/wheel 0.46.1: A built-package format for Python
