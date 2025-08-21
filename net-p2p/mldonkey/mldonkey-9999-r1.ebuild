@@ -62,7 +62,7 @@ src_prepare() {
 }
 
 src_configure() {
-	append-cflags -std=gnu17
+	#append-cflags -std=gnu17
 
 	local myconf=()
 
