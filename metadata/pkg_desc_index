@@ -53,8 +53,13 @@ dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/dune 3.20.0: A composable build system for OCaml
 dev-ml/dune-configurator 3.20.0: Helper library for gathering system configuration
+dev-ml/graphics 5.2.0: The OCaml graphics library
 dev-ml/ocaml_intrinsics_kernel 0.17.1: Functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
+dev-ml/ocamlgraph 2.2.0: O'Caml Graph library
+dev-ml/ocurl 0.10.0: OCaml interface to the libcurl library
+dev-ml/opam-common 2.4.1: Core libraries for opam
 dev-ml/opam-file-format 2.2.0: Parser and printer for the opam file syntax
+dev-ml/opam-installer 2.4.1: Core installer for opam packages
 dev-ml/topkg 1.1.0: The transitory OCaml software packager
 dev-ml/uutf 1.0.4: Non-blocking streaming Unicode codec for OCaml
 dev-python/cloudscraper 1.2.69-r1: A Python module to bypass Cloudflare's anti-bot page
