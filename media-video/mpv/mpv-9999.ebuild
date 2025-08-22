@@ -126,7 +126,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-0.40.0-ffmpeg8.patch
+	"${FILESDIR}"/${PN}-0.40.0-wayland-clipboard-cpu.patch
 )
 
 pkg_pretend() {
