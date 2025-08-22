@@ -46,6 +46,7 @@ dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libjodycode 4.0: Shared code used by several utilities written by Jody Bruchon
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
+dev-libs/protobuf 32.0: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/spdlog 1.15.3: Fast C++ logging library
 dev-libs/tinyxml2 11.0.0: A simple, small, efficient, C++ XML parser
 dev-libs/utfcpp 4.0.6: UTF-8 C++ library
