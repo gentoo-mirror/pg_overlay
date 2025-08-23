@@ -102,7 +102,6 @@ media-libs/libwebp 1.6.0_pre: A lossy image compression format
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
-media-libs/shaderc 2025.3: Collection of tools, libraries and tests for shader compilation
 media-libs/tg_owt 0_pre20250515 0_pre20250703: WebRTC build for Telegram
 media-libs/vapoursynth 72: VapourSynth is an library for video manipulation.
 media-libs/zimg 3.0.6: Scaling, colorspace conversion, and dithering library
