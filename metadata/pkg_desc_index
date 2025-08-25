@@ -53,9 +53,6 @@ dev-libs/tinyxml2 11.0.0: A simple, small, efficient, C++ XML parser
 dev-libs/utfcpp 4.0.6: UTF-8 C++ library
 dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
-dev-ml/dune 3.20.0: A composable build system for OCaml
-dev-ml/dune-configurator 3.20.0: Helper library for gathering system configuration
-dev-ml/graphics 5.2.0: The OCaml graphics library
 dev-ml/ocaml_intrinsics_kernel 0.17.1: Functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
 dev-ml/ocamlgraph 2.2.0: O'Caml Graph library
 dev-ml/ocurl 0.10.0: OCaml interface to the libcurl library
@@ -171,6 +168,7 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.15.0: XFS filesystem utilities
+sys-libs/liburing 2.12_pre: Efficient I/O with io_uring
 sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
 www-client/firefox 142.0: Firefox Web Browser
