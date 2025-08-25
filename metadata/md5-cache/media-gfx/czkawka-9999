@@ -16,4 +16,4 @@ RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://github.com/rust-skia/skia-binaries/releases/download/0.86.1/skia-binaries-32aa5672b7c0a651ab5e-x86_64-unknown-linux-gnu-gl-pdf-textlayout-vulkan.tar.gz https://codeload.github.com/rust-skia/skia/tar.gz/m137-0.85.0 -> skia-m137-0.85.0.tar.gz
 _eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	rust	2c958ff95a0fd21c1cb19e961cb2946d	rust-toolchain	76468983281b0a7fc167ca224f84ecfd	cargo	5da01b45ec362e78575502b4fb82773a	desktop	3a72ffe0d8e1dd73af3a1c8c15a59fed	git-r3	875eb471682d3e1f18da124be97dcc81	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	xdg	3ef49a87c52c8b77c476351195dfe575	virtualx	9741d451eb64ea8bb9faee90d68a9b68
-_md5_=358e30934833d6f741ba0caa2ff4bfa4
+_md5_=efa3d33753886e72666d2b3d6b80ee7c
