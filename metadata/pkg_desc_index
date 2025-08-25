@@ -87,7 +87,7 @@ llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 142.0: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/czkawka 9999: App to find duplicates, empty folders and similar images
-media-gfx/imagemagick 7.1.2.1: A collection of tools and libraries for many image formats
+media-gfx/imagemagick 7.1.2.2: A collection of tools and libraries for many image formats
 media-libs/gst-plugins-base 1.26.5_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.5_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.5_pre: Open source multimedia framework
