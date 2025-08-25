@@ -13,7 +13,8 @@ inherit cargo desktop git-r3 xdg virtualx
 DESCRIPTION="App to find duplicates, empty folders and similar images"
 HOMEPAGE="https://github.com/qarmin/czkawka"
 EGIT_REPO_URI="https://github.com/qarmin/${PN}.git"
-
+SRC_URI="https://github.com/rust-skia/skia-binaries/releases/download/0.86.1/skia-binaries-32aa5672b7c0a651ab5e-x86_64-unknown-linux-gnu-gl-pdf-textlayout-vulkan.tar.gz
+		https://codeload.github.com/rust-skia/skia/tar.gz/m137-0.85.0 -> skia-m137-0.85.0.tar.gz"
 # questionable license for gtk gui assets
 # https://github.com/qarmin/czkawka/issues/1029
 LICENSE="MIT gtk? ( CC-BY-4.0 ) "
@@ -66,6 +67,9 @@ src_configure() {
 	local myfeatures=(
 		$(usev heif)
 		$(usev raw libraw)
+		femtovg
+		winit_femtovg
+		skia_vulkan
 		winit_skia_vulkan
 	)
 	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --bin krokiet
