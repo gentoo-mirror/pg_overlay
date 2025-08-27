@@ -22,11 +22,9 @@ fi
 LICENSE="CC-BY-SA-4.0 GPL-2+" # default skin & source code
 SLOT="0"
 # KEYWORDS further up
-# NOTE: moving mms to qmmp-plugin-pack soon:
-# https://sourceforge.net/p/qmmp-dev/code/12062/
 IUSE="aac +alsa archive bs2b cdda cddb curl +dbus doc enca
-ffmpeg flac game gnome jack ladspa libxmp +mad midi mms mpg123
-mplayer musepack opus pipewire projectm pulseaudio qtmedia
+ffmpeg flac game gnome jack ladspa libxmp +mad midi mpg123
+musepack opus pipewire projectm pulseaudio qtmedia
 shout sid sndfile soxr +vorbis wavpack
 analyzer cover crossfade cue lyrics notifier oss qsui scrobbler stereo tray udisks
 "
@@ -59,9 +57,7 @@ RDEPEND="
 	libxmp? ( media-libs/libxmp )
 	mad? ( media-libs/libmad )
 	midi? ( media-sound/wildmidi )
-	mms? ( media-libs/libmms )
 	mpg123? ( media-sound/mpg123-base )
-	mplayer? ( media-video/mplayer )
 	musepack? ( >=media-sound/musepack-tools-444 )
 	opus? ( media-libs/opusfile )
 	pipewire? ( media-video/pipewire:= )
@@ -159,9 +155,7 @@ src_configure() {
 		-DUSE_LYRICS="$(usex lyrics)"
 		-DUSE_MAD="$(usex mad)"
 		-DUSE_MIDI="$(usex midi)"
-		-DUSE_MMS="$(usex mms)"
 		-DUSE_MPG123="$(usex mpg123)"
-		-DUSE_MPLAYER="$(usex mplayer)"
 		-DUSE_MPC="$(usex musepack)"
 		-DUSE_NOTIFIER="$(usex notifier)"
 		-DUSE_OPUS="$(usex opus)"
@@ -188,8 +182,6 @@ src_configure() {
 		-DUSE_SB=OFF
 		-DCMAKE_BUILD_TYPE=Release
 		-DQMMP_DEFAULT_OUTPUT=pipewire
-		# custom option
-		-DUSE_XCB=OFF
 	)
 	cmake_src_configure
 }
