@@ -182,8 +182,6 @@ src_configure() {
 		-DUSE_SB=OFF
 		-DCMAKE_BUILD_TYPE=Release
 		-DQMMP_DEFAULT_OUTPUT=pipewire
-		# custom option
-		-DUSE_XCB=OFF
 	)
 	cmake_src_configure
 }
