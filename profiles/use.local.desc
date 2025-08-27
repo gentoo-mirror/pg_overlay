@@ -248,31 +248,21 @@ media-sound/ncmpcpp:clock - Enable clock screen
 media-sound/ncmpcpp:lto - Build with link-time optimisation
 media-sound/ncmpcpp:outputs - Enable outputs screen
 media-sound/ncmpcpp:visualizer - Enable visualizer screen with sound wave/frequency spectrum modes
-media-sound/qmmp:analyzer - Enable visual analyzer
 media-sound/qmmp:archive - Enable archiving plugin via app-arch/libarchive.
 media-sound/qmmp:bs2b - Enable Bauer stereophonic-to-binaural headphone filter
-media-sound/qmmp:cover - Enable album cover support
-media-sound/qmmp:crossfade - Enable crossfade effect when switching tracks
-media-sound/qmmp:cue - enable CUE sheet parsing
 media-sound/qmmp:dbus - Enable DBus notifiications and MPRIS support
 media-sound/qmmp:enca - Detects the character encoding automatically
 media-sound/qmmp:game - Enable Game music support
 media-sound/qmmp:gnome - Enable Gnome hotkey support (requires QtDBus)
 media-sound/qmmp:libxmp - Enable module files renderer (modplug replacement) via media-libs/libxmp
-media-sound/qmmp:lyrics - Fetch track lyrics from the web
 media-sound/qmmp:midi - Enable midi support using wildmidi library
-media-sound/qmmp:notifier - Enable qmmps' notifier system
+media-sound/qmmp:mpg123 - Enable support for MPEG audio playback via media-sound/mpg123
 media-sound/qmmp:pipewire - Enable PipeWire output plugin
 media-sound/qmmp:projectm - Enable projectm music visualization plugin
-media-sound/qmmp:qsui - Enable QMMP simple UI
 media-sound/qmmp:qtmedia - Enable playback via dev-qt/qtmultimedia
-media-sound/qmmp:scrobbler - Enable audioscrobbler/last.fm support
 media-sound/qmmp:shout - Enable shoutcast plug-in via media-libs/libshout.
 media-sound/qmmp:sndfile - Enable wav playback support via media-libs/libsndfile
 media-sound/qmmp:soxr - Use the SoX resampling library
-media-sound/qmmp:stereo - Enable stereo effect
-media-sound/qmmp:tray - Build tray icon
-media-sound/qmmp:xmp - Enable module files renderer (modplug replacement)
 media-sound/strawberry:chromaprint - Enables audio fingerprinting support with media-libs/chromaprint
 media-sound/strawberry:loudness - Enable loudness normalisation according to the EBU R128 standard using media-libs/libebur128
 media-sound/strawberry:moodbar - Enable moodbar support
