@@ -89,12 +89,6 @@ BDEPEND="
 	dev-qt/qttools:6[linguist]
 	doc? ( app-text/doxygen )
 "
-
-PATCHES=(
-	# Avoid using xcb if qmmp is built without X but qtbase has xcb feature.
-	"${FILESDIR}"/${PN}-2.2.8-fix_xcb.patch
-)
-
 DOCS=( AUTHORS ChangeLog README )
 
 src_prepare() {
