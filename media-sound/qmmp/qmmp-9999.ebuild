@@ -24,10 +24,11 @@ SLOT="0"
 # KEYWORDS further up
 # NOTE: moving mms to qmmp-plugin-pack soon:
 # https://sourceforge.net/p/qmmp-dev/code/12062/
-IUSE="X aac +alsa archive bs2b cdda cddb curl +dbus doc enca
+IUSE="aac +alsa archive bs2b cdda cddb curl +dbus doc enca
 ffmpeg flac game gnome jack ladspa libxmp +mad midi mms mpg123
 mplayer musepack opus pipewire projectm pulseaudio qtmedia
 shout sid sndfile soxr +vorbis wavpack
+analyzer cover crossfade%) cue lyrics notifier oss qsui scrobbler stereo tray udisks
 "
 REQUIRED_USE="
 	cddb? ( cdda )
