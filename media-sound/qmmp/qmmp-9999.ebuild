@@ -4,29 +4,32 @@
 EAPI=8
 PLOCALES="bg cs de el en es fi fr gl_ES he hu id it ja kk ko lt nl pl_PL pt pt_BR ru sk sr_BA sr_RS tr uk_UA zh_CN zh_TW"
 
-inherit cmake xdg plocale
-[[ ${PV} = 9999 ]] && inherit subversion
+inherit cmake optfeature xdg
 
-DESCRIPTION="Q6-based audio player with winamp/xmms skins support"
-HOMEPAGE="http://qmmp.ylsoftware.com"
-if [[ ${PV} != 9999 ]]; then
-	SRC_URI="http://qmmp.ylsoftware.com/files/${P}.tar.bz2
-		mirror://sourceforge/${PN}-dev/files/${P}.tar.bz2"
+DESCRIPTION="Qt-based audio player with winamp/xmms skins support"
+HOMEPAGE="https://qmmp.ylsoftware.com"
+if [[ ${PV} != *9999* ]]; then
+	SRC_URI="
+		https://qmmp.ylsoftware.com/files/qmmp/$(ver_cut 1-2)/${P}.tar.bz2
+		https://downloads.sourceforge.net/project/qmmp-dev/qmmp/$(ver_cut 1-2)/${P}.tar.bz2
+	"
 	KEYWORDS="~amd64 ~x86"
 else
+	inherit subversion
 	ESVN_REPO_URI="svn://svn.code.sf.net/p/${PN}-dev/code/trunk/${PN}"
-	#QMMP_DEV_BRANCH="2.2"
-	#ESVN_REPO_URI="svn://svn.code.sf.net/p/${PN}-dev/code/branches/${PN}-${QMMP_DEV_BRANCH}"
 fi
 
 LICENSE="CC-BY-SA-4.0 GPL-2+" # default skin & source code
 SLOT="0"
 # KEYWORDS further up
-IUSE="aac +alsa analyzer archive bs2b cdda cover cddb crossfade cue curl +dbus doc enca
-ffmpeg flac game gnome jack ladspa libxmp lyrics +mad midi mpg123 mplayer musepack
-notifier opus oss pipewire projectm pulseaudio qsui qtmedia scrobbler shout sid
-sndfile soxr stereo tray udisks +vorbis wavpack"
-
+# NOTE: moving mms to qmmp-plugin-pack soon:
+# https://sourceforge.net/p/qmmp-dev/code/12062/
+IUSE="aac +alsa archive bs2b cdda cddb curl +dbus doc enca
+ffmpeg flac game gnome jack ladspa libxmp +mad midi mms mpg123
+mplayer musepack opus pipewire projectm pulseaudio qtmedia
+shout sid sndfile soxr +vorbis wavpack
+analyzer cover crossfade cue lyrics notifier oss qsui scrobbler stereo tray udisks
+"
 REQUIRED_USE="
 	cddb? ( cdda )
 	gnome? ( dbus )
@@ -56,6 +59,7 @@ RDEPEND="
 	libxmp? ( media-libs/libxmp )
 	mad? ( media-libs/libmad )
 	midi? ( media-sound/wildmidi )
+	mms? ( media-libs/libmms )
 	mpg123? ( media-sound/mpg123-base )
 	mplayer? ( media-video/mplayer )
 	musepack? ( >=media-sound/musepack-tools-444 )
@@ -85,7 +89,6 @@ BDEPEND="
 	dev-qt/qttools:6[linguist]
 	doc? ( app-text/doxygen )
 "
-
 DOCS=( AUTHORS ChangeLog README )
 
 src_prepare() {
@@ -156,6 +159,7 @@ src_configure() {
 		-DUSE_LYRICS="$(usex lyrics)"
 		-DUSE_MAD="$(usex mad)"
 		-DUSE_MIDI="$(usex midi)"
+		-DUSE_MMS="$(usex mms)"
 		-DUSE_MPG123="$(usex mpg123)"
 		-DUSE_MPLAYER="$(usex mplayer)"
 		-DUSE_MPC="$(usex musepack)"
@@ -184,6 +188,8 @@ src_configure() {
 		-DUSE_SB=OFF
 		-DCMAKE_BUILD_TYPE=Release
 		-DQMMP_DEFAULT_OUTPUT=pipewire
+		# custom option
+		-DUSE_XCB=OFF
 	)
 	cmake_src_configure
 }
