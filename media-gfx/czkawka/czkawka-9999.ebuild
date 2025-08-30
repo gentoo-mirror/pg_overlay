@@ -71,7 +71,7 @@ src_configure() {
 	#	skia_vulkan
 	#	winit_skia_vulkan
 	#)
-	cargo_src_configure --features "skia_vulkan winit_skia_vulkan"
+	cargo_src_configure --features skia_vulkan --features winit_skia_vulkan
 
 	#cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --bin krokiet
 }
