@@ -44,7 +44,7 @@ dev-libs/dbus-glib 0.114: D-Bus bindings for glib
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 6.1.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
-dev-libs/libjodycode 4.0: Shared code used by several utilities written by Jody Bruchon
+dev-libs/libjodycode 4.0.1: Shared code used by several utilities written by Jody Bruchon
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 32.0: Google's Protocol Buffers - Extensible mechanism for serializing structured data
