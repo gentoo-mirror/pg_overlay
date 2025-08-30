@@ -68,12 +68,8 @@ src_configure() {
 		$(usev raw libraw)
 		femtovg
 		winit_femtovg
-		skia_vulkan
-		winit_skia_vulkan
 	)
-	cargo_src_configure --bin czkawka_cli $(usev gui "--bin czkawka_gui") --bin krokiet
-
-	#cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --bin krokiet
+	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --bin krokiet
 }
 
 src_test() {
