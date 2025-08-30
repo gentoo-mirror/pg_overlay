@@ -63,17 +63,13 @@ src_unpack() {
 
 
 src_configure() {
-	#local myfeatures=(
-	#	$(usev heif)
-	#	$(usev raw libraw)
-	#	femtovg
-	#	winit_femtovg
-	#	skia_vulkan
-	#	winit_skia_vulkan
-	#)
-	cargo_src_configure --features skia_vulkan --features winit_skia_vulkan
-
-	#cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --bin krokiet
+	local myfeatures=(
+		$(usev heif)
+		$(usev raw libraw)
+		femtovg
+		winit_femtovg
+	)
+	cargo_src_configure --no-default-features --bin czkawka_cli $(usev gui "--bin czkawka_gui") --bin krokiet
 }
 
 src_test() {
