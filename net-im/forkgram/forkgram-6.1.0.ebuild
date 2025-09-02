@@ -10,8 +10,8 @@ inherit xdg cmake python-any-r1 optfeature flag-o-matic
 DESCRIPTION="Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature"
 HOMEPAGE="https://github.com/forkgram/tdesktop"
 
-SRC_URI="https://github.com/${PN}/tdesktop/releases/download/v${PV}/frk-v${PV}-full.tar.gz"
-S="${WORKDIR}/${P}-full"
+#SRC_URI="https://github.com/${PN}/tdesktop/releases/download/v${PV}/frk-v${PV}-full.tar.gz"
+SRC_URI="https://github.com/${PN}/tdesktop/releases/download/v${PV}/frk-v-full.tar.gz -> frk-v${PV}-full.tar.gz"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
@@ -73,7 +73,8 @@ BDEPEND="
 	wayland? ( dev-util/wayland-scanner )
 "
 
-S=${WORKDIR}/frk-v${PV}-full
+#S=${WORKDIR}/frk-v${PV}-full
+S=${WORKDIR}/frk-v-full
 
 PATCHES=(
 	"${FILESDIR}"/tdesktop-5.14.3-system-cppgir.patch
