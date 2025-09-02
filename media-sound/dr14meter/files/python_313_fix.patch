@@ -9,8 +9,8 @@ Subject: [PATCH] Patch for Python 3.13
 
 diff --git a/dr14tmeter/audio_file_reader.py b/dr14tmeter/audio_file_reader.py
 index 2d1faf6..c294bc0 100644
---- a/dr14tmeter/audio_file_reader.py
-+++ b/dr14tmeter/audio_file_reader.py
+--- a/src/dr14tmeter/audio_file_reader.py
++++ b/src/dr14tmeter/audio_file_reader.py
 @@ -85,8 +85,8 @@ def read_audio_file_new(self, file_name, target):
          tmp_dir = tempfile.gettempdir()
          tmp_file = os.path.join(tmp_dir, file) + ".wav"
