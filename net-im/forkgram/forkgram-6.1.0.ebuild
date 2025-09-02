@@ -16,6 +16,8 @@ SRC_URI="https://github.com/${PN}/tdesktop/releases/download/v${PV}/frk-v-full.t
 #_S="${WORKDIR}/${P}-full"
 S="${WORKDIR}/frk-v-full"
 
+S="${WORKDIR}/frk-v-full"
+
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
 KEYWORDS="~amd64"
