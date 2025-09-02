@@ -25,6 +25,7 @@ RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
 
 src_prepare() {
 	cp ${FILESFIR}/setup.cfg ${S}/setup.cfg
+	sed -i s/fromstring/frombuffer/g src/dr14meter/audio_file_reader.py
 	default
 }
 
