@@ -14,7 +14,7 @@ HOMEPAGE="https://github.com/forkgram/tdesktop"
 SRC_URI="https://github.com/${PN}/tdesktop/releases/download/v${PV}/frk-v-full.tar.gz -> frk-v${PV}-full.tar.gz"
 
 #S="${WORKDIR}/${P}-full"
-S="${WORKDIR}/${PN}-v-full"
+S="${WORKDIR}/frk-v-full"
 
 LICENSE="BSD GPL-3-with-openssl-exception LGPL-2+"
 SLOT="0"
