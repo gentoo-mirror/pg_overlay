@@ -23,6 +23,8 @@ RDEPEND="dev-python/numpy[${PYTHON_USEDEP}]
 		media-libs/mutagen
 		media-video/ffmpeg"
 
+PATCHES=("${FILESDIR}/python_313_fix.patch")
+
 src_prepare() {
 	cp ${FILESFIR}/setup.cfg ${S}/setup.cfg
 	default
