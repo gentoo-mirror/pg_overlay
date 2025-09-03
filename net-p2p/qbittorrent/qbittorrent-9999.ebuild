@@ -33,9 +33,9 @@ REQUIRED_USE="
 
 RDEPEND="
 	>=dev-libs/openssl-3.0.2:=
-	>=net-libs/libtorrent-rasterbar-1.2.19:=
-	>=sys-libs/zlib-1.2.11
 	>=dev-qt/qtbase-6.5:6[network,ssl,sql,sqlite,xml]
+	>=net-libs/libtorrent-rasterbar-2.0.10:=
+	>=sys-libs/zlib-1.2.11
 	gui? (
 		>=dev-qt/qtbase-6.5:6[dbus?,gui,widgets]
 		>=dev-qt/qtsvg-6.5:6
@@ -61,30 +61,26 @@ src_prepare() {
 #	sed -i "s/QBT_VERSION_BUGFIX 0/QBT_VERSION_BUGFIX 5/g" src/base/version.h.in
 	sed -i "s/alpha1//g" src/base/version.h.in
 	sed -i "s/beta1//g" src/base/version.h.in
-
-	MULTIBUILD_VARIANTS=()
-	use gui && MULTIBUILD_VARIANTS+=( gui )
-	use webui && MULTIBUILD_VARIANTS+=( nogui )
-
-	cmake_src_prepare
+	default
 }
-
 src_configure() {
+	MULTIBUILD_VARIANTS=(
+		$(usev gui)
+		$(usev webui nogui)
+	)
+
 	my_src_configure() {
 		local mycmakeargs=(
-			# musl lacks execinfo.h
-			-DSTACKTRACE=$(usex !elibc_musl)
-			# More verbose build logs are preferable for bug reports
-			-DVERBOSE_CONFIGURE=OFF
-
-			-DWEBUI=$(usex webui)
+			-DVERBOSE_CONFIGURE=ON # for bug reports
+			-DSTACKTRACE=$(usex !elibc_musl) # musl lacks execinfo.h
 			-DTESTING=$(usex test)
-			-DCMAKE_BUILD_TYPE=Release
+			-DWEBUI=$(usex webui)
 		)
 
+		# upstream supports building just gui or nogui
+		# so we build the project twice (see #839531 for details)
+		# Fedora does the same: https://src.fedoraproject.org/rpms/qbittorrent
 		if [[ ${MULTIBUILD_VARIANT} == "gui" ]]; then
-			# We do this in multibuild, see bug #839531 for why.
-			# Fedora has to do the same thing.
 			mycmakeargs+=(
 				-DGUI=ON
 				-DDBUS=$(usex dbus)
@@ -94,8 +90,7 @@ src_configure() {
 			mycmakeargs+=(
 				-DGUI=OFF
 				-DDBUS=OFF
-				# The systemd service calls qbittorrent-nox, which is only
-				# installed when GUI=OFF.
+				# The systemd service calls qbittorrent-nox, built only when GUI=OFF.
 				-DSYSTEMD=OFF
 			)
 		fi
