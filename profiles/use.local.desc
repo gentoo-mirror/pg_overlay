@@ -368,7 +368,8 @@ net-p2p/mldonkey:bittorrent - enable bittorrent support
 net-p2p/mldonkey:fasttrack - enable fasttrack support
 net-p2p/mldonkey:gnutella - enable gnutella and gnutella2 support
 net-p2p/mldonkey:guionly - enable client build only
-net-p2p/qbittorrent:webui - Install qBittorrent Web UI (qbittorrent-nox) and systemd/OpenRC service
+net-p2p/qbittorrent:dbus - Enable support for notifications and power-management features via D-Bus
+net-p2p/qbittorrent:webui - Install qBittorrent Web UI (qbittorrent-nox)
 net-p2p/rtorrent:daemon - Uses app-misc/screen to daemonize this application
 net-p2p/transmission:cli - Build command-line client
 net-p2p/transmission:debug - Enable assertions
