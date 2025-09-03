@@ -19,7 +19,7 @@ umask="${QBITTORRENT_UMASK}"
 start_stop_daemon_args="--ionice ${QBITTORRENT_IONICE} --nicelevel ${QBITTORRENT_NICE}"
 
 depend() {
-    need localmount net nfs netmount
+    need localmount net netmount
 }
 
 start_pre() {
