@@ -62,7 +62,9 @@ src_prepare() {
 	sed -i "s/alpha1//g" src/base/version.h.in
 	sed -i "s/beta1//g" src/base/version.h.in
 	default
+	cmake_src_prepare
 }
+
 src_configure() {
 	MULTIBUILD_VARIANTS=(
 		$(usev gui)
