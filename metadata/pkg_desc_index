@@ -89,7 +89,6 @@ mail-client/thunderbird 142.0: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/czkawka 9999: App to find duplicates, empty folders and similar images
 media-gfx/imagemagick 7.1.2.2: A collection of tools and libraries for many image formats
-media-libs/freetype 2.14.0_pre: High-quality and portable font engine
 media-libs/gst-plugins-base 1.26.5_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.5_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.5_pre: Open source multimedia framework
@@ -137,7 +136,7 @@ net-im/forkgram 6.1.3: Forkgram is the fork of the official Telegram Desktop app
 net-im/nchat 9999: Terminal-based Telegram / WhatsApp client for Linux and macOS
 net-libs/gtk-vnc 1.5.0: VNC viewer widget for GTK
 net-libs/libsrtp 2.7.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
-net-libs/libtirpc 1.3.6 1.3.7_rc3: Transport Independent RPC library (SunRPC replacement)
+net-libs/libtirpc 1.3.6 1.3.7_rc3 1.3.7: Transport Independent RPC library (SunRPC replacement)
 net-libs/libtorrent 0.15.6 0.15.7 0.16.0 9999 9999-r1: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 24.7.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
