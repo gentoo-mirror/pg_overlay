@@ -81,6 +81,7 @@ PATCHES=(
 	"${FILESDIR}"/tdesktop-4.11.3-system-libyuv.patch
 	"${FILESDIR}"/option-to-disable-stories.patch
 	"${FILESDIR}"/0000-data_data_sponsored_messages.cpp.patch
+	"${FILESDIR}"/pins.patch
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
 	"${FILESDIR}"/0001-kde-theme-injection-fix.patch
