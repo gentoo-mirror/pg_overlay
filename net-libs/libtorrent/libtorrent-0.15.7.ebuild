@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit autotools toolchain-funcs
+inherit autotools
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
@@ -34,8 +34,6 @@ PATCHES=(
 	"${FILESDIR}"/${PN}-0.14.0-sysroot.patch
 	"${FILESDIR}"/${PN}-0.14.0-tests-address.patch
 	"${FILESDIR}"/${PN}-0.15.3-unbundle_udns.patch
-	# https://github.com/rakshasa/libtorrent/pull/539.patch
-	"${FILESDIR}"/${PN}-0.15.5-find_grep.patch
 )
 
 src_prepare() {
@@ -43,6 +41,9 @@ src_prepare() {
 
 	# use system-udns
 	rm -r src/net/udns || die
+	sed -e 's@"net/udns/udns.h"@<udns.h>@' \
+		-e '\@^#include "net/udns/udns_.*.c"@d' \
+		-i src/net/udns_library.cc src/net/udns_library.h src/net/udns_resolver.cc || die
 
 	if [[ ${CHOST} != *-darwin* ]]; then
 		# syslibroot is only for macos, change to sysroot for others
@@ -52,24 +53,10 @@ src_prepare() {
 }
 
 src_configure() {
-	# bug 518582
-	local disable_instrumentation
-	echo -e "#include <inttypes.h>\nint main(){ int64_t var = 7; __sync_add_and_fetch(&var, 1); return 0;}" \
-		> "${T}/sync_add_and_fetch.c" || die
-	$(tc-getCC) ${CFLAGS} -o /dev/null -x c "${T}/sync_add_and_fetch.c" >/dev/null 2>&1
-	if [[ $? -ne 0 ]]; then
-		einfo "Disabling instrumentation"
-		disable_instrumentation="--disable-instrumentation"
-	fi
-
-	# configure needs bash or script bombs out on some null shift, bug #291229
-	export CONFIG_SHELL=${BASH}
-
 	local myeconfargs=(
 		LIBS="-ludns"
 		--enable-aligned
 		$(use_enable debug)
-		${disable_instrumentation}
 		--with-posix-fallocate
 	)
 
