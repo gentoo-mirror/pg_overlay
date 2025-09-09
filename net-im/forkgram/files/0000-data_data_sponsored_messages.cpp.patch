@@ -2,15 +2,15 @@ diff --git i/Telegram/SourceFiles/data/data_sponsored_messages.cpp w/Telegram/So
 index 10e69d37b..fbcb20158 100644
 --- i/Telegram/SourceFiles/data/components/sponsored_messages.cpp
 +++ w/Telegram/SourceFiles/data/components/sponsored_messages.cpp
-@@ -21,7 +21,7 @@ https://github.com/telegramdesktop/tdesk
- namespace Data {
+@@ -29,7 +29,7 @@
  namespace {
  
+ constexpr auto kMs = crl::time(1000);
 -constexpr auto kRequestTimeLimit = 5 * 60 * crl::time(1000);
 +constexpr auto kRequestTimeLimit = 9999999 * 60 * crl::time(1000);
  
- [[nodiscard]] bool TooEarlyForRequest(crl::time received) {
- 	return (received > 0) && (received + kRequestTimeLimit > crl::now());
+ const auto kFlaggedPreload = ((MediaPreload*)quintptr(0x01));
+ 
 @@ -74,6 +74,9 @@ void SponsoredMessages::clearOldRequests
  
  SponsoredMessages::AppendResult SponsoredMessages::append(
@@ -31,16 +31,20 @@ index 10e69d37b..fbcb20158 100644
  	if (!canHaveFor(history)) {
  		return;
  	}
-@@ -198,24 +204,17 @@ void SponsoredMessages::inject(
+ 
+@@ -237,11 +237,6 @@
  }
  
  bool SponsoredMessages::canHaveFor(not_null<History*> history) const {
 -	if (history->peer->isChannel()) {
 -		return true;
--	} else if (const auto user = history->peer->asUser()) {
--		return user->isBot();
--	}
- 	return false;
+-		} else if (const auto user = history->peer->asUser()) {
+-			return user->isBot();
+-		}
+		return false;
+ }
+ 
+@@ -251,15 +246,13 @@
  }
  
  bool SponsoredMessages::isTopBarFor(not_null<History*> history) const {
@@ -49,7 +53,7 @@ index 10e69d37b..fbcb20158 100644
 -			return user->isBot();
 -		}
 -	}
- 	return false;
+	return false;
  }
  
  void SponsoredMessages::request(not_null<History*> history, Fn<void()> done) {
@@ -57,5 +61,5 @@ index 10e69d37b..fbcb20158 100644
 +		return;
 +	}
  	if (!canHaveFor(history)) {
- 		return;
- 	}
+		return;
+	}
