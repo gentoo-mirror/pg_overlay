@@ -63,6 +63,8 @@ src_prepare() {
 
 	# use system-json
 	rm -r src/rpc/nlohmann || die
+	sed -e 's@"rpc/nlohmann/json.h"@<nlohmann/json.hpp>@' \
+		-i src/rpc/jsonrpc.cc || die
 
 	# use system-tinyxml2
 	rm -r src/rpc/tinyxml2 || die
