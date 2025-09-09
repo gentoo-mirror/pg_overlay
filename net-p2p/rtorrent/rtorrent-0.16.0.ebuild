@@ -24,7 +24,6 @@ REQUIRED_USE="
 
 COMMON_DEPEND="
 	~net-libs/libtorrent-${PV}
-	net-misc/curl
 	sys-libs/ncurses:0=
 	lua? ( ${LUA_DEPS} )
 	tinyxml2? ( dev-libs/tinyxml2:= )
