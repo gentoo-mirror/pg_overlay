@@ -43,12 +43,12 @@ diff --git a/src/net/udns_resolver.cc b/src/net/udns_resolver.cc
 index e35e5fc1..f697112d 100644
 --- a/src/net/udns_resolver.cc
 +++ b/src/net/udns_resolver.cc
-@@ -8,7 +8,7 @@
+@@ -6,7 +6,7 @@
+ #include <netinet/in.h>
+ #include <sys/socket.h>
  
- #include "globals.h"
- #include "manager.h"
 -#include "net/udns/udns.h"
-+#include <udns.h>
++#include "udns.h"
  #include "torrent/common.h"
- #include "torrent/poll.h"
+ #include "torrent/exceptions.h"
  #include "torrent/net/socket_address.h"
