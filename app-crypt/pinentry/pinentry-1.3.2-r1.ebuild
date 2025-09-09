@@ -33,7 +33,10 @@ DEPEND="
 "
 RDEPEND="
 	${DEPEND}
-	gtk? ( app-crypt/gcr:4[gtk] )
+	gtk? (
+		app-crypt/gcr:4[gtk]
+		gnome-base/gnome-keyring
+	)
 "
 BDEPEND="
 	sys-devel/gettext
