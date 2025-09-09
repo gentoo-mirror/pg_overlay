@@ -89,6 +89,7 @@ mail-client/thunderbird 142.0: Thunderbird Mail Client
 media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/czkawka 9999: App to find duplicates, empty folders and similar images
 media-gfx/imagemagick 7.1.2.2: A collection of tools and libraries for many image formats
+media-libs/freetype 2.14.0_pre: High-quality and portable font engine
 media-libs/gst-plugins-base 1.26.5_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.5_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.5_pre: Open source multimedia framework
@@ -132,7 +133,7 @@ net-dialup/xl2tpd 1.3.19: A modern version of the Layer 2 Tunneling Protocol (L2
 net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
 net-fs/nfs-utils 2.8.3 2.8.4_rc3: NFS client and server daemons
 net-im/64Gram 1.1.77: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
-net-im/forkgram 6.1.0: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
+net-im/forkgram 6.1.3: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
 net-im/nchat 9999: Terminal-based Telegram / WhatsApp client for Linux and macOS
 net-libs/gtk-vnc 1.5.0: VNC viewer widget for GTK
 net-libs/libsrtp 2.7.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
@@ -169,7 +170,6 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.16.0: XFS filesystem utilities
-sys-libs/liburing 2.12_pre: Efficient I/O with io_uring
 sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
 www-client/firefox 142.0.1: Firefox Web Browser
