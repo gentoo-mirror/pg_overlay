@@ -130,6 +130,11 @@ src_prepare() {
 	eapply --binary "${FILESDIR}"/saving-restrictions.patch
 	eapply --binary "${FILESDIR}"/0001-kde-theme-injection-fix.patch
 
+	#remove fcitc_qt
+	rm -rfv Telegram/ThirdParty/fcitx5-qt
+	rm -rfv cmake/external/qt/qt_static_plugins/fcitx5
+	eapply --binary "${FILESDIR}"/fcitx_qt_remove.patch
+
 	cmake_src_prepare
 }
 
@@ -171,9 +176,6 @@ src_configure() {
 		-DDESKTOP_APP_USE_ENCHANT=$(usex enchant)
 		## Use system fonts instead of bundled ones
 		-DDESKTOP_APP_USE_PACKAGED_FONTS=$(usex !fonts)
-
- 		-DENABLE_QT5=OFF
- 		-DENABLE_X11=OFF
 	)
 
 	if [[ -n ${MY_TDESKTOP_API_ID} && -n ${MY_TDESKTOP_API_HASH} ]]; then

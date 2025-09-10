@@ -1,0 +1,17 @@
+--- a/cmake/external/qt/qt_static_plugins/CMakeLists.txt	2025-09-10 23:50:45.303348222 +0700
++++ b/cmake/external/qt/qt_static_plugins/CMakeLists.txt	2025-09-10 23:51:16.511261930 +0700
+@@ -42,14 +42,6 @@
+         desktop-app::external_qt_static_plugins_nimf
+     )
+ 
+-    if (TARGET Qt::DBus)
+-        add_checked_subdirectory(fcitx5)
+-        target_link_libraries(external_qt_static_plugins
+-        PUBLIC
+-            desktop-app::external_qt_static_plugins_fcitx5
+-        )
+-    endif()
+-
+     if (NOT DESKTOP_APP_DISABLE_X11_INTEGRATION)
+         add_checked_subdirectory(hime)
+         target_link_libraries(external_qt_static_plugins
