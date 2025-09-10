@@ -114,7 +114,7 @@ media-sound/dr14meter 1.1.4 9999: dr14meter is a free and open-source command li
 media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
 media-sound/lame 3.100-r3: LAME Ain't an MP3 Encoder
-media-sound/mpd 0.24.4: The Music Player Daemon (mpd)
+media-sound/mpd 0.24.5: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: Featureful ncurses based MPD client inspired by ncmpc
