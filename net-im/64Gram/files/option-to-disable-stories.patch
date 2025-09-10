@@ -53,7 +53,7 @@ index 1cc3bb3..b42ef79 100644
 @@ -30,6 +30,8 @@ struct StoryIdDates;
  class Story;
  class StoryPreload;
-
+ 
 +extern const char kOptionDisableStories[];
 +
  struct StoriesIds {
