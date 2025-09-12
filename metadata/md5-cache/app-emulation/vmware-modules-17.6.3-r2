@@ -14,4 +14,4 @@ RESTRICT=mirror
 SLOT=0
 SRC_URI=https://github.com/perfect7gentleman/sources/raw/be525309bc8011d5d86ff24918635a1acd87e182/vmware-modules-17.6.3.tar.gz -> vmware-modules-17.6.3.tar.gz
 _eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	mount-boot-utils	2551bac1a772f4b6beacb494a750ae92	dist-kernel-utils	a40de3638d3f7a89f4c45d1a62b90e20	edo	a5e294016aa84979fcb2459749eb80b2	linux-info	efd923656513c879204fec6638eadee5	multiprocessing	1e32df7deee68372153dca65f4a7c21f	linux-mod-r1	2b1749a4ea9e1aea780b1b54dd2f65f1	udev	f3d9a4376ebd22131726a68e1a0a058f
-_md5_=0cf5b25bda91f431657f2e5a97a95497
+_md5_=e6771eb43d524d35f7bbc74f8476dc1d
