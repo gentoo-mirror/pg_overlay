@@ -13,8 +13,8 @@ MY_KERNEL_VERSION="6.16"
 
 MY_COMMIT="7bab658ccb4ba783b984e800a30925eea46448ff"
 
-SRC_URI="https://github.com/user-attachments/files/20490766/vmware-host-modules-workstation-17.6.0-kernel-6.16.rc0.tar.gz -> ${P}.tar.gz"
-S="${WORKDIR}/vmware-host-modules-workstation-17.6.0-kernel-6.16.rc0"
+SRC_URI="https://github.com/perfect7gentleman/sources/raw/be525309bc8011d5d86ff24918635a1acd87e182/${P}.tar.gz -> ${P}.tar.gz"
+#S="${WORKDIR}/vmware-host-modules-workstation-17.6.0-kernel-6.16.rc0"
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64"
