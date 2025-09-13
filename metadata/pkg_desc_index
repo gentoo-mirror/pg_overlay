@@ -41,7 +41,7 @@ dev-lang/lua 5.4.8_pre: A powerful light-weight programming language designed fo
 dev-lang/python 3.13.7: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/blake3 1.8.2: a fast cryptographic hash function
-dev-libs/dbus-glib 0.114: D-Bus bindings for glib
+dev-libs/glib 2.86.0: The GLib library of C routines
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 6.1.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
@@ -68,6 +68,8 @@ dev-python/wheel 0.46.1: A built-package format for Python
 dev-util/android-tools 35.0.2: Android platform tools (adb, fastboot, and mkbootimg)
 dev-util/cargo-ebuild 0.6.0: Generates an ebuild for a package using the in-tree eclasses.
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
+dev-util/gdbus-codegen 2.86.0: GDBus code and documentation generator
+dev-util/glib-utils 2.86.0: Build utilities for GLib using projects
 dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/librnp 9999: High performance C++ OpenPGP library
 dev-util/mingw64-toolchain 12.0.0_p1: All-in-one mingw64 toolchain intended for building Wine without crossdev
@@ -80,7 +82,7 @@ games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-extra/gnome-commander 1.18.2: A graphical, full featured, twin-panel file manager
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
-gui-libs/gtk 4.20.0: GTK is a multi-platform toolkit for creating graphical user interfaces
+gui-libs/gtk 4.20.1: GTK is a multi-platform toolkit for creating graphical user interfaces
 kde-misc/kweather 25.08.1 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.4.2: KDE Plasma workspace
 llvm-core/clang 19.1.6: C language family frontend for LLVM
