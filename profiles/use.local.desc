@@ -103,6 +103,13 @@ gui-libs/gtk:broadway - Enable the GDK Broadway backend.
 gui-libs/gtk:cloudproviders - Enable GtkPlacesSidebar to access cloud services
 gui-libs/gtk:colord - Use x11-misc/colord for color management in printing
 gui-libs/gtk:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
+kde-plasma/plasma-workspace:appstream - Enable AppStream software metadata support
+kde-plasma/plasma-workspace:ksysguard - Enable device notifier and system monitor applets as well as terminate applications runner
+kde-plasma/plasma-workspace:networkmanager - Enable support for location-based time zone changes
+kde-plasma/plasma-workspace:policykit - Enable locale generation and Users KCM using sys-auth/polkit and sys-apps/accountsservice
+kde-plasma/plasma-workspace:screencast - Enable camera indicator applet (requires media-video/pipewire at runtime)
+kde-plasma/plasma-workspace:telemetry - Enable User Feedback control module for kde-plasma/systemsettings
+kde-plasma/plasma-workspace:wallpaper-metadata - Show metadata for image wallpaper plugin using kde-apps/libkexiv2
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
