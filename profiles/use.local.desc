@@ -13,7 +13,6 @@ app-emulation/nemu:ovf - Adds support for OVA/OVF import
 app-emulation/nemu:remote-api - Adds API for remote control
 app-emulation/nemu:spice - Adds Spice protocol support
 app-emulation/nemu:vnc-client - Adds support for external VNC client
-app-misc/jdupes:dedupe - Enable deduplication support
 app-misc/worker:avfs - Enable support for sys-fs/avfs
 app-office/libreoffice:base - Enable full support for LibreOffice Base databases (involves additional bundled libs)
 app-office/libreoffice:clang - Use Clang compiler instead of GCC
@@ -104,23 +103,6 @@ gui-libs/gtk:broadway - Enable the GDK Broadway backend.
 gui-libs/gtk:cloudproviders - Enable GtkPlacesSidebar to access cloud services
 gui-libs/gtk:colord - Use x11-misc/colord for color management in printing
 gui-libs/gtk:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
-kde-plasma/plasma-workspace:appstream - Enable AppStream software metadata support
-kde-plasma/plasma-workspace:ksysguard - Enable device notifier and system monitor applets as well as terminate applications runner
-kde-plasma/plasma-workspace:networkmanager - Enable support for location-based time zone changes
-kde-plasma/plasma-workspace:policykit - Enable locale generation and Users KCM using sys-auth/polkit and sys-apps/accountsservice
-kde-plasma/plasma-workspace:screencast - Enable camera indicator applet (requires media-video/pipewire at runtime)
-kde-plasma/plasma-workspace:telemetry - Enable User Feedback control module for kde-plasma/systemsettings
-kde-plasma/plasma-workspace:wallpaper-metadata - Show metadata for image wallpaper plugin using kde-apps/libkexiv2
-llvm-core/clang:extra - Build extra tools (clangd, clang-tidy and a few more)
-llvm-core/clang:ieee-long-double - Use accelerated 128-bit IEEE long double ABI (ppc64le only)
-llvm-core/clang:static-analyzer - Install the Clang static analyzer
-llvm-core/llvm:binutils-plugin - Build the binutils plugin
-llvm-core/llvm:debuginfod - Install llvm-debuginfod (requires net-misc/curl and dev-cpp/cpp-httplib)
-llvm-core/llvm:doc - Build and install the HTML documentation and regenerate the man pages
-llvm-core/llvm:exegesis - Enable performance counter support for llvm-exegesis tool that can be used to measure host machine instruction characteristics
-llvm-core/llvm:ncurses - Support querying terminal properties using ncurses' terminfo
-llvm-core/llvm:xar - Support dumping LLVM bitcode sections in Mach-O files (uses app-arch/xar)
-llvm-core/llvm:z3 - Enable support for sci-mathematics/z3 constraint solver
 mail-client/thunderbird:clang - Use Clang compiler instead of GCC
 mail-client/thunderbird:eme-free - Disable EME (DRM plugin) capability at build time
 mail-client/thunderbird:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)

@@ -11,7 +11,6 @@ app-emulation/vmware-modules 17.6.3-r2: VMware kernel modules
 app-i18n/enca 1.20 9999: Detect and convert encoding of text files
 app-misc/doublecmd 1.1.28: Cross Platform file manager.
 app-misc/fclones 9999: Efficient Duplicate File Finder
-app-misc/jdupes 1.30.0: Identify duplicate files on the filesystem
 app-misc/rmlint 2.10.3: Extremely fast tool to remove duplicates and other lint from your filesystem
 app-misc/worker 5.2.2: Worker Filemanager: Amiga Directory Opus 4 clone
 app-office/libreoffice 25.2.1.2: A full office productivity suite
@@ -45,13 +44,9 @@ dev-libs/glib 2.86.0: The GLib library of C routines
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 6.1.1: A library for concurrent code execution on multicore hardware
 dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
-dev-libs/libjodycode 4.0.1: Shared code used by several utilities written by Jody Bruchon
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/protobuf 32.0: Google's Protocol Buffers - Extensible mechanism for serializing structured data
-dev-libs/spdlog 1.15.3: Fast C++ logging library
-dev-libs/tinyxml2 11.0.0: A simple, small, efficient, C++ XML parser
-dev-libs/utfcpp 4.0.6: UTF-8 C++ library
 dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/ocaml_intrinsics_kernel 0.17.1: Functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
@@ -84,14 +79,10 @@ gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/gtk 4.20.1: GTK is a multi-platform toolkit for creating graphical user interfaces
 kde-misc/kweather 25.08.1 9999: Weather forecast application for Plasma with flat and dynamic/animated views
-kde-plasma/plasma-workspace 6.4.2: KDE Plasma workspace
-llvm-core/clang 19.1.6: C language family frontend for LLVM
-llvm-core/llvm 19.1.6: Low Level Virtual Machine
-llvm-core/polly 19.1.6: Polyhedral optimizations for LLVM
 mail-client/thunderbird 142.0: Thunderbird Mail Client
-media-fonts/unifont 16.0.03: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
+media-fonts/unifont 17.0.01: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/czkawka 9999: App to find duplicates, empty folders and similar images
-media-gfx/imagemagick 7.1.2.2: A collection of tools and libraries for many image formats
+media-gfx/imagemagick 7.1.2.3: A collection of tools and libraries for many image formats
 media-libs/gst-plugins-base 1.26.5_pre: Basepack of plugins for gstreamer
 media-libs/gst-plugins-good 1.26.5_pre: Basepack of plugins for GStreamer
 media-libs/gstreamer 1.26.5_pre: Open source multimedia framework
