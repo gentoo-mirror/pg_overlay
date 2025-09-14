@@ -145,7 +145,6 @@ net-p2p/qbittorrent 9999: BitTorrent client in C++ and Qt
 net-p2p/rtorrent 0.15.6 0.15.7 0.16.0 9999 9999-r1: BitTorrent Client using libtorrent
 net-p2p/transmission 9999: A fast, easy, and free BitTorrent client
 net-p2p/transmission-remote-gtk 9999: GTK+ client for management of the Transmission BitTorrent client, over HTTP RPC
-net-print/cups 2.4.14_pre: The Common Unix Printing System
 net-print/cups-pdf 3.0.2: Provides a virtual printer for CUPS to produce PDF files
 net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for printers and MFDs
 net-vpn/networkmanager-l2tp 1.20.20: NetworkManager L2TP plugin
