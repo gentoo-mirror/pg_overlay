@@ -3,7 +3,7 @@
 
 EAPI=8
 
-FIREFOX_PATCHSET="firefox-141-patches-02t.tar.xz"
+FIREFOX_PATCHSET="firefox-143-patches-01t.tar.xz"
 
 LLVM_COMPAT=( 20 )
 
@@ -116,7 +116,7 @@ COMMON_DEPEND="${TB_ONLY_DEPEND}
 	dev-libs/expat
 	dev-libs/glib:2
 	dev-libs/libffi:=
-	>=dev-libs/nss-3.114
+	>=dev-libs/nss-3.115.1
 	>=dev-libs/nspr-4.35
 	media-libs/alsa-lib
 	media-libs/fontconfig
@@ -509,7 +509,6 @@ src_prepare() {
 	rm -v "${WORKDIR}"/firefox-patches/*bgo-928126-enable-jxl.patch || die
 
 	eapply "${WORKDIR}/firefox-patches"
-	use loong && eapply "${WORKDIR}/firefox-loong-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
 	eapply_user
