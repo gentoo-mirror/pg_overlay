@@ -17,7 +17,7 @@ LICENSE="GPL-2"
 # subslot.
 SLOT="0"
 KEYWORDS=""
-IUSE="debug ssl test"
+IUSE="debug test"
 RESTRICT="!test? ( test )"
 
 RDEPEND="
