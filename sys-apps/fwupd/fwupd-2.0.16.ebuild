@@ -117,9 +117,7 @@ src_configure() {
 		$(meson_feature flashrom plugin_flashrom)
 		$(meson_feature protobuf)
 		$(meson_feature modemmanager plugin_modem_manager)
-		$(meson_feature uefi plugin_uefi_capsule)
 		$(meson_use uefi plugin_uefi_capsule_splash)
-		$(meson_feature uefi plugin_uefi_capsule)
 		$(meson_feature uefi plugin_uefi_pk)
 	)
 	if use ppc64 || use riscv ; then
