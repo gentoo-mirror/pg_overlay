@@ -1,13 +1,13 @@
-# Copyright 1999-2024 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
 
-inherit autotools git-r3 toolchain-funcs
+inherit autotools git-r3
 
 DESCRIPTION="BitTorrent library written in C++ for *nix"
 HOMEPAGE="https://rakshasa.github.io/rtorrent/"
-EGIT_REPO_URI="https://github.com/stickz/rtorrent.git"
+EGIT_REPO_URI="https://github.com/rakshasa/${PN}.git"
 EGIT_BRANCH="master"
 
 LICENSE="GPL-2"
@@ -17,45 +17,52 @@ LICENSE="GPL-2"
 # subslot.
 SLOT="0"
 KEYWORDS=""
-IUSE="debug ssl"
+IUSE="debug ssl test"
+RESTRICT="!test? ( test )"
 
-# cppunit dependency - https://github.com/rakshasa/libtorrent/issues/182
 RDEPEND="
+	dev-libs/openssl:=
 	net-libs/udns
-	dev-util/cppunit:=
+	net-misc/curl
 	sys-libs/zlib
-	ssl? ( dev-libs/openssl:= )"
+"
 DEPEND="${RDEPEND}"
-BDEPEND="virtual/pkgconfig"
-
-S="${WORKDIR}/${PN}-${PV}/${PN}"
+BDEPEND="
+	virtual/pkgconfig
+	test? ( dev-util/cppunit )
+"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-sysroot.patch
+	"${FILESDIR}"/${PN}-0.14.0-sysroot.patch
+	"${FILESDIR}"/${PN}-0.14.0-tests-address.patch
+	"${FILESDIR}"/${PN}-0.15.3-unbundle_udns.patch
 )
 
 src_prepare() {
 	default
+
+	# use system-udns
+	rm -r src/net/udns || die
+	sed -e 's@"net/udns/udns.h"@<udns.h>@' \
+		-e '\@^#include "net/udns/udns_.*.c"@d' \
+		-i src/net/udns_library.cc src/net/udns_library.h src/net/udns_resolver.cc || die
+
+	if [[ ${CHOST} != *-darwin* ]]; then
+		# syslibroot is only for macos, change to sysroot for others
+		sed -i 's/Wl,-syslibroot,/Wl,--sysroot,/' "${S}/scripts/common.m4" || die
+	fi
 	eautoreconf
 }
 
 src_configure() {
-	# bug 518582
-	local disable_instrumentation
-	echo -e "#include <inttypes.h>\nint main(){ int64_t var = 7; __sync_add_and_fetch(&var, 1); return 0;}" > "${T}/sync_add_and_fetch.c" || die
-	$(tc-getCC) ${CFLAGS} -o /dev/null -x c "${T}/sync_add_and_fetch.c" >/dev/null 2>&1
-	if [[ $? -ne 0 ]]; then
-		einfo "Disabling instrumentation"
-		disable_instrumentation="--disable-instrumentation"
-	fi
+	local myeconfargs=(
+		LIBS="-ludns"
+		--enable-aligned
+		$(use_enable debug)
+		--with-posix-fallocate
+	)
 
-	# configure needs bash or script bombs out on some null shift, bug #291229
-	CONFIG_SHELL=${BASH} econf \
-		--enable-aligned \
-		--enable-udns \
-		$(use_enable debug) \
-		$(use_enable ssl openssl) \
-		${disable_instrumentation}
+	econf "${myeconfargs[@]}"
 }
 
 src_install() {
