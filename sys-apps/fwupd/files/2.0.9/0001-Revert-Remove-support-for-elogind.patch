@@ -53,13 +53,12 @@ diff --git a/plugins/logind/meson.build b/plugins/logind/meson.build
 index f07118cd9..257b8f455 100644
 --- a/plugins/logind/meson.build
 +++ b/plugins/logind/meson.build
-@@ -1,5 +1,5 @@
--if libsystemd.found() or subdur_done()
-+if libsystemd.found() or elogind.found()
+@@ -1,4 +1,4 @@
+-libsystemd.found() or subdir_done()
++libsystemd.found() or elogind.found() or subdir_done()
  
  cargs = ['-DG_LOG_DOMAIN="FuPluginLogind"']
  plugins += {meson.current_source_dir().split('/')[-1]: true}
- 
 -- 
 2.49.0
 
