@@ -69,7 +69,6 @@ src_prepare() {
 	# use system-tinyxml2
 	rm -r src/rpc/tinyxml2 || die
 	sed -i "/rpc\\/tinyxml2/d" src/Makefile.am
-	sed -i "/rpc\\/tinyxml2/d" src/Makefile.in
 
 	# https://github.com/rakshasa/rtorrent/issues/332
 	cp "${FILESDIR}"/rtorrent.1 "${S}"/doc/ || die
