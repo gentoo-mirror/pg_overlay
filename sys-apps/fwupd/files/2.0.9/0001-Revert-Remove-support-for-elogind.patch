@@ -54,7 +54,7 @@ index f07118cd9..257b8f455 100644
 --- a/plugins/logind/meson.build
 +++ b/plugins/logind/meson.build
 @@ -1,4 +1,4 @@
--if libsystemd.found()
+-if libsystemd.found() or subdur_done()
 +if libsystemd.found() or elogind.found()
  cargs = ['-DG_LOG_DOMAIN="FuPluginLogind"']
  plugins += {meson.current_source_dir().split('/')[-1]: true}
