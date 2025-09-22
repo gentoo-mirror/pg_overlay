@@ -10,6 +10,7 @@ inherit cmake git-r3 flag-o-matic plocale wxwidgets xdg eapi9-ver
 DESCRIPTION="aMule, the all-platform eMule p2p client"
 HOMEPAGE="https://www.amule.org/"
 EGIT_REPO_URI="https://github.com/${PN}-project/${PN}.git"
+#EGIT_REPO_URI="https://github.com/tgragnato/${PN}.git"
 
 LICENSE="GPL-2+"
 SLOT="0"

@@ -1,0 +1,85 @@
+From 6150ac103a0cca53ba0947c18842b4ce54dd22ce Mon Sep 17 00:00:00 2001
+From: Lars Wendler <polynomial-c@gmx.de>
+Date: Wed, 7 May 2025 13:51:00 +0200
+Subject: [PATCH 3/4] Revert "trivial: Remove -Dplugin_tpm build option"
+
+This reverts commit 2aa604d3ca1de557545539d1eefe2759a18874e4.
+---
+ contrib/fwupd.spec.in   | 2 ++
+ data/meson.build        | 4 +++-
+ meson_options.txt       | 4 ++++
+ plugins/tpm/meson.build | 8 ++++++--
+ 4 files changed, 15 insertions(+), 3 deletions(-)
+
+diff --git a/contrib/fwupd.spec.in b/contrib/fwupd.spec.in
+index 6b4cf91d1..8a70315d1 100644
+--- a/contrib/fwupd.spec.in
++++ b/contrib/fwupd.spec.in
+@@ -248,8 +248,10 @@ fwupd wrapper for Qubes OS
+ %endif
+ %if 0%{?have_uefi}
+     -Dplugin_uefi_capsule=enabled \
++    -Dplugin_tpm=enabled \
+ %else
+     -Dplugin_uefi_capsule=disabled \
++    -Dplugin_tpm=disabled \
+ %endif
+ %if 0%{?have_modem_manager}
+     -Dplugin_modem_manager=enabled \
+diff --git a/data/meson.build b/data/meson.build
+index d717319c0..bab2f096c 100644
+--- a/data/meson.build
++++ b/data/meson.build
+@@ -100,7 +100,6 @@ if build_daemon
+       'char-gpiochip',
+       'char-hidraw',
+       'char-mei',
+-      'char-tpm',
+       'char-usb',
+       'char-usb_device',
+     ]
+@@ -110,6 +109,9 @@ if build_daemon
+     if cc.has_header('linux/nvme_ioctl.h', required: false)
+       device_allows += ['char-nvme']
+     endif
++    if get_option('plugin_tpm').allowed()
++      device_allows += ['char-tpm']
++    endif
+     if get_option('plugin_uefi_capsule').allowed()
+       # for BLKSSZGET
+       device_allows += ['block-blkext']
+diff --git a/meson_options.txt b/meson_options.txt
+index 74dc289f7..be7a71290 100644
+--- a/meson_options.txt
++++ b/meson_options.txt
+@@ -137,6 +137,10 @@ option('plugin_modem_manager',
+   type: 'feature',
+   description: 'ModemManager support',
+ )
++option('plugin_tpm',
++  type: 'feature',
++  description: 'TPM support',
++)
+ option('plugin_uefi_capsule',
+   type: 'feature',
+   description: 'UEFI capsule support',
+diff --git a/plugins/tpm/meson.build b/plugins/tpm/meson.build
+index fa7495ccc..5ff9cb4c2 100644
+--- a/plugins/tpm/meson.build
++++ b/plugins/tpm/meson.build
+@@ -1,6 +1,10 @@
+-tpm2tss_tpm = dependency('tss2-esys', version: '>= 2.0', required: false)
++tpm2tss_tpm = dependency('tss2-esys', version: '>= 2.0', required: get_option('plugin_tpm'))
+ 
+-if hsi and tpm2tss_tpm.found() and host_machine.system() == 'linux'
++if hsi and \
++   tpm2tss_tpm.found() and \
++   host_machine.system() == 'linux' and \
++   get_option('plugin_tpm').require(enable_udev,
++    error_message: 'udev is needed for plugin_tpm').allowed()
+ cargs = ['-DG_LOG_DOMAIN="FuPluginTpm"']
+ plugins += {meson.current_source_dir().split('/')[-1]: true}
+ 
+-- 
+2.49.0
+
