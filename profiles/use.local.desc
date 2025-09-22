@@ -74,6 +74,7 @@ dev-libs/glib:mime - Pull in shared MIME database that many glib-based applicati
 dev-libs/glib:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 dev-libs/glib:systemtap - Build support for profiling and tracing using dev-debug/systemtap
 dev-libs/glib:utils - Install gtester-report utility to generate test report files for your software; build gresource utility with ELF support.
+dev-libs/libxmlb:stemmer - Enable language stemming support
 dev-libs/protobuf:conformance - Build conformance tests
 dev-libs/protobuf:libprotoc - Build libprotoc
 dev-libs/protobuf:libupb - Build libupb
