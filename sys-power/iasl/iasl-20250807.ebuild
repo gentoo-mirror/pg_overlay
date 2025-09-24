@@ -8,7 +8,7 @@ inherit edos2unix toolchain-funcs
 MY_PN=acpica-unix
 MY_P="${MY_PN}-${PV}"
 MY_TESTS_P="${MY_PN/ca/tests}-${PV}"
-REL_TAG="R${PV:0:4}_${PV:4:2}_${PV:6:2}"
+REL_TAG="${PV}"
 
 DESCRIPTION="Intel ACPI Source Language (ASL) compiler"
 HOMEPAGE="https://www.acpica.org/downloads/"
