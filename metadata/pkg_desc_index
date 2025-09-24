@@ -80,7 +80,7 @@ gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/gtk 4.20.1: GTK is a multi-platform toolkit for creating graphical user interfaces
 kde-misc/kweather 25.08.1 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.4.5: KDE Plasma workspace
-mail-client/thunderbird 143.0: Thunderbird Mail Client
+mail-client/thunderbird 143.0.1: Thunderbird Mail Client
 media-fonts/unifont 17.0.01: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/czkawka 9999: App to find duplicates, empty folders and similar images
 media-gfx/imagemagick 7.1.2.3: A collection of tools and libraries for many image formats
@@ -168,7 +168,7 @@ sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
 sys-fs/ncdu 2.9.1: NCurses Disk Usage
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.16.0: XFS filesystem utilities
-sys-power/iasl 20250404: Intel ACPI Source Language (ASL) compiler
+sys-power/iasl 20250807: Intel ACPI Source Language (ASL) compiler
 www-apps/baikal 0.10.1: Lightweight CalDAV+CardDAV server
 www-client/firefox 143.0.1: Firefox Web Browser
 x11-base/xwayland 24.1.8: Standalone X server running under Wayland
