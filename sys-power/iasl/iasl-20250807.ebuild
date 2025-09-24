@@ -28,8 +28,8 @@ BDEPEND="
 	app-alternatives/lex"
 
 PATCHES=(
-	"${FILESDIR}"/${P}-Makefile-fixes.patch
-	"${FILESDIR}"/${P}-Makefile-verbose.patch
+	"${FILESDIR}"/${PN}-20250404-Makefile-fixes.patch
+	"${FILESDIR}"/${PN}-20250404-Makefile-verbose.patch
 )
 
 pkg_setup() {
