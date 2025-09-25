@@ -85,6 +85,7 @@ PATCHES=(
 	"${FILESDIR}"/invite-peeking-restrictions.patch
 	"${FILESDIR}"/saving-restrictions.patch
 	"${FILESDIR}"/0001-kde-theme-injection-fix.patch
+	"${FILESDIR}"/glib2.86.patch
 )
 
 pkg_pretend() {
