@@ -129,6 +129,8 @@ src_prepare() {
 	eapply --binary "${FILESDIR}"/invite-peeking-restrictions.patch
 	eapply --binary "${FILESDIR}"/saving-restrictions.patch
 	eapply --binary "${FILESDIR}"/0001-kde-theme-injection-fix.patch
+	eapply --binary "${FILESDIR}"/glib2.86.patch
+
 
 	#remove fcitc_qt
 	rm -rfv Telegram/ThirdParty/fcitx5-qt
@@ -202,6 +204,13 @@ src_configure() {
 	fi
 
 	cmake_src_configure
+}
+
+src_compile() {
+	# There's a bug where sometimes, it will rebuild/relink during src_install
+	# Make sure that happens here, instead.
+	cmake_build
+	cmake_build
 }
 
 pkg_postinst() {
