@@ -26,8 +26,8 @@ dev-build/autoconf-wrapper 20250528: Wrapper for autoconf to manage multiple aut
 dev-cpp/atkmm 2.36.3: C++ interface for the ATK library
 dev-cpp/expected 1.3.1: Single header implementation of std::expected with functional-style extensions
 dev-cpp/expected-lite 0.9.0: Expected objects in C++11 and later in a single-file header-only library
-dev-cpp/glibmm 2.66.8 2.84.0: C++ interface for glib2
-dev-cpp/gtkmm 4.18.0: C++ interface for GTK+
+dev-cpp/glibmm 2.86.0: C++ interface for glib2
+dev-cpp/gtkmm 4.20.0: C++ interface for GTK+
 dev-cpp/highway 1.2.0: Performance-portable, length-agnostic SIMD with runtime dispatch
 dev-cpp/ms-gsl 4.2.0: Guideline Support Library implementation by Microsoft
 dev-cpp/pangomm 2.56.1: C++ interface for pango
