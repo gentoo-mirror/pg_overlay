@@ -45,7 +45,7 @@ dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
 dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/libxmlb 0.3.24: Library to help create and query binary XML blobs
-dev-libs/protobuf 32.0: Google's Protocol Buffers - Extensible mechanism for serializing structured data
+dev-libs/protobuf 32.1: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/ocaml_intrinsics_kernel 0.17.1: Functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
