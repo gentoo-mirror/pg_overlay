@@ -508,6 +508,30 @@ zig-utils_find_installation() {
 	mkdir -p "${ZIG_GLOBAL_CACHE_DIR}" || die
 	touch "${ZIG_GLOBAL_CACHE_DIR}/empty.zig" || die
 
+	local selected_path selected_ver
+	for selected_ver in "${zig_supported_versions[@]}"; do
+		# Check if candidate satisfies ZIG_SLOT condition.
+		if [[ "${selected_ver}" != "${ZIG_SLOT}"* ]]; then
+			continue
+		fi
+
+		# Prefer "dev-lang/zig" over "dev-lang/zig-bin"
+		local candidate_path
+		for candidate_path in "${base_path}"/zig{,-bin}-"${selected_ver}"; do
+			if [[ -x "${candidate_path}" ]]; then
+				if [[ ${ZIG_NEEDS_LLVM} ]]; then
+					"${candidate_path}" test "${ZIG_GLOBAL_CACHE_DIR}/empty.zig" &> /dev/null || continue
+				fi
+				selected_path="${candidate_path}"
+				break 2
+			fi
+		done
+	done
+
+	if [[ -z "${selected_path}" ]]; then
+		die "Could not find (suitable) Zig at \"${base_path}\""
+	fi
+
 	declare -g ZIG_EXE="${selected_path}"
 	declare -g ZIG_VER="${selected_ver}"
 	# Sanity check, comment from upstream:
