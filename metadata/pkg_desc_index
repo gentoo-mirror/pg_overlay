@@ -166,7 +166,6 @@ sys-fs/avfs 1.2.0: Virtual filesystem that allows browsing of compressed files
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
-sys-fs/ncdu 2.9.1-r1: NCurses Disk Usage
 sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.16.0: XFS filesystem utilities
 sys-power/iasl 20250807: Intel ACPI Source Language (ASL) compiler
