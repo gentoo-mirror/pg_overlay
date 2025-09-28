@@ -5,8 +5,8 @@ EAPI=8
 
 VERIFY_SIG_OPENPGP_KEY_PATH=/usr/share/openpgp-keys/yoranheling.asc
 
-ZIG_SLOT="0.15"
-ZIG_NEEDS_LLVM=0
+#ZIG_SLOT="0.15"
+#ZIG_NEEDS_LLVM=0
 inherit verify-sig zig
 
 DESCRIPTION="NCurses Disk Usage"
