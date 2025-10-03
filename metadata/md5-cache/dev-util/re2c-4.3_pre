@@ -10,5 +10,5 @@ LICENSE=public-domain
 RESTRICT=!test? ( test ) mirror
 SLOT=0
 SRC_URI=https://github.com/skvadrik/re2c/releases/download/4.3/re2c-4.3.tar.xz
-_eclasses_=multiprocessing	1e32df7deee68372153dca65f4a7c21f	toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	python-utils-r1	b7eb9c3a6dc6662368634584aab44a2c	python-any-r1	891415dfe39ad9b41b461f2b86354af0	poly-c_ebuilds	c64dd525109db6a07afb3241c012daad
+_eclasses_=multiprocessing	1e32df7deee68372153dca65f4a7c21f	toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0	python-utils-r1	0b620dd604ab8af0bc9cd1bcc66d4f7c	python-any-r1	891415dfe39ad9b41b461f2b86354af0	poly-c_ebuilds	c64dd525109db6a07afb3241c012daad
 _md5_=2eb16b98a4538c4aa54e5f8357ad916e
