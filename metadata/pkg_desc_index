@@ -155,7 +155,7 @@ sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer device
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
-sys-block/zram-init 13.0: Scripts to support compressed swap devices or ramdisks with zRAM
+sys-block/zram-init 13.0.1: Scripts to support compressed swap devices or ramdisks with zRAM
 sys-devel/gettext 0.26_pre: GNU locale utilities
 sys-fs/avfs 1.2.0: Virtual filesystem that allows browsing of compressed files
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
