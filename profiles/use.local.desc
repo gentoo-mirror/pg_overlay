@@ -6,6 +6,7 @@ app-accessibility/at-spi2-core:dbus-broker - Use DBus broker implementation inst
 app-admin/sysklogd:logger - Build the logger program
 app-admin/sysklogd:logrotate - use app-admin/logrotate for rotating logs rather than custom cron scripts
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
+app-containers/runc:kmem - Enable Kernel Memory Accounting.
 app-crypt/pinentry:efl - Build dev-libs/efl based pinentry
 app-crypt/swtpm:fuse - Support sys-fs/fuse based /dev/tpm interface
 app-emulation/nemu:network-map - Adds possibility of exporting network map to SVG
