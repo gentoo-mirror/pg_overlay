@@ -98,7 +98,6 @@ media-libs/vapoursynth 72: VapourSynth is an library for video manipulation.
 media-libs/zimg 3.0.6: Scaling, colorspace conversion, and dithering library
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
 media-plugins/qmmp-plugin-pack 9999: A set of extra plugins for Qmmp
-media-sound/alsa-scarlett-gui 0.5.1: A UI for Focusrite Scarlett and Clarett audio interfaces
 media-sound/cantata 9999: Featureful and configurable Qt client for the music player daemon (MPD)
 media-sound/deadbeef 9999: DeaDBeeF is a modular audio player similar to foobar2000
 media-sound/dr14_tmeter 9999: Compute the DR14 value of the given audio files
@@ -122,7 +121,7 @@ net-analyzer/openbsd-netcat 1.229_p1: The OpenBSD network swiss army knife
 net-analyzer/traceroute 2.1.6_pre: Utility to trace the route of IP packets
 net-dialup/xl2tpd 1.3.19: A modern version of the Layer 2 Tunneling Protocol (L2TP) daemon
 net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
-net-fs/nfs-utils 2.8.3 2.8.4_rc3: NFS client and server daemons
+net-fs/nfs-utils 2.8.4_rc3 2.8.4: NFS client and server daemons
 net-im/64Gram 1.1.79: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
 net-im/forkgram 6.1.3: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
 net-im/nchat 9999: Terminal-based Telegram / WhatsApp client for Linux and macOS
@@ -155,7 +154,6 @@ sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer device
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
-sys-devel/gettext 0.26_pre: GNU locale utilities
 sys-fs/avfs 1.2.0: Virtual filesystem that allows browsing of compressed files
 sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of directories, fast!
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
