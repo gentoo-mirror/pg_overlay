@@ -70,7 +70,7 @@ PATCHES=(
 	#"${FILESDIR}/patch-cmake-absl-external.patch"
 	"${FILESDIR}/patch-cmake-crc32c-external.patch"
 	"${FILESDIR}/tg_owt-system-yuv.patch"
-	"${FILESDIR}/0001-Replace-absl-template-nullability-annotations.patch""
+	"${FILESDIR}/0001-Replace-absl-template-nullability-annotations.patch"
 )
 
 src_prepare() {
