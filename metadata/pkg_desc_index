@@ -95,7 +95,7 @@ media-libs/libwebp 1.6.0_pre: A lossy image compression format
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
 media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
-media-libs/tg_owt 0_pre20250515 0_pre20250703: WebRTC build for Telegram
+media-libs/tg_owt 0_pre20250515 0_pre20250703 0_pre20250914: WebRTC build for Telegram
 media-libs/vapoursynth 72: VapourSynth is an library for video manipulation.
 media-libs/zimg 3.0.6: Scaling, colorspace conversion, and dithering library
 media-plugins/deadbeef-mpris2-plugin 9999: A plugin that implements the MPRISv2 for DeaDBeeF
@@ -125,7 +125,7 @@ net-dialup/xl2tpd 1.3.19: A modern version of the Layer 2 Tunneling Protocol (L2
 net-fs/libnfs 6.0.2: Client library for accessing NFS shares over a network
 net-fs/nfs-utils 2.8.4_rc3 2.8.4: NFS client and server daemons
 net-im/64Gram 1.1.79: 64Gram (unofficial Telegram Desktop). Provide 64bit build with some enhancements
-net-im/forkgram 6.1.3: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
+net-im/forkgram 6.1.4: Forkgram is the fork of the official Telegram Desktop application. This fork does not fundamentally change the official client and adds only some useful small feature
 net-im/nchat 9999: Terminal-based Telegram / WhatsApp client for Linux and macOS
 net-libs/gtk-vnc 1.5.0: VNC viewer widget for GTK
 net-libs/libsrtp 2.7.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
