@@ -1,0 +1,12 @@
+DEFINED_PHASES=compile prepare
+DESCRIPTION=User-mode networking daemons for VMs and namespaces, replacement for Slirp
+EAPI=8
+HOMEPAGE=https://passt.top/
+INHERIT=toolchain-funcs
+IUSE=static
+KEYWORDS=amd64 arm64 ~loong ~riscv
+LICENSE=BSD GPL-2+
+SLOT=0
+SRC_URI=https://passt.top/passt/snapshot/passt-623dbf6.tar.xz -> passt-2025.09.19.tar.xz
+_eclasses_=toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0
+_md5_=6c3e2845bc00e3d9d16d8e5f37d28da9
