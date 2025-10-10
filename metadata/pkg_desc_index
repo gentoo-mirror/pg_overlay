@@ -2,6 +2,10 @@ app-accessibility/at-spi2-core 2.54.0: D-Bus accessibility specifications and re
 app-admin/profile-cleaner 2.45: Vacuum and reindex browser sqlite databases
 app-admin/sysklogd 2.7.0: Standard log daemons
 app-admin/webapp-config 9999: Gentoo's installer for web-based applications
+app-containers/docker 28.5.1: The core functions you need to create Docker images and run Docker containers
+app-containers/docker-buildx 0.29.1: Docker CLI plugin for extended build capabilities with BuildKit
+app-containers/docker-cli 28.5.1: the command line binary for docker
+app-containers/docker-compose 2.40.0: Multi-container orchestration for Docker
 app-containers/runc 1.3.2: runc container cli tools
 app-crypt/pinentry 1.3.2-r1: Simple passphrase entry dialogs which utilize the Assuan protocol
 app-crypt/swtpm 0.10.0: Libtpms-based TPM emulator
