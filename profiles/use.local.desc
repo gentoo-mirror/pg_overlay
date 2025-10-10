@@ -6,9 +6,13 @@ app-accessibility/at-spi2-core:dbus-broker - Use DBus broker implementation inst
 app-admin/sysklogd:logger - Build the logger program
 app-admin/sysklogd:logrotate - use app-admin/logrotate for rotating logs rather than custom cron scripts
 app-admin/webapp-config:portage - Propagate python_targets dependencies to sys-apps/portage
+app-containers/crun:bpf - Enable in Kernel, eBPF (enhanced Berkley Packet Filter) support for managing device controllers.
+app-containers/crun:criu - Enable CRIU based checkpoint/restore support
 app-containers/docker:btrfs - Enables dependencies for the "btrfs" graph driver, including necessary kernel flags.
 app-containers/docker:container-init - Makes the a staticly-linked init system tini available inside a container.
 app-containers/docker:overlay2 - Enables dependencies for the "overlay2" graph driver, including necessary kernel flags.
+app-containers/podman:btrfs - Enables btrfs support (graph driver) in Podman
+app-containers/podman:wrapper - Install wrapper which lets use podman for command `docker`
 app-containers/runc:kmem - Enable Kernel Memory Accounting.
 app-crypt/pinentry:efl - Build dev-libs/efl based pinentry
 app-crypt/swtpm:fuse - Support sys-fs/fuse based /dev/tpm interface
