@@ -129,8 +129,6 @@ src_prepare() {
 	eapply --binary "${FILESDIR}"/invite-peeking-restrictions.patch
 	eapply --binary "${FILESDIR}"/saving-restrictions.patch
 	eapply --binary "${FILESDIR}"/0001-kde-theme-injection-fix.patch
-	eapply --binary "${FILESDIR}"/glib2.86.patch
-
 
 	#remove fcitc_qt
 	rm -rfv Telegram/ThirdParty/fcitx5-qt
