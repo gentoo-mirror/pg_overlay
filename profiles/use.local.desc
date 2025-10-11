@@ -309,11 +309,6 @@ net-libs/nodejs:snapshot - Enable snapshot creation for faster startup
 net-libs/nodejs:system-icu - Use system dev-libs/icu instead of the bundled version
 net-libs/nodejs:system-ssl - Use system OpenSSL instead of the bundled one
 net-libs/nodejs:systemtap - Enable SystemTap/DTrace tracing
-net-misc/freerdp:aad - Enable login via Azure AD
-net-misc/freerdp:client - Build client binaries
-net-misc/freerdp:fuse - Clipboard with FUSE file copy support
-net-misc/freerdp:openh264 - Enable H.264 support using media-libs/openh264
-net-misc/freerdp:server - Build server binaries
 net-misc/minidlna:netgear - Enable netgear branding
 net-misc/minidlna:readynas - Enable readynas branding
 net-nds/rpcbind:remotecalls - Enable remote calls
