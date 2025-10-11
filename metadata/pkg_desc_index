@@ -127,7 +127,7 @@ media-sound/qmmp 9999: Qt-based audio player with winamp/xmms skins support
 media-sound/redoflacs 1.1.0: Bash commandline flac compressor, verifier, organizer, analyzer, retagger
 media-sound/spek-X 0.9.4 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
-media-video/haruna 1.4.0: Video player built with Qt/QML and libmpv
+media-video/haruna 1.5.0: Video player built with Qt/QML and libmpv
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.4.9: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
