@@ -3,8 +3,8 @@
 
 EAPI=8
 
-KFMIN=6.9.0
-QTMIN=6.8.1
+KFMIN=6.17.0
+QTMIN=6.9.2
 inherit ecm kde.org xdg
 
 if [[ ${KDE_BUILD_TYPE} == release ]]; then
