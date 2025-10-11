@@ -3,13 +3,13 @@
 
 EAPI=8
 
-KFMIN=6.3.0
-QTMIN=6.6.2
+KFMIN=6.17.0
+QTMIN=6.9.2
 inherit ecm kde.org
 
 if [[ ${KDE_BUILD_TYPE} == release ]]; then
 	SRC_URI="mirror://kde/stable/${PN}/${P}.tar.xz"
-	KEYWORDS="amd64 arm64 ~ppc64 ~x86"
+	KEYWORDS="~amd64 ~arm64 ~ppc64 ~x86"
 fi
 
 DESCRIPTION="libmpv wrapper for QtQuick2 and QML"
