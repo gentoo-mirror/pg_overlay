@@ -557,6 +557,7 @@ cmake_src_configure() {
 		set(CMAKE_COMPILE_WARNING_AS_ERROR OFF CACHE BOOL "")
 		set(CMAKE_LINK_WARNING_AS_ERROR OFF CACHE BOOL "")
 		set(CMAKE_BUILD_TYPE Release CACHE STRING "")
+		set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
 	_EOF_
 
 	if [[ -n ${_ECM_ECLASS} ]]; then
@@ -783,5 +784,5 @@ cmake_src_install() {
 }
 
 fi
-
+: "${CMAKE_BUILD_TYPE:=Release}"
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_test src_install
