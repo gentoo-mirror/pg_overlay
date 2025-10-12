@@ -64,7 +64,6 @@ dev-libs/libxmlb 0.3.24: Library to help create and query binary XML blobs
 dev-libs/protobuf 32.1: Google's Protocol Buffers - Extensible mechanism for serializing structured data
 dev-libs/spdlog 1.16.0: Fast C++ logging library
 dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
-dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/ocaml_intrinsics_kernel 0.17.1: Functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
 dev-ml/ocamlgraph 2.2.0: O'Caml Graph library
 dev-ml/ocurl 0.10.0: OCaml interface to the libcurl library
