@@ -10,5 +10,5 @@ LICENSE=iASL
 RESTRICT=!test? ( test )
 SLOT=0
 SRC_URI=https://github.com/acpica/acpica/releases/download/20250807/acpica-unix-20250807.tar.gz test? ( https://github.com/acpica/acpica/releases/download/20250807/acpitests-unix-20250807.tar.gz )
-_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	toolchain-funcs	a0b29008c671a362b505f96fa80ce9c0
+_eclasses_=edos2unix	33e347e171066657f91f8b0c72ec8773	toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db
 _md5_=453bd9430c277171ea2b57f1296022a2
