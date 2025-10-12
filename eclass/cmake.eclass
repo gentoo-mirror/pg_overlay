@@ -107,7 +107,8 @@ fi
 # @DESCRIPTION:
 # Warn about variables that are declared on the command line
 # but not used. Might give false-positives.
-# "no" to disable (default) or anything else to enable.
+# "no" to disable or anything else to enable.
+# The default is set to "yes" (enabled).
 : "${CMAKE_WARN_UNUSED_CLI:=yes}"
 
 # @ECLASS_VARIABLE: CMAKE_EXTRA_CACHE_FILE
@@ -157,7 +158,7 @@ case ${CMAKE_MAKEFILE_GENERATOR} in
 esac
 
 if [[ ${PN} != cmake ]]; then
-	BDEPEND+=" >=dev-build/cmake-3.20.5"
+	BDEPEND+=" >=dev-build/cmake-3.31.9-r1"
 fi
 
 # @FUNCTION: cmake_run_in
@@ -551,8 +552,10 @@ cmake_src_configure() {
 		set(Python3_FIND_UNVERSIONED_NAMES FIRST CACHE STRING "")
 		set(FETCHCONTENT_FULLY_DISCONNECTED ON CACHE BOOL "")
 		set(CMAKE_DISABLE_PRECOMPILE_HEADERS ON CACHE BOOL "")
+		set(CMAKE_INTERPROCEDURAL_OPTIMIZATION ON CACHE BOOL "")
 		set(CMAKE_TLS_VERIFY ON CACHE BOOL "")
 		set(CMAKE_COMPILE_WARNING_AS_ERROR OFF CACHE BOOL "")
+		set(CMAKE_LINK_WARNING_AS_ERROR OFF CACHE BOOL "")
 	_EOF_
 
 	if [[ -n ${_ECM_ECLASS} ]]; then
