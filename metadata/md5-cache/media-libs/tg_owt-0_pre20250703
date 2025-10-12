@@ -11,5 +11,5 @@ LICENSE=BSD
 RDEPEND=>=dev-cpp/abseil-cpp-20240722.0:= dev-libs/openssl:= dev-libs/protobuf:= media-libs/libjpeg-turbo:= >=media-libs/libvpx-1.10.0:= media-libs/libyuv media-libs/openh264:= media-libs/opus media-video/ffmpeg:= dev-libs/crc32c net-libs/libsrtp screencast? ( dev-libs/glib:2 media-video/pipewire:= ) X? ( x11-libs/libX11 x11-libs/libXcomposite x11-libs/libXdamage x11-libs/libXext x11-libs/libXfixes x11-libs/libXrender x11-libs/libXrandr x11-libs/libXtst )
 SLOT=0/20250703
 SRC_URI=https://github.com/desktop-app/tg_owt/archive/62321fd7128ab2650b459d4195781af8185e46b5.tar.gz -> tg_owt-0_pre20250703.tar.gz
-_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	7980fb28223e4821262dd91e0ebf1d18
+_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db	flag-o-matic	a7afe42e95fb46ce9691605acfb24672	multiprocessing	1e32df7deee68372153dca65f4a7c21f	ninja-utils	2df4e452cea39a9ec8fb543ce059f8d6	xdg-utils	42869b3c8d86a70ef3cf75165a395e09	cmake	4b706315afb5382fd37fa9169b1ef14b
 _md5_=ea81000644178d6fb7fb788d0d3eada2
