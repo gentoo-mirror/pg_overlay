@@ -196,6 +196,8 @@ media-sound/fooyin:pipewire - Enable sound support via native PipeWire backend
 media-sound/fooyin:replaygain - Enable support for Replay Gain scanning using media-libs/libebur128 instead of using ffmpeg
 media-sound/kid3:acoustid - Build acoustic fingerprinting plugin using media-libs/chromaprint
 media-sound/kid3:mpris - Enable support for MPRIS2 interface using dev-qt/qtdbus
+media-sound/lame:frontend - Build and install the 'lame' executable frontend to lame libraries.
+media-sound/lame:mp3rtp - Build the mp3-to-RTP streaming utility. **UNSUPPORTED**
 media-sound/ncmpc:async-connect - Enable asynchronous connect
 media-sound/ncmpc:chat-screen - Enable the chat screen
 media-sound/ncmpc:help-screen - Enable the help screen
