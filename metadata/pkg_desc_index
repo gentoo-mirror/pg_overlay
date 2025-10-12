@@ -62,6 +62,7 @@ dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/libunistring 1.4_pre: Library for manipulating Unicode and C strings according to Unicode standard
 dev-libs/libxmlb 0.3.24: Library to help create and query binary XML blobs
 dev-libs/protobuf 32.1: Google's Protocol Buffers - Extensible mechanism for serializing structured data
+dev-libs/spdlog 1.16.0: Fast C++ logging library
 dev-libs/xmlrpc-c 1.63.9999: A lightweigt RPC library based on XML and HTTP
 dev-libs/zziplib 9999: Lightweight library for extracting data from files archived in a single zip file
 dev-ml/ocaml_intrinsics_kernel 0.17.1: Functions to invoke amd64 instructions (such as cmov, min/maxsd, popcnt)
