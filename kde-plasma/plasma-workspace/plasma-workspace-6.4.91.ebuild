@@ -5,8 +5,8 @@ EAPI=8
 
 ECM_HANDBOOK="optional"
 ECM_TEST="forceoptional"
-KFMIN=6.16.0
-QTMIN=6.8.1
+KFMIN=6.18.0
+QTMIN=6.9.1
 inherit ecm plasma.kde.org xdg
 
 DESCRIPTION="KDE Plasma workspace"
@@ -14,8 +14,9 @@ DESCRIPTION="KDE Plasma workspace"
 LICENSE="GPL-2" # TODO: CHECK
 SLOT="6"
 KEYWORDS="~amd64 ~arm64 ~loong ~ppc64 ~riscv ~x86"
-IUSE="appstream +calendar +fontconfig +ksysguard networkmanager +policykit
-screencast +semantic-desktop systemd telemetry +wallpaper-metadata +X"
+IUSE="appstream +calendar +fontconfig +ksysguard networkmanager phonon
++policykit screencast +semantic-desktop systemd telemetry
++wallpaper-metadata +X"
 
 #REQUIRED_USE="fontconfig? ( X )"
 RESTRICT="test"
@@ -50,7 +51,8 @@ COMMON_DEPEND="
 	>=kde-frameworks/kguiaddons-${KFMIN}:6
 	>=kde-frameworks/ki18n-${KFMIN}:6
 	>=kde-frameworks/kiconthemes-${KFMIN}:6
-	>=kde-frameworks/kio-${KFMIN}-r1:6
+	>=kde-frameworks/kidletime-${KFMIN}:6
+	>=kde-frameworks/kio-${KFMIN}:6
 	>=kde-frameworks/kitemmodels-${KFMIN}:6
 	>=kde-frameworks/kitemviews-${KFMIN}:6
 	>=kde-frameworks/kjobwidgets-${KFMIN}:6
@@ -65,7 +67,6 @@ COMMON_DEPEND="
 	>=kde-frameworks/ksvg-${KFMIN}:6
 	>=kde-frameworks/ktexteditor-${KFMIN}:6
 	>=kde-frameworks/ktextwidgets-${KFMIN}:6
-	>=kde-frameworks/kunitconversion-${KFMIN}:6
 	>=kde-frameworks/kwallet-${KFMIN}:6
 	>=kde-frameworks/kwidgetsaddons-${KFMIN}:6
 	>=kde-frameworks/kwindowsystem-${KFMIN}:6[X?]
@@ -73,16 +74,16 @@ COMMON_DEPEND="
 	>=kde-frameworks/prison-${KFMIN}:6[qml]
 	>=kde-frameworks/solid-${KFMIN}:6
 	>=kde-plasma/breeze-${KDE_CATV}:6
+	>=kde-plasma/knighttime-${KDE_CATV}:6
 	>=kde-plasma/kwayland-${KDE_CATV}:6
 	>=kde-plasma/kwin-${KDE_CATV}:6
 	>=kde-plasma/layer-shell-qt-${KDE_CATV}:6
 	>=kde-plasma/libkscreen-${KDE_CATV}:6
 	>=kde-plasma/libplasma-${KDE_CATV}:6
-	>=kde-plasma/plasma-activities-${KDE_CATV}:6
+	>=kde-plasma/plasma-activities-${KDE_CATV}:6=
 	>=kde-plasma/plasma-activities-stats-${KDE_CATV}:6
 	>=kde-plasma/plasma5support-${KDE_CATV}:6
 	media-libs/libcanberra
-	>=media-libs/phonon-4.12.0[qt6(+)]
 	sci-libs/libqalculate:=
 	sys-apps/dbus
 	sys-libs/zlib
@@ -90,6 +91,7 @@ COMMON_DEPEND="
 	appstream? ( >=dev-libs/appstream-1[qt6] )
 	calendar? ( >=kde-frameworks/kholidays-${KFMIN}:6 )
 	ksysguard? ( >=kde-plasma/libksysguard-${KDE_CATV}:6 )
+	phonon? ( >=media-libs/phonon-4.12.0[qt6(+)] )
 	policykit? ( virtual/libcrypt:= )
 	networkmanager? ( >=kde-frameworks/networkmanager-qt-${KFMIN}:6 )
 	semantic-desktop? ( >=kde-frameworks/baloo-${KFMIN}:6 )
@@ -116,7 +118,7 @@ COMMON_DEPEND="
 	)
 "
 DEPEND="${COMMON_DEPEND}
-	>=dev-libs/plasma-wayland-protocols-1.18.0
+	>=dev-libs/plasma-wayland-protocols-1.19.0
 	dev-libs/qcoro
 	>=dev-qt/qtbase-${QTMIN}:6[concurrent]
 	test? ( screencast? ( >=media-video/pipewire-0.3:* ) )
@@ -166,6 +168,11 @@ src_prepare() {
 	ecm_src_prepare
 
 	cmake_comment_add_subdirectory login-sessions
+
+	if ! use phonon; then
+		sed -e "s/^find_package.*Phonon4Qt6/#&/" -i CMakeLists.txt || die
+		cmake_comment_add_subdirectory phonon
+	fi
 
 	if ! use policykit; then
 		cmake_run_in kcms cmake_comment_add_subdirectory users
