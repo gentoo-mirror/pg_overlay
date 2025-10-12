@@ -142,7 +142,7 @@ net-im/forkgram 6.2.0: Forkgram is the fork of the official Telegram Desktop app
 net-im/nchat 9999: Terminal-based Telegram / WhatsApp client for Linux and macOS
 net-libs/gtk-vnc 1.5.0: VNC viewer widget for GTK
 net-libs/libsrtp 2.7.0: Open-source implementation of the Secure Real-time Transport Protocol (SRTP)
-net-libs/libtirpc 1.3.6 1.3.7_rc3 1.3.7: Transport Independent RPC library (SunRPC replacement)
+net-libs/libtirpc 1.3.7_rc3: Transport Independent RPC library (SunRPC replacement)
 net-libs/libtorrent 0.16.0 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
 net-libs/nodejs 24.10.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
