@@ -784,5 +784,5 @@ cmake_src_install() {
 }
 
 fi
-: "${CMAKE_BUILD_TYPE:=Release}"
+
 EXPORT_FUNCTIONS src_prepare src_configure src_compile src_test src_install
