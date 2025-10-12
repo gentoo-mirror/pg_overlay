@@ -56,7 +56,7 @@ inherit flag-o-matic multiprocessing ninja-utils toolchain-funcs xdg-utils
 #
 # In EAPI 7, the default was non-standard build type of Gentoo.
 : "${CMAKE_BUILD_TYPE:=Release}"
-: "${CMAKE_INTERPROCEDURAL_OPTIMIZATION:=ON}
+: "${CMAKE_INTERPROCEDURAL_OPTIMIZATION:=ON}"
 
 # @ECLASS_VARIABLE: CMAKE_IN_SOURCE_BUILD
 # @DEFAULT_UNSET
