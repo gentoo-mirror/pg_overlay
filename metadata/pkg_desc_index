@@ -161,6 +161,7 @@ net-print/samsung-unified-driver 1.00.39: Samsung Unified Linux Driver for print
 net-vpn/networkmanager-l2tp 1.20.20: NetworkManager L2TP plugin
 sci-mathematics/mathematica 14.2.1: Wolfram Mathematica
 sys-apps/bleachbit 9999: Clean junk to free disk space and to maintain privacy
+sys-apps/debianutils 5.23.2_pre: A selection of tools from Debian
 sys-apps/fwupd 2.0.16: Aims to make updating firmware on Linux automatic, safe and reliable
 sys-apps/hwinfo 25.0: Hardware detection tool used in SuSE Linux
 sys-apps/hwloc 2.12.1: Displays the hardware topology in convenient formats
