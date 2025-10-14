@@ -12,11 +12,11 @@ if [[ ${PV} != *9999* ]]; then
 	SRC_URI="
 		https://qmmp.ylsoftware.com/files/qmmp/$(ver_cut 1-2)/${P}.tar.bz2
 		https://downloads.sourceforge.net/project/qmmp-dev/qmmp/$(ver_cut 1-2)/${P}.tar.bz2
-	"
+		"
 	KEYWORDS="~amd64 ~x86"
 else
 	inherit subversion
-	ESVN_REPO_URI="svn://svn.code.sf.net/p/${PN}-dev/code/trunk/${PN}"
+	ESVN_REPO_URI="https://svn.code.sf.net/p/${PN}-dev/code/trunk/${PN}"
 fi
 
 LICENSE="CC-BY-SA-4.0 GPL-2+" # default skin & source code
