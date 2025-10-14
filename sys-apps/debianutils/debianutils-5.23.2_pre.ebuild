@@ -8,7 +8,6 @@ inherit autotools flag-o-matic poly-c_ebuilds
 DESCRIPTION="A selection of tools from Debian"
 HOMEPAGE="https://packages.qa.debian.org/d/debianutils.html"
 SRC_URI="mirror://debian/pool/main/d/${PN}/${PN}_${MY_PV}.tar.xz"
-#SRC_URI="mirror://gentoo/e7/${PN}_${MY_PV}.tar.xz"
 
 LICENSE="BSD GPL-2 SMAIL"
 SLOT="0"
@@ -16,6 +15,8 @@ KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~m68k ~mips ~ppc ~ppc64 ~riscv 
 IUSE="static"
 
 PATCHES=( "${FILESDIR}"/${PN}-3.4.2-no-bs-namespace.patch )
+
+S=${WORKDIR}/work
 
 src_prepare() {
 	# Avoid adding po4a dependency, upstream refreshes manpages.
