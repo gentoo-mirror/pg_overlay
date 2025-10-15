@@ -51,7 +51,7 @@ dev-cpp/tbb 2022.2.0: High level abstract threading library
 dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
 dev-games/freecell-solver 6.12.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.2: feature rich visual programming environment emulating Delphi
-dev-lang/python 3.13.8: An interpreted, interactive, object-oriented programming language
+dev-lang/python 3.13.9: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 6.1.1: A library for concurrent code execution on multicore hardware
