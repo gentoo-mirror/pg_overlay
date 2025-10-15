@@ -2,13 +2,17 @@ diff --git a/browser/extensions/moz.build b/browser/extensions/moz.build
 index 3c6e7eb88689..d923333aa100 100644
 --- a/browser/extensions/moz.build
 +++ b/browser/extensions/moz.build
-@@ -5,9 +5,4 @@
+@@ -5,13 +5,6 @@
  # file, You can obtain one at http://mozilla.org/MPL/2.0/.
-
+ 
  DIRS += [
+-    "data-leak-blocker",
 -    "formautofill",
+-    "ipp-activator",
 -    "webcompat",
 -    "pictureinpicture",
 -    "search-detection",
 -    "newtab",
  ]
+ 
+ JAR_MANIFESTS += ["jar.mn"]
