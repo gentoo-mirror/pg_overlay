@@ -3,7 +3,7 @@
 
 EAPI=8
 
-GREATEST_PV="1.2.1"
+GREATEST_PV="1.5.0"
 
 if [[ ${PV} = *9999 ]] ; then
 	inherit git-r3
