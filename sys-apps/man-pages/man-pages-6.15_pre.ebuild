@@ -3,7 +3,7 @@
 
 EAPI=8
 
-inherit poly-c_ebuilds eapi9-ver
+inherit poly-c_ebuilds
 
 # Maintenance notes:
 # - Upstream are very friendly, do approach them if have any questions;
