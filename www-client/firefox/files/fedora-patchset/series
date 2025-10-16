@@ -4,7 +4,6 @@ firefox-glibc-dynstack.patch
 0001-GLIBCXX-fix-for-GCC-12.patch
 firefox-gcc-13-build.patc
 
-firefox-tests-xpcshell.patch
 firefox-tests-reftest.patch
 firefox-tests-xpcshell-freeze.patch
 
