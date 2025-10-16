@@ -50,6 +50,7 @@ RDEPEND="
 	x11-libs/libXi
 	x11-libs/libXrandr
 	x11-libs/libdrm
+	x11-libs/libnotify
 	x11-libs/libxcb
 	x11-libs/libxkbcommon
 	x11-libs/pango
