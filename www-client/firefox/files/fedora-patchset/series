@@ -1,17 +1,5 @@
 firefox-gcc-build.patch
-firefox-testing.patch
-firefox-glibc-dynstack.patch
 0001-GLIBCXX-fix-for-GCC-12.patch
-firefox-gcc-13-build.patc
-
-firefox-tests-reftest.patch
-firefox-tests-xpcshell-freeze.patch
 
 firefox-enable-addons.patch
 disable-openh264-download.patch
-
-mozilla-1196777.patch
-
-pgo.patch
-mozilla-1516803.patch
-firefox-gcc-always-inline.patch

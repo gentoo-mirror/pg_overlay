@@ -1,2 +1,5 @@
+firefox-gcc-build.patch
+0001-GLIBCXX-fix-for-GCC-12.patch
+
 firefox-enable-addons.patch
 disable-openh264-download.patch
