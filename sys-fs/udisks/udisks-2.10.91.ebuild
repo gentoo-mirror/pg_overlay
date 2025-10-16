@@ -2,10 +2,11 @@
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=8
+
 inherit autotools bash-completion-r1 linux-info systemd tmpfiles udev xdg-utils
 
 DESCRIPTION="Daemon providing interfaces to work with storage devices"
-HOMEPAGE="https://www.freedesktop.org/wiki/Software/udisks"
+HOMEPAGE="https://www.freedesktop.org/wiki/Software/udisks/ https://github.com/storaged-project/udisks"
 SRC_URI="https://github.com/storaged-project/udisks/releases/download/${P}/${P}.tar.bz2"
 
 LICENSE="LGPL-2+ GPL-2+"
@@ -19,12 +20,9 @@ REQUIRED_USE="
 	systemd? ( daemon )
 "
 
-# See configure.ac file for the required min version
-BLOCKDEV_MIN_VER="3.0"
-
 COMMON_DEPEND="
-	>=sys-auth/polkit-0.114[daemon]
-	>=sys-libs/libblockdev-${BLOCKDEV_MIN_VER}:=[cryptsetup,lvm?,nvme]
+	>=sys-auth/polkit-0.114[daemon(+)]
+	>=sys-libs/libblockdev-3.3.0:=[cryptsetup,lvm?,nvme]
 	virtual/udev
 	acl? ( virtual/acl )
 	daemon? (
