@@ -147,7 +147,7 @@ net-libs/libsrtp 2.7.0: Open-source implementation of the Secure Real-time Trans
 net-libs/libtirpc 1.3.7_rc3: Transport Independent RPC library (SunRPC replacement)
 net-libs/libtorrent 0.16.0 9999: BitTorrent library written in C++ for *nix
 net-libs/libtorrent-rasterbar 2.0.9999: C++ BitTorrent implementation focusing on efficiency and scalability
-net-libs/nodejs 24.10.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
+net-libs/nodejs 25.0.0: A JavaScript runtime built on Chrome's V8 JavaScript engine
 net-misc/minidlna 9999: DLNA/UPnP-AV compliant media server
 net-misc/passt 2025.09.19: User-mode networking daemons for VMs and namespaces, replacement for Slirp
 net-nds/rpcbind 1.2.8_rc2: portmap replacement which supports RPC over various protocols
