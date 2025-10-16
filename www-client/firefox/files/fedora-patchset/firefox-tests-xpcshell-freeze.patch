@@ -1,0 +1,14 @@
+diff -up firefox-88.0/testing/xpcshell/runxpcshelltests.py.old firefox-88.0/testing/xpcshell/runxpcshelltests.py
+--- firefox-88.0/testing/xpcshell/runxpcshelltests.py.old	2021-04-30 10:45:14.466616224 +0200
++++ firefox-88.0/testing/xpcshell/runxpcshelltests.py	2021-04-30 10:45:21.339525085 +0200
+@@ -1382,8 +1382,8 @@ class XPCShellTests(object):
+                         self.log.info("Process %s" % label)
+                     self.log.info(msg)
+ 
+-            dumpOutput(proc.stdout, "stdout")
+-            dumpOutput(proc.stderr, "stderr")
++            #dumpOutput(proc.stdout, "stdout")
++            #dumpOutput(proc.stderr, "stderr")
+         self.nodeProc = {}
+ 
+     def startHttp3Server(self):
