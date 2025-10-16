@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_{13..14} )
 
 inherit flag-o-matic gnome.org vala meson python-any-r1 xdg
 
