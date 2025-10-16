@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..13} )
+PYTHON_COMPAT=( python3_{13..14} )
 inherit gnome.org meson python-any-r1 virtualx
 
 DESCRIPTION="C++ interface for GTK+"

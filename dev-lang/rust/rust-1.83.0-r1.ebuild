@@ -4,7 +4,7 @@
 EAPI=8
 
 LLVM_COMPAT=( 19 )
-PYTHON_COMPAT=( python3_{10..13} )
+PYTHON_COMPAT=( python3_{13..14} )
 
 RUST_MAX_VER=${PV}
 RUST_MIN_VER="$(ver_cut 1).$(($(ver_cut 2) - 1)).0"

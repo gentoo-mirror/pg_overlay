@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=( python3_{12..13} )
+PYTHON_COMPAT=( python3_{13..14} )
 
 inherit git-r3 linux-info meson pam python-any-r1 udev xdg-utils
 
