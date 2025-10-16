@@ -37,6 +37,7 @@ app-shells/quoter 4.2-r1: Quote arguments or standard input for usage in POSIX s
 app-text/enchant 2.8.6: Spellchecker wrapping library
 app-text/goldendict-ng 9999 9999-r1: The Next Generation GoldenDict. Feature-rich dictionary lookup program
 app-text/podofo 1.0.1: PoDoFo is a C++ library to work with the PDF file format
+app-text/poppler 25.10.0_pre: PDF rendering library based on the xpdf-3.0 code base
 dev-build/autoconf-wrapper 20250528: Wrapper for autoconf to manage multiple autoconf versions
 dev-cpp/abseil-cpp 20250814.1: Abseil Common Libraries (C++), LTS Branch
 dev-cpp/atkmm 2.36.3: C++ interface for the ATK library
@@ -167,7 +168,7 @@ sys-apps/debianutils 5.23.2_pre: A selection of tools from Debian
 sys-apps/fwupd 2.0.16: Aims to make updating firmware on Linux automatic, safe and reliable
 sys-apps/hwinfo 25.0: Hardware detection tool used in SuSE Linux
 sys-apps/hwloc 2.12.1: Displays the hardware topology in convenient formats
-sys-apps/man-pages 6.13_pre: A somewhat comprehensive collection of Linux man pages
+sys-apps/man-pages 6.15_pre: A somewhat comprehensive collection of Linux man pages
 sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
@@ -177,8 +178,9 @@ sys-fs/dua-cli 9999: A tool to conveniently learn about the disk usage of direct
 sys-fs/exfatprogs 1.3.0_pre: Userspace utilities for the exFAT filesystem
 sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
-sys-fs/udisks 2.10.90: Daemon providing interfaces to work with storage devices
+sys-fs/udisks 2.10.91: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.16.0: XFS filesystem utilities
+sys-libs/libblockdev 3.4.0_pre: Library for manipulating block devices
 sys-libs/libunwind 1.8.3: Portable and efficient API to determine the call-chain of a program
 sys-power/iasl 20250807: Intel ACPI Source Language (ASL) compiler
 sys-process/glances 4.3.3: CLI curses based monitoring tool
