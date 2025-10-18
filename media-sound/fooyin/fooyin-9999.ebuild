@@ -63,6 +63,7 @@ src_prepare() {
 			tests/tagreadertest.cpp \
 		|| die
 
+	sed -i '/discord/d'		src/plugins/CMakeLists.txt
 	sed -i '/fileops/d'		src/plugins/CMakeLists.txt
 	sed -i '/filters/d' 	src/plugins/CMakeLists.txt
 	sed -i '/gme/d' 		src/plugins/CMakeLists.txt
