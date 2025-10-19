@@ -408,6 +408,27 @@ www-client/firefox:system-png - Use the system-wide media-libs/libpng instead of
 www-client/firefox:system-webp - Use the system-wide media-libs/libwebp instead of bundled
 www-client/firefox:wasm-sandbox - Sandbox certain third-party libraries through WebAssembly using RLBox
 www-client/firefox:wifi - Enable necko-wifi for NetworkManager integration, and access point MAC address scanning for better precision with opt-in geolocation services
+www-client/librewolf:clang - Use Clang compiler instead of GCC
+www-client/librewolf:eme-free - Disable EME (DRM plugin) capability at build time
+www-client/librewolf:gmp-autoupdate - Allow Gecko Media Plugins (binary blobs) to be automatically downloaded and kept up-to-date in user profiles
+www-client/librewolf:hwaccel - Force-enable hardware-accelerated rendering (Mozilla bug 594876)
+www-client/librewolf:jumbo-build - Enable unified build - combines source files to speed up build process, but requires more memory
+www-client/librewolf:libproxy - Enable libproxy support
+www-client/librewolf:openh264 - Use media-libs/openh264 for H264 support instead of downloading binary blob from Mozilla at runtime
+www-client/librewolf:pgo - Add support for profile-guided optimization for faster binaries - this option will double the compile time
+www-client/librewolf:pulseaudio - Add sound server support via media-libs/libpulse (may be PulseAudio or Pipewire, or apulse if installed)
+www-client/librewolf:sndio - Enable support for the media-sound/sndio backend
+www-client/librewolf:system-av1 - Use the system-wide media-libs/dav1d and media-libs/libaom library instead of bundled
+www-client/librewolf:system-harfbuzz - Use the system-wide media-libs/harfbuzz instead of bundled and media-gfx/graphite2 in most cases
+www-client/librewolf:system-icu - Use the system-wide dev-libs/icu instead of bundled
+www-client/librewolf:system-jpeg - Use the system-wide media-libs/libjpeg-turbo instead of bundled
+www-client/librewolf:system-libevent - Use the system-wide dev-libs/libevent instead of bundled
+www-client/librewolf:system-libvpx - Use the system-wide media-libs/libvpx instead of bundled
+www-client/librewolf:system-pipewire - Use system media-video/pipewire for WebRTC and screencast instead of bundled one
+www-client/librewolf:system-png - Use the system-wide media-libs/libpng instead of bundled (requires APNG patches)
+www-client/librewolf:system-webp - Use the system-wide media-libs/libwebp instead of bundled
+www-client/librewolf:wasm-sandbox - Sandbox certain third-party libraries through WebAssembly using RLBox
+www-client/librewolf:wifi - Enable necko-wifi for NetworkManager integration, and access point MAC address scanning for better precision with opt-in geolocation services
 x11-base/xwayland:libei - Enable emulated input using dev-libs/libei
 x11-base/xwayland:unwind - Enable libunwind usage for backtraces
 x11-base/xwayland:xcsecurity - Build Security extension
