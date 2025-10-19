@@ -10,7 +10,7 @@ app-containers/crun 1.24: Fast and low-memory footprint OCI Container Runtime fu
 app-containers/docker 28.5.1: The core functions you need to create Docker images and run Docker containers
 app-containers/docker-buildx 0.29.1: Docker CLI plugin for extended build capabilities with BuildKit
 app-containers/docker-cli 28.5.1: the command line binary for docker
-app-containers/docker-compose 2.40.0: Multi-container orchestration for Docker
+app-containers/docker-compose 2.40.1: Multi-container orchestration for Docker
 app-containers/netavark 1.16.1: A container network stack
 app-containers/podman 5.6.2: A tool for managing OCI containers and pods with Docker-compatible CLI
 app-containers/podman-compose 1.5.0: A script to run docker-compose.yml using Podman
