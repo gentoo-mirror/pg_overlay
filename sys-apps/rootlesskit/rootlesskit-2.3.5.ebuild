@@ -17,12 +17,6 @@ IUSE="selinux"
 
 RDEPEND="selinux? ( sec-policy/selinux-rootlesskit )"
 
-src_prepare() {
-	export GOPATH="${S}"
-	go mod download
-
-}
-
 src_install() {
 	local -x BINDIR=${EPREFIX}/usr/bin
 	default
