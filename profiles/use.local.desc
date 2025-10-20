@@ -11,6 +11,7 @@ app-containers/crun:criu - Enable CRIU based checkpoint/restore support
 app-containers/docker:btrfs - Enables dependencies for the "btrfs" graph driver, including necessary kernel flags.
 app-containers/docker:container-init - Makes the a staticly-linked init system tini available inside a container.
 app-containers/docker:overlay2 - Enables dependencies for the "overlay2" graph driver, including necessary kernel flags.
+app-containers/nerdctl:rootless - Enables dependencies for running in rootless mode.
 app-containers/podman:btrfs - Enables btrfs support (graph driver) in Podman
 app-containers/podman:wrapper - Install wrapper which lets use podman for command `docker`
 app-containers/runc:kmem - Enable Kernel Memory Accounting.
