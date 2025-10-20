@@ -19,7 +19,7 @@ RDEPEND="selinux? ( sec-policy/selinux-rootlesskit )"
 
 src_unpack() {
 	default
-	mv go-mod ..
+	mv ${S}/go-mod ..
 }
 
 src_install() {
