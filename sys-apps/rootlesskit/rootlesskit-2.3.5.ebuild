@@ -17,6 +17,11 @@ IUSE="selinux"
 
 RDEPEND="selinux? ( sec-policy/selinux-rootlesskit )"
 
+src_unpack() {
+	default
+	mv ${S}/go-mod ${WORKDIR}
+}
+
 src_install() {
 	local -x BINDIR=${EPREFIX}/usr/bin
 	default
