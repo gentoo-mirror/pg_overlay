@@ -3,7 +3,7 @@
 
 EAPI=8
 
-PYTHON_COMPAT=python3_{13..14}
+PYTHON_COMPAT=(python3_{13..14})
 inherit readme.gentoo-r1 pam python-any-r1 systemd xdg-utils
 
 MY_PN="VMware-Workstation"
