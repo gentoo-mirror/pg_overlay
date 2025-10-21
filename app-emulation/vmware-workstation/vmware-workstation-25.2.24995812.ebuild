@@ -8,8 +8,8 @@ inherit readme.gentoo-r1 pam python-any-r1 systemd xdg-utils
 
 MY_PN="VMware-Workstation"
 MY_PV=$(ver_cut 1-2)
-PV_MODULES="25-2"
-PV_BUILD=$(ver_cut 2)
+PV_MODULES="25.2"
+PV_BUILD=$(ver_cut 3)
 MY_P="${MY_PN}-${MY_PV}-${PV_BUILD}"
 SYSTEMD_UNITS_TAG="gentoo-02"
 UNLOCKER_VERSION="3.0.5"
@@ -82,7 +82,7 @@ QA_WX_LOAD="opt/vmware/lib/vmware/tools-upgraders/vmware-tools-upgrader-32 opt/v
 # adding "opt/vmware/lib/vmware/lib/libvmware-gksu.so/libvmware-gksu.so" to QA_WX_LOAD doesn't work
 
 pkg_nofetch() {
-	einfo "${MY_PN}-Full-${MY_PV}-${PV_BUILD}.x86_64.bundle should be downloaded manually"
+	einfo "${MY_PN}-Full-${MY_PV/./H}-${PV_BUILD}.x86_64.bundle should be downloaded manually"
 }
 
 src_unpack() {
@@ -100,7 +100,7 @@ src_unpack() {
 	done
 
 	export LC_ALL=C # https://communities.vmware.com/thread/618570?start=15&tstart=0
-	local bundle="${MY_PN}-Full-${MY_PV}-${PV_BUILD}.x86_64.bundle"
+	local bundle="${MY_PN}-Full-${MY_PV/./H}-${PV_BUILD}.x86_64.bundle"
 	chmod 755 "${bundle}"
 	# this needs a /tmp mounted without "noexec" because it extracts and executes scripts in there
 	./${bundle} --console --required --eulas-agreed --extract=extracted || die "unable to extract bundle"
