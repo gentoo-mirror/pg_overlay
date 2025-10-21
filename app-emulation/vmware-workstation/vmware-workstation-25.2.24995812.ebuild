@@ -7,7 +7,7 @@ PYTHON_COMPAT=(python3_{13..14})
 inherit readme.gentoo-r1 pam python-any-r1 systemd xdg-utils
 
 MY_PN="VMware-Workstation"
-MY_PV=$(ver_cut 1-2/./H)
+MY_PV=$(ver_cut 1-2)
 PV_MODULES="25-2"
 PV_BUILD=$(ver_cut 2)
 MY_P="${MY_PN}-${MY_PV}-${PV_BUILD}"
@@ -17,7 +17,7 @@ UNLOCKER_VERSION="3.0.5"
 DESCRIPTION="Emulate a complete PC without the performance overhead of most emulators"
 HOMEPAGE="http://www.vmware.com/products/workstation/"
 SRC_URI="
-	${MY_PN}-Full-${MY_PV}-${PV_BUILD}.x86_64.bundle
+	${MY_PN}-Full-${MY_PV/./H}-${PV_BUILD}.x86_64.bundle
 	macos-guests? (
 		fetch+https://github.com/paolo-projects/unlocker/archive/${UNLOCKER_VERSION}.tar.gz -> unlocker-${UNLOCKER_VERSION}.tar.gz
 	)
