@@ -9,11 +9,11 @@ DESCRIPTION="VMware kernel modules"
 HOMEPAGE="https://github.com/bytium/vm-host-modules"
 
 # Highest kernel version known to work:
-MY_KERNEL_VERSION="6.16"
+MY_KERNEL_VERSION="6.17"
 
-MY_COMMIT="7bab658ccb4ba783b984e800a30925eea46448ff"
+MY_COMMIT="a8f67001613ad1804175ce6c80fbaffde129a7e1"
 
-SRC_URI="https://github.com/perfect7gentleman/sources/raw/be525309bc8011d5d86ff24918635a1acd87e182/${P}.tar.xz"
+SRC_URI="https://github.com/perfect7gentleman/sources/raw/${MY_COMMIT}/${P}.tar.xz"
 S="${WORKDIR}"
 LICENSE="GPL-2"
 SLOT="0"
