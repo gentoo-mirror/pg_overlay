@@ -1,0 +1,14 @@
+DEFINED_PHASES=compile configure install
+DEPEND=net-print/cups
+DESCRIPTION=Provides a virtual printer for CUPS to produce PDF files
+EAPI=8
+HOMEPAGE=https://www.cups-pdf.de/
+INHERIT=toolchain-funcs
+IUSE=+ppds
+KEYWORDS=amd64 ~arm ~arm64 ppc ~ppc64 x86
+LICENSE=GPL-2+
+RDEPEND=net-print/cups >=app-text/ghostscript-gpl-9.54
+SLOT=0
+SRC_URI=https://www.cups-pdf.de/src/cups-pdf_3.0.2.tar.gz
+_eclasses_=toolchain-funcs	98d9f464d912ae6b7316fb8a3721f5db
+_md5_=0f0e067be833c1b48df177f86342e8e3
