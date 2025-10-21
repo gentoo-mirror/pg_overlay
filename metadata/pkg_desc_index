@@ -24,7 +24,8 @@ app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of A
 app-emulation/libvirt 11.8.0: C toolkit to manipulate virtual machines
 app-emulation/nemu 3.3.1: Ncurses interface for QEMU
 app-emulation/virt-firmware 25.9: Tools for ovmf/armvirt firmware volumes
-app-emulation/vmware-modules 17.6.3-r2: VMware kernel modules
+app-emulation/vmware-modules 17.6.3-r2 25.2: VMware kernel modules
+app-emulation/vmware-workstation 25.2.24995812: Emulate a complete PC without the performance overhead of most emulators
 app-i18n/enca 1.20 9999: Detect and convert encoding of text files
 app-misc/doublecmd 1.1.29: Cross Platform file manager.
 app-misc/fclones 9999: Efficient Duplicate File Finder
