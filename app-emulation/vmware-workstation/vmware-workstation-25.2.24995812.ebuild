@@ -8,8 +8,8 @@ inherit readme.gentoo-r1 pam python-any-r1 systemd xdg-utils
 
 MY_PN="VMware-Workstation"
 MY_PV=$(ver_cut 1-2)
-PV_MODULES="25-2"
-PV_BUILD=$(ver_cut 2)
+PV_MODULES="25.2"
+PV_BUILD=$(ver_cut 3)
 MY_P="${MY_PN}-${MY_PV}-${PV_BUILD}"
 SYSTEMD_UNITS_TAG="gentoo-02"
 UNLOCKER_VERSION="3.0.5"
