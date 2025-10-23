@@ -95,7 +95,7 @@ gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
 gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 gui-libs/gtk 4.20.2: GTK is a multi-platform toolkit for creating graphical user interfaces
 kde-misc/kweather 25.08.2 9999: Weather forecast application for Plasma with flat and dynamic/animated views
-kde-plasma/plasma-workspace 6.5.0: KDE Plasma workspace
+kde-plasma/plasma-workspace 6.5.0-r1: KDE Plasma workspace
 mail-client/thunderbird 144.0.1: Thunderbird Mail Client
 media-fonts/unifont 17.0.01: GNU Unifont - a Pan-Unicode X11 bitmap iso10646 font
 media-gfx/czkawka 9999: App to find duplicates, empty folders and similar images
