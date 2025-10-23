@@ -340,7 +340,7 @@ _cmake_minreqver-info() {
 	[[ -n ${_CMAKE_MINREQVER_CMAKE305[@]} ]] && warnlvl=305
 	[[ -n ${_CMAKE_MINREQVER_CMAKE310[@]} ]] || [[ ${warnlvl} ]] && warnlvl=310
 	[[ ${CMAKE_ECM_MODE} == true ]] &&
-		{ [[ -n ${_CMAKE_MINREQVER_CMAKE316[@]} ]] || [[ ${warnlvl} ]] } && warnlvl=316
+		{ [[ -n ${_CMAKE_MINREQVER_CMAKE316[@]} ]] || [[ ${warnlvl} ]]; } && warnlvl=316
 
 	local weak_qaw="QA Notice: "
 	minreqver_qanotice() {
@@ -354,47 +354,66 @@ _cmake_minreqver-info() {
 			310)
 				eqawarn "${weak_qaw}Compatibility with CMake < 3.10 will be removed in a future release."
 				eqawarn "If not fixed in upstream's code repository, we should make sure they are aware."
+				eqawarn "See also tracker bug #964405; check existing or file a new bug for this package."
 				;;
 			316)
 				eqawarn "${weak_qaw}Compatibility w/ CMake < 3.16 will be removed in future ECM release."
 				eqawarn "If not fixed in upstream's code repository, we should make sure they are aware."
+				eqawarn "See also tracker bug #964407; check existing or file a new bug for this package."
 				;;
 		esac
 		eqawarn
 		weak_qaw="" # weak notice: no "QA Notice" starting with second call
 	}
 
+	local info
 	minreqver_listing() {
-		local info
-		eqawarn "${2}"
 		case ${1} in
-			305) for info in ${_CMAKE_MINREQVER_CMAKE305[*]}; do eqawarn "  ${info}"; done ;;
-			310) for info in ${_CMAKE_MINREQVER_CMAKE310[*]}; do eqawarn "  ${info}"; done ;;
-			316) for info in ${_CMAKE_MINREQVER_CMAKE316[*]}; do eqawarn "  ${info}"; done ;;
+			305)
+				eqawarn "The following CMakeLists.txt files are causing errors:"
+				for info in ${_CMAKE_MINREQVER_CMAKE305[*]}; do
+					eqawarn "  ${info#"${CMAKE_USE_DIR}/"}";
+				done
+				eqawarn
+				;;
+			310)
+				if [[ -n ${_CMAKE_MINREQVER_CMAKE310[@]} ]]; then
+					eqawarn "The following CMakeLists.txt files are causing warnings:"
+					for info in ${_CMAKE_MINREQVER_CMAKE310[*]}; do
+						eqawarn "  ${info#"${CMAKE_USE_DIR}/"}";
+					done
+					eqawarn
+				fi
+				;;
+			316)
+				if [[ ${warnlvl} -ge 316 ]] && [[ -n ${_CMAKE_MINREQVER_CMAKE316[@]} ]]; then
+					eqawarn "The following CMakeLists.txt files are causing warnings:"
+					for info in ${_CMAKE_MINREQVER_CMAKE316[*]}; do
+						eqawarn "  ${info#"${CMAKE_USE_DIR}/"}";
+					done
+					eqawarn
+				fi
+				;;
 		esac
-		eqawarn
 	}
 
 	# CMake 4-caused error is highest priority and must always be shown
 	if [[ -n ${_CMAKE_MINREQVER_CMAKE305[@]} ]]; then
 		minreqver_qanotice 305
-		minreqver_listing 305 "The following CMakeLists.txt files are causing errors:"
-		if ! [[ ${CMAKE_QA_COMPAT_SKIP} ]] && has_version -b ">=dev-build/cmake-4"; then
-			eqawarn "CMake 4 detected; building with -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
-			eqawarn "This is merely a workaround to avoid CMake Error and *not* a permanent fix;"
-			eqawarn "there may be new build or runtime bugs as a result."
-		fi
-		eqawarn
+		minreqver_listing 305
 	fi
 	# for warnings, we only want the latest relevant one, but list all flagged files
 	if [[ ${warnlvl} -ge 310 ]]; then
 		minreqver_qanotice ${warnlvl}
-		[[ -n ${_CMAKE_MINREQVER_CMAKE310[@]} ]] &&
-			minreqver_listing 310 "The following CMakeLists.txt files are causing warnings:"
-		[[ ${warnlvl} -ge 316 ]] && [[ -n ${_CMAKE_MINREQVER_CMAKE316[@]} ]] &&
-			minreqver_listing 316 "The following CMakeLists.txt files are causing warnings:"
+		for info in 310 316; do minreqver_listing ${info}; done
 	fi
 	if [[ ${warnlvl} ]]; then
+		if [[ -n ${_CMAKE_MINREQVER_CMAKE305[@]} ]] && has_version -b ">=dev-build/cmake-4"; then
+			eqawarn "CMake 4 detected; building with -DCMAKE_POLICY_VERSION_MINIMUM=3.5"
+			eqawarn "This is merely a workaround to avoid CMake Error and *not* a permanent fix;"
+			eqawarn "there may be new build or runtime bugs as a result."
+			eqawarn
+		fi
 		eqawarn "An upstreamable patch should take any resulting CMake policy changes"
 		eqawarn "into account. See also:"
 		eqawarn "  https://cmake.org/cmake/help/latest/manual/cmake-policies.7.html"
@@ -432,7 +451,7 @@ _cmake_modify-cmakelists() {
 		fi
 		# Detect unsupported minimum CMake versions unless CMAKE_QA_COMPAT_SKIP is set
 		if ! [[ ${CMAKE_QA_COMPAT_SKIP} ]]; then
-			_cmake_minreqver-check "${file#"${CMAKE_USE_DIR}/"}"
+			_cmake_minreqver-check "${file}"
 		fi
 	done < <(find "${CMAKE_USE_DIR}" -type f -iname "CMakeLists.txt" -print0 || die)
 
