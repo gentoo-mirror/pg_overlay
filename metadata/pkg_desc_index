@@ -10,7 +10,7 @@ app-containers/crun 1.24: Fast and low-memory footprint OCI Container Runtime fu
 app-containers/docker 28.5.1: The core functions you need to create Docker images and run Docker containers
 app-containers/docker-buildx 0.29.1: Docker CLI plugin for extended build capabilities with BuildKit
 app-containers/docker-cli 28.5.1: the command line binary for docker
-app-containers/docker-compose 2.40.1: Multi-container orchestration for Docker
+app-containers/docker-compose 2.40.2: Multi-container orchestration for Docker
 app-containers/nerdctl 2.1.6: Docker-compatible CLI for containerd, with support for Compose
 app-containers/netavark 1.16.1: A container network stack
 app-containers/podman 5.6.2: A tool for managing OCI containers and pods with Docker-compatible CLI
@@ -52,7 +52,6 @@ dev-cpp/ms-gsl 4.2.0: Guideline Support Library implementation by Microsoft
 dev-cpp/pangomm 2.56.1: C++ interface for pango
 dev-cpp/tbb 2022.2.0: High level abstract threading library
 dev-db/mariadb-connector-c 3.4.5: C client library for MariaDB/MySQL
-dev-games/freecell-solver 6.14.0: C library for automatically solving Freecell and some other solitaire variants
 dev-lang/lazarus 4.2: feature rich visual programming environment emulating Delphi
 dev-lang/python 3.13.9: An interpreted, interactive, object-oriented programming language
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
