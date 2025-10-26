@@ -1,11 +1,11 @@
 EAPI=8
 
-PYTHON_COMPAT=( python3_{11..14} )
+PYTHON_COMPAT=( python3_{13..14} )
 
 CRATES="
 "
 
-RUST_MIN_VER="1.77.2"
+RUST_MIN_VER="1.85.1"
 RUST_MULTILIB=1
 
 inherit cargo gnome2 meson-multilib python-any-r1 rust-toolchain vala
