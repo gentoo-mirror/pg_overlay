@@ -360,7 +360,7 @@ inherit cargo gnome2 meson-multilib python-any-r1 rust-toolchain vala
 
 DESCRIPTION="Scalable Vector Graphics (SVG) rendering library"
 HOMEPAGE="https://wiki.gnome.org/Projects/LibRsvg https://gitlab.gnome.org/GNOME/librsvg"
-SRC_URI+=" https://raw.githubusercontent.com/perfect7gentleman/sources/refs/heads/main/${PN}-${PV}-crates.tar.xz"
+SRC_URI+=" https://raw.githubusercontent.com/perfect7gentleman/sources/refs/heads/main/${PN}-c-${PV}-crates.tar.xz"
 
 LICENSE="LGPL-2.1+"
 # Dependent crate licenses
