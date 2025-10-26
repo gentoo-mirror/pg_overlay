@@ -407,7 +407,6 @@ QA_FLAGS_IGNORED="
 "
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-2.60.0-libxml2-2.15.0-tests.patch
 )
 
 pkg_setup() {
