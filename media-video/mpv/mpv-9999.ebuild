@@ -222,6 +222,7 @@ src_configure() {
 		$(meson_feature vdpau)
 
 		$(meson_feature vapoursynth)
+		--clipboard-xwayland=no
 	)
 
 	meson_src_configure
