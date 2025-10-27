@@ -222,6 +222,7 @@ src_configure() {
 		$(meson_feature vdpau)
 
 		$(meson_feature vapoursynth)
+		-Dx11-clipboard=disabled
 	)
 
 	meson_src_configure
