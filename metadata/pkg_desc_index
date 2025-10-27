@@ -111,7 +111,6 @@ media-libs/libmpdclient 9999: A C library which implements the Music Player Daem
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
 media-libs/libwebp 1.6.0_pre: A lossy image compression format
 media-libs/mesa 9999: OpenGL-like graphic library for Linux
-media-libs/mpvqt 1.1.1: libmpv wrapper for QtQuick2 and QML
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
 media-libs/tg_owt 0_pre20250515 0_pre20250703 0_pre20250914: WebRTC build for Telegram
 media-libs/tiff 4.7.1_pre: Tag Image File Format (TIFF) library
@@ -133,7 +132,6 @@ media-sound/qmmp 9999: Qt-based audio player with winamp/xmms skins support
 media-sound/redoflacs 1.1.0: Bash commandline flac compressor, verifier, organizer, analyzer, retagger
 media-sound/spek-X 0.9.4 9999: Spek-X (IPA: /spɛks/) is a fork of Spek-alternative, which is originally derived from Spek.
 media-sound/strawberry 9999: Modern music player and library organizer based on Clementine and Qt
-media-video/haruna 1.5.0: Video player built with Qt/QML and libmpv
 media-video/mpv 9999: Media player for the command line
 media-video/pipewire 1.4.9-r1: Multimedia processing graphs
 media-video/qmplay2 9999: A Qt-based video player, which can play most formats and codecs
