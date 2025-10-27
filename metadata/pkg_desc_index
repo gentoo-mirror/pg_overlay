@@ -21,7 +21,7 @@ app-containers/slirp4netns 1.3.3: User-mode networking for unprivileged network 
 app-crypt/pinentry 1.3.2-r1: Simple passphrase entry dialogs which utilize the Assuan protocol
 app-crypt/swtpm 0.10.0: Libtpms-based TPM emulator
 app-dicts/myspell-ru 20200606: Russian spellcheck dictionary based on works of AOT group for myspell/hunspell
-app-emulation/nemu 3.3.1: Ncurses interface for QEMU
+app-emulation/nemu 3.4.0: Ncurses interface for QEMU
 app-emulation/virt-firmware 25.10: Tools for ovmf/armvirt firmware volumes
 app-emulation/vmware-modules 17.6.3-r2 25.2: VMware kernel modules
 app-emulation/vmware-workstation 25.2.24995812: Emulate a complete PC without the performance overhead of most emulators
@@ -183,7 +183,6 @@ sys-fs/f2fs-tools 9999: Tools for Flash-Friendly File System (F2FS)
 sys-fs/fuse 2.9.9-r2: An interface for filesystems implemented in userspace
 sys-fs/udisks 2.10.91: Daemon providing interfaces to work with storage devices
 sys-fs/xfsprogs 6.17.0: XFS filesystem utilities
-sys-libs/libblockdev 3.4.0_pre: Library for manipulating block devices
 sys-libs/libunwind 1.8.3: Portable and efficient API to determine the call-chain of a program
 sys-power/iasl 20250807: Intel ACPI Source Language (ASL) compiler
 sys-power/upower 1.90.10: D-Bus abstraction for enumerating power devices, querying history and statistics
