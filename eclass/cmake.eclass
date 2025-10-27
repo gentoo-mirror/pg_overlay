@@ -700,14 +700,6 @@ cmake_src_configure() {
 		set(CMAKE_BUILD_TYPE Release CACHE STRING "" FORCE)
 	_EOF_
 
-	if [[ ${CMAKE_ECM_MODE} == true ]]; then
-		cat >> ${common_config} <<- _EOF_ || die
-			set(ECM_DISABLE_QMLPLUGINDUMP ON CACHE BOOL "")
-			set(ECM_DISABLE_APPSTREAMTEST ON CACHE BOOL "")
-			set(ECM_DISABLE_GIT ON CACHE BOOL "")
-		_EOF_
-	fi
-
 	# See bug 689410
 	if [[ "${ARCH}" == riscv ]]; then
 		echo 'set(CMAKE_FIND_LIBRARY_CUSTOM_LIB_SUFFIX '"${libdir#lib}"' CACHE STRING "library search suffix" FORCE)' >> "${common_config}" || die
