@@ -173,7 +173,7 @@ sys-apps/fwupd 2.0.16: Aims to make updating firmware on Linux automatic, safe a
 sys-apps/hwinfo 25.0: Hardware detection tool used in SuSE Linux
 sys-apps/hwloc 2.12.1: Displays the hardware topology in convenient formats
 sys-apps/man-pages 6.15_pre: A somewhat comprehensive collection of Linux man pages
-sys-apps/openrazer 3.10.3: Drivers and user-space daemon to control Razer devices on GNU/Linux
+sys-apps/openrazer 3.11.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
 sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-apps/rootlesskit 2.3.5: Linux-native "fake root" for implementing rootless containers
 sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
