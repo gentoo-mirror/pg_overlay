@@ -7,7 +7,7 @@ inherit desktop unpacker xdg
 
 MY_P="ONLYOFFICE-DesktopEditors-"${PV}""
 
-DESCRIPTION="Onlyoffice is an office productivity suite (binary version)"
+DESCRIPTION="A free and open source office and productivity suite (binary version)"
 HOMEPAGE="https://www.onlyoffice.com/"
 SRC_URI="
 	amd64? (
@@ -39,15 +39,12 @@ RDEPEND="
 	sys-devel/gcc
 	sys-libs/glibc
 	x11-libs/cairo
-	x11-libs/gtk+:3
-	x11-libs/libICE
-	x11-libs/libSM
+	x11-libs/gtk+:3[X]
 	x11-libs/libX11
 	x11-libs/libXcomposite
 	x11-libs/libXdamage
 	x11-libs/libXext
 	x11-libs/libXfixes
-	x11-libs/libXi
 	x11-libs/libXrandr
 	x11-libs/libdrm
 	x11-libs/libnotify
@@ -64,6 +61,10 @@ QA_PREBUILT="*"
 
 src_prepare() {
 	default
+
+	# Remove bundled Qt libs + icu bug #961968
+	#rm opt/onlyoffice/desktopeditors/libQt* || die
+	rm opt/onlyoffice/desktopeditors/libicu* || die
 
 	# Allow launching the ONLYOFFICE on ALSA systems via media-sound/apulse
 	sed -i -e "/^export LD_LIBRARY_PATH=/ s|$|:${EPREFIX}/usr/$(get_libdir)/apulse|" \
