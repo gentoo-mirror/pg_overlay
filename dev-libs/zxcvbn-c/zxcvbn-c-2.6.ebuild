@@ -12,8 +12,6 @@ SLOT="0"
 KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 
 PATCHES=(
-		"${FILESDIR}"/${PN}-2.5-makefile-install.patch
-
 )
 
 src_install() {
