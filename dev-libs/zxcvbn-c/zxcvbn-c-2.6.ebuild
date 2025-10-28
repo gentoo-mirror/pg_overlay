@@ -14,6 +14,11 @@ KEYWORDS="~amd64 ~arm ~arm64 ~loong ~ppc64 ~riscv ~x86"
 PATCHES=(
 )
 
+src_prepare() {
+	sed -i 's|usr/local|usr|g' makefile
+	default
+}
+
 src_install() {
 	emake DESTDIR="${ED}" LIBDIR="/usr/$(get_libdir)" install
 	rm "${ED}/usr/$(get_libdir)/libzxcvbn.a" || die
