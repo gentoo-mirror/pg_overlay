@@ -156,6 +156,7 @@ COMMON_DEPEND="${PYTHON_DEPS}
 	>=media-libs/harfbuzz-5.1.0:=[graphite,icu]
 	media-libs/lcms:2
 	>=media-libs/libcdr-0.1.0
+	media-libs/libeot
 	>=media-libs/libepoxy-1.3.1
 	>=media-libs/libfreehand-0.1.0
 	media-libs/libjpeg-turbo:=
