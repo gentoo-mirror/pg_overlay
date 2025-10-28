@@ -63,7 +63,7 @@ src_prepare() {
 	default
 
 	# Remove bundled Qt libs + icu bug #961968
-	rm opt/onlyoffice/desktopeditors/libQt* || die
+	#rm opt/onlyoffice/desktopeditors/libQt* || die
 	rm opt/onlyoffice/desktopeditors/libicu* || die
 
 	# Allow launching the ONLYOFFICE on ALSA systems via media-sound/apulse
