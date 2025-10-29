@@ -544,7 +544,7 @@ src_prepare() {
 		rm -v "${WORKDIR}"/firefox-patches/*bgo-748849-RUST_TARGET_override.patch || die
 		rm -v "${WORKDIR}"/firefox-patches/*bmo-1988166-musl-remove-nonexisting-system-header-req.patch || die
 	fi
-
+	rm "${WORKDIR}"/0023-bmo-1990430-make-autobuffer-trivially-copyable.patch
 	eapply "${WORKDIR}/firefox-patches"
 
 	# Allow user to apply any additional patches without modifing ebuild
