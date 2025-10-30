@@ -117,10 +117,6 @@ gnome-base/librsvg:tools - Build svg viewer tool
 gnome-extra/gnome-commander:gsf - Add metadata support for OLE, OLE2 and ODF
 gnome-extra/gnome-commander:pdf - Add metadata support for PDF
 gnome-extra/gnome-commander:taglib - Add metadata support for ID3, Vorbis, FLAC and APE
-gui-libs/gtk:broadway - Enable the GDK Broadway backend.
-gui-libs/gtk:cloudproviders - Enable GtkPlacesSidebar to access cloud services
-gui-libs/gtk:colord - Use x11-misc/colord for color management in printing
-gui-libs/gtk:sysprof - Enable profiling data capture support using dev-util/sysprof-capture
 kde-plasma/plasma-workspace:appstream - Enable AppStream software metadata support
 kde-plasma/plasma-workspace:ksysguard - Enable device notifier and system monitor applets as well as terminate applications runner
 kde-plasma/plasma-workspace:networkmanager - Enable support for location-based time zone changes
