@@ -58,11 +58,9 @@ dev-lang/python 3.13.9: An interpreted, interactive, object-oriented programming
 dev-lang/rust 1.83.0-r1: Systems programming language from Mozilla
 dev-libs/gplugin 9999: GObject based plugin system library supporting different languages
 dev-libs/libdispatch 6.1.1: A library for concurrent code execution on multicore hardware
-dev-libs/libevdevplus 0.1.1 9999: Easy-to-use event device library in C++
 dev-libs/libgnt 2.14.4_pre: Pidgin's GLib Ncurses Toolkit
 dev-libs/libixion 0.20.0: General purpose formula parser & interpreter
 dev-libs/libqt6pas 6.2.10: Free Pascal Qt6 bindings library updated by lazarus IDE.
-dev-libs/libuinputplus 0.1.4 9999: Easy-to-use uinput library in C++
 dev-libs/libunistring 1.4_pre: Library for manipulating Unicode and C strings according to Unicode standard
 dev-libs/libxmlb 0.3.24: Library to help create and query binary XML blobs
 dev-libs/protobuf 32.1: Google's Protocol Buffers - Extensible mechanism for serializing structured data
@@ -97,7 +95,6 @@ games-strategy/vcmi 9999: open-source engine for Heroes of Might and Magic III
 gnome-base/librsvg 2.61.2: Scalable Vector Graphics (SVG) rendering library
 gnome-extra/gnome-commander 1.18.2: A graphical, full featured, twin-panel file manager
 gui-apps/labwc-tweaks 9999: A GUI 'Settings' application for labwc
-gui-apps/ydotool 0.1.9 1.0.1 9999: Generic command-line automation tool (no X!)
 kde-misc/kweather 25.08.2 9999: Weather forecast application for Plasma with flat and dynamic/animated views
 kde-plasma/plasma-workspace 6.5.1: KDE Plasma workspace
 mail-client/thunderbird 144.0.1: Thunderbird Mail Client
@@ -127,6 +124,7 @@ media-sound/dr14meter 1.1.4 9999: dr14meter is a free and open-source command li
 media-sound/fooyin 9999: A customizable music player, Qt clone of foobar2000
 media-sound/kid3 9999: Simple tag editor based on Qt
 media-sound/lame 3.100-r3: LAME Ain't an MP3 Encoder
+media-sound/mpd 0.24.6: The Music Player Daemon (mpd)
 media-sound/mpdris2 9999: An implementation of the MPRIS 2 interface as a client for MPD
 media-sound/ncmpc 9999: Ncurses client for the Music Player Daemon (MPD)
 media-sound/ncmpcpp 9999: Featureful ncurses based MPD client inspired by ncmpc
@@ -173,7 +171,6 @@ sys-apps/hwinfo 25.0: Hardware detection tool used in SuSE Linux
 sys-apps/hwloc 2.12.1: Displays the hardware topology in convenient formats
 sys-apps/man-pages 6.15_pre: A somewhat comprehensive collection of Linux man pages
 sys-apps/openrazer 3.11.0: Drivers and user-space daemon to control Razer devices on GNU/Linux
-sys-apps/roccat-tools 5.9.0-r101: Utility for advanced configuration of Roccat devices
 sys-apps/rootlesskit 2.3.5: Linux-native "fake root" for implementing rootless containers
 sys-apps/shadow 4.18.0_pre: Utilities to deal with user accounts
 sys-auth/elogind 255.9999 257.9999: The systemd project's logind, extracted to a standalone package
