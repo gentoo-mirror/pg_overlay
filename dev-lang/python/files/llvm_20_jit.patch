@@ -5,7 +5,7 @@
  import typing
  
 -_LLVM_VERSION = 18
-+_LLVM_VERSION = 20
++_LLVM_VERSION = 21
  _LLVM_VERSION_PATTERN = re.compile(rf"version\s+{_LLVM_VERSION}\.\d+\.\d+\S*\s+")
  
  _P = typing.ParamSpec("_P")
