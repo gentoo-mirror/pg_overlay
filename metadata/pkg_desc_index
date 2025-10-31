@@ -83,8 +83,8 @@ dev-util/cargo-ebuild 0.6.0: Generates an ebuild for a package using the in-tree
 dev-util/cpp-utilities 4.16.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/gdbus-codegen 2.86.1: GDBus code and documentation generator
 dev-util/glib-utils 2.86.1: Build utilities for GLib using projects
-dev-util/intel_clc 9999: intel_clc tool used for building OpenCL C to SPIR-V
 dev-util/librnp 9999: High performance C++ OpenPGP library
+dev-util/mesa_clc 25.2.6 9999: mesa_clc tool used for building OpenCL C to SPIR-V
 dev-util/mingw64-toolchain 12.0.0_p1: All-in-one mingw64 toolchain intended for building Wine without crossdev
 dev-util/qtutilities 5.12.0: Common C++ classes and routines used by my applications such as argument parser, IO and conversion utilities
 dev-util/re2c 4.3_pre: Tool for generating C-based recognizers from regular expressions
@@ -109,7 +109,7 @@ media-libs/libjpeg-turbo 3.1.2: MMX, SSE, and SSE2 SIMD accelerated JPEG library
 media-libs/libmpdclient 9999: A C library which implements the Music Player Daemon protocol
 media-libs/libtgvoip 2.4.4_p20240706: VoIP library for Telegram clients
 media-libs/libwebp 1.6.0_pre: A lossy image compression format
-media-libs/mesa 9999: OpenGL-like graphic library for Linux
+media-libs/mesa 25.2.6 9999: OpenGL-like graphic library for Linux
 media-libs/rnnoise 0.2: Recurrent neural network for audio noise reduction
 media-libs/tg_owt 0_pre20250515 0_pre20250703 0_pre20250914: WebRTC build for Telegram
 media-libs/tiff 4.7.1_pre: Tag Image File Format (TIFF) library
